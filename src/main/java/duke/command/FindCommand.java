@@ -26,10 +26,11 @@ public class FindCommand extends Command {
      * Execution command to begin search for with relevant word given.
      * @param tasklist list of tasks to be referenced from.
      * @param ui UserInterface for the command to prompt.
+     * @return a filtered list according to the user input
      * @throws DukeListException When the input index does not match the list.
      */
     @Override
-    public void execute(Tasklist tasklist, UserInterface ui) throws DukeListException {
+    public String execute(Tasklist tasklist, UserInterface ui) throws DukeListException {
         Tasklist tempTaskList = new Tasklist(new Storage());
         tempTaskList.clearList();
         for (int i = 0; i < tasklist.getTaskSize(); i++) {
@@ -42,6 +43,7 @@ public class FindCommand extends Command {
         if (tempTaskList.getTaskSize() == 0) {
             throw new DukeListException("Your search result yields nothing.");
         }
-        new ListCommand().execute(tempTaskList, new UserInterface());
+        ListCommand listCommand = new ListCommand();
+        return listCommand.execute(tempTaskList, new UserInterface());
     }
 }

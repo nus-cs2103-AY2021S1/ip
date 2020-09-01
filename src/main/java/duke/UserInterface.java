@@ -22,7 +22,7 @@ public class UserInterface {
                     + "          `''       `''\n";
 
     private static final String THUNDERBOLT =
-                    "                  .-~*~--,.   .-.\n"
+            "                  .-~*~--,.   .-.\n"
                     + "          .-~-. ./OOOOOOOOO\\.'OOO`9~~-.\n"
                     + "        .`OOOOOO.OOM.OLSONOOOOO@@OOOOOO\\\n"
                     + "       /OOOO@@@OO@@@OO@@@OOO@@@@@@@@OOOO`.\n"
@@ -57,37 +57,43 @@ public class UserInterface {
      * To print out the task that is just added to the list.
      * @param task Task of which to be added.
      * @param totalNumber The prevailing number after a task is added.
+     * @return string to print whenever a task is added to the list.
      */
-    public void printAddTask(String task, int totalNumber) {
-        System.out.print(BORDER + "Steady! I add... wait ah.." + NEWLINE);
-        System.out.print(BORDER + BORDER + "ADDED: " + task + NEWLINE);
-        System.out.print(BORDER + "Now you got " + totalNumber + " tasks" + NEWLINE);
+    public String printAddTask(String task, int totalNumber) {
+        String response = BORDER + "Steady! I add... wait ah.." + NEWLINE;
+        response += BORDER + BORDER + "ADDED: " + task + NEWLINE;
+        response += BORDER + "Now you got " + totalNumber + " tasks" + NEWLINE;
+        return response;
     }
 
     /**
      * Preamble while the chat bot retrieves list of the tasks.
+     * @return response from when user prompts List Command
      */
-    public void listTask() {
-        System.out.print(BORDER + "Retrieving your list, patient ah!\n");
+    public String listTask() {
+        return BORDER + "Retrieving your list, patient ah!\n";
     }
 
     /**
      * To print out the list of tasks in an ordered fashion.
      * @param listNumber Index of the tasking in the list.
      * @param task The details of the task itself.
+     * @return response from Duke to list Command
      */
-    public void printTask(int listNumber, String task) {
-        String toPrint = String.format("%2d. %s\n", listNumber, task);
-        System.out.print(BORDER + toPrint);
+    public String printTask(int listNumber, String task) {
+        String response = String.format("%2d. %s\n", listNumber, task);
+        return BORDER + response;
     }
 
     /**
      * To print the preamble as well as the details of the task marked as done.
      * @param task Task of which to be marked as done.
+     * @return response from Duke to print Done command
      */
-    public void printDone(String task) {
-        System.out.print(BORDER + "Swee la, task done liao:" + NEWLINE);
-        System.out.print(BORDER + BORDER + task + NEWLINE);
+    public String printDone(String task) {
+        String response = BORDER + "Swee la, task done liao:" + NEWLINE;
+        response += BORDER + BORDER + task + NEWLINE;
+        return response;
     }
 
     /**
@@ -95,23 +101,25 @@ public class UserInterface {
      * @param task Task to be deleted.
      * @param remaining Remaining number of tasks after deletion.
      */
-    public void printDelete(String task, int remaining) {
-        System.out.print(BORDER + "Delete liao boss:" + NEWLINE);
-        System.out.print(BORDER + "Remaining Tasks: " + remaining + NEWLINE);
+    public String printDelete(String task, int remaining) {
+        String response = BORDER + "Delete liao boss:" + NEWLINE;
+        response += BORDER + "Remaining Tasks: " + remaining + NEWLINE;
+        return response;
     }
 
     /**
      * Standard error message to be printed.
      * @param errorMessage The details of the error message itself.
      */
-    public void printError(String errorMessage) {
-        System.out.print(ERROR + errorMessage + NEWLINE);
+    public String printError(String errorMessage) {
+        return ERROR + errorMessage + NEWLINE;
     }
 
     /**
      * Preamble for the initialisation of the Pikachu Chatbot.
+     * @return response for initialisation and instruction for User.
      */
-    public void welcomeMessage() {
+    public String welcomeMessage() {
         String startingMessage = "Pikachu: Hello, I am Pikachu! My pika service creates a to-do list for you!\n\n"
                 + "1. type 'list' and I list all that you said, along if it is completed\n"
                 + "2. type either 'event', 'deadline', 'todo', followed by the task!\n"
@@ -121,15 +129,16 @@ public class UserInterface {
                 + "   2.4. if 'done' type the task followed by a number within the list index to mark it\n"
                 + "3. type 'done x' where x is the index of the item you want to be indicated done\n"
                 + "4. or you can say 'bye' to end us </3 Type your command:\n";
-        System.out.print(LOGO + startingMessage);
+        return LOGO + startingMessage;
     }
 
     /**
      * Exit messsage when the chat bot terminates.
+     * @return response when the user ends the interaction with the bot.
      */
-    public void exitMessage() {
+    public String exitMessage() {
         String exitMessage = "Pikachu: Pika byebye! THUNDERBOLT!\n";
-        System.out.print(THUNDERBOLT + exitMessage);
+        return THUNDERBOLT + exitMessage;
     }
 
 }

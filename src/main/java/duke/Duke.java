@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 import java.util.Scanner;
+import javafx.application.Application;
 
 /**
  * Duke class representing the chat bot.
@@ -23,19 +24,19 @@ public class Duke {
         ui = new UserInterface();
     }
 
-    public static void main(String[] args) {
-        startBot();
-    }
+//    public static void main(String[] args) {
+//        startBot();
+//    }
 
-    /**
-     * Method to start running the bot.
-     */
-    public static void startBot() {
-        Duke duke = new Duke();
-        duke.initialise();
-        duke.acceptCommands();
-        duke.exit();
-    }
+//    /**
+//     * Method to start running the bot.
+//     */
+//    public static void startBot() {
+//        Duke duke = new Duke();
+//        duke.initialise();
+//        duke.acceptCommands();
+//        duke.exit();
+//    }
 
     /**
      * Method to send the preamble and load, if any, existing list.
@@ -52,21 +53,22 @@ public class Duke {
     /**
      * Method to initialise the acceptance of commands
      */
-    public void acceptCommands() {
+    public String acceptCommands(String input) {
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        while (!input.equals("bye")) {
-            Parser parser = new Parser(input, ui);
-            parser.start(taskList);
-            input = sc.nextLine();
-        }
+        //String input = sc.nextLine();
+        //while (!input.equals("bye")) {
+        Parser parser = new Parser(input, ui, taskList);
+        return parser.retrieveResponse();
     }
 
     /**
-     * Method for the termination of the chat bot.
+     * Method to retrieve the response of Duke.
+     * @param input user command.
+     * @return the String response.
      */
-    public void exit() {
-        ui.exitMessage();
+    public String getResponse(String input) { // input - whatever the user type
+        // return the chunk of string
+        this.initialise();
+        return acceptCommands(input);
     }
-
 }

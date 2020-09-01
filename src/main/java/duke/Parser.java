@@ -2,12 +2,8 @@ package duke;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeIndexException;
 import duke.exception.DukeListException;
@@ -20,71 +16,78 @@ public class Parser {
 
     private String parseMessage;
     private UserInterface ui;
+    private Tasklist tasklist;
 
     /**
      * Constructor for Parser.
      * @param parseMessage Message that has to be parsed by the parser.
      * @param ui UserInterface for the parser to trigger printing events.
+     * @param tasklist taskList that the Parser needs to keep track of.
      */
-    public Parser(String parseMessage, UserInterface ui) {
+    public Parser(String parseMessage, UserInterface ui, Tasklist tasklist) {
         this.parseMessage = parseMessage;
         this.ui = ui;
+        this.tasklist = tasklist;
     }
 
     /**
      * Initialises the parser to start processing the parseMessage. Continues until user terminates.
-     * @param tasklist List for the Parser to reference for tasks, can be empty.
+     * @return the response by Duke.
      */
-    public void start(Tasklist tasklist) {
-
-        Scanner sc = new Scanner(System.in);
+    public String start() {
 
         try {
-            while (!this.parseMessage.equals("bye")) {
-                String command = parseMessage.split(" ")[0];
-                if (command.equals("list")) {
-                    new ListCommand().execute(tasklist, ui);
-                } else if (command.equals("find")) {
-                    String wordToFind = this.parseMessage.substring(command.length());
-                    new FindCommand(wordToFind).execute(tasklist, ui);
-                } else if (command.equals("done")) {
-                    int index = Integer.parseInt(parseMessage.split(" ")[1]) - 1;
-                    new DoneCommand(index).execute(tasklist, ui);
-                } else if (command.equals("delete")) {
-                    int index = Integer.parseInt(parseMessage.split(" ")[1]) - 1;
-                    new DeleteCommand(index).execute(tasklist, ui);
-                } else if (command.equals("event") || command.equals("deadline") || command.equals("todo")) {
-                    String dissectedMessage = this.parseMessage.substring(command.length());
-                    commandTasks(tasklist, command, dissectedMessage);
-                } else {
-                    String errorMessage = "Command is wrong. Please start with delete, "
-                            + "list, done, deadline, todo or event.";
-                    throw new DukeCommandException(errorMessage);
-                }
-                this.parseMessage = sc.nextLine();
-                tasklist.updateStorage();
+            String command = parseMessage.split(" ")[0];
+            String response = "";
+            if (command.equals("bye")){
+                ByeCommand byeCommand = new ByeCommand();
+                response = byeCommand.execute(tasklist, ui);
+            } else if (command.equals("list")) {
+                ListCommand listCommand = new ListCommand();
+                response = listCommand.execute(tasklist, ui);
+            } else if (command.equals("find")) {
+                String wordToFind = this.parseMessage.substring(command.length());
+                FindCommand findCommand = new FindCommand(wordToFind);
+                response = findCommand.execute(tasklist, ui);
+            } else if (command.equals("done")) {
+                int index = Integer.parseInt(parseMessage.split(" ")[1]) - 1;
+                DoneCommand doneCommand = new DoneCommand(index);
+                response = doneCommand.execute(tasklist, ui);
+            } else if (command.equals("delete")) {
+                int index = Integer.parseInt(parseMessage.split(" ")[1]) - 1;
+                DeleteCommand deleteCommand = new DeleteCommand(index);
+                response = deleteCommand.execute(tasklist, ui);
+            } else if (command.equals("event") || command.equals("deadline") || command.equals("todo")) {
+                String dissectedMessage = this.parseMessage.substring(command.length());
+                response = commandTasks(command, dissectedMessage);
+            } else {
+                String errorMessage = "Command is wrong. Please start with delete, "
+                        + "list, done, deadline, todo or event.";
+                throw new DukeCommandException(errorMessage);
             }
+            this.tasklist.updateStorage();
+            return response;
         } catch (DukeCommandException | DukeIndexException | DukeTaskException | DukeListException e) {
-            ui.printError(e.getMessage());
+            return ui.printError(e.getMessage());
         } catch (DateTimeParseException e) {
-            ui.printError("INPUT DATE TIME FORMAT IS WRONG");
+            return ui.printError("INPUT DATE TIME FORMAT IS WRONG");
         } catch (IOException e) {
-            ui.printError(e.getMessage());
+            return ui.printError(e.getMessage());
         }
     }
 
     /**
      * Helper method to organize the different types of task that can be recorded.
-     * @param tasklist List of task to be referenced from.
      * @param tasktype Type of task to be recorded.
      * @param message Details of the task.
+     * @return response from Duke.
      * @throws DukeTaskException When there is an error in the input.
      */
-    public void commandTasks(Tasklist tasklist, String tasktype, String message) throws DukeTaskException {
+    public String commandTasks(String tasktype, String message) throws DukeTaskException {
 
         String[] parsedMessage = null;
         Task newTask = null;
-        int size = tasklist.getTaskSize();
+        int size = this.tasklist.getTaskSize();
 
         try {
 
@@ -100,8 +103,8 @@ public class Parser {
                 newTask = new Event(parsedMessage[0], parsedMessage[1]);
             }
 
-            tasklist.addTask(newTask);
-            ui.printAddTask(newTask.toString(), tasklist.getTaskSize());
+            this.tasklist.addTask(newTask);
+            return ui.printAddTask(newTask.toString(), this.tasklist.getTaskSize());
 
         } catch (IndexOutOfBoundsException e) {
             String errorMessage = "You might have left your message or duration empty.";
@@ -109,4 +112,11 @@ public class Parser {
         }
     }
 
+    /**
+     * retrieveResponse method to retrieve the response printed by Duke.
+     * @return response by Duke.
+     */
+    public String retrieveResponse() {
+        return this.start();
+    }
 }

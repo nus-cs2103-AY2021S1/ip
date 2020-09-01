@@ -25,9 +25,10 @@ public class DoneCommand extends Command {
      * @param tasklist list of tasks to be referenced from.
      * @param ui UserInterface for the command to prompt.
      * @throws DukeIndexException When the input index does not match the list.
+     * @return Message sent when the user completes a task.
      */
     @Override
-    public void execute(Tasklist tasklist, UserInterface ui) throws DukeIndexException {
+    public String execute(Tasklist tasklist, UserInterface ui) throws DukeIndexException {
 
         if (index > tasklist.getTaskSize() - 1 || index < 0) {
             String errorMessage = "Wrong list number input. "
@@ -37,7 +38,7 @@ public class DoneCommand extends Command {
         }
 
         tasklist.makeTaskDone(index);
-        ui.printDone(tasklist.get(index).toString());
+        return ui.printDone(tasklist.get(index).toString());
 
     }
 }
