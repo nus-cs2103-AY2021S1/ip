@@ -12,16 +12,10 @@ import duke.commands.TodoCommand;
 import duke.exceptions.DukeException;
 
 public class Parser {
-    private TaskList taskList;
-    private boolean terminate = false;
-    private String filePath;
-    private String lineSeparator = System.getProperty("line.separator");
-    private String taskDetailsSeparator = " | ";
     Ui ui;
 
     public Parser() {
         this.ui = new Ui();
-        this.taskList = new TaskList();
     }
 
 

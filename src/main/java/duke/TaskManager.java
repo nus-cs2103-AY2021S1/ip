@@ -1,13 +1,11 @@
 package duke;
 
 import duke.commands.Command;
-import duke.task.Task;
 import duke.exceptions.DukeException;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class TaskManager {
