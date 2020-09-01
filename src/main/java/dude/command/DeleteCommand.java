@@ -1,25 +1,39 @@
 package dude.command;
 
+import java.io.IOException;
+
 import dude.util.CommandException;
 import dude.util.Storage;
 import dude.util.TaskList;
 import dude.util.Ui;
 
-import java.io.IOException;
-
 /**
- * The command deletes a task from the tasklist.
+ * DeleteCommand deletes a task from the tasklist.
  */
 
 public class DeleteCommand extends Command {
     private int index;
 
+    /**
+     * Constructor for DeleteCommand class.
+     *
+     * @param action action the command is to perform.
+     * @param index index of task to be deleted.
+     */
     public DeleteCommand(String action, int index) {
         super(action);
         this.index = index;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws CommandException  {
+    /**
+     * Adds the task to the TaskList, stores the data and displays the resulting output.
+     *
+     * @param tasks TaskList containing all the current tasks.
+     * @param ui Ui class to display output.
+     * @param storage Storage class to store tasks.
+     * @throws CommandException
+     */
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws CommandException {
         try {
             StringBuilder str = new StringBuilder();
             str.append("Understood. I've removed this task:\n  ").append(

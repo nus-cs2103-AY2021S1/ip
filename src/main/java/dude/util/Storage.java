@@ -1,39 +1,39 @@
 package dude.util;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.DateTimeException;
-
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.function.Function;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import java.lang.StringBuilder;
-
-import java.time.LocalDate;
-
-import dude.task.Task;
 import dude.task.Deadline;
 import dude.task.Event;
+import dude.task.Task;
 import dude.task.Todo;
 
 /**
  * The class that handles the reading and writing of tasks.
  */
-
-
 public class Storage {
     private String filePath;
+    private Function<String, Boolean> func = x -> x.equals("1") ? true : false;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns an ArrayList of Tasks from the data file.
+     *
+     * @return ArrayList of Task from the data file.
+     * @throws FileNotFoundException file is not found.
+     * @throws CorruptedFileException file has unknown formatting.
+     */
     public ArrayList<Task> read() throws FileNotFoundException, CorruptedFileException {
         File f = new File(filePath);
         Scanner scanner = new Scanner(f);
@@ -48,6 +48,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the Tasklist into the data file.
+     *
+     * @param textToAdd list of Tasks that the user input.
+     * @throws IOException unable to open the file in write.
+     */
     public void write(List<Task> textToAdd) throws IOException {
         File f = new File(filePath);
         File dataDir = new File(f.toPath().getParent().toString());
@@ -59,9 +65,16 @@ public class Storage {
         fileWriter.close();
     }
 
+    /**
+     * Converts an Ararylist of Strings into an Arraylist of Task.
+     *
+     * @param lineList ArrayList of Strings.
+     * @return ArrayList of Task.
+     * @throws CorruptedFileException Invalid format read from the file.
+     */
     private ArrayList<Task> lineConverter(ArrayList<String> lineList) throws CorruptedFileException {
         ArrayList<Task> taskList = new ArrayList<>();
-        for (String s : lineList)  {
+        for (String s : lineList) {
             try {
                 String[] temp = s.split(" \\| ");
                 if (!temp[1].equals("1") && !temp[1].equals("0")) {
@@ -83,6 +96,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Converts a TaskList into a String for saving.
+     * @param taskList TaskList.
+     * @return String representation of TaskList.
+     */
     private String taskConverter(List<Task> taskList) {
         StringBuilder str = new StringBuilder();
         for (Task t : taskList) {
@@ -90,6 +108,4 @@ public class Storage {
         }
         return str.toString();
     }
-
-    private Function<String, Boolean> func = x -> x.equals("1") ? true : false;
 }

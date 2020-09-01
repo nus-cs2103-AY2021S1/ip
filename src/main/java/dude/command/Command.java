@@ -10,9 +10,14 @@ import dude.util.Ui;
  */
 
 public abstract class Command {
-    private String action;
     protected boolean isExit;
+    private String action;
 
+    /**
+     * Constructor for the Command class.
+     *
+     * @param action Takes in the action the command is to perform.
+     */
     public Command(String action) {
         this.action = action;
         isExit = false;
