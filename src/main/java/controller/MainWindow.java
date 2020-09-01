@@ -1,6 +1,7 @@
 package controller;
 
 import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -35,12 +39,17 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    public void dukeWelcome() {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog("Hello! I'm Duke, some call me a parrot.\nWhat can I do for you?", dukeImage));
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them
      * to the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws IOException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -48,5 +57,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    public static void endDuke() {
+        Platform.exit();
     }
 }
