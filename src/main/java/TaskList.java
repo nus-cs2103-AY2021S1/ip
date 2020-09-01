@@ -107,7 +107,7 @@ public class TaskList {
                 String[] dateTime = timeInfo.trim().split(", ");
                 String date = dateTime[1];
                 String time = dateTime[2];
-                return new Event(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
+                return new Event(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat)).markDone();
             }
         } else {
             DateTimeFormatter myDateFormat = DateTimeFormatter.ofPattern("d MMM yyyy");
