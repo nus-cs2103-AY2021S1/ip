@@ -82,13 +82,4 @@ public class Command {
             return ui.showInvalidCommand();
         }
     }
-
-    /**
-     * Returns a Boolean, with true indicating that the command given ends the interaction
-     * with the user, false indicating otherwise.
-     */
-
-    public boolean isEnd() {
-        return this.end;
-    }
 }
