@@ -4,26 +4,32 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class FindCommand extends Command {
-    private String keyword;
+    private ArrayList<String> keywords;
 
     /**
      * Initializes a FindCommand object.
      *
      * @param keyword The keyword used to find tasks with.
      */
-    public FindCommand(String keyword) {
+    public FindCommand(String ... keyword) {
         super();
-        this.keyword = keyword;
+        keywords = new ArrayList<>();
+        keywords.addAll(Arrays.asList(keyword));
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList keywordTasks = new TaskList();
         tasks.getTaskList().forEach((task) -> {
-            if (task.getDescription().contains(keyword)) {
-                keywordTasks.addTask(task);
-            }
+            keywords.forEach((keyword) -> {
+                if (task.getDescription().contains(keyword)) {
+                    keywordTasks.addTask(task);
+                }
+            });
         });
         return ui.showFind(keywordTasks);
     }

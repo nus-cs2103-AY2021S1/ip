@@ -12,6 +12,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.Arrays;
+
 /**
  * The Parser object deals with loading tasks from the file and saving tasks in the file.
  */
@@ -40,7 +42,7 @@ public class Parser {
         } else if (command.equals("bye")) {
             return new ExitCommand();
         } else if (command.equals("find")) {
-            String keyword = getFindKeyword();
+            String[] keyword = getKeyword();
             return new FindCommand(keyword);
         } else if (command.equals("deadline") || command.equals("todo") || command.equals("event")) {
             String desc;
@@ -115,7 +117,7 @@ public class Parser {
         return dateTime.substring(0, dateTime.length() - 1);
     }
 
-    private static String getFindKeyword() {
-        return inputArr[1];
+    private static String[] getKeyword() {
+        return Arrays.copyOfRange(inputArr, 1, inputArr.length);
     }
 }
