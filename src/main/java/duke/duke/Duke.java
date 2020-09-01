@@ -4,6 +4,7 @@ import duke.command.DukeException;
 import duke.command.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import javafx.fxml.FXML;
 
 /**
  * Duke class that runs the Duke chat bot program.
@@ -29,7 +30,7 @@ public class Duke {
      * Begin the Duke chat bot program.
      */
     public void run() {
-        ui.showWelcome();
+        ui.showOutput(ui.showWelcome());
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -44,6 +45,21 @@ public class Duke {
             }
         }
         storage.updateFile(list);
+    }
+
+    /**
+     * Gets the response after processing the user input.
+     *
+     * @param input The input provided by the user.
+     * @return String representation of the resulting command that was executed.
+     */
+    @FXML
+    public String getResponse(String input) {
+        try {
+            return parser.processCommand(input);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     public static void main(String[] args) {

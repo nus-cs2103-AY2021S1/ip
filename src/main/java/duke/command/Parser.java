@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
@@ -58,6 +59,8 @@ public class Parser {
         }
         if (command.equals("bye")) {
             this.isExit = true;
+            Storage storage = new Storage();
+            storage.updateFile(this.list);
             return "Bye! Hope to see you again soon!";
         }
         if (command.equals("help")) {
