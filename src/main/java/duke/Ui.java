@@ -20,9 +20,9 @@ public class Ui {
     private Scanner sc;
 
     /**
-     * Constructor of duke.Ui.
+     * Constructor of Ui.
      */
-    Ui() {
+    public Ui() {
         this.sc = new Scanner(System.in);
     }
 
@@ -63,6 +63,7 @@ public class Ui {
 
     /**
      * Searches and returns the keywords found in the list.
+     *
      * @param description keyword.
      */
     public String printFind(String description) {

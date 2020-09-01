@@ -1,6 +1,7 @@
 package duke.gui;
 
 import duke.Duke;
+import duke.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -23,6 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    private Ui ui = new Ui();
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -33,13 +36,11 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(ui.greeting() + "\n" + ui.showList(), dukeImage)
+        );
     }
 
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing
-     * Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();

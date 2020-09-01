@@ -32,25 +32,39 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/tasks.txt");
-        taskList = new TaskList();
+        try {
+            taskList = new TaskList();
+            storage.handleLoad();
+        } catch (IOException e) {
+            ui.printError(e.getMessage());
+            taskList = new TaskList();
+        }
     }
 
     /**
      * Constructor for Duke.
+     * Loads if there are any existing tasks in storage.
+     *
+     * @param filePath filepath
      */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        taskList = new TaskList();
+        try {
+            taskList = new TaskList();
+            storage.handleLoad();
+        } catch (IOException e) {
+            ui.printError(e.getMessage());
+            taskList = new TaskList();
+        }
     }
 
     /**
      * Invoke run for duke chatbot programme.
      *
      * @param args argument.
-     * @throws IOException if file does not exist.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
 
@@ -58,10 +72,8 @@ public class Duke {
      * Run Duke programme depending on the different commands
      * given by user.
      *
-     * @throws IOException if file does not exist.
      */
-    public void run() throws IOException {
-        storage.handleLoad();
+    public void run() {
         System.out.println(ui.greeting());
         System.out.println(ui.showList());
         boolean isExit = false;
