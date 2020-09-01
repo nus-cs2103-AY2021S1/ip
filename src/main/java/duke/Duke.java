@@ -1,7 +1,9 @@
 package duke;
 
+import duke.command.ExitCommand;
 import duke.javafx.DialogBox;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -187,9 +189,14 @@ public class Duke extends Application {
         //return "Duke heard: " + input;
         String response = "";
         try {
-            String fullCommand = input;
-            Command c = Parser.parse(fullCommand);
-            response = c.executeToString(tasks, ui, storage);
+
+            Command c = Parser.parse(input);
+            if (c instanceof ExitCommand) {
+                Platform.exit();
+            } else {
+                response = c.executeToString(tasks, ui, storage);
+            }
+
         } catch (DukeException e) {
             response = e.getMessage();
         }
