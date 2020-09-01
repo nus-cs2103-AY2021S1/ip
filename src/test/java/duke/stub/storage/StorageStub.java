@@ -1,9 +1,9 @@
 package duke.stub.storage;
 
-import duke.storage.Storage;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.storage.Storage;
 
 public class StorageStub implements Storage {
     @Override

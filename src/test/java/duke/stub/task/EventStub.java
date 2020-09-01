@@ -1,9 +1,9 @@
 package duke.stub.task;
 
-import duke.task.Task;
-import duke.parser.DateTimeParsing;
-
 import java.time.LocalDate;
+
+import duke.parser.DateTimeParsing;
+import duke.task.Task;
 
 public class EventStub extends Task {
     public EventStub() {

@@ -1,10 +1,11 @@
 package duke.command;
 
-import duke.stub.task.TaskListStub;
-import duke.task.TaskList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.stub.task.TaskListStub;
+import duke.task.TaskList;
 
 public class FindCommandTest {
     @Test
@@ -13,7 +14,7 @@ public class FindCommandTest {
         String actual = FindCommand.execute("find event stub", taskListStub);
         String expected =
                 "Here are the matching tasks in your list:\n"
-                + "8.[✘] event this is an event stub";
+                + "8.[\u2718] event this is an event stub";
         assertEquals(expected, actual);
     }
 }

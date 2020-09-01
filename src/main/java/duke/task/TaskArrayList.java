@@ -1,39 +1,44 @@
 package duke.task;
 
-import duke.storage.Storage;
-
 import java.util.ArrayList;
+
+import duke.storage.Storage;
 
 // An implementation of the TaskList interface using an ArrayList
 public class TaskArrayList implements TaskList {
-    private final ArrayList<Task> TASK_LIST = new ArrayList<>();
-    private final Storage STORE;
+    private final ArrayList<Task> taskList = new ArrayList<>();
+    private final Storage store;
 
     public TaskArrayList(Storage store) {
-        this.STORE = store;
+        this.store = store;
     }
 
+    @Override
     public void add(Task t, boolean shouldUpdateStorage) {
-        TASK_LIST.add(t);
+        taskList.add(t);
         if (shouldUpdateStorage) {
-            STORE.addLine(t.toSaveString());
+            store.addLine(t.toSaveString());
         }
     }
 
+    @Override
     public Task get(int i) {
-        return TASK_LIST.get(i);
+        return taskList.get(i);
     }
 
+    @Override
     public Task remove(int i) {
-        STORE.removeLine(i);
-        return TASK_LIST.remove(i);
+        store.removeLine(i);
+        return taskList.remove(i);
     }
 
+    @Override
     public void update(int i) {
-        STORE.updateLine(i, TASK_LIST.get(i).toSaveString());
+        store.updateLine(i, taskList.get(i).toSaveString());
     }
 
+    @Override
     public int size() {
-        return TASK_LIST.size();
+        return taskList.size();
     }
 }

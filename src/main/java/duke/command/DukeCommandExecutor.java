@@ -11,10 +11,10 @@ public class DukeCommandExecutor implements CommandExecutor {
      * Processes the command issued by user and passes it on to the relevant Command class for its execution.
      *
      *
-     * @param in String command issued by user
-     * @param taskList TaskList list that contains tasks added by the user
-     * @return String response message to user
-     * @throws DukeException If the command is not formatted properly
+     * @param in String command issued by user.
+     * @param taskList TaskList list that contains tasks added by the user.
+     * @return String response message to user.
+     * @throws DukeException If the command is not formatted properly.
      */
     public String execute(String in, TaskList taskList) throws DukeException {
         if (hasExited) {
@@ -39,14 +39,14 @@ public class DukeCommandExecutor implements CommandExecutor {
         case Task:
             return TaskCommand.execute(in, taskList);
         default: // Invalid
-           throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
+            throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
     /**
      * Returns true if the "bye" command has been issued else returns false.
      *
-     * @return boolean should the program exit
+     * @return boolean should the program exit.
      */
     public boolean shouldExit() {
         return hasExited;

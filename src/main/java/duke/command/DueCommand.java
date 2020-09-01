@@ -1,25 +1,24 @@
 package duke.command;
 
-import duke.exception.InvalidCommandException;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.parser.DateTimeParsing;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
 
-// Handles all the logic behind any "due" command from the user
+import duke.exception.InvalidCommandException;
+import duke.parser.DateTimeParsing;
+import duke.task.Task;
+import duke.task.TaskList;
+
+// Handles all the logic behind any "due" command from the user.
 public class DueCommand extends Command {
     /**
      * Executes any "due" command issued by the user.
      * Returns the information of the tasks due on the date specified by the user.
      *
-     * @param in String "due" command issued by user
-     * @param taskList TaskList list that contains tasks added by the user
-     * @return String response message to user including tasks due on the specified date
-     * @throws InvalidCommandException If an invalid date format is provided
+     * @param in String "due" command issued by user.
+     * @param taskList TaskList list that contains tasks added by the user.
+     * @return String response message to user including tasks due on the specified date.
+     * @throws InvalidCommandException If an invalid date format is provided.
      */
     public static String execute(String in, TaskList taskList) throws InvalidCommandException {
         String dateStr = in.replaceFirst("due ", "");

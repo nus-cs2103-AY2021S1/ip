@@ -1,12 +1,15 @@
 package duke.task;
 
-import duke.exception.InvalidTodoException;
-import duke.parser.DateTimeParsing;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.InvalidTodoException;
+import duke.parser.DateTimeParsing;
 
 public class TodoTest {
     @Test

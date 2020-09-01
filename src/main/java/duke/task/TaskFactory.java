@@ -9,10 +9,10 @@ public class TaskFactory {
     /**
      * Calls the factory method of each type of tasks based on the task type specified.
      *
-     * @param type TaskType type of task to create
-     * @param details String details of the task
-     * @return Task the specified type of task along with the details
-     * @throws InvalidTaskException If the details provided have an invalid format
+     * @param type TaskType type of task to create.
+     * @param details String details of the task.
+     * @return Task the specified type of task along with the details.
+     * @throws InvalidTaskException If the details provided have an invalid format.
      */
     public static Task createTask(TaskType type, String details) throws DukeException {
         switch (type) {

@@ -1,14 +1,14 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEventException;
 import duke.exception.InvalidTodoException;
-
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TaskFactoryTest {
     @Test

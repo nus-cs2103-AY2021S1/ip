@@ -1,9 +1,6 @@
 package duke;
 
-import duke.exception.InvalidSaveFileException;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -12,14 +9,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.InvalidSaveFileException;
 
 public class DukeTest {
     private static final Path TEST_FILE_PATH = Paths.get("test", "data", "duke.txt");
@@ -28,7 +28,7 @@ public class DukeTest {
     private static final InputStream SYSIN_BACKUP = System.in;
 
     // recursive function to delete directory that stores the save file
-    private void deleteDirectory(File directoryToBeDeleted) {
+    private static void deleteDirectory(File directoryToBeDeleted) {
         File[] allContents = directoryToBeDeleted.listFiles();
         if (allContents != null) {
             for (File file : allContents) {
@@ -38,7 +38,7 @@ public class DukeTest {
         directoryToBeDeleted.delete();
     }
 
-    private void clearPath() {
+    private static void clearPath() {
         Path topDir = TEST_FILE_PATH.subpath(0, 1);
         if (!java.nio.file.Files.exists(topDir)) {
             return;
@@ -49,7 +49,9 @@ public class DukeTest {
 
     @BeforeAll
     static void setUpStreams() throws IOException {
+        clearPath();
         System.setOut(new PrintStream(OUT_CONTENT));
+        System.out.println();
         BufferedReader reader = new BufferedReader(new FileReader(Paths.get("input.txt").toString()));
         String[] input = reader.lines().toArray(String[]::new);
         reader.close();

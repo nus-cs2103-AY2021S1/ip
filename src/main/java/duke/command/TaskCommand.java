@@ -8,16 +8,16 @@ import duke.task.TaskFactory;
 import duke.task.TaskList;
 import duke.task.TaskType;
 
-// Handles all the logic behind any "task" command from the user
+// Handles all the logic behind any "task" command from the user.
 public class TaskCommand {
     /**
      * Executes any "task" command issued by the user.
      * Adds the task specified by the user to the taskList and updates save file after updating.
      *
-     * @param in String "task" command issued by user
-     * @param taskList TaskList list that contains tasks added by the user
-     * @return String response message to user
-     * @throws DukeException If the task command provided does not fit the specified format
+     * @param in String "task" command issued by user.
+     * @param taskList TaskList list that contains tasks added by the user.
+     * @return String response message to user.
+     * @throws DukeException If the task command provided does not fit the specified format.
      */
     public static String execute(String in, TaskList taskList) throws DukeException {
         TaskType taskType = CommandParser.parseTaskType(in);
@@ -32,11 +32,11 @@ public class TaskCommand {
      * Creates the specific task type based on the taskType parameter and adds it to the taskList.
      * Updates save file after updating.
      *
-     * @param taskType TaskType the task type
-     * @param details String the task details
-     * @param taskList TaskList list that contains tasks added by the user
-     * @return String response message to user
-     * @throws InvalidTaskException If the task command provided does not fit the specified format
+     * @param taskType TaskType the task type.
+     * @param details String the task details.
+     * @param taskList TaskList list that contains tasks added by the user.
+     * @return String response message to user.
+     * @throws InvalidTaskException If the task command provided does not fit the specified format.
      */
     private static String createTask(
             TaskType taskType, String details, TaskList taskList, boolean isDone, boolean shouldUpdateStorage)
@@ -52,6 +52,13 @@ public class TaskCommand {
                 + "Now you have " + len + " task" + (len == 1 ? "" : "s") + " in the list.";
     }
 
+    /**
+     * Parses and loads the save string into the task list.
+     *
+     * @param in String the save string.
+     * @param taskList TaskList list that contains tasks added by the user.
+     * @throws DukeException If save string is invalid.
+     */
     public static void loadSavedTasks(String in, TaskList taskList) throws DukeException {
         boolean isDone = in.charAt(0) == '1';
         String taskCommand = in.substring(1);

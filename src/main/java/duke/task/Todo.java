@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.exception.InvalidTodoException;
-
 import java.time.LocalDate;
+
+import duke.exception.InvalidTodoException;
 
 public class Todo extends Task {
     private Todo(String desc) {
@@ -12,9 +12,9 @@ public class Todo extends Task {
     /**
      * Factory method for creating a todo task.
      *
-     * @param details String details of the task
-     * @return Todo the todo task
-     * @throws InvalidTodoException If the format of the details is invalid
+     * @param details String details of the task.
+     * @return Todo the todo task.
+     * @throws InvalidTodoException If the format of the details is invalid.
      */
     protected static Todo createTodo(String details) throws InvalidTodoException {
         if (details.equals("")) {

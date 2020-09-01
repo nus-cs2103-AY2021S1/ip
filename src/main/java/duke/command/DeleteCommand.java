@@ -9,10 +9,10 @@ public class DeleteCommand extends Command {
      * Executes any "delete" command issued by the user.
      * Removes the task specified by the user from taskList and updates save file after deletion.
      *
-     * @param in String "delete" command issued by user
-     * @param taskList TaskList list that contains tasks added by the user
-     * @return String response message to user
-     * @throws InvalidCommandException If an invalid index is provided
+     * @param in String "delete" command issued by user.
+     * @param taskList TaskList list that contains tasks added by the user.
+     * @return String response message to user.
+     * @throws InvalidCommandException If an invalid index is provided.
      */
     public static String execute(String in, TaskList taskList) throws InvalidCommandException {
         try {
