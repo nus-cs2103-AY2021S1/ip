@@ -73,11 +73,15 @@
 }
 
 .speech-bubble {
-    -fx-background-color: white;
+    -fx-background-color: #F5F5F5;
     -fx-background-radius: 15px;
 }
 
 .text-field {
     -fx-background-color: #4D5259;
     -fx-text-fill: white;
+}
+
+.user-speech-bubble {
+    -fx-background-color: #EFFDDE;
 }

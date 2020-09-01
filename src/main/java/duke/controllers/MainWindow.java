@@ -5,6 +5,9 @@ import duke.Repl;
 import duke.messages.DukeResponse;
 
 import duke.utils.ResourceHandler;
+
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -40,6 +43,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        BooleanBinding isUserInputEmpty = Bindings.isEmpty(userInput.textProperty());
+        sendButton.disableProperty().bind(isUserInputEmpty);
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(ResourceHandler.getString("repl.greeting"), dukeImage));
     }
@@ -52,6 +57,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+
+        if (input.isEmpty()) {
+            return;
+        }
+
         DukeResponse dukeResponse = Repl.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

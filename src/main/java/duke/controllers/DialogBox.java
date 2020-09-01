@@ -64,7 +64,9 @@ public class DialogBox extends HBox {
      * @return a {@code DialogBox} for the user
      */
     public static DialogBox getUserDialog(String text, Image image) {
-        return new DialogBox(text, image);
+        DialogBox dialogBox = new DialogBox(text, image);
+        dialogBox.speechBubble.getStyleClass().add("user-speech-bubble");
+        return dialogBox;
     }
 
     /**
