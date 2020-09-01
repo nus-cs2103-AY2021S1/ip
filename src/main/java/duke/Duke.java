@@ -1,26 +1,21 @@
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import com.sun.javafx.stage.EmbeddedWindow;
+package duke;
+
 import duke.command.Command;
 import duke.command.DukeRunTimeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import duke.ui.UI;
 
 /**
  * The class Duke denotes the faithful robot.
  *
  * @author Alvin Chee
  */
-public class Duke extends Application {
+public class Duke {
     private TaskList tasks;
     private Storage storage;
     private UI ui;
-    private EmbeddedWindow stage;
 
     /**
      * Constructs a Duke robot.
@@ -49,12 +44,12 @@ public class Duke extends Application {
     }
 
     /**
-     * Gets file path based on user's system.
+     * Executes all the operations stated.
+     *
+     * @param input  String arrays of operations.
      */
-    public static String getFilePath() {
-        String home = System.getProperty("user.home");
-        Path path = Paths.get(home, "Duke", "data", "tasks.text");
-        return path.toString();
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     /**
@@ -63,20 +58,12 @@ public class Duke extends Application {
      * @param args  String arrays of operations.
      */
     public static void main(String[] args) throws DukeRunTimeException {
-        new Duke(getFilePath()).run();
+        //new Duke(getFilePath()).run();
         /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);*/
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
     }
 }

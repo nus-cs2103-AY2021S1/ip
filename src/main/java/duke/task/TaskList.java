@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import duke.command.DukeIndexOutOfBoundsException;
 
 public class TaskList {
@@ -74,11 +73,13 @@ public class TaskList {
         System.out.println(String.format("\tNow you have %d tasks in the list.", taskList.size()));
     }
 
-    /**
-     * Deletes the task based on index in taskInfo
-     *
-     * @param taskInfo  Task information with task index information.
-     */
+     /**
+      *
+      * Deletes the task based on index in taskInfo
+      *
+      * @param taskInfo  Task information with task index information.
+      * @throws DukeIndexOutOfBoundsException
+      */
     public void deleteTask(String taskInfo) throws DukeIndexOutOfBoundsException {
         if (taskInfo.length() <= 7) {
             throw new DukeIndexOutOfBoundsException("The task you want to delete is invalid");
