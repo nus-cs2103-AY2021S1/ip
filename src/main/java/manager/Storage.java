@@ -1,17 +1,17 @@
 package main.java.manager;
 
-import main.java.tasks.Task;
-import main.java.tasks.Todo;
-import main.java.tasks.Deadline;
-import main.java.tasks.Event;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import main.java.tasks.Deadline;
+import main.java.tasks.Event;
+import main.java.tasks.Task;
+import main.java.tasks.Todo;
 
 /**
  * Represents a platform enabling storage, which stores
@@ -95,8 +95,9 @@ public class Storage {
             return new Deadline(description, words[3], isDone);
         case "E":
             return new Event(description, words[3], isDone);
+        default:
+            return null;
         }
-        return null;
     }
 
     /**
@@ -112,7 +113,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(this.pathname);
             fileWriter.write(sb.toString());
             fileWriter.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Cannot update database file.");
         }
     }

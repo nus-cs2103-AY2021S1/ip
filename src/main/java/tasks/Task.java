@@ -8,11 +8,20 @@ public abstract class Task {
     private final String description;
     private boolean isDone;
 
+    /**
+     * Constructs a task given a description, setting default done status as false.
+     * @param description provided for the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Constructs a task given a description and done status.
+     * @param description provided for the task
+     * @param isDone provided for the task
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -59,6 +68,6 @@ public abstract class Task {
      */
     public String databaseString() {
         String doneStatus = this.isDone ? "true" : "false";
-        return  doneStatus + " | " + this.description;
+        return doneStatus + " | " + this.description;
     }
 }

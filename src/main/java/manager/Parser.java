@@ -1,9 +1,9 @@
 package main.java.manager;
 
+import java.util.Scanner;
+
 import main.java.exceptions.InvalidCommandException;
 import main.java.exceptions.InvalidNumberException;
-
-import java.util.Scanner;
 
 /**
  * Represents a parser that parses the user's input and
@@ -65,8 +65,8 @@ public class Parser {
                         this.converter.passTask(this.converter.convertTask(Commands.TODO, input));
 
                     } else {
-                        throw new InvalidCommandException("Not sure what you mean. " +
-                                "Please ensure your command format is correct and try again.");
+                        throw new InvalidCommandException("Not sure what you mean. "
+                                + "Please ensure your command format is correct and try again.");
                     }
 
                 }
@@ -92,16 +92,16 @@ public class Parser {
     private boolean isNumberedCommand(String input) throws InvalidNumberException {
 
         String[] words = input.split(" ");
-        boolean checkBackNumber = words.length == 2 &&
-                words[1].chars().allMatch(Character::isDigit);
+        boolean checkBackNumber = words.length == 2
+                && words[1].chars().allMatch(Character::isDigit);
 
         if (checkBackNumber) {
             int index = Integer.parseInt(words[1]) - 1;
             boolean isValidNumber = index < this.converter.getTotalTasks();
 
             if (!isValidNumber) {
-                throw new InvalidNumberException("The number entered is invalid. " +
-                        "You have " + this.converter.getTotalTasks() + " tasks in your list.");
+                throw new InvalidNumberException("The number entered is invalid. "
+                        + "You have " + this.converter.getTotalTasks() + " tasks in your list.");
             }
             return true;
 

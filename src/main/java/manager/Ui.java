@@ -38,6 +38,8 @@ public class Ui {
             case TODO:
                 String todoDesc = input.substring("todo".length()).trim();
                 return new Todo(todoDesc);
+            default:
+                return null;
             }
         } catch (InvalidDescriptionException | InvalidTimeException e) {
             System.out.println(e.getMessage());
@@ -64,6 +66,9 @@ public class Ui {
             break;
         case FIND:
             this.taskList.findTasks(input);
+            break;
+        default:
+            break;
         }
     }
 

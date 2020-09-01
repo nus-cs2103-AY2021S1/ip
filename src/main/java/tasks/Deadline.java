@@ -1,11 +1,12 @@
 package main.java.tasks;
-import main.java.exceptions.InvalidDescriptionException;
-import main.java.exceptions.InvalidTimeException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import main.java.exceptions.InvalidDescriptionException;
+import main.java.exceptions.InvalidTimeException;
 
 /**
  * Represents a deadline, consisting of a description and an end time.
@@ -18,6 +19,13 @@ public class Deadline extends Task {
     private LocalDateTime formattedDateTime;
     private LocalDate formattedDate;
 
+    /**
+     * Creates a new deadline object with a given description and end time.
+     * @param description provided for the deadline
+     * @param endTime provided for the deadline
+     * @throws InvalidDescriptionException when description is empty
+     * @throws InvalidTimeException when end time is empty
+     */
     public Deadline(String description, String endTime) throws InvalidDescriptionException, InvalidTimeException {
         super(description);
         if (description.isBlank()) {
@@ -32,6 +40,12 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Creates a new deadline object given a description, deadline and its done status.
+     * @param description provided for the deadline
+     * @param endTime provided for the deadline
+     * @param isDone provided for the deadline
+     */
     public Deadline(String description, String endTime, boolean isDone) {
         super(description, isDone);
         this.endTime = endTime;
@@ -63,10 +77,11 @@ public class Deadline extends Task {
         return this.formattedDateTime == null
                 ? this.formattedDate == null
                     ? "[D]" + super.toString() + " (by: " + this.endTime + ")"
-                    : "[D]" + super.toString() + " (by: " +
-                        this.formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"
-                : "[D]" + super.toString() + " (by: " +
-                    this.formattedDateTime.format(
+                    : "[D]" + super.toString() + " (by: "
+                        + this.formattedDate.format(
+                                DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"
+                : "[D]" + super.toString() + " (by: "
+                    + this.formattedDateTime.format(
                             DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a")) + ")";
     }
 

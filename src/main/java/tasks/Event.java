@@ -1,11 +1,12 @@
 package main.java.tasks;
-import main.java.exceptions.InvalidDescriptionException;
-import main.java.exceptions.InvalidTimeException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import main.java.exceptions.InvalidDescriptionException;
+import main.java.exceptions.InvalidTimeException;
 
 /**
  * Represents an event, consisting of a description and a time.
@@ -18,6 +19,13 @@ public class Event extends Task {
     private LocalDateTime formattedDateTime;
     private LocalDate formattedDate;
 
+    /**
+     * Creates a new event object with a given description and time.
+     * @param description provided for the event
+     * @param time provided for the event
+     * @throws InvalidDescriptionException when description is empty
+     * @throws InvalidTimeException when time is empty
+     */
     public Event(String description, String time) throws InvalidDescriptionException, InvalidTimeException {
         super(description);
         if (description.isBlank()) {
@@ -32,6 +40,12 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Creates a new event object with a given description, time and done status.
+     * @param description provided for the event
+     * @param time provided for the event
+     * @param isDone provided for the event
+     */
     public Event(String description, String time, boolean isDone) {
         super(description, isDone);
         this.time = time;
@@ -63,10 +77,11 @@ public class Event extends Task {
         return this.formattedDateTime == null
                 ? this.formattedDate == null
                     ? "[E]" + super.toString() + " (at: " + this.time + ")"
-                    : "[E]" + super.toString() + " (at: " +
-                        this.formattedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"
-                : "[E]" + super.toString() + " (at: " +
-                    this.formattedDateTime.format(
+                    : "[E]" + super.toString() + " (at: "
+                        + this.formattedDate.format(
+                                DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"
+                : "[E]" + super.toString() + " (at: "
+                    + this.formattedDateTime.format(
                             DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a")) + ")";
     }
 

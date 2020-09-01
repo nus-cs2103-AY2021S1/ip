@@ -7,14 +7,24 @@ import main.java.exceptions.InvalidDescriptionException;
  */
 public class Todo extends Task {
 
+    /**
+     * Creates a new todo object with a given description.
+     * @param description provided for the todo
+     * @throws InvalidDescriptionException when description is empty
+     */
     public Todo(String description) throws InvalidDescriptionException {
         super(description);
         if (description.isBlank()) {
-            throw new InvalidDescriptionException("Hey! " +
-                    "Todo description shouldn't be blank.");
+            throw new InvalidDescriptionException("Hey! "
+                    + "Todo description shouldn't be blank.");
         }
     }
 
+    /**
+     * Creates a new todo given a description and done status.
+     * @param description provided for the todo
+     * @param isDone provided for the todo
+     */
     public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
