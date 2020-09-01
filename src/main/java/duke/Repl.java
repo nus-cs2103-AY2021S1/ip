@@ -110,8 +110,8 @@ public class Repl {
             }
             case FIND: {
                 String lineWithoutCommand = input.replaceFirst("^find", "");
-                String searchKeyword = lineWithoutCommand.trim();
-                response = taskManager.getMatchingTasks(searchKeyword);
+                String[] searchKeywords = lineWithoutCommand.trim().split("\\s+");
+                prettyPrinter.print(taskManager.getMatchingTasks(searchKeywords));
                 break;
             }
             case LIST: {

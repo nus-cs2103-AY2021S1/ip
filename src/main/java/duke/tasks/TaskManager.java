@@ -101,12 +101,13 @@ public class TaskManager {
     }
 
     /**
-     * Returns a list of {@code Task}s under the {@code TaskManager} that contain the specified keyword.
+     * Returns a list of {@code Task}s under the {@code TaskManager} that contain any of the specified keywords.
      *
-     * @return a list of {@code Task}s under the {@code TaskManager} that contain the specified keyword.
+     * @param keywords the keywords that are being searched.
+     * @return a list of {@code Task}s under the {@code TaskManager} that contain any of the specified keywords.
      */
-    public String getMatchingTasks(String keyword) {
-        List<Task> matchingTasks = tasks.stream().filter(task -> task.containsKeyword(keyword))
+    public String getMatchingTasks(String... keywords) {
+        List<Task> matchingTasks = tasks.stream().filter(task -> task.matchesKeywords(keywords))
                 .collect(Collectors.toList());
         StringBuilder formattedList =
                 new StringBuilder(ResourceHandler.getString("taskManager.matchingTasksPrefix") + "\n");
