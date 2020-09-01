@@ -19,6 +19,10 @@ public class Main extends Application {
     public Main() throws IOException {
     }
 
+    /**
+     * Overrides start method to set up stage.
+     * @param stage Stage.
+     */
     @Override
     public void start(Stage stage) {
         try {

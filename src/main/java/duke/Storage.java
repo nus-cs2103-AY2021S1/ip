@@ -181,7 +181,7 @@ public class Storage {
                     }
                     arrayList.add(str);
                 } else {
-                    System.out.println("One of your task is neither a duke.Todo, duke.Event or duke.Deadline");
+                    System.out.println("One of your task is neither a Todo, Event or Deadline");
                 }
             }
             for (String str : arrayList) {
