@@ -6,10 +6,10 @@ public class InvalidListIndexException extends DukeException {
      * @return a String
      */
     public String toString() {
-        return "____________________________________________________________"
+        return "______________________________________________________"
                 + "\n"
-                + " ☹ OOPS!!! The index you've chosen is invalid"
+                + " OOPS!!! The index you've chosen is invalid"
                 + "\n"
-                + "____________________________________________________________";
+                + "______________________________________________________";
     }
 }
