@@ -65,16 +65,18 @@ public class UI {
     }
 
     public static void printKeywordTasks(String substring, ArrayList<Task> stringStore) throws DukeNoMatchesExcpetion {
-        ArrayList<Task> keywordTasks = new ArrayList<>();
-        for (int i = 0; i < stringStore.size(); i++) {
-            if (stringStore.get(i).containsKeyword(substring)) {
-                keywordTasks.add(stringStore.get(i));
-            }
-        }
         try {
-            if (keywordTasks.size() == 0) {
-                throw new DukeNoMatchesExcpetion("ERROR: No matches found!");
+            ArrayList<Task> keywordTasks = new ArrayList<>();
+
+            for (int i = 0; i < stringStore.size(); i++) {
+                if (stringStore.get(i).containsKeyword(substring)) {
+                    keywordTasks.add(stringStore.get(i));
+                }
             }
+            if (keywordTasks.size() == 0) {
+                throw new DukeNoMatchesExcpetion("");
+            }
+
             printHorizontalLine();
             System.out.println("Here are the matching tasks in your list:");
             int sizeStore = keywordTasks.size();
@@ -83,7 +85,7 @@ public class UI {
             }
             printHorizontalLine();
         } catch (DukeNoMatchesExcpetion e) {
-            UI.printFormattedMessage("ERROR: No matches found!");
+            UI.printFormattedMessage("OOPS!!! No Matches!");
 
         }
     }
