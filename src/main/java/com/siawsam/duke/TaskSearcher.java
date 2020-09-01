@@ -13,6 +13,7 @@ public class TaskSearcher {
      * Searches a TaskList for Tasks matching a search string and prints them out.
      *
      * @param searchString The search string.
+     * @return A response representing the search result.
      */
     public Response searchAndDisplay(String searchString) {
         List<Task> results = taskList.searchByKeyword(searchString);

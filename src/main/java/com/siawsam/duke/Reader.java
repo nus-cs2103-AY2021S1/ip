@@ -21,11 +21,12 @@ public class Reader {
     }
 
     /**
-     * Reads a serialized TaskList instance from disk.
+     * Reads a serialized {@link TaskList TaskList} instance from disk.
      *
      * @param path The file path of the serialized TaskList.
-     * @return The deserialized TaskList instance.
-     * @throws ClassNotFoundException if the file given doesn't contain a serialized TaskList instance.
+     * @return The deserialized {@link TaskList TaskList} instance.
+     * @throws ClassNotFoundException if the file given doesn't contain a serialized
+     * {@link TaskList TaskList} instance.
      * @throws IOException if an IO exception occurs while reading the file.
      */
     static TaskList readListFromFile(String path) throws ClassNotFoundException, IOException {

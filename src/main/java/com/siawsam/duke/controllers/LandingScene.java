@@ -1,9 +1,9 @@
 package com.siawsam.duke.controllers;
 
+import java.io.IOException;
+
 import com.siawsam.duke.Duke;
 import com.siawsam.duke.Response;
-
-import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -33,11 +33,20 @@ public class LandingScene extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
     
+    /**
+     * Constructs a new scene that represents the main landing view of Duke.
+     *
+     * @param duke The Duke instance to attach the GUI to.
+     * @param stage The stage to display this scene on.
+     */
     public LandingScene(Duke duke, Stage stage) {
         this.stage = stage;
         this.duke = duke;
     }
     
+    /**
+     * Initializes a Landing Scene by loading saved Duke data.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -72,6 +81,7 @@ public class LandingScene extends AnchorPane {
         userInput.clear();
         
         System.out.println(response.getMessage());
+        // terminate application if a terminating response is received
         if (response.isTerminating()) {
             stage.close();
         }

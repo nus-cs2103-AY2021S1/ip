@@ -11,7 +11,7 @@ public class TaskList implements Serializable {
     /**
      * Adds an item to the TaskList by parsing the item's string literal.
      *
-* @param itemLiteral The string literal of the item.
+     * @param itemLiteral The string literal of the item.
      * @return The Task object constructed and added to the TaskList.
      * @throws DukeException if an invalid string literal is passed.
      */
@@ -81,7 +81,7 @@ public class TaskList implements Serializable {
         }
     }
     
-    private Task parseEvent(String itemLiteral) throws DukeException {
+    private Task parseEvent(String itemLiteral) {
         return new Event(
                 getItemDescription(itemLiteral, "event"),
                 getItemParameter(itemLiteral, "event")

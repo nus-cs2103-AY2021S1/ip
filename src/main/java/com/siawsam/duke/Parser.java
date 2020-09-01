@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * A parser for command-line user inputs.
+ * A parser for user inputs.
  */
 public class Parser {
     /**
@@ -35,6 +35,12 @@ public class Parser {
         this.storage = storage;
     }
     
+    /**
+     * Parses a string literal and executes the associated operation.
+     *
+     * @param literal The string literal to parse and execute.
+     * @return The {@link Response response} of the executed operation.
+     */
     public Response parseAndExecute(String literal) {
         String command = literal.split(" ")[0];
         boolean isValidCommand = COMMANDS.contains(command);
