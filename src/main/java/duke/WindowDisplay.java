@@ -137,10 +137,10 @@ public class WindowDisplay extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
-        );
+//        dialogContainer.getChildren().addAll(
+//                new DialogBox(userText, new ImageView(user)),
+//                new DialogBox(dukeText, new ImageView(duke))
+//        );
         userInput.clear();
     }
 
@@ -149,6 +149,7 @@ public class WindowDisplay extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
+        dialogContainer.getChildren().add(new DialogBox(new Label(input), new ImageView(user)));
         ui.handle(input);
         return "space";
     }

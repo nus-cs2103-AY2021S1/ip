@@ -4,8 +4,8 @@ public class TextStore {
 
 
     // Bling msgs
-    protected final static String top = "----------Bot made by Hendey Fan----------";
-    protected final static String bottom = "------------------------------------------";
+    protected final static String top = "--------------Bot made by Hendey Fan--------------";
+    protected final static String bottom = "--------------------------------------------------------";
     protected final static String startMessage = "This is a chat bot made by Hendey Fan.\n" +
             "What can this magnificent bot do for you?";
     protected final static String endMessage = "    oi don run away from ur tasks hor    ";
@@ -30,14 +30,14 @@ public class TextStore {
     // static info/display strings
     protected final static String commandList =
             "1) !commands | returns a list of text commands\n" +
-                    "2) list      | lists out all the current tasks\n" +
-                    "3) bye       | saves the current tasks into a file and exits program\n" +
-                    "4) done      | format: \"done <task number>\", marks a task in the list as done\n" +
-                    "5) todo      | format: \"todo <description>\", creates a todo task\n" +
-                    "6) deadline  | format: \"deadline <description> /by <dd/MM/yyyy HHmm>\", creates a deadline task\n" +
-                    "7) event     | format: \"event <description> /at <dd/MM/yyyy HHmm>\", creates a event task\n" +
-                    "8) delete    | format: \"delete <task number>\", deletes a task in the list\n" +
-                    "9) find      | format: \"find <string>\", finds tasks with matching string";
+                    "2) list | lists out all the current tasks\n" +
+                    "3) bye | saves the current tasks into a file and exits program\n" +
+                    "4) done | format: \"done <task number>\", marks a task in the list as done\n" +
+                    "5) todo | format: \"todo <description>\", creates a todo task\n" +
+                    "6) deadline | format: \"deadline <description> /by <dd/MM/yyyy HHmm>\", creates a deadline task\n" +
+                    "7) event | format: \"event <description> /at <dd/MM/yyyy HHmm>\", creates a event task\n" +
+                    "8) delete | format: \"delete <task number>\", deletes a task in the list\n" +
+                    "9) find | format: \"find <string>\", finds tasks with matching string";
 
     public final static String doneText    = "[Complete] ";
     public final static String notDoneText = "[ToBeDone] ";

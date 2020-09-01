@@ -44,18 +44,15 @@ public class FileManager {
     public static TaskList readFromSave(Path path) {
         TaskList taskList = new TaskList();
         try {
-            TextPrinter.printTopGraphic();
-            TextPrinter.printStandAlone(TextStore.loadingSave);
 
             boolean directoryExists = java.nio.file.Files.exists(path);
 
             if (directoryExists) {
-                TextPrinter.printStandAlone(TextStore.saveFound);
+                TextPrinter.standardPrint(TextStore.loadingSave + "\n" + TextStore.saveFound);
                 taskList = readSaveToTaskListObject(path);
             } else {
-                TextPrinter.printStandAlone(TextStore.saveNotFound);
+                TextPrinter.printStandAlone(TextStore.loadingSave + "\n" + TextStore.saveNotFound);
             }
-            TextPrinter.printBottomGraphic();
         } catch (IOException e) {
             e.printStackTrace();
         }
