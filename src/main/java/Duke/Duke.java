@@ -29,17 +29,22 @@ public class Duke {
 
     /**
      * This gives the respective output based on the input
-     * @param input what the user inputs in the GUI
+     * @param inputs what the user inputs in the GUI
      * @return the output based on the output.
      */
-    public String getResponse(String input)  {
-        Command c = Parser.parse(input);
-        try {
-            isExit = c.isExit();
-            return c.execute(tasks, new Ui(), storage);
-        } catch (DukeException e) {
-            return e.getMessage();
+    public String getResponse(String... inputs)  {
+        String output = "";
+        for(int i = 0; i < inputs.length; i++) {
+            String input = inputs[i];
+            Command c = Parser.parse(input);
+            try {
+                isExit = c.isExit();
+                output = output + "\n" + (i + 1) + ". " + c.execute(tasks, new Ui(), storage);
+            } catch (DukeException e) {
+                output = output + "\n" + (i + 1) + ". " + e.getMessage();
+            }
         }
+        return output.substring(1);
     }
     /**
      * assigns the above member variables with the appropriate values, and throws certain exceptions if file in
