@@ -55,7 +55,7 @@ public class Ui {
      */
     public static String goodbyeMessage() {
         return "_________________________________________\n"
-                + "Bye. Hope to see you again soon!\n"
+                + "Closing now. Hope to see you again soon!\n"
                 + "_________________________________________";
     }
 
@@ -87,7 +87,7 @@ public class Ui {
     /**
      * Prints a formatted response to inform the user that saving is in progress.
      */
-    public static String showSaving() {
-        return "Currently saving tasks. Do not Exit!";
+    public static String showSaving(String summary) {
+        return "Currently saving tasks. Do not Exit! \n" + summary + "\n";
     }
 }

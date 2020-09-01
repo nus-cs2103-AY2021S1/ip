@@ -191,23 +191,22 @@ public class Duke {
      */
     public String getResponse(String input) {
         //String cmd = sc.nextLine().trim().toLowerCase();
-        String finalString;
+        StringBuilder stringBuilder = new StringBuilder();
         if (!input.equals("bye") && input.length() != 0) {
             try {
-                finalString = Parser.process(input, this.taskList, this.storage);
+                stringBuilder.append(Parser.process(input, this.taskList, this.storage));
             } catch (DukeException e) {
-                finalString = Ui.showError(e.getMessage());
+                stringBuilder.append(Ui.showError(e.getMessage()));
             }
         } else {
             try {
-                System.out.println(Ui.showSaving());
-                this.storage.saveToFile();
+                stringBuilder.append(Ui.showSaving(this.storage.saveToFile()));
             } catch (IOException e) {
-                System.out.println(Ui.showError(e.getMessage()));
+                stringBuilder.append(Ui.showError(e.getMessage()));
             }
-            finalString = Ui.goodbyeMessage();
+            stringBuilder.append(Ui.goodbyeMessage());
         }
-        return finalString;
+        return stringBuilder.toString();
     }
 
 }

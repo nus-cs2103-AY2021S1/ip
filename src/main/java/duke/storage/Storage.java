@@ -32,14 +32,13 @@ public class Storage {
      * @author Lee Penn Han.
      * @throws IOException on input error.
      */
-    public void saveToFile() throws IOException {
+    public String saveToFile() throws IOException {
         FileWriter fileWriter = new FileWriter(fileName);
         for (String s : recordArrayLst) {
             fileWriter.write(s + "\n");
         }
-        System.out.println("Total number of Tasks saved: " + recordArrayLst.size());
-
         fileWriter.close();
+        return "Total number of Tasks saved: " + recordArrayLst.size();
     }
 
     /**
