@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class TaskManager {
     private ArrayList<Task> taskList;
@@ -43,7 +44,8 @@ public class TaskManager {
         if (temp.length < 2) {
             throw new DukeException("Deadline not properly formatted!");
         }
-        Deadline deadline = new Deadline(temp[0], temp[1]);
+        LocalDate deadlineDate = LocalDate.parse(temp[1]);
+        Deadline deadline = new Deadline(temp[0], deadlineDate);
         taskList.add(deadline);
         System.out.println("\n Task added: " + deadline);
     }
@@ -53,7 +55,8 @@ public class TaskManager {
         if (temp.length < 2) {
             throw new DukeException("Event not properly formatted!");
         }
-        Event event = new Event(temp[0], temp[1]);
+        LocalDate eventDate = LocalDate.parse(temp[1]);
+        Event event = new Event(temp[0], eventDate);
         taskList.add(event);
         System.out.println("\n Task added: " + event);
     }
