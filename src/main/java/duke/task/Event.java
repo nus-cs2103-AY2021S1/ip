@@ -65,7 +65,7 @@ public class Event extends Task {
         if (inputList.length < 3) {
             throw new TaskException("Invalid storage string");
         }
-        return new Event(inputList[0], inputList[1], decodeCompletionFlag(inputList[2]));
+        return new Event(inputList[0], inputList[1], isTaskCompleted(inputList[2]));
     }
 
     /**

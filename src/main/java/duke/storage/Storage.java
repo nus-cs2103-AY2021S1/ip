@@ -21,9 +21,7 @@ import duke.task.Todo;
 
 /**
  * Encapsulates the logic for storing tasks.
- *
  * It will create folders and file based on the given filePath in the constructor.
- *
  * A connection to the file is created and maintained once this class is instantiated.
  */
 public class Storage {
@@ -31,7 +29,6 @@ public class Storage {
 
     /**
      * Constructs a Storage class.
-     *
      * A connection to the file is created and maintained once this class is instantiated.
      *
      * @param filePath File to save the tasks in.

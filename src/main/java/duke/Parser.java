@@ -32,12 +32,12 @@ public class Parser {
     public static Command parse(String fullCommand) throws UnknownCommandException {
         StringBuilder commandInput = new StringBuilder();
         StringBuilder argsInput = new StringBuilder();
-        boolean commandFound = false;
+        boolean isCommandFound = false;
         for (int i = 0; i < fullCommand.length(); i++) {
-            if (commandFound) {
+            if (isCommandFound) {
                 argsInput.append(fullCommand.charAt(i));
             } else if (fullCommand.charAt(i) == ' ') {
-                commandFound = true;
+                isCommandFound = true;
             } else {
                 commandInput.append(fullCommand.charAt(i));
             }

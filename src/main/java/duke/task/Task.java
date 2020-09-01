@@ -87,7 +87,7 @@ public abstract class Task {
      * @param flag Storage representation of a task.
      * @return True if the given flag is ✓
      */
-    protected static boolean decodeCompletionFlag(String flag) {
+    protected static boolean isTaskCompleted(String flag) {
         return flag.equals(STORE_COMPLETED);
     }
 
@@ -104,7 +104,7 @@ public abstract class Task {
      * @param searchTerm Term to search with.
      * @return True if the description has the given searchTerm.
      */
-    public boolean descriptionContains(String searchTerm) {
+    public boolean hasSearchTerm(String searchTerm) {
         return description.contains(searchTerm);
     }
 

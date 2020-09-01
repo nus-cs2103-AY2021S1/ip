@@ -149,7 +149,7 @@ public class TaskList {
         List<Task> results = new ArrayList<>();
         for (int key : tasksMap.keySet()) {
             Task task = tasksMap.get(key);
-            if (task.descriptionContains(searchTerm)) {
+            if (task.hasSearchTerm(searchTerm)) {
                 results.add(task);
             }
         }

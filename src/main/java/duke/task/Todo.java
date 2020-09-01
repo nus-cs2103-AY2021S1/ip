@@ -39,7 +39,7 @@ public class Todo extends Task {
         if (inputList.length < 2) {
             throw new TaskException("Invalid storage string");
         }
-        return new Todo(inputList[0], decodeCompletionFlag(inputList[1]));
+        return new Todo(inputList[0], isTaskCompleted(inputList[1]));
     }
 
     /**

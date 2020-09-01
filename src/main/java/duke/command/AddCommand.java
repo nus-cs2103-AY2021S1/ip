@@ -24,6 +24,15 @@ public class AddCommand extends Command {
         this.taskType = taskType;
     }
 
+    /**
+     * Dispatches the appropriate method to add a certain task type into the given taskList.
+     *
+     * @param taskList The taskList to operate with.
+     * @param storage The storage to operate with.
+     * @return A message to indicate results.
+     * @throws TaskException If exception happened while processing task.
+     * @throws StorageException If exception happened while storing.
+     */
     @Override
     public String execute(TaskList taskList, Storage storage) throws TaskException, StorageException {
         Task newTask = null;
