@@ -32,49 +32,59 @@ public class Parser {
      * @param storage This is the Storage object that records the tasks
      * @throws DukeException Exception for unidentified commands
      */
-    public static void process(String command, TaskList taskList, Storage storage) throws DukeException {
+    public static String process(String command, TaskList taskList, Storage storage) throws DukeException {
         String[] stringarr = command.split(" ");
+        String finalString;
         if (stringarr[0].equals("list")) {
-            processorList(taskList);
+            String response = processorList(taskList);
+            finalString = Ui.showResponse(response, command);
         } else if (stringarr[0].equals("done")) {
             int index = Integer.parseInt(stringarr[1]);
             String response = taskList.updateTask(index);
             storage.updateRecord(response, index);
-            Ui.showResponse(response, command);
+            finalString = Ui.showResponse(response, command);
         } else if (stringarr[0].equals("delete")) {
             int index = Integer.parseInt(stringarr[1]);
             String response = taskList.deleteTask(index);
             storage.deleteRecord(index);
-            Ui.showResponse(response, command);
+            finalString = Ui.showResponse(response, command);
         } else if (stringarr[0].equals("find")) {
             String key = stringarr[1];
-            processorFind(taskList, key);
+            String response = processorFind(taskList, key);
+            finalString = Ui.showResponse(response, command);
         } else {
             String response = processorAdd(command, taskList);
             storage.saveRecord(response);
-            Ui.showResponse(response, command);
+            finalString = Ui.showResponse(response, command);
         }
+        return finalString;
     }
 
-    private static void processorFind(TaskList taskList, String key) {
+    private static String processorFind(TaskList taskList, String key) {
         int counter = 1;
-        Ui.showCommandMessage("Here are the matching tasks in your list:");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(Ui.showCommandMessage("Here are the matching tasks in your list:"));
         for (int i = 0; i < taskList.getListSize(); i++) {
             if (taskList.getTask(i).getTask().contains(key)) {
-                System.out.println(counter + "." + taskList.getTask(i).toString());
+                String findResponse = counter + "." + taskList.getTask(i).toString() + "\n";
+                stringBuilder.append(findResponse);
                 counter++;
             }
         }
-        Ui.showLine();
+        stringBuilder.append(Ui.showLine());
+        return stringBuilder.toString();
     }
 
-    private static void processorList(TaskList taskList) {
-        Ui.showCommandMessage("Here are the tasks in your list:");
+    private static String processorList(TaskList taskList) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(Ui.showCommandMessage("Here are the tasks in your list:"));
         for (int i = 0; i < taskList.getListSize(); i++) {
             int index = i + 1;
-            System.out.println(index + "." + taskList.getTask(i).toString());
+            String listResponse = index + "." + taskList.getTask(i).toString() + "\n";
+            stringBuilder.append(listResponse);
         }
-        Ui.showLine();
+        stringBuilder.append(Ui.showLine());
+        return stringBuilder.toString();
     }
 
     private static String processorAdd(String cmd, TaskList taskList) throws DukeException {

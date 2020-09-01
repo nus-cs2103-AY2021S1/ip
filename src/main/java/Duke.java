@@ -191,12 +191,12 @@ public class Duke {
      */
     public String getResponse(String input) {
         //String cmd = sc.nextLine().trim().toLowerCase();
-        String finalString = null;
+        String finalString;
         if (!input.equals("bye") && input.length() != 0) {
             try {
-                Parser.process(input, this.taskList, this.storage);
+                finalString = Parser.process(input, this.taskList, this.storage);
             } catch (DukeException e) {
-                System.out.println(Ui.showError(e.getMessage()));
+                finalString = Ui.showError(e.getMessage());
             }
         } else {
             try {

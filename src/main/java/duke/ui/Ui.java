@@ -22,7 +22,7 @@ public class Ui {
     }
 
     public static String showCommandMessage(String message) {
-        return "_________________________________________\n" + message;
+        return "_________________________________________\n" + message + "\n";
     }
 
     /**
