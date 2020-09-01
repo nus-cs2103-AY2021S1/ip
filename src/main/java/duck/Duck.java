@@ -5,7 +5,6 @@ import duck.storage.Storage;
 import duck.task.Task;
 import duck.task.TaskFactory;
 import duck.task.TaskList;
-import duck.ui.Colour;
 import duck.ui.Ui;
 
 import java.time.LocalDate;
@@ -136,7 +135,7 @@ public class Duck {
     public void markTaskAsDone(String input) throws DuckException {
         int taskNumber = Parser.parseTaskNumber(input);
         Task task = this.taskList.markDone(taskNumber);
-        responses.add("Nice! I've marked this as " + Colour.Green("done"));
+        responses.add("Nice! I've marked this as done");
         responses.add("  " + task.getStatus());
     }
 

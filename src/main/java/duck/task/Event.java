@@ -1,7 +1,5 @@
 package duck.task;
 
-import duck.ui.Colour;
-
 import java.time.LocalDate;
 
 /**
@@ -15,6 +13,6 @@ public class Event extends TaskWithDate {
 
     @Override
     public String getStatus() {
-        return Colour.Cyan("[E]") + super.getStatus() + " (at: " + super.getDateAsString() + ")";
+        return "[E]" + super.getStatus() + " (at: " + super.getDateAsString() + ")";
     }
 }

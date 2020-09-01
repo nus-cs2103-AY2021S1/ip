@@ -7,7 +7,7 @@ import java.util.List;
  * and indentation.
  */
 public class ConsoleUi implements Ui {
-    private final String LINE = Colour.Blue("____________________________________________________________");
+    private final String LINE = "____________________________________________________________";
     private final String INDENT = "    ";
 
 

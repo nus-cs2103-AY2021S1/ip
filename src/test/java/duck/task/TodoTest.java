@@ -1,7 +1,5 @@
 package duck.task;
 
-import duck.ui.Colour;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +11,7 @@ public class TodoTest {
         Todo todo = new Todo("read book");
         assertEquals(false, todo.getDone());
         assertEquals("read book", todo.getDescription());
-        assertEquals(Colour.Yellow("[T]") + Colour.Red("[\u2718] read book"), todo.getStatus());
+        assertEquals("[T][\u2718] read book", todo.getStatus());
     }
 
     @Test

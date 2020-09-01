@@ -1,7 +1,5 @@
 package duck.task;
 
-import duck.ui.Colour;
-
 import java.time.LocalDate;
 
 /**
@@ -15,6 +13,6 @@ public class Deadline extends TaskWithDate {
 
     @Override
     public String getStatus() {
-        return Colour.Magenta("[D]") + super.getStatus() + " (by: " + super.getDateAsString() + ")";
+        return "[D]" + super.getStatus() + " (by: " + super.getDateAsString() + ")";
     }
 }

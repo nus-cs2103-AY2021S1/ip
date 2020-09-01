@@ -1,7 +1,5 @@
 package duck.exception;
 
-import duck.ui.Colour;
-
 /**
  * Default exception thrown by Duck program.
  */
@@ -13,6 +11,6 @@ public class DuckException extends Exception {
 
     @Override
     public String toString() {
-        return Colour.Red(super.toString());
+        return super.toString();
     }
 }

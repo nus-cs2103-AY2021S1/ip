@@ -1,7 +1,5 @@
 package duck.task;
 
-import duck.ui.Colour;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -19,8 +17,8 @@ public class DeadlineTest {
         assertEquals("read book", deadline.getDescription());
         assertEquals(fixedDate, deadline.getDate());
         assertEquals(expectedFormattedDate, deadline.getDateAsString());
-        assertEquals(Colour.Magenta("[D]")
-                + Colour.Red("[\u2718] read book")
+        assertEquals("[D]"
+                + "[\u2718] read book"
                 + " (by: " + expectedFormattedDate + ")", deadline.getStatus());
     }
 

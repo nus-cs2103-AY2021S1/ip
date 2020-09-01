@@ -1,7 +1,5 @@
 package duck.task;
 
-import duck.ui.Colour;
-
 /**
  * Todo class for representing the todo type.
  */
@@ -12,6 +10,6 @@ public class Todo extends Task {
 
     @Override
     public String getStatus() {
-        return Colour.Yellow("[T]") + super.getStatus();
+        return "[T]" + super.getStatus();
     }
 }

@@ -1,7 +1,6 @@
 package duck.task;
 
 import duck.exception.DuckException;
-import duck.ui.Colour;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,7 +19,7 @@ public class TaskFactoryTest {
             assertEquals(true, task instanceof Todo);
             assertEquals(false, task.getDone());
             assertEquals("read book", task.getDescription());
-            assertEquals(Colour.Yellow("[T]") + Colour.Red("[\u2718] read book"), task.getStatus());
+            assertEquals("[T][\u2718] read book", task.getStatus());
         } catch (DuckException e) {
             fail();
         }
@@ -34,9 +33,7 @@ public class TaskFactoryTest {
             Task task = TaskFactory.createTaskFromInput(input);
             String expectedFormattedDate = fixedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             assertEquals(true, task instanceof Deadline);
-            assertEquals(Colour.Magenta("[D]")
-                    + Colour.Red("[\u2718] read book")
-                    + " (by: " + expectedFormattedDate + ")", task.getStatus());
+            assertEquals("[D][\u2718] read book (by: " + expectedFormattedDate + ")", task.getStatus());
             assertEquals(false, task.getDone());
             assertEquals("read book", task.getDescription());
 
@@ -57,9 +54,7 @@ public class TaskFactoryTest {
             Task task = TaskFactory.createTaskFromInput(input);
             String expectedFormattedDate = fixedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             assertEquals(true, task instanceof Event);
-            assertEquals(Colour.Cyan("[E]")
-                    + Colour.Red("[\u2718] read book")
-                    + " (at: " + expectedFormattedDate + ")", task.getStatus());
+            assertEquals("[E][\u2718] read book (at: " + expectedFormattedDate + ")", task.getStatus());
             assertEquals(false, task.getDone());
             assertEquals("read book", task.getDescription());
 

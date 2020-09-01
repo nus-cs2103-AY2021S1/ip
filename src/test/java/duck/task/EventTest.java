@@ -1,7 +1,5 @@
 package duck.task;
 
-import duck.ui.Colour;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -19,8 +17,8 @@ public class EventTest {
         assertEquals("read book", event.getDescription());
         assertEquals(fixedDate, event.getDate());
         assertEquals(expectedFormattedDate, event.getDateAsString());
-        assertEquals(Colour.Cyan("[E]")
-                + Colour.Red("[\u2718] read book")
+        assertEquals("[E]"
+                + "[\u2718] read book"
                 + " (at: " + expectedFormattedDate + ")", event.getStatus());
     }
 
