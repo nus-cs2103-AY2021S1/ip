@@ -1,4 +1,4 @@
-package duke.main;
+package duke.Ui;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -22,6 +24,9 @@ public class Ui extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/You.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Popi.jpg"));
 
     @Override
     public void start(Stage stage) {
@@ -67,13 +72,11 @@ public class Ui extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         // Set the stage
@@ -89,6 +92,20 @@ public class Ui extends Application {
         textToAdd.setWrapText(true);
 
         return textToAdd;
+    }
+
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+            new DialogBox(userText, new ImageView(user)),
+            new DialogBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     /**

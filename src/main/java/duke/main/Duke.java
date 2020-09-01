@@ -2,6 +2,7 @@ package duke.main;
 
 import java.util.Scanner;
 
+import duke.Ui.Ui;
 import javafx.application.Application;
 
 import duke.command.Command;
@@ -17,7 +18,7 @@ public class Duke {
     /** Storage to store data to hard disk */
     private final Storage storage;
     /** Ui for interacting with user. */
-    private final Ui  ui;
+    private final Ui ui;
 
     /**
      * Constructs a Duke.
