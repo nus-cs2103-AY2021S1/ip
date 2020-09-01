@@ -40,6 +40,7 @@ public class EventCommand extends Command {
      * @param tasks List of tasks which the new event task will be added into.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
+     * @return String containing the reply for successful creation of event task.
      * @throws DukeException If the event task cannot be created due to invalid inputs.
      */
     @Override
@@ -75,27 +76,22 @@ public class EventCommand extends Command {
         String description;
         String time;
         if (this.parsedCommand.length == 0) {
-            String err = "Your event task has missing arguments. The task cannot be created.\n"
-                    + "Type '/commands' to view the correct command for task creation!";
+            String err = "Your event task has missing arguments. The task cannot be created.";
             throw new InvalidTaskException(err);
         } else {
             String[] taskInputArray = this.parsedCommand[1].split(" /at ");
             if (!this.parsedCommand[1].contains(" /at ") && !this.parsedCommand[1].endsWith("/at")) {
-                String err = "Your event task has an incorrect format. The task cannot be created. \n"
-                        + "Type '/commands' to view the correct command for task creation!";
+                String err = "Your event task has an incorrect format. The task cannot be created.";
                 throw new InvalidTaskException(err);
             } else if (this.parsedCommand[1].trim().equals("/at")) {
                 String err = "Your event task is missing a description and time stamp. "
-                        + "The task cannot be created. \n"
-                        + "Type '/commands' to view the correct command for task creation!";
+                        + "The task cannot be created.";
                 throw new InvalidTaskException(err);
             } else if (this.parsedCommand[1].trim().endsWith("/at")) {
-                String err = "Your event task is missing a time stamp. The task cannot be created. \n"
-                        + "Type '/commands' to view the correct command for task creation!";
+                String err = "Your event task is missing a time stamp. The task cannot be created.";
                 throw new InvalidTaskException(err);
             } else if (taskInputArray[0].isBlank()) {
-                String err = "Your event task is missing a description. The task cannot be created. \n"
-                        + "Type '/commands' to view the correct command for task creation!";
+                String err = "Your event task is missing a description. The task cannot be created.";
                 throw new InvalidTaskException(err);
             } else {
                 description = taskInputArray[0].trim();

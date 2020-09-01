@@ -13,7 +13,7 @@ public class Duke {
 
     /** Ui object that functions as the user interface. */
     private final Ui ui;
-    /** Storage object that handles file opera:tions. */
+    /** Storage object that handles file operations. */
     private final Storage storage;
     /** TaskList object containing the user's list of tasks. */
     private final TaskList tasks;

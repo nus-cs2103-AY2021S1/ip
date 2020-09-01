@@ -34,6 +34,7 @@ public class ToDoCommand extends Command {
      * @param tasks List of tasks which the new todo task will be added into.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
+     * @return String containing the reply for successful creation of ToDo task.
      * @throws DukeException If the todo task cannot be created due to invalid inputs.
      */
     @Override
@@ -55,8 +56,7 @@ public class ToDoCommand extends Command {
     public String retrieveTodoInfo() throws DukeException {
         String todoInfo;
         if (this.parsedCommand.length == 0) {
-            String err = "Your todo task description is empty. The task cannot be created.\n"
-                    + "Type '/commands' to view the correct command for task creation! ";
+            String err = "Your todo task description is empty. The task cannot be created.";
             throw new InvalidTaskException(err);
         } else {
             todoInfo = this.parsedCommand[1];

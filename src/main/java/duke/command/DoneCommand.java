@@ -33,6 +33,7 @@ public class DoneCommand extends Command {
      * @param tasks List of tasks belonging to the user.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
+     * @return String containing the reply for successful completion of task.
      * @throws DukeException If the task cannot be mark completed due to invalid arguments.
      */
     @Override
@@ -40,8 +41,7 @@ public class DoneCommand extends Command {
         try {
             int index = Integer.parseInt(this.parsedCommand[1]);
             if (index > tasks.getListSize() || index <= 0) {
-                String err = "Invalid Task! The task ID you provided is not valid. "
-                        + "Input 'list' to view the correct task ID of your desired task.";
+                String err = "Invalid Task! The task ID you provided is not valid. ";
                 throw new InvalidTaskException(err);
             } else {
                 tasks.completeTask(index - 1);
@@ -53,8 +53,7 @@ public class DoneCommand extends Command {
             throw new InvalidFunctionException(err);
         } catch (NumberFormatException ex) {
             String err = "Your input is not a recognised command. You have to provide the ID of "
-                    + "the task you wish to mark as done. \n"
-                    + "Input '/commands' to view a list of my commands. ";
+                    + "the task you wish to mark as done. \n";
             throw new InvalidFunctionException(err);
         }
     }

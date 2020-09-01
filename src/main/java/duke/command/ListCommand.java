@@ -16,7 +16,7 @@ public class ListCommand extends Command {
      * @param tasks List of tasks belonging to the user.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
-     * @return
+     * @return String containing a list of all the user's tasks.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

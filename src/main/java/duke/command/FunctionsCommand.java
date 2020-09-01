@@ -16,6 +16,7 @@ public class FunctionsCommand extends Command {
      * @param tasks List of tasks belonging to the user.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
+     * @return String containing a list of all of Duke's functions and commands.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

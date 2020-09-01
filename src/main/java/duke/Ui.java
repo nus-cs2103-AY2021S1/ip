@@ -147,7 +147,7 @@ public class Ui {
      * Prints a farewell message when the session with DukeBot is terminated.
      */
     public String showFarewell() {
-        String farewellMessage = "GoodBye and I hope to see you soon! Have a fantastic day! ";
+        String farewellMessage = "Goodbye and I hope to see you soon! Have a fantastic day! ";
         scanner.close();
         return farewellMessage;
     }

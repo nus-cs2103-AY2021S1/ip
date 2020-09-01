@@ -19,11 +19,12 @@ public class InvalidCommand extends Command {
      * @param tasks List of tasks belonging to the user.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
+     * @return String containing the reply to an invalid input.
      * @throws DukeException DukeException is thrown to inform the user of the invalid input provided.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String err = "Invalid Function! Input '/commands' for a list of all my commands.";
+        String err = "Invalid Function!";
         throw new InvalidFunctionException(err);
     }
 

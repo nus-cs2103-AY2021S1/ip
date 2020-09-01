@@ -40,6 +40,7 @@ public class DeadlineCommand extends Command {
      * @param tasks List of tasks which the new deadline task will be added into.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
+     * @return String containing the reply for successful execution of command.
      * @throws DukeException If the deadline task cannot be created due to invalid inputs.
      */
     @Override
@@ -75,27 +76,22 @@ public class DeadlineCommand extends Command {
         String description;
         String time;
         if (this.parsedCommand.length == 0) {
-            String err = "Your deadline task has missing arguments. The task cannot be created.\n"
-                    + "Type '/commands' to view the correct command for task creation!";
+            String err = "Your deadline task has missing arguments. The task cannot be created.";
             throw new InvalidTaskException(err);
         } else {
             String[] taskInputArray = this.parsedCommand[1].split(" /by ");
             if (!this.parsedCommand[1].contains(" /by ") && !this.parsedCommand[1].endsWith("/by")) {
-                String err = "Your deadline task has an incorrect format. The task cannot be created. \n"
-                        + "Type '/commands' to view the correct command for task creation!";
+                String err = "Your deadline task has an incorrect format. The task cannot be created.";
                 throw new InvalidTaskException(err);
             } else if (this.parsedCommand[1].trim().equals("/by")) {
                 String err = "Your deadline task is missing a description and time stamp. "
-                        + "The task cannot be created. \n"
-                        + "Type '/commands' to view the correct command for task creation!";
+                        + "The task cannot be created.";
                 throw new InvalidTaskException(err);
             } else if (this.parsedCommand[1].trim().endsWith("/by")) {
-                String err = "Your deadline task is missing a time stamp. The task cannot be created. \n"
-                        + "Type '/commands' to view the correct command for task creation!";
+                String err = "Your deadline task is missing a time stamp. The task cannot be created.";
                 throw new InvalidTaskException(err);
             } else if (taskInputArray[0].isBlank()) {
-                String err = "Your deadline task is missing a description. The task cannot be created. \n"
-                        + "Type '/commands' to view the correct command for task creation!";
+                String err = "Your deadline task is missing a description. The task cannot be created.";
                 throw new InvalidTaskException(err);
             } else {
                 description = taskInputArray[0].trim();

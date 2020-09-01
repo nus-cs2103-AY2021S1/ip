@@ -16,6 +16,7 @@ public class ExitCommand extends Command {
      * @param tasks List of tasks belonging to the user.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
+     * @return String containing the reply to ExitCommand.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

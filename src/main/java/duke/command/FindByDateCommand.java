@@ -40,6 +40,7 @@ public class FindByDateCommand extends Command {
      * @param tasks List of tasks belonging to the user.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
+     * @return String containing a list of tasks that matches the search date.
      * @throws DukeException If no tasks could be found due to invalid date provided.
      */
     @Override
@@ -56,8 +57,7 @@ public class FindByDateCommand extends Command {
             }
             return ui.printTasks(searchResults);
         } catch (ArrayIndexOutOfBoundsException ex) {
-            String err = "No task date provided. Please input a valid date using the format: 'dd/mm/yyyy' \n"
-                    + "Type '/commands' to view the correct command for task search by date! ";
+            String err = "No task date provided. Please input a valid date using the format: 'dd/mm/yyyy' ";
             throw new InvalidFunctionException(err);
         } catch (DateTimeParseException ex) {
             String err = "The task date format is incorrect. "
