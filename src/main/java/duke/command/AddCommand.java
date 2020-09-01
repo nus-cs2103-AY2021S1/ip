@@ -1,11 +1,11 @@
-package Duke.command;
+package duke.command;
 
-import Duke.model.Deadline;
-import Duke.model.Event;
-import Duke.model.ToDo;
-import Duke.task.Task;
-import Duke.task.TaskList;
-import Duke.utils.Ui;
+import duke.model.Deadline;
+import duke.model.Event;
+import duke.model.ToDo;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.utils.Ui;
 
 public class AddCommand extends Command {
     String taskType;

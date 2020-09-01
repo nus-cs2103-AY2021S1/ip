@@ -1,9 +1,9 @@
-package Duke.task;
+package duke.task;
 
-import Duke.model.Deadline;
-import Duke.model.Event;
-import Duke.model.ToDo;
-import Duke.utils.FileHelper;
+import duke.model.Deadline;
+import duke.model.Event;
+import duke.model.ToDo;
+import duke.utils.FileHelper;
 
 import java.util.ArrayList;
 import java.util.List;

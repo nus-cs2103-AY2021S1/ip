@@ -1,4 +1,4 @@
-package Duke.task;
+package duke.task;
 
 public class Task {
     protected boolean isDone;

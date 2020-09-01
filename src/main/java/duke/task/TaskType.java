@@ -1,6 +1,4 @@
-package Duke.task;
-
-import java.lang.annotation.Inherited;
+package duke.task;
 
 public enum TaskType {
     TODO, EVENT, DEADLINE;

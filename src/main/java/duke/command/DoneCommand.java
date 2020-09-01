@@ -1,8 +1,8 @@
-package Duke.command;
+package duke.command;
 
-import Duke.task.Task;
-import Duke.task.TaskList;
-import Duke.utils.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.utils.Ui;
 
 public class DoneCommand extends Command {
     private int index;

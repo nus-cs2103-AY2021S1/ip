@@ -1,6 +1,6 @@
-package Duke.model;
+package duke.model;
 
-import Duke.task.Task;
+import duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

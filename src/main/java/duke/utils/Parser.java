@@ -1,8 +1,8 @@
-package Duke.utils;
+package duke.utils;
 
-import Duke.command.*;
-import Duke.exceptions.DukeException;
-import Duke.task.TaskType;
+import duke.command.*;
+import duke.exceptions.DukeException;
+import duke.task.TaskType;
 
 public class Parser {
 
