@@ -18,7 +18,7 @@ public abstract class Command {
      * @param storage Storage object used by the Duke object for file operations.
      * @throws DukeException If the command cannot be executed successfully.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Indicates if the DukeBot session has ended.

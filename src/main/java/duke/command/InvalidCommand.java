@@ -21,7 +21,7 @@ public class InvalidCommand extends Command {
      * @throws DukeException DukeException is thrown to inform the user of the invalid input provided.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String err = "Invalid Function! Input '/commands' for a list of all my commands.";
         throw new InvalidFunctionException(err);
     }

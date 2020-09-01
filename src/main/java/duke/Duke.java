@@ -14,7 +14,7 @@ public class Duke {
     /** Storage object that handles file operations. */
     private final Storage storage;
     /** TaskList object containing the user's list of tasks. */
-    private final TaskList taskList;
+    private final TaskList tasks;
 
     /**
      * Creates and initialises a new Duke object that has a Ui, Storage and TaskList object.
@@ -22,29 +22,40 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
-        this.taskList = this.storage.readFile();
+        this.tasks = this.storage.readFile();
     }
 
     /**
      * Executes a DukeBot session for the bot to perform its intended functions.
      */
     public void run() {
-        ui.showWelcome();
+        System.out.println(ui.showWelcome());
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command command = Parser.parse(fullCommand);
-                command.execute(taskList, ui, storage);
+                System.out.println(command.execute(tasks, ui, storage));
                 isExit = command.isExit();
             } catch (DukeException ex) {
-                ui.showError(ex.getMessage());
+                System.out.println(ui.showError(ex.getMessage()));
             } finally {
                 ui.showLine();
             }
         }
     }
+
+
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(tasks, ui, storage);
+        } catch (DukeException ex) {
+            return ui.showError(ex.getMessage());
+        }
+    }
+
 
     /**
      * Initialises a new DukeBot session.

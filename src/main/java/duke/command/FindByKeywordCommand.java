@@ -34,20 +34,25 @@ public class FindByKeywordCommand extends Command {
      * @throws DukeException If no tasks could be found due to invalid keyword provided.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
+            String response = "";
             String keyword = this.parsedCommand[1].trim().toLowerCase();
             int index = 1;
-            ui.printReply("Search Results:");
+            // ui.printReply("Search Results:");
+            response += "Search Results: \n";
             for (Task task : tasks.getTaskList()) {
                 if (task.getDescription().toLowerCase().contains(keyword)) {
-                    String results = String.format("%d. %s", index, task);
-                    ui.printReply(results);
+                    // String results = String.format("%d. %s", index, task);
+                    // ui.printReply(results);
+                    response += String.format("%d. %s", index, task) + "\n";
                     index++;
                 }
             }
             if (index == 1) {
-                ui.printReply("No tasks found! Please search using a different keyword!");
+                return ui.printReply("No tasks found! Please search using a different keyword!");
+            } else {
+                return ui.printReply(response);
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No keyword for the search was entered. Please enter a keyword!";

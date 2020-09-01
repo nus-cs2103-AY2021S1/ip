@@ -23,29 +23,30 @@ public class Ui {
      * Prints a greeting to welcome the user when a new session with DukeBot
      * is initialised.
      */
-    public void showWelcome() {
-        String text = "  ______  _____  __  ____     __     _______  \n"
-                + " |__  __||  __ | | \\ |  |    /_ \\    |   ___|   \n"
-                + "    | |  | | | | |  \\|  |   //_\\ \\   |  |___   \n"
-                + " _  | |  | | | | | |\\   |  / ____ \\  |____  |   \n"
-                + "| |_| |  | |_| | | | \\  | / /    \\ \\ _____| |  \n"
-                + "|_____|  |_____| |_|  \\_|/_/      \\_\\|______|  \n"
-                + "                  _____   ______  ________        \n"
-                + "                  |  _ \\ |  _  | |__   __|       \n"
-                + "                  | |_| || | | |    | |           \n"
-                + "                  |    / | | | |    | |           \n"
-                + "                  |  _ \\ | |_| |    | |          \n"
-                + "                  | |_| ||     |    | |           \n"
-                + "                  |_____/|_____|    |_|           \n";
+    public static String showWelcome() {
+        String text = "     ______  _____  __  ____     __     _______  \n"
+                + "    |__  __||  __ | | \\ |  |    /_ \\    |   ___|   \n"
+                + "       | |  | | | | |  \\|  |   //_\\ \\   |  |___   \n"
+                + "    _  | |  | | | | | |\\   |  / ____ \\  |____  |   \n"
+                + "   | |_| |  | |_| | | | \\  | / /    \\ \\ _____| |  \n"
+                + "   |_____|  |_____| |_|  \\_|/_/      \\_\\|______|  \n"
+                + "                     _____   ______  ________        \n"
+                + "                     |  _ \\ |  _  | |__   __|       \n"
+                + "                     | |_| || | | |    | |           \n"
+                + "                     |    / | | | |    | |           \n"
+                + "                     |  _ \\ | |_| |    | |          \n"
+                + "                     | |_| ||     |    | |           \n"
+                + "                     |_____/|_____|    |_|           \n";
 
-        String greeting = "  Hello! I am JonasBot! Nice to meet you :) \n"
-                + text + "  \n  I am a task manager bot that will keep track of all your tasks. \n"
-                + "  \n  To view a list of all my commands, input '/commands' \n"
-                + "  \n  Now that you are familiar with the commands, how may I assist you today?";
+        String greeting = "Hello! I am JonasBot! Nice to meet you :) \n"
+                + text + "  \nI am a task manager bot that will keep track of all your tasks. \n"
+                + "  \nTo view a list of all my commands, input '/commands' \n"
+                + "  \nNow that you are familiar with the commands, how may I assist you today?";
 
-        this.showLine();
-        System.out.println(greeting);
-        this.showLine();
+        // this.showLine();
+        return (greeting);
+        //System.out.println(greeting);
+        // this.showLine();
     }
 
     /**
@@ -63,8 +64,8 @@ public class Ui {
      *
      * @param error String representing the error message.
      */
-    public void showError(String error) {
-        System.out.println(error);
+    public String showError(String error) {
+        return error;
     }
 
     /**
@@ -72,17 +73,18 @@ public class Ui {
      *
      * @param message String representing the message to send to users.
      */
-    public void printReply(String message) {
-        System.out.println(message);
+    public String printReply(String message) {
+        return message;
     }
 
     /**
      * Prints a farewell message when the session with DukeBot is terminated.
      */
-    public void showFarewell() {
+    public String showFarewell() {
         String farewellMessage = "GoodBye and I hope to see you soon! Have a fantastic day! ";
-        System.out.println(farewellMessage);
+        // System.out.println(farewellMessage);
         scanner.close();
+        return farewellMessage;
     }
 
     /**

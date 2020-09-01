@@ -17,7 +17,7 @@ public class ViewFunctionsCommand extends Command {
      * @param storage Storage object used by the Duke object for file operations.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String commands = "  Below is a list of all the commands for my functions: \n\n"
                 + "  1. Create a new task: \n\n"
                 + "\t  1.1 Todo: 'todo' {task description}. For eg, todo eat \n"
@@ -33,7 +33,7 @@ public class ViewFunctionsCommand extends Command {
                 + "  \n  6. To search for a task by date: 'find_by_date' {date}. \n"
                 + "     Input the date using the format: 'dd/mm/yyyy'. For eg, 'find_by_date 12/2/2020' \n"
                 + "  \n  5. To end this chat: 'bye' \n";
-        ui.printReply(commands);
+        return ui.printReply(commands);
     }
 
     /**

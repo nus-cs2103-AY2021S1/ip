@@ -35,7 +35,7 @@ public class AddTodoCommand extends Command {
      * @throws DukeException If the todo task cannot be created due to invalid inputs.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
         String todoInfo = this.retrieveTodoInfo();
         Task toAdd = new Todo(todoInfo.trim());
@@ -43,8 +43,8 @@ public class AddTodoCommand extends Command {
         String successReply = "Success! This todo task has been added: \n\t"
                 + toAdd.toString() + "\nYou have " + tasks.getListSize()
                 + " tasks in your list now.";
-        ui.printReply(successReply);
         storage.saveToFile(tasks);
+        return ui.printReply(successReply);
     }
 
     /**
