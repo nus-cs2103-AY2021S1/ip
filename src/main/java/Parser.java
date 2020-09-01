@@ -32,6 +32,8 @@ public class Parser {
 		}
 		else if(getWord(fullCommand).equals("save")){
 			return save();
+		} else if (getWord(fullCommand).equals("find")) {
+			return find(fullCommand);
 		}
 		else{
 			throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -371,6 +373,33 @@ public class Parser {
 				String temp = storage.save(taskList);
 				ui.showOutput(temp);
 				return temp;
+			}
+
+			@Override
+			public boolean isExit() {
+				return false;
+			}
+		};
+	}
+
+	public static Command find(String fullCommand) {
+		return new Command() {
+			@Override
+			public String execute(TaskList taskList, Ui ui, Storage storage) {
+				String phrase = fullCommand.substring(5);
+				StringBuilder outputStringBuilder = new StringBuilder();
+				String temp = "Here are the matching tasks in your list:";
+				ui.showOutput(temp);
+				outputStringBuilder.append(temp).append("\n");
+				for (int taskListIndex = 1; taskListIndex <= taskList.size(); taskListIndex++) {
+					Task task = taskList.get(taskListIndex -1);
+					if (task.getFullString().contains(phrase)) {
+						temp = taskListIndex + "." + task.getFullString();
+						ui.showOutput(temp);
+						outputStringBuilder.append(temp).append("\n");
+					}
+				}
+				return outputStringBuilder.deleteCharAt(outputStringBuilder.length()-1).toString();
 			}
 
 			@Override

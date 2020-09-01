@@ -57,4 +57,10 @@ public class Task{
 	public String toString(){
 		return string;
 	}
+
+	public String getFullString(){
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(getTypeString()).append(getDoneString()).append(toString());
+		return stringBuilder.toString();
+	}
 }
