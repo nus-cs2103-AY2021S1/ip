@@ -21,7 +21,6 @@ public class Command {
 
     private CommandType commandType;
     private String taskInfo;
-    private boolean isExit;
 
     /**
      * Constructs a command
@@ -40,37 +39,38 @@ public class Command {
      * @param tasks   The list of tasks for user.
      * @param storage Storage object to store task list.
      */
-    public void execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
+        String dukeResponse = "";
         try {
             switch (commandType) {
             case BYE:
-                isExit = true;
+                dukeResponse = bidFarewell();
                 break;
             case PRINT:
-                printList(tasks);
+                dukeResponse =  printList(tasks);
                 break;
             case MARKTASKDONE:
-                markTaskDone(tasks, taskInfo);
-                storage.saveTaskList(tasks);
+                dukeResponse =  markTaskDone(tasks, taskInfo);
                 break;
             case HANDLETODO:
-                handleToDo(tasks, taskInfo);
+                dukeResponse =  handleToDo(tasks, taskInfo);
                 break;
             case HANDLEDEADLINE:
-                handleDeadLine(tasks, taskInfo);
+                dukeResponse =  handleDeadLine(tasks, taskInfo);
                 break;
             case HANDLEVENT:
-                handleEvent(tasks, taskInfo);
+                dukeResponse =  handleEvent(tasks, taskInfo);
                 break;
             case DELETETASK:
-                tasks.deleteTask(taskInfo);
+                dukeResponse =  tasks.deleteTask(taskInfo);
                 break;
             default:
-                isExit = false;
-                if (!foundMatchingTasks(tasks, taskInfo)) {
+                if (foundMatchingTasks(tasks, taskInfo).length() <= 0) {
+                    dukeResponse = "\tSorry handsome but I'm not sure about this command :)";
                     throw new DukeInvalidCommandException("Sorry handsome but I'm not sure about this command :)");
+                } else {
+                    dukeResponse = foundMatchingTasks(tasks, taskInfo);
                 }
-                break;
             }
             storage.saveTaskList(tasks);
         } catch (DukeInvalidCommandException err) {
@@ -85,31 +85,32 @@ public class Command {
             System.out.println("\t" + err.getMessage());
         } catch (DukeNumberFormatException err) {
             System.out.println("\t" + err.getMessage());
+        } finally {
+            return dukeResponse;
         }
     }
 
     /**
-     * Exits Duke programme.
+     * Says goodbye to user.
      *
-     * @return True if BYE command is called.
+     * @return String of farewell.
      */
-    public boolean isExit() {
-        if (isExit) {
-            System.out.print("\tBye. Hope to see you again soon!");
-        }
-        return isExit;
+    public String bidFarewell() {
+        return "\tBye. Hope to see you again soon!";
     }
 
     /**
      * Prints the list of tasks.
      *
      * @param tasks List of tasks to print.
+     * @return List of tasks in taskList.
      */
-    public void printList(TaskList tasks) {
-        System.out.println("\tHere are the tasks in your list:");
+    public String printList(TaskList tasks) {
+        String toPrint = "\tHere are the tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(String.format("\t%d. %s", i + 1, tasks.get(i)));
+            toPrint += String.format("\n\t%d. %s", i + 1, tasks.get(i));
         }
+        return toPrint;
     }
 
     /**
@@ -117,26 +118,26 @@ public class Command {
      *
      * @param tasks    List of user's tasks.
      * @param taskInfo Description of task.
+     * @return String of words Duke say in response.
      */
-    public void markTaskDone(TaskList tasks, String taskInfo) throws DukeIndexOutOfBoundsException {
+    public String markTaskDone(TaskList tasks, String taskInfo) throws DukeIndexOutOfBoundsException {
         if (taskInfo.length() <= 5) {
-            throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
+            throw new DukeIndexOutOfBoundsException("\tThe task you want to mark is invalid");
         }
         taskInfo = taskInfo.replace("done", "").trim();
         int taskNo;
         try {
             taskNo = Integer.parseInt(taskInfo);
         } catch (NumberFormatException err) {
-            throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
+            throw new DukeIndexOutOfBoundsException("\tThe task you want to mark is invalid");
         }
         if (taskNo < 1 || taskNo > tasks.size()) {
-            throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
+            throw new DukeIndexOutOfBoundsException("\tThe task you want to mark is invalid");
         }
-        System.out.println("\tNice! I've marked this task as done:");
         int index = taskNo - 1;
         Task task = tasks.remove(index).doneTask();
-        System.out.println("\t" + task);
         tasks.add(index, task);
+        return "\tNice! I've marked this task as done:" + "\n\t" + task;
     }
 
     /**
@@ -144,13 +145,14 @@ public class Command {
      *
      * @param tasks    List of user's tasks.
      * @param taskInfo Description of todos task.
+     * @return String of words Duke say in response.
      */
-    public void handleToDo(TaskList tasks, String taskInfo) throws DukeInvalidCommandException {
+    public String handleToDo(TaskList tasks, String taskInfo) throws DukeInvalidCommandException {
         if (taskInfo.trim().equals("todo")) {
-            throw new DukeInvalidCommandException("The command is incomplete handsome :D");
+            throw new DukeInvalidCommandException("\tThe command is incomplete handsome :D");
         }
         taskInfo = taskInfo.replace("todo", "").trim();
-        tasks.addTask(new ToDos(taskInfo));
+        return tasks.addTask(new ToDos(taskInfo));
     }
 
     /**
@@ -158,17 +160,18 @@ public class Command {
      *
      * @param tasks    List of user's tasks.
      * @param taskInfo Description of deadline task.
+     * @return String of words Duke say in response.
      */
-    public void handleDeadLine(TaskList tasks, String taskInfo)
+    public String handleDeadLine(TaskList tasks, String taskInfo)
         throws DukeInvalidCommandException, DukeDateTimeParseException {
         taskInfo = taskInfo.replace("deadline", "");
         String[] stringArr = taskInfo.split("/by", 2);
         if (stringArr.length != 2) {
-            throw new DukeInvalidCommandException("The command is incomplete handsome :D");
+            throw new DukeInvalidCommandException("\tThe command is incomplete handsome :D");
         }
         taskInfo = stringArr[0].trim();
         String by = stringArr[1].trim();
-        tasks.addTask(new Deadlines(taskInfo, by));
+        return tasks.addTask(new Deadlines(taskInfo, by));
     }
 
     /**
@@ -176,17 +179,18 @@ public class Command {
      *
      * @param tasks    List of user's tasks.
      * @param taskInfo Description of event task.
+     * @return String of words Duke say in response.
      */
-    public void handleEvent(TaskList tasks, String taskInfo)
+    public String handleEvent(TaskList tasks, String taskInfo)
         throws DukeInvalidCommandException, DukeDateTimeParseException {
         taskInfo = taskInfo.replace("event", "");
         String[] stringArr = taskInfo.split("/at", 2);
         if (stringArr.length != 2) {
-            throw new DukeInvalidCommandException("The command is incomplete handsome :D");
+            throw new DukeInvalidCommandException("\tThe command is incomplete handsome :D");
         }
         taskInfo = stringArr[0].trim();
         String at = stringArr[1].trim();
-        tasks.addTask(new Events(taskInfo, at));
+        return tasks.addTask(new Events(taskInfo, at));
     }
 
     /**
@@ -194,19 +198,18 @@ public class Command {
      *
      * @param tasks    List of user's tasks.
      * @param taskInfo Description of todos task.
-     * @return True if user input matches any word from any task in tasks list.
+     * @return List of matching tasks if any.
      */
-    public boolean foundMatchingTasks(TaskList tasks, String taskInfo) {
-        boolean matched = false;
+    public String foundMatchingTasks(TaskList tasks, String taskInfo) {
         String[] taskInfos = taskInfo.trim().split(" ");
         List<Task> matchList = tasks.returnMatchingTasks(taskInfos);
+        String dukeResponse = "";
         for (int i = 0; i < matchList.size(); i++) {
             if (i == 0) {
-                System.out.println("\tHere are the matching tasks in your list:");
+                dukeResponse = "\n\tHere are the matching tasks in your list:";
             }
-            System.out.println(String.format("\t%d. %s", i + 1, matchList.get(i)));
-            matched = true;
+            dukeResponse += String.format("\n\t%d. %s", i + 1, matchList.get(i));
         }
-        return matched;
+        return dukeResponse;
     }
 }
