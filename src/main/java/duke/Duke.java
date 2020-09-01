@@ -2,11 +2,18 @@ package duke;
 
 import duke.command.Command;
 
+/**
+ * Represents a personalized chat bot where a user can keep track of different tasks.
+ */
 public class Duke {
-    private Ui ui;           // deals with interactions with the user
-    private Storage storage; // deals with loading/saving tasks from/in the file
-    private TaskList tasks;  // contains operations to add/delete tasks in the list
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
 
+    /**
+     * Creates a new Duke chat bot that loads and saves tasks in the filepath.
+     * @param filePath is the path in which tasks are loaded and saved in.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the chat bot and represents the main driver of the program
+     */
     public void run() {
         ui.printWelcome();
         boolean isExit = false;
@@ -33,6 +43,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Acts as the starting mechanism to run the chat bot.
+     * @param args accepts any parameter.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
