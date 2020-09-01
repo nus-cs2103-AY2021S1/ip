@@ -5,7 +5,6 @@ package duke;
  */
 public class Duke {
     private Ui ui;
-    private Parser parser;
     private TaskManager taskManager;
 
     /**
@@ -23,6 +22,14 @@ public class Duke {
     public void run() {
         this.ui.printWelcomeMessage();
         this.taskManager.manage();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     /**
