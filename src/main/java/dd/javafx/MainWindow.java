@@ -1,5 +1,6 @@
-package dd;
+package dd.javafx;
 
+import dd.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

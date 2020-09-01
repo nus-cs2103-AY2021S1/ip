@@ -1,6 +1,8 @@
 package dd;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 
 import dd.commands.Command;
 import dd.exception.DukeException;
@@ -18,6 +20,8 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
+    public boolean isExit = false;
+
     /**
      * Class Constructor.
      */
@@ -33,44 +37,63 @@ public class Duke {
         }
     }
 
+    public String sendGreeting() {
+        //@@author g-erm-reused
+        //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java
+        //with adaptation
+
+        // Create a stream to hold the output
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        // IMPORTANT: Save the old System.out!
+        PrintStream old = System.out;
+        // Tell Java to use your special stream
+        System.setOut(ps);
+
+        ui.greeting();
+
+        // Put things back
+        System.out.flush();
+        System.setOut(old);
+
+        return baos.toString();
+
+        //@@author
+    }
+
     /**
      * Takes in user input, parses into a command and executes
      * the next command till an exit command is given.
      */
-    private void run() {
-        ui.greeting();
-
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String input = ui.readInput();
-                Command c = Parser.parse(input);
-
-                c.execute(tasks, ui, ds);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.printLine();
-            }
-        }
-    }
-
-    /**
-     * Starts a task tracking system with prior saved data, if applicable.
-     *
-     * @param args command-line arguments
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+
+        //@@author g-erm-reused
+        //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java
+        //with adaptation
+
+        // Create a stream to hold the output
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        // IMPORTANT: Save the old System.out!
+        PrintStream old = System.out;
+        // Tell Java to use your special stream
+        System.setOut(ps);
+
+        try {
+            Command c = Parser.parse(input);
+
+            c.execute(tasks, ui, ds);
+            isExit = c.isExit();
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
+
+        // Put things back
+        System.out.flush();
+        System.setOut(old);
+
+        return baos.toString();
+
+        //@@author
     }
 }

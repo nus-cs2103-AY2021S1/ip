@@ -1,4 +1,4 @@
-package dd;
+package dd.javafx;
 
 import java.io.IOException;
 
