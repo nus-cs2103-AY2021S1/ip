@@ -18,9 +18,9 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IncorrectFormat, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IncorrectFormat, IOException {
         ArrayList<Task> found = tasks.find(input);
-        ui.printFind(found);
+        return ui.printFind(found);
     }
 
     @Override

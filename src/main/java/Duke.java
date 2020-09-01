@@ -1,17 +1,24 @@
 import duke.command.Command;
+import duke.error.IncorrectFormat;
+import duke.error.UnknownAction;
 import duke.parts.Parser;
 import duke.parts.Storage;
 import duke.parts.TaskList;
 import duke.parts.Ui;
 
-public class Duke  {
+import java.io.IOException;
+
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private boolean isExit;
 
-    private Duke(String filePath) {
+    Duke() {
+        String filePath = "data/data.txt";
         ui = new Ui();
         storage = new Storage(filePath);
+        isExit = false;
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
@@ -19,9 +26,25 @@ public class Duke  {
         }
     }
 
+    Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        isExit = false;
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (Exception e) {
+            tasks = new TaskList();
+        }
+    }
+
+    String getResponse(String input) throws UnknownAction, IOException, IncorrectFormat {
+        Command c = Parser.parse(input);
+        String output = c.execute(tasks, ui, storage);
+        return output;
+    }
+
     private void run() {
         ui.showWelcome();
-        boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();

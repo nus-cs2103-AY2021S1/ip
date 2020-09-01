@@ -25,8 +25,9 @@ public class TaskList {
         updateList(storage);
     }
 
-    public Task deleteTask(int index) {
+    public Task deleteTask(int index, Storage storage) {
         Task removed = tasks.remove(index);
+        updateList(storage);
         return removed;
     }
 

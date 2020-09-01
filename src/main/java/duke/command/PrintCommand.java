@@ -14,15 +14,15 @@ public class PrintCommand extends Command{
 
     /**
      * Executes the print command.
-     * THe method prints the list of tasks which is stored in storage.
+     * The method prints the list of tasks which is stored in storage.
      * @param tasks The task list of the system.
      * @param ui The UI of the system which interacts with user.
      * @param storage The storage of the system.
      * @throws IOException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        ui.printList(storage);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+        return ui.printList(storage);
     }
     @Override
     public boolean isExit() {

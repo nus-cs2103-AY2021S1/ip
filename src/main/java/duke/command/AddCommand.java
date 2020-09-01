@@ -30,30 +30,32 @@ public class AddCommand extends Command {
      * @throws IncorrectFormat
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IncorrectFormat {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IncorrectFormat {
         int indexOfSpace = input.indexOf(" ");
         int indexOfSlash = input.indexOf("/");
         int length = input.length();
         Task newTask;
+        String output = "";
         switch(input.substring(0, indexOfSpace)) {
         case "todo":
             newTask = new ToDo(input.substring(indexOfSpace, length));
-            ui.printNew(newTask, "ToDo", tasks.numTask() + 1);
+            output += ui.printNew(newTask, "ToDo", tasks.numTask() + 1);
             break;
         case "deadline":
             String dateStringDeadline = input.substring(indexOfSlash + 1, input.length());
             newTask = new Deadline(input.substring(indexOfSpace, indexOfSlash), dateStringDeadline);
-            ui.printNew(newTask, "Deadline", tasks.numTask() + 1);
+            output += ui.printNew(newTask, "Deadline", tasks.numTask() + 1);
             break;
         case "event":
             String dateStringEvent = input.substring(indexOfSlash + 1, input.length());
             newTask = new Event(input.substring(indexOfSpace, indexOfSlash), dateStringEvent);
-            ui.printNew(newTask, "Event", tasks.numTask() + 1);
+            output += ui.printNew(newTask, "Event", tasks.numTask() + 1);
             break;
         default:
             throw new IncorrectFormat();
         }
         tasks.addTask(newTask, storage);
+        return output;
     }
 
     @Override

@@ -10,7 +10,6 @@ import duke.task.Task;
  * It is executed when the execute method is called.
  */
 public class DeleteCommand extends Command{
-
     int index;
 
     public DeleteCommand(int index) {
@@ -25,9 +24,10 @@ public class DeleteCommand extends Command{
      * @param storage The storage of the system.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task removed = tasks.deleteTask(index);
-        ui.showDelete(removed, tasks.numTask());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        Task removed = tasks.deleteTask(index - 1, storage);
+        String output = ui.showDelete(removed, tasks.numTask());
+        return output;
     }
 
     @Override
