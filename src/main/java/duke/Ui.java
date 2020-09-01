@@ -72,48 +72,11 @@ public class Ui {
     public String showInvalidCommand() {
         return "I'm sorry I don't understand :(";
     }
-
-    /**
-     * Reads the next command
-     * @return a String representing the command
-     */
-    public String readCommand() {
-        if (input.hasNextLine()) {
-            return input.nextLine();
-        } else {
-            return null;
-        }
-    }
-
     /**
      * Displays a message indicating that the program has come to an end.
      */
     public static String showEnd() {
         String toReturn = showLine() + " Bye. Hope to see you again soon!" + "\n" + showLine();
         return toReturn;
-    }
-
-    /**
-     * Closes the Scanner object
-     */
-    public void close() {
-        input.close();
-    }
-
-    /**
-     * Starts the Scanner object
-     */
-    public void start() {
-        input = new Scanner(System.in);
-    }
-
-    /**
-     * Displays a message indicating an error has occurred with the
-     * specific error message
-     *
-     * @param err in which the exception has occurred
-     */
-    public void showError(Exception err) {
-        System.out.println(err.getMessage());
     }
 }
