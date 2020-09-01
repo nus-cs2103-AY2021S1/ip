@@ -2,6 +2,15 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidInputException;
+import duke.exception.InvalidTaskTypeException;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 
 /**
  * Entry point of Duke chatbot.
@@ -46,6 +55,15 @@ public class Duke {
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.printReply(e.getMessage());
+        }
+    }
+
     /**
      * Runs the Duke Chatbot.
      */
@@ -53,4 +71,5 @@ public class Duke {
         Duke duke = new Duke();
         duke.run();
     }
+
 }

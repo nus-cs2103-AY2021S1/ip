@@ -39,10 +39,10 @@ public class AddCommand extends Command {
      * @param storage Storage associated with command.
      * @throws DukeException If there is error during execution of command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.addTask(description, date, type);
         storage.writeToFile(taskList);
-        ui.printReply(String.format(MESSAGE_SUCCESS, taskList.get(taskList.size() - 1), taskList));
+        return ui.printReply(String.format(MESSAGE_SUCCESS, taskList.get(taskList.size() - 1), taskList));
     }
 
     /**

@@ -14,8 +14,8 @@ public class ExitCommand extends Command {
      * @param storage Storage associated with command.
      * @throws DukeException If there is error during execution of command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.exit();
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return ui.exit();
     }
 
     /**

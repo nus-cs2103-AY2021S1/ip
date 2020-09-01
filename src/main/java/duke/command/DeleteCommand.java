@@ -33,11 +33,11 @@ public class DeleteCommand extends Command {
      * @param storage Storage associated with command.
      * @throws DukeException If there is error during execution of command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task deletedTask = taskList.get(index - 1);
         taskList.deleteTask(index);
         storage.writeToFile(taskList);
-        ui.printReply(String.format(MESSAGE_SUCCESS, deletedTask));
+        return ui.printReply(String.format(MESSAGE_SUCCESS, deletedTask));
     }
 
     /**

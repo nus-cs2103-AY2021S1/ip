@@ -33,11 +33,11 @@ public class DoneCommand extends Command {
      * @param storage Storage associated with command.
      * @throws DukeException If there is error during execution of command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task completedTask = taskList.get(index - 1);
         taskList.completeTask(index);
         storage.writeToFile(taskList);
-        ui.printReply(String.format(MESSAGE_SUCCESS, completedTask));
+        return ui.printReply(String.format(MESSAGE_SUCCESS, completedTask));
     }
 
     /**

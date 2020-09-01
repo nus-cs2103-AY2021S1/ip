@@ -28,37 +28,53 @@ public class Ui {
     /**
      * Generates and print exit message when user exits Duke.
      */
-    public void exit() {
+    public String exit() {
         System.out.println("Bye. Hope to see you again soon!");
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Prints all the tasks in current task list when user inputs "list" command.
      * @param tasks TaskList of current user.
      */
-    public void listTasks(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i <= tasks.size(); i++) {
-            try {
-                System.out.println(i + ". " + tasks.get(i - 1));
-            } catch (InvalidIndexException e) {
-                System.out.println(e.getMessage());
-            }
+    public String listTasks(TaskList tasks) {
+        if (tasks.size() <= 0) {
+            String message = "Sorry, your task list is empty.";
+            System.out.println(message);
+            return message;
         }
+        String message = "Here are the tasks in your list:";
+        for (int i = 1; i <= tasks.size(); i++) {
+            String task = null;
+            try {
+                task = i + ". " + tasks.get(i - 1);
+            } catch (InvalidIndexException e) {
+                showError(e.getMessage());
+            }
+            message += task + "\n";
+        }
+        System.out.println(message);
+        return message;
     }
 
     /**
      * Prints tasks matching find keyword after Find command is executed.
      * @param tasks Tasks that matches the Find command keyword.
      */
-    public void printSearchResults(List<Task> tasks) {
+    public String printSearchResults(List<Task> tasks) {
         if (tasks.size() <= 0) {
-            System.out.println("Sorry, there are no matching tasks with that keyword");
+            String message = "Sorry, there are no matching tasks with that keyword";
+            System.out.println(message);
+            return message;
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            String result = "Here are the matching tasks in your list:";
             for (int i = 1; i <= tasks.size(); i++) {
-                System.out.println(i + ". " + tasks.get(i - 1));
+                String task = i + ". " + tasks.get(i - 1);
+                result += task + "\n";
             }
+
+            System.out.println(result);
+            return result;
         }
     }
 
@@ -66,8 +82,9 @@ public class Ui {
      * Prints message when user's command has been executed.
      * @param message Message to be print.
      */
-    public void printReply(String message) {
+    public String printReply(String message) {
         System.out.println(message);
+        return message;
     }
 
     /**

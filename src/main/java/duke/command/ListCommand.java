@@ -17,8 +17,8 @@ public class ListCommand extends Command {
      * @param storage Storage associated with command.
      * @throws DukeException If there is error during execution of command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.listTasks(taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.listTasks(taskList);
     }
 
     /**
