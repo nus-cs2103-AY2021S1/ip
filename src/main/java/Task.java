@@ -24,6 +24,10 @@ public abstract class Task extends Command {
         return saveRep;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     @Override
     public String toString() {
         return doneToString() + " " + title;
