@@ -6,6 +6,8 @@ import task.EventTask;
 import task.Task;
 import task.ToDoTask;
 
+import java.time.format.DateTimeParseException;
+
 public class TaskParser {
 
     public static Task parseTask(String title, TaskEnum taskType) throws IndexOutOfBoundsException {
@@ -32,7 +34,9 @@ public class TaskParser {
             String[] titleComponents = title.split("/by", 2);
             return new DeadlineTask(titleComponents[0].trim(), titleComponents[1].trim());
         } catch (IndexOutOfBoundsException exception) {
-            throw new IndexOutOfBoundsException("\u2639 OOPS!!! The start and end time of an event cannot be empty.");
+            throw new IndexOutOfBoundsException("\u2639 OOPS!!! The date and time of a deadline cannot be empty.");
+        } catch (DateTimeParseException exception) {
+            throw new IndexOutOfBoundsException("\u2639 OOPS!!! Both date and time (24 hour format) must be in the form \"DD/MM/YYYY HH:MM\"");
         }
     }
 

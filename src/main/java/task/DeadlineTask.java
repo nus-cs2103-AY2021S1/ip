@@ -4,6 +4,7 @@ import enums.TaskEnum;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class DeadlineTask extends Task {
 
@@ -17,7 +18,7 @@ public class DeadlineTask extends Task {
 
     LocalDateTime dateTime;
 
-    public DeadlineTask(String title, String dateTimeDetails) {
+    public DeadlineTask(String title, String dateTimeDetails) throws DateTimeParseException {
         super(String.format("%s (by: %s)", title,
                 LocalDateTime.parse(dateTimeDetails, PATTERN_INPUT)
                         .format(PATTERN_OUTPUT)), TaskEnum.DEADLINE);

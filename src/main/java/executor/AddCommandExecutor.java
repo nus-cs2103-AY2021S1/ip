@@ -8,6 +8,7 @@ import parser.TaskParser;
 import task.Task;
 import tasklist.TaskList;
 
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +21,7 @@ public class AddCommandExecutor extends CommandExecutor {
         try {
             task = TaskParser.parseTask(((AddCommand) command).getArgument(),
                     ((AddCommand) command).getTaskType());
-        } catch (IndexOutOfBoundsException exception) {
+        } catch (IndexOutOfBoundsException | DateTimeParseException exception) {
             DukeOutput.output(exception.getMessage());
             return;
         }
