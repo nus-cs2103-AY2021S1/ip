@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="451.0" prefWidth="640.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="duke.MainWindow">
+  <children>
+    <TextField fx:id="userInput" layoutY="410.0" onAction="#handleUserInput" prefHeight="25.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" />
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="427.0" prefWidth="640.0" vvalue="1.0">
+         <content>
+        <VBox fx:id="dialogContainer" prefHeight="423.0" prefWidth="640.0" />
+         </content>
+    </ScrollPane>
+  </children>
+</AnchorPane>

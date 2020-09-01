@@ -1,58 +1,37 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * An ui to send message to user.
  */
 public class Ui {
 
-    private Scanner scanner = new Scanner(System.in);
+    private StringBuilder stringBuilder;
 
     /**
-     * Sends a welcoming message.
+     * Public getter of the welcome message.
+     * @return A welcoming message
      */
-    public void showWelcome() {
-        showLine();
-        System.out.println("        Hello! I'm duke.Duke\n" + "        What can I do for you?");
-        showLine();
+    public String getWelcome() {
+        return "Hello! I'm duke.Duke\nWhat can I do for you?";
     }
 
     /**
-     * Reads a line from the terminal and return it as a string.
-     * @return command line detected
+     * Returns a loading error message.
+     * @return loading error message
      */
-    public String readCommand() {
-        return scanner.nextLine();
+    public String showLoadingError() {
+        return "Failed to load";
     }
 
-    /**
-     * Prints a line to alert failure to load.
-     */
-    public void showLoadingError() {
-        System.out.println("        Failed to load");
-    }
-
-    /**
-     * Standard spacing line used for duke interactions.
-     */
-    public void showLine() {
-        System.out.println("        ____________________________________________________________");
-    }
-
-    /**
-     * Sends a message with fixed spacing before the string.
-     * @param msg Message to be sent
-     */
     public void printMessage(String msg) {
-        System.out.println("        " + msg);
+        this.stringBuilder.append(msg).append("\n");
     }
 
-    /**
-     * Sends an error message with the standard spacing in front.
-     * @param errorMsg Error message to be sent
-     */
-    public void showError(String errorMsg) {
-        System.out.println("        " + errorMsg);
+    public StringBuilder getStringBuilder() {
+        return stringBuilder;
+    }
+
+    public void setStringBuilder(StringBuilder stringBuilder) {
+        this.stringBuilder = stringBuilder;
     }
 }

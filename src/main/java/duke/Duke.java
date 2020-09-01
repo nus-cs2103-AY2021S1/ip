@@ -1,12 +1,8 @@
 package duke;
 
-import java.io.File;
-
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.exception.DukeStorageException;
-
-
 
 /**
  * A class for duke.
@@ -17,6 +13,22 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * Empty constructor for duke.
+     *
+     * Provides a path by default.
+     */
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage("./data/");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeStorageException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
 
     /**
      * Public constructor of duke.
@@ -39,32 +51,25 @@ public class Duke {
     }
 
     /**
-     * Main body of duke.
-     *
-     * It first shows a welcoming message and will
-     * runs until an exit command is detected.
+     * Parse and process the input command, then
+     * retrieve the result from ui.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, storage, ui);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public ResultInfo getResponse(String input) {
+        try {
+            ui.setStringBuilder(new StringBuilder());
+            Command c = Parser.parse(input);
+            c.execute(tasks, storage, ui);
+            return new ResultInfo(true, c.isExit(), ui.getStringBuilder().toString());
+        } catch (DukeException e) {
+            return new ResultInfo(false, false, e.getMessage());
         }
     }
 
-
-    public static void main(String[] args) {
-        new Duke("." + File.separator + "data" + File.separator).run();
+    /**
+     * Returns welcome message
+     * @return Returns welcome message
+     */
+    public String getWelcome() {
+        return ui.getWelcome();
     }
 }
-
