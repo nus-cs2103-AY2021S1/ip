@@ -45,7 +45,7 @@ test {
 }
 
 application {
-    mainClassName = "viscount.Viscount"
+    mainClassName = "viscount.Launcher"
 }
 
 shadowJar {

@@ -11,15 +11,6 @@ import viscount.gui.MainWindow;
  */
 public class Main extends Application {
     /**
-     * Launches Viscount.
-     *
-     * @param args Standard arguments.
-     */
-    public static void main(String[] args) {
-        Application.launch(args);
-    }
-
-    /**
      * Starts the GUI of Viscount.
      *
      * @param stage Stage shown.
