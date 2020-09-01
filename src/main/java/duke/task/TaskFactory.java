@@ -16,14 +16,14 @@ public class TaskFactory {
      */
     public static Task createTask(TaskType type, String details) throws DukeException {
         switch (type) {
-            case Todo:
-                return Todo.createTodo(details);
-            case Deadline:
-                return Deadline.createDeadline(details);
-            case Event: // duke.task.Event
-                return Event.createEvent(details);
-            default:
-                throw new InvalidCommandException("Something went wrong during the creation of the task. :-(");
+        case Todo:
+            return Todo.createTodo(details);
+        case Deadline:
+            return Deadline.createDeadline(details);
+        case Event: // duke.task.Event
+            return Event.createEvent(details);
+        default:
+            throw new InvalidCommandException("Something went wrong during the creation of the task. :-(");
         }
     }
 }

@@ -7,12 +7,12 @@ import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 
 public class Event extends Task {
-    private final String TIME12H;
+    private final String TIME_12H;
     private final LocalDate DATE;
 
     private Event(String description, String TIME12H, LocalDate DATE) {
         super(description);
-        this.TIME12H = TIME12H;
+        this.TIME_12H = TIME12H;
         this.DATE = DATE;
     }
 
@@ -47,13 +47,13 @@ public class Event extends Task {
     @Override
     public String toSaveString() {
         String date = DateTimeParsing.localDateToString(DATE);
-        String time = DateTimeParsing.to24HTimeFormat(TIME12H);
+        String time = DateTimeParsing.to24HTimeFormat(TIME_12H);
         return (isDone ? 1 : 0) + "event " + description + "/at " + date + " " + time;
     }
 
     @Override
     public String toString() {
         String formattedDate = DateTimeParsing.localDateToFormattedString(DATE);
-        return "[E]" + super.toString() + "(at: " + formattedDate + " " + TIME12H + ")";
+        return "[E]" + super.toString() + "(at: " + formattedDate + " " + TIME_12H + ")";
     }
 }

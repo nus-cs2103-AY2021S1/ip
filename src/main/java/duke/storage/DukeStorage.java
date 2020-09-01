@@ -8,13 +8,14 @@ import java.io.IOException;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 // Class that handles the loading and saving of the save file.
 public class DukeStorage implements Storage {
     private final Path FILE_PATH;
-    private ArrayList<String> SAVE_LINES;
+    private ArrayList<String> saveLines;
     private boolean isActive = true;
 
     public DukeStorage(Path filePath) throws IOException {
@@ -43,7 +44,7 @@ public class DukeStorage implements Storage {
 
         try {
             FileWriter myWriter = new FileWriter(FILE_PATH.toString());
-            for (String line: SAVE_LINES) {
+            for (String line: saveLines) {
                 try {
                     myWriter.write(line + "\n");
                 } catch (IOException e) {
@@ -57,22 +58,22 @@ public class DukeStorage implements Storage {
     }
 
     public void addLine(String saveString) {
-        SAVE_LINES.add(saveString);
+        saveLines.add(saveString);
         updateSaveFile();
     }
 
     public void updateLine(int index, String saveString) {
-        SAVE_LINES.set(index, saveString);
+        saveLines.set(index, saveString);
         updateSaveFile();
     }
 
     public void removeLine(int index) {
-        SAVE_LINES.remove(index);
+        saveLines.remove(index);
         updateSaveFile();
     }
 
     public ArrayList<String> getSavedLines() {
-        return SAVE_LINES;
+        return saveLines;
     }
 
     private String[] loadSaveFile() {
@@ -87,7 +88,7 @@ public class DukeStorage implements Storage {
             System.out.println("An error has occurred when reading the save file.");
         } finally {
             isActive = true;
-            this.SAVE_LINES = new ArrayList<>(Arrays.asList(result));
+            this.saveLines = new ArrayList<>(Arrays.asList(result));
         }
 
         return result;

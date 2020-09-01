@@ -34,9 +34,9 @@ public class DateTimeParsing {
      */
     public static String localDateToString(LocalDate date) {
         int day = date.getDayOfMonth();
-        String dayStr = day < 10 ? "0" + day : Integer.toString(day);
+        String dayStr = (day < 10) ? "0" + day : Integer.toString(day);
         int month = date.getMonthValue();
-        String monthStr = month < 10 ? "0" + month : Integer.toString(month);
+        String monthStr = (month < 10) ? "0" + month : Integer.toString(month);
         int year = date.getYear();
 
         return year + "-" + monthStr + "-" + dayStr;

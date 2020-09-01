@@ -1,19 +1,18 @@
 package duke.task;
 
 import duke.exception.InvalidDeadlineException;
-
 import duke.parser.DateTimeParsing;
 
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 
 public class Deadline extends Task {
-    private final String TIME12H;
+    private final String TIME_12H;
     private final LocalDate DATE;
 
     private Deadline(String description, String time12h, LocalDate date) {
         super(description);
-        this.TIME12H = time12h;
+        this.TIME_12H = time12h;
         this.DATE = date;
     }
 
@@ -48,13 +47,13 @@ public class Deadline extends Task {
     @Override
     public String toSaveString() {
         String date = DateTimeParsing.localDateToString(DATE);
-        String time = DateTimeParsing.to24HTimeFormat(TIME12H);
+        String time = DateTimeParsing.to24HTimeFormat(TIME_12H);
         return (isDone ? 1 : 0) + "deadline " + description + "/by " + date + " " + time;
     }
 
     @Override
     public String toString() {
         String formattedDate = DateTimeParsing.localDateToFormattedString(DATE);
-        return "[D]" + super.toString() + "(by: " + formattedDate + " " + TIME12H + ")";
+        return "[D]" + super.toString() + "(by: " + formattedDate + " " + TIME_12H + ")";
     }
 }
