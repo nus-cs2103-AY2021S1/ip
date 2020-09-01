@@ -9,7 +9,7 @@ public class Ui {
     private Scanner sc = new Scanner(System.in);
 
     public Ui() {
-        System.out.println("Hello! I'm meimei ^_^\nI could scream at you all day!");
+        //System.out.println("Hello! I'm meimei ^_^\nI could scream at you all day!");
     }
 
     /**
