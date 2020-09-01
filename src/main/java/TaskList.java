@@ -1,18 +1,25 @@
 import java.util.ArrayList;
 
+/**
+ * The TaskList class manages the adding, completion, finding, deletion and printing of the listings
+ * using an ArrayList.
+ */
+
 public class TaskList {
 
   public ArrayList<Listing> list;
 
   /**
-   * Takes in a new Arraylist<Listing> and initialises list
+   * Takes in a new Arraylist<Listing> and initialises list.
+   *
+   * @return a new TaskList object
    */
   public TaskList(ArrayList<Listing> l) {
     this.list = l;
   }
 
   /**
-   * Prints the toString() value of each listing in the list
+   * Prints the toString() value of each listing in the list.
    */
   protected void printReturns() {
     System.out.println("    ____________________________________________________________");
@@ -26,8 +33,12 @@ public class TaskList {
 
   /**
    * Modifies the done boolean in the listing objects inside the list. Print the correct message
-   * through printer * and updates storage through the storage input * @param num used to find the
-   * listing * @param Printer  to print the object message * @param  Sttorage to update Duke.txt
+   * through printer * and updates storage through the storage input.
+   *
+   * @param num used to find the
+   * listing *
+   * @param Printer  to print the object message
+   * @param Storage to update Duke.txt
    */
   public void doneListings(Integer value, Printer printer, Storage storage) {
     Listing item = list.get(value - 1);

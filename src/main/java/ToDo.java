@@ -1,7 +1,15 @@
+/**
+ * The ToDo class is a type of listing that contains a String as the detail of the listing and a
+ * boolean called isDone.
+ */
+
 public class ToDo extends Listing {
 
   /**
-   * Creates a ToDo object by passing the string s as the Todo message
+   * Creates a ToDo object by passing the string s as the Todo message.
+   *
+   * @param s the detail of the ToDo
+   * @return a ToDo object
    */
   public ToDo(String s) {
     super(s);
@@ -13,15 +21,19 @@ public class ToDo extends Listing {
    *
    * @param doneness a string of either 1 or 0 that gets converted to boolean
    * @param s        the message detail
+   * @return a ToDo object
    */
   public ToDo(String doneness, String s) {
     super(s);
-    checkDoneness(doneness);
+    setDoneness(doneness);
   }
 
   /**
    * Summarises the details of the ToDo object into a size 3 string array containing a code "T" that
    * represents ToDO, isDone boolean in the form of a string and the detail message
+   *
+   * @return a size 3 String array containing the code of the ToDo object, the isDone in string the
+   *         detail of the object
    */
   public String[] toArray() {
     String[] details = new String[3];
@@ -36,7 +48,7 @@ public class ToDo extends Listing {
   }
 
   /**
-   * Prints the ToDo object in string.
+   * @return Returns the ToDo object in string.
    */
   @Override
   public String toString() {

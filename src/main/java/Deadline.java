@@ -1,6 +1,11 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Deadline class is a type of listing that contains a String as the detail of the listing, a
+ * boolean called isDone and a LocalDate object called deadLine.
+ */
+
 public class Deadline extends Listing {
 
   private LocalDate deadLine;
@@ -11,6 +16,7 @@ public class Deadline extends Listing {
    *
    * @param s        detail of the listing
    * @param deadline in the format YYYY-MM-DD
+   * @return A DeadLine object
    */
   public Deadline(String s, String deadLine) {
     super(s);
@@ -18,24 +24,27 @@ public class Deadline extends Listing {
   }
 
   /**
-   * Creates a new Deadline object using an extra string parameter doneness. Used when creating
-   *    * Event objects are loading from storage
+   * Creates a new Deadline object using an extra string parameter doneness. Used when creating *
+   * Event objects are loading from storage.
    *
-   * @param doneness can be 0 or 1 and which gets passed to checkDoness that converts \ it to a
+   * @param doneness can be 0 or 1 and which gets passed to setDoneness that converts \ it to a
    *                 boolean
    * @param s        detail of the listing
    * @param deadline in the format YYYY-MM-DD
+   * @return A DeadLine object
    */
   public Deadline(String doneness, String s, String time) {
     super(s);
-    checkDoneness(doneness);
+    setDoneness(doneness);
     this.deadLine = LocalDate.parse(time);
   }
 
   /**
    * Returns a string array of size 4 containing a code, doneness, detail and time to be saved by
    * Storage.java. The code will always be "D" for "Deadline" and doneness wil be 1 or 0
-   * corresponding to the object boolean value
+   * corresponding to the object boolean value.
+   *
+   * @return A size 4 String array consisting of the details of the object
    */
   public String[] toArray() {
     String[] details = new String[4];
@@ -51,7 +60,7 @@ public class Deadline extends Listing {
   }
 
   /**
-   * Returns this object in string format.
+   * @return this object in string format
    */
   @Override
   public String toString() {
