@@ -1,18 +1,18 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
-import java.io.IOException;
 
 /**
  * Represents a command where user completes a task.
  */
 public class DoneCommand extends Command {
 
-    int index;
+    private final int index;
 
     /**
      * Instantiates a DoneCommand with the index of task that is completed.

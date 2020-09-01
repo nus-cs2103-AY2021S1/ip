@@ -1,19 +1,19 @@
 package duke.command;
 
+import java.util.Date;
+import java.util.List;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Represents a command where user queries tasks using a dates.
  */
 public class GetCommand extends Command {
 
-    Date date;
+    private final Date date;
 
     /**
      * Instantiates a GetCommand with the queried date.

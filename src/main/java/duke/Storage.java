@@ -1,20 +1,23 @@
 package duke;
 
-import duke.exception.DateException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskType;
-import duke.task.Todo;
-import duke.task.Task;
-import duke.format.DateFormat;
 
-import java.io.IOException;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.exception.DateException;
+import duke.format.DateFormat;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskType;
+import duke.task.Todo;
+
+
 
 /**
  * Represents a storage system responsible for loading existing tasks
@@ -67,8 +70,8 @@ public class Storage {
     public void saveData(TaskList taskList) throws IOException {
 
         File dataFile = new File(this.filePath);
-        String DIR_PATH = dataFile.getParent();
-        File directory = new File(DIR_PATH);
+        String directoryPath = dataFile.getParent();
+        File directory = new File(directoryPath);
         if (!directory.exists()) {
             directory.mkdir();
         }

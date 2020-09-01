@@ -1,21 +1,21 @@
 package duke.command;
 
+import java.io.IOException;
+import java.util.Date;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskType;
 
-import java.io.IOException;
-import java.util.Date;
-
 /**
  * Represents the command where user adds task
  */
-public class AddCommand extends Command{
-    TaskType type;
-    String name;
-    Date date;
+public class AddCommand extends Command {
+    private final TaskType type;
+    private final String name;
+    private Date date;
 
     /**
      * Creates an instance of AddCommand with no date field.

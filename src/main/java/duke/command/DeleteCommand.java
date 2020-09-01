@@ -1,18 +1,18 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
-import java.io.IOException;
 
 /**
  * Represents the delete command where user deletes a particular task.
  */
 public class DeleteCommand extends Command {
 
-    int index;
+    private final int index;
 
     /**
      * Instantiates a DeleteCommand with the index of task to be deleted.

@@ -1,18 +1,20 @@
 package duke;
 
-import duke.task.Task;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Task;
+
 
 /**
  * Interacts with the user by reading user inputs and outputting the
  * appropriate responses.
  */
 public class Ui {
-    private final static String line = "______________________________________________________";
-    private final static String lineIndent = "    ";
-    private final static String listIndent = "       ";
-    private final static String textIndent = "     ";
+    private static final String DISPLAY_LINE = "______________________________________________________";
+    private static final String DISPLAY_LINEINDENT = "    ";
+    private static final String DISPLAY_LISTINDENT = "       ";
+    private static final String DISPLAY_TEXTINDENT = "     ";
     private Scanner sc;
 
     /**
@@ -49,8 +51,8 @@ public class Ui {
      * @param message the message displayed to the user
      */
     public void printMessage(String message) {
-        System.out.println(String.format("%s%s\n%s%s\n%s%s", lineIndent, line,
-                textIndent, message, lineIndent, line));
+        System.out.println(String.format("%s%s\n%s%s\n%s%s", DISPLAY_LINEINDENT, DISPLAY_LINE,
+                DISPLAY_TEXTINDENT, message, DISPLAY_LINEINDENT, DISPLAY_LINE));
     }
 
     /**
@@ -61,7 +63,7 @@ public class Ui {
         String output = "Here are the tasks in your list:\n";
         int taskLen = taskList.getCount();
         for (int i = 0; i < taskLen; i++) {
-            output += String.format("%s%d. %s", textIndent, i + 1, taskList.getTasks().get(i));
+            output += String.format("%s%d. %s", DISPLAY_TEXTINDENT, i + 1, taskList.getTasks().get(i));
             if (i != taskLen - 1) {
                 output += "\n";
             }
@@ -75,7 +77,7 @@ public class Ui {
      */
     public void completeSuccess(Task task) {
         printMessage(String.format("Nice! I've marked this task as done:\n%s%s",
-                listIndent, task));
+                DISPLAY_LISTINDENT, task));
     }
 
     /**
@@ -85,7 +87,7 @@ public class Ui {
      */
     public void deleteSuccess(Task task, int taskCount) {
         String message = String.format("Noted. I've removed this task:\n%s%s\n%sNow you have %d %s in the list.",
-                listIndent, task, textIndent, taskCount, taskCount > 1 ? "tasks" : "task");
+                DISPLAY_LISTINDENT, task, DISPLAY_TEXTINDENT, taskCount, taskCount > 1 ? "tasks" : "task");
         printMessage(message);
     }
 
@@ -96,7 +98,7 @@ public class Ui {
      */
     public void addSuccess(Task task, int taskCount) {
         String message = String.format("Got it. I have added this task:\n%s%s\n%sNow you have %d %s in the list.",
-                listIndent, task, textIndent, taskCount, taskCount > 1 ? "tasks" : "task");
+                DISPLAY_LISTINDENT, task, DISPLAY_TEXTINDENT, taskCount, taskCount > 1 ? "tasks" : "task");
         printMessage(message);
     }
 
@@ -108,7 +110,7 @@ public class Ui {
         String output = "Here are the matching tasks in your list:\n";
         int taskSize = taskList.size();
         for (int i = 0; i < taskSize; i++) {
-            output += String.format("%s%d. %s", textIndent, i+1, taskList.get(i));
+            output += String.format("%s%d. %s", DISPLAY_TEXTINDENT, i + 1, taskList.get(i));
             if (i != taskSize - 1) {
                 output += "\n";
             }

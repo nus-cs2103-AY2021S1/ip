@@ -1,18 +1,18 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
-import java.util.List;
 
 /**
  * Represents the command where user queries tasks containing a keyword.
  */
 public class FindCommand extends Command {
 
-    String keyword;
+    private final String keyword;
 
     /**
      * Instantiates a FindCommand with the queried keyword.

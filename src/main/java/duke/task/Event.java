@@ -1,7 +1,8 @@
 package duke.task;
 
-import duke.format.DateFormat;
 import java.util.Date;
+
+import duke.format.DateFormat;
 
 /**
  * Represents an event type of task with the date of event.

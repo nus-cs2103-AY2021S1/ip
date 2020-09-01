@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.format.DateFormat;
 import java.util.Date;
 
+import duke.format.DateFormat;
 
 /**
  * Represents a deadline type of task that contains an additional due date.

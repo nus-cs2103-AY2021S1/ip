@@ -1,20 +1,20 @@
 package duke;
 
+import java.util.Date;
+
 import duke.command.AddCommand;
-import duke.command.GetCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.FindCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
 import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.GetCommand;
+import duke.command.ListCommand;
 import duke.exception.DateException;
 import duke.exception.DukeException;
 import duke.exception.MissingInformationException;
 import duke.format.DateFormat;
 import duke.task.TaskType;
-
-import java.util.Date;
 
 /**
  * Represents a decoder to make sense of the user input.
@@ -34,7 +34,7 @@ public class Parser {
         if (commandArr[0].equals("todo")) {
             return parseTodo(commandArr);
         } else if (commandArr[0].equals("deadline")) {
-           return parseDeadline(commandArr);
+            return parseDeadline(commandArr);
         } else if (commandArr[0].equals("event")) {
             return parseEvent(commandArr);
         } else if (commandArr[0].equals("list")) {

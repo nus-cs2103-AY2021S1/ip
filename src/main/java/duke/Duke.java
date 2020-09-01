@@ -1,12 +1,11 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exception.DateException;
 import duke.exception.DukeException;
 import duke.exception.MissingInformationException;
-
-import java.io.IOException;
-
 
 /**
  * Represents a task managing system.
@@ -14,9 +13,9 @@ import java.io.IOException;
  * keep track of tasks and manage the storage of data.
  */
 public class Duke {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Creates an instance of Duke.
@@ -50,7 +49,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException | MissingInformationException | DateException e ) {
+            } catch (DukeException | MissingInformationException | DateException e) {
                 ui.printMessage(e.getMessage());
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 ui.printMessage("Invalid task number!");
