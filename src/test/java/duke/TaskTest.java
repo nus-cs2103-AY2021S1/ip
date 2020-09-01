@@ -2,8 +2,14 @@ package duke;
 
 import org.junit.jupiter.api.Test;
 
-public class TaskTest{
+public class TaskTest {
 
+    /**
+     * Checks that the string output from creating todo tasks is correct. Also, it tests if updating the tasks
+     * produced the correct output.
+     *
+     *@throws Exception Exceptions are thrown if the test case fails
+     */
     @Test
     public void testStringOutput() throws Exception {
         Todo todo1 = new Todo("Make Breakfast");
@@ -20,6 +26,11 @@ public class TaskTest{
         System.out.println("All Tests Passed");
     }
 
+    /**
+     * Checks if date formatting for deadline objects is done correctly.
+     *
+     * @throws Exception Exceptions are thrown if the test cases fail.
+     */
     @Test
     public void testCheckDateFormat() throws Exception {
         try {
@@ -28,7 +39,7 @@ public class TaskTest{
                 throw new Exception("checkDateFormat Method Failed");
             }
         } catch (DukeException ignored) {
-
+            /* Exceptions are ignored */
         }
         System.out.println("All Tests Passed");
     }

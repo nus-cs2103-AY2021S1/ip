@@ -33,7 +33,7 @@ public class Deadline extends Task {
      * @throws DukeException thrown if the "by" String does not follow the specified format, or if the date is invalid
      * e.g. the 50th of June.
      */
-    public static boolean checkDateFormat(String date) throws DukeException{
+    public static boolean checkDateFormat(String date) throws DukeException {
         int stringLength = date.length();
         if (stringLength != 10) {
             throw new DukeException("That is not a valid date!");

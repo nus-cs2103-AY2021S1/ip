@@ -1,8 +1,10 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
+
+import org.junit.jupiter.api.Test;
+
 
 public class StorageTest {
 
@@ -15,7 +17,7 @@ public class StorageTest {
     public void testFileCreation() throws Exception {
         File dir = new File("src/main/data/");
         if (dir.exists()) {
-            for(File file: dir.listFiles()) {
+            for (File file: dir.listFiles()) {
                 if (!file.isDirectory()) {
                     file.delete();
                 }
@@ -28,7 +30,7 @@ public class StorageTest {
         try {
             storage1.processData();
         } catch (IOException ignored) {
-
+            /* Exceptions are ignored */
         }
         File newDir = new File("src/main/data/");
         if (!newDir.exists()) {
@@ -42,7 +44,12 @@ public class StorageTest {
         newFile.delete();
         newDir.delete();
     }
-    
+
+    /**
+     * Checks if new files created have 0 text.
+     *
+     * @throws Exception Exception is thrown if test case fails.
+     */
     @Test
     public void testDataCreation() throws Exception {
         Storage storage1 = new Storage("src/main/data/", "src/main/data/data.txt");

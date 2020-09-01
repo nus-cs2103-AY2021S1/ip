@@ -1,7 +1,13 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import duke.*;
+
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
+
+
 
 /**
  * The Duke class that runs the Duke task manager program
@@ -18,7 +24,7 @@ public class Duke {
         try {
             storage.processData();
         } catch (java.io.IOException ignored) {
-
+            /* Exceptions are ignored */
         }
         ArrayList<String> lines = storage.getData();
         Parser parser = new Parser(lines);
@@ -35,7 +41,7 @@ public class Duke {
             } catch (DukeException e) {
                 Ui.handleDukeException(e);
             } catch (IOException ignored) {
-
+                /* Exceptions are ignored */
             }
         }
     }
