@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private static Path filePath;
+    private Path filePath;
 
     public Storage(String filePath) {
         this.filePath = Paths.get(filePath);
