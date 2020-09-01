@@ -1,4 +1,4 @@
-package duke.TextStoreAndPrint;
+package duke.textstoreandprint;
 
 public class TextStore {
 

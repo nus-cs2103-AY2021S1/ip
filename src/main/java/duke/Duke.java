@@ -1,6 +1,7 @@
 package duke;
 
-import duke.TextStoreAndPrint.TextPrinter;
+import duke.textstoreandprint.TextPrinter;
+import javafx.application.Application;
 
 import java.nio.file.Path;
 
@@ -24,10 +25,12 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        TextPrinter.printStartMessage();
+        Application.launch(WindowDisplay.class, args);
 
-        String home = System.getProperty("user.home");
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "ipSave.txt");
-        new Duke(path).run();
+//        TextPrinter.printStartMessage();
+//
+//        String home = System.getProperty("user.home");
+//        java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "ipSave.txt");
+//        new Duke(path).run();
     }
 }

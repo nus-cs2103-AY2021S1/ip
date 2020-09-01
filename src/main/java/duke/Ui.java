@@ -1,6 +1,6 @@
 package duke;
 
-import duke.TextStoreAndPrint.TextPrinter;
+import duke.textstoreandprint.TextPrinter;
 
 import java.util.Scanner;
 

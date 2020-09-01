@@ -1,9 +1,9 @@
 package duke;
 
-import duke.Tasks.DeadLineTask;
-import duke.Tasks.EventTask;
-import duke.Tasks.TodoTask;
-import duke.TextStoreAndPrint.TextPrinter;
+import duke.tasks.DeadLineTask;
+import duke.tasks.EventTask;
+import duke.tasks.TodoTask;
+import duke.textstoreandprint.TextPrinter;
 
 import java.time.format.DateTimeParseException;
 

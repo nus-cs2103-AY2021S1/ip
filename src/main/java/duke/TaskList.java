@@ -1,7 +1,7 @@
 package duke;
 
-import duke.Tasks.Task;
-import duke.TextStoreAndPrint.TextPrinter;
+import duke.tasks.Task;
+import duke.textstoreandprint.TextPrinter;
 
 import java.util.ArrayList;
 

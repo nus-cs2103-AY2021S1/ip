@@ -1,6 +1,14 @@
-package duke.TextStoreAndPrint;
+package duke.textstoreandprint;
+
+import duke.WindowDisplay;
 
 public class TextPrinter {
+
+    private WindowDisplay windowDisplay;
+
+    TextPrinter(WindowDisplay windowDisplay) {
+        this.windowDisplay = windowDisplay;
+    }
 
     public static void standardPrint(String middle) {
         System.out.print(TextStore.top + "\n" + middle + "\n" + TextStore.bottom + "\n");

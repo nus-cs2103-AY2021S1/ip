@@ -1,11 +1,11 @@
 package duke;
 
-import duke.Tasks.DeadLineTask;
-import duke.Tasks.EventTask;
-import duke.Tasks.Task;
-import duke.Tasks.TodoTask;
-import duke.TextStoreAndPrint.TextPrinter;
-import duke.TextStoreAndPrint.TextStore;
+import duke.tasks.DeadLineTask;
+import duke.tasks.EventTask;
+import duke.tasks.Task;
+import duke.tasks.TodoTask;
+import duke.textstoreandprint.TextPrinter;
+import duke.textstoreandprint.TextStore;
 
 import java.io.*;
 import java.nio.file.Path;
