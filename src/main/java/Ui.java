@@ -3,12 +3,15 @@ import java.util.Scanner;
 
 public class Ui {
     final private String line = "-------------------------------------";
+    final private String loadFailMsg = "Sorry, I forgot you existed!";
     final private String addedMsg = "Alright, I've added a new order: ";
     final private String doneMsg = "Great choice! I have taken your order: ";
     final private String deleteMsg = "Too bad. I'll remove the following order: ";
     final private String saveMsg = "Aright, I have remembered your sins :)";
     final private String retListMsg = "Here's what you have ordered...";
     final private String defaultError = "Wat talking you?";
+    final private String byeMsg = "Bye! Please come again!";
+    final private String newLine = "\n";
 
     private Scanner s;
 
@@ -27,7 +30,7 @@ public class Ui {
 
     public void showWelcome() {
         System.out.println(line);
-        System.out.println("Welcome to mel's drive-in!");
+        System.out.println("Welcome to Hyu's drive-in!");
         System.out.println("What would you like to have?");
         System.out.println(line);
     }
@@ -36,64 +39,43 @@ public class Ui {
         System.out.println(line);
     }
 
-    public void addedItem(Task curr, int size) {
-        System.out.println(line);
-        System.out.println(addedMsg);
-        System.out.println(curr);
-        System.out.println("You have ordered " + size + " items.");
-        System.out.println(line);
+    public String addedItem(Task curr, int size) {
+         return addedMsg + newLine + curr + newLine + "You have ordered " + size + " items." + newLine;
     }
 
-    public void showError(String ex) {
-        System.out.println(line);
-        System.out.println(ex);
-        System.out.println(line);
+    public String showError(String ex) {
+        return ex + newLine;
     }
 
-    public void doneItem(Task curr) {
-        System.out.println(line);
-        System.out.println(doneMsg);
-        System.out.println(curr);
-        System.out.println(line);
+    public String doneItem(Task curr) {
+        return doneMsg + newLine + curr;
     }
 
-    public void deleteItem(Task curr) {
-        System.out.println(line);
-        System.out.println(deleteMsg);
-        System.out.println(curr);
-        System.out.println(line);
+    public String deleteItem(Task curr) {
+        return deleteMsg + newLine + curr;
     }
 
-    public void returnList(ArrayList<Task> curr) {
-        System.out.println(line);
-        System.out.println(retListMsg);
+    public String returnList(ArrayList<Task> curr) {
+        String temp = "";
         for (int k = 0; k < curr.size(); k++) {
-            System.out.println((k + 1) + ": " + curr.get(k));
+            temp += ((k + 1) + ": " + curr.get(k)) + newLine;
         }
-        System.out.println((line));
+        return retListMsg + newLine + temp;
     }
 
-    public void save() {
-        System.out.println(line);
-        System.out.println(saveMsg);
-        System.out.println(line);
+    public String save() {
+        return saveMsg + newLine;
     }
 
-    public void defaultError() {
-        System.out.println(line);
-        System.out.println(defaultError);
-        System.out.println(line);
+    public String defaultError() {
+        return defaultError + newLine;
     }
 
-    public void bye() {
-        System.out.println(line);
-        System.out.println("Bye! Please come again!");
-        System.out.println(line);
+    public String bye() {
+        return byeMsg + newLine;
     }
 
-    public void showLoadingError() {
-        System.out.println(line);
-        System.out.println("Sorry, I forgot you existed!");
-        System.out.println(line);
+    public String showLoadingError() {
+        return loadFailMsg + newLine;
     }
 }
