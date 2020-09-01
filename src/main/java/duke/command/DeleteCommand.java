@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.storage.Storage;
 import duke.storage.StorageException;
 import duke.task.InvalidTaskIndexException;
@@ -22,8 +24,13 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Storage storage) throws InvalidTaskIndexException, StorageException {
-        Task deletedTask = taskList.deleteTask(args);
+        List<Task> deletedTasks = taskList.deleteTask(args.split(" "));
         storage.save(taskList);
-        return "Alright! Deleting this:\n" + args + ". " + deletedTask.toString();
+
+        StringBuilder string = new StringBuilder("Alright! Deleting these:");
+        for (Task task : deletedTasks) {
+            string.append("\n").append(task.toString());
+        }
+        return string.toString();
     }
 }

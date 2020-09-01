@@ -27,7 +27,7 @@ public class CompleteCommand extends Command {
         List<Task> completedTasks = taskList.completeTasks(args.split(" "));
         storage.save(taskList);
 
-        StringBuilder string = new StringBuilder("Neat! Marking this as complete:");
+        StringBuilder string = new StringBuilder("Neat! Marking these as complete:");
         for (Task task : completedTasks) {
             string.append("\n").append(task.toString());
         }

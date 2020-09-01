@@ -2,13 +2,16 @@ package duke.task;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Encapsulates an ArrayList of Tasks.
  */
 public class TaskList {
-    private ArrayList<Task> taskList = new ArrayList<>();
+    private int nextIndex = 1;
+    private Map<Integer, Task> tasksMap = new HashMap<>();
 
     /**
      * Adds the given task to the list.
@@ -17,7 +20,8 @@ public class TaskList {
      * @return The given task.
      */
     public Task addTask(Task task) {
-        taskList.add(task);
+        tasksMap.put(nextIndex, task);
+        nextIndex++;
         return task;
     }
 
@@ -30,7 +34,8 @@ public class TaskList {
      */
     public Task addTodo(String args) throws TaskException {
         Todo todo = new Todo(args);
-        taskList.add(todo);
+        tasksMap.put(nextIndex, todo);
+        nextIndex++;
         return todo;
     }
 
@@ -44,7 +49,8 @@ public class TaskList {
     public Task addDeadline(String args) throws TaskException {
         try {
             Deadline deadline = Deadline.create(args);
-            taskList.add(deadline);
+            tasksMap.put(nextIndex, deadline);
+            nextIndex++;
             return deadline;
         } catch (DateTimeParseException e) {
             throw new TaskException("Invalid date format");
@@ -61,7 +67,8 @@ public class TaskList {
     public Task addEvent(String args) throws TaskException {
         try {
             Event event = Event.create(args);
-            taskList.add(event);
+            tasksMap.put(nextIndex, event);
+            nextIndex++;
             return event;
         } catch (DateTimeParseException e) {
             throw new TaskException("Invalid date format");
@@ -77,25 +84,32 @@ public class TaskList {
      * @throws InvalidTaskIndexException If any one index is invalid.
      */
     public List<Task> completeTasks(String... indexes) throws InvalidTaskIndexException {
-        List<Task> tasks = verifyIndexes(indexes);
-        for (Task task : tasks) {
+        List<Integer> intIndexes = verifyIndexes(indexes);
+        List<Task> tasks = new ArrayList<>();
+        for (int taskIndex : intIndexes) {
+            Task task = tasksMap.get(taskIndex);
             task.completeTask();
+            tasks.add(task);
         }
         return tasks;
     }
 
     /**
-     * Deletes a task at the given index.
-     * The given index should be as given in the list command.
+     * Deletes tasks at the given indexes.
+     * The given indexes should be as given in the list command.
      *
-     * @param index The index whose task should be deleted.
-     * @return The deleted task.
-     * @throws InvalidTaskIndexException If the index is invalid.
+     * @param indexes An array of indexes whose tasks should be deleted.
+     * @return Tasks that were deleted.
+     * @throws InvalidTaskIndexException If any one index is invalid.
      */
-    public Task deleteTask(String index) throws InvalidTaskIndexException {
-        verifyIndexes(index);
-        int taskIndex = Integer.parseInt(index) - 1;
-        return taskList.remove(taskIndex);
+    public List<Task> deleteTask(String... indexes) throws InvalidTaskIndexException {
+        List<Integer> intIndexes = verifyIndexes(indexes);
+        List<Task> tasks = new ArrayList<>();
+        for (int taskIndex : intIndexes) {
+            Task task = tasksMap.remove(taskIndex);
+            tasks.add(task);
+        }
+        return tasks;
     }
 
     /**
@@ -105,18 +119,22 @@ public class TaskList {
      * @return List of tasks corresponding to the list in the list command.
      * @throws InvalidTaskIndexException If the given list contains one or more invalid indexes.
      */
-    private List<Task> verifyIndexes(String... indexes) throws InvalidTaskIndexException {
-        List<Task> tasks = new ArrayList<>();
+    private List<Integer> verifyIndexes(String... indexes) throws InvalidTaskIndexException {
+        List<Integer> taskIndexes = new ArrayList<>();
         for (String index : indexes) {
             try {
-                int taskIndex = Integer.parseInt(index) - 1;
-                tasks.add(taskList.get(taskIndex));
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new InvalidTaskIndexException("One or more indexes is not valid."
+                int taskIndex = Integer.parseInt(index);
+                if (!tasksMap.containsKey(taskIndex)) {
+                    throw new InvalidTaskIndexException("One or more indexes is not valid. "
+                            + "Please check the list again.");
+                }
+                taskIndexes.add(taskIndex);
+            } catch (NumberFormatException e) {
+                throw new InvalidTaskIndexException("One or more indexes is not valid. "
                         + "Please check the list again.");
             }
         }
-        return tasks;
+        return taskIndexes;
     }
 
     /**
@@ -126,13 +144,33 @@ public class TaskList {
      * @return List of tasks whose description has the search term.
      */
     public List<Task> findTasks(String searchTerm) {
-        ArrayList<Task> results = new ArrayList<>();
-        for (Task t : taskList) {
-            if (t.descriptionContains(searchTerm)) {
-                results.add(t);
+        List<Task> results = new ArrayList<>();
+        for (int key : tasksMap.keySet()) {
+            Task task = tasksMap.get(key);
+            if (task.descriptionContains(searchTerm)) {
+                results.add(task);
             }
         }
         return results;
+    }
+
+    /**
+     * Returns a string that represents all the tasks.
+     */
+    public String getStorageDocument() throws TaskTypeDecodeException {
+        StringBuilder string = new StringBuilder();
+        boolean isFirst = true;
+        for (int key : tasksMap.keySet()) {
+            Task task = tasksMap.get(key);
+            String taskStorageString = TaskType.appendIdentifier(task.toStorageString(), task.getTaskType());
+            if (isFirst) {
+                string.append(taskStorageString);
+                isFirst = false;
+            } else {
+                string.append("\n").append(taskStorageString);
+            }
+        }
+        return string.toString();
     }
 
     /**
@@ -141,6 +179,6 @@ public class TaskList {
      * @return Shallow copy of the ArrayList.
      */
     public List<Task> getTaskList() {
-        return List.of(taskList.toArray(new Task[0]));
+        return List.of(tasksMap.values().toArray(new Task[0]));
     }
 }
