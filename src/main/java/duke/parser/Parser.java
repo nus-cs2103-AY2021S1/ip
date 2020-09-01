@@ -70,12 +70,11 @@ public class Parser {
                 || splitString[0].equals(Duke.TaskType.DEADLINE.name)
                 || splitString[0].equals(Duke.TaskType.EVENT.name)) {
             return createAddCommand(splitString);
-        } else if (splitString[0].equals("find") && splitString.length == 2) {
-            return new FindCommand(splitString[1]);
+        } else if (splitString[0].equals("find") && splitString.length >= 2) {
+            return createFindCommand(splitString);
         } else {
             throw new DukeException("Oops! I'm sorry, I don't know what that means.");
         }
-
     }
 
     static AddCommand createAddCommand(String[] stringArray) throws DukeException {
@@ -150,6 +149,15 @@ public class Parser {
             Event event = new Event(description, localDate, localTime);
             return event;
         }
+    }
+
+    static FindCommand createFindCommand(String[] stringArray) throws DukeException {
+        int lengthOfStringArray = stringArray.length;
+        String[] keyWords = new String[lengthOfStringArray - 1];
+        for (int i = 0; i < lengthOfStringArray - 1; i++) {
+            keyWords[i] = stringArray[i + 1];
+        }
+        return new FindCommand(keyWords);
     }
     // ---------------------------- Methods for date and time ---------------------------
     // Assumes input to be dd/mm/yyyy, returns in yyyy-mm-dd format
