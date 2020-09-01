@@ -1,17 +1,17 @@
 package duke;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.File;
-import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
  * Handles reading and writing from database.
  */
 public class Storage {
-    String dest;
+    private String dest;
 
     /**
      * Initialise the destination of database.

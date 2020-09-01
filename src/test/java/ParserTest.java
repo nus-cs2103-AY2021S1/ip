@@ -1,35 +1,36 @@
-import duke.parserResult;
-import duke.Parser;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import duke.Parser;
+import duke.ParserResult;
 
 public class ParserTest {
-    Parser parser = new Parser();
+    private final Parser parser = new Parser();
 
     @Test
-    public void parseInput_recognizableList_LIST() {
+    public void parseInput_recognizableList_parserResultList() {
         String[] tests = {
-                "list",
-                " list",
-                "  list   ",
-                "List "};
+            "list",
+            " list",
+            "  list   ",
+            "List "};
         assertTrue(Arrays.stream(tests)
-                .map(s -> parser.parseInput(s) == parserResult.LIST)
+                .map(s -> parser.parseInput(s) == ParserResult.LIST)
                 .reduce((x, y) -> x && y)
                 .get());
     }
 
     @Test
-    public void parseInput_recognizableBye_BYE() {
+    public void parseInput_recognizableBye_parserResultBye() {
         String[] tests = {
-                "bye",
-                " Bye  ",
-                "BYE "};
+            "bye",
+            " Bye  ",
+            "BYE "};
         assertTrue(Arrays.stream(tests)
-                    .map(s -> parser.parseInput(s) == parserResult.BYE)
+                .map(s -> parser.parseInput(s) == ParserResult.BYE)
                 .reduce((x, y) -> x && y)
                 .get());
     }

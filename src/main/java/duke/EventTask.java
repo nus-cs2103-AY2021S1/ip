@@ -5,8 +5,8 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class EventTask extends Task {
-    String periodString;
-    LocalDate period;
+    private String periodString;
+    private LocalDate period;
 
     /**
      * Initialises description to be desc and period to be periodParse. Will attempt to parse deadlineParse.
@@ -32,7 +32,7 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString()  + " (at: " + periodString + ")";
+        return "[E]" + super.toString() + " (at: " + periodString + ")";
     }
 
     private String toSaveStringPeriod() {

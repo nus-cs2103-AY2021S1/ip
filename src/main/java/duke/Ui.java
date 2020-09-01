@@ -9,20 +9,23 @@ import java.util.Scanner;
  * Interacts with the user.
  */
 public class Ui {
-    private final Scanner sc;
     private static final String BORDER_STRING = "________________________________________";
+    private final Scanner sc;
 
     public Ui() {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Greets the user at the start of the program.
+     */
     public void greet() {
         printNicely("Hello! This is duckmoon99's Duke.",
                   "What can I do to help you today?");
     }
 
     public void bye() {
-        printNicely("Bye. Hope to see you again soon!");
+        printNicely("Bye. Hope to  see you again soon!");
     }
 
     /**
@@ -34,7 +37,7 @@ public class Ui {
         ArrayList<String> toPrint = new ArrayList<>();
         toPrint.add(String.format("You currently have %d task(s)", taskList.size()));
         for (int i = 0; i < taskList.size(); i++) {
-            toPrint.add(String.format("%d.%s", i+1, taskList.get(i)));
+            toPrint.add(String.format("%d.%s", i + 1, taskList.get(i)));
         }
         printNicelyCollection(toPrint);
     }
@@ -49,7 +52,7 @@ public class Ui {
         ArrayList<String> toPrint = new ArrayList<>();
         toPrint.add(message);
         for (int i = 0; i < taskList.size(); i++) {
-            toPrint.add(String.format("%d.%s", i+1, taskList.get(i)));
+            toPrint.add(String.format("%d.%s", i + 1, taskList.get(i)));
         }
         printNicelyCollection(toPrint);
     }
