@@ -5,22 +5,22 @@ import java.io.IOException;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
+import javafx.application.Platform;
 
 /**
  * The main class for the project. Initialises the Duke class and runs it.
  */
 public class Duke {
     private TaskList tasks;
-    private final Ui ui;
     private final Storage storage;
+    private final String filePath = "data/data.txt";
 
     /**
      * Instantiates a Duke object.
      */
-    Duke() {
+    public Duke() {
         tasks = new TaskList();
-        ui = new Ui();
-        storage = new Storage("data/data.txt");
+        storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.processStorage());
         } catch (IOException e) {
@@ -29,33 +29,30 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke programme.
+     * Generates the Duke's response to the given input.
+     *
+     * @param input The input by the user.
+     * @return The response given by Duke.
      */
-    void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.displayMessage(e.getMessage());
-            } finally {
-                ui.showLine();
-                ui.newLine();
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            if (c.isExit()) {
+                Platform.exit();
             }
+            return c.execute(tasks, storage);
+        } catch (DukeException e) {
+            return (e.getMessage());
         }
     }
 
-    /**
-     * The main method for the project.
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+    public String greetUser() {
+        String logo = "\t██████╗ ██╗   ██╗██╗  ██╗███████╗\n"
+                + "\t██╔══██╗██║   ██║██║ ██╔╝██╔════╝\n"
+                + "\t██║  ██║██║   ██║█████╔╝ █████╗  \n"
+                + "\t██║  ██║██║   ██║██╔═██╗ ██╔══╝  \n"
+                + "\t██████╔╝╚██████╔╝██║  ██╗███████╗\n"
+                + "\t╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝\n";
+        return "Hello! This is\n\n" + logo + "What can I do for you?";
     }
 }
