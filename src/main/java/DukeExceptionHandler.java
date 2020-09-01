@@ -1,8 +1,10 @@
 public class DukeExceptionHandler {
 
-    /** Checks for Duke exception in the user input.
-     * @param userInput A String that represent the user's input
-     * @return A DukeException if an exception is found, null if there is no found exception
+    /**
+     * Checks for Duke exception in the user input.
+     *
+     * @param userInput A String that represent the user's input.
+     * @return A DukeException if an exception is found, null if there is no found exception.
      */
     public static DukeException checkForException(String userInput) {
         String[] replyArr = null;

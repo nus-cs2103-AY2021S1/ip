@@ -7,9 +7,10 @@ public class DeadlineTask extends Task {
 
     /**
      * Creates a Task object that has a description and status of whether the task is done.
-     * @param taskDescription A String that represents the description of the task
-     * @param isDone A boolean that shows the status of the task
-     * @param timeToBeDoneBy A DateAndTime object to represent the deadline
+     *
+     * @param taskDescription A String that represents the description of the task.
+     * @param isDone A boolean that shows the status of the task.
+     * @param timeToBeDoneBy A DateAndTime object to represent the deadline.
      */
     public DeadlineTask(String taskDescription, boolean isDone, DateAndTime timeToBeDoneBy) {
         super(taskDescription, isDone);

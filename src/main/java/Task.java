@@ -7,6 +7,7 @@ public class Task {
 
     /**
      * Creates a Task object that has a description and status of whether the task is done.
+     *
      * @param taskDescription A String that represents the description of the task
      * @param isDone A boolean that shows the status of the task
      */

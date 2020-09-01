@@ -10,10 +10,11 @@ public class TaskData {
 
     /**
      * Creates a TaskData object that stores data for a deadline task.
-     * @param taskType A String that represents task type
-     * @param taskDescription A String that represents task description
-     * @param isDone An int that represents the task status (0 is not done and 1 is done)
-     * @param date A String that represent the day the task to be done by
+     *
+     * @param taskType A String that represents task type.
+     * @param taskDescription A String that represents task description.
+     * @param isDone An int that represents the task status (0 is not done and 1 is done).
+     * @param date A String that represent the day the task to be done by.
      */
     public TaskData(String taskType, String taskDescription, int isDone, String date) {
         this.taskType = taskType;
@@ -24,9 +25,10 @@ public class TaskData {
 
     /**
      * Creates a TaskData object that stores data for a todo task.
-     * @param taskType A String that represents task type
-     * @param taskDescription A String that represents task description
-     * @param isDone An int that represents the task status (0 is not done and 1 is done)
+     *
+     * @param taskType A String that represents task type.
+     * @param taskDescription A String that represents task description.
+     * @param isDone An int that represents the task status (0 is not done and 1 is done).
      */
     public TaskData(String taskType, String taskDescription, int isDone) {
         this.taskType = taskType;
@@ -36,11 +38,12 @@ public class TaskData {
 
     /**
      * Creates a TaskData object that stores data for an event task.
-     * @param taskType A String that represents task type
-     * @param taskDescription A String that represents task description
-     * @param isDone An int that represents the task status (0 is not done and 1 is done)
-     * @param date A String that represents the day the event happens
-     * @param time A String that represents the time the event happens
+     *
+     * @param taskType A String that represents task type.
+     * @param taskDescription A String that represents task description.
+     * @param isDone An int that represents the task status (0 is not done and 1 is done).
+     * @param date A String that represents the day the event happens.
+     * @param time A String that represents the time the event happens.
      */
     public TaskData(String taskType, String taskDescription, int isDone, String date, String time) {
         this.taskType = taskType;

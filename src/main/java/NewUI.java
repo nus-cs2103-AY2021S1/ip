@@ -10,6 +10,7 @@ public class NewUI {
      * <li>If the user input is "find", returns a list of 2 strings, the first one is the
      * reply if nothing a found, the second one is the reply if at least 1 element is found.</li>
      * <li>Else, returns a list of 1 string responding to the user input.</li>
+     *
      * @param userInput A String to represent user input
      * @return A list of 1 or 2 strings to represent the bot's reply to the respective input
      */
@@ -33,8 +34,9 @@ public class NewUI {
 
     /**
      * Formats the body of the bot's reply.
-     * @param body A String to represent the body of bot's reply
-     * @return A String to represent the formatted body
+     *
+     * @param body A String to represent the body of bot's reply.
+     * @return A String to represent the formatted body.
      */
     public String formatBotReplyBody(String body) {
         String indentation = "      ";

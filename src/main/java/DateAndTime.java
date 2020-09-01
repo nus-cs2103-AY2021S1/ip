@@ -9,9 +9,11 @@ public class DateAndTime {
     private final LocalDate date;
     private LocalTime time;
 
-    /** Creates an object to represent date and time as a whole.
-     * @param date The date
-     * @param time The time
+    /**
+     * Creates an object to represent date and time as a whole.
+     *
+     * @param date The date.
+     * @param time The time.
      */
     public DateAndTime(LocalDate date, LocalTime time) {
         this.date = date;

@@ -24,9 +24,11 @@ public class FileReadWriteIO {
                                             + taskData.getTime());
     }
 
-    /** Saves all tasks and their status in the list of task.
-     * @param taskManagerData The data object that stores information about the task list
-     * @throws IOException when an IO operation fails
+    /**
+     * Saves all tasks and their status in the list of task.
+     *
+     * @param taskManagerData The data object that stores information about the task list.
+     * @throws IOException when an IO operation fails.
      */
     public static void saveTaskListData(TaskManagerData taskManagerData) throws IOException {
         for (int i = 0; i < taskManagerData.getTaskList().size(); i++) {

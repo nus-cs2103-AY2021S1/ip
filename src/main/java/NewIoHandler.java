@@ -6,10 +6,8 @@ import java.util.Scanner;
 
 public class NewIoHandler {
     private static NewUI ui = new NewUI();
-    private Scanner sc = new Scanner(System.in);
     private static TaskManager taskManager = new TaskManager(new ArrayList<>());
     private static TaskSaveAndLoadManager taskSaveAndLoadManager = new TaskSaveAndLoadManager();
-    // private NewUI ui = new NewUI();
 
     private static String[] splitReply(String input) {
         String[] replyArr;

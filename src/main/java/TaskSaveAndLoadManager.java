@@ -48,8 +48,9 @@ public class TaskSaveAndLoadManager {
     /**
      * Loads the task list with tasks, along with their descriptions as well as
      * their respective statuses and types since last save.
-     * @return The TaskManager that stores the task list
-     * @throws IOException An exception thrown when IO operation fails
+     *
+     * @return The TaskManager that stores the task list.
+     * @throws IOException An exception thrown when IO operation fails.
      */
     public TaskManager loadTaskManager() throws IOException {
         List<String> loadedData = FileReadWriteIO.loadUngroupedSavedTaskList();

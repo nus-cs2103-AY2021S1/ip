@@ -45,6 +45,10 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        //set background color for duke box
+        dialog.setStyle("-fx-background-color: #D1FDA4; "
+                + "-fx-border-color: #D1FDA4; -fx-border-radius: 10; "
+                + "-fx-border-width: 10; -fx-background-radius: 10");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
