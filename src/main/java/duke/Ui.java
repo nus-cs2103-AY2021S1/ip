@@ -84,6 +84,15 @@ public class Ui {
     }
 
     /**
+     * Prints a numbered list of the tasks with the specified keyword.
+     * @param keyword is the keyword used to find the tasks.
+     * @param taskList is the task list to find the tasks with keyword from.
+     */
+    public void printFindTasks(String keyword, TaskList taskList) {
+        printWithDivider("Here are the matching tasks in your list:" + taskList.getMatchingTasks(keyword));
+    }
+
+    /**
      * Gets the number of tasks in the task list.
      * @param taskList is the list to get the number of tasks from.
      * @return a message with the number of tasks in the list.

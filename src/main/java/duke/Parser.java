@@ -1,12 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.CommandTypes;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 
 import duke.task.ToDo;
 import duke.task.Deadline;
@@ -49,6 +43,8 @@ public class Parser {
                     String[] splitEvent = splitCommand[1].split(" /at ", 2);
                     Event event = new Event(splitEvent[0], splitEvent[1]);
                     return new AddCommand(event);
+                case FIND:
+                    return new FindCommand(splitCommand[1]);
                 default:
                     throw new IllegalArgumentException();
             }
