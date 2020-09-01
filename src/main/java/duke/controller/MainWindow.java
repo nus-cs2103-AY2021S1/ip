@@ -2,6 +2,7 @@ package duke.controller;
 
 import duke.tasks.TaskList;
 import duke.ui.DataSaver;
+import duke.utils.Evaluator;
 import duke.utils.Storage;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

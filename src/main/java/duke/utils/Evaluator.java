@@ -1,15 +1,15 @@
-package duke.controller;
+package duke.utils;
 
 import duke.exceptions.DukeException;
 import duke.tasks.TaskList;
 import duke.ui.AlertBox;
 import duke.ui.DataSaver;
 import duke.ui.Messenger;
-import duke.utils.Parser;
-import duke.utils.Storage;
 import javafx.application.Platform;
 
-
+/**
+ * Encapsulates an Evaluator class that evaluates the command passed from user.
+ */
 public class Evaluator {
     private Storage storage;
 
@@ -74,6 +74,6 @@ public class Evaluator {
             AlertBox.display("Something went wrong!", e.toString());
         }
         // error in evaluating
-        return "What???";
+        return Messenger.COMMAND_UNRECOGNIZABLE_ERROR;
     }
 }

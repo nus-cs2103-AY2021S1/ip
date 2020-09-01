@@ -10,7 +10,8 @@ import duke.ui.Messenger;
  * Encapsulate a class that represents a list of tasks that the user entered.
  */
 public class TaskList {
-    private ArrayList<Task> tasks; // a list of tasks
+    // a list of tasks
+    private ArrayList<Task> tasks;
 
     /**
      * Constructs an empty task list.
