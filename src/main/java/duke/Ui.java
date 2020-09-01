@@ -29,25 +29,25 @@ public class Ui {
     /**
      * Shows the greeting message.
      */
-    public void showGreeting() {
+    public String showGreeting() {
         String message = "Eh what's up\n"
                 + "What do you want?";
-        System.out.println(wrapMessage(message));
+        return wrapMessage(message);
     }
 
     /**
      * Shows the goodbye message.
      */
-    public void showGoodbye() {
-        String message = "Alright I'll see you around!";
-        System.out.println(wrapMessage(message));
+    public String showGoodbye() {
+        String message = "Alright I'll see you around!\n";
+        return wrapMessage(message);
     }
 
     /**
      * Shows the loading file error.
      */
-    public void showLoadingError() {
-        System.out.println(wrapMessage("Error loading file!"));
+    public String showLoadingError() {
+        return (wrapMessage("Error loading file!"));
     }
 
     /**
@@ -55,7 +55,7 @@ public class Ui {
      *
      * @param tasks Tasks currently in the list.
      */
-    public void showList(TaskList tasks) {
+    public String showList(TaskList tasks) {
         String message = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.getSize(); i++) {
             Task task = tasks.getTask(i);
@@ -64,7 +64,7 @@ public class Ui {
                     + task
                     + "\n";
         }
-        System.out.println(wrapMessage(message));
+        return wrapMessage(message);
     }
 
     /**
@@ -73,14 +73,14 @@ public class Ui {
      * @param task The added task.
      * @param tasks The current list of tasks.
      */
-    public void showAdd(Task task, TaskList tasks) {
+    public String showAdd(Task task, TaskList tasks) {
         String message = "Got it. I've added this task:\n"
                 + task
                 + "\n"
                 + "Now you have "
                 + tasks.getSize()
                 + " tasks in the list.";
-        System.out.println(wrapMessage(message));
+        return wrapMessage(message);
     }
 
     /**
@@ -89,14 +89,14 @@ public class Ui {
      * @param task The deleted task.
      * @param tasks The current list of tasks.
      */
-    public void showDelete(Task task, TaskList tasks) {
+    public String showDelete(Task task, TaskList tasks) {
         String message = "Noted! I've removed this task:\n"
                 + task
                 + "\n"
                 + "Now you have "
                 + tasks.getSize()
                 + " tasks in the list.";
-        System.out.println(wrapMessage(message));
+        return wrapMessage(message);
     }
 
     /**
@@ -104,10 +104,10 @@ public class Ui {
      *
      * @param task The task that has been marked as done.
      */
-    public void showDoneTask(Task task) {
+    public String showDoneTask(Task task) {
         String message = "Nice! I've marked this task as done:\n"
                 + task;
-        System.out.println(wrapMessage(message));
+        return wrapMessage(message);
     }
 
     /**
@@ -115,7 +115,7 @@ public class Ui {
      *
      * @param tasks The list of tasks containing the keyword.
      */
-    public void showFind(TaskList tasks) {
+    public String showFind(TaskList tasks) {
         String message = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < tasks.getSize(); i++) {
             Task task = tasks.getTask(i);
@@ -124,7 +124,7 @@ public class Ui {
                     + task
                     + "\n";
         }
-        System.out.println(wrapMessage(message));
+        return wrapMessage(message);
     }
 
     /**
@@ -132,8 +132,8 @@ public class Ui {
      *
      * @param message The error message to be shown.
      */
-    public void showError(String message) {
-        System.out.println(wrapMessage(message));
+    public String showError(String message) {
+        return wrapMessage(message);
     }
 
     /**
@@ -152,6 +152,7 @@ public class Ui {
         return line
                 + message
                 + "\n"
-                + line;
+                + line
+                + "\n";
     }
 }

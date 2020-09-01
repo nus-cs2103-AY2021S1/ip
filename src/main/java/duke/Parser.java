@@ -61,12 +61,24 @@ public class Parser {
                 task = new Deadline(desc, dateTime);
                 return new AddCommand(task);
             case "event":
-                desc = getTaskDescription();
-                dateTime = getTaskTimeDate();
+                try {
+                    desc = getTaskDescription();
+                } catch (StringIndexOutOfBoundsException e) {
+                    throw new DukeException("Please add the description of the event!!");
+                }
+                try {
+                    dateTime = getTaskTimeDate();
+                } catch (StringIndexOutOfBoundsException e) {
+                    throw new DukeException("Please add the date and time of the event!!");
+                }
                 task = new Event(desc, dateTime);
                 return new AddCommand(task);
             case "todo":
-                desc = getTaskDescription();
+                try {
+                    desc = getTaskDescription();
+                } catch (StringIndexOutOfBoundsException e) {
+                    throw new DukeException("Please add the description of the todo!!");
+                }
                 task = new Todo(desc);
                 return new AddCommand(task);
             default:
