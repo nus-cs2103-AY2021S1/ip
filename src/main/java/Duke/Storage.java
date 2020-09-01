@@ -13,27 +13,28 @@ public class Storage {
     private File f;
     private String dir;
     private String fileName;
-    public Storage(String dest, String filename) throws IOException, DukeException{
+
+    public Storage(String dest, String filename) throws IOException, DukeException {
         this.dir = dest;
         this.fileName = filename;
         File dir = new File(dest);
         this.f = new File(this.dir, filename);
-        if(!dir.exists()){
-            if (!dir.mkdir()){
+        if (!dir.exists()) {
+            if (!dir.mkdir()) {
                 throw new DukeException("Cannot create directory");
             }
         }
-        if(!f.exists()){
-            if(!this.f.createNewFile()){
+        if (!f.exists()) {
+            if (!this.f.createNewFile()) {
                 throw new DukeException("Cannot create data text file");
             }
         }
     }
 
-    public ArrayList<Task> load() throws IOException{
+    public ArrayList<Task> load() throws IOException {
         ArrayList<Task> dukeList = new ArrayList<>();
         Scanner sc = new Scanner(f);
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String input = sc.nextLine();
             String[] inputSplit = input.split("/");
 
@@ -56,7 +57,7 @@ public class Storage {
             }
 
             if (Boolean.parseBoolean(inputSplit[1])) {
-                task.markDone();
+                task.setDone();
             }
             dukeList.add(task);
 
@@ -64,15 +65,15 @@ public class Storage {
         return dukeList;
     }
 
-    public void addData(Task task) throws IOException{
+    public void addData(Task task) throws IOException {
         writeData(task.getParsedData() + "\n", true);
     }
 
-    public void markDoneData(int order, String parsedData) throws IOException{
+    public void markDoneData(int order, String parsedData) throws IOException {
         String newData = "";
         Scanner reader = new Scanner(f);
 
-        for (int i = 0; reader.hasNextLine(); i++){
+        for (int i = 0; reader.hasNextLine(); i++) {
             if (i == order - 1) {
                 newData = newData + parsedData + "\n";
                 reader.nextLine();
@@ -84,14 +85,14 @@ public class Storage {
         writeData(newData, false);
     }
 
-    public void deleteData(int order) throws IOException{
+    public void deleteData(int order) throws IOException {
         //New text
         Scanner reader = new Scanner(f);
         String newData = "";
-        for (int i = 0; reader.hasNextLine(); i++){
-            if(i != order - 1){
+        for (int i = 0; reader.hasNextLine(); i++) {
+            if (i != order - 1) {
                 newData = newData + reader.nextLine() + "\n";
-            }else{
+            } else {
                 reader.nextLine();
             }
 
@@ -101,7 +102,7 @@ public class Storage {
 
     }
 
-    public void writeData(String text, Boolean appendMode) throws IOException{
+    public void writeData(String text, Boolean appendMode) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(this.dir + "/" + this.fileName, appendMode));
         bw.write(text);
         bw.close();

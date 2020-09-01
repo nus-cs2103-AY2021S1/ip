@@ -4,11 +4,12 @@ import Duke.Ui;
 import Duke.Parser;
 import Duke.Storage;
 import Duke.TaskList;
+
 import java.io.IOException;
 
 public class Duke {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         //Destination
         String dest = "data";
         String filename = "duke.txt";
@@ -19,9 +20,6 @@ public class Duke {
         // Show Welcome
         ui.showWelcome();
 
-        // Start process
-        boolean exit = false;
-
         try {
             // Initialise Storage
             Storage data = new Storage(dest, filename);
@@ -29,11 +27,15 @@ public class Duke {
             // Creates list
             TaskList list = new TaskList(data.load());
 
+            // Start process
+            boolean exit = false;
+
             while (!exit) {
                 try {
                     String input = ui.readLine();
                     Parser.Mode mode = parser.mode(input);
-                    if (mode == Parser.Mode.TODO || mode == Parser.Mode.DEADLINE || mode == Parser.Mode.EVENT) {
+                    if (mode == Parser.Mode.TODO || mode == Parser.Mode.DEADLINE ||
+                            mode == Parser.Mode.EVENT) {
                         // Create and add task to task list
                         Task task = parser.task(input);
                         list.add(task);
@@ -73,9 +75,9 @@ public class Duke {
                     ui.showError(e.getMessage());
                 }
             }
-        } catch( IOException | DukeException e) {
+        } catch (IOException | DukeException e) {
             ui.showError(e.getMessage());
-        } finally{
+        } finally {
             ui.goodbye();
             ui.close();
         }

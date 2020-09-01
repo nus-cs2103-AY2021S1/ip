@@ -7,7 +7,7 @@ public class ToDo extends Task {
 
     @Override
     public String getParsedData() {
-        return "T" + "/" + String.valueOf(super.done) + "/" + super.name;
+        return "T" + "/" + String.valueOf(super.isDone) + "/" + super.name;
     }
 
     @Override

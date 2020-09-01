@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    final static private DateTimeFormatter MYDATEFORMATTER =
+    final static private DateTimeFormatter MY_DATE_FORMATTER =
             DateTimeFormatter.ofPattern("LLL dd uuuu");
     protected String by;
     protected String byFormat;
@@ -15,12 +15,12 @@ public class Deadline extends Task {
         super(name);
         this.by = by;
         this.date = LocalDate.parse(by);
-        this.byFormat = this.date.format(MYDATEFORMATTER);
+        this.byFormat = this.date.format(MY_DATE_FORMATTER);
     }
 
     @Override
     public String getParsedData() {
-        return "D" + "/" + String.valueOf(super.done) + "/" + super.name + "/" + this.by;
+        return "D" + "/" + String.valueOf(super.isDone) + "/" + super.name + "/" + this.by;
     }
 
     @Override
