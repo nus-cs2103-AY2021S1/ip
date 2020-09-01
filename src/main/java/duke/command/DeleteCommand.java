@@ -29,14 +29,15 @@ public class DeleteCommand extends Command {
      * @param storage The storage object.
      * @param taskList The taskList object.
      * @param ui The ui object.
+     * @return Duke's response.
      * @throws InvalidInputException
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) throws InvalidInputException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws InvalidInputException {
         Task task = taskList.getTask(index);
         taskList.deleteTask(index);
         storage.write(taskList.getListOfTasks());
-        ui.displayDeletion(task);
+        return ui.displayDeletion(task);
     }
 
     /**

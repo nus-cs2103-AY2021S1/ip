@@ -27,13 +27,15 @@ public class AddCommand extends Command {
      * @param storage The storage object.
      * @param taskList The taskList object.
      * @param ui The ui object.
+     * @return Duke's response.
      * @throws InvalidInputException If the input is invalid.
      */
+
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) throws InvalidInputException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws InvalidInputException {
         taskList.addTask(task);
         storage.write(taskList.getListOfTasks());
-        ui.displayAddition(task);
+        return ui.displayAddition(task);
     }
 
     /**

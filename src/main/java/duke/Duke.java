@@ -2,13 +2,11 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.InvalidInputException;
-import duke.exception.InvalidFilePathException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.Scanner;
 
 /**
  * Represents Duke class, which is the control class of Duke and
@@ -21,48 +19,36 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Initializes storage, taskList and ui.
+     * Creates a duke object and initializes storage, taskList and ui.
      */
     public Duke() {
-        try {
-            storage = new Storage("data/tasks.txt", "data");
-        } catch (InvalidFilePathException e) {
-            ui.displayError(e.getMessage());
-        }
+        storage = new Storage("data/tasks.txt", "data");
         taskList = storage.read();
         ui = new Ui(taskList);
     }
 
     /**
-     * Starts the program by executing commands scanned from user inputs.
+     * Returns the ui object.
+     *
+     * @return The ui object.
      */
-    public void run() {
-        ui.displayGreeting();
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()) {
-            try {
-                String userCommand = scanner.nextLine();
-                Command command = Parser.parse(userCommand);
-                command.execute(storage, taskList, ui);
-                if (command.isExit()) {
-                    break;
-                }
-            } catch (InvalidInputException e) {
-                ui.displayError(e.getMessage());
-            }
-        }
-        scanner.close();
+    public Ui getUi() {
+        return ui;
     }
 
-
     /**
-     * Executes the program Duke.
+     * Returns duke's response based on the user's input.
      *
-     * @param args user input.
+     * @param userInput The user's input.
+     * @return Duke's response.
      */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+    public String getResponse(String userInput) {
+        try {
+            Command command = Parser.parse(userInput);
+            return command.execute(storage, taskList, ui);
+        } catch (InvalidInputException e) {
+            return e.getMessage();
+        }
     }
 
 
