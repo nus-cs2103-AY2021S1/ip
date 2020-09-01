@@ -39,7 +39,7 @@ public class Task {
      *
      * @param status  Status to set Task to.
      */
-    public void markedDone(boolean status) {
+    public void setStatus(boolean status) {
         this.isDone = status;
     }
 
@@ -69,9 +69,9 @@ public class Task {
     public String toString() {
         // By default print task name and status
         if(isDone) {
-            return "[✓] " + this.name;
+            return "[Done] " + this.name;
         } else {
-            return "[✗] " + this.name;
+            return "[X] " + this.name;
         }
     }
 }
