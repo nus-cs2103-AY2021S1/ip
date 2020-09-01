@@ -1,0 +1,28 @@
+list
+todo
+todo lol 123
+todo lol123
+deadline
+deadline s1
+deadline s1 /by
+deadline s1 /by 02/01/2020
+deadline s1 /by 06:00
+deadline s1 /at 02/01/2020 06:00
+deadline s1 /by 02/01/2020 06:00
+event 
+event s2
+event s2 /by 02/01/2020 06:00-07:00
+event s2 /at 02/01/2020
+event s2 /at 06:00-07:00
+event s2 /at 02/01/2020 06:00-07:00
+done -1
+done 5
+done 1
+list
+delete -1
+delete 5
+delete 3
+list
+jij
+bye
+

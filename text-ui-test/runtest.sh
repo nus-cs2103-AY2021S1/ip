@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
+export LC_ALL=en_GB.UTF-8
+
+if [ -d "data" ]
+then
+  rm -r data
+fi
+
+if [ -d "../data" ]
+then
+  rm -r ../data
+fi
 
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
@@ -20,7 +31,7 @@ then
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+java -classpath ../bin duke/Duke < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
