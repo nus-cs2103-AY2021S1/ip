@@ -25,10 +25,11 @@ public class AddCommand extends Command {
         if (task instanceof ToDo) {
             storage.appendToFile("T | 0 | " + task.description + "\n");
         } else if (task instanceof Deadline) {
-            storage.appendToFile("D | 0 | " + task.description + " | " +
-                    ((Deadline) task).by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n");
+            storage.appendToFile("D | 0 | " + task.description + " | "
+                    + ((Deadline) task).by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n");
         } else if (task instanceof Event) {
-            storage.appendToFile("E | 0 | " + task.description + " | " + ((Event) task).at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n");
+            storage.appendToFile("E | 0 | " + task.description + " | "
+                    + ((Event) task).at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n");
         }
 
         ui.showAdded(tasks.getTask(tasks.getNumTasks()), tasks.getNumTasks());

@@ -4,11 +4,8 @@ import java.util.Scanner;
  * Represents the system that interacts with the user, reading inputs and displaying messages.
  */
 public class Ui {
-    protected Scanner sc;
 
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
+    public static final String LINE = " ____________________________________________________________\n ";
 
     public static final String LOGO =
             " ____        _\n"
@@ -17,7 +14,12 @@ public class Ui {
                     + " | |_| | |_| |   <  __/\n"
                     + " |____/ \\__,_|_|\\_\\___|\n";
 
-    public static final String LINE = " ____________________________________________________________\n ";
+    protected Scanner sc;
+
+    public Ui() {
+        this.sc = new Scanner(System.in);
+    }
+
 
     /**
      * Show a line, which is printed before and after each message for design.

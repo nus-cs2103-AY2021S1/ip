@@ -4,14 +4,25 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a task that is an event with a description and timing
  */
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDateTime at;
 
+    /**
+     * Creates an event task with description and timing of event, that is not done.
+     * @param description Description of the event task.
+     * @param at Timing event will take place.
+     */
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Creates an event task with description and timing of event, specifying if it is done.
+     * @param description Description of the event task.
+     * @param at Timing event will take place.
+     * @param isDone True to show task is done, False to show task is not done.
+     */
     public Event(String description, LocalDateTime at, boolean isDone) {
         super(description, isDone);
         this.at = at;

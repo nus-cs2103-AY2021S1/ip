@@ -7,7 +7,10 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
-    // Constructor
+    /**
+     * Creates a Duke object that loads information from specified filePath.
+     * @param filePath The text file which Duke loads information from.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         storage = new Storage(filePath);
@@ -20,7 +23,8 @@ public class Duke {
     }
 
     /**
-     * Displays a welcome message and runs the chatbot, continuously receiving user input and executing them accordingly.
+     * Displays a welcome message and runs the chatbot,
+     * continuously receiving user input and executing them accordingly.
      */
     public void run() {
         ui.showWelcome();

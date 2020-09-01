@@ -8,11 +8,22 @@ public class Deadline extends Task {
 
     protected LocalDateTime by;
 
+    /**
+     * Creates a deadline task that is not done.
+     * @param description Description of the task.
+     * @param by Deadline of the task.
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Creates a deadline task, specifying if it is done
+     * @param description Description of the task.
+     * @param by Deadline of the task.
+     * @param isDone True to show task is done, False to show task is not done.
+     */
     public Deadline(String description, LocalDateTime by, boolean isDone) {
         super(description, isDone);
         this.by = by;
