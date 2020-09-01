@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.ExitCommand;
 import duke.exception.InvalidInputException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -17,6 +18,8 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    private boolean canCloseWindow = false;
+    private static final String byeMessage = "bye";
 
     /**
      * Creates a duke object and initializes storage, taskList and ui.
@@ -38,6 +41,8 @@ public class Duke {
 
     /**
      * Returns duke's response based on the user's input.
+     * Sets the canCloseWindow to true if the input is
+     * "bye."
      *
      * @param userInput The user's input.
      * @return Duke's response.
@@ -45,10 +50,23 @@ public class Duke {
     public String getResponse(String userInput) {
         try {
             Command command = Parser.parse(userInput);
+            if (userInput.equals(byeMessage)) {
+                canCloseWindow = true;
+            }
             return command.execute(storage, taskList, ui);
         } catch (InvalidInputException e) {
             return e.getMessage();
         }
+    }
+
+    /**
+     * Checks if the GUI window can be closed, by checking
+     * whether the user inputs "bye."
+     *
+     * @return true if the GUI window can be closed, false otherwise.
+     */
+    public boolean canCloseWindow() {
+        return canCloseWindow;
     }
 
 

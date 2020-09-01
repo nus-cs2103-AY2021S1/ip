@@ -15,6 +15,11 @@ public class Main extends Application {
     private Duke duke = new Duke();
     private final String MAIN_WINDOW_PATH = "/view/MainWindow.fxml";
 
+    /**
+     * Starts
+     *
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         try {

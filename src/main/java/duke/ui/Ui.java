@@ -12,14 +12,9 @@ public class Ui {
 
     private TaskList taskList;
     private static final String EMPTY_SPACE_BEFORE_TASK = "     ";
-    private static final String GREETING_PART_ONE = "Hi, I am\n";
+    private static final String GREETING_PART_ONE = "Hi, I am Duke! :D\n";
     private static final String GREETING_PART_TWO = "Is there anything I could help with?\n";
     private static final String EXIT_MESSAGE = "Bye! I look forward to meeting you next time!\n";
-    private static final String LOGO = "      ____        _        \n"
-            + "     |  _ \\ _   _| | _____ \n"
-            + "     | | | | | | | |/ / _ \\\n"
-            + "     | |_| | |_| |   <  __/\n"
-            + "     |____/ \\__,_|_|\\_\\___|\n";
 
     /**
      * Constructs an ui object.
@@ -48,7 +43,7 @@ public class Ui {
      * @return Greeting message.
      */
     public String displayGreeting() {
-        return GREETING_PART_ONE + LOGO + GREETING_PART_TWO;
+        return GREETING_PART_ONE + GREETING_PART_TWO;
     }
 
     /**
@@ -119,7 +114,7 @@ public class Ui {
         if (noOfTasks == 1) {
             stringBuilder.append("Now there is 1 task in total in your list.\n");
         } else {
-            System.out.println("Now there are " + listOfTasks.size() + " tasks "
+            stringBuilder.append("Now there are " + listOfTasks.size() + " tasks "
                     + "in total in your list.\n");
         }
         return stringBuilder.toString();
