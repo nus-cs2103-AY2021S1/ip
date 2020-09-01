@@ -19,6 +19,11 @@
         <property name="lineSeparator" value="lf_cr_crlf"/>
     </module>
 
+    <module name="LineLength">
+        <!-- Checks if a line is too long. -->
+        <property name="max" value="120"/>
+    </module>
+
     <module name="RegexpSingleline">
         <!-- Checks that FIXME is not used in comments.  TODO is preferred. -->
         <property name="format" value="((//.*)|(\*.*))FIXME" />
@@ -31,11 +36,6 @@
 
     <!-- All Java AST specific tests live under TreeWalker module. -->
     <module name="TreeWalker">
-
-        <module name="LineLength">
-            <!-- Checks if a line is too long. -->
-            <property name="max" value="120"/>
-        </module>
 
         <!-- Required to allow exceptions in code style -->
         <module name="SuppressionCommentFilter">
