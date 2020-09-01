@@ -7,8 +7,9 @@ public class Parser {
     /**
      * Formats the user input given such that the Duke chat bot is able to
      * handle it.
-     * @param str the user input
-     * @return the user input formatted for Duke chat bot handling
+     *
+     * @param str The user input.
+     * @return The user input formatted for Duke chat bot handling.
      */
     public static String[] parse(String str) {
         return str.split(" ", 2);

@@ -9,12 +9,12 @@ public class Todo extends Task {
 
     @Override
     public String formatTaskForFile() {
-        return this.taskType + " | " +
-                (this.isDone ? "1" : "0") + " | " + this.description;
+        return taskType + " | " + (isDone ? "1" : "0")
+                    + " | " + description;
     }
 
     @Override
     public String toString() {
-        return "[T]" + this.getStatusIcon() + this.description;
+        return "[T]" + getStatusIcon() + description;
     }
 }

@@ -14,19 +14,19 @@ public class TaskList {
     /**
      * Returns the list of tasks stored in the object.
      *
-     * @return the current list of tasks
+     * @return The current list of tasks.
      */
     public List<Task> getList() {
-        return this.tasks;
+        return tasks;
     }
 
     /**
      * Returns the number of tasks in the list stored in the object.
      *
-     * @return the size of the current list of tasks.
+     * @return The size of the current list of tasks.
      */
     public int getLength() {
-        return this.tasks.size();
+        return tasks.size();
     }
 
     Task createTask(String taskType, String desc) throws MissingDeadlineException{
@@ -43,14 +43,14 @@ public class TaskList {
      * Adds a task with a description and if applicable, a deadline to the task list
      * and returns it.
      *
-     * @param taskType the type of task to be added
-     * @param desc the description of task to be added
-     * @return the task added to the task list
+     * @param taskType The type of task to be added.
+     * @param desc The description of task to be added.
+     * @return The task added to the task list.
      * @throws MissingDeadlineException
      */
     public Task addTask(String taskType, String desc) throws MissingDeadlineException {
         Task task = createTask(taskType, desc);
-        this.tasks.add(task);
+        tasks.add(task);
         return task;
     }
 
@@ -62,13 +62,13 @@ public class TaskList {
     /**
      * Returns the tasks in a numbered order as a String that can be printed out.
      *
-     * @return the String containing the tasks in a numbered order
+     * @return The String containing the tasks in a numbered order.
      */
     public String formattedList() {
         String list = "";
 
-        for (int i = 0; i < this.tasks.size(); i++) {
-            list += formatTask(i, this.tasks);
+        for (int i = 0; i < tasks.size(); i++) {
+            list += formatTask(i, tasks);
         }
 
         return list;
@@ -77,8 +77,8 @@ public class TaskList {
     /**
      * Marks the task at the given index as completed and returns it.
      *
-     * @param num the index of the task in the list
-     * @return the completed task
+     * @param num The index of the task in the list.
+     * @return The completed task.
      * @throws MissingTaskException
      */
     public Task completeTask(int num) throws MissingTaskException {
@@ -94,8 +94,8 @@ public class TaskList {
     /**
      * Deletes the task at the given index and returns it.
      *
-     * @param num the index of the task in the list
-     * @return the deleted task
+     * @param num The index of the task in the list.
+     * @return The deleted task.
      * @throws MissingTaskException
      */
     public Task deleteTask(int num) throws MissingTaskException {

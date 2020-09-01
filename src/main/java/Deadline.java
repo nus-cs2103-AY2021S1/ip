@@ -19,18 +19,18 @@ public class Deadline extends Task {
 
     Deadline(String desc, String date) {
         super("D", desc);
-        this.deadline = date;
+        deadline = date;
     }
 
 
     @Override
     public String formatTaskForFile() {
-        return this.taskType + " | " + (this.isDone ? "1" : "0") + " | " +
-                this.description + " | " + this.deadline;
+        return taskType + " | " + (isDone ? "1" : "0") + " | " +
+                description + " | " + deadline;
     }
 
     @Override
     public String toString() {
-        return "[D]" + this.getStatusIcon() + this.description + " (by: " + this.deadline + ")";
+        return "[D]" + getStatusIcon() + description + " (by: " + deadline + ")";
     }
 }

@@ -11,12 +11,12 @@ public class Duke {
     private  Ui ui;
 
     public Duke(String filePath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            this.tasks = new TaskList(this.storage.loadFile());
+            tasks = new TaskList(storage.loadFile());
         } catch (IOException e) {
-            this.ui.showLoadError();
+            ui.showLoadError();
         }
     }
 
@@ -24,39 +24,39 @@ public class Duke {
         try {
             switch (input[0]) {
             case "list":
-                this.ui.list(this.tasks.formattedList());
+                ui.list(tasks.formattedList());
                 break;
             case "bye":
-                this.storage.saveFile(this.tasks);
-                this.ui.exit();
+                storage.saveFile(tasks);
+                ui.exit();
                 break;
             case "done":
-                this.ui.completeTask(this.tasks.completeTask(Integer.valueOf(input[1])));
+                ui.completeTask(tasks.completeTask(Integer.valueOf(input[1])));
                 break;
             case "delete":
-                this.ui.deleteTask(this.tasks.deleteTask(Integer.valueOf(input[1])), this.tasks.getLength());
+                ui.deleteTask(tasks.deleteTask(Integer.valueOf(input[1])), tasks.getLength());
                 break;
             case "find":
-                this.ui.find(this.tasks.findTasks(input[1]));
+                ui.find(tasks.findTasks(input[1]));
                 break;
             case "todo":
-                //Fallthrough
+                // Fallthrough
             case "event":
-                //Fallthrough
+                // Fallthrough
             case "deadline":
                 if (input.length == 1) {
                     throw new MissingDescriptionException(input[0]);
                 } else {
-                    this.ui.addTask(this.tasks.addTask(input[0], input[1]), this.tasks.getLength());
+                    ui.addTask(tasks.addTask(input[0], input[1]), tasks.getLength());
                 }
                 break;
             default:
                 throw new UnknownCommandException();
             }
         } catch (DukeException e) {
-            this.ui.showDukeError(e);
+            ui.showDukeError(e);
         } catch (IOException e) {
-            this.ui.showSaveError();
+            ui.showSaveError();
         }
     }
 
@@ -65,7 +65,7 @@ public class Duke {
      * other classes like TaskList and Ui.
      */
     public void run() {
-        this.ui.greet();
+        ui.greet();
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {

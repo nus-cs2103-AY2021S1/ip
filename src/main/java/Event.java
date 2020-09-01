@@ -11,9 +11,9 @@ public class Event extends Task {
             throw new MissingDeadlineException("event");
         } else {
             String date = desc.split(" /at ", 2)[1];
-            this.eventTime = containsTime(date)
-                                ? formatDateTime(date)
-                                : formatDate(date);
+            eventTime = containsTime(date)
+                            ? formatDateTime(date)
+                            : formatDate(date);
         }
     }
 
@@ -24,12 +24,12 @@ public class Event extends Task {
 
     @Override
     public String formatTaskForFile() {
-        return this.taskType + " | " + (this.isDone ? "1" : "0") + " | " +
-                this.description + " | " + this.eventTime;
+        return taskType + " | " + (isDone ? "1" : "0") + " | " +
+                description + " | " + eventTime;
     }
 
     @Override
     public String toString() {
-        return "[E]" + this.getStatusIcon() + this.description + " (at: " + this.eventTime + ")";
+        return "[E]" + getStatusIcon() + description + " (at: " + eventTime + ")";
     }
 }

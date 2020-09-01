@@ -32,8 +32,8 @@ public class Ui {
      * Informs the user that the task has been added to the list and the number of tasks
      * currently in the list.
      *
-     * @param task the task to be added
-     * @param size the number of tasks in the current list
+     * @param task The task to be added.
+     * @param size The number of tasks in the current list.
      */
     public void addTask(Task task, int size) {
         String message = "Got it. I've added this task: \n  " + task +
@@ -44,7 +44,7 @@ public class Ui {
     /**
      * Informs the user that the task has been marked as done.
      *
-     * @param task the task to be completed
+     * @param task The task to be completed.
      */
     public void completeTask(Task task) {
         String message = "Nice! I've marked this task as done: \n  " + task;
@@ -55,8 +55,8 @@ public class Ui {
      * Informs the user that the task has been deleted and the number of tasks currently
      * in the list.
      *
-     * @param task the task to be deleted
-     * @param size the number of tasks in the current list
+     * @param task The task to be deleted.
+     * @param size The number of tasks in the current list.
      */
     public void deleteTask(Task task, int size) {
         String message = "Noted. I've removed this task: \n " + task +
@@ -68,7 +68,7 @@ public class Ui {
      * Lists out all the tasks in the current task list in
      * numbered order.
      *
-     * @param formattedList the formatted task list
+     * @param formattedList The formatted task list.
      */
     public void list(String formattedList) {
         String list = "Here are the tasks in your list: \n  ";
@@ -80,7 +80,7 @@ public class Ui {
      * Informs the user of the error that has occurred while using the Duke
      * chat bot.
      *
-     * @param e the error caught
+     * @param e The error caught.
      */
     public void showDukeError(DukeException e) {
         System.out.println(wrapMessage(e.toString()));

@@ -17,7 +17,7 @@ public class Storage {
     }
 
     void createFile() throws IOException {
-        File file = new File(this.filePath);
+        File file = new File(filePath);
         File directory = file.getParentFile();
         if (!(directory.exists())) {
             directory.mkdir();
@@ -29,11 +29,11 @@ public class Storage {
     /**
      * Loads the saved tasks from the data file and returns them.
      *
-     * @return the list of tasks saved in the data file
+     * @return The list of tasks saved in the data file.
      * @throws IOException
      */
     public List<Task> loadFile() throws IOException {
-        File file = new File(this.filePath);
+        File file = new File(filePath);
         List<Task> tasks = new ArrayList<>();
         try {
             Scanner s = new Scanner(file);
@@ -71,11 +71,11 @@ public class Storage {
     /**
      * Saves the current task list to the data file for future retrieval.
      * 
-     * @param tasks the current task list
+     * @param tasks The current task list.
      * @throws IOException
      */
     public void saveFile(TaskList tasks) throws IOException {
-        FileWriter fw = new FileWriter(this.filePath);
+        FileWriter fw = new FileWriter(filePath);
         String textToAdd = "";
 
         for (Task task: tasks.getList()) {

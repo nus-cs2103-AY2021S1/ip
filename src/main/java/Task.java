@@ -12,14 +12,14 @@ abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    Task(String tasktype, String description) {
-        this.taskType = tasktype;
+    Task(String taskType, String description) {
+        this.taskType = taskType;
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     protected boolean containsTime(String str) {
-        Pattern p = Pattern.compile(".*([01]?[0-9]|2[0-3])[0-5][0-9]");
+        Pattern p = Pattern.compile(".* ([01]?[0-9]|2[0-3])[0-5][0-9]");
         Matcher m = p.matcher(str);
         return m.matches();
     }
@@ -36,26 +36,26 @@ abstract class Task {
     }
 
     protected void completeTask() {
-        this.isDone = true;
+        isDone = true;
     }
 
     protected String getStatusIcon() {
-        return this.isDone ? "[✓] " : "[✗] ";
+        return isDone ? "[✓] " : "[✗] ";
     }
 
     /**
      * Formats the task to be stored in the text file.
      *
-     * @return a string representing the task in a format to be stored in the text file
+     * @return A string representing the task in a format to be stored in the text file.
      */
     abstract public String formatTaskForFile();
 
     protected boolean match(String keyword) {
-        return this.description.contains(keyword);
+        return description.contains(keyword);
     }
 
     @Override
     public String toString() {
-        return this.getStatusIcon() + this.description;
+        return getStatusIcon() + description;
     }
 }
