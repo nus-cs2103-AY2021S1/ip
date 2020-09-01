@@ -6,15 +6,30 @@
  * @since 2020-08-25
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    /**
+     * Task description.
+     */
+    private String description;
+    /**
+     * This states whether task is done.
+     */
+    private boolean isDone;
 
-    public Task(String description) {
+    /**
+     * Task constructor, marked as not done.
+     * @param description The description of the task.
+     */
+    public Task(final String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    public Task(String description, boolean isDone) {
+    /**
+     * Task constructor, marked as done.
+     * @param description The description of the task.
+     * @param isDone    Whether the task is done.
+     */
+    public Task(final String description, final boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }

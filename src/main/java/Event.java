@@ -9,27 +9,60 @@ import java.time.format.DateTimeFormatter;
  * @since 2020-08-25
  */
 public class Event extends Task {
-    protected LocalDate at;
-    protected String time;
+    /**
+     * The date of the event.
+     */
+    private LocalDate at;
+    /**
+     * The time of the event.
+     */
+    private String time;
 
-    public Event(String description, LocalDate at) {
+    /**
+     * Event constructor with date only.
+     * @param description   The description of the event.
+     * @param at            The date of the event.
+     */
+    public Event(final String description, final LocalDate at) {
         super(description);
         this.at = at;
     }
 
-    public Event(String description, LocalDate at, String time) {
+    /**
+     * Event constructor with date and time.
+     * @param description   The description of the event.
+     * @param at            The date of the event.
+     * @param time          The time of the event.
+     */
+    public Event(final String description, final LocalDate at,
+                 final String time) {
         super(description);
         this.at = at;
         this.time = time;
     }
 
-    public Event(String description, boolean isDone, LocalDate at) {
+    /**
+     * Event constructor with date and marked as done.
+     * @param description   The description of the event.
+     * @param isDone        The event is marked as done.
+     * @param at            The date of the event.
+     */
+    public Event(final String description, final boolean isDone,
+                 final LocalDate at) {
         super(description, isDone);
         this.at = at;
         this.time = null;
     }
 
-    public Event(String description, boolean isDone, LocalDate at, String time) {
+    /**
+     * Event constructor with date and time and marked as done.
+     * @param description   The description of the event.
+     * @param isDone        The event is marked as done.
+     * @param at            The date of the event.
+     * @param time          The time of the event.
+     */
+    public Event(final String description, final boolean isDone,
+                 final LocalDate at, final String time) {
         super(description, isDone);
         this.at = at;
         this.time = time;
@@ -42,7 +75,8 @@ public class Event extends Task {
     public String display() {
         if (time == null || time.isEmpty()) {
             return "[E]" + super.toString() + " (at: "
-                    + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                    + at.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    + ")";
         } else {
             return "[E]" + super.toString() + " (at: "
                     + at.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
@@ -53,6 +87,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at
-                + (time == null || time.isEmpty() ? "" : " " + time) + ")";
+                + (time == null || time.isEmpty() ? "" : " " + time)
+                + ")";
     }
 }

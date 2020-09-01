@@ -13,27 +13,34 @@ import java.io.IOException;
  * @since 2020-08-25
  */
 public class Storage {
+    /**
+     * The path of the storage file.
+     */
     private String filePath;
 
-    public Storage(String filePath) {
+    /**
+     * Storage constructor.
+     * @param filePath
+     */
+    public Storage(final String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * This method loads the data from a local file and returns it in TaskList
-     * @return This returns a TaskList that contains the data loaded from the file.
+     * This method loads the data from a local file and returns it in TaskList.
+     * @return This returns a TaskList loaded from the file.
      * @throws DukeException When there is a problem finding/creating the file.
      */
     public TaskList load() throws DukeException {
         File directory = new File("data/");
-        if (!directory.exists()){
+        if (!directory.exists()) {
             directory.mkdir();
         }
         File f = new File(this.filePath);
         if (f.exists()) {
             try {
                 TaskList taskList = new TaskList();
-                Scanner s = new Scanner(f); // create a Scanner using the File as the source
+                Scanner s = new Scanner(f);
                 while (s.hasNext()) {
                     String taskString = s.nextLine();
                     if (!taskString.isEmpty()) {
@@ -60,9 +67,9 @@ public class Storage {
     /**
      * This method saves data from the program into a local file.
      * @param listToAdd         This is the task list to be saved.
-     * @throws DukeException    When there is a problem writing to the local file.
+     * @throws DukeException    When there is a problem writing to local file.
      */
-    public void write(TaskList listToAdd) throws DukeException {
+    public void write(final TaskList listToAdd) throws DukeException {
         try {
             FileWriter resetfw = new FileWriter(this.filePath);
             resetfw.write("");

@@ -6,11 +6,20 @@
  * @since 2020-08-25
  */
 public class Todo extends Task {
-    public Todo(String description) {
+    /**
+     * To do constructor.
+     * @param description The description of the task.
+     */
+    public Todo(final String description) {
         super(description);
     }
 
-    public Todo(String description, boolean isDone) {
+    /**
+     * To do constructor, marked as done.
+     * @param description The description of the task.
+     * @param isDone      The task is marked as done.
+     */
+    public Todo(final String description, final boolean isDone) {
         super(description, isDone);
     }
 
