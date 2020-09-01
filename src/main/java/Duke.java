@@ -68,19 +68,35 @@ public class Duke {
             //parser.parse(sc.nextLine(), tasks, ui, storage);
         }
     }
-    
+
+    /**
+     * Gets list of tasks.
+     * @return List of tasks.
+     */
     public TaskList getTasks() {
         return this.tasks;
     }
-    
+
+    /**
+     * Gets storage.
+     * @return Storage of Duke.
+     */
     public Storage getStorage() {
         return this.storage;
     }
-    
+
+    /**
+     * Gets parser.
+     * @return Parser of Duke.
+     */
     public Parser getParser() {
         return this.parser;
     }
-    
+
+    /**
+     * Gets Ui.
+     * @return Ui of Duke.
+     */
     public Ui getUi() {
         return this.ui;
     }

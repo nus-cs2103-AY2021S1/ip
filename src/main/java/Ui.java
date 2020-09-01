@@ -4,6 +4,7 @@
 public class Ui {
     /**
      * Greets user when Duke bot is activated.
+     * @return Duke response message.
      */
     public String greet() {
         String logo = " ____        _        \n"
@@ -34,6 +35,7 @@ public class Ui {
 
     /**
      * Prints bye message to user.
+     * @return Duke response message for bye.
      */
     public String bye() {
         return "Bye. Hope to see you again soon!";
@@ -43,6 +45,7 @@ public class Ui {
      * Prints message when a task is added.
      * @param task Task that is added.
      * @param lst List of tasks.
+     * @return Duke response message when user adds task.
      */
     public String printAddTask(Task task, TaskList lst) {
         return "Got it. I've added this task:\n" + "  " 
@@ -53,6 +56,7 @@ public class Ui {
     /**
      * Prints message when a task is marked as done.
      * @param task Task that is marked as done.
+     * @return Duke response message when a task is done.
      */
     public String printDoneTask(Task task) {
         return "Nice! I've marked this task as done: \n" 
@@ -63,6 +67,7 @@ public class Ui {
      * Prints message when a task is deleted.
      * @param task Task that needs to be deleted.
      * @param lst List of tasks.
+     * @return Duke response message when a task is deleted.
      */
     public String printDeleteTask(Task task, TaskList lst) {
         return "Noted. I've removed this task:\n" + "  " 
@@ -73,6 +78,7 @@ public class Ui {
     /**
      * Prints the full list of tasks.
      * @param lst List of tasks.
+     * @return Duke response message of tasks in the list.
      */
     public String printTaskList(TaskList lst) { 
         return "Here are the tasks in your list:\n" + lst.toString();
@@ -81,6 +87,7 @@ public class Ui {
    /**
      * Prints error messages.
      * @param err Error message.
+     * @return Duke response message for an error.
      */
     public String showError(String err) {
         return err;
@@ -89,6 +96,7 @@ public class Ui {
     /**
      * Prints matching tasks that contains the keyword entered by user.
      * @param lst List of tasks.
+     * @return Duke response message of matching tasks.
      */
     public String printMatchingTasks(TaskList lst) {
         return "Here are the matching tasks in your list:\n" + lst.toString();

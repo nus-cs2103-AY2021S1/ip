@@ -9,6 +9,7 @@ public class Parser {
      * Stores the parsed user inputs and prints response messages for user.
      * @param userInput User input read by scanner.
      * @param duke Duke object.
+     * @return Duke response message.
      */
     public String parse(String userInput, Duke duke) {
         String[] strArr = userInput.split(" ");
