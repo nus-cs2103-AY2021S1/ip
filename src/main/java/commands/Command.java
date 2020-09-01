@@ -33,7 +33,7 @@ public enum Command {
             System.out.println(tasks);
 
             return IntStream.range(0, tasks.size())
-                    .mapToObj(index -> (index + 1) + ". " + tasks.get(index) + "\t")
+                    .mapToObj(index -> (index + 1) + ". " + tasks.get(index))
                     .reduce("", (x, y) -> x + y)
                     .strip();
         }

@@ -2,12 +2,14 @@ package utils.ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
 
@@ -19,8 +21,18 @@ public class DialogBox extends HBox {
         displayPicture = iv;
 
         text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        displayPicture.setFitWidth(84);
+        displayPicture.setFitHeight(84);
+
+        Circle circle = new Circle();
+        circle.setCenterX(84);
+        circle.setCenterY(42);
+        circle.setRadius(42);
+
+        iv.setClip(circle);
+
+        text.setStyle("-fx-background-color: #7781FF; -fx-background-radius: 32;");
+        text.setPadding(new Insets(12));
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
@@ -42,6 +54,15 @@ public class DialogBox extends HBox {
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
 
+        Circle circle = new Circle();
+
+        circle.setCenterX(0);
+        circle.setCenterY(42);
+        circle.setRadius(42);
+        displayPicture.setClip(circle);
+
+        text.setStyle("-fx-background-color: white; -fx-background-radius: 32;");
+        text.setPadding(new Insets(12));
         return this;
     }
 

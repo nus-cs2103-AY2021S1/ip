@@ -76,7 +76,6 @@ public class Duke {
     }
 
     public Duke() {
-        ui = new GUI();
         try {
             initializeDuke();
         } catch (DukeIoException e) {
