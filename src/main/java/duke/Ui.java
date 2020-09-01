@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Interact with the users with customized output based on what the user has keyed in.
+ * Responsible for customizing the Messages shown to User
  */
 public class Ui {
 
@@ -9,73 +9,69 @@ public class Ui {
     }
 
     /**
-     * Print out the input according to default's style.
+     * Return the input according to default's style.
      * @param input The message to display to user.
      */
-    public void show(String input) {
-        String line = "____________________________________________________________";
-        System.out.println(line);
-        System.out.println(input);
-        System.out.println(line);
+    public String show(String input) {
+        String line = "_______________________________________________________";
+        return String.format("%s\n%s\n%s",line, input, line);
     }
 
     /**
-     * Print out Welcome Message according to default's style.
+     * Return Welcome Message according to default's style.
      */
-    public void showWelcome() {
-        show("Duke at your service. How may I help?");
+    public String showWelcome() {
+        return show("Duke at your service. How may I help?");
     }
 
     /**
-     * Print out the detail of the new Task and new count of tasks at hand according to default's style.
+     * Return the detail of the new Task and new count of tasks at hand according to default's style.
      */
-    public void showTaskAdded(String taskDetail, int taskCount) {
+    public String showTaskAdded(String taskDetail, int taskCount) {
         String first = "Got it. I've added this task:\n";
         String second = "    " + taskDetail + "\n";
         String third = String.format("Now you have %d tasks in the list", taskCount);
-        show(first + second + third);
+        return show(first + second + third);
     }
 
     /**
-     * Print out the detail of the task that is just set to done according to default's style.
+     * Return the detail of the task that is just set to done according to default's style.
      */
-    public void showTaskDone(String taskDetail) {
-        show("Nice! I have marked this task as done:\n" +
+    public String showTaskDone(String taskDetail) {
+        return show("Nice! I have marked this task as done:\n" +
                 taskDetail);
     }
 
     /**
-     * Print out the tasks that the user has on hand.
+     * Return the tasks that the user has on hand.
      * @param taskDetails String of Task Descriptions that corresponds to the tasks user have on hand.
      */
-    public void showTasks(String taskDetails) {
-        show("Here are the tasks in your list\n" + taskDetails);
+    public String showTasks(String taskDetails) {
+        return show("Here are the tasks in your list\n" + taskDetails);
     }
 
     /**
-     * Print out the tasks that the user has just deleted.
+     * Return the tasks that the user has just deleted.
      * @param taskDetail String of Task that is just deleted.
      */
-    public void showDeletedTasks(String taskDetail) {
-        show("Alright! I have deleted this task:\n" + taskDetail);
+    public String showDeletedTasks(String taskDetail) {
+        return show("Alright! I have deleted this task:\n" + taskDetail);
     }
 
     /**
-     * Print out error message with different style.
+     * String error message with different style.
      * @param err Error Message to print out.
      */
-    public void showError(String err) {
-        String line = "************************************************************";
-        System.out.println(line);
-        System.out.println(err);
-        System.out.println(line);
+    public String showError(String err) {
+        String line = "*******************************************************";
+        return String.format("%s\n%s\n%s",line, err, line);
     }
 
     /**
      * Print out the bye with different style.
      */
-    public void showBye() {
-        show("Bye. See you again");
+    public String showBye() {
+        return show("Bye. See you again");
     }
 
 }
