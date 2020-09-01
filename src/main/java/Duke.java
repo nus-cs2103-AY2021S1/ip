@@ -31,7 +31,7 @@ public class Duke {
         int index = getTaskIndex(commands);
         Task task = taskList.remove(index);
         System.out.println(wrapDivider(
-                "     Noted. I've removed this task: \n" +
+                "     Noted. I've removed this task:\n" +
                 "       " + task.toString() + "\n" +
                 "     Now you have "+ taskList.size() +" tasks in the list.\n"
         ));
@@ -101,7 +101,7 @@ public class Duke {
     private void addTask(Task task) {
         taskList.add(task);
         System.out.println(wrapDivider(
-                "     Got it. I've added this task: \n" +
+                "     Got it. I've added this task:\n" +
                 "       " + task.toString() + "\n" +
                 "     Now you have "+ taskList.size() + " tasks in the list.\n"
         ));
@@ -113,7 +113,7 @@ public class Duke {
         Task task = taskList.get(index);
         task.markDone();
         System.out.println(wrapDivider(
-                "     Nice! I've marked this task as done: \n" +
+                "     Nice! I've marked this task as done:\n" +
                         "       "+ task.toString() + "\n"
         ));
     }
