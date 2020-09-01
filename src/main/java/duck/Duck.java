@@ -52,7 +52,7 @@ public class Duck {
     /**
      * Greets user when user first sees the bot.
      */
-    public void greet() {
+    private void greet() {
         List<String> welcomeMessage = new ArrayList<>();
         welcomeMessage.add("Hello! I'm Duck");
         welcomeMessage.add("What can I do for you?");
@@ -60,23 +60,29 @@ public class Duck {
     }
 
     /**
-     * Runs when the user exits the application or when the bot closes.
-     * This will send a message as well as save the existing data via storage.
+     * Saves the existing tasks into storage
      */
-    public void shutdown() {
-        responses.add("Bye. Hope to see you again soon!");
+    private void save() {
         try {
             this.storage.save(this.taskList);
         } catch (DuckException e) {
-            responses.add("Failed to save file");
+            System.out.println(e.toString());
         }
+    }
 
+    /**
+     * Runs when the user exits the application or when the bot closes.
+     * This will send a message as well as save the existing data via storage.
+     */
+    private void shutdown() {
+        responses.add("Bye. Hope to see you again soon!");
+        save();
     }
 
     /**
      * Gets statuses of all tasks in TaskList and adds to response.
      */
-    public void listTasks() {
+    private void listTasks() {
         responses.add("Here are the tasks in your list");
         String[] statuses = this.taskList.getStatuses();
         for (int i = 0; i < statuses.length; i++) {
@@ -90,7 +96,7 @@ public class Duck {
      *
      * @param input Input from user.
      */
-    public void listByDueDate(String input) {
+    private void listByDueDate(String input) {
         Optional<LocalDate> optionalDate;
         try {
             optionalDate = Optional.ofNullable(Parser.parseDate(input));
@@ -115,7 +121,7 @@ public class Duck {
      * @param input Input from User.
      * @throws DuckException If description field is empty.
      */
-    public void listByFind(String input) throws DuckException {
+    private void listByFind(String input) throws DuckException {
         input = input.substring(4);
 
         String[] statusesByFind = this.taskList.getStatusesByFind(input);
@@ -132,11 +138,12 @@ public class Duck {
      * @param input Input from user.
      * @throws DuckException If index obtained is less than 1 or greater than number of tasks.
      */
-    public void markTaskAsDone(String input) throws DuckException {
+    private void markTaskAsDone(String input) throws DuckException {
         int taskNumber = Parser.parseTaskNumber(input);
         Task task = this.taskList.markDone(taskNumber);
         responses.add("Nice! I've marked this as done");
         responses.add("  " + task.getStatus());
+        save();
     }
 
     /**
@@ -145,13 +152,13 @@ public class Duck {
      * @param input Input from user.
      * @throws DuckException If index obtained is less than 1 or greater than number of tasks.
      */
-    public void deleteTask(String input) throws DuckException {
+    private void deleteTask(String input) throws DuckException {
         int taskNumber = Parser.parseTaskNumber(input);
         Task task = this.taskList.deleteTask(taskNumber);
         responses.add("Noted. I've removed this task");
         responses.add("  " + task.getStatus());
         responses.add(getNumberOfTasks());
-
+        save();
     }
 
     /**
@@ -160,12 +167,13 @@ public class Duck {
      * @param input Input from user.
      * @throws DuckException If input is unable to be parsed into any Task.
      */
-    public void createNewTask(String input) throws DuckException {
+    private void createNewTask(String input) throws DuckException {
         Task newTask = TaskFactory.createTaskFromInput(input);
         this.taskList.addTask(newTask);
         responses.add("Got it. I've added this task");
         responses.add("  " + newTask.getStatus());
         responses.add(getNumberOfTasks());
+        save();
     }
 
 
