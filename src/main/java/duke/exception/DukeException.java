@@ -5,7 +5,7 @@ public class DukeException extends Exception {
         super(msg);
     }
 
-    public static DukeException storageIOException(String message) {
+    public static DukeException storageIoException(String message) {
         return new DukeException("Error! " + message);
     }
 }

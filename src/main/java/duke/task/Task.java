@@ -15,14 +15,14 @@ public abstract class Task {
     }
 
     @Override
-    abstract public String toString();
+    public abstract String toString();
 
     /**
      * Returns the task in a format readable by Storage when loading a save file.
      *
      * @return The task in a Storage readable format.
      */
-    abstract public String toCommand();
+    public abstract String toCommand();
 
     /**
      * Returns true if the dateTime of the task is within the the given time frame.
@@ -32,8 +32,15 @@ public abstract class Task {
      * @param hours The duration of the time frame in hours.
      * @return True or False.
      */
-    abstract public boolean compareTime(LocalDateTime givenDateTime, long hours);
+    public abstract boolean compareTime(LocalDateTime givenDateTime, long hours);
 
+    /**
+     * Returns true if the keyword is in the Task description.
+     * Returns false otherwise.
+     *
+     * @param keyword The given keyword to search for.
+     * @return True or False.
+     */
     public boolean find(String keyword) {
         String pattern = "(.*)" + keyword + "(.*)";
         return text.matches(pattern);

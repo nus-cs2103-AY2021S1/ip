@@ -1,13 +1,5 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.exception.LoadingErrorException;
-import duke.exception.StorageIOException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,10 +8,25 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
+import duke.exception.LoadingErrorException;
+import duke.exception.StorageIoException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
+
+
 public class Storage {
     private ArrayList<Task> list;
     private String filePath;
 
+    /**
+     * Creates a Storage object with the given file path.
+     *
+     * @param filePath The file path where save files are stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.list = new ArrayList<>();
@@ -88,10 +95,10 @@ public class Storage {
      */
     public void save(TaskList tasks) throws DukeException {
         File saveFile = new File(filePath);
-        File parent_directory = saveFile.getParentFile();
+        File parentDirectory = saveFile.getParentFile();
 
-        if (null != parent_directory) {
-            parent_directory.mkdirs();
+        if (null != parentDirectory) {
+            parentDirectory.mkdirs();
         }
 
         try {
@@ -100,7 +107,7 @@ public class Storage {
             fw.write(data);
             fw.close();
         } catch (IOException e) {
-            throw new StorageIOException(e.getMessage());
+            throw new StorageIoException(e.getMessage());
         }
     }
 }

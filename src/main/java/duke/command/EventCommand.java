@@ -1,17 +1,23 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.TaskType;
+import duke.Ui;
 import duke.exception.PastDateTimeException;
-
-import java.time.LocalDateTime;
 
 public class EventCommand extends Command {
     private String task;
     private LocalDateTime dateTime;
 
+    /**
+     * Creates a EventCommand with the given description and date.
+     *
+     * @param task The given description.
+     * @param dateTime The given date.
+     */
     public EventCommand(String task, LocalDateTime dateTime) {
         this.task = task;
         this.dateTime = dateTime;

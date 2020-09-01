@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.exception.EmptyListException;
 import duke.exception.OutOfBoundsException;
@@ -8,9 +11,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
+@SuppressWarnings("ALL")
 public class TaskList {
     private ArrayList<Task> list;
 
@@ -61,6 +62,7 @@ public class TaskList {
             Task nextToDo = new ToDo(task);
             list.add(nextToDo);
             break;
+        default:
         }
     }
 
@@ -154,6 +156,13 @@ public class TaskList {
         return text;
     }
 
+    /**
+     * Finds tasks matching the given keyword.
+     *
+     * @param keyword
+     * @return
+     */
+    @SuppressWarnings("checkstyle:Regexp")
     public String findMatches(String keyword) {
         int i = 0;
         String text = "These tasks contains the keyword: " + keyword;

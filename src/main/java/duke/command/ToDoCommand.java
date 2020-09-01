@@ -2,11 +2,11 @@ package duke.command;
 
 import java.time.LocalDateTime;
 
-import duke.exception.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.TaskType;
+import duke.Ui;
+import duke.exception.DukeException;
 
 public class ToDoCommand extends Command {
     private String task;

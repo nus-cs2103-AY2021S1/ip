@@ -8,6 +8,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke chat bot.
+     *
+     * @param filePath The file path of the Duke save file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

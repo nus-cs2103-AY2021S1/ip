@@ -1,14 +1,20 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 
 public class DueInCommand extends Command {
     private long time;
     private boolean hours;
 
+    /**
+     * Creates a DueInCommand with the given time.
+     *
+     * @param time The given time.
+     * @param hours Boolean to check if time is in hours or days.
+     */
     public DueInCommand(long time, boolean hours) {
         this.time = time;
         this.hours = hours;

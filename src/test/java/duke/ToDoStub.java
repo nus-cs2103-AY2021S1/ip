@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.time.LocalDateTime;
+
+import duke.task.Task;
 
 public class ToDoStub extends Task {
     public ToDoStub(String text) {

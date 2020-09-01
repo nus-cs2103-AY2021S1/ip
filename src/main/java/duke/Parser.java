@@ -1,4 +1,8 @@
 package duke;
+import static java.lang.Integer.parseInt;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -11,7 +15,6 @@ import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
-
 import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidDateTimeException;
@@ -22,11 +25,6 @@ import duke.exception.TypeMismatchException;
 import duke.exception.UnknownCommandException;
 import duke.exception.WrongDateTimeFormatException;
 import duke.exception.WrongDueInFormatException;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-
-import static java.lang.Integer.parseInt;
 
 public class Parser {
 

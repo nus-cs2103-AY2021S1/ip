@@ -8,6 +8,12 @@ public class Event extends Task {
     private LocalDateTime dateTime;
     private String time;
 
+    /**
+     * Creates a Event task with the given description and date.
+     *
+     * @param s The description of the Event task.
+     * @param dateTime The date of the Event task.
+     */
     public Event(String s, LocalDateTime dateTime) {
         super(s);
         this.dateTime = dateTime;

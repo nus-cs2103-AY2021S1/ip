@@ -8,6 +8,12 @@ public class Deadline extends Task {
     private LocalDateTime dateTime;
     private String time;
 
+    /**
+     * Creates a Deadline task with the given description and due date.
+     *
+     * @param s The description of the Deadline task.
+     * @param dateTime The due date of the Deadline task.
+     */
     public Deadline(String s, LocalDateTime dateTime) {
         super(s);
         this.dateTime = dateTime;
