@@ -29,7 +29,7 @@ public class ByeCommand extends Command {
      *
      * @return boolean true to signal exit from Duke program.
      */
-    public boolean exitCheck() {
+    public boolean exitChecker() {
         isExit = true;
         return isExit;
     }

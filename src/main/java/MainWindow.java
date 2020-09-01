@@ -63,7 +63,7 @@ public class MainWindow extends AnchorPane {
 
         userInput.clear();
 
-        if (response.exitCheck()) {
+        if (response.exitChecker()) {
             exit();
         }
         userInput.clear();

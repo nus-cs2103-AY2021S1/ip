@@ -35,7 +35,7 @@ public class Main extends Application {
     @Override
     public void stop() {
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2600);
         } catch (InterruptedException error) {
             error.printStackTrace();
         }

@@ -2,9 +2,9 @@
  * Main driver class for Duke.
  */
 public class Duke {
-    protected Storage storage;
-    protected Ui ui;
-    protected TaskList arrayOfTasks;
+    private Storage storage;
+    private Ui ui;
+    private TaskList arrayOfTasks;
 
     /**
      * Instantiates Duke object.

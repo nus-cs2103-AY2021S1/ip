@@ -29,7 +29,7 @@ public class Response {
      *
      * @return Boolean True if we want to exit, Boolean False if we do not want to exit.
      */
-    public boolean exitCheck() {
+    public boolean exitChecker() {
         return isExit;
     }
 

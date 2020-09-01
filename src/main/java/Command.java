@@ -29,5 +29,5 @@ public abstract class Command {
      *
      * @return boolean True only if command is a ByeCommand.
      */
-    public abstract boolean exitCheck();
+    public abstract boolean exitChecker();
 }

@@ -35,7 +35,7 @@ public class EventCommand extends Command {
      *
      * @return exitCheck as False
      */
-    public boolean exitCheck() {
+    public boolean exitChecker() {
         isExit = false;
         return isExit;
     }
