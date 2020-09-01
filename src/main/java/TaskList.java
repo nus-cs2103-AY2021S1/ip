@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class TaskList {
     private ArrayList<Task> taskList;
 
-    private TaskList() {
+    public TaskList() {
         taskList = new ArrayList<>();
     }
 
