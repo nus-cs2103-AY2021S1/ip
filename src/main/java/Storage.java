@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
 
+/**
+ * Storage deals with loading and saving task list from/ to memory.
+ */
 
 public class Storage{
 	private String filePath;
