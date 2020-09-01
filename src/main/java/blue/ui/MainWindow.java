@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 import blue.Blue;
 import blue.command.CommandResponse;
-import blue.exception.DukeException;
+import blue.exception.BlueException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -98,7 +98,7 @@ public class MainWindow extends AnchorPane {
         try {
             response = this.blue.execute(this.userInput.getText());
             message = response.getMessage();
-        } catch (DukeException ex) {
+        } catch (BlueException ex) {
             message = this.ui.getDukeExceptionMessage(ex);
         }
 

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import blue.exception.DukeException;
+import blue.exception.BlueException;
 import blue.task.Task;
 import blue.task.Tasks;
 
@@ -163,7 +163,7 @@ public class Ui {
      * @param ex the blue exception.
      * @return the blue exception message.
      */
-    public String getDukeExceptionMessage(DukeException ex) {
+    public String getDukeExceptionMessage(BlueException ex) {
         return ex.getMessage();
     }
 }

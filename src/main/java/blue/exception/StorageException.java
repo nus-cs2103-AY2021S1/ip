@@ -3,7 +3,7 @@ package blue.exception;
 /**
  * The Storage exception.
  */
-public class StorageException extends DukeException {
+public class StorageException extends BlueException {
     /**
      * Instantiates a new Storage exception.
      *

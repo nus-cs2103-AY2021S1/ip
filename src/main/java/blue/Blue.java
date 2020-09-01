@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import blue.command.Command;
 import blue.command.CommandResponse;
-import blue.exception.DukeException;
+import blue.exception.BlueException;
 import blue.exception.ReadFailedException;
 import blue.exception.UnknownInputException;
 import blue.task.Tasks;
@@ -70,9 +70,9 @@ public class Blue {
      *
      * @param input the input.
      * @return the response.
-     * @throws DukeException If the input is invalid.
+     * @throws BlueException If the input is invalid.
      */
-    public CommandResponse execute(String input) throws DukeException {
+    public CommandResponse execute(String input) throws BlueException {
         Command command = Parser.parse(input);
         CommandResponse response = command.execute(tasks, ui, storage);
         if (response.isEmpty()) {

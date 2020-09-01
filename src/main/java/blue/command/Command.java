@@ -1,7 +1,7 @@
 package blue.command;
 
 import blue.Storage;
-import blue.exception.DukeException;
+import blue.exception.BlueException;
 import blue.task.Tasks;
 import blue.ui.Ui;
 
@@ -30,7 +30,7 @@ public abstract class Command {
      * @param ui      interacts with user.
      * @param storage loads and save tasks.
      * @return the response to the command.
-     * @throws DukeException If there is a blue exception thrown.
+     * @throws BlueException If there is a blue exception thrown.
      */
-    public abstract CommandResponse execute(Tasks tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract CommandResponse execute(Tasks tasks, Ui ui, Storage storage) throws BlueException;
 }

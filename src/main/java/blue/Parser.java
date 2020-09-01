@@ -11,7 +11,7 @@ import blue.command.FindDateCommand;
 import blue.command.FindDescriptionCommand;
 import blue.command.ListCommand;
 import blue.command.TaskCommand;
-import blue.exception.DukeException;
+import blue.exception.BlueException;
 import blue.exception.EmptyInputException;
 import blue.exception.EmptyTaskException;
 import blue.exception.InvalidInputException;
@@ -37,9 +37,9 @@ public class Parser {
      *
      * @param input the input.
      * @return Command the command.
-     * @throws DukeException If the input cannot be parsed.
+     * @throws BlueException If the input cannot be parsed.
      */
-    public static Command parse(String input) throws DukeException {
+    public static Command parse(String input) throws BlueException {
         String keyword = input.split(" ")[0];
         switch (keyword) {
         case "bye":
