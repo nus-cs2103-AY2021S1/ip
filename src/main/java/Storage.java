@@ -39,29 +39,29 @@ public class Storage {
         }
     }
 
-    /**
-     * When Duke is just started up, it reads from the storage file, goes through each line, each corresponding to a
-     * task, and returns the tasks.
-     *
-     * @return ArrayList of Tasks according to the storage file.
-     */
-    public ArrayList<Task> initializeTasks() {
-        try {
-            File file = new File(filePath);
-            if (!file.exists()) {
-                return new ArrayList<>();
-            }
-            Scanner sc = new Scanner(file);
-            ArrayList<Task> tasks = new ArrayList<>();
-            while (sc.hasNextLine()) {
-                tasks.add(addTaskFromStorage(sc.nextLine()));
-            }
-            return tasks;
-        } catch (IOException | DukeException ex) {
-            Ui.showResponse(ex.getMessage());
-            return new ArrayList<>();
-        }
-    }
+	/**
+	 * When Duke is just started up, it reads from the storage file, goes through each line, each corresponding to a
+	 * task, and returns the tasks.
+	 *
+	 * @return ArrayList of Tasks according to the storage file.
+	 */
+	public ArrayList<Task> initializeTasks() {
+		try {
+			File file = new File(filePath);
+			if (!file.exists()) {
+				return new ArrayList<>();
+			}
+			Scanner sc = new Scanner(file);
+			ArrayList<Task> tasks = new ArrayList<>();
+			while (sc.hasNextLine()) {
+				tasks.add(addTaskFromStorage(sc.nextLine()));
+			}
+			return tasks;
+		} catch (IOException | DukeException ex) {
+			System.out.println(ex.getMessage());
+			return new ArrayList<>();
+		}
+	}
 
     /**
      * Overwrites the current storage file with updated taskList, or creates a new storage file with updated taskList
