@@ -1,9 +1,11 @@
 package duke.command;
 
 import duke.dukeexception.DukeException;
+import duke.dukeexception.WrongDeadlineException;
+
 import duke.Storage;
 import duke.TaskList;
-import duke.dukeexception.WrongDeadlineException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -12,10 +14,23 @@ import duke.task.Todo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Command that adds a task to the user's list when executed.
+ */
 public class AddCommand extends Command {
+    /** Represents the type of the command used by the user */
     private CommandType commandType;
+    /** Additional information needed for executing the command */
     private final String description;
 
+    /**
+     * Public constructor.
+     *
+     * @param commandType Either <code>TODO</code>, <code>Deadline</code>,
+     *                    or <code>Event</code>.
+     * @param description Name of the task (and date and time if
+     *                    <code>Deadline</code> or <code>Event</code>.
+     */
     public AddCommand(CommandType commandType, String description) {
         this.commandType = commandType;
         this.description = description;

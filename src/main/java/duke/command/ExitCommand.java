@@ -3,6 +3,9 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 
+/**
+ * Command that displays a goodbye message and exits(quits) the bot when executed.
+ */
 public class ExitCommand extends Command {
     @Override
     public void execute(TaskList tasks, Storage storage) {

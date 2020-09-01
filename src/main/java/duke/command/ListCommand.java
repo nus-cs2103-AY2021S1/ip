@@ -3,6 +3,9 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 
+/**
+ * Command that displays the user's list of tasks when executed.
+ */
 public class ListCommand extends Command {
 
     @Override

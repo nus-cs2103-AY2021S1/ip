@@ -1,14 +1,25 @@
 package duke.command;
 
 import duke.dukeexception.DukeException;
+import duke.dukeexception.WrongItemIndexException;
+
 import duke.Storage;
 import duke.TaskList;
-import duke.dukeexception.WrongItemIndexException;
+
 import duke.task.Task;
 
+/**
+ * Command that marks a task from the user's list as completed("done") when executed.
+ */
 public class DoneCommand extends Command {
+    /** A string representation of the number corresponding to the task to be marked */
     private final String description;
 
+    /**
+     * Public constructor.
+     * @param description String representation of the number
+     *                    corresponding to the task to be marked.
+     */
     public DoneCommand(String description) {
         this.description = description;
     }
