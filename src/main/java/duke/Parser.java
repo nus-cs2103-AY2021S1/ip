@@ -89,7 +89,7 @@ public class Parser {
         } else {
             Task task = null;
             if (inputString.indexOf("todo") == 0) {
-                if (inputString.length() == 4 || inputString.length() == 5  && inputString.indexOf(" ") == 4) {
+                if (inputString.length() == 4 || inputString.length() == 5 && inputString.indexOf(" ") == 4) {
                     throw new DukeException("Hey! Your Todo is empty >:(");
                 } else if (inputString.indexOf(" ") != 4) {
                     throw new DukeException("What are you even saying?!");
@@ -97,7 +97,8 @@ public class Parser {
                     task = new Todo(inputString.substring(5));
                 }
             } else if (inputString.indexOf("deadline") == 0) {
-                if (!inputString.contains(" /by ") || inputString.substring(inputString.indexOf(" /by ")).length() == 5) {
+                if (!inputString.contains(" /by ")
+                        || inputString.substring(inputString.indexOf(" /by ")).length() == 5) {
                     throw new DukeException("Oi, when is this deadline due??");
                 }
                 int byIndex = inputString.indexOf(" /by ");

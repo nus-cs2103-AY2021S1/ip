@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -77,7 +76,7 @@ public class Storage {
 
     /**
      * Saves into the txt file, located in the path specified when creating the storage object, a list of tasks which
-     * is obtained from the supplied ArrayList<String> parameter. The old txt file is overwritten as a result. Call this
+     * is obtained from the supplied ArrayList parameter. The old txt file is overwritten as a result. Call this
      * method only after calling processData.
      *
      * @param finalLines the list of tasks to be saved

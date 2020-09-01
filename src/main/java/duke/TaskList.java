@@ -7,7 +7,7 @@ public class TaskList {
     private int numberOfItems;
 
     /**
-     * The constructor for the TaskList object. It takes in an ArrayList<String> which would be manipulated using the
+     * The constructor for the TaskList object. It takes in an ArrayList of Strings which would be manipulated using the
      * methods in the object. It also stores the number of items in said ArrayList and the number gets updated with
      * certain TaskList methods. This is to reduce the number of calls to ArrayList.size().
      *
