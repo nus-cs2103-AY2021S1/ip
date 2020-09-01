@@ -11,28 +11,28 @@ import duke.task.TaskList;
 public class Ui {
     private static final String INDENTATION = "    ";
 
-    private void print(String message) {
+    public void printToScreen(String message) {
         System.out.println(message);
     }
 
     /**
      * Prints greetings to users upon opening Duke.
      */
-    public void greetings() {
+    public String greetings() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String sentence = "Hola! Duke reporting for duty\nWhat can I do for you sir?";
-        print(logo + sentence);
+        return logo + sentence;
     }
 
     /**
      * Prints farewell to the users when they stop using Duke.
      */
-    public void goodBye() {
-        print("Bye Master. Hope to see you again soon!");
+    public String goodBye() {
+        return "Bye Master. Hope to see you again soon!";
     }
 
     /**
@@ -61,10 +61,10 @@ public class Ui {
      * Prints out response to users when they mark a task as done.
      * @param task The task that is marked as done.
      */
-    public void markTaskAsDone(Task task) {
+    public String markTaskAsDone(Task task) {
         String result = "Nice! I've marked this task as done:\n";
         result += indentMessage(task.toString());
-        print(result);
+        return result;
     }
 
     /**
@@ -73,12 +73,12 @@ public class Ui {
      * @param task The task that is being added/deleted from the task list.
      * @param taskList The task list of the user.
      */
-    private void taskListModify(String message, Task task, TaskList taskList) {
+    private String taskListModify(String message, Task task, TaskList taskList) {
         String newTaskListLength = "Now you have " + taskList.getSize() + " items in the list";
         String taskDescription = indentMessage(task.toString());
         String[] strings = {message, taskDescription, newTaskListLength};
         String result = buildMessage(strings);
-        print(result);
+        return result;
     }
 
     /**
@@ -86,8 +86,8 @@ public class Ui {
      * @param task The task to be added.
      * @param taskList The user's task list.
      */
-    public void uiAddTask(Task task, TaskList taskList) {
-        taskListModify("Got it. I've added this task: ", task, taskList);
+    public String uiAddTask(Task task, TaskList taskList) {
+        return taskListModify("Got it. I've added this task: ", task, taskList);
     }
 
     /**
@@ -95,15 +95,15 @@ public class Ui {
      * @param task The task to be deleted.
      * @param taskList The user's task list.
      */
-    public void uiDeleteTask(Task task, TaskList taskList) {
-        taskListModify("Noted. I've removed this task: ", task, taskList);
+    public String uiDeleteTask(Task task, TaskList taskList) {
+        return taskListModify("Noted. I've removed this task: ", task, taskList);
     }
 
     /**
      * Prints out the task list containing all the tasks having a certain keyword.
      * @param taskList Task list that contains all the tasks having a certain keyword,
      */
-    public void printMatchingList(TaskList taskList) {
+    public String getMatchingList(TaskList taskList) {
         String result = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < taskList.getSize(); i++) {
             int taskNumber = i + 1;
@@ -111,14 +111,14 @@ public class Ui {
                     + (i == taskList.getSize() - 1 ? "" : "\n");
             result = result + taskNumber + "." + indentMessage(taskDescription);
         }
-        print(result);
+        return result;
     }
 
     /**
      * Prints out the full task list to the user.
      * @param taskList The user's task list.
      */
-    public void printFullList(TaskList taskList) {
+    public String getFullList(TaskList taskList) {
         String result = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.getSize(); i++) {
             int taskNumber = i + 1;
@@ -126,7 +126,7 @@ public class Ui {
                     + (i == taskList.getSize() - 1 ? "" : "\n");
             result = result + taskNumber + "." + indentMessage(taskDescription);
         }
-        print(result);
+        return result;
     }
 
     /**
@@ -134,6 +134,6 @@ public class Ui {
      * @param error The error to be printed.
      */
     public void printError(DukeException error) {
-        print(error.toString());
+        printToScreen(error.toString());
     }
 }

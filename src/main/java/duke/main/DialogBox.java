@@ -1,11 +1,16 @@
 package duke.main;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.geometry.Insets;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -14,21 +19,22 @@ import javafx.scene.paint.Color;
 
 
 public class DialogBox extends HBox {
-    private Label text;
+    @FXML
+    private Label dialog;
+    @FXML
     private ImageView displayPicture;
 
-    public DialogBox(Label l, ImageView iv) {
-        this.text = l;
-        this.displayPicture = iv;
-
-        text.setWrapText(true);
-        displayPicture.setFitHeight(100.0);
-        displayPicture.setFitWidth(100.0);
-
-        l.setPadding(new Insets(0, 10, 0, 0));
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.setPadding(new Insets(10, 0, 10, 0));
-        this.getChildren().addAll(text, displayPicture);
+    public DialogBox(String text, Image displayPicture) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.dialog.setText(text);
+        this.displayPicture.setImage(displayPicture);
     }
 
     private void setBackgroundColor(Color color) {
@@ -45,16 +51,15 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        DialogBox db = new DialogBox(l, iv);
+    public static DialogBox getUserDialog(String text, Image image) {
+        DialogBox db = new DialogBox(text, image);
         db.setBackgroundColor(Color.GREEN);
         return db;
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        DialogBox dukeBox = new DialogBox(l, iv);
+    public static DialogBox getDukeDialog(String text, Image image) {
+        DialogBox dukeBox = new DialogBox(text, image);
         dukeBox.flip();
-        dukeBox.text.setPadding(new Insets(0, 0, 0, 10));
         dukeBox.setBackgroundColor(Color.YELLOW);
         return dukeBox;
     }
