@@ -77,7 +77,17 @@ public class Parser {
             ui.printMessage("I have removed this task:\n" + taskList.getTask(taskToDelete)
                     + String.format("\nNow you have %d tasks in the list", taskList.getTaskList().size() - 1));
             taskList.deleteTask(taskToDelete);
-        } else {
+        } else if (userInput.startsWith("find")) {
+            String keyword = userInput.replace("find ", "");
+            String message = "Here are the matching tasks in your list\n";
+            for (Task task : taskList.getTasks()) {
+                if (task.description.contains(keyword)) {
+                    message += task.toString() + "\n";
+                }
+            }
+            ui.printMessage(message);
+        }
+        else {
             System.out.println(new InvalidInputException());
         }
     }
