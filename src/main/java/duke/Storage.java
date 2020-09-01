@@ -37,7 +37,7 @@ public class Storage {
             List<String> data = tasks.stream().map(Task::toSaveData).collect(Collectors.toList());
             Files.write(this.filePath, data);
         } catch (IOException e) {
-            throw new DukeException("Unable to save file! Exiting without saving :-(");
+            throw new DukeException("Unable to save file! Task will not be saved on exit.");
         }
     }
 

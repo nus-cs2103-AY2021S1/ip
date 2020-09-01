@@ -48,6 +48,7 @@ public class AddCommand extends Command {
         ui.showPrompt("Got it. I've added this task:\n  "
                 + task + "\n" + "Now you have " + taskList.getTasks().size()
                 + (taskList.getTasks().size() == 1 ? " task" : " tasks") + " in the list.");
+        storage.save(taskList.getTasks());
     }
 
     @Override
