@@ -48,14 +48,7 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
-    void handleExit(String input) {
-        String response = duke.getResponse(input);
-        System.out.println(response);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
+    void exitStage() {
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException ignored) {
@@ -75,10 +68,10 @@ public class MainWindow extends AnchorPane {
 
         Command command = Parser.parse(input);
 
+        handleGeneralUserInput(input);
+
         if (command instanceof ExitCommand) {
-            handleExit(input);
-        } else {
-            handleNonExitUserInput(input);
+            exitStage();
         }
     }
 
@@ -86,7 +79,7 @@ public class MainWindow extends AnchorPane {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleNonExitUserInput(String input) {
+    private void handleGeneralUserInput(String input) {
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
