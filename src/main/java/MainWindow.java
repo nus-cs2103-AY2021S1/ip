@@ -56,5 +56,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getMugDialog(response, mugImage)
         );
         userInput.clear();
+        if (input.toUpperCase().equals("BYE")) {
+            userInput.setPromptText("Text field has been disabled. Hope to see you soon!!");
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+        }
     }
 }

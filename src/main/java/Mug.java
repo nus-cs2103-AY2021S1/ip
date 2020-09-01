@@ -27,7 +27,7 @@ public class Mug {
         while (sc.hasNext()) {
             String input = sc.nextLine();
             System.out.println(this.ui.readCommand(input, this.tasks));
-            if (input.trim().equals("bye")) {
+            if (input.trim().toUpperCase().equals("BYE")) {
                 break;
             }
         }
