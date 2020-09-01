@@ -1,10 +1,9 @@
-import duke.resource.Parser;
-import duke.resource.TaskList;
-import duke.util.DukeException;
-
 import duke.Command;
 import duke.Storage;
 import duke.Ui;
+import duke.resource.Parser;
+import duke.resource.TaskList;
+import duke.util.DukeException;
 
 /**
  * Duke is a bot that functions as a user's task manager.
@@ -52,7 +51,12 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args){
+    /**
+     * Creates a new Duke object and runs it, starting the entire chat-bot.
+     * @param args input arguments for main; unused
+     */
+
+    public static void main(String[] args) {
         // change the filePath below to save elsewhere
         new Duke("./src/main/data/duke.txt").run();
     }
