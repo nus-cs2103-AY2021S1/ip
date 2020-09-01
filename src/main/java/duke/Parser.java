@@ -4,7 +4,6 @@ import duke.command.*;
 /**
  * Handles the main logic of inputs and what Command to execute.
  */
-
 public class Parser {
 
     /**
