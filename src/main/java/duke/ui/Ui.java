@@ -23,7 +23,7 @@ public class Ui {
     public String format(List<String> strings) {
         String res = "";
         for(String s: strings) {
-            res += s;
+            res = res + s + "\n";
         }
         return res;
     }

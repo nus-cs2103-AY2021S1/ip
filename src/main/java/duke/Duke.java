@@ -31,8 +31,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage =new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     // constructor
     public Duke() {
@@ -52,6 +52,10 @@ public class Duke extends Application {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        Label greeting = new Label(ui.greet());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greeting, new ImageView(dukeImage))
+        );
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -119,8 +123,8 @@ public class Duke extends Application {
         Label userText = new Label(input);
         Label dukeText = new Label(output);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(userImage)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
         );
 
         userInput.clear();
