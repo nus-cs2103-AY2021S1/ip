@@ -3,18 +3,25 @@ list
 bye
 */
 package duke;
+
 /**
  * The main driver of the program
  */
-public class Duke{
+public class Duke {
     /**
      * The entry point to the program
      */
-//    public static void main(String[] args) {
-//        TaskList taskList = new TaskList();
-//        Ui.init();
-//        Ui.greet();
-//        Parser parser = new Parser(taskList);
-//        parser.run();
-//    }
+    private final TaskList taskList;
+    private final Parser parser;
+
+    public Duke() {
+        taskList = new TaskList();
+        Ui.init();
+        Ui.greet();
+        parser = new Parser(taskList);
+    }
+
+    public String getResponse(String input) {
+        return parser.run(input);
+    }
 }
