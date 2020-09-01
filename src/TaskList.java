@@ -11,10 +11,6 @@ public class TaskList {
         this.arr = new ArrayList<Task>();
     }
 
-    /**
-     * Method returning the array variable.
-     * @return
-     */
     public ArrayList<Task> getArr() {
         return arr;
     }
