@@ -1,11 +1,11 @@
 package duke.tool;
 
+import java.time.LocalDateTime;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
-
-import java.time.LocalDateTime;
 
 /**
  * Handles different command.
@@ -14,7 +14,6 @@ public class Command {
 
     /**
      * Handles invalid user input.
-     * 
      * @throws DukeException exception indicating invalid input.
      */
     public void invalidInput() throws DukeException {
@@ -23,7 +22,6 @@ public class Command {
 
     /**
      * Marks task as done.
-     * 
      * @param num index.
      * @param taskList a list of tasks.
      * @throws DukeException indicates that the task is not found.
@@ -45,7 +43,6 @@ public class Command {
 
     /**
      * Lists all the tasks in the list.
-     * 
      * @param taskList a list of tasks.
      */
     public void list(TaskList taskList) {
@@ -61,7 +58,6 @@ public class Command {
 
     /**
      * Deletes a task from the list.
-     * 
      * @param num index of the task.
      * @param taskList a list of tasks.
      * @throws DukeException indicates that the task is not found.
@@ -84,7 +80,6 @@ public class Command {
 
     /**
      * Handles to-do task.
-     * 
      * @param instruction to-do instructions
      * @param taskList a list of tasks.
      * @param ui handles system output.
@@ -94,7 +89,7 @@ public class Command {
         if (instruction.substring(4).isBlank()) {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
-                    + "    You can do it by adding description after 'todo '." + emoji ;
+                    + "    You can do it by adding description after 'todo '." + emoji;
             throw new DukeException(exceptionMsg);
         }
         String toDoTitle = instruction.substring(5);
@@ -105,7 +100,6 @@ public class Command {
 
     /**
      * Handles deadline task.
-     * 
      * @param instruction deadline-instructions.
      * @param taskList a list of tasks.
      * @param ui
@@ -113,11 +107,10 @@ public class Command {
      */
     public void handleDeadline(String instruction, TaskList taskList, Ui ui) throws DukeException {
         int index = instruction.indexOf("/by");
-        
         if (index == 8) {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
-                    + "    You can do it by adding description after 'event '." + emoji ;
+                    + "    You can do it by adding description after 'event '." + emoji;
             throw new DukeException(exceptionMsg);
         }
 
@@ -127,28 +120,28 @@ public class Command {
             if (description.isBlank()) {
                 String emoji = Emoji.SMILE.toString();
                 String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
-                        + "    You can do it by adding description after 'deadline '." + emoji ;
+                        + "    You can do it by adding description after 'deadline '." + emoji;
                 throw new DukeException(exceptionMsg);
             } else if (by.isBlank()) {
                 String emoji = Emoji.SMILE.toString();
                 String exceptionMsg = "OOPS!!! I'm sorry, but the deadline cannot be empty. \n"
-                        + "    You can do it by adding deadline after '/by '." + emoji ;
+                        + "    You can do it by adding deadline after '/by '." + emoji;
                 throw new DukeException(exceptionMsg);
             }
-            Deadline deadline = new Deadline(description, LocalDateTime.parse(by.substring(1), Parser.validFormat), false);
+            Deadline deadline = new Deadline(
+                    description, LocalDateTime.parse(by.substring(1), Parser.getValidFormat()), false);
             taskList.addDeadline(deadline);
             ui.printAddedDdl(taskList, deadline);
         } else {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but you have to indicate the deadline. \n"
-                    + "    You can do it by adding '/by' after the description." + emoji ;
+                    + "    You can do it by adding '/by' after the description." + emoji;
             throw new DukeException(exceptionMsg);
         }
     }
 
     /**
      * Handles event.
-     * 
      * @param instruction event-instruction.
      * @param taskList a list of tasks.
      * @param ui Handles system output.
@@ -156,42 +149,40 @@ public class Command {
      */
     public void handleEvent(String instruction, TaskList taskList, Ui ui) throws DukeException {
         int index = instruction.indexOf("/at");
-        
         if (index == 5) {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
-                    + "    You can do it by adding description after 'event '." + emoji ;
+                    + "    You can do it by adding description after 'event '." + emoji;
             throw new DukeException(exceptionMsg);
         }
-        
         if (index != -1) {
             String time = instruction.substring(index + 3);
             String description = instruction.substring(6, index);
             if (description.isBlank()) {
                 String emoji = Emoji.SMILE.toString();
                 String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
-                        + "    You can do it by adding description after 'event '." + emoji ;
+                        + "    You can do it by adding description after 'event '." + emoji;
                 throw new DukeException(exceptionMsg);
             } else if (time.isBlank()) {
                 String emoji = Emoji.SMILE.toString();
                 String exceptionMsg = "OOPS!!! I'm sorry, but the time cannot be empty. \n"
-                        + "    You can do it by adding time after '/at '." + emoji ;
+                        + "    You can do it by adding time after '/at '." + emoji;
                 throw new DukeException(exceptionMsg);
             }
-            Event event = new Event(description, LocalDateTime.parse(time.substring(1), Parser.validFormat), false);
+            Event event = new Event(description, LocalDateTime.parse(
+                    time.substring(1), Parser.getValidFormat()), false);
             taskList.addEvent(event);
             ui.printAddedEvent(taskList, event);
         } else {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but you have to indicate the time of the event. \n"
-                    + "    You can do it by adding '/at' after the description." + emoji ;
+                    + "    You can do it by adding '/at' after the description." + emoji;
             throw new DukeException(exceptionMsg);
         }
     }
 
     /**
      * Finds a task by searching for a keyword.
-     * 
      * @param taskList a list of tasks.
      * @param input find instructions.
      * @throws DukeException indicates that the instruction is empty.
@@ -200,7 +191,7 @@ public class Command {
         if (input.length() == 4) {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
-                    + "    You can do it by adding description after 'find '." + emoji ;
+                    + "    You can do it by adding description after 'find '." + emoji;
             throw new DukeException(exceptionMsg);
         } else {
             String query = input.substring(5);
@@ -215,6 +206,5 @@ public class Command {
             }
             System.out.println("    ____________________________________________________________\n");
         }
-    } 
-    
+    }
 }

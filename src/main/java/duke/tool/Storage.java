@@ -1,6 +1,6 @@
 package duke.tool;
 
-import duke.task.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,18 +8,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Loads and writes data to data.txt.
  */
 public class Storage {
-    
     private String filePath;
 
     /**
      * Constructs a storage class.
-     * 
      * @param filePath path of the file
      */
     public Storage(String filePath) {
@@ -28,7 +30,6 @@ public class Storage {
 
     /**
      * Finds the index of nth occurrence of a string.
-     * 
      * @param str input string
      * @param target target string
      * @param n nth occurrence.
@@ -36,14 +37,14 @@ public class Storage {
      */
     public static int ordinalIndexOf(String str, String target, int n) {
         int pos = str.indexOf(target);
-        while (--n > 0 && pos != -1)
+        while (--n > 0 && pos != -1) {
             pos = str.indexOf(target, pos + 1);
+        }
         return pos;
     }
 
     /**
      * Loads the data from the file.
-     * 
      * @return a list of tasks containing all the data.
      */
     public ArrayList<Task> load() {
@@ -94,7 +95,6 @@ public class Storage {
 
     /**
      * Writes a list of tasks into the file.
-     * 
      * @param taskList a list of tasks.
      */
     public void writeData(ArrayList<Task> taskList) {
@@ -108,5 +108,4 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
-    
 }

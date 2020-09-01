@@ -1,11 +1,13 @@
-import duke.tool.*;
-import duke.task.*;
+import duke.task.TaskList;
+import duke.tool.Command;
+import duke.tool.Parser;
+import duke.tool.Storage;
+import duke.tool.Ui;
 
 /**
  * Represents Duke, a task scheduling bot.
  */
 public class Duke {
-    
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -14,7 +16,6 @@ public class Duke {
 
     /**
      * Constructs a new Duke object.
-     * 
      * @param filePath path of file storing the data.
      */
     public Duke(String filePath) {

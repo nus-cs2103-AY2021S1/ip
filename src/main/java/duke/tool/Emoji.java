@@ -8,16 +8,18 @@ public enum Emoji {
     CHICKEN(0x1F423),
     ERROR(0x1F616),
     SMILE(0x1F609);
-    
     private final int code;
 
     /**
      * Constructs an emoji object.
-     * 
      * @param emoji unicode of the emoji.
      */
     private Emoji(int emoji) {
         this.code = emoji;
+    }
+
+    public int getCode() {
+        return code;
     }
 
     @Override

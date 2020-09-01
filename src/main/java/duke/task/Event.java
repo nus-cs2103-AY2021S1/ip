@@ -7,12 +7,10 @@ import java.time.format.DateTimeFormatter;
  * Represents an event object with timing.
  */
 public class Event extends Task {
-    
     protected LocalDateTime time;
 
     /**
      * Constructs an event object.
-     * 
      * @param description title of the event.
      * @param time time of event happening time.
      * @param isDone status.
@@ -30,11 +28,11 @@ public class Event extends Task {
 
     /**
      * Represents the string written into data.txt.
-     * 
      * @return A string written into the data.txt.
      */
     @Override
     public String toWrite() {
-        return "E | " + (this.isDone ? '1' : '0')  + " | " + this.taskDescription + "| " + this.time.toString().replace('T', ' ');
+        return "E | " + (this.isDone ? '1' : '0') + " | " + this.taskDescription
+                + "| " + this.time.toString().replace('T', ' ');
     }
 }

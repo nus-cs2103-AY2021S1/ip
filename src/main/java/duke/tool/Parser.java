@@ -1,19 +1,22 @@
 package duke.tool;
 
-import duke.task.TaskList;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import duke.task.TaskList;
 
 /**
  * Parses the user input into command.
  */
 public class Parser {
-    
-    public static DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    public static DateTimeFormatter getValidFormat() {
+        return validFormat;
+    }
 
     /**
      * Parses the user input into different commands.
-     * 
      * @param storage class containing the data.
      * @param ui handles system output.
      * @param taskList a list of tasks.
@@ -54,6 +57,4 @@ public class Parser {
             }
         }
     }
-
-    
 }

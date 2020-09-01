@@ -1,17 +1,16 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
     @Test
     public void dummyTest() {
         assertEquals(2, 2);
     }
-    
     @Test
     public void getCountTest() {
         ArrayList<Task> taskList = new ArrayList<>(100);
@@ -20,5 +19,4 @@ public class TaskListTest {
         String expected = "    Now you have 0 tasks in the list.";
         assertEquals(expected, actualOutput);
     }
-    
 }

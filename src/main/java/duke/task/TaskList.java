@@ -6,29 +6,24 @@ import java.util.ArrayList;
  * Represents the list containing all the tasks.
  */
 public class TaskList {
-    
     protected ArrayList<Task> taskList;
 
     /**
      * Constructs a TaskList object.
-     * 
      * @param taskList a list of tasks
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
-    
     public TaskList() {
         this.taskList = new ArrayList<>(100);
     }
-    
     public ArrayList<Task> getList() {
         return this.taskList;
     }
 
     /**
      * Counts the number of tasks in the list.
-     * 
      * @return number of tasks in the list in string format
      */
     public String countNum() {
@@ -38,7 +33,6 @@ public class TaskList {
 
     /**
      * Counts the number of tasks in the list.
-     * 
      * @return number of tasks in the list.
      */
     public int getSize() {
@@ -47,7 +41,6 @@ public class TaskList {
 
     /**
      * Gets a specific task from the list.
-     * 
      * @param num index.
      * @return task at index num.
      */
@@ -57,7 +50,6 @@ public class TaskList {
 
     /**
      * Removes a specific task from the list.
-     * 
      * @param num index.
      */
     public void remove(int num) {
@@ -66,7 +58,6 @@ public class TaskList {
 
     /**
      * Adds a new To-do task to the list.
-     * 
      * @param newToDo new to-do item.
      */
     public void addToDo(Todo newToDo) {
@@ -75,7 +66,6 @@ public class TaskList {
 
     /**
      * Adds a new deadline task to the list.
-     * 
      * @param newDdl new deadline.
      */
     public void addDeadline(Deadline newDdl) {
@@ -84,7 +74,6 @@ public class TaskList {
 
     /**
      * Adds a new event task to the list.
-     * 
      * @param newEvent new event.
      */
     public void addEvent(Event newEvent) {

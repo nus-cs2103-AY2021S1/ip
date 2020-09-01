@@ -36,7 +36,6 @@ public class Ui {
 
     /**
      * Outputs the number of tasks.
-     * 
      * @param i number of tasks.
      */
     public void sendCount(int i) {
@@ -45,7 +44,6 @@ public class Ui {
 
     /**
      * Prints the newly added to-do item.
-     * 
      * @param tl a list of tasks.
      * @param todo a to-do item.
      */
@@ -60,7 +58,6 @@ public class Ui {
 
     /**
      * Prints the newly added deadline item.
-     * 
      * @param tl a list of tasks.
      * @param ddl a deadline item.
      */
@@ -75,7 +72,6 @@ public class Ui {
 
     /**
      * Prints the newly added event item.
-     * 
      * @param tl a list of tasks.
      * @param event a event item.
      */

@@ -7,7 +7,6 @@ public class Todo extends Task {
 
     /**
      * Constructs a to-do item.
-     * 
      * @param description title of the task.
      * @param isDone status.
      */
@@ -22,7 +21,6 @@ public class Todo extends Task {
 
     /**
      * Represents the string written into data.txt.
-     * 
      * @return A string written into the data.txt.
      */
     @Override
