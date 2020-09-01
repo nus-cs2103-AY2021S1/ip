@@ -1,5 +1,5 @@
-T | 1 | borrow books
-D | 0 | Chemistry Quiz| Mon, Aug 24 2020
-T | 0 | Study quiz
-T | 0 | Go and buy bottle
-E | 0 | Housewarming | Wed, Sep 02 2020 07:20 PM
+T | 0 | book hotel
+T | 0 | study quiz
+D | 0 | Project OP| Tue, Sep 01 2020
+E | 0 | Homecoming| Sat, Sep 19 2020 09:30 AM
+E | 0 | exam | Tue, Sep 15 2020 10:30 AM

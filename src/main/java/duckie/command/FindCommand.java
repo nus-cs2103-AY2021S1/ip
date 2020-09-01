@@ -37,7 +37,7 @@ public class FindCommand extends Command {
         } else {
             int index = 1;
             String output = "Quack! Duckie found these matching tasks: \n";
-            for (Task task : tasks.getTaskList()) {
+            for (Task task : filteredList) {
                 output += index + ". " + task + "\n";
                 index++;
             }
