@@ -1,28 +1,32 @@
 package duke.main;
 
 public class Duke {
-    private final Ui ui;
+    private final Parser parser;
     private final TaskList taskList;
     private final Storage storage;
 
-    private Duke(String filePath) {
-        this.storage = new Storage(filePath);
+    /**
+     * Constructs a Duke object that reads data from the default file path.
+     * The file path is taken to be data/tasks.txt
+     */
+    public Duke() {
+        this.storage = new Storage("data/tasks.txt");
         this.taskList = storage.getTasksFromFile();
-        this.ui = new Ui(taskList);
+        this.parser = new Parser(taskList);
     }
 
+    public String getResponse(String input) {
+        if (input.equals("bye")) {
+            storage.write(taskList);
+            return "All changes saved!";
+        }
+        return parser.parse(input);
+    }
+
+    /*
     private void run() {
         ui.run();
         storage.write(taskList);
     }
-
-    /**
-     * Runs Duke chat-bot.
-     * It first initialises by reading a saved list of tasks in data/tasks.txt.
-     *
-     * @param args
      */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
 }
