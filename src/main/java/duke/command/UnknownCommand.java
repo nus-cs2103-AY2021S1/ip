@@ -21,11 +21,10 @@ public class UnknownCommand extends Command {
      * @param tasks taskList that stores Task objects
      * @param ui Ui that handles input and output to User
      * @param storage storage storage that handles data storage
-     * @throws DukeException DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        throw new DukeException("I'm sorry, but I don't know what that means!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "I'm sorry, but I don't know that that means!";
     }
 
     /**
