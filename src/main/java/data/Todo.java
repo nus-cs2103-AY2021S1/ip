@@ -10,7 +10,7 @@ public class Todo extends Task {
 
     public static Todo newTodo(String body) throws ChatbotException {
         if (body.length() == 0) {
-            throw new ChatbotException("Ooopsss (>.>) Todo task cannot be empty!!");
+            throw new ChatbotException("Todo task cannot be empty.");
         }
 
         return new Todo(body, false);

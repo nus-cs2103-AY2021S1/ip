@@ -23,18 +23,23 @@ public class ShowCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+
+        String response = "";
+
         switch (type) {
         case LIST:
-            ui.list(taskList.getTasks());
+            response = ui.list(taskList.getTasks());
             break;
         case DATE:
             ArrayList<Task> tasks = taskList.retrieveTasksOnDate(
                     LocalDate.parse(body));
-            ui.list(tasks);
+            response = ui.list(tasks);
             break;
         default:
             break;
         }
+
+        return response;
     }
 }

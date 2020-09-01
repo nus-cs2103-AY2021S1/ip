@@ -15,36 +15,11 @@ public class Ui {
 
     Scanner sc;
 
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
-
-    private void display(String message) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    " + message);
-        System.out.println("    ____________________________________________________________");
-    }
-
     /**
      * Prints out a welcome message.
      */
-    public void greet() {
-        System.out.println(
-                "   ####################################################\n" +
-                        "   #                                                  #\n" +
-                        "   #  Hey there, I'm Hanry Kun the impatient ChatBot. #\n" +
-                        "   #  What can I do for you? (-.-)                    #\n" +
-                        "   #                                                  #\n" +
-                        "   ####################################################"
-        );
-    }
-
-    /**
-     * Reads in the command given by the user.
-     * @return the user command
-     */
-    public String readCommand() {
-        return sc.nextLine();
+    public String greet() {
+        return "Hey there, I'm Fukuyama Masaharu the 24/7 Chatbot. What can I do for you (deep voice).";
     }
 
     /**
@@ -52,9 +27,9 @@ public class Ui {
      * @param task task added
      * @param count current number of tasks in the task list
      */
-    public void addSuccess(Task task, int count) {
-        display("Got it. I've added this task:\n        " + task +
-                String.format("\n    Now you have %d task(s) in the list.", count));
+    public String addSuccess(Task task, int count) {
+        return "Got it. I've added this task:\n" + task + "\n" +
+                String.format("Now you have %d task(s) in the list.", count);
     }
 
     /**
@@ -62,50 +37,43 @@ public class Ui {
      * @param task task deleted
      * @param count current number of tasks in the task list
      */
-    public void deleteSuccess(Task task, int count) {
-        display("Alright. I've removed this task:\n        " + task +
-                String.format("\n    Now you have %d task(s) in the list.", count));
+    public String deleteSuccess(Task task, int count) {
+        return "Alright. I've removed this task:\n" + task + "\n" +
+                String.format("Now you have %d task(s) in the list.", count);
     }
 
     /**
      * Prints out a success message for marking a task as done.
      * @param task task marked as done
      */
-    public void markDoneSuccess(Task task) {
-        display("Nice! I've marked this task as done:\n    " +
-                "    " + task);
+    public String markDoneSuccess(Task task) {
+        return "Nice! I've marked this task as done:\n" + task;
     }
 
     /**
      * Prints out the given error message.
      * @param message the error message
      */
-    public void showErrorMessage(String message) {
-        display(message);
+    public String errorMessage(String message) {
+        return message;
     }
 
     /**
      * List out the given tasks.
      * @param ls list of tasks
      */
-    public void list(ArrayList<Task> ls) {
-        System.out.println("    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("    ######################## Your Tasks ########################");
-        System.out.println("    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public String list(ArrayList<Task> ls) {
 
-        if (ls.size() == 0 ) {
-            System.out.println("    No task here.");
-            return;
-        }
+        int index = 1;
+        String response = "";
 
         Iterator<Task> iter = ls.iterator();
-        int index = 1;
 
         while (iter.hasNext()) {
-            System.out.println("    " + index + ". " + iter.next());
+            response += index + ". " + iter.next() + "\n";
             index++;
         }
 
-        System.out.println("    - End of list -");
+        return response;
     }
 }

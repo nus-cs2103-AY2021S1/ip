@@ -23,24 +23,27 @@ public class AddCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException {
+
+        String response = "";
+
         switch (type) {
         case TODO:
             Todo task = Todo.newTodo(body);
             if (taskList.addTask(task)) {
-                ui.addSuccess(task, taskList.count());
+                response = ui.addSuccess(task, taskList.count());
             }
             break;
         case DEADLINE:
             Deadline deadline = Deadline.newDeadline(body);
             if (taskList.addTask(deadline)) {
-                ui.addSuccess(deadline, taskList.count());
+                response = ui.addSuccess(deadline, taskList.count());
             }
             break;
         case EVENT:
             Event event = Event.newEvent(body);
             if (taskList.addTask(event)) {
-                ui.addSuccess(event, taskList.count());
+                response = ui.addSuccess(event, taskList.count());
             }
             break;
         default:
@@ -48,5 +51,7 @@ public class AddCommand extends Command {
         }
 
         storage.saveTasks(taskList.getTasks());
+
+        return response;
     }
 }

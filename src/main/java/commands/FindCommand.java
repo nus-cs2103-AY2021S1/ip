@@ -16,7 +16,7 @@ public class FindCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.list(taskList.find(body));
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.list(taskList.find(body));
     }
 }

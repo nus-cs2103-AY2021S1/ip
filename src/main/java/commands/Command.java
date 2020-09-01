@@ -19,5 +19,5 @@ public abstract class Command {
      * @param storage the Storage object for persistence
      * @throws ChatbotException if execution unsuccessful
      */
-    abstract public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException;
+    abstract public String execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException;
 }

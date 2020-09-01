@@ -55,8 +55,7 @@ public class Parser {
     }
 
     private static void parseError() throws ChatbotException {
-        throw new ChatbotException("Arghh! I do not know what you mean, are you using the right\n    " +
-                "commands?");
+        throw new ChatbotException("I'm not sure what you mean.");
     }
 
 }

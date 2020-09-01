@@ -15,7 +15,7 @@ public class Deadline extends Task {
 
     public static Deadline newDeadline(String raw) throws ChatbotException {
         if (raw.length() == 0) {
-            throw new ChatbotException("Deadline cannot be empty!!");
+            throw new ChatbotException("Oh no no, deadline shouldn't be empty.");
         }
 
         String description = raw.split("/by")[0].trim();
@@ -25,7 +25,7 @@ public class Deadline extends Task {
             String dateString = raw.split("/by")[1].trim();
             timestamp = LocalDate.parse(dateString);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new ChatbotException("Deadline? By when??!!");
+            throw new ChatbotException("When is your task due?");
         } catch (DateTimeParseException e) {
             throw new ChatbotException(Message.INVALID_DATE);
         }

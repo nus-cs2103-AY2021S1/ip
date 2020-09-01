@@ -15,33 +15,35 @@ public class Chatbot {
     private static Storage taskStorage;
     private static Ui ui;
 
-    public static void main(String[] args) {
-
-        boolean exitProgram = false;
+    public Chatbot() {
         final Path dataLocation = Path.of("chatbot.txt");
 
-        // initialization
         ui = new Ui();
         taskStorage = new Storage(dataLocation);
 
         try {
             taskList = new TaskList(taskStorage.loadTasks());
         } catch (ChatbotException e) {
-            ui.showErrorMessage(e.getMessage());
+            e.printStackTrace();
             System.exit(0);
         }
+    }
 
-        ui.greet();
+    public String getResponse(String input) {
 
-        while(!exitProgram) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command command = Parser.parse(fullCommand);
-                command.execute(taskList, ui, taskStorage);
-                exitProgram = command.isExit();
-            } catch (ChatbotException e) {
-                ui.showErrorMessage(e.getMessage());
-            }
+        String response = "";
+
+        try {
+            Command command = Parser.parse(input);
+            response = command.execute(taskList, ui, taskStorage);
+        } catch (ChatbotException e) {
+            response = e.getMessage();
         }
+
+        return response;
+    }
+
+    public String greeting() {
+        return ui.greet();
     }
 }

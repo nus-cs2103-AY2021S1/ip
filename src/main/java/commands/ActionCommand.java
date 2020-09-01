@@ -25,9 +25,10 @@ public class ActionCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException {
 
         int index;
+        String response = "";
 
         try {
             index = Integer.parseInt(body) - 1;
@@ -38,16 +39,18 @@ public class ActionCommand extends Command {
         switch (type) {
             case DELETE:
                 Task deletedTask = taskList.removeTask(index);
-                ui.deleteSuccess(deletedTask, taskList.count());
+                response = ui.deleteSuccess(deletedTask, taskList.count());
                 break;
             case DONE:
                 Task taskDone = taskList.markAsDone(index);
-                ui.markDoneSuccess(taskDone);
+                response = ui.markDoneSuccess(taskDone);
                 break;
             default:
                 break;
         }
 
         storage.saveTasks(taskList.getTasks());
+
+        return response;
     }
 }
