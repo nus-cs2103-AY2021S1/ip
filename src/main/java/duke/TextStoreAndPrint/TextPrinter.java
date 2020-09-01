@@ -1,20 +1,31 @@
 package duke.textstoreandprint;
 
-import duke.WindowDisplay;
+
+import duke.DialogBox;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
 public class TextPrinter {
 
-    private WindowDisplay windowDisplay;
+    private static VBox dialogBoxPointer;
+    private static Image imagePointer;
 
-    TextPrinter(WindowDisplay windowDisplay) {
-        this.windowDisplay = windowDisplay;
+    public static void setDialogBox(VBox dialogBox, Image duke) {
+        dialogBoxPointer = dialogBox;
+        imagePointer = duke;
     }
 
     public static void standardPrint(String middle) {
+        dialogBoxPointer.getChildren().add(new DialogBox(
+                new Label(TextStore.top + "\n" + middle + "\n" + TextStore.bottom + "\n"), new ImageView(imagePointer)));
         System.out.print(TextStore.top + "\n" + middle + "\n" + TextStore.bottom + "\n");
     }
 
     public static void printStandAlone(String details) {
+        dialogBoxPointer.getChildren().add(new DialogBox(
+                new Label(details), new ImageView(imagePointer)));
         System.out.println(details);
     }
 

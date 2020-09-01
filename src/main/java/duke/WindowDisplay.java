@@ -1,5 +1,6 @@
 package duke;
 
+import duke.textstoreandprint.TextPrinter;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,6 +14,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.nio.file.Path;
+
 public class WindowDisplay extends Application {
 
     private ScrollPane scrollPane;
@@ -22,6 +25,10 @@ public class WindowDisplay extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    private TaskList taskList;
+    private Path pathToSave;
+    private Ui ui;
 
     @Override
     public void start(Stage stage) {
@@ -73,6 +80,20 @@ public class WindowDisplay extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        // My stuffs
+        TextPrinter.setDialogBox(dialogContainer, duke);
+        TextPrinter.printStartMessage();
+
+        String home = System.getProperty("user.home");
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "ipSave.txt");
+
+        pathToSave = path;
+        taskList = FileManager.readFromSave(path);
+        ui = new Ui(taskList);
+        TextPrinter.printPromptMsg();
+
+        // my stuff ends
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
@@ -128,7 +149,8 @@ public class WindowDisplay extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        ui.handle(input);
+        return "space";
     }
 }
 

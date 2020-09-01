@@ -15,19 +15,20 @@ public class Ui {
         commandParserAndLogic = new CommandParserAndLogic(taskList);
     }
 
-    public void run() {
+    public void handle(String input) {
 
-        String current;
-        Scanner sc = new Scanner(System.in);
-        TextPrinter.printPromptMsg();
-
-        while (!hasEnded) {
-
-            current = sc.nextLine();
-            commandParserAndLogic.handleInput(current);
-
-        }
-        sc.close();
+//        String current;
+//        Scanner sc = new Scanner(System.in);
+//        TextPrinter.printPromptMsg();
+//
+//        while (!hasEnded) {
+//
+//            current = sc.nextLine();
+//            commandParserAndLogic.handleInput(current);
+//
+//        }
+//        sc.close();
+        commandParserAndLogic.handleInput(input);
     }
 
     public static void endUi() {
