@@ -42,7 +42,7 @@ public class Task {
      */
     public String[] taskToArray() {
         String done;
-        if(isCompleted) {
+        if (isCompleted) {
             done = "0";
         } else {
             done = "1";

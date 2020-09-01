@@ -1,13 +1,13 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+
 public class ParserTest {
     @Test
-    void parseCommand_Parser_Test() {
+    void parseCommand_parser_test() {
         try {
             Parser.parseCommand("deadline");
         } catch (DukeException e) {
@@ -16,7 +16,7 @@ public class ParserTest {
     }
 
     @Test
-    void stopProgram_Parser_Test() {
+    void stopProgram_parser_test() {
         assertTrue(Parser.stopProgram("bye"));
     }
 }

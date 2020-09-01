@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> taskList;
-    private static final String indentation = "     ";
+    private final String indentation = "     ";
 
     /**
      * Construct a TaskList object.
@@ -28,7 +28,7 @@ public class TaskList {
     public void printAddedTask(Task task) {
         System.out.println(indentation + "Got it. I've added this task: ");
         System.out.println(indentation + "  " + task.toString());
-        System.out.println(indentation + "Now you have "+ taskList.size() + " tasks in the list.");
+        System.out.println(indentation + "Now you have " + taskList.size() + " tasks in the list.");
     }
 
     /**
@@ -36,7 +36,7 @@ public class TaskList {
      */
     public void printList() {
         System.out.println(indentation + "Here are the tasks in your list:");
-        for(int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             String s = indentation + (i + 1) + ". " + taskList.get(i).toString();
             System.out.println(s);
         }
@@ -62,7 +62,7 @@ public class TaskList {
         Task task = taskList.get(n - 1);
         System.out.println(indentation + "  " + task.toString());
         taskList.remove(n - 1);
-        System.out.println(indentation + "Now you have "+ taskList.size() + " tasks in the list.");
+        System.out.println(indentation + "Now you have " + taskList.size() + " tasks in the list.");
     }
 
     /**
@@ -81,6 +81,10 @@ public class TaskList {
         return taskList.size();
     }
 
+    /**
+     * Prints the tasks containing the keyword.
+     * @param keyword Keyword.
+     */
     public void findTaskByKeyword(String keyword) {
         ArrayList<Task> tasksWithKeyword = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
@@ -90,7 +94,7 @@ public class TaskList {
             }
         }
         System.out.println(indentation + "Here are the matching tasks in your list:");
-        for(int i = 0; i < tasksWithKeyword.size(); i++) {
+        for (int i = 0; i < tasksWithKeyword.size(); i++) {
             String s = indentation + (i + 1) + ". " + tasksWithKeyword.get(i).toString();
             System.out.println(s);
         }

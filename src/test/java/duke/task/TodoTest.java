@@ -1,16 +1,15 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TodoTest {
     @Test
-    void taskToArray_ToDo_Test() {
+    void taskToArray_toDo_test() {
         Todo todo = new Todo("Return book");
-        String[] expected_arr = new String[]{"T", "1", "Return book"};
-        assertArrayEquals(expected_arr, todo.taskToArray());
+        String[] expectedArr = new String[]{"T", "1", "Return book"};
+        assertArrayEquals(expectedArr, todo.taskToArray());
     }
 
 

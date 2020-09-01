@@ -20,7 +20,7 @@ public class Event extends Task {
     @Override
     public String[] taskToArray() {
         String done;
-        if(this.isCompleted()) {
+        if (this.isCompleted()) {
             done = "0";
         } else {
             done = "1";

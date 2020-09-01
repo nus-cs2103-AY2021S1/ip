@@ -1,12 +1,12 @@
 package duke;
-import duke.task.TaskList;
-import duke.task.Task;
 import duke.task.Deadline;
-import duke.task.Todo;
 import duke.task.Event;
+import duke.task.TaskList;
 import duke.task.TimeParser;
+import duke.task.Todo;
+
 public class Parser {
-    public static TaskList taskList;
+    private static TaskList taskList;
 
     /**
      * Sets taskList for Parser.
@@ -98,5 +98,13 @@ public class Parser {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
         }
+    }
+
+    /**
+     * Returns the taskList.
+     * @return TaskList.
+     */
+    public static TaskList getTaskList() {
+        return taskList;
     }
 }
