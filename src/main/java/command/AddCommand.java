@@ -1,28 +1,25 @@
 package command;
 
 import enums.TaskEnum;
-import service.DukeService;
+import executor.AddCommandExecutor;
+import parser.CommandParser;
 
 public class AddCommand extends Command {
     private final TaskEnum taskType;
 
+    private final String argument;
+
     public AddCommand(String input, TaskEnum taskType) {
-        super(input);
+        super(input, new AddCommandExecutor());
         this.taskType = taskType;
+        this.argument = CommandParser.getTitle(input);
     }
 
-    @Override
-    public void execute(DukeService dukeService) {
-        switch(taskType) {
-            case TODO:
-                dukeService.addToDoEvent(input);
-                break;
-            case EVENT:
-                dukeService.addEventTask(input);
-                break;
-            case DEADLINE:
-                dukeService.addDeadlineEvent(input);
-                break;
-        }
+    public TaskEnum getTaskType() {
+        return taskType;
+    }
+
+    public String getArgument() {
+        return argument;
     }
 }

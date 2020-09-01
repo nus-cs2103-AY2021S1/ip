@@ -1,14 +1,10 @@
 package command;
 
-import service.DukeService;
+import executor.ListCommandExecutor;
 
 public class ListCommand extends Command {
-    public ListCommand(String input) {
-        super(input);
-    }
 
-    @Override
-    public void execute(DukeService dukeService) {
-        dukeService.printList();
+    public ListCommand(String input) {
+        super(input, new ListCommandExecutor());
     }
 }

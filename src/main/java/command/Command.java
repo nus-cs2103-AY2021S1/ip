@@ -1,13 +1,23 @@
 package command;
 
-import service.DukeService;
+import executor.CommandExecutor;
 
-public abstract class Command {
+public class Command {
+
     String input;
 
-    public Command(String input) {
+    CommandExecutor commandExecutor;
+
+    public Command(String input, CommandExecutor commandExecutor) {
         this.input = input;
+        this.commandExecutor = commandExecutor;
     }
 
-    public abstract void execute(DukeService dukeService);
+    public String getInput() {
+        return input;
+    }
+
+    public CommandExecutor getCommandExecutor() {
+        return commandExecutor;
+    }
 }

@@ -1,21 +1,20 @@
 package ui;
 
 import dukeoutput.DukeOutput;
-import parser.Parser;
+import parser.CommandParser;
 import command.Command;
 import constant.DukeConstants;
-import service.DukeService;
+import storage.Storage;
+import tasklist.TaskList;
 
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Ui {
 
-    private final DukeService dukeService = new DukeService();
-    private final DukeOutput dukeOutput = new DukeOutput();
     private final Scanner scanner = new Scanner(System.in);
 
-    private final Parser parser = new Parser();
+    private final TaskList taskList = new TaskList(Storage.load());
 
     private boolean isOn = true;
 
@@ -23,7 +22,7 @@ public class Ui {
         printGreetingMessage();
         while (isOn) {
             String input = this.getInput();
-            if (this.parser.isExit(input)) {
+            if (CommandParser.isExit(input)) {
                 this.exit();
             } else {
                 this.respond(input);
@@ -32,27 +31,31 @@ public class Ui {
     }
 
     private void exit() {
-        this.dukeOutput.printResponse(DukeConstants.EXIT_RESPONSE);
-        this.dukeService.saveList();
+        DukeOutput.output(DukeConstants.EXIT_RESPONSE);
+        Storage.save(this.taskList.getList());
         this.isOn = false;
     }
 
     private void respond(String input) {
-        Command command = this.parser.parse(input);
-        if (Objects.isNull(command)) {
-            this.handleInvalidInput();
-        } else {
-            command.execute(dukeService);
+        try {
+            Command command = CommandParser.parse(input);
+            if (Objects.isNull(command)) {
+                this.handleInvalidInput();
+            } else {
+                command.getCommandExecutor().execute(command, taskList);
+            }
+        } catch (IndexOutOfBoundsException exception) {
+            DukeOutput.output(exception.getMessage());
         }
     }
 
     private void handleInvalidInput() {
-        this.dukeOutput.printResponse("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        DukeOutput.output("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     private void printGreetingMessage() {
-        this.dukeOutput.outputGreeting();
-        this.dukeOutput.printResponse(DukeConstants.INITIAL_RESPONSE);
+        DukeOutput.outputGreeting();
+        DukeOutput.output(DukeConstants.INITIAL_RESPONSE);
     }
 
     private String getInput() {

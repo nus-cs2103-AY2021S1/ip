@@ -3,6 +3,7 @@ package tasklist;
 import constant.DukeConstants;
 import task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
@@ -13,33 +14,38 @@ public class TaskList {
         this.list = list;
     }
 
-    public Task delete(int idx) {
-        return this.list.remove(idx);
-    }
-
     public void add(Task task) {
         this.list.add(task);
     }
 
-    public void print() {
+    public List<String> getListInfo() {
+        List<String> listInfo = new ArrayList<>();
+        listInfo.add(DukeConstants.LIST_OUTPUT);
+
         int num = 0;
         for (Task output : this.list) {
             num++;
-            System.out.printf("%s%d.%s\n", DukeConstants.IDENT, num, output);
+            listInfo.add(String.format("%d.%s", num, output));
         }
+        return listInfo;
     }
 
-    public int getSize() {
-        return this.list.size();
-    }
-
-    public Task markDone(int idx) {
+    public String markDone(int idx) {
         Task task = this.list.get(idx);
         task.markDone();
-        return task;
+        return task.toString();
     }
 
     public List<Task> getList() {
         return list;
+    }
+
+    public int getCurrentSize() {
+        return this.list.size();
+    }
+
+    public String delete(int idx) {
+        Task task = this.list.remove(idx);
+        return task.toString();
     }
 }

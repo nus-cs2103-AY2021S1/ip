@@ -1,14 +1,18 @@
 package command;
 
-import service.DukeService;
+import executor.DoneCommandExecutor;
+import parser.CommandParser;
 
 public class DoneCommand extends Command {
+
+    private final String argument;
+
     public DoneCommand(String input) {
-        super(input);
+        super(input, new DoneCommandExecutor());
+        this.argument = CommandParser.getTitle(input);
     }
 
-    @Override
-    public void execute(DukeService dukeService) {
-        dukeService.handleDoneCommand(input);
+    public String getArgument() {
+        return argument;
     }
 }

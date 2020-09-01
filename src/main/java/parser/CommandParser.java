@@ -1,13 +1,17 @@
 package parser;
 
-import command.*;
+import command.AddCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.ListCommand;
 import constant.DukeConstants;
 import enums.TaskEnum;
 
 
-public class Parser {
+public class CommandParser {
 
-    public Command parse(String input) {
+    public static Command parse(String input) throws IndexOutOfBoundsException {
         if (isListCommand(input)) {
             return new ListCommand(input);
         } else if (isDoneCommand(input)) {
@@ -25,30 +29,38 @@ public class Parser {
         }
     }
 
-    private boolean isListCommand(String input) {
+    private static boolean isListCommand(String input) {
         return input.equals(DukeConstants.LIST_COMMAND);
     }
 
-    private boolean isDoneCommand(String input) {
+    private static boolean isDoneCommand(String input) {
         return input.split("\\s+")[0].equals(DukeConstants.DONE_COMMAND);
     }
 
-    private boolean isDeleteCommand(String input) {
+    private static boolean isDeleteCommand(String input) {
         return input.split("\\s+")[0].equals(DukeConstants.DELETE_COMMAND);
     }
 
-    private boolean isTodoCommand(String input) {
+    private static boolean isTodoCommand(String input) {
         return input.split("\\s+")[0].equals(DukeConstants.TODO_COMMAND);
     }
 
-    private boolean isDeadlineCommand(String input) {
+    private static boolean isDeadlineCommand(String input) {
         return input.split("\\s+")[0].equals(DukeConstants.DEADLINE_COMMAND);
     }
-    private boolean isEventCommand(String input) {
+    private static boolean isEventCommand(String input) {
         return input.split("\\s+")[0].equals(DukeConstants.EVENT_COMMAND);
     }
 
-    public boolean isExit(String input) {
+    public static boolean isExit(String input) {
         return input.equals(DukeConstants.EXIT_INPUT);
+    }
+
+    public static String getTitle(String input) throws IndexOutOfBoundsException {
+        try {
+            return input.split("\\s+", 2)[1];
+        } catch(IndexOutOfBoundsException exception) {
+            throw new IndexOutOfBoundsException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
     }
 }

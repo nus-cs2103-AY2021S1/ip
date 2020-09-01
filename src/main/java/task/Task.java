@@ -22,10 +22,6 @@ public class Task {
         this.type = type;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
     public void markDone() {
         this.isDone = true;
     }

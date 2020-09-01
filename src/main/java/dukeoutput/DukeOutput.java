@@ -2,23 +2,27 @@ package dukeoutput;
 
 import constant.DukeConstants;
 
+import java.util.Collections;
+import java.util.List;
+
 public class DukeOutput {
 
-    public void outputGreeting() {
+    public static void outputGreeting() {
         System.out.println("Hello from\n" + DukeConstants.LOGO);
     }
 
-    public void printResponse(String response) {
-        System.out.println(DukeConstants.LINE);
-        System.out.printf("%s%s\n", DukeConstants.IDENT, response);
-        System.out.println(DukeConstants.LINE);
+    public static void output(String response) {
+        String formattedResponse = DukeOutputFormatter.format(Collections.singletonList(response));
+        System.out.println(formattedResponse);
     }
 
-    public void printResponseWithListSize(String response, int listSize) {
-        System.out.println(DukeConstants.LINE);
-        System.out.printf("%s%s\n", DukeConstants.IDENT, response);
-        System.out.printf("%sNow you have %d tasks in the list.%n",
-                DukeConstants.IDENT, listSize);
-        System.out.println(DukeConstants.LINE);
+    public static void output(List<String> response) {
+        String formattedResponse = DukeOutputFormatter.format(response);
+        System.out.println(formattedResponse);
+    }
+
+    public static void output(List<String> responses, List<Integer> indentIndexes) {
+        String formattedResponse = DukeOutputFormatter.format(responses, indentIndexes);
+        System.out.println(formattedResponse);
     }
 }

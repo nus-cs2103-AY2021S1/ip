@@ -17,7 +17,7 @@ public class Storage {
 
     private static final String LIST_FILE_PATH = "./data/duke.txt";
 
-    public List<Task> load() {
+    public static List<Task> load() {
         File file = new File(LIST_FILE_PATH);
         File parentFile = file.getParentFile();
         List<Task> list = new ArrayList<>();
@@ -58,7 +58,7 @@ public class Storage {
         return list;
     }
 
-    public void save(List<Task> taskList) {
+    public static void save(List<Task> taskList) {
         File file = new File(LIST_FILE_PATH);
         File parentFile = file.getParentFile();
         if (!parentFile.exists()) {
