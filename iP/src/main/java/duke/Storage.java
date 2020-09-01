@@ -33,12 +33,12 @@ public class Storage {
             reader.close();
         } catch (FileNotFoundException e) {
             // create folder if doesn't exist
-            File path = new File("./data/");
+            File path = new File("data/");
             if (!path.isDirectory()) {
                 path.mkdir();
             }
             // create file if doesn't exist
-            File file = new File("./data/duke.txt");
+            File file = new File("data/duke.txt");
             file.createNewFile();
             // Load again
             load(Duke);
@@ -56,7 +56,7 @@ public class Storage {
      * @param taskList contains list of tasks which will be saved
      */
     static void save(ArrayList<Task> taskList) throws IOException {
-        File file = new File("./data/duke.txt");
+        File file = new File("data/duke.txt");
         FileWriter fileWriter = new FileWriter(file, false);
         int index = 1;
         for (Task task: taskList) {

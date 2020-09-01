@@ -9,55 +9,61 @@ public class Ui {
     /**
      * shows error message occured while loading data from text file
      */
-    public void showLoadingError() {
-        System.out.println("Failed to load data");
+    public String showLoadingError() {
+        String message = "Failed to load data";
+        System.out.println(message);
+        return message;
     }
 
     /**
      * show welcome message when app is started
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(
-                "Hello from\n"
-                + logo);
-
-        System.out.println(
-                "Hello! I'm Duke\n"
-                + "What can I do for you?");
+        String message = logo
+                + "Hello! I'm Duke\n"
+                + "What can I do for you?";
+        System.out.println(message);
+        return message;
     }
 
     /**
      * show goodbye message when app exits
      */
-    public void showGoodBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showGoodBye() {
+        String message = "Bye. Hope to see you again soon!";
+        System.out.println(message);
+        return message;
     }
 
     /**
      * show list of tasks
      * @param taskList ArrayList containing tasks
      */
-    public void showListOfTask(ArrayList<Task> taskList) {
-        System.out.println("Here are the tasks in your list:");
+    public String showListOfTask(ArrayList<Task> taskList) {
+        String message = "Here are the tasks in your list: \n";
         int index = 1;
         for (Task task : taskList) {
-            System.out.println(String.format("%s. %s", index, task));
+            message += String.format("%s. %s \n", index, task);
             index += 1;
         }
+        System.out.println(message);
+        return message;
     }
 
     /**
      * show message when task is marked done
      * @param doneTask task which is marked as done
      */
-    public void showMarkedDoneTask(Task doneTask) {
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(doneTask);
+    public String showMarkedDoneTask(Task doneTask) {
+        String message = "Nice! I've marked this task as done: \n"
+                + doneTask.toString();
+        System.out.println(message);
+        return message;
     }
 
     /**
@@ -65,10 +71,12 @@ public class Ui {
      * @param deletedTask task which is deleted
      * @param taskList ArrayList containing tasks
      */
-    public void showDeletedTask(Task deletedTask, ArrayList<Task> taskList) {
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(deletedTask);
-        System.out.println(String.format("Now you have %s tasks in the list.", taskList.size()));
+    public String showDeletedTask(Task deletedTask, ArrayList<Task> taskList) {
+        String message = "Noted. I've removed this task: \n"
+                + deletedTask.toString() + "\n"
+                + String.format("Now you have %s tasks in the list.", taskList.size());
+        System.out.println(message);
+        return message;
     }
 
     /**
@@ -76,25 +84,30 @@ public class Ui {
      * @param addedTask task which is added
      * @param taskList ArrayList containing tasks
      */
-    public void showAddedTask(Task addedTask, ArrayList<Task> taskList) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(addedTask);
-        System.out.println(String.format("Now you have %s tasks in the list.", taskList.size()));
+    public String showAddedTask(Task addedTask, ArrayList<Task> taskList) {
+        String message = "Got it. I've added this task: \n"
+                + addedTask.toString() + "\n"
+                + String.format("Now you have %s tasks in the list.", taskList.size());
+        System.out.println(message);
+        return message;
     }
 
     /**
      * show horizontal line to saparate different messages
      */
-    public void showLine() {
-        System.out.println("---------------------------------------");
+    public String showLine() {
+        String message = "---------------------------------------";
+        System.out.println(message);
+        return message;
     }
 
     /**
      * show message for any error occurred
      * @param message message of error that occurred
      */
-    public void showError(String message) {
+    public String showError(String message) {
         System.out.println(message);
+        return message;
     }
 
     /**
@@ -108,13 +121,15 @@ public class Ui {
         return user_input;
     }
 
-    public void showFoundTask(ArrayList<Task> foundTasks) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showFoundTask(ArrayList<Task> foundTasks) {
+        String message = "Here are the matching tasks in your list: \n";
         int index = 1;
         for (Task task : foundTasks) {
-            System.out.println(String.format("%s. %s", index, task));
+            message += (String.format("%s. %s \n", index, task));
             index += 1;
         }
+        System.out.println(message);
+        return message;
     }
     
 }
