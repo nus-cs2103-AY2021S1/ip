@@ -1,6 +1,12 @@
 package duke;
 
 import duke.commands.Command;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,6 +22,17 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private boolean isRunning = true;
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    public Duke() {} // Why do we need an empty constructor for this?
 
     /**
      * Creates bot object while initializing necessary components / classes
@@ -57,4 +74,22 @@ public class Duke {
     public static void main(String[] args) throws DukeException {
         new Duke("./task_list.txt").run();
     }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Parser p = new Parser();
+            Command c = p.parseCommand(input);
+            c.execute(tasks, ui, storage);
+            this.isRunning = !c.isExitCommand();
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
+        return "";
+
+    }
+
 }
