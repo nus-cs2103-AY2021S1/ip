@@ -60,5 +60,3 @@ run{
     standardInput = System.in
     enableAssertions = true
 }
-
-mainClassName = 'Duke'

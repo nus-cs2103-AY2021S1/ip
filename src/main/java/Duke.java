@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
@@ -128,8 +129,8 @@ public class Duke extends Application {
     private Label getDialogLabel(String text) {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
+        textToAdd.setFont(Font.font(50));
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
 
@@ -142,8 +143,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userInput.getText(), user),
+                DialogBox.getDukeDialog(getResponse(userInput.getText()), duke)
         );
         userInput.clear();
     }
@@ -152,7 +153,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         Ui ui = new Ui();
         Storage storage = new Storage("\\save.txt");
         ui.printWelcome();
