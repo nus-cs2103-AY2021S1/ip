@@ -154,7 +154,7 @@ public class TaskList {
     public String readList() {
         String reply = "";
         if (tasks.isEmpty()) {
-            reply = "Looks like you don't have any tasks! Go on and add some!\n";
+            reply = "Looks like you don't have any tasks! Go on and add some!";
         } else {
             reply += "Here's all your tasks to complete:\n";
             int i = 1;
