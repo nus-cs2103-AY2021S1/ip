@@ -2,7 +2,6 @@ package duke.tasks;
 
 import duke.utils.DateTimeStringFormatter;
 import duke.utils.ResourceHandler;
-import duke.utils.Schedulable;
 
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
