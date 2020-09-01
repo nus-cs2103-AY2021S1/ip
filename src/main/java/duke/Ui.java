@@ -1,9 +1,11 @@
 package duke;
 
-import java.util.Scanner;
+import java.util.ArrayList;
+
+import task.Task;
 
 /**
- * A duke.Ui object deals with interactions with the user.
+ * A Ui object deals with interactions with the user.
  *
  * @author amelia
  * @version 1.0
@@ -11,23 +13,29 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    /**
-     * Obtain user inputs and edit the duke.TaskList currList accordingly.
-     *
-     * @param currList Current list of tasks.
-     */
-    public void start(TaskList currList) {
-        Scanner sc = new Scanner(System.in);
-        Parser parser = new Parser(currList);
-        while (sc.hasNext()) {
-            String inputMsg = sc.nextLine();
-            if (inputMsg.equals("bye")) {
-                // ends the bot
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            }
-            parser.processMsg(inputMsg);
-        }
-        sc.close();
+    public String addTask(Task newTask, TaskList currList) {
+        currList.add(newTask);
+        String outputMsg = "Got it. I've added this task:\n"
+                + newTask.toString()
+                + "\nYou have " + currList.getNumOfTasks() + " tasks in the list.";
+        return outputMsg;
+    }
+
+    public String deleteTask(int taskNumber, Task currTask, TaskList currList) {
+        currList.remove(taskNumber - 1);
+        String output = "Noted. I've removed this task:\n"
+                + currTask.toString()
+                + "\nNow you have " + currList.getNumOfTasks() + " tasks in the list.";
+        return output;
+    }
+
+    public String completeTask(Task currTask) {
+        currTask.markAsComplete();
+        return "Nice! I've marked this task as done:\n" + currTask.toString();
+    }
+
+    public String findTask(ArrayList<Task> searchResult) {
+        TaskList result = new TaskList(searchResult);
+        return result.displayTasks();
     }
 }
