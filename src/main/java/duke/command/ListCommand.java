@@ -1,14 +1,17 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * Represents command that is specific to the list command.
  */
 public class ListCommand extends Command {
 
+    /**
+     * Creates ListCommand object.
+     */
     public ListCommand() {
         this.exit = false;
     }

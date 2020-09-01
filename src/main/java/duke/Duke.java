@@ -12,6 +12,10 @@ public class Duke {
     private TaskList taskList;
     private final Ui ui;
 
+    /**
+     * Creates Duke object.
+     * @param filePath Path of file that Duke loads data from and saves data into.
+     */
     public Duke(String filePath) {
 
         ui = new Ui();

@@ -1,6 +1,9 @@
 package duke.command;
 
-import duke.*;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -11,6 +14,10 @@ public class DoneCommand extends Command {
 
     private String input;
 
+    /**
+     * Creates DeleteCommand object.
+     * @param input input of user.
+     */
     public DoneCommand(String input) {
         this.exit = false;
         this.input = input;

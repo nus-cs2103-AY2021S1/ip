@@ -1,14 +1,17 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * Represents command that is specific to the exit command.
  */
 public class ExitCommand extends Command {
 
+    /**
+     * Creates an ExitCommand object.
+     */
     public ExitCommand() {
         this.exit = true;
     }

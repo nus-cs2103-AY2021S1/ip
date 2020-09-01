@@ -8,9 +8,13 @@ import java.time.LocalDate;
 public class Task {
     protected String description;
     protected boolean isDone;
-    String dateString;
-    LocalDate date;
+    protected String dateString;
+    protected LocalDate date;
 
+    /**
+     * Creates Task object.
+     * @param description Description of Task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

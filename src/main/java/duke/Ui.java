@@ -1,18 +1,18 @@
 package duke;
 
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Stores all User Interface related methods and objects.
  */
 public class Ui {
 
-    public static String divider = "______________________________________________________________________________";
-    public static String logo = "             *\n"
+    private static String divider = "______________________________________________________________________________";
+    private static String logo = "             *\n"
             + "      o  o  / \\  o  o\n"
             + "      |\\/ \\/   \\/ \\/|\n"
             + "      |             |\n"
