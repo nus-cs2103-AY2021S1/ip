@@ -24,31 +24,6 @@ public class Duke {
         }
     }
 
-    public Duke() {
-        this("data/duke.txt");
-    }
-
-//    /**
-//     * Runs the entire program with the main logic.
-//     */
-//    public void run() {
-//        Scanner sc = new Scanner(System.in);
-//        ui.welcome();
-//        boolean exitProgram = false;
-//        while (!exitProgram && sc.hasNextLine()) {
-//            try {
-//                String fullCommand = sc.nextLine(); // no need
-//                Command c = Parser.parse(fullCommand);
-//                c.execute(tasks, ui, storage);
-//                storage.writeToFile(tasks);
-//                exitProgram = c.isExitProgram();
-//            } catch (DukeException e) {
-//                System.out.println(e.getMessage());
-//            }
-//        }
-//        sc.close();
-//    }
-
     public String getResponse(String userInput) {
         try {
             ui.clearMessage();
@@ -60,13 +35,4 @@ public class Duke {
             return ui.showError(e);
         }
     }
-
-//    /**
-//     * Starts the Duke program.
-//     * @param args user input that's not needed here
-//     */
-//    public static void main(String[] args) {
-//        new Duke("data/duke.txt").run();
-//    }
-
 }
