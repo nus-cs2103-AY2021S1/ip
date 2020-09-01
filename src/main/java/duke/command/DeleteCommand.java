@@ -3,7 +3,6 @@ package duke.command;
 import java.io.IOException;
 
 import duke.Storage;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidArgumentException;
 import duke.exception.StorageAccessException;
@@ -28,23 +27,22 @@ public class DeleteCommand extends Command {
      * Overrides execute in {@link Command}.
      * Executes the command to delete the {@link Task} and save the changes to storage.
      * @param tasks The list of {@link Task}s.
-     * @param ui The Ui object that is used by Duke.
      * @param storage The Storage object of Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             if (index > tasks.getSize()) {
                 throw new InvalidArgumentException("☹ OOPS!!! The task index you give is not found.");
             }
             String output = "Noted. I've removed this task:\n";
-            output += ("\t " + tasks.getTask(index) + "\n");
-            output += ("\t Now you have " + (tasks.getSize() - 1) + " tasks in the list.");
-            ui.displayMessage(output);
+            output += ("" + tasks.getTask(index) + "\n");
+            output += ("Now you have " + (tasks.getSize() - 1) + " tasks in the list.");
             tasks.deleteTask(index);
             storage.writeData(tasks.getTasks());
+            return output;
         } catch (InvalidArgumentException e) {
-            ui.displayMessage(e.getMessage());
+            return e.getMessage();
         } catch (IOException e) {
             throw new StorageAccessException("☹ OOPS!!! Something went wrong when removing the task from storage.");
         }

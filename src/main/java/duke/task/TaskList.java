@@ -76,8 +76,7 @@ public class TaskList {
     public String listTasks() {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            output.append("\t ")
-                    .append(i + 1)
+            output.append(i + 1)
                     .append(".")
                     .append(tasks.get(i))
                     .append(i == tasks.size() - 1 ? "" : "\n");
@@ -100,7 +99,7 @@ public class TaskList {
         output.append("Here are the tasks happening on: ").append(date).append("\n");
 
         for (int i = 0; i < filteredTasks.size(); i++) {
-            output.append(String.format("\t %d. %s" + (i == filteredTasks.size() - 1 ? "" : "\n"),
+            output.append(String.format("%d. %s" + (i == filteredTasks.size() - 1 ? "" : "\n"),
                     i + 1, filteredTasks.get(i)));
         }
 
@@ -121,7 +120,7 @@ public class TaskList {
         output.append("Here are the tasks that are pending: \n");
 
         for (int i = 0; i < pendingTasks.size(); i++) {
-            output.append(String.format("\t %d. %s" + (i == pendingTasks.size() - 1 ? "" : "\n"),
+            output.append(String.format("%d. %s" + (i == pendingTasks.size() - 1 ? "" : "\n"),
                     i + 1, pendingTasks.get(i)));
         }
 
@@ -141,7 +140,7 @@ public class TaskList {
         output.append("Here are the tasks that have been completed: \n");
 
         for (int i = 0; i < completedTasks.size(); i++) {
-            output.append(String.format("\t %d. %s" + (i == completedTasks.size() - 1 ? "" : "\n"),
+            output.append(String.format("%d. %s" + (i == completedTasks.size() - 1 ? "" : "\n"),
                     i + 1, completedTasks.get(i)));
         }
 
@@ -163,7 +162,7 @@ public class TaskList {
         output.append("Here are the tasks containing keyword: ").append(keyword).append("\n");
 
         for (int i = 0; i < matchingTasks.size(); i++) {
-            output.append(String.format("\t %d. %s" + (i == matchingTasks.size() - 1 ? "" : "\n"),
+            output.append(String.format("%d. %s" + (i == matchingTasks.size() - 1 ? "" : "\n"),
                     i + 1, matchingTasks.get(i)));
         }
 
