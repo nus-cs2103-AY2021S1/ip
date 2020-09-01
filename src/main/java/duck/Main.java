@@ -1,4 +1,5 @@
-import duck.Duck;
+package duck;
+
 import duck.storage.LocalStorage;
 import duck.storage.Storage;
 import duck.ui.Ui;
