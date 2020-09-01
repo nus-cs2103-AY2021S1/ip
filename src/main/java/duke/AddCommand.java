@@ -41,21 +41,18 @@ public class AddCommand extends Command {
      * @throws IOException When input for addToDo is invalid.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui)
+    public String execute(TaskList taskList, Storage storage, Ui ui)
             throws DukeException, IOException {
         switch (command) {
         case TODO:
-           addToDo(taskList, storage, ui, this.userInput);
-           break;
+           return addToDo(taskList, storage, ui, this.userInput);
         case DEADLINE:
-           addDeadline(taskList, storage, ui, this.userInput);
-           break;
+           return addDeadline(taskList, storage, ui, this.userInput);
         case EVENT:
-           addEvent(taskList, storage, ui, this.userInput);
-           break;
+           return addEvent(taskList, storage, ui, this.userInput);
         default:
            System.out.println("An invalid command is entered! :(");
-           break;
+           throw new DukeException("An invalid command is entered! :(");
         }
     }
 
@@ -78,13 +75,13 @@ public class AddCommand extends Command {
      * @throws DukeException When description of a ToDo task is empty.
      * @throws IOException When writing to file fails.
      */
-    public void addToDo(TaskList tasks, Storage storage, Ui ui,
+    public String addToDo(TaskList tasks, Storage storage, Ui ui,
                         String userInput) throws DukeException, IOException {
         if (!userInput.substring(4).isBlank()) { //if got space behind, it will add also
             ToDo todo = new ToDo(userInput.substring(5));
             tasks.addTask(todo); //adds into tasks list
-            ui.printAddTodo(todo, tasks);
             storage.writeToFile(tasks.getTasks());
+            return ui.printAddTodo(todo, tasks);
         } else {
             System.out.println(Ui.getLine());
             System.out.println(Ui.getBot());
@@ -101,7 +98,7 @@ public class AddCommand extends Command {
      * @param userInput User input as a String.
      * @throws DukeException When input for Deadline is invalid, respective error messages are printed.
      */
-    public void addDeadline(TaskList tasks, Storage storage, Ui ui, String userInput)
+    public String addDeadline(TaskList tasks, Storage storage, Ui ui, String userInput)
             throws DukeException {
         String[] input = userInput.split(" ");
         if (!userInput.substring(8).isBlank()) {
@@ -112,8 +109,8 @@ public class AddCommand extends Command {
                 String date = de.split(" /by ")[1];
                 Deadline deadline = new Deadline(description, date);
                 tasks.addTask(deadline);
-                ui.printAddDeadline(deadline, tasks);
                 storage.writeToFile(tasks.getTasks());
+                return ui.printAddDeadline(deadline, tasks);
             } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex) {
                 System.out.println(Ui.getLine());
                 System.out.println(Ui.getBot());
@@ -142,7 +139,7 @@ public class AddCommand extends Command {
      * @param userInput User input as a String.
      * @throws DukeException When input for Event is invalid, respective error messages are printed.
      */
-    public void addEvent(TaskList tasks, Storage storage, Ui ui, String userInput)
+    public String addEvent(TaskList tasks, Storage storage, Ui ui, String userInput)
             throws DukeException {
         String[] input = userInput.split(" ");
         if (!userInput.substring(5).isBlank()) {
@@ -154,7 +151,7 @@ public class AddCommand extends Command {
                 Event event = new Event(description, dateAndTime);
                 tasks.addTask(event);
                 storage.writeToFile(tasks.getTasks());
-                ui.printAddEvent(event, tasks);
+                return ui.printAddEvent(event, tasks);
             } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex ) {
                 System.out.println(Ui.getLine());
                 System.out.println(Ui.getBot());

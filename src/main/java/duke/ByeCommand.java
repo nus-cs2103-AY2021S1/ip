@@ -12,7 +12,7 @@ public class ByeCommand extends Command {
      * @param ui Handles printing of user interaction.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
-        ui.printBye();
+    public String execute(TaskList taskList, Storage storage, Ui ui) {
+        return ui.printBye();
     }
 }

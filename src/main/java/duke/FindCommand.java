@@ -1,8 +1,5 @@
 package duke;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 /**
  * Represents a find command for a task.
  */
@@ -27,9 +24,9 @@ public class FindCommand extends Command {
      * @throws DukeException When invalid inputs are entered.
      */
     @Override
-    public void execute(
+    public String execute(
             TaskList taskList, Storage storage,
             Ui ui) throws DukeException {
-        ui.printFindings(taskList.findTasks(userInput));
+        return ui.printFindings(taskList.findTasks(userInput));
     }
 }

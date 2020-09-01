@@ -28,11 +28,11 @@ public class Ui {
     /**
      * Prints greetings.
      */
-    public void printGreetings() {
+    public String printGreetings() {
         System.out.println(line);
         System.out.println(bot);
-        System.out.println("Greetings from me, Dave!\n" + "How can I help you? ^_^");
-        System.out.println(line);
+        return "Greetings from me, Dave!\n" + "How can I help you? ^_^\n" +
+                line;
     }
 
     /**
@@ -55,12 +55,12 @@ public class Ui {
     /**
      * Prints goodbye and terminates.
      */
-    public void printBye() {
+    public String printBye() {
         System.out.println(line);
         System.out.println(bot);
-        System.out.println("Goodbye! Hope to see you again soon! ^_^");
-        System.out.println(line);
-        System.exit(0);
+        return "Goodbye! Hope to see you again soon! ^_^";
+        //System.out.println(line);
+        //System.exit(0);
     }
 
     /**
@@ -68,23 +68,40 @@ public class Ui {
      *
      * @param tasks TaskList containing tasks.
      */
-    public void printTaskList(TaskList tasks) {
+//    public String printTaskList(TaskList tasks) {
+//        if (tasks.getTasks().isEmpty()) {
+//            System.out.println(line);
+//            System.out.println(bot);
+//            return "There are no tasks in your list yet! >_<";
+//            System.out.println(line);
+//        } else {
+//            System.out.println(line);
+//            System.out.println(bot);
+//            return "Here are the tasks in your list:\n" +
+//            for (int i = 0; i < tasks.size(); i++) {
+//                System.out.println(i + 1 + "." + " " + tasks.getTasks().get(i));
+//            }
+//        }
+//    }
+
+    public String printTaskList(TaskList tasks) {
         if (tasks.getTasks().isEmpty()) {
             System.out.println(line);
             System.out.println(bot);
-            System.out.println("There are no tasks in your list yet! >_<");
-            System.out.println(line);
+            return "There are no tasks in your list yet! >_< \n" +
+            line;
         } else {
             System.out.println(line);
             System.out.println(bot);
-            System.out.println("Here are the tasks in your list:");
+            StringBuilder res = new StringBuilder();
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(i + 1 + "." + " " + tasks.getTasks().get(i));
+                res.append(String.format("%d. %s\n", i + 1, tasks.getTasks().get(i)));
             }
+            return res.toString();
         }
     }
 
-    public void printDelete(String userInput, TaskList taskList) throws DukeException {
+    public String printDelete(String userInput, TaskList taskList) throws DukeException {
         if (!userInput.substring(6).isBlank()) {
             try {
                 String toDelete = userInput.substring(7);
@@ -92,11 +109,11 @@ public class Ui {
                 if (index <= taskList.size() && index > 0) {
                     System.out.println(Ui.getLine());
                     System.out.println(Ui.getBot());
-                    System.out.println("Noted! I've deleted this task:");
-                    System.out.println(taskList.getTasks().get(index - 1));
                     taskList.getTasks().remove(index - 1);
-                    System.out.println("Now you have " + taskList.size()
-                            + " tasks in the list.");
+                    return "Noted! I've deleted this task:\n" +
+                    taskList.getTasks().get(index - 1).toString() +
+                    "\nNow you have " + taskList.size()
+                            + " tasks in the list.";
                 } else {
                     throw new IndexOutOfBoundsException();
                 }
@@ -115,14 +132,14 @@ public class Ui {
      * @param pos Index in arraylist.
      * @throws DukeException When index < 0 or index > tasks.size().
      */
-    public void printDone(ArrayList<Task> tasks, int pos) throws DukeException {
+    public String printDone(ArrayList<Task> tasks, int pos) throws DukeException {
         if (pos <= tasks.size() && pos > 0) {
             tasks.get(pos - 1).markAsDone(); //marking task as done
             System.out.println(line);
             System.out.println(bot);
-            System.out.println("Great work! I've marked this task as done:");
-            System.out.println(tasks.get(pos - 1));
-            System.out.println("Keep the ticks going! ^_^");
+            return "Great work! I've marked this task as done:\n" +
+            tasks.get(pos - 1).toString() +
+            "\nKeep the ticks going! ^_^";
         } else {
             throw new DukeException("You have keyed in an invalid number!");
         }
@@ -133,17 +150,24 @@ public class Ui {
      * @param findings Arraylist of tasks with the keyword.
      * @throws DukeException When findings is empty.
      */
-    public void printFindings(ArrayList<Task> findings) throws DukeException {
+    public String printFindings(ArrayList<Task> findings) throws DukeException {
+        StringBuilder res = new StringBuilder();
         System.out.println(line);
         System.out.println(bot);
         if (findings.isEmpty()) {
             throw new DukeException("There are no such tasks with this keyword! :(");
         } else {
             System.out.println("These are the tasks with your keyword:");
-            for (Task finding : findings) {
-                System.out.println(finding);
+            int i = 0;
+            for(Task task : findings) {
+                res.append(String.format("%s\n", task));
+                i++;
             }
+//            for (Task finding : findings) {
+//                System.out.println(finding);
+//            }
         }
+        return res.toString();
     }
 
     /**
@@ -152,12 +176,12 @@ public class Ui {
      * @param todoTask Task to be done.
      * @param tasks TaskList to add task to.
      */
-    public void printAddTodo(ToDo todoTask, TaskList tasks) {
+    public String printAddTodo(ToDo todoTask, TaskList tasks) {
         System.out.println(line);
         System.out.println(bot);
-        System.out.println("Got it! I've added this task:");
-        System.out.println(todoTask);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        return "Got it! I've added this task:\n" +
+        todoTask.toString() +
+       "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
@@ -166,12 +190,12 @@ public class Ui {
      * @param eventTask Event task.
      * @param tasks TaskList to add task to.
      */
-    public void printAddEvent(Event eventTask, TaskList tasks) {
+    public String printAddEvent(Event eventTask, TaskList tasks) {
         System.out.println(line);
         System.out.println(bot);
-        System.out.println("Got it! I've added this task:");
-        System.out.println(eventTask);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        return "Got it! I've added this task:\n" +
+        eventTask.toString() +
+        "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
@@ -180,12 +204,12 @@ public class Ui {
      * @param deadlineTask Deadline task.
      * @param tasks TaskList to add task to.
      */
-    public void printAddDeadline(Deadline deadlineTask, TaskList tasks) {
+    public String printAddDeadline(Deadline deadlineTask, TaskList tasks) {
         System.out.println(line);
         System.out.println(bot);
-        System.out.println("Got it! I've added this task:");
-        System.out.println(deadlineTask);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        return "Got it! I've added this task:\n" +
+        deadlineTask.toString() +
+        "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
