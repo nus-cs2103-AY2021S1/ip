@@ -3,52 +3,88 @@ package Duke;
 import java.util.Scanner;
 
 public class Ui {
-    Scanner sc;
+    private final Scanner sc;
 
-    public Ui(){
+    /**
+     * Constructor initialises Scanner.
+     */
+    public Ui() {
         this.sc = new Scanner(System.in);
     }
 
-    public void showWelcome(){
+    /**
+     * Prints welcome message
+     */
+    public void showWelcome() {
         System.out.println("Hello! I'm Duke\n" +
                 "What can I do for you?");
     }
 
-    public String readLine(){
+    /**
+     * Reads and returns system input.
+     * @return System input.
+     */
+    public String readLine() {
         return sc.nextLine();
     }
 
-    public void close(){
+    /**
+     * Closes Scanner
+     */
+    public void close() {
         this.sc.close();
     }
 
-    public void goodbye(){
+    /**
+     * Prints goodbye message
+     */
+    public void goodbye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void showAddTask(Task task){
+    /**
+     * Prints header and task added.
+     * @param task Task to print
+     */
+    public void showAddTask(Task task) {
         System.out.println("Go it. I've added this task:\n" + task.toString());
     }
 
-    public void showDoneTask(Task task){
+    /**
+     * Prints header and task done.
+     * @param task Task to print
+     */
+    public void showDoneTask(Task task) {
         System.out.println("Nice! I've marked this task as done:\n" + task);
     }
 
-    public void showRemovedTask(Task task){
+    /**
+     * Prints header and task removed.
+     * @param task Task to print
+     */
+    public void showRemovedTask(Task task) {
         System.out.println("Noted. I've removed this task:\n" + task.toString());
     }
 
-    public void showTotalTasks(int size){
+    /**
+     * Prints header and number of tasks in list.
+     * @param size
+     */
+    public void showTotalTasks(int size) {
         String plural = size != 1 ? "tasks" : "task";
         System.out.println("Now you have " + size + " " + plural + " in the list.");
     }
 
-    public void printMessage(String output){
+    public void printMessage(String output) {
         System.out.println(output);
     }
 
-    public void showError(String message) {
-        System.out.println(message);
+    /**
+     * Prints error message
+     * @param e Exception to print
+     */
+    public void showError(Exception e) {
+        System.out.println(e.getMessage());
     }
 
 }
