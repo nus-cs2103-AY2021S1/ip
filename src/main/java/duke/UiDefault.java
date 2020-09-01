@@ -2,7 +2,7 @@ package duke;
 
 import java.util.Scanner;
 
-public class UiDefault extends Ui {
+public class UiDefault implements Ui {
 
     //Constants used when formatting the bot's message
     protected static final String LINE_BREAK = "    ____________________________________________________________\n";
@@ -14,12 +14,17 @@ public class UiDefault extends Ui {
         scanner = new Scanner(System.in);
     }
 
+    @Override
+    public void startup() {
+        outputMessage(Ui.OPENING_MESSAGE);
+    }
+
     /**
      * Queries the System input stream for the next command in the form of a string.
      * @return string provided by the user
      */
     @Override
-    public String getResponse() {
+    public String getInput() {
         return scanner.nextLine();
     }
 
@@ -43,5 +48,8 @@ public class UiDefault extends Ui {
                 + '\n' + LINE_BREAK;
     }
 
+    @Override
+    public void exit() {
+    }
 
 }
