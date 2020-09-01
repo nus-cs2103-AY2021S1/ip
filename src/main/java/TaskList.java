@@ -15,6 +15,13 @@ public class TaskList {
         this.taskList.add(task);
     }
 
+    /**
+     * Called by Storage when Duke is initialised. Looks for the on hard disc storage of the list. If found, retrieves it to be used by Duke
+     * Else the text file is created to be used for future storing on hard disc
+     * @param File
+     * @return
+     * @throws IOException
+     */
     public static TaskList retrieveTaskList(Path File) throws IOException {
         TaskList returnTaskList = new TaskList();
         if (java.nio.file.Files.exists(File)) {
@@ -41,12 +48,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * Getter to return a copy of the ArrayList
+     * @return copy of ArrayList
+     */
     public ArrayList<Task> getList() {
         ArrayList<Task> returnTaskList = new ArrayList<>();
         for (Task task : taskList) returnTaskList.add(task);
         return returnTaskList;
     }
 
+    /**
+     * Deletes task specific to the index
+     * @param index
+     * @throws deleteException
+     * @throws IOException
+     */
     public void deleteTask(int index) throws deleteException, IOException {
         if (index <= taskList.size()) {
             taskList.remove(index - 1);
@@ -55,14 +72,26 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add Task given to the list
+     * @param task
+     */
     public void addTask(Task task) {
         taskList.add(task);
     }
 
+    /**
+     * Marks task with given index as completed
+     * @param index
+     */
     public void taskCompleted(int index) {
         taskList.get(index - 1).isDone = true;
     }
 
+    /**
+     * getter for the size of the ArrayList
+     * @return
+     */
     public int getSize() {
         return taskList.size();
     }

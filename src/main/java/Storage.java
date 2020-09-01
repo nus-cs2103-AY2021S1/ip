@@ -17,6 +17,12 @@ public class Storage {
         return returnStorage;
     }
 
+    /**
+     * Writes a specific task to the hard disc. Called by saveToDisk() method
+     * @param task
+     * @param printWriter
+     * @throws IOException
+     */
     public void writeTask(Task task, PrintWriter printWriter) throws IOException {
         Class taskType = task.getClass();
 
@@ -33,7 +39,10 @@ public class Storage {
 
     }
 
-
+    /**
+     * Called every time a change is made to the list. Updates the data stored on hard disc
+     * @throws IOException
+     */
     public void saveToDisk() throws IOException {
         boolean directoryExists = java.nio.file.Files.exists(PATH);
 
@@ -50,6 +59,10 @@ public class Storage {
         printWriter.close();
     }
 
+    /**
+     * Called when Duke is initialised
+     * @throws IOException
+     */
     public void loadFromDisk() throws IOException {
         taskList = TaskList.retrieveTaskList(FILE);
     }

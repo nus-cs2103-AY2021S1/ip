@@ -33,6 +33,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Called by ui to give users a list view of all their tasks
+     * @return list view of all tasks
+     */
     public String returnList() {
         String returnString = "";
         int counter = 0;

@@ -4,6 +4,16 @@ import java.util.Scanner;
 public class Parser {
     Scanner scanner;
 
+    /**
+     * Returns appropriate task after processing userInput. Calls on ui to give user a response
+     * @param userInput
+     * @param taskList
+     * @param ui
+     * @return Task to be used by Duke instance
+     * @throws ToDoException
+     * @throws deadlineException
+     * @throws eventException
+     */
     public Task processAddTaskInput(String userInput, TaskList taskList, Ui ui) throws ToDoException, deadlineException, eventException {
         String taskType = userInput.split(" ")[0];
         Task thisTask = null;
@@ -30,6 +40,14 @@ public class Parser {
         return thisTask;
     }
 
+    /**
+     * Processes userInput and calls on ui to give appropriate response to the user
+     * @param userInput
+     * @param taskList
+     * @param ui
+     * @throws IOException
+     * @throws DukeException
+     */
     public void processOtherActionInput(String userInput, TaskList taskList, Ui ui) throws IOException, DukeException {
         String actionType = userInput.split(" ")[0];
         switch (actionType) {
