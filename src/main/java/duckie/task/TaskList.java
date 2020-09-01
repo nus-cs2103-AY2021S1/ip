@@ -2,9 +2,9 @@ package duckie.task;
 
 import java.util.ArrayList;
 
-import duckie.ui.Ui;
 import duckie.exception.DuckieException;
 import duckie.exception.DuckieNoListException;
+import duckie.ui.Ui;
 
 /**
  * Contains all the saved tasks in a List form

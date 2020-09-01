@@ -3,10 +3,10 @@ package duckie.command;
 import java.util.ArrayList;
 
 import duckie.Storage;
-import duckie.ui.Ui;
 import duckie.exception.DuckieException;
 import duckie.task.Task;
 import duckie.task.TaskList;
+import duckie.ui.Ui;
 
 /**
  * Command to retrieve all Tasks containing the keyword

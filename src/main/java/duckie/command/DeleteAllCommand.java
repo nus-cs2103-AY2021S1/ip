@@ -3,11 +3,11 @@ package duckie.command;
 import java.util.ArrayList;
 
 import duckie.Storage;
-import duckie.ui.Ui;
 import duckie.exception.DuckieException;
 import duckie.exception.DuckieNoListException;
 import duckie.task.Task;
 import duckie.task.TaskList;
+import duckie.ui.Ui;
 
 /**
  * Command to delete all tasks in the TaskList

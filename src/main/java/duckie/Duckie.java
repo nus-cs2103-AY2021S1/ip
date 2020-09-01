@@ -1,5 +1,12 @@
 package duckie;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import duckie.command.Command;
+import duckie.exception.DuckieException;
+import duckie.task.TaskList;
+import duckie.ui.DialogBox;
 import duckie.ui.Ui;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -7,18 +14,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import duckie.command.Command;
-import duckie.exception.DuckieException;
-import duckie.task.TaskList;
 
 /**
  * Main file for the chatbot Duckie
@@ -34,6 +36,8 @@ public class Duckie extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/duckie.png"));
 
     /**
      * Instantiate the Duckie object together with the filePath of duckie file
@@ -51,6 +55,9 @@ public class Duckie extends Application {
         }
     }
 
+    /**
+     * An empty constructor to start launcher
+     */
     public Duckie() {
         String cwd = System.getProperty("user.dir");
         Path filePath = Paths.get(cwd, "data", "duckie.txt");
@@ -131,6 +138,14 @@ public class Duckie extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
     }
 
     /**
@@ -145,6 +160,29 @@ public class Duckie extends Application {
         textToAdd.setWrapText(true);
 
         return textToAdd;
+    }
+
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user)),
+                new DialogBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     /**

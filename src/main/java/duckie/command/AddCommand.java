@@ -1,10 +1,10 @@
 package duckie.command;
 
 import duckie.Storage;
-import duckie.ui.Ui;
 import duckie.exception.DuckieException;
 import duckie.task.Task;
 import duckie.task.TaskList;
+import duckie.ui.Ui;
 
 /**
  * Command to add task into the TaskList

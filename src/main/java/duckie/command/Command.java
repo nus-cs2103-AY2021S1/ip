@@ -1,9 +1,9 @@
 package duckie.command;
 
 import duckie.Storage;
-import duckie.ui.Ui;
 import duckie.exception.DuckieException;
 import duckie.task.TaskList;
+import duckie.ui.Ui;
 
 /**
  * Parent class of all the Commands action
