@@ -7,10 +7,8 @@ import java.util.Scanner;
  */
 public class Ui {
     // String for output format
-    private static final String UNDERSCORE = "_________________________________________" +
-            "______________________________________________";
-    static Scanner SC = new Scanner(System.in);
-
+    private static final String UNDERSCORE = "_________________________________________"
+            + "______________________________________________";
     private static final String ALL_COMMANDS = "\n    You can use the following commands in this chat bot:"
             + (Commands.TODO).getUsage()
             + (Commands.DEADLINE).getUsage()
@@ -22,6 +20,7 @@ public class Ui {
             + (Commands.FIND).getUsage()
             + (Commands.FINDTYPE).getUsage()
             + (Commands.BYE).getUsage();
+    private static final Scanner SC = new Scanner(System.in);
 
     /**
      * Calls reply function with greeting string
@@ -35,12 +34,11 @@ public class Ui {
      * @return String user input
      */
     public static String getInput() {
-         String text = SC.nextLine();
-         if (text.equals("bye")) {
-             SC.close();
-         }
-
-         return text;
+        String text = SC.nextLine();
+        if (text.equals("bye")) {
+            SC.close();
+        }
+        return text;
     }
 
     /**

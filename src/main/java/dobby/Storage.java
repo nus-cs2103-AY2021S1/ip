@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
+
 import dobby.task.Task;
 
 /**
@@ -31,7 +32,7 @@ public class Storage {
             while (scanner.hasNext()) {
                 String str = scanner.nextLine();
                 try {
-                    (this.tasks).createFromStorage(str);
+                    this.tasks.createFromStorage(str);
                 } catch (ParseException e) { // should never be called
                     Ui.reply("\n    " + e.getMessage() + "\n    ");
                 }
