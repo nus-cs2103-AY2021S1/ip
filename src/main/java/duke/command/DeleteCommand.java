@@ -25,6 +25,17 @@ public class DeleteCommand implements Command {
     }
 
     @Override
+    public String execute(TaskList tasks, Storage store) throws DukeException {
+        if (index >= tasks.size() || index < 0) {
+            throw new InvalidArgumentException("index");
+        }
+        Task deleted = tasks.remove(index);
+        return "Noted. I've removed this task:\n  " + deleted.toString() + "\nNow you have " + tasks.size()
+                + " tasks in the list.";
+
+    }
+
+    @Override
     public boolean isExit() {
         return false;
     }

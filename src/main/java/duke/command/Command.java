@@ -15,6 +15,7 @@ public interface Command {
      * @throws DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage store) throws DukeException;
+    public String execute(TaskList tasks, Storage store) throws DukeException;
 
     /**
      * Return true if command signals the termination of the chatbot.

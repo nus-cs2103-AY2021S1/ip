@@ -24,6 +24,13 @@ public class AddTaskCommand implements Command {
     }
 
     @Override
+    public String execute(TaskList tasks, Storage store) throws DukeException {
+        tasks.addTask(task);
+        return "Got it. I've added this task:\n  " + task.toString() + "\nNow you have " + tasks.size()
+                + " tasks in the list.";
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

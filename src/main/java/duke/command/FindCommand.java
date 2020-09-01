@@ -31,6 +31,21 @@ public class FindCommand implements Command {
     }
 
     @Override
+    public String execute(TaskList tasks, Storage store) throws DukeException {
+        List<Task> results = tasks.findAll(query);
+        String tasksString = "";
+        if (results.size() == 0) {
+            return "No matches found :(";
+        } else {
+            for (int i = 0; i < results.size(); i++) {
+                tasksString += "" + (i + 1) + "." + results.get(i).toString() + (i + 1 == tasks.size() ? "" : "\n");
+            }
+            return "Here are the matching tasks in your list:\n" + tasksString;
+        }
+
+    }
+
+    @Override
     public boolean isExit() {
         return false;
     }

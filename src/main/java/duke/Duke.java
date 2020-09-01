@@ -24,29 +24,13 @@ public class Duke {
         tasks = new TaskList(storage);
     }
 
-    /**
-     * To start Dook chatbot.
-     */
-    public void run() {
-
-        // Initialise
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.print(e.toString());
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String lineToPrint = c.execute(tasks, storage);
+            return lineToPrint;
+        } catch (DukeException e) {
+            return e.toString();
         }
-        ui.showExit();
-    }
-
-    public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
     }
 }
