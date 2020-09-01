@@ -25,7 +25,7 @@ public class Ui {
      * Prints a line separator.
      */
     public void linePrinter() {
-        System.out.println("\n-------------------------------------------------------------------------\n");
+        System.out.println("\n------------------------------------------------\n");
     }
 
     /**
@@ -33,8 +33,8 @@ public class Ui {
      */
     public void start() {
         linePrinter();
-        printResult("Hello! I'm Duke\n" +
-                "What can I do for you?");
+        printResult("Hey I'm Duke...\n" +
+                "What do you wanna do?");
         linePrinter();
     }
 
@@ -77,4 +77,5 @@ public class Ui {
     public void printResult(String lines) {
         System.out.println(lines.replaceAll("(?m)^", "\t"));
     }
+
 }
