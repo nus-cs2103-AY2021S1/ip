@@ -49,12 +49,18 @@ public class Duke extends Application {
             tasks = new TaskList();
         }
     }
-
-    public Duke() {
-        filePath = "data";
-        ui = new Ui();
-        storage = new Storage("data");
-    }
+//
+//    public Duke() {
+//        filePath = "data";
+//        ui = new Ui();
+//        storage = new Storage("data");
+//        try {
+//            tasks = new TaskList(storage.load());
+//        } catch (DukeException e) {
+//            ui.showLoadingError();
+//            tasks = new TaskList();
+//        }
+//    }
 
     /**
      * Main method to get duke to start running and ask for user input
@@ -66,7 +72,8 @@ public class Duke extends Application {
         boolean isExit = false;
         while (!isExit) {
             System.out.println("Hello! I'm meimei ^_^\nI could scream at you all day!");
-            String command = ui.ask();
+            //String command = ui.ask();
+            String command = userInput.getText();
             if (command.contains("bye")) {
                 isExit = true;
             } else {
@@ -189,7 +196,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return "Meimei heard: " + input;
     }
 }
 
