@@ -5,9 +5,8 @@ import java.time.LocalDate;
 /**
  * Represents an Event task that is created upon user input.
  */
-public class Event extends Task{
+public class Event extends Task {
     protected String at;
-    int code = 2;
 
     /**
      * Constructor for an Event Task which stores the description

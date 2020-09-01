@@ -4,7 +4,7 @@ package duke.tasks;
  * Represents a list command. This command handles the list input
  * from users.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     protected String list;
 
     /**

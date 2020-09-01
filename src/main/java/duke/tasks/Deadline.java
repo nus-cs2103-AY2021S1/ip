@@ -7,7 +7,6 @@ import java.time.LocalDate;
  */
 public class Deadline extends Task {
     protected String by;
-    int code = 1;
 
     /**
      * Constructor for a Deadline Task which stores the description of

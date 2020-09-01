@@ -13,8 +13,8 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    static String rtfPath = "data/duke.rtf";
-    static String newLine = System.lineSeparator();
+    private static String rtfPath = "data/duke.rtf";
+    private static String newLine = System.lineSeparator();
 
 
     public Storage(TaskList tasksLs) throws FileNotFoundException {
@@ -57,7 +57,7 @@ public class Storage {
                 String[] description = eachTask.split("%");
                 Event eventTask = new Event(description[2], description[3]);
                 taskLs.add(eventTask);
-            } else {}
+            } else { }
         }
     }
 
@@ -71,12 +71,12 @@ public class Storage {
         int i = 1;
         for (Task n : itemsLs) {
             if (n instanceof Todo) {
-                s = s + "[T]" + "%" +  n.isDone + "%" + n.description + newLine;
+                s = s + "[T]" + "%" + n.isDone + "%" + n.description + newLine;
             } else if (n instanceof Deadline) {
                 s = s + "[D]" + "%" + n.isDone + "%" + n.description + "%" + ((Deadline) n).by + newLine;
-            } else if (n instanceof  Event) {
+            } else if (n instanceof Event) {
                 s = s + "[E]" + "%" + n.isDone + "%" + n.description + "%" + ((Event) n).at + newLine;
-            } else {}
+            } else { }
         }
 
         return s;

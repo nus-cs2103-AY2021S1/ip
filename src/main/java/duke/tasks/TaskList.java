@@ -37,8 +37,8 @@ public class TaskList {
     public void delete(String toDelete) {
         String command = toDelete.replaceAll("[^\\d.]", "");
         int i = Integer.parseInt(command.trim());
-        Task deletedTask = this.taskLs.get(i-1);
-        this.taskLs.remove(i-1);
+        Task deletedTask = this.taskLs.get(i - 1);
+        this.taskLs.remove(i - 1);
         int numTask = this.taskLs.size();
         System.out.println("Noted. I've removed this task: ");
         System.out.println(deletedTask);

@@ -4,7 +4,6 @@ package duke.tasks;
  * Represents a Todo task that is created upon user input.
  */
 public class Todo extends Task {
-    int code = 0;
 
     /**
      * Constructor for a Todo task which stores the description

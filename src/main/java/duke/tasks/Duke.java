@@ -13,6 +13,10 @@ public class Duke {
     private UI ui;
     private Parser parser;
 
+    /**
+     * Creates the Duke object with its attributes.
+     * @throws FileNotFoundException File containing list of task may not be found.
+     */
     public Duke() throws FileNotFoundException {
         ui = new UI();
         tasks = new TaskList();
@@ -25,13 +29,13 @@ public class Duke {
     }
 
     /**
-     * Here is where the Duke program is run and commands are executed.
+     * The Duke program is run and commands are executed.
      * @throws IOException File containing list of task may not be found.
      */
     public void run() throws IOException {
         UI.intro();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             String toPrint = ui.nextInput();
             ui.dividerLine();
 

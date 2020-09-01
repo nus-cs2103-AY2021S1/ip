@@ -6,7 +6,7 @@ import java.io.IOException;
  * Represents a todo command. This command handles the todo input
  * from users.
  */
-public class TodoCommand extends Command{
+public class TodoCommand extends Command {
     protected String todo;
 
     /**
