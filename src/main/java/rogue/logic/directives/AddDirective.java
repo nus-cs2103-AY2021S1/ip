@@ -19,7 +19,7 @@ import java.time.LocalDate;
  * Adds a {@code Task} to the {@code TaskList}.
  */
 public class AddDirective implements Executable {
-    /** Message to add to a {@code Report} upon adding a {@code Task} successfully. */
+    /** Message upon adding a {@code Task} successfully. */
     private final String MESSAGE_ADD_SUCCESS = "sInCe yOu'rE So hElPlEsS, i'lL ReMeMbEr \"%s\" FoR YoU.\n"
             + "yOu hAvE MaDe mE ReMeMbEr %d tAsK(s).";
 

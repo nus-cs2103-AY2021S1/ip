@@ -60,6 +60,12 @@ public class TaskList {
         return tasks.remove(index);
     }
 
+    /**
+     * Finds {@code Task} with descriptions containing the search term.
+     *
+     * @param searchTerm The search term.
+     * @return A list of tasks whose descriptions contain the search term
+     */
     public List<Task> search(String searchTerm) {
         return tasks.stream()
                 .filter(task -> task.getDescription().contains(searchTerm))

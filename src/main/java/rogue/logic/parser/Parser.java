@@ -8,13 +8,30 @@ import rogue.logic.parser.exceptions.UnknownCommandException;
 
 import rogue.commons.exceptions.IncorrectArgumentException;
 
+/**
+ * Parses user inputs into an {@code Executable} that is understood
+ * and can be executed by {@code Rogue}.
+ */
 public class Parser {
-    private static final String ERROR_INCORRECT_ARGUMENT = "i hAtE YoU! sToP MaKiNg mE Do sOmEtHiNg iMpOsSiBlE.";
+    /** Message for when user input is not a known {@code Action}. */
     private static final String ERROR_UNKNOWN_COMMAND = "sToP TrYiNg tO FoOl mE. %s iS An uNkNoWn cOmMaNd.";
 
+    /**
+     * Creates an {@code Executable} to be run by {@code Rogue}.
+     *
+     * Splits the user input into separate arguments based on the whitespace
+     * character. The first argument is checked against the list of possible
+     * {@code Action}. A valid {@code Action} will result in the appropriate
+     * {@code Executable} being created. Otherwise, an exception is thrown.
+     *
+     * @param fullCommand The user input.
+     * @return An {@code Executable} corresponding to the {@code Action}
+     * @throws UnknownCommandException if user input is an invalid {@code Action}
+     * @throws IncorrectArgumentException if the arguments are not suitable for the particular {@code Action}
+     */
     public static Executable createExe(String fullCommand)
             throws UnknownCommandException, IncorrectArgumentException {
-        String[] args = fullCommand.trim().split("\\s");
+        String[] args = fullCommand.trim().split("\\s"); // User input split by whitespace
 
         Action action = Action.getAction(args[0]);
 

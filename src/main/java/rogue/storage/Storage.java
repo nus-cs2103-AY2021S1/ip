@@ -85,7 +85,7 @@ public class Storage {
 
     /**
      * Reads the summary of each {@code Task} from the file.
-     * Converts each summary into a {@code Task}
+     * Converts each summary into a {@code Task}.
      *
      * @return A list of tasks
      */
@@ -115,7 +115,7 @@ public class Storage {
     }
 
     /**
-     * Converts each entry in the task summary to an actual {@code Task}.
+     * Converts each entry in the task summary to a {@code Task}.
      * If any of the entries cannot be parsed, an exception is thrown.
      *
      * @param taskSummary

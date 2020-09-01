@@ -12,7 +12,7 @@ import rogue.ui.Ui;
  * Starts the exit sequence to stop {@code Rogue} from running.
  */
 public class ExitDirective implements Executable {
-    /** Message to add to a {@code Report} for when {@code Rogue} is exiting. */
+    /** Message for when {@code Rogue} is exiting. */
     private final String MESSAGE_EXIT_SUCCESS = "hOpE To sEe yOu aGaIn. NoT.";
 
     /**

@@ -15,10 +15,10 @@ import rogue.commons.exceptions.IncorrectArgumentException;
  * Marks a {@code Task} as complete.
  */
 public class DoneDirective implements Executable {
-    /** Message to add to a {@code Report} when index is invalid. */
+    /** Message for when index is invalid. */
     private final String ERROR_INCORRECT_INDEX = "sToP TrYiNg tO FoOl mE. taSK #%d dOeS NoT ExIsT.";
 
-    /** Message to add to a {@code Report} when {@code Task} is marked as done successfully. */
+    /** Message for when {@code Task} is marked as done successfully. */
     private final String MESSAGE_DONE_SUCCESS = "fInAlLy, I feLL AsLeEp wHiLe wAiTiNg fOr yOu tO FiNiSh: %s";
 
     private final int index;
