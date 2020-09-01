@@ -53,7 +53,7 @@ public class Parser {
                 System.out.println();
             }
             System.setOut(oldOutput);
-            System.out.println("    BARK WOOF: (You have these tasks currently: )");
+            System.out.println("BARK WOOF: (You have these tasks currently: )");
             TaskList.viewList();
         } catch ( IOException e) {
             throw new DukeExceptions(e.getMessage());
@@ -85,23 +85,23 @@ public class Parser {
                     try {
                         int x = Integer.parseInt(input.substring(spaceIndex + 1)) - 1;
                         if (x + 1 > TaskList.getThingsOnListSize()) {
-                            throw new DukeExceptions("    Woof? (This task doesn't exist?)");
+                            throw new DukeExceptions("Woof? (This task doesn't exist?)");
                         }
                         if (input.substring(0, spaceIndex).equals(UI.getMessage("DONE"))) {
                             TaskList.markDone(x);
-                            return TaskList.getListView() + "    BARK BARK!!! (Task marked as done!!!)";
+                            return TaskList.getListView() + "BARK BARK!!! (Task marked as done!!!)";
                         } else if (input.substring(0, spaceIndex).equals(UI.getMessage("DELETE"))) {
                             TaskList.deleteFromList(x);
-                            return ("    Bark bark: bork bark. (Removing task: " +
+                            return ("Bark bark: bork bark. (Removing task: " +
                                     TaskList.getThingsOnList().get(x) + ".");
                         }
                     } catch (NumberFormatException e) {
-                        throw new DukeExceptions("    Bark. (That number isn't on the list.)");
+                        throw new DukeExceptions("Bark. (That number isn't on the list.)");
                     }
                 } else {
                     int cmdIndex = input.indexOf("/");
                     if ((cmdIndex == 0 || (input.contains("todo") || input.contains("find")) && input.length() == 4)) {
-                        throw new DukeExceptions("    Bark bark? (There's no content for this command?)");
+                        throw new DukeExceptions("Bark bark? (There's no content for this command?)");
                     } else if (cmdIndex != -1 && cmdIndex != input.length() - 1) {
                         String cmd = input.substring(cmdIndex, cmdIndex + 3);
                         try {
@@ -112,24 +112,24 @@ public class Parser {
                             }
                         } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
                             throw new DukeExceptions(
-                                    "    Bark (Please make sure format of Date/Time is yyyy-MM-dd HHmm)");
+                                    "Bark (Please make sure format of Date/Time is yyyy-MM-dd HHmm)");
                         }
                     } else if (input.contains("todo") && !(input.substring(input.length() - 4).contains("todo"))) {
                         if (input.substring(5).isEmpty()) {
-                            throw new DukeExceptions("    Bork? (This todo is empty?)");
+                            throw new DukeExceptions("Bork? (This todo is empty?)");
                         }
                         TaskList.addToList(new ToDos(input));
                     } else if (input.contains("find") && !input.substring(4).contains("find")) {
                         searched = true;
                         if (input.substring(5).isEmpty()) {
-                            throw new DukeExceptions("    Bork?? (This find is empty?)");
+                            throw new DukeExceptions("Bork?? (This find is empty?)");
                         }
                         return TaskList.getFind(input.substring(5));
                     }
                     if (TaskList.getThingsOnListSize() == startingSize && !searched) {
-                        throw new DukeExceptions("    Bark bark bark! (Please use me with proper Duke.TaskList.Duke.commands!)");
+                        throw new DukeExceptions("Bark bark bark! (Please use me with proper Duke.TaskList.Duke.commands!)");
                     } else {
-                        return ("    Bark. Bork: bark bark woof. (Roger. I've added this task:\n    " +
+                        return ("Bark. Bork: bark bark woof. (Roger. I've added this task:\n" +
                                 TaskList.getLastTask() + "\n    " +
                                 "Now you have " + TaskList.getThingsOnListSize() + " tasks in the list.)");
                     }

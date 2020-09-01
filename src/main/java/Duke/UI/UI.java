@@ -113,7 +113,7 @@ public class UI {
      * Prints a standard line to create spacing.
      */
     public static void printLine() {
-        System.out.println("    ************************************************************");
+        System.out.println("************************************************************");
     }
 
     /**
@@ -121,7 +121,7 @@ public class UI {
      * @return The line.
      */
     public static String getLine() {
-        return "    ************************************************************";
+        return "************************************************************";
     }
 
     /**

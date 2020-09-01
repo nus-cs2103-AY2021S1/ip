@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
 
     private String greeting = Duke.getGreeting();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     @FXML
@@ -39,13 +39,10 @@ public class MainWindow extends AnchorPane {
         try {
             Parser.readSave(Storage.getTmpFile());
         } catch (DukeExceptions e) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog(e.getMessage(), dukeImage),
-                    DialogBox.getDukeDialog(TaskList.getListView(), dukeImage)
-            );
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(e.getMessage(), dukeImage));
         }
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting + "\n" + TaskList.getListView(), dukeImage));
     }
 
     public void setDuke(Duke d) {

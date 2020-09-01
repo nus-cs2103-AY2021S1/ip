@@ -60,10 +60,10 @@ public class TaskList {
      */
     public static void viewList() {
         if (thingsOnList.size() == 0) {
-            System.out.println("    Bark bark. (No tasks right now.)");
+            System.out.println("Bark bark. (No tasks right now.)");
         } else {
             for (int i = 0; i < thingsOnList.size(); i++) {
-                System.out.println("    " + (i + 1) + ". " + thingsOnList.get(i));
+                System.out.println((i + 1) + ". " + thingsOnList.get(i));
             }
         }
     }
@@ -71,10 +71,11 @@ public class TaskList {
     public static String getListView() {
         String list = "";
         if (thingsOnList.size() == 0) {
-            list = "    Bark bark. (No tasks right now.)";
+            list = "Bark bark. (No tasks right now.)";
         } else {
+            list += "BARK WOOF: (You have these tasks currently: )\n";
             for (int i = 0; i < thingsOnList.size(); i++) {
-                list += "    " + (i + 1) + ". " + thingsOnList.get(i) + "\n";
+                list += (i + 1) + ". " + thingsOnList.get(i) + "\n";
             }
         }
         return list;
@@ -89,7 +90,7 @@ public class TaskList {
         System.out.println("Woof bark: (Here are the tasks that match your key word: )");
         for (int i = 0; i < thingsOnList.size(); i++) {
             if (thingsOnList.get(i).toString().contains(keyWord)) {
-                System.out.println(    (i + 1) + ". "  + thingsOnList.get(i));
+                System.out.println((i + 1) + ". "  + thingsOnList.get(i));
                 printed = true;
             }
         }
