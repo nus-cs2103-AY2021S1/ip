@@ -21,13 +21,13 @@ public class Parser {
             System.exit(0);
         } else if (userInput.startsWith("list")) {
             String message = "";
-            for (int i = 0; i < taskList.getTasks().size(); i++) {
+            for (int i = 0; i < taskList.getTaskList().size(); i++) {
                 message += (i + 1) + ": " + taskList.getTask(i) + "\n";
             }
             ui.printMessage(message);
         } else if (userInput.matches("done ([0-9]+)")) {
             int number = Integer.parseInt(userInput.split(" ")[1]);
-            if (number > taskList.getTasks().size()) {
+            if (number > taskList.getTaskList().size()) {
                 ui.printMessage("duke.Task not found please choose another number!");
             }
             else if (number < 100 && number > 0) {
@@ -41,9 +41,9 @@ public class Parser {
             } else {
                 Task task = new ToDo(description);
                 taskList.addTask(task);
-                storage.saveToFile(task);
+                storage.save(task);
                 ui.printMessage("Added: " + task
-                        + String.format("\nNow you have %d tasks in the list", taskList.getTasks().size()));
+                        + String.format("\nNow you have %d tasks in the list", taskList.getTaskList().size()));
             }
         } else if (userInput.startsWith("deadline")) {
             if (userInput.contains("/by")) {
@@ -52,9 +52,9 @@ public class Parser {
 
                 Task task = new Deadline(description, LocalDate.parse(dueDate));
                 taskList.addTask(task);
-                storage.saveToFile(task);
+                storage.save(task);
                 ui.printMessage("Added " + task
-                        + String.format("\nNow you have %d tasks in the list", taskList.getTasks().size()));
+                        + String.format("\nNow you have %d tasks in the list", taskList.getTaskList().size()));
             } else {
                 System.out.println(new DeadlineMissingDateException());
             }
@@ -65,9 +65,9 @@ public class Parser {
                 System.out.println(time);
                 Task task = new Event(description, LocalDate.parse(time));
                 taskList.addTask(task);
-                storage.saveToFile(task);
+                storage.save(task);
                 ui.printMessage("Added " + task
-                        + String.format("\nNow you have %d tasks in the list", taskList.getTasks().size()));
+                        + String.format("\nNow you have %d tasks in the list", taskList.getTaskList().size()));
             } else {
                 System.out.println(new EventMissingDateException());
             }
@@ -75,7 +75,7 @@ public class Parser {
             int taskToDelete = Integer.parseInt(userInput.replace("delete ", "")) - 1;
 
             ui.printMessage("I have removed this task:\n" + taskList.getTask(taskToDelete)
-                    + String.format("\nNow you have %d tasks in the list", taskList.getTasks().size() - 1));
+                    + String.format("\nNow you have %d tasks in the list", taskList.getTaskList().size() - 1));
             taskList.deleteTask(taskToDelete);
         } else {
             System.out.println(new InvalidInputException());

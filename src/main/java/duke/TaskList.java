@@ -18,7 +18,7 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    public List<Task> getTasks() {
+    public List<Task> getTaskList() {
         return tasks;
     }
 
