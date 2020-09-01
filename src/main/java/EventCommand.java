@@ -9,7 +9,8 @@ public class EventCommand extends Command {
 
 
     @Override
-    public String execute(TaskList tasklist, UI ui) throws DukeEmptyEventTimeException, DukeEmptyEventException, DukeTimeParseException {
+    public String execute(TaskList tasklist, UI ui) throws DukeEmptyEventTimeException, DukeEmptyEventException,
+            DukeTimeParseException {
         String message = "";
         try {
 

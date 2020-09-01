@@ -1,6 +1,6 @@
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+
 
 /**
  * Main class where Duke program is run.
@@ -40,63 +40,63 @@ public class Duke {
      */
     public String run(String input) {
         String message = "";
-                try {
-                    if (Parser.isList(input)) {
-                        ListCommand list = new ListCommand(input);
-                        message = list.execute(this.tasks, this.ui);
-                    } else if (Parser.isDone(input)) {
-                        DoneCommand done = new DoneCommand(input);
-                        message = done.execute(this.tasks, this.ui);
-                    } else if (Parser.isToDo(input)) {
-                        ToDoCommand todo = new ToDoCommand(input);
-                        message = todo.execute(this.tasks, this.ui);
-                    } else if (Parser.isDeadline(input)) {
-                        DeadlineCommand deadline = new DeadlineCommand(input);
-                        message = deadline.execute(this.tasks, this.ui);
-                    } else if (Parser.isEvent(input)) {
-                        EventCommand event = new EventCommand(input);
-                        message = event.execute(this.tasks, ui);
-                    } else if (Parser.isDelete(input)) {
-                        DeleteCommand delete = new DeleteCommand(input);
-                        message = delete.execute(this.tasks, ui);
-                    } else if (Parser.isFind(input)) {
-                        FindCommand find = new FindCommand(input);
-                        message = find.execute(this.tasks, this.ui);
-                    } else {
-                        throw new DukeUnknownInputException(input);
-                    }
-                } catch (DukeUnknownInputException e) {
-                    message = e.getMessage();
-                } catch (DukeEmptyDeadlineException e) {
-                    message = e.getMessage();
-                } catch (DukeInvalidDoneNumException e) {
-                    message = e.getMessage();
-                } catch (DukeEmptyDeadlineTimeException e) {
-                    message = e.getMessage();
-                } catch (DukeDeleteException e) {
-                    message = e.getMessage();
-                } catch (DateTimeParseException e) {
-                    message = e.getMessage();
-                } catch (DukeEmptyFindException e) {
-                    message = e.getMessage();
-                } catch (DukeEmptyEventTimeException e) {
-                    message = e.getMessage();
-                } catch (DukeEmptyEventException e) {
-                    message = e.getMessage();
-                } catch (DukeEmptyToDoException e) {
-                    message = e.getMessage();
-                } catch (DukeEmptyTaskListException e) {
-                    message = e.getMessage();
-                } catch (DukeNoMatchesExcpetion e) {
-                    message = e.getMessage();
-                } catch (DukeTimeParseException e) {
-                    message = e.getMessage();
-                }
-
-            if(Parser.isBye(input)) {
-                message = ui.printByeMessage();
+        try {
+            if (Parser.isList(input)) {
+                ListCommand list = new ListCommand(input);
+                message = list.execute(this.tasks, this.ui);
+            } else if (Parser.isDone(input)) {
+                DoneCommand done = new DoneCommand(input);
+                message = done.execute(this.tasks, this.ui);
+            } else if (Parser.isToDo(input)) {
+                ToDoCommand todo = new ToDoCommand(input);
+                message = todo.execute(this.tasks, this.ui);
+            } else if (Parser.isDeadline(input)) {
+                DeadlineCommand deadline = new DeadlineCommand(input);
+                message = deadline.execute(this.tasks, this.ui);
+            } else if (Parser.isEvent(input)) {
+                EventCommand event = new EventCommand(input);
+                message = event.execute(this.tasks, ui);
+            } else if (Parser.isDelete(input)) {
+                DeleteCommand delete = new DeleteCommand(input);
+                message = delete.execute(this.tasks, ui);
+            } else if (Parser.isFind(input)) {
+                FindCommand find = new FindCommand(input);
+                message = find.execute(this.tasks, this.ui);
+            } else {
+                throw new DukeUnknownInputException(input);
             }
-            storage.save(storage.convertArrayToSaveFormat(this.tasks));
-            return message;
+        } catch (DukeUnknownInputException e) {
+            message = e.getMessage();
+        } catch (DukeEmptyDeadlineException e) {
+            message = e.getMessage();
+        } catch (DukeInvalidDoneNumException e) {
+            message = e.getMessage();
+        } catch (DukeEmptyDeadlineTimeException e) {
+            message = e.getMessage();
+        } catch (DukeDeleteException e) {
+            message = e.getMessage();
+        } catch (DateTimeParseException e) {
+            message = e.getMessage();
+        } catch (DukeEmptyFindException e) {
+            message = e.getMessage();
+        } catch (DukeEmptyEventTimeException e) {
+            message = e.getMessage();
+        } catch (DukeEmptyEventException e) {
+            message = e.getMessage();
+        } catch (DukeEmptyToDoException e) {
+            message = e.getMessage();
+        } catch (DukeEmptyTaskListException e) {
+            message = e.getMessage();
+        } catch (DukeNoMatchesExcpetion e) {
+            message = e.getMessage();
+        } catch (DukeTimeParseException e) {
+            message = e.getMessage();
+        }
+
+        if (Parser.isBye(input)) {
+            message = ui.printByeMessage();
+        }
+        storage.save(storage.convertArrayToSaveFormat(this.tasks));
+        return message;
     }
 }

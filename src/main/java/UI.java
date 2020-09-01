@@ -48,8 +48,6 @@ public class UI {
             if (keywordTasks.size() == 0) {
                 throw new DukeNoMatchesExcpetion("");
             }
-
-
             int sizeStore = keywordTasks.size();
             for (int i = 1; i < sizeStore + 1; i++) {
                 message += String.valueOf(i) + "." + keywordTasks.get(i - 1).toString() + "\n";
