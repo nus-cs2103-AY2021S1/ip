@@ -1,15 +1,15 @@
 package duke;
 
-import exception.InvalidDeadlineException;
-import exception.InvalidEventException;
-import exception.InvalidTodoException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import exception.InvalidDeadlineException;
+import exception.InvalidEventException;
+import exception.InvalidTodoException;
 
 class Storage {
 
@@ -29,7 +29,7 @@ class Storage {
                 }
             }
             appendToFile("data/duke.txt", replacementText.toString());
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Folder data not found! " + e);
         }
     }
@@ -107,7 +107,7 @@ class Storage {
                         tl.addEvent(ui, list, curr.split(" ", 2)[1], false, true);
                     }
                 } catch (InvalidEventException e) {
-                    System.out.println( e);
+                    System.out.println(e);
                 }
                 break;
             default:

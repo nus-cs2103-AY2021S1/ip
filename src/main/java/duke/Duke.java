@@ -1,27 +1,32 @@
 package duke;
 
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-import exception.*;
+import exception.DukeErrorException;
+import exception.InvalidDeadlineException;
+import exception.InvalidEventException;
+import exception.InvalidTodoException;
 
 /**
  * Main class for the Duke application
  */
 public class Duke {
     // Scanner to read input
-    Scanner readSc, inputSc;
+    private Scanner readSc;
+    // Scanner to give input
+    private Scanner inputSc;
     // List of tasks
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
     // Ui object to print out displays
-    Ui ui;
+    private Ui ui;
     // Storage object to handle saving to file
-    Storage storage;
+    private Storage storage;
     // TaskList object to handle insertion, deletion, etc of tasks
-    TaskList tl;
+    private TaskList tl;
     // Parser object to process inputs and commands
-    Parser parser;
+    private Parser parser;
 
     /**
      * A constructor to initialize Duke Chatbot
@@ -71,15 +76,15 @@ public class Duke {
                 break;
             } else if (command.equals(Commands.LIST)) {
                 ui.printList(tasks);
-            } else if (command.equals(Commands.DONE)){
+            } else if (command.equals(Commands.DONE)) {
                 try {
-                    tl.makeDone(tasks,Integer.parseInt(splitted[1]) - 1);
+                    tl.makeDone(tasks, Integer.parseInt(splitted[1]) - 1);
                 } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
                     System.out.println(ex);
                 }
-            } else if (command.equals(Commands.DELETE)){
+            } else if (command.equals(Commands.DELETE)) {
                 try {
-                    tl.deleteTask(tasks,Integer.parseInt(splitted[1]) - 1);
+                    tl.deleteTask(tasks, Integer.parseInt(splitted[1]) - 1);
                 } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
                     System.out.println(ex);
                 }

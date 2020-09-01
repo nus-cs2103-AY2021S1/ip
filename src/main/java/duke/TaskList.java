@@ -1,19 +1,27 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+
 import exception.DukeErrorException;
 import exception.InvalidDeadlineException;
 import exception.InvalidEventException;
 import exception.InvalidTodoException;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 /**
  * Represents a {@code Tasklist} object to store tasks in memory
  */
 public class TaskList {
 
+    /**
+     * Read input from String and add new Deadline object to the list
+     * @param ui Ui object to print user display
+     * @param list The task list
+     * @param str The string input
+     * @param isNew Boolean value that indicates the task is new or not
+     * @param isDone Boolean value that indicates the state of the task
+     */
     public void addDeadline(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean isDone)
             throws InvalidDeadlineException {
         String[] deadline;
@@ -43,6 +51,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Read input from String and add new Event object to the list
+     * @param ui Ui object to print user display
+     * @param list The task list
+     * @param str The string input
+     * @param isNew Boolean value that indicates the task is new or not
+     * @param isDone Boolean value that indicates the state of the task
+     */
     public void addEvent(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean isDone)
             throws InvalidEventException {
         String[] event;
@@ -72,6 +88,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Read input from String and add new Todo object to the list
+     * @param ui Ui object to print user display
+     * @param list The task list
+     * @param str The string input
+     * @param isNew Boolean value that indicates the task is new or not
+     * @param isDone Boolean value that indicates the state of the task
+     */
     public void addTodo(Ui ui, ArrayList<Task> list, String str, boolean isNew, boolean isDone)
             throws InvalidTodoException {
         String description = str.trim();
@@ -85,6 +109,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task from the list
+     * @param list The task list
+     * @param index The index of the target object
+     */
     public void deleteTask(ArrayList<Task> list, int index) throws DukeErrorException {
         if (index >= list.size() || index < 0) {
             throw new DukeErrorException("Operation: delete " + (index + 1) + " fails ☹.");
@@ -93,6 +122,11 @@ public class TaskList {
         Ui.printDeleted(deleted, list);
     }
 
+    /**
+     * Make the target task to be completed
+     * @param list The task list
+     * @param index The index of the target object
+     */
     public void makeDone(ArrayList<Task> list, int index) throws DukeErrorException {
         if (index >= list.size() || index < 0) {
             throw new DukeErrorException("Operation: done " + (index + 1) + " fails ☹.");
@@ -101,6 +135,12 @@ public class TaskList {
         Ui.printDone(list, index);
     }
 
+    /**
+     * Finds Task objects that contains the keyword
+     * @param list The task list
+     * @param query The query keyword
+     * @reutn A list of task that fulfills the query keyword
+     */
     public ArrayList<Task> findTask(ArrayList<Task> list, String query) {
         ArrayList<Task> suitableTasks = new ArrayList<>();
         list.forEach(x -> {
