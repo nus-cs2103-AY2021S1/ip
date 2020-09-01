@@ -20,13 +20,13 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
         try {
             storage.write(tasks);
         } catch (DukeException e) {
-            System.out.println("Cannot write to file!");
+            ui.showError(e.getMessage());
         }
-        ui.showAdd(task, tasks);
+        return ui.showAdd(task, tasks);
     }
 }

@@ -31,11 +31,6 @@ public class Storage {
     public void write(TaskList tasks) throws DukeException {
         try {
             File f = new File(filePath);
-            if (f.createNewFile()) {
-                System.out.println("File created: " + f.getName());
-            } else {
-                System.out.println("File already exists");
-            }
             FileWriter fw = new FileWriter(filePath);
             StringBuilder textToAdd = new StringBuilder();
             for (Task task : tasks.getTaskList()) {
@@ -44,7 +39,7 @@ public class Storage {
             fw.write(textToAdd.toString());
             fw.close();
         } catch (IOException e) {
-            throw new DukeException();
+            throw new DukeException("Error writing task to file..");
         }
     }
 
