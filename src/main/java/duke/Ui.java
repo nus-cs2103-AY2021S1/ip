@@ -9,9 +9,8 @@ import java.util.Scanner;
 public class Ui {
     public String showWelcome() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n")
-                .append("hello! i'm duke :-)\n")
-                .append("how may i help you?\n");
+        sb.append("hello! i'm mochi :-)\n")
+                .append("what can i do for you today?\n");
         return sb.toString();
     }
 

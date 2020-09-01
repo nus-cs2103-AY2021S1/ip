@@ -1,2 +1,2 @@
-D | 1 | bank in money | Monday
+D | 0 | return book | Monday
 T | 0 | read book
