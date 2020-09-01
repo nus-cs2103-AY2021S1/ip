@@ -1,10 +1,10 @@
 package duke.enums;
 
-import duke.exceptions.DukeException;
-import duke.utils.ResourceHandler;
-
 import java.text.MessageFormat;
 import java.util.regex.Pattern;
+
+import duke.exceptions.DukeException;
+import duke.utils.ResourceHandler;
 
 /**
  * Commands that can be used in <i>Duke</i>.

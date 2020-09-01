@@ -1,10 +1,10 @@
 package duke.tasks;
 
-import duke.utils.DateTimeStringFormatter;
-import duke.utils.ResourceHandler;
-
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
+
+import duke.utils.DateTimeStringFormatter;
+import duke.utils.ResourceHandler;
 
 /**
  * A specialised {@code Task} that starts and ends at a specific time.
