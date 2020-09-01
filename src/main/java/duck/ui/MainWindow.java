@@ -1,7 +1,5 @@
 package duck.ui;
 
-import java.util.Arrays;
-
 import duck.Duck;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,7 +7,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 /**
@@ -54,15 +51,27 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Sends user input to the bot which will return an array of responses.
+     *
+     * @param input Input from user.
+     * @return Responses concatenated into a single string.
+     */
     private String getResponse(String input) {
         String[] responses = this.duck.handleInput(input);
         return concatResponseLines(responses);
     }
 
+    /**
+     * Concatenates multiple strings into a single string with newline.
+     *
+     * @param response Variable number of strings.
+     * @return Single string as a result of concatenation.
+     */
     private String concatResponseLines(String... response) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < response.length; i++) {
-            sb.append(response[i]);
+        for (String s : response) {
+            sb.append(s);
             sb.append("\n");
         }
         return sb.toString();
