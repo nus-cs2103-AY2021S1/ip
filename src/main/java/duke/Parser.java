@@ -17,10 +17,6 @@ public class Parser {
     static final String DONE = "done";
     static final String FIND = "find";
 
-    TaskList taskList;
-    Storage storage;
-    Ui ui;
-
     /**
      * Creates a Parser with the given classes.
      */

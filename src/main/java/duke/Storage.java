@@ -5,6 +5,7 @@ import duke.tasks.Task;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +15,39 @@ import java.util.List;
  */
 public class Storage {
 
-    private final Path FILE_PATH;
+    private Path FILE_PATH;
+    private final String dirName;
+    private final String fileName;
 
     /**
      * Creates a Storage object to handle a file at the given file path.
-     *
-     * @param filePath Path object to the file
      */
-    public Storage(Path filePath) {
-        this.FILE_PATH = filePath;
+    public Storage(String dirName, String fileName) {
+        this.dirName = dirName;
+        this.fileName = fileName;
+    }
+
+    public TaskList init(Ui ui) {
+        String home = System.getProperty("user.dir");
+        FILE_PATH = java.nio.file.Paths.get(home, dirName);
+        try {
+            java.nio.file.Files.createDirectory(FILE_PATH);
+        } catch (FileAlreadyExistsException ignored) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        TaskList taskList = new TaskList();
+        FILE_PATH = java.nio.file.Paths.get(home, dirName, fileName);
+        try {
+            java.nio.file.Files.createFile(FILE_PATH);
+        } catch (FileAlreadyExistsException ignored) {
+            taskList = new TaskList(loadList());
+            ui.writeOutput("Existing data loaded from file!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return taskList;
     }
 
     /**

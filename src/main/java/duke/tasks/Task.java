@@ -5,7 +5,7 @@ package duke.tasks;
  */
 public class Task {
 
-    private String task;
+    private final String task;
     private boolean isDone;
 
     /**
