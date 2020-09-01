@@ -1,2 +1,4 @@
-T | 0 | eat
+T | 1 | eat
 T | 0 | sleep
+T | 0 | play basketball
+D | 0 | study with Su Jin | 22/09/2020 12:00
