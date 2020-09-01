@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     private LocalDate timeDescription;
-    private String timeDescriptionFormatted;
+    private String formattedTimeDescription;
 
     /**
      * Creates an Event object.
@@ -18,7 +18,7 @@ public class Event extends Task {
     public Event(String description, LocalDate timeDescription) {
         super(description, "E");
         this.timeDescription = timeDescription;
-        this.timeDescriptionFormatted = this.timeDescription.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        this.formattedTimeDescription = this.timeDescription.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**
@@ -26,12 +26,12 @@ public class Event extends Task {
      * It is mainly for file reading.
      *
      * @param description is the description of the event.
-     * @param timeDescriptionFormatted is the LocalDate input representing date.
+     * @param formattedTimeDescription is the LocalDate input representing date.
      * @param isDone states if the Event object is completed or not.
      */
-    public Event(String description, String timeDescriptionFormatted, boolean isDone) {
+    public Event(String description, String formattedTimeDescription, boolean isDone) {
         super(description, "E", isDone);
-        this.timeDescriptionFormatted = timeDescriptionFormatted;
+        this.formattedTimeDescription = formattedTimeDescription;
     }
 
     /**
@@ -42,6 +42,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[" + getType() + "]" + "[" + getStatusIcon() + "] " + description
-                + "(at: " + this.timeDescriptionFormatted + ")";
+                + "(at: " + this.formattedTimeDescription + ")";
     }
 }

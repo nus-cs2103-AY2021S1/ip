@@ -9,16 +9,16 @@ import java.time.LocalDate;
  */
 public class Parser {
     private static boolean isProgramRunning = true;
-    private static TaskList lst;
+    private static TaskList tasks;
 
     /**
      * Creates a Parser object.
      * It is used for identifying String inputs from user.
      *
-     * @param lst TaskList object, required to interact with it.
+     * @param tasks TaskList object, required to interact with it.
      */
-    public Parser(TaskList lst) {
-        this.lst = lst;
+    public Parser(TaskList tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -43,7 +43,7 @@ public class Parser {
      *
      * @throws DukeException when command is wrong, unidentifiable or missing.
      */
-    public void checker(String str) throws DukeException {
+    public void checkUserInput(String str) throws DukeException {
         System.out.println("    _______________________________________________________________________");
 
         int commandSpace = str.indexOf(" ");
@@ -63,7 +63,7 @@ public class Parser {
             String index = str.substring(5, length);
             int realIndex = Integer.parseInt(index) - 1;
 
-            if (realIndex >= this.lst.getLength() || realIndex < 0) {
+            if (realIndex >= this.tasks.getLength() || realIndex < 0) {
                 throw new DukeException("*Invalid task index, please try again.*");
             }
             markDone(realIndex);
@@ -96,21 +96,21 @@ public class Parser {
                 throw new DukeException("*Please fill in event description*");
             }
 
-            int end = str.indexOf("/at");
-            if (end < 0) {
+            int timePrefix = str.indexOf("/at");
+            if (timePrefix < 0) {
                 throw new DukeException("*Please fill in event completion time in the following format:*\n" +
                         "     eg. event CCA meeting /at YYYY-MM-DD");
             }
 
             LocalDate date;
-            String dateString = str.substring(end + 4, length);
+            String dateString = str.substring(timePrefix + 4, length);
             try{
                 date = LocalDate.parse(dateString);
             } catch (DateTimeParseException e) {
                 throw new DukeException("*Please fill in the time in the YYYY-MM-DD format*");
             }
 
-            Event newEvent = new Event(str.substring(6, end), date);
+            Event newEvent = new Event(str.substring(6, timePrefix), date);
             store(newEvent);
 
         } else if (commandSpace <= 5) {
@@ -122,7 +122,7 @@ public class Parser {
             String index = str.substring(7, length);
             int realIndex = Integer.parseInt(index) - 1;
 
-            if (realIndex >= this.lst.getLength() || realIndex < 0) {
+            if (realIndex >= this.tasks.getLength() || realIndex < 0) {
                 throw new DukeException("       *Invalid task index, please try again.*");
             }
             delete(realIndex);
@@ -137,21 +137,21 @@ public class Parser {
                 throw new DukeException("       *Please fill in deadline description*");
             }
 
-            int end = str.indexOf("/by");
-            if (end < 0) {
+            int timePrefix = str.indexOf("/by");
+            if (timePrefix < 0) {
                 throw new DukeException("*Please fill in deadline completion time in the following format:*\n" +
                         "     eg. deadline return book to Jurong Regional Library /by YYYY-MM-DD");
             }
 
             LocalDate date;
-            String dateString = str.substring(end + 4, length);
+            String dateString = str.substring(timePrefix + 4, length);
             try{
                 date = LocalDate.parse(dateString);
             } catch (DateTimeParseException e) {
                 throw new DukeException("*Please fill in the time in the YYYY-MM-DD format*");
             }
 
-            Deadline newDeadline = new Deadline(str.substring(9, end), date);
+            Deadline newDeadline = new Deadline(str.substring(9, timePrefix), date);
             store(newDeadline);
 
         } else {
@@ -169,10 +169,10 @@ public class Parser {
      * @param task to pass over Task object for storage.
      */
     public void store(Task task) {
-        this.lst.store(task);
+        this.tasks.store(task);
         System.out.println("     Got it. I've added this task:\n"
                 + "       " + task);
-        System.out.println("     Now you have " + this.lst.getLength() + " task(s) in the list.");
+        System.out.println("     Now you have " + this.tasks.getLength() + " task(s) in the list.");
     }
 
     /**
@@ -180,7 +180,7 @@ public class Parser {
      * to print for user to see.
      */
     public void displayList() {
-        List<Task> currLst = this.lst.getTasks();
+        List<Task> currLst = this.tasks.getTasks();
         int size = currLst.size();
         System.out.println("     Here are the task(s) in your list:");
 
@@ -200,7 +200,7 @@ public class Parser {
      * @param index of the particular Task in Task list.
      */
     public void markDone(int index) {
-        Task taskSubject = this.lst.markDone(index);
+        Task taskSubject = this.tasks.markDone(index);
         System.out.println("     Nice! I've marked this task as done:\n"
                 + "       " + taskSubject);
     }
@@ -212,10 +212,10 @@ public class Parser {
      * @param index of the particular Task in Task list.
      */
     public void delete(int index) {
-        Task taskSubject = this.lst.remove(index);
+        Task taskSubject = this.tasks.remove(index);
         System.out.println("     Noted. I've removed this task:\n"
                 + "       " + taskSubject
-                + "\n     Now you have " + this.lst.getLength() + " task(s) in the list.");
+                + "\n     Now you have " + this.tasks.getLength() + " task(s) in the list.");
 
     }
 
@@ -232,7 +232,7 @@ public class Parser {
      * Communicates with TaskList class and to get the current stored Task list.
      */
     public List<Task> getTasks() {
-        return lst.getTasks();
+        return tasks.getTasks();
     }
 
     /**
@@ -243,8 +243,8 @@ public class Parser {
      * If matched, it will be printed.
      */
     public void findTask(String keyword) {
-        List<Task> allTasks = lst.getTasks();
-        int fullSize = lst.getLength();
+        List<Task> allTasks = tasks.getTasks();
+        int fullSize = tasks.getLength();
         List<Task> filteredTasks = new ArrayList<>();
 
         for (int i = 0; i < fullSize; i++) {
@@ -264,6 +264,6 @@ public class Parser {
             index ++;
         }
 
-        index ++;
+        index++;
     }
 }

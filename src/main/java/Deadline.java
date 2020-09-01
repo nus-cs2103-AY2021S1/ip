@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     private LocalDate timeDescription;
-    private String timeDescriptionFormatted;
+    private String formattedTimeDescription;
 
     /**
      * Creates a Deadline object.
@@ -18,7 +18,7 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDate timeDescription) {
         super(description, "D");
         this.timeDescription = timeDescription;
-        this.timeDescriptionFormatted = this.timeDescription.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        this.formattedTimeDescription = this.timeDescription.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**
@@ -26,12 +26,12 @@ public class Deadline extends Task {
      * It is mainly for file reading.
      *
      * @param description is the description of the deadline.
-     * @param timeDescriptionFormatted is the LocalDate input representing date.
+     * @param formattedTimeDescription is the LocalDate input representing date.
      * @param isDone states if the Deadline object is completed or not.
      */
-    public Deadline(String description, String timeDescriptionFormatted, boolean isDone) {
+    public Deadline(String description, String formattedTimeDescription, boolean isDone) {
         super(description, "D", isDone);
-        this.timeDescriptionFormatted = timeDescriptionFormatted;
+        this.formattedTimeDescription = formattedTimeDescription;
     }
 
     /**
@@ -42,6 +42,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[" + getType() + "]" + "[" + getStatusIcon() + "] " + description
-                + "(by: " + this.timeDescriptionFormatted + ")";
+                + "(by: " + this.formattedTimeDescription + ")";
     }
 }

@@ -32,7 +32,7 @@ public class Duke {
         this.isLoadingSuccess = true;
 
         try {
-            this.storage.loadFileContents();
+            this.storage.loadFileContent();
             this.tasks = new TaskList(this.storage.getTaskList());
 
         } catch (FileNotFoundException e) {
@@ -66,7 +66,7 @@ public class Duke {
                 String userInput = sc.nextLine();
 
                 try {
-                    parser.checker(userInput);
+                    parser.checkUserInput(userInput);
                 } catch (DukeException e) {
                     ui.displayUserInputError(e.getMessage());
                 }

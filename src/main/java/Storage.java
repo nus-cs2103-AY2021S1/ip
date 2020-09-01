@@ -13,6 +13,9 @@ import java.util.ArrayList;
 public class Storage {
     private static String filePath;
     private static List<Task> savedTasks;
+    private final static String TODO = "T";
+    private final static String EVENT = "E";
+    private final static String DEADLINE = "D";
 
     /**
      * Creates a Storage object.
@@ -33,7 +36,7 @@ public class Storage {
      * @throws FileNotFoundException when file is not found from the
      * given file path.
      */
-    public static void loadFileContents() throws FileNotFoundException {
+    public static void loadFileContent() throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
 
@@ -60,13 +63,13 @@ public class Storage {
             isDone = true;
         }
 
-        if (type.equals("T")) {
+        if (type.equals(TODO)) {
             int end = task.length();
             description = task.substring(7, end);
             Todo newTodo = new Todo(description, isDone);
             Storage.savedTasks.add(newTodo);
 
-        } else if (type.equals("E")) {
+        } else if (type.equals(EVENT)) {
             int start = task.indexOf("(");
             int end = task.lastIndexOf(")");
             timeDescription = task.substring(start + 5, end);
@@ -74,7 +77,7 @@ public class Storage {
             Event newEvent = new Event(description, timeDescription, isDone);
             Storage.savedTasks.add(newEvent);
 
-        } else if (type.equals("D")) {
+        } else if (type.equals(DEADLINE)) {
             int start = task.indexOf("(");
             int end = task.lastIndexOf(")");
             timeDescription = task.substring(start + 5, end);

@@ -3,7 +3,7 @@
  * Prints hardcoded designs that prompts the user.
  */
 public class Ui {
-    private static String TITLE = "     CS2103T Individual Project 1\n";
+    private final static String TITLE = "     CS2103T Individual Project 1\n";
 
     /**
      * Displays the welcome greetings when user runs Duke program.
