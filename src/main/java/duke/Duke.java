@@ -8,21 +8,6 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-// for GUI
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
-
 /**
  * Main class, responsible for running the program.
  */
@@ -82,7 +67,7 @@ public class Duke {
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        
+
         while (!isExit) {
             try {
                 String fullCommand = ui.requestCommand();
@@ -94,19 +79,5 @@ public class Duke {
                 ui.showError(e.getMessage());
             }
         }
-    }
-
-    /**
-     * Main function.
-     * @param args
-     */
-    public static void main(String[] args) {
-        // file path
-        String FILEPATH = System.getProperty("user.dir")
-                + (System.getProperty("user.dir").endsWith("text-ui-test")
-                ? "/test_data/duke.txt"
-                : "/data/duke.txt");
-        
-        new Duke(FILEPATH).run();
     }
 }

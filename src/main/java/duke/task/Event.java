@@ -1,11 +1,10 @@
 package duke.task;
 
-import duke.parser.DateParser;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import java.util.Optional;
+
+import duke.parser.DateParser;
 
 /**
  * Represents an event task
@@ -52,11 +51,11 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return getTypeIcon() + " " + super.getStatusIcon() + " " + super.description + " (at: " 
-                + (isInDateFormat 
+        return getTypeIcon() + " " + super.getStatusIcon() + " " + super.description + " (at: "
+                + (isInDateFormat
                     ? "from " + startTime.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
                         + " to " + endTime.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
-                    : eventTime) 
+                    : eventTime)
                 + ")";
     }
 

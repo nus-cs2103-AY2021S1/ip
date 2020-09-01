@@ -1,19 +1,17 @@
 package duke.command;
 
 import duke.storage.Storage;
-
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
-
 import duke.ui.Ui;
 
 /**
  * Is responsible for handing commands starting with <code>todo</code>.
  */
 public class ToDoCommand extends TaskCreationCommand {
-    public final static String COMMAND = "todo";
-    
+    public static final String COMMAND = "todo";
+
     private String description;
 
     /**

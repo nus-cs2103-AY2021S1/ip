@@ -1,19 +1,16 @@
 package duke.command;
 
 import duke.exception.InvalidIndexException;
-
 import duke.storage.Storage;
-
 import duke.task.TaskList;
-
 import duke.ui.Ui;
 
 /**
  * Is responsible for handling commands stating with <code>done</code>.
  */
-public class DoneCommand extends Command{
-    public final static String COMMAND = "done";
-    
+public class DoneCommand extends Command {
+    public static final String COMMAND = "done";
+
     private int index;
 
     /**

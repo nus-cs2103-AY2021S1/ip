@@ -1,20 +1,18 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-
-import duke.task.TaskList;
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * Retrieves data from the database and write new data to it.
@@ -27,7 +25,7 @@ public class Storage {
      * @param filePath The path of the file that this object interacts with
      */
     public Storage(String filePath) {
-        this.filePath = filePath;    
+        this.filePath = filePath;
     }
 
     /**
@@ -46,7 +44,7 @@ public class Storage {
                 String type = splitted[0];
                 boolean isDone = splitted[1].equals("D");
                 Task newTask;
-                
+
                 if (type.equals("T")) {
                     String description = splitted[2];
                     newTask = new ToDo(description);
@@ -60,18 +58,18 @@ public class Storage {
                         newTask = new Event(description, time);
                     }
                 }
-                
+
                 if (isDone) {
                     newTask.markAsDone();
                 }
-                
+
                 tasks.add(newTask);
             }
             sc.close();
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             try {
-                String DIRECTORY_PATH = filePath.substring(0, filePath.length() - 8);
-                File directory = new File(DIRECTORY_PATH);
+                String directoryPath = filePath.substring(0, filePath.length() - 8);
+                File directory = new File(directoryPath);
                 if (!directory.exists()) {
                     directory.mkdir();
                 }
@@ -90,16 +88,19 @@ public class Storage {
     public void write(TaskList tasks) throws DukeException {
         try {
             File f = new File(filePath);
-            
+
             if (f.exists()) {
                 f.delete();
             }
             f.createNewFile();
-            
+
             FileWriter fw = new FileWriter(filePath, true);
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
-                String type, description, time, status;
+                String type;
+                String description;
+                String time;
+                String status;
                 description = task.getDescription();
                 status = task.isDone() ? "D" : "ND";
                 time = task.getTime().equals("") ? "" : "/time " + task.getTime();
@@ -114,7 +115,7 @@ public class Storage {
                 fw.write(dataPresentation);
             }
             fw.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new DukeException("Cannot write file");
         }
     }

@@ -1,20 +1,18 @@
 package duke.command;
 
 import duke.storage.Storage;
-
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-
 import duke.ui.Ui;
 
 /**
  * Is responsible for handling commands starting with <code>event</code>.
  */
 public class EventCommand extends TaskCreationCommand {
-    public final static String COMMAND = "event";
-    public final static String TIME_SPECIFIER = "/at";
-    
+    public static final String COMMAND = "event";
+    public static final String TIME_SPECIFIER = "/at";
+
     private String description;
     private String time;
 

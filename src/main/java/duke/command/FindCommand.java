@@ -1,23 +1,21 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.util.Optional;
+
 import duke.parser.DateParser;
 import duke.storage.Storage;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
-
 import duke.ui.Ui;
-
-import java.time.LocalDate;
-import java.util.Optional;
 
 /**
  * Is responsible for handing commands starting with <code>find</code>.
  */
 public class FindCommand extends Command {
     public static final String COMMAND = "find";
-    
+
     private String[] keywords;
 
     /**

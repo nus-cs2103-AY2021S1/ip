@@ -2,17 +2,15 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
-
 import duke.task.TaskList;
-
 import duke.ui.Ui;
 
 /**
  * Is responsible for handing commands starting with <code>bye</code>.
  */
-public class ExitCommand extends Command{
-    public final static String COMMAND = "bye";
-    
+public class ExitCommand extends Command {
+    public static final String COMMAND = "bye";
+
     /**
      * Creates an <code>ExitCommand</code> object.
      */

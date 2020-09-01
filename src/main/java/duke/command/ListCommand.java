@@ -1,16 +1,14 @@
 package duke.command;
 
 import duke.storage.Storage;
-
 import duke.task.TaskList;
-
 import duke.ui.Ui;
 
 /**
  * Is responsible for handing commands starting with <code>list</code>.
  */
 public class ListCommand extends Command {
-    public final static String COMMAND = "list";
+    public static final String COMMAND = "list";
 
     /**
      * Creates a <code>ListCommand</code> object

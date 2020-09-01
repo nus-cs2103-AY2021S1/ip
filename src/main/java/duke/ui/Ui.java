@@ -1,9 +1,9 @@
 package duke.ui;
 
+import java.util.Scanner;
+
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Interacts with the user.
@@ -61,8 +61,8 @@ public class Ui {
     }
 
     /**
-     * Prints out any error message that passed in 
-     * @param errorMessage The error message to be printed 
+     * Prints out any error message that passed in
+     * @param errorMessage The error message to be printed
      */
     public String showError(String errorMessage) {
         return errorMessage;

@@ -1,11 +1,10 @@
 package duke.task;
 
-import duke.parser.DateParser;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import java.util.Optional;
+
+import duke.parser.DateParser;
 
 /**
  * Represents a deadline task
@@ -47,10 +46,10 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return getTypeIcon() + " " + super.getStatusIcon() + " " + super.description + " (by: " 
-                + (isInDateFormat 
-                        ? dueTime.format(DateTimeFormatter.ofPattern("d MMM yyyy")) 
-                        : dueTimeStr)    
+        return getTypeIcon() + " " + super.getStatusIcon() + " " + super.description + " (by: "
+                + (isInDateFormat
+                        ? dueTime.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                        : dueTimeStr)
                 + ")";
     }
 

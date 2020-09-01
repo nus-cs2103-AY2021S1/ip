@@ -1,18 +1,15 @@
 package duke.command;
 
 import duke.exception.InvalidIndexException;
-
 import duke.storage.Storage;
-
 import duke.task.TaskList;
-
 import duke.ui.Ui;
 
 /**
  * Is responsible for handling commands starting with <code>delete</code>.
  */
 public class DeleteCommand extends Command {
-    public final static String COMMAND = "delete";
+    public static final String COMMAND = "delete";
     private int index;
 
     /**
