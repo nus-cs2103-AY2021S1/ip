@@ -1,7 +1,7 @@
 package duke;
 
 public class Ui {
-    private String logo = "\n"
+    private static String logo = "\n"
             + " oooooooooooo                                                 oooo        \n"
             + "d'\"\"\"\"\"\"d888'                                                 `888        \n"
             + "      .888P    .ooooo.  oooo d8b  .ooooo.   .oooo.   oooo d8b  888  oooo  \n"
@@ -31,7 +31,7 @@ public class Ui {
      *
      * @return duke's welcome.
      */
-    public String getWelcome() {
+    public static String getWelcome() {
         return "Hello I am\n" + logo + "How can I help you?";
     }
 
