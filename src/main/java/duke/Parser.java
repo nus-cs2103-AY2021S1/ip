@@ -3,7 +3,11 @@ package duke;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeIndexException;
 import duke.exception.DukeListException;
@@ -39,7 +43,7 @@ public class Parser {
         try {
             String command = parseMessage.split(" ")[0];
             String response = "";
-            if (command.equals("bye")){
+            if (command.equals("bye")) {
                 ByeCommand byeCommand = new ByeCommand();
                 response = byeCommand.execute(tasklist, ui);
             } else if (command.equals("list")) {

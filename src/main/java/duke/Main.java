@@ -1,9 +1,7 @@
 package duke;
 
 import java.io.IOException;
-import java.lang.reflect.GenericDeclaration;
 
-import duke.MainWindow;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;

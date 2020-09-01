@@ -2,7 +2,6 @@ package duke;
 
 import java.io.IOException;
 import java.util.Scanner;
-import javafx.application.Application;
 
 /**
  * Duke class representing the chat bot.
@@ -23,20 +22,6 @@ public class Duke {
         taskList = new Tasklist(storage);
         ui = new UserInterface();
     }
-
-//    public static void main(String[] args) {
-//        startBot();
-//    }
-
-//    /**
-//     * Method to start running the bot.
-//     */
-//    public static void startBot() {
-//        Duke duke = new Duke();
-//        duke.initialise();
-//        duke.acceptCommands();
-//        duke.exit();
-//    }
 
     /**
      * Method to send the preamble and load, if any, existing list.
