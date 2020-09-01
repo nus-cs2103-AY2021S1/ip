@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.task.TaskList;
 import duke.Ui;
 
+/**
+ * Represents command that is specific to the find command.
+ */
 public class FindCommand extends Command {
 
     private String input;
@@ -13,6 +16,12 @@ public class FindCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Executes find command of user.
+     * @param tasks tasks of user.
+     * @param ui user interface object.
+     * @param storage Storage object to retrieve and store data from file.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.findTaskByKeyword(input.substring(5), tasks.getList());

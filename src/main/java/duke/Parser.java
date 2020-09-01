@@ -51,7 +51,6 @@ public class Parser {
         case GET_TASK:
             return new GetCommand(input);
         case FIND:
-            System.out.println("sdfs");
             return new FindCommand(input);
         default:
             throw new DukeException("Give me a valid banana (input)!");

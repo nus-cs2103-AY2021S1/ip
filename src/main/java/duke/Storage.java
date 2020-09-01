@@ -60,9 +60,10 @@ public class Storage {
         } else {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath.toString()));
-                String line;
-                while ((line = reader.readLine()) != null) {
+                String line = reader.readLine();
+                while (line != null) {
                     convertLineToTasks(tasks, line);
+                    line = reader.readLine();
                 }
                 return tasks;
             } catch (IOException e) {
