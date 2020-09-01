@@ -27,22 +27,28 @@ public class DoneCommand extends Command {
      * @param ui       Ui Object that interacts with user
      * @param storage  storage object dealing with
      *                  local disk file
-     * @throws SparklesException custom exception that handles
-     * exception of Sparkles
+     * @return response to the command
+     * @throws SparklesException that handles exception of Sparkles
+     *                           such as StringIndexOutOfBoundsException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
         int index;
+        String response;
 
         try {
             index = Integer.parseInt(command.substring(5));
             Task task = taskList.getStorage().get(index - 1);
             if (task.getStatusIcon().equals("O")) {
                 ui.print("     Task is already marked as done!");
+                response = "Task is already marked as done!";
             } else {
                 task.markAsDone();
                 ui.print("     Nice! I have marked this task as done :-)");
+                response = "Nice! I have marked this task as done :-)";
             }
+            return response;
+
         } catch (Exception ex) {
             if (ex instanceof StringIndexOutOfBoundsException) {
                 throw new SparklesException("     OOPS!! Task in the list to be marked as done is not specified!");

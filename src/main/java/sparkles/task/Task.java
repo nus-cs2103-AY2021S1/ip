@@ -40,17 +40,19 @@ public class Task {
      *
      * @param i numbering of the task
      */
-    public void printTask(int i) {
+    public String printTask(int i) {
         String output = "     " + i + "." + this.toString();
         System.out.println(output);
+        return output;
     }
 
     /**
      * Print task's details.
      */
-    public void printTask() {
+    public String printTask() {
         String output = "     " + this.toString();
         System.out.println(output);
+        return output;
     }
 
     public String getString() {

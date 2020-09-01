@@ -27,31 +27,36 @@ public class AddDeadlineCommand extends Command {
      * @param ui       Ui Object that interacts with user
      * @param storage  storage object dealing with
      *                  local disk file
-     * @throws SparklesException custom exception that handles
-     * exception of Sparkles
+     * @return response to the command
+     * @throws SparklesException that handles exception of Sparkles
+     *                           such as StringIndexOutOfBoundsException
+     *                           or ArrayIndexOutOfBoundsException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
         String[] arr = command.split(" /by ");
 
         String desc;
-        Task task;
+        String response;
         String by;
+        Task task;
 
         try {
             desc = arr[0].substring(9).trim();
             by = arr[1];
             task = new Deadline(desc, by);
             ui.print("     Got it. I've added this task");
-            task.printTask();
+            response = "Got it. I've added this task\n";
+            response += task.printTask().trim() + "\n";
 
             taskList.add(task);
-            ui.printListSize(taskList.listSize());
+            response += ui.showListSize(taskList.getListSize());
         } catch (Exception ex) {
             throw new SparklesException("     OOPS!! The description and deadline of a Deadline cannot be empty!");
         } finally {
             storage.updateFile(taskList.getStorage());
         }
+        return response;
     }
 
 }

@@ -64,7 +64,8 @@ public class Storage {
      * deadline, event, todo) it is.
      *
      * @return a list with the corresponding task
-     * @throws SparklesException
+     * @throws SparklesException that handles exceptions such as
+     *                           FileNotFoundException
      */
     public List<Task> load() throws SparklesException {
         List<Task> taskList = new ArrayList<>();

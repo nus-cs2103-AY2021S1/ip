@@ -27,13 +27,18 @@ public class FindCommand extends Command {
      * @param ui       Ui Object that interacts with user
      * @param storage  storage object dealing with
      *                  local disk file
+     * @return response to the command
+     * @throws SparklesException that handles exception of Sparkles
+     *                           such as StringIndexOutOfBoundsException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
         List<Task> listFromTaskList = taskList.getStorage();
+        String response = "";
 
         if (listFromTaskList.isEmpty()) {
             ui.print("     OOPS!! Task list is empty!");
+            response = "OOPS!! Task list is empty!";
         } else {
             try {
                 String find = command.substring(5).trim();
@@ -45,13 +50,14 @@ public class FindCommand extends Command {
                     String desc = task.getDescription();
 
                     if (desc.contains(find)) {
-                        task.printTask(index);
+                        response += task.printTask(index).trim() + "\n";
                         index++;
                     }
                 }
 
                 if (index == 1) {
                     ui.print("     OOPS!!No such task!");
+                    response = "OOPS!!No such task!";
                 }
             } catch (Exception ex) {
                 if (ex instanceof StringIndexOutOfBoundsException) {
@@ -60,5 +66,6 @@ public class FindCommand extends Command {
                 }
             }
         }
+        return response;
     }
 }

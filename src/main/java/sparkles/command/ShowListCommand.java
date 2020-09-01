@@ -26,21 +26,28 @@ public class ShowListCommand extends Command {
      * @param ui       Ui Object that interacts with user
      * @param storage  storage object dealing with
      *                  local disk file
-     * @throws SparklesException custom exception that handles
-     * exception of Sparkles
+     * @return response to the command
+     * @throws SparklesException that handles exception of Sparkles
+     *                           related to storage.load()
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
         taskList.updateList(storage.load());
         List<Task> tasks = taskList.getStorage();
+        String response = "";
 
         if (tasks.isEmpty()) {
+
             ui.print("     Tasks list is Empty.");
+            response = "Tasks list is Empty.";
+
         } else {
+
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
-                task.printTask(i + 1);
+                response += task.printTask(i + 1).trim() + "\n";
             }
         }
+        return response;
     }
 }

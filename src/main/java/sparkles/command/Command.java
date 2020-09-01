@@ -20,7 +20,7 @@ public abstract class Command {
         return command;
     }
 
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException;
 
     /**
      * Check is the command is an exit command.

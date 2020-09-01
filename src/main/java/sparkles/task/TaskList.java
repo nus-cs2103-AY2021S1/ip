@@ -39,7 +39,7 @@ public class TaskList {
         storage.remove(task);
     }
 
-    public int listSize() {
+    public int getListSize() {
         return storage.size();
     }
 }

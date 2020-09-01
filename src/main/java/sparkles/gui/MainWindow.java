@@ -25,15 +25,32 @@ public class MainWindow extends AnchorPane {
     private Sparkles sparkles;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Sparkles.png"));
+    private final Image sparklesImage = new Image(this.getClass().getResourceAsStream("/images/Sparkles.png"));
 
+    /**
+     * Initialise dialogContainer in ScrollPane.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Setup the Sparkles bot with the input Sparkles
+     *
+     * @param s Sparkles bot initiated
+     */
     public void setSparkles(Sparkles s) {
         sparkles = s;
+    }
+
+    /**
+     * Set the dialog Box in the container
+     *
+     * @param dialogBox dialog box to be setup in the container
+     */
+    public void setDialogContainer(DialogBox dialogBox) {
+        dialogContainer.getChildren().add(dialogBox);
     }
 
     /**
@@ -46,7 +63,7 @@ public class MainWindow extends AnchorPane {
         String response = sparkles.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getSparklesDialog(response, dukeImage)
+                DialogBox.getSparklesDialog(response, sparklesImage)
         );
         userInput.clear();
     }

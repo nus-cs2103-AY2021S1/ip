@@ -27,25 +27,30 @@ public class AddTodoCommand extends Command {
      * @param ui       Ui Object that interacts with user
      * @param storage  storage object dealing with
      *                  local disk file
-     * @throws SparklesException custom exception that handles
-     * exception of Sparkles
+     * @return response to the command
+     * @throws SparklesException that handles exception of Sparkles
+     *                           such as StringIndexOutOfBoundsException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
         String desc;
+        String response;
         Task task;
+
         try {
             desc = command.substring(5).trim();
             task = new Todo(desc);
             ui.print("     Got it. I've added this task");
-            task.printTask();
+            response = "Got it. I've added this task\n";
+            response += task.printTask().trim() + "\n";
 
             taskList.add(task);
-            ui.printListSize(taskList.listSize());
+            response += ui.showListSize(taskList.getListSize());
         } catch (Exception ex) {
             throw new SparklesException("     OOPS!! The description of a todo cannot be empty!");
         } finally {
             storage.updateFile(taskList.getStorage());
         }
+        return response;
     }
 }

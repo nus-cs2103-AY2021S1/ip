@@ -22,12 +22,14 @@ public class ExitCommand extends Command {
      * @param ui       Ui Object that interacts with user
      * @param storage  storage object dealing with
      *                  local disk file
+     * @return response to the command
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         ui.print("     Bye. Hope to see you again!");
         ui.showLine();
         System.exit(0);
+        return "Bye. Hope to see you again!";
     }
 
     /**

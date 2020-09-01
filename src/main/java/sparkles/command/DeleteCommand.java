@@ -27,21 +27,25 @@ public class DeleteCommand extends Command {
      * @param ui       Ui Object that interacts with user
      * @param storage  Storage object dealing with
      *                  local disk file
-     * @throws SparklesException custom exception that handles
-     * exception of Sparkles
+     * @return response to the command
+     * @throws SparklesException that handles exception of Sparkles
+     *                           such as StringIndexOutOfBoundsException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
         int index;
+        String response;
 
         try {
             index = Integer.parseInt(command.substring(7));
             Task task = taskList.getStorage().get(index - 1);
             ui.print("     Noted, I have removed this task:");
-            task.printTask();
+            response = "Noted, I have removed this task:\n";
+            response += task.printTask().trim() + "\n";
 
             taskList.remove(task);
-            ui.printListSize(taskList.listSize());
+            response += ui.showListSize(taskList.getListSize());
+            return response;
         } catch (Exception ex) {
             if (ex instanceof StringIndexOutOfBoundsException) {
                 throw new SparklesException("     OOPS!! Task in the list to be deleted is not specified!");

@@ -35,9 +35,11 @@ public class Ui {
      * Print the number of task in the list now.
      *
      * @param i number of task
+     * @return a string displaying size of list
      */
-    public void printListSize(int i) {
+    public String showListSize(int i) {
         print("     Now you have " + i + " task(s) in your list.");
+        return "Now you have " + i + " task(s) in your list.";
     }
 
     /**

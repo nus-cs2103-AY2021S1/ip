@@ -28,12 +28,13 @@ public class AddCommand extends Command {
      * @param ui       Ui Object that interacts with user
      * @param storage  storage object dealing with
      *                  local disk file
+     * @return response to the command
      * @throws SparklesException custom exception that handles
-     * exception of Sparkles
+     *                           exception of Sparkles
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
         Command c = Parser.parseAddCommand(command);
-        c.execute(taskList, ui, storage);
+        return c.execute(taskList, ui, storage);
     }
 }

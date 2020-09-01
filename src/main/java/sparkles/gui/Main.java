@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sparkles.Sparkles;
@@ -14,7 +15,7 @@ import sparkles.Sparkles;
  */
 public class Main extends Application {
 
-    private Sparkles sparkles = new Sparkles();
+    private Sparkles sparkles = new Sparkles("data/tasks.txt");
 
     @Override
     public void start(Stage stage) {
@@ -23,6 +24,12 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+
+            String welcomeMsg = "*Hello, I am Sparkles*\n\n     How can I help you?";
+            Image sparklesImage = new Image(this.getClass().getResourceAsStream("/images/Sparkles.png"));
+            DialogBox welcome = DialogBox.getSparklesDialog(welcomeMsg, sparklesImage);
+
+            fxmlLoader.<MainWindow>getController().setDialogContainer(welcome);
             fxmlLoader.<MainWindow>getController().setSparkles(sparkles);
             stage.show();
         } catch (IOException e) {

@@ -53,11 +53,26 @@ public class Sparkles {
         }
     }
 
+    private String execution(Command c) {
+        try {
+            return c.execute(tasks, ui, storage);
+        } catch (SparklesException e) {
+            return e.getMessage().trim();
+        }
+    }
+
     public static void main(String[] args) {
         new Sparkles("data/tasks.txt").run();
     }
 
+    /**
+     * Method to retrieve response from bot to user.
+     *
+     * @param input user input/command to the bot
+     * @return response to user in the form of string
+     */
     public String getResponse(String input) {
-        return input;
+        Command c = Parser.parse(input);
+        return execution(c);
     }
 }
