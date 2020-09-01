@@ -26,15 +26,15 @@ public class Ui {
     }
 
     /**
-     * Welcome message for the user.
+     * Welcome message String for the user.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
+        return "Hello from\n" + logo + "\nWhat can I do for you?";
     }
 
     /**

@@ -1,5 +1,8 @@
 package duke.duke;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -27,7 +33,10 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        Ui ui = new Ui();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren()
+                .add(DialogBox.getDukeDialog(ui.showWelcome(), dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -36,7 +45,8 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container. Clears the user input after processing. Once "bye" command is issued, 1s delay is provided
+     * before exiting the application.
      */
     @FXML
     private void handleUserInput() {
@@ -46,6 +56,14 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        if (input.equals("bye")) {
+            KeyFrame exit = new KeyFrame(Duration.seconds(1), event -> {
+                Platform.exit();
+            });
+            Timeline timeline = new Timeline(exit);
+            timeline.setCycleCount(1);
+            timeline.play();
+        }
         userInput.clear();
     }
 }

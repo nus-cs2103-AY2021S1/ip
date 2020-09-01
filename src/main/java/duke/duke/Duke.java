@@ -27,7 +27,7 @@ public class Duke {
      * Begin the Duke chat bot program.
      */
     public void run() {
-        ui.showWelcome();
+        ui.showOutput(ui.showWelcome());
         boolean isExit = false;
         while (!isExit) {
             try {
