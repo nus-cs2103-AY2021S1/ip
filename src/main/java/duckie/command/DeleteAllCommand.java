@@ -21,7 +21,7 @@ public class DeleteAllCommand extends Command {
      * @throws DuckieException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
         ArrayList<Task> lst = tasks.getTaskList();
         if (lst.size() == 0) {
             throw new DuckieNoListException();
@@ -33,6 +33,7 @@ public class DeleteAllCommand extends Command {
         } catch (DuckieException e) {
             throw e;
         }
-        ui.deleteAllReply();
+
+        return "Quack! All tasks are cleared in the list!";
     }
 }

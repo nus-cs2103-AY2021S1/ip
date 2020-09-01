@@ -28,13 +28,15 @@ public class AddCommand extends Command {
      * @throws DuckieException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
         tasks.addTask(this.task);
         try {
             storage.saveToFile(tasks.getTaskList());
         } catch (DuckieException e) {
             throw e;
         }
-        Ui.addTaskReply(this.task, tasks.getTaskList());
+        String output = "Quack! Added: \n";
+        output += "Now you have " + tasks.getTaskList().size() + " task(s) in the list.";
+        return output;
     }
 }

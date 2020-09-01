@@ -5,12 +5,11 @@ package duckie.exception;
  * task in the List
  */
 public class DuckieNoListException extends DuckieException {
-    protected static final String INDENT = "\t";
 
     /**
      * Instantiate DuckieNoListException
      */
     public DuckieNoListException() {
-        super(INDENT + "Quack. You have no tasks in the list currently.");
+        super("Quack. You have no tasks in the list currently.");
     }
 }

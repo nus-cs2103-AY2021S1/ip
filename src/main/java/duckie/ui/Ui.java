@@ -12,12 +12,11 @@ public class Ui {
     private static final String INDENT = "\t";
     private static final String HORIZ_LINE = INDENT
             + "____________________________________________________________";
-    private static final String LOGO = INDENT
-            + "           ____                   _      _\n"
-            + INDENT + "    __    |  _ \\   _   _    ___  | | _  (_)  ___     __\n"
-            + INDENT + "___( o)>  | | | | | | | | /  __| | |/ / | | / _ \\  <(o )___ \n"
-            + INDENT + "\\ <_. )   | |_| | | | | | | (__  |   <  | | | __/   ( ._> /\n"
-            + INDENT + " `---'    |____/  \\___,_|  \\ __| |_|\\_\\ |_| \\___|    `___' \n";
+    private static final String LOGO = "            ___                         _           _\n"
+            + "    __    |  _ \\   _   _    __    | |  _    (_)  __     __\n"
+            + "___( o)>| | | | | | | | /  __| | |/  /   | | / _ \\  <(o )___ \n"
+            + "\\ <_. )   | |_| | | | | | | (__  |   <      | | | __/    ( ._> /\n"
+            + " `---'    |___/  \\_,_| \\ __| |_|\\_\\ |_| \\__|    `---' \n";
     private Scanner sc;
 
     /**
@@ -28,12 +27,11 @@ public class Ui {
     }
 
     /**
-     * Returns the horizontal line required to break the lines
-     *
-     * @return the horizontal line String
+     * Display logo
+     * @return
      */
-    public static String getHorizLine() {
-        return HORIZ_LINE;
+    public static String getLogo() {
+        return LOGO;
     }
 
     /**

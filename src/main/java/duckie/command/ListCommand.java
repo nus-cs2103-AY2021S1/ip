@@ -3,6 +3,7 @@ package duckie.command;
 import duckie.Storage;
 import duckie.exception.DuckieException;
 import duckie.exception.DuckieNoListException;
+import duckie.task.Task;
 import duckie.task.TaskList;
 import duckie.ui.Ui;
 
@@ -18,11 +19,17 @@ public class ListCommand extends Command {
      * @throws DuckieException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
         if (tasks.getTaskList().size() == 0) {
             throw new DuckieNoListException();
         } else {
-            ui.displayListReply(tasks.getTaskList());
+            int index = 1;
+            String output = "Quack! You have these in your list currently: \n";
+            for (Task task : tasks.getTaskList()) {
+                output += index + ". " + task + "\n";
+                index++;
+            }
+            return output;
         }
     }
 }

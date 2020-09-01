@@ -17,7 +17,7 @@ public abstract class Command {
      * @param storage Storage to write to File
      * @throws DuckieException
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException;
 
     /**
      * Check if the Command signifies exit of the chatbot

@@ -24,7 +24,7 @@ public class ByeCommand extends Command {
      * @param storage Storage to write to File
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showEnding();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "Quack! Hope to see you again!";
     }
 }

@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
      * @throws DuckieException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
         ArrayList<Task> lst = tasks.getTaskList();
         if (lst.size() == 0) {
             throw new DuckieNoListException();
@@ -50,6 +50,8 @@ public class DeleteCommand extends Command {
             throw e;
         }
 
-        ui.deleteTaskReply(task);
+        String output = "Quack! I've remove this task: \n";
+        output += task.toString();
+        return output;
     }
 }
