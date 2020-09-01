@@ -1,12 +1,10 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-// import java.time.temporal.ChronoUnit;
+
+import duke.DukeException;
 
 public class TimeParser {
     /** Returns the date in format "MMM d yyyy".

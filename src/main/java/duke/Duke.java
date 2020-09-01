@@ -9,6 +9,10 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
+    /**
+     * Executes the Duke program.
+     * @param args Args.
+     */
     public static void main(String[] args) {
         TaskList taskList = new TaskList();
         Storage.loadFromFile(taskList);
