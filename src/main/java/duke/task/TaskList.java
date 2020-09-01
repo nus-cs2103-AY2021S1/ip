@@ -72,16 +72,26 @@ public class TaskList {
         return tasks.size();
     }
 
+
     /**
-     * Returns a list of tasks with the keyWord
-     * @param keyWord The string to search for
-     * @return The list of tasks with the keyword
+     * For each task, it will check if the task has all the keywords and if it does, will add it into a list.
+     * The list is returned
+     * @param keyWords The keywords to check for in tasks
+     * @return A list of tasks, each containing all the keywords.
      */
-    public ArrayList<Task> find(String keyWord) {
+    public ArrayList<Task> find(String... keyWords) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            if (task.toString().contains(keyWord)) {
+            boolean hasKeyWords = true;
+            for (int j = 0; j < keyWords.length; j++) {
+                if (!task.toString().contains(keyWords[j])) {
+                    hasKeyWords = false;
+                    break;
+                }
+            }
+
+            if (hasKeyWords) {
                 foundTasks.add(task);
             }
         }

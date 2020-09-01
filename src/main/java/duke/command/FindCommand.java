@@ -10,15 +10,15 @@ import duke.task.TaskList;
 
 public class FindCommand extends Command {
 
-    private String keyWord;
+    private String[] keyWords;
 
     /**
      * Initializes a command with the keyword to search for in the TaskList as input.
      *
-     * @param keyWord The keyword to find for in the list of tasks.
+     * @param keyWords The keyword to find for in the list of tasks.
      */
-    public FindCommand(String keyWord) {
-        this.keyWord = keyWord;
+    public FindCommand(String... keyWords) {
+        this.keyWords = keyWords;
     }
 
 
@@ -34,11 +34,10 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(TaskList taskList, Storage storage) throws DukeException {
         if (taskList.numberOfTasks() > 0) {
-            ArrayList<Task> tasksWithKeyWord = taskList.find(keyWord);
+            ArrayList<Task> tasksWithKeyWord = taskList.find(keyWords);
             if (tasksWithKeyWord.size() > 0) {
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("Here are the tasks with \"" + keyWord + "\" in your list:\n");
-
+                stringBuilder.append(createOpeningMessage());
                 for (int i = 0; i < tasksWithKeyWord.size(); i++) {
                     Task currentTask = tasksWithKeyWord.get(i);
                     stringBuilder.append((i + 1) + ". " + currentTask.toString() + "\n");
@@ -46,11 +45,29 @@ public class FindCommand extends Command {
 
                 return new CommandResult(stringBuilder.toString());
             } else {
-                return new CommandResult("No tasks with \"" + keyWord + "\" in your list.");
+                return new CommandResult("Sorry! No tasks with \""
+                        + keyWordString() + "\" in your list.");
             }
         } else {
             return new CommandResult("There are no tasks yet!");
         }
+    }
+
+    private String createOpeningMessage() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are the tasks with \"");
+        stringBuilder.append(keyWordString());
+        stringBuilder.append("\" in your list:\n");
+        return stringBuilder.toString();
+    }
+
+    private String keyWordString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < keyWords.length - 1; i++) {
+            stringBuilder.append(keyWords[i] + ", ");
+        }
+        stringBuilder.append(keyWords[keyWords.length - 1]);
+        return stringBuilder.toString();
     }
 
 }
