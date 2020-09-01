@@ -17,19 +17,19 @@ public class Ui {
     /**
      * Prints out a line to mark an individual message
      */
-    public static void showLine() {
-        System.out.println("\n_________________________________________\n");
+    public static String showLine() {
+        return "\n_________________________________________\n";
     }
 
-    public static void showCommandMessage(String message) {
-        System.out.println("_________________________________________\n" + message);
+    public static String showCommandMessage(String message) {
+        return "_________________________________________\n" + message;
     }
 
     /**
      * Prints out the Welcome Message when Duke is intialised
      * as an opening message
      */
-    public static void welcomeMessage() {
+    public static String welcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -43,20 +43,20 @@ public class Ui {
                 + indent + "deadline /by (date) YYYY-MM-DD: Creates a Deadline Task \n"
                 + indent + "event /at (string): Creates an Event Task \n"
                 + indent + "find (keyword): Finds all occurrences of the keyword in the List";
-        System.out.println("INITIALIZING \n" + logo);
-        System.out.println("Current version: " + version);
-        System.out.println("Welcome to DUKE, the ToDo list creator \n"
-                + "We current support these commands: \n" + commands);
-        System.out.println("Please input a command:");
+        return "INITIALIZING \n" + logo
+                + "\nCurrent version: " + version
+                + "\nWelcome to DUKE, the ToDo list creator "
+                + "\nWe current support these commands: \n" + commands
+                + "\nPlease input a command:";
     }
 
     /**
      * Prints out the Goodbye Message when Duke is exited
      */
-    public static void goodbyeMessage() {
-        System.out.println("_________________________________________\n"
-                + "Bye. Hope to see you again soon!" + "\n"
-                + "_________________________________________");
+    public static String goodbyeMessage() {
+        return "_________________________________________\n"
+                + "Bye. Hope to see you again soon!\n"
+                + "_________________________________________";
     }
 
     /**
@@ -65,11 +65,11 @@ public class Ui {
      *
      * @param error The error message
      */
-    public static void showError(String error) {
-        System.out.println("Sorry an error occurred!! :( \n"
+    public static String showError(String error) {
+        return "Sorry an error occurred!! :( \n"
                 + "_________________________________________\n"
                 + error + "\n"
-                + "_________________________________________");
+                + "_________________________________________";
     }
 
     /**
@@ -77,17 +77,17 @@ public class Ui {
      * @param response The String representation of the response from the command input
      * @param command The String command from the command from User Input
      */
-    public static void showResponse(String response, String command) {
-        System.out.println("Task: " + command + "\nExecution Success: \n"
+    public static String showResponse(String response, String command) {
+        return "Task: " + command + "\nExecution Success: \n"
                 + "_________________________________________\n"
                 + response
-                + "\n_________________________________________");
+                + "\n_________________________________________";
     }
 
     /**
      * Prints a formatted response to inform the user that saving is in progress.
      */
-    public static void showSaving() {
-        System.out.println("Currently saving tasks. Do not Exit!");
+    public static String showSaving() {
+        return "Currently saving tasks. Do not Exit!";
     }
 }

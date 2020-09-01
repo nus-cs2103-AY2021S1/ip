@@ -1,23 +1,17 @@
 import java.io.IOException;
-import java.util.Scanner;
 
 import duke.command.DukeException;
 import duke.command.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 
 
@@ -56,37 +50,37 @@ public class Duke {
         this.storage = Storage.createDukeFile("Saved");
     }
 
-    /**
-     * Initiates the process of DukeBot that
-     * accepts user commands and processes
-     * the commands to create the Chatbot Task list.
-     *
-     * @author Lee Penn Han.
-     */
-    public void run() {
-        Ui.welcomeMessage();
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            String cmd = sc.nextLine().trim().toLowerCase();
-            if (!cmd.equals("bye") && cmd.length() != 0) {
-                try {
-                    Parser.process(cmd, this.taskList, this.storage);
-                } catch (DukeException e) {
-                    Ui.showError(e.getMessage());
-                }
-            } else {
-                try {
-                    Ui.showSaving();
-                    this.storage.saveToFile();
-                } catch (IOException e) {
-                    Ui.showError(e.getMessage());
-                }
-                Ui.goodbyeMessage();
-                break;
-            }
-        }
-
-    }
+//    /**
+//     * Initiates the process of DukeBot that
+//     * accepts user commands and processes
+//     * the commands to create the Chatbot Task list.
+//     *
+//     * @author Lee Penn Han.
+//     */
+//    public void run() {
+//        Ui.welcomeMessage();
+//        Scanner sc = new Scanner(System.in);
+//        while (sc.hasNext()) {
+//            String cmd = sc.nextLine().trim().toLowerCase();
+//            if (!cmd.equals("bye") && cmd.length() != 0) {
+//                try {
+//                    Parser.process(cmd, this.taskList, this.storage);
+//                } catch (DukeException e) {
+//                    Ui.showError(e.getMessage());
+//                }
+//            } else {
+//                try {
+//                    Ui.showSaving();
+//                    this.storage.saveToFile();
+//                } catch (IOException e) {
+//                    Ui.showError(e.getMessage());
+//                }
+//                Ui.goodbyeMessage();
+//                break;
+//            }
+//        }
+//
+//    }
 
 //    @Override
 //    public void start(Stage stage) {
@@ -197,21 +191,23 @@ public class Duke {
      */
     public String getResponse(String input) {
         //String cmd = sc.nextLine().trim().toLowerCase();
+        String finalString = null;
         if (!input.equals("bye") && input.length() != 0) {
             try {
                 Parser.process(input, this.taskList, this.storage);
             } catch (DukeException e) {
-                Ui.showError(e.getMessage());
+                System.out.println(Ui.showError(e.getMessage()));
             }
         } else {
             try {
-                Ui.showSaving();
+                System.out.println(Ui.showSaving());
                 this.storage.saveToFile();
             } catch (IOException e) {
-                Ui.showError(e.getMessage());
+                System.out.println(Ui.showError(e.getMessage()));
             }
-            Ui.goodbyeMessage();
+            finalString = Ui.goodbyeMessage();
+        }
+        return finalString;
     }
-
 
 }
