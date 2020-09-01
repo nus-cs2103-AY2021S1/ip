@@ -1,20 +1,26 @@
 package duke.component;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import java.io.*;
-
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
- * Permanent storage that stores user's task list in a data file
+ * Permanent storage that stores user's task list in a data file.
  */
 public class Storage {
     private final String path;
 
     /**
      * Initializes a storage object using the given file path
+     *
      * @param path the given file path
      */
     public Storage(String path) {
@@ -23,6 +29,7 @@ public class Storage {
 
     /**
      * Reads from the data file and returns the task list it stores
+     *
      * @return the task list stored in the data file
      * @throws DukeException if errors occur while trying to read the data file
      */
@@ -40,20 +47,25 @@ public class Storage {
                 String[] components = nextLine.split(" \\| ");
                 try {
                     switch (components[0]) {
-                        case "T":
-                            task = new Todo(components[2]);
-                            break;
-                        case "D":
-                            task = new Deadline(components[2], components[3]);
-                            break;
-                        case "E":
-                            task = new Event(components[2], components[3]);
+                    case "T":
+                        task = new Todo(components[2]);
+                        break;
+                    case "D":
+                        task = new Deadline(components[2], components[3]);
+                        break;
+                    case "E":
+                        task = new Event(components[2], components[3]);
+                        break;
+                    default:
+                        throw new DukeException("I found an illegal string in the data file.");
                     }
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
 
-                if (components[1].equals("1")) task.markAsDone();
+                if (components[1].equals("1")) {
+                    task.markAsDone();
+                }
                 taskList.add(task);
             }
         } catch (FileNotFoundException e) {
@@ -76,6 +88,7 @@ public class Storage {
 
     /**
      * Saves the given task list to the data file
+     *
      * @param list the task list to be stored in the data file
      * @throws DukeException if errors occur when trying to write task list to the data file
      */

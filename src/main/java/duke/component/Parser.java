@@ -1,15 +1,26 @@
 package duke.component;
 
-import duke.command.*;
-import duke.task.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 
 /**
- * Interpreter of user's input
+ * Interpreter of user's input.
  */
 public class Parser {
 
     /**
      * Parses an input string and gives the corresponding command
+     *
      * @param input the input typed in by the user
      * @return the command that corresponds to the input
      * @throws DukeException if the input is invalid or illegal
@@ -25,7 +36,7 @@ public class Parser {
                 throw new DukeException("Please enter the keyword you want to search!");
             }
             return new FindCommand(input.substring(5));
-        }else if (input.startsWith("done")) {
+        } else if (input.startsWith("done")) {
             if (input.length() <= 5) {
                 throw new DukeException("I don't know which task should be marked as completed.");
             }
@@ -36,7 +47,7 @@ public class Parser {
                 throw new DukeException("The task index should be a number.");
             }
             return new DoneCommand(index);
-        } else if (input.startsWith("delete")){
+        } else if (input.startsWith("delete")) {
             if (input.length() <= 7) {
                 throw new DukeException("I don't know which task should be deleted.");
             }

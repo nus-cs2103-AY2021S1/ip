@@ -1,10 +1,15 @@
 package duke;
 
 import duke.command.Command;
-import duke.component.*;
+import duke.component.DukeException;
+import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
 
 /**
  * Chat bot that can manage your tasks!
+ *
  * @author Tian Fang
  * @version v0.1
  * @since 2020-08-18
@@ -16,6 +21,7 @@ public class Duke {
 
     /**
      * Initializes Duke with the given file path
+     *
      * @param filePath the file path used to initialize Duke
      */
     public Duke(String filePath) {
@@ -27,6 +33,14 @@ public class Duke {
             ui.showLoadingError(e);
             taskList = new TaskList();
         }
+    }
+
+    /**
+     * main method of Duke
+     */
+    public static void main(String[] args) {
+        String path = "data/tasks.txt";
+        new Duke(path).run();
     }
 
     /**
@@ -45,10 +59,5 @@ public class Duke {
                 ui.giveResponse(e.getMessage());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        String path = "data/tasks.txt";
-        new Duke(path).run();
     }
 }

@@ -1,9 +1,10 @@
 package duke.command;
 
-import duke.component.*;
+import duke.component.DukeException;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
 import duke.task.Task;
-
-import java.util.LinkedList;
 
 /**
  * The command to find tasks that contains the search keyword.
@@ -13,6 +14,7 @@ public class FindCommand implements Command {
 
     /**
      * Initializes a FindCommand with the given search keyword.
+     *
      * @param keyword the search keyword
      */
     public FindCommand(String keyword) {
@@ -21,6 +23,7 @@ public class FindCommand implements Command {
 
     /**
      * Return whether this command is the exit command
+     *
      * @return false at all times
      */
     public boolean isExit() {
@@ -29,8 +32,9 @@ public class FindCommand implements Command {
 
     /**
      * Executes the command to search tasks that contains the keyword
+     *
      * @param taskList the task list given
-     * @param ui the ui object that handles inputs and outputs
+     * @param ui       the ui object that handles inputs and outputs
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
