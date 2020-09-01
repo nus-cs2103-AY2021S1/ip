@@ -3,7 +3,6 @@ package duke.ui;
 import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -49,11 +48,5 @@ public class MainWindow extends AnchorPane {
             DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-    }
-
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-        return textToAdd;
     }
 }
