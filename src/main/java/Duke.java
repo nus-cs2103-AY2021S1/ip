@@ -127,13 +127,13 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+//        sendButton.setOnMouseClicked((event) -> {
+//            handleUserInput();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            handleUserInput();
+//        });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
@@ -151,30 +151,30 @@ public class Duke extends Application {
         return textToAdd;
     }
 
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        DialogBox userDialog = DialogBox.getUserDialog(userText, new ImageView(user));
-        DialogBox dukeDialog = DialogBox.getDukeDialog(dukeText, new ImageView(duke));
-        
-        userDialog.setPadding(new Insets(10));
-        dukeDialog.setPadding(new Insets(10));
-        userDialog.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
-        dukeDialog.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
-        dialogContainer.getChildren().addAll(userDialog, dukeDialog);
-        userInput.clear();
-    }
+//    /**
+//     * Iteration 2:
+//     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+//     * the dialog container. Clears the user input after processing.
+//     */
+//    private void handleUserInput() {
+//        Label userText = new Label(userInput.getText());
+//        Label dukeText = new Label(getResponse(userInput.getText()));
+//        DialogBox userDialog = DialogBox.getUserDialog(userText, new ImageView(user));
+//        DialogBox dukeDialog = DialogBox.getDukeDialog(dukeText, new ImageView(duke));
+//        
+//        userDialog.setPadding(new Insets(10));
+//        dukeDialog.setPadding(new Insets(10));
+//        userDialog.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
+//        dukeDialog.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
+//        dialogContainer.getChildren().addAll(userDialog, dukeDialog);
+//        userInput.clear();
+//    }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    String getResponse(String input) {
         return "Duke heard: " + input;
     }
 }
