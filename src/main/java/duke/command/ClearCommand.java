@@ -25,7 +25,7 @@ public class ClearCommand extends Command {
             }
             storage.saveToFile(tasks);
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace(System.out);
             DukeException.tryAgain();
         }
     }

@@ -33,7 +33,7 @@ public class DoneCommand extends AbstractModifyTaskCommand {
             Ui.printSuccess("done", task, tasks.size());
             storage.saveToFile(tasks);
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace(System.out);
             DukeException.tryAgain();
         }
     }

@@ -27,7 +27,7 @@ public class InvalidCommand extends Command {
             throw new DukeException("\u2639 Oops, I'm sorry but I don't know what "
                 + '"' + invalidInput + '"' + " means :-(");
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace(System.out);
             DukeException.tryAgain();
         }
     }
