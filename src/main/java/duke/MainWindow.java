@@ -1,8 +1,5 @@
 package duke;
 
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
-import duke.ui.UI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -11,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -28,16 +25,15 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the stage
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        File f = new File("D:\\24092014\\Joven\\UNI STUFF\\CS2103\\IP\\task.txt");
-        Storage storage = new Storage(f);
-        TaskList shelf = new TaskList(storage.loadFile());
-        UI ui = new UI(shelf, storage);
     }
 
     public void setDuke(Duke d) {
@@ -52,7 +48,6 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-
     }
 
     /**

@@ -15,6 +15,10 @@ import duke.tasklist.TaskList;
  * Class that deals with interactions with the user.
  */
 public class UI {
+    /**
+     * Empty line to be printed after each command
+     */
+    private static final String LINE = "************************************\n";
     private final TaskList shelf;
     private final Storage storage;
 
@@ -28,12 +32,6 @@ public class UI {
         this.shelf = shelf;
         this.storage = storage;
     }
-
-    /**
-     * Empty line to be printed after each command
-     */
-    private final static String LINE = "************************************\n";
-
 
     /**
      * This method shows the welcome message for the chatbot. It is what users see when they launch the chatbot.
@@ -127,9 +125,9 @@ public class UI {
         Task book = new ToDo(response, LocalDateTime.now());
         shelf.addTask(book);
         storage.updateFile(shelf);
-        return "Got it. I've added this task: " + '\n' +
-                "  " + book + '\n' +
-                "Now you have " + shelf.getSize() + " tasks in the list.";
+        return "Got it. I've added this task: " + '\n'
+                + "  " + book + '\n'
+                + "Now you have " + shelf.getSize() + " tasks in the list.";
     }
 
     /**
@@ -145,9 +143,9 @@ public class UI {
         Task book = new Deadline(response, LocalDateTime.now(), duedate);
         shelf.addTask(book);
         storage.updateFile(shelf);
-        return "Got it. I've added this task: " + '\n' +
-                "  " + book + '\n' +
-                "Now you have " + shelf.getSize() + " tasks in the list.";
+        return "Got it. I've added this task: " + '\n'
+                + "  " + book + '\n'
+                + "Now you have " + shelf.getSize() + " tasks in the list.";
     }
 
     /**
@@ -163,9 +161,9 @@ public class UI {
         Task book = new EventTask(response, LocalDateTime.now(), duedate);
         shelf.addTask(book);
         storage.updateFile(shelf);
-        return "Got it. I've added this task: " + '\n' +
-                "  " + book + '\n' +
-                "Now you have " + shelf.getSize() + " tasks in the list.";
+        return "Got it. I've added this task: " + '\n'
+                + "  " + book + '\n'
+                + "Now you have " + shelf.getSize() + " tasks in the list.";
     }
 
     /**

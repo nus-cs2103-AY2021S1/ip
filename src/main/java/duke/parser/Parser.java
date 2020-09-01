@@ -7,7 +7,6 @@ import duke.dukeexception.DukeKeywordMissingException;
 import duke.dukeexception.DukeTaskNonExistException;
 import duke.dukeexception.DukeUnknownInputException;
 import duke.dukeexception.EmptyDescriptionException;
-
 import duke.ui.UI;
 
 /**
@@ -23,17 +22,6 @@ public class Parser {
      */
     public Parser(UI ui) {
         this.ui = ui;
-    }
-
-    /**
-     * Method that is used as a flag in the duke handler method in the duke class to indicate when the program should
-     * stop running.
-     *
-     * @param response Response would refer to the input by the user
-     * @return boolean value, true = the program should stop, false = the program should continue running
-     */
-    public boolean toStop(String response) {
-        return response.equals("bye");
     }
 
     public String welcome() {
@@ -133,5 +121,4 @@ public class Parser {
         }
     }
 }
-
 

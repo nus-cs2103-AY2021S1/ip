@@ -1,8 +1,10 @@
 package duke.task.todo;
 
+import java.time.LocalDateTime;
+
 import duke.task.Task;
 
-import java.time.LocalDateTime;
+
 
 /**
  * Todo Task class which contains the information for a todo task.
