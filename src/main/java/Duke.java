@@ -4,19 +4,27 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) throws IOException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo + "\nHello im Eu Zin's Duke, he spent thursday afternoon creating me cuz he forgot abt the iP");
+    private Storage storage;
+    private Parser parser;
+    private Ui ui;
 
-        Storage.loadFromDisk();
+    private Duke(Storage storage, Parser parser, Ui ui) {
+        this.storage = storage;
+        this.parser = parser;
+        this.ui = ui;
+    }
+
+    public static void main(String[] args) throws IOException {
+        Storage dukeStorage = Storage.initialiseStorage();
+        dukeStorage.loadFromDisk();
+        Duke duke = new Duke(dukeStorage, new Parser(), new Ui());
+
+        duke.ui.showWelcomeMessage();
+
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNextLine()) {
             try {
-                Duke.response(scanner, Storage.taskList);
+                duke.response(scanner, duke.storage.taskList);
             } catch (DukeException e) {
                 System.out.println(e.toString());
             } catch (IOException IOe) {
@@ -25,10 +33,10 @@ public class Duke {
         }
     }
 
-    static String returnList() {
+    public String returnList() {
         String returnString = "";
         int counter = 0;
-        Iterator<Task> taskIterator = Storage.taskList.iterator();
+        Iterator<Task> taskIterator = storage.taskList.getList().iterator();
         while (taskIterator.hasNext()) {
             Task thisTask = taskIterator.next();
             returnString += "\n" + (counter + 1) + ". " + thisTask.toString();
@@ -37,67 +45,21 @@ public class Duke {
         return returnString;
     }
 
-    static void response(Scanner scanner, ArrayList<Task> taskList) throws DukeException, IOException {
+    private void response(Scanner scanner, TaskList taskList) throws DukeException, IOException {
         String userInput = scanner.nextLine();
-        String borders = "\n\\   / \\   / \\   / \\   / im not very creative \\   / \\   / \\   / \\   /\n \\ /   \\ /   \\ /   \\ /      EuZin's Duke      \\ /   \\ /   \\ /   \\ /\n\n";
-        String addedMessage = "ok can i've added it\n";
+        ui.showBorder();
         if (userInput.equals("bye")) {
-            System.out.println(borders + "Bye. Hope to see you again soon!" + borders);
+            ui.showByeMessage();
+            scanner.close();
         } else if (userInput.equals("list")) {
-            String returnString = borders + "faster do don't netflix already";
-            returnString += Duke.returnList();
-            System.out.println(returnString + "\n" + borders);
-            response(scanner, taskList);
-        } else if (userInput.startsWith("done")) {
-            String returnString = borders + "ok sure good job i guess\n";
-            int taskDone = Integer.parseInt(userInput.substring(5));
-            Task thisTask = taskList.get(taskDone - 1);
-            thisTask.done();
-            returnString += thisTask.toString();
-            System.out.println(returnString + "\n" + borders);
-            Storage.saveToDisk();
-            response(scanner, taskList);
-        } else if (userInput.startsWith("todo")) {
-            if (userInput.equals("todo")) throw new ToDoException();
-            Task thisTask = new Task(userInput.replace("todo ", ""));
-            taskList.add(thisTask);
-            System.out.println(borders + addedMessage + thisTask.toString().replace("todo ","") + "\n" +
-                    "Now got " + taskList.size() + " task in the list\n" + borders);
-            Storage.saveToDisk();
-            Duke.response(scanner, taskList);
-        } else if (userInput.startsWith("deadline")) {
-            if (userInput.equals("deadline")) {
-                throw new deadlineException();
-            }
-            String[] StringArr = userInput.split(" /by");
-            Task thisTask = new Deadline(StringArr[0].replace("deadline ", ""), StringArr[1]);
-            taskList.add(thisTask);
-            System.out.println(borders + addedMessage + thisTask.toString() + "\n" +
-                    "Now got " + taskList.size() + " task in the list\n" + borders);
-            Storage.saveToDisk();
-            response(scanner, taskList);
-        } else if (userInput.startsWith("event")) {
-            if (userInput.equals("event")) throw new eventException();
-            String[] StringArr = userInput.split(" /at");
-            Task thisTask = new Event(StringArr[0].replace("event ", ""), StringArr[1]);
-            taskList.add(thisTask);
-            System.out.println(borders + addedMessage + thisTask.toString() + "\n" +
-                    "Now got " + taskList.size() + " task in the list\n" + borders);
-            Storage.saveToDisk();
-            response(scanner, taskList);
-        } else if (userInput.startsWith("delete")) {
-            if (userInput.equals("delete")) throw new deleteException();
-            int indexDeleted = Integer.parseInt(userInput.replace("delete ", ""));
-            if (indexDeleted > taskList.size()) throw new deleteException();
-            else {
-                Task thisTask = taskList.get(indexDeleted - 1);
-                taskList.remove(indexDeleted - 1);
-                System.out.println(borders + "ok delete this task alr:\n" + thisTask + "\nNow you left " + taskList.size() + " task(s) left\n" + borders);
-                Storage.saveToDisk();
-                response(scanner, taskList);
-            }
+            ui.showList(returnList());
+        } else if (userInput.startsWith("todo") || userInput.startsWith("deadline") || userInput.startsWith("event")) {
+            Task thisTask = parser.processAddTaskInput(userInput, taskList, ui);
+            taskList.addTask(thisTask);
         } else {
-            throw new DukeException();
+            parser.processOtherActionInput(userInput, taskList, ui);
         }
+        storage.saveToDisk();
+        response(scanner, taskList);
     }
 }

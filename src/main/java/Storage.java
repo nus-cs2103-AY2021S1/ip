@@ -6,13 +6,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    static ArrayList<Task> taskList = new ArrayList<>();
+    public TaskList taskList;
     static private final String HOME = System.getProperty("user.home");
     static private final java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "IdeaProjects", "ip");
     static private final java.nio.file.Path FILE = java.nio.file.Paths.get(HOME, "IdeaProjects", "ip", "iPStorage");
 
+    public static Storage initialiseStorage() throws IOException {
+        Storage returnStorage = new Storage();
+        returnStorage.taskList = TaskList.retrieveTaskList(FILE);
+        return returnStorage;
+    }
 
-    public static void writeTask(Task task, PrintWriter printWriter) throws IOException {
+    public void writeTask(Task task, PrintWriter printWriter) throws IOException {
         Class taskType = task.getClass();
 
         if (taskType.equals(Event.class)) {
@@ -29,7 +34,7 @@ public class Storage {
     }
 
 
-    public static void saveToDisk() throws IOException {
+    public void saveToDisk() throws IOException {
         boolean directoryExists = java.nio.file.Files.exists(PATH);
 
         if (!directoryExists) {
@@ -39,31 +44,13 @@ public class Storage {
         FileWriter fileWriter = new FileWriter(FILE.toFile());
         PrintWriter printWriter = new PrintWriter(fileWriter);
 
-        for (Task task : taskList) {
-            Storage.writeTask(task, printWriter);
+        for (Task task : taskList.getList()) {
+            writeTask(task, printWriter);
         }
         printWriter.close();
     }
 
-    public static void loadFromDisk() throws IOException {
-        if (java.nio.file.Files.exists(FILE)) {
-            Scanner scanner = new Scanner(FILE);
-            while(scanner.hasNextLine()) {
-                String taskData = scanner.nextLine();
-                String[] taskDataDivided = taskData.split(" ~ ");
-                boolean isDone = taskDataDivided[2].equals("1");
-                switch (taskDataDivided[0]) {
-                    case "E":
-                        taskList.add(new Event(taskDataDivided[2], taskDataDivided[3], isDone));
-                        break;
-                    case "D":
-                        taskList.add(new Deadline(taskDataDivided[2], taskDataDivided[3], isDone));
-                        break;
-                    case "T":
-                        taskList.add(new Task(taskDataDivided[2], isDone));
-                        break;
-                }
-            }
-        }
+    public void loadFromDisk() throws IOException {
+        taskList = TaskList.retrieveTaskList(FILE);
     }
 }
