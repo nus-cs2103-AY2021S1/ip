@@ -1,3 +1,6 @@
-[D][✘] this (by 31 Aug 2020)
-[E][✘] party (from 1 Sep 2020, 8:00PM - 11:59PM)
-[T][✘] a
+[T][✘] this
+[D][✘] proj (by 1 Sep 2020)
+[E][✘] party (from 4 Sep 2020, 12:00AM - 11:59PM)
+[T][✘] test
+[T][✘] test
+[T][✘] hi
