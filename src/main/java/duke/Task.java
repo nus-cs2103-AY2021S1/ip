@@ -21,7 +21,7 @@ public class Task {
      * @return Tick if completed, cross if not.
      */
     public String getStatusIcon() {
-        return (isDone ? "[\u2713]" : "[\u2718]");
+        return (isDone ? "O" : "X");
     }
 
     /**
@@ -37,6 +37,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return getStatusIcon() + " " + this.description;
+        String done = this.isDone ? "O" : "X";
+        return "[" + done + "]" + " " + this.description;
     }
 }

@@ -138,7 +138,7 @@ public class Ui {
             } else {
                 String response = "Here are the matching tasks in your list:";
                 for (int i = 0; i < tasks.size(); i++) {
-                    response += Integer.toString(i + 1) + ". " + tasks.get(i).recordString();
+                    response += "\n" + Integer.toString(i + 1) + ". " + tasks.get(i).recordString();
                 }
                 return response;
             }

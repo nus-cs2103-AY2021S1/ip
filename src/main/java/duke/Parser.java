@@ -29,6 +29,8 @@ public class Parser {
             }
             tasks.get(index - 1).setDone();
             Task t = tasks.get(index - 1);
+            ArrayList<Task> tasksCopy = tasks.clone();
+            Storage.store(tasksCopy);
             return ui.done(t, isRunningOnGui);
         } else if (splitArr.length == 2 && splitArr[0].equals("delete") && Integer.parseInt(splitArr[1]) > 0) {
             int index = Integer.parseInt(splitArr[1]);

@@ -28,19 +28,15 @@ public class Storage {
         File f = new File(this.filePath); // create a File for the given file path
         if (!f.exists()) {
             final File parentDir = new File("data");
-            boolean directoryMade = parentDir.mkdir();
-            if (directoryMade) {
-                final String hash = "tasks";
-                final String fileName = hash + ".txt";
-                final File file = new File(parentDir, fileName);
-                try {
-                    boolean fileCreated = file.createNewFile();
-                    if (fileCreated) {
-                        System.out.println("Created path data/tasks.txt");
-                    }
-                } catch (IOException e) {
-                    System.out.println("Could not create file.");
-                }
+            parentDir.mkdir();
+            final String hash = "tasks";
+            final String fileName = hash + ".txt";
+            final File file = new File(parentDir, fileName);
+            try {
+                file.createNewFile();
+                System.out.println("Created path data/tasks.txt");
+            } catch (IOException e) {
+                System.out.println("Could not create file.");
             }
         }
         Scanner s;
@@ -54,24 +50,24 @@ public class Storage {
             String task = s.nextLine();
             switch (task.charAt(1)) {
             case ('T'):
-                if (task.charAt(4) == '✓') {
+                if (task.charAt(4) == 'O') {
                     Task newTask = new ToDo(task.substring(7));
                     newTask.setDone();
                     loadedTasks.add(newTask);
-                } else if (task.charAt(4) == '✘') {
+                } else if (task.charAt(4) == 'X') {
                     Task newTask = new ToDo(task.substring(7));
                     loadedTasks.add(newTask);
                 }
                 break;
             case ('D'):
-                if (task.charAt(4) == '✓') {
+                if (task.charAt(4) == 'O') {
                     int indexOfDeadline = task.indexOf("by:");
                     String date = task.substring(indexOfDeadline + 4, task.length() - 1);
                     String description = task.substring(7, indexOfDeadline - 2);
                     Task newTask = new Deadline(description, date);
                     newTask.setDone();
                     loadedTasks.add(newTask);
-                } else if (task.charAt(4) == '✘') {
+                } else if (task.charAt(4) == 'X') {
                     int indexOfDeadline = task.indexOf("by:");
                     String date = task.substring(indexOfDeadline + 4, task.length() - 1);
                     String description = task.substring(7, indexOfDeadline - 2);
@@ -80,14 +76,14 @@ public class Storage {
                 }
                 break;
             case ('E'):
-                if (task.charAt(4) == '✓') {
+                if (task.charAt(4) == 'O') {
                     int indexOfEvent = task.indexOf("at:");
                     String date = task.substring(indexOfEvent + 4, task.length() - 1);
                     String description = task.substring(7, indexOfEvent - 2);
                     Task newTask = new Event(description, date);
                     newTask.setDone();
                     loadedTasks.add(newTask);
-                } else if (task.charAt(4) == '✘') {
+                } else if (task.charAt(4) == 'X') {
                     int indexOfEvent = task.indexOf("at:");
                     String date = task.substring(indexOfEvent + 4, task.length() - 1);
                     String description = task.substring(7, indexOfEvent - 2);
