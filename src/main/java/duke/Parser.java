@@ -1,6 +1,12 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -10,7 +16,7 @@ import duke.task.Todo;
  * The Parser object deals with loading tasks from the file and saving tasks in the file.
  */
 public class Parser {
-    static String[] inputArr;
+    private static String[] inputArr;
 
     /**
      * Translates user input into meaningful commands and details.
@@ -36,7 +42,7 @@ public class Parser {
         } else if (command.equals("find")) {
             String keyword = getFindKeyword();
             return new FindCommand(keyword);
-        } else if (command.equals("deadline") || command.equals("todo") || command.equals("event")){
+        } else if (command.equals("deadline") || command.equals("todo") || command.equals("event")) {
             String desc;
             String dateTime;
             Task task;
@@ -55,12 +61,12 @@ public class Parser {
                 task = new Deadline(desc, dateTime);
                 return new AddCommand(task);
             case "event":
-                desc =  getTaskDescription();
+                desc = getTaskDescription();
                 dateTime = getTaskTimeDate();
                 task = new Event(desc, dateTime);
                 return new AddCommand(task);
             case "todo":
-                desc =  getTaskDescription();
+                desc = getTaskDescription();
                 task = new Todo(desc);
                 return new AddCommand(task);
             default:

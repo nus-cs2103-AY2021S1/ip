@@ -1,11 +1,8 @@
 package duke.task;
 
-import java.util.ArrayList;
-
 public class Task {
     protected String description;
     protected boolean isDone;
-    public static ArrayList<Task> taskList = new ArrayList<>();
 
     /**
      * Initialize the Task object.

@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * The Ui object deals with interactions with the user, including on screen messages and taking in user input.
@@ -62,7 +62,7 @@ public class Ui {
             message += (i + 1)
                     + ". "
                     + task
-                    +"\n";
+                    + "\n";
         }
         System.out.println(wrapMessage(message));
     }
@@ -122,7 +122,7 @@ public class Ui {
             message += (i + 1)
                     + ". "
                     + task
-                    +"\n";
+                    + "\n";
         }
         System.out.println(wrapMessage(message));
     }
