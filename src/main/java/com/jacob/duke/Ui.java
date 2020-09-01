@@ -3,7 +3,6 @@ package main.java.com.jacob.duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Scanner;
 import java.util.function.Predicate;
 
 import main.java.com.jacob.duke.task.Task;
@@ -13,8 +12,8 @@ public class Ui {
      * UI of the Done command
      * @param taskDescription The currently operated task's status
      */
-    public void showDone(String taskDescription) {
-        System.out.println(" Nice! I've marked this task as done: \n" + taskDescription);
+    public String showDone(String taskDescription) {
+        return String.format(" Nice! I've marked this task as done: \n" + taskDescription);
     }
 
     /**
@@ -22,9 +21,10 @@ public class Ui {
      * @param taskDescription The currently operated task's status
      * @param taskList List representation of the current task list
      */
-    public void showNewTaskAdded(String taskDescription, List<Task> taskList) {
-        System.out.printf(
-                " Got it. I've added this task: \n   %s\n Now you have %d tasks in the list.\n", taskDescription, taskList.size());
+    public String showNewTaskAdded(String taskDescription, List<Task> taskList) {
+        return String.format(
+                " Got it. I've added this task: \n   %s\n Now you have %d tasks in the list.\n",
+                taskDescription, taskList.size());
     }
 
     /**
@@ -32,8 +32,8 @@ public class Ui {
      * @param taskDescription The currently operated task's status
      * @param taskList List representation of the current task list
      */
-    public void showTaskDeleted(String taskDescription, List<Task> taskList) {
-        System.out.printf(" Noted. I've removed this task:\n "
+    public String showTaskDeleted(String taskDescription, List<Task> taskList) {
+        return String.format(" Noted. I've removed this task:\n "
                 + "   %s\n"
                 + " Now you have %d tasks in the list.\n", taskDescription, taskList.size());
 
@@ -43,21 +43,25 @@ public class Ui {
      * UI of the print list command
      * @param taskList List representation of the current task list
      */
-    public void showFullList(List<Task> taskList) {
+    public String showFullList(List<Task> taskList) {
         int count = 1;
-        System.out.println(" Here are the tasks in your list:");
+        StringBuffer stringList = new StringBuffer();
+        stringList.append(" Here are the tasks in your list:\n");
         for (Task t: taskList) {
-            System.out.println("  " + count + ". " + t.getCurrentStatus());
+            stringList.append("  " + count + ". " + t.getCurrentStatus() + "\n");
             count++;
         }
+        return stringList.toString();
     }
 
     /**
      * UI of the print filtered list command
      * @param inputCommand Command includes the date time it is filtering for
      * @param taskList List representation of the current task list
+     * @throws DukeException Duke Exception thrown if the command is incorrect
      */
-    public void showFilteredDateTimeList(String inputCommand, List<Task> taskList) throws DukeException {
+    @SuppressWarnings("checkstyle:JavadocMethod")
+    public String showFilteredDateTimeList(String inputCommand, List<Task> taskList) throws DukeException {
         if (inputCommand.length() <= "list-due ".length()) {
             throw new DukeException(" list-due command cannot be empty!!");
         }
@@ -72,13 +76,15 @@ public class Ui {
 
         //print out the filtered items
         int count = 1;
-        System.out.println(" Here are the tasks in your filtered list:");
+        StringBuffer stringList = new StringBuffer();
+        stringList.append(" Here are the tasks in your filtered list:\n");
         for (Task t : taskList) {
             if (t.getDueDateTime() != null && dateTimePredicate.test(t.getDueDateTime())) {
-                System.out.println("  " + count + ". " + t.getCurrentStatus());
+                stringList.append("  " + count + ". " + t.getCurrentStatus() + "\n");
                 count++;
             }
         }
+        return stringList.toString();
     }
 
     /**
@@ -87,7 +93,7 @@ public class Ui {
      * @param taskList List representation of the current task list
      * @throws DukeException Throws Exception if the search string is empty
      */
-    public void showKeywordList(String inputCommand, List<Task> taskList) throws DukeException {
+    public String showKeywordList(String inputCommand, List<Task> taskList) throws DukeException {
 
         if (inputCommand.length() <= "find ".length()) {
             throw new DukeException(" find command cannot be empty!!");
@@ -103,32 +109,30 @@ public class Ui {
 
         //print out the filtered items
         int count = 1;
-        System.out.println(" Here are the tasks in your filtered list:");
+        StringBuffer stringList = new StringBuffer();
+        stringList.append(" Here are the tasks in your filtered list:\n");
         for (Task t : taskList) {
             if (t.getDescription() != null && searchStringPredicate.test(t.getDescription())) {
-                System.out.println("  " + count + ". " + t.getCurrentStatus());
+                stringList.append("  " + count + ". " + t.getCurrentStatus() + "\n");
                 count++;
             }
         }
+        return stringList.toString();
     }
 
     /**
      * UI of the bye command
      */
-    public void sayBye() {
-        System.out.println(" Bye. Hope to see you again soon!");
+    public String sayBye() {
+        return " Bye. Hope to see you again soon!";
     }
-
-    /**
+}
+    /*
      * UI of the line printing
-     */
-    public void printLines() {
+    public return printLines() {
         System.out.println(" -----------------");
     }
-
-    /**
      * UI of the welcome message
-     */
     public void showWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -137,14 +141,10 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Omo!! hello from\n" + logo);
     }
-
-    /**
      * Handles console input
      * @return console input as String to be operated on
-     */
     public String getConsoleInput() {
         //get console inputs
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
-    }
-}
+    }*/

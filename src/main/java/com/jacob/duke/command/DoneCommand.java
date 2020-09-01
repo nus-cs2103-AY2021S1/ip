@@ -28,7 +28,7 @@ public class DoneCommand implements Command {
      * @param storage Storage object to deal with interfacing with file system
      */
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) {
+    public String execute(Ui ui, TaskList tasks, Storage storage) {
         List<Task> taskList = tasks.getTaskList();
         //get the integer from the string command and convert to integer
         Task theTask = taskList.get(Integer.parseInt(fullCommand.substring(5)) - 1);
@@ -44,7 +44,7 @@ public class DoneCommand implements Command {
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("Line to replace does not match any string in text: " + e.getMessage());
         }
-        ui.showDone(theTask.getCurrentStatus());
+        return ui.showDone(theTask.getCurrentStatus());
     }
 
     /**

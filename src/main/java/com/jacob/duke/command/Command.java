@@ -7,6 +7,6 @@ import main.java.com.jacob.duke.Ui;
 
 
 public interface Command {
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws DukeException;
+    public String execute(Ui ui, TaskList tasks, Storage storage) throws DukeException;
     public boolean isBye();
 }

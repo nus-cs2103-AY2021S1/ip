@@ -35,7 +35,7 @@ public class Task {
      * @return Done status
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "✓" : "X"); //return ✓ or X symbols
     }
 
     /**
@@ -83,5 +83,11 @@ public class Task {
      */
     public LocalDateTime getDueDateTime() {
         return dueDateTime;
+    }
+
+    public static void main(String[] args) {
+        Task theTask = new Task("Omo");
+        System.out.println(theTask.getStatusIcon());
+        System.out.println("\u2718");
     }
 }

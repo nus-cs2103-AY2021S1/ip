@@ -1,10 +1,8 @@
 package main.java.com.jacob.duke.command;
-import java.util.List;
 
 import main.java.com.jacob.duke.Storage;
 import main.java.com.jacob.duke.TaskList;
 import main.java.com.jacob.duke.Ui;
-import main.java.com.jacob.duke.task.Task;
 
 
 public class ByeCommand implements Command {
@@ -15,9 +13,8 @@ public class ByeCommand implements Command {
      * @param storage Storage object to deal with interfacing with file system
      */
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) {
-        List<Task> taskList = tasks.getTaskList();
-        ui.sayBye();
+    public String execute(Ui ui, TaskList tasks, Storage storage) {
+        return ui.sayBye();
     }
 
     /**

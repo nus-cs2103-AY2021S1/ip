@@ -107,6 +107,7 @@ public class Storage {
      */
     public List<Task> readFile() {
         List<Task> taskList = new ArrayList<>();
+        stringBufferOfData = new StringBuffer();
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     new DataInputStream(new FileInputStream(this.filename))));

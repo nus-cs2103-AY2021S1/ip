@@ -27,7 +27,7 @@ public class DeadlineCommand implements Command {
      * @throws DukeException In case there are internal errors
      */
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
+    public String execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
         List<Task> taskList = tasks.getTaskList();
         int breakpoint = inputCommand.indexOf("/") - 1;
         if (inputCommand.length() <= "deadline ".length()) {
@@ -43,8 +43,8 @@ public class DeadlineCommand implements Command {
         //append text
         storage.appendText(theDeadline.convertToFile());
 
-        //print status
-        ui.showNewTaskAdded(theDeadline.getCurrentStatus(), taskList);
+        //return status
+        return ui.showNewTaskAdded(theDeadline.getCurrentStatus(), taskList);
     }
 
     /**
@@ -55,4 +55,5 @@ public class DeadlineCommand implements Command {
     public boolean isBye() {
         return false;
     }
+
 }

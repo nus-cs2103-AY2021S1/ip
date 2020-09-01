@@ -28,9 +28,9 @@ public class PrintFilteredListDateTimeCommand implements Command {
      * @throws DukeException In case there are internal errors
      */
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
+    public String execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
         List<Task> taskList = tasks.getTaskList();
-        ui.showFilteredDateTimeList(inputCommand, taskList);
+        return ui.showFilteredDateTimeList(inputCommand, taskList);
     }
 
     /**

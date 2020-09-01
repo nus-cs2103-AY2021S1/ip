@@ -15,9 +15,9 @@ public class FindCommand implements Command {
         this.inputCommand = fullCommand;
     }
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
+    public String execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
         List<Task> taskList = tasks.getTaskList();
-        ui.showKeywordList(inputCommand, taskList);
+        return ui.showKeywordList(inputCommand, taskList);
     }
 
     @Override

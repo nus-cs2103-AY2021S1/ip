@@ -17,9 +17,9 @@ public class PrintListCommand implements Command {
      * @throws DukeException In case there are internal errors
      */
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) {
+    public String execute(Ui ui, TaskList tasks, Storage storage) {
         List<Task> taskList = tasks.getTaskList();
-        ui.showFullList(taskList);
+        return ui.showFullList(taskList);
     }
 
     /**

@@ -29,7 +29,7 @@ public class TodoCommand implements Command {
      * @throws DukeException In case there are internal errors
      */
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
+    public String execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
         List<Task> taskList = tasks.getTaskList();
         String s = inputCommand.substring(4);
 
@@ -43,8 +43,7 @@ public class TodoCommand implements Command {
         storage.appendText(theTodo.convertToFile());
 
         //print UI
-        ui.showNewTaskAdded(theTodo.getCurrentStatus(), taskList);
-
+        return ui.showNewTaskAdded(theTodo.getCurrentStatus(), taskList);
     }
 
     /**

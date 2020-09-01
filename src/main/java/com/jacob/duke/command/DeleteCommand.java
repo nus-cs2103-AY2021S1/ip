@@ -27,7 +27,7 @@ public class DeleteCommand implements Command {
      * @throws DukeException In case there are internal errors
      */
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
+    public String execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
         List<Task> taskList = tasks.getTaskList();
         Task theRemovedTask = taskList.remove(Integer.parseInt(inputCommand.substring(7)) - 1);
         if (theRemovedTask == null) {
@@ -36,9 +36,8 @@ public class DeleteCommand implements Command {
         //remove text
         storage.removeText(theRemovedTask.convertToFile());
 
-        //print the output
-
-        ui.showTaskDeleted(theRemovedTask.getCurrentStatus(), taskList);
+        //return the output
+        return ui.showTaskDeleted(theRemovedTask.getCurrentStatus(), taskList);
     }
 
     /**
