@@ -29,6 +29,12 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 test {
     useJUnitPlatform()
 
@@ -41,6 +47,8 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+	
+	systemProperty "file.encoding", "utf-8"
 }
 
 application {
@@ -57,5 +65,6 @@ checkstyle {
 }
 
 run{
+	systemProperty "file.encoding", "utf-8"
     standardInput = System.in
 }

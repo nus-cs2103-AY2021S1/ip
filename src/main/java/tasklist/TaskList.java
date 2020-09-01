@@ -16,10 +16,10 @@ import tasks.Todo;
 public class TaskList {
 
     /** The list of tasks */
-    protected ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /** Storage for storing user's data */
-    protected Storage storage;
+    private Storage storage;
 
     /**
      * Constructs a new TaskList object.
@@ -61,9 +61,6 @@ public class TaskList {
      * @return true if the text has the specified keyword
      */
     public boolean containsWord(String text, String keyword) {
-        /*String regexFormat = "(?i).*?\\b%s\\b.*?";
-        String regex = String.format(regexFormat, Pattern.quote(keyword));
-        return text.matches(regex);*/
         return text.contains(keyword);
     }
 
@@ -73,19 +70,15 @@ public class TaskList {
      * @return true if there are any tasks that has the keyword
      */
     public String findInList(String keyword) {
-        //boolean isMatch = false;
         String reply = "";
         int i = 1;
         for (Task task : tasks) {
             if (containsWord(task.getTaskName(), keyword)) {
-                //isMatch = true;
-                //System.out.println(i + ". " + task);
                 reply += i + ". " + task + "\n";
                 i++;
             }
         }
         return reply;
-        //return isMatch;
     }
 
     /**
@@ -149,24 +142,11 @@ public class TaskList {
         storage.saveData(taskString);
         addToList(task);
 
-        //System.out.println("New task added!");
-        //System.out.println(task);
-        //System.out.println("You now have " + getNumList() + " tasks.");
         reply += "New task added!\n";
         reply += task + "\n";
         reply += "You now have " + getNumList() + " tasks.";
         return reply;
     }
-
-    /*public void readList() {
-        if (storage.getNumOfTasks() == 0) {
-            System.out.println("Looks like you don't have any tasks! Go on and add some!");
-        } else {
-            System.out.println("Here's all your tasks to complete:");
-            storage.readFile();
-            System.out.println("Time to get to work! :D");
-        }
-    }*/
 
     /**
      * Prints out all the tasks in the task list.
@@ -174,18 +154,14 @@ public class TaskList {
     public String readList() {
         String reply = "";
         if (tasks.isEmpty()) {
-            //System.out.println("Looks like you don't have any tasks! Go on and add some!");
             reply = "Looks like you don't have any tasks! Go on and add some!\n";
         } else {
-            //System.out.println("Here's all your tasks to complete:");
             reply += "Here's all your tasks to complete:\n";
             int i = 1;
             for (Task task : tasks) {
-                //System.out.println(i + ". " + task);
                 reply += i + ". " + task + "\n";
                 i++;
             }
-            //System.out.println("Time to get to work! :D");
             reply += "Time to get to work! :D";
         }
         return reply;

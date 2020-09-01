@@ -6,7 +6,6 @@ import ui.Ui;
 /**
  * Main class for Cait.
  */
-@SuppressWarnings("checkstyle:CommentsIndentation")
 public class Cait {
 
     /** Storage for storing user's data */
@@ -21,6 +20,9 @@ public class Cait {
     /** Parser for parsing user's inputs */
     private Parser parser;
 
+    /**
+     * Constructs a new Cait object.
+     */
     public Cait() {
         storage = new Storage("cait_data.txt");
         tasks = new TaskList(storage);
@@ -45,10 +47,10 @@ public class Cait {
     public void run() {
         ui.showGreeting();
         ui.showLine();
-        boolean isExit = ui.isExit();
+        boolean isExit = ui.getIsExit();
         while (!isExit) {
             ui.readInput();
-            isExit = ui.isExit();
+            isExit = ui.getIsExit();
         }
     }
 
@@ -59,10 +61,14 @@ public class Cait {
         new Cait("cait_data.txt").run();
     }
 
-    protected String getResponse(String input) {
-        return parser.manageTask(input);
+    public String addLine() {
+        return "\n*********************************\n";
     }
 
-
-
+    protected String getResponse(String input) {
+        String result = addLine();
+        result += parser.manageTask(input);
+        result += addLine();
+        return result;
+    }
 }

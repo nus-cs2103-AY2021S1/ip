@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -5,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -22,10 +24,12 @@ public class MainWindow extends AnchorPane {
     private Cait cait;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image caitImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
+        DialogBox greeting = DialogBox.getCaitDialog(MainWindow.showGreeting(), caitImage);
+        dialogContainer.getChildren().add(greeting);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -33,18 +37,43 @@ public class MainWindow extends AnchorPane {
         cait = c;
     }
 
+
+    protected static String showGreeting() {
+        String logo = "_________     _____  .______________\n"
+                + "\\_   ___ \\   /  _  \\ |   \\__    ___/\n"
+                + "/    \\  \\/  /  /_\\  \\|   | |    |   \n"
+                + "\\     \\____/    |    \\   | |    |   \n"
+                + " \\______  /\\____|__  /___| |____|   \n"
+                + "        \\/         \\/               \n";
+        String result = "*********************************\n";
+        result += ("Hi! I'm\n" + logo + "\n");
+        result += ("What can I help you with?");
+        result += "\n*********************************";
+        return result;
+    }
+
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Cait's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (input.equals("bye")) {
+            String response = cait.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getCaitDialog(response, caitImage)
+            );
+            userInput.clear();
+            Platform.exit();
+        }
         String response = cait.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getCaitDialog(response, caitImage)
         );
         userInput.clear();
     }
+
 }

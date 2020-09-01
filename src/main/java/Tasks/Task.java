@@ -6,10 +6,10 @@ package tasks;
 public class Task {
 
     /** The description for the task */
-    protected String taskName;
+    private String taskName;
 
     /** Boolean for whether or not the task is done */
-    protected boolean isDone;
+    private boolean isDone;
 
     /**
      * Constructs a new Task object.

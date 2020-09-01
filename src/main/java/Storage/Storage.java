@@ -89,7 +89,7 @@ public class Storage {
             }
             return taskList;
         } catch (IOException e) {
-            fileError();
+            printFileError();
             return taskList;
         }
     }
@@ -97,7 +97,7 @@ public class Storage {
     /**
      * Tells the user if there has been an error with the data file.
      */
-    protected static void fileError() {
+    protected static void printFileError() {
         System.out.println("Oops! There's been an error with the data file, please try again!");
     }
 
@@ -118,7 +118,7 @@ public class Storage {
             sc.close();
             return count;
         } catch (FileNotFoundException e) {
-            fileError();
+            printFileError();
         }
         return 0;
     }
@@ -134,7 +134,7 @@ public class Storage {
                 ;
             }
         } catch (IOException e) {
-            fileError();
+            printFileError();
         }
     }
 
@@ -177,24 +177,23 @@ public class Storage {
     public void readFile() {
         createFile(this.fileName);
         BufferedReader reader = null;
-        int i;
+        int i = 1;
         String curr;
         try {
             reader = new BufferedReader(new FileReader(this.fileName));
-            i = 1;
             while ((curr = reader.readLine()) != null) {
                 System.out.println(i + ". " + processLine(curr));
                 i++;
             }
         } catch (IOException e) {
-            fileError();
+            printFileError();
         } finally {
             try {
                 if (reader != null) {
                     reader.close();
                 }
             } catch (IOException e) {
-                fileError();
+                printFileError();
             }
         }
     }
@@ -222,7 +221,7 @@ public class Storage {
             Storage data = new Storage(this.fileName, true);
             data.writeToFile(text);
         } catch (IOException e) {
-            fileError();
+            printFileError();
         }
     }
 
@@ -266,10 +265,10 @@ public class Storage {
 
         if (currFile.delete()) {
             if (!tempFile.renameTo(currFile)) {
-                fileError();
+                printFileError();
             }
         } else {
-            fileError();
+            printFileError();
         }
     }
 
@@ -305,10 +304,10 @@ public class Storage {
 
         if (currFile.delete()) {
             if (!tempFile.renameTo(currFile)) {
-                fileError();
+                printFileError();
             }
         } else {
-            fileError();
+            printFileError();
         }
     }
 

@@ -10,7 +10,7 @@ import parser.Parser;
 public class Ui {
 
     /** Parser for parsing user's inputs */
-    protected Parser parser;
+    private Parser parser;
 
     /** Boolean to determine if Cait should stop running */
     private boolean isExit = false;
@@ -27,7 +27,7 @@ public class Ui {
      * Determines whether or not Cait should stop running.
      * @return true if Cait should stop running
      */
-    public boolean isExit() {
+    public boolean getIsExit() {
         return this.isExit;
     }
 

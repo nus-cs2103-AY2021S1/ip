@@ -33,11 +33,14 @@ public class Parser {
         this.tasks = tasks;
     }
 
+    public String addLine() {
+        return "\n*********************************";
+    }
+
     /**
      * Warns the user if they give a number not on their list.
      */
     protected static String indexOutOfBounds() {
-        //System.out.println("Oh no! That number is not on the list! D:");
         return "Oh no! That number is not on the list! D:";
     }
 
@@ -45,7 +48,6 @@ public class Parser {
      * Warns the user if they give something other than a number as their description for delete and done.
      */
     protected static String numberFormat() {
-        //System.out.println("Oh no! Type only a number for the description!");
         return "Oh no! Type only a number for the description!";
     }
 
@@ -53,23 +55,20 @@ public class Parser {
      * Reminds the user to write a time for deadline.
      */
     protected static String deadlineByReminder() {
-        //System.out.println("Oh no! Remember to write /by (time) after your task!");
-        return "Oh no! Remember to write /by (time) after your task!";
+        return "Oh no! Remember to write /by [date] after your task!";
     }
 
     /**
      * Reminds the user to write a time for event.
      */
     protected static String eventAtReminder() {
-        //System.out.println("Oh no! Remember to write /at (time) after your task!");
-        return "Oh no! Remember to write /at (time) after your task!";
+        return "Oh no! Remember to write /at [date] after your task!";
     }
 
     /**
      * Tells the user if there has been an error with the data file.
      */
-    protected static String fileError() {
-        //System.out.println("Oops! There's been an error with the data file, please try again!");
+    protected static String printFileError() {
         return "Oops! There's been an error with the data file, please try again!";
     }
 
@@ -77,7 +76,6 @@ public class Parser {
      * Warns the user if they have given the wrong time format.
      */
     protected static String incorrectTimeFormat() {
-        //System.out.println("Oh no! Please only type in the date in this format: yyyy-mm-dd (eg, 2019-10-15).");
         return "Oh no! Please only type in the date in this format: yyyy-mm-dd (eg, 2019-10-15).";
     }
 
@@ -97,18 +95,16 @@ public class Parser {
                 storage.setDoneLine(index);
                 String doneTask = storage.printLine(index);
                 doneTask = storage.processLine(doneTask);
-                //System.out.println("Task marked as done! Good job!");
                 reply += "Task marked as done! Good job!\n";
-                //System.out.println(doneTask);
                 reply += doneTask;
             } catch (IndexOutOfBoundsException e) {
                 reply = indexOutOfBounds();
             } catch (NumberFormatException e) {
                 reply = numberFormat();
             } catch (FileNotFoundException e) {
-                reply = fileError();
+                reply = printFileError();
             } catch (IOException e) {
-                reply = fileError();
+                reply = printFileError();
             } finally {
                 return reply;
             }
@@ -132,10 +128,6 @@ public class Parser {
                 deletedTask = storage.processLine(deletedTask);
                 storage.deleteFromFile(index);
 
-                //System.out.println("This task has been deleted from the list:");
-                //System.out.println(deletedTask);
-                //System.out.println("You now have " + storage.getNumOfTasks() + " tasks.");
-
                 reply += "This task has been deleted from the list:\n";
                 reply += deletedTask + "\n";
                 reply += "You now have " + storage.getNumOfTasks() + " tasks.";
@@ -144,9 +136,9 @@ public class Parser {
             } catch (NumberFormatException e) {
                 reply = numberFormat();
             } catch (FileNotFoundException e) {
-                reply = fileError();
+                reply = printFileError();
             } catch (IOException e) {
-                reply = fileError();
+                reply = printFileError();
             } finally {
                 return reply;
             }
@@ -233,18 +225,15 @@ public class Parser {
         String reply = "";
         String[] findCommand = command.split("\\W+");
         if (findCommand.length == 1) {
-            throw new DukeException("Oh no! Did you FIND out your problem? (The description of fine can't be empty!)");
+            throw new DukeException("Oh no! Did you FIND out your problem? (The description of find can't be empty!)");
         } else {
             String taskName = command.substring(command.indexOf("find") + 5);
-            //System.out.println("Here's what I've found for you:");
             reply = "Here's what I've found for you:\n";
             reply += tasks.findInList(taskName);
 
             if (!reply.equals("Here's what I've found for you:\n")) {
-                //System.out.println("Hope you found it useful!");
                 reply += "Hope you found it useful!";
             } else {
-                //System.out.println("Oh! Looks like there aren't any tasks that has this word!");
                 reply += "Oh! Looks like there aren't any tasks that has this word!";
             }
         }
@@ -287,15 +276,13 @@ public class Parser {
                 reply = handleFind(command);
                 break;
             default:
-                //System.out.println("Sorry! I don't understand that command. Please try again!");
                 reply = "Sorry! I don't understand that command. Please try again!";
                 break;
             }
         } catch (DukeException e) {
-            //System.out.println(e.getMessage());
             reply = e.getMessage();
-        }
-        finally {
+        } finally {
+            //reply += addLine();
             return reply;
         }
     }

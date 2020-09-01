@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     /** The time that the event is at */
-    protected LocalDate at;
+    private LocalDate at;
 
     /**
      * Constructs a new Event object.
