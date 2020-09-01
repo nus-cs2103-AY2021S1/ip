@@ -9,9 +9,9 @@ import duke.task.Task;
  */
 
 public class TaskList {
-    protected static String TASK_TODO_INDICATOR = "[T]";
-    protected static String TASK_DEADLINE_INDICATOR = "[D]";
-    protected static String TASK_EVENT_INDICATOR = "[E]";
+    protected static final String TASK_TODO_INDICATOR = "[T]";
+    protected static final String TASK_DEADLINE_INDICATOR = "[D]";
+    protected static final String TASK_EVENT_INDICATOR = "[E]";
 
     private List<Task> listOfTasks;
 
@@ -43,7 +43,6 @@ public class TaskList {
         this.deleteTask(index - 1);
         this.listOfTasks.add(index, newTask);
     }
-    
     /**
      * Returns the total number of tasks currently in the task list.
      *

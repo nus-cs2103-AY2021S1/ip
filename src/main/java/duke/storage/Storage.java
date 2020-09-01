@@ -18,7 +18,7 @@ import duke.task.Todo;
 import duke.ui.Ui;
 
 /**
- * Represents the local storage of the program and stores the user's task list. 
+ * Represents the local storage of the program and stores the user's task list.
  * Handles file processing of the saved task list.
  */
 public class Storage {
@@ -96,7 +96,7 @@ public class Storage {
     }
 
     /**
-     * Reads the text stored in the task list file and returns a List of Tasks of the specified 
+     * Reads the text stored in the task list file and returns a List of Tasks of the specified
      * tasks in the task list file.
      *
      * @param savedTaskListText Text stored in the task list file.
@@ -125,7 +125,6 @@ public class Storage {
 
                 String deadlineDescription = deadlineDetails[0];
                 String deadlineDate = deadlineDetails[1];
-                
                 Deadline deadline = new Deadline(deadlineDescription, deadlineDate);
 
                 // Checks if the task stored in the file is marked as done.
@@ -170,22 +169,21 @@ public class Storage {
      */
     private static String[] parseTaskText(String taskText, String typeOfTask) {
         String[] taskDescriptionAndDate = taskText.split(" \\(", 2);
-        
         if (TaskList.TASK_DEADLINE_INDICATOR.equals(typeOfTask)) {
             String[] date = taskDescriptionAndDate[1].split(TEXT_DEADLINE_SEPARATOR);
-            taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() -1);
+            taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() - 1);
         }
 
         if (TaskList.TASK_EVENT_INDICATOR.equals(typeOfTask)) {
             String[] date = taskDescriptionAndDate[1].split(TEXT_EVENT_SEPARATOR);
-            taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() -1);
+            taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() - 1);
         }
 
         return taskDescriptionAndDate;
     }
 
     /**
-     * Processes the status of the task stored in the task list and returns a Task object with the 
+     * Processes the status of the task stored in the task list and returns a Task object with the
      * appropriate status.
      *
      * @param task Task which status is to be processed.

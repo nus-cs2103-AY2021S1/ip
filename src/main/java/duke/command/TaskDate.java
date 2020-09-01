@@ -10,11 +10,11 @@ public class TaskDate {
     /**
      * Processes the date of and time indicated in user commands and converts it into another form.
      * Input date is of the form "yyyy-MM-dd" and is converted into "dd MMM yyyy" form.
-     * Input time follows the 24-hour clock system and of the form "HH:mm". It is converted into 
+     * Input time follows the 24-hour clock system and of the form "HH:mm". It is converted into
      * "hh:mm aa" form, which follows the 12-hour clock. The day of the week is returned along with
      * the converted date and time.
      *
-     * For example, given input date and time "2020-01-01 18:00", "1 Jan 2020, Wednesday 06:00 PM" 
+     * For example, given input date and time "2020-01-01 18:00", "1 Jan 2020, Wednesday 06:00 PM"
      * would be returned.
      *
      * @param userInput Date and time of deadline or event.

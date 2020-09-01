@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Indicates when a user specifies a task in the task list using a non-numerical number. 
+ * Indicates when a user specifies a task in the task list using a non-numerical number.
  */
 public class InvalidIndexNumberException extends NumberFormatException {
     /**

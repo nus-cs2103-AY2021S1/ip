@@ -6,7 +6,7 @@ import duke.storage.TaskList;
 import duke.task.Task;
 
 /**
- * Displays the user interface and deals with interacting with the user by printing responding to 
+ * Displays the user interface and deals with interacting with the user by printing responding to
  * user commands.
  */
 public class Ui {
@@ -14,9 +14,7 @@ public class Ui {
     private static final String SKIPLINE = "\n";
     private static final String USER = SKIPLINE + "You: ";
     private static final String DIVIDER = SKIPLINE + CHATBOT;
-    
-    public static boolean exit = false;
-    
+    private static boolean hasExit = false;
     private final Scanner scan;
 
     /**
@@ -49,12 +47,12 @@ public class Ui {
     public void showGoodbyeMessage() {
         System.out.println(DIVIDER + "Goodbye! Have a nice day :D");
         this.scan.close();
-        exit = true;
+        hasExit = true;
 
     }
 
     /**
-     * Displays the task list saved in the local storage. 
+     * Displays the task list saved in the local storage.
      *
      * @param tasks Task list saved in the local storage.
      */
@@ -76,7 +74,7 @@ public class Ui {
 
     /**
      * Displays the task list containing tasks that match a keyword.
-     * 
+     *
      * @param tasks Task list containing the tasks that match the keyword.
      * @param keyword Keyword found in the filtered tasks.
      */
@@ -141,7 +139,7 @@ public class Ui {
     }
 
     /**
-     * Informs user that indicated task has been deleted from the task list and has successfully 
+     * Informs user that indicated task has been deleted from the task list and has successfully
      * been deleted from the task list.
      *
      * @param deletedTask Task to be deleted from the task list.
@@ -159,7 +157,7 @@ public class Ui {
     }
 
     /**
-     * Informs user that indicated task has been successfully marked as done. 
+     * Informs user that indicated task has been successfully marked as done.
      *
      * @param doneTask Task to be marked done.
      */
@@ -205,5 +203,14 @@ public class Ui {
      */
     public void showSuccessfullySavedMessage() {
         System.out.println(SKIPLINE + "Successfully saved tasklist to file :)");
+    }
+
+    /**
+     * Determines whether the user has exited the program.
+     *
+     * @return True if user exits the program, otherwise false.
+     */
+    public static boolean hasExited() {
+        return hasExit;
     }
 }

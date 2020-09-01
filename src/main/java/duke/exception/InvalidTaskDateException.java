@@ -1,10 +1,10 @@
 package duke.exception;
 
 /**
- * Indicates when a user's input date is not recognized by the program due to a non-existent date 
+ * Indicates when a user's input date is not recognized by the program due to a non-existent date
  * or time or when the format of input date is not recognized by the program.
  */
-public class InvalidTaskDateException extends InvalidUserCommandException{
+public class InvalidTaskDateException extends InvalidUserCommandException {
     /**
      * Creates a new InvalidTaskDateException with the specified invalid date.
      *

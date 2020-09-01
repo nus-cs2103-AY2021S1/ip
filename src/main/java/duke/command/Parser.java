@@ -16,7 +16,7 @@ import duke.task.Todo;
 import duke.ui.Ui;
 
 /**
- * Processes user commands to determine the appropriate course of action to display the correct 
+ * Processes user commands to determine the appropriate course of action to display the correct
  * response by Duke.
  */
 public class Parser {
@@ -24,7 +24,7 @@ public class Parser {
     private static final String EVENT_TASK_SEPARATOR = "/at ";
 
     /**
-     * Processes user commands to determine the appropriate actions needed to display the 
+     * Processes user commands to determine the appropriate actions needed to display the
      * appropriate output.
      *
      * @param userCommand User input command.
@@ -51,7 +51,6 @@ public class Parser {
 
             // Contains type of user command
             String command = commandDetails[0];
-            
             if (UserCommands.TODO.getCommandWord().equals(command)) {
                 addTodo(commandDetails[1], ui, storage);
             } else if (UserCommands.DEADLINE.getCommandWord().equals(command)) {
@@ -112,7 +111,7 @@ public class Parser {
             Deadline newDeadlineTask = new Deadline(description, deadlineDate);
             tasks.addNewTask(newDeadlineTask);
             storage.save(tasks, ui);
-            ui.showAddedNewTaskMessage(newDeadlineTask, storage.load());   
+            ui.showAddedNewTaskMessage(newDeadlineTask, storage.load());
         } catch (StorageException e) {
             // Unable to load or save task list
             ui.showErrorMessage(e);
@@ -164,7 +163,6 @@ public class Parser {
                 tasks.deleteTask(index - 1);
                 storage.save(tasks, ui);
                 ui.showDeleteTaskMessage(deletedTask, storage.load());
-                
             // If task specified does not exist in the task list
             } else {
                 throw new TaskDoesNotExistException(index);
@@ -177,7 +175,7 @@ public class Parser {
     }
 
     /**
-     * Processes the list index in the user command and returns the numerical value of the task 
+     * Processes the list index in the user command and returns the numerical value of the task
      * index as an integer. If a non-numerical number is found, an exception is thrown.
      *
      * @param inputIndex List index indicated in the user command.
@@ -208,7 +206,7 @@ public class Parser {
 
             // Checks if index is valid
             if (index > 0 && index <= tasks.totalNumberOfTasks()) {
-                Task doneTask = tasks.getTask(index -1);
+                Task doneTask = tasks.getTask(index - 1);
 
                 // Task has already been marked as done
                 if (doneTask.hasDoneStatus()) {
@@ -233,7 +231,7 @@ public class Parser {
 
     /**
      * Finds all the tasks in the task list that contains the keyword.
-     * 
+     *
      * @param keyword Keyword found in the filtered tasks.
      * @param ui User interface which displays the filtered tasks.
      * @param storage ocal storage that loads the saved task list.
@@ -246,12 +244,10 @@ public class Parser {
             for (int i = 0; i < tasks.totalNumberOfTasks(); i++) {
                 Task task = tasks.getTask(i);
                 boolean containsKeyword = task.toString().contains(keyword);
-                
                 if (containsKeyword) {
                     tasksContainingKeyword.add(task);
                 }
             }
-            
             TaskList filteredTaskList = new TaskList(tasksContainingKeyword);
             ui.showFilteredByKeywordTaskList(filteredTaskList, keyword);
         } catch (StorageException e) {

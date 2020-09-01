@@ -12,12 +12,12 @@ import duke.ui.Ui;
  * Represents a chatbot that maintains a task list for users.
  */
 public class Duke {
-    Storage storage;
-    Ui ui;
-    TaskList tasks;
+    private Storage storage;
+    private Ui ui;
+    private TaskList tasks;
 
     /**
-     * Creates a new Duke object which will create and access the saved task list at the specified 
+     * Creates a new Duke object which will create and access the saved task list at the specified
      * filepath.
      *
      * @param filePath Specifies the where to create and/or access the saved task list.
@@ -38,8 +38,7 @@ public class Duke {
     private void run() {
         ui.loadTaskList(tasks);
         ui.showGreetings();
-        
-        while (!Ui.exit) {
+        while (!Ui.hasExited()) {
             String userCommand = ui.readUserCommand();
             try {
                 Parser.parseCommands(userCommand, ui, storage);
