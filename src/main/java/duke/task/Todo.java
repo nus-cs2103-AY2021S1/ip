@@ -1,7 +1,7 @@
 package duke.task;
 
 public class Todo extends Task {
-    public static final String taskIcon = "T";
+    public static final String TASK_ICON = "T";
 
     public Todo(String description) {
         super(description);
@@ -9,6 +9,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[" + this.taskIcon + "]" + super.toString();
+        return "[" + this.TASK_ICON + "]" + super.toString();
     }
 }

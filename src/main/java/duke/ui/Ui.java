@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String logo =
+    private static final String LOGO =
             "       ,\n" +
                     "       \\`-._           __\n" +
                     "        \\\\  `-..____,.'  `.\n" +
@@ -35,7 +35,7 @@ public class Ui {
                     "`---'    `----'   ;      /    \\,.,,,/\n" +
                     "                   `----`              ";
 
-    private static final String line = "-------------------------------------------------------------------------------";
+    private static final String LINE = "-------------------------------------------------------------------------------";
 
     private String botName = "duke.Duke";
     private String userName = "You";
@@ -76,7 +76,7 @@ public class Ui {
      */
     public void showWelcome() {
         System.out.println("\nOh hai kittehs! I r lolcatus. reziztents is fu... fut...\n"
-                + this.logo + "\n\n" + "reziztents dun werk.\n" + this.line);
+                + this.LOGO + "\n\n" + "reziztents dun werk.\n" + this.LINE);
     }
 
     /**
@@ -93,7 +93,7 @@ public class Ui {
      * Prints a horizontal line.
      */
     public void showLine() {
-        System.out.println(this.line);
+        System.out.println(this.LINE);
     }
 
     /**

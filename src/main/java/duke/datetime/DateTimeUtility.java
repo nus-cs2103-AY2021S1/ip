@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateTimeUtility {
-    private static DateTimeFormatter outputDateFmt = DateTimeFormatter.ofPattern("MMM d yyyy");
-    private static DateTimeFormatter outputDateTimeFmt = DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm:ss a");
+    private static DateTimeFormatter OUTPUT_DATE_FMT = DateTimeFormatter.ofPattern("MMM d yyyy");
+    private static DateTimeFormatter OUTPUT_DATETIME_FMT = DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm:ss a");
 
     /**
      * Checks whether the input dataString is of the correct Date or DateTime format, or is just a String.
@@ -21,7 +21,7 @@ public class DateTimeUtility {
             return DateTimeFormat.DateTime;
         } catch (DateTimeException e) {}
         try {
-            LocalDateTime.parse(dateStr, outputDateTimeFmt);
+            LocalDateTime.parse(dateStr, OUTPUT_DATETIME_FMT);
             return DateTimeFormat.DateTime;
         } catch (DateTimeException e) {}
         try {
@@ -29,7 +29,7 @@ public class DateTimeUtility {
             return DateTimeFormat.Date;
         } catch (DateTimeException e) {}
         try {
-            LocalDate.parse(dateStr, outputDateFmt);
+            LocalDate.parse(dateStr, OUTPUT_DATE_FMT);
             return DateTimeFormat.Date;
         } catch (DateTimeException e) {}
 
@@ -48,17 +48,17 @@ public class DateTimeUtility {
 
     public static String formatString(String dateStr, DateTimeFormat format) {
         switch(format) {
-            case DateTime:
-                try {
-                    return LocalDateTime.parse(dateStr).format(outputDateTimeFmt);
-                } catch (DateTimeException e) {}
-            case Date:
-                try {
-                    return LocalDate.parse(dateStr).format(outputDateFmt);
-                } catch (DateTimeException e) {}
+        case DateTime:
+            try {
+                return LocalDateTime.parse(dateStr).format(OUTPUT_DATETIME_FMT);
+            } catch (DateTimeException e) {}
+        case Date:
+            try {
+                return LocalDate.parse(dateStr).format(OUTPUT_DATE_FMT);
+            } catch (DateTimeException e) {}
 
-            default:
-                return dateStr;
+        default:
+            return dateStr;
         }
     }
 
@@ -106,17 +106,17 @@ public class DateTimeUtility {
         //check all possible cases!
         if (aType == DateTimeFormat.Date) {
             if (bType == DateTimeFormat.Date) {
-                return DateTimeUtility.compare(LocalDate.parse(a, outputDateFmt), LocalDate.parse(b, outputDateFmt));
+                return DateTimeUtility.compare(LocalDate.parse(a, OUTPUT_DATE_FMT), LocalDate.parse(b, OUTPUT_DATE_FMT));
             } else if (bType == DateTimeFormat.DateTime) {
-                return DateTimeUtility.compare(LocalDate.parse(a, outputDateFmt), LocalDateTime.parse(b, outputDateTimeFmt));
+                return DateTimeUtility.compare(LocalDate.parse(a, OUTPUT_DATE_FMT), LocalDateTime.parse(b, OUTPUT_DATETIME_FMT));
             } else {
                 throw new DateTimeException("Cannot compare Datetime with string!");
             }
         } else if (aType == DateTimeFormat.DateTime) {
             if (bType == DateTimeFormat.Date) {
-                return DateTimeUtility.compare(LocalDateTime.parse(a, outputDateFmt), LocalDate.parse(b, outputDateFmt));
+                return DateTimeUtility.compare(LocalDateTime.parse(a, OUTPUT_DATE_FMT), LocalDate.parse(b, OUTPUT_DATE_FMT));
             } else if (bType == DateTimeFormat.DateTime) {
-                return DateTimeUtility.compare(LocalDateTime.parse(a, outputDateTimeFmt), LocalDateTime.parse(b, outputDateTimeFmt));
+                return DateTimeUtility.compare(LocalDateTime.parse(a, OUTPUT_DATETIME_FMT), LocalDateTime.parse(b, OUTPUT_DATETIME_FMT));
             } else {
                 throw new DateTimeException("Cannot compare Datetime with string!");
             }

@@ -23,9 +23,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.display("OKAIS I IZ GOIN 2 NOM BYEEEEE C U !!!1!1!!");
-    }
-
+        ui.display("OKAIS I IZ GOIN 2 NOM BYEEEEE C U !!!1!1!!")
     @Override
     public String toString() {
         return this.cmd.toString();

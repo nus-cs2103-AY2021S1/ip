@@ -160,14 +160,14 @@ public class TaskList {
         String taskType = String.valueOf(temp[0].charAt(1));
         boolean isDone = (String.valueOf(temp[1].charAt(1)).equals(Task.ICON_TICK));
 
-        if (taskType.equals(Todo.taskIcon)) {
+        if (taskType.equals(Todo.TASK_ICON)) {
             task = new Todo(temp[2].trim());
-        } else if (taskType.equals(Deadline.taskIcon)) {
+        } else if (taskType.equals(Deadline.TASK_ICON)) {
             String taskName = temp[2].split("\\(by:")[0].trim();
             String by = temp[2].split(" \\(by:")[1].trim();
             by = by.substring(0, by.length()-1);
             task = new Deadline(taskName, by);
-        } else if (taskType.equals(Event.taskIcon)) {
+        } else if (taskType.equals(Event.TASK_ICON)) {
             String taskName = temp[2].split(" \\(at:")[0].trim();
             String by = temp[2].split(" \\(at:")[1].trim();
             by = by.substring(0, by.length()-1);
