@@ -27,9 +27,11 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     /** Image that is shown alongside the user's messages. */
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image userImage =
+            new Image(this.getClass().getResourceAsStream("/images/Pomeranian with Mask.png"));
     /** Image that is shown alongside the chatbot's messages. */
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image dukeImage =
+            new Image(this.getClass().getResourceAsStream("/images/Pomeranian with Sunglasses.png"));
 
     /**
      * Initialises the MainWindow.
