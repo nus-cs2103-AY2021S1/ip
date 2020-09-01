@@ -22,8 +22,7 @@ public class Duke {
 
     public String getResponse(String input) {
         try {
-            String userInput = input;
-            return command.execute(userInput, tasks, storage) + "\n" + ui.showLineBreak();
+            return command.execute(input, tasks, storage) + "\n" + ui.showLineBreak();
         } catch (DukeException ex) {
             return ui.showErrorMessage(ex.getMessage());
         }
@@ -39,13 +38,13 @@ public class Duke {
     public void run() {
         command.welcomeCommand();
         Scanner scanner = new Scanner(System.in);
-        boolean terminated = false;
+        boolean isTerminated = false;
 
-        while (!terminated && scanner.hasNext()) {
+        while (!isTerminated && scanner.hasNext()) {
             try {
                 String userInput = scanner.nextLine();
                 command.execute(userInput, tasks, storage);
-                terminated = command.isTerminated();
+                isTerminated = command.isTerminated();
             } catch (DukeException ex) {
                 ui.showErrorMessage(ex.getMessage());
             } finally {

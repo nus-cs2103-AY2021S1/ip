@@ -66,10 +66,10 @@ public class Parser {
         if (time.equals("")) {
             return true;
         }
-        String[] splitTime = time.split(":");
-        if (splitTime.length == 2) {
-            String hour = splitTime[0];
-            String minutes = splitTime[1];
+        String[] hoursAndMinutes = time.split(":");
+        if (hoursAndMinutes.length == 2) {
+            String hour = hoursAndMinutes[0];
+            String minutes = hoursAndMinutes[1];
             if (hour.length() == 2 && minutes.length() == 2 && Integer.parseInt(hour) <= 24
                     && Integer.parseInt(hour) >= 0 && Integer.parseInt(minutes) >= 0
                     && Integer.parseInt(minutes) <= 60) {

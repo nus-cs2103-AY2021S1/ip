@@ -10,8 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
