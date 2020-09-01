@@ -3,6 +3,7 @@ package duke.utils;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -46,6 +47,13 @@ public class Ui {
 
     public void showListMessage(TaskList tasks) {
         tasks.printList();
+    }
+
+    public void showListMessage(List<Task> tasks) {
+        int size = tasks.size();
+        for (int i = 0; i < size; ++i) {
+            System.out.println((i + 1) + "." + tasks.get(i).toString());
+        }
     }
 
     public void showMessage(String message) {

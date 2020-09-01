@@ -17,6 +17,8 @@ public class Parser {
         } else if(command.length() >= 8 && command.substring(0, 7).equals("delete ")) {
             int num = Integer.parseInt(command.split(" ")[1]);
            return new DeleteCommand(num - 1);
+        } else if (command.length() >= 6 && command.substring(0, 5).equals("find ")) {
+            return new FindCommand(command.split(" ")[1]);
         } else {
             String[] parts = command.split(" ", 2);
             String taskType = parts[0];
