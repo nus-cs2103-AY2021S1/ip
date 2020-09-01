@@ -1,17 +1,27 @@
 package command;
 
+import java.util.ArrayList;
+
 import duke.TaskList;
 import duke.Ui;
 import exception.DukeException;
 import task.Task;
 
-import java.util.ArrayList;
-
+/**
+ * A FindCommand object searches for tasks within the list based on keyword.
+ *
+ * @author amelia
+ * @version 1.0
+ * @since 2020-09-01
+ */
 public class FindCommand extends Command {
     /**
      * Displays tasks containing keyword.
      *
-     * @param inputMsg User's input message to the chatbot.
+     * @param inputMsg User's input message to the chat bot.
+     * @param currList Current list of tasks.
+     * @param ui Ui object relevant to the chat bot.
+     * @return String message representing tasks with matching keywords.
      * @throws DukeException If user does not specify a keyword or there were no matches.
      */
     @Override

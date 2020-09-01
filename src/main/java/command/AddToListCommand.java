@@ -1,5 +1,7 @@
 package command;
 
+import java.time.LocalDateTime;
+
 import duke.TaskList;
 import duke.Ui;
 import exception.DukeException;
@@ -8,8 +10,13 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
-import java.time.LocalDateTime;
-
+/**
+ * An AddToListCommand object adds a task to the existing list.
+ *
+ * @author amelia
+ * @version 1.0
+ * @since 2020-09-01
+ */
 public class AddToListCommand extends Command {
     /**
      * Processes the input date by user.
@@ -41,7 +48,10 @@ public class AddToListCommand extends Command {
     /**
      * Adds a new task to the list of tasks.
      *
-     * @param inputMsg User's input message to the chatbot.
+     * @param inputMsg User's input message to the chat bot.
+     * @param currList Current list of tasks.
+     * @param ui Ui object relevant to the chat bot.
+     * @return String message indicating task has been added.
      * @throws DukeException If user does not give a task description.
      */
     @Override

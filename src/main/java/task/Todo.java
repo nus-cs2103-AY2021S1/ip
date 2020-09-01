@@ -1,7 +1,7 @@
 package task;
 
 /**
- * Represents a task.Todo by its taskName and whether or not it has been completed.
+ * Represents a Todo object by its taskName and whether or not it has been completed.
  *
  * @author amelia
  * @version 1.0

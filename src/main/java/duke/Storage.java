@@ -22,7 +22,7 @@ import task.Task;
 import task.Todo;
 
 /**
- * A duke.Storage object deals with loading tasks from the file and saving tasks in the file.
+ * A Storage object deals with loading tasks from the file and saving tasks in the file.
  *
  * @author amelia
  * @version 1.0
@@ -97,6 +97,8 @@ public class Storage {
     }
 
     /**
+     * Gets all past tasks stored locally.
+     *
      * @return List of previous tasks stored in an ArrayList.
      * @throws DukeException If file does not exists or from getPastTasks method.
      * @throws IOException By FileReader object.

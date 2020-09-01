@@ -13,6 +13,13 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDateTime date;
 
+    /**
+     * Public constructor for Event object to represent an event with a date.
+     *
+     * @param taskName Name of task.
+     * @param isCompleted Whether task has been completed.
+     * @param date Date of event.
+     */
     public Event(String taskName, boolean isCompleted, LocalDateTime date) {
         super(taskName, isCompleted);
         this.date = date;

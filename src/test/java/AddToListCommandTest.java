@@ -1,10 +1,12 @@
-import command.AddToListCommand;
-import exception.DukeException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import command.AddToListCommand;
+import exception.DukeException;
+
 public class AddToListCommandTest {
     @Test
     public void processDate_validDate_success() throws DukeException {

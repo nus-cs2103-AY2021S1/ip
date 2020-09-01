@@ -8,11 +8,11 @@ import controller.MainWindow;
 import exception.DukeException;
 
 /**
- * A Duke object represents the chatbot which responds to users' inputs.
+ * A Duke object represents the chat bot which responds to users' inputs.
  *
  * @author amelia
- * @version 1.0
- * @since 2020-08-26
+ * @version 2.0
+ * @since 2020-09-01
  */
 public class Duke {
 
@@ -38,8 +38,11 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the response of Duke based on user's input.
+     *
+     * @param input User's input message to the chat bot.
+     * @return String message of Duke's response.
+     * @throws IOException If user's input message is invalid.
      */
     public String getResponse(String input) throws IOException {
         if (input.equals("bye")) {

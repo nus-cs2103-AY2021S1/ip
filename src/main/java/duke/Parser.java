@@ -8,11 +8,11 @@ import command.FindCommand;
 import command.ListCommand;
 
 /**
- * A duke.Parser object deals with making sense of user command.
+ * A Parser object deals with making sense of user command.
  *
  * @author amelia
- * @version 1.0
- * @since 2020-08-26
+ * @version 2.0
+ * @since 2020-09-01
  */
 public class Parser {
     private TaskList currList;
@@ -24,7 +24,8 @@ public class Parser {
     /**
      * Looks through the input message to determine actions to be taken.
      *
-     * @param inputMsg User's input message to the chatbot.
+     * @param inputMsg User's input message to the chat bot.
+     * @return Command to be executed.
      */
     public Command processMsg(String inputMsg) {
         // user specified action, to identify type of action

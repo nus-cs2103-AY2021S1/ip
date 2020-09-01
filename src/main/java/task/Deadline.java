@@ -13,6 +13,13 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDateTime date;
 
+    /**
+     * Public constructor for Deadline object to represent a task with a deadline.
+     *
+     * @param taskName Name of task.
+     * @param isCompleted Whether task has been completed.
+     * @param date Deadline of task.
+     */
     public Deadline(String taskName, boolean isCompleted, LocalDateTime date) {
         super(taskName, isCompleted);
         this.date = date;

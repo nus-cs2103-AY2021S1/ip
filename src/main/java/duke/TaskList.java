@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import task.Task;
 
 /**
- * A duke.TaskList object stores tasks input by the user in a list.
+ * A TaskList object stores tasks input by the user in a list.
  *
  * @author amelia
  * @version 1.0

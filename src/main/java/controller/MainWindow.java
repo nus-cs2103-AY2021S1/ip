@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.IOException;
+
 import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -9,8 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -39,6 +39,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Displays welcome message on starting Duke chat bot.
+     */
     public void dukeWelcome() {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog("Hello! I'm Duke, some call me a parrot.\nWhat can I do for you?", dukeImage));
