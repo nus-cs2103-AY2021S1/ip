@@ -33,25 +33,25 @@ public class Parser {
         }
         return dateString;
     }
-
+    
     /**
      * This is a method that parses user input when it contains a "done" in it.
      * @param input This is the string to be parsed.
      * @param taskList This is the current task list.
      * @throws DukeException When an invalid input is entered.
      */
-    private static void handleDoneInput(String input, TaskList taskList) throws DukeException {
-        int index;
+    public static void handleDoneInput(String input, TaskList taskList) throws DukeException {
         if (!input.substring(4).trim().isEmpty()
                 && input.substring(4).trim().matches("[0-9]+")) { //to make sure the input after "done" is a number
-            index = Integer.parseInt(input.substring(4).trim()); //convert string to integer
+            int index = Integer.parseInt(input.substring(4).trim()); //convert string to integer
             if (index >= 1) { //if input index is valid
                 taskList.setDone(index);
             } else {
                 throw new DukeException("Please enter a valid task number to mark as done (index is not valid)");
             }
         } else {
-            throw new DukeException("Please enter a valid task number to mark as done (substring doesn't match regex)");
+            throw new DukeException("Please enter a valid task number to mark as done " +
+                    "(substring doesn't match regex)");
         }
     }
 
@@ -61,18 +61,18 @@ public class Parser {
      * @param taskList This is the current task list.
      * @throws DukeException When an invalid input is entered.
      */
-    private static void handleDeleteInput(String input, TaskList taskList) throws DukeException {
-        int index;
+    public static void handleDeleteInput(String input, TaskList taskList) throws DukeException {
         if (!input.substring(6).trim().isEmpty()
                 && input.substring(6).trim().matches("[0-9]+")) { //to make sure the input after "done" is a number
-            index = Integer.parseInt(input.substring(6).trim()); //convert string to integer
+            int index = Integer.parseInt(input.substring(6).trim()); //convert string to integer
             if (index >= 1) { //if input index is valid
                 taskList.setDelete(index);
             } else {
                 throw new DukeException("Please enter a valid task number to delete (index is not valid)");
             }
         } else {
-            throw new DukeException("Please enter a valid task number to delete (substring doesn't match regex)");
+            throw new DukeException("Please enter a valid task number to delete " +
+                    "(substring doesn't match regex)");
         }
     }
 
@@ -130,7 +130,8 @@ public class Parser {
                     taskList.setDeadline(description, d1);
                 }
             } catch (DateTimeException dte) {
-                throw new DukeException("Please enter your date and time in the format yyyy-mm-dd hhmm (eg. 2020-08-23 1800)");
+                throw new DukeException("Please enter your date and time in the format yyyy-mm-dd hhmm " +
+                        "(eg. 2020-08-23 1800)");
             }
         } else {
             throw new DukeException("Please enter a valid deadline");
@@ -177,7 +178,8 @@ public class Parser {
                     taskList.setEvent(description, d2);
                 }
             } catch (DateTimeException dte) {
-                throw new DukeException("Please enter your date and time in the format yyyy-mm-dd hhmm (eg. 2020-08-23 1800)");
+                throw new DukeException("Please enter your date and time in the format yyyy-mm-dd hhmm " +
+                        "(eg. 2020-08-23 1800)");
             }
         } else {
             throw new DukeException("Please enter a valid event");

@@ -27,7 +27,8 @@ public class Ui {
      * This method prints a greeting when the user starts the program.
      */
     public void printGreeting() {
-        System.out.println("Yooo, I'm Duke.\nWhat can I do for you today?\nPlease enter dates and times in this format: yyyy-mm-dd hhmm"); //Greeting
+        System.out.println("Yooo, I'm Duke.\nWhat can I do for you today?\n" +
+                "Please enter dates and times in this format: yyyy-mm-dd hhmm"); //Greeting
     }
 
     /**

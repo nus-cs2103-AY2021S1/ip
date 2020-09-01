@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @since 2020-08-25
  */
 public class TaskList {
-    ArrayList<Task> taskList;
+    protected ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
