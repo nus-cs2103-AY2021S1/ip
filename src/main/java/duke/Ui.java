@@ -80,57 +80,63 @@ public class Ui {
     }
 
     /**
-     * Prints message that task was added to TaskList.
-     *
+     * Returns message that task was added to TaskList.
      * @param task Task that was added.
      * @param size Size of TaskList.
+     * @return String of message.
      */
-    public void printAddTask(Task task, int size) {
+    public String getAddTaskString(Task task, int size) {
         String s = "Got it. I've added this task: \n"
                 + task.toString() + '\n'
                 + "Now you have " + size + " tasks in the list. \n";
-        System.out.println(formatString(s));
+        return s;
     }
 
     /**
      * Prints goodbye message.
      */
     public void printGoodbye() {
-        String goodbye = "Bye. Hope to see you again soon! \n";
+        String goodbye = getGoodbyeString();
         System.out.println(formatString(goodbye));
     }
 
-    /**
-     * Prints message that task has been deleted from TaskList.
-     *
-     * @param task Task that was deleted from TaskList.
-     * @param size Size of TaskList.
-     */
-    public void printDeletedTask(Task task, int size) {
-        String success = "Noted. I've removed this task: \n"
-                + task.toString() + "\n"
-                + "Now you have " + size + " tasks in the list. \n";
-        System.out.println(formatString(success));
-
+    public String getGoodbyeString() {
+        return "Bye. Hope to see you again soon! \n";
     }
 
     /**
-     * Prints message that task has been marked as done.
-     *
-     * @param task Task that is marked as done.
+     * Returns message that task has been deleted from TaskList.
+     * @param task Task that was deleted from TaskList.
+     * @param size Size of TaskList.
+     * @return String of message.
      */
-    public void printMarkedTask(Task task) {
-        String success = "Nice! I've marked this task as done: \n"
+    public String getDeletedTaskString(Task task, int size) {
+        String success = "Noted. I've removed this task: \n"
+                + task.toString() + "\n"
+                + "Now you have " + size + " tasks in the list. \n";
+        return success;
+    }
+
+    /**
+     * Returns message that task has been marked as done.
+     * @param task Task that is marked as done.
+     * @return String of message.
+     */
+    public String getMarkedTaskString(Task task) {
+        return "Nice! I've marked this task as done: \n"
                 + task + "\n";
-        System.out.println(formatString(success));
     }
 
     /**
      * Prints TaskList.
-     *
      * @param list TaskList to be printed.
      */
     public void printList(List<Task> list) {
+        String printedList = getListString(list);
+        System.out.println(formatString(printedList));
+    }
+
+    public String getListString(List<Task> list) {
         String printedList = "";
         if (list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
@@ -140,7 +146,7 @@ public class Ui {
         } else {
             printedList = "List is empty \n";
         }
-        System.out.println(formatString(printedList));
+        return printedList;
     }
 
     /**
@@ -154,10 +160,11 @@ public class Ui {
 
 
     /**
-     * Prints Tasks that have been found.
+     * Returns message of tasks that have been found.
      * @param foundTasks ArrayList of found tasks.
+     * @return String of message.
      */
-    public void printFoundTasks(ArrayList<Task> foundTasks) {
+    public String getFoundTasksString(ArrayList<Task> foundTasks) {
         String printedList = "";
         if (foundTasks.size() > 0) {
             printedList = "Here are the matching tasks in your list: \n";
@@ -168,6 +175,8 @@ public class Ui {
         } else {
             printedList = "No such keyword exists in the tasks in your list.\n";
         }
-        System.out.println(formatString(printedList));
+        return printedList;
     }
+
+
 }

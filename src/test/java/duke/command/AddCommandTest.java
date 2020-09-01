@@ -1,15 +1,14 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddCommandTest {
 
@@ -27,10 +26,7 @@ public class AddCommandTest {
     }
 
     class UiStub extends Ui {
-        @Override
-        public void printAddTask(Task task, int size) {
-            //Do nothing
-        }
+
     }
 
     @Test
