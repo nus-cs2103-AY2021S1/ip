@@ -18,6 +18,7 @@ public class ExitCommand extends Command {
 
     /**
      * Exits the Chatbot.
+     *
      * @param tasks The task list the command is executed with.
      * @param storage The storage the command is executed with.
      * @return A command response that represents the result of completing an exit command.
@@ -31,6 +32,7 @@ public class ExitCommand extends Command {
 
     /**
      * Indicates that this command is an exit command.
+     *
      * @return False.
      */
     @Override

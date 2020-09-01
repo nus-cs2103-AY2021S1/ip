@@ -24,6 +24,7 @@ public class TaskList {
 
     /**
      * Creates a task list with the given tasks.
+     *
      * @param tasks The tasks to be added.
      */
     public TaskList(List<Task> tasks) {
@@ -32,6 +33,7 @@ public class TaskList {
 
     /**
      * Gets the number of tasks in this task list.
+     *
      * @return The number of tasks in this task list.
      */
     public int getNumberOfTasks() {
@@ -40,6 +42,7 @@ public class TaskList {
 
     /**
      * Gets the task at the specified position in this task list.
+     *
      * @param taskNumber The position of the task in this task list.
      * @return The task at the specified position in this task list.
      */
@@ -49,6 +52,7 @@ public class TaskList {
 
     /**
      * Gets all the tasks in this task list as a list.
+     *
      * @return The list of all the tasks.
      */
     public List<Task> getTasks() {
@@ -57,6 +61,7 @@ public class TaskList {
 
     /**
      * Gets all the tasks in this task list on the specified date as a task list.
+     *
      * @param date The date of all the tasks to get.
      * @return The task list with all the tasks on the specified date.
      */
@@ -74,6 +79,7 @@ public class TaskList {
 
     /**
      * Gets all the tasks in this task list that contains the keyword as a task list.
+     *
      * @param keyword The string that the tasks you are finding should contain.
      * @return The task list with all the tasks that contain the keyword.
      */
@@ -90,6 +96,7 @@ public class TaskList {
 
     /**
      * Adds a task to this task list.
+     *
      * @param task The task to be added to this task list.
      * @return The task that was added.
      */
@@ -100,6 +107,7 @@ public class TaskList {
 
     /**
      * Deletes a task from this task list.
+     *
      * @param taskNumber The position of the task to be deleted.
      * @return The task that was deleted.
      */
@@ -111,6 +119,7 @@ public class TaskList {
 
     /**
      * Marks the task with the specified position in this task list as done.
+     *
      * @param taskNumber The position of the task to be marked as done.
      */
     public void markTaskAsDone(int taskNumber) {
@@ -119,6 +128,7 @@ public class TaskList {
 
     /**
      * Returns a string representation of this task list.
+     *
      * @return A string representation of this task list.
      */
     @Override
