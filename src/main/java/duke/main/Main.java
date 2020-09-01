@@ -9,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Main is a class that represents an application that houses the Duke chat-bot.
+ */
 public class Main extends Application {
     private Duke duke = new Duke();
 

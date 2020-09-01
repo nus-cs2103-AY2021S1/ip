@@ -7,6 +7,9 @@ import duke.exception.InvalidIndexException;
 import duke.exception.MissingDateException;
 import duke.task.Task;
 
+/**
+ * Parser is a class used by Duke to interpret user inputs as commands.
+ */
 public class Parser {
     private final TaskList taskList;
     private StringBuilder reply = new StringBuilder();

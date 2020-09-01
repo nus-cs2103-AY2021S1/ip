@@ -15,6 +15,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Class representing a GUI box that contains a textbox and an image avatar.
+ * DialogBoxes sent by the user have their avatar on the right, while those
+ * representing Duke's response have its avatar on the left instead.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -43,10 +48,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.CENTER_LEFT);
     }
 
+    /**
+     * Creates a DialogBox item representing a command sent by a user.
+     * @param text User input.
+     * @param img User avatar.
+     * @return DialogBox object containing the user's input and avatar.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a DialogBox item representing a response from Duke.
+     * @param text Duke's response.
+     * @param img Duke's avatar.
+     * @return DialogBox object containing the Duke's avatar and response.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

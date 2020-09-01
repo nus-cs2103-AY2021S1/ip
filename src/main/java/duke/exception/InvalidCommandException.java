@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * This exception is thrown when an invalid command is sent.
+ */
 public class InvalidCommandException extends Exception {
     @Override
     public String toString() {

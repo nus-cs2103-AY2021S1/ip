@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * This exception is thrown when an incomplete task creation command is sent.
+ */
 public class EmptyTaskException extends Exception {
     private String taskType;
 

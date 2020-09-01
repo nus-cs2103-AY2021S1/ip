@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * This exception is thrown when an invalid date format is parsed.
+ */
 public class InvalidDateException extends Exception {
     @Override
     public String toString() {

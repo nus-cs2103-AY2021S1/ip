@@ -8,6 +8,11 @@ import duke.exception.EmptyTaskException;
 import duke.exception.InvalidDateException;
 import duke.exception.MissingDateException;
 
+/**
+ * Class representing a deadline task.
+ * A deadline task has a description containing the details of the task and
+ * a date by which the task is due.
+ */
 public class Deadline extends Task {
     private final LocalDate dueDate;
 

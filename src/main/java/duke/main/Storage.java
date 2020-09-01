@@ -5,6 +5,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * The Storage class represents a container that stores a file containing saved tasks.
+ * It supports operations for reading and writing the save file.
+ */
 public class Storage {
     private final File file;
 

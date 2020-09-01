@@ -16,6 +16,10 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Class representing a list of tasks.
+ * It supports operations for removing, completing, adding and searching for tasks.
+ */
 public class TaskList {
     private final List<Task> tasks;
 

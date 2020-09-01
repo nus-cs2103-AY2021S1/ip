@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.exception.EmptyTaskException;
 
+/**
+ * Class representing a generic task with no dates attached.
+ */
 public class ToDo extends Task {
     private ToDo(String description) {
         super(description);

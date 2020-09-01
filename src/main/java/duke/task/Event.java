@@ -8,6 +8,11 @@ import duke.exception.EmptyTaskException;
 import duke.exception.InvalidDateException;
 import duke.exception.MissingDateException;
 
+/**
+ * Class representing an event task.
+ * It consists of a description containing information on the task
+ * and a date representing when the event is to occur.
+ */
 public class Event extends Task {
     private final LocalDate date;
 

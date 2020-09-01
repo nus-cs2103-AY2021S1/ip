@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Abstract class representing a task item.
+ * A task contains a description as well as a flag of whether it has been completed.
+ */
 public abstract class Task {
     protected final String description;
     protected boolean isDone;
