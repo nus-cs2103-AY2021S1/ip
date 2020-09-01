@@ -40,7 +40,7 @@ public class Ui {
 
     /**
      * Reads the next command from the user.
-     * 
+     *
      * @return Input by user.
      */
     String getUserInput() {
@@ -49,7 +49,7 @@ public class Ui {
 
     /**
      * Prints the status of a command's execution.
-     * 
+     *
      * @param status Status of command execution.
      */
     public void printStatus(String status) {

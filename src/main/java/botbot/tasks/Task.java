@@ -10,7 +10,7 @@ public abstract class Task {
 
     /**
      * Creates a task.
-     * 
+     *
      * @param type Type of task.
      * @param description Description of task.
      */
@@ -35,7 +35,7 @@ public abstract class Task {
 
     /**
      * Returns the type of the task.
-     * 
+     *
      * @return Type of task.
      */
     public char getType() {
@@ -44,7 +44,7 @@ public abstract class Task {
 
     /**
      * Returns the description of the task.
-     * 
+     *
      * @return Description of task.
      */
     public String getDescription() {
@@ -53,7 +53,7 @@ public abstract class Task {
 
     /**
      * Returns the completion status of the task.
-     * 
+     *
      * @return 1 if task is done, 0 otherwise.
      */
     public String getStatus() {
@@ -78,14 +78,14 @@ public abstract class Task {
 
     /**
      * Returns the time of the task.
-     * 
+     *
      * @return Time of task.
      */
     public abstract String getAt();
 
     /**
      * Returns the deadline of the task.
-     * 
+     *
      * @return Deadline of task.
      */
     public abstract String getBy();

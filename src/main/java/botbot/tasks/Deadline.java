@@ -1,11 +1,11 @@
 package botbot.tasks;
 
-import botbot.Parser;
-import botbot.exceptions.InvalidFormatException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import botbot.Parser;
+import botbot.exceptions.InvalidFormatException;
 
 /**
  * Represents a deadline with a description, deadline and completion status.
@@ -18,7 +18,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a deadline.
-     * 
+     *
      * @param command Command to create deadline.
      * @throws InvalidFormatException If command is of invalid format.
      */
@@ -33,7 +33,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a deadline.
-     * 
+     *
      * @param description Description of deadline.
      * @param isDone Completion status of deadline.
      * @param by Deadline of deadline.

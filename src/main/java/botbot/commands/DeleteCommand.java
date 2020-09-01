@@ -1,9 +1,9 @@
 package botbot.commands;
 
 import botbot.Storage;
-import botbot.tasks.Task;
 import botbot.TaskList;
 import botbot.Ui;
+import botbot.tasks.Task;
 
 /**
  * Deletes a task from the task list.

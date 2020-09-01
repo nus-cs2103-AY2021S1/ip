@@ -22,7 +22,7 @@ public class ExitCommand extends Command {
 
     /**
      * Returns true if the given command is an exit command.
-     * 
+     *
      * @param command Command.
      * @return True if given command is exit command, false otherwise.
      */
