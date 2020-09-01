@@ -1,17 +1,17 @@
-package main.java.duke.main;
+package duke.main;
 
-import main.java.duke.exception.DukeException;
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
-import main.java.duke.task.Todo;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * This class handles the final Format object
  * that is printed out by Duke.
  *
- * @param <T>: T is the data type of the input.
- */
+ * @param <T>
+ * */
 public class Format<T> {
     private final T content;
 
@@ -116,21 +116,21 @@ public class Format<T> {
     public String toString() {
         if (this.content instanceof Task) {
 
-            return  FormatString.UNDERSCORE.toString() +
-                    FormatString.NEXTLINE.toString() +
-                    Statement.TASKADDED.toString() +
-                    content +
-                    FormatString.NEXTLINE.toString() +
-                    String.format(Statement.REPORT.toString(), Parser.taskList.getTaskList().size()) +
-                    FormatString.NEXTLINE.toString() +
-                    FormatString.UNDERSCORE;
+            return FormatString.UNDERSCORE.toString()
+                    + FormatString.NEXTLINE.toString()
+                    + Statement.TASKADDED.toString()
+                    + content
+                    + FormatString.NEXTLINE.toString()
+                    + String.format(Statement.REPORT.toString(), Parser.getTaskList().getTaskList().size())
+                    + FormatString.NEXTLINE.toString()
+                    + FormatString.UNDERSCORE;
         }
 
-        return  FormatString.UNDERSCORE.toString() +
-                FormatString.NEXTLINE.toString() +
-                content +
-                FormatString.NEXTLINE.toString() +
-                FormatString.UNDERSCORE.toString();
+        return FormatString.UNDERSCORE.toString()
+                + FormatString.NEXTLINE.toString()
+                + content
+                + FormatString.NEXTLINE.toString()
+                + FormatString.UNDERSCORE.toString();
     }
 }
 

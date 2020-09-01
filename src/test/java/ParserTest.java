@@ -1,11 +1,10 @@
-
-import main.java.duke.main.Command;
-import main.java.duke.main.Parser;
-import main.java.duke.main.Time;
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
-import main.java.duke.task.Todo;
+import duke.main.Command;
+import duke.main.Parser;
+import duke.main.Time;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,9 +26,9 @@ public class ParserTest {
         Task expected = new Todo("reading");
         boolean isExist = false;
 
-        int size = Parser.taskList.getTaskList().size();
+        int size = Parser.getTaskList().getTaskList().size();
         for (int i = 0; i < size; i++) {
-            Task currentTask = Parser.taskList.getTaskList().get(i);
+            Task currentTask = Parser.getTaskList().getTaskList().get(i);
             if (currentTask.toString().equals(expected.toString())) {
                 isExist = true;
             }
@@ -48,9 +47,9 @@ public class ParserTest {
         Task expected = new Deadline("eating", new Time("2020-08-30").toString());
         boolean isExist = false;
 
-        int size = Parser.taskList.getTaskList().size();
+        int size = Parser.getTaskList().getTaskList().size();
         for (int i = 0; i < size; i++) {
-            Task currentTask = Parser.taskList.getTaskList().get(i);
+            Task currentTask = Parser.getTaskList().getTaskList().get(i);
             if (currentTask.toString().equals(expected.toString())) {
                 isExist = true;
             }
@@ -69,9 +68,9 @@ public class ParserTest {
         Task expected = new Event("working", new Time("2020-08-30").toString());
         boolean isExist = false;
 
-        int size = Parser.taskList.getTaskList().size();
+        int size = Parser.getTaskList().getTaskList().size();
         for (int i = 0; i < size; i++) {
-            Task currentTask = Parser.taskList.getTaskList().get(i);
+            Task currentTask = Parser.getTaskList().getTaskList().get(i);
             if (currentTask.toString().equals(expected.toString())) {
                 isExist = true;
             }
@@ -92,9 +91,9 @@ public class ParserTest {
         Task expected = new Event("working", new Time("2020-08-30").toString());
         boolean isDeleted = true;
 
-        int size = Parser.taskList.getTaskList().size();
+        int size = Parser.getTaskList().getTaskList().size();
         for (int i = 0; i < size; i++) {
-            Task currentTask = Parser.taskList.getTaskList().get(i);
+            Task currentTask = Parser.getTaskList().getTaskList().get(i);
             if (currentTask.toString().equals(expected.toString())) {
                 isDeleted = false;
             }
@@ -115,9 +114,9 @@ public class ParserTest {
         expected.setDone();
         boolean isDone = false;
 
-        int size = Parser.taskList.getTaskList().size();
+        int size = Parser.getTaskList().getTaskList().size();
         for (int i = 0; i < size; i++) {
-            Task currentTask = Parser.taskList.getTaskList().get(i);
+            Task currentTask = Parser.getTaskList().getTaskList().get(i);
             if (currentTask.toString().equals(expected.toString())) {
                 isDone = true;
             }

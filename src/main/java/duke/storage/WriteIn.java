@@ -1,10 +1,10 @@
-package main.java.duke.storage;
-
-import main.java.duke.exception.DukeException;
+package duke.storage;
 
 import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import duke.exception.DukeException;
 
 /**
  * This class is to write the information
@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class WriteIn {
     private String path;
-    private boolean append_to_file;
+    private boolean appendToFile;
 
     /**
      * Initializes a WriteIn object.
@@ -20,12 +20,12 @@ public class WriteIn {
      * @param path A string which contains
      *             the directory of the file
      *             that is to be read.
-     * @param append_to_file A boolean of if the user want to make
+     * @param appendToFile A boolean of if the user want to make
      *                       the WriteIn work immediately.
      */
-    public WriteIn(String path, boolean append_to_file) {
+    public WriteIn(String path, boolean appendToFile) {
         this.path = path;
-        this.append_to_file = append_to_file;
+        this.appendToFile = appendToFile;
     }
 
     /**
@@ -36,7 +36,7 @@ public class WriteIn {
      */
     public void writeToFile (String input) {
         try {
-            FileWriter writeIn = new FileWriter(path, append_to_file);
+            FileWriter writeIn = new FileWriter(path, appendToFile);
             PrintWriter printWrite = new PrintWriter(writeIn);
 
             printWrite.println(input);
@@ -44,7 +44,7 @@ public class WriteIn {
             printWrite.close();
 
         } catch (IOException e) {
-            DukeException.FileException();
+            DukeException.fileException();
         }
     }
 }

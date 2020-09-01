@@ -1,4 +1,6 @@
-package main.java.duke.exception;
+package duke.exception;
+
+import duke.main.FormatString;
 
 /**
  * This is an enum class that contains
@@ -8,8 +10,9 @@ public enum Exceptions {
     NUMBEREXCESSEXCEPTION {
         @Override
         public String toString() {
-            return "    OOPS!!! It seems like you don't have this option\n" +
-                    "    Enter list to see options";
+            return "    "
+                    + "OOPS!!! It seems like you don't have this option\n"
+                    + "    Enter list to see options";
         }
     },
 
@@ -41,19 +44,16 @@ public enum Exceptions {
         }
     },
 
-    NOTIMEEXCEPTION {
-        @Override
-        public String toString() {
-            return "    OOPS!!! The time of a deadline/event cannot be empty";
-        }
-    },
-
     FILEEXCEPTION {
+        @SuppressWarnings("checkstyle:SingleSpaceSeparator")
         @Override
         public String toString() {
-            return "    OOPS!!! The file exists but is a directory rather than a regular file,\n" +
-                    "    or does not exist but cannot be created,\n" +
-                    "    or cannot be opened for any other reason";
+            return FormatString.FOURSPACE.toString()
+                    + "OOPS!!! The file exists but is a directory rather than a regular file,\n"
+                    + "    "
+                    + "or does not exist but cannot be created,\n"
+                    + "    "
+                    + "or cannot be opened for any other reason";
         }
     },
 

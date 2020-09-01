@@ -1,4 +1,4 @@
-package main.java.duke.main;
+package duke.main;
 
 /**
  * This is an enum class which
@@ -37,6 +37,13 @@ public enum FormatString {
         @Override
         public String toString() {
             return " ";
+        }
+    },
+
+    FOURSPACE {
+        @Override
+        public String toString() {
+            return "    ";
         }
     },
 

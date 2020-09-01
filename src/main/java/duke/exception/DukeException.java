@@ -1,6 +1,6 @@
-package main.java.duke.exception;
+package duke.exception;
 
-import main.java.duke.main.Format;
+import duke.main.Format;
 
 /**
  * This class consists all exceptions related to Duke input.
@@ -26,11 +26,11 @@ public class DukeException {
         System.out.println(new Format<>(Exceptions.INPUTFORMATEXCEPTION.toString()));
     }
 
-    public static void FileException() {
+    public static void fileException() {
         System.out.println(new Format<>(Exceptions.FILEEXCEPTION.toString()));
     }
 
-    public static void ReadLineException() {
+    public static void readLineException() {
         System.out.println(new Format<>(Exceptions.READLINEEXCEPTION.toString()));
     }
 

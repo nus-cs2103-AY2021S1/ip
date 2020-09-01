@@ -1,12 +1,14 @@
-package main.java.duke.storage;
+package duke.storage;
 
-import main.java.duke.exception.DukeException;
-import main.java.duke.main.Format;
-import main.java.duke.main.Parser;
-
-import java.io.IOException;
-import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+import duke.exception.DukeException;
+import duke.main.Format;
+import duke.main.Parser;
+
+
 
 /**
  * This class is to read the file in
@@ -38,17 +40,23 @@ public class ReadFile {
 
             while (currentLine != null) {
                 Format<String> stringFormat = new Format<>(currentLine);
-                Parser.taskList.addMemory(stringFormat.stringToTask());
+                Parser.getTaskList().addMemory(stringFormat.stringToTask());
                 currentLine = textReader.readLine();
             }
 
             textReader.close();
 
         } catch (IOException e) {
-            DukeException.FileException();
+            DukeException.fileException();
         }
     }
 
+    /**
+     * Finds the Tasks whose detail contains
+     * the content.
+     *
+     * @param content User input.
+     */
     public void matchContent(String content) {
         try {
             FileReader fileReader = new FileReader(path);
@@ -59,7 +67,7 @@ public class ReadFile {
             while (currentLine != null) {
                 if (currentLine.contains(content)) {
                     Format<String> stringFormat = new Format<>(currentLine);
-                    Parser.taskList.addMemory(stringFormat.stringToTask());
+                    Parser.getTaskList().addMemory(stringFormat.stringToTask());
                 }
                 currentLine = textReader.readLine();
             }
@@ -67,7 +75,7 @@ public class ReadFile {
             textReader.close();
 
         } catch (IOException e) {
-            DukeException.FileException();
+            DukeException.fileException();
         }
     }
 }

@@ -1,4 +1,4 @@
-package main.java.duke.task;
+package duke.task;
 
 /**
  * This is a subclass of Task.
@@ -21,7 +21,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() +
-            " (by: " + time + ")";
+        return "[D]" + super.toString()
+                + " (by: " + time + ")";
     }
 }

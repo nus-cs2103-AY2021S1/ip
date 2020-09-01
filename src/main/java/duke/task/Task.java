@@ -1,6 +1,6 @@
-package main.java.duke.task;
+package duke.task;
 
-import main.java.duke.main.FormatString;
+import duke.main.FormatString;
 
 /**
  * This class simulates the tasks

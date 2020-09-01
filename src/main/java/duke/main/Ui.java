@@ -1,4 +1,4 @@
-package main.java.duke.main;
+package duke.main;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package main.java.duke.main;
+package duke.main;
 
 /**
  * This enum class consists of
@@ -9,16 +9,16 @@ public enum Statement {
     GREET {
         @Override
         public String toString() {
-            return "    Wonderful! It is nice to see you!\n" +
-                    "    Is there anything I can help?";
+            return "    Wonderful! It is nice to see you!\n"
+                    + "    Is there anything I can help?";
         }
     },
 
     BYE {
         @Override
         public String toString() {
-            return "    It is nice to talk to you.\n" +
-                    "    Hope to see you again!";
+            return "    It is nice to talk to you.\n"
+                    + "    Hope to see you again!";
         }
     },
 
@@ -32,16 +32,16 @@ public enum Statement {
     DONE {
         @Override
         public String toString() {
-            return "    Nice! I've marked this task as done:\n" +
-                    "      ";
+            return "    Nice! I've marked this task as done:\n"
+                    + "      ";
         }
     },
 
     DELETE {
         @Override
         public String toString() {
-            return "    Noted. I've removed this task:\n" +
-                    "      ";
+            return "    Noted. I've removed this task:\n"
+                    + "      ";
         }
     },
 
@@ -62,8 +62,8 @@ public enum Statement {
     TASKADDED {
         @Override
         public String toString() {
-            return "    Got it. I've added this task\n" +
-                    "      ";
+            return "    Got it. I've added this task\n"
+                    + "      ";
         }
     },
 

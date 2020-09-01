@@ -1,10 +1,10 @@
-package main.java.duke.task;
+package duke.task;
 
 /**
  * This is a subclass of Task.
  */
 public class Event extends Task {
-    public String time;
+    private String time;
 
     /**
      * Initializes a Event object.
@@ -21,8 +21,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() +
-                " (on: " + time + ")";
+        return "[E]" + super.toString() + " (on: " + time + ")";
     }
 
 

@@ -1,10 +1,15 @@
-package main.java.duke.main;
+package duke.main;
 
 /**
  * This is the main class that
  * is directly called by the users.
  */
 public class Duke {
+
+    /**
+     * Runs main function in Duke.
+     * @param args Argument needed.
+     */
     public static void main(String[] args) {
 
         Ui ui = new Ui();

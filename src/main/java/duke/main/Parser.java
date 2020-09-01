@@ -1,21 +1,21 @@
-package main.java.duke.main;
+package duke.main;
 
-import main.java.duke.exception.DukeException;
-import main.java.duke.storage.EditFile;
-import main.java.duke.storage.ReadFile;
-import main.java.duke.storage.WriteIn;
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
-import main.java.duke.task.TaskList;
-import main.java.duke.task.Todo;
+import duke.exception.DukeException;
+import duke.storage.EditFile;
+import duke.storage.ReadFile;
+import duke.storage.WriteIn;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * This class deals with the strings from the client
  * and enable the string to make sense to Duke.
  */
 public class Parser {
-    public static TaskList<Task> taskList;
+    private static TaskList<Task> taskList;
     private static String[] extract = new String[3];
     private static final int command = 0;
     private static final int taskDetail = 1;
@@ -26,6 +26,14 @@ public class Parser {
      */
     public Parser() {
         taskList = new TaskList<>();
+    }
+
+    /**
+     * Returns the static attribute of taskList.
+     * @return the static attribute of taskList.
+     */
+    public static TaskList<Task> getTaskList() {
+        return taskList;
     }
 
     /**
@@ -84,7 +92,7 @@ public class Parser {
     /**
      * Sets done the corresponding
      * task on both the taskList and Duke.txt.
-      */
+     */
     public static void done() {
         try {
             int num = Integer.parseInt(extract[taskDetail]);
@@ -121,11 +129,11 @@ public class Parser {
                 editFile.deleteLine(num);
 
                 String response =
-                        Statement.DELETE.toString() +
-                                task +
-                                FormatString.NEXTLINE.toString() +
-                                String.format
-                                        (Statement.REPORT.toString(), taskList.getTaskList().size());
+                        Statement.DELETE.toString()
+                                + task
+                                + FormatString.NEXTLINE.toString()
+                                + String.format
+                                (Statement.REPORT.toString(), taskList.getTaskList().size());
 
                 System.out.println(
                         new Format<>(new Response(response)));
@@ -147,8 +155,8 @@ public class Parser {
         readFile.matchContent(content);
 
         Response response = new Response(
-                Statement.FIND.toString() +
-                taskList.toString()
+                Statement.FIND.toString()
+                        + taskList.toString()
         );
 
         System.out.println(
@@ -214,7 +222,7 @@ public class Parser {
         extract[taskDetail] = new Format<>(
                 description
                         .substring(pointer + 1, separator)
-                )
+        )
                 .shorten()
                 .getContent();
 
@@ -227,7 +235,7 @@ public class Parser {
             extract[taskTime] = new Format<>(
                     description
                             .substring(separator + 1)
-                    )
+            )
                     .shorten()
                     .getContent();
         }
@@ -282,9 +290,9 @@ public class Parser {
         taskList.addMemory(task);
         WriteIn data = new WriteIn(Directory.FILEDIRECTORY.toString(), true);
         data.writeToFile(task.toString());
-        Format<Task> ResponseWithFormat =
+        Format<Task> responseWithFormat =
                 new Format<>(task);
-        System.out.println(ResponseWithFormat);
+        System.out.println(responseWithFormat);
     }
 
 

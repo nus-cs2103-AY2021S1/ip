@@ -1,14 +1,16 @@
-package main.java.duke.storage;
+package duke.storage;
 
-import main.java.duke.exception.DukeException;
-import main.java.duke.main.FormatString;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.FileReader;
-import java.io.File;
-import java.io.BufferedReader;
+
+import duke.exception.DukeException;
+import duke.main.FormatString;
+
+
 
 /**
  * This class is to edit the file in
@@ -59,16 +61,20 @@ public class EditFile {
             reader.close();
             fileWriter.close();
         } catch (IOException e) {
-            DukeException.ReadLineException();
+            DukeException.readLineException();
         }
     }
 
+    /**
+     * Clears all tasks recorded in the file
+     * with directory in the FileDirectory in Directory class.
+     */
     public void clearFile() {
         try {
             PrintWriter printWriter = new PrintWriter(path);
             printWriter.close();
         } catch (IOException e) {
-            DukeException.FileException();
+            DukeException.fileException();
         }
     }
 
@@ -106,7 +112,7 @@ public class EditFile {
             reader.close();
             fileWriter.close();
         } catch (IOException e) {
-            DukeException.ReadLineException();
+            DukeException.readLineException();
         }
     }
 }

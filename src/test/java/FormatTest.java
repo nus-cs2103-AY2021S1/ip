@@ -1,14 +1,12 @@
-
-import main.java.duke.main.Format;
-import main.java.duke.main.Time;
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
-import main.java.duke.task.Todo;
+import duke.main.Format;
+import duke.main.Time;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * This class is to test the Format class.
@@ -26,8 +24,8 @@ public class FormatTest {
     public void formatShortenTest1() {
         String test =
                 new Format<>("   hahaha  ")
-                .shorten()
-                .getContent();
+                        .shorten()
+                        .getContent();
 
         String expected = "hahaha";
         assertEquals(test, expected);
