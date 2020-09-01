@@ -20,8 +20,14 @@ public abstract class Task {
      * @param title the task's title.
      */
     protected Task(String title) {
+        this(title, "");
+    }
+
+    protected Task(String title, String description) {
 
         this.title = title;
+        this.description = description;
+
         this.done = false;
     }
 
