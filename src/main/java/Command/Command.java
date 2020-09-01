@@ -17,7 +17,7 @@ abstract public class Command {
     /**
      * Executes the command
      **/
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Check if the current command is an exit command

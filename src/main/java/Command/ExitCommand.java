@@ -20,13 +20,14 @@ public class ExitCommand extends Command {
      * Executes the command
      **/
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             storage.putToDatabase(tasks.getTaskList());
-            ui.showGoodBye();
+
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());
         }
+        return ui.showGoodBye();
     }
 
     /**

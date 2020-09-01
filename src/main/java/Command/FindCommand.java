@@ -20,9 +20,9 @@ public class FindCommand extends Command {
      * Executes the command
      **/
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws UnSpecifiedFind {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws UnSpecifiedFind {
         try {
-            ui.showFoundTasks(tasks, this.command.substring(5));
+            return ui.showFoundTasks(tasks, this.command.substring(5));
         } catch (IndexOutOfBoundsException e) {
             throw new UnSpecifiedFind("☹ OOPS!!! Please specify the keyword to be found.");
         }

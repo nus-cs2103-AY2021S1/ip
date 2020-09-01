@@ -8,7 +8,7 @@ import parserstorageui.Ui;
 
 import task.TaskList;
 
-public class Duke {
+public class Duke{
 
     /**
      * The storage assigned to Duke
@@ -25,14 +25,9 @@ public class Duke {
      **/
     private Ui ui;
 
-    /**
-     * Initializes Duke
-     *
-     * @param filePath
-     */
-    public Duke(String filePath) {
+    public Duke(){
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -41,11 +36,14 @@ public class Duke {
         }
     }
 
-    /**
-     * The main program of all file
-     **/
-    public static void main(String[] args) {
-        new Duke("data").run();
+    public String getResponse(Command c) throws DukeException {
+        try {
+            String out = c.execute(tasks, ui, storage);
+            System.out.println(out);
+            return out;
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 
     /**
@@ -68,4 +66,5 @@ public class Duke {
             }
         }
     }
+
 }

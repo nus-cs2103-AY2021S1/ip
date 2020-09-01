@@ -21,14 +21,13 @@ public class DoneCommand extends Command {
      * Executes the command
      **/
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws WrongIndexError {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws WrongIndexError {
         try {
             tasks = tasks.done(this.command);
-            ui.showDoneTask(tasks.getAddedOrDeletedTask());
         } catch (WrongIndexError e) {
             throw new WrongIndexError(e.getMessage());
         }
-
+        return ui.showDoneTask(tasks.getAddedOrDeletedTask());
     }
 
     /**

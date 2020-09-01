@@ -22,6 +22,7 @@ public class Ui {
         System.out.println(logo);
     }
 
+
     /**
      * Receive input from user
      **/
@@ -53,62 +54,66 @@ public class Ui {
     /**
      * Show added task to the user
      **/
-    public void showAddedTask(int taskSize, Task added) {
-        System.out.println("Got it. I've added this task: \n"
+    public String showAddedTask(int taskSize, Task added) {
+        return "Got it. I've added this task: \n"
             + " " + added + "\n"
-            + "Now you have " + taskSize + " tasks in the list.");
+            + "Now you have " + taskSize + " tasks in the list.";
     }
 
     /**
      * Show deleted task to the user
      **/
-    public void showDeletedTask(int taskSize, Task deleted) {
-        System.out.println("Noted. I've removed this task: \n"
+    public String showDeletedTask(int taskSize, Task deleted) {
+        return "Noted. I've removed this task: \n"
             + "  "
             + deleted
             + "\n"
-            + "Now you have " + taskSize + " tasks in the list.");
+            + "Now you have " + taskSize + " tasks in the list.";
     }
 
     /**
      * Show the current tasks to the user
      **/
-    public void showTasks(TaskList tasks) {
+    public String showTasks(TaskList tasks) {
         int i = 1;
-        System.out.println("Here are the tasks in your list:");
+        String output = "Here are the tasks in your list:\n";
         for (Task item : tasks.getTaskList()) {
-            System.out.println(i + ". " + item);
+            output = output + i + ". " + item + "\n";
+            //System.out.println(i + ". " + item);
             i++;
         }
+        return output;
     }
 
     /**
      * Show done tasks to the user
      **/
-    public void showDoneTask(Task done) {
-        System.out.println("Nice! I've marked this task as done: \n"
-            + done);
+    public String showDoneTask(Task done) {
+        return "Nice! I've marked this task as done: \n"
+            + done;
     }
 
     /**
      * Show the tasks that match the keyword
      **/
-    public void showFoundTasks(TaskList tasks, String keyword) {
+    public String  showFoundTasks(TaskList tasks, String keyword) {
         int i = 1;
-        System.out.println("Here are the matching tasks in your list:");
+        String output = "Here are the matching tasks in your list:\n";
         for (Task item : tasks.getTaskList()) {
             if (item.isNameMatchKeyWord(keyword)) {
-                System.out.println(i + ". " + item);
+                output = output + i + ". " + item + "\n";
+                /*System.out.println(i + ". " + item);*/
                 i++;
             }
         }
+        return output;
     }
 
     /**
      * Show goodbye message to the customer
      **/
-    public void showGoodBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showGoodBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
 }

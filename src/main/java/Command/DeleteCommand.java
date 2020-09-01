@@ -21,15 +21,16 @@ public class DeleteCommand extends Command {
      * Executes the command
      **/
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MissingSpecifiedDeleteError, WrongIndexError {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws MissingSpecifiedDeleteError, WrongIndexError {
         try {
             tasks = tasks.delete(this.command);
-            ui.showDeletedTask(tasks.taskSize(), tasks.getAddedOrDeletedTask());
+
         } catch (MissingSpecifiedDeleteError e) {
             throw new MissingSpecifiedDeleteError(e.getMessage());
         } catch (WrongIndexError e) {
             throw new WrongIndexError(e.getMessage());
         }
+        return ui.showDeletedTask(tasks.taskSize(), tasks.getAddedOrDeletedTask());
     }
 
     /**
