@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.Scanner;
 
 public class Deadline extends Task {
+    //dealing with dates
     LocalDate deadlineDate;
     LocalTime deadlineTime;
 
