@@ -1,3 +1,6 @@
+/**
+ * Ends the ChatBot.
+ */
 public class Bye extends Command {
 
     Bye() {
@@ -10,6 +13,9 @@ public class Bye extends Command {
         return "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * Sets end parameter as true.
+     */
     public void endBot() {
         ChatBot.ended = true;
     }

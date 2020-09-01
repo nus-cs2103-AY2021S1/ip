@@ -5,11 +5,16 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Loads a list of tasks from a persistent file stored on the device.
+ */
 public class Load extends Command {
 
+    /** Query of User stored for Reference */
     String filePath;
 
     Load(String[] query) throws WrongUsageException {
+
         this.name = "load";
         this.usage = "load [FILE_PATH]";
         this.description = "Used to load files stored in the task format";
@@ -19,6 +24,13 @@ public class Load extends Command {
         this.filePath = query[1];
     }
 
+    /**
+     * Loads file and Returns success or error message accordingly.
+     *
+     * @return success or error message accordingly.
+     * @throws FileNotFoundException If File Cannot be found on device with the given file path.
+     * @throws DukeException If Task Data cannot be read properly.
+     */
     public String load() throws FileNotFoundException, DukeException {
         boolean success = readFile();
         if (success) {
@@ -28,6 +40,13 @@ public class Load extends Command {
         }
     }
 
+    /**
+     * Reads File Data and adds Task Data into Task List.
+     *
+     * @return Success boolean.
+     * @throws FileNotFoundException If File Cannot be found on device with the given file path.
+     * @throws DukeException If Task Data cannot be read properly.
+     */
     private boolean readFile() throws FileNotFoundException,DukeException {
         File file = new File(filePath);
         ArrayList<Task> newTasks = new ArrayList<>();

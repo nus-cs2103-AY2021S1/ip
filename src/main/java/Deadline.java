@@ -2,6 +2,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline Command to add in an Deadline type Task.
+ */
 public class Deadline extends Task {
     LocalDate date;
     LocalTime time;
