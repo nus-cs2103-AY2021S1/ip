@@ -29,7 +29,7 @@ public class Duke {
 
     /**
      * This gives the respective output based on the input
-     * @param inputs what the user inputs in the GUI
+     * @param inputs what the user inputs in the GUI, can be multiple inputs.
      * @return the output based on the output.
      */
     public String getResponse(String... inputs)  {
