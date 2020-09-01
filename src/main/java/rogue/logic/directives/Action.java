@@ -19,8 +19,6 @@ public enum Action {
     EXIT            ("bye"),
     INVALID         ("");
 
-    private final String keyword;
-
     /** Stores keyword to action mappings. */
     private static final Map<String, Action> ACTION_KEYWORD_MAP = new HashMap<>();
 
@@ -30,6 +28,8 @@ public enum Action {
             ACTION_KEYWORD_MAP.put(action.keyword, action);
         }
     }
+
+    private final String keyword;
 
     /**
      * Constructs an {@code Action}.

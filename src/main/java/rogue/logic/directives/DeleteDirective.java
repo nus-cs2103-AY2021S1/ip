@@ -20,8 +20,8 @@ public class DeleteDirective implements Executable {
     private final String ERROR_INCORRECT_INDEX = "sToP TrYiNg tO FoOl mE. taSK #%d dOeS NoT ExIsT.";
 
     /** Message upon deleting a {@code Task} successfully. */
-    private final String MESSAGE_DELETE_SUCCESS = "gReAt! OnE FeWeR ThInG To rEmEmBeR: %s\n" +
-            "i sTiLl nEeD To rEmEmBeR %d tAsK(s).";
+    private final String MESSAGE_DELETE_SUCCESS = "gReAt! OnE FeWeR ThInG To rEmEmBeR: %s\n"
+            + "i sTiLl nEeD To rEmEmBeR %d tAsK(s).";
 
     private final int index;
 
