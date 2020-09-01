@@ -1,5 +1,0 @@
-todo, 0, a
-todo, 0, b
-todo, 1, c
-todo, 0, d
-todo, 0, fx
