@@ -20,12 +20,18 @@ public class Duke {
     public Duke(){}
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * This gives the boolean value of isExit
+     * @return returns the value of isExit.
      */
     public boolean isExit(){
         return isExit;
     }
+
+    /**
+     * This gives the respective output based on the input
+     * @param input what the user inputs in the GUI
+     * @return the output based on the output.
+     */
     public String getResponse(String input)  {
         Command c = Parser.parse(input);
         try {

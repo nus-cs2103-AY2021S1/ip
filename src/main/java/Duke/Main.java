@@ -13,6 +13,10 @@ import java.io.IOException;
 public class Main extends Application {
     private Duke duke = new Duke("src/main/java/tasks.txt");
 
+    /**
+     * Implements the abstract start method in Application class
+     * @param stage it is to show the main screen
+     */
     @Override
     public void start(Stage stage) {
         if(duke.isExit()){

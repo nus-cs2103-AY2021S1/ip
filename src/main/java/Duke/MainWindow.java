@@ -27,13 +27,22 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private boolean intro = true;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    public Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private Stage stage;
+
+    /**
+     * Initializes
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * also ensures that the getDukeDialog prints hello when opened
+     * @param d assigns duke value of d
+     * @param stage assigns stage value of stage
+     */
     public void setDuke(Duke d, Stage stage) {
         duke = d;
         this.stage = stage;
@@ -46,6 +55,9 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        if(duke.isExit()){
+            stage.close();
+        }
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -53,11 +65,5 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
             );
         userInput.clear();
-        if(duke.isExit()) {
-            stage.setOnCloseRequest(event -> {
-                System.out.println(3);
-                dialogContainer.getChildren().add(DialogBox.getDukeDialog("Bye", dukeImage));
-            });
-        }
     }
 }
