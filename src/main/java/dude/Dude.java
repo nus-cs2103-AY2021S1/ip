@@ -66,7 +66,7 @@ public class Dude extends Application {
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
 
-        
+
 
 
        /* Dude bot = new Dude();
