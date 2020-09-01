@@ -83,6 +83,20 @@ public class UI {
     }
 
     /**
+     * Returns the hello message.
+     */
+    public static String getHelloMessage() {
+        return HELLO_MESSAGE;
+    }
+
+    /**
+     * Returns the exit message.
+     */
+    public static String getExitMessage() {
+        return EXIT_MESSAGE;
+    }
+
+    /**
      * Closes the scanner.
      */
     public void closeScanner() {

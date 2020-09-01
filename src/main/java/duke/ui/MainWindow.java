@@ -22,18 +22,22 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Duke duke = new Duke();
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/SpeechEmoji.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/GeekEmoji.png"));
 
+    /**
+     * Initialises the MainWindow. Sends a welcome message with the list of tasks.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    public void setDuke(Duke d) {
-        duke = d;
+        String helloMessage = UI.getHelloMessage() + "\n\nI've saved these so far:\n"
+                + duke.getResponse("list");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(helloMessage, dukeImage)
+        );
     }
 
     /**

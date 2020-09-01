@@ -4,6 +4,7 @@ import duke.storage.Storage;
 import duke.storage.StorageException;
 import duke.task.TaskException;
 import duke.task.TaskList;
+import duke.ui.UI;
 
 /**
  * Encapsulates the logic for exiting tasks.
@@ -31,6 +32,6 @@ public class ExitCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Storage storage) throws TaskException, StorageException {
-        return "See you soon!";
+        return UI.getExitMessage();
     }
 }
