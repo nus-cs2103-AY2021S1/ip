@@ -9,6 +9,11 @@ public class Storage {
     private String dataPathName;
     private String dataFilePath;
 
+    /**
+     * Initialises a Storage object with the given dataPathName and dataFilePath.
+     * @param dataPathName PathName to get to the .txt file used for storage
+     * @param dataFilePath Full FilePath to get to the .txt file used for storage
+     */
     public Storage(String dataPathName, String dataFilePath) {
         this.dataPathName = dataPathName;
         this.dataFilePath = dataFilePath;

@@ -9,6 +9,12 @@ import java.util.Scanner;
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Initialises a TaskList object from a file containing saved tasks
+     * @param file .txt file that contains saved Duke task data
+     * @param ui Ui to display results and errors to the user
+     */
+    @SuppressWarnings("checkstyle:MissingSwitchDefault")
     public TaskList(File file, Ui ui) {
         this.tasks = new ArrayList<>();
 
@@ -18,16 +24,17 @@ public class TaskList {
             while (sc.hasNextLine()) {
                 String[] components = sc.nextLine().split(" \\| ");
 
+                //noinspection CheckStyle
                 switch (components[0]) {
-                    case "T":
-                        tasks.add(new Todo(components[2], components[1].equals("1") ? true : false));
-                        break;
-                    case "D":
-                        tasks.add(new Deadline(components[2], components[3], components[1].equals("1") ? true : false));
-                        break;
-                    case "E":
-                        tasks.add(new Event(components[2], components[3], components[1].equals("1") ? true : false));
-                        break;
+                case "T":
+                    tasks.add(new Todo(components[2], components[1].equals("1") ? true : false));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(components[2], components[3], components[1].equals("1") ? true : false));
+                    break;
+                case "E":
+                    tasks.add(new Event(components[2], components[3], components[1].equals("1") ? true : false));
+                    break;
                 }
             }
 

@@ -4,8 +4,8 @@ import java.io.File;
  * Class responsible for the execution of the Duke chatbot.
  */
 public class Duke {
-    private final String DATA_PATH_NAME = "./data";
-    private final String DATA_FILE_PATH = "./data/dukedata.txt";
+    private static final String DATA_PATH_NAME = "./data";
+    private static final String DATA_FILE_PATH = "./data/dukedata.txt";
 
     private Storage storage;
     private TaskList tasks;

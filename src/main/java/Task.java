@@ -5,11 +5,20 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Initialises a new Task with the given description.
+     * @param description Description of the task that needs to be performed
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Initialises a new Task with the given description and whether it is completed.
+     * @param description Description of the task that needs to be performed
+     * @param isDone Completion status of the task
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

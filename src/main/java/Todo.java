@@ -1,5 +1,5 @@
 /**
- *
+ * Represents a Todo task object that has a description.
  */
 public class Todo extends Task {
     public Todo(String description) {
