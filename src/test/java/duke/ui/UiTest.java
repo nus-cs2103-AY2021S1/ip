@@ -36,9 +36,4 @@ public class UiTest {
         List<String> result = new Ui().splitIntoLines("abc\ndefg zd\nxy", 3);
         assertListEquality(Arrays.asList("abc", "defg", "zd", "xy"), result);
     }
-
-    @Test
-    public void newSay() {
-
-    }
 }
