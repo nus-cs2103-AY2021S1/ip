@@ -61,9 +61,9 @@ public class Storage {
     private static void convertToTask(String line, TaskList taskList) throws DukeException {
         boolean isDone;
 
-        if (line.startsWith("✓", 4)) {
+        if (line.startsWith("O", 4)) {
             isDone = true;
-        } else if (line.startsWith("✘", 4)) {
+        } else if (line.startsWith("Ø", 4)) {
             isDone = false;
         } else {
             throw new DukeException();
