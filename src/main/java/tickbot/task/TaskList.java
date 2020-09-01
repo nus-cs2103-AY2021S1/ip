@@ -22,7 +22,7 @@ public class TaskList {
 
     /**
      * Get a task in the list by the index.
-     * @param index
+     * @param index the index of the task to get.
      * @return the corresponding task.
      */
     public Task get(int index) {
@@ -31,8 +31,8 @@ public class TaskList {
 
     /**
      * Add a task to the end of the task list.
-     * @param task the task to add.
      * <p> The data storage would be updated. </p>
+     * @param task the task to add.
      */
     public void add(Task task) {
         tasks.add(task);
@@ -41,8 +41,8 @@ public class TaskList {
 
     /**
      * Remove a task from the task list.
-     * @param index the index of the task to be removed.
      * <p> The data storage would be updated. </p>
+     * @param index the index of the task to be removed.
      */
     public void remove(int index) {
         tasks.remove(index);
