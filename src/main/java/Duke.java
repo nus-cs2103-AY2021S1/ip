@@ -26,6 +26,10 @@ public class Duke {
         }
     }
 
+    public Duke() throws IOException {
+        this("data/tasks.txt");
+    }
+
     /**
      * Runs the Duke application.
      * @throws IOException If an error occurs while accessing/creating the
