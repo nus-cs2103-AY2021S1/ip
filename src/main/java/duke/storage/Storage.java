@@ -1,17 +1,19 @@
 package duke.storage;
 
-import duke.task.deadline.Deadline;
-import duke.task.Task;
-import duke.task.eventtask.EventTask;
-import duke.task.todo.ToDo;
-import duke.tasklist.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import duke.task.Task;
+import duke.task.deadline.Deadline;
+import duke.task.eventtask.EventTask;
+import duke.task.todo.ToDo;
+import duke.tasklist.TaskList;
+
+
 
 /**
  * Storage class that deals with loading tasks from the file and saving tasks in the file.

@@ -1,9 +1,9 @@
 package duke.task.deadline;
 
-import duke.task.Task;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.task.Task;
 
 /**
  * A subclass of task that deals with deadlines.

@@ -1,14 +1,14 @@
 package duke.parser;
 
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
 import duke.dukeexception.DukeKeywordMissingException;
 import duke.dukeexception.DukeTaskNonExistException;
 import duke.dukeexception.DukeUnknownInputException;
 import duke.dukeexception.EmptyDescriptionException;
 
 import duke.ui.UI;
-
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
 
 /**
  * This class deals with the interpretation of the user's inputs by the program.
@@ -125,8 +125,8 @@ public class Parser {
             } else {
                 throw new DukeUnknownInputException("error");
             }
-        } catch (IOException | DukeTaskNonExistException | EmptyDescriptionException |
-                DukeKeywordMissingException | DukeUnknownInputException e) {
+        } catch (IOException | DukeTaskNonExistException | EmptyDescriptionException
+                | DukeKeywordMissingException | DukeUnknownInputException e) {
             return ui.showError(e);
         } catch (DateTimeParseException e) {
             return "☹ OOPS!!! Ensure that the datetime input is in the format YYYY-MM-DD HH:MM";

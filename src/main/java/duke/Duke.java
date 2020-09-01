@@ -1,11 +1,12 @@
 package duke;
 
+import java.io.File;
+
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.UI;
 
-import java.io.File;
 
 /**
  * The Duke program implements a chatbot application that would take in the input from
@@ -16,7 +17,7 @@ public class Duke {
     /**
      * Parser that makes sense of the user's inputs
      */
-    public static Parser parser;
+    private static Parser parser;
 
 
     /**
