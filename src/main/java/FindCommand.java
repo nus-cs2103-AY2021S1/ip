@@ -2,7 +2,7 @@
  * Represents a command to find tasks based on keyword.
  */
 public class FindCommand extends Command {
-    String keyword;
+    private String keyword;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;

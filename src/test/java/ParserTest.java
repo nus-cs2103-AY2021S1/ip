@@ -1,6 +1,6 @@
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
     @Test
@@ -32,7 +32,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_InvalidDoneCommand_exceptionThrown() {
+    public void parse_invalidDoneCommand_exceptionThrown() {
         try {
             assertEquals(true, Parser.parse("done 0") instanceof DoneCommand);
         } catch (DukeException e) {
@@ -58,7 +58,7 @@ public class ParserTest {
         try {
             assertEquals(true, Parser.parse("abcd") instanceof Command);
         } catch (DukeException e) {
-            assertEquals("☹ ERROR: Invalid command provided. Please try again.", e.getMessage());
+            assertEquals("  ERROR: Invalid command provided. Please try again.", e.getMessage());
         }
     }
 }

@@ -1,13 +1,15 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+
 
 public class DeadlineTest {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    LocalDateTime atLocalDate = LocalDateTime.parse("2020-12-12 12:30", formatter);
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private LocalDateTime atLocalDate = LocalDateTime.parse("2020-12-12 12:30", formatter);
 
     @Test
     public void markAsDone_success() {
