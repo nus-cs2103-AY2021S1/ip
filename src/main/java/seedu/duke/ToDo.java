@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.time.LocalDateTime;
+
 /**
  * Class that represents
  */
@@ -17,6 +19,11 @@ public class ToDo extends Task {
     @Override
     public String getType() {
         return "T";
+    }
+
+    @Override
+    public LocalDateTime getTime(){
+        return null;
     }
 
 }

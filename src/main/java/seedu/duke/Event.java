@@ -28,7 +28,6 @@ public class Event extends Task {
      * Gets the deadline of the task.
      * @return DateTime object that represents the deadline.
      */
-    @Override
     public LocalDateTime getTime() {
         return this.time;
     }

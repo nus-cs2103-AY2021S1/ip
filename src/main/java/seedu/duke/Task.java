@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 /**
  * Class that represents the tasks the user can add to their list.
  */
-public class Task {
+public abstract class Task {
     protected String name;
     protected boolean isDone;
 
@@ -42,17 +42,13 @@ public class Task {
      * Returns the type of the task.
      * @return String representing the type of task.
      */
-    public String getType() {
-        return "";
-    }
+    public abstract String getType();
 
     /**
      * Returns the deadline of the task, if any.
      * @return DateTime object that is the deadline of the task, if any.
      */
-    public LocalDateTime getTime() {
-        return null;
-    }
+    public abstract LocalDateTime getTime();
 
     /**
      * Returns the state of the current task.
