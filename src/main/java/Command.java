@@ -1,3 +1,5 @@
+import java.util.Map;
+
 abstract class Command {
 
     // Abstract Methods
@@ -8,7 +10,9 @@ abstract class Command {
      * @param ui Ui object to handle printing of outputs.
      * @param storage Storage object to handle saving of outputs to computer
      */
-    abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    abstract String execute(TaskList tasks, Ui ui, Storage storage, Map<String, Runnable> runnables)
+            throws DukeException;
+
     abstract boolean isExit();
 
 }

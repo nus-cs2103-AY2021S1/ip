@@ -1,3 +1,5 @@
+import java.util.Map;
+
 /**
  * Class representing commands to delete a task
  */
@@ -21,8 +23,9 @@ public class DeleteCommand extends Command {
      * @throws IndexOutOfBoundsDukeException If task number is invalid.
      */
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws IndexOutOfBoundsDukeException {
-        ui.showMessage(tasks.deleteTask(taskNumber));
+    String execute(TaskList tasks, Ui ui, Storage storage, Map<String, Runnable> runnables)
+            throws IndexOutOfBoundsDukeException {
+        return tasks.deleteTask(taskNumber);
     }
 
     /**

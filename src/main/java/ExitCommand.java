@@ -1,3 +1,5 @@
+import java.util.Map;
+
 /**
  * Command to finish running the program
  */
@@ -13,11 +15,13 @@ public class ExitCommand extends Command {
      * @param tasks TaskList representing list of current tasks.
      * @param ui Ui object to handle printing of outputs.
      * @param storage Storage object to handle saving of outputs to computer
+     * @param runnables Map object consisting of logic encapsulated as Runnables mapped by a name
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage, Map<String, Runnable> runnables) {
         storage.save(tasks);
-        ui.showMessage(EXIT + "\n File saved!");
+        runnables.get("handleExit").run();
+        return EXIT + "\n File saved!";
     }
 
     /**
