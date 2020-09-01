@@ -1,4 +1,4 @@
-package main.java;
+package bob.exception;
 
 /**
  * Encapsulates exceptions that may be thrown when Bob runs.

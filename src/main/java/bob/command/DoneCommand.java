@@ -1,6 +1,10 @@
-package main.java;
+package bob.command;
 
-import java.io.IOException;
+import bob.exception.BobIOException;
+import bob.exception.BobIndexOutOfBoundsException;
+import bob.Storage;
+import bob.TaskList;
+import bob.UI;
 
 /**
  * This command when executed marks a task of a particular index on the TaskList as done and calls
@@ -13,7 +17,7 @@ public class DoneCommand extends Command {
     private int index;
 
     /** Constructs a DoneCommand by assigning a provided integer to the index parameter. */
-    DoneCommand(int index) {
+    public DoneCommand(int index) {
         this.index = index;
     }
 

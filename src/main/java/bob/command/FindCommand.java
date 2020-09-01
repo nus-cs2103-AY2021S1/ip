@@ -1,4 +1,9 @@
-package main.java;
+package bob.command;
+
+import bob.exception.BobException;
+import bob.Storage;
+import bob.TaskList;
+import bob.UI;
 
 /**
  * This command when executed creates a TaskList of tasks that contains key words or phrases. The UI is called on
@@ -16,7 +21,7 @@ public class FindCommand extends Command {
      *
      * @param keyWord the key word or phrases to be searched for in the TaskList.
      */
-    FindCommand(String keyWord) {
+    public FindCommand(String keyWord) {
         this.keyWord = keyWord;
     }
 

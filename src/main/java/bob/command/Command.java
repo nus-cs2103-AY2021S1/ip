@@ -1,4 +1,9 @@
-package main.java;
+package bob.command;
+
+import bob.exception.BobException;
+import bob.Storage;
+import bob.TaskList;
+import bob.UI;
 
 /**
  * An abstraction of commands which may be executed by Bob.

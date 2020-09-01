@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "bob.Bob"
 }
 
 shadowJar {
@@ -39,6 +39,7 @@ shadowJar {
 
 checkstyle {
     toolVersion = '8.23'
+    sourceSets = []
 }
 
 run{

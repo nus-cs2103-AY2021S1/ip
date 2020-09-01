@@ -1,5 +1,6 @@
 package main.java;
 
+import bob.task.Event;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ public class BobEventTest {
     @Test
     public void toString_eventString_success() {
         Event event = new Event("meet friends","2020-05-18 2000 to 2020-05-18 2100");
-        Assertions.assertEquals("[✘] meet friends (at: May 18 2020 2000 to May 18 2020 2100)", event.toString());
+        Assertions.assertEquals("[\u2718] meet friends (at: May 18 2020 2000 to May 18 2020 2100)", event.toString());
     }
 
 }

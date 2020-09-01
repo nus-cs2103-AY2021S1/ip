@@ -1,4 +1,4 @@
-package main.java;
+package bob.task;
 
 /**
  * Encapsulates a Todo which inherits a Task.

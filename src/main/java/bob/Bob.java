@@ -1,4 +1,7 @@
-import main.java.*;
+package bob;
+
+import bob.exception.BobException;
+import bob.command.Command;
 
 public class Bob {
     private TaskList tasks = new TaskList();
@@ -39,3 +42,4 @@ public class Bob {
         new Bob("data/save.txt").run();
     }
 }
+

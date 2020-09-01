@@ -1,4 +1,4 @@
-package main.java;
+package bob.exception;
 
 /**
  * An exception that may be thrown when an error occurs during the parsing of dates and times.

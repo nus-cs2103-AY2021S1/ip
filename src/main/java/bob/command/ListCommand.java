@@ -1,4 +1,9 @@
-package main.java;
+package bob.command;
+
+import bob.exception.BobIndexOutOfBoundsException;
+import bob.Storage;
+import bob.TaskList;
+import bob.UI;
 
 /**
  * This command when executed prints out all tasks on a TaskList.

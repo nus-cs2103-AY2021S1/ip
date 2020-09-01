@@ -1,5 +1,9 @@
 package main.java;
 
+import bob.TaskList;
+import bob.exception.BobIndexOutOfBoundsException;
+import bob.task.Task;
+import bob.task.Todo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

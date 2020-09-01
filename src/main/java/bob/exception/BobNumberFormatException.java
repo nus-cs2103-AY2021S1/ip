@@ -1,4 +1,4 @@
-package main.java;
+package bob.exception;
 
 /**
  * An exception to be thrown when a required index is not provided.

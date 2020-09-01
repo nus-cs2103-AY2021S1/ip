@@ -1,4 +1,4 @@
-package main.java;
+package bob.exception;
 
 /**
  * An exception to be thrown when trying to access an index which does not exist.

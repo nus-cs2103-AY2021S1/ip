@@ -1,4 +1,10 @@
-package main.java;
+package bob.command;
+
+import bob.Storage;
+import bob.TaskList;
+import bob.UI;
+import bob.exception.BobIOException;
+import bob.task.Task;
 
 import java.io.IOException;
 
@@ -12,7 +18,7 @@ public class AddCommand extends Command {
     private Task task;
 
     /** Constructs an AddCommand with a task assigned to the task parameter. */
-    AddCommand(Task task) {
+    public AddCommand(Task task) {
         this.task = task;
     }
 

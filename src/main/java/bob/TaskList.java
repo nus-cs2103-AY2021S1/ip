@@ -1,4 +1,7 @@
-package main.java;
+package bob;
+
+import bob.exception.BobIndexOutOfBoundsException;
+import bob.task.Task;
 
 import java.util.ArrayList;
 
@@ -78,7 +81,7 @@ public class TaskList {
      * @return a TaskList of tasks containing the provided key words or phrases.
      * @throws BobIndexOutOfBoundsException if trying to access an index that does not exist on TaskList.
      */
-    TaskList contains(String keyWord) throws BobIndexOutOfBoundsException {
+    public TaskList contains(String keyWord) throws BobIndexOutOfBoundsException {
         TaskList keyWordTasks = new TaskList();
         for(int i = 1; i < this.size(); i++) {
             if (this.get(i).toString().contains(keyWord)) {

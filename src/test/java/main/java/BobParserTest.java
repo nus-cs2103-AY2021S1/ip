@@ -1,8 +1,13 @@
 package main.java;
 
-import main.java.Command;
-import main.java.Parser;
+import bob.Parser;
+import bob.command.AddCommand;
+import bob.command.Command;
+import bob.exception.BobException;
 
+import bob.task.Deadline;
+import bob.task.Event;
+import bob.task.Todo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +17,7 @@ public class BobParserTest {
         Command c = null;
         try {
             c = Parser.parse("todo do homework");
-        } catch (main.java.BobException e) {
+        } catch (BobException e) {
             e.printStackTrace();
         }
         Assertions.assertEquals( new AddCommand(new Todo("do homework")), c);
@@ -23,7 +28,7 @@ public class BobParserTest {
         Command c = null;
         try {
             c = Parser.parse("deadline do homework /by 2020-05-20 1700");
-        } catch (main.java.BobException e) {
+        } catch (BobException e) {
             e.printStackTrace();
         }
         Assertions.assertEquals(new AddCommand(new Deadline("do homework", "2020-05-20 1700")),c);
@@ -34,7 +39,7 @@ public class BobParserTest {
         Command c = null;
         try {
             c = Parser.parse("event do homework /at 2020-05-20 1700 to 2020-05-20 1800");
-        } catch (main.java.BobException e) {
+        } catch (BobException e) {
             e.printStackTrace();
         }
         Assertions.assertEquals(new AddCommand(new Event("do homework", "2020-05-20 1700 to 2020-05-20 1800")), c);

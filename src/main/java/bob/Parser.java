@@ -1,4 +1,24 @@
-package main.java;
+package bob;
+
+import bob.command.AddCommand;
+import bob.command.Command;
+import bob.command.DeleteCommand;
+import bob.command.DoneCommand;
+import bob.command.ExitCommand;
+import bob.command.FindCommand;
+import bob.command.ListCommand;
+
+import bob.exception.BobException;
+import bob.exception.BobFindNoKeyWordsException;
+import bob.exception.BobIncompleteDeadlineDescriptionException;
+import bob.exception.BobIncompleteEventDescriptionException;
+import bob.exception.BobNoDescriptionException;
+import bob.exception.BobNumberFormatException;
+
+import bob.task.Deadline;
+import bob.task.Event;
+import bob.task.Task;
+import bob.task.Todo;
 
 /**
  * This class consists of the parse method which parses user input and determines

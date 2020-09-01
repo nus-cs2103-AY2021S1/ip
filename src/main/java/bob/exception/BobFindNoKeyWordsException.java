@@ -1,4 +1,4 @@
-package main.java;
+package bob.exception;
 
 /**
  * An exception which may be thrown when a key words are not provided.

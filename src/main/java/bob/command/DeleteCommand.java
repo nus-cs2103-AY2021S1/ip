@@ -1,6 +1,10 @@
-package main.java;
+package bob.command;
 
-import java.io.IOException;
+import bob.exception.BobIOException;
+import bob.exception.BobIndexOutOfBoundsException;
+import bob.Storage;
+import bob.TaskList;
+import bob.UI;
 
 /**
  * This command when executed deletes a task of a particular index from the TaskList and calls
@@ -13,7 +17,7 @@ public class DeleteCommand extends Command {
     private int index;
 
     /** Constructs a DeleteCommand by assigning a provided integer to the index parameter. */
-    DeleteCommand(int index) {
+    public DeleteCommand(int index) {
         this.index = index;
     }
 

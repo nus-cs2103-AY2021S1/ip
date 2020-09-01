@@ -1,6 +1,14 @@
-package main.java;
+package bob;
 
-import java.util.ArrayList;
+import bob.exception.BobFileNotFoundException;
+import bob.exception.BobIOException;
+import bob.exception.BobIndexOutOfBoundsException;
+import bob.exception.BobStorageInitialisationException;
+import bob.task.Deadline;
+import bob.task.Event;
+import bob.task.Task;
+import bob.task.Todo;
+
 import java.util.Scanner;
 
 import java.io.File;

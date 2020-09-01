@@ -1,6 +1,8 @@
-package main.java;
+package bob;
 
-import java.util.ArrayList;
+import bob.exception.BobIndexOutOfBoundsException;
+import bob.task.Task;
+
 import java.util.Scanner;
 
 

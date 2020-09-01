@@ -1,8 +1,6 @@
-package main.java;
+package bob.task;
 
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -60,7 +58,7 @@ public class Event extends Task {
      *
      * @return the String representation of the period of which the event occurred over.
      */
-    String getPeriod() {
+    public String getPeriod() {
         return this.start.format(outputFormatter).toString() + " to " + this.end.format(outputFormatter).toString();
     }
 
