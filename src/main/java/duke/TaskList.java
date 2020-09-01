@@ -22,25 +22,26 @@ public class TaskList {
      *
      * @param task
      */
+
+
     public static String addTask(Task task) {
         tasks.add(task);
-        String str = "   ____________________________________________________________"
-                + "\n    Got it. I've added this task:"
-                + "\n      " + task
-                + "\n    Now you have " + tasks.size() + " task(s) in the list."
-                + "\n   ____________________________________________________________\n";
-        System.out.println(str);
+        String str = "_____________________________________________________"
+                + "\nGot it. I've added this task:"
+                + "\n" + task
+                + "\nNow you have " + tasks.size() + " task(s) in the list."
+                + "\n_____________________________________________________\n";
         return str;
     }
 
-    /**
-     * Adds task from listOfTasks.txt into user's list of tasks.
-     *
-     * @param task
-     */
-    public static void addStoredTask(Task task) {
-        tasks.add(task);
-    }
+//    /**
+//     * Adds task from listOfTasks.txt into user's list of tasks.
+//     *
+//     * @param task
+//     */
+//    public static void addStoredTask(Task task) {
+//        tasks.add(task);
+//    }
 
     /**
      * Prints user's list of tasks.
@@ -57,16 +58,16 @@ public class TaskList {
                 str += e;
             }
         } else {
-            String lst = "   ____________________________________________________________"
-                    + "\n    Here are the tasks in your list:";
+            String lst = "_____________________________________________________"
+                    + "\nHere are the tasks in your list:";
             for (int i = 0; i < tasks.size(); i++) {
                 int index = i + 1;
-                lst += "\n    " + index + ". " + tasks.get(i);
+                lst += "\n" + index + ". " + tasks.get(i);
             }
-            lst += "\n   ____________________________________________________________\n";
-            System.out.println(lst);
-            str += lst;
+            lst += "\n_____________________________________________________\n";
+            str = lst;
         }
+        System.out.println(str);
         return str;
     }
 
@@ -77,11 +78,10 @@ public class TaskList {
      */
     public static String done(Integer index) {
         tasks.get(index - 1).markAsDone();
-        String str = "   ____________________________________________________________"
-                + "\n    Nice! I've marked this task as done:\n      "
+        String str = "_____________________________________________________"
+                + "\nNice! I've marked this task as done:\n      "
                 + tasks.get(index - 1)
-                + "\n   ____________________________________________________________\n";
-        System.out.println(str);
+                + "\n_____________________________________________________\n";
         return str;
     }
 
@@ -91,12 +91,11 @@ public class TaskList {
      * @param index
      */
     public static String delete(Integer index) {
-        String str = "   ____________________________________________________________"
-                + "\n    Noted. I've removed this task:\n      "
+        String str = "_____________________________________________________"
+                + "\nNoted. I've removed this task:\n      "
                 + tasks.remove(index - 1)
                 + "\n    Now you have " + tasks.size() + " task(s) in the list."
-                + "\n   ____________________________________________________________\n";
-        System.out.println(str);
+                + "\n_____________________________________________________\n";
         return str;
     }
 
@@ -117,18 +116,17 @@ public class TaskList {
             try {
                 throw new DukeException("", DukeExceptionType.NO_MATCHING_FOUND);
             } catch (DukeException e) {
-                System.err.println(e);
+                str += e;
             }
         } else {
             int index = 1;
-            str += "   ____________________________________________________________"
-                    + "\n    Here are the matching tasks in your list:";
+            str += "_____________________________________________________"
+                    + "\nHere are the matching tasks in your list:";
             for (Task task : matchingTasks) {
-                str += "\n     " + index + ". " + task;
+                str += "\n" + index + ". " + task;
                 index++;
             }
-            str += "\n   ____________________________________________________________\n";
-            System.out.println(str);
+            str += "\n_____________________________________________________\n";
         }
         return str;
     }

@@ -50,16 +50,15 @@ public class Ui {
      * Prints a list of commands which the user can use.
      */
     public static String getListOfCommands() {
-        String commands = "   ____________________________________________________________"
-                + "\n    Here are all your commands:"
-                + "\n     list - show all tasks"
-                + "\n     todo <your task> - add task"
-                + "\n     deadline <your task> /by <your deadline> - add task with deadline"
-                + "\n     event <your event> /at <event's timing> - add event"
-                + "\n     done <index of task> - mark task as done"
-                + "\n     delete <index of task> - delete task from list"
-                + "\n   ____________________________________________________________\n";
-        System.out.println(commands);
+        String commands = "__________________________________________________"
+                + "\nHere are all your commands:"
+                + "\nlist - show all tasks"
+                + "\ntodo <your task> - add task"
+                + "\ndeadline <your task> /by <your deadline> - add task with deadline"
+                + "\nevent <your event> /at <event's timing> - add event"
+                + "\ndone <index of task> - mark task as done"
+                + "\ndelete <index of task> - delete task from list"
+                + "\n__________________________________________________\n";
         return commands;
     }
 
@@ -67,10 +66,9 @@ public class Ui {
      * Prints bye and quit the bot.
      */
     public static String exit() {
-        String bye = "   ____________________________________________________________"
-                + "\n    Bye! Hope to see you again soon."
-                + "\n   ____________________________________________________________";
-        System.out.println(bye);
+        String bye = "________________________________________________"
+                + "\nBye! Hope to see you again soon."
+                + "\n___________________________________________________";
         return bye;
     }
 
@@ -88,6 +86,7 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
+            System.out.println(input);
             if (input.equals("bye")) {
                 this.isExit = true;
                 exit();

@@ -40,13 +40,11 @@ public class CommandHandler {
             try {
                 task = input.split("todo ")[1];
                 Task newTask = new ToDos(task);
-                tasks.addTask(newTask);
                 output += tasks.addTask(newTask);
             } catch (ArrayIndexOutOfBoundsException exception) {
                 try {
                     throw new DukeException("", DukeExceptionType.MISSING_DESCRIPTION, TODO);
                 } catch (DukeException e) {
-                    System.err.println(e);
                     output += e;
                 }
             }
@@ -78,19 +76,16 @@ public class CommandHandler {
                         } else {
                             try {
                                 Task newTask = new Deadlines(task, due);
-                                tasks.addTask(newTask);
                                 output += tasks.addTask(newTask);
                             } catch (DateTimeParseException e) {
                                 DukeException.wrongTimeFormat();
                             }
                         }
                     } catch (DukeException e) {
-                        System.err.println(e);
                         output += e;
                     }
                 }
             } catch (DukeException e) {
-                System.err.println(e);
                 output += e;
             }
             break;
@@ -120,41 +115,34 @@ public class CommandHandler {
                             throw new DukeException("", DukeExceptionType.MISSING_TIMING, DEADLINE);
                         } else {
                             Task newTask = new Events(task, due);
-                            tasks.addTask(newTask);
                             output += tasks.addTask(newTask);
                         }
                     } catch (DukeException e) {
-                        System.err.println(e);
                         output += e;
                     } catch (DateTimeParseException e) {
                         DukeException.wrongTimeFormat();
                     }
                 }
             } catch (DukeException e) {
-                System.err.println(e);
                 output += e;
             }
             break;
         case LIST:
-            tasks.getListOfTasks();
             output += tasks.getListOfTasks();
             break;
         case FIND:
             String keyword = input.split(" ")[1];
             System.out.println(keyword);
-            tasks.findTasks(keyword);
             output += tasks.findTasks(keyword);
             break;
         case DONE:
             try {
                 int index = Integer.parseInt(input.split(" ")[1]);
-                tasks.done(index);
                 output += tasks.done(index);
             } catch (IndexOutOfBoundsException exception) {
                 try {
                     throw new DukeException("", DukeExceptionType.INVALID_INDEX, DONE);
                 } catch (DukeException e) {
-                    System.err.println(e);
                     output += e;
                 }
             }
@@ -162,30 +150,25 @@ public class CommandHandler {
         case DELETE:
             try {
                 int index = Integer.parseInt(input.split(" ")[1]);
-                tasks.delete(index);
                 output += tasks.delete(index);
             } catch (IndexOutOfBoundsException exception) {
                 try {
                     throw new DukeException("", DukeExceptionType.INVALID_INDEX, DELETE);
                 } catch (DukeException e) {
-                    System.err.println(e);
                     output += e;
                 }
             }
             break;
         case HELP:
-            Ui.getListOfCommands();
             output += Ui.getListOfCommands();
             break;
         case EXIT:
-            Ui.exit();
             output += Ui.exit();
             break;
         default:
             try {
                 throw new DukeException("", DukeExceptionType.UNKNOWN);
             } catch (DukeException e) {
-                System.err.println(e);
                 output += e;
             }
             break;

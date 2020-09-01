@@ -44,68 +44,83 @@ public class DukeException extends Exception {
         String error = "";
         switch (exceptionType) {
         case EMPTY_LIST:
-            error += "    YOUR LIST IS EMPTY :-(\n";
+            error += "_____________________________________________________";
+            error += "\nYour list is empty...";
+            error += "\n_____________________________________________________";
             break;
         case UNKNOWN:
-            error += "    I DON'T KNOW WHAT YOU MEAN :-(\n";
+            error += "_____________________________________________________";
+            error += "Huh? I don't understand what you mean...";
+            error += "\n_____________________________________________________";
             break;
         case NO_MATCHING_FOUND:
-            error += "    NO MATCHES FOUND :-(\n";
+            error += "_____________________________________________________";
+            error += "\nI can't find anything :-(";
+            error += "\n_____________________________________________________";
             break;
         case WRONG_FORMAT:
             switch (commandType) {
             case DEADLINE:
-                error += "    ERROR IN ADDING DEADLINE: WRONG FORMAT\n    ";
-                error += "Format: deadline <description> /by <datetime>\n";
+                error += "_____________________________________________________";
+                error += "\nError in adding deadline: Wrong format";
+                error += "\nFormat: deadline <description> /by <datetime>";
+                error += "\n_____________________________________________________";
                 break;
             case EVENT:
-                error += "    ERROR IN ADDING EVENT: WRONG FORMAT\n    Format: event <description> /at <datetime>\n";
+                error += "_____________________________________________________";
+                error += "\nError in adding event: Wrong format";
+                error += "\nFormat: event <description> /at <datetime>";
+                error += "\n_____________________________________________________";
                 break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + commandType);
             }
             break;
         case MISSING_DESCRIPTION:
             switch (commandType) {
             case TODO:
-                error += "    ERROR IN ADDING TODO: MISSING DESCRIPTION\n";
+                error += "_____________________________________________________";
+                error += "\nError in adding todo: Missing description";
+                error += "\n_____________________________________________________";
                 break;
             case DEADLINE:
-                error += "    ERROR IN ADDING DEADLINE: MISSING DESCRIPTION\n";
+                error += "_____________________________________________________";
+                error += "\nError in adding deadline: Missing description";
+                error += "\n_____________________________________________________";
                 break;
             case EVENT:
-                error += "    ERROR IN ADDING EVENT: MISSING DESCRIPTION\n";
+                error += "_____________________________________________________";
+                error += "\nError in adding event: Missing description";
+                error += "\n_____________________________________________________";
                 break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + commandType);
             }
             break;
         case MISSING_TIMING:
             switch (commandType) {
             case DEADLINE:
-                error += "    ERROR IN ADDING DEADLINE: MISSING DUE DATE\n";
+                error += "_____________________________________________________";
+                error += "\nError in adding deadline: Missing due date";
+                error += "\n_____________________________________________________";
                 break;
             case EVENT:
-                error += "    ERROR IN ADDING EVENT: MISSING SCHEDULED DATE\n";
+                error += "_____________________________________________________";
+                error += "\nError in adding event: Missing scheduled date";
+                error += "\n_____________________________________________________";
                 break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + commandType);
             }
             break;
         case INVALID_INDEX:
             switch (commandType) {
             case DONE:
-                error += "    ERROR IN MARKING TASK DONE: INVALID INDEX\n";
+                error += "_____________________________________________________";
+                error += "\nError in marking task done: Invalid index";
+                error += "\n_____________________________________________________";
                 break;
             case DELETE:
-                error += "    ERROR IN DELETING TASK: INVALID INDEX\n";
+                error += "_____________________________________________________";
+                error += "\nError in deleting task: Invalid index";
+                error += "\n_____________________________________________________";
                 break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + commandType);
             }
             break;
-        default:
-            throw new IllegalStateException("Unexpected value: " + exceptionType);
         }
         return error;
     }
@@ -114,6 +129,11 @@ public class DukeException extends Exception {
      * Returns error in user's input due to wrong time format.
      */
     public static String wrongTimeFormat() {
-        return "    ERROR IN ADDING DEADLINE: WRONG FORMAT\n    Format: YYYY-MM-DD\n";
+        String error = "";
+        error += "_____________________________________________________";
+        error += "\nError in adding deadline: Wrong format";
+        error += "\nFormat: YYYY-MM-DD";
+        error += "\n_____________________________________________________";
+        return error;
     }
 }
