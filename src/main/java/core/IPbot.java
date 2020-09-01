@@ -2,40 +2,30 @@ package core;
 
 import command.Command;
 import command.CommandHandler;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import ui.MainWindow;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.stream.Stream;
 
 /**
- * Main class containing the entry point of the program.
+ * Contains the iPbot GUI logic.
  */
-public class IPbot {
+public class IPbot extends Application {
 
-    /**
-     * Entry point of the program.
-     * @param args command line arguments
-     */
-    public static void main(String[] args) {
-        try {
-            Storage.load();
-        } catch (IOException e) {
-            Ui.print(e.getMessage());
-        }
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        URL url = IPbot.class.getResource("/view/MainWindow.fxml");
+        BorderPane root =  FXMLLoader.load(url);
 
-        Ui.print("Hello from iPbot, what can I do for you?");
-
-        if (Ui.missingInput()) {
-            Ui.print("No input found. Exiting!");
-            return;
-        }
-
-        Stream.generate(Ui::getCommand)
-            .takeWhile(input -> !Command.EXIT_CMD.getCmdString().equals(input))
-            .forEach(new CommandHandler(true));
-
-        Ui.print("Goodbye!");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
-
-
 
 }

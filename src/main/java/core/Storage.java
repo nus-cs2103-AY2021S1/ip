@@ -38,7 +38,7 @@ public class Storage {
         final File saveFile = new File("./data/saved.txt");
         if (saveFile.exists()) {
             Files.lines(saveFile.toPath())
-                    .forEach(new CommandHandler(false));
+                    .forEach(new CommandHandler());
         }
     }
 }
