@@ -1,18 +1,20 @@
+package duke.Tasks;
+
 import java.time.LocalDateTime;
 
 public class EventTask extends Task {
 
-    private static String display = "[E]";
+    private static String indicator = "[E]";
     private final LocalDateTime date;
 
-    EventTask(String name, LocalDateTime date) {
+    public EventTask(String name, LocalDateTime date) {
         super(name);
         this.date = date;
     }
 
     @Override
     public String toString() {
-        return display + super.toString() + " (at: " + date + ")";
+        return indicator + super.toString() + " (Date: " + date.toString() + ")";
     }
 
     @Override
