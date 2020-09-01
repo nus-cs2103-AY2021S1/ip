@@ -17,10 +17,10 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         taskList.addTask(task);
-        Ui.showMessage(String.format("Okay! I have added the task:\n%s\n", task));
-        Ui.showMessage(String.format("Currently you have %d tasks in your list, don't forget to do them!\n",
+        ui.addMessage(String.format("Okay! I have added the task:\n%s\n", task));
+        ui.addMessage(String.format("Currently you have %d tasks in your list, don't forget to do them!\n",
                 taskList.getSize()));
         storage.writeToFile(taskList);
     }
