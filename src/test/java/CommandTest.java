@@ -36,9 +36,9 @@ public class CommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         Parser.parse("deadline play /by 1/4/2020 16:00").execute(tasks, ui, storage);
-        String expected = "Success! This deadline task has been added: \n\t" +
-                "[D][✗] play (by: Wed, Apr 01 2020, 04:00 PM)\n" +
-                "You have 1 tasks in your list now.";
+        String expected = "Success! This deadline task has been added: \n\t"
+                + "[D][✗] play (by: Wed, Apr 01 2020, 04:00 PM)\n"
+                + "You have 1 tasks in your list now.";
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 
@@ -51,8 +51,8 @@ public class CommandTest {
         todo.markAsDone();
         tasks.addTask(todo);
         Parser.parse("delete 1").execute(tasks, ui, storage);
-        String expected = "Found it! This task has been successfully deleted: \n" +
-                "\t[T][✓] read\n" + "You have 0 tasks in your list now.";
+        String expected = "Found it! This task has been successfully deleted: \n"
+                + "\t[T][✓] read\n" + "You have 0 tasks in your list now.";
         assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 

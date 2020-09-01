@@ -38,7 +38,7 @@ public class DeleteTaskCommand extends Command {
      * @throws DukeException If the task cannot be deleted due to invalid arguments.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             int index = Integer.parseInt(this.parsedCommand[1]);
             if (index > tasks.getListSize()) {
@@ -55,8 +55,8 @@ public class DeleteTaskCommand extends Command {
                 String successReply = "Found it! This task has been successfully deleted: \n\t"
                         + toRemove.toString() + "\nYou have " + tasks.getListSize()
                         + " tasks in your list now.";
-                ui.printReply(successReply);
                 storage.saveToFile(tasks);
+                return ui.printReply(successReply);
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No Task ID provided! Please input the ID of the task you wish to delete.";

@@ -36,8 +36,9 @@ public class CompleteTaskCommand extends Command {
      * @throws DukeException If the task cannot be mark completed due to invalid arguments.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
+            String response;
             int index = Integer.parseInt(this.parsedCommand[1]);
             if (index > tasks.getListSize()) {
                 String err = "Invalid Task! The task does not exist. "
@@ -49,17 +50,17 @@ public class CompleteTaskCommand extends Command {
                 throw new InvalidFunctionException(err);
             } else {
                 if (tasks.getTask(index - 1).hasBeenCompleted()) {
-                    String message = "This task has already been completed:";
-                    ui.printReply(message);
+                    response = "This task has already been completed:";
+                    // return ui.printReply(message);
                 } else {
                     tasks.completeTask(index - 1);
-                    String message = "Nice! I've marked this task as done:";
-                    ui.printReply(message);
+                    response = "Nice! I've marked this task as done:\n";
+                    // return ui.printReply(message);
                 }
-                String successReply = "\t" + tasks.getTask(index - 1);
-                ui.printReply(successReply);
+                response += "\t" + tasks.getTask(index - 1);
+                storage.saveToFile(tasks);
+                return ui.printReply(response);
             }
-            storage.saveToFile(tasks);
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";
             throw new InvalidFunctionException(err);

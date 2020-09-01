@@ -29,32 +29,33 @@ public class Duke {
      * Executes a DukeBot session for the bot to perform its intended functions.
      */
     public void run() {
-        ui.showWelcome();
+        System.out.println(ui.showWelcome());
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command command = Parser.parse(fullCommand);
-                command.execute(tasks, ui, storage);
+                System.out.println(command.execute(tasks, ui, storage));
                 isExit = command.isExit();
             } catch (DukeException ex) {
-                ui.showError(ex.getMessage());
+                System.out.println(ui.showError(ex.getMessage()));
             } finally {
                 ui.showLine();
             }
         }
     }
 
+
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
-            String response = command.execute(tasks, ui, storage);
-            return response;
+            return command.execute(tasks, ui, storage);
         } catch (DukeException ex) {
-            ui.showError(ex.getMessage());
+            return ui.showError(ex.getMessage());
         }
     }
+
 
     /**
      * Initialises a new DukeBot session.

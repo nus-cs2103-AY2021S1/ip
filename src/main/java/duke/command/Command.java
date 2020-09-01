@@ -1,11 +1,9 @@
 package duke.command;
 
-import duke.exception.DukeException;
-
-import duke.task.TaskList;
-
-import duke.Ui;
 import duke.Storage;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.TaskList;
 
 /**
  * Represents a command to be executed by the DukeBot.
@@ -20,7 +18,7 @@ public abstract class Command {
      * @param storage Storage object used by the Duke object for file operations.
      * @throws DukeException If the command cannot be executed successfully.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Indicates if the DukeBot session has ended.

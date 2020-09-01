@@ -1,1 +1,10 @@
 T | 0 |ear
+T | 1 |eat
+T | 1 |play
+T | 0 |play
+T | 0 |test
+T | 0 |eat
+T | 1 |eat
+D | 0 |eating and playing | 2010-02-01 13:00
+T | 0 |play
+T | 0 |eat

@@ -43,7 +43,7 @@ public class AddEventCommand extends Command {
      * @throws DukeException If the event task cannot be created due to invalid inputs.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
         try {
@@ -58,9 +58,8 @@ public class AddEventCommand extends Command {
 
             String successReply = "Success! This event task has been added: \n\t"
                     + toAdd.toString() + "\nYou have " + tasks.getListSize() + " tasks in your list now.";
-            ui.printReply(successReply);
-
             storage.saveToFile(tasks);
+            return ui.printReply(successReply);
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException ex) {
             String err = "The task date format is incorrect. \n"
                     + "Please input a valid date using the format: 'dd/mm/yyyy hh:mm'. For eg, 10/8/2020 18:00";
@@ -79,8 +78,7 @@ public class AddEventCommand extends Command {
         String description;
         String time;
         if (this.parsedCommand.length == 0) {
-            String err = "Your event task has missing arguments and has an incorrect format. "
-                    + "The task cannot be created.\n"
+            String err = "Your event task has missing arguments. The task cannot be created.\n"
                     + "Type '/commands' to view the correct command for task creation!";
             throw new InvalidTaskException(err);
         } else {

@@ -18,9 +18,9 @@ public class ExitCommand extends Command {
      * @param storage Storage object used by the Duke object for file operations.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         // storage.saveFile(tasks);
-        ui.showFarewell();
+        return ui.showFarewell();
     }
 
     /**
