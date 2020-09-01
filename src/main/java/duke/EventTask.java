@@ -9,7 +9,7 @@ public class EventTask extends Task {
     LocalDate period;
 
     /**
-     * Initialise description to be desc and period to be periodParse. Will attempt to parse deadlineParse.
+     * Initialises description to be desc and period to be periodParse. Will attempt to parse deadlineParse.
      * If it is in the format yyyy-mm-dd, it will be stored as local date, for nicer string representation later.
      *
      * @param desc Description of the task.
@@ -35,10 +35,13 @@ public class EventTask extends Task {
         return "[E]" + super.toString()  + " (at: " + periodString + ")";
     }
 
+    private String toSaveStringPeriod() {
+        return period == null ? periodString : period.toString();
+    }
+
     @Override
     public String toSaveString() {
-        return String.format("E @@ %d @@ %s @@ %s",
-                isDone ? 1 : 0, desc, period == null ? periodString : period.toString());
+        return String.format("E @@ %s @@ %s @@ %s", toSaveStringDone(), desc, toSaveStringPeriod());
     }
 
     @Override

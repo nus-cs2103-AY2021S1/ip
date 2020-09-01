@@ -17,7 +17,15 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%c] %s", isDone ? '\u2713' : '\u2717', desc);
+        return String.format("[%c] %s", getDoneIcon(), desc);
+    }
+
+    private char getDoneIcon() {
+        return isDone ? '\u2713' : '\u2717';
+    }
+
+    protected String toSaveStringDone() {
+        return isDone ? "1" : "0";
     }
 
     public abstract String toSaveString();

@@ -1,10 +1,9 @@
-import duke.PARSER_RESULT;
+import duke.parserResult;
 import duke.Parser;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
@@ -18,7 +17,7 @@ public class ParserTest {
                 "  list   ",
                 "List "};
         assertTrue(Arrays.stream(tests)
-                .map(s -> parser.parseInput(s) == PARSER_RESULT.LIST)
+                .map(s -> parser.parseInput(s) == parserResult.LIST)
                 .reduce((x, y) -> x && y)
                 .get());
     }
@@ -30,7 +29,7 @@ public class ParserTest {
                 " Bye  ",
                 "BYE "};
         assertTrue(Arrays.stream(tests)
-                    .map(s -> parser.parseInput(s) == PARSER_RESULT.BYE)
+                    .map(s -> parser.parseInput(s) == parserResult.BYE)
                 .reduce((x, y) -> x && y)
                 .get());
     }

@@ -10,6 +10,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private final Scanner sc;
+    private static final String BORDER_STRING = "________________________________________";
 
     public Ui() {
         sc = new Scanner(System.in);
@@ -39,7 +40,7 @@ public class Ui {
     }
 
     /**
-     * List out a taskList with a different message.
+     * Lists out a taskList with a different message.
      *
      * @param message The message explaining the context of the list.
      * @param taskList The taskList.
@@ -59,11 +60,11 @@ public class Ui {
      * @param strings The collection of strings to be printed.
      */
     public void printNicelyCollection(Collection<String> strings) {
-        System.out.println("________________________________________");
+        System.out.println(BORDER_STRING);
         for (String s: strings) {
             System.out.println("    " + s);
         }
-        System.out.println("________________________________________");
+        System.out.println(BORDER_STRING);
     }
 
     /**

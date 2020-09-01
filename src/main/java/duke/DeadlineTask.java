@@ -8,11 +8,11 @@ import java.util.Locale;
  * Represents a deadline task with a deadline.
  */
 public class DeadlineTask extends Task {
-    LocalDate deadline;
-    String deadlineString;
+    private LocalDate deadline;
+    private String deadlineString;
 
     /**
-     * Initialise description to be desc and deadline to be deadlineParse. Will attempt to parse deadlineParse.
+     * Initialises description to be desc and deadline to be deadlineParse. Will attempt to parse deadlineParse.
      * If it is in the format yyyy-mm-dd, it will be stored as local date, for nicer string representation later.
      *
      * @param desc Description of the task.
@@ -38,10 +38,13 @@ public class DeadlineTask extends Task {
         return "[D]" + super.toString() + " (by: " + deadlineString + ")";
     }
 
+    private String toSaveStringDeadline() {
+        return deadline == null ? deadlineString : deadline.toString();
+    }
+
     @Override
     public String toSaveString() {
-        return String.format("D @@ %d @@ %s @@ %s",
-                isDone ? 1 : 0, desc, deadline == null ? deadlineString : deadline.toString());
+        return String.format("D @@ %s @@ %s @@ %s", toSaveStringDone(), desc, toSaveStringDeadline());
     }
 
     @Override

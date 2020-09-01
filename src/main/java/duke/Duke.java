@@ -5,6 +5,7 @@ import java.io.IOException;
 public class Duke {
     private final Ui ui;
     private final Parser parser;
+    private boolean hasExited;
     String dest;
 
     /**
@@ -30,7 +31,7 @@ public class Duke {
         }
         ui.greet();
         ui.listOut(taskList);
-        while (true) {
+        while (!hasExited) {
             try {
                 String input = ui.nextLine();
                 switch (parser.parseInput(input)) {
@@ -60,6 +61,7 @@ public class Duke {
                     break;
                 case BYE:
                     ui.bye();
+                    hasExited = true;
                     return;
                 default:
                     throw new IOException("Cannot be understood.");

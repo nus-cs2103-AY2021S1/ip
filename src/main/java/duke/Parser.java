@@ -13,15 +13,24 @@ public class Parser {
     }
 
     private static boolean isDone(String s) {
-        return s.length() >= 4 && s.substring(0, 4).toLowerCase().equals("done");
+        return s.length() >= 4
+                && s.substring(0, 4)
+                    .toLowerCase()
+                    .equals("done");
     }
 
     private static boolean isDelete(String s) {
-        return s.length() >= 6 && s.substring(0, 6).toLowerCase().equals("delete");
+        return s.length() >= 6
+                && s.substring(0, 6)
+                    .toLowerCase()
+                    .equals("delete");
     }
 
     private static boolean isFind(String s) {
-        return s.length() >= 4 && s.substring(0, 4).toLowerCase().equals("find");
+        return s.length() >= 4
+                && s.substring(0, 4)
+                    .toLowerCase()
+                    .equals("find");
     }
 
     /**
@@ -105,20 +114,20 @@ public class Parser {
      * @return A PARSER_RESULT value.
      * @throws IllegalArgumentException Unrecognizable command.
      */
-    public PARSER_RESULT parseInput(String input) throws IllegalArgumentException {
+    public parserResult parseInput(String input) throws IllegalArgumentException {
         input = input.trim();
         if (isBye(input)) {
-            return PARSER_RESULT.BYE;
+            return parserResult.BYE;
         } else if (isDelete(input)) {
-            return PARSER_RESULT.DELETE;
+            return parserResult.DELETE;
         } else if (isDone(input)) {
-            return PARSER_RESULT.DONE;
+            return parserResult.DONE;
         } else if (isList(input)) {
-            return PARSER_RESULT.LIST;
+            return parserResult.LIST;
         } else if (isFind(input)) {
-            return PARSER_RESULT.FIND;
+            return parserResult.FIND;
         } else if (isTask(input)) {
-            return PARSER_RESULT.ADD;
+            return parserResult.ADD;
         } else {
             throw new IllegalArgumentException("Unrecognizable command.");
         }
