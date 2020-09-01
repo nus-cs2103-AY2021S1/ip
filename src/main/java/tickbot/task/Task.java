@@ -8,11 +8,11 @@ import java.time.LocalDate;
 public abstract class Task {
     private final String content;
     private final LocalDate time;
-    private boolean completed;
+    private boolean isCompleted;
 
-    Task(boolean completed, String content, LocalDate time) {
+    Task(boolean isCompleted, String content, LocalDate time) {
         this.content = content;
-        this.completed = completed;
+        this.isCompleted = isCompleted;
         this.time = time;
     }
 
@@ -40,7 +40,7 @@ public abstract class Task {
      * @return the boolean status.
      */
     public boolean isCompleted() {
-        return completed;
+        return isCompleted;
     }
 
     /**
@@ -52,7 +52,7 @@ public abstract class Task {
     }
 
     public void setCompleted(boolean status) {
-        completed = status;
+        isCompleted = status;
     }
 
     private String getCompleteMark() {
