@@ -13,7 +13,7 @@ public class DukeDateTimeParseException extends DukeRunTimeException {
      *
      * @param errorMessage  Error message of the exception.
      */
-   public DukeDateTimeParseException(String errorMessage) {
+    public DukeDateTimeParseException(String errorMessage) {
         super(errorMessage);
     }
 }

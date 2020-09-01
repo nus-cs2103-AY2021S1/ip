@@ -6,12 +6,11 @@ package duke.task;
  * @author Alvin Chee
  */
 public class Task {
+    public static final int UNDONENO = 0;
+    public static final int DONENO = 1;
+    protected boolean done;
     private String taskInfo;
     private TaskType taskType;
-    protected boolean done;
-    public static final int undoneNo = 0;
-    public static final int doneNo = 1;
-
     /**
      * Constructs a task
      *
@@ -48,7 +47,7 @@ public class Task {
      * @return Integer representing status of event.
      */
     public int returnDoneStatus() {
-        return done ? doneNo : undoneNo;
+        return done ? DONENO : UNDONENO;
     }
 
     /**
