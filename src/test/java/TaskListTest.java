@@ -1,5 +1,7 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskListTest {
 
@@ -7,9 +9,9 @@ public class TaskListTest {
 
     @Test
     public void createTask_emptyTaskList() {
-        String expected = "Got it. I've added this task:\n" +
-                " [T][✘] cry\n" +
-                "Now you have 1 tasks in the list";
+        String expected = "Got it. I've added this task:\n"
+                + " [T][✘] cry\n"
+                + "Now you have 1 tasks in the list";
 
         try {
             Task newTask = new Todo("cry");
@@ -24,8 +26,8 @@ public class TaskListTest {
 
     @Test
     public void markAsDone_task() {
-        String expected = "Nice! I've marked this task as done:\n" +
-                " [T][✓] cry";
+        String expected = "Nice! I've marked this task as done:\n"
+                + " [T][✓] cry";
         try {
             Task newTask = new Todo("cry");
             tasks.createTask(newTask);
@@ -39,8 +41,8 @@ public class TaskListTest {
 
     @Test
     public void deleteTask_task() {
-        String expected = "Okay. I've removed this task:\n" +
-                " [T][✘] cry";
+        String expected = "Okay. I've removed this task:\n"
+                + " [T][✘] cry";
         try {
             Task newTask = new Todo("cry");
             tasks.createTask(newTask);
@@ -54,8 +56,7 @@ public class TaskListTest {
 
     @Test
     public void toString_task() {
-        String expected = "Here are the tasks in your list:\n" +
-                " 1. [T][✘] cry";
+        String expected = " 1. [T][✘] cry\n";
         try {
             Task newTask = new Todo("cry");
             tasks.createTask(newTask);

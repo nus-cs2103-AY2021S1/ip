@@ -8,64 +8,72 @@ public class AddCommand extends Command {
 
     // Attributes
     private final String type;
-    private final String remaining;
+    private final String description;
 
     // Constructor
-    public AddCommand(String type, String remaining) {
+
+    /**
+     * Creates a new command to add tasks to TaskList.
+     * @param type Type of task to be added.
+     * @param description Description of task to be added.
+     */
+    public AddCommand(String type, String description) {
         this.type = type;
-        this.remaining = remaining;
+        this.description = description;
     }
 
     // Methods
 
     /**
      * Executes the command to add a task by adding task into given TaskList.
-     * @param tasks TaskList representing list of current tasks.
-     * @param ui Ui object to handle printing of outputs.
+     *
+     * @param tasks   TaskList representing list of current tasks.
+     * @param ui      Ui object to handle printing of outputs.
      * @param storage Storage object to handle saving of outputs to computer
-     * @throws EmptyBodyException If command is to add event or deadline but no date and time is provided.
+     * @throws EmptyBodyException    If command is to add event or deadline but no date and time is provided.
      * @throws UnknownInputException If an unrecognised command is given.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws EmptyBodyException, UnknownInputException {
         switch (this.type) {
-            case "todo":
-                Task newTodo = new Todo(remaining);
-                ui.showMessage(tasks.createTask(newTodo));
-                break;
-            case "deadline": {
-                String[] text = remaining.split(" /by ");
-                String description = text[0];
-                if (text.length <= 1) {
-                    throw new EmptyBodyException("deadline", "deadline");
-                }
-                try {
-                    LocalDate deadline = LocalDate.parse(text[1]);
-                    Task newDeadline = new Deadline(description, deadline);
-                    ui.showMessage(tasks.createTask(newDeadline));
-                } catch (DateTimeParseException e) {
-                    throw new UnknownInputException(text[1]);
-                }
-                break;
+        case "todo":
+            Task newTodo = new Todo(description);
+            ui.showMessage(tasks.createTask(newTodo));
+            break;
+        case "deadline": {
+            String[] text = description.split(" /by ");
+            String description = text[0];
+            if (text.length <= 1) {
+                throw new EmptyBodyException("deadline", "deadline");
             }
-            case "event": {
-                String[] text = remaining.split(" /at ");
-                String description = text[0];
-                if (text.length <= 1) {
-                    throw new EmptyBodyException("date and time", "event");
-                }
-                String dateTime = text[1];
-                Task newEvent = new Event(description, dateTime);
-                ui.showMessage(tasks.createTask(newEvent));
-                break;
+            try {
+                LocalDate deadline = LocalDate.parse(text[1]);
+                Task newDeadline = new Deadline(description, deadline);
+                ui.showMessage(tasks.createTask(newDeadline));
+            } catch (DateTimeParseException e) {
+                throw new UnknownInputException(text[1]);
             }
-            default:
-                throw new UnknownInputException(this.type);
+            break;
+        }
+        case "event": {
+            String[] text = description.split(" /at ");
+            String description = text[0];
+            if (text.length <= 1) {
+                throw new EmptyBodyException("date and time", "event");
+            }
+            String dateTime = text[1];
+            Task newEvent = new Event(description, dateTime);
+            ui.showMessage(tasks.createTask(newEvent));
+            break;
+        }
+        default:
+            throw new UnknownInputException(this.type);
         }
     }
 
     /**
      * Returns whether the command is a command to exit.
+     *
      * @return false.
      */
     @Override

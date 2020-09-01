@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * Creates a new task with deadline
      * @param description description of task
      * @param deadline deadline of the task in yyyy-mm-dd format
-     * @throws EmptyBodyException
+     * @throws EmptyBodyException If description is empty.
      */
     public Deadline(String description, LocalDate deadline) throws EmptyBodyException {
         super(description);

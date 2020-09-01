@@ -1,4 +1,4 @@
-public class IndexOutOfBoundsDukeException extends DukeException{
+public class IndexOutOfBoundsDukeException extends DukeException {
 
     // Constructor
     public IndexOutOfBoundsDukeException(int number, int maxSize, String thing) {
