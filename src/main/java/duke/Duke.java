@@ -1,8 +1,10 @@
 package duke;
-import duke.command.Command;
-import duke.task.TaskList;
+
 import java.io.IOException;
 import java.util.Scanner;
+
+import duke.command.Command;
+import duke.task.TaskList;
 
 /**
  * Represents the overarching Duke chat-bot.
@@ -12,16 +14,13 @@ import java.util.Scanner;
 
 public class Duke {
 
-    TaskList list;
-    Storage storage;
-    Ui ui;
+    private TaskList list;
+    private Storage storage;
+    private Ui ui;
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-
-    }
-
+    /**
+     * The constructor for the class Duke.
+     */
     public Duke() {
         ui = new Ui();
         ui.intro();
@@ -31,6 +30,16 @@ public class Duke {
         } catch (IOException e) {
             System.out.println("You have no save tasks");
         }
+    }
+
+    /**
+     * The main method that will instantiate a Duke object.
+     * @param args the arguments
+     */
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+
     }
 
     /**

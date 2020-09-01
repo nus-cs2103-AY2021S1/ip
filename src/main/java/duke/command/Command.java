@@ -5,8 +5,8 @@ import duke.Ui;
 import duke.task.TaskList;
 
 public abstract class Command {
-    protected final String command;
     public final boolean isExit;
+    protected final String command;
 
     /**
      * Represents an abstract Command forming the parent to other commands.

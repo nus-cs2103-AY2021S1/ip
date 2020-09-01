@@ -1,33 +1,39 @@
 package duke;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.IOException;
-import java.io.File;
-import java.io.FileWriter;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Storage {
 
-    public static final String savedFile = "data/storage.txt";
-    public static final String savedFolder = "data";
-    public Task task;
+    public static final String SAVED_FILE = "data/storage.txt";
+    public static final String SAVED_FOLDER = "data";
+    private Task task;
 
     public Storage() {}
     public Storage(Task task) {
         this.task = task;
     }
 
+    /**
+     * Reads the file and converts the file to a list.
+     * @return a list of tasks having read the file from the save storage
+     * @throws IOException
+     */
     public static List<Task> readFile() throws IOException {
         List<Task> todoList = new ArrayList<>();
-        Path path = Paths.get(savedFile);
+        Path path = Paths.get(SAVED_FILE);
         List<String> list = new ArrayList<>(Files.readAllLines(path));
         for (String task : list) {
             Task current = null;
@@ -47,9 +53,14 @@ public class Storage {
         return todoList;
     }
 
+    /**
+     * Takes a task and adds the task to the file to be saved.
+     * @param task the task that is going to be saved
+     * @throws IOException
+     */
     public static void addToFile(String task) throws IOException {
-        File file = new File(savedFile);
-        File fold = new File(savedFolder);
+        File file = new File(SAVED_FILE);
+        File fold = new File(SAVED_FOLDER);
         if (!fold.isDirectory()) {
             fold.mkdir();
         }
@@ -61,19 +72,29 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Converts the task in the saved file and converts a task from incomplete to complete.
+     * @param number the specific task number
+     * @throws IOException
+     */
     public static void editFile(int number) throws IOException {
-        Path path = Paths.get(savedFile);
+        Path path = Paths.get(SAVED_FILE);
         List<String> list = new ArrayList<>(Files.readAllLines(path));
-        String doneTask = list.get(number).replace("0","1");
+        String doneTask = list.get(number).replace("0", "1");
         list.set(number, doneTask);
-        Files.write(path,list);
+        Files.write(path, list);
     }
 
+    /**
+     * Deletes a task from the list.
+     * @param number the specific task to be deleted
+     * @throws IOException
+     */
     public static void deleteTask(int number) throws IOException {
-        Path path = Paths.get(savedFile);
+        Path path = Paths.get(SAVED_FILE);
         List<String> list = new ArrayList<>(Files.readAllLines(path));
         list.remove(number - 1);
-        Files.write(path,list);
+        Files.write(path, list);
     }
 
 }

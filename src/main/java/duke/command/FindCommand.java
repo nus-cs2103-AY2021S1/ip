@@ -8,7 +8,7 @@ import duke.task.TaskList;
 /**
  * Represents an FindCommand that is part of the Command class, regarding finding a keyword in the chat.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     public FindCommand(String command) {
         super(command, false);
@@ -26,7 +26,7 @@ public class FindCommand extends Command{
         TaskList finding = new TaskList();
         String keyWord = command.substring(5);
         for (Task t : list.getList()) {
-            if (t.description.contains(keyWord)) {
+            if (t.getDescription().contains(keyWord)) {
                 finding.add(t);
             }
         }

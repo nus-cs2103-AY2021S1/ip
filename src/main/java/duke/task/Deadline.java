@@ -9,6 +9,11 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDate date;
 
+    /**
+     * The constructor to make a Deadline task.
+     * @param description the specific details of the task
+     * @param by the due date of the task
+     */
     public Deadline(String description, String by) {
         super(description);
         this.date = LocalDate.parse(by);

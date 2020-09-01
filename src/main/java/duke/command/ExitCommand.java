@@ -20,6 +20,6 @@ public class ExitCommand extends Command {
      * @param storage Storage of tasks in a txt file.
      */
     public void execute(TaskList list, Ui ui, Storage storage) {
-        ui.finsih();
+        ui.finish();
     }
 }

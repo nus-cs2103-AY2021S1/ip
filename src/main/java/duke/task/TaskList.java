@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    public List<Task> list;
+    private List<Task> list;
 
+    /**
+     * The constructor for task list.
+     */
     public TaskList() {
         this.list = new ArrayList<>();
     }
@@ -14,10 +17,13 @@ public class TaskList {
         this.list = list;
     }
 
+    /**
+     * Displays all the tasks that the user has
+     */
     public void showTasks() {
         int counter = 1;
         for (Task t : list) {
-            System.out.println("        " + counter +  "." + t.toString());
+            System.out.println("        " + counter + "." + t.toString());
             counter++;
         }
     }

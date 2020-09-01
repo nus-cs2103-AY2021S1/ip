@@ -1,11 +1,12 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-import java.io.IOException;
 
 /**
  * Represents an DoneCommand that is part of the Command class, regarding finishing a task.
@@ -14,6 +15,11 @@ import java.io.IOException;
 public class DoneCommand extends Command {
     private final int num;
 
+    /**
+     * Constructor for the Done Command
+     * @param command the specific command instructions
+     * @param num the task number
+     */
     public DoneCommand(String command, int num) {
         super(command, false);
         this.num = num;
@@ -31,7 +37,7 @@ public class DoneCommand extends Command {
             if (num <= list.size()) {
                 Task current = list.get(num - 1);
                 current.markAsDone();
-                ui.doneMessage(current.isDone, current.description);
+                ui.doneMessage(current.getDone(), current.getDescription());
                 storage.editFile(num - 1);
             } else {
                 throw new DukeException("☹ OOPS!!! there is no such task");

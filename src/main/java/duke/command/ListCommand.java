@@ -5,6 +5,11 @@ import duke.Ui;
 import duke.task.TaskList;
 
 public class ListCommand extends Command {
+
+    /**
+     * The constructor to display a list.
+     * @param command the specific command instructions
+     */
     public ListCommand(String command) {
         super(command, false);
 

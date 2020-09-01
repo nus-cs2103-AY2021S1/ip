@@ -1,5 +1,13 @@
 package duke;
-import duke.command.*;
+
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 
 /**
  * Handles the main logic of inputs and what Command to execute.
@@ -22,7 +30,7 @@ public class Parser {
             return new ListCommand(input);
         } else if (input.equals("bye")) {
             return new ExitCommand(input);
-        } else if(checker.equals("done")) {
+        } else if (checker.equals("done")) {
             int num = Character.getNumericValue(input.charAt(5));
             return new DoneCommand(input, num);
         } else if (checker.equals("dele")) {

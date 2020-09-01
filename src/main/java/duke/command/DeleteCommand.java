@@ -1,10 +1,13 @@
 package duke.command;
+
+import java.io.IOException;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-import java.io.IOException;
+
 
 /**
  * Represents an DeleteCommand that is part of the Command class, regarding deleting a task.
@@ -13,6 +16,11 @@ import java.io.IOException;
 public class DeleteCommand extends Command {
     private final int num;
 
+    /**
+     * The constructor for the Delete Command.
+     * @param command the specific command instructions
+     * @param num the task number
+     */
     public DeleteCommand(String command, int num) {
         super(command, false);
         this.num = num;

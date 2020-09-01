@@ -1,17 +1,15 @@
-import duke.DukeException;
-import duke.Parser;
-import duke.command.Command;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-import duke.task.Task;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class DukeTest {
     @Test
-    public void dummyTest(){
+    public void dummyTest() {
         assertEquals(2, 2);
     }
 
@@ -32,5 +30,4 @@ public class DukeTest {
         Task task = new Deadline("Go Swim", "2020-11-11");
         assertEquals(task.toString(), "[D][✘] Go Swim (by: Nov 11 2020)");
     }
-    
 }
