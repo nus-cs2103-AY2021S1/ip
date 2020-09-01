@@ -10,6 +10,9 @@ repositories {
 }
 
 dependencies {
+    implementation 'junit:junit:4.12'
+    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
@@ -27,9 +30,15 @@ test {
         showStandardStreams = false
     }
 }
-
+sourceSets {
+    test {
+        java {
+            srcDirs = ["test"]
+        }
+    }
+}
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {

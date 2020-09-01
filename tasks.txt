@@ -16,3 +16,7 @@ T
 F
 bab
 
+T
+F
+die
+
