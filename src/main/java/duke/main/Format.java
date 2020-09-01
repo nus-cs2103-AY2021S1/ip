@@ -10,7 +10,7 @@ import duke.task.Todo;
  * This class handles the final Format object
  * that is printed out by Duke.
  *
- * @param <T>
+ * @param <T> The data type of the object in the Format.
  * */
 public class Format<T> {
     private final T content;
