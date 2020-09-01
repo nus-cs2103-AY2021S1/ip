@@ -1,5 +1,7 @@
 package com.siawsam.duke.controllers;
 
+import com.siawsam.duke.Duke;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -21,8 +24,16 @@ public class LandingScene extends AnchorPane {
     @FXML
     private Button sendButton;
     
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    private final Stage stage;
+    private final Duke duke;
+    
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    
+    public LandingScene(Duke duke, Stage stage) {
+        this.stage = stage;
+        this.duke = duke;
+    }
     
     @FXML
     public void initialize() {
@@ -36,11 +47,11 @@ public class LandingScene extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        System.out.println(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(input, dukeImage)
         );
         userInput.clear();
+        duke.readUserInput(input);
     }
 }

@@ -46,61 +46,66 @@ public class Parser {
     public void scan() throws IOException {
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader((System.in)));
+        boolean willContinue = true;
         
-        scanLoop:
-        while (true) {
+        while (willContinue) {
             String line = reader.readLine();
-            String command = line.split(" ")[0];
-            
-            if (COMMANDS.contains(command) && line.split(" ").length > 1) {
-                // handle commands with >1 argument
-                switch (command) {
-                case "done":
-                    try {
-                        userTaskList.markAsDone(
-                                Integer.parseInt(line.split(" ")[1])
-                        );
-                    } catch (IllegalArgumentException ex) {
-                        Ui.showErrorMessage(ex);
-                    }
-                    break;
-                case "delete":
-                    try {
-                        userTaskList.removeItem(
-                                Integer.parseInt(line.split(" ")[1])
-                        );
-                    } catch (IllegalArgumentException ex) {
-                        Ui.showErrorMessage(ex);
-                    }
-                    break;
-                case "find":
-                    TaskSearcher searcher = new TaskSearcher(userTaskList);
-                    searcher.searchAndDisplay(line.split("find")[1].trim());
-                    break;
-                default:
-                    break;
+            willContinue = parse(line);
+        }
+    }
+    
+    public boolean parse(String literal) {
+        String command = literal.split(" ")[0];
+    
+        if (COMMANDS.contains(command) && literal.split(" ").length > 1) {
+            // handle commands with >1 argument
+            switch (command) {
+            case "done":
+                try {
+                    userTaskList.markAsDone(
+                            Integer.parseInt(literal.split(" ")[1])
+                    );
+                } catch (IllegalArgumentException ex) {
+                    Ui.showErrorMessage(ex);
                 }
-            } else {
-                switch (line) {
-                case "bye":
-                    Ui.showGoodbyeMessage();
-                    break scanLoop;
-                case "list":
-                    userTaskList.printList();
-                    break;
-                case "save":
-                    storage.save(userTaskList);
-                    break;
-                default:
-                    try {
-                        Task addedTask = userTaskList.addItem(line);
-                        Ui.showSuccessfulAdd(addedTask);
-                    } catch (DukeException ex) {
-                        Ui.showErrorMessage(ex);
-                    }
-                    break;
+                break;
+            case "delete":
+                try {
+                    userTaskList.removeItem(
+                            Integer.parseInt(literal.split(" ")[1])
+                    );
+                } catch (IllegalArgumentException ex) {
+                    Ui.showErrorMessage(ex);
                 }
+                break;
+            case "find":
+                TaskSearcher searcher = new TaskSearcher(userTaskList);
+                searcher.searchAndDisplay(literal.split("find")[1].trim());
+                break;
+            default:
+                break;
+            }
+        } else {
+            switch (literal) {
+            case "bye":
+                Ui.showGoodbyeMessage();
+                return false;
+            case "list":
+                userTaskList.printList();
+                break;
+            case "save":
+                storage.save(userTaskList);
+                break;
+            default:
+                try {
+                    Task addedTask = userTaskList.addItem(literal);
+                    Ui.showSuccessfulAdd(addedTask);
+                } catch (DukeException ex) {
+                    Ui.showErrorMessage(ex);
+                }
+                break;
             }
         }
+        return true;
     }
 }

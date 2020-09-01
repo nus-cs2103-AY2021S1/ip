@@ -35,7 +35,7 @@ test {
 }
 
 application {
-    mainClassName = "com.siawsam.duke.Duke"
+    mainClassName = "com.siawsam.duke.Launcher"
 }
 
 shadowJar {
