@@ -30,8 +30,9 @@ public class Duke {
     /**
      * This is the main method which will start running the
      * Duke Task Tracker.
-     * @exception IOException On input error.
+     *
      * @param args Unused.
+     * @throws IOException On input error.
      */
     public static void main(String[] args) {
         try {

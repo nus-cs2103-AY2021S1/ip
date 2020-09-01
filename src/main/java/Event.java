@@ -19,6 +19,7 @@ public class Event extends Task {
     /**
      * An overridden method that returns a String with the Task type,
      * event details, event date formatted in MMM d yyyy format.
+     *
      * @return String with all details of the event.
      */
     @Override

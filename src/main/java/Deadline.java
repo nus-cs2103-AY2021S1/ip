@@ -3,8 +3,8 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * <h1>Represents an Deadline</h1>
- *  * Contains the details of the deadline, whether it is completed,
- *  * and the due date.
+ * * Contains the details of the deadline, whether it is completed,
+ * * and the due date.
  */
 public class Deadline extends Task {
     protected String date;
@@ -19,6 +19,7 @@ public class Deadline extends Task {
     /**
      * An overridden method that returns a String with the Task type,
      * deadline details, due date formatted in MMM d yyyy format.
+     *
      * @return String with all details of the deadline.
      */
     @Override

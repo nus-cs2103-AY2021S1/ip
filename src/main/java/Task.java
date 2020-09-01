@@ -4,12 +4,20 @@
  * the task has been completed.
  */
 public class Task {
-    String task;
-    boolean isCompleted;
+    private String task;
+    private boolean isCompleted;
 
     public Task(String task, boolean isCompleted) {
         this.task = task;
         this.isCompleted = isCompleted;
+    }
+
+    public String getTask() {
+        return task;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
     }
 
     /**
@@ -21,6 +29,7 @@ public class Task {
 
     /**
      * An overriden method that returns a String with the details of a task.
+     *
      * @return String containing a tick or a cross, if the task is complete or incomplete respectively,
      * together with the details of the task.
      */

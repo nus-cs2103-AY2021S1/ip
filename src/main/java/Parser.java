@@ -18,6 +18,7 @@ public class Parser {
     /**
      * Parses the current line of input and checks which command it falls under.
      * Helps separate out key details in the input such as the task details and date.
+     *
      * @throws DukeException When user input is wrong or incomplete.
      */
     public void parse() throws DukeException {

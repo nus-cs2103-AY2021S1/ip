@@ -1,5 +1,4 @@
 import java.io.IOException;
-
 import java.util.Scanner;
 
 /**
@@ -24,6 +23,7 @@ public class Ui {
      * carry out the command.
      * The updated list of tasks will be stored upon every command.
      * Duke will end when users type "bye".
+     *
      * @throws IOException
      */
     public void startProgram() throws IOException {
@@ -68,7 +68,8 @@ public class Ui {
                 } else if (commandType.equals("find")) {
                     find(taskDetails);
 
-                } else { }
+                } else {
+                }
 
                 storage.addData(list.getList());
                 System.out.println(LINE);
@@ -126,6 +127,7 @@ public class Ui {
     /**
      * Marks the task indicated as completed and prints out the task.
      * that was completed.
+     *
      * @param taskNumber Task's number in the list.
      */
     public void done(int taskNumber) {
@@ -136,6 +138,7 @@ public class Ui {
 
     /**
      * Removes the task indicated from the list and prints out the task.
+     *
      * @param taskNumber Task's number in the list.
      */
     public void delete(int taskNumber) {
@@ -148,6 +151,7 @@ public class Ui {
 
     /**
      * Creates a new todo task.
+     *
      * @param task Task details.
      */
     public void todo(String task) {
@@ -160,6 +164,7 @@ public class Ui {
 
     /**
      * Creates a new event.
+     *
      * @param task Event details.
      * @param date Date of event.
      */
@@ -173,6 +178,7 @@ public class Ui {
 
     /**
      * Creates a new deadline.
+     *
      * @param task Deadline details.
      * @param date Date of deadline.
      */
@@ -184,11 +190,16 @@ public class Ui {
         System.out.println(list.toString());
     }
 
+    /**
+     * Looks for tasks in the list that contains the keyword
+     *
+     * @param keyword Word that user wants to look out for in list of tasks.
+     */
     public void find(String keyword) {
         int counter = 1;
         System.out.println("Here are the matching tasks in your list:\n");
         for (Task t : list.getList()) {
-            if (t.task.contains(keyword)) {
+            if (t.getTask().contains(keyword)) {
                 System.out.println(counter + ". " + t.toString());
                 counter++;
             }

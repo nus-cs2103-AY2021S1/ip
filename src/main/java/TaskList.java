@@ -1,5 +1,5 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <h1>TaskList class</h1>
@@ -16,6 +16,7 @@ public class TaskList {
 
     /**
      * Overloaded method that takes in a list of tasks retrieved from duke.txt.
+     *
      * @param list List of tasks that the user inputted previously.
      */
     public TaskList(List<Task> list) {

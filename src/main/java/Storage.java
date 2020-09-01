@@ -1,15 +1,12 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
-
-import java.util.Scanner;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * <h1>Storage class</h1>
@@ -19,7 +16,7 @@ import java.util.ArrayList;
  */
 public class Storage {
     private final Path path;
-    private static final String DESTINATION = "./duke.txt";
+    private static String DESTINATION = "./duke.txt";
 
     public Storage() {
         path = Paths.get(DESTINATION);
@@ -37,6 +34,7 @@ public class Storage {
     /**
      * Reads the data saved in a specific file containing all the previous tasks.
      * Then the method parses those data and add the old tasks to a new list.
+     *
      * @return List containing all the Tasks that have been inputted previously.
      * @throws IOException
      */
@@ -74,6 +72,7 @@ public class Storage {
 
     /**
      * Saves the new list of tasks to a specific file.
+     *
      * @param list List containing all the current tasks that have been inputted previously.
      * @throws IOException
      */
@@ -83,24 +82,24 @@ public class Storage {
         for (Task task : list) {
 
             String toAdd = "";
-            String completed = String.valueOf(task.isCompleted);
+            String completed = String.valueOf(task.isCompleted());
 
             if (task instanceof Todo) {
 
-                toAdd = "T:" + completed + ":" + task.task;
+                toAdd = "T:" + completed + ":" + task.getTask();
 
             } else if (task instanceof Deadline) {
 
-                toAdd = "D:" + completed + ":" + task.task + ":" + ((Deadline) task).date;
+                toAdd = "D:" + completed + ":" + task.getTask() + ":" + ((Deadline) task).date;
 
             } else if (task instanceof Event) {
 
-                toAdd = "E:" + completed + ":" + task.task + ":" + ((Event) task).date;
+                toAdd = "E:" + completed + ":" + task.getTask() + ":" + ((Event) task).date;
 
             } else {
                 // nothing
             }
-            
+
             fw.write(toAdd + "\n");
         }
 
@@ -109,6 +108,7 @@ public class Storage {
 
     /**
      * Resets the file.
+     *
      * @throws IOException
      */
     public void clear() throws IOException {
