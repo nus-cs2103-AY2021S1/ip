@@ -1,6 +1,6 @@
 package TextFxJava;
 
-import duke.components.Starter;
+import duke.ui.Main;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +15,7 @@ public class TestFXJUnitAppRunner extends ApplicationTest {
     @BeforeEach
     public void runAppToTests() throws Exception {
         FxToolkit.registerPrimaryStage();
-        FxToolkit.setupApplication(Starter::new);
+        FxToolkit.setupApplication(Main::new);
         FxToolkit.showStage();
         WaitForAsyncUtils.waitForFxEvents(100);
     }

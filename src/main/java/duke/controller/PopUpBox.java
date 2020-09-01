@@ -1,9 +1,9 @@
-package duke.components;
+package duke.controller;
 
 /**
- * Encapsulates an interface that represents a dialog box.
+ * Encapsulates an interface that represents a customised dialog box.
  */
-public interface DialogBox {
+public interface PopUpBox {
     /**
      * The default width of a dialog box scene.
      */

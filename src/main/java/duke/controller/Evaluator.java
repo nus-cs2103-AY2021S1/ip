@@ -1,30 +1,23 @@
-package duke.components;
+package duke.controller;
 
 import duke.exceptions.DukeException;
 import duke.tasks.TaskList;
+import duke.ui.Messenger;
 import duke.utils.Parser;
 import duke.utils.Storage;
-import duke.views.Messenger;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import javafx.application.Platform;
 
 
 public class Evaluator {
     private Storage storage;
-    private Label label;
-    private Stage window;
 
     /**
      * Constructs an Evaluator object that interacts with the command input.
      *
      * @param storage the storage the evaluator uses to manipulate tasks.
-     * @param label the Label object which the evaluator should manipulate.
-     * @param window the Stage object which the evaluator operates on.
      */
-    public Evaluator(Storage storage, Label label, Stage window) {
+    public Evaluator(Storage storage) {
         this.storage = storage;
-        this.label = label;
-        this.window = window;
     }
 
     /**
@@ -32,7 +25,7 @@ public class Evaluator {
      *
      * @param command a string representing the command passed in.
      */
-    public void handle(String command) {
+    public String getResponse(String command) {
         // initialize utilities
         Parser parser = new Parser();
         TaskList list = storage.getTaskList();
@@ -40,14 +33,13 @@ public class Evaluator {
         if (command.equals("bye")) {
             DataSaver.save(storage);
             if (DataSaver.isQuitting()) {
-                window.close();
+                Platform.exit();
             }
-            return;
+            return "";
         }
 
         if (command.equals("list")) {
-            label.setText(list.printList());
-            return;
+            return list.printList();
         }
 
         try {
@@ -56,23 +48,18 @@ public class Evaluator {
             String body = actionExtracted[1];
             switch (status) {
             case "done":
-                label.setText(list.markTaskAsDone(Integer.parseInt(body)));
-                break;
+                return list.markTaskAsDone(Integer.parseInt(body));
             case "todo":
-                label.setText(list.addTask(body, status));
-                break;
+                return list.addTask(body, status);
             case "delete":
-                label.setText(list.deleteTask(Integer.parseInt(body)));
-                break;
+                return list.deleteTask(Integer.parseInt(body));
             case "find":
-                label.setText(list.findTask(body));
-                break;
+                return list.findTask(body);
             default:
                 String[] timeExtracted = parser.extractDate(body);
                 String content = timeExtracted[0];
                 String time = timeExtracted[1];
-                label.setText(list.addTask(content, status, time));
-                break;
+                return list.addTask(content, status, time);
             }
         } catch (NumberFormatException e) {
             AlertBox.display("Index not valid!", Messenger.INDEX_FORMAT_ERROR);
@@ -83,5 +70,6 @@ public class Evaluator {
         } catch (Exception e) {
             AlertBox.display("Something went wrong!", e.toString());
         }
+        return "What???";
     }
 }

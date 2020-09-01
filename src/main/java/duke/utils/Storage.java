@@ -7,11 +7,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import duke.components.AlertBox;
+import duke.controller.AlertBox;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.types.TaskType;
-import duke.views.Messenger;
+import duke.ui.Messenger;
 import javafx.scene.control.Label;
 
 
@@ -45,19 +45,20 @@ public class Storage {
     /**
      * Reads the saved file and populate the data into the task list.
      */
-    public void readSavedFile(Label label) {
+    public String readSavedFile() {
+        String output = "";
         try {
-            label.setText(Messenger.FILE_LOADING + "\n");
+            output += Messenger.FILE_LOADING + "\n";
             File directory = new File(DIRECTORY_PATH);
 
             if (!directory.exists()) {
-                label.setText(label.getText() + Messenger.DIRECTORY_NOT_FOUND + "\n");
+                output += Messenger.DIRECTORY_NOT_FOUND + "\n";
                 directory.mkdir();
             }
 
             File f = new File(FILE_PATH);
             if (f.createNewFile()) {
-                label.setText(label.getText() + Messenger.FILE_NOT_FOUND + "\n");
+                output += Messenger.FILE_NOT_FOUND + "\n";
             } else {
                 Scanner sc = new Scanner(f);
                 while (sc.hasNextLine()) {
@@ -73,11 +74,13 @@ public class Storage {
                         taskList.getTasks().add(new Task(parsed[1], command));
                     }
                 }
-                label.setText(label.getText() + Messenger.FILE_LOADED + "\n");
+                output += Messenger.FILE_LOADED + "\n";
             }
         } catch (IOException e) {
             AlertBox.display("IO Error", e.getMessage());
         }
+
+        return output;
     }
 
     /**

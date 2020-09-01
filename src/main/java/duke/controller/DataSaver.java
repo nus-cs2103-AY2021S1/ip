@@ -1,4 +1,4 @@
-package duke.components;
+package duke.controller;
 
 import duke.utils.Storage;
 import javafx.geometry.Pos;
@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 /**
  * Encapsulates a DataSaver class that saves data to a load file.
  */
-public class DataSaver implements DialogBox {
+public class DataSaver implements PopUpBox {
     private static boolean isQuitting = false;
     /**
      * Saves the data to a load file.

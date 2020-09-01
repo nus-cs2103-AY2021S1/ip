@@ -1,4 +1,4 @@
-package duke.views;
+package duke.ui;
 
 /**
  * Encapsulates a Messenger class to manage important notifications in the program.

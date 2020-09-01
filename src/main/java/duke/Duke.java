@@ -1,6 +1,6 @@
 package duke;
 
-import duke.components.Starter;
+import duke.ui.Main;
 import javafx.application.Application;
 
 /**
@@ -13,6 +13,6 @@ public class Duke {
      * @param args command line arguments to be fed to the program.
      */
     public static void main(String[] args) {
-        Application.launch(Starter.class, args);
+        Application.launch(Main.class, args);
     }
 }

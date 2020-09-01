@@ -1,4 +1,4 @@
-package duke.components;
+package duke.controller;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 /**
  * Encapsulates an AlertBox class that deals with displaying an alert UI.
  */
-public class AlertBox implements DialogBox {
+public class AlertBox implements PopUpBox {
     /**
      * Displays an alert box with the given title and the alert message.
      *

@@ -3,7 +3,7 @@ package duke.tasks;
 import java.util.ArrayList;
 
 import duke.exceptions.DukeException;
-import duke.views.Messenger;
+import duke.ui.Messenger;
 
 
 /**

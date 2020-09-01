@@ -1,6 +1,6 @@
 package duke.types;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +10,7 @@ class TaskTypeTest {
     private static TaskType eventType;
     private static TaskType todoType;
 
-    @BeforeEach
+    @BeforeAll
     static void setUp() {
         deadlineType = TaskType.DEADLINE;
         eventType = TaskType.EVENT;
