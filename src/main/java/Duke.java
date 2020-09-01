@@ -62,4 +62,14 @@ public class Duke {
             System.out.println(e.getMessage());
         }
     }
+
+    public String getResponse(String input) throws IOException {
+        try {
+            command.receive(input);
+            return command.executeTask(parser, tasks, storage, ui);
+        } catch (InvalidTaskArgumentException | InvalidDoneException | InvalidCommandException |
+                InvalidDeleteException | DateException e) {
+            return ui.showError(e.getMessage());
+        }
+    }
 }

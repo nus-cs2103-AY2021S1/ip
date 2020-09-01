@@ -14,8 +14,8 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    public void showLine() {
-        System.out.println("-------------------------------------------------------------------------------------");
+    public String showLine() {
+        return "----------------------------------------------------------";
     }
 
     /**
@@ -48,21 +48,26 @@ public class Ui {
      * an error.
      * @param message Error message.
      */
-    public void showError(String message) {
-        showLine();
-        System.out.println(message);
-        showLine();
+    public String showError(String message) {
+        String response = "";
+        response += showLine() + System.lineSeparator();
+        response += message + System.lineSeparator();
+        response += showLine() + System.lineSeparator();
+        return response;
     }
 
     /**
      * Displays a message indicating that a particular task has been marked as done.
      * @param task Task that has been marked as done.
      */
-    public void showDone(Task task) {
-        showLine();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("    " + task);
-        showLine();
+    public String showDone(Task task) {
+        String response = "";
+        response += showLine() + System.lineSeparator();
+        response += "Nice! I've marked this task as done:" + System.lineSeparator();
+        response += showLine() + System.lineSeparator();
+        response += "   " + task + System.lineSeparator();
+        response += showLine() + System.lineSeparator();
+        return response;
     }
 
     /**
@@ -71,12 +76,14 @@ public class Ui {
      * @param task Task that has been added to the task list.
      * @param size Total number of tasks in the task list after addition.
      */
-    public void showAdd(Task task, int size) {
-        showLine();
-        System.out.println("Got it. I've added this task:");
-        System.out.println("    " + task);
-        System.out.println("Now you have " + size + " tasks in the list.");
-        showLine();
+    public String showAdd(Task task, int size) {
+        String response = "";
+        response += showLine() + System.lineSeparator();
+        response += "Got it. I've added this task:" + System.lineSeparator();
+        response += "    " + task + System.lineSeparator();
+        response += "Now you have " + size + " tasks in the list." + System.lineSeparator();
+        response += showLine() + System.lineSeparator();
+        return response;
     }
 
     /**
@@ -85,25 +92,29 @@ public class Ui {
      * @param task Task that has been deleted from the task list.
      * @param size Total number of tasks in the task list after deletion.
      */
-    public void showDelete(Task task, int size) {
-        showLine();
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("    " + task);
-        System.out.println("Now you have " + size + " tasks in the list.");
-        showLine();
+    public String showDelete(Task task, int size) {
+        String response = "";
+        response += showLine() + System.lineSeparator();
+        response += "Noted. I've removed this task:" + System.lineSeparator();
+        response += "   " + task + System.lineSeparator();
+        response += "Now you have " + size + " tasks in the list." + System.lineSeparator();
+        response += showLine() + System.lineSeparator();
+        return response;
     }
 
     /**
      * Displays the tasks in the task list.
      * @param lst List of String objects representing the tasks in the task list.
      */
-    public void showList(ArrayList<String> lst) {
-        showLine();
-        System.out.println("Here are the tasks in your list: ");
+    public String showList(ArrayList<String> lst) {
+        String response = "";
+        response += showLine() + System.lineSeparator();
+        response += "Here are the tasks in your list:" + System.lineSeparator();
         for (int i = 0; i < lst.size(); i++) {
-            System.out.println((i + 1) + "." + lst.get(i));
+            response += (i + 1) + "." + lst.get(i) + System.lineSeparator();
         }
-        showLine();
+        response += showLine() + System.lineSeparator();
+        return response;
     }
 
     /**
@@ -111,13 +122,15 @@ public class Ui {
      * @param lst List of String objects representing the tasks in the task list
      *            that match the given keyword.
      */
-    public void showFind(ArrayList<String> lst) {
-        showLine();
-        System.out.println("Here are the matching tasks in your list:");
+    public String showFind(ArrayList<String> lst) {
+        String response = "";
+        response += showLine() + System.lineSeparator();
+        response += "Here are the matching tasks in your list:" + System.lineSeparator();
         for (int i = 0; i < lst.size(); i++) {
-            System.out.println("    " + (i + 1) + "." + lst.get(i));
+            response += "   " + (i + 1) + "." + lst.get(i) + System.lineSeparator();
         }
-        showLine();
+        response += showLine() + System.lineSeparator();
+        return response;
     }
 
     /**

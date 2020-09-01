@@ -51,30 +51,32 @@ public class Command {
      * @throws DateException If an error occurs while parsing the dates/times
      * of event/deadlines.
      */
-    public void executeTask(Parser parser, TaskList taskList, Storage storage, Ui ui)
+    public String executeTask(Parser parser, TaskList taskList, Storage storage, Ui ui)
             throws IOException, InvalidTaskArgumentException, InvalidDoneException, InvalidCommandException,
             InvalidDeleteException, DateException {
         ArrayList<String> lst = parser.parseString(currentInput, taskList.getLength());
+        String response = "";
         if (lst.get(0).equals("Show")) {
-            taskList.showList(ui);
+            response = taskList.showList(ui);
             storage.save(taskList.getTasks());
         } else if (lst.get(0).equals("Done")) {
-            taskList.markDone(Integer.parseInt(lst.get(1)), ui);
+            response = taskList.markDone(Integer.parseInt(lst.get(1)), ui);
             storage.save(taskList.getTasks());
         } else if (lst.get(0).equals("Add")) {
             if (lst.get(1).equals("ToDo")) {
-                taskList.addTask(new ToDo(lst.get(2)), ui);
+                response = taskList.addTask(new ToDo(lst.get(2)), ui);
             } else if (lst.get(1).equals("Deadline")) {
-                taskList.addTask(new Deadline(lst.get(2), lst.get(3)), ui);
+                response = taskList.addTask(new Deadline(lst.get(2), lst.get(3)), ui);
             } else {
-                taskList.addTask(new Event(lst.get(2), lst.get(3)), ui);
+                response = taskList.addTask(new Event(lst.get(2), lst.get(3)), ui);
             }
             storage.save(taskList.getTasks());
         } else if (lst.get(0).equals("Find")) {
-            taskList.findTask(lst.get(1), ui);
+            response = taskList.findTask(lst.get(1), ui);
         } else {
-            taskList.deleteTask(Integer.parseInt(lst.get(1)), ui);
+            response = taskList.deleteTask(Integer.parseInt(lst.get(1)), ui);
             storage.save(taskList.getTasks());
         }
+        return response;
     }
 }

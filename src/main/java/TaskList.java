@@ -65,12 +65,12 @@ public class TaskList {
      * application for display.
      * @param ui User interface of the Duke application.
      */
-    public void showList(Ui ui) {
+    public String showList(Ui ui) {
         ArrayList<String> lst = new ArrayList<>();
         for (Task task : tasks) {
             lst.add(task.toString());
         }
-        ui.showList(lst);
+        return ui.showList(lst);
     }
 
     /**
@@ -79,9 +79,9 @@ public class TaskList {
      * @param pos Position of the task to be marked as done in the task list.
      * @param ui User interface of the Duke application.
      */
-    public void markDone(int pos, Ui ui) {
+    public String markDone(int pos, Ui ui) {
         tasks.get(pos).markAsDone();
-        ui.showDone(tasks.get(pos));
+        return ui.showDone(tasks.get(pos));
     }
 
     /**
@@ -91,9 +91,9 @@ public class TaskList {
      * @param pos Position of the task to be removed in the task list.
      * @param ui User interface of the Duke application.
      */
-    public void deleteTask(int pos, Ui ui) {
+    public String deleteTask(int pos, Ui ui) {
         Task t = tasks.remove(pos);
-        ui.showDelete(t, tasks.size());
+        return ui.showDelete(t, tasks.size());
     }
 
     /**
@@ -102,9 +102,9 @@ public class TaskList {
      * @param task New task to be added to the task list.
      * @param ui User interface of the Duke application.
      */
-    public void addTask(Task task, Ui ui) {
+    public String addTask(Task task, Ui ui) {
         tasks.add(task);
-        ui.showAdd(tasks.get(tasks.size() - 1), tasks.size());
+        return ui.showAdd(tasks.get(tasks.size() - 1), tasks.size());
     }
 
     /**
@@ -112,13 +112,13 @@ public class TaskList {
      * @param keyword Keyword given by the user.
      * @param ui User interface of the Duke application.
      */
-    public void findTask(String keyword, Ui ui) {
+    public String findTask(String keyword, Ui ui) {
         ArrayList<String> lst = new ArrayList<>();
         for (Task t : tasks) {
             if (t.toString().contains(keyword)) {
                 lst.add(t.toString());
             }
         }
-        ui.showFind(lst);
+        return ui.showFind(lst);
     }
 }
