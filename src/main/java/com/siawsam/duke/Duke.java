@@ -25,7 +25,7 @@ public class Duke {
         }
     }
     
-    public Response readUserInput(String input) {
-        return parser.parse(input);
+    public Response readAndExecute(String input) {
+        return parser.parseAndExecute(input);
     }
 }

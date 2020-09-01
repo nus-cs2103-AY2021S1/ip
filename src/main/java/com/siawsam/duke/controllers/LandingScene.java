@@ -64,7 +64,7 @@ public class LandingScene extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        Response response = duke.readUserInput(input);
+        Response response = duke.readAndExecute(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response.getMessage(), dukeImage)

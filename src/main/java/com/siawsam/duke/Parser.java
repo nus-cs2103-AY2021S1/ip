@@ -1,8 +1,5 @@
 package com.siawsam.duke;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,50 +35,14 @@ public class Parser {
         this.storage = storage;
     }
     
-//    /**
-//     * Parses user input strings from the command line.
-//     *
-//     * @throws IOException if an IO exception occurs when trying to read standard input.
-//     */
-//    public void scan() throws IOException {
-//        BufferedReader reader =
-//                new BufferedReader(new InputStreamReader((System.in)));
-//        boolean willContinue = true;
-//
-//        while (willContinue) {
-//            String line = reader.readLine();
-//            willContinue = parse(line);
-//        }
-//    }
-    
-    public Response parse(String literal) {
+    public Response parseAndExecute(String literal) {
         String command = literal.split(" ")[0];
+        boolean isValidCommand = COMMANDS.contains(command);
+        boolean hasArgument = literal.split(" ").length > 1;
     
-        if (COMMANDS.contains(command) && literal.split(" ").length > 1) {
+        if (isValidCommand && hasArgument) {
             // handle commands with >1 argument
-            switch (command) {
-            case "done":
-                try {
-                    return userTaskList.markAsDone(
-                            Integer.parseInt(literal.split(" ")[1])
-                    );
-                } catch (IllegalArgumentException ex) {
-                    return new Response(Ui.showErrorMessage(ex));
-                }
-            case "delete":
-                try {
-                    return userTaskList.removeItem(
-                            Integer.parseInt(literal.split(" ")[1])
-                    );
-                } catch (IllegalArgumentException ex) {
-                    return new Response(Ui.showErrorMessage(ex));
-                }
-            case "find":
-                TaskSearcher searcher = new TaskSearcher(userTaskList);
-                return searcher.searchAndDisplay(literal.split("find")[1].trim());
-            default:
-                break;
-            }
+            return parseParameterizedCommand(command, literal);
         } else {
             switch (literal) {
             case "bye":
@@ -91,15 +52,55 @@ public class Parser {
             case "save":
                 return storage.save(userTaskList);
             default:
-                try {
-                    Task addedTask = userTaskList.addItem(literal);
-                    return new Response(Ui.showSuccessfulAdd(addedTask));
-                } catch (DukeException ex) {
-                    return new Response(Ui.showErrorMessage(ex));
-                }
+                return parseAddCommand(literal);
             }
         }
-        
-        return Response.emptyResponse();
+    }
+    
+    private Response parseParameterizedCommand(String command, String literal) {
+        switch (command) {
+        case "done":
+            return parseDoneCommand(literal);
+        case "delete":
+            return parseDeleteCommand(literal);
+        case "find":
+            return parseFindCommand(literal);
+        default:
+            return Response.emptyResponse();
+        }
+    }
+    
+    private Response parseDoneCommand(String literal) {
+        try {
+            return userTaskList.markAsDone(
+                    Integer.parseInt(literal.split(" ")[1])
+            );
+        } catch (IllegalArgumentException ex) {
+            return new Response(Ui.showErrorMessage(ex));
+        }
+    }
+    
+    private Response parseDeleteCommand(String literal) {
+        try {
+            return userTaskList.removeItem(
+                    Integer.parseInt(literal.split(" ")[1])
+            );
+        } catch (IllegalArgumentException ex) {
+            return new Response(Ui.showErrorMessage(ex));
+        }
+    }
+    
+    private Response parseFindCommand(String literal) {
+        TaskSearcher searcher = new TaskSearcher(userTaskList);
+        return searcher.searchAndDisplay(literal.split("find")[1].trim());
+    }
+    
+    private Response parseAddCommand(String literal) {
+        try {
+            Task addedTask = userTaskList.addItem(literal);
+            return new Response(Ui.showSuccessfulAdd(addedTask));
+        } catch (DukeException ex) {
+            return new Response(Ui.showErrorMessage(ex));
+        }
     }
 }
