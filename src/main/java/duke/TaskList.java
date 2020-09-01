@@ -74,7 +74,7 @@ public class TaskList {
      * Adds a Task to the list.
      *
      * @param task Task name
-     * @param type Task type defined by COmm
+     * @param type TaskType of the of Task to add
      * @param ddl Task deadline
      * @param done whether task has been marked done
      */
@@ -169,7 +169,7 @@ public class TaskList {
     }
 
     /**
-     * Delets the given Task.
+     * Deletes the given Task.
      *
      * @param position position of the Task in the list, as seen by the user
      * @return Task deleted

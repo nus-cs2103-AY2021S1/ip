@@ -6,8 +6,16 @@ import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Task;
 
+/**
+ * Command sub-type to define deleting Tasks
+ */
 public class DeleteCommand extends Command {
 
+    /**
+     * Creates DeleteCommand object.
+     *
+     * @param attributes input attributes from user
+     */
     public DeleteCommand(String attributes) {
         this.attributes = attributes;
     }

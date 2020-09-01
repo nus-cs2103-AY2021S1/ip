@@ -6,8 +6,16 @@ import duke.Ui;
 
 import java.util.List;
 
+/**
+ * Command sub-type to define finding Tasks.
+ */
 public class FindCommand extends Command {
 
+    /**
+     * Creates FindCommand object.
+     *
+     * @param attributes input attributes from user
+     */
     public FindCommand(String attributes) {
         this.attributes = attributes;
     }

@@ -27,6 +27,13 @@ public class Storage {
         this.fileName = fileName;
     }
 
+    /**
+     * Initialises a TaskList by checking for pre-existing data and loading
+     * if present, or creating an empty TaskList.
+     *
+     * @param ui Ui object to handle user interface interactions
+     * @return initialised TaskList
+     */
     public TaskList init(Ui ui) {
         String home = System.getProperty("user.dir");
         FILE_PATH = java.nio.file.Paths.get(home, dirName);

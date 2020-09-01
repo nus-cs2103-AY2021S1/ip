@@ -4,8 +4,14 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Command sub-type to define exiting the program
+ */
 public class ExitCommand extends Command {
 
+    /**
+     * Creates ExitCommand object.
+     */
     public ExitCommand() {}
 
     @Override

@@ -26,7 +26,7 @@ public class Parser {
      * Parses and processes the input string.
      *
      * @param input String input from the user
-     * @return false if the user exits
+     * @return Command object to execute the respective process
      * @throws DukeException Duke-related exception due to erroneous inputs
      */
     public Command processInput(String input) throws DukeException {

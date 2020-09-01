@@ -6,8 +6,16 @@ import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Task;
 
+/**
+ * Command sub-type to define marking Tasks as done
+ */
 public class DoneCommand extends Command {
 
+    /**
+     * Creates DoneCommand object.
+     *
+     * @param attributes input attributes from user
+     */
     public DoneCommand(String attributes) {
         this.attributes = attributes;
     }

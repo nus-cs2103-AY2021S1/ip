@@ -16,7 +16,7 @@ public class Duke {
     private final TaskList taskList;
 
     /**
-     * Creates a Duke. Loads existing task data, or creates a file if it doesn't exist.
+     * Creates a Duke and initializes the individual components.
      */
     public Duke() {
         ui = new Ui();

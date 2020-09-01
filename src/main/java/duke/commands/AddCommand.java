@@ -7,11 +7,19 @@ import duke.Ui;
 import duke.tasks.Task;
 import duke.tasks.TaskType;
 
+/**
+ * Command sub-type to define adding Tasks
+ */
 public class AddCommand extends Command {
 
     private final TaskType taskType;
 
-
+    /**
+     * Creates AddCommand object.
+     *
+     * @param attributes input attributes from user
+     * @param taskType TaskType of the Task to add
+     */
     public AddCommand(String attributes, TaskType taskType) {
         this.attributes = attributes;
         this.taskType = taskType;
