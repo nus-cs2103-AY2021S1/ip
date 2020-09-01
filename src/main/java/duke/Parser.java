@@ -45,71 +45,73 @@ public class Parser {
         }
         return s;
     }
-
-
     /**
-     * Sends different instructions depending on user input
-     * @param next Next line of input from the user
-     * @param list List of tasks
-     * @param storage Storage of tasks
-     * @param ui User interface to receive input and generate output to users
+     *Processes user input and returns the appropriate response
+     * @param next next line of user input
+     * @param list list of tasks
+     * @param storage storage for tasks
+     * @param ui ui to show messages
+     * @return returns the appropriate response to the user
      */
-    public void sortInput (String next, TaskList list, Storage storage, Ui ui) {
+    public String sortInput (String next, TaskList list, Storage storage, Ui ui) {
+        String[] input = next.trim().split(" ");
+        String commandWord = input[0].toUpperCase();
+        String output = "";
         try {
-            next = next.trim();
-
-            //Listing out all the tasks
-            if (next.equalsIgnoreCase("list")) {
-                ui.showList(list);
-
-            //When a task is done
-            } else if (next.startsWith("done")) {
+            switch (commandWord) {
+            case "LIST":
+                output = ui.showList(list);
+                break;
+            case "DONE":
                 Task completedTask = done(next, list);
-                ui.showDoneMessage(completedTask);
                 storage.writeToDataFile(list);
-
-            //When a task is removed from the list
-            } else if (next.startsWith("delete")) {
+                output = ui.showDoneMessage(completedTask);
+                break;
+            case "DELETE":
                 Task deletedTask = delete(next, list);
-                ui.showRemoveTaskMessage(deletedTask, list.size());
                 storage.writeToDataFile(list);
-
-            //Add the task to the list and update the data in storage
-            } else if (next.startsWith("todo")) {
+                output = ui.showRemoveTaskMessage(deletedTask, list.size());
+                break;
+            case "TODO":
                 Task addedTodo = addTodo(next, list);
-                ui.showAddTaskMessage(addedTodo, list.size());
                 storage.writeToDataFile(list);
-
-            } else if (next.startsWith("deadline")) {
+                output = ui.showAddTaskMessage(addedTodo, list.size());
+                break;
+            case "DEADLINE":
                 Task addedDeadline = addDeadline(next, list);
-                ui.showAddTaskMessage(addedDeadline, list.size());
                 storage.writeToDataFile(list);
-
-            } else if (next.startsWith("event")) {
+                output = ui.showAddTaskMessage(addedDeadline, list.size());
+                break;
+            case "EVENT":
                 Task addedEvent = addEvent(next, list);
-                ui.showAddTaskMessage(addedEvent, list.size());
                 storage.writeToDataFile(list);
-
-            //Search for task descriptions in the list
-            } else if (next.startsWith("find")) {
+                output = ui.showAddTaskMessage(addedEvent, list.size());
+                break;
+            case "FIND":
                 TaskList filter = find(next, list);
-                ui.showList(filter);
-            } else {
-                throw new UnsupportedOperationException();
+                output = ui.showList(filter);
+                break;
+            case "HI":
+                output = ui.showWelcomeMessage();
+                break;
+            case "BYE":
+                output = ui.showByeMessage();
+                break;
+            default:
+                output = "Sorry >_< I don't know what you mean...";
             }
         } catch (DukeException e) {
             ui.showNoTaskInputException();
-        } catch (ArrayIndexOutOfBoundsException e) {
-            ui.showNoTimeInputException();
         } catch (IndexOutOfBoundsException e) {
             ui.showNoTaskExistException();
-        } catch (UnsupportedOperationException e) {
-            ui.showDoNotUnderstandMessage();
+        } catch (NumberFormatException e) {
+            System.out.println ("Please enter a number");
         }
+        return output;
     }
 
 
-    private Task done (String s, TaskList list) throws IndexOutOfBoundsException {
+    private Task done (String s, TaskList list) {
         int index = Integer.parseInt(s.replaceAll("[^0-9]", "")) - 1;
         list.setDone(index);
         return list.get(index);
@@ -129,7 +131,7 @@ public class Parser {
         list.addTask(t);
         return t;
     }
-    private Task addDeadline (String s, TaskList list) throws DukeException, ArrayIndexOutOfBoundsException {
+    private Task addDeadline (String s, TaskList list) throws DukeException, IndexOutOfBoundsException {
         String description = s.split("/by")[0].substring(9).trim();
         String deadline = s.split("/by")[1].trim();
         if (description.length() == 0) {
@@ -139,7 +141,7 @@ public class Parser {
         list.addTask(t);
         return t;
     }
-    private Task addEvent (String s, TaskList list) throws DukeException, ArrayIndexOutOfBoundsException {
+    private Task addEvent (String s, TaskList list) throws DukeException, IndexOutOfBoundsException {
         String description = s.split("/at")[0].substring(5).trim();
         String time = s.split("/at")[1].trim();
         if (description.length() == 0) {
