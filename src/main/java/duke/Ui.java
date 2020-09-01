@@ -24,28 +24,28 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void showLine() {
-        System.out.println("________________________ \n");
+    public String showLine() {
+        return ("________________________ \n");
     }
 
     /**
      * Display welcome message with duke logo to user.
      */
-    public void showWelcomeMessage() {
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
+    public String showWelcomeMessage() {
+        return "Hello from\n" + logo
+                + "\nHello! I'm Duke \nWhat can I do for you?";
     }
 
-    public void showExitMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showExitMessage() {
+        return ("Bye. Hope to see you again soon!");
     }
 
-    public void showErrorMessage(String message) {
-        System.out.println(message);
+    public String showErrorMessage(String message) {
+        return message;
     }
 
-    public void printMessage(String message) {
-        System.out.println(message);
+    public String printMessage(String message) {
+        return (message);
     }
 
 }

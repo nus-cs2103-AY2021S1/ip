@@ -25,10 +25,10 @@ public class ExitCommand extends Command {
      * @throws InvalidFileException failed to save file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException, InvalidFileException {
-        ui.showExitMessage();
         storage.save(tasks);
+        return ui.showExitMessage();
     }
 
     @Override

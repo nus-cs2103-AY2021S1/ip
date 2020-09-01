@@ -35,7 +35,7 @@ public class DeadlineCommand extends Command {
      * @throws InvalidFileException throws an error when method fails to save.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 8) {
             throw new InvalidInputException("☹ OOPS!!! The description of a deadline cannot be empty.\n");
@@ -46,9 +46,10 @@ public class DeadlineCommand extends Command {
             LocalDateTime date = LocalDateTime.parse(split[1], formatter);
             Task deadline = new Deadline(split[0], date);
             tasks.addTask(deadline);
-            ui.printMessage(MESSAGE_SUCCESS + deadline.toString()
-                    + "\nNow you have " + tasks.taskListSize() + " tasks in the list.");
             storage.save(tasks);
+            return ui.printMessage(MESSAGE_SUCCESS + deadline.toString()
+                    + "\nNow you have " + tasks.taskListSize() + " tasks in the list.");
+
         } catch (DateTimeParseException e) {
             throw new InvalidInputException(MESSAGE_PARSE_ERROR);
         }

@@ -29,16 +29,17 @@ public class TodoCommand extends Command {
      * @throws InvalidFileException failed to save file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 5) {
-            throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.\n");
+            throw new InvalidInputException(
+                    "☹ OOPS!!! The description of a todo cannot be empty.\n");
         }
         Task todoTask = new Todo(super.input.substring(5));
         tasks.addTask(todoTask);
-        ui.printMessage(MESSAGE_SUCCESS + todoTask.toString()
-                + "\nNow you have " + tasks.taskListSize() + " tasks in the list.");
         storage.save(tasks);
+        return ui.printMessage(MESSAGE_SUCCESS + todoTask.toString()
+                + "\nNow you have " + tasks.taskListSize() + " tasks in the list.");
     }
 
     @Override

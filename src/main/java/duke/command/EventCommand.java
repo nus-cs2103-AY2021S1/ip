@@ -34,10 +34,11 @@ public class EventCommand extends Command {
      * @throws InvalidFileException failed to save file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 5) {
-            throw new InvalidInputException("☹ OOPS!!! The description of a event cannot be empty.\n");
+            throw new InvalidInputException(
+                    "☹ OOPS!!! The description of a event cannot be empty.\n");
         }
         try {
             String[] split = super.input.substring(6).split("/at ", 2);
@@ -45,9 +46,9 @@ public class EventCommand extends Command {
             LocalDateTime date = LocalDateTime.parse(split[1], formatter);
             Task event = new Event(split[0], date);
             tasks.addTask(event);
-            ui.printMessage(MESSAGE_SUCCESS + event.toString() + "\nNow you have "
-                    + tasks.taskListSize() + " tasks in the list.");
             storage.save(tasks);
+            return ui.printMessage(MESSAGE_SUCCESS + event.toString() + "\nNow you have "
+                    + tasks.taskListSize() + " tasks in the list.");
         } catch (DateTimeParseException e) {
             throw new InvalidInputException(MESSAGE_PARSE_ERROR);
         }

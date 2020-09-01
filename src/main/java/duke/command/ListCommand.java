@@ -22,14 +22,16 @@ public class ListCommand extends Command {
      * @param storage Storage object from the Storage class.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException {
         if (tasks.taskListSize() == 0) {
-            ui.printMessage("List is empty! Start adding to your task list!");
+            return ui.printMessage("List is empty! Start adding to your task list!");
         } else {
+            String result = "";
             for (int i = 0; i < tasks.taskListSize(); i++) {
-                ui.printMessage((i + 1) + "." + tasks.getTask(i));
+                result = result + "\n" + ui.printMessage((i + 1) + "." + tasks.getTask(i));
             }
+            return result;
         }
     }
 

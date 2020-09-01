@@ -1,7 +1,5 @@
 package duke;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
 import duke.command.Command;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidFileException;
@@ -12,7 +10,7 @@ import duke.tasks.TaskList;
  * all of the bot logic sequences.
  */
 
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
@@ -39,33 +37,21 @@ public class Duke extends Application {
     /**
      * Main method for Duke to start running its processors.
      */
-    public void run() {
-        this.ui.showWelcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parseCommand(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showErrorMessage(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String run(String input) {
+        String result = ui.showLine();
+        try {
+            Command c = Parser.parseCommand(input);
+            return result + c.execute(tasks, ui, storage) + "\n" + ui.showLine();
+        } catch (DukeException e) {
+            return ui.showErrorMessage(e.getMessage());
         }
     }
 
-    @Override
-    public void start(Stage stage) {
+    public String showWelcomeMessage() {
+        return this.ui.showWelcomeMessage();
     }
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        return run(input);
     }
 }

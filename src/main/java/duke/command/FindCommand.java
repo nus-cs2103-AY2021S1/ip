@@ -34,7 +34,7 @@ public class FindCommand extends Command {
      * @throws InvalidFileException failed to save file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 4) {
             throw new InvalidInputException("Please select task to find!");
@@ -48,12 +48,13 @@ public class FindCommand extends Command {
             }
         }
         if (tasksFound.size() == 0) {
-            ui.printMessage(NO_TASK_FOUND);
+            return ui.printMessage(NO_TASK_FOUND);
         } else {
-            ui.printMessage(TASK_FOUND_MESSAGE);
+            String result = ui.printMessage(TASK_FOUND_MESSAGE);
             for (int j = 0; j < tasksFound.size(); j++) {
-                ui.printMessage((j + 1) + "." + tasksFound.get(j));
+                result = result + ui.printMessage((j + 1) + "." + tasksFound.get(j));
             }
+            return result;
         }
     }
 

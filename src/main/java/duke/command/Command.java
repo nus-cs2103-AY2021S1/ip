@@ -26,7 +26,7 @@ public abstract class Command {
      * @throws InvalidFileException when the file cannot be read or written.
      */
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage)
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException, InvalidFileException;
 
     /**

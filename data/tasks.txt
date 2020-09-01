@@ -1,0 +1,2 @@
+T|1|read book
+D|0|buy book |2020-10-10 12:12

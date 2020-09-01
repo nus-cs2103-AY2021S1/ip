@@ -28,17 +28,17 @@ public class DeleteCommand extends Command {
      * @throws InvalidFileException failed to save file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 7) {
-            throw new InvalidInputException
-                    ("☹ OOPS!!! The description of a delete operation cannot be empty / invalid index.");
+            throw new InvalidInputException(
+                    "☹ OOPS!!! The description of a delete operation cannot be empty / invalid index.");
         }
         int index = Integer.parseInt(super.input.substring(7)) - 1;
         Task taskDeleted = tasks.getTask(index);
         tasks.removeTask(index);
-        ui.printMessage(MESSAGE_SUCCESS + taskDeleted);
         storage.save(tasks);
+        return ui.printMessage(MESSAGE_SUCCESS + taskDeleted);
     }
 
     @Override

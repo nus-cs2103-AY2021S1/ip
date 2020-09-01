@@ -29,17 +29,17 @@ public class DoneCommand extends Command {
      * @throws InvalidFileException failed to save file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 4) {
-            throw new InvalidInputException
-                    ("☹ OOPS!!! Please choose a task to be completed.");
+            throw new InvalidInputException(
+                    "☹ OOPS!!! Please choose a task to be completed.");
         }
         int index = Integer.parseInt(super.input.substring(5)) - 1;
         Task taskDone = tasks.getTask(index);
         tasks.markAsDone(index);
-        ui.printMessage(MESSAGE_SUCCESS + taskDone);
         storage.save(tasks);
+        return ui.printMessage(MESSAGE_SUCCESS + taskDone);
     }
 
     @Override
