@@ -46,7 +46,7 @@ public class Storage {
                 try {
                     list.add(Task.parse(str));
                 } catch (DukeException de) {
-                    System.out.println("    Error: "+ de.getMessage());
+                    System.out.println("    Error: " + de.getMessage());
                 }
             });
         } catch (FileNotFoundException e) {

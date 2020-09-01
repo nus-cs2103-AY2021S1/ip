@@ -1,9 +1,11 @@
 package duke.resource;
 
-import duke.task.ToDo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.task.ToDo;
+
 
 public class TaskListTest {
 
@@ -12,7 +14,7 @@ public class TaskListTest {
         var list = new TaskList();
         list.addTask(new ToDo("placeholder", false));
         assertEquals(list.size(), 1);
-        assertEquals(list.getTask(1).toString(), "[T][✘] placeholder");
+        assertEquals(list.getTask(1).toString(), "[T][\u2718] placeholder");
     }
 
     @Test
@@ -20,7 +22,7 @@ public class TaskListTest {
         var list = new TaskList();
         list.addTask(new ToDo("placeholder", false));
         list.completeTask(1);
-        assertEquals(list.getTask(1).toString(), "[T][✓] placeholder");
+        assertEquals(list.getTask(1).toString(), "[T][\u2713] placeholder");
     }
 
     @Test

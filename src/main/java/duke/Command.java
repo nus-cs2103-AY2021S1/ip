@@ -2,6 +2,7 @@ package duke;
 
 import java.time.format.DateTimeParseException;
 import java.util.List;
+
 import duke.resource.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -51,7 +52,7 @@ public class Command {
         case "done": {
             int index;
             if (input.length == 1) {
-            throw new DukeException("    Please select a task to mark as completed!");
+                throw new DukeException("    Please select a task to mark as completed!");
             }
             try {
                 index = Integer.parseInt(input[1]);
@@ -132,8 +133,8 @@ public class Command {
                 storage.save(tasks);
             } catch (DateTimeParseException e) {
                 throw new DukeException(
-                        "    Error: Please use the following format instead:\n" +
-                        "        dd-MM-yyyy HHmm");
+                        "    Error: Please use the following format instead:\n"
+                                + "        dd-MM-yyyy HHmm");
             }
             break;
         }
@@ -169,8 +170,8 @@ public class Command {
                 storage.save(tasks);
             } catch (DateTimeParseException e) {
                 throw new DukeException(
-                        "    Error: Please use the following format instead:\n" +
-                        "        dd-MM-yyyy HHmm");
+                        "    Error: Please use the following format instead:\n"
+                                + "        dd-MM-yyyy HHmm");
             }
             break;
         }
@@ -192,7 +193,7 @@ public class Command {
         }
         default:
             throw new DukeException("    I'm sorry, but I don't know what that means :-(");
-    }
+        }
     }
 
     public boolean shouldExit() {
