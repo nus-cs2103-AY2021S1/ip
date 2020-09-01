@@ -11,14 +11,14 @@ public class Duke {
     }
 
     public Duke(String filepath) {
-        ui = new Ui();
-        storage = new Storage(filepath);
+        this.ui = new Ui();
+        this.storage = new Storage(filepath);
         try {
-            tasks = new TaskList(storage.load());
+            this.tasks = new TaskList(storage.loadFile());
         } catch (FileNotFoundException | DukeException e) {
             ui.getError(e);
             ui.say("It seems like you have no saved files! Creating one now...");
-            tasks = new TaskList();
+            this.tasks = new TaskList();
         }
     }
 
@@ -26,9 +26,9 @@ public class Duke {
         ui.greet();
         boolean isBye = false;
         while (!isBye) {
-            String input = ui.receive();
+            String input = ui.receiveInput();
             try {
-                Parser.process(input, ui, tasks, storage);
+                Parser.parseInput(input, ui, tasks, storage);
             } catch (DukeException | IOException e) {
                 ui.getError(e);
             } finally {

@@ -7,7 +7,7 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    public String receive() {
+    public String receiveInput() {
         String input = scanner.nextLine();
         return input;
     }

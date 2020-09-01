@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Parser {
 
-    public static void process(String input, Ui ui, TaskList tasks, Storage storage) throws DukeException, IOException {
+    public static void parseInput(String input, Ui ui, TaskList tasks, Storage storage) throws DukeException, IOException {
         String[] parsed = input.split(" ", 2);
         String keyword = parsed[0];
         String body = "";
@@ -17,14 +17,14 @@ public class Parser {
             break;
         case "done":
             if (isValidSize(body, tasks)) {
-                tasks.done(getNumber(body), ui);
+                tasks.markTaskDone(getNumber(body), ui);
             } else {
                 throw new DukeException("Invalid number");
             }
             break;
         case "delete":
             if (isValidSize(body, tasks)) {
-                tasks.delete(getNumber(body), ui);
+                tasks.deleteTask(getNumber(body), ui);
             } else {
                 throw new DukeException("Invalid number");
             }
@@ -38,14 +38,14 @@ public class Parser {
             break;
         case "deadline":
             if (isValidDFormat(body)) {
-                tasks.addTask(new Deadline(desc(body), deadline(body)), ui);
+                tasks.addTask(new Deadline(getDescription(body), getDeadline(body)), ui);
             } else {
                 throw new DukeException("Invalid task format");
             }
             break;
         case "event":
             if (isValidEFormat(body)) {
-                tasks.addTask(new Event(desc(body), eventTime(body)), ui);
+                tasks.addTask(new Event(getDescription(body), getEventTime(body)), ui);
             } else {
                 throw new DukeException("Invalid task format");
             }
@@ -57,7 +57,7 @@ public class Parser {
         default:
             throw new DukeException("Invalid command");
         }
-        storage.write(tasks);
+        storage.writeFile(tasks);
     }
 
     private static boolean isValidSize(String body, TaskList tasks) {
@@ -65,7 +65,7 @@ public class Parser {
             String num = body;
             try {
                 int number = Integer.parseInt(num);
-                return tasks.size() >= number && number > 0;
+                return tasks.getListSize() >= number && number > 0;
             } catch (NumberFormatException e) {
                 return false;
             }
@@ -79,7 +79,7 @@ public class Parser {
         return Integer.parseInt(num);
     }
 
-    private static String desc(String body) {
+    private static String getDescription(String body) {
         return body.split(" /", 2)[0];
     }
 
@@ -91,7 +91,7 @@ public class Parser {
         return body.split(" /by ", 2).length == 2;
     }
 
-    private static String deadline(String body) {
+    private static String getDeadline(String body) {
         String time = body.split(" /by ", 2)[1];
         if (time.equals("now")) {
             return LocalDate.now().format(DateTimeFormatter.ofPattern("d MMM yyyy"));
@@ -104,7 +104,7 @@ public class Parser {
         return body.split(" /at ", 2).length == 2;
     }
 
-    private static String eventTime(String body) {
+    private static String getEventTime(String body) {
         String time = body.split(" /at ", 2)[1];
         if (time.equals("now")) {
             return LocalDate.now().format(DateTimeFormatter.ofPattern("d MMM yyyy"));

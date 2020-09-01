@@ -13,7 +13,7 @@ public class Storage {
         file = new File(filepath);
     }
 
-    public ArrayList<Task> load() throws FileNotFoundException, DukeException {
+    public ArrayList<Task> loadFile() throws FileNotFoundException, DukeException {
         if (file.exists()) {
             Scanner scanner = new Scanner(file);
             ArrayList<Task> tasks = new ArrayList<>();
@@ -26,7 +26,7 @@ public class Storage {
         }
     }
 
-    public void write(TaskList tasks) throws IOException {
+    public void writeFile(TaskList tasks) throws IOException {
         FileWriter writer = new FileWriter(file);
         writer.write(tasks.toString());
         writer.close();

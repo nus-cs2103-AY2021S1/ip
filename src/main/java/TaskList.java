@@ -32,24 +32,24 @@ public class TaskList {
         }
     }
 
-    public void done(int number, Ui ui) {
+    public void markTaskDone(int number, Ui ui) {
         Task task = tasks.get(number - 1);
         task.markDone();
         ui.say("I have marked it as done!");
         System.out.println(task);
     }
 
-    public void delete(int number, Ui ui) {
+    public void deleteTask(int number, Ui ui) {
         Task task = tasks.get(number - 1);
         tasks.remove(number - 1);
         ui.say("I have deleted this task!");
         System.out.println(task);
-        ui.say("You have " + size() + " items in your task list now.");
+        ui.say("You have " + getListSize() + " items in your task list now.");
     }
 
     public void addTask(Task task, Ui ui) {
         tasks.add(task);
-        ui.say("You have " + size() + " items in your task list now.");
+        ui.say("You have " + getListSize() + " items in your task list now.");
     }
 
     public void findTask(String body, Ui ui) {
@@ -68,7 +68,7 @@ public class TaskList {
         }
     }
 
-    public int size() {
+    public int getListSize() {
         return tasks.size();
     }
 }
