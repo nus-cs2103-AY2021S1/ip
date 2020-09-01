@@ -48,12 +48,12 @@ public class Storage {
      * @return A TaskList that is loaded with the tasks recorded on the txt file
      */
     public ArrayList<Task> loadFile() {
-        ArrayList<Task> shelf = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         while (lineReader.hasNextLine()) {
             String data = lineReader.nextLine();
-            shelf.add(taskCreator(data));
+            tasks.add(taskCreator(data));
         }
-        return shelf;
+        return tasks;
     }
 
     /**

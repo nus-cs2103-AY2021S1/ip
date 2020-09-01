@@ -14,15 +14,15 @@ public class TaskList {
     /**
      * The arraylist that is used to store the tasks
      */
-    private final ArrayList<Task> shelf;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor for the TaskList object.
      *
-     * @param shelf An ArrayList that encapsulates Tasks objects
+     * @param tasks An ArrayList that encapsulates Tasks objects
      */
-    public TaskList(ArrayList<Task> shelf) {
-        this.shelf = shelf;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -32,7 +32,7 @@ public class TaskList {
      * @return Returns the Task that is gotten from the arraylist
      */
     public Task getTask(int index) {
-        return this.shelf.get(index);
+        return this.tasks.get(index);
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList {
      * @param task Task object to be added to the arraylist
      */
     public void addTask(Task task) {
-        this.shelf.add(task);
+        this.tasks.add(task);
     }
 
     /**
@@ -52,10 +52,10 @@ public class TaskList {
      * @throws DukeTaskNonExistException if the index provided is out of range of the arraylist
      */
     public Task completeTask(int index) throws DukeTaskNonExistException {
-        if (index < 0 | index >= shelf.size()) {
+        if (index < 0 | index >= tasks.size()) {
             throw new DukeTaskNonExistException("error");
         }
-        Task book = this.shelf.get(index);
+        Task book = this.tasks.get(index);
         book.complete();
         return book;
     }
@@ -67,7 +67,7 @@ public class TaskList {
      * @return the size of the arraylist
      */
     public int getSize() {
-        return this.shelf.size();
+        return this.tasks.size();
     }
 
     /**
@@ -75,7 +75,7 @@ public class TaskList {
      * id of the task. The first task would be id 1, second task would be id 2 and so on.
      */
     public String iterate() {
-        Iterator<Task> iter = shelf.iterator();
+        Iterator<Task> iter = tasks.iterator();
         StringBuilder sb = new StringBuilder("Here are the tasks in your list: ").append('\n');
         int counter = 1;
         while (iter.hasNext()) {
@@ -92,10 +92,10 @@ public class TaskList {
      * @throws DukeTaskNonExistException if the index provided is out of range of the arraylist
      */
     public void delete(int index) throws DukeTaskNonExistException {
-        if (index < 0 | index >= shelf.size()) {
+        if (index < 0 | index >= tasks.size()) {
             throw new DukeTaskNonExistException("error");
         }
-        this.shelf.remove(index);
+        this.tasks.remove(index);
     }
 
     /**
@@ -105,7 +105,7 @@ public class TaskList {
      * @param response The string that will be identified from the tasks
      */
     public String find(String response) {
-        Iterator<Task> iter = shelf.iterator();
+        Iterator<Task> iter = tasks.iterator();
         ArrayList<Task> temp = new ArrayList<>();
         while (iter.hasNext()) {
             Task book = iter.next();

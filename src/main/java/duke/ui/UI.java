@@ -19,17 +19,17 @@ public class UI {
      * Empty line to be printed after each command
      */
     private static final String LINE = "************************************\n";
-    private final TaskList shelf;
+    private final TaskList taskList;
     private final Storage storage;
 
     /**
      * Constructor for the UI object
      *
-     * @param shelf   Tasklist
+     * @param taskList   Tasklist
      * @param storage Storage
      */
-    public UI(TaskList shelf, Storage storage) {
-        this.shelf = shelf;
+    public UI(TaskList taskList, Storage storage) {
+        this.taskList = taskList;
         this.storage = storage;
     }
 
@@ -65,7 +65,7 @@ public class UI {
      * of where the task is on the Tasklist.
      */
     public String replyList() {
-        return shelf.iterate();
+        return taskList.iterate();
     }
 
     /**
@@ -74,7 +74,7 @@ public class UI {
      * @param response Input from the user
      */
     public String replyFind(String response) {
-        return shelf.find(response);
+        return taskList.find(response);
     }
 
 
@@ -88,9 +88,9 @@ public class UI {
      */
     public String replyDelete(int index) throws IOException, DukeTaskNonExistException {
         StringBuilder sb = new StringBuilder("Noted. I've removed this task: ").append('\n');
-        shelf.delete(index);
-        storage.updateFile(shelf);
-        sb.append("Now you have ").append(shelf.getSize()).append(" in the list.");
+        taskList.delete(index);
+        storage.updateFile(taskList);
+        sb.append("Now you have ").append(taskList.getSize()).append(" in the list.");
         return sb.toString();
     }
 
@@ -103,12 +103,12 @@ public class UI {
      * @throws IOException               if there is an error while updating the txt file
      */
     public String replyDone(int index) throws DukeTaskNonExistException, IOException {
-        if (index >= shelf.getSize() || index < 0) {
+        if (index >= taskList.getSize() || index < 0) {
             throw new DukeTaskNonExistException("error");
         }
         StringBuilder sb = new StringBuilder("Nice! I've marked this task as done: ").append('\n');
-        Task book = shelf.completeTask(index);
-        storage.updateFile(shelf);
+        Task book = taskList.completeTask(index);
+        storage.updateFile(taskList);
         sb.append(book.toString());
         return sb.toString();
     }
@@ -123,11 +123,11 @@ public class UI {
      */
     public String addTodo(String response) throws IOException {
         Task book = new ToDo(response, LocalDateTime.now());
-        shelf.addTask(book);
-        storage.updateFile(shelf);
+        taskList.addTask(book);
+        storage.updateFile(taskList);
         return "Got it. I've added this task: " + '\n'
                 + "  " + book + '\n'
-                + "Now you have " + shelf.getSize() + " tasks in the list.";
+                + "Now you have " + taskList.getSize() + " tasks in the list.";
     }
 
     /**
@@ -141,11 +141,11 @@ public class UI {
      */
     public String addDeadline(String response, String duedate) throws IOException {
         Task book = new Deadline(response, LocalDateTime.now(), duedate);
-        shelf.addTask(book);
-        storage.updateFile(shelf);
+        taskList.addTask(book);
+        storage.updateFile(taskList);
         return "Got it. I've added this task: " + '\n'
                 + "  " + book + '\n'
-                + "Now you have " + shelf.getSize() + " tasks in the list.";
+                + "Now you have " + taskList.getSize() + " tasks in the list.";
     }
 
     /**
@@ -159,11 +159,11 @@ public class UI {
      */
     public String addEvent(String response, String duedate) throws IOException {
         Task book = new EventTask(response, LocalDateTime.now(), duedate);
-        shelf.addTask(book);
-        storage.updateFile(shelf);
+        taskList.addTask(book);
+        storage.updateFile(taskList);
         return "Got it. I've added this task: " + '\n'
                 + "  " + book + '\n'
-                + "Now you have " + shelf.getSize() + " tasks in the list.";
+                + "Now you have " + taskList.getSize() + " tasks in the list.";
     }
 
     /**

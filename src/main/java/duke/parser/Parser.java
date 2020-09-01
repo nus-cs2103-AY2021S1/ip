@@ -69,7 +69,7 @@ public class Parser {
      */
     public String listen(String response) {
         try {
-            int indexer;
+            int taskIndex;
             if (response.equals("bye")) {
                 return ui.replyBye();
             } else if (response.equals("list")) {
@@ -80,11 +80,11 @@ public class Parser {
                 }
                 return ui.replyFind(response.substring(5));
             } else if (response.indexOf("delete") == 0) {
-                indexer = Integer.parseInt(response.replaceAll("\\D+", "")) - 1;
-                return ui.replyDelete(indexer);
+                taskIndex = Integer.parseInt(response.replaceAll("\\D+", "")) - 1;
+                return ui.replyDelete(taskIndex);
             } else if (response.indexOf("done ") == 0) {
-                indexer = Integer.parseInt(response.replaceAll("\\D+", "")) - 1;
-                return ui.replyDone(indexer);
+                taskIndex = Integer.parseInt(response.replaceAll("\\D+", "")) - 1;
+                return ui.replyDone(taskIndex);
             } else if (response.indexOf("todo ") == 0) {
                 if (response.length() <= 5) {
                     throw new EmptyDescriptionException("todo");
