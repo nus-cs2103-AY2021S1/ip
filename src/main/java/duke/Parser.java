@@ -3,14 +3,13 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import task.Task;
-
 import exception.InvalidCommandException;
 import exception.MissingInfoException;
+
+import task.Task;
 
 /**
  * Parser deals with making sense of the user command.

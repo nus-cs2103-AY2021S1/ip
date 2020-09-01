@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import exception.MissingInfoException;
+
 import task.Task;
 import task.Event;
 import task.Deadline;
@@ -29,8 +31,8 @@ public class Storage {
      * @param taskList A TaskList with no tasks.
      * @throws IOException If file is not found or error reading file.
      */
-    public void load(TaskList taskList) throws IOException {
-        try{
+    public void load(TaskList taskList) throws IOException, MissingInfoException {
+        try {
             File directory = new File("data");
 
             if (!directory.exists()) {
@@ -58,9 +60,13 @@ public class Storage {
                     taskList.addTask(taskList.createTask(TaskType.TypeOfTask.EVENT, data[2],
                             LocalDateTime.parse(data[3]), data[1].equals("1") ? true : false));
                     break;
+                default:
+                    throw new MissingInfoException("There is something wrong with your database file...");
                 }
             }
         } catch (IOException e) {
+            throw e;
+        } catch (MissingInfoException e) {
             throw e;
         }
     }
@@ -71,7 +77,7 @@ public class Storage {
      * @param taskList The list of tasks to be saved.
      * @throws IOException If file is not found or error writing to file.
      */
-    public void save(TaskList taskList) throws IOException {
+    public void save(TaskList taskList) throws IOException, MissingInfoException {
         String taskString = "";
         ArrayList<Task> tasks = taskList.getTasks();
 
@@ -92,6 +98,8 @@ public class Storage {
                 taskString = taskString + "E";
                 timing = timing + ((Event) task).getTiming();
                 break;
+            default:
+                throw new MissingInfoException("Something wrong with your function parameter?");
             }
 
             taskString = taskString + " | " + (task.getStatus() ? "1" : "0") + " | " + task.getTaskDescription()
