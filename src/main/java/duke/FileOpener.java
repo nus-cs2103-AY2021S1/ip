@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class FileOpener {
     public static File openFile(String path) {
-        File prev_tasks = new File("prev_tasks.txt");
+        File prev_tasks = new File(path);
         try {
             if (!prev_tasks.exists()) {
                 prev_tasks.createNewFile();
