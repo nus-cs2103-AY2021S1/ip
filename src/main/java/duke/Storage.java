@@ -24,6 +24,7 @@ public class Storage {
 
     /**
      * Constructor that creates a Storage object.
+     *
      * @param filePath the filepath task sessions will be saved in
      */
 
@@ -34,6 +35,7 @@ public class Storage {
     /**
      * Reads the save file and returns the List of Tasks in it. Throws a DukeException
      * if the file is not found and proceeds to create one, or if a file cannot be created.
+     *
      * @return a List of Tasks in the save file
      * @throws DukeException thrown if a save file is not found or cannot be created
      */

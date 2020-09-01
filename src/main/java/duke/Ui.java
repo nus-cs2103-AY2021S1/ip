@@ -30,10 +30,11 @@ public class Ui {
     /**
      * Prints to user if the given save file has loaded successfully and the tasks found
      * in the save file.
+     *
      * @param tasks a TaskList containing the tasks in the save file
      */
 
-    public void loaded(TaskList tasks) {
+    public void printLoaded(TaskList tasks) {
         System.out.println(
                 "    A save file has been found and loaded!\n"
                         + "    Your current tasks are: ");
@@ -51,6 +52,7 @@ public class Ui {
     /**
      * Prints to user if a Task has successfully been added to the TaskList and
      * the current number of Tasks in it.
+     *
      * @param tasks the TaskList associated with the current Duke object.
      * @param task the Task that was added to the TaskList.
      */
@@ -77,6 +79,7 @@ public class Ui {
 
     /**
      * Prints to user if a Task has been marked as complete.
+     *
      * @param task the Task that was marked as complete.
      */
 
@@ -90,6 +93,7 @@ public class Ui {
     /**
      * Prints to user if a Task has successfully been deleted from the TaskList and
      * the current number of Tasks in it.
+     *
      * @param tasks the TaskList associated with the current Duke object.
      * @param task the Task that was deleted from the TaskList.
      */
@@ -107,6 +111,7 @@ public class Ui {
     /**
      * Prints to user if a DukeException has been caught, printing the corresponding
      * error message.
+     *
      * @param e a DukeException containing the error message
      */
 
@@ -117,6 +122,7 @@ public class Ui {
 
     /**
      * Prints to user a list of matching Tasks given a keyword to search for
+     *
      * @param list a list of matching Tasks
      */
 
@@ -131,6 +137,7 @@ public class Ui {
 
     /**
      * Prints to user the current Tasks found in the TaskList.
+     *
      * @param list the TaskList associated with the current Duke object
      */
 
@@ -145,6 +152,7 @@ public class Ui {
 
     /**
      * Reads and returns the next line of user input.
+     *
      * @return the next line of user input
      */
 

@@ -22,6 +22,7 @@ public class Command {
 
     /**
      * Constructor that creates a Command object.
+     *
      * @param input command string that has been split
      */
 
@@ -32,6 +33,7 @@ public class Command {
     /**
      * Evaluates the syntax of the input command and executes it, throwing
      * a DukeException if the syntax is incorrect.
+     *
      * @param tasks the TaskList object associated with the current Duke object
      * @param ui the Ui object associated with the current Duke object
      * @param storage the Storage object associated with the current Duke object
@@ -40,7 +42,7 @@ public class Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeException {
-        switch(input[0]) {
+        switch (input[0]) {
         case "bye":
             ui.printBye();
             this.shouldExit = true;

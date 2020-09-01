@@ -16,10 +16,12 @@ public class Deadline extends Task {
      * Constructor that creates a Deadline object that has a description of the
      * task, the date and time of the deadline, and whether the task has been
      * completed.
+     *
      * @param description a String representing the description of the task
      * @param deadline a LocalDateTime representing the date and time of the deadline
      * @param isDone a boolean representing whether the task has been completed
-     * @throws DateTimeParseException
+     * @throws DateTimeParseException exception thrown if input date was not
+     *                                correctly formatted
      */
 
     public Deadline(String description, String deadline, boolean isDone)
@@ -32,6 +34,7 @@ public class Deadline extends Task {
     /**
      * Returns a String formatted to how an Deadline should be saved in the associated
      * save file.
+     *
      * @return a formatted String to be written to the save file
      */
 

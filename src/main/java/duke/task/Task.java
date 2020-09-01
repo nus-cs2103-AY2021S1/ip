@@ -18,6 +18,7 @@ public abstract class Task {
      * task, a tag representing the type of task, and whether the task has been
      * completed. Protected so only subclasses of Task can access and create a
      * Task object, to prevent any instances from being directly created.
+     *
      * @param description a String representing the description of the task
      * @param tag a String representing the type of task
      * @param isDone a boolean representing whether the task has been completed
@@ -49,6 +50,7 @@ public abstract class Task {
      * Parses a string that has been validated to contain the necessary information,
      * then returning a Task matching the information. Throws an exception if the tag
      * given is incorrect, or if too few arguments are given.
+     *
      * @param str a String containing the necessary information to create a Task
      * @return a Task object with the information stated in the String
      * @throws DukeException thrown if the tag given is incorrect, or if too few arguments
@@ -77,6 +79,7 @@ public abstract class Task {
     /**
      * Returns a String formatted to how an Deadline should be saved in the associated
      * save file.
+     *
      * @return a formatted String to be written to the save file
      */
 

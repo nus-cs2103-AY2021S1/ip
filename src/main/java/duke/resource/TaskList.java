@@ -27,6 +27,7 @@ public class TaskList {
     /**
      * Overloaded constructor that takes in a List of Tasks and creates a TaskList object
      * and populates it with the Tasks in the List.
+     *
      * @param tasks a List containing Tasks to store in the TaskList
      */
 
@@ -36,6 +37,7 @@ public class TaskList {
 
     /**
      * Adds a Task to the TaskList.
+     *
      * @param task the Task to be added.
      */
 
@@ -45,6 +47,7 @@ public class TaskList {
 
     /**
      * Completes a Task in the TaskList.
+     *
      * @param index the index of the Task to be completed.
      */
 
@@ -54,6 +57,7 @@ public class TaskList {
 
     /**
      * Deletes a Task in the TaskList.
+     *
      * @param index the index of the Task to be deleted.
      */
 
@@ -63,6 +67,7 @@ public class TaskList {
 
     /**
      * Retrieves a Task in the TaskList.
+     *
      * @param index the index of the Task to be retrieved.
      * @return the Task retrieved at the associated index.
      */
@@ -73,6 +78,7 @@ public class TaskList {
 
     /**
      * Parses a given List of Tasks, returning a TaskList containing the Tasks found.
+     *
      * @param tasks the List of Tasks to parse
      * @return a TaskList object containing the Tasks in the List
      */
@@ -83,6 +89,7 @@ public class TaskList {
 
     /**
      * Returns a List of Tasks with descriptions that match the given keyword.
+     *
      * @param keyword a String representing the keyword to search for
      * @return a List of Tasks with descriptions that match the given keyword
      */
@@ -96,6 +103,7 @@ public class TaskList {
 
     /**
      * Returns a Stream of the Tasks in the TaskList.
+     *
      * @return a Stream of the Tasks in the TaskList
      */
 
@@ -105,6 +113,7 @@ public class TaskList {
 
     /**
      * Returns the number of Tasks in the TaskList.
+     * ß
      * @return the number of Tasks in the TaskList
      */
 

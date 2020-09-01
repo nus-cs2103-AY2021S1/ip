@@ -17,6 +17,7 @@ public class Duke {
 
     /**
      * Constructor that creates a Duke object.
+     *
      * @param filePath the filepath task sessions will be saved in
      */
 
@@ -26,7 +27,7 @@ public class Duke {
         ui.welcome();
         try {
             tasks = TaskList.parse(this.storage.load());
-            ui.loaded(tasks);
+            ui.printLoaded(tasks);
         } catch (DukeException e) {
             ui.printError(e);
         }
@@ -53,6 +54,7 @@ public class Duke {
 
     /**
      * Creates a new Duke object and runs it, starting the entire chat-bot.
+     *
      * @param args input arguments for main; unused
      */
 

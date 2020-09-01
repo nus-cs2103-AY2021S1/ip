@@ -16,10 +16,12 @@ public class Event extends Task {
      * Constructor that creates an Event object that has a description of the
      * task, the date and time of the event, and whether the task has been
      * completed.
+     *
      * @param description a String representing the description of the task
      * @param time a LocalDateTime representing the date and time of the event
      * @param isDone a boolean representing whether the task has been completed
-     * @throws DateTimeParseException
+     * @throws DateTimeParseException exception thrown if input date was not
+     *                                correctly formatted
      */
 
     public Event(String description, String time, boolean isDone)
@@ -32,6 +34,7 @@ public class Event extends Task {
     /**
      * Returns a String formatted to how an Event should be saved in the associated
      * save file.
+     *
      * @return a formatted String to be written to the save file
      */
 
