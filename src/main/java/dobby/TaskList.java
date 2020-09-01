@@ -4,11 +4,12 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
 import dobby.task.Deadline;
 import dobby.task.Event;
 import dobby.task.Task;
-import dobby.task.Todo;
 import dobby.task.TimedTask;
+import dobby.task.Todo;
 
 /**
  * Stores the tasks and performs operations or returns details depending on function called
@@ -22,8 +23,6 @@ public class TaskList {
 
     /**
      * Create task with details from the input string and add to the tasks list
-     * @param
-     * @return
      */
     public void createFromStorage(String str) throws ParseException {
         boolean isDone = str.charAt(4) == '\u2713';
@@ -67,7 +66,7 @@ public class TaskList {
     }
 
     public void addToList(Task task) {
-        (this.tasks).add(task);
+        this.tasks.add(task);
     }
 
     /**
@@ -76,17 +75,17 @@ public class TaskList {
      */
     public String getListedTasks() {
         int i = 0;
-        String all_tasks = "\n    ";
+        String allTasks = "\n    ";
         for (Task task : (this.tasks)) {
             i++;
-            all_tasks = all_tasks + i + ". " + task.getDescription() + "\n    ";
+            allTasks = allTasks + i + ". " + task.getDescription() + "\n    ";
         }
 
         if (i == 0) {
-            all_tasks = all_tasks + "The task list is currently empty.\n    ";
+            allTasks = allTasks + "The task list is currently empty.\n    ";
         }
 
-        return all_tasks;
+        return allTasks;
     }
 
     /**
@@ -101,7 +100,7 @@ public class TaskList {
         int counter = 0;
         for (Task task: tasks) {
             if (task instanceof TimedTask) {
-                TimedTask timedTask = (TimedTask)task;
+                TimedTask timedTask = (TimedTask) task;
                 if (date.equals(timedTask.getDate())) {
                     message = message + String.format("%d. %s\n    ", ++counter, timedTask.getDescription());
                 }
@@ -122,13 +121,13 @@ public class TaskList {
         int counter = 0;
         for (Task task: this.tasks) {
             if ((task.getTag()).equals("[" + type + "]")) {
-                message = message +
-                        String.format("%d. %s\n    ", ++counter, task.getDescription());
+                message = message
+                        + String.format("%d. %s\n    ", ++counter, task.getDescription());
             }
         }
 
         if (counter == 0) {
-            message =  message + "There are no tasks of type " + type + "\n    ";
+            message = message + "There are no tasks of type " + type + "\n    ";
         }
 
         return message;
@@ -145,8 +144,8 @@ public class TaskList {
         int counter = 0;
         for (Task task: this.tasks) {
             if ((task.getDescription()).indexOf(keyword) >= 0) {
-                message = message +
-                        String.format("%d. %s\n    ", ++counter, task.getDescription());
+                message = message
+                        + String.format("%d. %s\n    ", ++counter, task.getDescription());
             }
         }
 
@@ -164,4 +163,4 @@ public class TaskList {
     public void removeTask(int index) {
         this.tasks.remove(index);
     }
- }
+}

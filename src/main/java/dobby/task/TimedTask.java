@@ -11,6 +11,12 @@ public class TimedTask extends Task {
     private final String time;
     private final String tag;
 
+    /**
+     * Constructor used for tasks input by user
+     * @param description
+     * @param time
+     * @param tag
+     */
     public TimedTask(String description, String time, String tag) {
         super(description, tag);
         String dt = "";
@@ -28,6 +34,13 @@ public class TimedTask extends Task {
         this.tag = tag;
     }
 
+    /**
+     * Constructor used for tasks read from storage
+     * @param description
+     * @param time
+     * @param date
+     * @param tag
+     */
     public TimedTask(String description, String time, LocalDate date, String tag) {
         super(description, tag);
         this.time = time;
@@ -101,14 +114,13 @@ public class TimedTask extends Task {
 
     /**
      * Returns a string to compare scheduling of Task object
-     * @param
      * @return schedule string to indicate scheduling details
      */
     public String getSchedule() {
         String timeTag = "";
         if (super.getTag() == "[D]") {
             timeTag = "(by: ";
-        } else if (super.getTag() == "[E]"){
+        } else if (super.getTag() == "[E]") {
             timeTag = "(at: ";
         }
 

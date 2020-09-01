@@ -4,10 +4,10 @@ package dobby.task;
  * Class for todo tasks
  */
 public class Todo extends Task {
-    private final String TAG = "[T]";
+    private static final String TAG = "[T]";
 
     public Todo(String description) {
-        super(description, "[T]");
+        super(description, TAG);
     }
 
     @Override
