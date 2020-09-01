@@ -4,6 +4,14 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Represents a storage class that allows data to be stored and
+ * retrieved in/from a local file.
+ *
+ * @author Siqi
+ * @version 1.0
+ * @since 2020-08-25
+ */
 public class Storage {
     private String filePath;
 
@@ -11,6 +19,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * This method loads the data from a local file and returns it in TaskList
+     * @return This returns a TaskList that contains the data loaded from the file.
+     * @throws DukeException When there is a problem finding/creating the file.
+     */
     public TaskList load() throws DukeException {
         File directory = new File("data/");
         if (!directory.exists()){
@@ -44,6 +57,11 @@ public class Storage {
         }
     }
 
+    /**
+     * This method saves data from the program into a local file.
+     * @param listToAdd         This is the task list to be saved.
+     * @throws DukeException    When there is a problem writing to the local file.
+     */
     public void write(TaskList listToAdd) throws DukeException {
         try {
             FileWriter resetfw = new FileWriter(this.filePath);

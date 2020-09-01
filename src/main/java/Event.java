@@ -1,6 +1,13 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event task.
+ *
+ * @author Siqi
+ * @version 1.0
+ * @since 2020-08-25
+ */
 public class Event extends Task {
     protected LocalDate at;
     protected String time;
@@ -28,6 +35,10 @@ public class Event extends Task {
         this.time = time;
     }
 
+    /**
+     * This method formats the task for display to the user.
+     * @return This returns a string containing the task details.
+     */
     public String display() {
         if (time == null || time.isEmpty()) {
             return "[E]" + super.toString() + " (at: "
