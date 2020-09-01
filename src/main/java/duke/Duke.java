@@ -100,7 +100,6 @@ public class Duke extends Application {
         try {
             Storage storage = new Storage();
             TaskList taskList = TaskList.initialiseTaskList(storage);
-            CommandParser parser = new CommandParser();
 
             Scanner scanner = new Scanner(System.in);
             Ui.welcomeMessage();
@@ -109,7 +108,7 @@ public class Duke extends Application {
             while (!isExit) {
                 try {
                     String userCommand = scanner.nextLine();
-                    Command parsedCommand = parser.parseCommand(userCommand);
+                    Command parsedCommand = CommandParser.parseCommand(userCommand);
                     parsedCommand.execute(taskList, storage);
                     isExit = parsedCommand.isExit();
                 } catch (DukeException e) {
