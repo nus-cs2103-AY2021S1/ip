@@ -1,7 +1,7 @@
 package duke;
 
 class Event extends Task {
-    static String SYMBOL = "[E]";
+    private static String SYMBOL = "[E]";
 
     private String details;
 
