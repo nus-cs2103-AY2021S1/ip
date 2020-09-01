@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -23,16 +25,14 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-
-    public Duke() {
-
-    }
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Creates the Duke object.
-     * @param filePath File Path for the saved tasks.
      */
-    public Duke(String filePath) {
+    public Duke() {
+        String filePath = "data/duke.TaskList.txt";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -47,39 +47,37 @@ public class Duke extends Application {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("data/duke.TaskList.txt").run();
-    }
-
-    public void run() {
-        ui.printGreetings();
-
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.readInputs();
-                Command command = Parser.parse(input);
-                command.execute(ui, tasks, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.printError(e.getMessage());
-            }
-        }
-
-        ui.close();
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
+     * Returns a response to be displayed.
+     * @param input User input string.
+     * @return The response.
      */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
+    private String getResponse(String input) {
+        boolean isExit = false;
+        String output = null;
+        try {
+            Command command = Parser.parse(input);
+            output = command.execute(ui, tasks, storage);
+            isExit = command.isExit();
+        } catch (DukeException e) {
+            output = ui.printError(e.getMessage());
+        }
+        return output;
     }
 
 
@@ -104,11 +102,11 @@ public class Duke extends Application {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinWidth(500.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(500.0, 600.0);
 
-        scrollPane.setPrefSize(400, 550);
+        scrollPane.setPrefSize(500, 550);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -117,7 +115,7 @@ public class Duke extends Application {
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(345.0);
+        userInput.setPrefWidth(445.0);
 
         sendButton.setPrefWidth(55.0);
 
@@ -129,19 +127,22 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        // print greetings
+        Label greetings = new Label(ui.printGreetings());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greetings, new ImageView(duke))
+        );
+
         // handle user input
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
 
     }
 }

@@ -23,50 +23,44 @@ public class Command {
         return isExit;
     }
 
-    public void execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
+    public String execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
         switch (commandType) {
         case BYE:
-            ui.printBye();
             isExit = true;
-            return;
+            return ui.printBye();
         case HELP:
-            ui.printHelp();
-            break;
+            return ui.printHelp();
         case LIST:
-            ui.showList(tasks);
-            break;
+            return ui.showList(tasks);
         case DONE:
             if (inputs.length <= 1) {
                 throw new DukeException("OOPS! duke.Task number cannot be empty for done action!");
             }
             try {
                 Task doneTask = tasks.markTaskAsDone(Integer.parseInt(inputs[1]));
-                ui.showMarkedAsDone(doneTask);
                 storage.saveTaskListToFile(tasks);
+                return ui.showMarkedAsDone(doneTask);
             } catch (NumberFormatException | IndexOutOfBoundsException ex) {
                 throw new DukeException("OOPS! duke.Task number is invalid!");
             }
-            break;
         case DELETE:
             if (inputs.length <= 1) {
                 throw new DukeException("OOPS! duke.Task number cannot be empty for delete action!");
             }
             try {
                 Task deleteTask = tasks.deleteTask(Integer.parseInt(inputs[1]));
-                ui.showDeletedTask(deleteTask, tasks);
                 storage.saveTaskListToFile(tasks);
+                return ui.showDeletedTask(deleteTask, tasks);
             } catch (NumberFormatException | IndexOutOfBoundsException ex) {
                 throw new DukeException("OOPS! duke.Task number is invalid!");
             }
-            break;
         case TODO:
             if (inputs.length <= 1) {
                 throw new DukeException("OOPS! The description of a todo cannot be empty!");
             }
             Task addedToDo = tasks.addTask(new ToDo(inputs[1]));
-            ui.showAddedTask(addedToDo, tasks);
             storage.saveTaskListToFile(tasks);
-            break;
+            return ui.showAddedTask(addedToDo, tasks);
         case DEADLINE:
             if (inputs.length <= 1) {
                 throw new DukeException("OOPS! The description of a deadline cannot be empty!");
@@ -76,9 +70,8 @@ public class Command {
                 throw new DukeException("OOPS! The date of a deadline cannot be empty!");
             }
             Task addedDeadline = tasks.addTask(new Deadline(deadlineDetails[0], deadlineDetails[1]));
-            ui.showAddedTask(addedDeadline, tasks);
             storage.saveTaskListToFile(tasks);
-            break;
+            return ui.showAddedTask(addedDeadline, tasks);
         case EVENT:
             if (inputs.length <= 1) {
                 throw new DukeException("OOPS! The description of an event cannot be empty!");
@@ -88,15 +81,13 @@ public class Command {
                 throw new DukeException("OOPS! The time of an event cannot be empty!");
             }
             Task addedEvent = tasks.addTask(new Event(eventDetails[0], eventDetails[1]));
-            ui.showAddedTask(addedEvent, tasks);
             storage.saveTaskListToFile(tasks);
-            break;
+            return ui.showAddedTask(addedEvent, tasks);
         case FIND:
             if (inputs.length <= 1) {
                 throw new DukeException("OOPS! The keyword for search cannot be empty!");
             }
-            ui.showMatchingTasks(tasks, inputs[1]);
-            break;
+            return ui.showMatchingTasks(tasks, inputs[1]);
         default:
             throw new DukeException("OOPS! I'm sorry, but I don't know what that means :-(");
         }
