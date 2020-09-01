@@ -1,10 +1,10 @@
 package duke;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.BufferedReader;
 import java.util.ArrayList;
 
 /**
@@ -25,7 +25,7 @@ public class Storage {
     /**
      * Loads the user's task list from the file.
      *
-     * @return An ArrayList<Task> of the task list.
+     * @return An ArrayList of the task list.
      */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -50,6 +50,8 @@ public class Storage {
                         break;
                     case "E":
                         Events.loadEventTask(lineSegment[2], lineSegment[3], isDone, tasks);
+                        break;
+                    default:
                         break;
                     }
                     lineData = bufferedReader.readLine();
