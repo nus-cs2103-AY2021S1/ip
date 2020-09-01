@@ -1,9 +1,9 @@
 package tasks;
 
-import exceptions.DukeIOException;
-import utils.Storage;
-
 import java.util.ArrayList;
+
+import exceptions.DukeIoException;
+import utils.Storage;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -21,17 +21,17 @@ public class TaskList {
         return tasks.get(index);
     }
 
-    public void add(Task task) throws DukeIOException {
+    public void add(Task task) throws DukeIoException {
         tasks.add(task);
         notifyObserver();
     }
 
-    public void markAsDone(int index) throws DukeIOException {
+    public void markAsDone(int index) throws DukeIoException {
         tasks.get(index).markAsDone();
         notifyObserver();
     }
 
-    public Task remove(int index) throws DukeIOException {
+    public Task remove(int index) throws DukeIoException {
         Task task = tasks.remove(index);
         notifyObserver();
         return task;
@@ -41,7 +41,7 @@ public class TaskList {
         this.storageObserver = storage;
     }
 
-    private void notifyObserver() throws DukeIOException {
+    private void notifyObserver() throws DukeIoException {
         storageObserver.save(tasks);
     }
 

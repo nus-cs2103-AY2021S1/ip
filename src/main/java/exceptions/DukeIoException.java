@@ -1,11 +1,11 @@
 package exceptions;
 
 
-public class DukeIOException extends DukeException {
+public class DukeIoException extends DukeException {
 
     private final String path;
 
-    public DukeIOException(String message,String path) {
+    public DukeIoException(String message, String path) {
         super(message);
         this.path = path;
     }

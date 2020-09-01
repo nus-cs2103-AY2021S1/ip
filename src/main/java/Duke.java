@@ -1,11 +1,14 @@
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import commands.Command;
-import exceptions.*;
+import exceptions.DukeException;
+import exceptions.DukeIoException;
+import tasks.TaskList;
 import utils.Parser;
 import utils.Storage;
-import tasks.*;
 import utils.UI;
-
-import java.util.*;
 
 /**
  * The main driver Class for the Duke Application.
@@ -17,7 +20,7 @@ public class Duke {
     private static TaskList tasks;
     private static Storage storage;
 
-    private static void initializeDuke() throws DukeIOException {
+    private static void initializeDuke() throws DukeIoException {
         // read the appropriate string resources
         strings = ResourceBundle.getBundle("StringsBundle", Locale.ENGLISH);
         ui = new UI();
@@ -35,12 +38,14 @@ public class Duke {
 
         try {
             initializeDuke();
-        } catch (DukeIOException e) {
+        } catch (DukeIoException e) {
             ui.print(e.getMessage());
         }
         ui.print(strings.getString("output.greeting"));
 
-        String input, mainCommand = "", output;
+        String input;
+        String mainCommand = "";
+        String output;
         HashMap<String, String> parameters;
 
         while (!mainCommand.equals(strings.getString("command.bye"))) {
