@@ -2,8 +2,12 @@ package duke;
 
 import java.io.*;
 import java.util.Scanner;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
 
     enum TaskType {
         TODO,
@@ -15,6 +19,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
+
+    /**
+     * Constructs a Duke object
+     */
+    public Duke(){}
 
     /**
      * Constructs a Duke object
@@ -34,8 +43,21 @@ public class Duke {
     }
 
     /**
+     * Overrides the start method
+     * @param stage stage
+     */
+    @Override
+    public void start(Stage stage){
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+
+    /**
      * Runs the Duke app
-     * @throws IOException
+     * @throws IOException exception for reading files
      */
     public void run() throws IOException {
         ui.showWelcomeMessage();
@@ -52,8 +74,8 @@ public class Duke {
 
     /**
      * Drives the Duke app
-     * @param args
-     * @throws IOException
+     * @param args parameter for main method
+     * @throws IOException exception for reading files
      */
     public static void main(String[] args) throws IOException {
         new Duke("data/main.java.duke.txt").run();
