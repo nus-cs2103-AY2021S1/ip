@@ -32,7 +32,7 @@ public class Storage {
      * @param directoryPath The directory path.
      * @throws InvalidFilePathException If the file path is invalid.
      */
-    public Storage(String filePath, String directoryPath) throws InvalidFilePathException {
+    public Storage(String filePath, String directoryPath) {
         try {
             File directory = new File(directoryPath);
             if (!isValidFilePath(filePath)) {

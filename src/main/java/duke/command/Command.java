@@ -15,9 +15,10 @@ public abstract class Command {
      * @param storage The storage object.
      * @param taskList The taskList object.
      * @param ui The ui object.
+     * @return Duke's response.
      * @throws InvalidInputException If the input is invalid.
      */
-    public abstract void execute(Storage storage, TaskList taskList, Ui ui) throws InvalidInputException;
+    public abstract String execute(Storage storage, TaskList taskList, Ui ui) throws InvalidInputException;
 
     /**
      * Checks if the command is ExitCommand.

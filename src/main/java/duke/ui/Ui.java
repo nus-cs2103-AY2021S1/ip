@@ -11,7 +11,10 @@ import java.util.ArrayList;
 public class Ui {
 
     private TaskList taskList;
-    private static final String LINE_DIVIDER = "     _____________________________________";
+    private static final String EMPTY_SPACE_BEFORE_TASK = "     ";
+    private static final String GREETING_PART_ONE = "Hi, I am\n";
+    private static final String GREETING_PART_TWO = "Is there anything I could help with?\n";
+    private static final String EXIT_MESSAGE = "Bye! I look forward to meeting you next time!\n";
     private static final String LOGO = "      ____        _        \n"
             + "     |  _ \\ _   _| | _____ \n"
             + "     | | | | | | | |/ / _ \\\n"
@@ -34,54 +37,59 @@ public class Ui {
      * @param message The message to be printed out.
      */
     public void messageFormat(String... message) {
-        System.out.println(LINE_DIVIDER);
         for (String i : message) {
             System.out.println(i);
         }
-        System.out.println(LINE_DIVIDER);
     }
 
     /**
      * Displays greetings to the user.
+     *
+     * @return Greeting message.
      */
-    public void displayGreeting() {
-        messageFormat("     Hi, I am\n", LOGO,
-         "     Is there anything I could help with?");
+    public String displayGreeting() {
+        return GREETING_PART_ONE + LOGO + GREETING_PART_TWO;
     }
 
     /**
      * Displays exit message to the user.
+     *
+     * @return Exit message.
      */
-    public void displayExit() {
-        messageFormat("     Bye! I look forward to meeting you next time!");
+    public String displayExit() {
+        return EXIT_MESSAGE;
     }
 
     /**
      * Displays the list of tasks to the user.
+     *
+     * @return The list of tasks.
      */
-    public void getList() {
+    public String getList() {
+        StringBuilder stringBuilder = new StringBuilder();
         ArrayList<Task> listOfTasks = taskList.getListOfTasks();
         int noOfTasks = listOfTasks.size();
         if (noOfTasks == 0) {
-            messageFormat("     There is no task in the list yet!");
+            stringBuilder.append("There is no task in the list yet!\n");
         } else {
-            System.out.println(LINE_DIVIDER);
-            System.out.println("     Here are the tasks in the list:");
+            stringBuilder.append("Here are the tasks in the list:\n");
             for (int i = 0; i < noOfTasks; i++) {
                 Task task = listOfTasks.get(i);
-                System.out.println("     " + (i + 1) + "." + task);
+                stringBuilder.append((i + 1) + "." + task + "\n");
             }
-            System.out.println(LINE_DIVIDER);
         }
+        return stringBuilder.toString();
     }
+
 
     /**
      * Displays error message to the user.
      *
      * @param message The error message.
+     * @return The error message to be displayed.
      */
-    public void displayError(String message) {
-        messageFormat("     " + message);
+    public String displayError(String message) {
+        return message + "\n";
     }
 
     /**
@@ -89,30 +97,33 @@ public class Ui {
      * to the user.
      *
      * @param task The particular task that is marked as done.
+     * @return The message that a particular task is marked as done.
      */
-    public void displayDone(Task task) {
-        messageFormat("     Great! The task below is marked as done:\n"
-                + "        " + task.toString());
+    public String displayDone(Task task) {
+        return "Great! The task below is marked as done:\n"
+                + EMPTY_SPACE_BEFORE_TASK + task.toString() + "\n";
     }
 
     /**
      * Displays the message that a particular task is deleted to the user.
      *
      * @param task The particular task that is deleted.
+     * @return The message that a particular task is deleted.
      */
-    public void displayDeletion(Task task) {
+    public String displayDeletion(Task task) {
+        StringBuilder stringBuilder = new StringBuilder();
         ArrayList<Task> listOfTasks = taskList.getListOfTasks();
         int noOfTasks = listOfTasks.size();
-        System.out.println(LINE_DIVIDER);
-        System.out.println("     Okay. The task below is deleted from your list:\n"
-                + "        " + task.toString());
+        stringBuilder.append("Okay. The task below is deleted from your list:\n"
+                + EMPTY_SPACE_BEFORE_TASK + task.toString() + "\n");
         if (noOfTasks == 1) {
-            System.out.println("     Now there is 1 task in total in your list.");
+            stringBuilder.append("Now there is 1 task in total in your list.\n");
         } else {
-            System.out.println("     Now there are " + listOfTasks.size() + " tasks "
-                    + "in total in your list.");
+            System.out.println("Now there are " + listOfTasks.size() + " tasks "
+                    + "in total in your list.\n");
         }
-        System.out.println(LINE_DIVIDER);
+        return stringBuilder.toString();
+
     }
 
     /**
@@ -120,20 +131,22 @@ public class Ui {
      * in to the list to the user.
      *
      * @param task The particular task that is added to the list.
+     * @return The message that a particular task is added into the list.
      */
-    public void displayAddition(Task task) {
+    public String displayAddition(Task task) {
+        StringBuilder stringBuilder = new StringBuilder();
         ArrayList<Task> listOfTasks = taskList.getListOfTasks();
         int noOfTasks = listOfTasks.size();
-        System.out.println(LINE_DIVIDER);
-        System.out.println("     Noted! The task below is added into the list:\n"
-                + "        " + task);
+        stringBuilder.append("Noted! The task below is added into the list:\n"
+                + EMPTY_SPACE_BEFORE_TASK + task + "\n");
         if (noOfTasks == 1) {
-            System.out.println("     There is 1 task in total in your list.");
+            stringBuilder.append("There is 1 task in total in your list.\n");
         } else {
-            System.out.println("     There are " + listOfTasks.size()
-                    + " tasks in total in your list.");
+            stringBuilder.append("There are " + listOfTasks.size()
+                    + " tasks in total in your list.\n");
         }
-        System.out.println(LINE_DIVIDER);
+        return stringBuilder.toString();
+
     }
 
     /**
@@ -141,20 +154,21 @@ public class Ui {
      * is found to the user, listing the matching tasks.
      *
      * @param matchingTasks The tasks matching the keyword.
+     * @return The message that lists the matching tasks.
      */
-    public void displayFinding(ArrayList<Task> matchingTasks) {
+    public String displayFinding(ArrayList<Task> matchingTasks) {
+        StringBuilder stringBuilder = new StringBuilder();
         int noOfTasks = matchingTasks.size();
         if (noOfTasks == 0) {
-            messageFormat("     There is no task that match with this keyword!");
+            stringBuilder.append("There is no task that match with this keyword!\n");
         } else {
-            System.out.println(LINE_DIVIDER);
-            System.out.println("     Here are the task or tasks that match with this keyword:");
+            stringBuilder.append("Here are the task or tasks that match with this keyword:\n");
             for (int i = 0; i < noOfTasks; i++) {
                 Task task = matchingTasks.get(i);
-                System.out.println("     " + (i + 1) + "." + task);
+                stringBuilder.append((i + 1) + "." + task + "\n");
             }
-            System.out.println(LINE_DIVIDER);
         }
+        return stringBuilder.toString();
     }
 
 
