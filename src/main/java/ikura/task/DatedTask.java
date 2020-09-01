@@ -3,8 +3,6 @@
 
 package ikura.task;
 
-import java.util.List;
-import java.util.Arrays;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -20,7 +18,7 @@ public class DatedTask {
 
     /**
      * Parses the provided input, extracting the task's description and the date. The input should
-     * be of the form "<description> /<dateSpec> <date>".
+     * be of the form "(description) /(dateSpec) (date)".
      *
      * @param kind     the specific kind; either "deadline" or "event".
      * @param input    the user input.
@@ -28,7 +26,7 @@ public class DatedTask {
      * @param usage    the correct usage for the command (used for the error message).
      * @return a Pair of strings; first is the description, and second is the date.
      */
-	public static Pair<String, String> parse(String kind, String input, String dateSpec, String usage)
+    public static Pair<String, String> parse(String kind, String input, String dateSpec, String usage)
         throws InvalidInputException {
 
         var slash = input.indexOf('/');
@@ -51,7 +49,7 @@ public class DatedTask {
 
         when = when.substring(3).strip();
         return new Pair<>(item, when);
-	}
+    }
 
     /**
      * Parses the input string as a date according to ISO-8601 format (yyyy-mm-dd).

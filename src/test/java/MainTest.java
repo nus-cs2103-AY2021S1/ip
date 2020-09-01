@@ -1,13 +1,11 @@
 // MainTest.java
 // Copyright (c) 2020, zhiayang, Apache License 2.0.
 
-
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Optional;
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.io.PrintStream;
+import java.nio.charset.Charset;
 import java.io.ByteArrayOutputStream;
 
 import java.io.IOException;
@@ -15,8 +13,6 @@ import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import ikura.Bot;
 import ikura.Frontend;
@@ -38,8 +34,8 @@ public class MainTest {
             var outPath = Path.of("tests/expected.txt");
 
             return Either.right(new Pair<>(
-                Files.readString(inPath),
-                Files.readString(outPath))
+                Files.readString(inPath, Charset.forName("UTF-8")),
+                Files.readString(outPath, Charset.forName("UTF-8")))
             );
 
         } catch (IOException e) {
@@ -72,9 +68,9 @@ public class MainTest {
 
         var output = buffer.toString().lines()
             .map(x -> x.stripTrailing())
-            .reduce((a, b) -> a + "\n" + b)
+            .reduce((a, b) -> a + '\n' + b)
             .get()
-            + "\n";
+            + '\n';
 
         if (!output.equals(test.snd())) {
             try {

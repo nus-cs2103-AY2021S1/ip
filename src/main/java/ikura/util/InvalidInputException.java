@@ -9,34 +9,34 @@ package ikura.util;
  */
 public class InvalidInputException extends Exception {
 
-	private final String usage;
+    private final String usage;
 
     /**
      * Constructs a new InvalidInputException with the given message, and
-	 * the expected usage of the command.
+     * the expected usage of the command.
      *
      * @param msg   the exception message.
-	 * @param usage the expected usage of the command.
+     * @param usage the expected usage of the command.
      */
-	public InvalidInputException(String msg, String usage) {
+    public InvalidInputException(String msg, String usage) {
 
-		super(msg);
-		this.usage = usage;
-	}
+        super(msg);
+        this.usage = usage;
+    }
 
     /**
      * Gets the expected usage of the command, specific to the code that
-	 * threw the exception.
+     * threw the exception.
      *
      * @return the expected usage.
      */
-	public String getUsage() {
-		return this.usage;
-	}
+    public String getUsage() {
+        return this.usage;
+    }
 
-	@Override
-	public String toString() {
-		// don't include the exception name.
-		return this.getMessage();
-	}
+    @Override
+    public String toString() {
+        // don't include the exception name.
+        return this.getMessage();
+    }
 }

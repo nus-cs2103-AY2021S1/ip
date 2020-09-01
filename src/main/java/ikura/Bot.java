@@ -4,25 +4,19 @@
 package ikura;
 
 import java.util.Map;
-import java.util.List;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Optional;
-import java.util.ArrayList;
-import java.util.stream.Stream;
-import java.util.stream.Collectors;
 import java.util.function.BiConsumer;
-
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
 
 import ikura.task.Task;
 import ikura.task.Todo;
 import ikura.task.Event;
 import ikura.task.Deadline;
-
-import ikura.util.Pair;
 import ikura.util.StreamUtils;
+
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import ikura.util.InvalidInputException;
 
 /**
@@ -81,12 +75,11 @@ public class Bot {
             "todo",     this::cmdAddTask,
             "event",    this::cmdAddTask,
             "deadline", this::cmdAddTask
-        ).get(cmd))
-            .ifPresentOrElse(x -> {
-                x.accept(cmd, input);
-            }, () -> {
-                this.ui.println("unknown command '%s'", cmd);
-            });
+        ).get(cmd)).ifPresentOrElse(x -> {
+            x.accept(cmd, input);
+        }, () -> {
+            this.ui.println("unknown command '%s'", cmd);
+        });
 
         this.ui.endLog();
 

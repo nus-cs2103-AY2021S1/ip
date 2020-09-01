@@ -144,11 +144,17 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds tasks using a list of keywords. Tasks containing *ANY* of the strings in the input
+     * array will be matched.
+     *
+     * @param keywords the list of words to search with
+     * @return a list of matching Tasks, together with their task number (0-indexed)
+     */
     public List<Pair<Integer, Task>> findTasksByKeywords(List<String> keywords) {
 
         return StreamUtils.indexed(this.tasks.stream())
             .filter(x -> {
-                // x.snd().getName().contains(name)
                 var words = Arrays.stream(x.snd().getName().split(" "));
                 return words.anyMatch(w -> keywords.contains(w));
             })

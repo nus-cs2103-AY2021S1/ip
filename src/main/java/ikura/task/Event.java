@@ -3,7 +3,6 @@
 
 package ikura.task;
 
-import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -51,7 +50,7 @@ public class Event extends Task {
 
     /**
      * Parses an Event from the given input. The input should be of the
-     * form "event <description> /at <date>", where <date> is in the form
+     * form "event (description) /at (date)", where (date) is in the form
      * "yyyy-mm-dd".
      *
      * @param  input the user's input.

@@ -21,3 +21,5 @@ data
 *.class
 *.jar
 
+
+tests/actual.txt

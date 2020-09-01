@@ -16,6 +16,11 @@ public class DatabaseStub extends Database {
 
     private List<Task> tasks;
 
+    /**
+     * Constructs a fake database using the given list of tasks.
+     *
+     * @param tasks the list of tasks to use.
+     */
     public DatabaseStub(List<Task> tasks) {
         super("asdf");
         this.tasks = tasks;

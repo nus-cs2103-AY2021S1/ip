@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
@@ -17,10 +16,11 @@ import java.time.format.DateTimeFormatter;
 import ikura.task.Task;
 import ikura.task.Todo;
 import ikura.task.Event;
+import ikura.util.Either;
 import ikura.task.Deadline;
 import ikura.task.DatedTask;
 
-import ikura.util.Either;
+import java.io.IOException;
 import ikura.util.InvalidInputException;
 import ikura.util.InvalidDatabaseException;
 
@@ -219,16 +219,18 @@ public class Database {
 
                         } else if (task instanceof Event) {
 
+                            var event = (Event) task;
                             return String.format("%c%c%s|%s", 'E',
                                 task.isDone() ? '1' : '0',
-                                ((Event) task).getEventDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                                event.getEventDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                                 task.getName());
 
                         } else if (task instanceof Deadline) {
 
+                            var deadline = (Deadline) task;
                             return String.format("%c%c%s|%s", 'D',
                                 task.isDone() ? '1' : '0',
-                                ((Deadline) task).getDeadline().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                                deadline.getDeadline().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                                 task.getName());
                         } else {
                             // asdf?!

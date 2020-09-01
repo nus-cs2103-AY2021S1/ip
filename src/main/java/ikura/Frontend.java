@@ -51,7 +51,7 @@ public class Frontend {
     /**
      * Reads a line of user input from this Frontend's input stream.
      *
-     * @return the input line as an Optional<String>, or an empty optional on EOF.
+     * @return the input line as an Optional String, or an empty optional on EOF.
      */
     public Optional<String> readLine() {
         this.out.printf("> ");
