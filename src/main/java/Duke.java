@@ -1,50 +1,40 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+import java.util.Map;
 
 public class Duke {
-
-    // Constants
 
     // Attributes
     private final Storage storage;
     private final TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     // Constructor
+
+    /**
+     * Creates a new duke bot that saves list of tasks to /data/todo.txt.
+     */
+    public Duke() {
+        this.ui = new Ui();
+        this.storage = new Storage("./data/todo.txt");
+        this.tasks = storage.read();
+    }
+
+    /**
+     * Creates a new duke bot that saves list of tasks to a given filepath.
+     * @param filePath File path to save list of tasks to,
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.tasks = storage.read();
     }
 
-    // Wrap text in lines
-
-    // Scanner
-    private final Scanner sc = new Scanner(System.in);
-
-    /**
-     * Runs the Duke bot.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showMessage(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    // Methods
+    String getResponse(String fullCommand, Map<String, Runnable> runnables) {
+        try {
+            Command c = Parser.parse(fullCommand);
+            return c.execute(tasks, ui, storage, runnables);
+        } catch (DukeException e) {
+            return e.toString();
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("./data/todo.txt").run();
     }
 }

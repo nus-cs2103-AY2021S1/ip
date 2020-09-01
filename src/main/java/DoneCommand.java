@@ -1,3 +1,5 @@
+import java.util.Map;
+
 /**
  * Command to mark a task as done.
  */
@@ -21,8 +23,9 @@ public class DoneCommand extends Command {
      * @throws IndexOutOfBoundsDukeException If task number is invalid.
      */
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws IndexOutOfBoundsDukeException {
-        ui.showMessage(tasks.markAsDone(taskNumber));
+    String execute(TaskList tasks, Ui ui, Storage storage, Map<String, Runnable> runnables)
+            throws IndexOutOfBoundsDukeException {
+        return tasks.markAsDone(taskNumber);
     }
 
 

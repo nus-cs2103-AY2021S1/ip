@@ -1,3 +1,5 @@
+import java.util.Map;
+
 public class FindCommand extends Command {
 
     // Attributes
@@ -10,10 +12,10 @@ public class FindCommand extends Command {
 
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    String execute(TaskList tasks, Ui ui, Storage storage, Map<String, Runnable> runnables) {
         TaskList filteredTasks = tasks.findTasks(this.substring);
-        ui.showMessage("Here are your tasks matching " + this.substring);
-        ui.showMessage(filteredTasks.toString());
+        return String.format("Here are your tasks matching %s\n"
+                + "%s", this.substring, filteredTasks);
     }
 
     @Override

@@ -31,9 +31,9 @@ public class TaskList implements Serializable {
     public String createTask(Task newTask) {
         taskList.add(newTask);
         int newSize = taskList.size();
-        String todoText = String.format("Got it. I've added this task:\n" +
-                " %s\n" +
-                "Now you have %s tasks in the list", newTask, newSize);
+        String todoText = String.format("Got it. I've added this task:\n"
+                + " %s\n"
+                + "Now you have %s tasks in the list", newTask, newSize);
         return todoText;
     }
 
@@ -47,8 +47,8 @@ public class TaskList implements Serializable {
         try {
             Task task = taskList.get(taskNumber - 1);
             task.markAsDone();
-            String doneText = String.format("Nice! I've marked this task as done:\n" +
-                    " %s", task);
+            String doneText = String.format("Nice! I've marked this task as done:\n"
+                    + " %s", task);
             return doneText;
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsDukeException(taskNumber, taskList.size(), "task");
@@ -65,22 +65,26 @@ public class TaskList implements Serializable {
         try {
             Task task = taskList.get(taskNumber - 1);
             taskList.remove(taskNumber - 1);
-            String deleteText = String.format("Okay. I've removed this task:\n" +
-                    " %s", task);
+            String deleteText = String.format("Okay. I've removed this task:\n"
+                    + " %s", task);
             return deleteText;
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsDukeException(taskNumber, taskList.size(), "task");
         }
     }
 
+    /**
+     * Finds all tasks matching a substring and returns them in the form of a TaskList.
+     * @param substring part of a string to find tasks with it.
+     * @return TaskList containing all tasks matching the given substring.
+     */
     public TaskList findTasks(String substring) {
-         List<Task> listOfTasks = Arrays.asList(
-                 taskList.stream()
-                 .filter(task -> task.description.contains(substring)) // Filter tasks
+        List<Task> listOfTasks = Arrays.asList(
+                taskList.stream()
+                        .filter(task -> task.description.contains(substring)) // Filter tasks
                  .toArray(Task[]::new)
          );
-
-         return new TaskList(listOfTasks);
+        return new TaskList(listOfTasks);
     }
 
     // String Representation
@@ -92,7 +96,7 @@ public class TaskList implements Serializable {
         for (int i = 0; i < sizeOfList; i++) {
             int number = i + 1;
             String text = taskList.get(i).toString();
-            sb.append(String.format("\n %s. %s", number, text));
+            sb.append(String.format(" %s. %s\n", number, text));
         }
 
         return sb.toString();

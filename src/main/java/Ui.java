@@ -5,15 +5,15 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    // Attributes
-    private final Scanner sc;
-
     // Constants
     private static final String NAME = "DUKE";
     private static final String INTRODUCTION = String.format(
-            "Hello! I'm %s\n" +
-                    "I was created for the module CS2103T\n" +
-                    "What can I do for you?", NAME);
+            "Hello! I'm %s\n"
+                    + "I was created for the module CS2103T\n"
+                    + "What can I do for you?", NAME);
+
+    // Attributes
+    private final Scanner sc;
 
     // Constructor
 

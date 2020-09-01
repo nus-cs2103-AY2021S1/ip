@@ -34,6 +34,14 @@ abstract class Task implements Serializable {
         this.isDone = true;
     }
 
+    /**
+     * Returns a boolean denoting whether task is done.
+     * @return isDone Boolean denoting whether task is done.
+     */
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
     // String Representation
     @Override
     public String toString() {

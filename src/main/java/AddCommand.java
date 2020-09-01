@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Map;
 
 /**
  * Class representing commands to add task to TaskList
@@ -13,9 +14,9 @@ public class AddCommand extends Command {
     // Constructor
 
     /**
-     * Creates a new command to add tasks to TaskList.
-     * @param type Type of task to be added.
-     * @param description Description of task to be added.
+     * Creates a new command to add task to the list
+     * @param type Type of task to be added to the list.
+     * @param description Description of task.
      */
     public AddCommand(String type, String description) {
         this.type = type;
@@ -34,12 +35,13 @@ public class AddCommand extends Command {
      * @throws UnknownInputException If an unrecognised command is given.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EmptyBodyException, UnknownInputException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, Map<String, Runnable> runnables)
+            throws EmptyBodyException, UnknownInputException {
         switch (this.type) {
-        case "todo":
+        case "todo": {
             Task newTodo = new Todo(description);
-            ui.showMessage(tasks.createTask(newTodo));
-            break;
+            return tasks.createTask(newTodo);
+        }
         case "deadline": {
             String[] text = description.split(" /by ");
             String description = text[0];
@@ -49,11 +51,10 @@ public class AddCommand extends Command {
             try {
                 LocalDate deadline = LocalDate.parse(text[1]);
                 Task newDeadline = new Deadline(description, deadline);
-                ui.showMessage(tasks.createTask(newDeadline));
+                return tasks.createTask(newDeadline);
             } catch (DateTimeParseException e) {
                 throw new UnknownInputException(text[1]);
             }
-            break;
         }
         case "event": {
             String[] text = description.split(" /at ");
@@ -63,8 +64,7 @@ public class AddCommand extends Command {
             }
             String dateTime = text[1];
             Task newEvent = new Event(description, dateTime);
-            ui.showMessage(tasks.createTask(newEvent));
-            break;
+            return tasks.createTask(newEvent);
         }
         default:
             throw new UnknownInputException(this.type);
