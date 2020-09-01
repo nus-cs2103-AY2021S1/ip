@@ -7,6 +7,13 @@ public class Deadline extends Task {
 
     private final Date by;
 
+    /**
+     * Creates a new Deadline.
+     *
+     * @param description Description of Deadline.
+     * @param by          Due time of deadline.
+     * @param isDone      True if completed, false if yet to be completed.
+     */
     public Deadline(String description, Date by, boolean isDone) {
         super(description, TaskType.DEADLINE, isDone);
         this.by = by;
