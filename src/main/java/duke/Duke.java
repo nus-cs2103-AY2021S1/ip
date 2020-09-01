@@ -17,6 +17,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    public Duke() {
+
+    }
+
     /**
      * Initializes a Duke object
      *
@@ -68,5 +72,9 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke("./tasks.txt").run();
+    }
+
+    public String getResponse(String input) {
+        return input;
     }
 }
