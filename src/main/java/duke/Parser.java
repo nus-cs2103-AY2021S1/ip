@@ -15,13 +15,13 @@ public class Parser {
      * @return Returns a ui.goodbye() if the user inputs "bye", which ends the program.
      * @throws DukeException  If user input is incorrect.
      */
-    public static String parse(String input, TaskList tasks) throws DukeException {
+    public static String parse(String input, TaskList tasks, boolean isRunningOnGui) throws DukeException {
         Ui ui = new Ui();
         String[] splitArr = input.split(" ");
         if (input.equals("bye")) {
-            return ui.goodbye();
+            return ui.goodbye(isRunningOnGui);
         } else if (input.equals("list")) {
-            ui.list(tasks);
+            return ui.list(tasks, isRunningOnGui);
         } else if (splitArr.length == 2 && splitArr[0].equals("done") && Integer.parseInt(splitArr[1]) > 0) {
             int index = Integer.parseInt(splitArr[1]);
             if (index > tasks.size() || index < 0) {
@@ -29,18 +29,20 @@ public class Parser {
             }
             tasks.get(index - 1).setDone();
             Task t = tasks.get(index - 1);
-            ui.done(t);
+            return ui.done(t, isRunningOnGui);
         } else if (splitArr.length == 2 && splitArr[0].equals("delete") && Integer.parseInt(splitArr[1]) > 0) {
             int index = Integer.parseInt(splitArr[1]);
             if (index > tasks.size() || index < 0) {
                 throw new DukeException("That task number does not exist.");
             }
             Task deletedTask = tasks.remove(index - 1);
-            ui.delete(deletedTask, tasks.size());
+            ArrayList<Task> tasksCopy = tasks.clone();
+            Storage.store(tasksCopy);
+            return ui.delete(deletedTask, tasks.size(), isRunningOnGui);
         } else if (splitArr.length == 2 && splitArr[0].equals("find")) {
             String keyWord = splitArr[1];
             ArrayList<Task> foundTasks = tasks.find(keyWord);
-            ui.find(foundTasks);
+            return ui.find(foundTasks, isRunningOnGui);
         } else {
             switch (splitArr[0]) {
             case "todo":
@@ -49,8 +51,9 @@ public class Parser {
                 }
                 Task newTask = new ToDo(input.substring(5));
                 tasks.add(newTask);
-                ui.add(newTask, tasks.size());
-                break;
+                ArrayList<Task> tasksCopy = tasks.clone();
+                Storage.store(tasksCopy);
+                return ui.add(newTask, tasks.size(), isRunningOnGui);
             case "deadline":
                 if (splitArr.length <= 1) {
                     throw new DukeException("The description of a deadline cannot be empty.");
@@ -64,11 +67,12 @@ public class Parser {
                 try {
                     Task newDeadline = new Deadline(desc, date);
                     tasks.add(newDeadline);
-                    ui.add(newDeadline, tasks.size());
+                    ArrayList<Task> taskCopy = tasks.clone();
+                    Storage.store(taskCopy);
+                    return ui.add(newDeadline, tasks.size(), isRunningOnGui);
                 } catch (Exception e) {
                     throw new DukeException("Please enter a valid YYYY-MM-DD date format!");
                 }
-                break;
             case "event":
                 if (splitArr.length <= 1) {
                     throw new DukeException("The description of an event cannot be empty.");
@@ -82,17 +86,15 @@ public class Parser {
                 try {
                     Task newEvent = new Event(des, dat);
                     tasks.add(newEvent);
-                    ui.add(newEvent, tasks.size());
+                    ArrayList<Task> tasCopy = tasks.clone();
+                    Storage.store(tasCopy);
+                    return ui.add(newEvent, tasks.size(), isRunningOnGui);
                 } catch (Exception e) {
                     throw new DukeException("Please enter a valid YYYY-MM-DD date format!");
                 }
-                break;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
         }
-        ArrayList<Task> tasksCopy = tasks.clone();
-        Storage.store(tasksCopy);
-        return "";
     }
 }

@@ -115,7 +115,7 @@ public class Duke extends Application {
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+           handleUserInput();
         });
     }
     /**
@@ -150,7 +150,21 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            if (tasks == null) {
+                Storage storage = new Storage("data/tasks.txt");
+                try {
+                    tasks = storage.load();
+                    ui = new Ui();
+                } catch (DukeException e) {
+                    assert false;
+                    ui.showLoadingError(e);
+                }
+            }
+            return Parser.parse(input, tasks, true);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**
