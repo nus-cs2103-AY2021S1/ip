@@ -127,7 +127,7 @@ public class Parser {
                         return TaskList.getFind(input.substring(5));
                     }
                     if (TaskList.getThingsOnListSize() == startingSize && !searched) {
-                        throw new DukeExceptions("Bark bark bark! (Please use me with proper Duke.TaskList.Duke.commands!)");
+                        throw new DukeExceptions("Bark bark bark! (Please use me with proper commands!)");
                     } else {
                         return ("Bark. Bork: bark bark woof. (Roger. I've added this task:\n" +
                                 TaskList.getLastTask() + "\n    " +
