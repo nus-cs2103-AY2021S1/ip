@@ -1,16 +1,14 @@
-package duke.Tasks;
-
 public class TodoTask extends Task {
 
-    private static String indicator = "[T]";
+    private static String display = "[T]";
 
-    public TodoTask(String name) {
+    TodoTask(String name) {
         super(name);
     }
 
     @Override
     public String toString() {
-        return indicator + super.toString();
+        return display + super.toString();
     }
 
     @Override
