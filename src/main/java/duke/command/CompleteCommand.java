@@ -24,7 +24,7 @@ public class CompleteCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Storage storage) throws InvalidTaskIndexException, StorageException {
-        List<Task> completedTasks = taskList.completeTasks(args.split(" "));
+        List<Task> completedTasks = taskList.completeTasks(args.trim().split(" "));
         storage.save(taskList);
 
         StringBuilder string = new StringBuilder("Neat! Marking these as complete:");

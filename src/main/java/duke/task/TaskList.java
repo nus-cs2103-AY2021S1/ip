@@ -3,8 +3,10 @@ package duke.task;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Encapsulates an ArrayList of Tasks.
@@ -84,7 +86,7 @@ public class TaskList {
      * @throws InvalidTaskIndexException If any one index is invalid.
      */
     public List<Task> completeTasks(String... indexes) throws InvalidTaskIndexException {
-        List<Integer> intIndexes = verifyIndexes(indexes);
+        Set<Integer> intIndexes = verifyIndexes(indexes);
         List<Task> tasks = new ArrayList<>();
         for (int taskIndex : intIndexes) {
             Task task = tasksMap.get(taskIndex);
@@ -103,7 +105,7 @@ public class TaskList {
      * @throws InvalidTaskIndexException If any one index is invalid.
      */
     public List<Task> deleteTask(String... indexes) throws InvalidTaskIndexException {
-        List<Integer> intIndexes = verifyIndexes(indexes);
+        Set<Integer> intIndexes = verifyIndexes(indexes);
         List<Task> tasks = new ArrayList<>();
         for (int taskIndex : intIndexes) {
             Task task = tasksMap.remove(taskIndex);
@@ -119,8 +121,8 @@ public class TaskList {
      * @return List of tasks corresponding to the list in the list command.
      * @throws InvalidTaskIndexException If the given list contains one or more invalid indexes.
      */
-    private List<Integer> verifyIndexes(String... indexes) throws InvalidTaskIndexException {
-        List<Integer> taskIndexes = new ArrayList<>();
+    private Set<Integer> verifyIndexes(String... indexes) throws InvalidTaskIndexException {
+        Set<Integer> taskIndexes = new HashSet<>();
         for (String index : indexes) {
             try {
                 int taskIndex = Integer.parseInt(index);

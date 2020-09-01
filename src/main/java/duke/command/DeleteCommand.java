@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Storage storage) throws InvalidTaskIndexException, StorageException {
-        List<Task> deletedTasks = taskList.deleteTask(args.split(" "));
+        List<Task> deletedTasks = taskList.deleteTask(args.trim().split(" "));
         storage.save(taskList);
 
         StringBuilder string = new StringBuilder("Alright! Deleting these:");
