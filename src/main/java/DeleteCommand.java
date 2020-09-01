@@ -19,6 +19,7 @@ public class DeleteCommand extends Command {
      * Method to execute entirely when a delete command is entered by the user.
      * @param tasks Tasklist containing all the tasks.
      * @param dukeUI UI to print string responses by the bot.
+     * @return String response by the bot.
      * @throws InvalidTaskNumberException when an inaccurate task number is entered.
      */
     @Override
@@ -39,13 +40,5 @@ public class DeleteCommand extends Command {
         } catch (NumberFormatException e) {
             throw new NumberFormatException();
         }
-    }
-
-    /**
-     * Method to tell bot whether to end the current session.
-     * @return false to not exit the system.
-     */
-    protected boolean isExit() {
-        return false;
     }
 }

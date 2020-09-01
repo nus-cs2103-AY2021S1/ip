@@ -19,6 +19,7 @@ public class ListCommand extends Command {
      * Method to execute entirely when a list command is entered by the user.
      * @param tasks TaskList containing all the tasks.
      * @param dukeUI UI to print string responses by the bot.
+     * @return String response by the bot.
      * @throws InvalidCommandException when an invalid command is entered by user.
      */
     @Override
@@ -45,13 +46,5 @@ public class ListCommand extends Command {
         } catch (InvalidCommandException e) {
             throw new InvalidCommandException();
         }
-    }
-
-    /**
-     * Method to tell bot whether to end the current session or not.
-     * @return false to not exit the session.
-     */
-    protected boolean isExit() {
-        return false;
     }
 }

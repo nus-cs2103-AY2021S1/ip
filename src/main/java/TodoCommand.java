@@ -19,6 +19,7 @@ public class TodoCommand extends Command{
      * Method to execute entirely when a todo command is entered by the user.
      * @param tasks TaskList containing all the tasks.
      * @param dukeUI UI to print all string responses by the bot.
+     * @return String response by the bot.
      * @throws InvalidTaskDescriptionException when an inaccurate task description is entered.
      */
     @Override
@@ -32,13 +33,5 @@ public class TodoCommand extends Command{
         } catch (IndexOutOfBoundsException e){
             throw new InvalidTaskDescriptionException();
         }
-    }
-
-    /**
-     * Method to tell bot whether to end the current session or not.
-     * @return false to not exit the session.
-     */
-    protected boolean isExit() {
-        return false;
     }
 }

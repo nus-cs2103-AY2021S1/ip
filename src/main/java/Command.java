@@ -9,13 +9,9 @@ public abstract class Command {
      * Abstract method which would be implemented in the subclasses.
      * @param tasks
      * @param ui
+     * @return string response by the bot.
      * @throws DukeException
      */
     abstract String execute(TaskList tasks, UI ui) throws DukeException;
 
-    /**
-     * Abstract method which would be implemented in the subclasses.
-     * @return a boolean to indicate whether or not to exit the bot.
-     */
-    abstract boolean isExit();
 }

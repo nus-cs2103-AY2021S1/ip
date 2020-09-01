@@ -25,6 +25,11 @@ public class Duke {
         dukeParser = new Parser();
     }
 
+    /**
+     * Gets a response from the user input.
+     * @param input user input
+     * @return Bot's response.
+     */
     public String getResponse(String input) {
         try {
             String userCommand = input;

@@ -11,6 +11,7 @@ public class UI {
     /**
      * Prints responses when a task is completed.
      * @param task the completed task.
+     * @return String response for this command.
      */
     protected String doneTask(Task task) {
         if (task.getStatus()) {
@@ -27,6 +28,7 @@ public class UI {
      * Prints responses when a task is added.
      * @param tasks TaskList containing all tasks.
      * @param newTask Task to be completed.
+     * @return String response for this command.
      */
     protected String addTask(TaskList tasks, Task newTask) {
         String str1 = "\nGot it. This task is now added.\n";
@@ -41,6 +43,7 @@ public class UI {
      * Prints responses when a task is deleted.
      * @param tasks TaskList containing all tasks.
      * @param deletedTask Task to be deleted.
+     * @return String response for this command.
      */
     protected String deleteTask(TaskList tasks, Task deletedTask) {
         String str1 = "\nGot it. Deleting task.....\n";
@@ -53,6 +56,7 @@ public class UI {
     /**
      * Prints all the tasks stored.
      * @param taskList TaskList containing all the tasks.
+     * @return String response by the bot.
      */
     protected String displayTasks(TaskList taskList) {
         int index = 1;
@@ -68,6 +72,7 @@ public class UI {
     /**
      * Prints tasks found using find command.
      * @param foundTasks tasks found with find command.
+     * @return String response by the bot.
      */
     protected String findTask(ArrayList<Task> foundTasks) {
         if (foundTasks.isEmpty()) {

@@ -21,6 +21,7 @@ public class FindCommand extends Command {
      * Method to execute when a find command is entered.
      * @param tasks TaskList containing all the tasks
      * @param dukeUI UI to print string responses by the bot.
+     * @return String response by the bot.
      * @throws DukeException
      */
     @Override
@@ -34,14 +35,5 @@ public class FindCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidKeywordException();
         }
-    }
-
-    /**
-     * Method to tell bot to end current session or not.
-     * @return false to not end session.
-     */
-    @Override
-    boolean isExit() {
-        return false;
     }
 }

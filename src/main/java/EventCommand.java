@@ -22,6 +22,7 @@ public class EventCommand extends Command{
      * Method to execute entirely when a done command is entered by the user.
      * @param tasks Tasklist containing all the tasks.
      * @param dukeUI UI to print string responses by the bot.
+     * @return the String response for this command.
      * @throws InvalidTaskDescriptionException when an invalid task description is entered.
      * @throws WrongDateFormatException when an invalid date format is entered.
      */
@@ -40,13 +41,5 @@ public class EventCommand extends Command{
         } catch (DateTimeParseException e) {
             throw new WrongDateFormatException();
         }
-    }
-
-    /**
-     * Method to tell bot whether or not to end the current session.
-     * @return false to not exit the session.
-     */
-    protected boolean isExit() {
-        return false;
     }
 }

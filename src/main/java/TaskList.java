@@ -69,7 +69,7 @@ public class TaskList {
     /**
      * Search and return tasks using keyword.
      * @param keyWord word used to search.
-     * @return Tasks withg description matching the keyword.
+     * @return Tasks with description matching the keyword.
      */
     protected ArrayList<Task> findTask(String keyWord) {
         ArrayList<Task> foundTasks = new ArrayList<>();

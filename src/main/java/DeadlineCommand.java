@@ -23,6 +23,7 @@ public class DeadlineCommand extends Command {
      * Method to execute entirely when a deadline command is entered by the user.
      * @param tasks Tasklist containing all the tasks.
      * @param dukeUI UI to print string responses by the bot.
+     * @return String response by the bot.
      * @throws InvalidTaskDescriptionException when an inaccurate task description is entered.
      * @throws WrongDateFormatException when the date is not typed in the correct format.
      */
@@ -42,13 +43,5 @@ public class DeadlineCommand extends Command {
         } catch (DateTimeParseException e) {
             throw new WrongDateFormatException();
         }
-    }
-
-    /**
-     * Method to tell bot whether to end the current session.
-     * @return false to not exit the system.
-     */
-    protected boolean isExit() {
-        return false;
     }
 }
