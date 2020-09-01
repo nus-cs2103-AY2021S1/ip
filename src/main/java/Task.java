@@ -4,9 +4,9 @@
 
 public class Task {
     /** Name of task */
-    String name;
+    protected String name;
     /** Status of task, can either be complete or incomplete */
-    boolean completed;
+    protected boolean completed;
 
     Task(String name) {
         this.name = name;
@@ -18,11 +18,17 @@ public class Task {
         this.completed = completed;
     }
 
-    String getName() { return this.name; }
+    String getName() {
+        return this.name;
+    }
 
-    String getType() { return ""; }
+    String getType() {
+        return "";
+    }
 
-    String getTime() { return ""; }
+    String getTime() {
+        return "";
+    }
 
     /**
      * Returns symbol used to represent status of task.
