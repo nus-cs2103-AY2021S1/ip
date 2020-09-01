@@ -3,12 +3,12 @@ package duckie.command;
 import java.util.ArrayList;
 
 import duckie.Storage;
-import duckie.Ui;
 import duckie.exception.DuckieException;
 import duckie.exception.DuckieNoIndexException;
 import duckie.exception.DuckieNoListException;
 import duckie.task.Task;
 import duckie.task.TaskList;
+import duckie.ui.Ui;
 
 /**
  * Command to mark a task as Done
@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
      * @throws DuckieException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
         ArrayList<Task> lst = tasks.getTaskList();
         if (lst.size() == 0) {
             throw new DuckieNoListException();
@@ -49,6 +49,9 @@ public class DoneCommand extends Command {
         } catch (DuckieException e) {
             throw e;
         }
-        ui.checkTaskReply(task);
+
+        String output = "Quack! I've marked this task as done: \n";
+        output += task.toString();
+        return output;
     }
 }

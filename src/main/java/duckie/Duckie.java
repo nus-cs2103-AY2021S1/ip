@@ -6,6 +6,9 @@ import java.nio.file.Paths;
 import duckie.command.Command;
 import duckie.exception.DuckieException;
 import duckie.task.TaskList;
+import duckie.ui.Ui;
+import javafx.application.Platform;
+
 
 /**
  * Main file for the chatbot Duckie
@@ -16,14 +19,16 @@ public class Duckie {
     private TaskList tasks;
     private Ui ui;
 
+    private String cwd = System.getProperty("user.dir");
+    private Path filePath = Paths.get(cwd, "data", "duckie.txt");
+
     /**
-     * Instantiate the Duckie object together with the filePath of duckie file
-     * @param filePath Duckie file location
+     * Instantiate the Duckie object
      */
-    public Duckie(String filePath) {
+    public Duckie() {
         ui = new Ui();
         ui.showIntro();
-        storage = new Storage(filePath);
+        storage = new Storage(String.valueOf(filePath));
         try {
             tasks = new TaskList(storage.load());
         } catch (DuckieException e) {
@@ -53,13 +58,19 @@ public class Duckie {
     }
 
     /**
-     * Main method activating run() method
-     * @param args
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        String cwd = System.getProperty("user.dir");
-        Path dirPath = Paths.get(cwd, "data");
-        Path filePath = Paths.get(cwd, "data", "duckie.txt");
-        new Duckie(String.valueOf(filePath)).run();
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input.trim());
+            if (c.isExit()) {
+                Platform.exit();
+            }
+            return c.execute(tasks, ui, storage);
+        } catch (DuckieException e) {
+            return e.getMessage();
+        }
     }
+
 }

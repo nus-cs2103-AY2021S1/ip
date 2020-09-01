@@ -3,10 +3,10 @@ package duckie.command;
 import java.util.ArrayList;
 
 import duckie.Storage;
-import duckie.Ui;
 import duckie.exception.DuckieException;
 import duckie.task.Task;
 import duckie.task.TaskList;
+import duckie.ui.Ui;
 
 /**
  * Command to retrieve all Tasks containing the keyword
@@ -30,12 +30,18 @@ public class FindCommand extends Command {
      * @throws DuckieException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
         ArrayList<Task> filteredList = tasks.filterList(keyword);
         if (filteredList.size() == 0) {
             throw new DuckieException("Duckie can't find any matching tasks!");
         } else {
-            ui.displayMatchingTasksReply(filteredList);
+            int index = 1;
+            String output = "Quack! Duckie found these matching tasks: \n";
+            for (Task task : tasks.getTaskList()) {
+                output += index + ". " + task + "\n";
+                index++;
+            }
+            return output;
         }
     }
 

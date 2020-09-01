@@ -1,9 +1,9 @@
 package duckie.command;
 
 import duckie.Storage;
-import duckie.Ui;
 import duckie.exception.DuckieException;
 import duckie.task.TaskList;
+import duckie.ui.Ui;
 
 /**
  * Parent class of all the Commands action
@@ -17,7 +17,7 @@ public abstract class Command {
      * @param storage Storage to write to File
      * @throws DuckieException
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException;
 
     /**
      * Check if the Command signifies exit of the chatbot

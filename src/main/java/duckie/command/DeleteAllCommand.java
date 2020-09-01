@@ -3,11 +3,11 @@ package duckie.command;
 import java.util.ArrayList;
 
 import duckie.Storage;
-import duckie.Ui;
 import duckie.exception.DuckieException;
 import duckie.exception.DuckieNoListException;
 import duckie.task.Task;
 import duckie.task.TaskList;
+import duckie.ui.Ui;
 
 /**
  * Command to delete all tasks in the TaskList
@@ -21,7 +21,7 @@ public class DeleteAllCommand extends Command {
      * @throws DuckieException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
         ArrayList<Task> lst = tasks.getTaskList();
         if (lst.size() == 0) {
             throw new DuckieNoListException();
@@ -33,6 +33,7 @@ public class DeleteAllCommand extends Command {
         } catch (DuckieException e) {
             throw e;
         }
-        ui.deleteAllReply();
+
+        return "Quack! All tasks are cleared in the list!";
     }
 }
