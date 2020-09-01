@@ -24,6 +24,9 @@ public class Parser {
             } else if (inputByParts[0].equals("done")) {
                 int taskNumber = Integer.parseInt(inputByParts[1]);
                 return new MarkDoneCommand(taskNumber);
+            } else if (inputByParts[0].equals("find")) {
+                String toFind = inputByParts[1];
+                return new FindCommand(toFind);
             } else {
                 String taskType = inputByParts[0];
                 validateTaskType(taskType);

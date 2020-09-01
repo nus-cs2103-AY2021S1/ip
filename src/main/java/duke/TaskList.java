@@ -3,6 +3,7 @@ package duke;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
@@ -49,6 +50,16 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(DukeException.ExceptionType.REQUESTED_NONEXISTENT_ITEM);
         }
+    }
+
+    public TaskList findTasks(String phrase) {
+        List<Task> searchResult = new ArrayList<>();
+        for (Task task: taskList) {
+            if (task.getDescription().contains(phrase)) {
+                searchResult.add(task);
+            }
+        }
+        return new TaskList(searchResult);
     }
 
     public int getCount() {
