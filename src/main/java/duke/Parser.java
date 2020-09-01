@@ -30,34 +30,40 @@ public class Parser {
      * @param command Command from user input.
      * @throws DukeException DukeException if command is not in legal form.
      */
-    public static void parseCommand(String command) throws DukeException {
-        if (command.equals("list")) {
-            taskList.printList();
+    public static String parseCommand(String command) throws DukeException {
+        if (command.equals("bye")) {
+            Storage.writeToFile(taskList);
+            return Ui.getExitMessage();
+        } else if (command.equals("list")) {
+            return taskList.taskListToString();
         } else {
             String[] strArr = command.split(" ", 2);
             String taskType = strArr[0];
-            if (taskType.equals("done")) {
+            switch (taskType) {
+            case "done": {
                 int taskNumber = Integer.parseInt(strArr[1]);
-                taskList.markTaskAsDone(taskNumber);
-            } else if (taskType.equals("delete")) {
+                return taskList.markTaskAsDone(taskNumber);
+            }
+            case "delete": {
                 int taskNumber = Integer.parseInt(strArr[1]);
                 if (taskNumber <= taskList.getNumOfTask()) {
-                    taskList.deleteTask(taskNumber);
+                    return taskList.deleteTask(taskNumber);
                 } else {
                     throw new DukeException("You only have " + taskList.getNumOfTask() + " tasks in your task list.");
                 }
-            } else if (taskType.equals("find")) {
+            }
+            case "find":
                 String keyword = strArr[1];
-                taskList.findTaskByKeyword(keyword);
-            } else if (taskType.equals("todo")) {
+                return taskList.findTaskByKeyword(keyword);
+            case "todo":
                 if (strArr.length == 1) {
                     throw new DukeException("The description of a todo cannot be empty.");
                 } else {
                     Todo todo = new Todo(strArr[1]);
                     taskList.addTask(todo);
-                    taskList.printAddedTask(todo);
+                    return taskList.addedTaskToString(todo);
                 }
-            } else if (taskType.equals("deadline")) {
+            case "deadline":
                 if (strArr.length == 1) {
                     throw new DukeException("The description of a deadline cannot be empty.");
                 } else {
@@ -70,13 +76,13 @@ public class Parser {
                             String deadlineTime = TimeParser.parseTime(deadlineArr[1]);
                             Deadline deadline = new Deadline(deadlineArr[0], deadlineTime);
                             taskList.addTask(deadline);
-                            taskList.printAddedTask(deadline);
+                            return taskList.addedTaskToString(deadline);
                         } else {
                             throw new DukeException("Wrong format when describing a date.");
                         }
                     }
                 }
-            } else if (taskType.equals("event")) {
+            case "event":
                 if (strArr.length == 1) {
                     throw new DukeException("The description of an event cannot be empty.");
                 } else {
@@ -88,13 +94,13 @@ public class Parser {
                             String eventTime = TimeParser.parseTime(eventArr[1]);
                             Event event = new Event(eventArr[0], eventTime);
                             taskList.addTask(event);
-                            taskList.printAddedTask(event);
+                            return taskList.addedTaskToString(event);
                         } else {
                             throw new DukeException("Wrong format when describing a date.");
                         }
                     }
                 }
-            } else {
+            default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
         }
