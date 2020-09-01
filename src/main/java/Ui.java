@@ -1,55 +1,59 @@
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Ui {
 
-    static String line = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
-    static Scanner input = new Scanner(System.in);
-    static String logo = " ____        _        \n"
+    private static final String LINE = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
+    private static final Scanner INPUT = new Scanner(System.in);
+    private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+    private static Image userPic;
+    private static Image dukePic;
+    private static TextField userInput;
+    private static VBox dialogContainer;
+    private static Duke dukeApp;
 
     /**
      * Takes in inputs, and passes them to the Parser to perform actions.
      */
-    public static void processInput(TaskList taskList) {
+    public static void processInput(String nextInput, TaskList taskList) {
 
-        printWithLines("Hello! My name is Duketh Puketh III, but you can call me\n" + logo +
-                "\n How may I help you today? :)\n The date and time is now " +
-                LocalDateTime.now().format(Duke.dateTimeFormat) + "\n");
-
-        String nextInput = input.nextLine();
         String[] inputParts = nextInput.split(" ", 2);
         String inputPrefix = inputParts[0];
         String inputSuffix = inputParts.length == 1 ? "" : inputParts[1];
-
-        while (!nextInput.equals("bye")) {
-
-            try {
-                Parser.handleInput(inputPrefix, inputSuffix, taskList);
-            } catch (DukeException dukeException) {
-                printWithLines(dukeException + "\n");
-            }
-
-
-            nextInput = input.nextLine();
-            inputParts = nextInput.split(" ", 2);
-            inputPrefix = inputParts[0];
-            inputSuffix = inputParts.length == 1 ? "" : inputParts[1];
-
+        try {
+            Parser.handleInput(inputPrefix, inputSuffix, taskList, dukeApp);
+        } catch (DukeException dukeException) {
+            printWithLines(dukeException + "\n");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
 
-        printWithLines("Bye! I'll see you again next time!\n");
-
+    public static void startInput(TaskList taskList) {
+        String input = userInput.getText();
+        Label userText = new Label(input);
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, new ImageView(userPic)));
+        processInput(input, taskList);
+        userInput.clear();
     }
 
     /**
      * Prints the desired output with decorative lines.
      */
     public static void printWithLines(String output) {
-        System.out.println(line + "\n" + output + line);
+        System.out.println(LINE + "\n" + output + LINE);
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(LINE + "\n" + output + LINE),
+                new ImageView(dukePic)));
     }
 
     /**
@@ -66,4 +70,18 @@ public class Ui {
         return true;
     }
 
+    public static void initialise(TextField newUserInput,
+                                  VBox newDialogContainer,
+                                  Duke newDuke,
+                                  Image user,
+                                  Image duke) {
+        userInput = newUserInput;
+        dialogContainer = newDialogContainer;
+        dukeApp = newDuke;
+        userPic = user;
+        dukePic = duke;
+        printWithLines("Hello! My name is Duketh Puketh III, but you can call me\n" + LOGO
+                + "\n How may I help you today? :)\n The date and time is now "
+                + LocalDateTime.now().format(Duke.dateTimeFormat) + "\n");
+    }
 }

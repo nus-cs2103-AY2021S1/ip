@@ -19,7 +19,7 @@ public class Event extends Task {
      */
     public static void newEvent(String inputSuffix, TaskList taskList, boolean isDone, boolean shouldAnnounce)
             throws DukeException {
-        String[] eventParts = inputSuffix.split("/at",2);
+        String[] eventParts = inputSuffix.split("/at", 2);
         String eventName = eventParts[0];
         if (eventParts.length == 1) {
             throw new DukeEmptyDescException(TaskType.EVENT);
