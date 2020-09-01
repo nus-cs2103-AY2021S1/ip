@@ -1,3 +1,7 @@
+package util;
+
+import util.task.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -27,7 +31,6 @@ public class Storage {
      * @return Array list of Tasks deciphered from save file.
      * @throws FileNotFoundException  If no save file detected.
      */
-    /** Retrieved from https://nus-cs2103-ay2021s1.github.io/website/book/cppToJava/misc/fileAccess/ */
     public ArrayList<Task> loadFileContents() throws FileNotFoundException {
         // Initialize list to be returned
         ArrayList<Task> list = new ArrayList<>(100);
