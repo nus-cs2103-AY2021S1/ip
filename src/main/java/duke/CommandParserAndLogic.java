@@ -26,6 +26,13 @@ public class CommandParserAndLogic {
         commandCheck(current[0]);
     }
 
+    /**
+     * Checks the string provided if it matches any known commands
+     * Follows up by calling the relevant logic
+     *
+     * @param string input
+     * @return true if it is an know command, else false
+     */
     private boolean commandCheck(String string) {
         switch (string) {
             case "!commands":
