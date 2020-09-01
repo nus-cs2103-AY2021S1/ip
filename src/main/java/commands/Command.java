@@ -1,10 +1,5 @@
 package commands;
 
-import exceptions.DukeException;
-import exceptions.DukeInvalidParameterException;
-import exceptions.DukeUnrecognisedCommandException;
-import tasks.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
@@ -13,6 +8,16 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import exceptions.DukeException;
+import exceptions.DukeInvalidParameterException;
+import exceptions.DukeUnrecognisedCommandException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.Todo;
+
 
 /**
  * The enum of all valid Commands

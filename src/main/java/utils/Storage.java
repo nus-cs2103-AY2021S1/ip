@@ -1,14 +1,20 @@
 package utils;
 
-import exceptions.DukeIOException;
-import tasks.Task;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import exceptions.DukeIoException;
+import tasks.Task;
+
 
 /**
  * The storage handler. Handles saving and loading of data using
@@ -32,16 +38,16 @@ public class Storage {
      * @param directoryPath the directory path
      * @param fileName      the file name of the ser database
      * @return the storage instance
-     * @throws DukeIOException when unable to create directory
+     * @throws DukeIoException when unable to create directory
      */
-    public static Storage createStorage(String directoryPath, String fileName) throws DukeIOException {
+    public static Storage createStorage(String directoryPath, String fileName) throws DukeIoException {
         Path dirPath = Paths.get(directoryPath);
 
         File directory = new File(dirPath.normalize().toString());
         if (!directory.exists()) {
             if (!directory.mkdirs()) {
                 ResourceBundle strings = ResourceBundle.getBundle("resources.StringsBundle", Locale.ENGLISH);
-                throw new DukeIOException(strings.getString("error.dir"), directoryPath);
+                throw new DukeIoException(strings.getString("error.dir"), directoryPath);
             }
         }
         Storage storage = new Storage();
@@ -60,14 +66,16 @@ public class Storage {
      * Load the saved list from the database.
      *
      * @return the array list
-     * @throws DukeIOException when data is corrupted
+     * @throws DukeIoException when data is corrupted
      */
     @SuppressWarnings("unchecked")
-    public ArrayList<Task> load() throws DukeIOException {
+    public ArrayList<Task> load() throws DukeIoException {
 
         //Solution below adapted from https://www.javatpoint.com/serialization-in-java
         try {
-            if (objIn == null) return new ArrayList<>();
+            if (objIn == null) {
+                return new ArrayList<>();
+            }
             ArrayList<Task> ret = (ArrayList<Task>) objIn.readObject();
 
             objIn.close();
@@ -75,7 +83,7 @@ public class Storage {
 
             return ret;
         } catch (ClassNotFoundException e) {
-            throw new DukeIOException(e.getMessage(), "");
+            throw new DukeIoException(e.getMessage(), "");
         } catch (IOException e) {
             return new ArrayList<>();
         }
@@ -85,9 +93,9 @@ public class Storage {
      * Save a given list into the database.
      *
      * @param tasks the <code>Task</code> list to save
-     * @throws DukeIOException when unable to write to database
+     * @throws DukeIoException when unable to write to database
      */
-    public void save(ArrayList<Task> tasks) throws DukeIOException {
+    public void save(ArrayList<Task> tasks) throws DukeIoException {
 
         //Solution below adapted from https://www.javatpoint.com/serialization-in-java
         try {
@@ -98,7 +106,7 @@ public class Storage {
             objOut.close();
             fileOut.close();
         } catch (IOException e) {
-            throw new DukeIOException(e.getMessage(), "");
+            throw new DukeIoException(e.getMessage(), "");
         }
     }
 
