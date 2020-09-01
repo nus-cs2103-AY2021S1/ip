@@ -61,8 +61,8 @@ public class Task {
      */
     @Override
     public String toString() {
-        String tick = "✔";
-        String cross = "✘";
+        String tick = "\u2713";
+        String cross = "\u2718";
         if (isDone) {
             return "[" + tick + "] " + this.description;
         } else {

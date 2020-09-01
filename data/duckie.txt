@@ -1,5 +1,5 @@
 T | 0 | book hotel
-T | 0 | study quiz
+T | 1 | study quiz
 D | 0 | Project OP| Tue, Sep 01 2020
 E | 0 | Homecoming| Sat, Sep 19 2020 09:30 AM
-E | 0 | exam | Tue, Sep 15 2020 10:30 AM
+E | 0 | exam| Tue, Sep 15 2020 10:30 AM
