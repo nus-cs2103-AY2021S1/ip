@@ -12,13 +12,13 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        String[] stringArray = {AddTodoCommand.MESSAGE_USAGE
-                ,AddEventCommand.MESSAGE_USAGE
-                ,AddDeadlineCommand.MESSAGE_USAGE
-                ,DeleteCommand.MESSAGE_USAGE
-                ,MarkDoneCommand.MESSAGE_USAGE
+        String[] stringArray = {src.main.java.duke.commands.AddTodoCommand.MESSAGE_USAGE
+                , src.main.java.duke.commands.AddEventCommand.MESSAGE_USAGE
+                , src.main.java.duke.commands.AddDeadlineCommand.MESSAGE_USAGE
+                , src.main.java.duke.commands.DeleteCommand.MESSAGE_USAGE
+                , src.main.java.duke.commands.MarkDoneCommand.MESSAGE_USAGE
                 ,HelpCommand.MESSAGE_USAGE
-                ,ExitCommand.MESSAGE_USAGE};
+                , src.main.java.duke.commands.ExitCommand.MESSAGE_USAGE};
 
         String resultString = "";
 
@@ -28,6 +28,6 @@ public class HelpCommand extends Command {
             ;
         }
 
-        return new CommandResult(resultString);
+        return new src.main.java.duke.commands.CommandResult(resultString);
     }
 }

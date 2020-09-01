@@ -3,6 +3,7 @@ package src.main.java.duke.data;
 import src.main.java.duke.data.task.Task;
 import src.main.java.duke.data.task.TaskList;
 import src.main.java.duke.data.task.TaskList.TaskNotFoundException;
+import src.main.java.duke.storage.StorageFile;
 
 
 /**
@@ -11,6 +12,8 @@ import src.main.java.duke.data.task.TaskList.TaskNotFoundException;
 public class Duke {
 
     private final TaskList taskList;
+
+    public src.main.java.duke.storage.StorageFile storageFile;
 
     /**
      * Creates an empty task list.
@@ -76,6 +79,19 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        return "sadfasd";
+        src.main.java.duke.commands.Command command = new src.main.java.duke.parser.Parser().parseCommand(input);
+        return executeCommand(command);
+    }
+
+    private String executeCommand(src.main.java.duke.commands.Command command) {
+        try {
+            command.setData(this);
+            src.main.java.duke.commands.CommandResult result = command.execute();
+//            storageFile.save(this);
+            return result.getFeedbackToUser();
+        } catch (Exception e) {
+            System.out.println("asdfasdfasdhere");
+            return e.getMessage();
+        }
     }
 }
