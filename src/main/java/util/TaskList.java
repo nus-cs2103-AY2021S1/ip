@@ -88,7 +88,7 @@ public class TaskList {
         int index = Integer.parseInt(instructions[1]) - 1;
         try {
             Task t = tasks.get(index);
-            t.markedDone(true);
+            t.setStatus(true);
             return String.format("Congratulations!\nI've helped you mark the task as done:\n -> %s\n",
                     t.toString());
         } catch (IndexOutOfBoundsException e) {

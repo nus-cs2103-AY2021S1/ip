@@ -31,16 +31,6 @@ public class Ui {
     }
 
     /**
-     * Prints Duke's greetings to user.
-     */
-    public void displayGreetings() {
-        System.out.println("\nHello, I'm Duke!");
-        System.out.println("What can I help you with today?");
-        System.out.println("\n" + lineBreaker);
-        System.out.println();
-    }
-
-    /**
      * Sets Duke's load message as a string.
      */
     public void setGreetings(String loadMessage) {
@@ -57,15 +47,6 @@ public class Ui {
                 "\nHello, I'm Duke! " +
                 "What can I help you with today?" +
                 "\n" + lineBreaker + "\n";
-    }
-
-    /**
-     * Print's Duke's farewell to user.
-     */
-    public void displayFarewells() {
-        System.out.print(outputBreaker);
-        System.out.println("Bye! Hoped I helped!");
-        System.out.println("\n" + lineBreaker);
     }
 
     /**
@@ -106,49 +87,12 @@ public class Ui {
     }
 
     /**
-     * Prints a line.
-     */
-    public void printLineBreaker() {
-        System.out.println(lineBreaker);
-        System.out.println();
-    }
-
-    /**
      * Returns the line breaker string.
      *
      * @returns Line break as String.
      */
     public String getLineBreaker() {
         return lineBreaker + "\n";
-    }
-
-    /**
-     * Prints error message for when Duke fails to load save file.
-     */
-    public void showLoadingError() {
-        System.out.println("... Who? Never mind. Er-hmm.");
-        System.out.println();
-    }
-
-    /**
-     * Prints error messages from DukeException.
-     *
-     * @param e The DukeException to print message of.
-     */
-    public void printError(DukeException e) {
-        System.out.println(e.getMessage());
-        System.out.println();
-    }
-
-    /**
-     * Prints messages from commands.
-     *
-     * @param s The message to print.
-     */
-    public void printMessage(String s) {
-        printOutputSymbol();
-        System.out.println(s);
-        System.out.println();
     }
 
     /**
@@ -162,23 +106,6 @@ public class Ui {
     }
 
     /**
-     * Prints all tasks within a TaskList (if any).
-     * Else prints a list is empty message.
-     *
-     * @param list TaskList of Duke.
-     */
-    public void printList(TaskList list) {
-        System.out.print("Here is what I have! ^^\n");
-        if (list.isListEmpty()) {
-            // Handles printing empty list
-            System.out.println("Whoops! I don't have anything of note yet...");
-        } else {
-            list.printAllTasks();
-        }
-        System.out.println();
-    }
-
-    /**
      * Returns all tasks within a TaskList (if any).
      * Else prints a list is empty message.
      *
@@ -189,7 +116,7 @@ public class Ui {
         String output = "Here is what I have! ^^\n";
         if (list.isListEmpty()) {
             // Handles printing empty list
-            output += "Whoops! I don't have anything of note yet...";
+            output += "Whoops! I don't have anything of note yet...\n";
         } else {
             output += list.getAllTasks();
         }

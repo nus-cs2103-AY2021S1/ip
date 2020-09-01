@@ -48,7 +48,7 @@ public class Storage {
             if (taskDetails[0].equals("T")) {
                 Task t = new Todo(taskDetails[2]);
                 if (taskDetails[1].equals("1")) {
-                    t.markedDone(true);
+                    t.setStatus(true);
                 }
                 list.add(t);
             } else if (taskDetails[0].equals("D")) {
@@ -56,7 +56,7 @@ public class Storage {
                     // Try to add Deadline based off file
                     Task t = new Deadline(taskDetails[2], LocalDate.parse(taskDetails[3]));
                     if (taskDetails[1].equals("1")) {
-                        t.markedDone(true);
+                        t.setStatus(true);
                     }
                     list.add(t);
                 } catch(Exception e) {
@@ -70,7 +70,7 @@ public class Storage {
             } else if (taskDetails[0].equals("E")) {
                 Task t = new Event(taskDetails[2], taskDetails[3]);
                 if (taskDetails[1].equals("1")) {
-                    t.markedDone(true);
+                    t.setStatus(true);
                 }
                 list.add(t);
             } else {

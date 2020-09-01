@@ -39,7 +39,7 @@ public class Task {
      *
      * @param status  Status to set Task to.
      */
-    public void markedDone(boolean status) {
+    public void setStatus(boolean status) {
         this.isDone = status;
     }
 
