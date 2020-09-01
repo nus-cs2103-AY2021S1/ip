@@ -34,7 +34,7 @@ public class CheckCommand extends Command {
                 result += ui.showTask(lib.get(i).toString());
             }
         }
-        return result;
+        return result + ui.printEndLine();
     }
 
 }
