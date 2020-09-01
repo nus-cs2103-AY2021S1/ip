@@ -1,3 +1,5 @@
+package util;
+
 /**
  * Represents the type of commands Duke can do.
  *

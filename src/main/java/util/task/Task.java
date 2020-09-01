@@ -1,3 +1,5 @@
+package util.task;
+
 /**
  * Parent Class for all Tasks.
  *
@@ -36,7 +38,6 @@ public class Task {
      * Set Task status to specified value.
      *
      * @param status  Status to set Task to.
-     * @return Lateral location.
      */
     public void markedDone(boolean status) {
         this.isDone = status;
