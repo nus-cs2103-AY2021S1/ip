@@ -1,10 +1,12 @@
 package dude;
 
-import dude.Dude;
+import javafx.application.Application;
 
+/**
+ * A Main class to workaround classpath issues.
+ */
 public class Main {
     public static void main(String[] args) {
-        Dude bot = new Dude();
-        bot.run();
+        Application.launch(Dude.class, args);
     }
 }
