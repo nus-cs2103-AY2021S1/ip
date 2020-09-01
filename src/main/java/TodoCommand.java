@@ -22,12 +22,13 @@ public class TodoCommand extends Command{
      * @throws InvalidTaskDescriptionException when an inaccurate task description is entered.
      */
     @Override
-    protected void execute(TaskList tasks, UI dukeUI) throws InvalidTaskDescriptionException {
+    protected String execute(TaskList tasks, UI dukeUI) throws InvalidTaskDescriptionException {
         try {
             String[] todoDetails = this.command.split(" ", 2);
             Todo newTodo = new Todo(todoDetails[1]);
             tasks.addTask(newTodo);
-            dukeUI.addTask(tasks, newTodo);
+            String dukeResponse = dukeUI.addTask(tasks, newTodo);
+            return dukeResponse;
         } catch (IndexOutOfBoundsException e){
             throw new InvalidTaskDescriptionException();
         }

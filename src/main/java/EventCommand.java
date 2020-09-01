@@ -26,14 +26,15 @@ public class EventCommand extends Command{
      * @throws WrongDateFormatException when an invalid date format is entered.
      */
     @Override
-    protected void execute(TaskList tasks, UI dukeUI) throws InvalidTaskDescriptionException, WrongDateFormatException {
+    protected String execute(TaskList tasks, UI dukeUI) throws InvalidTaskDescriptionException, WrongDateFormatException {
         try {
             String[] taskDetails = this.command.split("/");
             LocalDate taskDate = LocalDate.parse(taskDetails[1]);
             String[] taskDetailsWithoutDate = taskDetails[0].split(" ", 2);
             Event newEvent = new Event(taskDetailsWithoutDate[1], taskDate);
             tasks.addTask(newEvent);
-            dukeUI.addTask(tasks, newEvent);
+            String dukeResponse = dukeUI.addTask(tasks, newEvent);
+            return dukeResponse;
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskDescriptionException();
         } catch (DateTimeParseException e) {

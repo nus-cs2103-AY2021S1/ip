@@ -24,12 +24,13 @@ public class FindCommand extends Command {
      * @throws DukeException
      */
     @Override
-    void execute(TaskList tasks, UI dukeUI) throws DukeException {
+    protected String execute(TaskList tasks, UI dukeUI) throws DukeException {
         try {
             String[] keywords = this.command.split(" ", 2);
             String keyword = keywords[1];
             ArrayList<Task> foundTasks = tasks.findTask(keyword);
-            dukeUI.findTask(foundTasks);
+            String dukeResponse = dukeUI.findTask(foundTasks);
+            return dukeResponse;
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidKeywordException();
         }

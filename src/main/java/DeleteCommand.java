@@ -22,14 +22,15 @@ public class DeleteCommand extends Command {
      * @throws InvalidTaskNumberException when an inaccurate task number is entered.
      */
     @Override
-    protected void execute(TaskList tasks, UI dukeUI) throws InvalidTaskNumberException {
+    protected String execute(TaskList tasks, UI dukeUI) throws InvalidTaskNumberException {
         try {
             String[] deleteCommand = this.command.split(" ");
             int taskIndex = Integer.parseInt(deleteCommand[1]);
             if (taskIndex > 0 && taskIndex <= tasks.getTaskList().size()) {
                 Task deletedTask = tasks.getTaskList().get(taskIndex-1);
                 tasks.deleteTask(deletedTask);
-                dukeUI.deleteTask(tasks, deletedTask);
+                String dukeResponse = dukeUI.deleteTask(tasks, deletedTask);
+                return dukeResponse;
             } else {
                 throw new InvalidTaskNumberException();
             }

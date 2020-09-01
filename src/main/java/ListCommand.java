@@ -22,12 +22,14 @@ public class ListCommand extends Command {
      * @throws InvalidCommandException when an invalid command is entered by user.
      */
     @Override
-    protected void execute(TaskList tasks, UI dukeUI) throws InvalidCommandException {
+    protected String execute(TaskList tasks, UI dukeUI) throws InvalidCommandException {
         this.checkCommandValidity();
         if (tasks.getTaskList().isEmpty()) {
-            System.out.println("\nThere are currently no tasks stored!\n");
+            String str1 = "\nThere are currently no tasks stored!\n";
+            return str1;
         } else {
-            dukeUI.displayTasks(tasks);
+            String dukeResponse = dukeUI.displayTasks(tasks);
+            return dukeResponse;
         }
     }
 

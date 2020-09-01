@@ -12,8 +12,8 @@ public class ByeCommand extends Command {
      * @throws DukeException
      */
     @Override
-    void execute(TaskList tasks, UI ui) throws DukeException {
-        System.out.println("Bye! Have a nice day!");
+    protected String execute(TaskList tasks, UI ui) throws DukeException {
+        return "Bye Have a nice day!";
     }
 
     /**
