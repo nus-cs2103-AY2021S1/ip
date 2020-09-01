@@ -76,12 +76,13 @@ public class Ui {
                         + " tasks in the list");
                 break;
             case DELETE:
-                index = Character.getNumericValue(input.charAt(5)) - 1;
+                index = Character.getNumericValue(input.charAt(7)) - 1;
                 current = ls.getTaskArrayList().get(index);
                 ls.deleteTask(index);
 
                 outputDialogue += ("\n    I have deleted this task for you: " + current
                         + "\n    You have " + ls.getTaskArrayList().size() + " tasks in your list now");
+                break;
             default:
                 throw new DukeException("Command is not recognised");
         }
@@ -102,17 +103,18 @@ public class Ui {
                 throw new DukeException("Empty Index");
             }
 
-            int index = Character.getNumericValue(input.charAt(5)) - 1;
+            int index = Character.getNumericValue(input.charAt(7));
             if (index > maxIndexSize) {
-                throw new DukeException("Index is invalid");
+                throw new DukeException("Index of " + index + " is invalid");
             }
+
             c = Command.DELETE;
 
         } else if (input.contains("done")) {
             if (shortened.equals("done")) {
                 throw new DukeException("Index cannot be found");
             }
-            int index = Character.getNumericValue(input.charAt(5)) - 1;
+            int index = Character.getNumericValue(input.charAt(5));
             if (index > maxIndexSize) {
                 throw new DukeException("Index is invalid");
             }
