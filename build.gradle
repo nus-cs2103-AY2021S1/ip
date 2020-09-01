@@ -2,7 +2,8 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id "com.github.johnrengelman.shadow" version "6.0.0"
+    id 'com.github.johnrengelman.shadow' version '6.0.0'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 repositories {
@@ -20,10 +21,10 @@ test {
     useJUnitPlatform()
 
     testLogging {
-        events "passed", "skipped", "failed"
+        events 'passed', 'skipped', 'failed'
 
         showExceptions true
-        exceptionFormat "full"
+        exceptionFormat 'full'
         showCauses true
         showStackTraces true
         showStandardStreams = false
@@ -31,16 +32,21 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
-}
-
-shadowJar {
-    archiveBaseName = "duke"
-    archiveClassifier = null
+    mainClassName = 'duke.Duke'
 }
 
 checkstyle {
     toolVersion = '8.23'
+}
+
+shadowJar {
+    archiveBaseName = 'duke'
+    archiveClassifier = null
+}
+
+javafx {
+    version = '11.0.2'
+    modules = [ 'javafx.base', 'javafx.controls', 'javafx.fxml', 'javafx.graphics' ]
 }
 
 run{
