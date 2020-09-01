@@ -21,36 +21,32 @@ public class TaskList {
     private final List<Task> lst;
 
     /**
-     * Creates a new empty TaskList.
-     */
-    public TaskList() {
-        this.lst = new ArrayList<>();
-    }
-
-    /**
      * Creates a new TaskList of tasks based on an input list of strings.
      * The constructor parses these strings to create tasks before adding them to the TaskList.
      *
-     * @param inputLst List containing tasks represented as strings.
+     * @param inputLst List containing tasks represented as strings. (Param can have 0 arguments)
      */
-    public TaskList(List<String> inputLst) {
+    @SafeVarargs
+    public TaskList(List<String> ...inputLst) {
         String done = "1";
         this.lst = new ArrayList<>();
-        for (String line : inputLst) {
-            String[] splitInput = line.split(" \\| ");
-            TaskType taskType = TaskType.valueOf(splitInput[0]);
-            switch (taskType) {
-            case TODO:
-                this.add(new ToDoTask(splitInput[2], splitInput[1].equals(done)));
-                break;
-            case DEADLINE:
-                this.add(new DeadlineTask(splitInput[2], splitInput[1].equals(done), splitInput[3]));
-                break;
-            case EVENT:
-                this.add(new EventTask(splitInput[2], splitInput[1].equals(done), splitInput[3]));
-                break;
-            default:
-                break;
+        if (inputLst.length >= 1) {
+            for (String line : inputLst[0]) {
+                String[] splitInput = line.split(" \\| ");
+                TaskType taskType = TaskType.valueOf(splitInput[0]);
+                switch (taskType) {
+                case TODO:
+                    this.add(new ToDoTask(splitInput[2], splitInput[1].equals(done)));
+                    break;
+                case DEADLINE:
+                    this.add(new DeadlineTask(splitInput[2], splitInput[1].equals(done), splitInput[3]));
+                    break;
+                case EVENT:
+                    this.add(new EventTask(splitInput[2], splitInput[1].equals(done), splitInput[3]));
+                    break;
+                default:
+                    break;
+                }
             }
         }
     }
