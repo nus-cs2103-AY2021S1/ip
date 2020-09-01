@@ -20,9 +20,7 @@ import duke.task.TaskList;
 import duke.utils.Datetime;
 import duke.utils.Utils;
 
-/**
- * The class that converts commands passed into Duke into <code>Operations</code>.
- */
+/** The class that converts commands passed into Duke into <code>Operations</code>.*/
 public class CommandParser {
     private ExitOperation createExitOp(TaskStorage storage, TaskList list) {
         return new ExitOperation(storage, list);

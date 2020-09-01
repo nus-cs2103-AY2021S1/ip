@@ -2,9 +2,7 @@ package duke.utils;
 
 import java.util.Arrays;
 
-/**
- * The utilities class for Duke.
- */
+/** The utilities class for Duke. */
 public final class Utils {
     public static final int INDEX_NOT_FOUND = -1;
 

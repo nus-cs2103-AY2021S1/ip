@@ -3,9 +3,7 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
- * Represents the list of <code>Tasks</code> that Duke stores in.
- */
+/** Represents the list of <code>Tasks</code> that Duke stores in. */
 public class TaskList implements Iterable<Task> {
     private final ArrayList<Task> taskList;
 

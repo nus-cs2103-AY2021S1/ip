@@ -2,9 +2,7 @@ package duke.ui;
 
 import java.util.Scanner;
 
-/**
- * Represents the user interface class.
- */
+/** Represents the user interface class. */
 public class CommandLineUi {
     private static final String DIVIDER = "---------------------------------------------------------";
     private static final String LOGO = " ____        _        \n"

@@ -10,9 +10,7 @@ import duke.storage.TaskStorage;
 import duke.task.TaskList;
 import duke.ui.CommandLineUi;
 
-/**
- * Represents the main driver class of Duke.
- */
+/** Represents the main driver class of Duke. */
 public class Duke {
     private final TaskStorage taskStorage;
     private final TaskList taskList;

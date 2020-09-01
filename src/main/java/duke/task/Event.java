@@ -53,6 +53,7 @@ public class Event extends Task {
 
     /**
      * Checks if the other object is equivalent to the <code>Event</code>.
+     * The description, completion status and time must be equal.
      *
      * @param other the object to be compared to.
      * @return <code>true</code> if both objects are equal.

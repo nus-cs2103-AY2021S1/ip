@@ -2,9 +2,7 @@ package duke.task;
 
 import java.util.Optional;
 
-/**
- * Represents the Task object.
- */
+/** Represents the Task object. */
 public abstract class Task {
     private static final String TICK = "\u2713";
     private static final String CROSS = "\u2717";

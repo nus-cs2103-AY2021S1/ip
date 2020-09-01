@@ -11,9 +11,7 @@ import duke.parser.StorageParser;
 import duke.task.Task;
 import duke.task.TaskList;
 
-/**
- * Class that loads and converts the <code>TaskList</code> in Duke with a text file.
- */
+/** Class that loads and converts the <code>TaskList</code> in Duke with a text file. */
 public class TaskStorage {
     private static final String DEFAULT_FILENAME = "taskstorage.txt";
     private static final String DEFAULT_FILEPATH = "data/";

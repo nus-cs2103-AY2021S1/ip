@@ -1,8 +1,6 @@
 package duke.parser;
 
-/**
- * Represents the various commands that Duke supports.
- */
+/** Represents the various commands that Duke supports. */
 public enum CommandType {
     BYE("bye", 1),
     LIST("list", 1),
