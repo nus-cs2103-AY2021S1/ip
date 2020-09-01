@@ -1,9 +1,12 @@
 package duke;
 
+import duke.utils.ResourceHandler;
+
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.text.MessageFormat;
 
 import javafx.application.Application;
 
@@ -12,13 +15,31 @@ import javafx.application.Application;
  */
 public class Duke {
     /**
-     * Starts the Duke chatbot.
+     * Starts the Duke chatbot with the specified command line parameters if applicable.
      *
-     * @param args The command line parameters (unused)
+     * @param args the command line parameters
      */
     public static void main(String[] args) {
-        launchGui();
-        // TODO: Add option to launch Duke in CLI mode.
+        if (args.length > 0) {
+            switch (args[0].toLowerCase()) {
+            case "-h":
+            case "--help":
+                System.out.println(ResourceHandler.getString("duke.help"));
+                break;
+            case "-c":
+            case "--console":
+                launchCli();
+                break;
+            case "-g":
+            case "--graphical":
+                launchGui();
+                break;
+            default:
+                System.out.println(MessageFormat.format(ResourceHandler.getString("duke.invalidCommand"), args[0]));
+            }
+        } else {
+            launchGui();
+        }
     }
 
     /**
