@@ -60,6 +60,11 @@ public class DataSaver implements DialogBox {
         window.showAndWait();
     }
 
+    /**
+     * Notifies if the program is going to quit.
+     *
+     * @return a boolean representing if the program is quitting.
+     */
     public static boolean isQuitting() {
         return isQuitting;
     }
