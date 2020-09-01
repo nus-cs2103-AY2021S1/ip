@@ -9,18 +9,18 @@ import java.util.ArrayList;
  * of tasks
  */
 public class TaskList {
-    private ArrayList<Task> store = new ArrayList<>();
+    private ArrayList<Task> taskArrayList = new ArrayList<>();
 
-    TaskList(ArrayList<Task> store) {
-        this.store = store;
+    TaskList(ArrayList<Task> taskArrayList) {
+        this.taskArrayList = taskArrayList;
     }
 
-    public ArrayList<Task> getStore() {
-        return this.store;
+    public ArrayList<Task> getTaskArrayList() {
+        return this.taskArrayList;
     }
 
-    public void add(Task t) {
-        store.add(t);
+    public void addTask(Task t) {
+        taskArrayList.add(t);
     }
 
     /**
@@ -28,8 +28,8 @@ public class TaskList {
      *
      * @param index provided by the user
      */
-    public void delete(int index) {
-        store.remove(index);
+    public void deleteTask(int index) {
+        taskArrayList.remove(index);
     }
 
     /**
@@ -39,9 +39,9 @@ public class TaskList {
      * @param keyword matches the task description
      * @return a list of task the user is finding
      */
-    public ArrayList<Task> finder(String keyword) {
+    public ArrayList<Task> findSameKeyword(String keyword) {
         ArrayList<Task> ls = new ArrayList<>();
-        for (Task t : this.store) {
+        for (Task t : this.taskArrayList) {
             String d = t.getDescription();
             if (d.contains(keyword)) {
                 ls.add(t);

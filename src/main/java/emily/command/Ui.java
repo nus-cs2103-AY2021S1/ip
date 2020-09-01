@@ -15,6 +15,10 @@ public class Ui {
 
     }
 
+    enum Command {
+        LIST, DELETE, TASK, DONE, BLANK, FIND
+    }
+
 
     /**
      * Read a line of input from the user and modify the task list accordingly
@@ -23,87 +27,114 @@ public class Ui {
      * @param ls    to be modified
      * @throws DukeException when there is invalid command
      */
-    public void reading(String input, TaskList ls) throws DukeException {
+    public String readsLine(String input, TaskList ls) throws DukeException {
+        String outputDialogue = "";
 
         Task current;
         Parser p = new Parser();
-        String divider = "    ---------------";
 
-        if (input.isEmpty() || input.trim().isEmpty()) {
-            throw new DukeException("input is empty");
-        } else if (input.contains("list")) {
-            System.out.println(divider);
+        Command instruct = checksValidInput(input, ls.getTaskArrayList().size());
+        int index;
+        int counter;
 
-            int num = 1;
-            for (Task c : ls.getStore()) {
-                String item = "    " + num + ". " + c;
-                num++;
-                System.out.println(item);
-            }
+        switch (instruct) {
+            case LIST:
 
-            System.out.println(divider);
-        } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
-
-            if (input.trim().equals("todo") || input.trim().equals("deadline") || input.trim().equals("event")
-                    || input.trim().equals("deadline/by") || input.trim().equals("event/at")) {
-
-                throw new DukeException("The description of " + input + " cannot be empty");
-
-            } else {
-
-                System.out.println(divider);
-                //call parser to convert to task
-                current = p.process(input);
-                ls.add(current);
-                System.out.println("    Now you have " + (ls.getStore().size())
-                        + " tasks in the list" + "\n" + divider);
-            }
-
-        } else if (input.contains("done") || input.contains("delete") || input.contains("find")) {
-            if (input.contains("done")) {
-
-                int index = Character.getNumericValue(input.charAt(5)) - 1;
-                current = ls.getStore().get(index);
-                current.setFinished(true);
-                System.out.println(divider + "\n    Nice work, I have marked this task as done: "
-                        + current + "\n" + divider);
-
-            } else if (input.contains("delete")) {
-
-                if (input.trim().equals("delete")) {
-                    throw new DukeException("missing index");
+                int num = 1;
+                for (Task c : ls.getTaskArrayList()) {
+                    String item = "    " + num + ". " + c;
+                    num++;
+                    outputDialogue += "\n" + item + "\n";
                 }
 
-                int index = Character.getNumericValue(input.charAt(7)) - 1;
-                if ((index + 1) > ls.getStore().size()) {
-                    throw new DukeException("Invalid index");
-                }
-                current = ls.getStore().get(index);
-                ls.delete(index);
-
-                System.out.println(divider + "\n    I have deleted this task for you: " + current);
-                System.out.println("    You have " + ls.getStore().size() + " tasks in your list now"
-                        + "\n" + divider);
-            } else { //case of finding
-                if (input.trim().equals("find")) {
-                    throw new DukeException("missing keyword");
-                }
+                break;
+            case FIND:
                 String keyword = input.substring(5);
 
-                ArrayList<Task> arr = ls.finder(keyword);
+                ArrayList<Task> arr = ls.findSameKeyword(keyword);
 
-                System.out.println(divider + "\n    Here are the matching tasks in your list");
-                int index = 1;
+                outputDialogue += "\n    Here are the matching tasks in your list";
+                counter = 1;
                 for (Task t : arr) {
-                    System.out.println(index + ". " + t);
-                    index++;
+                    outputDialogue += ("\n    " + counter + ". " + t);
+                    counter++;
                 }
-                System.out.println(divider);
+                break;
+            case DONE:
+                index = Character.getNumericValue(input.charAt(5)) - 1;
+                current = ls.getTaskArrayList().get(index);
+                current.setFinished(true);
+                outputDialogue += ("\n    Nice work, I have marked this task as done: "
+                        + current);
+                break;
+            case TASK:
+                //call parser to convert to task
+                current = p.parse(input);
+                ls.addTask(current);
+                outputDialogue+= "\n    Got it! I have added this task: " + current;
+                outputDialogue += ("\n    Now you have " + (ls.getTaskArrayList().size())
+                        + " tasks in the list");
+                break;
+            case DELETE:
+                index = Character.getNumericValue(input.charAt(5)) - 1;
+                current = ls.getTaskArrayList().get(index);
+                ls.deleteTask(index);
 
+                outputDialogue += ("\n    I have deleted this task for you: " + current
+                        + "\n    You have " + ls.getTaskArrayList().size() + " tasks in your list now");
+            default:
+                throw new DukeException("Command is not recognised");
+        }
+        return outputDialogue;
+    }
+
+    public Command checksValidInput(String input, int maxIndexSize) throws DukeException {
+        Command c = Command.BLANK;
+        String shortened = input.trim();
+
+
+        if (input.isEmpty() || shortened.isEmpty()) {
+            throw new DukeException("Empty Input");
+        } else if (input.equals("list")) {
+            c = Command.LIST;
+        } else if (input.contains("delete")) {
+            if (shortened.equals("delete")) {
+                throw new DukeException("Empty Index");
             }
 
-        } else {
-            throw new DukeException("Command is not recognised");
+            int index = Character.getNumericValue(input.charAt(5)) - 1;
+            if (index > maxIndexSize) {
+                throw new DukeException("Index is invalid");
+            }
+            c = Command.DELETE;
+
+        } else if (input.contains("done")) {
+            if (shortened.equals("done")) {
+                throw new DukeException("Index cannot be found");
+            }
+            int index = Character.getNumericValue(input.charAt(5)) - 1;
+            if (index > maxIndexSize) {
+                throw new DukeException("Index is invalid");
+            }
+
+            c = Command.DONE;
+        } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
+            if (shortened.equals("todo") || shortened.equals("deadline") || shortened.equals("event")
+                    || shortened.equals("deadline/by") || shortened.equals("event/at")) {
+                throw new DukeException("The description cannot be empty");
+            }
+
+            c = Command.TASK;
         }
+        if (input.contains("find")) {
+            if (shortened.equals("find")) {
+                throw new DukeException("Missing keyword");
+            }
+
+            c = Command.FIND;
+        }
+        return c;
     }
+
+
 }

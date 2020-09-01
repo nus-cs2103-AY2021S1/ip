@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import main.java.emily.command.Emily;
 
 public class Main extends Application {
 
@@ -22,13 +23,16 @@ public class Main extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/day.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/night.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image emily = new Image(this.getClass().getResourceAsStream("/images/emily.png"));
 
+    private Emily bot = new Emily();
 
     @Override
     public void start(Stage stage) {
         //The container for the content of the chat to scroll.
+        String intro = "Hello, I am Emily\n"
+                + "What can i do for you?\n";
 
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -38,7 +42,8 @@ public class Main extends Application {
         sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, dialogContainer, userInput, sendButton);
+        mainLayout.getChildren().addAll(scrollPane, dialogContainer, userInput, sendButton,
+                new DialogBox(getDialogLabel(intro), new ImageView()));
 
 
         scene = new Scene(mainLayout);
@@ -48,7 +53,7 @@ public class Main extends Application {
 
         // more code to be added here later
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("Emily");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -89,7 +94,6 @@ public class Main extends Application {
             handleUserInput();
         });
 
-
     }
 
     /**
@@ -100,9 +104,10 @@ public class Main extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getDukeDialog(dukeText, new ImageView(emily))
         );
         userInput.clear();
     }
@@ -112,7 +117,8 @@ public class Main extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Emily receiving: " + input;
+        return "Emily receiving: " + input + "\n"
+                + bot.receiveCommandLine(input);
     }
 
     /**
