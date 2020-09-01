@@ -96,6 +96,14 @@ public class TaskList {
         return taskList.size();
     }
 
+    public ArrayList<Task> find(String findFor) {
+        ArrayList<Task> returnArrayList = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getDescription().contains(findFor)) returnArrayList.add(task);
+        }
+        return returnArrayList;
+    }
+
 
 
 }

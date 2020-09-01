@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Ui {
 
     public void showWelcomeMessage() {
@@ -53,5 +55,15 @@ public class Ui {
     public void showDeletedMessage(Task task, TaskList tasklist) {
         System.out.println("ok deleted this task alr:\n" + task + "\n" + "Now you left " + (tasklist.getSize() - 1)
         + " task(s)");
+    }
+
+    public void showSearchList(ArrayList<Task> taskArrayList) {
+        if (taskArrayList.size() == 0) {
+            System.out.println("We could not find anything that matches the search");
+        } else {
+            String returnString = "Here are the tasks that match your search\n";
+            for (Task task : taskArrayList) returnString += task.toString() + "\n";
+            System.out.println(returnString);
+        }
     }
 }

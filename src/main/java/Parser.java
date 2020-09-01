@@ -51,18 +51,22 @@ public class Parser {
     public void processOtherActionInput(String userInput, TaskList taskList, Ui ui) throws IOException, DukeException {
         String actionType = userInput.split(" ")[0];
         switch (actionType) {
-            case "done":
+            case "done" :
                 System.out.println("ok sure good job i guess\n");
                 int doneIndex = Integer.parseInt(userInput.substring(5));
                 ui.showDoneMessage(taskList.getList().get(doneIndex));
                 taskList.taskCompleted(doneIndex);
                 System.out.println("\n");
                 break;
-            case "delete":
+            case "delete" :
                 if (userInput.equals("delete")) throw new deleteException();
                 int indexDeleted = Integer.parseInt(userInput.replace("delete ", ""));
                 ui.showDeletedMessage(taskList.getList().get(indexDeleted - 1), taskList);
                 taskList.deleteTask(indexDeleted);
+                break;
+            case "find" :
+                if (userInput.equals("delete")) throw new searchException();
+                ui.showSearchList(taskList.find(userInput.replace("find ", "")));
                 break;
             default :
                 throw new DukeException();
