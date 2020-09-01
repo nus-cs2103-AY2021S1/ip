@@ -54,8 +54,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing duke.
-     * Duke's reply and then appends them to the dialog container.
+     * Retrieves user input and executes it. Prints a dialog box to echo the user input
+     * and another dialog box containing the chat bot response.
      * Clears the user input after processing.
      */
     @FXML

@@ -117,6 +117,12 @@ public class Event extends Task {
                 super.description);
     }
 
+    /**
+     * Returns true if this {@code Event} matches the specified {@code searchParameter}.
+     *
+     * @param searchParameter the string to test against.
+     * @return true if this {@code Event} matches the specified {@code searchParameter}.
+     */
     @Override
     public boolean match(String searchParameter) {
         try {
