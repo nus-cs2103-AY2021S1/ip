@@ -36,4 +36,7 @@ public class CommandResult {
         return Optional.ofNullable(relevantTasks);
     }
 
+    public String getFeedbackToUser() {
+        return feedbackToUser;
+    }
 }
