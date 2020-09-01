@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -8,35 +8,35 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 /**
- * Represents a task with info of when it will be held
+ * Represents a task with info of by when it must be done
  */
-public class Event extends Task {
+public class Deadline extends Task {
 
     private LocalDate date;
     private Optional<LocalTime> time;
 
     /**
-     * Initializes a newly created Event with a description, date, and whether it is done.
+     * Initializes a newly created Deadline with a description, date, and whether it is done.
      *
      * @param desc description of task.
      * @param date date of task.
      * @param isDone whether task is done.
      */
-    public Event(String desc, LocalDate date, boolean isDone) {
+    public Deadline(String desc, LocalDate date, boolean isDone) {
         super(desc, isDone);
         this.date = date;
         this.time = Optional.empty();
     }
+
     /**
-     * Initializes a newly created Event with a description, date, time, and whether it is done.
+     * Initializes a newly created Deadline with a description, date, time, and whether it is done.
      *
      * @param desc description of task.
      * @param date date of task.
      * @param time time of task.
      * @param isDone whether task is done.
      */
-
-    public Event(String desc, LocalDate date, LocalTime time, boolean isDone) {
+    public Deadline(String desc, LocalDate date, LocalTime time, boolean isDone) {
         super(desc, isDone);
         this.date = date;
         this.time = Optional.ofNullable(time);
@@ -50,8 +50,8 @@ public class Event extends Task {
     @Override
     public Task setDone() {
         Task doneTask = this.time.map(
-                localTime -> new Event(this.desc, this.date, localTime, this.isDone))
-                .orElseGet(() -> new Event(this.desc, this.date, this.isDone));
+                localTime -> new Deadline(this.desc, this.date, localTime, this.isDone))
+                .orElseGet(() -> new Deadline(this.desc, this.date, this.isDone));
         doneTask.isDone = true;
         return doneTask;
     }
@@ -63,9 +63,9 @@ public class Event extends Task {
      */
     @Override
     public String formatTask() {
-        return ("E | " + (isDone ? "V" : "X") + " | " + desc + " | "
-                + this.date.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + " "
-                + this.time.map(localTime -> localTime.format(DateTimeFormatter.ofPattern("HHmm")))
+        return ("D" + " | " + (isDone ? "V" : "X") + " | " + desc + " | "
+                + this.date.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+                + this.time.map(localTime -> " " + localTime.format(DateTimeFormatter.ofPattern("HHmm")))
                 .orElse(""));
     }
 
@@ -76,7 +76,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: "
+        return "[D]" + super.toString() + " (by: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + this.time.map(time -> " " + time.toString()).orElse("") + ")";
     }

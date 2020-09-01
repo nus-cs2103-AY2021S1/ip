@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.Task;
-import duke.TaskList;
-import duke.Ui;
-import duke.Storage;
+import duke.task.Task;
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.util.Storage;
 import duke.DukeException;
 
 /**
@@ -28,16 +28,17 @@ public class DeleteCommand extends Command {
      * @param tasks TaskList of the program.
      * @param ui user interface of the program.
      * @param storage storage of the program.
+     * @return the execution message.
      * @throws DukeException if the task doesn't exist.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.idx >= tasks.size()) {
             throw new DukeException("Oh dear! That task doesn't exist!");
         }
         Task rmTask = tasks.remove(this.idx);
         storage.save(tasks.getList());
-        ui.onDelete(rmTask, tasks.size());
+        return ui.onDelete(rmTask, tasks.size());
     }
 
     /**

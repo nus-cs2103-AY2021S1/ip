@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.DukeException;
 import duke.command.Command;
 import duke.command.ByeCommand;
 import duke.command.ListCommand;
@@ -71,7 +72,7 @@ public class Parser {
             }
         } catch (DateTimeParseException ex) {
             throw new DukeException("Oh dear! Please format the date and time as yyyy/MM/dd HHmm!");
-        } catch (NumberFormatException ex) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
             throw new DukeException("Oh dear! Please give me a number!");
         }
     }
@@ -101,11 +102,10 @@ public class Parser {
         if (type.equals("event") && !info.contains("/at")) {
             throw new DukeException("Oh dear! An event must contain '/at'!");
         }
-        int timeStampLength = info.substring(info.indexOf('/')).length();
-        if (type.equals("deadline") &&  timeStampLength < 5) {
+        if (type.equals("deadline") &&  info.substring(idxMeta).length() < 5) {
             throw new DukeException("Oh dear! A deadline must contain a timestamp!");
         }
-        if (type.equals("event") && timeStampLength < 5) {
+        if (type.equals("event") && info.substring(idxMeta).length() < 5) {
             throw new DukeException("Oh dear! An event must contain a timestamp!");
         }
     }

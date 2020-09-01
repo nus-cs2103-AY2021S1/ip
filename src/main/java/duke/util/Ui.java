@@ -1,4 +1,6 @@
-package duke;
+package duke.util;
+
+import duke.task.Task;
 
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +11,6 @@ import java.util.Scanner;
 public class Ui {
 
     private Scanner sc;
-    private String tab = "     ";
     private String line = "____________________________________________________________";
 
     /**
@@ -30,58 +31,72 @@ public class Ui {
 
     /**
      * Greets the user.
+     *
+     * @return the printed message.
      */
-    public void greet() {
-        String tab = "     ";
-        chatPrint("Hello! I'm Duke\n" +
-                tab + "What can I do for you?");
+    public String greet() {
+        String textToPrint = "Hello! I'm Duke\n"
+                + "What can I do for you?";
+        chatPrint(textToPrint);
+        return textToPrint;
     }
 
     /**
      * Prints a farewell message to the user.
+     *
+     * @return the printed message.
      */
-    public void farewell() {
-        chatPrint("Bye. Hope to see you again soon!");
+    public String farewell() {
+        String textToPrint = "Bye. Hope to see you again soon!";
+        chatPrint(textToPrint);
+        return textToPrint;
     }
 
     /**
      * Prints the set output whenever the list command is called.
      *
      * @param tasks list of tasks.
+     * @return the printed message.
      */
-    public void onList(List<Task> tasks) {
+    public String onList(List<Task> tasks) {
         int id = 1;
         StringBuilder output = new StringBuilder("Here are the tasks in your list:");
         for (Task task : tasks) {
-            output.append("\n").append(tab).append(id).append(". ").append(task);
+            output.append("\n").append(id).append(". ").append(task);
             id++;
         }
         chatPrint(output.toString());
+        return output.toString();
     }
 
     /**
      * Prints the set output whenever a find command is executed.
      *
      * @param tasks a list of tasks.
+     * @return the printed message.
      */
-    public void onFind(List<Task> tasks) {
+    public String onFind(List<Task> tasks) {
         int id = 1;
         StringBuilder output = new StringBuilder("Here are the matching tasks in your list:");
         for (Task task : tasks) {
-            output.append("\n").append(tab).append(id).append(". ").append(task);
+            output.append("\n").append(id).append(". ").append(task);
             id++;
         }
         chatPrint(output.toString());
+        return output.toString();
     }
 
     /**
      * Prints the set output whenever a task is done.
      *
      * @param task a done task.
+     * @return the printed message.
      */
-    public void onDone(Task task) {
-        chatPrint("Nice! I've marked this task as done:\n" +
-                tab + "   " + task);
+    public String onDone(Task task) {
+        String textToPrint = "Nice! I've marked this task as done:\n"
+                + "   " + task;
+        chatPrint(textToPrint);
+        return textToPrint;
     }
 
     /**
@@ -89,11 +104,14 @@ public class Ui {
      *
      * @param task a removed task.
      * @param size size of the list.
+     * @return the printed message.
      */
-    public void onDelete(Task task, int size) {
-        chatPrint("Noted. I've removed this task:\n" +
-                tab + "   " + task + "\n" +
-                tab + "Now you have " + size + " tasks in the list.");
+    public String onDelete(Task task, int size) {
+        String textToPrint = "Noted. I've removed this task:\n"
+                + "   " + task + "\n"
+                + "Now you have " + size + " tasks in the list.";
+        chatPrint(textToPrint);
+        return textToPrint;
     }
 
     /**
@@ -101,11 +119,14 @@ public class Ui {
      *
      * @param task an added task.
      * @param size size of the list.
+     * @return the printed message.
      */
-    public void onAdd(Task task, int size) {
-        chatPrint("Got it. I've added this task:\n" +
-                tab + "   " + task + "\n" +
-                tab + "Now you have " + size + " tasks in the list.");
+    public String onAdd(Task task, int size) {
+        String textToPrint = "Got it. I've added this task:\n"
+                + "   " + task + "\n"
+                + "Now you have " + size + " tasks in the list.";
+        chatPrint(textToPrint);
+        return textToPrint;
     }
 
     /**
@@ -114,8 +135,8 @@ public class Ui {
      * @param toPrint string to print.
      */
     public void chatPrint(String toPrint) {
-        System.out.println(tab + line);
-        System.out.println(tab + toPrint);
-        System.out.println(tab + line + "\n");
+        System.out.println(line);
+        System.out.println(toPrint);
+        System.out.println(line + "\n");
     }
 }
