@@ -3,7 +3,7 @@ package Duke;
 public class Parser {
 
     public enum Mode{
-        LIST, BYE, DONE, DELETE, TODO, DEADLINE, EVENT;
+        LIST, BYE, DONE, DELETE, TODO, DEADLINE, EVENT, FIND;
 
     }
 
@@ -24,6 +24,8 @@ public class Parser {
                 return Mode.DELETE;
             case "list":
                 return Mode.LIST;
+            case "find":
+                return Mode.FIND;
             default:
                 throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -72,4 +74,7 @@ public class Parser {
         return Integer.parseInt(input.split(" ")[1]);
     }
 
+    public String name(String input) {
+        return input.split("find ")[1];
+    }
 }

@@ -67,6 +67,11 @@ public class Duke {
                     } else if (mode == Parser.Mode.BYE) {
                         // Exit now
                         exit = true;
+                    } else if (mode == Parser.Mode.FIND) {
+                        // Find tasks
+                        String subName = parser.name(input);
+                        String result = list.find(subName);
+                        ui.showFindTask(result);
                     }
 
                 } catch (DukeException e) {
