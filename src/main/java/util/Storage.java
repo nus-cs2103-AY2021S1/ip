@@ -18,7 +18,9 @@ public class Storage {
     private String filePath;
 
     /**
-     * Constructor.
+     * Constructor for Storage class.
+     *
+     * @param filePath File path string for Duke's data.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -87,7 +89,6 @@ public class Storage {
      *
      * @param list ArrayList of Tasks Duke currently has.
      * @throws DukeException  If Duke is unable to save into file.
-     * @throws IOException If unable to create or write into specified file path.
      */
     public void saveToFile(ArrayList<Task> list) throws DukeException {
         try {
@@ -98,7 +99,7 @@ public class Storage {
             clearTheFile();
 
         } catch (IOException e) {
-            throw new DukeException("☹️Sorry, something went wrong and I couldn't save my data... ");
+            throw new DukeException("Sorry, something went wrong and I couldn't save my data... ");
         }
         for (int i = 0; i < list.size(); i++) {
             // Try to write into save file

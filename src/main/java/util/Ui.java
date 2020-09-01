@@ -82,6 +82,8 @@ public class Ui {
 
     /**
      * Prints error messages from DukeException.
+     *
+     * @param e The DukeException to print message of.
      */
     public void printError(DukeException e) {
         System.out.println(e.getMessage());
