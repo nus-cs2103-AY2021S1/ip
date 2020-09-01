@@ -3,12 +3,10 @@ package storage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-
 import java.util.Scanner;
 
-import tasklist.TaskList;
-
 import duke.DukeException;
+import tasklist.TaskList;
 
 /**
  * Storage deals with loading tasks from a file and saving tasks in the same file
@@ -17,7 +15,7 @@ import duke.DukeException;
  */
 public class Storage {
     private final String filePath;
-    private final String OUTPUT_FORMAT = "  %s\n";
+    private final String outputFormat = "  %s\n";
     private final TaskList taskList;
 
     /**
@@ -82,7 +80,7 @@ public class Storage {
                 taskList.addEvent(body, false);
             }
         } catch (DukeException e) {
-            System.out.printf(OUTPUT_FORMAT, e.getMessage());
+            System.out.printf(outputFormat, e.getMessage());
         }
     }
 

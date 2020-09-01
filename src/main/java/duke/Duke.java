@@ -1,12 +1,9 @@
 package duke;
 
-import ui.Ui;
-
-import storage.Storage;
-
-import tasklist.TaskList;
-
 import parser.Parser;
+import storage.Storage;
+import tasklist.TaskList;
+import ui.Ui;
 
 /**
  * Initializes the Java Duke Program, loads the task list

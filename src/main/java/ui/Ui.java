@@ -2,9 +2,8 @@ package ui;
 
 import java.util.Scanner;
 
-import parser.Parser;
-
 import duke.DukeException;
+import parser.Parser;
 
 /**
  * UI deals with interactions with the user in the Java Duke Program
@@ -12,8 +11,8 @@ import duke.DukeException;
  * @author (Sruthi)
  */
 public class Ui {
-    private final String LINE_FORMAT = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    private final String OUTPUT_FORMAT = "  %s\n";
+    private final String lineFormat = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    private final String outputFormat = "  %s\n";
     private boolean isOngoing;
     private final Parser parser;
 
@@ -48,7 +47,7 @@ public class Ui {
      * @param input input given by the user
      */
     public void systemOutput(String input) {
-        System.out.println(LINE_FORMAT + "\n");
+        System.out.println(lineFormat + "\n");
         try {
             String output = parser.scenarios(input);
             if (output.equals("bye")) {
@@ -58,26 +57,26 @@ public class Ui {
                 System.out.println(output);
             }
         } catch (DukeException e) {
-            System.out.printf(OUTPUT_FORMAT, e.getMessage());
+            System.out.printf(outputFormat, e.getMessage());
         }
-        System.out.println("\n" + LINE_FORMAT);
+        System.out.println("\n" + lineFormat);
     }
 
     /**
      * Greets the user.
      */
     public void greeting() {
-        System.out.println(LINE_FORMAT + "\n         (^v^)");
-        System.out.printf(OUTPUT_FORMAT, "Hey there! I'm JavaDuke");
-        System.out.printf(OUTPUT_FORMAT, "What can I do for you?\n" + LINE_FORMAT);
+        System.out.println(lineFormat + "\n         (^v^)");
+        System.out.printf(outputFormat, "Hey there! I'm JavaDuke");
+        System.out.printf(outputFormat, "What can I do for you?\n" + lineFormat);
     }
 
     /**
      * Says goodbye to the user.
      */
     public void goodBye() {
-        System.out.printf(OUTPUT_FORMAT, "          *(^v^)");
-        System.out.printf(OUTPUT_FORMAT, "Bye. Hope to see you again soon!");
+        System.out.printf(outputFormat, "          *(^v^)");
+        System.out.printf(outputFormat, "Bye. Hope to see you again soon!");
     }
 
     /**
