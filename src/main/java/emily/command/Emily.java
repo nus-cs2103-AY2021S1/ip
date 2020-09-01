@@ -3,25 +3,26 @@ package main.java.emily.command;
 import java.io.File;
 import java.util.Scanner;
 
+
 /**
  * Main program
  */
 public class Emily {
 
     private static final String FILE_PATH = "data/emily.txt";
-    private final Storage storage;
+    private Storage storage;
     private TaskList tasks;
-    private final Ui ui;
+    private Ui ui;
+
 
     /**
      * Initialises Emily bot
-     * @param filePath location to store the information
      */
-    public Emily(String filePath) {
+    public Emily() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILE_PATH);
         try {
-            tasks = new TaskList(storage.readData());
+            tasks = new TaskList(storage.loadData());
         } catch (DukeException e) {
             File f = new File(FILE_PATH);
             f.getParentFile().mkdirs();
@@ -32,37 +33,27 @@ public class Emily {
      * Interact with the user
      * Read the user commands, modifies the task list, prints out information
      */
-    public void run() {
+    public String receiveCommandLine(String userInputText) {
 
-        String divider = "-------------------";
         boolean end = false;
-
-        System.out.println("Hello, I am Emily\n"
-                + "What can i do for you?\n"
-                + divider);
+        String output = "";
 
         while (!end) {
             try {
-                Scanner sc = new Scanner(System.in);
-
-                String input = sc.nextLine();
-                while (!input.equals("bye")) {
-                    ui.reading(input, tasks);
-                    input = sc.nextLine();
-                    storage.reWrite(tasks.getStore());
-                }
+                output = ui.readsLine(userInputText, tasks);
+                storage.reWriteData(tasks.getTaskArrayList());
                 end = true;
             } catch (DukeException e) {
-                System.out.println("    OOPS! " + e.getMessage() + "\n" + divider);
+                return "    OOPS! " + e.getMessage() + "\n";
             }
         }
 
-        System.out.println("bye\n" + divider + "\nBye~, hope to see you again!");
+        //System.out.println("\nBye~, hope to see you again!");
+        return output;
 
 
     }
 
     public static void main(String[] args) {
-        new Emily(FILE_PATH).run();
     }
 }

@@ -21,7 +21,7 @@ public class Parser {
      * @return A new Task with the input details
      * @throws DukeException when the user input is invalid or is not in the proper form
      */
-    public Task process(String str) throws DukeException {
+    public Task parse(String str) throws DukeException {
         Task item = new Task("");
 
         try {
@@ -29,8 +29,6 @@ public class Parser {
                 String describe = str.substring(5);
                 item = new ToDos(describe);
 
-                System.out.println("    Got it! I have added this task:");
-                System.out.println("        " + item);
                 return item;
             } else if (str.contains("deadline")) {
 
@@ -49,7 +47,7 @@ public class Parser {
 
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Invalid input");
+            throw new DukeException("Invalid index given");
         } catch (java.time.DateTimeException e) {
             throw new DukeException("Invalid timestamp, should be in the form of yyy-mm--dd");
         }

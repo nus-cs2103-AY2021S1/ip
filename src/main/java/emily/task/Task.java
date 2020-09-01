@@ -5,7 +5,7 @@ package main.java.emily.task;
  * A task will have a string of description detail.
  */
 public class Task {
-    protected String description;
+    protected final String description;
     protected char type;
     protected boolean isFinished;
 
@@ -31,10 +31,6 @@ public class Task {
 
     public String getStatusIcon() {
         return (isFinished ? "\u2713" : "\u2718");
-    }
-
-    public char getType() {
-        return this.type;
     }
 
     @Override

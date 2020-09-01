@@ -29,7 +29,7 @@ public class Storage {
      * @return an Arraylist of Task
      * @throws DukeException when the file is invalid
      */
-    public ArrayList<Task> readData() throws DukeException {
+    public ArrayList<Task> loadData() throws DukeException {
 
         ArrayList<Task> store = new ArrayList<>();
 
@@ -89,7 +89,7 @@ public class Storage {
      * @param store contains the updated list of task
      * @throws DukeException for invalid file
      */
-    public void reWrite(ArrayList<Task> store) throws DukeException {
+    public void reWriteData(ArrayList<Task> store) throws DukeException {
         try {
             FileWriter fw = new FileWriter(this.filepath);
             String txt = "";
