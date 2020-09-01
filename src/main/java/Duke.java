@@ -25,12 +25,12 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public static void main(String[] args) {
-        try {
-            taskList = Storage.loadFromMem();
-        } catch (DukeException e) {
-            Ui.printWithLines(e.toString() + "\n");
-        }
-        Ui.processInput(taskList);
+//        try {
+//            taskList = Storage.loadFromMem();
+//        } catch (DukeException e) {
+//            Ui.printWithLines(e.toString() + "\n");
+//        }
+//        Ui.processInput(taskList);
     }
 
     @Override
@@ -97,6 +97,13 @@ public class Duke extends Application {
 //            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
 //            userInput.clear();
 //        });
+        Ui.initialise(userInput, dialogContainer, this, user, duke);
+
+        try {
+            taskList = Storage.loadFromMem();
+        } catch (DukeException e) {
+            Ui.printWithLines(e.toString() + "\n");
+        }
 
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -122,13 +129,14 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
+//        Label userText = new Label(userInput.getText());
+//        Label dukeText = new Label(getResponse(userInput.getText()));
+//        dialogContainer.getChildren().addAll(
+//                DialogBox.getUserDialog(userText, new ImageView(user)),
+//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+//        );
+//        userInput.clear();
+        Ui.startInput(taskList);
     }
 
     /**

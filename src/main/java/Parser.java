@@ -3,7 +3,8 @@ public class Parser {
     /**
      * Considers the command input and performs actions accordingly.
      */
-    public static void handleInput(String inputPrefix, String inputSuffix, TaskList taskList) throws DukeException {
+    public static void handleInput(String inputPrefix, String inputSuffix, TaskList taskList, Duke dukeApp)
+            throws Exception {
         switch (inputPrefix) {
         case "list":
             taskList.printList();
@@ -25,6 +26,9 @@ public class Parser {
             break;
         case "find":
             taskList.lookFor(inputSuffix);
+            break;
+        case "bye":
+            dukeApp.stop();
             break;
         default:
             throw new DukeNoSuchInputException();
