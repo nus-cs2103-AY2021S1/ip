@@ -75,23 +75,23 @@ public class TaskList implements Serializable {
     }
     //--------end of item literal parsers---------//
     
-    void markAsDone(int itemIndex) throws IllegalArgumentException {
+    Response markAsDone(int itemIndex) throws IllegalArgumentException {
         if (itemIndex > itemList.size()) {
             throw new IllegalArgumentException("Item #" + itemIndex + " does "
                                                        + "not exist and cannot "
                                                        + "be marked as done.");
         }
-        itemList.get(itemIndex - 1).markAsDone();
+        return itemList.get(itemIndex - 1).markAsDone();
     }
     
-    void removeItem(int itemIndex) throws IllegalArgumentException {
+    Response removeItem(int itemIndex) throws IllegalArgumentException {
         if (itemIndex > itemList.size()) {
             throw new IllegalArgumentException("Item #" + itemIndex + " does "
                                                        + "not exist and cannot "
                                                        + "be removed.");
         }
         Task removed = itemList.remove(itemIndex - 1);
-        Ui.showSuccessfulRemoval(removed);
+        return new Response(Ui.showSuccessfulRemoval(removed));
     }
     
     /**
@@ -112,9 +112,15 @@ public class TaskList implements Serializable {
         return results;
     }
     
-    void printList() {
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        
         for (int i = 1; i <= itemList.size(); i++) {
-            System.out.println(i + ". " + itemList.get(i - 1));
+            String taskString = i + ". " + itemList.get(i - 1) + "\n";
+            stringBuilder.append(taskString);
         }
+        
+        return stringBuilder.toString();
     }
 }

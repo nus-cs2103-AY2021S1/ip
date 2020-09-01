@@ -1,64 +1,66 @@
 package com.siawsam.duke;
 
-import java.io.IOException;
 import java.util.List;
 
 public class Ui {
-    static void readUserInput(Parser parser) throws IOException {
-        parser.scan();
-    }
-    
     /**
      * Displays the welcome message when Duke starts.
      */
-    public static void showWelcomeMessage() {
-        System.out.println("Hi I'm Duke, your personal task-tracker bot!");
-        System.out.println("You can add todos, deadlines, or events to my "
-                                   + "list.");
+    public static String showWelcomeMessage() {
+        return "Hi I'm Duke, your personal task-tracker bot!\n"
+               + "You can add todos, deadlines, or events to my list.";
     }
 
-    static void showGoodbyeMessage() {
-        System.out.println("Bye. Hope to see you again");
+    static String showGoodbyeMessage() {
+        return "Bye. Hope to see you again";
     }
 
-    static void showSuccessfulLoad() {
-        System.out.println("Your existing task list has been retrieved from disk.");
+    static String showSuccessfulLoad() {
+        return "Your existing task list has been retrieved from disk.";
     }
 
-    public static void showNoExistingSave() {
-        System.out.println("You don't have an existing saved task list.");
+    public static String showNoExistingSave() {
+        return "You don't have an existing saved task list.";
     }
 
-    static void showSuccessfulAdd(Task task) {
-        System.out.println("added: " + task);
+    static String showSuccessfulAdd(Task task) {
+        return "added: " + task;
     }
 
-    static void showSuccessfulSave() {
-        System.out.println("Alright, your list has been saved!");
+    static String showSuccessfulSave() {
+        return "Alright, your list has been saved!";
     }
 
-    static void showErrorMessage(Exception exception) {
-        System.out.println(exception.getMessage());
+    static String showErrorMessage(Exception exception) {
+        return exception.getMessage();
     }
 
-    static void showErrorMessage(String customMessage, Exception exception) {
-        System.out.println(customMessage + exception.getMessage());
+    static String showErrorMessage(String customMessage, Exception exception) {
+        return customMessage + exception.getMessage();
     }
 
-    static void showSuccessfulRemoval(Task task) {
-        System.out.println("This task has been removed: " + task);
+    static String showSuccessfulRemoval(Task task) {
+        return "This task has been removed: " + task;
     }
 
-    static void showMarkedAsDone(Task task) {
-        System.out.println("I've marked this task as done:\n" + task);
+    static String showMarkedAsDone(Task task) {
+        return "I've marked this task as done:\n" + task;
     }
     
-    static void showSearchResults(List<Task> results) {
-        System.out.println("Here are the matching tasks in your list:");
-        results.forEach(System.out::println);
+    static String showSearchResults(List<Task> results) {
+        StringBuilder stringBuilder = new StringBuilder("Here are the matching tasks in your list:\n");
+        
+        results.forEach(task -> {
+            stringBuilder.append(task.toString() + "\n");
+        });
+        return stringBuilder.toString();
     }
     
-    static void showNoSearchResults() {
-        System.out.println("There are no matching tasks in your list.");
+    static String showNoSearchResults() {
+        return "There are no matching tasks in your list.";
+    }
+    
+    static String printList(TaskList taskList) {
+        return taskList.toString();
     }
 }

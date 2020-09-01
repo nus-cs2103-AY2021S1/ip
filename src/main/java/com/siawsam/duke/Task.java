@@ -21,9 +21,9 @@ public class Task implements Serializable {
     /**
      * Marks the task as "done".
      */
-    void markAsDone() {
+    Response markAsDone() {
         this.isDone = true;
-        Ui.showMarkedAsDone(this);
+        return new Response(Ui.showMarkedAsDone(this));
     }
     
     public boolean includesKeyword(String keyword) {

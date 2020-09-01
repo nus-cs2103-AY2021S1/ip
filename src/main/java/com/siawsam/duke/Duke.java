@@ -12,20 +12,20 @@ public class Duke {
     static final String FILE_PATH = "savedTasks.txt";
     private Parser parser;
     
-    public void loadFromDisk() throws IOException, ClassNotFoundException {
+    public Response loadFromDisk() throws IOException, ClassNotFoundException {
         Storage storage = new Storage(FILE_PATH);
         
         if (storage.doesExist()) {
             TaskList savedList = storage.load();
             parser = new Parser(storage, savedList);
-            Ui.showSuccessfulLoad();
+            return new Response(Ui.showSuccessfulLoad());
         } else {
-            Ui.showNoExistingSave();
             parser = new Parser(storage);
+            return new Response(Ui.showNoExistingSave());
         }
     }
     
-    public void readUserInput(String input) {
-        parser.parse(input);
+    public Response readUserInput(String input) {
+        return parser.parse(input);
     }
 }

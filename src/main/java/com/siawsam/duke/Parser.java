@@ -38,23 +38,23 @@ public class Parser {
         this.storage = storage;
     }
     
-    /**
-     * Parses user input strings from the command line.
-     *
-     * @throws IOException if an IO exception occurs when trying to read standard input.
-     */
-    public void scan() throws IOException {
-        BufferedReader reader =
-                new BufferedReader(new InputStreamReader((System.in)));
-        boolean willContinue = true;
-        
-        while (willContinue) {
-            String line = reader.readLine();
-            willContinue = parse(line);
-        }
-    }
+//    /**
+//     * Parses user input strings from the command line.
+//     *
+//     * @throws IOException if an IO exception occurs when trying to read standard input.
+//     */
+//    public void scan() throws IOException {
+//        BufferedReader reader =
+//                new BufferedReader(new InputStreamReader((System.in)));
+//        boolean willContinue = true;
+//
+//        while (willContinue) {
+//            String line = reader.readLine();
+//            willContinue = parse(line);
+//        }
+//    }
     
-    public boolean parse(String literal) {
+    public Response parse(String literal) {
         String command = literal.split(" ")[0];
     
         if (COMMANDS.contains(command) && literal.split(" ").length > 1) {
@@ -62,50 +62,44 @@ public class Parser {
             switch (command) {
             case "done":
                 try {
-                    userTaskList.markAsDone(
+                    return userTaskList.markAsDone(
                             Integer.parseInt(literal.split(" ")[1])
                     );
                 } catch (IllegalArgumentException ex) {
-                    Ui.showErrorMessage(ex);
+                    return new Response(Ui.showErrorMessage(ex));
                 }
-                break;
             case "delete":
                 try {
-                    userTaskList.removeItem(
+                    return userTaskList.removeItem(
                             Integer.parseInt(literal.split(" ")[1])
                     );
                 } catch (IllegalArgumentException ex) {
-                    Ui.showErrorMessage(ex);
+                    return new Response(Ui.showErrorMessage(ex));
                 }
-                break;
             case "find":
                 TaskSearcher searcher = new TaskSearcher(userTaskList);
-                searcher.searchAndDisplay(literal.split("find")[1].trim());
-                break;
+                return searcher.searchAndDisplay(literal.split("find")[1].trim());
             default:
                 break;
             }
         } else {
             switch (literal) {
             case "bye":
-                Ui.showGoodbyeMessage();
-                return false;
+                return Response.terminatingResponse(Ui.showGoodbyeMessage());
             case "list":
-                userTaskList.printList();
-                break;
+                return new Response(Ui.printList(userTaskList));
             case "save":
-                storage.save(userTaskList);
-                break;
+                return storage.save(userTaskList);
             default:
                 try {
                     Task addedTask = userTaskList.addItem(literal);
-                    Ui.showSuccessfulAdd(addedTask);
+                    return new Response(Ui.showSuccessfulAdd(addedTask));
                 } catch (DukeException ex) {
-                    Ui.showErrorMessage(ex);
+                    return new Response(Ui.showErrorMessage(ex));
                 }
-                break;
             }
         }
-        return true;
+        
+        return Response.emptyResponse();
     }
 }

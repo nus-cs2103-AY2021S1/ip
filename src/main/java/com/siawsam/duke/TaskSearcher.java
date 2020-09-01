@@ -14,12 +14,12 @@ public class TaskSearcher {
      *
      * @param searchString The search string.
      */
-    public void searchAndDisplay(String searchString) {
+    public Response searchAndDisplay(String searchString) {
         List<Task> results = taskList.searchByKeyword(searchString);
         if (results.size() > 0) {
-            Ui.showSearchResults(results);
+            return new Response(Ui.showSearchResults(results));
         } else {
-            Ui.showNoSearchResults();
+            return new Response(Ui.showNoSearchResults());
         }
     }
 }

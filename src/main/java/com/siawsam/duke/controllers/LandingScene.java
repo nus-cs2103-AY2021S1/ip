@@ -1,6 +1,7 @@
 package com.siawsam.duke.controllers;
 
 import com.siawsam.duke.Duke;
+import com.siawsam.duke.Response;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -47,11 +48,16 @@ public class LandingScene extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        Response response = duke.readUserInput(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(input, dukeImage)
+                DialogBox.getDukeDialog(response.getMessage(), dukeImage)
         );
         userInput.clear();
-        duke.readUserInput(input);
+        
+        System.out.println(response.getMessage());
+        if (response.isTerminating()) {
+            stage.close();
+        }
     }
 }

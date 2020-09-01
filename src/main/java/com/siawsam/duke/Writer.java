@@ -14,16 +14,16 @@ public class Writer {
      * @param taskList The TaskList instance to write.
      * @param path The file path to write to.
      */
-    static void writeListToFile(TaskList taskList, String path) {
+    static Response writeListToFile(TaskList taskList, String path) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(path);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(taskList);
             objectOutputStream.flush();
             objectOutputStream.close();
-            Ui.showSuccessfulSave();
+            return new Response(Ui.showSuccessfulSave());
         } catch (IOException e) {
-            Ui.showErrorMessage(e);
+            return new Response(Ui.showErrorMessage(e));
         }
     }
 }
