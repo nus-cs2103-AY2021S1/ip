@@ -30,10 +30,35 @@ public class UI {
     }
 
     /**
+     * Empty line to be printed after each command
+     */
+    private final static String LINE = "************************************\n";
+
+
+    /**
+     * This method shows the welcome message for the chatbot. It is what users see when they launch the chatbot.
+     */
+    public String welcome() {
+
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        StringBuilder sb = new StringBuilder(LINE);
+        sb.append("Hello from \n");
+        sb.append(logo);
+        sb.append("What can I do for you pal? :D\n");
+        sb.append(LINE);
+        return sb.toString();
+    }
+
+
+    /**
      * Method that prints the goodbye statement
      */
-    public void replyBye() {
-        System.out.println("CYA PAL. Hope to see you again!");
+    public String replyBye() {
+        return "CYA PAL. Hope to see you again!";
     }
 
     /**
@@ -41,17 +66,19 @@ public class UI {
      * This iterates through the entire list and prints out each task with a 1-based index position
      * of where the task is on the Tasklist.
      */
-    public void replyList() {
-        shelf.iterate();
+    public String replyList() {
+        return shelf.iterate();
     }
 
     /**
      * Method that would invoke the find statement from the TaskList.
+     *
      * @param response Input from the user
      */
-    public void replyFind(String response) {
-        shelf.find(response);
+    public String replyFind(String response) {
+        return shelf.find(response);
     }
+
 
     /**
      * method that deletes a task from the tasklist given the one-based index provided by the user.
@@ -61,11 +88,12 @@ public class UI {
      * @throws IOException               if there is an error while updating the txt file
      * @throws DukeTaskNonExistException if the task does not exist
      */
-    public void replyDelete(int index) throws IOException, DukeTaskNonExistException {
-        System.out.println("Noted. I've removed this task: ");
+    public String replyDelete(int index) throws IOException, DukeTaskNonExistException {
+        StringBuilder sb = new StringBuilder("Noted. I've removed this task: ").append('\n');
         shelf.delete(index);
         storage.updateFile(shelf);
-        System.out.println("Now you have " + shelf.getSize() + " in the list.");
+        sb.append("Now you have ").append(shelf.getSize()).append(" in the list.");
+        return sb.toString();
     }
 
     /**
@@ -76,14 +104,15 @@ public class UI {
      * @throws DukeTaskNonExistException if there is an error while updating the txt file.
      * @throws IOException               if there is an error while updating the txt file
      */
-    public void replyDone(int index) throws DukeTaskNonExistException, IOException {
+    public String replyDone(int index) throws DukeTaskNonExistException, IOException {
         if (index >= shelf.getSize() || index < 0) {
             throw new DukeTaskNonExistException("error");
         }
-        System.out.println("Nice! I've marked this task as done: ");
+        StringBuilder sb = new StringBuilder("Nice! I've marked this task as done: ").append('\n');
         Task book = shelf.completeTask(index);
         storage.updateFile(shelf);
-        System.out.println(book);
+        sb.append(book.toString());
+        return sb.toString();
     }
 
     /**
@@ -94,13 +123,13 @@ public class UI {
      * @param response input from the user to create a todo task
      * @throws IOException if there is an error while updating the txt file
      */
-    public void addTodo(String response) throws IOException {
+    public String addTodo(String response) throws IOException {
         Task book = new ToDo(response, LocalDateTime.now());
         shelf.addTask(book);
         storage.updateFile(shelf);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("  " + book);
-        System.out.println("Now you have " + shelf.getSize() + " tasks in the list.");
+        return "Got it. I've added this task: " + '\n' +
+                "  " + book + '\n' +
+                "Now you have " + shelf.getSize() + " tasks in the list.";
     }
 
     /**
@@ -112,13 +141,13 @@ public class UI {
      * @param duedate  input given by the user indicating the duedate of the task
      * @throws IOException if there is an error while updating the txt file
      */
-    public void addDeadline(String response, String duedate) throws IOException {
+    public String addDeadline(String response, String duedate) throws IOException {
         Task book = new Deadline(response, LocalDateTime.now(), duedate);
         shelf.addTask(book);
         storage.updateFile(shelf);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("  " + book);
-        System.out.println("Now you have " + shelf.getSize() + " tasks in the list.");
+        return "Got it. I've added this task: " + '\n' +
+                "  " + book + '\n' +
+                "Now you have " + shelf.getSize() + " tasks in the list.";
     }
 
     /**
@@ -130,13 +159,13 @@ public class UI {
      * @param duedate  input given by the user indicating the eventdate of the task
      * @throws IOException if there is an error while updating the txt file
      */
-    public void addEvent(String response, String duedate) throws IOException {
+    public String addEvent(String response, String duedate) throws IOException {
         Task book = new EventTask(response, LocalDateTime.now(), duedate);
         shelf.addTask(book);
         storage.updateFile(shelf);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("  " + book);
-        System.out.println("Now you have " + shelf.getSize() + " tasks in the list.");
+        return "Got it. I've added this task: " + '\n' +
+                "  " + book + '\n' +
+                "Now you have " + shelf.getSize() + " tasks in the list.";
     }
 
     /**
@@ -144,7 +173,7 @@ public class UI {
      *
      * @param except indicates the exception
      */
-    public void showError(Exception except) {
-        System.out.println(except);
+    public String showError(Exception except) {
+        return except.toString();
     }
 }
