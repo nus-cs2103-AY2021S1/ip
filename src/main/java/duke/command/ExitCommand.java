@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.UiForGui;
 
 /**
  * Encapsulates an exit command for the Duke program. This is the command that terminates the program. The format for
@@ -28,5 +29,10 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showGoodbye();
+    }
+
+    @Override
+    public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) {
+        return uiForGui.showGoodbye();
     }
 }

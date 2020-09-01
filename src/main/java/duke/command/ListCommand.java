@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.UiForGui;
 
 /**
  * Encapsulates a list command for the Duke program. This is the command that lists out the tasks in the task list
@@ -20,5 +21,10 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showTaskList(tasks);
+    }
+
+    @Override
+    public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) {
+        return uiForGui.showTaskList(tasks);
     }
 }

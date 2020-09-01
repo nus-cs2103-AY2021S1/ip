@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.UiForGui;
 import duke.exception.UnknownCommandException;
 
 /**
@@ -18,7 +19,13 @@ public class UnknownCommand extends Command {
      * @param ui The Ui object being used in the program.
      * @param storage The Storage object being used in the program.
      */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showError(new UnknownCommandException());
+    }
+
+    @Override
+    public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) {
+        return uiForGui.showError(new UnknownCommandException());
     }
 }

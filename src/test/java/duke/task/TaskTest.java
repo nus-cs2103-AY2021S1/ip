@@ -31,7 +31,7 @@ public class TaskTest {
     public void getStatusIcon_taskNotDone_getCross() {
         try {
             Task task = new Task("do homework", "[T]", "todo", false);
-            assertEquals("✘", task.getStatusIcon());
+            assertEquals("\u2718", task.getStatusIcon());
         } catch (WrongFormatException e) {
             fail();
         }
@@ -41,7 +41,7 @@ public class TaskTest {
     public void getStatusIcon_taskDone_getTick() {
         try {
             Task task = new Task("do homework", "[T]", "todo", true);
-            assertEquals("✓", task.getStatusIcon());
+            assertEquals("\u2713", task.getStatusIcon());
         } catch (WrongFormatException e) {
             fail();
         }
@@ -52,7 +52,7 @@ public class TaskTest {
         try {
             Task task = new Task("do homework", "[T]", "todo", false);
             task.setDone(true);
-            assertEquals("✓", task.getStatusIcon());
+            assertEquals("\u2713", task.getStatusIcon());
         } catch (WrongFormatException e) {
             fail();
         }
@@ -72,7 +72,7 @@ public class TaskTest {
     public void testToString() {
         try {
             Task task = new Task("do homework", "[T]", "todo", false);
-            assertEquals("[T][✘] do homework", task.toString());
+            assertEquals("[T][\u2718] do homework", task.toString());
         } catch (WrongFormatException e) {
             fail();
         }

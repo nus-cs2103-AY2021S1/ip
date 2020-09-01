@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.UiForGui;
 import duke.exception.DeadlineWrongFormatException;
 import duke.exception.WrongFormatException;
 import duke.task.Deadline;
@@ -49,6 +50,24 @@ public class AddDeadlineCommand extends AddCommand {
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
+        } catch (IndexOutOfBoundsException | WrongFormatException | DateTimeException | NumberFormatException e) {
+            // add deadline command is in a wrong format
+            throw new DeadlineWrongFormatException();
+        }
+    }
+
+    @Override
+    public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) throws DeadlineWrongFormatException {
+        try {
+            String[] commandParts = fullCommand.split("/by");
+            Task newTask = new Deadline(commandParts[0].substring(9).trim(), commandParts[1].trim());
+            tasks.addTask(newTask);
+            try {
+                storage.writeToFile(tasks);
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+            return uiForGui.showReplyForAddTask(newTask, tasks);
         } catch (IndexOutOfBoundsException | WrongFormatException | DateTimeException | NumberFormatException e) {
             // add deadline command is in a wrong format
             throw new DeadlineWrongFormatException();
