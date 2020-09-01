@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Implements a Parser to parse user commands or dates
+ */
 public class Parser {
 
     /**
