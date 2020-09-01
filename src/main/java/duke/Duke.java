@@ -15,7 +15,10 @@ public class Duke implements Bot {
     private Ui ui;
     private StringBuilder message;
 
-    private Duke() {
+    /**
+     * Create a new instance of Duke.
+     */
+    public Duke() {
         isStopped = false;
         ui = new Ui();
         message = new StringBuilder();
