@@ -1,12 +1,12 @@
 package tasklist;
 
-public class Todos extends Task {
+public class Todo extends Task {
 
-    public Todos(String description) {
+    public Todo(String description) {
         super(description);
     }
 
-    public Todos(String description, boolean isDone) {
+    public Todo(String description, boolean isDone) {
         super(description,isDone);
     }
 
