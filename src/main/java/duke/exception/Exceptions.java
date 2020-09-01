@@ -1,4 +1,4 @@
-package Duke.exception;
+package main.java.duke.exception;
 
 /**
  * This is an enum class that contains

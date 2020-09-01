@@ -1,4 +1,4 @@
-package Duke.task;
+package main.java.duke.task;
 
 /**
  * This is a subclass of Task.

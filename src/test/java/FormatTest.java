@@ -1,13 +1,13 @@
-package test.java;
 
-import Duke.main.Format;
-import Duke.main.Time;
-import Duke.task.Deadline;
-import Duke.task.Event;
-import Duke.task.Task;
-import Duke.task.Todo;
+import main.java.duke.main.Format;
+import main.java.duke.main.Time;
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -30,7 +30,7 @@ public class FormatTest {
                 .getContent();
 
         String expected = "hahaha";
-        assertTrue(test.equals(expected));
+        assertEquals(test, expected);
     }
 
     /**
@@ -46,7 +46,7 @@ public class FormatTest {
                         .getContent();
 
         String expected = "";
-        assertTrue(test.equals(expected));
+        assertEquals(test, expected);
     }
 
     /**
@@ -58,7 +58,7 @@ public class FormatTest {
         String string = "[T][✘] reading";
         Task expected = new Todo("reading");
         Task todo = new Format<>(string).stringToTask();
-        assertTrue(todo.toString().equals(expected.toString()));
+        assertEquals(todo.toString(), expected.toString());
     }
 
     /**
@@ -70,7 +70,7 @@ public class FormatTest {
         String string = "[D][✘] eating (by: Aug_30_2020)";
         Task expected = new Deadline("eating", new Time("2020-08-30").toString());
         Task todo = new Format<>(string).stringToTask();
-        assertTrue(todo.toString().equals(expected.toString()));
+        assertEquals(todo.toString(), expected.toString());
     }
 
     /**
@@ -82,7 +82,7 @@ public class FormatTest {
         String string = "[E][✘] eating (at: Aug_30_2020)";
         Task expected = new Event("eating", new Time("2020-08-30").toString());
         Task todo = new Format<>(string).stringToTask();
-        assertTrue(todo.toString().equals(expected.toString()));
+        assertEquals(todo.toString(), expected.toString());
     }
 
 }

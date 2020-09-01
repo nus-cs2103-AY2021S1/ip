@@ -1,14 +1,14 @@
-package Duke.main;
+package main.java.duke.main;
 
-import Duke.exception.DukeException;
-import Duke.storage.EditFile;
-import Duke.storage.ReadFile;
-import Duke.storage.WriteIn;
-import Duke.task.Deadline;
-import Duke.task.Event;
-import Duke.task.Task;
-import Duke.task.TaskList;
-import Duke.task.Todo;
+import main.java.duke.exception.DukeException;
+import main.java.duke.storage.EditFile;
+import main.java.duke.storage.ReadFile;
+import main.java.duke.storage.WriteIn;
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.TaskList;
+import main.java.duke.task.Todo;
 
 /**
  * This class deals with the strings from the client

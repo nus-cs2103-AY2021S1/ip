@@ -1,7 +1,7 @@
-package Duke.storage;
+package main.java.duke.storage;
 
-import Duke.exception.DukeException;
-import Duke.main.FormatString;
+import main.java.duke.exception.DukeException;
+import main.java.duke.main.FormatString;
 
 import java.io.FileWriter;
 import java.io.IOException;

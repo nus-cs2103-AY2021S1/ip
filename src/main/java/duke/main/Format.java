@@ -1,10 +1,10 @@
-package Duke.main;
+package main.java.duke.main;
 
-import Duke.exception.DukeException;
-import Duke.task.Deadline;
-import Duke.task.Event;
-import Duke.task.Task;
-import Duke.task.Todo;
+import main.java.duke.exception.DukeException;
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.Todo;
 
 /**
  * This class handles the final Format object

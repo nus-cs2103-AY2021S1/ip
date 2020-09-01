@@ -1,12 +1,11 @@
-package test.java;
 
-import Duke.main.Command;
-import Duke.main.Parser;
-import Duke.main.Time;
-import Duke.task.Deadline;
-import Duke.task.Event;
-import Duke.task.Task;
-import Duke.task.Todo;
+import main.java.duke.main.Command;
+import main.java.duke.main.Parser;
+import main.java.duke.main.Time;
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

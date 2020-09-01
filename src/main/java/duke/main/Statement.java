@@ -1,4 +1,4 @@
-package Duke.main;
+package main.java.duke.main;
 
 /**
  * This enum class consists of

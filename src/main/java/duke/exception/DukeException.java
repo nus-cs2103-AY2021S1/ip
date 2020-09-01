@@ -1,6 +1,6 @@
-package Duke.exception;
+package main.java.duke.exception;
 
-import Duke.main.Format;
+import main.java.duke.main.Format;
 
 /**
  * This class consists all exceptions related to Duke input.

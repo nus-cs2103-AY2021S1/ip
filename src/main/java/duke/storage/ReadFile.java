@@ -1,8 +1,8 @@
-package Duke.storage;
+package main.java.duke.storage;
 
-import Duke.exception.DukeException;
-import Duke.main.Format;
-import Duke.main.Parser;
+import main.java.duke.exception.DukeException;
+import main.java.duke.main.Format;
+import main.java.duke.main.Parser;
 
 import java.io.IOException;
 import java.io.FileReader;
