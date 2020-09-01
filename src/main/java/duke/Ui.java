@@ -1,7 +1,7 @@
 package duke;
 
 public class Ui {
-    private static String logo = "\n"
+    private String logo = "\n"
             + " oooooooooooo                                                 oooo        \n"
             + "d'\"\"\"\"\"\"d888'                                                 `888        \n"
             + "      .888P    .ooooo.  oooo d8b  .ooooo.   .oooo.   oooo d8b  888  oooo  \n"
@@ -12,47 +12,58 @@ public class Ui {
             + "                                                                          \n"
             + "                                                                          \n"
             + "                                                                          \n";
-    private static String lowerLine = "\n(¯`·._.·(¯`·._.· Zoroark ·._.·´¯)·._.·´¯)\n";
-    private static String upperLine = "    ♫♪.ılılıll|̲̅̅●̲̅̅|̲̅̅=̲̅̅|̲̅̅●̲̅̅|llılılı.♫♪\n\n";
-    private static String goodbye = " __   __   __   __   __       ___ \n"
+    private String lowerLine = "\n(¯`·._.·(¯`·._.· Zoroark ·._.·´¯)·._.·´¯)\n";
+    private String upperrLine = "    ♫♪.ılılıll|̲̅̅●̲̅̅|̲̅̅=̲̅̅|̲̅̅●̲̅̅|llılılı.♫♪\n\n";
+    private String goodbye = " __   __   __   __   __       ___ \n"
             + "/ _` /  \\ /  \\ |  \\ |__) \\ / |__  \n" + "\\__> \\__/ \\__/ |__/ |__)  |  |___ \n"
             + "                                  ";
+    private String response;
 
     /**
-     * Shows Duke's welcome.
+     * Ui constructor.
      */
-    public static void showWelcome() {
-        System.out.println("Hello I am\n" + logo + "How can I help you?");
-        return;
+    public Ui() {
+        response = "";
     }
 
     /**
-     * Shows the given message.
+     * Gets Duke's welcome.
      *
-     * @param message message to be shown.
+     * @return duke's welcome.
      */
-    public static void showMessage(String message) {
-        System.out.println(message);
+    public String getWelcome() {
+        return "Hello I am\n" + logo + "How can I help you?";
     }
 
     /**
-     * Shows the upper line.
+     * Adds message to response.
+     *
+     * @param message message to be added.
      */
-    public static void showUpperLine() {
-        System.out.println(upperLine);
+    public void addMessage(String message) {
+        response += message + '\n';
     }
 
     /**
-     * Shows the lower line.
+     * Gets the current response.
+     *
+     * @return the current response.
      */
-    public static void showLowerLine() {
-        System.out.println(lowerLine);
+    public String getResponse() {
+        return upperrLine + '\n' + response + lowerLine;
     }
 
     /**
-     * Shows Duke's goodbye.
+     * Clears the current response.
      */
-    public static void showGoodbye() {
-        System.out.println(upperLine + goodbye + "\n" + lowerLine);
+    public void clearResponse() {
+        response = "";
+    }
+
+    /**
+     * Sets response to be Duke's goodbye.
+     */
+    public void addGoodbye() {
+        response = goodbye;
     }
 }

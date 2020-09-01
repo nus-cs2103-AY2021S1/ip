@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class Parser {
     private enum CommandType {
-        find, list, done, delete, todo, deadline, event
+        find, list, done, delete, todo, deadline, event, bye
     }
 
     private static String parseDescription(String[] data, String timeDivider) throws DukeException {
@@ -101,6 +101,8 @@ public class Parser {
             command = new AddCommand(
                     new Event(Parser.parseDescription(commandLine, "/at"), Parser.parseTime(commandLine, "/at")));
             break;
+        case bye:
+            return new ByeCommand();
         default:
             throw new DukeException("I'm sorry but I don't recognize your commandLine T__T.");
         }

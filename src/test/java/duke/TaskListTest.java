@@ -24,9 +24,10 @@ public class TaskListTest {
 
     @Test
     public void testDeleteTask() throws DukeException {
+        Ui ui = new Ui();
         TaskList taskList = new TaskList(new ArrayList<>());
         taskList.addTask(new Task("task"));
-        taskList.deleteTask(1);
+        taskList.deleteTask(1, ui);
         int size = taskList.getSize();
 
         assertEquals(0, size);

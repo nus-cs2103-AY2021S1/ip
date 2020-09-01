@@ -6,8 +6,8 @@ package duke;
 public class ListCommand extends Command {
 
     @Override
-    public void execute(TaskList taskList, Storage storage) throws DukeException {
-        taskList.showTaskList();
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+        taskList.showTaskList(ui);
         storage.writeToFile(taskList);
     }
 }

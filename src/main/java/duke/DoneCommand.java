@@ -17,8 +17,8 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) throws DukeException {
-        taskList.markTaskAsDone(idx);
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+        taskList.markTaskAsDone(idx, ui);
         storage.writeToFile(taskList);
     }
 }
