@@ -1,3 +1,5 @@
+import java.io.*;
+
 import java.util.ArrayList;
 
 public class TaskManager {
@@ -5,6 +7,17 @@ public class TaskManager {
 
     public TaskManager() {
         this.taskList = new ArrayList<Task>();
+    }
+
+    public TaskManager(String filePath) throws IOException {
+        this.taskList = new ArrayList<Task>();
+        try {
+            loadFromFile(filePath);
+        } catch (FileNotFoundException e) {
+            File dukeDb = new File(filePath);
+            dukeDb.getParentFile().mkdirs();
+            dukeDb.createNewFile();
+        }
     }
 
     public void parseCommand(String command) throws DukeException {
@@ -85,6 +98,40 @@ public class TaskManager {
                 s = s + (i + 1) + ". " + taskList.get(i) + "\n";
             }
             System.out.println(s);
+        }
+    }
+
+    public void saveToFile(String filePath) throws IOException {
+        File dukeDb = new File(filePath);
+        if (!dukeDb.exists()) {
+            dukeDb.getParentFile().mkdirs();
+            dukeDb.createNewFile();
+        }
+        FileWriter writer = new FileWriter(filePath, false);
+        for (Task task : taskList) {
+            writer.write(task.toDataString() + "\n");
+        }
+        writer.close();
+    }
+
+    public void loadFromFile(String filePath) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] taskLine = line.split("\\|");
+            switch (taskLine[0]) {
+                case("T"):
+                    ToDo todo = new ToDo(taskLine[2], Boolean.parseBoolean(taskLine[1]));
+                    taskList.add(todo);
+                    break;
+                case("D"):
+                    Deadline deadline = new Deadline(taskLine[2], Boolean.parseBoolean(taskLine[1]), taskLine[3]);
+                    taskList.add(deadline);
+                    break;
+                case("E"):
+                    Event event = new Event(taskLine[2], Boolean.parseBoolean(taskLine[1]), taskLine[3]);
+                    taskList.add(event);
+            }
         }
     }
 }

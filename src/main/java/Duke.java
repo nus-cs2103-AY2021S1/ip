@@ -1,11 +1,14 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    private static final String FILE_PATH = "data/DukeDB.txt";
+
+    public static void main(String[] args) throws IOException {
         String welcome = "Hello. I am Claude! What may I do for you today?";
         String goodbye = "Goodbye! Hope to see you again soon!";
         Scanner sc = new Scanner(System.in);
-        TaskManager tm = new TaskManager();
+        TaskManager tm = new TaskManager(FILE_PATH);
 
         System.out.println(welcome);
         while (sc.hasNext()) {
@@ -20,6 +23,7 @@ public class Duke {
                 }
             }
         }
+        tm.saveToFile(FILE_PATH);
         System.out.println(goodbye);
     }
 }
