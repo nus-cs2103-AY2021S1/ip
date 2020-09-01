@@ -5,6 +5,6 @@ public class InvalidTaskIndexException extends DukeException {
 
     /** Constructor. */
     public InvalidTaskIndexException() {
-        super("☹ OOPS!!! This task index does not exist in your list.");
+        super("Harh? This task index does not exist in your list.");
     }
 }

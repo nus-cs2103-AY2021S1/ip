@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
      * @param storage The storage system that saves the taskList.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.formatDeleteTask(taskList.getTasks(), num);
+        dialog = ui.formatDeleteTask(taskList.getTasks(), num);
         taskList.deleteTask(num);
         storage.saveTaskList(taskList.getTasks());
     }

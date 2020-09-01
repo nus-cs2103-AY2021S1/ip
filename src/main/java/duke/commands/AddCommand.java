@@ -30,7 +30,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(task);
-        ui.formatAddTask(taskList.getTasks(), task);
+        dialog = ui.formatAddTask(taskList.getTasks(), task);
         storage.saveTaskList(taskList.getTasks());
     }
 }

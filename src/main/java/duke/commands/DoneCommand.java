@@ -29,7 +29,7 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.markTaskAsDone(num);
-        ui.formatMarkAsDone(taskList.getTasks(), num);
+        dialog = ui.formatMarkAsDone(taskList.getTasks(), num);
         storage.saveTaskList(taskList.getTasks());
     }
 }

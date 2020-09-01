@@ -5,6 +5,6 @@ public class MissingTaskIndexException extends DukeException {
 
     /** Constructor. */
     public MissingTaskIndexException() {
-        super("☹ OOPS!!! There isn't a task index inputted");
+        super("Harh? There isn't a task index inputted");
     }
 }

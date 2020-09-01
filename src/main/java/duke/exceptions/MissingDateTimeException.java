@@ -5,6 +5,6 @@ public class MissingDateTimeException extends DukeException {
 
     /** Constructor. */
     public MissingDateTimeException() {
-        super ("☹ OOPS!!! The task does not have a date/time attached.");
+        super ("Harh? The task does not have a date/time attached.");
     }
 }

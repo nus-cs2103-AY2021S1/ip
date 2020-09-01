@@ -1,10 +1,9 @@
 package duke;
 
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.commands.Command;
-import duke.exceptions.DukeException;
+import duke.commands.ExceptionCommand;
 import duke.parsers.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -18,14 +17,10 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    /** Constructor.
-     *
-     * @param directoryPath The path of the dataFile's directory.
-     * @param dataFilePath The path of the dataFile.
-     */
-    public Duke(String directoryPath, String dataFilePath) {
+    /** Constructor. */
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(directoryPath, dataFilePath);
+        storage = new Storage();
         ArrayList<String> lines = storage.readFile();
         parser = new Parser();
         ArrayList<Task> tasks = parser.parseSavedTaskList(lines);
@@ -34,22 +29,41 @@ public class Duke {
 
     /** Runs the Duke program. */
     public void run() {
-        ui.showWelcome();
         boolean isExit = false;
-        try {
-            while (!isExit) {
-                String userInput = ui.readCommand();
-                Command c = parser.parse(userInput, taskList.getTasks());
-                c.execute(taskList, ui, storage);
+        while (!isExit) {
+            String userInput = ui.readCommand();
+            try {
+                Command c = getResponse(userInput);
                 isExit = c.isExit();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (DukeException | DateTimeParseException e) {
-            ui.showError(e);
         }
     }
 
-    /** The main method which runs the Duke program. */
+    /** Gets the response in Command form from the user input.
+     *
+     * @param userInput The user input.
+     * @return The response in Command form.
+     */
+    public Command getResponse(String userInput) {
+        try {
+            Command c = parser.parse(userInput, taskList.getTasks());
+            c.execute(taskList, ui, storage);
+            return c;
+        } catch (Exception e) {
+            Command c = new ExceptionCommand(e);
+            c.execute(taskList, ui, storage);
+            return c;
+        }
+    }
+
+    /** The main method which runs the Duke program.
+     *
+     * @param args The array of command-line arguments.
+     */
     public static void main(String[] args) {
-        new Duke("src/main/data", "src/main/data/data.txt").run();
+        Duke duke = new Duke();
+        duke.run();
     }
 }

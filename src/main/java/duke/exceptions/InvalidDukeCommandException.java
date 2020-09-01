@@ -5,6 +5,6 @@ public class InvalidDukeCommandException extends DukeException {
 
     /** Constructor. */
     public InvalidDukeCommandException() {
-        super("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        super("Harh? I don't know what that means.");
     }
 }

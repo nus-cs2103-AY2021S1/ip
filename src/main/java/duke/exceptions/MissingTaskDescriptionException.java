@@ -5,6 +5,6 @@ public class MissingTaskDescriptionException extends DukeException {
 
     /** Constructor. */
     public MissingTaskDescriptionException() {
-        super("☹ OOPS!!! The description of a task cannot be empty.");
+        super("Harh? The description of a task cannot be empty.");
     }
 }

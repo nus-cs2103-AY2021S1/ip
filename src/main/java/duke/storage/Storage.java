@@ -12,21 +12,21 @@ import duke.tasks.Task;
 /** Represents the storage system that saves the list of tasks. */
 public class Storage {
 
+    /** The path to the directory.*/
+    private static final String DIRECTORY_PATH = "src/main/data";
+    /** The path to the dataFile.*/
+    private static final String DATAFILE_PATH = "src/main/data/data.txt";
     /** The file that stores in the list of tasks in the hard disk. */
     private File dataFile;
 
-    /** Constructor.
-     *
-     * @param directoryPath The path of the dataFile's directory.
-     * @param dataFilePath The path of the dataFile.
-     */
-    public Storage(String directoryPath, String dataFilePath) {
+    /** Constructor. */
+    public Storage() {
         try {
-            File directory = new File(directoryPath);
+            File directory = new File(DIRECTORY_PATH);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
-            dataFile = new File(dataFilePath);
+            dataFile = new File(DATAFILE_PATH);
             dataFile.createNewFile();
         } catch (IOException e) {
             System.out.println("An error occurred");
