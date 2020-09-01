@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.siawsam.duke.Duke;
 import com.siawsam.duke.Response;
+import com.siawsam.duke.Ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -61,7 +62,8 @@ public class LandingScene extends AnchorPane {
             initializationMessage = "The save file does not contain a saved Duke task list.";
         }
     
-        dialogContainer.getChildren().add(
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(Ui.showWelcomeMessage(), dukeImage),
                 DialogBox.getDukeDialog(initializationMessage, dukeImage)
         );
     }
