@@ -54,21 +54,25 @@ class Ui {
      * @param s command given by user
      * @return -1 indicating failure, 0 indicating end of program, 1 indicating program is running
      */
-    public int takeInputAndReturn(String s) {
+    public String takeInputAndReturn(String s) {
         // End command
         if (!s.isEmpty() && END.contains(s)) {
-            return 0;
+            return "See yall around!!!";
+        }
+        // Initiating a conversation with duke with 'hi'
+        if (s.length() == 2 && s.contains("hi")) {
+            return CONVO_START;
         }
 
         String reply = CONTROLLER.parseAndExec(s);
 
         if (reply.equals("Error")) {            // Error. However this should not occur
-            System.out.println(DIVIDER + reply + "\n" + DIVIDER);
-            return -1;
+//            System.out.println(DIVIDER + reply + "\n" + DIVIDER);
+            return DIVIDER + reply + DIVIDER;
         } else {
             // Normal execution
-            System.out.println(DIVIDER + reply + "\n" + DIVIDER);
-            return 1;
+//            System.out.println(DIVIDER + reply + "\n" + DIVIDER);
+            return String.format("%s%s%s", DIVIDER, reply, DIVIDER);
         }
     }
 }
