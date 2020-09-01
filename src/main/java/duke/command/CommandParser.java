@@ -16,8 +16,8 @@ public class CommandParser {
     /**
      * Parses the user's command and return the type of command issued by the user.
      *
-     * @param in String command provided by user
-     * @return CommandType type of command
+     * @param in String command provided by user.
+     * @return CommandType type of command.
      */
     public static CommandType parseCmdWord(String in) {
         String[] input = in.split(" ");
@@ -49,8 +49,8 @@ public class CommandParser {
     /**
      * Parses the user's "task" command and return the type of "task" command issued by the user.
      *
-     * @param in String "task" command provided by user
-     * @return CommandType type of "task" command
+     * @param in String "task" command provided by user.
+     * @return CommandType type of "task" command.
      */
     public static TaskType parseTaskType(String in) {
         String[] input = in.split(" ");

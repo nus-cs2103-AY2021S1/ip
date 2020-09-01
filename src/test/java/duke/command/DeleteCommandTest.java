@@ -1,13 +1,13 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exception.InvalidCommandException;
 import duke.stub.task.DeadlineStub;
 import duke.stub.task.TaskListStub;
 import duke.task.TaskList;
-
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeleteCommandTest {
     @Test

@@ -35,13 +35,4 @@ public class TaskListStub implements TaskList {
     public void update(int i) {
 
     }
-
-    public static Task[] fillerTasks() {
-        Task[] fillerTasks = new Task[3];
-        fillerTasks[0] = new TodoStub();
-        fillerTasks[1] = new EventStub();
-        fillerTasks[1].markAsDone();
-        fillerTasks[2] = new DeadlineStub();
-        return fillerTasks;
-    }
 }

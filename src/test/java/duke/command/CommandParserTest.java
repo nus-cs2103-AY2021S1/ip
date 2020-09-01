@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.task.TaskType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.task.TaskType;
 
 public class CommandParserTest {
     @Test

@@ -1,38 +1,41 @@
 package duke;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Scanner;
+
 import duke.command.CommandExecutor;
 import duke.command.DukeCommandExecutor;
 import duke.exception.DukeException;
 import duke.exception.InvalidSaveFileException;
-import duke.task.TaskArrayList;
 import duke.storage.DukeStorage;
 import duke.storage.Storage;
+import duke.task.TaskArrayList;
 import duke.ui.Ui;
-
-import java.io.IOException;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import java.util.List;
-import java.util.Scanner;
 
 // Main class that initializes the program.
 public class Duke {
-    private final Scanner SC = new Scanner(System.in);
-    private final CommandExecutor EXE = new DukeCommandExecutor();
-    private final Ui UI = new Ui();
-    private final Storage STORAGE;
-    private final TaskArrayList TASK_LIST;
+    private final Scanner sc = new Scanner(System.in);
+    private final CommandExecutor exe = new DukeCommandExecutor();
+    private final Ui ui = new Ui();
+    private final Storage storage;
+    private final TaskArrayList taskList;
 
-
+    /**
+     * Takes in a path which decides where the save file is stored and initializes the program.
+     *
+     * @param filePath Path path to save file.
+     * @throws IOException if an error occurs while performing IO operations.
+     */
     public Duke(Path filePath) throws IOException {
-        this.STORAGE = new DukeStorage(filePath);
-        this.TASK_LIST = new TaskArrayList(STORAGE);
+        this.storage = new DukeStorage(filePath);
+        this.taskList = new TaskArrayList(storage);
     }
 
     private void handleStart() {
-        UI.print("Hello! I'm Duke\nWhat can I do for you?");
+        ui.print("Hello! I'm Duke\nWhat can I do for you?");
     }
 
     /**
@@ -46,27 +49,25 @@ public class Duke {
             throw new InvalidSaveFileException("An error has occurred while loading the save file!.");
         }
 
-        String input, msgBody;
-
         while (true) {
-            input = SC.nextLine().trim();
+            String input = sc.nextLine().trim();
             try {
-                msgBody = EXE.execute(input, TASK_LIST);
-                UI.print(msgBody);
-                if (EXE.shouldExit()) {
+                String msgBody = exe.execute(input, taskList);
+                ui.print(msgBody);
+                if (exe.shouldExit()) {
                     break;
                 }
             } catch (DukeException e) {
-                UI.printErr(e.getMessage());
+                ui.printErr(e.getMessage());
             }
         }
     }
 
     private void initialise() throws DukeException {
         handleStart();
-        List<String> loadedLines = STORAGE.getSavedLines();
+        List<String> loadedLines = storage.getSavedLines();
         for (String line: loadedLines) {
-            EXE.loadSaveString(line, TASK_LIST);
+            exe.loadSaveString(line, taskList);
         }
     }
 

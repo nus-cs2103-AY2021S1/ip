@@ -21,7 +21,7 @@ public abstract class Task {
     /**
      * Returns an icon that represents the task status.
      *
-     * @return String ✘ if not done and ✓ if done
+     * @return String ✘ if not done and ✓ if done.
      */
     public String getStatusIcon() {
         return isDone ? "\u2713" : "\u2718";
@@ -39,15 +39,15 @@ public abstract class Task {
     /**
      * Returns true or false based on whether the task is due on the date provided.
      *
-     * @param date LocalDate the date to check
-     * @return boolean Whether the task is due on the specified date
+     * @param date LocalDate the date to check.
+     * @return boolean Whether the task is due on the specified date.
      */
     public abstract boolean isDueOn(LocalDate date);
 
     /**
      * Converts the task into a string format that will be stored in the save file.
      *
-     * @return String storage information of task
+     * @return String storage information of task.
      */
     public abstract String toSaveString();
 }

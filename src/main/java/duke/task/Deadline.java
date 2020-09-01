@@ -1,27 +1,27 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.exception.InvalidDeadlineException;
 import duke.parser.DateTimeParsing;
 
-import java.time.format.DateTimeParseException;
-import java.time.LocalDate;
-
 public class Deadline extends Task {
-    private final String TIME_12H;
-    private final LocalDate DATE;
+    private final String time12h;
+    private final LocalDate date;
 
     private Deadline(String description, String time12h, LocalDate date) {
         super(description);
-        this.TIME_12H = time12h;
-        this.DATE = date;
+        this.time12h = time12h;
+        this.date = date;
     }
 
     /**
      * Factory method for creating a deadline task.
      *
-     * @param details String details of the task
-     * @return Deadline the deadline task
-     * @throws InvalidDeadlineException If the format of the details is invalid
+     * @param details String details of the task.
+     * @return Deadline the deadline task.
+     * @throws InvalidDeadlineException If the format of the details is invalid.
      */
     protected static Deadline createDeadline(String details) throws InvalidDeadlineException {
         String[] info = details.split("/");
@@ -34,26 +34,26 @@ public class Deadline extends Task {
             LocalDate date = DateTimeParsing.parseDate(dateTime[0]);
             String time12h = DateTimeParsing.to12HTimeFormat(dateTime[1]);
             return new Deadline(desc, time12h, date);
-        } catch(DateTimeParseException | NumberFormatException e) {
+        } catch (DateTimeParseException | NumberFormatException e) {
             throw new InvalidDeadlineException();
         }
     }
 
     @Override
     public boolean isDueOn(LocalDate date) {
-        return this.DATE.equals(date);
+        return this.date.equals(date);
     }
 
     @Override
     public String toSaveString() {
-        String date = DateTimeParsing.localDateToString(DATE);
-        String time = DateTimeParsing.to24HTimeFormat(TIME_12H);
+        String date = DateTimeParsing.localDateToString(this.date);
+        String time = DateTimeParsing.to24HTimeFormat(time12h);
         return (isDone ? 1 : 0) + "deadline " + description + "/by " + date + " " + time;
     }
 
     @Override
     public String toString() {
-        String formattedDate = DateTimeParsing.localDateToFormattedString(DATE);
-        return "[D]" + super.toString() + "(by: " + formattedDate + " " + TIME_12H + ")";
+        String formattedDate = DateTimeParsing.localDateToFormattedString(date);
+        return "[D]" + super.toString() + "(by: " + formattedDate + " " + time12h + ")";
     }
 }

@@ -1,28 +1,28 @@
 package duke.ui;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 public class UiTest {
-    private final ByteArrayOutputStream OUT_CONTENT = new ByteArrayOutputStream();
-    private final PrintStream ORIGINAL_OUT = System.out;
-    private final static String DIVIDER = "____________________________________________________________";
-    private final static String ERROR_HEADER = "___________________________ERROR!___________________________";
+    private static final String DIVIDER = "____________________________________________________________";
+    private static final String ERROR_HEADER = "___________________________ERROR!___________________________";
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
     @BeforeEach
     public void setUpStreams() {
-        System.setOut(new PrintStream(OUT_CONTENT));
+        System.setOut(new PrintStream(outContent));
     }
 
     @AfterEach
     public void restoreStreams() {
-        System.setOut(ORIGINAL_OUT);
+        System.setOut(originalOut);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class UiTest {
         new Ui().print(msgBody);
         assertEquals(
             DIVIDER + "\n" + msgBody + "\n" + DIVIDER + "\n",
-            OUT_CONTENT.toString()
+            outContent.toString()
         );
     }
 
@@ -41,7 +41,7 @@ public class UiTest {
         new Ui().printErr(msgBody);
         assertEquals(
                 ERROR_HEADER + "\n" + msgBody + "\n" + DIVIDER + "\n",
-                OUT_CONTENT.toString()
+                outContent.toString()
         );
     }
 }
