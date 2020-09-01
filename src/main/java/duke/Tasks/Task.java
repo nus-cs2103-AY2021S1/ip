@@ -1,4 +1,8 @@
-public class Task {
+package duke.Tasks;
+
+import duke.TextStoreAndPrint.TextStore;
+
+public abstract class Task {
 
     String name;
     boolean done = false;
@@ -12,12 +16,10 @@ public class Task {
     }
 
     public String toString() {
-        return done ? Text.doneText + name : Text.notDoneText + name;
+        return done ? TextStore.doneText + name : TextStore.notDoneText + name;
     }
 
-    public String saveString() {
-        return "T/break/" + this.done + "/break/" + name;
-    }
+    public abstract String saveString();
 
     public boolean markDone() {
         if (done) {
