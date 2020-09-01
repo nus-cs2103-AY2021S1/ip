@@ -80,7 +80,7 @@ public class Parser {
         } else if (userInput.startsWith("find")) {
             String keyword = userInput.replace("find ", "");
             String message = "Here are the matching tasks in your list\n";
-            for (Task task : taskList.getTasks()) {
+            for (Task task : taskList.getTaskList()) {
                 if (task.description.contains(keyword)) {
                     message += task.toString() + "\n";
                 }

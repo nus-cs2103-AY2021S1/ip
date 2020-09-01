@@ -66,7 +66,7 @@ public class Storage {
      * Formats a task and appends a given task to the end of the data file.
      * @param task The task that will be appended to the data file.
      */
-    public void saveToFile(Task task) {
+    public void save(Task task) {
         try {
             FileWriter fileWriter = new FileWriter("data.txt", true);
             String[] strings = task.toString().split("\\|");
