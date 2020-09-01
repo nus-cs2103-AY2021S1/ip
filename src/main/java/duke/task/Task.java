@@ -10,14 +10,14 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * @param s the description of the task
+     * @param description the description of the task
      * @throws DukeException if the the description of the task is left blank
      */
-    public Task(String s) throws DukeException {
-        if (s.isBlank()) {
+    public Task(String description) throws DukeException {
+        if (description.isBlank()) {
             throw new DukeException("Please add a nice description to your task :)");
         }
-        this.description = s;
+        this.description = description;
         this.isDone = false;
     }
 
@@ -25,13 +25,13 @@ public abstract class Task {
      * Overloaded constructor for tasks from the database.
      *
      * @param doneStatus whether the task is done from the previous session.
-     * @param s the description of the task stored in the database.
+     * @param description the description of the task stored in the database.
      */
-    public Task(int doneStatus, String s) {
+    public Task(int doneStatus, String description) {
         if (doneStatus == 1) {
             this.isDone = true;
         }
-        this.description = s;
+        this.description = description;
     }
 
     /**
@@ -59,7 +59,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String isChecked = (isDone ? "[\u2713]" : "[\u2718]");
-        return isChecked;
+        return isDone ? "[\u2713]" : "[\u2718]";
     }
 }
