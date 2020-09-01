@@ -10,8 +10,20 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents executor of delete command.
+ * Executes the action of deleting the task in the task list
+ * given the task item number.
+ * Returns appropriate response message if task item number is invalid.
+ */
 public class DeleteCommandExecutor extends CommandExecutor {
 
+    /**
+     * Deletes task to the task list if list item number is valid.
+     *
+     * @param command
+     * @param taskList
+     */
     @Override
     public void execute(Command command, TaskList taskList) {
         try {

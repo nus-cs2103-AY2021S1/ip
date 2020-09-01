@@ -13,10 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Loads and saves task list from / to file.
+ */
 public class Storage {
 
     private static final String LIST_FILE_PATH = "./data/duke.txt";
 
+    /**
+     * Loads the task list from stored tasks in a file.
+     * 
+     * @return Task list.
+     */
     public static List<Task> load() {
         File file = new File(LIST_FILE_PATH);
         File parentFile = file.getParentFile();
@@ -58,6 +66,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Saves the tasks in the task list to a file.
+     * 
+     * @param taskList
+     */
     public static void save(List<Task> taskList) {
         File file = new File(LIST_FILE_PATH);
         File parentFile = file.getParentFile();

@@ -10,6 +10,10 @@ import tasklist.TaskList;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Represents Ui where the input is parsed and 
+ * the appropriate command is executed and output is given.
+ */
 public class Ui {
 
     private final Scanner scanner = new Scanner(System.in);
@@ -18,6 +22,9 @@ public class Ui {
 
     private boolean isOn = true;
 
+    /**
+     * Runs the while loop of Duke until exit input given.
+     */
     public void run() {
         printGreetingMessage();
         while (isOn) {

@@ -8,9 +8,19 @@ import command.ListCommand;
 import constant.DukeConstants;
 import enums.TaskEnum;
 
-
+/**
+ * Parses the input to form the appropriate command.
+ * If input is invalid, the command is null.
+ */
 public class CommandParser {
 
+    /**
+     * Parses the input to form the command object.
+     * 
+     * @param input
+     * @return Command object related to the input to Duke.
+     * @throws IndexOutOfBoundsException
+     */
     public static Command parse(String input) throws IndexOutOfBoundsException {
         if (isListCommand(input)) {
             return new ListCommand(input);
@@ -52,10 +62,22 @@ public class CommandParser {
         return input.split("\\s+")[0].equals(DukeConstants.EVENT_COMMAND);
     }
 
+    /**
+     * Checks if the input is requesting to exit.
+     *
+     * @param input
+     * @return Boolean result if input is requesting to exit.
+     */
     public static boolean isExit(String input) {
         return input.equals(DukeConstants.EXIT_INPUT);
     }
 
+    /**
+     * Returns the title of the input.
+     * @param input
+     * @return Title of the input
+     * @throws IndexOutOfBoundsException
+     */
     public static String getTitle(String input) throws IndexOutOfBoundsException {
         try {
             return input.split("\\s+", 2)[1];

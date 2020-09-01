@@ -6,6 +6,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents EventTask object 
+ * and parses the start and end time to another format.
+ */
 public class EventTask extends Task {
 
     private static final DateTimeFormatter PATTERN_DATE_INPUT =
@@ -56,6 +60,11 @@ public class EventTask extends Task {
         this.endTime = LocalTime.parse(endTime, PATTERN_TIME_INPUT);
     }
 
+    /**
+     * Returns the save format of the task.
+     * 
+     * @return Save format of the task.
+     */
     @Override
     public String getSaveFormat() {
         return String.format("%s | %s | %s | %s", TaskEnum.EVENT.getTaskLetter(),

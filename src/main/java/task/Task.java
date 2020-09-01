@@ -22,23 +22,46 @@ public class Task {
         this.type = type;
     }
 
+    /**
+     * Marks the task done.
+     */
     public void markDone() {
         this.isDone = true;
     }
 
+    /**
+     * Returns the unicode corresponding to isDone value.
+     * 
+     * @return unicode corresponding to isDone value.
+     */
     public String getStatusIcon() {
         return (this.isDone ? "\u2713" : "\u2718");
     }
-
+    
+    /**
+     * Returns the save format of the task.
+     * 
+     * @return Save format of the task.
+     */
     public String getSaveFormat() {
         return String.format("%s | %s | %s", this.type.getTaskLetter(), this.isDone ? 1 : 0, this.title);
     }
 
+    /**
+     * Returns the String information of the task.
+     * 
+     * @return String information of the task.
+     */
     @Override
     public String toString() {
         return String.format("[%s][%s] %s", this.type.getTaskLetter(), this.getStatusIcon(), this.title);
     }
 
+    /**
+     * Returns the isDone attribute.
+     * 
+     * @return the isDone attribute.
+     */
     public boolean getIsDone() {
         return this.isDone;
     }

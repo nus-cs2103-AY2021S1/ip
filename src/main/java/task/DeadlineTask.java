@@ -6,6 +6,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents Deadline Task and
+ * parses input datetime info to another format.
+ */
 public class DeadlineTask extends Task {
 
     private static final DateTimeFormatter PATTERN_INPUT =
@@ -36,6 +40,11 @@ public class DeadlineTask extends Task {
         this.dateTime = LocalDateTime.parse(dateTimeDetails, PATTERN_INPUT);
     }
 
+    /**
+     * Returns the save format of the task.
+     * 
+     * @return Save format of the task.
+     */
     @Override
     public String getSaveFormat() {
         return String.format("%s | %s | %s | %s", TaskEnum.DEADLINE.getTaskLetter(),

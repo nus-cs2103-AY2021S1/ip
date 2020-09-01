@@ -13,8 +13,20 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents executor of add command.
+ * Executes the action of adding the task to the task list.
+ */
 public class AddCommandExecutor extends CommandExecutor {
 
+    /**
+     * Creates a Task object from the command.
+     * Adds task to the task list.
+     * Prints response from Duke.
+     * 
+     * @param command
+     * @param taskList
+     */
     @Override
     public void execute(Command command, TaskList taskList) {
         Task task;

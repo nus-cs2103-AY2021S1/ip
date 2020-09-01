@@ -4,9 +4,18 @@ import constant.DukeConstants;
 
 import java.util.List;
 
-public class DukeOutputFormatter {
+/**
+ * Represents class to format
+ * the response to be outputted to Duke.
+ */
+class DukeOutputFormatter {
 
-    public static String format(List<String> responses) {
+    /**
+     * Formats and prints the responses from Duke.
+     *
+     * @param list of responses by Duke.
+     */
+    static String format(List<String> responses) {
         StringBuilder sb = new StringBuilder();
         sb.append(DukeConstants.LINE);
         sb.append("\n");
@@ -14,8 +23,15 @@ public class DukeOutputFormatter {
         sb.append(DukeConstants.LINE);
         return sb.toString();
     }
-
-    public static String format(List<String> responses, List<Integer> indentIndexes) {
+    
+    
+    /**
+     * Formats and prints the responses from Duke.
+     *
+     * @param list of responses by Duke.
+     * @param indentIndexes to indicate which response is formatted more.
+     */
+    static String format(List<String> responses, List<Integer> indentIndexes) {
         StringBuilder sb = new StringBuilder();
         sb.append(DukeConstants.LINE);
         sb.append("\n");

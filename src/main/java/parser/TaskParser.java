@@ -8,8 +8,20 @@ import task.ToDoTask;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * outputs the appropriate task given the taskType.
+ * If the title is invalid, output appropriate message to Duke.
+ */
 public class TaskParser {
 
+    /**
+     * Parses title and taskType to form Task object.
+     * 
+     * @param title
+     * @param taskType
+     * @return Task object.
+     * @throws IndexOutOfBoundsException
+     */
     public static Task parseTask(String title, TaskEnum taskType) throws IndexOutOfBoundsException {
         Task task;
         switch(taskType) {

@@ -10,8 +10,20 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents executor of done command.
+ * Executes the action of marking the task in the task list as done
+ * given the task item number.
+ * Returns appropriate response message if task item number is invalid.
+ */
 public class DoneCommandExecutor extends CommandExecutor {
 
+    /**
+     * Marks task done given the task item position in the task list.
+     * 
+     * @param command
+     * @param taskList
+     */
     @Override
     public void execute(Command command, TaskList taskList) {
         try {

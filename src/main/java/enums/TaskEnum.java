@@ -1,5 +1,8 @@
 package enums;
 
+/**
+ * Represents enum of the possible task.
+ */
 public enum TaskEnum {
     TODO("T"),
     EVENT("E"),
@@ -11,6 +14,10 @@ public enum TaskEnum {
         this.taskLetter = taskLetter;
     }
 
+    /**
+     * Returns taskLetter String.
+     * @return taskLetter String
+     */
     public String getTaskLetter() {
         return taskLetter;
     }
