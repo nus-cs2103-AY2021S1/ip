@@ -1,5 +1,6 @@
 import duke.DukeException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -53,14 +54,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws DukeException {
         String input = userInput.getText();
-        if (input.equals("bye")) {
-            // close the app
-        }
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(this.topLine + input + this.bottomLine, userImage),
                 DialogBox.getDukeDialog(this.topLine + response + this.bottomLine, dukeImage)
         );
+        if (input.equals("bye")) {
+            Platform.exit();
+        }
         userInput.clear();
     }
 }
