@@ -6,20 +6,13 @@ import duke.ui.Ui;
 
 /** This abstract class is a generic class which all other command classes inherit from. */
 public abstract class Command {
-    protected boolean exit;
-
-    /**
-     * @return Boolean representing whether the program should terminate after executing the command.
-     */
-    public boolean isExit() {
-        return this.exit;
-    }
 
     /**
      * Performs the necessary actions associated with the command.
-     * @param taskList The TaskList associated with the Command
-     * @param ui The Ui associated with the Command.
-     * @param storage The Storage associated with the Command.
+     *
+     * @param taskList The TaskList object to make changes to or to get tasks from.
+     * @param ui The Ui that saves messages to be sent to the user.
+     * @param storage The Storage object to make changes to or to get tasks from.
      */
     public abstract void execute(TaskList taskList, Ui ui, Storage storage);
 }

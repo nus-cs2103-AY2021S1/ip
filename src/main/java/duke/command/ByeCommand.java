@@ -6,15 +6,10 @@ import duke.ui.Ui;
 
 /** This class represents the command to terminate the program. */
 public class ByeCommand extends Command {
-    public ByeCommand() {
-        this.exit = true;
-    }
 
-    /**
-     * Prints the goodbye message.
-     */
+    /** Exits the program. */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printGoodbye();
+        System.exit(0);
     }
 }

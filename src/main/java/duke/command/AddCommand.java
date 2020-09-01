@@ -13,25 +13,27 @@ public class AddCommand extends Command {
 
     /**
      * Constructs a AddCommand object with a task.
-     * @param task The Task associated with the AddCommand.
+     *
+     * @param task The Task the user wants to add.
      */
     public AddCommand(Task task) {
         this.task = task;
     }
 
     /**
-     * Adds task to taskList.
+     * Adds the task to taskList.
      * Prints the task that has just been added.
-     * Adds task to storage.
+     * Adds the ask to storage.
+     *
      * @param taskList The TaskList to add the task to.
-     * @param ui The Ui which will print the messages to the user.
+     * @param ui The Ui that saves messages to be sent to the user.
      * @param storage The Storage to add the task to.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             taskList.add(this.task);
-            ui.printAdd(this.task, taskList.size());
+            ui.saveAddMessage(this.task, taskList.size());
             storage.add(this.task);
         } catch (IOException e) {
             System.out.println("Something went wrong!");

@@ -9,50 +9,46 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
-import java.time.format.DateTimeParseException;
-
 /** The main class of the app. */
 public class Duke {
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
 
+    private static final String path = "./data/duke.txt";
+
     /**
      * Constructs a Duke object associated with a file path.
      * @param path The location of the storage file.
      */
-    public Duke(String path) throws IOException {
-        ui = new Ui();
-        storage = new Storage(path);
+    public Duke() {
         try {
-            taskList = new TaskList(storage.load());
+            this.ui = new Ui();
+            this.storage = new Storage(path);
+            this.taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
-            taskList = new TaskList();
-        }
-    }
-    
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } catch (DateTimeParseException e) {
-                ui.showError("Invalid date input");
-            } finally {
-                ui.showLine();
-            }
+            ui.saveErrorMessage("Error");
+            this.taskList = new TaskList();
+        } catch (IOException e) {
+            ui.saveErrorMessage("Error loading disk");
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new Duke("./data/duke.txt").run();
+    /**
+     * Parses user input and executes the command returned by the parser.
+     *
+     * @param input The input from the user as a String.
+     */
+    public void handleUserInput(String input) {
+        try {
+            Command command = Parser.parse(input);
+            command.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            ui.saveErrorMessage("Sorry, I don't understand that!");
+        }
+    }
+
+    public String getResponse() {
+        return ui.getMessage();
     }
 }

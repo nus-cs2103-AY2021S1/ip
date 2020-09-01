@@ -21,17 +21,18 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Mark the task as done.
-     * Print the mark as done message to the user.
-     * Refresh the storage to reflect the changes.
-     * @param taskList The TaskList to get the task to be marked as done from
-     * @param ui The Ui to print the mark as done message to the user
-     * @param storage The Storage to save the changes
+     * Marks the task as done.
+     * Prints the mark as done message to the user.
+     * Refreshes the storage to reflect the changes.
+     *
+     * @param taskList The TaskList to get the task to be marked as done from.
+     * @param ui The Ui that saves messages to be sent to the user..
+     * @param storage The Storage to save the changes.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            ui.printDone(taskList.setDone(i));
+            ui.saveDoneMessage(taskList.setDone(i));
             storage.refresh(taskList);
         } catch (IOException e) {
             System.out.println("Sorry something went wrong!");

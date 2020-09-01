@@ -11,7 +11,8 @@ public class DeleteCommand extends Command {
     private int i;
 
     /**
-     * Constructs a DeleteCommand object associated with an int i.
+     * Constructs a DeleteCommand object.
+     *
      * @param i The index of the Task to be deleted in the TaskList.
      */
     public DeleteCommand(int i) {
@@ -19,17 +20,18 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Delete the task at index i from the TaskList.
-     * Print the deleted task.
-     * Refresh the storage to reflect the changes.
+     * Deletes the task at index i from the TaskList.
+     * Prints the deleted task.
+     * Refreshes the storage to reflect the changes.
+     *
      * @param taskList The TaskList to delete the task from.
-     * @param ui The Ui that prints the delete message.
+     * @param ui The Ui that saves messages to be sent to the user.
      * @param storage The Storage to delete the task from.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            ui.printDelete(taskList.delete(i));
+            ui.saveDeleteMessage(taskList.delete(i));
             storage.refresh(taskList);
         } catch (IOException e) {
             System.out.println("Sorry something went wrong!");

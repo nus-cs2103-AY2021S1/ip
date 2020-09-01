@@ -7,115 +7,95 @@ import java.time.LocalDate;
 
 import java.util.Scanner;
 
-/** This class deals with interactions with the user. */
+/** This class deals with messages sent to the user. */
 public class Ui {
     private Scanner sc = new Scanner(System.in);
 
-    private static String instructions = "Instructions on using Duke:\n" +
-            "list : key in list to show your list of tasks. key in a date after list to show your list of tasks on that date\n" +
-            "date and time : follow yyyy-mm-dd format when keying in dates and hh:mm format when keying in times\n";
+    /** The message to be sent to the user through the GUI. */
+    private String message;
 
-    /**
-     * @return User input as a String.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\n");
-        System.out.println(instructions);
-        System.out.println("What can I do for you?");
+    public String getMessage() {
+        return this.message;
     }
 
     /**
-     * Prints all tasks in the list, if no date is specified.
-     * Prints all tasks on the specified date, if a date is specified.
-     * @param tasklist The TaskList containing the tasks to be printed.
+     * Saves all tasks on the specified date to the message.
+     * If no date is specified, saves all tasks to the message.
+     *
+     * @param taskList The TaskList containing all tasks.
      * @param date The date used to filter tasks.
      */
-    public void displayList(TaskList tasklist, LocalDate date) {
+    public void saveListMessage(TaskList taskList, LocalDate date) {
         int i = 1;
+        StringBuilder sb = new StringBuilder();
         if (date == null) {
-            for (Task t : tasklist.getList()) {
-                System.out.println(i + "." + t);
+            for (Task t : taskList.getList()) {
+                sb.append(i + "." + t + "\n");
                 i++;
             }
         } else {
-            for (Task t : tasklist.getList()) {
+            for (Task t : taskList.getList()) {
                 if (t.getDate() != null && t.getDate().equals(date)) {
-                    System.out.println(i + "." + t);
+                    sb.append(i + "." + t + "\n");
                     i++;
                 }
             }
         }
+        this.message = sb.toString();
     }
 
     /**
-     * Show find message.
-     * @param taskList The TaskList containing the tasks to be printed.
-     * @param keyword The keyword filter
+     * Saves all tasks containing the keyword to the message.
+     *
+     * @param taskList The TaskList containing all tasks.
+     * @param keyword The keyword filter.
      */
-    public void showFindMessage(TaskList taskList, String keyword) {
+    public void saveFindMessage(TaskList taskList, String keyword) {
         int i = 1;
+        StringBuilder sb = new StringBuilder();
         for (Task t : taskList.getList()) {
             if (t.getDescription().indexOf(keyword) != -1) {
-                System.out.println(i++ + "." + t);
+                sb.append(i++ + "." + t + "\n");
             }
         }
+        this.message = sb.toString();
     }
 
     /**
-     * Print done message.
+     * Saves the done message with the task that has just been marked as done.
+     *
      * @param task The task marked as done.
      */
-    public void printDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n\t" + task);
+    public void saveDoneMessage(Task task) {
+        this.message = "Nice! I've marked this task as done:\n\t" + task;
     }
 
     /**
-     * Print delete message.
-     * @param task The delete task.
+     * Saves the delete message with the task that has just been deleted.
+     *
+     * @param task The deleted task.
      */
-    public void printDelete(Task task) {
-        System.out.println("Noted. I've removed this task:\n\t" + task);
+    public void saveDeleteMessage(Task task) {
+        this.message = "Noted. I've removed this task:\n\t" + task;
     }
 
     /**
-     * Print add message.
+     * Saves the add message with the task that has just been added.
+     *
      * @param task The added task.
      * @param size The size of the TaskList.
      */
-    public void printAdd(Task task, int size) {
-        System.out.println("Got it. I've added this task:\n\t" + task);
-        System.out.println("Now you have " + size + " tasks in the list");
+    public void saveAddMessage(Task task, int size) {
+        this.message = "Got it. I've added this task:\n\t" + task + "\n"
+                + "Now you have " + size + " tasks in the list";
     }
 
     /**
-     * Prints error message to user when an exception occurs while loading tasks from the storage file.
+     * Saves error messages.
+     *
+     * @param error The error message.
      */
-    public void showLoadingError() {
-        System.out.println("Error loading disk");
-    }
-
-    /**
-     * Prints error message to user when a DukeException occurs.
-     * @param error
-     */
-    public void showError(String error) {
-        System.out.println(error);
-    }
-
-    public void printGoodbye() {
-        System.out.println("Goodbye! See you again :-)");
-    }
-
-    public void showLine() {
-        System.out.println("____________________________________________________________");
+    public void saveErrorMessage(String error) {
+        this.message = error;
     }
 }

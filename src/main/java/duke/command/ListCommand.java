@@ -26,14 +26,14 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Prints all tasks if no date is specified.
-     * Prints all tasks on the specified date, if a date is specified.
-     * @param taskList The TaskList which contains the tasks to be printed.
+     * Saves the list message to the Ui.
+     *
+     * @param taskList The TaskList to get the tasks.
      * @param ui The Ui that prints the list to the user.
      * @param storage The Storage associated with the Command.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.displayList(taskList, date);
+        ui.saveListMessage(taskList, date);
     }
 }
