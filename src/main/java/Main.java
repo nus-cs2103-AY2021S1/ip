@@ -1,10 +1,12 @@
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A GUI for Duke using FXML.
@@ -16,7 +18,6 @@ public class Main extends Application {
     public Main() throws IOException {
 
     }
-
 
     @Override
     public void start(Stage stage) {
@@ -30,5 +31,9 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void endDuke() {
+        Platform.exit();
     }
 }

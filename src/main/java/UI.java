@@ -9,20 +9,6 @@ import java.util.Scanner;
 public class UI {
 
     /**
-     * Greets the user upon launch.
-     */
-    protected void greetUser() {
-        String welcome = "Hello I am Duke!\nHow can I help you?\n";
-        String instructions = "Leave a single blankspace after each command to " +
-                "trigger Duke's response!\n";
-        String listOfCommand = "List of Commands = " +
-                "event, todo, deadline, delete, done, find, list\n";
-        System.out.println(welcome);
-        System.out.println(instructions);
-        System.out.println(listOfCommand);
-    }
-
-    /**
      * Prints responses when a task is completed.
      * @param task the completed task.
      */
@@ -43,12 +29,12 @@ public class UI {
      * @param newTask Task to be completed.
      */
     protected String addTask(TaskList tasks, Task newTask) {
-        String str1 = "\nGot it. This task is now added.";
+        String str1 = "\nGot it. This task is now added.\n";
         String str2 = " " + newTask;
         int tasksLeft = tasks.checkTasksLeft();
         String str3 = "You have " + tasksLeft
                 + " tasks left in your list!\n";
-        return str1 + str2 + str3;
+        return str1 + str2 + "\n" + str3;
     }
 
     /**
@@ -57,11 +43,11 @@ public class UI {
      * @param deletedTask Task to be deleted.
      */
     protected String deleteTask(TaskList tasks, Task deletedTask) {
-        String str1 = "\nGot it. Deleting task.....";
+        String str1 = "\nGot it. Deleting task.....\n";
         String str2 = " " + deletedTask;
         String str3 = "You have " + tasks.getTaskList().size()
                 + " tasks left in your list!\n";
-        return str1 + str2 + str3;
+        return str1 + str2 + "\n" + str3;
     }
 
     /**
@@ -71,7 +57,7 @@ public class UI {
     protected String displayTasks(TaskList taskList) {
         int index = 1;
         String allTask = "";
-        String str1 = "Here are the tasks in your tasklist:";
+        String str1 = "Here are the tasks in your tasklist:\n";
         for (Task task : taskList.getTaskList()) {
             allTask += index + "." + task + "\n";
             index++;

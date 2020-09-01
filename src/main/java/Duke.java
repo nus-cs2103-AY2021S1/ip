@@ -23,18 +23,6 @@ public class Duke {
         dukeTaskList = new TaskList(dukeStorage.loadData());
         dukeUI = new UI();
         dukeParser = new Parser();
-
-        //dukeUI.greetUser();
-
-//        boolean isExit = false;
-//
-//        while (!isExit) {
-//            String userCommand = dukeUI.readCommand();
-//            Command cmd = dukeParser.parseCommand(userCommand);
-//            cmd.execute(dukeTaskList, dukeUI);
-//            ixsExit = cmd.isExit();
-//            storage.writeData(dukeTaskList);
-//        }
     }
 
     public String getResponse(String input) {
