@@ -4,7 +4,6 @@ package duke;
  * Main class to run Ui object and listen for user input.
  */
 public class Duke {
-
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
@@ -28,8 +27,16 @@ public class Duke {
      * Initialises the Duke bot.
      * @throws Exception File not found exception
      */
-    public void run() throws Exception {
-        this.ui.initialise(tasks, storage);
+    public String run(String input) throws Exception {
+        return this.ui.initialise(tasks, storage, input);
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) throws Exception {
+        return this.run(input);
     }
 
     /**
@@ -39,7 +46,7 @@ public class Duke {
      */
     public static void main(String[] args) throws Exception {
         // remember to change filepath to "../../../data/duke.ser" during jar build
-        Duke duke = new Duke("data/duke.ser");
-        duke.run();
+        // Duke duke = new Duke("data/duke.ser");
+        // duke.run();
     }
 }

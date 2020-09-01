@@ -20,7 +20,7 @@ public class DeadlineCommand extends Command {
      * @param storage Storage object that reads and writes to duke.ser
      */
     @Override
-    public void execute(String command, TaskList list, Storage storage) {
+    public String execute(String command, TaskList list, Storage storage) {
         String horizontalLine = "____________________________________\n";
         String instructions = command.substring(9);
         String[] arr = instructions.split("/by");
@@ -28,9 +28,9 @@ public class DeadlineCommand extends Command {
         String date = arr[1].substring(1);
         int counter = list.getList().size();
         list.addTask(counter, new Deadline(false, counter + 1, instructions, date));
-        String taskMessage = list.getList().get(counter).toString();
-        System.out.println(horizontalLine + "Okok. I help you add this task: \n"
-                + taskMessage + "\n" + "You got " + (counter + 1) + " tasks in the list.\n" + horizontalLine);
         storage.writeData(list.getList());
+        String taskMessage = list.getList().get(counter).toString();
+        return horizontalLine + "Okok. I help you add this task: \n"
+                + taskMessage + "\n" + "You got " + (counter + 1) + " tasks in the list.\n" + horizontalLine;
     }
 }

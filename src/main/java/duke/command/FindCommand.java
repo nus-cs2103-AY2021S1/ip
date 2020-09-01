@@ -12,10 +12,10 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(String command, TaskList list, Storage storage) {
+    public String execute(String command, TaskList list, Storage storage) {
         String horizontalLine = "____________________________________\n";
         String keyword = command.substring(5);
-        System.out.println(horizontalLine + "Here are the things you want lor: \n");
-        System.out.println(list.filter(keyword) + horizontalLine);
+        return horizontalLine + "Here are the things you want lor: \n"
+            + list.filter(keyword) + horizontalLine;
     }
 }
