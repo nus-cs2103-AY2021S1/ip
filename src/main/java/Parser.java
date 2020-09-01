@@ -1,7 +1,7 @@
-import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.ArrayList;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a Parser object.
@@ -55,8 +55,8 @@ public class Parser {
             displayList();
 
         } else if (commandSpace < 0) {
-            throw new DukeException("*Invalid command.*\n" +
-                    "     Commands: bye, list, todo, event, deadline, delete");
+            throw new DukeException("*Invalid command.*\n"
+                    + "     Commands: bye, list, todo, event, deadline, delete");
 
         } else if (str.substring(0, 5).equals("done ")) {
             int length = str.length();
@@ -77,7 +77,7 @@ public class Parser {
             Todo newTodo = new Todo(str.substring(5, length));
             store(newTodo);
 
-        }  else if (str.substring(0, 5).equals("find ")) {
+        } else if (str.substring(0, 5).equals("find ")) {
             int length = str.length();
             if (length == 5) {
                 throw new DukeException("*Please fill in a keyword to find*");
@@ -87,8 +87,8 @@ public class Parser {
             findTask(stringToFind);
 
         } else if (commandSpace <= 4) {
-            throw new DukeException("*Invalid command.*\n" +
-                    "     Commands: bye, list, todo, event, deadline, delete");
+            throw new DukeException("*Invalid command.*\n"
+                    + "     Commands: bye, list, todo, event, deadline, delete");
 
         } else if (str.substring(0, 6).equals("event ")) {
             int length = str.length();
@@ -98,13 +98,13 @@ public class Parser {
 
             int timePrefix = str.indexOf("/at");
             if (timePrefix < 0) {
-                throw new DukeException("*Please fill in event completion time in the following format:*\n" +
-                        "     eg. event CCA meeting /at YYYY-MM-DD");
+                throw new DukeException("*Please fill in event completion time in the following format:*\n"
+                        + "     eg. event CCA meeting /at YYYY-MM-DD");
             }
 
             LocalDate date;
             String dateString = str.substring(timePrefix + 4, length);
-            try{
+            try {
                 date = LocalDate.parse(dateString);
             } catch (DateTimeParseException e) {
                 throw new DukeException("*Please fill in the time in the YYYY-MM-DD format*");
@@ -114,8 +114,8 @@ public class Parser {
             store(newEvent);
 
         } else if (commandSpace <= 5) {
-            throw new DukeException("*Invalid command.*\n" +
-                    "     Commands: bye, list, todo, event, deadline, delete");
+            throw new DukeException("*Invalid command.*\n"
+                    + "     Commands: bye, list, todo, event, deadline, delete");
 
         } else if (str.substring(0, 7).equals("delete ")) {
             int length = str.length();
@@ -128,8 +128,8 @@ public class Parser {
             delete(realIndex);
 
         } else if (commandSpace <= 6) {
-            throw new DukeException("       *Invalid command.*\n" +
-                    "     Commands: bye, list, todo, event, deadline, delete");
+            throw new DukeException("       *Invalid command.*\n"
+                    + "     Commands: bye, list, todo, event, deadline, delete");
 
         } else if (str.substring(0, 9).equals("deadline ")) {
             int length = str.length();
@@ -139,13 +139,13 @@ public class Parser {
 
             int timePrefix = str.indexOf("/by");
             if (timePrefix < 0) {
-                throw new DukeException("*Please fill in deadline completion time in the following format:*\n" +
-                        "     eg. deadline return book to Jurong Regional Library /by YYYY-MM-DD");
+                throw new DukeException("*Please fill in deadline completion time in the following format:*\n"
+                        + "     eg. deadline return book to Jurong Regional Library /by YYYY-MM-DD");
             }
 
             LocalDate date;
             String dateString = str.substring(timePrefix + 4, length);
-            try{
+            try {
                 date = LocalDate.parse(dateString);
             } catch (DateTimeParseException e) {
                 throw new DukeException("*Please fill in the time in the YYYY-MM-DD format*");
@@ -155,8 +155,8 @@ public class Parser {
             store(newDeadline);
 
         } else {
-            throw new DukeException("*Invalid command.*\n" +
-                    "     Commands: bye, list, todo, event, deadline, delete");
+            throw new DukeException("*Invalid command.*\n"
+                    + "     Commands: bye, list, todo, event, deadline, delete");
         }
 
         System.out.println("    _______________________________________________________________________\n");
@@ -187,10 +187,10 @@ public class Parser {
         int index = 1;
         for (int i = 0; i < size; i++) {
             System.out.println("     " + index + "." + currLst.get(i));
-            index ++;
+            index++;
         }
 
-        index ++;
+        index++;
     }
 
     /**
@@ -261,7 +261,7 @@ public class Parser {
 
         for (int i = 0; i < partialSize; i++) {
             System.out.println("     " + index + "." + filteredTasks.get(i));
-            index ++;
+            index++;
         }
 
         index++;

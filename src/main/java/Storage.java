@@ -2,9 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Represents a Storage object.
@@ -13,9 +13,6 @@ import java.util.ArrayList;
 public class Storage {
     private static String filePath;
     private static List<Task> savedTasks;
-    private final static String TODO = "T";
-    private final static String EVENT = "E";
-    private final static String DEADLINE = "D";
 
     /**
      * Creates a Storage object.
@@ -63,13 +60,13 @@ public class Storage {
             isDone = true;
         }
 
-        if (type.equals(TODO)) {
+        if (type.equals("T")) {
             int end = task.length();
             description = task.substring(7, end);
             Todo newTodo = new Todo(description, isDone);
             Storage.savedTasks.add(newTodo);
 
-        } else if (type.equals(EVENT)) {
+        } else if (type.equals("E")) {
             int start = task.indexOf("(");
             int end = task.lastIndexOf(")");
             timeDescription = task.substring(start + 5, end);
@@ -77,7 +74,7 @@ public class Storage {
             Event newEvent = new Event(description, timeDescription, isDone);
             Storage.savedTasks.add(newEvent);
 
-        } else if (type.equals(DEADLINE)) {
+        } else if (type.equals("D")) {
             int start = task.indexOf("(");
             int end = task.lastIndexOf(")");
             timeDescription = task.substring(start + 5, end);
@@ -90,7 +87,7 @@ public class Storage {
     /**
      * Returns a list of Tasks object stored after reading the file.
      *
-     * @Return List<Task>.
+     * @return a list of Task objects.
      */
     public static List<Task> getTaskList() {
         return Storage.savedTasks;

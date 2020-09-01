@@ -3,7 +3,6 @@
  * Prints hardcoded designs that prompts the user.
  */
 public class Ui {
-    private final static String TITLE = "     CS2103T Individual Project 1\n";
 
     /**
      * Displays the welcome greetings when user runs Duke program.
@@ -11,7 +10,7 @@ public class Ui {
     public static void displayWelcome() {
         System.out.println("    _______________________________________________________________________\n"
                 + "     ***Welcome to Project DUKE***\n"
-                + TITLE
+                + "     CS2103T Individual Project 1\n"
                 + "\n     Hello! I'm Duke"
                 + "\n     What can I do for you?"
                 + "\n    _______________________________________________________________________\n");
