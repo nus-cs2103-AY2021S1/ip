@@ -18,7 +18,8 @@ REM run the program, feed commands from input.txt file and redirect the output t
 java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
 
 REM delete data afterwards
-del data\duke.txt
+rmdir  /s /q "data"
+
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT

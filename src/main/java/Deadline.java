@@ -9,9 +9,9 @@ public class Deadline extends Task  {
         this.date = LocalDate.parse(dateString);
     }
 
-    Deadline(String name, String date, boolean isCompleted) {
+    Deadline(String name, String dateString, boolean isCompleted) {
         super(name, isCompleted);
-        this.date = date;
+        this.date = LocalDate.parse(dateString);
     }
 
     public static Deadline create(String description) throws DukeException {
