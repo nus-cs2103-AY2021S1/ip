@@ -71,9 +71,9 @@ public class TaskList {
     }
 
     /**
-     * Finds the tasks that matches the keyword. 
-     * @param keyword Keyword for finding matching tasks. 
-     * @return List of matching tasks. 
+     * Finds the tasks that matches the keyword.
+     * @param keyword Keyword for finding matching tasks.
+     * @return List of matching tasks.
      */
     public List<Task> findTasks(String keyword) {
         List<Task> matchingTasks = new ArrayList<>();
@@ -113,15 +113,17 @@ public class TaskList {
             boolean isDone = Integer.parseInt(taskDetail[1]) == 1;
             String description = taskDetail[2];
             switch (type) {
-                case "T":
-                    taskList.add(new ToDo(isDone, description));
-                    break;
-                case "E":
-                    taskList.add(new Event(isDone, description, taskDetail[3]));
-                    break;
-                case "D":
-                    taskList.add(new Deadline(isDone, description, taskDetail[3]));
-                    break;
+            case "T":
+                taskList.add(new ToDo(isDone, description));
+                break;
+            case "E":
+                taskList.add(new Event(isDone, description, taskDetail[3]));
+                break;
+            case "D":
+                taskList.add(new Deadline(isDone, description, taskDetail[3]));
+                break;
+            default:
+                throw new DukeException("OOPS! Invalid input from file! ");
             }
         }
     }

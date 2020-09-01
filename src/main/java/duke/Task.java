@@ -1,9 +1,6 @@
 package duke;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-abstract public class Task {
+abstract class Task {
     protected String description;
     protected boolean isDone;
 

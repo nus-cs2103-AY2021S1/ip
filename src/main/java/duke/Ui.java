@@ -94,13 +94,13 @@ public class Ui {
      */
     public void showAddedTask(Task task, TaskList taskList) {
         formatPrint(String.format("Got it. I've added this task: \n   %s\nNow you have %d task%s in the list.",
-                task, taskList.getSize(), taskList.getSize() > 1 ? "s": ""));
+                task, taskList.getSize(), taskList.getSize() > 1 ? "s" : ""));
     }
 
     /**
-     * Shows the tasks that match the search keyword. 
-     * @param taskList Task list. 
-     * @param keyword Keyword for finding matching tasks. 
+     * Shows the tasks that match the search keyword.
+     * @param taskList Task list.
+     * @param keyword Keyword for finding matching tasks.
      */
     public void showMatchingTasks(TaskList taskList, String keyword) {
         formatPrint(taskList.printMatchingTasks(taskList.findTasks(keyword)));
@@ -113,7 +113,7 @@ public class Ui {
      */
     public void showDeletedTask(Task task, TaskList taskList) {
         formatPrint(String.format("Got it. I've deleted this task: \n   %s\nNow you have %d task%s in the list.",
-                task, taskList.getSize(), taskList.getSize() > 1 ? "s": ""));
+                task, taskList.getSize(), taskList.getSize() > 1 ? "s" : ""));
     }
 
     /**

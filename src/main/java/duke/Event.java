@@ -1,8 +1,8 @@
 package duke;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -59,10 +59,10 @@ public class Event extends Task {
 
     @Override
     String getTaskDetailsForSave() {
-        return "E | " + (isDone ? 1 : 0) + " | " + description + " | " 
+        return "E | " + (isDone ? 1 : 0) + " | " + description + " | "
                 + startDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " "
                 + startDateTime.format(DateTimeFormatter.ofPattern("HH:mm")) + " "
-                + endDateTime.format(DateTimeFormatter.ofPattern("HH:mm")) ;
+                + endDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     @Override
