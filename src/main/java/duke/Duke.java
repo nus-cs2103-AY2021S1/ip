@@ -28,7 +28,6 @@ public class Duke {
                 String command = input.toLowerCase();
 
                 if (command.equals("bye")) {
-
                     Storage.writeToFile(taskList);
                     userInterface.goodbye();
                     break;
@@ -37,6 +36,9 @@ public class Duke {
 
                     userInterface.listTasks(taskList);
 
+                } else if (command.split("\\s+")[0].equals("find"))  {
+                    String keyword = Parser.parseKeyWord(command);
+                    UI.listTasks(taskList.search(keyword));
                 } else if (command.split("\\s+")[0].equals("done")) {
                     Task task = taskList.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
                     task.setDone();
