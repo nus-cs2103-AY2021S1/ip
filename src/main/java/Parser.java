@@ -123,6 +123,9 @@ public class Parser {
                             counter++;
                         }
                     }
+                    if (counter == 1) {
+                        return "There are no matching tasks in your list :(";
+                    }
                     return string;
                 } else {
                     return "OOPS!! Missing keyword to find!";
@@ -272,7 +275,7 @@ public class Parser {
                 }
             case "event":
                 if (len == 1) {
-                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                    throw new DukeException("OOPS!!! The description of a event cannot be empty.");
                 } else {
                     String desc = "";
                     String time = "";
@@ -286,7 +289,7 @@ public class Parser {
                         desc += words[i] + " ";
                     }
                     if (count == 0 || count == len) {
-                        throw new DukeException("OOPS!!! The date/time of a deadline cannot be empty.");
+                        throw new DukeException("OOPS!!! The date/time of a event cannot be empty.");
                     }
                     for (int j = count; j < len; j++) {
                         if (j == len - 1) {

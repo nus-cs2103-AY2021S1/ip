@@ -57,6 +57,8 @@ public class DialogBox extends HBox {
 
     public static DialogBox welcome(Image img) {
         String msg = "Hello, I'm Duke!" + "\n" + "How can I help you?";
-        return new DialogBox(msg, img);
+        DialogBox welcome = new DialogBox(msg, img);
+        welcome.flip();
+        return  welcome;
     }
 }
