@@ -11,8 +11,6 @@ import java.util.ArrayList;
 public class Ui {
     private static String print(String s) {
         return s;
-//        return ("\t____________________________________________________________\n" + s
-//                + "\t____________________________________________________________\n");
     }
 
     public static String welcomeMessage() {
