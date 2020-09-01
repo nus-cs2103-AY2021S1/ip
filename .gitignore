@@ -17,7 +17,7 @@ bin/
 
 #user-added
 *.jar
-*.xml
+/cs2030_checks.xml
 /assets/userData.txt
 /assets/
 /text-ui-test/ACTUAL.txt
