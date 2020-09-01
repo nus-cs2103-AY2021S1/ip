@@ -1,17 +1,19 @@
 package duke;
 
 
-import duke.commands.Command;
-import duke.exceptions.DukeException;
-
 import java.io.InputStream;
 import java.util.Scanner;
+
+import duke.commands.Command;
+import duke.exceptions.DukeException;
 
 
 /**
  * Main class for the Duke programme.
  */
 public class Duke {
+
+    private static final String QUIT_STRING = "bye";
 
     private final DukeList taskList = new DukeList();
     private final Ui ui;
@@ -42,9 +44,7 @@ public class Duke {
      * @return if programme should quit.
      */
     private static Boolean shouldQuit(String msgInput) {
-        final String QUIT_STRING = "bye";
-
-        return msgInput.equals(QUIT_STRING);
+        return msgInput.equals(Duke.QUIT_STRING);
     }
 
 
@@ -180,6 +180,9 @@ public class Duke {
                 } catch (DukeException e) {
                     this.ui.printErrorMessage(e.getMessage());
                 }
+                break;
+
+            default:
                 break;
             }
         }

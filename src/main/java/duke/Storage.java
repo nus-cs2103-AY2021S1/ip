@@ -1,8 +1,6 @@
 package duke;
 
 
-import duke.tasks.Task;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,6 +13,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import duke.tasks.Task;
+
 
 /**
  * Storage for Duke.
@@ -24,7 +24,7 @@ public class Storage {
 
     private static final String DELIMITER = ",";
 
-    private final static String projectRoot = System.getProperty("user.dir");
+    private static final String projectRoot = System.getProperty("user.dir");
 
     private final Path path;
     private final File storageFile;
@@ -144,6 +144,8 @@ public class Storage {
             break;
         case ("D"):
             parsedStringBuilder.append("deadline ").append(taskStr).append(" /by ").append(splitStr[3]);
+            break;
+        default:
             break;
         }
 

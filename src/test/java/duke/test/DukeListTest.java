@@ -1,13 +1,14 @@
 package duke.test;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
 import duke.DukeList;
 import duke.exceptions.DukeInvalidCommandException;
 import duke.exceptions.DukeInvalidDescriptionException;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class DukeListTest {
@@ -20,9 +21,9 @@ public class DukeListTest {
     public void add_correctInput_addedCorrectly() {
         DukeList testList = new DukeList();
         String actual = testList.add("todo stuff");
-        String expected = "Got it. I've added this task:\n" +
-                String.format("\t[T][%c] %s\n", NOT_DONE, "stuff") +
-                String.format("%s", "Now you have 1 tasks in the list.");
+        String expected = "Got it. I've added this task:\n"
+                + String.format("\t[T][%c] %s\n", NOT_DONE, "stuff")
+                + String.format("%s", "Now you have 1 tasks in the list.");
 
         assertEquals(expected, actual);
     }
@@ -86,8 +87,8 @@ public class DukeListTest {
         testList.add("event another test /at 2020-02-02");
 
         String actual = testList.delete(1);
-        String expected = "Noted. I've removed this task:\n" +
-                String.format("\t[T][%c] %s\n", NOT_DONE, "stuff")
+        String expected = "Noted. I've removed this task:\n"
+                + String.format("\t[T][%c] %s\n", NOT_DONE, "stuff")
                 + String.format("%s", "Now you have 2 tasks in the list.");
 
         assertEquals(expected, actual);

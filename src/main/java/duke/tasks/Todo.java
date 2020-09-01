@@ -34,14 +34,14 @@ public class Todo extends Task {
      */
     @Override
     public String[] toStorageStringArr() {
-        return new String[]{"T", this.isDone ? "1" : "0", this.itemString};
+        return new String[]{"T", this.isDone() ? "1" : "0", this.getItemString()};
     }
 
 
     @Override
     public String toString() {
-        char stateSymbol = this.isDone ? DONE : NOT_DONE;
-        return String.format("[T][%s] %s", stateSymbol, this.itemString);
+        char stateSymbol = this.isDone() ? DONE : NOT_DONE;
+        return String.format("[T][%s] %s", stateSymbol, this.getItemString());
     }
 
 }

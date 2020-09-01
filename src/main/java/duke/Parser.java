@@ -1,12 +1,12 @@
 package duke;
 
 
+import java.util.Arrays;
+
 import duke.commands.Command;
 import duke.exceptions.DukeInvalidDescriptionException;
 import duke.exceptions.DukeNoDescriptionException;
 import duke.tasks.TaskType;
-
-import java.util.Arrays;
 
 
 /**
@@ -14,6 +14,11 @@ import java.util.Arrays;
  * Parses user inputStrings.
  */
 public class Parser {
+
+
+    private Parser() {
+    }
+
 
     /**
      * Parse inputString to array by delimiter.
