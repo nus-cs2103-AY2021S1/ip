@@ -4,7 +4,7 @@ import task.Task;
 
 public class Ui {
 
-    private String border = "----------------------------------------------------------------------------\n";
+    private String border = "";
 
     /**
      * prints the greeting when user first boots duke

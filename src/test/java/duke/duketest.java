@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class duketest {
     @Test
     public void testErrOutput(){
-        Duke testDuke = new Duke("./");
+        Duke testDuke = new Duke();
         assertThrows(IllegalArgumentException.class, () -> testDuke.run("blah"));
     }
 
