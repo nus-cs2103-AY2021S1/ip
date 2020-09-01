@@ -3,7 +3,6 @@ package duke.command;
 import duke.task.Task;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * List all tasks which containing searchString
@@ -31,12 +30,14 @@ public class FindCommand implements Command {
         System.out.println("Here are the matching tasks in your list:");
 
         // Search matching tasks
-        AtomicInteger index = new AtomicInteger(0);
-        this.taskList.stream()
-                .filter(task -> task.getDescription().contains(searchString))
-                .forEach(task -> System.out.println(index.incrementAndGet() + ". " + task.toString()));
+        int index = 0;
+        for (Task task : taskList) {
+            if (task.getDescription().contains(searchString)) {
+                System.out.println(++index + ". " + task.toString());
+            }
+        }
 
-        // Let user know how many items are found, so that program is responsive in case no items are found
+        // Let user know how many items are found, for responsiveness
         System.out.println("Number of tasks found: " + index);
     }
 

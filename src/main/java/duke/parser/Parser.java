@@ -4,7 +4,6 @@ import duke.command.Command;
 import duke.command.InvalidCommand;
 import duke.task.Task;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,8 +23,6 @@ public class Parser {
     public static Command parse(List<Task> taskList, String input) {
 
         // Match the input pattern
-        // matcher.group(1) is used to identify the command type
-        // matcher.group(2) is used to extract command parameters
         Pattern pattern = Pattern.compile("^\\s*(\\S+)\\s*(.*)$");
         Matcher matcher = pattern.matcher(input);
 
@@ -34,13 +31,16 @@ public class Parser {
             return new InvalidCommand("Empty input!");
         }
 
-        // Find and generate the matching duke.command
-        String firstWord = matcher.group(1).toUpperCase();
-        return Arrays.stream(CommandFactory.values()) // parser is an enum of all valid commands
-                .filter(commandFactory -> commandFactory.toString().equals(firstWord))
-                .findFirst()
-                .map(commandFactory -> commandFactory.generate(taskList, matcher.group(2)))
-                .orElse(new InvalidCommand());
+        // Extract commandType and commandParameter
+        String commandType = matcher.group(1).toUpperCase();
+        String commandParam = matcher.group(2);
+
+        try {
+            // Generate duke.command with commandType and commandParameter
+            return CommandFactory.valueOf(commandType).generate(taskList, commandParam);
+        } catch (IllegalArgumentException e) {
+            return new InvalidCommand();
+        }
     }
 
 }
