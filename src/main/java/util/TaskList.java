@@ -36,57 +36,61 @@ public class TaskList {
      * Creates and adds a to-do task into TaskList.
      *
      * @param command The to-do command and its details.
+     * @return Message of successful creation
      */
-    public void createTodo(String command) {
+    public String createTodo(String command) {
         String[] instructions = command.split(" ", 2);
         Task t = new Todo(instructions[1]);
         tasks.add(t);
-        System.out.println("added: " + t);
-        System.out.println("There is now " + tasks.size() + " tasks in the list!\n");
+        return String.format("added: %s\n There is now %d tasks in the list!\n",
+                t, tasks.size());
     }
 
     /**
      * Creates and adds a deadline task into TaskList.
      *
      * @param command The deadline command and its details.
+     * @return Message of successful creation
      */
-    public void createDeadline(String command) {
+    public String createDeadline(String command) {
         String[] instructions = command.split(" ", 2);
         String[] details = instructions[1].split(" /by ", 2);
         Task t = new Deadline(details[0], LocalDate.parse(details[1]));
         tasks.add(t);
-        System.out.println("added: " + t);
-        System.out.println("There is now " + tasks.size() + " tasks in the list!\n");
+        return String.format("added: %s\n There is now %d tasks in the list!\n",
+                t, tasks.size());
     }
 
     /**
      * Creates and adds a Event task into TaskList.
      *
      * @param command The event command and its details.
+     * @return Message of successful creation
      */
-    public void createEvent(String command) {
+    public String createEvent(String command) {
         String[] instructions = command.split(" ", 2);
         String[] details = instructions[1].split(" /at ", 2);
         Task t = new Event(details[0], details[1]);
         tasks.add(t);
-        System.out.println("added: " + t);
-        System.out.println("There is now " + tasks.size() + " tasks in the list!\n");
+        return String.format("added: %s\n There is now %d tasks in the list!\n",
+                t, tasks.size());
     }
 
     /**
      * Identifies a specific task and mark it as done.
      *
      * @param command The done command and its details.
+     * @return Message of successful change of status
      * @throws DukeException If index noted in command is invalid.
      */
-    public void markTaskDone(String command) throws DukeException {
+    public String markTaskDone(String command) throws DukeException {
         String[] instructions = command.split(" ", 2);
         int index = Integer.parseInt(instructions[1]) - 1;
         try {
             Task t = tasks.get(index);
             t.markedDone(true);
-            System.out.println("Congratulations! I've helped you mark the task as done:");
-            System.out.println("    " + t.toString() + "\n");
+            return String.format("Congratulations!\nI've helped you mark the task as done:\n -> %s\n",
+                    t.toString());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Sorry, I don't think that's a valid index...");
         }
@@ -96,17 +100,18 @@ public class TaskList {
      * Identifies a specific task and deletes it from TaskList.
      *
      * @param command The delete command and its details.
+     * @return Message of successful deletion of task.
      * @throws DukeException If index noted in command is invalid.
      */
-    public void deleteTask(String command) throws DukeException {
+    public String deleteTask(String command) throws DukeException {
         String[] instructions = command.split(" ", 2);
         int index = Integer.parseInt(instructions[1]) - 1;
         try {
             Task t = tasks.get(index);
-            System.out.println("Noted! I've helped you remove the following task:");
-            System.out.print("    " + t.toString() + "\n");
+            String m = String.format("Noted!\nI've helped you remove the following task:\n ->%s\n",
+            t.toString());
             tasks.remove(index);
-            System.out.println("    Now, there is " + tasks.size() + " tasks in the list!\n");
+            return m + String.format("Now, there is %d tasks in the list!\n", tasks.size());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Sorry, I don't think that's a valid index...");
         }
@@ -138,15 +143,29 @@ public class TaskList {
             System.out.println(tasks.get(i));
         }
     }
+    /**
+     * Gets all of the tasks in the TaskList.
+     *
+     * @return List of all tasks as a String.
+     */
+    public String getAllTasks() {
+        String output = "";
+        // Turn all tasks in Duke's list into a long String
+        for (int i = 0; i < tasks.size(); i++) {
+            output = output + String.format("%d. %s\n", i+1, tasks.get(i));
+        }
+        return output;
+    }
 
     /**
      * Searches through all of Duke's tasks and
      * print out tasks with given keyword
      *
      * @param command The find command inputted by the user.
+     * @return List of findings
      * @throws DukeException If no tasks with keyword can be found.
      */
-    public void searchForKeyword(String command) throws DukeException {
+    public String searchForKeyword(String command) throws DukeException {
         String[] instructions = command.split(" ", 2);
         String keyword = instructions[1];
 
@@ -166,15 +185,12 @@ public class TaskList {
         if (findings.isEmpty()) {
             throw new DukeException("Sorry I find can't any tasks related to " + keyword + ".");
         } else {
-            System.out.println("Here are the relevant tasks!");
+            String m = "Here are the relevant tasks!\n";
             // Prints all tasks in findings
             for (int i = 0; i < findings.size(); i++) {
-                // Enumerator
-                System.out.print((i+1) + ".");
-                // Actual Task
-                System.out.println(findings.get(i));
+                m = m + String.format("-> %s\n", findings.get(i));
             }
+            return m;
         }
-        System.out.println();
     }
 }
