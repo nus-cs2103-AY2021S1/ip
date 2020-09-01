@@ -58,12 +58,11 @@ public class Ui {
     }
 
     public void showSearchList(ArrayList<Task> taskArrayList) {
-        if (taskArrayList.size() == 0) {
-            System.out.println("We could not find anything that matches the search");
-        } else {
-            String returnString = "Here are the tasks that match your search\n";
-            for (Task task : taskArrayList) returnString += task.toString() + "\n";
-            System.out.println(returnString);
+        if (taskArrayList.size() == 0) System.out.println("We were unable to find your task");
+        String returnString = "Here is what we found \n";
+        for (Task task : taskArrayList) {
+            returnString += task.toString() + "\n";
         }
+        System.out.println(returnString);
     }
 }

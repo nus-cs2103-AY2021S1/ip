@@ -18,6 +18,14 @@ public class Storage {
     }
 
     /**
+     * Called when Duke is initialised
+     * @throws IOException
+     */
+    public void loadFromDisk() throws IOException {
+        taskList = TaskList.retrieveTaskList(FILE);
+    }
+
+    /**
      * Writes a specific task to the hard disc. Called by saveToDisk() method
      * @param task
      * @param printWriter
@@ -57,13 +65,5 @@ public class Storage {
             writeTask(task, printWriter);
         }
         printWriter.close();
-    }
-
-    /**
-     * Called when Duke is initialised
-     * @throws IOException
-     */
-    public void loadFromDisk() throws IOException {
-        taskList = TaskList.retrieveTaskList(FILE);
     }
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     public TaskList() {
         taskList = new ArrayList<>();
@@ -96,10 +96,10 @@ public class TaskList {
         return taskList.size();
     }
 
-    public ArrayList<Task> find(String findFor) {
+    public ArrayList<Task> searchFor(String searchString) {
         ArrayList<Task> returnArrayList = new ArrayList<>();
         for (Task task : taskList) {
-            if (task.getDescription().contains(findFor)) returnArrayList.add(task);
+            if (task.getDescription().contains(searchString)) returnArrayList.add(task);
         }
         return returnArrayList;
     }

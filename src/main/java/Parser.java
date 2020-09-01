@@ -2,8 +2,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Parser {
-    Scanner scanner;
-
     /**
      * Returns appropriate task after processing userInput. Calls on ui to give user a response
      * @param userInput
@@ -66,7 +64,7 @@ public class Parser {
                 break;
             case "find" :
                 if (userInput.equals("delete")) throw new searchException();
-                ui.showSearchList(taskList.find(userInput.replace("find ", "")));
+                ui.showSearchList(taskList.searchFor(userInput.replace("find ", "")));
                 break;
             default :
                 throw new DukeException();
