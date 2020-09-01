@@ -21,7 +21,7 @@ public class ListCommand extends Command {
         try {
             handler.printList();
         } catch (DukeException e) {
-            e.printStackTrace(System.out);
+            System.out.print(e.getMessage());
         }
     }
 }
