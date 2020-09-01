@@ -1,8 +1,12 @@
 package duke.storage;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.Scanner;
@@ -81,7 +85,7 @@ public class Storage {
      */
     public TaskList load(TaskList taskList) throws StorageException {
         try {
-            Scanner reader = new Scanner(file);
+            Scanner reader = new Scanner(file, StandardCharsets.UTF_8);
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
                 TaskType taskType = TaskType.decodeTaskType(line);
@@ -120,9 +124,13 @@ public class Storage {
      */
     public File save(TaskList taskList) throws StorageException {
         try {
-            FileWriter writer = new FileWriter(file);
-            writer.write(getStorageString(taskList).toString());
-            writer.close();
+            Writer out = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(file), StandardCharsets.UTF_8));
+            try {
+                out.write(getStorageString(taskList).toString());
+            } finally {
+                out.close();
+            }
         } catch (IOException e) {
             throw new StorageException("File remains missing even after initialisation.");
         } catch (TaskTypeDecodeException e) {
