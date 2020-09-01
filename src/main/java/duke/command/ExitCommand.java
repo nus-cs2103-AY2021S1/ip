@@ -20,7 +20,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Exits the Duke program.
+     * Prints the template for exiting the Duke program.
      *
      * @param tasks List of <code>Task</code> objects.
      * @param ui Ui object created by Duke.
