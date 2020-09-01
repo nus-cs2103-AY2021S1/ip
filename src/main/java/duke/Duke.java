@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.CommandResult;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -45,41 +46,17 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke object.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isRunning = true;
-        while (isRunning) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isRunning = !c.isExitCommand();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
-    }
-
-    /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
 
-    public String getResponse(String input) {
+    public CommandResult getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            String output = c.execute(tasks, storage);
+            CommandResult output = c.execute(tasks, storage);
             return output;
         } catch (DukeException e) {
-            return e.getMessage();
+            return new CommandResult(e.getMessage());
         }
     }
-
-    /*
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
-    }
-    */
 }

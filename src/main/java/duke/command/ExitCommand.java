@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 public class ExitCommand extends Command {
 
@@ -12,17 +11,14 @@ public class ExitCommand extends Command {
      * Prints exit message on the Ui.
      *
      * @param taskList The TaskList used by Duke.
-     * @param ui       The Ui used by Duke.
      * @param storage  The Storage used by Duke.
+     * @return CommandResult object for ui
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printMessage(EXIT_MESSAGE);
-    }
-
-    @Override
-    public String execute(TaskList taskList, Storage storage) {
-        return EXIT_MESSAGE;
+    public CommandResult execute(TaskList taskList, Storage storage) {
+        CommandResult commandResult = new CommandResult(EXIT_MESSAGE);
+        commandResult.setIsExit();
+        return commandResult;
     }
 
     /**

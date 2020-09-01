@@ -9,7 +9,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 public class DateAndTimeListCommand extends Command {
     private LocalDate localDate;
@@ -26,17 +25,18 @@ public class DateAndTimeListCommand extends Command {
         this.localTime = localTime;
     }
 
+
+
     /**
      * Searches for tasks that have the same date and time as localDate and localTime
      * and prints them in the Ui.
      *
      * @param taskList The TaskList used by Duke.
-     * @param ui       The Ui used by Duke.
      * @param storage  The Storage used by Duke.
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public CommandResult execute(TaskList taskList, Storage storage) throws DukeException {
         int numberOfTasksFound = 0;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are the tasks with the date: "
@@ -61,43 +61,11 @@ public class DateAndTimeListCommand extends Command {
             }
         }
         if (numberOfTasksFound > 0) {
-            ui.printMessage(stringBuilder.toString());
+            return new CommandResult(stringBuilder.toString());
         } else {
-            ui.printMessage("There are no tasks with the date: " + localDate.toString()
-                    + " and time: " + localTime.toString());
-        }
-    }
-
-    @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException {
-        int numberOfTasksFound = 0;
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Here are the tasks with the date: "
-                + localDate.toString() + " and time: " + localTime.toString() + "\n");
-
-        for (int i = 0; i < taskList.numberOfTasks(); i++) {
-            Task currentTask = taskList.getTask(i);
-            if (currentTask instanceof Deadline) {
-                Deadline deadline = (Deadline) currentTask;
-                if (deadline.getLocalDate().equals(localDate)
-                        && deadline.getLocalTime().equals(localTime)) {
-                    stringBuilder.append((i + 1) + ". " + deadline.toString() + "\n");
-                    numberOfTasksFound++;
-                }
-            } else if (currentTask instanceof Event) {
-                Event event = (Event) currentTask;
-                if (event.getLocalDate().equals(localDate)
-                        && event.getLocalTime().equals(localTime)) {
-                    stringBuilder.append((i + 1) + ". " + event.toString() + "\n");
-                    numberOfTasksFound++;
-                }
-            }
-        }
-        if (numberOfTasksFound > 0) {
-            return stringBuilder.toString();
-        } else {
-            return "There are no tasks with the date: " + localDate.toString()
-                    + " and time: " + localTime.toString();
+            return new CommandResult("There are no tasks with the date: "
+                    + localDate.toString()
+                        + " and time: " + localTime.toString());
         }
     }
 
