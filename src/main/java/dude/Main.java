@@ -1,3 +1,5 @@
+package dude;
+
 import dude.Dude;
 
 public class Main {
