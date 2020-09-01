@@ -6,12 +6,12 @@ package duke.dukeexception;
  * <code>CommandType</code>.
  */
 public class WrongDeadlineException extends DukeException {
-    public WrongDeadlineException(String cmd, String separator) {
+    public WrongDeadlineException(String commandName, String separator) {
         super("You type wrong lah!" +
-                "\nTry \"" +
-                cmd +
-                " {description of task} " +
-                separator +
-                " {date and time in this format: dd/MM/yyyy HH:mm}\"");
+            "\nTry \"" +
+            commandName +
+            " {description of task} " +
+            separator +
+            " {date and time in this format: dd/MM/yyyy HH:mm}\"");
     }
 }

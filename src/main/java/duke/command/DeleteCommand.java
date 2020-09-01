@@ -32,14 +32,14 @@ public class DeleteCommand extends Command {
             tasks.delete(taskNum, storage);
 
             System.out.println("Okay, I deleted this liao:" +
-                    "\n  " +
-                    task.toString() +
-                    "\nNow left " +
-                    tasks.getListLength() +
-                    " things in the list.");
+                "\n  " +
+                task.toString() +
+                "\nNow left " +
+                tasks.getListLength() +
+                " things in the list.");
         } catch (Exception e) {
             throw new WrongItemIndexException(CommandType.DELETE.toString().toLowerCase(),
-                    tasks.getListLength());
+                tasks.getListLength());
         }
     }
 

@@ -139,22 +139,22 @@ public class Storage {
             taskDescription = task.getTaskName() +
                 " | " +
                 ((Deadline) task).getDateTime().format(
-                        DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
+                    DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
         } else if (task instanceof Event) {
             taskType = "E";
             taskDescription = task.getTaskName() +
-                    " | " +
-                    ((Event) task).getDateTime().format(
-                            DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
+                " | " +
+                ((Event) task).getDateTime().format(
+                    DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
         } else {
             throw new DukeException("Cannot recognise type");
         }
 
         return taskType +
-                " | " +
-                status +
-                " | " +
-                taskDescription;
+            " | " +
+            status +
+            " | " +
+            taskDescription;
     }
 
     /**
@@ -175,12 +175,12 @@ public class Storage {
             } else if (storedTask.charAt(0) == 'D') {
                 String taskName = taskElements[2];
                 LocalDateTime dateTime = LocalDateTime.parse(taskElements[3],
-                        DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
+                    DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
                 task = new Deadline(taskName, dateTime);
             } else if (storedTask.charAt(0) == 'E') {
                 String taskName = taskElements[2];
                 LocalDateTime dateTime = LocalDateTime.parse(taskElements[3],
-                        DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
+                    DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
                 task = new Event(taskName, dateTime);
             }
 

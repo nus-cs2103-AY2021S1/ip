@@ -32,11 +32,11 @@ public class DoneCommand extends Command {
             tasks.markDone(taskNum, storage);
 
             System.out.println("Can, I help you mark this as done liao:" +
-                    "\n  " +
-                    task.toString());
+                "\n  " +
+                task.toString());
         } catch (NumberFormatException e) {
             throw new WrongItemIndexException(CommandType.DONE.toString().toLowerCase(),
-                    tasks.getListLength());
+                tasks.getListLength());
         }
     }
 
