@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +8,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -28,6 +32,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(Ui.outputWelcome(), dukeImage)
+        );
+        userInput.setPromptText("   Message");
+        userInput.getParent().requestFocus();
     }
 
     public void setDuke(Duke d) {
@@ -39,13 +48,17 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws IOException, InterruptedException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        userInput.clear();
+        if (Parser.parseCmd(input).equals("BYE")) {
+            Platform.exit();
+        } else {
+            userInput.clear();
+        }
     }
 }

@@ -3,17 +3,17 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+//import javafx.application.Application;
+//import javafx.scene.Scene;
+//import javafx.scene.control.Button;
+//import javafx.scene.control.Label;
+//import javafx.scene.control.ScrollPane;
+//import javafx.scene.control.TextField;
+//import javafx.scene.image.Image;
+//import javafx.scene.layout.AnchorPane;
+//import javafx.scene.layout.Region;
+//import javafx.scene.layout.VBox;
+//import javafx.stage.Stage;
 
 
 
@@ -26,19 +26,19 @@ import javafx.stage.Stage;
  * @version 0.1
  * @since 2020-08-18
  */
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList ls;
     private Ui ui;
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+//    private ScrollPane scrollPane;
+//    private VBox dialogContainer;
+//    private TextField userInput;
+//    private Button sendButton;
+//    private Scene scene;
+//    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+//    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Constructor for duke.Duke
@@ -54,97 +54,197 @@ public class Duke extends Application {
     public Duke() {
     }
 
-    @Override
-    public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userInput.getText(), user),
-                DialogBox.getDukeDialog(getResponse(userInput.getText()), duke)
-        );
-        userInput.clear();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
+//    @Override
+//    public void start(Stage stage) {
+//        //Step 1. Setting up required components
+//
+//        //The container for the content of the chat to scroll.
+//        scrollPane = new ScrollPane();
+//        dialogContainer = new VBox();
+//        scrollPane.setContent(dialogContainer);
+//
+//        userInput = new TextField();
+//        sendButton = new Button("Send");
+//
+//        AnchorPane mainLayout = new AnchorPane();
+//        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+//
+//        scene = new Scene(mainLayout);
+///*
+//        //Step 2. Formatting the window to look as expected
+//        stage.setTitle("Duke");
+//        stage.setResizable(false);
+//        stage.setMinHeight(600.0);
+//        stage.setMinWidth(400.0);
+//
+//        mainLayout.setPrefSize(400.0, 600.0);
+//
+//        scrollPane.setPrefSize(385, 535);
+//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+//
+//        scrollPane.setVvalue(1.0);
+//        scrollPane.setFitToWidth(true);
+//
+//        // You will need to import `javafx.scene.layout.Region` for this.
+//        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+//
+//        userInput.setPrefWidth(325.0);
+//
+//        sendButton.setPrefWidth(55.0);
+//
+//        AnchorPane.setTopAnchor(scrollPane, 1.0);
+//
+//        AnchorPane.setBottomAnchor(sendButton, 1.0);
+//        AnchorPane.setRightAnchor(sendButton, 1.0);
+//
+//        AnchorPane.setLeftAnchor(userInput , 1.0);
+//        AnchorPane.setBottomAnchor(userInput, 1.0);
+//*/
+//        //Step 3. Add functionality to handle user input.
+//        sendButton.setOnMouseClicked((event) -> {
+//            handleUserInput();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            handleUserInput();
+//        });
+//
+//        //Scroll down to the end every time dialogContainer's height changes.
+//        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+//
+//        stage.setScene(scene);
+//        stage.show();
+//    }
+//
+//    /**
+//     * Iteration 2:
+//     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+//     * the dialog container. Clears the user input after processing.
+//     */
+//    private void handleUserInput() {
+//        Label userText = new Label(userInput.getText());
+//        Label dukeText = new Label(getResponse(userInput.getText()));
+//        dialogContainer.getChildren().addAll(
+//                DialogBox.getUserDialog(userInput.getText(), user),
+//                DialogBox.getDukeDialog(getResponse(userInput.getText()), duke)
+//        );
+//        userInput.clear();
+//    }
+//
 
     /**
      * Command that user can input
      */
     enum Command {
         BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CHECK, FIND
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String str) throws IOException {
+        String[] arr = str.split(" ", 2);
+
+        String upperCaseCmd = Parser.parseCmd(arr[0]);
+        Command cmd;
+        try {
+            cmd = Command.valueOf(upperCaseCmd);
+        } catch (IllegalArgumentException ex) {
+            return ui.outputInvalidInput();
+        }
+
+        switch (cmd) {
+        case BYE:
+            // rewrite the file to update latest changes
+            Storage.saveFile(this.storage.getFile(), ls);
+            return ui.outputBye();
+        case LIST:
+            if (ls.isEmpty()) {
+                return ui.outputListNoTask();
+            } else {
+                return ui.outputListTask(ls);
+            }
+        case DONE:
+            try {
+                int numToBeMarkedAsDone = Parser.parseInt(str);
+                Task tsk = ls.get(numToBeMarkedAsDone);
+                tsk.markAsDone();
+                ls.set(numToBeMarkedAsDone, tsk);
+                return ui.outputDoneMsg(tsk);
+            } catch (Exception ex) {
+                return ui.outputDoneError();
+            }
+        case TODO:
+            try {
+                Task newTask = new Todo(arr[1]);
+                ls.add(newTask);
+                return ui.outputTodoMsg(ls, newTask);
+            } catch (Exception ex) {
+                return ui.outputTodoError();
+            }
+        case DEADLINE:
+            try {
+                String[] arrOfStr = Parser.parse(arr, 1);
+                try {
+                    Task newTask = new Deadline(arrOfStr[0], arrOfStr[1]);
+                    ls.add(newTask);
+                    return ui.outputDeadlineEventMsg(ls, newTask);
+                } catch (Exception ex) {
+                    return ui.outputDeadlineFormatError();
+                }
+            } catch (Exception ex) {
+                return ui.outputDeadlineError();
+            }
+        case EVENT:
+            try {
+                String[] arrOfStr = Parser.parse(arr, 2);
+                try {
+                    Task newTask = new Event(arrOfStr[0], arrOfStr[1]);
+                    ls.add(newTask);
+                    return ui.outputDeadlineEventMsg(ls, newTask);
+                } catch (Exception ex) {
+                    return ui.outputEventFormatError();
+                }
+            } catch (Exception ex) {
+                return ui.outputEventError();
+            }
+        case DELETE:
+            try {
+                int numToBeDeleted = Parser.parseInt(str);
+                Task tsk = ls.get(numToBeDeleted);
+                ls.remove(numToBeDeleted);
+                return ui.outputDeleteMsg(ls, tsk);
+            } catch (Exception ex) {
+                return ui.outputDeleteError();
+            }
+        case CHECK:
+            try {
+                String checkDate = arr[1];
+                LocalDate date = LocalDate.parse(checkDate);
+                if (ls.isEmpty()) {
+                    return ui.outputCheckNoTask();
+                } else {
+                    return ui.outputCheckTask(ls, date);
+                }
+            } catch (Exception ex) {
+                return ui.outputCheckError();
+            }
+        case FIND:
+            try {
+                String keyword = arr[1];
+                if (ls.isEmpty()) {
+                    return ui.outputCheckNoTask();
+                } else {
+                    return ui.outputFindTask(ls, keyword);
+                }
+            } catch (Exception ex) {
+                return ui.outputFindError();
+            }
+        default:
+            return ui.outputInvalidInput();
+        }
     }
 
     /**
@@ -304,14 +404,14 @@ public class Duke extends Application {
         }
     }
 
-    /**
-     * This is the main method which will create an instance of duke.Duke
-     * and call on the method run.
-     *
-     * @param args Unused.
-     * @throws IOException On input error.
-     */
-    public static void main(String[] args) throws IOException {
-        new Duke(Storage.getFilePath()).run();
-    }
+//    /**
+//     * This is the main method which will create an instance of duke.Duke
+//     * and call on the method run.
+//     *
+//     * @param args Unused.
+//     * @throws IOException On input error.
+//     */
+//    public static void main(String[] args) throws IOException {
+//        new Duke(Storage.getFilePath()).run();
+//    }
 }

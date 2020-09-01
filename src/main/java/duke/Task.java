@@ -23,9 +23,8 @@ public class Task {
      * @return String This returns 'O' if done and 'X' if not done.
      */
     public String getStatusIcon() {
-        // return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-        return (isDone ? "O" : "X"); //return tick or X symbols
-
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        //return (isDone ? "O" : "X"); //return tick or X symbols
     }
 
     /**

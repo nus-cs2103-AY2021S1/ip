@@ -27,7 +27,8 @@ public class Parser {
      * @return int The int at the back of the string.
      */
     public static int parseInt(String str) {
-        return Integer.parseInt(str.substring(str.length() - 1)) - 1;
+        String[] strArray = str.split(" ", 2);
+        return Integer.parseInt(strArray[1]) - 1;
     }
 
     /**
