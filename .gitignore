@@ -17,3 +17,4 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 duke.txt
 tasks.txt
+MANIFEST.MF
