@@ -2,7 +2,7 @@ package test;
 
 import bot.task.Todo;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class TodoTest {
 

@@ -12,6 +12,10 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+    implementation 'junit:junit:4.12'
+    implementation 'org.testng:testng:6.9.6'
+    testCompile 'junit:junit:4.12'
+    compile 'junit:junit:4.12'
 }
 
 test {
@@ -38,9 +42,10 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '8.36'
 }
 
 run{
+    enableAssertions = true
     standardInput = System.in
 }

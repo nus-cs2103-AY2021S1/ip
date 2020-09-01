@@ -14,7 +14,8 @@ import java.nio.file.Path;
 
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
+
 
 /**
  * JUnit test for Main.
