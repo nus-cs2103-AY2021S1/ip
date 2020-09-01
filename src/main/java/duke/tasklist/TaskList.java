@@ -74,14 +74,15 @@ public class TaskList {
      * A method that iterates through the arraylist, starting from the oldest first, and printing them, indicating the
      * id of the task. The first task would be id 1, second task would be id 2 and so on.
      */
-    public void iterate() {
+    public String iterate() {
         Iterator<Task> iter = shelf.iterator();
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list: ").append('\n');
         int counter = 1;
-        System.out.println("Here are the tasks in your list: ");
         while (iter.hasNext()) {
-            System.out.println(counter + ". " + iter.next());
+            sb.append(counter).append(". ").append(iter.next()).append('\n');
             counter++;
         }
+        return sb.toString();
     }
 
     /**
@@ -97,22 +98,23 @@ public class TaskList {
         this.shelf.remove(index);
     }
 
-    public void find(String response) {
+    public String find(String response) {
         Iterator<Task> iter = shelf.iterator();
         ArrayList<Task> temp = new ArrayList<>();
         while (iter.hasNext()) {
             Task book = iter.next();
-            if(book.getName().contains(response)){
+            if (book.getName().contains(response)) {
                 temp.add(book);
             }
         }
         iter = temp.iterator();
         int counter = 1;
-        System.out.println("Here are the matching tasks in your list: ");
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list: ").append('\n');
         while (iter.hasNext()) {
-            System.out.println(counter + ". " + iter.next());
+            sb.append(counter).append(". ").append(iter.next()).append('\n');
             counter++;
         }
+        return sb.toString();
     }
 
 }
