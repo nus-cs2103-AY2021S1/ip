@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents exceptions in the Duke program.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     /**
      * Initializes a newly created DukeException with a message.

@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
-import duke.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.util.Storage;
 
 /**
  * Represents a find command in the Duke program.
@@ -26,10 +26,11 @@ public class FindCommand extends Command {
      * @param tasks TaskList of the program.
      * @param ui user interface of the program.
      * @param storage storage of the program.
+     * @return the execution message.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.onFind(tasks.find(this.keyword));
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.onFind(tasks.find(this.keyword));
     }
 
     /**

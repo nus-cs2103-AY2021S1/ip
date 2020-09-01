@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.Task;
-import duke.TaskList;
-import duke.Ui;
-import duke.Storage;
+import duke.task.Task;
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.util.Storage;
 import duke.DukeException;
 
 /**
@@ -28,13 +28,14 @@ public class AddCommand extends Command {
      * @param tasks TaskList of the program.
      * @param ui user interface of the program.
      * @param storage storage of the program.
+     * @return the execution message.
      * @throws DukeException if there is a saving issue.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTodo = tasks.addTodo(this.desc, false);
         storage.save(tasks.getList());
-        ui.onAdd(newTodo, tasks.size());
+        return ui.onAdd(newTodo, tasks.size());
     }
 
     /**

@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
-import duke.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.util.Storage;
 import duke.DukeException;
 
 /**
@@ -25,7 +25,8 @@ public abstract class Command {
      * @param tasks TaskList of the program.
      * @param ui user interface of the program.
      * @param storage storage of the program.
+     * @return the execution message.
      * @throws DukeException if a task doesn't exist or if there is an saving issue.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

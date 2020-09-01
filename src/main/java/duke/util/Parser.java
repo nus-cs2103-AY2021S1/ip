@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.DukeException;
 import duke.command.Command;
 import duke.command.ByeCommand;
 import duke.command.ListCommand;
@@ -28,7 +29,8 @@ public class Parser {
      * @throws DukeException if there are any date/time parsing issues or unknown commands.
      */
     public static Command parse(String input) throws DukeException {
-        String command = input.split(" ")[0];
+        String trimmedInput = input.trim();
+        String command = trimmedInput.split(" ")[0];
         try {
             switch (command) {
             case "bye":
@@ -36,22 +38,22 @@ public class Parser {
             case "list":
                 return new ListCommand();
             case "find":
-                String keyword = input.substring(input.indexOf(' ') + 1);
+                String keyword = trimmedInput.substring(trimmedInput.indexOf(' ') + 1);
                 return new FindCommand(keyword);
             case "done":
-                int doneIdx = Integer.parseInt(input.split(" ")[1]) - 1;
+                int doneIdx = Integer.parseInt(trimmedInput.split(" ")[1]) - 1;
                 return new DoneCommand(doneIdx);
             case "delete":
-                int deleteIdx = Integer.parseInt(input.split(" ")[1]) - 1;
+                int deleteIdx = Integer.parseInt(trimmedInput.split(" ")[1]) - 1;
                 return new DeleteCommand(deleteIdx);
             case "todo":
-                taskFormatCheck(command, input);
-                String desc = input.substring(input.indexOf(' ') + 1);
+                taskFormatCheck(command, trimmedInput);
+                String desc = trimmedInput.substring(trimmedInput.indexOf(' ') + 1);
                 return new AddCommand(desc);
             case "deadline":
             case "event":
-                taskFormatCheck(command, input);
-                String tInfo = input.substring(input.indexOf(' ') + 1);
+                taskFormatCheck(command, trimmedInput);
+                String tInfo = trimmedInput.substring(trimmedInput.indexOf(' ') + 1);
                 String tDesc = tInfo.substring(0, tInfo.indexOf('/') - 1);
                 String meta = tInfo.substring(tInfo.indexOf('/') + 4);
                 LocalDate date;
@@ -70,7 +72,7 @@ public class Parser {
             }
         } catch (DateTimeParseException ex) {
             throw new DukeException("Oh dear! Please format the date and time as yyyy/MM/dd HHmm!");
-        } catch (NumberFormatException ex) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
             throw new DukeException("Oh dear! Please give me a number!");
         }
     }
@@ -86,8 +88,8 @@ public class Parser {
         int idxSpace = input.indexOf(' ');
         int idxMeta = input.indexOf('/');
         int infoLength = idxMeta - (idxSpace + 1);
-        if (idxSpace == -1 ||
-                (idxMeta != -1 && infoLength < 1)) {
+        if (idxSpace == -1
+                || (idxMeta != -1 && infoLength < 1)) {
             throw new DukeException("Oh dear! A task description cannot be empty!");
         }
         String info = input.substring(input.indexOf(' ') + 1);
@@ -99,6 +101,12 @@ public class Parser {
         }
         if (type.equals("event") && !info.contains("/at")) {
             throw new DukeException("Oh dear! An event must contain '/at'!");
+        }
+        if (type.equals("deadline") &&  info.substring(idxMeta).length() < 5) {
+            throw new DukeException("Oh dear! A deadline must contain a timestamp!");
+        }
+        if (type.equals("event") && info.substring(idxMeta).length() < 5) {
+            throw new DukeException("Oh dear! An event must contain a timestamp!");
         }
     }
 }

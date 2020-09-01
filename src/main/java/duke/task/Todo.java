@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Represents a task without any additional info.

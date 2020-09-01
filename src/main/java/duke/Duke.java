@@ -1,6 +1,10 @@
 package duke;
 
 import duke.command.Command;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * Represents Duke, a virtual task management system and personal assistant.
@@ -42,6 +46,16 @@ public class Duke {
             } catch (DukeException e) {
                 ui.chatPrint(e.getMessage());
             }
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(this.tasks, this.ui, this.storage);
+        } catch (DukeException e) {
+            this.ui.chatPrint(e.getMessage());
+            return e.getMessage();
         }
     }
 
