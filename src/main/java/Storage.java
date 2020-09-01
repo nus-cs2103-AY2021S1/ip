@@ -1,11 +1,9 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 public class Storage {
     private Path path;
@@ -17,9 +15,8 @@ public class Storage {
     /**
      * Check if file exists, if it does then read it, else create a file.
      * @return TaskList containing any tasks from file.
-     * @throws FileNotFoundException if the file cannot be found.
      */
-    public TaskList readFile() throws FileNotFoundException {
+    public TaskList readFile() {
         if (Files.exists(path)) {
             return Parser.reader(new File(path.toString()));
         } else {
@@ -32,24 +29,28 @@ public class Storage {
      * Overwrites and updates the file at the path for changes to the tasks.
      * @param tasks TaskList containing all tasks.
      * @param path where file is located.
-     * @throws IOException for any input/ output issues with FileWriter.
      */
-    public static void fileUpdate(TaskList tasks, Path path) throws IOException {
-        FileWriter fw = new FileWriter(path.toString());
-        for (Task t : tasks.getList()) {
-            int done = t.isDone ? 1 : 0;
-            if (t instanceof Event) {
-                fw.write("[E]@" + done + "@" + t.desc + "@" +
-                        ((Event) t).at + System.getProperty("line.separator"));
-            } else if (t instanceof Deadline) {
-                fw.write("[D]@" + done + "@" + t.desc + "@" +
-                        ((Deadline) t).by + System.getProperty("line.separator"));
-            } else {
-                fw.write("[T]@" + done + "@" + t.desc +
-                        System.getProperty("line.separator"));
+    public static void fileUpdate(TaskList tasks, Path path) {
+        try {
+            FileWriter fw = new FileWriter(path.toString());
+            for (Task t : tasks.getList()) {
+                int done = t.isDone ? 1 : 0;
+                if (t instanceof Event) {
+                    fw.write("[E]@" + done + "@" + t.desc + "@" +
+                            ((Event) t).at + System.getProperty("line.separator"));
+                } else if (t instanceof Deadline) {
+                    fw.write("[D]@" + done + "@" + t.desc + "@" +
+                            ((Deadline) t).by + System.getProperty("line.separator"));
+                } else {
+                    fw.write("[T]@" + done + "@" + t.desc +
+                            System.getProperty("line.separator"));
+                }
             }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("OOPS!! Something went wrong :(");
         }
-        fw.close();
+
     }
 
 

@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -36,7 +35,7 @@ public class Parser {
                         tasks.get(index).setDone();
                         Storage.fileUpdate(tasks, path);
                         ui.done(tasks, index);
-                    } catch (DukeException | IOException e) {
+                    } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                 } else if (words[0].equals("delete")) {
@@ -45,7 +44,7 @@ public class Parser {
                         ui.remove(tasks, index);
                         tasks.delete(index);
                         Storage.fileUpdate(tasks, path);
-                    } catch (DukeException | IOException e) {
+                    } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                 } else if (words[0].equals("find")) {
@@ -60,13 +59,91 @@ public class Parser {
                         tasks.add(task);
                         Storage.fileUpdate(tasks, path);
                         ui.add(task, tasks.size());
-                    } catch (DukeException | IOException e) {
+                    } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                 }
             }
         }
     }
+
+
+    public String parser(String line, TaskList tasks) {
+        Path path = Paths.get("./duke.txt");
+        if (line.equals("bye")) {
+            return "Bye! Hope to see you again ;)";
+        } else if (line.equals("list")) {
+            int count = 1;
+            String string = "";
+            for (Task task : tasks.getList()) {
+                if (count == tasks.size()) {
+                    string += count + "." + task.toString();
+                } else {
+                    string += count + "." + task.toString() + "\n";
+                    count++;
+                }
+            }
+            return string;
+        } else {
+            String[] words = line.split("\\s+");
+            if (words[0].equals("done")) {
+                try {
+                    int index = completeDelete(line, tasks.size());
+                    tasks.get(index).setDone();
+                    Storage.fileUpdate(tasks, path);
+                    String string = "Nice! I've marked this task as done:" + "\n";
+                    string += tasks.get(index).toString();
+                    return string;
+                } catch (DukeException e) {
+                    return e.getMessage();
+                }
+            } else if (words[0].equals("delete")) {
+                try {
+                    int index = completeDelete(line, tasks.size());
+                    String string = "Noted. I've removed this task:" + "\n";
+                    string += tasks.get(index).toString() + "\n";
+                    string += "Now you have " + (tasks.size() - 1) + " tasks in the list.";
+                    tasks.delete(index);
+                    Storage.fileUpdate(tasks, path);
+                    return string;
+                } catch (DukeException e) {
+                    return e.getMessage();
+                }
+            } else if (words[0].equals("find")) {
+                if (words.length > 1) {
+                    String keyword = line.substring(5);
+                    TaskList matches = matchFinder(tasks, keyword);
+                    String string = "Here are the matching tasks in your list:" + "\n";
+                    int counter = 1;
+                    for (Task task : matches.getList()) {
+                        if (counter == tasks.size()) {
+                            string += counter + "." + task.toString();
+                        } else {
+                            string += counter + "." + task.toString() + "\n";
+                            counter++;
+                        }
+                    }
+                    return string;
+                } else {
+                    return "OOPS!! Missing keyword to find!";
+                }
+            } else {
+                try {
+                    Task task = taskClassify(line);
+                    tasks.add(task);
+                    Storage.fileUpdate(tasks, path);
+                    String string = "Got it. I've added this task:" + "\n";
+                    string += "  " + task.toString() + "\n";
+                    string += "Now you have " + tasks.size() + " tasks in the list.";
+                    return string;
+
+                } catch (DukeException e) {
+                    return e.getMessage();
+                }
+            }
+        }
+    }
+
 
     /**
      * returns the index of task to be deleted/completed if possible.
@@ -92,37 +169,42 @@ public class Parser {
         throw new DukeException("OOPS!!! Invalid task provided.");
     }
 
-    public static TaskList reader(File file) throws FileNotFoundException {
-        Scanner s = new Scanner(file);
-        TaskList tasks = new TaskList();
-        while (s.hasNextLine()) {
-            String line = s.nextLine();
-            String splitOn = "\\s*@\\s*";
-            String[] words = line.split(splitOn);
-            int done = Integer.parseInt(words[1]);
-            if (words.length == 3) {
-                ToDo toDo = new ToDo(words[2]);
-                if (done == 1) {
-                    toDo.setDone();
-                }
-                tasks.add(toDo);
-            } else {
-                if (words[0].equals("[E]")) {
-                    Event event = new Event(words[2], words[3]);
+    public static TaskList reader(File file) {
+        try {
+            Scanner s = new Scanner(file);
+            TaskList tasks = new TaskList();
+            while (s.hasNextLine()) {
+                String line = s.nextLine();
+                String splitOn = "\\s*@\\s*";
+                String[] words = line.split(splitOn);
+                int done = Integer.parseInt(words[1]);
+                if (words.length == 3) {
+                    ToDo toDo = new ToDo(words[2]);
                     if (done == 1) {
-                        event.setDone();
+                        toDo.setDone();
                     }
-                    tasks.add(event);
+                    tasks.add(toDo);
                 } else {
-                    Deadline deadline = new Deadline(words[2], words[3]);
-                    if (done == 1) {
-                        deadline.setDone();
+                    if (words[0].equals("[E]")) {
+                        Event event = new Event(words[2], words[3]);
+                        if (done == 1) {
+                            event.setDone();
+                        }
+                        tasks.add(event);
+                    } else {
+                        Deadline deadline = new Deadline(words[2], words[3]);
+                        if (done == 1) {
+                            deadline.setDone();
+                        }
+                        tasks.add(deadline);
                     }
-                    tasks.add(deadline);
                 }
             }
+            return tasks;
+        } catch (FileNotFoundException e) {
+            System.out.println("OOPS!! Something went wrong :(");
+            return new TaskList();
         }
-        return tasks;
     }
 
     public static TaskList matchFinder(TaskList tasks, String keyword) {
