@@ -12,16 +12,16 @@ public class UiTest {
     }
 
     @Test
-    public void unknownInputLine() {
+    public void helpLine() {
         String line = "Below are the list of commands:\n"
                 + "list\n"
                 + "find [keyword]\n"
                 + "todo [taskname]\n"
                 + "deadline [taskname] /by [yyyy-MM-dd HHmm]\n"
                 + "event [taskname] /at [yyy-MM-dd HHmm]\n"
-                + "remove [index or all]\n"
-                + "bye";
+                + "delete [index or all]\n"
+                + "bye\n";
 
-        assertEquals(line, ui.unknownInputLine());
+        assertEquals(line, ui.helpLine());
     }
 }
