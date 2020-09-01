@@ -32,13 +32,13 @@ Hello from
 	☹ OOPS!!! The date and time of a deadline cannot be empty.
 	------------------------------
 	------------------------------
-	need to pass in both date and time (24hour format) of format "DD/MM/YYYY HH:MM"
+	☹ OOPS!!! Both date and time (24 hour format) must be in the form "DD/MM/YYYY HH:MM"
 	------------------------------
 	------------------------------
-	need to pass in both date and time (24hour format) of format "DD/MM/YYYY HH:MM"
+	☹ OOPS!!! Both date and time (24 hour format) must be in the form "DD/MM/YYYY HH:MM"
 	------------------------------
 	------------------------------
-	need to pass in both date and time (24hour format) of format "DD/MM/YYYY HH:MM"
+	☹ OOPS!!! Both date and time (24 hour format) must be in the form "DD/MM/YYYY HH:MM"
 	------------------------------
 	------------------------------
 	☹ OOPS!!! The date and time of a deadline cannot be empty.
