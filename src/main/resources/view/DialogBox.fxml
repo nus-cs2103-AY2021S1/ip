@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="TOP_RIGHT" maxWidth="381.0" style="-fx-max-height: &quot;Infinity&quot;;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="381.0" style="-fx-max-height: &quot;Infinity&quot;;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <Label fx:id="dialog" alignment="TOP_RIGHT" maxWidth="220.0" style="-fx-background-color: CCE5FF CCE5FF; -fx-background-radius: 15; -fx-padding: 7.5;" wrapText="true">
          <opaqueInsets>
