@@ -17,7 +17,7 @@ public class TaskListTest {
     
     @Test
     public void readCommandAddTaskTest() {
-        taskList.readCommands(null, dummyAddTask.split(" "));
+        taskList.readCommands(dummyAddTask.split(" "));
         ArrayList<Task> expected = new ArrayList<>();
         expected.add(new Deadline("week 3 ip and tp", "26-8-2020 wednesday 2359"));
         assertEquals(actualTasks, expected);
@@ -25,8 +25,8 @@ public class TaskListTest {
     
     @Test
     public void readCommandManageTaskTest() {
-        taskList.readCommands(null, dummyAddTask.split(" "));
-        taskList.readCommands(null, dummyMarkDoneTask.split(" "));
+        taskList.readCommands(dummyAddTask.split(" "));
+        taskList.readCommands(dummyMarkDoneTask.split(" "));
         ArrayList<Task> expected = new ArrayList<>();
         Deadline deadline = new Deadline("week 3 ip and tp", "26-8-2020 wednesday 2359");
         deadline.markDone();

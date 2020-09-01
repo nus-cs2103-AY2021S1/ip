@@ -1,11 +1,11 @@
 package duke;
 
 import java.util.ArrayList;
-import duke.io.Storage;
 import duke.task.TaskList;
+import duke.task.DukeException;
 import duke.io.Ui;
 import duke.io.Layout;
-import duke.task.DukeException;
+import duke.io.Storage;
 
 /**
  * Represents a task manager, Duke.
@@ -15,11 +15,7 @@ public class Duke {
     private TaskList tasksData;
     private Ui ui;
     private Layout layout;
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
+    
     protected String getResponse(String input) {
         String dukeRespond = tasksData.readCommands(input.split(" "));
         return "Duke heard: " + dukeRespond;
