@@ -8,19 +8,19 @@ import java.util.Optional;
  * time.
  */
 
-public class Task{
+public class Task {
 	duke.TaskType taskType;
 	boolean isDone;
 	String string;
 	Optional<LocalDateTime> dateTime;
 
-	public Task(duke.TaskType taskType, boolean isDone, String string){
+	public Task(duke.TaskType taskType, boolean isDone, String string) {
 		this.taskType = taskType;
 		this.isDone = isDone;
 		this.string = string;
 		this.dateTime = Optional.empty();
 	}
-	public Task(duke.TaskType taskType, boolean isDone, String string, Optional<LocalDateTime> date) {
+	public Task(duke.TaskType taskType, boolean isDone, String string, Optional<LocalDateTime> dateTime) {
 		this.taskType = taskType;
 		this.isDone = isDone;
 		this.string = string;
@@ -30,7 +30,7 @@ public class Task{
 	public String getString() {
 		return string;
 	}
-	public String getDoneString(){
+	public String getDoneString() {
 		String string;
 		if(isDone){
 			string = "[✓]";
@@ -41,11 +41,11 @@ public class Task{
 		return string;
 	}
 
-	public duke.Task done(){
+	public duke.Task done() {
 		return new duke.Task(taskType, true, string);
 	}
 
-	public String getTypeString(){
+	public String getTypeString() {
 		String string;
 		if(taskType.equals(duke.TaskType.TODO)){
 			string = "[T]";
@@ -59,11 +59,11 @@ public class Task{
 		return string;
 	}
 
-	public String toString(){
+	public String toString() {
 		return string;
 	}
 
-	public String getFullString(){
+	public String getFullString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(getTypeString()).append(getDoneString()).append(toString());
 		return stringBuilder.toString();

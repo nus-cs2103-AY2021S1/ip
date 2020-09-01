@@ -19,7 +19,7 @@ import java.util.Scanner;
  * Storage deals with loading and saving task list from/ to memory.
  */
 
-public class Storage{
+public class Storage {
 	private String filePath;
 
 	public Storage(String filePath) {
@@ -35,31 +35,27 @@ public class Storage{
 			duke.TaskType taskType;
 			boolean isDone;
 			LocalDateTime dateTime;
-			while(sc.hasNext()) {
+			while (sc.hasNext()) {
 				task = sc.nextLine();
 				if(task.charAt(1) == 'T') {
 					taskType = duke.TaskType.TODO;
-				}
-				else if(task.charAt(1) == 'D') {
+				} else if(task.charAt(1) == 'D') {
 					taskType = duke.TaskType.DEADLINE;
-				}
-				else {
+				} else {
 					taskType = duke.TaskType.EVENT;
 				}
 
-				if(task.charAt(4) == '✓') {
+				if (task.charAt(4) == '✓') {
 					isDone = true;
-				}
-				else {
+				} else {
 					isDone = false;
 				}
 				taskString = task.substring(6);
-				if(taskType == duke.TaskType.DEADLINE){
+				if (taskType == duke.TaskType.DEADLINE) {
 					int index = task.indexOf("(by:");
 					dateTime = LocalDateTime.parse(task.substring(index + 4, task.length()-1), DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
 					list.add(new Task(taskType, isDone, taskString, Optional.of(dateTime)));
-				}
-				else {
+				} else {
 					list.add(new Task(taskType, isDone, taskString));
 				}
 			}

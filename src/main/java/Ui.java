@@ -6,8 +6,8 @@ import java.util.Scanner;
  * Ui deals with any interaction with the user.
  * This includes both user inputs and outputs to user.
  */
-public class Ui{
 
+public class Ui {
 	public void showWelcome() {
 		String logo = "____________________________________________________________\n"
                 /*+ " ____        _        \n"
