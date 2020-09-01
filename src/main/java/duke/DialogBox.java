@@ -58,6 +58,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        setSpacing(IMAGE_TEXT_SPACING);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

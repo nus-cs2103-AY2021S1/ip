@@ -25,18 +25,18 @@ public class AddCommand extends Command {
      * displays a message indicating completion of the command.
      *
      * @param tasks The task list.
-     * @param ui The user interface.
      * @param storage The storage object that saves the task list.
+     * @return A String that indicates that a task has been successfully added.
      * @throws DukeException If task contains an invalid date and time format.
      */
     @Override
-    public void execute(Tasklist tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(Tasklist tasks, Storage storage) throws DukeException {
         try {
             tasks.add(task);
             storage.save(tasks);
-            ui.display("Got it. I've added this task:\n"
+            return "Got it. I've added this task:\n"
                     + "  " + task.toDisplayString() + "\n"
-                    + "Now you have " + tasks.size() + " tasks in the list");
+                    + "Now you have " + tasks.size() + " tasks in the list";
         } catch (DateTimeException dateTimeException) {
             throw new DukeException("Please enter a valid date and time in the format 'DD-MM-YYYY HHMM'!");
         }

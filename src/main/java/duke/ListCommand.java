@@ -16,13 +16,12 @@ public class ListCommand extends Command {
      * Displays all the tasks from the task list onto the user interface.
      *
      * @param tasks The task list.
-     * @param ui The user interface.
      * @param storage The Storage object that saves the task list.
-     * @throws DukeException If task number entered is invalid.
+     * @return The list of all tasks as a String.
      */
     @Override
-    public void execute(Tasklist tasks, Ui ui, Storage storage) {
-        ui.display(tasks.toDisplayString());
+    public String execute(Tasklist tasks, Storage storage) {
+        return tasks.toDisplayString();
     }
 
     /**

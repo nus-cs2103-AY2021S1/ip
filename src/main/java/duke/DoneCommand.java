@@ -23,18 +23,18 @@ public class DoneCommand extends Command {
      * and displays a message indicating completion of the command.
      *
      * @param tasks The task list.
-     * @param ui The user interface.
      * @param storage The Storage object that saves the task list.
+     * @return A String that indicates that the task has been marked as done.
      * @throws DukeException If task number entered is invalid.
      */
     @Override
-    public void execute(Tasklist tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(Tasklist tasks, Storage storage) throws DukeException {
         try {
             Task completedTask = tasks.get(taskNumber);
             completedTask.markAsDone();
             storage.save(tasks);
-            ui.display("Nice! I've marked this task as done:\n" + "  "
-                    + completedTask.toDisplayString());
+            return "Nice! I've marked this task as done:\n" + "  "
+                    + completedTask.toDisplayString();
         } catch (IndexOutOfBoundsException exception) {
             throw new DukeException("Please enter a valid task number!");
         }

@@ -13,16 +13,16 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Displays a goodbye message and exits Duke.
+     * Exits Duke.
      *
      * @param tasks The task list.
-     * @param ui The user interface.
      * @param storage The Storage object that saves the task list.
+     * @return An empty String.
      */
     @Override
-    public void execute(Tasklist tasks, Ui ui, Storage storage) {
-        ui.showGoodbye();
+    public String execute(Tasklist tasks, Storage storage) {
         System.exit(0);
+        return "";
     }
 
     /**

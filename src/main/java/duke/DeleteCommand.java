@@ -24,19 +24,19 @@ public class DeleteCommand extends Command {
      * completion of the command.
      *
      * @param tasks The task list.
-     * @param ui The user interface.
      * @param storage The Storage object that saves the task list.
+     * @return A String that indicates that the task has been successfully deleted.
      * @throws DukeException If task number entered is invalid.
      */
     @Override
-    public void execute(Tasklist tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(Tasklist tasks, Storage storage) throws DukeException {
         try {
             Task removedTask = tasks.get(taskNumber);
             tasks.deleteTask(taskNumber);
             storage.save(tasks);
-            ui.display("Noted. I've removed this task:\n" + "  "
+            return "Noted. I've removed this task:\n" + "  "
                     + removedTask.toDisplayString() + "\n"
-                    + "Now you have " + tasks.size() + " tasks in the list.");
+                    + "Now you have " + tasks.size() + " tasks in the list.";
         } catch (IndexOutOfBoundsException exception) {
             throw new DukeException("Please enter a valid task number!");
         }

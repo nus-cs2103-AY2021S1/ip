@@ -12,19 +12,14 @@ public class Duke {
     /** List of tasks saved by Duke */
     private Tasklist tasks;
 
-    /** User interface for Duke */
-    private Ui ui;
-
     /**
      * Creates a Duke object with a default filepath.
      */
     public Duke() {
-        ui = new Ui();
         storage = new Storage("data/tasks.txt");
         try {
             tasks = storage.load();
         } catch (DukeException dukeException) {
-            ui.showError(dukeException.getMessage());
             tasks = new Tasklist();
         }
     }
@@ -36,46 +31,20 @@ public class Duke {
      *                 list of tasks is stored in a .txt file.
      */
     public Duke(String filepath) {
-        ui = new Ui();
         storage = new Storage(filepath);
         try {
             tasks = storage.load();
         } catch (DukeException dukeException) {
-            ui.showError(dukeException.getMessage());
             tasks = new Tasklist();
         }
     }
 
-    /**
-     * Runs the Duke bot.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command command = Parser.parseCommand(fullCommand);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command command = Parser.parseCommand(input);
+            return command.execute(tasks, storage);
+        } catch (DukeException dukeException) {
+            return dukeException.getMessage();
+        }
     }
 }

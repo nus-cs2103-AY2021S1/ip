@@ -10,12 +10,12 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(Tasklist tasks, Ui ui, Storage storage) {
+    public String execute(Tasklist tasks, Storage storage) {
         if (query.isBlank()) {
-            ui.display("Please enter a valid query!");
+            return "Please enter a valid query!";
         } else {
-            ui.display("Here are the matching tasks in your list:\n"
-                    + tasks.matchedTasksOnly(query));
+            return "Here are the matching tasks in your list:\n"
+                    + tasks.matchedTasksOnly(query);
         }
     }
 
