@@ -45,7 +45,7 @@ public class Storage {
             br.lines().forEach(str -> {
                 try {
                     list.add(Task.parse(str));
-                } catch (DukeException de){
+                } catch (DukeException de) {
                     System.out.println("    Error: "+ de.getMessage());
                 }
             });
@@ -55,14 +55,14 @@ public class Storage {
                 new File("./src/main/data/duke.txt").createNewFile();
             } catch (IOException ioe) {
                 throw new DukeException(
-                        "Sorry, the file couldn't be created!\n" +
-                        "Please try again.");
+                        "Sorry, the file couldn't be created!\n"
+                                + "Please try again.");
             }
             throw new DukeException(
-                    "    No save file found in [root]/src/main/data/duke.txt.\n" +
-                    "    A file has been created by default.\n" +
-                    "    If you'd like to import one, simply copy the file\n" +
-                    "    over to the above location and rerun me!");
+                    "    No save file found in [root]/src/main/data/duke.txt.\n"
+                            + "    A file has been created by default.\n"
+                            + "    If you'd like to import one, simply copy the file\n"
+                            + "    over to the above location and rerun me!");
         }
         return list;
     }
@@ -81,7 +81,9 @@ public class Storage {
             FileWriter fw = new FileWriter("./src/main/data/duke.txt");
             fw.write(toWrite);
             fw.close();
-        } catch (IOException ignored) { }
+        } catch (IOException ignored) {
+            return;
+        }
     }
 
 }

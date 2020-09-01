@@ -13,10 +13,11 @@ import duke.util.DukeException;
 
 public class Ui {
 
-    private final Scanner sc;
-
     private static final String LINE =
             "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+
+    private final Scanner sc;
+
 
     /**
      * Constructor that creates a Ui object, with a Scanner that reads user input.
@@ -34,8 +35,8 @@ public class Ui {
 
     public void loaded(TaskList tasks) {
         System.out.println(
-                "    A save file has been found and loaded!\n" +
-                "    Your current tasks are: ");
+                "    A save file has been found and loaded!\n"
+                        + "    Your current tasks are: ");
         int i = 0;
         if (tasks.size() == 0) {
             System.out.println("    ... empty! Good work!");
@@ -56,12 +57,12 @@ public class Ui {
 
     public void printAdd(TaskList tasks, Task task) {
         System.out.println(
-                "    Got it. I've added this task:\n        " +
-                task.toString() +
-                "\n    You now have " + tasks.size() +
-                (tasks.size() == 1 ? " task" : " tasks") +
-                " in your list.\n" +
-                LINE);
+                "    Got it. I've added this task:\n        "
+                        + task.toString()
+                        + "\n    You now have " + tasks.size()
+                        + (tasks.size() == 1 ? " task" : " tasks")
+                        + " in your list.\n"
+                        + LINE);
     }
 
     /**
@@ -70,8 +71,8 @@ public class Ui {
 
     public void printBye() {
         System.out.println(
-                "    Bye. Hope to see you again soon!\n" +
-                LINE);
+                "    Bye. Hope to see you again soon!\n"
+                        + LINE);
     }
 
     /**
@@ -81,9 +82,9 @@ public class Ui {
 
     public void printDone(Task task) {
         System.out.println(
-                "    Nice! I've marked this task as done:\n        " +
-                task.toString() + "\n" +
-                LINE);
+                "    Nice! I've marked this task as done:\n        "
+                        + task.toString() + "\n"
+                        + LINE);
     }
 
     /**
@@ -95,12 +96,12 @@ public class Ui {
 
     public void printDelete(TaskList tasks, Task task) {
         System.out.println(
-                "    Noted. I've removed this task:\n        " +
-                task.toString() +
-                "\n    You now have " + tasks.size() +
-                (tasks.size() == 1 ? " task" : " tasks") +
-                " in your list.\n" +
-                LINE);
+                "    Noted. I've removed this task:\n        "
+                        + task.toString()
+                        + "\n    You now have " + tasks.size()
+                        + (tasks.size() == 1 ? " task" : " tasks")
+                        + " in your list.\n"
+                        + LINE);
     }
 
     /**
@@ -111,8 +112,7 @@ public class Ui {
 
     public void printError(DukeException e) {
         System.out.println(
-                e.getMessage() + "\n" +
-                LINE);
+                e.getMessage() + "\n" + LINE);
     }
 
     /**
@@ -158,8 +158,7 @@ public class Ui {
 
     public void start() {
         System.out.println(
-                "    Awaiting input...\n" +
-                LINE);
+                "    Awaiting input...\n" + LINE);
     }
 
     /**
@@ -167,8 +166,7 @@ public class Ui {
      */
 
     public void welcome() {
-        String logo
-                = "     ____        _        \n"
+        String logo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"
                 + "    | | | | | | | |/ / _ \\\n"
                 + "    | |_| | |_| |   <  __/\n"
