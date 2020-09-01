@@ -45,11 +45,11 @@ public class Duke {
      */
     protected String getResponse(String input) {
         try {
-            Command c = Parser.parse(input);
-            if (c.isExit()) {
+            Command command = Parser.parse(input);
+            if (command.isExit()) {
                 setTimeout(() -> Platform.exit());
             }
-            return c.execute(tasks, ui, storage);
+            return command.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
