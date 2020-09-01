@@ -1,10 +1,10 @@
 package duke;
 
+import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.io.File;
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,13 +55,13 @@ public class Storage {
             String contents = "";
             for (Task x : list) {
                 if (x.getClass().getSimpleName().equals("ToDo")) {
-                    String temp = "ToDo\n" + x.isDone + "\n" + x.getName() + "\n\n";
+                    String temp = "ToDo\n" + x.getDone() + "\n" + x.getName() + "\n\n";
                     contents += temp;
                 } else if (x.getClass().getSimpleName().equals("Deadlines")) {
-                    String temp = "Deadlines\n" + x.isDone + "\n" + x.getName() + "\n" + x.getTime() + "\n\n";
+                    String temp = "Deadlines\n" + x.getDone() + "\n" + x.getName() + "\n" + x.getTime() + "\n\n";
                     contents += temp;
                 } else {
-                    String temp = "Events\n" + x.isDone + "\n" + x.getName() + "\n" + x.getTime() + "\n\n";
+                    String temp = "Events\n" + x.getDone() + "\n" + x.getName() + "\n" + x.getTime() + "\n\n";
                     contents += temp;
                 }
             }
@@ -112,7 +112,7 @@ public class Storage {
                     list.add(temp);
                 }
             }
-                return list;
+            return list;
 
         } catch (IOException e) {
             throw new DukeException("Unable to find load file");

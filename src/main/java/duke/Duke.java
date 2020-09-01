@@ -129,8 +129,10 @@ public class Duke extends Application {
 
     /*
     /**
-     * Main method which runs the bot in the CLI
-    public static void main(String[] args) throws  DukeException{
+     * Main method which runs the bot
+     * @param args user input
+     * @throws DukeException if bot does not understand user input
+    public static void main(String[] args) throws DukeException {
         new Duke().bot();
     }
     */
@@ -152,7 +154,6 @@ public class Duke extends Application {
             // user sees the list of tasks
             } else if (input.equals("list")) {
                 ui.printList(taskList.getList());
-                ui.drawLine();
             // user sets a specific task as completed
             } else if (input.split(" ")[0].equals("done")) {
                 ui.doneTask(taskList.done(Integer.parseInt(input.split(" ")[1])));
@@ -160,13 +161,13 @@ public class Duke extends Application {
                 ui.drawLine();
                 storage.saveFile(taskList.getList());
             // user creates a new task
-            } else if (first.equals("todo")|| first.equals("deadline") || first.equals("event")) {
+            } else if (first.equals("todo") || first.equals("deadline") || first.equals("event")) {
                 ui.addTask(taskList.add(input));
                 ui.listCount(taskList.countList());
                 ui.drawLine();
                 storage.saveFile(taskList.getList());
             // user deletes a task
-            } else if (first.equals("delete")){
+            } else if (first.equals("delete")) {
                 ui.deleteTask(taskList.delete(input));
                 ui.listCount(taskList.countList());
                 ui.drawLine();

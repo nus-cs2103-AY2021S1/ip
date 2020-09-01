@@ -7,8 +7,8 @@ package duke;
  * @version 0.1
  * @since   27/8/2020
  */
-public class DukeException extends Exception{
-    public DukeException(String message){
+public class DukeException extends Exception {
+    public DukeException(String message) {
         super(message);
     }
 }
