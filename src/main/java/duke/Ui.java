@@ -10,20 +10,20 @@ public class Ui {
      * Prints logo "Welcome" greeting.
      */
     public void logoMsg() {
-        String logo = " ___       __   _______   ___       ________  " +
-                "________  _____ ______   _______      \n" +
-                "|\\  \\     |\\  \\|\\  ___ \\ |\\  \\     " +
-                "|\\   ____\\|\\   __  \\|\\   _ \\  _   \\|\\  ___ \\     \n" +
-                "\\ \\  \\    \\ \\  \\ \\   __/|\\ \\  \\    \\ \\  \\___|" +
-                "\\ \\  \\|\\  \\ \\  \\\\\\__\\ \\  \\ \\   __/|    \n" +
-                " \\ \\  \\  __\\ \\  \\ \\  \\_|/_\\ \\  \\    \\ \\  \\    " +
-                "\\ \\  \\\\\\  \\ \\  \\\\|__| \\  \\ \\  \\_|/__  \n" +
-                "  \\ \\  \\|\\__\\_\\  \\ \\  \\_|\\ \\ \\  \\____\\ \\  \\____" +
-                "\\ \\  \\\\\\  \\ \\  \\    \\ \\  \\ \\  \\_|\\ \\ \n" +
-                "   \\ \\____________\\ \\_______\\ \\_______\\ \\_______" +
-                "\\ \\_______\\ \\__\\    \\ \\__\\ \\_______\\\n" +
-                "    \\|____________|\\|_______|\\|_______|\\|_______|\\|_______" +
-                "|\\|__|     \\|__|\\|_______|"
+        String logo = " ___       __   _______   ___       ________  "
+                + "________  _____ ______   _______      \n"
+                + "|\\  \\     |\\  \\|\\  ___ \\ |\\  \\     "
+                + "|\\   ____\\|\\   __  \\|\\   _ \\  _   \\|\\  ___ \\     \n"
+                + "\\ \\  \\    \\ \\  \\ \\   __/|\\ \\  \\    \\ \\  \\___|"
+                + "\\ \\  \\|\\  \\ \\  \\\\\\__\\ \\  \\ \\   __/|    \n"
+                + " \\ \\  \\  __\\ \\  \\ \\  \\_|/_\\ \\  \\    \\ \\  \\    "
+                + "\\ \\  \\\\\\  \\ \\  \\\\|__| \\  \\ \\  \\_|/__  \n"
+                + "  \\ \\  \\|\\__\\_\\  \\ \\  \\_|\\ \\ \\  \\____\\ \\  \\____"
+                + "\\ \\  \\\\\\  \\ \\  \\    \\ \\  \\ \\  \\_|\\ \\ \n"
+                + "   \\ \\____________\\ \\_______\\ \\_______\\ \\_______"
+                + "\\ \\_______\\ \\__\\    \\ \\__\\ \\_______\\\n"
+                + "    \\|____________|\\|_______|\\|_______|\\|_______|\\|_______"
+                + "|\\|__|     \\|__|\\|_______|"
                 + "\n\n WELCOME to DukeBT!";
         System.out.println(logo);
     }
@@ -183,19 +183,20 @@ public class Ui {
      * Prints out all tasks that match the keyword stored in the task list.
      *
      * @param keyword A string of keyword to find the matching tasks.
-     * @param matchedTasks An ArrayList<Task> of all the tasks that match with the keyword.
+     * @param matchedTasks An ArrayList of all the tasks that match with the keyword.
      */
     public static void findMatchingTasks(String keyword, ArrayList<Task> matchedTasks) {
         String outputMsg = "";
         if (matchedTasks.isEmpty()) {
             outputMsg = "___________________________________________________________"
                     + "\n (⊙ ‿ ⊙)"
-                    + "\n There is no matching task with the keyword - '" + keyword+"'."
+                    + "\n There is no matching task with the keyword - '" + keyword + "'."
                     + "\n___________________________________________________________\n";
         } else {
             outputMsg = "___________________________________________________________"
                     + "\n (⊙ ‿ ⊙)"
-                    + "\n You have " + matchedTasks.size() + " tasks matched with keyword - '" + keyword+"'."
+                    + "\n You have " + matchedTasks.size() + " tasks matched with keyword - '"
+                    + keyword + "'."
                     + "\n Here they are:";
             for (int i = 0; i < matchedTasks.size(); i++) {
                 outputMsg += "\n      " + (i + 1) + ". " + matchedTasks.get(i);

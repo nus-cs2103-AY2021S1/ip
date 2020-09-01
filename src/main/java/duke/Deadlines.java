@@ -1,8 +1,8 @@
 package duke;
 
-import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * Handles deadline tasks

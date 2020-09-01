@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Contains the overall user's task list, and it provide operations to modify task in the task list.
  */
 public class TaskList {
-    public ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * TaskList Constructor.
@@ -18,9 +18,9 @@ public class TaskList {
     }
 
     /**
-     * Returns the ArrayList<Task> contains all user's tasks in the task list.
+     * Returns the ArrayList contains all user's tasks in the task list.
      *
-     * @return The ArrayList<Task> contains all user's tasks in the task list.
+     * @return The ArrayList contains all user's tasks in the task list.
      */
     public ArrayList<Task> getTaskList() {
         return this.tasks;
@@ -79,7 +79,7 @@ public class TaskList {
 
     /**
      * Marks a task as done in the task list and calls the Ui class to display a message.
-     * 
+     *
      * @param index The int of the task series number in the task list.
      * @param tasks The overall user's task list.
      */
@@ -92,7 +92,7 @@ public class TaskList {
      * Finds all tasks that match with the keyword in the task list.
      *
      * @param keyword A string of keyword to find the matching tasks.
-     * @param tasks An ArrayList<Task> of all the tasks that match with the keyword.
+     * @param tasks An ArrayList of all the tasks that match with the keyword.
      */
     public static void findTask(String keyword, ArrayList<Task> tasks) {
         ArrayList<Task> matchedTasks = new ArrayList<>();
