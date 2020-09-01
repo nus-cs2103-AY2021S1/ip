@@ -96,7 +96,7 @@ public class Parser {
                                     TaskList.getThingsOnList().get(x) + ".");
                         }
                     } catch (NumberFormatException e) {
-                        throw new DukeExceptions("Bark. (That number isn't on the list.)");
+                        throw new DukeExceptions("Bark bark. (That number isn't on the list.)");
                     }
                 } else {
                     int cmdIndex = input.indexOf("/");
