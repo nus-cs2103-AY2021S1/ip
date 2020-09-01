@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * <p>The UI class deals with interactions with the user.</p>
+ * <p>The Ui class deals with interactions with the user.</p>
  */
 public class NewUI {
 

@@ -11,6 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -21,7 +24,7 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private ImageView displayPicture;
+    private Circle displayPicture;
 
     private DialogBox(String text, Image img) {
         try {
@@ -32,9 +35,11 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        dialog.setStyle("-fx-background-color: #00CED1; "
+                + "-fx-border-color: #00CED1; -fx-border-radius: 10; "
+                + "-fx-border-width: 10; -fx-background-radius: 10");
         dialog.setText(text);
-        displayPicture.setImage(img);
+        displayPicture.setFill(new ImagePattern(img));
     }
 
     /**
@@ -46,8 +51,8 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         //set background color for duke box
-        dialog.setStyle("-fx-background-color: #D1FDA4; "
-                + "-fx-border-color: #D1FDA4; -fx-border-radius: 10; "
+        dialog.setStyle("-fx-background-color: #FFFAF0; "
+                + "-fx-border-color: #FFFAF0; -fx-border-radius: 10; "
                 + "-fx-border-width: 10; -fx-background-radius: 10");
     }
 

@@ -1,19 +1,22 @@
+/*
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+*/
 /**
  * <p>The IoHandler class makes sense of user input and acts on it.</p>
- */
+ *//*
+
 public class IoHandler {
     private String[] replyArr;
     private Scanner sc = new Scanner(System.in);
     private String reply = sc.nextLine();
     private TaskManager taskManager = new TaskManager(new ArrayList<>());
     private TaskSaveAndLoadManager taskSaveAndLoadManager = new TaskSaveAndLoadManager();
-    private UI ui = new UI();
+    private Ui ui = new Ui();
 
     private DateAndTime handleTime(String timeFormat) {
         if (!timeFormat.contains(" ")) {
@@ -124,3 +127,4 @@ public class IoHandler {
         sc.close();
     }
 }
+*/
