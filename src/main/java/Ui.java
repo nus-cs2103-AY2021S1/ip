@@ -1,94 +1,26 @@
 import java.util.List;
-import java.util.Scanner;
 
-public class Ui {
-    private static final String LINE = "____________________________________________________________";
-    private static final String GREETING_MESSAGE = LINE
+public abstract class Ui {
+    protected static final String LINE = "____________________________________________________";
+    protected static final String GREETING_MESSAGE = LINE
             + "\n Quack! I am Duck"
             + "\n How can I help you today?\n" + LINE;
-    private static final String EXIT_MESSAGE = LINE
+    protected static final String EXIT_MESSAGE = LINE
             + "\n Waddling off now. See you soon! \n" + LINE;
 
-    private Scanner sc;
+    public abstract void processError(String errorMessage);
 
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
+    public abstract void processAddMessage(Task task, int count);
 
-    public void greet() {
-        System.out.println(GREETING_MESSAGE);
-    }
+    public abstract void displayTaskCount(int numOfTasks);
 
-    public void printError(String errorMessage) {
-        System.out.println(LINE);
-        System.out.println(errorMessage);
-        System.out.println(LINE);
-    }
+    public abstract void processDeleteMessage(Task taskToDelete, int count);
 
-    public String getNextInput() {
-        return sc.nextLine();
-    }
+    public abstract void processDoneMessage(Task task);
 
-    public void close() {
-        System.out.println(EXIT_MESSAGE);
-        sc.close();
-    }
+    public abstract void processClose();
 
-    public void listStoredTasks(List<Task> storedTasks) {
-        if (storedTasks.isEmpty()) {
-            System.out.println("No tasks stored...");
-        } else {
-            System.out.println(LINE);
-            System.out.println("Quack! Here are the tasks in your list:");
-            int count = 1;
-            for (Task task : storedTasks) {
-                System.out.println(count + ". " + task);
-                count++;
-            }
-            System.out.println(LINE);
-        }
-    }
+    public abstract void processResultTaskList(List<Task> resultTaskList);
 
-    public void printDoneMessage(Task task) {
-        System.out.println(LINE);
-        System.out.println("Quack! I have marked this task as done: \n" + task);
-        System.out.println(LINE);
-    }
-
-    public void printAddMessage(Task task, int count) {
-        System.out.println(LINE);
-        System.out.println("Quack! I have added: " + task);
-        displayTaskCount(count);
-        System.out.println(LINE);
-    }
-
-    public void printDeleteMessage(Task taskToDelete, int count) {
-        System.out.println(LINE);
-        System.out.println("Quack! I have deleted this task: \n" + taskToDelete);
-        displayTaskCount(count);
-        System.out.println(LINE);
-    }
-
-    public void displayTaskCount(int numOfTasks) {
-        if (numOfTasks == 1) {
-            System.out.println("My duck senses tell me you have 1 task in the list.");
-        } else {
-            System.out.println("My duck senses tell me you have " + numOfTasks + " tasks in the list.");
-        }
-    }
-
-    public void printResultTaskList(List<Task> resultTaskList) {
-        if (resultTaskList.isEmpty()) {
-            System.out.println("No tasks matched...");
-        } else {
-            System.out.println(LINE);
-            System.out.println("Quack! Here are the tasks in your list that match:");
-            int count = 1;
-            for (Task task : resultTaskList) {
-                System.out.println(count + ". " + task);
-                count++;
-            }
-            System.out.println(LINE);
-        }
-    }
+    public abstract void listStoredTasks(List<Task> storedTasks);
 }
