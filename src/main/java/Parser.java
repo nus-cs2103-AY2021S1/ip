@@ -8,29 +8,27 @@ public class Parser {
     /**
      * Stores the parsed user inputs and prints response messages for user.
      * @param userInput User input read by scanner.
-     * @param lst List of tasks.
-     * @param ui Ui object that deals with user interaction.
-     * @param storage Storage object that deals with loading tasks from the file and saving tasks in the file.
+     * @param duke Duke object.
      */
-    public void parse(String userInput, TaskList lst, Ui ui, Storage storage) {
+    public String parse(String userInput, Duke duke) {
         String[] strArr = userInput.split(" ");
         try {
             check(strArr);
             if (userInput.equals("bye")) {
-                ui.bye();
-                System.exit(0);
+                return duke.getUi().bye();
+                //System.exit(0);
             } else if (userInput.equals("list")) {
-                ui.printTaskList(lst);
+                return duke.getUi().printTaskList(duke.getTasks());
             } else if (strArr[0].equals("done")) {
-                lst.getTask(Integer.parseInt(strArr[1]) - 1).markAsDone();
-                ui.printDoneTask(lst.getTask(Integer.parseInt(strArr[1]) - 1));
-                storage.writeFile(lst.getTaskList());
+                duke.getTasks().getTask(Integer.parseInt(strArr[1]) - 1).markAsDone();
+                duke.getStorage().writeFile(duke.getTasks().getTaskList());
+                return duke.getUi().printDoneTask(duke.getTasks().getTask(Integer.parseInt(strArr[1]) - 1));
             } else if (strArr[0].equals("delete")) {
                 int i = Integer.parseInt(strArr[1]) - 1;
-                Task t = lst.getTask(Integer.parseInt(strArr[1]) - 1);
-                lst.deleteTask(i);
-                ui.printDeleteTask(t, lst);
-                storage.writeFile(lst.getTaskList());
+                Task t = duke.getTasks().getTask(Integer.parseInt(strArr[1]) - 1);
+                duke.getTasks().deleteTask(i);
+                duke.getStorage().writeFile(duke.getTasks().getTaskList());
+                return duke.getUi().printDeleteTask(t, duke.getTasks());
             } else {
                 if (strArr[0].equals("todo")) {
                     String sd = "";
@@ -38,9 +36,9 @@ public class Parser {
                         sd += strArr[i] + " ";
                     }
                     Task task = new Todo(sd);
-                    lst.addTask(task);
-                    ui.printAddTask(task, lst);
-                    storage.writeFile(lst.getTaskList());
+                    duke.getTasks().addTask(task);
+                    duke.getStorage().writeFile(duke.getTasks().getTaskList());
+                    return duke.getUi().printAddTask(task, duke.getTasks());
                 } else if (strArr[0].equals("deadline")) {
                     String sd = "";
                     String sb = "";
@@ -61,9 +59,9 @@ public class Parser {
                         }
                     }
                     Task task = new Deadline(sd, LocalDate.parse(sb));
-                    lst.addTask(task);
-                    ui.printAddTask(task, lst);
-                    storage.writeFile(lst.getTaskList());
+                    duke.getTasks().addTask(task);
+                    duke.getStorage().writeFile(duke.getTasks().getTaskList());
+                    return duke.getUi().printAddTask(task, duke.getTasks());
                 } else if (strArr[0].equals("event")) {
                     String sd = "";
                     String sa = "";
@@ -85,24 +83,24 @@ public class Parser {
                     }
 
                     Task task = new Event(sd, LocalDate.parse(sa));
-                    lst.addTask(task);
-                    
-                    ui.printAddTask(task, lst);
-                    storage.writeFile(lst.getTaskList());
+                    duke.getTasks().addTask(task);
+                    duke.getStorage().writeFile(duke.getTasks().getTaskList());
+                    return duke.getUi().printAddTask(task, duke.getTasks());
                 } else if (strArr[0].equals("find")) {
                     String keyword = strArr[1];
                     TaskList taskLst = new TaskList();
-                    for (int i = 0; i < lst.getSize(); i++) {
-                        if (lst.getTask(i).getDescription().contains(keyword)) {
-                            taskLst.addTask(lst.getTask(i));
+                    for (int i = 0; i < duke.getTasks().getSize(); i++) {
+                        if (duke.getTasks().getTask(i).getDescription().contains(keyword)) {
+                            taskLst.addTask(duke.getTasks().getTask(i));
                         }
                     }
-                    ui.printMatchingTasks(taskLst);
+                    return duke.getUi().printMatchingTasks(taskLst);
                 }
             }
         } catch (Exception e) {
-            ui.showError(e.toString());
+            return duke.getUi().showError(e.toString());
         }
+        return "";
     }
 
     /**

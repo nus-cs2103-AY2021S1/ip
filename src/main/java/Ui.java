@@ -5,13 +5,13 @@ public class Ui {
     /**
      * Greets user when Duke bot is activated.
      */
-    public void greet() {
+    public String greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        printLine(logo + "\nHello! I'm Duke" + "\nWhat can I do for you?");
+        return "Hello! I'm Duke" + "\nWhat can I do for you?";
     }
 
     /**
@@ -35,8 +35,8 @@ public class Ui {
     /**
      * Prints bye message to user.
      */
-    public void bye() {
-        printLine(drawBorder("Bye. Hope to see you again soon!"));
+    public String bye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -44,19 +44,19 @@ public class Ui {
      * @param task Task that is added.
      * @param lst List of tasks.
      */
-    public void printAddTask(Task task, TaskList lst) {
-        printLine(drawBorder("Got it. I've added this task:\n" + "  " 
+    public String printAddTask(Task task, TaskList lst) {
+        return "Got it. I've added this task:\n" + "  " 
                 + task.toString() + "\n" + "Now you have " 
-                + lst.getSize() + " tasks in the list."));
+                + lst.getSize() + " tasks in the list.";
     }
 
     /**
      * Prints message when a task is marked as done.
      * @param task Task that is marked as done.
      */
-    public void printDoneTask(Task task) {
-        printLine(drawBorder("Nice! I've marked this task as done: \n" 
-                + "  " + task.toString()));
+    public String printDoneTask(Task task) {
+        return "Nice! I've marked this task as done: \n" 
+                + "  " + task.toString();
     }
 
     /**
@@ -64,34 +64,34 @@ public class Ui {
      * @param task Task that needs to be deleted.
      * @param lst List of tasks.
      */
-    public void printDeleteTask(Task task, TaskList lst) {
-        printLine(drawBorder("Noted. I've removed this task:\n" + "  " 
+    public String printDeleteTask(Task task, TaskList lst) {
+        return "Noted. I've removed this task:\n" + "  " 
                 + task.toString() + "\n" + "Now you have " 
-                + lst.getSize() + " tasks in the list."));
+                + lst.getSize() + " tasks in the list.";
     }
 
     /**
      * Prints the full list of tasks.
      * @param lst List of tasks.
      */
-    public void printTaskList(TaskList lst) {
-        printLine(drawBorder( "Here are the tasks in your list:\n" + lst.toString()));
+    public String printTaskList(TaskList lst) { 
+        return "Here are the tasks in your list:\n" + lst.toString();
     }
 
    /**
      * Prints error messages.
      * @param err Error message.
      */
-    public void showError(String err) {
-        printLine(drawBorder(err));
+    public String showError(String err) {
+        return err;
     }
 
     /**
      * Prints matching tasks that contains the keyword entered by user.
      * @param lst List of tasks.
      */
-    public void printMatchingTasks(TaskList lst) {
-        printLine(drawBorder( "Here are the matching tasks in your list:\n" + lst.toString()));
+    public String printMatchingTasks(TaskList lst) {
+        return "Here are the matching tasks in your list:\n" + lst.toString();
 
     }
 }
