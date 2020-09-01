@@ -33,7 +33,7 @@ public class DoneCommand extends Command {
             Task currTask = currList.get(taskNumber - 1);
             if (currTask.getStatus()) {
                 // task has already marked done before
-                throw new DukeException("task.Task has already been completed earlier on!");
+                throw new DukeException("Task has already been completed earlier on!");
             } else {
                 return ui.completeTask(currTask);
             }
