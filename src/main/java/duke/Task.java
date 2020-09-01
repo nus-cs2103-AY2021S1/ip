@@ -2,7 +2,7 @@ package duke;
 
 public class Task {
     protected String name;
-    private boolean done;
+    private boolean isDone;
     private TaskType type;
 
     public Task(String name, TaskType type) {
@@ -16,7 +16,7 @@ public class Task {
     }
 
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     public TaskType getType() {
