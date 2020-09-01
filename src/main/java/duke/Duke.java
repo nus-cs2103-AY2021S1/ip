@@ -8,6 +8,8 @@ import exception.DukeErrorException;
 import exception.InvalidDeadlineException;
 import exception.InvalidEventException;
 import exception.InvalidTodoException;
+import ui.Ui;
+
 
 /**
  * Main class for the Duke application
@@ -41,74 +43,72 @@ public class Duke {
     }
 
     /**
-     * Main method to start the application
+     * Method to parse data.txt file
      */
-    public void start() {
-        ui.introduceDuke();
-        interact();
-        ui.sayFarewell();
-    }
-
-    /**
-     * A method to handle the logic of Duke Chatbot and interact with users
-     */
-    public void interact() {
-        String input;
+    public void putExistingTask() {
         try {
             storage.readFile(readSc, tl, ui, tasks, "data/duke.txt");
         } catch (FileNotFoundException | NullPointerException e) {
             System.out.println("Folder data not found! " + e);
         }
+    }
 
-        while (inputSc.hasNextLine()) {
-            input = inputSc.nextLine();
-            String[] splitted = input.split(" ", 2);
-            Commands command;
+    /**
+     * Get the suitable response from Duke Chatbot
+     */
+    public String getResponse(String input) {
+        return interact(input);
+    }
+
+    /**
+     * A method to handle the logic of Duke Chatbot and interact with users
+     */
+    public String interact(String input) {
+        String[] splitted = input.split(" ", 2);
+        Commands command;
+        try {
+            command = parser.processCommand(splitted);
+        } catch (DukeErrorException ex) {
+            return ex.toString();
+        }
+
+        if (command.equals(Commands.BYE)) {
+            storage.writeFile(tasks);
+            return ui.sayFarewell();
+        } else if (command.equals(Commands.LIST)) {
+            return ui.printList(tasks);
+        } else if (command.equals(Commands.DONE)) {
             try {
-                command = parser.processCommand(splitted);
-            } catch (DukeErrorException ex) {
-                System.out.println(ex);
-                continue;
+                return tl.makeDone(tasks, Integer.parseInt(splitted[1]) - 1);
+            } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
+                return ex.toString();
             }
-
-            if (command.equals(Commands.BYE)) {
-                storage.writeFile(tasks);
-                break;
-            } else if (command.equals(Commands.LIST)) {
-                ui.printList(tasks);
-            } else if (command.equals(Commands.DONE)) {
-                try {
-                    tl.makeDone(tasks, Integer.parseInt(splitted[1]) - 1);
-                } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
-                    System.out.println(ex);
-                }
-            } else if (command.equals(Commands.DELETE)) {
-                try {
-                    tl.deleteTask(tasks, Integer.parseInt(splitted[1]) - 1);
-                } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
-                    System.out.println(ex);
-                }
-            } else if (command.equals(Commands.DEADLINE)) {
-                try {
-                    tl.addDeadline(ui, tasks, splitted[1], true, false);
-                } catch (ArrayIndexOutOfBoundsException | InvalidDeadlineException ex) {
-                    System.out.println(ex + ". ☹ Task deadline must be specified.");
-                }
-            } else if (command.equals(Commands.TODO)) {
-                try {
-                    tl.addTodo(ui, tasks, splitted[1], true, false);
-                } catch (ArrayIndexOutOfBoundsException | InvalidTodoException ex) {
-                    System.out.println(ex + ". ☹ The description of a todo cannot be empty.");
-                }
-            } else if (command.equals(Commands.EVENT)) {
-                try {
-                    tl.addEvent(ui, tasks, splitted[1], true, false);
-                } catch (ArrayIndexOutOfBoundsException | InvalidEventException ex) {
-                    System.out.println(ex + ". ☹ The description of an event cannot be empty.");
-                }
-            } else {
-                ui.printList(tl.findTask(tasks, splitted[1]));
+        } else if (command.equals(Commands.DELETE)) {
+            try {
+                return tl.deleteTask(tasks, Integer.parseInt(splitted[1]) - 1);
+            } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
+                return ex.toString();
             }
+        } else if (command.equals(Commands.DEADLINE)) {
+            try {
+                return tl.addDeadline(ui, tasks, splitted[1], true, false);
+            } catch (ArrayIndexOutOfBoundsException | InvalidDeadlineException ex) {
+                return ex + ". ☹ Task deadline must be specified.";
+            }
+        } else if (command.equals(Commands.TODO)) {
+            try {
+                return tl.addTodo(ui, tasks, splitted[1], true, false);
+            } catch (ArrayIndexOutOfBoundsException | InvalidTodoException ex) {
+                return ex + ". ☹ The description of a todo cannot be empty.";
+            }
+        } else if (command.equals(Commands.EVENT)) {
+            try {
+                return tl.addEvent(ui, tasks, splitted[1], true, false);
+            } catch (ArrayIndexOutOfBoundsException | InvalidEventException ex) {
+                return ex + ". ☹ The description of an event cannot be empty.";
+            }
+        } else {
+            return ui.printList(tl.findTask(tasks, splitted[1]));
         }
     }
 }

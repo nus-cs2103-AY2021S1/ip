@@ -10,8 +10,9 @@ import java.util.Scanner;
 import exception.InvalidDeadlineException;
 import exception.InvalidEventException;
 import exception.InvalidTodoException;
+import ui.Ui;
 
-class Storage {
+public class Storage {
 
     /**
      * Write the content of the list into a file
@@ -69,7 +70,7 @@ class Storage {
      * @param list The task list
      * @param filePath The file path (destination)
      */
-    public void readFile(Scanner readSc, TaskList tl, Ui ui, ArrayList<Task> list, String filePath)
+    public String readFile(Scanner readSc, TaskList tl, Ui ui, ArrayList<Task> list, String filePath)
             throws FileNotFoundException, NullPointerException {
         File f = new File(filePath);
         readSc = new Scanner(f);
@@ -85,7 +86,7 @@ class Storage {
                         tl.addTodo(ui, list, curr.split(" ", 2)[1], false, true);
                     }
                 } catch (InvalidTodoException e) {
-                    System.out.println(e);
+                    return e.toString();
                 }
                 break;
             case 'D':
@@ -96,7 +97,7 @@ class Storage {
                         tl.addDeadline(ui, list, curr.split(" ", 2)[1], false, true);
                     }
                 } catch (InvalidDeadlineException e) {
-                    System.out.println(e);
+                    return e.toString();
                 }
                 break;
             case 'E':
@@ -107,12 +108,13 @@ class Storage {
                         tl.addEvent(ui, list, curr.split(" ", 2)[1], false, true);
                     }
                 } catch (InvalidEventException e) {
-                    System.out.println(e);
+                    return e.toString();
                 }
                 break;
             default:
-                System.out.println("Unknown task");
+                return "Unknown task";
             }
         }
+        return null;
     }
 }
