@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.storage.Storage;
 import duke.storage.StorageException;
 import duke.task.InvalidTaskIndexException;
@@ -22,8 +24,13 @@ public class CompleteCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Storage storage) throws InvalidTaskIndexException, StorageException {
-        Task completedTask = taskList.completeTask(args);
+        List<Task> completedTasks = taskList.completeTasks(args.trim().split(" "));
         storage.save(taskList);
-        return "Neat! Marking this as complete:\n" + args + ". " + completedTask.toString();
+
+        StringBuilder string = new StringBuilder("Neat! Marking these as complete:");
+        for (Task task : completedTasks) {
+            string.append("\n").append(task.toString());
+        }
+        return string.toString();
     }
 }

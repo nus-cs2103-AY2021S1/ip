@@ -13,7 +13,6 @@ import java.util.Scanner;
 
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
 import duke.task.TaskException;
 import duke.task.TaskList;
 import duke.task.TaskType;
@@ -127,7 +126,7 @@ public class Storage {
             Writer out = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(file), StandardCharsets.UTF_8));
             try {
-                out.write(getStorageString(taskList).toString());
+                out.write(taskList.getStorageDocument());
             } finally {
                 out.close();
             }
@@ -138,27 +137,5 @@ public class Storage {
         }
 
         return file;
-    }
-
-    /**
-     * Iterates through the given taskList to get each storage representation.
-     *
-     * @param taskList TaskList to iterate over.
-     * @return StringBuilder with the storage representations separated by \n.
-     * @throws TaskTypeDecodeException If the task cannot be properly represented in storage.
-     */
-    private StringBuilder getStorageString(TaskList taskList) throws TaskTypeDecodeException {
-        StringBuilder string = new StringBuilder();
-        boolean isFirst = true;
-        for (Task task : taskList.getTaskList()) {
-            String taskStorageString = TaskType.appendIdentifier(task.toStorageString(), task.getTaskType());
-            if (isFirst) {
-                string.append(taskStorageString);
-                isFirst = false;
-            } else {
-                string.append("\n").append(taskStorageString);
-            }
-        }
-        return string;
     }
 }
