@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.UiForGui;
 import duke.exception.FindWrongFormatException;
 import duke.task.Event;
 import duke.task.Task;
@@ -28,6 +29,24 @@ public class FindCommand extends Command {
                 }
             }
             ui.showFoundTaskList(foundTasks, keyWords);
+        } catch (IndexOutOfBoundsException e) {
+            throw new FindWrongFormatException();
+        }
+    }
+
+    @Override
+    public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) throws FindWrongFormatException {
+        try {
+            String keyWords = fullCommand.substring(5);
+            TaskList foundTasks = new TaskList();
+            for (Task task : tasks.getTaskList()) {
+                if (task.getDescription().contains(keyWords)) {
+                    foundTasks.addTask(task);
+                } else if (task instanceof Event && ((Event) task).getAt().contains(keyWords)) {
+                    foundTasks.addTask(task);
+                }
+            }
+            return uiForGui.showFoundTaskList(foundTasks, keyWords);
         } catch (IndexOutOfBoundsException e) {
             throw new FindWrongFormatException();
         }

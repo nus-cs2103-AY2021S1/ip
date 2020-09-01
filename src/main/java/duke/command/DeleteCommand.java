@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.UiForGui;
 import duke.exception.DeleteWrongFormatException;
 import duke.exception.TaskIndexOutOfBoundsException;
 import duke.task.Task;
@@ -37,6 +38,7 @@ public class DeleteCommand extends Command {
      * @throws TaskIndexOutOfBoundsException If the index of the task specified by the user is not present in the task
      * list.
      */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DeleteWrongFormatException,
             TaskIndexOutOfBoundsException {
         try {
@@ -51,6 +53,31 @@ public class DeleteCommand extends Command {
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
+        } catch (NumberFormatException e) { // Second argument of
+            // command was not a number, e.g. "delete X"
+            throw new DeleteWrongFormatException();
+        } catch (IndexOutOfBoundsException e) { // User requests
+            // for a task with an index not within the current
+            // task list
+            throw new TaskIndexOutOfBoundsException(commandParts[1]);
+        }
+    }
+
+    @Override
+    public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) throws DeleteWrongFormatException,
+            TaskIndexOutOfBoundsException {
+        try {
+            if (commandParts.length != 2) { // If command is in a wrong format
+                throw new DeleteWrongFormatException();
+            }
+            int taskIndex = Integer.parseInt(commandParts[1]) - 1; // Index of task in the task list
+            Task removedTask = tasks.removeTask(taskIndex);
+            try {
+                storage.writeToFile(tasks);
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+            return uiForGui.showReplyForDeleteTask(removedTask, tasks);
         } catch (NumberFormatException e) { // Second argument of
             // command was not a number, e.g. "delete X"
             throw new DeleteWrongFormatException();

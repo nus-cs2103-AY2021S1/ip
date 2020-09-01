@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.UiForGui;
 import duke.exception.EventWrongFormatException;
 import duke.exception.WrongFormatException;
 import duke.task.Event;
@@ -48,6 +49,23 @@ public class AddEventCommand extends AddCommand {
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
+        } catch (IndexOutOfBoundsException | WrongFormatException e) { // add event command is in a wrong format
+            throw new EventWrongFormatException();
+        }
+    }
+
+    @Override
+    public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) throws EventWrongFormatException {
+        try {
+            String[] commandParts = fullCommand.split("/at");
+            Task newTask = new Event(commandParts[0].substring(6).trim(), commandParts[1].trim());
+            tasks.addTask(newTask);
+            try {
+                storage.writeToFile(tasks);
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+            return uiForGui.showReplyForAddTask(newTask, tasks);
         } catch (IndexOutOfBoundsException | WrongFormatException e) { // add event command is in a wrong format
             throw new EventWrongFormatException();
         }
