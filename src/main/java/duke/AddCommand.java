@@ -25,12 +25,12 @@ public class AddCommand extends Command {
      * @param ui a user interface in charge of Duke's I/O.
      * @param storage a storage system that handles .txt file manipulation.
      */
-    public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         Task task = list.addTask(command, input);
         String output = "Got it. I've added this task: \n";
         output += task;
         output += "\nNow you have " + list.size() + " tasks in the list.";
         storage.updateTextFile(list);
-        ui.printLine(output);
+        return output;
     }
 }

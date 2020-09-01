@@ -21,5 +21,5 @@ public abstract class Command {
      * @param ui a user interface in charge of Duke's I/O.
      * @param storage a storage system that handles .txt file manipulation.
      */
-    public abstract void execute(TaskList list, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList list, Ui ui, Storage storage) throws DukeException;
 }
