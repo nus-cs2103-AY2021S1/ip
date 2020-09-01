@@ -1,7 +1,6 @@
 package duke.parser;
 
 import duke.command.Command;
-import duke.command.InvalidCommand;
 import duke.task.Task;
 
 import java.util.List;
@@ -19,8 +18,10 @@ public class Parser {
      * @param taskList The taskList which the Duke Command will execute on
      * @param input The raw user input
      * @return The corresponding Command, or InvalidCommand if input cannot be parsed
+     * @throws DukeParserException if the input cannot be parsed. Details about the error can be
+     * retrieved by the Throwable.getMessage() method
      */
-    public static Command parse(List<Task> taskList, String input) {
+    public static Command parse(List<Task> taskList, String input) throws DukeParserException {
 
         // Match the input pattern
         Pattern pattern = Pattern.compile("^\\s*(\\S+)\\s*(.*)$");
@@ -28,7 +29,7 @@ public class Parser {
 
         // No input received
         if (!matcher.matches()) {
-            return new InvalidCommand("Empty input!");
+            throw new DukeParserException("Empty input!");
         }
 
         // Extract commandType and commandParameter
@@ -39,7 +40,7 @@ public class Parser {
             // Generate duke.command with commandType and commandParameter
             return CommandFactory.valueOf(commandType).generate(taskList, commandParam);
         } catch (IllegalArgumentException e) {
-            return new InvalidCommand();
+            throw new DukeParserException("Unrecognised Command!");
         }
     }
 

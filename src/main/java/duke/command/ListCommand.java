@@ -3,7 +3,6 @@ package duke.command;
 import duke.task.Task;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * List all items in taskList
@@ -35,10 +34,10 @@ public class ListCommand implements Command {
 
         // Case 2: taskList is not empty
         // Iterate and print all items in taskList
-        AtomicInteger index = new AtomicInteger(0);
-        taskList.stream()
-                .map((task) -> index.incrementAndGet() + ". " + task.toString())
-                .forEach(System.out::println);
+        int index = 0;
+        for (Task task : taskList) {
+            System.out.println(++index + ". " + task.toString());
+        }
 
     }
 

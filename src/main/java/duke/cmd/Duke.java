@@ -2,6 +2,7 @@ package duke.cmd;
 
 import duke.command.Command;
 import duke.command.ExitCommand;
+import duke.parser.DukeParserException;
 import duke.parser.Parser;
 import duke.task.Task;
 
@@ -46,6 +47,7 @@ public class Duke {
 
         // Loop until 'bye' input received
         while (true) {
+            Command command;
 
             // Prompt for input
             String input = scanner.nextLine();
@@ -53,8 +55,13 @@ public class Duke {
                 continue;
             }
 
-            // Parse command
-            Command command = Parser.parse(taskList, input);
+            try {
+                // Attempt to parse input
+                command = Parser.parse(taskList, input);
+            } catch (DukeParserException e) {
+                System.out.println(e.getMessage());
+                continue;
+            }
 
             // Check for exit command
             if (command instanceof ExitCommand) {
@@ -63,6 +70,7 @@ public class Duke {
 
             // Execute command
             command.execute();
+
         }
 
         // Print ending greetings

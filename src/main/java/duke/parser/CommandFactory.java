@@ -7,7 +7,6 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
-import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.LoadCommand;
 import duke.command.SaveCommand;
@@ -58,9 +57,9 @@ public enum CommandFactory {
                 Task task = taskList.get(index);
                 return new DoneCommand(task);
             } catch (NumberFormatException e) {
-                return new InvalidCommand("Format: done {index}");
+                throw new DukeParserException("Format: done {index}");
             } catch (IndexOutOfBoundsException e) {
-                return new InvalidCommand("Index Error: done {index}");
+                throw new DukeParserException("Index Error: done {index}");
             }
         }
     },
@@ -74,9 +73,9 @@ public enum CommandFactory {
                 Task task = taskList.get(index);
                 return new DeleteCommand(taskList, task);
             } catch (NumberFormatException e) {
-                return new InvalidCommand("Format: delete {index}");
+                throw new DukeParserException("Format: delete {index}");
             } catch (IndexOutOfBoundsException e) {
-                return new InvalidCommand("Index Error: delete {index}");
+                throw new DukeParserException("Index Error: delete {index}");
             }
         }
     },
@@ -85,7 +84,7 @@ public enum CommandFactory {
         @Override
         public Command generate(List<Task> taskList, String commandParam) {
             if (commandParam.isBlank()) {
-                return new InvalidCommand("Format: todo {description}");
+                throw new DukeParserException("Format: todo {description}");
             }
 
             // Generate an AddCommand which when executed, adds
@@ -98,6 +97,8 @@ public enum CommandFactory {
     DEADLINE {
         @Override
         public Command generate(List<Task> taskList, String commandParam) {
+            String usage = "deadline {description} /by {ddMMyyyy HHmm}";
+
             // Regex to obtain param1 and param2 in Deadline(description, deadline)
             // param1: Description (String class)
             // param2: Deadline (DukeDateTime class)
@@ -106,7 +107,7 @@ public enum CommandFactory {
 
             // Ensure that both param1 and param2 exists
             if (!matcher.matches() || matcher.group(1).isBlank() || matcher.group(2).isBlank()) {
-                return new InvalidCommand("Format: deadline {description} /by {ddMMyyyy HHmm}");
+                throw new DukeParserException("Format: " + usage);
             }
 
             try {
@@ -117,7 +118,7 @@ public enum CommandFactory {
                 );
                 return new AddCommand(taskList, task);
             } catch (DateTimeParseException e) {
-                return new InvalidCommand("DateTime Error: deadline {description} /by {ddMMyyyy HHmm}");
+                throw new DukeParserException("DateTime Error: " + usage);
             }
         }
     },
@@ -125,6 +126,8 @@ public enum CommandFactory {
     EVENT {
         @Override
         public Command generate(List<Task> taskList, String commandParam) {
+            String usage = "event {description} /from {ddMMyyyy HHmm} /till {ddMMyyyy HHmm}";
+
             // Regex to obtain param1, param2 and param3 in Event(description, start, end)
             // param1: Description (String class)
             // param2: start (DukeDateTime class)
@@ -137,7 +140,7 @@ public enum CommandFactory {
                     || matcher.group(1).isBlank()
                     || matcher.group(2).isBlank()
                     || matcher.group(3).isBlank()) {
-                return new InvalidCommand("Format: event {description} /from {ddMMyyyy HHmm} /till {ddMMyyyy HHmm}");
+                throw new DukeParserException("Format: " + usage);
             }
 
             try {
@@ -148,8 +151,7 @@ public enum CommandFactory {
                         new DukeDateTime(matcher.group(3).trim()));
                 return new AddCommand(taskList, task);
             } catch (DateTimeParseException e) {
-                return new InvalidCommand("DateTime Error: "
-                        + "event {description} /from {ddMMyyyy HHmm} /till {ddMMyyyy HHmm}");
+                throw new DukeParserException("DateTime Error: " + usage);
             }
         }
     },
@@ -158,7 +160,7 @@ public enum CommandFactory {
         @Override
         public Command generate(List<Task> taskList, String commandParam) {
             if (commandParam.isBlank()) {
-                return new InvalidCommand("Format: save {filepath}");
+                throw new DukeParserException("Format: save {filepath}");
             }
 
             // Generate a SaveCommand which when executed, saves the taskList into specified file path
@@ -170,7 +172,7 @@ public enum CommandFactory {
         @Override
         public Command generate(List<Task> taskList, String commandParam) {
             if (commandParam.isBlank()) {
-                return new InvalidCommand("Format: load {filepath}");
+                throw new DukeParserException("Format: load {filepath}");
             }
 
             // Generate a LoadCommand which when executed, loads data from specified file path into taskList
@@ -182,7 +184,7 @@ public enum CommandFactory {
         @Override
         public Command generate(List<Task> taskList, String commandParam) {
             if (commandParam.isBlank()) {
-                return new InvalidCommand("Format: find {keyword}");
+                throw new DukeParserException("Format: find {keyword}");
             }
 
             // Generate a FindCommand which when executed, search for all instance of searchString in taskList
@@ -195,6 +197,9 @@ public enum CommandFactory {
      * @param taskList The taskList which Command will execute on
      * @param commandParam Command parameters needed to construct the Command (As required)
      * @return A Command which executes on the taskList
+     * @throws DukeParserException if the input cannot be parsed. Details about the error can be
+     * retrieved by the Throwable.getMessage() method
      */
-    public abstract Command generate(List<Task> taskList, String commandParam);
+    public abstract Command generate(List<Task> taskList, String commandParam) throws DukeParserException;
+
 }

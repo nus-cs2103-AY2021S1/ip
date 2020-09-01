@@ -6,7 +6,6 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
-import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.LoadCommand;
 import duke.command.SaveCommand;
@@ -18,12 +17,13 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParserTest {
 
-    private List<Task> taskList = new ArrayList<>(5);
-    private Task dummy = new ToDo("Dummy Task");
+    private final List<Task> taskList = new ArrayList<>(5);
+    private final Task dummy = new ToDo("Dummy Task");
 
     @BeforeEach
     void init() {
@@ -48,23 +48,17 @@ class ParserTest {
     }
 
     @Test
-    void parse_addCommand_failure() {
-        String input;
+    void parse_addCommand_exceptionThrown() {
 
-        input = "todo";
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "todo"));
 
-        input = "deadline";
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "deadline"));
 
-        input = "deadline hello";
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "deadline hello"));
 
-        input = "event";
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "event"));
 
-        input = "event greeting";
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "event greeting"));
     }
 
     @Test
@@ -74,20 +68,19 @@ class ParserTest {
     }
 
     @Test
-    void parse_deleteCommand_failure() {
-        String input;
+    void parse_deleteCommand_exceptionThrown() {
 
-        input = "delete";
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        // Missing required argument
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "delete"));
 
-        input = "delete nothing";
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        // NumberFormatException -> DukeParserException
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "delete nothing"));
 
-        input = "delete 5"; // Index out of range
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        // Index out of range
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "delete 5"));
 
-        input = "delete 100"; // Index out of range
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        // Index out of range
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "delete 100"));
     }
 
     @Test
@@ -97,20 +90,19 @@ class ParserTest {
     }
 
     @Test
-    void parse_doneCommand_failure() {
-        String input;
+    void parse_doneCommand_exceptionThrown() {
 
-        input = "done";
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        // Missing required argument
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "done"));
 
-        input = "done nothing";
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        // NumberFormatException -> DukeParserException
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "done nothing"));
 
-        input = "done 5"; // Index out of range
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        // Index out of range
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "done 5"));
 
-        input = "done 100"; // Index out of range
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        // Index out of range
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "done 100"));
     }
 
     @Test
@@ -140,17 +132,13 @@ class ParserTest {
     }
 
     @Test
-    void parse_invalidCommand_success() {
-        String input;
+    void parse_invalidCommand_exceptionThrown() {
 
-        input = "";
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, ""));
 
-        input = "invalid";
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "invalid"));
 
-        input = "invalid two";
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "invalid second"));
     }
 
     @Test
@@ -166,9 +154,8 @@ class ParserTest {
     }
 
     @Test
-    void parse_loadCommand_failure() {
-        String input = "load";
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+    void parse_loadCommand_exceptionThrown() {
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "load"));
     }
 
     @Test
@@ -178,9 +165,8 @@ class ParserTest {
     }
 
     @Test
-    void parse_saveCommand_failure() {
-        String input = "save";
-        assertTrue(Parser.parse(taskList, input) instanceof InvalidCommand);
+    void parse_saveCommand_exceptionThrown() {
+        assertThrows(DukeParserException.class, () -> Parser.parse(taskList, "save"));
     }
 
 }
