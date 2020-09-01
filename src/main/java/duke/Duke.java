@@ -6,7 +6,7 @@ public class Duke {
     private final Ui ui;
     private final Parser parser;
     private boolean hasExited;
-    String dest;
+    private String dest;
 
     /**
      * Constructor with specified directory of database.

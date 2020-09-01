@@ -114,20 +114,20 @@ public class Parser {
      * @return A PARSER_RESULT value.
      * @throws IllegalArgumentException Unrecognizable command.
      */
-    public parserResult parseInput(String input) throws IllegalArgumentException {
+    public ParserResult parseInput(String input) throws IllegalArgumentException {
         input = input.trim();
         if (isBye(input)) {
-            return parserResult.BYE;
+            return ParserResult.BYE;
         } else if (isDelete(input)) {
-            return parserResult.DELETE;
+            return ParserResult.DELETE;
         } else if (isDone(input)) {
-            return parserResult.DONE;
+            return ParserResult.DONE;
         } else if (isList(input)) {
-            return parserResult.LIST;
+            return ParserResult.LIST;
         } else if (isFind(input)) {
-            return parserResult.FIND;
+            return ParserResult.FIND;
         } else if (isTask(input)) {
-            return parserResult.ADD;
+            return ParserResult.ADD;
         } else {
             throw new IllegalArgumentException("Unrecognizable command.");
         }

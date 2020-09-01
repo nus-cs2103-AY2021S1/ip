@@ -3,7 +3,7 @@ package duke;
 /**
  * Results of Parser parsing an input.
  */
-public enum parserResult {
+public enum ParserResult {
     BYE,
     LIST,
     DONE,
