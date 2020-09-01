@@ -30,51 +30,44 @@ public class TaskList {
     /**
      * Read commands by user and execute associated action.
      *
-     * @param sc Scanner that listens to user input.
      * @param arr Array of words in user input.
      */
-    public void readCommands(Scanner sc, String[] arr) {
-        switch (arr[0]) {
-        case "bye":
-            sc.close();
-            new Exit(tasks).closeDuke(storage);
-            break;
-        case "list":
-            new ShowTasks(tasks).showTasks();
-            break;
-        case "done":
-            ManageTask doneTaskCommand = new ManageTask(tasks);
-            doneTaskCommand.manageTask(ManageTask.Action.DONE, arr[1]);
-            break;
-        case "delete":
-            ManageTask deleteTaskCommand = new ManageTask(tasks);
-            deleteTaskCommand.manageTask(ManageTask.Action.DELETE, arr[1]);
-            break;
-        case "help":
-            new Help(tasks).getCommands();
-            break;
-        case "deadline":
-            AddTask addDeadlineCommand = new AddTask(tasks);
-            addDeadlineCommand.addTask(AddTask.Type.DEADLINE, arr);
-            break;
-        case "event":
-            AddTask addEventCommand = new AddTask(tasks);
-            addEventCommand.addTask(AddTask.Type.EVENT, arr);
-            break;
-        case "todo":
-            AddTask addTodoCommand = new AddTask(tasks);
-            addTodoCommand.addTask(AddTask.Type.TODO, arr);
-            break;
-        case "find":
-            new FindTask(tasks).findTask(arr);
-            break;
-        case "date":
-            new FindTaskByDate(tasks).findTaskByDate(arr);
-            break;
-        default:
-            DukeException e = new DukeException("I do not understand your command");
-            layout.print(e.getMessage());
+    public String readCommands(String[] arr) {
+        try {
+            switch (arr[0]) {
+            case "bye":
+                return new Exit(tasks).closeDuke(storage);
+            case "list":
+                return new ShowTasks(tasks).showTasks();
+            case "done":
+                ManageTask doneTaskCommand = new ManageTask(tasks);
+                return doneTaskCommand.manageTask(ManageTask.Action.DONE, arr[1]);
+            case "delete":
+                ManageTask deleteTaskCommand = new ManageTask(tasks);
+                return deleteTaskCommand.manageTask(ManageTask.Action.DELETE, arr[1]);
+            case "help":
+                return new Help(tasks).getCommands();
+            case "deadline":
+                AddTask addDeadlineCommand = new AddTask(tasks);
+                return addDeadlineCommand.addTask(AddTask.Type.DEADLINE, arr);
+            case "event":
+                AddTask addEventCommand = new AddTask(tasks);
+                return addEventCommand.addTask(AddTask.Type.EVENT, arr);
+            case "todo":
+                AddTask addTodoCommand = new AddTask(tasks);
+                return addTodoCommand.addTask(AddTask.Type.TODO, arr);
+            case "find":
+                return new FindTask(tasks).findTask(arr);
+            case "date":
+                return new FindTaskByDate(tasks).findTaskByDate(arr);
+            default:
+                DukeException e = new DukeException("I do not understand your command");
+                return layout.print(e.getMessage());
 
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            DukeException d = new DukeException("Please specify task number");
+            return layout.print(d.getMessage());
         }
     }
 

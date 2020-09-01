@@ -9,75 +9,52 @@ import java.util.ArrayList;
  */
 public class Layout {
 
-    public void printLine() {
-        String line = "\t";
-        for (int i = 0; i < 50; i++) {
-            line += "\u2500";
-        }
-        System.out.println(line);
+    public String print(String s) {
+        return s;
     }
 
-    public void print(String s) {
-        printLine();
-        System.out.println("\t" + s);
-        printLine();
-    }
-
-    public void printTaskList(boolean isFindCommand, ArrayList<Task> arr) {
-        printLine();
+    public String printTaskList(boolean isFindCommand, ArrayList<Task> arr) {
+        StringBuilder sb = new StringBuilder();
         if (arr.size() != 0) {
             if (isFindCommand) {
-                System.out.println("\tHere are the matching tasks in your list: ");
+                sb.append("Here are the matching tasks in your list: ");
             } else {
-                System.out.println("\tHere are the tasks in your list: ");   
+                sb.append("Here are the tasks in your list: ");   
             }
             for (int i = 0; i < arr.size(); i++) {
                 Task task = arr.get(i);
-                System.out.println("\t" + (i + 1) + "." + task.toString());
+                sb.append("\n" + (i + 1) + "." + task.toString());
             }
         } else {
-            System.out.println("\t No tasks");
+            sb.append("No tasks");
         }
-        printLine();
+        return sb.toString();
     }
     
     
 
-    public void printMarkedDone(Task task) {
-        printLine();
-        System.out.println("\tNice! I've marked this task as done: ");
-        System.out.println("\t\t" + task.toString());
-        printLine();
+    public String printMarkedDone(Task task) {
+        return "Nice! I've marked this task as done: " + "\n" + task.toString();
     }
     
-    public void printDeleted(Task task, int size) {
+    public String printDeleted(Task task, int size) {
         String str = size > 1 ? "tasks" : "duke/task";
-        printLine();
-        System.out.println("\tNoted. I've removed this task: ");
-        System.out.println("\t\t" + task.toString());
-        System.out.println("\tNow you have " + size + " " + str + " in the list.");
-        printLine();
+        return "Noted. I've removed this task: " + "\n" + task.toString() +
+                "\nNow you have " + size + " " + str + " in the list.";
     }
 
-    public void printAddedMessage(String description, int size) {
+    public String printAddedMessage(String description, int size) {
         String str = size > 1 ? "tasks" : "duke/task";
-        printLine();
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t\t" + description);
-        System.out.println("\tNow you have " + size + " " + str + " in the list.");
-        printLine();
+        return "Got it. I've added this task:" + "\n" + description +
+                "\nNow you have " + size + " " + str + " in the list.";
     }
     
-    public void printCommands(String [] arr) {
-        printLine();
+    public String printCommands(String [] arr) {
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < arr.length; i++) {
-            if (i != arr.length - 1) {
-                System.out.println("\t" + arr[i] + "\n");
-            } else {
-                System.out.println("\t" + arr[i]);
-            }
+            sb.append(i != arr.length - 1 ? arr[i] + "\n" : arr[i]);
         }
-        printLine();
+        return sb.toString();
     }
 
 }

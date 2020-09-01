@@ -11,7 +11,7 @@ public class FindTask extends Command {
         super(tasks);
     }
 
-    public void findTask(String [] arr) {
+    public String findTask(String [] arr) {
         String filterWord;
         try {
             filterWord = parser.getFilterWord(arr);
@@ -19,9 +19,9 @@ public class FindTask extends Command {
             shallowCopy.removeIf(task ->
                     !(task.containsWord(filterWord))
             );
-            layout.printTaskList(true, shallowCopy);
+            return layout.printTaskList(true, shallowCopy);
         } catch (DukeException e) {
-            layout.print(e.getMessage());
+            return layout.print(e.getMessage());
         }
     }
     

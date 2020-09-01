@@ -169,14 +169,21 @@ public class Parser {
         String [] splitArr = t.split("\\.");
 
         if (splitArr.length == 1) {
+            
             if (t.length() == 3) {
+                //Case: 7pm
                 return t.charAt(0) + ".00" + t.substring(1);
+            } else if(t.length() == 4 && Integer.valueOf(t.substring(0, 2)) < 13) {
+                //Case: 12am
+                return t.substring(0, 2) + ".00" + t.substring(2);
             } else if (t.length() == 5) {
+                //Case: 732pm 
                 return t.charAt(0) + "." + t.substring(1);
             } else if (t.length() == 6) {
+                //Case: 1159pm 
                 return t.substring(0, 2) + "." + t.substring(2);
             } else {
-                return t;
+                return null;
             }
         } else {
             if (splitArr[1].length() == 3) {

@@ -15,10 +15,10 @@ public class Exit extends Command {
      * Store task list in hard disk.
      * Exit process.
      */
-    public void closeDuke(Storage storage) {
+    public String closeDuke(Storage storage) {
         storage.writeFile(tasks);
-        layout.print("Bye. Hope to see you again soon!");
         System.exit(0);
+        return layout.print("Bye. Hope to see you again soon!");
     }
     
 }

@@ -13,7 +13,7 @@ public class Help extends Command {
     /**
      * Return all valid commands that Duke can execute.
      */
-    public void getCommands() {
+    public String getCommands() {
         String[] arr = new String[]{
                 "Here are all your commands:",
                 "list- list all tasks",
@@ -27,7 +27,7 @@ public class Help extends Command {
                 "find <one filter word> - finds task with specified word",
                 "bye - goodbye!"
         };
-        layout.printCommands(arr);
+        return layout.printCommands(arr);
     }
     
 }
