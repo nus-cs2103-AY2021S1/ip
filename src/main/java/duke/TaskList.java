@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasks;
     
+    /**
+     * Constructor for TaskList
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
@@ -17,6 +20,11 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * summarize prints out all tasks inside a TaskList object.
+     * @param
+     * @return String with all tasks
+     */
     public String summarize() {
         String all_tasks = "Here are the tasks in your list:\n";
         for (int i = 0; i < this.tasks.size(); i++) {
@@ -26,6 +34,12 @@ public class TaskList {
         return all_tasks;
     }
 
+    /**
+     * mark_done helps change the status of any Task inside TaskList, and mark
+     * it done.
+     * @param index index of task, counting from head of TaskList
+     * @return String to confirm marking done
+     */
     public String mark_done(int index) {
         if (!this.tasks.get(index).isDone()) {
             this.tasks.get(index).done();
@@ -35,6 +49,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * deleteTask helps remove any Task inside TaskList.
+     * @param index index of task, counting from head of TaskList
+     * @return String to confirm marking done
+     */
     public String deleteTask(int index) {
         if (tasks.size() <= index) {
             return "No such task\n";
@@ -44,13 +63,21 @@ public class TaskList {
         return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.\n", t.toString(), this.tasks.size());
     }
 
+    /**
+     * addTask appends a task to the bottom of the list.
+     * @param t Task object to be appended
+     * @return String to confirm appending done
+     */
     public String addTask(Task t) {
         tasks.add(t);
         return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", t.toString(), this.tasks.size());
     }
 
-
-
+    /**
+     * findTasksWith finds all tasks containing a specified keyword.
+     * @param keyword keyword to be searched in task names
+     * @return String with all tasks found
+     */
     public String findTasksWith(String keyword) {
         ArrayList<Task> matches = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
@@ -66,6 +93,13 @@ public class TaskList {
         return output_msg;
     }
 
+    /**
+     * matchName checks if a task name contains keyword and add it to an
+     * ArrayList of matched tasks
+     * @param t Task object examined
+     * @param keyword keyword to be searched for in names
+     * @param matches ArrayList of Task objects that matches description
+     */
     public static void matchName(Task t, String keyword, ArrayList<Task> matches) {
         if (t.containsKeyword(keyword)) {
             matches.add(t);

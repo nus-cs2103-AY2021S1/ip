@@ -1,6 +1,11 @@
 package duke;
 
 public class Parser {
+    /**
+     * categorize() place a task to its appropriate type based on String input
+     * @param input_parts an array of Strings derived from input
+     * @return corresponding TaskType object
+     */
     public static TaskType categorize(String[] input_parts) throws Exception {
         if (input_parts[0].compareTo("todo") == 0) {
             return TaskType.ToDo;
@@ -13,8 +18,12 @@ public class Parser {
         }
     }
 
-    // Can be used to get the details too
-    public static String extractTask(String[] input_parts) {
+    /**
+     * extractTask extract a task name from input_parts.
+     * @param input_parts array of strings derived from input
+     * @return task name
+     */
+    private static String extractTask(String[] input_parts) {
         String task = "";
         for (int i = 1; i < input_parts.length; i++) {
             task += input_parts[i] + " ";
@@ -22,7 +31,12 @@ public class Parser {
         return task.trim();
     }
 
-    public static String extractDetails(String[] input_parts) {
+    /**
+     * Extract details of deadline and event tasks from input.
+     * @param input_parts input in form of String array
+     * @return details of task
+     */
+    private static String extractDetails(String[] input_parts) {
         String task = "";
         for (int i = 0; i < input_parts.length; i++) {
             task += input_parts[i] + " ";
@@ -30,6 +44,11 @@ public class Parser {
         return task.trim();
     }
     
+    /**
+     * parseTask creates a Task object based on user input String.
+     * @param input String of user input
+     * @return corresponding Task object
+     */
     public static Task parseTask(String input) throws Exception { // catch duke exception from extractTask and categorize, throw to op()
         String[] parts = input.split(" ");
         TaskType type;
@@ -64,6 +83,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Series of is* methods help identify what operation is specified by the
+     * user.
+     * @param input user input, to be compared with the operation keyword
+     * @return boolean indicating whether it is some operation
+     */
+
     public static boolean isBye(String input) {
         return input.compareTo("bye") == 0;
     }
@@ -86,7 +112,12 @@ public class Parser {
     public static int getIndex(String input) {
         return Integer.parseInt(input.split(" ")[1]) - 1;
     }
-
+    
+    /**
+     * getKeyword obtains user's keyword that they wish to find in tasks
+     * @param input user input
+     * @return keyword as String
+     */
     public static String getKeyword(String input) {
         return input.split(" ")[1];
     }
