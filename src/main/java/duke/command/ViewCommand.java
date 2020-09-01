@@ -17,7 +17,6 @@ public class ViewCommand extends Command {
 
     /**
      * Creates a new view command with the specified date.
-     *
      * @param date The date on which you want to view the tasks for.
      */
     public ViewCommand(String date) {
@@ -26,7 +25,6 @@ public class ViewCommand extends Command {
 
     /**
      * View the tasks on the date in the specified task list.
-     *
      * @param tasks The task list the command is executed with.
      * @param storage The storage the command is executed with.
      * @return A command response that represents the result of completing a view command.

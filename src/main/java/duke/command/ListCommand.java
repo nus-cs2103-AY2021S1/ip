@@ -18,7 +18,6 @@ public class ListCommand extends Command {
 
     /**
      * Lists out all the tasks in the specified task list.
-     *
      * @param tasks The task list the command is executed with.
      * @param storage The storage the command is executed with.
      * @return A command response that represents the result of completing a command to list out all the tasks

@@ -7,14 +7,11 @@ import duke.command.CommandResponse;
  * Represents a Personal Assistant Chatbot that helps a person to keep track of various tasks.
  */
 public class Duke {
-    /** The storage to handle saving and loading tasks. */
     private Storage storage;
-    /** The list of tasks. */
     private TaskList tasks;
 
     /**
      * Creates a new Duke Chatbot that saves and loads tasks from the given filepath.
-     *
      * @param filePath The file path to load tasks from and save tasks to.
      */
     public Duke(String filePath) {
@@ -29,7 +26,6 @@ public class Duke {
 
     /**
      * Generates a response to user input.
-     *
      * @param input The string input from the user.
      * @return The command response to the user input.
      */

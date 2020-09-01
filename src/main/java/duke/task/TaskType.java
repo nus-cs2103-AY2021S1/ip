@@ -16,7 +16,6 @@ public enum TaskType {
 
     /**
      * Gets the short form string representation of the task type.
-     *
      * @return The short form string representation of the task type.
      */
     public String getShortForm() {

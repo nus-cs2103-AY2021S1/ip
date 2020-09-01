@@ -12,7 +12,6 @@ public class Deadline extends Task {
 
     /**
      * Creates a new Deadline with the specified description and specified deadline date.
-     *
      * @param description The description of the deadline.
      * @param by The date by which the task must be done.
      */
@@ -23,7 +22,6 @@ public class Deadline extends Task {
 
     /**
      * Gets the date by which this task must be done.
-     *
      * @return The date by which this task must be done.
      */
     public LocalDate getBy() {
@@ -32,7 +30,6 @@ public class Deadline extends Task {
 
     /**
      * Returns a string representation of this deadline.
-     *
      * @return A string representation of this deadline.
      */
     @Override

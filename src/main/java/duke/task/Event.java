@@ -12,7 +12,6 @@ public class Event extends Task {
 
     /**
      * Creates a new Event with the specified description and specified event date.
-     *
      * @param description The description of the event.
      * @param at The date at which the event occurs.
      */
@@ -23,7 +22,6 @@ public class Event extends Task {
 
     /**
      * Gets the date at which this task occurs.
-     *
      * @return The date at which this task occurs.
      */
     public LocalDate getAt() {
@@ -32,7 +30,6 @@ public class Event extends Task {
 
     /**
      * Returns a string representation of this event.
-     *
      * @return A string representation of this event.
      */
     @Override

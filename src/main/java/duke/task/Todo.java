@@ -7,7 +7,6 @@ public class Todo extends Task {
 
     /**
      * Creates a new Todo with the specified description.
-     *
      * @param description The description of the todo.
      */
     public Todo(String description) {
@@ -16,7 +15,6 @@ public class Todo extends Task {
 
     /**
      * Returns a string representation of this todo.
-     *
      * @return A string representation of this todo.
      */
     @Override
