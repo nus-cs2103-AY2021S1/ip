@@ -15,7 +15,7 @@ public class Ui {
     /**
      * Prints the welcome message.
      */
-    public String welcomeMessage() {
+    public static String welcomeMessage() {
         String intro = "Hello, I am Doraemon! I can help you remember and keep track of your tasks.\n"
                 + "I assume that you are as forgetful as Nobita. Remember to bribe me with loads of Dorayaki too!";
         return intro;
@@ -24,7 +24,7 @@ public class Ui {
     /**
      * Prints the goodbye message.
      */
-    public String byeMessage() {
+    public static String byeMessage() {
         String bye = "Goodbye, I need to find my sister now! >_<";
         return bye;
     }
