@@ -7,7 +7,7 @@ import duke.exception.DukeException;
 
 public class FindCommand extends Command {
 
-    String word;
+    private String word;
 
     public FindCommand(String word) {
         this.word = word;

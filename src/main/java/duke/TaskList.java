@@ -1,8 +1,9 @@
 package duke;
-import duke.exception.DukeException;
-import duke.task.Task;
 
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
+import duke.task.Task;
 
 /**
  * Encapsulate the TaskList class which deals with the tasks in Duke
@@ -33,7 +34,7 @@ public class TaskList {
      */
     public Task removeATask(int ind) throws DukeException {
         if (ind < 0 || ind >= tasks.size()) {
-            throw new DukeException("Task "+ ind +" does not exist!");
+            throw new DukeException("Task " + ind + " does not exist!");
         }
         return tasks.remove(ind);
     }
@@ -46,7 +47,7 @@ public class TaskList {
      */
     public Task completeTask(int ind) throws DukeException {
         if (ind < 0 || ind >= tasks.size()) {
-            throw new DukeException("Task "+ ind +" does not exist!");
+            throw new DukeException("Task " + ind + " does not exist!");
         }
         Task t = tasks.get(ind);
         t.completeTask();
@@ -71,7 +72,7 @@ public class TaskList {
 
     /**
      * Returns a string that represents all the tasks that fulfills the keyword
-     * @param Keyword Keyword
+     * @param keyword Keyword
      * @return String that represents all the tasks that satisfies the keyword
      */
     public String printTasksWithKeyword(String keyword) {
@@ -87,7 +88,7 @@ public class TaskList {
     private String printOutTasks(ArrayList<Task> tasks) {
         StringBuilder str = new StringBuilder();
         int i = 0;
-        for(Task task : tasks){
+        for (Task task : tasks) {
             str.append(String.format("%d.%s", ++i, task));
             if (i != tasks.size()) {
                 str.append("\n");

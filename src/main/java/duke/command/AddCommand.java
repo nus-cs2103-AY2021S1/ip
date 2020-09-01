@@ -8,6 +8,10 @@ import duke.task.Task;
 public class AddCommand extends Command {
     private Task taskToAdd;
 
+    /**
+     * Constructs a new add task
+     * @param task given task to be added
+     */
     public AddCommand(Task task) {
         super();
         this.taskToAdd = task;

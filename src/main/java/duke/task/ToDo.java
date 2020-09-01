@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Encapsulates the todo class
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * Creates a new todo

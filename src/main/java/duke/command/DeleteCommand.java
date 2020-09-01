@@ -7,7 +7,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 public class DeleteCommand extends Command {
-    int deleteIndex;
+    private int deleteIndex;
 
     public DeleteCommand(int taskDone) {
         this.deleteIndex = taskDone;

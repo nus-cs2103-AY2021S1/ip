@@ -1,17 +1,17 @@
 package duke;
 
-import duke.exception.DukeFileException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
+
+import duke.exception.DukeFileException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Encapsulates the storage class
@@ -36,16 +36,16 @@ public class Storage {
      */
     public TaskList writeData(TaskList taskList) throws DukeFileException {
         if (taskList != null) {
-            try{
+            try {
                 FileWriter writer = new FileWriter(filePath);
                 StringBuilder str = new StringBuilder();
                 for (Task task : taskList.getTasks()) {
                     str.append(task.toFileString());
                     str.append("\n");
                 }
-                    writer.write(str.toString());
-                    writer.flush();
-                    writer.close();
+                writer.write(str.toString());
+                writer.flush();
+                writer.close();
             } catch (IOException e) {
                 throw new DukeFileException();
             }

@@ -8,7 +8,7 @@ import duke.task.Task;
 
 public class DoneCommand extends Command {
 
-    int taskDone;
+    private int taskDone;
 
     public DoneCommand(int taskDone) {
         this.taskDone = taskDone;

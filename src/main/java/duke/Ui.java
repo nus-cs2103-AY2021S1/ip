@@ -1,8 +1,8 @@
 package duke;
 
-import duke.exception.DukeException;
-
 import java.util.Scanner;
+
+import duke.exception.DukeException;
 
 /**
  * Encapsulates the UI class

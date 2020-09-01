@@ -1,6 +1,17 @@
 package duke;
 
-import duke.command.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.exception.EmptyCommandException;
 import duke.exception.InvalidCommandException;
@@ -9,11 +20,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 
 /**
  * Encapsulates the logic for the parser class
@@ -28,12 +34,12 @@ public class Parser {
      */
     public static Command parse(String command) throws DukeException {
         ArrayList<String> tokens = new ArrayList<String>(Arrays.asList(command.split(" ")));
-        if (tokens.size()==0 || tokens.get(0).equals("")) {
+        if (tokens.size() == 0 || tokens.get(0).equals("")) {
             throw new EmptyCommandException();
         }
         String cmd = tokens.get(0);
 
-        if (cmd.equals("bye")){
+        if (cmd.equals("bye")) {
             return new ExitCommand();
         } else if (cmd.equals("done") || cmd.equals("delete")) {
             if (tokens.size() < 2) {
@@ -42,8 +48,8 @@ public class Parser {
             int ind;
             try {
                 ind = Integer.parseInt(tokens.get(1)) - 1;
-            } catch(Exception ex) {
-                throw new InvalidCommandException(tokens.get(1)+" is not a number!");
+            } catch (Exception ex) {
+                throw new InvalidCommandException(tokens.get(1) + " is not a number!");
             }
             if (cmd.equals("done")) {
                 return new DoneCommand(ind);
@@ -69,7 +75,7 @@ public class Parser {
                 toAdd = new ToDo(stringCombiner(tokens, 1, tokens.size()));
             } else if (cmd.equals("deadline")) {
                 int ind = 0;
-                boolean found= false;
+                boolean found = false;
                 while (!found && ind < tokens.size() - 1) {
                     ind++;
                     if (tokens.get(ind).equals("/by")) {
@@ -87,15 +93,15 @@ public class Parser {
                 }
                 Date date;
                 try {
-                    date = readformatter.parse(stringCombiner(tokens,ind + 1, tokens.size()));
+                    date = readformatter.parse(stringCombiner(tokens, ind + 1, tokens.size()));
                 } catch (Exception ex) {
                     throw new InvalidCommandException("Provide a proper date and time!");
                 }
 
-                toAdd =  new Deadline(stringCombiner(tokens, 1, ind), date);
+                toAdd = new Deadline(stringCombiner(tokens, 1, ind), date);
             } else {
                 int ind = 0;
-                boolean found= false;
+                boolean found = false;
                 while (!found && ind < tokens.size() - 1) {
                     ind++;
                     if (tokens.get(ind).equals("/at")) {
@@ -113,11 +119,11 @@ public class Parser {
                 }
                 Date date;
                 try {
-                    date = readformatter.parse(stringCombiner(tokens,ind+1, tokens.size()));
+                    date = readformatter.parse(stringCombiner(tokens, ind + 1, tokens.size()));
                 } catch (Exception ex) {
                     throw new InvalidCommandException("Provide a proper date and time!");
                 }
-                toAdd =  new Event(stringCombiner(tokens, 1, ind), date);
+                toAdd = new Event(stringCombiner(tokens, 1, ind), date);
             }
             return new AddCommand(toAdd);
 
