@@ -25,25 +25,25 @@ public class Ui {
     /**
      * prints the farewell message when the user closes duke
      */
-    public void printFarewell() {
+    public String printFarewell() {
         String farewell = "Adios, pleasure to serve you!\n";
-        System.out.println(this.border + farewell + this.border);
+        return (this.border + farewell + this.border);
     }
 
     /**
      * prints the current list of tasks
      * @param taskList the current list of task
      */
-    public void printTaskList(TaskList taskList) {
-        System.out.println(this.border + taskList.toString() + this.border);
+    public String printTaskList(TaskList taskList) {
+        return (this.border + taskList.toString() + this.border);
     }
 
     /**
      * prints the task that was just marked complete
      * @param task the task that was just marked completed
      */
-    public void printDoneTask(Task task) {
-        System.out.println(this.border
+    public String printDoneTask(Task task) {
+        return (this.border
                 + "Making great progress master.\n"
                 + task.toString() + "\n"
                 + this.border
@@ -55,8 +55,8 @@ public class Ui {
      * @param task the new task that was created by the user
      * @param noTask the number of task currently in the task list
      */
-    public void printAddedNewTask(Task task, int noTask) {
-        System.out.println(this.border
+    public String printAddedNewTask(Task task, int noTask) {
+        return (this.border
                 + "Yes master. I've added the task to the list: \n"
                 + task.toString() + "\n"
                 + "You now have " + noTask + " task in the list master.\n"
@@ -69,8 +69,8 @@ public class Ui {
      * @param task the task that was deleted by the user
      * @param noTask the number of task currently in the task list
      */
-    public void printDeleteTask(Task task, int noTask) {
-        System.out.println(this.border
+    public String printDeleteTask(Task task, int noTask) {
+        return ( this.border
                 + "Yes master. I've deleted the task from the list: \n"
                 + task.toString() + "\n"
                 + "You now have " + noTask + " task in the list master.\n"
@@ -84,9 +84,8 @@ public class Ui {
      * @param dueDate the date in string
      * @param tasks the current list of task
      */
-    public void printGetTaskOnDThisDate(String dueDate, TaskList tasks) {
-        System.out.println(
-            this.border
+    public String printGetTaskOnDThisDate(String dueDate, TaskList tasks) {
+        return ( this.border
             + "Master here are the tasks due on " + dueDate.strip() + " :\n"
             + tasks.getTaskDueOn(dueDate)
             + this.border
@@ -97,8 +96,8 @@ public class Ui {
      * alerts the user that it has trouble loading the tasks that was saved on the hard disk and hence creating a new
      * file
      */
-    public void printLoadingError() {
-        System.out.println(
+    public String printLoadingError() {
+        return (
             this.border
             + "Master i am unable to retrieve the file, initializing new one!"
             + this.border
@@ -108,8 +107,8 @@ public class Ui {
     /**
      * alerts the user that it has trouble saving the tasks onto the hard disk
      */
-    public void printErrorInSaving() {
-        System.out.println(
+    public String printErrorInSaving() {
+        return (
             this.border
             + "Master i am unable to save the file!"
             + this.border
@@ -121,8 +120,8 @@ public class Ui {
      * @param parameter the keyword that the user inputs
      * @param taskList the current list of task
      */
-    public void printFindKeyword(String parameter, TaskList taskList) {
-        System.out.println(
+    public String printFindKeyword(String parameter, TaskList taskList) {
+        return (
             this.border
             + "Master here are the tasks with keyword " + parameter.strip() + " :\n"
             + taskList.getTaskWithKeyword(parameter)

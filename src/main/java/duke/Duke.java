@@ -60,12 +60,12 @@ public class Duke {
      */
 
 
-    private void doneHandler(String[] parameters) throws DukeExceptions.NoUndoneTaskException {
+    private String doneHandler(String[] parameters) throws DukeExceptions.NoUndoneTaskException {
         if (!this.taskList.isEmpty() || this.taskList.allDone()) {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
             this.taskList.completeTask(index);
-            this.ui.printDoneTask(this.taskList.getTask(index));
             this.updateFile();
+            return this.ui.printDoneTask(this.taskList.getTask(index));
         } else {
             throw new DukeExceptions.NoUndoneTaskException();
         }
@@ -80,11 +80,11 @@ public class Duke {
      */
 
 
-    private void addTaskHandler(Command command) throws DukeExceptions.IncompleteCommandException {
+    private String addTaskHandler(Command command) throws DukeExceptions.IncompleteCommandException {
         if (!command.isEmpty()) {
             Task newTask = this.taskList.addTask(command);
-            this.ui.printAddedNewTask(newTask, this.taskList.getNoTask());
             this.updateFile();
+            return this.ui.printAddedNewTask(newTask, this.taskList.getNoTask());
         } else {
             throw new DukeExceptions.IncompleteCommandException(command.getClass().toString());
         }
@@ -98,12 +98,12 @@ public class Duke {
      * @throws DukeExceptions.NoTaskToDeleteException if tasklist is empty
      */
 
-    private void deleteTaskHandler(String[] parameters) throws DukeExceptions.NoTaskToDeleteException {
+    private String deleteTaskHandler(String[] parameters) throws DukeExceptions.NoTaskToDeleteException {
         if (!this.taskList.isEmpty()) {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
             Task task = this.taskList.deleteTask(index);
-            this.ui.printDeleteTask(task, this.taskList.getNoTask());
             this.updateFile();
+            return this.ui.printDeleteTask(task, this.taskList.getNoTask());
         } else {
             throw new DukeExceptions.NoTaskToDeleteException();
         }
@@ -136,16 +136,16 @@ public class Duke {
      *
      * @param userInput commands and parameters that the user inputs through the user interface
      */
-    public void run(String userInput) {
+    public String run(String userInput) {
         Command command = this.parser.parse(userInput);
         if (command.getClass() == ByeCommand.class) {
             this.isRunning = false;
-            this.ui.printFarewell();
+            return this.ui.printFarewell();
         } else if (command.getClass() == ListCommand.class) {
-            this.ui.printTaskList(this.taskList);
+            return this.ui.printTaskList(this.taskList);
         } else if (command.getClass() == DoneCommand.class) {
             try {
-                this.doneHandler(command.getParameters());
+                return this.doneHandler(command.getParameters());
             } catch (DukeExceptions.NoUndoneTaskException e) {
                 DukeExceptions.printNoUndoneTaskError();
             } catch (IndexOutOfBoundsException e) {
@@ -157,7 +157,7 @@ public class Duke {
                 || command.getClass() == EventCommand.class
                 || command.getClass() == DeadLineCommand.class) {
             try {
-                this.addTaskHandler(command);
+                return this.addTaskHandler(command);
             } catch (DukeExceptions.IncompleteCommandException e) {
                 DukeExceptions.printIncompleteCommandError();
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -167,7 +167,7 @@ public class Duke {
             }
         } else if (command.getClass() == DelCommand.class) {
             try {
-                this.deleteTaskHandler(command.getParameters());
+                return this.deleteTaskHandler(command.getParameters());
             } catch (DukeExceptions.NoTaskToDeleteException e) {
                 DukeExceptions.printNoTaskToDeleteError();
             } catch (IndexOutOfBoundsException e) {
@@ -176,10 +176,11 @@ public class Duke {
                 DukeExceptions.noIndexKeyedError();
             }
         } else if (command.getClass() == DateCommand.class) {
-            ui.printGetTaskOnDThisDate(command.getParameters()[0], this.taskList);
+            return ui.printGetTaskOnDThisDate(command.getParameters()[0], this.taskList);
         } else if (command.getClass() == FindCommand.class) {
-            ui.printFindKeyword(command.getParameters()[0], this.taskList);
+            return ui.printFindKeyword(command.getParameters()[0], this.taskList);
         }
+        return "";
     }
 
     /**
