@@ -15,7 +15,7 @@ public class TaskList {
      * Constructs an empty task list.
      */
     public TaskList() {
-        data = new ArrayList();
+        data = new ArrayList<Task>();
     }
 
     /**
@@ -125,9 +125,8 @@ public class TaskList {
             throw new DukeException("      OOPS!!! The description of a deadline cannot be empty.");
         }
         String[] ss = input.split("/");
-        if (!ss[1].startsWith("by ")) {
-            // Exception: eg. deadline do homework /Mon
-            throw new DukeException("      OOPS!!! Please enter the time following the format: by XXX");
+        if (ss.length != 4 || !ss[1].startsWith("by ")) {
+            throw new DukeException("      OOPS!!! Please following the format: deadline XXX /by X/X/XXXX XXXX");
         }
         Deadline t = new Deadline(ss[0].substring(9),
                 LocalDateTime.of(Integer.parseInt(ss[3].split(" ")[0]), Integer.parseInt(ss[2]),
@@ -156,9 +155,9 @@ public class TaskList {
             throw new DukeException("      OOPS!!! The description of an event cannot be empty.");
         }
         String[] ss = input.split("/");
-        if (!ss[1].startsWith("at ")) {
+        if (ss.length != 4 || !ss[1].startsWith("at ")) {
             // Exception: eg. event meeting /Mon
-            throw new DukeException("      OOPS!!! Please enter the time following the format: at XXX");
+            throw new DukeException("\"      OOPS!!! Please following the format: event XXX /at X/X/XXXX XXXX");
         }
         Event t = new Event(ss[0].substring(6),
                 LocalDateTime.of(Integer.parseInt(ss[3].split(" ")[0]), Integer.parseInt(ss[2]),

@@ -2,23 +2,18 @@ package Duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  * Represents a todo manager bot.
@@ -97,11 +92,14 @@ public class Duke extends Application {
      * Starts creating an Duke bot object.
      * @param args no need here.
      */
-
     public static void main(String[] args) {
         new Duke("./log.txt").run();
     }
 
+    /**
+     * Starts Duke in GUI.
+     * @param stage is necessary component.
+     */
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
