@@ -6,7 +6,7 @@ event
 eventfsrfdg
 event awrfawesf
 event dads /at
-event efaws /at
+event efaws /at 
 event /at 2020-10-23
 event/at 2020-10-23
 event a /at 2020-10-32
@@ -15,8 +15,8 @@ deadline
 deadline 
 deadlineedasfa
 deadline awrfawesf
-deadline dads /yb
-deadline efaws /by
+deadline dads /by
+deadline efaws /by 
 deadline /by 2020-10-22
 deadline/by 2020-10-22
 deadline dda /by 2020-22
