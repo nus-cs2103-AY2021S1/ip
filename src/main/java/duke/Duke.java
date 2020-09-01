@@ -14,12 +14,10 @@ public class Duke {
 
     /**
      * Constructor to take in a specified filepath to create a Duke object.
-     *
-     * @param filePath the path location of the load or save file
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("src/main/java/data/duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
@@ -38,6 +36,10 @@ public class Duke {
         parser.interact(tasks, Storage.getFilePath());
     }
 
+    public String getResponse(String input) throws IOException {
+        return Parser.interact(input, tasks, Storage.getFilePath());
+    }
+
     /**
      * Creates a new Duke object with a specified filepath and runs it.
      *
@@ -46,6 +48,6 @@ public class Duke {
      * @throws DukeException thrown if the Duke program does not recognise user input
      */
     public static void main(String[] args) throws IOException, DukeException {
-        new Duke("src/main/java/data/duke.txt").run();
+        new Duke().run();
     }
 }
