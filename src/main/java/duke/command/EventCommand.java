@@ -16,6 +16,15 @@ public class EventCommand extends Command {
         this.by = by;
     }
 
+    /**
+     * Executes the EVENT command, adds an EVENT task to the existing taskList and saves
+     * the updated taskList to a log file.
+     *
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ui.display("I PUT NEW TING IN DA LIST\n  " + taskList.addEvent(this.taskName, this.by)
@@ -25,6 +34,6 @@ public class EventCommand extends Command {
 
     @Override
     public String toString() {
-        return cmd.toString() + ": " + taskName + "(" + by + ")";
+        return this.cmd.toString() + ": " + this.taskName + "(" + this.by + ")";
     }
 }

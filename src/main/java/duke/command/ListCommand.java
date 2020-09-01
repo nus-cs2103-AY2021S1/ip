@@ -15,11 +15,28 @@ public class ListCommand extends Command {
         this.cmd = CMD.LIST;
     }
 
+    /**
+     * Overloaded class constructor if a deadline is spceified for filtering out
+     * tasks after the deadline.
+     *
+     * @param by
+     */
+
     public ListCommand(String by) {
         this();
         this.by = DateTimeUtility.formatString(by);
     }
 
+    /**
+     * Executes the LIST command. If no deadline is specified, all tasks in the taskList
+     * are printed. If a date / datetime is specified, only tasks that are timed and whose
+     * deadline occurs before the given deadline is listed.
+     *
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskList.isEmpty()) {
@@ -29,7 +46,7 @@ public class ListCommand extends Command {
                 ui.display("U HAS DEES TINGS IN UR LIST.\n" + taskList.toString());
             } else {
                 try {
-                    String ret = TaskList.tasks2String(taskList.filterTasksByDate(this.by));
+                    String ret = taskList.filterTasksByDate(this.by);
                     if (ret.isEmpty()) {
                         ui.display("U HAZ NUTHIN DUE/HAPPENIN BY "
                                     + DateTimeUtility.formatString(this.by) + "!! LULZIES");
@@ -46,6 +63,6 @@ public class ListCommand extends Command {
 
     @Override
     public String toString() {
-        return cmd.toString() + (by.isEmpty() ? "" : " (" + by + ")");
+        return this.cmd.toString() + (this.by.isEmpty() ? "" : " (" + this.by + ")");
     }
 }

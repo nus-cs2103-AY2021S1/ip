@@ -13,6 +13,16 @@ public class DoneCommand extends Command {
         this.idx = idx;
     }
 
+    /**
+     * Executes the DONE command, which marks an existing task in the taskList as DONE based on
+     * index. Indexing of tasks in the taskList starts from 1.
+     *
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.markTaskAsDone(this.idx);
@@ -22,7 +32,7 @@ public class DoneCommand extends Command {
 
     @Override
     public String toString() {
-        return cmd.toString() + ": " + idx;
+        return this.cmd.toString() + ": " + this.idx;
     }
 }
 

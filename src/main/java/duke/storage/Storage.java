@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private static Path filePath;
+    private Path filePath;
 
     public Storage(String filePath) {
         this.filePath = Paths.get(filePath);
@@ -27,6 +27,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the existing tasklist to a log file specified with filePath in the class constructor along
+     * with a timestamp. Creates the necessary directories and files if they do not exist.
+     *
+     * @param taskList
+     * @throws DukeException
+     */
     public void save(TaskList taskList) throws DukeException {
         try (BufferedWriter writer = Files.newBufferedWriter(this.filePath)) {
             LocalDateTime now = LocalDateTime.now();
@@ -35,10 +42,17 @@ public class Storage {
                     + "):\n";
             writer.write(msg + taskList.toString());
         } catch (IOException e) {
-            throw new DukeException("CANNOT SAVE TASKLIST TO FILE");
+            throw new DukeException("CANNOT SAVE TASKLIST TO FILE: " + e.getMessage());
         }
     }
 
+    /**
+     * loads a saved tasklist from a log file and parses it into an arrayList of Strings that describe
+     * the task.
+     *
+     * @return an arrayList of Strings that describe the tasks saved in the tasklist
+     * @throws DukeException
+     */
     public ArrayList<String> load() throws DukeException {
         try (BufferedReader reader = Files.newBufferedReader(this.filePath)) {
             ArrayList<String> tasksStr = new ArrayList<>();

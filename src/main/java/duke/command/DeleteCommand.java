@@ -13,6 +13,15 @@ public class DeleteCommand extends Command {
         this.idx = idx;
     }
 
+    /**
+     * Executes the DELETE command, removes a task from the existing taskList based on index,
+     * where indexing starts from 1.
+     *
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ui.display("TASK IZ NAO DELETZ!!!!1!11!\n" + "  "
@@ -23,6 +32,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public String toString() {
-        return cmd.toString() + ": " + idx;
+        return this.cmd.toString() + ": " + this.idx;
     }
 }

@@ -13,6 +13,14 @@ public class ByeCommand extends Command {
         this.isExit = true;
     }
 
+    /**
+     * Executes the BYE command, which dispalys an exiting message.
+     *
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ui.display("OKAIS I IZ GOIN 2 NOM BYEEEEE C U !!!1!1!!");
@@ -20,6 +28,6 @@ public class ByeCommand extends Command {
 
     @Override
     public String toString() {
-        return cmd.toString();
+        return this.cmd.toString();
     }
 }

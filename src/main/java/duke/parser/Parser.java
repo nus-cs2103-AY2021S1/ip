@@ -6,6 +6,15 @@ import duke.datetime.DateTimeFormat;
 import duke.datetime.DateTimeUtility;
 
 public class Parser {
+
+    /**
+     * Parses a user input and returns the right command with other relevant arguments for the command.
+     * Performs input validation and throws a DukeException if input is not valid.
+     *
+     * @param userInput
+     * @return
+     * @throws DukeException
+     */
     public static Command parse(String userInput) throws DukeException {
         int space_idx = userInput.indexOf(' ');
         CMD cmd;
@@ -106,8 +115,6 @@ public class Parser {
             case DEFAULT:
                 return new Command();
         }
-
         return new Command();
-
     }
 }

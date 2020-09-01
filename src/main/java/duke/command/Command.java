@@ -18,12 +18,21 @@ public class Command {
         return this.isExit;
     }
 
+    /**
+     * Executes the default command, which displays a standard string regardless
+     * of input.
+     *
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ui.display("CAN I HAZ CHEEZBURGER?");
     }
 
     @Override
     public String toString() {
-        return cmd.toString();
+        return this.cmd.toString();
     }
 }
