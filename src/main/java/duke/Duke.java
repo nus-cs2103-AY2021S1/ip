@@ -22,7 +22,7 @@ public class Duke {
             } else if (Parser.isList(input)) {
                 output_msg = tasks.summarize();
             } else if (Parser.isDone(input)) {
-                output_msg = tasks.mark_done(Parser.getIndex(input)); 
+                output_msg = tasks.markDone(Parser.getIndex(input)); 
             } else if (Parser.isDelete(input)) {
                 output_msg = tasks.deleteTask(Parser.getIndex(input)); 
             } else if (Parser.isFind(input)) {

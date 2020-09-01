@@ -2,12 +2,12 @@ package duke;
 
 public class Task {
     protected String name;
-    private final boolean isDone;
+    private boolean isDone;
     private final TaskType type;
 
     public Task(String name, TaskType type) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
         this.type = type;
     }
 
@@ -40,7 +40,7 @@ public class Task {
     }
 
     public void done() {
-        this.done = true;
+        this.isDone = true;
     }
 }
 
