@@ -20,7 +20,7 @@ public class DataStorage {
      *
      * @throws DukeException For the different Commands Initialising here, will never be thrown.
      */
-    public static void init() throws DukeException{
+    public static void init() throws DukeException {
         commandInit.add(new Bye());
         commandInit.add(new Clear());
         commandInit.add(new Deadline("init","by",LocalDate.MAX,LocalTime.MIDNIGHT));

@@ -13,7 +13,7 @@ public class DataStorageInterface {
      *
      * @throws DukeException For the different Commands Initialising, will never be thrown.
      */
-    public static void initStorage() throws DukeException{
+    public static void initStorage() throws DukeException {
         DataStorage.init();
     }
 
@@ -22,10 +22,10 @@ public class DataStorageInterface {
      *
      * @return String representation of list of commands with Usage syntax.
      */
-    public static String listCommands(){
-        StringBuilder allCommands = new StringBuilder();
-        for(Command c:DataStorage.commandInit){
-            allCommands.append(c.getName()).append(": ").append(c.getUsage()).append("\n");
+    public static String listCommands() {
+        String allCommands = "";
+        for (Command c:DataStorage.commandInit) {
+            allCommands = allCommands + c.getName() + ": "  + c.getUsage() + "\n";
         }
         return allCommands.toString();
     }
@@ -39,7 +39,7 @@ public class DataStorageInterface {
      */
     public static Task markDone(int index) throws CustomException {
         Task curr = DataStorage.taskList.get(index);
-        if(curr.isDone()){
+        if (curr.isDone()) {
             throw new CustomException("Error: This task has already been marked as done");
         }
         curr.markDone();
@@ -52,7 +52,7 @@ public class DataStorageInterface {
      * @param index Index of Task in list.
      * @return Task that is removed.
      */
-    public static Task remove(int index){
+    public static Task remove(int index) {
         return DataStorage.taskList.remove(index);
     }
 
@@ -61,7 +61,7 @@ public class DataStorageInterface {
      *
      * @return size of Task List.
      */
-    public static int getSize(){
+    public static int getSize() {
         return DataStorage.taskList.size();
     }
 
@@ -70,10 +70,10 @@ public class DataStorageInterface {
      *
      * @return number of Tasks that are not marked Done by the User.
      */
-    public static int getTasksNotDone(){
+    public static int getTasksNotDone() {
         int counter = 0;
-        for(Task t:DataStorage.taskList){
-            if(!t.isDone()){
+        for (Task t:DataStorage.taskList) {
+            if (!t.isDone()) {
                 counter++;
             }
         }
@@ -86,7 +86,7 @@ public class DataStorageInterface {
      * @param task Task to be added.
      * @return Task Added Response with number of tasks Not Done.
      */
-    public static String taskAdded(Task task){
+    public static String taskAdded(Task task) {
         return "Got it. I've added this task:\n\t" + task.toString() +
                 String.format("\nNow you have %d tasks in the list",
                         DataStorageInterface.getTasksNotDone());
@@ -99,7 +99,7 @@ public class DataStorageInterface {
      * @return Task that is added.
      * @throws WrongUsageException If todo command is used wrongly.
      */
-    public static Task addToDo(String query) throws WrongUsageException{
+    public static Task addToDo(String query) throws WrongUsageException {
         Task newTask = new ToDo(query);
         DataStorage.taskList.add(newTask);
         return newTask;
@@ -117,7 +117,7 @@ public class DataStorageInterface {
      */
     public static Task addDeadline(String title,
                                    String preposition,
-                                   LocalDate date, LocalTime time) throws WrongUsageException{
+                                   LocalDate date, LocalTime time) throws WrongUsageException {
         Task newTask = new Deadline(title,preposition,date, time);
         DataStorage.taskList.add(newTask);
         return newTask;
@@ -134,7 +134,7 @@ public class DataStorageInterface {
      * @throws WrongUsageException If event command is used wrongly.
      */
     public static Task addEvent(String title, String preposition, LocalDate date, LocalTime time)
-            throws WrongUsageException{
+            throws WrongUsageException {
         Task newTask = new Event(title,preposition,date, time);
         DataStorage.taskList.add(newTask);
         return newTask;
@@ -143,7 +143,7 @@ public class DataStorageInterface {
     /**
      * Removes all tasks from the Task List.
      */
-    public static void removeAllTasks(){
+    public static void removeAllTasks() {
         DataStorage.taskList.clear();
     }
 
@@ -152,10 +152,8 @@ public class DataStorageInterface {
      *
      * @param taskArrayList Tasks to be Added in current Task List.
      */
-    public static void loadNewTasks(ArrayList<Task> taskArrayList){
-        for(Task t: taskArrayList){
-            DataStorage.taskList.add(t);
-        }
+    public static void loadNewTasks(ArrayList<Task> taskArrayList) {
+        DataStorage.taskList.addAll(taskArrayList);
     }
 
     /**
@@ -163,14 +161,14 @@ public class DataStorageInterface {
      *
      * @return String representation of all tasks in the task list.
      */
-    public static String listOfTasks(){
+    public static String listOfTasks() {
         StringBuilder acc = new StringBuilder();
         int i = 0;
-        for (Task t: DataStorage.taskList){
+        for (Task t: DataStorage.taskList) {
             i++;
             acc.append(String.format("%d. %s\n", i, t));
         }
-        return acc.toString().isEmpty()?"There are no Tasks in the list":acc.toString();
+        return acc.toString().isEmpty() ? "There are no Tasks in the list" : acc.toString();
     }
 
     /**
@@ -178,14 +176,14 @@ public class DataStorageInterface {
      *
      * @return String representation of tasks to be saved in an external file.
      */
-    public static String getSaveRepresentation(){
+    public static String getSaveRepresentation() {
         StringBuilder acc = new StringBuilder();
         int i = 0;
-        for (Task t: DataStorage.taskList){
+        for (Task t: DataStorage.taskList) {
             i++;
             acc.append(String.format("%d. %s\n", i, t.saveStringRepresentation()));
         }
-        return acc.toString().isEmpty()?"":acc.toString();
+        return acc.toString().isEmpty() ? "" : acc.toString();
     }
 
     /**
@@ -195,9 +193,9 @@ public class DataStorageInterface {
      * @return String representation of Command queried by User.
      * @throws UnknownCommandException If User enters wrong Command.
      */
-    public static String getUsage(String query) throws UnknownCommandException{
-        for(Command c: DataStorage.commandInit){
-            if(c.getName().equalsIgnoreCase(query)){
+    public static String getUsage(String query) throws UnknownCommandException {
+        for (Command c: DataStorage.commandInit) {
+            if (c.getName().equalsIgnoreCase(query)) {
                 return c.getName() + "\nUsage: "  + c.getUsage() +
                         "\nDescription: " + c.getDescription();
             }

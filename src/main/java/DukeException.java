@@ -1,7 +1,7 @@
 /**
  * Overall DukeException Class.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     String errorMessage;
 
