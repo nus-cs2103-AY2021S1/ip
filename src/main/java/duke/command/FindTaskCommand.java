@@ -26,7 +26,7 @@ public class FindTaskCommand extends Command {
      * @param ui       UI object from the current Duke instance
      * @param saveData Storage object from the current Duke instance
      */
-    public void execute(TaskList list, Ui ui, Storage saveData) {
+    public String execute(TaskList list, Ui ui, Storage saveData) {
         try {
             if (this.getCommand().trim().length() == 4) {
                 throw new DukeException("☹ OOPS!!! Check find formatting, include keyword");
@@ -38,9 +38,10 @@ public class FindTaskCommand extends Command {
                     searchedList.add(list.get(i));
                 }
             }
-            ui.showList(searchedList);
+            ui.saySomthing(ui.showList(searchedList));
+            return ui.showList(searchedList);
         } catch (DukeException e) {
-            ui.saySomthing(e.getMessage());
+            return e.getMessage();
         }
     }
 

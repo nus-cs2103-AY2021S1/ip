@@ -31,7 +31,7 @@ public class DeleteTaskCommand extends Command {
      * @param ui       UI object from the current Duke instance
      * @param saveData Storage object from the current Duke instance
      */
-    public void execute(TaskList list, Ui ui, Storage saveData) {
+    public String execute(TaskList list, Ui ui, Storage saveData) {
         try {
             if (this.getCommand().trim().length() == 6) {
                 throw new DukeException("☹ OOPS!!! Check delete formatting, include which task to delete.");
@@ -42,11 +42,13 @@ public class DeleteTaskCommand extends Command {
             int index = Character.getNumericValue(this.getCommand().charAt(7));
             Task toRemove = list.get(index - 1);
             list.remove(index - 1);
-            ui.saySomthing("Noted. I've removed this task:\n" + toRemove.toString()
+            String saySomthing = ("Noted. I've removed this task:\n" + toRemove.toString()
                     + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
             saveData.deleteTask(index);
+            ui.saySomthing(saySomthing);
+            return saySomthing;
         } catch (DukeException | IOException e) {
-            ui.saySomthing(e.getMessage());
+            return e.getMessage();
         }
     }
 

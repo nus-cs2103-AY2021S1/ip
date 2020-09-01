@@ -45,7 +45,8 @@ public abstract class Command {
      * @param ui       UI object from the current Duke instance
      * @param saveData Storage object from the current Duke instance
      */
-    public void execute(TaskList list, Ui ui, Storage saveData) {
+    public String execute(TaskList list, Ui ui, Storage saveData) {
+        return null;
     }
 
     /**

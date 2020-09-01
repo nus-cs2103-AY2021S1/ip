@@ -29,7 +29,7 @@ public class AddDeadlineCommand extends Command {
      * @param ui       UI object from the current Duke instance
      * @param saveData Storage object from the current Duke instance
      */
-    public void execute(TaskList list, Ui ui, Storage saveData) {
+    public String execute(TaskList list, Ui ui, Storage saveData) {
         try {
             if (this.getCommand().trim().length() == 8) {
                 throw new DukeException("☹ OOPS!!! Check deadline formatting, include description and /by.");
@@ -41,12 +41,15 @@ public class AddDeadlineCommand extends Command {
             String by = holder[1].trim();
             Deadline task = new Deadline(description, by);
             list.add(task);
-            ui.saySomthing("Got it. I've added this task:\n" + task.toString()
+
+            String saySomthing = ("Got it. I've added this task:\n" + task.toString()
                     + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
             String save = "D>0>" + description + ">" + by;
             saveData.addTask(save);
+            ui.saySomthing(saySomthing);
+            return saySomthing;
         } catch (DukeException | IOException e) {
-            ui.saySomthing(e.getMessage());
+            return e.getMessage();
         }
     }
 

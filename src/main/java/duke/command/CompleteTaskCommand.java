@@ -30,7 +30,7 @@ public class CompleteTaskCommand extends Command {
      * @param ui       UI object from the current Duke instance
      * @param saveData Storage object from the current Duke instance
      */
-    public void execute(TaskList list, Ui ui, Storage saveData) {
+    public String execute(TaskList list, Ui ui, Storage saveData) {
         try {
             if (this.getCommand().trim().length() == 4) {
                 throw new DukeException("☹ OOPS!!! Check done formatting, include which task to complete.");
@@ -40,10 +40,12 @@ public class CompleteTaskCommand extends Command {
             }
             int index = Character.getNumericValue(this.getCommand().charAt(5));
             list.get(index - 1).markAsDone();
-            ui.saySomthing("Nice! I've marked this task as done:\n" + list.get(index - 1).toString());
+            String saySomthing = ("Nice! I've marked this task as done:\n" + list.get(index - 1).toString());
             saveData.completeTask(index);
+            ui.saySomthing(saySomthing);
+            return saySomthing;
         } catch (DukeException | IOException e) {
-            ui.saySomthing(e.getMessage());
+            return e.getMessage();
         }
     }
 

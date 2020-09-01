@@ -27,7 +27,7 @@ public class Ui {
      *
      * @param list a Tasklist object
      */
-    public void showList(TaskList list) {
+    public String showList(TaskList list) {
         String print = "";
         print += "Here are the tasks in your list:\n";
         for (int i = 0; i < list.size(); i++) {
@@ -37,7 +37,7 @@ public class Ui {
                 print += String.format("%d. ", i + 1) + list.get(i) + "\n";
             }
         }
-        saySomthing(print);
+        return print;
     }
 
     /**

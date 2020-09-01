@@ -31,19 +31,21 @@ public class AddTodoCommand extends Command {
      * @param ui       UI object from the current Duke instance
      * @param saveData Storage object from the current Duke instance
      */
-    public void execute(TaskList list, Ui ui, Storage saveData) {
+    public String execute(TaskList list, Ui ui, Storage saveData) {
         try {
             if (this.getCommand().trim().length() == 4) {
                 throw new DukeException("☹ OOPS!!! Check todo formatting, include description");
             }
             Todo task = new Todo(this.getCommand().substring(5));
             list.add(task);
-            ui.saySomthing("Got it. I've added this task:\n" + task.toString()
+            String saySomthing = ("Got it. I've added this task:\n" + task.toString()
                     + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
             String save = "T>0>" + this.getCommand().substring(5);
             saveData.addTask(save);
+            ui.saySomthing(saySomthing);
+            return saySomthing;
         } catch (DukeException | IOException e) {
-            ui.saySomthing(e.getMessage());
+            return e.getMessage();
         }
     }
 

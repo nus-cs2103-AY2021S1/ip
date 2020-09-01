@@ -31,7 +31,7 @@ public class AddEventCommand extends Command {
      * @param ui       UI object from the current Duke instance
      * @param saveData Storage object from the current Duke instance
      */
-    public void execute(TaskList list, Ui ui, Storage saveData) {
+    public String execute(TaskList list, Ui ui, Storage saveData) {
         try {
             if (this.getCommand().trim().length() == 5) {
                 throw new DukeException("☹ OOPS!!! Check event formatting, include description and /at.");
@@ -44,13 +44,14 @@ public class AddEventCommand extends Command {
             Event task = new Event(description, at);
 
             list.add(task);
-            ui.saySomthing("Got it. I've added this task:\n" + task.toString()
+            String saySomthing = ("Got it. I've added this task:\n" + task.toString()
                     + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
-
+            ui.saySomthing(saySomthing);
             String save = "E>0>" + description + ">" + at;
             saveData.addTask(save);
+            return saySomthing;
         } catch (DukeException | IOException e) {
-            ui.saySomthing(e.getMessage());
+            return e.getMessage();
         }
     }
 

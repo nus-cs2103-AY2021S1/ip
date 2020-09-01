@@ -2,6 +2,10 @@ package duke;
 
 import duke.command.Command;
 import duke.task.TaskList;
+import javafx.application.Platform;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Main class to run Duke program.
@@ -13,14 +17,14 @@ public class Duke {
     private TaskList list;
     private Ui ui;
 
+
     /**
      * Duke Class constructor. Create a new Ui and TaskList. Load saved data if Storage exist, else create new Storage.
      *
-     * @param filePath give the path of the save data
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        this.saveData = new Storage(filePath);
+        this.saveData = new Storage();
         list = new TaskList(saveData.loadSavedData());
     }
 
@@ -47,6 +51,23 @@ public class Duke {
      * main method to run Duke class.
      */
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
+    }
+
+    String getResponse(String input) {
+        if (input.equals("bye")) {
+            new Timer().schedule(new TimerTask() {
+                public void run () {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            }, 3000);
+        }
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(list, ui, saveData);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

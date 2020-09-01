@@ -25,8 +25,9 @@ public class ShowListCommand extends Command {
      * @param ui       UI object from the current Duke instance
      * @param saveData Storage object from the current Duke instance
      */
-    public void execute(TaskList list, Ui ui, Storage saveData) {
-        ui.showList(list);
+    public String execute(TaskList list, Ui ui, Storage saveData) {
+        ui.saySomthing(ui.showList(list));
+        return ui.showList(list);
     }
 
     /**

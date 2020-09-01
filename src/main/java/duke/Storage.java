@@ -26,8 +26,8 @@ public class Storage {
      *
      * @param path give the path of the save data
      */
-    public Storage(String path) {
-        this.path = path;
+    public Storage() {
+        this.path = txtPath;
         try {
             createFolder();
         } catch (IOException e) {
