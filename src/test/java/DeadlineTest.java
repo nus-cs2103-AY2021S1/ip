@@ -1,5 +1,7 @@
+import Duke.Deadline;
 import org.junit.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.Assert.assertEquals;
 import java.time.LocalDateTime;
 
 public class DeadlineTest {

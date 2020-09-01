@@ -1,3 +1,5 @@
+package Duke;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class Storage {
         line = br.readLine();
         while (line != null) {
             char type = line.charAt(8);
-            boolean isDone = line.charAt(11) == '✓';
+            boolean isDone = line.charAt(11) == '\u2713';
             if(type == 'T') {
                 Todo t = new Todo(line.substring(14));
                 if(isDone) {
@@ -98,20 +100,32 @@ public class Storage {
      * @return number representation of months.
      */
     public static int getMonth(String month) {
-        return switch (month) {
-            case "JAN" -> 1;
-            case "FEB" -> 2;
-            case "MAR" -> 3;
-            case "APR" -> 4;
-            case "MAY" -> 5;
-            case "JUN" -> 6;
-            case "JUL" -> 7;
-            case "AUG" -> 8;
-            case "SEP" -> 9;
-            case "OCT" -> 10;
-            case "NOV" -> 11;
-            case "DEC" -> 12;
-            default -> 0;
-        };
+        int res = 0;
+        if(month.equals("JAN")) {
+            res = 1;
+        } else if(month.equals("FEB")) {
+            res = 2;
+        } else if(month.equals("MAR")) {
+            res = 3;
+        }else if(month.equals("APR")) {
+            res = 4;
+        }else if(month.equals("MAY")) {
+            res = 5;
+        }else if(month.equals("JUN")) {
+            res = 6;
+        } else if(month.equals("JUL")) {
+            res = 7;
+        } else if(month.equals("AUG")) {
+            res = 8;
+        } else if(month.equals("SEP")) {
+            res = 9;
+        } else if(month.equals("OTC")) {
+            res = 10;
+        } else if(month.equals("NOV")) {
+            res = 11;
+        } else if(month.equals("DEC")) {
+            res = 12;
+        }
+        return res;
     }
 }

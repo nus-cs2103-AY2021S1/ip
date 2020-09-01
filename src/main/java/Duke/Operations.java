@@ -1,3 +1,5 @@
+package Duke;
+
 /**
  * Represents a series of operations provided by the Duke bot.
  */
