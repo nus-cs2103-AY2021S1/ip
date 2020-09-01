@@ -35,4 +35,5 @@ public class Ui {
     public String bye() {
         return "Bye. Hope to see you again soon!";
     }
+
 }

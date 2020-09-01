@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import exception.MissingInfoException;
+
 import javafx.stage.Stage;
 
 /**
@@ -43,6 +45,8 @@ public class Duke {
             this.ui.printReply("OOPS!!! Can't access task data.");
         } catch (IOException e) {
             this.ui.printReply("OOPS!!! Something went wrong... Tasks not saved.");
+        } catch (MissingInfoException e) {
+            this.ui.printReply(e.getMessage());
         }
 
         this.ui.greet();
@@ -60,6 +64,8 @@ public class Duke {
                 this.storage.save(this.taskList);
             } catch (IOException e) {
                 this.ui.printReply("OOPS!!! Something went wrong... Tasks not saved.");
+            } catch (MissingInfoException e) {
+                this.ui.printReply(e.getMessage());
             }
         }
 

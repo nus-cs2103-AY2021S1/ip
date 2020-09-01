@@ -1,25 +1,22 @@
 package duke;
 
+import java.util.Scanner;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-
 import javafx.scene.image.Image;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
 import javafx.util.Duration;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 
-import java.util.Scanner;
+import exception.MissingInfoException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -59,6 +56,8 @@ public class MainWindow extends AnchorPane {
             sendMessage("OOPS!!! Can't access task data.");
         } catch (IOException e) {
             sendMessage("OOPS!!! Something went wrong... Tasks not saved.");
+        } catch (MissingInfoException e) {
+            sendMessage(e.getMessage());
         }
     }
 
@@ -82,14 +81,13 @@ public class MainWindow extends AnchorPane {
             userInput.clear();
 
             Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3000), e -> {
-               duke.getStage().close();
+                    duke.getStage().close();
             }));
             timeline.play();
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(userInput.getText(), userImage),
-                    DialogBox.getDukeDialog(reply, dukeImage)
-            );
+                    DialogBox.getDukeDialog(reply, dukeImage));
 
             userInput.clear();
 
@@ -97,6 +95,8 @@ public class MainWindow extends AnchorPane {
                 duke.getStorage().save(duke.getTaskList());
             } catch (IOException e) {
                 sendMessage("OOPS!!! Something went wrong... Tasks not saved.");
+            } catch (MissingInfoException e) {
+                sendMessage(e.getMessage());
             }
         }
     }
