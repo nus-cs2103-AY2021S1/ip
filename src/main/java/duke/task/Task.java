@@ -15,8 +15,8 @@ public abstract class Task {
     protected static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("dd MMM YY HH:mm");
     protected static final DateTimeFormatter READER_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-    private static final String COMPLETE = "\u2713";
-    private static final String NOT_COMPLETE = "\u2718";
+    private static final String COMPLETE = "✓";
+    private static final String NOT_COMPLETE = "✘";
 
     private static final String STORE_COMPLETED = COMPLETE;
     private static final String STORE_INCOMPLETE = NOT_COMPLETE;
@@ -43,7 +43,7 @@ public abstract class Task {
      */
     private void verifyArgs(String description) throws TaskException {
         if (description.equals("")) {
-            throw new TaskException("Did you provide any description for this todo task?");
+            throw new TaskException("Did you provide any description for this task?");
         }
     }
 
