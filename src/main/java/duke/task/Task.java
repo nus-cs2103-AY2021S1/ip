@@ -11,18 +11,18 @@ public abstract class Task {
         DEADLINE("deadline <task description> /by <yyyy-mm-dd>"),
         EVENT("event <event description> /at <event location>"),
         TODO("todo <task description>");
-        
+
         private final String format;
-        
+
         TaskType(String format) {
             this.format = format;
         }
-        
+
         String getFormat() {
             return this.format;
         }
     }
-    
+
     protected Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -45,7 +45,7 @@ public abstract class Task {
 
     /**
      * Returns checkbox with tick/cross representing if task is done (tick) or not (cross).
-     * @return String representing checkbox with unicode character CHECK MARK (U+2713) if task is done 
+     * @return String representing checkbox with unicode character CHECK MARK (U+2713) if task is done
      * or HEAVY BALLOT X (U+2718) if task is not done.
      */
     public String getCheckBox() {
@@ -62,7 +62,7 @@ public abstract class Task {
     public void markDone() {
         this.isDone = true;
     }
-    
+
     @Override
     public String toString() {
         return getCheckBox() + " " + this.description;

@@ -11,8 +11,6 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.util.List;
 
-
-// random test comment
 /**
  * Deals with loadings tasks from the file and saving tasks in the file.
  */
@@ -31,8 +29,8 @@ public class Storage {
         }
         this.file = file;
     }
-    
-    private void createFile(File file){
+
+    private void createFile(File file) {
         try {
             String dir = file.getParent();
             File dirFile = new File(dir);
@@ -56,7 +54,7 @@ public class Storage {
     }
 
     /**
-     * Saves Tasks from taskList onto hard drive. 
+     * Saves Tasks from taskList onto hard drive.
      * Overwrites saved txt file each time with updated values.
      * @param taskList TaskList containing list of tasks to save.
      */
@@ -73,11 +71,10 @@ public class Storage {
             List<Task> tl = taskList.getTaskList();
             for (Task t : tl) {
                 fw.write(t.getParsedTask());
-            }   
+            }
             fw.close();
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e);
         }
     }
-    
 }

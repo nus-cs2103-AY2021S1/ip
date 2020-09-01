@@ -10,25 +10,25 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
-    
+
     public enum SampleTask {
-        DEADLINE("deadline Math Test /by 2020-08-31", true, 
+        DEADLINE("deadline Math Test /by 2020-08-31", true,
                 new Deadline("Math Test", "2020-08-31", true)),
         EVENT("event Pool Party /at Matt's House", false,
                 new Event("Pool Party", "Matt's House", false)),
-        TODO("todo Write English Essay", false, 
+        TODO("todo Write English Essay", false,
                 new Todo("Write English Essay", false));
-        
+
         final String command;
-        boolean isDone;
         final Task task;
-        
+        private boolean isDone;
+
         SampleTask(String command, boolean isDone, Task task) {
             this.command = command;
             this.isDone = isDone;
             this.task = task;
         }
-        
+
         String getStoredString() {
             return this.command + System.lineSeparator() + this.isDone + System.lineSeparator();
         }
@@ -41,7 +41,7 @@ public class TaskListTest {
         }
         return data.toString();
     }
-    
+
     public static List<Task> getCorrectFormatExpectedTaskList() {
         List<Task> taskList = new ArrayList<>();
         for (SampleTask sample : SampleTask.values()) {
@@ -55,7 +55,7 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
         assertEquals(new ArrayList<Task>(), taskList.getTaskList());
     }
-    
+
     @Test
     public void addCorrectFormatTest() {
         TaskList taskList = new TaskList();
@@ -64,14 +64,14 @@ public class TaskListTest {
         }
         assertEquals(getCorrectFormatExpectedTaskList(), taskList.getTaskList());
     }
-    
+
     @Test
     public void correctFormatBufferedReaderConstuctorTest() {
         BufferedReader br = new BufferedReader(new StringReader(getCorrectFormatSampleData()));
         TaskList taskList = new TaskList(br);
         assertEquals(getCorrectFormatExpectedTaskList(), taskList.getTaskList());
     }
-    
+
     @Test
     public void markTaskAsDoneTest() {
         BufferedReader br = new BufferedReader(new StringReader(getCorrectFormatSampleData()));
@@ -79,7 +79,7 @@ public class TaskListTest {
         taskList.markTaskAsDone("1");
         assertEquals("[\u2713]", taskList.getTaskList().get(0).getCheckBox());
     }
-    
+
     @Test
     public void deleteTaskTest() {
         BufferedReader br = new BufferedReader(new StringReader(getCorrectFormatSampleData()));
@@ -89,5 +89,4 @@ public class TaskListTest {
         expectedTaskList.remove(1);
         assertEquals(expectedTaskList, taskList.getTaskList());
     }
-    
 }

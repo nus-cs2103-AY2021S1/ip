@@ -22,7 +22,7 @@ public class Todo extends Task {
         return "todo " + this.description + System.lineSeparator()
                 + this.isDone + System.lineSeparator();
     }
-    
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

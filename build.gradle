@@ -49,3 +49,7 @@ test {
 run {
     enableAssertions = true
 }
+
+checkstyle {
+    toolVersion = '8.29'
+}

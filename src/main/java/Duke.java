@@ -1,7 +1,7 @@
 import duke.backend.Storage;
-import duke.task.TaskList;
 import duke.frontend.Parser;
 import duke.frontend.Ui;
+import duke.task.TaskList;
 
 import java.io.FileNotFoundException;
 
@@ -24,10 +24,10 @@ import java.io.FileNotFoundException;
  */
 public class Duke {
     private Storage storage;
-    
+
     private TaskList taskList;
     private Parser parser;
-    
+
     private Duke(String filePath) {
         try {
             storage = new Storage(filePath);
@@ -37,17 +37,17 @@ public class Duke {
             System.out.println("Error: file not created. " + e);
         }
     }
-    
+
     private void run() {
         Ui.greet();
         this.parser.parseInputCommands();
         this.storage.save(this.taskList);
         Ui.exit();
     }
-    
+
     /**
      * Creates a new instance of Duke that saves tasks to filePath "./data/saved-tasks.txt" and runs it.
-     * 
+     *
      * @param args unused.
      */
     public static void main(String[] args) {

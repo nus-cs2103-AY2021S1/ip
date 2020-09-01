@@ -2,10 +2,11 @@ package duke.task;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EventTest {
-    
+
     @Test
     public void constructorTest() {
         // Test with correct arguments
@@ -19,7 +20,7 @@ public class EventTest {
         assertEquals("Matt's House", event2.at);
         assertEquals(true, event2.isDone);
     }
-    
+
     @Test
     public void getParsedTaskTest() {
         Event event = new Event("Eat Apple", "NUS", true);
@@ -41,5 +42,4 @@ public class EventTest {
         Event event2 = new Event("Eat Apple", "NUS", true);
         assertTrue(event1.equals(event2));
     }
-    
 }

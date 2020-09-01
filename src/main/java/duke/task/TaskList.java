@@ -9,8 +9,8 @@ import java.util.List;
  * Contains and handles the task list.
  */
 public class TaskList {
-    private List<Task> list;
     private static final String STARLINE = "**************************************************************************";
+    private List<Task> list;
 
     /**
      * Constructs an instance of TaskList with an empty task list.
@@ -32,7 +32,7 @@ public class TaskList {
             while (line != null) {
                 try {
                     boolean isDone = Boolean.parseBoolean(bufferedReader.readLine());
-                    this.add(line, isDone,false);
+                    this.add(line, isDone, false);
                 } catch (IllegalArgumentException e) {
                     if (!isFileCorrupted) {
                         System.out.println(STARLINE + "WARNING: Your stored data appears to be in a corrupted format. "
@@ -45,7 +45,7 @@ public class TaskList {
             }
         } catch (IOException e) {
             System.out.println("Error populating task list with saved tasks: " + e);
-        } 
+        }
     }
 
     /**
@@ -55,15 +55,15 @@ public class TaskList {
     public List<Task> getTaskList() {
         return this.list;
     }
-    
+
     private void printList(List<Task> list, String listObjectDescription) {
         System.out.println(STARLINE + String.format("\nHere are the %s in your list:", listObjectDescription));
-        for (int i=0; i < list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             printTask(i + 1, list.get(i));
         }
         System.out.println(STARLINE);
     }
-    
+
     /**
      * Prints a list of the user's tasks.
      */
@@ -79,7 +79,7 @@ public class TaskList {
         String taskString = String.format("%d.%s", listIndex, task);
         System.out.println(taskString);
     }
-    
+
     /**
      * Prints the task added and number of tasks in the list.
      * @param task The task added.
@@ -88,7 +88,7 @@ public class TaskList {
         System.out.println("added: " + task);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
-    
+
     private void throwEmptyFieldException(String taskType, String ... fields) {
         StringBuilder emptyFields = new StringBuilder();
         boolean isFirstField = true;
@@ -100,17 +100,23 @@ public class TaskList {
                 emptyFields.append("/").append(field);
             }
         }
-        
         throw new IllegalArgumentException("OOPS! The " + emptyFields + " of " + taskType + " cannot be empty.");
     }
-    
+
     private void throwInvalidTaskSyntaxException(String taskType) {
         throw new IllegalArgumentException(String.format("OOPS! Invalid syntax. To add a %s, use:\n%s", taskType,
                 Task.getFormat(taskType)));
     }
 
+    private void addTaskToList(Task task, boolean shouldEcho) {
+        this.list.add(task);
+        if (shouldEcho) {
+            echo(task.toString());
+        }
+    }
+
     /**
-     * Handles user input command related to adding new task to the list. 
+     * Handles user input command related to adding new task to the list.
      * Throws errors to be caught and handled by parser if user input commands are in an invalid format.
      * @param input User input command for adding the task (unprocessed).
      * @param isDone Whether task is done or not.
@@ -119,47 +125,50 @@ public class TaskList {
     public void add(String input, boolean isDone, boolean shouldEcho) {
         String[] splitInput = input.split(" ", 2);
         String taskType = splitInput[0];
-        Task newTask;
-        
-        switch(taskType) { 
+
+        switch(taskType) {
         case "todo":
             if (input.matches("todo (\\S+\\s?)+")) {
-                newTask = new Todo(splitInput[1], isDone);
+                Task newTask = new Todo(splitInput[1], isDone);
+                addTaskToList(newTask, shouldEcho);
                 break;
             } else if (input.matches("todo\\s?")) {
                 throwEmptyFieldException("todo", "description");
             } else {
                 throwInvalidTaskSyntaxException("todo");
             }
+            break;
         case "deadline":
             if (input.matches("deadline (\\S+\\s?)+ /by (\\S+\\s?)+")) {
                 String[] splitDeadline = splitInput[1].split(" /by ");
                 String deadlineDesc = splitDeadline[0];
                 String by = splitDeadline[1];
-                newTask = new Deadline(deadlineDesc, by, isDone);
+                Task newTask = new Deadline(deadlineDesc, by, isDone);
+                addTaskToList(newTask, shouldEcho);
                 break;
-            } else if (input.matches("deadline\\s?") || !input.contains(" by ")){
+            } else if (input.matches("deadline\\s?") || !input.contains(" by ")) {
                 throwEmptyFieldException("deadline", "description", "date");
             } else {
                 throwInvalidTaskSyntaxException("deadline");
             }
+            break;
         case "event":
             if (input.matches("event (\\S+\\s?)+ /at (\\S+\\s?)+")) {
                 String[] splitEvent = splitInput[1].split(" /at ");
                 String eventDesc = splitEvent[0];
                 String at = splitEvent[1];
-                newTask = new Event(eventDesc, at, isDone);
+                Task newTask = new Event(eventDesc, at, isDone);
+                addTaskToList(newTask, shouldEcho);
                 break;
             } else if (input.matches("event\\s?") || !input.contains(" at ")) {
                 throwEmptyFieldException("event", "description", "location");
             } else {
                 throwInvalidTaskSyntaxException("event");
             }
+            break;
         default:
             throw new IllegalArgumentException("OOPS! There is no task of type " + taskType + "!");
         }
-        this.list.add(newTask);
-        if (shouldEcho) echo(newTask.toString());
     }
 
     /**
@@ -197,7 +206,12 @@ public class TaskList {
                     + "   delete <task index>");
         }
     }
-    
+
+    /**
+     * Returns a list of Task with descriptions containing the keyword.
+     * @param keyword The keyword used to filter Task descriptions.
+     * @return A list of Task with descriptions containing the keyword.
+     */
     public List<Task> find(String keyword) {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task : this.list) {
@@ -208,6 +222,4 @@ public class TaskList {
         printList(matchingTasks, "matching tasks");
         return matchingTasks;
     }
-
-    
 }

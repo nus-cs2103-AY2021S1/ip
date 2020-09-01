@@ -6,7 +6,7 @@ package duke.frontend;
  */
 public class Ui {
     private static final String STARLINE = "**************************************************************************";
-    private static final String LOGO = " ____        _   \n" 
+    private static final String LOGO = " ____        _   \n"
             + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -32,7 +32,7 @@ public class Ui {
      * Prints farewell greeting to user at end of program.
      */
     public static void exit() {
-        System.out.println( " _____  ___  ___  _____\n"
+        System.out.println(" _____  ___  ___  _____\n"
                 + "|  __ \\ \\  \\/  / |  ___|\n"
                 + "| | / /  \\    /  |  |__\n"
                 + "| | \\ \\   |  |   |  ___|\n"

@@ -31,10 +31,10 @@ public class Deadline extends Task {
      * @return String of Deadline object in format for saving to and retrieving from hard disk.
      */
     public String getParsedTask() {
-        return "deadline " + this.description + " /by " + this.by + System.lineSeparator() 
+        return "deadline " + this.description + " /by " + this.by + System.lineSeparator()
                 + this.isDone + System.lineSeparator();
     }
-    
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
