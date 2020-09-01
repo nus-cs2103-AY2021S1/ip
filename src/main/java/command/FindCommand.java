@@ -37,7 +37,7 @@ public class FindCommand extends Command {
      * keyword in the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeKeywordException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeKeywordException {
         String keyword = Parser.findKeywordParser(this.command);
         System.out.println(keyword.equals(""));
         StringBuilder sb = new StringBuilder();
@@ -50,6 +50,8 @@ public class FindCommand extends Command {
             }
         }
         sb.deleteCharAt(sb.length() - 1);
-        ui.getMessageTemplate(ui.formatMessage("Here are the matching tasks in your list:\n" + sb.toString()));
+
+        return ui.getMessageTemplate(ui
+                .formatMessage("Here are the matching tasks in your list:\n" + sb.toString()));
     }
 }

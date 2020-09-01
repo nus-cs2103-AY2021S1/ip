@@ -37,15 +37,15 @@ public class DeleteAllCommand extends Command {
      * @throws IOException Thrown when system failed to open external file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
 
         int length = tasks.size();
         for (int i = 0; i < length; i++) {
             tasks.remove(0);
         }
 
-        ui.getMessageTemplate(ui.formatMessage("All of your task has been removed!"));
-
         storage.updateFile(tasks);
+
+        return ui.getMessageTemplate("All of your task has been removed!");
     }
 }

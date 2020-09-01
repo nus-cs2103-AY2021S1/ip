@@ -47,15 +47,15 @@ public class DoneCommand extends Command {
      * to specify the index of the task in the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, NoIndexException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, NoIndexException {
         int index = Parser.findIndexParser(this.command);
         Task task = tasks.getTask(index - 1);
         task.setDone(true);
 
-        ui.getMessageTemplate(ui.formatMessage("Nice! I've marked this task as done:\n"
-                + ui.formatMessage(task.toString())));
-
         storage.updateFile(tasks);
+
+        return ui.getMessageTemplate("Nice! I've marked this task as done:\n"
+                + task.toString());
 
     }
 }

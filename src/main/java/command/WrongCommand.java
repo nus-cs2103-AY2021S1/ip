@@ -38,7 +38,7 @@ public class WrongCommand extends Command {
      * does not exist in the program.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws AnonymousException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws AnonymousException {
         throw new AnonymousException(this.command);
     }
 }

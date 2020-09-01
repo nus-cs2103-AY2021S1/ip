@@ -55,7 +55,7 @@ public class EventCommand extends Command {
      * user failed to enter the specified format of date-time in the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DescriptionException,
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DescriptionException,
             DukeDateTimeParserException {
         try {
             Map<String, String> taskDetails = Parser.findDescriptionParser(this.command);
@@ -65,9 +65,10 @@ public class EventCommand extends Command {
 
             tasks.add(eventTask);
 
-            ui.getTaskMessage(eventTask, tasks.size());
-
             storage.updateFile(tasks);
+
+            return ui.getTaskMessage(eventTask, tasks.size());
+
         } catch (DescriptionException e) {
             throw new DescriptionException();
         } catch (DateTimeParseException e) {

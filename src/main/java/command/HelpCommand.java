@@ -30,7 +30,7 @@ public class HelpCommand extends Command {
      * @param storage Storage to update external file whenever needed.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.getCommandList();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.getCommandList();
     }
 }

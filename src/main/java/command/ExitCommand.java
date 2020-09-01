@@ -6,7 +6,7 @@ import ui.Ui;
 
 /**
  * EventCommand would execute the program when user specify
- * "exit" as the command. This would terminate the Duke
+ * "exit" as the command. This would terminate the duke.Duke
  * program.
  */
 public class ExitCommand extends Command {
@@ -21,7 +21,7 @@ public class ExitCommand extends Command {
 
     /**
      * Executes parsed user command. The result is:
-     * 1. Terminates the Duke program.
+     * 1. Terminates the duke.Duke program.
      * 2. Sends a farewell message to the user via Ui.
      * 3. Alter the setExit field to true.
      *
@@ -30,9 +30,8 @@ public class ExitCommand extends Command {
      * @param storage Storage to update external file whenever needed.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.getMessageTemplate(ui.formatMessage("Bye! Hope to see you soon"));
-
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         super.setExit(true);
+        return ui.getMessageTemplate("Bye! Hope to see you soon");
     }
 }

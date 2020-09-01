@@ -63,7 +63,7 @@ public abstract class Command {
      * that should be specified in the command.
      * @throws DukeKeywordException Thrown when user failed to specify the keyword in the command.
      */
-    public abstract void execute (TaskList tasks, Ui ui, Storage storage) throws IOException, AnonymousException,
+    public abstract String execute (TaskList tasks, Ui ui, Storage storage) throws IOException, AnonymousException,
             DescriptionException, DukeDateTimeParserException, NoIndexException, DukeKeywordException;
 
     /**

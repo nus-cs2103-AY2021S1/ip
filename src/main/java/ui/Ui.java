@@ -10,7 +10,7 @@ import task.Task;
  * showing list of task, and showing exception message.
  */
 public class Ui {
-    static final String LINE = "     ___________________________________________________________________________\n";
+    static final String LINE = "___________________________________________________________________________";
     static final String DOUBLE_TAB = "      ";
 
     /**
@@ -38,10 +38,12 @@ public class Ui {
      *
      * @param input String message.
      */
-    public void getMessageTemplate(String input) {
-        System.out.print(LINE);
-        System.out.println(input);
-        System.out.println(LINE);
+    public String getMessageTemplate(String input) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(LINE).append("\n").append(input)
+                .append("\n").append(LINE);
+        System.out.println(stringBuilder.toString());
+        return stringBuilder.toString();
     }
 
     /**
@@ -51,10 +53,13 @@ public class Ui {
      * @param exception String exception message.
      */
     public void getExceptionTemplate(Exception exception) {
-        System.out.print(LINE);
-        System.out.println(formatExceptionMessage(exception.toString()));
-        System.out.println(LINE);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(LINE).append("\n")
+                .append(exception.toString()).append("\n")
+                .append(LINE);
+        System.out.println(stringBuilder.toString());
     }
+
 
     /**
      * Formats the command and format message, so that
@@ -66,15 +71,15 @@ public class Ui {
      */
     public String formatCommandList(String command, String format) {
         String indentation = "%-20s%s%n";
-        return formatMessage(String.format(indentation, command, format));
+        return String.format(indentation, command, format);
     }
 
     /**
      * Gets the list of existing commands that is available
-     * in Duke program ans shows it to the user via HelpCommand.
+     * in duke.Duke program ans shows it to the user via HelpCommand.
      */
-    public void getCommandList() {
-        getMessageTemplate(formatCommandList("COMMAND", "FORMAT")
+    public String getCommandList() {
+        return formatCommandList("COMMAND", "FORMAT")
                 + formatCommandList("deadline", "deadline <DEADLINE_NAME> /by <yyyy-MM-dd> <HH:mm>")
                 + formatCommandList("delete", "delete <TASK_NUMBER>")
                 + formatCommandList("delete all", "delete all")
@@ -83,8 +88,7 @@ public class Ui {
                 + formatCommandList("event", "event <EVENT_NAME> /at <yyyy-MM-dd> <HH:mm>")
                 + formatCommandList("show after", "show after <yyyy-MM-dd>")
                 + formatCommandList("show before", "show before <yyyy-MM-dd>")
-                + formatCommandList("todo", "todo <TASK_NAME>")
-        );
+                + formatCommandList("todo", "todo <TASK_NAME>");
     }
 
     /**
@@ -110,9 +114,9 @@ public class Ui {
     /**
      * Gets the greeting message and show it to the user.
      */
-    public void greet() {
-        getMessageTemplate(formatMessage("Hello! I'm Rich.\n")
-                + formatMessage("What can I do for you?"));
+    public String greet() {
+        return getMessageTemplate("Hello! I'm Rich.\n"
+                + "What can I do for you?");
     }
 
     /**
@@ -129,9 +133,8 @@ public class Ui {
      * @param task Task task.
      * @param size int size of task list.
      */
-    public void getTaskMessage(Task task, int size) {
-        getMessageTemplate(formatMessage("Got it. I've added this task :\n")
-                + formatMessage(task + "\n")
-                + formatMessage("Now you have " + size + " tasks in the list"));
+    public String getTaskMessage(Task task, int size) {
+        return getMessageTemplate("Got it. I've added this task :\n" + task + "\n"
+                + "Now you have " + size + " tasks in the list");
     }
 }

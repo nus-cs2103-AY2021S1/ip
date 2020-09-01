@@ -36,7 +36,7 @@ public class DoneAllCommand extends Command {
      * the external file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         for (Task task : tasks.getTasks()) {
             if (!task.isDone()) {
                 task.setDone(true);
@@ -51,8 +51,9 @@ public class DoneAllCommand extends Command {
                 sb.append(ui.formatMessage((i + 1) + ". " + tasks.getTask(i)));
             }
         }
-        ui.getMessageTemplate(ui.formatMessage("Here are the tasks in your list:\n" + sb.toString()));
 
         storage.updateFile(tasks);
+
+        return ui.getMessageTemplate("Here are the tasks in your list:\n" + sb.toString());
     }
 }

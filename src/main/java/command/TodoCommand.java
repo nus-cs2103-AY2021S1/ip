@@ -44,14 +44,14 @@ public class TodoCommand extends Command {
      * description in user command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DescriptionException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DescriptionException {
         String taskDescription = Parser.findTodoParser(this.command);
         TodoTask todoTask = new TodoTask(taskDescription);
 
         tasks.add(todoTask);
 
-        ui.getTaskMessage(todoTask, tasks.size());
-
         storage.updateFile(tasks);
+
+        return ui.getTaskMessage(todoTask, tasks.size());
     }
 }

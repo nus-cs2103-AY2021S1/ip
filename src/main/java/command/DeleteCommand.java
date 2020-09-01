@@ -47,15 +47,14 @@ public class DeleteCommand extends Command {
      * the external file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, NoIndexException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, NoIndexException {
         int index = Parser.findIndexParser(this.command);
 
         Task removedTask = tasks.remove(index - 1);
 
-        ui.getMessageTemplate(ui.formatMessage("Noted. I've removed this task:\n")
-                + ui.formatMessage(removedTask.toString() + "\n")
-                + ui.formatMessage("Now you have " + tasks.size() + " tasks in the list"));
-
         storage.updateFile(tasks);
+
+        return ui.getMessageTemplate("Noted. I've removed this task:\n"
+                + removedTask.toString() + "\n" + "Now you have " + tasks.size() + " tasks in the list");
     }
 }

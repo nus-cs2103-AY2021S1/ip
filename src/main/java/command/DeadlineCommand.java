@@ -52,7 +52,7 @@ public class DeadlineCommand extends Command {
      * valid date-time details on the command
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DescriptionException,
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DescriptionException,
             DukeDateTimeParserException {
         try {
             Map<String, String> taskDetails = Parser.findDescriptionParser(this.command);
@@ -62,9 +62,9 @@ public class DeadlineCommand extends Command {
 
             tasks.add(deadlineTask);
 
-            ui.getTaskMessage(deadlineTask, tasks.size());
-
             storage.updateFile(tasks);
+
+            return ui.getTaskMessage(deadlineTask, tasks.size());
         } catch (DateTimeParseException e) {
             throw new DukeDateTimeParserException();
         }

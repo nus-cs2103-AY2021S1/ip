@@ -43,7 +43,7 @@ public class ShowAfterCommand extends Command {
      * when the user failed to specify the date in the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeDateTimeParserException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeDateTimeParserException {
         LocalDate localDate = Parser.findDateParser(this.command);
         StringBuilder sb = new StringBuilder();
         int i = 1;
@@ -52,20 +52,20 @@ public class ShowAfterCommand extends Command {
             if (task instanceof DeadlineTask) {
                 DeadlineTask deadlineTask = (DeadlineTask) task;
                 if (deadlineTask.getDateTime().toLocalDate().isAfter(localDate)) {
-                    sb.append(ui.formatMessage(i + ". " + deadlineTask + "\n"));
+                    sb.append(i + ". " + deadlineTask + "\n");
                     i++;
                 }
 
             } else if (task instanceof EventTask) {
                 EventTask eventTask = (EventTask) task;
                 if (eventTask.getDateTime().toLocalDate().isAfter(localDate)) {
-                    sb.append(ui.formatMessage(i + ". " + eventTask + "\n"));
+                    sb.append(i + ". " + eventTask + "\n");
                     i++;
                 }
             }
 
         }
 
-        ui.getMessageTemplate(sb.toString());
+        return ui.getMessageTemplate(sb.toString());
     }
 }

@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -16,8 +18,10 @@ import task.TaskList;
 import ui.Ui;
 
 
+
+
 /**
- * Duke is the main program that runs and
+ * duke.Duke is the main program that runs and
  * interact with the user with Command Line.
  */
 public class Duke {
@@ -26,8 +30,12 @@ public class Duke {
     private Storage storage;
     private Ui ui;
 
+    public Duke() {
+        this("data/data.txt");
+    }
+
     /**
-     * Constructs a new Duke with the specified filepath.
+     * Constructs a new duke.Duke with the specified filepath.
      *
      * @param filepath file path
      */
@@ -47,7 +55,7 @@ public class Duke {
     }
 
     /**
-     * Runs the main program of the Duke. Terminates when
+     * Runs the main program of the duke.Duke. Terminates when
      * isExit is set to true.
      */
     public void mainProgram() {
@@ -79,12 +87,38 @@ public class Duke {
     }
 
 
+    public String getResponse(String command) {
+        try {
+            System.out.println(command);
+            Command c = Parser.parseCommand(command);
+            return c.execute(tasks, ui, storage);
+        } catch (FileNotFoundException e) {
+            return new DukeFileNotFoundException().toString();
+        } catch (IOException e) {
+            return new DukeFileException().toString();
+        } catch (AnonymousException e) {
+            System.out.println(command);
+            return new AnonymousException(command).toString();
+        } catch (DescriptionException e) {
+            return new DescriptionException().toString();
+        } catch (DukeDateTimeParserException e) {
+            return new DukeDateTimeParserException().toString();
+        } catch (NoIndexException e) {
+            return new NoIndexException().toString();
+        } catch (DukeKeywordException e) {
+            return new DukeKeywordException().toString();
+        }
+    }
+
+
     /**
-     * The main program of Duke.
+     * The main program of duke.Duke.
      * @param args String[] arbitrary arguments.
      */
     public static void main (String[]args) {
-        Duke duke = new Duke("data/data.txt");
-        duke.mainProgram();
+        //duke.Duke duke = new duke.Duke("data/data.txt");
+        //Duke duke = new Duke();
+        //duke.mainProgram();
+
     }
 }
