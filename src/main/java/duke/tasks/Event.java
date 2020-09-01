@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 
 import duke.utils.DateTimeStringFormatter;
 import duke.utils.ResourceHandler;
-import duke.utils.Schedulable;
 
 /**
  * A specialised {@code Task} that starts and ends at a specific time.

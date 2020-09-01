@@ -10,7 +10,6 @@ import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
 import duke.utils.PersistentList;
 import duke.utils.ResourceHandler;
-import duke.utils.Schedulable;
 
 /**
  * Manages {@code Task} objects.
