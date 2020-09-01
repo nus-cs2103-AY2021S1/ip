@@ -1,4 +1,4 @@
-package main.java;
+package java;
 
 import java.io.IOException;
 
@@ -8,11 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+
 /**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application{
-    private Duke duke = new Duke();
+    private Duke duke = new Duke("/data.txt");
 
     @Override
     public void start(Stage stage) {
@@ -27,4 +28,6 @@ public class Main extends Application{
             e.printStackTrace();
         }
     }
+
+
 }

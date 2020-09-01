@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package java.exceptions;
 
 public class PathNoFoundException extends DukeException {
     public PathNoFoundException(String errorMessage) {

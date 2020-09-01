@@ -1,8 +1,8 @@
-package main.java.commands;
+package java.commands;
 
-import main.java.tasklist.TaskList;
-import main.java.storage.Storage;
-import main.java.ui.Ui;
+import java.tasklist.TaskList;
+import java.storage.Storage;
+import java.ui.Ui;
 
 /**
  * A command object containing information parsed from an Ui object
@@ -16,6 +16,6 @@ public abstract class Command {
         return false;
     }
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
 }

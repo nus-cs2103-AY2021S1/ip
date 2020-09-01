@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package java.exceptions;
 
 public class WrongDateFormatException extends DukeException {
     public WrongDateFormatException(String errorMessage) {

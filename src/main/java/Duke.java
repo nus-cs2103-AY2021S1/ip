@@ -1,4 +1,4 @@
-package main.java;
+package java;
 
 import javafx.application.Application;
 import javafx.scene.layout.Region;
@@ -10,12 +10,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import main.java.commands.Command;
-import main.java.exceptions.DukeException;
-import main.java.tasklist.TaskList;
-import main.java.parser.Parser;
-import main.java.storage.Storage;
-import main.java.ui.Ui;
+import java.commands.Command;
+import java.exceptions.DukeException;
+import java.tasklist.TaskList;
+import java.parser.Parser;
+import java.storage.Storage;
+import java.ui.Ui;
 
 public class Duke {
     private Storage storage;
@@ -47,28 +47,29 @@ public class Duke {
     /**
      * Run a Duke object while isExit is not changed to true
      */
-    public void run() {
-        ui.displayWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.displayErrorMessage(e);
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
+//    public void run() {
+//        ui.displayWelcome();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String fullCommand = ui.readCommand();
+//                ui.showLine(); // show the divider line ("_______")
+//                Command c = Parser.parse(fullCommand);
+//                c.execute(tasks, ui, storage);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.displayErrorMessage(e);
+//            } finally {
+//                ui.showLine();
+//            }
+//        }
+//    }
 
     public String getResponse(String input){
         try{
             Command c = Parser.parse(input);
-            c.execute(tasks, ui, storage);
+            String output = c.execute(tasks, ui, storage);
+            return output;
         } catch (DukeException ex) {
             return ex.getMessage();
         }
@@ -76,8 +77,8 @@ public class Duke {
 
 
 
-    public static void main(String[] args) {
-        new Duke("/data.txt").run();
-    }
+//    public static void main(String[] args) {
+//        new Duke("/data.txt").run();
+//    }
 
 }

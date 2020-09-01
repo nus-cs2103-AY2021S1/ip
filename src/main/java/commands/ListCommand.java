@@ -1,8 +1,8 @@
-package main.java.commands;
+package java.commands;
 
-import main.java.tasklist.*;
-import main.java.ui.*;
-import main.java.storage.*;
+import java.tasklist.*;
+import java.ui.*;
+import java.storage.*;
 import java.time.LocalDate;
 
 public class ListCommand extends Command {
@@ -12,12 +12,16 @@ public class ListCommand extends Command {
         this.date = date;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String output = "";
         if (date == null) {
-            ui.showTask(tasks);
+            output = ui.showTask(tasks);
+
         } else {
-            ui.showTask(tasks, date);
+            output = ui.showTask(tasks, date);
         }
+
+        return output;
     }
 
 }

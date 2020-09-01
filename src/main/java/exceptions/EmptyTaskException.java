@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package java.exceptions;
 
 public class EmptyTaskException extends DukeException {
     public EmptyTaskException() {

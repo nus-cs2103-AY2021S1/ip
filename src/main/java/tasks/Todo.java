@@ -1,4 +1,4 @@
-package main.java.tasks;
+package java.tasks;
 
 public class Todo extends Task {
     protected boolean hasTime = false;

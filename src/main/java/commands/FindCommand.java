@@ -1,8 +1,8 @@
-package main.java.commands;
+package java.commands;
 
-import main.java.storage.Storage;
-import main.java.tasklist.TaskList;
-import main.java.ui.Ui;
+import java.storage.Storage;
+import java.tasklist.TaskList;
+import java.ui.Ui;
 
 public class FindCommand extends Command {
     private final String keyword;
@@ -11,8 +11,10 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showTask(tasks, keyword);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+
+        String output = ui.showTask(tasks, keyword);
+        return output;
     }
 
 }

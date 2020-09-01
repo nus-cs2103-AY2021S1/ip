@@ -1,9 +1,9 @@
-package main.java.commands;
+package java.commands;
 
-import main.java.tasklist.*;
-import main.java.ui.*;
-import main.java.storage.*;
-import main.java.tasks.*;
+import java.tasklist.*;
+import java.ui.*;
+import java.storage.*;
+import java.tasks.*;
 
 public class DoneCommand extends Command {
     private final int index;
@@ -12,10 +12,12 @@ public class DoneCommand extends Command {
         this.index = index;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.getTask(index);
-        ui.displayMarkAsDoneMessage(task);
+        String output = ui.displayMarkAsDoneMessage(task);
         tasks.completeTask(index);
+        return output;
+
     }
 
 }

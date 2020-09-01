@@ -1,8 +1,8 @@
-package test.java.parser;
+package parser;
 
-import main.java.commands.*;
-import main.java.exceptions.DukeException;
-import main.java.parser.Parser;
+import java.commands.*;
+import java.exceptions.DukeException;
+import java.parser.Parser;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;

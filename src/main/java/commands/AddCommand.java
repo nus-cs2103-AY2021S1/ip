@@ -1,9 +1,9 @@
-package main.java.commands;
+package java.commands;
 
-import main.java.tasklist.*;
-import main.java.ui.*;
-import main.java.storage.*;
-import main.java.tasks.*;
+import java.tasklist.*;
+import java.storage.*;
+import java.ui.*;
+import java.tasks.*;
 import java.time.LocalDate;
 
 public class AddCommand extends Command {
@@ -17,24 +17,26 @@ public class AddCommand extends Command {
         this.date = date;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public String execute(TaskList tasks, Ui ui, Storage storage){
+        String output = "";
         switch (type) {
             case "todo":
                 Todo todo = new Todo(description);
                 tasks.addTask(todo);
-                ui.displayAddTaskMessage(todo);
+                output = ui.displayAddTaskMessage(todo);
                 break;
             case "deadline":
                 Deadline deadline = new Deadline(description, date);
                 tasks.addTask(deadline);
-                ui.displayAddTaskMessage(deadline);
+                output = ui.displayAddTaskMessage(deadline);
                 break;
             case "event":
                 Event event = new Event(description, date);
                 tasks.addTask(event);
-                ui.displayAddTaskMessage(event);
+                output = ui.displayAddTaskMessage(event);
                 break;
         }
+        return output;
     }
 
     @Override

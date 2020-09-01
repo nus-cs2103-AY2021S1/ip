@@ -1,7 +1,7 @@
-package main.java.parser;
+package java.parser;
 
-import main.java.commands.*;
-import main.java.exceptions.*;
+import java.commands.*;
+import java.exceptions.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

@@ -1,7 +1,7 @@
 package test.java.ui;
 
 
-import main.java.ui.Ui;
+import java.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

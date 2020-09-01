@@ -1,11 +1,11 @@
-package main.java.storage;
+package java.storage;
 
-import main.java.tasklist.TaskList;
-import main.java.exceptions.PathNoFoundException;
-import main.java.tasks.Deadline;
-import main.java.tasks.Event;
-import main.java.tasks.Task;
-import main.java.tasks.Todo;
+import java.tasklist.TaskList;
+import java.exceptions.PathNoFoundException;
+import java.tasks.Deadline;
+import java.tasks.Event;
+import java.tasks.Task;
+import java.tasks.Todo;
 import java.util.ArrayList;
 import java.util.List;
 import java.nio.file.Files;

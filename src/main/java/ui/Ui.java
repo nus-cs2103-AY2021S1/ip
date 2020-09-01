@@ -1,8 +1,7 @@
-package main.java.ui;
+package java.ui;
 
-import main.java.tasklist.TaskList;
-import main.java.tasks.Task;
-
+import java.tasklist.TaskList;
+import java.tasks.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -15,41 +14,41 @@ public class Ui {
     public Ui(){
     }
 
-    public String readCommand() {
-        return sc.nextLine();
+//    public String readCommand() {
+//        return sc.nextLine();
+//    }
+
+//    public void showLine() {
+//        System.out.println("____________________________________________________________");
+//    }
+
+    public String displayWelcome() {
+        return "Hello! I am YURINA Chan.\nWhat can I do for you? ᕕ( ᐛ )ᕗ";
     }
 
-    public void showLine() {
-        System.out.println("____________________________________________________________");
+    public String displayBye() {
+        return "Bye~ Hope to see you again soon! ∠( ᐛ 」∠)＿";
     }
 
-    public void displayWelcome() {
-        System.out.println("Hello! I am YURINA Chan.\nWhat can I do for you? ᕕ( ᐛ )ᕗ");
+    public String showLoadingError() {
+        return "There is no data file found. " +
+                "A new file will be created at the end of the session. ⊂(￣▽￣)⊃";
     }
 
-    public void displayBye() {
-        System.out.println("Bye~ Hope to see you again soon! ∠( ᐛ 」∠)＿");
+    public String displayAddTaskMessage(Task task){
+        return task.addMessage();
     }
 
-    public void showLoadingError() {
-        System.out.println("There is no data file found. " +
-                "A new file will be created at the end of the session. ⊂(￣▽￣)⊃");
+    public String displayDeleteMessage(Task task){
+        return task.deleteMessage();
     }
 
-    public void displayAddTaskMessage(Task task){
-        System.out.println(task.addMessage());
+    public String displayMarkAsDoneMessage(Task task){
+        return task.markAsDoneMessage();
     }
 
-    public void displayDeleteMessage(Task task){
-        System.out.println(task.deleteMessage());
-    }
-
-    public void displayMarkAsDoneMessage(Task task){
-        System.out.println(task.markAsDoneMessage());
-    }
-
-    public void displayErrorMessage(Exception ex){
-        System.out.println(ex.getMessage());
+    public String displayErrorMessage(Exception ex){
+        return ex.getMessage();
     }
 
     /**
@@ -57,17 +56,20 @@ public class Ui {
      * @param taskList
      */
 
-    public void showTask(TaskList taskList) {
+    public String showTask(TaskList taskList) {
         if (taskList.getTasks().size() == 0) {
-            System.out.println("This is no task in your task list yet. Add one now! (/^▽^)/");
-        }
-
-        int no = 1;
-        for (Task task : taskList.getTasks()) {
-            String prefix = task.toString().substring(0, 7);
-            String end = task.toString().substring(7);
-            System.out.println(prefix + no + ". " + end);
-            no++;
+            return "This is no task in your task list yet. Add one now! (/^▽^)/";
+        } else {
+            int no = 1;
+            String output = "";
+            for (Task task : taskList.getTasks()) {
+                String prefix = task.toString().substring(0, 7);
+                String end = task.toString().substring(7);
+                String appended = prefix + no + ". " + end + "\n";
+                output = output + appended;
+                no++;
+            }
+            return output;
         }
     }
 
@@ -76,32 +78,35 @@ public class Ui {
      * @param taskList
      */
 
-    public void showTask(TaskList taskList, LocalDate date) {
+    public String showTask(TaskList taskList, LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         String dateString = date.format(formatter);
         ArrayList<Task> tasks = taskList.getTasks();
         ArrayList<Task> filtered = tasks.stream().filter(Task::getHasTime).filter(task -> task.getTime().equals(date))
                 .collect(Collectors.toCollection(ArrayList::new));
         if (filtered.size() == 0) {
-            System.out.println("No tasks on this day! Chill Chill~ ٩(˘◡˘)۶");
+            return "No tasks on this day! Chill Chill~ ٩(˘◡˘)۶";
         } else {
-            System.out.println("On " + dateString + ", you have the following tasks:");
+            String output = "On " + dateString + ", you have the following tasks: \n";
             for (Task task : filtered) {
-                System.out.println(task.toString());
+                output = output + task.toString() + "\n";
             }
+            return output;
         }
     }
 
-    public void showTask(TaskList taskList, String keyword){
+    public String showTask(TaskList taskList, String keyword){
         ArrayList<Task> tasks = taskList.getTasks();
         ArrayList<Task> filtered = tasks.stream().filter(task -> task.getDescription().contains(keyword))
                 .collect(Collectors.toCollection(ArrayList::new));
         if (filtered.size() == 0) {
-            System.out.println("Yurina can't find any relevant tasks. (T▽T)");
+            return "Yurina can't find any relevant tasks. (T▽T)";
         } else {
+            String output = "";
             for (Task task : filtered) {
-                System.out.println(task.toString());
+                output = output + task.toString() + "\n";
             }
+            return output;
         }
     }
 

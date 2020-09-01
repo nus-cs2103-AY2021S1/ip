@@ -1,8 +1,8 @@
-package main.java.commands;
+package java.commands;
 
-import main.java.tasklist.TaskList;
-import main.java.storage.Storage;
-import main.java.ui.Ui;
+import java.tasklist.TaskList;
+import java.storage.Storage;
+import java.ui.Ui;
 
 public class ExitCommand extends Command {
 
@@ -11,8 +11,10 @@ public class ExitCommand extends Command {
         return true;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveFile(tasks);
-        ui.displayBye();
+        String output = ui.displayBye();
+        return output;
+
     }
 }
