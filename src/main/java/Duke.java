@@ -22,7 +22,7 @@ public class Duke extends Application {
     TaskList myTaskList = new TaskList();
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/SeanDuke.JPG"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/SeanDuke.JPG"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/JARVIS.JPG"));
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
