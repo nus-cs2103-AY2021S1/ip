@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 class Deadline extends Task {
-    static String SYMBOL = "[D]";
+    private static String SYMBOL = "[D]";
 
     private LocalDate deadlineDay;
     private LocalTime deadlineTime;

@@ -15,14 +15,14 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         
         while (!end) {
-            String input = Ui.get_input(sc);
+            String input = Ui.getInput(sc);
             String output_msg = "";
             if (Parser.isBye(input)) {
                 end = true;
             } else if (Parser.isList(input)) {
                 output_msg = tasks.summarize();
             } else if (Parser.isDone(input)) {
-                output_msg = tasks.mark_done(Parser.getIndex(input)); 
+                output_msg = tasks.markDone(Parser.getIndex(input)); 
             } else if (Parser.isDelete(input)) {
                 output_msg = tasks.deleteTask(Parser.getIndex(input)); 
             } else if (Parser.isFind(input)) {
@@ -32,7 +32,7 @@ public class Duke {
                 try {
                     taskInput = Parser.parseTask(input); // catch duke exception from getTask(input)
                 } catch (Exception e) {
-                    System.out.println(Formatter.format_response(e.getMessage()));
+                    System.out.println(Formatter.formatResponse(e.getMessage()));
                     continue;
                 }
                 output_msg = tasks.addTask(taskInput);
@@ -41,7 +41,7 @@ public class Duke {
                 FormatPrinter.print(output_msg);
             }
         }
-        System.out.println(Formatter.format_response("Bye. Hope to see you again soon!\n"));
+        System.out.println(Formatter.formatResponse("Bye. Hope to see you again soon!\n"));
         sc.close();
     }
     
@@ -60,8 +60,8 @@ public class Duke {
 
         Duke hal9000 = new Duke();
         File prev_tasks = FileOpener.openFile("prev_tasks.txt");
-        TaskLoader.load_tasks(prev_tasks, hal9000.tasks);
+        TaskLoader.loadTasks(prev_tasks, hal9000.tasks);
         hal9000.op();
-        TaskStorage.save_task(prev_tasks, hal9000.tasks);
+        TaskStorage.saveTask(prev_tasks, hal9000.tasks);
     }
 }

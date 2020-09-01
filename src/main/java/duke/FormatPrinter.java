@@ -7,6 +7,6 @@ public class FormatPrinter {
      * @param str any string to be formatted and printed
      */
     public static void print(String str) {
-                System.out.println(Formatter.format_response(str));
+        System.out.println(Formatter.formatResponse(str));
     }
 }

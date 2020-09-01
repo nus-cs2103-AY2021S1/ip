@@ -2,8 +2,8 @@ package duke;
 
 public class Task {
     protected String name;
-    private boolean done;
-    private TaskType type;
+    private boolean isDone;
+    private final TaskType type;
 
     /**
      * Constructor for Task.
@@ -13,7 +13,7 @@ public class Task {
      */
     public Task(String name, TaskType type) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
         this.type = type;
     }
 
@@ -22,7 +22,7 @@ public class Task {
     }
 
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     public TaskType getType() {
@@ -37,8 +37,8 @@ public class Task {
     public boolean containsKeyword(String keyword) {
         String[] nameParts = name.split(" ");
         for (int i = 0; i < nameParts.length; i++) {
-            if (nameParts[i].length() == keyword.length() && 
-                    nameParts[i].compareTo(keyword) == 0) {
+            if (nameParts[i].length() == keyword.length()
+                    && nameParts[i].compareTo(keyword) == 0) {
                         return true;
             }
         }
@@ -59,8 +59,8 @@ public class Task {
      * done(): Set this task isDone = true
      */
     public void done() {
-        this.done = true;
-    }    
+        this.isDone = true;
+    }
 }
 
 

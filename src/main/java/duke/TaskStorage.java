@@ -10,7 +10,7 @@ public class TaskStorage {
      * @param prev_tasks File object to be written to
      * @param tasks TaskList to be saved
      */
-    public static void save_task(File prev_tasks, TaskList tasks) {
+    public static void saveTask(File prev_tasks, TaskList tasks) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(prev_tasks));
             for (int i = 0; i < tasks.getSize(); i++) {

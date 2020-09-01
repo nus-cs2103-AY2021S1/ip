@@ -9,7 +9,7 @@ public class Ui {
      * @param sc Scanner object
      * @return a string representing user input
      */
-    public static String get_input(Scanner sc) {
+    public static String getInput(Scanner sc) {
         String user_input = sc.nextLine().trim(); // Read user input
         return user_input;
     }

@@ -10,7 +10,7 @@ public class TaskLoader {
      * @param prev_tasks File object that has all previous tasks
      * @param tasks TaskList object to be populated
      */
-    public static void load_tasks(File prev_tasks, TaskList tasks) {
+    public static void loadTasks(File prev_tasks, TaskList tasks) {
         try {
             Scanner sc_file = new Scanner(prev_tasks);
             while (sc_file.hasNextLine()) {
