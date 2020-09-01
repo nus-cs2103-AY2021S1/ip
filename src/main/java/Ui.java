@@ -2,11 +2,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
-    private final String LINE = "____________________________________________________________";
-    private final String GREETING_MESSAGE = LINE
+    private static final String LINE = "____________________________________________________________";
+    private static final String GREETING_MESSAGE = LINE
             + "\n Quack! I am Duck"
             + "\n How can I help you today?\n" + LINE;
-    private final String EXIT_MESSAGE = LINE
+    private static final String EXIT_MESSAGE = LINE
             + "\n Waddling off now. See you soon! \n" + LINE;
 
     private Scanner sc;
