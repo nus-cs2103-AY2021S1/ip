@@ -13,9 +13,6 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
-
-
-
 /**
  * The Storage class deals with handling the writing and reading of data to the file specified
  */
@@ -23,7 +20,7 @@ import duke.tasks.Todo;
 public class Storage {
     private final File dataFile;
     @SuppressWarnings({"checkstyle:AbbreviationAsWordInName", "CheckStyle"})
-    private final String FILE_PATH;
+    private final String FilePath;
 
     /**
      * Initializes a storage object
@@ -31,7 +28,7 @@ public class Storage {
      * @param filePath String representing the filepath to load the file
      */
     public Storage(String filePath) {
-        this.FILE_PATH = filePath;
+        this.FilePath = filePath;
         dataFile = new File(filePath);
         try {
             if (dataFile.createNewFile()) {
@@ -50,7 +47,7 @@ public class Storage {
 
     public void appendFile (String task) {
         try {
-            FileWriter fw = new FileWriter(FILE_PATH, true);
+            FileWriter fw = new FileWriter(FilePath, true);
             fw.write(task);
             fw.close();
         } catch (IOException err) {
@@ -65,7 +62,7 @@ public class Storage {
      */
     public void overwriteFile (ArrayList<Task> list) {
         try {
-            FileWriter fw = new FileWriter(FILE_PATH);
+            FileWriter fw = new FileWriter(FilePath);
             for (Task currentTask : list) {
                 String done = currentTask.isDone() ? "1" : "0";
                 if (currentTask instanceof Event) {

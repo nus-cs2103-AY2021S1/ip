@@ -19,8 +19,8 @@ public class Ui {
     /**
      * Shows a line to dictate separation
      */
-    public static void showLine() {
-        System.out.println("____________________________________________________________ \n");
+    public static String showLine() {
+        return "_______________________________________________________ \n";
     }
 
     /**
@@ -28,22 +28,22 @@ public class Ui {
      *
      * @param list in which the tasks are stored
      */
-    public void welcomeMessage(TaskList list) {
-        System.out.println("____________________________________________________________ \n"
-                + "Hello! Welcome to Duke, your personal task manager! \nWhat can I do for you?"
-        );
+    public String welcomeMessage(TaskList list) {
+        String toReturn = showLine()
+                + "Hello! Welcome to Duke, your personal task manager! \nWhat can I do for you?";
         if (list.getList().size() > 0) {
-            System.out.println("You have outstanding tasks. Type 'list' to view your current tasks.");
+            toReturn = toReturn + "You have outstanding tasks. Type 'list' to view your current tasks.";
         }
-        System.out.println("____________________________________________________________ \n");
+        toReturn = toReturn + showLine();
+        return toReturn;
     }
 
     /**
      * Displays a message to show that the task has been added
      */
-    public void showAdded () {
-        System.out.println("Okay! I've added it to the list."
-                + " To view your current tasks, type 'list'");
+    public String showAdded () {
+        return "Okay! I've added it to the list."
+                + " To view your current tasks, type 'list'";
     }
 
     /**
@@ -52,24 +52,25 @@ public class Ui {
      * @param list in which tasks are stored
      */
 
-    public void showList(ArrayList<Task> list) {
-        showLine();
+    public String showList(ArrayList<Task> list) {
+        String toReturn = showLine();
         if (list.size() == 0) {
-            System.out.println("you do not have any tasks yet");
+            toReturn += "you do not have any tasks yet";
         } else {
             for (int i = 0; i < list.size(); i++) {
                 int number = i + 1;
-                System.out.println(" " + number + "." + list.get(i));
+                toReturn += " " + number + "." + list.get(i) + "\n";
             }
         }
-        showLine();
+        toReturn += showLine();
+        return toReturn;
     }
 
     /**
      * Displays a message to the user indicating that the command is invalid
      */
-    public void showInvalidCommand() {
-        System.out.println("I'm sorry I don't understand :(");
+    public String showInvalidCommand() {
+        return "I'm sorry I don't understand :(";
     }
 
     /**
@@ -87,10 +88,9 @@ public class Ui {
     /**
      * Displays a message indicating that the program has come to an end.
      */
-    public void showEnd() {
-        showLine();
-        System.out.println(" Bye. Hope to see you again soon!" + "\n");
-        showLine();
+    public static String showEnd() {
+        String toReturn = showLine() + " Bye. Hope to see you again soon!" + "\n" + showLine();
+        return toReturn;
     }
 
     /**

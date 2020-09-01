@@ -28,7 +28,7 @@ public class Parser {
         } else if (line.indexOf("find") == 0) {
             return new Command(line, "find");
         } else {
-            return new Command(line, null);
+            return new Command(line, "invalid");
         }
     }
 }

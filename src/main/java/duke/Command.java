@@ -33,53 +33,53 @@ public class Command {
      * @param ui the user interface object.
      */
 
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
-        if (action == null) {
-            ui.showInvalidCommand();
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
+        if (action.equals("invalid")) {
+            return ui.showInvalidCommand();
         } else if (action.equals("bye")) {
             this.end = true;
-            ui.showEnd();
-            ui.close();
+            return ui.showEnd();
         } else if (action.equals("list")) {
-            ui.showList(taskList.getList());
+            return ui.showList(taskList.getList());
         } else if (action.indexOf("done") == 0) {
             String[] split = action.split("done ");
             try {
                 Integer taskNumber = Integer.parseInt(split[1]);
-                taskList.checkOff(taskNumber);
+                return taskList.checkOff(taskNumber);
             } catch (NumberFormatException err) {
-                System.out.println("Please input a valid number");
+                return "Please input a valid number";
             }
         } else if (action.equals("delete")) {
-            taskList.delete(task);
+            return taskList.delete(task);
         } else if (action.equals("todo")) {
-            taskList.addToDo(task);
-            ui.showAdded();
+            String toReturn = taskList.addToDo(task) + ui.showAdded();
+            return toReturn;
         } else if (action.equals("deadline")) {
-            taskList.addDeadline(task);
-            ui.showAdded();
+            String toReturn = taskList.addDeadline(task) + ui.showAdded();
+            return toReturn;
         } else if (action.equals("event")) {
-            taskList.addEvent(task);
-            ui.showAdded();
+            String toReturn = taskList.addEvent(task) + ui.showAdded();
+            return toReturn;
         } else if (action.equals("find")) {
             String[] split = task.split("find ");
             String toFind = split[1];
             ArrayList<Task> list = taskList.getList();
             ArrayList<Task> filtered = new ArrayList<>();
             if (list.size() == 0) {
-                System.out.println("You do not have any tasks yet");
+                return "You do not have any tasks yet";
             } else {
-                System.out.println("Here are the tasks that matches '" + toFind + "'");
+                String toReturn = "Here are the tasks that matches '" + toFind + "'";
                 for (int i = 0; i < list.size(); i++) {
                     String task = list.get(i).toString();
                     if (task.contains(toFind)) {
                         filtered.add(list.get(i));
                     }
                 }
-                ui.showList(filtered);
+                toReturn += ui.showList(filtered);
+                return toReturn;
             }
         } else {
-            ui.showInvalidCommand();
+            return ui.showInvalidCommand();
         }
     }
 
