@@ -32,7 +32,7 @@ public class AddTask extends Command {
      * @param type Type of task.
      * @param arr Array of words from the tasks's description and (if any) date.
      */
-    public void addTask(Type type, String [] arr) {
+    public String addTask(Type type, String [] arr) {
         Task task;
 
         try {
@@ -63,9 +63,9 @@ public class AddTask extends Command {
             }
 
             tasks.add(task);
-            layout.printAddedMessage(task.toString(), tasks.size());
+            return layout.printAddedMessage(task.toString(), tasks.size());
         } catch (DukeException e) {
-            layout.print(e.getMessage());
+            return layout.print(e.getMessage());
         }
     }
     

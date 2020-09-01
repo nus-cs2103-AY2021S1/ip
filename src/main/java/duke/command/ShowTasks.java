@@ -13,8 +13,8 @@ public class ShowTasks extends Command {
     /**
      * Get task list and display it to the user.
      */
-    public void showTasks() {
-        layout.printTaskList(false, tasks);
+    public String showTasks() {
+        return layout.printTaskList(false, tasks);
     }
     
 }

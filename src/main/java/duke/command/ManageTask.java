@@ -24,26 +24,26 @@ public class ManageTask extends Command {
      * @param type Type of action to execute: delete or mark done.
      * @param i Index of the task in the task list.
      */
-    public void manageTask(Action type, String i) {
+    public String manageTask(Action type, String i) {
         try {
             int index = Integer.parseInt(i);
             Task task = tasks.get(index - 1);
             switch (type) {
             case DONE:
                 task.markDone();
-                layout.printMarkedDone(task);
-                break;
+                return layout.printMarkedDone(task);
             case DELETE:
                 tasks.remove(index - 1);
-                layout.printDeleted(task, tasks.size());
-                break;
+                return layout.printDeleted(task, tasks.size());
+            default:
+                return "Should never reach here";
             }
         } catch (IndexOutOfBoundsException e) {
             DukeException d = new DukeException("Task " + i + " cannot be found");
-            layout.print(d.getMessage());
+            return layout.print(d.getMessage());
         } catch (NumberFormatException e) {
             DukeException d = new DukeException(i + " is not an integer");
-            layout.print(d.getMessage());
+            return layout.print(d.getMessage());
         }
 
     }

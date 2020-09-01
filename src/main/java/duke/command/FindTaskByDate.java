@@ -13,7 +13,7 @@ public class FindTaskByDate extends Command {
         super(tasks);
     }
 
-    public void findTaskByDate(String [] arr) {
+    public String findTaskByDate(String [] arr) {
         String date;
         try {
             date = parser.getDate(arr);
@@ -21,9 +21,9 @@ public class FindTaskByDate extends Command {
             shallowCopy.removeIf(task ->
                     !(task.isSameDate(date))
             );
-            layout.printTaskList(true, shallowCopy);
+            return layout.printTaskList(true, shallowCopy);
         } catch (DukeException e) {
-            layout.print(e.getMessage());
+            return layout.print(e.getMessage());
         }
 
     }

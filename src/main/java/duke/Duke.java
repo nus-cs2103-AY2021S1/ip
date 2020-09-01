@@ -16,7 +16,21 @@ public class Duke {
     private Ui ui;
     private Layout layout;
 
-    public Duke(String filePath) {
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponse(String input) {
+        String dukeRespond = tasksData.readCommands(input.split(" "));
+        return "Duke heard: " + dukeRespond;
+    }
+    
+    protected String greet() {
+        return ui.greet();
+    }
+
+    public Duke() {
+        String filePath = "data/duke.txt";
         storage = new Storage(filePath);
         try {
             tasksData = new TaskList(storage.load(), storage);
@@ -27,16 +41,5 @@ public class Duke {
             layout.print(d.getMessage());
             tasksData = new TaskList(new ArrayList<>(), storage);
         }
-    }
-
-    /**
-     * Listen to user input.
-     */
-    public void run() {
-        ui.listen();
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 }
