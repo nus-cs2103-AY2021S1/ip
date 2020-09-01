@@ -23,7 +23,6 @@ public class TaskList {
      * @param task
      */
 
-
     public static String addTask(Task task) {
         tasks.add(task);
         String str = "_____________________________________________________"
@@ -34,14 +33,14 @@ public class TaskList {
         return str;
     }
 
-//    /**
-//     * Adds task from listOfTasks.txt into user's list of tasks.
-//     *
-//     * @param task
-//     */
-//    public static void addStoredTask(Task task) {
-//        tasks.add(task);
-//    }
+   /**
+    * Adds task from listOfTasks.txt into user's list of tasks.
+    *
+    * @param task
+    */
+   public static void addStoredTask(Task task) {
+       tasks.add(task);
+   }
 
     /**
      * Prints user's list of tasks.
