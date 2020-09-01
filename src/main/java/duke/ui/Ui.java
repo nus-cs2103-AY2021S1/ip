@@ -66,7 +66,7 @@ public class Ui {
      * @param error The error message
      */
     public static String showError(String error) {
-        return "Sorry an error occurred!! :( \n"
+        return "Sorry an error occurred!! \n"
                 + "_________________________________________\n"
                 + error + "\n"
                 + "_________________________________________";
