@@ -37,4 +37,8 @@ public class Task {
     protected String boxFormat(String symbol) {
         return String.format("[%s]", symbol);
     }
+
+    public String getDescription() {
+        return description;
+    }
 }
