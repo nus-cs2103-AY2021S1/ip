@@ -33,7 +33,7 @@ public class Task {
      * @return String ✓ or ✗ symbols
      */
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✗"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     /**
@@ -41,7 +41,6 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:\n [✓] " + description);
     }
 
     /**

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -5,6 +6,61 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner sc;
+
+    /**
+     * Print statement when a task is added into TaskList.
+     *
+     * @param task
+     */
+    public String printAddedTask(Task task, int numTask) {
+        return "Got it. I've added this task:\n" + task + "\n"
+                + "Now you have " + String.valueOf(numTask) + " tasks in the list.";
+    }
+
+    public String markAsDone(Task task) {
+        return "Nice! I've marked this task as done:\n [✓] " + task.description;
+    }
+
+    /**
+     * Delete a task using its position from TaskList.
+     *
+     * @param task Task
+     * @param numTaskLeft int
+     */
+    public String deleteTask(Task task, int numTaskLeft) {
+        return "Noted. I've removed this task: \n" + task + "\n"
+                + "Now you have " + Integer.valueOf(numTaskLeft) + " tasks in the list.";
+    }
+
+    /**
+     * Print all the tasks in the TaskList.
+     *
+     * @param tasks
+     */
+    public String printAllTask(TaskList tasks) {
+        int numTask = 0;
+        String output = "Here are the tasks in your list:\n";
+        while (numTask < tasks.size()) {
+            output = output + Integer.valueOf(numTask + 1) + "." + tasks.getTask(numTask) + "\n";
+            numTask++;
+        }
+        return output;
+    }
+
+    /**
+     * Print all the matching tasks.
+     *
+     * @param tasks ArrayList
+     */
+    public String printSearchedTask(ArrayList<Task> tasks) {
+        int numTask = 0;
+        String output = "Here are the matching tasks in your list:\n";
+        while (numTask < tasks.size()) {
+            output = output + Integer.valueOf(numTask + 1) + "." + tasks.get(numTask) + "\n";
+            numTask++;
+        }
+        return output;
+    }
 
     /**
      * Ui constructor to initialise scanner.
@@ -62,9 +118,9 @@ public class Ui {
     /**
      * Stop Duke and close scanner.
      */
-    public void closeDuke() {
+    public String closeDuke() {
         String bye = "Bye. Hope to see you again soon!";
         sc.close();
-        System.out.println(bye);
+        return bye;
     }
 }

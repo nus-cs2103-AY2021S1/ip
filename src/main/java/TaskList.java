@@ -50,23 +50,11 @@ public class TaskList {
     }
 
     /**
-     * Print statement when a task is added into TaskList.
-     *
-     * @param task
-     */
-    public void printAddedTask(Task task) {
-        System.out.println("Got it. I've added this task:\n"
-                + task + "\nNow you have " + String.valueOf(tasks.size())
-                + " tasks in the list.");
-    }
-
-    /**
      * Add a task into TaskList at the last position.
      *
      * @param task
      */
     public void addTask(Task task) {
         tasks.add(task);
-        printAddedTask(task);
     }
 }

@@ -19,52 +19,12 @@ public class Command {
     }
 
     /**
-     * Print all the tasks in the TaskList.
-     *
-     * @param tasks
-     */
-    public void printAllTask(TaskList tasks) {
-        int numTask = 0;
-        System.out.println("Here are the tasks in your list:");
-        while (numTask < tasks.size()) {
-            System.out.println(Integer.valueOf(numTask + 1) + "." + tasks.getTask(numTask));
-            numTask++;
-        }
-    }
-
-    /**
-     * Print all the matching tasks.
-     *
-     * @param tasks ArrayList
-     */
-    public void printSearchedTask(ArrayList<Task> tasks) {
-        int numTask = 0;
-        System.out.println("Here are the matching tasks in your list:");
-        while (numTask < tasks.size()) {
-            System.out.println(Integer.valueOf(numTask + 1) + "." + tasks.get(numTask));
-            numTask++;
-        }
-    }
-
-    /**
-     * Delete a task using its position from TaskList.
-     *
-     * @param pos int
-     * @param tasks TaskList
-     */
-    public void deleteTask(int pos, TaskList tasks) {
-        System.out.println("Noted. I've removed this task: \n" + tasks.getTask(pos) +
-                "\n" + "Now you have " + Integer.valueOf(tasks.size() - 1) + " tasks in the list.");
-        tasks.removeTask(pos);
-    }
-
-    /**
      * Remove first string in the string array.
      *
      * @param arr string array
      * @return string array
      */
-    private static String[] removeFirst(String[] arr) {
+    private String[] removeFirst(String[] arr) {
         String[] tempArr = new String[arr.length];
         for (int i = 0; i < arr.length - 1; i++) {
             tempArr[i] = arr[i + 1];
@@ -79,7 +39,7 @@ public class Command {
      * @param word string
      * @return string array before the word
      */
-    private static String[] removeAfterWord(String[] arr, String word) {
+    private String[] removeAfterWord(String[] arr, String word) {
         String[] temp = new String[arr.length];
         for (int i = 0; i < arr.length; i++) {
             if (arr[i].equals(word)) {
@@ -98,7 +58,7 @@ public class Command {
      * @param word string
      * @return string array
      */
-    private static String[] keepAfterWord(String[] arr, String word) {
+    private String[] keepAfterWord(String[] arr, String word) {
         String[] temp = new String[arr.length];
         int counter = 0;
         // find position of the word
@@ -121,7 +81,7 @@ public class Command {
      * @param arr string array
      * @return string
      */
-    private static String joinString(String[] arr) {
+    private String joinString(String[] arr) {
         String text = arr[0];
         if (arr.length == 1) {
             return text;
@@ -215,36 +175,54 @@ public class Command {
      * @throws ParseException
      * @throws IOException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTodoDescripDukeException,
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTodoDescripDukeException,
             InvalidDeadlineDescripDukeException, InvalidEventDescripDukeException,
             InvalidFirstDukeException, ParseException, IOException {
 
         if (commandType.equals(CommandType.PRINTALLTASKS)) {
-            printAllTask(tasks);
+            return ui.printAllTask(tasks);
         } else if (commandType.equals(CommandType.EXITDUKE)) {
-            ui.closeDuke();
+            return ui.closeDuke();
         } else if (commandType.equals(CommandType.MARKASDONE)){
             int counter = Integer.parseInt(commandArr[1]);
+
             tasks.getTask(counter - 1).markAsDone();
             storage.saveToFile(tasks.tasks);
+            return ui.markAsDone(tasks.getTask(counter - 1));
         } else if (commandType.equals(CommandType.DELETETASK)){
             int counter = Integer.parseInt(commandArr[1]);
-            deleteTask(counter - 1, tasks);
+            String output;
+
+            output = ui.deleteTask(tasks.getTask(counter - 1), tasks.size() - 1);
+            tasks.removeTask(counter - 1);
             storage.saveToFile(tasks.tasks);
+            return output;
         } else if (commandType.equals(CommandType.ADDTODO)){
-            tasks.addTask(createTodo());
+            Task todoTask = createTodo();
+
+            tasks.addTask(todoTask);
             storage.saveToFile(tasks.tasks);
+            return ui.printAddedTask(todoTask, tasks.size());
         } else if (commandType.equals(CommandType.ADDDEADLINE)) {
-            tasks.addTask(createDeadline());
+            Task deadlineTask = createDeadline();
+
+            tasks.addTask(deadlineTask);
             storage.saveToFile(tasks.tasks);
+            return ui.printAddedTask(deadlineTask, tasks.size());
         } else if (commandType.equals(CommandType.ADDEVENT)) {
-            tasks.addTask(createEvent());
+            Task eventTask = createEvent();
+
+            tasks.addTask(eventTask);
             storage.saveToFile(tasks.tasks);
+            return ui.printAddedTask(eventTask, tasks.size());
         } else if (commandType.equals(CommandType.FINDTASK)) {
             String keyword = joinString(removeFirst(commandArr));
+
             ArrayList<Task> tempTasks = searchKeyWord(tasks, keyword);
-            printSearchedTask(tempTasks);
-        } else {}
+            return ui.printSearchedTask(tempTasks);
+        } else {
+            return null;
+        }
     }
 
     /**
