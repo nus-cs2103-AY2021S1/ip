@@ -3,6 +3,9 @@ package duke;
 import java.io.*;
 
 
+/**
+ * Implements Storage to handle data read and write
+ */
 public class Storage {
     String filePath;
 
