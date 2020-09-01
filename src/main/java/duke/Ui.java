@@ -20,40 +20,30 @@ public class Ui {
     }
 
     /**
-     * Prints the greet message.
+     * Returns the greet message.
      */
-    public void greet() {
-        System.out.println(horizontalLine);
-        System.out.println(indentation + "Hello! I'm Duke");
-        System.out.println(indentation + "What can I do for you?");
-        System.out.println(horizontalLine);
+    public static String greet() {
+        return ("Hello! I'm Duke\n" + "What can I do for you?\n");
     }
 
     /**
-     * Prints the exit message and close the scanner.
+     * Returns the exit message and close the scanner.
      */
-    public void exit() {
-        String bye = "Bye. Hope to see you again soon!";
-        System.out.println(horizontalLine);
-        System.out.println(indentation + bye);
-        System.out.println(horizontalLine);
+    public String exit() {
         scanner.close();
+        return getExitMessage();
+    }
+
+    public static String getExitMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints the error message.
+     * Returns the error message.
      * @param message Error message.
      */
-    public void printErrorMessage(String message) {
-        System.out.println(indentation + "☹ OOPS!!! " + message);
-        System.out.println(horizontalLine);
-    }
-
-    /**
-     * Prints a horizontal line.
-     */
-    public void printHorizontalLine() {
-        System.out.println(horizontalLine);
+    public static String getErrorMessage(String message) {
+        return "OOPS!!! " + message;
     }
 
 }

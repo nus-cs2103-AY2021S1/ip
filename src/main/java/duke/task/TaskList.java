@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> taskList;
-    private final String indentation = "     ";
+    private final String indentation = "  ";
 
     /**
      * Construct a TaskList object.
@@ -22,47 +22,52 @@ public class TaskList {
     }
 
     /**
-     * Prints the task.
+     * Returns the task in String.
      * @param task Task to be printed.
      */
-    public void printAddedTask(Task task) {
-        System.out.println(indentation + "Got it. I've added this task: ");
-        System.out.println(indentation + "  " + task.toString());
-        System.out.println(indentation + "Now you have " + taskList.size() + " tasks in the list.");
+    public String addedTaskToString(Task task) {
+        String message = "Got it. I've added this task: \n";
+        message += indentation + task.toString() + "\n"
+                + "Now you have " + taskList.size() + " tasks in the list.\n";
+        return message;
     }
 
     /**
-     * Prints taskList.
+     * Returns taskList in string.
      */
-    public void printList() {
-        System.out.println(indentation + "Here are the tasks in your list:");
+    public String taskListToString() {
+        String message = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.size(); i++) {
             String s = indentation + (i + 1) + ". " + taskList.get(i).toString();
-            System.out.println(s);
+            message += s + "\n";
         }
+        return message;
     }
 
     /**
      * Marks the nth task as done.
      * @param n Index of the task to be marked as done.
      */
-    public void markTaskAsDone(int n) {
-        System.out.println(indentation + "Nice! I've marked this task as done: ");
+    public String markTaskAsDone(int n) {
+        String message = "Nice! I've marked this task as done: \n";
         Task task = taskList.get(n - 1);
         task.markAsDone();
-        System.out.println(indentation + "  " + task.toString());
+        message += indentation + task.toString() + "\n";
+        return message;
     }
 
     /**
      * Deletes the nth task.
      * @param n Index of the task to be deleted.
      */
-    public void deleteTask(int n) {
-        System.out.println(indentation + "Noted. I've removed this task:");
+    public String deleteTask(int n) {
+        String message = "Noted. I've removed this task:\n";
         Task task = taskList.get(n - 1);
         System.out.println(indentation + "  " + task.toString());
         taskList.remove(n - 1);
-        System.out.println(indentation + "Now you have " + taskList.size() + " tasks in the list.");
+        message += indentation + task.toString() + "\n";
+        message += "Now you have " + taskList.size() + " tasks in the list.\n";
+        return message;
     }
 
     /**
@@ -85,7 +90,7 @@ public class TaskList {
      * Prints the tasks containing the keyword.
      * @param keyword Keyword.
      */
-    public void findTaskByKeyword(String keyword) {
+    public String findTaskByKeyword(String keyword) {
         ArrayList<Task> tasksWithKeyword = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
@@ -93,10 +98,11 @@ public class TaskList {
                 tasksWithKeyword.add(task);
             }
         }
-        System.out.println(indentation + "Here are the matching tasks in your list:");
+        String message = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < tasksWithKeyword.size(); i++) {
             String s = indentation + (i + 1) + ". " + tasksWithKeyword.get(i).toString();
-            System.out.println(s);
+            message += s + "\n";
         }
+        return message;
     }
 }

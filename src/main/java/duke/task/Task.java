@@ -54,9 +54,9 @@ public class Task {
     @Override
     public String toString () {
         if (isCompleted) {
-            return "[✓] " + taskName;
+            return "[done] " + taskName;
         } else {
-            return "[✗] " + taskName;
+            return "[notDone] " + taskName;
         }
     }
 }
