@@ -36,6 +36,18 @@ public class TaskList {
                 Willy.style);
     }
 
+    public String javaFXAddToList(Task task) {
+        listOfTasks.add(task);
+        storage.updateStorage(listOfTasks);
+        return Willy.style +
+                "\tAy here is the task you just added:\n" +
+                "\t  " + task + "\n" +
+                "\tNow you have " + listOfTasks.size() +
+                " task(s) ah dun forget\n" +
+                Willy.style;
+    }
+
+
     public void removeTask(int taskNum) {
         int i = taskNum - 1;
         Task task = listOfTasks.get(i);
@@ -49,6 +61,19 @@ public class TaskList {
                 Willy.style);
     }
 
+    public String javaFXRemoveTask(int taskNum) {
+        int i = taskNum - 1;
+        Task task = listOfTasks.get(i);
+        listOfTasks.remove(i);
+        storage.updateStorage(listOfTasks);
+        return Willy.style +
+                "\tOkai here is the task you just deleted:\n" +
+                "\t  " + task + "\n" +
+                "\tNow you have " + listOfTasks.size() +
+                " task(s) left ~\n" +
+                Willy.style;
+    }
+
     // Reads through all the tasks in the list
     public void readList() {
         System.out.println(Willy.style);
@@ -58,6 +83,17 @@ public class TaskList {
             System.out.println("\t" + (i + 1) + ". " + task);
         }
         System.out.println(Willy.style);
+    }
+
+    public String javaKFReadList() {
+        String list = Willy.style +
+                "\tHere are the tasks in your list to jolt ur memory:>\n";
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            Task task = listOfTasks.get(i);
+            list = list + "\t" + (i + 1) + ". " + task + "\n";
+        }
+        list = list + Willy.style;
+        return list;
     }
 
     // Update Tasks to be done
@@ -70,6 +106,17 @@ public class TaskList {
         System.out.println("\tNiceee I've marked this task as done!");
         System.out.println("\t   " + task);
         System.out.println(Willy.style);
+    }
+
+    public String javaFXSetTaskDone(int taskNum) {
+        int i = taskNum - 1;
+        Task task = listOfTasks.get(i);
+        task.setTaskDone(true);
+        storage.updateStorage(listOfTasks);
+        return Willy.style + "\n" +
+        "\tNiceee I've marked this task as done!" + "\n" +
+        "\t   " + task + "\n" +
+        Willy.style + "\n";
     }
 
     public void findTask(String keyword) {
@@ -88,5 +135,24 @@ public class TaskList {
             System.out.println("\t  " + (i + 1) + "." + task);
         }
         System.out.println(Willy.style);
+    }
+
+    public String javaFXFindTask(String keyword) {
+        ArrayList<Task> keyList = new ArrayList<>();
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            Task tempTask = listOfTasks.get(i);
+            if (tempTask.task.contains(keyword)) {
+                keyList.add(tempTask);
+            }
+        }
+
+        String filteredList = Willy.style + "\n" +
+        "\t Here are the matching tasks in your list:" + "\n";
+        for (int i = 0; i < keyList.size(); i++) {
+            Task task = keyList.get(i);
+            filteredList = filteredList + "\t  " + (i + 1) + "." + task + "\n";
+        }
+        filteredList = filteredList + Willy.style;
+        return filteredList;
     }
 }
