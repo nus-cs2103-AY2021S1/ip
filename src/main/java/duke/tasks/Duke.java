@@ -13,6 +13,10 @@ public class Duke {
     private UI ui;
     private Parser parser;
 
+
+
+
+
     /**
      * Creates the Duke object with its attributes.
      * @throws FileNotFoundException File containing list of task may not be found.
@@ -26,6 +30,15 @@ public class Duke {
         } catch (FileNotFoundException e) {
             System.out.println(e);
         }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponse(String input) throws IOException {
+        Command c = parser.parse(input);
+        return c.execute(tasks, ui, storage);
     }
 
     /**

@@ -14,13 +14,15 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws IOException {
         //remove event task from list of tasks
         tasks.done(this.done);
 
         //write to file
         String s = storage.genList(tasks.getTaskLs());
         storage.writeToFile("data/duke.rtf", s);
+
+        return tasks.doneString(this.done);
     }
 
     public abstract static class Command {

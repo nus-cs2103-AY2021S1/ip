@@ -18,12 +18,15 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws IOException {
         //add event task to list of tasks
         tasks.deadline(this.deadline);
 
         //write to file
         String s = storage.genList(tasks.getTaskLs());
         storage.writeToFile("data/duke.rtf", s);
+
+        //Return String to print
+        return tasks.deadlineString(this.deadline);
     }
 }

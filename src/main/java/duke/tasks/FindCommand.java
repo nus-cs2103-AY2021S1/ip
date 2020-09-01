@@ -18,8 +18,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws IOException {
         //find tasks with matching keywords in the string
-        tasks.find(this.toFind);
+        return tasks.find(this.toFind);
     }
 }

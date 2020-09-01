@@ -39,27 +39,26 @@ public class TaskList {
         int i = Integer.parseInt(command.trim());
         Task deletedTask = this.taskLs.get(i - 1);
         this.taskLs.remove(i - 1);
-        int numTask = this.taskLs.size();
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(deletedTask);
-        System.out.println("Now you have " + numTask + " tasks in the list.");
     }
 
     /**
      * Lists all the task from the list of tasks.
      */
-    public void list() {
+    public String list() {
+        String printGui = "";
+        printGui = printGui + "Here are the tasks in your list: " + "\n";
+        int size = this.taskLs.size();
         int i = 1;
-        System.out.println("Here are the tasks in your list: ");
-        this.taskLs.forEach(n -> System.out.println(this.taskLs.indexOf(n) + 1 + ". " + n));
-    }
 
-    /**
-     * Lists the task from the list of tasks.
-     */
-    public void findList() {
-        int i = 1;
-        this.taskLs.forEach(n -> System.out.println(this.taskLs.indexOf(n) + 1 + ". " + n));
+        while (i != (size + 1)) {
+            printGui = printGui + i + ". " + this.taskLs.get(i - 1) + "\n";
+            i++;
+        }
+        return printGui;
+
+//        String finalPrintGui = printGui;
+//        this.taskLs.forEach(n -> finalPrintGui.concat((this.taskLs.indexOf(n) + 1 + ". " + n + "\n")));
+//        return finalPrintGui;
     }
 
     /**
@@ -75,6 +74,17 @@ public class TaskList {
         System.out.println("[" + completedTask.getStatusIcon() + "] " + completedTask.description);
     }
 
+    public String doneString(String toPrint) {
+        String command = toPrint.replaceAll("[^\\d.]", "");
+        int indexCommand = Integer.parseInt(command.trim());
+        Task completedTask = this.taskLs.get(indexCommand - 1);
+
+        String printGui = "";
+        printGui = printGui + "Nice! I've marked this task as done: " + "\n";
+        printGui = printGui + "[" + completedTask.getStatusIcon() + "] " + completedTask.description;
+        return printGui;
+    }
+
     /**
      * Creates a todo task and adds it to the list of tasks.
      * @param toPrint Description of task.
@@ -88,13 +98,19 @@ public class TaskList {
             Todo taskTodo = new Todo(toPrint);
             this.taskLs.add(taskTodo);
 
-            System.out.println("Got it. I've added this task:");
-            System.out.println(taskTodo);
-            System.out.println("Now you have " + this.taskLs.size() + " tasks in the list.");
-
         } catch (DukeException e) {
             Todo.invalidInput();
         }
+    }
+
+    public String todoString(String toPrint) {
+        toPrint = toPrint.substring(4);
+        Todo taskTodo = new Todo(toPrint);
+        String printGui = "";
+        printGui = printGui + "Got it. I've added this task:" + "\n";
+        printGui = printGui + taskTodo + "\n";
+        printGui = printGui + "Now you have " + this.taskLs.size() + " tasks in the list.";
+        return printGui;
     }
 
     /**
@@ -108,13 +124,21 @@ public class TaskList {
             Event taskEvent = new Event(arrtoPrint[0], arrtoPrint[1]);
             this.taskLs.add(taskEvent);
 
-            System.out.println("Got it. I've added this task:");
-            System.out.println(taskEvent);
-            System.out.println("Now you have " + this.taskLs.size() + " tasks in the list.");
-
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             Event.invalidInput();
         }
+    }
+
+    public String eventString(String toPrint) {
+        toPrint = toPrint.substring(5);
+        String[] arrtoPrint = toPrint.split("/at ");
+
+        Event taskEvent = new Event(arrtoPrint[0], arrtoPrint[1]);
+        String printGui = "";
+        printGui = printGui + "Got it. I've added this task:" + "\n";
+        printGui = printGui + taskEvent + "\n";
+        printGui = printGui + "Now you have " + this.taskLs.size() + " tasks in the list.";
+        return printGui;
     }
 
     /**
@@ -129,20 +153,30 @@ public class TaskList {
             Deadline taskDeadline = new Deadline(arrtoPrint[0], arrtoPrint[1]);
             this.taskLs.add(taskDeadline);
 
-            System.out.println("Got it. I've added this task:");
-            System.out.println(taskDeadline);
-            System.out.println("Now you have " + this.taskLs.size() + " tasks in the list.");
+
 
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             Deadline.invalidInput();
         }
     }
 
+    public String deadlineString(String toPrint) {
+        toPrint = toPrint.substring(8);
+        String[] arrtoPrint = toPrint.split("/by ");
+
+        Deadline taskDeadline = new Deadline(arrtoPrint[0], arrtoPrint[1]);
+        String printGui = "";
+        printGui = printGui + "Got it. I've added this task:" + "\n";
+        printGui = printGui + taskDeadline + "\n";
+        printGui = printGui + "Now you have " + this.taskLs.size() + " tasks in the list.";
+        return printGui;
+    }
+
     /**
      * Finds the tasks in the list of tasks matching the keyword.
      * @param toPrint Keyword entered by user.
      */
-    public void find(String toPrint) {
+    public String find(String toPrint) {
         TaskList duplicateTaskLs = new TaskList();
         duplicateTaskLs.taskLs = new ArrayList<>(this.getTaskLs());
 
@@ -150,8 +184,23 @@ public class TaskList {
         String finalToPrint = toPrint;
 
         duplicateTaskLs.taskLs.removeIf(n -> !n.getDescription().contains(finalToPrint));
-        System.out.println("Here are the matching tasks in your list: ");
-        duplicateTaskLs.findList();
+
+        String printGui = "";
+        printGui = printGui + "Here are the matching tasks in your list: " + "\n";
+        return duplicateTaskLs.findList(printGui);
+    }
+
+    /**
+     * Lists the task from the list of tasks.
+     */
+    public String findList(String printGui) {
+        int size = this.taskLs.size();
+        int i = 1;
+        while (i != (size + 1)) {
+            printGui = printGui + i + ". " + this.taskLs.get(i - 1) + "\n";
+            i++;
+        }
+        return printGui;
     }
 
 }

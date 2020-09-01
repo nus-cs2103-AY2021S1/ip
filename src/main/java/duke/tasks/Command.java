@@ -7,7 +7,9 @@ import java.io.IOException;
  * the user.
  */
 public abstract class Command {
-    public void execute(TaskList tasks, UI ui, Storage storage) throws IOException { }
+    public String execute(TaskList tasks, UI ui, Storage storage) throws IOException {
+        return null;
+    }
 
     /**
      * Returns if the command requires Duke to terminate.
