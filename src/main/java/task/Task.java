@@ -1,8 +1,14 @@
+package task;
+
 public class Task {
     protected String taskName;
     protected boolean isCompleted;
 
-    Task(String taskName, boolean isCompleted) {
+    /**
+     * @param taskName Name of task.
+     * @param isCompleted Whether task has been completed.
+     */
+    public Task(String taskName, boolean isCompleted) {
         this.taskName = taskName;
         this.isCompleted = isCompleted;
     }

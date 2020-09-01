@@ -1,8 +1,9 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.Parser;
+import duke.TaskList;
 
 public class ParserTest {
     @Test
@@ -13,12 +14,5 @@ public class ParserTest {
         } catch (Exception e) {
             assertEquals("Specified action is not recognised.", e.getMessage());
         }
-    }
-
-    @Test
-    public void processDate_validDate_success() throws DukeException {
-        Parser p = new Parser(new TaskList());
-        LocalDateTime test = p.processDate("5/2/2020 1821");
-        assertEquals(LocalDateTime.of(2020, 2, 5, 18, 21), test);
     }
 }
