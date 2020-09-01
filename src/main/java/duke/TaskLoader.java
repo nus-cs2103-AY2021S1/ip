@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Scanner;
 
 public class TaskLoader {
-    public static void load_tasks(File prev_tasks, TaskList tasks) {
+    public static void loadTasks(File prev_tasks, TaskList tasks) {
         try {
             Scanner sc_file = new Scanner(prev_tasks);
             while (sc_file.hasNextLine()) {

@@ -26,7 +26,7 @@ public class TaskList {
         return all_tasks;
     }
 
-    public String mark_done(int index) {
+    public String markDone(int index) {
         if (!this.tasks.get(index).isDone()) {
             this.tasks.get(index).done();
             return String.format("Nice! I've marked this task as done:\n[✓] %s\n", this.tasks.get(index).getName());
