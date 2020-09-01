@@ -7,7 +7,6 @@ import duke.exceptions.IncompleteDukeCommandException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * The {@code ListCommand} class represents a command to print all contents of a {@link TaskList}.
@@ -35,11 +34,10 @@ public class ListCommand extends Command {
     /**
      * Prints the result of executing this {@code ListCommand}.
      *
-     * @param ui the {@link Ui} instance to use for formatting.
      * @throws IncompleteDukeCommandException if this {@code ListCommand} was not executed.
      */
     @Override
-    public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
+    public String feedback() throws IncompleteDukeCommandException {
         if (super.completed) {
             String printout = "";
             if (existingTasks.size() == 0) {
@@ -50,7 +48,7 @@ public class ListCommand extends Command {
                     printout += String.format("%d.%s\n", i + 1, existingTasks.get(i).toString());
                 }
             }
-            ui.formattedPrint(ui.prependIndent(printout, 1));
+            return printout;
         } else {
             throw new IncompleteDukeCommandException("List command was not completed.");
         }

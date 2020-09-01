@@ -7,7 +7,6 @@ import duke.exceptions.IncompleteDukeCommandException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * The {@code SearchCommand} class represents a command that allows the user to search for tasks.
@@ -48,11 +47,10 @@ public class SearchCommand extends Command {
     /**
      * Prints the result of executing this {@code SearchCommand}.
      *
-     * @param ui the {@link Ui} instance to use for formatting.
      * @throws IncompleteDukeCommandException if this {@code DeleteCommand} was not executed.
      */
     @Override
-    public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
+    public String feedback() throws IncompleteDukeCommandException {
         if (super.completed) {
             String resultPrint = "";
             for (Task result : results) {
@@ -61,7 +59,7 @@ public class SearchCommand extends Command {
                 }
                 resultPrint = resultPrint.concat(result.toString());
             }
-            ui.formattedPrint(ui.prependIndent(resultPrint, 1));
+            return resultPrint;
         } else {
             throw new IncompleteDukeCommandException("Search command was not completed.");
         }

@@ -3,7 +3,6 @@ package duke.command;
 import duke.exceptions.IncompleteDukeCommandException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * The {@code Exit} class represents a command to safely terminate the program.
@@ -24,12 +23,11 @@ public class ExitCommand extends Command {
     /**
      * Prints a feedback confirming the execution of this {@code ExitCommand}.
      *
-     * @param ui the {@link Ui} instance to use for formatting.
      * @throws IncompleteDukeCommandException if this {@code ExitCommand} was not executed.
      */
-    public void printFeedback(Ui ui) throws IncompleteDukeCommandException {
+    public String feedback() throws IncompleteDukeCommandException {
         if (super.completed) {
-            ui.exit();
+            return "Ja ne!\n";
         } else {
             throw new IncompleteDukeCommandException("Exit command was not completed.");
         }

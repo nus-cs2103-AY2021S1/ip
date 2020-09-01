@@ -3,18 +3,18 @@ package duke.ui;
 import java.util.Scanner;
 
 /**
- * The {@code Ui} class manages program input and output.
+ * The {@code Clui} class manages program input and output.
  */
-public class Ui {
+public class Clui {
 
     private static final String DIVIDER = "________________________________________________________\n";
 
     private Scanner sc;
 
     /**
-     * Constructs a {@code Ui} instance.
+     * Constructs a {@code Clui} instance.
      */
-    public Ui() {
+    public Clui() {
         sc = new Scanner(System.in);
     }
 
@@ -28,7 +28,7 @@ public class Ui {
      * @param indent  the amount of spaces to indent by.
      * @return a string containing the specified content where each line is indented by the specified indent.
      */
-    public String prependIndent(String content, int indent) {
+    private String prependIndent(String content, int indent) {
         String spaces = "";
         for (int i = 0; i < indent; i++) {
             spaces += " ";
@@ -46,9 +46,9 @@ public class Ui {
      *
      * @param content the content to be printed.
      */
-    public void formattedPrint(String content) {
+    public void print(String content) {
         System.out.print(prependIndent(DIVIDER, 4));
-        System.out.print(prependIndent(content, 4));
+        System.out.print(prependIndent(content, 5));
         System.out.println(prependIndent(DIVIDER, 4));
     }
 
@@ -60,26 +60,6 @@ public class Ui {
                 + "What can I do for you?\n";
         System.out.printf(prependIndent(DIVIDER, 4));
         System.out.printf(prependIndent(welcomeMessage, 5));
-        System.out.println(prependIndent(DIVIDER, 4));
-    }
-
-    /**
-     * Prints the message for failing to load storage.
-     */
-    public void showLoadingError() {
-        String loadingErrorMessage = "I think I lost my memory... Let me start afresh.";
-        System.out.printf(prependIndent(DIVIDER, 4));
-        System.out.printf(prependIndent(loadingErrorMessage, 5));
-        System.out.println(prependIndent(DIVIDER, 4));
-    }
-
-    /**
-     * Prints the default goodbye message.
-     */
-    public void exit() {
-        String exitMessage = "Ja ne!\n";
-        System.out.printf(prependIndent(DIVIDER, 4));
-        System.out.printf(prependIndent(exitMessage, 5));
         System.out.println(prependIndent(DIVIDER, 4));
     }
 

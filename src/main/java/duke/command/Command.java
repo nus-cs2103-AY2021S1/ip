@@ -3,7 +3,6 @@ package duke.command;
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * The {@code Command} class provides a skeletal implementation of an executable command.
@@ -23,10 +22,9 @@ public abstract class Command {
     /**
      * Prints a feedback after this {@code Command} has been executed.
      *
-     * @param ui the {@link Ui} instance to use for formatting.
      * @throws DukeException if this {@code Command} has not been executed.
      */
-    public abstract void printFeedback(Ui ui) throws DukeException;
+    public abstract String feedback() throws DukeException;
 
     /**
      * Returns true if this {@code Command} should terminate the program.

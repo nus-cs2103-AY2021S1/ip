@@ -1,12 +1,13 @@
 package duke.task;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.DukeTaskCreationException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeTaskCreationException;
 
 public class TaskTest {
 
