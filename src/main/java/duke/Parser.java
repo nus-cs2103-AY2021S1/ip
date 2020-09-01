@@ -20,9 +20,8 @@ public class Parser {
             String extractCommand = input[0];
             command = CommandEnum.valueOf(extractCommand.toUpperCase());
         } catch (NullPointerException | IllegalArgumentException ex) {
-            System.out.println(Ui.getBot());
             throw new DukeException(
-                    "You have keyed in an invalid command or formatting!\n" +
+                    "You have keyed in an invalid command or format!\n" +
                             "(Valid commands: todo, deadline, event, list," +
                             " delete, bye, done, find)");
         }
@@ -45,7 +44,6 @@ public class Parser {
             case FIND:
                 return new FindCommand(userInput);
             default:
-                System.out.println(Ui.getBot());
                 throw new DukeException(
                         "You have keyed in an invalid command!\n" +
                                 "(Valid commands: todo, deadline," +

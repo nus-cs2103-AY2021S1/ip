@@ -25,7 +25,6 @@ public class Ui {
      * Prints greetings.
      */
     public String printGreetings() {
-        System.out.println(bot);
         return "Greetings from me, Dave!\n" + "How can I help you? ^_^\n";
     }
 
@@ -45,9 +44,7 @@ public class Ui {
      * Prints goodbye and terminates.
      */
     public String printBye() {
-        System.out.println(bot);
         return "Goodbye! Hope to see you again soon! ^_^";
-        //System.out.println(line);
         //System.exit(0);
     }
 
@@ -74,11 +71,10 @@ public class Ui {
 
     public String printTaskList(TaskList tasks) {
         if (tasks.getTasks().isEmpty()) {
-            System.out.println(bot);
             return "There are no tasks in your list yet! >_< \n";
         } else {
-            System.out.println(bot);
             StringBuilder res = new StringBuilder();
+            res.append("Here are the tasks in your list:\n");
             for (int i = 0; i < tasks.size(); i++) {
                 res.append(String.format("%d. %s\n", i + 1, tasks.getTasks().get(i)));
             }
@@ -92,10 +88,10 @@ public class Ui {
                 String toDelete = userInput.substring(7);
                 int index = Integer.parseInt(toDelete);
                 if (index <= taskList.size() && index > 0) {
-                    System.out.println(Ui.getBot());
+                    String deleted = taskList.getTasks().get(index - 1).toString();
                     taskList.getTasks().remove(index - 1);
                     return "Noted! I've deleted this task:\n" +
-                    taskList.getTasks().get(index - 1).toString() +
+                   deleted +
                     "\nNow you have " + taskList.size()
                             + " tasks in the list.";
                 } else {
@@ -119,7 +115,6 @@ public class Ui {
     public String printDone(ArrayList<Task> tasks, int pos) throws DukeException {
         if (pos <= tasks.size() && pos > 0) {
             tasks.get(pos - 1).markAsDone(); //marking task as done
-            System.out.println(bot);
             return "Great work! I've marked this task as done:\n" +
             tasks.get(pos - 1).toString() +
             "\nKeep the ticks going! ^_^";
@@ -135,14 +130,13 @@ public class Ui {
      */
     public String printFindings(ArrayList<Task> findings) throws DukeException {
         StringBuilder res = new StringBuilder();
-        System.out.println(bot);
         if (findings.isEmpty()) {
             throw new DukeException("There are no such tasks with this keyword! :(");
         } else {
-            System.out.println("These are the tasks with your keyword:");
+            res.append("These are the tasks with your keyword:\n");
             int i = 0;
             for(Task task : findings) {
-                res.append(String.format("%s\n", task));
+                res.append(String.format("%d.%s\n",i + 1,task));
                 i++;
             }
 //            for (Task finding : findings) {
@@ -171,7 +165,6 @@ public class Ui {
      * @param tasks TaskList to add task to.
      */
     public String printAddEvent(Event eventTask, TaskList tasks) {
-        System.out.println(bot);
         return "Got it! I've added this task:\n" +
         eventTask.toString() +
         "\nNow you have " + tasks.size() + " tasks in the list.";
@@ -184,7 +177,6 @@ public class Ui {
      * @param tasks TaskList to add task to.
      */
     public String printAddDeadline(Deadline deadlineTask, TaskList tasks) {
-        System.out.println(bot);
         return "Got it! I've added this task:\n" +
         deadlineTask.toString() +
         "\nNow you have " + tasks.size() + " tasks in the list.";

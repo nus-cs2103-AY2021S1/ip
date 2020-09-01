@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -11,14 +12,6 @@ import javafx.stage.Stage;
  * Represents a Duke class.
  */
 public class Duke {
-
-//    public void start(Stage stage) {
-//        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-//        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-//
-//        stage.setScene(scene); // Setting the stage to show our screen
-//        stage.show(); // Render the stage.
-//    }
 
     /** Storage for reading and writing all tasks */
     private Storage storage;
@@ -73,7 +66,10 @@ public class Duke {
     String getResponse(String input) {
        try {
            Command c = Parser.parseCommands(input);
-           return c.execute(this.tasks, this.storage, this.ui); //task and storage alr null
+           if (input.equals("bye")) {
+               System.exit(0);
+           }
+           return c.execute(this.tasks, this.storage, this.ui);
        } catch (IOException | DukeException e) {
            return e.getMessage();
        }
