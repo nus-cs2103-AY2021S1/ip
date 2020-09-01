@@ -26,6 +26,7 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+
 }
 
 application {
@@ -44,3 +45,4 @@ checkstyle {
 run{
     standardInput = System.in
 }
+
