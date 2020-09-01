@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents the command given by the user.
@@ -10,7 +9,6 @@ import duke.ui.Ui;
 public abstract class Command {
     protected TaskList taskList;
     protected String command;
-    protected Ui ui;
     protected Storage storage;
     protected boolean isExit = false;
 
@@ -22,11 +20,9 @@ public abstract class Command {
      * Sets the respective fields for Command object.
      *
      * @param taskList is the current state of the user's task list.
-     * @param ui is the ui object that handles output.
      * @param storage is the database of the user.
      */
-    public void init(TaskList taskList, Ui ui, Storage storage) {
-        this.ui = ui;
+    public void init(TaskList taskList, Storage storage) {
         this.storage = storage;
         this.taskList = taskList;
     }
@@ -39,9 +35,8 @@ public abstract class Command {
      * Executes the command given by the user depending on the type of command given.
      *
      * @param taskList the list of tasks to be operated on based on the command
-     * @param ui       the type of output for the UI depending on the command
      * @param storage  the database to store the user's task list when he/she exits the program
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute(TaskList taskList, Storage storage);
 
 }

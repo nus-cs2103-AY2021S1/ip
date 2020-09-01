@@ -4,7 +4,6 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Marks the specified task to be done or not.
@@ -20,22 +19,20 @@ public class UpdateCommand extends Command {
      */
     public UpdateCommand(String command, String index) {
         super(command);
-        try {
-            this.index = Integer.parseInt(index);
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid task number");
-        }
+        this.index = Integer.parseInt(index);
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
+        String response = "Nice! I've marked this task as done:\n";
         try {
             Task selectedTask = taskList.getTask(index);
             selectedTask.setDone();
-            ui.printDoneMessage(selectedTask);
+            response += selectedTask.toString();
         } catch (DukeException e) {
-            ui.displayErrorMessage(e.getMessage());
+            return e.getMessage();
         }
+        return response;
     }
 
 }

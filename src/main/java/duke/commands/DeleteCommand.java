@@ -4,7 +4,6 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Deletes the specified task from the task list.
@@ -20,21 +19,19 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(String command, String index) {
         super(command);
-        try {
-            this.index = Integer.parseInt(index);
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid task number");
-        }
+        this.index = Integer.parseInt(index);
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
+        Task selectedTask = null;
         try {
-            Task selectedTask = taskList.deleteTask(index);
-            ui.printDeleteMessage(taskList, selectedTask);
+            selectedTask = taskList.deleteTask(index);
         } catch (DukeException e) {
-            ui.displayErrorMessage(e.getMessage());
+            return e.getMessage();
         }
+        return "Noted. I've removed this duke.task:\n " + selectedTask
+                + "\nNow you have " + taskList.size() + " in the list.";
     }
 
 }

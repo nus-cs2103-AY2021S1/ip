@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 
 /**
@@ -24,7 +23,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         StringBuilder stringBuilder = new StringBuilder();
         taskList.forEach(task -> {
             stringBuilder.append(task.formatTaskForDatabase() + "\n");
@@ -35,8 +34,9 @@ public class ExitCommand extends Command {
             fileWriter.write(stringBuilder.toString());
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("Error while updating database file");
+            return "Error while updating database file";
         }
+        return "Goodbyeb";
     }
 
 }

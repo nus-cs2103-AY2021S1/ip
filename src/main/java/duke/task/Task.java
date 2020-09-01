@@ -15,7 +15,7 @@ public abstract class Task {
      */
     public Task(String s) throws DukeException {
         if (s.isBlank()) {
-            throw new DukeException("Please add a nice description to your duke.task :)");
+            throw new DukeException("Please add a nice description to your task :)");
         }
         this.description = s;
         this.isDone = false;
