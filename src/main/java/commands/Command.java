@@ -151,7 +151,7 @@ public enum Command {
         }
     };
 
-    private static final ResourceBundle strings = ResourceBundle.getBundle("resources.StringsBundle", Locale.ENGLISH);
+    private static final ResourceBundle strings = ResourceBundle.getBundle("StringsBundle", Locale.ENGLISH);
 
     /**
      * Factory method to choose the appropriate <code>Command</code> from a given <code>String</code>

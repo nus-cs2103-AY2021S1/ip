@@ -19,7 +19,7 @@ public class Duke {
 
     private static void initializeDuke() throws DukeIOException {
         // read the appropriate string resources
-        strings = ResourceBundle.getBundle("resources.StringsBundle", Locale.ENGLISH);
+        strings = ResourceBundle.getBundle("StringsBundle", Locale.ENGLISH);
         ui = new UI();
         storage = Storage.createStorage("database", "tasks.ser");
         tasks = new TaskList(storage.load());
