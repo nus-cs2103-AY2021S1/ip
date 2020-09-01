@@ -30,7 +30,7 @@ public class AddCommand extends Command {
             String[] descElements = this.description.split(" /by ");
             try {
                 LocalDateTime dateTime = LocalDateTime.parse(descElements[1],
-                        DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
                 String taskName = descElements[0];
                 task = new Deadline(taskName, dateTime);
             } catch (Exception e) {
@@ -40,7 +40,7 @@ public class AddCommand extends Command {
             String[] descElements = this.description.split(" /at ");
             try {
                 LocalDateTime dateTime = LocalDateTime.parse(descElements[1],
-                        DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
                 String taskName = descElements[0];
                 task = new Event(taskName, dateTime);
             } catch (Exception e) {
@@ -52,11 +52,11 @@ public class AddCommand extends Command {
             tasks.add(task, storage);
 
             System.out.println("Orh. I added:" +
-                    "\n  " +
-                    task.toString() +
-                    "\nNow you got " +
-                    tasks.getListLength() +
-                    " things in the list.");
+                "\n  " +
+                task.toString() +
+                "\nNow you got " +
+                tasks.getListLength() +
+                " things in the list.");
         }
     }
 

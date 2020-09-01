@@ -8,7 +8,7 @@ public class Ui {
     public void showWelcomeMsg() {
         System.out.println("____________________________________________________________");
         System.out.println("Eh what's up! I'm Meimei" +
-                "\nWhat you want ah?");
+            "\nWhat you want ah?");
         System.out.println("____________________________________________________________");
     }
 

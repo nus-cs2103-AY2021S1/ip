@@ -33,10 +33,10 @@ public class Parser {
         } else if (commandType == CommandType.BYE) {
             return new ExitCommand();
         } else if (commandType == CommandType.DELETE ||
-                commandType == CommandType.DONE ||
-                commandType == CommandType.TODO ||
-                commandType == CommandType.DEADLINE ||
-                commandType == CommandType.EVENT) { // Commands that have a description
+            commandType == CommandType.DONE ||
+            commandType == CommandType.TODO ||
+            commandType == CommandType.DEADLINE ||
+            commandType == CommandType.EVENT) { // Commands that have a description
             try {
                 String description = commandElements[1];
                 if (commandType == CommandType.DELETE) {
