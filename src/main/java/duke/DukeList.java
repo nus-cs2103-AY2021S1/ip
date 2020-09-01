@@ -1,6 +1,9 @@
 package duke;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeInvalidCommandException;
 import duke.exceptions.DukeInvalidDescriptionException;
@@ -11,9 +14,6 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskType;
 import duke.tasks.Todo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -115,9 +115,9 @@ public class DukeList {
     public String add(String descriptionString) throws DukeException {
         Task newTask = addHelper(descriptionString);
 
-        return "Got it. I've added this task:\n" +
-                String.format("\t%s\n", newTask.toString()) +
-                String.format("%s", this.getListStats());
+        return "Got it. I've added this task:\n"
+                + String.format("\t%s\n", newTask.toString())
+                + String.format("%s", this.getListStats());
     }
 
 
@@ -165,8 +165,8 @@ public class DukeList {
      */
     public String delete(int index) throws IndexOutOfBoundsException {
         Task removedTask = this.taskList.remove(index - 1);
-        return "Noted. I've removed this task:\n" +
-                String.format("\t%s\n", removedTask.toString())
+        return "Noted. I've removed this task:\n"
+                + String.format("\t%s\n", removedTask.toString())
                 + String.format("%s", this.getListStats());
     }
 

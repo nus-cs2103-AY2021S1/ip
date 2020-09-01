@@ -1,13 +1,14 @@
 package duke.test;
 
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.Parser;
 import duke.commands.Command;
 import duke.tasks.TaskType;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class ParserTest {

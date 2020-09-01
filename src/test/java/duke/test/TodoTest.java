@@ -1,10 +1,11 @@
 package duke.test;
 
 
-import duke.tasks.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.tasks.Todo;
 
 
 public class TodoTest {
@@ -19,7 +20,7 @@ public class TodoTest {
 
 
     @Test
-    public void constructor_NotDone_toString_printedCorrectly() {
+    public void constructorNotDone_toString_printedCorrectly() {
         Todo testTodo = new Todo("stuff");
         String expected = String.format("[T][%c] %s", NOT_DONE, "stuff");
         assertEquals(expected, testTodo.toString());
@@ -27,7 +28,7 @@ public class TodoTest {
 
 
     @Test
-    public void constructor_Done_toString_printedCorrectly() {
+    public void constructorDone_toString_printedCorrectly() {
         Todo testTodo = new Todo("stuff", true);
         String expected = String.format("[T][%c] %s", DONE, "stuff");
         assertEquals(expected, testTodo.toString());

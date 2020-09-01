@@ -21,8 +21,8 @@ public class Deadline extends Task {
      */
     public Deadline(String itemString) {
         super(Task.getTaskString(itemString, Deadline.DELIMITER));
-        this.dateString = Task.getDateString(itemString, Deadline.DELIMITER);
-        this.date = LocalDate.parse(this.dateString);
+        this.setDateString(Task.getDateString(itemString, Deadline.DELIMITER));
+        this.date = LocalDate.parse(this.getDateString());
     }
 
 
@@ -34,8 +34,8 @@ public class Deadline extends Task {
      */
     public Deadline(String itemString, boolean isDone) {
         super(Task.getTaskString(itemString, Deadline.DELIMITER), isDone);
-        this.dateString = Task.getDateString(itemString, Deadline.DELIMITER);
-        this.date = LocalDate.parse(this.dateString);
+        this.setDateString(Task.getDateString(itemString, Deadline.DELIMITER));
+        this.date = LocalDate.parse(this.getDateString());
     }
 
 
@@ -46,15 +46,15 @@ public class Deadline extends Task {
      */
     @Override
     public String[] toStorageStringArr() {
-        return new String[]{"D", this.isDone ? "1" : "0", this.itemString, this.dateString};
+        return new String[]{"D", this.isDone() ? "1" : "0", this.getItemString(), this.getDateString()};
     }
 
 
     @Override
     public String toString() {
-        char stateSymbol = this.isDone ? DONE : NOT_DONE;
+        char stateSymbol = this.isDone() ? DONE : NOT_DONE;
         String dateString = Task.formatDateString(this.date);
-        return String.format("[D][%s] %s (by: %s)", stateSymbol, this.itemString, dateString);
+        return String.format("[D][%s] %s (by: %s)", stateSymbol, this.getItemString(), dateString);
     }
 
 }

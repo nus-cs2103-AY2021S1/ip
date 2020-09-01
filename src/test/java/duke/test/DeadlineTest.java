@@ -1,10 +1,11 @@
 package duke.test;
 
 
-import duke.tasks.Deadline;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.tasks.Deadline;
 
 
 public class DeadlineTest {
@@ -19,7 +20,7 @@ public class DeadlineTest {
 
 
     @Test
-    public void Deadline_NotDone_toString_printedCorrectly() {
+    public void deadlineNotDone_toString_printedCorrectly() {
         Deadline testDeadline = new Deadline("stuff /by 2020-01-01");
         String expected = String.format("[D][%c] %s (by: %s)", NOT_DONE, "stuff", "01 Jan 2020");
         assertEquals(expected, testDeadline.toString());
@@ -27,7 +28,7 @@ public class DeadlineTest {
 
 
     @Test
-    public void Deadline_Done_toString_printedCorrectly() {
+    public void deadlineDone_toString_printedCorrectly() {
         Deadline testDeadline = new Deadline("stuff /by 2020-01-01", true);
         String expected = String.format("[D][%c] %s (by: %s)", DONE, "stuff", "01 Jan 2020");
         assertEquals(expected, testDeadline.toString());

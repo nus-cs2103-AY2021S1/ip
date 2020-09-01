@@ -1,12 +1,12 @@
 package duke.tasks;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import duke.exceptions.DukeInvalidDescriptionException;
 import duke.exceptions.DukeNoDateException;
 import duke.exceptions.DukeNoDescriptionException;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 
 /**
@@ -18,9 +18,10 @@ public abstract class Task {
     public static final char DONE = '\u2713';
     public static final char NOT_DONE = '\u2717';
 
-    public final String itemString;
-    public String dateString;
-    public boolean isDone;
+    private boolean isDone;
+
+    private final String itemString;
+    private String dateString;
 
 
     /**
@@ -79,6 +80,16 @@ public abstract class Task {
 
 
     /**
+     * Gets date string.
+     *
+     * @return Date string.
+     */
+    public String getDateString() {
+        return this.dateString;
+    }
+
+
+    /**
      * Formats date string.
      *
      * @param date date object
@@ -86,6 +97,36 @@ public abstract class Task {
      */
     public static String formatDateString(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+    }
+
+
+    /**
+     * Gets item string.
+     *
+     * @return Item string.
+     */
+    public String getItemString() {
+        return this.itemString;
+    }
+
+
+    /**
+     * Sets date string.
+     *
+     * @param dateString New date string to be set.
+     */
+    public void setDateString(String dateString) {
+        this.dateString = itemString;
+    }
+
+
+    /**
+     * Checks whether task is done.
+     *
+     * @return If task is done.
+     */
+    public boolean isDone() {
+        return this.isDone;
     }
 
 
