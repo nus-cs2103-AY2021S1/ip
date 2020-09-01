@@ -22,7 +22,7 @@ public class Deadline extends Task {
         this.by = by;
         // In case time is included
         String dateAndTime[] = by.split("\\s");
-        this.date = LocalDate.parse(dateAndTime[0]);
+            this.date = LocalDate.parse(dateAndTime[0]);
         if (dateAndTime.length > 1) {
             // If time is given as well
             this.time = dateAndTime[1].trim();
