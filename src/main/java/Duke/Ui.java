@@ -14,7 +14,7 @@ public class Ui {
     /**
      * UI line divider
      */
-    public static final String DIVIDER = "------------------------------------------------\n";
+    public static final String DIVIDER = "------------------------------------------------";
 
     /**
      * Introduction message
@@ -26,7 +26,7 @@ public class Ui {
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n"
                     + DIVIDER
-                    + "Hello! I'm Duke\nWhat can I do for you?\n";
+                    + "\nHello! I'm Duke\nWhat can I do for you?\n";
 
     /**
      *  Farewell message
