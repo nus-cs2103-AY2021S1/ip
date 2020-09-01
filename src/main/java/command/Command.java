@@ -15,5 +15,5 @@ public abstract class Command {
      * @param ui      Ui allows execute to carry out ui methods to print to the console.
      * @param storage Storage allows execute to write and read files.
      */
-    public abstract void execute(TaskList lst, Ui ui, Storage storage);
+    public abstract String execute(TaskList lst, Ui ui, Storage storage);
 }

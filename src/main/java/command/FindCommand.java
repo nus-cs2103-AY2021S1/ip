@@ -1,11 +1,12 @@
 package command;
 
+import java.util.List;
+
 import task.Task;
 import util.Storage;
 import util.TaskList;
 import util.Ui;
 
-import java.util.List;
 
 /**
  * Represents the find command. The find command searches for tasks based on the query and lists them.
@@ -33,13 +34,14 @@ public class FindCommand extends Command {
      * @param ui      Ui allows execute to carry out ui methods to print to the console.
      * @param storage Storage allows execute to write and read files.
      */
-    public void execute(TaskList lst, Ui ui, Storage storage) {
+    public String execute(TaskList lst, Ui ui, Storage storage) {
+        StringBuilder result = new StringBuilder();
         List<Task> filteredTasks = lst.filter(query);
-        ui.showFindStatement(filteredTasks.size() <= 0);
+        result.append(ui.showFindStatement(filteredTasks.size() <= 0) + "\n");
         for (int i = 0; i < filteredTasks.size(); i++) {
             int num = i + 1;
-            ui.showTask(filteredTasks.get(i), num);
+            result.append(ui.showTask(filteredTasks.get(i), num) + "\n");
         }
-        ui.showLine();
+        return result.toString();
     }
 }

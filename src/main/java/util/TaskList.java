@@ -1,14 +1,15 @@
 package util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import task.DeadlineTask;
 import task.EventTask;
 import task.Task;
 import task.ToDoTask;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * The TaskList class represents the list containing tasks.
@@ -27,28 +28,30 @@ public class TaskList {
     }
 
     /**
-     * Creates a new TaskList of tasks based on an input list of strings. The constructor parses these strings to create tasks before adding them to the TaskList.
+     * Creates a new TaskList of tasks based on an input list of strings.
+     * The constructor parses these strings to create tasks before adding them to the TaskList.
      *
      * @param inputLst List containing tasks represented as strings.
      */
     public TaskList(List<String> inputLst) {
-        String DONE = "1";
+        String done = "1";
         this.lst = new ArrayList<>();
         for (String line : inputLst) {
             String[] splitInput = line.split(" \\| ");
             TaskType taskType = TaskType.valueOf(splitInput[0]);
             switch (taskType) {
             case TODO:
-                this.add(new ToDoTask(splitInput[2], splitInput[1].equals(DONE)));
+                this.add(new ToDoTask(splitInput[2], splitInput[1].equals(done)));
                 break;
             case DEADLINE:
-                this.add(new DeadlineTask(splitInput[2], splitInput[1].equals(DONE), splitInput[3]));
+                this.add(new DeadlineTask(splitInput[2], splitInput[1].equals(done), splitInput[3]));
                 break;
             case EVENT:
-                this.add(new EventTask(splitInput[2], splitInput[1].equals(DONE), splitInput[3]));
+                this.add(new EventTask(splitInput[2], splitInput[1].equals(done), splitInput[3]));
+                break;
+            default:
                 break;
             }
-
         }
     }
 

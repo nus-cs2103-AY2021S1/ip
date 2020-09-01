@@ -9,18 +9,20 @@ import util.Ui;
  */
 public class ListCommand extends Command {
     /**
-     * Executes the list command. The execution involves listing all the tasks in the task list and printing the relevant UI.
+     * Executes the list command. The execution involves listing all the tasks in the task list and
+     * printing the relevant UI.
      *
      * @param lst     List containing the current tasks.
      * @param ui      Ui allows execute to carry out ui methods to print to the console.
      * @param storage Storage allows execute to write and read files.
      */
-    public void execute(TaskList lst, Ui ui, Storage storage) {
-        ui.showListStatement();
+    public String execute(TaskList lst, Ui ui, Storage storage) {
+        StringBuilder result = new StringBuilder();
+        result.append(ui.showListStatement() + "\n");
         for (int i = 0; i < lst.size(); i++) {
             int num = i + 1;
-            ui.showTask(lst.get(i), num);
+            result.append(ui.showTask(lst.get(i), num) + "\n");
         }
-        ui.showLine();
+        return result.toString();
     }
 }

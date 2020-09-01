@@ -1,15 +1,16 @@
 package util;
 
-import duke.DukeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
+
 public class ParserTest {
-    Ui ui = new Ui();
-    TaskList lst = new TaskList();
-    Parser parser = new Parser(lst);
+    private Ui ui = new Ui();
+    private TaskList lst = new TaskList();
+    private Parser parser = new Parser(lst);
 
     @Test
     public void testParseForInvalidCommand() {
