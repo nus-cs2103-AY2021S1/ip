@@ -1,12 +1,12 @@
 package duke;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class DukeTest {
+    @SuppressWarnings("checkstyle:WhitespaceAround")
     @Test
-    public void dummyTest(){
-        assertEquals(2, 2);
+    public void dummyTest() {
+        Assertions.assertEquals(2, 2);
     }
 }
