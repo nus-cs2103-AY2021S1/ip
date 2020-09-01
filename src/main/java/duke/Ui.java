@@ -8,27 +8,25 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner sc = new Scanner(System.in);
     private final String line = "------------------------------"
-            + "------------------------------";;
+            + "------------------------------";
+    private final String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
      * Prints out the Duke logo.
      */
-    public void printLogo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
+    public String getLogo() {
+        return this.logo;
     }
 
     /**
      * Prints out the welcome message.
      */
-    public void printWelcomeMessage() {
-        System.out.println("Hello! I'm Duke.");
-        System.out.println("What can I do for you?");
-        System.out.println(this.line);
+    public String getWelcomeMessage() {
+        return "Hello! I'm Duke.\nWhat can I do for you?\n" + this.line;
     }
 
     /**
@@ -45,16 +43,15 @@ public class Ui {
      *
      * @param message message to be printed.
      */
-    public void printLine(String message) {
-        System.out.println(message);
-        System.out.println(this.line);
+    public String getLine(String message) {
+        return message;// + "\n" + this.line;
     }
 
     /**
      * Prints out the farewell message.
      */
-    public void printBye() {
-        System.out.println("Bye. Hope to see you again!");
+    public String printBye() {
+        return "Bye. Hope to see you again!";
     }
 
     /**
@@ -62,8 +59,8 @@ public class Ui {
      *
      * @param exception exception to be printed.
      */
-    public void printError(Exception exception) {
-        this.printLine(exception.getMessage());
+    public String getError(Exception exception) {
+        return exception.getMessage();
     }
 
 }

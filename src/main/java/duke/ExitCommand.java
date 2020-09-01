@@ -16,7 +16,7 @@ public class ExitCommand extends Command {
      * @param ui a user interface in charge of Duke's I/O.
      * @param storage a storage system that handles .txt file manipulation.
      */
-    public void execute(TaskList list, Ui ui, Storage storage) {
-        ui.printBye();
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        return ui.printBye();
     }
 }

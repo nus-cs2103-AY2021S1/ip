@@ -194,7 +194,7 @@ public class TaskList implements Iterable<Task> {
      */
     public TaskList findTask(String keyword) throws DukeException {
         ArrayList<Task> keywordTasks = new ArrayList<>(this.list);
-        keywordTasks.removeIf(i -> i.getDescription().contains(keyword));
+        keywordTasks.removeIf(i -> !i.getDescription().contains(keyword));
         if (keywordTasks.isEmpty()) {
             throw new DukeException("OOPS!!! I'm sorry, no such keyword :<");
         }
