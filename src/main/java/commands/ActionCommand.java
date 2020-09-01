@@ -1,8 +1,10 @@
 package main.java.commands;
 
 import main.java.common.Type;
+
 import main.java.data.Task;
 import main.java.data.TaskList;
+
 import main.java.exception.ChatbotException;
 import main.java.storage.Storage;
 import main.java.ui.Ui;
@@ -37,16 +39,16 @@ public class ActionCommand extends Command {
         }
 
         switch (type) {
-            case DELETE:
-                Task deletedTask = taskList.removeTask(index);
-                response = ui.deleteSuccess(deletedTask, taskList.count());
-                break;
-            case DONE:
-                Task taskDone = taskList.markAsDone(index);
-                response = ui.markDoneSuccess(taskDone);
-                break;
-            default:
-                break;
+        case DELETE:
+            Task deletedTask = taskList.removeTask(index);
+            response = ui.deleteSuccess(deletedTask, taskList.count());
+            break;
+        case DONE:
+            Task taskDone = taskList.markAsDone(index);
+            response = ui.markDoneSuccess(taskDone);
+            break;
+        default:
+            break;
         }
 
         storage.saveTasks(taskList.getTasks());

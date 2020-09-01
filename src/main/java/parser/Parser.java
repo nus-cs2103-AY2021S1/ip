@@ -1,12 +1,12 @@
-/**
- * A class that parses the command input given by the user.
- */
-
 package main.java.parser;
 
 import main.java.commands.*;
 import main.java.common.Type;
 import main.java.exception.ChatbotException;
+
+/**
+ * A class that parses the command input given by the user.
+ */
 
 public class Parser {
 

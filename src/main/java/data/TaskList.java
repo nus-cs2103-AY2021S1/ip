@@ -1,8 +1,3 @@
-/**
- * A class containing a list of tasks, with methods for adding new tasks, deleting and returning
- * tasks due on a specific date.
- */
-
 package main.java.data;
 
 import main.java.exception.ChatbotException;
@@ -10,6 +5,11 @@ import main.java.exception.ChatbotException;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Iterator;
+
+/**
+ * A class containing a list of tasks, with methods for adding new tasks, deleting and returning
+ * tasks due on a specific date.
+ */
 
 public class TaskList {
 
