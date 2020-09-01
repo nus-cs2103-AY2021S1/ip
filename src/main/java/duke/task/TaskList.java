@@ -66,21 +66,22 @@ public class TaskList {
      * Adds the task based at last index
      *
      * @param task  Task to be added to taskList.
+     * @return String of words duke say in response.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         taskList.add(task);
-        System.out.println("\tGot it. I've added this task:" + "\n\t\t" + task);
-        System.out.println(String.format("\tNow you have %d tasks in the list.", taskList.size()));
+        return "\tGot it. I've added this task:" + "\n\t\t" + task
+            + String.format("\n\tNow you have %d tasks in the list.", taskList.size());
     }
 
-     /**
-      *
-      * Deletes the task based on index in taskInfo
-      *
-      * @param taskInfo  Task information with task index information.
-      * @throws DukeIndexOutOfBoundsException
-      */
-    public void deleteTask(String taskInfo) throws DukeIndexOutOfBoundsException {
+    /**
+     * Deletes the task based on index in taskInfo
+     *
+     * @param taskInfo  Task information with task index information.
+     * @return String of words duke say in response.
+     * @throws DukeIndexOutOfBoundsException
+     */
+    public String deleteTask(String taskInfo) throws DukeIndexOutOfBoundsException {
         if (taskInfo.length() <= 7) {
             throw new DukeIndexOutOfBoundsException("The task you want to delete is invalid");
         }
@@ -96,8 +97,8 @@ public class TaskList {
         }
         int index = taskNo - 1;
         Task t = taskList.remove(index);
-        System.out.println("\tNoted. I've removed this task:" + "\n\t\t" + t);
-        System.out.println(String.format("\tNow you have %d tasks in the list.", taskList.size()));
+        return "\tNoted. I've removed this task:" + "\n\t\t" + t
+            + String.format("\n\tNow you have %d tasks in the list.", taskList.size());
     }
 
     /**

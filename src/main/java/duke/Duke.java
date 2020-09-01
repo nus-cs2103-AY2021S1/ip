@@ -6,6 +6,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.UI;
+import javafx.stage.Stage;
 
 /**
  * The class Duke denotes the faithful robot.
@@ -16,6 +17,8 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
     private UI ui;
+    private boolean isExit;
+    private Stage stage;
 
     /**
      * Constructs a Duke robot.
@@ -30,8 +33,15 @@ public class Duke {
     }
 
     /**
-     * Bot introduces and gets input from user.
+     * Returns true if user says "bye".
+     * @return true if user says "bye".
      */
+    public boolean shouldExit() {
+        return isExit;
+    }
+   /* *//**
+     * Bot introduces and gets input from user.
+     *//*
     public void run() {
         ui.showIntro();
         boolean isExit = false;
@@ -42,14 +52,23 @@ public class Duke {
             isExit = c.isExit();
         }
     }
+*/
 
+    public void referStage(Stage stage) {
+        this.stage = stage;
+    }
     /**
      * Executes all the operations stated.
      *
      * @param input  String arrays of operations.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        Command c = Parser.parse(input);
+        isExit = input.trim().equalsIgnoreCase("bye");
+        if (isExit) {
+            stage.close();
+        }
+        return c.execute(tasks, storage);
     }
 
     /**
