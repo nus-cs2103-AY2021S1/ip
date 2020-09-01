@@ -1,33 +1,33 @@
 package duke.tasks;
 
+import java.util.List;
+
 import duke.exceptions.TaskOutOfBoundException;
 import duke.storage.Storage;
 import duke.ui.Printer;
 
-import java.util.List;
 
 /**
  * Class for task list.
  */
 public class SingletonTaskList {
 
-    List<Task> tasks;
-
-    Storage storage;
-
     private static SingletonTaskList instance; //this class should only be instantiate once
+
+    private Storage storage;
+
+    private List<Task> tasks;
+
+    private SingletonTaskList(Storage database) {
+        this.storage = database;
+        tasks = storage.readAll();
+    }
 
     public static synchronized SingletonTaskList getInstance(Storage database) {
         if (instance == null) {
             instance = new SingletonTaskList(database);
         }
         return instance;
-    }
-
-
-    private SingletonTaskList(Storage database) {
-        this.storage = database;
-        tasks = storage.readAll();
     }
 
     /**
@@ -51,6 +51,7 @@ public class SingletonTaskList {
         try {
             Printer.printDelete(tasks.get(idx - 1), tasks.size() - 1);
             tasks.remove(idx - 1);
+            storage.update(tasks);
         } catch (IndexOutOfBoundsException e) {
             throw new TaskOutOfBoundException("task number out of bound", idx);
         }
@@ -77,12 +78,17 @@ public class SingletonTaskList {
             Task task = this.tasks.get(idx);
             task.setStatus(true);
             Printer.printDoneTask(task);
+            storage.update(tasks);
         } catch (IndexOutOfBoundsException e) {
             throw new TaskOutOfBoundException("Target number of task out of bound", idx + 1);
         }
     }
 
-    public void Query(String queryKey) {
+    /**
+     * Query tasks in the taskList with the {@code queryKey}.
+     * @param queryKey the key used to query the tasks
+     */
+    public void query(String queryKey) {
         List<Task> matchedTasks = storage.query(queryKey);
         Printer.printAllTask(matchedTasks, false);
     }

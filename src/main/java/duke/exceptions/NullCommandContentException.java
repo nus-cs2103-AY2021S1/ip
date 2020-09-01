@@ -4,6 +4,11 @@ public class NullCommandContentException extends Exception {
 
     private String typeOfCommand;
 
+    /**
+     * Constructor for null command content exception.
+     * @param err errorMessage
+     * @param typeOfCommand command type
+     */
     public NullCommandContentException(String err, String typeOfCommand) {
         super(err);
         this.typeOfCommand = typeOfCommand;

@@ -2,11 +2,6 @@ package duke;
 
 import duke.storage.Storage;
 import duke.ui.Ui;
-import duke.utils.Constants;
-
-import java.util.Objects;
-import java.util.Scanner;
-
 
 public class Duke {
     private static void launchDuke() {

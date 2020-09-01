@@ -1,13 +1,18 @@
 package duke.storage;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class for the representation of the storage/database.
@@ -74,10 +79,15 @@ public class Storage {
         return formatTask;
     }
 
+    /**
+     * Query for a specific task in the database with a query key.
+     * @param queryKey the key used to query the database
+     * @return
+     */
     public List<Task> query(String queryKey) {
         List<Task> tasks = new ArrayList<>();
         try {
-            File databaseFile = new File( databasePath);
+            File databaseFile = new File(databasePath);
             BufferedReader csvReader = new BufferedReader(new FileReader(databaseFile));
             String line;
             while ((line = csvReader.readLine()) != null) {

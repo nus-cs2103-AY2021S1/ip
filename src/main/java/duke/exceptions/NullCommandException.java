@@ -1,7 +1,10 @@
 package duke.exceptions;
 
 public class NullCommandException extends Exception {
-
+    /**
+     * Constructor of null command exception.
+     * @param err error message
+     */
     public NullCommandException(String err) {
         super(err);
     }

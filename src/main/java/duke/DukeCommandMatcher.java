@@ -1,31 +1,55 @@
 package duke;
 
-import duke.exceptions.*;
-import duke.storage.Storage;
-import duke.tasks.*;
-import duke.utils.Constants;
-import duke.utils.UtilFunction;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import duke.exceptions.CommandNotFoundException;
+import duke.exceptions.DateFormatException;
+import duke.exceptions.LackOfTimeException;
+import duke.exceptions.NullCommandContentException;
+import duke.exceptions.NullCommandException;
+import duke.exceptions.TaskNotSpecifyException;
+import duke.exceptions.TaskOutOfBoundException;
+import duke.storage.Storage;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.SingletonTaskList;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+import duke.utils.Constants;
+import duke.utils.UtilFunction;
 
+
+/**
+ * The class to match the command to Duke's response.
+ */
 public class DukeCommandMatcher {
-
-    private SingletonTaskList taskList;
 
     private static final List<String> commandList = new ArrayList<>(Arrays.asList(Constants.LISTPATTERN,
             Constants.EXITPATTERN, Constants.DONEPATTERN, Constants.TODOPATTERN, Constants.DEADLINEPATTERN,
             Constants.EVENTPATTERN, Constants.DELETEPATTERN, Constants.FINDPATTERN
-            ));
+    ));
+
+    private SingletonTaskList taskList;
 
     public DukeCommandMatcher(Storage database) {
         this.taskList = SingletonTaskList.getInstance(database);
     }
 
-
+    /**
+     * Match the command to corresponding behavior.
+     * @param command
+     * @return message of implementation
+     * @throws CommandNotFoundException
+     * @throws NullCommandException
+     * @throws LackOfTimeException
+     * @throws NullCommandContentException
+     * @throws TaskOutOfBoundException
+     * @throws TaskNotSpecifyException
+     * @throws DateFormatException
+     */
     public String matchCommand(String command) throws CommandNotFoundException, NullCommandException,
             LackOfTimeException, NullCommandContentException, TaskOutOfBoundException, TaskNotSpecifyException,
             DateFormatException {
@@ -39,32 +63,31 @@ public class DukeCommandMatcher {
         for (String commandPattern: commandList) {
             //the command is in the list
             if (UtilFunction.matchPattern(commandPattern, splitCommand[0])) {
-               switch (commandPattern) {
-               case Constants.EXITPATTERN:
-                   return handleExit();
-               case Constants.LISTPATTERN:
-                   return handleList();
-               case Constants.DONEPATTERN:
-                   return handleDone(splitCommand);
-               case Constants.TODOPATTERN:
-                   return handleTodo(splitCommand);
-               case Constants.DEADLINEPATTERN:
-                   return handleDeadline(splitCommand);
-               case Constants.EVENTPATTERN:
-                   return handleEvent(splitCommand);
-               case Constants.DELETEPATTERN:
-                   return handleDelete(splitCommand);
-               case Constants.FINDPATTERN:
-                   return handleFind(splitCommand);
-               default:
-                   break;
-               }
+                switch (commandPattern) {
+                case Constants.EXITPATTERN:
+                    return handleExit();
+                case Constants.LISTPATTERN:
+                    return handleList();
+                case Constants.DONEPATTERN:
+                    return handleDone(splitCommand);
+                case Constants.TODOPATTERN:
+                    return handleTodo(splitCommand);
+                case Constants.DEADLINEPATTERN:
+                    return handleDeadline(splitCommand);
+                case Constants.EVENTPATTERN:
+                    return handleEvent(splitCommand);
+                case Constants.DELETEPATTERN:
+                    return handleDelete(splitCommand);
+                case Constants.FINDPATTERN:
+                    return handleFind(splitCommand);
+                default:
+                    break;
+                }
             }
         }
         throw new CommandNotFoundException(command);
     }
 
-    
     private String handleExit() {
         System.out.println("Farewell/再見/さようなら～～");
         return "EXIT";
@@ -84,7 +107,7 @@ public class DukeCommandMatcher {
         try {
             int targetTaskPos = Integer.parseInt(targetTask[1]) - 1;
             taskList.setTaskDone(targetTaskPos);
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new TaskNotSpecifyException("task to be done not specified", "DONE");
         }
         return "Task " + targetTask + " has been done";
@@ -108,15 +131,15 @@ public class DukeCommandMatcher {
         try {
             String deadlineContent = deadlineStr[1];
             splitDeadline = deadlineContent.split("/", 2);
-        } catch(IndexOutOfBoundsException e) {
-            throw new NullCommandContentException("Description cannot be null", "Deadline" );
+        } catch (IndexOutOfBoundsException e) {
+            throw new NullCommandContentException("Description cannot be null", "Deadline");
         }
 
         try {
             String standardDate = UtilFunction.formatDateToStandard(splitDeadline[1]);
             deadline = new Deadline(splitDeadline[0], standardDate);
         } catch (IndexOutOfBoundsException e) {
-            throw new LackOfTimeException("The time cannot be empty", "Duke.Deadline" );
+            throw new LackOfTimeException("The time cannot be empty", "Duke.Deadline");
         }
         return handleAdd(deadline);
     }
@@ -132,13 +155,13 @@ public class DukeCommandMatcher {
                 throw new IndexOutOfBoundsException();
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new NullCommandContentException("Description cannot be null", "Event" );
+            throw new NullCommandContentException("Description cannot be null", "Event");
         }
         try {
             String standardDate = UtilFunction.formatDateToStandard(splitEventStr[1]);
             event = new Event(splitEventStr[0], standardDate);
-        } catch(IndexOutOfBoundsException e) {
-            throw new LackOfTimeException("The time cannot be empty", "Event" );
+        } catch (IndexOutOfBoundsException e) {
+            throw new LackOfTimeException("The time cannot be empty", "Event");
         }
         return handleAdd(event);
     }
@@ -151,13 +174,13 @@ public class DukeCommandMatcher {
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new TaskNotSpecifyException("task to deletion not specified", "DELETE");
         }
-        return "Task " + (taskToDelete -1) + " has been removed successfully";
+        return "Task " + (taskToDelete - 1) + " has been removed successfully";
     }
 
     private String handleFind(String[] findStr) throws NullCommandContentException {
         try {
             String queryKey = findStr[1];
-            taskList.Query(queryKey);
+            taskList.query(queryKey);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new NullCommandContentException("no query body", "FIND");
         }

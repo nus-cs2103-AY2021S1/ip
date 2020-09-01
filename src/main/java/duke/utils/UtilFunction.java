@@ -1,18 +1,16 @@
 package duke.utils;
 
-import duke.exceptions.DateFormatException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Objects;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.exceptions.DateFormatException;
+
 /**
- * @Author Eddy
- * @Version 1.0.0
+ * @author Eddy
+ * @version 1.0.0
  */
 public class UtilFunction {
     /**
@@ -22,7 +20,7 @@ public class UtilFunction {
      * @param string the string to check
      * @return true if the string matches the string pattern
      */
-    public static Boolean matchPattern(String patternStr, String string){
+    public static Boolean matchPattern(String patternStr, String string) {
         Pattern pattern = Pattern.compile(patternStr);
         Matcher matcher = pattern.matcher(string);
         return matcher.find();
@@ -36,7 +34,7 @@ public class UtilFunction {
      * @throws DateFormatException when input string date formal is invalid
      * @see duke.exceptions.DateFormatException
      */
-    public static String formatDateToStandard(String dateString) throws DateFormatException{
+    public static String formatDateToStandard(String dateString) throws DateFormatException {
         String standardDateFormat = null;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
@@ -71,7 +69,7 @@ public class UtilFunction {
             if (count < Constants.CONSOLEWIDTH) {
                 System.out.print(word + " ");
             } else {
-                System.out.print('\n' + word);
+                System.out.print('\n' + word + " ");
                 count = word.length();
             }
         }

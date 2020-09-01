@@ -50,9 +50,9 @@ public class Task {
     }
 
     private String statusToIcon() {
-        if(this.status){
+        if (this.status) {
             return "✅";
-        }else{
+        } else {
             return "❎";
         }
     }

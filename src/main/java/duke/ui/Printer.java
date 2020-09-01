@@ -1,10 +1,10 @@
 package duke.ui;
 
+import java.util.List;
+
 import duke.tasks.Task;
 import duke.utils.Constants;
 import duke.utils.UtilFunction;
-
-import java.util.List;
 
 public class Printer {
     //This is not meant to be initiated.
@@ -16,9 +16,9 @@ public class Printer {
      * @param numOfTask the total number of task in the database
      */
     public static void printAdd(Task task, int numOfTask) {
-        UtilFunction.printLimit("Got it. I've added this task:\n" +
-                "   " + task +  '\n' + "Now you have " + numOfTask +
-                (numOfTask > 1 ? " tasks " : " task ") + "in the list.");
+        UtilFunction.printLimit("Got it. I've added this task:\n"
+                + "   " + task + '\n' + "Now you have " + numOfTask
+                + (numOfTask > 1 ? " tasks " : " task ") + "in the list.");
     }
 
     /**
@@ -27,16 +27,16 @@ public class Printer {
      * @param numOfTask the total number of task in the database
      */
     public static void printDelete(Task task, int numOfTask) {
-        UtilFunction.printLimit("Noted. I've removed this task:\n" + "   " +
-                task + "\n" + "Now you have " + numOfTask  + " duke.tasks in the list.");
+        UtilFunction.printLimit("Noted. I've removed this task:\n" + "   "
+                + task + "\n" + "Now you have " + numOfTask + " duke.tasks in the list.");
     }
 
     /**
      * Print the reminder when list command is used but the database is empty.
      */
     public static void printNoTaskReminder() {
-        UtilFunction.printLimit("😝You don't have any task in the schedule yet~~\n" +
-                "use todo/deadline/event command to create your tasks~");
+        UtilFunction.printLimit("😝You don't have any task in the schedule yet~~\n"
+                + "use todo/deadline/event command to create your tasks~");
     }
 
     /**
@@ -53,8 +53,8 @@ public class Printer {
      * @param tasks the tasks to print
      */
     public static void printAllTask(List<Task> tasks, boolean withLabel) {
-        for(int i =1; i< tasks.size()+1; i++){
-            UtilFunction.printLimit(withLabel ? (i + ". ") : "   " + tasks.get(i-1));
+        for (int i = 1; i < tasks.size() + 1; i++) {
+            UtilFunction.printLimit((withLabel ? (i + ". ") : ("   ")) + tasks.get(i - 1));
         }
     }
 

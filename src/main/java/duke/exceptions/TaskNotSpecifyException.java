@@ -6,6 +6,11 @@ public class TaskNotSpecifyException extends Exception {
 
     private String typeOfCommand;
 
+    /**
+     * Constructor for Task not specify exception.
+     * @param err errorm message
+     * @param typeOfCommand command type
+     */
     public TaskNotSpecifyException(String err, String typeOfCommand) {
         super(err);
         this.typeOfCommand = typeOfCommand;

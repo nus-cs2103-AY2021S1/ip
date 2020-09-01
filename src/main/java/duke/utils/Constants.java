@@ -6,8 +6,8 @@ public class Constants {
      * Greeting for Duke.
      */
     public static final String GREETING =
-            "Hello/您好/こんにちは I'm Duke\n" +
-            "What can I do for you?";
+            "Hello/您好/こんにちは I'm Duke\n"
+            + "What can I do for you?";
 
     /**
      * Divider for Duke output.

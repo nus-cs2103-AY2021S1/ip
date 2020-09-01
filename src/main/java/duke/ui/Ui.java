@@ -1,12 +1,13 @@
 package duke.ui;
 
+import java.util.Objects;
+import java.util.Scanner;
+
 import duke.DukeCommandMatcher;
 import duke.storage.Storage;
 import duke.utils.Constants;
 import duke.utils.UtilFunction;
 
-import java.util.Objects;
-import java.util.Scanner;
 
 public class Ui {
 

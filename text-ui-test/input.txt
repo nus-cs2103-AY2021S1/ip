@@ -1,7 +1,19 @@
-todo study CS2103T
-TODO study CS2101
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
 ls
+List
+gibberish
+deadLiNe
+deadline return book
+deadline return book /2020-08-08
+deadline return book2 /20200808
+liSt
+event
+event presentation
+event presentation /2020-08-25
+event presentation2 /20200826
+ls
+done 1
+done 0
+find
+find book
 list
 bye
