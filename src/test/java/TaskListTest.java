@@ -12,20 +12,20 @@ public class TaskListTest {
 
     @Test
     public void addTest(){
-        myTaskList.addTask(task1);
-        myTaskList.addTask(task2);
-        myTaskList.addTask(task3);
+        myTaskList.addTaskUI(task1);
+        myTaskList.addTaskUI(task2);
+        myTaskList.addTaskUI(task3);
 
         assertEquals(myTaskList.getTasks().size(),3);
     }
 
     @Test
     public void deleteTest(){
-        myTaskList.addTask(task1);
-        myTaskList.addTask(task2);
-        myTaskList.addTask(task3);
+        myTaskList.addTaskUI(task1);
+        myTaskList.addTaskUI(task2);
+        myTaskList.addTaskUI(task3);
 
-        myTaskList.deleteTask(1);
+        myTaskList.deleteTaskUI(1);
         assertEquals(myTaskList.getTasks().size(),2);
     }
 
