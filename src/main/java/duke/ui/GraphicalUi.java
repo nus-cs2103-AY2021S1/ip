@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -84,10 +83,10 @@ public class GraphicalUi extends javafx.application.Application implements Ui {
      * appends them to the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)),
-                                             DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
+        String userText = userInput.getText();
+        String dukeText = getResponse(userText);
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, this.user),
+                                             DialogBox.getDukeDialog(dukeText, this.duke));
         userInput.clear();
     }
     private String getResponse(String text) {
