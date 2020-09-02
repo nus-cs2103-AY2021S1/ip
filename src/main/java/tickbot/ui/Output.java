@@ -9,6 +9,7 @@ import java.util.Map.Entry;
  * The class to represent output in the text UI.
  */
 public class Output {
+    private static final String TIME_FORMAT = "<yyyy-MM-dd[ HH:mm[:ss]]>";
     private static PrintStream printStream = System.out;
     private static String prefix = "  ";
 
@@ -21,8 +22,8 @@ public class Output {
             put("delete", "delete <index>");
             put("list", "list");
             put("todo", "todo <content>");
-            put("deadline", "deadline <content> /by <YYYY-MM-DD>");
-            put("event", "event <content> /at <YYYY-MM-DD>");
+            put("deadline", "deadline <content> /by " + TIME_FORMAT);
+            put("event", "event <content> /at " + TIME_FORMAT);
         }
     };
 

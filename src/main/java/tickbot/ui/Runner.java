@@ -1,7 +1,8 @@
 package tickbot.ui;
 
 import java.time.DateTimeException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -14,6 +15,7 @@ import tickbot.task.Event;
 import tickbot.task.Task;
 import tickbot.task.TaskList;
 import tickbot.task.Todo;
+import tickbot.util.DateTimeFormatterFactory;
 
 /**
  * The class to represent the runner of commands.
@@ -115,6 +117,11 @@ public class Runner {
         }
     }
 
+    private LocalDateTime parseTime(String timeString) {
+        DateTimeFormatter formatter = DateTimeFormatterFactory.getInputFormatter();
+        return LocalDateTime.parse(timeString, formatter);
+    }
+
     /**
      * Adds a task to the task list.
      * @param args The split parts of the commands.
@@ -125,7 +132,7 @@ public class Runner {
     private void addTask(
         String[] args,
         String taskName,
-        BiFunction<String, LocalDate, ? extends Task> initializer,
+        BiFunction<String, LocalDateTime, ? extends Task> initializer,
         String timeMarker
     ) {
         if (args.length < 2) {
@@ -146,7 +153,7 @@ public class Runner {
                 }
             }
             Task task = initializer.apply(content,
-                timeMarker == null ? null : LocalDate.parse(time.get()));
+                    timeMarker == null ? null : parseTime(time.get()));
             tasks.add(task);
             Output.printMessage(taskName + " added: " + task);
             Output.printMessage("You have " + tasks.size() + " task(s) in task list.");
@@ -157,7 +164,8 @@ public class Runner {
             Output.printMessage("Missing time for the " + args[0] + ".");
             Output.printUsage(args[0]);
         } catch (DateTimeException err) {
-            Output.printMessage("Bad date format. Please input in YYYY-MM-DD format.");
+            Output.printMessage("Bad date format. Please input in correct format.");
+            Output.printUsage(args[0]);
         }
     }
 }

@@ -2,9 +2,12 @@ package tickbot.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
+
+import tickbot.util.DateTimeFormatterFactory;
 
 public class TaskTests {
     /**
@@ -12,9 +15,10 @@ public class TaskTests {
      */
     @Test
     public void testSpace() {
-        LocalDate date = LocalDate.parse("2020-01-01");
+        DateTimeFormatter formatter = DateTimeFormatterFactory.getInputFormatter();
+        LocalDateTime date = LocalDateTime.parse("2020-01-01 08:00", formatter);
         Deadline deadline = new Deadline(false, "with space", date);
-        assertEquals("[D][✘] with space (by: 2020-01-01)", deadline.toString());
+        assertEquals("[D][✘] with space (by: 2020-01-01 08:00:00)", deadline.toString());
     }
 
     /**
@@ -22,9 +26,10 @@ public class TaskTests {
      */
     @Test
     public void testComma() {
-        LocalDate date = LocalDate.parse("2020-01-01");
+        DateTimeFormatter formatter = DateTimeFormatterFactory.getInputFormatter();
+        LocalDateTime date = LocalDateTime.parse("2020-01-01", formatter);
         Event event = new Event(false, "with, comma", date);
-        assertEquals("[E][✘] with, comma (at: 2020-01-01)", event.toString());
+        assertEquals("[E][✘] with, comma (at: 2020-01-01 00:00:00)", event.toString());
     }
 
     /**

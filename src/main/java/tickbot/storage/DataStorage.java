@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.time.DateTimeException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -51,12 +51,12 @@ public class DataStorage {
                     break;
                 }
                 case "E": {
-                    LocalDate time = LocalDate.parse(parts[3]);
+                    LocalDateTime time = LocalDateTime.parse(parts[3]);
                     task = new Event(completed, parts[2], time);
                     break;
                 }
                 case "D": {
-                    LocalDate time = LocalDate.parse(parts[3]);
+                    LocalDateTime time = LocalDateTime.parse(parts[3]);
                     task = new Deadline(completed, parts[2], time);
                     break;
                 }

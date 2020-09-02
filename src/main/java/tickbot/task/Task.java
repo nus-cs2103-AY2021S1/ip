@@ -1,16 +1,19 @@
 package tickbot.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import tickbot.util.DateTimeFormatterFactory;
 
 /**
  * The class to represent an abstract task.
  */
 public abstract class Task {
     private final String content;
-    private final LocalDate time;
+    private final LocalDateTime time;
     private boolean isCompleted;
 
-    Task(boolean isCompleted, String content, LocalDate time) {
+    Task(boolean isCompleted, String content, LocalDateTime time) {
         this.content = content;
         this.isCompleted = isCompleted;
         this.time = time;
@@ -45,9 +48,10 @@ public abstract class Task {
 
     /**
      * Gets the date of the task.
-     * @return A {@LocalDate} object if the task contains a time, {@code null} if none.
+     * @return A {@LocalDateTime} object if the task contains a time,
+     *         {@code null} if none.
      */
-    public LocalDate getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
@@ -63,8 +67,10 @@ public abstract class Task {
     public String toString() {
         String timeMarker = getTimeMarker();
         if (timeMarker != null) {
+            DateTimeFormatter formatter = DateTimeFormatterFactory.getOutputFormatter();
+            String timeString = formatter.format(getTime());
             return String.format("[%s][%s] %s (%s: %s)", getTaskType(),
-                    getCompleteMark(), getContent(), timeMarker, getTime());
+                    getCompleteMark(), getContent(), timeMarker, timeString);
         } else {
             return String.format("[%s][%s] %s", getTaskType(),
                     getCompleteMark(), getContent());
