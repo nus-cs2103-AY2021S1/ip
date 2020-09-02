@@ -15,9 +15,9 @@ public class DoneCommand extends Command {
      * @param ui user interface to display deleted message
      * @param storage file storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.markTaskAsDone(taskNumber);
         Task currTask = tasks.getTask(taskNumber);
-        ui.showDoneMessage(currTask);
+        return ui.showDoneMessage(currTask);
     }
 }

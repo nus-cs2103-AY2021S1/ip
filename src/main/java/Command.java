@@ -8,7 +8,7 @@ public abstract class Command {
      * @param ui user interface for printing relevant messages for the user
      * @param storage file storage
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     public boolean isExit() {
         return false;

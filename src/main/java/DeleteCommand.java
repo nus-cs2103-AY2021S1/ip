@@ -15,9 +15,9 @@ public class DeleteCommand extends Command {
      * @param ui user interface to display deleted message
      * @param storage file storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task currTask = tasks.getTask(taskNumber);
         tasks.delete(taskNumber);
-        ui.showDeletedMessage(currTask, tasks.getTotalTasks());
+        return ui.showDeletedMessage(currTask, tasks.getTotalTasks());
     }
 }

@@ -9,9 +9,9 @@ public class ExitCommand extends Command {
      * @param ui user interface to display deleted message
      * @param storage file storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveTasks(tasks.getTasksList());
-        ui.showGoodbyeMessage();
+        return ui.showGoodbyeMessage();
     }
 
     @Override
