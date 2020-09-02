@@ -55,6 +55,10 @@ public class Parser {
     private String getCommand(String command) {
         return command.split(" ")[0];
     }
+
+    protected String trimCommand(String task_type, String command) {
+        return command.replace(task_type, "").trim();
+    }
 }
 
 

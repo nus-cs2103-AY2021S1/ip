@@ -111,6 +111,29 @@ public class TaskList {
         return task_list;
     }
 
+    /**
+     * Finds the tasks in the task_list matching the entered keyword,
+     * then return the list containing those tasks.
+     *
+     * @param keyword The string containing the description of the task in the list to be found.
+     * @return The list of tasks with the matching keyword description.
+     * @throws DukeInvalidTaskException If the task doesn't exist in the list.
+     */
+    public ArrayList<Task> findTask(String keyword) throws DukeInvalidTaskException {
+        ArrayList<Task> temp_ls = new ArrayList<>();
+        for (Task task : task_list) {
+            if (task.task_info.contains(keyword)) {
+                temp_ls.add(task);
+            }
+        }
+        if (temp_ls.size() == 0) {
+            throw new DukeInvalidTaskException("    ____________________________________________________________\n" +
+                                               "     ☹ OOPS!!! There are no matching tasks.\n" +
+                                               "    ____________________________________________________________\n");
+        }
+        return temp_ls;
+    }
+
     private String getDescription(String command, String s) {
         return command.split(s)[0].trim();
     }
