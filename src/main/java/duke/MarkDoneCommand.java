@@ -24,13 +24,13 @@ public class MarkDoneCommand extends Command {
      * @throws DukeException if exception encountered
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskIndex >= tasks.size()) {
-            throw new DukeException("duke.tasks.Task does not exist _(´ཀ`」 ∠)_");
+            throw new DukeException("Sorry, the task does not exist");
         } else {
-        Task completedTask = tasks.markDone(taskIndex);
-        storage.updateFile(tasks);
-        ui.printTask(completedTask, ActionType.MARK_DONE);
+            Task completedTask = tasks.markDone(taskIndex);
+            storage.updateFile(tasks);
+            return ui.printTask(completedTask, ActionType.MARK_DONE);
         }
     }
 }

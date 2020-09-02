@@ -25,13 +25,13 @@ public class DeleteCommand extends Command {
      * @throws DukeException if exception encountered
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskIndex >= tasks.getList().size()) {
-            throw new DukeException("Task does not exist :(");
+            throw new DukeException("Sorry, the task does not exist...");
         } else {
             Task deletedTask = tasks.delete(taskIndex);
             storage.updateFile(tasks);
-            ui.printTask(deletedTask, ActionType.MARK_DONE);
+            return ui.printTask(deletedTask, ActionType.DELETE);
         }
     }
 }

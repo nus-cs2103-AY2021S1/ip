@@ -3,13 +3,13 @@ package duke;
 import java.util.Scanner;
 
 /**
- * Ui class to deal with user interaction
+ * Ui class to deal with user's interaction
  */
 public class Ui {
     private static final Scanner sc = new Scanner(System.in);
-    private void delimiter() {
-        System.out.println("__________________________________________________________________");
-    }
+//    private void delimiter() {
+//        System.out.println("__________________________________________________________________");
+//    }
 
     /**
      * Returns next line of user input
@@ -24,36 +24,35 @@ public class Ui {
      * Prints message when it operates
      */
     public void showInfo() {
-        delimiter();
-        System.out.println("    Hello, I'm DukeQ");
-        System.out.println("    todo then your instructions e.g. todo read book");
-        System.out.println("    deadline then your instructions e.g. deadline by 2020-09-01");
-        System.out.println("    type 'event' followed by the description,");
-        System.out.println("    then '/at', then timing in yyyy-MM-dd format");
-        System.out.println("    done followed by the task number " +
-                "ok I have marked it as done");
-        System.out.println("    type list to see the list");
-        System.out.println("    type find followed by keywords to search for tasks");
-        System.out.println("    type bye to exit");
-        delimiter();
+        System.out.println("Hello, I'm DukeQ");
+        System.out.println("todo then your instructions e.g. todo read book");
+        System.out.println("deadline then your instructions e.g. deadline by 2020-09-01");
+        System.out.println("type 'event' followed by the description,");
+        System.out.println("then '/at', then timing in yyyy-MM-dd format");
+        System.out.println("done followed by the task number " + "marked it as done");
+        System.out.println("type list to see the task list");
+        System.out.println("type find to search by keywords for tasks");
+        System.out.println("type bye to exit");
     }
 
+
     /**
-     * Prints list of existing tasks
+     * Returns string containing list of existing tasks
      *
      * @param tasks List of tasks
+     * @return String of tasks
      */
-    public void printList(TaskList tasks) {
-        delimiter();
+    public String printList(TaskList tasks) {
+        String tasksString = "";
         if (tasks.size() == 0) {
-            System.out.println("    List is empty");
+            tasksString += "List is empty \n";
         } else {
-            System.out.println("    Items in list:");
+            tasksString += "Tasks in the list: \n";
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println("      " + (i + 1) + ". " + tasks.get(i).toString());
+                tasksString += ((i + 1) + ". " + tasks.get(i).toString() + "\n");
             }
         }
-        delimiter();
+        return tasksString;
     }
 
     /**
@@ -62,52 +61,50 @@ public class Ui {
      * @param task Task to be printed
      * @param action Action type; determines format of text that is printed
      */
-    public void printTask(Task task, ActionType action) {
-        delimiter();
+    public String printTask(Task task, ActionType action) {
+        String taskDescription;
         switch(action){
         case MARK_DONE:
-            System.out.println("    Task marked complete:");
+            taskDescription = "Task marked complete: \n";
             break;
         case DELETE:
-            System.out.println("    Task deleted:");
+            taskDescription = "Task deleted: \n";
             break;
         default:
-            System.out.println("    Added: ");
+            taskDescription = "Added: \n";
         }
-        System.out.println("      " + task.toString());
-        delimiter();
+        taskDescription += task.toString();
+        return taskDescription;
     }
 
-    public void search(TaskList tasks, String input) {
+    public String search(TaskList tasks, String input) {
         int count = 1;
-        delimiter();
-        System.out.println("    Matching tasks:");
+        String result = "Matching tasks: \n";
         for (Task task: tasks.getList()) {
             String taskString = task.toString();
             if (taskString.contains(input)) {
-                System.out.println("      " + count + ". " + taskString);
+                result += (count + ". " + taskString + "\n");
                 count++;
             }
         }
-        delimiter();
+        return result;
     }
 
     /**
      * Prints total number of tasks
      *
      * @param tasks List of tasks
+     * @return String with total number of tasks
      */
-    public void printTotalTasks(TaskList tasks) {
-        System.out.println("    Total tasks: " + tasks.size());
-        delimiter();
+    public String printTotalTasks(TaskList tasks) {
+        return "Total tasks: " + tasks.size();
     }
+
 
     /**
      * Prints goodbye message
      */
-    public void goodbye() {
-        delimiter();
-        System.out.println("    Bye!");
-        delimiter();
+    public String bye() {
+        return "Bye!!!";
     }
 }

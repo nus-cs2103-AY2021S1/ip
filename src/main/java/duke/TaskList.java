@@ -20,12 +20,12 @@ public class TaskList {
         return list.size();
     }
 
-    public Task get(int index) {
-        return list.get(index);
-    }
-
     public ArrayList<Task> getList() {
         return list;
+    }
+
+    public Task get(int index) {
+        return list.get(index);
     }
 
     public void addTask(Task task) {
