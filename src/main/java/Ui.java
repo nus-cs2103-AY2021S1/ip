@@ -14,18 +14,19 @@ public class Ui {
     /**
      * Greets the user when they start up the Duke chat bot.
      */
-    public void greet() {
-        String greeting = "Hello! I'm Duke\n What can I do for you? (◠  ◠✿)";
-        System.out.println(wrapMessage(greeting));
+    public String greet() {
+        String greeting = "Hello! I'm Duke\nWhat can I do for you? (◠  ◠✿)";
+        return greeting;
     }
 
     /**
      * Bids farewell to the user when they exit the Duke chat bot.
+     * @return A farewell message.
      */
-    public void exit() {
+    public String exit() {
         String byeMessage = "Bye! ( ´ ▽ ` )/";
-        System.out.println(wrapMessage(byeMessage));
         System.exit(0);
+        return byeMessage;
     }
 
     /**
@@ -35,20 +36,21 @@ public class Ui {
      * @param task The task to be added.
      * @param size The number of tasks in the current list.
      */
-    public void addTask(Task task, int size) {
+    public String addTask(Task task, int size) {
         String message = "Got it. I've added this task: \n  " + task +
                 "\n Now you have " + size + " tasks in the list.";
-        System.out.println(wrapMessage(message));
+        return message;
     }
 
     /**
      * Informs the user that the task has been marked as done.
      *
      * @param task The task to be completed.
+     * @return A message to inform the user that the task has been marked as done.
      */
-    public void completeTask(Task task) {
+    public String completeTask(Task task) {
         String message = "Nice! I've marked this task as done: \n  " + task;
-        System.out.println(wrapMessage(message));
+        return message;
     }
 
     /**
@@ -58,10 +60,10 @@ public class Ui {
      * @param task The task to be deleted.
      * @param size The number of tasks in the current list.
      */
-    public void deleteTask(Task task, int size) {
+    public String deleteTask(Task task, int size) {
         String message = "Noted. I've removed this task: \n " + task +
                 "\n Now you have " + size + " tasks in the list.";
-        System.out.println(wrapMessage(message));
+        return message;
     }
 
     /**
@@ -69,11 +71,12 @@ public class Ui {
      * numbered order.
      *
      * @param formattedList The formatted task list.
+     * @return The list of tasks.
      */
-    public void list(String formattedList) {
+    public String list(String formattedList) {
         String list = "Here are the tasks in your list: \n  ";
         list += formattedList;
-        System.out.println(wrapMessage(list));
+        return list;
     }
 
     /**
@@ -82,27 +85,27 @@ public class Ui {
      *
      * @param e The error caught.
      */
-    public void showDukeError(DukeException e) {
-        System.out.println(wrapMessage(e.toString()));
+    public String showDukeError(DukeException e) {
+        return e.toString();
     }
 
     /**
      * Informs the user that an error occurred while trying to save their tasks.
      */
-    public void showSaveError() {
-        System.out.println(wrapMessage("Something went wrong while saving your tasks..."));
+    public String showSaveError() {
+        return "Something went wrong while saving your tasks...";
     }
 
     /**
      * Informs the user that an error occurred while trying to load their tasks.
      */
-    public void showLoadError() {
-        System.out.println(wrapMessage("Something went wrong while loading your tasks..."));
+    public String showLoadError() {
+        return wrapMessage("Something went wrong while loading your tasks...");
     }
 
-    public void find(String matchingTasks) {
+    public String find(String matchingTasks) {
         String list = "Here are the matching tasks in your list: \n  ";
         list += matchingTasks;
-        System.out.println(wrapMessage(list));
+        return list;
     }
 }

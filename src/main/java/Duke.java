@@ -10,9 +10,9 @@ public class Duke {
     private TaskList tasks;
     private  Ui ui;
 
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/tasks.txt");
         try {
             tasks = new TaskList(storage.loadFile());
         } catch (IOException e) {
@@ -20,43 +20,40 @@ public class Duke {
         }
     }
 
-    void handleInput(String[] input) {
+    String getResponse(String userInput) {
+        String[] parsedInput = Parser.parse(userInput);
         try {
-            switch (input[0]) {
+            switch (parsedInput[0]) {
+            case "hello":
+                return ui.greet();
             case "list":
-                ui.list(tasks.formattedList());
-                break;
+                return ui.list(tasks.formattedList());
             case "bye":
                 storage.saveFile(tasks);
-                ui.exit();
-                break;
+                return ui.exit();
             case "done":
-                ui.completeTask(tasks.completeTask(Integer.valueOf(input[1])));
-                break;
+                return ui.completeTask(tasks.completeTask(Integer.valueOf(parsedInput[1])));
             case "delete":
-                ui.deleteTask(tasks.deleteTask(Integer.valueOf(input[1])), tasks.getLength());
-                break;
+                return ui.deleteTask(tasks.deleteTask(Integer.valueOf(parsedInput[1])), tasks.getLength());
             case "find":
-                ui.find(tasks.findTasks(input[1]));
-                break;
+                return ui.find(tasks.findTasks(parsedInput[1]));
             case "todo":
                 // Fallthrough
             case "event":
                 // Fallthrough
             case "deadline":
-                if (input.length == 1) {
-                    throw new MissingDescriptionException(input[0]);
+                if (parsedInput.length == 1) {
+                    throw new MissingDescriptionException(parsedInput[0]);
                 } else {
-                    ui.addTask(tasks.addTask(input[0], input[1]), tasks.getLength());
+                    return ui.addTask(tasks.addTask(parsedInput[0], parsedInput[1]), tasks.getLength());
                 }
-                break;
             default:
                 throw new UnknownCommandException();
             }
         } catch (DukeException e) {
-            ui.showDukeError(e);
+            return ui.showDukeError(e);
         } catch (IOException e) {
-            ui.showSaveError();
+            return ui.showSaveError();
         }
     }
 
@@ -65,19 +62,17 @@ public class Duke {
      * other classes like TaskList and Ui.
      */
     public void run() {
-        ui.greet();
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
-            String[] input = Parser.parse(sc.nextLine());
-            handleInput(input);
+            getResponse(sc.nextLine());
         }
 
         sc.close();
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke().run();
     }
 }
 
