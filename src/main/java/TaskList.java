@@ -16,25 +16,29 @@ public class TaskList {
     /**
      * List tasks to system output.
      */
-    public void listTasks() {
+    public String listTasks() {
+        String message = "";
         if (tasks.isEmpty()) {
-            System.out.println("You have no remaining tasks! Cheers!");
+            message += "You have no remaining tasks! Cheers!\n";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            message += "Here are the tasks in your list:\n";
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(i + 1 + "." + tasks.get(i));
+                message += i + 1 + "." + tasks.get(i) + "\n";
             }
         }
+        return message;
     }
 
     /**
      * Add a task to list of tasks.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
+        String message = "";
         this.tasks.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + tasks.get(tasks.size() - 1));
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        message += "Got it. I've added this task:\n";
+        message += "  " + tasks.get(tasks.size() - 1) + "\n";
+        message += "Now you have " + tasks.size() + " tasks in the list.\n";
+        return message;
     }
 
     /**
@@ -42,10 +46,12 @@ public class TaskList {
      *
      * @param id index of task to be marked as done
      */
-    public void setDone(int id) {
+    public String setDone(int id) {
+        String message = "";
         this.tasks.get(id).setDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + tasks.get(id));
+        message += "Nice! I've marked this task as done:\n";
+        message += "  " + tasks.get(id) + "\n";
+        return message;
     }
 
     /**
@@ -53,10 +59,12 @@ public class TaskList {
      *
      * @param id index of task to be deleted
      */
-    public void deleteTask(int id) {
+    public String deleteTask(int id) {
+        String message = "";
         Task deletedTask = this.tasks.remove(id);
-        System.out.println("Noted. I have removed this task:");
-        System.out.println("  " + deletedTask);
+        message += "Noted. I have removed this task:\n";
+        message += "  " + deletedTask + "\n";
+        return message;
     }
 
     /**
@@ -64,16 +72,18 @@ public class TaskList {
      *
      * @param keyword keyword that task names must contain
      */
-    public void searchKeyword(String keyword) {
+    public String searchKeyword(String keyword) {
+        String message = "";
         if (tasks.isEmpty()) {
-            System.out.println("You have no remaining tasks to search from!");
+            message += "You have no remaining tasks to search from!\n";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            message += "Here are the matching tasks in your list:\n";
             for (int i = 0; i < tasks.size(); i++) {
                 if (tasks.get(i).containsKeyword(keyword)) {
-                    System.out.println(i + 1 + "." + tasks.get(i));
+                    message += i + 1 + "." + tasks.get(i) + "\n";
                 }
             }
         }
+        return message;
     }
 }
