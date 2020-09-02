@@ -11,7 +11,7 @@ public class Parser {
      *                 and writing of data.
      * @return nothing
      */
-    public static void respond(String command, Ui ui, TaskList taskList, String filePath) {
+    public static String respond(String command, Ui ui, TaskList taskList, String filePath) {
         String[] pieces = command.split(" ", 2);
         if (command.equals("bye")) { // terminating command
             ui.bye();
@@ -113,6 +113,7 @@ public class Parser {
 
             }
         }
+        return command;
     }
 }
 
