@@ -1,4 +1,4 @@
-package moco.logic;
+package test.java.moco.logic;
 
 import main.java.moco.logic.TaskList;
 import main.java.moco.task.Deadline;

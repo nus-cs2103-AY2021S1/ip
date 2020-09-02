@@ -1,4 +1,4 @@
-package moco;
+package test.java.moco;
 
 import org.junit.jupiter.api.Test;
 
