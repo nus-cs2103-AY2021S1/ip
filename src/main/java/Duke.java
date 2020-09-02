@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -24,29 +23,29 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    /**
-     * The main method which handles users and calls relevant methods:
-     * Storage is called to print out stored tasks on the hard disk from the previous run,
-     * Ui is called to handle user inputs/ commands specifically.
-     *
-     * @param args standard format
-     */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo +
-                "People call me Duke the All-Knowing ," +
-                "ask me anything by typing a line.");
-
-        Storage.read();
-
-        Ui ui = new Ui();
-        ui.deal();
-
-    }
+//    /**
+//     * The main method which handles users and calls relevant methods:
+//     * Storage is called to print out stored tasks on the hard disk from the previous run,
+//     * Ui is called to handle user inputs/ commands specifically.
+//     *
+//     * @param args standard format
+//     */
+//    public static void main(String[] args) {
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo +
+//                "People call me Duke the All-Knowing ," +
+//                "ask me anything by typing a line.");
+//
+//        Storage.read();
+//
+//        Ui ui = new Ui();
+//        ui.deal();
+//
+//    }
 
     @Override
     public void start(Stage stage){
@@ -136,11 +135,11 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
         );
         userInput.clear();
     }
@@ -149,7 +148,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    String getResponse(String input) {
         return "Duke heard: " + input;
     }
 
