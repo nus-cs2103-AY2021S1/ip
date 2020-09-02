@@ -34,7 +34,7 @@ public class DeleteCommand extends ComplexCommand {
         try {
             // Attempt to parse parameters then remove task with given index
             int index = this.parseParams(taskManager.size());
-            Task temp = taskManager.removeTask(index-1);
+            Task temp = taskManager.removeTask(index - 1);
 
             // Display status message to user
             ui.display("Alright. I've removed this task:");

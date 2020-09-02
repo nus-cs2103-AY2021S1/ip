@@ -3,7 +3,7 @@ package duke.exception;
 /**
  * A generic <code>Exception</code> created by Duke.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     /**
      * Creates a new <code>DukeException</code> with error details encoded within.

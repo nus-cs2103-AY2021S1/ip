@@ -3,12 +3,12 @@ package duke.command;
 /**
  * Abstract class for representing user commands with parameters.
  */
-public abstract class ComplexCommand extends Command{
+public abstract class ComplexCommand extends Command {
 
     /**
      * Parameters for the command.
      */
-    public String params;
+    protected String params;
 
     /**
      * Creates a complex <code>Command</code> with parameters initialised.

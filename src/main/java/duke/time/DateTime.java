@@ -8,7 +8,7 @@ import java.util.Locale;
 /**
  * Representation as a point of time as a <code>Date</code>, and if available, <code>Time</code>.
  */
-public class DateTime extends TimePoint{
+public class DateTime extends TimePoint {
 
     /**
      * Date of point in time represented by <code>DateTime</code>.

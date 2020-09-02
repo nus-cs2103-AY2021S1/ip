@@ -35,7 +35,7 @@ public class DoneCommand extends ComplexCommand {
             // Attempt to parse parameter and get task at given index
             int index = this.parseParams(taskManager.size());
 
-            Task temp = taskManager.getTask(index-1);
+            Task temp = taskManager.getTask(index - 1);
 
             // Mark task as done
             temp.doTask();

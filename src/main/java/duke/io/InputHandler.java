@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class InputHandler {
 
-    Scanner scanner;
+    protected Scanner scanner;
 
     /**
      * Initializes a new <code>InputHandler</code>.

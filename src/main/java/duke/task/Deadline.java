@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.time.TimePoint;
-
 import java.util.HashMap;
+
+import duke.time.TimePoint;
 
 /**
  * Class that represents a <code>Task</code> with a deadline.

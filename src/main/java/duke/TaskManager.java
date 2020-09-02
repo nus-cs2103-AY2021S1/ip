@@ -1,12 +1,12 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import duke.task.Task;
 
 /**
  * Provides a container for storing <code>Task</code> objects.

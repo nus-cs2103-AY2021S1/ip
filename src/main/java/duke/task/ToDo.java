@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * Class that represents a task to be done.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * Creates an initialized <code>ToDo</code> with name.

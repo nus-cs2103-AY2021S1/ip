@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.time.TimePoint;
-
 import java.util.HashMap;
+
+import duke.time.TimePoint;
 
 /**
  * Class that represents an event that occurs at some time.

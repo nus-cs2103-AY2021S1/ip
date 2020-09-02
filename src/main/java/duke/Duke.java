@@ -1,12 +1,14 @@
 package duke;
 
+import java.nio.file.Path;
+
 import duke.command.Command;
 import duke.exception.DukeInputException;
 import duke.exception.DukeSaveDataException;
 import duke.io.InputHandler;
 import duke.io.OutputHandler;
 
-import java.nio.file.Path;
+
 
 /** Contains main software logic loop and initialization logic.*/
 public class Duke {
@@ -63,7 +65,7 @@ public class Duke {
     public void run() {
 
         // Main software loop.
-        while(true) {
+        while (true) {
 
             try {
                 // Parse user input into software command.

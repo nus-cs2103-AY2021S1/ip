@@ -40,7 +40,7 @@ public class ToDoCommand extends ComplexCommand {
 
             ui.displayAfterAddTask(newToDo, taskManager.size());
 
-        } catch (DukeInputException e){
+        } catch (DukeInputException e) {
             ui.displayException(e);
         }
 

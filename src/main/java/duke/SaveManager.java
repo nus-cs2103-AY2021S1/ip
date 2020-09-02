@@ -1,11 +1,5 @@
 package duke;
 
-import duke.exception.DukeSaveDataException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -14,6 +8,13 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import duke.exception.DukeSaveDataException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 
 /** Contains functions for saving into and loading from save file */
 public class SaveManager {
@@ -78,7 +79,7 @@ public class SaveManager {
      * @param taskManager Contains task data to save.
      * @throws DukeSaveDataException If unable to save data.
      */
-    public void save(TaskManager taskManager) throws DukeSaveDataException{
+    public void save(TaskManager taskManager) throws DukeSaveDataException {
 
         // Initialise save data storage variable
         // Currently implemented as a String[] for use with taskManager.forEach()
@@ -123,7 +124,7 @@ public class SaveManager {
     private HashMap<String, String> loadMapFromSave(String objectData) {
 
         // Convert save data to a list of parameters
-        String copyData = objectData.substring(2, objectData.length()-2);
+        String copyData = objectData.substring(2, objectData.length() - 2);
         String[] paramsList = copyData.split("}, \\{");
 
         // Convert list of parameters to HashMap form
@@ -138,7 +139,7 @@ public class SaveManager {
         return paramsMap;
     }
 
-    private Task loadTaskFromMap(HashMap<String, String> params) throws DukeSaveDataException{
+    private Task loadTaskFromMap(HashMap<String, String> params) throws DukeSaveDataException {
 
         // Determine Task type from params
         String type = params.get("type");
@@ -165,7 +166,7 @@ public class SaveManager {
         }
     }
 
-    private Task loadTaskFromSave(String objectData) throws DukeSaveDataException{
+    private Task loadTaskFromSave(String objectData) throws DukeSaveDataException {
         return this.loadTaskFromMap(this.loadMapFromSave(objectData));
     }
 

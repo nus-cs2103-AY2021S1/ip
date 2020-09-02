@@ -8,7 +8,7 @@ import duke.exception.DukeInputException;
 /**
  * Represents a user command to find tasks containing input keywords
  */
-public class FindCommand extends ComplexCommand{
+public class FindCommand extends ComplexCommand {
 
     /**
      * Creates a new <code>FindCommand</code> with the given parameters.

@@ -1,11 +1,11 @@
 package duke.time;
 
-import duke.exception.DukeInputException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeInputException;
 
 /**
  * Contains a static method for handling parsing string inputs to <code>DateTime</code> objects.
