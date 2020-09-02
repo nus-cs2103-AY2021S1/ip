@@ -39,14 +39,13 @@ public class DukeTest {
     public void storageUploadTest() throws YooException, IOException {
 
         //upload() dummy text for testing
-        System.out.println(System.getProperty("user.dir"));
-        Storage storage = new Storage("./data/tasks.txt");
+        Storage storage = new Storage("data/tasks.txt");
         TaskList tasks = new TaskList();
         tasks.add(new Todo("for testing"));
         storage.upload(tasks);
 
         //reading the uploaded dummy text
-        File test = new File("./data/tasks.txt");
+        File test = new File("data/tasks.txt");
         BufferedReader br = new BufferedReader(new FileReader(test));
         String actual = "";
         String line;
@@ -55,7 +54,7 @@ public class DukeTest {
         }
 
         assertEquals("T // 0 // for testing // ", actual);
-        PrintWriter pw = new PrintWriter("./data/tasks.txt");
+        PrintWriter pw = new PrintWriter("data/tasks.txt");
         pw.close();
     }
 }

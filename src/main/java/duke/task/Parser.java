@@ -19,15 +19,15 @@ public class Parser {
      */
     protected static String parse(String command, TaskList tasks, Ui ui, Storage storage) throws YooException {
 
-        String string = "";
+        String string;
         try {
-            String[] cmd = command.split(" ", 2);
-
             if (command.equals("bye")) {
                 storage.upload(tasks);
                 string = ui.showExit();
                 return string;
             }
+
+            String[] cmd = command.split(" ", 2);
 
             if (command.equals("list")) {
                 if (tasks.length() > 0) {

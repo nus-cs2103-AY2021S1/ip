@@ -90,8 +90,8 @@ public class Storage {
      * @throws YooException If the file is not found in the path.
      */
     protected void upload(TaskList tasks) throws YooException {
-        String[] path = filePath.split("/", 3);
-        java.nio.file.Path dukePath = java.nio.file.Paths.get(path[0], path[1], path[2]);
+        String[] path = filePath.split("/", 2);
+        java.nio.file.Path dukePath = java.nio.file.Paths.get(path[0], path[1]);
         File duke = new File(String.valueOf(dukePath));
 
         try {
