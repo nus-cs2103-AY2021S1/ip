@@ -34,7 +34,6 @@ public class DukeFileHandler {
 
         if (!file.exists()) {
             try {
-                // todo find out why access is denied when creating file
                 file.getParentFile().mkdirs();
                 file.createNewFile();
             } catch (IOException e) {
@@ -47,7 +46,7 @@ public class DukeFileHandler {
             List<Task> toDoList = new ArrayList<>();
 
             while (scan.hasNext()) {
-                toDoList.add(createTask(scan.nextLine()));
+                toDoList.add(createTask(scan.nextLine().split("\\|")));
             }
 
             return toDoList;
@@ -56,8 +55,7 @@ public class DukeFileHandler {
 
 
     // input is of format TaskType | isDone | Detail | Date (can be null)
-    private Task createTask(String input) {
-        String[] inputArr = input.split("\\|");
+    private Task createTask(String... inputArr) {
         boolean isDone = inputArr[1].trim().equals("1");
 
         switch (inputArr[0].trim()) {
@@ -73,8 +71,6 @@ public class DukeFileHandler {
         }
     }
 
-
-    // todo the access denied to write file
 
     /**
      * Writes the list to the file.
