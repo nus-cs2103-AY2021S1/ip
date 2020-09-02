@@ -7,11 +7,17 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * A chatbot that helps the user keep track of todo, deadline and event tasks 
  * by storing them in a list.
  */
-public class Duke {
+public class Duke extends Application {
     
     
     static final String filepath = "duke.txt";
@@ -19,6 +25,11 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
+    
+    public Duke() {
+        
+    }
+    
     /**
      * Constructs a Duke object and initialises the TaskList, Ui and Storage.
      * @param filepath location of the save file containing the list of tasks.
@@ -57,6 +68,15 @@ public class Duke {
     
     public static void main (String[] args) {
         new Duke(filepath).run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     
