@@ -19,29 +19,10 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     * Creates a Duke Chat-bot.
-     *
-     * @param filePath Directory where duke.Duke text file is saved.
-     * @param folderPath Path name of duke.Duke text file to be saved.
-     */
-    public Duke(String filePath, String folderPath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filePath, folderPath);
-        try {
-            this.tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            this.tasks = new TaskList();
-        }
-    }
-
-    public Duke() {
-    }
-
-    /**
+     * Creates a Duke.
      * Initialises the Ui, Storage and TaskList upon starting.
      */
-    public void initialise() {
+    public Duke() {
         ui = new Ui();
         storage = new Storage("/data/duke.txt", "/data");
         try {
@@ -64,20 +45,12 @@ public class Duke {
             Command command = Parser.parse(input);
             isExit = command.isExit();
             if (isExit) {
-                //                System.exit(0);
+                // System.exit(0);
                 return ui.showFarewell();
             }
             return command.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
         }
-    }
-
-    /**
-     * Main method for starting the chat-bot.
-     * @param args Command line arguments, not used.
-     */
-    public static void main(String[] args) {
-        new Duke("/data/duke.txt", "/data").run();
     }
 }
