@@ -7,109 +7,107 @@ import java.util.ArrayList;
  */
 public class Ui {
     /**
-     * Prints line divider between user input and Duke response.
+     * Gets chat divider.
+     * @return divider line.
      */
-    public void printDivider() {
-        System.out.println("          ____________________________________________________________");
+    public String chatDivider() {
+        return "____________________________________________________________\n";
     }
 
     /**
-     * Prints welcome message.
+     * Gets welcome message.
+     * @return welcome message from Duke.
      */
-    public void printWelcome() {
+    public String gettWelcomeMessage() {
         String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        printDivider();
-        printOutput("Hi! I'm Duke \nWhat can I do for you?");
-        printDivider();
-    }
-    /**
-     * Prints the output with indentation.
-     * @param output the ouput to be printed.
-     */
-    public void printOutput(String output) {
-        String[] splitted = output.split("\n");
-        for (String line : splitted) {
-            System.out.println("          " + line);
-        }
+        return "Hello from\n" + logo
+            + "Hi! I'm Duke \nWhat can I do for you?\n";
     }
 
     /**
-     * Prints goodbye message.
+     * Gets goodbye message.
+     * @return goodbye message from Duke.
      */
-    public void printGoodbye() {
-        printOutput("Bye. See you again next time!");
+    public String getGoodbyeMessage() {
+        return "Bye. See you again next time!";
     }
 
     /**
      * Prints confirmation when a new task is added.
      * @param task the task added.
      * @param numberOfTask the current number of tasks.
+     * @return message for added task.
      */
-    public void printAddedTask(Task task, int numberOfTask) {
-        printOutput("Got it. I've added this task: ");
-        printOutput(task.toString());
-        printOutput("Now you have " + numberOfTask + " tasks in the list.");
+    public String getAddedTask(Task task, int numberOfTask) {
+        return "Got it. I've added this task: \n"
+            + task.toString()
+            + "\nNow you have " + numberOfTask + " tasks in the list.";
     }
 
     /**
      * Prints the current list of tasks.
      * @param taskList the lists of task.
+     * @return the String representation of taskList.
      */
-
-    public void printTaskList(TaskList taskList) {
+    public String getTaskList(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
-        printOutput("Here are the tasks in your list:");
+        StringBuilder results = new StringBuilder("Here are the tasks in your list:");
         for (int index = 0; index < tasks.size(); index++) {
-            printOutput((index + 1) + ": " + tasks.get(index));
+           results.append("\n" + (index + 1) + ": " + tasks.get(index).toString());
         }
+        return results.toString();
     }
 
     /**
      * Prints confirmation when a task is marked as done.
      * @param task the task being completed.
+     * @return message for completed task.
      */
-    public void printCompleteTask(Task task) {
-        printOutput("Nice! I've marked this task as done:");
-        printOutput(task.toString());
+    public String getCompletedTask(Task task) {
+        return "Nice! I've marked this task as done:\n"
+        + task.toString();
     }
 
     /**
      * Prints confirmation when a task is deleted from the list.
      * @param task the task deleted.
      * @param numberOfTask the current number of tasks.
+     * @return message for deleted task.
      */
-    public void printDeleteTask(Task task, int numberOfTask) {
-        printOutput("Noted. I've removed this task:");
-        printOutput(task.toString());
-        printOutput("Now you have " + numberOfTask + " tasks in the list.");
+    public String getDeletedTask(Task task, int numberOfTask) {
+        return "Noted. I've removed this task:\n"
+        + task.toString()
+        + "\nNow you have " + numberOfTask + " tasks in the list.";
 
     }
 
     /**
      * Prints confirmation when all tasks is deleted from the list.
+     * @return message for delete all tasks.
      */
-    public void printDeleteAllTasks() {
-        printOutput("Noted. I've removed all tasks in the list.");
-        printOutput("Now you have no task in the list.");
+    public String sayDeleteAllTasks() {
+        return "Noted. I've removed all tasks in the list.\n"
+        + "Now you have no task in the list.";
     }
 
     /**
      * Prints the tasks in the search results.
      * @param tasks the tasks in the search results.
+     * @return search results.
      */
-    public void printSearchResult(ArrayList<Task> tasks) {
+    public String getSearchResult(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
-            printOutput("No tasks found");
+            return "No tasks found";
         } else {
-            printOutput("Here are the matching tasks in your list:");
+            StringBuilder results = new StringBuilder("Here are the matching tasks in your list:");
             for (int index = 0; index < tasks.size(); index++) {
-                printOutput((index + 1) + ": " + tasks.get(index));
+                results.append("\n" + (index + 1) + ": " + tasks.get(index));
             }
+            return results.toString();
         }
     }
 }
