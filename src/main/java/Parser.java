@@ -1,4 +1,16 @@
+/**
+ * Represents a parser that deals with making sense of the user command.
+ */
 public class Parser {
+    /**
+     * How the parser will respond to users' command.
+     * @param command Full command by the user.
+     * @param ui Ui used in responding.
+     * @param taskList Task list referred to in the interaction.
+     * @param filePath The relative path to assigned file for reading
+     *                 and writing of data.
+     * @return nothing
+     */
     public static void respond(String command, Ui ui, TaskList taskList, String filePath) {
         String[] pieces = command.split(" ", 2);
         if (command.equals("bye")) { // terminating command

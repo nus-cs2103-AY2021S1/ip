@@ -2,6 +2,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Represents a reader class that can read content from files
+ * in local environment.
+ */
 public class FileReading {
     public static String printFileContents(String filePath) throws FileNotFoundException {
         String output = "";
