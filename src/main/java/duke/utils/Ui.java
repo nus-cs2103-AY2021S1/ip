@@ -4,6 +4,7 @@ import duke.exceptions.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -25,14 +26,11 @@ public class Ui {
                 " What can I do for you?");
     }
 
-<<<<<<< HEAD
     /**
      * Listens for user input and return the user input as string.
      *
      * @return a string that user has input
      */
-=======
->>>>>>> branch-A-CodingStandard
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         String input = scanner.nextLine();  // Read user input
@@ -91,7 +89,14 @@ public class Ui {
         tasks.printList();
     }
 
-    public void showLine() {
+    public void showListMessage(List<Task> tasks) {
+        int size = tasks.size();
+        for (int i = 0; i < size; ++i) {
+            System.out.println((i + 1) + "." + tasks.get(i).toString());
+        }
+    }
+
+    public void showLine(){
         System.out.println("-----------------------");
     }
 
