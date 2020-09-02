@@ -21,33 +21,33 @@ public class Parser {
             command = CommandEnum.valueOf(extractCommand.toUpperCase());
         } catch (NullPointerException | IllegalArgumentException ex) {
             throw new DukeException(
-                    "You have keyed in an invalid command or format!\n" +
-                            "(Valid commands: todo, deadline, event, list," +
-                            " delete, bye, done, find)");
+                    "You have keyed in an invalid command or format!\n"
+                            + "(Valid commands: todo, deadline, event, list,"
+                            + " delete, bye, done, find)");
         }
 
         switch (command) {
-            case BYE:
-                return new ByeCommand();
-            case LIST:
-                return new ListCommand();
-            case DONE:
-                return new DoneCommand(userInput);
-            case TODO:
-                return new AddCommand(CommandEnum.TODO, userInput);
-            case DEADLINE:
-                return new AddCommand(CommandEnum.DEADLINE, userInput);
-            case EVENT:
-                return new AddCommand(CommandEnum.EVENT, userInput);
-            case DELETE:
-                return new DeleteCommand(userInput);
-            case FIND:
-                return new FindCommand(userInput);
-            default:
-                throw new DukeException(
-                        "You have keyed in an invalid command!\n" +
-                                "(Valid commands: todo, deadline," +
-                                " event, list, delete, bye, done, find)");
+        case BYE:
+            return new ByeCommand();
+        case LIST:
+            return new ListCommand();
+        case DONE:
+            return new DoneCommand(userInput);
+        case TODO:
+            return new AddCommand(CommandEnum.TODO, userInput);
+        case DEADLINE:
+            return new AddCommand(CommandEnum.DEADLINE, userInput);
+        case EVENT:
+            return new AddCommand(CommandEnum.EVENT, userInput);
+        case DELETE:
+            return new DeleteCommand(userInput);
+        case FIND:
+            return new FindCommand(userInput);
+        default:
+            throw new DukeException(
+                    "You have keyed in an invalid command!\n"
+                            + "(Valid commands: todo, deadline,"
+                            + " event, list, delete, bye, done, find)");
         }
     }
 }

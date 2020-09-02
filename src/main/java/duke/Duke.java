@@ -2,16 +2,13 @@ package duke;
 
 import java.io.IOException;
 
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
 /**
  * Represents a Duke class.
  */
 public class Duke {
+
+    /** File path */
+    private static final String FILEPATH = "data/duke.txt";
 
     /** Storage for reading and writing all tasks */
     private Storage storage;
@@ -22,9 +19,9 @@ public class Duke {
     /** Handles printing of user interaction */
     private final Ui ui = new Ui();
 
-    private static final String FILEPATH = "data/duke.txt";
-
-
+    /**
+     * Constructs Duke and initialises storage and tasks.
+     */
     public Duke() {
         try {
             storage = new Storage(FILEPATH);
@@ -41,13 +38,13 @@ public class Duke {
     public void run() {
         ui.printGreetings();
         while (ui.hasMoreInput()) {
-           try {
-               String userInput = ui.readCommand();
-               Command command = Parser.parseCommands(userInput);
-               command.execute(this.tasks, this.storage, this.ui);
-           } catch (DukeException | IOException ex) {
-               System.out.println(ex.getMessage());
-           }
+            try {
+                String userInput = ui.readCommand();
+                Command command = Parser.parseCommands(userInput);
+                command.execute(this.tasks, this.storage, this.ui);
+            } catch (DukeException | IOException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 
@@ -64,15 +61,15 @@ public class Duke {
     }
 
     String getResponse(String input) {
-       try {
-           Command c = Parser.parseCommands(input);
-           if (input.equals("bye")) {
-               System.exit(0);
-           }
-           return c.execute(this.tasks, this.storage, this.ui);
-       } catch (IOException | DukeException e) {
-           return e.getMessage();
-       }
+        try {
+            Command c = Parser.parseCommands(input);
+            if (input.equals("bye")) {
+                System.exit(0);
+            }
+            return c.execute(this.tasks, this.storage, this.ui);
+        } catch (IOException | DukeException e) {
+            return e.getMessage();
+        }
     }
 }
 

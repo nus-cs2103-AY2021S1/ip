@@ -1,9 +1,7 @@
 package duke;
 
 import java.io.IOException;
-
 import java.time.format.DateTimeParseException;
-
 import java.util.Arrays;
 import java.util.regex.PatternSyntaxException;
 
@@ -45,13 +43,13 @@ public class AddCommand extends Command {
             throws DukeException, IOException {
         switch (command) {
         case TODO:
-           return addToDo(taskList, storage, ui, this.userInput);
+            return addToDo(taskList, storage, ui, this.userInput);
         case DEADLINE:
-           return addDeadline(taskList, storage, ui, this.userInput);
+            return addDeadline(taskList, storage, ui, this.userInput);
         case EVENT:
-           return addEvent(taskList, storage, ui, this.userInput);
+            return addEvent(taskList, storage, ui, this.userInput);
         default:
-           throw new DukeException("An invalid command is entered! :(");
+            throw new DukeException("An invalid command is entered! :(");
         }
     }
 
@@ -113,8 +111,8 @@ public class AddCommand extends Command {
                         "You have keyed in an invalid input for 'deadline'!");
             } catch (DateTimeParseException | IOException ex) {
                 throw new DukeException(
-                        "Please key in your deadline in the form:\n" +
-                                " /by <dd/MM/yyyy hh:mm AM/PM>");
+                        "Please key in your deadline in the form:\n"
+                        + " /by <dd/MM/yyyy hh:mm AM/PM>");
             }
         } else {
             throw new DukeException("The description of deadline cannot be empty!");
@@ -143,12 +141,12 @@ public class AddCommand extends Command {
                 tasks.addTask(event);
                 storage.writeToFile(tasks.getTasks());
                 return ui.printAddEvent(event, tasks);
-            } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex ) {
-                throw new DukeException("You have keyed in an " +
-                        "invalid input for 'event'!");
+            } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex) {
+                throw new DukeException("You have keyed in an "
+                        + "invalid input for 'event'!");
             } catch (DateTimeParseException | IOException ex) {
-                throw new DukeException("Please key in your event " +
-                        "in the form:\n /at <dd/MM/yyyy hh:mm AM/PM>");
+                throw new DukeException("Please key in your event "
+                        + "in the form:\n /at <dd/MM/yyyy hh:mm AM/PM>");
             }
         } else {
             throw new DukeException("The description of an event cannot be empty!");
