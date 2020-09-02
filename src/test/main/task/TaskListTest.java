@@ -2,11 +2,11 @@ package main.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
 
 public class TaskListTest {
     private static final Todo TASK_ONE = new Todo("task 1", true);
