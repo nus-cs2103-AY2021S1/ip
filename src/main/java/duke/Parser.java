@@ -16,10 +16,10 @@ import commands.UndoneCommand;
  */
 public class Parser {
 
-    private boolean quit = false;
+    private boolean isQuit = false;
 
-    public boolean isQuit() {
-        return quit;
+    public boolean getQuit() {
+        return isQuit;
     }
 
     /**
@@ -29,7 +29,7 @@ public class Parser {
      */
     public Command parse(String input) {
         if (input.equals("exit")) {
-            quit = true;
+            isQuit = true;
             return new ExitCommand();
         } else if (input.equals("list")) {
             return new ListCommand();

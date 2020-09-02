@@ -15,7 +15,7 @@ public class Ui {
     private String message;
 
     public Ui() {
-        this.sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
     }
 
     /**

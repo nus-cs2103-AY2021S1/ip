@@ -11,7 +11,7 @@ public class TaskList {
     private ArrayList<Task> list;
 
     public TaskList() {
-        this.list = new ArrayList<>();
+        list = new ArrayList<>();
     }
 
     /**
@@ -35,13 +35,13 @@ public class TaskList {
      * @return A representation of the TaskList in a form easily readable by a user.
      */
     public String toString() {
-        StringBuilder ls = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         int counter = 1;
         for (Task task : list) {
-            ls.append(counter == 1 ? "" : "\n").append(counter).append(".").append(task);
+            sb.append(counter == 1 ? "" : "\n").append(counter).append(".").append(task);
             counter++;
         }
-        return ls.toString();
+        return sb.toString();
     }
 
     /**
@@ -49,12 +49,12 @@ public class TaskList {
      * @return A representation of the TaskList in a form easily readable by a Storage object.
      */
     public String writeString() {
-        StringBuilder ls = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         int counter = 1;
         for (Task task : list) {
-            ls.append(task.writeString()).append(counter != list.size() ? "\n" : "");
+            sb.append(task.writeString()).append(counter != list.size() ? "\n" : "");
             counter++;
         }
-        return ls.toString();
+        return sb.toString();
     }
 }

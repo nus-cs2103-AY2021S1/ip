@@ -35,7 +35,7 @@ public class Storage {
      * Used if the file cannot be found in the working directory
      */
     public Storage() {
-        this.file = new File("data.txt");
+        file = new File("data.txt");
     }
 
     /**

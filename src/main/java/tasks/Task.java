@@ -4,22 +4,22 @@ package tasks;
  * Represents a general Task object with a name
  */
 
-public class Task {
+public abstract class Task {
     private String name;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Creates a new Task object.
      * @param name Name of the task.
-     * @param done Whether the task is done or not.
+     * @param isDone Whether the task is done or not.
      */
-    public Task(String name, boolean done) {
+    public Task(String name, boolean isDone) {
         this.name = name;
-        this.done = done;
+        this.isDone = isDone;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
@@ -28,7 +28,7 @@ public class Task {
      */
 
     public String getStatusIcon() {
-        return (done ? "\u2713" : "\u2718");
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     public String getName() {
@@ -40,6 +40,6 @@ public class Task {
     }
 
     public String writeString() {
-        return (done ? "1" : "0") + " # " + name;
+        return (isDone ? "1" : "0") + " # " + name;
     }
 }
