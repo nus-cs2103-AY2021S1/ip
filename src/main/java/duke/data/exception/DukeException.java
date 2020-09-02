@@ -5,11 +5,6 @@ package src.main.java.duke.data.exception;
  *
  */
 public class DukeException extends Exception {
-    // Type of exceptions to handle
-    // Missing input
-    // Nothing is typed
-    // Sth else is typed other than todo and
-
     private String errorMesage;
     public DukeException(String errorMessage) {
         this.errorMesage = errorMessage;

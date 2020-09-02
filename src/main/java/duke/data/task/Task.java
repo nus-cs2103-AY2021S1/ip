@@ -18,7 +18,7 @@ public class Task {
     }
 
     /**
-     * This method gets the status icon of the task
+     * Gets the status icon of the task.
      * @return String of status icon
      */
     public String getStatusIcon() {
@@ -35,7 +35,7 @@ public class Task {
     }
 
     /**
-     * This method marks the task as done.
+     * Marks the task as done.
      * @return true value
      */
     public boolean markAsDoneWithoutPrint() {
@@ -43,15 +43,26 @@ public class Task {
         return true;
     }
 
+    /**
+     * Returns the hashCode of the task.
+     * @return integer which represents the hashcode
+     */
     public int hashCode() {
         return this.description.length();
     }
 
-
+    /**
+     * Gets the string to be printed for the task.
+     * @return string to be printed for the task
+     */
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
+    /**
+     * Checks if the object is equal to task.
+     * @return true if it is equal
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -65,6 +76,10 @@ public class Task {
                 && Objects.equals(description, task.description);
     }
 
+    /**
+     * Gets a string that is to be written.
+     * @return String that is to be written
+     */
     public String toWriteString() {
         return " | " + (isDone ? "1" : "0") + " | " + description;
     }

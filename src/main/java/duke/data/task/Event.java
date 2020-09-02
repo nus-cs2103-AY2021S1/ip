@@ -16,8 +16,8 @@ public class Event extends Task {
     }
 
     /**
-     * To String
-     * @return
+     * Gets a string that print event task.
+     * @return string that represents event task
      */
     public String toString() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
@@ -29,7 +29,8 @@ public class Event extends Task {
     }
 
     /**
-     * This method returns the string to be written for the event.
+     * Gets the string to be written for the event.
+     * @return string which is to be written for the event
      */
     public String toWriteString() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

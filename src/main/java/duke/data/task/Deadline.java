@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     private LocalDateTime dueDate;
+
     public Deadline(String description, String dueDate) {
         this.description = description;
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -17,7 +18,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * This method returns the string to be written for the deadline.
+     * Gets the string to be printed for the deadline.
      */
     public String toString() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
@@ -29,7 +30,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * This method returns the string to be written for the deadline task.
+     * Gets the string to be written for the deadline task.
      */
     public String toWriteString() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

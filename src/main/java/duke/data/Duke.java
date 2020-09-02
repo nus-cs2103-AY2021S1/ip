@@ -4,7 +4,10 @@ import src.main.java.duke.data.task.Task;
 import src.main.java.duke.data.task.TaskList;
 import src.main.java.duke.data.task.TaskList.TaskNotFoundException;
 import src.main.java.duke.storage.StorageFile;
-
+import src.main.java.duke.storage.StorageFile.StorageOperationException;
+import src.main.java.duke.commands.Command;
+import src.main.java.duke.parser.Parser;
+import src.main.java.duke.commands.CommandResult;
 
 /**
  * Duke class represents the bot which contains a tasklist and interacts with the tasks.
@@ -13,13 +16,23 @@ public class Duke {
 
     private final TaskList taskList;
 
-    public src.main.java.duke.storage.StorageFile storageFile;
+    public StorageFile storageFile;
 
     /**
      * Creates an empty task list.
      */
     public Duke() {
         taskList = new TaskList();
+    }
+
+    /**
+     * Sets the storage file for duke.
+     * @peram storageFile storageFile which is the own storage file
+     * @return return the duke object
+     */
+    public Duke setStorageFile(StorageFile storageFile) {
+        this.storageFile = storageFile;
+        return this;
     }
 
     /**
@@ -33,15 +46,15 @@ public class Duke {
 
     /**
      * Adds a task to the task list.
-     *
+     * @param task task to be added to the task list
      */
-    public void addTask(Task toAdd) {
-        taskList.add(toAdd);
+    public void addTask(Task task) {
+        taskList.add(task);
     }
 
     /**
-     * Adds a task to the task list.
-     *
+     * Marks the task in the list done.
+     * @param index index of the task to be mark done
      */
     public Task markDone(int index) {
         taskList.getTask(index).markAsDone();
@@ -57,20 +70,24 @@ public class Duke {
 
     /**
      * Removes the equivalent task from the task list.
-     *
+     * @poram toRemove index of the task to be removed
      */
     public void removeTask(int toRemove) throws TaskNotFoundException {
         taskList.remove(toRemove - 1);
     }
 
     /**
-     * Returns a new UniquePersonList of all tasks in the task list at the time of
+     * Returns a new UniqueTaskList of all tasks in the task list at the time of
      * the call.
      */
     public TaskList getTaskList() {
         return taskList;
     }
 
+    /**
+     * Returns true if duke is equal.
+     * @param other another object to compare if it's equal
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -78,20 +95,27 @@ public class Duke {
                         && this.taskList.equals(((Duke) other).taskList));
     }
 
-    public String getResponse(String input) {
-        src.main.java.duke.commands.Command command = new src.main.java.duke.parser.Parser().parseCommand(input);
-        return executeCommand(command);
+    /**
+     * Gets the response from the input string and parse it to execute
+     *
+     * @param input an user input
+     * @return return a response to the user
+     */
+    public String getResponse(String input) throws StorageOperationException {
+        Command command = new Parser().parseCommand(input);
+        return executeCommand(command).getFeedbackToUser();
+
     }
 
-    private String executeCommand(src.main.java.duke.commands.Command command) {
-        try {
-            command.setData(this);
-            src.main.java.duke.commands.CommandResult result = command.execute();
-//            storageFile.save(this);
-            return result.getFeedbackToUser();
-        } catch (Exception e) {
-            System.out.println("asdfasdfasdhere");
-            return e.getMessage();
-        }
+    /**
+     * Executes the command
+     * @return a command result which result from the command executed
+     */
+    private CommandResult executeCommand(src.main.java.duke.commands.Command command)
+            throws StorageOperationException {
+        command.setData(this);
+        CommandResult result = command.execute();
+        storageFile.save(this);
+        return result;
     }
 }

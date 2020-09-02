@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import src.main.java.duke.data.task.Task;
+
 /**
  * A list of tasks that does not allow null elements or duplicates.
  *
@@ -72,16 +74,16 @@ public class TaskList implements Iterable<Task> {
 
 
     /**
-     * Adds a person to the list.
+     * Adds a task to the list.
      */
-    public void add(Task toAdd) {
-        internalList.add(toAdd);
+    public void add(Task task) {
+        internalList.add(task);
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the equivalent task from the list.
      *
-     * @throws TaskNotFoundException if no such person could be found in the list.
+     * @throws TaskNotFoundException if no such task could be found in the list.
      */
     public void remove(int toRemove) throws TaskNotFoundException {
         final Task taskNotFound = internalList.remove(toRemove);
@@ -90,15 +92,27 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Gets the task at a certain index from the list.
+     * @param index index of the task
+     */
     public Task getTask(int index) {
         return internalList.get(index - 1);
     }
 
+    /**
+     * Gets the task list iterator.
+     * @return an iterator that represents the task list.
+     */
     @Override
     public Iterator<Task> iterator() {
         return internalList.iterator();
     }
 
+    /**
+     * Gets the task list iterator.
+     * @return an iterator that represents the task list.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -111,6 +125,10 @@ public class TaskList implements Iterable<Task> {
         return Objects.equals(internalList, tasks.internalList);
     }
 
+    /**
+     * Gets the hashcode of taskList.
+     * @return the hashcode of the tasklist
+     */
     @Override
     public int hashCode() {
         return Objects.hash(internalList);

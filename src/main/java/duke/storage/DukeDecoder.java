@@ -19,6 +19,8 @@ import src.main.java.duke.storage.StorageFile.StorageOperationException;
  */
 public class DukeDecoder {
 
+    public static final String TODO_REGEX = "(T)+\\s+([|])+\\s+([10])+\\s+([|])+\\s+\\w+.+";
+    public static final String DEADLINE_REGEX = "([DE])+\\s+([|])+\\s+([10])+\\s+([|])+\\s+\\w+.+\\s+([|])+\\s+\\w+.+";
     /**
      * Decodes {@code encodedDuke} into an {@code Duke} containing the decoded
      * tasks.
@@ -28,7 +30,8 @@ public class DukeDecoder {
      * @throws StorageOperationException if the {@code encodedDuke} is in an invalid
      *                                   format.
      */
-    public static Duke decodeDuke(List<String> encodedDuke) throws IllegalValueException, StorageOperationException {
+    public static Duke decodeDuke(List<String> encodedDuke) throws
+            IllegalValueException, StorageOperationException {
         final List<Task> decodedTasks = new ArrayList<>();
         for (String encodedTask : encodedDuke) {
             decodedTasks.add(decodeTaskFromString(encodedTask));
@@ -45,11 +48,10 @@ public class DukeDecoder {
      *                                   format.
      */
     private static Task decodeTaskFromString(String input) {
-
         Task newTask = null;
         String[] inputList = input.split("\\|");
-        if (!(Pattern.matches("(T)+\\s+([|])+\\s+([10])+\\s+([|])+\\s+\\w+.+", input.trim()) | Pattern
-                .matches("([DE])+\\s+([|])+\\s+([10])+\\s+([|])+\\s+\\w+.+\\s+([|])+\\s+\\w+.+", input.trim()))) {
+        if (!(Pattern.matches(TODO_REGEX, input.trim()) | Pattern
+                .matches(DEADLINE_REGEX, input.trim()))) {
             System.out.println("I'm sorry, but I don't know what that means :-(");
         }
 

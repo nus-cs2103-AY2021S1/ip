@@ -10,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import src.main.java.duke.storage.StorageFile;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -54,12 +56,14 @@ public class MainWindow extends AnchorPane {
                 src.main.java.duke.ui.DialogBox.getUserDialog("Hello! I'm Best2103/TBot \n" +"What can I do for you?", dukeImage)
         );
     }
+
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other
+     * containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws StorageFile.StorageOperationException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(

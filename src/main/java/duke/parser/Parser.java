@@ -52,7 +52,8 @@ public class Parser {
     public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -89,13 +90,14 @@ public class Parser {
         final Matcher matcher = EVENT_TASK_DATA_ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTodoCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddTodoCommand.MESSAGE_USAGE));
         }
         return new AddEventCommand(matcher.group("description"), matcher.group("duedate"));
     }
 
     /**
-     * Parses arguments in the context of the add task command.
+     * Parses arguments in the context of the add todo task command.
      *
      * @param args full command args string
      * @return the prepared command
@@ -104,13 +106,14 @@ public class Parser {
         final Matcher matcher = TASK_DATA_ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTodoCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddTodoCommand.MESSAGE_USAGE));
         }
         return new AddTodoCommand(matcher.group("description"));
     }
 
     /**
-     * Parses arguments in the context of the add task command.
+     * Parses arguments in the context of the add deadline task command.
      *
      * @param args full command args string
      * @return the prepared command
@@ -136,14 +139,15 @@ public class Parser {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new DeleteCommand(targetIndex);
         } catch (ParseException pe) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
     }
 
     /**
-     * Parses arguments in the context of the delete task command.
+     * Parses arguments in the context of the mark done command.
      *
      * @param args full command args string
      * @return the prepared command
@@ -153,14 +157,15 @@ public class Parser {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new MarkDoneCommand(targetIndex);
         } catch (ParseException pe) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
     }
 
     /**
-     * Parses arguments in the context of the delete task command.
+     * Parses arguments in the context of the find task command.
      *
      * @param args full command args string
      * @return the prepared command

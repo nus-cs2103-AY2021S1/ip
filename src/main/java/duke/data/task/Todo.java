@@ -10,12 +10,17 @@ public class Todo extends Task {
         this.description = description;
     }
 
+    /**
+     * Gets the string to be printed for the todo.
+     * @return string to be printed for todo
+     */
     public String toString() {
         return "[T]" + super.toString();
     }
 
     /**
-     * This method returns the string to be written for the todo.
+     * Gets the string to be written for the todo.
+     * 2return string to be written for todo
      */
     public String toWriteString() {
         return "T " + super.toWriteString();
