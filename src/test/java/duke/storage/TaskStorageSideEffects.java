@@ -2,15 +2,14 @@ package duke.storage;
 
 public class TaskStorageSideEffects {
 
+    private static TaskStorageSideEffects instance;
     public boolean getSavedTasks;
-
     public boolean saveTasks;
 
     private TaskStorageSideEffects() {
         reset();
     }
 
-    private static TaskStorageSideEffects instance;
     public static TaskStorageSideEffects getInstance() {
         if (instance == null) {
             instance = new TaskStorageSideEffects();
@@ -19,6 +18,9 @@ public class TaskStorageSideEffects {
         return instance;
     }
 
+    /**
+     * Resets all values to false.
+     */
     public void reset() {
         getSavedTasks = false;
         saveTasks = false;

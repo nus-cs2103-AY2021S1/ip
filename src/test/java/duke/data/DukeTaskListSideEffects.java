@@ -1,11 +1,8 @@
 package duke.data;
 
-import duke.task.Task;
-import duke.task.ToDo;
-
-import java.util.ArrayList;
-
 public class DukeTaskListSideEffects {
+
+    private static DukeTaskListSideEffects instance;
 
     public boolean getTask;
     public boolean addTask;
@@ -19,7 +16,6 @@ public class DukeTaskListSideEffects {
         reset();
     }
 
-    private static DukeTaskListSideEffects instance;
     public static DukeTaskListSideEffects getInstance() {
         if (instance == null) {
             instance = new DukeTaskListSideEffects();
@@ -28,6 +24,9 @@ public class DukeTaskListSideEffects {
         return instance;
     }
 
+    /**
+     * Resets all values to false.
+     */
     public void reset() {
         getTask = false;
         addTask = false;

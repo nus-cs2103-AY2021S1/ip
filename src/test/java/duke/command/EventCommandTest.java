@@ -1,13 +1,16 @@
 package duke.command;
 
-import duke.data.DukeTaskListSideEffects;
-import duke.ui.UiPrint;
-import duke.ui.UiSideEffects;
-import duke.exception.IncorrectFormatException;
-import duke.DukeStub;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.DukeStub;
+import duke.data.DukeTaskListSideEffects;
+import duke.exception.IncorrectFormatException;
+import duke.ui.UiPrint;
+import duke.ui.UiSideEffects;
 
 public class EventCommandTest {
 
@@ -49,8 +52,8 @@ public class EventCommandTest {
     public void execute_invalidInput_exceptionThrown() {
         String invalidInput = "return book";
 
-        Exception exception = assertThrows(IncorrectFormatException.class,
-                () -> command.execute(invalidInput, dukeStub));
+        Exception exception = assertThrows(
+                IncorrectFormatException.class, () -> command.execute(invalidInput, dukeStub));
 
         String line = UiPrint.getLine(UiPrint.STAR, 50);
         String errMessage =

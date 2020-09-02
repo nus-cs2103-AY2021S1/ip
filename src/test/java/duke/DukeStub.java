@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.CommandParser;
 import duke.data.DukeCommandSet;
 import duke.data.DukeState;
@@ -8,10 +10,11 @@ import duke.storage.DukeStorage;
 import duke.storage.TaskStorageStub;
 import duke.ui.UiStub;
 
-import java.io.IOException;
-
 public class DukeStub extends Duke {
 
+    /**
+     * Constructs a DukeStub.
+     */
     public DukeStub() {
         commandSet = new DukeCommandSet();
         state = new DukeState();

@@ -1,12 +1,13 @@
 package duke.task;
 
-import duke.exception.NoDescriptionException;
-import duke.ui.UiPrint;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exception.NoDescriptionException;
+import duke.ui.UiPrint;
 
 public class ToDoTest {
 

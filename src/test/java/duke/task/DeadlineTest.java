@@ -1,12 +1,13 @@
 package duke.task;
 
-import duke.exception.IncorrectFormatException;
-import duke.ui.UiPrint;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exception.IncorrectFormatException;
+import duke.ui.UiPrint;
 
 public class DeadlineTest {
 
@@ -27,8 +28,8 @@ public class DeadlineTest {
 
     @Test
     public void createDeadline_noDeadline_exceptionThrown() {
-        Exception exception = assertThrows(IncorrectFormatException.class,
-                () -> Deadline.createDeadline("read book"));
+        Exception exception = assertThrows(
+                IncorrectFormatException.class, () -> Deadline.createDeadline("read book"));
 
         String line = UiPrint.getLine(UiPrint.STAR, 50);
         String errMessage =

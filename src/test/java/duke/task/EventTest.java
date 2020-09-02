@@ -1,12 +1,13 @@
 package duke.task;
 
-import duke.exception.IncorrectFormatException;
-import duke.ui.UiPrint;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exception.IncorrectFormatException;
+import duke.ui.UiPrint;
 
 public class EventTest {
 
@@ -27,8 +28,8 @@ public class EventTest {
 
     @Test
     public void createDeadline_noTime_exceptionThrown() {
-        Exception exception = assertThrows(IncorrectFormatException.class,
-                () -> Event.createEvent("read book"));
+        Exception exception = assertThrows(
+                IncorrectFormatException.class, () -> Event.createEvent("read book"));
 
         String line = UiPrint.getLine(UiPrint.STAR, 50);
         String errMessage =

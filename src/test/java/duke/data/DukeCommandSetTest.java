@@ -1,10 +1,13 @@
 package duke.data;
 
-import duke.exception.UnknownCommandException;
-import duke.ui.UiPrint;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.exception.UnknownCommandException;
+import duke.ui.UiPrint;
 
 public class DukeCommandSetTest {
 
@@ -29,8 +32,8 @@ public class DukeCommandSetTest {
     public void getCommand_invalidCommandName_exceptionThrown() {
         String invalidCommandName = "hahaha";
 
-        Exception exception = assertThrows(UnknownCommandException.class,
-                () -> commandSet.getCommand(invalidCommandName));
+        Exception exception = assertThrows(
+                UnknownCommandException.class, () -> commandSet.getCommand(invalidCommandName));
 
         String line = UiPrint.getLine(UiPrint.STAR, 50);
         String errMessage =

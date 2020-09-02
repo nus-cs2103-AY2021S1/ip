@@ -1,12 +1,16 @@
 package duke.command;
 
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import duke.DukeStub;
 import duke.data.DukeTaskListSideEffects;
 import duke.exception.InvalidIndexException;
 import duke.ui.UiPrint;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class DeleteCommandTest {
 
@@ -44,8 +48,8 @@ public class DeleteCommandTest {
     public void execute_invalidInput_exceptionThrown() {
         String invalidInput = "5";
 
-        Exception exception = assertThrows(InvalidIndexException.class,
-                () -> command.execute(invalidInput, dukeStub));
+        Exception exception = assertThrows(
+                InvalidIndexException.class, () -> command.execute(invalidInput, dukeStub));
 
         String line = UiPrint.getLine(UiPrint.STAR, 50);
         String errMessage =

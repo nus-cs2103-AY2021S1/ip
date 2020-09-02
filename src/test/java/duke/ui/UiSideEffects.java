@@ -2,6 +2,7 @@ package duke.ui;
 
 public class UiSideEffects {
 
+    private static UiSideEffects instance;
     public boolean uiGreet;
     public boolean uiEcho;
     public boolean uiReportCurrentTasks;
@@ -13,8 +14,6 @@ public class UiSideEffects {
     private UiSideEffects() {
         reset();
     }
-
-    private static UiSideEffects instance;
     public static UiSideEffects getInstance() {
         if (instance == null) {
             instance = new UiSideEffects();
@@ -22,6 +21,9 @@ public class UiSideEffects {
         return instance;
     }
 
+    /**
+     * Resets all values to false.
+     */
     public void reset() {
         uiGreet = false;
         uiEcho = false;

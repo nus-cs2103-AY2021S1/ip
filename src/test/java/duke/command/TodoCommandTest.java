@@ -1,13 +1,17 @@
 package duke.command;
 
-import duke.data.DukeTaskListSideEffects;
-import duke.ui.UiPrint;
-import duke.ui.UiSideEffects;
-import duke.exception.NoDescriptionException;
-import duke.DukeStub;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.DukeStub;
+import duke.data.DukeTaskListSideEffects;
+import duke.exception.NoDescriptionException;
+import duke.ui.UiPrint;
+import duke.ui.UiSideEffects;
+
 
 public class TodoCommandTest {
 
@@ -49,8 +53,8 @@ public class TodoCommandTest {
     public void execute_invalidInput_exceptionThrown() {
         String invalidInput = "";
 
-        Exception exception = assertThrows(NoDescriptionException.class,
-                () -> command.execute(invalidInput, dukeStub));
+        Exception exception = assertThrows(
+                NoDescriptionException.class, () -> command.execute(invalidInput, dukeStub));
 
         String line = UiPrint.getLine(UiPrint.STAR, 50);
         String errMessage =

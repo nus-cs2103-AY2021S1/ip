@@ -1,13 +1,16 @@
 package duke.data;
 
-import duke.exception.InvalidIndexException;
-import duke.task.Task;
-import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.InvalidIndexException;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class DukeTaskListTest {
 
@@ -40,8 +43,8 @@ public class DukeTaskListTest {
     public void getTask_invalidIndex_exceptionThrown() {
         int invalidIndex = 10;
 
-        Exception exception = assertThrows(InvalidIndexException.class,
-                () -> taskList.getTask(invalidIndex));
+        Exception exception = assertThrows(
+                InvalidIndexException.class, () -> taskList.getTask(invalidIndex));
 
         assertEquals("Invalid Index!", exception.getMessage());
     }
@@ -82,8 +85,8 @@ public class DukeTaskListTest {
     public void deleteTask_invalidIndex_exceptionThrown() {
         int invalidIndex = -2;
 
-        Exception exception = assertThrows(InvalidIndexException.class,
-                () -> taskList.deleteTask(invalidIndex));
+        Exception exception = assertThrows(
+                InvalidIndexException.class, () -> taskList.deleteTask(invalidIndex));
 
         assertEquals("Invalid Index!", exception.getMessage());
     }

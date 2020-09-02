@@ -1,9 +1,9 @@
 package duke.data;
 
+import java.util.ArrayList;
+
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.util.ArrayList;
 
 public class DukeTaskListStub extends DukeTaskList {
 
