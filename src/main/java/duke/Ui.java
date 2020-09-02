@@ -42,7 +42,7 @@ public class Ui {
      * Prints goodbye message.
      */
     public void printGoodbye() {
-        printOutput("Bye. See you again next time!" );
+        printOutput("Bye. See you again next time!");
     }
 
     /**
@@ -64,7 +64,7 @@ public class Ui {
     public void printTaskList(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
         printOutput("Here are the tasks in your list:");
-        for(int index = 0; index < tasks.size(); index++) {
+        for (int index = 0; index < tasks.size(); index++) {
             printOutput((index + 1) + ": " + tasks.get(index));
         }
     }
@@ -103,7 +103,7 @@ public class Ui {
      * @param tasks the tasks in the search results.
      */
     public void printSearchResult(ArrayList<Task> tasks) {
-        if (tasks.size() == 0 ) {
+        if (tasks.size() == 0) {
             printOutput("No tasks found");
         } else {
             printOutput("Here are the matching tasks in your list:");

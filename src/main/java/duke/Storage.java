@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,7 +35,7 @@ public class Storage {
             String input = sc.nextLine();
             String[] inputs = input.split("#");
             Commands command = Commands.valueOf(inputs[0]);
-            if (command.equals(Commands.TODO)){
+            if (command.equals(Commands.TODO)) {
                 taskList.add(new Todo(inputs[1], Boolean.parseBoolean(inputs[2])));
             } else if (command.equals(Commands.EVENT)) {
                 taskList.add(new Event(inputs[1], Boolean.parseBoolean(inputs[2]), inputs[3]));

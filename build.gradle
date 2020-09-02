@@ -17,6 +17,8 @@ dependencies {
 test {
     useJUnitPlatform()
 
+    systemProperty "file.encoding", "utf-8"
+
     testLogging {
         events "passed", "skipped", "failed"
 
@@ -47,6 +49,7 @@ checkstyle {
     toolVersion = '8.29'
 }
 
-run{
+run {
     standardInput = System.in
+    systemProperty "file.encoding", "utf-8"
 }
