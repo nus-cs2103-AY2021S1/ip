@@ -17,6 +17,14 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+/**
+ * The Storage class implements a storage
+ * with functionalities to load data from the
+ * storage and write data to storage.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public class Storage {
     protected String filepath;
     protected String dirpath;
@@ -25,6 +33,7 @@ public class Storage {
      * Initialises a storage object that stores any updates to the
      * list of tasks in the hard disk and retrieves task information
      * from the hard disk when Duke starts.
+     *
      * @param filepath string file path of the file where Duke stores
      *                 task information
      */
@@ -121,6 +130,11 @@ public class Storage {
      */
     public void writeToFile(Task task, DukeAction action) throws DukeException {
         try {
+            File inputFile = new File(this.filepath);
+            File tempFile = new File("./data/myTempFile.txt");
+            BufferedReader reader = new BufferedReader(new FileReader(this.filepath));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
             switch (action) {
             case ADD:
                 FileWriter fw = new FileWriter(this.filepath, true);
@@ -130,11 +144,6 @@ public class Storage {
                 break;
 
             case DELETE:
-                File inputFile = new File(this.filepath);
-                File tempFile = new File("./data/myTempFile.txt");
-                BufferedReader reader = new BufferedReader(new FileReader(this.filepath));
-                BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-
                 String lineToRemove = task.storedTaskString();
                 String currentLine;
                 while ((currentLine = reader.readLine()) != null) {
@@ -159,29 +168,24 @@ public class Storage {
                 break;
 
             case MARK_DONE:
-                File taskFile = new File(this.filepath);
-                File temFile = new File("./data/myTemFile.txt");
-                BufferedReader br = new BufferedReader(new FileReader(this.filepath));
-                BufferedWriter bw = new BufferedWriter(new FileWriter(temFile));
-
                 String lineToMarkDone = task.storedTaskString();
                 String currentL;
-                while ((currentL = br.readLine()) != null) {
+                while ((currentL = reader.readLine()) != null) {
                     if (!currentL.equals(lineToMarkDone)) {
-                        bw.write(currentL);
+                        writer.write(currentL);
                     } else {
                         String taskType = currentL.substring(0, 2);
                         String taskDesc = currentL.substring(3);
-                        bw.write(taskType + "1" + taskDesc);
+                        writer.write(taskType + "1" + taskDesc);
                     }
-                    bw.newLine();
+                    writer.newLine();
                 }
-                bw.close();
-                br.close();
+                writer.close();
+                reader.close();
                 System.gc();
 
-                if (taskFile.delete()) {
-                    if (temFile.renameTo(taskFile)) {
+                if (inputFile.delete()) {
+                    if (tempFile.renameTo(inputFile)) {
                         System.out.println("Success!");
                     } else {
                         throw new DukeException("Dino could not write task data to hard disk.");

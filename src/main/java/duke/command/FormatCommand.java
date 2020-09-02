@@ -4,6 +4,15 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The FormatCommand class implements a
+ * FormatCommand command executable to list
+ * out all the formats in which user can follow
+ * to input commands.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public class FormatCommand extends Command {
     public FormatCommand() {
     }

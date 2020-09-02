@@ -7,6 +7,13 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The Duke class implements a Duke chat-bot, called Dino,
+ * with functionalities to keep track of tasks.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public class Duke {
 
     private Storage storage;
@@ -57,6 +64,7 @@ public class Duke {
 
     /**
      * Initialises Duke with the file record of task history, and runs Duke.
+     *
      * @param args an array of command-line arguments for the application
      */
     public static void main(String[] args) {

@@ -5,6 +5,13 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The DeleteCommand class implements a DeleteCommand command
+ * executable to delete a task from the task list.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public class DeleteCommand extends Command {
     protected String input;
 

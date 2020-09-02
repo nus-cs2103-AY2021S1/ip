@@ -5,6 +5,13 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The AddCommand class implements a AddCommand command
+ * executable to add a task to the task list.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public class AddCommand extends Command {
     protected String input;
 

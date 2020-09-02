@@ -5,6 +5,13 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The Command class implements methods that all
+ * Commands use to execute for user request.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public abstract class Command {
     protected boolean isBye = false;
 

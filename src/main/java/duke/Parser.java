@@ -9,6 +9,13 @@ import duke.command.FormatCommand;
 import duke.command.ListCommand;
 import duke.command.MarkDoneCommand;
 
+/**
+ * The Parser class parses user input into
+ * commands to be executed by the Command class.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public class Parser {
 
     /**

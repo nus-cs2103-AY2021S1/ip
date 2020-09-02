@@ -6,6 +6,13 @@ import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 
+/**
+ * The Event class implements a Event task
+ * with task description and date/time.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public class Event extends Task {
 
     protected LocalDate date;
@@ -13,6 +20,15 @@ public class Event extends Task {
     protected String userInputDate;
     protected String userInputTime;
 
+    /**
+     * Instantiates an Event task.
+     *
+     * @param description string description of the task
+     * @param userInputDate string date of task in yyyy-mm-dd format
+     * @param userInputTime string time of task in hhmm (24-hour) format
+     * @param date LocalDate parsed date of task
+     * @param time String time of task in 12-hour format
+     */
     private Event(String description, String userInputDate, String userInputTime,
                   LocalDate date, String time) {
         super(description);

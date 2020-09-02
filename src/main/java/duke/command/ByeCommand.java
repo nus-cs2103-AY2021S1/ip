@@ -4,6 +4,13 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The ByeCommand class implements a ByeCommand command
+ * executable to show user a closing message when Dino exits.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public class ByeCommand extends Command {
 
     public ByeCommand() {

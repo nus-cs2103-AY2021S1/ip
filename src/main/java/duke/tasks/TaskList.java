@@ -7,6 +7,13 @@ import duke.DukeAction;
 import duke.DukeException;
 import duke.storage.Storage;
 
+/**
+ * The TaskList class implements a task list
+ * with functionalities to update the task list.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public class TaskList {
     protected List<Task> taskList;
 

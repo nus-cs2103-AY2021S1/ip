@@ -5,6 +5,14 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The ListCommand class implements a
+ * ListCommand command executable to list
+ * out all the tasks in the task list.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public class ListCommand extends Command {
     protected String input;
 

@@ -5,6 +5,14 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The FindCommand class implements a
+ * FindCommand command executable to find a task
+ * based on a keyword, from the task list.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public class FindCommand extends Command {
     protected String input;
 

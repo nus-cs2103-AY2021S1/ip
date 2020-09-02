@@ -1,7 +1,16 @@
 package duke.ui;
 
+/**
+ * The Ui class handles interactions with user.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public class Ui {
 
+    /**
+     * Prints a line for separation between commands.
+     */
     public void showLine() {
         System.out.println("____________________________________________________________");
     }

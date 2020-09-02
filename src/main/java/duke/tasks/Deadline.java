@@ -6,7 +6,13 @@ import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 
-
+/**
+ * The Deadline class implements a Deadline task
+ * with task description and deadline.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public class Deadline extends Task {
 
     protected String userInputDate;
@@ -14,6 +20,15 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected String time;
 
+    /**
+     * Instantiates a Deadline task.
+     *
+     * @param description string description of the task
+     * @param userInputDate string date of task in yyyy-mm-dd format
+     * @param userInputTime string time of task in hhmm (24-hour) format
+     * @param date LocalDate parsed date of task
+     * @param time String time of task in 12-hour format
+     */
     private Deadline(String description, String userInputDate, String userInputTime,
                      LocalDate date, String time) {
         super(description);

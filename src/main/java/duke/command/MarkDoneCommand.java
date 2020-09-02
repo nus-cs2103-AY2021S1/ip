@@ -5,6 +5,14 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The MarkDoneCommand class implements a
+ * MarkDoneCommand command executable to mark
+ * a task as done.
+ *
+ * @author Amy Lim Zhi Ting
+ * @version v0.1
+ */
 public class MarkDoneCommand extends Command {
     protected String input;
 
