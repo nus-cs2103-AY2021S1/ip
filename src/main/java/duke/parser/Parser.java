@@ -1,4 +1,4 @@
-package parser;
+package duke.parser;
 /**
  * Parser class parses the given input.
  * @author Maguire Ong

@@ -1,4 +1,5 @@
-package exceptions;
+package duke.exceptions;
+
 /**
  * DukeException class is the super class of the EmptyDeadlineException,
  * EmptyEventsException, EmptyTodoException and UnknownCommandException classes.

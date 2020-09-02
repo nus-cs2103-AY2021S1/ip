@@ -1,4 +1,4 @@
-package tasklist;
+package duke.tasklist;
 
 /**
  * Todo class is a subclass of Task.

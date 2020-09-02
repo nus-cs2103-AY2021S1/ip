@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 /**
  * UnknownCommandException class extends DukeException class

@@ -1,4 +1,4 @@
-package tasklist;
+package duke.tasklist;
 
 /**
  * Event class is a subclass of Task.

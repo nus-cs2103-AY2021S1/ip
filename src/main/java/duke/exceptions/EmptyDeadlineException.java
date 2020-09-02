@@ -1,4 +1,5 @@
-package exceptions;
+package duke.exceptions;
+
 /**
  * EmptyDeadlineException class extends DukeException class
  * and handles the EmptyDeadlineException.

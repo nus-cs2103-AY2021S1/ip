@@ -1,4 +1,5 @@
-package exceptions;
+package duke.exceptions;
+
 /**
  * EmptyEventsException class extends DukeException class
  * and handles the EmptyEventsException.
