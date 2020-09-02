@@ -1,5 +1,6 @@
 package duke.main;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -9,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -26,6 +29,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private Stage stage;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -51,12 +55,21 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    public void setStage(Stage s) {
+        this.stage = s;
+    }
+
     private void greeting() {
         String greetLine = "Hi Master, Duke here";
         DialogBox greetDialog = DialogBox.getDukeDialog(greetLine, dukeImage);
         dialogContainer.getChildren().addAll(greetDialog);
     }
 
+    private void exit(int duration) {
+        PauseTransition delay = new PauseTransition(Duration.seconds(duration));
+        delay.setOnFinished(event -> this.stage.hide());
+        delay.play();
+    }
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -70,5 +83,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            this.exit(2);
+        }
     }
 }
