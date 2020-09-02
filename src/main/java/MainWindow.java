@@ -8,50 +8,30 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-/**
- * Controller for MainWindow. Provides the layout for the other controls.
- */
+/** Controller for MainWindow. Provides the layout for the other controls. */
 public class MainWindow extends AnchorPane {
-    /**
-     * Scroll pane for conservations.
-     */
+    /** Scroll pane for conservations. */
     @FXML
     private ScrollPane scrollPane;
-    /**
-     * Dialog container for conversations.
-     */
+    /** Dialog container for conversations. */
     @FXML
     private VBox dialogContainer;
-    /**
-     * User's input.
-     */
+    /** User's input. */
     @FXML
     private TextField userInput;
-    /**
-     * Send button for user.
-     */
+    /** Send button for user. */
     @FXML
     private Button sendButton;
-    /**
-     * Duke.
-     */
+    /** Duke. */
     private Duke duke;
-    /**
-     * Number of times user has input their name.
-     */
+    /** Number of times user has input their name. */
     private int numberOfTimes;
-    /**
-     * Gets the image for User.
-     */
+    /** Gets the image for User. */
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    /**
-     * Gets the image for Duke.
-     */
+    /** Gets the image for Duke. */
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    /**
-     * Initialises the main window.
-     */
+    /** Initialises the main window. */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

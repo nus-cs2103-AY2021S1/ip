@@ -4,9 +4,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-/**
- * Represents the DoneCommand to mark tasks done on task list.
- */
+/** Represents the DoneCommand to mark tasks done on task list. */
 public class DoneCommand extends Command {
     /**
      * Returns false since DoneCommand is not an ExitCommand.

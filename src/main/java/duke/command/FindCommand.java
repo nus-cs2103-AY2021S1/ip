@@ -4,9 +4,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-/**
- * Represents the FindCommand to find tasks based on user's input.
- */
+/** Represents the FindCommand to find tasks based on user's input. */
 public class FindCommand extends Command {
     /**
      * Returns false since FindCommand is not an ExitCommand.

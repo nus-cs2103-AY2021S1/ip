@@ -9,25 +9,17 @@ import java.util.Scanner;
 
 import duke.task.Task;
 
-/**
- * Allows Focus to load and save data in user's files.
- */
+/** Allows Focus to load and save data in user's files. */
 public class Storage {
-    /**
-     * Represents the path for the task list to be saved at.
-     */
+    /** Represents the path for the task list to be saved at. */
     private final String path;
 
-    /**
-     * Creates a storage to allow loading and saving of tasks.
-     */
+    /** Creates a storage to allow loading and saving of tasks. */
     public Storage() {
         this.path = System.getProperty("user.dir") + "/data/duke.txt";
     }
 
-    /**
-     * Creates a folder to store text file. If present, it will not create.
-     */
+    /** Creates a folder to store text file. If present, it will not create. */
     public static void createFolder() {
         String folderPath = System.getProperty("user.dir") + "/data";
         File folder = new File(folderPath);

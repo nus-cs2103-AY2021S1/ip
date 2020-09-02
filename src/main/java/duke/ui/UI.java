@@ -1,8 +1,6 @@
 package duke.ui;
 
-/**
- * Represents the interactions between Focus and user.
- */
+/** Represents the interactions between Focus and user. */
 public class UI {
     /**
      * Greets the user upon entering the Focus.

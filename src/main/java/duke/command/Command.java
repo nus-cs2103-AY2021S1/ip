@@ -4,9 +4,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-/**
- * Represents all the commands to allow different command classes to inherit.
- */
+/** Represents all the commands to allow different command classes to inherit. */
 public abstract class Command {
     /**
      * Returns true or false depending on the type of command.

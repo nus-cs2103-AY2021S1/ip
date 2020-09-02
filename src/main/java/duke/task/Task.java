@@ -1,20 +1,12 @@
 package duke.task;
 
-/**
- * Represents a Task to allow different types of tasks to inherit.
- */
+/** Represents a Task to allow different types of tasks to inherit. */
 public class Task {
-    /**
-     * Description of task.
-     */
+    /** Description of task. */
     protected String taskName;
-    /**
-     * Checks if task is completed or not.
-     */
+    /** Checks if task is completed or not. */
     protected boolean isDone;
-    /**
-     * '0' to represent incomplete, '1' to represent completed.
-     */
+    /** '0' to represent incomplete, '1' to represent completed. */
     protected String completed;
 
     /**
@@ -48,9 +40,7 @@ public class Task {
                 : "\u2718";
     }
 
-    /**
-     * Marks the task as done.
-     */
+    /** Marks the task as done. */
     public void markAsDone() {
         this.isDone = true;
         this.completed = "1";

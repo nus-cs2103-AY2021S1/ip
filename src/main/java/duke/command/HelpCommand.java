@@ -5,9 +5,7 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.UI;
 
-/**
- * Represents the HelpCommand to help first-time users about the commands.
- */
+/** Represents the HelpCommand to help first-time users about the commands. */
 public class HelpCommand extends Command {
     /**
      * Returns false since HelpCommand is not an ExitCommand.

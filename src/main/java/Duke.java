@@ -5,26 +5,16 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.UI;
 
-/**
- * Main class to run Focus.
- */
+/** Main class to run Focus. */
 public class Duke {
-    /**
-     * Storage created for user.
-     */
+    /** Storage created for user. */
     private final Storage storage;
-    /**
-     * Task list created for user.
-     */
+    /** Task list created for user. */
     private final TaskList taskList;
-    /**
-     * UI created to interact with user.
-     */
+    /** UI created to interact with user. */
     private final UI ui;
 
-    /**
-     * Creates Focus to set up the things needed.
-     */
+    /** Creates Focus to set up the things needed. */
     public Duke() {
         ui = new UI();
         Storage.createFolder();

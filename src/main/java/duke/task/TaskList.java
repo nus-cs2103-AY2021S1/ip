@@ -6,19 +6,12 @@ import java.util.ArrayList;
 import duke.parser.Parser;
 import duke.storage.Storage;
 
-/**
- * Represents the task list of user.
- */
+/** Represents the task list of user. */
 public class TaskList {
-    /**
-     * Arraylist for the task list.
-     */
+    /** Arraylist for the task list. */
     private final ArrayList<Task> taskList;
 
-    /**
-     * Creates an empty task list if user does not have existing
-     * data in files.
-     */
+    /** Creates an empty task list if user does not have existing data in files. */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }

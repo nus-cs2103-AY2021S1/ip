@@ -1,8 +1,6 @@
 import javafx.application.Application;
 
-/**
- * A launcher class to workaround classpath issues.
- */
+/** A launcher class to workaround classpath issues. */
 public class Launcher {
     /**
      * Entry point to run Focus.

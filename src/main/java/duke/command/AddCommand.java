@@ -7,13 +7,9 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-/**
- * Represents the AddCommand to add tasks into task list.
- */
+/** Represents the AddCommand to add tasks into task list. */
 public class AddCommand extends Command {
-    /**
-     * Represents the type of task.
-     */
+    /** Represents the type of task. */
     private final String taskType;
 
     /**

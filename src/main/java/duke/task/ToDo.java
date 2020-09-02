@@ -1,8 +1,6 @@
 package duke.task;
 
-/**
- * Represents task with a type of To-Do.
- */
+/** Represents task with a type of To-Do. */
 public class ToDo extends Task {
 
     /**

@@ -1,8 +1,6 @@
 package duke.exception;
 
-/**
- * Represents the exceptions for Focus.
- */
+/** Represents the exceptions for Focus. */
 public class DukeException extends Exception {
     /**
      * Creates DukeException for methods to throw.

@@ -3,9 +3,7 @@ package duke.command;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-/**
- * Represents the ExitCommand to exit Focus.
- */
+/** Represents the ExitCommand to exit Focus. */
 public class ExitCommand extends Command {
     /**
      * Returns true since ExitCommand is not an ExitCommand.

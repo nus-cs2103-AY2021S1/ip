@@ -4,9 +4,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-/**
- * Represents the InvalidCommand to deal with invalid inputs by user.
- */
+/** Represents the InvalidCommand to deal with invalid inputs by user. */
 public class InvalidCommand extends Command {
     /**
      * Returns false since InvalidCommand is not an ExitCommand.

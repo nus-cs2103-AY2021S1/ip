@@ -15,18 +15,14 @@ import javafx.scene.shape.Circle;
 
 /**
  * A custom control using FXML.
- * This control represents a dialog box consisting of a Circle to be filled by images to represent the
- * speaker's face and a label containing text from the speaker.
+ * This control represents a dialog box consisting of a Circle to be filled by images to
+ * represent the speaker's face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
-    /**
-     * Dialog label for text.
-     */
+    /** Dialog label for text. */
     @FXML
     private Label dialog;
-    /**
-     * Circle for speaker's images.
-     */
+    /** Circle for speaker's images. */
     @FXML
     private Circle circle;
 
@@ -50,9 +46,7 @@ public class DialogBox extends HBox {
         circle.setFill(new ImagePattern(image));
     }
 
-    /**
-     * Flips the dialog box such that the Circle is on the left and text on the right.
-     */
+    /** Flips the dialog box such that the Circle is on the left and text on the right. */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);

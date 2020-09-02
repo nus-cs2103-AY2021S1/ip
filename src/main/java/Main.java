@@ -7,17 +7,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * A GUI for Duke using FXML.
- */
+/** A GUI for Duke using FXML. */
 public class Main extends Application {
-    /**
-     * Creates Duke.
-     */
+    /** Creates Duke. */
     private final Duke duke = new Duke();
-    /**
-     * Gets the image for Duke.
-     */
+    /** Gets the image for Duke. */
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**

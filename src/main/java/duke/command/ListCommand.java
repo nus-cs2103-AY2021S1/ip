@@ -4,9 +4,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
-/**
- * Represents the ListCommand to list all the tasks on task list.
- */
+/** Represents the ListCommand to list all the tasks on task list. */
 public class ListCommand extends Command {
     /**
      * Returns false since ListCommand is not an ExitCommand.
