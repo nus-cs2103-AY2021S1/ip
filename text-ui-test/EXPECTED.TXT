@@ -20,6 +20,7 @@ Use any of the commands on the left to access my quality services:
 	scroll: Displays your scroll - your list of tasks
 	conquer [NUMBER]: Marks the particular item on your scroll as DONE
 	delete [NUMBER]: Deletes the particular item from your scroll
+	find [KEYWORD]: Returns a list of relevant items on your scroll
 	dismiss: This will be my cue to leave.
 
 Now, how may I serve you?
@@ -33,20 +34,20 @@ You have 1 writing(s) on your scroll as of now.
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Your Majesty, I've added the writing:
-	[D][✘] return book  (by: Thursday)
+	[D][✘] return book  (by: Jan 1 2020)
 You have 2 writing(s) on your scroll as of now. 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Your current scroll, Your Majesty:
 	1.[T][✘] read book
-	2.[D][✘] return book  (by: Thursday)
+	2.[D][✘] return book  (by: Jan 1 2020)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Your current scroll, Your Majesty:
 	1.[T][✘] read book
-	2.[D][✘] return book  (by: Thursday)
+	2.[D][✘] return book  (by: Jan 1 2020)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -57,30 +58,34 @@ As you wish, Your Majesty. I have marked this as conquered.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Your current scroll, Your Majesty:
 	1.[T][✓] read book
-	2.[D][✘] return book  (by: Thursday)
+	2.[D][✘] return book  (by: Jan 1 2020)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 As you wish, Your Majesty. I have marked this as conquered.
-	[D][✓] return book  (by: Thursday)
+	[D][✓] return book  (by: Jan 1 2020)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Your current scroll, Your Majesty:
 	1.[T][✓] read book
-	2.[D][✓] return book  (by: Thursday)
+	2.[D][✓] return book  (by: Jan 1 2020)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 Your Majesty, there's no such agenda in my detailed records.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-Use /on for events, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your Majesty, I've added the writing:
+	[E][✘] arts experience  (by: Apr 2 2020, 6:00 pm)
+You have 3 writing(s) on your scroll as of now. 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Your current scroll, Your Majesty:
 	1.[T][✓] read book
-	2.[D][✓] return book  (by: Thursday)
+	2.[D][✓] return book  (by: Jan 1 2020)
+	3.[E][✘] arts experience  (by: Apr 2 2020, 6:00 pm)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 I'm afraid I do not understand that command, Your Majesty.
@@ -133,8 +138,8 @@ Come again, Your Majesty?
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 As you wish, Your Majesty. I have removed this writing.
-	[D][✓] return book  (by: Thursday)
-You have 1 writing(s) on your scroll as of now. 
+	[D][✓] return book  (by: Jan 1 2020)
+You have 2 writing(s) on your scroll as of now. 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -145,6 +150,7 @@ As you wish, Your Majesty. I have marked this as conquered.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Your current scroll, Your Majesty:
 	1.[T][✓] read book
+	2.[E][✘] arts experience  (by: Apr 2 2020, 6:00 pm)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 Do give me more details about this todo, Your Majesty.
@@ -153,23 +159,24 @@ Do give me more details about this todo, Your Majesty.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Your Majesty, I've added the writing:
 	[T][✘] return book
-You have 2 writing(s) on your scroll as of now. 
+You have 3 writing(s) on your scroll as of now. 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 As you wish, Your Majesty. I have marked this as conquered.
-	[T][✓] return book
+	[E][✓] arts experience  (by: Apr 2 2020, 6:00 pm)
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 As you wish, Your Majesty. I have removed this writing.
 	[T][✓] read book
-You have 1 writing(s) on your scroll as of now. 
+You have 2 writing(s) on your scroll as of now. 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Your current scroll, Your Majesty:
-	1.[T][✓] return book
+	1.[E][✓] arts experience  (by: Apr 2 2020, 6:00 pm)
+	2.[T][✘] return book
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
