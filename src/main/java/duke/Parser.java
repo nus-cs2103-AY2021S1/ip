@@ -9,6 +9,7 @@ import main.java.duke.command.UwuCommand;
 import main.java.duke.command.DoneCommand;
 import main.java.duke.command.AddCommand;
 import main.java.duke.command.ExitCommand;
+import main.java.duke.command.FindCommand;
 
 import main.java.duke.tasks.Deadline;
 import main.java.duke.tasks.Todo;
@@ -33,7 +34,10 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-
+        case FindCommand.COMMAND_WORD_FIND:
+            if (checkInputLength(splitCommand, 2)) {
+                return new FindCommand(splitCommand[1]);
+            }
         case DeleteCommand.COMMAND_WORD:
             if (checkInputLength(splitCommand, 2)) {
                 return prepareDelete(splitCommand[1]);

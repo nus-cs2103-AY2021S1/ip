@@ -86,6 +86,28 @@ public class TaskList {
     }
 
     /**
+     * Lists all current tasks in list that matches keyword.
+     *
+     * @return A string representation of all the current tasks that matches keyword.
+     */
+    public String findMatchingTasks(String keyword) {
+        String res = "";
+        int count = 1;
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            if (task.getTask().contains(keyword)) {
+                if (count != 1) {
+                    res += "\n";
+                }
+                res += String.format("%d. %s", count, task);
+                count ++;
+            }
+        }
+        return res;
+    }
+
+
+    /**
      * Returns size of current task list.
      *
      * @return Size of current task list

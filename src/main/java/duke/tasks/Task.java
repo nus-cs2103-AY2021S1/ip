@@ -35,4 +35,8 @@ public class Task {
         int check = isDone ? 1 : 0;
         return String.format("%d | %s", check, task);
     }
+
+    public String getTask() {
+        return this.task;
+    }
 }
