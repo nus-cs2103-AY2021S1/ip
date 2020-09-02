@@ -17,7 +17,6 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
-    private boolean isInitialised;
 
     /**
      * Creates a Duke Chat-bot.
@@ -40,23 +39,18 @@ public class Duke {
     }
 
     /**
-     * Runs the chat-bot upon starting the program.
+     * Initialises the Ui, Storage and TaskList upon starting.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+    public void initialise() {
+        ui = new Ui();
+        storage = new Storage("/data/duke.txt", "/data");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
-
 
     /**
      * Returns the response for the input command.
@@ -65,18 +59,6 @@ public class Duke {
      * @return Response to user's input.
      */
     public String getResponse(String input) {
-        if (!isInitialised) {
-            ui = new Ui();
-            storage = new Storage("/data/duke.txt", "/data");
-            try {
-                tasks = new TaskList(storage.load());
-            } catch (DukeException e) {
-                ui.showLoadingError();
-                tasks = new TaskList();
-            }
-            isInitialised = true;
-            return ui.showWelcome();
-        }
         boolean isExit = false;
         try {
             Command command = Parser.parse(input);

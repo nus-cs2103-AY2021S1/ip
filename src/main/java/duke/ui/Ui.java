@@ -36,7 +36,7 @@ public class Ui {
      *
      * @return String representation of farewell message.
      */
-    public String showWelcome() {
+    public static String showWelcome() {
         return LOGO + DIVIDER + GREETING + DIVIDER;
     }
 

@@ -27,6 +27,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            duke.initialise();
             stage.setTitle("NITE");
             stage.show();
         } catch (IOException e) {
