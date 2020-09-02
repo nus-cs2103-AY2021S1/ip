@@ -47,7 +47,7 @@ public class DeleteCommand implements Command {
      * @return true.
      */
     @Override
-    public boolean hasCommand() {
+    public boolean hasCommandAfter() {
         return true;
     }
 

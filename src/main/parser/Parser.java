@@ -3,15 +3,15 @@ package main.parser;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
-import main.command.AddDeadlineCommand;
-import main.command.AddEventCommand;
-import main.command.AddTodoCommand;
 import main.command.Command;
+import main.command.DeadlineCommand;
 import main.command.DeleteCommand;
 import main.command.DoneCommand;
+import main.command.EventCommand;
 import main.command.ExitCommand;
 import main.command.FindCommand;
 import main.command.ListCommand;
+import main.command.TodoCommand;
 import main.exception.EmptyMessageException;
 import main.exception.InvalidDateException;
 import main.exception.InvalidDeadlineFormatException;
@@ -80,19 +80,19 @@ public class Parser {
 
         switch (command) {
         case COMMAND_TODO:
-            return new AddTodoCommand(description);
+            return new TodoCommand(description);
         case COMMAND_DEADLINE:
             nameAndTime = description.split(" /by ", 2);
             if (nameAndTime.length == 1) {
                 throw new InvalidDeadlineFormatException();
             }
-            return new AddDeadlineCommand(nameAndTime[0], toDateTime(nameAndTime[1]));
+            return new DeadlineCommand(nameAndTime[0], toDateTime(nameAndTime[1]));
         case COMMAND_EVENT:
             nameAndTime = description.split(" /at ", 2);
             if (nameAndTime.length == 1) {
                 throw new InvalidEventFormatException();
             }
-            return new AddEventCommand(nameAndTime[0], toDateTime(nameAndTime[1]));
+            return new EventCommand(nameAndTime[0], toDateTime(nameAndTime[1]));
         default:
             throw new UnknownCommandException();
         }

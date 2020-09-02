@@ -28,7 +28,7 @@ public class ListCommand implements Command {
      * @return true.
      */
     @Override
-    public boolean hasCommand() {
+    public boolean hasCommandAfter() {
         return true;
     }
 

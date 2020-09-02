@@ -153,7 +153,7 @@ public class Duke extends Application {
         try {
             Command command = Parser.parse(splitInput);
             output = command.execute(ui, tasks);
-            hasCommand = command.hasCommand();
+            hasCommand = command.hasCommandAfter();
         } catch (DukeException e) {
             output = e.getMessage();
         }

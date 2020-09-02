@@ -80,17 +80,17 @@ public class Storage {
             String taskType = task[0];
             String taskTime = task[1];
             String taskName = task[3];
-            boolean taskDoneState = task[2].equals("1");
+            boolean isTaskDone = task[2].equals("1");
 
             switch (taskType) {
             case "T":
-                tasks.add(new Todo(taskName, taskDoneState));
+                tasks.add(new Todo(taskName, isTaskDone));
                 break;
             case "D":
-                tasks.add(new Deadline(taskName, taskTime, taskDoneState));
+                tasks.add(new Deadline(taskName, taskTime, isTaskDone));
                 break;
             case "E":
-                tasks.add(new Event(taskName, taskTime, taskDoneState));
+                tasks.add(new Event(taskName, taskTime, isTaskDone));
                 break;
             default:
                 break;

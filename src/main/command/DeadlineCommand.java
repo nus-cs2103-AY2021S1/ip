@@ -13,16 +13,16 @@ import main.ui.Ui;
  * @version v0.1
  * @since v0.1
  */
-public class AddDeadlineCommand implements Command {
+public class DeadlineCommand implements Command {
     private final Deadline deadline;
 
     /**
-     * Constructs an AddDeadlineCommand instance and the Deadline object
+     * Constructs an DeadlineCommand instance and the Deadline object
      * with the description and the deadline of the task.
      * @param description the description of the task.
      * @param dateTime the deadline of the task.
      */
-    public AddDeadlineCommand(String description, LocalDateTime dateTime) {
+    public DeadlineCommand(String description, LocalDateTime dateTime) {
         deadline = new Deadline(description, dateTime);
     }
 
@@ -44,14 +44,14 @@ public class AddDeadlineCommand implements Command {
      * @return true.
      */
     @Override
-    public boolean hasCommand() {
+    public boolean hasCommandAfter() {
         return true;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof AddDeadlineCommand) {
-            AddDeadlineCommand o = (AddDeadlineCommand) obj;
+        if (obj instanceof DeadlineCommand) {
+            DeadlineCommand o = (DeadlineCommand) obj;
             return this.deadline.equals(o.deadline);
         }
         return false;

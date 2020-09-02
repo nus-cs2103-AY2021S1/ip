@@ -13,16 +13,16 @@ import main.ui.Ui;
  * @version v0.1
  * @since v0.1
  */
-public class AddEventCommand implements Command {
+public class EventCommand implements Command {
     private final Event event;
 
     /**
-     * Constructs an AddEventCommand instance and the Event object
+     * Constructs an EventCommand instance and the Event object
      * with the description and the deadline of the task.
      * @param description the description of the task.
      * @param dateTime the time of the event occurring.
      */
-    public AddEventCommand(String description, LocalDateTime dateTime) {
+    public EventCommand(String description, LocalDateTime dateTime) {
         event = new Event(description, dateTime);
     }
 
@@ -44,14 +44,14 @@ public class AddEventCommand implements Command {
      * @return true.
      */
     @Override
-    public boolean hasCommand() {
+    public boolean hasCommandAfter() {
         return true;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof AddEventCommand) {
-            AddEventCommand o = (AddEventCommand) obj;
+        if (obj instanceof EventCommand) {
+            EventCommand o = (EventCommand) obj;
             return this.event.equals(o.event);
         }
         return false;

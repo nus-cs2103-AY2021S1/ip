@@ -31,16 +31,16 @@ public class FindCommand implements Command {
      */
     @Override
     public String execute(Ui ui, TaskList tasks) {
-        TaskList found = new TaskList();
+        TaskList foundTasks = new TaskList();
         if (searchTerm.length() > 0) {
             for (int j = 0; j < tasks.size(); j++) {
                 Task task = tasks.get(j);
                 if (task.getName().contains(searchTerm)) {
-                    found.add(task);
+                    foundTasks.add(task);
                 }
             }
         }
-        return ui.printFoundList(found);
+        return ui.printFoundList(foundTasks);
     }
 
     /**
@@ -48,7 +48,7 @@ public class FindCommand implements Command {
      * @return true.
      */
     @Override
-    public boolean hasCommand() {
+    public boolean hasCommandAfter() {
         return true;
     }
 

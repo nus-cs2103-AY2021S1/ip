@@ -20,7 +20,7 @@ public class ExitCommand implements Command {
      */
     @Override
     public String execute(Ui ui, TaskList tasks) {
-        return ui.printExit();
+        return ui.printExitMessage();
     }
 
     /**
@@ -28,7 +28,7 @@ public class ExitCommand implements Command {
      * @return false.
      */
     @Override
-    public boolean hasCommand() {
+    public boolean hasCommandAfter() {
         return false;
     }
 

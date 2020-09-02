@@ -11,15 +11,15 @@ import main.ui.Ui;
  * @version v0.1
  * @since v0.1
  */
-public class AddTodoCommand implements Command {
+public class TodoCommand implements Command {
     private final Todo todo;
 
     /**
-     * Constructs an AddTodoCommand instance and the Todo object
+     * Constructs an TodoCommand instance and the Todo object
      * with the description of the task.
      * @param description the description of the task.
      */
-    public AddTodoCommand(String description) {
+    public TodoCommand(String description) {
         todo = new Todo(description);
     }
 
@@ -41,14 +41,14 @@ public class AddTodoCommand implements Command {
      * @return true.
      */
     @Override
-    public boolean hasCommand() {
+    public boolean hasCommandAfter() {
         return true;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof AddTodoCommand) {
-            AddTodoCommand o = (AddTodoCommand) obj;
+        if (obj instanceof TodoCommand) {
+            TodoCommand o = (TodoCommand) obj;
             return this.todo.equals(o.todo);
         }
         return false;

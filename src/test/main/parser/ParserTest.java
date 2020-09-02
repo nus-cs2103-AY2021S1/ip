@@ -9,15 +9,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import main.command.AddDeadlineCommand;
-import main.command.AddEventCommand;
-import main.command.AddTodoCommand;
 import main.command.Command;
+import main.command.DeadlineCommand;
 import main.command.DeleteCommand;
 import main.command.DoneCommand;
+import main.command.EventCommand;
 import main.command.ExitCommand;
 import main.command.FindCommand;
 import main.command.ListCommand;
+import main.command.TodoCommand;
 import main.exception.DukeException;
 import main.exception.EmptyMessageException;
 import main.exception.InvalidDateException;
@@ -113,14 +113,14 @@ public class ParserTest {
         public void parse_todoCommand_objectAddTodoCommand()
                 throws DukeException {
             Command command = Parser.parse(new String[] { "todo", "name" });
-            assertEquals(command, new AddTodoCommand("name"));
+            assertEquals(command, new TodoCommand("name"));
         }
 
         @Test
         @DisplayName("should generate add todo object with alt data")
         public void parse_todoCommand_altDataAddTodoCommand() throws DukeException {
             Command command = Parser.parse(new String[] { "todo", "another" });
-            assertEquals(command, new AddTodoCommand("another"));
+            assertEquals(command, new TodoCommand("another"));
         }
 
         @Test
@@ -143,7 +143,7 @@ public class ParserTest {
                 throws DukeException {
             Command command = Parser.parse(
                     new String[] { "deadline", "name /by 1400-1-31 1453" });
-            assertEquals(command, new AddDeadlineCommand("name",
+            assertEquals(command, new DeadlineCommand("name",
                     LocalDateTime.of(1400, 1, 31, 14, 53)));
         }
 
@@ -153,7 +153,7 @@ public class ParserTest {
                 throws DukeException {
             Command command = Parser.parse(
                     new String[] { "deadline", "test /by 1285-5-3 2144" });
-            assertEquals(command, new AddDeadlineCommand("test",
+            assertEquals(command, new DeadlineCommand("test",
                     LocalDateTime.of(1285, 5, 3, 21, 44)));
         }
 
@@ -257,7 +257,7 @@ public class ParserTest {
                 throws DukeException {
             Command command = Parser.parse(
                     new String[] { "event", "name /at 1400-1-31 1453" });
-            assertEquals(command, new AddEventCommand("name",
+            assertEquals(command, new EventCommand("name",
                     LocalDateTime.of(1400, 1, 31, 14, 53)));
         }
 
@@ -267,7 +267,7 @@ public class ParserTest {
                 throws DukeException {
             Command command = Parser.parse(
                     new String[] { "event", "test /at 1285-5-3 2144" });
-            assertEquals(command, new AddEventCommand("test",
+            assertEquals(command, new EventCommand("test",
                     LocalDateTime.of(1285, 5, 3, 21, 44)));
         }
 

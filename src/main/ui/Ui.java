@@ -16,7 +16,7 @@ public class Ui {
      * Returns the string bidding the user farewell.
      * @return the string bidding the user farewell.
      */
-    public String printExit() {
+    public String printExitMessage() {
         return "Bye. Hope to see you again soon!";
     }
 
@@ -41,7 +41,7 @@ public class Ui {
         }
 
         for (int i = 0; i < tasks.size(); i++) {
-            list.append(String.format("     %d.%s\n", i + 1, tasks.get(i)));
+            list.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
         }
 
         return list.toString();

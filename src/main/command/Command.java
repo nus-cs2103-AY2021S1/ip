@@ -26,5 +26,5 @@ public interface Command {
      * Checks if there are still commands after this command
      * @return false if ExitCommand, else true.
      */
-    boolean hasCommand();
+    boolean hasCommandAfter();
 }
