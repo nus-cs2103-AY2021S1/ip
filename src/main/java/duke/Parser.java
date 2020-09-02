@@ -29,8 +29,7 @@ public class Parser {
             int number = Integer.parseInt(userInput.split(" ")[1]);
             if (number > taskList.getTaskList().size()) {
                 ui.printMessage("duke.Task not found please choose another number!");
-            }
-            else if (number < 100 && number > 0) {
+            } else if (number < 100 && number > 0) {
                 taskList.getTask(number - 1).markAsDone();
                 ui.printMessage("This task is done, great job!\n" + taskList.getTask(number - 1));
             }
@@ -86,8 +85,7 @@ public class Parser {
                 }
             }
             ui.printMessage(message);
-        }
-        else {
+        } else {
             System.out.println(new InvalidInputException());
         }
     }
