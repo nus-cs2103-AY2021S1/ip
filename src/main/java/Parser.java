@@ -34,6 +34,7 @@ public class Parser {
         if (input.equals("bye")) {
             Storage.write(list_of_Content);
             return Ui.exitMessage();
+   
         }
         if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list: ");

@@ -118,7 +118,7 @@ public class TaskList {
         Ui ui = new Ui();
         int no_of_tasks = list_of_Contents.size();
         int counter = 1;
-        String tasks = ui.printLine();
+        String tasks = "Here are the possible matches: \n" + ui.printLine() + "\n";
 //        ui.printHorizontalLine();
         if (no_of_tasks == 0) {
 
@@ -127,15 +127,19 @@ public class TaskList {
 //            System.out.println("There is no tasks in the list ");
             
         } else {
+            boolean isTaskFound = false;
             for (int i = 0; i < list_of_Contents.size(); i = i + 1) {
                 if (list_of_Contents.get(i).containKeyWord(keyword)) {
-
-                    String oneTask = counter + list_of_Contents.get(i).timeConverted();
+                    isTaskFound = true;
+                    String oneTask = counter + ". " + list_of_Contents.get(i).timeConverted();
                     tasks = tasks + oneTask + "\n";
 //                    System.out.println(counter + list_of_Contents.get(i).timeConverted());
                     counter = counter + 1;
                 }
-
+            }
+            
+            if (!isTaskFound) {
+                tasks = tasks + "Sorry, we cannot find a tasks that match the keyword in the list :( \n";
             }
         }
 //        ui.printHorizontalLine();
