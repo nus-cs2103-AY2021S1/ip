@@ -20,12 +20,25 @@ import duke.task.Todo;
  * A parser that is used to parse inputs from the user.
  */
 public class Parser {
-    private static final String FAILED_TO_MARK_TASK_AS_COMPLETE =
-            "Failed to mark task as complete!";
-    private static final String FAILED_TO_DELETE_TASK = "Failed to delete task!";
-    private static final String FAILED_TO_CREATE_TASK = "Failed to create task!";
-    private static final String FAILED_TO_CREATE_DEADLINE_TASK = "Failed to create Deadline task!";
-    private static final String FAILED_TO_CREATE_EVENT_TASK = "Failed to create Event task!";
+    private enum ErrorMessage {
+        FAILED_TO_MARK_TASK_AS_COMPLETE("Failed to mark task as complete!"),
+        FAILED_TO_DELETE_TASK("Failed to delete task!"),
+        FAILED_TO_CREATE_TASK("Failed to create task!"),
+        FAILED_TO_CREATE_DEADLINE_TASK("Failed to create Deadline task!"),
+        FAILED_TO_CREATE_EVENT_TASK("Failed to create Event task!");
+
+        private final String message;
+
+        ErrorMessage(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return this.message;
+        }
+
+    }
+
 
     /**
      * Parses the full command given by the user as input.
@@ -62,7 +75,8 @@ public class Parser {
         case "done":
             // "done" needs to be accompanied by task ID
             if (commandInputs.length < 2) {
-                throw new MissingTaskIdException(FAILED_TO_MARK_TASK_AS_COMPLETE);
+                throw new MissingTaskIdException(
+                        ErrorMessage.FAILED_TO_MARK_TASK_AS_COMPLETE.getMessage());
             }
 
             commandDetails = commandInputs[1].trim();
@@ -71,13 +85,14 @@ public class Parser {
                 int taskId = Integer.parseInt(commandDetails);
                 return new DoneCommand(taskId);
             } catch (NumberFormatException e) {
-                throw new InvalidTaskIdException(FAILED_TO_MARK_TASK_AS_COMPLETE);
+                throw new InvalidTaskIdException(
+                        ErrorMessage.FAILED_TO_MARK_TASK_AS_COMPLETE.getMessage());
             }
 
         case "delete":
             // "delete" needs to be accompanied by task ID
             if (commandInputs.length < 2) {
-                throw new MissingTaskIdException(FAILED_TO_DELETE_TASK);
+                throw new MissingTaskIdException(ErrorMessage.FAILED_TO_DELETE_TASK.getMessage());
             }
 
             commandDetails = commandInputs[1].trim();
@@ -86,48 +101,13 @@ public class Parser {
                 int taskId = Integer.parseInt(commandDetails);
                 return new DeleteCommand(taskId);
             } catch (NumberFormatException e) {
-                throw new InvalidTaskIdException(FAILED_TO_DELETE_TASK);
+                throw new InvalidTaskIdException(ErrorMessage.FAILED_TO_DELETE_TASK.getMessage());
             }
 
         case "todo":
         case "deadline":
         case "event":
-            // "todo", "deadline", "event" needs to be accompanied with details on the task to be
-            // created
-            if (commandInputs.length < 2) {
-                throw new MissingTaskDetailsException(FAILED_TO_CREATE_TASK);
-            }
-
-            commandDetails = commandInputs[1].trim();
-
-            if (command.equals("todo")) {
-                return new AddCommand(new Todo(commandDetails));
-            } else if (command.equals("deadline")) {
-                String[] deadlineDetails = commandDetails.split("/by", 2);
-
-                if (deadlineDetails.length < 2) {
-                    throw new MissingTaskDetailsException(FAILED_TO_CREATE_DEADLINE_TASK,
-                            "No deadline was specified!");
-                }
-
-                String description = deadlineDetails[0].trim();
-                String by = deadlineDetails[1].trim();
-
-                return new AddCommand(new Deadline(description, by));
-            } else {
-                // Last case would be creating an event
-                String[] eventDetails = commandDetails.split("/at", 2);
-
-                if (eventDetails.length < 2) {
-                    throw new MissingTaskDetailsException(FAILED_TO_CREATE_EVENT_TASK,
-                            "No date was specified!");
-                }
-
-                String description = eventDetails[0].trim();
-                String at = eventDetails[1].trim();
-
-                return new AddCommand(new Event(description, at));
-            }
+            return Parser.handleTaskCreationInput(command, commandInputs);
 
         case "bye":
             return new ByeCommand();
@@ -135,7 +115,47 @@ public class Parser {
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
-
     }
 
+    private static Command handleTaskCreationInput(String command, String[] commandInputs)
+            throws DukeException {
+        // "todo", "deadline", "event" needs to be accompanied with details on the task to be
+        // created
+        if (commandInputs.length < 2) {
+            throw new MissingTaskDetailsException(ErrorMessage.FAILED_TO_CREATE_TASK.getMessage());
+        }
+
+        String commandDetails = commandInputs[1].trim();
+
+        if (command.equals("todo")) {
+            return new AddCommand(new Todo(commandDetails));
+        } else if (command.equals("deadline")) {
+            String[] deadlineDetails = commandDetails.split("/by", 2);
+
+            if (deadlineDetails.length < 2) {
+                throw new MissingTaskDetailsException(
+                        ErrorMessage.FAILED_TO_CREATE_DEADLINE_TASK.getMessage(),
+                        "No deadline was specified!");
+            }
+
+            String description = deadlineDetails[0].trim();
+            String by = deadlineDetails[1].trim();
+
+            return new AddCommand(new Deadline(description, by));
+        } else {
+            // Last case would be creating an event
+            String[] eventDetails = commandDetails.split("/at", 2);
+
+            if (eventDetails.length < 2) {
+                throw new MissingTaskDetailsException(
+                        ErrorMessage.FAILED_TO_CREATE_EVENT_TASK.getMessage(),
+                        "No date was specified!");
+            }
+
+            String description = eventDetails[0].trim();
+            String at = eventDetails[1].trim();
+
+            return new AddCommand(new Event(description, at));
+        }
+    }
 }

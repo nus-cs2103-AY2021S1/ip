@@ -15,7 +15,7 @@ public class Duke {
     /**
      * The file path where tasks will be stored.
      */
-    private static final Path filePath = Paths.get(".", "data", "duke.txt");
+    private static final Path FILE_PATH = Paths.get(".", "data", "duke.txt");
 
     /**
      * The storage associated with the chat bot.
@@ -31,7 +31,7 @@ public class Duke {
      * Initialises a new instance of Duke.
      */
     public Duke() {
-        this.storage = new Storage(Duke.filePath);
+        this.storage = new Storage(Duke.FILE_PATH);
 
         try {
             this.tasks = new TaskList(this.storage.loadTasks());
