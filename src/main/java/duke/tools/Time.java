@@ -12,6 +12,7 @@ public class Time {
 
     /**
      * Initializes a Time.
+     *
      * @param time A string of format
      *             of "yyyy-mm-dd".
      */

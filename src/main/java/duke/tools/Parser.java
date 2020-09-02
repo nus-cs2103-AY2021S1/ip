@@ -33,6 +33,7 @@ public class Parser {
 
     /**
      * Returns the static attribute of taskList.
+     *
      * @return the static attribute of taskList.
      */
     public static TaskList<Task> getTaskList() {
@@ -69,7 +70,7 @@ public class Parser {
 
         extract = extract(order);
         reloadTaskList();
-        //Empty line.
+
         if (order.equals(Command.LIST.toString())) {
             return new Format<>(Statement.LIST.toString() + taskList).toString();
         } else {

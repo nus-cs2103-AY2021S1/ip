@@ -18,6 +18,7 @@ public class Duke {
 
     /**
      * Gets the Ui object in Duke.
+     *
      * @return The Ui object.
      */
     public Ui getUi() {
@@ -26,6 +27,7 @@ public class Duke {
 
     /**
      * Returns the response after user input.
+     *
      * @param input String of user input.
      * @return The response of the user input.
      */

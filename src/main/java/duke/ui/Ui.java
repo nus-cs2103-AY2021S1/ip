@@ -20,6 +20,7 @@ public class Ui {
 
     /**
      * Responds after the user keyed in the input.
+     *
      * @return String of the response from Duke.
      */
     public String getResponse(String input) {
@@ -46,8 +47,7 @@ public class Ui {
      */
     public String greet() {
         return new Format<>(
-                new Response(Statement.GREET.toString()
-                )
+                new Response(Statement.GREET.toString())
         ).toString();
     }
 
@@ -57,8 +57,7 @@ public class Ui {
      */
     public String exit() {
         return new Format<>(
-                new Response(Statement.BYE.toString()
-                )
+                new Response(Statement.BYE.toString())
         ).toString();
     }
 }

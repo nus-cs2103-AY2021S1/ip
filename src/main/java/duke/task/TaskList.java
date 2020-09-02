@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * This class is to contain tasks.
+ *
  * @param <T> The data type of the object in the task list.
  */
 public class TaskList<T> {
@@ -28,6 +29,7 @@ public class TaskList<T> {
 
     /**
      * Gets all Tasks in the list.
+     *
      * @return The arrayList which stores all the tasks.
      */
     public ArrayList<T> getTaskList() {

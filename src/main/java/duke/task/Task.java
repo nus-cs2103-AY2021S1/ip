@@ -34,15 +34,6 @@ public class Task {
     }
 
     /**
-     * Returns the description of a Task.
-     *
-     * @return The description of a Task.
-     */
-    public String getDescription() {
-        return this.description;
-    }
-
-    /**
      * Sets the task as done.
      */
     public void setDone() {
