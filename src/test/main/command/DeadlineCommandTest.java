@@ -21,9 +21,9 @@ public class DeadlineCommandTest {
     private static TaskList tasks;
     private static final Todo TASK_ONE = new Todo("task 1", true);
     private static final Deadline TASK_TWO = new Deadline("task 2",
-            LocalDateTime.of(1993, 12, 6, 10, 10));
+            LocalDateTime.of(193, 7, 26, 13, 50));
     private static final Event TASK_THREE = new Event(
-            "task 1", "1993-12-06T10:10", false);
+            "task 3", "1993-12-06T10:10", false);
 
     @BeforeEach
     public void beforeEach() {
