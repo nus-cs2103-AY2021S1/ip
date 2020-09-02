@@ -1,10 +1,11 @@
 package src.main.java.duke.commands;
 
+
+import static src.main.java.duke.commons.Messages.INDENT;
+
 import java.util.List;
 
 import src.main.java.duke.data.task.Task;
-
-import static src.main.java.duke.commons.Messages.INDENT;
 
 /**
  * Represents an list command. Upon execution, list the task list to the user.

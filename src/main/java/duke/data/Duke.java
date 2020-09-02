@@ -1,13 +1,14 @@
 package src.main.java.duke.data;
 
+
+import src.main.java.duke.commands.Command;
+import src.main.java.duke.commands.CommandResult;
 import src.main.java.duke.data.task.Task;
 import src.main.java.duke.data.task.TaskList;
 import src.main.java.duke.data.task.TaskList.TaskNotFoundException;
+import src.main.java.duke.parser.Parser;
 import src.main.java.duke.storage.StorageFile;
 import src.main.java.duke.storage.StorageFile.StorageOperationException;
-import src.main.java.duke.commands.Command;
-import src.main.java.duke.parser.Parser;
-import src.main.java.duke.commands.CommandResult;
 
 /**
  * Duke class represents the bot which contains a tasklist and interacts with the tasks.
@@ -16,13 +17,21 @@ public class Duke {
 
     private final TaskList taskList;
 
-    public StorageFile storageFile;
+    private StorageFile storageFile;
 
     /**
      * Creates an empty task list.
      */
     public Duke() {
         taskList = new TaskList();
+    }
+    /**
+     * Constructs an task list with the given data.
+     *
+     * @param tasks external changes to this will not affect this task list
+     */
+    public Duke(TaskList tasks) {
+        this.taskList = new TaskList(tasks);
     }
 
     /**
@@ -35,14 +44,6 @@ public class Duke {
         return this;
     }
 
-    /**
-     * Constructs an task list with the given data.
-     *
-     * @param tasks external changes to this will not affect this task list
-     */
-    public Duke(TaskList tasks) {
-        this.taskList = new TaskList(tasks);
-    }
 
     /**
      * Adds a task to the task list.

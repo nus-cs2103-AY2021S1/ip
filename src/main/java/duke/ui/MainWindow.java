@@ -31,9 +31,13 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
 
+    /**
+     * Constructor for main window
+     */
     public MainWindow() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(src.main.java.duke.ui.MainWindow.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class
+                    .getResource("/view/MainWindow.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -50,10 +54,13 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
-
+    /**
+     * Shows welcome message to the user
+     */
     public void showWelcomeMessage() {
         dialogContainer.getChildren().addAll(
-                src.main.java.duke.ui.DialogBox.getUserDialog("Hello! I'm Best2103/TBot \n" +"What can I do for you?", dukeImage)
+                src.main.java.duke.ui.DialogBox.getUserDialog("Hello! I'm Best2103/TBot \n"
+                        + "What can I do for you?", dukeImage)
         );
     }
 

@@ -19,11 +19,20 @@ public class CommandResult {
     /** The list of tasks that was produced by the command */
     private final List<Task> relevantTasks;
 
+    /**
+     * Constructor for command result with feedback to user
+     * @param feedbackToUser
+     */
     public CommandResult(String feedbackToUser) {
         this.feedbackToUser = feedbackToUser;
         relevantTasks = null;
     }
 
+    /**
+     * Constructor for command result with feedback to user and list of relevant tasks
+     * @param feedbackToUser
+     * @param relevantTasks
+     */
     public CommandResult(String feedbackToUser, List<Task> relevantTasks) {
         this.feedbackToUser = feedbackToUser;
         this.relevantTasks = relevantTasks;

@@ -9,6 +9,12 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     private LocalDateTime dueDate;
+
+    /**
+     * Constructor for event with description and duedate
+     * @param description
+     * @param dueDate
+     */
     public Event(String description, String dueDate) {
         this.description = description;
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

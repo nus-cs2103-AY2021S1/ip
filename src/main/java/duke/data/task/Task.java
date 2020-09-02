@@ -12,6 +12,10 @@ public class Task {
 
     public Task() {}
 
+    /**
+     * Costructor for task with description
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

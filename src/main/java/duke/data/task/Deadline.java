@@ -11,6 +11,11 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDateTime dueDate;
 
+    /**
+     * Constructor for deadline with description and dueDate
+     * @param description
+     * @param dueDate
+     */
     public Deadline(String description, String dueDate) {
         this.description = description;
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

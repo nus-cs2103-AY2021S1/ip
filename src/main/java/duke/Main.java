@@ -1,23 +1,19 @@
 package src.main.java.duke;
 
-import java.io.IOException;
-
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import src.main.java.duke.data.Duke;
 import src.main.java.duke.storage.StorageFile;
-import src.main.java.duke.ui.MainWindow;
-
 import src.main.java.duke.storage.StorageFile.InvalidStorageFilePathException;
+import src.main.java.duke.ui.MainWindow;
 
 /**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
 
-    private src.main.java.duke.data.Duke duke = new src.main.java.duke.data.Duke();
+    private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {

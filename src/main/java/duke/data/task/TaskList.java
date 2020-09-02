@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import src.main.java.duke.data.task.Task;
-
 /**
  * A list of tasks that does not allow null elements or duplicates.
  *
