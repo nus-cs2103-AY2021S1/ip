@@ -28,4 +28,18 @@ public class CompletedCommand extends Command {
             throw new ErrorExceptions("There is no such Tasks.task!");
         }
     }
+
+    public static String execute2(int i) throws ErrorExceptions {
+        task t;
+        int index = i;
+        try {
+            t = TaskManager.getTask(index);
+            TaskManager.completed(t);
+            UserInterface.done();
+            return "    " + TaskManager.read(t) + System.lineSeparator()
+                    + "The tracked Tasks.task has been marked as completed! Congrats~~!";
+        } catch (IndexOutOfBoundsException e) {
+            throw new ErrorExceptions("There is no such Tasks.task!");
+        }
+    }
 }

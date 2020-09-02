@@ -24,4 +24,10 @@ public class ParseFilter extends Parse {
         LocalDate d = LocalDate.parse(date, format);
         FilterDateCommand.execute(d);
     }
+
+    public static String execute2(String date) throws ErrorExceptions {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d-MM-uuuu");
+        LocalDate d = LocalDate.parse(date, format);
+        return FilterDateCommand.execute2(d);
+    }
 }

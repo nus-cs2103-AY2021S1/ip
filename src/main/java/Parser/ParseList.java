@@ -13,4 +13,8 @@ public class ParseList extends Parse {
     public static void execute() {
         ListCommand.execute();
     }
+
+    public static String execute2() {
+        return ListCommand.execute2();
+    }
 }

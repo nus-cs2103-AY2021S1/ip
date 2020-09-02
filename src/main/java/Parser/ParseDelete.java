@@ -17,4 +17,8 @@ public class ParseDelete extends Parse {
     public static void execute(int i) throws ErrorExceptions {
         DeleteCommand.execute(i);
     }
+
+    public static String execute2(int i) throws ErrorExceptions {
+        return DeleteCommand.execute2(i);
+    }
 }

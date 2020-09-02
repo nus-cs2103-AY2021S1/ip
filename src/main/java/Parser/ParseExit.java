@@ -13,4 +13,8 @@ public class ParseExit extends Parse {
     public static void execute() {
         ExitCommand.execute();
     }
+
+    public static String execute2() {
+        return ExitCommand.execute2();
+    }
 }

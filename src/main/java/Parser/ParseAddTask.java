@@ -30,4 +30,17 @@ public class ParseAddTask extends Parse {
             WrongCommand.execute();
         }
     }
+
+    public static String execute2(String s, String input) throws ErrorExceptions {
+        String current = s;
+        if (current.equals("todo")) {
+            return AddTodoCommand.execute2(input);
+        } else if (current.equals("deadline")) {
+            return AddDeadlineCommand.execute2(input);
+        } else if (current.equals("event")) {
+            return AddEventCommand.execute2(input);
+        } else {
+            return WrongCommand.execute2();
+        }
+    }
 }

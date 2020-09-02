@@ -172,4 +172,32 @@ public class TaskManager {
         }
         return clone;
     }
+
+    public static String listing2() {
+        String result = "";
+        result = result + "These are your current tasks!";
+        int count = 1;
+        for (task i : store) {
+            result = result + System.lineSeparator();
+            result = result + count + ". " + read(i);
+            count++;
+        }
+        return result;
+    }
+
+    public static String newTask2(String name, String itype, String date, String fileDir) throws ErrorExceptions {
+        task Task;
+        if (itype.equals("Todo")) {
+            Task = new Todo(name, "[T]");
+        } else if (itype.equals("Deadline")) {
+            Task = new Deadline(name, "[D]");
+            DateTimeManager.addDate(Task, date);
+        } else {
+            Task = new Event(name, "[E]");
+            DateTimeManager.addDate(Task, date);
+        }
+        store.add(Task);
+        save(fileDir, Task);
+        return UserInterface.addedTask2(Task);
+    }
 }

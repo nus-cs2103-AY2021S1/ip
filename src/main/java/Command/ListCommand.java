@@ -12,4 +12,8 @@ public class ListCommand extends Command {
     public static void execute() {
         TaskManager.listing();
     }
+
+    public static String execute2() {
+        return TaskManager.listing2();
+    }
 }

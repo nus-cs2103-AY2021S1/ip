@@ -166,4 +166,47 @@ public class InputManager {
     public static String getFileDir() {
         return fileDir;
     }
+
+    public static String parse2(String input) throws ErrorExceptions {
+        Scanner sc = new Scanner(input);
+        String current = sc.next();
+        TaskManager.fileDir(fileDir);
+        if (current.equals("bye")) {
+            return ParseExit.execute2();
+        } else if (current.equals("delete")) {
+            try {
+                int index = sc.nextInt();
+                return ParseDelete.execute2(index);
+            } catch (NoSuchElementException e) {
+                throw new ErrorExceptions("There is no such tasks!");
+            }
+        } else if (current.equals("done")) {
+            try {
+                task t;
+                int index = sc.nextInt();
+                return ParseCompleted.execute2(index);
+            } catch (NoSuchElementException e) {
+                throw new ErrorExceptions("There is no such tasks!");
+            }
+        } else if (current.equals("list")) {
+            return ParseList.execute2();
+        } else if (current.equals("show")) {
+            return ParseShow.execute2();
+        } else if (current.equals("filter")) {
+            try {
+                String date = sc.next();
+                return ParseFilter.execute2(date);
+            } catch (NoSuchElementException e) {
+                throw new ErrorExceptions("Missing date!");
+            }
+        } else if (current.equals("find")) {
+            try {
+                return ParseFind.execute2(input);
+            } catch (ErrorExceptions e) {
+                return e.toString();
+            }
+        } else { // add tasks
+            return ParseAddTask.execute2(current, input);
+        }
+    }
 }

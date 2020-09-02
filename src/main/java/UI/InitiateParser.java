@@ -18,4 +18,12 @@ public class InitiateParser {
             System.out.println(e);
         }
     }
+
+    public static String parser2(String input) {
+        try {
+            return InputManager.parse2(input);
+        } catch (ErrorExceptions e) {
+            return e.toString();
+        }
+    }
 }

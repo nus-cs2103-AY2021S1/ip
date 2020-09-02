@@ -23,4 +23,9 @@ public class AddTodoCommand extends Command {
         String name = getName(input, 1);
         TaskManager.newTask(name, "Todo", null, getFileDir());
     }
+
+    public static String execute2(String input) throws ErrorExceptions {
+        String name = getName(input, 1);
+        return TaskManager.newTask2(name, "Todo", null, getFileDir());
+    }
 }

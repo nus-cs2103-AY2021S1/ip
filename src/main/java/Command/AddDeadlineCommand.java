@@ -22,4 +22,10 @@ public class AddDeadlineCommand extends Command {
         String date = getDate(input, 1);
         TaskManager.newTask(name, "Deadline", date, getFileDir());
     }
+
+    public static String execute2(String input) throws ErrorExceptions {
+        String name = getName(input, 2);
+        String date = getDate(input, 1);
+        return TaskManager.newTask2(name, "Deadline", date, getFileDir());
+    }
 }

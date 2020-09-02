@@ -25,4 +25,10 @@ public class AddEventCommand extends Command {
         String date = getDate(input, 2);
         TaskManager.newTask(name, "Event", date, getFileDir());
     }
+
+    public static String execute2(String input) throws ErrorExceptions {
+        String name = getName(input, 2);
+        String date = getDate(input, 2);
+        return TaskManager.newTask2(name, "Event", date, getFileDir());
+    }
 }
