@@ -14,11 +14,12 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.removeATask(deleteIndex);
         storage.writeData(tasks);
-        ui.printMessage("I have removed this task");
-        ui.printMessage(task.toString());
-        ui.printMessage("You now have " + tasks.getNumberOfTasks() + " tasks left!");
+        StringBuilder str = new StringBuilder("I have removed this task\n");
+        str.append(task.toString());
+        str.append("\nYou now have " + tasks.getNumberOfTasks() + " tasks left!");
+        return str.toString();
     }
 }

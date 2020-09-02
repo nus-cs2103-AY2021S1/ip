@@ -15,9 +15,9 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.completeTask(taskDone);
         storage.writeData(tasks);
-        ui.printMessage(task.toString());
+        return task.toString();
     }
 }

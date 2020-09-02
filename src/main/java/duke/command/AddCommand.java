@@ -17,11 +17,12 @@ public class AddCommand extends Command {
         this.taskToAdd = task;
     }
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addATask(this.taskToAdd);
         storage.writeData(tasks);
-        ui.printMessage("Added new task:");
-        ui.printMessage(taskToAdd.toString());
-        ui.printMessage("You now have " + tasks.getNumberOfTasks() + " tasks!");
+        StringBuilder str = new StringBuilder("Added new task:\n");
+        str.append(taskToAdd.toString());
+        str.append("\nYou now have " + tasks.getNumberOfTasks() + " tasks!");
+        return str.toString();
     }
 }

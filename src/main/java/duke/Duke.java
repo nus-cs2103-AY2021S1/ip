@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 
+
 /**
  * Encapsulates the main Duke class
  */
@@ -12,13 +13,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    /**
-     * Constructs a new Duke instance given a filepath
-     * @param filePath
-     */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("duke.txt");
         try {
             tasks = storage.loadData();
         } catch (DukeException e) {
@@ -27,32 +24,26 @@ public class Duke {
         }
     }
 
-    /**
-     * Runs the main logic
-     */
-    public void run() {
-        ui.welcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.getLine();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printError(e);
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
+
 
     /**
-     * Runs the program
-     * @param args
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
+    public String getResponse(String input) {
+        String output;
+        try{
+            Command c = Parser.parse(input);
+            output = c.execute(tasks,ui,storage);
+
+        } catch (DukeException e) {
+            output = e.toString();
+        }
+
+        return output;
     }
+
+
+
+
 }
