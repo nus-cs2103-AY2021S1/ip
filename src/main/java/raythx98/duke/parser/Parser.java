@@ -50,7 +50,12 @@ public class Parser {
             if (spaceSplit.length < 2) {
                 throw new DukeException("done error");
             }
-            int doneIndex = Integer.parseInt(spaceSplit[1]) - 1;
+            int doneIndex;
+            try {
+                doneIndex = Integer.parseInt(spaceSplit[1]) - 1;
+            } catch (NumberFormatException e) {
+                throw new DukeException("Not number");
+            }
             if (doneIndex < 0 || doneIndex > tasks.getSize() - 1) {
                 throw new InvalidIndexException("Simi number lai de");
             }
@@ -59,7 +64,12 @@ public class Parser {
             if (spaceSplit.length < 2) {
                 throw new DukeException("lol");
             }
-            int deleteIndex = Integer.parseInt(spaceSplit[1]) - 1;
+            int deleteIndex;
+            try {
+                deleteIndex = Integer.parseInt(spaceSplit[1]) - 1;
+            } catch (NumberFormatException e) {
+                throw new DukeException("Not number");
+            }
             if (deleteIndex < 0 || deleteIndex > tasks.getSize() - 1) {
                 throw new InvalidIndexException("Simi number lai de");
             }

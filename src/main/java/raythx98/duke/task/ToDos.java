@@ -1,7 +1,5 @@
 package raythx98.duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -52,19 +50,12 @@ public class ToDos extends Task {
         return tag;
     }
 
-<<<<<<< HEAD:src/main/java/raythx98/duke/task/ToDos.java
     public String toPrint() {
         if (date == null) {
             return super.toPrint();
         } else {
             return super.toPrint() + "|" + date + "|" + by;
         }
-=======
-    public String toPrint(){
-        return date == null
-                ? super.toPrint()
-                : super.toPrint() + "|" + date + "|" + by;
->>>>>>> branch-Level-10:src/main/java/duke/task/ToDos.java
     }
 
     @Override

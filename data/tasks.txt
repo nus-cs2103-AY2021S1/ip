@@ -1,4 +1,6 @@
 T|1|something
 T|0|this|2020-12-31|2021
 D|0|that|2020-11-30|2011
-E|0|lol|2020-10-20|2000
+E|1|lol|2020-10-20|2000
+T|0|something|2020-12-31|2021
+T|0|even more homework omg
