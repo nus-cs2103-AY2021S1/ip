@@ -1,10 +1,21 @@
+package luke;
+
 import java.io.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import luke.exception.*;
+import luke.task.Deadline;
+import luke.task.Event;
+import luke.task.Task;
+import luke.task.Todo;
 
-public class Luke {
+
+public class Main extends Application {
     public static void main(String[] args) {
         File tlFile = new File("./data/", "luke.txt");
         Scanner sc = new Scanner(System.in);
@@ -25,7 +36,7 @@ public class Luke {
                     Deadline newDeadline = createDeadline(input);
                     taskList.writeTasks(tlFile, newDeadline);
                 } catch (EmptyDeadlineException e) {
-                    System.out.printf("Luke:%s\nYou:\n", e.getMessage());
+                    System.out.printf("Luke:%s\nYou:\n", e.getMessßage());
                 } catch (InvalidDeadlineException e) {
                     System.out.printf("Luke:%s\nYou:\n", e.getMessage());
                 }
@@ -77,10 +88,19 @@ public class Luke {
         }
     }
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+
     /**
-     * Creates a Todo object with the given input.
+     * Creates a task.Todo object with the given input.
      *
-     * @param input description of the Todo object
+     * @param input description of the task.Todo object
      * @return the todo object with the given input
      */
     private static Todo createTodo(String input) throws EmptyTodoException {
@@ -93,10 +113,10 @@ public class Luke {
     }
 
     /**
-     * Creates a Deadline object with the given input.
+     * Creates a task.Deadline object with the given input.
      *
-     * @param input description of the Deadline object
-     * @return the Deadline object with the given input
+     * @param input description of the task.Deadline object
+     * @return the task.Deadline object with the given input
      */
     private static Deadline createDeadline(String input) throws EmptyDeadlineException, InvalidDeadlineException {
         String[] deadline = input.split("deadline | /by ");
@@ -110,10 +130,10 @@ public class Luke {
     }
 
     /**
-     * Creates a Event object with the given input.
+     * Creates a task.Event object with the given input.
      *
-     * @param input description of the Event object
-     * @return the Event object with the given input
+     * @param input description of the task.Event object
+     * @return the task.Event object with the given input
      */
     private static Event createEvent(String input) throws EmptyEventException, InvalidEventException {
         String[] event = input.split("event | /at ");
@@ -125,4 +145,5 @@ public class Luke {
             return new Event(event[1], event[2]);
         }
     }
+
 }

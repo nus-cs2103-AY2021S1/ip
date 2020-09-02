@@ -1,3 +1,14 @@
+package luke;
+
+import luke.exception.DeleteIndexOutofboundsException;
+import luke.exception.DoneIndexOutofboundsException;
+import luke.exception.InvalidDeleteException;
+import luke.exception.InvalidDoneException;
+import luke.task.Deadline;
+import luke.task.Event;
+import luke.task.Task;
+import luke.task.Todo;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,19 +29,19 @@ public class TaskList {
     }
 
     /**
-     * Retrieves a Task object that corresponds to the given index.
+     * Retrieves a task.Task object that corresponds to the given index.
      *
-     * @param i index of the Task object
-     * @return the Task object that corresponds to the given index
+     * @param i index of the task.Task object
+     * @return the task.Task object that corresponds to the given index
      */
     public Task getTask(int i) {
         return this.tasks.get(i);
     }
 
     /**
-     * Retrieves the number of tasks for the current TaskList.
+     * Retrieves the number of tasks for the current luke.TaskList.
      *
-     * @return the size of the current TaskList
+     * @return the size of the current luke.TaskList
      */
     public int getSize() {
         return this.tasks.size();
@@ -102,8 +113,7 @@ public class TaskList {
     /**
      * Completes Tasks for the given file.
      *
-     * @param file destination file
-     * @param task newly added task
+     * @param input destination file
      */
     public void completeTask(String input) throws InvalidDoneException, DoneIndexOutofboundsException {
         if (input.equals("done") || input.equals("done ")) {
