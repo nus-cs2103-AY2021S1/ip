@@ -15,7 +15,7 @@ public class Duke {
      * @param filePath The filePath of the file which stores the data.
      */
     public Duke(String filePath) {
-        ui =  new Ui();
+        ui = new Ui();
 
         try {
             storage = new Storage(filePath);

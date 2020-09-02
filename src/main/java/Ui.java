@@ -6,13 +6,13 @@ import java.util.Scanner;
  * to take in user input.
  */
 public class Ui {
-    private Scanner sc;
-    private String LOGO = " ____        _\n"
+    private static final String LOGO = " ____        _\n"
             + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private String LINE = "---------------------------------------------------------";
+    private static final String LINE = "---------------------------------------------------------";
+    private Scanner sc;
 
     /**
      * Instantiates a Ui object with a scanner object.
@@ -92,20 +92,20 @@ public class Ui {
      * Replies the user's command to delete a task.
      * @param t Task that is deleted.
      */
-    public void showDelete(Task t) {
+    public void showDelete(Task t, TaskList tasks) {
         System.out.println("Oki! I've removed this task!");
         System.out.println(t);
-        System.out.println("Now you have " + Task.totalTasks + " tasks in your list!");
+        System.out.println("Now you have " + tasks.getSize() + " tasks in your list!");
     }
 
     /**
      * Replies the user's command to add a task.
      * @param t Task to be added.
      */
-    public void showAdd(Task t) {
+    public void showAdd(Task t, TaskList tasks) {
         System.out.println("Oki! I have added this task:");
         System.out.println(t);
-        System.out.println("Now you have " + Task.totalTasks + " tasks in your list!");
+        System.out.println("Now you have " + tasks.getSize() + " tasks in your list!");
     }
 
     /**

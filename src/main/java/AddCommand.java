@@ -4,9 +4,9 @@
  * and a string array with the task description separated into the task name and date/time.
  */
 public class AddCommand extends Command {
-    public static int TODO = 1;
-    public static int DEADLINE = 2;
-    public static int EVENT = 3;
+    public static final int TODO = 1;
+    public static final int DEADLINE = 2;
+    public static final int EVENT = 3;
 
     private int taskType;
     private String[] taskInfos;
@@ -36,15 +36,15 @@ public class AddCommand extends Command {
         if (this.taskType == TODO) {
             Task t = new Todo(this.taskInfos[0]);
             tasks.addTask(t);
-            ui.showAdd(t);
+            ui.showAdd(t, tasks);
         } else if (this.taskType == DEADLINE) {
             Task t = new Deadline(this.taskInfos[0], this.taskInfos[1]);
             tasks.addTask(t);
-            ui.showAdd(t);
+            ui.showAdd(t, tasks);
         } else {
             Task t = new Event(this.taskInfos[0], this.taskInfos[1]);
             tasks.addTask(t);
-            ui.showAdd(t);
+            ui.showAdd(t, tasks);
         }
 
         storage.updateData(tasks);

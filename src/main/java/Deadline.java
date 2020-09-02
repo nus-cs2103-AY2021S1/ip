@@ -29,7 +29,6 @@ public class Deadline extends Task {
             this.printedFormat = this.by.format(
                     DateTimeFormatter.ofPattern("EEE, d MMM yyyy, HH:mm"));
         } catch (DateTimeParseException ex) {
-            Task.totalTasks--;
             throw new DukeException("You need to use the proper format!\n"
                     + "eg deadline return book /by 2019-10-15 2359");
         }

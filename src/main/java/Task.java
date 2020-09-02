@@ -5,13 +5,10 @@
  * tasks the user has in the list so far.
  */
 public class Task {
+    private static final String TICK = "\u2713";
+    private static final String CROSS = "\u2718";
     private String taskName;
     private boolean isDone;
-    
-    private static String TICK = "\u2713";
-    private static String CROSS = "\u2718";
-    
-    public static int totalTasks = 0;
 
     /**
      * Instantiates a Task object.
@@ -19,7 +16,6 @@ public class Task {
      * @param taskName The description of the task.
      */
     public Task(String taskName) {
-        totalTasks++;
         this.taskName = taskName;
         this.isDone = false;
     }
@@ -47,7 +43,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + (isDone ? TICK : CROSS) +
-                "] " + taskName;
+        return "[" + (isDone ? TICK : CROSS)
+                + "] " + taskName;
     }
 }
