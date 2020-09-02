@@ -43,4 +43,13 @@ public class TaskList {
     public int size() {
         return tasks.size();
     }
+
+    public static String getTaskMessage(List<Task> tasks) {
+        StringBuilder taskMessage = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            String task = String.format("\n\t%d. %s", (i + 1), tasks.get(i));
+            taskMessage.append(task);
+        }
+        return taskMessage.toString();
+    }
 }

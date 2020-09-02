@@ -1,5 +1,6 @@
 package duke;
 
+import duke.ui.Ui;
 import duke.command.Command;
 
 /**
@@ -10,6 +11,13 @@ public class Duke {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
+
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage("data/tasks.txt");
+        tasks = new TaskList(storage.load());
+    }
+
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -34,5 +42,14 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getLocalizedMessage();
+        }
     }
 }

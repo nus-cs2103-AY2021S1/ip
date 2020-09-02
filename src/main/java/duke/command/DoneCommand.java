@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * Represents a done task command.
@@ -29,9 +29,10 @@ public class DoneCommand extends Command {
      * @param taskList List of tasks.
      * @param ui UI to handle user interaction.
      * @param storage Storage to save the task list in the hard disk.
+     * @return Formatted response message.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskNumber > taskList.size() || taskNumber < 1) {
             throw new DukeException("The task number is not found");
         }
@@ -42,5 +43,6 @@ public class DoneCommand extends Command {
         ui.printResponse(response);
         // update task data in the file
         storage.writeFile(taskList);
+        return response;
     }
 }

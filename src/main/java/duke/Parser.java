@@ -87,7 +87,7 @@ public class Parser {
             task = new Event(taskDescription, at);
         } else {
             throw new DukeException(":( Oops!!! I'm sorry, but I don't know what that means "
-                    + ":-(\n\tCommands: list | done | delete | todo | deadline | event");
+                    + ":-(\n\tCommands: list | done | delete | todo | deadline | event | bye");
         }
         return task;
     }

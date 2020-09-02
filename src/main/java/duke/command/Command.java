@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.Task;
 
 /**
@@ -53,7 +53,8 @@ public abstract class Command {
      * @param taskList List of tasks.
      * @param ui UI to handle user interaction.
      * @param storage Storage to save the task list in the hard disk.
+     * @return Formatted response message.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
 }

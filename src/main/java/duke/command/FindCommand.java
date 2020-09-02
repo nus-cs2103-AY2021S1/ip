@@ -5,7 +5,7 @@ import java.util.List;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.Task;
 
 public class FindCommand extends Command {
@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         List<Task> tasks = taskList.getTasks();
         List<Task> matchedTasks = new ArrayList<>();
         for (Task task: tasks) {
@@ -26,14 +26,12 @@ public class FindCommand extends Command {
         }
         if (matchedTasks.size() == 0) {
             ui.printResponse("No task found...");
-            return;
+            return "No task found...";
         }
         StringBuilder taskMessage = new StringBuilder();
         taskMessage.append("Here are the matching tasks in your list:");
-        for (int i = 0; i < matchedTasks.size(); i++) {
-            String task = String.format("\n\t%d.%s", (i + 1), matchedTasks.get(i));
-            taskMessage.append(task);
-        }
+        taskMessage.append(TaskList.getTaskMessage(matchedTasks));
         ui.printResponse(taskMessage.toString());
+        return taskMessage.toString();
     }
 }

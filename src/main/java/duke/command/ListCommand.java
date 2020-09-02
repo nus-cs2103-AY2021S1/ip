@@ -4,7 +4,7 @@ import java.util.List;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.Task;
 
 /**
@@ -19,20 +19,19 @@ public class ListCommand extends Command {
      * @param taskList List of tasks.
      * @param ui UI to handle user interaction.
      * @param storage Storage to save the task list in the hard disk.
+     * @return Formatted response message.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         List<Task> tasks = taskList.getTasks();
         if (tasks.size() == 0) {
             ui.printResponse("No task added yet...");
-            return;
+            return "No task added yet...";
         }
         StringBuilder taskMessage = new StringBuilder();
         taskMessage.append("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            String task = String.format("\n\t%d.%s", (i + 1), tasks.get(i));
-            taskMessage.append(task);
-        }
+        taskMessage.append(TaskList.getTaskMessage(tasks));
         ui.printResponse(taskMessage.toString());
+        return taskMessage.toString();
     }
 }
