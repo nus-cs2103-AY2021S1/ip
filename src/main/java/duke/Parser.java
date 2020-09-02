@@ -33,7 +33,6 @@ public class Parser {
         if (userInput.equals(Command.BYE.value)) {
             ui.sayGoodbye();
             return true;
-            //isExit = true;
 
         } else if (userInput.equals(Command.LIST.value)) {
             tasks.showTasks();
@@ -108,5 +107,81 @@ public class Parser {
             ui.showMeaninglessCommandDescription();
         }
         return false;
+    }
+
+    /**
+     * Displays reply to users' commands
+     *
+     * @param tasks list of current tasks
+     * @param ui UI for client.
+     * @param storage save and display data from database.
+     * @param userInput user's command.
+     * @return boolean terminate when it returns true.
+     * @throws FileNotFoundException If the file path cannot be found.
+     */
+    public static String getUiReply(TaskList tasks, Ui ui, Storage storage, String userInput)
+            throws FileNotFoundException {
+        if (userInput.equals(Command.BYE.value)) {
+            return "Bye. Hope to see you again soon!";
+        } else if (userInput.equals(Command.LIST.value)) {
+            return tasks.showTasksAsString();
+        } else if (userInput.startsWith(Command.DONE.value)) {
+            try {
+                int taskPosition = Integer.parseInt(userInput.substring(5));
+                return tasks.setDoneAsString(taskPosition);
+
+            } catch (StringIndexOutOfBoundsException e) {
+                ui.showInvalidFormatCommandDescription();
+            } catch (NumberFormatException e) {
+                ui.showInvalidFormatCommandDescription();
+            }
+        } else if (userInput.startsWith(Command.TODO.value)) {
+            try {
+                String description = userInput.trim().substring(5);
+                String result = tasks.addToDoAsString(description);
+                storage.saveTasks(tasks.getTasksList());
+                return result;
+            } catch (StringIndexOutOfBoundsException e) {
+                ui.showInvalidFormatCommandDescription();
+            }
+
+        } else if (userInput.startsWith(Command.DEADLINE.value)) {
+            try {
+                int spacePosition = userInput.indexOf(" ");
+                int keywordPosition = userInput.indexOf("/by");
+                String description = userInput.substring(spacePosition + 1, keywordPosition - 1);
+                String by = userInput.substring(keywordPosition + 4);
+                String result = tasks.addDeadlineAsString(description, by);
+                storage.saveTasks(tasks.getTasksList());
+                return result;
+            } catch (StringIndexOutOfBoundsException e) {
+                ui.showInvalidFormatCommandDescription();
+            }
+
+        } else if (userInput.startsWith(Command.EVENT.value)) {
+            try {
+                int spacePosition = userInput.indexOf(" ");
+                int keywordPosition = userInput.indexOf("/at");
+                String description = userInput.substring(spacePosition + 1, keywordPosition - 1);
+                String at = userInput.substring(keywordPosition + 4);
+                String result = tasks.addEventAsString(description, at);
+                storage.saveTasks(tasks.getTasksList());
+                return result;
+
+            } catch (StringIndexOutOfBoundsException e) {
+                ui.showInvalidFormatCommandDescription();
+            }
+        } else if (userInput.startsWith(Command.DELETE.value)) {
+            try {
+                int taskPosition = Integer.parseInt(userInput.substring(7));
+                String result = tasks.deleteTaskAsString(taskPosition);
+                storage.saveTasks(tasks.getTasksList());
+                return result;
+
+            } catch (StringIndexOutOfBoundsException e) {
+                ui.showInvalidFormatCommandDescription();
+            }
+        }
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 }

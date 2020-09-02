@@ -56,6 +56,17 @@ public class Duke extends Application {
         stage.show(); // Render the stage.
     }
 
+    /**
+     * Gets message to UI display.
+     *
+     * @param input users' input
+     * @return the reply to the specific command of users.
+     * @throws FileNotFoundException If the file path cannot be found
+     */
+    public String getResponse(String input) throws FileNotFoundException {
+        return Parser.getUiReply(tasks, ui, storage, input);
+    }
+
     public static void main(String[] args) throws DukeException, FileNotFoundException {
         new Duke("./data/duke.txt").run();
     }

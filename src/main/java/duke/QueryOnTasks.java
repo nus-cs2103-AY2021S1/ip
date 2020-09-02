@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class QueryOnTasks {
     /**
-     * Filter tasks by date.
+     * Filters tasks by date.
      *
      * @param list list of tasks.
      * @param date date to filter.
@@ -18,7 +18,7 @@ public class QueryOnTasks {
     }
 
     /**
-     * Filter tasks by month.
+     * Filters tasks by month.
      *
      * @param list list of tasks.
      * @param month month to filter.
@@ -30,7 +30,7 @@ public class QueryOnTasks {
     }
 
     /**
-     * Filter tasks by year.
+     * Filters tasks by year.
      *
      * @param list list of tasks.
      * @param year year to filter.

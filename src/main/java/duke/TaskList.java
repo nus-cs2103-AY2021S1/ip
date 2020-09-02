@@ -26,7 +26,7 @@ public class TaskList {
     }
 
     /**
-     * Get current list of tasks.
+     * Gets current list of tasks.
      *
      * @return current list of tasks.
      */
@@ -47,7 +47,21 @@ public class TaskList {
     }
 
     /**
-     * Set the task at the particular position as done.
+     * Gets reply to show all the tasks to the user.
+     *
+     * @return the reply to display all the tasks as string.
+     */
+    public String showTasksAsString() {
+        String result = "___________________________________________\n";
+        result += "        Here are the tasks in your list:\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            result += "            " + (i + 1) + "." + tasks.get(i) + "\n";
+        }
+        result += "___________________________________________";
+        return result;
+    }
+    /**
+     * Sets the task at the particular position as done.
      *
      * @param taskPosition position of the task.
      */
@@ -60,7 +74,22 @@ public class TaskList {
     }
 
     /**
-     * Add a task type Todo.
+     * Sets the task at the particular position as done and display message.
+     *
+     * @param taskPosition position of the task.
+     * @return the reply to DONE task as string.
+     */
+    public String setDoneAsString(int taskPosition) {
+        tasks.get(taskPosition - 1).markAsDone();
+        String result = "___________________________________________\n";
+        result += "        Nice! I've marked this task as done:\n";
+        result += "            " + tasks.get(taskPosition - 1) + "\n";
+        result += "___________________________________________";
+        return result;
+    }
+
+    /**
+     * Adds a task type Todo.
      *
      * @param description description of the task.
      */
@@ -75,7 +104,24 @@ public class TaskList {
     }
 
     /**
-     * Add a task type Deadline
+     * Adds a task type Todo and display message.
+     *
+     * @param description description of the task.
+     * @return the reply to Todo task as string.
+     */
+    public String addToDoAsString(String description) {
+        Task toDo = new Todo(description);
+        tasks.add(toDo);
+        String result = "___________________________________________\n";
+        result += "        Got it. I've added this task:\n";
+        result += "            " + toDo + "\n";
+        result += "        Now you have " + tasks.size() + " tasks in the list.\n";
+        result += "___________________________________________";
+        return result;
+    }
+
+    /**
+     * Adds a task type Deadline
      *
      * @param description description of the task.
      * @param by time to finish the task.
@@ -91,7 +137,25 @@ public class TaskList {
     }
 
     /**
-     * Add a task type Event.
+     * Adds a task type Deadline and display message.
+     *
+     * @param description description of the task.
+     * @param by time to finish the task.
+     * @return the reply to Deadline task as string.
+     */
+    public String addDeadlineAsString(String description, String by) {
+        Task deadline = new Deadline(description, by);
+        tasks.add(deadline);
+        String result = "___________________________________________\n";
+        result += "        Got it. I've added this task:\n";
+        result += "            " + deadline + "\n";
+        result += "        Now you have " + tasks.size() + " tasks in the list.\n";
+        result += "___________________________________________";
+        return result;
+    }
+
+    /**
+     * Adds a task type Event.
      *
      * @param description description of the task.
      * @param at time that event occurs.
@@ -107,7 +171,25 @@ public class TaskList {
     }
 
     /**
-     * Delete task at the particular position.
+     * Adds a task type Event and display message.
+     *
+     * @param description
+     * @param by
+     * @return the reply to Event task as string.
+     */
+    public String addEventAsString(String description, String by) {
+        Task event = new Event(description, by);
+        tasks.add(event);
+        String result = "___________________________________________\n";
+        result += "        Got it. I've added this task:\n";
+        result += "            " + event + "\n";
+        result += "        Now you have " + tasks.size() + " tasks in the list.\n";
+        result += "___________________________________________";
+        return result;
+    }
+
+    /**
+     * Deletes task at the particular position.
      *
      * @param taskPosition position of the task that user wants to delete.
      */
@@ -120,7 +202,21 @@ public class TaskList {
     }
 
     /**
-     * Filter tasks by a particular condition.
+     * Deletes task at the particular position and display message.
+     *
+     * @param taskPosition position of the task that user wants to delete.
+     * @return the reply to DELETE command as string.
+     */
+    public String deleteTaskAsString(int taskPosition) {
+        String result = "___________________________________________\n";
+        result += "        Noted. I've removed this task:\n";
+        result += "            " + tasks.remove(taskPosition - 1) + "\n";
+        result += "        Now you have " + tasks.size() + " tasks in the list.\n";
+        result += "___________________________________________";
+        return result;
+    }
+    /**
+     * Filters tasks by a particular condition.
      *
      * @param inputArray an array of input information.
      */
@@ -154,7 +250,7 @@ public class TaskList {
     }
 
     /**
-     * Find tasks by a keyword.
+     * Finds tasks by a keyword.
      *
      * @param keyword keyword to find the tasks.
      */
