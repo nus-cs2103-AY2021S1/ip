@@ -63,4 +63,7 @@ public class Duke {
     public String getResponse(String input) {
         return Parser.parseUserInput(input);
     }
+    public void save() {
+        storage.writeTasks(tasks);
+    }
 }
