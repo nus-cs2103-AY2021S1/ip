@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeInvalidKeywordException;
-import duke.exception.DukeInvalidListNumberInputException;
+import duke.exception.DukeInvalidIndexException;
 import duke.exception.DukeInvalidTaskDescriptionException;
 import duke.exception.DukeInvalidTaskTimeException;
 import duke.exception.DukeLoadingErrorException;
@@ -45,7 +45,7 @@ public abstract class Command {
      * @param output      The platform through which both user and chat bot interact.
      * @param storage The object responsible for saving and loading data.
      * @return A command result with the appropriate response for the user.
-     * @throws DukeInvalidListNumberInputException If an invalid list number is given.
+     * @throws DukeInvalidIndexException If an invalid list number is given.
      * @throws DukeInvalidTaskTimeException        If an invalid task time is given.
      * @throws DukeInvalidTaskDescriptionException If an invalid task description is given.
      * @throws DukeUnknownInputException           If the user input cannot be understood.
@@ -53,7 +53,7 @@ public abstract class Command {
      * @throws DukeInvalidKeywordException         If the user input contains an invalid keyword.
      */
     public abstract CommandResult execute(TaskList tasks, Output output, Storage storage)
-            throws DukeInvalidListNumberInputException, DukeInvalidTaskTimeException,
+            throws DukeInvalidIndexException, DukeInvalidTaskTimeException,
             DukeInvalidTaskDescriptionException, DukeUnknownInputException,
             DukeLoadingErrorException, DukeInvalidKeywordException;
 

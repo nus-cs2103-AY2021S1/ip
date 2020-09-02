@@ -8,7 +8,7 @@ import java.util.List;
 import duke.exception.DukeInvalidDeadlineTimeException;
 import duke.exception.DukeInvalidEventTimeException;
 import duke.exception.DukeInvalidKeywordException;
-import duke.exception.DukeInvalidListNumberInputException;
+import duke.exception.DukeInvalidIndexException;
 import duke.exception.DukeInvalidTaskDescriptionException;
 import duke.exception.DukeInvalidTaskTimeException;
 
@@ -22,7 +22,7 @@ public class TaskList {
     private final List<Task> tasks;
 
     /**
-     * Class connstructor with a pre-loaded list of tasks.
+     * Class constructor with a pre-loaded list of tasks.
      *
      * @param tasks The task list to be loaded.
      */
@@ -60,9 +60,9 @@ public class TaskList {
      *
      * @param input A string input representing the specific task to complete.
      * @return The task that has been completed itself.
-     * @throws DukeInvalidListNumberInputException If the task number provided is invalid.
+     * @throws DukeInvalidIndexException If the task number provided is invalid.
      */
-    public Task completeTask(String input) throws DukeInvalidListNumberInputException {
+    public Task completeTask(String input) throws DukeInvalidIndexException {
         try {
             // Obtain index within list of tasks
             int index = Integer.parseInt(input.substring(5)) - 1;
@@ -71,7 +71,7 @@ public class TaskList {
             task.markAsDone();
             return task;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeInvalidListNumberInputException();
+            throw new DukeInvalidIndexException();
         }
     }
 
@@ -80,9 +80,9 @@ public class TaskList {
      *
      * @param input A string input representing the specific task to delete.
      * @return The task that has been deleted itself.
-     * @throws DukeInvalidListNumberInputException If the task number provided is invalid.
+     * @throws DukeInvalidIndexException If the task number provided is invalid.
      */
-    public Task deleteTask(String input) throws DukeInvalidListNumberInputException {
+    public Task deleteTask(String input) throws DukeInvalidIndexException {
         try {
             // Obtain index within list of tasks
             int index = Integer.parseInt(input.substring(7)) - 1;
@@ -91,7 +91,7 @@ public class TaskList {
             tasks.remove(index);
             return task;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeInvalidListNumberInputException();
+            throw new DukeInvalidIndexException();
         }
     }
 

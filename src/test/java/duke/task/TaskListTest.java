@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeInvalidKeywordException;
-import duke.exception.DukeInvalidListNumberInputException;
+import duke.exception.DukeInvalidIndexException;
 import duke.exception.DukeInvalidTaskDescriptionException;
 import duke.exception.DukeInvalidTaskTimeException;
 
@@ -85,7 +85,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void completeTask_validInput_success() throws DukeInvalidListNumberInputException {
+    public void completeTask_validInput_success() throws DukeInvalidIndexException {
         toDo.markAsDone();
         assertEquals(toDo.toString(),
                 createTaskList().completeTask("done 1").toString());
@@ -97,13 +97,13 @@ public class TaskListTest {
             toDo.markAsDone();
             assertEquals(toDo.toString(),
                     createTaskList().completeTask("done 1000").toString());
-        } catch (DukeInvalidListNumberInputException e) {
+        } catch (DukeInvalidIndexException e) {
             assertEquals("ERROR: Invalid list number input!", e.toString());
         }
     }
 
     @Test
-    public void deleteTask_validInput_success() throws DukeInvalidListNumberInputException {
+    public void deleteTask_validInput_success() throws DukeInvalidIndexException {
         assertEquals(toDo.toString(),
                 createTaskList().deleteTask("delete 1").toString());
     }
@@ -113,7 +113,7 @@ public class TaskListTest {
         try {
             assertEquals(toDo.toString(),
                     createTaskList().deleteTask("delete 1000").toString());
-        } catch (DukeInvalidListNumberInputException e) {
+        } catch (DukeInvalidIndexException e) {
             assertEquals("ERROR: Invalid list number input!", e.toString());
         }
     }

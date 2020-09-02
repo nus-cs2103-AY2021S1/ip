@@ -1,5 +1,7 @@
 package duke.exception;
 
+import duke.messages.Message;
+
 /**
  * Represents a general exception specific to Duke.
  */
@@ -12,7 +14,7 @@ public class DukeException extends Exception {
      */
     @Override
     public String toString() {
-        return "ERROR";
+        return Message.ERROR;
     }
 
 }

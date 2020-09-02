@@ -1,13 +1,15 @@
 package duke.exception;
 
+import duke.messages.Message;
+
 /**
  * Represents a Duke exception in which the list number input is invalid.
  */
-public class DukeInvalidListNumberInputException extends DukeException {
+public class DukeInvalidIndexException extends DukeException {
 
     @Override
     public String toString() {
-        return "ERROR: Invalid list number input!";
+        return Message.ERROR_INVALID_INDEX;
     }
 
 }

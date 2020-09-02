@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exception.DukeInvalidListNumberInputException;
+import duke.exception.DukeInvalidIndexException;
 import duke.exception.DukeLoadingErrorException;
 import duke.messages.Output;
 import duke.storage.Storage;
@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute(TaskList tasks, Output output, Storage storage)
-            throws DukeInvalidListNumberInputException, DukeLoadingErrorException {
+            throws DukeInvalidIndexException, DukeLoadingErrorException {
         String response = output.printDeleteTaskChatWindow(tasks.deleteTask(input), tasks.getTasksSize());
         storage.save(tasks.getTasks());
         return new CommandResult(response);

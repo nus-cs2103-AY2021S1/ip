@@ -1,5 +1,7 @@
 package duke.exception;
 
+import duke.messages.Message;
+
 /**
  * Represents a Duke exception in which the deadline time input is invalid.
  */
@@ -7,8 +9,7 @@ public class DukeInvalidDeadlineTimeException extends DukeInvalidTaskTimeExcepti
 
     @Override
     public String toString() {
-        return "ERROR: Usage: <deadline> <description> /by <time>\n"
-                + "Time formatting: dd-MM-yyyy HH:mm";
+        return String.format("%s\n%s", Message.ERROR_DEADLINE_TIME, Message.ERROR_TIME_FORMATTING);
     }
 
 }

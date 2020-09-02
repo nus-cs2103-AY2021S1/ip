@@ -72,8 +72,18 @@ public class MainWindow extends AnchorPane {
             return;
         }
         if (result.isExit()) {
-            // TODO: add a delay
-            Platform.exit();
+            // TODO
+            Platform.runLater(() -> {
+                try {
+                    //Show the bye message for 1.5seconds before exit.
+                    Thread.sleep(1500);
+                    Platform.exit();
+                } catch (InterruptedException e) {
+                    dialogContainer.getChildren().addAll(
+                            DialogBox.getUserDialog(e.getMessage(), dukeImage)
+                    );
+                }
+            });
         }
     }
 
