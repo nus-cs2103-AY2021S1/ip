@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.exception.EmptyTaskException;
 import duke.exception.InvalidDateException;
 import duke.exception.MissingDateException;
 
@@ -28,17 +27,12 @@ public class Deadline extends Task {
      *
      * @param task Description of task to be converted to a Deadline.
      * @return Deadline object representing the given description.
-     * @throws EmptyTaskException If there is no text after "deadline ".
      * @throws MissingDateException If " /by " is not given or if there is no date provided.
      * @throws InvalidDateException If the date provided is in the wrong format.
      */
     public static Deadline create(String task)
-            throws EmptyTaskException, MissingDateException, InvalidDateException {
-        if (task.length() <= 9) {
-            throw new EmptyTaskException("deadline");
-        }
-
-        String[] taskInfo = task.substring(9).split(" /by ", 2);
+            throws MissingDateException, InvalidDateException {
+        String[] taskInfo = task.split(" /by ", 2);
         if (taskInfo.length < 2) {
             throw new MissingDateException();
         }

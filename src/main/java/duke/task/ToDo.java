@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.exception.EmptyTaskException;
-
 /**
  * Class representing a generic task with no dates attached.
  */
@@ -15,13 +13,9 @@ public class ToDo extends Task {
      *
      * @param task Command describing the ToDo to be created.
      * @return ToDo object representing the task description.
-     * @throws EmptyTaskException If no text is provided after "todo ".
      */
-    public static ToDo create(String task) throws EmptyTaskException {
-        if (task.length() <= 5) {
-            throw new EmptyTaskException("todo");
-        }
-        return new ToDo(task.substring(5));
+    public static ToDo create(String task) {
+        return new ToDo(task);
     }
 
     /**

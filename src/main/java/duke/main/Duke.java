@@ -7,24 +7,18 @@ package duke.main;
  */
 public class Duke {
     private final Parser parser;
-    private final TaskList taskList;
-    private final Storage storage;
 
     /**
      * Constructs a Duke object that reads data from the default file path.
      * The file path is taken to be data/tasks.txt
      */
     public Duke() {
-        this.storage = new Storage("data/tasks.txt");
-        this.taskList = storage.getTasksFromFile();
-        this.parser = new Parser(taskList);
+        Storage storage = new Storage("data/tasks.txt");
+        TaskList taskList = storage.getTasksFromFile();
+        this.parser = new Parser(storage, taskList);
     }
 
     public String getResponse(String input) {
-        if (input.equals("bye")) {
-            storage.writeToFile(taskList);
-            return "All changes saved!";
-        }
         return parser.parse(input);
     }
 

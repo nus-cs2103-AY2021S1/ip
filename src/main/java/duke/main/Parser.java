@@ -1,6 +1,5 @@
 package duke.main;
 
-import duke.exception.EmptyTaskException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDateException;
 import duke.exception.InvalidIndexException;
@@ -11,10 +10,16 @@ import duke.task.Task;
  * Parser is a class used by Duke to interpret user inputs as commands.
  */
 public class Parser {
+    private static final String BYE = "All changes saved, hope to see you again!";
+    private static final String NO_TASK_FOUND = "Sorry, there are no tasks that "
+            + "match your description!";
+
+    private final Storage storage;
     private final TaskList taskList;
     private StringBuilder reply = new StringBuilder();
 
-    public Parser(TaskList taskList) {
+    Parser(Storage storage, TaskList taskList) {
+        this.storage = storage;
         this.taskList = taskList;
     }
 
@@ -27,24 +32,56 @@ public class Parser {
      * @return Output message upon execution of command.
      */
     public String parse(String input) {
-        try {
-            if (input.equals("list")) {
-                list();
-            } else if (input.startsWith("done")) {
-                done(input);
-            } else if (input.startsWith("delete")) {
-                delete(input);
-            } else if (input.startsWith("find")) {
-                find(input);
-            } else {
-                add(input);
-            }
-        } catch (InvalidCommandException e) {
-            reply.append(e.toString());
+        if (input.equals("list")) {
+            list();
+        } else if (input.equals("bye")) {
+            close();
+        } else {
+            operateOnTaskList(input);
         }
+
         StringBuilder output = reply;
         reply = new StringBuilder();
         return output.toString();
+    }
+
+    private void operateOnTaskList(String input) {
+        try {
+            String command = extractCommand(input);
+            switch (command) {
+            case "done":
+                done(input.substring(5));
+                break;
+            case "delete":
+                delete(input.substring(7));
+                break;
+            case "find":
+                find(input.substring(5));
+                break;
+            case "todo":
+                addToDo(input.substring(5));
+                break;
+            case "event":
+                addEvent(input.substring(6));
+                break;
+            case "deadline":
+                addDeadline(input.substring(9));
+                break;
+            default:
+                throw new InvalidCommandException();
+            }
+        } catch (InvalidCommandException e) {
+            reply.append(e);
+        }
+    }
+
+    private String extractCommand(String input) throws InvalidCommandException {
+        int spaceIndex = input.indexOf(' ');
+        if (spaceIndex > 0) {
+            return input.substring(0, spaceIndex);
+        } else {
+            throw new InvalidCommandException();
+        }
     }
 
     private void list() {
@@ -53,69 +90,80 @@ public class Parser {
                 .append(taskList);
     }
 
-    private void done(String input) throws InvalidCommandException {
-        if (input.length() != 6) {
-            throw new InvalidCommandException();
-        } else {
-            try {
-                int index = Integer.parseInt(input.substring(5)) - 1;
-                Task completed = taskList.complete(index);
-                reply.append("Well done! The following task is complete:")
-                        .append(System.lineSeparator())
-                        .append(completed);
-            } catch (InvalidIndexException e) {
-                reply.append(e.toString());
-            }
+    private void close() {
+        storage.writeToFile(taskList);
+        reply.append(BYE);
+    }
+
+    private void done(String taskNumber) {
+        try {
+            int index = Integer.parseInt(taskNumber) - 1;
+            Task completed = taskList.complete(index);
+            reply.append("Well done! The following task is complete:")
+                    .append(System.lineSeparator())
+                    .append(completed);
+        } catch (InvalidIndexException e) {
+            reply.append(e.toString());
         }
     }
 
-    private void delete(String input) throws InvalidCommandException {
-        if (input.length() != 8) {
-            throw new InvalidCommandException();
-        } else {
-            try {
-                int index = Integer.parseInt(input.substring(7)) - 1;
-                Task deleted = taskList.delete(index);
-                reply.append("Noted, I have removed the below task:")
-                        .append(System.lineSeparator())
-                        .append(deleted)
-                        .append(System.lineSeparator())
-                        .append("Now you have ")
-                        .append(taskList.size())
-                        .append(" task(s) left");
-            } catch (InvalidIndexException e) {
-                reply.append(e.toString());
-            }
+    private void delete(String taskNumber) {
+        try {
+            int index = Integer.parseInt(taskNumber) - 1;
+            Task deleted = taskList.delete(index);
+            reply.append("Noted, I have removed the below task:")
+                    .append(System.lineSeparator())
+                    .append(deleted)
+                    .append(System.lineSeparator())
+                    .append("Now you have ")
+                    .append(taskList.size())
+                    .append(" task(s) left");
+        } catch (InvalidIndexException e) {
+            reply.append(e.toString());
         }
     }
 
-    private void find(String input) throws InvalidCommandException {
-        if (input.length() <= 5 || !input.startsWith("find ")) {
-            throw new InvalidCommandException();
-        }
-        String searchString = input.substring(5);
+    private void find(String searchString) {
         TaskList searchResults = taskList.find(searchString);
         if (searchResults.size() > 0) {
             reply.append("The following task(s) match your search:")
                     .append(System.lineSeparator())
                     .append(searchResults);
         } else {
-            reply.append("Sorry, there are no tasks that match your description!");
+            reply.append(NO_TASK_FOUND);
         }
     }
 
-    private void add(String input) throws InvalidCommandException {
+    private void addToDo(String details) {
+        Task toDo = taskList.addToDo(details);
+        generateAddTaskMessage(toDo);
+    }
+
+    private void addEvent(String details) {
         try {
-            Task newTask = taskList.add(input);
-            reply.append("Got it, I have added this task:")
-                    .append(System.lineSeparator())
-                    .append(newTask)
-                    .append(System.lineSeparator())
-                    .append("You now have ")
-                    .append(taskList.size())
-                    .append(" task(s) in this list");
-        } catch (InvalidDateException | EmptyTaskException | MissingDateException e) {
-            reply.append(e.toString());
+            Task event = taskList.addEvent(details);
+            generateAddTaskMessage(event);
+        } catch (MissingDateException | InvalidDateException e) {
+            reply.append(e);
         }
+    }
+
+    private void addDeadline(String details) {
+        try {
+            Task deadline = taskList.addDeadline(details);
+            generateAddTaskMessage(deadline);
+        } catch (MissingDateException | InvalidDateException e) {
+            reply.append(e);
+        }
+    }
+
+    private void generateAddTaskMessage(Task task) {
+        reply.append("Got it, I have added this task:")
+                .append(System.lineSeparator())
+                .append(task)
+                .append(System.lineSeparator())
+                .append("You now have ")
+                .append(taskList.size())
+                .append(" task(s) in this list");
     }
 }

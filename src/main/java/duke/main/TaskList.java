@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.exception.EmptyTaskException;
-import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDateException;
 import duke.exception.InvalidIndexException;
 import duke.exception.MissingDateException;
@@ -23,7 +21,7 @@ import duke.task.ToDo;
 public class TaskList {
     private final List<Task> tasks;
 
-    TaskList(File file) {
+    public TaskList(File file) {
         this.tasks = initTasks(file);
     }
 
@@ -58,9 +56,7 @@ public class TaskList {
                     task = Event.createFromFile(strings[2], strings[3]);
                     break;
                 default:
-                    System.out.println(Ui.LINE + "\n"
-                            + "Hmm, something's wrong with this task\n"
-                            + Ui.LINE);
+                    System.out.println("Hmm, something's wrong with this task");
                     break;
                 }
                 if (task != null) {
@@ -82,7 +78,7 @@ public class TaskList {
      *
      * @return String representation of a saved TaskList.
      */
-    String toSaveFormat() {
+    public String toSaveFormat() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Task task : tasks) {
             stringBuilder.append(task.toDataString())
@@ -95,32 +91,42 @@ public class TaskList {
     }
 
     /**
-     * Adds a Task object to the list based on a user command.
-     * If the command starts with "todo" a ToDo task is added.
-     * If it starts with "deadline" a DeadLine task is added.
-     * If it starts with "event" an Event task is created.
-     *
-     * @param task Command describing the kind of task and its details.
-     * @return Newly added task.
-     * @throws MissingDateException If a date is not provided for an Event or Deadline.
-     * @throws InvalidDateException If the date provided is not in the correct format.
-     * @throws InvalidCommandException If the command does not match either Tasks (case sensitive).
-     * @throws EmptyTaskException If no task description is provided in the command.
+     * Creates a new ToDo instance and adds it to the list.
+     * @param details Description of task to create.
+     * @return Newly-created task.
      */
-    Task add(String task) throws MissingDateException,
-            InvalidDateException, InvalidCommandException, EmptyTaskException {
-        Task newTask;
-        if (task.startsWith("todo")) {
-            newTask = ToDo.create(task);
-        } else if (task.startsWith("deadline")) {
-            newTask = Deadline.create(task);
-        } else if (task.startsWith("event")) {
-            newTask = Event.create(task);
-        } else {
-            throw new InvalidCommandException();
-        }
-        tasks.add(newTask);
-        return newTask;
+    public ToDo addToDo(String details) {
+        ToDo toDo = ToDo.create(details);
+        tasks.add(toDo);
+        return toDo;
+    }
+
+    /**
+     * Creates a new Event instance and adds it to the list.
+     * @param details Description of task to create.
+     * @return Newly-created task.
+     * @throws MissingDateException If date field is missing.
+     * @throws InvalidDateException If date is not provided in the correct format.
+     */
+    public Event addEvent(String details)
+            throws MissingDateException, InvalidDateException {
+        Event event = Event.create(details);
+        tasks.add(event);
+        return event;
+    }
+
+    /**
+     * Creates a new Deadline instance and adds it to the list.
+     * @param details Description of task to create.
+     * @return Newly-created task.
+     * @throws MissingDateException If date field is missing.
+     * @throws InvalidDateException If date is not provided in the correct format.
+     */
+    public Deadline addDeadline(String details)
+            throws MissingDateException, InvalidDateException {
+        Deadline deadline = Deadline.create(details);
+        tasks.add(deadline);
+        return deadline;
     }
 
     /**
@@ -130,7 +136,7 @@ public class TaskList {
      * @return Deleted Task object represented by the specified index.
      * @throws InvalidIndexException If index lies outside the boundaries of the list.
      */
-    Task delete(int index) throws InvalidIndexException {
+    public Task delete(int index) throws InvalidIndexException {
         if (index < 0 || index >= tasks.size()) {
             throw new InvalidIndexException();
         }
@@ -144,7 +150,7 @@ public class TaskList {
      * @return Completed Task object represented by the specified index.
      * @throws InvalidIndexException If index lies outside boundaries of the list.
      */
-    Task complete(int index) throws InvalidIndexException {
+    public Task complete(int index) throws InvalidIndexException {
         if (index < 0 || index >= tasks.size()) {
             throw new InvalidIndexException();
         }
@@ -154,21 +160,12 @@ public class TaskList {
     }
 
     /**
-     * Returns the length of the list of Tasks.
-     *
-     * @return Length of TaskList contents.
-     */
-    int size() {
-        return tasks.size();
-    }
-
-    /**
      * Returns a TaskList containing all tasks with a given keyword in the description.
      *
      * @param search Keyword to filter tasks by.
      * @return TaskList containing all tasks that match the keyword.
      */
-    TaskList find(String search) {
+    public TaskList find(String search) {
         List<Task> filtered = new ArrayList<>();
         for (Task task : tasks) {
             if (task.contains(search)) {
@@ -176,6 +173,15 @@ public class TaskList {
             }
         }
         return new TaskList(filtered);
+    }
+
+    /**
+     * Returns the length of the list of Tasks.
+     *
+     * @return Length of TaskList contents.
+     */
+    public int size() {
+        return tasks.size();
     }
 
     @Override

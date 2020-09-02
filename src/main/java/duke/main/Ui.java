@@ -12,12 +12,15 @@ public class Ui {
             + "What can I do for you?";
     private static final String FAREWELL = "Sad to see you go!";
 
-    private final Parser parser;
+    private Parser parser;
     private final Scanner scanner;
 
     public Ui(TaskList taskList) {
-        this.parser = new Parser(taskList);
         this.scanner = new Scanner(System.in);
+    }
+
+    public void setParser(Parser parser) {
+        this.parser = parser;
     }
 
     /**
