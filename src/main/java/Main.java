@@ -1,5 +1,4 @@
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +13,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        //Scroll down to the end every time dialogContainer's height changes.
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

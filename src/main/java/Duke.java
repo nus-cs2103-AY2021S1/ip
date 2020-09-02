@@ -7,14 +7,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class Duke extends Application {
+public class Duke {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -50,7 +49,7 @@ public class Duke extends Application {
 
     }
 
-    @Override
+    /*@Override
     public void start(Stage stage) {
         Label helloWorld = new Label("Hello World!"); // Creating a new Label control
         Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
@@ -124,15 +123,15 @@ public class Duke extends Application {
             handleUserInput();
         });
 
-    }
+    }*/
 
-    private Label getDialogLabel(String text) {
+    /* private Label getDialogLabel(String text) {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setFont(Font.font(50));
         textToAdd.setWrapText(true);
         return textToAdd;
-    }
+    } */
 
     /**
      * Iteration 2:

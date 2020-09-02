@@ -8,10 +8,10 @@ public class Ui {
     /**
      * Prints the default welcome message.
      */
-    public void printWelcome() {
-        System.out.println("--------------------------------------");
-        System.out.println("Hello from doge");
-        System.out.println("______________________$$$$$$$$\n"
+    public static String printWelcome() {
+        String welcomeMessage = ("--------------------------------------\n")
+                + "Hello from doge\n"
+                + "______________________$$$$$$$$\n"
                 + "_______________$$$$$$$________$$$$$$$$$\n"
                 + "_____________$$________________________$$$$\n"
                 + "____________$$_____________________________$$\n"
@@ -61,9 +61,10 @@ public class Ui {
                 + "_____$$__$$__$$__$$_$______________________$$__________$$\n"
                 + "______$$$$__$___$__$$______________________$$____________$\n"
                 + "_______$$___$___$__$________________________$$_$__$$__$$__$\n"
-                + "_________$$$$$$$$$$__________________________$$_$_$$$$$$$$\n");
-        System.out.println("What can this good boi do for you?");
-        System.out.println("--------------------------------------");
+                + "_________$$$$$$$$$$__________________________$$_$_$$$$$$$$\n"
+                + "What can this good boi do for you?\n"
+                + "--------------------------------------";
+        return welcomeMessage;
     }
 
     /**
@@ -106,7 +107,7 @@ public class Ui {
         returnStr = "--------------------------------------" + "\n"
                 + "Such wow! I have completed the following task!" + "\n"
                 + task + " [" + taskStatus + "]" + "\n"
-                + "--------------------------------------";
+                + "--------------------------------------\n";
         /*System.out.println("--------------------------------------");
         System.out.println("Such wow! I have completed the following task!");
         System.out.println(task + " [" + taskStatus + "]");
@@ -138,7 +139,7 @@ public class Ui {
         String returnStr;
         returnStr = "--------------------------------------" + "\n"
                 + "Added to list : " + print + "\n"
-                + "--------------------------------------";
+                + "--------------------------------------\n";
         /*System.out.println("--------------------------------------");
         //System.out.println("Added to task list : " + print);
         System.out.println("Added to list : " + print);
