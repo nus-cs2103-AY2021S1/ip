@@ -1,6 +1,5 @@
 package duke;
 
-import java.awt.desktop.SystemSleepEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
