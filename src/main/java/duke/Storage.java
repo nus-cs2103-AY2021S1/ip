@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import main.java.duke.tasks.Task;
 import main.java.duke.tasks.Deadline;
 import main.java.duke.tasks.Todo;
 import main.java.duke.tasks.Event;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -60,7 +63,6 @@ public class Storage {
                     }
                     list.add(event);
                     break;
-                default:
                 }
             }
             return list;

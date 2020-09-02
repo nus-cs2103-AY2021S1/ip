@@ -8,8 +8,8 @@ import main.java.duke.tasks.Task;
 
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
-    public static final String MESSAGE_DONE_ACKNOWLEDGEMENT = "Nice I've digested the following: ";
-    public static final String MESSAGE_DONE_END = "Now I'm hungry again! FEED ME MORE :3";
+    private static final String MESSAGE_DONE_ACKNOWLEDGEMENT = "Nice I've digested the following: ";
+    private static final String MESSAGE_DONE_END = "Now I'm hungry again! FEED ME MORE :3";
     private int taskNum;
 
     public DoneCommand(int taskNum) {
@@ -25,4 +25,5 @@ public class DoneCommand extends Command {
                 task.toString(), MESSAGE_DONE_END));
 
     }
+
 }

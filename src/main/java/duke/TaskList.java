@@ -1,6 +1,7 @@
 package main.java.duke;
 
 import java.util.ArrayList;
+
 import main.java.duke.tasks.Task;
 
 public class TaskList {

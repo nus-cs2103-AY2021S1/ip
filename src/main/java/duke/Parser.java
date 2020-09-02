@@ -1,7 +1,15 @@
 package main.java.duke;
 
 
-import main.java.duke.command.*;
+import main.java.duke.command.ListCommand;
+import main.java.duke.command.Command;
+import main.java.duke.command.DeleteCommand;
+import main.java.duke.command.OwoCommand;
+import main.java.duke.command.UwuCommand;
+import main.java.duke.command.DoneCommand;
+import main.java.duke.command.AddCommand;
+import main.java.duke.command.ExitCommand;
+
 import main.java.duke.tasks.Deadline;
 import main.java.duke.tasks.Todo;
 
@@ -9,7 +17,7 @@ public class Parser {
 
     public static Command parse(String userInput) throws DukeException {
 
-        String splitCommand[] = userInput.split(" ", 2);
+        String[] splitCommand = userInput.split(" ", 2);
         String commandWord = splitCommand[0];
         switch (commandWord) {
 
@@ -18,12 +26,12 @@ public class Parser {
 
         case DeleteCommand.COMMAND_WORD:
             if (checkInputLength(splitCommand, 2)) {
-            return prepareDelete(splitCommand[1]);
-        }
+                return prepareDelete(splitCommand[1]);
+            }
         case DoneCommand.COMMAND_WORD:
             if (checkInputLength(splitCommand, 2)) {
-            return prepareDone(splitCommand[1]);
-        }
+                return prepareDone(splitCommand[1]);
+            }
 
         case OwoCommand.COMMAND_WORD:
             return new OwoCommand();
@@ -32,15 +40,15 @@ public class Parser {
             return new UwuCommand();
 
         case AddCommand.COMMAND_WORD_TODO:
+            // Fallthrough
         case AddCommand.COMMAND_WORD_DEADLINE:
+            // Fallthrough
         case AddCommand.COMMAND_WORD_EVENT:
             if (checkInputLength(splitCommand, 2)) {
                 return prepareAdd(commandWord, splitCommand[1]);
             }
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-
         default:
             throw new DukeException("I don't understand what you're saying HMM...");
         }
@@ -55,14 +63,22 @@ public class Parser {
         }
     }
 
-    private static Command prepareDelete(String input) {
-        int taskNum = Integer.parseInt(input);
-        return new DeleteCommand(taskNum);
+    private static Command prepareDelete(String input) throws DukeException {
+        try {
+            int taskNum = Integer.parseInt(input);
+            return new DeleteCommand(taskNum);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid task number!");
+        }
     }
 
-    private static Command prepareDone(String input) {
-        int taskNum = Integer.parseInt(input);
-        return new DoneCommand(taskNum);
+    private static Command prepareDone(String input) throws DukeException{
+        try {
+            int taskNum = Integer.parseInt(input);
+            return new DoneCommand(taskNum);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid task number!");
+        }
     }
 
     private static Command prepareAdd(String command, String descript) throws DukeException {
@@ -70,12 +86,12 @@ public class Parser {
         case ("todo"):
             return new AddCommand(new Todo(descript));
         case ("deadline"):
-            String delete[] = descript.split(" /by ", 2);
+            String[] delete = descript.split(" /by ", 2);
             if (checkInputLength(delete, 2)) {
                 return new AddCommand(new Deadline(delete[0], delete[1].replace('/', '-')));
             }
         case ("event"):
-            String event[] = descript.split(" /at ", 2);
+            String[] event = descript.split(" /at ", 2);
             if (checkInputLength(event, 2)) {
                 return new AddCommand(new Deadline(event[0], event[1].replace('/', '-')));
             }

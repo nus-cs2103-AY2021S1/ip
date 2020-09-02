@@ -7,12 +7,12 @@ import main.java.duke.Ui;
 import main.java.duke.tasks.Task;
 
 public class AddCommand extends Command {
-    private Task task;
     public static final String COMMAND_WORD_TODO = "todo";
     public static final String COMMAND_WORD_DEADLINE = "deadline";
     public static final String COMMAND_WORD_EVENT = "event";
-    public static final String MESSAGE_ADD_ACKNOWLEDGEMENT = "*Gobble gobble* the following has been eated OwO:";
-    public static final String MESSAGE_ADD_UPDATE = "Number of thing(s) in my belly has now become ";
+    private static final String MESSAGE_ADD_ACKNOWLEDGEMENT = "*Gobble gobble* the following has been eated OwO:";
+    private static final String MESSAGE_ADD_UPDATE = "Number of thing(s) in my belly has now become ";
+    private Task task;
 
     public AddCommand(Task task) {
         this.task = task;
@@ -25,6 +25,7 @@ public class AddCommand extends Command {
         ui.printMessage(String.format("%s\n%s\n%s%d!", MESSAGE_ADD_ACKNOWLEDGEMENT, task.toString(),
                 MESSAGE_ADD_UPDATE, tasks.getTaskCount()));
     }
+
 
 
 }

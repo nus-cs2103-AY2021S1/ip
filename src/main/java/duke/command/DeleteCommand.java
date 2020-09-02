@@ -8,12 +8,12 @@ import main.java.duke.tasks.Task;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
-    public static final String MESSAGE_DELETE_ACKNOWLEDGEMENT =
+    private static final String MESSAGE_DELETE_ACKNOWLEDGEMENT =
             "Nooo you can't take away what you've already given me...\n"
                     + "Okay fine. It's in my stomach tho... ASDFGUUVHHH!!\n"
                     + "The following has been removed: ";
-    public static final String MESSAGE_DELETE_CONTINUED = "Now I'm feeling sick :( there's ";
-    public static final String MESSAGE_DELETE_END = " thing(s) in my belly now...HUNGRY!";
+    private static final String MESSAGE_DELETE_CONTINUED = "Now I'm feeling sick :( there's ";
+    private static final String MESSAGE_DELETE_END = " thing(s) in my belly now...HUNGRY!";
     private int taskNum;
 
     public DeleteCommand(int taskNum) {
