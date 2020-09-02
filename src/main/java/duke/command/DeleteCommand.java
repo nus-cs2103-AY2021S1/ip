@@ -30,13 +30,12 @@ public class DeleteCommand extends Command {
     /**
      * Execute delete command.
      * @param tasklist TaskList for delete to be performed
-     * @param ui       User interface used
      * @param storage  Storage to update save file
      * @throws InvalidDeleteInputException
      * @throws IOException
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws InvalidDeleteInputException {
+    public String execute(TaskList tasklist, Storage storage) throws InvalidDeleteInputException {
         try {
             int num = Integer.parseInt(input.replaceAll("\\s+", ""));
             if (num > tasklist.getNumOfTask() || num <= 0) {
@@ -44,7 +43,7 @@ public class DeleteCommand extends Command {
             }
             Task task = tasklist.deleteTask(num);
             tasklist.updateData(storage);
-            ui.showDelete(task, tasklist);
+            return Ui.showDelete(task, tasklist);
         } catch (NumberFormatException | IOException e) {
             throw new InvalidDeleteInputException();
         }

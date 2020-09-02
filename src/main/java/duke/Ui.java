@@ -12,21 +12,21 @@ import duke.exception.DukeException;
 public class Ui {
 
     /**
-     * UI line divider
+     * Show user input message(s).
+     * @param message  Message(s) to be shown
      */
-    public static final String DIVIDER = "------------------------------------------------";
+    public static String show(String ... message) {
+        String response = "";
+        for (String m : message) {
+            response += m;
+        }
+        return response;
+    }
 
     /**
      * Introduction message
      */
-    public static final String GREET =
-            " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n"
-                    + DIVIDER
-                    + "\nHello! I'm Duke\nWhat can I do for you?\n";
+    public static final String GREET = "\nHello! I'm Rose\nWhat can I do for you? <3\n";
 
     /**
      *  Farewell message
@@ -53,13 +53,6 @@ public class Ui {
     }
 
     /**
-     * Print line divider.
-     */
-    public void lineDivider() {
-        out.println(DIVIDER);
-    }
-
-    /**
      * Read use input.
      * @return String input of user
      */
@@ -69,27 +62,17 @@ public class Ui {
     }
 
     /**
-     * Show user input message(s).
-     * @param msg  Message(s) to be shown
-     */
-    public void show(String... msg) {
-        for (String m : msg) {
-            out.println(m.replace("\n", LS));
-        }
-    }
-
-    /**
      * Show intro message.
      */
-    public void showIntro() {
-        show(DIVIDER, GREET, DIVIDER);
+    public static String showIntro() {
+        return show(GREET);
     }
 
     /**
      * Show farewell message.
      */
-    public void showFarewell() {
-        show(FAREWELL);
+    public static String showFarewell() {
+        return show(FAREWELL);
     }
 
     /**
@@ -105,8 +88,8 @@ public class Ui {
      * @param task      Task added
      * @param tasklist  TaskList which Task is stored
      */
-    public void showAdd(Task task, TaskList tasklist) {
-        show("Got it. I've added this task:\n",
+    public static String showAdd(Task task, TaskList tasklist) {
+        return show("Got it. I've added this task:\n",
                 task.toString(),
                 "\nNow you have " + tasklist.getNumOfTask() + " tasks in the list.\n");
     }
@@ -115,8 +98,8 @@ public class Ui {
      * Show done message.
      * @param task Task done
      */
-    public void showDone(Task task) {
-        show("Nice! I've marked this task as done:\n", task + "\n");
+    public static String showDone(Task task) {
+        return show("Nice! I've marked this task as done:\n", task + "\n");
     }
 
     /**
@@ -124,9 +107,9 @@ public class Ui {
      * @param task      Task added
      * @param tasklist  TaskList which Task is stored
      */
-    public void showDelete(Task task, TaskList tasklist) {
+    public static String showDelete(Task task, TaskList tasklist) {
         String taskMsg = "Deleted: " + task + "\n";
-        show("Noted. I've removed this task:\n",
+        return show("Noted. I've removed this task:\n",
                 task.toString(),
                 "\nNow you have " + tasklist.getNumOfTask() + " tasks in the list.\n");
     }
@@ -138,12 +121,12 @@ public class Ui {
         show("Update file failed");
     }
 
-    public void showTaskFound(String input, String tasksFound) {
-        show("Here are the matching tasks in your list:\n", tasksFound + "\n");
+    public static String showTaskFound(String input, String tasksFound) {
+        return show("Here are the matching tasks in your list:\n", tasksFound + "\n");
     }
 
-    public void showNoTaskFound(String input) {
-        show("Sorry. No tasks found containing " + input + ".\n");
+    public static String showNoTaskFound(String input) {
+        return show("Sorry. No tasks found containing " + input + ".\n");
     }
 
 }

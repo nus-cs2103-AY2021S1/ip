@@ -15,7 +15,7 @@ public class TodoCommand extends Command {
     private String input;
 
     /**
-     * Initiate TodoCommand.
+     * Initiate Todo Command.
      * @param input  User input
      * @throws InvalidTodoInputException
      */
@@ -36,15 +36,14 @@ public class TodoCommand extends Command {
     /**
      * Execute todo command.
      * @param tasklist  TaskList for ToDo to be added
-     * @param ui        User interface used
      * @param storage   Storage to update save file
      * @throws IOException
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasklist, Storage storage) throws IOException {
         ToDo todo = new ToDo(this.input);
         tasklist.addTask(todo);
         tasklist.updateData(storage);
-        ui.showAdd(todo, tasklist);
+        return Ui.showAdd(todo, tasklist);
     }
 }

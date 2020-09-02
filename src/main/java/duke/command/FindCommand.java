@@ -36,17 +36,16 @@ public class FindCommand extends Command {
     /**
      * Execute find command.
      * @param taskList  TaskList for delete to be performed
-     * @param ui        User interface used
      * @param storage   Storage to update save file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         String tasksFound = taskList.findTasks(this.input);
 
         if (tasksFound.length() == 0) {
-            ui.showNoTaskFound(this.input);
+            return Ui.showNoTaskFound(this.input);
         } else {
-            ui.showTaskFound(this.input, tasksFound);
+            return Ui.showTaskFound(this.input, tasksFound);
         }
     }
 }

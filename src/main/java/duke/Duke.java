@@ -11,63 +11,47 @@ import duke.exception.DukeException;
 public class Duke {
     private Storage storage;
     private TaskList tasklist;
-    private Ui ui;
+    private boolean isExited;
 
     /**
      * Creates Duke
-     * @param path  File path of saved tasks file.
+     *
      * @throws IOException
      */
-    public Duke(String path) throws IOException {
-        this.ui = new Ui();
-        this.storage = new Storage(path);
-        TaskList tempTaskList;
-        try {
-            tempTaskList = new TaskList(storage);
-        } catch (DukeException | IOException e) {
-            tempTaskList = new TaskList();
-        }
-        this.tasklist = tempTaskList;
-    }
-
-    /**
-     * Runs Duke
-     */
-    public void run() {
-        ui.showIntro();
-        boolean isExited = false;
-        while (!isExited) {
-            try {
-                String line = ui.readLine();
-                ui.lineDivider();
-                Command command = Parser.parse(line);
-                command.execute(tasklist, ui, storage);
-                isExited = command.isExited();
-            } catch (IOException e) {
-                ui.showFileError();
-            } catch (DukeException e) {
-                ui.showError(e);
-            } finally {
-                ui.lineDivider();
-            }
-        }
-    }
-
-    /**
-     * Main environment for the chat bot.
-     * @param args  User input
-     */
-    public static void main(String[] args) {
-
+    public Duke() throws DukeException, IOException {
         String filePath = System.getProperty("user.dir").endsWith("text-ui-test")
                 ? "test.txt"
                 : System.getProperty("user.dir").endsWith("ip")
                 ? "data/duke.txt"
                 : System.getProperty("user.home") + "/duke.txt";
+
+        this.storage = new Storage(filePath);
+        TaskList tempTaskList = null;
         try {
-            new Duke(filePath).run();
+            tempTaskList = new TaskList(storage);
+        } catch (DukeException | IOException e) {
+            tempTaskList = new TaskList();
+            throw e;
+        } finally {
+            this.tasklist = tempTaskList;
+            this.isExited = false;
+        }
+    }
+
+    public boolean isExited() {
+        return this.isExited;
+    }
+
+    public String getResponse(String userInput) {
+        try {
+            Command command = Parser.parse(userInput);
+            String replyMessage = command.execute(tasklist, storage);
+            this.isExited = command.isExited();
+            return replyMessage;
         } catch (IOException e) {
-            System.out.println("File not recognised\n");
+            return "Update failed, check file for corruption.";
+        } catch (DukeException e) {
+            return e.toString();
         }
     }
 

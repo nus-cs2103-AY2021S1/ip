@@ -83,14 +83,13 @@ public class EventCommand extends Command {
     /**
      * Execute event command.
      * @param tasks    TaskList for Event to be added
-     * @param ui       User interface used
      * @param storage  Storage to update save file
      * @throws InvalidEventInputException
      * @throws InvalidDateTimeException
      * @throws IOException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidEventInputException,
+    public String execute(TaskList tasks, Storage storage) throws InvalidEventInputException,
             InvalidDateTimeException, IOException {
         String[] eventTaskArray = input.split(" /at ");
         if (eventTaskArray.length != 2) {
@@ -101,6 +100,6 @@ public class EventCommand extends Command {
         Event event = createEvent(eventDescription, at);
         tasks.addTask(event);
         tasks.updateData(storage);
-        ui.showAdd(event, tasks);
+        return Ui.showAdd(event, tasks);
     }
 }

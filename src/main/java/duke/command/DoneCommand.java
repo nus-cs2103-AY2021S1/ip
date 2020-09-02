@@ -30,13 +30,12 @@ public class DoneCommand extends Command {
     /**
      * Execute done command.
      * @param tasklist  TaskList for Done to be added
-     * @param ui        User interface used
      * @param storage   Storage to update save file
      * @throws InvalidDoneInputException
      * @throws IOException
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws InvalidDoneInputException, IOException {
+    public String execute(TaskList tasklist, Storage storage) throws InvalidDoneInputException, IOException {
         try {
             int num = Integer.parseInt(input.replaceAll("\\s+", ""));
             if (num > tasklist.getNumOfTask() || num <= 0) {
@@ -44,7 +43,7 @@ public class DoneCommand extends Command {
             }
             Task task = tasklist.markDone(num);
             tasklist.updateData(storage);
-            ui.showDone(task);
+            return Ui.showDone(task);
         } catch (NumberFormatException e) {
             throw new InvalidDoneInputException();
         }

@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.exception.DukeException;
 
 /**
@@ -14,5 +13,5 @@ public abstract class Command {
 
     public abstract boolean isExited();
 
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;
+    public abstract String execute(TaskList taskList, Storage storage) throws DukeException, IOException;
 }

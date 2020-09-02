@@ -83,14 +83,13 @@ public class DeadlineCommand extends Command {
     /**
      * Execute deadline command.
      * @param tasklist  TaskList for Deadline to be added
-     * @param ui        User interface used
      * @param storage   Storage to update save file
      * @throws InvalidDeadlineInputException
      * @throws IOException
      * @throws InvalidDateTimeException
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws InvalidDeadlineInputException,
+    public String execute(TaskList tasklist, Storage storage) throws InvalidDeadlineInputException,
             IOException, InvalidDateTimeException {
         String[] deadlineTaskArray = input.split(" /by ");
         if (deadlineTaskArray.length != 2) {
@@ -101,6 +100,6 @@ public class DeadlineCommand extends Command {
         Deadline deadline = createDeadline(deadlineDescription, by);
         tasklist.addTask(deadline);
         tasklist.updateData(storage);
-        ui.showAdd(deadline, tasklist);
+        return Ui.showAdd(deadline, tasklist);
     }
 }
