@@ -8,11 +8,11 @@ public class CompleteCommand extends Command {
     }
     
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage store) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage store) throws DukeException {
         Task task = taskList.get(number);
         task.completeTask();
-        ui.showCompletion(task);
         store.write(taskList);
+        return ui.showCompletion(task);
     }
     
     @Override

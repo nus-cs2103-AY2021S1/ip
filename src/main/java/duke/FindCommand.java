@@ -11,7 +11,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
         ArrayList<Task> list = new ArrayList<>();
         for (Task task : taskList.getList()) {
             if (task.getName().contains(this.keyword)) {
@@ -19,12 +19,13 @@ public class FindCommand extends Command {
             }
         }
         if (list.size() == 0) {
-            System.out.println("No tasks matching the keyword");
+            return "No tasks matching the keyword";
         } else {
-            System.out.println("Here are the matching tasks in your list");
+            String matchingResults = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < list.size(); i++) {
-                System.out.println((i + 1) + ": " + list.get(i));
+                matchingResults = matchingResults + ((i + 1) + ": " + list.get(i)) + "\n";
             }
+            return matchingResults;
         }
     }
     

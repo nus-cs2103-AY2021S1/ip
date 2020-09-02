@@ -3,13 +3,15 @@ package duke;
 public class ListCommand extends Command {
     
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage store) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage store) throws DukeException {
         if (taskList.getSize() == 0) {
-            ui.showNoTask();
+            return ui.showNoTask();
         } else {
+            String message = "";
             for (int i = 0; i < taskList.getSize(); i++) {
-                System.out.println((i + 1) + ": " + taskList.get(i));
+                message = message + (i + 1) + ": " + taskList.get(i) + "\n";
             }
+            return message;
         }
     }
     

@@ -8,5 +8,5 @@ public abstract class Command {
         return isExit();
     }
     
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;
 }

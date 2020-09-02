@@ -18,16 +18,15 @@ public class Ui {
     /**
      * Greets the user.
      */
-    public void greet() {
-        System.out.println("Hello, I'm Eggy!\n" + "How may I help you?");
+    public String greet() {
+        return ("Hello, I'm Eggy!\n" + "How may I help you?");
     }
 
     /**
      * Says bye to the user.
      */
-    public void exit() {
-        System.out.println("Bye, see you soon!");
-        sc.close();
+    public String exit() {
+        return "Bye, see you soon!";
     }
 
     /**
@@ -35,9 +34,7 @@ public class Ui {
      * @return a String object of the user input.
      */
     public String readCommand() {
-        String command = sc.nextLine();
-        return command;
- 
+        return sc.nextLine();
     }
 
     /**
@@ -45,17 +42,16 @@ public class Ui {
      * @param task Task added into the tasklist.
      * @param taskList tasklist of the user.
      */
-    public void showAddition(Task task, TaskList taskList) {
-        System.out.println("Added this task to your list:\n" + task);
-        showTaskTotal(taskList);
+    public String showAddition(Task task, TaskList taskList) {
+        return ("Added this task to your list:\n" + task + "\n" + showTaskTotal(taskList));
     }
 
     /**
      * Prints the message when a task is successfully completed.
      * @param task Task completed.
      */
-    public void showCompletion(Task task) {
-        System.out.println("Nice! I've marked this task as done: \n" + task);
+    public String showCompletion(Task task) {
+        return ("Nice! I've marked this task as done: \n" + task);
     }
 
     /**
@@ -63,39 +59,38 @@ public class Ui {
      * @param task Task deleted.
      * @param taskList tasklist of the user.
      */
-    public void showDeletion(Task task, TaskList taskList) {
-        System.out.println("Noted. Removed task: \n" + task);
-        showTaskTotal(taskList);
+    public String showDeletion(Task task, TaskList taskList) {
+        return ("Noted. Removed task: \n" + task + "\n" + showTaskTotal(taskList));
     }
 
     /**
      * Prints the message when the list is empty.
      */
-    public void showNoTask() {
-        System.out.println("No tasks in your list yet");
+    public String showNoTask() {
+        return "No tasks in your list yet";
     }
 
     /**
      * Prints the message when there is an error loading the user's file.
      */
-    public void showLoadingError() {
-        System.out.println("Error loading files");
+    public String showLoadingError() {
+        return "Error loading files";
     }
 
     /**
      * Prints the error message.
      * @param message error message.
      */
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return message;
     }
 
     /**
      * Prints the message informing the user of the number of tasks in list.
      * @param taskList tasklist of the user.
      */
-    public void showTaskTotal(TaskList taskList) {
+    public String showTaskTotal(TaskList taskList) {
         int total = taskList.getSize();
-        System.out.printf("You now have %d task%s in the list.\n", total, total > 1 ? "s" : "");
+        return ("You now have " + Integer.toString(total) + " task(s) in the list.");
     }
 }

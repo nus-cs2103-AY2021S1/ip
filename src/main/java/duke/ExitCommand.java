@@ -8,7 +8,7 @@ public class ExitCommand extends Command {
     }
     
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage store) {
-        ui.exit();
+    public String execute(TaskList taskList, Ui ui, Storage store) {
+        return ui.exit();
     }
 }

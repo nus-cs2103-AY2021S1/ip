@@ -21,10 +21,10 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage store) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage store) throws DukeException {
         Task newTask = null;
         try {
-            switch (type) {
+            switch (type) { 
                 case TODO:
                     newTask = new ToDo(description);
                     break;
@@ -44,7 +44,7 @@ public class AddCommand extends Command {
         }
         taskList.addTask(newTask);
         store.write(taskList);
-        ui.showAddition(newTask, taskList);
+        return ui.showAddition(newTask, taskList);
     }
     
     @Override
