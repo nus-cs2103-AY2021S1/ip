@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,7 +32,7 @@ public class Storage {
     public static ArrayList<Task> readFromFile(String filepath) throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(filepath);
-        Scanner s = new Scanner(f);
+        Scanner s = new Scanner(f, "UTF-8");
 
         while (s.hasNext()) {
             String input = s.nextLine();
@@ -61,7 +62,7 @@ public class Storage {
         File oldFile= new File(filePath);
         oldFile.delete();
         File newFile= new File(filePath);
-        FileWriter fileWriter = new FileWriter(newFile, false);
+        FileWriter fileWriter = new FileWriter(newFile, StandardCharsets.UTF_8,false);
         for (Task task : taskArr) {
             fileWriter.write(task.toString());
             fileWriter.write(System.lineSeparator());

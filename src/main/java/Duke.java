@@ -2,8 +2,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 
-import javafx.scene.control.Label;
-
 /**
  * Duke, a Personal Assistant Chatbot that helps a person to keep track of various things.
  *
@@ -17,7 +15,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Duke construction specifying a filePath to initialise the Storage, Ui and TaskList.
+     * Duke constructor to initialise the Storage, Ui and TaskList.
      */
     public Duke() {
         ui = new Ui();
@@ -27,7 +25,7 @@ public class Duke {
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
         } finally {
-            ui.showWelcome();
+            System.out.println("Duke is started!");
         }
     }
 
@@ -58,32 +56,17 @@ public class Duke {
      * You should have your own function to generate a response to user input. Replace this stub with
      * your completed method.
      */
-    String getResponse(String input) {
+    public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
         } catch (DukeException | ParseException e) {
-            ui.showError(e.getMessage());
-            return null;
+            return ui.showError(e.getMessage());
         } catch (IOException e) {
-            ui.showError(e.getMessage());
-            return null;
+            return ui.showError(e.getMessage());
         }
     }
 
-    /**
-     * Iteration 1: Creates a label with the specified text and adds it to the dialog container.
-     *
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
 
     public static void main(String[] args) {
         new Duke().run();

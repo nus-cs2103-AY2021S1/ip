@@ -163,11 +163,12 @@ public class Command {
     }
 
     /**
-     * Execute Command.
+     * Execute Command and return output from Ui.
      *
      * @param tasks TaskList
      * @param ui Ui
      * @param storage Storage
+     * @return String
      * @throws InvalidTodoDescripDukeException
      * @throws InvalidDeadlineDescripDukeException
      * @throws InvalidEventDescripDukeException
