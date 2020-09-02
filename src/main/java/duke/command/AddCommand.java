@@ -60,22 +60,27 @@ public class AddCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String response = "";
         switch (taskType) {
         case "todo" :
-            tasks.addTodo(ui, this.description);
+            response = tasks.addTodo(ui, this.description);
             storage.save(tasks.convertToFile());
-            break;
+            return response;
+            //Fallthrough
         case "event" :
-            tasks.addEvent(ui, this.description, this.localDate, this.localTime);
+            response = tasks.addEvent(ui, this.description, this.localDate, this.localTime);
             storage.save(tasks.convertToFile());
-            break;
+            return response;
+            //Fallthrough
         case "deadline" :
-            tasks.addDeadline(ui, this.description, this.localDate, this.localTime);
+            response = tasks.addDeadline(ui, this.description, this.localDate, this.localTime);
             storage.save(tasks.convertToFile());
-            break;
+            return response;
+            //Fallthrough
         default:
-            break;
+            return "Error in AddCommand execute method";
+            //Fallthrough
         }
     }
 }

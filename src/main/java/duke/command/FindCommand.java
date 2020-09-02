@@ -29,7 +29,7 @@ public class FindCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.findTask(ui, this.description);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return tasks.findTask(ui, this.description);
     }
 }

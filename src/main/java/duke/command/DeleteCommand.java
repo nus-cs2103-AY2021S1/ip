@@ -31,12 +31,14 @@ public class DeleteCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String response = "";
         if (index >= 0 && index < tasks.listSize()) {
-            tasks.taskDelete(index, ui);
+            response = tasks.taskDelete(index, ui);
             storage.save(tasks.convertToFile());
         } else {
             throw new DukeException("    Invalid index entry for done command.");
         }
+        return response;
     }
 }
