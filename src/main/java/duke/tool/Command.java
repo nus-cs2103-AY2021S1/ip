@@ -6,6 +6,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.ui.Ui;
 
 /**
  * Handles different command.
@@ -16,7 +17,7 @@ public class Command {
      * Handles invalid user input.
      * @throws DukeException exception indicating invalid input.
      */
-    public void invalidInput() throws DukeException {
+    public String invalidInput() throws DukeException {
         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
@@ -26,14 +27,15 @@ public class Command {
      * @param taskList a list of tasks.
      * @throws DukeException indicates that the task is not found.
      */
-    public void markAsDone(int num, TaskList taskList) throws DukeException {
+    public String markAsDone(int num, TaskList taskList) throws DukeException {
         if (num > 0 && num <= taskList.getSize()) {
             taskList.get(num - 1).markAsDone();
             String msgForDone = "    ____________________________________________________________\n"
                     + "    Nice! I 've marked this task as done: \n"
                     + "       " + taskList.get(num - 1).toString() + "\n"
                     + "    ____________________________________________________________\n";
-            System.out.println(msgForDone);
+            //System.out.println(msgForDone);
+            return msgForDone;
         } else {
             throw new DukeException(
                     "OOPS!!! The task is not found. Please try again."
@@ -45,7 +47,7 @@ public class Command {
      * Lists all the tasks in the list.
      * @param taskList a list of tasks.
      */
-    public void list(TaskList taskList) {
+    public String list(TaskList taskList) {
         String msgForList = "    ____________________________________________________________\n";
         msgForList += "    Here are the tasks in your list: \n";
         for (int i = 0; i < taskList.getSize(); i++) {
@@ -53,7 +55,8 @@ public class Command {
                     + taskList.get(i).toString() + "\n";
         }
         msgForList += "    ____________________________________________________________\n";
-        System.out.println(msgForList);
+        //System.out.println(msgForList);
+        return msgForList;
     }
 
     /**
@@ -62,7 +65,7 @@ public class Command {
      * @param taskList a list of tasks.
      * @throws DukeException indicates that the task is not found.
      */
-    public void delete(int num, TaskList taskList) throws DukeException {
+    public String delete(int num, TaskList taskList) throws DukeException {
         if (num > 0 && num <= taskList.getSize()) {
             String msgForDelete = "    ____________________________________________________________\n"
                     + "    Noted. I've removed this task: \n"
@@ -70,7 +73,8 @@ public class Command {
             taskList.remove(num - 1);
             msgForDelete += taskList.countNum() + "\n"
                     + "    ____________________________________________________________\n";
-            System.out.println(msgForDelete);
+            //System.out.println(msgForDelete);
+            return msgForDelete;
         } else {
             throw new DukeException(
                     "OOPS!!! The task is not found. Please try again."
@@ -85,7 +89,7 @@ public class Command {
      * @param ui handles system output.
      * @throws DukeException indicates that the description is empty.
      */
-    public void handleTodo(String instruction, TaskList taskList, Ui ui) throws DukeException {
+    public String handleTodo(String instruction, TaskList taskList, Ui ui) throws DukeException {
         if (instruction.substring(4).isBlank()) {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
@@ -95,7 +99,7 @@ public class Command {
         String toDoTitle = instruction.substring(5);
         Todo newTodo = new Todo(toDoTitle, false);
         taskList.addToDo(newTodo);
-        ui.printAddedToDo(taskList, newTodo);
+        return ui.printAddedToDo(taskList, newTodo);
     }
 
     /**
@@ -105,7 +109,7 @@ public class Command {
      * @param ui
      * @throws DukeException indicates that the description or deadline timing is missing.
      */
-    public void handleDeadline(String instruction, TaskList taskList, Ui ui) throws DukeException {
+    public String handleDeadline(String instruction, TaskList taskList, Ui ui) throws DukeException {
         int index = instruction.indexOf("/by");
         if (index == 8) {
             String emoji = Emoji.SMILE.toString();
@@ -131,7 +135,7 @@ public class Command {
             Deadline deadline = new Deadline(
                     description, LocalDateTime.parse(by.substring(1), Parser.getValidFormat()), false);
             taskList.addDeadline(deadline);
-            ui.printAddedDdl(taskList, deadline);
+            return ui.printAddedDdl(taskList, deadline);
         } else {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but you have to indicate the deadline. \n"
@@ -147,7 +151,7 @@ public class Command {
      * @param ui Handles system output.
      * @throws DukeException indicates that the timing or the description is missing.
      */
-    public void handleEvent(String instruction, TaskList taskList, Ui ui) throws DukeException {
+    public String handleEvent(String instruction, TaskList taskList, Ui ui) throws DukeException {
         int index = instruction.indexOf("/at");
         if (index == 5) {
             String emoji = Emoji.SMILE.toString();
@@ -172,7 +176,7 @@ public class Command {
             Event event = new Event(description, LocalDateTime.parse(
                     time.substring(1), Parser.getValidFormat()), false);
             taskList.addEvent(event);
-            ui.printAddedEvent(taskList, event);
+            return ui.printAddedEvent(taskList, event);
         } else {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but you have to indicate the time of the event. \n"
@@ -187,7 +191,7 @@ public class Command {
      * @param input find instructions.
      * @throws DukeException indicates that the instruction is empty.
      */
-    public void find(TaskList taskList, String input) throws DukeException {
+    public String find(TaskList taskList, String input) throws DukeException {
         if (input.length() == 4) {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
@@ -196,15 +200,17 @@ public class Command {
         } else {
             String query = input.substring(5);
             int count = 0;
-            System.out.println("    ____________________________________________________________\n"
-                    + "    Here are the matching tasks in your list:");
+            String output = "";
+            output += "    ____________________________________________________________\n"
+                    + "    Here are the matching tasks in your list:";
             for (int i = 0; i < taskList.getSize(); i++) {
                 if (taskList.get(i).getTaskDescription().contains(query)) {
                     count += 1;
-                    System.out.println("    " + count + "." + taskList.get(i).toString());
+                    output += "    " + count + "." + taskList.get(i).toString();
                 }
             }
-            System.out.println("    ____________________________________________________________\n");
+            output += "    ____________________________________________________________\n";
+            return output;
         }
     }
 }

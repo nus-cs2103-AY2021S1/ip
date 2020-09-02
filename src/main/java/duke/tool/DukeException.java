@@ -1,12 +1,12 @@
 package duke.tool;
 
 /**
- * Represents the exception thrown by Duke.
+ * Represents the exception thrown by duke.Duke.
  */
 public class DukeException extends Exception {
 
     /**
-     * Constructs a Duke exception.
+     * Constructs a duke.Duke exception.
      * @param message message of the exception.
      */
     public DukeException(String message) {

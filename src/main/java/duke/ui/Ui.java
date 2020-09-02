@@ -1,9 +1,10 @@
-package duke.tool;
+package duke.ui;
 
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.tool.Emoji;
 
 
 /**
@@ -14,32 +15,35 @@ public class Ui {
     /**
      * Prints welcome message.
      */
-    public void printWelcomeMessage() {
+    public String printWelcomeMessage() {
         String emoji = Emoji.CHICKEN.toString();
         String welcomeMessage = "    ____________________________________________________________\n"
                 + "    Hello! I'm ByteMe " + emoji + emoji + emoji + "\n"
                 + "    What can I do for you? (Don't bite me!)\n"
                 + "    ____________________________________________________________\n";
 
-        System.out.println(welcomeMessage);
+        //System.out.println(welcomeMessage);
+        return welcomeMessage;
     }
 
     /**
      * Prints bye message.
      */
-    public void sendBye() {
+    public String sendBye() {
         String msgForBye = "    ____________________________________________________________\n"
                 + "    Bye. Hope to see you again soon! \n"
                 + "    ____________________________________________________________\n";
-        System.out.println(msgForBye);
+        //System.out.println(msgForBye);
+        return msgForBye;
     }
 
     /**
      * Outputs the number of tasks.
      * @param i number of tasks.
      */
-    public void sendCount(int i) {
-        System.out.println("    Now you have " + i + " tasks in the list.");
+    public String sendCount(int i) {
+        String countMsg = "    Now you have " + i + " tasks in the list.";
+        return countMsg;
     }
 
     /**
@@ -47,13 +51,14 @@ public class Ui {
      * @param tl a list of tasks.
      * @param todo a to-do item.
      */
-    public void printAddedToDo(TaskList tl, Todo todo) {
+    public String printAddedToDo(TaskList tl, Todo todo) {
         String msgForToDo = "    ____________________________________________________________\n"
                 + "    Got it. I 've added this task: \n"
                 + "      " + todo.toString() + "\n"
                 + tl.countNum() + "\n"
                 + "    ____________________________________________________________\n";
-        System.out.println(msgForToDo);
+        //System.out.println(msgForToDo);
+        return msgForToDo;
     }
 
     /**
@@ -61,13 +66,14 @@ public class Ui {
      * @param tl a list of tasks.
      * @param ddl a deadline item.
      */
-    public void printAddedDdl(TaskList tl, Deadline ddl) {
+    public String printAddedDdl(TaskList tl, Deadline ddl) {
         String msgForToDo = "    ____________________________________________________________\n"
                 + "    Got it. I 've added this task: \n"
                 + "      " + ddl.toString() + "\n"
                 + tl.countNum() + "\n"
                 + "    ____________________________________________________________\n";
-        System.out.println(msgForToDo);
+        //System.out.println(msgForToDo);
+        return msgForToDo;
     }
 
     /**
@@ -75,19 +81,22 @@ public class Ui {
      * @param tl a list of tasks.
      * @param event a event item.
      */
-    public void printAddedEvent(TaskList tl, Event event) {
+    public String printAddedEvent(TaskList tl, Event event) {
         String msgForEvent = "    ____________________________________________________________\n"
                 + "    Got it. I 've added this task: \n"
                 + "      " + event.toString() + "\n"
                 + tl.countNum() + "\n"
                 + "    ____________________________________________________________\n";
-        System.out.println(msgForEvent);
+        //System.out.println(msgForEvent);
+        return msgForEvent;
     }
 
     /**
      * Prints loading error.
      */
-    public void showLoadingError() {
-        System.out.println("Loading error!");
+    public String showLoadingError() {
+        String errorMsg = "Loading error!";
+        return errorMsg;
+        //System.out.println("Loading error!");
     }
 }
