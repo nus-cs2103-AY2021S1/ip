@@ -19,7 +19,7 @@ public class Ui {
      * Greets the user.
      */
     public String greet() {
-        return ("Hello, I'm Eggy!\n" + "How may I help you?");
+        return ("Hello, I'm Bo-Chan!\n" + "How may I help you?");
     }
 
     /**
