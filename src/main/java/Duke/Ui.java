@@ -80,6 +80,12 @@ public class Ui {
         System.out.println("Now you have " + size + " " + plural + " in the list.");
     }
 
+
+    public void showFindTask(String result) {
+        String header = "Here are the matching tasks in your list:\n";
+        System.out.println(header + result);
+    }
+
     public void printMessage(String output) {
         System.out.println(output);
     }

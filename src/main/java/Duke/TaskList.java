@@ -69,4 +69,18 @@ public class TaskList {
     public int getSize() {
         return dukeList.size();
     }
+
+    public String find (String subName) {
+        StringBuilder output = new StringBuilder();
+        int counter = 0;
+        for (Task t: dukeList) {
+            String s1 = t.getName().toLowerCase();
+            if(s1.contains(subName.toLowerCase())) {
+                output.append(counter + 1).append(".").append(t.toString()).append("\n");
+                counter +=1;
+            }
+        }
+
+        return output.toString();
+    }
 }
