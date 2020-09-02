@@ -40,6 +40,15 @@ public class Bot {
     }
 
     /**
+     * Gets the task list used by the bot.
+     *
+     * @return the task list.
+     */
+    public TaskList getTaskList() {
+        return this.tasks;
+    }
+
+    /**
      * Parses a line of user input, and executes the command as appropriate. The
      * return value specifies whether or not the bot should print the exit message.
      *

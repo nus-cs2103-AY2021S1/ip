@@ -3,11 +3,10 @@
 
 package ikura;
 
-// import ikura.gui.GuiLauncher;
+import ikura.gui.GuiFrontend;
 
 public class Main {
 
-    private static final String BOT_NAME  = "ikurabowl";
     private static final String DB_PATH   = "data/tasks.txt";
 
     /**
@@ -17,17 +16,9 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        // GuiLauncher.startGui();
-
-        /*
         var tasks = new TaskList(new Database(DB_PATH));
-        var ui = new Frontend(BOT_NAME);
-        var bot = new Bot(ui, tasks);
 
-        ui.greet();
-        while (ui.readLine().map(bot::processCommand).orElse(false))
-            ;
-
-        */
+        var frontend = new GuiFrontend(tasks);
+        frontend.run();
     }
 }

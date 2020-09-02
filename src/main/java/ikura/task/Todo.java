@@ -15,7 +15,7 @@ public class Todo extends Task {
     /**
      * Constructs a new Todo task with the given title.
      *
-     * @param name the Todo's description.
+     * @param title the Todo's title.
      */
     public Todo(String title) {
         super(title);
@@ -24,8 +24,8 @@ public class Todo extends Task {
     /**
      * Constructs a new Todo task with the given title and description.
      *
-     * @param title the Todo's title
-     * @param description the Todo's description
+     * @param title         the Todo's title.
+     * @param description   the Todo's description.
      */
     public Todo(String title, String description) {
         super(title, description);
