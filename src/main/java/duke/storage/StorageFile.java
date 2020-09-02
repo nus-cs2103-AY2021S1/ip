@@ -26,6 +26,7 @@ public class StorageFile {
     public final Path path;
 
     /**
+     * Constructor for storagefile
      * @throws InvalidStorageFilePathException if the default path is invalid
      */
     public StorageFile() throws InvalidStorageFilePathException {
