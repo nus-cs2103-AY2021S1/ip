@@ -5,10 +5,10 @@ import duke.task.Event;
 import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
 
+import java.io.InputStream;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 public class UiTest {
     ToDo todo = new ToDo("homework");
@@ -16,13 +16,13 @@ public class UiTest {
     Event event = new Event("party", LocalDate.parse("2020-09-04"));
 
     @Test
-    public void getNumOfTasksMessage_numOfTasksShownSuccessfully() {
+    public void showNumOfTasks_numOfTasksShownSuccessfully() {
         Ui ui = new Ui();
         TaskList tasks = new TaskList();
         tasks.addTask(todo);
         tasks.addTask(deadline);
         tasks.addTask(event);
-        String actual = ui.getNumOfTasksMessage(tasks);
+        String actual = ui.showNumOfTasks(tasks);
         String expected = "\nNow you have 3 task(s) in the list.";
         assertEquals(expected, actual);
     }

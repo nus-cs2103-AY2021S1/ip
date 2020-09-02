@@ -35,7 +35,7 @@ public class Duke {
      * If an Exit command is entered, Duke terminates.
      */
     public void run() {
-        ui.showWelcomeMessage();
+        ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
