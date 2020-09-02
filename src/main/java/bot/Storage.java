@@ -68,14 +68,14 @@ public class Storage {
         String[] words = line.split(" \\| ");
         char firstChar = line.charAt(0);
         switch (firstChar) {
-            case 'D':
-                return new Deadline(words[2], words[3],
-                        words[1].equals("1"));
-            case 'E':
-                return new Event(words[2], words[3],
-                        words[1].equals("1"));
-            default:
-                return new Todo(words[2], words[1].equals("1"));
+        case 'D':
+            return new Deadline(words[2], words[3],
+                    words[1].equals("1"));
+        case 'E':
+            return new Event(words[2], words[3],
+                    words[1].equals("1"));
+        default:
+            return new Todo(words[2], words[1].equals("1"));
         }
     }
 

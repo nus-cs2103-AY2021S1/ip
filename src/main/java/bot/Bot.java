@@ -34,6 +34,16 @@ public class Bot {
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command cmd = parser.parseInput(input);
+            String response = cmd.run(this.taskList, this.storage);
+            return response;
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
     /**
      * Start the bot's interaction with user.
      */
