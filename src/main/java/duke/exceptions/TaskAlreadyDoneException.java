@@ -1,6 +1,6 @@
-package duke.Exceptions;
+package duke.exceptions;
 
-import duke.Tasks.Task;
+import duke.tasks.Task;
 
 // Exception to check if task is already done
 public class TaskAlreadyDoneException extends DukeException {
@@ -10,6 +10,7 @@ public class TaskAlreadyDoneException extends DukeException {
                 task.toString());
     }
 
+    @Override
     public String toString(){
         return "Error";
     }

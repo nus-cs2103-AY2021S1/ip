@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 /**
  * A ToDo class is a children object of the Task class

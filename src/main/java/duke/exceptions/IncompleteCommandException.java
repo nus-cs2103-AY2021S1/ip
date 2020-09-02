@@ -1,4 +1,4 @@
-package duke.Exceptions;
+package duke.exceptions;
 
 // Exception for incomplete/ inappropriate command given
 public class IncompleteCommandException extends DukeException{
@@ -7,6 +7,7 @@ public class IncompleteCommandException extends DukeException{
         super("Please enter an appropriate command!");
     }
 
+    @Override
     public String toString(){
         return "Error";
     }

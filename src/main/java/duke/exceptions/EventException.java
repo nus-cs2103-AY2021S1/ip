@@ -1,4 +1,4 @@
-package duke.Exceptions;
+package duke.exceptions;
 
 // Exception for wrong event command format
 public class EventException extends DukeException{
@@ -8,6 +8,8 @@ public class EventException extends DukeException{
                 "With the date in the following format :" +
                 "YYYY-MM-DD HHMM OR YYYY-MM-DD");
     }
+
+    @Override
     public String toString(){
         return "Error";
     }

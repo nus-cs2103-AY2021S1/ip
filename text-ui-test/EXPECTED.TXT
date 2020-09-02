@@ -63,7 +63,7 @@ ________________________________________________________________________________
 Please enter an appropriate command!
 ________________________________________________________________________________
 ________________________________________________________________________________
-The following duke.Tasks.Task is removed from the duke.TaskList.duke.TaskList!!
+The following duke.tasks.Task is removed from the duke.taskList.duke.taskList!!
 [✓] Read a book
 You have 2 tasks left!
 ________________________________________________________________________________

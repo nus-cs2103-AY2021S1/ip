@@ -1,9 +1,13 @@
 package duke;
 
-import duke.Commands.AddInput;
-import duke.Storage.Storage;
-import duke.TaskList.TaskList;
-import duke.Ui.Ui;
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.taskList.TaskList;
+import duke.ui.Ui;
+
+import java.util.Scanner;
 
 /**
  * Duke is the name of this program. It is an CLI app that reads and save
@@ -30,9 +34,25 @@ public class Duke {
     /**
      * Runs the programme, using a Duke Object
      */
-    public void run(){
-        this.ui.startMessage();
-        storage.loadTasks(this.tasks);
-        AddInput.addInput(this.tasks, this.storage);
+    public void run() throws DukeException {
+        ui.startMessage();
+        storage.loadTasks(tasks);
+
+        Scanner scanner = new Scanner(System.in);
+
+        while  (scanner.hasNext()) {
+            try {
+                String input = scanner.nextLine();
+                Command executable = Parser.parse(input);
+                String output = executable.execute(tasks, ui, storage);
+                if (executable.isComplete()){
+                    break;
+                }
+                ui.lineFormatter(output);
+            } catch (DukeException e){
+                ui.lineFormatter(e.getMessage());
+            }
+        }
+
     }
 }

@@ -1,6 +1,6 @@
-package duke.Ui;
+package duke.ui;
 
-import duke.Tasks.Task;
+import duke.tasks.Task;
 
 public class Ui {
     private final static String LONG_LINE = "________________________________________________________________________________";
@@ -28,27 +28,35 @@ public class Ui {
     }
 
     // standardised goodbye greeting
-    public static void byeGreetings () {
+    public static String byeGreetings () {
+        String statement = "Bye! Hope to see you soon again?!";
 
-        lineFormatter("Bye! Hope to see you soon again?!");
+        lineFormatter(statement);
+        return statement;
     }
 
     //method to mark tasks as done
-    public static void taskDone(Task task) {
-        lineFormatter("Nice! This task is getting done!!\n" + "[" + task.getStatusIcon() + "] " + task.getTask());
+    public static String taskDone(Task task) {
+        String statement = "Nice! This task is getting done!!\n" + "[" + task.getStatusIcon() + "] " + task.getTask();
+        lineFormatter(statement);
+        return statement;
     }
 
     //method to mark tasks as deleted
-    public static void taskDeleted(Task task) {
-        lineFormatter("The following duke.Tasks.Task is removed from the duke.TaskList.duke.TaskList!!\n" + "[" + task.getStatusIcon() + "] "
-                + task.getTask() + "\n"
-        );
+    public static String taskDeleted(Task task) {
+        String statement = "The following duke.Tasks.Task is removed from the duke.TaskList.duke.TaskList!!\n" + "[" + task.getStatusIcon() + "] "
+                + task.getTask() + "\n";
+        lineFormatter(statement);
+        return statement;
     }
 
     //method for formatting inputs into the taskList
-    public static void newTaskItem (Task task){
-        lineFormatter("Now you have a new task! :\n" + task.toString() +
-                "\nType \'list\' to check your Tasklist");
+    public static String newTaskItem (Task task){
+        String statement = "Now you have a new task! :\n" + task.toString() +
+                "\nType \'list\' to check your Tasklist";
+        lineFormatter(statement);
+
+        return statement;
     }
 
 }

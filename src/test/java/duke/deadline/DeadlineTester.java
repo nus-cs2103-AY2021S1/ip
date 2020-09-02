@@ -1,6 +1,6 @@
 package duke.deadline;
 
-import duke.Tasks.Deadline;
+import duke.tasks.Deadline;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

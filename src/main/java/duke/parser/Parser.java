@@ -1,7 +1,12 @@
-package duke.Parser;
+package duke.parser;
+
+import duke.commands.*;
+import duke.exceptions.DukeException;
+import duke.exceptions.IncompleteCommandException;
 
 /**
  * A Parser Class does all the checking required in the programme
+ *
  */
 
 public class Parser {
@@ -18,6 +23,7 @@ public class Parser {
 
     /**
      * Checks for BYE Command
+     *
      * @param checker
      * @return boolean
      */
@@ -28,6 +34,7 @@ public class Parser {
 
     /**
      * Checks for LIST Command
+     *
      * @param checker
      * @return boolean
      */
@@ -38,6 +45,7 @@ public class Parser {
 
     /**
      * Checks for DONE Command
+     *
      * @param checker
      * @return boolean
      */
@@ -48,6 +56,7 @@ public class Parser {
 
     /**
      * Checks for TODO Command
+     *
      * @param checker
      * @return boolean
      */
@@ -58,6 +67,7 @@ public class Parser {
 
     /**
      * Checks for DEADLINE Command
+     *
      * @param checker
      * @return boolean
      */
@@ -68,6 +78,7 @@ public class Parser {
 
     /**
      * Checks for EVENT Command
+     *
      * @param checker
      * @return boolean
      */
@@ -77,6 +88,7 @@ public class Parser {
 
     /**
      * Checks for DELETE Command
+     *
      * @param checker
      * @return boolean
      */
@@ -86,6 +98,7 @@ public class Parser {
 
     /**
      * Checks for FIND Command
+     *
      * @param checker
      * @return boolean
      */
@@ -97,6 +110,7 @@ public class Parser {
 
     /**
      * Checks if input is a number
+     *
      * @param num
      * @return boolean
      */
@@ -107,6 +121,37 @@ public class Parser {
         } catch (NumberFormatException e){
             return false;
         }
+    }
+
+    public static Command parse (String input) throws DukeException {
+        String[] inputList = input.split(" ", 2);
+
+        if (isBye(inputList[0].trim())){
+            return new ByeCommand(input);
+        }
+
+        if (isList(inputList[0].trim())){
+            return new ListCommand(input);
+        }
+
+        if (isDelete(inputList[0].trim())){
+            return new DeleteCommand(input);
+        }
+
+        if (isFind(inputList[0].trim())){
+            return new FindCommand(input);
+        }
+
+        if (isComplete(inputList[0].trim())){
+            return new DoneCommand(input);
+        }
+
+        if (isEvent(inputList[0].trim()) || isDeadline(inputList[0].trim()) || isToDo(inputList[0].trim())){
+            return new AddCommand(input);
+        }
+
+        throw new IncompleteCommandException();
+
     }
 
 }

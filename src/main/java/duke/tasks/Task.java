@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 //Adapted from CS2103T website's duke.Tasks.Task class
 public class Task {

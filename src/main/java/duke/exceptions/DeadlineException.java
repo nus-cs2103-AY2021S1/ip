@@ -1,4 +1,4 @@
-package duke.Exceptions;
+package duke.exceptions;
 
 // Exception for wrong deadline format
 public class DeadlineException extends DukeException{
@@ -10,6 +10,7 @@ public class DeadlineException extends DukeException{
                 "YYYY-MM-DD HHMM OR YYYY-MM-DD");
     }
 
+    @Override
     public String toString(){
         return "Error";
     }
