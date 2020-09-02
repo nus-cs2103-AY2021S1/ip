@@ -12,7 +12,6 @@ public class TaskList {
 
     /**
      * Constructs a new instance of TaskList with an arraylist of tasks.
-     *
      * @param tasks ArrayList of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -21,7 +20,6 @@ public class TaskList {
 
     /**
      * Adds tasks to TaskList.
-     *
      * @param task ArrayList of tasks.
      */
     public void addTask(Task task) {
@@ -30,7 +28,6 @@ public class TaskList {
 
     /**
      * Returns an Arraylist of tasks with keyword.
-     *
      * @param userInput User input as string.
      * @return Arraylist of tasks with keyword.
      */
@@ -46,18 +43,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes task from task list at this index.
-     *
-     * @param index Index at which task should be removed at.
-     * @return Task to be removed.
-     */
-    public Task deleteTask(int index) {
-        return this.tasks.remove(index);
-    }
-
-    /**
      * Returns number of tasks in task list.
-     *
      * @return Number of tasks in task list.
      */
     public int size() {
@@ -66,7 +52,6 @@ public class TaskList {
 
     /**
      * Returns arraylist of tasks.
-     *
      * @return ArrayList of tasks.
      */
     public ArrayList<Task> getTasks() {

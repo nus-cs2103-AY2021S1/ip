@@ -19,7 +19,6 @@ public class AddCommand extends Command {
 
     /**
      * Constructs an AddCommand object with command and a user input.
-     *
      * @param command Enumeration of a command.
      * @param userInput User input as a String.
      */
@@ -31,10 +30,10 @@ public class AddCommand extends Command {
     /**
      * Adds a task to a task list.
      * Execution depends on the type of task.
-     *
      * @param taskList Task list containing tasks.
      * @param storage Storage for storing and retrieving all tasks.
      * @param ui Handles printing of user interaction.
+     * @return Text when task is added.
      * @throws DukeException When input for addToDo, addDeadline and addEvent is invalid.
      * @throws IOException When input for addToDo is invalid.
      */
@@ -55,7 +54,6 @@ public class AddCommand extends Command {
 
     /**
      * Returns user input.
-     *
      * @return User input as a String.
      */
     public String getUserInput() {
@@ -64,11 +62,11 @@ public class AddCommand extends Command {
 
     /**
      * Adds a ToDo task.
-     *
      * @param tasks Task List containing tasks.
      * @param storage Writes the task being added into file.
      * @param ui Handles printing of user interaction.
      * @param userInput User input as a String.
+     * @return Text when todo task is added.
      * @throws DukeException When description of a ToDo task is empty.
      * @throws IOException When writing to file fails.
      */
@@ -78,7 +76,7 @@ public class AddCommand extends Command {
             ToDo todo = new ToDo(userInput.substring(5));
             tasks.addTask(todo); //adds into tasks list
             storage.writeToFile(tasks.getTasks());
-            return ui.printAddTodo(todo, tasks);
+            return ui.displayAddTodo(todo, tasks);
         } else {
             throw new DukeException("The description of todo cannot be empty!");
         }
@@ -86,11 +84,11 @@ public class AddCommand extends Command {
 
     /**
      * Adds a Deadline Task.
-     *
      * @param tasks Task List containing tasks.
      * @param storage Writes the task being added into file.
      * @param ui Handles printing of user interaction.
      * @param userInput User input as a String.
+     * @return  Text when deadline task is added.
      * @throws DukeException When input for Deadline is invalid, respective error messages are printed.
      */
     public String addDeadline(TaskList tasks, Storage storage, Ui ui, String userInput)
@@ -98,14 +96,14 @@ public class AddCommand extends Command {
         String[] input = userInput.split(" ");
         if (!userInput.substring(8).isBlank()) {
             try {
-                String de = String.join(" ",
+                String deadlineInput = String.join(" ",
                         Arrays.copyOfRange(input, 1, input.length));
-                String description = de.split(" /by ")[0];
-                String date = de.split(" /by ")[1];
+                String description = deadlineInput.split(" /by ")[0];
+                String date = deadlineInput.split(" /by ")[1];
                 Deadline deadline = new Deadline(description, date);
                 tasks.addTask(deadline);
                 storage.writeToFile(tasks.getTasks());
-                return ui.printAddDeadline(deadline, tasks);
+                return ui.displayAddDeadline(deadline, tasks);
             } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex) {
                 throw new DukeException(
                         "You have keyed in an invalid input for 'deadline'!");
@@ -121,11 +119,11 @@ public class AddCommand extends Command {
 
     /**
      * Adds an Event task.
-     *
      * @param tasks Task List containing tasks.
      * @param storage Writes the task being added into file.
      * @param ui Handles printing of user interaction.
      * @param userInput User input as a String.
+     * @return Text when deadline task is added.
      * @throws DukeException When input for Event is invalid, respective error messages are printed.
      */
     public String addEvent(TaskList tasks, Storage storage, Ui ui, String userInput)
@@ -133,14 +131,14 @@ public class AddCommand extends Command {
         String[] input = userInput.split(" ");
         if (!userInput.substring(5).isBlank()) {
             try {
-                String ev = String.join(" ",
+                String eventInput = String.join(" ",
                         Arrays.copyOfRange(input, 1, input.length));
-                String description = ev.split(" /at ")[0];
-                String dateAndTime = ev.split(" /at ")[1];
+                String description = eventInput.split(" /at ")[0];
+                String dateAndTime = eventInput.split(" /at ")[1];
                 Event event = new Event(description, dateAndTime);
                 tasks.addTask(event);
                 storage.writeToFile(tasks.getTasks());
-                return ui.printAddEvent(event, tasks);
+                return ui.displayAddEvent(event, tasks);
             } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex) {
                 throw new DukeException("You have keyed in an "
                         + "invalid input for 'event'!");

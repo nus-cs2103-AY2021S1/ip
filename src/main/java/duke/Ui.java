@@ -11,7 +11,7 @@ public class Ui {
     private static final String bot = "Dave says:";
 
     /** Scanner object */
-    private Scanner scanner;
+    private final Scanner scanner;
 
     /**
      * Constructs a new Ui object.
@@ -21,15 +21,15 @@ public class Ui {
     }
 
     /**
-     * Prints greetings.
+     * Returns greetings from bot.
+     * @return Greetings.
      */
-    public String printGreetings() {
+    public String displayGreetings() {
         return "Greetings from me, Dave!\n" + "How can I help you? ^_^\n";
     }
 
     /**
      * Returns prefix of reply.
-     *
      * @return String of prefix of reply.
      */
     public static String getBot() {
@@ -37,42 +37,40 @@ public class Ui {
     }
 
     /**
-
-
-    /**
-     * Prints goodbye and terminates.
+     * Returns bye text from bot.
+     * @return Bye text.
      */
-    public String printBye() {
+    public String displayBye() {
         return "Goodbye! Hope to see you again soon! ^_^";
         //System.exit(0);
     }
 
     /**
-     * Prints tasks in task list.
-     *
+     * Returns tasks in task list.
      * @param tasks TaskList containing tasks.
+     * @return Task list.
      */
-    public String printTaskList(TaskList tasks) {
+    public String displayTaskList(TaskList tasks) {
         if (tasks.getTasks().isEmpty()) {
             return "There are no tasks in your list yet! >_< \n";
         } else {
-            StringBuilder res = new StringBuilder();
-            res.append("Here are the tasks in your list:\n");
+            StringBuilder list = new StringBuilder();
+            list.append("Here are the tasks in your list:\n");
             for (int i = 0; i < tasks.size(); i++) {
-                res.append(String.format("%d. %s\n", i + 1, tasks.getTasks().get(i)));
+                list.append(String.format("%d. %s\n", i + 1, tasks.getTasks().get(i)));
             }
-            return res.toString();
+            return list.toString();
         }
     }
 
     /**
-     * Prints task to be deleted and displayed text when deleted.
+     * Returns task to be deleted and displayed text when deleted.
      * @param userInput User input.
      * @param taskList User's tasks.
      * @return Text when a task is deleted.
      * @throws DukeException When an invalid input is entered.
      */
-    public String printDelete(String userInput, TaskList taskList) throws DukeException {
+    public String displayDelete(String userInput, TaskList taskList) throws DukeException {
         if (!userInput.substring(6).isBlank()) {
             try {
                 String toDelete = userInput.substring(7);
@@ -95,13 +93,12 @@ public class Ui {
     }
 
     /**
-     * Marks tasks as done.
-     *
+     * Returns and marks task as done.
      * @param tasks Arraylist of tasks.
      * @param pos Index in arraylist.
      * @throws DukeException When index < 0 or index > tasks.size().
      */
-    public String printDone(ArrayList<Task> tasks, int pos) throws DukeException {
+    public String displayDone(ArrayList<Task> tasks, int pos) throws DukeException {
         if (pos <= tasks.size() && pos > 0) {
             tasks.get(pos - 1).markAsDone(); //marking task as done
             return "Great work! I've marked this task as done:\n"
@@ -115,59 +112,59 @@ public class Ui {
     /**
      * Prints tasks with the keyword.
      * @param findings Arraylist of tasks with the keyword.
+     * @return Tasks that contains keyword.
      * @throws DukeException When findings is empty.
      */
-    public String printFindings(ArrayList<Task> findings) throws DukeException {
-        StringBuilder res = new StringBuilder();
+    public String displayFindings(ArrayList<Task> findings) throws DukeException {
+        StringBuilder list = new StringBuilder();
         if (findings.isEmpty()) {
             throw new DukeException("There are no such tasks with this keyword! :(");
         } else {
-            res.append("These are the tasks with your keyword:\n");
+            list.append("These are the tasks with your keyword:\n");
             int i = 0;
             for (Task task : findings) {
-                res.append(String.format("%d.%s\n", i + 1, task));
+                list.append(String.format("%d.%s\n", i + 1, task));
                 i++;
             }
         }
-        return res.toString();
+        return list.toString();
     }
 
     /**
-     * Prints replies when ToDo task is added.
-     *
+     * Returns text when ToDo task is added.
      * @param todoTask Task to be done.
      * @param tasks TaskList to add task to.
+     * @return Text when todo task is added.
      */
-    public String printAddTodo(ToDo todoTask, TaskList tasks) {
+    public String displayAddTodo(ToDo todoTask, TaskList tasks) {
         return "Got it! I've added this task:\n" + todoTask.toString()
                 + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
-     * Prints replies when Event task is added.
-     *
+     * Returns text when Event task is added.
      * @param eventTask Event task.
      * @param tasks TaskList to add task to.
+     * @return Text when event task is added.
      */
-    public String printAddEvent(Event eventTask, TaskList tasks) {
+    public String displayAddEvent(Event eventTask, TaskList tasks) {
         return "Got it! I've added this task:\n" + eventTask.toString()
                 + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
-     * Prints replies when Deadline task is added.
-     *
+     * Returns text when Deadline task is added.
      * @param deadlineTask Deadline task.
      * @param tasks TaskList to add task to.
+     * @return Text when deadline task is added.
      */
-    public String printAddDeadline(Deadline deadlineTask, TaskList tasks) {
+    public String displayAddDeadline(Deadline deadlineTask, TaskList tasks) {
         return "Got it! I've added this task:\n" + deadlineTask.toString()
             + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
      * Returns user inputs.
-     *
      * @return User input.
      */
     public String readCommand() {
@@ -176,7 +173,6 @@ public class Ui {
 
     /**
      * Checks if there is more user input.
-     *
      * @return True if there is more input, if not false.
      */
     public boolean hasMoreInput() {

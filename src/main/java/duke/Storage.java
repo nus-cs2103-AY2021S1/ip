@@ -37,7 +37,6 @@ public class Storage {
 
     /**
      * Adds tasks to file.
-     *
      * @param tasks Tasks in an arraylist.
      * @throws IOException When writing to file fails.
      */
@@ -57,9 +56,9 @@ public class Storage {
                     break;
                 case DEADLINE:
                 case EVENT:
-                    String dnt = task.getTime();
+                    String dateAndTime = task.getTime();
                     String write = String.format("%s | %s | %s | %s\n", stringTaskType, isDone,
-                            description, dnt);
+                            description, dateAndTime);
                     fileWriter.write(write);
                     break;
                 default:
@@ -75,31 +74,30 @@ public class Storage {
 
     /**
      * Retrieves all tasks when bot starts running.
-     *
      * @return ArrayList of tasks.
      * @throws FileNotFoundException When file with specified pathname does not exist.
      */
-    public ArrayList<Task> read() throws FileNotFoundException {
+    public ArrayList<Task> readFromFile() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            File f = path.toFile();
-            Scanner scanner = new Scanner(f);
+            File file = path.toFile();
+            Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
                 String input = scanner.nextLine();
                 String[] splitString = input.split(" \\| ");
-                boolean check = splitString[1].equals("done");
+                boolean isDone = splitString[1].equals("done");
                 switch (splitString[0]) {
                 case "ToDo":
-                    Task td = new ToDo(splitString[2], check);
-                    tasks.add(td);
+                    Task todo = new ToDo(splitString[2], isDone);
+                    tasks.add(todo);
                     break;
                 case "Deadline":
-                    Task dl = new Deadline(splitString[2], splitString[3], check);
-                    tasks.add(dl);
+                    Task deadline = new Deadline(splitString[2], splitString[3], isDone);
+                    tasks.add(deadline);
                     break;
                 case "Event":
-                    Task ev = new Event(splitString[2], splitString[3], check);
-                    tasks.add(ev);
+                    Task event = new Event(splitString[2], splitString[3], isDone);
+                    tasks.add(event);
                     break;
                 default:
                     System.out.println("Cannot read file! :(");

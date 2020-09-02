@@ -6,7 +6,7 @@ package duke;
 public class Task {
 
     /** Description of task */
-    protected String task;
+    protected String description;
 
     /** Completion status */
     protected boolean isDone;
@@ -16,51 +16,46 @@ public class Task {
 
     /**
      * Constructs a new instance of a task with its description.
-     *
-     * @param task Description of task.
+     * @param description Description of task.
      */
-    public Task(String task) {
-        this.task = task;
+    public Task(String description) {
+        this.description = description;
         this.isDone = false;
     }
 
     /**
      * Constructs a new instance of a task with its description and type.
-     *
-     * @param task Description of task.
+     * @param description Description of task.
      * @param type Type of task.
      */
-    public Task(String task, Type type) {
-        this.task = task;
+    public Task(String description, Type type) {
+        this.description = description;
         this.isDone = false;
         this.type = type;
     }
 
     /**
      * Constructs a new instance of a task with its description, type and completion status.
-     *
-     * @param task Description of task.
+     * @param description Description of task.
      * @param type Type of task.
      * @param isDone Completion status.
      */
-    public Task(String task, Type type, boolean isDone) {
-        this.task = task;
+    public Task(String description, Type type, boolean isDone) {
+        this.description = description;
         this.type = type;
         this.isDone = isDone;
     }
 
     /**
      * Returns description of task.
-     *
      * @return Description of task.
      */
     public String getTask() {
-        return this.task;
+        return this.description;
     }
 
     /**
      * Returns date and time in subclasses, when valid.
-     *
      * @return Date and time as a string.
      */
     public String getTime() {
@@ -69,11 +64,10 @@ public class Task {
 
     /**
      * Returns status icon of task.
-     *
      * @return Status icon of task.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
@@ -85,7 +79,6 @@ public class Task {
 
     /**
      * Returns type of task.
-     *
      * @return Type of task.
      */
     public Type getType() {
@@ -94,7 +87,6 @@ public class Task {
 
     /**
      * Returns string representation of task.
-     *
      * @return String representation of task.
      */
     @Override

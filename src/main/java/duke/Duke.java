@@ -25,7 +25,7 @@ public class Duke {
     public Duke() {
         try {
             storage = new Storage(FILEPATH);
-            tasks = new TaskList(storage.read());
+            tasks = new TaskList(storage.readFromFile());
         } catch (DukeException | IOException ex) {
             ui.showLoadingError();
             tasks = new TaskList(tasks.getTasks());
@@ -36,7 +36,7 @@ public class Duke {
      * Runs the Duke program.
      */
     public void run() {
-        ui.printGreetings();
+        ui.displayGreetings();
         while (ui.hasMoreInput()) {
             try {
                 String userInput = ui.readCommand();
@@ -62,11 +62,11 @@ public class Duke {
 
     String getResponse(String input) {
         try {
-            Command c = Parser.parseCommands(input);
+            Command command = Parser.parseCommands(input);
             if (input.equals("bye")) {
                 System.exit(0);
             }
-            return c.execute(this.tasks, this.storage, this.ui);
+            return command.execute(this.tasks, this.storage, this.ui);
         } catch (IOException | DukeException e) {
             return e.getMessage();
         }

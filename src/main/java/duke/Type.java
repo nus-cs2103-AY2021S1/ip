@@ -7,7 +7,6 @@ public enum Type {
     TODO {
         /**
          * Returns string representation of ToDo task.
-         *
          * @return String representation of ToDo task.
          */
         public String toString() {
@@ -16,7 +15,6 @@ public enum Type {
     }, DEADLINE {
         /**
          * Returns string representation of Deadline task.
-         *
          * @return String representation of Deadline task.
          */
         public String toString() {
@@ -25,7 +23,6 @@ public enum Type {
     }, EVENT {
         /**
          * Returns string representation of Event task.
-         *
          * @return String representation of Event task.
          */
         public String toString() {

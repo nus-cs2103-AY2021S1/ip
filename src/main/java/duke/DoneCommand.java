@@ -12,7 +12,6 @@ public class DoneCommand extends Command {
 
     /**
      * Constructs a new instance of a DoneCommand object with user input.
-     *
      * @param userInput User input as a String.
      */
     DoneCommand(String userInput) {
@@ -24,15 +23,16 @@ public class DoneCommand extends Command {
      * @param taskList Task list containing tasks.
      * @param storage Storage for storing and retrieving all tasks.
      * @param ui Handles printing of user interaction.
-     * @throws DukeException if index < 0 or index > taskList.size().
+     * @return Text when DoneCommand is executed.
+     * @throws DukeException If index < 0 or index > taskList.size().
      * @throws IOException When writing to file fails.
      */
     @Override
     public String execute(TaskList taskList,
                         Storage storage, Ui ui) throws DukeException, IOException {
-        int len = userInput.length();
-        int pos = Integer.parseInt(userInput.substring(5, len));
+        int length = userInput.length();
+        int position = Integer.parseInt(userInput.substring(5, length));
         storage.writeToFile(taskList.getTasks());
-        return ui.printDone(taskList.getTasks(), pos);
+        return ui.displayDone(taskList.getTasks(), position);
     }
 }

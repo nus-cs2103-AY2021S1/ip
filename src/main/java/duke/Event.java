@@ -14,7 +14,6 @@ public class Event extends Task {
 
     /**
      * Constructs a new instance of an Event with description and date.
-     *
      * @param description Description of event.
      * @param dateAndTime Date and time of event.
      */
@@ -26,7 +25,6 @@ public class Event extends Task {
 
     /**
      * Constructs a new instance of an Event with description, date and completion status.
-     *
      * @param description Description of event.
      * @param dateAndTime Date and time of event.
      * @param isDone Completion status.
@@ -39,7 +37,6 @@ public class Event extends Task {
 
     /**
      * Returns date and time of event.
-     *
      * @return Date and time of event as a String.
      */
     @Override

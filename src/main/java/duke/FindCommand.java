@@ -21,12 +21,13 @@ public class FindCommand extends Command {
      * @param taskList Task list containing tasks.
      * @param storage Storage for storing and retrieving all tasks.
      * @param ui Handles printing of user interaction.
+     * @return Text when FindCommand is executed.
      * @throws DukeException When invalid inputs are entered.
      */
     @Override
     public String execute(
             TaskList taskList, Storage storage,
             Ui ui) throws DukeException {
-        return ui.printFindings(taskList.findTasks(userInput));
+        return ui.displayFindings(taskList.findTasks(userInput));
     }
 }

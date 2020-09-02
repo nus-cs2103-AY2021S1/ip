@@ -16,7 +16,6 @@ public class Parser {
         CommandEnum command;
         try {
             String[] input = userInput.split(" ");
-            int len = userInput.length();
             String extractCommand = input[0];
             command = CommandEnum.valueOf(extractCommand.toUpperCase());
         } catch (NullPointerException | IllegalArgumentException ex) {

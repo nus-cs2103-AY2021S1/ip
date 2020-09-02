@@ -10,28 +10,28 @@ import java.time.format.FormatStyle;
 public class Deadline extends Task {
 
     /** Deadline of task in local date time */
-    protected LocalDateTime by;
+    protected LocalDateTime dateAndTime;
 
     /**
      * Constructs a new instance of Deadline task with description and deadline.
      * @param description Description of task.
-     * @param by Deadline of task.
+     * @param dateAndTime Deadline of task.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String dateAndTime) {
         super(description, Type.DEADLINE);
-        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern(
+        this.dateAndTime = LocalDateTime.parse(dateAndTime, DateTimeFormatter.ofPattern(
                 "dd/MM/yyyy hh:mm a"));
     }
 
     /**
      * Constructs a new instance of Deadline task with description, deadline, status of completion.
      * @param description Description of task.
-     * @param by Deadline of task.
+     * @param dateAndTime Deadline of task.
      * @param isDone Status of completion.
      */
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String dateAndTime, boolean isDone) {
         super(description, Type.DEADLINE, isDone);
-        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern(
+        this.dateAndTime = LocalDateTime.parse(dateAndTime, DateTimeFormatter.ofPattern(
                 "dd/MM/yyyy hh:mm a"));
     }
 
@@ -41,7 +41,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getTime() {
-        return this.by.format(
+        return this.dateAndTime.format(
                 DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
     }
 
@@ -51,7 +51,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(
+        return "[D]" + super.toString() + " (by: " + dateAndTime.format(
                         DateTimeFormatter.ofLocalizedDateTime(
                                 FormatStyle.MEDIUM)) + ")";
     }

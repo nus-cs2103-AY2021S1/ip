@@ -21,10 +21,10 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the deleting of a task.
-     *
      * @param taskList Task list containing tasks.
      * @param storage Storage for storing and retrieving all tasks.
      * @param ui Handles printing of user interaction.
+     * @return Text when DeleteCommand is executed.
      * @throws DukeException When input for delete is invalid, respective error messages are printed.
      * @throws IOException When input for delete is invalid, respective error messages are printed.
      */
@@ -32,6 +32,6 @@ public class DeleteCommand extends Command {
     public String execute(
             TaskList taskList, Storage storage, Ui ui) throws DukeException, IOException {
         storage.writeToFile(taskList.getTasks());
-        return ui.printDelete(userInput, taskList);
+        return ui.displayDelete(userInput, taskList);
     }
 }
