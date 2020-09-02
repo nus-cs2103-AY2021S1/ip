@@ -51,6 +51,6 @@ public class Duke {
     }
 
     public String greet() {
-        return "Hello! I am Duke, your personal assistant, how can I help you today?";
+        return "Hello! How can I help you today?";
     }
 }

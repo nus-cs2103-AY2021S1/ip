@@ -12,7 +12,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Paint;
 
 /**
  * An example of a custom control using FXML.
@@ -37,6 +43,21 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        dialog.setWrapText(true);
+        displayPicture.setFitHeight(40);
+        displayPicture.setFitWidth(40);
+
+        this.setAlignment(Pos.TOP_RIGHT);
+        this.setBorder(new Border(new BorderStroke(Paint.valueOf("blue"),
+                BorderStrokeStyle.DASHED, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        int count = text.endsWith("\n") ? 1 : 0;
+        String[] size = text.split("\n");
+        count += size.length + 1;
+        for (String s : size) {
+            count += s.length() / 32;
+        }
+        this.setMinHeight(count * 15 + 30);
     }
 
     /**
