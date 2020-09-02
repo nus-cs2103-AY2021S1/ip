@@ -14,6 +14,11 @@ public abstract class Task {
 
     private boolean done;
 
+<<<<<<< Updated upstream
+=======
+    private final List<Consumer<Task>> observers = new ArrayList<>();
+
+>>>>>>> Stashed changes
     /**
      * Constructs a new Task with the given description. It is set to uncompleted by default.
      *
@@ -27,7 +32,6 @@ public abstract class Task {
 
         this.title = title;
         this.description = description;
-
         this.done = false;
     }
 

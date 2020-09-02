@@ -3,6 +3,8 @@
 
 package ikura.task;
 
+import java.util.Optional;
+
 import ikura.util.InvalidInputException;
 
 /**
@@ -11,12 +13,22 @@ import ikura.util.InvalidInputException;
 public class Todo extends Task {
 
     /**
-     * Constructs a new Todo task with the given description.
+     * Constructs a new Todo task with the given title.
      *
      * @param name the Todo's description.
      */
-    public Todo(String name) {
-        super(name);
+    public Todo(String title) {
+        super(title);
+    }
+
+    /**
+     * Constructs a new Todo task with the given title and description.
+     *
+     * @param title the Todo's title
+     * @param description the Todo's description
+     */
+    public Todo(String title, String description) {
+        super(title, description);
     }
 
     @Override
@@ -39,11 +51,16 @@ public class Todo extends Task {
      * @throws InvalidInputException if the input was empty.
      */
     public static Todo parse(String input) throws InvalidInputException {
-        if (input.isEmpty()) {
-            throw new InvalidInputException("task description cannot be empty", getUsage());
-        }
 
-        return new Todo(input);
+        var desc = TaskParser.parse("todo", input, /* dateSpec: */ Optional.empty(), getUsage());
+        assert desc.hasTitle();
+        assert !desc.hasDate();
+
+        if (desc.hasDescription()) {
+            return new Todo(desc.getTitle().get(), desc.getDescription().get());
+        } else {
+            return new Todo(desc.getTitle().get());
+        }
     }
 
     /**
@@ -53,6 +70,6 @@ public class Todo extends Task {
      * @return the usage.
      */
     private static String getUsage() {
-        return "todo <description>";
+        return "todo <title>";
     }
 }

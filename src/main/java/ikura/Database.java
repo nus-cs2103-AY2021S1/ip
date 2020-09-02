@@ -18,7 +18,7 @@ import ikura.task.Todo;
 import ikura.task.Event;
 import ikura.util.Either;
 import ikura.task.Deadline;
-import ikura.task.DatedTask;
+import ikura.task.TaskParser;
 
 import java.io.IOException;
 import ikura.util.InvalidInputException;
@@ -30,7 +30,7 @@ import ikura.util.InvalidDatabaseException;
  */
 public class Database {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private final String databasePath;
 
@@ -101,6 +101,7 @@ public class Database {
         // one might note the flagrant use of Collectors.toList() here, it's because java
         // streams suck.
 
+        // TODO: '|' character needs to be escaped
         var ret = xs.subList(1, xs.size())
             .stream()
             // java is a bad language.
@@ -110,7 +111,7 @@ public class Database {
                 public Either<String, Task> apply(String line) {
                     /*
                         format:
-                        <type> <doneness> [date string] "|" <description>
+                        <type> <doneness> [date string] "|" <title> "|" <description>
                         <type>       :: char (ascii char)
                                         'T' = todo
                                         'D' = deadline
@@ -139,22 +140,29 @@ public class Database {
                         return Either.left(String.format("invalid doneness '%c' (expected either '0' or '1')", asdf));
                     }
 
+                    // TODO: clean up this code
                     Task task = null;
                     if (type == 'T') {
 
-                        var desc = line.substring(line.indexOf('|') + 1);
-                        task = new Todo(desc);
+                        var bits  = line.split("\\|");
+                        var title = bits[1];
+                        var desc  = bits[2];
+
+                        task = new Todo(title, desc);
 
                     } else if (type == 'D' || type == 'E') {
 
                         try {
-                            var date = DatedTask.parseDate(line.substring(2, line.indexOf('|')));
-                            var desc = line.substring(line.indexOf('|') + 1);
+                            var date = TaskParser.parseDate(line.substring(2, line.indexOf('|')));
+
+                            var bits  = line.split("\\|");
+                            var title = bits[1];
+                            var desc  = bits[2];
 
                             if (type == 'D') {
-                                task = new Deadline(desc, date);
+                                task = new Deadline(title, desc, date);
                             } else {
-                                task = new Event(desc, date);
+                                task = new Event(title, desc, date);
                             }
                         } catch (InvalidInputException e) {
                             return Either.left(e.toString());
@@ -213,25 +221,28 @@ public class Database {
                     .map(task -> {
                         if (task instanceof Todo) {
 
-                            return String.format("%c%c|%s", 'T',
+                            return String.format("%c%c|%s|%s", 'T',
                                 task.isDone() ? '1' : '0',
-                                task.getTitle());
+                                task.getTitle(),
+                                task.getDescription());
 
                         } else if (task instanceof Event) {
 
                             var event = (Event) task;
-                            return String.format("%c%c%s|%s", 'E',
+                            return String.format("%c%c%s|%s|%s", 'E',
                                 task.isDone() ? '1' : '0',
                                 event.getEventDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                                task.getTitle());
+                                task.getTitle(),
+                                task.getDescription());
 
                         } else if (task instanceof Deadline) {
 
                             var deadline = (Deadline) task;
-                            return String.format("%c%c%s|%s", 'D',
+                            return String.format("%c%c%s|%s|%s", 'D',
                                 task.isDone() ? '1' : '0',
                                 deadline.getDeadline().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                                task.getTitle());
+                                task.getTitle(),
+                                task.getDescription());
                         } else {
                             // asdf?!
                             return "";
