@@ -43,7 +43,6 @@ public class TaskList {
      * @return the Task retrieved from the TaskList.
      */
     public Task getTask(int index) {
-        
         return tasks.get(index - 1);
     }
 

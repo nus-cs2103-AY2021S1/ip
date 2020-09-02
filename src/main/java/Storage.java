@@ -25,7 +25,7 @@ public class Storage {
      * @param taskList the TaskList which contains the Tasks to save.
      * @param ui the Ui which is currently in use.
      */
-    public void save(TaskList taskList, Ui ui) {
+    public String save(TaskList taskList, Ui ui) {
         File savedTasks = new File(filePath);
         boolean exists = savedTasks.exists();
         try {
@@ -38,17 +38,18 @@ public class Storage {
                 }
                 taskWriter.write(currentTasks.toString());
                 taskWriter.close();
+                return ui.printSuccess("File found, loading file");
             } else { //file does not exist, create new file
                 boolean isCreated = savedTasks.createNewFile();
-                if(isCreated) {
-                    ui.printSuccess("New save file created");
-                } else {
-                    ui.printError("Failed to create save file");
-                }
                 save(taskList, ui);
+                if(isCreated) {
+                    return ui.printSuccess("New save file created");
+                } else {
+                    return ui.printError("Failed to create save file");
+                }
             }
         } catch (IOException ex) {
-            ui.printError(ex);
+            return ui.printError(ex);
         }
     }
 
@@ -57,8 +58,7 @@ public class Storage {
      * @param taskList the TaskList that is currently in use.
      * @param ui the Ui that is currently in use.
      */
-    public void load(TaskList taskList, Ui ui) {
-        ui.loadTasks();
+    public String load(TaskList taskList, Ui ui) {
         try {
             BufferedReader taskReader = new BufferedReader(new FileReader(filePath));
             String line = taskReader.readLine();
@@ -66,12 +66,13 @@ public class Storage {
                 processTask(line, taskList, ui);
                 line = taskReader.readLine();
             }
-            ui.showTasks(taskList);
+            return ui.showTasks(taskList);
         } catch (FileNotFoundException e) {
             //Folder not yet created, do nothing
         } catch (IOException e) {
             ui.printError(e);
         }
+        return null;
     }
 
     /**

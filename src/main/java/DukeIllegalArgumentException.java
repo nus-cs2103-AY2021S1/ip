@@ -18,15 +18,15 @@ public class DukeIllegalArgumentException extends DukeException {
         switch (dukeExceptionType) {
             case TODO:
                 message = "todo";
-                return String.format("OOPS!!! The description of a %s cannot be empty.", message);
+                return String.format("I can't hear youuuuuuuu! The description of a %s cannot be empty.", message);
             case EVENT:
                 message = "event";
-                return String.format("OOPS!!! The description of a %s cannot be empty.", message);
+                return String.format("I can't hear youuuuuuuu! The description of a %s cannot be empty.", message);
             case DEADLINE:
                 message = "deadline";
-                return String.format("OOPS!!! The description of a %s cannot be empty.", message);
+                return String.format("I can't hear youuuuuuuu! The description of a %s cannot be empty.", message);
             default:
-                return "OOPS!!! The description cannot be empty.";
+                return "I can't hear youuuuuuuu! The description cannot be empty.";
         }
     }
 }

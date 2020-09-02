@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -18,19 +19,22 @@ public class Duke extends Application {
     private final Storage storage;
     private final TaskList taskList;
     private final Ui ui;
+    private final Parser parser;
+    
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/spongebob.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/pirate.png"));
     
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(".//.//.//savedTasks.txt");
         this.taskList = new TaskList();
+        this.parser = new Parser(ui, taskList, storage);
     }
     /**
      * Constructor that creates a Duke object.
@@ -40,28 +44,35 @@ public class Duke extends Application {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.taskList = new TaskList();
+        this.parser = new Parser(ui, taskList, storage);
     }
+    
 
-    /**
-     * Starts Duke and begins taking in user input.
-     */
-    public void run() {
-        Parser.echo(ui, taskList, storage);
+//    public static void main(String[] args) {
+//        new Duke(".//.//.//savedTasks.txt").run();
+//    }
+    public Ui getUi() {
+        return this.ui;
     }
-
-    public static void main(String[] args) {
-        new Duke(".//.//.//savedTasks.txt").run();
+    
+    public TaskList getTaskList() {
+        return taskList;
     }
+    
+    public Storage getStorage() {
+        return storage;
+    }
+    
 
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
-
+        
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
+        
         userInput = new TextField();
         sendButton = new Button("Send");
 
@@ -76,7 +87,7 @@ public class Duke extends Application {
         // more code to be added here later
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("Spongebob To Do List");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -118,15 +129,13 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        storage.load(taskList, ui);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.loadTasks(), duke)
+        );
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.showTasks(taskList), duke)
+        );
     }
     
     /**
@@ -137,31 +146,15 @@ public class Duke extends Application {
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userText, new ImageView(user)),
-//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-//        );
-        userInput.clear();
-    }
-
+    
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return parser.parseInput(input);
     }
     
 }
