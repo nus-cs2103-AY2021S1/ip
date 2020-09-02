@@ -31,6 +31,7 @@ public class DeleteCommand extends Command {
                 + task + "\n"
                 + "Now you have " + taskList.getTasks().size()
                 + (taskList.getTasks().size() == 1 ? " task" : " tasks") + " in the list.");
+        storage.save(taskList.getTasks());
     }
 
     @Override

@@ -18,7 +18,7 @@ public class ExitCommand extends Command {
      * @throws DukeException if the tasks cannot be saved.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showPrompt("Bye. Hope to see you again soon!");
     }
 
