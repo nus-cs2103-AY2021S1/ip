@@ -81,7 +81,7 @@ public class Parser {
             return Command.EVENT;
         case "deadline":
             return Command.DEADLINE;
-        default:    // Unknown command
+        default: // Unknown command
             throw new DukeInputException("I'm sorry, but I don't know what that means. \u2639\n");
         }
     }
@@ -108,6 +108,8 @@ public class Parser {
             throw new DukeInputException("The description of an event cannot be empty.\n");
         case DEADLINE:
             throw new DukeInputException("The description of a deadline cannot be empty.\n");
+        default:
+            break;
         }
     }
 }

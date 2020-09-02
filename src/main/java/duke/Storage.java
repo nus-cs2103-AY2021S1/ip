@@ -122,11 +122,11 @@ public class Storage {
                 Task task;
                 String[] arr = line.split(" / ");
                 boolean isDone = Integer.parseInt(arr[1]) != 0;
-                if (arr[0].equals("T")) {    // Todo
+                if (arr[0].equals("T")) { // Todo
                     task = new Todo(arr[2], isDone);
-                } else if (arr[0].equals("E")) {    // Event
+                } else if (arr[0].equals("E")) { // Event
                     task = new Event(arr[2], isDone, arr[3]);
-                } else {    // Deadline
+                } else { // Deadline
                     task = new Deadline(arr[2], isDone, arr[3]);
                 }
                 this.taskList.addTask(task);

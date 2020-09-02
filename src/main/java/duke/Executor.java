@@ -99,13 +99,13 @@ public class Executor {
             // Check if index is within the task list size
             if (index >= 0 && index < this.taskList.getNumOfTasks()) {
                 Task task = this.taskList.getTask(index);
-                this.taskList.deleteTask(index);    // delete task from the list
-                this.storage.writeToSaveFile();    // edit the data in storage
+                this.taskList.deleteTask(index); // delete task from the list
+                this.storage.writeToSaveFile(); // edit the data in storage
                 String confirmationMessage = "Noted. I've removed this task:\n"
                         + task.toString()
                         + "\n"
                         + this.getNumOfTasksFooter();
-                this.ui.printMessage(confirmationMessage);    // print delete confirmation message
+                this.ui.printMessage(confirmationMessage); // print delete confirmation message
             } else {
                 throw new DukeInputException("The index is not within the range of the list.");
             }
@@ -128,11 +128,11 @@ public class Executor {
             if (index >= 0 && index < this.taskList.getNumOfTasks()) {
                 Task task = this.taskList.getTask(index);
                 task.markAsDone();
-                this.storage.writeToSaveFile();    // write task's data to storage
+                this.storage.writeToSaveFile(); // write task's data to storage
                 String confirmationMessage = "Nice! I've marked this as done:\n"
                         + task.toString()
                         + "\n";
-                this.ui.printMessage(confirmationMessage);    // print mark task as done confirmation message
+                this.ui.printMessage(confirmationMessage); // print mark task as done confirmation message
             } else {
                 throw new DukeInputException("The index is not within the range of the list.");
             }
@@ -248,11 +248,11 @@ public class Executor {
      */
     private void addTask(Task task) {
         this.taskList.addTask(task);
-        this.storage.writeToSaveFile();    // write task's data to storage
+        this.storage.writeToSaveFile(); // write task's data to storage
         String confirmationMessage = "Got it. I've added this task:\n"
                 + task.toString()
                 + "\n"
                 + getNumOfTasksFooter();
-        this.ui.printMessage(confirmationMessage);    // print create task confirmation message
+        this.ui.printMessage(confirmationMessage); // print create task confirmation message
     }
 }
