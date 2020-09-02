@@ -1,2 +1,0 @@
-T | 1 | read book
-E | 0 | project meeting | Monday 12pm

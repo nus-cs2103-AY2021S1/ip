@@ -12,10 +12,10 @@ public class ToDoCommand extends TaskCommand {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException {
         ToDo todo = new ToDo(fullCommand);
         tasks.add(todo);
         storage.save(tasks);
-        System.out.println(addedTaskMessage(todo, tasks));
+        return addedTaskMessage(todo, tasks);
     }
 }

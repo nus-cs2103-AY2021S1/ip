@@ -1,8 +1,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.exception.EmptyDateException;
 import org.junit.jupiter.api.Test;
 
-import duke.exception.EmptyDateException;
 import duke.exception.EmptyDescriptionException;
 import duke.task.Event;
 

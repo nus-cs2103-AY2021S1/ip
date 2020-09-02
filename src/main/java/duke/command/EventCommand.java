@@ -13,10 +13,10 @@ public class EventCommand extends TaskCommand {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException, EmptyDateException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException, EmptyDateException {
         Event event = new Event(fullCommand);
         tasks.add(event);
         storage.save(tasks);
-        System.out.println(addedTaskMessage(event, tasks));
+        return addedTaskMessage(event, tasks);
     }
 }

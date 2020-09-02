@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.EmptyDescriptionException;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -14,9 +15,12 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException {
+        if (fullCommand.length() < 6) {
+            throw new EmptyDescriptionException("oops! the description of 'find' cannot be empty");
+        }
         ArrayList<Task> matchingTasks = tasks.getMatchingTasks(fullCommand.substring(5));
-        System.out.println(matchingTasksMessage(matchingTasks));
+        return matchingTasksMessage(matchingTasks);
     }
 
     public String matchingTasksMessage(ArrayList<Task> matchingTasks) {

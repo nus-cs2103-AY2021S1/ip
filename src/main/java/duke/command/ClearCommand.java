@@ -5,14 +5,19 @@ import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
 
-public class InvalidCommand extends Command {
-    public InvalidCommand(String fullCommand) {
+public class ClearCommand extends Command {
+    public ClearCommand(String fullCommand) {
         super(fullCommand);
         this.isExit = false;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return "oops! im sorry, but i do not know what that means :-(";
+        tasks.deleteAll();
+        return getClearMessage();
+    }
+
+    public String getClearMessage() {
+        return "all the tasks in your list have been cleared";
     }
 }
