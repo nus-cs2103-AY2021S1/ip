@@ -7,20 +7,29 @@ public class Duke {
     private final Parser parser;
     private boolean hasExited;
     private final String dest;
+    private Storage storage;
+    private TaskList taskList;
 
     /**
-     * Constructor with specified directory of database.
-     *
-     * @param dest directory of database
+     * Constructor with default directory of database.
      */
-    public Duke(String dest) {
-        this.dest = dest;
+    public Duke() {
+        dest = "data/duke.txt";
         ui = new Ui();
         parser = new Parser();
+        try {
+            storage = new Storage(dest);
+            taskList = storage.loadFile();
+        } catch (IOException e) {
+            ui.printNicely(e.getMessage());
+        }
+    }
+
+    public boolean hasExited() {
+        return hasExited;
     }
 
     private void run() {
-        System.setProperty("file.encoding", "UTF-8");
         Storage storage;
         TaskList taskList;
         try {
@@ -75,6 +84,57 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
     }
+
+    /**
+     * Process the input and returns a response in the form of a string.
+     *
+     * @param input User input
+     * @return Duke's response.
+     */
+    public String processAndGetResponse(String input) {
+        StringBuilder response;
+        try {
+            input = input.trim();
+            switch (parser.parseInput(input)) {
+            case ADD:
+                taskList.add(parser.parseInputTask(input));
+                response = new StringBuilder(ui.generateResponse("Noted, I have added the following task:",
+                        parser.parseInputTask(input).toString()));
+                break;
+            case DONE:
+                taskList.markDone(parser.parseDone(input));
+                response = new StringBuilder(ui.generateResponse("Noted, I have marked the following task as done:",
+                        taskList.get(parser.parseDone(input)).toString()));
+                break;
+            case DELETE:
+                response = new StringBuilder(ui.generateResponse("Noted, I have deleted the following task:",
+                        taskList.get(parser.parseDelete(input)).toString()));
+                taskList.delete(parser.parseDelete(input));
+                response.append(ui.generateTaskListString(taskList));
+                break;
+            case FIND:
+                TaskList newList = taskList.find(parser.parseFind(input));
+                response = new StringBuilder(ui.generateTaskListString(
+                        String.format("I have found the following %d task(s)", newList.size()),
+                        newList));
+                break;
+            case LIST:
+                response = new StringBuilder(ui.generateTaskListString(taskList));
+                break;
+            case BYE:
+                hasExited = true;
+                response = new StringBuilder(ui.generateResponse("Goodbye."));
+                break;
+            default:
+                throw new IOException("Cannot be understood.");
+            }
+            storage.writeFile(taskList);
+        } catch (Exception e) {
+            response = new StringBuilder(ui.generateResponse(e.getMessage()));
+        }
+        return response.toString();
+    }
+
 }

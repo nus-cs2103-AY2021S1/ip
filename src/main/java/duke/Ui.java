@@ -25,7 +25,7 @@ public class Ui {
     }
 
     public void bye() {
-        printNicely("Bye. Hope to  see you again soon!");
+        printNicely("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -79,6 +79,53 @@ public class Ui {
         printNicelyCollection(Arrays.asList(strings));
     }
 
+    /**
+     * Generates a string which is the concatenation of all the strings separated by new line.
+     *
+     * @param strings Collection of strings.
+     * @return
+     */
+    public String generateResponseCollection(Collection<String> strings) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String s: strings) {
+            stringBuilder.append(s);
+            stringBuilder.append('\n');
+        }
+        return stringBuilder.toString();
+    }
+
+    public String generateResponse(String ...strings) {
+        return generateResponseCollection(Arrays.asList(strings));
+    }
+
+    /**
+     * Generates a String representing the TaskList.
+     *
+     * @param taskList The user's taskList.
+     */
+    public String generateTaskListString(TaskList taskList) {
+        ArrayList<String> toPrint = new ArrayList<>();
+        toPrint.add(String.format("You currently have %d task(s)", taskList.size()));
+        for (int i = 0; i < taskList.size(); i++) {
+            toPrint.add(String.format("%d.%s", i + 1, taskList.get(i)));
+        }
+        return generateResponseCollection(toPrint);
+    }
+
+    /**
+     * Generates a String representing the TaskList with a message as context.
+     *
+     * @param message The message explaining the context of the list.
+     * @param taskList The taskList.
+     */
+    public String generateTaskListString(String message, TaskList taskList) {
+        ArrayList<String> toPrint = new ArrayList<>();
+        toPrint.add(message);
+        for (int i = 0; i < taskList.size(); i++) {
+            toPrint.add(String.format("%d.%s", i + 1, taskList.get(i)));
+        }
+        return generateResponseCollection(toPrint);
+    }
     public String nextLine() {
         return sc.nextLine();
     }
