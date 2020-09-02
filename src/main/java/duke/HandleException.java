@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.List;
+
 public class HandleException {
 
     /**
@@ -12,10 +14,11 @@ public class HandleException {
      * Handle Exceptions when running the program.
      *
      * @param et  ExceptionType object to initialize DukeException object.
+     * @return  List of Strings that represent the DukeException object.
      */
-    public static void handleException(DukeException.ExceptionType et) {
+    public static List<String> handleException(DukeException.ExceptionType et) {
         DukeException de = new DukeException(et);
-        System.out.println(de);
+        return de.toArrList();
     }
 
 }

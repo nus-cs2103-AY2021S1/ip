@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DukeException extends Throwable {
 
     /** ExceptionType object of DukeException */
@@ -17,7 +20,7 @@ public class DukeException extends Throwable {
     }
 
 
-    /** Enum class of ExceptionType within DukeException class */
+    /** Enum class of ExceptionType within DukeException class. */
     public enum ExceptionType {
         NO_MEANING,
         EMPTY_ILLEGAL,
@@ -31,58 +34,61 @@ public class DukeException extends Throwable {
 
 
     /**
-     * Return String representation of DukeException object.
+     * Return String representation of DukeException object in form of List<String>.
      *
      */
-    @Override
-    public String toString() {
-        String output = "";
+    public List<String> toArrList() {
+        List<String> output = new ArrayList<>();
 
-        String full_guide = "\n     Please follow the format:"
-                + "\n     'list'" + "\n     'done TASK_NUMBER' or 'delete TASK_NUMBER'"
-                + "\n     'todo MY_TASK'" + "\n     'deadline MY_TASK /by DATE_OR_TIME'"
-                + "\n     'event MY_TASK /at DATE_OR_TIME'" + "\n     'bye' + '\n     NOTE: "
-                + "\n     Recommended Form of DATE_OR_TIME: 'YYYY-MM-DD HHMM' or 'YYYY-MM-DD''";
+        String full_guide = "Please follow the format below:\n"
+                + "\n'list'" + "\n'done TASK_NUMBER'" + "\n'delete TASK_NUMBER'"
+                + "\n'todo MY_TASK'" + "\n'deadline MY_TASK /by DATE_OR_TIME'"
+                + "\n'event MY_TASK /at DATE_OR_TIME'"
+                + "\n'find KEYWORD'"
+                + "\n'bye'\n\nNOTE: "
+                + "\nRecommended Form of DATE_OR_TIME: 'YYYY-MM-DD HHMM' or 'YYYY-MM-DD''";
 
         switch(et) {
         case NO_MEANING:
-            output = "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(" + full_guide;
+            output.add("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            output.add(full_guide);
             break;
         case EMPTY_ILLEGAL:
-            output = "     ☹ OOPS!!! Your number input is empty or invalid."
-                    + "\n     Please foxllow the format: 'done TASK_NUMBER' or 'delete TASK_NUMBER'";
+            output.add("☹ OOPS!!! Your number input is empty or invalid.");
+            output.add("Please follow the format: \n'done TASK_NUMBER' or 'delete TASK_NUMBER'");
             break;
         case TODO_INCOMPLETE:
-            output = "     ☹ OOPS!!! The description of a todo cannot be empty."
-                    + "\n     Please follow the format: 'todo MY_TASK'";
+            output.add("☹ OOPS!!! The description of a todo cannot be empty.");
+            output.add("Please follow the format: \n'todo MY_TASK'");
             break;
         case FIND_INCOMPLETE:
-            output = "     ☹ OOPS!!! The keyword of a search cannot be empty."
-                    + "\n     Please follow the format: 'find KEYWORD'";
+            output.add("☹ OOPS!!! The keyword of a search cannot be empty.");
+            output.add("Please follow the format: 'find KEYWORD'");
             break;
         case DEADLINE_INCOMPLETE:
-            output = "     ☹ OOPS!!! The description of a deadline cannot be empty or incomplete."
-                    + "\n     Please follow the format: 'deadline MY_TASK /by DATE_OR_TIME'"
-                    + "\n     (Recommended DATE/TIME format: 'YYYY-MM-DD HHMM' or 'YYYY-MM-DD')";
+            output.add("☹ OOPS!!! The description of a deadline cannot be empty or incomplete.");
+            output.add("Please follow the format: \n'deadline MY_TASK /by DATE_OR_TIME'\n"
+                    + "\n(Recommended DATE/TIME format:\n'YYYY-MM-DD HHMM' or 'YYYY-MM-DD')");
             break;
         case EVENT_INCOMPLETE:
-            output = "     ☹ OOPS!!! The description of an event cannot be empty or incomplete."
-                    + "\n     Please follow the format: 'event MY_TASK /at DATE_OR_TIME'"
-                    + "\n     (Recommended DATE/TIME format: 'YYYY-MM-DD HHMM' or 'YYYY-MM-DD')";
+            output.add("☹ OOPS!!! The description of an event cannot be empty or incomplete.");
+            output.add("Please follow the format: \n'event MY_TASK /at DATE_OR_TIME'\n"
+                    + "\nRecommended DATE/TIME format: 'YYYY-MM-DD HHMM' or 'YYYY-MM-DD'");
             break;
         case READ_FILE:
-            output = "     ☹ OOPS!!! There seems to be some problem accessing the memory file!";
+            output.add("☹ OOPS!!! There seems to be some problem accessing the memory file!");
             break;
         case IMPROPER_DATETIME:
-            output = SpecialFormat.STARTING_LINE +
-                    "☹ OOPS!!! We are unable to understand the Time provided."
-                    + "\n     However, we will still add this task. No worries!"
-                    + "\n     Next time, you can consider the format 'YYYY-MM-DD HHMM' or 'YYYY-MM-DD'!";
+            output.add("☹ OOPS!!! We are unable to understand the Time provided.");
+            output.add("However, we will still add this task. No worries!\n"
+                    + "Next time, please consider the format 'YYYY-MM-DD HHMM' or 'YYYY-MM-DD'!");
             break;
         default:
-            output = "     ☹ OOPS!!! Unspecified problem detected!" + full_guide;
+            output.add("☹ OOPS!!! Unspecified problem detected!");
+            output.add(full_guide);
             break;
         }
+
         return output;
     }
 

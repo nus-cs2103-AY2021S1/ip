@@ -56,6 +56,9 @@ public class Parser {
         if (input.equals("bye")) {
             commandType = "bye";
             output = new String[] {commandType};
+        } else if (input.equals("hello")) {
+            commandType = "hello";
+            output = new String[] {commandType};
         } else if (input.equals("list")) {
             commandType = "list";
             output = new String[] {commandType};
@@ -88,14 +91,12 @@ public class Parser {
                     commandType.equals("todo")) {
                 String taskContent;
                 String dateTime;
-                boolean exceptionAbsent = true;
 
                 if (!commandType.equals("todo")) {
                     try {
                         inputSplitArr = inputSplitArr[1].split(
                                 commandType.equals("event") ? " /at " : " /by ", 2);
                     } catch (Exception ex) {
-                        exceptionAbsent = false;
                         exceptionType = commandType.equals("deadline")
                                 ? "deadline"
                                 : "event";
@@ -103,30 +104,29 @@ public class Parser {
                         return new String[] {commandType, exceptionType};
                     }
                 }
-                if (exceptionAbsent) {
-                    if (commandType.equals("todo")) {
-                        try {
-                            taskContent = inputSplitArr[1];
-                        } catch (Exception e) {
-                            return new String[] {"exception", "todo"};
-                        }
-                        output = new String[] {commandType, taskContent};
-                    } else {
-                        try {
-                            taskContent = inputSplitArr[0];
-                            dateTime = inputSplitArr[1];
-                            dateTime = this.dateTimeParser(dateTime);
-                            output = new String[] {commandType, taskContent, dateTime};
-                        } catch (Exception ex) {
-                            exceptionAbsent = false;
-                            exceptionType = commandType.equals("event")
-                                    ? "event"
-                                    : "deadline";
-                            commandType = "exception";
-                            return new String[] {commandType, exceptionType};
-                        }
+
+                if (commandType.equals("todo")) {
+                    try {
+                        taskContent = inputSplitArr[1];
+                    } catch (Exception e) {
+                        return new String[] {"exception", "todo"};
+                    }
+                    output = new String[] {commandType, taskContent};
+                } else {
+                    try {
+                        taskContent = inputSplitArr[0];
+                        dateTime = inputSplitArr[1];
+                        dateTime = this.dateTimeParser(dateTime);
+                        output = new String[] {commandType, taskContent, dateTime};
+                    } catch (Exception ex) {
+                        exceptionType = commandType.equals("event")
+                                ? "event"
+                                : "deadline";
+                        commandType = "exception";
+                        return new String[] {commandType, exceptionType};
                     }
                 }
+
             } else {
                 exceptionType = "no_meaning";
                 commandType = "exception";
@@ -135,4 +135,5 @@ public class Parser {
         }
         return output;
     }
+
 }

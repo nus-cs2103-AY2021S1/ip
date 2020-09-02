@@ -67,18 +67,22 @@ public class TaskList {
     /**
      * Modify temporary tasklist and overwrite local memory.
      */
-    public void editTask(String[] commandArr) {
+    public List<String> editTask(String[] commandArr) {
         String type = commandArr[0];
         String taskNumber = commandArr[1];
         boolean exceptionAbsent = true;
         int actionNumber = -1;
         String taskContent = "";
+        List<String> output = new ArrayList<>();
+
         try {
             actionNumber = Integer.parseInt(taskNumber);
         } catch (Exception ex) {
             exceptionAbsent = false;
-            HandleException.handleException(DukeException.ExceptionType.EMPTY_ILLEGAL);
+            output.addAll(HandleException.handleException(
+                    DukeException.ExceptionType.EMPTY_ILLEGAL));
         }
+
         if (exceptionAbsent) {
             try {
                 if (type.equals("delete")) {
@@ -89,20 +93,45 @@ public class TaskList {
                 }
                 new Storage(memoFileDir, memoFileName).write_memory(taskCollections);
                 if (type.equals("delete")) {
-                    System.out.println(SpecialFormat.INDENT + "Noted. I've removed this task:");
-                    System.out.println(SpecialFormat.INDENT + taskContent);
-                    System.out.println(SpecialFormat.INDENT + "Now you have " + this.taskCollections.size() +
-                            " tasks in the list.");
+                    output.add("Noted. I've removed this task:\n" + taskContent + "\n"
+                            + "Now you have " + this.taskCollections.size() + " tasks in the list.");
                 } else {
-                    System.out.println(SpecialFormat.INDENT + "Nice! I've marked this task as done:");
-                    System.out.println(SpecialFormat.INDENT + "  [\u2713] " +
-                            taskCollections.get(actionNumber - 1).toString().split("] ", 2)[1]);
-                }
+                    output.add("Nice! I've marked this task as done:\n" + " [\u2713] "
+                            + taskCollections.get(actionNumber - 1).toString().split("] ", 2)[1]);                }
             } catch (Exception ex) {
-                exceptionAbsent = false;
-                HandleException.handleException(DukeException.ExceptionType.EMPTY_ILLEGAL);
+                output.addAll(HandleException.handleException(
+                        DukeException.ExceptionType.EMPTY_ILLEGAL));
             }
         }
+        return output;
+    }
+
+
+    /**
+     * Add new Task object to the temporary collection and local memory.
+     */
+    public List<String> addTask(String[] commandArr) {
+        String type = commandArr[0];
+        String taskContent = commandArr[1];
+        Task t;
+        List<String> output = new ArrayList<>();
+        if (type.equals("todo")) {
+            t = new Todo(taskContent);
+        } else {
+            t = type.equals("event")
+                    ? new Event(taskContent, commandArr[2])
+                    : new Deadline(taskContent, commandArr[2]);
+        }
+        try {
+            this.taskCollections.add(t);
+            new Storage(memoFileDir, memoFileName).appendToFile(memoFileDir + memoFileName, t);
+            output.add("Got it. I've added ths task:\n" + "  " + taskCollections.get(taskCollections.size() - 1)
+                    + "\nNow you have " + taskCollections.size() + " tasks in the list.");
+        } catch (Exception e) {
+            output.addAll(HandleException.handleException(
+                    DukeException.ExceptionType.READ_FILE));
+        }
+        return output;
     }
 
 
@@ -117,44 +146,17 @@ public class TaskList {
         Iterator itr = taskCollections.iterator();
         while (itr.hasNext()) {
             Task currTask = (Task) itr.next();
-            if (currTask.getDescription().contains(keyword)) {
+            if (currTask.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 searchResult.add(currTask);
             } else {
                 if (currTask.getType().equals("D") || currTask.getType().equals("E")) {
-                    if (currTask.getInfo()[3].contains(keyword)) {
+                    if (currTask.getInfo()[3].toLowerCase().contains(keyword.toLowerCase())) {
                         searchResult.add(currTask);
                     }
                 }
             }
         }
         return searchResult;
-    }
-
-
-    /**
-     * Add new Task object to the temporary collection and local memory.
-     */
-    public void addTask(String[] commandArr) {
-        String type = commandArr[0];
-        String taskContent = commandArr[1];
-        Task t;
-        if (type.equals("todo")) {
-            t = new Todo(taskContent);
-        } else {
-            t = type.equals("event")
-                    ? new Event(taskContent, commandArr[2])
-                    : new Deadline(taskContent, commandArr[2]);
-        }
-        try {
-            this.taskCollections.add(t);
-            new Storage(memoFileDir, memoFileName).appendToFile(memoFileDir + memoFileName, t);
-            System.out.println(SpecialFormat.INDENT + "Got it. I've added ths task:");
-            System.out.println(SpecialFormat.INDENT + "  " + taskCollections.get(taskCollections.size() - 1));
-            System.out.println(SpecialFormat.INDENT + "Now you have " +
-                    taskCollections.size() + " tasks in the list.");
-        } catch (Exception e) {
-            HandleException.handleException(DukeException.ExceptionType.READ_FILE);
-        }
     }
 
 }
