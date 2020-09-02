@@ -13,7 +13,7 @@ public class ToDoTest {
     public void factoryMethod_success() {
         String[] data = new String[]{"T", "0", "test event"};
         try {
-            assertEquals(ToDo.createFromFile(data), ToDo.create("todo test event"));
+            assertEquals(ToDo.createFromFile(data), ToDo.create("test event"));
         } catch (UnreadableSaveTaskException e) {
             e.printStackTrace();
             fail();
