@@ -13,7 +13,7 @@ import duke.exception.DukeException;
 public class Command {
 
     /** Indicates if the command is telling the program to terminate */
-    public boolean isExit = false;
+    private boolean isExit = false;
 
     /**
      * Executes the command.
@@ -27,5 +27,13 @@ public class Command {
 
     public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) throws DukeException {
         return "";
+    }
+
+    public boolean isExit() {
+        return isExit;
+    }
+
+    public void setExit(boolean exitStatus) {
+        isExit = exitStatus;
     }
 }

@@ -1,8 +1,10 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.task.Task;
 
-import java.util.Scanner;
+
 
 /**
  * Handles all interactions with the user.
@@ -37,8 +39,7 @@ public class Ui {
      * Greets the user upon program start up.
      */
     public void showWelcome() {
-        System.out.println(LOGO + "\nHello, I'm Star Bot! What can I do for " +
-                "you?\nSay \"bye\" to exit.\n");
+        System.out.println(LOGO + "\nHello, I'm Star Bot! What can I do for you?\nSay \"bye\" to exit.\n");
     }
 
     /**
@@ -83,8 +84,8 @@ public class Ui {
      * @param tasks The list of tasks that the task is being added to.
      */
     public void showReplyForAddTask(Task newTask, TaskList tasks) {
-        showReply("Got it. I've added this task:\n" + newTask + "\nNow " +
-                "you have " + tasks.getNumberOfTasks() + " tasks in the list.");
+        showReply("Got it. I've added this task:\n" + newTask + "\nNow you have " + tasks.getNumberOfTasks()
+                + " tasks in the list.");
     }
 
     /**
@@ -103,8 +104,8 @@ public class Ui {
      * @param tasks The list of tasks that the task is being removed from.
      */
     public void showReplyForDeleteTask(Task removedTask, TaskList tasks) {
-        showReply("Noted. I've removed this task:\n" + removedTask +
-                "\nNow you have " + tasks.getNumberOfTasks() + " tasks in the list.");
+        showReply("Noted. I've removed this task:\n" + removedTask + "\nNow you have " + tasks.getNumberOfTasks()
+                + " tasks in the list.");
     }
 
     /**

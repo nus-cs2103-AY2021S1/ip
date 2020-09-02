@@ -7,7 +7,7 @@ package duke.exception;
 public class WrongFormatException extends DukeException {
 
     /** The command type as specified by the first word of the command that the user entered */
-    String commandName;
+    private String commandName;
 
     /**
      * Creates and initializes a WrongFormatException object.

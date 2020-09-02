@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -8,8 +10,6 @@ import duke.exception.TodoWrongFormatException;
 import duke.exception.WrongFormatException;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.io.IOException;
 
 /**
  * Encapsulates an add command for to-do tasks. This command adds a to-do task to the task list. The format for this

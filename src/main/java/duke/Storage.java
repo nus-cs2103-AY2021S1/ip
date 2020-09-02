@@ -1,7 +1,5 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,6 +9,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Loads tasks from and saves tasks to the save file (a saved task list). Storage will attempt to load the save file
@@ -65,9 +65,9 @@ public class Storage {
                     System.err.println(e.getMessage());
                 }
                 throw new FileNotFoundException("ERROR: Could not load last save.\nThe save file \""
-                        + pathParts[pathParts.length - 1] + "\" does not exist.\nNow loading a new, empty task list" +
-                        ".\nA new save file \"" + pathParts[pathParts.length - 1] + "\" has been created with the\n" +
-                        "following path: \"" + filePath + "\".");
+                        + pathParts[pathParts.length - 1] + "\" does not exist.\nNow loading a new, empty task list"
+                        + ".\nA new save file \"" + pathParts[pathParts.length - 1] + "\" has been created with the\n"
+                        + "following path: \"" + filePath + "\".");
             } else { // A directory specified in filePath does not exist so we should create it (and all its
                 // subdirectories if any)
                 try {
@@ -81,11 +81,11 @@ public class Storage {
                 } catch (IOException e) {
                     System.err.println(e.getMessage());
                 }
-                throw new FileNotFoundException("ERROR: Could not load last save.\nPath specified for save file: " +
-                        "\"" + filePath + "\"\nThe directory \"" + nonExistentDirectory + "\"\n(and hence all " +
-                        "subdirectories of it, if any)\ndoes not exist.\nNow loading a new, empty task list.\nA new " +
-                        "save file \"" + pathParts[pathParts.length - 1] + "\" has been created with the\nfollowing " +
-                        "path: \"" + filePath + "\".");
+                throw new FileNotFoundException("ERROR: Could not load last save.\nPath specified for save file: "
+                        + "\"" + filePath + "\"\nThe directory \"" + nonExistentDirectory + "\"\n(and hence all "
+                        + "subdirectories of it, if any)\ndoes not exist.\nNow loading a new, empty task list.\nA new "
+                        + "save file \"" + pathParts[pathParts.length - 1] + "\" has been created with the\nfollowing "
+                        + "path: \"" + filePath + "\".");
             }
         }
 

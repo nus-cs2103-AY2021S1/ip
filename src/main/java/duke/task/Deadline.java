@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.WrongFormatException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.exception.WrongFormatException;
 
 /**
  * Encapsulates the deadline task type. A deadline task has a description of the task and the date and time of when
@@ -31,8 +31,8 @@ public class Deadline extends Task {
         String byDate = dateAndTimeParts[0];
         String byTime = dateAndTimeParts[1];
         this.date = LocalDate.parse(byDate);
-        this.dateAndTime = this.date.atTime(Integer.parseInt(byTime.substring(0,2)),
-                Integer.parseInt(byTime.substring(2,4)));
+        this.dateAndTime = this.date.atTime(Integer.parseInt(byTime.substring(0, 2)),
+                Integer.parseInt(byTime.substring(2, 4)));
     }
 
     /**
@@ -49,8 +49,8 @@ public class Deadline extends Task {
         String byDate = dateAndTimeParts[0];
         String byTime = dateAndTimeParts[1];
         this.date = LocalDate.parse(byDate);
-        this.dateAndTime = this.date.atTime(Integer.parseInt(byTime.substring(0,2)),
-                Integer.parseInt(byTime.substring(2,4)));
+        this.dateAndTime = this.date.atTime(Integer.parseInt(byTime.substring(0, 2)),
+                Integer.parseInt(byTime.substring(2, 4)));
     }
 
     /**

@@ -16,7 +16,7 @@ public class ExitCommand extends Command {
      * program that it should terminate.
      */
     public ExitCommand() {
-        isExit = true;
+        setExit(true);
     }
 
     /**

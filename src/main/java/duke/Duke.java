@@ -1,13 +1,15 @@
 package duke;
 
+import java.io.FileNotFoundException;
+import java.util.concurrent.TimeUnit;
+
 import duke.command.Command;
 import duke.command.UnknownCommand;
 import duke.exception.DukeException;
 import duke.exception.WrongFormatException;
 import javafx.application.Platform;
 
-import java.io.FileNotFoundException;
-import java.util.concurrent.TimeUnit;
+
 
 /**
  * Represents the Duke chat bot. Duke can keep a record of user's inputs as a list of tasks, mark them as completed
@@ -16,6 +18,8 @@ import java.util.concurrent.TimeUnit;
  * and event tasks.
  */
 public class Duke {
+    /** The relative path in which the save file is located */
+    private static final String FILE_PATH = "data/duke.txt";
 
     /** Deals with loading tasks from and saving tasks to the save file on the hard disk */
     private Storage storage;
@@ -29,11 +33,8 @@ public class Duke {
     /** Deals with interactions with the user for GUI version of Duke */
     private UiForGui uiForGui;
 
-    /** The relative path in which the save file is located */
-    private static final String FILE_PATH = "data/duke.txt";
-
     /**
-     * Creates and initializes the Duke program.
+     * Creates and initializes the CLI version of the Duke program.
      *
      * @param filePath The relative path in which the save file is located.
      */
@@ -48,6 +49,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Creates and initializes the GUI version of the Duke program.
+     */
     public Duke() {
         uiForGui = new UiForGui();
         storage = new Storage("./data/duke.txt");
@@ -79,7 +83,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
-                isExit = c.isExit;
+                isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e);
             }
@@ -93,7 +97,7 @@ public class Duke {
     public Response getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            if (c.isExit) {
+            if (c.isExit()) {
                 Thread newThread = new Thread(() -> exitProgram());
                 newThread.start();
             }
@@ -103,6 +107,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Terminates the GUI version of Duke.
+     */
     public void exitProgram() {
         try {
             TimeUnit.SECONDS.sleep(3);

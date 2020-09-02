@@ -21,7 +21,6 @@ public class EventWrongFormatException extends WrongFormatException {
      */
     @Override
     public String getMessage() {
-        return super.getMessage() + "description of a task in the " +
-                "following format:\nevent /at time.";
+        return super.getMessage() + "description of a task in the following format:\nevent /at time.";
     }
 }

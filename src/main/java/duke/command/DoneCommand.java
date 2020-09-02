@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -7,8 +9,6 @@ import duke.UiForGui;
 import duke.exception.DoneWrongFormatException;
 import duke.exception.TaskIndexOutOfBoundsException;
 import duke.task.Task;
-
-import java.io.IOException;
 
 /**
  * Encapsulates a done command for the Duke program. This is the command that marks tasks as completed in the task list.
