@@ -4,8 +4,9 @@ import java.util.Scanner;
 
 /**
  * Class representing the interface that receives user inputs.
- * (Now unused, replaced by GUI elements)
+ * @deprecated As of Level-10, replaced by GUI elements instead.
  */
+@Deprecated
 public class Ui {
     public static final String LINE = "____________________";
     private static final String GREETING = "Hello, I'm your chatbot!\n"
