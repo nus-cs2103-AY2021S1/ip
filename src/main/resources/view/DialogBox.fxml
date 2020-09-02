@@ -2,67 +2,43 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.effect.Blend?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
-<fx:root
-        xmlns:fx="http://javafx.com/fxml/1"
-        alignment="TOP_RIGHT"
-        maxHeight="-Infinity"
-        maxWidth="Infinity"
-        prefWidth="400.0"
-        type="javafx.scene.layout.HBox"
-        xmlns="http://javafx.com/javafx/11.0.1">
+
+<fx:root 
+        alignment="TOP_RIGHT" 
+        maxHeight="-Infinity" 
+        maxWidth="1.7976931348623157E308" 
+        minHeight="-Infinity" 
+        prefWidth="400.0" 
+        type="javafx.scene.layout.HBox" 
+        xmlns="http://javafx.com/javafx/11.0.1" 
+        xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label
-                fx:id="dialog"
-                minHeight="-Infinity"
-                lineSpacing="1.0"
-                style="-fx-border-radius: 12px; -fx-border-color: #27457B; -fx-background-color: #FEFFE5; -fx-background-radius: 12px;"
-                textFill="#0b1e38"
-                textOverrun="CLIP"
-                wrapText="true">
-            <font>
-                <Font name="Malgun Gothic" size="13.777777671813965"/>
-            </font>
-            <opaqueInsets>
-                <Insets/>
-            </opaqueInsets>
-            <padding>
-                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
-            </padding>
+        <HBox 
+                fx:id="speechBubble" 
+                maxHeight="-Infinity" 
+                styleClass="speech-bubble" 
+                stylesheets="@../styles/base.css">
+            <children>
+                <Label fx:id="dialog" text="Label" wrapText="true">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </Label>
+            </children>
             <HBox.margin>
-                <Insets/>
+                <Insets left="10.0" right="10.0" />
             </HBox.margin>
-        </Label>
-        <ImageView
-                fx:id="displayPicture"
-                fitHeight="100.0"
-                fitWidth="100.0"
-                pickOnBounds="true"
-                preserveRatio="true">
-            <HBox.margin>
-                <Insets left="10.0" right="10.0"/>
-            </HBox.margin>
-        </ImageView>
+        </HBox>
+        <ImageView 
+                fx:id="displayPicture" 
+                fitHeight="100.0" 
+                fitWidth="100.0" 
+                pickOnBounds="true" 
+                preserveRatio="true" />
     </children>
     <padding>
-        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
     </padding>
-    <cursor>
-        <Cursor fx:constant="DEFAULT"/>
-    </cursor>
-    <effect>
-        <Glow>
-            <input>
-                <Blend/>
-            </input>
-        </Glow>
-    </effect>
-    <opaqueInsets>
-        <Insets/>
-    </opaqueInsets>
 </fx:root>

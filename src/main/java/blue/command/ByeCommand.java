@@ -1,5 +1,7 @@
 package blue.command;
 
+import java.util.Random;
+
 import blue.Storage;
 import blue.task.Tasks;
 import blue.ui.Ui;
@@ -25,6 +27,10 @@ public class ByeCommand extends Command {
      */
     @Override
     public CommandResponse execute(Tasks tasks, Ui ui, Storage storage) {
-        return new CommandResponse(ui.getExitMessage() + ui.getLongExitMessage(), this.isExit());
+        String message = ui.getExitMessage();
+        if (new Random().nextInt(4) == 0) {
+            message += ui.getLongExitMessage();
+        }
+        return new CommandResponse(message, this.isExit());
     }
 }
