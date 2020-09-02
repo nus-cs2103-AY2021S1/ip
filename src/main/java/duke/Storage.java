@@ -17,7 +17,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private final String defaultPath = "./duke.txt";
+    private final String DEFAULTPATH = "./duke.txt";
     private final Path path;
 
     /**
@@ -26,8 +26,8 @@ public class Storage {
      * If not available, the storage object will create a file.
      */
     public Storage() {
-        path = Paths.get(defaultPath);
-        File file = new File(defaultPath);
+        path = Paths.get(DEFAULTPATH);
+        File file = new File(DEFAULTPATH);
         if (Files.notExists(this.path)) {
             try {
                 file.createNewFile();
@@ -43,7 +43,7 @@ public class Storage {
      * @throws IOException
      */
     public void writeData(List<Task> taskList) throws IOException {
-        FileWriter file = new FileWriter(defaultPath);
+        FileWriter file = new FileWriter(DEFAULTPATH);
         for (Task tasking : taskList) {
             String toBeSaved = "";
             switch (tasking.getTasktype()) {

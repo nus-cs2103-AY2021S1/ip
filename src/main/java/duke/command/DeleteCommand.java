@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Tasklist;
+import duke.TaskList;
 import duke.UserInterface;
 import duke.exception.DukeIndexException;
 
@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
      * @return response for when user deletes a task.
      */
     @Override
-    public String execute(Tasklist tasklist, UserInterface ui) throws DukeIndexException {
+    public String execute(TaskList tasklist, UserInterface ui) throws DukeIndexException {
 
         if (this.index > tasklist.getTaskSize() - 1 || this.index < 0) {
             String errorMessage = "Wrong list number input. "
@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
                     + tasklist.getTaskSize();
             throw new DukeIndexException(errorMessage);
         }
-        String response = ui.printDelete(tasklist.get(index).toString(), tasklist.getTaskSize());
+        String response = ui.printDelete(tasklist.getTaskDetail(index).toString(), tasklist.getTaskSize() - 1);
         tasklist.removeTask(index);
         return response;
 

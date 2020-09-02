@@ -1,7 +1,7 @@
 package duke.command;
 
 
-import duke.Tasklist;
+import duke.TaskList;
 import duke.UserInterface;
 import duke.exception.DukeListException;
 
@@ -19,11 +19,11 @@ public class ListCommand extends Command {
      * @throws DukeListException When the list is empty.
      */
     @Override
-    public String execute(Tasklist tasklist, UserInterface ui) throws DukeListException {
+    public String execute(TaskList tasklist, UserInterface ui) throws DukeListException {
         if (tasklist.getTaskSize() != 0) {
             String response = ui.listTask();
             for (int i = 0; i < tasklist.getTaskSize(); i++) {
-                response += ui.printTask(i + 1, tasklist.get(i).toString());
+                response += ui.printTask(i + 1, tasklist.getTaskDetail(i).toString());
             }
             return response;
         } else {

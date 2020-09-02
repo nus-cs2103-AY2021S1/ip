@@ -1,5 +1,0 @@
-T	false	 eat food
-T	false	 eat more food
-T	false	 fat fie me
-T	false	 eat foosd
-T	false	 eat food

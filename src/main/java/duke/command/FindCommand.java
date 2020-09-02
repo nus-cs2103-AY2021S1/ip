@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.Task;
-import duke.Tasklist;
+import duke.TaskList;
 import duke.UserInterface;
 import duke.exception.DukeListException;
 
@@ -30,11 +30,11 @@ public class FindCommand extends Command {
      * @throws DukeListException When the input index does not match the list.
      */
     @Override
-    public String execute(Tasklist tasklist, UserInterface ui) throws DukeListException {
-        Tasklist tempTaskList = new Tasklist(new Storage());
+    public String execute(TaskList tasklist, UserInterface ui) throws DukeListException {
+        TaskList tempTaskList = new TaskList(new Storage());
         tempTaskList.clearList();
         for (int i = 0; i < tasklist.getTaskSize(); i++) {
-            Task taskInCheck = tasklist.get(i);
+            Task taskInCheck = tasklist.getTaskDetail(i);
             if (taskInCheck.getTask().contains(wordToFind)) {
                 tempTaskList.addTask(taskInCheck);
             }

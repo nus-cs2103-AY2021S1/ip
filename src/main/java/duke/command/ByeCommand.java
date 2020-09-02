@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Tasklist;
+import duke.TaskList;
 import duke.UserInterface;
 import duke.exception.DukeIndexException;
 import duke.exception.DukeListException;
@@ -20,7 +20,7 @@ public class ByeCommand extends Command {
      * @throws DukeIndexException
      */
     @Override
-    public String execute(Tasklist tasklist, UserInterface ui) throws DukeListException, DukeIndexException {
+    public String execute(TaskList tasklist, UserInterface ui) throws DukeListException, DukeIndexException {
         return ui.exitMessage();
     }
 }

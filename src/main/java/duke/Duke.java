@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Duke {
 
     private Storage storage;
-    private Tasklist taskList;
+    private TaskList taskList;
     private UserInterface ui;
     private Parser parser;
 
@@ -19,7 +19,7 @@ public class Duke {
      */
     public Duke() {
         storage = new Storage();
-        taskList = new Tasklist(storage);
+        taskList = new TaskList(storage);
         ui = new UserInterface();
     }
 
@@ -28,7 +28,6 @@ public class Duke {
      */
     public void initialise() {
         try {
-            ui.welcomeMessage();
             taskList.loadList();
         } catch (IOException e) {
             System.out.print(e.getStackTrace());

@@ -1,7 +1,7 @@
 package duke.command;
 
 
-import duke.Tasklist;
+import duke.TaskList;
 import duke.UserInterface;
 import duke.exception.DukeIndexException;
 
@@ -28,7 +28,7 @@ public class DoneCommand extends Command {
      * @return Message sent when the user completes a task.
      */
     @Override
-    public String execute(Tasklist tasklist, UserInterface ui) throws DukeIndexException {
+    public String execute(TaskList tasklist, UserInterface ui) throws DukeIndexException {
 
         if (index > tasklist.getTaskSize() - 1 || index < 0) {
             String errorMessage = "Wrong list number input. "
@@ -38,7 +38,7 @@ public class DoneCommand extends Command {
         }
 
         tasklist.makeTaskDone(index);
-        return ui.printDone(tasklist.get(index).toString());
+        return ui.printDone(tasklist.getTaskDetail(index).toString());
 
     }
 }

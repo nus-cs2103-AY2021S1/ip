@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * A Tasklist to handle operations pertaining to the Tasklist.
  */
-public class Tasklist {
+public class TaskList {
 
     private List<Task> taskList;
     private Storage storage;
@@ -17,7 +17,7 @@ public class Tasklist {
      *
      * @param storage Takes in the storage object for initialisation.
      */
-    public Tasklist(Storage storage) {
+    public TaskList(Storage storage) {
         this.storage = storage;
     }
 
@@ -76,7 +76,7 @@ public class Tasklist {
      * @param index Index of the desired task.
      * @return Returns the task.
      */
-    public Task get(int index) {
+    public Task getTaskDetail(int index) {
         return taskList.get(index);
     }
 

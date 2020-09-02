@@ -119,7 +119,7 @@ public class UserInterface {
      * Preamble for the initialisation of the Pikachu Chatbot.
      * @return response for initialisation and instruction for User.
      */
-    public String welcomeMessage() {
+    public String sendWelcomeMessage() {
         String startingMessage = "Pikachu: Hello, I am Pikachu! My pika service creates a to-do list for you!\n\n"
                 + "1. type 'list' and I list all that you said, along if it is completed\n"
                 + "2. type either 'event', 'deadline', 'todo', followed by the task!\n"
@@ -129,7 +129,7 @@ public class UserInterface {
                 + "   2.4. if 'done' type the task followed by a number within the list index to mark it\n"
                 + "3. type 'done x' where x is the index of the item you want to be indicated done\n"
                 + "4. or you can say 'bye' to end us </3 Type your command:\n";
-        return LOGO + startingMessage;
+        return startingMessage;
     }
 
     /**
