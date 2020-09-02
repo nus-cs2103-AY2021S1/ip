@@ -36,7 +36,7 @@ public class Menu {
     }
 
     /**
-     * Switches the current scene to MainWindow.
+     * Switches the current scene to App.
      *
      * @throws IOException an IOException in trying to retrieve the fxml file.
      */
@@ -45,7 +45,7 @@ public class Menu {
         Stage stage;
         Parent root;
         stage = (Stage) startButton.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("/view/MainWindow.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/view/App.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

@@ -15,9 +15,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
- * Encapsulates the MainWindow class, representing the main window for the program.
+ * Encapsulates the App class, representing the main window for the program.
  */
-public class MainWindow extends AnchorPane {
+public class App extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -34,7 +34,7 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * Initialize the MainWindow class properties.
+     * Initialize the App class properties.
      */
     @FXML
     public void initialize() {

@@ -23,8 +23,8 @@ public class Main extends Application {
         // execute GUI loop
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/Menu.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
+            AnchorPane anchorPane = fxmlLoader.load();
+            Scene scene = new Scene(anchorPane);
             window.setScene(scene);
             window.show();
         } catch (IOException e) {
