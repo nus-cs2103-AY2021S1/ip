@@ -32,9 +32,9 @@ public class DoneCommand extends Command {
      * @throws BobIndexOutOfBoundsException if the index of the task to be marked as done does not exist on TaskList.
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws BobIOException, BobIndexOutOfBoundsException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws BobIOException, BobIndexOutOfBoundsException {
         tasks.get(index).markAsDone();
-        ui.markAsDone(tasks,index);
         storage.updateSave(tasks);
+        return ui.markAsDone(tasks,index);
     }
 }

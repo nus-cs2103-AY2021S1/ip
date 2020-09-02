@@ -19,7 +19,7 @@ public class ListCommand extends Command {
      * @throws BobIndexOutOfBoundsException
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws BobIndexOutOfBoundsException {
-        ui.printOutList(tasks);
+    public String execute(TaskList tasks, UI ui, Storage storage) throws BobIndexOutOfBoundsException {
+        return ui.printOutList(tasks);
     }
 }

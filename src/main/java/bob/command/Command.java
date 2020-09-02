@@ -19,7 +19,7 @@ public abstract class Command {
      * @param storage the Storage which manages all saved data to be updated.
      * @throws BobException if any errors arise.
      */
-    public abstract void execute(TaskList tasks, UI ui, Storage storage) throws BobException;
+    public abstract String execute(TaskList tasks, UI ui, Storage storage) throws BobException;
 
     /**
      * Returns a boolean value to indicate if Bob should stop accepting commands from the user.
