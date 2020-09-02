@@ -4,11 +4,10 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import duke.TaskList;
-import duke.ui.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-
+import duke.ui.Ui;
 
 /**
  * Represents command to add all forms of tasks into list.
@@ -56,7 +55,7 @@ public class AddCommand extends Command {
                 }
             }
         } catch (DateTimeException e) {
-            return Ui.printErrorMessage("Please key in again with a valid date\n" + Ui.LINE);
+            return Ui.printErrorMessage("Please key in again with a valid date\n");
         }
         return "";
     }

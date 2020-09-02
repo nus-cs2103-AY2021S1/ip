@@ -30,7 +30,7 @@ public class TaskList {
     public String addTask(Task toAdd) {
         this.allItems.add(toAdd);
         String printTask = "Alright, its in your list now!\n\t" + toAdd
-                + "\nNow you have " + this.allItems.size() + " tasks.\n" + Ui.LINE;
+                + "\nNow you have " + this.allItems.size() + " tasks.";
         return Ui.printMessage(printTask);
     }
 
@@ -45,13 +45,13 @@ public class TaskList {
 
     /**
      * Prints the output of all tasks in store currently.
+     *
      * @return response to User.
      */
     public String printStore() {
         String printList;
         if (this.allItems.size() == 0) {
-            printList = "There are no tasks added till now.\nAdd one by just typing its name.\n"
-                    + Ui.LINE;
+            printList = "There are no tasks added till now.\nAdd one by just typing its name.\n";
         } else {
             printList = "Please finish these tasks ASAP!\n";
             int counter = 1;
@@ -60,7 +60,7 @@ public class TaskList {
                 counter++;
             }
             printList = printList.concat("If you're brave enough to start,\n"
-                    + "You're strong enough to finish it!\n" + Ui.LINE);
+                    + "You're strong enough to finish it!\n");
         }
         return Ui.printMessage(printList);
     }
@@ -81,7 +81,7 @@ public class TaskList {
      *
      * @param index index of task to be removed.
      * @return response to User.
-     * */
+     */
     public String deleteTask(int index) {
         this.allItems.remove(index);
         return Ui.printDeleteTaskMessage();
@@ -110,13 +110,12 @@ public class TaskList {
 
         String printMatchingTasks;
         if (matchingTasks.size() == 0) {
-            printMatchingTasks = "There are no tasks that match " + toMatch + "\n" + Ui.LINE;
+            printMatchingTasks = "There are no tasks that match " + toMatch + "\n";
         } else {
             printMatchingTasks = "Matching tasks: \n";
             for (Task task : matchingTasks) {
                 printMatchingTasks = printMatchingTasks.concat(task + "\n");
             }
-            printMatchingTasks = printMatchingTasks + Ui.LINE;
         }
         return Ui.printMessage(printMatchingTasks);
     }

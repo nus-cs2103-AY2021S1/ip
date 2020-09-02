@@ -13,7 +13,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes the particular task.
-     * @param text index of task to delete.
+     *
+     * @param text     index of task to delete.
      * @param taskList current list of tasks.
      */
     @Override

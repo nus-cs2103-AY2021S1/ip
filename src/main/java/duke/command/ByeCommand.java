@@ -14,7 +14,8 @@ public class ByeCommand extends Command {
 
     /**
      * Leaves the conversation after saving the current state of tasks.
-     * @param text unused argument.
+     *
+     * @param text     unused argument.
      * @param taskList current list of tasks to be saved into hard disk.
      */
     @Override

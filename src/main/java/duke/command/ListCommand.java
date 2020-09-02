@@ -13,7 +13,8 @@ public class ListCommand extends Command {
 
     /**
      * Lists all current tasks.
-     * @param text  unused argument.
+     *
+     * @param text     unused argument.
      * @param taskList current list of tasks.
      */
     @Override

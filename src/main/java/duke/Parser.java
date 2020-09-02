@@ -2,7 +2,13 @@ package duke;
 
 import java.util.zip.DataFormatException;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.ui.Ui;
 
 
@@ -51,7 +57,7 @@ public class Parser {
                 throw new DukeCannotUnderstandException();
             }
         } catch (DukeCannotUnderstandException e) {
-            return Ui.printErrorMessage(e.getMessage() + "\n" + Ui.LINE);
+            return Ui.printErrorMessage(e.getMessage());
         }
     }
 
@@ -69,9 +75,9 @@ public class Parser {
         } catch (NumberFormatException e) {
             return Ui.printErrorMessage("I can't seem to understand what task you are referring to.\n"
                     + "Please let me know in this format: " + stringCommand
-                    + " <number of task>\n" + Ui.LINE);
+                    + " <number of task>\n");
         } catch (IndexOutOfBoundsException e) {
-            return Ui.printErrorMessage("Hmm... I don't have a task numbered " + answer + "\n" + Ui.LINE);
+            return Ui.printErrorMessage("Hmm... I don't have a task numbered " + answer);
         }
     }
 
@@ -119,9 +125,9 @@ public class Parser {
                 throw new DukeGotNoArgumentsException(instruction);
             }
         } catch (DukeGotNoArgumentsException e) {
-            return Ui.printErrorMessage(e.getMessage() + "\n" + Ui.LINE);
+            return Ui.printErrorMessage(e.getMessage());
         } catch (DataFormatException e) {
-            return Ui.printErrorMessage("Please key in again with the date in the ddmmyyyy format." + "\n" + Ui.LINE);
+            return Ui.printErrorMessage("Please key in again with the date in the ddmmyyyy format.");
         } catch (ArrayIndexOutOfBoundsException e) {
             return Ui.printErrorMessage(answer);
         }

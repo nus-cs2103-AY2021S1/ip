@@ -10,9 +10,11 @@ public class DoneCommand extends Command {
     public DoneCommand() {
         this.commandText = "done";
     }
+
     /**
      * Marks the particular task complete.
-     * @param text index of task to mark complete.
+     *
+     * @param text     index of task to mark complete.
      * @param taskList current list of tasks.
      */
     @Override

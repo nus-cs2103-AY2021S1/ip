@@ -4,8 +4,6 @@ package duke.ui;
  * Prints necessary output to user.
  */
 public class Ui {
-    public static final String LINE = "____________________________________________________________\n";
-
     /**
      * Introduces bot with welcome message.
      */
@@ -24,7 +22,7 @@ public class Ui {
      * Signs off with Bye message.
      */
     public static String printByeMessage() {
-        return ("Byeeeee see you later!\n" + LINE);
+        return ("Byeeeee see you later!\n");
     }
 
     /**
@@ -40,7 +38,7 @@ public class Ui {
      * Prints message that signals the deletion of a task.
      */
     public static String printDeleteTaskMessage() {
-        return ("I have removed the task from your list.\n" + LINE);
+        return ("I have removed the task from your list.");
     }
 
     /**
@@ -48,9 +46,9 @@ public class Ui {
      */
     public static String printDoneMessage(boolean isDone) {
         if (isDone) {
-            return ("Task is already done!\n" + LINE);
+            return ("Task is already done!\n");
         } else {
-            return ("Congratulations! I have marked this task done.\n" + LINE);
+            return ("Congratulations! I have marked this task done.\n");
         }
     }
 
