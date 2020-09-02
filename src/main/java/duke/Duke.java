@@ -6,8 +6,8 @@ import java.util.Scanner;
  * Main class for duke to run.
  */
 public class Duke {
-    private Storage storage;
     protected static TaskList tasks;
+    private Storage storage;
     private Ui ui;
 
     /**

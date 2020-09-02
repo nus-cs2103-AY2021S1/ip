@@ -147,15 +147,16 @@ public class Ui {
      * Prints confirmation message to show user the corresponding task has been deleted from the task list.
      *
      * @param index A series number of the task in the task list.
-     * @param newSizeOfTasks Size of the task list.
      * @param taskToDelete Task to be deleted.
+     * @param tasks
+     * @return
      */
-    public static String deleteTaskMsg(int index, int newSizeOfTasks, Task taskToDelete) {
+    public static String deleteTaskMsg(int index, Task taskToDelete, TaskList tasks) {
         String outputMsg = "___________________________________________________________"
                 + "\n (ಠ‿↼)"
                 + "\n Noted. This task has been removed from your task list:"
                 + "\n      Task #" + index + ". " + taskToDelete
-                + "\n Now you have " + newSizeOfTasks + " tasks in the list."
+                + "\n Now you have " + tasks.getTaskListSize() + " tasks in the list."
                 + "\n___________________________________________________________\n";
         System.out.println(outputMsg);
         return outputMsg;
