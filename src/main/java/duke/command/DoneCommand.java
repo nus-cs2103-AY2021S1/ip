@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
         if (Parser.isValidIndex(input, taskList.getListSize())) {
             Task task = taskList.getList().get(Parser.getIndex(input));
             task.markAsDone();
-            ui.printDoneMessage(task);
+            ui.setDoneMessage(task);
             storage.saveListToFile(taskList.getList());
         } else {
             throw new DukeException("You don't have such task in your list...");

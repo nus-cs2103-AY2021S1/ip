@@ -31,7 +31,7 @@ public class GetCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.findTaskByDate(Parser.parseDate(input.substring(9)), tasks.getList());
+        ui.setFindTaskByDateMessage(Parser.parseDate(input.substring(9)), tasks.getList());
     }
 
 }
