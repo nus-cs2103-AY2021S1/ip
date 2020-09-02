@@ -11,7 +11,7 @@ import tickbot.ui.text.TextUi;
  */
 public class Tickbot {
     /**
-     * The main entrance of Tockbot.
+     * The main entrance of Tickbot.
      */
     public static void main(String[] args) {
         Ui ui;
