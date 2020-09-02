@@ -66,7 +66,7 @@ public class Duke {
         System.out.println(SPACE + LINE);
 
         if (!directoryExists) {
-            System.out.println(format("☹ OOPS!!! Cannot find start file"));
+            System.out.println(format("OOPS!!! Cannot find start file"));
             throw new FileNotFoundException();
         }
 

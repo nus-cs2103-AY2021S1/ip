@@ -7,6 +7,6 @@ public class DoneEmptyBodyException extends EmptyBodyException {
     DoneEmptyBodyException() {}
     @Override
     public String toString() {
-        return "☹ OOPS!!! Empty done is invalid.";
+        return "OOPS!!! Empty done is invalid.";
     }
 }
