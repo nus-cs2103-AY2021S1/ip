@@ -3,6 +3,7 @@
 
 package ikura.task;
 
+import java.util.Optional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -16,13 +17,25 @@ public class Event extends Task {
     private final LocalDate eventDate;
 
     /**
-     * Constructs a new Event task with the given description and date.
+     * Constructs a new Event task with the given title and date.
      *
-     * @param name     the Event's description.
+     * @param title    the Event's title.
      * @param deadline the date of this event.
      */
-    public Event(String name, LocalDate date) {
-        super(name);
+    public Event(String title, LocalDate date) {
+        super(title);
+        this.eventDate = date;
+    }
+
+    /**
+     * Constructs a new Event task with the given title, description and date.
+     *
+     * @param title       the Event's description.
+     * @param description the Event's description.
+     * @param deadline    the date of this event.
+     */
+    public Event(String title, String description, LocalDate date) {
+        super(title, description);
         this.eventDate = date;
     }
 
@@ -45,7 +58,8 @@ public class Event extends Task {
     public boolean equals(Object other) {
         return (other instanceof Event)
             && ((Event) other).getTitle().equals(this.getTitle())
-            && ((Event) other).getEventDate().equals(this.getEventDate());
+            && ((Event) other).getEventDate().equals(this.getEventDate())
+            && ((Event) other).getDescription().equals(this.getDescription());
     }
 
     /**
@@ -59,8 +73,14 @@ public class Event extends Task {
      */
     public static Event parse(String input) throws InvalidInputException {
 
-        var parts = DatedTask.parse("event", input, "at", getUsage());
-        return new Event(parts.fst(), DatedTask.parseDate(parts.snd()));
+        var desc = TaskParser.parse("event", input, Optional.of("at"), getUsage());
+        assert desc.hasTitle() && desc.hasDate();
+
+        if (desc.hasDescription()) {
+            return new Event(desc.getTitle().get(), desc.getDescription().get(), desc.getDate().get());
+        } else {
+            return new Event(desc.getTitle().get(), desc.getDate().get());
+        }
     }
 
     /**

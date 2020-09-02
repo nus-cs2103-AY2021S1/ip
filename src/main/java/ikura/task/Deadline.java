@@ -3,6 +3,7 @@
 
 package ikura.task;
 
+import java.util.Optional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -27,6 +28,18 @@ public class Deadline extends Task {
     }
 
     /**
+     * Constructs a new Deadline task with the given title, description and date.
+     *
+     * @param title       the Deadline's description.
+     * @param description the Deadline's description.
+     * @param deadline    the date of this event.
+     */
+    public Deadline(String title, String description, LocalDate deadline) {
+        super(title, description);
+        this.deadline = deadline;
+    }
+
+    /**
      * Gets the deadline of the task.
      *
      * @return the deadline.
@@ -46,7 +59,8 @@ public class Deadline extends Task {
     public boolean equals(Object other) {
         return (other instanceof Deadline)
             && ((Deadline) other).getTitle().equals(this.getTitle())
-            && ((Deadline) other).getDeadline().equals(this.getDeadline());
+            && ((Deadline) other).getDeadline().equals(this.getDeadline())
+            && ((Deadline) other).getDescription().equals(this.getDescription());
     }
 
     /**
@@ -60,8 +74,14 @@ public class Deadline extends Task {
      */
     public static Deadline parse(String input) throws InvalidInputException {
 
-        var parts = DatedTask.parse("deadline", input, "by", getUsage());
-        return new Deadline(parts.fst(), DatedTask.parseDate(parts.snd()));
+        var desc = TaskParser.parse("deadline", input, Optional.of("by"), getUsage());
+        assert desc.hasTitle() && desc.hasDate();
+
+        if (desc.hasDescription()) {
+            return new Deadline(desc.getTitle().get(), desc.getDescription().get(), desc.getDate().get());
+        } else {
+            return new Deadline(desc.getTitle().get(), desc.getDate().get());
+        }
     }
 
     /**
