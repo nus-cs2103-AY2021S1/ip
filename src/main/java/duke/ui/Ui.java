@@ -1,8 +1,8 @@
-package main.java.moco.ui;
+package duke.ui;
 
-import main.java.moco.MocoException;
-import main.java.moco.logic.TaskList;
-import main.java.moco.task.Task;
+import duke.MocoException;
+import duke.logic.TaskList;
+import duke.task.Task;
 
 import java.util.Scanner;
 
@@ -71,7 +71,7 @@ public class Ui {
         printBorder();
     }
 
-    public void addTask(Task task, TaskList tasks) throws MocoException {
+    public void addTask(Task task, TaskList tasks) {
         System.out.println("Got it. I've added this task:\n" + task);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.\n");
         printBorder();

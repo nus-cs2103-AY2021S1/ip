@@ -1,4 +1,4 @@
-package main.java.moco.task;
+package duke.task;
 
 public class Todo extends Task {
 

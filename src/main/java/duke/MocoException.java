@@ -1,4 +1,4 @@
-package main.java.moco;
+package duke;
 
 public class MocoException extends Exception {
     public MocoException(String errorMessage) {

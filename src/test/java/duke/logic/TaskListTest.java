@@ -1,10 +1,10 @@
-package test.java.moco.logic;
+package duke.logic;
 
-import main.java.moco.logic.TaskList;
-import main.java.moco.task.Deadline;
-import main.java.moco.task.Event;
-import main.java.moco.task.Task;
-import main.java.moco.task.Todo;
+import duke.logic.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
