@@ -36,9 +36,17 @@ public class Parser {
         } else if (fullCommand.equals("help")) {
             command = new HelpCommand();
         } else if (fullCommand.startsWith("done")) {
-            command = new DoneCommand(Integer.parseInt(fullCommand.split(" ")[1]));
+            try {
+                command = new DoneCommand(Integer.parseInt(fullCommand.split(" ")[1]));
+            } catch (NumberFormatException ex) {
+                throw new DukeException("Invalid format of task number!");
+            }
         } else if (fullCommand.startsWith("delete")) {
-            command = new DeleteCommand(Integer.parseInt(fullCommand.split(" ")[1]));
+            try {
+                command = new DeleteCommand(Integer.parseInt(fullCommand.split(" ")[1]));
+            } catch (NumberFormatException ex) {
+                throw new DukeException("Invalid format of task number!");
+            }
         } else if (fullCommand.startsWith("todo")) {
             command = new AddCommand(parseTask("todo", fullCommand));
         } else if (fullCommand.startsWith("deadline")) {
