@@ -1,3 +1,5 @@
+package duke;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -5,7 +7,7 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.UI;
 
-/** Main class to run Focus. */
+/** duke.Main class to run Focus. */
 public class Duke {
     /** Storage created for user. */
     private final Storage storage;

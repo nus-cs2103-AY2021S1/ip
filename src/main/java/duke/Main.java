@@ -1,5 +1,8 @@
+package duke;
+
 import java.io.IOException;
 
+import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,11 +10,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/** A GUI for Duke using FXML. */
+/** A GUI for duke.Duke using FXML. */
 public class Main extends Application {
-    /** Creates Duke. */
+    /** Creates duke.Duke. */
     private final Duke duke = new Duke();
-    /** Gets the image for Duke. */
+    /** Gets the image for duke.Duke. */
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/rj.jpg"));
 
     /**

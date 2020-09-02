@@ -1,4 +1,6 @@
-import duke.ui.UI;
+package duke.ui;
+
+import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-/** Controller for MainWindow. Provides the layout for the other controls. */
+/** Controller for duke.ui.MainWindow. Provides the layout for the other controls. */
 public class MainWindow extends AnchorPane {
     /** Scroll pane for conservations. */
     @FXML
@@ -22,13 +24,13 @@ public class MainWindow extends AnchorPane {
     /** Send button for user. */
     @FXML
     private Button sendButton;
-    /** Duke. */
+    /** duke.Duke. */
     private Duke duke;
     /** Number of times user has input their name. */
     private int numberOfTimes;
     /** Gets the image for User. */
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/koya.jpg"));
-    /** Gets the image for Duke. */
+    /** Gets the image for duke.Duke. */
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/rj.jpg"));
 
     /** Initialises the main window. */
@@ -41,16 +43,16 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Sets Duke.
+     * Sets duke.Duke.
      *
-     * @param duke Duke.
+     * @param duke duke.Duke.
      */
     public void setDuke(Duke duke) {
         this.duke = duke;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply,
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply,
      * and appends them to the dialog container. Clears the user input after processing.
      */
     @FXML

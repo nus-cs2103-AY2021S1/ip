@@ -1,4 +1,4 @@
-C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip\src\main\java\Duke.java
+C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip\src\main\java\duke.Duke.java
 C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip\src\main\java\duke\command\AddCommand.java
 C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip\src\main\java\duke\command\Command.java
 C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip\src\main\java\duke\command\DeleteCommand.java
