@@ -247,35 +247,80 @@
 
 import java.io.IOException;
 
+import javafx.application.Application;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+
 
 public class Bill {
-    
-    private static final String filePath = "./data/bill.txt";
-    public static void main(String[] args) throws IOException {
 
-        Ui ui = new Ui(); 
+
+    private static final String filePath = "./data/bill.txt";
+    Bill() throws IOException {
+        Ui ui = new Ui();
         TaskList taskList = new TaskList();
         ui.welcome_message();
         Storage storage = new Storage(filePath);
         Parser.initiateTaskList(taskList);
-        boolean isCompleted = false;
-        while (!isCompleted) {
-            try {
-                String input = ui.getInput();
-                if (Parser.exit(input)) {
-                    isCompleted = true;
-                    storage.write(taskList.getTheList());
-                    ui.session_end();
-                } else {
-                    ui.printHorizontalLine();
-                    Parser.processInput(input);
-                    ui.printHorizontalLine();
-                } 
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
- 
     }
+
+    public String getResponse(String input) {
+        try {
+            return Parser.processInput(input);
+        } catch (InvalidException e) {
+            return Ui.getErrorMessage(e.getMessage());
+        }
+    }
+    
+    
+    
+//    String getResponse(String input) {
+//        return "Duke heard: " + input;
+//    }
+//
+  //  private static final String filePath = "./data/bill.txt";
+//    public static void main(String[] args) throws IOException {
+//
+//        Ui ui = new Ui(); 
+//        TaskList taskList = new TaskList();
+//        ui.welcome_message();
+//        Storage storage = new Storage(filePath);
+//        Parser.initiateTaskList(taskList);
+//        boolean isCompleted = false;
+//        while (!isCompleted) {
+//            try {
+//                String input = ui.getInput();
+//                if (Parser.exit(input)) {
+//                    isCompleted = true;
+//                    storage.write(taskList.getTheList());
+//                    ui.session_end();
+//                } else {
+//                    ui.printHorizontalLine();
+//                    Parser.processInput(input);
+//                    ui.printHorizontalLine();
+//                } 
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
+//
+//    }
 }
 

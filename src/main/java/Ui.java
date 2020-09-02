@@ -29,17 +29,28 @@ public class Ui {
     public void printHorizontalLine() {
         System.out.println(horizontal_line);
     }
+    
+    public String printLine() {
+        return horizontal_line;
+    }
 
 
     /**
      * Prints the welcome message
      */
-    public static void welcome_message() {
+    public static String welcome_message() {
+        
+        String message = "Hello from Bill \n" + logo + "\n";
+        message = message + horizontal_line + "\n ";
+        message = message + "Hello! I'm Bill \n" + "What Can I do for you? \n";
+        message = message + horizontal_line + "\n ";
         System.out.println("Hello from Bill \n" + logo);
         System.out.println(horizontal_line);
         System.out.println("Hello! I'm Bill ");
         System.out.println("What Can I do for you? ");
         System.out.println(horizontal_line);
+        
+        return message;
     }
 
     /**
@@ -49,5 +60,19 @@ public class Ui {
         System.out.println(horizontal_line);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(horizontal_line);
+        
+        
+    }
+    
+    public static String exitMessage() {
+        return horizontal_line + "\n" + "Bye. Hope to see you again soon! \n" + horizontal_line + "\n";
+    }
+
+    /**
+     * Returns the error message.
+     * @param message Error message.
+     */
+    public static String getErrorMessage(String message) {
+        return "OOPS!!! " + message;
     }
 }

@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    private String filePath;
-    private File file;
+    private static String filePath;
+    private static File file;
 
 
     Storage (String filePath) throws IOException {
@@ -51,10 +51,10 @@ public class Storage {
      * Stores the updated Lists that contain the tasks to bill.txt.
      * @param list_of_Content TaskList that manages tasks.
      */
-    public void write(List<Task> list_of_Content) {
+    public static void write(TaskList list_of_Content) {
         try {
             FileWriter fileWriter = new FileWriter(filePath, true);
-            for (Task task : list_of_Content) {
+            for (Task task : list_of_Content.getTheList()) {
 //                fileWriter.write(task.fileFormat() + "\n");
                 fileWriter.write(task.timeConverted() + "\n");
             }

@@ -23,18 +23,24 @@ public class Parser {
      * Processes input and add the tasks to taskList.
      * @param input user input.
      * @throws InvalidException InvalidException if input is illegal.
+     * @return
      */
-    public static void processInput(String input) throws InvalidException {
+    public static String processInput(String input) throws InvalidException {
         
             int length = input.length();
             String[] isDone = input.split(" ");
             String firstChar = isDone[0];
-            if (input.equals("list")) {
+
+        if (input.equals("bye")) {
+            Storage.write(list_of_Content);
+            return Ui.exitMessage();
+        }
+        if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list: ");
-                list_of_Content.showAllContent();
+                return list_of_Content.showAllContent();
             } else if (firstChar.equals("find")) {
                 String keyword = isDone[isDone.length - 1];
-                list_of_Content.findKeyword(keyword);
+                return list_of_Content.findKeyword(keyword);
             } else if (firstChar.equals("done")) {
 
                 if (isDone.length == 1) {
@@ -57,6 +63,7 @@ public class Parser {
                 current.set_Task_As_Done();
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(current.timeConverted());
+                return current.timeConverted();
 
             } else if (firstChar.equals("delete")) {
 
@@ -77,11 +84,12 @@ public class Parser {
                             " the task to be deleted");
                 }
                 Task toBeRemove = list_of_Content.getTheList().get(index - 1);
-                list_of_Content.removeTask(index - 1);
-                int no_of_tasks_left = list_of_Content.getSizeOfList();
+                            int no_of_tasks_left = list_of_Content.getSizeOfList();
                 System.out.println(" Noted. I've removed this task:  ");
                 System.out.println(toBeRemove);
                 System.out.println(" Now you have " + no_of_tasks_left + " tasks in the list. ");
+                return list_of_Content.removeTask(index - 1);
+
             } else {
                 if (firstChar.equals("todo")) {
 
@@ -94,6 +102,8 @@ public class Parser {
                     System.out.println("Got it. I've added this task: ");
                     System.out.println(new_task.timeConverted());
                     System.out.println("Now you have " + list_of_Content.getSizeOfList() + " tasks in the list.");
+                    return list_of_Content.addStringTask(new_task);
+
                 } else if (firstChar.equals("deadline")) {
                     
 //                    System.out.println("reach deadline");
@@ -113,9 +123,11 @@ public class Parser {
                     String time = input.substring(index + 4);
                     Deadline deadline = new Deadline(task, time);
                     list_of_Content.addTask(deadline);
-                    System.out.println("Got it. I've added this task: ");
+                                        System.out.println("Got it. I've added this task: ");
                     System.out.println(deadline.timeConverted());
                     System.out.println("Now you have " + list_of_Content.getSizeOfList() + " tasks in the list.");
+                    return list_of_Content.addStringTask(deadline);
+
                 } else if (firstChar.equals("event")) {
 
                     if (isDone.length == 1) {
@@ -131,16 +143,19 @@ public class Parser {
                     int index = input.indexOf("/at");
                     String task = input.substring(firstChar.length() + 1, index);
                     String duration = input.substring(index + 4);
-                    Event event = new Event(task, duration);
+                    Task event = new Event(task, duration);
                     list_of_Content.addTask(event);
-                    System.out.println("Got it. I've added this task: ");
+                                        System.out.println("Got it. I've added this task: ");
                     System.out.println(event.timeConverted());
                     System.out.println("Now you have " + list_of_Content.getSizeOfList() + " tasks in the list.");
+                    return list_of_Content.addStringTask(event);
+
                 } else {
                     throw new InvalidException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
 
-        }
+//        return firstChar;
+    }
     
 }

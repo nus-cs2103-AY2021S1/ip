@@ -19,6 +19,14 @@ public class TaskList {
     public void addTask (Task task) {
         list_of_Contents.add(task);
     }
+    
+    public String addStringTask (Task task) {
+        String message = "Got it. I've added this task: \n";
+        message = message + task.timeConverted() + "\n";
+        int currentSize = list_of_Contents.size();
+        message = message + "Now you have " + currentSize + " tasks in the list. \n";
+        return message;
+    }
 
     /**
      * Prints the current task.
@@ -33,21 +41,30 @@ public class TaskList {
     /**
      * Prints the whole taskList.
      */
-    public void showAllContent() {
+    public String showAllContent() {
             int no_of_tasks = list_of_Contents.size();
 
             Ui ui = new Ui();
-            System.out.println("Here are the tasks in your list: ");
-            ui.printHorizontalLine();
+//            System.out.println("Here are the tasks in your list: ");
+            String allTasks = "Here are the tasks in your list: \n";
+            allTasks = allTasks + ui.printLine() + "\n";
+//            ui.printHorizontalLine();
             if (no_of_tasks == 0) {
-                System.out.println("There is no tasks in the list, please add some tasks first ");
+                
+                String noTasks = "There is no tasks in the list, please add some tasks first \n";
+                allTasks =  allTasks + noTasks;
+//                System.out.println("There is no tasks in the list, please add some tasks first ");
             } else {
                 for (int i = 0; i < list_of_Contents.size(); i = i + 1) {
                     String counter = Integer.toString(i + 1) + ". ";
-                    System.out.println(counter + list_of_Contents.get(i).timeConverted());
+                    String oneTask = counter + list_of_Contents.get(i).timeConverted();
+                    allTasks = allTasks + oneTask + "\n";
+                   // System.out.println(counter + list_of_Contents.get(i).timeConverted());
                 }
             }
-            ui.printHorizontalLine();
+        //            ui.printHorizontalLine(); 
+            return allTasks;
+
     }
 
     /**
@@ -78,34 +95,51 @@ public class TaskList {
      * Deletes the nth task.
      * @param n Index of the task to be deleted.
      */
-    public void removeTask(int n) {
-        System.out.println("Noted. I've removed this task:");
-        Task task = list_of_Contents.get(n - 1);
+    public String removeTask(int n) {
+        
+        String reply = "Noted. I've removed this task: \n";
+//        System.out.println("Noted. I've removed this task:");
+        Task task = list_of_Contents.get(n);
         System.out.println(task.toString());
-        list_of_Contents.remove(n - 1);
+        reply = reply + task.toString();
+        list_of_Contents.remove(n);
         System.out.println("Now you have "+ list_of_Contents.size() + " tasks in the list.");
+        int currentSize = list_of_Contents.size();
+        reply = reply + "\n" + "Now you have "+ currentSize + " tasks in the list. \n";
+        return reply;
+       
     }
 
     /**
      * find whether the keyword from the user is in the list
      */
-    public void findKeyword(String keyword) {
+    public String findKeyword(String keyword) {
 
         Ui ui = new Ui();
         int no_of_tasks = list_of_Contents.size();
         int counter = 1;
-        ui.printHorizontalLine();
+        String tasks = ui.printLine();
+//        ui.printHorizontalLine();
         if (no_of_tasks == 0) {
-            System.out.println("There is no tasks in the list ");
+
+            String noTasks = "There is no tasks in the list, please add some tasks first \n";
+            tasks =  tasks + noTasks;
+//            System.out.println("There is no tasks in the list ");
+            
         } else {
             for (int i = 0; i < list_of_Contents.size(); i = i + 1) {
                 if (list_of_Contents.get(i).containKeyWord(keyword)) {
-                    System.out.println(counter + list_of_Contents.get(i).timeConverted());
+
+                    String oneTask = counter + list_of_Contents.get(i).timeConverted();
+                    tasks = tasks + oneTask + "\n";
+//                    System.out.println(counter + list_of_Contents.get(i).timeConverted());
                     counter = counter + 1;
                 }
 
             }
         }
-        ui.printHorizontalLine();
+//        ui.printHorizontalLine();
+        tasks = tasks + ui.printLine();
+        return tasks;
     }
 }
