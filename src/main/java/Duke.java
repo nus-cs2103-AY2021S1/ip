@@ -1,7 +1,11 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
-import duke.*;
+import duke.DialogBox;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
 
 import javafx.application.Application;
 import javafx.application.Platform;
