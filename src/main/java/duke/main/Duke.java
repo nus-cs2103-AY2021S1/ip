@@ -15,7 +15,7 @@ public class Duke {
     private final TaskList tasks;
     /** Storage to store data to hard disk */
     private final Storage storage;
-
+    public static boolean isExit;
     /**
      * Constructs a Duke.
      */
@@ -40,10 +40,16 @@ public class Duke {
             Command command = Parser.parse(input);
             command.perform(tasks);
             storage.writeToHardDisk(tasks);
+            isExit = command.isExit();
             return command.getReply();
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    public static void exit() throws InterruptedException {
+        Thread.sleep(1000);
+        System.exit(0);
     }
 
     /**
@@ -56,3 +62,4 @@ public class Duke {
         duke.run();
     }
 }
+
