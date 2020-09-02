@@ -1,7 +1,7 @@
 /**
  * Represents a type of PandaBotException which is thrown when the task description is empty.
  */
-public class PandaBotEmptyTaskDescriptionException extends PandaBotException{
+public class PandaBotEmptyTaskDescriptionException extends PandaBotException {
 
     /**
      * Creates a PandaBotEmptyTaskDescriptionException object which is used to

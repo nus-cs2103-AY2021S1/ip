@@ -8,7 +8,7 @@ public class Deadline extends Task {
     private String dueBy;
 
     /**
-     * Create a Deadline object.
+     * Creates a Deadline object.
      * It can accept both formatted and unformatted due dates.
      * Formatted due dates have to be in the format: dd/MM/yyyy HHmm
      * 

@@ -26,21 +26,30 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+
+    systemProperty "file.encoding", "utf-8"
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "PandaBot"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "PandaBot"
     archiveClassifier = null
 }
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '8.29'
 }
 
 run{
     standardInput = System.in
+    systemProperty "file.encoding", "utf-8"
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
