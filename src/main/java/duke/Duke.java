@@ -39,6 +39,7 @@ public class Duke {
      */
     public String getResponse(String fullCommand) {
         String[] splitted = fullCommand.split("\\s+");
+        String response;
         boolean isExiting = false;
         if (splitted.length == 1 && splitted[0].equals("hello")) {
             isRunning = true;
@@ -53,31 +54,14 @@ public class Duke {
 
             try {
                 Command command = Parser.parse(fullCommand);
-                return command.execute(tasks, ui, storage);
+                response = command.execute(tasks, ui, storage);
+                storage.write(tasks);
             } catch (DukeException e) {
-                return ui.showError(e.getMessage());
+                response = ui.showError(e.getMessage());
             }
+        } else {
+            response = "I'm sleeping...zzz";
         }
-        return "I'm sleeping...zzz";
-    }
-
-    /**
-     * Runs the program.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullCommand = ui.requestCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-                storage.write(tasks); // temporary until having better implementation
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
+        return response;
     }
 }
