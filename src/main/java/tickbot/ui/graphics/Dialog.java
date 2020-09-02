@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
  */
 public class Dialog extends Label {
     /**
-     * Initialize the dialog with the text on it.
+     * Initializes the dialog with the text on it.
      * @param text The text on the dialog.
      */
     public Dialog(String text) {

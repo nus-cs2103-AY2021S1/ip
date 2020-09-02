@@ -7,7 +7,7 @@ public class Parser {
     private Runner runner = new Runner();
 
     /**
-     * Execute a command.
+     * Executes a command.
      * @param command the command to execute.
      */
     public boolean executeCommand(String command) {

@@ -17,7 +17,7 @@ public class ParserTests {
     private final PrintStream originalErr = System.err;
 
     /**
-     * Replace system output streams with custom ones.
+     * Replaces system output streams with custom ones.
      */
     @BeforeEach
     public void setUpStreams() {
@@ -26,7 +26,7 @@ public class ParserTests {
     }
 
     /**
-     * Restore the system output streams.
+     * Restores the system output streams.
      */
     @AfterEach
     public void restoreStreams() {
@@ -35,7 +35,7 @@ public class ParserTests {
     }
 
     /**
-     * Test if the parser works.
+     * Tests if the parser works.
      */
     @Test
     public void testParser() {

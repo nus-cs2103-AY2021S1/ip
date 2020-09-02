@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class TaskTests {
     /**
-     * Test if task can process content with spaces.
+     * Tests if task can process content with spaces.
      */
     @Test
     public void testSpace() {
@@ -18,7 +18,7 @@ public class TaskTests {
     }
 
     /**
-     * Test if task can process content with commas.
+     * Tests if task can process content with commas.
      */
     @Test
     public void testComma() {
@@ -28,7 +28,7 @@ public class TaskTests {
     }
 
     /**
-     * Test if task can process content with back slashes.
+     * Tests if task can process content with back slashes.
      */
     @Test
     public void testBackSlash() {

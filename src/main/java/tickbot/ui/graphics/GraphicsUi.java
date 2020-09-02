@@ -32,7 +32,7 @@ public class GraphicsUi extends Application implements Ui {
     }
 
     /**
-     * Perform the basic logic of the main loop.
+     * Performs the basic logic of the main loop.
      */
     public void performLogic() {
         DialogStream stream = new DialogStream(this);
@@ -54,7 +54,7 @@ public class GraphicsUi extends Application implements Ui {
     }
 
     /**
-     * Create a dialog in the main UI.
+     * Creates a dialog in the main UI.
      */
     public void writeDialog(String text) {
         Dialog dialog = new Dialog(text);
@@ -84,7 +84,7 @@ public class GraphicsUi extends Application implements Ui {
     }
 
     /**
-     * Design the styles of the elements.
+     * Designs the styles of the elements.
      */
     private void designStyles() {
         // main layout styles

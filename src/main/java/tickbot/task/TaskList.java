@@ -13,26 +13,26 @@ public class TaskList {
     private List<Task> tasks = storage.read();
 
     /**
-     * Get the size of the task list.
-     * @return the size of the task list.
+     * Gets the size of the task list.
+     * @return The size of the task list.
      */
     public int size() {
         return tasks.size();
     }
 
     /**
-     * Get a task in the list by the index.
-     * @param index the index of the task to get.
-     * @return the corresponding task.
+     * Gets a task in the list by the index.
+     * @param index The index of the task to get.
+     * @return The corresponding task.
      */
     public Task get(int index) {
         return tasks.get(index);
     }
 
     /**
-     * Add a task to the end of the task list.
+     * Adds a task to the end of the task list.
      * <p> The data storage would be updated. </p>
-     * @param task the task to add.
+     * @param task The task to add.
      */
     public void add(Task task) {
         tasks.add(task);
@@ -40,9 +40,9 @@ public class TaskList {
     }
 
     /**
-     * Remove a task from the task list.
+     * Removes a task from the task list.
      * <p> The data storage would be updated. </p>
-     * @param index the index of the task to be removed.
+     * @param index The index of the task to be removed.
      */
     public void remove(int index) {
         tasks.remove(index);
@@ -50,9 +50,9 @@ public class TaskList {
     }
 
     /**
-     * Mark a task in the task list as completed.
+     * Marks a task in the task list as completed.
      * <p> The data storage would be updated. </p>
-     * @param index the index of the task to be marked as completed.
+     * @param index The index of the task to be marked as completed.
      * @return {@code true} if the task is successfully marked;
      *         {@code false} if the task is already completed.
      */

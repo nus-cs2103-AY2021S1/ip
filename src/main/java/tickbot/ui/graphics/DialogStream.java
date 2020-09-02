@@ -12,7 +12,7 @@ public class DialogStream extends PrintStream {
     private GraphicsUi ui;
 
     /**
-     * Initialize the dialog stream with the GUI it will be used in.
+     * Initializes the dialog stream with the GUI it will be used in.
      * @param ui The GUI the stream will be used in.
      */
     public DialogStream(GraphicsUi ui) {

@@ -30,8 +30,8 @@ public class DataStorage {
     private static final String DATA_STORAGE_FILE_NAME = "tasks.csv";
 
     /**
-     * Read the stored data from the application data directory.
-     * @return a list containing the stored tasks.
+     * Reads the stored data from the application data directory.
+     * @return A list containing the stored tasks.
      * @see DataStorage#getDataStoragePath
      */
     public List<Task> read() {
@@ -77,8 +77,8 @@ public class DataStorage {
     }
 
     /**
-     * Write the task list into the application data directory.
-     * @param tasks the task list to write.
+     * Writes the task list into the application data directory.
+     * @param tasks The task list to write.
      * @see DataStorage#getDataStoragePath
      */
     public void update(List<Task> tasks) {
@@ -103,8 +103,9 @@ public class DataStorage {
     }
 
     /**
-     * Get the path of the application data directory.
+     * Gets the path of the application data directory.
      * <p> The path is OS-specified and can vary among different OS. </p>
+     * @return The path of the application data directory.
      */
     private static String getDataStoragePath() {
         AppDirs appDirs = AppDirsFactory.getInstance();

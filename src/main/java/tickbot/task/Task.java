@@ -17,18 +17,18 @@ public abstract class Task {
     }
 
     /**
-     * The string to represent the type of the task (e.g. T, D, E, ...)
+     * Gets the string to represent the type of the task (e.g. T, D, E, ...)
      * @return the type string.
      */
     public abstract String getTaskType();
     /**
-     * The word used before the time of the task (e.g. by, at, ...)
-     * @return the word used, {@code null} if none.
+     * Gets the word used before the time of the task (e.g. by, at, ...)
+     * @return The word used, {@code null} if none.
      */
     public abstract String getTimeMarker();
 
     /**
-     * Get the content of the task.
+     * Gets the content of the task.
      * @return the content string.
      */
     public String getContent() {
@@ -36,7 +36,7 @@ public abstract class Task {
     }
 
     /**
-     * Get the status whether the task is completed.
+     * Gets the status whether the task is completed.
      * @return the boolean status.
      */
     public boolean isCompleted() {
@@ -44,8 +44,8 @@ public abstract class Task {
     }
 
     /**
-     * Get the date of the task.
-     * @return a {@LocalDate} object if the task contains a time, {@code null} if none.
+     * Gets the date of the task.
+     * @return A {@LocalDate} object if the task contains a time, {@code null} if none.
      */
     public LocalDate getTime() {
         return time;

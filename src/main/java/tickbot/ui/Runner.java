@@ -116,11 +116,11 @@ public class Runner {
     }
 
     /**
-     * Add a task to the task list.
-     * @param args the split parts of the commands.
-     * @param taskName the human-readable name of the task (e.g. deadline, TO-DO, ...).
-     * @param initializer the initializer function of the task.
-     * @param timeMarker the time marker used by the task command (e.g. /by, /at, ...)
+     * Adds a task to the task list.
+     * @param args The split parts of the commands.
+     * @param taskName The human-readable name of the task (e.g. deadline, TO-DO, ...).
+     * @param initializer The initializer function of the task.
+     * @param timeMarker The time marker used by the task command (e.g. /by, /at, ...)
      */
     private void addTask(
         String[] args,
