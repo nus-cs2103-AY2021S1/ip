@@ -67,7 +67,7 @@ public class Duke extends Thread {
             return command.execute(this.tasks, this.ui);
         } catch (DukeException | IOException e) {
             e.printStackTrace();
-            return "get fukt";
+            return e.getMessage();
         }
     }
     public static void main(String[] args) throws IOException {

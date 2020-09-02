@@ -23,8 +23,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
     private Duke duke;
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -39,10 +39,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = this.userInput.getText();
-        // String response = "Stub response by duke for user input"; // todo: replace stub with logic
         String response = this.duke.getResponse(input);
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
                                              DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();
     }
+    // todo: 1) add greeting upon startup
+    //       2) dynamic resizing of DialogBox for vertical height to display long list
+    //       3) make it pretty :) try a matrix rain for the background, or just some stupid animation rendered
 }

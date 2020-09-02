@@ -9,11 +9,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-// todo: find a better way to assign numbers to the tasks. the current error is that after loading,
-//  Task class is restarting the counter from 0. changed the counter to be kept at TaskList, but for some
-//   reason, the error still happens. this error only is recreated when running testscripts I think.
-//  not that easy to replicate, so shall solve it another time :')
-
 /**
  * Holds a Collection of Tasks and has methods to manipulate these Tasks, is serializable as well
  */
@@ -92,7 +87,8 @@ public class TaskList implements Serializable {
         return toDelete.toString();
     }
     /**
-     * Verifies the validity of the task to be handled, whether it exists in the TaskList or not
+     * Verifies the validity of the task to be handled, whether it exists in the TaskList or not;
+     * is used only when tasks are being deleted or marked as done
      *
      * @param taskID TaskID to be checked
      *
@@ -123,6 +119,9 @@ public class TaskList implements Serializable {
         return "Now you have " + incompleteTasks + ((incompleteTasks == 1)
                                                     ? " undone task"
                                                     : " undone tasks") + " in the list.";
+    }
+    public Task getTask(int taskID) {
+        return this.taskList.get(taskID);
     }
     public int getCurrentTaskCount() {
         return this.currentTaskCount;
