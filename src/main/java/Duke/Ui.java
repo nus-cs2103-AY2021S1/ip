@@ -1,9 +1,9 @@
 package duke;
 
-import task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import task.Task;
 
 /**
  * Ui is the user interface interacts with the user. The input from the user is first received by the ui
@@ -15,9 +15,8 @@ public class Ui {
     /**
      * sc is the Scanner that parses the user's input.
      */
+    private static final String GREETING_MESSAGE = "Buenos Dias! Soy Duke.Duke, como estas mi amigo?";
     private Scanner sc;
-    private final static String GREETING_MESSAGE = "Buenos Dias! Soy Duke.Duke, como estas mi amigo?";
-
     /**
      * Creates the Ui object.
      */
@@ -104,7 +103,7 @@ public class Ui {
      * @param taskList the tasklist to be accessed.
      */
     public void showNumberInList(TaskList taskList) {
-        System.out.println("Ahora tienes "  + taskList.getTaskList().size() +  " tareas en la lista.");
+        System.out.println("Ahora tienes " + taskList.getTaskList().size() + " tareas en la lista.");
     }
 
     /**

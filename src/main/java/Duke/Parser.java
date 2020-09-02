@@ -1,21 +1,20 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import command.AddCommand;
 import command.Command;
 import command.DeleteCommand;
 import command.DoneCommand;
 import command.ExitCommand;
+import command.FindCommand;
 import command.IncorrectCommand;
 import command.ListCommand;
-import command.FindCommand;
-
 import task.Deadline;
 import task.Event;
 import task.Todo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Parser is the class which makes sense of the user's commands.
@@ -23,18 +22,18 @@ import java.time.format.DateTimeParseException;
  * @author Joshua
  */
 public class Parser {
-    private final static String COMMAND_LIST = "list";
-    private final static String COMMAND_TERMINATE = "bye";
-    private final static String COMMAND_COMPLETE_TASK = "done";
-    private final static String COMMAND_ADD_TODO = "todo";
-    private final static String COMMAND_ADD_DEADLINE = "deadline";
-    private final static String COMMAND_ADD_EVENT = "event";
-    private final static String COMMAND_DELETE_EVENT = "delete";
-    private final static String COMMAND_FIND = "find";
-    private final static String DATE_DEADLINE = "/by";
-    private final static String DATE_EVENT = "/at";
+    private static final String COMMAND_LIST = "list";
+    private static final String COMMAND_TERMINATE = "bye";
+    private static final String COMMAND_COMPLETE_TASK = "done";
+    private static final String COMMAND_ADD_TODO = "todo";
+    private static final String COMMAND_ADD_DEADLINE = "deadline";
+    private static final String COMMAND_ADD_EVENT = "event";
+    private static final String COMMAND_DELETE_EVENT = "delete";
+    private static final String COMMAND_FIND = "find";
+    private static final String DATE_DEADLINE = "/by";
+    private static final String DATE_EVENT = "/at";
 
-    private final static DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static final DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
      * Creates a Parser object.
@@ -101,14 +100,14 @@ public class Parser {
      * Handles the creation of more complicated commands that require interaction with the TaskList.
      *
      * @param restOfCommand the content of the task to be added after initial command.
-     * @param TypeOfCommand the type of command to be carried out.
+     * @param typeOfCommand the type of command to be carried out.
      * @return the command that will finally be carried out by Duke.
      */
-    private static Command handle(String restOfCommand, TypeOfCommand TypeOfCommand) {
+    private static Command handle(String restOfCommand, TypeOfCommand typeOfCommand) {
         if (restOfCommand.isEmpty()) {
             return new IncorrectCommand("☹ OOPS !!! La descripción de una tarea no puede estar vacía.");
         }
-        switch (TypeOfCommand) {
+        switch (typeOfCommand) {
         case DONE:
             int positionDone;
             try {
@@ -127,7 +126,7 @@ public class Parser {
             positionDone = positionDone - 1;
             return new DeleteCommand(positionDone);
         case TODO:
-           return new AddCommand(new Todo(restOfCommand));
+            return new AddCommand(new Todo(restOfCommand));
         case DEADLINE:
             if (!restOfCommand.contains(DATE_DEADLINE)) {
                 return new IncorrectCommand("☹ OOPS !!! Debe establecer una fecha límite para esta tarea.");
@@ -137,9 +136,10 @@ public class Parser {
             String dateDescription = restOfCommand.substring(byPosition + 4);
             LocalDateTime date;
             try {
-               date = LocalDateTime.parse(dateDescription, SAVE_READ_DATETIME_FORMAT);
+                date = LocalDateTime.parse(dateDescription, SAVE_READ_DATETIME_FORMAT);
             } catch (DateTimeParseException e) {
-                return new IncorrectCommand("☹ OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
+                return new IncorrectCommand(
+                        "☹ OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
             }
             Deadline newDeadline = new Deadline(taskDescription);
             newDeadline.setTime(date);
@@ -154,14 +154,16 @@ public class Parser {
             try {
                 date = LocalDateTime.parse(dateDescription, SAVE_READ_DATETIME_FORMAT);
             } catch (DateTimeParseException e) {
-                return new IncorrectCommand("☹ OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
+                return new IncorrectCommand(
+                        "☹ OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
             }
             Event newEvent = new Event(taskDescription);
             newEvent.setTime(date);
             return new AddCommand(newEvent);
         case FIND:
             return new FindCommand(restOfCommand);
+        default:
+            return null;
         }
-        return null;
     }
 }

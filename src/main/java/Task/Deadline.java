@@ -14,8 +14,8 @@ public class Deadline extends Task {
      * NEW_DATETIME_FORMAT is the date time format that will be displayed to the user.
      * SAVE_READ_DATETIME_FORMAT is the date time format that is stored internally in Duke.
      */
-    private final static DateTimeFormatter NEW_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mma");
-    private final static DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static final DateTimeFormatter NEW_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mma");
+    private static final DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
      * Creates the Deadline with the given task description.

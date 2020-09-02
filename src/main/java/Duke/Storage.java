@@ -1,10 +1,5 @@
 package duke;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,6 +8,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 /**
  * Storage saves data and loads data from the hard drive so that tasks saved previously
@@ -26,10 +26,9 @@ public class Storage {
      * filePath is the file path that leads to dukeFile.
      * SAVE_READ_DATETIME_FORMAT is the date time format that dates are stored in Duke.
      */
+    private static final DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private File dukeFile;
     private String filePath;
-    private final static DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-
     /**
      * Creates the Storage class with the given filePath as a String.
      * This initializes the dukeFile or creates the dukeFile if it does not exist.
@@ -62,7 +61,7 @@ public class Storage {
         ArrayList<Task> listOfTasks = new ArrayList<Task>();
         try {
             Scanner sc1 = new Scanner(dukeFile);
-            while(sc1.hasNext()) {
+            while (sc1.hasNext()) {
                 String loadedInput = sc1.nextLine();
                 if (loadedInput.substring(0, 3).equals("[T]")) {
                     Todo newTodo = new Todo(loadedInput.substring(7));
@@ -77,7 +76,8 @@ public class Storage {
                     if (loadedInput.substring(4, 7).equals("[✓]")) {
                         newDeadline.completeTask();
                     }
-                    LocalDateTime date = LocalDateTime.parse(loadedInput.substring(byPosition + 3), SAVE_READ_DATETIME_FORMAT);
+                    LocalDateTime date = LocalDateTime.parse(loadedInput.substring(byPosition + 3),
+                            SAVE_READ_DATETIME_FORMAT);
                     newDeadline.setTime(date);
                     listOfTasks.add(newDeadline);
                 } else if (loadedInput.substring(0, 3).equals("[E]")) {
@@ -87,7 +87,8 @@ public class Storage {
                     if (loadedInput.substring(4, 7).equals("[✓]")) {
                         newEvent.completeTask();
                     }
-                    LocalDateTime date = LocalDateTime.parse(loadedInput.substring(atPosition + 3), SAVE_READ_DATETIME_FORMAT);
+                    LocalDateTime date = LocalDateTime.parse(loadedInput.substring(atPosition + 3),
+                            SAVE_READ_DATETIME_FORMAT);
                     newEvent.setTime(date);
                     listOfTasks.add(newEvent);
                 }

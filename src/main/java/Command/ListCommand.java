@@ -33,7 +33,7 @@ public class ListCommand extends Command {
      * @throws DukeException throws exception when list is empty.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskList.getTaskList().isEmpty()) {
             throw new DukeException("☹ OOPS !!! La lista está vacía. ¡Agregue una nueva tarea!");
         }

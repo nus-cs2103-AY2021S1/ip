@@ -46,7 +46,7 @@ public class DoneCommand extends Command {
      * @throws DukeException throws exception if the position of the task to be completed is incorrect.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskPosition < taskList.getTaskList().size() && taskPosition >= 0) {
             taskList.getTaskList().get(taskPosition).completeTask();
             storage.updateStorage(taskList);

@@ -1,11 +1,11 @@
 package command;
 
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import task.Task;
-
-import java.util.ArrayList;
 
 /**
  * FindCommand receives a keyword from the parser and searches for it in the task list.
@@ -13,23 +13,22 @@ import java.util.ArrayList;
  *
  * @author Joshua
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     /**
      * wordToFind is the keyword retrieved from the parser.
      * listOfIncludedTasks contains the list of tasks the have the keyword in their description.
      */
     private String wordToFind;
     private ArrayList<Task> listOfIncludedTasks;
-
     /**
      * Creates the FindCommand and initializes the keyword to be searched with.
      *
      * @param wordToFind the keyword to search for.
      */
-   public FindCommand(String wordToFind) {
+    public FindCommand(String wordToFind) {
         this.wordToFind = wordToFind;
         listOfIncludedTasks = new ArrayList<>();
-   }
+    }
 
     /**
      * Returns a true or false to terminate Duke.
@@ -51,18 +50,18 @@ public class FindCommand extends Command{
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-       if (taskList.getTaskList().isEmpty()) {
-           ui.showError("La lista de tareas está actualmente vacía, agregue una tarea antes de encontrar una.");
-       }
-       for (Task task : taskList.getTaskList()) {
-           if (task.toString().contains(wordToFind)) {
-               listOfIncludedTasks.add(task);
-           }
-       }
-       if (listOfIncludedTasks.isEmpty()) {
-           ui.showError("Lo sentimos, ninguna de las tareas coincide con sus criterios de búsqueda.");
-       } else {
-           ui.showFoundList(listOfIncludedTasks);
-       }
+        if (taskList.getTaskList().isEmpty()) {
+            ui.showError("La lista de tareas está actualmente vacía, agregue una tarea antes de encontrar una.");
+        }
+        for (Task task : taskList.getTaskList()) {
+            if (task.toString().contains(wordToFind)) {
+                listOfIncludedTasks.add(task);
+            }
+        }
+        if (listOfIncludedTasks.isEmpty()) {
+            ui.showError("Lo sentimos, ninguna de las tareas coincide con sus criterios de búsqueda.");
+        } else {
+            ui.showFoundList(listOfIncludedTasks);
+        }
     }
 }
