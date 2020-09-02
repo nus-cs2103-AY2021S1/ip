@@ -1,3 +1,12 @@
+package pandabot.pandabot;
+
+import pandabot.commands.Command;
+import pandabot.exceptions.PandaBotException;
+import pandabot.parser.Parser;
+import pandabot.storage.Storage;
+import pandabot.tasks.TaskList;
+import pandabot.ui.Ui;
+
 /**
  * Represents the main driver of the PandaBot program.
  */

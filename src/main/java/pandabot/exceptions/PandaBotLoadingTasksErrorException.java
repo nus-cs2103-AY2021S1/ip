@@ -1,3 +1,5 @@
+package pandabot.exceptions;
+
 /**
  * Represents a type of PandaBotException which is thrown when there is an error in
  * loading a task from the save file.

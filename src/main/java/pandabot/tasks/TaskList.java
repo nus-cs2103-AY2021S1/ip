@@ -1,4 +1,8 @@
+package pandabot.tasks;
+
 import java.util.ArrayList;
+
+import pandabot.exceptions.PandaBotOutOfRangeException;
 
 /**
  *  Represents Tasks in a TaskList object and stores the various Tasks in a TaskList.
@@ -13,6 +17,7 @@ public class TaskList {
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
+
 
     /**
      * Returns the list of tasks stored.

@@ -1,3 +1,10 @@
+package pandabot.commands;
+
+import pandabot.exceptions.PandaBotException;
+import pandabot.storage.Storage;
+import pandabot.tasks.TaskList;
+import pandabot.ui.Ui;
+
 /**
  * Represents a find command which allows users to search for tasks with description
  * that matches the search word.

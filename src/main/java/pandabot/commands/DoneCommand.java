@@ -1,3 +1,11 @@
+package pandabot.commands;
+
+import pandabot.exceptions.PandaBotException;
+import pandabot.storage.Storage;
+import pandabot.tasks.Task;
+import pandabot.tasks.TaskList;
+import pandabot.ui.Ui;
+
 /**
  * Represents the done command which allows users to mark a task as done.
  */

@@ -1,3 +1,5 @@
+package pandabot.exceptions;
+
 /**
  * Represents a type of PandaBotException which is thrown when an an invalid input
  * is passed as an argument into a method.

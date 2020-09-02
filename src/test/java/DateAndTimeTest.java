@@ -6,6 +6,8 @@ import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
 
+import pandabot.tasks.DateAndTime;
+
 public class DateAndTimeTest {
 
     @Test

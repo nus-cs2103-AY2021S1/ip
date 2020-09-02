@@ -1,3 +1,9 @@
+package pandabot.commands;
+
+import pandabot.storage.Storage;
+import pandabot.tasks.TaskList;
+import pandabot.ui.Ui;
+
 /**
  * Represents a bye command which allows users to exit the program.
  */

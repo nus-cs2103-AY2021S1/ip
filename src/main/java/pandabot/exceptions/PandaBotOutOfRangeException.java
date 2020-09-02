@@ -1,3 +1,5 @@
+package pandabot.exceptions;
+
 /**
  * Represents a type of PandaBotException which is thrown when a value is exceeds
  * the range of values available.

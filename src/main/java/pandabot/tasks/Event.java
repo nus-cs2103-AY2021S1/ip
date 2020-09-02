@@ -1,3 +1,8 @@
+package pandabot.tasks;
+
+import pandabot.exceptions.PandaBotException;
+import pandabot.exceptions.PandaBotInsufficientArgumentException;
+
 /**
  * Represents an event which is a type of task that starts at a specific time
  * and ends at a specific time

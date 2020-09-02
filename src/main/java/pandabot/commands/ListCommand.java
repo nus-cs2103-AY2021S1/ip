@@ -1,3 +1,9 @@
+package pandabot.commands;
+
+import pandabot.storage.Storage;
+import pandabot.tasks.TaskList;
+import pandabot.ui.Ui;
+
 /**
  * Represents a list command which allows users to view the
  * current list of tasks.

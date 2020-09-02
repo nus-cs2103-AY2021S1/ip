@@ -1,4 +1,9 @@
+package pandabot.tasks;
+
 import java.time.format.DateTimeParseException;
+
+import pandabot.exceptions.PandaBotException;
+import pandabot.exceptions.PandaBotInsufficientArgumentException;
 
 /**
  * The Deadline class represents a Deadline task which needs to be
@@ -18,11 +23,12 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String dueBy) throws PandaBotException {
         super(description);
+
         String input = dueBy.strip();
-        // check if input is not empty
         if (input.length() == 0) {
             throw new PandaBotInsufficientArgumentException();
         }
+
         // check if a formatted date and time is given
         String[] dT = input.split(" ");
         if (dT.length > 1) {

@@ -1,3 +1,5 @@
+package pandabot.exceptions;
+
 /**
  *  Represents a general exception thrown by PandaBot.
  */

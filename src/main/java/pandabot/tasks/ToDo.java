@@ -1,3 +1,7 @@
+package pandabot.tasks;
+
+import pandabot.exceptions.PandaBotEmptyTaskDescriptionException;
+
 /**
  * Represents a ToDo task, which is a type of task without any date or time attached to it
  */

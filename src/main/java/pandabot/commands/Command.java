@@ -1,3 +1,10 @@
+package pandabot.commands;
+
+import pandabot.exceptions.PandaBotException;
+import pandabot.storage.Storage;
+import pandabot.tasks.TaskList;
+import pandabot.ui.Ui;
+
 /**
  * Represents a Command, which is an abstract class.
  * The Command class is used to execute a command.

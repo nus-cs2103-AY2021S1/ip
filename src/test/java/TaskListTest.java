@@ -5,6 +5,12 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import pandabot.exceptions.PandaBotEmptyTaskDescriptionException;
+import pandabot.exceptions.PandaBotOutOfRangeException;
+import pandabot.tasks.Task;
+import pandabot.tasks.TaskList;
+import pandabot.tasks.ToDo;
+
 public class TaskListTest {
 
     @Test

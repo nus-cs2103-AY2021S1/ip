@@ -1,4 +1,9 @@
+package pandabot.ui;
+
 import java.util.Scanner;
+
+import pandabot.tasks.Task;
+import pandabot.tasks.TaskList;
 
 /**
  *  Represents the user interface which prints messages to interact with the user.

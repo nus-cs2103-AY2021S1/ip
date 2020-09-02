@@ -1,8 +1,16 @@
+package pandabot.commands;
+
+import pandabot.exceptions.PandaBotException;
+import pandabot.storage.Storage;
+import pandabot.tasks.Task;
+import pandabot.tasks.TaskList;
+import pandabot.ui.Ui;
+
 /**
  * Represents a delete command which allows users to delete tasks.
  */
 public class DeleteCommand extends Command {
-    private int taskNum;
+    private final int taskNum;
     /**
      * Creates a DeleteCommand object.
      *

@@ -1,3 +1,7 @@
+package pandabot.tasks;
+
+import pandabot.exceptions.PandaBotEmptyTaskDescriptionException;
+
 /**
  * Represents a Task, which is an abstract class that can be used to represent
  * different types of tasks.
@@ -13,7 +17,7 @@ public abstract class Task {
      * @throws PandaBotEmptyTaskDescriptionException If the description given is empty
      */
     public Task(String description) throws PandaBotEmptyTaskDescriptionException {
-        this.description = description.strip(); // removes starting and ending white spaces
+        this.description = description.strip();
         if (this.description.length() == 0) {
             throw new PandaBotEmptyTaskDescriptionException(this.getClass().getSimpleName());
         }

@@ -1,3 +1,11 @@
+package pandabot.commands;
+
+import pandabot.exceptions.PandaBotException;
+import pandabot.storage.Storage;
+import pandabot.tasks.Task;
+import pandabot.tasks.TaskList;
+import pandabot.ui.Ui;
+
 /**
  * Represents an add command which allows users to add tasks to the TaskList.
  */
