@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
 /**
@@ -35,10 +36,13 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        this.setSpacing(10);
+        this.getStylesheets().add(this.getClass().getClassLoader().getResource("style/DialogBox.css").toString());
         dialog.setText(text);
         dialog.setFont(new Font("Courier New", 10));
         displayPicture.setImage(img);
+        Circle clip = new Circle(displayPicture.getX() + 25, displayPicture.getY() + 25, 25);
+        displayPicture.setClip(clip);
     }
 
     /**

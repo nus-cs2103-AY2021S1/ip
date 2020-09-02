@@ -23,8 +23,11 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    // Icons made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a>
+    // from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/engineer.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/crm.png"));
+
 
     /**
      * Initialize the scene
