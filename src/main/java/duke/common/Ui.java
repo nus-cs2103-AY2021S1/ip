@@ -1,9 +1,9 @@
 package duke.common;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Text UI of the application.
@@ -45,6 +45,10 @@ public class Ui {
         displayLine();
     }
 
+    /**
+     * Generates and prints the matching task list of the user.
+     * @param tasks list of tasks that matches the users keyword
+     */
     public static void displayMatchingTasks(ArrayList<Task> tasks) {
         displayLine();
         System.out.println("Here are the matching tasks in your list:");
@@ -64,8 +68,8 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\n" +
-                "     What can I do for you?");
+        System.out.println("Hello! I'm Duke\n"
+                + "     What can I do for you?");
     }
 
     /**

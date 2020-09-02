@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.common.CustomException;
+import java.util.ArrayList;
+
+import duke.common.DukeException;
 import duke.common.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.ArrayList;
 
 /**
  * Command to search for keywords
@@ -15,11 +15,23 @@ public class FindCommand extends Command {
 
     private static String keyword;
 
+    /**
+     * Constructor for a new FindCommand object
+     *
+     * @param keyword keyword that user is searching for
+     */
     public FindCommand(String keyword) {
         duke.command.FindCommand.keyword = keyword;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws CustomException {
+    /**
+     * Executes the command.
+     *
+     * @param tasks list of tasks
+     * @param ui object to output messages
+     * @param storage object to write TaskList to file
+     */
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             ArrayList<Task> matching = tasks.findTask(keyword);
             if (!matching.isEmpty()) {
@@ -28,7 +40,7 @@ public class FindCommand extends Command {
                 Ui.display("No matching tasks!");
             }
         } catch (Exception e) {
-            throw new CustomException("Please include a keyword to search for!");
+            throw new DukeException("Please include a keyword to search for!");
         }
     }
 }

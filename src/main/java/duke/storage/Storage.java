@@ -1,17 +1,16 @@
 package duke.storage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Stores user data.
@@ -20,19 +19,25 @@ public class Storage {
 
     private static String filePath;
 
+    /**
+     * Constructor for a new Storage object
+     *
+     * @param filePath directory of the file which saves user inputs
+     */
     public Storage(String filePath) {
         Storage.filePath = filePath;
         try {
             File f = new File(filePath);
             f.getParentFile().mkdir();
             f.createNewFile();
-        } catch(Exception e) {
-            // if any error occurs
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     /**
      * Writes task list to file
+     *
      * @param toDoList list of tasks that user has inputted that needs to be saved
      */
     public static void writeToFile(ArrayList<Task> toDoList) throws IOException {
@@ -46,6 +51,7 @@ public class Storage {
 
     /**
      * Adds an additional task to file
+     *
      * @param task the task that needs to be added to the file to be saved
      */
     public static void appendToFile(Task task) throws IOException {
@@ -57,6 +63,7 @@ public class Storage {
 
     /**
      * Reads file and generates the task list that was saved
+     *
      * @return the tasklist that was saved in the file
      */
     public static ArrayList<Task> readFile() throws FileNotFoundException {
@@ -77,21 +84,22 @@ public class Storage {
 
     /**
      * Converts infoString format into a Task
+     *
      * @param s infoString of the task
      * @return task represented by the infoString
      */
     public static Task createTask(String s) {
         String[] parts = s.split("\\|");
-        switch(parts[0].trim()) {
-            case "T":
-                return new ToDo(parts[2].trim(), parts[1].trim().equals("1"));
-            case "D":
-                return new Deadline(parts[2].trim(), parts[1].trim().equals("1"), parts[3].trim());
-            case "E":
-                return new Event(parts[2].trim(), parts[1].trim().equals("1"), parts[3].trim());
+        switch (parts[0].trim()) {
+        case "T":
+            return new ToDo(parts[2].trim(), parts[1].trim().equals("1"));
+        case "D":
+            return new Deadline(parts[2].trim(), parts[1].trim().equals("1"), parts[3].trim());
+        case "E":
+            return new Event(parts[2].trim(), parts[1].trim().equals("1"), parts[3].trim());
 
-            default:
-                return null;
+        default:
+            return null;
         }
     }
 }

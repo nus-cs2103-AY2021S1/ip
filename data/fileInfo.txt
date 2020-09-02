@@ -2,5 +2,6 @@ D | 1 | pore | 2012-02-19
 T | 0 | pretty
 D | 0 | yas | 2012-01-01
 E | 1 | pepega | 2010-04-30
-T | 0 | thisisfine
+T | 1 | thisisfine
 D | 0 | imnotfine | 2030-04-05
+E | 0 | party | 2010-12-31

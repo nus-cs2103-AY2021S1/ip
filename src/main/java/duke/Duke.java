@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import duke.command.Command;
-import duke.common.CustomException;
+import duke.common.DukeException;
 import duke.common.Ui;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -54,7 +54,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (CustomException | IOException e) {
+            } catch (DukeException | IOException e) {
                 Ui.display(e.getMessage());
             }
         }

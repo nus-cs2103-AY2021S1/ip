@@ -11,11 +11,10 @@ public class Deadline extends Task {
     protected LocalDate by;
 
     /**
-     * Creates a new Deadline object
+     * Constructor for a new Deadline object
      *
      * @param description details about the Deadline
      * @param by          date the deadline is due by in yyyy-mm-dd format
-     * @return Deadline with a corresponding description and sets it as uncompleted.
      */
     public Deadline(String description, String by) {
         super(description);
@@ -23,12 +22,11 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates a new Event object
+     * Constructor for a new Deadline object
      *
      * @param description details about the Deadline
      * @param isDone whether Deadline is done or not
      * @param by time/date the Deadline is due by in yyyy-mm-dd format
-     * @return Deadline with a corresponding description and completed status.
      */
     public Deadline(String description, boolean isDone, String by) {
         super(description, isDone);
@@ -65,6 +63,6 @@ public class Deadline extends Task {
         if (isDone) {
             x = "1";
         }
-        return "D | " + x +  " | " + this.description + " | " + by;
+        return "D | " + x + " | " + this.description + " | " + by;
     }
 }

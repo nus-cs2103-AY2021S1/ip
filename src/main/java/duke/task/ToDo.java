@@ -53,6 +53,6 @@ public class ToDo extends Task {
         if (isDone) {
             x = "1";
         }
-        return "T | " + x +  " | " + this.description;
+        return "T | " + x + " | " + this.description;
     }
 }

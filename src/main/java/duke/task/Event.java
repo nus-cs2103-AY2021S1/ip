@@ -15,7 +15,6 @@ public class Event extends Task {
      *
      * @param description details about the Event
      * @param at time/date the event is held at
-     * @return Event with a corresponding description and completed status.
      */
     public Event(String description, String at) {
         super(description);
@@ -28,7 +27,6 @@ public class Event extends Task {
      * @param description details about the Event
      * @param isDone whether Event is done or not
      * @param at time/date the event is held at
-     * @return Event with a corresponding description and completed status.
      */
     public Event(String description, boolean isDone, String at) {
         super(description, isDone);
@@ -65,6 +63,6 @@ public class Event extends Task {
         if (isDone) {
             x = "1";
         }
-        return "E | " + x +  " | " + this.description + " | " + at;
+        return "E | " + x + " | " + this.description + " | " + at;
     }
 }

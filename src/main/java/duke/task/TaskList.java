@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.common.CustomException;
-
 import java.util.ArrayList;
+
+import duke.common.DukeException;
 
 /**
  * Represents all of the users tasks in a list.
@@ -67,7 +67,7 @@ public class TaskList {
      *
      * @return tasks that contains the keyword in an array list.
      */
-    public ArrayList<Task> findTask(String keyword) throws CustomException {
+    public ArrayList<Task> findTask(String keyword) throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
         if (!keyword.isEmpty()) {
             for (Task task : tasks) {
@@ -76,7 +76,7 @@ public class TaskList {
                 }
             }
         } else {
-            throw new CustomException("keyword is left blank.");
+            throw new DukeException("Keyword is left blank.");
         }
         return result;
     }

@@ -3,9 +3,9 @@ package duke.common;
 /**
  * Signals custom errors and outputs a corresponding message.
  */
-public class CustomException extends Exception {
+public class DukeException extends Exception {
 
-    public CustomException(String message) {
+    public DukeException(String message) {
         super(message);
     }
 }
