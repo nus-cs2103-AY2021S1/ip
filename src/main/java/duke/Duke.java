@@ -26,15 +26,15 @@ public class Duke {
         this.parser = new Parser(this.storage);
     }
 
-    /**
-     * Main entry point for Duke.
-     *
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.runDuke();
-    }
+//    /**
+//     * Main entry point for Duke.
+//     *
+//     * @param args Command line arguments.
+//     */
+//    public static void main(String[] args) {
+//        Duke duke = new Duke();
+//        duke.runDuke();
+//    }
 
     /**
      * Runs Duke.
