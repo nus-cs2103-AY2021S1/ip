@@ -4,11 +4,24 @@ import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Represents an interactive bot to handle tasks
  */
-public class Duke {
+public class Duke extends Application {
+    // add: start method
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
     // constant SPACE and LINE for format purposes
     public static String SPACE = "     ";
     public static String LINE = "____________________________________________________________\n";
