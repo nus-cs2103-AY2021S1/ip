@@ -17,6 +17,6 @@ public class Bye extends Command {
      * Sets end parameter as true.
      */
     public void endBot() {
-        ChatBot.ended = true;
+        ChatBot.hasEnded = true;
     }
 }
