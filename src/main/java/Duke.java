@@ -1,17 +1,51 @@
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Duke {
+public class Duke extends Application {
     private static final String SAVE_FILE_PATH =
             System.getProperty("user.home") + File.separator + ".duke" + File.separator + "tasks.txt";
-    private static final String BYE = "bye";
 
     private final Storage storage;
     private final Ui ui;
     private final TaskList tasks;
 
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    /**
+     * A Constructor for Duke that initializes the save file path to nothing.
+     */
+    public Duke() {
+        this.ui = new Ui();
+        this.storage = new Storage("");
+        this.tasks = new TaskList();
+    }
+
+    /**
+     * A Constructor for Duke that sets the save file path to a given path.
+     *
+     * @param filePath the path to the saved tasks
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -25,6 +59,7 @@ public class Duke {
 
     /**
      * Initializes an instance of Duke, and runs it.
+     *
      * @param args The command line args passed to the program
      */
     public static void main(String[] args) {
@@ -51,12 +86,11 @@ public class Duke {
             System.out.print("> ");
             while (scanner.hasNextLine()) {
                 String input = scanner.nextLine();
+                String output = handleCommand(input);
 
-                if (input.equalsIgnoreCase(BYE)) {
+                if (output.equalsIgnoreCase(Ui.GOODBYE_MESSAGE)) {
                     this.storage.saveTasks(this.tasks.getTasks());
                     break;
-                } else {
-                    this.handleCommand(input);
                 }
                 System.out.print("> ");
             }
@@ -69,65 +103,147 @@ public class Duke {
     }
 
     /**
-     * Interprets a command that was passed to Duke, and performs a corresponding action based on it. If the command or
-     * its arguments were malformed, display an error to the user.
+     * Interprets a command that was passed to Duke, and returns a corresponding response based on it. If the command or
+     * its arguments were malformed, return an error response to the user.
      *
      * @param input The String containing the command, as well as its arguments
+     * @return Duke's response to the input string
      */
-    private void handleCommand(String input) {
+    private String handleCommand(String input) {
         try {
             String[] tokens = input.split(" ");
             String command = tokens[0].toLowerCase();
             switch (command) {
             case "list": // show tasks available
-                this.ui.displayTasks(this.tasks.getTasks());
-                break;
+                return ui.displayTasks(this.tasks.getTasks());
             case "find":
                 String term = input.substring("find".length()).strip();
                 List<Task> matchingTasks = this.tasks.searchTasks(term);
-                this.ui.displayMatchingTasks(matchingTasks);
-                break;
+                return ui.displayMatchingTasks(matchingTasks);
             case "done": {
                 if (tokens.length < 2) {
                     throw new InvalidInputException("Um, you need to tell me what it is you've done.");
                 }
                 int index = Integer.parseInt(tokens[1]) - 1;
-                Task task = this.tasks.getTask(index);
+                Task task = tasks.getTask(index);
                 task.markDone();
-                this.ui.displayMessages(
+                return ui.displayMessages(
                         "Okay. So you've done:",
                         task.toString());
             }
-            break;
             case "delete":
                 int index = Integer.parseInt(tokens[1]) - 1;
                 Task task = this.tasks.getTask(index);
                 this.tasks.deleteTask(index);
-                this.ui.displayMessages(
+                return this.ui.displayMessages(
                         "Right, you no longer want me to track:",
                         task.toString(),
                         this.ui.getTasksLeftMessage(this.tasks.tasksCount()));
-                break;
             case "todo":
             case "deadline":
             case "event": // it's a new task
-                this.addTask(command, input);
-                break;
+                return addTask(command, input);
+            case "bye":
+                return ui.displayGoodbye();
             default:
-                this.ui.displayMessages("Um, I don't get what you're saying.");
-                break;
+                return ui.displayMessages("Um, I don't get what you're saying.");
             }
         } catch (InvalidInputException e) {
-            this.ui.displayMessages(e.getMessage());
+            return ui.displayMessages(e.getMessage());
         }
     }
 
-    private void addTask(String command, String input) throws InvalidTaskException {
+    private String addTask(String command, String input) throws InvalidTaskException {
         Task task = TaskParser.parseInput(command, input);
         this.tasks.addTask(task);
-        this.ui.displayMessages(
+        return this.ui.displayMessages(
                 "Okay, you want to:",
                 task.toString(),
                 this.ui.getTasksLeftMessage(this.tasks.tasksCount()));
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        //Step 1. Setting up required components
+
+        //The container for the content of the chat to scroll.
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+
+        //Step 2. Formatting the window to look as expected
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput, 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        //Step 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        String input = userInput.getText();
+        String response = getResponse(userInput.getText());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+
+        userInput.clear();
+    }
+
+    /**
+     * Returns Duke's response String to a user's input.
+     */
+    public String getResponse(String input) {
+        return handleCommand(input);
     }
 }
