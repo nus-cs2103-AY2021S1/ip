@@ -6,16 +6,22 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 /**
  * Represents an interactive chat bot named "Duke"
  * who can manage simple tasks for users.
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    public Duke() {}
     /**
      * Constructor for Duke chat bot.
      * @param filePath the relative path of assigned
@@ -56,6 +62,17 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        helloWorld.setFont(new Font(50.0));
+
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
 
