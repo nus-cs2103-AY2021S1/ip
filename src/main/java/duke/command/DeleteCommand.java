@@ -3,7 +3,7 @@ package duke.command;
 import duke.Duke;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
-import duke.ui.UIPrint;
+import duke.ui.UiPrint;
 
 /**
  * DeleteCommand asks DukeTaskList to remove the task with the input index.
@@ -46,7 +46,7 @@ public class DeleteCommand extends Command {
 
     private void checkException(int taskIndex, String str, Duke duke) {
         if (duke.taskList.getSize() <= taskIndex || taskIndex < 0) {
-            String line = UIPrint.getLine(UIPrint.star, 50);
+            String line = UiPrint.getLine(UiPrint.star, 50);
             String errMessage =
                     line + "\nSorry " + str + " is not a valid index\n" + line;
             throw new InvalidIndexException(errMessage);

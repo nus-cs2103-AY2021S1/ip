@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.ui.UIPrint;
+import duke.ui.UiPrint;
 
 /**
  * Task is the super class of all types of tasks, cannot be instantiated.
@@ -48,7 +48,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String statusIcon = isDone ? UIPrint.tick : UIPrint.cross;
+        String statusIcon = isDone ? UiPrint.tick : UiPrint.cross;
 
         return icon + statusIcon + " " + description;
     }

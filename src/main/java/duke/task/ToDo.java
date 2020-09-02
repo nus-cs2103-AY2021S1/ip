@@ -1,7 +1,7 @@
 package duke.task;
 
 import duke.exception.NoDescriptionException;
-import duke.ui.UIPrint;
+import duke.ui.UiPrint;
 
 /**
  * A ToDo is a task with no time info. Todo objects store only task description.
@@ -20,7 +20,7 @@ public class ToDo extends Task {
      */
     public static ToDo createToDo(String todoInfo) {
         checkException(todoInfo);
-        ToDo newToDo = new ToDo(UIPrint.todoIcon, todoInfo, todoInfo);
+        ToDo newToDo = new ToDo(UiPrint.todoIcon, todoInfo, todoInfo);
         return newToDo;
     }
 
@@ -31,7 +31,7 @@ public class ToDo extends Task {
 
     private static void checkException(String str) throws NoDescriptionException {
         if (str.isBlank()) {
-            String line = UIPrint.getLine(UIPrint.star, 50);
+            String line = UiPrint.getLine(UiPrint.star, 50);
             String errMessage =
                     line + "\nOOPS!!! The description of a todo cannot be empty.\n" + line;
 

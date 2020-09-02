@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.data.DukeTaskListSideEffects;
+import duke.ui.UiPrint;
 import duke.ui.UiSideEffects;
 import duke.exception.NoDescriptionException;
 import duke.DukeStub;
-import duke.ui.UIPrint;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -52,7 +52,7 @@ public class TodoCommandTest {
         Exception exception = assertThrows(NoDescriptionException.class,
                 () -> command.execute(invalidInput, dukeStub));
 
-        String line = UIPrint.getLine(UIPrint.star, 50);
+        String line = UiPrint.getLine(UiPrint.star, 50);
         String errMessage =
                 line + "\nOOPS!!! The description of a todo cannot be empty.\n" + line;
 

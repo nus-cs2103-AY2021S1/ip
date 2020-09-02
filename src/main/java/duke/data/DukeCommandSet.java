@@ -2,7 +2,7 @@ package duke.data;
 
 import duke.command.*;
 import duke.exception.UnknownCommandException;
-import duke.ui.UIPrint;
+import duke.ui.UiPrint;
 
 import java.util.HashMap;
 
@@ -44,7 +44,7 @@ public class DukeCommandSet {
      */
     public Command getCommand(String commandName) throws UnknownCommandException {
         if (!commandSet.containsKey(commandName)) {
-            String line = UIPrint.getLine(UIPrint.star, 50);
+            String line = UiPrint.getLine(UiPrint.star, 50);
             String errMessage =
                     line + "\nOOPS!!! I'm sorry, but I don't know what that means :-(\n" + line;
 
