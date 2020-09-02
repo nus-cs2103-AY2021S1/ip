@@ -19,7 +19,7 @@ class DukeOutputFormatter {
         StringBuilder sb = new StringBuilder();
         sb.append(DukeConstants.LINE);
         sb.append("\n");
-        responses.forEach(x -> sb.append(String.format("%s%s\n", DukeConstants.IDENT, x)));
+        responses.forEach(x -> sb.append(String.format("%s%s\n", DukeConstants.INDENT, x)));
         sb.append(DukeConstants.LINE);
         return sb.toString();
     }
@@ -39,9 +39,9 @@ class DukeOutputFormatter {
         for (int i = 0 ; i < responses.size() ; i++) {
             String response = responses.get(i);
             if (k < indentIndexes.size() && i == indentIndexes.get(k)) {
-                sb.append(DukeConstants.IDENT);
+                sb.append(DukeConstants.INDENT);
             }
-            sb.append(String.format("%s%s\n", DukeConstants.IDENT, response));
+            sb.append(String.format("%s%s\n", DukeConstants.INDENT, response));
         }
         sb.append(DukeConstants.LINE);
         return sb.toString();

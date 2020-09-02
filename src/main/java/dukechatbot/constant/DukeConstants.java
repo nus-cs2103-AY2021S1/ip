@@ -10,8 +10,8 @@ public class DukeConstants {
                                     + "| |_| | |_| |   <  __/\n"
                                     + "|____/ \\__,_|_|\\_\\___|\n";
 
-    public static final String IDENT = "\t";
-    public static final String LINE = IDENT + "------------------------------";
+    public static final String INDENT = "    ";
+    public static final String LINE = INDENT + "------------------------------";
     public static final String INITIAL_RESPONSE = "Hello! I'm Duke\n\tWhat can I do for you?";
     public static final String EXIT_INPUT = "bye";
     public static final String EXIT_RESPONSE = "Bye. Hope to see you again soon!";
