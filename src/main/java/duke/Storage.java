@@ -14,9 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents the part of Duke that deals with loading tasks from a file and saving tasks in the same file.
+ */
 public class Storage {
     private final File file;
 
+    /**
+     * Creates a new Storage where tasks can be loaded from and saved to.
+     * If the directory or file does not exist, new ones will be created.
+     *
+     * @param filePath the filepath where tasks are loaded from and saved to.
+     */
     public Storage(String filePath) {
         this.file = new File(filePath);
         file.getParentFile().mkdir();
@@ -27,6 +36,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks that were previously saved on an existing file.
+     *
+     * @return a list of all previous tasks from an existing file.
+     * @throws DukeException if there are issues while loading the previous tasks.
+     */
     public List<Task> loadTasks() throws DukeException {
         try {
             Scanner sc = new Scanner(file);
@@ -48,10 +63,17 @@ public class Storage {
             }
             return tasks;
         } catch (FileNotFoundException e) {
-            throw new DukeException("Uh-oh! The file could not be found!");
+            throw new DukeException("Uh-oh! The file could not be found.");
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("Uh-oh! There seems to be a problem loading the previous tasks.");
         }
     }
 
+    /**
+     * Saves current tasks onto a file.
+     *
+     * @param tasks the list of all the current tasks to be saved.
+     */
     public void save(List<Task> tasks) {
         try {
             FileWriter fw = new FileWriter("./data/tasks.txt");
