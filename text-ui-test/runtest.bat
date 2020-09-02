@@ -1,13 +1,15 @@
 @ECHO OFF
 
+SET MY_PATH=C:\Users\cs623\Docs\GitHub\ip
+
 REM create bin directory if it doesn't exist
-if not exist ..\bin mkdir ..\bin
+if not exist "%MY_PATH%\bin" mkdir "%MY_PATH%\bin"
 
 REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\Duke.java
+javac  -cp "%MY_PATH%\src\main\java" -Xlint:none -d "%MY_PATH%\bin" "%MY_PATH%\src\main\java\Duke.java"
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
@@ -18,4 +20,4 @@ REM run the program, feed commands from input.txt file and redirect the output t
 java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
-FC ACTUAL.TXT EXPECTED.TXT
+FC /w ACTUAL.TXT EXPECTED.TXT
