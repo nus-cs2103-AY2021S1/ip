@@ -18,7 +18,7 @@ public class EventTest {
         } catch (InvalidDateException e) {
             assertEquals("Invalid date format detected!\n"
                     + "Accepted formats: 'dd/MM/yyyy' or 'dd-MM-yyyy", e.toString());
-        } catch (MissingDateException | EmptyTaskException e) {
+        } catch (MissingDateException e) {
             e.printStackTrace();
             fail();
         }

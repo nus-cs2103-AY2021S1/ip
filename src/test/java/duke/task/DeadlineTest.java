@@ -11,8 +11,9 @@ public class DeadlineTest {
         String command1 = "deadline test /by 2/8/20";
         String command2 = "test";
         String command3 = "2020-08-02";
+        String[] data = new String[]{"D", "0", command2, command3};
         try {
-            assertEquals(Deadline.create(command1), Deadline.createFromFile(command2, command3));
+            assertEquals(Deadline.create(command1), Deadline.createFromFile(data));
         } catch (Exception e) {
             e.printStackTrace();
             fail();

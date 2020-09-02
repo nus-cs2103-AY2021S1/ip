@@ -2,9 +2,6 @@ package duke.task;
 
 import duke.exception.UnreadableSaveTaskException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 /**
  * Class representing a generic task with no dates attached.
  */

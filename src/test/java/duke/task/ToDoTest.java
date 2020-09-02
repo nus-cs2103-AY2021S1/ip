@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.EmptyTaskException;
+import duke.exception.UnreadableSaveTaskException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,21 +11,12 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class ToDoTest {
     @Test
     public void factoryMethod_success() {
+        String[] data = new String[]{"T", "0", "test event"};
         try {
-            assertEquals(ToDo.createFromFile("test event"), ToDo.create("todo test event"));
-        } catch (EmptyTaskException e) {
+            assertEquals(ToDo.createFromFile(data), ToDo.create("todo test event"));
+        } catch (UnreadableSaveTaskException e) {
             e.printStackTrace();
             fail();
-        }
-    }
-
-    @Test
-    public void factoryMethod_invalidCommand_ExceptionThrown() {
-        try {
-            assertNull(ToDo.create("todo "));
-            fail();
-        } catch (EmptyTaskException e) {
-            assertEquals("You can't add a non-existent todo, silly!", e.toString());
         }
     }
 }
