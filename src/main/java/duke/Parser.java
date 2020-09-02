@@ -40,9 +40,10 @@ public class Parser {
      * command and executes the appropriate response. If the input is invalid, a DukeException is thrown.
      *
      * @param inputString The user input to be parsed
+     * @return The string representing the appropriate response.
      * @throws DukeException The exception explaining why the input was invalid
      */
-    public void parse(String inputString) throws DukeException {
+    public String parse(String inputString) throws DukeException {
         String divider = "************************************************\n";
         if (inputString.indexOf("done ") == 0) {
             try {
@@ -53,16 +54,18 @@ public class Parser {
                     throw new DukeException("Hey, no such task exists!");
                 } else {
                     String doneTask = lines.getTask(itemNumber - 1);
-                    lines.updateTask(Ui.done(doneTask), itemNumber - 1);
+                    String message = Ui.done(doneTask);
+                    lines.updateTask(Ui.updateDoneTask(doneTask), itemNumber - 1);
+                    return message;
                 }
             } catch (NumberFormatException e) {
-                System.out.println(divider + "Invalid input for done command!" + "\n" + divider);
+                throw new DukeException("Invalid input for done command!");
             }
         } else if (inputString.equals("list")) {
-            Ui.listTasks(lines.getList());
+            return Ui.listTasks(lines.getList());
         } else if (inputString.equals("bye")) {
-            Ui.bye();
             carryOn = false;
+            return Ui.bye();
         } else if (inputString.indexOf("delete ") == 0) {
             try {
                 int itemNumber = Integer.parseInt(inputString.substring(inputString.indexOf(" ") + 1));
@@ -73,10 +76,10 @@ public class Parser {
                 } else {
                     String task = lines.getTask(itemNumber - 1);
                     lines.removeTask(itemNumber - 1);
-                    Ui.deletedTask(task, lines.getNumberOfItems());
+                    return Ui.deletedTask(task, lines.getNumberOfItems());
                 }
             } catch (NumberFormatException e) {
-                System.out.println(divider + "Invalid input for delete command!" + "\n" + divider);
+                throw new DukeException("Invalid input for delete command!");
             }
         } else if (inputString.indexOf("find ") == 0) {
             if (inputString.length() == 5) {
@@ -84,7 +87,7 @@ public class Parser {
             } else {
                 String keyword = inputString.substring(5);
                 ArrayList<String> matchingTasks = lines.find(keyword);
-                Ui.listMatchingTasks(matchingTasks);
+                return Ui.listMatchingTasks(matchingTasks);
             }
         } else {
             Task task = null;
@@ -131,7 +134,9 @@ public class Parser {
             if (task != null) {
                 String newTask = task.toString();
                 lines.addTask(newTask);
-                Ui.addedTask(task, lines.getNumberOfItems());
+                return Ui.addedTask(task, lines.getNumberOfItems());
+            } else {
+                return "";
             }
         }
     }

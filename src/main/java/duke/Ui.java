@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+
 /**
  * The Ui class handles all of the Ui interaction with the users using its various static methods
  */
@@ -9,72 +12,84 @@ public class Ui {
     private static String divider = "************************************************\n";
 
     /**
-     * Introduces Duke to the users upon start up by printing an introduction.
+     * Returns a scene to be printed as an introduction upon start up Duke
+     *
+     * @return  returns the intro scene
      */
-    public static void introduction() {
+    public static Scene introduction() {
         String intro = "Hello! I'm Duke\nWhat can i do for you?\n";
-        System.out.println(divider + intro + divider);
+        return new Scene(new Label(divider + intro + divider));
     }
 
     /**
-     * Prints out a done statement while updating the task string by swapping the cross with a tick.
+     * returns a done statement while updating the task string by swapping the cross with a tick.
      * The doneTask argument must comply with the standard output string format of Duke tasks.
      *
      * @param doneTask the task that is to be marked done.
      * @return returns the updated line.
      */
-    public static String done(String doneTask) {
+
+    public static String updateDoneTask(String doneTask) {
         String updatedLine = doneTask.substring(0, 4) + "\u2713" + doneTask.substring(5);
-        System.out.println(divider + "Nice! I have marked this task as done:");
-        System.out.println(updatedLine + "\n" + divider);
         return updatedLine;
     }
 
-    /**
-     * Prints out the tasks in numerical order based on the ArrayList param.
-     * The lines argument must contain Strings that comply with the standard output string format of Duke tasks.
-     *
-     * @param lines List of tasks to be printed.
-     */
-    public static void listTasks(ArrayList<String> lines) {
-        System.out.println(divider);
-        System.out.println("Here are the tasks in your list!");
-        for (int i = 0; i < lines.size(); i++) {
-            int numbering = i + 1;
-            String task = lines.get(i);
-            System.out.println(numbering + "." + task);
-        }
-        System.out.println(divider);
+    public static String done(String doneTask) {
+        String updatedLine = updateDoneTask(doneTask);
+        String message = divider + "Nice! I have marked this task as done:\n";
+        message = message + updatedLine + "\n" + divider;
+        return message;
     }
 
     /**
-<<<<<<< HEAD:src/main/java/duke/Ui.java
+     * returns out the tasks in numerical order based on the ArrayList param.
+     * The lines argument must contain Strings that comply with the standard output string format of Duke tasks.
+     *
+     * @param lines List of tasks to be printed.
+     * @return The string representing the list of tasks.
+     */
+    public static String listTasks(ArrayList<String> lines) {
+        String list = "";
+        list = list + divider + "Here are the tasks in your list!\n";
+        for (int i = 0; i < lines.size(); i++) {
+            int numbering = i + 1;
+            String task = lines.get(i);
+            list = list + (numbering + "." + task + "\n");
+        }
+        list = list + divider;
+        return list;
+    }
+
+    /**
      * Same as listTasks() except that the message printed out is slightly different. If the ArrayList supplied is
      * empty, a "no matching tasks" message would be printed.
      *
      * @param lines The list of tasks to print out.
+     * @return A string representing the list of tasks / message to print out.
      */
-    public static void listMatchingTasks(ArrayList<String> lines) {
-        System.out.println(divider);
+    public static String listMatchingTasks(ArrayList<String> lines) {
+        String list = divider;
         if (lines.size() > 0) {
-            System.out.println("Here are the matching tasks in your list!");
+            list = list + "Here are the matching tasks in your list!\n";
             for (int i = 0; i < lines.size(); i++) {
                 int numbering = i + 1;
                 String task = lines.get(i);
-                System.out.println(numbering + "." + task);
+                list = list + (numbering + "." + task + "\n");
             }
         } else {
-            System.out.println("Unfortunately no tasks matches your keyword :(");
+            list = list + "Unfortunately no tasks matches your keyword :(";
         }
-        System.out.println(divider);
+        list = list + divider;
+        return list;
     }
 
-
     /**
-     * prints out a goodbye message when users exit Duke using the goodbye command
+     * returns out a goodbye message when users exit Duke using the goodbye command
+     *
+     * @return a String representing the goodbye message
      */
-    public static void bye() {
-        System.out.println(divider + "Bye! See you next time!" + "\n" + divider);
+    public static String bye() {
+       return divider + "Bye! See you next time!" + "\n" + divider;
     }
 
     /**
@@ -83,37 +98,50 @@ public class Ui {
      * @param task The task string representing the task that was deleted.
      * @param numberOfItems the remaining number of tasks.
      */
-    public static void deletedTask(String task, int numberOfItems) {
-        System.out.println(divider + "Noted, the task has been deleted");
-        System.out.println(task + "\n" + divider);
-        System.out.println("Now you have " + numberOfItems + " tasks in the list.");
+
+    /**
+     * returns a statement confirming that a task has been deleted, as well as the number of tasks left.
+     *
+     * @param task The task string representing the task that was deleted.
+     * @param numberOfItems the remaining number of tasks.
+     * @return the string representing the deleted task.
+     */
+    public static String deletedTask(String task, int numberOfItems) {
+        String message = divider + "Noted, the task has been deleted\n";
+        message = message + task + "\n" + divider + "\n";
+        message = message + "Now you have " + numberOfItems + " tasks in the list.";
+        return message;
     }
 
     /**
-     * Prints out a statement confirming that a task has been added, as well as the number of task currently.
+     * Prints out a statement confirming that a task has been added, as well as the number of tasks currently.
      *
      * @param task The task string representing the task that was added.
      * @param numberOfItems the current number of tasks.
+     * @return the message representing the added task
      */
-    public static void addedTask(Task task, int numberOfItems) {
+    public static String addedTask(Task task, int numberOfItems) {
+        String message = "";
         if (numberOfItems < 100) {
-            System.out.println(divider + "Got it, I've added this task:");
-            System.out.println(" " + task);
-            System.out.println("Now you have " + numberOfItems + " tasks in the list.");
-            System.out.println(divider);
+            message = message + divider + "Got it, I've added this task:\n";
+            message = message + " " + task + "\n";
+            message = message + "Now you have " + numberOfItems + " tasks in the list.\n";
+            message = message + divider;
         } else {
-            System.out.println(divider + "Sorry, the list is full!\n" + divider);
+            message = message + divider + "Sorry, the list is full!\n" + divider;
         }
+        return message;
     }
 
 
-
     /**
-     * Handles DukeExceptions{@link DukeException} thrown by Duke package methods by printing them out for users to see.
+     * Handles DukeExceptions{@link DukeException} thrown by Duke package methods by returning a string representing
+     * the error.
      *
      * @param e The DukeException to be handled.
+     * @return the string representing the exception.
      */
-    public static void handleDukeException(DukeException e) {
-        System.out.println(divider + e.getMessage() + "\n" + divider);
+    public static String handleDukeException(DukeException e) {
+        return divider + e.getMessage() + "\n" + divider;
     }
 }
