@@ -17,6 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
+
 
 
 
@@ -35,11 +37,14 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    public Duke() {}
+    public Duke() {
+    }
+
     /**
      * Constructor for Duke chat bot.
+     *
      * @param filePath the relative path of assigned
-     * file for reading and writing of data.
+     *                 file for reading and writing of data.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -56,6 +61,7 @@ public class Duke extends Application {
     /**
      * This method simulate the interaction between
      * Duke and human users.
+     *
      * @param args Unused.
      * @return Nothing.
      */
@@ -71,6 +77,7 @@ public class Duke extends Application {
      * This is the main method which makes use of run method.
      * A new Duke chat bot will be initiated by reading from and writing
      * into the file of relative path "data/tasks.txt".
+     *
      * @param args Unused.
      * @return Nothing.
      */
@@ -125,10 +132,31 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        // more code to be added here later
+        //Step 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        userInput.setOnAction((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+        return textToAdd;
     }
 }
 
