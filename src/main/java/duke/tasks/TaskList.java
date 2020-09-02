@@ -90,8 +90,7 @@ public class TaskList {
     /**
      * Prints the list with specified mode.
      * Prints all the undone tasks in the list if the mode is undone.
-     * Prints all tasks in the list if the mode is all.
-     * Prints all tasks with description containing the mode keyword in any other condition.
+     * Prints all the tasks in the list in any other conditions.
      *
      * @param mode The mode specified for printing the list.
      */
@@ -99,17 +98,11 @@ public class TaskList {
         int i = 1;
         for (Task t : list) {
             switch (mode) {
-            case "Undone":
-                if (t.getStatus()) {
-                    continue;
-                }
-                break;
-            case "All":
-                break;
-            default:
-                if (!t.getDescription().contains(mode)) {
-                    continue;
-                }
+                case "Undone":
+                    if (t.getStatus()) {
+                        continue;
+                    }
+                    break;
             }
             System.out.println("\t" + i + ". " + t);
             i++;
