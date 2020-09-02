@@ -2,6 +2,8 @@ package duke.task;
 
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
+
 /**
  * Represents a list of tasks.
  */
@@ -25,7 +27,11 @@ public class TaskList {
     public TaskList(ArrayList<String> taskStrings) {
         tasks = new ArrayList<>();
         for (String taskString : taskStrings) {
-            this.tasks.add(dataToTask(taskString));
+            try {
+                this.tasks.add(dataToTask(taskString));
+            } catch (DukeException ignored) {
+                continue;
+            }
         }
     }
 
@@ -35,7 +41,7 @@ public class TaskList {
      * @param taskString Line of text from text file.
      * @return Task which is specified by the line of text
      */
-    public Task dataToTask(String taskString) {
+    public Task dataToTask(String taskString) throws DukeException {
         String[] taskLine = taskString.split("~");
         Task task = null;
         switch (taskLine[0]) {

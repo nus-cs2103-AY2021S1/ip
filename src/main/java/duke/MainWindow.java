@@ -30,6 +30,16 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Greets the user upon starting the application.
+     */
+    public void greet() {
+        String response = duke.getResponse(" ");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+    }
+
     public void setDuke(Duke d) {
         duke = d;
     }

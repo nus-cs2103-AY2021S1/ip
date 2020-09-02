@@ -16,6 +16,7 @@ public abstract class Command {
      * @param tasks Tasklist containing current tasks.
      * @param ui Ui for displaying output.
      * @param storage Storage of tasks in hard disk.
+     * @return String displaying completion of Command.
      * @throws DukeException If command is invalid.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;

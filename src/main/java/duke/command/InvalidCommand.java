@@ -27,6 +27,7 @@ public class InvalidCommand extends Command {
      * @param tasks Tasklist containing current tasks.
      * @param ui Ui for displaying output.
      * @param storage Storage of tasks in hard disk.
+     * @return String displaying completion of Command.
      * @throws DukeException Always throws exception as input is invalid.
      */
     @Override

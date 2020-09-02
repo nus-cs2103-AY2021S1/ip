@@ -8,19 +8,19 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents the duke.Duke chat-bot, called Nite.
+ * Represents the Duke chat-bot, called Nite.
  * Nite is an interactive app which helps to keep track of tasks.
  * @author Chia Wen Ling
  * @version v0.1
  */
 public class Duke {
-    private static Ui ui;
-    private static Storage storage;
-    private static TaskList tasks;
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
     private boolean isInitialised;
 
     /**
-     * Creates a duke.Duke Chat-bot.
+     * Creates a Duke Chat-bot.
      *
      * @param filePath Directory where duke.Duke text file is saved.
      * @param folderPath Path name of duke.Duke text file to be saved.
@@ -37,7 +37,6 @@ public class Duke {
     }
 
     public Duke() {
-
     }
 
     /**
@@ -60,10 +59,12 @@ public class Duke {
 
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the response for the input command.
+     *
+     * @param input User input.
+     * @return Response to user's input.
      */
-    String getResponse(String input) {
+    public String getResponse(String input) {
         if (!isInitialised) {
             ui = new Ui();
             storage = new Storage("/data/duke.txt", "/data");
@@ -81,7 +82,7 @@ public class Duke {
             Command command = Parser.parse(input);
             isExit = command.isExit();
             if (isExit) {
-                System.exit(0);
+                //                System.exit(0);
                 return ui.showFarewell();
             }
             return command.execute(tasks, ui, storage);
