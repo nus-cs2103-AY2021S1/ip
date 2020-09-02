@@ -28,8 +28,14 @@ test {
     }
 }
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Main"
 }
 
 shadowJar {
@@ -38,7 +44,7 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '8.29'
 }
 
 run{
