@@ -8,6 +8,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -49,6 +54,12 @@ public class MainWindow extends AnchorPane {
         this.nite = nite;
     }
 
+    private void playSound() {
+        Media sound = new Media(new File("src/main/resources/audio/meow.wav").toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -61,6 +72,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        playSound();
         userInput.clear();
     }
 }
