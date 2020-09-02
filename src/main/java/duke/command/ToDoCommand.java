@@ -23,9 +23,9 @@ public class ToDoCommand extends Command {
      * @param storage The Storage.
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(task, LocalDateTime.now(), TaskType.TODO);
-        ui.say("Added ToDo '" + task + "' to your list!");
+        return ("Added ToDo '" + task + "' to your list!");
     }
 
     @Override

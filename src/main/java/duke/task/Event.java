@@ -33,8 +33,8 @@ public class Event extends Task {
         int year = dateTime.getYear();
         String dueDate = String.format("%s %d %d, %s", month, day, year, time);
         return done
-                ? "[E][✓] " + text + " (at: " + dueDate + ")"
-                : "[E][✗] " + text + " (at: " + dueDate + ")";
+                ? "[E][O] " + text + " (at: " + dueDate + ")"
+                : "[E][X] " + text + " (at: " + dueDate + ")";
     }
 
     public boolean compareTime(LocalDateTime givenDateTime, long hours) {

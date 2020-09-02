@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
      * @param storage The Storage.
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String help = "These are the available commands:\n"
                 + "bye - exits the program\n"
                 + "deadline <description> /by <due date and time> - "
@@ -30,7 +30,7 @@ public class HelpCommand extends Command {
                 + "help - shows this list of commands\n"
                 + "list - shows the contents of the task list\n"
                 + "todo <description> - adds a todo task with the given description to the task list";
-        ui.say(help);
+        return (help);
     }
 
     @Override

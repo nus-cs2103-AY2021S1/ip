@@ -11,8 +11,8 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return done
-                ? "[T][✓] " + text
-                : "[T][✗] " + text;
+                ? "[T][O] " + text
+                : "[T][X] " + text;
     }
 
     @Override

@@ -20,9 +20,9 @@ public class DoneCommand extends Command {
      * @param storage The Storage.
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String task = tasks.done(index);
-        ui.say("Marked this task as done:\n" + task);
+        return ("Marked this task as done:\n" + task);
     }
 
     @Override

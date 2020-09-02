@@ -29,12 +29,13 @@ public class DeadlineCommand extends Command {
      * @param tasks The TaskList.
      * @param ui The Ui.
      * @param storage The Storage.
+     * @returns Duke response.
      * @throws PastDateTimeException If the dateTime has already passed.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws PastDateTimeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws PastDateTimeException {
         if (LocalDateTime.now().isBefore(dateTime)) {
             tasks.add(task, dateTime, TaskType.DEADLINE);
-            ui.say("Added Deadline '" + task + "' to your list!");
+            return ("Added Deadline '" + task + "' to your list!");
         } else {
             throw (new PastDateTimeException());
         }

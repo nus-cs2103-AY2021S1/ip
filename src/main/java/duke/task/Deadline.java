@@ -33,8 +33,8 @@ public class Deadline extends Task {
         int year = dateTime.getYear();
         String dueDate = String.format("%s %d %d, %s", month, day, year, time);
         return done
-                ? "[D][✓] " + text + " (by: " + dueDate + ")"
-                : "[D][✗] " + text + " (by: " + dueDate + ")";
+                ? "[D][O] " + text + " (by: " + dueDate + ")"
+                : "[D][X] " + text + " (by: " + dueDate + ")";
     }
 
     @Override

@@ -28,11 +28,11 @@ public class DueInCommand extends Command {
      * @param storage The Storage.
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (hours) {
-            ui.say(tasks.extractDueTasksHours(time));
+            return(tasks.extractDueTasksHours(time));
         } else {
-            ui.say(tasks.extractDueTasksDays(time));
+            return(tasks.extractDueTasksDays(time));
         }
     }
 

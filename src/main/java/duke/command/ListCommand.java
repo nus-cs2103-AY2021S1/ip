@@ -15,10 +15,10 @@ public class ListCommand extends Command {
      * @param storage The Storage.
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String text = tasks.listContents();
-            ui.say(text);
+            return (text);
         } catch (DukeException e) {
             throw (e);
         }

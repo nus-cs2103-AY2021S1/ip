@@ -31,10 +31,10 @@ public class EventCommand extends Command {
      * @param storage The Storage.
      * @throws PastDateTimeException If the dateTime has already passed.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws PastDateTimeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws PastDateTimeException {
         if (LocalDateTime.now().isBefore(dateTime)) {
             tasks.add(task, dateTime, TaskType.EVENT);
-            ui.say("Added Event '" + task + "' to your list!");
+            return ("Added Event '" + task + "' to your list!");
         } else {
             throw (new PastDateTimeException());
         }

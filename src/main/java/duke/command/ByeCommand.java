@@ -15,12 +15,13 @@ public class ByeCommand extends Command {
      * @param storage The Storage.
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             storage.save(tasks);
             ui.end();
+            return "Goodbye!";
         } catch (DukeException e) {
-            ui.say(e.getMessage());
+            return e.getMessage();
         }
     }
 
