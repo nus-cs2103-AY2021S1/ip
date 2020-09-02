@@ -59,6 +59,10 @@ public class TaskList {
         return this.tasks;
     }
 
+    public void deleteAll() {
+        tasks.clear();
+    }
+
     private Task getTaskNumber(int taskNumber) throws InvalidIndexException {
         try {
             return this.tasks.get(taskNumber);

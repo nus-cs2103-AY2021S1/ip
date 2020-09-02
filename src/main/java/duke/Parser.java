@@ -25,6 +25,10 @@ public class Parser {
                 return new EventCommand(fullCommand);
             case "find":
                 return new FindCommand(fullCommand);
+            case "clear":
+                return new ClearCommand(fullCommand);
+            case "help":
+                return new HelpCommand(fullCommand);
             case "bye":
                 return new ExitCommand(fullCommand);
             default:
