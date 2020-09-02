@@ -3,6 +3,7 @@
  * For printing of Duke program related error messages.
  */
 public class DukeException extends Exception {
+    private String message;
     /**
      * Creates a DukeException object.
      * It is used for Duke error printing.
@@ -11,5 +12,11 @@ public class DukeException extends Exception {
      */
     public DukeException(String message) {
         super(message);
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return this.message;
     }
 }
