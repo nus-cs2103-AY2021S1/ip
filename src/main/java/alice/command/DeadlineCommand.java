@@ -3,20 +3,21 @@ package alice.command;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import alice.command.result.CommandResult;
+import alice.command.result.DeadlineCommandResult;
 import alice.storage.AliceStorageException;
+import alice.storage.SaveStatus;
 import alice.storage.StorageFile;
 import alice.task.Deadline;
 import alice.task.Task;
 import alice.task.TaskList;
-import alice.ui.Ui;
 
 /**
  * Represents the command to add a new deadline in ALICE.
  */
-public class DeadlineCommand extends Command {
+public class DeadlineCommand implements Command {
     protected static final List<String> NAMES = List.of("deadline");
-    protected static final String DESCRIPTION = "Create a task with a deadline. "
-            + "Example: deadline assignment /by 10-Aug 2359";
+    protected static final String DESCRIPTION = "Create a task with deadline";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES)
             + "] <desc> /by <datetime>";
 
@@ -44,18 +45,18 @@ public class DeadlineCommand extends Command {
         return NAMES.contains(name);
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @throws AliceStorageException if there were errors writing to storageFile.
-     */
     @Override
-    public void process(TaskList tasks, Ui ui, StorageFile storageFile) throws AliceStorageException {
+    public CommandResult process(TaskList tasks, StorageFile storageFile) {
         Task deadline = new Deadline(description, by);
         tasks.addTask(deadline);
-        ui.displayOutput("Roger. I've added the deadline to your list:\n    "
+        String reply = "Roger. I've added the deadline to your list:\n    "
                 + deadline + "\nNow you have " + tasks.getNumberOfTasks()
-                + " tasks in your list");
-        storageFile.saveToLastLine(deadline.encode());
+                + " tasks in your list!";
+        try {
+            storageFile.saveToLastLine(deadline.encode());
+            return new DeadlineCommandResult(reply, true, SaveStatus.SAVE_SUCCESS);
+        } catch (AliceStorageException ex) {
+            return new DeadlineCommandResult(reply, true, SaveStatus.SAVE_FAILED);
+        }
     }
 }

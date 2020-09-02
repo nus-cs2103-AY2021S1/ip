@@ -2,14 +2,15 @@ package alice.command;
 
 import java.util.List;
 
+import alice.command.result.CommandResult;
+import alice.command.result.ListCommandResult;
 import alice.storage.StorageFile;
 import alice.task.TaskList;
-import alice.ui.Ui;
 
 /**
  * Represents the command to list all tasks in ALICE.
  */
-public class ListCommand extends Command {
+public class ListCommand implements Command {
     protected static final List<String> NAMES = List.of("list", "ls");
     protected static final String DESCRIPTION = "Lists all tasks";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "]";
@@ -25,12 +26,12 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void process(TaskList tasks, Ui ui, StorageFile storageFile) {
+    public CommandResult process(TaskList tasks, StorageFile storageFile) {
         String output = tasks.getAllTasks();
         if (output == null) {
-            ui.displayOutput("You have no tasks at the moment.");
+            return new ListCommandResult("You have no tasks at the moment.", true);
         } else {
-            ui.displayOutput("Here are the tasks in your list:\n" + output);
+            return new ListCommandResult("Here are the tasks in your list:\n" + output, true);
         }
     }
 }

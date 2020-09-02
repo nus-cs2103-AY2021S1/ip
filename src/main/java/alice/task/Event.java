@@ -16,7 +16,7 @@ public class Event extends Task {
             .ofPattern("EEEE, MMM dd uuuu, ha");
 
     private final LocalDateTime on;
-    private final boolean includesTime;
+    private final boolean hasTime;
 
     /**
      * Creates a undone event happening at the specified time.
@@ -27,7 +27,7 @@ public class Event extends Task {
     public Event(String description, LocalDateTime on) {
         super(description);
         this.on = on;
-        this.includesTime = !on.toLocalTime().equals(LocalTime.MIDNIGHT);
+        this.hasTime = !on.toLocalTime().equals(LocalTime.MIDNIGHT);
     }
 
     /**
@@ -40,7 +40,7 @@ public class Event extends Task {
     public Event(boolean isDone, String description, LocalDateTime on) {
         super(isDone, description);
         this.on = on;
-        this.includesTime = !on.toLocalTime().equals(LocalTime.MIDNIGHT);
+        this.hasTime = !on.toLocalTime().equals(LocalTime.MIDNIGHT);
     }
 
     /**
@@ -50,7 +50,7 @@ public class Event extends Task {
      * @return the appropriate string representation of the event datetime.
      */
     public String getEventDateTime() {
-        if (includesTime) {
+        if (hasTime) {
             return on.format(E_DATETIME_FORMAT);
         } else {
             return on.format(E_DATE_FORMAT);
@@ -81,6 +81,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (on: " + getEventDateTime() + ")";
+        return "[E] " + super.toString() + " (on: " + getEventDateTime() + ")";
     }
 }

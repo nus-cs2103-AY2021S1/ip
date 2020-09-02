@@ -2,19 +2,21 @@ package alice.command;
 
 import java.util.List;
 
+import alice.command.result.CommandResult;
+import alice.command.result.TodoCommandResult;
 import alice.storage.AliceStorageException;
+import alice.storage.SaveStatus;
 import alice.storage.StorageFile;
 import alice.task.Task;
 import alice.task.TaskList;
 import alice.task.Todo;
-import alice.ui.Ui;
 
 /**
  * Represents the command to add a new todo task in ALICE.
  */
-public class TodoCommand extends Command {
+public class TodoCommand implements Command {
     protected static final List<String> NAMES = List.of("todo");
-    protected static final String DESCRIPTION = "Create a todo task. Example: todo homework1";
+    protected static final String DESCRIPTION = "Create a todo task";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "] <desc>";
 
     private final String description;
@@ -38,17 +40,17 @@ public class TodoCommand extends Command {
         return NAMES.contains(name);
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @throws AliceStorageException if there were errors writing to storageFile.
-     */
     @Override
-    public void process(TaskList tasks, Ui ui, StorageFile storageFile) throws AliceStorageException {
+    public CommandResult process(TaskList tasks, StorageFile storageFile) {
         Task todo = new Todo(description);
         tasks.addTask(todo);
-        ui.displayOutput("Roger. I've added the task to your list:\n    " + todo
-                + "\nNow you have " + tasks.getNumberOfTasks() + " tasks in your list");
-        storageFile.saveToLastLine(todo.encode());
+        String reply = "Roger. I've added the task to your list:\n    " + todo
+                + "\nNow you have " + tasks.getNumberOfTasks() + " tasks in your list!";
+        try {
+            storageFile.saveToLastLine(todo.encode());
+            return new TodoCommandResult(reply, true, SaveStatus.SAVE_SUCCESS);
+        } catch (AliceStorageException ex) {
+            return new TodoCommandResult(reply, true, SaveStatus.SAVE_FAILED);
+        }
     }
 }

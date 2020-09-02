@@ -3,7 +3,7 @@ package alice.command;
 import alice.AliceException;
 
 /**
- * Thrown when the command given by the user is invalid.
+ * Throws when the command given by the user is invalid.
  */
 public class InvalidCommandException extends AliceException {
     /**

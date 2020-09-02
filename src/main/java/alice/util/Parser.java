@@ -1,4 +1,4 @@
-package alice.parser;
+package alice.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -68,7 +68,7 @@ public class Parser {
      * @throws InvalidCommandException if the userInput does not match any commands and/or its command signature.
      */
     public static Command parseCommand(String userInput) throws InvalidCommandException {
-        String[] arr = userInput.trim().split(" ", 2);
+        String[] arr = userInput.strip().split(" ", 2);
         String cmd = arr[0];
         String argument;
         if (arr.length == 2) {
@@ -122,7 +122,7 @@ public class Parser {
      */
     private static FindCommand parseFindKeywords(String keywords) throws InvalidCommandException {
         if (!keywords.isBlank()) {
-            return new FindCommand(keywords.trim().split(" "));
+            return new FindCommand(keywords.strip().split(" "));
         } else {
             throw new InvalidCommandException("The keyword for find cannot be left empty.");
         }

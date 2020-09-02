@@ -1,7 +1,4 @@
 clear
-y
-clear
-n
 ls
 todo borrow book
 deadline return book /by 14-Dec 0200

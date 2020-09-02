@@ -2,14 +2,15 @@ package alice.command;
 
 import java.util.List;
 
+import alice.command.result.CommandResult;
+import alice.command.result.HelpCommandResult;
 import alice.storage.StorageFile;
 import alice.task.TaskList;
-import alice.ui.Ui;
 
 /**
  * Represents the command to get the list of commands that ALICE understands.
  */
-public class HelpCommand extends Command {
+public class HelpCommand implements Command {
     protected static final List<String> NAMES = List.of("help");
     protected static final String DESCRIPTION = "Gets the list of commands";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "]";
@@ -25,8 +26,8 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void process(TaskList tasks, Ui ui, StorageFile storageFile) {
-        String commandFormat = "    %-35s | %s\n";
+    public CommandResult process(TaskList tasks, StorageFile storageFile) {
+        String commandFormat = "%s - %s\n";
 
         StringBuilder output = new StringBuilder("These are the commands in my dictionary:\n");
         output.append(String.format(commandFormat, ListCommand.USE_CASE, ListCommand.DESCRIPTION));
@@ -42,6 +43,6 @@ public class HelpCommand extends Command {
 
         // remove last newline char
         output.setLength(output.length() - 1);
-        ui.displayOutput(output.toString());
+        return new HelpCommandResult(output.toString(), true);
     }
 }

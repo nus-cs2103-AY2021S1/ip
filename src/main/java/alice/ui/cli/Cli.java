@@ -1,17 +1,18 @@
-package alice.ui;
+package alice.ui.cli;
 
 import java.util.Scanner;
 
 /**
- * Represents the user interface of ALICE program.
+ * Represents the client line interface of ALICE program.
+ * Mainly used for testing purposes.
  */
-public class Ui {
+public class Cli {
     private final Scanner sc;
 
     /**
      * Creates a new user interface to be used by the program.
      */
-    public Ui() {
+    public Cli() {
         this.sc = new Scanner(System.in);
     }
 
@@ -25,18 +26,6 @@ public class Ui {
         System.out.print(" > ");
 
         return sc.nextLine();
-    }
-
-    /**
-     * Asks the user a question and get user feedback.
-     *
-     * @param question question to ask the user.
-     * @return the user response to the question.
-     */
-    public String getFeedback(String question) {
-        System.out.println(question);
-        displayLine();
-        return readUserInput();
     }
 
     /**
@@ -63,26 +52,10 @@ public class Ui {
     }
 
     /**
-     * Prints a success message for successful initialisation of ALICE.
+     * Prints the file loading status message for initialisation of ALICE.
      */
-    public void displayInitSuccessMessage() {
-        displayOutput("File successfully loaded!");
-    }
-
-    /**
-     * Prints an error message for failure to initialise ALICE.
-     */
-    public void displayInitFailedMessage() {
-        displayError("Error starting ALICE program!");
-    }
-
-    /**
-     * Prints a warning message to the user.
-     *
-     * @param warningMessage warning message to print.
-     */
-    public void displayWarning(String warningMessage) {
-        System.out.println("!! " + warningMessage);
+    public void displayInitMessage(String msg) {
+        displayOutput(msg);
     }
 
     /**

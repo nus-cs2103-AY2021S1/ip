@@ -1,5 +1,6 @@
 package alice;
 
+import alice.ui.controller.AliceGui;
 import javafx.application.Application;
 
 /**
@@ -7,6 +8,13 @@ import javafx.application.Application;
  */
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(Alice.class, args);
+        if (args.length > 0 && args[0].equals("-c")) {
+            // Start CLI interface
+            new Alice().initCli().run();
+            return;
+        }
+
+        // By default start GUI interface
+        Application.launch(AliceGui.class, args);
     }
 }

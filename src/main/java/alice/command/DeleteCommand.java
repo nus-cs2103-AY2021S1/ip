@@ -2,16 +2,19 @@ package alice.command;
 
 import java.util.List;
 
+import alice.command.result.CommandResult;
+import alice.command.result.DeleteCommandResult;
+import alice.command.result.InvalidCommandResult;
 import alice.storage.AliceStorageException;
+import alice.storage.SaveStatus;
 import alice.storage.StorageFile;
 import alice.task.Task;
 import alice.task.TaskList;
-import alice.ui.Ui;
 
 /**
  * Represents the command to delete a task from ALICE.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand implements Command {
     protected static final List<String> NAMES = List.of("delete");
     protected static final String DESCRIPTION = "Delete a task";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "] <task number>";
@@ -37,21 +40,21 @@ public class DeleteCommand extends Command {
         return NAMES.contains(name);
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @throws AliceStorageException if there were errors writing to storageFile.
-     */
     @Override
-    public void process(TaskList tasks, Ui ui, StorageFile storageFile) throws AliceStorageException {
+    public CommandResult process(TaskList tasks, StorageFile storageFile) {
+        String reply = "";
         try {
             Task deletedTask = tasks.deleteTask(taskIndex);
-            ui.displayOutput("Roger. I've removed this task from your list:\n    "
+            reply = "Roger. I've removed this task from your list:\n    "
                     + deletedTask
-                    + "\nNow you have " + tasks.getNumberOfTasks() + " task in your list");
+                    + "\nNow you have " + tasks.getNumberOfTasks() + " task in your list!";
             storageFile.save(tasks.encode());
+            return new DeleteCommandResult(reply, true, SaveStatus.SAVE_SUCCESS);
         } catch (InvalidCommandException ex) {
-            ui.displayWarning("Failed to delete task. " + ex.getMessage());
+            String errorMessage = "Failed to delete task. " + ex.getMessage();
+            return new InvalidCommandResult(errorMessage);
+        } catch (AliceStorageException ex) {
+            return new DeleteCommandResult(reply, true, SaveStatus.SAVE_FAILED);
         }
     }
 }

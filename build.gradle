@@ -29,8 +29,18 @@ dependencies {
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding('UTF-8')
+}
+
+applicationDefaultJvmArgs = ["-Dfile.encoding=utf-8"]
+
 test {
     useJUnitPlatform()
+
+    systemProperty "file.encoding", "utf-8"
 
     testLogging {
         events "passed", "skipped", "failed"
@@ -44,7 +54,7 @@ test {
 }
 
 application {
-    mainClassName = "alice.Alice"
+    mainClassName = "alice.Launcher"
 }
 
 shadowJar {
@@ -58,6 +68,18 @@ checkstyle {
 
 run {
     standardInput = System.in
+    systemProperty "file.encoding", "utf-8"
+}
+
+task runCli(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = 'alice.Launcher'
+    standardInput = System.in
+    systemProperty "file.encoding", "utf-8"
+
+    // arguments to pass to the application
+    args '-c'
 }
 
 task textUiTest(type: Exec) {
