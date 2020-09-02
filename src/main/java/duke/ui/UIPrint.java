@@ -1,10 +1,10 @@
 package duke.ui;
 
 /**
- * UIPrint stores strings such as logo, icons, symbols, and provides
+ * UiPrint stores strings such as logo, icons, symbols, and provides
  * methods to form Strings or print strings.
  */
-public class UIPrint {
+public class UiPrint {
 
     public static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"

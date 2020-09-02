@@ -1,7 +1,7 @@
 package duke.task;
 
 import duke.exception.IncorrectFormatException;
-import duke.ui.UIPrint;
+import duke.ui.UiPrint;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -30,7 +30,7 @@ public class EventTest {
         Exception exception = assertThrows(IncorrectFormatException.class,
                 () -> Event.createEvent("read book"));
 
-        String line = UIPrint.getLine(UIPrint.star, 50);
+        String line = UiPrint.getLine(UiPrint.star, 50);
         String errMessage =
                 line + "\nPlease follow the format of event <duke.task description> /at <event duke.time>\n" + line;
 

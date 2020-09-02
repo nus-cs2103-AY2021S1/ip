@@ -1,7 +1,7 @@
 package duke.data;
 
 import duke.exception.UnknownCommandException;
-import duke.ui.UIPrint;
+import duke.ui.UiPrint;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,7 +32,7 @@ public class DukeCommandSetTest {
         Exception exception = assertThrows(UnknownCommandException.class,
                 () -> commandSet.getCommand(invalidCommandName));
 
-        String line = UIPrint.getLine(UIPrint.star, 50);
+        String line = UiPrint.getLine(UiPrint.star, 50);
         String errMessage =
                 line + "\nOOPS!!! I'm sorry, but I don't know what that means :-(\n" + line;
 

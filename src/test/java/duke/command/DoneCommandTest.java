@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeStub;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
-import duke.ui.UIPrint;
+import duke.ui.UiPrint;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,7 +44,7 @@ public class DoneCommandTest {
         Exception exception = assertThrows(InvalidIndexException.class,
                 () -> command.execute(invalidInput, dukeStub));
 
-        String line = UIPrint.getLine(UIPrint.star, 50);
+        String line = UiPrint.getLine(UiPrint.star, 50);
         String errMessage =
                 line + "\nSorry " + invalidInput + " is not a valid index\n" + line;
 
