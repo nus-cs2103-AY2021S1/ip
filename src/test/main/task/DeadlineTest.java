@@ -72,11 +72,11 @@ public class DeadlineTest {
 
         @Test
         @DisplayName("should return false for a non deadline tasks")
-        public void toString_noInput_altString() {
-            assertFalse(DEADLINE_ONE.equals(new Task("test 1")));
-            assertFalse(DEADLINE_TWO.equals(new Todo("test 2")));
+        public void equals_noInput_altString() {
+            assertFalse(DEADLINE_ONE.equals(new Task("task 1")));
+            assertFalse(DEADLINE_TWO.equals(new Todo("task 2")));
             assertFalse(DEADLINE_TWO.equals(
-                    new Event("test 3", "4198-01-13T23:39", true)));
+                    new Event("task 2", "4198-01-13T23:39", true)));
         }
     }
 }
