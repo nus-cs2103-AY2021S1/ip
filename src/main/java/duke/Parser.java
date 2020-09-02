@@ -22,50 +22,50 @@ public class Parser {
      * @return The appropriate Command object to execute
      */
     public static Command parse(String command, TaskList list, Storage storage) {
-        Command c;
+        Command parsedCommand;
         if (command.equals("bye")) {
-            c = new ByeCommand(command, list, storage);
+            parsedCommand = new ByeCommand(command, list, storage);
         } else if (command.equals("list")) {
-            c = new ListCommand(command, list, storage);
+            parsedCommand = new ListCommand(command, list, storage);
         } else if (command.startsWith("delete")) {
             if (command.equals("delete")) {
-                c = new InvalidCommand(command, list, storage);
+                parsedCommand = new InvalidCommand(command, list, storage);
             } else {
-                c = new DeleteCommand(command, list, storage);
+                parsedCommand = new DeleteCommand(command, list, storage);
             }
         } else if (command.startsWith("done")) {
             if (command.equals("done")) {
-                c = new InvalidCommand(command, list, storage);
+                parsedCommand = new InvalidCommand(command, list, storage);
             } else {
-                c = new DoneCommand(command, list, storage);
+                parsedCommand = new DoneCommand(command, list, storage);
             }
         } else if (command.startsWith("todo")) {
             if (command.equals("todo")) {
-                c = new InvalidCommand(command, list, storage);
+                parsedCommand = new InvalidCommand(command, list, storage);
             } else {
-                c = new TodoCommand(command, list, storage);
+                parsedCommand = new TodoCommand(command, list, storage);
             }
         } else if (command.startsWith("deadline")) {
             if (command.equals("deadline")) {
-                c = new InvalidCommand(command, list, storage);
+                parsedCommand = new InvalidCommand(command, list, storage);
             } else {
-                c = new DeadlineCommand(command, list, storage);
+                parsedCommand = new DeadlineCommand(command, list, storage);
             }
         } else if (command.startsWith("event")) {
             if (command.equals("event")) {
-                c = new InvalidCommand(command, list, storage);
+                parsedCommand = new InvalidCommand(command, list, storage);
             } else {
-                c = new EventCommand(command, list, storage);
+                parsedCommand = new EventCommand(command, list, storage);
             }
         } else if (command.startsWith("find")) {
             if (command.equals("find")) {
-                c = new InvalidCommand(command, list, storage);
+                parsedCommand = new InvalidCommand(command, list, storage);
             } else {
-                c = new FindCommand(command, list, storage);
+                parsedCommand = new FindCommand(command, list, storage);
             }
         } else {
-            c = new InvalidCommand(command, list, storage);
+            parsedCommand = new InvalidCommand(command, list, storage);
         }
-        return c;
+        return parsedCommand;
     }
 }

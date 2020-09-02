@@ -33,12 +33,10 @@ public class Storage {
             ArrayList<Task> loadedList = (ArrayList<Task>) readStream.readObject();
             readStream.close();
             list = loadedList;
+        } catch (FileNotFoundException ex) {
+            throw new FileNotFoundException("☹ OOPS!!! I can't find your file leh!");
         } catch (Exception ex) {
-            if (ex instanceof FileNotFoundException) {
-                throw new FileNotFoundException("☹ OOPS!!! I can't find your file leh!");
-            } else {
-                throw new Exception("☹ OOPS!!! I can't load your file leh...");
-            }
+            throw new Exception("☹ OOPS!!! I can't load your file leh...");
         }
         return list;
     }

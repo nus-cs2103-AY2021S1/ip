@@ -38,7 +38,7 @@ public class Event extends Task {
      * @return Time as LocalDate object
      */
     public LocalDate getTime() {
-        return this.time;
+        return time;
     }
 
     /**

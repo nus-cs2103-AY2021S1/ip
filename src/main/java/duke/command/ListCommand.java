@@ -21,6 +21,6 @@ public class ListCommand extends Command {
     public String execute(String command, TaskList list, Storage storage) {
         String horizontalLine = "____________________________________\n";
         return horizontalLine + "Here are the things you need to do lor: \n"
-            + list.iterateToDo() + horizontalLine;
+            + list.iterateAndPrintToDo() + horizontalLine;
     }
 }

@@ -25,16 +25,15 @@ public class TaskList {
      * Iterates through the list of Tasks stored.
      * @return A String of List of Tasks stored
      */
-    public String iterateToDo() {
+    public String iterateAndPrintToDo() {
         StringBuilder output = new StringBuilder();
         int counter = 1;
         for (Task task : list) {
             if (task == null) {
                 break;
-            } else {
-                output.append(counter).append(". ").append(task.toString()).append("\n");
-                counter++;
             }
+            output.append(counter).append(". ").append(task.toString()).append("\n");
+            counter++;
         }
         return output.toString();
     }

@@ -21,7 +21,8 @@ public class ByeCommand extends Command {
     @Override
     public String execute(String command, TaskList list, Storage storage) {
         String horizontalLine = "____________________________________\n";
-        return horizontalLine + "Bye bye. See you soon bro!\n" + horizontalLine;
+        String byeMessage = "Bye bye. See you soon bro!\n";
+        return horizontalLine + byeMessage + horizontalLine;
     }
 
     @Override

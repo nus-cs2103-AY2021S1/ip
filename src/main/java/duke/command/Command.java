@@ -34,11 +34,7 @@ public class Command {
     }
 
     /**
-<<<<<<< HEAD
      * To be overridden by subclasses.
-=======
-     * To be overridden by subclasses
->>>>>>> branch-Level-10
      * @param command User input
      * @param list TaskList object containing all tasks
      * @param storage Storage object that reads and writes to duke.ser

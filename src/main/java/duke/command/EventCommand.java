@@ -26,7 +26,8 @@ public class EventCommand extends Command {
         instructions = arr[0].substring(0, arr[0].length() - 1);
         String date = arr[1].substring(1);
         int counter = list.getList().size();
-        list.addTask(counter, new Event(false, counter + 1, instructions, date));
+        Event event = new Event(false, counter + 1, instructions, date);
+        list.addTask(counter, event);
         String taskMessage = list.getList().get(counter).toString();
         storage.writeData(list.getList());
         return horizontalLine + "Okok. I help you add this task: \n"
