@@ -97,8 +97,11 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets response from Duke based on user input.
+     *
+     * @param input represents user input in String format.
+     *
+     * @return String represents Duke's output in String format.
      */
     public String getResponse(String input) {
         String output;

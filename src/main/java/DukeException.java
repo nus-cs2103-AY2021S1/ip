@@ -15,6 +15,11 @@ public class DukeException extends Exception {
         this.message = message;
     }
 
+    /**
+     * Prints out DukeException object in String format.
+     *
+     * @return a string representation of DukeException object.
+     */
     @Override
     public String toString() {
         return this.message;

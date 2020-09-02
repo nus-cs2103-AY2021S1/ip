@@ -262,6 +262,20 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes user input for classification and execution.
+     *
+     * @param str is the line of String obtained from user input.
+     *
+     * Reads and makes sense of user input commands which includes:
+     * (bye, list, todo, deadline, event, delete)
+     *
+     * It then executes the commands.
+     *
+     * @return a String representation of Duke output.
+     *
+     * @throws DukeException when command is wrong, unidentifiable or missing.
+     */
     public String parseUserInput(String str) throws DukeException {
         int commandSpace = str.indexOf(" ");
 
