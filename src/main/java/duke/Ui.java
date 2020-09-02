@@ -56,7 +56,7 @@ public class Ui {
 
     /**
      * Prints Task mark as done
-     * @param task
+     * @param task the task to be marked as done
      */
     public void showTaskMarkAsDone(Task task) {
         System.out.println("Nice! I've marked this task as done: ");
