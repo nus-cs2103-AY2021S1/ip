@@ -21,7 +21,7 @@ public class AddCommand extends Command {
     private static final String ADDED_NOTIFICATION = "Got it. I've added this task:";
     /**
      * Creates an AddCommand object.
-     * 
+     *
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command
      *                 At index 1, contains the message of the command.
@@ -38,16 +38,17 @@ public class AddCommand extends Command {
     /**
      * Adds the given task into the task list. Expected format for the date in message is YYYY-MM-DD HHMM or
      * YYYY-MM-DD HHMM. If type is of todo, date can be omitted.
-     * 
+     *
      * @param type Type of task that is being entered (todo, event, deadline).
      * @param message Details of the task that the user entered.
      * @param ui Object that deals with interactions with the user.
      * @param tasks Object contains the task list.
+     * @return A string message showing the information of the task that has been added.
      * @throws InvalidFormatDeadlineException Throws an exception when the format of 'message' is wrong.
      * @throws InvalidFormatEventException Throws an exception when the format of 'message' is wrong.
      * @throws InvalidFormatDateException Throws an exception when the format of 'message' is wrong.
      */
-    private String addTask(String type, String message, Ui ui, TaskList tasks) throws InvalidFormatDeadlineException, 
+    private String addTask(String type, String message, Ui ui, TaskList tasks) throws InvalidFormatDeadlineException,
             InvalidFormatEventException, InvalidFormatDateException {
         Task task;
         String[] dateTime;

@@ -31,7 +31,7 @@ public class Ui {
      * Greets the user.
      */
     public String greetings() {
-        return messageFormatter(HELLO_DUKE, QUESTION);   
+        return messageFormatter(HELLO_DUKE, QUESTION);
     }
 
     /**
@@ -56,7 +56,7 @@ public class Ui {
     public String messageFormatter(String... messageList) {
         StringBuffer s = new StringBuffer("");
         for (int i = 0; i < messageList.length; i++) {
-            s.append(messageList[i]).append("\n"); 
+            s.append(messageList[i]).append("\n");
         }
         return s.toString();
     }

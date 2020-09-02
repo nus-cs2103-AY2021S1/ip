@@ -13,7 +13,6 @@ import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.UnknownCommand;
-
 import duke.exception.EmptyTextException;
 import duke.exception.InvalidFormatByeException;
 import duke.exception.InvalidFormatDateException;
@@ -38,7 +37,7 @@ public class Parser {
 
     /**
      * Checking if the user's string input is a number.
-     * 
+     *
      * @param str the inputted user's index for tasks.
      * @return boolean value of true if user's string input is a number, false otherwise.
      */
@@ -53,7 +52,7 @@ public class Parser {
 
     /**
      * Checking if the type of command is of type todo.
-     * 
+     *
      * @param type The inputted user's type.
      * @return Boolean value of true if user's inputted type is todo, false otherwise.
      */
@@ -63,7 +62,7 @@ public class Parser {
 
     /**
      * Checking if the type of command is of type deadline.
-     * 
+     *
      * @param type The inputted user's type.
      * @return Boolean value of true if user's inputted type is deadline, false otherwise.
      */
@@ -72,7 +71,7 @@ public class Parser {
     }
     /**
      * Checking if the type of command is of type event.
-     * 
+     *
      * @param type The inputted user's type.
      * @return Boolean value of true if user's inputted type is event, false otherwise.
      */
@@ -82,7 +81,7 @@ public class Parser {
 
     /**
      * Checking if the type of command is of type done.
-     * 
+     *
      * @param type The inputted user's type.
      * @return boolean value of true if user's inputted type is done, false otherwise.
      */
@@ -92,7 +91,7 @@ public class Parser {
 
     /**
      * Checking if the type of command is of type bye.
-     * 
+     *
      * @param type The inputted user's type.
      * @return boolean value of true if user's inputted type is bye, false otherwise.
      */
@@ -102,7 +101,7 @@ public class Parser {
 
     /**
      * Checking if the type of command is of type list.
-     * 
+     *
      * @param type The inputted user's type.
      * @return boolean value of true if user's inputted type is list, false otherwise.
      */
@@ -112,7 +111,7 @@ public class Parser {
 
     /**
      * Checking if the type of command is of type task(deadline or todo or event).
-     * 
+     *
      * @param type The inputted user's type.
      * @return boolean value of true if user's inputted type is task, false otherwise.
      */
@@ -122,7 +121,7 @@ public class Parser {
 
     /**
      * Checking if the type of command is of type delete.
-     * 
+     *
      * @param type The inputted user's type.
      * @return boolean value of true if user's inputted type is delete, false otherwise.
      */
@@ -141,8 +140,8 @@ public class Parser {
     }
     /**
      * Formats the user's input timing into a LocalDateTime format.
-     * 
-     * @param s The inputted user's timing.
+     *
+     * @param dateAndTime The inputted user's timing.
      * @return A LocalDateTime object that contains the information of the timing.
      * @throws InvalidFormatDateException If the inputted user's timing is not of the correct format,
      * YYYY-MM-DD HHMM or YYYY-MM-DD HMMM, an exception will be thrown to notify the user.
@@ -178,8 +177,8 @@ public class Parser {
 
     /**
      * Making sense of the user's input and outputting the relevant commands to the input.
-     * 
-     * @param s The inputted user's command.
+     *
+     * @param message The inputted user's command.
      * @return A command object that executes the user's command.
      * @throws InvalidFormatByeException Throws an InvalidFormatByeException when the format of Bye is incorrect.
      * @throws InvalidFormatListException Throws an InvalidFormatListException when the format of List is incorrect.
@@ -188,9 +187,9 @@ public class Parser {
      * @throws InvalidFormatDeleteException Throws an InvalidFormatDeleteException when the format of Delete is
      * incorrect.
      */
-    public static Command parse(String s) throws InvalidFormatByeException, InvalidFormatListException,
+    public static Command parse(String message) throws InvalidFormatByeException, InvalidFormatListException,
             InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException, InvalidFormatFindException {
-        String[] inputArr = s.trim().replaceAll("  +", " ").split(" ", 2);
+        String[] inputArr = message.trim().replaceAll("  +", " ").split(" ", 2);
         inputArr[0] = inputArr[0].toLowerCase();
         if (isBye(inputArr[0])) {
             if (inputArr.length != 1) {

@@ -14,7 +14,7 @@ public class TaskTest {
     @Test
     public void testMarkAsDone() {
         String taskCompletedMessage = task.markAsDone();
-        String str = "Nice! I've marked this task as done:\n[\u2713] hello world";
+        String str = "Nice! I've marked this task as done:\n[\u2714] hello world";
         assertEquals(str, taskCompletedMessage);
     }
 

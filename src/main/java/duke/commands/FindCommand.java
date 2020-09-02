@@ -28,9 +28,11 @@ public class FindCommand extends Command {
 
     /**
      * Find and displays the list of task based on the user's input.
-     * 
+     *
      * @param tasks Object that contains the list of tasks.
      * @param keyword The task that the user is looking for.
+     * @return A String message stating all the tasks that contains the particular keyword that
+     * the user has keyed in.
      */
     public String findTasks(TaskList tasks, String keyword, Ui ui) {
         StringBuilder s = new StringBuilder();

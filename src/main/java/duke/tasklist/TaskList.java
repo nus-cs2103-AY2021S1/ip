@@ -18,7 +18,7 @@ public class TaskList {
 
     /**
      * Return the number of tasks in the list
-     * 
+     *
      * @return Integer value of the size of the list
      */
     public int size() {
@@ -27,7 +27,7 @@ public class TaskList {
 
     /**
      * Retrieves the task at that index 'n' of the list.
-     * 
+     *
      * @param n Integer value.
      * @return A task at that index 'n'.
      */
@@ -37,7 +37,7 @@ public class TaskList {
 
     /**
      * Adds the tasks into the list
-     * 
+     *
      * @param t Task to be added.
      */
     public void add(Task t) {
@@ -46,7 +46,7 @@ public class TaskList {
 
     /**
      * Removes the task as that index 'n' of the list.
-     * 
+     *
      * @param n Integer value.
      */
     public void remove(int n) {

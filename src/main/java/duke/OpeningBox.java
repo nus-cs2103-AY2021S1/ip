@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -7,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
+
 
 public class OpeningBox extends VBox {
     @FXML
@@ -26,13 +28,12 @@ public class OpeningBox extends VBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         openingMessage.setText(openingText);
         greetingMessage.setText(greetingText);
         displayPicture.setImage(img);
     }
-    
     public static OpeningBox getOpeningMessage(String openingText, String greetingText, Image img) {
         return new OpeningBox(openingText, greetingText, img);
     }
 }
+

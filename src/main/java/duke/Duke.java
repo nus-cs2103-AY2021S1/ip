@@ -14,7 +14,7 @@ import javafx.application.Platform;
  * of it.
  */
 
-public class Duke  {
+public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
@@ -29,16 +29,14 @@ public class Duke  {
         storage.retrieve(tasks);
         ui = new Ui();
     }
-    
     //@@ Oleg Mikhailov
     //Reused https://stackoverflow.com/questions/26311470/what-is-the-equivalent-of-javascript-settimeout-in-java
-    public static void setTimeout(Runnable runnable, int delay){
+    public static void setTimeout(Runnable runnable, int delay) {
         new Thread(() -> {
             try {
                 Thread.sleep(delay);
                 runnable.run();
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 System.err.println(e);
             }
         }).start();
