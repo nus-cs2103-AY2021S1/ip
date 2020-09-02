@@ -66,7 +66,6 @@ public class Command {
                 break;
             default:
                 if (foundMatchingTasks(tasks, taskInfo).length() <= 0) {
-                    dukeResponse = "\tSorry handsome but I'm not sure about this command :)";
                     throw new DukeInvalidCommandException("Sorry handsome but I'm not sure about this command :)");
                 } else {
                     dukeResponse = foundMatchingTasks(tasks, taskInfo);
@@ -74,17 +73,17 @@ public class Command {
             }
             storage.saveTaskList(tasks);
         } catch (DukeInvalidCommandException err) {
-            System.out.println("\t" + err.getMessage());
+            dukeResponse = "\t" + err.getMessage();
         } catch (DukeIndexOutOfBoundsException err) {
-            System.out.println("\t" + err.getMessage());
+            dukeResponse = "\t" + err.getMessage();
         } catch (DukeIncompleteCommandException err) {
-            System.out.println("\t" + err.getMessage());
+            dukeResponse = "\t" + err.getMessage();
         } catch (DukeIOException err) {
-            System.out.println("\t" + err.getMessage());
+            dukeResponse = "\t" + err.getMessage();
         } catch (DukeDateTimeParseException err) {
-            System.out.println("\t" + err.getMessage());
+            dukeResponse = "\t" + err.getMessage();
         } catch (DukeNumberFormatException err) {
-            System.out.println("\t" + err.getMessage());
+            dukeResponse = "\t" + err.getMessage();
         } finally {
             return dukeResponse;
         }
@@ -122,17 +121,17 @@ public class Command {
      */
     public String markTaskDone(TaskList tasks, String taskInfo) throws DukeIndexOutOfBoundsException {
         if (taskInfo.length() <= 5) {
-            throw new DukeIndexOutOfBoundsException("\tThe task you want to mark is invalid");
+            throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
         }
         taskInfo = taskInfo.replace("done", "").trim();
         int taskNo;
         try {
             taskNo = Integer.parseInt(taskInfo);
         } catch (NumberFormatException err) {
-            throw new DukeIndexOutOfBoundsException("\tThe task you want to mark is invalid");
+            throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
         }
         if (taskNo < 1 || taskNo > tasks.size()) {
-            throw new DukeIndexOutOfBoundsException("\tThe task you want to mark is invalid");
+            throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
         }
         int index = taskNo - 1;
         Task task = tasks.remove(index).doneTask();
@@ -149,7 +148,7 @@ public class Command {
      */
     public String handleToDo(TaskList tasks, String taskInfo) throws DukeInvalidCommandException {
         if (taskInfo.trim().equals("todo")) {
-            throw new DukeInvalidCommandException("\tThe command is incomplete handsome :D");
+            throw new DukeInvalidCommandException("The command is incomplete handsome :D");
         }
         taskInfo = taskInfo.replace("todo", "").trim();
         return tasks.addTask(new ToDos(taskInfo));
@@ -167,7 +166,7 @@ public class Command {
         taskInfo = taskInfo.replace("deadline", "");
         String[] stringArr = taskInfo.split("/by", 2);
         if (stringArr.length != 2) {
-            throw new DukeInvalidCommandException("\tThe command is incomplete handsome :D");
+            throw new DukeInvalidCommandException("The command is incomplete handsome :D");
         }
         taskInfo = stringArr[0].trim();
         String by = stringArr[1].trim();
@@ -186,7 +185,7 @@ public class Command {
         taskInfo = taskInfo.replace("event", "");
         String[] stringArr = taskInfo.split("/at", 2);
         if (stringArr.length != 2) {
-            throw new DukeInvalidCommandException("\tThe command is incomplete handsome :D");
+            throw new DukeInvalidCommandException("The command is incomplete handsome :D");
         }
         taskInfo = stringArr[0].trim();
         String at = stringArr[1].trim();
@@ -206,10 +205,10 @@ public class Command {
         String dukeResponse = "";
         for (int i = 0; i < matchList.size(); i++) {
             if (i == 0) {
-                dukeResponse = "\n\tHere are the matching tasks in your list:";
+                dukeResponse = "\n\t\tHere are the matching tasks in your list:";
             }
-            dukeResponse += String.format("\n\t%d. %s", i + 1, matchList.get(i));
+            dukeResponse += String.format("\n\t\t%d. %s", i + 1, matchList.get(i));
         }
-        return dukeResponse;
+        return dukeResponse.trim();
     }
 }

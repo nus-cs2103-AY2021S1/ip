@@ -35,20 +35,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
-    /*public void run() {
-        ui.showIntro();
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.readCommand();
-            Command c = Parser.parse(fullCommand);
-            c.execute(tasks, storage);
-            isExit = c.isExit();
-        }
-    }*/
-
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
+        String input = userInput.getText() + "\t";
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(input, userImage),
