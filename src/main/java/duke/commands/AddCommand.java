@@ -13,9 +13,8 @@ import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.ui.Ui;
 
-import java.net.PasswordAuthentication;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
     public AddCommand(String description){
         super(description);
