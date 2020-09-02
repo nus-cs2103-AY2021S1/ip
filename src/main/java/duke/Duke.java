@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import javafx.scene.Scene;
 import java.util.Scanner;
 
 /**
@@ -36,6 +35,10 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
+    }
+
+    String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
 

@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public class MainWindow {
+public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
     @FXML
