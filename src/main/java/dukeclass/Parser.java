@@ -10,12 +10,12 @@ public class Parser {
     /**
      * Parse the input String by the user and returns a task.
      *
-     * @param rawInput A single line of entry from the user.
+     * @param userInput A single line of entry from the user.
      * @return Task of a specific type e.g. todo, deadline.
      * @throws InvalidInputException  If the user did not enter the entry in the correct format.
      */
-    public static Task parseTask(String rawInput) throws InvalidInputException {
-        String[] splitString = rawInput.split(" ");
+    public static Task parseTask(String userInput) throws InvalidInputException {
+        String[] splitString = userInput.split(" ");
         int splitStringLength = splitString.length;
 
 
@@ -74,65 +74,52 @@ public class Parser {
      * @return list of a tasks
      * @throws InvalidInputException  If the user did not enter the entry in the correct format.
      */
-    public static TaskList parseCommands(TaskList list) throws InvalidInputException {
+    public static String parseCommands(TaskList list, String userInput) throws InvalidInputException {
 
-        Scanner sc = new Scanner(System.in);
-
-        String rawInput = sc.nextLine();
-
-        while (!rawInput.equals("bye")) {
-
-            try {
-                String[] splitString = rawInput.split(" ");
+        try {
+            String[] splitString = userInput.split(" ");
 
 
-                if (splitString[0].equals("list")) {
+            if (splitString[0].equals("list")) {
 
-                    System.out.println(Ui.printTaskList(list));
+                return Ui.printTaskList(list);
 
-                } else if (splitString[0].equals("done")) {
-                    //print OG list
-                    // can add error handling exception in case out of bounds
-                    // can add error handling for exception already done
-                    int index = Integer.parseInt(splitString[1]);
-                    list.get(index - 1).setStatus(true);
+            } else if (splitString[0].equals("done")) {
+                //print OG list
+                // can add error handling exception in case out of bounds
+                // can add error handling for exception already done
+                int index = Integer.parseInt(splitString[1]);
+                list.get(index - 1).setStatus(true);
 
-                    System.out.println(Ui.printTaskList(list));
+                return Ui.printTaskList(list);
 
-                } else if (splitString[0].equals("delete")) {
-                    // can add error handling exception in case out of bounds
-                    int index = Integer.parseInt(splitString[1]);
-                    list.remove(index - 1);
+            } else if (splitString[0].equals("delete")) {
+                // can add error handling exception in case out of bounds
+                int index = Integer.parseInt(splitString[1]);
+                list.remove(index - 1);
 
-                    System.out.println(Ui.printTaskList(list));
+                return Ui.printTaskList(list);
 
-                } else if (splitString[0].equals("find")) {
+            } else if (splitString[0].equals("find")) {
 
-                    TaskList tempList = new TaskList();
-                    for (int i = 0; i < list.size(); i++) {
-                        if (list.get(i).toString().contains(splitString[1])) {
-                            tempList.add(list.get(i));
-                        }
+                TaskList tempList = new TaskList();
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).toString().contains(splitString[1])) {
+                        tempList.add(list.get(i));
                     }
-                    System.out.println(tempList.toString());
-
-                } else {
-                    Task currTask = Parser.parseTask(rawInput);
-                    list.add(currTask);
-                    System.out.println(Ui.printTask(currTask));
-
                 }
+                return tempList.toString();
 
-            } catch (Exception e) {
-                System.out.println(Ui.unknownInputErrorMessage(e));
+            } else {
+                Task currTask = Parser.parseTask(userInput);
+                list.add(currTask);
+                return Ui.printTask(currTask);
+
             }
 
-            rawInput = sc.nextLine();
+        } catch (Exception e) {
+            return Ui.unknownInputErrorMessage(e);
         }
-
-        sc.close();
-
-        return list;
 
     }
 }
