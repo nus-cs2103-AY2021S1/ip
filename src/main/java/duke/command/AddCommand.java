@@ -180,10 +180,10 @@ public class AddCommand extends Command {
      * @throws DukeException If the addition of the task fails.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         addTask(tasks);
-        ui.showTaskAdded(tasks);
         storage.write(tasks);
+        return ui.showTaskAdded(tasks);
     }
 
 }

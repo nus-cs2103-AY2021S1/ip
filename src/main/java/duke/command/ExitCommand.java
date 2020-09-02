@@ -26,8 +26,9 @@ public class ExitCommand extends Command {
      * @param storage Represents the logic needed to write to an user-specified file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         //Empty as program will exit.
+        return null;
     }
 
     /**

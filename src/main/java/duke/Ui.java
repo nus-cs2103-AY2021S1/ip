@@ -37,46 +37,42 @@ public class Ui {
      * Prints all of the matching tasks that are stored in the ArrayList.
      *
      * @param foundTasks The ArrayList containing all of the matching tasks.
+     * @return String to be printed out.
      */
-    public void printMatches(ArrayList<Task> foundTasks) {
-        showLine();
-        System.out.println("\t Here are the matching tasks in your list: ");
+    public String printMatches(ArrayList<Task> foundTasks) {
+        String returnString = "\n Here are the matching tasks in your list: ";
         for (Task t: foundTasks) {
-            System.out.println("\t " + t.toString());
+            returnString += "\n\t " + t.toString();
         }
-        showLine();
+        return returnString;
     }
 
-    private void showLine() {
-        System.out.println("\t\u25A0_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\u25A0");
-    }
-
-    private void showTotalTasks(int total) {
-        System.out.println("\t Now you have " + total + " tasks in the task list.");
+    private String showTotalTasks(int total) {
+        return "\n Now you have " + total + " tasks in the task list.";
     }
 
     /**
      * Prints the default message after every successful addition of a task.
      *
      * @param taskList Task list that stores all of the tasks.
+     * @return String to be printed out.
      */
-    public void showTaskAdded(TaskList taskList) {
-        showLine();
-        System.out.println("\t Got it. I've added this task: " + "\n\t  "
-                + taskList.getTask(taskList.totalTask() - 1).toString());
-        showTotalTasks(taskList.totalTask());
-        showLine();
+    public String showTaskAdded(TaskList taskList) {
+        return "\n Got it. I've added this task: " + "\n  "
+                + taskList.getTask(taskList.totalTask() - 1).toString()
+                + showTotalTasks(taskList.totalTask());
     }
 
     /**
      * Prints the default done message after every successful change in task done status.
      *
      * @param task Task that is marked done.
+     * @return String to be printed out.
      */
-    public void showDone(Task task) {
-        showLine();
-        System.out.println("\t Nice! I've marked this task as done: " + "\n\t   " + task.toString());
-        showLine();
+    public String showDone(Task task) {
+        return "\n Nice! I've marked this task as done: "
+                + "\n\t   "
+                + task.toString();
     }
 
     /**
@@ -84,58 +80,61 @@ public class Ui {
      *
      * @param taskList Task list that stores all of the tasks.
      * @param task Task that is deleted.
+     * @return String to be printed out.
      */
-    public void showDelete(TaskList taskList, Task task) {
-        showLine();
-        System.out.println("\t Noted. I've removed this task: " + "\n\t   " + task.toString());
-        showTotalTasks(taskList.totalTask());
-        showLine();
+    public String showDelete(TaskList taskList, Task task) {
+        return "\n Noted. I've removed this task: "
+                + "\n\t "
+                + task.toString()
+                + showTotalTasks(taskList.totalTask());
     }
 
     /**
      * Prints out all the tasks stored in the specified task list.
      *
      * @param taskList Task list that contains the tasks to be printed.
+     * @return String to be printed out.
      */
-    public void printList(TaskList taskList) {
-        showLine();
-        System.out.println("\t Here are the tasks in your list:");
+    public String printList(TaskList taskList) {
+        String returnString = "\n Here are the tasks in your list: \n";
         for (int i = 0; i < taskList.totalTask(); i++) {
-            System.out.println("\t " + (i + 1) + "." + taskList.getTask(i).toString());
+            returnString += "\n\t " + (i + 1) + ". " + taskList.getTask(i).toString();
         }
-        showLine();
+        return returnString;
     }
 
     /**
      * Displays any error message that is the result of an exception.
      *
      * @param errorMessage Error message that is displayed to the user.
+     * @return String to be printed out.
      */
-    public void showError(String errorMessage) {
-        showLine();
-        System.out.println("\t " + errorMessage);
-        showLine();
+    public String showError(String errorMessage) {
+        return "\n\t "
+                + errorMessage;
     }
     /**
      * Displays any error message that is the result of a file loading exception.
+     *
+     * @return String to be printed out.
      */
-    public void showLoadingError() {
-        showLine();
-        System.out.println("\tSomething wrong with loading from your file.. Proceeding to create new empty TaskList");
-        showLine();
+    public String showLoadingError() {
+        return "\n Something wrong with loading from your file.. Proceeding to create new empty TaskList";
     }
 
     /**
      * Displays the welcome message of the Duke chat-bot.
+     *
+     * @return String to be printed out.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ \uD83D\uDD34 \uD83D\uDD34 \\\n"
                 + "| |_| | |_| |   <  \\__/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        System.out.println("Hello! I'm\n" + logo);
-        System.out.println("\nWhat can I do for you?");
+        return "Hello! I'm\n"
+                + logo + "\nWhat can I do for you?";
     }
 }

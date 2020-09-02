@@ -44,7 +44,7 @@ public abstract class Command {
      * @param storage Represents the logic needed to write to an user-specified file.
      * @throws DukeException If the execution of the command fails.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Determines if the command should result in the termination of the program.
