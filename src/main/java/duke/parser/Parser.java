@@ -1,12 +1,6 @@
 package duke.parser;
 
-import duke.commands.Command;
-import duke.commands.CreateTaskCommand;
-import duke.commands.DateFilterCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoCommand;
-import duke.commands.ExitCommand;
-import duke.commands.ListCommand;
+import duke.commands.*;
 import duke.exceptions.DukeException;
 import duke.tasks.TaskType;
 
@@ -56,6 +50,13 @@ public class Parser {
                 throw new DukeException("\tCannot recognise task number.");
             } else {
                 command = new DeleteCommand(Integer.parseInt(commandParaPair[1]));
+            }
+            break;
+        case "find":
+            if (commandParaPair.length < 2) {
+                throw new DukeException("\tNothing specified to find.");
+            } else {
+                command = new FindCommand(commandParaPair[1]);
             }
             break;
         case "todo":
