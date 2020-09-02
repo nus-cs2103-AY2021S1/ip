@@ -38,6 +38,7 @@ public class Main extends Application {
             stage.setMinHeight(600.0);
             stage.setMinWidth(400.0);
             stage.setScene(scene);
+            scene.getStylesheets().add("stylesheets/stylesheet.css");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
