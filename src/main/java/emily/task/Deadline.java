@@ -14,8 +14,9 @@ public class Deadline extends Task {
 
     /**
      * Subclass of Task with timestamp
-     * @param description
-     * @param timeStamp
+     *
+     * @param description String of the task name
+     * @param timeStamp   String of the time
      */
     public Deadline(String description, String timeStamp) {
         super(description);
@@ -23,22 +24,19 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(timeStamp);
     }
 
-
     /**
      * Getter method to retrieve timestamp
+     *
      * @return timestamp in the format yyy-mm--dd
      */
     public String getBy() {
         return this.timeStamp;
-
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: "
                 + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-
     }
-
 
 }

@@ -15,6 +15,7 @@ public class Event extends Task {
 
     /**
      * Subclass of Task with a timestamp
+     *
      * @param description
      * @param timeStamp
      */
@@ -27,6 +28,7 @@ public class Event extends Task {
 
     /**
      * Getter method to retrieve timestamp
+     *
      * @return String of the date in the form yyy-mm-dd
      */
     public String getAt() {

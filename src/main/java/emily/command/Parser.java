@@ -28,23 +28,18 @@ public class Parser {
             if (str.contains("todo")) {
                 String describe = str.substring(5);
                 item = new ToDos(describe);
-
                 return item;
             } else if (str.contains("deadline")) {
-
                 String description = str.substring(9);
                 String[] temp = description.split("/by ");
 
                 item = new Deadline(temp[0], temp[1]);
                 return item;
-
             } else {
-
                 String description = str.substring(6);
                 String[] temp = description.split("/at ");
                 item = new Event(temp[0], temp[1]);
                 return item;
-
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Invalid index given");

@@ -2,27 +2,24 @@ package main.java.emily.task;
 
 /**
  * Represents the basic structure of a sample task from the user input.
- * A task will have a string of description detail.
+ * Contains a string of description detail.
  */
 public class Task {
     protected final String description;
     protected char type;
-    protected boolean isFinished;
+    protected boolean hasFinished;
 
-    /**
-     * @param description
-     */
     public Task(String description) {
         this.description = description;
-        this.isFinished = false;
+        this.hasFinished = false;
     }
 
-    public void setFinished(boolean b) {
-        this.isFinished = b;
+    public void setHasFinished(boolean b) {
+        this.hasFinished = b;
     }
 
-    public boolean isFinished() {
-        return this.isFinished;
+    public boolean isHasFinished() {
+        return this.hasFinished;
     }
 
     public String getDescription() {
@@ -30,7 +27,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isFinished ? "\u2713" : "\u2718");
+        return (hasFinished ? "\u2713" : "\u2718");
     }
 
     @Override

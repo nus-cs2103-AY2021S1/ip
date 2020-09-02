@@ -1,8 +1,7 @@
 package main.java.emily.command;
 
 /**
- * Customised exception to handle general exception
- * thrown when the program runs
+ * Alerts the program if logic fails.
  */
 public class DukeException extends Exception {
 
