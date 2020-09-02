@@ -1,17 +1,19 @@
 package duke.core;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.DoneCommand;
 import duke.command.EmptyCommand;
 import duke.command.EndCommand;
 import duke.command.ListCommand;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class ParserTest {
 
-    Parser p = new Parser();
+    private Parser p = new Parser();
 
     @Test
     public void byeTest() {

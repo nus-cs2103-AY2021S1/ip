@@ -1,8 +1,8 @@
 package duke.core;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Encapsulates an ArrayList of Task objects and handles the tracking of tasks during the usage of the
@@ -22,6 +22,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Searches the TaskList for all tasks with descriptions containing the search term and prints them out in order.
+     * @param searchTerm the string to be searched for within all the task descriptions
+     */
     public void listSearch(String searchTerm) {
         int count = 1;
         for (int i = 0; i < tasks.size(); i++) {
@@ -53,7 +57,9 @@ public class TaskList {
      * @see Storage
      */
     public void loadTasks(ArrayList<Task> savedTasks) {
-        if (!savedTasks.isEmpty()) tasks.addAll(savedTasks);
+        if (!savedTasks.isEmpty()) {
+            tasks.addAll(savedTasks);
+        }
     }
 
     public void addTask(Task task) {

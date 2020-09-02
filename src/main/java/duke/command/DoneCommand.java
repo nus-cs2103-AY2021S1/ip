@@ -33,7 +33,7 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, Storage storage, Ui ui) {
         try {
             if (index > tasks.size()) {
-                throw new DukeException("C'mon parder! That task doesn't exist cos you don't go so many!");
+                throw new DukeException("C'mon pardner! That task doesn't exist cos you don't go so many!");
             }
             Task toBeDone = tasks.get(index);
             tasks.markAsDone(index);

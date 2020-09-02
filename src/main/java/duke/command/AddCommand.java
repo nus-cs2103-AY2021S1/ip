@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.core.Storage;
 import duke.core.TaskList;
 import duke.core.Ui;
@@ -7,14 +9,13 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import java.time.LocalDate;
 
 /**
  * Represents a command where a new task will be added to the TaskList during the usage of the Duke programme.
  */
 public class AddCommand extends Command {
 
-    Task taskToAdd;
+    private Task taskToAdd;
 
     /**
      * Private constructor that assigns the task to be added to this AddCommand.

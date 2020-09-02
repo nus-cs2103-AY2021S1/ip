@@ -7,7 +7,7 @@ import duke.core.Ui;
 /**
  * Represents a Command to terminate the Duke programme.
  */
-public class EndCommand extends Command{
+public class EndCommand extends Command {
 
     /**
      * Deactivates the given Ui object to signal the termination of the Duke programme.

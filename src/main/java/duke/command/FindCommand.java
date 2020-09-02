@@ -6,7 +6,7 @@ import duke.core.Ui;
 
 public class FindCommand extends Command {
 
-    String searchTerm;
+    private String searchTerm;
 
     public FindCommand(String searchTerm) {
         this.searchTerm = searchTerm.toLowerCase();

@@ -1,10 +1,5 @@
 package duke.core;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -14,14 +9,19 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 /**
  * An object used to load and save the user's task list during startup and termination of the Duke programme.
  */
 public class Storage {
 
-    File saveData;
-    String filePath;
-    String dirPath;
+    private File saveData;
+    private String filePath;
+    private String dirPath;
 
     /**
      * Public constructor to create a Storage object.
@@ -47,7 +47,9 @@ public class Storage {
 
         boolean dirExists = new File(dirPath).exists();
 
-        if (!dirExists) new File(dirPath).mkdirs();
+        if (!dirExists) {
+            new File(dirPath).mkdirs();
+        }
 
         // checking if the save file is already there
         try {
@@ -64,20 +66,22 @@ public class Storage {
                         String[] keywords = saveEntry.split(":");
                         Task savedTask = null;
                         switch (keywords[0]) {
-                            case "T":
-                                savedTask = new Todo(keywords[2]);
-                                break;
-                            case "D":
-                                savedTask = new Deadline(keywords[2], LocalDate.parse(keywords[3]));
-                                break;
-                            case "E":
-                                savedTask = new Event(keywords[2], LocalDate.parse(keywords[3]));
-                                break;
-                            default:
-                                break;
+                        case "T":
+                            savedTask = new Todo(keywords[2]);
+                            break;
+                        case "D":
+                            savedTask = new Deadline(keywords[2], LocalDate.parse(keywords[3]));
+                            break;
+                        case "E":
+                            savedTask = new Event(keywords[2], LocalDate.parse(keywords[3]));
+                            break;
+                        default:
+                            break;
                         }
                         if (savedTask != null) {
-                            if (keywords[1].equals("y")) savedTask.markAsDone();
+                            if (keywords[1].equals("y")) {
+                                savedTask.markAsDone();
+                            }
                             tasks.add(savedTask);
                         }
                     } catch (DateTimeParseException e) {
@@ -85,8 +89,7 @@ public class Storage {
                     }
                 }
             }
-        } catch (
-                IOException exception) {
+        } catch (IOException exception) {
             System.out.println(exception);
         }
         return tasks;

@@ -9,12 +9,12 @@ public abstract class Task {
     protected boolean isDone;
     protected LocalDate date;
 
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    public Task(String description, LocalDate date) {
+    protected Task(String description, LocalDate date) {
         this.description = description;
         this.date = date;
     }
