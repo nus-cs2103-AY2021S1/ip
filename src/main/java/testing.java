@@ -9,6 +9,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class testing extends Application {
 
@@ -17,9 +19,29 @@ public class testing extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public static void main(String[] args){
         System.out.println("Main is running!");
+    }
+
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+//        dialogContainer.getChildren().addAll(
+//                DialogBox.getUserDialog(userText, new ImageView(user)),
+//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+//        );
+        userInput.clear();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    static String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     private Label getDialogLabel(String text) {
@@ -88,5 +110,15 @@ public class testing extends Application {
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+
     }
 }
