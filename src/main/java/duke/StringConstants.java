@@ -19,4 +19,17 @@ public class StringConstants {
     public static final String TASK_FOUND_MESSAGE = "Here are the matching tasks in your list:";
     public static final String NO_TASK_FOUND_MESSAGE = "No matching tasks found.";
 
+    /**
+     * Joins array of strings together separated by newline character.
+     * @param strings array of strings to join
+     * @return joined string
+     */
+    public static String joinStrings(String[] strings) {
+        return String.join("\n", strings);
+    }
+
+    public static String getGreeting() {
+        return joinStrings(StringConstants.GREETING_MESSAGES);
+    }
+
 }

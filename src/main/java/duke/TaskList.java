@@ -5,6 +5,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -17,8 +18,8 @@ public class TaskList {
     /**
      * Loads tasks from saveFilePath.
      */
-    public TaskList() {
-        this.tasks = Storage.load();
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     private void addTask(Task task) {
@@ -29,9 +30,10 @@ public class TaskList {
      * Parse add task command and adds corresponding task.
      * @param command User command String
      * @param userCommandType UserCommandType
+     * @return String array of output messages
      * @throws Parser.InvalidCommandException if user command syntax is invalid
      */
-    public void addTask(String command, UserCommandType userCommandType)
+    public String[] addTask(String command, UserCommandType userCommandType)
             throws Parser.InvalidCommandException {
         Task task;
         String[] taskComponents = Parser.parseTask(command);
@@ -52,11 +54,11 @@ public class TaskList {
         }
 
         addTask(task);
-        Ui.printMessagesBetweenLines(new String[] {
+        return new String[] {
             StringConstants.ADD_MESSAGE,
             "  " + task.toString(),
             String.format(StringConstants.COUNT_MESSAGE, tasks.size())
-        });
+        };
     }
 
     /**
@@ -113,54 +115,46 @@ public class TaskList {
     }
 
     /**
-     * Prints all the user tasks.
+     * Gets tasks' String representations as String array
+     * @return String array of tasks' print Strings
      */
-    public void printTaskList() {
+    public String[] getTasksAsStrings() {
         String[] messages = new String[tasks.size()];
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             messages[i] = String.format("%d.%s", i + 1, task.toString());
         }
-        Ui.printMessagesBetweenLines(messages);
+        return messages;
     }
 
     /**
      * Finds tasks matching with keyword String and prints them.
      * @param command user command String
+     * @return String array of output messages
      */
-    public void find(String command) {
-        try {
-            String keyWordString = Parser.getFindKeyWordString(command);
-            ArrayList<String> messages = new ArrayList<>();
-            messages.add(StringConstants.TASK_FOUND_MESSAGE);
-            int i = 1;
-            for (Task task: tasks) {
-                if (task.getName().contains(keyWordString)) {
-                    messages.add(String.format("%d.%s", i, task.toString()));
-                    i++;
-                }
+    public String[] find(String command) throws Parser.InvalidCommandException {
+        String keyWordString = Parser.getFindKeyWordString(command);
+        ArrayList<String> messages = new ArrayList<>();
+        messages.add(StringConstants.TASK_FOUND_MESSAGE);
+        int i = 1;
+        for (Task task: tasks) {
+            if (task.getName().contains(keyWordString)) {
+                messages.add(String.format("%d.%s", i, task.toString()));
+                i++;
             }
-            if (messages.size() == 1) {
-                Ui.printMessageBetweenLines(StringConstants.NO_TASK_FOUND_MESSAGE);
-            } else {
-                Ui.printMessagesBetweenLines(messages.toArray(new String[0]));
-            }
-
-        } catch (Parser.InvalidCommandException exception) {
-            Ui.printExceptionBetweenLines(exception);
+        }
+        if (messages.size() == 1) {
+            return new String[]{StringConstants.NO_TASK_FOUND_MESSAGE};
+        } else {
+            return messages.toArray(new String[0]);
         }
     }
 
     /**
      * Saves user tasks to disk.
      */
-    public void saveTaskList() {
-        try {
+    public void saveTaskList() throws IOException {
             Storage.save(tasks);
-        } catch (IOException exception) {
-            System.out.println(exception.getMessage());
-        }
-
     }
 
     /**

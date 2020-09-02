@@ -38,39 +38,31 @@ public class Storage {
      * Loads tasks from saveFilePath.
      * @return ArrayList of loaded tasks
      */
-    public static ArrayList<Task> load() {
-        try {
-            createSaveDirectoryIfNotExists();
-            File file = new File(saveFilePath);
-            Scanner scanner = new Scanner(file);
-            ArrayList<Task> tasks = new ArrayList<>();
-            final String doneString = "1";
-            while (scanner.hasNext()) {
-                String[] components = scanner.nextLine().split("\\|");
-                switch (components[0]) {
-                    case "T":
-                        tasks.add(new Todo(components[2], components[1].equals(doneString)));
-                        break;
-                    case "D":
-                        tasks.add(new Deadline(components[2], components[1].equals(doneString),
-                                LocalDateTime.parse(components[3])));
-                        break;
-                    case "E":
-                        tasks.add(new Event(components[2], components[1].equals(doneString),
-                                components[3]));
-                        break;
-                    default:
-                        throw new InvalidSaveFileException();
-                }
+    public static ArrayList<Task> load() throws InvalidSaveFileException, DateTimeParseException, FileNotFoundException {
+        createSaveDirectoryIfNotExists();
+        File file = new File(saveFilePath);
+        Scanner scanner = new Scanner(file);
+        ArrayList<Task> tasks = new ArrayList<>();
+        final String doneString = "1";
+        while (scanner.hasNext()) {
+            String[] components = scanner.nextLine().split("\\|");
+            switch (components[0]) {
+                case "T":
+                    tasks.add(new Todo(components[2], components[1].equals(doneString)));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(components[2], components[1].equals(doneString),
+                            LocalDateTime.parse(components[3])));
+                    break;
+                case "E":
+                    tasks.add(new Event(components[2], components[1].equals(doneString),
+                            components[3]));
+                    break;
+                default:
+                    throw new InvalidSaveFileException();
             }
-            return tasks;
-        } catch (FileNotFoundException exception) {
-            System.out.println("No save file detected");
-            return new ArrayList<>();
-        } catch (InvalidSaveFileException | DateTimeParseException exception) {
-            Ui.printExceptionBetweenLines(exception);
-            return new ArrayList<>();
         }
+        return tasks;
     }
 
     private static void createSaveDirectoryIfNotExists() {
