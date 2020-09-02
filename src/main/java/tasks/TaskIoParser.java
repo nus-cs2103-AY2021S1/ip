@@ -1,8 +1,5 @@
 package tasks;
 
-import exceptions.DukeDateTimeException;
-import exceptions.DukeIOException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,14 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import exceptions.DukeDateTimeException;
+import exceptions.DukeIoException;
+
+
 /**
  * Class to perform reading and writing operations on the task list itself.
  */
-public class TaskIOParser {
+public class TaskIoParser {
     private static final String SAVEFILE = "save.txt";
     private final File saveFile;
 
-    TaskIOParser(String path) {
+    TaskIoParser(String path) {
         Path taskFile = Paths.get(path, "src", "save");
         this.saveFile = new File(taskFile.toString());
     }
@@ -28,9 +29,9 @@ public class TaskIOParser {
     /**
      * Load tasks from a text file into memory
      * @return A read text file of tasks to Tasklist
-     * @throws DukeIOException if there is an error in reading a file from disk
+     * @throws DukeIoException if there is an error in reading a file from disk
      */
-    public List<Task> loadTaskList() throws DukeIOException {
+    public List<Task> loadTaskList() throws DukeIoException {
         List<Task> tasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(this.saveFile.toPath().resolve(SAVEFILE));
@@ -41,15 +42,17 @@ public class TaskIOParser {
                     currentLine = sc.nextLine();
                     spl = currentLine.split(Task.SEPERATOR);
                     switch (spl[0]) {
-                        case "T":
-                            tasks.add(new ToDo(spl[2], Boolean.parseBoolean(spl[1])));
-                            break;
-                        case "D":
-                            tasks.add(new Deadline(spl[2], spl[3], Boolean.parseBoolean(spl[1])));
-                            break;
-                        case "E":
-                            tasks.add(new Event(spl[2], spl[3], Boolean.parseBoolean(spl[1])));
-                            break;
+                    case "T":
+                        tasks.add(new ToDo(spl[2], Boolean.parseBoolean(spl[1])));
+                        break;
+                    case "D":
+                        tasks.add(new Deadline(spl[2], spl[3], Boolean.parseBoolean(spl[1])));
+                        break;
+                    case "E":
+                        tasks.add(new Event(spl[2], spl[3], Boolean.parseBoolean(spl[1])));
+                        break;
+                    default:
+                        continue;
                     }
                 } catch (DukeDateTimeException ignored) {
                     // ignored as if the error occurs, we just do not parse that command
@@ -58,8 +61,8 @@ public class TaskIOParser {
             sc.close();
             return tasks;
         } catch (IOException fileException) {
-            throw new DukeIOException("Oops we couldnt read any file," +
-                    " hence we will start from a new save file");
+            throw new DukeIoException("Oops we couldnt read any file,"
+                    + " hence we will start from a new save file");
         }
 
     }
@@ -75,15 +78,15 @@ public class TaskIOParser {
     /**
      * Writes the task list into a textfile
      * @param taskList the given list of tasks.
-     * @throws DukeIOException If there is a IO error in creating or writing to the file.
+     * @throws DukeIoException If there is a IO error in creating or writing to the file.
      */
-    public void writeTask(List<Task> taskList) throws DukeIOException{
-        if ( ! saveFile.exists()) {
+    public void writeTask(List<Task> taskList) throws DukeIoException {
+        if (!saveFile.exists()) {
             try {
                 Files.createDirectory(Path.of(saveFile.getPath()));
                 Files.createFile(Path.of(saveFile.getPath()).resolve(SAVEFILE));
             } catch (IOException e) {
-                throw new DukeIOException("Could not save the file due to directory not created");
+                throw new DukeIoException("Could not save the file due to directory not created");
             }
         }
 
@@ -96,7 +99,7 @@ public class TaskIOParser {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeIOException(e.toString());
+            throw new DukeIoException(e.toString());
         }
 
     }

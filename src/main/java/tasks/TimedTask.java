@@ -1,7 +1,5 @@
 package tasks;
 
-import exceptions.DukeDateTimeException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -10,6 +8,7 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 
+import exceptions.DukeDateTimeException;
 /**
  * TimedTask is a abstract class that inherits from the base Task
  * class, to add a new field of datetime into this child class which implements such functionalities
@@ -31,7 +30,7 @@ abstract class TimedTask extends Task {
     }
     protected final LocalDateTime dateby;
     /**
-     * Constructor for a TimedTask for use by implementing subclasses, in particular to populate 
+     * Constructor for a TimedTask for use by implementing subclasses, in particular to populate
      * Tasks that have been read from a text save file.
      * @param desc Description of a task
      * @param date String that is extracted from user input to be parsed into the constructor for a TimedTask object
@@ -46,15 +45,15 @@ abstract class TimedTask extends Task {
             }
             this.dateby = LocalDateTime.parse(date, FMAT);
         } catch (DateTimeParseException e) {
-            throw new DukeDateTimeException("The String you entered does not meet the " +
-                    "required format of 'yyyy-MM-dd' ");
+            throw new DukeDateTimeException("The String you entered does not meet the "
+                    + "required format of 'yyyy-MM-dd' ");
         }
 
     }
 
     /**
-     * Constructor for a TimedTask for use by implementing subclasses, in particular to create 
-     * a new TimedTask class 
+     * Constructor for a TimedTask for use by implementing subclasses, in particular to create
+     * a new TimedTask class
      * @param desc Description of a task
      * @param date String that is extracted from user input to be parsed into the constructor for
      *            a TimedTask object
@@ -79,12 +78,11 @@ abstract class TimedTask extends Task {
     public String getDateby() {
         return dateby.toLocalDate().format(FMAT);
     }
-
-    @Override
     /**
      * Returns a String Representation of the Event object class to write to text file.
      * @return the saved task to write to a text file
      */
+    @Override
     public String saveTask() {
         return super.saveTask() + SEPERATOR + getDateby();
     }

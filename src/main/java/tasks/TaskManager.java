@@ -1,27 +1,42 @@
 package tasks;
 
-import exceptions.*;
-
 import java.util.List;
 import java.util.regex.Pattern;
 
+import exceptions.DukeCommandException;
+import exceptions.DukeDateTimeException;
+import exceptions.DukeIndexException;
+import exceptions.DukeIoException;
+import exceptions.DukeNoInputException;
+
+
 /**
- * TaskManager is a class to handle where 
+ * TaskManager is a class to handle where tasks are CRUD.
  */
 public class TaskManager {
     private final List<Task> taskList;
-    private final TaskIOParser ioparser;
+    private final TaskIoParser ioParser;
     private final TextParser textParser;
 
-    public TaskManager(String path) throws DukeIOException {
-        this.ioparser = new TaskIOParser(path);
-        this.taskList = ioparser.loadTaskList();
+    /**
+     * Constructs TaskManager for the Duke Application with loading from the save file
+     * @param path File Path from Main Class
+     * @throws DukeIoException If no loaded save is read
+     */
+    public TaskManager(String path) throws DukeIoException {
+        this.ioParser = new TaskIoParser(path);
+        this.taskList = ioParser.loadTaskList();
         this.textParser = new TextParser();
     }
 
+    /**
+     * Constructs TaskManger for the first time.
+     * @param path File Path from Main Class
+     * @param isNew Boolean to indicate that the TaskManager is first initialised.
+     */
     public TaskManager(String path, boolean isNew) {
-        this.ioparser = new TaskIOParser(path);
-        this.taskList = ioparser.loadNewTaskList();
+        this.ioParser = new TaskIoParser(path);
+        this.taskList = ioParser.loadNewTaskList();
         this.textParser = new TextParser();
     }
 
@@ -45,9 +60,17 @@ public class TaskManager {
         return sb.toString();
     }
 
+    /**
+     * Indicate that a task is done
+     * @param index index of the list as displayed from the application
+     * @return String representation of indicating the task is done.
+     * @throws DukeCommandException if a illegal index is given
+     * @throws DukeIndexException If a given index is out of bounds
+     */
     public String doTask(String index) throws DukeCommandException, DukeIndexException {
         try {
-            int i = Integer.parseInt(index) - 1;//0 indexing
+            int i = Integer.parseInt(index) - 1;
+            //0 indexing
             this.getTask(i).doTask();
             return "\tNice! I've marked this task as done: \n\t" + this.getTask(i) + "\n";
         } catch (IllegalArgumentException e) {
@@ -58,9 +81,17 @@ public class TaskManager {
 
     }
 
+    /**
+     * Deletes task
+     * @param index index of the list as displayed from the application
+     * @return String representation of the confirmation of deletion of task
+     * @throws DukeCommandException if a illegal index is given
+     * @throws DukeIndexException if a given index is out of bounds
+     */
     public String deleteTask(String index) throws DukeCommandException, DukeIndexException {
         try {
-            int i = Integer.parseInt(index) - 1;//0 indexing
+            int i = Integer.parseInt(index) - 1;
+            //0 indexing
             Task t = this.getTask(i);
             this.taskList.remove(i);
             return new StringBuilder().append("\tNoted! I've removed this task from your list: \n\t")
@@ -135,8 +166,8 @@ public class TaskManager {
         if (userInput.isBlank()) {
             throw new DukeNoInputException(userInput);
         }
-        String[] timeSEP = textParser.extractTime(userInput);
-        Deadline d = new Deadline(timeSEP[0], timeSEP[1]);
+        String[] timeSeperator = textParser.extractTime(userInput);
+        Deadline d = new Deadline(timeSeperator[0], timeSeperator[1]);
         return add(d);
     }
 
@@ -152,17 +183,17 @@ public class TaskManager {
         if (cmd.isBlank()) {
             throw new DukeNoInputException(cmd);
         }
-        String[] timeSEP = textParser.extractTime(cmd);
-        Event e = new Event(timeSEP[0], timeSEP[1]);
+        String[] timeSeperator = textParser.extractTime(cmd);
+        Event e = new Event(timeSeperator[0], timeSeperator[1]);
         return add(e);
     }
 
     /**
      * Message Passing for Tasks
-     * @throws DukeIOException if the task cannot be read to the file
+     * @throws DukeIoException if the task cannot be read to the file
      */
-    public void saveTasks() throws DukeIOException {
-        ioparser.writeTask(taskList);
+    public void saveTasks() throws DukeIoException {
+        ioParser.writeTask(taskList);
     }
 
     /**
@@ -172,20 +203,20 @@ public class TaskManager {
      */
     public String findTasks(String pattern) {
         StringBuilder sb = new StringBuilder("");
-        if (this.taskList.size()>0) {
-            Pattern stringPattern = Pattern.compile(pattern); 
-            for (int i=0; i<taskList.size(); i++){
-                if (stringPattern.matcher(taskList.get(i).getDescription()).find()){
+        if (this.taskList.size() > 0) {
+            Pattern stringPattern = Pattern.compile(pattern);
+            for (int i = 0; i < taskList.size(); i++) {
+                if (stringPattern.matcher(taskList.get(i).getDescription()).find()) {
                     sb.append("\t").append(i + 1)
                             .append(". ")
                             .append(this.taskList.get(i).toString())
                             .append("\n");
                 }
             }
-            if (sb.toString().isEmpty()){
+            if (sb.toString().isEmpty()) {
                 sb.append("\tCannot find a valid task in your list");
             }
-        }else{
+        } else {
             sb.append("\tThere are no tasks in your list!\n");
         }
         return sb.toString();

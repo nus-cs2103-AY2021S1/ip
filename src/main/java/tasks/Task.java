@@ -1,7 +1,7 @@
 package tasks;
 
 /**
- * The Task Class is a Abstract Base class for any extending class that acts as 
+ * The Task Class is a Abstract Base class for any extending class that acts as
  * a Task object for the Duke Chatbot
  */
 abstract class Task {

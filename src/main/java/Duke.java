@@ -1,4 +1,8 @@
-import exceptions.*;
+import exceptions.DukeBlankCommandException;
+import exceptions.DukeCommandException;
+import exceptions.DukeException;
+import exceptions.DukeIOException;
+import exceptions.DukeUnknownException;
 import tasks.Command;
 import tasks.TaskManager;
 import tasks.TextParser;
@@ -42,36 +46,34 @@ class Duke {
         String[] words = cleaned.split(" ");
         cleaned = cleaned.replace(" [sep]", "");
         // Take out command from the words
-        String text_input = cleaned.replaceFirst(words[0], "");
+        String textInput = cleaned.replaceFirst(words[0], "");
         //Sep token is added to prevent index errors
         Command c = textParser.parseCommand(words[0]);
-
         switch (c) {
-            case BYE:
-                return Boolean.TRUE.toString();
-            case HELP:
-                return this.help();
-            case DONE:
-                return taskManager.doTask(words[1]);
-            case DELETE:
-                return taskManager.deleteTask(words[1]);
-            case LIST:
-                return taskManager.parseoutput();
-            case SEARCH:
-                return taskManager.findTasks(words[1]);
-            case TODO:
-                return this.taskManager.addToDo(text_input);
-            case DEADLINE:
-                return this.taskManager.addDeadline(text_input);
-            case EVENT:
-                return this.taskManager.addEvent(text_input);
-            case BLANK:
-                throw new DukeBlankCommandException("''");
-            case ERROR:
-                throw new DukeCommandException(words[0]);
-            default:
-                throw new DukeUnknownException(text_input);
-
+        case BYE:
+            return Boolean.TRUE.toString();
+        case HELP:
+            return this.help();
+        case DONE:
+            return taskManager.doTask(words[1]);
+        case DELETE:
+            return taskManager.deleteTask(words[1]);
+        case LIST:
+            return taskManager.parseoutput();
+        case SEARCH:
+            return taskManager.findTasks(words[1]);
+        case TODO:
+            return this.taskManager.addToDo(textInput);
+        case DEADLINE:
+            return this.taskManager.addDeadline(textInput);
+        case EVENT:
+            return this.taskManager.addEvent(textInput);
+        case BLANK:
+            throw new DukeBlankCommandException("''");
+        case ERROR:
+            throw new DukeCommandException(words[0]);
+        default:
+            throw new DukeUnknownException(textInput);
         }
     }
 
@@ -92,17 +94,17 @@ class Duke {
      */
     public String help() {
         //eventually to add command help <command>
-        return "\t Need some help huh?\n" +
-                "\t Heres a list of my commands!\n" +
-                "\t- 'bye' to close the application\n" +
-                "\t- 'list' to list the current list of tasks and their statuses\n" +
-                "\t- 'done' to set a task as done\n" +
-                "\t- 'find' to find a task using regex or a query text string\n" +
-                "\t- 'todo' to list a untimed task\n" +
-                "\t- 'deadline' to list a timed deadline task, please structure with " +
-                "[deadline <task name> /by dd-MM-YYYY]\n" +
-                "\t- 'event' to list a timed event task, please structure with [event <task name> /at dd-MM-YYYY]\n" +
-                "\t- 'help' to list these commands again\n";
+        return "\t Need some help huh?\n"
+                + "\t Heres a list of my commands!\n"
+                + "\t- 'bye' to close the application\n"
+                + "\t- 'list' to list the current list of tasks and their statuses\n"
+                + "\t- 'done' to set a task as done\n"
+                + "\t- 'find' to find a task using regex or a query text string\n"
+                + "\t- 'todo' to list a untimed task\n"
+                + "\t- 'deadline' to list a timed deadline task, please structure with "
+                + "[deadline <task name> /by dd-MM-YYYY]\n"
+                + "\t- 'event' to list a timed event task, please structure with [event <task name> /at dd-MM-YYYY]\n"
+                + "\t- 'help' to list these commands again\n";
     }
 
     /**
@@ -112,15 +114,15 @@ class Duke {
      */
     String greeting(String name) {
 
-        String logo = "\tHello from\n" +
-                " ____        _        \n" +
-                "|  _ \\ _   _| | _____ \n" +
-                "| | | | | | | |/ / _ \\\n" +
-                "| |_| | |_| |   <  __/\n" +
-                "|____/ \\__,_|_|\\_\\___|\n" +
-                "\tHello! I'm Duke\n\tWhat can I do for you " +
-                name +
-                "\n";
+        String logo = "\tHello from\n"
+                + " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n"
+                + "\tHello! I'm Duke\n\tWhat can I do for you "
+                + name
+                + "\n";
         return logo;
     }
 
@@ -129,8 +131,8 @@ class Duke {
      * @param name Name of the user
      * @return Sends a goodbye message from dukebot to the user
      */
-    String goodbye(String name){
-        return "Bye " + name +"! Hope to see you again soon!";
+    String goodbye(String name) {
+        return "Bye " + name + "! Hope to see you again soon!";
     }
 
     /**

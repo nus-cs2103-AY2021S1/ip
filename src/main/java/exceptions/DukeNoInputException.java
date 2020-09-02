@@ -6,9 +6,9 @@ package exceptions;
 public class DukeNoInputException extends DukeException {
     /**
      * Constructor class for a DukeNoInputException
-     * @param bad_cmd the empty command or invalid string
+     * @param badCommand the empty command or invalid string
      */
-    public DukeNoInputException(String bad_cmd){
-        super(bad_cmd,2);
+    public DukeNoInputException(String badCommand) {
+        super(badCommand, 2);
     }
 }

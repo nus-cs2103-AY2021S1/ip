@@ -9,8 +9,8 @@ public class DukeDateTimeException extends DukeException {
      * Constructor class for DukeDateTimeException
      * @param cmd the invalid command
      */
-    public DukeDateTimeException(String cmd){
-        super(cmd,3);
+    public DukeDateTimeException(String cmd) {
+        super(cmd, 3);
     }
 
     /**
