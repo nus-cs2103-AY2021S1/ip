@@ -56,15 +56,18 @@ public class task {
      *
      * @return String type of task.
      */
-    public String getTaskType() { return this.type; }
+    public String getTaskType() {
+        return this.type;
+    }
 
     /**
      * Returns the date and time of the task to be completed by.
      *
      * @return LocalDateTime date and time.
      */
-    public LocalDateTime getTaskDate() { return this.date; }
-
+    public LocalDateTime getTaskDate() {
+        return this.date;
+    }
     /**
      * Sets the date and time of the task.
      *

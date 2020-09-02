@@ -5,41 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f48f93c2-feee-4960-9630-ec0bc55c7b48" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/AddEventCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/AddEventCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/AddTodoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/AddTodoCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/DeleteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/DeleteCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/ExitCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/FilterDateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/FilterDateCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/FindCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/FindCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/ListCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/ListCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/ShowFunctionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/ShowFunctionCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/WrongCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/WrongCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DateTime/DateTimeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DateTime/DateTimeManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Duke.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Errors/ErrorExceptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Errors/ErrorExceptions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/File/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/File/FileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/InputManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/InputManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseAddTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseAddTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseDelete.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseDelete.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseExit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseExit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseFind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseFind.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseShow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseShow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Tasks/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tasks/Deadline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Tasks/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tasks/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Tasks/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tasks/TaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Tasks/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tasks/Todo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Tasks/task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tasks/task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UI/InitiateParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/InitiateParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UI/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/UserInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/DeadlineTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tasks/DeadlineTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/EventTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tasks/EventTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/TaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tasks/TaskManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/TodoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tasks/TodoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/taskTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tasks/taskTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/AddDeadlineCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/AddDeadlineCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/AddEventCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/AddEventCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/AddTodoCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/AddTodoCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/Command.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/Command.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/CompletedCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/CompletedCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/DeleteCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/DeleteCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/ExitCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/ExitCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/FilterDateCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/FilterDateCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/FindCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/FindCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/ListCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/ListCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/ShowFunctionCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/ShowFunctionCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/WrongCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/WrongCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/DateTime/DateTimeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/DateTime/DateTimeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Duke.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Duke.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Errors/ErrorExceptions.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Errors/ErrorExceptions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/File/FileManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/File/FileManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/InputManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/InputManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/Parse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/Parse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseAddTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseAddTask.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseCompleted.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseCompleted.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseDelete.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseDelete.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseExit.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseExit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseFind.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseFind.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseShow.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseShow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Tasks/Deadline.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Tasks/Deadline.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Tasks/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Tasks/Event.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Tasks/TaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Tasks/TaskManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Tasks/Todo.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Tasks/Todo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Tasks/task.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Tasks/task.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/UI/InitiateParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/UI/InitiateParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/UI/UserInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/UI/UserInterface.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,17 +66,6 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="ip" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="ip" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="application" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="ip" type="f1a62948:ProjectNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -209,6 +196,9 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="575" y="239" key="#Custom_Plugin_Repositories" timestamp="1598796918132">
       <screen x="0" y="0" width="1280" height="680" />
@@ -234,9 +224,9 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1598798528071" />
-    <state x="197" y="0" key="SettingsEditor" timestamp="1598798495389">
+    <state x="197" y="0" key="SettingsEditor" timestamp="1599035367873">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="197" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1598798495389" />
+    <state x="197" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1599035367873" />
   </component>
 </project>
