@@ -30,9 +30,9 @@ public class DeleteCommand extends Command {
 
         checkException(taskIndex, str, duke);
 
-        Task task = duke.taskList.deleteTask(taskIndex);
+        Task task = duke.getTaskList().deleteTask(taskIndex);
 
-        duke.ui.reportDeleteTask(task);
+        duke.getUi().reportDeleteTask(task);
     }
 
     private boolean tryParseInt(String str) {
@@ -45,8 +45,8 @@ public class DeleteCommand extends Command {
     }
 
     private void checkException(int taskIndex, String str, Duke duke) {
-        if (duke.taskList.getSize() <= taskIndex || taskIndex < 0) {
-            String line = UiPrint.getLine(UiPrint.star, 50);
+        if (duke.getTaskList().getSize() <= taskIndex || taskIndex < 0) {
+            String line = UiPrint.getLine(UiPrint.STAR, 50);
             String errMessage =
                     line + "\nSorry " + str + " is not a valid index\n" + line;
             throw new InvalidIndexException(errMessage);

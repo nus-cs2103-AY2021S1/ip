@@ -5,12 +5,27 @@ package duke.data;
  */
 public class DukeState {
 
-    public boolean exitLoop;
+    private boolean exitLoop;
 
     /**
      * Constructs a DukeState.
      */
     public DukeState() {
         exitLoop = false;
+    }
+
+    /**
+     * Gets the exitLoop value.
+     * @return the exitLoop value
+     */
+    public boolean getExitLoop() {
+        return exitLoop;
+    }
+
+    /**
+     * Makes exitLoop true;
+     */
+    public void endLoop() {
+        exitLoop = true;
     }
 }

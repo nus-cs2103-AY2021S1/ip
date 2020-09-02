@@ -26,7 +26,7 @@ public class DoneCommandTest {
     @Test
     public void execute_normalInput_taskMarkedAsDone() {
         String normalInput = "1";
-        Task taskToBeMarked = dukeStub.taskList.getTask(0);
+        Task taskToBeMarked = dukeStub.getTaskList().getTask(0);
 
         try {
             command.execute(normalInput, dukeStub);
@@ -44,7 +44,7 @@ public class DoneCommandTest {
         Exception exception = assertThrows(InvalidIndexException.class,
                 () -> command.execute(invalidInput, dukeStub));
 
-        String line = UiPrint.getLine(UiPrint.star, 50);
+        String line = UiPrint.getLine(UiPrint.STAR, 50);
         String errMessage =
                 line + "\nSorry " + invalidInput + " is not a valid index\n" + line;
 

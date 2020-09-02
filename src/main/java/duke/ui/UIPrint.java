@@ -1,23 +1,23 @@
 package duke.ui;
 
 /**
- * UiPrint stores strings such as logo, icons, symbols, and provides
+ * UiPrint stores strings such as LOGO, icons, symbols, and provides
  * methods to form Strings or print strings.
  */
 public class UiPrint {
 
-    public static String logo = " ____        _        \n"
+    public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    public static char star = '*';
-    public static String tick = "[Done]";
-    public static String cross = "[Not Done]";
-    public static String todoIcon = "[T]";
-    public static String deadlineIcon = "[D]";
-    public static String eventIcon = "[E]";
+    public static final char STAR = '*';
+    public static final String TICK = "[Done]";
+    public static final String CROSS = "[Not Done]";
+    public static final String TODO_ICON = "[T]";
+    public static final String DEADLINE_ICON = "[D]";
+    public static final String EVENT_ICON = "[E]";
 
     /**
      * Draws a line formed by a char with customized length.

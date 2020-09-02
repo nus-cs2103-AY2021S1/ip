@@ -1,8 +1,8 @@
 package duke.storage;
 
-import duke.Duke;
-
 import java.io.IOException;
+
+import duke.Duke;
 
 /**
  * DukeStorage helps Duke saving and loading data.
@@ -18,14 +18,14 @@ public class DukeStorage {
      */
     public DukeStorage(Duke duke) {
         this.duke = duke;
-        taskStorage = duke.taskStorage;
+        taskStorage = duke.getTaskStorage();
     }
 
     /**
      * Loads saved tasks to the current task list.
      */
     public void loadSavedTasks() {
-        duke.taskList.setTasks(taskStorage.getSavedTasks());
+        duke.getTaskList().setTasks(taskStorage.getSavedTasks());
     }
 
     /**
@@ -33,6 +33,6 @@ public class DukeStorage {
      * @throws IOException
      */
     public void saveCurrentTasks() throws IOException {
-        taskStorage.saveTasks(duke.taskList.getTasks());
+        taskStorage.saveTasks(duke.getTaskList().getTasks());
     }
 }

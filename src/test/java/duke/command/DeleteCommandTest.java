@@ -47,7 +47,7 @@ public class DeleteCommandTest {
         Exception exception = assertThrows(InvalidIndexException.class,
                 () -> command.execute(invalidInput, dukeStub));
 
-        String line = UiPrint.getLine(UiPrint.star, 50);
+        String line = UiPrint.getLine(UiPrint.STAR, 50);
         String errMessage =
                 line + "\nSorry " + invalidInput + " is not a valid index\n" + line;
 

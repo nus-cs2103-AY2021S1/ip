@@ -1,11 +1,5 @@
 package duke.storage;
 
-import duke.exception.UnknownTaskTypeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,6 +7,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.UnknownTaskTypeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * TaskStorage saves and loads task data.
@@ -67,7 +67,7 @@ public class TaskStorage {
     }
 
     private String taskToString(Task task) {
-        return task.getTaskType() + " " + task.taskInfo;
+        return task.getTaskType() + " " + task.getTaskInfo();
     }
 
     /**

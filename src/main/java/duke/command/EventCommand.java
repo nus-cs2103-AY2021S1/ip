@@ -23,8 +23,8 @@ public class EventCommand extends Command {
     @Override
     public void execute(String str, Duke duke) {
         Event newEvent = Event.createEvent(str);
-        duke.taskList.addTask(newEvent);
-        duke.ui.reportNewTask(newEvent);
+        duke.getTaskList().addTask(newEvent);
+        duke.getUi().reportNewTask(newEvent);
     }
 
 }

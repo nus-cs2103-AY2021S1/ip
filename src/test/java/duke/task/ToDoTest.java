@@ -29,7 +29,7 @@ public class ToDoTest {
     public void createToDo_invalidInput_exceptionThrown() {
         Exception exception = assertThrows(NoDescriptionException.class, () -> ToDo.createToDo(""));
 
-        String line = UiPrint.getLine(UiPrint.star, 50);
+        String line = UiPrint.getLine(UiPrint.STAR, 50);
         String errMessage =
                 line + "\nOOPS!!! The description of a todo cannot be empty.\n" + line;
 

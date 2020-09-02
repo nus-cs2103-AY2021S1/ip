@@ -1,8 +1,8 @@
 package duke.task;
 
 import duke.exception.IncorrectFormatException;
-import duke.ui.UiPrint;
 import duke.time.Time;
+import duke.ui.UiPrint;
 
 /**
  * A Deadline is a task with a deadline. Deadline objects store both task
@@ -36,14 +36,14 @@ public class Deadline extends Task {
         String description = splitStr[0];
         String deadline = splitStr[1];
 
-        Deadline newDeadline = new Deadline(UiPrint.deadlineIcon, description, deadline, deadlineInfo);
+        Deadline newDeadline = new Deadline(UiPrint.DEADLINE_ICON, description, deadline, deadlineInfo);
 
         return newDeadline;
     }
 
     private static void checkException(String[] splitStr) {
         if (splitStr.length != 2) {
-            String line = UiPrint.getLine(UiPrint.star, 50);
+            String line = UiPrint.getLine(UiPrint.STAR, 50);
             String errMessage =
                     line + "\nPlease follow the format of deadline <duke.task description> /by <deadline>\n" + line;
             throw new IncorrectFormatException(errMessage);

@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class UserInput {
 
-    public static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     /**
      * Gets one line entered by the key broad.

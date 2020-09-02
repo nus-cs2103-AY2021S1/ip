@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.Duke;
 import duke.data.DukeCommandSet;
-
 import duke.exception.IncorrectFormatException;
 import duke.exception.InvalidIndexException;
 import duke.exception.NoDescriptionException;
@@ -26,7 +25,7 @@ public class CommandParser {
         String commandName = splitParts[0];
         String rest = splitParts[1];
 
-        Command command = tryGetCommand(commandName, duke.commandSet);
+        Command command = tryGetCommand(commandName, duke.getCommandSet());
 
         if (command != null) {
             tryExecuteCommand(command, rest, duke);

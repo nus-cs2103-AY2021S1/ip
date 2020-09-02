@@ -30,7 +30,7 @@ public class EventTest {
         Exception exception = assertThrows(IncorrectFormatException.class,
                 () -> Event.createEvent("read book"));
 
-        String line = UiPrint.getLine(UiPrint.star, 50);
+        String line = UiPrint.getLine(UiPrint.STAR, 50);
         String errMessage =
                 line + "\nPlease follow the format of event <duke.task description> /at <event duke.time>\n" + line;
 

@@ -7,7 +7,7 @@ import duke.Duke;
  */
 public abstract class Command {
 
-    public String[] names;
+    protected String[] names;
 
     /**
      * Do something.
@@ -15,4 +15,12 @@ public abstract class Command {
      * @param duke the current Duke
      */
     public abstract void execute(String str, Duke duke);
+
+    /**
+     * Gets the names of the command.
+     * @return the array of names
+     */
+    public String[] getNames() {
+        return names;
+    }
 }

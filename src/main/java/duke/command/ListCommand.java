@@ -21,6 +21,6 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(String str, Duke duke) {
-        duke.ui.reportCurrentTasks();
+        duke.getUi().reportCurrentTasks();
     }
 }

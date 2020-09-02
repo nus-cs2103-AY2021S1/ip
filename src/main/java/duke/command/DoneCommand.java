@@ -30,10 +30,10 @@ public class DoneCommand extends Command {
 
         checkException(taskIndex, str, duke);
 
-        Task task = duke.taskList.getTask(taskIndex);
+        Task task = duke.getTaskList().getTask(taskIndex);
         task.markAsDone();
 
-        duke.ui.reportDoneTask(task);
+        duke.getUi().reportDoneTask(task);
     }
 
     private boolean tryParseInt(String str) {
@@ -46,8 +46,8 @@ public class DoneCommand extends Command {
     }
 
     private void checkException(int taskIndex, String str, Duke duke) {
-        if (duke.taskList.getSize() <= taskIndex || taskIndex < 0) {
-            String line = UiPrint.getLine(UiPrint.star, 50);
+        if (duke.getTaskList().getSize() <= taskIndex || taskIndex < 0) {
+            String line = UiPrint.getLine(UiPrint.STAR, 50);
             String errMessage =
                     line + "\nSorry " + str + " is not a valid index\n" + line;
             throw new InvalidIndexException(errMessage);
