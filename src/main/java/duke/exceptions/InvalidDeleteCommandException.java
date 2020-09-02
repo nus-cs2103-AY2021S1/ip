@@ -3,6 +3,6 @@ package duke.exceptions;
 public class InvalidDeleteCommandException extends DukeException {
 
     public InvalidDeleteCommandException() {
-        super("☹ OOPS!!! Please mark a valid item for deletion");
+        super("\u2639 OOPS!!! Please mark a valid item for deletion");
     }
 }
