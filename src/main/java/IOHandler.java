@@ -1,73 +1,75 @@
-import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Handles the input by the user and generates the respective output.
  */
 public class IOHandler {
 
-    Scanner sc = new Scanner(System.in);
-    String text = sc.nextLine();
-
-    TaskManager taskManager = new TaskManager();
+    private static TaskManager taskManager = new TaskManager();
 
     /**
      * Handles the input by the user and prints the respective output.
      */
-    public void handleIO() {
+    public static String handleIO(String input) {
 
-        try {
+//        try {
 
-            String fileName = "data/duke.txt";
-            File file = new File(fileName);
+//            String fileName = "data/duke.txt";
+//            File file = new File(fileName);
+//
+//            if (!file.exists()) {
+//                file.createNewFile();
+//            }
+//
+            String error = DukeExceptionHandler.handleException(input);
+//            List<String> files = FileHandler.readSavedFile(fileName);
 
-            if (!file.exists()) {
-                file.createNewFile();
-            }
+//            for (String value : files) {
+//                Task task = TextAndTaskConverter.textConverter(value);
+//                taskManager.getTasksList().add(task);
+//            }
 
-            String error = DukeExceptionHandler.handleException(text);
-            List<String> files = FileHandler.readSavedFile(fileName);
-
-            for (String value : files) {
-                Task task = TextAndTaskConverter.textConverter(value);
-                taskManager.getTasksList().add(task);
-            }
-
-            while (!text.equals("bye")) {
+            while (!input.equals("bye")) {
 
                 if (error != null) {
-                    System.out.print(text);
+                    System.out.print(input);
                     System.out.println(error);
 
                 } else {
-                    if (text.equals("list")) {
-                        System.out.print(taskManager);
+                    if (input.equals("list")) {
+                        return taskManager.toString();
 
-                    } else if (text.contains("done")) {
-                        String[] textArray = text.split(" ", 2);
+                    } else if (input.contains("done")) {
+                        String[] textArray = input.split(" ", 2);
                         int taskNum = Integer.parseInt(textArray[1]);
                         taskManager.setTaskDone(taskNum);
 
-                        System.out.println("Nice! I've marked this task as done:\n"
-                                + taskManager.getTask(taskNum - 1));
+                        return "Nice! I've marked this task as done:\n"
+                                + taskManager.getTask(taskNum - 1);
 
-                    } else if (text.contains("delete")) {
-                        String[] textArray = text.split(" ", 2);
+//                        System.out.println("Nice! I've marked this task as done:\n"
+//                                + taskManager.getTask(taskNum - 1));
+
+                    } else if (input.contains("delete")) {
+                        String[] textArray = input.split(" ", 2);
                         int taskNum = Integer.parseInt(textArray[1]);
                         Task deletedTask = taskManager.getTask(taskNum - 1);
                         taskManager.removeTask(taskNum);
 
-                        System.out.println("Noted. I've removed this task:\n"
+                        return "Noted. I've removed this task:\n"
                                 + deletedTask + "\nNow you have " + taskManager.getNumTasks()
-                                + " tasks in the list");
+                                + " tasks in the list";
 
-                    } else if (text.contains("find")) {
-                        String[] textArray = text.split(" ", 2);
+//                        System.out.println("Noted. I've removed this task:\n"
+//                                + deletedTask + "\nNow you have " + taskManager.getNumTasks()
+//                                + " tasks in the list");
+
+                    } else if (input.contains("find")) {
+                        String[] textArray = input.split(" ", 2);
                         ArrayList<String> tasksFound = new ArrayList<>();
+
                         for (int i = 0; i < taskManager.getTasksList().size(); i++) {
                             String found = taskManager.getTasksList().get(i).toString();
                             if (found.contains(textArray[1])) {
@@ -76,26 +78,36 @@ public class IOHandler {
                         }
 
                         if (tasksFound.size() > 0) {
+
                             System.out.println("Here are the matching tasks in your list:");
+
                             for (int j = 0; j < tasksFound.size(); j++) {
-                                System.out.println((j + 1) + ". " + tasksFound.get(j));
+
+                                return (j + 1) + ". " + tasksFound.get(j);
+                                //System.out.println((j + 1) + ". " + tasksFound.get(j));
                             }
                         } else {
-                            System.out.println("Nothing matches :(");
+                            return "Nothing matches :(";
+                            //System.out.println("Nothing matches :(");
                         }
 
-                    } else if (text.length() > 0) {
+                    } else if (input.length() > 0) {
 
-                        if (text.contains("todo")) {
-                            String[] textArray = text.split(" ", 2);
+                        if (input.contains("todo")) {
+                            String[] textArray = input.split(" ", 2);
                             Todo todo = new Todo(textArray[1]);
                             taskManager.addTask(todo);
-                            System.out.println("Got it. I've added this task:\n"
-                                    + todo + "\nNow you have " + taskManager.getNumTasks()
-                                    + " tasks in the list");
 
-                        } else if (text.contains("deadline")) {
-                            String[] textArray = text.split(" ", 2);
+                            return "Got it. I've added this task:\n"
+                                    + todo + "\nNow you have " + taskManager.getNumTasks()
+                                    + " tasks in the list";
+
+//                            System.out.println("Got it. I've added this task:\n"
+//                                    + todo + "\nNow you have " + taskManager.getNumTasks()
+//                                    + " tasks in the list");
+
+                        } else if (input.contains("deadline")) {
+                            String[] textArray = input.split(" ", 2);
                             String trimText = textArray[1].trim();
                             String task = trimText.replace("/by", "/");
 
@@ -104,12 +116,17 @@ public class IOHandler {
 
                             Deadline deadline = new Deadline(taskName, date);
                             taskManager.addTask(deadline);
-                            System.out.println("Got it. I've added this task:\n"
-                                    + deadline + "\nNow you have " + taskManager.getNumTasks()
-                                    + " tasks in the list");
 
-                        } else if (text.contains("event")) {
-                            String[] textArray = text.split(" ", 2);
+                            return "Got it. I've added this task:\n"
+                                    + deadline + "\nNow you have " + taskManager.getNumTasks()
+                                    + " tasks in the list";
+
+//                            System.out.println("Got it. I've added this task:\n"
+//                                    + deadline + "\nNow you have " + taskManager.getNumTasks()
+//                                    + " tasks in the list");
+
+                        } else if (input.contains("event")) {
+                            String[] textArray = input.split(" ", 2);
 
                             String trimText = textArray[1].trim();
                             String task = trimText.replace("/at", "/");
@@ -120,24 +137,29 @@ public class IOHandler {
 
                             Event event = new Event(taskName, date, time);
                             taskManager.addTask(event);
-                            System.out.println("Got it. I've added this task:\n"
+
+                            return "Got it. I've added this task:\n"
                                     + event + "\nNow you have " + taskManager.getNumTasks()
-                                    + " tasks in the list");
+                                    + " tasks in the list";
+
+//                            System.out.println("Got it. I've added this task:\n"
+//                                    + event + "\nNow you have " + taskManager.getNumTasks()
+//                                    + " tasks in the list");
                         }
                     }
-                    text = sc.nextLine();
                 }
             }
-            FileHandler.writeToFile(fileName, taskManager);
-        }
-
-        catch(FileNotFoundException e){
-            System.out.println("File not found!");
-        }
-        catch(IOException e){
-            System.out.println("OOPS something went wrong!");
-        }
-        sc.close();
+            //FileHandler.writeToFile(fileName, taskManager);
+//        catch(FileNotFoundException e){
+//
+//            return "File not found!";
+//            //System.out.println("File not found!");
+//        }
+//        catch(IOException e){
+//            return "OOPS something went wrong!";
+////            System.out.println("OOPS something went wrong!");
+//        }
+        return "Bye. Hope to see you again soon!";
     }
 }
 
