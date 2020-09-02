@@ -22,6 +22,16 @@ public class Duke {
     }
 
     /**
+     * asd
+     */
+    public Duke() {
+        String filePath = "data/tasks.txt";
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.load());
+    }
+
+    /**
      * Runs Duke.
      */
     public void run() {
