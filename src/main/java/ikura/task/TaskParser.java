@@ -33,48 +33,32 @@ public class TaskParser {
         throws InvalidInputException {
 
         // TODO: make kind an enum
+        // TODO: allow '/' in description or title via escapes or something
 
-        var slash = input.indexOf('/');
-        String when = "";
-
-        if (slash == 0 || input.isEmpty()) {
+        if (input.isEmpty()) {
             throw new InvalidInputException("task description cannot be empty", usage);
+        }
 
-        } else if (slash == -1 && dateSpec.isPresent()) {
+        var pieces = input.split("/");
+        if (pieces.length == 1 && dateSpec.isPresent()) {
             throw new InvalidInputException(String.format("%s requires a date", kind), usage);
         }
 
-        var title = input.substring(0, slash).strip();
-        assert !title.isEmpty();
+        String title   = pieces[0].strip();
+        String desc    = null;
+        LocalDate date = null;
 
-
-        // TODO: allow specifying both /at and /desc here
-        if (dateSpec.isPresent()) {
-
-            when = input.substring(slash + 1).strip();
-
-            if (!when.startsWith(dateSpec.get() + " ")) {
-                throw new InvalidInputException("incorrect date specification", usage);
+        for (int i = 1; i < pieces.length; i++) {
+            if (dateSpec.isPresent() && pieces[i].startsWith(dateSpec.get())) {
+                date = parseDate(pieces[i].substring(dateSpec.get().length()).strip());
+            } else if (pieces[i].startsWith("desc")) {
+                desc = pieces[i];
             } else {
-                when = when.substring(3).strip();
+                throw new InvalidInputException(String.format("Unexpected argument '%s'", pieces[i]), usage);
             }
-
-            return TaskDescription.withTitleAndDate(title, parseDate(when));
-
-        } else if (slash != -1) {
-            when = input.substring(slash + 1).strip();
-            if (when.startsWith("desc ")) {
-
-                var desc = when.substring(4).strip();
-                return TaskDescription.withTitleAndDescription(title, desc);
-
-            } else {
-                throw new InvalidInputException(String.format("Unexpected argument '%s'", when), usage);
-            }
-        } else {
-
-            return TaskDescription.withTitle(title);
         }
+
+        return TaskDescription.of(title, desc, date);
     }
 
     /**

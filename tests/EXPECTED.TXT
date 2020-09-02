@@ -102,11 +102,11 @@ error: task description cannot be empty
 usage: deadline <description> /by <date>
 --------------------------------------
 >
-error: task description cannot be empty
+error: Unexpected argument 'at 1999-12-31'
 usage: deadline <description> /by <date>
 --------------------------------------
 >
-error: incorrect date specification
+error: Unexpected argument 'at 1999-12-31'
 usage: deadline <description> /by <date>
 --------------------------------------
 >
@@ -118,11 +118,11 @@ error: task description cannot be empty
 usage: event <description> /at <date>
 --------------------------------------
 >
-error: task description cannot be empty
+error: Unexpected argument 'by 1999-12-31'
 usage: event <description> /at <date>
 --------------------------------------
 >
-error: incorrect date specification
+error: Unexpected argument 'by 1999-12-31'
 usage: event <description> /at <date>
 --------------------------------------
 >

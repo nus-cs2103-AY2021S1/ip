@@ -3,7 +3,7 @@
 
 package ikura;
 
-import ikura.gui.GuiLauncher;
+// import ikura.gui.GuiLauncher;
 
 public class Main {
 
@@ -17,7 +17,7 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        GuiLauncher.startGui();
+        // GuiLauncher.startGui();
 
         /*
         var tasks = new TaskList(new Database(DB_PATH));

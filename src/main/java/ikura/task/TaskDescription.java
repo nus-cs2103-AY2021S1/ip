@@ -93,7 +93,7 @@ public class TaskDescription {
     /**
      * Create a task description with only a title.
      *
-     * @param title the task title
+     * @param title the task title, not null
      * @return a task description
      */
     public static TaskDescription withTitle(String title) {
@@ -103,7 +103,7 @@ public class TaskDescription {
     /**
      * Create a task description with only a description.
      *
-     * @param description the task description
+     * @param description the task description, not null
      * @return a task description
      */
     public static TaskDescription withDescription(String description) {
@@ -113,8 +113,8 @@ public class TaskDescription {
     /**
      * Create a task description with a title and a description.
      *
-     * @param title the task title
-     * @param description the task description
+     * @param title the task title, not null
+     * @param description the task description, not null
      * @return a task description
      */
     public static TaskDescription withTitleAndDescription(String title, String description) {
@@ -124,8 +124,8 @@ public class TaskDescription {
     /**
      * Create a task description with a title and a date.
      *
-     * @param title the task title
-     * @param date  the task date
+     * @param title the task title, not null
+     * @param date  the task date, not null
      * @return a task description
      */
     public static TaskDescription withTitleAndDate(String title, LocalDate date) {
@@ -133,14 +133,19 @@ public class TaskDescription {
     }
 
     /**
-     * Create a task description with a title, a description, and a date.
+     * Create a task description with a title, a description, and a date. Any of the
+     * components can be nullable to omit them.
      *
-     * @param title         the task title
-     * @param description   the task description
-     * @param date          the task date
+     * @param title         the task title, possibly null.
+     * @param description   the task description, possibly null.
+     * @param date          the task date, possibly null.
      * @return a task description
      */
     public static TaskDescription of(String title, String description, LocalDate date) {
-        return new TaskDescription(Optional.of(title), Optional.of(description), Optional.of(date));
+        return new TaskDescription(
+            Optional.ofNullable(title),
+            Optional.ofNullable(description),
+            Optional.ofNullable(date)
+        );
     }
 }

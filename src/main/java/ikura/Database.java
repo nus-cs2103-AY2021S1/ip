@@ -146,7 +146,7 @@ public class Database {
 
                         var bits  = line.split("\\|");
                         var title = bits[1];
-                        var desc  = bits[2];
+                        var desc  = (bits.length > 2 ? bits[2] : "");
 
                         task = new Todo(title, desc);
 
@@ -157,7 +157,7 @@ public class Database {
 
                             var bits  = line.split("\\|");
                             var title = bits[1];
-                            var desc  = bits[2];
+                            var desc  = (bits.length > 2 ? bits[2] : "");
 
                             if (type == 'D') {
                                 task = new Deadline(title, desc, date);

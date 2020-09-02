@@ -3,6 +3,10 @@
 
 package ikura.task;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.function.Consumer;
+
 /**
  * An abstract class representing a Task. It contains a description (name) and records its current state
  * (done or not done).
@@ -13,12 +17,8 @@ public abstract class Task {
     private String description;
 
     private boolean done;
-
-<<<<<<< Updated upstream
-=======
     private final List<Consumer<Task>> observers = new ArrayList<>();
 
->>>>>>> Stashed changes
     /**
      * Constructs a new Task with the given description. It is set to uncompleted by default.
      *
