@@ -25,7 +25,7 @@ public class Ui {
     }
 
     /** Prints welcome message. */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"
                 + "    | | | | | | | |/ / _ \\\n"
@@ -34,31 +34,36 @@ public class Ui {
         System.out.println("    Welcome to \n" + logo + "\n    Your personal assistant :)");
         showLine();
         showLine();
+        return "    Welcome to \n" + logo + "\n    Your personal assistant :)" + showLine() + showLine();
     }
 
     /** Prints a breakLine. */
-    public void showLine() {
+    public String showLine() {
         System.out.println("    ______________________________________________________");
+        return "    ______________________________________________________";
     }
 
     /** Prints loading error.
      * @param error error message.
      */
-    public void showLoadingError(String error) {
+    public String showLoadingError(String error) {
         System.out.println(error);
+        return error;
     }
 
     /**
      * Prints duke exception error message.
      * @param error Duke exception message.
      */
-    public void showError(String error) {
+    public String showError(String error) {
         System.out.println(error);
+        return error;
     }
 
     /** Prints exit statement. */
-    public void showExit() {
+    public String showExit() {
         System.out.println("    Bye. Hope to see you again soon!");
+        return "    Bye. Hope to see you again soon!";
     }
 
     /**
@@ -66,15 +71,17 @@ public class Ui {
      * @param counter Index of the task in the list.
      * @param task The task to print.
      */
-    public void printTask(int counter, Task task) {
+    public String printTask(int counter, Task task) {
         System.out.println("    " + counter + ": " + task.toString());
+        return "    " + counter + ": " + task.toString();
     }
 
     /**
      * Prints the search result.
      */
-    public void printResult() {
+    public String printResult() {
         System.out.println("    Here are the matching tasks in your list:");
+        return "    Here are the matching tasks in your list:";
     }
 
     /**
@@ -82,18 +89,22 @@ public class Ui {
      * @param listSize The size of the task list.
      * @param task The task to add into the list.
      */
-    public void addTask(int listSize, Task task) {
+    public String addTask(int listSize, Task task) {
         System.out.println("    Got it. I've added this task: \n     " + task.toString());
         System.out.println("    Now you have " + listSize + " tasks in the list.");
+        return "    Got it. I've added this task: \n     " + task.toString()
+                + "\n    Now you have " + listSize + " tasks in the list.";
     }
 
     /**
      * Prints the done message.
      * @param task The task that is completed.
      */
-    public void markDone(Task task) {
+    public String markDone(Task task) {
         System.out.println("    Nice! I've marked this task as done:");
         System.out.println("    " + task.toString());
+        return "    Nice! I've marked this task as done:"
+                + "\n    " + task.toString();
     }
 
     /**
@@ -101,10 +112,13 @@ public class Ui {
      * @param listSize The size of the task list.
      * @param task The task to delete from the list.
      */
-    public void markDelete(int listSize, Task task) {
+    public String markDelete(int listSize, Task task) {
         System.out.println("    Noted. I've removed this task:");
         System.out.println("    " + task.toString());
         System.out.println("    Now you have " + listSize + " tasks in the list.");
+        return "    Noted. I've removed this task:"
+                + "\n    " + task.toString()
+                + "\n    Now you have " + listSize + " tasks in the list.";
     }
 
 }

@@ -55,12 +55,14 @@ public class TaskList {
      * Prints the descriptions of all tasks in the list.
      * @param ui The Ui object to print messages.
      */
-    public void printList(Ui ui) {
+    public String printList(Ui ui) {
         int counter = 1;
+        String response = "";
         for (Task task: this.listOfTasks) {
-            ui.printTask(counter, task);
+            response = response + "\n" + ui.printTask(counter, task);
             counter += 1;
         }
+        return response;
     }
 
     /**
@@ -68,10 +70,10 @@ public class TaskList {
      * @param ui Ui object to print messages.
      * @param description Description of the task to be created.
      */
-    public void addTodo(Ui ui, String description) {
+    public String addTodo(Ui ui, String description) {
         ToDo newTask = new ToDo(description);
         this.listOfTasks.add(newTask);
-        ui.addTask(listOfTasks.size(), newTask);
+        return ui.addTask(listOfTasks.size(), newTask);
     }
 
     /**
@@ -81,10 +83,10 @@ public class TaskList {
      * @param localDate Time of the task.
      * @param localTime Date of the task.
      */
-    public void addEvent(Ui ui, String description, LocalDate localDate, LocalTime localTime) {
+    public String addEvent(Ui ui, String description, LocalDate localDate, LocalTime localTime) {
         Event newEvent = new Event(description, localDate, localTime);
         this.listOfTasks.add(newEvent);
-        ui.addTask(listOfTasks.size(), newEvent);
+        return ui.addTask(listOfTasks.size(), newEvent);
     }
 
     /**
@@ -94,10 +96,10 @@ public class TaskList {
      * @param localDate Time of the task.
      * @param localTime Date of the task.
      */
-    public void addDeadline(Ui ui, String description, LocalDate localDate, LocalTime localTime) {
+    public String addDeadline(Ui ui, String description, LocalDate localDate, LocalTime localTime) {
         Deadline newDeadline = new Deadline(description, localDate, localTime);
         this.listOfTasks.add(newDeadline);
-        ui.addTask(listOfTasks.size(), newDeadline);
+        return ui.addTask(listOfTasks.size(), newDeadline);
     }
 
     /**
@@ -105,10 +107,10 @@ public class TaskList {
      * @param index The index of the task to be completed.
      * @param ui Ui object to print messages.
      */
-    public void taskDone(int index, Ui ui) {
+    public String taskDone(int index, Ui ui) {
         Task temp = this.listOfTasks.get(index);
         temp.completed();
-        ui.markDone(temp);
+        return ui.markDone(temp);
     }
 
     /**
@@ -116,10 +118,10 @@ public class TaskList {
      * @param index The index of the task to be deleted.
      * @param ui Ui object to print messages.
      */
-    public void taskDelete(int index, Ui ui) {
+    public String taskDelete(int index, Ui ui) {
         Task temp = this.listOfTasks.get(index);
         this.listOfTasks.remove(index);
-        ui.markDelete(listOfTasks.size(), temp);
+        return ui.markDelete(listOfTasks.size(), temp);
     }
 
     /**
@@ -140,7 +142,7 @@ public class TaskList {
      * @param description Task description.
      * @throws DukeException
      */
-    public void findTask(Ui ui, String description) throws DukeException {
+    public String findTask(Ui ui, String description) throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
         for (Task t : this.listOfTasks) {
             if (t.isResult(description)) {
@@ -151,11 +153,12 @@ public class TaskList {
             throw new DukeException("    No matching task found :(");
         }
         int counter = 1;
-        ui.printResult();
+        String response = ui.printResult();
         for (Task task: result) {
-            ui.printTask(counter, task);
+            response = response + "\n" + ui.printTask(counter, task);
             counter += 1;
         }
+        return response;
     }
 
     /**

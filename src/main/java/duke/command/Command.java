@@ -22,7 +22,7 @@ public abstract class Command {
      * @param storage Storage object to load and save tasks to data file.
      * @throws DukeException
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Checks if the exit command has been triggered.

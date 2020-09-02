@@ -17,9 +17,9 @@ public class ExitCommand extends Command {
      * @param storage Storage object to load and save tasks to data file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         super.isExit = true;
         storage.save(tasks.convertToFile());
-        ui.showExit();
+        return ui.showExit();
     }
 }
