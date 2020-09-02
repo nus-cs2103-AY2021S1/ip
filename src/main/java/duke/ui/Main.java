@@ -1,5 +1,8 @@
+package duke.ui;
+
 import java.io.IOException;
 
+import duke.Ui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,11 +10,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for duke.Ui.Duke using FXML.
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Ui.Duke duke = new Ui.Duke();
 
     @Override
     public void start(Stage stage) {

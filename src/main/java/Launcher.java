@@ -1,3 +1,4 @@
+import duke.ui.Main;
 import javafx.application.Application;
 
 /**

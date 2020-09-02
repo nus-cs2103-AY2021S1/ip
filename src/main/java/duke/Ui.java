@@ -90,4 +90,36 @@ public class Ui {
     public void printMessage(String message) {
         out.println(message);
     }
+
+    public static class Duke {
+        private TaskList taskList;
+        private Ui ui;
+        private Parser parser;
+        
+        // UI variables
+        
+        
+        public Duke() {
+            taskList = new TaskList();
+            ui = new Ui();
+            parser = new Parser(taskList, ui);
+            Storage.loadTasksFrom("data/duke.txt", taskList);
+        }
+        
+        public void LoadTasks() {
+            Storage.loadTasksFrom("data/duke.txt", taskList);
+        }
+        
+        public void saveTasks() {
+            Storage.saveTasksTo("data/duke.txt", taskList);
+        }
+        
+        public String parseInput(String input) {
+            String output = parser.parse(input);
+            // System.out.println(output);
+            return output;
+        }
+    
+    
+    }
 }
