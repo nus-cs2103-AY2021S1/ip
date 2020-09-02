@@ -13,17 +13,17 @@ import chatterbox.ui.Ui;
  */
 public class TaskList {
     private static List<Task> tasks = new ArrayList<>();
-    private final Storage store;
+    private final Storage storage;
 
     public TaskList(Storage store) {
-        this.store = store;
+        this.storage = store;
     }
 
     /**
      * Gets tasks from storage.
      */
     public void loadTasks() throws IOException, ChatterboxException {
-        tasks = store.getItems();
+        tasks = storage.getItems();
     }
 
     /**
@@ -69,7 +69,7 @@ public class TaskList {
      */
     public String addTask(Task t) throws IOException {
         tasks.add(t);
-        store.saveItems(tasks);
+        storage.saveItems(tasks);
 
         return Ui.getAddTaskMessage(t, tasks.size());
     }
@@ -88,8 +88,8 @@ public class TaskList {
 
         Task t = tasks.get(taskNo);
         t.setDone(true);
-        store.saveItems(tasks);
-        return "Nice! I've marked this task as done: \n" + t;
+        storage.saveItems(tasks);
+        return Ui.getDoneTaskMessage(t);
     }
 
     /**
@@ -105,7 +105,7 @@ public class TaskList {
         }
 
         Task t = tasks.remove(taskNo);
-        store.saveItems(tasks);
+        storage.saveItems(tasks);
         return Ui.getDeleteTaskMessage(t, tasks.size());
     }
 }

@@ -15,8 +15,8 @@ public class Chatterbox {
      * Initializes the task list and load stored tasks.
      */
     public Chatterbox() {
-        Storage store = new Storage();
-        tasks = new TaskList(store);
+        Storage storage = new Storage();
+        tasks = new TaskList(storage);
     }
 
     /**

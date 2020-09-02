@@ -3,6 +3,7 @@ package chatterbox;
 import java.io.IOException;
 
 import chatterbox.ui.MainWindow;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

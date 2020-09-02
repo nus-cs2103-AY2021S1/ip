@@ -7,10 +7,11 @@ import chatterbox.task.Task;
  */
 public class Ui {
     /**
-     * Shows the add task message.
+     * Returns the add task message.
      *
      * @param t The task that has been added.
      * @param totalTasks    The total number of tasks in the list currently.
+     * @return The add task message.
      */
     public static String getAddTaskMessage(Task t, int totalTasks) {
         return "Got it. I've added this task: \n"
@@ -19,10 +20,11 @@ public class Ui {
     }
 
     /**
-     * Shows the delete task message.
+     * Returns the delete task message.
      *
      * @param t The task that has been deleted.
      * @param totalTasks    The total number of tasks in the list currently.
+     * @return The delete task message.
      */
     public static String getDeleteTaskMessage(Task t, int totalTasks) {
         return "Noted! I've removed this task from your list: \n"
@@ -31,25 +33,31 @@ public class Ui {
     }
 
     /**
-     * Shows the first message the user sees when the program starts.
+     * Returns the done task message.
+     *
+     * @param t The task that has been marked as done.
+     * @return The done task message.
+     */
+    public static String getDoneTaskMessage(Task t) {
+        return "Nice! I've marked this task as done: \n" + t;
+    }
+
+    /**
+     * Returns the first message the user sees when the program starts.
+     *
+     * @return The welcome message.
      */
     public static String getWelcomeMessage() {
         return "Hello I'm Chatterbox. What can I do for you?";
     }
 
     /**
-     * Shows an error message.
+     * Returns an error message.
      *
      * @param error The message to show.
+     * @return The error meesage.
      */
     public static String getErrorMessage(String error) {
         return "☹ OOPS!!! " + error;
-    }
-
-    /**
-     * Shows the last message the user sees when the program exits.
-     */
-    public static String getFarewellMessage() {
-        return "Goodbye! Hope to see you again soon!";
     }
 }

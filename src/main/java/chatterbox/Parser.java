@@ -23,6 +23,7 @@ public class Parser {
 
     /**
      * Tries to parse a raw string into a date and time, and returns a LocalDateTime if possible.
+     * If parsing fails, this functions returns null.
      *
      * @param dateTime  The raw string to be parsed into datetime.
      * @return  The string parsed as a LocalDateTime if possible, else null
@@ -40,10 +41,10 @@ public class Parser {
     }
 
     /**
-     * Parse the task contents to change the date display.
+     * Parses the task contents to change the date display.
      *
      * @param input String to format.
-     * @return  The formatted string.
+     * @return The formatted string.
      */
     public static String parseDateTimeTask(String input, LocalDateTime deadline) {
         if (input.contains("/")) {
@@ -63,7 +64,7 @@ public class Parser {
      * Task can be a deadline, a todo, or an event.
      *
      * @param input Raw user input.
-     * @return  Task object created based on user input.
+     * @return Task object created based on user input.
      * @throws ChatterboxException  If description of the task command is empty or the command is invalid.
      */
     public static Task parseTask(String input) throws ChatterboxException {

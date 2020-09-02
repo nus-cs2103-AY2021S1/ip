@@ -2,6 +2,7 @@ package chatterbox;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
@@ -24,21 +25,13 @@ public class ParserTest {
 
     @Test
     public void parse_emptyCommandDescription_exceptionThrown() {
-        try {
-            Parser.parseTask("todo");
-            fail();
-        } catch (ChatterboxException e) {
-            assertEquals("The description of a todo cannot be empty", e.getMessage());
-        }
+        ChatterboxException e = assertThrows(ChatterboxException.class, () -> Parser.parseTask("todo"));
+        assertEquals("The description of a todo cannot be empty", e.getMessage());
     }
 
     @Test
     public void parse_invalidCommand_exceptionThrown() {
-        try {
-            Parser.parseTask("todos check");
-            fail();
-        } catch (ChatterboxException e) {
-            assertEquals("Invalid command.", e.getMessage());
-        }
+        ChatterboxException e = assertThrows(ChatterboxException.class, () -> Parser.parseTask("todos check"));
+        assertEquals("Invalid command.", e.getMessage());
     }
 }

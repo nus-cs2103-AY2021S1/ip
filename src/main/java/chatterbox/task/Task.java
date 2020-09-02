@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
  * General task.
  */
 public class Task {
-    private static final String TICK = "\u2713";
-    private static final String CROSS = "\u2717";
+    private static final String SYMBOL_TICK = "\u2713";
+    private static final String SYMBOL_CROSS = "\u2717";
 
     protected LocalDateTime deadline;
     protected String prefix;
@@ -35,6 +35,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", prefix, (isDone ? TICK : CROSS), contents);
+        return String.format("[%s][%s] %s", prefix, (isDone ? SYMBOL_TICK : SYMBOL_CROSS), contents);
     }
 }
