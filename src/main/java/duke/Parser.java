@@ -12,32 +12,32 @@ public class Parser {
      * split up the user input and recognise the executable functions
      * @param input user input
      */
-    public void parse(String input) {
+    public Command parse(String input) {
         if (input.contains("list")) {
-            TaskList.printTaskList();
+            return Command.PRINT_TASKS;
         } else if (input.contains("bye")) {
-            Ui.bye();
+            return Command.BYE;
         } else {
             try {
                 String key = input.split(" ", 2)[0];
                 String command = input.split(" ", 2)[1];
                 if (key.contains("done")) {
-                    TaskList.doneTask(command);
+                    return Command.DONE;
                 } else if (key.equals("find")) {
-                    TaskList.findTask(command);
+                    return Command.FIND;
                 } else if (key.equals("delete")) {
-                    TaskList.deleteTask(command);
+                    return Command.DELETE;
                 } else if (key.equals("todo")) {
-                    TaskList.createTodo(command);
+                    return Command.TODO;
                 } else if (key.equals("event")) {
-                    TaskList.createEvent(command);
+                    return Command.EVENT;
                 } else if (key.equals("deadline")) {
-                    TaskList.createDeadline(command);
+                    return Command.DEADLINE;
                 } else {
-                    System.out.println(new DukeException("command not found"));
+                    return Command.ERROR;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println(new DukeException("command not found"));
+                return Command.ERROR;
             }
         }
     }

@@ -6,12 +6,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.skin.TextAreaSkin;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 /**
  * Duke class that creates a Duke bot to interact with user.
@@ -26,7 +28,7 @@ public class Duke extends Application {
     private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/meimei.jpeg"));
 
 
     private final Storage storage;
@@ -64,24 +66,59 @@ public class Duke extends Application {
 
     /**
      * Main method to get duke to start running and ask for user input
+     * @return
      */
 
-    public void run() {
+    public String run(String input) {
         //...
         Parser p = new Parser();
         boolean isExit = false;
         while (!isExit) {
-            System.out.println("Hello! I'm meimei ^_^\nI could scream at you all day!");
+            //System.out.println("Hello! I'm meimei ^_^\nI could scream at you all day!");
             //String command = ui.ask();
-            String command = userInput.getText();
-            if (command.contains("bye")) {
-                isExit = true;
-            } else {
-                p.parse(command);
+            //String command = userInput.getText();
+            //String input = userInput.getText();
+            Command command = p.parse(input);
+            try {
+                if (command.equals(Command.BYE)) {
+                    isExit = true;
+                } else if (command.equals(Command.TODO)) {
+                    input = input.split(" ", 2)[1];
+                    Task task = TaskList.createTodo(input);
+                    return Ui.addedTask(task, tasks.getSize());
+                } else if (command.equals(Command.EVENT)) {
+                    input = input.split(" ", 2)[1];
+                    Task task = TaskList.createEvent(input);
+                    return Ui.addedTask(task, tasks.getSize());
+                } else if (command.equals(Command.DEADLINE)) {
+                    input = input.split(" ", 2)[1];
+                    Task task = TaskList.createDeadline(input);
+                    return Ui.addedTask(task, tasks.getSize());
+                } else if (command.equals(Command.DELETE)) {
+                    input = input.split(" ", 2)[1];
+                    Task task = TaskList.deleteTask(input);
+                    return Ui.deletedTask(task);
+                } else if (command.equals(Command.DONE)) {
+                    input = input.split(" ", 2)[1];
+                    Task task = TaskList.doneTask(input);
+                    return Ui.doneTask(task);
+                } else if (command.equals(Command.FIND)) {
+                    input = input.split(" ", 2)[1];
+                    List<Task> tasks = TaskList.findTask(input);
+                    return Ui.tasksFound(tasks);
+                } else if (command.equals(Command.PRINT_TASKS)) {
+                    return Ui.printTaskList(tasks.getTaskList());
+                } else if (command.equals(Command.ERROR)) {
+                    return Ui.commandError();
+                } else {
+                    return input;
+                }
+            } catch (DukeException e) {
+                return Ui.showError(e);
             }
         }
         storage.updateDatabase(tasks.getTaskList(), filePath);
-        ui.bye();
+        return Ui.bye();
     }
 
     /**
@@ -89,7 +126,7 @@ public class Duke extends Application {
      * @param args
      */
     public static void main(String[] args) {
-        new Duke("data").run();
+        //new Duke("data").run();
         //new Duke().run();
     }
 
@@ -183,7 +220,7 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         String userText = userInput.getText();
-        String dukeText = getResponse(userInput.getText());
+        String dukeText = getResponse(userText);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
                 DialogBox.getDukeDialog(dukeText, duke)
@@ -196,7 +233,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Meimei heard: " + input;
+        return "Meimei says: " + run(input);
     }
 }
 

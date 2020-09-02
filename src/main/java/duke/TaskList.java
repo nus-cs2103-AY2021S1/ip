@@ -30,26 +30,30 @@ public class TaskList {
     /**
      * method to mark a task in the list as done
      * @param remain index of the task in list
+     * @return
      */
 
-    public static void doneTask(String remain) {
+    public static Task doneTask(String remain) {
+
         int index = Integer.parseInt(remain);
-        tasks.get(index - 1).markAsDone();
-        System.out.println("Nice! This task is marked as done!");
-        System.out.println(tasks.get(index - 1));
+        Task task = tasks.get(index - 1);
+        task.markAsDone();
+        //Ui.doneTask(task);
+        return task;
     }
 
     /**
      * method to add a todo item into the list
      * @param command description of a todo
+     * @return
      */
 
-    public static void createTodo(String command) {
+    public static Task createTodo(String command) throws DukeException {
         if (command.isEmpty()) {
-            System.out.println(new DukeException("todo"));
+            throw new DukeException("todo");
         } else {
             tasks.add(new Todo(command));
-            Ui.addedTask(new Todo(command), tasks.size());
+            return new Todo(command);
         }
     }
 
@@ -58,34 +62,38 @@ public class TaskList {
      * @param command description of an event
      */
 
-    public static void createEvent(String command) {
+    public static Task createEvent(String command) throws DukeException {
         try {
             String description = command.split(" /at ", 2)[0];
             String at = command.split(" /at ", 2)[1].replace(" ", "");
             tasks.add(new Event(description, at));
-            Ui.addedTask(new Event(description, at), tasks.size());
+            return new Event(description, at);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(new DukeException("event"));
+            throw new DukeException("event");
         } catch (DateTimeParseException e2) {
-            System.out.println(new DukeException("time"));
+            throw new DukeException("time");
         }
     }
 
     /**
      * method to add a deadline into the list
      * @param command description of an event
+     * @return
      */
-    public static void createDeadline(String command) {
+    public static Task createDeadline(String command) {
         try {
             String description = command.split("/by ", 2)[0];
             String by = command.split("/by ", 2)[1].replace(" ", "");
             tasks.add(new Deadline(description, by));
-            Ui.addedTask(new Deadline(description, by), tasks.size());
+            return new Deadline(description, by);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(new DukeException("deadline"));
+            //System.out.println(new DukeException("deadline"));
+            Ui.dukeException(new DukeException("deadline"));
         } catch (DateTimeParseException e2) {
-            System.out.println(new DukeException("time"));
+            //System.out.println(new DukeException("time"));
+            Ui.dukeException(new DukeException("time"));
         }
+        return null;
     }
 
     /**
@@ -132,32 +140,28 @@ public class TaskList {
     /**
      * Void method to search for a task with a given keyword
      * @param name of the keyword
+     * @return
      */
-    public static void findTask(String name) {
+    public static List<Task> findTask(String name) {
         List<Task> result = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).findTask(name)) {
                 result.add(tasks.get(i));
             }
         }
-        if (result.isEmpty()) {
-            System.out.println("No matching tasks found :(");
-        } else {
-            System.out.println("Meimei found these matching tasks:");
-            for (int i = 0; i < result.size(); i++) {
-                System.out.println((i + 1) + "." + result.get(i).toString());
-            }
-        }
+        return result;
     }
 
     /**
      * Void method to print the list of tasks stored.
+     * @return
      */
-    public static void printTaskList() {
-        System.out.println("Here are the tasks in your list: ");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i).toString());
-        }
+    public static String printTaskList() {
+//        System.out.println("Here are the tasks in your list: ");
+//        for (int i = 0; i < tasks.size(); i++) {
+//            System.out.println((i + 1) + "." + tasks.get(i).toString());
+//        }
+        return Ui.printTaskList(tasks);
     }
 
     /**
@@ -165,10 +169,14 @@ public class TaskList {
      * @param command the specified index
      */
 
-    public static void deleteTask(String command) {
+    public static Task deleteTask(String command) {
         int index = Integer.parseInt(command);
         Task k = tasks.get(index - 1);
         tasks.remove(k);
-        Ui.deletedTask(k);
+        return k;
+    }
+
+    public int getSize() {
+        return tasks.size();
     }
 }
