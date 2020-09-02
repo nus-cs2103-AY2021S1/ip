@@ -108,7 +108,7 @@ public class TaskList {
      *
      * @param matchWords  All the keywords from user
      */
-    public List<Task> returnMatchingTasks(String[] matchWords) {
+    public List<Task> returnMatchingTasks(String ... matchWords) {
         List<Task> matchList = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             for (int j = 0; j < matchWords.length; j++) {
