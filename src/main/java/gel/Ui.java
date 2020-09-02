@@ -42,32 +42,34 @@ public class Ui {
         return removeTaskMsg;
     }
 
-    public void markTaskAsDoneMsg(Task task) {
-
-        System.out.println("\n    Nice! I've marked this task as done:");
-        System.out.println("    " + task);
-        System.out.println();
-        return
+    public String markTaskAsDoneMsg(Task task) {
+        String markDoneMsg = "\n    Nice! I've marked this task as done:\n    " + task + "\n";
+        System.out.println(markDoneMsg);
+        return markDoneMsg;
     }
 
-    public void showListOfTask(List<Task> taskList) {
-        System.out.println("\n    Here are the task(s) in your list:");
+    public String showListOfTask(List<Task> taskList) {
+        StringBuilder listOfTask = new StringBuilder("\n    Here are the task(s) in your list:");
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.get(i - 1);
-            System.out.println("    " + i + "." + task);
+            listOfTask.append("\n    ").append(i).append(".").append(task);
         }
-        System.out.println();
+        listOfTask.append("\n");
+        System.out.println(listOfTask);
+        return listOfTask.toString();
     }
 
-    public void showSearchResults(List<Task> taskList, String keyword) {
+    public String showSearchResults(List<Task> taskList, String keyword) {
         int resultCount = 1;
-        System.out.println("\n    Here are the matching task(s) in your list:");
+        StringBuilder searchResults = new StringBuilder("\n    Here are the matching task(s) in your list:");
         for (Task task : taskList) {
             if (task.getDescription().contains(keyword)) {
-                System.out.println("    " + resultCount + "." + task);
+                searchResults.append("\n    ").append(resultCount).append(".").append(task);
                 resultCount += 1;
             }
         }
-        System.out.println();
+        searchResults.append("\n");
+        System.out.println(searchResults);
+        return searchResults.toString();
     }
 }

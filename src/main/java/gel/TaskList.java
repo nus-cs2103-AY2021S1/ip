@@ -22,15 +22,15 @@ public class TaskList {
         this.ui = ui;
     }
 
-    public void showListOfTask() {
-        ui.showListOfTask(this.listOfTasks);
+    public String showListOfTask() {
+        return ui.showListOfTask(this.listOfTasks);
     }
 
-    public void findDescription(String keyword) {
-        ui.showSearchResults(this.listOfTasks, keyword);
+    public String findDescription(String keyword) {
+        return ui.showSearchResults(this.listOfTasks, keyword);
     }
 
-    public void doneTask(String input) throws GelException {
+    public String doneTask(String input) throws GelException {
         int index = Integer.parseInt(input.substring(5)) - 1;
         if (index >= listOfTasks.size() || index < 0) {
             throw new GelException("    Please input a valid number from 1 - " + listOfTasks.size());
@@ -38,38 +38,38 @@ public class TaskList {
         Task taskToBeDone = listOfTasks.remove(index);
         taskToBeDone.markAsDone();
         listOfTasks.add(index, taskToBeDone);
-        ui.markTaskAsDoneMsg(taskToBeDone);
+        return ui.markTaskAsDoneMsg(taskToBeDone);
     }
 
-    public void deleteTask(String deleteNumber) {
+    public String deleteTask(String deleteNumber) {
         int taskNo = Integer.parseInt(deleteNumber);
         Task taskToBeDeleted = listOfTasks.remove(taskNo - 1);
-        ui.taskRemoveMsg(taskToBeDeleted, listOfTasks.size());
+        return ui.taskRemoveMsg(taskToBeDeleted, listOfTasks.size());
     }
 
-    public void addDeadline(String input, int dateIndex) throws GelException {
+    public String addDeadline(String input, int dateIndex) throws GelException {
         String by = input.substring(dateIndex + 4);
         String description = input.substring(9, dateIndex - 1);
         LocalDateTime byDateTime = Parser.toDateTime(by);
         Deadline deadline = new Deadline(description, byDateTime);
         listOfTasks.add(deadline);
-        ui.addTaskToListMsg(deadline, listOfTasks.size());
+        return ui.addTaskToListMsg(deadline, listOfTasks.size());
     }
 
-    public void addEvent(String input, int dateIndex) throws GelException {
+    public String addEvent(String input, int dateIndex) throws GelException {
         String at = input.substring(dateIndex + 4);
         String description = input.substring(6, dateIndex - 1);
         LocalDateTime atDateTime = Parser.toDateTime(at);
         Event event = new Event(description, atDateTime);
         listOfTasks.add(event);
-        ui.addTaskToListMsg(event, listOfTasks.size());
+        return ui.addTaskToListMsg(event, listOfTasks.size());
     }
 
-    public void addTodo(String input) {
+    public String addTodo(String input) {
         String description = input.substring(5);
         Todo todo = new Todo(description);
         listOfTasks.add(todo);
-        ui.addTaskToListMsg(todo, listOfTasks.size());
+        return ui.addTaskToListMsg(todo, listOfTasks.size());
     }
 
     public void addTodoFromFile(String description, int done) {

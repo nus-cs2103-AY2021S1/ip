@@ -54,6 +54,12 @@ public class Gel {
     }
 
     public String getResponse(String input) {
-        return input;
+        try {
+            storage.checkFileExistence();
+            ui.showWelcomeMessage();
+            return Parser.parseUserInputFromGui(storage, ui, taskList, input);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 }
