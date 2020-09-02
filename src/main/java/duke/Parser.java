@@ -23,42 +23,41 @@ public class Parser {
      * @param taskList list of tasks user has currently
      * @return boolean value of whether conversation is to be continued
      */
-    public static boolean understandText(String userText, TaskList taskList) {
+    public static String understandText(String userText, TaskList taskList) {
         try {
             String edittedAnswer = userText.strip().toLowerCase();
             String[] answers = userText.split(" ");
             if (answers.length == 2 && answers[0].equals(Commands.DONE.text)) {
-                Parser.furtherUnderstandTaskNumber(answers[0], answers[1], taskList);
+                return Parser.understandTaskNumber(answers[0], answers[1], taskList);
 
             } else if (answers.length == 2 && answers[0].equals(Commands.DELETE.text)) {
                 Command command = new DeleteCommand();
-                Parser.furtherUnderstandTaskNumber(answers[0], answers[1], taskList);
+                return Parser.understandTaskNumber(answers[0], answers[1], taskList);
 
             } else if (edittedAnswer.equals(Commands.LIST.text)) {
                 Command command = new ListCommand();
-                command.execute(" ", taskList);
+                return command.execute(" ", taskList);
 
             } else if (edittedAnswer.equals(Commands.EXIT.text)) {
                 Command command = new ByeCommand();
-                command.execute(" ", taskList);
-                return false;
+                return command.execute(" ", taskList);
 
             } else if (answers[0].equals(Commands.TODO.text)
                     || answers[0].equals(Commands.DEADLINE.text)
                     || answers[0].equals(Commands.EVENT.text)) {
-                Parser.furtherUnderstandTask(userText, taskList);
+                return Parser.understandTaskDescription(userText, taskList);
+            } else if (answers[0].equals(Commands.FIND.text)) {
+//                Command command = new FindCommand()
 
             } else {
                 throw new DukeCannotUnderstandException();
-
             }
         } catch (DukeCannotUnderstandException e) {
-            System.out.println(e.getMessage() + "\n" + Ui.LINE);
+            return Ui.printErrorMessage(e.getMessage() + "\n" + Ui.LINE);
         }
-        return true;
     }
 
-    private static void furtherUnderstandTaskNumber(String stringCommand, String answer, TaskList taskList) {
+    private static String understandTaskNumber(String stringCommand, String answer, TaskList taskList) {
         try {
             int oneIndex = Integer.parseInt(answer);
             int realIndex = oneIndex - 1;
@@ -68,17 +67,17 @@ public class Parser {
             } else {
                 command = new DeleteCommand();
             }
-            command.execute(String.valueOf(realIndex), taskList);
+            return command.execute(String.valueOf(realIndex), taskList);
         } catch (NumberFormatException e) {
-            System.out.println("I can't seem to understand what task you are referring to.\n"
+            return Ui.printErrorMessage("I can't seem to understand what task you are referring to.\n"
                     + "Please let me know in this format: " + stringCommand
                     + " <number of task>\n" + Ui.LINE);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Hmm... I don't have a task numbered " + answer + "\n" + Ui.LINE);
+            return Ui.printErrorMessage("Hmm... I don't have a task numbered " + answer + "\n" + Ui.LINE);
         }
     }
 
-    private static void furtherUnderstandTask(String answer, TaskList taskList) {
+    private static String understandTaskDescription(String answer, TaskList taskList) {
         try {
             String[] answers = answer.split(" ", 2);
             if (answers.length > 1) {
@@ -90,7 +89,7 @@ public class Parser {
                 if (type.equals(Commands.TODO.text) || partsOfTask.length == 2) {
                     if (type.equals(Commands.TODO.text)) {
                         Command command = new AddCommand(type);
-                        command.execute(task, taskList);
+                        return command.execute(task, taskList);
 
                     } else {
                         String description = partsOfTask[0].strip();
@@ -102,8 +101,7 @@ public class Parser {
                         }
 
                         Command command = new AddCommand(type);
-                        command.execute(task, taskList);
-
+                        return command.execute(task, taskList);
                     }
                 } else {
                     String instruction = "<type of task> <description> / <deadline>";
@@ -123,11 +121,11 @@ public class Parser {
                 throw new DukeGotNoArgumentsException(instruction);
             }
         } catch (DukeGotNoArgumentsException e) {
-            System.out.println(e.getMessage() + "\n" + Ui.LINE);
+            return Ui.printErrorMessage(e.getMessage() + "\n" + Ui.LINE);
         } catch (DataFormatException e) {
-            System.out.println("Please key in again with the date in the ddmmyyyy format." + "\n" + Ui.LINE);
+            return Ui.printErrorMessage("Please key in again with the date in the ddmmyyyy format." + "\n" + Ui.LINE);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(answer);
+            return Ui.printErrorMessage(answer);
         }
     }
 
@@ -138,7 +136,8 @@ public class Parser {
         LIST("list"),
         EXIT("bye"),
         DONE("done"),
-        DELETE("delete");
+        DELETE("delete"),
+        FIND ("find");
         private String text;
 
         Commands(String text) {

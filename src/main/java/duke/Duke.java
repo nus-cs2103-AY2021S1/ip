@@ -8,11 +8,15 @@ import java.util.Scanner;
 public class Duke {
     private TaskList taskList;
 
-//    Duke() {
-//        this.taskList = new TaskList();
-//    }
+    public Duke() {
+        this.taskList = new TaskList();
+    }
 
-//    public static void main(String[] args) {
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
+    //    public static void main(String[] args) {
 //        Duke.run();
 //    }
 //

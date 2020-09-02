@@ -30,11 +30,11 @@ public class AddCommand extends Command {
      * @param taskList    current list of tasks.
      */
     @Override
-    public void execute(String taskDetails, TaskList taskList) {
+    public String execute(String taskDetails, TaskList taskList) {
         try {
             if (this.commandText.equals(Types.TODO.text)) {
                 Task toAdd = new Task(taskDetails);
-                taskList.addTask(toAdd);
+                return taskList.addTask(toAdd);
             } else {
                 String[] partsOfTask = taskDetails.split("/");
                 String description = partsOfTask[0];
@@ -47,17 +47,18 @@ public class AddCommand extends Command {
 
                 if (this.commandText.equals(Types.DEADLINE.text)) {
                     Task toAdd = new Deadline(description.strip(), actualDate);
-                    taskList.addTask(toAdd);
+                    return taskList.addTask(toAdd);
 
                 } else if (this.commandText.equals(Types.EVENT.text)) {
                     Task toAdd = new Event(description.strip(), actualDate);
-                    taskList.addTask(toAdd);
+                    return taskList.addTask(toAdd);
 
                 }
             }
         } catch (DateTimeException e) {
-            System.out.println("Please key in again with a valid date\n" + Ui.LINE);
+            return Ui.printErrorMessage("Please key in again with a valid date\n" + Ui.LINE);
         }
+        return "";
     }
 
     enum Types {

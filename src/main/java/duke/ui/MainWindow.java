@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.Duke;
+import duke.Parser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -23,8 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/assets/Duke.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/assets/User.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/assets/Duke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/assets/User.png"));
 
     @FXML
     public void initialize() {
@@ -51,8 +52,6 @@ public class MainWindow extends AnchorPane {
     }
 
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return Parser.understandText(input, duke.getTaskList());
     }
-
-
 }

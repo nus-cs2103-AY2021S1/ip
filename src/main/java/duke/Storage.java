@@ -13,6 +13,7 @@ import java.util.List;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.ui.Ui;
 
 class Storage {
     private File savedCopy;
@@ -30,7 +31,7 @@ class Storage {
                 this.retrieveStorage();
             }
         } catch (IOException e) {
-            System.out.println("Something went wrong:  " + e.getMessage());
+            Ui.printErrorMessage("Something went wrong:  " + e.getMessage());
         }
     }
 
@@ -73,7 +74,7 @@ class Storage {
             }
 
         } catch (IOException e) {
-            System.out.println("Something went wrong:  " + e.getMessage());
+            Ui.printErrorMessage("Something went wrong:  " + e.getMessage());
         }
     }
 
@@ -81,7 +82,7 @@ class Storage {
         return this.savedTasks;
     }
 
-    public void saveIntoHarddisk() {
+    public void saveIntoHardDisk() {
         try {
             FileWriter writer = new FileWriter("./data/save.txt", false);
             writer.write("");
@@ -92,7 +93,7 @@ class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong:  " + e.getMessage());
+            Ui.printErrorMessage("Something went wrong:  " + e.getMessage());
         }
     }
 }

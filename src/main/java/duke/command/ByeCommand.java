@@ -18,8 +18,8 @@ public class ByeCommand extends Command {
      * @param taskList current list of tasks to be saved into hard disk.
      */
     @Override
-    public void execute(String text, TaskList taskList) {
-        taskList.saveIntoHarddisk();
-        Ui.showByeMessage();
+    public String execute(String text, TaskList taskList) {
+        taskList.saveIntoHardDisk();
+        return Ui.printByeMessage();
     }
 }

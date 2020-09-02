@@ -16,8 +16,8 @@ public class DoneCommand extends Command {
      * @param taskList current list of tasks.
      */
     @Override
-    public void execute(String text, TaskList taskList) {
+    public String execute(String text, TaskList taskList) {
         int index = Integer.parseInt(text);
-        taskList.completeTask(index);
+        return taskList.completeTask(index);
     }
 }

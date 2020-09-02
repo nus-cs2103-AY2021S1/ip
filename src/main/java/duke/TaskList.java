@@ -26,11 +26,11 @@ public class TaskList {
      *
      * @param toAdd Task to add
      */
-    public void addTask(Task toAdd) {
+    public String addTask(Task toAdd) {
         this.allItems.add(toAdd);
         String printTask = "Alright, its in your list now!\n\t" + toAdd
                 + "\nNow you have " + this.allItems.size() + " tasks.\n" + Ui.LINE;
-        Ui.printMessageToUser(printTask);
+        return Ui.printMessage(printTask);
     }
 
     /**
@@ -45,7 +45,7 @@ public class TaskList {
     /**
      * Prints the output of all tasks in store currently.
      */
-    public void printStore() {
+    public String printStore() {
         String printList;
         if (this.allItems.size() == 0) {
             printList = "There are no tasks added till now.\nAdd one by just typing its name.\n"
@@ -60,7 +60,7 @@ public class TaskList {
             printList = printList.concat("If you're brave enough to start,\n"
                     + "You're strong enough to finish it!\n" + Ui.LINE);
         }
-        Ui.printMessageToUser(printList);
+        return Ui.printMessage(printList);
     }
 
     /**
@@ -68,9 +68,9 @@ public class TaskList {
      *
      * @param index index of task to be set completed.
      */
-    public void completeTask(int index) {
+    public String completeTask(int index) {
         Task toComplete = this.allItems.get(index);
-        toComplete.finishTask();
+        return toComplete.finishTask();
     }
 
     /**
@@ -78,16 +78,16 @@ public class TaskList {
      *
      * @param index index of task to be removed.
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         this.allItems.remove(index);
-        Ui.printDeleteTaskMessage();
+        return Ui.printDeleteTaskMessage();
     }
 
     /**
      * Sends instruction to save the current tasks.
      */
-    public void saveIntoHarddisk() {
-        this.savedStorage.saveIntoHarddisk();
+    public void saveIntoHardDisk() {
+        this.savedStorage.saveIntoHardDisk();
     }
 
     /**
@@ -112,6 +112,6 @@ public class TaskList {
             }
             printMatchingTasks = printMatchingTasks + Ui.LINE;
         }
-        System.out.println(printMatchingTasks);
+        Ui.printMessage(printMatchingTasks);
     }
 }
