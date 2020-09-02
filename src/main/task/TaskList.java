@@ -54,4 +54,18 @@ public class TaskList {
     public Task get(int index) {
         return tasks.get(index);
     }
+
+    @Override
+    public String toString() {
+        return tasks.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof TaskList) {
+            TaskList o = (TaskList) obj;
+            return tasks.equals(o.tasks);
+        }
+        return false;
+    }
 }
