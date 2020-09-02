@@ -1,14 +1,23 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
     private final Storage storage;
     private final Parser parser;
     private final Ui ui;
 
-    private Duke(Storage storage, Parser parser, Ui ui) {
+    public Duke() {
+        this.storage = new Storage();
+        this.parser = new Parser();
+        this.ui = new Ui();
+    }
+
+    public Duke(Storage storage, Parser parser, Ui ui) {
         this.storage = storage;
         this.parser = parser;
         this.ui = ui;
@@ -65,5 +74,15 @@ public class Duke {
             counter++;
         }
         return returnString;
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+
     }
 }
