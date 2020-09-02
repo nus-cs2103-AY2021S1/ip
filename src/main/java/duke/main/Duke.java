@@ -2,6 +2,7 @@ package duke.main;
 
 import java.util.Scanner;
 
+import duke.Ui.Main;
 import duke.Ui.Ui;
 import javafx.application.Application;
 
@@ -39,7 +40,7 @@ public class Duke {
      */
     public void run() {
         // Launch GUI
-        Application.launch(Ui.class, "");
+        Application.launch(Main.class, "");
         // Display greeting message
         ui.showLine();
         ui.showGreetingMessage();
