@@ -1,8 +1,2 @@
-D | 1 | finish homework | 2020-08-31 7pm
-D | 1 | read book | 2020-08-31 6pm
-<<<<<<< HEAD
-D | 0 | sing | 2020-09-11
-E | 0 | frisbee | 2020-07-11 5pm
-T | 1 | play game
->>>>>>> branch-Level-10
-T | 0 | read
+T | 1 | read book
+D | 0 | singing contest | 2020-09-11
