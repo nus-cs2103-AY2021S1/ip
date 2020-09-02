@@ -37,7 +37,7 @@ public class Ui {
 
     /**
      * Returns a String representation of the user input.
-     * 
+     *
      * @return a String representation of the user input
      */
     public String readCmd() {
@@ -46,7 +46,7 @@ public class Ui {
 
     /**
      * Prints an error message.
-     * 
+     *
      * @param message the error message to be printed
      */
     public void printError(String message) {
@@ -63,7 +63,7 @@ public class Ui {
 
     /**
      * Prints the entire list of tasks.
-     * 
+     *
      * @param tasks the TaskList to be printed
      */
     public void printOnList(TaskList tasks) {
@@ -71,7 +71,7 @@ public class Ui {
         if (len == 0) {
             System.out.println("WOOTS! You don't have any tasks to do at the moment.");
         } else {
-            System.out.println("These are the task(s) you have: ");
+            System.out.println("These are the task(s) you have:");
             int i = 0;
             for (Task t : tasks.getTaskList()) {
                 if (t != null) {
@@ -86,7 +86,7 @@ public class Ui {
 
     /**
      * Prints the done message.
-     * 
+     *
      * @param task the task that is done
      */
     public void printOnDone(Task task) {
@@ -96,7 +96,7 @@ public class Ui {
 
     /**
      * Prints the delete message.
-     * 
+     *
      * @param task the Task to be deleted
      * @param numOfTasks the number of tasks in the list
      */
@@ -108,23 +108,23 @@ public class Ui {
 
     /**
      * Prints the add task message.
-     * 
+     *
      * @param task the Task to be printed
      * @param numOfTasks the number of tasks in the list
      */
     public void printOnAddTask(Task task, int numOfTasks) {
-        System.out.println("Noted! I've added this task: ");
+        System.out.println("Noted! I've added this task:");
         System.out.println(task);
         System.out.println("Now you have " + numOfTasks + " task(s) in this list.");
     }
 
     /**
      * Prints the tasks with matching description.
-     * 
+     *
      * @param tasks the TaskList which contains the tasks with matching description.
      */
     public void printOnFind(TaskList tasks) {
-        System.out.println("Here are the matching tasks: ");
+        System.out.println("Here are the matching tasks:");
         int i = 0;
         for (Task t : tasks.getTaskList()) {
             if (t != null) {
@@ -133,7 +133,7 @@ public class Ui {
             } else {
                 break;
             }
-        }   
+        }
     }
-    
+
 }

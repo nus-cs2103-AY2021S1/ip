@@ -9,35 +9,35 @@ Hello! I'm PandaBot.
 What can I do for you?
 
  ___________________________________________________
-Noted! I've added this task: 
+Noted! I've added this task:
 [T][✘] read book
-Now you have 1 tasks in this list.
+Now you have 1 task(s) in this list.
  ___________________________________________________
  ___________________________________________________
-Noted! I've added this task: 
+Noted! I've added this task:
 [T][✘] return book
-Now you have 2 tasks in this list.
+Now you have 2 task(s) in this list.
  ___________________________________________________
  ___________________________________________________
-OOPS! Insufficient arguments given. What do you want me to do?
+OOPS! Insufficient arguments given. Make sure you give me all the details!
  ___________________________________________________
  ___________________________________________________
-Noted! I've added this task: 
+Noted! I've added this task:
 [D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
-Now you have 3 tasks in this list.
+Now you have 3 task(s) in this list.
  ___________________________________________________
  ___________________________________________________
-Noted! I've added this task: 
+Noted! I've added this task:
 [T][✘] buy bread
-Now you have 4 tasks in this list.
+Now you have 4 task(s) in this list.
  ___________________________________________________
  ___________________________________________________
-Noted! I've added this task: 
+Noted! I've added this task:
 [E][✘] project meeting (at: sun 4pm)
-Now you have 5 tasks in this list.
+Now you have 5 task(s) in this list.
  ___________________________________________________
  ___________________________________________________
-These are the task(s) you have: 
+These are the task(s) you have:
 1. [T][✘] read book
 2. [T][✘] return book
 3. [D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
@@ -56,7 +56,7 @@ Great! I've marked this task as done:
 [T][✓] return book
  ___________________________________________________
  ___________________________________________________
-These are the task(s) you have: 
+These are the task(s) you have:
 1. [T][✘] read book
 2. [T][✓] return book
 3. [D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
@@ -67,15 +67,15 @@ These are the task(s) you have:
 :c OOPS! The description of the Event cannot be empty.
  ___________________________________________________
  ___________________________________________________
-OOPS! Insufficient arguments given. What do you want me to do?
+OOPS! Insufficient arguments given. Make sure you give me all the details!
  ___________________________________________________
  ___________________________________________________
 Will do! I've removed this task:
 [T][✓] return book
-Now you have 4 tasks in this list.
+Now you have 4 task(s) in this list.
  ___________________________________________________
  ___________________________________________________
-These are the task(s) you have: 
+These are the task(s) you have:
 1. [T][✘] read book
 2. [D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
 3. [T][✓] buy bread
@@ -84,10 +84,10 @@ These are the task(s) you have:
  ___________________________________________________
 Will do! I've removed this task:
 [T][✓] buy bread
-Now you have 3 tasks in this list.
+Now you have 3 task(s) in this list.
  ___________________________________________________
  ___________________________________________________
-These are the task(s) you have: 
+These are the task(s) you have:
 1. [T][✘] read book
 2. [D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
 3. [E][✘] project meeting (at: sun 4pm)

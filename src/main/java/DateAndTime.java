@@ -11,9 +11,9 @@ public class DateAndTime {
     private final LocalTime time;
 
     /**
-     * Creates a DateAndTime object by taking in an input 
-     * of the format dd/mm/yyyy hhmm
-     * 
+     * Creates a DateAndTime object by taking in an input
+     * of the format dd/mm/yyyy hhmm.
+     *
      * @param date a String of the format dd/mm/yyyy
      * @param time a String of the format hhmm
      * @throws DateTimeParseException
@@ -22,7 +22,7 @@ public class DateAndTime {
         this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));
     }
-    
+
     private String parseDate(LocalDate input) {
         // Day of Month Counter
         String ending;
@@ -41,10 +41,9 @@ public class DateAndTime {
             ending = "th";
             break;
         }
-        
         return day + ending + " of " + date.format(DateTimeFormatter.ofPattern("MMMM yyyy"));
     }
-    
+
     private String parseTime(LocalTime input) {
         if (input.getMinute() == 0) {
             return time.format(DateTimeFormatter.ofPattern("ha"));
@@ -54,14 +53,13 @@ public class DateAndTime {
     }
 
     /**
-     * Returns a String representation of the DateAndTime object 
+     * Returns a String representation of the DateAndTime object
      * in the format date of month year, hour.min AM/PM.
-     * 
-      * @return a String representation of the DateAndTime object
-     */ 
+     *
+     * @return a String representation of the DateAndTime object
+     */
     @Override
     public String toString() {
         return parseDate(date) + ", " + parseTime(time);
     }
-    
 }

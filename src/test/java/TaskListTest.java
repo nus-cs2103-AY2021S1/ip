@@ -1,21 +1,21 @@
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
 public class TaskListTest {
-    
+
     @Test
-    public void addThreeTasksTest() {
+    public void addTask_addThreeTasks_successful() {
         //set up
         TaskList tasks = new TaskList(new ArrayList<>());
         try {
             Task a = new ToDo("a");
             Task b = new ToDo("b");
-            Task c= new ToDo("c");
-            
+            Task c = new ToDo("c");
+
             //add
             tasks.addTask(a);
             tasks.addTask(b);
@@ -27,19 +27,19 @@ public class TaskListTest {
         //test
         assertEquals(3, tasks.size());
     }
-    
+
     @Test
-    public void deleteTwoTasksThenAddOneSuccessfullyTest() {
+    public void deleteAndAddTask_deleteTwoTasksThenAddOneTask_successful() {
         //set up
         TaskList tasks = new TaskList(new ArrayList<>());
         try {
             Task a = new ToDo("a");
             Task b = new ToDo("b");
-            Task c= new ToDo("c");
+            Task c = new ToDo("c");
             tasks.addTask(a);
             tasks.addTask(b);
             tasks.addTask(c);
-            
+
             //delete and add
             tasks.deleteTask(0);
             tasks.deleteTask(1);
@@ -53,7 +53,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTaskOutOfRangeTest() {
+    public void deleteTask_taskOutOfRange_exceptionThrownAndNotDeleted() {
         //set up
         TaskList tasks = new TaskList(new ArrayList<>());
         try {
@@ -61,7 +61,7 @@ public class TaskListTest {
             Task b = new ToDo("b");
             tasks.addTask(a);
             tasks.addTask(b);
-            
+
             //delete
             tasks.deleteTask(4);
         } catch (PandaBotEmptyTaskDescriptionException | PandaBotOutOfRangeException e) {

@@ -2,7 +2,7 @@
  * Represents a type of PandaBotException which is thrown when a value is exceeds
  * the range of values available.
  */
-public class PandaBotOutOfRangeException extends PandaBotException{
+public class PandaBotOutOfRangeException extends PandaBotException {
 
     /**
      * Creates a new PandaBotOutOfRangeException object which

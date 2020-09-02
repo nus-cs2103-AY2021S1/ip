@@ -5,7 +5,7 @@ public class ToDo extends Task {
 
     /**
      * Creates a ToDo object.
-     * 
+     *
      * @param description the description of the ToDo task
      * @throws PandaBotEmptyTaskDescriptionException If the description given is empty
      */
@@ -24,7 +24,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns a String representation of the task for saving to the save file 
+     * Returns a String representation of the task for saving to the save file
      *
      * @return a String representation of the task for saving to the save file
      */

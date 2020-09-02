@@ -1,7 +1,7 @@
 import java.time.format.DateTimeParseException;
 
 /**
- * The Deadline class represents a Deadline task which needs to be 
+ * The Deadline class represents a Deadline task which needs to be
  * done before a specific time.
  */
 public class Deadline extends Task {
@@ -11,20 +11,18 @@ public class Deadline extends Task {
      * Creates a Deadline object.
      * It can accept both formatted and unformatted due dates.
      * Formatted due dates have to be in the format: dd/MM/yyyy HHmm
-     * 
+     *
      * @param description the description of the Deadline task
      * @param dueBy the due date and time of the Deadline task
      * @throws PandaBotException If the description or due date given is empty
      */
     public Deadline(String description, String dueBy) throws PandaBotException {
         super(description);
-        
         String input = dueBy.strip();
         // check if input is not empty
         if (input.length() == 0) {
             throw new PandaBotInsufficientArgumentException();
         }
-        
         // check if a formatted date and time is given
         String[] dT = input.split(" ");
         if (dT.length > 1) {
@@ -51,7 +49,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a String representation of the task for saving to the save file 
+     * Returns a String representation of the task for saving to the save file
      *
      * @return a String representation of the task for saving to the save file
      */

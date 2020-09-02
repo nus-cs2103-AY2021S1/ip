@@ -15,7 +15,7 @@ public class PandaBot {
         storage = new Storage(fileName);
         tasks = new TaskList(storage.load());
     }
-    
+
     /**
      * Runs the PandaBot program.
      */
@@ -41,7 +41,7 @@ public class PandaBot {
 
     /**
      * Executes the PandaBot program.
-     * 
+     *
      * @param args command line arguments
      */
     public static void main(String[] args) {

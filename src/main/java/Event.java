@@ -2,19 +2,19 @@
  * Represents an event which is a type of task that starts at a specific time
  * and ends at a specific time
  */
-public class Event extends Task{
+public class Event extends Task {
     private String duration;
 
     /**
      * Creates an Event object.
-     * 
+     *
      * @param description the description of the Event task
      * @param duration the duration of the Event task
      * @throws PandaBotException If description or duration given is empty
      */
     public Event(String description, String duration) throws PandaBotException {
         super(description);
-        
+
         String d = duration.strip();
         // check if the duration is not empty
         if (d.length() == 0) {
@@ -35,7 +35,7 @@ public class Event extends Task{
     }
 
     /**
-     * Returns a String representation of the task for saving to the save file 
+     * Returns a String representation of the task for saving to the save file
      *
      * @return a String representation of the task for saving to the save file
      */

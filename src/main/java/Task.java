@@ -8,7 +8,7 @@ public abstract class Task {
 
     /**
      * Creates a Task object with the given description.
-     * 
+     *
      * @param description the description of the task
      * @throws PandaBotEmptyTaskDescriptionException If the description given is empty
      */
@@ -17,27 +17,27 @@ public abstract class Task {
         if (this.description.length() == 0) {
             throw new PandaBotEmptyTaskDescriptionException(this.getClass().getSimpleName());
         }
-        
+
         isDone = false;
     }
 
     /**
-     * Returns a String that represents a status icon 
+     * Returns a String that represents a status icon
      * which marks whether the task is done
-     * 
-     * @return a String that represents a status icon which marks whether the task is done 
+     *
+     * @return a String that represents a status icon which marks whether the task is done
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
-    
+
     public String getDescription() {
         return description;
     }
 
     /**
      * Returns a String representation of the task that is displayed to the user
-     * 
+     *
      * @return a String Representation of the task that is displayed to the user
      */
     @Override
@@ -46,8 +46,8 @@ public abstract class Task {
     }
 
     /**
-     * Returns a String representation of the task for saving to the save file 
-     * 
+     * Returns a String representation of the task for saving to the save file
+     *
      * @return a String representation of the task for saving to the save file
      */
     public String saveAsText() {

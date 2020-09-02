@@ -16,7 +16,7 @@ public class Storage {
     /**
      * Creates a Storage object, which is used to load and save tasks
      * into a save file.
-     * 
+     *
      * @param fileName the name of the save file
      */
     public Storage(String fileName) {
@@ -24,7 +24,7 @@ public class Storage {
 
         Path dirPath = Paths.get(home, "PandaBot");
         boolean directoryExists = Files.exists(dirPath);
-        
+
         // create a dir for save files to be saved in
         if (!directoryExists) {
             try {
@@ -33,10 +33,10 @@ public class Storage {
                 e.printStackTrace();
             }
         }
-        
+
         Path saveFilePath = Paths.get(home, "PandaBot", fileName);
         boolean saveFileExists = Files.exists(saveFilePath);
-        
+
         // create a save file where the data will be written to
         if (!saveFileExists) {
             try {
@@ -45,13 +45,13 @@ public class Storage {
                 e.printStackTrace();
             }
         }
-        
+
         this.saveFilePath = saveFilePath;
     }
 
     /**
      * Loads contents from the save file into an ArrayList of Task.
-     * 
+     *
      * @return a list of tasks as an ArrayList
      */
     public ArrayList<Task> load() {
@@ -61,14 +61,14 @@ public class Storage {
             loadTask(tasks, reader);
             reader.close();
         } catch (IOException e) {
-            System.out.println("OOPS! :c There was an error in reading save file: " + e.getMessage() + "\n" 
+            System.out.println("OOPS! :c There was an error in reading save file: " + e.getMessage() + "\n"
                                 + "I'll get you a new save file!");
             tasks = new ArrayList<>();
         }
-        
+
         return tasks;
     }
-    
+
     private void loadTask(ArrayList<Task> tasks, BufferedReader reader) throws IOException {
         String task;
         while ((task = reader.readLine()) != null) {
@@ -80,8 +80,8 @@ public class Storage {
             }
         }
     }
-    
-    private Task convertToTask(String input) throws PandaBotException{
+
+    private Task convertToTask(String input) throws PandaBotException {
         String[] tDes = input.split(" \\| ");
         Task task;
         switch (tDes[0]) {
@@ -97,34 +97,34 @@ public class Storage {
         default:
             throw new PandaBotLoadingTasksErrorException(input);
         }
-        
+
         // update the done status
         String isDone = tDes[1];
         if (isDone.equals("1")) {
             task.markTaskDone();
         }
-        
+
         return task;
     }
 
     /**
      * Writes each task in the list of tasks into the save file.
-     * 
+     *
      * @param tasks the ArrayList of tasks to be written and saved
      */
     public void write(ArrayList<Task> tasks) {
         try {
             BufferedWriter writer = Files.newBufferedWriter(saveFilePath);
-             for (Task t : tasks) {
-                 writer.write(t.saveAsText());
-                 writer.newLine();
-             }
-             writer.flush();
-             writer.close();
+            for (Task t : tasks) {
+                writer.write(t.saveAsText());
+                writer.newLine();
+            }
+            writer.flush();
+            writer.close();
         } catch (IOException e) {
-            System.out.println("OOPS! :c There is an error in trying to write to the save file." 
+            System.out.println("OOPS! :c There is an error in trying to write to the save file."
                                 + "I can't save the entire list of tasks here.");
         }
     }
-    
+
 }
