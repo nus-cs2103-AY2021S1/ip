@@ -14,18 +14,8 @@ import duke.task.ToDo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-/**
- * Represents the part of Duke that deals with making sense of the user command.
- */
 public class Parser {
 
-    /**
-     * Parses the command given by the user so that Duke can execute it.
-     *
-     * @param fullCommand the command given by the user.
-     * @return the command interpreted by Duke from the command given by the user.
-     * @throws DukeException if the command given by the user is invalid.
-     */
     public static Command parse(String fullCommand) throws DukeException {
         fullCommand = fullCommand.strip().replaceAll("\\s+", " ");
         String[] splitCommands = fullCommand.split(" ", 2);
