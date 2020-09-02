@@ -6,7 +6,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private void welcome(){
+    public void welcome(){
         String logo =   "_|_|_|_|_|    _|_|                _|_|_|      _|_|     _|  \n" +
                         "    _|      _|    _|              _|    _|  _|    _|   _|  \n" +
                         "    _|      _|    _|  _|_|_|_|_|  _|    _|  _|    _|   _|  \n" +
@@ -22,21 +22,14 @@ public class Ui {
      * @param parser a parser used to parse incoming commands
      * @return the User interface itself
      */
-    public Ui read(Parser parser){
-        welcome();
-        Scanner sc = new Scanner(System.in);
+    public String read(String input, Parser parser){
         Command command = Command.INIT;
-        while (command != Command.BYE){      //when last command was bye
-            System.out.print("> ");
-            command = Command.getCommand(sc.nextLine());
-            try {
-                parser.runCommand(command);
-            } catch (Exception e){
-                showExceptionContent(e.getMessage());
-            }
+        command = Command.getCommand(input);
+        try {
+            return parser.runCommand(command);
+        } catch (Exception e){
+            return showExceptionContent(e.getMessage());
         }
-        sc.close();
-        return this;
     }
 
     /**
@@ -44,23 +37,34 @@ public class Ui {
      *
      * @param todoList a list contains all the tasks
      */
-    static public void printList(ArrayList<Task> todoList){
+    static public String printList(ArrayList<Task> todoList){
+        if (todoList.size() == 0)
+            return "There is no task in your list now.";
+        String tmp="";
         for (int i = 0; i < todoList.size(); i++){
             Task task = todoList.get(i);
             if (task.checkDone())
-                print(i+1 + ".["+task.getTaskType()+"][X] " + task.toString());
+                tmp = tmp + print(i+1 + ".["+task.getTaskType()+"][X] " + task.toString());
             else
-                print(i+1 + ".["+task.getTaskType()+"][ ] " + task.toString());
+                tmp = tmp + print(i+1 + ".["+task.getTaskType()+"][ ] " + task.toString())+ "\n";
         }
+
+        return tmp;
     }
 
-    static public void print(String str){
-        for (String s:str.split("\n"))
+    static public String print(String str){
+        String tmp = "";
+
+        for (String s:str.split("\n")) {
+            tmp = tmp + s + "\n";
             System.out.println("    " + s);
+        }
+
+        return tmp;
     }
 
-    public void showExceptionContent(String err){
-        print(err);
+    public String showExceptionContent(String err){
+        return print(err);
     }
 
     /**
@@ -70,11 +74,12 @@ public class Ui {
      * @param size total number of tasks left in the list
      * @param undoneCount number of tasks in the list that has not been done.
      */
-    static public void printTodoTask(String taskContent, int size, int undoneCount){
-        Ui.print("The following task has been added to your list:");
-        Ui.print("  [T][ ] " + taskContent);
-        Ui.print(String.format("Now you have %d tasks in your list.", size));
-        Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount));
+    static public String printTodoTask(String taskContent, int size, int undoneCount){
+
+        return (Ui.print("The following task has been added to your list:")+
+        Ui.print("  [T][ ] " + taskContent)+
+        Ui.print(String.format("Now you have %d tasks in your list.", size))+
+        Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount)));
     }
 
     /**
@@ -84,11 +89,11 @@ public class Ui {
      * @param size total number of tasks left in the list
      * @param undoneCount number of tasks in the list that has not been done.
      */
-    static public void printDeadlineTask(String taskContent, int size, int undoneCount){
-        Ui.print("The following task has been added to your list:");
-        Ui.print("  [D][ ] " + taskContent);
-        Ui.print(String.format("Now you have %d tasks in your list.", size));
-        Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount));
+    static public String printDeadlineTask(String taskContent, int size, int undoneCount){
+        return (Ui.print("The following task has been added to your list:")+
+        Ui.print("  [D][ ] " + taskContent)+
+        Ui.print(String.format("Now you have %d tasks in your list.", size))+
+        Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount)));
     }
 
     /**
@@ -98,11 +103,11 @@ public class Ui {
      * @param size total number of tasks left in the list
      * @param undoneCount number of tasks in the list that has not been done.
      */
-    static public void printEventTask(String taskContent, int size, int undoneCount){
-        Ui.print("The following task has been added to your list:");
-        Ui.print("  [E][ ] " + taskContent);
-        Ui.print(String.format("Now you have %d tasks in your list.", size));
-        Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount));
+    static public String printEventTask(String taskContent, int size, int undoneCount){
+        return (Ui.print("The following task has been added to your list:")+
+        Ui.print("  [E][ ] " + taskContent)+
+        Ui.print(String.format("Now you have %d tasks in your list.", size))+
+        Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount)));
     }
 
     /**
@@ -111,13 +116,13 @@ public class Ui {
      * @param task the deleted task
      * @param undoneCount number of tasks in the list that has not been done.
      */
-    static public void printDelete(Task task, int undoneCount) {
-        Ui.print("Nice! I've deleted following task:");
+    static public String printDelete(Task task, int undoneCount) {
+        String tmp = Ui.print("Nice! I've deleted following task:");
         if (task.checkDone())
-            Ui.print("  ["+task.getTaskType()+"][X] " + task.toString());
+            tmp = tmp + Ui.print("  ["+task.getTaskType()+"][X] " + task.toString());
         else
-            Ui.print("  ["+task.getTaskType()+"][ ] " + task.toString());
-        Ui.print(String.format("Now you have %d tasks waiting to be done.", undoneCount));
+            tmp = tmp +Ui.print("  ["+task.getTaskType()+"][ ] " + task.toString());
+        return (tmp + Ui.print(String.format("Now you have %d tasks waiting to be done.", undoneCount)));
     }
 
     /**
@@ -126,23 +131,24 @@ public class Ui {
      * @param task the finished task
      * @param undoneCount number of tasks in the list that has not been done.
      */
-    static public void printDone(Task task, int undoneCount) {
-        Ui.print("Nice! I've marked following task as done:");
+    static public String printDone(Task task, int undoneCount) {
+        String tmp = Ui.print("Nice! I've marked following task as done:");
         if (task.checkDone())
-            Ui.print("  ["+task.getTaskType()+"][X] " + task.toString());
+            tmp = tmp + Ui.print("  ["+task.getTaskType()+"][X] " + task.toString());
         else
-            Ui.print("  ["+task.getTaskType()+"][ ] " + task.toString());
-        Ui.print(String.format("Now you have %d tasks waiting to be done.", undoneCount));
+            tmp = tmp + Ui.print("  ["+task.getTaskType()+"][ ] " + task.toString());
+        return (tmp + Ui.print(String.format("Now you have %d tasks waiting to be done.", undoneCount)));
     }
 
-    static public void printFind(ArrayList<Task> allMatches){
-        Ui.print("Here are the matching tasks in your list:");
+    static public String printFind(ArrayList<Task> allMatches){
+        String tmp = Ui.print("Here are the matching tasks in your list:");
         for (int i = 0; i < allMatches.size(); i++){
             Task task = allMatches.get(i);
             if (task.checkDone())
-                Ui.print(String.format("%d.[", i+1)+task.getTaskType()+"][X] " + task.toString());
+                tmp = tmp + Ui.print(String.format("%d.[", i+1)+task.getTaskType()+"][X] " + task.toString());
             else
-                Ui.print(String.format("%d.[", i+1)+task.getTaskType()+"][ ] " + task.toString());
+                tmp = tmp + Ui.print(String.format("%d.[", i+1)+task.getTaskType()+"][ ] " + task.toString());
         }
+        return tmp;
     }
 }

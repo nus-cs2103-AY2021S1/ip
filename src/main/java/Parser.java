@@ -14,40 +14,32 @@ public class Parser {
      * @throws DukeException an DukeException that stores the information to be printed
      * @throws Exception
      */
-    public void runCommand(Command command) throws DukeException, Exception{
+    public String runCommand(Command command) throws DukeException, Exception{
         Task task;
         ArrayList<Task> allTasks;
         switch (command) {
             case BYE:
-                Ui.print("Bye. Hope to see you again soon!");
-                break;
+                return (Ui.print("Bye. Hope to see you again soon!"));
             case LIST:
-                Ui.printList(taskList.getTodoList());
-                break;
+                return (Ui.printList(taskList.getTodoList()));
             case TODO:
                 task = parseTodoTask(command.getTaskContent());
-                Ui.printTodoTask(task.toString(), taskList.getSize(), taskList.getUndoneCount());
-                break;
+                return (Ui.printTodoTask(task.toString(), taskList.getSize(), taskList.getUndoneCount()));
             case DEADLINE:
                 task = parseDeadlineTask(command.getTaskContent());
-                Ui.printDeadlineTask(task.toString(), taskList.getSize(), taskList.getUndoneCount());
-                break;
+                return (Ui.printDeadlineTask(task.toString(), taskList.getSize(), taskList.getUndoneCount()));
             case EVENT:
                 task = parseEventTask(command.getTaskContent());
-                Ui.printEventTask(task.toString(), taskList.getSize(), taskList.getUndoneCount());
-                break;
+                return (Ui.printEventTask(task.toString(), taskList.getSize(), taskList.getUndoneCount()));
             case DONE:
                 task = parseDone(command.getTaskContent());
-                Ui.printDelete(task, taskList.getUndoneCount());
-                break;
+                return (Ui.printDelete(task, taskList.getUndoneCount()));
             case DELETE:
                 task = parseDelete(command.getTaskContent());
-                Ui.printDelete(task, taskList.getUndoneCount());
-                break;
+                return (Ui.printDelete(task, taskList.getUndoneCount()));
             case FIND:
                 allTasks = parseFind(command.getTaskContent());
-                Ui.printFind(allTasks);
-                break;
+                return (Ui.printFind(allTasks));
             case INVALID:
                 throw new CommandException(command.echo() + " is an invalid command.\n"+
                         "please try another one.");
