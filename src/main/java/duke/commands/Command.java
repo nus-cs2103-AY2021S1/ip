@@ -35,6 +35,7 @@ public class Command {
 
     /**
      * Executes the command and returns the result.
+     * @return return a command result after execution
      */
     public CommandResult execute() {
         throw new UnsupportedOperationException("This method is to be implemented by child classes");
@@ -42,6 +43,7 @@ public class Command {
 
     /**
      * Supplies the data the command will operate on.
+     * @param duke duke object which requires to set data
      */
     public void setData(Duke duke) {
         this.duke = duke;

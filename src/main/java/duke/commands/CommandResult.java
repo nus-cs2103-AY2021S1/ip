@@ -21,7 +21,7 @@ public class CommandResult {
 
     /**
      * Constructor for command result with feedback to user
-     * @param feedbackToUser
+     * @param feedbackToUser message to the user
      */
     public CommandResult(String feedbackToUser) {
         this.feedbackToUser = feedbackToUser;
@@ -30,8 +30,8 @@ public class CommandResult {
 
     /**
      * Constructor for command result with feedback to user and list of relevant tasks
-     * @param feedbackToUser
-     * @param relevantTasks
+     * @param feedbackToUser message to the user
+     * @param relevantTasks relevant tasks list
      */
     public CommandResult(String feedbackToUser, List<Task> relevantTasks) {
         this.feedbackToUser = feedbackToUser;
@@ -40,6 +40,7 @@ public class CommandResult {
 
     /**
      * Returns a list of tasks relevant to the command command result, if any.
+     * @return return a list of tasks which may be empty
      */
     public Optional<List<Task>> getRelevantTasks() {
         return Optional.ofNullable(relevantTasks);

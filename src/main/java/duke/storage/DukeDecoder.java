@@ -24,6 +24,8 @@ public class DukeDecoder {
     /**
      * Decodes {@code encodedDuke} into an {@code Duke} containing the decoded
      * tasks.
+     * @param encodedDuke A list of string that is encoded
+     * @return Duke duke object which is decoded
      *
      * @throws IllegalValueException     if any of the fields in any encoded task
      *                                   string is invalid.

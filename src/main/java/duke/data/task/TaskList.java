@@ -31,6 +31,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Constructs a shallow copy of the list.
+     * @param source the source of the task list
      */
     public TaskList(TaskList source) {
         internalList.addAll(source.internalList);
@@ -40,6 +41,7 @@ public class TaskList implements Iterable<Task> {
      * Returns an unmodifiable java List view with elements cast as immutable {@link Task}s.
      * For use with other methods/libraries.
      * Any changes to the internal list/elements are immediately visible in the returned list.
+     * @return a list of task that is immmutable.
      */
     public List<Task> immutableListView() {
         return Collections.unmodifiableList(internalList);
@@ -49,6 +51,8 @@ public class TaskList implements Iterable<Task> {
      * Returns an unmodifiable java List view with elements cast as immutable {@link Task}s.
      * For use with other methods/libraries.
      * Any changes to the internal list/elements are immediately visible in the returned list.
+     * @param searchString String to be searched in the task
+     * @return a list of tasks that is filtered
      */
     public List<Task> filteredView(String searchString) {
         List<Task> filteredList = internalList
@@ -60,6 +64,8 @@ public class TaskList implements Iterable<Task> {
     /**
      * Checks if the list contains an equivalent person as the given argument.
      * defines a weaker notion of equality.
+     * @param toCheck the task to be check
+     * @return return true if the list contains the task
      */
     public boolean contains(Task toCheck) {
         for (Task p : internalList) {
@@ -73,6 +79,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Adds a task to the list.
+     * @param task task to be added
      */
     public void add(Task task) {
         internalList.add(task);
@@ -80,11 +87,11 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Removes the equivalent task from the list.
-     *
+     * @param index index to remove the task
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
-    public void remove(int toRemove) throws TaskNotFoundException {
-        final Task taskNotFound = internalList.remove(toRemove);
+    public void remove(int index) throws TaskNotFoundException {
+        final Task taskNotFound = internalList.remove(index);
         if (taskNotFound == null) {
             throw new TaskNotFoundException();
         }
@@ -93,6 +100,7 @@ public class TaskList implements Iterable<Task> {
     /**
      * Gets the task at a certain index from the list.
      * @param index index of the task
+     * @return return a task
      */
     public Task getTask(int index) {
         return internalList.get(index - 1);

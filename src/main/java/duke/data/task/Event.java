@@ -8,17 +8,17 @@ import java.time.format.DateTimeFormatter;
  *
  */
 public class Event extends Task {
-    private LocalDateTime dueDate;
+    private LocalDateTime eventDate;
 
     /**
      * Constructor for event with description and duedate
-     * @param description
-     * @param dueDate
+     * @param description description of the event
+     * @param eventDate duedate of the event
      */
-    public Event(String description, String dueDate) {
+    public Event(String description, String eventDate) {
         this.description = description;
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        this.dueDate = LocalDateTime.parse(dueDate, dateFormat);
+        this.eventDate = LocalDateTime.parse(eventDate, dateFormat);
     }
 
     /**
@@ -27,11 +27,11 @@ public class Event extends Task {
      */
     public String toString() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        return "[E]" + super.toString() + "(at: " + dueDate.format(dateFormat) + ")";
+        return "[E]" + super.toString() + "(at: " + eventDate.format(dateFormat) + ")";
     }
 
-    public LocalDateTime getDueDate() {
-        return dueDate;
+    public LocalDateTime getEventDate() {
+        return eventDate;
     }
 
     /**
@@ -40,6 +40,6 @@ public class Event extends Task {
      */
     public String toWriteString() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return "E " + super.toWriteString() + " | " + dueDate.format(dateFormat);
+        return "E " + super.toWriteString() + " | " + eventDate.format(dateFormat);
     }
 }

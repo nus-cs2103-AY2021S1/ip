@@ -36,7 +36,7 @@ public class Duke {
 
     /**
      * Sets the storage file for duke.
-     * @peram storageFile storageFile which is the own storage file
+     * @param storageFile storageFile which is the own storage file
      * @return return the duke object
      */
     public Duke setStorageFile(StorageFile storageFile) {
@@ -56,6 +56,7 @@ public class Duke {
     /**
      * Marks the task in the list done.
      * @param index index of the task to be mark done
+     * @return Return task which is mark done
      */
     public Task markDone(int index) {
         taskList.getTask(index).markAsDone();
@@ -64,22 +65,27 @@ public class Duke {
 
     /**
      * Returns true if an equivalent task exists in the task list.
+     * @param task check if the task contains the task
+     * @return True if the list contains the task
      */
-    public boolean containsTask(Task key) {
-        return taskList.contains(key);
+    public boolean containsTask(Task task) {
+        return taskList.contains(task);
     }
 
     /**
      * Removes the equivalent task from the task list.
-     * @poram toRemove index of the task to be removed
+     *
+     * @param index index of the task to be removed
+     * @throws TaskNotFoundException task cannot be found
      */
-    public void removeTask(int toRemove) throws TaskNotFoundException {
-        taskList.remove(toRemove - 1);
+    public void removeTask(int index) throws TaskNotFoundException {
+        taskList.remove(index - 1);
     }
 
     /**
      * Returns a new UniqueTaskList of all tasks in the task list at the time of
      * the call.
+     * @return the list of task that is immutable
      */
     public TaskList getTaskList() {
         return taskList;
@@ -101,6 +107,7 @@ public class Duke {
      *
      * @param input an user input
      * @return return a response to the user
+     * @throws StorageOperationException error occur when executing storage operation
      */
     public String getResponse(String input) throws StorageOperationException {
         Command command = new Parser().parseCommand(input);

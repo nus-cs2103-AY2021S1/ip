@@ -13,6 +13,10 @@ public class DukeEncoder {
     /**
      * Encodes all the {@code Task} in the {@code toSave} into a list of decodable
      * and readable string presentation for storage.
+     *
+     * @param toSave the duke object that is required to save
+     *
+     * @return a list of strings that is encoded
      */
     public static List<String> encodeDuke(Duke toSave) {
         final List<String> encodedTasks = new ArrayList<>();

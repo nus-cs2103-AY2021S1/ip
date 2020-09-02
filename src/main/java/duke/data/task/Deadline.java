@@ -13,8 +13,8 @@ public class Deadline extends Task {
 
     /**
      * Constructor for deadline with description and dueDate
-     * @param description
-     * @param dueDate
+     * @param description description of deadline
+     * @param dueDate duedate of the deadline task
      */
     public Deadline(String description, String dueDate) {
         this.description = description;

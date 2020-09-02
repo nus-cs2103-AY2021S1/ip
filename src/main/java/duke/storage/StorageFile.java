@@ -33,6 +33,9 @@ public class StorageFile {
     }
 
     /**
+     * Constructor for storagefile
+     *
+     * @param filePath File path to save the file
      * @throws InvalidStorageFilePathException if the given file path is invalid
      */
     public StorageFile(String filePath) throws InvalidStorageFilePathException {
@@ -52,7 +55,7 @@ public class StorageFile {
 
     /**
      * Saves the {@code addressBook} data to the storage file.
-     *
+     * @param duke Duke object that is to be saved
      * @throws StorageOperationException if there were errors converting and/or
      *                                   storing data to file.
      */
@@ -81,6 +84,7 @@ public class StorageFile {
      * Returns an empty {@code Duke} if the file does not exist, or is not a regular
      * file.
      *
+     * @return Duke object that is loaded
      * @throws StorageOperationException if there were errors reading and/or
      *                                   converting data from file.
      */
