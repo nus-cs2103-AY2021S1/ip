@@ -34,7 +34,7 @@ public class Rogue {
         try {
             tasks = new TaskList(storage.load());
         } catch (StorageException e) {
-            ui.print(e.getMessage());
+            // TBD: should let user know that file is not loaded successfully.
             tasks = new TaskList();
         }
         ui = new Ui();
