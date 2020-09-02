@@ -75,6 +75,10 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        final double minHeight = 600.0;
+        final double minWidth = 400.0;
+        final double anchorValue = 1.0;
+
         //Step 1. Formatting the window to look as expected.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -94,8 +98,8 @@ public class Duke extends Application {
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(minHeight);
+        stage.setMinWidth(minWidth);
 
         mainLayout.setPrefSize(400.0, 600.0);
 
@@ -112,13 +116,13 @@ public class Duke extends Application {
 
         sendButton.setPrefWidth(55.0);
 
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setTopAnchor(scrollPane, anchorValue);
 
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, anchorValue);
+        AnchorPane.setRightAnchor(sendButton, anchorValue);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        AnchorPane.setLeftAnchor(userInput , anchorValue);
+        AnchorPane.setBottomAnchor(userInput, anchorValue);
 
         welcomeMessage();
 

@@ -1,6 +1,6 @@
 package duke.storage;
 
-import ui.Ui;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,8 +14,6 @@ import java.io.IOException;
 
 public class Storage {
     public String filePath;
-
-    public final static String FILEPATH = System.getProperty("user.dir") + "/duke.txt";
 
     public Storage(String filePath) {
         this.filePath = filePath;

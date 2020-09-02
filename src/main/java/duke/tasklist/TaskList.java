@@ -67,7 +67,8 @@ public class TaskList {
                         throw new EmptyEventsException();
                     }
                     int start = fullCommand.indexOf("/at");
-                    String date = fullCommand.substring(start + 4);
+                    int commandSubstring = start + 4;
+                    String date = fullCommand.substring(commandSubstring);
                     LocalDate d = LocalDate.parse(date);
                     String formattedDate = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
@@ -86,7 +87,8 @@ public class TaskList {
                     }
 
                     int start = fullCommand.indexOf("/by");
-                    String date = fullCommand.substring(start + 4);
+                    int commandSubstring = start + 4;
+                    String date = fullCommand.substring(commandSubstring);
                     LocalDate d = LocalDate.parse(date);
                     String formattedDate = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
