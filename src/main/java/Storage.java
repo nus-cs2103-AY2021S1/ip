@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class TaskSaver {
+public class Storage {
     private Path savePath;
 
-    TaskSaver (Path savePath) {
+    Storage(Path savePath) {
         this.savePath = savePath;
     }
 
-    public void save(List<Task> taskList) {
+    public void save(TaskList taskList) {
         File saveFile = savePath.toFile();
         try {
             if (!saveFile.exists()) {
@@ -23,7 +23,8 @@ public class TaskSaver {
                 saveFile.createNewFile();
             }
             FileWriter writer = new FileWriter(saveFile);
-            for (Task task : taskList) {
+            List<Task> tasks = taskList.getTasks();
+            for (Task task : tasks) {
                 writer.append(task.toSaveFormat() + "\n");
             }
             writer.close();
