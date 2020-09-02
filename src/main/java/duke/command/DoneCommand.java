@@ -31,7 +31,7 @@ public class DoneCommand extends Command {
      * @throws DukeException If the user-specified task index is not an Integer or not found in the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (super.isFirstIndexEmpty()) {
             throw new DukeException("Oops, please enter a task number after your command!");
         }
@@ -43,11 +43,11 @@ public class DoneCommand extends Command {
             }
             Task taskToMarkDone = tasks.getTask(taskNumber - 1);
             taskToMarkDone.markDone();
-            ui.showDone(taskToMarkDone);
+            storage.write(tasks);
+            return ui.showDone(taskToMarkDone);
         } catch (NumberFormatException e) {
             throw new DukeException("Task Number to mark done must be an Integer!");
         }
-        storage.write(tasks);
     }
 }
 

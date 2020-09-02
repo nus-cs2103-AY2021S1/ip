@@ -27,7 +27,7 @@ public class ListCommand extends Command {
      * @param storage Represents the logic needed to write to an user-specified file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printList(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printList(tasks);
     }
 }

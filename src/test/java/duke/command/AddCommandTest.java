@@ -1,14 +1,15 @@
 package duke.command;
-
-import duke.DukeException;
-import duke.task.Task;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
+import duke.task.Task;
+
 
 class AddCommandTest {
 
@@ -27,12 +28,12 @@ class AddCommandTest {
     @Test
     public void processTask_deadlineTask_success() {
         try {
-            Task myReturnedTask = new AddCommand(new String[]{"deadline", "return", "book",
-                    "/by", "2022-08-26", "1800" }).processTask("/by", "deadline");
+            Task myReturnedTask = new AddCommand(new String[]{"deadline", "return", "book", "/by", "2022-08-26", "1800"
+            }).processTask("/by", "deadline");
             assertNotNull(myReturnedTask); //check if the object is != null
             //check if the returned object is of class Task
             assertTrue(myReturnedTask instanceof Task);
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             // let the test fail, if the function throws a Duke Exception.
             fail("Got Duke Exception");
         }
@@ -41,13 +42,12 @@ class AddCommandTest {
     @Test
     public void processTask_deadlineNoDate_exceptionThrown() {
         try {
-            Task myReturnedTask = new AddCommand(new String[]{"deadline", "return", "book",
-                    "/by" }).processTask("/by", "deadline");
+            Task myReturnedTask = new AddCommand(new String[]{"deadline", "return", "book", "/by" })
+                    .processTask("/by", "deadline");
             fail(); // the test should not reach this line
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             assertEquals("All deadline/event tasks must come with a date in yyyy-mm-dd format!",
                     e.getMessage());
         }
     }
-
 }

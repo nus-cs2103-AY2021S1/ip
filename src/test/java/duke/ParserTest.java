@@ -1,13 +1,14 @@
 package duke;
 
-import duke.command.Command;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.command.Command;
 
 class ParserTest {
 
@@ -30,7 +31,7 @@ class ParserTest {
             assertNotNull(myReturnedTask); //check if the object is != null
             //check if the returned object is of class Task
             assertTrue(myReturnedTask instanceof Command);
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             // let the test fail, if the function throws a Duke Exception.
             fail("Got Duke Exception");
         }
@@ -41,7 +42,7 @@ class ParserTest {
         try {
             Command myReturnedTask = new Parser("").parse();
             fail(); // the test should not reach this line
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             assertEquals("Your Input String cannot be Empty!", e.getMessage());
         }
     }
@@ -51,7 +52,7 @@ class ParserTest {
         try {
             Command myReturnedTask = new Parser("yo").parse();
             fail(); // the test should not reach this line
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             assertEquals("Your Input Command is not Recognized!", e.getMessage());
         }
     }

@@ -34,12 +34,12 @@ public class FindCommand extends Command {
      * @throws DukeException If find command is not followed by any keyword.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (super.isFirstIndexEmpty()) {
             throw new DukeException("Oops, please enter a keyword after your command!");
         }
         String keyword = Arrays.stream(getArray()).skip(1).collect(Collectors.joining(" "));
-        ui.printMatches(tasks.findTask(keyword));
+        return ui.printMatches(tasks.findTask(keyword));
     }
 
 }

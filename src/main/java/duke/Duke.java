@@ -8,14 +8,18 @@ import duke.task.TaskList;
  */
 public class Duke {
 
+    /** Handles all User Interaction elements of the chat-bot. */
+    protected Ui ui;
+
+    /** Determines if user has been greeted. */
+    private boolean isWelcome;
+
     /** Handles any read/write requests. */
     private Storage storage;
 
     /** Container for the storage of tasks. */
     private TaskList tasks;
 
-    /** Handles all User Interaction elements of the chat-bot. */
-    private Ui ui;
 
     /**
      * Loads tasks into a task list from a local file that is read in based on an user-specified filepath.
@@ -28,7 +32,7 @@ public class Duke {
         try {
             tasks = storage.load();
         } catch (DukeException e) {
-            ui.showLoadingError();
+            System.out.println(ui.showLoadingError());
             tasks = new TaskList();
         }
     }
@@ -38,27 +42,58 @@ public class Duke {
      * Exits only when an ExitCommand is generated based on user input.
      */
     public void run() {
-        ui.showWelcome();
+        System.out.println(ui.showWelcome());
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = new Parser(fullCommand).parse();
-                c.execute(tasks, ui, storage);
+                String returnString = c.execute(tasks, ui, storage);
+                if (returnString != null) {
+                    System.out.println(returnString);
+                }
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                System.out.println(ui.showError(e.getMessage()));
             }
         }
+        System.out.println("Goodbye! Hope you have a great one!");
 
     }
 
     /**
-     * Represents the entry point for the application.
+     * Takes in user input, parses the input and executes the correct command to process the tasks.
+     * Runs the program GUI.
+     * Exits only when an ExitCommand is generated based on user input.
      *
-     * @param args An array of command-line arguments for the application
+     * @param input The User input in the form of a string.
+     * @return The response to the user based on the user input.
      */
+    public String run(String input) {
+        ui.showWelcome();
+        try {
+            Command c = new Parser(input).parse();
+            if (!c.isExit()) {
+                return c.execute(tasks, ui, storage);
+            }
+        } catch (DukeException e) {
+            return (ui.showError(e.getMessage()));
+        }
+        return "Thanks for using me! Goodbye!";
+    }
+
+    /**
+     * Generate a response to user input.
+     *
+     * @param input User input.
+     * @return The response to the user input.
+     */
+    String getResponse(String input) {
+        return new Duke("data/tasks.txt").run(input);
+    }
+
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
+
 }

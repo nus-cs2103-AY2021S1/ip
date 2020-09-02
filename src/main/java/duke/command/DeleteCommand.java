@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException If the user-specified task index is not an Integer or not found in the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (super.isFirstIndexEmpty()) {
             throw new DukeException("Oops, please enter a task number after your command!");
         }
@@ -43,10 +43,10 @@ public class DeleteCommand extends Command {
             }
             Task taskToDelete = tasks.getTask(taskNumber - 1);
             tasks.deleteTask(taskNumber - 1);
-            ui.showDelete(tasks, taskToDelete);
+            storage.write(tasks);
+            return ui.showDelete(tasks, taskToDelete);
         } catch (NumberFormatException e) {
             throw new DukeException("Task Number to delete must be an Integer!");
         }
-        storage.write(tasks);
     }
 }
