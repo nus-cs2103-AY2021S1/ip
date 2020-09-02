@@ -4,7 +4,7 @@ import rogue.logic.directives.FindDirective;
 
 import rogue.commons.util.StringUtil;
 
-import rogue.commons.exceptions.IncorrectArgumentException;
+import rogue.logic.exceptions.IncorrectArgumentException;
 
 /**
  * Parses user inputs into a {@code FindDirective}.

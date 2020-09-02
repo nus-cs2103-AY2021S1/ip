@@ -10,7 +10,7 @@ import rogue.storage.exceptions.StorageException;
 
 import rogue.ui.Ui;
 
-import rogue.commons.exceptions.IncorrectArgumentException;
+import rogue.logic.exceptions.IncorrectArgumentException;
 
 /**
  * Deletes a {@code Task} from the {@code TaskList}.

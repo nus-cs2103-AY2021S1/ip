@@ -5,27 +5,27 @@ package rogue.logic;
  * May contain messages for success, errors, or other miscellaneous information.
  */
 public class Report {
-    private final String description;
+    private final String message;
     private final boolean isExit;
 
     /**
      * Constructs a {@code Report}.
      *
-     * @param description The main content of the report.
+     * @param message The main content of the report.
      */
-    public Report(String description) {
-        this.description = description;
+    public Report(String message) {
+        this.message = message;
         this.isExit = false;
     }
 
     /**
      * Constructs a {@code Report}.
      *
-     * @param description   The main content of the report.
-     * @param isExit        Indicates whether {@code Rogue} should exit.
+     * @param message   The main content of the report.
+     * @param isExit    Indicates whether {@code Rogue} should exit.
      */
-    public Report(String description, boolean isExit) {
-        this.description = description;
+    public Report(String message, boolean isExit) {
+        this.message = message;
         this.isExit = isExit;
     }
 
@@ -35,6 +35,6 @@ public class Report {
 
     @Override
     public String toString() {
-        return description;
+        return message;
     }
 }

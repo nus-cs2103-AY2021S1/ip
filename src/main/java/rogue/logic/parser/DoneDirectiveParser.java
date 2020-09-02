@@ -2,7 +2,7 @@ package rogue.logic.parser;
 
 import rogue.logic.directives.DoneDirective;
 
-import rogue.commons.exceptions.IncorrectArgumentException;
+import rogue.logic.exceptions.IncorrectArgumentException;
 
 public class DoneDirectiveParser {
     private final String ERROR_INCORRECT_INDEX = "sToP TrYiNg tO FoOl mE. tHe \"done\" ComMand"

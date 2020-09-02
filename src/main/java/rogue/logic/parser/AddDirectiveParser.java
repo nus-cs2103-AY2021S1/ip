@@ -3,7 +3,7 @@ package rogue.logic.parser;
 import rogue.logic.directives.Action;
 import rogue.logic.directives.AddDirective;
 
-import rogue.commons.exceptions.IncorrectArgumentException;
+import rogue.logic.exceptions.IncorrectArgumentException;
 import rogue.commons.util.DateTimeUtil;
 import rogue.commons.util.StringUtil;
 

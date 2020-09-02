@@ -9,7 +9,7 @@ import rogue.storage.exceptions.StorageException;
 
 import rogue.ui.Ui;
 
-import rogue.commons.exceptions.IncorrectArgumentException;
+import rogue.logic.exceptions.IncorrectArgumentException;
 
 /**
  * Represents an action that can be executed.

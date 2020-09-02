@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import rogue.logic.parser.exceptions.UnknownCommandException;
 
-import rogue.commons.exceptions.IncorrectArgumentException;
+import rogue.logic.exceptions.IncorrectArgumentException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

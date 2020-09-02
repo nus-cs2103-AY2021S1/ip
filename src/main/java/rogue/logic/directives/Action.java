@@ -20,12 +20,12 @@ public enum Action {
     INVALID         ("");
 
     /** Stores keyword to action mappings. */
-    private static final Map<String, Action> ACTION_KEYWORD_MAP = new HashMap<>();
+    private static final Map<String, Action> KEYWORD_ACTION_MAP = new HashMap<>();
 
     // Caches the keyword and its corresponding action for fast reverse lookup. */
     static {
         for (Action action : values()) {
-            ACTION_KEYWORD_MAP.put(action.keyword, action);
+            KEYWORD_ACTION_MAP.put(action.keyword, action);
         }
     }
 
@@ -49,7 +49,7 @@ public enum Action {
      * @return An {@code Action} matching the keyword, or {@code Action.INVALID} if no match.
      */
     public static Action getAction(String keyword) {
-        Action action = ACTION_KEYWORD_MAP.get(keyword);
+        Action action = KEYWORD_ACTION_MAP.get(keyword);
         return (action != null) ? action : Action.INVALID;
     }
 }

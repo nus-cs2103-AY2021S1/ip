@@ -12,7 +12,7 @@ import rogue.storage.exceptions.StorageException;
 
 import rogue.ui.Ui;
 
-import rogue.commons.exceptions.IncorrectArgumentException;
+import rogue.logic.exceptions.IncorrectArgumentException;
 
 /**
  * Main driver of {@code Rogue}. Consists of three main elements: the {@code Storage},

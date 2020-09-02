@@ -44,10 +44,10 @@ public class Storage {
      * Terminates program if the file or its parent directories
      * cannot be created.
      *
-     * @param fileName The relative or absolute path where persistent information is stored.
+     * @param filePath The relative or absolute path where persistent information is stored.
      */
-    public static Storage init(String fileName) {
-        Path path = Paths.get(fileName);
+    public static Storage init(String filePath) {
+        Path path = Paths.get(filePath);
         Path parentDirPath = path.getParent();
 
         try {
@@ -76,7 +76,7 @@ public class Storage {
      */
     public void save(List<Task> tasks) throws StorageException {
         try {
-            List<String> taskSummary = tasksToString(tasks);
+            List<String> taskSummary = convertTasksToString(tasks);
             Files.write(filePath, taskSummary, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             throw new StorageException(String.format(ERROR_IO, "save"));
@@ -92,7 +92,7 @@ public class Storage {
     public List<Task> load() throws StorageException {
         try {
             List<String> taskSummary = Files.readAllLines(filePath);
-            return stringToTask(taskSummary);
+            return convertStringToTasks(taskSummary);
         } catch (IOException e) {
             throw new StorageException(String.format(ERROR_IO, "load"));
         }
@@ -104,7 +104,7 @@ public class Storage {
      * @param tasks A list of tasks.
      * @return A list of extracted summary
      */
-    private List<String> tasksToString(List<Task> tasks) {
+    private List<String> convertTasksToString(List<Task> tasks) {
         List<String> taskSummary = new ArrayList<>();
 
         for (Task task : tasks) {
@@ -122,7 +122,7 @@ public class Storage {
      * @return A list of tasks
      * @throws StorageException if any summary is invalid.
      */
-    private List<Task> stringToTask(List<String> taskSummary) throws StorageException {
+    private List<Task> convertStringToTasks(List<String> taskSummary) throws StorageException {
         List<Task> tasks = new ArrayList<>();
 
         for (String summary : taskSummary) {
