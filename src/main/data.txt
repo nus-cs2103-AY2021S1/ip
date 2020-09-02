@@ -1,4 +1,2 @@
 [T][✘] read book
-[T][✘] read book
-[T][✘] buy bread
 [T][✘] wash clothes
