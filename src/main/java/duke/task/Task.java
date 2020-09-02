@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.main.FormatString;
+import duke.tools.FormatString;
 
 /**
  * This class simulates the tasks

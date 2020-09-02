@@ -44,7 +44,7 @@ public class WriteIn {
             printWrite.close();
 
         } catch (IOException e) {
-            DukeException.fileException();
+            System.out.println(DukeException.fileException());
         }
     }
 }

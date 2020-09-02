@@ -1,6 +1,6 @@
 import duke.main.Command;
-import duke.main.Parser;
-import duke.main.Time;
+import duke.tools.Parser;
+import duke.tools.Time;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;

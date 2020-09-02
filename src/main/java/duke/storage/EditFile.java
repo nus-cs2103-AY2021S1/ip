@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import duke.exception.DukeException;
-import duke.main.FormatString;
+import duke.tools.FormatString;
 
 
 
@@ -61,7 +61,7 @@ public class EditFile {
             reader.close();
             fileWriter.close();
         } catch (IOException e) {
-            DukeException.readLineException();
+            System.out.println(DukeException.readLineException());
         }
     }
 
@@ -74,7 +74,7 @@ public class EditFile {
             PrintWriter printWriter = new PrintWriter(path);
             printWriter.close();
         } catch (IOException e) {
-            DukeException.fileException();
+            System.out.println(DukeException.fileException());
         }
     }
 
@@ -112,7 +112,7 @@ public class EditFile {
             reader.close();
             fileWriter.close();
         } catch (IOException e) {
-            DukeException.readLineException();
+            System.out.println(DukeException.readLineException());
         }
     }
 }

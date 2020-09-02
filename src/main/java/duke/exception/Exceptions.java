@@ -1,6 +1,6 @@
 package duke.exception;
 
-import duke.main.FormatString;
+import duke.tools.FormatString;
 
 /**
  * This is an enum class that contains
@@ -68,6 +68,14 @@ public enum Exceptions {
         @Override
         public String toString() {
             return "    OOPS!!! Your time format seems incorrect, please follow yyyy-mm-dd";
+        }
+    },
+
+    FINDDETAILMISSINGEXCEPTION {
+        @Override
+        public String toString() {
+            return "    OOPS!!! So what would you like to find?\n"
+                    + "    Try to add something behind 'find'.";
         }
     }
 }

@@ -5,8 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import duke.exception.DukeException;
-import duke.main.Format;
-import duke.main.Parser;
+import duke.tools.Format;
+import duke.tools.Parser;
 
 
 
@@ -47,7 +47,7 @@ public class ReadFile {
             textReader.close();
 
         } catch (IOException e) {
-            DukeException.fileException();
+            System.out.println(DukeException.fileException());
         }
     }
 
@@ -75,7 +75,7 @@ public class ReadFile {
             textReader.close();
 
         } catch (IOException e) {
-            DukeException.fileException();
+            System.out.println(DukeException.fileException());
         }
     }
 }

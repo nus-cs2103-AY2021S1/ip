@@ -1,5 +1,5 @@
-import duke.main.Format;
-import duke.main.Time;
+import duke.tools.Format;
+import duke.tools.Time;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
