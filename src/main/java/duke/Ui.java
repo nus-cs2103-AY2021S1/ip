@@ -13,16 +13,9 @@ public class Ui {
      * @return A string containing a welcome message.
      */
     public static String welcomeMessage() {
-        String catLogo = "        /\\_____/\\\n"
-                + "       /  o   o  \\\n"
-                + "      ( ==  ^  == )\n"
-                + "       )         (\n"
-                + "      (           )\n"
-                + "     ( (  )   (  ) )\n"
-                + "    (__(__)___(__)__)\n";
         String introduction = "Hello! I'm NEKOBOT!!\n";
         String question = "What can I do for you :>";
-        return catLogo + introduction + question;
+        return introduction + question;
     }
 
     /**
