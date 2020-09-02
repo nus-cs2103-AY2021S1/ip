@@ -18,7 +18,7 @@ public class Parser {
     /**
      * @param command User input as String
      * @param list Current list of tasks
-     * @param storage Access to duke.ser
+     * @param storage Access to duke.txt
      * @return The appropriate Command object to execute
      */
     public static Command parse(String command, TaskList list, Storage storage) {

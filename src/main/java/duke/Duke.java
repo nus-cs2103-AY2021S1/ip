@@ -36,8 +36,8 @@ public class Duke {
      * @throws Exception File not found exception
      */
     public static void main(String[] args) throws Exception {
-        // remember to change filepath to "../../../data/duke.ser" during jar build
-        // Duke duke = new Duke("data/duke.ser");
+        // remember to change filepath to "../../../data/duke.txt" during jar build
+        // Duke duke = new Duke("data/duke.txt");
         // duke.run();
     }
 }

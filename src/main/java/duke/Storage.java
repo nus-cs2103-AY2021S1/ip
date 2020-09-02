@@ -20,13 +20,13 @@ public class Storage {
     }
 
     /**
-     * Accesses duke.ser file in order to read and load in data as a List of Tasks.
+     * Accesses duke.txt file in order to read and load in data as a List of Tasks.
      * @return List of stored Tasks
      * @throws Exception FIle not found
      */
     @SuppressWarnings("unchecked")
     public List<Task> loadData() throws Exception {
-        List<Task> list = new ArrayList<>();
+        List<Task> list;
         try {
             FileInputStream readData = new FileInputStream(filePath);
             ObjectInputStream readStream = new ObjectInputStream(readData);
@@ -42,7 +42,7 @@ public class Storage {
     }
 
     /**
-     * Stores modified List of tasks and writes onto duke.ser for future access.
+     * Stores modified List of tasks and writes onto duke.txt for future access.
      * @param list List of stored Tasks
      */
     public void writeData(List<Task> list) {

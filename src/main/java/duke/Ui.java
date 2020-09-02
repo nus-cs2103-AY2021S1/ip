@@ -26,7 +26,7 @@ public class Ui {
     }
 
     /**
-     * Shows when there is an error accessing and loading duke.ser.
+     * Shows when there is an error accessing and loading duke.txt.
      */
     public void showLoadingError() {
         System.out.println("☹ AIYO!!! I cannot load the file sia...");
@@ -35,7 +35,7 @@ public class Ui {
     /**
      * Runs and starts the Duke bot.
      * @param list Loaded list of Tasks
-     * @param storage Storage object that has access to duke.ser
+     * @param storage Storage object that has access to duke.txt
      * @throws Exception File not found
      */
     public String initialise(TaskList list, Storage storage, String input) throws Exception {
