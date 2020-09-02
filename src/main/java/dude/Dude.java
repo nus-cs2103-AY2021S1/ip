@@ -3,8 +3,8 @@ package dude;
 import java.io.FileNotFoundException;
 
 import dude.command.Command;
-import dude.ui.Ui;
 import dude.ui.DialogWrapper;
+import dude.ui.Ui;
 import dude.util.CommandException;
 import dude.util.CorruptedFileException;
 import dude.util.InvalidArgumentException;

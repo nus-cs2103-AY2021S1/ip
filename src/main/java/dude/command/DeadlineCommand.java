@@ -5,10 +5,10 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import dude.task.Deadline;
+import dude.ui.Ui;
 import dude.util.CommandException;
 import dude.util.Storage;
 import dude.util.TaskList;
-import dude.ui.Ui;
 
 /**
  * The command creates a deadline and adds it to the tasklist when executed.
