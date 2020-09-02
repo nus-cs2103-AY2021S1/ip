@@ -8,6 +8,7 @@ import duke.Ui;
  * Represents a command to find tasks which matches a keyword.
  */
 public class FindCommand extends Command {
+
     private final String keyword;
 
     /**
@@ -21,11 +22,11 @@ public class FindCommand extends Command {
     /**
      * Finds the tasks which matches the keyword.
      * @param tasks is the tasks the command will execute with.
-     * @param ui is the ui the command will execute with.
      * @param storage is the storage the command will execute with.
+     * @return a command response after executing the find command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printFindTasks(keyword, tasks);
+    public CommandResponse execute(TaskList tasks, Storage storage) {
+        return new CommandResponse(Ui.printFindTasks(keyword, tasks), this.isExit());
     }
 }

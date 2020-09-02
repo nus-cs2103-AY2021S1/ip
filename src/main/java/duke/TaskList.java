@@ -9,6 +9,7 @@ import duke.task.Task;
  * Represents a list which stores tasks.
  */
 public class TaskList {
+
     private final List<Task> tasks;
 
     /**

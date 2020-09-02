@@ -10,6 +10,7 @@ import duke.task.Task;
  * Represents a command to add a task.
  */
 public class AddCommand extends Command {
+
     private final Task task;
 
     /**
@@ -23,14 +24,14 @@ public class AddCommand extends Command {
     /**
      * Adds the task to the task list.
      * @param tasks is the task list that the command will execute with.
-     * @param ui is the ui that the command will execute with.
      * @param storage is the storage that the command will execute with.
+     * @return a command response after executing the add command.
      * @throws DukeException when there is a problem executing the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
         tasks.addTask(task);
-        ui.printAddTask(task, tasks);
         storage.save(tasks.getTasks());
+        return new CommandResponse(Ui.printAddTask(task, tasks), this.isExit());
     }
 }
