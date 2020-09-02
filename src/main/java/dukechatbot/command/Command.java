@@ -3,15 +3,15 @@ package dukechatbot.command;
 import dukechatbot.executor.CommandExecutor;
 
 /**
- * Represents the command. 
+ * Represents the command.
  * Stores the input of the command.
  * Stores the executor related to the command.
  */
 public class Command {
 
-    String input;
+    private String input;
 
-    CommandExecutor commandExecutor;
+    private CommandExecutor commandExecutor;
 
     public Command(String input, CommandExecutor commandExecutor) {
         this.input = input;

@@ -1,9 +1,8 @@
 package dukechatbot.dukeoutput;
 
-import dukechatbot.constant.DukeConstants;
-
 import java.util.List;
 
+import dukechatbot.constant.DukeConstants;
 /**
  * Represents class to format
  * the response to be outputted to Duke.
@@ -25,7 +24,6 @@ class DukeOutputFormatter {
         return sb.toString();
     }
     
-    
     /**
      * Formats and prints the responses from Duke.
      *
@@ -37,7 +35,7 @@ class DukeOutputFormatter {
         sb.append(DukeConstants.LINE);
         sb.append("\n");
         int k = 0;
-        for (int i = 0 ; i < responses.size() ; i++) {
+        for (int i = 0; i < responses.size(); i++) {
             String response = responses.get(i);
             if (k < indentIndexes.size() && i == indentIndexes.get(k)) {
                 sb.append(DukeConstants.INDENT);

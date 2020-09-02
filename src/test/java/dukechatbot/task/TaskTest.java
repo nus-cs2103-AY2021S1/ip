@@ -1,15 +1,15 @@
 package dukechatbot.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskTest {
 
-    Task task = new ToDoTask("lol123");
+    private final Task task = new ToDoTask("lol123");
 
     @Test
-    void get_save_format_success() {
+    void getSaveFormat_success() {
         assertEquals("T | 0 | lol123", this.task.getSaveFormat());
     }
 }

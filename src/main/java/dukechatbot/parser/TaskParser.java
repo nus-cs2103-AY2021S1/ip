@@ -1,12 +1,12 @@
 package dukechatbot.parser;
 
+import java.time.format.DateTimeParseException;
+
 import dukechatbot.enums.TaskEnum;
 import dukechatbot.task.DeadlineTask;
 import dukechatbot.task.EventTask;
 import dukechatbot.task.Task;
 import dukechatbot.task.ToDoTask;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * outputs the appropriate task given the taskType.
@@ -16,7 +16,7 @@ public class TaskParser {
 
     /**
      * Parses title and taskType to form Task object.
-     * 
+     *
      * @param title
      * @param taskType
      * @return Task object.
@@ -50,7 +50,7 @@ public class TaskParser {
                     "\u2639 OOPS!!! The date and time of a deadline cannot be empty.");
         } catch (DateTimeParseException exception) {
             throw new IndexOutOfBoundsException(
-                    "\u2639 OOPS!!! Both date and time (24 hour format) must be " 
+                    "\u2639 OOPS!!! Both date and time (24 hour format) must be "
                             + "in the form \"DD/MM/YYYY HH:MM\"");
         }
     }

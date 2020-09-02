@@ -1,11 +1,11 @@
 package dukechatbot.tasklist;
 
-import dukechatbot.constant.DukeConstants;
-import dukechatbot.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import dukechatbot.constant.DukeConstants;
+import dukechatbot.task.Task;
 
 /**
  * Represents a list of task where you can add, delete tasks and list the tasks.

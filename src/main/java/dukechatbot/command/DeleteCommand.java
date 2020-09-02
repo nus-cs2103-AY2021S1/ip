@@ -4,7 +4,7 @@ import dukechatbot.executor.DeleteCommandExecutor;
 import dukechatbot.parser.CommandParser;
 
 /**
- * Represents the command for delete. 
+ * Represents the command for delete.
  * Stores the argument that contains the task item number to be deleted.
  */
 public class DeleteCommand extends Command {
@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Returns the String argument attribute of this object. 
+     * Returns the String argument attribute of this object.
      *
      * @return argument attribute.
      */

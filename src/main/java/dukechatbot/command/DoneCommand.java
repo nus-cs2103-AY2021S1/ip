@@ -4,8 +4,8 @@ import dukechatbot.executor.DoneCommandExecutor;
 import dukechatbot.parser.CommandParser;
 
 /**
- * Represents the command for done. 
- * Stores the argument that contains the 
+ * Represents the command for done.
+ * Stores the argument that contains the
  * task item number to mark done.
  */
 public class DoneCommand extends Command {
@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Returns the String argument attribute of this object. 
+     * Returns the String argument attribute of this object.
      *
      * @return argument attribute.
      */

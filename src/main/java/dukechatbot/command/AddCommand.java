@@ -5,12 +5,11 @@ import dukechatbot.executor.AddCommandExecutor;
 import dukechatbot.parser.CommandParser;
 
 /**
- * Represents the command for add. 
+ * Represents the command for add.
  * Stores the tasktype of the task to be added.
  * Stores the argument that contains the task to be added.
  */
 public class AddCommand extends Command {
-    
     private final TaskEnum taskType;
 
     private final String argument;
@@ -22,8 +21,8 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Returns the TaskEnum taskType attribute of this object. 
-     * 
+     * Returns the TaskEnum taskType attribute of this object.
+     *
      * @return taskType attribute.
      */
     public TaskEnum getTaskType() {
@@ -31,7 +30,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Returns the String argument attribute of this object. 
+     * Returns the String argument attribute of this object.
      *
      * @return argument attribute.
      */

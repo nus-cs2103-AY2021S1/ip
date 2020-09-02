@@ -1,14 +1,14 @@
 package dukechatbot.ui;
 
-import dukechatbot.dukeoutput.DukeOutput;
-import dukechatbot.parser.CommandParser;
-import dukechatbot.command.Command;
-import dukechatbot.constant.DukeConstants;
-import dukechatbot.storage.Storage;
-import dukechatbot.tasklist.TaskList;
-
 import java.util.Objects;
 import java.util.Scanner;
+
+import dukechatbot.command.Command;
+import dukechatbot.constant.DukeConstants;
+import dukechatbot.dukeoutput.DukeOutput;
+import dukechatbot.parser.CommandParser;
+import dukechatbot.storage.Storage;
+import dukechatbot.tasklist.TaskList;
 
 /**
  * Represents Ui where the input is parsed and 

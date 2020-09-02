@@ -8,7 +8,7 @@ public class Duke {
 
     /**
      * Runs the main program of Duke.
-     * 
+     *
      * @param args
      */
     public static void main(String[] args) {
