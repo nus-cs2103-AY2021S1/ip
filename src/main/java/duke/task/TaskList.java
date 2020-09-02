@@ -12,6 +12,11 @@ import duke.util.Parser;
 public class TaskList {
     private List<Task> tasks;
 
+    /**
+     * Constructor
+     *
+     * @param tasks List of task objects.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
@@ -38,8 +43,8 @@ public class TaskList {
             case "deadline":
                 String[] splitSlash = description.split(" /by ");
                 if (splitSlash.length != 2) {
-                    throw new DukeException("\tPaise! :') Please use the format: deadline <task> /by <time>" +
-                            "\n\t\t*time format: <yyyy-mm-dd> or  <yyyy-mm-dd HH:mm>");
+                    throw new DukeException("\tPaise! :') Please use the format: deadline <task> /by <time>"
+                            + "\n\t\t*time format: <yyyy-mm-dd> or  <yyyy-mm-dd HH:mm>");
                 }
                 task = new Deadline(splitSlash[0], false, Parser.parseDate(splitSlash[1]));
                 this.tasks.add(task);
@@ -48,8 +53,8 @@ public class TaskList {
             case "event":
                 splitSlash = description.split(" /at ");
                 if (splitSlash.length != 2) {
-                    throw new DukeException("\tPaise! :') Please use the correct format: event <task> /at <time> +" +
-                            "\n\t\t*time format: <yyyy-mm-dd> or  <yyyy-mm-dd HH:mm>");
+                    throw new DukeException("\tPaise! :') Please use the correct format: event <task> /at <time> +"
+                            + "\n\t\t*time format: <yyyy-mm-dd> or  <yyyy-mm-dd HH:mm>");
                 }
                 task = new Event(splitSlash[0], false, Parser.parseDate(splitSlash[1]));
                 this.tasks.add(task);
@@ -61,6 +66,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints confirmation for addition of task.
+     * @param task Task object.
+     */
     public void printAddedConfirmation(Task task) {
         int size = this.tasks.size();
         System.out.println("\tOkay! I've added this task:");

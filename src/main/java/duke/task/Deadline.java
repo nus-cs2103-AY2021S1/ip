@@ -9,6 +9,13 @@ import java.util.Date;
 public class Deadline extends Task {
     protected final Date doBy;
 
+    /**
+     * Constructor
+     *
+     * @param description Description of the deadline.
+     * @param isDone Status of the deadline - done or not done.
+     * @param doBy Due date of the deadline.
+     */
     public Deadline(String description, boolean isDone, Date doBy) {
         super(description, isDone);
         this.doBy = doBy;

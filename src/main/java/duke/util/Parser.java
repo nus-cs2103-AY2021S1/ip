@@ -3,10 +3,20 @@ package duke.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import duke.DukeException;
 
+/**
+ * Represents parser for user's input.
+ */
 public class Parser {
-    public static Date parseDate(String strDate) throws DukeException{
+    /**
+     * Parse string date to Date date in a neater format.
+     * @param strDate Date type in by user.
+     * @return Date object in a neater format.
+     * @throws DukeException
+     */
+    public static Date parseDate(String strDate) throws DukeException {
         String formatWithMin = "y-M-d HH:mm";
         String formatWithoutMin = "y-M-d";
         try {

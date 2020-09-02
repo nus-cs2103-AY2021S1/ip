@@ -9,6 +9,13 @@ import java.util.Date;
 public class Event extends Task {
     private final Date time;
 
+    /**
+     * Constructor
+     *
+     * @param description Description of the event.
+     * @param isDone Status of the event - done or not done.
+     * @param time Time of the event.
+     */
     public Event(String description, boolean isDone, Date time) {
         super(description, isDone);
         this.time = time;

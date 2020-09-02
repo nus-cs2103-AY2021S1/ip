@@ -1,21 +1,21 @@
 package duke.storage;
 
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ToDo;
-
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Saves and loads tasks by serializing and deserializing respectively.
@@ -92,6 +92,7 @@ public class Storage {
                     .filter((task) -> !task.trim().equals(""))
                     .forEach((task) -> tasks.add(deserializeTask(task)));
         } catch (IOException e) {
+            System.out.println("");
         }
         return tasks;
     }

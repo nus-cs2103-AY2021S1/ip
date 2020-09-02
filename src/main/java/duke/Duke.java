@@ -1,7 +1,7 @@
 package duke;
 
-import duke.task.TaskList;
 import duke.storage.Storage;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class Duke {
@@ -9,6 +9,9 @@ public class Duke {
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Represents the task management app.
+     */
     public Duke() {
         this.storage = new Storage();
         this.tasks = new TaskList(storage.loadTasks());

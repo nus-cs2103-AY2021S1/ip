@@ -3,8 +3,8 @@ package duke.ui;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.task.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Deals with user interactions by scanning and printing.
@@ -59,8 +59,8 @@ public class Ui {
         List<Task> tasks = taskList.getTasks();
 
         if (tasks.size() > 0) {
-            print(isForFind ? "These are the tasks that you are looking for.:)" :
-                    "These are the tasks in your list. Jiayous! :)");
+            print(isForFind ? "These are the tasks that you are looking for.:)"
+                    : "These are the tasks in your list. Jiayous! :)");
         } else {
             print("You have no task in your list. :D");
         }
