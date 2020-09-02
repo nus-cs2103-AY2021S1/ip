@@ -12,7 +12,7 @@ public class Parser {
     private static void checkCommands(String input) throws InvalidCommandException {
         try {
             Commands.valueOf(input.trim().toUpperCase());
-        } catch(IllegalArgumentException ex) {
+        } catch (IllegalArgumentException ex) {
             throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
@@ -38,15 +38,15 @@ public class Parser {
     public static void checkIndex(String[] inputs, int numberOfTask) throws InvalidIndexException {
         String usage = (numberOfTask > 1 ? "\nInput a number between 1 - " + numberOfTask : "");
         if (inputs.length < 2 || inputs[1].trim().equals("")) {
-            throw new InvalidIndexException("Please input a valid index of task" + usage );
+            throw new InvalidIndexException("Please input a valid index of task" + usage);
         }
         try {
             int index = Integer.parseInt(inputs[1]);
             if (index < 1 || index > numberOfTask) {
-                throw new InvalidIndexException("Please input a valid index of task" + usage );
+                throw new InvalidIndexException("Please input a valid index of task" + usage);
             }
         } catch (NumberFormatException ex) {
-            throw new InvalidIndexException("Please input a valid index of task" + usage );
+            throw new InvalidIndexException("Please input a valid index of task" + usage);
         }
     }
 

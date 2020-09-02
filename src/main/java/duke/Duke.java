@@ -2,11 +2,13 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import exception.*;
+import exception.EmptyDescriptionException;
+import exception.EmptyTimeException;
+import exception.InvalidCommandException;
+import exception.InvalidIndexException;
 
 /**
  * Represents Duke, a chat bot that allows tasks management (add, delete, mark as done).
@@ -52,7 +54,7 @@ public class Duke {
                     ui.printGoodbye();
                     try {
                         storage.writeData(taskList);
-                    } catch (IOException ex){
+                    } catch (IOException ex) {
                         ui.printOutput(ex.getMessage());
                     }
                     break;
@@ -84,7 +86,7 @@ public class Duke {
                     } catch (InvalidIndexException ex) {
                         ui.printOutput(ex.getMessage());
                     }
-                } else if (command.equals(Commands.TODO)){
+                } else if (command.equals(Commands.TODO)) {
                     try {
                         Parser.checkDescription(inputs, command);
                         taskList.addTask(new Todo(inputs[1]));

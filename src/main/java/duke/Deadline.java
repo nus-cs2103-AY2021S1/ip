@@ -23,7 +23,7 @@ public class Deadline extends Task {
         this.by = by;
         try {
             this.date = LocalDate.parse(by);
-        } catch (DateTimeParseException ex){
+        } catch (DateTimeParseException ex) {
             this.date = null;
         }
     }
@@ -39,7 +39,7 @@ public class Deadline extends Task {
         this.by = by;
         try {
             this.date = LocalDate.parse(by);
-        } catch (DateTimeParseException ex){
+        } catch (DateTimeParseException ex) {
             this.date = null;
         }
     }

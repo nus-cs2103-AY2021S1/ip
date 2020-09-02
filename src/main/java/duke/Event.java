@@ -23,7 +23,7 @@ public class Event extends Task {
         this.at = at;
         try {
             this.date = LocalDate.parse(at);
-        } catch (DateTimeParseException ex){
+        } catch (DateTimeParseException ex) {
             this.date = null;
         }
     }
@@ -39,7 +39,7 @@ public class Event extends Task {
         this.at = at;
         try {
             this.date = LocalDate.parse(at);
-        } catch (DateTimeParseException ex){
+        } catch (DateTimeParseException ex) {
             this.date = null;
         }
     }
