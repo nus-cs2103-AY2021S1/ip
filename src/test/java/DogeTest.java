@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import duke.DukeException;
 import duke.Parser;
+import duke.commands.AddCommand;
 import duke.task.TaskList;
 import duke.commands.Command;
 import org.junit.jupiter.api.Test;
@@ -35,7 +36,7 @@ public class DogeTest {
     public void taskListTest() {
         Task task = new Task("Cycling", TaskType.E);
         TaskList.addToList(task);
-        assertEquals(task, TaskList.toDoList.get(0));
+        assertEquals(task, TaskList.getList().get(0));
     }
 
     @Test
