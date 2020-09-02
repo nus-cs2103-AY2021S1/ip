@@ -2,13 +2,16 @@ package test.java.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static src.test.java.util.TestUtil.*;
+import static src.test.java.util.TestUtil.assertFileDoesNotExist;
+import static src.test.java.util.TestUtil.assertTextFilesEqual;
+import static src.test.java.util.TestUtil.isIdentical;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
 import src.main.java.duke.data.Duke;
 import src.main.java.duke.data.exception.IllegalValueException;
 import src.main.java.duke.data.task.Event;
