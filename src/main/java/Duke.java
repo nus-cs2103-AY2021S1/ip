@@ -33,14 +33,16 @@ public class Duke extends Application{
         this.ui = UI.initialise(this.storage);
     }
 
-    private void run() {
+    public void run() {
         try {
             this.storage.initialise();
-            this.ui.startUpMessage();
-            this.ui.processInput();
         } catch (Exception e) {
            this.ui.showError(e);
         }
+    }
+
+    public String startUpMessage() {
+        return this.ui.startUpMessage();
     }
 
     @Override
@@ -102,6 +104,7 @@ public class Duke extends Application{
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
     }
 
     /**
@@ -128,6 +131,7 @@ public class Duke extends Application{
                 DialogBox.getUserDialog(userInput.getText(), user),
                 DialogBox.getDukeDialog(getResponse(userInput.getText()), duke)
         );
+
         userInput.clear();
     }
 
@@ -137,7 +141,11 @@ public class Duke extends Application{
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            return this.ui.processInput(input);
+        } catch (Exception e){
+            return this.ui.showError(e);
+        }
     }
 
 
