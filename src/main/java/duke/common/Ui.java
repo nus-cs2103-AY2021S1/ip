@@ -2,6 +2,7 @@ package duke.common;
 
 import java.util.Scanner;
 
+import duke.Main;
 import duke.task.TaskList;
 
 /**
@@ -14,6 +15,10 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+//    private static void displayString(String s) {
+//        Main.getWindow().displayText(s);
+//    }
+
     /**
      * Generates and prints a custom string.
      * @param s text to be displayed to the user.
@@ -21,6 +26,7 @@ public class Ui {
     public static void display(String s) {
         displayLine();
         System.out.println(s);
+//        displayString(s);
         displayLine();
     }
 
@@ -81,6 +87,10 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\n"
                 + "     What can I do for you?");
+
+//        displayString("Hello from\n" + logo);
+//        displayString("Hello! I'm Duke\n"
+//                + "     What can I do for you?");
     }
 
     /**
