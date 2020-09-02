@@ -38,7 +38,7 @@ public class TaskList {
     /**
      * Adds a task to the list of current tasks.
      *
-     * @param task Index of task to add.
+     * @param task Task to be added.
      */
     protected String addToList(Task task) {
         StringBuilder output = new StringBuilder();
@@ -57,7 +57,7 @@ public class TaskList {
      *
      * @param taskNo Index of task to mark.
      */
-    protected String taskDone(int taskNo) {
+    protected String makeTaskDone(int taskNo) {
         StringBuilder output = new StringBuilder();
         Task toBeDone = this.list.get(taskNo);
         toBeDone.markAsDone();

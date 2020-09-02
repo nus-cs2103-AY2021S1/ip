@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Represents the Duke Chatbot.
@@ -24,24 +23,23 @@ public class Duke {
     }
 
     /**
-     * Runs the chatbot instance.
-     * Chatbot will begin listening for commands with this method.
+     * Runs the Chatbot instance.
+     * Chatbot will execute commands based on inputText.
      */
     private String run(String inputText) {
         try {
             Command command = ui.parseCommand(inputText);
-            String output = "";
 
             switch (command.name) {
             case "find":
                 return tasks.findTasks(command.message);
             case "bye":
-                storage.saveTasks();
+                storage.saveTasksToFile();
                 return "That's it? That's a shame. Well, see you later then.";
             case "list":
                 return tasks.printList();
             case "done":
-                return tasks.taskDone(command.index);
+                return tasks.makeTaskDone(command.index);
             case "delete":
                 return tasks.removeFromList(command.index);
             case "error":

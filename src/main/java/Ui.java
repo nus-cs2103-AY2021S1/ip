@@ -4,13 +4,13 @@
  */
 public class Ui {
 
-    protected Parser parser;
+    private Parser parser;
 
     public Ui() {
         this.parser = new Parser();
     }
 
-    public static final String LINE = "___________________________________________________";
+    private static final String LINE = "___________________________________________________";
 
     /**
      * Utilises the parser to parse user commands.

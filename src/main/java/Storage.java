@@ -72,7 +72,7 @@ public class Storage {
         }
     }
 
-    public void saveTasks() throws IOException {
+    public void saveTasksToFile() throws IOException {
         String root = System.getProperty("user.dir");
         FileWriter fw = new FileWriter(Paths.get(root, "data", "dukeTaskList.txt").toString());
         for (int i = 0; i < TaskList.list.size(); i++) {
