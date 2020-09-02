@@ -1,8 +1,11 @@
 package duke;
 
+import duke.TaskList;
+import duke.Task;
+
 /** Utility methods for generating stylised CLI outputs */
 public class Ui {
-    private static final String LINE_DIVIDER = "\t____________________________________________________________\n";
+    private static final String LINE_DIVIDER = "\t_______________________________________________________\n";
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -10,14 +13,15 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     /** Prints out the greeting */
-    public static void greet() {
-        System.out.println("Hello from\n" + LOGO);
-        Ui.prettyPrint("Hello! I'm Duke\n\tWhat can I do for you?");
+    public static String greet() {
+        StringBuilder s = new StringBuilder("Hello from\n" + LOGO);
+        s.append("Hello! I'm Duke\n\tWhat can I do for you?");
+        return s.toString();
     }
 
     /** Prints out message to indicate Task is updated */
-    public static void updateTaskText(String update, Task taskToUpdate, int size) {
-        Ui.prettyPrint("Got it. I've " + update + " this task: \n"
+    public static String updateTaskText(String update, Task taskToUpdate, int size) {
+        return Ui.prettyPrint("Got it. I've " + update + " this task: \n"
                 + "\t" + taskToUpdate + "\n"
                 + "\tNow you have " + size + " tasks in the list.");
     }
@@ -27,8 +31,8 @@ public class Ui {
      *
      * @param string String to print
      */
-    public static void prettyPrint(String string) {
-        System.out.println(LINE_DIVIDER + "\t" + string + "\n" + LINE_DIVIDER);
+    public static String prettyPrint(String string) {
+        return (LINE_DIVIDER + "\t" + string + "\n" + LINE_DIVIDER);
     }
 
     /**
@@ -36,11 +40,13 @@ public class Ui {
      *
      * @param tasks Tasks to print
      */
-    public static void prettyPrint(TaskList tasks) {
-        System.out.println(LINE_DIVIDER + "\tHere are the tasks in your list:");
+    public static String prettyPrint(TaskList tasks) {
+        StringBuilder s = new StringBuilder(LINE_DIVIDER + "\tHere are the tasks in your list:\n");
         for (int i = 0; i < tasks.length(); i++) {
-            System.out.println("\t" + (i + 1) + "." + tasks.getTask(i));
+            s.append("\t" + (i + 1) + "." + tasks.getTask(i));
+            s.append("\n");
         }
-        System.out.println(LINE_DIVIDER);
+        s.append(LINE_DIVIDER);
+        return s.toString();
     }
 }

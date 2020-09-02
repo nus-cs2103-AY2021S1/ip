@@ -10,8 +10,8 @@ public class DukeMissingArgumentException extends ArrayIndexOutOfBoundsException
 
     @Override
     public String toString() {
-        return "\t____________________________________________________________\n"
-                + "\t☹ OOPS!!! The description of " + description + " cannot be empty.\n"
-                + "\t____________________________________________________________";
+        return "\t____________________________________________________\n"
+                + "\tOOPS!!! The description of " + description + " cannot be empty.\n"
+                + "\t________________________________________________________";
     }
 }

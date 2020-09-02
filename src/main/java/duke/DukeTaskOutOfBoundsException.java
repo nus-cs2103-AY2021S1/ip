@@ -10,8 +10,8 @@ public class DukeTaskOutOfBoundsException extends IndexOutOfBoundsException {
 
     @Override
     public String toString() {
-        return "\t____________________________________________________________\n"
-                + "\t☹ OOPS!!! The task to mark as " + description + " does not exist.\n"
-                + "\t____________________________________________________________";
+        return "\t________________________________________________________\n"
+                + "\tOOPS!!! The task to mark as " + description + " does not exist.\n"
+                + "\t________________________________________________________";
     }
 }

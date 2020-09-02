@@ -5,8 +5,32 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 /** Duke class to encapsulate the behaviour of a task manager */
 public class Duke {
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
     private static Scanner scan = new Scanner(System.in);
     private static final String SAVE_PATH = "./src/data/SaveData.txt";
     private static enum AcceptedCommands {
@@ -30,7 +54,7 @@ public class Duke {
     }
 
     /** Driver method for Duke */
-    private void run(String userInput) {
+    private String run(String userInput) {
         while (!userInput.equals("bye")) {
             try {
                 String command = Parser.getCommand(userInput);
@@ -50,61 +74,62 @@ public class Duke {
                 Task taskToUpdate;
                 switch (command) {
                 case "list":
-                    Ui.prettyPrint(tasks);
-                    break;
+                    return Ui.prettyPrint(tasks);
+                    
                 case "done":
                     taskToUpdate = tasks.updateTaskStatus(Parser.getIndex(userInput), true);
-                    Ui.prettyPrint("Nice! I've marked this task as done: \n" + "\t" + taskToUpdate);
-                    break;
+                    storage.saveTask(tasks);
+                    return Ui.prettyPrint("Nice! I've marked this task as done: \n" + "\t" + taskToUpdate);
+                    
                 case "todo":
                     taskToUpdate = tasks.addTask(new ToDo(Parser.getDetails(userInput)));
-                    Ui.updateTaskText("added", taskToUpdate, tasks.length());
-                    break;
+                    storage.saveTask(tasks);
+                    return Ui.updateTaskText("added", taskToUpdate, tasks.length());
+                    
                 case "event":
                     description = Parser.stringSplit(details, " /at ");
                     taskToUpdate = tasks.addTask(new Event(description[0], LocalDate.parse(description[1])));
-                    Ui.updateTaskText("added", taskToUpdate, tasks.length());
-                    break;
+                    storage.saveTask(tasks);
+                    return Ui.updateTaskText("added", taskToUpdate, tasks.length());
+                    
                 case "deadline":
                     description = Parser.stringSplit(details, " /by ");
                     taskToUpdate = tasks.addTask(new Deadline(description[0], LocalDate.parse(description[1])));
-                    Ui.updateTaskText("added", taskToUpdate, tasks.length());
-                    break;
+                    storage.saveTask(tasks);
+                    return Ui.updateTaskText("added", taskToUpdate, tasks.length());
+                    
                 case "delete":
                     taskToUpdate = tasks.removeTask(Parser.getIndex(userInput));
-                    Ui.updateTaskText("removed", taskToUpdate, tasks.length());
-                    break;
+                    storage.saveTask(tasks);
+                    return Ui.updateTaskText("removed", taskToUpdate, tasks.length());
+                    
                 case "clear":
-                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-                    break;
+                    return ("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                    
                 case "hello":
-                    Ui.greet();
-                    break;
+                    return Ui.greet();
+                    
                 case "find":
-                    Ui.prettyPrint(tasks.contains(details));
-                    break;
+                    return Ui.prettyPrint(tasks.contains(details));
+                    
                 default:
                     break;
                 }
             } catch (DukeIllegalCommandException | DukeMissingArgumentException | DukeTaskOutOfBoundsException e) {
-                System.out.println(e.toString());
+                return (e.toString());
             } catch (DateTimeParseException e) {
-                System.out.println("date time wrong");
+                return ("date time wrong");
+            } catch (IOException e){
+                return "file not found";
             } catch (Exception e) {
-                System.out.println("Write a number pls");
+                return ("Write a number pls");
             }
-
-            try {
-                storage.saveTask(tasks);
-            } catch (IOException e) {
-                System.out.println(e);
-            }
-
+            
             // Gets the new input
             userInput = scan.nextLine();
         }
 
-        Ui.prettyPrint("Bye. Hope to see you again soon!");
+        return Ui.prettyPrint("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -173,5 +198,13 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke(SAVE_PATH).run("hello");
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return run(input);
     }
 }
