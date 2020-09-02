@@ -1,12 +1,14 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
 import duke.Deadline;
 import duke.Task;
 import duke.TaskList;
 import duke.Todo;
-import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 public class TaskListTest {
     @Test
