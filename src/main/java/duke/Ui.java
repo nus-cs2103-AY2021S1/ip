@@ -9,7 +9,7 @@ public class Ui {
     /**
      * Prints logo "Welcome" greeting.
      */
-    public String logoMsg() {
+    public static String logoMsg() {
         String logo = " ___       __   _______   ___       ________  "
                 + "________  _____ ______   _______      \n"
                 + "|\\  \\     |\\  \\|\\  ___ \\ |\\  \\     "
@@ -32,7 +32,7 @@ public class Ui {
     /**
      * Prints greeting.
      */
-    public String greetingMsg() {
+    public static String greetingMsg() {
         String greetingMsg = "\n___________________________________________________________"
                 + "\n |°‿°|"
                 + "\n Hello! I'm DukeBT."
