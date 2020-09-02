@@ -13,7 +13,7 @@ public class EventTest {
     @Test
     public void factoryMethod_invalidDate_exceptionThrown() {
         try {
-            assertNull(Event.create("event test /at 2 9 12"));
+            assertNull(Event.create("test /at 2 9 12"));
             fail();
         } catch (InvalidDateException e) {
             assertEquals("Invalid date format detected!\n"
