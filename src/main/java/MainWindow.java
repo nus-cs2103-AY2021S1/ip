@@ -34,13 +34,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty()); //Set auto scroll
+    }
+
+    private String getResponse(String input) {
+        return "Duke heard: \n" + input;
     }
 }
 
