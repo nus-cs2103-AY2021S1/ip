@@ -28,11 +28,11 @@ public class DoneCommand extends Command {
      * @throws IOException When writing to file fails.
      */
     @Override
-    public void execute(TaskList taskList,
+    public String execute(TaskList taskList,
                         Storage storage, Ui ui) throws DukeException, IOException {
         int len = userInput.length();
         int pos = Integer.parseInt(userInput.substring(5, len));
-        ui.printDone(taskList.getTasks(), pos);
         storage.writeToFile(taskList.getTasks());
+        return ui.printDone(taskList.getTasks(), pos);
     }
 }

@@ -29,9 +29,9 @@ public class DeleteCommand extends Command {
      * @throws IOException When input for delete is invalid, respective error messages are printed.
      */
     @Override
-    public void execute(
+    public String execute(
             TaskList taskList, Storage storage, Ui ui) throws DukeException, IOException {
-        ui.printDelete(userInput, taskList);
         storage.writeToFile(taskList.getTasks());
+        return ui.printDelete(userInput, taskList);
     }
 }
