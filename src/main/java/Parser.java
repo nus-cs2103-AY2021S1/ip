@@ -23,19 +23,20 @@ public class Parser {
 
     /**
      * reads a String input and outputs according to different cases of input
-     *
-     * @param input String comes from the scanner object in Duke.main
+     * @param input String in the scanner
+     * @return output in response to String input
      */
-    public void parse(String input) {
+    public String parse(String input) {
 
         String errorMessage = DukeExceptionHandler.handleException(input);
         if (errorMessage != null) {
-            System.out.println(errorMessage);
-            return;
+            return errorMessage;
         }
 
         if (input.equals("list")) {
-            tasks.printTasks();
+            return tasks.printTasks();
+        } else if (input.equals("bye")) {
+            return Ui.Bye();
         } else {
             String[] words = input.split(" ", 2);
             String inputType = words[0];
@@ -45,27 +46,44 @@ public class Parser {
                 if (inputType.equals("todo")) {
                     Todo todo = new Todo(description);
                     tasks.addTask(storage, todo);
+
+                    return Ui.print("Got it. I've added this task:\n" + "" + todo.toString() +
+                            "\nNow you have " + tasks.getList().size() + " tasks in the list");
+
                 } else if (inputType.equals("deadline")) {
                     Deadline deadline = new Deadline(description);
                     tasks.addTask(storage, deadline);
+
+                    return Ui.print("Got it. I've added this task:\n" + "" + deadline.toString() +
+                            "\nNow you have " + tasks.getList().size() + " tasks in the list");
+
                 } else if (inputType.equals("event")) {
                     Event event = new Event(description);
                     tasks.addTask(storage, event);
+
+                    return Ui.print("Got it. I've added this task:\n" + "" + event.toString() +
+                            "\nNow you have " + tasks.getList().size() + " tasks in the list");
+
                 } else if (inputType.equals("done")) {
                     tasks.setDone(Integer.parseInt(description), storage);
+                    Task doneTask = tasks.getList().get(Integer.parseInt(description) - 1);
+                    return Ui.print("Nice! I've marked this task as done:\n" + doneTask);
+
                 } else if (inputType.equals("delete")) {
                     tasks.delete(Integer.parseInt(description));
+                    return Ui.printList(tasks.getList());
+
                 } else if (inputType.equals("find")) {
-                    tasks.find(input.substring(5));
-                }
+                    return tasks.find(input.substring(5));
+                } else return "Input format incorrect.";
             } catch (FileNotFoundException e) {
-                System.out.println("File not found");
+                return e.getMessage();
             } catch (IOException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
+                return "Something went wrong: " + e.getMessage();
             } catch (DateTimeParseException e) {
-                System.out.println("Date must be in the YYYY-MM-DD format!");
+                return "Date must be in the YYYY-MM-DD format!";
             } catch (DukeException e) {
-                e.printStackTrace();
+                return e.getMessage();
             }
         }
     }

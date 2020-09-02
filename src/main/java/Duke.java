@@ -6,7 +6,16 @@ import java.util.Scanner;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    protected Ui ui;
+
+    /**
+     * No-argument constructor for duke
+     */
+    public Duke() {
+        this.ui = new Ui();
+        this.storage = new Storage("data/duke.txt");
+        this.tasks = new TaskList();
+    }
 
     /**
      * constructor for Duke
@@ -17,6 +26,11 @@ public class Duke {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.tasks = new TaskList();
+    }
+
+    public String getResponse(String input) {
+        Parser parser = new Parser(tasks, storage);
+        return parser.parse(input);
     }
 
     /**
@@ -43,5 +57,4 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
-
 }

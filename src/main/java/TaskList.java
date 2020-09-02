@@ -17,6 +17,9 @@ public class TaskList {
         taskArrayList = new ArrayList<>();
     }
 
+    public ArrayList<Task> getList() {
+        return taskArrayList;
+    }
 
     /**
      * Adds task to taskArrayList, writes to duke.txt file
@@ -27,8 +30,6 @@ public class TaskList {
      */
     public void addTask(Storage storage, Task task) throws IOException {
         taskArrayList.add(task);
-        Ui.print("     Got it. I've added this task:\n" + "     " + task.toString() +
-                "\n     Now you have " + taskArrayList.size() + " tasks in the list");
         storage.writeToFile(task);
     }
 
@@ -37,11 +38,11 @@ public class TaskList {
      * prints list of tasks when user inputs "list"
      *
      */
-    public void printTasks() {
+    public String printTasks() {
         if (taskArrayList.size() == 0){
-            Ui.print("There are no tasks!\n");
+            return "There are no tasks!\n";
         }
-        else Ui.printList(this.taskArrayList);
+        else return Ui.printList(this.taskArrayList);
     }
 
     /**
@@ -55,7 +56,6 @@ public class TaskList {
             throw new DukeException("invalid task number");
         }
         taskArrayList.remove(i - 1);
-        Ui.printList(this.taskArrayList);
     }
 
     /**
@@ -67,11 +67,10 @@ public class TaskList {
     public void setDone(int i, Storage storage) {
         Task doneTask = taskArrayList.get(i - 1);
         doneTask.markAsDone();
-        Ui.print("Nice! I've marked this task as done:\n" + doneTask);
         storage.replaceDone(doneTask.getDescription());
     }
 
-    public void find(String substring) {
+    public String find(String substring) {
         StringBuilder sb = new StringBuilder();
         int counter = 0;
         sb.append("Here are the matching tasks in your list:\n");
@@ -82,9 +81,9 @@ public class TaskList {
             }
         }
         if (counter > 0) {
-            Ui.print(sb.toString());
+            return sb.toString();
         } else {
-            Ui.print("No match found!\n");
+            return "No match found!\n";
         }
     }
 }

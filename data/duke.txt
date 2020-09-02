@@ -1,0 +1,19 @@
+T | 1 | live life
+T | 1 | enjoy life
+E | 1 | concert | Sep 2 2020
+T | 0 | cum
+T | 1 | enjoy life
+E | 1 | concert | Sep 2 2020
+T | 1 | enjoy life
+T | 1 | live life
+T | 0 | enjoy life
+T | 1 | live life
+T | 0 | enjoy life
+T | 1 | live life
+T | 0 | enjoy life
+D | 0 | homework | Sep 2 2020
+T | 0 | live life
+T | 0 | live life
+T | 0 | enjoy life
+T | 1 | read a book
+T | 0 | borrow book

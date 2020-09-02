@@ -7,53 +7,42 @@ import java.util.ArrayList;
 public class Ui {
 
     /**
-     * void function to greet and introduce to user
+     * Function to greet and introduce Duke to user
      *
+     * @return String of a greeting
      */
-    public void Greet() {
-        System.out.println("Hello, I'm Duke");
-        System.out.println("What can I do for you?");
+    public String Greet() {
+        String greeting = "Hello! I'm Duke. What can I do for you?";
+        return greeting;
+
     }
 
-    /**
-     * void printing function that prints a string that adheres to line and indentation format of Duke
-     *
-     * @param string
-     */
-    public static void print(String string) {
-        showLine();
-        System.out.println(string);
-        showLine();
+    public static String print(String string) {
+        return string;
     }
 
     /**
      * takes in an ArrayList of tasks and prints each task one by one
      *
      * @param TaskList
+     * @return String of lists of tasks in ArrayList
      */
-    public static void printList(ArrayList<Task> TaskList) {
-        showLine();
+    public static String printList(ArrayList<Task> TaskList) {
+        String output = "";
         for (Task task : TaskList) {
-            System.out.println("     " + (TaskList.indexOf(task) + 1) + "." + task);
+            output += (TaskList.indexOf(task) + 1) + "." + task + "\n";
         }
-        showLine();
+        return output;
     }
 
     /**
      * Exit function for Duke
      *
+     * @return String of a bye greeting
      */
-    public void Bye() {
-        showLine();
-        System.out.println("     Bye. Hope to see you again soon!");
-        showLine();
+    public static String Bye() {
+        String bye = "Bye! Hope to see you soon!";
+        return bye;
     }
 
-    /**
-     * Helper function to assist with line and spacing format
-     *
-     */
-    public static void showLine() {
-        System.out.println("    ____________________________________________________________");
-    }
 }
