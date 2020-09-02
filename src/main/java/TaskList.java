@@ -19,6 +19,19 @@ public class TaskList {
         return this.tasks;
     }
 
+    public static TaskList TaskList(Task ... myTasks){
+
+        TaskList myList = new TaskList();
+
+
+        for(int i = 0 ;i<myTasks.length;i++){
+            myList.getTasks().add(myTasks[i]);
+        }
+        return myList;
+    }
+
+
+
     public String findTaskUI(String keyword) {
 
         String myStr = "";
