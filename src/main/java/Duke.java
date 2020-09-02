@@ -14,17 +14,18 @@ public class Duke {
     private Ui ui;
     private boolean isLoadingSuccess;
     private String filepath;
+    private Parser parser;
 
     /**
      * Creates a Duke object.
      * It is to start the Duke program.
-     *
+     * <p>
      * Variable filepath is directory to the duke.txt file where
      * reading and writing of the file occurs.
-     *
+     * <p>
      * Initialises Ui, Storage classes.
      * Sets isLoadingSuccess to true, assuming no errors.
-     *
+     * <p>
      * Loads the file contents.
      */
     public Duke() {
@@ -44,22 +45,16 @@ public class Duke {
             System.out.println(e);
             this.isLoadingSuccess = false;
         }
-    }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse(String input) {
-        return "Duke:\n" + input;
+        this.parser = new Parser(tasks);
     }
 
     /**
      * Runs the bulk of the Duke program.
-     *
+     * <p>
      * Prints the greetings using Ui object.
      * Tells the user if file loading is successful or not.
-     *
+     * <p>
      * Continues off data from the file.
      * Edit the file as user types in the console.
      */
@@ -94,13 +89,39 @@ public class Duke {
     }
 
     /**
-     * Main method of Duke program.
-     *
-     * Sets the relative path to the .txt file that requires updating.
-     * Creates a Duke object and runs it.
+     * Runs the the Duke program by terminal / .jar file.
      */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        String output;
+
+        try {
+            output = parser.parseUserInput(input);
+
+            try {
+                storage.writeToFile(parser.getTasks());
+            } catch (IOException e) {
+                ui.displayUpdateFileError(e.getMessage());
+            }
+
+        } catch (DukeException e) {
+            String exceptionMessage = e.toString();
+
+            if (exceptionMessage.equals("bye")) {
+                output = "See you again!";
+            } else {
+                output = e.toString();
+            }
+        }
+
+        return output;
     }
 }

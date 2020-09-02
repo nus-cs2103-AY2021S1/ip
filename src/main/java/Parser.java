@@ -189,8 +189,6 @@ public class Parser {
             System.out.println("     " + index + "." + currLst.get(i));
             index++;
         }
-
-        index++;
     }
 
     /**
@@ -216,7 +214,6 @@ public class Parser {
         System.out.println("     Noted. I've removed this task:\n"
                 + "       " + taskSubject
                 + "\n     Now you have " + this.tasks.getLength() + " task(s) in the list.");
-
     }
 
     /**
@@ -263,7 +260,164 @@ public class Parser {
             System.out.println("     " + index + "." + filteredTasks.get(i));
             index++;
         }
+    }
 
-        index++;
+    public String parseUserInput(String str) throws DukeException {
+        int commandSpace = str.indexOf(" ");
+
+        if (str.equals("bye")) {
+            throw new DukeException("bye");
+
+        } else if (str.equals("list")) {
+            List<Task> currLst = this.tasks.getTasks();
+            int size = currLst.size();
+            String output = "Here are the task(s) in your list:\n";
+
+            int index = 1;
+            for (int i = 0; i < size; i++) {
+                output = output + "  " + index + "." + currLst.get(i) + "\n";
+                index++;
+            }
+
+            return output;
+
+        } else if (commandSpace < 0) {
+            throw new DukeException("*Invalid command.*\n"
+                    + "  Commands: bye, list, todo, event, deadline, delete");
+
+        } else if (str.substring(0, 5).equals("done ")) {
+            int length = str.length();
+            String index = str.substring(5, length);
+            int realIndex = Integer.parseInt(index) - 1;
+
+            if (realIndex >= this.tasks.getLength() || realIndex < 0) {
+                throw new DukeException("*Invalid task index, please try again.*");
+            }
+            Task taskSubject = this.tasks.markDone(realIndex);
+            return "Nice! I've marked this task as done:\n"
+                    + "  " + taskSubject;
+
+        } else if (str.substring(0, 5).equals("todo ")) {
+            int length = str.length();
+            if (length == 5) {
+                throw new DukeException("*Please fill in todo description*");
+            }
+
+            Todo newTodo = new Todo(str.substring(5, length));
+            this.tasks.store(newTodo);
+            return "Got it. I've added this task:\n"
+                    + "  " + newTodo + "\n"
+                    + "Now you have " + this.tasks.getLength() + " task(s) in the list.";
+
+        } else if (str.substring(0, 5).equals("find ")) {
+            int length = str.length();
+            if (length == 5) {
+                throw new DukeException("*Please fill in a keyword to find*");
+            }
+
+            String keyword = str.substring(5, length);
+            List<Task> allTasks = tasks.getTasks();
+            int fullSize = tasks.getLength();
+            List<Task> filteredTasks = new ArrayList<>();
+
+            for (int i = 0; i < fullSize; i++) {
+                Task task = allTasks.get(i);
+                String taskString = task.toString();
+                if (taskString.contains(keyword)) {
+                    filteredTasks.add(task);
+                }
+            }
+
+            String output = "Here are the matching task(s) in your list:\n";
+            int partialSize = filteredTasks.size();
+            int index = 1;
+            for (int i = 0; i < partialSize; i++) {
+                output = output + "  " + index + "." + filteredTasks.get(i) + "\n";
+                index++;
+            }
+            return output;
+
+        } else if (commandSpace <= 4) {
+            throw new DukeException("*Invalid command.*\n"
+                    + "  Commands: bye, list, todo, event, deadline, delete");
+
+        } else if (str.substring(0, 6).equals("event ")) {
+            int length = str.length();
+            if (length == 6) {
+                throw new DukeException("*Please fill in event description*");
+            }
+
+            int timePrefix = str.indexOf("/at");
+            if (timePrefix < 0) {
+                throw new DukeException("*Please fill in event completion time in the following format:*\n"
+                        + "  eg. event CCA meeting /at YYYY-MM-DD");
+            }
+
+            LocalDate date;
+            String dateString = str.substring(timePrefix + 4, length);
+            try {
+                date = LocalDate.parse(dateString);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("*Please fill in the time in the YYYY-MM-DD format*");
+            }
+
+            Event newEvent = new Event(str.substring(6, timePrefix), date);
+            this.tasks.store(newEvent);
+            return "Got it. I've added this task:\n"
+                    + "  " + newEvent + "\n"
+                    + "Now you have " + this.tasks.getLength() + " task(s) in the list.";
+
+        } else if (commandSpace <= 5) {
+            throw new DukeException("*Invalid command.*\n"
+                    + "  Commands: bye, list, todo, event, deadline, delete");
+
+        } else if (str.substring(0, 7).equals("delete ")) {
+            int length = str.length();
+            String index = str.substring(7, length);
+            int realIndex = Integer.parseInt(index) - 1;
+
+            if (realIndex >= this.tasks.getLength() || realIndex < 0) {
+                throw new DukeException("*Invalid task index, please try again.*");
+            }
+
+            Task taskSubject = this.tasks.remove(realIndex);
+            return "Noted. I've removed this task:\n"
+                    + "  " + taskSubject + "\n"
+                    + "Now you have " + this.tasks.getLength() + " task(s) in the list.";
+
+        } else if (commandSpace <= 6) {
+            throw new DukeException("*Invalid command.*\n"
+                    + "  Commands: bye, list, todo, event, deadline, delete");
+
+        } else if (str.substring(0, 9).equals("deadline ")) {
+            int length = str.length();
+            if (length == 9) {
+                throw new DukeException("*Please fill in deadline description*");
+            }
+
+            int timePrefix = str.indexOf("/by");
+            if (timePrefix < 0) {
+                throw new DukeException("*Please fill in deadline completion time in the following format:*\n"
+                        + "  eg. deadline return book to Jurong Regional Library /by YYYY-MM-DD");
+            }
+
+            LocalDate date;
+            String dateString = str.substring(timePrefix + 4, length);
+            try {
+                date = LocalDate.parse(dateString);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("*Please fill in the time in the YYYY-MM-DD format*");
+            }
+
+            Deadline newDeadline = new Deadline(str.substring(9, timePrefix), date);
+            this.tasks.store(newDeadline);
+            return "Got it. I've added this task:\n"
+                    + "  " + newDeadline + "\n"
+                    + "Now you have " + this.tasks.getLength() + " task(s) in the list.";
+
+        } else {
+            throw new DukeException("*Invalid command.*\n"
+                    + "     Commands: bye, list, todo, event, deadline, delete");
+        }
     }
 }

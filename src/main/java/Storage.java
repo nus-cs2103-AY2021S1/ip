@@ -109,8 +109,8 @@ public class Storage {
         for (int i = 0; i < totalTasks; i++) {
             Task writeTask = tasksToWrite.get(i);
             String taskString = writeTask.toString();
-            String replacement1 = taskString.replaceAll("✓", "1");
-            String replacement2 = replacement1.replaceAll("✘", "0");
+            String replacement1 = taskString.replace('\u2713', '1');
+            String replacement2 = replacement1.replace('\u2718', '0');
             fw.write(replacement2 + "\n");
         }
 
