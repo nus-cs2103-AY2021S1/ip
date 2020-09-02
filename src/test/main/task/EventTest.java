@@ -72,11 +72,32 @@ public class EventTest {
 
         @Test
         @DisplayName("should return false for a non event tasks")
-        public void equals_noInput_altString() {
+        public void equals_nonEvent_false() {
             assertFalse(EVENT_ONE.equals(new Task("task 1")));
             assertFalse(EVENT_TWO.equals(new Todo("task 2")));
             assertFalse(EVENT_TWO.equals(
                     new Deadline("task 2", "4198-01-13T23:39", true)));
+        }
+
+        @Test
+        @DisplayName("should return false for an event with different name")
+        public void equals_event_false() {
+            assertFalse(EVENT_ONE.equals(
+                    new Event("different name", "1993-12-06T10:10", false)));
+        }
+
+        @Test
+        @DisplayName("should return false for an event with different done state")
+        public void equals_altEvent_false() {
+            assertFalse(EVENT_ONE.equals(
+                    new Event("task 1", "1993-12-06T10:10", true)));
+        }
+
+        @Test
+        @DisplayName("should return false for an event with different date")
+        public void equals_altEventTwo_false() {
+            assertFalse(EVENT_ONE.equals(
+                    new Event("task 1", "2020-12-06T10:10", false)));
         }
     }
 }

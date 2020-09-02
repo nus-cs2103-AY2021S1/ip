@@ -22,7 +22,7 @@ public class TodoTest {
         }
 
         @Test
-        @DisplayName("should return a string meant for writing to disk with alt event")
+        @DisplayName("should return a string meant for writing to disk with alt todo")
         public void write_noInput_altString() {
             assertEquals("T,,1,task 2\n", TODO_TWO.write());
         }
@@ -32,13 +32,13 @@ public class TodoTest {
     @DisplayName("string representation")
     class StringRepresentation {
         @Test
-        @DisplayName("should return a string representation of the event instance")
+        @DisplayName("should return a string representation of the todo instance")
         public void toString_noInput_string() {
             assertEquals("[T][\u2718] task 1", TODO_ONE.toString());
         }
 
         @Test
-        @DisplayName("should return a string representation of an alternate event instance")
+        @DisplayName("should return a string representation of an alternate todo instance")
         public void toString_noInput_altString() {
             assertEquals("[T][\u2713] task 2", TODO_TWO.toString());
         }
@@ -48,26 +48,38 @@ public class TodoTest {
     @DisplayName("equals")
     class Equal {
         @Test
-        @DisplayName("should return true for a event with the same name, event time and done state")
-        public void equals_event_true() {
+        @DisplayName("should return true for a todo with the same name")
+        public void equals_todo_true() {
             assertTrue(TODO_ONE.equals(new Todo("task 1")));
         }
 
         @Test
-        @DisplayName("should return true for an alt event with the same "
-                + "name, event time and done state")
-        public void equals_altEvent_true() {
+        @DisplayName("should return true for an alt todo with the same name")
+        public void equals_altTodo_true() {
             assertTrue(TODO_TWO.equals(new Todo("task 2", true)));
         }
 
         @Test
-        @DisplayName("should return false for a non event tasks")
-        public void equals_noInput_altString() {
+        @DisplayName("should return false for a non todo tasks")
+        public void equals_nonTodo_false() {
             assertFalse(TODO_ONE.equals(new Task("task 1")));
             assertFalse(TODO_TWO.equals(
                     new Event("task 2", "4198-01-13T23:39", true)));
             assertFalse(TODO_TWO.equals(
                     new Deadline("task 2", "4198-01-13T23:39", true)));
+        }
+
+        @Test
+        @DisplayName("should return false for a todo with different name")
+        public void equals_todo_false() {
+            assertFalse(TODO_ONE.equals(new Todo("task 2")));
+        }
+
+        @Test
+        @DisplayName("should return false for a todo with different done state")
+        public void equals_altTodo_false() {
+            assertFalse(TODO_ONE.equals(
+                    new Todo("task 1", true)));
         }
     }
 }

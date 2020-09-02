@@ -72,11 +72,32 @@ public class DeadlineTest {
 
         @Test
         @DisplayName("should return false for a non deadline tasks")
-        public void equals_noInput_altString() {
+        public void equals_nonDeadline_false() {
             assertFalse(DEADLINE_ONE.equals(new Task("task 1")));
             assertFalse(DEADLINE_TWO.equals(new Todo("task 2")));
             assertFalse(DEADLINE_TWO.equals(
                     new Event("task 2", "4198-01-13T23:39", true)));
+        }
+
+        @Test
+        @DisplayName("should return false for an deadline with different name")
+        public void equals_deadline_false() {
+            assertFalse(DEADLINE_ONE.equals(
+                    new Deadline("different name", "1993-12-06T10:10", false)));
+        }
+
+        @Test
+        @DisplayName("should return false for an deadline with different done state")
+        public void equals_altDeadline_false() {
+            assertFalse(DEADLINE_ONE.equals(
+                    new Deadline("task 1", "1993-12-06T10:10", true)));
+        }
+
+        @Test
+        @DisplayName("should return false for an deadline with different date")
+        public void equals_altDeadlineTwo_false() {
+            assertFalse(DEADLINE_ONE.equals(
+                    new Deadline("task 1", "2020-12-06T10:10", false)));
         }
     }
 }
