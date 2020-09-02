@@ -18,7 +18,22 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Initialise the Duke programme and load tasks from data file.
+     * Initialises the Duke programme and load tasks from default file.
+     */
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage(DATA_FILE);
+        try {
+            taskList = new TaskList(storage.load());
+            ui.showLoadSuccess(taskList);
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            taskList = new TaskList();
+        }
+    }
+
+    /**
+     * Initialises the Duke programme and load tasks from data file.
      *
      * @param filePath Path of data file to be loaded from.
      */
@@ -35,7 +50,7 @@ public class Duke {
     }
 
     /**
-     * Execute the {@code Duke} programme.
+     * Executes the {@code Duke} programme.
      */
     public void run() {
         while (!Command.isTerminated) {
