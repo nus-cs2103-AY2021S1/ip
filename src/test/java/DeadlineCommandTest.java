@@ -19,7 +19,7 @@ public class DeadlineCommandTest {
         String input = "deadline Laundry /by 2020-12-30";
         try {
             deadlineCommand.execute(taskList, ui, input);
-        } catch (InvalidTaskIdException | EmptyDescriptionException | InvalidFormatException e) {
+        } catch (EmptyDescriptionException | InvalidFormatException e) {
             e.printStackTrace();
         }
         Task lastTaskAdded = taskList.getTasks().get(taskList.taskSize() - 1);

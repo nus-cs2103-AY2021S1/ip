@@ -18,8 +18,6 @@ public class TodoCommandTest {
         String input = "todo Laundry";
         try {
             todoCommand.execute(taskList, ui, input);
-        } catch (InvalidTaskIdException e) {
-            e.printStackTrace();
         } catch (EmptyDescriptionException e) {
             e.printStackTrace();
         }
