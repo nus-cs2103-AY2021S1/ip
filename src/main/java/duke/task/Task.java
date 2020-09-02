@@ -1,4 +1,4 @@
-package main.java.duke.task;
+package duke.task;
 
 import java.time.LocalDate;
 
@@ -30,7 +30,7 @@ public class Task {
     /**
      * Changes the state of the task and marks it as completed.
      */
-    public void markAsCompleted(){
+    public void markAsCompleted() {
         this.isCompleted = true;
     }
 
@@ -40,7 +40,7 @@ public class Task {
      * @return The state of completion of the task.
      */
     public String getState() {
-        if(this.isCompleted) {
+        if (this.isCompleted) {
             return "\u2713";
         } else {
             return "\u2718";

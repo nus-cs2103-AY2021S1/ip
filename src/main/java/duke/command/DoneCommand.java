@@ -1,10 +1,12 @@
-package main.java.duke.command;
+package duke.command;
 
 import java.io.IOException;
-import main.java.duke.core.Ui;
-import main.java.duke.core.TaskList;
-import main.java.duke.core.Storage;
-import main.java.duke.handle.TaskNotFoundException;
+
+import duke.core.Result;
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
+import duke.handle.TaskNotFoundException;
 
 /**
  * The DoneCommand class represents a command that marks a task as completed in the task list.
@@ -32,15 +34,17 @@ public class DoneCommand extends Command {
      * @throws IOException If the storage process needs to be handled
      */
     @Override
-    public void excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
+    public Result excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
 
-        if(!taskList.has(count - 1)) {
+        if (!taskList.has(count - 1)) {
             //System.out.println(Duke.makeBlock("There is no such task"));
             throw new TaskNotFoundException("There is no such task");
         } else {
             taskList.markAsCompleted(count - 1);
-            ui.showDone(taskList.getTask(count - 1), count);
+            //ui.showDone(taskList.getTask(count - 1), count);
             storage.writeRecord(taskList);
+
+            return new Result(ui.showDone(taskList.getTask(count - 1), count), this.isContinuing());
         }
     }
 }

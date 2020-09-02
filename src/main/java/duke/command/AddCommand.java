@@ -1,10 +1,12 @@
-package main.java.duke.command;
+package duke.command;
 
 import java.io.IOException;
-import main.java.duke.core.Ui;
-import main.java.duke.core.TaskList;
-import main.java.duke.core.Storage;
-import main.java.duke.task.Task;
+
+import duke.core.Result;
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
+import duke.task.Task;
 
 /**
  * The AddCommand class represents a command that adds a task to the task list.
@@ -31,9 +33,10 @@ public class AddCommand extends Command {
      * @throws IOException If the storage process needs to be handled
      */
     @Override
-    public void excecute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public Result excecute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.add(task);
-        ui.showAdd(task, taskList.getSize());
         storage.writeRecord(taskList);
+
+        return new Result(ui.showAdd(task, taskList.getSize()), this.isContinuing());
     }
 }

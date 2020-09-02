@@ -1,15 +1,18 @@
-package main.java.duke;
+package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import main.java.duke.command.Command;
-import main.java.duke.handle.CommandNotFoundException;
-import main.java.duke.handle.TaskNotFoundException;
-import main.java.duke.handle.LoadingException;
-import main.java.duke.core.Storage;
-import main.java.duke.core.TaskList;
-import main.java.duke.core.Ui;
-import main.java.duke.core.Parser;
+
+import duke.command.Command;
+import duke.core.Parser;
+import duke.core.Result;
+import duke.core.Ui;
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.handle.CommandNotFoundException;
+import duke.handle.TaskNotFoundException;
+import duke.handle.LoadingException;
+import javafx.scene.image.Image;
 
 /**
  * The Duke class represents a duke bot that can interact with
@@ -24,65 +27,57 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
     private static final String FILE_PATH = "data/duke.txt";
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Takes in the path of the local record, and creates a duke bot to interact with
      * the user.
-     *
-     * @param filePath The path of the local record.
      */
-    public Duke(String filePath) {
+    public Duke() throws FileNotFoundException, LoadingException {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILE_PATH);
         try {
             taskList = new TaskList(storage.readRecord());
         } catch (FileNotFoundException fileNotFoundException) {
-            ui.handle(fileNotFoundException);
             taskList = new TaskList();
             try {
                 storage.writeRecord(taskList);
             } catch (IOException ioException) {
             }
+            throw fileNotFoundException;
         } catch (LoadingException loadingException) {
-            ui.handle(loadingException);
+            //ui.handle(loadingException);
             taskList = new TaskList();
             try {
                 storage.writeRecord(taskList);
             } catch (IOException ioException) {
             }
+            throw loadingException;
         }
     }
 
-    /**
-     * Starts the interaction between the bot and the user.
-     */
-    public void run() {
-        this.ui.showGreeting();
-        boolean isContinuing = true;
-        while (isContinuing) {
-            try {
-                String command = this.ui.readCommand();
-                Command parsedCommand = Parser.parseCommand(command);
-                parsedCommand.excecute(taskList, ui, storage);
-                isContinuing = parsedCommand.isContinuing();
-            } catch (CommandNotFoundException commandNotFoundexException) {
-                //System.out.println(commandNotFoundexException.getMessage());
-                ui.handle(commandNotFoundexException);
-            } catch (TaskNotFoundException taskNotFoundException) {
-                ui.handle(taskNotFoundException);
-            } catch (IOException ioException) {
-                ui.handle(ioException);
-            }
+    public Result getResponse(String command) {
+        try {
+            Command parsedCommand = Parser.parseCommand(command);
+            return parsedCommand.excecute(taskList, ui, storage);
+            //isContinuing = parsedCommand.isContinuing();
+        } catch (CommandNotFoundException commandNotFoundexException) {
+            //System.out.println(commandNotFoundexException.getMessage());
+            return new Result(ui.handle(commandNotFoundexException), true);
+        } catch (TaskNotFoundException taskNotFoundException) {
+            return new Result(ui.handle(taskNotFoundException), true);
+        } catch (IOException ioException) {
+            return new Result(ui.handle(ioException), true);
         }
+
+        //Command parsedCommand = Parser.parseCommand(command);
+        //return parsedCommand.excecute(taskList, ui, storage);
+
+        //return "Smith heard: " + string;
     }
 
-    /**
-     * Creates a duke bot and starts the interaction between the bot and the user.
-     *
-     * @param args The arguments.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke(FILE_PATH);
-        duke.run();
+    public Ui getUi() {
+        return ui;
     }
 }

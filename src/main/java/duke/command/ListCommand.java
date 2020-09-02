@@ -1,8 +1,9 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.core.Ui;
-import main.java.duke.core.TaskList;
-import main.java.duke.core.Storage;
+import duke.core.Result;
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
 
 /**
  * The ListCommand class represents a command that lists the tasks in the task list.
@@ -18,7 +19,7 @@ public class ListCommand extends Command {
      * @param storage The storage component.
      */
     @Override
-    public void excecute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showList(taskList);
+    public Result excecute(TaskList taskList, Ui ui, Storage storage) {
+        return new Result(ui.showList(taskList), isContinuing());
     }
 }

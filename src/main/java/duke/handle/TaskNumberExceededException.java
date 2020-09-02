@@ -1,4 +1,4 @@
-package main.java.duke.handle;
+package duke.handle;
 
 /**
  * The TaskNumberExceededException class describes the exception where

@@ -1,4 +1,4 @@
-package main.java.duke.task;
+package duke.task;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ class EventTest {
     @Test
     void record_eventWithDescription_suitableDescription() {
         LocalDate localDate = LocalDate.parse("2014-12-07");
-        assertEquals("E | 1 | a b c | 2014-12-07", new Event("a b c", localDate).record());
+        assertEquals("E | 0 | a b c | 2014-12-07", new Event("a b c", localDate).record());
     }
 
     @Test

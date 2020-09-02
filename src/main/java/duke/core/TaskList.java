@@ -1,8 +1,9 @@
-package main.java.duke.core;
+package duke.core;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import main.java.duke.task.Task;
+
+import duke.task.Task;
 
 /**
  * The TaskList class stores the tasks and manages the tasks using corresponding methods.
@@ -70,8 +71,8 @@ public class TaskList {
      */
     public TaskList findTaskAt(LocalDate localDate) {
         ArrayList<Task> list = new ArrayList<>();
-        for(int i = 0; i < tasks.size(); i = i + 1) {
-            if(tasks.get(i).isAt(localDate)) {
+        for (int i = 0; i < tasks.size(); i = i + 1) {
+            if (tasks.get(i).isAt(localDate)) {
                 list.add(tasks.get(i));
             }
         }
@@ -86,8 +87,8 @@ public class TaskList {
      */
     public TaskList findTaskWithDescription(String key) {
         ArrayList<Task> list = new ArrayList<>();
-        for(int i = 0; i < tasks.size(); i = i + 1) {
-            if(tasks.get(i).getDescription().contains(key)) {
+        for (int i = 0; i < tasks.size(); i = i + 1) {
+            if (tasks.get(i).getDescription().contains(key)) {
                 list.add(tasks.get(i));
             }
         }
@@ -102,7 +103,7 @@ public class TaskList {
     @Override
     public String toString() {
         String result = "";
-        for(int i = 0; i < tasks.size(); i = i + 1) {
+        for (int i = 0; i < tasks.size(); i = i + 1) {
             result = result + String.valueOf(i + 1) + "." + tasks.get(i).toString() + "\n";
         }
         return result;

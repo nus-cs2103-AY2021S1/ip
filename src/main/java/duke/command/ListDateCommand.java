@@ -1,16 +1,18 @@
-package main.java.duke.command;
+package duke.command;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import main.java.duke.core.Ui;
-import main.java.duke.core.TaskList;
-import main.java.duke.core.Storage;
-import main.java.duke.handle.TaskNotFoundException;
+
+import duke.core.Result;
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
+import duke.handle.TaskNotFoundException;
 
 /**
  * The ListDateCommand class represents a command that lists a task on a specific date in the task list.
  */
-public class ListDateCommand extends Command{
+public class ListDateCommand extends Command {
     private LocalDate localDate;
 
     /**
@@ -33,7 +35,7 @@ public class ListDateCommand extends Command{
      * @throws IOException If the storage process needs to be handled
      */
     @Override
-    public void excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
-        ui.showList(taskList.findTaskAt(localDate));
+    public Result excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
+        return new Result(ui.showList(taskList.findTaskAt(localDate)), isContinuing());
     }
 }

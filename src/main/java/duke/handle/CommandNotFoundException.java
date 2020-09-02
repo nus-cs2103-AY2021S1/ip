@@ -1,4 +1,4 @@
-package main.java.duke.handle;
+package duke.handle;
 
 /**
  * The CommandNotFoundException class describes the exception where
@@ -13,6 +13,6 @@ public class CommandNotFoundException extends Exception {
      * @param message The message of why the command cannot be parsed.
      */
     public CommandNotFoundException(String message) {
-        super(message);   
+        super(message);
     }
 }

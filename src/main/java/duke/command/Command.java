@@ -1,11 +1,14 @@
-package main.java.duke.command;
+package duke.command;
 
 import java.io.IOException;
-import main.java.duke.core.Ui;
-import main.java.duke.core.TaskList;
-import main.java.duke.core.Storage;
+import java.util.HashMap;
 
-import main.java.duke.handle.TaskNotFoundException;
+import duke.core.Result;
+import duke.core.Ui;
+import duke.core.TaskList;
+import duke.core.Storage;
+
+import duke.handle.TaskNotFoundException;
 
 /**
  * The Command class represents a command that can be executed.
@@ -25,7 +28,7 @@ public abstract class Command {
      * @throws TaskNotFoundException If there is no task corresponding to the count of the task.
      * @throws IOException If the stroage process needs to be handled
      */
-    abstract public void excecute(TaskList taskList, Ui ui, Storage storage)
+    abstract public Result excecute(TaskList taskList, Ui ui, Storage storage)
             throws TaskNotFoundException, IOException;
 
     /**
