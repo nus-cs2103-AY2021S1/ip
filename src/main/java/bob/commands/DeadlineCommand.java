@@ -23,7 +23,7 @@ public class DeadlineCommand extends Command {
      */
     public DeadlineCommand(String input) throws BobEmptyTaskException {
         //Removes all whitespaces and checks if input is empty
-        if (input.replaceAll("\\s+", "").length() == 0) {
+        if (input.trim().length() == 0) {
             throw new BobEmptyTaskException();
         }
 

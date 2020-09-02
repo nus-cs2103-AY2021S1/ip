@@ -23,7 +23,7 @@ public class EventCommand extends Command {
      */
     public EventCommand(String input) throws BobEmptyTaskException {
         //Removes all whitespaces and checks if input is empty
-        if (input.replaceAll("\\s+", "").length() == 0) {
+        if (input.trim().length() == 0) {
             throw new BobEmptyTaskException();
         }
 

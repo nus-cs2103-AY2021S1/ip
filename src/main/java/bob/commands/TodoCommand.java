@@ -21,7 +21,7 @@ public class TodoCommand extends Command {
      * @throws BobEmptyTaskException If there is no description for task.
      */
     public TodoCommand(String input) throws BobEmptyTaskException {
-        if (input.length() == 0) {
+        if (input.trim().length() == 0) {
             throw new BobEmptyTaskException();
         }
 
