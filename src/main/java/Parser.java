@@ -1,5 +1,7 @@
 /**
  * The Parser class is responsible for parsing various types of Strings encountered within the program.
+ *
+ * @auther Jaya Rengam
  */
 public class Parser {
 
@@ -9,48 +11,30 @@ public class Parser {
         if (consoleArg.length() <= 4) {
             throw new UnknownCommandException("Error: Missing task type keyword");
         }
-        String[] parsedArr = consoleArg.substring(4).split(" ");
-        String keyword = parsedArr[0];
-        if (keyword.equals("todo")) {
-            String name = "";
 
-            for (int i = 1; i < parsedArr.length; i++) {
-                if (i != parsedArr.length - 1) {
-                    name += parsedArr[i] + " ";
-                } else {
-                    name += parsedArr[i];
-                }
-            }
-            if (name.equals("")) {
+        String keyword = consoleArg.substring(4).split(" ")[0];
+        switch (keyword) {
+        case("todo"):
+            if (consoleArg.length() <= 9) {
                 throw new EmptyTaskDescriptionException("Error: Empty task name not allowed");
             }
 
-            return new Todo(name, false);
+            String name = consoleArg.substring(9);
 
-        } else if (keyword.equals("deadline")) {
-            String name = "";
+            return new Todo(name, false);
+        case("deadline"):
+            String deadlineName = "";
             String time = "";
-            boolean nameOrTime = true;
-            for (int i = 1; i < parsedArr.length; i++) {
-                if (nameOrTime) {
-                    if (parsedArr[i].contains("/by")) {
-                        if (name.equals("")) {
-                            throw new EmptyTaskDescriptionException("Error: Empty task name not allowed");
-                        }
-                        nameOrTime = false;
-                        continue;
-                    } else {
-                        name += parsedArr[i] + " ";
-                    }
-                } else {
-                    if (i != parsedArr.length - 1) {
-                        time += parsedArr[i] + " ";
-                    } else {
-                        time += parsedArr[i];
-                    }
-                }
+
+            try {
+                String[] nameAndTime = consoleArg.substring(13).split(" /by ");
+                deadlineName = nameAndTime[0];
+                time = nameAndTime[1];
+            } catch (IndexOutOfBoundsException e) {
+                throw new InvalidTaskTimeException("Error: Missing '/by' keyword or time range");
             }
-            if (name.equals("")) {
+
+            if (deadlineName.equals("")) {
                 throw new EmptyTaskDescriptionException("Error: Empty task name not allowed");
             }
             if (time.equals("")) {
@@ -58,30 +42,21 @@ public class Parser {
             }
 
             TaskDate dateTime = DateParser.parseDate(time);
-            return new Deadline(name, false, dateTime);
+            return new Deadline(deadlineName, false, dateTime);
 
-        } else if (keyword.equals("event")) {
-            String name = "";
+        case("event"):
+            String eventName = "";
             String timeRange = "";
-            boolean nameOrTime = true;
-            for (int i = 1; i < parsedArr.length; i++) {
-                if (nameOrTime) {
-                    if (parsedArr[i].contains("/at")) {
-                        nameOrTime = false;
-                        continue;
-                    } else {
-                        name += parsedArr[i] + " ";
-                    }
-                } else {
-                    if (i != parsedArr.length - 1) {
-                        timeRange += parsedArr[i] + " ";
-                    } else {
-                        timeRange += parsedArr[i];
-                    }
-                }
+
+            try {
+                String[] nameAndTime = consoleArg.substring(10).split(" /at ");
+                eventName = nameAndTime[0];
+                timeRange = nameAndTime[1];
+            } catch (IndexOutOfBoundsException e) {
+                throw new InvalidTaskTimeException("Error: Missing '/at' keyword or time range");
             }
 
-            if (name.equals("")) {
+            if (eventName.equals("")) {
                 throw new EmptyTaskDescriptionException("Error: Empty task name not allowed");
             }
             if (timeRange.equals("")) {
@@ -90,14 +65,15 @@ public class Parser {
 
             TaskDate startDateTime = DateParser.getRange(timeRange, true);
             TaskDate endDateTime = DateParser.getRange(timeRange, false);
-            return new Event(name, false, startDateTime, endDateTime);
-        } else {
+            return new Event(eventName, false, startDateTime, endDateTime);
+        default:
             throw new UnknownCommandException("Error: Invalid Event Type, please try again.");
         }
     }
 
     /**
      * Parses one line of user input and returns a Command describing what type of action to execute.
+     *
      * @throws InvalidInputException if there is a formatting error in the input after the first keyword.
      * @throws UnknownCommandException if the keyword is not recognised.
      */
@@ -148,11 +124,14 @@ public class Parser {
 
     /**
      * Parses the storage string representation of a Task and returns the Task.
+     *
+     * @param storageLine A storage string representation of a Task.
+     * @return The task represented by storageLine.
      */
     public Task parseFromStorage(String storageLine) {
         String[] taskData = storageLine.split(" \\| ");
         String taskType = taskData[0];
-        boolean taskIsDone = Integer.valueOf(taskData[1]) == 1;
+        boolean taskIsDone = Integer.parseInt(taskData[1]) == 1;
         String taskName = taskData[2];
 
         if (!taskType.equals("T")) {

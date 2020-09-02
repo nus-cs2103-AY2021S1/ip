@@ -3,6 +3,7 @@ import java.util.ArrayList;
 /**
  * The TaskList class represents the running list of Tasks. It uses the ArrayList to store Tasks.
  * Note that the list uses one-based numbering.
+ *
  * @author Jaya Rengam
  */
 public class TaskList {

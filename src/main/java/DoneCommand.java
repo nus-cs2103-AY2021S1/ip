@@ -5,7 +5,8 @@
  */
 public class DoneCommand implements Command{
     private boolean hasExecuted;
-    /** The ID in the list of the task to be mark as complete. */
+
+    /** The ID in the list of the task to be marked as complete. */
     private int taskIdToComplete;
 
     DoneCommand(int taskIdToComplete) {
@@ -13,6 +14,14 @@ public class DoneCommand implements Command{
         this.taskIdToComplete = taskIdToComplete;
     }
 
+    /**
+     * Completes the Task given by taskIdToComplete in the TaskList and updates the Storage text file.
+     *
+     * @param taskList the TaskList being modified
+     * @param ui the Ui object that is used to print the action to the console
+     * @param storage the Storage object used to update the text file
+     * @throws CartonaException if the command has already been executed
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
         // Check if the command has already been executed.

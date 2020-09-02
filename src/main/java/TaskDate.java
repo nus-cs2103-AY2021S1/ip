@@ -12,8 +12,8 @@ public class TaskDate {
     private LocalDateTime dateTime;
 
     TaskDate(LocalDate date, String time) {
-        this.dateTime = date.atTime(LocalTime.parse(time,
-                                    DateTimeFormatter.ofPattern("HHmm")));
+        this.dateTime = date.atTime(LocalTime
+                                    .parse(time, DateTimeFormatter.ofPattern("HHmm")));
     }
 
     /**
@@ -28,8 +28,8 @@ public class TaskDate {
     }
 
     public String getTime() {
-        return this.dateTime.toLocalTime().format(
-                             DateTimeFormatter.ofPattern("HHmm"));
+        return this.dateTime.toLocalTime()
+                            .format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
     @Override

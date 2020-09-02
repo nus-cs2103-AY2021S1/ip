@@ -11,6 +11,14 @@ public class PrintListCommand implements Command {
         this.isDone = false;
     }
 
+    /**
+     * Prints the contents of a TaskList to the console.
+     *
+     * @param taskList The TaskList to be printed.
+     * @param ui The Ui object that is used to print the action to the console.
+     * @param storage The Storage object in use.
+     * @throws CartonaException if the command has already been executed.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
         // Check if the command has already been executed.

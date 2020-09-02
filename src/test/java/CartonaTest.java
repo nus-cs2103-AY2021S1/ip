@@ -9,8 +9,7 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CartonaTest {
@@ -62,10 +61,10 @@ public class CartonaTest {
             Scanner txtReader = null;
             txtReader = new Scanner(path);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
-        String expectedString = "T | 0 | test1\n" + "D | 0 | test2  | Aug 30 2020 1800\n" +
-                                    "E | 0 | test3  | Aug 30 2020 2000 - 2200\n";
+        String expectedString = "T | 0 | test1\n" + "D | 0 | test2 | Aug 30 2020 1800\n" +
+                                    "E | 0 | test3 | Aug 30 2020 2000 - 2200\n";
 
         assertEquals(savedtxt, expectedString);
     }

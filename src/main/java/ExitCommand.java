@@ -10,6 +10,14 @@ public class ExitCommand implements Command {
         this.hasExecuted = false;
     }
 
+    /**
+     * Prints the exit message to console.
+     *
+     * @param taskList the running TaskList
+     * @param ui the Ui object that is used to print the action to the console
+     * @param storage the Storage object in use
+     * @throws CartonaException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
         // Check if the command has already been executed.

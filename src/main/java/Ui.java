@@ -79,7 +79,12 @@ public class Ui {
         toPrint += HORIZONTAL_LINE;
         System.out.printf(toPrint);
     }
-    
+
+    /**
+     * Prints a numbered list of matching Tasks (from a FindTask Command operation)
+     *
+     * @param matchingTaskList
+     */
     public void printMatchingTaskList(TaskList matchingTaskList) {
         String toPrint = HORIZONTAL_LINE + "     Here are the matching tasks in your list:\n";
         toPrint += matchingTaskList.toString();

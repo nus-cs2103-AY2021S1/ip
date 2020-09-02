@@ -7,6 +7,14 @@ public class Event extends Task {
     private TaskDate start;
     private TaskDate end;
 
+    /**
+     * Creates an Event object.
+     *
+     * @param name the name of the Event
+     * @param isDone whether the Event has been completed or not
+     * @param start the starting date and time of the Event
+     * @param end the ending date and time of the Event
+     */
     Event(String name, boolean isDone, TaskDate start, TaskDate end) {
         super(name, isDone,"E");
         this.start = start;

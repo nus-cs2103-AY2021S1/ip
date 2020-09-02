@@ -16,6 +16,7 @@ public abstract class Task {
 
     /**
      * Sets isDone to true
+     *
      * @throws CartonaException if the task is already done
      */
     public void complete() throws CartonaException {

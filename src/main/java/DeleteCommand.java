@@ -5,7 +5,8 @@
  */
 public class DeleteCommand implements Command {
     private boolean hasExecuted;
-    /** The ID in the list of the task to be deleted. */
+
+    /** The ID in the TaskList of the Task to be deleted. */
     private int taskIdToDelete;
 
     DeleteCommand(int taskIdToDelete) {
@@ -13,6 +14,14 @@ public class DeleteCommand implements Command {
         this.taskIdToDelete = taskIdToDelete;
     }
 
+    /**
+     * Deletes the Task given by taskIdToComplete in the TaskList and updates the Storage text file.
+     *
+     * @param taskList the TaskList being modified
+     * @param ui the Ui object that is used to print the action to the console
+     * @param storage the Storage object used to update the text file
+     * @throws CartonaException if the command has already been executed
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
         // Check if the command has already been executed.

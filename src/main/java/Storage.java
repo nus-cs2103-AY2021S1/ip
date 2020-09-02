@@ -11,6 +11,8 @@ import java.util.List;
 
 /**
  * The Storage class handles the saving of the TaskList to a file, and the loading of Tasks from a file.
+ *
+ * @author Jaya Rengam
  */
 public class Storage {
     private static String HORIZONTAL_LINE = "    ____________________________________________________________\n";

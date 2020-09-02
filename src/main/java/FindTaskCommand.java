@@ -1,12 +1,24 @@
 public class FindTaskCommand implements Command {
     private boolean isDone;
+
+    /** The search keyword used to find tasks */
     private String searchKeyword;
 
     FindTaskCommand(String searchKeyword) {
         this.isDone = false;
+
+
         this.searchKeyword = searchKeyword;
     }
 
+    /**
+     * Finds the list of tasks whose names contain the searchKeyword and prints the list to the console.
+     *
+     * @param taskList the running TaskList in use
+     * @param ui the Ui object that is used to print the action to the console
+     * @param storage the Storage object in use
+     * @throws CartonaException if the command has already been executed
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
         if (isDone) {
