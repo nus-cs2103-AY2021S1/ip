@@ -24,7 +24,8 @@ public class DoneCommand extends Command {
      * @param storage Storage to load and save data.
      */
     @Override
-    public void executeCommand(TaskList tasks, Ui ui, Storage storage) {
-        tasks.markAsDone(index);
+    public String executeCommand(TaskList tasks, Ui ui, Storage storage) {
+        tasks.markAsDone(index, ui);
+        return ui.getResponses();
     }
 }

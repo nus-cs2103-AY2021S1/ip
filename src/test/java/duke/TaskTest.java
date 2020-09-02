@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
 public class TaskTest {
     private static final String SEPARATOR = System.getProperty("line.separator");
@@ -29,11 +30,13 @@ public class TaskTest {
 
     @Test
     public void testAddTask() {
+        Ui ui = new Ui();
         PrintStream ps = new PrintStream(out);
         System.setOut(ps);
         testTasks = new TaskList();
         Task newTask = new ToDo("to be done", false);
-        testTasks.addTask(newTask);
+        testTasks.addTask(newTask, ui);
+        ui.printMessage(ui.getResponses());
         assertEquals(" Your task has been recorded." + SEPARATOR
                 + "   " + newTask + SEPARATOR + " You have 1 tasks currently."
                 + SEPARATOR, out.toString());
@@ -42,16 +45,20 @@ public class TaskTest {
 
     @Test
     public void testDeleteTask() {
+        Ui ui = new Ui();
         PrintStream ps = new PrintStream(out);
         testTasks = new TaskList();
         Task newTask = new ToDo("to be done", false);
-        testTasks.addTask(newTask);
+        testTasks.addTask(newTask, ui);
+        ui.getResponses();
         System.setOut(ps);
-        testTasks.deleteTask(-1);
+        testTasks.deleteTask(-1, ui);
+        ui.printMessage(ui.getResponses());
         assertEquals(" Sorry I cannot find your specified task :("
                 + SEPARATOR, out.toString());
         out.reset();
-        testTasks.deleteTask(1);
+        testTasks.deleteTask(1, ui);
+        ui.printMessage(ui.getResponses());
         assertEquals(" Okay, I will remove this task for you" + SEPARATOR
                 + "   " + newTask + SEPARATOR
                 + " You have 0 tasks currently." + SEPARATOR,
@@ -61,16 +68,20 @@ public class TaskTest {
 
     @Test
     public void testMarkAsDone() {
+        Ui ui = new Ui();
         PrintStream ps = new PrintStream(out);
         testTasks = new TaskList();
         Task newTask = new ToDo("to be done", false);
-        testTasks.addTask(newTask);
+        testTasks.addTask(newTask, ui);
+        ui.getResponses();
         System.setOut(ps);
-        testTasks.markAsDone(-1);
+        testTasks.markAsDone(-1, ui);
+        ui.printMessage(ui.getResponses());
         assertEquals(" Sorry I cannot find your specified task :("
                 + SEPARATOR, out.toString());
         out.reset();
-        testTasks.markAsDone(1);
+        testTasks.markAsDone(1, ui);
+        ui.printMessage(ui.getResponses());
         assertEquals(" Congratulations for finishing this task!" + SEPARATOR
                 + " Let me mark this as done for you." + SEPARATOR
                 + "   " + newTask + SEPARATOR, out.toString());
@@ -79,17 +90,21 @@ public class TaskTest {
 
     @Test
     public void testListTasks() {
+        Ui ui = new Ui();
         PrintStream ps = new PrintStream(out);
         testTasks = new TaskList();
         System.setOut(ps);
-        testTasks.listTasks();
+        testTasks.listTasks(ui);
+        ui.printMessage(ui.getResponses());
         assertEquals(" You've got no tasks now." + SEPARATOR
                 + " If you want to get busy add more task." + SEPARATOR
                 + " I'll remember them for you :)" + SEPARATOR, out.toString());
         Task newTask = new ToDo("to be done", false);
-        testTasks.addTask(newTask);
+        testTasks.addTask(newTask, ui);
+        ui.getResponses();
         out.reset();
-        testTasks.listTasks();
+        testTasks.listTasks(ui);
+        ui.printMessage(ui.getResponses());
         assertEquals(" Let me list out all your tasks..." + SEPARATOR
                 + " 1." + newTask + SEPARATOR, out.toString());
         System.setOut(originalOut);

@@ -18,6 +18,13 @@ public class Duke {
     private Ui ui;
 
     /**
+     * Initializes a Duke object.
+     */
+    public Duke() {
+        this("./tasks.txt");
+    }
+
+    /**
      * Initializes a Duke object
      *
      * @param filePath The location of saved data.
@@ -42,16 +49,16 @@ public class Duke {
         while (!isExit) {
             try {
                 String input = ui.readInput();
-                ui.showLine();
+                ui.printMessage(ui.showLine());
                 Command command = Parser.parse(input);
                 if (command != null) {
-                    command.executeCommand(tasks, ui, storage);
+                    ui.printMessage(command.executeCommand(tasks, ui, storage));
                     isExit = command.isExit();
                 }
             } catch (DukeException error) {
                 ui.printMessage(error.getMessage());
             } finally {
-                ui.showLine();
+                ui.printMessage(ui.showLine());
             }
         }
         try {
@@ -68,5 +75,36 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke("./tasks.txt").run();
+    }
+
+    /**
+     * Returns a response to be shown to the user.
+     *
+     * @param input Input from the user.
+     * @return Response to the user.
+     */
+    public String getResponse(String input) {
+        StringBuilder response = new StringBuilder();
+        try {
+            response.append(ui.showLine() + "\n");
+            Command command = Parser.parse(input);
+            if (command != null) {
+                response.append(command.executeCommand(tasks, ui, storage) + "\n");
+            }
+        } catch (DukeException error) {
+            response.append(error.getMessage() + "\n");
+        } finally {
+            response.append(ui.showLine() + "\n");
+        }
+        return response.toString();
+    }
+
+    /**
+     * Shows welcome message to user.
+     *
+     * @return Welcome message to user.
+     */
+    public String getWelcomeMessage() {
+        return ui.getGreetings();
     }
 }
