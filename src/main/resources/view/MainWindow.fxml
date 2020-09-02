@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -10,9 +11,13 @@
     <children>
         <TextField fx:id="userInput" layoutX="14.0" layoutY="745.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="480.0" AnchorPane.bottomAnchor="14.0" />
         <Button fx:id="sendButton" layoutX="510.0" layoutY="745.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutX="9.0" prefHeight="742.0" prefWidth="578.0" vvalue="1.0">
+        <ScrollPane fx:id="scrollPane" cacheHint="QUALITY" hbarPolicy="NEVER" hvalue="1.0" layoutX="14.0" prefHeight="730.0" prefWidth="570.0" stylesheets="@mainwindow.css" vvalue="1.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="5.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="739.0" prefWidth="574.0" />
+                <VBox fx:id="dialogContainer" blendMode="MULTIPLY" cache="true" prefHeight="732.0" prefWidth="555.0" spacing="10.0" styleClass="anchor">
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+            </VBox>
             </content>
         </ScrollPane>
     </children>

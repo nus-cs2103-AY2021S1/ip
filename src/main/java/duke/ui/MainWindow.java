@@ -3,15 +3,13 @@ package duke.ui;
 import duke.Duke;
 import duke.Ui;
 import javafx.application.Platform;
-import javafx.concurrent.Service;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
