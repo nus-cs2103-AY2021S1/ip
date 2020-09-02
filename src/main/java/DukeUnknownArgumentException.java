@@ -12,7 +12,7 @@ public class DukeUnknownArgumentException extends DukeException {
     }
     
     public String toString() {
-        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return "I can't hear youuuuuuuu";
     }
     
 }

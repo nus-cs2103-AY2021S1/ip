@@ -5,6 +5,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -20,18 +22,33 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/spongebob.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/pirate.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        printToUser("Hi spongebob, what kind of patties are you flipping today?");
+//        System.out.println(duke);
+//        Ui ui = duke.getUi();
+//        TaskList taskList = duke.getTaskList();
+//        printToUser(duke.getStorage().load(taskList, ui));
     }
 
     public void setDuke(Duke d) {
         duke = d;
     }
 
+    /**
+     * Prints to user a message
+     */
+    @FXML
+    private void printToUser(String message) {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(message, dukeImage)
+        );
+    }
+    
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -45,5 +62,17 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if(input.equals("bye")) {
+            closeStage();
+        }
+        Ui ui = duke.getUi();
+        TaskList taskList = duke.getTaskList();
+        duke.getStorage().save(taskList, ui);
+    }
+
+    @FXML
+    void closeStage() {
+        Stage stage = (Stage) userInput.getScene().getWindow();
+        stage.close();
     }
 }
