@@ -1,5 +1,3 @@
-package gui;
-
 import javafx.application.Application;
 
 /**

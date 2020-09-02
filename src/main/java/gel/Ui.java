@@ -9,35 +9,45 @@ import gel.task.Task;
  */
 public class Ui {
 
-    public void showLoadingError() {
-        System.out.println("    Lol... Did not manage to load storage data..."
-                + " Creating new TaskList now...");
+    public String showLoadingError() {
+        String errorMsg = "    Lol... Did not manage to load storage data..."
+                + " Creating new TaskList now...";
+        System.out.println(errorMsg);
+        return errorMsg;
     }
 
-    public void showWelcomeMessage() {
-        System.out.println("    Hello! I'm Gel\n    What do you want from me?\n");
+    public String showWelcomeMessage() {
+        String welcomeMsg = "    Hello! I'm gel.Gel\n    What do you want from me?\n";
+        System.out.println(welcomeMsg);
+        return welcomeMsg;
     }
 
-    public void farewellMessage() {
-        System.out.println("\n    Bye. Hope to see you again soon!\n");
+    public String farewellMessage() {
+        String farewellMsg = "\n    Bye. Hope to see you again soon!\n";
+        System.out.println(farewellMsg);
+        return farewellMsg;
     }
 
-    public void addTaskToListMsg(Task task, int numberOfItems) {
-        System.out.println("\n    Got it. I've added this task:");
-        System.out.println("      " + task);
-        System.out.println("    Now you have " + numberOfItems + " task(s) in the list.\n");
+    public String addTaskToListMsg(Task task, int numberOfItems) {
+        String addTaskMsg = "\n    Got it. I've added this task:\n    "
+                + task + "\n    Now you have " + numberOfItems + " task(s) in the list.\n";
+        System.out.println(addTaskMsg);
+        return addTaskMsg;
     }
 
-    public void taskRemoveMsg(Task task, int numberOfItemsLeft) {
-        System.out.println("\n    Noted. I've removed this task:");
-        System.out.println("    " + task);
-        System.out.println("    Now you have " + numberOfItemsLeft + " task(s) in the list.\n");
+    public String taskRemoveMsg(Task task, int numberOfItemsLeft) {
+        String removeTaskMsg = "\n    Noted. I've removed this task:\n    "
+                + task + "\n    Now you have " + numberOfItemsLeft + " task(s) in the list.\n";
+        System.out.println(removeTaskMsg);
+        return removeTaskMsg;
     }
 
     public void markTaskAsDoneMsg(Task task) {
+
         System.out.println("\n    Nice! I've marked this task as done:");
         System.out.println("    " + task);
         System.out.println();
+        return
     }
 
     public void showListOfTask(List<Task> taskList) {
