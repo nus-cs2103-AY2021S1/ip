@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-//    id 'checkstyle'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -37,9 +37,9 @@ shadowJar {
     archiveClassifier = null
 }
 
-//checkstyle {
-//    toolVersion = '8.23'
-//}
+checkstyle {
+    toolVersion = '8.32'
+}
 
 run{
     standardInput = System.in
@@ -48,4 +48,14 @@ run{
 task uiTest(type:Exec) {
     workingDir './text-ui-test'
     commandLine './runtest.sh'
+}
+
+task allTests {
+    dependsOn(uiTest, 
+            tasks.findByName('test'),
+            tasks.findByName('checkstyleMain'),
+            tasks.findByName('checkstyleTest'))
+    uiTest.mustRunAfter(tasks.findByName('test'))
+    tasks.findByName('checkstyleMain').mustRunAfter(uiTest)
+    tasks.findByName('checkstyleTest').mustRunAfter(tasks.findByName('checkstyleMain'))
 }
