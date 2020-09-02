@@ -1,5 +1,3 @@
-package duke;
-
 /**
  * Deadline class is a subclass of Task which holds information for this type of tasks with
  * a date and time (which is the deadline :) ).

@@ -1,5 +1,3 @@
-package duke;
-
 /**
  * Task class is the subclass of Deadline, Event and Todo
  * thus it holds common methods and constructors for these classes.
