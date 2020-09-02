@@ -1,7 +1,7 @@
 package task;
 
 public class Task {
-    private int hasCompleted;
+    private int hasCompletedInt;
     private String name;
 
     /**
@@ -10,7 +10,7 @@ public class Task {
      * @param name Name of Task
      */
     public Task(String name) {
-        this.hasCompleted = 0;
+        this.hasCompletedInt = 0;
         this.name = name;
     }
 
@@ -18,19 +18,19 @@ public class Task {
      * Alternative Constructor for Task
      *
      * @param name         Name of Task
-     * @param hasCompleted boolean to determine whether task is completed
+     * @param hasCompletedInt boolean to determine whether task is completed
      */
-    public Task(String name, int hasCompleted) {
-        this.hasCompleted = hasCompleted;
+    public Task(String name, int hasCompletedInt) {
+        this.hasCompletedInt = hasCompletedInt;
         this.name = name;
     }
 
     public void markAsDone() {
-        this.hasCompleted = 1;
+        this.hasCompletedInt = 1;
     }
 
-    public int getHasCompleted() {
-        return hasCompleted;
+    public int gethasCompletedInt() {
+        return hasCompletedInt;
     }
 
     public String getName() {
@@ -38,6 +38,6 @@ public class Task {
     }
 
     public String toString() {
-        return String.format("[%s] %s", this.hasCompleted == 1 ? "✓" : "✗", this.name);
+        return String.format("[%s] %s", this.hasCompletedInt == 1 ? "✓" : "✗", this.name);
     }
 }

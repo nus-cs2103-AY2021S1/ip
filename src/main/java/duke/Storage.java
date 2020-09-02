@@ -102,7 +102,7 @@ public class Storage {
      * @throws DukeException Exceptions in parsing the file.
      */
     public List<Task> parseFile(File file) throws DukeException {
-        List<Task> result = new ArrayList<>();
+        List<Task> results = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
@@ -111,10 +111,10 @@ public class Storage {
             while ((line = reader.readLine()) != null) {
                 Task task = readLine(line);
                 if (task != null) {
-                    result.add(task);
+                    results.add(task);
                 }
             }
-            return result;
+            return results;
         } catch (FileNotFoundException e) {
             throw new DukeFileException();
         } catch (IOException e2) {
@@ -135,13 +135,13 @@ public class Storage {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             for (Task task : taskList.getTaskList()) {
                 if (task instanceof TodoTask) {
-                    writer.write(String.format("T | %s | %s\n", task.getHasCompleted(), task.getName()));
+                    writer.write(String.format("T | %s | %s\n", task.gethasCompletedInt(), task.getName()));
                 } else if (task instanceof DeadlineTask) {
                     DeadlineTask deadlineTask = (DeadlineTask) task;
                     writer.write(
                             String.format(
                                     "D | %s | %s | %s\n",
-                                    deadlineTask.getHasCompleted(),
+                                    deadlineTask.gethasCompletedInt(),
                                     deadlineTask.getName(),
                                     deadlineTask.getDeadline()));
                 } else if (task instanceof EventTask) {
@@ -149,7 +149,7 @@ public class Storage {
                     writer.write(
                             String.format(
                                     "E | %s | %s | %s\n",
-                                    eventTask.getHasCompleted(), eventTask.getName(), eventTask.getTime()));
+                                    eventTask.gethasCompletedInt(), eventTask.getName(), eventTask.getTime()));
                 }
             }
             writer.close();

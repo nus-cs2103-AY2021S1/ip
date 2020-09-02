@@ -7,8 +7,8 @@ public class TodoTask extends Task {
         super(name);
     }
 
-    public TodoTask(String name, int hasCompleted) {
-        super(name, hasCompleted);
+    public TodoTask(String name, int hasCompletedInt) {
+        super(name, hasCompletedInt);
     }
 
     @Override
@@ -26,6 +26,6 @@ public class TodoTask extends Task {
         }
         TodoTask that = (TodoTask) o;
         return Objects.equals(this.getName(), that.getName())
-                && Objects.equals(this.getHasCompleted(), that.getHasCompleted());
+                && Objects.equals(this.gethasCompletedInt(), that.gethasCompletedInt());
     }
 }

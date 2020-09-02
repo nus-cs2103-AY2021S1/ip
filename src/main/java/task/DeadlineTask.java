@@ -22,11 +22,11 @@ public class DeadlineTask extends Task {
      * Alternative Constructor for Deadline Task
      *
      * @param name         Name of Task
-     * @param hasCompleted boolean to show if task has been completed
+     * @param hasCompletedInt boolean to show if task has been completed
      * @param deadline     Deadline of task
      */
-    public DeadlineTask(String name, int hasCompleted, LocalDateTime deadline) {
-        super(name, hasCompleted);
+    public DeadlineTask(String name, int hasCompletedInt, LocalDateTime deadline) {
+        super(name, hasCompletedInt);
         this.deadline = deadline;
     }
 

@@ -40,20 +40,20 @@ public class TaskList {
         return this.taskList.size();
     }
 
-    public Task get(int i) {
+    public Task getTask(int i) {
         return this.taskList.get(i);
     }
 
     /**
      * Returns a new TaskList containing matching tasks
      *
-     * @param findString String to match.
+     * @param stringToFind String to match.
      * @return Object of TaskList class.
      */
-    public TaskList find(String findString) {
+    public TaskList find(String stringToFind) {
         List<Task> findList = new ArrayList<>();
         for (Task task : this.taskList) {
-            if (task.getName().contains(findString)) {
+            if (task.getName().contains(stringToFind)) {
                 findList.add(task);
             }
         }

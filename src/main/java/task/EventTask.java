@@ -21,11 +21,11 @@ public class EventTask extends Task {
      * Alternative Constructor for Event Task
      *
      * @param name         Name of Task
-     * @param hasCompleted boolean to show if task is completed
+     * @param hasCompletedInt boolean to show if task is completed
      * @param time         Time of Task
      */
-    public EventTask(String name, int hasCompleted, LocalDateTime time) {
-        super(name, hasCompleted);
+    public EventTask(String name, int hasCompletedInt, LocalDateTime time) {
+        super(name, hasCompletedInt);
         this.time = time;
     }
 
