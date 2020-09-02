@@ -47,7 +47,7 @@ public class Storage {
         List<String> taskListText = new ArrayList<>();
 
         // Convert each task into a string
-        for (int i = 0; i < tasks.totalNumberOfTasks(); i++) {
+        for (int i = 1; i <= tasks.getTotalNumberOfTasks(); i++) {
             Task task = tasks.getTask(i);
             taskListText.add(task.toString());
         }

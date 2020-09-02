@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        displayGreetings();
     }
 
     /**
@@ -48,5 +49,17 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (duke.canExitProgram()) {
+            Runtime.getRuntime().halt(0);
+        }
+    }
+
+    /**
+     * Creates a dialog box containing the Duke's greeting when the program first starts up. Duke's greeting
+     * includes displaying the currently saved task list in the hard drive and a standard greeting message.
+     */
+    private void displayGreetings() {
+        String greetings = duke.getGreetings();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetings, dukeImage));
     }
 }

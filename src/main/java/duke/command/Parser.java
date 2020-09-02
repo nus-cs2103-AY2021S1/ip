@@ -44,29 +44,35 @@ public class Parser {
                 return ui.showErrorMessage(e);
             }
 
-            // For multi-word user commands
+        // For multi-word user commands
         } else {
             // Extract the first word of the user command to obtain the type of user command
             String[] commandDetails = userCommand.split(" ", 2);
 
             // Contains type of user command
             String command = commandDetails[0];
-            if (UserCommands.TODO.getCommandWord().equals(command)) {
-                return addTodo(commandDetails[1], ui, storage);
-            } else if (UserCommands.DEADLINE.getCommandWord().equals(command)) {
-                return addDeadline(commandDetails[1], ui, storage);
-            } else if (UserCommands.EVENT.getCommandWord().equals(command)) {
-                return addEvent(commandDetails[1], ui, storage);
-            } else if (UserCommands.DELETE.getCommandWord().equals(command)) {
-                return deleteTask(commandDetails[1], ui, storage);
-            } else if (UserCommands.DONE.getCommandWord().equals(command)) {
-                return markTaskAsDone(commandDetails[1], ui, storage);
-            } else if (UserCommands.FIND.getCommandWord().equals(command)) {
-                return searchTaskListForKeyword(commandDetails[1], ui, storage);
-            } else {
-                // User commands is not recognized by the system
+            try {
+                if (UserCommands.TODO.getCommandWord().equals(command)) {
+                    return addTodo(commandDetails[1], ui, storage);
+                } else if (UserCommands.DEADLINE.getCommandWord().equals(command)) {
+                    return addDeadline(commandDetails[1], ui, storage);
+                } else if (UserCommands.EVENT.getCommandWord().equals(command)) {
+                    return addEvent(commandDetails[1], ui, storage);
+                } else if (UserCommands.DELETE.getCommandWord().equals(command)) {
+                    return deleteTask(commandDetails[1], ui, storage);
+                } else if (UserCommands.DONE.getCommandWord().equals(command)) {
+                    return markTaskAsDone(commandDetails[1], ui, storage);
+                } else if (UserCommands.FIND.getCommandWord().equals(command)) {
+                    return searchTaskListForKeyword(commandDetails[1], ui, storage);
+                } else {
+                    // User commands is not recognized by the system
+                    throw new InvalidUserCommandException(ui.showInvalidUserCommand(userCommand));
+                }
+            // If user input only consists of the type of command but no other details
+            } catch (ArrayIndexOutOfBoundsException e) {
                 throw new InvalidUserCommandException(ui.showInvalidUserCommand(userCommand));
             }
+
         }
     }
 
@@ -152,15 +158,15 @@ public class Parser {
      * @param ui User interface which displays that the task has been deleted to the task list.
      * @param storage Local storage that loads the old task list and saves the updated task list.
      */
-    private static String deleteTask(String taskToDelete, Ui ui, Storage storage) {
+    private static String deleteTask(String taskToDelete, Ui ui, Storage storage) throws TaskDoesNotExistException {
         try {
             TaskList tasks = storage.load();
             int index = parseTaskIndex(taskToDelete);
 
             // Checks if index is valid
-            if (index > 0 && index <= tasks.totalNumberOfTasks()) {
-                Task deletedTask = tasks.getTask(index - 1);
-                tasks.deleteTask(index - 1);
+            if (index > 0 && index <= tasks.getTotalNumberOfTasks()) {
+                Task deletedTask = tasks.getTask(index);
+                tasks.deleteTask(index);
                 storage.save(tasks, ui);
                 return ui.showDeleteTaskMessage(deletedTask, storage.load());
             // If task specified does not exist in the task list
@@ -199,21 +205,22 @@ public class Parser {
      * @param ui User interface which displays the specified task has been marked as done.
      * @param storage Local storage that loads the old task list and saves the updated task list.
      */
-    private static String markTaskAsDone(String taskToMarkDone, Ui ui, Storage storage) {
+    private static String markTaskAsDone(
+            String taskToMarkDone, Ui ui, Storage storage) throws TaskDoesNotExistException {
         try {
             TaskList tasks = storage.load();
             int index = parseTaskIndex(taskToMarkDone);
 
             // Checks if index is valid
-            if (index > 0 && index <= tasks.totalNumberOfTasks()) {
-                Task doneTask = tasks.getTask(index - 1);
+            if (index > 0 && index <= tasks.getTotalNumberOfTasks()) {
+                Task doneTask = tasks.getTask(index);
 
                 // Task has already been marked as done
                 if (doneTask.hasDoneStatus()) {
                     return ui.showAlreadyMarkDoneMessage(doneTask);
                 } else {
                     doneTask.markAsDone();
-                    tasks.updateTaskList(doneTask, index - 1);
+                    tasks.updateTaskList(doneTask, index);
                     storage.save(tasks, ui);
                     return ui.showMarkDoneMessage(doneTask);
                 }
@@ -241,7 +248,7 @@ public class Parser {
             TaskList tasks = storage.load();
             List<Task> tasksContainingKeyword = new ArrayList<>();
 
-            for (int i = 0; i < tasks.totalNumberOfTasks(); i++) {
+            for (int i = 1; i <= tasks.getTotalNumberOfTasks(); i++) {
                 Task task = tasks.getTask(i);
                 boolean containsKeyword = task.toString().contains(keyword);
                 if (containsKeyword) {
