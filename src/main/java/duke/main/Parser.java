@@ -40,7 +40,6 @@ public class Parser {
      * @throws DukeException If user's input is invalid.
      */
     public static void checkInput(String ... input) throws DukeException {
-        System.out.println(Arrays.toString(input));
         String command = input[0];
         System.out.println(command);
         if (command.equals("")) {

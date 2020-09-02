@@ -81,7 +81,7 @@ public class ParserTest {
     @Test
     public void checkInput_deleteOutOfList_exceptionThrown() {
         try {
-            Parser.checkInput("delete -1");
+            Parser.checkInput("delete", "-1");
             fail();
         } catch (DukeException e) {
             String s = " Oh no! Task number cannot be zero or negative"
@@ -94,7 +94,7 @@ public class ParserTest {
     @Test
     public void checkInput_doneOutOfList_exceptionThrown() {
         try {
-            Parser.checkInput("done -1");
+            Parser.checkInput("done", "-1");
             fail();
         } catch (DukeException e) {
             String s = " Oh no! Task number cannot be zero or negative"
