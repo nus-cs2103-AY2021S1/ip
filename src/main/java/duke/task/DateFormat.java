@@ -1,6 +1,10 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import duke.exception.InvalidDateException;
 
 enum DateFormat {
     FORMAT1("d-M-yy"),
@@ -14,6 +18,23 @@ enum DateFormat {
 
     DateFormat(String pattern) {
         this.pattern = pattern;
+    }
+
+    public static LocalDate getLocalDate(String date) throws InvalidDateException {
+        LocalDate out = null;
+
+        for (DateFormat format : DateFormat.values()) {
+            try {
+                out = LocalDate.parse(date, format.toDateFormat());
+            } catch (DateTimeParseException ignored) {
+                continue;
+            }
+        }
+
+        if (out == null) {
+            throw new InvalidDateException();
+        }
+        return out;
     }
 
     /**

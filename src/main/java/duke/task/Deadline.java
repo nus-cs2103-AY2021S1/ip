@@ -2,10 +2,10 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import duke.exception.InvalidDateException;
 import duke.exception.MissingDateException;
+import duke.exception.UnreadableSaveTaskException;
 
 /**
  * Class representing a deadline task.
@@ -36,31 +36,26 @@ public class Deadline extends Task {
         if (taskInfo.length < 2) {
             throw new MissingDateException();
         }
-
-        LocalDate dateTime = null;
-        for (DateFormat format : DateFormat.values()) {
-            try {
-                dateTime = LocalDate.parse(taskInfo[1], format.toDateFormat());
-            } catch (DateTimeParseException ignored) {
-                continue;
-            }
-        }
-        if (dateTime == null) {
-            throw new InvalidDateException();
-        }
-        return new Deadline(taskInfo[0], dateTime);
+        LocalDate date = DateFormat.getLocalDate(taskInfo[1]);
+        return new Deadline(taskInfo[0], date);
     }
 
     /**
      * Creates a new Deadline object represented by its String when read from a file.
+     * The read string, when split with the '/' regex, must produce an array of length
+     * 4 in the form <code>[E, {isDone indicator}, {description}, {deadline}]</code>.
      *
-     * @param task Description of task.
-     * @param date Date by which the task is to be completed by.
+     * @param data Description of task.
      * @return Deadline object representing the given details.
+     * @throws UnreadableSaveTaskException If data does not have length 4
      */
-    public static Deadline createFromFile(String task, String date) {
+    public static Deadline createFromFile(String[] data)
+            throws UnreadableSaveTaskException {
+        if (data.length != 4) {
+            throw new UnreadableSaveTaskException();
+        }
         DateTimeFormatter format = DateFormat.FORMAT6.toDateFormat();
-        return new Deadline(task, LocalDate.parse(date, format));
+        return new Deadline(data[2], LocalDate.parse(data[3], format));
     }
 
     @Override

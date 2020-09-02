@@ -9,6 +9,7 @@ import java.util.Scanner;
 import duke.exception.InvalidDateException;
 import duke.exception.InvalidIndexException;
 import duke.exception.MissingDateException;
+import duke.exception.UnreadableSaveTaskException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -44,33 +45,44 @@ public class TaskList {
             while (sc.hasNext()) {
                 String current = sc.nextLine();
                 String[] strings = current.split(" \\| ");
-                Task task = null;
-                switch (strings[0]) {
-                case "T":
-                    task = ToDo.createFromFile(strings[2]);
-                    break;
-                case "D":
-                    task = Deadline.createFromFile(strings[2], strings[3]);
-                    break;
-                case "E":
-                    task = Event.createFromFile(strings[2], strings[3]);
-                    break;
-                default:
-                    System.out.println("Hmm, something's wrong with this task");
-                    break;
-                }
+                Task task = getTaskFromLine(strings);
+
                 if (task != null) {
-                    if (strings[1].equals("1")) {
-                        task.setDone();
-                    }
                     tasks.add(task);
                 }
             }
+
             return tasks;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private static Task getTaskFromLine(String[] data) {
+        Task task = null;
+        try {
+            switch (data[0]) {
+            case "T":
+                task = ToDo.createFromFile(data);
+                break;
+            case "D":
+                task = Deadline.createFromFile(data);
+                break;
+            case "E":
+                task = Event.createFromFile(data);
+                break;
+            default:
+                throw new UnreadableSaveTaskException();
+            }
+
+            if (data[1].equals("1")) {
+                task.setDone();
+            }
+        } catch (UnreadableSaveTaskException e) {
+            e.printStackTrace();
+        }
+        return task;
     }
 
     /**

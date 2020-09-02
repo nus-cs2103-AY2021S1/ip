@@ -1,5 +1,10 @@
 package duke.task;
 
+import duke.exception.UnreadableSaveTaskException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Class representing a generic task with no dates attached.
  */
@@ -20,12 +25,19 @@ public class ToDo extends Task {
 
     /**
      * Creates a new ToDo object represented by its String when read from a file.
+     * The read string, when split with the '/' regex, must produce an array of length
+     * 3 in the form <code>[E, {isDone indicator}, {description}]</code>.
      *
-     * @param description Description of task.
+     * @param data Description of task.
      * @return Event object representing the given details.
+     * @throws UnreadableSaveTaskException If data does not have length 3.
      */
-    public static ToDo createFromFile(String description) {
-        return new ToDo(description);
+    public static ToDo createFromFile(String[] data)
+            throws UnreadableSaveTaskException {
+        if (data.length != 3) {
+            throw new UnreadableSaveTaskException();
+        }
+        return new ToDo(data[2]);
     }
 
     @Override
