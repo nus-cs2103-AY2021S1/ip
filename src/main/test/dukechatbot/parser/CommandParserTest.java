@@ -1,4 +1,4 @@
-package parser;
+package dukechatbot.parser;
 
 import org.junit.jupiter.api.Test;
 

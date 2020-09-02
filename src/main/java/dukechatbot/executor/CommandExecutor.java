@@ -1,7 +1,7 @@
-package executor;
+package dukechatbot.executor;
 
-import command.Command;
-import tasklist.TaskList;
+import dukechatbot.command.Command;
+import dukechatbot.tasklist.TaskList;
 
 /**
  * Represents executor of add command.

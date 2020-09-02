@@ -1,4 +1,4 @@
-package task;
+package dukechatbot.task;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,9 +1,9 @@
-package storage;
+package dukechatbot.storage;
 
-import task.DeadlineTask;
-import task.EventTask;
-import task.Task;
-import task.ToDoTask;
+import dukechatbot.task.DeadlineTask;
+import dukechatbot.task.EventTask;
+import dukechatbot.task.Task;
+import dukechatbot.task.ToDoTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -63,6 +63,7 @@ public class Storage {
             System.out.println("\u2639 OOPS! some error saving the list.");
             e.printStackTrace();
         }
+        
         return list;
     }
 
@@ -74,9 +75,11 @@ public class Storage {
     public static void save(List<Task> taskList) {
         File file = new File(LIST_FILE_PATH);
         File parentFile = file.getParentFile();
+        
         if (!parentFile.exists()) {
             parentFile.mkdir();
         }
+        
         try (FileWriter fileWriter = new FileWriter(file)) {
             for (Task task : taskList) {
                 fileWriter.write(task.getSaveFormat());

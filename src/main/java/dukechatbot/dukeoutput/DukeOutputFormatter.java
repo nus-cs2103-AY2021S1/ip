@@ -1,6 +1,6 @@
-package dukeoutput;
+package dukechatbot.dukeoutput;
 
-import constant.DukeConstants;
+import dukechatbot.constant.DukeConstants;
 
 import java.util.List;
 
@@ -19,7 +19,8 @@ class DukeOutputFormatter {
         StringBuilder sb = new StringBuilder();
         sb.append(DukeConstants.LINE);
         sb.append("\n");
-        responses.forEach(x -> sb.append(String.format("%s%s\n", DukeConstants.INDENT, x)));
+        responses.forEach(x -> sb.append(
+                String.format("%s%s\n", DukeConstants.INDENT, x)));
         sb.append(DukeConstants.LINE);
         return sb.toString();
     }

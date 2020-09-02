@@ -1,8 +1,8 @@
-package command;
+package dukechatbot.command;
 
-import enums.TaskEnum;
-import executor.AddCommandExecutor;
-import parser.CommandParser;
+import dukechatbot.enums.TaskEnum;
+import dukechatbot.executor.AddCommandExecutor;
+import dukechatbot.parser.CommandParser;
 
 /**
  * Represents the command for add. 
@@ -10,6 +10,7 @@ import parser.CommandParser;
  * Stores the argument that contains the task to be added.
  */
 public class AddCommand extends Command {
+    
     private final TaskEnum taskType;
 
     private final String argument;

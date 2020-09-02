@@ -1,10 +1,10 @@
-package executor;
+package dukechatbot.executor;
 
-import command.Command;
-import command.DeleteCommand;
-import constant.DukeConstants;
-import dukeoutput.DukeOutput;
-import tasklist.TaskList;
+import dukechatbot.command.Command;
+import dukechatbot.command.DeleteCommand;
+import dukechatbot.constant.DukeConstants;
+import dukechatbot.dukeoutput.DukeOutput;
+import dukechatbot.tasklist.TaskList;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -32,7 +32,8 @@ public class DeleteCommandExecutor extends CommandExecutor {
             int taskListSize = taskList.getCurrentSize();
             String additionalResponse = String.format("Now you have %d tasks in the list.",
                     taskListSize);
-            List<String> responses = Arrays.asList(DukeConstants.DELETE_OUTPUT, response, additionalResponse);
+            List<String> responses = Arrays.asList(DukeConstants.DELETE_OUTPUT, 
+                    response, additionalResponse);
             DukeOutput.output(responses, Collections.singletonList(1));
         } catch (NumberFormatException exception) {
             DukeOutput.output("\u2639 OOPS!!! the task number has to be a positive integer.");

@@ -1,6 +1,6 @@
-package task;
+package dukechatbot.task;
 
-import enums.TaskEnum;
+import dukechatbot.enums.TaskEnum;
 
 public class Task {
 
@@ -44,7 +44,8 @@ public class Task {
      * @return Save format of the task.
      */
     public String getSaveFormat() {
-        return String.format("%s | %s | %s", this.type.getTaskLetter(), this.isDone ? 1 : 0, this.title);
+        return String.format("%s | %s | %s", this.type.getTaskLetter(),
+                this.isDone ? 1 : 0, this.title);
     }
 
     /**
@@ -54,7 +55,8 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", this.type.getTaskLetter(), this.getStatusIcon(), this.title);
+        return String.format("[%s][%s] %s", this.type.getTaskLetter(),
+                this.getStatusIcon(), this.title);
     }
 
     /**

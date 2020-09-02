@@ -1,7 +1,7 @@
-package command;
+package dukechatbot.command;
 
-import executor.DoneCommandExecutor;
-import parser.CommandParser;
+import dukechatbot.executor.DoneCommandExecutor;
+import dukechatbot.parser.CommandParser;
 
 /**
  * Represents the command for done. 

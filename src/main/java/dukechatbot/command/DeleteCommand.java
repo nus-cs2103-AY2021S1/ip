@@ -1,7 +1,7 @@
-package command;
+package dukechatbot.command;
 
-import executor.DeleteCommandExecutor;
-import parser.CommandParser;
+import dukechatbot.executor.DeleteCommandExecutor;
+import dukechatbot.parser.CommandParser;
 
 /**
  * Represents the command for delete. 

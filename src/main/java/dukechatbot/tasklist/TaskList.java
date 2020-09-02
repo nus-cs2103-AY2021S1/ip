@@ -1,7 +1,7 @@
-package tasklist;
+package dukechatbot.tasklist;
 
-import constant.DukeConstants;
-import task.Task;
+import dukechatbot.constant.DukeConstants;
+import dukechatbot.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;

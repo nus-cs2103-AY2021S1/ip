@@ -1,8 +1,8 @@
-package executor;
+package dukechatbot.executor;
 
-import command.Command;
-import dukeoutput.DukeOutput;
-import tasklist.TaskList;
+import dukechatbot.command.Command;
+import dukechatbot.dukeoutput.DukeOutput;
+import dukechatbot.tasklist.TaskList;
 
 /**
  * Represents executor of list command.

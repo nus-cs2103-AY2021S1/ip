@@ -1,12 +1,12 @@
-package parser;
+package dukechatbot.parser;
 
-import command.AddCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.ListCommand;
-import constant.DukeConstants;
-import enums.TaskEnum;
+import dukechatbot.command.AddCommand;
+import dukechatbot.command.Command;
+import dukechatbot.command.DeleteCommand;
+import dukechatbot.command.DoneCommand;
+import dukechatbot.command.ListCommand;
+import dukechatbot.constant.DukeConstants;
+import dukechatbot.enums.TaskEnum;
 
 /**
  * Parses the input to form the appropriate command.
@@ -82,7 +82,8 @@ public class CommandParser {
         try {
             return input.split("\\s+", 2)[1];
         } catch(IndexOutOfBoundsException exception) {
-            throw new IndexOutOfBoundsException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+            throw new IndexOutOfBoundsException(
+                    "\u2639 OOPS!!! The description of a deadline cannot be empty.");
         }
     }
 }

@@ -1,14 +1,15 @@
-package enums;
+package dukechatbot.enums;
 
 /**
  * Represents enum of the possible task.
  */
 public enum TaskEnum {
+    
     TODO("T"),
     EVENT("E"),
     DEADLINE("D");
 
-    String taskLetter;
+    final String taskLetter;
 
     TaskEnum(String taskLetter) {
         this.taskLetter = taskLetter;

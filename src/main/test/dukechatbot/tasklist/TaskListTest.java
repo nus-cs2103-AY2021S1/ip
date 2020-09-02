@@ -1,9 +1,9 @@
-package tasklist;
+package dukechatbot.tasklist;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import task.Task;
-import task.ToDoTask;
+import dukechatbot.task.Task;
+import dukechatbot.task.ToDoTask;
 
 import java.util.Collections;
 
@@ -16,7 +16,8 @@ public class TaskListTest {
 
     @BeforeEach
     void init() {
-        this.taskList = new TaskList(Collections.singletonList(new ToDoTask("hi")));
+        this.taskList = new TaskList(Collections.singletonList(
+                new ToDoTask("hi")));
     }
 
     @Test

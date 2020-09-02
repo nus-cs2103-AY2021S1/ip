@@ -1,6 +1,6 @@
-package command;
+package dukechatbot.command;
 
-import executor.CommandExecutor;
+import dukechatbot.executor.CommandExecutor;
 
 /**
  * Represents the command. 

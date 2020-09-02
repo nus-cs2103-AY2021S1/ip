@@ -1,12 +1,12 @@
-package executor;
+package dukechatbot.executor;
 
-import command.AddCommand;
-import command.Command;
-import constant.DukeConstants;
-import dukeoutput.DukeOutput;
-import parser.TaskParser;
-import task.Task;
-import tasklist.TaskList;
+import dukechatbot.command.AddCommand;
+import dukechatbot.command.Command;
+import dukechatbot.constant.DukeConstants;
+import dukechatbot.dukeoutput.DukeOutput;
+import dukechatbot.parser.TaskParser;
+import dukechatbot.task.Task;
+import dukechatbot.tasklist.TaskList;
 
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
@@ -38,8 +38,10 @@ public class AddCommandExecutor extends CommandExecutor {
             return;
         }
         taskList.add(task);
-        String taskListSizeInfo = String.format("Now you have %d tasks in the list.", taskList.getCurrentSize());
-        List<String> responses = Arrays.asList(DukeConstants.ADD_TASK_OUTPUT, task.toString(), taskListSizeInfo);
+        String taskListSizeInfo = String.format("Now you have %d tasks in the list.", 
+                taskList.getCurrentSize());
+        List<String> responses = Arrays.asList(DukeConstants.ADD_TASK_OUTPUT, 
+                task.toString(), taskListSizeInfo);
         DukeOutput.output(responses, Collections.singletonList(1));
     }
 }

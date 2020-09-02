@@ -1,6 +1,6 @@
-package task;
+package dukechatbot.task;
 
-import enums.TaskEnum;
+import dukechatbot.enums.TaskEnum;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

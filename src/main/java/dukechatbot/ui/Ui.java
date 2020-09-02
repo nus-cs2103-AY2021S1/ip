@@ -1,11 +1,11 @@
-package ui;
+package dukechatbot.ui;
 
-import dukeoutput.DukeOutput;
-import parser.CommandParser;
-import command.Command;
-import constant.DukeConstants;
-import storage.Storage;
-import tasklist.TaskList;
+import dukechatbot.dukeoutput.DukeOutput;
+import dukechatbot.parser.CommandParser;
+import dukechatbot.command.Command;
+import dukechatbot.constant.DukeConstants;
+import dukechatbot.storage.Storage;
+import dukechatbot.tasklist.TaskList;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -57,7 +57,8 @@ public class Ui {
     }
 
     private void handleInvalidInput() {
-        DukeOutput.output("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+        DukeOutput.output("\u2639 OOPS!!! I'm sorry,"
+                + " but I don't know what that means :-(");
     }
 
     private void printGreetingMessage() {

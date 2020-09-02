@@ -1,6 +1,6 @@
-package duke;
+package dukechatbot.duke;
 
-import ui.Ui;
+import dukechatbot.ui.Ui;
 
 public class Duke {
 
