@@ -11,6 +11,7 @@ public class Parser {
     /**
      * split up the user input and recognise the executable functions
      * @param input user input
+     * @return command type
      */
     public Command parse(String input) {
         if (input.contains("list")) {

@@ -72,12 +72,9 @@ public class Duke extends Application {
     public String run(String input) {
         //...
         Parser p = new Parser();
+        //Ui.welcome();
         boolean isExit = false;
         while (!isExit) {
-            //System.out.println("Hello! I'm meimei ^_^\nI could scream at you all day!");
-            //String command = ui.ask();
-            //String command = userInput.getText();
-            //String input = userInput.getText();
             Command command = p.parse(input);
             try {
                 if (command.equals(Command.BYE)) {

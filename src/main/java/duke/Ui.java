@@ -13,6 +13,10 @@ public class Ui {
         //System.out.println("Hello! I'm meimei ^_^\nI could scream at you all day!");
     }
 
+    /**
+     * Method to return command error message
+     * @return error message
+     */
     public static String commandError() {
         return "Command not found";
     }
@@ -21,7 +25,7 @@ public class Ui {
         return e.toString();
     }
 
-    public String welcome() {
+    public static String welcome() {
         return "Hello! I'm meimei ^_^\nI could scream at you all day!";
     }
 
@@ -34,6 +38,11 @@ public class Ui {
         return result;
     }
 
+    /**
+     * Method to return the list of task containing keyword
+     * @param taskList
+     * @return list of task in string format
+     */
     public static String tasksFound(List<Task> taskList) {
         if (taskList.isEmpty()) {
             return "No matching task found";
@@ -46,6 +55,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Method to print exception messages
+     * @param exception type of duke exception
+     * @return exception message
+     */
     public static String dukeException(DukeException exception) {
         return exception.toString();
     }

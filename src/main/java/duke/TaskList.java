@@ -30,7 +30,7 @@ public class TaskList {
     /**
      * method to mark a task in the list as done
      * @param remain index of the task in list
-     * @return
+     * @return task specified
      */
 
     public static Task doneTask(String remain) {
@@ -38,14 +38,13 @@ public class TaskList {
         int index = Integer.parseInt(remain);
         Task task = tasks.get(index - 1);
         task.markAsDone();
-        //Ui.doneTask(task);
         return task;
     }
 
     /**
      * method to add a todo item into the list
      * @param command description of a todo
-     * @return
+     * @return a new todo task
      */
 
     public static Task createTodo(String command) throws DukeException {
@@ -60,6 +59,7 @@ public class TaskList {
     /**
      * method to add an Event into the list
      * @param command description of an event
+     * @return a new event task
      */
 
     public static Task createEvent(String command) throws DukeException {
@@ -78,7 +78,7 @@ public class TaskList {
     /**
      * method to add a deadline into the list
      * @param command description of an event
-     * @return
+     * @return a new deadline task
      */
     public static Task createDeadline(String command) {
         try {
@@ -87,10 +87,8 @@ public class TaskList {
             tasks.add(new Deadline(description, by));
             return new Deadline(description, by);
         } catch (ArrayIndexOutOfBoundsException e) {
-            //System.out.println(new DukeException("deadline"));
             Ui.dukeException(new DukeException("deadline"));
         } catch (DateTimeParseException e2) {
-            //System.out.println(new DukeException("time"));
             Ui.dukeException(new DukeException("time"));
         }
         return null;
@@ -114,7 +112,6 @@ public class TaskList {
         String remain = task.split(" ", 2)[1];
         String done = remain.split(" ", 2)[0];
         String title = remain.split(" ", 2)[1];
-        //System.out.println(title);
         if (type.isEmpty()) {
             return;
         }
@@ -140,7 +137,7 @@ public class TaskList {
     /**
      * Void method to search for a task with a given keyword
      * @param name of the keyword
-     * @return
+     * @return list of tasks with specified keyword in string format
      */
     public static List<Task> findTask(String name) {
         List<Task> result = new ArrayList<>();
@@ -150,18 +147,6 @@ public class TaskList {
             }
         }
         return result;
-    }
-
-    /**
-     * Void method to print the list of tasks stored.
-     * @return
-     */
-    public static String printTaskList() {
-//        System.out.println("Here are the tasks in your list: ");
-//        for (int i = 0; i < tasks.size(); i++) {
-//            System.out.println((i + 1) + "." + tasks.get(i).toString());
-//        }
-        return Ui.printTaskList(tasks);
     }
 
     /**
@@ -176,6 +161,10 @@ public class TaskList {
         return k;
     }
 
+    /**
+     * Method to get the size of the task list
+     * @return size of list
+     */
     public int getSize() {
         return tasks.size();
     }
