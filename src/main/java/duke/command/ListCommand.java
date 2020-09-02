@@ -11,7 +11,7 @@ public class ListCommand extends Command {
         if (tasks.isNull()) {
             throw new DukeException("There's nothing in the list :-(");
         } else {
-            ui.displayList(tasks.getList());
+            ui.displayList(tasks.getList(), "Here are your current tasks:");
         }
     }
 }
