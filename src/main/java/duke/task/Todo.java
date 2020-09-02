@@ -5,10 +5,10 @@ public class Todo extends Task {
     /**
      * A Task without deadline or duration.
      * @param name name of Task
-     * @param done whether Task is done
+     * @param isDone whether Task is done
      */
-    public Todo(String name, boolean done) {
-        super(name, done);
+    public Todo(String name, boolean isDone) {
+        super(name, isDone);
     }
 
     /**
@@ -17,7 +17,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        String doneSymbol = isDone() ? "✓" : "✗";
+        String doneSymbol = getIsDone() ? "✓" : "✗";
         return String.format("[T][%s] %s", doneSymbol, getName());
     }
 
@@ -27,6 +27,6 @@ public class Todo extends Task {
      */
     @Override
     public String toSaveString() {
-        return String.format("T|%d|%s", isDone() ? 1 : 0, getName());
+        return String.format("T|%d|%s", getIsDone() ? 1 : 0, getName());
     }
 }

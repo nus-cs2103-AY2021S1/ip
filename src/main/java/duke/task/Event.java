@@ -6,11 +6,11 @@ public class Event extends Task {
     /**
      * A Task with duration.
      * @param name name of Task
-     * @param done whether Task is done
+     * @param isDone whether Task is done
      * @param duration duration of Task as a String
      */
-    public Event(String name, boolean done, String duration) {
-        super(name, done);
+    public Event(String name, boolean isDone, String duration) {
+        super(name, isDone);
         this.duration = duration;
     }
 
@@ -20,7 +20,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String doneSymbol = isDone() ? "✓" : "✗";
+        String doneSymbol = getIsDone() ? "✓" : "✗";
         return String.format("[E][%s] %s (at: %s)", doneSymbol, getName(), duration);
     }
 
@@ -30,6 +30,6 @@ public class Event extends Task {
      */
     @Override
     public String toSaveString() {
-        return String.format("E|%d|%s|%s", isDone() ? 1 : 0, getName(), duration);
+        return String.format("E|%d|%s|%s", getIsDone() ? 1 : 0, getName(), duration);
     }
 }

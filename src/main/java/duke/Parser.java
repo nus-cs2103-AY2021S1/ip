@@ -21,7 +21,7 @@ public class Parser {
             DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     /**
-     * Parse user command as a String and returns the corresponding UserCommandType.
+     * Parses user command as a String and returns the corresponding UserCommandType.
      * @param command String of user command
      * @return UserCommandType
      * @throws InvalidCommandException if user command is not recognised
@@ -49,7 +49,7 @@ public class Parser {
     }
 
     /**
-     * Parse a task command and return the String components.
+     * Parses a task command and return the String components.
      * @param command user command String
      * @return String array of the command components as Task name, dateTimeString
      * @throws InvalidCommandException if command syntax is unrecognised
@@ -63,7 +63,7 @@ public class Parser {
                 throw new InvalidCommandException("The description of a todo cannot be empty.");
             }
             return new String[]{
-                    String.join(" ", Arrays.copyOfRange(components, 1, components.length))
+                String.join(" ", Arrays.copyOfRange(components, 1, components.length))
             };
         } else if (taskType.equals(DEADLINE_COMMAND) || taskType.equals(EVENT_COMMAND)) {
             for (int i = 0; i < components.length - 1; i++) {
@@ -86,7 +86,7 @@ public class Parser {
     }
 
     /**
-     * Parse datetime String and return LocalDateTime.
+     * Parses datetime String and return LocalDateTime.
      * @param dateString datetime String
      * @return LocalDateTime
      * @throws InvalidCommandException if cannot parse dateString
@@ -101,7 +101,7 @@ public class Parser {
     }
 
     /**
-     * Get Task index of done user command.
+     * Gets Task index of done user command.
      * @param command User command String
      * @return task index
      * @throws InvalidCommandException if command syntax is invalid
@@ -115,7 +115,7 @@ public class Parser {
     }
 
     /**
-     * Get Keyword String from find command.
+     * Gets Keyword String from find command.
      * @param command user command
      * @return keyword String
      * @throws InvalidCommandException if keyword string not provided

@@ -2,31 +2,31 @@ package duke.task;
 
 public abstract class Task {
     private final String name;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * A base Task to inherit from.
      * @param name name of Task
-     * @param done whether Task is done
+     * @param isDone whether Task is done
      */
-    public Task(String name, boolean done) {
+    public Task(String name, boolean isDone) {
         this.name = name;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
-     * Mark task as done.
+     * Marks task as done.
      */
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * Returns whether Task is done.
      * @return boolean of task is done
      */
-    public boolean isDone() {
-        return done;
+    public boolean getIsDone() {
+        return isDone;
     }
 
     /**
@@ -43,7 +43,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String doneSymbol = isDone() ? "✓" : "✗";
+        String doneSymbol = getIsDone() ? "✓" : "✗";
         return String.format("[%s] %s", doneSymbol, getName());
     }
 

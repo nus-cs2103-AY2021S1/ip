@@ -9,11 +9,11 @@ public class Deadline extends Task {
     /**
      * A Task with deadline.
      * @param name name of Task
-     * @param done whether Task is done
+     * @param isDone whether Task is done
      * @param deadline deadline of task in LocalDateTime
      */
-    public Deadline(final String name, final boolean done, final LocalDateTime deadline) {
-        super(name, done);
+    public Deadline(final String name, final boolean isDone, final LocalDateTime deadline) {
+        super(name, isDone);
         this.deadline = deadline;
     }
 
@@ -23,7 +23,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String doneSymbol = isDone() ? "✓" : "✗";
+        String doneSymbol = getIsDone() ? "✓" : "✗";
         return String.format("[D][%s] %s (by: %s)", doneSymbol, getName(),
                 deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm")));
     }
@@ -34,7 +34,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toSaveString() {
-        return String.format("D|%d|%s|%s", isDone() ? 1 : 0, getName(), deadline);
+        return String.format("D|%d|%s|%s", getIsDone() ? 1 : 0, getName(), deadline);
     }
 
 }

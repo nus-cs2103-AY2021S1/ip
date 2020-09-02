@@ -1,8 +1,11 @@
 package duke;
 
+/**
+ * Class for displaying output to user.
+ */
 public class Ui {
     /**
-     * Print message with 4 indentation.
+     * Prints message with 4 indentation.
      * @param message message to be printed
      */
     public static void printWith4Indent(String message) {
@@ -10,7 +13,7 @@ public class Ui {
     }
 
     /**
-     * Print message with 6 indentation.
+     * Prints message with 6 indentation.
      * @param message message to be printed
      */
     public static void printWith6Indent(String message) {
@@ -18,14 +21,14 @@ public class Ui {
     }
 
     /**
-     * Print new line.
+     * Prints new line.
      */
     public static void printNewLine() {
         System.out.println();
     }
 
     /**
-     * Print message between 2 lines.
+     * Prints message between 2 lines.
      * @param message message to be printed
      */
     public static void printMessageBetweenLines(String message) {
@@ -35,7 +38,7 @@ public class Ui {
     }
 
     /**
-     * Print array of messages between 2 lines.
+     * Prints array of messages between 2 lines.
      * @param messages array of messages to be printed
      */
     public static void printMessagesBetweenLines(String[] messages) {
@@ -47,7 +50,7 @@ public class Ui {
     }
 
     /**
-     * Print exception message between 2 lines.
+     * Prints exception message between 2 lines.
      * @param exception exception to be printed
      */
     public static void printExceptionBetweenLines(Exception exception) {
@@ -55,7 +58,7 @@ public class Ui {
     }
 
     /**
-     * Print greeting to user.
+     * Prints greeting to user.
      */
     public static void printGreeting() {
         printMessagesBetweenLines(StringConstants.GREETING_MESSAGES);

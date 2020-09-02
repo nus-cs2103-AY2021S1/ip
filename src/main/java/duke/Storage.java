@@ -21,7 +21,7 @@ public class Storage {
     private static final String saveFilePath = "data/duke.txt";
 
     /**
-     * Save tasks to disk.
+     * Saves tasks to disk.
      * @param tasks ArrayList of tasks to save
      * @throws IOException if cannot write to saveFilePath
      */
@@ -35,7 +35,7 @@ public class Storage {
     }
 
     /**
-     * Load tasks from saveFilePath.
+     * Loads tasks from saveFilePath.
      * @return ArrayList of loaded tasks
      */
     public static ArrayList<Task> load() {
@@ -44,18 +44,19 @@ public class Storage {
             File file = new File(saveFilePath);
             Scanner scanner = new Scanner(file);
             ArrayList<Task> tasks = new ArrayList<>();
+            final String doneString = "1";
             while (scanner.hasNext()) {
                 String[] components = scanner.nextLine().split("\\|");
                 switch (components[0]) {
                     case "T":
-                        tasks.add(new Todo(components[2], components[1].equals("1")));
+                        tasks.add(new Todo(components[2], components[1].equals(doneString)));
                         break;
                     case "D":
-                        tasks.add(new Deadline(components[2], components[1].equals("1"),
+                        tasks.add(new Deadline(components[2], components[1].equals(doneString),
                                 LocalDateTime.parse(components[3])));
                         break;
                     case "E":
-                        tasks.add(new Event(components[2], components[1].equals("1"),
+                        tasks.add(new Event(components[2], components[1].equals(doneString),
                                 components[3]));
                         break;
                     default:
