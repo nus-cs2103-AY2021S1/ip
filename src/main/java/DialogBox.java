@@ -48,7 +48,10 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox userDialog = new DialogBox(text, img);
+        userDialog.dialog.getStyleClass().remove("chat-box");
+        userDialog.dialog.getStyleClass().add("chat-box-user");
+        return userDialog;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
