@@ -9,7 +9,7 @@ public class Ui {
     /**
      * Prints logo "Welcome" greeting.
      */
-    public void logoMsg() {
+    public String logoMsg() {
         String logo = " ___       __   _______   ___       ________  "
                 + "________  _____ ______   _______      \n"
                 + "|\\  \\     |\\  \\|\\  ___ \\ |\\  \\     "
@@ -26,12 +26,13 @@ public class Ui {
                 + "|\\|__|     \\|__|\\|_______|"
                 + "\n\n WELCOME to DukeBT!";
         System.out.println(logo);
+        return logo;
     }
 
     /**
      * Prints greeting.
      */
-    public void greetingMsg() {
+    public String greetingMsg() {
         String greetingMsg = "\n___________________________________________________________"
                 + "\n |°‿°|"
                 + "\n Hello! I'm DukeBT."
@@ -39,12 +40,13 @@ public class Ui {
                 + "\n\n **Type 'help' to see what I can do. |^_^|"
                 + "\n___________________________________________________________\n";
         System.out.println(greetingMsg);
+        return greetingMsg;
     }
 
     /**
      * Prints help message to show all possible commands available.
      */
-    public static void helpMsg() {
+    public static String helpMsg() {
         String commandList = "**************************************************************"
                 + "\n ┗( ⊙.⊙ )┛ "
                 + "\n These are all the commands you may use:"
@@ -59,20 +61,21 @@ public class Ui {
                 + "\n     9.bye -- exit the chatbot"
                 + "\n**************************************************************\n";
         System.out.println(commandList);
+        return commandList;
     }
 
     /**
      * Prints bye message to see goodbye to the user.
      */
-    public static void byeMsg() {
+    public static String byeMsg() {
         String byeMsg = "\n___________________________________________________________"
                 + "\n |^_^|┛"
                 + "\n Bye. Hope to see you again soon!"
                 + "\n Your task list has been saved."
                 + "\n It will be automatically reloaded when you come back!"
                 + "\n___________________________________________________________\n";
-
         System.out.println(byeMsg);
+        return byeMsg;
     }
 
     /**
@@ -80,7 +83,7 @@ public class Ui {
      *
      * @param tasks The overall user's task list.
      */
-    public static void addDeadlineTaskMsg(ArrayList<Task> tasks) {
+    public static String addDeadlineTaskMsg(ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
                 + "\n Got it. I've added this Deadline task:"
@@ -88,6 +91,7 @@ public class Ui {
                 + "\n Now you have " + tasks.size() + " tasks in the list."
                 + "\n___________________________________________________________\n";
         System.out.println(outputMsg);
+        return outputMsg;
     }
 
     /**
@@ -95,7 +99,7 @@ public class Ui {
      *
      * @param tasks The overall user's task list.
      */
-    public static void addEventTaskMsg(ArrayList<Task> tasks) {
+    public static String addEventTaskMsg(ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
                 + "\n Got it. I've added this Event task:"
@@ -103,6 +107,7 @@ public class Ui {
                 + "\n Now you have " + tasks.size() + " tasks in the list."
                 + "\n___________________________________________________________\n";
         System.out.println(outputMsg);
+        return outputMsg;
     }
 
     /**
@@ -110,7 +115,7 @@ public class Ui {
      *
      * @param tasks The overall user's task list.
      */
-    public static void addTodoTaskMsg(ArrayList<Task> tasks) {
+    public static String addTodoTaskMsg(ArrayList<Task> tasks) {
         String outputMsg = "\n___________________________________________________________"
                 + "\n (^.^)"
                 + "\n Got it. I've added this ToDo task:"
@@ -118,6 +123,7 @@ public class Ui {
                 + "\n Now you have " + tasks.size() + " tasks in the list."
                 + "\n___________________________________________________________\n";
         System.out.println(outputMsg);
+        return outputMsg;
     }
 
     /**
@@ -126,7 +132,7 @@ public class Ui {
      * @param index A series number of the task in the task list.
      * @param tasks The overall user's task list.
      */
-    public static void doneTaskMsg(int index, ArrayList<Task> tasks) {
+    public static String doneTaskMsg(int index, ArrayList<Task> tasks) {
         String outputMsg = "___________________________________________________________"
                 + "\n (ﾉﾟ0ﾟ)ﾉ~"
                 + "\n Congratulations from DukeBT! You have done 1 task!"
@@ -134,6 +140,7 @@ public class Ui {
                 + "\n      Task #" + index + ". " + tasks.get(index - 1)
                 + "\n___________________________________________________________\n";
         System.out.println(outputMsg);
+        return outputMsg;
     }
 
     /**
@@ -143,7 +150,7 @@ public class Ui {
      * @param newSizeOfTasks Size of the task list.
      * @param taskToDelete Task to be deleted.
      */
-    public static void deleteTaskMsg(int index, int newSizeOfTasks, Task taskToDelete) {
+    public static String deleteTaskMsg(int index, int newSizeOfTasks, Task taskToDelete) {
         String outputMsg = "___________________________________________________________"
                 + "\n (ಠ‿↼)"
                 + "\n Noted. This task has been removed from your task list:"
@@ -151,6 +158,7 @@ public class Ui {
                 + "\n Now you have " + newSizeOfTasks + " tasks in the list."
                 + "\n___________________________________________________________\n";
         System.out.println(outputMsg);
+        return outputMsg;
     }
 
     /**
@@ -158,7 +166,7 @@ public class Ui {
      *
      * @param tasks The overall user's task list.
      */
-    public static void getAllTasksMsg(ArrayList<Task> tasks) {
+    public static String getAllTasksMsg(ArrayList<Task> tasks) {
         String outputMsg = "";
         if (tasks.isEmpty()) {
             outputMsg = "___________________________________________________________"
@@ -177,6 +185,7 @@ public class Ui {
         }
 
         System.out.println(outputMsg);
+        return outputMsg;
     }
 
     /**
@@ -185,7 +194,7 @@ public class Ui {
      * @param keyword A string of keyword to find the matching tasks.
      * @param matchedTasks An ArrayList of all the tasks that match with the keyword.
      */
-    public static void findMatchingTasks(String keyword, ArrayList<Task> matchedTasks) {
+    public static String findMatchingTasks(String keyword, ArrayList<Task> matchedTasks) {
         String outputMsg = "";
         if (matchedTasks.isEmpty()) {
             outputMsg = "___________________________________________________________"
@@ -205,5 +214,6 @@ public class Ui {
         }
 
         System.out.println(outputMsg);
+        return outputMsg;
     }
 }

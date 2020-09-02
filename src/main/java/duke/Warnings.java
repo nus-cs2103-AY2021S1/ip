@@ -11,7 +11,7 @@ public class Warnings extends Ui {
      *
      * @param tasksSize Size of the user's task list.
      */
-    public static void invalidDoneTaskIndex(int tasksSize) {
+    public static String invalidDoneTaskIndex(int tasksSize) {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
                 + "\n I couldn't find this task, please re-enter a valid task index!"
@@ -20,12 +20,13 @@ public class Warnings extends Ui {
                 + "\n\n **Type 'help' to see what I can do. |^_^|"
                 + "\n################################################################";
         System.out.println(warningMsg);
+        return warningMsg;
     }
 
     /**
      * Display warning message when invalid ToDoTask input entered.
      */
-    public static void invalidToDo() {
+    public static String invalidToDo() {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
                 + "\n OOPS!!! The description of a todo cannot be empty."
@@ -33,12 +34,13 @@ public class Warnings extends Ui {
                 + "\n\n **Type 'help' to see what I can do. |^_^|"
                 + "\n################################################################";
         System.out.println(warningMsg);
+        return warningMsg;
     }
 
     /**
      * Display warning message when invalid DeadlineTask input entered.
      */
-    public static void invalidDeadline() {
+    public static String invalidDeadline() {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
                 + "\n OOPS!!! The description or/and deadline of a deadline task cannot be empty."
@@ -46,12 +48,13 @@ public class Warnings extends Ui {
                 + "\n\n **Type 'help' to see what I can do. |^_^|"
                 + "\n################################################################";
         System.out.println(warningMsg);
+        return warningMsg;
     }
 
     /**
      * Display warning message when invalid EventTask input entered.
      */
-    public static void invalidEvent() {
+    public static String invalidEvent() {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
                 + "\n OOPS!!! The description or/and event timing of a event task cannot be empty."
@@ -59,18 +62,20 @@ public class Warnings extends Ui {
                 + "\n\n **Type 'help' to see what I can do. |^_^|"
                 + "\n################################################################";
         System.out.println(warningMsg);
+        return warningMsg;
     }
 
     /**
      * Display warning message when Parser cannot recognize the input.
      */
-    public static void invalidInput() {
+    public static String invalidInput() {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
                 + "\n OOPS!!! I'm sorry, but I don't know what that means."
                 + "\n\n **Type 'help' to see what I can do. |^_^|"
                 + "\n################################################################";
         System.out.println(warningMsg);
+        return warningMsg;
     }
 
     /**
@@ -78,7 +83,7 @@ public class Warnings extends Ui {
      *
      * @param tasksSize Size of the user's task list.
      */
-    public static void invalidDelete(int tasksSize) {
+    public static String invalidDelete(int tasksSize) {
         String warningMsg = "################################################################"
                 + "\n [• ▂ •]What? "
                 + "\n I couldn't find this task, please re-enter a valid task index!"
@@ -87,6 +92,7 @@ public class Warnings extends Ui {
                 + "\n\n **Type 'help' to see what I can do. |^_^|"
                 + "\n################################################################";
         System.out.println(warningMsg);
+        return warningMsg;
     }
 
     /**
@@ -94,7 +100,7 @@ public class Warnings extends Ui {
      *
      * @param e Exception message.
      */
-    public static void invalidFileInput(IOException e) {
+    public static String invalidFileInput(IOException e) {
         String warningMsg1 = "################################################################"
                 + "\n [• ▂ •]What? "
                 + "\n Invalid data inside data/taskList.txt file..."
@@ -103,6 +109,8 @@ public class Warnings extends Ui {
         System.err.println(e);
         String warningMsg2 = "\n################################################################";
         System.out.println(warningMsg2);
+        String warningMsg = warningMsg1 + "\n" + e + warningMsg2;
+        return warningMsg;
     }
 
     /**
@@ -110,7 +118,7 @@ public class Warnings extends Ui {
      *
      * @param e Exception message.
      */
-    public static void invalidFileOutput(IOException e) {
+    public static String invalidFileOutput(IOException e) {
         String warningMsg1 = "################################################################"
                 + "\n [• ▂ •]What? "
                 + "\n Errors occurred when try to write data into data/taskList.txt file..."
@@ -119,6 +127,9 @@ public class Warnings extends Ui {
         System.err.println(e);
         String warningMsg2 = "\n################################################################";
         System.out.println(warningMsg2);
+
+        String warningMsg = warningMsg1 + "\n" + e + warningMsg2;
+        return warningMsg;
     }
 
 }
