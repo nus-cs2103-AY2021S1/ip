@@ -12,31 +12,31 @@ public class Parser {
     /**
      * Splits a sentence into command and its description.
      *
-     * @param string sentence given by user.
+     * @param fullCommand sentence given by user.
      * @return String[] string array with command in index 0 and description in index 1.
      */
-    public static String[] splitCommandAndDescription(String string) {
-        return string.split(" ", 2);
+    public static String[] splitCommandAndDescription(String fullCommand) {
+        return fullCommand.split(" ", 2);
     }
 
     /**
      * Splits the deadline description and time.
      *
-     * @param string sentence containing both description and time.
+     * @param fullCommand sentence containing both description and time.
      * @return String[] string array with description in index 0 and time in index 1.
      */
-    public static String[] splitDeadlineTime(String string) {
-        return string.split("/by ", 2);
+    public static String[] splitDeadlineTime(String fullCommand) {
+        return fullCommand.split("/by ", 2);
     }
 
     /**
      * Splits the event description and time.
      *
-     * @param string sentence containing both description and time.
+     * @param fullCommand sentence containing both description and time.
      * @return String[] string array with description in index 0 and time in index 1.
      */
-    public static String[] splitEventTime(String string) {
-        return string.split("/at ", 2);
+    public static String[] splitEventTime(String fullCommand) {
+        return fullCommand.split("/at ", 2);
     }
 
     /**

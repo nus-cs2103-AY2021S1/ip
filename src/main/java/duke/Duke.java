@@ -79,7 +79,7 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-                Command c = new Command(taskList, ui);
+                Command command = new Command(taskList, ui);
                 String toEcho = ui.getCommand();
                 if (toEcho.equals("bye")) {
                     System.out.println(ui.bye());
@@ -87,17 +87,17 @@ public class Duke {
                 } else if (toEcho.equals("list")) {
                     System.out.println(ui.showList());
                 } else if (toEcho.startsWith("done")) {
-                    System.out.println(c.handleDone(toEcho));
+                    System.out.println(command.handleDone(toEcho));
                 } else if (toEcho.startsWith("todo")) {
-                    System.out.println(c.handleTodo(toEcho));
+                    System.out.println(command.handleTodo(toEcho));
                 } else if (toEcho.startsWith("deadline")) {
-                    System.out.println(c.handleDeadline(toEcho));
+                    System.out.println(command.handleDeadline(toEcho));
                 } else if (toEcho.startsWith("event")) {
-                    System.out.println(c.handleEvent(toEcho));
+                    System.out.println(command.handleEvent(toEcho));
                 } else if (toEcho.startsWith("delete")) {
-                    System.out.println(c.handleDelete(toEcho));
+                    System.out.println(command.handleDelete(toEcho));
                 } else if (toEcho.startsWith("find")) {
-                    System.out.println(c.handleFind(toEcho));
+                    System.out.println(command.handleFind(toEcho));
                 } else {
                     throw new DukeUnknownCommandException();
                 }
@@ -110,13 +110,9 @@ public class Duke {
         }
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     public String getResponse(String input) {
         try {
-            Command c = new Command(taskList, ui);
+            Command command = new Command(taskList, ui);
             if (input.equals("bye")) {
                 storage.saveTasks();
                 return ui.bye();
@@ -125,22 +121,22 @@ public class Duke {
                 return ui.showList();
             } else if (input.startsWith("done")) {
                 storage.saveTasks();
-                return c.handleDone(input);
+                return command.handleDone(input);
             } else if (input.startsWith("todo")) {
                 storage.saveTasks();
-                return c.handleTodo(input);
+                return command.handleTodo(input);
             } else if (input.startsWith("deadline")) {
                 storage.saveTasks();
-                return c.handleDeadline(input);
+                return command.handleDeadline(input);
             } else if (input.startsWith("event")) {
                 storage.saveTasks();
-                return c.handleEvent(input);
+                return command.handleEvent(input);
             } else if (input.startsWith("delete")) {
                 storage.saveTasks();
-                return c.handleDelete(input);
+                return command.handleDelete(input);
             } else if (input.startsWith("find")) {
                 storage.saveTasks();
-                return c.handleFind(input);
+                return command.handleFind(input);
             } else {
                 throw new DukeUnknownCommandException();
             }
