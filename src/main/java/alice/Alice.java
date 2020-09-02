@@ -11,7 +11,7 @@ import alice.ui.cli.Cli;
 import alice.util.Parser;
 
 /**
- * Runs the ALICE application.
+ * Represents the ALICE program.
  */
 public class Alice {
     private TaskList tasks;
@@ -20,8 +20,8 @@ public class Alice {
     private Cli cli;
 
     /**
-     * Creates an ALICE program that reads data from specified location.
-     * If the file does not exist, creates the appropriate directory and file
+     * Creates an ALICE program with default save file location.
+     * If the file does not exist, creates the appropriate directory and file.
      */
     public Alice() {
         this(StorageFile.DEFAULT_FILE_PATH);
@@ -45,10 +45,21 @@ public class Alice {
         }
     }
 
+    /**
+     * Returns the status of loading the save file from specified or default location.
+     *
+     * @return the load status of the file.
+     */
     public String getLoadStatus() {
         return storageFile.getLoadStatus();
     }
 
+    /**
+     * Processes the command provided by the user.
+     *
+     * @param inputCommand the command string input by the user
+     * @return the CommandResult which contains instructions for replying the user.
+     */
     public CommandResult processCommand(String inputCommand) {
         try {
             Command c = Parser.parseCommand(inputCommand);
@@ -58,11 +69,20 @@ public class Alice {
         }
     }
 
-    protected Alice initCli() {
+    /**
+     * Initialises and prepares the Alice's Command Line Interface.
+     *
+     * @return the Alice object with CLI initialised.
+     */
+    protected Alice initialiseCli() {
         this.cli = new Cli();
         return this;
     }
 
+    /**
+     * Runs the Alice program on the command line.
+     * The program uses the read-eval-print-loop framework.
+     */
     protected void run() {
         cli.displayInitMessage(getLoadStatus());
         cli.displayWelcomeMsg();

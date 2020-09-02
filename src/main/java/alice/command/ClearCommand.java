@@ -4,8 +4,8 @@ import java.util.List;
 
 import alice.command.result.ClearCommandResult;
 import alice.command.result.CommandResult;
-import alice.storage.SaveStatus;
 import alice.storage.AliceStorageException;
+import alice.storage.SaveStatus;
 import alice.storage.StorageFile;
 import alice.task.TaskList;
 
@@ -22,7 +22,7 @@ public class ClearCommand implements Command {
      *
      * @param name the command word to check.
      * @return true if the command word belongs to <code>ClearCommand</code>; false otherwise.
-      */
+     */
     public static boolean hasCommandWord(String name) {
         return NAMES.contains(name);
     }

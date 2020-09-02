@@ -1,13 +1,14 @@
-package alice.ui.controller;
+package alice.ui;
 
 import java.io.IOException;
 
 import alice.Alice;
+import alice.ui.controller.MainWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Alice using FXML.
+ * Represents the GUI manager for Alice.
  */
 public class AliceGui extends Application {
     private Alice alice;

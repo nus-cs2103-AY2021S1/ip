@@ -36,6 +36,13 @@ public class MainWindow {
     private final Stage primaryStage;
     private final Alice alice;
 
+    /**
+     * Creates the display for the Alice GUI, which contains the main chat interface.
+     *
+     * @param primaryStage the Stage to place the main layout.
+     * @param alice        the Alice program that handles the logic.
+     * @throws IOException if an error occur during FXML loading.
+     */
     public MainWindow(Stage primaryStage, Alice alice) throws IOException {
         this.alice = alice;
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/MainWindow.fxml"));
@@ -51,10 +58,17 @@ public class MainWindow {
         return primaryStage;
     }
 
+    /**
+     * Show the stage to the user.
+     */
     public void show() {
         primaryStage.show();
     }
 
+    /**
+     * Welcomes the user and display the load status of the program's initialisation.
+     * This method is called immediately after the class is loaded and constructed.
+     */
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         displaySystemMessage(String.format("<%s>", alice.getLoadStatus()));
@@ -101,7 +115,7 @@ public class MainWindow {
         delay.play();
     }
 
-    public void welcomeUser() {
+    private void welcomeUser() {
         respondToUser("Hello! I'm Alice\n"
                 + "How can I help you today?");
     }

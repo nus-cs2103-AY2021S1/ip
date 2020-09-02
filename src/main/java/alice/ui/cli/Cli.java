@@ -64,7 +64,7 @@ public class Cli {
      * @param errorMessage error message to print.
      */
     public void displayError(String errorMessage) {
-        System.out.println("ERROR: " + errorMessage);
+        System.out.println("Oops! " + errorMessage);
     }
 
     /**

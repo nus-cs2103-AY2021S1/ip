@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
-import alice.util.Parser;
 import org.junit.jupiter.api.Test;
 
 import alice.command.InvalidCommandException;
+import alice.util.Parser;
 
 public class ParserTest {
     @Test

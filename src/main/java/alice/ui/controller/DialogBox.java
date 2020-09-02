@@ -16,7 +16,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
@@ -39,7 +38,7 @@ public class DialogBox extends HBox {
     @FXML
     private HBox chatRow;
 
-    private DialogBox(String text, Image img, String name) {
+    private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -61,12 +60,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.CENTER_LEFT);
     }
 
+    /**
+     * Creates a user dialog box with the given string input as dialog text.
+     *
+     * @param text the dialog string given by the user.
+     * @return the corresponding DialogBox with the user string input.
+     */
     public static DialogBox getUserDialog(String text) {
-        return new DialogBox(text, USER_AVATAR, "You");
+        return new DialogBox(text, USER_AVATAR);
     }
 
+    /**
+     * Creates a Alice dialog box with the given string input as dialog text.
+     *
+     * @param text the dialog string output by Alice.
+     * @return the corresponding DialogBox representing Alice's feedback to the user.
+     */
     public static DialogBox getAliceDialog(String text) {
-        DialogBox db = new DialogBox(text, ALICE_AVATAR, "Alice");
+        DialogBox db = new DialogBox(text, ALICE_AVATAR);
         db.flip();
         db.chatBubble.setStyle("-fx-background-color: darkslateblue; -fx-background-radius: 15");
         HBox.setMargin(db.chatBubble, new Insets(0, 15, 0, 5));
@@ -74,8 +85,17 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Adds an appropriate save status icon at the bottom of the dialog box.
+     * The icon is equipped with a tooltip which displays when hovered upon.
+     * The icon is not added if the saveStatus is of type SAVE_NOT_APPLICABLE
+     * as no save process was attempted.
+     *
+     * @param saveStatus the SaveStatus of the command execution.
+     */
     public void addSaveIndicator(SaveStatus saveStatus) {
         if (saveStatus == SaveStatus.SAVE_NOT_APPLICABLE) {
+            // do not add save indicator
             return;
         }
 
