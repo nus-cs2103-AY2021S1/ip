@@ -13,4 +13,8 @@ public class ParseShow extends Parse {
     public static void execute() {
         ShowFunctionCommand.execute();
     }
+
+    public static String execute2() {
+        return ShowFunctionCommand.execute2();
+    }
 }

@@ -99,4 +99,44 @@ public class UserInterface {
         System.out.println("    " + TaskManager.read(t));
         System.out.println("MattBot is tracking " + TaskManager.storeIndex() + " number of Tasks.task!");
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public static String welcomeMessage(){
+        return "Welcome to MattBot v1.0!" + System.lineSeparator()
+                + "How may I assist you today?";
+    }
+
+    private String failed2() {
+        return "No commands entered, please enter a command!";
+    }
+
+    private String action2() {
+        return InitiateParser.parser2(input);
+    }
+
+    public String parse2() {
+        if (this.input.equals("")) {
+            return failed2();
+        } else {
+            return action2();
+        }
+    }
+
+    public static String stop2() {
+        isExit = true;
+        return "Awww, leaving so soon? Hope to see you again!";
+    }
+
+    public static String wrongCommand2() {
+        return "Errroorrrr! Invalid command entered! Cannot compute!";
+    }
+
+    public static String addedTask2(task t) {
+        String result = "";
+        String nLine = System.lineSeparator();
+        String one = "Task has been successfully added!";
+        String two = "    " + TaskManager.read(t);
+        String three = "MattBot is tracking " + TaskManager.storeIndex() + " number of Tasks.task!";
+        result = result + one + nLine + two + nLine + three;
+        return result;
+    }
 }

@@ -31,4 +31,18 @@ public class DeleteCommand extends Command {
             throw new ErrorExceptions("There is no suck Tasks.task!");
         }
     }
+
+    public static String execute2(int i) throws ErrorExceptions {
+        task t;
+        int index = i;
+        try {
+            t = TaskManager.getTask(index);
+            TaskManager.delete(index);
+            UserInterface.done();
+            return "    " + TaskManager.read(t) + System.lineSeparator()
+                    + "The tracked Tasks.task has been deleted!";
+        } catch (NoSuchElementException e) {
+            throw new ErrorExceptions("There is no suck Tasks.task!");
+        }
+    }
 }

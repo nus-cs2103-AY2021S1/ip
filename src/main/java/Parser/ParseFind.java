@@ -33,4 +33,21 @@ public class ParseFind extends Parse {
             throw new ErrorExceptions("Wrong format! Missing name!");
         }
     }
+
+    public static String execute2(String input) throws ErrorExceptions {
+        Scanner sc = new Scanner(input);
+        sc.next();
+        String name = "";
+        try {
+            String current = sc.next();
+            while (sc.hasNext()) {
+                name = name + current + " ";
+                current = sc.next();
+            }
+            name = name + current + " ";
+            return FindCommand.execute2(name);
+        } catch (NoSuchElementException e) {
+            throw new ErrorExceptions("Wrong format! Missing name!");
+        }
+    }
 }

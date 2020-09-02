@@ -5,6 +5,7 @@ import java.util.Scanner;
 import Parser.InputManager;
 import Tasks.TaskManager;
 import UI.UserInterface;
+import javafx.application.Platform;
 
 /**
  * Represents the main method of the MattBot program. The bot is able to track added todo tasks into the list and it
@@ -12,6 +13,15 @@ import UI.UserInterface;
  * If this file is not present, the program will automatically create this text file in the root.
  */
 public class Duke {
+    static String getResponse(String input) {
+        UserInterface UI = new UserInterface();
+        UI.input(input);
+        UI.parse();
+        if (UI.getStop() == true) {
+            Platform.exit();
+        }
+        return UI.parse2();
+    }
     /**
      * Represents the main method of the program. The start of the mattbot program.
      * @param args args.

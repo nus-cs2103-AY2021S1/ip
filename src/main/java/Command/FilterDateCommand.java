@@ -31,6 +31,22 @@ public class FilterDateCommand extends Command {
                 }
             }
         }
+    }
 
+    public static String execute2(LocalDate date) throws ErrorExceptions {
+        ArrayList<task> clone = TaskManager.getStore();
+        int count = 1;
+        String result = "";
+        result = result + "Here are your tasks on this date!";
+        for (task i : clone) {
+            if (i.getTaskDate() != null) {
+                if (i.getTaskDate().toLocalDate().equals(date)) {
+                    result = result + System.lineSeparator();
+                    result = result + "    " + count + ". " + TaskManager.read(i);
+                    count++;
+                }
+            }
+        }
+        return result;
     }
 }

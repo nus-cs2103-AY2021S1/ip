@@ -13,4 +13,8 @@ public class WrongCommand extends Command {
     public static void execute() {
         UserInterface.wrongCommand();
     }
+
+    public static String execute2() {
+        return UserInterface.wrongCommand2();
+    }
 }

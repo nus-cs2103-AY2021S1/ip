@@ -27,4 +27,19 @@ public class FindCommand extends Command {
             }
         }
     }
+
+    public static String execute2(String name) {
+        ArrayList<task> clone = TaskManager.getStore();
+        int count = 1;
+        String result = "";
+        result = result + "Here are your tasks with this keywords!";
+        for (task i : clone) {
+            if (i.getTaskName().contains(name)) {
+                result = result + System.lineSeparator();
+                result = result + "    " + count + ". " + TaskManager.read(i);
+                count++;
+            }
+        }
+        return result;
+    }
 }

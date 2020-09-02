@@ -13,4 +13,8 @@ public class ExitCommand extends Command {
     public static void execute() {
         UserInterface.stop();
     }
+
+    public static String execute2() {
+        return UserInterface.stop2();
+    }
 }
