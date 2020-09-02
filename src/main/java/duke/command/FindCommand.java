@@ -19,7 +19,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public boolean isRunning() {
+    public boolean continueRunning() {
         return true;
     }
 }
