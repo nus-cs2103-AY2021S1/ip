@@ -12,7 +12,20 @@ import java.util.List;
  * Represents the file used to store the list of tasks.
  */
 public class StorageFile {
+    /**
+     * Default file path to store ALICE data file
+     */
+    public static final String DEFAULT_FILE_PATH = "data/tasks.txt";
+
     private final Path filePath;
+    private String loadMessage;
+
+    /**
+     * Creates a StorageFile from the default filePath.
+     */
+    public StorageFile() {
+        this(DEFAULT_FILE_PATH);
+    }
 
     /**
      * Creates a StorageFile from the indicated filePath.
@@ -33,14 +46,32 @@ public class StorageFile {
      */
     public List<String> load() throws AliceStorageException {
         boolean fileExists = Files.exists(filePath);
-        if (fileExists) {
-            return readFile();
-        } else {
-            // Create data file and directory
-            createFile();
+        try {
+            if (fileExists) {
+                List<String> taskDatas = readFile();
+                loadMessage = "Save file loaded";
+                return taskDatas;
+            } else {
+                // Create data file and directory
+                createFile();
+                loadMessage = "New file created";
+                return null;
+            }
+        } catch (AliceStorageException ex) {
+            loadMessage = ex.getMessage();
             return null;
         }
     }
+
+    /**
+     * Get load status message.
+     *
+     * @return the string depicting the load status message.
+     */
+    public String getLoadStatus() {
+        return loadMessage;
+    }
+
 
     /**
      * Reads the data file located at the filePath.
@@ -52,7 +83,7 @@ public class StorageFile {
         try {
             return Files.readAllLines(filePath);
         } catch (IOException ex) {
-            throw new AliceStorageException("Save file is corrupted!");
+            throw new AliceStorageException("Data file corrupted!");
         }
     }
 
@@ -67,7 +98,7 @@ public class StorageFile {
             Files.createDirectories(filePath.getParent());
             Files.createFile(filePath);
         } catch (IOException ex) {
-            throw new AliceStorageException("Problem occurred creating file!");
+            throw new AliceStorageException("File creation failed!");
         }
     }
 

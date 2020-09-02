@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root fx:id="chatRow" alignment="CENTER_RIGHT" fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity"
+         spacing="5.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml">
+    <children>
+        <VBox fx:id="chatBubble" alignment="TOP_RIGHT" maxHeight="-Infinity" spacing="5.0"
+              style="-fx-background-color: skyblue; -fx-background-radius: 15;">
+            <HBox.margin>
+                <Insets left="15.0" right="5.0"/>
+            </HBox.margin>
+            <padding>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+            </padding>
+            <effect>
+                <DropShadow blurType="GAUSSIAN" color="#9c9a9a" height="16.23" radius="9.9625" width="25.62"/>
+            </effect>
+            <children>
+                <Label fx:id="dialog" lineSpacing="5.0" text="Label" wrapText="true">
+                    <font>
+                        <Font name="Lucida Fax Regular" size="12.0"/>
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
+    </children>
+</fx:root>

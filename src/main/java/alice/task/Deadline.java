@@ -16,7 +16,7 @@ public class Deadline extends Task {
             .ofPattern("EEEE, MMM dd uuuu");
 
     private final LocalDateTime by;
-    private final boolean includesTime;
+    private final boolean hasTime;
 
     /**
      * Creates an undone task with the specified deadline.
@@ -27,7 +27,7 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
-        this.includesTime = !by.toLocalTime().equals(LocalTime.MIDNIGHT);
+        this.hasTime = !by.toLocalTime().equals(LocalTime.MIDNIGHT);
     }
 
     /**
@@ -40,7 +40,7 @@ public class Deadline extends Task {
     public Deadline(boolean isDone, String description, LocalDateTime by) {
         super(isDone, description);
         this.by = by;
-        this.includesTime = !by.toLocalTime().equals(LocalTime.MIDNIGHT);
+        this.hasTime = !by.toLocalTime().equals(LocalTime.MIDNIGHT);
     }
 
     /**
@@ -50,7 +50,7 @@ public class Deadline extends Task {
      * @return the appropriate string representation of the deadline datetime
      */
     public String getDeadlineDateTime() {
-        if (includesTime) {
+        if (hasTime) {
             return by.format(D_DATETIME_FORMAT);
         } else {
             return by.format(D_DATE_FORMAT);
@@ -81,6 +81,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + getDeadlineDateTime() + ")";
+        return "[D] " + super.toString() + " (by: " + getDeadlineDateTime() + ")";
     }
 }

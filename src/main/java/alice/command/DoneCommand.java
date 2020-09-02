@@ -2,16 +2,19 @@ package alice.command;
 
 import java.util.List;
 
+import alice.command.result.CommandResult;
+import alice.command.result.DoneCommandResult;
+import alice.command.result.InvalidCommandResult;
 import alice.storage.AliceStorageException;
+import alice.storage.SaveStatus;
 import alice.storage.StorageFile;
 import alice.task.Task;
 import alice.task.TaskList;
-import alice.ui.Ui;
 
 /**
  * Represents the command to mark a task as done in ALICE.
  */
-public class DoneCommand extends Command {
+public class DoneCommand implements Command {
     protected static final List<String> NAMES = List.of("done");
     protected static final String DESCRIPTION = "Mark a task as done";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "] <task number>";
@@ -37,19 +40,19 @@ public class DoneCommand extends Command {
         return NAMES.contains(name);
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @throws AliceStorageException if there were errors writing to storageFile.
-     */
     @Override
-    public void process(TaskList tasks, Ui ui, StorageFile storageFile) throws AliceStorageException {
+    public CommandResult process(TaskList tasks, StorageFile storageFile) {
+        String reply = "";
         try {
             Task completedTask = tasks.markTaskAsDone(taskIndex);
-            ui.displayOutput("Great work! I've marked this task as done:\n    " + completedTask);
+            reply = "Great work! I've marked this task as done:\n    " + completedTask;
             storageFile.save(tasks.encode());
+            return new DoneCommandResult(reply, true, SaveStatus.SAVE_SUCCESS);
         } catch (InvalidCommandException ex) {
-            ui.displayWarning("Failed to mark task as done. " + ex.getMessage());
+            String errorMessage = "Failed to mark task as done.\n" + ex.getMessage();
+            return new InvalidCommandResult(errorMessage);
+        } catch (AliceStorageException ex) {
+            return new DoneCommandResult(reply, true, SaveStatus.SAVE_FAILED);
         }
     }
 }

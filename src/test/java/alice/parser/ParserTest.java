@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import alice.command.InvalidCommandException;
+import alice.util.Parser;
 
 public class ParserTest {
     @Test

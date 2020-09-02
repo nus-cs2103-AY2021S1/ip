@@ -2,14 +2,15 @@ package alice.command;
 
 import java.util.List;
 
+import alice.command.result.CommandResult;
+import alice.command.result.FindCommandResult;
 import alice.storage.StorageFile;
 import alice.task.TaskList;
-import alice.ui.Ui;
 
 /**
  * Represents the command to find specific tasks in ALICE.
  */
-public class FindCommand extends Command {
+public class FindCommand implements Command {
     protected static final List<String> NAMES = List.of("find", "search");
     protected static final String DESCRIPTION = "Find tasks using keywords";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "] <keyword(s)>";
@@ -36,12 +37,12 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void process(TaskList tasks, Ui ui, StorageFile storage) {
+    public CommandResult process(TaskList tasks, StorageFile storageFile) {
         String output = tasks.find(keywords);
         if (output == null) {
-            ui.displayOutput("There are no tasks matching your search.");
+            return new FindCommandResult("There are no tasks matching your search.", true);
         } else {
-            ui.displayOutput("Here are the tasks that matches your search:\n" + output);
+            return new FindCommandResult("Here are the tasks that matches your search:\n" + output, true);
         }
     }
 }

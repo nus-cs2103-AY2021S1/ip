@@ -67,7 +67,7 @@ public class Task {
      * @return O if the task is completed; X otherwise.
      */
     private String getStatusIcon() {
-        return isDone ? "O" : "X";
+        return isDone ? "\u2714" : "\u2718";
     }
 
     /**

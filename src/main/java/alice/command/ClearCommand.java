@@ -2,15 +2,17 @@ package alice.command;
 
 import java.util.List;
 
+import alice.command.result.ClearCommandResult;
+import alice.command.result.CommandResult;
 import alice.storage.AliceStorageException;
+import alice.storage.SaveStatus;
 import alice.storage.StorageFile;
 import alice.task.TaskList;
-import alice.ui.Ui;
 
 /**
  * Represents the command to clear all the tasks in ALICE.
  */
-public class ClearCommand extends Command {
+public class ClearCommand implements Command {
     protected static final List<String> NAMES = List.of("clear", "clr");
     protected static final String DESCRIPTION = "Clear all tasks";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "]";
@@ -25,23 +27,15 @@ public class ClearCommand extends Command {
         return NAMES.contains(name);
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @throws AliceStorageException if there were errors writing to storageFile.
-     */
     @Override
-    public void process(TaskList tasks, Ui ui, StorageFile storageFile) throws AliceStorageException {
-        String confirmation = ui.getFeedback("Are you sure you want to clear all tasks? [Y/N]");
-        ui.displayLine();
-
-        if (confirmation.trim().toLowerCase().startsWith("y")) {
+    public CommandResult process(TaskList tasks, StorageFile storageFile) {
+        String clearSuccessMessage = "All tasks successfully cleared!";
+        try {
             tasks.clearAllTasks();
             storageFile.save(tasks.encode());
-            ui.displayOutput("All tasks successfully cleared!");
-        } else {
-            // abort
-            ui.displayOutput("Clear command aborted!");
+            return new ClearCommandResult(clearSuccessMessage, true, SaveStatus.SAVE_SUCCESS);
+        } catch (AliceStorageException ex) {
+            return new ClearCommandResult(clearSuccessMessage, true, SaveStatus.SAVE_FAILED);
         }
     }
 }

@@ -2,14 +2,15 @@ package alice.command;
 
 import java.util.List;
 
+import alice.command.result.ByeCommandResult;
+import alice.command.result.CommandResult;
 import alice.storage.StorageFile;
 import alice.task.TaskList;
-import alice.ui.Ui;
 
 /**
  * Represents the command to exit the ALICE program.
  */
-public class ByeCommand extends Command {
+public class ByeCommand implements Command {
     protected static final List<String> NAMES = List.of("bye", "exit");
     protected static final String DESCRIPTION = "Exits ALICE program";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "]";
@@ -25,12 +26,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public boolean isExitCommand() {
-        return true;
-    }
-
-    @Override
-    public void process(TaskList tasks, Ui ui, StorageFile storageFile) {
-        ui.displayOutput("Goodbye. Hope to see you again soon!");
+    public CommandResult process(TaskList tasks, StorageFile storageFile) {
+        return new ByeCommandResult("Goodbye. Hope to see you again soon!", true);
     }
 }
