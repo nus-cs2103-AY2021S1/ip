@@ -3,12 +3,12 @@ package duke.ui;
 import duke.task.TaskList;
 
 public class Message {
-    public static final String MESSAGE_WELCOME = "Hello! I'm Duke\nWhat can I do for you?";
-    public static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
+    public static final String MESSAGE_WELCOME = "¡Hola! Soy Dora!\nWhat can do for my amigo today?";
+    public static final String MESSAGE_EXIT = "Adiós amigo! Till next time!";
     public static final String BORDERS = "___________________________________________________________________________";
-    public static final String MESSAGE_ADDED = "Got it. I've added this task:\n    ";
-    public static final String MESSAGE_DONE = "Nice! I've marked this task as done:\n   ";
-    public static final String MESSAGE_DELETE = "Noted. I've removed this task:\n    ";
+    public static final String MESSAGE_ADDED = "¡Está bien! I've added this task:\n    ";
+    public static final String MESSAGE_DONE = "¡Fantástico! I've marked this task as done:\n   ";
+    public static final String MESSAGE_DELETE = "Entiendo! I've removed this task:\n    ";
     public static final String MESSAGE_FIND = "Here are the matching tasks in your list:";
     public static final String MESSAGE_NO_TASK = "There are currently no tasks in your list";
     public static final String MESSAGE_LIST = "Here are the tasks in your list:";
@@ -27,7 +27,7 @@ public class Message {
     }
 
     public static String showError(String message) {
-        return String.format("☹ OOPS!!! %s\n", message);
+        return String.format("☹ Oh, no!!! %s\n", message);
     }
 
     public static String concatLines(String... str) {

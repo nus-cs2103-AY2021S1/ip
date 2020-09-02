@@ -133,7 +133,7 @@ public class AddCommand extends Command {
             newTask = new Event(description, dateAndTime);
             break;
         default:
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("Did you type the wrong command? Try again!");
         }
 
         taskList.add(newTask);
