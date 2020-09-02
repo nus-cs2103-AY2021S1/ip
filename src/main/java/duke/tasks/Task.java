@@ -104,7 +104,7 @@ public class Task {
     @Override
     public String toString() {
         String statusLabel = "[" + type.toString().substring(0, 1) + "]";
-        String mainBody = statusLabel + (completed ? "[✓]" : "[✗]") + " " + content;
+        String mainBody = statusLabel + getDoneStatusString() + " " + content;
         if (type == TaskType.EVENT) {
             mainBody += " (on: " + getDate() + ")";
         }
@@ -112,5 +112,9 @@ public class Task {
             mainBody += " (by: " + getDate() + ")";
         }
         return mainBody;
+    }
+
+    private String getDoneStatusString() {
+        return "[" + (completed ? '\u2713' : '\u2717') + "]";
     }
 }
