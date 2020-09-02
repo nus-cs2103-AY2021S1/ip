@@ -14,7 +14,7 @@ public class Deadline extends Task {
     private final LocalDate date;
     private final LocalTime time;
 
-    public static final String delimiterBy = " /by ";
+    public static final String DELIMITER_BY = " /by ";
 
     /**
      * Constructs a <code>Deadline</code> Object to represent a task with a deadline.

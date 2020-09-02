@@ -18,7 +18,7 @@ public class Event extends Task {
     private final LocalTime startTime;
     private final LocalTime endTime;
 
-    public static final String delimiterAt = " /at ";
+    public static final String DELIMITER_AT = " /at ";
 
     /**
      * Constructs an <code>Event</code> Object to represent an event.

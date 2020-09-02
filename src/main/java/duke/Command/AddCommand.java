@@ -47,8 +47,8 @@ public class AddCommand extends Command {
     private static String getDateAndTime(String str, String delimiter) throws DukeException {
         String[] splitString = str.split("\\s+");
 
-        boolean isDelimiterByMatched = delimiter.equals(Deadline.delimiterBy);
-        boolean isDelimiterAtMatched = delimiter.equals(Event.delimiterAt);
+        boolean isDelimiterByMatched = delimiter.equals(Deadline.DELIMITER_BY);
+        boolean isDelimiterAtMatched = delimiter.equals(Event.DELIMITER_AT);
 
         boolean isDeadlineTimeEmpty = splitString[splitString.length - 1].equals("/by");
         boolean isEventTimeEmpty = splitString[splitString.length - 1].equals("/at");
@@ -79,8 +79,8 @@ public class AddCommand extends Command {
     private static String getDescription(String str, String delimiter) throws DukeException {
         String[] splitString = str.split("\\s+");
 
-        boolean isDelimiterByMatched = delimiter.equals(Deadline.delimiterBy);
-        boolean isDelimiterAtMatched = delimiter.equals(Event.delimiterAt);
+        boolean isDelimiterByMatched = delimiter.equals(Deadline.DELIMITER_BY);
+        boolean isDelimiterAtMatched = delimiter.equals(Event.DELIMITER_AT);
 
         boolean isDeadlineDescrEmpty = splitString[0].equals("/by");
         boolean isEventDescrEmpty = splitString[0].equals("/at");
@@ -119,8 +119,8 @@ public class AddCommand extends Command {
                 throw new DukeException("The description and the due date and time of a deadline cannot be empty.");
             }
 
-            dateAndTime = getDateAndTime(stringWithoutKeyword, Deadline.delimiterBy);
-            description = getDescription(stringWithoutKeyword, Deadline.delimiterBy);
+            dateAndTime = getDateAndTime(stringWithoutKeyword, Deadline.DELIMITER_BY);
+            description = getDescription(stringWithoutKeyword, Deadline.DELIMITER_BY);
             newTask = new Deadline(description, dateAndTime);
             break;
         case "event":
@@ -128,8 +128,8 @@ public class AddCommand extends Command {
                 throw new DukeException("The description and the date and time of an event cannot be empty.");
             }
 
-            dateAndTime = getDateAndTime(stringWithoutKeyword, Event.delimiterAt);
-            description = getDescription(stringWithoutKeyword, Event.delimiterAt);
+            dateAndTime = getDateAndTime(stringWithoutKeyword, Event.DELIMITER_AT);
+            description = getDescription(stringWithoutKeyword, Event.DELIMITER_AT);
             newTask = new Event(description, dateAndTime);
             break;
         default:
