@@ -18,8 +18,4 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 text-ui-test/data/tasklist.csv
 
-# codestyle checks
-checkstyle-8.2-all.jar
-cs2030_checks.xml
-
 data/tasklist.csv
