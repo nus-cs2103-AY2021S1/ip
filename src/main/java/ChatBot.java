@@ -73,7 +73,7 @@ public class ChatBot {
                 Task event = DataStorageInterface.addEvent(ttle,ppstn,dateEvent,timeEvent);
                 return DataStorageInterface.taskAdded(event);
             case "find":
-                String remainingQuery = Parser.concatenateStrArr(cRemoved);
+                String remainingQuery = Parser.concatenateStrArr(commandRemoved);
                 Find find = new Find(remainingQuery);
                 return find.response();
             case "help":
