@@ -8,7 +8,7 @@ public class Ui {
                     + "██╔══██╗██╔══╝  ██║╚██╗██║██╔══╝  ██║  ██║██║██║        ██║\n"
                     + "██████╔╝███████╗██║ ╚████║███████╗██████╔╝██║╚██████╗   ██║\n"
                     + "╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═════╝ ╚═╝ ╚═════╝   ╚═╝\n";
-    private static final String GOODBYE_MESSAGE = "Ok lor like that lor.";
+    public static final String GOODBYE_MESSAGE = "Ok lor like that lor.";
 
     /**
      * Displays a greeting message to the user.
@@ -21,15 +21,20 @@ public class Ui {
 
     /**
      * Displays a given number of messages in an indented block, enclosed by 2 indented lines.
+     *
      * @param messages a variable number of messages to be displayed in the indented block
      */
-    public void displayMessages(String... messages) {
+    public String displayMessages(String... messages) {
+        StringBuilder response = new StringBuilder();
         System.out.println("     ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
         for (String message : messages) {
             System.out.printf("     %s\n", message);
+            response.append(message).append('\n');
         }
         System.out.println("     ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
         System.out.println();
+
+        return response.toString();
     }
 
     /**
@@ -37,17 +42,16 @@ public class Ui {
      *
      * @param count the number of tasks
      */
-    public void displayGreetingReminder(int count) {
+    public String displayGreetingReminder(int count) {
         if (count == 0) {
-            return;
+            return "";
         }
         if (count == 0) {
-            this.displayMessages(
+            return this.displayMessages(
                     "Don't forget you already have one thing to do.",
                     "But okay.");
-            return;
         }
-        this.displayMessages(
+        return this.displayMessages(
                 "Don't forget you already have " + count + " things to do.",
                 "But okay.");
     }
@@ -57,24 +61,27 @@ public class Ui {
      *
      * @param tasks the tasks to display in the indented block
      */
-    public void displayTasks(List<Task> tasks) {
+    public String displayTasks(List<Task> tasks) {
         int noOfTasks = tasks.size();
         if (noOfTasks == 0) {
-            this.displayMessages("You didn't tell me to remind you anything.");
+            return this.displayMessages("You didn't tell me to remind you anything.");
         } else {
             String[] messages = new String[noOfTasks + 1];
+            StringBuilder sb = new StringBuilder("Right, you said you wanted to:");
             messages[0] = "Right, you said you wanted to:";
 
             for (int i = 0; i < noOfTasks; i++) {
                 messages[i + 1] = String.format("%3d: %s", i + 1, tasks.get(i));
+                sb.append(String.format("%3d: %s", i + 1, tasks.get(i)));
             }
 
-            this.displayMessages(messages);
+            return this.displayMessages(messages);
         }
     }
 
     /**
      * Retrieves a nicely formatted reminder of the number of tasks, given the number of tasks left.
+     *
      * @param noOfTasks the number
      * @return a formatted String
      */
@@ -88,22 +95,29 @@ public class Ui {
     /**
      * Displays a goodbye message.
      */
-    public void displayGoodbye() {
-        this.displayMessages(GOODBYE_MESSAGE);
+    public String displayGoodbye() {
+        return displayMessages(GOODBYE_MESSAGE);
     }
 
     // TODO: Consider something more descriptive
+
     /**
      * Display an error message to the user indicating that Duke failed to load saved tasks properly.
      */
-    public void showLoadingError() {
-        this.displayMessages("Ugh, I can't remember what you told me to remind you :(");
+    public String showLoadingError() {
+        return displayMessages("Ugh, I can't remember what you told me to remind you :(");
     }
 
-    public void displayMatchingTasks(List<Task> matchingTasks) {
+    /**
+     * Displays a list of matching tasks in an indented block. If the list of tasks is empty, display a message
+     * indicating so.
+     *
+     * @param matchingTasks the tasks to display in the indented block
+     */
+    public String displayMatchingTasks(List<Task> matchingTasks) {
         int noOfTasks = matchingTasks.size();
         if (noOfTasks == 0) {
-            this.displayMessages("Well, I don't recall you asking me to note down anything like that.");
+            return this.displayMessages("Well, I don't recall you asking me to note down anything like that.");
         } else {
             String[] messages = new String[noOfTasks + 1];
             messages[0] = "Right, here's some tasks that match what you asked for:";
@@ -112,7 +126,7 @@ public class Ui {
                 messages[i + 1] = String.format("%3d: %s", i + 1, matchingTasks.get(i));
             }
 
-            this.displayMessages(messages);
+            return this.displayMessages(messages);
         }
     }
 }

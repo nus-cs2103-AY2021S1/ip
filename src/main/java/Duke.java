@@ -85,12 +85,11 @@ public class Duke extends Application {
             System.out.print("> ");
             while (scanner.hasNextLine()) {
                 String input = scanner.nextLine();
+                String output = handleCommand(input);
 
-                if (input.equalsIgnoreCase(BYE)) {
+                if (output.equalsIgnoreCase(Ui.GOODBYE_MESSAGE)) {
                     this.storage.saveTasks(this.tasks.getTasks());
                     break;
-                } else {
-                    this.handleCommand(input);
                 }
                 System.out.print("> ");
             }
@@ -103,63 +102,60 @@ public class Duke extends Application {
     }
 
     /**
-     * Interprets a command that was passed to Duke, and performs a corresponding action based on it. If the command or
-     * its arguments were malformed, display an error to the user.
+     * Interprets a command that was passed to Duke, and returns a corresponding response based on it. If the command or
+     * its arguments were malformed, return an error response to the user.
      *
      * @param input The String containing the command, as well as its arguments
+     * @return Duke's response to the input string
      */
-    private void handleCommand(String input) {
+    private String handleCommand(String input) {
         try {
             String[] tokens = input.split(" ");
             String command = tokens[0].toLowerCase();
             switch (command) {
             case "list": // show tasks available
-                this.ui.displayTasks(this.tasks.getTasks());
-                break;
+                return ui.displayTasks(this.tasks.getTasks());
             case "find":
                 String term = input.substring("find".length()).strip();
                 List<Task> matchingTasks = this.tasks.searchTasks(term);
-                this.ui.displayMatchingTasks(matchingTasks);
-                break;
+                return ui.displayMatchingTasks(matchingTasks);
             case "done": {
                 if (tokens.length < 2) {
                     throw new InvalidInputException("Um, you need to tell me what it is you've done.");
                 }
                 int index = Integer.parseInt(tokens[1]) - 1;
-                Task task = this.tasks.getTask(index);
+                Task task = tasks.getTask(index);
                 task.markDone();
-                this.ui.displayMessages(
+                return ui.displayMessages(
                         "Okay. So you've done:",
                         task.toString());
             }
-            break;
             case "delete":
                 int index = Integer.parseInt(tokens[1]) - 1;
                 Task task = this.tasks.getTask(index);
                 this.tasks.deleteTask(index);
-                this.ui.displayMessages(
+                return this.ui.displayMessages(
                         "Right, you no longer want me to track:",
                         task.toString(),
                         this.ui.getTasksLeftMessage(this.tasks.tasksCount()));
-                break;
             case "todo":
             case "deadline":
             case "event": // it's a new task
-                this.addTask(command, input);
-                break;
+                return addTask(command, input);
+            case "bye":
+                return ui.displayGoodbye();
             default:
-                this.ui.displayMessages("Um, I don't get what you're saying.");
-                break;
+                return ui.displayMessages("Um, I don't get what you're saying.");
             }
         } catch (InvalidInputException e) {
-            this.ui.displayMessages(e.getMessage());
+            return ui.displayMessages(e.getMessage());
         }
     }
 
-    private void addTask(String command, String input) throws InvalidTaskException {
+    private String addTask(String command, String input) throws InvalidTaskException {
         Task task = TaskParser.parseInput(command, input);
         this.tasks.addTask(task);
-        this.ui.displayMessages(
+        return this.ui.displayMessages(
                 "Okay, you want to:",
                 task.toString(),
                 this.ui.getTasksLeftMessage(this.tasks.tasksCount()));
