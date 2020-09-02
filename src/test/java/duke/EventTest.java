@@ -8,14 +8,14 @@ public class EventTest {
     @Test
     public void testToString() {
         Event event = new Event("attend meeting", "2020-08-27");
-        assertEquals("[E][\u2718] attend meeting (at: THURSDAY, Aug 27 2020)", event.toString());
+        assertEquals("[E][X] attend meeting (at: THURSDAY, Aug 27 2020)", event.toString());
     }
 
     @Test
     public void testCompleteTask() {
         Event event = new Event("buy books", "6pm");
         event = event.completeTask();
-        assertEquals("[E][\u2713] buy books (at: 6pm)", event.toString());
+        assertEquals("[E][V] buy books (at: 6pm)", event.toString());
     }
 
     @Test

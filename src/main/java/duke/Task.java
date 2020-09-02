@@ -49,7 +49,7 @@ public class Task {
      * @return a check icon if the task is done, a cross icon otherwise.
      */
     public String getStatusIcon() {
-        return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
+        return (isDone ? "[V]" : "[X]"); //return tick or X symbols
     }
 
     /**

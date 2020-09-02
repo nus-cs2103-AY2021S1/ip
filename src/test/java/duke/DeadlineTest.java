@@ -8,14 +8,14 @@ public class DeadlineTest {
     @Test
     public void testToString() {
         Deadline deadline = new Deadline("submit essay", "2020-08-29");
-        assertEquals("[D][\u2718] submit essay (by: SATURDAY, Aug 29 2020)", deadline.toString());
+        assertEquals("[D][X] submit essay (by: SATURDAY, Aug 29 2020)", deadline.toString());
     }
 
     @Test
     public void testCompleteTask() {
         Deadline deadline = new Deadline("pay bills", "tomorrow");
         deadline = deadline.completeTask();
-        assertEquals("[D][\u2713] pay bills (by: tomorrow)", deadline.toString());
+        assertEquals("[D][V] pay bills (by: tomorrow)", deadline.toString());
     }
 
     @Test
