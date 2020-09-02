@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exceptions.DukeException;
+import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -33,7 +34,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("FUCK", dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.startMessage(), dukeImage));
     }
 
     /**

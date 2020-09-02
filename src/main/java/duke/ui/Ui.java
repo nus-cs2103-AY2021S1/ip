@@ -4,20 +4,21 @@ import duke.tasks.Task;
 
 public class Ui {
     private final static String LONG_LINE = "________________________________________________________________________________";
-    private final static String LOGO = " ____        _\n"
-            + "|  _ \\ _   _| | _____\n"
+    private final static String LOGO = "___          _\n"
+            + "|  _ \\ _   _| | ___\n"
             + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+            + "| |_| | |_| | <  __/\n"
+            + "|___/ \\_,_|_|\\_\\_|\n";
 
 
 
     public Ui(){
     }
 
-    public static void startMessage(){
-        System.out.println("Hello from\n" + LOGO);
-        lineFormatter("Hello!!!! I'm duke.Duke\nWhat can I do for you?!?!?!" );
+    public static String startMessage(){
+//        System.out.println("Hello from\n" + LOGO);
+//        lineFormatter("Hello!!!! I'm duke.Duke\nWhat can I do for you?!?!?!" );
+        return "Hello from\n" + LOGO + "Hello!!!! I'm Duke\nWhat can I do for you?!?!?!" ;
     }
 
     //method to segment every String that is being fed into this method

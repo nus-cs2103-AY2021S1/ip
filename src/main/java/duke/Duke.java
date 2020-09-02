@@ -42,6 +42,7 @@ public class Duke{
         storage = new Storage(this.DIRECTORY);
         ui = new Ui();
         this.tasks = new TaskList();
+        storage.loadTasks(tasks);
 
     }
     /**
@@ -74,6 +75,7 @@ public class Duke{
             Command executable = Parser.parse(input);
             String output = executable.execute(tasks, ui, storage);
             if (executable.isComplete()){
+                System.exit(0);
 
             }
 //            ui.lineFormatter(output);
