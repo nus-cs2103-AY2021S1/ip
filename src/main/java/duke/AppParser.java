@@ -2,6 +2,7 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class AppParser extends Parser {
 
@@ -73,12 +74,14 @@ public class AppParser extends Parser {
             }
             return appUi.getFindResult(Finder.appFind(list, command[ptr + 1]));
         } else if (command[ptr].equals("todo")) {
-            Todo newTodo = Todo.of(inputCommand);
-            if (newTodo == null) {
+            ArrayList<Todo> newTodos = Todo.of(inputCommand);
+            if (newTodos == null) {
                 return appUi.getDescriptionEmptyMsg();
             }
-            list.add(newTodo);
-            return appUi.getAfterAddMsg(newTodo, TODO, list.getSize());
+            for(Todo newTodo : newTodos){
+                list.add(newTodo);
+            }
+            return appUi.getAfterAddMsgVarargs(TODO, list.getSize(), newTodos.toArray(new Task[newTodos.size()]));
         } else if (command[ptr].equals("deadline")) {
             Deadline deadline = Deadline.of(inputCommand);
             if (deadline == null) {

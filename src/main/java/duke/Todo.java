@@ -1,5 +1,8 @@
 package duke;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Todo extends Task {
 
     /**
@@ -20,12 +23,17 @@ public class Todo extends Task {
      * @param input input by user
      * @return the Todo object
      */
-    public static Todo of(String input) {
+    public static ArrayList<Todo> of(String input) {
         String description = getDescription(input);
         if (description.equals("")) {
             return null;
         }
-        return new Todo(description);
+        String[] descriptions = description.split(",");
+        ArrayList<Todo> res = new ArrayList<>();
+        for(String des : descriptions){
+            res.add(new Todo(des));
+        }
+        return res;
     }
 
     /**

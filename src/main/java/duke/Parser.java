@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 public class Parser {
 
     public static int CONTINUE = 1, BYE = 2;
@@ -80,13 +82,15 @@ public class Parser {
             Finder.find(list, command[ptr + 1]);
             return CONTINUE;
         } else if (command[ptr].equals("todo")) {
-            Todo newTodo = Todo.of(inputCommand);
-            if (newTodo == null) {
+            ArrayList<Todo> newTodos = Todo.of(inputCommand);
+            if (newTodos == null) {
                 ui.descriptionEmpty();
                 return CONTINUE;
             }
-            list.add(newTodo);
-            ui.MessageAfterAdd(newTodo, TODO, list.getSize());
+            for(Todo newTodo : newTodos){
+                list.add(newTodo);
+            }
+            ui.MessageAfterAddVarargs(TODO, list.getSize(), newTodos.toArray(new Task[newTodos.size()]));
             return CONTINUE;
         } else if (command[ptr].equals("deadline")) {
             Deadline deadline = Deadline.of(inputCommand);
