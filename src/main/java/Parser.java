@@ -37,13 +37,13 @@ public class Parser {
         else if (wrongCommand.equals("delete") || wrongCommand.equals("done")) {
             throw new DukeIncompleteCommandException(String.format(
                     "    ____________________________________________________________\n" +
-                            "     ☹ OOPS!!! Please indicate the index of the task which you would like to %s.\n" +
-                            "    ____________________________________________________________\n", wrongCommand.equals("done") ? "mark as done" : wrongCommand));
+                    "     ☹ OOPS!!! Please indicate the index of the task which you would like to %s.\n" +
+                    "    ____________________________________________________________\n", wrongCommand.equals("done") ? "mark as done" : wrongCommand));
         }
 
         throw new DukeInvalidCommandException("    ____________________________________________________________\n" +
-                "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                "    ____________________________________________________________");
+                                              "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                                              "    ____________________________________________________________");
     }
 
     /**

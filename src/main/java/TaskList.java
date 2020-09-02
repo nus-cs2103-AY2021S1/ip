@@ -96,16 +96,16 @@ public class TaskList {
         int index = Integer.parseInt(command.split(" ")[1]) - 1;
         if (index >= task_list.size() || index < 0) {
             throw new DukeInvalidTaskException("    ____________________________________________________________\n" +
-                    "     ☹ OOPS!!! The task cannot be found.\n" +
-                    "    ____________________________________________________________\n");
+                                               "     ☹ OOPS!!! The task cannot be found.\n" +
+                                               "    ____________________________________________________________\n");
         }
 
         task_list.get(index).complete();
 
         String task_done =  "    ____________________________________________________________\n" +
-                "     Nice! I've marked this task as done: \n" +
-                "       " + task_list.get(index) + "\n" +
-                "    ____________________________________________________________";
+                            "     Nice! I've marked this task as done: \n" +
+                            "       " + task_list.get(index) + "\n" +
+                            "    ____________________________________________________________";
 
         System.out.println(task_done);
         return task_list;
