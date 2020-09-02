@@ -18,7 +18,7 @@ public class ParserTest {
         } catch (DobbyException e) {
             bye = e.getMessage();
         }
-        assertEquals("\n    Goodbye. Hope to see you again soon!\n    ", bye);
+        assertEquals("Goodbye.\nHope to see you again soon!", bye);
     }
 
     @Test
@@ -33,8 +33,9 @@ public class ParserTest {
         } catch (DobbyException e) {
             todoNoDescription = e.getMessage();
         }
-        assertEquals("\n    Incorrect usage of command. Description cannot be empty. Please try again."
-                + (Commands.TODO).getUsage() + "\n    ", todoNoDescription);
+        assertEquals("Incorrect usage of command.\n"
+                + "Description cannot be empty. Please try again.\n  "
+                + (Commands.TODO).getUsage(), todoNoDescription);
 
         // for valid todo command
         String todoTask;
@@ -43,8 +44,8 @@ public class ParserTest {
         } catch (DobbyException e) {
             todoTask = e.getMessage();
         }
-        assertEquals("\n    Great! I've added the following task:\n      [T][\u2718] test todo command"
-                + "\n    Now you have 1 task in the list.\n    ", todoTask);
+        assertEquals("Great! I've added the following task:\n  [T][\u2718] test todo command"
+                + "\nNow you have 1 task in the list.", todoTask);
     }
 
     @Test
@@ -59,8 +60,9 @@ public class ParserTest {
         } catch (DobbyException e) {
             deadlineNoDescription = e.getMessage();
         }
-        assertEquals("\n    Incorrect usage of command. Description cannot be empty. Please try again."
-                + (Commands.DEADLINE).getUsage() + "\n    ", deadlineNoDescription);
+        assertEquals("Incorrect usage of command.\n"
+                + "Description cannot be empty. Please try again.\n  "
+                + (Commands.DEADLINE).getUsage(), deadlineNoDescription);
 
         // for deadline command with no deadline details
         String emptyDeadlineDetails;
@@ -69,8 +71,9 @@ public class ParserTest {
         } catch (DobbyException e) {
             emptyDeadlineDetails = e.getMessage();
         }
-        assertEquals("\n    Incorrect usage of command. Deadline details cannot be empty. Please try again."
-                + (Commands.DEADLINE).getUsage() + "\n    ", emptyDeadlineDetails);
+        assertEquals("Incorrect usage of command.\n"
+                + "Deadline details cannot be empty. Please try again.\n  "
+                + (Commands.DEADLINE).getUsage(), emptyDeadlineDetails);
 
         // for valid deadline command
         String deadlineTask;
@@ -79,9 +82,9 @@ public class ParserTest {
         } catch (DobbyException e) {
             deadlineTask = e.getMessage();
         }
-        assertEquals("\n    Great! I've added the following task:\n      [D][\u2718] week3 iP "
+        assertEquals("Great! I've added the following task:\n  [D][\u2718] week3 iP "
                 + "(by: Aug 28 2020 2:00 pm)"
-                + "\n    Now you have 1 task in the list.\n    ", deadlineTask);
+                + "\nNow you have 1 task in the list.", deadlineTask);
 
     }
 
@@ -97,8 +100,9 @@ public class ParserTest {
         } catch (DobbyException e) {
             eventNoDescription = e.getMessage();
         }
-        assertEquals("\n    Incorrect usage of command. Description cannot be empty. Please try again."
-                + (Commands.EVENT).getUsage() + "\n    ", eventNoDescription);
+        assertEquals("Incorrect usage of command."
+                + "\nDescription cannot be empty. Please try again.\n  "
+                + (Commands.EVENT).getUsage(), eventNoDescription);
 
         // for event command with no schedule details
         String emptyEventDetails;
@@ -107,8 +111,9 @@ public class ParserTest {
         } catch (DobbyException e) {
             emptyEventDetails = e.getMessage();
         }
-        assertEquals("\n    Incorrect usage of command. Schedule details cannot be empty. Please try again."
-                + (Commands.EVENT).getUsage() + "\n    ", emptyEventDetails);
+        assertEquals("Incorrect usage of command."
+                + "\nSchedule details cannot be empty. Please try again.\n  "
+                + (Commands.EVENT).getUsage(), emptyEventDetails);
 
         // for valid event command
         String eventTask;
@@ -117,9 +122,9 @@ public class ParserTest {
         } catch (DobbyException e) {
             eventTask = e.getMessage();
         }
-        assertEquals("\n    Great! I've added the following task:\n      [E][\u2718] week3 lec "
+        assertEquals("Great! I've added the following task:\n  [E][\u2718] week3 lec "
                 + "(at: Aug 28 2020 2:00 pm)"
-                + "\n    Now you have 1 task in the list.\n    ", eventTask);
+                + "\nNow you have 1 task in the list.", eventTask);
 
     }
 
@@ -142,7 +147,7 @@ public class ParserTest {
         } catch (DobbyException e) {
             listTodo = e.getMessage();
         }
-        assertEquals("\n    1. [T][\u2718] test done and delete commands\n    ", listTodo);
+        assertEquals("1. [T][\u2718] test done and delete commands", listTodo);
 
         // test done command
         String doneTodo;
@@ -151,8 +156,8 @@ public class ParserTest {
         } catch (DobbyException e) {
             doneTodo = e.getMessage();
         }
-        assertEquals("\n    Great! I've marked this task as done:\n      "
-                + "[T][\u2713] test done and delete commands\n    ", doneTodo);
+        assertEquals("Great! I've marked this task as done:\n  "
+                + "[T][\u2713] test done and delete commands", doneTodo);
 
         // test delete command
         String deleteTodo;
@@ -161,8 +166,8 @@ public class ParserTest {
         } catch (DobbyException e) {
             deleteTodo = e.getMessage();
         }
-        assertEquals("\n    Noted. I've removed this task:\n      "
-                + "[T][\u2713] test done and delete commands\n    ", deleteTodo);
+        assertEquals("Noted. I've removed this task:\n  "
+                + "[T][\u2713] test done and delete commands", deleteTodo);
     }
 
     @Test
@@ -185,7 +190,7 @@ public class ParserTest {
         } catch (DobbyException e) {
             scheduled = e.getMessage();
         }
-        assertEquals("\n    1. [D][\u2718] push A-JUnit to github (by: Aug 24 2020 11:59 pm)\n    ", scheduled);
+        assertEquals("1. [D][\u2718] push A-JUnit to github (by: Aug 24 2020 11:59 pm)\n", scheduled);
     }
 
     @Test
@@ -208,9 +213,9 @@ public class ParserTest {
             noType = e.getMessage();
         }
 
-        assertEquals("\n    1. [T][\u2718] test findtype command\n    ", message);
-        assertEquals("\n    Incorrect usage of command. Please try again."
-                + "\n      findtype _T/D/E_\n    ", noType);
+        assertEquals("1. [T][\u2718] test findtype command", message);
+        assertEquals("Incorrect usage of command. Please try again."
+                + "\n  findtype _T/D/E_", noType);
     }
 
     @Test
@@ -235,10 +240,11 @@ public class ParserTest {
             noTaskContainingKeyword = e.getMessage();
         }
 
-        assertEquals("\n    1. [T][\u2718] test findtype command\n    ", message);
-        assertEquals("\n    Incorrect usage of command. Keyword required cannot be empty. "
-                + "Please try again.\n      find _keyword_\n    ", noKeyword);
-        assertEquals("\n    There are no tasks of containing the word - none\n    ",
+        assertEquals("1. [T][\u2718] test findtype command\n", message);
+        assertEquals("Incorrect usage of command."
+                + "\nKeyword required cannot be empty. "
+                + "Please try again.\n  find _keyword_", noKeyword);
+        assertEquals("There are no tasks of containing the word - none",
                 noTaskContainingKeyword);
     }
 }
