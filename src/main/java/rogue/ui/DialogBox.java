@@ -15,9 +15,8 @@ import java.io.IOException;
 import java.util.Collections;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face
+ * and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -53,7 +52,7 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getRogueDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

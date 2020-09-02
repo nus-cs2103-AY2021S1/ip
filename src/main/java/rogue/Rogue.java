@@ -11,7 +11,7 @@ import rogue.storage.exceptions.StorageException;
 import rogue.ui.Ui;
 
 /**
- * Main driver of {@code Rogue}. Consists of three main elements: the {@code Storage},
+ * The chat-bot {@code Rogue}. Consists of three main elements: the {@code Storage},
  * the {@code TaskList}, and the {@code Ui}.
  */
 public class Rogue {

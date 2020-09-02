@@ -5,7 +5,11 @@ import rogue.ui.Ui;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * The entry point of {@code Rogue} to initialize the GUI.
+ */
 public class Main extends Application {
+    /** The path of the file to which {@code Rogue} will save its data. */
     private static final String DEFAULT_SAVE_FILE_PATH = "./data/tasks.txt";
 
     @Override

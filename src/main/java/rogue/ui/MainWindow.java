@@ -28,6 +28,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Scrolls down to the end every time the height of the dialog container changes.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -38,8 +41,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Rogue's reply
+     * and then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
@@ -47,7 +50,7 @@ public class MainWindow extends AnchorPane {
         String response = rogue.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getRogueDialog(response, dukeImage)
         );
         userInput.clear();
     }

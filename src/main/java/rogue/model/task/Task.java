@@ -50,6 +50,7 @@ public class Task {
 
     /**
      * Retrieves print-friendly summary of a {@code Task}.
+     *
      * 1 indicates a completed {@code Task}, and 0 an incomplete {@code Task}.
      *
      * @return Print-friendly summary of task
