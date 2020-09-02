@@ -14,6 +14,13 @@ public class Duke {
     private String fileString;
     private TaskList taskList;
 
+    public Duke() {
+    }
+
+    /**
+     * Duke's constructor
+     * @param fileString name of the file
+     */
     public Duke(String fileString) {
         this.fileString = fileString;
         this.taskList = new TaskList();
