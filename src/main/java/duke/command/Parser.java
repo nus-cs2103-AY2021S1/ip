@@ -32,41 +32,47 @@ public class Parser {
      * @param storage Local storage which handles the loading and saving of task lists.
      * @throws InvalidUserCommandException If a user command is not recognized by the program.
      */
-    public static void parseCommands(String userCommand, Ui ui, Storage storage) throws InvalidUserCommandException {
+    public static String parseCommands(String userCommand, Ui ui, Storage storage) throws InvalidUserCommandException {
         if (UserCommands.EXIT.getCommandWord().equals(userCommand)) {
-            ui.showGoodbyeMessage();
+            return ui.showGoodbyeMessage();
         } else if (UserCommands.LIST.getCommandWord().equals(userCommand)) {
             try {
                 // Load the saved TaskList from the storage and display it
-                ui.showTaskList(storage.load());
+                return ui.showTaskList(storage.load());
             } catch (StorageException e) {
                 // Unable to load saved TaskList
-                ui.showErrorMessage(e);
+                return ui.showErrorMessage(e);
             }
 
-            // For multi-word user commands
+        // For multi-word user commands
         } else {
             // Extract the first word of the user command to obtain the type of user command
             String[] commandDetails = userCommand.split(" ", 2);
 
             // Contains type of user command
             String command = commandDetails[0];
-            if (UserCommands.TODO.getCommandWord().equals(command)) {
-                addTodo(commandDetails[1], ui, storage);
-            } else if (UserCommands.DEADLINE.getCommandWord().equals(command)) {
-                addDeadline(commandDetails[1], ui, storage);
-            } else if (UserCommands.EVENT.getCommandWord().equals(command)) {
-                addEvent(commandDetails[1], ui, storage);
-            } else if (UserCommands.DELETE.getCommandWord().equals(command)) {
-                deleteTask(commandDetails[1], ui, storage);
-            } else if (UserCommands.DONE.getCommandWord().equals(command)) {
-                markTaskAsDone(commandDetails[1], ui, storage);
-            } else if (UserCommands.FIND.getCommandWord().equals(command)) {
-                searchTaskListForKeyword(commandDetails[1], ui, storage);
-            } else {
-                // User commands is not recognized by the system
+            try {
+                if (UserCommands.TODO.getCommandWord().equals(command)) {
+                    return addTodo(commandDetails[1], ui, storage);
+                } else if (UserCommands.DEADLINE.getCommandWord().equals(command)) {
+                    return addDeadline(commandDetails[1], ui, storage);
+                } else if (UserCommands.EVENT.getCommandWord().equals(command)) {
+                    return addEvent(commandDetails[1], ui, storage);
+                } else if (UserCommands.DELETE.getCommandWord().equals(command)) {
+                    return deleteTask(commandDetails[1], ui, storage);
+                } else if (UserCommands.DONE.getCommandWord().equals(command)) {
+                    return markTaskAsDone(commandDetails[1], ui, storage);
+                } else if (UserCommands.FIND.getCommandWord().equals(command)) {
+                    return searchTaskListForKeyword(commandDetails[1], ui, storage);
+                } else {
+                    // User commands is not recognized by the system
+                    throw new InvalidUserCommandException(ui.showInvalidUserCommand(userCommand));
+                }
+            // If user input only consists of the type of command but no other details
+            } catch (ArrayIndexOutOfBoundsException e) {
                 throw new InvalidUserCommandException(ui.showInvalidUserCommand(userCommand));
             }
+
         }
     }
 
@@ -77,17 +83,17 @@ public class Parser {
      * @param ui User interface which displays a new todo has been added to the task list.
      * @param storage Local storage that loads the old task list and saves the updated task list.
      */
-    private static void addTodo(String todo, Ui ui, Storage storage) {
+    private static String addTodo(String todo, Ui ui, Storage storage) {
         try {
             TaskList tasks = storage.load();
 
             Todo newTodoTask = new Todo(todo);
             tasks.addNewTask(newTodoTask);
             storage.save(tasks, ui);
-            ui.showAddedNewTaskMessage(newTodoTask, storage.load());
+            return ui.showAddedNewTaskMessage(newTodoTask, storage.load());
         } catch (StorageException e) {
             // Unable to load or save task list
-            ui.showErrorMessage(e);
+            return ui.showErrorMessage(e);
         }
     }
 
@@ -98,7 +104,7 @@ public class Parser {
      * @param ui User interface which displays a new deadline has been added to the task list.
      * @param storage Local storage that loads the old task list and saves the updated task list.
      */
-    private static void addDeadline(String deadline, Ui ui, Storage storage) {
+    private static String addDeadline(String deadline, Ui ui, Storage storage) {
         try {
             TaskList tasks = storage.load();
             String[] deadlineInformation;
@@ -111,10 +117,10 @@ public class Parser {
             Deadline newDeadlineTask = new Deadline(description, deadlineDate);
             tasks.addNewTask(newDeadlineTask);
             storage.save(tasks, ui);
-            ui.showAddedNewTaskMessage(newDeadlineTask, storage.load());
+            return ui.showAddedNewTaskMessage(newDeadlineTask, storage.load());
         } catch (StorageException e) {
             // Unable to load or save task list
-            ui.showErrorMessage(e);
+            return ui.showErrorMessage(e);
         }
     }
 
@@ -125,7 +131,7 @@ public class Parser {
      * @param ui User interface which displays a new event has been added to the task list.
      * @param storage Local storage that loads the old task list and saves the updated task list.
      */
-    private static void addEvent(String event, Ui ui, Storage storage) {
+    private static String addEvent(String event, Ui ui, Storage storage) {
         try {
             TaskList tasks = storage.load();
             String[] eventInformation;
@@ -138,10 +144,10 @@ public class Parser {
             Event newEventTask = new Event(description, eventDate);
             tasks.addNewTask(newEventTask);
             storage.save(tasks, ui);
-            ui.showAddedNewTaskMessage(newEventTask, storage.load());
+            return ui.showAddedNewTaskMessage(newEventTask, storage.load());
         } catch (StorageException e) {
             // Unable to load or save task list
-            ui.showErrorMessage(e);
+            return ui.showErrorMessage(e);
         }
     }
 
@@ -152,17 +158,17 @@ public class Parser {
      * @param ui User interface which displays that the task has been deleted to the task list.
      * @param storage Local storage that loads the old task list and saves the updated task list.
      */
-    private static void deleteTask(String taskToDelete, Ui ui, Storage storage) {
+    private static String deleteTask(String taskToDelete, Ui ui, Storage storage) throws TaskDoesNotExistException {
         try {
             TaskList tasks = storage.load();
             int index = parseTaskIndex(taskToDelete);
 
             // Checks if index is valid
-            if (index > 0 && index <= tasks.totalNumberOfTasks()) {
-                Task deletedTask = tasks.getTask(index - 1);
-                tasks.deleteTask(index - 1);
+            if (index > 0 && index <= tasks.getTotalNumberOfTasks()) {
+                Task deletedTask = tasks.getTask(index);
+                tasks.deleteTask(index);
                 storage.save(tasks, ui);
-                ui.showDeleteTaskMessage(deletedTask, storage.load());
+                return ui.showDeleteTaskMessage(deletedTask, storage.load());
             // If task specified does not exist in the task list
             } else {
                 throw new TaskDoesNotExistException(index);
@@ -170,7 +176,7 @@ public class Parser {
 
         // If index specified by users is not a number or task list fails to load or save
         } catch (InvalidUserCommandException | StorageException e) {
-            ui.showErrorMessage(e);
+            return ui.showErrorMessage(e);
         }
     }
 
@@ -199,23 +205,24 @@ public class Parser {
      * @param ui User interface which displays the specified task has been marked as done.
      * @param storage Local storage that loads the old task list and saves the updated task list.
      */
-    private static void markTaskAsDone(String taskToMarkDone, Ui ui, Storage storage) {
+    private static String markTaskAsDone(
+            String taskToMarkDone, Ui ui, Storage storage) throws TaskDoesNotExistException {
         try {
             TaskList tasks = storage.load();
             int index = parseTaskIndex(taskToMarkDone);
 
             // Checks if index is valid
-            if (index > 0 && index <= tasks.totalNumberOfTasks()) {
-                Task doneTask = tasks.getTask(index - 1);
+            if (index > 0 && index <= tasks.getTotalNumberOfTasks()) {
+                Task doneTask = tasks.getTask(index);
 
                 // Task has already been marked as done
                 if (doneTask.hasDoneStatus()) {
-                    ui.showAlreadyMarkDoneMessage(doneTask);
+                    return ui.showAlreadyMarkDoneMessage(doneTask);
                 } else {
                     doneTask.markAsDone();
-                    tasks.updateTaskList(doneTask, index - 1);
+                    tasks.updateTaskList(doneTask, index);
                     storage.save(tasks, ui);
-                    ui.showMarkDoneMessage(doneTask);
+                    return ui.showMarkDoneMessage(doneTask);
                 }
 
             // If task specified does not exist in the task list
@@ -225,7 +232,7 @@ public class Parser {
 
         // If index specified by users is not a number or task list fails to load or save
         } catch (InvalidUserCommandException | StorageException e) {
-            ui.showErrorMessage(e);
+            return ui.showErrorMessage(e);
         }
     }
 
@@ -236,12 +243,12 @@ public class Parser {
      * @param ui User interface which displays the filtered tasks.
      * @param storage ocal storage that loads the saved task list.
      */
-    private static void searchTaskListForKeyword(String keyword, Ui ui, Storage storage) {
+    private static String searchTaskListForKeyword(String keyword, Ui ui, Storage storage) {
         try {
             TaskList tasks = storage.load();
             List<Task> tasksContainingKeyword = new ArrayList<>();
 
-            for (int i = 0; i < tasks.totalNumberOfTasks(); i++) {
+            for (int i = 1; i <= tasks.getTotalNumberOfTasks(); i++) {
                 Task task = tasks.getTask(i);
                 boolean containsKeyword = task.toString().contains(keyword);
                 if (containsKeyword) {
@@ -249,9 +256,9 @@ public class Parser {
                 }
             }
             TaskList filteredTaskList = new TaskList(tasksContainingKeyword);
-            ui.showFilteredByKeywordTaskList(filteredTaskList, keyword);
+            return ui.showFilteredByKeywordTaskList(filteredTaskList, keyword);
         } catch (StorageException e) {
-            ui.showErrorMessage(e);
+            return ui.showErrorMessage(e);
         }
     }
 }

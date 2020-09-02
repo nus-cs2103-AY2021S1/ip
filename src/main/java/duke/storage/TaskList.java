@@ -40,15 +40,15 @@ public class TaskList {
      * @param index Index of task in the task list.
      */
     public void updateTaskList(Task newTask, int index) {
-        this.deleteTask(index - 1);
-        this.listOfTasks.add(index, newTask);
+        this.deleteTask(index);
+        this.listOfTasks.add(index - 1, newTask);
     }
     /**
      * Returns the total number of tasks currently in the task list.
      *
      * @return Total number of tasks currently in the task list.
      */
-    public int totalNumberOfTasks() {
+    public int getTotalNumberOfTasks() {
         return this.listOfTasks.size();
     }
 
@@ -59,7 +59,7 @@ public class TaskList {
      * @return Task stored at the specified index.
      */
     public Task getTask(int index) {
-        return this.listOfTasks.get(index);
+        return this.listOfTasks.get(index - 1);
     }
 
     /**
@@ -68,7 +68,7 @@ public class TaskList {
      * @param index Index of the task to be deleted.
      */
     public void deleteTask(int index) {
-        this.listOfTasks.remove(index);
+        this.listOfTasks.remove(index - 1);
     }
 
     /**

@@ -2,6 +2,7 @@ package duke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
 import duke.exception.InvalidTaskDateException;
@@ -13,9 +14,7 @@ class TaskDateTest {
     void getDate_validDatePattern() {
         String validDate = "2020-01-01 16:00";
         String expected = "1 Jan 2020, Wednesday 04:00 PM";
-        
         String actual = TaskDate.getDate(validDate);
-        
         assertEquals(expected, actual);
     }
 
