@@ -17,6 +17,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initializes a Duke object.
+     */
     public Duke() {
         this("./tasks.txt");
     }
@@ -74,6 +77,12 @@ public class Duke {
         new Duke("./tasks.txt").run();
     }
 
+    /**
+     * Returns a response to be shown to the user.
+     *
+     * @param input Input from the user.
+     * @return Response to the user.
+     */
     public String getResponse(String input) {
         StringBuilder response = new StringBuilder();
         try {
@@ -90,6 +99,11 @@ public class Duke {
         return response.toString();
     }
 
+    /**
+     * Shows welcome message to user.
+     *
+     * @return Welcome message to user.
+     */
     public String getWelcomeMessage() {
         return ui.getGreetings();
     }

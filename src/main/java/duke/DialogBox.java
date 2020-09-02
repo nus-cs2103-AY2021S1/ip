@@ -15,6 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
+/**
+ * Controller for Dialog Box
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -43,10 +46,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a new user dialog box.
+     *
+     * @param text Text to be displayed.
+     * @param img Image to be displayed.
+     * @return User dialog box.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a new chat bot dialog box.
+     *
+     * @param text Text to be displayed.
+     * @param img Image to be displayed.
+     * @return User dialog box.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

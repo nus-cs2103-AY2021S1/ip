@@ -193,6 +193,9 @@ public class Ui {
             + "██████";
     private ArrayList<String> accumulatedResponses;
 
+    /**
+     * Creates a new Ui object.
+     */
     public Ui() {
         this.accumulatedResponses = new ArrayList<>();
     }
@@ -255,10 +258,18 @@ public class Ui {
         return sc.nextLine();
     }
 
+    /**
+     * Accumulates response from various functionalities.
+     * @param response Response to be accumulated.
+     */
     public void accumulateResponse(String response) {
         accumulatedResponses.add(response);
     }
 
+    /**
+     * Returns the accumulated responses and reset.
+     * @return Accumulated responses.
+     */
     public String getResponses() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < accumulatedResponses.size() - 1; i++) {

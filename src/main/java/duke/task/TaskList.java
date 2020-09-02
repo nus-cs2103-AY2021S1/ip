@@ -24,6 +24,7 @@ public class TaskList {
 
     /**
      * Initializes a TaskList object.
+     *
      * @param savedTasks Tasks gathered from save file.
      */
     public TaskList(ArrayList<Task> savedTasks) {
@@ -44,6 +45,7 @@ public class TaskList {
      * Adds task to task list.
      *
      * @param task Task to be added.
+     * @param ui Ui to get responses.
      */
     public void addTask(Task task, Ui ui) {
         tasks.add(task);
@@ -57,6 +59,7 @@ public class TaskList {
      * Deletes a specific task.
      *
      * @param index Position of the task to be deleted.
+     * @param ui Ui to get responses.
      */
     public void deleteTask(int index, Ui ui) {
         if (index < 1 || taskCount < index) {
@@ -73,6 +76,8 @@ public class TaskList {
 
     /**
      * Lists all tasks in task list.
+     *
+     * @param ui Ui to get responses.
      */
     public void listTasks(Ui ui) {
         if (taskCount == 0) {
@@ -91,6 +96,7 @@ public class TaskList {
      * Marks a specific task as done.
      *
      * @param index Position of the task to be completed.
+     * @param ui Ui to get responses.
      */
     public void markAsDone(int index, Ui ui) {
         if (index < 1 || taskCount < index) {

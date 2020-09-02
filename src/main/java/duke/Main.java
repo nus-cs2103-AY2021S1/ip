@@ -8,9 +8,17 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Creates stage for GUI.
+ */
 public class Main extends Application {
     private Duke duke = new Duke();
 
+    /**
+     * Creates a new stage for GUI.
+     *
+     * @param stage Stage for GUI.
+     */
     @Override
     public void start(Stage stage) {
         try {
