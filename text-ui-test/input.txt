@@ -1,3 +1,4 @@
+list a
 list
 todo
 todo borrow book
@@ -30,5 +31,6 @@ delete 4
 list
 get 1-9-2020
 blah
+bye a
 bye
 blah

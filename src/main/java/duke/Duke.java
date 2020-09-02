@@ -43,7 +43,7 @@ public class Duke {
     /**
      * Reads the inputs from the user.
      */
-    public void readInputs() {
+    private void readInputs() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String nextInput = sc.nextLine();

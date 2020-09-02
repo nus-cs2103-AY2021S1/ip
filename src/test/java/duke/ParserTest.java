@@ -10,40 +10,46 @@ public class ParserTest {
 
     @BeforeEach
     public void beforeEachTestMethod() {
-        this.parser = new Parser(new Storage("../data", "../data/duke.txt", new Ui(), new TaskList()));
+        Storage storage = new Storage("../data", "../data/duke.txt", new Ui(), new TaskList());
+        this.parser = new Parser(storage);
     }
 
     @Test
-    public void processInput_unknownCommand_dukeExceptionThrown() {
+    public void testByeCommand_extraUserInput_dukeExceptionThrown() {
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("bye bye"));
     }
 
     @Test
-    public void processInput_invalidDeleteCommand_dukeExceptionThrown() {
+    public void testListCommand_extraUserInput_dukeExceptionThrown() {
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("list 1"));
+    }
+
+    @Test
+    public void testDeleteCommand_invalidFormat_dukeExceptionThrown() {
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("delete"));
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("delete a"));
     }
 
     @Test
-    public void processInput_invalidDoneCommand_dukeExceptionThrown() {
+    public void testDoneCommand_invalidFormat_dukeExceptionThrown() {
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("done"));
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("done a"));
     }
 
     @Test
-    public void processInput_invalidGetCommand_dukeExceptionThrown() {
+    public void testGetCommand_invalidFormat_dukeExceptionThrown() {
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("get"));
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("get a"));
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("get 01/09/2020"));
     }
 
     @Test
-    public void processInput_invalidTodoCommand_dukeExceptionThrown() {
+    public void testTodoCommand_invalidFormat_dukeExceptionThrown() {
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("todo"));
     }
 
     @Test
-    public void processInput_invalidEventCommand_dukeExceptionThrown() {
+    public void testEventCommand_invalidFormat_dukeExceptionThrown() {
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("event project meeting"));
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("event project meeting"));
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("event project meeting /at"));
@@ -52,7 +58,7 @@ public class ParserTest {
     }
 
     @Test
-    public void processInput_invalidDeadlineCommand_dukeExceptionThrown() {
+    public void testDeadlineCommand_invalidFormat_dukeExceptionThrown() {
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("return book"));
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("return book"));
         Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("return book /by"));
