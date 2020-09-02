@@ -28,12 +28,18 @@ public class Ui {
     public void run() {
         printGreetingMessage();
         while (isOn) {
-            String input = this.getInput();
-            if (CommandParser.isExit(input)) {
-                this.exit();
-            } else {
-                this.respond(input);
+            if (scanner.hasNextLine()) {
+                this.handleInput();
             }
+        }
+    }
+    
+    private void handleInput() {
+        String input = this.getInput();
+        if (CommandParser.isExit(input)) {
+            this.exit();
+        } else {
+            this.respond(input);
         }
     }
 
