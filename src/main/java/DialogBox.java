@@ -53,7 +53,18 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox dialogBox = new DialogBox(text, img);
+        dialogBox.setBackground(new Background(new BackgroundFill(Color.AZURE,
+                new CornerRadii(10), new Insets(0))));
+
+        // Spacing between Image and Text
+        dialogBox.setSpacing(10.0);
+
+        // Border for Duke Dialog
+        dialogBox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
+                + "-fx-border-width: 2;" + "-fx-border-insets: 0;"
+                + "-fx-border-radius: 10;" + "-fx-border-color: skyblue;");
+        return dialogBox;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {

@@ -2,6 +2,6 @@ T | 1 | read book
 D | 1 | return book | 03/10/2020, 1900
 E | 1 | graduation ceremony | 10/10/2020, 1830
 E | 1 | final exams | 19/11/2020, 1500
-D | 1 | homework | 20/10/2020, 1900
 T | 0 | homework
 D | 0 | finish assignment | 20/01/2020, 1900
+T | 0 | homework
