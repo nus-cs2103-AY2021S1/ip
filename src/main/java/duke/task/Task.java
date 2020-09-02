@@ -1,9 +1,15 @@
 package duke.task;
 
-abstract public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for Task
+     *
+     * @param description description of task.
+     * @param isDone      whether or not a task has been done.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -22,7 +28,7 @@ abstract public class Task {
         this.isDone = true;
     }
 
-    abstract public String saveText();
+    public abstract String saveText();
 
     @Override
     public String toString() {

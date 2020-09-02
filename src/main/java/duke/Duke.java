@@ -6,11 +6,17 @@ import duke.logic.TaskList;
 import duke.ui.Ui;
 
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor to initialise Moco with specific filepath
+     * If expected error is met, MocoException is thrown and
+     * user is prompted.
+     *
+     * @param filepath file path of saved tasklist.
+     */
     public Duke(String filePath) throws MocoException {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,8 +26,6 @@ public class Duke {
     /**
      * Starts Moco
      * If the user inputs "bye", Moco closes, saving task list
-     *
-     * @throws MocoException If insufficient details are entered/wrongly entered.
      */
     public void run() {
         ui.startBot();

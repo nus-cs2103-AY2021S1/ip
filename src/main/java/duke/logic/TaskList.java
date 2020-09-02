@@ -1,16 +1,24 @@
 package duke.logic;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor for Tasklist for those without a saved tasklist.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor for Tasklist for those with saved tasklist.
+     *
+     * @param tasks tasks in the saved task list.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
         if (tasks.size() > 0) {
@@ -56,6 +64,12 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    /**
+     * Find tasks with specified keyword from tasklist.
+     *
+     * @param keyword keyword of tasks to search for.
+     * @return TaskList of tasks with specified keyword.
+     */
     public TaskList findTasks(String keyword) {
         TaskList tl = new TaskList();
         for (Task t : tasks) {

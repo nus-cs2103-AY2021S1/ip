@@ -1,19 +1,19 @@
 package duke.logic;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import duke.MocoException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Storage {
     private File taskList;
@@ -78,6 +78,8 @@ public class Storage {
                 LocalDate at = LocalDate.parse(s[3]);
                 Event e = new Event(s[2], isDone, at);
                 tasks.add(e);
+                break;
+            default:
                 break;
         }
     }

@@ -1,5 +1,8 @@
 package duke.logic;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.MocoException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -7,40 +10,36 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.ui.Ui;
 
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 public class Parser {
     private enum type {
-        Todo {
-            public String toString() {
-                return "todo";
-            }
-        },
-        Deadline {
+        DEADLINE {
             public String toString() {
                 return "deadline";
             }
         },
-        Event {
-            @Override
-            public String toString() {
-                return "event";
-            }
-        },
-        Delete {
+        DELETE {
             @Override
             public String toString() {
                 return "delete";
             }
         },
-        Find {
+        EVENT {
+            @Override
+            public String toString() {
+                return "event";
+            }
+        },
+        FIND {
             @Override
             public String toString() {
                 return "find";
             }
-        }
+        },
+        TODO {
+            public String toString() {
+                return "todo";
+            }
+        },
     }
 
     /**
@@ -67,15 +66,15 @@ public class Parser {
             doneCommand(input, tasks, storage, ui);
         } else {
             ui.printBorder();
-            if (input.contains(type.Todo.toString())) {
+            if (input.contains(type.TODO.toString())) {
                 toDoCommand(input, tasks, storage, ui);
-            } else if (input.contains(type.Deadline.toString())) {
+            } else if (input.contains(type.DEADLINE.toString())) {
                 deadlineCommand(input, tasks, storage, ui);
-            } else if (input.contains(type.Event.toString())) {
+            } else if (input.contains(type.EVENT.toString())) {
                 eventCommand(input, tasks, storage, ui);
-            } else if (input.contains(type.Delete.toString())) {
+            } else if (input.contains(type.DELETE.toString())) {
                 deleteCommand(input, tasks, storage, ui);
-            } else if (input.contains(type.Find.toString())) {
+            } else if (input.contains(type.FIND.toString())) {
                 findCommand(input, tasks, storage, ui);
             } else {
                 throw new MocoException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -92,10 +91,10 @@ public class Parser {
                 if (tl.size() > 0) {
                     ui.findTasks(tl);
                 } else {
-                    throw new MocoException(" ☹ OOPS!!! You have no task that contains the keyword " + keyword + "! :(");
+                    throw new MocoException(" ☹ OOPS!!! You have no task that contains the keyword " + keyword + "!");
                 }
             } else {
-                throw new MocoException(" ☹ OOPS!!! What task are you looking for? Please specific a keyword.");
+                throw new MocoException(" ☹ OOPS! What task are you looking for? Please specify a keyword.");
             }
         } catch (MocoException e) {
             throw new MocoException(e.getMessage());
@@ -149,7 +148,8 @@ public class Parser {
                 throw new MocoException(" ☹ Insufficient details! The description of a deadline cannot be empty.");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new MocoException("Date not/wrongly entered! (Please provide in this format: deadline description /by dd-mm-yyyy");
+            throw new MocoException("Date not/wrongly entered! "
+                    + "(Please provide in this format: deadline description /by dd-mm-yyyy");
         } catch (DateTimeParseException e) {
             throw new MocoException(" ☹ Date wrongly entered, please remember to format date in dd-MM-yyyy");
         }
@@ -170,7 +170,8 @@ public class Parser {
                 throw new MocoException(" ☹ Insufficient details! The description of an event cannot be empty.");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new MocoException("Date not/wrongly entered! (Please provide in this format: event description /at dd-mm-yyyy");
+            throw new MocoException("Date not/wrongly entered! (Please provide in this format: "
+                    + "event description /at dd-mm-yyyy");
         } catch (DateTimeParseException e) {
             throw new MocoException(" ☹ Date wrongly entered, please remember to format date in dd-MM-yyyy!");
         }
@@ -183,7 +184,7 @@ public class Parser {
                 Task t = tasks.get(index);
                 tasks.deleteTask(index);
                 storage.Save();
-                ui.deleteTask(t, tasks);
+                ui.deleteTask(t);
             } else {
                 throw new MocoException("Please provide the index of the task you would like to remove.");
             }
