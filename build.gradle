@@ -29,11 +29,7 @@ test {
 }
 
 application {
-<<<<<<< HEAD
-    mainClassName = "Duke"
-=======
-    mainClassName = "seedu.duke.Duke"
->>>>>>> 3b19ba1790d6035a9e246f5d4ae627bf68778606
+
 }
 
 shadowJar {
@@ -47,8 +43,4 @@ checkstyle {
 
 run{
     standardInput = System.in
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 3b19ba1790d6035a9e246f5d4ae627bf68778606
