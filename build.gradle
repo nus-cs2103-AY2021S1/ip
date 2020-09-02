@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "chatterbox.Chatterbox"
+    mainClassName = "chatterbox.Launcher"
 }
 
 checkstyle {
