@@ -6,83 +6,68 @@ import java.util.ArrayList;
  * Represents a Ui object.
  */
 public class Ui {
-    
+
     public Ui() {
     }
 
     /**
      * Displays welcome message.
      */
-    public static void welcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("\n Always at your service, \n" + logo + "\n");
-        System.out.println("Your Majesty, I am your loyal Duke.");
-        System.out.println("I offer a range of administrative services. Do type 'assist' to see the comprehensive list.");
-        System.out.println();
+    public static String welcome() {
+        String footer= "Your Majesty, I am your loyal Duke.\n " +
+                "I offer a range of administrative services. Do type 'assist' to see the comprehensive list.\n";
+        return footer + printDashedLineBreak();
     }
 
     /**
      * Displays a dashed line break that is 32 dashes long.
      */
-    public static void dashedLineBreak() {
+    public static String printDashedLineBreak() {
         String dashedLine = "- ";
-        System.out.println(dashedLine.repeat(32));
+        return dashedLine.repeat(33);
     }
 
     /**
      * Displays list of possible user commands.
      */
-    public static void assist() {
-        dashedLineBreak();
-        System.out.println("Greetings, Your Majesty. \n");
-        System.out.println("Use any of the commands on the left to access my quality services:");
-        System.out.println("\ttodo [TASK]: Adds a todo to your scroll");
-        System.out.println("\tdeadline [TASK] /by [DATE AND/OR TIME]: Adds a deadline to your scroll");
-        System.out.println("\tevent [TASK] /on [DATE AND/OR TIME]: Adds an event to your scroll");
-        System.out.println("\tscroll: Displays your scroll - your list of tasks");
-        System.out.println("\tconquer [NUMBER]: Marks the particular item on your scroll as DONE");
-        System.out.println("\tdelete [NUMBER]: Deletes the particular item from your scroll");
-        System.out.println("\tfind [KEYWORD]: Returns a list of relevant items on your scroll");
-        System.out.println("\tdismiss: This will be my cue to leave.");
-        System.out.println();
-        System.out.println("Now, how may I serve you?");
-        dashedLineBreak();
-        System.out.println();
+    public static String assist() {
+        String greeting = "Greetings, Your Majesty.\n " +
+                "Use any of these commands to access my quality services:\n";
+        String commandList = "1. todo [TASK]: Adds a todo to your scroll\n" +
+                    "2. deadline [TASK] /by [DATE AND/OR TIME]: Adds a deadline to your scroll\n" + 
+                        "3. event [TASK] /on [DATE AND/OR TIME]: Adds an event to your scroll\n" +
+                            "4. scroll: Displays your scroll - your list of tasks\n" +
+                                "5. conquer [NUMBER]: Marks the particular item on your scroll as DONE\n" +
+                                    "6. delete [NUMBER]: Deletes the particular item from your scroll\n" +
+                                        "7. find [KEYWORD]: Returns a list of relevant items on your scroll\n" +
+                                            "8. dismiss: This will be my cue to leave.\n";
+        String ending = "Now, how may I serve you?\n";
+        return greeting + commandList + ending;
     }
 
     /**
      * Displays goodbye message.
      */
-    public static void dismiss() {
-        dashedLineBreak();
-        System.out.println("Your wish is my command, Your Majesty. Till I see you again. \n");
-        System.exit(0);
+    public static String dismiss() {
+        return "Your wish is my command, Your Majesty. Till I see you again. \n";
     }
 
     /**
      * Displays error message.
      * @param e DukeException.
      */
-    public static void dukeErrorMessage(DukeException e) {
-        System.out.println(e.getMessage());
-        dashedLineBreak();
-        System.out.println();
+    public static String dukeErrorMessage(DukeException e) {
+        return e.getMessage() + "\n";
     }
 
     /**
      * Displays marked task as done message.
      * @param t Task that has been marked as done.
      */
-    public static void conqueredMessage(Task t) {
-        dashedLineBreak();
-        System.out.println("As you wish, Your Majesty. I have marked this as conquered.");
-        System.out.println("\t" + t);
-        dashedLineBreak();
-        System.out.println();
+    public static String conqueredMessage(Task t) {
+        String response = "As you wish, Your Majesty. I have marked this as conquered.\n";
+        String conqueredTask = t.toString() + "\n";
+        return response + conqueredTask;
     }
 
     /**
@@ -90,13 +75,11 @@ public class Ui {
      * @param t Task that has been deleted.
      * @param size Size of current list of stored tasks.
      */
-    public static void deletedMessage(Task t, int size) {
-        dashedLineBreak();
-        System.out.println("As you wish, Your Majesty. I have removed this writing.");
-        System.out.println("\t" + t);
-        System.out.printf("You have %s writing(s) on your scroll as of now. \n", size);
-        dashedLineBreak();
-        System.out.println();
+    public static String deletedMessage(Task t, int size) {
+        String response = "As you wish, Your Majesty. I have removed this writing.\n";
+        String deletedTask = t.toString() + "\n";
+        String information = String.format("You have %s writing(s) on your scroll as of now. \n", size);
+        return response + deletedTask + information;
     }
 
     /**
@@ -104,50 +87,32 @@ public class Ui {
      * @param t Task that has been added.
      * @param size Size of current list of stored tasks.
      */
-    public static void addedMessage(Task t, int size) {
-        dashedLineBreak();
-        System.out.println("Your Majesty, I've added the writing:");
-        System.out.println("\t" + t);
-        System.out.printf("You have %s writing(s) on your scroll as of now. \n",size);
-        dashedLineBreak();
-        System.out.println();
+    public static String addedMessage(Task t, int size) {
+        String response = "Your Majesty, I've added the writing:\n";
+        String addedTask = t.toString() + "\n";
+        String information = String.format("You have %s writing(s) on your scroll as of now. \n", size);
+        return response + addedTask + information;
     }
-
-    /**
-     * Prints all stored tasks.
-     * @param storedTasks List of stored tasks.
-     */
-    public static void printAllTasksUi(ArrayList<Task> storedTasks) {
+    
+    public static String printAllTasksUi(ArrayList<Task> storedTasks) {
         if (storedTasks.size() == 0) {
-            System.out.println("Your scroll is currently empty, Your Majesty.");
-        } else {
-            dashedLineBreak();
-            System.out.println("Your current scroll, Your Majesty:");
-            for (Task task : storedTasks) {
-                System.out.printf("\t%s.%s", storedTasks.indexOf(task) + 1, task);
-                System.out.println();
-            }
+            return "Your scroll is currently empty, Your Majesty.";
+        } 
+        StringBuilder response = new StringBuilder();
+        for (Task task : storedTasks) {
+            response.append(String.format("%s.%s\n", storedTasks.indexOf(task) + 1, task));
         }
-        dashedLineBreak();
-        System.out.println();
+        return response.toString();
     }
-
-    /**
-     * Prints relevant tasks.
-     * @param storedTasks List of relevant tasks.
-     */
-    public static void printRelevantTasksUi(ArrayList<Task> storedTasks) {
+    
+    public static String printRelevantTasksUi(ArrayList<Task> storedTasks) {
         if (storedTasks.size() == 0) {
-            System.out.println("There doesn't seem to be any relevant writings, Your Majesty.");
-        } else {
-            dashedLineBreak();
-            System.out.println("Here are the relevant writings, Your Majesty:");
-            for (Task task : storedTasks) {
-                System.out.printf("\t%s.%s", storedTasks.indexOf(task) + 1, task);
-                System.out.println();
-            }
+            return "There doesn't seem to be any relevant writings, Your Majesty.";
         }
-        dashedLineBreak();
-        System.out.println();
+        StringBuilder response = new StringBuilder();
+        for (Task task : storedTasks) {
+            response.append(String.format("%s.%s\n", storedTasks.indexOf(task) + 1, task));
+        }
+        return response.toString();
     }
 }

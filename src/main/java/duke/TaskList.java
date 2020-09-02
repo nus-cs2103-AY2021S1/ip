@@ -92,8 +92,8 @@ public class TaskList {
     /**
      * Prints all stored tasks.
      */
-    public void printAllTasks() {
-        Ui.printAllTasksUi(storedTasks);
+    public String printAllTasks() {
+        return Ui.printAllTasksUi(storedTasks);
     }
 
     /**
@@ -126,12 +126,40 @@ public class TaskList {
             if (newTask != null) {
                 storedTasks.add(newTask);
                 Ui.addedMessage(newTask, storedTasks.size());
+            } 
+            toBeReturned = newTask;
+        } catch (DukeException err) {
+            return null;
+        }
+        return toBeReturned;
+    }
+    public String getAddedTaskMessage(String task) {
+        Task toBeReturned = null;
+        try {
+            validateScannerInput(task);
+            String splitTask[] = task.split(" ", 2);
+            Task newTask = null;
+            validateAdd(splitTask);
+            validateSlashCommands(splitTask);
+
+            switch(splitTask[0].toLowerCase()) {
+                case "todo":
+                    newTask = new ToDo(splitTask[1]);
+                    break;
+                case "deadline":
+                    newTask = new Deadline(splitTask[1]);
+                    break;
+                case "event":
+                    newTask = new Event(splitTask[1]);
+                    break;
+                default:
+                    throw new DukeException("I'm afraid I do not understand that command, Your Majesty.");
             }
             toBeReturned = newTask;
         } catch (DukeException err) {
-            Ui.dukeErrorMessage(err);
+            return Ui.dukeErrorMessage(err);
         }
-        return toBeReturned;
+        return Ui.addedMessage(toBeReturned, storedTasks.size());
     }
 
     /**
@@ -139,7 +167,7 @@ public class TaskList {
      * @param command String array of user input.
      * @return Index of task that is to be marked as done.
      */
-    public int conquerTask(String[] command) {
+    public int getConquerTaskIndex(String[] command) {
         int indexToBeReturned = -1;
         try {
             validateConquerDelete(command);
@@ -150,9 +178,23 @@ public class TaskList {
             indexToBeReturned = taskNumber;
             Ui.conqueredMessage(storedTasks.get(taskNumber - 1));
         } catch (DukeException err) {
-            Ui.dukeErrorMessage(err);
+            return -1;
         }
         return indexToBeReturned;
+    }
+    
+    public String getConquerTaskMessage(String[] command) {
+        Task conqueredTask = null;
+        try {
+            validateConquerDelete(command);
+            int taskNumber = Integer.parseInt(sanitiseInput(command[1]));
+            validateIndex(taskNumber);
+            conqueredTask = storedTasks.get(taskNumber - 1);
+            
+        } catch (DukeException err) {
+            return Ui.dukeErrorMessage(err);
+        }
+        return Ui.conqueredMessage(conqueredTask);
     }
 
     /**
@@ -160,21 +202,33 @@ public class TaskList {
      * @param command String array of user input.
      * @return Index of task that is to be deleted.
      */
-    public int deleteTask(String[] command) {
+    public int getDeleteTaskIndex(String[] command) {
         int indexToBeReturned = -1;
         try {
             validateConquerDelete(command);
             int taskNumber = Integer.parseInt(sanitiseInput(command[1]));
             validateIndex(taskNumber);
-
-            Task deletedTask = storedTasks.get(taskNumber - 1);
-            storedTasks.remove(deletedTask);
+            
             indexToBeReturned = taskNumber;
-            Ui.deletedMessage(deletedTask, storedTasks.size());
         } catch (DukeException err) {
-            Ui.dukeErrorMessage(err);
+            return -1;
         }
         return indexToBeReturned;
+    }
+    
+    public String getDeletedTaskMessage(String[] command) {
+        Task deletedTask;
+        try {
+            validateConquerDelete(command);
+            int taskNumber = Integer.parseInt(sanitiseInput(command[1]));
+            validateIndex(taskNumber);
+            
+            deletedTask = storedTasks.get(taskNumber - 1);
+            storedTasks.remove(deletedTask);
+        } catch (DukeException err) {
+            return Ui.dukeErrorMessage(err);
+        }
+        return Ui.deletedMessage(deletedTask, storedTasks.size());
     }
 
     /**
@@ -189,7 +243,7 @@ public class TaskList {
      * Prints list of relevant tasks based on inputted key word.
      * @param input String array of user input.
      */
-    public void returnSearchedTask(String[] input) {
+    public String returnSearchedTask(String[] input) {
         ArrayList<Task> relevantTasks = new ArrayList<>();
         String searchWord = input[1];
         for (Task t : storedTasks) {
@@ -197,6 +251,6 @@ public class TaskList {
                 relevantTasks.add(t);
             }
         }
-        Ui.printRelevantTasksUi(relevantTasks);
+       return Ui.printRelevantTasksUi(relevantTasks);
     }
 }
