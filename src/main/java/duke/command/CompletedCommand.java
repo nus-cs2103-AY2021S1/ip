@@ -11,6 +11,7 @@ public class CompletedCommand extends Command {
     /**
      * Overrides execute in {@link Command}.
      * Executes the command to display all completed tasks.
+     *
      * @param tasks The list of {@link Task}s.
      * @param storage The Storage object of Duke.
      */

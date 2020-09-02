@@ -11,6 +11,7 @@ import duke.task.TaskList;
 public abstract class Command {
     /**
      * Executes the command.
+     *
      * @param tasks The list of {@link Task}s.
      * @param storage The Storage object of Duke.
      * @throws DukeException Exception when the execution encounters an error at any stage.
@@ -19,6 +20,7 @@ public abstract class Command {
 
     /**
      * Returns a boolean to indicate if the Command is an exit command.
+     *
      * @return Boolean flag that is false by default.
      */
     public boolean isExit() {

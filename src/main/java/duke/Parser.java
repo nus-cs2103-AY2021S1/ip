@@ -30,6 +30,7 @@ public class Parser {
     /**
      * Parses the given command based on different keywords.
      * Returns the appropriate {@link Command} to execute next.
+     *
      * @param fullCommand A String read from user input.
      * @return The corresponding {@link Command} for the input.
      * @throws DukeException Exception when parsing the input.
@@ -81,58 +82,71 @@ public class Parser {
         } else if (fullCommandArray[0].equals(CommandType.DELETE.getType())) {
             return new DeleteCommand(Integer.parseInt(fullCommandArray[1]));
         } else if (fullCommandArray[0].equals(CommandType.FIND.getType())) {
-            return new FindCommand(fullCommandArray[1]);
+            String findKeywords = fullCommand.replaceFirst("^find", "");
+            findKeywords = findKeywords.strip();
+            return new FindCommand(findKeywords.split(" "));
         } else {
-            String type = fullCommand.split(" ")[0];
-            String temp = fullCommand.strip();
-            if (temp.equals(TaskType.TODO.getType())
-                    || temp.equals(TaskType.DEADLINE.getType())
-                    || temp.equals(TaskType.EVENT.getType())) {
-                throw new InvalidArgumentException(
-                        "☹ OOPS!!! The description of "
-                                + (temp.equals(TaskType.EVENT.getType()) ? "an " : "a ")
-                                + temp
-                                + " cannot be empty.");
-            } else if (temp.equals("")) {
-                throw new InvalidTaskTypeException("☹ OOPS!!! The type of a task cannot be empty.");
+            return Parser.parseTasks(fullCommand);
+        }
+    }
+
+    /**
+     * A helper method to parse specifically a {@link ToDo}, an {@link Event} or a {@link Deadline}.
+     *
+     * @param fullCommand A String representing user input.
+     * @return The corresponding {@link Command}.
+     * @throws DukeException Thrown if there is error parsing the user input.
+     */
+    private static Command parseTasks(String fullCommand) throws DukeException {
+        String type = fullCommand.split(" ")[0];
+        String temp = fullCommand.strip();
+        if (temp.equals(TaskType.TODO.getType())
+                || temp.equals(TaskType.DEADLINE.getType())
+                || temp.equals(TaskType.EVENT.getType())) {
+            throw new InvalidArgumentException(
+                    "☹ OOPS!!! The description of "
+                            + (temp.equals(TaskType.EVENT.getType()) ? "an " : "a ")
+                            + temp
+                            + " cannot be empty.");
+        } else if (temp.equals("")) {
+            throw new InvalidTaskTypeException("☹ OOPS!!! The type of a task cannot be empty.");
+        }
+        if (type == null
+                || (!type.equals(TaskType.TODO.getType())
+                && !type.equals(TaskType.DEADLINE.getType())
+                && !type.equals(TaskType.EVENT.getType()))) {
+            throw new InvalidTaskTypeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+        String details = fullCommand.substring(type.length());
+        if (type.equals(TaskType.TODO.getType())) {
+            ToDo t = new ToDo(details.strip());
+            return new AddCommand(t);
+        } else if (type.equals(TaskType.DEADLINE.getType())) {
+            String[] detailsArray = details.split("/by");
+            if (detailsArray.length <= 1) {
+                throw new InvalidArgumentException("☹ OOPS!!! Please specify a due date for the deadline.");
             }
-            if (type == null
-                    || (!type.equals(TaskType.TODO.getType())
-                    && !type.equals(TaskType.DEADLINE.getType())
-                    && !type.equals(TaskType.EVENT.getType()))) {
-                throw new InvalidTaskTypeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            LocalDate date;
+            try {
+                date = LocalDate.parse(detailsArray[1].strip());
+            } catch (DateTimeParseException e) {
+                throw new InvalidArgumentException("☹ OOPS!!! Please enter a date in yyyy-mm-dd format.");
             }
-            String details = fullCommand.substring(type.length());
-            if (type.equals(TaskType.TODO.getType())) {
-                ToDo t = new ToDo(details.strip());
-                return new AddCommand(t);
-            } else if (type.equals(TaskType.DEADLINE.getType())) {
-                String[] detailsArray = details.split("/by");
-                if (detailsArray.length <= 1) {
-                    throw new InvalidArgumentException("☹ OOPS!!! Please specify a due date for the deadline.");
-                }
-                LocalDate date;
-                try {
-                    date = LocalDate.parse(detailsArray[1].strip());
-                } catch (DateTimeParseException e) {
-                    throw new InvalidArgumentException("☹ OOPS!!! Please enter a date in yyyy-mm-dd format.");
-                }
-                Deadline d = new Deadline(detailsArray[0].strip(), date);
-                return new AddCommand(d);
-            } else {
-                String[] detailsArray = details.split("/at");
-                if (detailsArray.length <= 1) {
-                    throw new InvalidArgumentException("☹ OOPS!!! Please specify a date for the event.");
-                }
-                LocalDate date;
-                try {
-                    date = LocalDate.parse(detailsArray[1].strip());
-                } catch (DateTimeParseException e) {
-                    throw new InvalidArgumentException("☹ OOPS!!! Please enter a date in yyyy-mm-dd format.");
-                }
-                Event e = new Event(detailsArray[0].strip(), date);
-                return new AddCommand(e);
+            Deadline d = new Deadline(detailsArray[0].strip(), date);
+            return new AddCommand(d);
+        } else {
+            String[] detailsArray = details.split("/at");
+            if (detailsArray.length <= 1) {
+                throw new InvalidArgumentException("☹ OOPS!!! Please specify a date for the event.");
             }
+            LocalDate date;
+            try {
+                date = LocalDate.parse(detailsArray[1].strip());
+            } catch (DateTimeParseException e) {
+                throw new InvalidArgumentException("☹ OOPS!!! Please enter a date in yyyy-mm-dd format.");
+            }
+            Event e = new Event(detailsArray[0].strip(), date);
+            return new AddCommand(e);
         }
     }
 }

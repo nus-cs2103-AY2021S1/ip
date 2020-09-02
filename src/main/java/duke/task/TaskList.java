@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,7 @@ public class TaskList {
 
     /**
      * Instantiates an empty list of {@link Task}s.
+     *
      */
     public TaskList() {
         tasks = new ArrayList<>();
@@ -22,6 +24,7 @@ public class TaskList {
 
     /**
      * Instantiates a new TaskList with a provided list of {@link Task}s.
+     *
      * @param tasks A list of {@link Task}s.
      */
     public TaskList(List<Task> tasks) {
@@ -30,6 +33,7 @@ public class TaskList {
 
     /**
      * Adds a {@link Task} to the end of the list.
+     *
      * @param task A task to be added to the list.
      */
     public void addTask(Task task) {
@@ -38,6 +42,7 @@ public class TaskList {
 
     /**
      * Marks a {@link Task} at a certain index (starting from 1) as completed.
+     *
      * @param index The index of the task to be marked as completed.
      */
     public void markDone(int index) {
@@ -46,6 +51,7 @@ public class TaskList {
 
     /**
      * Returns a {@link Task} in the list based on the given index.
+     *
      * @param index Index of the task in the list.
      * @return The task at the provided index.
      */
@@ -55,6 +61,7 @@ public class TaskList {
 
     /**
      * Returns the current number of {@link Task}s in the list.
+     *
      * @return The current size of the list.
      */
     public int getSize() {
@@ -63,6 +70,7 @@ public class TaskList {
 
     /**
      * Returns the list of all the {@link Task}s in the current list.
+     *
      * @return The list of tasks.
      */
     public List<Task> getTasks() {
@@ -71,6 +79,7 @@ public class TaskList {
 
     /**
      * Returns all the {@link Task}s formatted properly.
+     *
      * @return A formatted String of all the {@link Task}s.
      */
     public String listTasks() {
@@ -86,6 +95,7 @@ public class TaskList {
 
     /**
      * Returns all the {@link Task}s that happen on or due at a specific date.
+     *
      * @param date The date to search for.
      * @return A formatted String of all the tasks that happen on or due at the provided date.
      */
@@ -108,6 +118,7 @@ public class TaskList {
 
     /**
      * Returns all the {@link Task}s that have not been completed.
+     *
      * @return A formatted String of all pending {@link Task}s.
      */
     public String showPendingTasks() {
@@ -129,6 +140,7 @@ public class TaskList {
 
     /**
      * Returns all the {@link Task}s that have been completed.
+     *
      * @return A formatted String of all completed {@link Task}s.
      */
     public String showCompletedTasks() {
@@ -149,17 +161,18 @@ public class TaskList {
 
     /**
      * Returns all the {@link Task}s that contains the keyword.
-     * @param keyword A String to search for.
+     *
+     * @param keywords A String to search for.
      * @return A formatted String of {@link Task}s with description that includes this keyword.
      */
-    public String showMatchingTasks(String keyword) {
+    public String showMatchingTasks(String... keywords) {
         List<Task> matchingTasks = tasks.stream()
-                .filter(task -> task.includesKeyword(keyword)).collect(Collectors.toList());
-        if (matchingTasks.size() == 1) {
-            return "There are no tasks containing keyword: " + keyword;
+                .filter(task -> task.includeKeywords(keywords)).collect(Collectors.toList());
+        if (matchingTasks.size() == 0) {
+            return "There are no tasks containing keyword: " + Arrays.toString(keywords);
         }
         StringBuilder output = new StringBuilder();
-        output.append("Here are the tasks containing keyword: ").append(keyword).append("\n");
+        output.append("Here are the tasks containing keyword: ").append(Arrays.toString(keywords)).append("\n");
 
         for (int i = 0; i < matchingTasks.size(); i++) {
             output.append(String.format("%d. %s" + (i == matchingTasks.size() - 1 ? "" : "\n"),
@@ -171,6 +184,7 @@ public class TaskList {
 
     /**
      * Delete a {@link Task} at a given index.
+     *
      * @param index The index of the {@link Task} to be deleted.
      */
     public void deleteTask(int index) {

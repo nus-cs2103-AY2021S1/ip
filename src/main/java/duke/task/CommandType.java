@@ -22,6 +22,7 @@ public enum CommandType {
 
     /**
      * Returns a String representation of the {@link duke.command.Command} type.
+     *
      * @return A String of the {@link duke.command.Command} type.
      */
     public String getType() {

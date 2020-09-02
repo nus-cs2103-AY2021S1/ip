@@ -26,6 +26,7 @@ public class Storage {
 
     /**
      * Instantiates a Storage object with a file path.
+     *
      * @param path File path to read from and write to.
      */
     Storage(String path) {
@@ -45,6 +46,7 @@ public class Storage {
 
     /**
      * Reads saved data from the storage file and returns a list of {@link Task}s.
+     *
      * @return A list of {@link Task}s.
      * @throws IOException Exception when reading from storage file.
      */
@@ -74,6 +76,7 @@ public class Storage {
 
     /**
      * Writes a list of {@link Task}s to the storage file.
+     *
      * @param list A list of {@link Task}s.
      * @throws IOException Exception when writing to storage file.
      */
