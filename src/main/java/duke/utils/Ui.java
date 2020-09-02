@@ -11,7 +11,9 @@ import duke.task.Task;
  */
 public class Ui {
 
-
+    /**
+     * Creates a instance of Ui class.
+     */
     public Ui() {
     }
 
@@ -19,10 +21,10 @@ public class Ui {
     /**
      * Outputs to console with lines.
      *
-     * @param s string to output to console
+     * @param msg string to output to console
      */
-    public void displayThis(String s) {
-        displayString(s);
+    public void displayThis(String msg) {
+        displayString(msg);
     }
 
 
@@ -55,6 +57,7 @@ public class Ui {
                 + "\n- list"
                 + "\n- done <num>"
                 + "\n- todo <task>"
+                + "\n- delete <num>"
                 + "\n- deadline <task> /by <yyyy-mm-dd>"
                 + "\n- event <task> /at <yyyy-mm-dd>"
                 + "\n- find <keyword>\n");

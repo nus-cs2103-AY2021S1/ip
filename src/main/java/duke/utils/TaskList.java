@@ -68,7 +68,7 @@ public class TaskList {
      *
      * @return the number of tasks in the list.
      */
-    public int size() {
+    public int getSize() {
         return list.size();
     }
 
@@ -99,7 +99,7 @@ public class TaskList {
      * @param keyword string the user wants to find.
      * @return List of tasks with the keyword.
      */
-    public List<Task> findKeyword(String keyword) throws DukeException {
+    public List<Task> tasksContainingKeywords(String keyword) throws DukeException {
         List<Task> containsKeywords = new ArrayList<>();
         for (Task task : list) {
             if (task.getDescription().contains(keyword)) {

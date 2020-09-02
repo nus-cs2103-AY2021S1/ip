@@ -20,7 +20,7 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, DukeFileHandler fileHandler) throws DukeException {
-        List<Task> temp = tasks.findKeyword(keyword);
+        List<Task> temp = tasks.tasksContainingKeywords(keyword);
         if (temp.size() <= 0) {
             throw new DukeException("No tasks found, please refine your search");
         }

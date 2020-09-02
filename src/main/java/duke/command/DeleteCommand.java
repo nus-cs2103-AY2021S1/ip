@@ -7,19 +7,19 @@ import duke.utils.Ui;
 
 
 public class DeleteCommand extends Command {
-    private final int entryDelete;
+    private final int indexEntryToDelete;
 
 
-    public DeleteCommand(int entryDelete) {
-        this.entryDelete = entryDelete;
+    public DeleteCommand(int indexEntryToDelete) {
+        this.indexEntryToDelete = indexEntryToDelete;
     }
 
 
     @Override
     public void execute(TaskList tasks, Ui ui, DukeFileHandler fileHandler) throws DukeException {
         try {
-            ui.displayThis("OKay, I've remove this task: \n        " + tasks.delete(entryDelete)
-                    + "\n    Now you have " + tasks.size() + " tasks in the list");
+            ui.displayThis("OKay, I've remove this task: \n" + tasks.delete(indexEntryToDelete)
+                    + "\nNow you have " + tasks.getSize() + " tasks in the list");
             fileHandler.writeToFile(tasks.getList());
         } catch (Exception ex) {
             throw new DukeException("This task does not exist");

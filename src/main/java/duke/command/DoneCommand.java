@@ -7,18 +7,18 @@ import duke.utils.Ui;
 
 
 public class DoneCommand extends Command {
-    private final int entryDone;
+    private final int indexEntryDone;
 
 
-    public DoneCommand(int entryDone) {
-        this.entryDone = entryDone;
+    public DoneCommand(int indexEntryDone) {
+        this.indexEntryDone = indexEntryDone;
     }
 
 
     @Override
     public void execute(TaskList tasks, Ui ui, DukeFileHandler fileHandler) throws DukeException {
         try {
-            ui.displayThis("Nice! I've marked this task as done: \n        " + tasks.done(entryDone));
+            ui.displayThis("Nice! I've marked this task as done: \n" + tasks.done(indexEntryDone));
             fileHandler.writeToFile(tasks.getList());
         } catch (Exception ex) {
             throw new DukeException("This task does not exist");

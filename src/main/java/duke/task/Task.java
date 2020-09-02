@@ -21,9 +21,10 @@ public class Task {
         this.isDone = isDone;
     }
 
-
+    /**
+     * Returns tick or X symbols
+     */
     protected String getStatusIcon() {
-        //return tick or X symbols
         return (isDone ? "\u2713" : "\u2718");
     }
 
@@ -60,6 +61,7 @@ public class Task {
 
     /**
      * Gets the content of the tasks
+     *
      * @return String the content of the tasks
      */
     public String getDescription() {

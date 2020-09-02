@@ -7,7 +7,7 @@ public class Deadline extends Task {
     protected LocalDate by;
 
     /**
-     * Creates a type of task with a deadline
+     * Creates a type of task with a deadline.
      *
      * @param description the content of the task
      * @param by          time in yyyy-mm-dd
@@ -18,6 +18,13 @@ public class Deadline extends Task {
     }
 
 
+    /**
+     * Creates tasks which could have been completed.
+     *
+     * @param description the content of the task
+     * @param isDone      the status of the task
+     * @param by          the deadline of the task
+     */
     public Deadline(String description, boolean isDone, String by) {
         super(description, isDone);
         this.by = LocalDate.parse(by.trim());
@@ -25,7 +32,7 @@ public class Deadline extends Task {
 
 
     /**
-     * Overrides the toString method
+     * Overrides the toString method.
      *
      * @return a custom task description
      */
