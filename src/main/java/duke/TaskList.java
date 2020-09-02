@@ -20,7 +20,8 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public Task deleteTask(int index) {
+    public Task deleteTask(int taskNum) {
+        int index = taskNum - 1;
         return tasks.remove(index);
     }
 
@@ -32,11 +33,13 @@ public class TaskList {
         return tasks.size();
     }
 
-    public Task getTask(int index) {
+    public Task getTask(int taskNum) {
+        int index = taskNum - 1;
         return tasks.get(index);
     }
 
-    public void markAsDone(int index) {
+    public void markAsDone(int taskNum) {
+        int index = taskNum - 1;
         tasks.get(index).markAsDone();
     }
 

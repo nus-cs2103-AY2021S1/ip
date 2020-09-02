@@ -7,16 +7,16 @@ import duke.Ui;
 import duke.task.Task;
 
 public class DeleteCommand extends Command {
-    private final int index;
+    private final int taskNum;
 
     public DeleteCommand(int taskNum) {
-        index = taskNum - 1;
+        this.taskNum = taskNum;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            Task task = tasks.deleteTask(index);
+            Task task = tasks.deleteTask(taskNum);
             ui.showDeleted(task, tasks);
             storage.save(tasks.getTasks());
         } catch (IndexOutOfBoundsException e) {

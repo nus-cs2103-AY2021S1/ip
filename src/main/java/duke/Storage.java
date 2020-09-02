@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Deadlines;
-import duke.task.Events;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDos;
+import duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,7 +27,7 @@ public class Storage {
         }
     }
 
-    public List<Task> load() throws DukeException {
+    public List<Task> loadTasks() throws DukeException {
         try {
             Scanner sc = new Scanner(file);
             List<Task> tasks = new ArrayList<>();
@@ -36,11 +36,11 @@ public class Storage {
                 String taskDetails = sc.nextLine();
                 Task task;
                 if (taskDetails.startsWith("T")) {
-                    task = ToDos.load(taskDetails);
+                    task = ToDo.load(taskDetails);
                 } else if (taskDetails.startsWith("D")) {
-                    task = Deadlines.load(taskDetails);
+                    task = Deadline.load(taskDetails);
                 } else if (taskDetails.startsWith("E")) {
-                    task = Events.load(taskDetails);
+                    task = Event.load(taskDetails);
                 } else {
                     throw new IllegalArgumentException();
                 }

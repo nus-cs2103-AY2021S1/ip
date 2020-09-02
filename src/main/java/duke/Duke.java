@@ -14,9 +14,9 @@ public class Duke {
         System.out.println("Loading previous tasks....");
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.loadTasks());
         } catch (DukeException e) {
-            ui.showError(e);
+            ui.showErrorMessage(e);
             tasks = new TaskList();
         }
     }
@@ -31,7 +31,7 @@ public class Duke {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e);
+                ui.showErrorMessage(e);
             }
         }
     }

@@ -2,18 +2,18 @@ package duke.task;
 
 import java.time.LocalDate;
 
-public class ToDos extends Task {
+public class ToDo extends Task {
 
-    public ToDos(String description) {
+    public ToDo(String description) {
         super(description);
     }
 
-    public static ToDos load(String taskDetails) {
-        String[] splitTaskDetails = taskDetails.split("\\|",3);
+    public static ToDo load(String taskDetails) {
+        String[] splitTaskDetails = taskDetails.split("\\|", 3);
         for (int i = 0; i < splitTaskDetails.length; i++) {
             splitTaskDetails[i] = splitTaskDetails[i].strip();
         }
-        ToDos todo = new ToDos(splitTaskDetails[2].strip());
+        ToDo todo = new ToDo(splitTaskDetails[2].strip());
         if (splitTaskDetails[1].equals("true")) {
             todo.markAsDone();
         }

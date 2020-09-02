@@ -6,17 +6,17 @@ import duke.TaskList;
 import duke.Ui;
 
 public class DoneCommand extends Command {
-    private final int index;
+    private final int taskNum;
 
     public DoneCommand(int taskNum) {
-        index = taskNum - 1;
+        this.taskNum = taskNum;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            tasks.markAsDone(index);
-            ui.showDone(tasks.getTask(index));
+            tasks.markAsDone(taskNum);
+            ui.showDone(tasks.getTask(taskNum));
             storage.save(tasks.getTasks());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Uh-oh! Looks like you have entered an invalid task number.");

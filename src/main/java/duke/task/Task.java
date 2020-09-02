@@ -5,7 +5,7 @@ public class Task {
     protected boolean isDone;
 
     public Task(String description) {
-        this.description = description.trim();
+        this.description = description.strip();
         this.isDone = false;
     }
 

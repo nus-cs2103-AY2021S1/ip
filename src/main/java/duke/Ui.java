@@ -11,7 +11,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        return sc.nextLine().trim();
+        return sc.nextLine();
     }
 
     public void printLines(String output) {
@@ -52,7 +52,7 @@ public class Ui {
         return String.format("\nNow you have %d task(s) in the list.", tasks.getNumOfTasks());
     }
 
-    public void showError(Exception e) {
+    public void showErrorMessage(Exception e) {
         printLines(e.getMessage());
     }
 }
