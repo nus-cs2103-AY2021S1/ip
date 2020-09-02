@@ -6,6 +6,9 @@
  */
 public class IncompleteInputException extends DukeException {
 
+    /**
+     * Creates an IncompleteInputException object.
+     */
     public IncompleteInputException() {
         super("Missing description and/or date.");
     }

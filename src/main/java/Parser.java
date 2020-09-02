@@ -11,6 +11,11 @@ public class Parser {
     private String taskDetails = "";
     private String date = "";
 
+    /**
+     * Creates a Parser object.
+     *
+     * @param line User input.
+     */
     public Parser(String line) {
         this.line = line;
     }
@@ -22,7 +27,10 @@ public class Parser {
      * @throws DukeException When user input is wrong or incomplete.
      */
     public void parse() throws DukeException {
-        if (line.contains("bye")) {
+        if (line.contains("hello")) {
+            commandType = "hello";
+
+        } else if (line.contains("bye")) {
             commandType = "bye";
 
         } else if (line.contains("list")) {
@@ -42,7 +50,7 @@ public class Parser {
                 throw new IncompleteInputException();
             } else {
                 taskDetails = line.substring(6, line.indexOf('/') - 1);
-                date = line.substring(line.lastIndexOf("at") + 4);
+                date = line.substring(line.lastIndexOf("at") + 3);
             }
 
         } else if (line.contains("deadline")) {
@@ -51,7 +59,7 @@ public class Parser {
                 throw new IncompleteInputException();
             } else {
                 taskDetails = line.substring(9, line.indexOf('/') - 1);
-                date = line.substring(line.lastIndexOf("by") + 4);
+                date = line.substring(line.lastIndexOf("by") + 3);
             }
 
         } else if (line.contains("done")) {

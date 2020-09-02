@@ -10,6 +10,13 @@ public class Event extends Task {
     protected String date;
     private LocalDate localDate;
 
+    /**
+     * Creates an Event object.
+     *
+     * @param task Details of event.
+     * @param date Date of event.
+     * @param isCompleted Boolean to check whether task has been completed.
+     */
     public Event(String task, String date, boolean isCompleted) {
         super(task, isCompleted);
         this.date = date;

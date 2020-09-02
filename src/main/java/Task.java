@@ -7,6 +7,12 @@ public class Task {
     private String task;
     private boolean isCompleted;
 
+    /**
+     * Creates a Task object.
+     *
+     * @param task
+     * @param isCompleted
+     */
     public Task(String task, boolean isCompleted) {
         this.task = task;
         this.isCompleted = isCompleted;

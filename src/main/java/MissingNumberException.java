@@ -5,6 +5,9 @@
  */
 public class MissingNumberException extends DukeException {
 
+    /**
+     * Creates a MissingNumberException object.
+     */
     public MissingNumberException() {
         super("Please indicate the task number.");
     }

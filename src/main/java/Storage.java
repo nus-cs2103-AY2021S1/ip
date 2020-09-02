@@ -15,9 +15,12 @@ import java.util.Scanner;
  * run the program again.
  */
 public class Storage {
+    private static final String DESTINATION = "./duke.txt";
     private final Path path;
-    private static String DESTINATION = "./duke.txt";
 
+    /**
+     * Creates a Storage object.
+     */
     public Storage() {
         path = Paths.get(DESTINATION);
         File file = new File(DESTINATION);

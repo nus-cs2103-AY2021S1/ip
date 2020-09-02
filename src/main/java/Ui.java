@@ -1,16 +1,20 @@
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * <h1>User Interface class</h1>
  * Deals with interaction with the users.
  */
 public class Ui {
-
-    private static String LINE = "____________________________________________________________";
+    private static final String LINE = "______________________________________\n";
     private TaskList list;
     private Storage storage;
 
+    /**
+     * Creates a Ui object.
+     *
+     * @param taskList
+     * @param storage
+     */
     public Ui(TaskList taskList, Storage storage) {
         this.list = taskList;
         this.storage = storage;
@@ -26,101 +30,94 @@ public class Ui {
      *
      * @throws IOException
      */
-    public void startProgram() throws IOException {
-        greet();
-
-        Scanner sc = new Scanner(System.in);
+    public String runProgram(String input) throws IOException {
         String commandType = "";
         String taskDetails = "";
         String date = "";
+        String toReturn = "";
+        toReturn += LINE;
 
-        while (sc.hasNext()) {
-            System.out.println(LINE);
+        try {
+            Parser parser = new Parser(input);
+            parser.parse();
+            commandType = parser.getCommandType();
+            taskDetails = parser.getTaskDetails();
+            date = parser.getDate();
 
-            try {
-                Parser parser = new Parser(sc.nextLine());
-                parser.parse();
-                commandType = parser.getCommandType();
-                taskDetails = parser.getTaskDetails();
-                date = parser.getDate();
+            if (commandType.equals("bye")) {
+                toReturn += end();
 
-                if (commandType.equals("bye")) {
-                    break;
+            } else if (commandType.equals("list")) {
+                toReturn += list();
 
-                } else if (commandType.equals("list")) {
-                    list();
+            } else if (commandType.equals("todo")) {
+                toReturn += todo(taskDetails);
 
-                } else if (commandType.equals("todo")) {
-                    todo(taskDetails);
+            } else if (commandType.equals("event")) {
+                toReturn += event(taskDetails, date);
 
-                } else if (commandType.equals("event")) {
-                    event(taskDetails, date);
+            } else if (commandType.equals("deadline")) {
+                toReturn += deadline(taskDetails, date);
 
-                } else if (commandType.equals("deadline")) {
-                    deadline(taskDetails, date);
+            } else if (commandType.equals("done")) {
+                toReturn += done(Integer.parseInt(taskDetails));
 
-                } else if (commandType.equals("done")) {
-                    done(Integer.parseInt(taskDetails));
+            } else if (commandType.equals("delete")) {
+                toReturn += delete(Integer.parseInt(taskDetails));
 
-                } else if (commandType.equals("delete")) {
-                    delete(Integer.parseInt(taskDetails));
+            } else if (commandType.equals("find")) {
+                toReturn += find(taskDetails);
 
-                } else if (commandType.equals("find")) {
-                    find(taskDetails);
+            } else {
 
-                } else {
-                }
-
-                storage.addData(list.getList());
-                System.out.println(LINE);
-
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-                System.out.println(LINE);
             }
+
+            storage.addData(list.getList());
+
+        } catch (DukeException e) {
+            toReturn += e.getMessage();
+            toReturn += "\n";
         }
 
-        sc.close();
-        end();
+        toReturn += LINE;
+        return toReturn;
     }
 
     /**
      * Greeting of users to signify the start of the program.
      */
-    public void greet() {
+    public String greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String start = "Hello! I'm Duke, your personal assistant. \nWhat can I do for you?";
-        System.out.println(LINE);
-        System.out.println(logo);
-        System.out.println(start);
-        System.out.println(LINE);
+        String text = LINE + logo + start + LINE;
+        return text;
     }
 
     /**
      * Good bye to signify the end of the program.
      */
-    public void end() {
-        String end = "Goodbye! Hope to see you again soon. :)";
-        System.out.println(LINE);
-        System.out.println(end);
-        System.out.println(LINE);
+    public String end() {
+        String text = "Goodbye! Hope to see you again soon. :)\n";
+        return text;
     }
 
     /**
      * Prints out the current list of tasks.
      */
-    public void list() {
+    public String list() {
         if (list.isEmpty()) {
-            System.out.println("You have no tasks, go out and have fun! ~");
+            return "You have no tasks, go out and have fun!\n";
         } else {
-            System.out.println("Here is your to-do list:\n");
+            String header = "Here is your to-do list:\n";
+            String text = header;
             for (int i = 1; i <= list.getTotalTasks(); i++) {
-                System.out.println(i + ". " + list.get(i - 1).toString());
+                text += i + ". " + list.get(i - 1).toString() + "\n";
             }
+            return text;
         }
     }
 
@@ -130,10 +127,11 @@ public class Ui {
      *
      * @param taskNumber Task's number in the list.
      */
-    public void done(int taskNumber) {
+    public String done(int taskNumber) {
         list.getList().get(taskNumber - 1).completed();
-        System.out.println("You've completed this task:");
-        System.out.println((list.getList().get(taskNumber - 1)).toString());
+        String header = "You've completed this task:\n";
+        String text = header + (list.getList().get(taskNumber - 1)).toString() + "\n";
+        return text;
     }
 
     /**
@@ -141,12 +139,12 @@ public class Ui {
      *
      * @param taskNumber Task's number in the list.
      */
-    public void delete(int taskNumber) {
+    public String delete(int taskNumber) {
         String deleted = (list.getList().get(taskNumber - 1)).toString();
         list.remove(taskNumber - 1);
-        System.out.println("Ok, this task has been kicked off your to-do list:");
-        System.out.println(deleted);
-        System.out.println(list.toString());
+        String header = "Ok, this task has been kicked off your to-do list:\n";
+        String text = header + deleted + "\n" + list.toString() + "\n";
+        return text;
     }
 
     /**
@@ -154,12 +152,12 @@ public class Ui {
      *
      * @param task Task details.
      */
-    public void todo(String task) {
+    public String todo(String task) {
         Todo todo = new Todo(task, false);
         list.add(todo);
-        System.out.println("I've added this task:\n");
-        System.out.println(todo.toString());
-        System.out.println(list.toString());
+        String header = "I've added this task:\n";
+        String text = header + todo.toString() + "\n" + list.toString() + "\n";
+        return text;
     }
 
     /**
@@ -168,12 +166,12 @@ public class Ui {
      * @param task Event details.
      * @param date Date of event.
      */
-    public void event(String task, String date) {
+    public String event(String task, String date) {
         Event event = new Event(task, date, false);
         list.add(event);
-        System.out.println("I've added this task:\n");
-        System.out.println(event.toString());
-        System.out.println(list.toString());
+        String header = "I've added this task:\n";
+        String text = header + event.toString() + "\n" + list.toString() + "\n";
+        return text;
     }
 
     /**
@@ -182,12 +180,12 @@ public class Ui {
      * @param task Deadline details.
      * @param date Date of deadline.
      */
-    public void deadline(String task, String date) {
+    public String deadline(String task, String date) {
         Deadline deadline = new Deadline(task, date, false);
         list.add(deadline);
-        System.out.println("I've added this task:\n");
-        System.out.println(deadline.toString());
-        System.out.println(list.toString());
+        String header = "I've added this task:\n";
+        String text = header + deadline.toString() + "\n" + list.toString() + "\n";
+        return text;
     }
 
     /**
@@ -195,15 +193,18 @@ public class Ui {
      *
      * @param keyword Word that user wants to look out for in list of tasks.
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
         int counter = 1;
-        System.out.println("Here are the matching tasks in your list:\n");
+        String header = "Here are the matching tasks in your list:\n";
+        String text = header;
         for (Task t : list.getList()) {
             if (t.getTask().contains(keyword)) {
-                System.out.println(counter + ". " + t.toString());
+                String toAdd = counter + ". " + t.toString();
+                text += toAdd + "\n";
                 counter++;
             }
         }
+        return text;
     }
 
 }

@@ -10,6 +10,13 @@ public class Deadline extends Task {
     protected String date;
     private LocalDate localDate;
 
+    /**
+     * Creates a Deadline object.
+     *
+     * @param task Details of the deadline.
+     * @param date Date of deadline.
+     * @param isCompleted Boolean to check whether task is completed.
+     */
     public Deadline(String task, String date, boolean isCompleted) {
         super(task, isCompleted);
         this.date = date;

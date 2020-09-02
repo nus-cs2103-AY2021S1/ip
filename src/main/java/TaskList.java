@@ -9,6 +9,9 @@ public class TaskList {
     private List<Task> list;
     private int totalTasks;
 
+    /**
+     * Creates a TaskList object.
+     */
     public TaskList() {
         list = new ArrayList<>();
         totalTasks = 0;
@@ -40,11 +43,21 @@ public class TaskList {
         return list.get(x);
     }
 
+    /**
+     * Add task to current list of tasks.
+     *
+     * @param t Task to be added.
+     */
     public void add(Task t) {
         list.add(t);
         totalTasks++;
     }
 
+    /**
+     * Remove task from current list of tasks.
+     *
+     * @param x Index of task to be removed.
+     */
     public void remove(int x) {
         list.remove(x);
         totalTasks--;
