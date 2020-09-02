@@ -21,12 +21,20 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(String command, TaskList list, Storage storage) {
         String horizontalLine = "____________________________________\n";
-        String index = command.substring(command.length() - 1);
-        int number = Integer.parseInt(index);
-        String taskMessage = list.getList().get(number - 1).toString();
-        list.deleteTask(number);
-        storage.writeData(list.getList());
-        return horizontalLine + "Task deleted liao: \n" + taskMessage + "\n"
-                + "You got " + list.getList().size() + " tasks left. \n" + horizontalLine;
+        String index = command.substring(7);
+        try {
+            int number = Integer.parseInt(index);
+            if (number <= 0 || number > list.getList().size()) {
+                return "Sorry hor, the number you keyed in is out of range...";
+            } else {
+                String taskMessage = list.getList().get(number - 1).toString();
+                list.deleteTask(number);
+                storage.writeData(list.getList());
+                return horizontalLine + "Task deleted liao: \n" + taskMessage + "\n"
+                        + "You got " + list.getList().size() + " tasks left. \n" + horizontalLine;
+            }
+        } catch (NumberFormatException ex) {
+            return "Sorry hor, the number you keyed in is invalid...";
+        }
     }
 }

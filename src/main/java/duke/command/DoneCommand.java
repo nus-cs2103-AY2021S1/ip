@@ -20,12 +20,20 @@ public class DoneCommand extends Command {
     @Override
     public String execute(String command, TaskList list, Storage storage) {
         String horizontalLine = "____________________________________\n";
-        String index = command.substring(command.length() - 1);
-        int number = Integer.parseInt(index) - 1;
-        list.getList().set(number, list.getList().get(number).markDone());
-        String taskMessage = list.getList().get(number).toString();
-        storage.writeData(list.getList());
-        return horizontalLine + "Swee! Now I will mark this as done: \n"
-                + taskMessage + "\n" + horizontalLine;
+        String index = command.substring(5);
+        try {
+            int number = Integer.parseInt(index);
+            if (number <= 0 || number > list.getList().size()) {
+                return "Sorry hor, the number you keyed in is out of range...";
+            } else {
+                list.getList().set(number - 1, list.getList().get(number - 1).markDone());
+                String taskMessage = list.getList().get(number - 1).toString();
+                storage.writeData(list.getList());
+                return horizontalLine + "Swee! Now I will mark this as done: \n"
+                        + taskMessage + "\n" + horizontalLine;
+            }
+        } catch (NumberFormatException ex) {
+            return "Sorry hor, the number you keyed in is invalid...";
+        }
     }
 }
