@@ -29,6 +29,8 @@ public class DukeException extends Throwable {
             return "Please enter the number position of the item that you wish to mark done.";
         } else if (this.s.equals("find")) {
             return "Please enter what you wish to find along with the find command.";
+        } else if (this.s.equals("find2")) {
+            return "No results found :(";
         } else {
             return "Sorry I do not understand that command.";
         }
