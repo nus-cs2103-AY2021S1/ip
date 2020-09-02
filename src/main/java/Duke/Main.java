@@ -2,7 +2,6 @@ package Duke;
 
 import java.io.IOException;
 
-import bob.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
