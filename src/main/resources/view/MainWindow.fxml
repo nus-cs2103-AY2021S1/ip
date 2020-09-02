@@ -10,28 +10,33 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="620.0" minWidth="580.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+<AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="620.0" minWidth="580.0"
+            xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
     <GridPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" />
-            <ColumnConstraints />
+            <ColumnConstraints hgrow="SOMETIMES"/>
+            <ColumnConstraints/>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints vgrow="SOMETIMES" />
-            <RowConstraints />
+            <RowConstraints vgrow="SOMETIMES"/>
+            <RowConstraints/>
         </rowConstraints>
         <children>
             <TextField fx:id="userInput" minHeight="42.0" minWidth="485.0" onAction="#handleUserInput"
-                       AnchorPane.bottomAnchor="1.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="42.0" prefWidth="95.0" text="Send" textAlignment="CENTER" textFill="#262424" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                       AnchorPane.bottomAnchor="1.0" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="42.0"
+                    prefWidth="95.0" text="Send" textAlignment="CENTER" textFill="#262424" GridPane.columnIndex="1"
+                    GridPane.rowIndex="1">
                 <font>
-                    <Font name="Forte" size="18.0" />
+                    <Font name="Forte" size="18.0"/>
                 </font>
             </Button>
         </children>
-        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" maxHeight="Infinity" pannable="true"
-                    prefWidth="580.0" vvalue="1.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
-            <VBox fx:id="dialogContainer" maxHeight="Infinity" prefWidth="525.0" />
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" maxHeight="Infinity"
+                    pannable="true"
+                    prefWidth="580.0" vvalue="1.0" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                    GridPane.rowIndex="0">
+            <VBox fx:id="dialogContainer" maxHeight="Infinity" prefWidth="525.0"/>
         </ScrollPane>
     </GridPane>
 </AnchorPane>

@@ -8,7 +8,7 @@ import duke.tasklist.TaskList;
  */
 public class Ui {
 
-    private String stringFormatter(String ... args) {
+    private String stringFormatter(String... args) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < args.length - 1; i++) {
             sb.append(args[i]).append("\n");
@@ -93,13 +93,6 @@ public class Ui {
      */
     public String emptyFind(String queryWord) {
         return String.format("There are no matching tasks with the keyword %s.", queryWord);
-    }
-
-    /**
-     * Prints the file update error.
-     */
-    public void fileUpdateError() {
-        System.out.println("Error in updating file");
     }
 
     /**

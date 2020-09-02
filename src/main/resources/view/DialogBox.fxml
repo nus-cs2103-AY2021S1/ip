@@ -6,19 +6,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="620.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="620.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11"
+         xmlns:fx="http://javafx.com/fxml/1">
     <Label fx:id="dialog" text="Label" textFill="#2c2929" wrapText="true">
-      <HBox.margin>
-         <Insets left="8.0" right="8.0" />
-      </HBox.margin>
-      <font>
-         <Font name="Segoe UI" size="13.0" />
-      </font></Label>
+        <HBox.margin>
+            <Insets left="8.0" right="8.0"/>
+        </HBox.margin>
+        <font>
+            <Font name="Segoe UI" size="13.0"/>
+        </font>
+    </Label>
     <ImageView fx:id="displayPicture" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-      <HBox.margin>
-         <Insets left="5.0" />
-      </HBox.margin></ImageView>
+        <HBox.margin>
+            <Insets left="5.0"/>
+        </HBox.margin>
+    </ImageView>
     <padding>
-        <Insets bottom="15.0" left="1.0" right="3.0" top="15.0" />
+        <Insets bottom="15.0" left="1.0" right="3.0" top="15.0"/>
     </padding>
 </fx:root>

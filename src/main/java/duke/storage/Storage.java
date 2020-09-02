@@ -13,7 +13,6 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-
 /**
  * Handles the interactions with the user's CSV file.
  * Includes creating, updating file and retrieving list of tasks from CSV file.

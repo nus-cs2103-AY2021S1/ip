@@ -12,6 +12,7 @@ public class TaskList {
 
     /**
      * Initializes the task list.
+     *
      * @param tasks List of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {

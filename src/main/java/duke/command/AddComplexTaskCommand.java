@@ -91,8 +91,8 @@ public class AddComplexTaskCommand extends AddCommand {
 
     private String dateAndTimeToString(String dateAndTime) {
         return LocalDateTime
-                .parse(dateAndTime.replace(" ", "T"))
-                .format(DateTimeFormatter.ofPattern("MMM d yyyy / h.mm a"));
+            .parse(dateAndTime.replace(" ", "T"))
+            .format(DateTimeFormatter.ofPattern("MMM d yyyy / h.mm a"));
     }
 
     private String timeToString(String time) {
