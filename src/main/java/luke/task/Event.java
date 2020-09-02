@@ -1,4 +1,6 @@
-public class Event extends Task{
+package luke.task;
+
+public class Event extends Task {
     protected String at;
 
 
