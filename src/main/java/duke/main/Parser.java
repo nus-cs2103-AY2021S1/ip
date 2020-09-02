@@ -36,12 +36,13 @@ public class Parser {
     /**
      * Checks the correctness of the input by the user.
      *
-     * @param line The input from the user.
+     * @param input The input from the user.
      * @throws DukeException If user's input is invalid.
      */
-    public static void checkInput(String line) throws DukeException {
-        String[] input = line.split(" ");
+    public static void checkInput(String ... input) throws DukeException {
+        System.out.println(Arrays.toString(input));
         String command = input[0];
+        System.out.println(command);
         if (command.equals("")) {
             throw new NoInputException();
         } else if (!VALID_COMMAND.contains(input[0])) {
@@ -79,46 +80,76 @@ public class Parser {
      * @return Command that will be executed.
      * @throws DukeException If user's input is invalid.
      */
-    public static Command parse(String c) throws DukeException {
+    public static Command parse(String ... c) throws DukeException {
         // Check command input
         checkInput(c);
-        String[] s = c.split(" ");
-        String commandType = s[0];
+        String commandType = c[0];
         switch (commandType) {
         case "bye":
             return new ByeCommand();
         case "list":
             return new ListCommand();
         case "done": {
-            String taskNumber = s[1];
+            String taskNumber = c[1];
             return new DoneCommand(taskNumber);
         }
         case "delete": {
-            String taskNumber = s[1];
+            String taskNumber = c[1];
             return new DeleteCommand(taskNumber);
         }
-        case "todo":
-            String taskDescription = c.substring(5);
-            return new TodoCommand(taskDescription);
+        case "todo": {
+            StringBuilder description = new StringBuilder();
+            for (int i = 1; i < c.length; i++) {
+                if (description.length() > 0) {
+                    description.append(" ");
+                }
+                description.append(c[i]);
+            }
+            return new TodoCommand(description.toString());
+        }
         case "deadline": {
-            // Split string to get date
-            String[] str = c.split(" /by ");
-            // Ignore task type
-            String description = str[0].substring(9);
-            String date = str[1];
-            return new DeadlineCommand(description, date);
+            StringBuilder description = new StringBuilder();
+            StringBuilder date = new StringBuilder();
+            boolean shouldTake = false;
+            for (int i = 1; i < c.length; i++) {
+                if (c[i].equals("/by")) {
+                    shouldTake = true;
+                    continue;
+                }
+                if (shouldTake) {
+                    date.append(c[i]);
+                } else {
+                    if (description.length() > 0) {
+                        description.append(" ");
+                    }
+                    description.append(c[i]);
+                }
+            }
+            return new DeadlineCommand(description.toString(), date.toString());
         }
         case "find": {
-            return new FindCommand(s[1]);
+            return new FindCommand(c[1]);
         }
         default: {
-            // Split string to get date
-            String[] str = c.split(" /at ");
-            // Ignore task type
-            String description = str[0].substring(6);
-            String date = str[1];
-            return new EventCommand(description, date);
+            StringBuilder description = new StringBuilder();
+            StringBuilder date = new StringBuilder();
+            boolean shouldTake = false;
+            for (int i = 1; i < c.length; i++) {
+                if (c[i].equals("/at")) {
+                    shouldTake = true;
+                    continue;
+                }
+                if (shouldTake) {
+                    date.append(c[i]);
+                } else {
+                    if (description.length() > 0) {
+                        description.append(" ");
+                    }
+                    description.append(c[i]);
+                }
             }
+            return new EventCommand(description.toString(), date.toString());
+        }
         }
     }
 }
