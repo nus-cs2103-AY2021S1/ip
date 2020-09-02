@@ -16,6 +16,7 @@ public class ListCommand extends Command {
      * @param tasks Task list the user currently have.
      * @param ui Tool to interact with user.
      * @param storage Storage to load and save data.
+     * @return Responses in to be passed to user.
      */
     @Override
     public String executeCommand(TaskList tasks, Ui ui, Storage storage) {

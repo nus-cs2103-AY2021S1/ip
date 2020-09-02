@@ -125,6 +125,7 @@ public class TaskList {
                 String currentSearch = description.substring(j, j + wordLength);
                 if (currentSearch.equals(keyword)) {
                     matchingTasks.add(currentTask);
+                    break;
                 }
             }
         }

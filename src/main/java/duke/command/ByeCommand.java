@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -16,9 +17,12 @@ public class ByeCommand extends Command {
      * @param tasks Task list the user currently have.
      * @param ui Tool to interact with user.
      * @param storage Storage to load and save data.
+     * @return Responses in to be passed to user.
+     * @throws DukeException If failed to save tasks.
      */
     @Override
-    public String executeCommand(TaskList tasks, Ui ui, Storage storage) {
+    public String executeCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        storage.saveTasks(tasks.getTasks());
         return ui.showGoodbyeUser();
     }
 
