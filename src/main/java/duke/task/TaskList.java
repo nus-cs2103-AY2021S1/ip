@@ -23,9 +23,6 @@ public class TaskList {
      */
     protected TaskList(ArrayList<Task> al) {
         this.al = al;
-        if (al.size() > 0) {
-            System.out.println("Here is your list of saved tasks:\n" + this.toString() + "\n");
-        }
     }
 
     protected int length() {
