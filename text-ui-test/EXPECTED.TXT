@@ -106,5 +106,33 @@ Hello from
     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
     ------------------------------
     ------------------------------
+    Got it. I've added this task:
+        [T][✘] book
+    Now you have 4 tasks in the list.
+    ------------------------------
+    ------------------------------
+    Got it. I've added this task:
+        [D][✘] return book (by: Jun 20 2020 00:00 AM)
+    Now you have 5 tasks in the list.
+    ------------------------------
+    ------------------------------
+    Got it. I've added this task:
+        [E][✘] book signing (at: Jul 20 2020 00:00 AM - 02:00 AM)
+    Now you have 6 tasks in the list.
+    ------------------------------
+    ------------------------------
+    Nice! I've marked this task as done:
+        [E][✓] book signing (at: Jul 20 2020 00:00 AM - 02:00 AM)
+    ------------------------------
+    ------------------------------
+    Here are the matching tasks in your list:
+    ------------------------------
+    ------------------------------
+    Here are the matching tasks in your list:
+    [T][✘] book
+    [D][✘] return book (by: Jun 20 2020 00:00 AM)
+    [E][✓] book signing (at: Jul 20 2020 00:00 AM - 02:00 AM)
+    ------------------------------
+    ------------------------------
     Bye. Hope to see you again soon!
     ------------------------------

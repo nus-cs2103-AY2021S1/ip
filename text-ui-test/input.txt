@@ -24,5 +24,11 @@ delete 5
 delete 3
 list
 jij
+todo book
+deadline return book /by 20/06/2020 00:00 
+event book signing /at 20/07/2020 00:00-02:00
+done 6
+find b
+find book
 bye
 

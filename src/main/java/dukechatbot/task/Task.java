@@ -2,6 +2,8 @@ package dukechatbot.task;
 
 import dukechatbot.enums.TaskEnum;
 
+import java.util.Arrays;
+
 public class Task {
 
     private String title;
@@ -66,5 +68,17 @@ public class Task {
      */
     public boolean getIsDone() {
         return this.isDone;
+    }
+
+    /**
+     * Checks if the title attribute contains any word that matches the given substring.
+     * The check is case-insensitive.
+     * 
+     * @param substring
+     * @return Boolean on whether attribute contains the substring as a word.
+     */
+    public boolean contains(String substring) {
+        return Arrays.stream(this.title.split("\\s+"))
+                .anyMatch(x -> x.toLowerCase().equals(substring.toLowerCase()));
     }
 }

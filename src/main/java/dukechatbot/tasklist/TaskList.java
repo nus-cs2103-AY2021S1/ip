@@ -5,6 +5,7 @@ import dukechatbot.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a list of task where you can add, delete tasks and list the tasks.
@@ -81,4 +82,16 @@ public class TaskList {
         Task task = this.list.remove(idx);
         return task.toString();
     }
+
+    /**
+     * Returns a list of tasks in the task list that contains the search keyword.
+     * 
+     * @param searchKeyword
+     * @return List of tasks in the task list that contains the search keyword.
+     */
+    public List<Task> findMatches(String searchKeyword) {
+        return this.list.stream()
+                .filter(x -> x.contains(searchKeyword))
+                .collect(Collectors.toList());
+    } 
 }

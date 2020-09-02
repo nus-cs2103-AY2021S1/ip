@@ -4,6 +4,7 @@ import dukechatbot.command.AddCommand;
 import dukechatbot.command.Command;
 import dukechatbot.command.DeleteCommand;
 import dukechatbot.command.DoneCommand;
+import dukechatbot.command.FindCommand;
 import dukechatbot.command.ListCommand;
 import dukechatbot.constant.DukeConstants;
 import dukechatbot.enums.TaskEnum;
@@ -34,6 +35,8 @@ public class CommandParser {
             return new AddCommand(input, TaskEnum.DEADLINE);
         } else if (isEventCommand(input)) {
             return new AddCommand(input, TaskEnum.EVENT);
+        } else if (isFindCommand(input)) {
+            return new FindCommand(input);
         } else {
             return null;
         }
@@ -58,8 +61,13 @@ public class CommandParser {
     private static boolean isDeadlineCommand(String input) {
         return input.split("\\s+")[0].equals(DukeConstants.DEADLINE_COMMAND);
     }
+    
     private static boolean isEventCommand(String input) {
         return input.split("\\s+")[0].equals(DukeConstants.EVENT_COMMAND);
+    }
+
+    private static boolean isFindCommand(String input) {
+        return input.split("\\s+")[0].equals(DukeConstants.FIND_COMMAND);
     }
 
     /**

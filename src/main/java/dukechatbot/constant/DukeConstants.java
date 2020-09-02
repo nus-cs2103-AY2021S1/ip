@@ -23,6 +23,8 @@ public class DukeConstants {
     public static final String DELETE_OUTPUT = "Noted. I've removed this task: ";
     public static final String LIST_COMMAND = "list";
     public static final String LIST_OUTPUT = "Here are the tasks in your list:";
+    public static final String FIND_COMMAND = "find";
+    public static final String FIND_OUTPUT = "Here are the matching tasks in your list:";
 
     public static final String TODO_COMMAND = "todo";
     public static final String DEADLINE_COMMAND = "deadline";
