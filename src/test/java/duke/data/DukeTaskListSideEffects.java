@@ -4,6 +4,7 @@ public class DukeTaskListSideEffects {
 
     private static DukeTaskListSideEffects instance;
 
+    //CHECKSTYLE:OFF: VisibilityModifier
     public boolean getTask;
     public boolean addTask;
     public boolean deleteTask;
@@ -11,6 +12,7 @@ public class DukeTaskListSideEffects {
     public boolean setTasks;
     public boolean getTasks;
     public boolean findTasks;
+    //CHECKSTYLE:ON: VisibilityModifier
 
     private DukeTaskListSideEffects() {
         reset();

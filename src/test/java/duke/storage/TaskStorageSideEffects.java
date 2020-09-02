@@ -3,8 +3,10 @@ package duke.storage;
 public class TaskStorageSideEffects {
 
     private static TaskStorageSideEffects instance;
+    //CHECKSTYLE:OFF: VisibilityModifier
     public boolean getSavedTasks;
     public boolean saveTasks;
+    //CHECKSTYLE:ON: VisibilityModifier
 
     private TaskStorageSideEffects() {
         reset();

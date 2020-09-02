@@ -3,6 +3,7 @@ package duke.ui;
 public class UiSideEffects {
 
     private static UiSideEffects instance;
+    //CHECKSTYLE:OFF: VisibilityModifier
     public boolean uiGreet;
     public boolean uiEcho;
     public boolean uiReportCurrentTasks;
@@ -10,6 +11,7 @@ public class UiSideEffects {
     public boolean uiReportDoneTask;
     public boolean uiReportDeleteTask;
     public boolean uiReportExit;
+    //CHECKSTYLE:ON: VisibilityModifier
 
     private UiSideEffects() {
         reset();
