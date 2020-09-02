@@ -13,6 +13,8 @@ public abstract class Command {
      */
     public abstract void perform(TaskList tasks);
 
+    public abstract String getReply();
+
     /**
      * Checks if this Command is a termination Command.
      *

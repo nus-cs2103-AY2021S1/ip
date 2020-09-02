@@ -10,6 +10,8 @@ public class DoneCommand extends Command {
 
     /** The index of the Task that wants to be marked as done. */
     protected int taskNumber;
+    protected TaskList tasks;
+    protected Task task;
 
     /**
      * Constructs a DoneCommand.
@@ -23,14 +25,18 @@ public class DoneCommand extends Command {
     /**
      * Marks as done the Task in the TaskList based on the given index.
      *
-     * @param tasks The related TaskList.
+     * @param t The related TaskList.
      */
     @Override
-    public void perform(TaskList tasks) {
-        Task task = tasks.get(taskNumber - 1);
+    public void perform(TaskList t) {
+        tasks = t;
+        task = tasks.get(taskNumber - 1);
         task.markAsDone();
-        System.out.println(" Yay! I have marked this task as done: " + "\n"
-                + "   " + task.toString());
+    }
+
+    public String getReply() {
+        return " Yay! I have marked this task as done: " + "\n"
+            + "   " + task.toString();
     }
 
     /**

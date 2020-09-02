@@ -10,6 +10,8 @@ public class DeleteCommand extends Command {
 
     /** The index of the Task that wants to be deleted from the TaskList. */
     protected int taskNumber;
+    protected TaskList tasks;
+    protected Task task;
 
     /**
      * Constructs a DeleteCommand.
@@ -23,15 +25,19 @@ public class DeleteCommand extends Command {
     /**
      * Deletes a Task from the related TaskList based on the given index.
      *
-     * @param tasks The related TaskList.
+     * @param t The related TaskList.
      */
     @Override
-    public void perform(TaskList tasks) {
-        Task task = tasks.get(taskNumber - 1);
+    public void perform(TaskList t) {
+        tasks = t;
+        task = t.get(taskNumber - 1);
         tasks.delete(taskNumber - 1);
-        System.out.println(" Okie! I have deleted this task: " + "\n"
-                + "   " + task.toString() + "\n" + " Now you have " + tasks.size() + (tasks.size() > 1
-                ? " tasks." : " task."));
+    }
+
+    public String getReply() {
+        return " Okie! I have deleted this task: " + "\n"
+            + "   " + task.toString() + "\n" + " Now you have " + tasks.size() + (tasks.size() > 1
+            ? " tasks." : " task.");
     }
 
     /**

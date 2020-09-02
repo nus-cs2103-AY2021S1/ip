@@ -1,5 +1,6 @@
 package duke.Ui;
 
+import duke.main.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -20,7 +21,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Ui ui;
+    private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/You.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Popi.jpg"));
@@ -30,8 +31,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setUi(Ui ui) {
-        this.ui = ui;
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     /**
@@ -41,7 +42,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = ui.getResponse(input);
+        String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(input, userImage),
             DialogBox.getDukeDialog(response, dukeImage)

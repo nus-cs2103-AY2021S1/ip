@@ -1,9 +1,6 @@
 package duke.main;
 
-import java.util.Scanner;
-
 import duke.Ui.Main;
-import duke.Ui.Ui;
 import javafx.application.Application;
 
 import duke.command.Command;
@@ -18,8 +15,6 @@ public class Duke {
     private final TaskList tasks;
     /** Storage to store data to hard disk */
     private final Storage storage;
-    /** Ui for interacting with user. */
-    private final Ui ui;
 
     /**
      * Constructs a Duke.
@@ -30,9 +25,6 @@ public class Duke {
 
         // Read from hard disk
         tasks = storage.readFromHardDisk();
-
-        // Initialize Ui
-        ui = new Ui();
     }
 
     /**
@@ -41,28 +33,16 @@ public class Duke {
     public void run() {
         // Launch GUI
         Application.launch(Main.class, "");
-        // Display greeting message
-        ui.showLine();
-        ui.showGreetingMessage();
-        ui.showLine();
+    }
 
-        // Process user input
-        Scanner sc = new Scanner(System.in);
-        boolean isExit = false;
-        while (!isExit) {
-            String input = sc.nextLine();
-            try {
-                Command command = Parser.parse(input);
-                ui.showLine();
-                command.perform(tasks);
-                ui.showLine();
-                storage.writeToHardDisk(tasks);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showLine();
-                System.out.println(e.getMessage());
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            command.perform(tasks);
+            storage.writeToHardDisk(tasks);
+            return command.getReply();
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 

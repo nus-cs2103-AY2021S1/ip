@@ -8,18 +8,25 @@ import duke.task.Task;
  */
 public class ListCommand extends Command {
 
+    protected TaskList tasks;
+
     /**
      * Lists all the task in the related TaskList.
      *
-     * @param tasks The related TaskList.
+     * @param t The related TaskList.
      */
     @Override
-    public void perform(TaskList tasks) {
-        System.out.println(" These are the tasks in your list:");
+    public void perform(TaskList t) {
+        tasks = t;
+    }
+
+    public String getReply() {
+        String reply = " These are the tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
-            System.out.println(" " + (i + 1) + "." + t.toString());
+            reply = reply + "\n" + " " + (i + 1) + "." + t.toString();
         }
+        return reply;
     }
 
     /**

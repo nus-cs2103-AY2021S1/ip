@@ -12,6 +12,7 @@ public class TodoCommand extends Command {
      * The Todo that wants to be added to the related TaskList.
      */
     protected Todo todo;
+    protected TaskList tasks;
 
     /**
      * Constructs a TodoCommand.
@@ -25,14 +26,18 @@ public class TodoCommand extends Command {
     /**
      * Adds the Todo to the related TaskList.
      *
-     * @param tasks The related TaskList.
+     * @param t The related TaskList.
      */
     @Override
-    public void perform(TaskList tasks) {
+    public void perform(TaskList t) {
+        tasks = t;
         tasks.add(todo);
-        System.out.println(" Okay! I have added this task:" + "\n" + "   "
-                + todo.toString() + "\n" + " Now you have " + tasks.size() + (tasks.size() > 1 ? " tasks."
-                : " task."));
+    }
+
+    public String getReply() {
+        return " Okay! I have added this task:" + "\n" + "   "
+            + todo.toString() + "\n" + " Now you have " + tasks.size() + (tasks.size() > 1 ? " tasks."
+            : " task.");
     }
 
     /**
