@@ -18,7 +18,7 @@ public class Duke {
     private Ui ui;
 
     public Duke() {
-
+        this("./tasks.txt");
     }
 
     /**
@@ -76,5 +76,9 @@ public class Duke {
 
     public String getResponse(String input) {
         return input;
+    }
+
+    public String getWelcomeMessage() {
+        return ui.getGreetings();
     }
 }

@@ -199,6 +199,14 @@ public class Ui {
     }
 
     /**
+     * Returns welcome message.
+     * @return Welcome message.
+     */
+    public String getGreetings() {
+        return LOGO + "\n" + WELCOME_MESSAGE;
+    }
+
+    /**
      * Prints line divider.
      */
     public void showLine() {

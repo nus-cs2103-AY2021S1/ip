@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 
 public class DialogBox extends HBox {
     @FXML
@@ -30,6 +31,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        dialog.setFont(Font.font("Monospaced", 12));
         dialog.setText(text);
         displayPicture.setImage(img);
     }
