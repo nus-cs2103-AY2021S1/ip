@@ -1,12 +1,12 @@
 package tasks;
 
-import main.java.exceptions.InvalidDescriptionException;
-import main.java.exceptions.InvalidTimeException;
-import main.java.tasks.Deadline;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import exceptions.InvalidDescriptionException;
+import exceptions.InvalidTimeException;
 
 public class DeadlineTest {
 
@@ -25,8 +25,9 @@ public class DeadlineTest {
         try {
             new Deadline(" ", "today");
         } catch (InvalidDescriptionException | InvalidTimeException e) {
-            assertEquals("Hey! " +
-                    "Deadline description shouldn't be blank.", e.getMessage());
+            assertEquals("Hey! "
+                    + "Deadline description shouldn't be blank.",
+                    e.getMessage());
         }
     }
 
@@ -35,8 +36,8 @@ public class DeadlineTest {
         try {
             new Deadline("go for family therapy", " ");
         } catch (InvalidDescriptionException | InvalidTimeException e) {
-            assertEquals("Do try again by adding a time " +
-                    "you need to get this done by.", e.getMessage());
+            assertEquals("Do try again by adding a time "
+                    + "you need to get this done by.", e.getMessage());
         }
     }
 

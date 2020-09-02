@@ -1,4 +1,4 @@
-package main.java.manager;
+package manager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import main.java.tasks.Deadline;
-import main.java.tasks.Event;
-import main.java.tasks.Task;
-import main.java.tasks.Todo;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 /**
  * Represents a platform enabling storage, which stores

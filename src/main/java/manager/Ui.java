@@ -1,11 +1,11 @@
-package main.java.manager;
+package manager;
 
-import main.java.exceptions.InvalidDescriptionException;
-import main.java.exceptions.InvalidTimeException;
-import main.java.tasks.Deadline;
-import main.java.tasks.Event;
-import main.java.tasks.Task;
-import main.java.tasks.Todo;
+import exceptions.InvalidDescriptionException;
+import exceptions.InvalidTimeException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 /**
  * Represents a platform that converts commands into tasks and actions.

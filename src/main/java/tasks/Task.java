@@ -1,4 +1,4 @@
-package main.java.tasks;
+package tasks;
 
 /**
  * Represents an abstract task, consisting of a description.

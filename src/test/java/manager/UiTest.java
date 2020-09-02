@@ -1,11 +1,10 @@
 package manager;
 
-import main.java.manager.Commands;
-import main.java.manager.Ui;
-import main.java.tasks.Task;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import tasks.Task;
 
 public class UiTest {
 
@@ -22,8 +21,8 @@ public class UiTest {
         assertEquals("[T][✘] buy a hat", todo.toString());
         assertEquals("[D][✘] undo cronenberg world (by: Dec 7 2020)", deadline.toString());
         assertEquals(
-                "[E][✘] destroy the galactic government " +
-                        "(at: Nov 8 2020, 02:30 PM)", event.toString());
+                "[E][✘] destroy the galactic government "
+                        + "(at: Nov 8 2020, 02:30 PM)", event.toString());
     }
 
     @Test

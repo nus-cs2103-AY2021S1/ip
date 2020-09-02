@@ -1,13 +1,18 @@
-import main.java.manager.Parser;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import manager.Parser;
 
 /**
  * Represents the Duke chat bot.
  */
 public class Duke {
 
+    private final Parser parser = new Parser();
+
     private void printGreeting() {
         System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        System.out.println("What can I do for you?\n");
     }
 
     private void printGoodbye() {
@@ -16,13 +21,41 @@ public class Duke {
 
     /**
      * Runs the Duke bot by printing the greeting message,
-     * instantiating a parser to handle user input
+     * instantiating a parser to handle user input from a scanner
      * and printing the goodbye message upon exit.
      */
     public void run() {
         printGreeting();
-        new Parser().handleUserInput();
+        this.parser.handleUserInput();
         printGoodbye();
+    }
+
+    /**
+     * Obtains the response from the bot given the user input.
+     * @param input as a provided string
+     * @return output response
+     */
+    public String getResponse(String input) {
+        return this.parser.handleUserInput(input);
+    }
+
+    /**
+     * Starts the Duke bot by printing the greeting message,
+     * instantiating a parser to parse saved tasks
+     * @return greeting message and saved tasks as a string
+     */
+    public String start() {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(output);
+        PrintStream old = System.out;
+        System.setOut(printStream);
+
+        printGreeting();
+        this.parser.parseSavedTasks();
+
+        System.out.flush();
+        System.setOut(old);
+        return output.toString();
     }
 
     /**

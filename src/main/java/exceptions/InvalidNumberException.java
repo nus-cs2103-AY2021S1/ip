@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package exceptions;
 
 /**
  * Represents an invalid number exception thrown by Duke,

@@ -1,9 +1,11 @@
-package main.java.manager;
+package manager;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
-import main.java.exceptions.InvalidCommandException;
-import main.java.exceptions.InvalidNumberException;
+import exceptions.InvalidCommandException;
+import exceptions.InvalidNumberException;
 
 /**
  * Represents a parser that parses the user's input and
@@ -17,14 +19,17 @@ public class Parser {
     /**
      * Handles the user input by parsing them into commands
      * and sending them to the converter.
+     * @param input obtained
+     * @return output as a string from converter
      */
-    public void handleUserInput() {
+    public String handleUserInput(String input) {
 
-        Scanner sc = new Scanner(System.in);
-        this.converter.getSavedTasks();
-        String input = sc.nextLine();
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(output);
+        PrintStream old = System.out;
+        System.setOut(printStream);
 
-        while (!input.equals("bye")) {
+        if (!input.equals("bye")) {
 
             try {
 
@@ -77,6 +82,28 @@ public class Parser {
                 System.out.println(e.getMessage());
             }
 
+            System.out.flush();
+            System.setOut(old);
+            return output.toString();
+
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Handles user input obtained from a Scanner object.
+     */
+    public void handleUserInput() {
+
+        Scanner sc = new Scanner(System.in);
+        parseSavedTasks();
+        String input = sc.nextLine();
+
+        while (!input.equals("bye")) {
+
+            System.out.println(handleUserInput(input));
+
             if (sc.hasNextLine()) {
                 input = sc.nextLine();
                 this.converter.storeTasks();
@@ -87,6 +114,13 @@ public class Parser {
         }
 
         sc.close();
+    }
+
+    /**
+     * Obtains the saved tasks from the converter.
+     */
+    public void parseSavedTasks() {
+        this.converter.getSavedTasks();
     }
 
     private boolean isNumberedCommand(String input) throws InvalidNumberException {

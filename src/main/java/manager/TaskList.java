@@ -1,9 +1,9 @@
-package main.java.manager;
+package manager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.tasks.Task;
+import tasks.Task;
 
 /**
  * Represents a task list. Performs actions on tasks.
@@ -78,6 +78,7 @@ public class TaskList {
         if (this.taskList.size() > 0) {
             this.taskList.subList(0, this.taskList.size()).clear();
         }
+        System.out.println("All clear! You have 0 tasks now.");
     }
 
     /**
