@@ -3,6 +3,7 @@ package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -51,7 +52,7 @@ public class Storage {
             try {
                 taskListFile.createNewFile();
             } catch (Exception e) {
-                HandleException.handleException(DukeException.ExceptionType.READ_FILE);
+
             }
         }
         this.memoFile = taskListFile;
@@ -64,14 +65,15 @@ public class Storage {
      * @return List of Task objects each time the chatbot is run.
      */
     public List<Task> readMemoTasks() {
+
         reachFile();
+
         List<Task> taskCollections = new ArrayList<>();
         Scanner sc;
 
         try {
             sc = new Scanner(memoFile);
-        } catch (FileNotFoundException e) {
-            System.out.println("Sorry, the memory cannot be read successfully.");
+        } catch (Exception e) {
             return taskCollections;
         }
 
@@ -127,20 +129,16 @@ public class Storage {
      *
      * @param task_list  Current List of Task objects.
      */
-    public void write_memory(List<Task> task_list) {
-        try {
-            FileWriter fw = new FileWriter(fileDirectory + fileName);
-            String textToAppend = "";
-            Iterator taskIter = task_list.iterator();
-            while (taskIter.hasNext()) {
-                Task t = (Task) taskIter.next();
-                textToAppend += taskToMemoStr(t);
-            }
-            fw.write(textToAppend);
-            fw.close();
-        } catch (Exception ex) {
-            HandleException.handleException(DukeException.ExceptionType.READ_FILE);
+    public void write_memory(List<Task> task_list) throws IOException {
+        FileWriter fw = new FileWriter(fileDirectory + fileName);
+        String textToAppend = "";
+        Iterator taskIter = task_list.iterator();
+        while (taskIter.hasNext()) {
+            Task t = (Task) taskIter.next();
+            textToAppend += taskToMemoStr(t);
         }
+        fw.write(textToAppend);
+        fw.close();
     }
 
 
