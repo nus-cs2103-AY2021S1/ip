@@ -4,13 +4,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import duke.command.Command;
-import duke.command.ExitCommand;
 import duke.utils.DukeException;
 import duke.utils.DukeFileHandler;
 import duke.utils.Parser;
 import duke.utils.TaskList;
 import duke.utils.Ui;
-
 
 
 public class Duke {
@@ -26,6 +24,7 @@ public class Duke {
 
     }
 
+
     public void showWelcome() {
         ui.welcome();
         try {
@@ -40,49 +39,16 @@ public class Duke {
     }
 
 
-    //    private void run() {
-    //
-    //        Scanner scanner = new Scanner(System.in);
-    //
-    //        while (true) {
-    //            String input = scanner.nextLine().trim();
-    //
-    //            try {
-    //                Command command = Parser.parse(input);
-    //                command.execute(tasks, ui, fileHandler);
-    //
-    //                if (command instanceof ExitCommand) {
-    //                    break;
-    //                }
-    //
-    //            } catch (DukeException ex) {
-    //                ui.displayThis(ex.getMessage());
-    //            }
-    //
-    //        }
-    //    }
-
-
     private void enteredInput(String input) {
         try {
             Command command = Parser.parse(input);
             command.execute(tasks, ui, fileHandler);
 
-            if (command instanceof ExitCommand) {
-                // break;
-                // todo close the window when bye is entered
-
-            }
 
         } catch (DukeException ex) {
             ui.displayThis(ex.getMessage());
         }
     }
-
-
-    //    public static void main(String[] args) {
-    //        new Duke("data/dukeData.txt");
-    //    }
 
 
     /**
