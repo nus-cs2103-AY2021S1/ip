@@ -50,31 +50,32 @@ public class TaskList {
      * This method marks the task at index index of the list as done.
      * @param index     The index of the task to be marked as done.
      */
-    public void markTaskAsDone(final int index) {
+    public String markTaskAsDone(final int index) {
         Task newTask = this.taskList.get(index - 1).markAsDone();
         this.taskList.set(index - 1, newTask);
-        Ui.printMarkAsDone(newTask);
+        return Ui.printMarkAsDone(newTask);
     }
 
     /**
      * This method deletes the task at the index in the list.
      * @param index     The index of the task to be deleted.
      */
-    public void deleteTask(final int index) {
+    public String deleteTask(final int index) {
         Task removed = this.taskList.get(index - 1);
         this.taskList.remove(index - 1);
-        Ui.printRemoveTask(removed, this.taskList);
+        return Ui.printRemoveTask(removed, this.taskList);
     }
 
     /**
      * This method adds a to do task in the list.
      * @param input     This contains information about task to be added.
+     * @return          String to be printed.
      */
-    public void addTodo(final String input) {
+    public String addTodo(final String input) {
         String description = input.substring(4);
         Task newTask = new Todo(description.trim());
         this.taskList.add(newTask);
-        Ui.printTaskAdded(newTask, taskList);
+        return Ui.printTaskAdded(newTask, taskList);
     }
 
     /**
@@ -82,23 +83,25 @@ public class TaskList {
      * @param description   This is the description of the deadline task.
      * @param d1            This is the date associated with the deadline task.
      * @param timeString    This is the time associated with the deadline task.
+     * @return String to be printed.
      */
-    public void addDeadline(final String description, final LocalDate d1,
+    public String addDeadline(final String description, final LocalDate d1,
                             final String timeString) {
         Task newTask = new Deadline(description.trim(), d1, timeString);
         this.taskList.add(newTask);
-        Ui.printTaskAdded(newTask, this.taskList);
+        return Ui.printTaskAdded(newTask, this.taskList);
     }
 
     /**
      * This method adds a deadline task in the list.
      * @param description   This is the description of the deadline task.
      * @param d1            This is the date associated with the deadline task.
+     * @return String to be printed.
      */
-    public void addDeadline(final String description, final LocalDate d1) {
+    public String addDeadline(final String description, final LocalDate d1) {
         Task newTask = new Deadline(description.trim(), d1);
         this.taskList.add(newTask);
-        Ui.printTaskAdded(newTask, this.taskList);
+        return Ui.printTaskAdded(newTask, this.taskList);
     }
 
     /**
@@ -106,23 +109,25 @@ public class TaskList {
      * @param description   This is the description of the event task.
      * @param d2            This is the date associated with the event task.
      * @param timeString    This is the time associated with the deadline task.
+     * @return String to be printed.
      */
-    public void addEvent(final String description, final LocalDate d2,
+    public String addEvent(final String description, final LocalDate d2,
                          final String timeString) {
         Task newTask = new Event(description.trim(), d2, timeString);
         this.taskList.add(newTask);
-        Ui.printTaskAdded(newTask, this.taskList);
+        return Ui.printTaskAdded(newTask, this.taskList);
     }
 
     /**
      * This method adds an event task in the list.
      * @param description   This is the description of the event task.
      * @param d2            This is the date associated with the event task.
+     * @return String to be printed.
      */
-    public void addEvent(final String description, final LocalDate d2) {
+    public String addEvent(final String description, final LocalDate d2) {
         Task newTask = new Event(description.trim(), d2);
         this.taskList.add(newTask);
-        Ui.printTaskAdded(newTask, this.taskList);
+        return Ui.printTaskAdded(newTask, this.taskList);
     }
 
     /**

@@ -46,7 +46,7 @@ public class Parser {
      * @param taskList This is the current task list.
      * @throws DukeException When an invalid input is entered.
      */
-    public static void handleDoneInput(final String input,
+    public static String handleDoneInput(final String input,
             final TaskList taskList) throws DukeException {
         if (!input.substring(DONE).trim().isEmpty()
                 //to make sure the input after "done" is a number
@@ -54,7 +54,7 @@ public class Parser {
             //convert string to integer
             int index = Integer.parseInt(input.substring(DONE).trim());
             if (index >= 1) { //if input index is valid
-                taskList.markTaskAsDone(index);
+                return taskList.markTaskAsDone(index);
             } else {
                 throw new DukeException("Please enter a valid task number "
                         + "to mark as done (index is not valid)");
@@ -71,7 +71,7 @@ public class Parser {
      * @param taskList This is the current task list.
      * @throws DukeException When an invalid input is entered.
      */
-    public static void handleDeleteInput(final String input,
+    public static String handleDeleteInput(final String input,
                      final TaskList taskList) throws DukeException {
         if (!input.substring(DELETE).trim().isEmpty()
                 //to make sure the input after "done" is a number
@@ -79,7 +79,7 @@ public class Parser {
             //convert string to integer
             int index = Integer.parseInt(input.substring(DELETE).trim());
             if (index >= 1) { //if input index is valid
-                taskList.deleteTask(index);
+                return taskList.deleteTask(index);
             } else {
                 throw new DukeException("Please enter a valid task number "
                         + "to delete (index is not valid)");
@@ -95,12 +95,13 @@ public class Parser {
      * @param input This is the string to be parsed.
      * @param taskList This is the current task list.
      * @throws DukeException When an invalid input is entered.
+     * @return String to be printed.
      */
-    private static void handleTodoInput(final String input,
+    private static String handleTodoInput(final String input,
                     final TaskList taskList) throws DukeException {
         //to make sure to do task is not empty
         if (!input.substring(TODO).trim().isEmpty()) {
-           taskList.addTodo(input);
+           return taskList.addTodo(input);
         } else {
             throw new DukeException("Please enter a valid todo");
         }
@@ -111,8 +112,9 @@ public class Parser {
      * @param input This is the string to be parsed.
      * @param taskList This is the current task list.
      * @throws DukeException When an invalid input is entered.
+     * @return String to be printed.
      */
-    private static void handleDeadlineInput(final String input,
+    private static String handleDeadlineInput(final String input,
                         final TaskList taskList) throws DukeException {
         //to make sure deadline is not empty
         if (!input.substring(DEADLINE).trim().isEmpty()
@@ -136,7 +138,7 @@ public class Parser {
                             //convert string to integer
                             int time = Integer.parseInt(timeString);
                             if (time >= 0000 && time <= 2359) {
-                                taskList.addDeadline(description,
+                                return taskList.addDeadline(description,
                                         d1, timeString);
                             } else {
                                 throw new DukeException("Please enter a "
@@ -147,12 +149,12 @@ public class Parser {
                                    + "in the right format (eg. 1800)");
                         }
                     } else {
-                        taskList.addDeadline(description, d1);
+                        return taskList.addDeadline(description, d1);
                     }
                 } else { //user didn't give a time input
                     by = formatDate(by);
                     LocalDate d1 = LocalDate.parse(by);
-                    taskList.addDeadline(description, d1);
+                    return taskList.addDeadline(description, d1);
                 }
             } catch (DateTimeException dte) {
                 throw new DukeException("Please enter your date "
@@ -169,8 +171,9 @@ public class Parser {
      * @param input This is the string to be parsed.
      * @param taskList This is the current task list.
      * @throws DukeException When an invalid input is entered.
+     * @return String to be printed.
      */
-    private static void handleEventInput(final String input,
+    private static String handleEventInput(final String input,
                          final TaskList taskList) throws DukeException {
         //to make sure event is not empty
         if (!input.substring(EVENT).trim().isEmpty()
@@ -194,7 +197,7 @@ public class Parser {
                             //convert string to integer
                             int time = Integer.parseInt(timeString);
                             if (time >= 0000 && time <= 2359) {
-                               taskList.addEvent(description,
+                               return taskList.addEvent(description,
                                        d2, timeString);
                             } else {
                                 throw new DukeException("Please enter a "
@@ -205,12 +208,12 @@ public class Parser {
                                    + "time in the right format (eg. 1800)");
                         }
                     } else {
-                        taskList.addEvent(description, d2);
+                        return taskList.addEvent(description, d2);
                     }
                 } else { //user didn't give a time input
                     at = formatDate(at);
                     LocalDate d2 = LocalDate.parse(at);
-                    taskList.addEvent(description, d2);
+                    return taskList.addEvent(description, d2);
                 }
             } catch (DateTimeException dte) {
                 throw new DukeException("Please enter your date "
@@ -325,35 +328,32 @@ public class Parser {
      * @return This returns whether the user is done using the chatbot.
      * @throws DukeException When the input is not recognized.
      */
-    public static boolean execute(final TaskList taskList, final Ui ui,
-          final Storage storage, final String input) throws DukeException {
-        if (input.equalsIgnoreCase("bye")) {
-            ui.printGoodbye();
-            storage.write(taskList);
-            return true;
-        } else if (input.equalsIgnoreCase("list")) {
-            ui.printTasks(taskList);
-            return false;
-        } else if (input.toLowerCase().startsWith("done")) {
-            handleDoneInput(input, taskList);
-            return false;
-        } else if (input.toLowerCase().startsWith("delete")) {
-            handleDeleteInput(input, taskList);
-            return false;
-        } else if (input.toLowerCase().startsWith("find")) {
-            ui.printMatchingTasks(handleFindInput(input, taskList));
-            return false;
-        } else if (input.toLowerCase().startsWith("todo")) {
-            handleTodoInput(input, taskList);
-            return false;
-        } else if (input.toLowerCase().startsWith("deadline")) {
-            handleDeadlineInput(input, taskList);
-            return false;
-        } else if (input.toLowerCase().startsWith("event")) {
-            handleEventInput(input, taskList);
-            return false;
-        } else {
-            throw new DukeException("Sorry I don't know what that means :(");
+    public static String execute(final TaskList taskList, final Ui ui,
+          final Storage storage, final String input) {
+        try {
+            if (input.equalsIgnoreCase("bye")) {
+                ui.printGoodbye();
+                storage.write(taskList);
+                return "bye then";
+            } else if (input.equalsIgnoreCase("list")) {
+                return ui.printTasks(taskList);
+            } else if (input.toLowerCase().startsWith("done")) {
+                return handleDoneInput(input, taskList);
+            } else if (input.toLowerCase().startsWith("delete")) {
+                return handleDeleteInput(input, taskList);
+            } else if (input.toLowerCase().startsWith("find")) {
+                return ui.printMatchingTasks(handleFindInput(input, taskList));
+            } else if (input.toLowerCase().startsWith("todo")) {
+                return handleTodoInput(input, taskList);
+            } else if (input.toLowerCase().startsWith("deadline")) {
+                return handleDeadlineInput(input, taskList);
+            } else if (input.toLowerCase().startsWith("event")) {
+                return handleEventInput(input, taskList);
+            } else {
+                throw new DukeException("Sorry I don't know what that means :(");
+            }
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }
