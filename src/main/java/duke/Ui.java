@@ -8,7 +8,7 @@ import duke.task.Task;
 public class Ui {
 
     private static final String BORDER =
-            "==========================================";
+            "=================================";
 
     /**
      * Prints out the farewell message to the user.

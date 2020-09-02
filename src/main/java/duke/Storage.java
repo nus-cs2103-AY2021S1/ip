@@ -38,6 +38,7 @@ public class Storage {
         BufferedReader br = Files.newBufferedReader(filePath);
         br.readLine();
         String line = br.readLine();
+
         while (line != null) {
             String[] taskEntry = line.split(",");
             String type = taskEntry[0];
@@ -83,6 +84,7 @@ public class Storage {
         if (!file.exists()) {
             file.createNewFile();
         }
+
         FileWriter fw = new FileWriter(file);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write("Task,Done?,Description,Date");

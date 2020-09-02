@@ -13,7 +13,7 @@ import duke.exception.DukeInvalidDateException;
 import duke.exception.DukeInvalidTaskException;
 
 /**
- * Represents a command
+ * Represents a command.
  */
 public abstract class Command {
 
@@ -70,14 +70,14 @@ public abstract class Command {
      * @param tasks TaskList object in chat bot.
      * @param ui Ui object in chat bot.
      * @return String of the Ui text printed by chat bot.
-     * @throws IOException if error in loading file.
-     * @throws DukeEmptyArgumentException if argument of command is empty.
-     * @throws DukeInvalidCommandException if command is unrecognised by chat bot.
-     * @throws DukeInvalidDateException if date input format is invalid
-     * @throws DukeInvalidArgumentException if argument for command is unrecognised
-     * by chat bot
-     * @throws DukeInvalidTaskException if task is not found in the list.
-     * @throws DukeEmptyDescriptionException if description of command is empty.
+     * @throws IOException If error in loading file.
+     * @throws DukeEmptyArgumentException If argument of command is empty.
+     * @throws DukeInvalidCommandException If command is unrecognised by chat bot.
+     * @throws DukeInvalidDateException If date input format is invalid.
+     * @throws DukeInvalidArgumentException If argument for command is unrecognised
+     * by chat bot.
+     * @throws DukeInvalidTaskException If task is not found in the list.
+     * @throws DukeEmptyDescriptionException If description of command is empty.
      */
     public abstract String execute(Storage storage, TaskList tasks, Ui ui)
             throws IOException, DukeEmptyArgumentException,

@@ -14,7 +14,8 @@ import javafx.scene.layout.VBox;
 public class MainWindow extends AnchorPane {
 
     private static final String greetMessage =
-            "Hi, my name is Duke.\nWhat can I do for you?";
+            "==================================="
+            + "Hi, my name is Duke.\nWhat can I do for you?";
 
     @FXML
     private ScrollPane scrollPane;
