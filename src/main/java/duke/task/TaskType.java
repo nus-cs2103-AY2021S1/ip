@@ -4,13 +4,13 @@ public enum TaskType {
     TODO, EVENT, DEADLINE;
 
     public String toString(){
-        switch(this){
-            case TODO :
-                return "todo";
-            case EVENT :
-                return "event";
-            case DEADLINE :
-                return "deadline";
+        switch (this) {
+        case TODO:
+            return "todo";
+        case EVENT :
+            return "event";
+        case DEADLINE:
+            return "deadline";
         }
         return null;
     }

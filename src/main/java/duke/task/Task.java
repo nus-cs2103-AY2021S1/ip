@@ -8,7 +8,7 @@ public class Task {
     protected String description;
 
     public Task(String description) {
-        isDone = false;
+        this.isDone = false;
         this.description = description;
     }
 
@@ -18,18 +18,18 @@ public class Task {
     }
 
     public void markAsDone() {
-        isDone = true;
+        this.isDone = true;
     }
 
-    private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    public String getStatusIcon() {
+        return (this.isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    public String toStoreFormat(){
+    public String toStoreFormat() {
         return "";
     }
 }

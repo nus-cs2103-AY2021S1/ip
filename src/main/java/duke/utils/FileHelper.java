@@ -26,7 +26,7 @@ public class FileHelper {
         List<String> data = new ArrayList<>();
 
         File file = new File(path + "/" + fileName);
-        try{
+        try {
             if (file.exists()) {
                 Scanner sc = new Scanner(file);
                 while (sc.hasNextLine()) {
@@ -37,7 +37,6 @@ public class FileHelper {
         } catch(IOException e) {
             e.printStackTrace();
         }
-
         return data;
     }
 
@@ -52,22 +51,19 @@ public class FileHelper {
     public static void save(String path, String fileName, List<String> data) {
 
         File directory = new File(path);
-        if (! directory.exists()){
+        if (!directory.exists()) {
             directory.mkdir();
         }
 
         try {
             FileWriter writer = new FileWriter(path + "/" + fileName);
 
-            for(int i = 0; i < data.size(); i++) {
+            for (int i = 0; i < data.size(); i++) {
                 writer.write(data.get(i) + System.lineSeparator());
             }
-
             writer.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 }

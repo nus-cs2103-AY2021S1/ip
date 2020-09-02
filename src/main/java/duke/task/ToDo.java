@@ -19,9 +19,9 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String toStoreFormat(){
+    public String toStoreFormat() {
         String type = "T";
-        String status = isDone ? "1" : "0";
+        String status = super.isDone ? "1" : "0";
         String connect = " | ";
         return type + connect + status + connect + description;
     }

@@ -25,11 +25,14 @@ public class Ui {
                 " What can I do for you?");
     }
 
+<<<<<<< HEAD
     /**
      * Listens for user input and return the user input as string.
      *
      * @return a string that user has input
      */
+=======
+>>>>>>> branch-A-CodingStandard
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         String input = scanner.nextLine();  // Read user input
@@ -88,10 +91,7 @@ public class Ui {
         tasks.printList();
     }
 
-    /**
-     * Displays a line
-     */
-    public void showLine(){
+    public void showLine() {
         System.out.println("-----------------------");
     }
 
