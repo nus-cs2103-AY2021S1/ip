@@ -41,7 +41,7 @@ public class Parser {
             switch (type) {
                 case "todo":
                     if (!(description.length() > 1)) {
-                        throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                     } else {
                         tasks.addTask(new Todo(description.substring(1)));
                         ui.printPart("Got it. I've added this task:\n"
@@ -52,7 +52,7 @@ public class Parser {
 
                 case "deadline":
                     if (!(description.length() > 1)) {
-                        throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+                        throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                     } else {
                         location = description.indexOf("/");
                         date = description.substring(location + 4);
@@ -67,7 +67,7 @@ public class Parser {
 
                 case "event":
                     if (!(description.length() > 1)) {
-                        throw new DukeException("\u2639 OOPS!!! The description of a event cannot be empty.");
+                        throw new DukeException("OOPS!!! The description of a event cannot be empty.");
                     } else {
                         location = description.indexOf("/");
                         date = description.substring(location + 4);
@@ -82,7 +82,7 @@ public class Parser {
 
                 case "find":
                     if (!(description.length() > 1)) {
-                        throw new DukeException("\u2639 OOPS!!! The key word cannot be empty.");
+                        throw new DukeException("OOPS!!! The key word cannot be empty.");
                     } else {
                         TaskList matchingTasks = tasks.findTasks(description.substring(1));
                         ui.find(matchingTasks);
@@ -91,7 +91,7 @@ public class Parser {
 
                 case "done":
                     if (!(description.length() > 1)) {
-                        throw new DukeException("\u2639 OOPS!!! The number to be marked done cannot be empty.");
+                        throw new DukeException("OOPS!!! The number to be marked done cannot be empty.");
                     } else {
                         int n = Integer.parseInt(description.substring(1));
                         tasks.get(n - 1).markAsDone();
@@ -102,7 +102,7 @@ public class Parser {
 
                 case "delete":
                     if (!(description.length() > 1)) {
-                        throw new DukeException("\u2639 OOPS!!! The number to be deleted cannot be empty.");
+                        throw new DukeException("OOPS!!! The number to be deleted cannot be empty.");
                     } else {
                         int selected = Integer.parseInt(description.substring(1));
                         ui.printPart("Noted. I've removed this task:\n"
@@ -113,7 +113,7 @@ public class Parser {
                     break;
 
                 default:
-                    throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
