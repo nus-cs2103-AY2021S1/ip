@@ -9,8 +9,12 @@ public class Duke {
      * Method to initialize a Chatbot instance and start the bot. Catch errors specific to the bot.
      * @param args
      */
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) {
         Ui ui = new Ui();
-        ui.chat();
+        try {
+            ui.chat();
+        } catch (DukeException | IOException ex) {
+            System.out.println(ex);
+        }
     }
 }

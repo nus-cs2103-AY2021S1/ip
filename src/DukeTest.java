@@ -22,7 +22,7 @@ public class DukeTest {
 
     @Test
     public void Test2() {
-        ArrayList<Task> arr = new ArrayList<Task>();
+        ArrayList<Task> arr = new ArrayList<>();
         arr.add(new Task("Hello World!"));
         System.out.println(arr.get(0));
     }
