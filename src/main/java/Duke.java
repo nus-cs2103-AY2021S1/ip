@@ -59,6 +59,7 @@ public class Duke extends Application {
 
     /**
      * Initializes an instance of Duke, and runs it.
+     *
      * @param args The command line args passed to the program
      */
     public static void main(String[] args) {
