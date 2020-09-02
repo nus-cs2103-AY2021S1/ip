@@ -13,11 +13,11 @@ import java.util.List;
  */
 public class FindDirective implements Executable {
     /** Message for when the search yields no results. */
-    private final String MESSAGE_FIND_FAILURE = "oF CoUrSe %s iS NoT FoUnD. "
+    private static final String MESSAGE_FIND_FAILURE = "oF CoUrSe %s iS NoT FoUnD. "
             + "DoN'T YoU EvEn rEmEmBeR ThE TaSkS YoU AdDeD?";
 
     /** Message for when there is at least one search result. */
-    private final String MESSAGE_FIND_SUCCESS = "wHaT? iS NaP TiMe oVeR? hErE ArE YoUr tAsKs tHeN:";
+    private static final String MESSAGE_FIND_SUCCESS = "wHaT? iS NaP TiMe oVeR? hErE ArE YoUr tAsKs tHeN:";
 
     private final String searchTerm;
 

@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a task that can be tracked by Rogue.
+ *
  * A deadline additionally has a date component to specify
  * by when the task should be completed.
  */

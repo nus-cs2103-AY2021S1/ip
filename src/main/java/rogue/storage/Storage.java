@@ -21,10 +21,15 @@ import java.util.List;
  * Deals with file I/O and persisting information across multiple executions.
  */
 public class Storage {
-    private final String FORMAT_TASK_FIELD_DELIMITER = "\\s\\|\\s"; // Separator for each field in file
-    private final String VALUE_TASK_COMPLETE = "1"; // The value corresponding to whether a task is completed
-    private final String ERROR_INCORRECT_FILE_FORMAT = "ERROR: Saved file does not have the correct format!\n";
-    private final String ERROR_IO = "ERROR: Unable to %s tasks from file!";
+    /** Separator for each field in file. **/
+    private static final String FORMAT_TASK_FIELD_DELIMITER = "\\s\\|\\s";
+
+    /** The value corresponding to whether a task is completed. **/
+    private static final String VALUE_TASK_COMPLETE = "1";
+
+    private static final String ERROR_INCORRECT_FILE_FORMAT =
+            "ERROR: Saved file does not have the correct format!\n";
+    private static final String ERROR_IO = "ERROR: Unable to %s tasks from file!";
 
     private Path filePath;
 
@@ -39,8 +44,6 @@ public class Storage {
 
     /**
      * Factory method for producing the {@code Storage}.
-     * Terminates program if the file or its parent directories
-     * cannot be created.
      *
      * @param filePath The relative or absolute path where persistent information is stored.
      */
@@ -58,9 +61,7 @@ public class Storage {
                 path = Files.createFile(path);
             }
         } catch (IOException e) {
-            System.err.println("ERROR: Unable to create file for saving and loading tasks!\n");
             e.printStackTrace();
-            System.exit(1);
         }
 
         return new Storage(path);
@@ -83,6 +84,7 @@ public class Storage {
 
     /**
      * Reads the summary of each {@code Task} from the file.
+     *
      * Converts each summary into a {@code Task}.
      *
      * @return A list of tasks
@@ -114,6 +116,7 @@ public class Storage {
 
     /**
      * Converts each entry in the task summary to a {@code Task}.
+     *
      * If any of the entries cannot be parsed, an exception is thrown.
      *
      * @param taskSummary

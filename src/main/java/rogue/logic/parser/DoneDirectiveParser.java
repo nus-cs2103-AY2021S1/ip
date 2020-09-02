@@ -4,7 +4,7 @@ import rogue.logic.directives.DoneDirective;
 import rogue.logic.exceptions.IncorrectArgumentException;
 
 public class DoneDirectiveParser {
-    private final String ERROR_INCORRECT_INDEX = "sToP TrYiNg tO FoOl mE. tHe \"done\" ComMand"
+    private static final String ERROR_INCORRECT_INDEX = "sToP TrYiNg tO FoOl mE. tHe \"done\" ComMand"
             + " mUsT Be FolLoWed bY tHe InDEx Of THe TAsK.";
 
     public DoneDirective parse(String[] args) throws IncorrectArgumentException {

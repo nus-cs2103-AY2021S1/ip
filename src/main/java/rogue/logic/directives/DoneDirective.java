@@ -12,10 +12,11 @@ import rogue.ui.Ui;
  */
 public class DoneDirective implements Executable {
     /** Message for when index is invalid. */
-    private final String ERROR_INCORRECT_INDEX = "sToP TrYiNg tO FoOl mE. taSK #%d dOeS NoT ExIsT.";
+    private static final String ERROR_INCORRECT_INDEX = "sToP TrYiNg tO FoOl mE. taSK #%d dOeS NoT ExIsT.";
 
     /** Message for when {@code Task} is marked as done successfully. */
-    private final String MESSAGE_DONE_SUCCESS = "fInAlLy, I feLL AsLeEp wHiLe wAiTiNg fOr yOu tO FiNiSh: %s";
+    private static final String MESSAGE_DONE_SUCCESS =
+            "fInAlLy, I feLL AsLeEp wHiLe wAiTiNg fOr yOu tO FiNiSh: %s";
 
     private final int index;
 

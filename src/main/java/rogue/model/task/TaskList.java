@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 /**
  * Wraps a list of {@code Task}.
+ *
  * Provides bookkeeping functionalities to manage {@code Task} objects.
  */
 public class TaskList {

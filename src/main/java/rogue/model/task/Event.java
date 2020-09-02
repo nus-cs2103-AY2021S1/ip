@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a task that can be tracked by Rogue.
+ *
  * An event additionally has a date component to specify
  * when the task will happen.
  */

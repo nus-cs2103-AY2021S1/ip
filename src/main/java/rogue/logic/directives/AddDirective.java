@@ -13,7 +13,7 @@ import java.time.LocalDate;
  */
 public class AddDirective implements Executable {
     /** Message upon adding a {@code Task} successfully. */
-    private final String MESSAGE_ADD_SUCCESS = "sInCe yOu'rE So hElPlEsS, i'lL ReMeMbEr \"%s\" FoR YoU.\n"
+    private static final String MESSAGE_ADD_SUCCESS = "sInCe yOu'rE So hElPlEsS, i'lL ReMeMbEr \"%s\" FoR YoU.\n"
             + "yOu hAvE MaDe mE ReMeMbEr %d tAsK(s).";
 
     private final Action action;

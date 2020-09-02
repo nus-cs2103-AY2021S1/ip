@@ -2,6 +2,7 @@ package rogue.model.task;
 
 /**
  * Represents a task that can be tracked by Rogue.
+ *
  * A todo is any general task that has to be done.
  */
 public class Todo extends Task {

@@ -10,13 +10,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class AddDirectiveParser {
-    private final String ERROR_MISSING_DESC = "sToP TrYiNg tO FoOl mE. "
+    private static final String ERROR_MISSING_DESC = "sToP TrYiNg tO FoOl mE. "
             + "a tOdO MuSt bE FoLlOwEd bY A DesCrIpTiOn.";
-    private final String ERROR_MISSING_DESC_OR_DATE = "sToP TrYiNg tO FoOl mE. "
+    private static final String ERROR_MISSING_DESC_OR_DATE = "sToP TrYiNg tO FoOl mE. "
             + "a%s MuSt bE FoLlOwEd bY A DeScRiPtIoN AnD dAtE.";
-    private final String ERROR_MISSING_DATE = "sToP TrYiNg tO FoOl mE."
+    private static final String ERROR_MISSING_DATE = "sToP TrYiNg tO FoOl mE."
             + " tHe dAtE MuSt cOmE RiGhT AfTeR \"%s\".";
-    private final String ERROR_INCORRECT_DATE_FORMAT = "sToP TrYiNg tO FoOl mE."
+    private static final String ERROR_INCORRECT_DATE_FORMAT = "sToP TrYiNg tO FoOl mE."
             + " dAtE MuSt bE In yEaR-MoNtH-DaY FoRmAt.";
 
     public AddDirective parse(Action action, String[] args) throws IncorrectArgumentException {

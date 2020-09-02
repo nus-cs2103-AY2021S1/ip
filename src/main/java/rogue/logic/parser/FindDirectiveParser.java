@@ -9,7 +9,7 @@ import rogue.logic.exceptions.IncorrectArgumentException;
  */
 public class FindDirectiveParser {
     /** Message when no search terms are provided. */
-    private final String ERROR_MISSING_SEARCH_TERM = "sToP TrYiNg tO FoOl mE. "
+    private static final String ERROR_MISSING_SEARCH_TERM = "sToP TrYiNg tO FoOl mE. "
             + "fInD MuSt bE FoLlOwEd bY ThE SeArCh tErM.";
 
     public FindDirective parse(String[] args) throws IncorrectArgumentException {
