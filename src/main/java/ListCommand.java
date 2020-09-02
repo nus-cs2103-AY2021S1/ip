@@ -9,8 +9,7 @@ public class ListCommand extends Command {
      * @param ui user interface to display deleted message
      * @param storage file storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showListMessage();
-        tasks.listTasks();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showListMessage(tasks.getTasksList());
     }
 }

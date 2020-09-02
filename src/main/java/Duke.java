@@ -14,8 +14,7 @@ public class Duke{
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        this.run();
-        return "Duke heard: " + input;
+        return this.run(input);
     }
 
     /**
@@ -40,24 +39,12 @@ public class Duke{
     /**
      * Activates and deactivates the Chatbot accordingly.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+    public String run(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
         }
-        ui.showUpliftingQuote();
     }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
-    }
-
 }

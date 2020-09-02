@@ -14,8 +14,8 @@ public class AddCommand extends Command {
      * @param ui user interface to display added message
      * @param storage file storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(this.task);
-        ui.showAddedMessage(this.task, tasks.getTotalTasks());
+        return ui.showAddedMessage(this.task, tasks.getTotalTasks());
     }
 }

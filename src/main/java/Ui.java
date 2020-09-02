@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -14,9 +15,9 @@ public class Ui {
     /**
      * Prints a welcome message.
      */
-    public void showWelcome() {
-        System.out.println("Hello! I'm Duke\n"
-                + "What can I do for you?");
+    public static String showWelcome() {
+        return "Hello! I'm Duke\n"
+                + "What can I do for you?";
     }
 
     /**
@@ -32,13 +33,17 @@ public class Ui {
      * Prints a message to indicate that a task has been marked as completed.
      * @param task task which has been marked as completed.
      */
-    public void showDoneMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n"
-                + task);
+    public String showDoneMessage(Task task) {
+        return "Nice! I've marked this task as done:\n"
+                + task;
     }
     
-    public void showFindMessage() {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showFindMessage(ArrayList<Task> tasks) {
+        String findMessage = "Here are the matching tasks in your list:\n";
+        for (int i = 1; i <= tasks.size(); i++) {
+            findMessage = findMessage + i + "." + tasks.get(i - 1) + "\n";
+        }
+        return findMessage;
     }
 
     /**
@@ -46,10 +51,10 @@ public class Ui {
      * @param task task which has been deleted.
      * @param totalTasks total number of tasks left after deletion.
      */
-    public void showDeletedMessage(Task task, int totalTasks) {
-        System.out.println("Noted. I've removed this task:\n"
+    public String showDeletedMessage(Task task, int totalTasks) {
+        return "Noted. I've removed this task:\n"
                 + task
-                + "\nNow you have " + totalTasks + " tasks in the list.");
+                + "\nNow you have " + totalTasks + " tasks in the list.";
     }
 
     /**
@@ -57,46 +62,44 @@ public class Ui {
      * @param task task which has been added.
      * @param totalTasks total number of tasks left after addition.
      */
-    public void showAddedMessage(Task task, int totalTasks) {
-        System.out.println("Got it. I've added this task:\n"
+    public String showAddedMessage(Task task, int totalTasks) {
+        return "Got it. I've added this task:\n"
                 + task
-                + "\nNow you have " + totalTasks + " tasks in the list.");
+                + "\nNow you have " + totalTasks + " tasks in the list.";
     }
 
     /**
      * Prints a message to indicate the list of all tasks.
      */
-    public void showListMessage() {
-        System.out.println("Here are the tasks in your list:");
+    public String showListMessage(ArrayList<Task> tasks) {
+        String listMessage = "Here are the tasks in your list:\n";
+        for (int i = 1; i <= tasks.size(); i++) {
+            listMessage = listMessage + i + "." + tasks.get(i - 1) + "\n";
+        }
+        return listMessage;
     }
 
     /**
-     * Prints a message to say goodbye to the user.
+     * Prints a message to say goodbye to the user with an uplifting quote.
      */
-    public void showGoodbyeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showGoodbyeMessage() {
+        return "Bye. Hope to see you again soon!\n"
+                + "Those who are crazy enough to think that they can "
+                + "change the world are the ones who usually do. Dream big!";
     }
 
     /**
      * Prints a message to show the error encountered.
      * @param errorMessage error message to be printed.
      */
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
      * Prints a message to indicate an error in loading the file containing saved tasks.
      */
-    public void showLoadingError() {
-        System.out.println("File loading error!");
-    }
-
-    /**
-     * Prints a message containing an uplifting quote.
-     */
-    public void showUpliftingQuote() {
-        System.out.println("Those who are crazy enough to think that they can " +
-                "change the world are the ones who usually do. Dream big!");
+    public String showLoadingError() {
+        return "File loading error!";
     }
 }

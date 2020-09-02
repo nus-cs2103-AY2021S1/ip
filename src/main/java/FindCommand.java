@@ -6,8 +6,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showFindMessage();
-        tasks.listFilteredTasks(this.filter);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showFindMessage(tasks.listFilteredTasks(this.filter));
     }
 }

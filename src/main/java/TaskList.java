@@ -69,20 +69,14 @@ public class TaskList {
         return this.tasks;
     }
 
-    /**
-     * Lists all tasks.
-     */
-    public void listTasks() {
-        for (int i = 1; i <= totalTasks; i++) {
-            System.out.println(i + "." + tasks.get(i - 1));
-        }
-    }
-
-    public void listFilteredTasks(String filter) {
-        for (int i = 1; i <= totalTasks; i++) {
+    public ArrayList<Task> listFilteredTasks(String filter) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (int i = 0; i < totalTasks; i++) {
             if (tasks.get(i - 1).description.contains(filter)) {
-                System.out.println(i + "." + tasks.get(i - 1));
+                filteredTasks.add(tasks.get(i));
+                //System.out.println(i + "." + tasks.get(i - 1));
             }
         }
+        return filteredTasks;
     }
 }
