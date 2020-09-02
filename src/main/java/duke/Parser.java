@@ -14,12 +14,13 @@ public class Parser {
      * @param input The input String typed in by the user.
      * @return False if the command to terminate the programme is encountered, true otherwise.
      */
-    public boolean parse(String input) {
+    public String parse(String input) {
         try {
             if (input.equals("bye")) {
-                return false;
+                Storage.saveTasksTo("data/duke.txt", taskList);
+                return ui.showGoodbyeScreen();
             } else if (input.equals("list")) {
-                ui.printAllTasks(taskList);
+                return ui.printAllTasks(taskList);
             } else if (input.indexOf("done") == 0) {
                 if (input.length() == 4) {
                     throw new DukeException("OOPS!!! Please specify a task to mark as complete.");
@@ -28,7 +29,7 @@ public class Parser {
                     Task completedTask = taskList.getTask(taskIndex);
                     completedTask.markAsDone();
 
-                    ui.printMarkTaskCompleteConfirmation(completedTask);
+                    return ui.printMarkTaskCompleteConfirmation(completedTask);
                 }
             } else if (input.indexOf("delete") == 0) {
                 if (input.length() == 6) {
@@ -40,7 +41,7 @@ public class Parser {
                         Task removedTask = taskList.getTask(taskIndex);
                         taskList.deleteTask(taskIndex);
 
-                        ui.printRemoveTaskConfirmation(removedTask, taskList);
+                        return ui.printRemoveTaskConfirmation(removedTask, taskList);
                         
                     } catch (NumberFormatException e) {
                         throw new DukeException(" OOPS!!! Please specify a valid task to delete.");
@@ -50,7 +51,7 @@ public class Parser {
                 if (input.length() == 4) {
                     throw new DukeException(" OOPS!!! Please specify a keyword to search for.");
                 } else {
-                    ui.printMessage(taskList.find(input.substring(5)));
+                    return taskList.find(input.substring(5));
                 }
             } else {
                 // use indexOf() method to find substring
@@ -99,14 +100,13 @@ public class Parser {
                     throw new DukeException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
 
-                ui.printAddTaskConfirmation(newTask, taskList);
+                return ui.printAddTaskConfirmation(newTask, taskList);
                 
             }
         } catch (DukeException e) {
-            ui.printExceptionMessage(e);
+            return e.getMessage();
         }
         
-        return true;
         
     }
 }

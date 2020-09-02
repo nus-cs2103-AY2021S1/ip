@@ -18,22 +18,23 @@ public class Ui {
      * Renders the welcome message onto the console.
      * To be called on programme startup.
      */
-    public void showWelcomeScreen() {
+    public String showWelcomeScreen() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        out.println("Hello, my name is\n" + logo);
-        out.println("What can I do for you?");
+                + "|____/ \\__,_|_|\\_\\___|\n"
+                + "Hello, my name is\n" 
+                + "What can I do for you?";
+        return logo;
     }
 
     /**
      * Renders the goodbye message onto the console.
      * To be called on programme exit.
      */
-    public void showGoodbyeScreen() {
-        out.println("See you space cowboy!");
+    public String showGoodbyeScreen() {
+        return "See you space cowboy!";
     }
 
     /**
@@ -50,10 +51,10 @@ public class Ui {
      * @param task The Task that has been added to the task list.
      * @param taskList The TaskList which the task has been added to.
      */
-    public void printAddTaskConfirmation(Task task, TaskList taskList) {
-        out.println("Got it. I've added this task: ");
-        out.println(task);
-        out.println("Now you have " + taskList.numTasks() + " tasks in the list.");
+    public String printAddTaskConfirmation(Task task, TaskList taskList) {
+        return "Got it. I've added this task: \n" 
+                + task 
+                + "\nNow you have " + taskList.numTasks() + " tasks in the list.";
     }
 
     /**
@@ -62,10 +63,10 @@ public class Ui {
      * @param task The Task that has been removed from the task list.
      * @param taskList The TaskList which the task has been removed from.
      */
-    public void printRemoveTaskConfirmation(Task task, TaskList taskList) {
-        out.println("Noted. I've removed this task: ");
-        out.println(task);
-        out.println("Now you have " + taskList.numTasks() + " tasks in the list.");
+    public String printRemoveTaskConfirmation(Task task, TaskList taskList) {
+        return "Noted. I've removed this task: \n"
+                + task 
+                + "\nNow you have " + taskList.numTasks() + " tasks in the list.";
     }
 
     /**
@@ -73,17 +74,17 @@ public class Ui {
      * task has been successfully marked as complete.
      * @param task The Task that has been marked as complete.
      */
-    public void printMarkTaskCompleteConfirmation(Task task) {
-        out.println("Nice! I've marked this task as done: ");
-        out.println(task);
+    public String printMarkTaskCompleteConfirmation(Task task) {
+        return "Nice! I've marked this task as done: \n" 
+                + task;
     }
 
     /**
      * Renders the all tasks from the TaskList onto the console.
      * @param taskList The TaskList which contains all the tasks to be displayed on the console.
      */
-    public void printAllTasks(TaskList taskList) {
-        out.println(taskList.getAllTasksAsString());
+    public String printAllTasks(TaskList taskList) {
+        return taskList.getAllTasksAsString();
     }
     
     public void printMessage(String message) {
