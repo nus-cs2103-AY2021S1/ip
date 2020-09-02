@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.io.IOException;
+import java.time.DateTimeException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -8,9 +11,6 @@ import duke.exception.DeadlineWrongFormatException;
 import duke.exception.WrongFormatException;
 import duke.task.Deadline;
 import duke.task.Task;
-
-import java.io.IOException;
-import java.time.DateTimeException;
 
 /**
  * Encapsulates an add command for deadline tasks. This command adds a deadline task to the task list. The format for

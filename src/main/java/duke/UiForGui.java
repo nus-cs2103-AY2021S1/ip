@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Handles all interactions with the user.
@@ -16,8 +16,7 @@ public class UiForGui {
      * Greets the user upon program start up.
      */
     public static String showWelcome() {
-        return "Hello, I'm Star Bot! What can I do for " +
-                "you?\nSay \"bye\" to exit.\n";
+        return "Hello, I'm Star Bot! What can I do for you?\nSay \"bye\" to exit.\n";
     }
 
     /**
@@ -43,8 +42,8 @@ public class UiForGui {
      * @param tasks The list of tasks that the task is being added to.
      */
     public String showReplyForAddTask(Task newTask, TaskList tasks) {
-        return "Got it. I've added this task:\n" + newTask + "\nNow " +
-                "you have " + tasks.getNumberOfTasks() + " tasks in the list.";
+        return "Got it. I've added this task:\n" + newTask + "\nNow you have " + tasks.getNumberOfTasks()
+                + " tasks in the list.";
     }
 
     /**
@@ -63,8 +62,8 @@ public class UiForGui {
      * @param tasks The list of tasks that the task is being removed from.
      */
     public String showReplyForDeleteTask(Task removedTask, TaskList tasks) {
-        return "Noted. I've removed this task:\n" + removedTask +
-                "\nNow you have " + tasks.getNumberOfTasks() + " tasks in the list.";
+        return "Noted. I've removed this task:\n" + removedTask + "\nNow you have " + tasks.getNumberOfTasks()
+                + " tasks in the list.";
     }
 
     /**

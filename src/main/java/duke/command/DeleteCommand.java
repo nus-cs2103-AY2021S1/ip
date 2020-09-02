@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -7,8 +9,6 @@ import duke.UiForGui;
 import duke.exception.DeleteWrongFormatException;
 import duke.exception.TaskIndexOutOfBoundsException;
 import duke.task.Task;
-
-import java.io.IOException;
 
 /**
  * Encapsulates a delete command for the Duke program. This is the command that removes tasks from the task list. The

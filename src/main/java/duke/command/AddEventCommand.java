@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -8,8 +10,6 @@ import duke.exception.EventWrongFormatException;
 import duke.exception.WrongFormatException;
 import duke.task.Event;
 import duke.task.Task;
-
-import java.io.IOException;
 
 /**
  * Encapsulates an add command for event tasks. This command adds an event task to the task list. The format for this

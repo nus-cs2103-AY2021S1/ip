@@ -1,12 +1,13 @@
 package duke.task;
 
-import duke.exception.WrongFormatException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.DateTimeException;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.WrongFormatException;
 
 public class DeadlineTest {
 
