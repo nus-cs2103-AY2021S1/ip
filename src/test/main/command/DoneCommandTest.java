@@ -19,7 +19,7 @@ import main.task.TaskList;
 import main.task.Todo;
 import main.ui.Ui;
 
-public class DeleteCommandTest {
+public class DoneCommandTest {
     private static final Ui UI = new Ui();
     private static TaskList tasks;
     private static final Todo TASK_ONE = new Todo("task 1", true);
@@ -40,31 +40,33 @@ public class DeleteCommandTest {
     @DisplayName("execute")
     class Execute {
         @Test
-        @DisplayName("should remove task from list and return remove success string")
-        public void execute_taskList_removeSuccess() throws InvalidTaskException {
-            DeleteCommand command = new DeleteCommand(2);
+        @DisplayName("should mark task in list as done and return done success string")
+        public void execute_taskList_doneSuccess() throws InvalidTaskException {
+            DoneCommand command = new DoneCommand(2);
             Task task = tasks.get(1);
+            String doneSuccess = command.execute(UI, tasks);
 
             assertEquals(3, tasks.size());
-            assertEquals(UI.printRemoveSuccess(task, 2), command.execute(UI, tasks));
-            assertEquals(2, tasks.size());
+            assertEquals(UI.printDoneSuccess(task), doneSuccess);
+            assertEquals(3, tasks.size());
         }
 
         @Test
-        @DisplayName("should remove alternate task from list and return remove success string")
-        public void execute_altTaskList_removeSuccess() throws InvalidTaskException {
-            DeleteCommand command = new DeleteCommand(1);
+        @DisplayName("should mark alternate task in list as done and return done success string")
+        public void execute_altTaskList_doneSuccess() throws InvalidTaskException {
+            DoneCommand command = new DoneCommand(1);
             Task task = tasks.get(0);
+            String doneSuccess = command.execute(UI, tasks);
 
             assertEquals(3, tasks.size());
-            assertEquals(UI.printRemoveSuccess(task, 2), command.execute(UI, tasks));
-            assertEquals(2, tasks.size());
+            assertEquals(UI.printDoneSuccess(task), doneSuccess);
+            assertEquals(3, tasks.size());
         }
 
         @Test
         @DisplayName("should throw InvalidTaskException if task number out of index")
         public void execute_taskList_throwException() {
-            DeleteCommand command = new DeleteCommand(4);
+            DoneCommand command = new DoneCommand(0);
 
             InvalidTaskException exception = assertThrows(
                     InvalidTaskException.class, () -> command.execute(UI, tasks));
@@ -79,7 +81,7 @@ public class DeleteCommandTest {
         @Test
         @DisplayName("should return true")
         public void hasCommandAfter_noInput_true() {
-            assertTrue(new DeleteCommand(2).hasCommandAfter());
+            assertTrue(new DoneCommand(2).hasCommandAfter());
         }
     }
 }
