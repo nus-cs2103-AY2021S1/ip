@@ -70,7 +70,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String print() {
+    public String toDataString() {
         return "D | "
                 + (isDone ? 1 : 0) + " | "
                 + this.description + " | "

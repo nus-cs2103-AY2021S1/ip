@@ -35,7 +35,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String print() {
+    public String toDataString() {
         return "T | "
                 + (isDone ? 1 : 0) + " | "
                 + this.description;

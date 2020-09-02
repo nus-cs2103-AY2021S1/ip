@@ -45,11 +45,11 @@ public class Storage {
      *
      * @param taskList List of tasks to be written and saved to a file.
      */
-    void write(TaskList taskList) {
+    void writeToFile(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(file.getPath());
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
-            bufferedWriter.write(taskList.write());
+            bufferedWriter.write(taskList.toSaveFormat());
             bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();

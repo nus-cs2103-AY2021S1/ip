@@ -26,7 +26,7 @@ public abstract class Task {
      *
      * @return String representation of the Task.
      */
-    public abstract String print();
+    public abstract String toDataString();
 
     /**
      * Checks if the task description contains a given keyword.

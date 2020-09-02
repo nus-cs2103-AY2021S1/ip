@@ -71,7 +71,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String print() {
+    public String toDataString() {
         return "E | "
                 + (isDone ? 1 : 0) + " | "
                 + this.description + " | "

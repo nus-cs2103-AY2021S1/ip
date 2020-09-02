@@ -82,10 +82,11 @@ public class TaskList {
      *
      * @return String representation of a saved TaskList.
      */
-    String write() {
+    String toSaveFormat() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Task task : tasks) {
-            stringBuilder.append(task.print()).append(System.lineSeparator());
+            stringBuilder.append(task.toDataString())
+                    .append(System.lineSeparator());
         }
         if (stringBuilder.length() != 0) {
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);

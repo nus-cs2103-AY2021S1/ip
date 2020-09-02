@@ -24,7 +24,7 @@ public class DeadlineTest {
         try {
             Deadline test = Deadline.create("deadline test /by 9-12-10");
             test.setDone();
-            assertEquals("D | 1 | test | 2010-12-09", test.print());
+            assertEquals("D | 1 | test | 2010-12-09", test.toDataString());
         } catch (Exception e) {
             e.printStackTrace();
             fail();

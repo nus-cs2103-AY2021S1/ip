@@ -22,7 +22,7 @@ public class Duke {
 
     public String getResponse(String input) {
         if (input.equals("bye")) {
-            storage.write(taskList);
+            storage.writeToFile(taskList);
             return "All changes saved!";
         }
         return parser.parse(input);
