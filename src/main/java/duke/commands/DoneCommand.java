@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public CommandResult execute(TaskList taskList, Ui ui, Storage storage) {
         Task targetTask = taskList.get(indexOfTaskToBeDone - 1);
         String message = targetTask.completeTask();
         try {
@@ -25,6 +25,7 @@ public class DoneCommand extends Command {
             e.printStackTrace();
         }
         ui.printDone(message);
+        return new CommandResult(message);
     }
 
     @Override

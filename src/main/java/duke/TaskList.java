@@ -38,6 +38,10 @@ public class TaskList {
         return this.todoList.size();
     }
 
+    public ArrayList<Task> getList() {
+        return this.todoList;
+    }
+
     public void addTodo(String isCompleted, String task) {
         Todo newTodo = new Todo(isCompleted, task);
         this.todoList.add(newTodo);
@@ -62,5 +66,16 @@ public class TaskList {
             }
         }
         this.ui.printMatchingTasks(tempArrayList);
+    }
+
+    public ArrayList<Task> findForGui(String keyword) {
+        ArrayList<Task> tempArrayList = new ArrayList<>();
+        for (Task task : this.todoList) {
+            String taskDetails = task.toString();
+            if (taskDetails.contains(keyword)) {
+                tempArrayList.add(task);
+            }
+        }
+        return tempArrayList;
     }
 }

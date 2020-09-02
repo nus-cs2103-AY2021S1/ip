@@ -3,6 +3,9 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
+
+import java.util.ArrayList;
 
 public class ListCommand extends Command {
     private final boolean HAS_FINISHED = false;
@@ -11,8 +14,13 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public CommandResult execute(TaskList taskList, Ui ui, Storage storage) {
+        // for CLI
         taskList.list();
+        // for GUI
+        ArrayList<Task> todoList = taskList.getList();
+        String messageAfterExecution = taskListToString(todoList);
+        return new CommandResult(messageAfterExecution);
     }
 
     @Override

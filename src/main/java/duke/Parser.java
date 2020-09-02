@@ -63,7 +63,7 @@ public class Parser {
         }
     }
 
-    public static ListCommand parseList() {
+    private static ListCommand parseList() {
         return new ListCommand();
     }
 

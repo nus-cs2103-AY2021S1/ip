@@ -14,12 +14,14 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public CommandResult execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addEvent("0", eventTaskDetails[0], eventTaskDetails[1]);
         storage.writeToFile("E", "0", eventTaskDetails[0], eventTaskDetails[1]);
         int size = taskList.getSize();
         Task targetTask = taskList.get(size - 1);
         ui.printTaskAdded(targetTask.toString(), size);
+        String messageAfterExecution = addTaskToString(targetTask, size);
+        return new CommandResult(messageAfterExecution);
     }
 
     @Override

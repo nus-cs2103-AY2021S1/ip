@@ -14,11 +14,11 @@ public class TaskManager {
     private TaskList taskList;
     private Storage storage;
 
-    public TaskManager() {
-        this.ui = new Ui();
-        this.parser = new Parser();
-        this.taskList = new TaskList();
-        this.storage = new Storage();
+    public TaskManager(TaskList taskList, Ui ui, Storage storage, Parser parser) {
+        this.ui = ui;
+        this.parser = parser;
+        this.taskList = taskList;
+        this.storage = storage;
     }
 
     public void manage() {

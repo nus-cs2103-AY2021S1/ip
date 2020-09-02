@@ -11,8 +11,9 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public CommandResult execute(TaskList taskList, Ui ui, Storage storage) {
         ui.printBye();
+        return new CommandResult("Bye. Hope to see you again soon!");
     }
 
     @Override

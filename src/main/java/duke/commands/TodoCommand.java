@@ -14,12 +14,14 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public CommandResult execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTodo("0", todoTaskDetails);
         storage.writeToFile("T", "0", todoTaskDetails, "");
         int size = taskList.getSize();
         Task targetTask = taskList.get(size - 1);
         ui.printTaskAdded(targetTask.toString(), size);
+        String messageAfterExecution = addTaskToString(targetTask, size);
+        return new CommandResult(messageAfterExecution);
     }
 
     @Override
