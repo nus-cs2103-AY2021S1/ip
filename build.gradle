@@ -1,3 +1,4 @@
+
 plugins {
     id 'java'
     id 'application'
@@ -12,7 +13,7 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
-    
+
     String javaFxVersion = '11'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
@@ -44,7 +45,7 @@ test {
 }
 
 application {
-    mainClassName = "Main"
+    mainClassName = "seedu.duke.Duke"
 }
 
 shadowJar {
@@ -53,7 +54,7 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '8.29'
 }
 
 run{

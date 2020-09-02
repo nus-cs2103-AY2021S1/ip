@@ -1,7 +1,12 @@
 package duke;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.response.Response;
 import duke.scanner.CommandScanner;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -15,15 +20,51 @@ public class Duke {
     private TaskList taskList;
 
     public Duke() {
+        this.taskList = new TaskList();
     }
 
     /**
      * Duke's constructor
+     *
      * @param fileString name of the file
      */
     public Duke(String fileString) {
         this.fileString = fileString;
         this.taskList = new TaskList();
+    }
+
+    private ByteArrayOutputStream setupOutStream() {
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        return outContent;
+    }
+
+    private void restoreOutStream() {
+        System.setOut(System.out);
+    }
+
+    /**
+     * Runs a command string and returns the response
+     *
+     * @param commandString Raw command from user
+     * @return String containing the response from Duke
+     */
+    public Response runCommand(String commandString) {
+        ByteArrayOutputStream outContent = setupOutStream();
+        Response response = new Response();
+        try {
+            Command cmd = Parser.parseCommandString(commandString);
+            cmd.execute(this.taskList);
+            if (cmd.isExit()) {
+                response.setExit(true);
+            }
+        } catch (DukeException e) {
+            Ui.showError(e.getMessage());
+        }
+        response.setText(outContent.toString());
+        restoreOutStream();
+        return response;
     }
 
     /**
