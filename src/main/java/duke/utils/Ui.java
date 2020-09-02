@@ -93,6 +93,7 @@ public class Ui {
     }
 
 
+    // todo clean up commented codes
     private void displayString(String s) {
         //        System.out.println("    " + s);
         Main.getWindow().showsToDialog(s);
