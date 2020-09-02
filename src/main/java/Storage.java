@@ -56,7 +56,7 @@ public class Storage {
             switch (line.charAt(0)) {
                 case 'T':
                     task = new Todo(line.substring(4));
-                    if(line.charAt(2) == '1') {
+                    if (line.charAt(2) == '1') {
                         task.markAsDone();
                     }
                     tasks.addTask(task);
@@ -68,7 +68,7 @@ public class Storage {
                     time = LocalDate.parse(date);
                     description = line.substring(4, location);
                     task = new Deadline(description, time);
-                    if(line.charAt(2) == '1') {
+                    if (line.charAt(2) == '1') {
                         task.markAsDone();
                     }
                     tasks.addTask(task);
@@ -80,7 +80,7 @@ public class Storage {
                     time = LocalDate.parse(date);
                     description = line.substring(4, location);
                     task = new Event(description, time);
-                    if(line.charAt(2) == '1') {
+                    if (line.charAt(2) == '1') {
                         task.markAsDone();
                     }
                     tasks.addTask(task);
