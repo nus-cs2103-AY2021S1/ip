@@ -1,8 +1,5 @@
 package duke;
 
-import duke.TaskList;
-import duke.Task;
-
 /** Utility methods for generating stylised CLI outputs */
 public class Ui {
     private static final String LINE_DIVIDER = "\t_______________________________________________________\n";
