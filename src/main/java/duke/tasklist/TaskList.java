@@ -1,7 +1,7 @@
-package tasklist;
+package duke.tasklist;
 
-import exceptions.*;
-import storage.Storage;
+import duke.exceptions.*;
+import duke.storage.Storage;
 
 import java.io.IOException;
 import java.time.LocalDate;

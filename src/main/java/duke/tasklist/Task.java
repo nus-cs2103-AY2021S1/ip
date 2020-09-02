@@ -1,4 +1,4 @@
-package tasklist;
+package duke.tasklist;
 
 /**
  * Task class is the super class of all Task types.

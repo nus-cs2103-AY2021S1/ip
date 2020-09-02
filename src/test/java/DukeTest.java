@@ -1,5 +1,5 @@
-import tasklist.Deadline;
-import tasklist.Todo;
+import duke.tasklist.Deadline;
+import duke.tasklist.Todo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

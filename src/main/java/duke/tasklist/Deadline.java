@@ -1,4 +1,4 @@
-package tasklist;
+package duke.tasklist;
 
 /**
  * Deadline class is a subclass of Task.

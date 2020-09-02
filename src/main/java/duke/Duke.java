@@ -1,23 +1,22 @@
 package duke;
 
-import javafx.scene.layout.VBox;
-import parser.Parser;
-import storage.Storage;
-import tasklist.TaskList;
-import ui.Ui;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+import duke.parser.Parser;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 
 import java.io.IOException;
 
@@ -64,18 +63,14 @@ public class Duke extends Application {
      * Main driver of Duke bot.
      */
     public void run(String fullCommand) throws IOException {
-//        while (true) {
-//            String fullCommand = ui.readCommand();
-            input = fullCommand;
-            String first = parser.parse(fullCommand);
-            if (first.equals("bye")) {
-                output = "Bye. Hope to see you again soon!";
-                storage.appendToFile(output);
-//                break;
-            } else {
-                output = tasks.operate(storage, fullCommand, first);
-            }
-//        }
+        input = fullCommand;
+        String first = parser.parse(fullCommand);
+        if (first.equals("bye")) {
+            output = "Bye. Hope to see you again soon!";
+            storage.appendToFile(output);
+        } else {
+            output = tasks.operate(storage, fullCommand, first);
+        }
     }
 
     @Override
@@ -179,7 +174,11 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() throws IOException {
-        run(userInput.getText());
+        String command = userInput.getText();
+        System.out.println(command);
+        assert !command.equals("") : "command should not be empty";
+
+        run(command);
         String userText = this.input;
         String dukeText = getResponse(this.output);
         dialogContainer.getChildren().addAll(
