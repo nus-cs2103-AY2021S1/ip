@@ -1,11 +1,14 @@
 package rogue.ui;
 
+import rogue.Rogue;
 import rogue.logic.Report;
 
-import java.io.BufferedReader;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 /**
  * The interface of {@code Rogue} with which the user interacts.
@@ -13,41 +16,17 @@ import java.io.InputStreamReader;
  * errors, and other textual information onto the console.
  */
 public class Ui {
-    private final BufferedReader textParser; // Reads user inputs
-
-    /**
-     * Constructs the {@code Ui}.
-     */
-    public Ui() {
-        textParser = new BufferedReader(new InputStreamReader(System.in));
-    }
-
-    /**
-     * Constructs the {@code Ui}.
-     *
-     * @param in The source from which the Ui should read user input.
-     */
-    public Ui(InputStream in) {
-        textParser = new BufferedReader(new InputStreamReader(in));
-    }
-
-    /**
-     * Reads a line of input from the specified source.
-     * A line is terminated by any of the '\n', \r', '\r\n', or EOF characters.
-     * Terminates program if an I/O error occurs.
-     */
-    public String readCommand() {
-        String text = "";
-
+    public static void init(Stage stage, Rogue rogue) {
         try {
-            text = textParser.readLine();
+            FXMLLoader fxmlLoader = new FXMLLoader(rogue.Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setRogue(rogue);
+            stage.show();
         } catch (IOException e) {
-            System.err.println("ERROR: Unable to parse input stream!\n");
             e.printStackTrace();
-            System.exit(1);
         }
-
-        return text;
     }
 
     /**

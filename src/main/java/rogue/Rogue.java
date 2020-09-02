@@ -47,6 +47,7 @@ public class Rogue {
      * Continues to prompt the user for more inputs, parsing and executing them appropriately,
      * until the user initiates the exit sequence (i.e. {@code Action.EXIT}).
      */
+    /*
     public void start() {
         ui.greet();
         boolean isExit = false;
@@ -62,8 +63,21 @@ public class Rogue {
             }
         } while (!isExit);
     }
+    */
 
-    public static void main(String[] args) {
-        new Rogue("./data/tasks.txt").start();
+    /**
+     * Parses and executes user inputs to
+     *
+     * @param input
+     * @return
+     */
+    public String getResponse(String input) {
+        try {
+            Executable e = Parser.createExe(input);
+            Report r = e.execute(storage, tasks, ui);
+            return r.toString();
+        } catch (UnknownCommandException | IncorrectArgumentException | StorageException e) {
+            return e.getMessage();
+        }
     }
 }
