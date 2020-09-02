@@ -72,10 +72,6 @@ public class Duke {
         return ui;
     }
 
-    public CommandParser getCommandParser() {
-        return commandParser;
-    }
-
     public DukeTaskList getTaskList() {
         return taskList;
     }
