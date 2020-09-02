@@ -13,11 +13,11 @@ public class ListCommand extends Command {
     /**
      * Executes the command.
      *
-     * @param tasks list of tasks
-     * @param ui object to output messages
-     * @param storage object to write TaskList to file
+     * @param tasks list of tasks.
+     * @param ui object to output messages.
+     * @param storage object to write TaskList to file.
      */
     public void execute (TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Ui.displayTasks(tasks.getList());
+        Ui.displayTasks(tasks);
     }
 }

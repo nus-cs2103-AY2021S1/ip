@@ -8,9 +8,9 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Creates a new Task object
+     * Creates a new Task object.
      *
-     * @param description details about the Task
+     * @param description details about the Task.
      */
     public Task(String description) {
         this.description = description;
@@ -18,10 +18,10 @@ public abstract class Task {
     }
 
     /**
-     * Creates a new Task object and set its isDone boolean
+     * Creates a new Task object and set its isDone boolean.
      *
-     * @param description details about the Task
-     * @param isDone whether Task is done or not
+     * @param description details about the Task.
+     * @param isDone whether Task is done or not.
      * @return Task with a corresponding description and completed status.
      */
     public Task(String description, boolean isDone) {
@@ -42,7 +42,7 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public abstract boolean haveKeyword(String keyword);
+    public abstract boolean hasKeyword(String keyword);
 
     /**
      * Returns task description and its status icon.

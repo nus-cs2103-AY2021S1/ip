@@ -16,7 +16,7 @@ public class TaskList {
 
     /**
      * Adds a task to the task list.
-     * @param task The task to be added
+     * @param task The task to be added.
      */
     public void addTask(Task task) {
         tasks.add(task);
@@ -31,7 +31,7 @@ public class TaskList {
     }
 
     /**
-     * Marks a task in the task list as done
+     * Marks a task in the task list as done.
      * @param taskindex The index of the task in the task list that is to be marked as done.
      */
     public void markAsDone(int taskindex) {
@@ -55,7 +55,7 @@ public class TaskList {
     }
 
     /**
-     * Returns number of tasks in the task list
+     * Returns number of tasks in the task list.
      * @return number of tasks.
      */
     public int getSize() {
@@ -63,15 +63,22 @@ public class TaskList {
     }
 
     /**
+     * Returns if task list is empty or not.
+     * @return boolean if task list is empty or not.
+     */
+    public boolean isEmpty() {
+        return tasks.isEmpty();
+    }
+
+    /**
      * Filters for tasks that contain the keyword.
-     *
      * @return tasks that contains the keyword in an array list.
      */
     public ArrayList<Task> findTask(String keyword) throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
         if (!keyword.isEmpty()) {
             for (Task task : tasks) {
-                if (task.haveKeyword(keyword)) {
+                if (task.hasKeyword(keyword)) {
                     result.add(task);
                 }
             }

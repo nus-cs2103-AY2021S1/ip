@@ -19,8 +19,8 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param command full user input string
-     * @return the command based on the user input
+     * @param command full user input string.
+     * @return the command based on the user input.
      */
     public static Command parse(String command) throws DukeException {
         String[] parts = command.split(" ", 2);

@@ -1,9 +1,8 @@
 package duke.common;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Text UI of the application.
@@ -17,7 +16,7 @@ public class Ui {
 
     /**
      * Generates and prints a custom string.
-     * @param s text to be displayed to the user
+     * @param s text to be displayed to the user.
      */
     public static void display(String s) {
         displayLine();
@@ -34,26 +33,38 @@ public class Ui {
 
     /**
      * Generates and prints the current task list of the user.
-     * @param tasks list of tasks the user has inputted thus far
+     * @param tasks list of tasks the user has inputted thus far.
      */
-    public static void displayTasks(ArrayList<Task> tasks) {
+    public static void displayTasks(TaskList tasks) {
         displayLine();
         System.out.println("Here is your current list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("    " + (i + 1) + ". " + tasks.get(i));
+        for (int i = 0; i < tasks.getSize(); i++) {
+            System.out.println("    " + (i + 1) + ". " + tasks.getTask(i));
         }
         displayLine();
     }
 
     /**
-     * Generates and prints the matching task list of the user.
-     * @param tasks list of tasks that matches the users keyword
+     * Generates and prints the remaining task list of the user.
+     * @param tasks list of tasks the user has inputted thus far.
      */
-    public static void displayMatchingTasks(ArrayList<Task> tasks) {
+    public static void displayRemainingTasks(TaskList tasks) {
+        displayLine();
+        System.out.println("\nNow you have"
+                + tasks.getSize()
+                + " tasks in your list.");
+        displayLine();
+    }
+
+    /**
+     * Generates and prints the matching task list of the user.
+     * @param tasks list of tasks that matches the users keyword.
+     */
+    public static void displayMatchingTasks(TaskList tasks) {
         displayLine();
         System.out.println("Here are the matching tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("    " + (i + 1) + ". " + tasks.get(i));
+        for (int i = 0; i < tasks.getSize(); i++) {
+            System.out.println("    " + (i + 1) + ". " + tasks.getTask(i));
         }
         displayLine();
     }
@@ -74,7 +85,7 @@ public class Ui {
 
     /**
      * Uses scanner to read the next line that the user input.
-     * @return next command
+     * @return next command.
      */
     public String readCommand() {
         return sc.nextLine();

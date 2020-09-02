@@ -1,21 +1,19 @@
 package duke.task;
 
 /**
- * Todo task that inherits from Task class
+ * Todo task that inherits from Task class.
  */
 public class ToDo extends Task {
-    protected String by;
 
     public ToDo(String description) {
         super(description);
     }
 
-
     /**
-     * Creates a new Task object and set its isDone boolean
+     * Creates a new Task object and set its isDone boolean.
      *
-     * @param description details about the Task
-     * @param isDone whether Task is done or not
+     * @param description details about the Task.
+     * @param isDone whether Task is done or not.
      * @return Task with a corresponding description and completed status.
      */
     public ToDo(String description, boolean isDone) {
@@ -25,18 +23,18 @@ public class ToDo extends Task {
     }
 
     /**
-     * Checks if task contains the keyword
+     * Checks if task contains the keyword.
      *
-     * @return whether the task contains that keyword
+     * @return whether the task contains that keyword.
      */
-    public boolean haveKeyword(String keyword) {
+    public boolean hasKeyword(String keyword) {
         return description.contains(keyword);
     }
 
     /**
-     * Overrides toString method of Task class
+     * Overrides toString method of Task class.
      *
-     * @return Custom description of the todo task
+     * @return Custom description of the todo task.
      */
     @Override
     public String toString() {

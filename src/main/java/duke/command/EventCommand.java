@@ -17,10 +17,10 @@ public class EventCommand extends Command {
     private static String at;
 
     /**
-     * Constructor for a new EventCommand object
+     * Constructor for a new EventCommand object.
      *
-     * @param description details about the Deadline
-     * @param at          date the event is held at in yyyy-mm-dd format
+     * @param description details about the Deadline.
+     * @param at date the event is held at in yyyy-mm-dd format.
      */
     public EventCommand(String description, String at) {
         EventCommand.description = description;
@@ -30,18 +30,20 @@ public class EventCommand extends Command {
     /**
      * Executes the command.
      *
-     * @param tasks   list of tasks
-     * @param ui      object to output messages
-     * @param storage object to write TaskList to file
+     * @param tasks list of tasks.
+     * @param ui object to output messages.
+     * @param storage object to write TaskList to file.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        Task temp = new Event(description, at);
-        tasks.addTask(temp);
-        Storage.appendToFile(temp);
-        Ui.display("Yay! New task added:\n   "
-                + temp
-                + "\nNow you have "
-                + tasks.getSize()
-                + " tasks in your list.");
+        try {
+            Task temp = new Event(description, at);
+            tasks.addTask(temp);
+            Storage.appendToFile(temp);
+            Ui.display("Yay! New task added:\n   "
+                    + temp);
+            Ui.displayRemainingTasks(tasks);
+        } catch (Exception e) {
+            throw new DukeException("Please input a suitable date of <yyyy-mm-dd> format!");
+        }
     }
 }

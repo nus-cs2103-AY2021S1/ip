@@ -8,13 +8,13 @@ import java.time.format.DateTimeFormatter;
  * Deadline task that inherits from Task class, and has an additional condition, which is when it is due by.
  */
 public class Deadline extends Task {
-    protected LocalDate by;
+    private LocalDate by;
 
     /**
-     * Constructor for a new Deadline object
+     * Constructor for a new Deadline object.
      *
-     * @param description details about the Deadline
-     * @param by          date the deadline is due by in yyyy-mm-dd format
+     * @param description details about the Deadline.
+     * @param by date the deadline is due by in yyyy-mm-dd format.
      */
     public Deadline(String description, String by) {
         super(description);
@@ -22,11 +22,11 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor for a new Deadline object
+     * Constructor for a new Deadline object.
      *
-     * @param description details about the Deadline
-     * @param isDone whether Deadline is done or not
-     * @param by time/date the Deadline is due by in yyyy-mm-dd format
+     * @param description details about the Deadline.
+     * @param isDone whether Deadline is done or not.
+     * @param by time/date the Deadline is due by in yyyy-mm-dd format.
      */
     public Deadline(String description, boolean isDone, String by) {
         super(description, isDone);
@@ -34,18 +34,18 @@ public class Deadline extends Task {
     }
 
     /**
-     * Checks if task contains the keyword
+     * Checks if task contains the keyword.
      *
-     * @return whether the task contains that keyword
+     * @return whether the task contains that keyword.
      */
-    public boolean haveKeyword(String keyword) {
+    public boolean hasKeyword(String keyword) {
         return description.contains(keyword) || by.format(DateTimeFormatter.ofPattern("d MMM yyyy")).contains(keyword);
     }
 
     /**
-     * Overrides toString method of Task class
+     * Overrides toString method of Task class.
      *
-     * @return Custom description of the deadline
+     * @return Custom description of the deadline.
      */
     @Override
     public String toString() {

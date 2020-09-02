@@ -36,7 +36,7 @@ public class Duke {
             ArrayList<Task> currenttasks = Storage.readFile();
             tasks = new TaskList(currenttasks);
             if (!currenttasks.isEmpty()) {
-                Ui.displayTasks(currenttasks);
+                Ui.displayTasks(tasks);
             } else {
                 Ui.display("No current list available. Start by adding a task!");
             }
@@ -45,7 +45,9 @@ public class Duke {
         }
     }
 
-    /** Runs the program until termination.  */
+    /**
+     * Runs the program until termination.
+     */
     public void run() {
         boolean isExit = false;
         while (!isExit) {

@@ -20,9 +20,9 @@ public class Storage {
     private static String filePath;
 
     /**
-     * Constructor for a new Storage object
+     * Constructor for a new Storage object.
      *
-     * @param filePath directory of the file which saves user inputs
+     * @param filePath directory of the file which saves user inputs.
      */
     public Storage(String filePath) {
         Storage.filePath = filePath;
@@ -36,9 +36,9 @@ public class Storage {
     }
 
     /**
-     * Writes task list to file
+     * Writes task list to file.
      *
-     * @param toDoList list of tasks that user has inputted that needs to be saved
+     * @param toDoList list of tasks that user has inputted that needs to be saved.
      */
     public static void writeToFile(ArrayList<Task> toDoList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
@@ -50,9 +50,9 @@ public class Storage {
     }
 
     /**
-     * Adds an additional task to file
+     * Adds an additional task to file.
      *
-     * @param task the task that needs to be added to the file to be saved
+     * @param task the task that needs to be added to the file to be saved.
      */
     public static void appendToFile(Task task) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
@@ -62,9 +62,9 @@ public class Storage {
     }
 
     /**
-     * Reads file and generates the task list that was saved
+     * Reads file and generates the task list that was saved.
      *
-     * @return the tasklist that was saved in the file
+     * @return the tasklist that was saved in the file.
      */
     public static ArrayList<Task> readFile() throws FileNotFoundException {
         File f = new File(filePath);
@@ -83,10 +83,10 @@ public class Storage {
     }
 
     /**
-     * Converts infoString format into a Task
+     * Converts infoString format into a Task.
      *
-     * @param s infoString of the task
-     * @return task represented by the infoString
+     * @param s infoString of the task.
+     * @return task represented by the infoString.
      */
     public static Task createTask(String s) {
         String[] parts = s.split("\\|");

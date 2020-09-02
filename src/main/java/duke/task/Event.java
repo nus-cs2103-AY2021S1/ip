@@ -8,13 +8,13 @@ import java.time.format.DateTimeFormatter;
  * Event task that inherits from Task class, and has an additional condition, which is when it is held at.
  */
 public class Event extends Task {
-    protected LocalDate at;
+    private LocalDate at;
 
     /**
-     * Creates a new Event object
+     * Creates a new Event object.
      *
-     * @param description details about the Event
-     * @param at time/date the event is held at
+     * @param description details about the Event.
+     * @param at time/date the event is held at.
      */
     public Event(String description, String at) {
         super(description);
@@ -22,11 +22,11 @@ public class Event extends Task {
     }
 
     /**
-     * Creates a new Event object
+     * Creates a new Event object.
      *
-     * @param description details about the Event
-     * @param isDone whether Event is done or not
-     * @param at time/date the event is held at
+     * @param description details about the Event.
+     * @param isDone whether Event is done or not.
+     * @param at time/date the event is held at.
      */
     public Event(String description, boolean isDone, String at) {
         super(description, isDone);
@@ -34,18 +34,18 @@ public class Event extends Task {
     }
 
     /**
-     * Checks if task contains the keyword
+     * Checks if task contains the keyword.
      *
-     * @return whether the task contains that keyword
+     * @return whether the task contains that keyword.
      */
-    public boolean haveKeyword(String keyword) {
+    public boolean hasKeyword(String keyword) {
         return description.contains(keyword) || at.format(DateTimeFormatter.ofPattern("d MMM yyyy")).contains(keyword);
     }
 
     /**
-     * Overrides toString method of Task class
+     * Overrides toString method of Task class.
      *
-     * @return Custom description of the event
+     * @return Custom description of the event.
      */
     @Override
     public String toString() {
