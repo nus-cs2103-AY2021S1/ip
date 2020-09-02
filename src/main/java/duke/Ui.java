@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,11 +11,11 @@ public class Ui {
     private static final String bot = "Dave says:";
 
     /** Line separator */
-    private static final String line = "______________________" +
-            "_________________________________________";
+    private static final String line = "______________________"
+            + "_________________________________________";
 
     /** Scanner object */
-    Scanner scanner;
+    private final Scanner scanner;
 
     /**
      * Constructs a new Ui object.
@@ -84,6 +83,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints delete text and task deleted.
+     * @param userInput User input.
+     * @param taskList TaskList containing tasks.
+     * @throws DukeException When an invalid input is keyed in.
+     */
     public void printDelete(String userInput, TaskList taskList) throws DukeException {
         if (!userInput.substring(6).isBlank()) {
             try {

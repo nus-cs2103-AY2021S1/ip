@@ -6,7 +6,7 @@ package duke;
 public class DukeException extends Exception {
 
     /** Error message of exception */
-    String message;
+    private String message;
 
     /**
      * Constructs an exception specific to Duke program.
