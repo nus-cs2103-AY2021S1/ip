@@ -3,6 +3,8 @@
 
 package ikura.gui;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
@@ -22,6 +24,8 @@ import javafx.scene.control.*;  // TODO: get rid of this wildcard
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 public class FxWrapper extends Application {
@@ -42,6 +46,8 @@ public class FxWrapper extends Application {
     private Node todo(Region box, Task task) {
         return new TaskPane(box, task);
     }
+
+    private final ObservableList<String> lines = FXCollections.observableArrayList();
 
 
     @Override
@@ -64,15 +70,26 @@ public class FxWrapper extends Application {
         var inputArea = new HBox(enterButton, commandField);
         HBox.setHgrow(commandField, Priority.ALWAYS);
 
-        var flow = new TextArea();
-        flow.setEditable(false);
-        flow.setText(Stream.iterate(0, i -> i + 1).map(i -> "ayaya " + i).limit(15)
-            .reduce("", (a, b) -> a + "\n" + b));
+        this.lines.addAll(Stream.iterate(0, i -> i + 1)
+            .map(i -> "ayaya " + i)
+            .limit(15)
+            .collect(Collectors.toList())
+        );
 
-        var leftBox = new VBox(flow, inputArea);
+        var flow = new ListView<String>(this.lines);
+        enterButton.setOnAction(event -> {
+            this.lines.add(commandField.getText());
+            flow.scrollTo(this.lines.size() - 1);
+        });
+
+        var fscroll = new ScrollPane(flow);
+        fscroll.setFitToWidth(true);
+        fscroll.setFitToHeight(true);
+
+        var leftBox = new VBox(fscroll, inputArea);
         leftBox.setFillWidth(true);
         leftPane.getChildren().add(leftBox);
-        VBox.setVgrow(flow, Priority.ALWAYS);
+        VBox.setVgrow(fscroll, Priority.ALWAYS);
 
         var rightBox = new ScrollPane();
         rightBox.setFitToWidth(true);
