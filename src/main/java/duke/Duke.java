@@ -1,17 +1,17 @@
-package main.java.moco;
+package duke;
 
-import main.java.moco.logic.Parser;
-import main.java.moco.logic.Storage;
-import main.java.moco.logic.TaskList;
-import main.java.moco.ui.Ui;
+import duke.logic.Parser;
+import duke.logic.Storage;
+import duke.logic.TaskList;
+import duke.ui.Ui;
 
-public class Moco {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Moco(String filePath) throws MocoException {
+    public Duke(String filePath) throws MocoException {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
@@ -39,6 +39,6 @@ public class Moco {
     }
 
     public static void main(String[] args) throws MocoException {
-        new Moco("tasklist.txt").run();
+        new Duke("tasklist.txt").run();
     }
 }

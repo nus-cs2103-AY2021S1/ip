@@ -1,11 +1,11 @@
-package main.java.moco.logic;
+package duke.logic;
 
-import main.java.moco.MocoException;
-import main.java.moco.task.Deadline;
-import main.java.moco.task.Event;
-import main.java.moco.task.Task;
-import main.java.moco.task.Todo;
-import main.java.moco.ui.Ui;
+import duke.MocoException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.ui.Ui;
 
 
 import java.time.LocalDate;

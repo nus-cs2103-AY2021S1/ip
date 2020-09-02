@@ -1,6 +1,6 @@
-package main.java.moco.logic;
+package duke.logic;
 
-import main.java.moco.task.Task;
+import duke.task.Task;
 
 import java.util.ArrayList;
 
@@ -70,7 +70,7 @@ public class TaskList {
     public String toString() {
         String s = "";
         for (int i = 0; i < tasks.size(); i++) {
-            s += (i + 1) + ". " + tasks.get(i) + "\n";
+            s += (i + 1) + " " + tasks.get(i) + "\n";
         }
         return s;
     }
