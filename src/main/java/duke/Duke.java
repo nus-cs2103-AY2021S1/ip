@@ -38,98 +38,100 @@ public class Duke {
     }
 
     /**
-     * Runs Duke.
+     * Gets welcome message.
+     * @return welcome message from Duke.
      */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        ui.printWelcome();
+    public String getWelcomeMessage() {
+        return ui.gettWelcomeMessage();
+    }
 
-        while (sc.hasNextLine()) {
-            String fullCommand = sc.nextLine();
-            ui.printDivider();
-            String[] inputs = fullCommand.split("\\s+", 2);
-            try {
-                Commands command = Parser.parse(fullCommand);
-                if (command.equals(Commands.BYE)) {
-                    ui.printGoodbye();
-                    try {
-                        storage.writeData(taskList);
-                    } catch (IOException ex) {
-                        ui.printOutput(ex.getMessage());
-                    }
-                    break;
-                } else if (command.equals(Commands.LIST)) {
-                    ui.printTaskList(taskList);
-                } else if (command.equals(Commands.FIND)) {
-                    ArrayList<Task> results = inputs.length > 1 ? taskList.find(inputs[1]) : taskList.getTasks();
-                    ui.printSearchResult(results);
-                } else if (command.equals(Commands.DONE)) {
-                    try {
+    /**
+     * Gets response from Duke after giving command
+     * @param input the user input
+     * @return the String response from Duke
+     */
+    public String getResponse(String input) {
+//        ui.printWelcome();
+        String[] inputs = input.split("\\s+", 2);
+        try {
+            Commands command = Parser.parse(input);
+            if (command.equals(Commands.BYE)) {
+                try {
+                    storage.writeData(taskList);
+                } catch (IOException ex) {
+                    return ex.getMessage();
+                }
+                return ui.getGoodbyeMessage();
+            } else if (command.equals(Commands.LIST)) {
+                return ui.getTaskList(taskList);
+            } else if (command.equals(Commands.FIND)) {
+                ArrayList<Task> results = inputs.length > 1 ? taskList.find(inputs[1]) : taskList.getTasks();
+                return ui.getSearchResult(results);
+            } else if (command.equals(Commands.DONE)) {
+                try {
+                    Parser.checkIndex(inputs, taskList.getSize());
+                    int index = Integer.parseInt(inputs[1]) - 1;
+                    taskList.markDone(index);
+                    return ui.getCompletedTask(taskList.getTask(index));
+                } catch (InvalidIndexException ex) {
+                    return ex.getMessage();
+                }
+            } else if (command.equals(Commands.DELETE)) {
+                try {
+                    if (inputs.length > 1 && inputs[1].trim().equals("all")) {
+                        taskList.removeAllTasks();
+                        return ui.sayDeleteAllTasks();
+                    } else {
                         Parser.checkIndex(inputs, taskList.getSize());
                         int index = Integer.parseInt(inputs[1]) - 1;
-                        taskList.markDone(index);
-                        ui.printCompleteTask(taskList.getTask(index));
-                    } catch (InvalidIndexException ex) {
-                        ui.printOutput(ex.getMessage());
+                        Task temp = taskList.getTask(index);
+                        taskList.removeTask(index);
+                        return ui.getDeletedTask(temp, taskList.getSize());
                     }
-                } else if (command.equals(Commands.DELETE)) {
-                    try {
-                        if (inputs.length > 1 && inputs[1].trim().equals("all")) {
-                            taskList.removeAllTasks();
-                            ui.printDeleteAllTasks();
-                        } else {
-                            Parser.checkIndex(inputs, taskList.getSize());
-                            int index = Integer.parseInt(inputs[1]) - 1;
-                            ui.printDeleteTask(taskList.getTask(index), taskList.getSize() - 1);
-                            taskList.removeTask(index);
-                        }
-                    } catch (InvalidIndexException ex) {
-                        ui.printOutput(ex.getMessage());
-                    }
-                } else if (command.equals(Commands.TODO)) {
-                    try {
-                        Parser.checkDescription(inputs, command);
-                        taskList.addTask(new Todo(inputs[1]));
-                        ui.printAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
-                    } catch (EmptyDescriptionException ex) {
-                        ui.printOutput(ex.getMessage());
-                    }
-                } else if (command.equals(Commands.DEADLINE)) {
-                    try {
-                        Parser.checkDescription(inputs, command);
-                        String temp = " " + inputs[1];
-                        String[] taskInfos = temp.split("/by", 2);
-                        inputs[1] = taskInfos[0];
-                        Parser.checkDescription(inputs, command);
-                        Parser.checkTime(taskInfos, command);
-                        taskList.addTask(new Deadline(taskInfos[0].trim(), taskInfos[1].trim()));
-                        ui.printAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
-                    } catch (EmptyDescriptionException ex) {
-                        ui.printOutput(ex.getMessage());
-                    } catch (EmptyTimeException ex) {
-                        ui.printOutput(ex.getMessage());
-                    }
-                } else {
-                    try {
-                        Parser.checkDescription(inputs, command);
-                        String temp = " " + inputs[1];
-                        String[] taskInfos = temp.split("/at", 2);
-                        inputs[1] = taskInfos[0];
-                        Parser.checkDescription(inputs, command);
-                        Parser.checkTime(taskInfos, command);
-                        taskList.addTask(new Event(taskInfos[0].trim(), taskInfos[1].trim()));
-                        ui.printAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
-                    } catch (EmptyDescriptionException ex) {
-                        ui.printOutput(ex.getMessage());
-                    } catch (EmptyTimeException ex) {
-                        ui.printOutput(ex.getMessage());
-                    }
+                } catch (InvalidIndexException ex) {
+                    return ex.getMessage();
                 }
-            } catch (InvalidCommandException ex) {
-                ui.printOutput(ex.getMessage() + "hello");
-            } finally {
-                ui.printDivider();
+            } else if (command.equals(Commands.TODO)) {
+                try {
+                    Parser.checkDescription(inputs, command);
+                    taskList.addTask(new Todo(inputs[1]));
+                    return ui.getAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
+                } catch (EmptyDescriptionException ex) {
+                    return ex.getMessage();
+                }
+            } else if (command.equals(Commands.DEADLINE)) {
+                try {
+                    Parser.checkDescription(inputs, command);
+                    String temp = " " + inputs[1];
+                    String[] taskInfos = temp.split("/by", 2);
+                    inputs[1] = taskInfos[0];
+                    Parser.checkDescription(inputs, command);
+                    Parser.checkTime(taskInfos, command);
+                    taskList.addTask(new Deadline(taskInfos[0].trim(), taskInfos[1].trim()));
+                    return ui.getAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
+                } catch (EmptyDescriptionException ex) {
+                    return ex.getMessage();
+                } catch (EmptyTimeException ex) {
+                    return ex.getMessage();
+                }
+            } else {
+                try {
+                    Parser.checkDescription(inputs, command);
+                    String temp = " " + inputs[1];
+                    String[] taskInfos = temp.split("/at", 2);
+                    inputs[1] = taskInfos[0];
+                    Parser.checkDescription(inputs, command);
+                    Parser.checkTime(taskInfos, command);
+                    taskList.addTask(new Event(taskInfos[0].trim(), taskInfos[1].trim()));
+                    return ui.getAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
+                } catch (EmptyDescriptionException ex) {
+                    return ex.getMessage();
+                } catch (EmptyTimeException ex) {
+                    return ex.getMessage();
+                }
             }
+        } catch (InvalidCommandException ex) {
+            return ex.getMessage();
         }
     }
 }
