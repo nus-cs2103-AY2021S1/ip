@@ -7,10 +7,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exception.DukeInvalidKeywordException;
-import duke.exception.DukeInvalidIndexException;
-import duke.exception.DukeInvalidTaskDescriptionException;
-import duke.exception.DukeInvalidTaskTimeException;
+import duke.exceptions.DukeInvalidIndexException;
+import duke.exceptions.DukeInvalidKeywordException;
+import duke.exceptions.DukeInvalidTaskDescriptionException;
+import duke.exceptions.DukeInvalidTaskTimeException;
+import duke.messages.Message;
 
 public class TaskListTest {
 
@@ -37,12 +38,12 @@ public class TaskListTest {
     }
 
     @Test
-    public void addToDo_erroneousToDo_exceptionThrown() throws DukeInvalidTaskTimeException {
+    public void addToDo_erroneousDescription_exceptionThrown() throws DukeInvalidTaskTimeException {
         try {
             assertEquals(toDo.toString(),
                     tasks.addTask("todo", "todo").toString());
         } catch (DukeInvalidTaskDescriptionException e) {
-            assertEquals("ERROR: The description of a task cannot be empty!", e.toString());
+            assertEquals(Message.ERROR_INVALID_TASK_DESCRIPTION, e.toString());
         }
     }
 
@@ -55,13 +56,13 @@ public class TaskListTest {
     }
 
     @Test
-    public void addEvent_erroneousEvent_exceptionThrown() throws DukeInvalidTaskDescriptionException {
+    public void addEvent_erroneousTime_exceptionThrown() throws DukeInvalidTaskDescriptionException {
         try {
             assertEquals(event.toString(),
                     tasks.addTask("event", "event /at blah").toString());
         } catch (DukeInvalidTaskTimeException e) {
-            assertEquals("ERROR: Usage: <event> <description> /at <time>\n"
-                    + "Time formatting: dd-MM-yyyy HH:mm", e.toString());
+            assertEquals(String.format("%s\n%s", Message.ERROR_EVENT_TIME, Message.ERROR_TIME_FORMATTING),
+                    e.toString());
         }
     }
 
@@ -74,13 +75,13 @@ public class TaskListTest {
     }
 
     @Test
-    public void addDeadline_erroneousEvent_exceptionThrown() throws DukeInvalidTaskDescriptionException {
+    public void addDeadline_erroneousTime_exceptionThrown() throws DukeInvalidTaskDescriptionException {
         try {
             assertEquals(deadline.toString(),
                     tasks.addTask("deadline", "deadline /by blah").toString());
         } catch (DukeInvalidTaskTimeException e) {
-            assertEquals("ERROR: Usage: <deadline> <description> /by <time>\n"
-                    + "Time formatting: dd-MM-yyyy HH:mm", e.toString());
+            assertEquals(String.format("%s\n%s", Message.ERROR_DEADLINE_TIME, Message.ERROR_TIME_FORMATTING),
+                    e.toString());
         }
     }
 
@@ -98,7 +99,7 @@ public class TaskListTest {
             assertEquals(toDo.toString(),
                     createTaskList().completeTask("done 1000").toString());
         } catch (DukeInvalidIndexException e) {
-            assertEquals("ERROR: Invalid list number input!", e.toString());
+            assertEquals(Message.ERROR_INVALID_INDEX, e.toString());
         }
     }
 
@@ -114,7 +115,7 @@ public class TaskListTest {
             assertEquals(toDo.toString(),
                     createTaskList().deleteTask("delete 1000").toString());
         } catch (DukeInvalidIndexException e) {
-            assertEquals("ERROR: Invalid list number input!", e.toString());
+            assertEquals(Message.ERROR_INVALID_INDEX, e.toString());
         }
     }
 
@@ -130,7 +131,7 @@ public class TaskListTest {
             assertEquals(event.toString(),
                     createTaskList().findTasks("find").toString());
         } catch (DukeInvalidKeywordException e) {
-            assertEquals("ERROR: The keyword cannot be empty!", e.toString());
+            assertEquals(Message.ERROR_INVALID_KEYWORD, e.toString());
         }
     }
 

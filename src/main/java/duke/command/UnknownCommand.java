@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exception.DukeUnknownInputException;
+import duke.exceptions.DukeUnknownInputException;
 import duke.messages.Output;
 import duke.storage.Storage;
 import duke.task.TaskList;

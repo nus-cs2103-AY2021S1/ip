@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.exception.DukeInvalidKeywordException;
-import duke.exception.DukeInvalidIndexException;
-import duke.exception.DukeInvalidTaskDescriptionException;
-import duke.exception.DukeInvalidTaskTimeException;
-import duke.exception.DukeLoadingErrorException;
-import duke.exception.DukeUnknownInputException;
+import duke.exceptions.DukeInvalidIndexException;
+import duke.exceptions.DukeInvalidKeywordException;
+import duke.exceptions.DukeInvalidTaskDescriptionException;
+import duke.exceptions.DukeInvalidTaskTimeException;
+import duke.exceptions.DukeLoadingErrorException;
+import duke.exceptions.DukeUnknownInputException;
 import duke.messages.Output;
 import duke.storage.Storage;
 import duke.task.TaskList;

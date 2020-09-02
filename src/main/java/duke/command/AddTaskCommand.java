@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.exception.DukeInvalidTaskDescriptionException;
-import duke.exception.DukeInvalidTaskTimeException;
-import duke.exception.DukeLoadingErrorException;
+import duke.exceptions.DukeInvalidTaskDescriptionException;
+import duke.exceptions.DukeInvalidTaskTimeException;
+import duke.exceptions.DukeLoadingErrorException;
 import duke.messages.Output;
 import duke.storage.Storage;
 import duke.task.Task;

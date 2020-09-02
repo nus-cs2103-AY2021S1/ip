@@ -2,7 +2,7 @@ package duke.ui;
 
 import duke.Duke;
 import duke.command.CommandResult;
-import duke.exception.DukeException;
+import duke.exceptions.DukeException;
 import duke.messages.Output;
 
 import javafx.application.Platform;

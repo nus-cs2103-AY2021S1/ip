@@ -5,12 +5,12 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.exception.DukeInvalidDeadlineTimeException;
-import duke.exception.DukeInvalidEventTimeException;
-import duke.exception.DukeInvalidKeywordException;
-import duke.exception.DukeInvalidIndexException;
-import duke.exception.DukeInvalidTaskDescriptionException;
-import duke.exception.DukeInvalidTaskTimeException;
+import duke.exceptions.DukeInvalidDeadlineTimeException;
+import duke.exceptions.DukeInvalidEventTimeException;
+import duke.exceptions.DukeInvalidIndexException;
+import duke.exceptions.DukeInvalidKeywordException;
+import duke.exceptions.DukeInvalidTaskDescriptionException;
+import duke.exceptions.DukeInvalidTaskTimeException;
 
 /**
  * Contains the task list.

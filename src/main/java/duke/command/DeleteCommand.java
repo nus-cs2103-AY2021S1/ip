@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.exception.DukeInvalidIndexException;
-import duke.exception.DukeLoadingErrorException;
+import duke.exceptions.DukeInvalidIndexException;
+import duke.exceptions.DukeLoadingErrorException;
 import duke.messages.Output;
 import duke.storage.Storage;
 import duke.task.TaskList;

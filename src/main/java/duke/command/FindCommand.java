@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exception.DukeInvalidKeywordException;
+import duke.exceptions.DukeInvalidKeywordException;
 import duke.messages.Output;
 import duke.storage.Storage;
 import duke.task.TaskList;

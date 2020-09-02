@@ -1,4 +1,4 @@
-package duke.exception;
+package duke.exceptions;
 
 import duke.messages.Message;
 

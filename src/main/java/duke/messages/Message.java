@@ -18,19 +18,19 @@ public class Message {
             + "--)   |   |  `--'  | |  |  |  | |  |____        |  `--'  |\n"
             + "/__/     \\__\\  \\__/  \\__/     |_______|_"
             + "______/     \\______/  |__|  |__| |_______|        \\______/\n";
-    public static final String MESSAGE_GREETING = "Greetings! I'm Awesome-O.";
-    public static final String MESSAGE_WHAT_CAN_I_DO = "What can I do for you?";
+    public static final String MESSAGE_GREETING = "I AM Awesome-O.";
+    public static final String MESSAGE_WHAT_CAN_I_DO = "What can Awesome-O do for you?";
     public static final String MESSAGE_HELP_PROMPT = "...PSST! Type \"help\" for more information!";
-    public static final String MESSAGE_TASKS_INTRO = "Here are the tasks in your list:";
+    public static final String MESSAGE_TASKS_INTRO = "Awesome-O now shows you your tasks:";
     public static final String MESSAGE_NO_TASKS_CURRENTLY = "No tasks currently";
-    public static final String MESSAGE_DONE_TASK = "Great! I've marked this task as done:";
-    public static final String MESSAGE_DELETE_TASK = "Okay. I've removed this task:";
+    public static final String MESSAGE_DONE_TASK = "Awesome-O marked this task as done:";
+    public static final String MESSAGE_DELETE_TASK = "Awesome-O removed this task:";
     public static final String MESSAGE_CLEAR_TASKS = "All tasks have been cleared!";
-    public static final String MESSAGE_ADD_TASK = "Alright. I've added this task:";
+    public static final String MESSAGE_ADD_TASK = "Awesome-O added this task:";
     public static final String MESSAGE_FIND_TASKS_INTRO = "Here are the tasks that match the keyword:";
     public static final String MESSAGE_NO_MATCHING_TASKS = "No matching tasks!";
     public static final String MESSAGE_THANK_YOU = "Thank you for talking to Awesome-O.";
-    public static final String MESSAGE_GOODBYE = "Have a nice day. Goodbye!";
+    public static final String MESSAGE_GOODBYE = "Awesome-O WILL MISS YOU.";
     public static final String MESSAGE_NUMBER_OF_TASKS = "Now you have %d tasks in the list.";
 
     public static final String ERROR = "ERROR";

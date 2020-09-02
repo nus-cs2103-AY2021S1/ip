@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.exception.DukeFileNotFoundException;
-import duke.exception.DukeLoadingErrorException;
+import duke.exceptions.DukeFileNotFoundException;
+import duke.exceptions.DukeLoadingErrorException;
 
 import duke.task.Deadline;
 import duke.task.Event;
