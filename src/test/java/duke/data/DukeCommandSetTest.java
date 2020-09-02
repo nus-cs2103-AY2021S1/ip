@@ -32,7 +32,7 @@ public class DukeCommandSetTest {
         Exception exception = assertThrows(UnknownCommandException.class,
                 () -> commandSet.getCommand(invalidCommandName));
 
-        String line = UiPrint.getLine(UiPrint.star, 50);
+        String line = UiPrint.getLine(UiPrint.STAR, 50);
         String errMessage =
                 line + "\nOOPS!!! I'm sorry, but I don't know what that means :-(\n" + line;
 

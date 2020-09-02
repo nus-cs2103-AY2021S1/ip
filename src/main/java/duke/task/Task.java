@@ -9,8 +9,8 @@ public class Task {
 
     private String icon;
     private String description;
+    private String taskInfo;
     private boolean isDone;
-    public String taskInfo;
 
     protected Task(String icon, String description, String taskInfo) {
         this.icon = icon;
@@ -42,14 +42,18 @@ public class Task {
         return isDone;
     }
 
-    public boolean containKeyWord(String keyWord) {
+    public boolean containsKeyWord(String keyWord) {
         return description.contains(keyWord);
     }
 
     @Override
     public String toString() {
-        String statusIcon = isDone ? UiPrint.tick : UiPrint.cross;
+        String statusIcon = isDone ? UiPrint.TICK : UiPrint.CROSS;
 
         return icon + statusIcon + " " + description;
+    }
+
+    public String getTaskInfo() {
+        return taskInfo;
     }
 }

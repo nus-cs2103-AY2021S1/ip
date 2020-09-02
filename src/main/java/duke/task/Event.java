@@ -1,8 +1,8 @@
 package duke.task;
 
 import duke.exception.IncorrectFormatException;
-import duke.ui.UiPrint;
 import duke.time.Time;
+import duke.ui.UiPrint;
 
 /**
  * A Event is a task with a time. Event objects store both task description
@@ -36,14 +36,14 @@ public class Event extends Task {
         String description = splitStr[0];
         String time = splitStr[1];
 
-        Event newEvent = new Event(UiPrint.eventIcon, description, time, eventInfo);
+        Event newEvent = new Event(UiPrint.EVENT_ICON, description, time, eventInfo);
 
         return newEvent;
     }
 
     private static void checkException(String[] splitStr) throws IncorrectFormatException {
         if (splitStr.length != 2) {
-            String line = UiPrint.getLine(UiPrint.star, 50);
+            String line = UiPrint.getLine(UiPrint.STAR, 50);
             String errMessage =
                     line + "\nPlease follow the format of event <duke.task description> /at <event duke.time>\n" + line;
             throw new IncorrectFormatException(errMessage);

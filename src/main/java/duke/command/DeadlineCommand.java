@@ -23,7 +23,7 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(String str, Duke duke) {
         Deadline newDeadline = Deadline.createDeadline(str);
-        duke.taskList.addTask(newDeadline);
-        duke.ui.reportNewTask(newDeadline);
+        duke.getTaskList().addTask(newDeadline);
+        duke.getUi().reportNewTask(newDeadline);
     }
 }

@@ -1,28 +1,28 @@
 package duke;
 
+import java.io.IOException;
+
+import duke.command.CommandParser;
 import duke.data.DukeCommandSet;
+import duke.data.DukeState;
 import duke.data.DukeTaskList;
 import duke.input.UserInput;
-import duke.command.CommandParser;
-import duke.data.DukeState;
 import duke.storage.DukeStorage;
 import duke.storage.TaskStorage;
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Duke is a console program that can save tasks and modify saved tasks.
  */
 public class Duke {
 
-    public DukeCommandSet commandSet;
-    public DukeState state;
-    public Ui ui;
-    public CommandParser commandParser;
-    public DukeTaskList taskList;
-    public TaskStorage taskStorage;
-    public DukeStorage storage;
+    protected DukeCommandSet commandSet;
+    protected DukeState state;
+    protected Ui ui;
+    protected CommandParser commandParser;
+    protected DukeTaskList taskList;
+    protected TaskStorage taskStorage;
+    protected DukeStorage storage;
 
     protected Duke() {
         commandSet = new DukeCommandSet();
@@ -42,7 +42,7 @@ public class Duke {
         storage.loadSavedTasks();
         ui.greet();
 
-        while (!state.exitLoop) {
+        while (!state.getExitLoop()) {
             String inputLine = UserInput.getOneLine();
             commandParser.parse(inputLine, this);
         }
@@ -58,5 +58,33 @@ public class Duke {
      */
     public static void main(String[] args) throws IOException {
         new Duke().run();
+    }
+
+    public DukeCommandSet getCommandSet() {
+        return commandSet;
+    }
+
+    public DukeState getState() {
+        return state;
+    }
+
+    public Ui getUi() {
+        return ui;
+    }
+
+    public CommandParser getCommandParser() {
+        return commandParser;
+    }
+
+    public DukeTaskList getTaskList() {
+        return taskList;
+    }
+
+    public TaskStorage getTaskStorage() {
+        return taskStorage;
+    }
+
+    public DukeStorage getStorage() {
+        return storage;
     }
 }

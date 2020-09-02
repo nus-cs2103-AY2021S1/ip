@@ -20,7 +20,7 @@ public class ToDo extends Task {
      */
     public static ToDo createToDo(String todoInfo) {
         checkException(todoInfo);
-        ToDo newToDo = new ToDo(UiPrint.todoIcon, todoInfo, todoInfo);
+        ToDo newToDo = new ToDo(UiPrint.TODO_ICON, todoInfo, todoInfo);
         return newToDo;
     }
 
@@ -31,7 +31,7 @@ public class ToDo extends Task {
 
     private static void checkException(String str) throws NoDescriptionException {
         if (str.isBlank()) {
-            String line = UiPrint.getLine(UiPrint.star, 50);
+            String line = UiPrint.getLine(UiPrint.STAR, 50);
             String errMessage =
                     line + "\nOOPS!!! The description of a todo cannot be empty.\n" + line;
 

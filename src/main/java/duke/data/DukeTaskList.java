@@ -79,11 +79,16 @@ public class DukeTaskList {
         }
     }
 
+    /**
+     * Finds tasks containing the input keyword.
+     * @param keyword the keyword
+     * @return the list of tasks containing the keyword
+     */
     public ArrayList<Task> findTasks(String keyword) {
         ArrayList<Task> tasksFound = new ArrayList<>();
 
         for (Task task : tasks) {
-            if (task.containKeyWord(keyword)) {
+            if (task.containsKeyWord(keyword)) {
                 tasksFound.add(task);
             }
         }

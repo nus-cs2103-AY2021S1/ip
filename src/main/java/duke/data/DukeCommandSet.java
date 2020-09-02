@@ -1,10 +1,18 @@
 package duke.data;
 
-import duke.command.*;
+import java.util.HashMap;
+
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 import duke.exception.UnknownCommandException;
 import duke.ui.UiPrint;
-
-import java.util.HashMap;
 
 /**
  * DukeCommandSet contains all supported commands in Duke, and provides
@@ -31,7 +39,7 @@ public class DukeCommandSet {
     }
 
     private void registerCommand(Command command) {
-        for (String name : command.names) {
+        for (String name : command.getNames()) {
             commandSet.put(name, command);
         }
     }
@@ -44,7 +52,7 @@ public class DukeCommandSet {
      */
     public Command getCommand(String commandName) throws UnknownCommandException {
         if (!commandSet.containsKey(commandName)) {
-            String line = UiPrint.getLine(UiPrint.star, 50);
+            String line = UiPrint.getLine(UiPrint.STAR, 50);
             String errMessage =
                     line + "\nOOPS!!! I'm sorry, but I don't know what that means :-(\n" + line;
 

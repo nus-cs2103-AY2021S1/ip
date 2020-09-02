@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
  */
 public class Time {
 
-    public LocalDateTime time;
-    public String timeDescription;
+    private LocalDateTime time;
+    private String timeDescription;
 
     private Time(LocalDateTime time) {
         this.time = time;
@@ -59,9 +59,17 @@ public class Time {
     @Override
     public String toString() {
         if (time != null) {
-            return time.format(TimeFormat.dateTimeFormatter);
+            return time.format(TimeFormat.DATE_TIME_FORMATTER);
         } else {
             return timeDescription;
         }
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public String getTimeDescription() {
+        return timeDescription;
     }
 }

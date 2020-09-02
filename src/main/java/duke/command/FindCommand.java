@@ -1,9 +1,9 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.Duke;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * FindCommand finds all tasks that contain the keyword entered by user,
@@ -26,7 +26,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(String str, Duke duke) {
-        ArrayList<Task> tasksFound = duke.taskList.findTasks(str);
-        duke.ui.reportGiveTasks(tasksFound);
+        ArrayList<Task> tasksFound = duke.getTaskList().findTasks(str);
+        duke.getUi().reportGiveTasks(tasksFound);
     }
 }

@@ -1,3 +1,0 @@
-todo read book
-event return book /at 8:00
-deadline have dinner /by 19:00

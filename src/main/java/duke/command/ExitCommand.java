@@ -21,8 +21,8 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(String str, Duke duke) {
-        duke.ui.reportExit();
+        duke.getUi().reportExit();
 
-        duke.state.exitLoop = true;
+        duke.getState().endLoop();
     }
 }

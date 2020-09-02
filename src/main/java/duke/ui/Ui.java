@@ -1,9 +1,9 @@
 package duke.ui;
 
+import java.util.ArrayList;
+
 import duke.Duke;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Ui interacts with users by printing out messages in console.
@@ -27,14 +27,14 @@ public class Ui {
      * Greets the user.
      */
     public void greet() {
-        System.out.println(UiPrint.logo);
+        System.out.println(UiPrint.LOGO);
 
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
     }
 
     /**
@@ -42,28 +42,28 @@ public class Ui {
      * @param str string to be repeated
      */
     public void echo(String str) {
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
         System.out.println(str);
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
     }
 
     /**
      * Prints out the current tasks saved in task list.
      */
     public void reportCurrentTasks() {
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
 
         System.out.println("Current tasks:\n");
 
-        for (int i = 0; i < duke.taskList.getSize(); i++) {
-            System.out.println(i + 1 + ". " + duke.taskList.getTask(i));
+        for (int i = 0; i < duke.getTaskList().getSize(); i++) {
+            System.out.println(i + 1 + ". " + duke.getTaskList().getTask(i));
         }
 
-        if (duke.taskList.getSize() == 0) {
+        if (duke.getTaskList().getSize() == 0) {
             System.out.println("None");
         }
 
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
     }
 
     /**
@@ -71,13 +71,13 @@ public class Ui {
      * @param task the new task added
      */
     public void reportNewTask(Task task) {
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
 
         System.out.println("Got it. I've added this task: ");
         System.out.println(task);
-        System.out.println("Now you have " + duke.taskList.getSize() + " tasks in the list.");
+        System.out.println("Now you have " + duke.getTaskList().getSize() + " tasks in the list.");
 
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
     }
 
     /**
@@ -85,12 +85,12 @@ public class Ui {
      * @param task the task marked as done
      */
     public void reportDoneTask(Task task) {
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
 
         System.out.println("Nice, I've marked this task as done:");
         System.out.println(task);
 
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
     }
 
     /**
@@ -98,29 +98,33 @@ public class Ui {
      * @param task the task deleted
      */
     public void reportDeleteTask(Task task) {
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
 
         System.out.println("Noted. I've removed this task: ");
         System.out.println(task);
-        System.out.println("Now you have " + duke.taskList.getSize() + " tasks in the list");
+        System.out.println("Now you have " + duke.getTaskList().getSize() + " tasks in the list");
 
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
     }
 
     /**
      * Says good bye to the user.
      */
     public void reportExit() {
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
 
         String exitWords = "Bye, hope to see you again soon!";
         System.out.println(exitWords);
 
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
     }
 
+    /**
+     * Shows the input tasks to the user.
+     * @param tasks tasks to show
+     */
     public void reportGiveTasks(ArrayList<Task> tasks) {
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
 
         System.out.println("Here are the matching tasks in your list:");
 
@@ -132,6 +136,6 @@ public class Ui {
             }
         }
 
-        UiPrint.drawLine(UiPrint.star, 50);
+        UiPrint.drawLine(UiPrint.STAR, 50);
     }
 }

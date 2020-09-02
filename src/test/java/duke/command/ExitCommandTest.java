@@ -28,7 +28,7 @@ public class ExitCommandTest {
         try {
             command.execute(input, dukeStub);
 
-            assertEquals(true, dukeStub.state.exitLoop);
+            assertEquals(true, dukeStub.getState().getExitLoop());
         } catch (Exception exception) {
             fail(exception.getMessage());
         }

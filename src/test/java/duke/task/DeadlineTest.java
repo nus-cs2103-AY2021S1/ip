@@ -30,7 +30,7 @@ public class DeadlineTest {
         Exception exception = assertThrows(IncorrectFormatException.class,
                 () -> Deadline.createDeadline("read book"));
 
-        String line = UiPrint.getLine(UiPrint.star, 50);
+        String line = UiPrint.getLine(UiPrint.STAR, 50);
         String errMessage =
                 line + "\nPlease follow the format of deadline <duke.task description> /by <deadline>\n" + line;
 
