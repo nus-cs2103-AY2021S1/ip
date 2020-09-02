@@ -40,8 +40,8 @@ public class DateTimeManager {
             try {
                 String t = sc.next();
                 try {
-                    String DT = d + " " + t;
-                    LocalDateTime dt = DateTimeManager.setDateTime(DT);
+                    String dateTime = d + " " + t;
+                    LocalDateTime dt = DateTimeManager.setDateTime(dateTime);
                     task.setDate(dt);
                 } catch (DateTimeParseException e) {
                     throw new ErrorExceptions("Wrong date time format! dd-mm-yyyy HHmm");

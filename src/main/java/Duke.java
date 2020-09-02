@@ -16,7 +16,7 @@ import javafx.stage.Stage;
  * is stored locally in a save txt file called DukeTodoSave.txt located in the root of the project directory.
  * If this file is not present, the program will automatically create this text file in the root.
  */
-public class Duke extends Application{
+public class Duke extends Application {
     public void start(Stage stage) {
         Label helloWorld = new Label("Hello World!"); // Creating a new Label control
         Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
