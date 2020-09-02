@@ -3,3 +3,4 @@ T | ✘ | play games
 D | ✓ | damn  | 2020-10-01
 T | ✘ | add task
 T | ✓ | add games
+T | ✘ | play games
