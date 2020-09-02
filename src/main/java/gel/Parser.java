@@ -51,9 +51,9 @@ public class Parser {
     /**
      * Translates user input into something understandable by the task planner.
      *
-     * @param sc Scanner.
-     * @param storage Storage to store date.
-     * @param ui Ui to communicate with user.
+     * @param sc       Scanner.
+     * @param storage  Storage to store date.
+     * @param ui       Ui to communicate with user.
      * @param taskList List of tasks.
      * @throws IOException If file could not be updated.
      */
@@ -142,6 +142,80 @@ public class Parser {
                 System.out.println(e.getMessage());
                 System.out.println();
             }
+        }
+    }
+
+    public static String parseUserInputFromGui(Storage storage, Ui ui, TaskList taskList, String input)
+            throws IOException, GelException {
+
+        String[] inputArr = input.split(" ");
+        String keyword = inputArr[0];
+
+        switch (keyword) {
+        case "bye": { //bye
+            storage.updateFile(taskList);
+            return ui.farewellMessage();
+        }
+        case "list": { //list
+            return taskList.showListOfTask();
+        }
+        case "done": { //done
+            return taskList.doneTask(input);
+        }
+        case "delete": { //delete
+            if (inputArr.length <= 1) {
+                throw new GelException("    Yo tell me what you want to delete la");
+            }
+            try {
+                return taskList.deleteTask(inputArr[1]);
+            } catch (Exception e) {
+                throw new GelException("    Yoyoyo please input a valid number after delete");
+            }
+        }
+        case "deadline": { //deadline
+            int dateIndex = input.lastIndexOf("/");
+            if (dateIndex == -1) {
+                throw new GelException("    Bruh you need the /by tag for deadlines");
+            } else {
+                String[] dateDetails = input.substring(dateIndex).split(" ");
+                String checkBy = dateDetails[0];
+                if (!checkBy.equals("/by")) {
+                    throw new GelException("    Bruh you need the /by tag for deadlines");
+                } else if (dateDetails.length <= 1) {
+                    throw new GelException("    Bruh you left out the deadline");
+                }
+            }
+            return taskList.addDeadline(input, dateIndex);
+        }
+        case "event": { //event
+            int dateIndex = input.lastIndexOf("/");
+            if (dateIndex == -1) {
+                throw new GelException("    Bruh you need the /at tag for events");
+            } else {
+                String[] dateDetails = input.substring(dateIndex).split(" ");
+                String checkAt = dateDetails[0];
+                if (!checkAt.equals("/at")) {
+                    throw new GelException("    Bruh you need the /at tag for events");
+                } else if (dateDetails.length <= 1) {
+                    throw new GelException("    Bruh you left out the event date");
+                }
+            }
+            return taskList.addEvent(input, dateIndex);
+        }
+        case "todo": {
+            if (inputArr.length <= 1) {
+                throw new GelException("    Yo tell me what you want todo");
+            }
+            return taskList.addTodo(input);
+        }
+        case "find": {
+            String[] findInputArr = input.split(" ", 2);
+            String findKeyword = findInputArr[1];
+            return taskList.findDescription(findKeyword);
+        }
+        default: {
+            throw new GelException();
+        }
         }
     }
 }

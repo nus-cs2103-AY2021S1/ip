@@ -1,14 +1,12 @@
+package gel;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-import gel.Parser;
-import gel.Storage;
-import gel.TaskList;
-import gel.Ui;
 
 /**
- * Gel is an task planner. A <code>Gel</code> object is a bot which
+ * gel.Gel is an task planner. A <code>gel.Gel</code> object is a bot which
  * enables user to plan their tasks.
  */
 public class Gel {
@@ -17,8 +15,9 @@ public class Gel {
     private TaskList taskList;
     private Ui ui;
 
+
     /**
-     * Constructor for class Gel.
+     * Constructor for class gel.Gel.
      *
      * @param filePath takes in the filepath of the storage file.
      */
@@ -34,7 +33,7 @@ public class Gel {
     }
 
     /**
-     * Starts the task planner <code>Gel</code> and interact with user.
+     * Starts the task planner <code>gel.Gel</code> and interact with user.
      */
     public void run() {
         // initialise list and scanner
@@ -52,5 +51,15 @@ public class Gel {
 
     public static void main(String[] args) {
         new Gel("data/tasks.txt").run();
+    }
+
+    public String getResponse(String input) {
+        try {
+            storage.checkFileExistence();
+            ui.showWelcomeMessage();
+            return Parser.parseUserInputFromGui(storage, ui, taskList, input);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 }
