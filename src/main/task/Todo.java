@@ -21,10 +21,10 @@ public class Todo extends Task {
      * Constructs a Todo instance with the name of the task
      * and the done state of the task.
      * @param name the name of the task.
-     * @param doneState the done state of the task.
+     * @param isDone the done state of the task.
      */
-    public Todo(String name, boolean doneState) {
-        super(name, doneState);
+    public Todo(String name, boolean isDone) {
+        super(name, isDone);
     }
 
     /**

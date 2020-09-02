@@ -18,12 +18,12 @@ import main.command.ExitCommand;
 import main.command.FindCommand;
 import main.command.ListCommand;
 import main.command.TodoCommand;
-import main.exception.DukeException;
 import main.exception.EmptyMessageException;
 import main.exception.InvalidDateException;
 import main.exception.InvalidDeadlineFormatException;
 import main.exception.InvalidEventFormatException;
 import main.exception.InvalidTaskException;
+import main.exception.StuffException;
 import main.exception.UnknownCommandException;
 
 public class ParserTest {
@@ -32,9 +32,9 @@ public class ParserTest {
     class Bye {
         @Test
         @DisplayName("should generate exit command object")
-        public void parse_byeCommand_objectExitCommand() throws DukeException {
+        public void parse_byeCommand_objectExitCommand() throws StuffException {
             Command command = Parser.parse(new String[] { "bye" });
-            assertEquals(command, new ExitCommand());
+            assertEquals(new ExitCommand(), command);
         }
     }
 
@@ -43,9 +43,9 @@ public class ParserTest {
     class List {
         @Test
         @DisplayName("should generate list command object")
-        public void parse_listCommand_objectListCommand() throws DukeException {
+        public void parse_listCommand_objectListCommand() throws StuffException {
             Command command = Parser.parse(new String[] { "list" });
-            assertEquals(command, new ListCommand());
+            assertEquals(new ListCommand(), command);
         }
     }
 
@@ -54,16 +54,16 @@ public class ParserTest {
     class Done {
         @Test
         @DisplayName("should generate done command object")
-        public void parse_doneCommand_objectDoneCommand() throws DukeException {
+        public void parse_doneCommand_objectDoneCommand() throws StuffException {
             Command command = Parser.parse(new String[] { "done", "1" });
-            assertEquals(command, new DoneCommand(1));
+            assertEquals(new DoneCommand(1), command);
         }
 
         @Test
         @DisplayName("should generate done command object with alt data")
-        public void parse_doneCommand_altDataDoneCommand() throws DukeException {
+        public void parse_doneCommand_altDataDoneCommand() throws StuffException {
             Command command = Parser.parse(new String[] { "done", "4123" });
-            assertEquals(command, new DoneCommand(4123));
+            assertEquals(new DoneCommand(4123), command);
         }
 
         @Test
@@ -82,16 +82,16 @@ public class ParserTest {
     class Delete {
         @Test
         @DisplayName("should generate delete command object")
-        public void parse_deleteCommand_objectDeleteCommand() throws DukeException {
+        public void parse_deleteCommand_objectDeleteCommand() throws StuffException {
             Command command = Parser.parse(new String[] { "delete", "1" });
-            assertEquals(command, new DeleteCommand(1));
+            assertEquals(new DeleteCommand(1), command);
         }
 
         @Test
         @DisplayName("should generate delete command object with alt data")
-        public void parse_deleteCommand_altDataDeleteCommand() throws DukeException {
+        public void parse_deleteCommand_altDataDeleteCommand() throws StuffException {
             Command command = Parser.parse(new String[] { "delete", "12736" });
-            assertEquals(command, new DeleteCommand(12736));
+            assertEquals(new DeleteCommand(12736), command);
         }
 
         @Test
@@ -111,16 +111,16 @@ public class ParserTest {
         @Test
         @DisplayName("should generate add todo object")
         public void parse_todoCommand_objectAddTodoCommand()
-                throws DukeException {
+                throws StuffException {
             Command command = Parser.parse(new String[] { "todo", "name" });
-            assertEquals(command, new TodoCommand("name"));
+            assertEquals(new TodoCommand("name"), command);
         }
 
         @Test
         @DisplayName("should generate add todo object with alt data")
-        public void parse_todoCommand_altDataAddTodoCommand() throws DukeException {
+        public void parse_todoCommand_altDataAddTodoCommand() throws StuffException {
             Command command = Parser.parse(new String[] { "todo", "another" });
-            assertEquals(command, new TodoCommand("another"));
+            assertEquals(new TodoCommand("another"), command);
         }
 
         @Test
@@ -140,21 +140,23 @@ public class ParserTest {
         @Test
         @DisplayName("should generate add deadline object")
         public void parse_deadlineCommand_objectAddDeadlineCommand()
-                throws DukeException {
+                throws StuffException {
             Command command = Parser.parse(
                     new String[] { "deadline", "name /by 1400-1-31 1453" });
-            assertEquals(command, new DeadlineCommand("name",
-                    LocalDateTime.of(1400, 1, 31, 14, 53)));
+            assertEquals(new DeadlineCommand("name",
+                            LocalDateTime.of(1400, 1, 31, 14, 53)),
+                    command);
         }
 
         @Test
         @DisplayName("should generate add deadline object with alt data")
         public void parse_deadlineCommand_altDataAddDeadlineCommand()
-                throws DukeException {
+                throws StuffException {
             Command command = Parser.parse(
                     new String[] { "deadline", "test /by 1285-5-3 2144" });
-            assertEquals(command, new DeadlineCommand("test",
-                    LocalDateTime.of(1285, 5, 3, 21, 44)));
+            assertEquals(new DeadlineCommand("test",
+                            LocalDateTime.of(1285, 5, 3, 21, 44)),
+                    command);
         }
 
         @Test
@@ -254,21 +256,23 @@ public class ParserTest {
         @Test
         @DisplayName("should generate add event object")
         public void parse_eventCommand_objectAddEventCommand()
-                throws DukeException {
+                throws StuffException {
             Command command = Parser.parse(
                     new String[] { "event", "name /at 1400-1-31 1453" });
-            assertEquals(command, new EventCommand("name",
-                    LocalDateTime.of(1400, 1, 31, 14, 53)));
+            assertEquals(new EventCommand("name",
+                            LocalDateTime.of(1400, 1, 31, 14, 53)),
+                    command);
         }
 
         @Test
         @DisplayName("should generate add event object with alt data")
         public void parse_eventCommand_altDataAddEventCommand()
-                throws DukeException {
+                throws StuffException {
             Command command = Parser.parse(
                     new String[] { "event", "test /at 1285-5-3 2144" });
-            assertEquals(command, new EventCommand("test",
-                    LocalDateTime.of(1285, 5, 3, 21, 44)));
+            assertEquals(new EventCommand("test",
+                            LocalDateTime.of(1285, 5, 3, 21, 44)),
+                    command);
         }
 
         @Test
@@ -367,14 +371,14 @@ public class ParserTest {
     class Find {
         @Test
         @DisplayName("should generate find command object")
-        public void parse_findCommand_objectFindCommand() throws DukeException {
+        public void parse_findCommand_objectFindCommand() throws StuffException {
             assertEquals(new FindCommand("test"),
                     Parser.parse(new String[] { "find", "test" }));
         }
 
         @Test
         @DisplayName("should generate find command object")
-        public void parse_findCommand_altDataFindCommand() throws DukeException {
+        public void parse_findCommand_altDataFindCommand() throws StuffException {
             assertEquals(new FindCommand("test"),
                     Parser.parse(new String[] { "find", "test" }));
         }
@@ -382,7 +386,7 @@ public class ParserTest {
         @Test
         @DisplayName("should generate find command object with empty search term")
         public void parse_findCommand_emptySearchTermFindCommand()
-                throws DukeException {
+                throws StuffException {
             assertEquals(new FindCommand(""),
                     Parser.parse(new String[] { "find" }));
         }

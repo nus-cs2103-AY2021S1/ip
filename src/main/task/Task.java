@@ -9,7 +9,7 @@ package main.task;
  */
 public class Task {
     private final String name;
-    private boolean doneState;
+    private boolean isDone;
 
     /**
      * Constructs a Task instance with the name of the task.
@@ -17,7 +17,7 @@ public class Task {
      */
     public Task(String name) {
         this.name = name;
-        doneState = false;
+        isDone = false;
     }
 
     /**
@@ -28,7 +28,7 @@ public class Task {
      */
     public Task(String name, boolean doneState) {
         this.name = name;
-        this.doneState = doneState;
+        this.isDone = doneState;
     }
 
     /**
@@ -40,14 +40,14 @@ public class Task {
     }
 
     private String doneTag() {
-        return doneState ? "[\u2713]" : "[\u2718]";
+        return isDone ? "[\u2713]" : "[\u2718]";
     }
 
     /**
      * Sets the done state of the task to true.
      */
     public void setDone() {
-        doneState = true;
+        isDone = true;
     }
 
     /**
@@ -55,7 +55,7 @@ public class Task {
      * @return the string meant for writing to disk.
      */
     public String write() {
-        return String.format(",%d,%s\n", doneState ? 1 : 0, name);
+        return String.format(",%d,%s\n", isDone ? 1 : 0, name);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class Task {
     public boolean equals(Object obj) {
         if (obj instanceof Task) {
             Task o = (Task) obj;
-            return this.name.equals(o.name) && this.doneState == o.doneState;
+            return this.name.equals(o.name) && this.isDone == o.isDone;
         }
         return false;
     }

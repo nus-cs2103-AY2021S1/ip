@@ -7,7 +7,7 @@ package main.exception;
  * @version v0.1
  * @since v0.1
  */
-public class InvalidDeadlineFormatException extends DukeException {
+public class InvalidDeadlineFormatException extends StuffException {
 
     /**
      * Constructs an InvalidDeadlineFormatException instance.

@@ -7,7 +7,7 @@ package main.exception;
  * @version v0.1
  * @since v0.1
  */
-public class UnknownCommandException extends DukeException {
+public class UnknownCommandException extends StuffException {
 
     /**
      * Constructs an UnknownCommandException instance.

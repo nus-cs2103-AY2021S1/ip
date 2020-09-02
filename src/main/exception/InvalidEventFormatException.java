@@ -7,7 +7,7 @@ package main.exception;
  * @version v0.1
  * @since v0.1
  */
-public class InvalidEventFormatException extends DukeException {
+public class InvalidEventFormatException extends StuffException {
 
     /**
      * Constructs an InvalidEventFormatException instance.

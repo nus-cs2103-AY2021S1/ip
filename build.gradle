@@ -61,11 +61,11 @@ sourceSets {
 }
 
 application {
-    mainClassName = "main.Duke"
+    mainClassName = "main.gui.Stuff"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "stuff"
     archiveClassifier = null
 }
 

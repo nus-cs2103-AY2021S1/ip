@@ -7,7 +7,7 @@ package main.exception;
  * @version v0.1
  * @since v0.1
  */
-public class EmptyMessageException extends DukeException {
+public class EmptyMessageException extends StuffException {
 
     /**
      * Constructs an EmptyMessageException instance with the

@@ -18,22 +18,22 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import main.command.Command;
-import main.exception.DukeException;
+import main.exception.StuffException;
 import main.parser.Parser;
 import main.storage.Storage;
 import main.task.TaskList;
 import main.ui.Ui;
 
 /**
- * Duke application.
+ * Stuff application.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.1
- * @since v0.1
+ * @version v0.2
+ * @since v0.2
  */
-public class Duke extends Application {
+public class Stuff extends Application {
     private final Image userImage;
-    private final Image dukeImage;
+    private final Image stuffImage;
     private final Ui ui;
     private final TaskList tasks;
     private ScrollPane scrollPane;
@@ -41,15 +41,15 @@ public class Duke extends Application {
     private TextField userInput;
 
     /**
-     * Constructs the duke application.
+     * Constructs the stuff application.
      */
-    public Duke() {
+    public Stuff() {
         tasks = new TaskList();
         ui = new Ui();
         userImage = new Image(
-                this.getClass().getResourceAsStream("/images/DaUser.png"));
-        dukeImage = new Image(
-                this.getClass().getResourceAsStream("/images/DaDuke.png"));
+                this.getClass().getResourceAsStream("/images/Peter.jpg"));
+        stuffImage = new Image(
+                this.getClass().getResourceAsStream("/images/Stuff.jpg"));
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
-        stage.setTitle("Duke");
+        stage.setTitle("Stuff");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -97,30 +97,30 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        ImageView dukeImageView = new ImageView(dukeImage);
+        ImageView stuffImageView = new ImageView(stuffImage);
 
-        dukeImageView.setClip(new Circle(50, 50, 50));
+        stuffImageView.setClip(new Circle(50, 50, 50));
 
-        DialogBox dukeGreeting = DialogBox
-                .getDukeDialog(new Label(ui.printGreeting()), dukeImageView);
+        DialogBox stuffGreeting = DialogBox
+                .getStuffDialog(new Label(ui.printGreeting()), stuffImageView);
 
-        dukeGreeting.setSpacing(10);
+        stuffGreeting.setSpacing(10);
 
-        dialogContainer.getChildren().addAll(dukeGreeting);
+        dialogContainer.getChildren().addAll(stuffGreeting);
 
         try {
             Storage.setTasks(tasks);
         } catch (IOException e) {
-            dukeImageView = new ImageView(dukeImage);
+            stuffImageView = new ImageView(stuffImage);
 
-            dukeImageView.setClip(new Circle(50, 50, 50));
+            stuffImageView.setClip(new Circle(50, 50, 50));
 
-            DialogBox dukeError = DialogBox
-                    .getDukeDialog(new Label(ui.printError()), dukeImageView);
+            DialogBox stuffDialog = DialogBox
+                    .getStuffDialog(new Label(ui.printError()), stuffImageView);
 
-            dukeError.setSpacing(10);
+            stuffDialog.setSpacing(10);
 
-            dialogContainer.getChildren().addAll(dukeError);
+            dialogContainer.getChildren().addAll(stuffDialog);
         }
 
         sendButton.setOnMouseClicked(event -> handleUserInput());
@@ -143,10 +143,10 @@ public class Duke extends Application {
         Insets padding = new Insets(10, 0, 10, 0);
 
         ImageView userImageView = new ImageView(userImage);
-        ImageView dukeImageView = new ImageView(dukeImage);
+        ImageView stuffImageView = new ImageView(stuffImage);
 
         userImageView.setClip(new Circle(50, 50, 50));
-        dukeImageView.setClip(new Circle(50, 50, 50));
+        stuffImageView.setClip(new Circle(50, 50, 50));
 
         String[] splitInput = input.trim().split(" ", 2);
 
@@ -154,32 +154,32 @@ public class Duke extends Application {
             Command command = Parser.parse(splitInput);
             output = command.execute(ui, tasks);
             hasCommand = command.hasCommandAfter();
-        } catch (DukeException e) {
+        } catch (StuffException e) {
             output = e.getMessage();
         }
 
         Label userText = new Label(input);
-        Label dukeText = new Label(output);
+        Label stuffText = new Label(output);
 
         DialogBox userDialog = DialogBox.getUserDialog(userText, userImageView);
-        DialogBox dukeDialog = DialogBox.getDukeDialog(dukeText, dukeImageView);
+        DialogBox stuffDialog = DialogBox.getStuffDialog(stuffText, stuffImageView);
 
         userDialog.setPadding(padding);
-        dukeDialog.setPadding(padding);
+        stuffDialog.setPadding(padding);
 
         userDialog.setSpacing(10);
-        dukeDialog.setSpacing(10);
+        stuffDialog.setSpacing(10);
 
-        dialogContainer.getChildren().addAll(userDialog, dukeDialog);
+        dialogContainer.getChildren().addAll(userDialog, stuffDialog);
         userInput.clear();
 
         if (!hasCommand) {
             try {
                 Storage.write(tasks);
             } catch (IOException e) {
-                DialogBox dukeError = DialogBox
-                        .getDukeDialog(new Label(ui.printError()), dukeImageView);
-                dialogContainer.getChildren().addAll(dukeError);
+                DialogBox stuffError = DialogBox
+                        .getStuffDialog(new Label(ui.printError()), stuffImageView);
+                dialogContainer.getChildren().addAll(stuffError);
             }
             Platform.exit();
         }

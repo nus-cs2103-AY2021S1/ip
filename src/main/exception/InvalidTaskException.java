@@ -7,7 +7,7 @@ package main.exception;
  * @version v0.1
  * @since v0.1
  */
-public class InvalidTaskException extends DukeException {
+public class InvalidTaskException extends StuffException {
 
     /**
      * Constructs an InvalidTaskException instance.

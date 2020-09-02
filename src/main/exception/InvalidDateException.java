@@ -7,7 +7,7 @@ package main.exception;
  * @version v0.1
  * @since v0.1
  */
-public class InvalidDateException extends DukeException {
+public class InvalidDateException extends StuffException {
 
     /**
      * Constructs an InvalidDateException instance with a message.

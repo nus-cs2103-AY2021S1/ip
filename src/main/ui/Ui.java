@@ -4,7 +4,7 @@ import main.task.Task;
 import main.task.TaskList;
 
 /**
- * Represents the ui of duke.
+ * Represents the ui of stuff.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
  * @version v0.1
@@ -25,7 +25,7 @@ public class Ui {
      * @return the greeting message.
      */
     public String printGreeting() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
+        return "Hello! I'm Stuff\nWhat can I do for you?";
     }
 
     /**
@@ -34,17 +34,17 @@ public class Ui {
      * @return the string with all tasks listed.
      */
     public String printTaskList(TaskList tasks) {
-        StringBuilder list = new StringBuilder();
+        StringBuilder listMessage = new StringBuilder();
 
         if (tasks.size() == 0) {
             return "There are no tasks yet!";
         }
 
         for (int i = 0; i < tasks.size(); i++) {
-            list.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
+            listMessage.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
         }
 
-        return list.toString();
+        return listMessage.toString();
     }
 
     /**
@@ -53,19 +53,20 @@ public class Ui {
      * @return a string with all the tasks found via the find command.
      */
     public String printFoundList(TaskList tasks) {
-        StringBuilder foundList;
+        StringBuilder foundListMessage;
 
         if (tasks.size() == 0) {
             return "There are no tasks found!";
         } else {
-            foundList = new StringBuilder("Here are the matching tasks in your list:\n");
+            foundListMessage = new StringBuilder(
+                    "Here are the matching tasks in your list:\n");
         }
 
         for (int i = 0; i < tasks.size(); i++) {
-            foundList.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
+            foundListMessage.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
         }
 
-        return foundList.toString();
+        return foundListMessage.toString();
     }
 
     /**

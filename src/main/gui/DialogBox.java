@@ -2,21 +2,33 @@ package main.gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 public class DialogBox extends HBox {
-    private Label text;
-    private ImageView displayPicture;
+    private static final Color DIALOG_COLOR = Color.rgb(255, 255, 255);
+    private static final Insets DIALOG_PADDING = new Insets(5);
+    private static final Background TEXT_BOX = new Background(
+            new BackgroundFill(
+                    Color.rgb(14, 122, 254),
+                    new CornerRadii(5),
+                    Insets.EMPTY
+            )
+    );
 
     private DialogBox(Label text, ImageView displayPicture) {
-        this.text = text;
-        this.displayPicture = displayPicture;
-
         text.setWrapText(true);
+        text.setPadding(DIALOG_PADDING);
+        text.setTextFill(DIALOG_COLOR);
+        text.setBackground(TEXT_BOX);
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
 
@@ -32,20 +44,22 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Constructs a DialogBox instance with dialog and display picture of user
-     * @param text the dialog
-     * @param displayPicture the picture of the person speaking
+     * Constructs a DialogBox instance with user input and display picture of user.
+     * @param text the user input.
+     * @param displayPicture the picture of the user.
+     * @return a DialogBox instance with user input and display picture of user.
      */
     public static DialogBox getUserDialog(Label text, ImageView displayPicture) {
         return new DialogBox(text, displayPicture);
     }
 
     /**
-     * Constructs a DialogBox instance with dialog and display picture of Duke
-     * @param text the dialog
-     * @param displayPicture the picture of the person speaking
+     * Constructs a DialogBox instance with dialog and display picture of Stuff.
+     * @param text the dialog of Stuff.
+     * @param displayPicture the picture of Stuff.
+     * @return a DialogBox instance with dialog and display picture of Stuff.
      */
-    public static DialogBox getDukeDialog(Label text, ImageView displayPicture) {
+    public static DialogBox getStuffDialog(Label text, ImageView displayPicture) {
         DialogBox db = new DialogBox(text, displayPicture);
         db.flip();
         return db;

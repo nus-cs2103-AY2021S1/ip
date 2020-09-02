@@ -31,10 +31,10 @@ public class Deadline extends Task {
      * task, time of deadline and the done state of the task.
      * @param name the name of task.
      * @param time the deadline of task.
-     * @param doneState the done state of the task.
+     * @param isDone the done state of the task.
      */
-    public Deadline(String name, String time, boolean doneState) {
-        super(name, doneState);
+    public Deadline(String name, String time, boolean isDone) {
+        super(name, isDone);
         this.time = LocalDateTime.parse(time);
     }
 
