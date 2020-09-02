@@ -23,11 +23,11 @@ public class DoneCommand extends Command {
      * Then writes the updated task list to computer
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         try {
             tasks.get(idx).setAsDone();
-            ui.showDoneMessage(tasks, idx);
             storage.save(tasks);
+            return ui.showDoneMessage(tasks.get(idx));
         } catch (IOException e) {
             throw new DukeException("cannot save data due to unexpected error lah.");
         }

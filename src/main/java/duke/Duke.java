@@ -1,12 +1,6 @@
 package duke;
 
 import duke.commands.Command;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,17 +16,22 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private boolean isRunning = true;
+    private String filePath = "./task_list.txt";
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
+    public Duke() {
+        ui = new Ui();
+        //ui.showWelcomeMessage();
+        storage = new Storage(filePath);
+        try {
+            tasks = storage.load();
+        } catch (FileNotFoundException e) {
+            tasks = new TaskList();
+            System.out.println(ui.showNewSaveFileMessage()); // TODO: fix this system print
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(new DukeException("loading failed lah.")); // TODO: fix this system print
+        }
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
-    public Duke() {} // Why do we need an empty constructor for this?
+    }
 
     /**
      * Creates bot object while initializing necessary components / classes
@@ -41,7 +40,7 @@ public class Duke {
      */
     public Duke(String filePath) throws DukeException {
         ui = new Ui();
-        ui.showWelcomeMessage();
+        //ui.showWelcomeMessage();
         storage = new Storage(filePath);
         try {
             tasks = storage.load();
@@ -76,20 +75,16 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Runs the bot while there is user input & the user has not ended the session (GUI version)
      */
     public String getResponse(String input) {
         try {
             Parser p = new Parser();
             Command c = p.parseCommand(input);
-            c.execute(tasks, ui, storage);
-            this.isRunning = !c.isExitCommand();
+            return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            System.out.println(e);
+            return e.toString();
         }
-        return "";
-
     }
 
 }

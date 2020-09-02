@@ -3,9 +3,6 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.tasks.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents the find command to search for task with specific keyword in its description
@@ -25,8 +22,8 @@ public class FindCommand extends Command {
      * Filters and prints the tasks containing the keyword
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) { // TODO: FIX THIS!
+    public String execute(TaskList tasks, Ui ui, Storage storage) { // TODO: FIX THIS!
         TaskList filteredTasks = new TaskList(tasks.filter(keyword));
-        ui.showFilterMessage(filteredTasks.size() > 0, filteredTasks);
+        return ui.showFilterMessage(filteredTasks.size() > 0, filteredTasks);
     }
 }

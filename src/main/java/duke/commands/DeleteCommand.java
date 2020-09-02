@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.*;
+import duke.tasks.Task;
 
 import java.io.IOException;
 
@@ -23,10 +24,11 @@ public class DeleteCommand extends Command {
      * Then writes the updated task list to computer
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException { // TODO: FIX THIS
         try {
-            ui.showDeleteMessage(tasks, idx);
+            Task t = tasks.remove(idx - 1);
             storage.save(tasks);
+            return ui.showDeleteMessage(tasks, t);
         } catch (IOException e) {
             throw new DukeException("cannot save data due to unexpected error lah.");
         }

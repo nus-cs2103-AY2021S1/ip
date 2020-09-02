@@ -34,15 +34,14 @@ public class AddCommand extends Command {
      * Then writes the updated task list to computer
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch(commandType) {
         case TODO:
             if (description.equals("")) {
                 throw new DukeException("Todo description cannot be empty lah!");
             }
             Task todo = new ToDo(description);
-            addThenSave(tasks, ui, storage, todo);
-            break;
+            return addThenSave(tasks, ui, storage, todo);
         case DEADLINE:
             if (description.equals("")) {
                 throw new DukeException("Deadline description cannot be empty lah!");
@@ -50,9 +49,8 @@ public class AddCommand extends Command {
                 throw new DukeException("Date and time of deadline cannot be empty lah!");
             } else {
                 Task deadline = new Deadline(description, timeOfTask);
-                addThenSave(tasks, ui, storage, deadline);
+                return addThenSave(tasks, ui, storage, deadline);
             }
-            break;
         case EVENT:
             if (description.equals("")) {
                 throw new DukeException("Event description cannot be empty lah!");
@@ -60,9 +58,8 @@ public class AddCommand extends Command {
                 throw new DukeException("Date and time of event cannot be empty lah!");
             } else {
                 Task event = new Event(description, timeOfTask);
-                addThenSave(tasks, ui, storage, event);
+                return addThenSave(tasks, ui, storage, event);
             }
-            break;
         default:
             throw new DukeException("Unknown add command lah!");
         }
@@ -71,11 +68,11 @@ public class AddCommand extends Command {
     /**
      * Adds then saves the task to the task list while showing an appropriate message
      */
-    private void addThenSave(TaskList tasks, Ui ui, Storage storage, Task task) throws DukeException {
+    private String addThenSave(TaskList tasks, Ui ui, Storage storage, Task task) throws DukeException {
         try {
             tasks.add(task);
-            ui.showAddTaskMessage(tasks, task);
             storage.save(tasks);
+            return ui.showAddTaskMessage(tasks, task);
         } catch (IOException e) {
             throw new DukeException("cannot save due to exception lah!");
         }

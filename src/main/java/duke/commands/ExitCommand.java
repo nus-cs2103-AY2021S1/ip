@@ -13,8 +13,8 @@ public class ExitCommand extends Command {
      * Shows the user the goodbye message
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showByeMessage();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showByeMessage();
     }
 
     @Override

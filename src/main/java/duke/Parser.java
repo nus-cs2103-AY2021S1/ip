@@ -58,7 +58,7 @@ public class Parser {
                 throw new DukeException("you need date and time for event (hint: event something /at YYY-MM-DD)!");
             }
         } else {
-            throw new DukeException("I dunno any command like that!");
+            throw new DukeException("Uncle Roger dunno any command like that!");
         }
     }
 

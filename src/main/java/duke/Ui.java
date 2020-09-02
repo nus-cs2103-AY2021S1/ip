@@ -3,7 +3,7 @@ package duke;
 import duke.tasks.Task;
 
 public class Ui {
-    String logo = " _       _ \n"
+    /*String logo = " _       _ \n"
             + "| |  _  | |_   _ ____ ___\n"
             + "| | | | | | |_/ |  _ \\  _ \\ \n"
             + "| |_| |_| |\\___ |    <  __/\n"
@@ -13,62 +13,53 @@ public class Ui {
 
 
     public void showWelcomeMessage() {
-        System.out.println("Hello from\n" + logo);
-        System.out.println(border + "Hullo! I Wyre, your Personal Assistant Chatbot! :>\nWhat you want me to do?"
-                + border);
+        //System.out.println("Hello from\n" + logo);
+        System.out.println("Hullo! I Wyre, your Personal Assistant Chatbot! :>\nWhat you want me to do?");
+    }*/
+
+    public String showByeMessage() {
+        return "Bye bye niece and nephews!";
+
     }
 
-    public void showByeMessage() {
-        System.out.println(border + "Bye bye hooman friend!" + border);
-
+    public String showNewSaveFileMessage() {
+        return "You new mah? Or your save file corrupted? Uncle Roger create new task list for you, don't worry lah.";
     }
 
-    public void showNewSaveFileMessage() {
-        System.out.println("You new to Wyre mah? (Or your save file corrupted :/) " +
-                "I create new task list for you, don't worry lah.");
+    public String showDoneMessage(Task t) {
+        return "Uncle Roger mark this task done:\t" + t;
     }
 
-    public void showDoneMessage(TaskList tList, int index) {
-        System.out.println(border + "I mark this task done:");
-        System.out.println("\t" + tList.get(index) + border);
+    public String showDeleteMessage(TaskList tList, Task t) {
+        return "Uncle Roger remove task:\t" + t + "\nNow you have " + (tList.size()) + " task(s) in the list lah!";
     }
 
-    public void showDeleteMessage(TaskList tList, int index) {
-        System.out.println(border + "I remove task:");
-        System.out.println("\t" + tList.get(index));
-        System.out.println("Now you have " + (tList.size() - 1) + " task(s) in the list lah!" + border);
+    public String showAddTaskMessage(TaskList tList, Task t) {
+        return "Uncle Roger add task:\n\t" + t + "\nNow you have " + tList.size() + " task(s) in the list lah!";
     }
 
-    public void showAddTaskMessage(TaskList tList, Task t) {
-        System.out.println(border + "Wyre at your service. I add task:\n\t" + t);
-        System.out.println("Now you have " + tList.size() + " task(s) in the list lah!" + border);
-    }
-
-    public void showFilterMessage(boolean isFound, TaskList filteredTasks) {
+    public String showFilterMessage(boolean isFound, TaskList filteredTasks) {
         if (isFound) {
-            System.out.println(border + "Here the matching tasks lah:\n");
-            printList(filteredTasks);
-            System.out.println(border);
+            return "Here the matching tasks lah:\n" + printList(filteredTasks);
         } else {
-            System.out.println(border + "Paiseh, no tasks found with that name!" + border);
+            return "Paiseh, no tasks found with that name!";
         }
     }
 
-    public void showTaskList(TaskList tasks) {
+    public String showTaskList(TaskList tasks) {
         if (tasks.isEmpty()) {
-            System.out.println(border + "Your list empty lah!" + border);
+            return "Your list empty lah!";
         } else {
-            System.out.println(border + "Here the list lah:\n");
-            printList(tasks);
-            System.out.println(border);
-
+            return "Here the list lah:\n" + printList(tasks);
         }
     }
 
-    public void printList(TaskList tasks) {
+    public String printList(TaskList tasks) {
+        String s = "";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("\t" + (i + 1) + ". " + tasks.get(i));
+            s += "\t" + (i + 1) + ". " + tasks.get(i) + "\n";
         }
+        return s;
     }
 
 }
