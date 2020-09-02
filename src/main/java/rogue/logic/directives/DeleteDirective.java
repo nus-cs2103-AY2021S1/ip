@@ -1,16 +1,12 @@
 package rogue.logic.directives;
 
+import rogue.logic.Report;
+import rogue.logic.exceptions.IncorrectArgumentException;
 import rogue.model.task.Task;
 import rogue.model.task.TaskList;
-
-import rogue.logic.Report;
-
 import rogue.storage.Storage;
 import rogue.storage.exceptions.StorageException;
-
 import rogue.ui.Ui;
-
-import rogue.logic.exceptions.IncorrectArgumentException;
 
 /**
  * Deletes a {@code Task} from the {@code TaskList}.

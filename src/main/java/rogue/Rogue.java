@@ -1,18 +1,14 @@
 package rogue;
 
-import rogue.model.task.TaskList;
-
 import rogue.logic.Report;
 import rogue.logic.directives.Executable;
+import rogue.logic.exceptions.IncorrectArgumentException;
 import rogue.logic.parser.Parser;
 import rogue.logic.parser.exceptions.UnknownCommandException;
-
+import rogue.model.task.TaskList;
 import rogue.storage.Storage;
 import rogue.storage.exceptions.StorageException;
-
 import rogue.ui.Ui;
-
-import rogue.logic.exceptions.IncorrectArgumentException;
 
 /**
  * Main driver of {@code Rogue}. Consists of three main elements: the {@code Storage},
@@ -25,7 +21,9 @@ public class Rogue {
 
     /**
      * Constructs {@code Rogue}.
+     *
      * Loads data from the file at the given path.
+     *
      * The data is used to recreate the tasks if it is successfully parsed.
      * Otherwise, an empty {@code TaskList} is used instead.
      *
@@ -43,33 +41,16 @@ public class Rogue {
     }
 
     /**
-     * Runs {@code Rogue}.
-     * Continues to prompt the user for more inputs, parsing and executing them appropriately,
-     * until the user initiates the exit sequence (i.e. {@code Action.EXIT}).
-     */
-    /*
-    public void start() {
-        ui.greet();
-        boolean isExit = false;
-        do {
-            String fullCommand = ui.readCommand();
-            try {
-                Executable e = Parser.createExe(fullCommand);
-                Report r = e.execute(storage, tasks, ui);
-                ui.print(r);
-                isExit = r.isExit();
-            } catch (UnknownCommandException | IncorrectArgumentException | StorageException e) {
-                ui.print(e.getMessage());
-            }
-        } while (!isExit);
-    }
-    */
-
-    /**
-     * Parses and executes user inputs to
+     * Parses a user input.
      *
-     * @param input
-     * @return
+     * A valid input is executed by {@code Rogue} and an appropriate response
+     * will be generated.
+     *
+     * An invalid input or a failed execution of valid input will result in
+     * an error message.
+     *
+     * @param input The user input to parse.
+     * @return A response from {@code Rogue}
      */
     public String getResponse(String input) {
         try {

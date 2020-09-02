@@ -4,9 +4,8 @@ import rogue.logic.directives.Action;
 import rogue.logic.directives.Executable;
 import rogue.logic.directives.ExitDirective;
 import rogue.logic.directives.ListDirective;
-import rogue.logic.parser.exceptions.UnknownCommandException;
-
 import rogue.logic.exceptions.IncorrectArgumentException;
+import rogue.logic.parser.exceptions.UnknownCommandException;
 
 /**
  * Parses user inputs into an {@code Executable} that is understood

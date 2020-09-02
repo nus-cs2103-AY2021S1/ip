@@ -1,7 +1,6 @@
 package rogue.logic.parser;
 
 import rogue.logic.directives.DoneDirective;
-
 import rogue.logic.exceptions.IncorrectArgumentException;
 
 public class DoneDirectiveParser {

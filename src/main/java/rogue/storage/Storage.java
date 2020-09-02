@@ -1,13 +1,11 @@
 package rogue.storage;
 
+import rogue.commons.util.DateTimeUtil;
 import rogue.model.task.Deadline;
 import rogue.model.task.Event;
 import rogue.model.task.Task;
 import rogue.model.task.Todo;
-
 import rogue.storage.exceptions.StorageException;
-
-import rogue.commons.util.DateTimeUtil;
 
 import java.io.IOException;
 import java.nio.file.Files;

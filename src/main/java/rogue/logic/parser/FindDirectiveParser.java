@@ -1,9 +1,7 @@
 package rogue.logic.parser;
 
-import rogue.logic.directives.FindDirective;
-
 import rogue.commons.util.StringUtil;
-
+import rogue.logic.directives.FindDirective;
 import rogue.logic.exceptions.IncorrectArgumentException;
 
 /**
