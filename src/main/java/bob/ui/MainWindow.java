@@ -32,9 +32,9 @@ public class MainWindow extends AnchorPane {
     private ImageView imageView;
     private Bob bob;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private Image bobImage = new Image(this.getClass().getResourceAsStream("/images/Bob.png"));
-    private Image imageTitle = new Image(this.getClass().getResourceAsStream("/images/titleImage.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private final Image bobImage = new Image(this.getClass().getResourceAsStream("/images/Bob.png"));
+    private final Image imageTitle = new Image(this.getClass().getResourceAsStream("/images/titleImage.png"));
 
 
 
@@ -45,6 +45,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         imageView.setImage(imageTitle);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setFitToHeight(false);
         dialogContainer.getChildren().addAll(
                 DialogBox.getBobDialog(MsgGenerator.generateIntroMessage(), bobImage)
         );
@@ -58,6 +59,8 @@ public class MainWindow extends AnchorPane {
             this.bob = new Bob();
         } catch (BobException | IOException e) {
             dialogContainer.getChildren().addAll(
+                    Gap.createGap(),
+                    Gap.createGap(),
                     DialogBox.getBobDialog(MsgGenerator.generateLoadingError(), bobImage)
             );
         }
@@ -72,7 +75,9 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = bob.nextAction(input);
         dialogContainer.getChildren().addAll(
+                Gap.createGap(),
                 DialogBox.getUserDialog(input, userImage),
+                Gap.createGap(),
                 DialogBox.getBobDialog(response, bobImage)
         );
         userInput.clear();

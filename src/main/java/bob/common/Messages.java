@@ -4,9 +4,7 @@ package bob.common;
  * Contains messages used in Bob.
  */
 public class Messages {
-    public static final String INTRO = "/*----------------- Welcome to BOB -----------------*/\n"
-            + "Hi, my name is BOB.\n"
-            + "What can I do for you?";
+    public static final String INTRO = "Hi, my name is BOB.\n" + "What can I do for you?";
     public static final String OUTRO = "Good bye boss, see you soon.";
     public static final String ADD_MSG = "Yes boss, I have added this task to your list:\n";
     public static final String DONE_MSG = "I have marked the task as done, good job boss.\n";
