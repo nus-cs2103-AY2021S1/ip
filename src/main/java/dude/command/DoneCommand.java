@@ -5,7 +5,7 @@ import java.io.IOException;
 import dude.util.CommandException;
 import dude.util.Storage;
 import dude.util.TaskList;
-import dude.util.Ui;
+import dude.ui.Ui;
 
 /**
  * The command changes the status of an incomplete task to complete.

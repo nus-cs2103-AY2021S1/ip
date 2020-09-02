@@ -8,7 +8,7 @@ import dude.task.Deadline;
 import dude.util.CommandException;
 import dude.util.Storage;
 import dude.util.TaskList;
-import dude.util.Ui;
+import dude.ui.Ui;
 
 /**
  * The command creates a deadline and adds it to the tasklist when executed.

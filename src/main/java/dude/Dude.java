@@ -9,19 +9,12 @@ import dude.util.InvalidArgumentException;
 import dude.util.InvalidCommandException;
 import dude.util.Storage;
 import dude.util.TaskList;
-import dude.util.Ui;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
-
-
+import dude.ui.Ui;
 
 /**
  * The main class containing the key functionality of the bot.
  */
-public class Dude extends Application {
+public class Dude {
     private static final String FILEPATH = "./data/tasks.txt";
     private final Storage storage;
     private final Ui ui;
@@ -61,17 +54,5 @@ public class Dude extends Application {
                 ui.showError(e.getMessage());
             }
         }
-    }
-
-    @Override
-    public void start(Stage stage) {
-        Label dude = new Label("Dude!"); // Creating a new Label control
-        Scene scene = new Scene(dude); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-
-        /*Dude bot = new Dude();
-        bot.run();*/
     }
 }

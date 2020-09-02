@@ -1,4 +1,4 @@
-package dude.util;
+package dude.ui;
 
 import java.util.Scanner;
 
