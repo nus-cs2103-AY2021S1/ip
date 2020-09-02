@@ -7,10 +7,8 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Parser parser;
 
     public Duke(String filePath) {
-        parser = new Parser(System.in);
         storage = new Storage(SAVE_FILE);
         try {
             tasks = storage.load();
@@ -20,57 +18,44 @@ public class Duke {
         }
     }
 
-    public void run() {
-        Ui.showWelcome();
+    public String getResponse(String input) {
 
         ParsedCommand command;
-        while (true) {
-            try {
-                command = parser.parseNextCommand();
-            } catch (DukeException e) {
-                Ui.showException(e);
-                continue;
-            }
 
-            switch (command.getType()) {
-            case "bye":
-                storage.save(tasks);
-                Ui.showExit();
-                return;
-            case "list":
-                Ui.showList(tasks);
-                break;
-            case "done":
-                Task doneTask = tasks.done(command.getIndex());
-                Ui.showDone(doneTask);
-                break;
-            case "delete":
-                Task deletedTask = tasks.delete(command.getIndex());
-                Ui.showDelete(deletedTask);
-                break;
-            case "todo":
-            case "deadline":
-            case "event":
-                try {
-                    Task addedTask = command.toTask();
-                    tasks.addTask(addedTask);
-                    Ui.showAddTask(addedTask);
-                } catch (DukeException e) {
-                    Ui.showException(e);
-                }
-                break;
-            case "find":
-                TaskList foundTasks = tasks.find(command.getName());
-                Ui.showFound(foundTasks);
-                break;
-            default:
-                Ui.showException(new DukeException("Duke did not receive a matching command type."));
-                break;
-            }
+        try {
+            command = Parser.parseNextCommand(input);
+        } catch (DukeException e) {
+            return Ui.showException(e);
         }
-    }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        switch (command.getType()) {
+        case "bye":
+            storage.save(tasks);
+            return Ui.showExit();
+        case "list":
+            return Ui.showList(tasks);
+        case "done":
+            Task doneTask = tasks.done(command.getIndex());
+            return Ui.showDone(doneTask);
+        case "delete":
+            Task deletedTask = tasks.delete(command.getIndex());
+            return Ui.showDelete(deletedTask);
+        case "todo":
+        case "deadline":
+        case "event":
+            try {
+                Task addedTask = command.toTask();
+                tasks.addTask(addedTask);
+                return Ui.showAddTask(addedTask);
+            } catch (DukeException e) {
+                return Ui.showException(e);
+            }
+        case "find":
+            TaskList foundTasks = tasks.find(command.getName());
+            return Ui.showFound(foundTasks);
+        default:
+            return Ui.showException(new DukeException("Duke did not receive a matching command type."));
+        }
+
     }
 }
