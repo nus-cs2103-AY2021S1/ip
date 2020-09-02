@@ -25,7 +25,7 @@ public class AddEventCommand extends AddCommand {
             throw new DukeException("Invalid Description");
         }
         tasks.addTask(task);
-        ui.showOnScreen("Got it, here yur task bij\n" + task.toString()
+        ui.addShowOnScreen("Got it, here yur task bij\n" + task.toString()
                 + "\nNow you have " + tasks.getSize() + " tasks in the list.");
     }
 }

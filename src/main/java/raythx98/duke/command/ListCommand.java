@@ -7,6 +7,6 @@ import raythx98.duke.ui.Ui;
 
 public class ListCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showOnScreen("Here yur tasks faggit: \n" + tasks.toString());
+        ui.addShowOnScreen("Here yur tasks faggit: \n" + tasks.toString());
     }
 }

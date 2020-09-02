@@ -2,7 +2,6 @@ package raythx98.duke.command;
 
 import raythx98.duke.exception.DukeException;
 import raythx98.duke.storage.Storage;
-import raythx98.duke.task.Deadline;
 import raythx98.duke.task.Task;
 import raythx98.duke.task.TaskList;
 import raythx98.duke.task.ToDos;
@@ -25,7 +24,7 @@ public class AddTodoCommand extends AddCommand {
             throw new DukeException("Invalid Description");
         }
         tasks.addTask(task);
-        ui.showOnScreen("Got it, here yur task bij\n" + task.toString()
+        ui.addShowOnScreen("Got it, here yur task bij\n" + task.toString()
                 + "\nNow you have " + tasks.getSize() + " tasks in the list.");
     }
 }

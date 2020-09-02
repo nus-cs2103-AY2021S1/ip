@@ -12,6 +12,6 @@ public class FindCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showOnScreen(tasks.findTask(keyWord));
+        ui.addShowOnScreen(tasks.findTask(keyWord));
     }
 }

@@ -1,11 +1,11 @@
 package raythx98.duke.task;
 
-import raythx98.duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
+
+import raythx98.duke.exception.DukeException;
 
 /**
  * Represents a specific task which has a deadline.

@@ -12,8 +12,7 @@ public class DoneCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showOnScreen("okcan done:");
-        ui.showOnScreen(tasks.getTask(doneIndex).markAsDone());
-        ui.showOnScreen("Now you have " + tasks.getSize() + " tasks in the list.");
+        ui.addShowOnScreen("okcan done:\n" + tasks.getTask(doneIndex).markAsDone()
+                + "\nNow you have " + tasks.getSize() + " tasks in the list.");
     }
 }

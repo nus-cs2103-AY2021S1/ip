@@ -8,8 +8,8 @@ public class ExitCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         storage.save();
-        ui.farewell();
         System.exit(0);
+        ui.farewell();
     }
     public boolean isExit() {
         return true;
