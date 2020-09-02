@@ -32,7 +32,7 @@ public class Parser {
         type = command[0];
         description = command[1];
 
-        if(type.equals("list")) {
+        if (type.equals("list")) {
             ui.list();
         } else if(type.equals("bye")) {
             ui.showEnd();
