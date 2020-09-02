@@ -1,0 +1,8 @@
+list
+todo sleep
+done 4
+done 2
+list
+delete 3
+list
+bye

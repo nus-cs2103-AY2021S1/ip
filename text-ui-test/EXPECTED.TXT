@@ -1,7 +1,43 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello I'm Verzachtend
+What can I do for you?
+BE YOURSELF, NEVER SURRENDER AND KEEP A SMILE ON YOUR FACE
+list
+________________________________________________
+Here are the tasks in your list:
+1. [D][✗] cs2103 porject (by: Jun 26 2020 2359)
+2. [E][✗] welcome tea angklung (by: 17 from 7-9 p.m.)
+3. [T][✗] read book
+________________________________________________
+________________________________________________
+Got it. I've added this task:
+ [T][✗] sleep
+Now you have 4 tasks in the list.
+________________________________________________
+________________________________________________
+[T][✓] sleep
+________________________________________________
+________________________________________________
+[E][✓] welcome tea angklung (by: 17 from 7-9 p.m.)
+________________________________________________
+________________________________________________
+Here are the tasks in your list:
+1. [D][✗] cs2103 porject (by: Jun 26 2020 2359)
+2. [E][✓] welcome tea angklung (by: 17 from 7-9 p.m.)
+3. [T][✗] read book
+4. [T][✓] sleep
+________________________________________________
+________________________________________________
+Noted. I've removed this task:
+  [T][✗] read book
+Now you have 3 tasks in the list.
+________________________________________________
+________________________________________________
+Here are the tasks in your list:
+1. [D][✗] cs2103 porject (by: Jun 26 2020 2359)
+2. [E][✓] welcome tea angklung (by: 17 from 7-9 p.m.)
+3. [T][✓] sleep
+________________________________________________
+________________________________________________
+Bye. Hope to see you again soon!
+________________________________________________
 
