@@ -2,7 +2,6 @@ package duke;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Scanner;
 
 import duke.task.Task;
 
@@ -11,134 +10,115 @@ import duke.task.Task;
  */
 public class Ui {
 
-    private static String divider = "______________________________________________________________________________";
-    private static String logo = "             *\n"
-            + "      o  o  / \\  o  o\n"
-            + "      |\\/ \\/   \\/ \\/|\n"
-            + "      |             |\n"
-            + "      |ooooooooooooo|\n"
-            + " __  _  ____  ____    ____      ____    ___   ____\n"
-            + "|  |/ ||    ||    \\  /    |    |    \\  /   \\ |    \\\n"
-            + "|  ' /  |  | |  _  ||   __|    |  o  )|     ||  o  )\n"
-            + "|    \\  |  | |  |  ||  |  |    |     ||  O  ||     |\n"
-            + "|     | |  | |  |  ||  |_ |    |  O  ||     ||  O  |\n"
-            + "|  .  | |  | |  |  ||     |    |     ||     ||     |\n"
-            + "|__|\\_||____||__|__||___,_|    |_____| \\___/ |_____|\n";
-    private final Scanner scanner = new Scanner(System.in);
+    private StringBuilder responseMessage = new StringBuilder("");
 
     /**
-     * Displays list of tasks to user.
+     * Resets responseMessage to empty StringBuilder.
+     */
+    private void resetMessage() {
+        responseMessage = new StringBuilder("");
+    }
+
+    /**
+     * Sets responseMessage to list of tasks.
      * @param tasks tasks of user.
      */
-    public void showList(List<Task> tasks) {
-        System.out.println(divider);
-        System.out.println("   Banana! So many tasks?");
+    public void setShowListMessage(List<Task> tasks) {
+        resetMessage();
+        responseMessage.append("Banana! So many tasks?\n");
         Task task;
         for (int i = 0; i < tasks.size(); i++) {
             task = tasks.get(i);
-            System.out.println("   " + (i + 1) + ". " + task.toString());
+            responseMessage.append((i + 1) + ". " + task.toString() + "\n");
         }
-        System.out.println(divider + "\n");
     }
 
     /**
-     * Prints greetings to user.
+     * Sets responseMessage to bye message.
      */
-    public void greet() {
-        System.out.println("Bello from the Majestic\n" + logo);
-        System.out.println("Banana! What can King Bob do for you?\n" + divider + "\n");
+    public void setByeMessage() {
+        resetMessage();
+        responseMessage.append("Banana! King Bob is sad to see you go. Farewell my friend!");
     }
 
     /**
-     * Wraps message in dividers.
-     * @param message Message to be wrapped in dividers.
-     */
-    public void wrapMessage(String message) {
-        System.out.println(divider);
-        System.out.println("   " + message);
-        System.out.println(divider + "\n");
-    }
-
-    /**
-     * Prints bye message to user.
-     */
-    public void printByeMessage() {
-        wrapMessage("Banana! King Bob is sad to see you go. Farewell my friend!");
-    }
-
-    /**
-     * Prints added message to user.
+     * Sets responseMessage to added message.
      * @param task Task that is added.
      * @param tasksNumber number of tasks.
      */
-    public void printAddedMessage(Task task, int tasksNumber) {
-        wrapMessage("Banana! Banana has been added to your list!\n"
+    public void setAddedMessage(Task task, int tasksNumber) {
+        resetMessage();
+        responseMessage.append("Banana! Banana has been added to your list!\n"
                 + "      " + task.toString() + "\n"
                 + "   Now you have " + tasksNumber + " banana(s) in your list! Nom nom..");
     }
 
     /**
-     * Prints deleted message to user.
+     * Sets responseMessage to deleted message.
      * @param task Task that is deleted.
      * @param tasksNumber Number of tasks.
      */
-    public void printDeletedMessage(Task task, int tasksNumber) {
-        wrapMessage("Banana! Banana has been eaten. Burp!\n"
+    public void setDeletedMessage(Task task, int tasksNumber) {
+        resetMessage();
+        responseMessage.append("Banana! Banana has been eaten. Burp!\n"
                 + "      " + task.toString() + "\n"
                 + "   Now you have " + (tasksNumber - 1) + " banana(s) in your list! Nom nom..");
     }
 
     /**
-     * Prints done message to user.
+     * Sets responseMessage to done message.
      * @param task Task that is done.
      */
-    public void printDoneMessage(Task task) {
-        wrapMessage("Banana! I've marked this task as done:\n"
+    public void setDoneMessage(Task task) {
+        resetMessage();
+        responseMessage.append("Banana! I've marked this task as done:\n"
                 + "      " + task.toString());
     }
 
     /**
-     * Prints loading error message to user.
+     * Sets responseMessage to loading error message.
      */
-    public void printLoadingErrorMessage() {
-        wrapMessage("Banana! There is a loading error...");
+    public void setLoadingErrorMessage() {
+        resetMessage();
+        responseMessage.append("Banana! There is a loading error...");
     }
 
     /**
-     * Prints tasks happening/due this date.
+     * Sets responseMessage to tasks happening/due this date.
      * @param date date requested by user.
      * @param tasks tasks of user.
      */
-    public void findTaskByDate(LocalDate date, List<Task> tasks) {
-        System.out.println(divider);
+    public void setFindTaskByDateMessage(LocalDate date, List<Task> tasks) {
+        resetMessage();
+        responseMessage.append("Banana! Here are your bananas..\n");
         for (Task t : tasks) {
             if (t.getDate().equals(date)) {
-                System.out.println("   " + t.toString());
+                responseMessage.append(t.toString() + "\n");
             }
         }
-        System.out.println(divider + "\n");
     }
 
     /**
-     * Prints tasks containing this keyword.
+     * Sets responseMessage to tasks containing this keyword.
      * @param keyword Keyword input by user.
      * @param tasks Tasks of user.
      */
-    public void findTaskByKeyword(String keyword, List<Task> tasks) {
-        System.out.println(divider);
+    public void setFindTaskByKeywordMessage(String keyword, List<Task> tasks) {
+        resetMessage();
+        responseMessage.append("Banana! Here are your bananas..\n");
         for (Task t : tasks) {
             if (t.toString().contains(keyword)) {
-                System.out.println("   " + t.toString());
+                responseMessage.append(t.toString() + "\n");
             }
         }
-        System.out.println(divider + "\n");
     }
 
     /**
-     * Reads command of user.
-     * @return string command of user.
+     * Returns the responseMessage.
+     * @return responseMessage of this Ui Object.
      */
-    public String readCommand() {
-        return scanner.nextLine();
+    public String getResponseMessage() {
+        return responseMessage.toString();
     }
+
 }

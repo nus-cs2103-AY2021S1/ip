@@ -22,10 +22,10 @@ import duke.task.Todo;
 public class Storage {
 
     private List<Task> tasks = new ArrayList<>();
-    private String filePath;
+    private Path filePath;
     private File dataFile;
 
-    public Storage(String filePath) {
+    public Storage(Path filePath) {
         this.filePath = filePath;
     }
 
@@ -38,7 +38,7 @@ public class Storage {
 
         Path directoryPath = Paths.get("data");
         boolean directoryExists = Files.exists(directoryPath);
-        dataFile = new File(filePath);
+        dataFile = new File(filePath.toString());
         boolean fileExists = Files.exists(Paths.get("data", "duke.txt"));
 
         if (!directoryExists) {

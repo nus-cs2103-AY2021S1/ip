@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
+import javafx.application.Platform;
 
 /**
  * Represents command that is specific to the exit command.
@@ -24,6 +25,8 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printByeMessage();
+        ui.setByeMessage();
+        Platform.exit();
+        System.exit(0);
     }
 }

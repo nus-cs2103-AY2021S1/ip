@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (Parser.isValidIndex(input, taskList.getListSize())) {
             int index = Parser.getIndex(input);
-            ui.printDeletedMessage(taskList.getList().get(index), taskList.getListSize());
+            ui.setDeletedMessage(taskList.getList().get(index), taskList.getListSize());
             taskList.deleteTask(index);
             storage.saveListToFile(taskList.getList());
         } else {
