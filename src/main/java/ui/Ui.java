@@ -1,9 +1,9 @@
 package ui;
 
-import java.util.Scanner;
-
 import duke.DukeException;
 import parser.Parser;
+
+import java.util.Scanner;
 
 /**
  * UI deals with interactions with the user in the Java Duke Program
@@ -35,7 +35,9 @@ public class Ui {
         Scanner scanner = new Scanner(System.in);
         while (isOngoing) {
             String input = scanner.nextLine();
-            systemOutput(input);
+            System.out.println(lineFormat + "\n");
+            System.out.println(systemOutput(input));
+            System.out.println("\n" + lineFormat);
         }
     }
 
@@ -45,21 +47,20 @@ public class Ui {
      * it calles the goodbye function and sets ongoing to false.
      *
      * @param input input given by the user
+     * @return String that needs to be printed to the user
      */
-    public void systemOutput(String input) {
-        System.out.println(lineFormat + "\n");
+    public String systemOutput(String input) {
         try {
             String output = parser.scenarios(input);
             if (output.equals("bye")) {
                 isOngoing = false;
-                goodBye();
+                return goodBye();
             } else {
-                System.out.println(output);
+                return output;
             }
         } catch (DukeException e) {
-            System.out.printf(outputFormat, e.getMessage());
+            return "  " + e.getMessage() + "\n";
         }
-        System.out.println("\n" + lineFormat);
     }
 
     /**
@@ -72,11 +73,17 @@ public class Ui {
     }
 
     /**
+     * @return String that greets the user
+     */
+    public static String guiGreeting() {
+        return "  (^v^)" + "  Hey there! I'm Lan Zhan\n" + "  What can I do for you?\n";
+    }
+
+    /**
      * Says goodbye to the user.
      */
-    public void goodBye() {
-        System.out.printf(outputFormat, "          *(^v^)");
-        System.out.printf(outputFormat, "Bye. Hope to see you again soon!");
+    public String goodBye() {
+        return "  " + "          *(^v^)" + "\n" + "  " + "Bye. Hope to see you again soon!" + "\n";
     }
 
     /**

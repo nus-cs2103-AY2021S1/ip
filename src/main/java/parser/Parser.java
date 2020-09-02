@@ -1,13 +1,13 @@
 package parser;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import duke.DukeException;
 import storage.Storage;
 import task.Deadline;
 import task.Event;
 import tasklist.TaskList;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Parser parses the commands inputted by the user into the Java Duke Program
@@ -65,6 +65,9 @@ public class Parser {
             String event = input.substring(5);
             return taskList.addItem(command, event);
         }
+        case "LanZhan":
+            return "Wei Ying, \n\n"
+                    + "Why am I sitting here having such a useless conversation with you?\n\n Go away!";
         default:
             throw new DukeException("Oops! I'm sorry but I have no idea what that means >.<");
         }
