@@ -16,58 +16,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.2/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DukeTodoSave.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/AddDeadlineCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/AddDeadlineCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/AddEventCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/AddEventCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/AddTodoCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/AddTodoCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/CompletedCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/CompletedCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/DeleteCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/DeleteCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/ExitCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/ExitCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/FilterDateCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/FilterDateCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/FindCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/FindCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/ListCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/ListCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/ShowFunctionCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/ShowFunctionCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/WrongCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/WrongCommand.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Duke.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Duke.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/InputManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/InputManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseAddTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseAddTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseCompleted.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseCompleted.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseDelete.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseDelete.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseExit.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseExit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseFind.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseFind.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseShow.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseShow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Tasks/TaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Tasks/TaskManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/UI/InitiateParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/UI/InitiateParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/UI/UserInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/UI/UserInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/AddDeadlineCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/AddDeadlineCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/AddEventCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/AddEventCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/AddTodoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/AddTodoCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/CompletedCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/CompletedCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/DeleteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/DeleteCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/ExitCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/FilterDateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/FilterDateCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/FindCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/FindCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/ListCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/ListCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/ShowFunctionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/ShowFunctionCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Command/WrongCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Command/WrongCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DialogBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DialogBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Duke.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Launcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/InputManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/InputManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseAddTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseAddTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseCompleted.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseCompleted.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseDelete.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseDelete.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseExit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseExit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseFind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseFind.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/ParseShow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/ParseShow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Tasks/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tasks/TaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UI/InitiateParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/InitiateParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UI/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/UserInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/testing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/testing.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,22 +200,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="102" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1599032427849" />
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1599067445565">
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1599068229884">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1599067445565" />
-    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1599067445565">
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1599068229884" />
+    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1599068229884">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1599067445565" />
-    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1599067445565">
+    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1599068229884" />
+    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1599068229884">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1599067445565" />
-    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1599067445565">
+    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1599068229884" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1599068229884">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1599067445565" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1599068229884" />
     <state x="197" y="0" key="SettingsEditor" timestamp="1599031180968">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
