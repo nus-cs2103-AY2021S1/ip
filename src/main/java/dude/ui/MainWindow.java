@@ -1,14 +1,16 @@
 package dude.ui;
 
+import dude.Dude;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import dude.Dude;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -24,8 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Dude dude;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/right.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/left.png"));
 
     @FXML
     public void initialize() {
@@ -43,11 +45,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = dude.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
+        DialogWrapper response = dude.getResponse(input);
+        if (response.getExitStatus()) {
+            Platform.exit();
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response.getMessage(), dukeImage)
+            );
+            userInput.clear();
+        }
     }
 }

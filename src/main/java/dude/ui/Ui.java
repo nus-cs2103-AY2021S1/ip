@@ -5,16 +5,21 @@ import java.util.Scanner;
 /**
  * The class the handles all the on screen interaction with the user.
  */
-
 public class Ui {
     private static final String LINE = "____________________________________________________________\n";
     private Scanner scanner;
     private String message;
 
+    /**
+     * Constructor for the Ui class.
+     */
     public Ui() {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Greeting to the user.
+     */
     public void greet() {
         StringBuilder str = new StringBuilder();
         str.append("Yo I'm Dood!!\nAnything I can do for you?\n").append("The commands available are:\n")
@@ -58,6 +63,10 @@ public class Ui {
 
     public String readCommand() {
         return scanner.nextLine();
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public void setMessage(String message) {

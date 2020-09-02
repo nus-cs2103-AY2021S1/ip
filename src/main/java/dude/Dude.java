@@ -3,13 +3,14 @@ package dude;
 import java.io.FileNotFoundException;
 
 import dude.command.Command;
+import dude.ui.Ui;
+import dude.ui.DialogWrapper;
 import dude.util.CommandException;
 import dude.util.CorruptedFileException;
 import dude.util.InvalidArgumentException;
 import dude.util.InvalidCommandException;
 import dude.util.Storage;
 import dude.util.TaskList;
-import dude.ui.Ui;
 
 /**
  * The main class containing the key functionality of the bot.
@@ -38,6 +39,22 @@ public class Dude {
     }
 
     /**
+     * Get a response from Dude.
+     *
+     * @param input input from user.
+     * @return DialogWrapper based on the command executed.
+     */
+    public DialogWrapper getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            command.execute(tasks, ui, storage);
+            return new DialogWrapper(ui.getMessage(), command.getExitStatus());
+        } catch (CommandException | InvalidArgumentException | InvalidCommandException e) {
+            return new DialogWrapper(e.getMessage(), false);
+        }
+    }
+
+    /**
      * Starts Dude bot by accepting user input.
      */
     public void run() {
@@ -54,5 +71,15 @@ public class Dude {
                 ui.showError(e.getMessage());
             }
         }
+    }
+
+    /**
+     * Runs the application.
+     *
+     * @param args unused.
+     */
+    public static void main(String[] args) {
+        Dude dude = new Dude();
+        dude.run();
     }
 }
