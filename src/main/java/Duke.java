@@ -1,6 +1,9 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * The main Duke class.
+ */
 public class Duke {
     private Ui ui;
     private TaskList tasks;

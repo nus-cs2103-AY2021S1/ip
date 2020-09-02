@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Responsible for storing the file. A <code>Storage</code> object contains a <code>File</code>
+ * object.
+ */
 public class Storage {
     private File file;
 
@@ -13,6 +17,13 @@ public class Storage {
         file = new File(filepath);
     }
 
+    /**
+     * Reads the user's saved file and returns a list of all the tasks found in the file.
+     *
+     * @return A list of task.
+     * @throws FileNotFoundException When no file is found.
+     * @throws DukeException When no file is found.
+     */
     public ArrayList<Task> loadFile() throws FileNotFoundException, DukeException {
         if (file.exists()) {
             Scanner scanner = new Scanner(file);
@@ -26,6 +37,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes what is in the task list into the user's safe file.
+     *
+     * @param tasks TaskList to be read.
+     * @throws DukeException When no file is found.
+     */
     public void writeFile(TaskList tasks) throws IOException {
         FileWriter writer = new FileWriter(file);
         writer.write(tasks.toString());

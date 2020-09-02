@@ -1,8 +1,15 @@
+/**
+ * Represents a Task. A <code>Task</code> object contains a description, keeps track of
+ * whether it has been completed and stores a type.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
     protected Type type;
 
+    /**
+     * Task types available.
+     */
     public enum Type {
         TODO, DEADLINE, EVENT, NONE
     }

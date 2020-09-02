@@ -1,3 +1,7 @@
+/**
+ * Represents a Todo Task. A <code>Todo</code> object contains a description and
+ * keeps track of whether it has been completed.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {

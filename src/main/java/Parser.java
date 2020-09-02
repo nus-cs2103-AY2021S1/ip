@@ -3,8 +3,20 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Responsible for parsing the user's input and processing the desired command.
+ */
 public class Parser {
 
+    /**
+     * Reads the user input and return it.
+     *
+     * @param input An input String.
+     * @param ui A Ui object.
+     * @param tasks A TaskList object.
+     * @param storage A Storage object.
+     * @throws DukeException When user input cannot be understood.
+     */
     public static void parseInput(String input, Ui ui, TaskList tasks, Storage storage) throws DukeException, IOException {
         String[] parsed = input.split(" ", 2);
         String keyword = parsed[0];
@@ -61,6 +73,12 @@ public class Parser {
         storage.writeFile(tasks);
     }
 
+    /**
+     * Reads the user input and return it.
+     *
+     * @param input An input String.
+     * @return A boolean whether input is bye.
+     */
     public static boolean isBye(String input){
         return input.split(" ", 2)[0].equals("bye");
     }

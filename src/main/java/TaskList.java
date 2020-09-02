@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * Responsible for storing a list of Tasks and interaction with the Tasks.
+ * A <code>TaskList</code> contains an <code>ArrayList</code> object.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
@@ -20,6 +24,11 @@ public class TaskList {
         return listString;
     }
 
+    /**
+     * Prints the list of tasks in order.
+     *
+     * @param ui A Ui object.
+     */
     public void printList(Ui ui) {
         if (tasks.size() == 0) ui.say("Your task list is currently empty.");
         else {
@@ -32,6 +41,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the (number - 1)th task in the list as done.
+     *
+     * @param number Task number.
+     * @param ui A Ui object.
+     */
     public void markTaskDone(int number, Ui ui) {
         Task task = tasks.get(number - 1);
         task.markDone();
@@ -39,6 +54,12 @@ public class TaskList {
         System.out.println(task);
     }
 
+    /**
+     * Deletes the (number - 1)th task in the list.
+     *
+     * @param number Task number.
+     * @param ui A Ui object.
+     */
     public void deleteTask(int number, Ui ui) {
         Task task = tasks.get(number - 1);
         tasks.remove(number - 1);
@@ -47,11 +68,23 @@ public class TaskList {
         ui.say("You have " + getListSize() + " items in your task list now.");
     }
 
+    /**
+     * Adds a task to the back of the list.
+     *
+     * @param task The Task to be added.
+     * @param ui A Ui object.
+     */
     public void addTask(Task task, Ui ui) {
         tasks.add(task);
         ui.say("You have " + getListSize() + " items in your task list now.");
     }
 
+    /**
+     * Finds a task that matches the String body parameter.
+     *
+     * @param body String to search for.
+     * @param ui A Ui object.
+     */
     public void findTask(String body, Ui ui) {
         if (tasks.size() > 0) {
             ui.say("Here are the matching tasks in your list:");
@@ -68,6 +101,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Gets the size of the list.
+     *
+     * @return The list size.
+     */
     public int getListSize() {
         return tasks.size();
     }

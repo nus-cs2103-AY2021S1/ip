@@ -1,3 +1,6 @@
+/**
+ * Handles exceptions related to Duke.
+ */
 public class DukeException extends Exception {
     private String exception;
 
