@@ -10,6 +10,7 @@ public class DeadlineCommand extends Command {
 
     /** The Deadline that wants to be added to the TaskList. */
     protected Deadline deadline;
+    protected TaskList tasks;
 
     /**
      * Constructs a DeadlineCommand.
@@ -24,14 +25,18 @@ public class DeadlineCommand extends Command {
     /**
      * Adds the Deadline to the related TaskList.
      *
-     * @param tasks The related TaskList.
+     * @param t The related TaskList.
      */
     @Override
-    public void perform(TaskList tasks) {
+    public void perform(TaskList t) {
+        tasks = t;
         tasks.add(deadline);
-        System.out.println(" Okay! I have added this task:" + "\n" + "   "
+    }
+
+    public String getReply() {
+        return " Okay! I have added this task:" + "\n" + "   "
                 + deadline.toString() + "\n" + " Now you have " + tasks.size() + (tasks.size() > 1 ? " tasks."
-                : " task."));
+                : " task.");
     }
 
     /**
