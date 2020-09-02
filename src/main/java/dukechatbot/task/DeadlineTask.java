@@ -1,10 +1,10 @@
 package dukechatbot.task;
 
-import dukechatbot.enums.TaskEnum;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import dukechatbot.enums.TaskEnum;
 
 /**
  * Represents Deadline Task and
@@ -18,9 +18,9 @@ public class DeadlineTask extends Task {
     private static final DateTimeFormatter PATTERN_OUTPUT =
             DateTimeFormatter.ofPattern("MMM dd yyyy KK:mm a");
 
-    String title;
+    private String title;
 
-    LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     public DeadlineTask(String title, String dateTimeDetails) throws DateTimeParseException {
         super(String.format("%s (by: %s)", title,

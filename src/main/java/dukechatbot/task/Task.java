@@ -1,8 +1,8 @@
 package dukechatbot.task;
 
-import dukechatbot.enums.TaskEnum;
-
 import java.util.Arrays;
+
+import dukechatbot.enums.TaskEnum;
 
 public class Task {
 
@@ -33,7 +33,7 @@ public class Task {
 
     /**
      * Returns the unicode corresponding to isDone value.
-     * 
+     *
      * @return unicode corresponding to isDone value.
      */
     public String getStatusIcon() {

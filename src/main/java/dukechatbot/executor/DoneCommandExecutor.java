@@ -1,14 +1,14 @@
 package dukechatbot.executor;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import dukechatbot.command.Command;
 import dukechatbot.command.DoneCommand;
 import dukechatbot.constant.DukeConstants;
 import dukechatbot.dukeoutput.DukeOutput;
 import dukechatbot.tasklist.TaskList;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Represents executor of done command.

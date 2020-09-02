@@ -89,7 +89,7 @@ public class CommandParser {
     public static String getTitle(String input) throws IndexOutOfBoundsException {
         try {
             return input.split("\\s+", 2)[1];
-        } catch(IndexOutOfBoundsException exception) {
+        } catch (IndexOutOfBoundsException exception) {
             throw new IndexOutOfBoundsException(
                     "\u2639 OOPS!!! The description of a deadline cannot be empty.");
         }

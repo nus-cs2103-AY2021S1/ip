@@ -1,10 +1,10 @@
 package dukechatbot.task;
 
-import dukechatbot.enums.TaskEnum;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import dukechatbot.enums.TaskEnum;
 
 /**
  * Represents EventTask object 
@@ -24,13 +24,13 @@ public class EventTask extends Task {
     private static final DateTimeFormatter PATTERN_TIME_OUTPUT =
             DateTimeFormatter.ofPattern("KK:mm a");
 
-    String title;
+    private String title;
 
-    LocalDate date;
+    private LocalDate date;
 
-    LocalTime startTime;
+    private LocalTime startTime;
 
-    LocalTime endTime;
+    private LocalTime endTime;
 
     public EventTask(String title, String date, String startTime, String endTime) {
         super(String.format("%s (at: %s %s - %s)", title,

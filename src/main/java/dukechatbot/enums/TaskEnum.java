@@ -4,7 +4,6 @@ package dukechatbot.enums;
  * Represents enum of the possible task.
  */
 public enum TaskEnum {
-    
     TODO("T"),
     EVENT("E"),
     DEADLINE("D");
