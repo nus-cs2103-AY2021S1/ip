@@ -22,19 +22,12 @@ public class ListCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Storage storage) {
-        StringBuilder string = new StringBuilder();
-        List<Task> list = taskList.getTaskList();
+        String tasksString = taskList.getTaskList();
 
-        if (list.size() == 0) {
+        if (tasksString.equals("")) {
             return "You have no tasks. Add some here!";
         }
 
-        for (int i = 0; i < list.size(); i++) {
-            if (i != 0) {
-                string.append("\n");
-            }
-            string.append((i + 1) + ". ").append(list.get(i).toString());
-        }
-        return string.toString();
+        return tasksString;
     }
 }

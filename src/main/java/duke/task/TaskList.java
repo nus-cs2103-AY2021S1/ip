@@ -176,11 +176,22 @@ public class TaskList {
     }
 
     /**
-     * Returns a shallow copy of the ArrayList.
+     * Returns the list of tasks.
      *
-     * @return Shallow copy of the ArrayList.
+     * @return The tasks in a string format.
      */
-    public List<Task> getTaskList() {
-        return List.of(tasksMap.values().toArray(new Task[0]));
+    public String getTaskList() {
+        StringBuilder string = new StringBuilder();
+        boolean isFirst = true;
+        for (int i = 1; i < nextIndex; i++) {
+            boolean taskExists = tasksMap.containsKey(i);
+            if (isFirst && taskExists) {
+                string.append(i).append(": ").append(tasksMap.get(i).toString());
+                isFirst = false;
+            } else if (taskExists) {
+                string.append("\n").append(i).append(": ").append(tasksMap.get(i).toString());
+            }
+        }
+        return string.toString();
     }
 }
