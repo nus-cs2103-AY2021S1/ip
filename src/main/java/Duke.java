@@ -10,7 +10,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Duke extends Application {
 
@@ -23,15 +22,6 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
-    public static void main(String[] args) {
-//        try {
-//            taskList = Storage.loadFromMem();
-//        } catch (DukeException e) {
-//            Ui.printWithLines(e.toString() + "\n");
-//        }
-//        Ui.processInput(taskList);
-    }
 
     @Override
     public void start(Stage stage) {
@@ -86,17 +76,6 @@ public class Duke extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        //Step 3. Add functionality to handle user input.
-//        sendButton.setOnMouseClicked((event) -> {
-//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-//            dialogContainer.getChildren().add(getDialogLabel("Help pls"));
-//            userInput.clear();
-//        });
-//
-//        userInput.setOnAction((event) -> {
-//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-//            userInput.clear();
-//        });
         Ui.initialise(userInput, dialogContainer, this, user, duke);
 
         try {
@@ -129,13 +108,6 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-//        Label userText = new Label(userInput.getText());
-//        Label dukeText = new Label(getResponse(userInput.getText()));
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userText, new ImageView(user)),
-//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-//        );
-//        userInput.clear();
         Ui.startInput(taskList);
     }
 
