@@ -9,17 +9,10 @@ public class Ui {
     /**
      * prints the greeting when user first boots duke
      */
-    public void printGreeting() {
-        String logo =
-              " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    public String printGreeting() {
         String greeting = "Sorry :( duke.Duke is getting some upgrades at the moment.\n"
                 + "This is Tron, temporarily standing in for duke.Duke, how may I assist you ?\n";
-        System.out.println(this.border + greeting + this.border);
+        return (this.border + greeting + this.border);
     }
 
     /**

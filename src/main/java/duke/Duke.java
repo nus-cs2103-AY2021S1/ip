@@ -35,7 +35,7 @@ import javafx.stage.Stage;
  *
  * @author  Ryan Lim
  */
-public class Duke extends Application {
+public class Duke {
     /** variable to check if duke is still running */
     private boolean isRunning = true;
     /** ArrayList to hold all tasks keyed in by the user for the session */
@@ -70,6 +70,9 @@ public class Duke extends Application {
         this.ui.printGreeting();
     }
 
+    public String greet() {
+        return this.ui.printGreeting();
+    }
 
     /**
      * Handles Tasks which are marked done and updates it in both hard disk accordingly as well as the task list.
@@ -77,8 +80,6 @@ public class Duke extends Application {
      * @param parameters the index of the task to be marked done.
      * @throws DukeExceptions.NoUndoneTaskException
      */
-
-
     private String doneHandler(String[] parameters) throws DukeExceptions.NoUndoneTaskException {
         if (!this.taskList.isEmpty() || this.taskList.allDone()) {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
@@ -201,104 +202,27 @@ public class Duke extends Application {
         return "";
     }
 
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
+    /**
+     * main method of duke.java where duke is runned
+     * @param args
+     */
+    public static void main(String[] args) {
+        System.out.println("ellowoo");
+        Duke duke = new Duke();
+        Scanner sc = new Scanner(System.in); //scans for input
+        String userInput;
 
-        return textToAdd;
-    }
-
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText;
-        try {
-            dukeText = new Label(this.run(userInput.getText()));
-        } catch (IllegalArgumentException e) {
-            dukeText = new Label("sorry master i do not recognize that command");
+        while (duke.isRunning()) {
+            userInput = sc.nextLine();
+            try {
+                duke.run(userInput);
+            } catch (IllegalArgumentException e) {
+                DukeExceptions.printUnrecognizableCommandError();
+            }
         }
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
     }
 
-    @Override
-    public void start(Stage stage) {
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
+    public String returnUnrecognizableCommandError() {
+        return DukeExceptions.printUnrecognizableCommandError();
     }
-
-//    /**
-//     * main method of duke.java where duke is runned
-//     * @param args
-//     */
-//    public static void main(String[] args) {
-//
-//        Duke duke = new Duke("./data/data.txt");
-//        Scanner sc = new Scanner(System.in); //scans for input
-//        String userInput;
-//
-//        while (duke.isRunning()) {
-//            userInput = sc.nextLine();
-//            try {
-//                duke.run(userInput);
-//            } catch (IllegalArgumentException e) {
-//                DukeExceptions.printUnrecognizableCommandError();
-//            }
-//        }
-//    }
 }
