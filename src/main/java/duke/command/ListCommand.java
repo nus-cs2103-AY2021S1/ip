@@ -4,7 +4,7 @@ import duke.task.TaskList;
 import duke.utils.Ui;
 
 /**
- * Represents command that displays current task list in Duke upon execution.
+ * Represents command that displays current task list in duke.Duke upon execution.
  */
 public class ListCommand extends Command {
 
@@ -20,7 +20,7 @@ public class ListCommand extends Command {
      * @param ui a UI object which can prints message to console
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.showListMessage(tasks);
+    public String execute(TaskList tasks, Ui ui) {
+        return ui.showListMessage(tasks);
     }
 }

@@ -1,3 +1,5 @@
+package duke;
+
 import duke.command.Command;
 import duke.exceptions.DukeException;
 import duke.task.TaskList;
@@ -5,7 +7,7 @@ import duke.utils.Parser;
 import duke.utils.Ui;
 
 /**
- * Represents a chat bot call Duke.
+ * Represents a chat bot call duke.Duke.
  */
 public class Duke {
 
@@ -38,6 +40,11 @@ public class Duke {
         }
 
         ui.sayGoodBye();
+    }
+
+    public String getResponse(String command) throws DukeException {
+        Command c = Parser.parse(command);
+        return c.execute(tasks, ui);
     }
 
     public static void main(String[] args) {

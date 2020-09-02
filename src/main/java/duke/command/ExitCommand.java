@@ -4,7 +4,7 @@ import duke.task.TaskList;
 import duke.utils.Ui;
 
 /**
- * Represents command that stops the Duke from running upon execution.
+ * Represents command that stops the duke.Duke from running upon execution.
         */
 public class ExitCommand extends Command {
     @Override
@@ -13,7 +13,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        //do nothing
+    public String execute(TaskList tasks, Ui ui) {
+        return "";
     }
 }

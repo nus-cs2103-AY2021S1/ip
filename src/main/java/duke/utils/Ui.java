@@ -52,10 +52,13 @@ public class Ui {
      * @param removedTask the task that has been removed
      * @param tasks the latest task list (after remove the task above)
      */
-    public void showRemovalMessage(Task removedTask, TaskList tasks) {
-        System.out.println(" Noted. I've removed this task:");
-        System.out.println(removedTask);
-        System.out.println("Now you have " + tasks.getNumberOfTask() + " tasks in the list.");
+    public String showRemovalMessage(Task removedTask, TaskList tasks) {
+        String message = "Noted. I've removed this task:\n";
+        message = message + removedTask.toString() + "\n";
+        message = message + "Now you have " + tasks.getNumberOfTask() + " tasks in the list.";
+
+        System.out.println(message);
+        return message;
     }
 
     /**
@@ -63,9 +66,10 @@ public class Ui {
      *
      * @param doneTask the task that has been done.
      */
-    public void showDoneMessage(Task doneTask) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(doneTask);
+    public String showDoneMessage(Task doneTask) {
+        String message = "Nice! I've marked this task as done:\n" + doneTask.toString() ;
+        System.out.println(message);
+        return message;
     }
 
     /**
@@ -74,9 +78,11 @@ public class Ui {
      * @param newTask the task that has been added
      * @param tasks the latest task list (after added the task above)
      */
-    public void showAddMessage(Task newTask, TaskList tasks) {
-        System.out.println(newTask);
-        System.out.println("Now you have " + tasks.getNumberOfTask() + " tasks in the list.");
+    public String showAddMessage(Task newTask, TaskList tasks) {
+        String message = newTask.toString() + "\n";
+        message = message + "Now you have " + tasks.getNumberOfTask() + " tasks in the list.";
+        System.out.println(message);
+        return message;
     }
 
 
@@ -85,15 +91,18 @@ public class Ui {
      *
      * @param tasks the latest task list
      */
-    public void showListMessage(TaskList tasks) {
-        tasks.printList();
+    public String showListMessage(TaskList tasks) {
+        return tasks.printList();
     }
 
-    public void showListMessage(List<Task> tasks) {
+    public String showListMessage(List<Task> tasks) {
+        String message = "";
         int size = tasks.size();
         for (int i = 0; i < size; ++i) {
-            System.out.println((i + 1) + "." + tasks.get(i).toString());
+            message += (i + 1) + "." + tasks.get(i).toString() + "\n";
         }
+        System.out.println(message);
+        return message;
     }
 
     public void showLine(){

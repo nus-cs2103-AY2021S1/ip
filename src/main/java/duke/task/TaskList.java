@@ -81,12 +81,14 @@ public class TaskList {
         return data;
     }
 
-    public void printList() {
-        System.out.println("Here are the tasks in your list:");
+    public String printList() {
+        String message = "Here are the tasks in your list:\n";
         int size = tasks.size();
         for (int i = 0; i < size; i++) {
-            System.out.println((i + 1) + "." + tasks.get(i).toString());
+            message += (i + 1) + "." + tasks.get(i).toString()+ "\n";
         }
+        System.out.println(message);
+        return message;
     }
 
     public List<Task> find(String searchText) {

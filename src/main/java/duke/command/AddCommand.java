@@ -8,7 +8,7 @@ import duke.task.TaskList;
 import duke.utils.Ui;
 
 /**
- * Represents command that add a task to the Duke's task list upon execution
+ * Represents command that add a task to the duke.Duke's task list upon execution
  */
 
 public class AddCommand extends Command {
@@ -32,7 +32,7 @@ public class AddCommand extends Command {
      * @param ui a UI object which can prints message to console
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
 
         Task task;
 
@@ -47,7 +47,8 @@ public class AddCommand extends Command {
         }
 
         tasks.addTask(task);
-        ui.showAddMessage(task, tasks);
+        return ui.showAddMessage(task, tasks);
 
     }
+
 }

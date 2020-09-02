@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import duke.utils.Ui;
 
 /**
- * Represents command that delete a task from the Duke's task list upon execution
+ * Represents command that delete a task from the duke.Duke's task list upon execution
  */
 
 public class DeleteCommand extends Command{
@@ -28,9 +28,9 @@ public class DeleteCommand extends Command{
      * @param ui a UI object which can prints message to console
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         Task task = tasks.get(index);
         tasks.remove(index);
-        ui.showRemovalMessage(task, tasks);
+        return ui.showRemovalMessage(task, tasks);
     }
 }

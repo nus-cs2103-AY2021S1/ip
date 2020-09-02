@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import duke.utils.Ui;
 
 /**
- * Represents command that change a task status to done in the Duke's task list upon execution
+ * Represents command that change a task status to done in the duke.Duke's task list upon execution
  */
 public class DoneCommand extends Command {
     private int index;
@@ -25,9 +25,9 @@ public class DoneCommand extends Command {
      * @param ui a UI object which can prints message to console
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         Task task = tasks.get(index);
         tasks.markAsDone(index);
-        ui.showDoneMessage(task);
+        return ui.showDoneMessage(task);
     }
 }
