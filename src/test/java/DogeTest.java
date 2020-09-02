@@ -1,7 +1,13 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import duke.DukeException;
+import duke.Parser;
+import duke.task.TaskList;
+import duke.commands.Command;
 import org.junit.jupiter.api.Test;
+import duke.task.Task;
+import duke.task.TaskType;
 
 public class DogeTest {
 
@@ -12,7 +18,7 @@ public class DogeTest {
 
     /*@Test
     public void uiTest() {
-        Ui ui = new Ui();
+        duke.Ui ui = new duke.Ui();
         String testString = "--------------------------------------" + "\n"
                 + "Added to list : " + "printable message" + "\n"
                 + "--------------------------------------";

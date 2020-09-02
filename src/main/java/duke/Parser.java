@@ -1,3 +1,10 @@
+package duke;
+
+import duke.commands.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
 import java.time.LocalDate;
 
 /**
@@ -6,7 +13,7 @@ import java.time.LocalDate;
 public class Parser {
 
     /**
-     * Returns a Command based on user input
+     * Returns a duke.commands.Command based on user input
      * @param input user input
      * @return command based on user input
      * @throws DukeException exception that occurs when parser does not
@@ -68,7 +75,7 @@ public class Parser {
                     return new AddCommand(new Deadline(echo));
                 }
             } else {
-                //this.addToList(new Deadline(input.substring(9, input.length())));
+                //this.addToList(new duke.task.Deadline(input.substring(9, input.length())));
                 return new AddCommand(new Deadline(input.substring(9)));
             }
         } else if (input.contains("event")) {

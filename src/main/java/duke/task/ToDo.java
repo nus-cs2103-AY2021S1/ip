@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.task.Task;
+import duke.task.TaskType;
+
 /**
  * Defines a todo
  */

@@ -1,5 +1,7 @@
+package duke.task;
+
 /**
- * Defines an Event
+ * Defines an duke.task.Event
  */
 public class Event extends Task {
     public Event(String taskName) {

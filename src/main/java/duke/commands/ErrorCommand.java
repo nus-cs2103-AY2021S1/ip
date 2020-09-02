@@ -1,3 +1,8 @@
+package duke.commands;
+
+import duke.Storage;
+import duke.Ui;
+
 public class ErrorCommand extends Command {
     final String errorMessage;
     public ErrorCommand(String errorMessage) {
@@ -6,8 +11,8 @@ public class ErrorCommand extends Command {
 
     /**
      * Prints out an error message.
-     * @param ui a Ui instance to enable calling of Ui functions
-     * @param storage a Storage instance to enable calling of Storage functions
+     * @param ui a duke.Ui instance to enable calling of duke.Ui functions
+     * @param storage a duke.Storage instance to enable calling of duke.Storage functions
      */
     @Override
     public String execute(Ui ui, Storage storage) {

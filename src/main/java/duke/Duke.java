@@ -1,17 +1,15 @@
+package duke;
+
 import java.util.Scanner;
 
-import javafx.application.Application;
+import duke.commands.Command;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 public class Duke {
     private ScrollPane scrollPane;
@@ -24,7 +22,7 @@ public class Duke {
     private Image duke = new Image(this.getClass()
             .getResourceAsStream("/images/DaDuke.png"));
     /**
-     * Runs the Duke programme
+     * Runs the duke.Duke programme
      * @param args main args
      */
     public static void main(String[] args) {
@@ -75,7 +73,7 @@ public class Duke {
         stage.show();
 
         // more code to be added here later
-        stage.setTitle("Duke");
+        stage.setTitle("duke.Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -135,7 +133,7 @@ public class Duke {
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {

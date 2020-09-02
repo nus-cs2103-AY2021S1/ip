@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 /**
- * Object to enable permanent storing of task list onto hard drive.
+ * Object to enable permanent storing of duke.task list onto hard drive.
  */
 public class Storage {
     private final String filePath;
@@ -15,8 +19,8 @@ public class Storage {
     }
 
     /**
-     * Stores task list provided onto a specified text file.
-     * @param toDoList given task list
+     * Stores duke.task list provided onto a specified text file.
+     * @param toDoList given duke.task list
      */
     public void save(List<Task> toDoList) {
         String path = System.getProperty("user.dir") + filePath;

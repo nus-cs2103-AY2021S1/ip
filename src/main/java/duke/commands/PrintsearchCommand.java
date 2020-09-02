@@ -1,3 +1,9 @@
+package duke.commands;
+
+import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
+
 public class PrintsearchCommand extends Command {
     final String keyword;
 
@@ -6,7 +12,7 @@ public class PrintsearchCommand extends Command {
     }
 
     /**Calls the displayList function in the ui class which prints out a provided
-     * list of task.
+     * list of duke.task.
      */
     @Override
     public String execute(Ui ui, Storage storage) {
