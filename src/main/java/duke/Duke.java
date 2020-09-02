@@ -55,7 +55,7 @@ public class Duke  {
             String cmd = parsedUserInput[0];
             Command checkedCommand = Command.valueOfUserCommand(cmd);
             if (checkedCommand == null) {
-                ui.showInvalidCommandMessage();
+                return ui.showInvalidCommandMessage();
             } else {
                 switch (checkedCommand) {
                 case LIST:
