@@ -2,12 +2,7 @@ package duke;
 
 import java.util.zip.DataFormatException;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.ui.Ui;
 
 
@@ -26,13 +21,18 @@ public class Parser {
     public static String understandText(String userText, TaskList taskList) {
         try {
             String edittedAnswer = userText.strip().toLowerCase();
-            String[] answers = userText.split(" ");
+            String[] answers = edittedAnswer.split(" ");
             if (answers.length == 2 && answers[0].equals(Commands.DONE.text)) {
                 return Parser.understandTaskNumber(answers[0], answers[1], taskList);
 
             } else if (answers.length == 2 && answers[0].equals(Commands.DELETE.text)) {
                 Command command = new DeleteCommand();
                 return Parser.understandTaskNumber(answers[0], answers[1], taskList);
+
+            } else if (answers[0].equals(Commands.FIND.text)) {
+                String toMatch = edittedAnswer.split(" ", 2)[1];
+                Command command = new FindCommand();
+                return command.execute(toMatch, taskList);
 
             } else if (edittedAnswer.equals(Commands.LIST.text)) {
                 Command command = new ListCommand();
@@ -46,8 +46,6 @@ public class Parser {
                     || answers[0].equals(Commands.DEADLINE.text)
                     || answers[0].equals(Commands.EVENT.text)) {
                 return Parser.understandTaskDescription(userText, taskList);
-            } else if (answers[0].equals(Commands.FIND.text)) {
-//                Command command = new FindCommand()
 
             } else {
                 throw new DukeCannotUnderstandException();
@@ -137,7 +135,7 @@ public class Parser {
         EXIT("bye"),
         DONE("done"),
         DELETE("delete"),
-        FIND ("find");
+        FIND("find");
         private String text;
 
         Commands(String text) {

@@ -25,6 +25,7 @@ public class TaskList {
      * Adds task to the current list of tasks.
      *
      * @param toAdd Task to add
+     * @return response to User.
      */
     public String addTask(Task toAdd) {
         this.allItems.add(toAdd);
@@ -36,7 +37,7 @@ public class TaskList {
     /**
      * Retrieves all the tasks currently stored.
      *
-     * @return
+     * @return all tasks currently stored
      */
     public List<Task> getAllTasks() {
         return this.allItems;
@@ -44,6 +45,7 @@ public class TaskList {
 
     /**
      * Prints the output of all tasks in store currently.
+     * @return response to User.
      */
     public String printStore() {
         String printList;
@@ -67,6 +69,7 @@ public class TaskList {
      * Sets the selected task to be completed.
      *
      * @param index index of task to be set completed.
+     * @return response to User.
      */
     public String completeTask(int index) {
         Task toComplete = this.allItems.get(index);
@@ -77,7 +80,8 @@ public class TaskList {
      * Removes task from current list.
      *
      * @param index index of task to be removed.
-     */
+     * @return response to User.
+     * */
     public String deleteTask(int index) {
         this.allItems.remove(index);
         return Ui.printDeleteTaskMessage();
@@ -92,9 +96,11 @@ public class TaskList {
 
     /**
      * Finds and prints matching tasks.
+     *
      * @param toMatch the word to match with.
+     * @return response to User.
      */
-    public void matchTasks(String toMatch) {
+    public String matchTasks(String toMatch) {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task : this.allItems) {
             if (task.canMatch(toMatch)) {
@@ -112,6 +118,6 @@ public class TaskList {
             }
             printMatchingTasks = printMatchingTasks + Ui.LINE;
         }
-        Ui.printMessage(printMatchingTasks);
+        return Ui.printMessage(printMatchingTasks);
     }
 }
