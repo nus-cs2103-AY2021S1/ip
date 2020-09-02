@@ -1,0 +1,13 @@
+todo
+todo working example
+deadline
+deadline no date
+deadline test /by wrong format
+deadline test /by no date
+deadline /by 12-12-2020
+event
+event no date
+event test /by wrong format
+event test /by no date
+event /by 12-12-2020
+list
