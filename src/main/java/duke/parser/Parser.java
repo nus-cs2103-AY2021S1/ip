@@ -47,7 +47,7 @@ public class Parser {
                 output = new FindCommand(command, tasks).execute();
                 break;
             default:
-                output = new ErrorCommand("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(").execute();
+                output = new ErrorCommand("☹ OOPS!!! I'm sorry, but I don't know what that means :-(").execute();
                 break;
         }
 

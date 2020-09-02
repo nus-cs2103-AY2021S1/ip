@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute() throws DukeException {
         if (args.length < 2) {
-            throw new DukeException("\t☹ OOPS!!! The description of a done cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description of a done cannot be empty.");
         }
 
         int inputNumber;
@@ -26,27 +26,27 @@ public class DoneCommand extends Command {
         try {
             inputNumber = Integer.parseInt(args[1]);
         } catch(NumberFormatException e) {
-            throw new DukeException("\t☹ OOPS!!! Argument must be an integer.");
+            throw new DukeException("☹ OOPS!!! Argument must be an integer.");
         }
 
         if (inputNumber <= 0) {
-            throw new DukeException(("\t☹ OOPS!!! Invalid argument."));
+            throw new DukeException(("☹ OOPS!!! Invalid argument."));
         }
 
         if (inputNumber > tasks.size()) {
-            throw new DukeException("\t☹ OOPS!!! There is only " + tasks.size() + " tasks in the list.");
+            throw new DukeException("☹ OOPS!!! There is only " + tasks.size() + " tasks in the list.");
         }
 
         int index = inputNumber - 1;
         Task targetTask = tasks.get(index);
 
         if (targetTask.getStatus()) {
-            throw new DukeException("\t☹ OOPS!!! You've already done that task.");
+            throw new DukeException("☹ OOPS!!! You've already done that task.");
         }
 
         targetTask.setDone();
         tasks.updateStorage(storage);
         
-        return "\tNice! I've marked this task as done: \n\t\t" + targetTask;
+        return "Nice! I've marked this task as done: \n\t" + targetTask;
     }
 }

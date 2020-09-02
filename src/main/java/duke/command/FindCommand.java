@@ -13,14 +13,14 @@ public class FindCommand extends Command {
     @Override
     public String execute() throws DukeException {
         if (args.length < 2) {
-            return new ErrorCommand("\t☹ OOPS!!! The description of a find cannot be empty.").execute();
+            return new ErrorCommand("☹ OOPS!!! The description of a find cannot be empty.").execute();
         }
 
         String searchString = args[1];
         TaskList matchedTasks = tasks.find(searchString);
 
         if (matchedTasks.isEmpty()) {
-            return new ErrorCommand("\t☹ OOPS!!! There is no such task in the list.").execute();
+            return new ErrorCommand("☹ OOPS!!! There is no such task in the list.").execute();
         }
 
         StringBuilder concat = new StringBuilder();
@@ -29,6 +29,6 @@ public class FindCommand extends Command {
             concat.append(String.format("\n\t%d. %s", i + 1, matchedTasks.get(i)));
         }
 
-        return "\tHere are the matching tasks in your list: " + concat;
+        return "Here are the matching tasks in your list: " + concat;
     }
 }

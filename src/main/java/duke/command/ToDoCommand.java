@@ -18,13 +18,13 @@ public class ToDoCommand extends Command {
     @Override
     public String execute() throws DukeException {
         if (args.length < 2 || args[1].isBlank()) {
-            return new ErrorCommand("\t☹ OOPS!!! The description of a todo cannot be empty.").execute();
+            return new ErrorCommand("☹ OOPS!!! The description of a todo cannot be empty.").execute();
         }
 
         ToDo newToDo = new ToDo(args[1]);
 
         tasks.add(newToDo,storage);
-        return "\tGot it. I've added this task: \n\t\t" + newToDo + "\n\tNow you have " + tasks.size()
+        return "Got it. I've added this task: \n\t" + newToDo + "\nNow you have " + tasks.size()
                 + " tasks in the list.";
     }
 }

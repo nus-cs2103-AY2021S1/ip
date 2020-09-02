@@ -17,7 +17,7 @@ public class Ui {
      * Print the divider line to the standard output.
      */
     public void showLine() {
-        System.out.println("\t" + DIVIDER);
+        System.out.println(DIVIDER);
     }
 
     /**
@@ -26,7 +26,7 @@ public class Ui {
     public void showWelcome() {
         System.out.println("\n" + LOGO);
         showLine();
-        System.out.println("\t" + "Hello! I'm Duke\n\tWhat can I do for you?");
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         showLine();
     }
 
