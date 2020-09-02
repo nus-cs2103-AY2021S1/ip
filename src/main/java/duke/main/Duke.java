@@ -35,7 +35,7 @@ public class Duke {
         Application.launch(Main.class, "");
     }
 
-    public String getResponse(String input) {
+    public String getResponse(String[] input) {
         try {
             Command command = Parser.parse(input);
             command.perform(tasks);

@@ -42,10 +42,10 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() throws InterruptedException {
-        String input = userInput.getText();
+        String[] input = userInput.getText().split(" ");
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
+            DialogBox.getUserDialog(userInput.getText(), userImage),
             DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
