@@ -50,6 +50,9 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Hi, I'm Duke! How can I help you today? :-)", dukeImage)
         );
+        userInput.setOnAction((event) -> handleUserInput());
+        sendButton.setOnAction((event -> handleUserInput()));
+
     }
 
     public void setDuke(Duke d) {
