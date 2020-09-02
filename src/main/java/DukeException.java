@@ -1,5 +1,3 @@
-package duke;
-
 /**
  * Exceptions that may occur during users' entering arguments and commands.
  */

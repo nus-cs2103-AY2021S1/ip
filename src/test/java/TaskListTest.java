@@ -1,11 +1,3 @@
-package java;
-
-import duke.TaskList;
-import duke.DukeException;
-import duke.DateAndTime;
-import duke.Task;
-import duke.ToDo;
-
 import org.junit.Test;
 
 import java.util.ArrayList;
