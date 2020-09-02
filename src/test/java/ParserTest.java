@@ -1,7 +1,7 @@
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
     @Test
@@ -31,7 +31,7 @@ public class ParserTest {
             fail();
         } catch (DukeException ex) {
             String error = "UHOH! You need to specify which task to mark done! \n"
-                    +  "eg done 1";
+                    + "eg done 1";
             assertEquals(error, ex.getMessage());
         }
     }

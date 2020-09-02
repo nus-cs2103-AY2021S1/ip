@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -94,8 +93,8 @@ public class Storage {
         try {
             String data = "";
 
-            for (int i = 1; i <= Task.totalTasks; i++) {
-                if (i == Task.totalTasks) {
+            for (int i = 1; i <= tasks.getSize(); i++) {
+                if (i == tasks.getSize()) {
                     data += tasks.getTask(i).toTaskData();
                 } else {
                     data += tasks.getTask(i).toTaskData() + "\n";

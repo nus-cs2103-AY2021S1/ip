@@ -35,8 +35,8 @@ public class Parser {
 
         if (commandWord.equals("find")) {
             if (inputWords.length == 1) {
-                throw new DukeException("You need to specify what keyword to search! \n" +
-                        "eg find book");
+                throw new DukeException("You need to specify what keyword to search! \n"
+                        + "eg find book");
             }
 
             String keyword = input.substring(4);

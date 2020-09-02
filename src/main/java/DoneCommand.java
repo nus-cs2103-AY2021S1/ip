@@ -25,11 +25,11 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (Task.totalTasks == 0) {
+        if (tasks.getSize() == 0) {
             throw new DukeException("You don't have any tasks yet!");
         }
 
-        if (this.taskNum == 0 || this.taskNum > Task.totalTasks) {
+        if (this.taskNum == 0 || this.taskNum > tasks.getSize()) {
             throw new DukeException("You don't have a task with that number! ><\n"
                     + "Can you try a different number?");
         }

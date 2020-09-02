@@ -12,7 +12,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (Task.totalTasks == 0) {
+        if (tasks.getSize() == 0) {
             throw new DukeException("You don't have any tasks yet!");
         }
 
