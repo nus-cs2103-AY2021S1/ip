@@ -1,5 +1,6 @@
 package duke;
 
+import duke.gui.DialogBox;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -8,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -96,7 +96,7 @@ public class DukeGui extends Application implements Ui {
     public void startup() {
         Platform.runLater(() -> {
             Label startupText = new Label(Ui.OPENING_MESSAGE);
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(startupText, new ImageView(dukeImage)));
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(startupText, dukeImage));
         });
     }
     /**
@@ -122,14 +122,14 @@ public class DukeGui extends Application implements Ui {
         String text = userInput.getText();
         registerResponse(text);
         Label userText = new Label(text);
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, new ImageView(userImage)));
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, userImage));
         userInput.clear();
     }
 
     public void outputMessage(String message) {
         Platform.runLater(() -> {
             Label dukeText = new Label(message);
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage)));
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeText, dukeImage));
         });
     }
 
