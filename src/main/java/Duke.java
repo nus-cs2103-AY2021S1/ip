@@ -25,6 +25,10 @@ public class Duke {
         printGoodbye();
     }
 
+    public String getResponse(String input) {
+        return "hello";
+    }
+
     /**
      * Main method that drives the running of the Duke bot.
      */
