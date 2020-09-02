@@ -27,9 +27,9 @@ public class MainWindow extends AnchorPane {
     /** Number of times user has input their name. */
     private int numberOfTimes;
     /** Gets the image for User. */
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/koya.jpg"));
     /** Gets the image for Duke. */
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/rj.jpg"));
 
     /** Initialises the main window. */
     @FXML

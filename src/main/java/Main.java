@@ -12,7 +12,7 @@ public class Main extends Application {
     /** Creates Duke. */
     private final Duke duke = new Duke();
     /** Gets the image for Duke. */
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/rj.jpg"));
 
     /**
      * Overrides start method of JavaFX.
@@ -26,10 +26,10 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setTitle("focus.");
+            stage.getIcons().add(new Image("/images/planner.jpg"));
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

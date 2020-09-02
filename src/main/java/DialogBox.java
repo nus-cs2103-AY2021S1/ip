@@ -41,7 +41,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         circle.setFill(new ImagePattern(image));
     }

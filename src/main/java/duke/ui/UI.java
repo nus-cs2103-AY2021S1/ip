@@ -9,10 +9,10 @@ public class UI {
      */
     public static String greetUser() {
         String logo = " __\n"
-                    + "/ _|   ___    ___  _   _  ___\n"
-                    + "| |_  / _ \\  / __|| | | |/ __|\n"
-                    + "|  _|| (_) || (__ | |_| |\\__ \\ _\n"
-                    + "|_|   \\___/  \\___| \\__,_||___/(_)\n\n";
+                    + "/ _|   ___   ___  _   _  _ __\n"
+                    + "| |_  / _ \\ / __|  | | | | / __|\n"
+                    + "|  _|| (_) | | (__  | |_| | \\__ \\  _\n"
+                    + "|_|   \\___/ \\___| \\__,_||___/(_)\n\n";
         String greetings = "Welcome to\n" + logo + "\"\\(*^O^*) I am Pocus, your personal assistant!"
                 + "\nBefore we start, may I know your name?\n";
         return greetings;
