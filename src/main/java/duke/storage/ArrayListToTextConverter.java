@@ -1,12 +1,11 @@
 package duke.storage;
 
-import duke.tasks.Task;
-import duke.tasks.TaskList;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.List;
+
+import duke.tasks.TaskList;
 
 /**
  * Convert arraylist to txt file.
@@ -14,7 +13,7 @@ import java.util.List;
 public class ArrayListToTextConverter {
 
     /**
-     * @param tasks list containing the tasks to be converted to a txt file.
+     * @param tasks    list containing the tasks to be converted to a txt file.
      * @param filePath path to store the file.
      */
     public static void convertTaskListToText(TaskList tasks, String filePath) {

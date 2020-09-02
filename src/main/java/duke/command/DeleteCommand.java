@@ -35,9 +35,9 @@ public class DeleteCommand extends UserCommand {
             } else {
                 Task item = taskList.getTask(itemToBeDeleted - 1);
                 taskList.deleteTask(itemToBeDeleted - 1);
-                return ui.printResponse("Noted. I've removed this task:") + "\n" +
-                        ui.printResponse(item.toString()) + "\n" +
-                        ui.printListCount(taskList);
+                return ui.printResponse("Noted. I've removed this task:") + "\n"
+                        + ui.printResponse(item.toString()) + "\n"
+                        + ui.printListCount(taskList);
             }
         }
     }

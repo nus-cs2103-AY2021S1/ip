@@ -17,7 +17,7 @@ public abstract class UserCommand {
     /**
      * boolean to check if user wishes to exit the program
      */
-    public Boolean isExit = false;
+    protected Boolean isExit = false;
 
     /**
      * @param userInput user's input.

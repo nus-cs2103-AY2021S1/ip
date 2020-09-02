@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.exceptions.DukeException;
 import duke.tasks.Event;
 import duke.tasks.TaskList;
 import duke.timeformatter.TimeFormatter;
 import duke.ui.Ui;
-
-import java.time.LocalDate;
 
 /**
  * Represents a command that creates an event task.
@@ -32,9 +32,9 @@ public class EventCommand extends UserCommand {
         LocalDate localEventDate = TimeFormatter.localDate(at);
         Event event = new Event(eventString, localEventDate);
         taskList.addTask(event);
-        return ui.printResponse("Got it. I've added this task:") + "\n" +
-        ui.printResponse(event.toString()) + "\n" +
-        ui.printListCount(taskList);
+        return ui.printResponse("Got it. I've added this task:") + "\n"
+                + ui.printResponse(event.toString()) + "\n"
+                + ui.printListCount(taskList);
 
     }
 }

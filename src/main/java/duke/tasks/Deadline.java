@@ -1,19 +1,23 @@
 package duke.tasks;
 
-import duke.timeformatter.TimeFormatter;
-
 import java.time.LocalDate;
 
+import duke.timeformatter.TimeFormatter;
+
 /**
- * Represent a task that specifies a deadline
+ * Represents a task that specifies a deadline
  */
 public class Deadline extends Task {
 
     /**
-     * Deadline of the deadline task.
+     * Represents the date of the deadline task.
      */
     protected LocalDate by;
 
+    /**
+     * @param description description of the deadline task.
+     * @param by          date of the deadline.
+     */
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;

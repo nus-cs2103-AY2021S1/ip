@@ -1,8 +1,8 @@
 package duke.tasks;
 
-import duke.timeformatter.TimeFormatter;
-
 import java.time.LocalDate;
+
+import duke.timeformatter.TimeFormatter;
 
 /**
  * Represent a task that specifies a time of occurrence.
@@ -14,6 +14,10 @@ public class Event extends Task {
      */
     protected LocalDate at;
 
+    /**
+     * @param description description of the event.
+     * @param at          date of the event.
+     */
     public Event(String description, LocalDate at) {
         super(description);
         this.at = at;

@@ -1,14 +1,11 @@
 package duke.storage;
 
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
-import java.util.List;
+
+import duke.tasks.TaskList;
 
 /**
  * Converts txt file to an arraylist.

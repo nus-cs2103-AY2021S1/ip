@@ -6,6 +6,9 @@ public class Task implements Serializable {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * @param description description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

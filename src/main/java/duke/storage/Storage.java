@@ -1,9 +1,6 @@
 package duke.storage;
 
-import duke.tasks.Task;
 import duke.tasks.TaskList;
-
-import java.util.List;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file

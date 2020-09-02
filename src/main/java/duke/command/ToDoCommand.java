@@ -24,9 +24,9 @@ public class ToDoCommand extends UserCommand {
             String todoString = userInput.substring(5);
             ToDo todo = new ToDo(todoString);
             taskList.addTask(todo);
-            return ui.printResponse("Got it. I've added this task:") + "\n" +
-                    ui.printResponse(todo.toString()) + "\n" +
-                    ui.printListCount(taskList);
+            return ui.printResponse("Got it. I've added this task:") + "\n"
+                    + ui.printResponse(todo.toString()) + "\n"
+                    + ui.printListCount(taskList);
         }
     }
 }

@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyFindException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represent a command that search for tasks based on user's input.
