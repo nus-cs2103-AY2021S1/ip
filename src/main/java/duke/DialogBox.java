@@ -36,6 +36,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setStyle("-fx-font-family: monospace");
         displayPicture.setImage(img);
     }
 

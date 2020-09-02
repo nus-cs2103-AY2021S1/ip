@@ -31,8 +31,8 @@ public class DeleteCommand extends Command {
         try {
             Ui.display("Noted. I've removed this task:\n   "
                     + tasks.getTask(taskIndex));
-            Ui.displayRemainingTasks(tasks);
             tasks.deleteTask(taskIndex);
+            Ui.displayRemainingTasks(tasks);
             Storage.writeToFile(tasks.getList());
         } catch (Exception e) {
             throw new DukeException("This task does not exist!");

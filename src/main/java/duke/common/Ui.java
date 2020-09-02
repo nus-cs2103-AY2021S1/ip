@@ -15,39 +15,30 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
-//    private static void displayString(String s) {
-//        Main.getWindow().displayText(s);
-//    }
+    private static void displayString(String s) {
+        Main.getWindow().displayText(s);
+    }
 
     /**
      * Generates and prints a custom string.
      * @param s text to be displayed to the user.
      */
     public static void display(String s) {
-        displayLine();
-        System.out.println(s);
-//        displayString(s);
-        displayLine();
+        displayString(s);
     }
 
-    /**
-     * Generates and prints a divider line.
-     */
-    public static void displayLine() {
-        System.out.println("________________________________________");
-    }
 
     /**
      * Generates and prints the current task list of the user.
      * @param tasks list of tasks the user has inputted thus far.
      */
     public static void displayTasks(TaskList tasks) {
-        displayLine();
-        System.out.println("Here is your current list:");
+        StringBuilder s = new StringBuilder();
+        s.append("Here is your current list: \n");
         for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println("    " + (i + 1) + ". " + tasks.getTask(i));
+            s.append(i + 1).append(". ").append(tasks.getTask(i)).append("\n");
         }
-        displayLine();
+        displayString(s.toString());
     }
 
     /**
@@ -55,11 +46,9 @@ public class Ui {
      * @param tasks list of tasks the user has inputted thus far.
      */
     public static void displayRemainingTasks(TaskList tasks) {
-        displayLine();
-        System.out.println("\nNow you have"
+        display("\nNow you have "
                 + tasks.getSize()
                 + " tasks in your list.");
-        displayLine();
     }
 
     /**
@@ -67,12 +56,13 @@ public class Ui {
      * @param tasks list of tasks that matches the users keyword.
      */
     public static void displayMatchingTasks(TaskList tasks) {
-        displayLine();
-        System.out.println("Here are the matching tasks in your list:");
+        StringBuilder s = new StringBuilder();
+        s.append("Here is the matching list: \n");
         for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println("    " + (i + 1) + ". " + tasks.getTask(i));
+            s.append(i + 1).append(". ").append(tasks.getTask(i)).append("\n");
         }
-        displayLine();
+        displayString(s.toString());
+
     }
 
     /**
@@ -84,13 +74,10 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\n"
-                + "     What can I do for you?");
 
-//        displayString("Hello from\n" + logo);
-//        displayString("Hello! I'm Duke\n"
-//                + "     What can I do for you?");
+        displayString("Hello from\n" + logo);
+        displayString("Hello! I'm Duke\n"
+                + "     What can I do for you?");
     }
 
     /**
