@@ -6,7 +6,7 @@ public class Duke {
     private final Ui ui;
     private final Parser parser;
     private boolean hasExited;
-    private String dest;
+    private final String dest;
 
     /**
      * Constructor with specified directory of database.
@@ -20,6 +20,7 @@ public class Duke {
     }
 
     private void run() {
+        System.setProperty("file.encoding", "UTF-8");
         Storage storage;
         TaskList taskList;
         try {

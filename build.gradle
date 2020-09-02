@@ -43,4 +43,5 @@ checkstyle {
 
 run{
     standardInput = System.in
+    systemProperty "file.encoding", "utf-8"
 }
