@@ -39,9 +39,9 @@ public class DialogBox extends HBox {
         this.setSpacing(10);
         this.getStylesheets().add(this.getClass().getClassLoader().getResource("style/DialogBox.css").toString());
         dialog.setText(text);
-        dialog.setFont(new Font("Courier New", 10));
+        dialog.setFont(new Font("Courier New", 13));
         displayPicture.setImage(img);
-        Circle clip = new Circle(displayPicture.getX() + 25, displayPicture.getY() + 25, 25);
+        Circle clip = new Circle(displayPicture.getX() + 15, displayPicture.getY() + 15, 15);
         displayPicture.setClip(clip);
     }
 

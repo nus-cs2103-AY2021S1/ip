@@ -1,13 +1,48 @@
 #dialogContainer {
     -fx-background-color: #427aa1;
+    /*-fx-background-image: url('/images/skyBackground2.jpg');
+    -fx-background-position: center;*/
+}
+/* @@author Huynh Thai Duong (aidoxe-123)
+   As reference from: https://stackoverflow.com/questions/48048943/javafx-8-scroll-bar-css
+*/
+.scroll-bar:vertical .track{
+    -fx-background-color :transparent;
+    -fx-border-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-border-radius :2.0em;
+}
+
+
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 10.0 0.0 0.0;
 
 }
-#userInput {
-    -fx-padding: 5, 10;
-    -fx-border-insets: 5px;
-    -fx-background-insets: 5px;
-    -fx-background-radius: 5px;
-    -fx-border-radius: 5px;
-    -fx-border-width: 1px;
-    -fx-border-color: #427aa1;
+
+ .scroll-bar .increment-arrow,
+ .scroll-bar .decrement-arrow{
+    -fx-shape : " ";
+    -fx-padding :0.15em 0.0;
 }
+
+ .scroll-bar:vertical .increment-arrow,
+ .scroll-bar:vertical .decrement-arrow{
+    -fx-shape : " ";
+    -fx-padding :0.0 0.15em;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color :derive(black,90.0%);
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0em;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color :derive(#4D4C4F,10.0%);
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0em;
+}
+/* @@author */
