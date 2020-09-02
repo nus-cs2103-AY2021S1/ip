@@ -1,8 +1,8 @@
-package duke;
+package duke.task;
 
-abstract class Task {
-    protected String description;
-    protected boolean isDone;
+public abstract class Task {
+    public String description;
+    public boolean isDone;
 
     /**
      * Creates a task object, default to status in not done.
@@ -40,7 +40,7 @@ abstract class Task {
      * Gets the task details in the format for saving to local storage.
      * @return Task details in the correct format.
      */
-    abstract String getTaskDetailsForSave();
+    public abstract String getTaskDetailsForSave();
 
     @Override
     public String toString() {

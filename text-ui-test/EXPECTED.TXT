@@ -50,11 +50,11 @@
    ############################
    
    ############################
-   OOPS! duke.Task number is invalid!
+   OOPS! duke.task.Task number is invalid!
    ############################
    
    ############################
-   OOPS! duke.Task number is invalid!
+   OOPS! duke.task.Task number is invalid!
    ############################
    
    ----------------------------

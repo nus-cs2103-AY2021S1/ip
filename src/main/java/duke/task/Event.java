@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.DukeException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -58,7 +60,7 @@ public class Event extends Task {
     }
 
     @Override
-    String getTaskDetailsForSave() {
+    public String getTaskDetailsForSave() {
         return "E | " + (isDone ? 1 : 0) + " | " + description + " | "
                 + startDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " "
                 + startDateTime.format(DateTimeFormatter.ofPattern("HH:mm")) + " "

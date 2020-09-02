@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.DukeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -45,7 +47,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    String getTaskDetailsForSave() {
+    public String getTaskDetailsForSave() {
         return "D | " + (isDone ? 1 : 0) + " | " + description + " | "
                 + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }

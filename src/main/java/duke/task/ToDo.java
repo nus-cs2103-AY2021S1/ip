@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 public class ToDo extends Task {
     public ToDo(String description) {
@@ -10,7 +10,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    String getTaskDetailsForSave() {
+    public String getTaskDetailsForSave() {
         return "T | " + (isDone ? 1 : 0) + " | " + description;
     }
 
