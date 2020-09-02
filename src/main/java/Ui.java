@@ -1,4 +1,3 @@
-import javax.net.ssl.HostnameVerifier;
 import java.util.Scanner;
 
 /**
@@ -7,9 +6,9 @@ import java.util.Scanner;
  * @author Jaya Rengam
  */
 public class Ui {
-    private Scanner sc;
+    private static final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
 
-    private static String HORIZONTAL_LINE = "    ____________________________________________________________\n";
+    private Scanner sc;
 
     Ui() {
         this.sc = new Scanner(System.in);

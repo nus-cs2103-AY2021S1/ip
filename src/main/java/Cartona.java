@@ -46,7 +46,7 @@ public class Cartona {
                 nextCommand.execute(cartona.taskList, cartona.ui, cartona.storage);
 
                 // If command is exit command, stop program after running
-                if (nextCommand.isExitCmd())  {
+                if (nextCommand.isExitCmd()) {
                     break;
                 }
 

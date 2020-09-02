@@ -3,7 +3,7 @@
  *
  * @author Jaya Rengam
  */
-public class DoneCommand implements Command{
+public class DoneCommand implements Command {
     private boolean hasExecuted;
 
     /** The ID in the list of the task to be marked as complete. */

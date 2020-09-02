@@ -1,7 +1,7 @@
 /**
  * The Parser class is responsible for parsing various types of Strings encountered within the program.
  *
- * @auther Jaya Rengam
+ * @author Jaya Rengam
  */
 public class Parser {
 
@@ -117,9 +117,10 @@ public class Parser {
             String keyword = userInput.substring(5);
 
             return new FindTaskCommand(keyword);
+        default:
+            throw new UnknownCommandException("Error: Invalid command keyword!");
         }
 
-        throw new UnknownCommandException("Error: Invalid command keyword!");
     }
 
     /**

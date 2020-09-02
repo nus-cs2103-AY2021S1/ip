@@ -1,12 +1,14 @@
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.FileNotFoundException;
+
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+
 import java.util.List;
 
 /**
@@ -15,7 +17,7 @@ import java.util.List;
  * @author Jaya Rengam
  */
 public class Storage {
-    private static String HORIZONTAL_LINE = "    ____________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
 
     private String pathString;
 
@@ -50,8 +52,8 @@ public class Storage {
                     System.out.printf(HORIZONTAL_LINE + "     Found an existing list at %s%n" + HORIZONTAL_LINE,
                                             path);
                 } else {
-                    System.out.printf(HORIZONTAL_LINE + "     Found an existing list, but it was empty!%n" +
-                            HORIZONTAL_LINE);
+                    System.out.printf(HORIZONTAL_LINE + "     Found an existing list, but it was empty!%n"
+                            + HORIZONTAL_LINE);
                 }
 
                 // Parse each line of text and add it to the TasKList
@@ -59,7 +61,8 @@ public class Storage {
                     taskList.addTask(parser.parseFromStorage(taskLine));
                 }
             } else {
-                System.out.printf(HORIZONTAL_LINE + "     Existing list not found, creating new list\n" + HORIZONTAL_LINE);
+                System.out.printf(HORIZONTAL_LINE + "     Existing list not found, creating new list\n"
+                        + HORIZONTAL_LINE);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
