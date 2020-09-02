@@ -41,9 +41,9 @@ public class Duke extends Application implements Serializable {
     
     public Duke() {
         Duke duke = new Duke("tasks");
-        this.ui = duke.ui;
         this.storage = duke.storage;
         this.tasks = duke.tasks;
+        this.ui = duke.ui;
     }
 
     @Override
@@ -98,11 +98,23 @@ public class Duke extends Application implements Serializable {
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (DukeException e) {
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (DukeException e) {
+                e.printStackTrace();
+            }
         });
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -127,12 +139,12 @@ public class Duke extends Application implements Serializable {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+    private void handleUserInput() throws FileNotFoundException, DukeException {
+        String userText = (userInput.getText());
+        String dukeText = (getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, (user)),
+                DialogBox.getDukeDialog(dukeText, (duke))
         );
         userInput.clear();
     }
@@ -141,8 +153,9 @@ public class Duke extends Application implements Serializable {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String input) throws FileNotFoundException, DukeException {
+        Parser parser = new Parser();
+        return parser.commandParser(input, tasks, storage);
     }
     
 
@@ -155,7 +168,7 @@ public class Duke extends Application implements Serializable {
         System.out.println("Hello I'm Greg!");
         System.out.println("How may I be of service today?");
         Parser parser = new Parser();
-        parser.commandParser(tasks, storage);
+        //parser.commandParser(tasks, storage);
     }
 
     /**
