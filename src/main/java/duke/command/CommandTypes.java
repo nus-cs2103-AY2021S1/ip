@@ -13,7 +13,7 @@ public enum CommandTypes {
     EVENT("event"),
     FIND("find");
 
-    private final String command;
+    final String command;
 
     /**
      * Creates a new command type from the user.

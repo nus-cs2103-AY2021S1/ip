@@ -1,19 +1,18 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.CommandTypes;
-import duke.command.DoneCommand;
 import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-
-import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
-
-import java.time.format.DateTimeParseException;
+import duke.task.ToDo;
 
 /**
  * Deals with making sense of the user command.

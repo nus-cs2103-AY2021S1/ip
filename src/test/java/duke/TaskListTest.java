@@ -1,17 +1,17 @@
 package duke;
 
-import duke.task.ToDo;
-import duke.task.Deadline;
-import duke.task.Event;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 
 public class TaskListTest {
-    ToDo todo = new ToDo("wakeup");
-    Deadline deadline = new Deadline("project", "2020-09-01");
-    Event event = new Event("holiday", "2020-12-12");
+    private final ToDo todo = new ToDo("wakeup");
+    private final Deadline deadline = new Deadline("project", "2020-09-01");
+    private final Event event = new Event("holiday", "2020-12-12");
 
     @Test
     public void markAsDone_doneSecondTask_correctTaskDone() {
@@ -20,9 +20,9 @@ public class TaskListTest {
         tasks.addTask(deadline);
         tasks.addTask(event);
         tasks.markAsDone(2);
-        assertEquals("\n\t1.[T][✗] wakeup" +
-                "\n\t2.[D][✓] project (by: 1 Sep 2020)" +
-                "\n\t3.[E][✗] holiday (at: 12 Dec 2020)", tasks.toString());
+        assertEquals("\n\t1.[T][✗] wakeup"
+                + "\n\t2.[D][✓] project (by: 1 Sep 2020)"
+                + "\n\t3.[E][✗] holiday (at: 12 Dec 2020)", tasks.toString());
     }
 
     @Test
@@ -32,8 +32,8 @@ public class TaskListTest {
         tasks.addTask(deadline);
         tasks.addTask(event);
         tasks.deleteTask(3);
-        assertEquals("\n\t1.[T][✗] wakeup" +
-                "\n\t2.[D][✗] project (by: 1 Sep 2020)", tasks.toString());
+        assertEquals("\n\t1.[T][✗] wakeup"
+                + "\n\t2.[D][✗] project (by: 1 Sep 2020)", tasks.toString());
     }
 
     @Test
