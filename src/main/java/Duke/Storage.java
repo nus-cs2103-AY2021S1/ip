@@ -16,9 +16,10 @@ public class Storage {
 
     /**
      * Constructor creates the data folder and txt if not yet created.
-     * @param dest the destination folder for the data file
+     *
+     * @param dest     the destination folder for the data file
      * @param filename the name of the file
-     * @throws IOException thrown when there's an error creating the data file.
+     * @throws IOException   thrown when there's an error creating the data file.
      * @throws DukeException thrown when error in creating folder and data file.
      */
     public Storage(String dest, String filename) throws IOException, DukeException {
@@ -38,8 +39,10 @@ public class Storage {
         }
     }
 
+
     /**
      * Load reads the data file and returns a list of tasks stored inside.
+     *
      * @return list of tasks stored in the data file as an ArrayList
      * @throws IOException thrown when scanner is unable to read the file
      */
@@ -69,7 +72,7 @@ public class Storage {
             }
 
             if (Boolean.parseBoolean(inputSplit[1])) {
-                task.markDone();
+                task.setDone();
             }
             dukeList.add(task);
 
@@ -79,6 +82,7 @@ public class Storage {
 
     /**
      * Adds the new task into the data file.
+     *
      * @param task New task to be written into the data file.
      * @throws IOException thrown when unable to find data file.
      */
@@ -88,6 +92,7 @@ public class Storage {
 
     /**
      * Marks task as done in the data file
+     *
      * @param order which order task to overwrite as done.
      * @throws IOException
      */
@@ -111,6 +116,7 @@ public class Storage {
 
     /**
      * Adds the new task into the data file.
+     *
      * @param order which order task to be deleted from the data file.
      * @throws IOException thrown when unable to find data file.
      */
@@ -133,7 +139,8 @@ public class Storage {
 
     /**
      * Writes the data as string into the data file.
-     * @param text String to write or overwrite.
+     *
+     * @param text     String to write or overwrite.
      * @param isAppend true to append text, false to overwrite entire file.
      * @throws IOException thrown when file cannot be found.
      */

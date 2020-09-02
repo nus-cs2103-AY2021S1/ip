@@ -8,23 +8,24 @@ public class Task {
     public final static String CROSS = "\u2718";
 
     protected final String name;
-    protected boolean done;
+    protected boolean isDone;
 
     /**
      * Constructor creates a task and initialises done to false.
-     * @param name name of Task
+     *
+     * @param name name of Task.
      */
     public Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
-    public void markDone() {
-        this.done = true;
+    public void setDone() {
+        this.isDone = true;
     }
 
     public boolean getDone() {
-        return this.done;
+        return this.isDone;
     }
 
     public String getName() {
@@ -33,14 +34,15 @@ public class Task {
 
     /**
      * Formats task into the data format.
+     *
      * @return
      */
     public String getParsedData() {
-        return String.valueOf(this.done) + "/" + this.name;
+        return String.valueOf(this.isDone) + "/" + this.name;
     }
 
     public String toString() {
-        String symbol = done ? Task.TICK : Task.CROSS;
+        String symbol = isDone ? Task.TICK : Task.CROSS;
         return "[" + symbol + "] " + name;
     }
 }

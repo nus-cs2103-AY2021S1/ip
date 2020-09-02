@@ -22,6 +22,7 @@ public class Ui {
 
     /**
      * Reads and returns system input.
+     *
      * @return System input.
      */
     public String readLine() {
@@ -44,6 +45,7 @@ public class Ui {
 
     /**
      * Prints header and task added.
+     *
      * @param task Task to print
      */
     public void showAddTask(Task task) {
@@ -52,6 +54,7 @@ public class Ui {
 
     /**
      * Prints header and task done.
+     *
      * @param task Task to print
      */
     public void showDoneTask(Task task) {
@@ -60,6 +63,7 @@ public class Ui {
 
     /**
      * Prints header and task removed.
+     *
      * @param task Task to print
      */
     public void showRemovedTask(Task task) {
@@ -68,6 +72,7 @@ public class Ui {
 
     /**
      * Prints header and number of tasks in list.
+     *
      * @param size
      */
     public void showTotalTasks(int size) {
@@ -81,6 +86,7 @@ public class Ui {
 
     /**
      * Prints error message
+     *
      * @param e Exception to print
      */
     public void showError(Exception e) {

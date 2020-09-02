@@ -5,13 +5,12 @@ import Duke.Task;
 import Duke.TaskList;
 import Duke.DukeException;
 
-
 import java.io.IOException;
 
 public class Duke {
-
     /**
      * Main handles starts the bot and handles the logic.
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -25,9 +24,6 @@ public class Duke {
         // Show Welcome
         ui.showWelcome();
 
-        // Start process
-        boolean exit = false;
-
         try {
             // Initialise Storage
             Storage data = new Storage(dest, filename);
@@ -35,11 +31,15 @@ public class Duke {
             // Creates list
             TaskList list = new TaskList(data.load());
 
+            // Start process
+            boolean exit = false;
+
             while (!exit) {
                 try {
                     String input = ui.readLine();
                     Parser.Mode mode = parser.mode(input);
-                    if (mode == Parser.Mode.TODO || mode == Parser.Mode.DEADLINE || mode == Parser.Mode.EVENT) {
+                    if (mode == Parser.Mode.TODO || mode == Parser.Mode.DEADLINE ||
+                            mode == Parser.Mode.EVENT) {
                         // Create and add task to task list
                         Task task = parser.task(input);
                         list.add(task);

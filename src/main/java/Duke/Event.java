@@ -10,7 +10,7 @@ public class Event extends Task {
 
     @Override
     public String getParsedData() {
-        return "E" + "/" + String.valueOf(super.done) + "/" + super.name + "/" + this.at;
+        return "E" + "/" + String.valueOf(super.isDone) + "/" + super.name + "/" + this.at;
     }
 
     @Override

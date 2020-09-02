@@ -3,7 +3,7 @@ package Duke;
 public class Parser {
 
     public enum Mode {
-        LIST, BYE, DONE, DELETE, TODO, DEADLINE, EVENT;
+        BYE, DEADLINE, DELETE, DONE, EVENT, LIST, TODO;
 
     }
 
