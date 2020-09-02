@@ -41,29 +41,32 @@ public class Parser {
      * @param fullInput Command from the user.
      */
 
-    public void parse(String fullInput) {
+    public String parse(String fullInput) {
+        String result = "";
         try {
             if (fullInput.equals("list")) {
                 //Lists the tasks in the task list.
-                this.tasks.list();
+                result = this.tasks.list();
             } else if (fullInput.startsWith("delete ")) {
                 //Deletes a task in the task list.
                 int num = Integer.parseInt(fullInput.substring(7));
-                this.tasks.delete(num);
+                result = this.tasks.delete(num);
             } else if (fullInput.startsWith("done ")) {
                 //Marks a task as done in the task list.
                 int num = Integer.parseInt(fullInput.substring(5));
-                this.tasks.doTask(num);
+                result = this.tasks.doTask(num);
             } else if (fullInput.equals("bye")) {
                 //Saves the task list into the hard drive and terminates the program.
                 this.storage.save(this.tasks);
                 this.isExit = true;
+                result = "Bye. Hope to see you again soon! Bahahahaha!\n"
+                    + "____________________________________________________________\n";
 
             } else if (fullInput.startsWith("find ")) {
                 if (fullInput.length() <= 5) {
                     throw new DescriptionException("find");
                 }
-                this.tasks.find(fullInput.substring(5));
+                result = this.tasks.find(fullInput.substring(5));
 
             } else if (fullInput.startsWith("todo ")) {
                 if (fullInput.length() <= 5) {
@@ -73,7 +76,7 @@ public class Parser {
                 String description = fullInput.substring(5);
                 Task newTask = new ToDo(description);
                 //Adds task into the task list.
-                this.tasks.add(newTask);
+                result = this.tasks.add(newTask);
 
             } else if (fullInput.startsWith("deadline ")) {
 
@@ -110,7 +113,7 @@ public class Parser {
                 Task task = new Deadline(description, by);
 
                 //Adds task into the task list.
-                this.tasks.add(task);
+                result = this.tasks.add(task);
 
             } else if (fullInput.startsWith("event ")) {
                 //Check for validity of input.
@@ -146,7 +149,7 @@ public class Parser {
                 Task task = new Events(description, at);
 
                 //Adds task into task list.
-                this.tasks.add(task);
+                result = this.tasks.add(task);
 
             } else if (fullInput.equals("event") || fullInput.equals("deadline") || fullInput.equals("todo")
                 || fullInput.equals("done") || fullInput.equals("find")) {
@@ -157,9 +160,9 @@ public class Parser {
                 throw new CommandException(fullInput);
             }
         } catch (DukeException ex) {
-            System.out.println(ex);
+            result = ex.toString();
         }
-
+        return result;
     }
 
     public boolean isExit() {

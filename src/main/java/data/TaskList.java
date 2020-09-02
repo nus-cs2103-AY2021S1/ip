@@ -16,17 +16,18 @@ public class TaskList {
      * Prints out the current list of tasks.
      */
 
-    public void list() {
+    public String list() {
         int counter = 1;
-        System.out.println("Here are the tasks in your list: \n");
+        String result = "Here are the tasks in your list: \n";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i) != null) {
-                System.out.println(counter + ". " + tasks.get(i));
+                result += counter + ". " + tasks.get(i) + "\n";
                 counter++;
             } else {
                 break;
             }
         }
+        return result;
     }
 
     /**
@@ -34,16 +35,16 @@ public class TaskList {
      * @param num index of task to be deleted.
      */
 
-    public void delete(int num) {
+    public String delete(int num) {
 
         try {
             Task task = tasks.get(num - 1);
             tasks.remove(num - 1);
-            System.out.println("Noted. I've removed the task: \n"
+            return "Noted. I've removed the task: \n"
                     + task
-                    + "\nNow you have " + tasks.size() + " tasks in the list.");
+                    + "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("There isn't such a task!");
+            return "There isn't such a task!";
         }
     }
 
@@ -52,23 +53,22 @@ public class TaskList {
      * @param num Index of task to be done.
      */
 
-    public void doTask(int num) {
+    public String doTask(int num) {
         Task task = tasks.get(num - 1);
         task.doTask();
-        System.out.println("Noted. I've done the task: \n"
-                + task);
+        return "Noted. I've done the task: \n" + task;
     }
 
     /**
      * Add a task to the task list.
      * @param task Task object to be added to the list.
      */
-    public void add(Task task) {
+    public String add(Task task) {
 
         tasks.add(task);
-        System.out.println("Got it. I've added this task: \n"
+        return "Got it. I've added this task: \n"
                 + task
-                + "\nNow you have " + tasks.size() + " task(s) in the list.");
+                + "\nNow you have " + tasks.size() + " task(s) in the list.";
     }
 
     /**
@@ -100,14 +100,16 @@ public class TaskList {
      * @param substring Substring that the task is to contain.
      */
 
-    public void find(String substring) {
+    public String find(String substring) {
         int counter = 1;
+        String result = "";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).toString().contains(substring)) {
-                System.out.println(counter + "." + tasks.get(i));
+                result += counter + "." + tasks.get(i);
                 counter++;
             }
         }
+        return result;
     }
 
 
