@@ -1,14 +1,20 @@
-import Duke.DukeException;
-import Duke.Task;
 import Duke.Ui;
 import Duke.Parser;
 import Duke.Storage;
+import Duke.Task;
 import Duke.TaskList;
+import Duke.DukeException;
+
+
 import java.io.IOException;
 
 public class Duke {
 
-    public static void main(String[] args){
+    /**
+     * Main handles starts the bot and handles the logic.
+     * @param args
+     */
+    public static void main(String[] args) {
         //Destination
         String dest = "data";
         String filename = "duke.txt";
@@ -49,7 +55,7 @@ public class Duke {
                         // Mark Task as Done
                         int order = parser.order(input);
                         Task task = list.markDone(order);
-                        data.markDoneData(order, task.getParsedData());
+                        data.markDoneData(order);
                         ui.showDoneTask(task);
 
                     } else if (mode == Parser.Mode.DELETE) {
@@ -70,12 +76,12 @@ public class Duke {
                     }
 
                 } catch (DukeException e) {
-                    ui.showError(e.getMessage());
+                    ui.showError(e);
                 }
             }
-        } catch( IOException | DukeException e) {
-            ui.showError(e.getMessage());
-        } finally{
+        } catch (IOException | DukeException e) {
+            ui.showError(e);
+        } finally {
             ui.goodbye();
             ui.close();
         }

@@ -2,7 +2,7 @@ package Duke;
 
 public class Parser {
 
-    public enum Mode{
+    public enum Mode {
         LIST, BYE, DONE, DELETE, TODO, DEADLINE, EVENT;
 
     }
@@ -29,9 +29,9 @@ public class Parser {
         }
     }
 
-    public Task task(String input) throws DukeException{
+    public Task task(String input) throws DukeException {
         String command = input.split(" ")[0];
-        switch(command) {
+        switch (command) {
             case "todo":
                 return toDo(input);
             case "deadline":
@@ -68,7 +68,7 @@ public class Parser {
 
     }
 
-    public int order(String input){
+    public int order(String input) {
         return Integer.parseInt(input.split(" ")[1]);
     }
 
