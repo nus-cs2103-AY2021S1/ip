@@ -1,3 +1,8 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.util.List;
 
 /**
@@ -98,35 +103,35 @@ public class Ui {
     }
 
     /**
-     * Prints the completion of a task
-     * @param task task description
-     * @param taskStatus icon representing completion of task
+     * Prints the completion of a duke.task
+     * @param task duke.task description
+     * @param taskStatus icon representing completion of duke.task
      */
     public String checkList(String task, String taskStatus) {
         String returnStr;
         returnStr = "--------------------------------------" + "\n"
-                + "Such wow! I have completed the following task!" + "\n"
+                + "Such wow! I have completed the following duke.task!" + "\n"
                 + task + " [" + taskStatus + "]" + "\n"
                 + "--------------------------------------\n";
         /*System.out.println("--------------------------------------");
-        System.out.println("Such wow! I have completed the following task!");
-        System.out.println(task + " [" + taskStatus + "]");
+        System.out.println("Such wow! I have completed the following duke.task!");
+        System.out.println(duke.task + " [" + taskStatus + "]");
         System.out.println("--------------------------------------");*/
         System.out.println(returnStr);
         return returnStr;
     }
 
     /**
-     * Prints formatted message when task is removed
-     * @param taskId given task id
+     * Prints formatted message when duke.task is removed
+     * @param taskId given duke.task id
      */
     public String removePrint(int taskId) {
-        Task tr = TaskList.toDoList.get(taskId - 1);
+        Task tr = TaskList.getList().get(taskId - 1);
         String returnStr;
-        returnStr = "Task successfully removed!" + "\n"
+        returnStr = "duke.task.Task successfully removed!" + "\n"
                 + "-> " + tr.toString();
         System.out.println(returnStr);
-        /*System.out.println("Task successfully removed!");
+        /*System.out.println("duke.task.Task successfully removed!");
         System.out.println("-> " + tr.toString());*/
         return returnStr;
     }
@@ -141,7 +146,7 @@ public class Ui {
                 + "Added to list : " + print + "\n"
                 + "--------------------------------------\n";
         /*System.out.println("--------------------------------------");
-        //System.out.println("Added to task list : " + print);
+        //System.out.println("Added to duke.task list : " + print);
         System.out.println("Added to list : " + print);
         System.out.println("--------------------------------------");*/
         System.out.println(returnStr);

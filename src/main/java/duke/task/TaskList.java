@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,19 +9,19 @@ import java.util.List;
  * Encapsulates a list of tasks
  */
 public class TaskList {
-    protected static List<Task> toDoList = new ArrayList<>();
+    private static List<Task> toDoList = new ArrayList<>();
 
     /**
-     * Adds a given task to the list.
-     * @param task given task
+     * Adds a given duke.task to the list.
+     * @param task given duke.task
      */
     public static void addToList(Task task) {
         toDoList.add(task);
     }
 
     /**
-     * Removes a task with given task ID from the list.
-     * @param taskId given task ID
+     * Removes a duke.task with given duke.task ID from the list.
+     * @param taskId given duke.task ID
      */
     public static void removeFromList(int taskId) {
         toDoList.remove(taskId - 1);
@@ -37,5 +41,9 @@ public class TaskList {
             }
         }
         return returnList;
+    }
+
+    public static List<Task> getList() {
+        return toDoList;
     }
 }

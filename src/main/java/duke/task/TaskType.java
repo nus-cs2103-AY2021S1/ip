@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Enum representing various types of tasks.
  */
