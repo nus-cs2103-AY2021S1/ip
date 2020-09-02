@@ -4,17 +4,33 @@ import java.util.ArrayList;
 
 import main.java.duke.tasks.Task;
 
+/**
+ * Represents the current the task list.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 
+    /**
+     * Creates a TaskList instance.
+     *
+     * @param taskList An array list of previously saved tasks.
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * Creates a TaskList instance.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Lists all current tasks in list.
+     *
+     * @return A string representation of all the current tasks.
+     */
     public String listAllTasks() {
         String res = "";
         for (int i = 0; i < taskList.size(); i++) {
@@ -26,10 +42,22 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Adds new task to task list.
+     *
+     * @param newTask A new task.
+     */
     public void addTask(Task newTask) {
         taskList.add(newTask);
     }
 
+    /**
+     * Marks a task in task list to be done.
+     *
+     * @param taskNum The position of task in task list.
+     * @return The task that has been marked done.
+     * @throws DukeException If taskNum < 0 or exceeds total number of tasks in task list.
+     */
     public Task doneTask(int taskNum) throws DukeException {
         if (taskNum > 0 && taskNum <= taskList.size()) {
             Task task = taskList.get(taskNum - 1);
@@ -40,6 +68,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes task from task list.
+     *
+     * @param taskNum The position of task in task list.
+     * @return The task that has been deleted.
+     * @throws DukeException If taskNum < 0 or exceeds total number of tasks in task list.
+     */
     public Task removeTask(int taskNum) throws DukeException {
         if (taskNum > 0 && taskNum <= taskList.size()) {
             Task task = taskList.get(taskNum - 1);
@@ -50,6 +85,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns size of current task list.
+     *
+     * @return Size of current task list
+     */
     public int getTaskCount() {
         return taskList.size();
     }

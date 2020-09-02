@@ -13,8 +13,18 @@ import main.java.duke.command.ExitCommand;
 import main.java.duke.tasks.Deadline;
 import main.java.duke.tasks.Todo;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
 
+    /**
+     * Returns the command to be executed corresponding to the first word in the string of user input.
+     *
+     * @param userInput A string of text user typed into command line.
+     * @return Command to be executed.
+     * @throws DukeException If Duke does not understand user command.
+     */
     public static Command parse(String userInput) throws DukeException {
 
         String[] splitCommand = userInput.split(" ", 2);

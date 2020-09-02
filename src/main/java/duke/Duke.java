@@ -2,6 +2,9 @@ package main.java.duke;
 
 import main.java.duke.command.Command;
 
+/**
+ * Represents a Personal Assistant Chatbot that helps a person to keep track of various things.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -18,6 +21,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts Duke to take in user inputs.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

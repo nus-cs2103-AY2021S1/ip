@@ -16,10 +16,19 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private String filePath;
     private File file;
 
+    /**
+     * Creates a Storage instance.
+     *
+     * @param filePath A string representing the file path tasks are saved to.
+     * @throws DukeException  If unable to create a file in given path.
+     */
     public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
         file = new File(this.filePath);
@@ -34,6 +43,13 @@ public class Storage {
 
     }
 
+    /**
+     * Returns an array list containing tasks from previous session by extracting details
+     * of tasks from local file and creating corresponding task objects.
+     *
+     * @return An array list containing tasks from previous session.
+     * @throws DukeException  If there is no file available to load.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         try {
@@ -71,6 +87,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks in the hard disk when the task list changes.
+     *
+     * @param taskToAdd A string representing details of the task to be added to the file.
+     * @throws DukeException  If unable to edit file.
+     */
     public void saveTaskList(String taskToAdd) throws DukeException {
         try {
             FileWriter fw = new FileWriter(this.file, true);
@@ -81,6 +103,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Edit the existing tasks in the hard disk when the task list changes.
+     *
+     * @param newTask A string representing new details of the task already present in the file.
+     * @param taskNum Position of task in file.
+     * @param delete If the action is to delete the task in file.
+     * @throws DukeException  If unable to edit file.
+     */
     public void editTaskList(String newTask, int taskNum, boolean delete) throws DukeException {
         try {
             ArrayList<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(this.filePath)));

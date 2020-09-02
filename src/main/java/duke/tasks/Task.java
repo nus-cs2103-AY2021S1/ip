@@ -1,14 +1,25 @@
 package main.java.duke.tasks;
 
+/**
+ * Represents a task.
+ */
 public class Task {
     private String task;
     private boolean isDone;
 
+    /**
+     * Creates a Task instance that has not been done.
+     *
+     * @param task A string containing task details.
+     */
     Task(String task) {
         this.task = task;
         this.isDone = false;
     }
 
+    /**
+     * Marks task as done.
+     */
     public void doTask() {
         this.isDone = true;
     }
