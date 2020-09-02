@@ -1,22 +1,21 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.format.FormatStyle;
-
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
 
     @Test
-    public void dateTimeConverter_processTime_success(){
+    public void dateTimeConverter_processTime_success() {
         assertEquals(
-                new DateTimeConverter(FormatStyle.MEDIUM, FormatStyle.SHORT).processTime("10/12/2020 1300"),
+                new DateTimeConverter(FormatStyle.MEDIUM,
+                        FormatStyle.SHORT).processTime("10/12/2020 1300"),
                 "Dec 10, 2020, 1:00 PM");
     }
 
     @Test
-    public void parser_processTime_success(){
+    public void parser_processTime_success() {
         String[] orig = new Parser().commandParser("deadline finish assignments /by 2020-12-10 1500");
         String[] actual = new String[]{"deadline", "finish assignments", "Dec 10, 2020, 3:00 PM"};
         assertEquals(orig[0], actual[0]);
@@ -25,7 +24,7 @@ public class DukeTest {
     }
 
     @Test
-    public void deadline_getInfo_success(){
+    public void deadline_getInfo_success() {
         String[] orig = new Deadline("read books", "Dec 10, 2020, 3:00 PM").getInfo();
         String[] actual = new String[]{"D", "0", "read books", "Dec 10, 2020, 3:00 PM"};
         assertEquals(orig[0], actual[0]);

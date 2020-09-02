@@ -9,6 +9,10 @@ repositories {
     mavenCentral()
 }
 
+checkstyle {
+    toolVersion = '8.36'
+}
+
 dependencies {
     String javaFxVersion = '11'
 
@@ -51,10 +55,6 @@ application {
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null
-}
-
-checkstyle {
-    toolVersion = '8.23'
 }
 
 run{
