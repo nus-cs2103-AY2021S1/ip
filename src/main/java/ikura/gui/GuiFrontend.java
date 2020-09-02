@@ -12,10 +12,32 @@ import ikura.Frontend;
 import ikura.TaskList;
 import ikura.task.Todo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class GuiFrontend extends Frontend {
+
+    private final ObservableList<String> outputLog;
 
     public GuiFrontend(TaskList tasks) {
         super(tasks);
+
+        this.outputLog = FXCollections.observableArrayList();
+    }
+
+    public ObservableList<String> getOutputLog() {
+        return this.outputLog;
+    }
+
+    /**
+     * Executes the given command with the bot instance. The interface is the same; if this returns
+     * true, then the bot should not exit; if it returns false, then it should exit.
+     *
+     * @param cmd the command to execute
+     * @return true if the bot should continue, false if it should exit
+     */
+    public boolean processCommand(String cmd) {
+        return this.bot.processCommand(cmd);
     }
 
     @Override
@@ -25,6 +47,7 @@ public class GuiFrontend extends Frontend {
 
     @Override
     public void println(String fmt, Object... args) {
+        this.outputLog.add(String.format(fmt, args));
     }
 
     @Override
@@ -33,16 +56,5 @@ public class GuiFrontend extends Frontend {
 
     @Override
     public void endLog() {
-
-        // since this is called at the end of each command that's run, we can use
-        // the opportunity to update the gui.
     }
-
-
-
-
-
-
-
-
 }

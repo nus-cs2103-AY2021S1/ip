@@ -3,16 +3,24 @@
 
 package ikura.task;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.function.Consumer;
+
+import ikura.util.Observable;
+
 /**
  * An abstract class representing a Task. It contains a description (name) and records its current state
  * (done or not done).
  */
-public abstract class Task {
+public abstract class Task implements Observable<Task> {
 
     private String title;
     private String description;
 
     private boolean done;
+
+    private final List<Consumer<Task>> observers = new ArrayList<>();
 
     private static final String lipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
@@ -53,6 +61,8 @@ public abstract class Task {
     public void setTitle(String title) {
         assert title != null && !title.isEmpty();
         this.title = title;
+
+        this.updateObservers();
     }
 
     /**
@@ -72,6 +82,8 @@ public abstract class Task {
     public void setDescription(String description) {
         assert description != null;
         this.description = description;
+
+        this.updateObservers();
     }
 
     /**
@@ -91,10 +103,23 @@ public abstract class Task {
 
         assert !this.done;
         this.done = true;
+
+        this.updateObservers();
     }
 
     @Override
     public String toString() {
         return String.format("[%s] %s", this.done ? "\u2713" : "\u2718", this.title);
+    }
+
+    @Override
+    public void addObserver(Consumer<Task> observer) {
+        this.observers.add(observer);
+    }
+
+    private void updateObservers() {
+        for (var observer : this.observers) {
+            observer.accept(this);
+        }
     }
 }
