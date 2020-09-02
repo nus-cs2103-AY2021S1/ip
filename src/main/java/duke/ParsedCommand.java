@@ -101,8 +101,6 @@ public class ParsedCommand {
 
         ParsedCommand pc = (ParsedCommand) other;
 
-        boolean a = pc.getType().equals(getType()) && pc.getIndex() == getIndex()
-                && pc.getName().equals(getName()) && pc.getDate().equals(getDate());
         return pc.getType().equals(getType()) && pc.getIndex() == getIndex()
                 && pc.getName().equals(getName()) && pc.getDate().equals(getDate());
     }
