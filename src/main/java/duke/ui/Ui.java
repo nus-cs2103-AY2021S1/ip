@@ -260,10 +260,12 @@ public class Ui {
 
     /**
      * Accumulates response from various functionalities.
-     * @param response Response to be accumulated.
+     * @param responses Responses to be accumulated.
      */
-    public void accumulateResponse(String response) {
-        accumulatedResponses.add(response);
+    public void accumulateResponses(String... responses) {
+        for (String i: responses) {
+            accumulatedResponses.add(i);
+        }
     }
 
     /**

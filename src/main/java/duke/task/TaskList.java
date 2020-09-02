@@ -50,9 +50,9 @@ public class TaskList {
     public void addTask(Task task, Ui ui) {
         tasks.add(task);
         taskCount += 1;
-        ui.accumulateResponse(" Your task has been recorded.");
-        ui.accumulateResponse("   " + task);
-        ui.accumulateResponse(" You have " + taskCount + " tasks currently.");
+        ui.accumulateResponses(" Your task has been recorded.",
+                "   " + task,
+                " You have " + taskCount + " tasks currently.");
     }
 
     /**
@@ -63,14 +63,14 @@ public class TaskList {
      */
     public void deleteTask(int index, Ui ui) {
         if (index < 1 || taskCount < index) {
-            ui.accumulateResponse(" Sorry I cannot find your specified task :(");
+            ui.accumulateResponses(" Sorry I cannot find your specified task :(");
         } else {
             Task removed = tasks.get(index - 1);
             tasks.remove(index - 1);
             taskCount -= 1;
-            ui.accumulateResponse(" Okay, I will remove this task for you");
-            ui.accumulateResponse("   " + removed);
-            ui.accumulateResponse(" You have " + taskCount + " tasks currently.");
+            ui.accumulateResponses(" Okay, I will remove this task for you",
+                    "   " + removed,
+                    " You have " + taskCount + " tasks currently.");
         }
     }
 
@@ -81,13 +81,13 @@ public class TaskList {
      */
     public void listTasks(Ui ui) {
         if (taskCount == 0) {
-            ui.accumulateResponse(" You've got no tasks now.");
-            ui.accumulateResponse(" If you want to get busy add more task.");
-            ui.accumulateResponse(" I'll remember them for you :)");
+            ui.accumulateResponses(" You've got no tasks now.",
+                    " If you want to get busy add more task.",
+                    " I'll remember them for you :)");
         } else {
-            ui.accumulateResponse(" Let me list out all your tasks...");
+            ui.accumulateResponses(" Let me list out all your tasks...");
             for (int i = 0; i < taskCount; i++) {
-                ui.accumulateResponse(" " + (i + 1) + "." + tasks.get(i));
+                ui.accumulateResponses(" " + (i + 1) + "." + tasks.get(i));
             }
         }
     }
@@ -100,12 +100,12 @@ public class TaskList {
      */
     public void markAsDone(int index, Ui ui) {
         if (index < 1 || taskCount < index) {
-            ui.accumulateResponse(" Sorry I cannot find your specified task :(");
+            ui.accumulateResponses(" Sorry I cannot find your specified task :(");
         } else {
             tasks.get(index - 1).completeTask();
-            ui.accumulateResponse(" Congratulations for finishing this task!");
-            ui.accumulateResponse(" Let me mark this as done for you.");
-            ui.accumulateResponse("   " + tasks.get(index - 1));
+            ui.accumulateResponses(" Congratulations for finishing this task!",
+                    " Let me mark this as done for you.",
+                    "   " + tasks.get(index - 1));
         }
     }
 
