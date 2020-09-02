@@ -10,6 +10,7 @@ import duke.task.Task;
  * Represents a command to mark a task as done.
  */
 public class DoneCommand extends Command {
+
     private final int taskNum;
 
     /**
@@ -23,17 +24,17 @@ public class DoneCommand extends Command {
     /**
      * Marks a task from the task list as done.
      * @param tasks is the task list that the command will execute with.
-     * @param ui is the ui that the command will execute with.
      * @param storage is the storage that the command will execute with.
+     * @return a command response after executing the done command.
      * @throws DukeException when there is a problem executing the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             tasks.markAsDone(taskNum);
             Task doneTask = tasks.getTask(taskNum);
-            ui.printDoneTask(doneTask);
             storage.save(tasks.getTasks());
+            return new CommandResponse(Ui.printDoneTask(doneTask), this.isExit());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("SORRY!!! Task number is not valid.");
         }

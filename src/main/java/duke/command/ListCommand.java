@@ -18,11 +18,11 @@ public class ListCommand extends Command {
     /**
      * Lists all the tasks from the task list.
      * @param tasks is the task list that the command will execute with.
-     * @param ui is the ui that the command will execute with.
      * @param storage is the storage that the command will execute with.
+     * @return a command response after executing the list command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printList(tasks);
+    public CommandResponse execute(TaskList tasks, Storage storage) {
+        return new CommandResponse(Ui.printList(tasks), this.isExit());
     }
 }

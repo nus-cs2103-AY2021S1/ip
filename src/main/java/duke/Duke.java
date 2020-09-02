@@ -1,12 +1,13 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.CommandResponse;
 
 /**
  * Represents a personalized chat bot where a user can keep track of different tasks.
  */
 public class Duke {
-    private final Ui ui;
+
     private final Storage storage;
     private TaskList tasks;
 
@@ -15,39 +16,26 @@ public class Duke {
      * @param filePath is the path in which tasks are loaded and saved in.
      */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showError(e);
+            Ui.showError(e);
             tasks = new TaskList();
         }
     }
 
     /**
-     * Executes the chat bot and represents the main driver of the program.
+     * Gives a command response to user input.
+     * @param input The input from the user.
+     * @return the command response to the user.
      */
-    public void run() {
-        ui.printWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e);
-            }
+    public CommandResponse getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, storage);
+        } catch (DukeException e) {
+            return new CommandResponse(Ui.showError(e), false);
         }
-    }
-
-    /**
-     * Acts as the starting mechanism to run the chat bot.
-     * @param args accepts any parameter.
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a deadline to be done by a specified date.
  */
 public class Deadline extends Task {
+
     protected LocalDate by;
 
     /**
