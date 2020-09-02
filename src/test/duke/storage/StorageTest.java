@@ -10,6 +10,10 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Represents a storage test.
+ * @version 1.0
+ */
 public class StorageTest {
     Storage storage1 = new Storage("./src/test/tasks.txt");
     Storage storage2 = new Storage("./tasks.txt");
