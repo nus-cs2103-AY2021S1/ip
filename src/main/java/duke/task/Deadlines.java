@@ -26,8 +26,8 @@ public class Deadlines extends Task {
         try {
             this.localDateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));;
         } catch (DateTimeParseException e) {
-            throw new DukeDateTimeParseException("Please input the date and time in "
-                    + "yyyy-MM-dd HHmm format with the correct values\n\teg. 2014-12-25 1630");
+            throw new DukeDateTimeParseException("Please input the date and time in yyyy-MM-dd HHmm format"
+                    + " with the correct values\n\teg. event hackathon /by 2014-12-25 1630");
         }
 
     }

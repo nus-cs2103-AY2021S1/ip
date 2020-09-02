@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 import duke.command.DukeIndexOutOfBoundsException;
+import duke.command.DukeInvalidCommandException;
 
 public class TaskList {
     /**
@@ -115,10 +117,14 @@ public class TaskList {
                     continue;
                 }
                 String pattern = "\\b" + matchWords[j] + "\\b";
-                Pattern p = Pattern.compile(pattern);
-                Matcher m = p.matcher(taskList.get(i).toString());
-                if (m.find()) {
-                    matchList.add(taskList.get(i));
+                try {
+                    Pattern p = Pattern.compile(pattern);
+                    Matcher m = p.matcher(taskList.get(i).toString());
+                    if (m.find()) {
+                        matchList.add(taskList.get(i));
+                    }
+                } catch (PatternSyntaxException e) {
+                    throw new DukeInvalidCommandException("Sorry handsome but I'm not sure about this command :)");
                 }
             }
         }
