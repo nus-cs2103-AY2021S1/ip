@@ -16,6 +16,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * An example of a custom control using FXML.
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * containing text from the speaker.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -33,25 +38,6 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
     }
-    //    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    //    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    //    private Label text;
-    //    private ImageView displayPicture;
-    //    /**
-    //     * Constructs DialogBox
-    //     * @param l Constituent label control
-    //     * @param iv Constituent image view control
-    //     */
-    //    public DialogBox(Label l, ImageView iv) {
-    //        this.text = l;
-    //        this.displayPicture = iv;
-    //        text.setWrapText(true);
-    //        displayPicture.setFitWidth(100.0);
-    //        displayPicture.setFitHeight(100.0);
-    //        this.setAlignment(Pos.TOP_RIGHT);
-    //        this.getChildren().addAll(this.text, this.displayPicture);
-    //    }
-    //
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */

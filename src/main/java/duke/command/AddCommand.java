@@ -35,7 +35,7 @@ public class AddCommand implements Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui) throws DukeException, IOException {
         ArrayList<String> lines = new ArrayList<>();
         lines.add(Message.CONFIRMATION_MSG.getMsg());
         String reply = tasks.addEntry(this.parsedInput, this.commandTag);
@@ -43,6 +43,7 @@ public class AddCommand implements Command {
         lines.add(tasks.getCurrentStatus());
         ui.display(lines);
         Storage.save(tasks); // save upon addition
+        return Command.listLinesToString(lines);
     }
     @Override
     public boolean isExit() {

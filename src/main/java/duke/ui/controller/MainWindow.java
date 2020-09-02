@@ -39,7 +39,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = this.userInput.getText();
-        String response = "Stub response by duke for user input"; // todo: replace stub with logic
+        // String response = "Stub response by duke for user input"; // todo: replace stub with logic
+        String response = this.duke.getResponse(input);
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
                                              DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();

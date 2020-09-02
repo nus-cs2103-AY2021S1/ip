@@ -45,7 +45,7 @@ public class FindCommand implements Command {
      * @param ui    Where the User shall receive messages about the command
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         Matcher m = getMatcher(this.searchTerm);
         ArrayList<Task> allTasks = tasks.getAllTasks();
         ArrayList<String> lines = new ArrayList<>();
@@ -54,11 +54,12 @@ public class FindCommand implements Command {
         allTasks.stream()
                 .filter(task -> this.containsExactWord(task.getDescription(), searchTerm))
                 .forEach(foundTask -> lines.add(counter.incrementAndGet() + ". " + foundTask.toString()));
-        if (lines.isEmpty()) {
+        if (lines.size() == 1) { //if no found lines
+            lines.add(Message.ERROR_NO_FIND.getMsg());
             ui.displayError(Message.ERROR_NO_FIND.getMsg());
-        } else {
-            ui.display(lines);
         }
+        ui.display(lines);
+        return Command.listLinesToString(lines);
     }
     /**
      * Tests if a word/phrases is exactly present in a text
