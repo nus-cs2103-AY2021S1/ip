@@ -120,7 +120,7 @@ public class UserInterface {
      * @return response for initialisation and instruction for User.
      */
     public String sendWelcomeMessage() {
-        String startingMessage = "Pikachu: Hello, I am Pikachu! My pika service creates a to-do list for you!\n\n"
+        String startingMessage1 = "Pikachu: Hello, I am Pikachu! My pika service creates a to-do list for you!\n\n"
                 + "1. type 'list' and I list all that you said, along if it is completed\n"
                 + "2. type either 'event', 'deadline', 'todo', followed by the task!\n"
                 + "   2.1. if 'event', type the task followed by a '/at <duration>' to indicate duration\n"
@@ -129,7 +129,8 @@ public class UserInterface {
                 + "   2.4. if 'done' type the task followed by a number within the list index to mark it\n"
                 + "3. type 'done x' where x is the index of the item you want to be indicated done\n"
                 + "4. or you can say 'bye' to end us </3 Type your command:\n";
-        return startingMessage;
+        String startingMessage2 = "Hello! I am PikaDuke, I can help you keep track of your tasks!\n";
+        return startingMessage2;
     }
 
     /**

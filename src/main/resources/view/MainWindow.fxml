@@ -1,18 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="388.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="44.0" prefWidth="315.0" AnchorPane.bottomAnchor="1.0" />
+        <Button fx:id="sendButton" layoutX="318.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="28.0" prefWidth="70.0" style="-fx-background-radius: 10;" text="Send">
+         <font>
+            <Font name="Dubai Bold" size="18.0" />
+         </font></Button>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="388.0" style="-fx-background-image: bg.jpg;" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
+                <VBox fx:id="dialogContainer" prefHeight="553.0" prefWidth="390.0">
+                    <children>
+                        <BorderPane prefHeight="76.0" prefWidth="396.0">
+                     <center>
+                                <BorderPane prefHeight="98.0" prefWidth="367.0" style="-fx-background-color: #daa520; -fx-background-radius: 20;" styleClass="header-section" BorderPane.alignment="CENTER">
+                                    <center>
+                                        <Label id="header-text" prefHeight="68.0" prefWidth="205.0" text="PikaDuke" textFill="#f8f8f8">
+                                 <font>
+                                    <Font name="Dubai Medium" size="52.0" />
+                                 </font>
+                              </Label>
+                                    </center>
+                           <effect>
+                              <Blend />
+                           </effect>
+                           <left>
+                              <ImageView fitHeight="98.0" fitWidth="100.0" style="-fx-translate-x: 20; -fx-scale-x: 0.9; -fx-scale-y: 0.9;">
+                                 <image>
+                                    <Image url="@../images/icon.png" />
+                                 </image>
+                              </ImageView>
+                           </left>
+                                </BorderPane>
+                     </center>
+                     <VBox.margin>
+                        <Insets top="2.5" />
+                     </VBox.margin>
+                        </BorderPane>
+                    </children>
+                </VBox>
             </content>
         </ScrollPane>
     </children>
