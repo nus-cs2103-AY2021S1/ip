@@ -32,11 +32,11 @@ public class AddCommand extends Command {
      * @throws BobIOException if Storage's text file does not exist.
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws BobIOException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws BobIOException {
         tasks.add(task);
         storage.appendToStorage(task.saveFormat() + System.lineSeparator());
         storage.flushWriter();
-        ui.addTask(task);
+        return ui.addTask(task);
     }
 
     /**

@@ -32,10 +32,11 @@ public class DeleteCommand extends Command {
      * @throws BobIndexOutOfBoundsException if the index of the task to be deleted does not exist on TaskList.
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws BobIOException, BobIndexOutOfBoundsException {
-        ui.deleteTask(tasks,index);
+    public String execute(TaskList tasks, UI ui, Storage storage) throws BobIOException, BobIndexOutOfBoundsException {
+        String message = ui.deleteTask(tasks,index);
         tasks.delete(index);
         storage.updateSave(tasks);
+        return message;
     }
 
 }

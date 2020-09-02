@@ -18,7 +18,7 @@ public class UI {
     /**
      * Prints out a greeting from Bob to the user.
      */
-    public void greet() {
+    public static String greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -26,8 +26,7 @@ public class UI {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String greetings = "Hello! I'm Bob\nWhat can I do for you?";
         String exit = "Bye! Hope to see you again.";
-        System.out.println("Hello from\n" + logo);
-        System.out.println(greetings);
+        return "Hello from\n" + logo + greetings;
     }
 
     /**
@@ -36,14 +35,16 @@ public class UI {
      * @param tasks the TaskList to be printed out.
      * @throws BobIndexOutOfBoundsException if the method tries to retrieve a task with an index not on the list.
      */
-    public void printOutList(TaskList tasks) throws BobIndexOutOfBoundsException {
+    public String printOutList(TaskList tasks) throws BobIndexOutOfBoundsException {
+        String list = "";
         for(int i = 1; i < tasks.size()+1; i++) {
             Task task = tasks.get(i);
-            System.out.println(i +"." + task.toString());
+            list += i +"." + task.toString() + "\n";
         }
         if(tasks.isEmpty()) {
-            System.out.println("There are no tasks in the list at the moment. Feel free to add any.");
+            return "There are no tasks in the list at the moment. Feel free to add any.";
         }
+        return list;
     }
 
     /**
@@ -53,11 +54,10 @@ public class UI {
      * @param index the index of the task on the TaskList that has been deleted.
      * @throws BobIndexOutOfBoundsException if the index of the task to be deleted does not exist on the TaskList.
      */
-    public void deleteTask(TaskList tasks, int index) throws BobIndexOutOfBoundsException {
+    public String deleteTask(TaskList tasks, int index) throws BobIndexOutOfBoundsException {
         Task task = tasks.get(index);
-        System.out.println("Noted. I have removed the following task: ");
-        System.out.println("\t" + task.toString());
-        System.out.println("There are now " + tasks.size() + " remaining tasks on the list.");
+        return "Noted. I have removed the following task:\n\t" + task.toString()
+                + "\nThere are now " + tasks.size() + " remaining tasks on the list.";
     }
 
     /**
@@ -67,10 +67,10 @@ public class UI {
      * @param index the index of the task on the TaskList that has been marked as done.
      * @throws BobIndexOutOfBoundsException if the index of the task to be marked as done does not exist on the TaskList.
      */
-    public void markAsDone(TaskList tasks, int index) throws BobIndexOutOfBoundsException {
+    public String markAsDone(TaskList tasks, int index) throws BobIndexOutOfBoundsException {
         Task task = tasks.get(index);
-        System.out.println("Good job! I have marked this task as done:");
-        System.out.println("\t" + index + "." + task.toString());
+        return "Good job! I have marked this task as done:"
+                + "\n\t" + index + "." + task.toString();
     }
 
     /**
@@ -78,9 +78,9 @@ public class UI {
      *
      * @param task the task that has been added to TaskList.
      */
-    public void addTask(Task task) {
-        System.out.println("Got it! I have added a new task to the list.");
-        System.out.println("added: " + task.toString());
+    public String addTask(Task task) {
+        return "Got it! I have added a new task to the list."
+                + "\n\tadded: \n\t" + task.toString();
     }
 
     /**
@@ -96,19 +96,24 @@ public class UI {
      * Prints out an error message.
      * @param error the error message to be printed out.
      */
-    public void printError(String error) {
-        System.out.println(error);
+    public String printError(String error) {
+        return error;
     }
 
-    public void findKeyWord(TaskList tasks) throws BobIndexOutOfBoundsException {
+    public String findKeyWord(TaskList tasks) throws BobIndexOutOfBoundsException {
         if (!tasks.isEmpty()) {
-            System.out.println("Here are the tasks in your lists which match: ");
+            String message = "Here are the tasks in your lists which match: ";
             for(int i = 1; i < tasks.size()+1; i++) {
                 Task task = tasks.get(i);
-                System.out.println(i +"." + task.toString());
+                message += "\n" + i +"." + task.toString();
             }
+            return message;
         } else {
-            System.out.println("None of the tasks in your list match.");
+            return "None of the tasks in your list match.";
         }
+    }
+
+    public String exit() {
+        return "Bye! I hope to see you soon! \n[This window will close in 3 seconds.]";
     }
 }
