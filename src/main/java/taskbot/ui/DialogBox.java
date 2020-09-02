@@ -55,10 +55,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a DialogBox representing the user.
+     * @param text The text the user has input.
+     * @param image The image representing the user.
+     * @return a DialogBox with the given text and image.
+     */
     public static DialogBox getUserDialog(String text, Image image) {
         return new DialogBox(text, image);
     }
 
+    /**
+     * Creates a DialogBox representing TaskBot's response.
+     * @param text The response given by TaskBot.
+     * @param image The image representing TaskBot.
+     * @return a DialogBox to be displayed as TaskBot's answer to the user.
+     */
     public static DialogBox getTaskbotDialog(String text, Image image) {
         DialogBox dialogBox = new DialogBox(text, image);
         dialogBox.flip();
