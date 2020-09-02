@@ -1,5 +1,12 @@
 package duke;
 
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+
 import java.util.Scanner;
 
 /**
@@ -11,13 +18,13 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private String filePath = "data/tasks.txt";
 
     /**
      * Constructor for Duke class, initialises objects
      * for Storage, TaskList and Ui.
-     * @param filePath the location the data file would be retrieved from.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -29,7 +36,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke().run();
     }
 
     /**
@@ -43,6 +50,14 @@ public class Duke {
             String input = scanner.nextLine();
             Parser.parseUserInput(input, ui, tasks, storage);
         }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
 }
