@@ -13,12 +13,13 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes the particular task.
-     * @param text index of task to delete.
+     *
+     * @param text     index of task to delete.
      * @param taskList current list of tasks.
      */
     @Override
-    public void execute(String text, TaskList taskList) {
+    public String execute(String text, TaskList taskList) {
         int index = Integer.parseInt(text);
-        taskList.deleteTask(index);
+        return taskList.deleteTask(index);
     }
 }

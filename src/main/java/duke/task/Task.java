@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * Represents a Task that user wishes to add.
@@ -33,10 +33,12 @@ public class Task {
     /**
      * Marks the task complete.
      */
-    public void finishTask() {
-        Ui.printDoneMessage(this.isDone);
+    public String finishTask() {
         if (!this.isDone) {
             this.isDone = true;
+            return Ui.printDoneMessage(false);
+        } else {
+            return Ui.printDoneMessage(true);
         }
     }
 

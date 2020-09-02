@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Handles actions by user with regards to all their tasks.
@@ -24,12 +25,13 @@ public class TaskList {
      * Adds task to the current list of tasks.
      *
      * @param toAdd Task to add
+     * @return response to User.
      */
-    public void addTask(Task toAdd) {
+    public String addTask(Task toAdd) {
         this.allItems.add(toAdd);
         String printTask = "Alright, its in your list now!\n\t" + toAdd
-                + "\nNow you have " + this.allItems.size() + " tasks.\n" + Ui.LINE;
-        Ui.printMessageToUser(printTask);
+                + "\nNow you have " + this.allItems.size() + " tasks.";
+        return Ui.printMessage(printTask);
     }
 
     /**
@@ -43,12 +45,13 @@ public class TaskList {
 
     /**
      * Prints the output of all tasks in store currently.
+     *
+     * @return response to User.
      */
-    public void printStore() {
+    public String printStore() {
         String printList;
         if (this.allItems.size() == 0) {
-            printList = "There are no tasks added till now.\nAdd one by just typing its name.\n"
-                    + Ui.LINE;
+            printList = "There are no tasks added till now.\nAdd one by just typing its name.\n";
         } else {
             printList = "Please finish these tasks ASAP!\n";
             int counter = 1;
@@ -57,43 +60,47 @@ public class TaskList {
                 counter++;
             }
             printList = printList.concat("If you're brave enough to start,\n"
-                    + "You're strong enough to finish it!\n" + Ui.LINE);
+                    + "You're strong enough to finish it!\n");
         }
-        Ui.printMessageToUser(printList);
+        return Ui.printMessage(printList);
     }
 
     /**
      * Sets the selected task to be completed.
      *
      * @param index index of task to be set completed.
+     * @return response to User.
      */
-    public void completeTask(int index) {
+    public String completeTask(int index) {
         Task toComplete = this.allItems.get(index);
-        toComplete.finishTask();
+        return toComplete.finishTask();
     }
 
     /**
      * Removes task from current list.
      *
      * @param index index of task to be removed.
+     * @return response to User.
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         this.allItems.remove(index);
-        Ui.printDeleteTaskMessage();
+        return Ui.printDeleteTaskMessage();
     }
 
     /**
      * Sends instruction to save the current tasks.
      */
-    public void saveIntoHarddisk() {
-        this.savedStorage.saveIntoHarddisk();
+    public void saveIntoHardDisk() {
+        this.savedStorage.saveIntoHardDisk();
     }
 
     /**
      * Finds and prints matching tasks.
+     *
      * @param toMatch the word to match with.
+     * @return response to User.
      */
-    public void matchTasks(String toMatch) {
+    public String matchTasks(String toMatch) {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task : this.allItems) {
             if (task.canMatch(toMatch)) {
@@ -103,14 +110,13 @@ public class TaskList {
 
         String printMatchingTasks;
         if (matchingTasks.size() == 0) {
-            printMatchingTasks = "There are no tasks that match " + toMatch + "\n" + Ui.LINE;
+            printMatchingTasks = "There are no tasks that match " + toMatch + "\n";
         } else {
             printMatchingTasks = "Matching tasks: \n";
             for (Task task : matchingTasks) {
                 printMatchingTasks = printMatchingTasks.concat(task + "\n");
             }
-            printMatchingTasks = printMatchingTasks + Ui.LINE;
         }
-        System.out.println(printMatchingTasks);
+        return Ui.printMessage(printMatchingTasks);
     }
 }

@@ -13,11 +13,12 @@ public class ListCommand extends Command {
 
     /**
      * Lists all current tasks.
-     * @param text  unused argument.
+     *
+     * @param text     unused argument.
      * @param taskList current list of tasks.
      */
     @Override
-    public void execute(String text, TaskList taskList) {
-        taskList.printStore();
+    public String execute(String text, TaskList taskList) {
+        return taskList.printStore();
     }
 }
