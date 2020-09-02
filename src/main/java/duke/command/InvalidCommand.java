@@ -8,17 +8,17 @@ import duke.ui.Ui;
 /**
  * Represents an UnknownCommand where user input is unclear.
  */
-public class UnknownCommand extends Command {
+public class InvalidCommand extends Command {
 
-    private String gibberish;
+    private String input;
 
     /**
      * Creates an UnknownCommand.
      *
-     * @param gibberish Full input by the user.
+     * @param input Full input by the user.
      */
-    public UnknownCommand(String gibberish) {
-        this.gibberish = gibberish;
+    public InvalidCommand(String input) {
+        this.input = input;
     }
 
     /**
@@ -33,6 +33,6 @@ public class UnknownCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         throw new DukeException(String.format(
                 "I'm sorry, but I don't know what \"%s\" means :-(\n"
-                + "    type \"help\" for a list of commands!", gibberish));
+                + "    type \"help\" for a list of commands!", input));
     }
 }

@@ -11,15 +11,15 @@ import duke.ui.Ui;
  */
 public class DeleteCommand extends Command {
 
-    private int i;
+    private int taskNumber;
 
     /**
      * Creates a DeleteCommand.
      *
-     * @param i Index of task to be deleted.
+     * @param taskNumber Index of task to be deleted.
      */
-    public DeleteCommand(int i) {
-        this.i = i;
+    public DeleteCommand(int taskNumber) {
+        this.taskNumber = taskNumber;
     }
 
     /**
@@ -33,11 +33,11 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            Task t = tasks.deleteTask(i);
+            Task t = tasks.remove(taskNumber);
             storage.save(tasks);
             return ui.showAction(String.format("  Noted. I've removed this task:\n"
                     + "    %s\n"
-                    + "  Now you have %d tasks in the list.\n", t, tasks.numTasks()));
+                    + "  Now you have %d tasks in the list.\n", t, tasks.size()));
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("Can't delete a task that does not exist.");
         }

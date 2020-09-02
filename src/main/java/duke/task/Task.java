@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 /**
  * Represents a Task created by the user.
  */
@@ -54,6 +56,6 @@ public class Task {
     }
 
     public boolean hasKeyword(String keyword) {
-        return description.contains(keyword) ? true : false;
+        return description.contains(keyword);
     }
 }

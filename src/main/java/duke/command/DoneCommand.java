@@ -11,15 +11,15 @@ import duke.ui.Ui;
  */
 public class DoneCommand extends Command {
 
-    private int i;
+    private int taskNumber;
 
     /**
      * Creates a DoneCommand.
      *
-     * @param i Index of task to be marked as done.
+     * @param taskNumber Index of task to be marked as done.
      */
-    public DoneCommand(int i) {
-        this.i = i;
+    public DoneCommand(int taskNumber) {
+        this.taskNumber = taskNumber;
     }
 
     /**
@@ -33,7 +33,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            Task t = tasks.markTask(i);
+            Task t = tasks.markTask(taskNumber);
             storage.save(tasks);
             return ui.showAction(String.format("  Nice! I've marked this task as done:\n"
                     + "    %s\n", t));

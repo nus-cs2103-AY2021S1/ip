@@ -25,7 +25,7 @@ public class TaskList {
     public TaskList(ArrayList<String> taskStrings) {
         tasks = new ArrayList<>();
         for (String taskString : taskStrings) {
-            this.tasks.add(lineToTask(taskString));
+            this.tasks.add(dataToTask(taskString));
         }
     }
 
@@ -35,7 +35,7 @@ public class TaskList {
      * @param taskString Line of text from text file.
      * @return Task which is specified by the line of text
      */
-    public Task lineToTask(String taskString) {
+    public Task dataToTask(String taskString) {
         String[] taskLine = taskString.split("~");
         Task task = null;
         switch (taskLine[0]) {
@@ -65,10 +65,10 @@ public class TaskList {
      */
     public String listTasks() {
         String tasks = "";
-        Task t;
+        Task task;
         for (int i = 0; i < this.tasks.size(); i++) {
-            t = this.tasks.get(i);
-            tasks += String.format("  %d.%s%n", i + 1, t);
+            task = this.tasks.get(i);
+            tasks += String.format("  %d.%s%n", i + 1, task);
         }
         return tasks;
     }
@@ -78,7 +78,7 @@ public class TaskList {
      *
      * @param task Task to be added.
      */
-    public void addTasks(Task task) {
+    public void add(Task task) {
         tasks.add(task);
     }
 
@@ -87,7 +87,7 @@ public class TaskList {
      *
      * @return Number of items in TaskList.
      */
-    public int numTasks() {
+    public int size() {
         return tasks.size();
     }
 
@@ -129,7 +129,7 @@ public class TaskList {
      * @param idx Position of the Task in the list of tasks.
      * @return Task which was deleted.
      */
-    public Task deleteTask(int idx) {
+    public Task remove(int idx) {
         Task t = tasks.get(idx - 1);
         tasks.remove(idx - 1);
         return t;
@@ -138,11 +138,11 @@ public class TaskList {
     /**
      * Marks a tast in the list as done.
      *
-     * @param idx Position of Task in the list of tasks.
+     * @param taskNumber Position of Task in the list of tasks.
      * @return Task which was marked as done.
      */
-    public Task markTask(int idx) {
-        Task t = tasks.get(idx - 1);
+    public Task markTask(int taskNumber) {
+        Task t = tasks.get(taskNumber - 1);
         t.markAsDone();
         return t;
     }

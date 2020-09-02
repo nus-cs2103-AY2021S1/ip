@@ -8,7 +8,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
-import duke.command.UnknownCommand;
+import duke.command.InvalidCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -56,7 +56,7 @@ public class Parser {
         } else if (fullCommand.startsWith("find")) {
             command = new FindCommand(fullCommand.split(" ")[1]);
         } else {
-            command = new UnknownCommand(fullCommand);
+            command = new InvalidCommand(fullCommand);
         }
         return command;
     }
@@ -65,37 +65,37 @@ public class Parser {
      * Parses a task input into Task objects.
      *
      * @param type Type of task (todo, deadline, or event).
-     * @param task The full input of the task.
+     * @param taskString The full input of the task.
      * @return Task obtained from the input.
      * @throws DukeException If task is not successfully parsed.
      */
-    public static Task parseTask(String type, String task) throws DukeException {
-        Task t;
+    public static Task parseTask(String type, String taskString) throws DukeException {
+        Task task;
         switch (type) {
         case "todo":
-            if (task.length() <= 5) {
+            if (taskString.length() <= 5) {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
-            t = new ToDo(task.substring(5));
+            task = new ToDo(taskString.substring(5));
             break;
         case "deadline":
-            if (task.length() <= 9) {
+            if (taskString.length() <= 9) {
                 throw new DukeException("The description of a deadline cannot be empty.");
             }
-            String[] taskArr = task.substring(9).split(" /by ");
+            String[] taskArr = taskString.substring(9).split(" /by ");
             try {
-                t = new Deadline(taskArr[0], taskArr[1]);
+                task = new Deadline(taskArr[0], taskArr[1]);
             } catch (IndexOutOfBoundsException ex) {
                 throw new DukeException("Invalid description of a deadline.");
             }
             break;
         case "event":
-            if (task.length() <= 6) {
+            if (taskString.length() <= 6) {
                 throw new DukeException("The description of an event cannot be empty.");
             }
-            String[] taskArr2 = task.substring(6).split(" /at ");
+            String[] taskArr2 = taskString.substring(6).split(" /at ");
             try {
-                t = new Event(taskArr2[0], taskArr2[1]);
+                task = new Event(taskArr2[0], taskArr2[1]);
             } catch (IndexOutOfBoundsException ex) {
                 throw new DukeException("Invalid description of an event.");
             }
@@ -103,6 +103,6 @@ public class Parser {
         default:
             throw new DukeException("Unexpected value: " + type);
         }
-        return t;
+        return task;
     }
 }

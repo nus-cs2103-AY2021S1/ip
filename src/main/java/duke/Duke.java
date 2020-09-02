@@ -26,13 +26,13 @@ public class Duke {
      * @param folderPath Path name of duke.Duke text file to be saved.
      */
     public Duke(String filePath, String folderPath) {
-        ui = new Ui();
-        storage = new Storage(filePath, folderPath);
+        this.ui = new Ui();
+        this.storage = new Storage(filePath, folderPath);
         try {
-            tasks = new TaskList(storage.load());
+            this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            this.tasks = new TaskList();
         }
     }
 
@@ -58,13 +58,6 @@ public class Duke {
         }
     }
 
-    /**
-     * Main method for starting the chat-bot.
-     * @param args Command line arguments, not used.
-     */
-    public static void main(String[] args) {
-        new Duke("/data/duke.txt", "/data").run();
-    }
 
     /**
      * You should have your own function to generate a response to user input.
@@ -85,16 +78,23 @@ public class Duke {
         }
         boolean isExit = false;
         try {
-            Command c = Parser.parse(input);
-            isExit = c.isExit();
+            Command command = Parser.parse(input);
+            isExit = command.isExit();
             if (isExit) {
                 System.exit(0);
                 return ui.showFarewell();
             }
-            return c.execute(tasks, ui, storage);
+            return command.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
         }
-        //return " heard: " + input;
+    }
+
+    /**
+     * Main method for starting the chat-bot.
+     * @param args Command line arguments, not used.
+     */
+    public static void main(String[] args) {
+        new Duke("/data/duke.txt", "/data").run();
     }
 }

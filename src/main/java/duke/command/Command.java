@@ -11,12 +11,6 @@ import duke.ui.Ui;
 public abstract class Command {
 
     /**
-     * Default constructor for Command class.
-     */
-    public Command() {
-    }
-
-    /**
      * Executes the command.
      *
      * @param tasks Tasklist containing current tasks.

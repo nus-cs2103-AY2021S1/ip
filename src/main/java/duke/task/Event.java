@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -9,15 +11,16 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
 
-    protected LocalDateTime timeStart;
-    protected LocalDateTime timeEnd;
+    private LocalDateTime timeStart;
+    private LocalDateTime timeEnd;
 
     /**
      * Creates an Event Task.
      * @param description Description of Event.
      * @param at The date and time during which the Event occurs.
+     * @throws DukeException If format of time is wrong.
      */
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException {
         super(description);
         String[] startEnd = at.split(" to ");
         LocalDateTime timeStart;
@@ -28,7 +31,7 @@ public class Event extends Task {
             timeEnd = LocalDateTime.parse(startEnd[1],
                     DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         } catch (DateTimeParseException ignored) {
-            return;
+            throw new DukeException("Wrong format of for deadline time.");
         }
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
@@ -41,10 +44,10 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String at = timeStart.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))
+        String timeInterval = timeStart.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))
                 + " to "
                 + timeEnd.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + timeInterval + ")";
     }
 
     /**
@@ -56,9 +59,10 @@ public class Event extends Task {
     public String toData() {
         String isDone = super.isDone ? "1" : "0";
         String separator = "~";
-        String at = timeStart.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
+        String timeInterval = timeStart.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
                 + " to "
                 + timeEnd.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-        return "E" + separator + isDone + separator + super.description + separator + at + "\n";
+        return String.format("D%s%s%s%s%s%s%n", separator, isDone, separator,
+                super.description, separator, timeInterval);
     }
 }
