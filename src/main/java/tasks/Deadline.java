@@ -1,12 +1,12 @@
-package main.java.tasks;
+package tasks;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import main.java.exceptions.InvalidDescriptionException;
-import main.java.exceptions.InvalidTimeException;
+import exceptions.InvalidDescriptionException;
+import exceptions.InvalidTimeException;
 
 /**
  * Represents a deadline, consisting of a description and an end time.

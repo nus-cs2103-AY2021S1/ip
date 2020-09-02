@@ -1,9 +1,9 @@
-package main.java.manager;
+package manager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.tasks.Task;
+import tasks.Task;
 
 /**
  * Represents a task list. Performs actions on tasks.

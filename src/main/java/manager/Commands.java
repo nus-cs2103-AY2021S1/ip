@@ -1,4 +1,4 @@
-package main.java.manager;
+package manager;
 
 /**
  * Represents the set of commands recognised by the converter.

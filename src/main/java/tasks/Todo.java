@@ -1,5 +1,5 @@
-package main.java.tasks;
-import main.java.exceptions.InvalidDescriptionException;
+package tasks;
+import exceptions.InvalidDescriptionException;
 
 /**
  * Represents a todo, consisting of a description.

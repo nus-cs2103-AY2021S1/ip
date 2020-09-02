@@ -1,9 +1,7 @@
 package exceptions;
 
-import main.java.exceptions.InvalidDescriptionException;
-import main.java.exceptions.InvalidTimeException;
-import main.java.tasks.Deadline;
-import main.java.tasks.Event;
+import tasks.Deadline;
+import tasks.Event;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

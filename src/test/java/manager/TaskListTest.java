@@ -1,11 +1,11 @@
 package manager;
 
-import main.java.exceptions.InvalidDescriptionException;
-import main.java.exceptions.InvalidTimeException;
-import main.java.manager.TaskList;
-import main.java.tasks.Deadline;
-import main.java.tasks.Event;
-import main.java.tasks.Todo;
+import exceptions.InvalidDescriptionException;
+import exceptions.InvalidTimeException;
+import manager.TaskList;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

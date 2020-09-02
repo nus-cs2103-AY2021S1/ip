@@ -1,4 +1,4 @@
-import main.java.manager.Parser;
+import manager.Parser;
 
 /**
  * Represents the Duke chat bot.

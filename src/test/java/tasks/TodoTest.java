@@ -1,7 +1,6 @@
 package tasks;
 
-import main.java.exceptions.InvalidDescriptionException;
-import main.java.tasks.Todo;
+import exceptions.InvalidDescriptionException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

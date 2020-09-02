@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package exceptions;
 
 /**
  * Represents an exception thrown by Duke. The message corresponds to

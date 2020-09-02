@@ -1,8 +1,7 @@
 package tasks;
 
-import main.java.exceptions.InvalidDescriptionException;
-import main.java.exceptions.InvalidTimeException;
-import main.java.tasks.Event;
+import exceptions.InvalidDescriptionException;
+import exceptions.InvalidTimeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

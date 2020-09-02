@@ -1,9 +1,9 @@
-package main.java.manager;
+package manager;
 
 import java.util.Scanner;
 
-import main.java.exceptions.InvalidCommandException;
-import main.java.exceptions.InvalidNumberException;
+import exceptions.InvalidCommandException;
+import exceptions.InvalidNumberException;
 
 /**
  * Represents a parser that parses the user's input and

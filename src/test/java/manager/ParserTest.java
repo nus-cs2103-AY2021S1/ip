@@ -1,6 +1,5 @@
 package manager;
 
-import main.java.manager.Parser;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;

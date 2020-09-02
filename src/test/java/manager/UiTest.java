@@ -1,8 +1,8 @@
 package manager;
 
-import main.java.manager.Commands;
-import main.java.manager.Ui;
-import main.java.tasks.Task;
+import manager.Commands;
+import manager.Ui;
+import tasks.Task;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
