@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.DukeInputException;
 import duke.util.DateTimeHandler;
 
 /**
@@ -15,12 +15,12 @@ public class Event extends Task {
      * Creates a new event from a description and a date and time String.
      *
      * @param description Description of the event.
-     * @param at Date and time of the event.
-     * @throws DukeException If the date and time input is invalid.
+     * @param dateTime Date and time of the event.
+     * @throws DukeInputException If the date and time input is invalid.
      */
-    public Event(String description, String at) throws DukeException {
+    public Event(String description, String dateTime) throws DukeInputException {
         super(description);
-        this.dateTime = DateTimeHandler.parseDateTime(at);
+        this.dateTime = DateTimeHandler.parseDateTime(dateTime);
     }
 
     /**

@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.DukeInputException;
 import duke.util.DateTimeHandler;
 
 /**
@@ -15,12 +15,12 @@ public class Deadline extends Task {
      * Creates a new deadline from a description and a date and time String.
      *
      * @param description Description of the deadline.
-     * @param by Due date and time of the deadline.
-     * @throws DukeException If the date and time input is invalid.
+     * @param dateTime Due date and time of the deadline.
+     * @throws DukeInputException If the date and time input is invalid.
      */
-    public Deadline(String description, String by) throws DukeException {
+    public Deadline(String description, String dateTime) throws DukeInputException {
         super(description);
-        this.dateTime = DateTimeHandler.parseDateTime(by);
+        this.dateTime = DateTimeHandler.parseDateTime(dateTime);
     }
 
     /**

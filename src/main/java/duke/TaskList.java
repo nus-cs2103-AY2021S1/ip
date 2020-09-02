@@ -31,11 +31,11 @@ public class TaskList {
     /**
      * Gets a task from the list.
      *
-     * @param i Index of task stored in the list.
+     * @param index Index of task stored in the list.
      * @return Task from index i of the list.
      */
-    public Task getTask(int i) {
-        return this.tasks.get(i);
+    public Task getTask(int index) {
+        return this.tasks.get(index);
     }
 
     /**
@@ -59,9 +59,9 @@ public class TaskList {
     /**
      * Deletes a task from the list.
      *
-     * @param i Index of task stored in the list.
+     * @param index Index of task stored in the list.
      */
-    public void deleteTask(int i) {
-        this.tasks.remove(i);
+    public void deleteTask(int index) {
+        this.tasks.remove(index);
     }
 }

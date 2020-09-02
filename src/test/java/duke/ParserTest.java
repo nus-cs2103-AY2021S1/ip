@@ -15,48 +15,48 @@ public class ParserTest {
 
     @Test
     public void processInput_unknownCommand_dukeExceptionThrown() {
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("bye bye"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("bye bye"));
     }
 
     @Test
     public void processInput_invalidDeleteCommand_dukeExceptionThrown() {
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("delete"));
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("delete a"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("delete"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("delete a"));
     }
 
     @Test
     public void processInput_invalidDoneCommand_dukeExceptionThrown() {
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("done"));
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("done a"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("done"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("done a"));
     }
 
     @Test
     public void processInput_invalidGetCommand_dukeExceptionThrown() {
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("get"));
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("get a"));
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("get 01/09/2020"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("get"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("get a"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("get 01/09/2020"));
     }
 
     @Test
     public void processInput_invalidTodoCommand_dukeExceptionThrown() {
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("todo"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("todo"));
     }
 
     @Test
     public void processInput_invalidEventCommand_dukeExceptionThrown() {
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("event project meeting"));
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("event project meeting"));
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("event project meeting /at"));
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("event project meeting /at 01/09/2020"));
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("event project meeting /by 01/09/2020 0800"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("event project meeting"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("event project meeting"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("event project meeting /at"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("event project meeting /at 01/09/2020"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("event project meeting /by 01/09/2020 0800"));
     }
 
     @Test
     public void processInput_invalidDeadlineCommand_dukeExceptionThrown() {
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("return book"));
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("return book"));
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("return book /by"));
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("return book /by 01/09/2020"));
-        Assertions.assertThrows(DukeException.class, () -> this.parser.processInput("return book /at 01/09/2020 1800"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("return book"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("return book"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("return book /by"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("return book /by 01/09/2020"));
+        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("return book /at 01/09/2020 1800"));
     }
 }

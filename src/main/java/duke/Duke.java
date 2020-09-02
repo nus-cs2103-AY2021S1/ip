@@ -28,14 +28,14 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.run();
+        duke.runDuke();
     }
 
     /**
      * Runs Duke.
      */
-    public void run() {
-        this.storage.checkSaveFile();
+    public void runDuke() {
+        this.storage.checkSavedFile();
         this.ui.printIntroduction();
         this.readInputs();
     }
@@ -49,7 +49,7 @@ public class Duke {
             String nextInput = sc.nextLine();
             try {
                 this.parser.processInput(nextInput);
-            } catch (DukeException e) {
+            } catch (DukeInputException e) {
                 this.ui.printError(e.getMessage());
             }
 

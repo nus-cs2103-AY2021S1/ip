@@ -1,6 +1,6 @@
 package duke.util;
 
-import duke.DukeException;
+import duke.DukeInputException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,9 +17,9 @@ public class DateTimeHandler {
      *
      * @param date Unformatted date string.
      * @return Date string in the format of "dd MMM YYYY".
-     * @throws DukeException If date input is invalid.
+     * @throws DukeInputException If date input is invalid.
      */
-    public static String parseDate(String date) throws DukeException {
+    public static String parseDate(String date) throws DukeInputException {
         try {
             // Parse input
             DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d-M-yyyy");
@@ -29,7 +29,7 @@ public class DateTimeHandler {
             DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
             return inputDate.format(outputFormatter);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Enter the date as \"dd-MM-yyyy\".\n");
+            throw new DukeInputException("Enter the date as \"dd-MM-yyyy\".\n");
         }
     }
 
@@ -38,9 +38,9 @@ public class DateTimeHandler {
      *
      * @param dateTime Unformatted date and time string.
      * @return Date and time string in the format of "dd MMM YYYY, hh:ss".
-     * @throws DukeException If date and time input is invalid.
+     * @throws DukeInputException If date and time input is invalid.
      */
-    public static String parseDateTime(String dateTime) throws DukeException {
+    public static String parseDateTime(String dateTime) throws DukeInputException {
         try {
             // Parse input
             DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d-M-yyyy HHmm");
@@ -50,7 +50,7 @@ public class DateTimeHandler {
             DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:ss a");
             return inputDateTime.format(outputFormatter);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Enter the date and time as \"dd-MM-yyyy HHmm\".\n");
+            throw new DukeInputException("Enter the date and time as \"dd-MM-yyyy HHmm\".\n");
         }
     }
 }

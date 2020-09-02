@@ -69,7 +69,7 @@ public class Storage {
      * If it exists, load the data into Duke.
      * If it does not exist, create one.
      */
-    public void checkSaveFile() {
+    public void checkSavedFile() {
         if (directory.exists()) {
             if (textFile.exists()) {
                 readTextFile();
@@ -119,8 +119,8 @@ public class Storage {
             BufferedReader reader = new BufferedReader(new FileReader(textFile));
             String line = reader.readLine();
             while (line != null) {
-                String[] arr = line.split(" / ");
                 Task task;
+                String[] arr = line.split(" / ");
                 boolean isDone = Integer.parseInt(arr[1]) != 0;
                 if (arr[0].equals("T")) {    // Todo
                     task = new Todo(arr[2], isDone);

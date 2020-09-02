@@ -34,26 +34,26 @@ public class Parser {
     /**
      * Processes the input fed to Duke.
      *
-     * @param input Input string.
-     * @throws DukeException If input is invalid.
+     * @param userInput User input string.
+     * @throws DukeInputException If input is invalid.
      */
-    public void processInput(String input) throws DukeException {
-        if (input.equals("bye")) {
+    public void processInput(String userInput) throws DukeInputException {
+        if (userInput.equals("bye")) {
             this.ui.printMessage("Bye. Hope to see you again soon!");
-        } else if (input.equals("list")) {
+        } else if (userInput.equals("list")) {
             this.ui.printTaskList(this.taskList);
-        } else if (input.contains("delete")) {
-            deleteTask(input);
-        } else if (input.contains("done")) {
-            markTaskAsDone(input);
-        } else if (input.contains("get")) {
-            printTasksFromDate(input);
-        } else if (input.contains("find")) {
-            findTasks(input);
-        } else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
-            createTask(input);
+        } else if (userInput.contains("delete")) {
+            deleteTask(userInput);
+        } else if (userInput.contains("done")) {
+            markTaskAsDone(userInput);
+        } else if (userInput.contains("get")) {
+            printTasksFromDate(userInput);
+        } else if (userInput.contains("find")) {
+            findTasks(userInput);
+        } else if (userInput.contains("todo") || userInput.contains("event") || userInput.contains("deadline")) {
+            createTask(userInput);
         } else {
-            throw new DukeException("I'm sorry, but I don't know what that means. \u2639\n");
+            throw new DukeInputException("I'm sorry, but I don't know what that means. \u2639\n");
         }
     }
 
@@ -62,7 +62,7 @@ public class Parser {
      *
      * @return Footer string containing the number of tasks.
      */
-    private String numOfTasksFooter() {
+    private String getNumOfTasksFooter() {
         int numOfTasks = this.taskList.getNumOfTasks();
         if (numOfTasks == 1) {
             return "Now you have " + numOfTasks + " task in the list.\n";
@@ -75,9 +75,9 @@ public class Parser {
      * Deletes a task specified by the user.
      *
      * @param input Input string indicating which task's index to be deleted.
-     * @throws DukeException If input is invalid.
+     * @throws DukeInputException If input is invalid.
      */
-    private void deleteTask(String input) throws DukeException {
+    private void deleteTask(String input) throws DukeInputException {
         try {
             int number = Integer.parseInt(input.substring(7));
             int index = number - 1;
@@ -87,12 +87,12 @@ public class Parser {
             String confirmationMessage = "Noted. I've removed this task:\n"
                     + task.toString()
                     + "\n"
-                    + this.numOfTasksFooter();
+                    + this.getNumOfTasksFooter();
             this.ui.printMessage(confirmationMessage);    // print delete confirmation message
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Which task do you want to delete?\n");
+            throw new DukeInputException("Which task do you want to delete?\n");
         } catch (NumberFormatException e) {
-            throw new DukeException("Enter the index of the task to be deleted.\n");
+            throw new DukeInputException("Enter the index of the task to be deleted.\n");
         }
     }
 
@@ -100,9 +100,9 @@ public class Parser {
      * Marks a task as done.
      *
      * @param input Input string describing which task's index is done.
-     * @throws DukeException If input is invalid.
+     * @throws DukeInputException If input is invalid.
      */
-    private void markTaskAsDone(String input) throws DukeException {
+    private void markTaskAsDone(String input) throws DukeInputException {
         try {
             int number = Integer.parseInt(input.substring(5));
             Task task = this.taskList.getTask(number - 1);
@@ -113,9 +113,9 @@ public class Parser {
                     + "\n";
             this.ui.printMessage(confirmationMessage);    // print mark task as done confirmation message
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Which task have you done?\n");
+            throw new DukeInputException("Which task have you done?\n");
         } catch (NumberFormatException e) {
-            throw new DukeException("Enter the index of the task done.\n");
+            throw new DukeInputException("Enter the index of the task done.\n");
         }
     }
 
@@ -123,9 +123,9 @@ public class Parser {
      * Prints the tasks with the date required by the user.
      *
      * @param input Input string describing the date of tasks required.
-     * @throws DukeException If input is invalid.
+     * @throws DukeInputException If input is invalid.
      */
-    private void printTasksFromDate(String input) throws DukeException {
+    private void printTasksFromDate(String input) throws DukeInputException {
         try {
             String requiredDate = DateTimeHandler.parseDate(input.substring(4));
             boolean hasRequiredTasks = false;
@@ -148,7 +148,7 @@ public class Parser {
                 this.ui.printMessage("You have no tasks from " + requiredDate + ".");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Enter the date you want to get tasks from.\n");
+            throw new DukeInputException("Enter the date you want to get tasks from.\n");
         }
     }
 
@@ -156,9 +156,9 @@ public class Parser {
      * Finds the tasks with the given keyword.
      *
      * @param input Input string describing the keyword to search for.
-     * @throws DukeException If input is invalid.
+     * @throws DukeInputException If input is invalid.
      */
-    private void findTasks(String input) throws DukeException {
+    private void findTasks(String input) throws DukeInputException {
         try {
             String searchTerm = input.substring(5);
             boolean hasRelevantTasks = false;
@@ -182,7 +182,7 @@ public class Parser {
                 this.ui.printMessage("You have no matching tasks for the keyword: \"" + searchTerm + "\".\n");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Enter a search term.\n");
+            throw new DukeInputException("Enter a search term.\n");
         }
     }
 
@@ -191,9 +191,9 @@ public class Parser {
      * Either a todo, an event or a deadline.
      *
      * @param input Input string describing a task.
-     * @throws DukeException If input is invalid.
+     * @throws DukeInputException If input is invalid.
      */
-    private void createTask(String input) throws DukeException {
+    private void createTask(String input) throws DukeInputException {
         Task task;
         String taskString;
 
@@ -205,14 +205,14 @@ public class Parser {
                 taskString = input.substring(6);
                 String[] arr = taskString.split(" /at ", 2);
                 if (arr.length < 2 || arr[1].equals("")) {
-                    throw new DukeException("Enter the date and time of the event after \"/at\".\n");
+                    throw new DukeInputException("Enter the date and time of the event after \"/at\".\n");
                 }
                 task = new Event(arr[0], arr[1]);
             } else {    // deadline
                 taskString = input.substring(9);
                 String[] arr = taskString.split(" /by ", 2);
                 if (arr.length < 2 || arr[1].equals("")) {
-                    throw new DukeException("Enter the date and time of the deadline after \"/by\".\n");
+                    throw new DukeInputException("Enter the date and time of the deadline after \"/by\".\n");
                 }
                 task = new Deadline(arr[0], arr[1]);
             }
@@ -222,7 +222,7 @@ public class Parser {
                     : input.contains("event")
                     ? "an event"
                     : "a deadline";
-            throw new DukeException("The description of " + typeOfTask + " cannot be empty.\n");
+            throw new DukeInputException("The description of " + typeOfTask + " cannot be empty.\n");
         }
 
         this.taskList.addTask(task);
@@ -230,7 +230,7 @@ public class Parser {
         String confirmationMessage = "Got it. I've added this task:\n"
                 + task.toString()
                 + "\n"
-                + numOfTasksFooter();
+                + getNumOfTasksFooter();
         this.ui.printMessage(confirmationMessage);    // print create task confirmation message
     }
 }
