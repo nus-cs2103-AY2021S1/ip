@@ -20,19 +20,24 @@ public class Ui {
      * Shows the welcome message.
      */
     public void showWelcome() {
-        this.showPrompt(Ui.LOGO
-                + "Hello! I'm Duke\n"
-                + "What can I do for you?\n"
-        );
+        this.showPrompt(this.getWelcome());
     }
 
-    /**
-     * Shows a given prompt text enclosed in lines.
-     *
-     * @param promptText Text to be shown.
-     * @param isError Boolean denoting if the prompt should be shown as an error.
-     */
-    public void showPrompt(String promptText, boolean isError) {
+    public String getWelcome() {
+        return Ui.LOGO
+                + "Hello! I'm Duke\n"
+                + "What can I do for you?\n";
+    }
+
+    public void showPrompt(String promptText) {
+        System.out.println(this.getPrompt(promptText));
+    }
+
+    public void showError(String errorText) {
+        System.out.println(this.getError(errorText));
+    }
+
+    public String getPrompt(String promptText, boolean isError) {
         String[] lines = promptText.split("[\\r\\n]+");
         StringBuilder output = new StringBuilder(isError ? Ui.COLOR_START : "");
         output.append(Ui.INDENTATION).append(Ui.HORIZONTAL_LINE).append('\n');
@@ -43,15 +48,15 @@ public class Ui {
 
         output.append(Ui.INDENTATION).append(Ui.HORIZONTAL_LINE).append(isError ? Ui.COLOR_END : "").append('\n');
 
-        System.out.println(output.toString());
+        return output.toString();
     }
 
-    public void showPrompt(String promptText) {
-        this.showPrompt(promptText, false);
+    public String getPrompt(String promptText) {
+        return this.getPrompt(promptText, false);
     }
 
-    public void showError(String errorText) {
-        this.showPrompt(errorText, true);
+    public String getError(String promptText) {
+        return this.getPrompt(promptText, true);
     }
 
     /**
