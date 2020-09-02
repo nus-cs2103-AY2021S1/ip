@@ -1,7 +1,7 @@
-import duke.Duke;
+import javafx.application.Application;
 
 public class Main {
     public static void main(String[] args) {
-        new Duke("tasks.txt").run();
+        Application.launch(Launcher.class, args);
     }
 }
