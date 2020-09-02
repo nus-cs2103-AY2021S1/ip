@@ -1,10 +1,11 @@
 package tasks;
 
-import exceptions.InvalidDescriptionException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import exceptions.InvalidDescriptionException;
 
 public class TodoTest {
 
@@ -13,8 +14,8 @@ public class TodoTest {
         try {
             new Todo("");
         } catch (InvalidDescriptionException e) {
-            assertEquals("Hey! " +
-                    "Todo description shouldn't be blank.", e.getMessage());
+            assertEquals("Hey! "
+                    + "Todo description shouldn't be blank.", e.getMessage());
         }
     }
 
@@ -23,8 +24,8 @@ public class TodoTest {
         try {
             new Todo(" ");
         } catch (InvalidDescriptionException e) {
-            assertEquals("Hey! " +
-                    "Todo description shouldn't be blank.", e.getMessage());
+            assertEquals("Hey! "
+                    + "Todo description shouldn't be blank.", e.getMessage());
         }
     }
 

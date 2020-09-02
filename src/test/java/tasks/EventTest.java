@@ -1,11 +1,12 @@
 package tasks;
 
-import exceptions.InvalidDescriptionException;
-import exceptions.InvalidTimeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import exceptions.InvalidDescriptionException;
+import exceptions.InvalidTimeException;
 
 public class EventTest {
 
@@ -23,8 +24,8 @@ public class EventTest {
         try {
             new Event(" ", "next Monday");
         } catch (InvalidDescriptionException | InvalidTimeException e) {
-            assertEquals("Hey! " +
-                    "Event description shouldn't be blank.", e.getMessage());
+            assertEquals("Hey! "
+                    + "Event description shouldn't be blank.", e.getMessage());
         }
     }
 }

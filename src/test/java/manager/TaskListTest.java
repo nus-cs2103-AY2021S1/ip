@@ -1,17 +1,17 @@
 package manager;
 
-import exceptions.InvalidDescriptionException;
-import exceptions.InvalidTimeException;
-import manager.TaskList;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Todo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import exceptions.InvalidDescriptionException;
+import exceptions.InvalidTimeException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Todo;
 
 public class TaskListTest {
 

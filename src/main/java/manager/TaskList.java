@@ -78,6 +78,7 @@ public class TaskList {
         if (this.taskList.size() > 0) {
             this.taskList.subList(0, this.taskList.size()).clear();
         }
+        System.out.println("All clear! You have 0 tasks now.");
     }
 
     /**
