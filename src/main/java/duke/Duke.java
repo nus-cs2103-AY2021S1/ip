@@ -21,11 +21,10 @@ public class Duke {
      * Initializes instances of TaskList, Storage, Parser and UI
      * and gets the task list from the storage.
      *
-     * @param filePath path of the file from the root
      */
-    Duke(String filePath) {
+    private Duke(String filepath) {
         taskList = new TaskList();
-        storage = new Storage(filePath, taskList);
+        storage = new Storage(filepath, taskList);
         parser = new Parser(taskList, storage);
         ui = new Ui(parser);
         try {
@@ -33,6 +32,10 @@ public class Duke {
         } catch (DukeException e) {
             ui.showLoadingError();
         }
+    }
+
+    public Duke() {
+        this("src/data/duke.txt");
     }
 
     /**
@@ -58,4 +61,13 @@ public class Duke {
         Duke duke = new Duke("src/data/duke.txt");
         duke.run();
     }
+
+    /**
+     * @param input which is the user's input
+     * @return String which is the response to the user input
+     */
+    public String getResponse(String input) {
+        return ui.systemOutput(input);
+    }
+
 }
