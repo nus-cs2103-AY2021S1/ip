@@ -1,7 +1,7 @@
 package tasks;
 
 /**
- * Represents a general Task object with a name
+ * Represents a general Task object with a name.
  */
 
 public abstract class Task {

@@ -6,7 +6,7 @@ import exceptions.DukeException;
 import tasks.TaskList;
 
 /**
- * Handles interactions with users, namely accepting inputs and printing of info
+ * Handles interactions with users, namely accepting inputs and printing of info.
  */
 public class Ui {
     private static final String LINE = "---------------------------------------------------------------";
@@ -19,8 +19,8 @@ public class Ui {
     }
 
     /**
-     * Reads an input from a user
-     * @return The user's input
+     * Reads an input from a user.
+     * @return The user's input.
      */
     public String takeInput() {
         return sc.nextLine();
@@ -34,7 +34,7 @@ public class Ui {
     public void setMessageException(DukeException e) {
         this.message = e.getMessage();
     }
-    public void setMessageHelp() {
+    public void setMessagePrintHelp() {
         this.message = "Welcome to Duke! Here is a list of commands you can use: \n"
                 + "exit - shuts down the bot\n"
                 + "todo <name> - adds a Todo task to your list\n"
@@ -45,7 +45,7 @@ public class Ui {
                 + "list - displays the current list of your tasks\n"
                 + "help - displays this helpful message\n";
     }
-    public void setMessageList(TaskList tasks) {
+    public void setMessagePrintList(TaskList tasks) {
         message = "Here are your tasks:\n"
                 + LINE + "\n"
                 + tasks + "\n"
@@ -54,7 +54,7 @@ public class Ui {
     public void setMessageExit() {
         message = "Goodbye!";
     }
-    public void setMessageAddTask(String task, int size) {
+    public void setMessageNewTask(String task, int size) {
         message = "Added new task: " + task + "\n"
                 + "You now have " + size + (size == 1
                         ? "task in your list."

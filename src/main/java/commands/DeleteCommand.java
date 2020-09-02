@@ -7,7 +7,7 @@ import exceptions.TaskNotFoundException;
 import tasks.TaskList;
 
 /**
- * Represents an instruction from the user to delete a task from the list
+ * Represents an instruction from the user to delete a task from the list.
  */
 
 public class DeleteCommand extends Command {
@@ -18,12 +18,12 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the command to delete the task from the TaskList
-     * @param tasks The current TaskList
-     * @param ui The Ui object in use
-     * @param storage The Storage object in use
-     * @throws TaskNotFoundException If input task number is not found in the list
-     * @throws InvalidTaskNumberException If the user enters a non-integer argument
+     * Executes the command to delete the task from the TaskList.
+     * @param tasks The current TaskList.
+     * @param ui The Ui object in use.
+     * @param storage The Storage object in use.
+     * @throws TaskNotFoundException If input task number is not found in the list.
+     * @throws InvalidTaskNumberException If the user enters a non-integer argument.
      */
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException,
@@ -34,10 +34,10 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes an input task from the list
-     * @param idx Index of the task indicated to be deleted
-     * @throws TaskNotFoundException If input task number is not found in the list
-     * @throws InvalidTaskNumberException If user enters a non-integer argument
+     * Deletes an input task from the list.
+     * @param idx Index of the task indicated to be deleted.
+     * @throws TaskNotFoundException If input task number is not found in the list.
+     * @throws InvalidTaskNumberException If user enters a non-integer argument.
      */
     public void deleteTask(int idx, TaskList tasks) throws TaskNotFoundException, InvalidTaskNumberException {
         try {

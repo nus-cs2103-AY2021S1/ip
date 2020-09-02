@@ -19,7 +19,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Attempts to read an existing stored data.txt file, and creates a new data.txt file if one is not found
+     * Attempts to read an existing stored data.txt file, and creates a new data.txt file if one is not found.
      */
     public Duke() {
         this.tasks = new TaskList();

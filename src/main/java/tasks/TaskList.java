@@ -15,8 +15,8 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the ArrayList of tasks
-     * @param item The task to be added
+     * Adds a task to the ArrayList of tasks.
+     * @param item The task to be added.
      */
     public void addItem(Task item) {
         list.add(item);

@@ -5,6 +5,10 @@ import duke.Ui;
 import tasks.Task;
 import tasks.TaskList;
 
+/**
+ * Represents an instruction from the user to find specific tasks matching the input keywords.
+ */
+
 public class FindCommand extends Command {
     private String text;
 
@@ -12,6 +16,12 @@ public class FindCommand extends Command {
         this.text = text;
     }
 
+    /**
+     * Executes the command to find the specific tasks matching the input keywords.
+     * @param tasks The current TaskList.
+     * @param ui The Ui object in use.
+     * @param storage The Storage object in use.
+     */
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder output = new StringBuilder();
@@ -23,7 +33,6 @@ public class FindCommand extends Command {
                 counter++;
             }
         }
-        // ui.printFindTask(output.toString(), counter - 1);
         ui.setMessageFindTask(output.toString(), counter - 1);
     }
 }

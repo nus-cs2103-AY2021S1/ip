@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * Thrown if a user enters an invalid date-time format when adding a task
+ * Thrown if a user enters an invalid date-time format when adding a task.
  */
 
 public class BadDtFormatException extends DukeException {

@@ -15,7 +15,7 @@ import tasks.TaskList;
 import tasks.Todo;
 
 /**
- * Handles the reading and writing of the data.txt file on the user's hard-disk
+ * Handles the reading and writing of the data.txt file on the user's hard-disk.
  */
 public class Storage {
     private TaskList tasks;
@@ -32,15 +32,15 @@ public class Storage {
     }
 
     /**
-     * Used if the file cannot be found in the working directory
+     * Constructor for if the file cannot be found in the working directory.
      */
     public Storage() {
         file = new File("data.txt");
     }
 
     /**
-     * Reads data from a pre-existing .txt file
-     * @throws FileNotFoundException If required file is not found
+     * Reads data from a pre-existing .txt file.
+     * @throws FileNotFoundException If required file is not found.
      */
     public void readData() throws FileNotFoundException {
         Scanner reader = new Scanner(file);
@@ -64,10 +64,10 @@ public class Storage {
     }
 
     /**
-     * Writes data into a .txt file
-     * @param path Path to the file
-     * @param text Text to be written into the file
-     * @throws InvalidFileException File was not found at the end of the input path
+     * Writes data into a .txt file.
+     * @param path Path to the file.
+     * @param text Text to be written into the file.
+     * @throws InvalidFileException File was not found at the end of the input path.
      */
     public void writeToFile(String path, String text) throws InvalidFileException {
         try {
