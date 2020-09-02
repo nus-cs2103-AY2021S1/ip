@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -16,11 +15,12 @@ import javafx.stage.Stage;
  */
 
 public class Duke extends Application{
-    private static Storage storage;
-    private static TaskList tasks;
-    private static UI ui;
-    private static Parser newParser;
+    UI ui = new UI();
+    Storage storage = new Storage();
+    Parser newParser = new Parser();
+    TaskList tasks = new TaskList();
 
+    private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
@@ -29,42 +29,39 @@ public class Duke extends Application{
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public static void main(String[] args) {
-        storage.createDirectory("FileSaver1");
-        storage.updateList(tasks);
-        newParser.run(tasks, ui);
-        storage.updateDirectory(tasks);
-        tasks.showList();
-        System.out.println("Thank you for using! See you next time!");
-    }
 
     @Override
     public void start(Stage stage) {
-        storage.createDirectory("FileSaver2");
-        storage.updateList(tasks);
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(dialogContainer);
+        storage.createDirectory("TestList");
+
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+
+        scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        Button sendButton = new Button("Send");
+        sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
 
+        stage.setScene(scene);
         stage.show();
 
-
-        //Formatting and Style
-        stage.setScene(scene);
+        //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600);
-        stage.setMinWidth(400);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
 
-        mainLayout.setPrefSize(400, 600);
+        mainLayout.setPrefSize(400.0, 600.0);
 
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -73,9 +70,10 @@ public class Duke extends Application{
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        userInput.setPrefWidth(325.0);
-
+        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
 
         sendButton.setPrefWidth(55.0);
 
@@ -87,6 +85,15 @@ public class Duke extends Application{
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+
+        //Part 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
@@ -112,28 +119,28 @@ public class Duke extends Application{
 
     }
 
-    private String getResponse(String input) {
+    String getResponse(String input) {
         return "Duke heard: " + input;
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
+        String userText = userInput.getText();
         String userInputText = userInput.getText();
         System.out.println("user input:" + userInputText);
 
         String response = newParser.uiResponse(tasks, ui,userInputText);
         System.out.println("response:" + response);
-        Label dukeText = new Label(getResponse(response));
+        String dukeText = getResponse(response);
 
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
         );
-        storage.updateDirectory(tasks);
+        //storage.updateDirectory(tasks);
         userInput.clear();
     }
 
-    private Label getDialogLabel(String text) {
+    public Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 

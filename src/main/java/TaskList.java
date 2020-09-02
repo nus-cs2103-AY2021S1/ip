@@ -49,9 +49,9 @@ public class TaskList {
 
     public String showList() {
         int iterator = 1;
-        String output = "Here are the tasks in your list:";
+        String output = "Here are the tasks in your list:\n";
         for (Task s : tasks) {
-            output += iterator + "." + s.toString();
+            output += iterator + "." + s.toString() + "\n";
             iterator++;
         }
         return output;

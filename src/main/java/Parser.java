@@ -1,8 +1,7 @@
 import java.time.LocalDate;
-import java.util.Scanner;
 public class Parser {
 
-    public void run(TaskList tasks, UI ui) {
+    /*public void run(TaskList tasks, UI ui) {
         Scanner sc = new Scanner(System.in);
         String textMessage = sc.nextLine();
 
@@ -71,7 +70,7 @@ public class Parser {
                 }
 
                 else {
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new InvalidInputException();
                 }
 
 
@@ -84,7 +83,7 @@ public class Parser {
         }
 
 
-    }
+    }*/
 
 
     public String uiResponse(TaskList tasks, UI ui,String uiInput) {
@@ -93,26 +92,25 @@ public class Parser {
         String textMessage = uiInput;
 
             try {
-                String[] keyPhrase = textMessage.split("/");
-                String[] keyword = keyPhrase[0].split(" ");
+                String[] keyword = textMessage.split(" ");
 
                 if (textMessage.equals("bye")) {
                     response += "Bye. Hope to see you again soon!";
                 }
 
-                if (keyword[0].equals("find")) {
+                else if (keyword[0].equals("find")) {
 
                     response += tasks.findTask(keyword[1]);
                 }
 
-                if (keyword[0].equals("delete")) {
+                else if (keyword[0].equals("delete")) {
                     int index = Integer.parseInt(keyword[1]) - 1;
                     response += tasks.deleteTask(index);
                 }
 
-                if (keyword[0].equals("todo")) {
+                else if (keyword[0].equals("todo")) {
 
-                    if(keyPhrase.length == 1) {
+                    if(keyword.length == 1) {
                         throw new InvalidTodoException();
                     }
                     Todo newTodo = new Todo(textMessage.substring(5), false);
@@ -120,35 +118,41 @@ public class Parser {
                 }
 
 
-                if (keyword[0].equals("deadline")) {
+                else if (keyword[0].equals("deadline")) {
 
-                    if(keyPhrase.length == 1) {
+                    if(keyword.length == 1) {
                         throw new InvalidDeadlineException();
                     }
-
-                    String[] tempString = textMessage.substring(9).split(" /by");
-                    Deadline newDeadline = new Deadline(tempString[0], false, LocalDate.parse(tempString[1]));
-
-                    response += tasks.addTask(newDeadline);
+                    try {
+                        String[] tempString = textMessage.substring(9).split(" /by ");
+                        Deadline newDeadline = new Deadline(tempString[0], false, LocalDate.parse(tempString[1]));
+                        response += tasks.addTask(newDeadline);
+                    } catch (Exception e){
+                        throw new InvalidFormatException();
+                    }
 
                 }
 
-                if (keyword[0].equals("event")) {
+                else if (keyword[0].equals("event")) {
 
-                    if(keyPhrase.length == 1) {
+                    if(keyword.length == 1) {
                         throw new InvalidEventException();
                     }
-                    String[] tempString = textMessage.substring(7).split(" /at");
-                    Event newEvent = new Event(tempString[0], false,  LocalDate.parse(tempString[1]));
-                    response += tasks.addTask(newEvent);
+                    try {
+                        String[] tempString = textMessage.substring(7).split(" /at ");
+                        Event newEvent = new Event(tempString[0], false, LocalDate.parse(tempString[1]));
+                        response += tasks.addTask(newEvent);
+                    } catch (Exception e){
+                        throw new InvalidFormatException();
+                    }
 
                 }
 
-                if (textMessage.equals("list")) {
+                else if (textMessage.equals("list")) {
                     response += tasks.showList();
                 }
 
-                if (keyword[0].equals("done")) {
+                else if (keyword[0].equals("done")) {
                     int index = Integer.parseInt(keyword[1]) - 1;
                     tasks.getTasks().get(index).markDone();
                     response += "Nice I've marked this tasks as done";
@@ -156,7 +160,7 @@ public class Parser {
                 }
 
                 else {
-                    response +="☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+                    throw new InvalidInputException();
                 }
 
             }

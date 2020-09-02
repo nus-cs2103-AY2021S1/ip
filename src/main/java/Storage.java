@@ -10,38 +10,51 @@ public class Storage {
 
         if (!file.exists()) {
             try {
-                file.createNewFile();
-            } catch (IOException e) {
+                file.mkdir();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
     }
 
-    public void updateDirectory(TaskList myTaskList) {
+    public void updateDirectory(TaskList tasks) {
 
         File fileDir = new File("TaskList");
         File[] fileList = fileDir.listFiles();
         for (File f : fileList) {
-            if (f.toString().substring(0, 8).equals("TaskList")) {
+            if (f.toString().substring(0, 13).equals("TaskList/Task")) {
                 Path path = FileSystems.getDefault().getPath(f.toString());
                 try {
                     Files.delete(path);
-                }  catch (IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
 
-        for (int i = 0; i < myTaskList.getTasks().size(); i++) {
-            writeToFile(myTaskList.getTasks().get(i), i);
+        for (int i = 0; i < tasks.getTasks().size(); i++) {
+            writeToFile(tasks.getTasks().get(i), i);
         }
     }
 
-    public void writeToFile(Task task, int todoNum) {
-        createDirectory("TaskList" + todoNum + ".txt");
+    public void createFile(String fileName) {
+
+        File file = new File(fileName);
+
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void writeToFile(Task task, int index) {
+
+
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("TaskList" + todoNum + ".txt"));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ToDo/item" + todoNum + ".txt"));
             out.writeObject(task);
         } catch (IOException e) {
             e.printStackTrace();
@@ -60,15 +73,15 @@ public class Storage {
 
     }
 
-    public void updateList(TaskList myList) {
+    public void updateList(TaskList tasks) {
         File fileDir = new File("TaskList");
         File[] fileList = fileDir.listFiles();
         for (File f : fileList) {
-            if (f.toString().substring(0, 8).equals("TaskList")) {
-                myList.getTasks().add(readFromFile(f.toString()));
+            if (f.toString().substring(0, 13).equals("TaskList/Task")) {
+                tasks.getTasks().add(readFromFile(f.toString()));
             }
         }
     }
-
-
 }
+
+
