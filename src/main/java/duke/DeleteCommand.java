@@ -8,7 +8,7 @@ import java.io.IOException;
 public class DeleteCommand extends Command {
 
     /** User input as a String */
-    String userInput;
+    private final String userInput;
 
     /**
      * Constructs a DeleteCommand object with user input.

@@ -1,8 +1,5 @@
 package duke;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 /**
  * Represents a find command for a task.
  */

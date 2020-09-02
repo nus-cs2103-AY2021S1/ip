@@ -8,7 +8,7 @@ import java.io.IOException;
 public class DoneCommand extends Command {
 
     /** User input as a String */
-    String userInput;
+    private final String userInput;
 
     /**
      * Constructs a new instance of a DoneCommand object with user input.

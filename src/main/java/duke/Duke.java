@@ -38,15 +38,15 @@ public class Duke {
     public void run() {
         ui.printGreetings();
         while (ui.hasMoreInput()) {
-           try {
-               String userInput = ui.readCommand();
-               Command command = Parser.parseCommands(userInput);
-               command.execute(this.tasks, this.storage, this.ui);
-           } catch (DukeException | IOException ex) {
-               System.out.println(ex.getMessage());
-           } finally {
-               System.out.println(Ui.getLine());
-           }
+            try {
+                String userInput = ui.readCommand();
+                Command command = Parser.parseCommands(userInput);
+                command.execute(this.tasks, this.storage, this.ui);
+            } catch (DukeException | IOException ex) {
+                System.out.println(ex.getMessage());
+            } finally {
+                System.out.println(Ui.getLine());
+            }
         }
     }
 
