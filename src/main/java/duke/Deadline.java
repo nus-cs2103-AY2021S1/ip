@@ -1,4 +1,4 @@
-//package duke;
+package duke;
 /**
  * Deadline <- Task
  */

@@ -1,4 +1,4 @@
-//package duke;
+package duke;
 /**
  * interact with user
  */

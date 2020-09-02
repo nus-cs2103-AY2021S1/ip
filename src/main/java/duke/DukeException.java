@@ -1,4 +1,4 @@
-//package duke;
+package duke;
 /**
  * handle error when using duke
  */

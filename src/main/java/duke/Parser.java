@@ -1,4 +1,4 @@
-//package duke;
+package duke;
 /**
  * translate command -> name and time
  */
