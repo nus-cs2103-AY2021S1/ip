@@ -13,6 +13,6 @@ public class DukeException extends Exception {
      */
     public static void tryAgain() {
         System.out.println();
-        System.out.println("Please try again: ");
+        System.out.println("Please try again.");
     }
 }

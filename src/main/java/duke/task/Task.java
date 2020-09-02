@@ -50,7 +50,7 @@ public class Task {
     public String getStatusIcon() {
         return (this.status == TaskStatus.DONE
             // return tick or X symbols
-            ? "\u2713"
+            ? "\u2714"
             : "\u2718");
     }
 

@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -25,6 +26,9 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().showGreeting();
             stage.show();
+            stage.setTitle("Duke");
+            stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/icon.png")));
+            // Shooting Stars icon by Icons8 from https://icons8.com/icon/81220/shooting-stars
         } catch (IOException e) {
             e.printStackTrace();
         }

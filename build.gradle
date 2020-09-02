@@ -29,6 +29,7 @@ dependencies {
 }
 
 test {
+    systemProperty "file.encoding", "utf-8"
     useJUnitPlatform()
 
     testLogging {
@@ -43,7 +44,14 @@ test {
 }
 
 application {
+    applicationDefaultJvmArgs = ["-Dfile.encoding=utf-8"]
     mainClassName = "duke.Duke"
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 shadowJar {
@@ -56,5 +64,6 @@ checkstyle {
 }
 
 run{
+    systemProperty "file.encoding", "utf-8"
     standardInput = System.in
 }

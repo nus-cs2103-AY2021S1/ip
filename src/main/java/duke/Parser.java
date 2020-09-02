@@ -118,14 +118,14 @@ public class Parser {
                 return parseTaskWithTime(input, tasktype, "/by");
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("\u2639 Oops wrong format, use add deadline format: "
-                    + "deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')] !");
+                    + "deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]");
             }
         } else if (tasktype == Task.TaskType.EVENT) {
             try {
                 return parseTaskWithTime(input, tasktype, "/at");
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("\u2639 Oops wrong format, use add event format: "
-                    + "event [task] /at [time] !");
+                    + "event [task] /at [time]");
             }
         } else {
             return new Task("this task should not be created");

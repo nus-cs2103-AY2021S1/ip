@@ -63,15 +63,12 @@ public class Ui {
      * Draws the top border of the chatbot's response.
      */
     public static void drawTopBorder() {
-        System.out.println("___________________________________");
     }
 
     /**
      * Draws the bottom border of the chatbot's response.
      */
     public static void drawBottomBorder() {
-        System.out.println("___________________________________");
-
     }
 
     /**
@@ -125,25 +122,12 @@ public class Ui {
 
     public static String getGreeting() {
         setLogo();
-        String greeting = "    Hey! I'm Duke the chatbot!";
-        String doForYou = "    What can I do for you?";
+        String greeting = "Hey! I'm Duke the chatbot!";
+        String doForYou = "What can I do for you?";
         return logo + "\n" + greeting + "\n" + doForYou;
     }
 
     public static void setLogo() {
-        logo = "\n" +
-            "     ___              ___                  \n" +
-            "    (   )            (   )                 \n" +
-            "  .-.| |   ___  ___   | |   ___     .--.   \n" +
-            " /   \\ |  (   )(   )  | |  (   )   /    \\  \n" +
-            "|  .-. |   | |  | |   | |  ' /    |  .-. ; \n" +
-            "| |  | |   | |  | |   | |,' /     |  | | | \n" +
-            "| |  | |   | |  | |   | .  '.     |  |/  | \n" +
-            "| |  | |   | |  | |   | | `. \\    |  ' _.' \n" +
-            "| '  | |   | |  ; '   | |   \\ \\   |  .'.-. \n" +
-            "' `-'  /   ' `-'  /   | |    \\ .  '  `-' / \n" +
-            " `.__,'     '.__.'   (___ ) (___)  `.__.'  \n" +
-            "                                           \n" +
-            "                                           \n";
+        logo = "DUKE!";
     }
 }

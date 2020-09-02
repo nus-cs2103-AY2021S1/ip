@@ -28,7 +28,8 @@ public class Duke {
      * Starts the chatbot.
      */
     public static void initialize() {
-        Storage storage = new Storage("./data");
+        String home = System.getProperty("user.dir");
+        Storage storage = new Storage( home + "/data");
         if (Storage.hasLoadingError) {
             return;
         }
