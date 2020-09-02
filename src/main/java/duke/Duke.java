@@ -46,16 +46,16 @@ public class Duke {
         while (!isExit) {
             try {
                 String input = ui.readInput();
-                ui.showLine();
+                ui.printMessage(ui.showLine());
                 Command command = Parser.parse(input);
                 if (command != null) {
-                    command.executeCommand(tasks, ui, storage);
+                    ui.printMessage(command.executeCommand(tasks, ui, storage));
                     isExit = command.isExit();
                 }
             } catch (DukeException error) {
                 ui.printMessage(error.getMessage());
             } finally {
-                ui.showLine();
+                ui.printMessage(ui.showLine());
             }
         }
         try {
@@ -75,7 +75,19 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        return input;
+        StringBuilder response = new StringBuilder();
+        try {
+            response.append(ui.showLine() + "\n");
+            Command command = Parser.parse(input);
+            if (command != null) {
+                response.append(command.executeCommand(tasks, ui, storage) + "\n");
+            }
+        } catch (DukeException error) {
+            response.append(error.getMessage() + "\n");
+        } finally {
+            response.append(ui.showLine() + "\n");
+        }
+        return response.toString();
     }
 
     public String getWelcomeMessage() {

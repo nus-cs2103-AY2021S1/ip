@@ -216,7 +216,7 @@ public class UiTest {
         PrintStream ps = new PrintStream(out);
         System.setOut(ps);
         Ui ui = new Ui();
-        ui.showLine();
+        ui.printMessage(ui.showLine());
         assertEquals(DIVIDER + SEPARATOR, out.toString());
         System.setOut(originalOut);
     }
@@ -226,7 +226,7 @@ public class UiTest {
         PrintStream ps = new PrintStream(out);
         System.setOut(ps);
         Ui ui = new Ui();
-        ui.showGoodbyeUser();
+        ui.printMessage(ui.showGoodbyeUser());
         assertEquals(GOODBYE_MESSAGE + SEPARATOR, out.toString());
         System.setOut(originalOut);
     }
@@ -236,7 +236,7 @@ public class UiTest {
         PrintStream ps = new PrintStream(out);
         System.setOut(ps);
         Ui ui = new Ui();
-        ui.showLoadingError();
+        ui.printMessage(ui.showLoadingError());
         assertEquals(" Failed to load saved data :("
                 + SEPARATOR, out.toString());
         System.setOut(originalOut);

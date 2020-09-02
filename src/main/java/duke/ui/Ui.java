@@ -1,5 +1,6 @@
 package duke.ui;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -8,6 +9,7 @@ import java.util.Scanner;
  * @author Audrey Felicio Anwar
  */
 public class Ui {
+    private static final String SEPARATOR = System.getProperty("line.separator");
     private static final String LOGO = " _   _       _   _ _            \n"
             + "| | | |     | | | (_)           \n"
             + "| |_| | ___ | |_| |_ _ __   ___ \n"
@@ -189,6 +191,11 @@ public class Ui {
             + "          ██████            ████"
             + "████      ██████            ████"
             + "██████";
+    private ArrayList<String> accumulatedResponses;
+
+    public Ui() {
+        this.accumulatedResponses = new ArrayList<>();
+    }
 
     /**
      * Prints welcome message.
@@ -209,22 +216,22 @@ public class Ui {
     /**
      * Prints line divider.
      */
-    public void showLine() {
-        System.out.println(DIVIDER);
+    public String showLine() {
+        return DIVIDER;
     }
 
     /**
      * Prints goodbye message.
      */
-    public void showGoodbyeUser() {
-        System.out.println(GOODBYE_MESSAGE);
+    public String showGoodbyeUser() {
+        return GOODBYE_MESSAGE;
     }
 
     /**
      * Prints loading error message.
      */
-    public void showLoadingError() {
-        System.out.println(" Failed to load saved data :(");
+    public String showLoadingError() {
+        return " Failed to load saved data :(";
     }
 
     /**
@@ -246,5 +253,19 @@ public class Ui {
     public String readInput() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
+    }
+
+    public void accumulateResponse(String response) {
+        accumulatedResponses.add(response);
+    }
+
+    public String getResponses() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < accumulatedResponses.size() - 1; i++) {
+            sb.append(accumulatedResponses.get(i) + SEPARATOR);
+        }
+        sb.append(accumulatedResponses.get(accumulatedResponses.size() - 1));
+        accumulatedResponses = new ArrayList<>();
+        return sb.toString();
     }
 }
