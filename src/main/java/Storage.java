@@ -8,12 +8,25 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 
+/**
+ * Storage class abstracts the I/O method of
+ * reading tasks from a file and writing tasks onto a file
+ */
 public class Storage {
     private static ArrayList<Task> task_list;
 
+    /**
+     * Constructs a Storage instance.
+     */
     public Storage() {
     }
 
+    /**
+     * Loads the tasks onto a task_list from the file specified.
+     *
+     * @return The List of all the tasks loaded from the file.
+     * @throws IOException If an I/O error occurred.
+     */
     public ArrayList<Task> loadFile() throws IOException {
         task_list = new ArrayList<Task>();
         File file = getFile();
@@ -52,6 +65,7 @@ public class Storage {
         return task_list;
     }
 
+
     private LocalDate getDate(String s) {
         return LocalDate.parse(s.substring(3, 13));
     }
@@ -60,6 +74,12 @@ public class Storage {
         return s.substring(14);
     }
 
+    /**
+     * Saves the List of tasks to a file
+     *
+     * @param task_list The list of tasks.
+     * @throws IOException If an I/O error occurred.
+     */
     public void createFile(ArrayList<Task> task_list) throws IOException {
         File file = getFile();
         FileWriter writer = new FileWriter(file);
@@ -75,6 +95,13 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Creates a file to store the list of tasks if the file does not exist,
+     * otherwise returns the existing file containing Duke's data.
+     *
+     * @return File, the file containing Duke's data.
+     * @throws IOException If an I/O error occurred.
+     */
     private File getFile() throws IOException {
         Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
         if (!Files.exists(path)) {

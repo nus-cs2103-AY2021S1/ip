@@ -2,29 +2,31 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * TaskList class allows management of tasks in a list
+ */
 public class TaskList {
     private ArrayList<Task> task_list;
 
+    /**
+     * Constructs a TaskList instance.
+     *
+     * @param task_list The List of tasks.
+     */
     public TaskList(ArrayList<Task> task_list) {
         this.task_list = task_list;
     }
 
-    public ArrayList<Task> deleteTask(String command) throws DukeInvalidTaskException {
-        int index = Integer.parseInt(command.split(" ")[1]) - 1;
-        if (index >= task_list.size() || index < 0) {
-            throw new DukeInvalidTaskException("There is no such task in the list!");
-        }
 
-        String task_deleted = String.format("    ____________________________________________________________\n" +
-                                            "     Noted. I've removed this task: \n" +
-                                            "       %s\n" +
-                                            "     Now you have %d tasks in the list.\n" +
-                                            "    ____________________________________________________________", task_list.get(index), task_list.size() - 1);
-        System.out.println(task_deleted);
-        task_list.remove(index);
-        return task_list;
-    }
+    /**
+     * Adds the task specified by the client into a list of tasks
+     * @param command The string containing the description of the task to be added in the list.
+     * @return The updated task list after the addition of the given task.
+     * @throws DukeInvalidCommandException If the description of the command entered is invalid.
+     * @throws DateTimeParseException If the date provided in the task description is in an invalid format.
+     * @throws ArrayIndexOutOfBoundsException If the command is given in a unreadable format
 
+     */
     public ArrayList<Task> addTask(String command) throws DukeInvalidCommandException,  DateTimeParseException, ArrayIndexOutOfBoundsException {
         Task task = null;
         String task_type = command.split(" ")[0];
@@ -43,22 +45,71 @@ public class TaskList {
                 break;
             default:
                 throw new DukeInvalidCommandException(String.format(
-                                "    ____________________________________________________________\n" +
+                        "    ____________________________________________________________\n" +
                                 "     ☹ OOPS!!! The description of a %s cannot be empty.\n" +
                                 "    ____________________________________________________________\n", task_type));
         }
 
         task_list.add(task);
         String task_added = String.format("    ____________________________________________________________\n" +
-                                          "     Got it. I've added this task: \n" +
-                                          "       %s\n" +
-                                          "     Now you have %d tasks in the list.\n" +
-                                          "    ____________________________________________________________\n", task, task_list.size());
+                "     Got it. I've added this task: \n" +
+                "       %s\n" +
+                "     Now you have %d tasks in the list.\n" +
+                "    ____________________________________________________________\n", task, task_list.size());
         System.out.println(task_added);
         return task_list;
     }
 
+    /**
+     * Deletes the task from the tasks list,
+     * then return the updated list.
+     *
+     * @param command The string containing the index of the task in the list to be deleted.
+     * @return The updated task list after the task deletion.
+     * @throws DukeInvalidTaskException If the task doesn't exist in the list.
+     */
+    public ArrayList<Task> deleteTask(String command) throws DukeInvalidTaskException {
+        int index = Integer.parseInt(command.split(" ")[1]) - 1;
+        if (index >= task_list.size() || index < 0) {
+            throw new DukeInvalidTaskException("There is no such task in the list!");
+        }
 
+        String task_deleted = String.format("    ____________________________________________________________\n" +
+                                            "     Noted. I've removed this task: \n" +
+                                            "       %s\n" +
+                                            "     Now you have %d tasks in the list.\n" +
+                                            "    ____________________________________________________________", task_list.get(index), task_list.size() - 1);
+        System.out.println(task_deleted);
+        task_list.remove(index);
+        return task_list;
+    }
+
+    /**
+     * Marks the task as done in the tasks list,
+     * then return the updated list.
+     *
+     * @param command The string containing the index of the task in the list to be marked as done.
+     * @return The updated task list after marking the task as done.
+     * @throws DukeInvalidTaskException If the task doesn't exist in the list.
+     */
+    public ArrayList<Task> doneTask(String command) throws DukeInvalidTaskException {
+        int index = Integer.parseInt(command.split(" ")[1]) - 1;
+        if (index >= task_list.size() || index < 0) {
+            throw new DukeInvalidTaskException("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! The task cannot be found.\n" +
+                    "    ____________________________________________________________\n");
+        }
+
+        task_list.get(index).complete();
+
+        String task_done =  "    ____________________________________________________________\n" +
+                "     Nice! I've marked this task as done: \n" +
+                "       " + task_list.get(index) + "\n" +
+                "    ____________________________________________________________";
+
+        System.out.println(task_done);
+        return task_list;
+    }
 
     private String getDescription(String command, String s) {
         return command.split(s)[0].trim();
@@ -80,23 +131,5 @@ public class TaskList {
 
 
 
-    public ArrayList<Task> doneTask(String command) throws DukeInvalidTaskException {
-        int index = Integer.parseInt(command.split(" ")[1]) - 1;
-        if (index >= task_list.size() || index < 0) {
-            throw new DukeInvalidTaskException("    ____________________________________________________________\n" +
-                                               "     ☹ OOPS!!! The task cannot be found.\n" +
-                                               "    ____________________________________________________________\n");
-        }
-
-        task_list.get(index).complete();
-
-        String task_done =  "    ____________________________________________________________\n" +
-                            "     Nice! I've marked this task as done: \n" +
-                            "       " + task_list.get(index) + "\n" +
-                            "    ____________________________________________________________";
-
-        System.out.println(task_done);
-        return task_list;
-    }
 }
 

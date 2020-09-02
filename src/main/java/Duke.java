@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The Duke class is the main driver class,
+ * where the commands are being processed into actions.
+ */
 public class Duke {
 
     public static Ui uI;
@@ -13,12 +17,20 @@ public class Duke {
     private static Storage storage;
     private static ArrayList<Task> task_list = new ArrayList<>();
 
+    /**
+     * Construct a new Duke instance.
+     */
     public Duke() {
         uI = new Ui();
         parser = new Parser();
         storage = new Storage();
     }
 
+    /**
+     * Function to generate an action based on user input.
+     * @param input Command entered by the user
+     * @throws IOException If the file is corrupted or some error occurred during reading the data.
+     */
     protected void getResponse(String input) throws IOException {
         task_list = storage.loadFile();
 
@@ -39,6 +51,14 @@ public class Duke {
         }
     }
 
+
+    /**
+     * Parses the input entered by the user.
+     * @param command Command entered by the user.
+     * @throws IOException If the file is corrupted or some error occurred during reading the data
+     * @throws DukeException If the command is invalid or the task enquired doesn't exists.
+     * @throws DateTimeParseException If the date of the deadline or event is not formatted properly.
+     */
     private static void run(String command) throws IOException, DukeException, DateTimeParseException {
         TaskList taskList = new TaskList(task_list);
         if (command.equals("list")) {
@@ -60,6 +80,11 @@ public class Duke {
         storage.createFile(task_list);
     }
 
+
+    /**
+     * main method that is being executed when the Duke program is run
+     * @param args Input entered in the command line
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
