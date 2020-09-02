@@ -40,65 +40,65 @@ public class UserInterface {
     }
 
     //Given contents output line by line between the output lines
-    public void outputUi(String... contents) {
+    public String outputUi(String... contents) {
         StringBuilder result = new StringBuilder(UPPER_LINE);
         for (String s : contents) {
             result.append(INDENT).append(s).append("\n");
         }
         result.append(LOWER_LINE);
-        System.out.println(result.toString());
+        return result.toString();
     }
 
-    public void greetUser() {
-        outputUi(GREET_USER_LINE_1, GREET_USER_LINE_2);
+    public String greetUser() {
+        return outputUi(GREET_USER_LINE_1, GREET_USER_LINE_2);
     }
 
-    public void showInvalidCommandMessage() {
-        outputUi(INVALID_COMMAND_MESSAGE);
+    public String showInvalidCommandMessage() {
+        return outputUi(INVALID_COMMAND_MESSAGE);
     }
 
-    public void showInvalidTodoCommand() {
-        outputUi(INVALID_TODO_MESSAGE);
+    public String showInvalidTodoCommand() {
+        return outputUi(INVALID_TODO_MESSAGE);
     }
 
-    public void showInvalidDoneCommand() {
-        outputUi(INVALID_DONE_MESSAGE);
+    public String showInvalidDoneCommand() {
+        return outputUi(INVALID_DONE_MESSAGE);
     }
 
-    public void showInvalidDeleteCommand() {
-        outputUi(INVALID_DELETE_MESSAGE);
+    public String showInvalidDeleteCommand() {
+        return outputUi(INVALID_DELETE_MESSAGE);
     }
 
-    public void showInvalidTaskNumber() {
-        outputUi(NO_TASK_MESSAGE);
+    public String showInvalidTaskNumber() {
+        return outputUi(NO_TASK_MESSAGE);
     }
 
-    public void showMarkedTaskDoneMessage(Task task) {
-        outputUi(DONE_TASK_MARKED_MESSAGE, INDENT + task.getStatusIcon() + SPACE + task.getDescription());
+    public String showMarkedTaskDoneMessage(Task task) {
+        return outputUi(DONE_TASK_MARKED_MESSAGE, INDENT + task.getStatusIcon() + SPACE + task.getDescription());
     }
 
-    public void showDeleteTaskMessage(Task task, int numOfTaskInList) {
-        outputUi(DELETE_TASK_MARKED_MESSAGE, INDENT + task.toString(), numOfTaskInList(numOfTaskInList));
+    public String showDeleteTaskMessage(Task task, int numOfTaskInList) {
+        return outputUi(DELETE_TASK_MARKED_MESSAGE, INDENT + task.toString(), numOfTaskInList(numOfTaskInList));
     }
 
-    public void showAddedTaskMessage(Task task, int numOfTaskInList) {
-        outputUi(ADDED_TASK_MESSAGE, INDENT + task.toString(), numOfTaskInList(numOfTaskInList));
+    public String showAddedTaskMessage(Task task, int numOfTaskInList) {
+       return outputUi(ADDED_TASK_MESSAGE, INDENT + task.toString(), numOfTaskInList(numOfTaskInList));
     }
 
     private String numOfTaskInList(int numOfTaskInList) {
         return TASK_LEFT_MESSAGE_PART_1 + numOfTaskInList + TASK_LEFT_MESSAGE_PART_2;
     }
 
-    public void showExitMessage() {
-        outputUi(BYE_MESSAGE);
+    public String showExitMessage() {
+        return outputUi(BYE_MESSAGE);
     }
 
-    public void showInvalidDateFormatGiven() {
-        outputUi(INVALID_DATE_FORMAT);
+    public String showInvalidDateFormatGiven() {
+        return outputUi(INVALID_DATE_FORMAT);
     }
 
-    public void showSearchResults(List<Task> lstOfTask) {
-        outputUi(MATCH_SEARCH_RESULT_MESSAGE, listTaskOnly(lstOfTask));
+    public String showSearchResults(List<Task> lstOfTask) {
+        return outputUi(MATCH_SEARCH_RESULT_MESSAGE, listTaskOnly(lstOfTask));
     }
 
     public String listTaskOnly(List<Task> lstOfTask) {
@@ -118,7 +118,7 @@ public class UserInterface {
         return concat.toString();
     }
 
-    public void listTask(List<Task> lstOfTask) {
+    public String listTask(List<Task> lstOfTask) {
         String outputIndent = "    ";
         StringBuilder concat = new StringBuilder();
         for (int i = 0; i < lstOfTask.size(); i++) {
@@ -132,15 +132,15 @@ public class UserInterface {
             }
             concat.append(s);
         }
-        outputUi(concat.toString());
+        return outputUi(concat.toString());
     }
 
-    public void showInvalidSearchCommand() {
-        outputUi(INVALID_SEARCH_MESSAGE);
+    public String showInvalidSearchCommand() {
+        return outputUi(INVALID_SEARCH_MESSAGE);
     }
 
-    public void showNoSearchResult() {
-        outputUi(NO_SEARCH_RESULT_MESSAGE);
+    public String showNoSearchResult() {
+        return outputUi(NO_SEARCH_RESULT_MESSAGE);
     }
 
 }

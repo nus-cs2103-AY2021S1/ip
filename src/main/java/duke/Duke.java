@@ -1,19 +1,5 @@
 package duke;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -21,7 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Duke extends Application {
+
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class Duke  {
 
     private UserInterface ui;
     private Storage storage;
@@ -30,6 +29,10 @@ public class Duke extends Application {
 
     public Duke() {} // empty constructor needed for javaFX
 
+    /**
+     * Constructor for a duke object
+     * @param filePath the filepath that stores data of the duke obj
+     */
     public Duke(String filePath) {
         this.ui = new UserInterface();
         this.storage = new Storage(filePath);
@@ -46,8 +49,9 @@ public class Duke extends Application {
         }
     }
 
-    private void processCommand(String[] parsedUserInput) {
+    private String processCommand(String[] parsedUserInput) {
         try {
+            String result = "";
             String cmd = parsedUserInput[0];
             Command checkedCommand = Command.valueOfUserCommand(cmd);
             if (checkedCommand == null) {
@@ -55,35 +59,39 @@ public class Duke extends Application {
             } else {
                 switch (checkedCommand) {
                 case LIST:
-                    ui.listTask(taskList.getLstOfTask());
+                    result = ui.listTask(taskList.getLstOfTask());
                     break;
                 case BYE:
                     exit();
-                    ui.showExitMessage();
+                    result = ui.showExitMessage();
                     break;
                 case DONE:
-                    done(parsedUserInput);
+                    result = done(parsedUserInput);
                     break;
                 case TODO:
-                    addToDo(parsedUserInput);
+                    result = addToDo(parsedUserInput);
                     break;
                 case EVENT:
-                    addEvent(parsedUserInput);
+                    result = addEvent(parsedUserInput);
                     break;
                 case DEADLINE:
-                    addDeadline(parsedUserInput);
+                    result = addDeadline(parsedUserInput);
                     break;
                 case DELETE:
-                    delete(parsedUserInput);
+                    result = delete(parsedUserInput);
                     break;
                 case FIND:
-                    search(parsedUserInput);
+                    result = search(parsedUserInput);
+                    break;
+                default:
                     break;
                 }
+
             }
+            return result;
 
         } catch (IndexOutOfBoundsException e) {
-            ui.showInvalidCommandMessage();
+            return ui.showInvalidCommandMessage();
         }
     }
 
@@ -91,7 +99,7 @@ public class Duke extends Application {
         storage.saveTaskContents(taskList.getLstOfTask());
     }
 
-    private void done(String[] parsedUserInput) {
+    private String done(String[] parsedUserInput) {
 
         try {
             String doneTask = parsedUserInput[1];
@@ -100,13 +108,13 @@ public class Duke extends Application {
             Task task = taskList.getLstOfTask()
                     .get(identifierNumberInArrayList);
             task.markAsDone();
-
+            return ui.showMarkedTaskDoneMessage(task);
         } catch (IndexOutOfBoundsException e1) {
-            ui.showInvalidDoneCommand();
+            return ui.showInvalidDoneCommand();
         }
     }
 
-    private void delete(String[] parsedUserInput) {
+    private String delete(String[] parsedUserInput) {
         try {
             String deleteTask = parsedUserInput[1];
             int doneTaskNumber = Integer.parseInt(deleteTask);
@@ -115,13 +123,13 @@ public class Duke extends Application {
             Task task = lstOfTask
                     .get(identifierNumberInArrayList);
             lstOfTask.remove(identifierNumberInArrayList);
-            ui.showDeleteTaskMessage(task, taskList.getNumOfTask());
+            return ui.showDeleteTaskMessage(task, taskList.getNumOfTask());
         } catch (IndexOutOfBoundsException e1) {
-            ui.showInvalidDeleteCommand();
+            return ui.showInvalidDeleteCommand();
         }
     }
 
-    private void addToDo(String[] parsedUserInput) {
+    private String addToDo(String[] parsedUserInput) {
         try {
             String test = parsedUserInput[1];
             String taskDescription = "";
@@ -134,13 +142,13 @@ public class Duke extends Application {
             }
             ToDo td = new ToDo(taskDescription);
             taskList.add(td);
-            ui.showAddedTaskMessage(td, taskList.getNumOfTask());
+            return ui.showAddedTaskMessage(td, taskList.getNumOfTask());
         } catch (IndexOutOfBoundsException e1) {
-            ui.showInvalidTodoCommand();
+            return ui.showInvalidTodoCommand();
         }
     }
 
-    private void addEvent(String[] parsedUserInput) {
+    private String addEvent(String[] parsedUserInput) {
         String taskDescription = "";
         for (int i = 1; i < parsedUserInput.length; i++) {
             if (i == parsedUserInput.length - 1) {
@@ -156,10 +164,10 @@ public class Duke extends Application {
 
         Event event = new Event(description, date.trim());
         taskList.add(event);
-        ui.showAddedTaskMessage(event, taskList.getNumOfTask());
+        return ui.showAddedTaskMessage(event, taskList.getNumOfTask());
     }
 
-    private void addDeadline(String[] parsedUserInput) {
+    private String addDeadline(String[] parsedUserInput) {
         try {
             String taskDescription = "";
             for (int i = 1; i < parsedUserInput.length; i++) {
@@ -179,13 +187,13 @@ public class Duke extends Application {
             LocalDateTime d1 = parser.parseDateAndTime(date);
             Deadline deadline = new Deadline(description, d1);
             taskList.add(deadline);
-            ui.showAddedTaskMessage(deadline, taskList.getNumOfTask());
+            return ui.showAddedTaskMessage(deadline, taskList.getNumOfTask());
         } catch (DateTimeParseException e) {
-            ui.showInvalidDateFormatGiven();
+            return ui.showInvalidDateFormatGiven();
         }
     }
 
-    private void search(String[] parsedUserInput) {
+    private String search(String[] parsedUserInput) {
         try {
             StringBuilder keyword = new StringBuilder(parsedUserInput[1]);
             for (int i = 2; i < parsedUserInput.length; i++) {
@@ -204,13 +212,13 @@ public class Duke extends Application {
             }
 
             if (resultList.isEmpty()) {
-                ui.showNoSearchResult();
+                return ui.showNoSearchResult();
             } else {
-                ui.showSearchResults(resultList);
+                return ui.showSearchResults(resultList);
             }
 
         } catch (IndexOutOfBoundsException e) {
-            ui.showInvalidSearchCommand();
+            return ui.showInvalidSearchCommand();
         }
 
     }
@@ -232,129 +240,16 @@ public class Duke extends Application {
 
     }
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    @Override
-    public void start(Stage stage) throws Exception {
-        /*
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-        */
-
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String input) {
+        String[] parsedString = this.parser.parseString(input);
+        return this.processCommand(parsedString);
     }
+
+
+
 }
