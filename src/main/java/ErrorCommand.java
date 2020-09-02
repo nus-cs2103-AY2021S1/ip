@@ -10,7 +10,7 @@ public class ErrorCommand extends Command {
      * @param storage a Storage instance to enable calling of Storage functions
      */
     @Override
-    public void execute(Ui ui, Storage storage) {
-        ui.taskPrint(errorMessage);
+    public String execute(Ui ui, Storage storage) {
+        return ui.taskPrint(errorMessage);
     }
 }

@@ -6,8 +6,8 @@ public class PrintlistCommand extends Command {
      * @param storage a Storage instance to enable calling of Storage functions
      */
     @Override
-    public void execute(Ui ui, Storage storage) {
-        ui.displayList(TaskList.toDoList, "Check out your missions!");
-        ui.printNumberOfTasks(TaskList.toDoList.size());
+    public String execute(Ui ui, Storage storage) {
+        return ui.displayList(TaskList.toDoList, "Check out your missions!")
+                + ui.printNumberOfTasks(TaskList.toDoList.size());
     }
 }

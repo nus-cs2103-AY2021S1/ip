@@ -9,8 +9,8 @@ public class PrintsearchCommand extends Command {
      * list of task.
      */
     @Override
-    public void execute(Ui ui, Storage storage) {
-        ui.displayList(TaskList.searchList(this.keyword),
+    public String execute(Ui ui, Storage storage) {
+        return ui.displayList(TaskList.searchList(this.keyword),
                 "Doge found the following tasks you asked for!");
     }
 }

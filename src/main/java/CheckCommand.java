@@ -11,11 +11,13 @@ public class CheckCommand extends Command {
      * @param storage a Storage instance to enable calling of Storage functions
      */
     @Override
-    public void execute(Ui ui, Storage storage) {
+    public String execute(Ui ui, Storage storage) {
         Task task = TaskList.toDoList.get(checkInt - 1);
         task.markAsDone();
         storage.save(TaskList.toDoList);
-        ui.checkList(task.toString(), task.getTaskStatusIcon());
-        ui.printNumberOfTasks(TaskList.toDoList.size());
+        /*ui.checkList(task.toString(), task.getTaskStatusIcon());
+        ui.printNumberOfTasks(TaskList.toDoList.size());*/
+        return ui.checkList(task.toString(), task.getTaskStatusIcon())
+                + ui.printNumberOfTasks(TaskList.toDoList.size());
     }
 }
