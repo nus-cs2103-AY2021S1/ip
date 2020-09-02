@@ -45,7 +45,7 @@ public class Storage {
 					taskType = duke.TaskType.EVENT;
 				}
 
-				if (task.charAt(4) == '✓') {
+				if (task.charAt(4) == '\u2713') { //✓
 					isDone = true;
 				} else {
 					isDone = false;
