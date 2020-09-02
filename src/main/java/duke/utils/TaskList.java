@@ -98,6 +98,7 @@ public class TaskList {
      *
      * @param keyword string the user wants to find.
      * @return List of tasks with the keyword.
+     * @throws DukeException when the string does not contain the keyword.
      */
     public List<Task> tasksContainingKeywords(String keyword) throws DukeException {
         List<Task> containsKeywords = new ArrayList<>();

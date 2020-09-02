@@ -22,7 +22,9 @@ public class Task {
     }
 
     /**
-     * Returns tick or X symbols
+     * Calls to get the status icon.
+     *
+     * @return tick or X symbols.
      */
     protected String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
@@ -31,6 +33,8 @@ public class Task {
 
     /**
      * Changes the state of this task, isDone to true.
+     *
+     * @return the task after marking it as done.
      */
     public Task markAsDone() {
         isDone = true;

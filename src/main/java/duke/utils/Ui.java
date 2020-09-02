@@ -29,10 +29,13 @@ public class Ui {
 
 
     /**
-     * Welcomes the user with a welcome message
+     * Welcomes the user with a welcome message.
+     *
+     * @param toDoList    the lists to display to the user.
+     * @param customTitle the custom string to display before showing the list.
      */
-    public void displayList(List<Task> toDoList, String s) {
-        StringBuilder sBuilder = new StringBuilder(s).append('\n');
+    public void displayList(List<Task> toDoList, String customTitle) {
+        StringBuilder sBuilder = new StringBuilder(customTitle).append('\n');
 
         for (int i = 0; i < toDoList.size(); i++) {
             sBuilder.append(i + 1).append(". ").append(toDoList.get(i)).append('\n');
