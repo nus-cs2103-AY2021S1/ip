@@ -14,10 +14,10 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void executeCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task task = tasks.deleteTask(taskNum);
-            ui.showDeleted(task, tasks);
+            ui.showDeletedMessage(task, tasks);
             storage.save(tasks.getTasks());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Uh-oh! Looks like you have entered an invalid task number.");

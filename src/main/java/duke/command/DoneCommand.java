@@ -13,10 +13,10 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void executeCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             tasks.markAsDone(taskNum);
-            ui.showDone(tasks.getTask(taskNum));
+            ui.showDoneMessage(tasks.getTask(taskNum));
             storage.save(tasks.getTasks());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Uh-oh! Looks like you have entered an invalid task number.");

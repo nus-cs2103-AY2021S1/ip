@@ -16,13 +16,13 @@ public class UiTest {
     Event event = new Event("party", LocalDate.parse("2020-09-04"));
 
     @Test
-    public void showNumOfTasks_numOfTasksShownSuccessfully() {
+    public void showNumOfTasksMessage_numOfTasksShownSuccessfully() {
         Ui ui = new Ui();
         TaskList tasks = new TaskList();
         tasks.addTask(todo);
         tasks.addTask(deadline);
         tasks.addTask(event);
-        String actual = ui.showNumOfTasks(tasks);
+        String actual = ui.showNumOfTasksMessage(tasks);
         String expected = "\nNow you have 3 task(s) in the list.";
         assertEquals(expected, actual);
     }

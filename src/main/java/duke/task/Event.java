@@ -11,10 +11,10 @@ public class Event extends Task {
         this.eventDate = eventDate;
     }
 
-    public static Event load(String taskDetails) {
-        String[] splitTaskDetails = taskDetails.strip().split("\\|",4);
-        Event event = new Event(splitTaskDetails[2], LocalDate.parse(splitTaskDetails[3]));
-        if (splitTaskDetails[1].equals("true")) {
+    public static Event load(String eventDetails) {
+        String[] splitEventDetails = eventDetails.split("\\|",4);
+        Event event = new Event(splitEventDetails[2], LocalDate.parse(splitEventDetails[3]));
+        if (splitEventDetails[1].equals("true")) {
             event.markAsDone();
         }
         return event;

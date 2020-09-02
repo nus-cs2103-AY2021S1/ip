@@ -7,9 +7,9 @@ import duke.Ui;
 public class ExitCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void executeCommand(TaskList tasks, Ui ui, Storage storage) {
         storage.save(tasks.getTasks());
-        ui.showExit();
+        ui.showExitMessage();
     }
 
     @Override
