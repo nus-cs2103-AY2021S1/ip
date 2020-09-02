@@ -1,4 +1,3 @@
-import sun.tools.jstat.Closure
 
 plugins {
     id 'java'
