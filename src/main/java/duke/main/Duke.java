@@ -10,7 +10,7 @@ import duke.exception.DukeException;
 public class Duke {
     private Ui ui;
     private Storage storage;
-    private TaskList tasklist;
+    private TaskList taskList;
 
     /**
      * Creates a Duke object with an Ui object, storage object to the saved task list file in the
@@ -23,7 +23,7 @@ public class Duke {
         try {
             this.ui = new Ui();
             this.storage = new Storage(fileName);
-            this.tasklist = storage.formTaskList();
+            this.taskList = storage.formTaskList();
         } catch (IOException error) {
             System.out.println(error.toString());
         }
@@ -34,7 +34,7 @@ public class Duke {
      */
     public void run() {
         try {
-            Processor.process(tasklist, storage, ui);
+            Processor.process(taskList, storage, ui);
         } catch (DukeException dukeException) {
             ui.printError(dukeException);
         }
