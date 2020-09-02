@@ -102,6 +102,23 @@ public class AppUi extends Ui {
         }
     }
 
+    public String getAfterAddMsgVarargs(int type, int overallListSize, Task ... list){
+        String res = "Got it. I've added this task:\n";
+        for (int i = 0; i < list.length; i++) {
+            if (type == TODO) {
+                Todo todo = (Todo) list[i];
+                res += (todo.toString() + "\n");
+            } else if (type == DEADLINE) {
+                Deadline ddl = (Deadline) list[i];
+                res += (ddl.toString() + "\n");
+            } else {
+                Event event = (Event) list[i];
+                res += (event.toString() + "\n");
+            }
+        }
+        return res + String.format("Now you have %d tasks in the list.", overallListSize);
+    }
+
     /**
      * Returns wrong deadline format message
      * @return wrong deadline format message

@@ -135,6 +135,23 @@ public class Ui {
         }
     }
 
+    public void MessageAfterAddVarargs(int type, int overallListSize, Task ... list){
+        String res = "Got it. I've added this task:\n";
+        for (int i = 0; i < list.length; i++) {
+            if (type == TODO) {
+                Todo todo = (Todo) list[i];
+                res += (todo.toString() + "\n");
+            } else if (type == DEADLINE) {
+                Deadline ddl = (Deadline) list[i];
+                res += (ddl.toString() + "\n");
+            } else {
+                Event event = (Event) list[i];
+                res += (event.toString() + "\n");
+            }
+        }
+        System.out.println(res + String.format("Now you have %d tasks in the list.", overallListSize));
+    }
+
     /**
      * Prints wrong deadline format
      */
