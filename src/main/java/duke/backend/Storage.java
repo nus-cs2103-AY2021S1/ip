@@ -49,7 +49,7 @@ public class Storage {
      * @throws FileNotFoundException If file of the Storage object is not found.
      */
     public BufferedReader load() throws FileNotFoundException {
-        FileReader f = new FileReader(this.file);
+        FileReader f = new FileReader(file);
         return new BufferedReader(f);
     }
 

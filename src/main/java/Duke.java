@@ -40,8 +40,8 @@ public class Duke {
 
     private void run() {
         Ui.greet();
-        this.parser.parseInputCommands();
-        this.storage.save(this.taskList);
+        parser.parseInputCommands();
+        storage.save(taskList);
         Ui.exit();
     }
 

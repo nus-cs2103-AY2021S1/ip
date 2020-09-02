@@ -19,8 +19,8 @@ public class Todo extends Task {
      * @return String of Todo object in format for saving to and retrieving from hard disk.
      */
     public String getParsedTask() {
-        return "todo " + this.description + System.lineSeparator()
-                + this.isDone + System.lineSeparator();
+        return "todo " + description + System.lineSeparator()
+                + isDone + System.lineSeparator();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Todo extends Task {
             return true;
         } else if (other instanceof Todo) {
             Todo otherTodo = (Todo) other;
-            return this.description.equals(otherTodo.description) && (this.isDone == otherTodo.isDone);
+            return description.equals(otherTodo.description) && (isDone == otherTodo.isDone);
         } else {
             return false;
         }

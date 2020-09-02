@@ -31,13 +31,13 @@ public class Deadline extends Task {
      * @return String of Deadline object in format for saving to and retrieving from hard disk.
      */
     public String getParsedTask() {
-        return "deadline " + this.description + " /by " + this.by + System.lineSeparator()
-                + this.isDone + System.lineSeparator();
+        return "deadline " + description + " /by " + by + System.lineSeparator()
+                + isDone + System.lineSeparator();
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
     /**
@@ -51,9 +51,9 @@ public class Deadline extends Task {
             return true;
         } else if (other instanceof Deadline) {
             Deadline otherDeadline = (Deadline) other;
-            return this.description.equals(otherDeadline.description)
-                    && this.isDone == otherDeadline.isDone
-                    && this.by.equals(otherDeadline.by);
+            return description.equals(otherDeadline.description)
+                    && isDone == otherDeadline.isDone
+                    && by.equals(otherDeadline.by);
         } else {
             return false;
         }

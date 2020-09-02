@@ -49,7 +49,7 @@ public abstract class Task {
      * or HEAVY BALLOT X (U+2718) if task is not done.
      */
     public String getCheckBox() {
-        if (this.isDone) {
+        if (isDone) {
             return "[\u2713]";
         } else {
             return "[\u2718]";
@@ -59,13 +59,13 @@ public abstract class Task {
     /**
      * Marks this task as done.
      */
-    public void markDone() {
-        this.isDone = true;
+    public void setDoneAsTrue() {
+        isDone = true;
     }
 
     @Override
     public String toString() {
-        return getCheckBox() + " " + this.description;
+        return getCheckBox() + " " + description;
     }
 
     /**
@@ -79,7 +79,7 @@ public abstract class Task {
             return true;
         } else if (other instanceof Task) {
             Task otherTask = (Task) other;
-            return this.description.equals(otherTask.description) && this.isDone == otherTask.isDone;
+            return description.equals(otherTask.description) && isDone == otherTask.isDone;
         } else {
             return false;
         }

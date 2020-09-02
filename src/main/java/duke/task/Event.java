@@ -22,13 +22,13 @@ public class Event extends Task {
      * @return String of Event object in format for saving to and retrieving from hard disk.
      */
     public String getParsedTask() {
-        return "event " + this.description + " /at " + this.at + System.lineSeparator()
-                + this.isDone + System.lineSeparator();
+        return "event " + description + " /at " + at + System.lineSeparator()
+                + isDone + System.lineSeparator();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
     /**
@@ -42,9 +42,9 @@ public class Event extends Task {
             return true;
         } else if (other instanceof Event) {
             Event otherEvent = (Event) other;
-            return this.description.equals(otherEvent.description)
-                    && this.isDone == otherEvent.isDone
-                    && this.at.equals(otherEvent.at);
+            return description.equals(otherEvent.description)
+                    && isDone == otherEvent.isDone
+                    && at.equals(otherEvent.at);
         } else {
             return false;
         }

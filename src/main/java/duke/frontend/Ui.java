@@ -5,7 +5,7 @@ package duke.frontend;
  * Contains methods that greets user on start and exit of program.
  */
 public class Ui {
-    private static final String STARLINE = "**************************************************************************";
+    private static final String STAR_LINE = "**************************************************************************";
     private static final String LOGO = " ____        _   \n"
             + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
@@ -16,7 +16,7 @@ public class Ui {
      * Prints welcome greeting to user at start of program.
      */
     public static void greet() {
-        System.out.println(STARLINE
+        System.out.println(STAR_LINE
                 + "\nWelcome! I am\n" + LOGO
                 + "\nHere are some magic words to get you going:"
                 + "\nTo add a todo, say 'todo <task description>'."
@@ -25,7 +25,7 @@ public class Ui {
                 + "\nTo view your tasks, say 'list'."
                 + "\nTo check off a task, say 'done <task number>'."
                 + "\nTo leave, say 'bye'.\n"
-                + STARLINE);
+                + STAR_LINE);
     }
 
     /**

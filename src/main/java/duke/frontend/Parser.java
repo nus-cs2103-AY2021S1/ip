@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Deals with parsing and making sense of user commands.
  */
 public class Parser {
-    private static final String DASHLINE = "--------------------------------------------------------------------------";
+    private static final String DASH_LINE = "--------------------------------------------------------------------------";
     private final TaskList taskList;
 
     /**
@@ -35,40 +35,40 @@ public class Parser {
 
             // "list" prints the task list
             if (next.equals("list")) {
-                this.taskList.list();
+                taskList.list();
 
             // "done" checks off boxes, need to check for input errors
             } else if (splitNext[0].equals("done")) {
                 try {
-                    this.taskList.markTaskAsDone(splitNext[1]);
+                    taskList.markTaskAsDone(splitNext[1]);
                 } catch (IndexOutOfBoundsException ex) {
-                    System.out.println(DASHLINE + "\n\u2639 Please indicate which task you'd like to check off!");
+                    System.out.println(DASH_LINE + "\n\u2639 Please indicate which task you'd like to check off!");
                 }
 
             // to "delete" tasks from the taskList
             } else if (splitNext[0].equals("delete")) {
                 try {
-                    this.taskList.deleteTask(splitNext[1]);
+                    taskList.deleteTask(splitNext[1]);
                 } catch (IndexOutOfBoundsException ex) {
-                    System.out.println(DASHLINE + "\n\u2639 Please indicate which task you'd like to delete!");
+                    System.out.println(DASH_LINE + "\n\u2639 Please indicate which task you'd like to delete!");
                 }
 
             } else if (splitNext[0].equals("find")) {
                 if (splitNext.length == 1) {
-                    this.taskList.find("");
+                    taskList.find("");
                 } else {
-                    this.taskList.find(splitNext[1]);
+                    taskList.find(splitNext[1]);
                 }
 
             // for ToDos, Deadlines, Events
             } else if (splitNext[0].equals("todo") || splitNext[0].equals("deadline") || splitNext[0].equals("event")) {
                 try {
-                    this.taskList.add(next, false, true);
+                    taskList.add(next, false, true);
                 } catch (IllegalArgumentException ex) {
-                    System.out.println(DASHLINE + "\n\u2639 " + ex.getMessage() + "\n" + DASHLINE);
+                    System.out.println(DASH_LINE + "\n\u2639 " + ex.getMessage() + "\n" + DASH_LINE);
                 }
             } else {
-                System.out.println(DASHLINE + "\n\u2639 Sorry I don't know what that means!\n" + DASHLINE);
+                System.out.println(DASH_LINE + "\n\u2639 Sorry I don't know what that means!\n" + DASH_LINE);
             }
             next = sc.nextLine();
         }
