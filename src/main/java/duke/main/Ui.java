@@ -15,7 +15,7 @@ public class Ui {
     private final Parser parser;
     private final Scanner scanner;
 
-    Ui(TaskList taskList) {
+    public Ui(TaskList taskList) {
         this.parser = new Parser(taskList);
         this.scanner = new Scanner(System.in);
     }

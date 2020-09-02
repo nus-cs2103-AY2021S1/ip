@@ -14,7 +14,7 @@ public class Parser {
     private final TaskList taskList;
     private StringBuilder reply = new StringBuilder();
 
-    Parser(TaskList taskList) {
+    public Parser(TaskList taskList) {
         this.taskList = taskList;
     }
 
@@ -26,7 +26,7 @@ public class Parser {
      * @param input User command in console.
      * @return Output message upon execution of command.
      */
-    String parse(String input) {
+    public String parse(String input) {
         try {
             if (input.equals("list")) {
                 list();
