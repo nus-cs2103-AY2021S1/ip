@@ -3,11 +3,20 @@ import java.io.IOException;
 /**
  * Represents the main Chatbot.
  */
-public class Duke {
+public class Duke{
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        this.run();
+        return "Duke heard: " + input;
+    }
 
     /**
      * Loads the saved tasks into the list of tasks.
@@ -22,6 +31,10 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    public Duke() {
+        ui = new Ui();
     }
 
     /**
