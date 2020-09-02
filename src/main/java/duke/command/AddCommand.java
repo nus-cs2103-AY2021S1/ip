@@ -31,9 +31,9 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTasks(task);
-        String echoizer = "\t Got it. I've added this task:\n"
-                + "\t %s\n"
-                + "\t Now you have %d tasks in the list.\n";
+        String echoizer = "  Got it. I've added this task:\n"
+                + "    %s\n"
+                + "  Now you have %d tasks in the list.\n";
         storage.save(tasks);
         return ui.showAction(String.format(echoizer, task, tasks.numTasks()));
     }

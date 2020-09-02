@@ -35,9 +35,9 @@ public class DeleteCommand extends Command {
         try {
             Task t = tasks.deleteTask(i);
             storage.save(tasks);
-            return ui.showAction(String.format("\t Noted. I've removed this task:\n"
-                    + "\t   %s\n"
-                    + "\t Now you have %d tasks in the list.\n", t, tasks.numTasks()));
+            return ui.showAction(String.format("  Noted. I've removed this task:\n"
+                    + "    %s\n"
+                    + "  Now you have %d tasks in the list.\n", t, tasks.numTasks()));
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("Can't delete a task that does not exist.");
         }

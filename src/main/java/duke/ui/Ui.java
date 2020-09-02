@@ -8,20 +8,19 @@ import java.util.Scanner;
 public class Ui {
 
     private static final String DIVIDER =
-            "\t____________________________________________________________\n";
+            "___________________________________\n";
     private static final String LOGO =
-            " _____     __   __   ________   _________\n"
-            + "|     \\   |  | |  | |__    __| |   ______|\n"
-            + "|  |\\  \\  |  | |  |    |  |    |  |______\n"
-            + "|  | \\  \\ |  | |  |    |  |    |   ______|\n"
-            + "|  |  \\  \\|  | |  |    |  |    |  |______\n"
-            + "|__|   \\_____| |__|    |__|    |_________|\n";
+            "            _____   _____\n"
+            + "|\\   |  |     |    |\n"
+            + "| \\  |  |     |    |_____\n"
+            + "|  \\ |  |     |    |\n"
+            + "|   \\|  |     |    |_____\n";
     private static final String GREETING =
-            "\t Hello! I'm Nite, the Dark Knight,\n"
-            + "\t Here to help you track your tasks and achieve a great night.\n"
-            + "\t What can I do for you?\n";
+            "  Hello! I'm Nite, the Dark Knight,\n"
+            + "  Here to help you track your tasks and achieve a great night.\n"
+            + "  What can I do for you?\n";
     private static final String GOODBYE =
-            "\t Good nite! Hope you have a good night's sleep. See you soon!\n";
+            "  Good nite! Hope you have a good night's sleep. See you soon!\n";
 
     private Scanner scanner;
 
@@ -52,7 +51,7 @@ public class Ui {
      * @param errorMessage Error message of the DukeException.
      */
     public String showError(String errorMessage) {
-        String enhancedMessage = "\t :-( OOPS!!! " + errorMessage + "\n";
+        String enhancedMessage = "  :-( OOPS!!! " + errorMessage + "\n";
         return DIVIDER + enhancedMessage + DIVIDER;
     }
 

@@ -68,7 +68,7 @@ public class TaskList {
         Task t;
         for (int i = 0; i < this.tasks.size(); i++) {
             t = this.tasks.get(i);
-            tasks += String.format("\t %d.%s%n", i + 1, t);
+            tasks += String.format("  %d.%s%n", i + 1, t);
         }
         return tasks;
     }
@@ -117,7 +117,7 @@ public class TaskList {
             t = this.tasks.get(i);
             if (t.hasKeyword(keyword)) {
                 numMatch++;
-                tasks += String.format("\t %d.%s%n", numMatch, t);
+                tasks += String.format("  %d.%s%n", numMatch, t);
             }
         }
         return tasks;

@@ -25,15 +25,15 @@ public class HelpCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String commandsList =
-                "\t These are the common Nite commands used in various situations:\n"
-                + "\t add a task\n\t\t todo <description>\n"
-                + "\t\t deadline <description> /by <YYYY-MM-DD HH:mm>\n"
-                + "\t\t event <description> /at <YYYY-MM-DD HH:mm> to <YYYY-MM-DD HH:mm>\n"
-                + "\t delete a task\n\t\t delete <task number>\n"
-                + "\t mark task as done\n\t\t done <task number>\n"
-                + "\t list all tasks\n\t\t list\n"
-                + "\t find a task\n\t\t find <keyword>\n"
-                + "\t exit Nite\n\t\t bye\n";
+                "  These are the Nite commands!!\n"
+                + "  add a task\n    todo <description>\n"
+                + "    deadline <description> /by <YYYY-MM-DD HH:mm>\n"
+                + "    event <description> /at <YYYY-MM-DD HH:mm> to <YYYY-MM-DD HH:mm>\n"
+                + "  delete a task\n    delete <task number>\n"
+                + "  mark task as done\n    done <task number>\n"
+                + "  list all tasks\n    list\n"
+                + "  find a task\n    find <keyword>\n"
+                + "  exit Nite\n    bye\n";
         return ui.showAction(commandsList);
     }
 }

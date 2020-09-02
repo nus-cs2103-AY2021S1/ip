@@ -25,6 +25,6 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String tasksString = tasks.listTasks();
-        return ui.showAction("\t Here are the tasks in your list:\n" + tasksString);
+        return ui.showAction("  Here are the tasks in your list:\n" + tasksString);
     }
 }

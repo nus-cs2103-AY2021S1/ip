@@ -35,8 +35,8 @@ public class DoneCommand extends Command {
         try {
             Task t = tasks.markTask(i);
             storage.save(tasks);
-            return ui.showAction(String.format("\t Nice! I've marked this task as done:\n"
-                    + "\t   %s\n", t));
+            return ui.showAction(String.format("  Nice! I've marked this task as done:\n"
+                    + "    %s\n", t));
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("Can't complete a task that does not exist.");
         }
