@@ -20,13 +20,13 @@ import duke.task.Event;
 import duke.task.Todo;
 
 /**
- * Deals with making sense of the user command.
+ * Deals with making sense of user inputs.
  */
 public class Parser {
     /**
      * List of all the valid date inputs.
      */
-    private static final List<String> formatStrings = Arrays.asList("d/M/y", "y-M-d");
+    private static final List<String> DATE_FORMATS = Arrays.asList("d/M/y", "y-M-d");
 
     /**
      * Parses the input command from the user into a command that the Chatbot can understand.
@@ -77,21 +77,20 @@ public class Parser {
         }
     }
 
-
     /**
-     * Parses input dates in the correct format into the local date format.
+     * Parses input dates in the valid date formats of d/M/y and y-M-d into the local date format.
      *
      * @param string The date to be parsed.
      * @return Local date format of the input date.
      * @throws DateTimeParseException If the input date is not of an acceptable format.
      */
     public static LocalDate parseDate(String string) throws DateTimeParseException {
-        for (int i = 0; i < formatStrings.size(); i++) {
-            String formatString = formatStrings.get(i);
+        for (int i = 0; i < DATE_FORMATS.size(); i++) {
+            String formatString = DATE_FORMATS.get(i);
             try {
                 return LocalDate.parse(string, DateTimeFormatter.ofPattern(formatString));
             } catch (DateTimeParseException e) {
-                if (i == formatStrings.size() - 1) {
+                if (i == DATE_FORMATS.size() - 1) {
                     throw e;
                 }
             }

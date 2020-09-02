@@ -1,7 +1,7 @@
 package duke.command;
 
 /**
- * Commands that can be used.
+ * Represents commands that can be used.
  */
 public enum CommandInstruction {
     LIST("list"),
