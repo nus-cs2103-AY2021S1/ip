@@ -11,6 +11,7 @@ public class Ui {
 
     /**
      * Reads the next line provided by the user.
+     *
      * @return The command provided as a String.
      */
     public String readCommand() {
@@ -19,6 +20,7 @@ public class Ui {
 
     /**
      * Outputs the String provided by the program to the user.
+     *
      * @param output The String intended to be outputted to the user.
      */
     public void showOutput(String output) {
@@ -46,6 +48,7 @@ public class Ui {
 
     /**
      * Provides the user an understanding of what went wrong during program execution.
+     *
      * @param errorMessage The error message to be shown to the user.
      */
     public void showError(String errorMessage) {

@@ -31,6 +31,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaJunan.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaJunan2.jpg"));
 
+    /**
+     * Binds the dialogContainer to the scrollPane.
+     */
     @FXML
     public void initialize() {
         Ui ui = new Ui();

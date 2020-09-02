@@ -36,6 +36,7 @@ public class TaskList {
 
     /**
      * Adds a Task to the list.
+     *
      * @param item Task object to be added on to the list.
      * @return String result that describes the item added
      * if successful.
@@ -56,6 +57,7 @@ public class TaskList {
 
     /**
      * Deletes a Task from the list.
+     *
      * @param index The index of the Task object to be deleted.
      * @return String result that describes the deleted Task
      * if successful.
@@ -77,6 +79,7 @@ public class TaskList {
 
     /**
      * Marks a Task as completed.
+     *
      * @param index The index of the Task object to be marked as done.
      * @return String result that describes the completed Task
      * if successful.
@@ -96,6 +99,7 @@ public class TaskList {
 
     /**
      * Marks a Task as not completed.
+     *
      * @param index The index of the Task object to be marked as not done.
      * @return String result that describes the uncompleted Task if successful.
      */
@@ -114,6 +118,7 @@ public class TaskList {
 
     /**
      * Finds the tasks that have the word parameter in the task description.
+     *
      * @param word The word to be searched for.
      * @return TaskList of the results from the search.
      */
@@ -129,6 +134,7 @@ public class TaskList {
      * Custom toString representation of a TaskList which provides a view of the
      * current Tasks in the list along with additional information such as
      * number of active tasks and completed tasks.
+     *
      * @return String representation of current Tasks in the list.
      */
     @Override
