@@ -15,6 +15,7 @@ public enum TaskType {
 
     /**
      * Instantiates a TaskType object.
+     *
      * @param type Type of a {@link Task}.
      */
     private TaskType(String type) {
@@ -23,6 +24,7 @@ public enum TaskType {
 
     /**
      * Returns a String representation of the {@link Task} type.
+     *
      * @return A String of the {@link Task} type.
      */
     public String getType() {

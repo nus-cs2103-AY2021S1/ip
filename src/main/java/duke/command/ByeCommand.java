@@ -8,6 +8,7 @@ public class ByeCommand extends Command {
     /**
      * Overrides execute in {@link Command}.
      * Executes the command to print an exiting message.
+     *
      * @param tasks The list of {@link Task}s.
      * @param storage The Storage object of Duke.
      */
@@ -18,6 +19,7 @@ public class ByeCommand extends Command {
 
     /**
      * Overrides isExit in {@link Command}.
+     *
      * @return true to indicate an exiting instruction.
      */
     @Override

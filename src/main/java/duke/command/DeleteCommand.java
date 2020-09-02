@@ -17,6 +17,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Instantiates a new DeleteCommand object.
+     *
      * @param index The index of the {@link Task} to be deleted.
      */
     public DeleteCommand(int index) {
@@ -26,6 +27,7 @@ public class DeleteCommand extends Command {
     /**
      * Overrides execute in {@link Command}.
      * Executes the command to delete the {@link Task} and save the changes to storage.
+     *
      * @param tasks The list of {@link Task}s.
      * @param storage The Storage object of Duke.
      */

@@ -15,6 +15,7 @@ public class Event extends Task {
     /**
      * Instantiates a new Event object.
      * The new Event is not completed by default.
+     *
      * @param description The description of the Event.
      * @param date The date on which the Event is happening.
      */
@@ -25,6 +26,7 @@ public class Event extends Task {
 
     /**
      * Instantiates a new Event object based on completion status provided.
+     *
      * @param description The description of the Event.
      * @param date The date on which the Event is happening.
      * @param completionStatus The completion status of the Event.
@@ -36,6 +38,7 @@ public class Event extends Task {
 
     /**
      * Overrides getType method in {@link Task}.
+     *
      * @return Type of Event.
      */
     @Override
@@ -45,6 +48,7 @@ public class Event extends Task {
 
     /**
      * Overrides getDate method in {@link Task}.
+     *
      * @return The date of the Event.
      */
     @Override
@@ -55,6 +59,7 @@ public class Event extends Task {
     /**
      * Returns a String representation of the Event.
      * Overrides toString in {@link Task}.
+     *
      * @return A String representation of the Event.
      */
     @Override

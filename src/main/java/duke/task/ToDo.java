@@ -6,6 +6,7 @@ package duke.task;
 public class ToDo extends Task {
     /**
      * Instantiates a ToDo that is by default not completed.
+     *
      * @param description The description of the ToDo.
      */
     public ToDo(String description) {
@@ -14,6 +15,7 @@ public class ToDo extends Task {
 
     /**
      * Instantiates a ToDo based on completion Status.
+     *
      * @param description The description of the ToDo.
      * @param completionStatus The completion status of the ToDo.
      */
@@ -23,6 +25,7 @@ public class ToDo extends Task {
 
     /**
      * Overrides getType method in {@link Task}.
+     *
      * @return Type of ToDo.
      */
     @Override
@@ -33,6 +36,7 @@ public class ToDo extends Task {
     /**
      * Returns a String representation of the ToDo.
      * Overrides toString in {@link Task}.
+     *
      * @return A String representation of the ToDo.
      */
     @Override

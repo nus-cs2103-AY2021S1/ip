@@ -16,6 +16,7 @@ public class DoneCommand extends Command {
 
     /**
      * Instantiates a new DoneCommand object.
+     *
      * @param index The index of the {@link Task} to be marked as completed.
      */
     public DoneCommand(int index) {
@@ -25,6 +26,7 @@ public class DoneCommand extends Command {
     /**
      * Overrides execute in {@link Command}.
      * Executes the command to mark the {@link Task} as completed and save the changes to storage.
+     *
      * @param tasks The list of {@link Task}s.
      * @param storage The Storage object of Duke.
      */

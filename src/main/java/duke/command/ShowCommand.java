@@ -6,6 +6,9 @@ import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Encapsulates a {@link Command} that displays tasks happening on a particular date.
+ */
 public class ShowCommand extends Command {
     /**
      * The date filter for the {@link Task}s.
@@ -14,6 +17,7 @@ public class ShowCommand extends Command {
 
     /**
      * Instantiates a new ShowCommand object.
+     *
      * @param date The date to query for.
      */
     public ShowCommand(LocalDate date) {
@@ -22,6 +26,7 @@ public class ShowCommand extends Command {
 
     /**
      * Lists all the {@link Task}s that happen on or due at a certain date.
+     *
      * @param tasks The list of {@link Task}s.
      * @param storage The Storage object of Duke.
      */
