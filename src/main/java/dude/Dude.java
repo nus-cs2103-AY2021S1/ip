@@ -55,7 +55,7 @@ public class Dude extends Application {
                 String fullCommand = ui.readCommand();
                 Command command = Parser.parse(fullCommand);
                 command.execute(tasks, ui , storage);
-                isExit = command.isExit();
+                isExit = command.getExitStatus();
                 ui.showMessage();
             } catch (CommandException | InvalidArgumentException | InvalidCommandException e) {
                 ui.showError(e.getMessage());

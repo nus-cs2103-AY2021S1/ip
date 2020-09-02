@@ -29,10 +29,10 @@ public class Parser {
      */
     public static Command parse(String input) throws InvalidArgumentException, InvalidCommandException {
         String[] commands = input.split(" ", 2);
-        Commands current;
+        Commands currentCommand;
         try {
-            current = Commands.valueOf(commands[0].toUpperCase());
-            switch(current) {
+            currentCommand = Commands.valueOf(commands[0].toUpperCase());
+            switch(currentCommand) {
             case BYE:
                 return new ExitCommand(commands[0]);
             case LIST:

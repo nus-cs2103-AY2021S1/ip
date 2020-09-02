@@ -8,7 +8,6 @@ import dude.util.Ui;
 /**
  * The abstract task contains the action of the command and whether the command calls for an exit.
  */
-
 public abstract class Command {
     protected boolean isExit;
     private String action;
@@ -25,7 +24,7 @@ public abstract class Command {
 
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws CommandException;
 
-    public boolean isExit() {
+    public boolean getExitStatus() {
         return isExit;
     }
 }
