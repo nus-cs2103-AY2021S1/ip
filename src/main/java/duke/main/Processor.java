@@ -23,14 +23,13 @@ public class Processor {
      *                       wrong date format.
      */
     public static void process(TaskList taskList, Storage storage, Ui ui) throws DukeException {
-        ui.greetings();
         while(Parser.hasNextLine()) {
             String userInput = Parser.readNextLine();
             String command = Parser.getCommand(userInput);
             String response;
             if (Keyword.isValid(command)) {
                 if (command.equals("bye")) {
-                    ui.goodBye();
+                    ui.printToScreen(ui.getGoodByeMessage());
                     break;
                 } else if (command.equals("list")) {
                     response = ui.getFullList(taskList);
@@ -38,17 +37,17 @@ public class Processor {
                     int index = Parser.getIndexTask(userInput);
                     Task task = taskList.getTask(index - 1);
                     task.markAsDone();
-                    response = ui.markTaskAsDone(task);
+                    response = ui.getMarkTaskAsDoneMessage(task);
                 } else if (command.equals("delete")) {
                     int index = Parser.getIndexTask(userInput);
                     Task deletedTask = taskList.getTask(index - 1);
                     taskList.deleteTask(index - 1);
-                    response = ui.uiDeleteTask(deletedTask, taskList);
+                    response = ui.getDeleteTaskMessage(deletedTask, taskList);
                 } else if (command.equals("todo")) {
                     String taskDescription = Parser.findDescription(Parser.getArgs(userInput));
                     Task task = new ToDo(taskDescription);
                     taskList.addTask(task);
-                    response = ui.uiAddTask(task, taskList);
+                    response = ui.getAddTaskMessage(task, taskList);
                 } else if (command.equals("deadline")) {
                     String taskDescription = Parser.findDescription(Parser.getArgs(userInput));
                     String deadlineTime = Parser.findTime(Parser.getArgs(userInput), "by");
@@ -58,7 +57,7 @@ public class Processor {
                     boolean hasTime = Parser.hasTime(deadlineTime);
                     Task deadine = new DeadLine(taskDescription, deadlineTime, hasTime, false);
                     taskList.addTask(deadine);
-                    response = ui.uiAddTask(deadine, taskList);
+                    response = ui.getAddTaskMessage(deadine, taskList);
                 } else if (command.equals("event")) {
                     String taskDescription = Parser.findDescription(Parser.getArgs(userInput));
                     String eventTime = Parser.findTime(Parser.getArgs(userInput), "at");
@@ -68,7 +67,7 @@ public class Processor {
                     boolean hasTime = Parser.hasTime(eventTime);
                     Task event = new Event(taskDescription, eventTime, hasTime, false);
                     taskList.addTask(event);
-                    response = ui.uiAddTask(event, taskList);
+                    response = ui.getAddTaskMessage(event, taskList);
                 } else {
                     String keyword = Parser.getArgs(userInput);
                     TaskList correspondTaskList = taskList.findTaskWithKeyword(keyword);

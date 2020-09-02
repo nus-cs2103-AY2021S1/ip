@@ -71,6 +71,7 @@ public class Storage {
     public List<String> readStorageFile() throws IOException {
         File folder = new File(this.folderPath);
         File file = new File(this.storagePath);
+        System.out.println(file.getAbsolutePath());
         if (!folder.exists()) {
             folder.mkdirs();
             throw new IOException("Folder data does not exist");

@@ -18,7 +18,7 @@ public class Ui {
     /**
      * Prints greetings to users upon opening Duke.
      */
-    public String greetings() {
+    public String getGreetingMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -31,7 +31,7 @@ public class Ui {
     /**
      * Prints farewell to the users when they stop using Duke.
      */
-    public String goodBye() {
+    public String getGoodByeMessage() {
         return "Bye Master. Hope to see you again soon!";
     }
 
@@ -61,7 +61,7 @@ public class Ui {
      * Prints out response to users when they mark a task as done.
      * @param task The task that is marked as done.
      */
-    public String markTaskAsDone(Task task) {
+    public String getMarkTaskAsDoneMessage(Task task) {
         String result = "Nice! I've marked this task as done:\n";
         result += indentMessage(task.toString());
         return result;
@@ -86,7 +86,7 @@ public class Ui {
      * @param task The task to be added.
      * @param taskList The user's task list.
      */
-    public String uiAddTask(Task task, TaskList taskList) {
+    public String getAddTaskMessage(Task task, TaskList taskList) {
         return taskListModify("Got it. I've added this task: ", task, taskList);
     }
 
@@ -95,7 +95,7 @@ public class Ui {
      * @param task The task to be deleted.
      * @param taskList The user's task list.
      */
-    public String uiDeleteTask(Task task, TaskList taskList) {
+    public String getDeleteTaskMessage(Task task, TaskList taskList) {
         return taskListModify("Noted. I've removed this task: ", task, taskList);
     }
 
@@ -107,9 +107,9 @@ public class Ui {
         String result = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < taskList.getSize(); i++) {
             int taskNumber = i + 1;
-            String taskDescription = taskNumber + "." + taskList.getTask(i).toString()
+            String taskDescription = taskList.getTask(i).toString()
                     + (i == taskList.getSize() - 1 ? "" : "\n");
-            result = result + taskNumber + "." + indentMessage(taskDescription);
+            result = result + indentMessage(taskNumber + "." + taskDescription);
         }
         return result;
     }
@@ -122,9 +122,9 @@ public class Ui {
         String result = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.getSize(); i++) {
             int taskNumber = i + 1;
-            String taskDescription = taskNumber + "." + taskList.getTask(i).toString()
+            String taskDescription = taskList.getTask(i).toString()
                     + (i == taskList.getSize() - 1 ? "" : "\n");
-            result = result + taskNumber + "." + indentMessage(taskDescription);
+            result = result + indentMessage(taskNumber + "." + taskDescription);
         }
         return result;
     }

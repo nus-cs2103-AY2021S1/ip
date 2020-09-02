@@ -35,10 +35,14 @@ public class Duke {
      * Runs the Duke program.
      */
     public void run() {
-        try {
-            Processor.process(tasklist, storage, ui);
-        } catch (DukeException dukeException) {
-            ui.printError(dukeException);
+        ui.printToScreen(ui.getGreetingMessage());
+        while (true) {
+            try {
+                Processor.process(tasklist, storage, ui);
+                break;
+            } catch (DukeException dukeException) {
+                ui.printError(dukeException);
+            }
         }
     }
 
@@ -55,17 +59,17 @@ public class Duke {
                     int index = Parser.getIndexTask(userInput);
                     Task task = tasklist.getTask(index - 1);
                     task.markAsDone();
-                    response = ui.markTaskAsDone(task);
+                    response = ui.getMarkTaskAsDoneMessage(task);
                 } else if (command.equals("delete")) {
                     int index = Parser.getIndexTask(userInput);
                     Task deletedTask = tasklist.getTask(index - 1);
                     tasklist.deleteTask(index - 1);
-                    response = ui.uiDeleteTask(deletedTask, tasklist);
+                    response = ui.getDeleteTaskMessage(deletedTask, tasklist);
                 } else if (command.equals("todo")) {
                     String taskDescription = Parser.findDescription(Parser.getArgs(userInput));
                     Task task = new ToDo(taskDescription);
                     tasklist.addTask(task);
-                    response = ui.uiAddTask(task, tasklist);
+                    response = ui.getAddTaskMessage(task, tasklist);
                 } else if (command.equals("deadline")) {
                     String taskDescription = Parser.findDescription(Parser.getArgs(userInput));
                     String deadlineTime = Parser.findTime(Parser.getArgs(userInput), "by");
@@ -75,7 +79,7 @@ public class Duke {
                     boolean hasTime = Parser.hasTime(deadlineTime);
                     Task deadine = new DeadLine(taskDescription, deadlineTime, hasTime, false);
                     tasklist.addTask(deadine);
-                    response = ui.uiAddTask(deadine, tasklist);
+                    response = ui.getAddTaskMessage(deadine, tasklist);
                 } else if (command.equals("event")) {
                     String taskDescription = Parser.findDescription(Parser.getArgs(userInput));
                     String eventTime = Parser.findTime(Parser.getArgs(userInput), "at");
@@ -85,7 +89,7 @@ public class Duke {
                     boolean hasTime = Parser.hasTime(eventTime);
                     Task event = new Event(taskDescription, eventTime, hasTime, false);
                     tasklist.addTask(event);
-                    response = ui.uiAddTask(event, tasklist);
+                    response = ui.getAddTaskMessage(event, tasklist);
                 } else {
                     String keyword = Parser.getArgs(userInput);
                     TaskList correspondTaskList = tasklist.findTaskWithKeyword(keyword);
