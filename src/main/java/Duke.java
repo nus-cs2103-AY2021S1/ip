@@ -16,6 +16,13 @@ public class Duke extends Application {
         TASKS = new TaskList(STORAGE.loadTasks());
     }
 
+    // empty constructor
+    public Duke() {
+        UI = new Ui();
+        STORAGE = new Storage("src/main/java/tasks.txt");
+        TASKS = new TaskList(STORAGE.loadTasks());
+    }
+
     public void run() {
 
         UI.greet(STORAGE.createResult);
