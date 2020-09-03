@@ -1,6 +1,9 @@
 package duke;
 
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.EmptyComparatorException;
+import duke.exception.NullIndexException;
+import duke.exception.NullTaskNameException;
 
 /**
  * Parses and contains the important info required
@@ -46,35 +49,35 @@ public class Parser {
         commandWord = words[0];
 
         switch (commandWord) {
-            case "bye":
-            case "list":
-                break;
-            case "done":
-            case "delete":
-                try {
-                    parseForNumber(words[1].trim());
-                } catch (Exception e) {
-                    throw new NullIndexException(commandWord);
-                }
-                break;
-            case "todo":
-            case "deadline":
-            case "event":
-                try {
-                    parseForDetails(words[1].trim());
-                } catch (Exception e) {
-                    throw new NullTaskNameException(commandWord);
-                }
-                break;
-            case "find":
-                try {
-                    parseForComparator(words[1].trim());
-                } catch (Exception e) {
-                    throw new EmptyComparatorException(commandWord);
-                }
-                break;
-            default:
-                throw new DukeException(commandWord);
+        case "bye":
+        case "list":
+            break;
+        case "done":
+        case "delete":
+            try {
+                parseForNumber(words[1].trim());
+            } catch (Exception e) {
+                throw new NullIndexException(commandWord);
+            }
+            break;
+        case "todo":
+        case "deadline":
+        case "event":
+            try {
+                parseForDetails(words[1].trim());
+            } catch (Exception e) {
+                throw new NullTaskNameException(commandWord);
+            }
+            break;
+        case "find":
+            try {
+                parseForComparator(words[1].trim());
+            } catch (Exception e) {
+                throw new EmptyComparatorException(commandWord);
+            }
+            break;
+        default:
+            throw new DukeException(commandWord);
         }
     }
 
@@ -109,6 +112,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Class getter routines.
+     */
     public String getCommandWord() {
         return commandWord;
     }

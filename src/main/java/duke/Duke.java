@@ -2,13 +2,12 @@ package duke;
 
 import duke.exception.DukeException;
 
-import java.util.*;
+import java.util.Scanner;
 
 /**
  * Represents the main class for the Duke application.
  */
 public class Duke {
-
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -17,7 +16,7 @@ public class Duke {
      * Initialises Duke with a given file save path.
      * Runs Duke with empty TaskList if save file is not found.
      *
-     * @param filePath String representation of the file path
+     * @param filePath String representation of the file path.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -47,28 +46,28 @@ public class Duke {
                 String command = parser.getCommandWord();
 
                 switch (command) {
-                    case "bye":
-                        storage.save(taskList);
-                        ui.displayBye();
-                        sc.close();
-                        break loop;
-                    case "list":
-                        ui.displayList(taskList);
-                        break;
-                    case "done":
-                        taskList.done(parser);
-                        break;
-                    case "delete":
-                        taskList.delete(parser);
-                        break;
-                    case "find":
-                        taskList.find(parser);
-                        break;
-                    case "deadline":
-                    case "event":
-                    case "todo":
-                        taskList.add(parser);
-                        break;
+                case "bye":
+                    storage.save(taskList);
+                    ui.displayGoodbye();
+                    sc.close();
+                    break loop;
+                case "list":
+                    ui.displayList(taskList);
+                    break;
+                case "done":
+                    taskList.done(parser);
+                    break;
+                case "delete":
+                    taskList.delete(parser);
+                    break;
+                case "find":
+                    taskList.find(parser);
+                    break;
+                case "deadline":
+                case "event":
+                case "todo":
+                    taskList.add(parser);
+                    break;
                 }
             } catch (DukeException e) {
                 ui.displayMessage(e.toString());
@@ -78,10 +77,5 @@ public class Duke {
             System.out.println();
         }
     }
-
-    public static void main(String[] args) {
-        new Duke("duke_save_data.txt").run();
-    }
-
 }
 

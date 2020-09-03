@@ -1,6 +1,5 @@
 package duke;
 
-
 import duke.exception.*;
 import duke.task.TaskType;
 
@@ -10,12 +9,16 @@ import java.util.Objects;
 
 /**
  * Represents the list of tasks together with a counter
- * to keep track of pending tasks
+ * to keep track of pending tasks.
  */
 public class TaskList implements Cloneable {
+    private static final Ui UI = new Ui();
+    private static final String DONE_MESSAGE = "Good job! This task is now marked done:";
+    private static final String DELETED_MESSAGE = "Alright! This task is now deleted:";
+    private static final String LIST_HINT = "(Use 'list' command to see your updated list.)";
+    private static final String NO_MATCH = "No matches found!";
     private List<Task> tasks;
     private int numOfPendingTasks;
-    private static final Ui UI = new Ui();
 
     TaskList() {
         this.tasks = new ArrayList<>();
@@ -33,19 +36,10 @@ public class TaskList implements Cloneable {
     }
 
     /**
-     * Extracts the list of tasks of a TaskList.
-     *
-     * @return a list of tasks contained in a TaskList object.
-     */
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    /**
      * Checks if a call to task index in the CLI is valid.
      *
-     * @param target Integer number
-     * @return true if target is usable as an array access
+     * @param target Integer number.
+     * @return true if target is usable as an array access.
      */
     public boolean isWithinValidRange(int target) {
         return target >= 0 && target < tasks.size();
@@ -65,22 +59,18 @@ public class TaskList implements Cloneable {
         this.numOfPendingTasks--;
     }
 
-    public int getNumOfPendingTasks() {
-        return numOfPendingTasks;
-    }
-
     /**
-     * Gets the intended access index of a task in TaskList
+     * Gets the intended access index of a Task in TaskList.
      *
-     * @param parser Parser which contains the processed command line
-     * @return The corresponding array access
+     * @param parser Parser which contains the processed command line.
+     * @return The corresponding array access.
      * @throws DukeException If the task is empty,
-     * no integer index provided,
-     * or index given is out of range
+     *         no integer index provided,
+     *         or index given is out of range.
      */
     public int getTaskID(Parser parser) throws DukeException {
         if (tasks.isEmpty()) {
-            throw new EmptyTasksException("duke.Task is empty");
+            throw new EmptyTasksException("Task is empty");
         }
         if (Objects.isNull(parser.getTaskNumber())) {
             throw new NullIndexException("Target is null");
@@ -95,8 +85,8 @@ public class TaskList implements Cloneable {
     }
 
     /**
-     * Attempts to check a task as done, then display a success message
-     * If the checking as done fails, a fail message is displayed instead
+     * Attempts to check a Task as done, then display a success message.
+     * If the checking as done fails, a fail message is displayed instead.
      *
      * @param parser
      */
@@ -110,7 +100,7 @@ public class TaskList implements Cloneable {
             targetTask.markAsDone();
 
             UI.displayStarLine();
-            System.out.println("Good job! This task is now marked done:");
+            System.out.println(DONE_MESSAGE);
             System.out.println(targetTask);
             UI.displayStarLine();
 
@@ -122,7 +112,7 @@ public class TaskList implements Cloneable {
     }
 
     /**
-     * Attempts to delete a task, then display a success message
+     * Attempts to delete a Task, then display a success message
      * If the deletion fails, a fail message is displayed instead
      *
      * @param parser
@@ -137,7 +127,7 @@ public class TaskList implements Cloneable {
             }
 
             UI.displayStarLine();
-            System.out.println("Alright! This task is now deleted:");
+            System.out.println(DELETED_MESSAGE);
             System.out.println(targetTask);
             UI.displayStarLine();
         } catch (DukeException e) {
@@ -146,8 +136,8 @@ public class TaskList implements Cloneable {
     }
 
     /**
-     * Attempts to add a task to the list, then display a success message
-     * If the addition fails, a fail message is displayed instead
+     * Attempts to add a Task to the list, then display a success message.
+     * If the addition fails, a fail message is displayed instead.
      *
      * @param parser
      */
@@ -166,19 +156,25 @@ public class TaskList implements Cloneable {
             System.out.println("'" + taskName + "' added to list!");
             System.out.println(tasks.get(size - 1));
             System.out.println("\nYou now have " + size + " task(s) in your list.\n");
-            System.out.println("(Use 'list' command to see your updated list.)");
+            System.out.println(LIST_HINT);
             UI.displayStarLine();
         } catch (DukeException e) {
             UI.displayMessage(e.toString());
         }
     }
 
+    /**
+     * Displays a list of Tasks that contains a given String.
+     * If not found, displays an alternative null message.
+     *
+     * @param parser
+     */
     public void find(Parser parser) {
         List<Task> matches = getMatchingTask(parser.comparator);
 
         UI.displayStarLine();
         if (matches.isEmpty()) {
-            System.out.println("No matches found!");
+            System.out.println(NO_MATCH);
         } else {
             int count = 1;
 
@@ -191,6 +187,12 @@ public class TaskList implements Cloneable {
         UI.displayStarLine();
     }
 
+    /**
+     * Creates a sublist of Tasks with a name that contains a certain string.
+     *
+     * @param comparator the substring of interest.
+     * @return a list of Tasks containing the substring of interest.
+     */
     public List<Task> getMatchingTask(String comparator) {
         List<Task> matchingTasks = new ArrayList<>();
 
@@ -206,9 +208,26 @@ public class TaskList implements Cloneable {
         return matchingTasks;
     }
 
+    /**
+     * Creates a clone of the current TaskList (for testing purposes).
+     *
+     * @return a shallow copy of this with no element references.
+     * @throws CloneNotSupportedException
+     */
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    /**
+     * Class getter routines.
+     */
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public int getNumOfPendingTasks() {
+        return numOfPendingTasks;
     }
 }
 

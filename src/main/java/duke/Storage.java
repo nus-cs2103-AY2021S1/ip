@@ -5,12 +5,13 @@ import duke.task.TaskType;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
+    public static final String LOAD_FAILED = "Oops, load was unsuccessful!";
+    public static final String SAVE_WAS_UNSUCCESSFUL = "Oops, save was unsuccessful!";
     private String filePath;
 
     public Storage(String filePath) {
@@ -20,10 +21,9 @@ public class Storage {
     /**
      * Loads existing Duke save file before running.
      *
-     * @return an ArrayList of Tasks used for TaskList.
-     * @throws DukeException If there are no save files
+     * @return an ArrayList of Tasks for TaskList.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() {
         ArrayList<Task> result = new ArrayList<>();
 
         try {
@@ -47,16 +47,17 @@ public class Storage {
             }
             input.close();
         } catch (Exception e) {
+            System.out.println(LOAD_FAILED);
         }
         return result;
     }
 
     /**
-     * Saves and/or overwrites the tasks into a Duke save file.
+     * Saves and/or overwrites the current Tasks into a Duke save file.
      *
      * @param taskList The final state of TaskList as Duke closes.
      */
-    public void save (TaskList taskList) {
+    public void save(TaskList taskList) {
         List<Task> tasks = taskList.getTasks();
         try {
             File file = new File(filePath);
@@ -69,8 +70,8 @@ public class Storage {
                 output.write(saveLine);
             }
             output.close();
-        } catch (IOException | DukeException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(SAVE_WAS_UNSUCCESSFUL);
         }
     }
 }
