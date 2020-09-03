@@ -5,26 +5,96 @@
     -fx-text-alignment: left;
 }
 
-#dialogField {
-    -fx-background-color: black;
-}
-
 #dialogContainer {
+    -fx-background-color: #1a1c1e;
+}
+
+.button {
+    -fx-background-color : #05071F;
+    -fx-text-fill : #e7e5e5;
+}
+.button:hover {
+    -fx-background-color : #10165F;
+}
+
+.button:pressed{
+    -fx-background-color : #1620A1;
+}
+
+#userInput {
+    -fx-background-color: #35393e;
+    -fx-text-fill: white;
+}
+
+.root {
+    -fx-background-color: #1a1c1e;
+}
+
+.scroll-bar{
+    -fx-background-color: #1a1c1e;
+    -fx-background-insets: 0 0 0 0;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #10165F;
+    -fx-background-radius: 5em;
+}
+
+.scroll-pane > .corner {
     -fx-background-color: black;
 }
 
-#sendButton {
-        -fx-background-color:
-                #090a0c,
-                linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-                linear-gradient(#20262b, #191d22),
-                radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
-        -fx-background-radius: 5,4,3,5;
-        -fx-background-insets: 0,1,2,0;
-        -fx-text-fill: white;
-        -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-        -fx-font-family: "Arial";
-        -fx-text-fill: linear-gradient(white, #d0d0d0);
-        -fx-font-size: 12px;
-        -fx-padding: 10 20 10 20;
+.scroll-bar: horizontal .increment-button;
+.scroll-bar: horizontal .decrement-button{
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 0.0 10.0 0.0;
 }
+
+.scroll-bar: vertical .increment-button;
+.scroll-bar: vertical .decrement-button{
+    -fx-background-color: transparent;
+    -fx-background-radius: 0.0em;
+    -fx-padding:0.0 0.0 10.0 0.0;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow{
+    -fx-shape: " ";
+    -fx-padding: 0.15em 0.0;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow{
+    -fx-shape: " ";
+    -fx-padding:0.0 0.15em;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #35393e;
+    -fx-background-insets: 2.0, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+}
+
+.scroll-pane {
+    -fx-background-color: #02030A;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+
+
+
+
+

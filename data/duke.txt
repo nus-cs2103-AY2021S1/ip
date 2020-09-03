@@ -1,3 +1,2 @@
-T | 0 | read book
+T | 1 | read book
 D | 0 | return book | 10 Oct 2020 2:30 PM
-T | 0 | go for CS2103T Tutorial
