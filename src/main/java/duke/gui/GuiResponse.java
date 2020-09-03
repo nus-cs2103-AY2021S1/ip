@@ -1,8 +1,11 @@
 package duke.gui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import duke.Duke;
+import duke.command.Command;
+import duke.data.DukeCommandSet;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.ui.UiPrint;
@@ -138,5 +141,21 @@ public class GuiResponse {
         resetResponse();
 
         response.append(exception.getMessage() + '\n');
+    }
+
+    /**
+     * Shows description of all commands.
+     * @param commandSet the DukeCommandSet
+     */
+    public void showAllCommand(DukeCommandSet commandSet) {
+        resetResponse();
+
+        HashMap<String, Command> allCommands = commandSet.getAllCommands();
+        response.append("Here are all commands in Duke:\n\n");
+
+        for (String commandName : allCommands.keySet()) {
+            response.append("\"" + commandName + "\"\n");
+            response.append(allCommands.get(commandName).getDescription() + "\n\n");
+        }
     }
 }
