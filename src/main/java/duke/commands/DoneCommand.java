@@ -21,6 +21,7 @@ public class DoneCommand extends Command {
      * @param taskIndex Integer indicating the index of task to be marked as done.
      */
     public DoneCommand(int taskIndex) {
+        assert taskIndex > 0;
         this.taskIndex = taskIndex;
     }
 

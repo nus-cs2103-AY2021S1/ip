@@ -81,11 +81,11 @@ public class MainWindow extends AnchorPane {
 
         } catch (NoSuchElementException e) {
             this.dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog("huh1", pingu));
+                    DialogBox.getDukeDialog("pingu doesn't understand what that means :(", pingu));
             this.userInput.clear();
         } catch (DukeException e) {
             this.dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog("huh2", pingu));
+                    DialogBox.getDukeDialog("pingu doesn't understand what that means :(", pingu));
             this.userInput.clear();
         }
 
