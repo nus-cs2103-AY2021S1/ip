@@ -33,100 +33,110 @@ public class Ui {
     /**
      * Displays the welcome message.
      */
-    public void showWelcome() {
-        System.out.println("hElLoOOoOOoO! Welcome to\n" + LOGO);
-        System.out.println("How can I help you today? : D");
-        System.out.println("Type \"help\" to view the list of commands you can use!");
+    public static String showWelcome() {
+        String welcomeMessage = "hElLoOOoOOoO! WELCOME TO BIKINI BOTTOM! "
+                + "I'm Sandy Cheeks, how can I help you today?\n"
+                + "Type \"help\" to view the list of commands you can use!";
+        return welcomeMessage;
     }
 
     /**
      * Displays the exit message.
      */
-    public void showExit() {
-        System.out.println("BYEEE!! SEE YOU AGAIN!!! >O<");
+    public String showExit() {
+        return "BYEEE!! SEE YOU AGAIN!!! >O<";
     }
 
     /**
      * Displays the list of commands available.
      */
-    public void showHelp() {
-        System.out.println("Here are the list of commands you can use! =D");
-        System.out.println("help: displays the list of commands available\n");
-        System.out.println("list: displays the list of tasks you have\n");
-        System.out.println("find *keyword*: displays the tasks with that keyword\n"
-                + "eg find book\n");
-        System.out.println("todo *task description*: adds a task without any\n"
-                + "date/time attached to it\n" + "eg todo read book\n");
-        System.out.println("deadline *task description* /by *date+time*: adds a\n"
+    public String showHelp() {
+        String helpMessage = "Here are the list of commands you can use! =D\n"
+                + "help: displays the list of commands available\n"
+                + "\n"
+                + "list: displays the list of tasks you have\n"
+                + "\n"
+                + "find *keyword*: displays the tasks with that keyword\n"
+                + "eg find book\n"
+                + "\n"
+                + "todo *task description*: adds a task without any\n"
+                + "date/time attached to it\n" + "eg todo read book\n"
+                + "\n"
+                + "deadline *task description* /by *date+time*: adds a\n"
                 + "task that needs to be done before a specific date and time\n"
                 + "(date and time to be written in yyyy-mm-dd HHMM format)\n"
-                + "eg deadline return book /by 2019-10-15 2359\n");
-        System.out.println("event *task description* /at *date+time*: adds a task that\n"
+                + "eg deadline return book /by 2019-10-15 2359\n"
+                + "\n"
+                + "event *task description* /at *date+time*: adds a task that\n"
                 + "starts at a specific time and ends at a specific time\n"
                 + "(date and time to be written in yyyy-mm-dd HHMM format)\n"
-                + "eg event meeting /at 2019-10-15 1200\n");
-        System.out.println("done *task number*: marks the task with that number as\n"
-                + "done eg done 1\n");
-        System.out.println("delete *task number*: deletes the task with that number\n"
-                + "from the list eg delete 1\n");
-        System.out.println("bye: ends the session");
+                + "eg event meeting /at 2019-10-15 1200\n"
+                + "\n"
+                + "done *task number*: marks the task with that number as\n"
+                + "done eg done 1\n"
+                + "\n"
+                + "delete *task number*: deletes the task with that number\n"
+                + "from the list eg delete 1\n"
+                + "\n"
+                + "bye: ends the session";
+        return helpMessage;
     }
 
     /**
      * Displays the user's list of tasks.
      */
-    public void showList() {
-        System.out.println("Here are your tasks! JIAYOU! =D");
+    public String showList() {
+        return "Here are your tasks! JIAYOU! =D";
     }
 
     /**
      * Replies the user's command to mark a task as done.
      * @param t Task that is marked as done.
      */
-    public void showDone(Task t) {
-        System.out.println("Nicee!! You've completed this task!");
-        System.out.println(t);
+    public String showDone(Task t) {
+        String doneMessage = "Nicee!! You've completed this task!\n" + t;
+        return doneMessage;
     }
 
     /**
      * Replies the user's command to delete a task.
      * @param t Task that is deleted.
      */
-    public void showDelete(Task t, TaskList tasks) {
-        System.out.println("Oki! I've removed this task!");
-        System.out.println(t);
-        System.out.println("Now you have " + tasks.getSize() + " tasks in your list!");
+    public String showDelete(Task t, TaskList tasks) {
+        String deleteMessage = "Oki! I've removed this task!\n" + t + "\n"
+                + "Now you have " + tasks.getSize() + " tasks in your list!";
+        return deleteMessage;
     }
 
     /**
      * Replies the user's command to add a task.
      * @param t Task to be added.
      */
-    public void showAdd(Task t, TaskList tasks) {
-        System.out.println("Oki! I have added this task:");
-        System.out.println(t);
-        System.out.println("Now you have " + tasks.getSize() + " tasks in your list!");
+    public String showAdd(Task t, TaskList tasks) {
+        String addMessage = "Oki! I have added this task:\n" + t + "\n"
+                + "Now you have " + tasks.getSize() + " tasks in your list!";
+        return addMessage;
     }
 
     /**
      * Displays the matching tasks found using the keyword.
      */
-    public void showFind() {
-        System.out.println("Oki! I have found the matching tasks in your list:");
+    public String showFind() {
+        return "Oki! I have found the matching tasks in your list:";
     }
 
     /**
      * Displays the error message.
      * @param err Error message.
      */
-    public void showError(String err) {
-        System.out.println(err);
+    public String showError(String err) {
+        return err;
     }
 
     /**
      * Displays the line that acts as a border.
      */
-    public void showLine() {
-        System.out.println(LINE);
+    public String showLine() {
+        return LINE;
     }
 }

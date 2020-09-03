@@ -24,7 +24,7 @@ public class FindCommand extends Command {
      * @throws DukeException If there are no matching tasks with the specified keyword.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList foundTasks = tasks.findTasks(keyword);
 
         if (foundTasks.getSize() == 0) {
@@ -32,8 +32,7 @@ public class FindCommand extends Command {
                     + "Can you try a different keyword?");
         }
 
-        ui.showFind();
-        foundTasks.printList();
+        return ui.showFind() + "\n" + foundTasks.printList();
     }
 
     /**
