@@ -36,20 +36,14 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
 
         dialog.setWrapText(true);
+        dialog.setPadding(new Insets(10, 10, 10, 10));
 
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-        Circle circle = new Circle(displayPicture.getLayoutX() + 50,
-                displayPicture.getLayoutY() + 50, 50);
-        displayPicture.setClip(circle);
+//        Circle circle = new Circle(displayPicture.getLayoutX() + 50,
+//                displayPicture.getLayoutY() + 50, 50);
+//        displayPicture.setClip(circle);
 
-//        this.getChildren().addAll(dialog, displayPicture);
-//        this.setPadding(new Insets(0, 5, 5, 5));
-//        this.setSpacing(10);
-//        this.setBorder(new Border(new BorderStroke(Color.TRANSPARENT, Color.TRANSPARENT, Color.BLACK, Color.TRANSPARENT,
-//                BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.DASHED, BorderStrokeStyle.NONE,
-//                CornerRadii.EMPTY, new BorderWidths(1), new Insets(0, 10, 0, 10))));
-//        this.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+        dialog.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, new CornerRadii(20), Insets.EMPTY)));
+
     }
 
     /**

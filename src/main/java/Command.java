@@ -10,7 +10,7 @@ abstract class Command {
      * @param storage Storage to load and save tasks.
      * @throws DukeException if unable to update file to storage's filepath when required
      */
-    abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     abstract boolean isExit();
 }

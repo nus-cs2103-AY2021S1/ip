@@ -9,9 +9,9 @@ public class ListCommand extends Command {
      * @param ui Ui to deal with interaction with user.
      * @param storage Storage to load and save tasks.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getNumTasks() == 0) {
-            ui.showEmptyTaskList();
+            return ui.showEmptyTaskList();
         } else {
             String tasksList = "";
 
@@ -23,7 +23,7 @@ public class ListCommand extends Command {
                 }
             }
 
-            ui.showTaskList(tasksList);
+            return ui.showTaskList(tasksList);
         }
     }
 
