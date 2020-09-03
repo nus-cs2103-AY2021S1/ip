@@ -12,14 +12,13 @@ import javafx.scene.layout.VBox;
 
 
 public class OpeningBox extends VBox {
-    @FXML
-    private Label openingMessage;
+
     @FXML
     private Label greetingMessage;
     @FXML
     private ImageView displayPicture;
 
-    private OpeningBox(String openingText, String greetingText, Image img) {
+    private OpeningBox(String greetingText, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/OpeningBox.fxml"));
             fxmlLoader.setController(this);
@@ -28,12 +27,12 @@ public class OpeningBox extends VBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        openingMessage.setText(openingText);
         greetingMessage.setText(greetingText);
+        greetingMessage.getStylesheets().add("view/OpeningBox.css");
         displayPicture.setImage(img);
     }
-    public static OpeningBox getOpeningMessage(String openingText, String greetingText, Image img) {
-        return new OpeningBox(openingText, greetingText, img);
+    public static OpeningBox getOpeningMessage(String greetingText, Image img) {
+        return new OpeningBox(greetingText, img);
     }
 }
 

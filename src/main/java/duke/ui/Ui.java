@@ -7,12 +7,8 @@ import java.util.Scanner;
  */
 
 public class Ui {
-    private static final String SPACER = "               ";
-    private static final String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    private static final String OPENING_MSG = " *** Opening and loading relevant documents into Duke ***";
     private static final String GOODBYE_MSG = "Bye ^.^, Hope to see you again soon!!!";
-    private static final String HELLO_DUKE = "      " + "Hello! I'm Duke ^.^";
-    private static final String QUESTION = "What can I do for you?";
+    private static final String HELLO_DUKE = "Welcome back";
 
     private final Scanner sc;
 
@@ -23,15 +19,8 @@ public class Ui {
     /**
      * Greets the user.
      */
-    public String startMessage() {
-        return messageFormatter(OPENING_MSG);
-    }
-
-    /**
-     * Greets the user.
-     */
     public String greetings() {
-        return messageFormatter(HELLO_DUKE, QUESTION);
+        return messageFormatter(HELLO_DUKE);
     }
 
     /**

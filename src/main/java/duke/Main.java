@@ -19,8 +19,11 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
+            MainWindow mainWindow = new MainWindow();
+            fxmlLoader.setRoot(mainWindow);
+            fxmlLoader.load();
+            Scene scene = new Scene(mainWindow);
+            scene.getStylesheets().add("view/MainWindow.css");
             stage.setScene(scene);
             stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(duke);

@@ -5,29 +5,85 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.RowConstraints?>
-<AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+
+<?import javafx.geometry.Insets?>
+<fx:root type="javafx.scene.layout.AnchorPane" 
+         maxHeight="Infinity" 
+         maxWidth="Infinity" 
+         minHeight="-Infinity" 
+         minWidth="-Infinity" 
+         prefHeight="600.0" 
+         prefWidth="900.0" 
+         xmlns="http://javafx.com/javafx/8.0.171" 
+         xmlns:fx="http://javafx.com/fxml/1" 
+         fx:controller="duke.MainWindow"
+>
     <children>
-        <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <GridPane fx:id="GridPane" 
+                  AnchorPane.bottomAnchor="0.0" 
+                  AnchorPane.leftAnchor="0.0" 
+                  AnchorPane.rightAnchor="0.0" 
+                  AnchorPane.topAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES"/>
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints vgrow="SOMETIMES"/>
             </rowConstraints>
-            <children>
-                <TextField fx:id="userInput" onAction="#handleUserInput" minHeight="41.0" minWidth="324.0" AnchorPane.bottomAnchor="1.0" GridPane.columnIndex="0" GridPane.rowIndex="3"  GridPane.valignment="CENTER"/>
-                <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleUserInput" minHeight="41.0" minWidth="76.0" text="Send" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER"/>
-                <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" fitToWidth="true" vvalue="1.0" maxHeight="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
-                    <content>
-                        <VBox fx:id="dialogContainer" maxHeight="Infinity" prefWidth="880.0" />
-                    </content>
-                </ScrollPane>
-            </children>
+           <children>
+               <TextField styleClass="textFieldStyling"
+                          fx:id="userInput"
+                          onAction="#handleUserInput"
+                          minHeight="41.0"
+                          maxWidth="Infinity"
+                          AnchorPane.bottomAnchor="1.0"
+                          GridPane.columnIndex="0"
+                          GridPane.rowIndex="3"
+                          GridPane.valignment="CENTER"
+                          promptText="Enter your command here..."
+                          focusTraversable="false"
+               />
+               <Button fx:id="sendButton"
+                       mnemonicParsing="false"
+                       onAction="#handleUserInput"
+                       minHeight="41.0"
+                       minWidth="76.0"
+                       text=">"
+                       GridPane.columnIndex="1"
+                       GridPane.rowIndex="3"
+                       GridPane.valignment="CENTER"
+                       styleClass="buttonStyling"
+                       AnchorPane.bottomAnchor="12.0"
+                       AnchorPane.rightAnchor="8.0"
+               />
+               <ScrollPane  fx:id="scrollPane"
+                            hbarPolicy="NEVER"
+                            hvalue="1.0"
+                            fitToWidth="true"
+                            vvalue="1.0"
+                            maxHeight="Infinity"
+                            GridPane.columnIndex="0"
+                            GridPane.rowIndex="0"
+                            GridPane.columnSpan="2"
+               >
+                   <content>
+                       <VBox styleClass="mainBodyStyling"
+                             fx:id="dialogContainer"
+                             minHeight="559"
+                             maxHeight="Infinity"
+                             minWidth="-Infinity"
+                       >
+                           <padding>
+                               <Insets bottom="45.0" top="15.0"/>
+                           </padding>
+                       </VBox>
+                   </content>
+               </ScrollPane>
+           </children>
         </GridPane>
     </children>
-</AnchorPane>
+</fx:root>
 

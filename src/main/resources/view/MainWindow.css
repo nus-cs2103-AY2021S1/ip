@@ -1,0 +1,10 @@
+.textFieldStyling {
+    -fx-background-color: white; 
+    -fx-text-fill: #638bfb;
+}
+.buttonStyling {
+    -fx-background-color: white;
+}
+.mainBodyStyling {
+    -fx-background-color: #e9eff9;
+}

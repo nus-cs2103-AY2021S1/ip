@@ -7,7 +7,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -23,8 +25,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image ashley = new Image(this.getClass().getResourceAsStream("/images/jumpingman.png"));
-    private Image dennis = new Image(this.getClass().getResourceAsStream("/images/shocklim.png"));
+    private Image stitch = new Image(this.getClass().getResourceAsStream("/images/stitch.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image welcomeStitch = new Image(this.getClass().getResourceAsStream("/images/welcomestitch.png"));
 
     @FXML
     public void initialize() {
@@ -34,9 +37,8 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         Ui ui = new Ui();
-        String startingMessage = ui.startMessage();
         String greet = ui.greetings();
-        dialogContainer.getChildren().addAll(OpeningBox.getOpeningMessage(startingMessage, greet, dennis));
+        dialogContainer.getChildren().addAll(OpeningBox.getOpeningMessage(greet, welcomeStitch));
     }
 
     /**
@@ -48,8 +50,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, ashley),
-                DialogBox.getDukeDialog(response, dennis)
+                DialogBox.getUserDialog(input, user),
+                DialogBox.getDukeDialog(response, stitch)
         );
         userInput.clear();
     }

@@ -7,9 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class UiTest {
-    private static final String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    private static final String HELLO_DUKE = "      " + "Hello! I'm Duke ^.^";
-    private static final String QUESTION = "What can I do for you?";
+    private static final String HELLO_DUKE = "Welcome back";
     private static final String GOODBYE_MSG = "Bye ^.^, Hope to see you again soon!!!";
     private Ui ui;
     @BeforeEach
@@ -28,7 +26,7 @@ public class UiTest {
     @DisplayName("user's login greetings")
     public void testGreetings() {
         String greetingMessage = ui.greetings();
-        String str = HELLO_DUKE + "\n" + QUESTION + "\n";
+        String str = HELLO_DUKE + "\n";
         assertEquals(str, greetingMessage);
     }
     @Test
