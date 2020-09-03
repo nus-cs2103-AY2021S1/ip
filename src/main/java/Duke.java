@@ -1,9 +1,12 @@
 import duke.command.Command;
+import duke.command.ExitCommand;
 import duke.exception.DukeException;
 import duke.util.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
+
+import java.util.Scanner;
 
 //TODO: Stretch Goals: Level 8- Use date related command
 
@@ -51,16 +54,41 @@ public class Duke {
 
     /**
      * Executes the {@code Duke} programme.
+     *
+     * @deprecated For GUI, use {@link #run(String)} instead.
      */
+    @Deprecated
     public void run() {
+        Scanner scanner = new Scanner(System.in);
         while (!Command.isTerminated) {
             try {
-                String input = ui.readCommand();
+                String input = scanner.nextLine();
                 Command c = Parser.parse(input);
                 c.execute(taskList, ui);
             } catch (DukeException de) {
                 ui.printError(de);
             }
+        }
+    }
+
+    /**
+     * Executes the {@code Duke} programe using the input provided
+     *
+     * @param input Command to run.
+     */
+    public void run(String input) {
+        if (Command.isTerminated)
+            return;
+        try {
+            Command c = Parser.parse(input);
+            c.execute(taskList, ui);
+
+            if (c instanceof ExitCommand) {
+                terminate();
+            }
+
+        } catch (DukeException de) {
+            ui.printError(de);
         }
     }
 
@@ -78,4 +106,12 @@ public class Duke {
         duke.terminate();
     }
 
+    /**
+     * Retrieves the output buffer to display in UI.
+     *
+     * @return output string.
+     */
+    public String getUiUpdate() {
+        return ui.flush();
+    }
 }

@@ -1,3 +1,4 @@
+import duke.command.Command;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -5,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class MainWindow extends AnchorPane {
     @FXML
@@ -33,8 +35,15 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private void handleUserInput() {
+        if (Command.isTerminated) {
+            Stage stage = (Stage) userInput.getScene().getWindow();
+            stage.close();
+            return;
+        }
+
         String input = userInput.getText();
-        String response = getResponse(input);
+        duke.run(input);
+        String response = duke.getUiUpdate();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -43,8 +52,14 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty()); //Set auto scroll
     }
 
-    private String getResponse(String input) {
-        return "Duke heard: \n" + input;
+    public void update() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(duke.getUiUpdate(), dukeImage)
+        );
+    }
+
+    public void handleCloseBtnClicked() {
+        duke.run("exit");
     }
 }
 

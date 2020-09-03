@@ -17,8 +17,15 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.setTitle("Duke Echo");
+            fxmlLoader.<MainWindow>getController().update();
+            stage.setTitle("Duke Bot");
             stage.show();
+
+            //Add action when pressing on close button
+            stage.setOnCloseRequest((event -> {
+                fxmlLoader.<MainWindow>getController().handleCloseBtnClicked();
+            }));
+
 
         } catch (IOException e) {
             e.printStackTrace();

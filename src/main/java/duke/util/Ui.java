@@ -4,34 +4,46 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * This class handles the user-specific inputs and outputs.
  */
 public class Ui {
 
-    private Scanner scanner;
+    /**
+     * Output buffer for GUI output.
+     * Only writable from println()
+     * Only erasable from flush()
+     * */
+    private String outputBuffer = "";
 
     /**
      * Constructs a new UI object, and displays a welcome message.
      */
     public Ui() {
         intro();
-        this.scanner = new Scanner(System.in);
     }
 
     /**
-     * Displays output messages enclosed in top and bottom horizontal lines.
+     * Prints the output into the class buffer.
      *
-     * @param message message to be output.
+     * @param message message to be appended to the buffer.
      */
-    private static void println(String... message) {
-        System.out.println("\t____________________________________________________________");
-        for (String s : message) {
-            System.out.println("\t" + s);
+    private void println(String... message) {
+        for (int i = 0; i < message.length; i++) {
+            outputBuffer += message[i] + "\n";
         }
-        System.out.println("\t____________________________________________________________");
+    }
+
+    /**
+     * Retrieves the output buffer to display in GUI.
+     *
+     * @return output string.
+     */
+    public String flush() {
+        String output = this.outputBuffer;
+        outputBuffer = "";
+        return output;
     }
 
     private void intro() {
@@ -81,7 +93,7 @@ public class Ui {
      * Displays the exit page.
      */
     public void showExit() {
-        println("Bye. Hope to see you again soon!");
+        println("Saved your file! Hope to see you again soon!", "\n\nEnter any character to exit . . .");
     }
 
     /**
@@ -124,15 +136,6 @@ public class Ui {
      */
     public void printError(DukeException de) {
         println(de.getMessage());
-    }
-
-    /**
-     * Reads the user input.
-     *
-     * @return The user's input as String.
-     */
-    public String readCommand() {
-        return scanner.nextLine();
     }
 
     /**

@@ -41,7 +41,7 @@ public class DialogBox extends HBox {
         this.displayPicture.setClip(new Circle(45,50,45));
         this.setPadding(new Insets(20,10,20,10));
         this.dialog.setPadding(new Insets(0,10,0,10));
-        this.dialog.setTextAlignment(TextAlignment.LEFT);
+        this.dialog.setTextAlignment(TextAlignment.RIGHT);
     }
 
     private void flip() {
@@ -49,7 +49,7 @@ public class DialogBox extends HBox {
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
         this.setAlignment(Pos.TOP_LEFT);
-        this.dialog.setTextAlignment(TextAlignment.RIGHT);
+        this.dialog.setTextAlignment(TextAlignment.LEFT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

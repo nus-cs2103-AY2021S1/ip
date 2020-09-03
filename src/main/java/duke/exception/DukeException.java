@@ -11,6 +11,6 @@ public class DukeException extends RuntimeException {
      * @param msg Message to be displayed for user.
      */
     public DukeException(String msg) {
-        super(":( \n\tI dont understand this... \n\t" + msg);
+        super(":( \nI dont understand this... \n" + msg);
     }
 }
