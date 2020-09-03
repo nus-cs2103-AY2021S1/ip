@@ -19,7 +19,7 @@ public class Ui {
     public Ui() {}
 
     /**
-     * Read the input command from user.
+     * Reads the input command from user.
      *
      * @return String user command
      */
@@ -47,7 +47,7 @@ public class Ui {
     }
 
     /**
-     * gets the template of exception message, where
+     * Gets the template of exception message, where
      * the exception messages are in between two lines.
      *
      * @param exception String exception message.
@@ -92,7 +92,7 @@ public class Ui {
     }
 
     /**
-     * Indent the inputted message by two tabs.
+     * Indents the inputted message by two tabs.
      *
      * @param input String input.
      * @return String indented message.
@@ -102,7 +102,7 @@ public class Ui {
     }
 
     /**
-     * Indent the inputted exception message by two tabs.
+     * Indents the inputted exception message by two tabs.
      *
      * @param message String exception message.
      * @return String indented exception message.

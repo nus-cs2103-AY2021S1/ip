@@ -37,7 +37,7 @@ public class Duke {
     /**
      * Constructs a new duke.Duke with the specified filepath.
      *
-     * @param filepath file path
+     * @param filepath file path.
      */
     public Duke(String filepath) {
         ui = new Ui();

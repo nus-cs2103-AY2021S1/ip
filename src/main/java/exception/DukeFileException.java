@@ -11,7 +11,7 @@ public class DukeFileException extends DukeException {
      * The result is "OOPS!! Something went wrong when
      * accessing your file."
      *
-     * @return String exception message
+     * @return String exception message.
      */
     @Override
     public String toString() {

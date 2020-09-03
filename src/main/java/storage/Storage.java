@@ -25,14 +25,14 @@ public class Storage {
     private File file;
 
     /**
-     * An empty constructor to initialize Storage object.
+     * Constructs a new Storage object.
      */
     public Storage() {}
 
     /**
-     * A constructor to create Storage by taking file path as its arguments.
+     * Constructs a new Storage object with file path as its arguments.
      * It would instantly create the directory and the file if
-     * the filepath specified was not found in user's local.
+     * the filepath specified was found in user's local.
      *
      * @param filepath String The path of the file.
      * @throws IOException This is exception would be thrown if the system
@@ -55,7 +55,7 @@ public class Storage {
     }
 
     /**
-     * This would load the data from the given file path, turn into
+     * Loads the data from the given file path, turn into
      * various type of Task object (based on the data), and return
      * a list of task.
      *
@@ -75,7 +75,7 @@ public class Storage {
     }
 
     /**
-     * This method would update the external file of the given
+     * Updates the external file of the given
      * file path, by taking a list of Task as it's argument.
      *
      * @param tasks TaskList A list of task.

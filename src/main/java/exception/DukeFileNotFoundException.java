@@ -2,7 +2,7 @@ package exception;
 
 /**
  * Thrown to notify user that system failed to find
- * the external file
+ * the external file.
  */
 public class DukeFileNotFoundException extends DukeException {
 

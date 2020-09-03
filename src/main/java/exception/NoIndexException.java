@@ -3,7 +3,7 @@ package exception;
 /**
  * Thrown to notify user that they forgot to specify
  * index number of the tasks list when they run
- * DoneCommand or DeleteCommand
+ * DoneCommand or DeleteCommand.
  */
 public class NoIndexException extends DukeException {
 

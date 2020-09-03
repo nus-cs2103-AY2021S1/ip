@@ -13,7 +13,7 @@ public class DukeDateTimeParserException extends DukeException {
      * The result is "OOPS!! You have to enter the
      * date time format correctly".
      *
-     * @return String exception message
+     * @return String exception message.
      */
     @Override
     public String toString() {

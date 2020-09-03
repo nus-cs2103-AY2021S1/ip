@@ -12,7 +12,7 @@ public class DukeException extends Exception {
      * Returns a short description of this throwable.
      * The result is "OOPS!!"
      *
-     * @return String exception message
+     * @return String exception message.
      */
     @Override
     public String toString() {

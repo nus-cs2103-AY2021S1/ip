@@ -41,12 +41,12 @@ public class Parser {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
-     * An empty constructor to initialize Parser object.
+     * Constructs a new Parser object.
      */
     public Parser() {}
 
     /**
-     * This method parse a file path into parent directory and the file name.
+     * Parses a file path into parent directory and the file name.
      *
      * @param filepath String The path of a file
      * @return String[] array of separated String.
@@ -57,7 +57,7 @@ public class Parser {
 
 
     /**
-     * This method parse the content of a file line by line and
+     * Parses the content of a file line by line and
      * turns into the correct Task object.
      *
      * @param line String Each line of strings in the file.
@@ -107,7 +107,7 @@ public class Parser {
     }
 
     /**
-     * This method parse given user command and turns it into and
+     * Parses given user command and turns it into and
      * Command object.
      *
      * @param command String User command.
@@ -146,7 +146,7 @@ public class Parser {
     }
 
     /**
-     * This method would parse user command(usually DeleteCommand and
+     * Parses user command (usually DeleteCommand and
      * DoneCommand), returns the number that was passed in the command.
      *
      * @param input user command.
@@ -164,7 +164,7 @@ public class Parser {
     }
 
     /**
-     * This method would parse user command(usually ShowAfterCommand
+     * Parses user command(usually ShowAfterCommand
      * or ShowBeforeCommand) and returns the date that was passed in the
      * command.
      *
@@ -183,7 +183,7 @@ public class Parser {
     }
 
     /**
-     * This method would return Map(String,String) that contains task's description and
+     * Returns Map(String,String) that contains task's description and
      * task's date-time. Usually used by DeadlineCommand and EventCommand.
      *
      * @param input user command.
@@ -206,7 +206,7 @@ public class Parser {
     }
 
     /**
-     * This method would parse specific TodoCommand and return the task description.
+     * Parses specific TodoCommand and return the task description.
      *
      * @param input user command.
      * @return String task description of type TodoTask.
@@ -222,7 +222,7 @@ public class Parser {
     }
 
     /**
-     * Finds the keyword specified in user command
+     * Finds the keyword specified in user command.
      *
      * @param input String user command.
      * @return String keyword
