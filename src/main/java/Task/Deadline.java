@@ -43,7 +43,7 @@ public class Deadline extends Task {
     @Override
     public String saveFormat() {
         String base = "[D] ";
-        if (taskCompleted) {
+        if (isCompleted) {
             base = base + "[✓]";
         } else {
             base = base + "[✗]";
@@ -60,7 +60,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String base = "[D] ";
-        if (taskCompleted) {
+        if (isCompleted) {
             base = base + "[✓]";
         } else {
             base = base + "[✗]";

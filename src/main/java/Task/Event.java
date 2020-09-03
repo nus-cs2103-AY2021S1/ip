@@ -45,7 +45,7 @@ public class Event extends Task {
     @Override
     public String saveFormat() {
         String base = "[E] ";
-        if (taskCompleted) {
+        if (isCompleted) {
             base = base + "[✓]";
         } else {
             base = base + "[✗]";
@@ -62,7 +62,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String base = "[E] ";
-        if (taskCompleted) {
+        if (isCompleted) {
             base = base + "[✓]";
         } else {
             base = base + "[✗]";

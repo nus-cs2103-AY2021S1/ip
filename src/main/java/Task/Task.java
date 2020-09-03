@@ -13,12 +13,12 @@ public abstract class Task {
     /**
      * position is the location of the task in the TaskList.
      * taskDescription is the contents of the task.
-     * taskCompleted is the indicator of whether the task has been done or not.
+     * isCompleted is the indicator of whether the task has been done or not.
      * date is the scheduled time for the task to occur.
      */
     protected int position;
     protected String taskDescription;
-    protected boolean taskCompleted;
+    protected boolean isCompleted;
     protected LocalDateTime date;
 
     /**
@@ -28,7 +28,7 @@ public abstract class Task {
      */
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
-        taskCompleted = false;
+        isCompleted = false;
     }
 
     /**
@@ -42,7 +42,7 @@ public abstract class Task {
      * Changes the task from incomplete to completed.
      */
     public void completeTask() {
-        taskCompleted = true;
+        isCompleted = true;
     }
 
     /**

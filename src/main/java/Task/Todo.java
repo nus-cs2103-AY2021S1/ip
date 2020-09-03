@@ -23,7 +23,7 @@ public class Todo extends Task {
     @Override
     public String saveFormat() {
         String base = "[T] ";
-        if (taskCompleted) {
+        if (isCompleted) {
             base = base + "[✓]";
         } else {
             base = base + "[✗]";
@@ -40,7 +40,7 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String base = "[T] ";
-        if (taskCompleted) {
+        if (isCompleted) {
             base = base + "[✓]";
         } else {
             base = base + "[✗]";
