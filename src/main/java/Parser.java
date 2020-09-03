@@ -35,24 +35,24 @@ public class Parser {
                         throw new DukeException(":( OOPS!!! The description of a deadline cannot be empty.");
                     }
                     String rest = command.substring(9);
-                    int by_position = rest.indexOf("/by ");
-                    if (by_position == -1) {
+                    int byPosition = rest.indexOf("/by ");
+                    if (byPosition == -1) {
                         throw new DukeException(":( OOPS!!! Deadline time specification not found.");
                     }
-                    String description = rest.substring(0, by_position - 1);
-                    String by = rest.substring(by_position + 4);
+                    String description = rest.substring(0, byPosition - 1);
+                    String by = rest.substring(byPosition + 4);
                     newTask = new Deadline(description, by);
                 } else if (command.startsWith("event")) {
                     if (command.length() < 6) {
                         throw new DukeException(":( OOPS!!! The description of an event cannot be empty.");
                     }
                     String rest = command.substring(6);
-                    int at_position = rest.indexOf("/at ");
-                    if (at_position == -1) {
+                    int atPosition = rest.indexOf("/at ");
+                    if (atPosition == -1) {
                         throw new DukeException(":( OOPS!!! Event time specification not found.");
                     }
-                    String description = rest.substring(0, at_position - 1);
-                    String at = rest.substring(at_position + 4);
+                    String description = rest.substring(0, atPosition - 1);
+                    String at = rest.substring(atPosition + 4);
                     newTask = new Event(description, at);
                 }
 

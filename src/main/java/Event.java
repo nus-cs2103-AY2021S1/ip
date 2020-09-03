@@ -1,18 +1,32 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
-    protected String at;
+    protected LocalDateTime atTime;
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-M-d H:mm");
+        try {
+            this.atTime = LocalDateTime.parse(at, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Cannot parse event time.");
+        }
     }
 
     public Event(String description, boolean isDone, String at) {
         super(description, isDone);
-        this.at = at;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-M-d H:mm");
+        try {
+            this.atTime = LocalDateTime.parse(at, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Cannot parse event time, time set as null.");
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.at);
+        return String.format("[E]%s (at: %s)", super.toString(), this.atTime);
     }
 }
