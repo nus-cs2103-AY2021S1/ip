@@ -21,27 +21,27 @@ public class Parser {
      * @param command   Command given to the chatbot.
      * @return Commands from the Commands ENUM class
      */
-    public Commands analyse(String command) {
+    public Command analyse(String command) {
         if (command.startsWith("list")) {
-            return Commands.LIST;
+            return Command.LIST;
         } else if (command.startsWith("find")) {
-            return Commands.FIND;
+            return Command.FIND;
         } else if (command.startsWith("todo")) {
-            return Commands.TODO;
+            return Command.TODO;
         } else if (command.startsWith("deadline")) {
-            return Commands.DEADLINE;
+            return Command.DEADLINE;
         } else if (command.startsWith("event")) {
-            return Commands.EVENT;
+            return Command.EVENT;
         } else if (command.startsWith("delete")) {
-            return Commands.DELETE;
+            return Command.DELETE;
         } else if (command.startsWith("blah")) {
-            return Commands.BLAH;
+            return Command.BLAH;
         } else if (command.startsWith("done")) {
-            return Commands.DONE;
+            return Command.DONE;
         } else if (command.startsWith("bye")) {
-            return Commands.BYE;
+            return Command.BYE;
         } else {
-            return Commands.TASK;
+            return Command.TASK;
         }
     }
 }

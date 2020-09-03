@@ -3,7 +3,7 @@ package duke.classes;
 /**
  * Enum class for categorising the commands given to the scanner.
  */
-public enum Commands {
+public enum Command {
     FIND {
         @Override
         public String toString() {

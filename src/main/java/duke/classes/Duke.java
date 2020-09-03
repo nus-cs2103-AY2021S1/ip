@@ -75,7 +75,7 @@ public class Duke {
         String word = parser.scan.nextLine();
 
         while (!word.equals("bye")) {
-            Commands currentCommand = parser.analyse(word);
+            Command currentCommand = parser.analyse(word);
             assign(currentCommand, word);
             word = parser.scan.nextLine();
         }
@@ -101,7 +101,7 @@ public class Duke {
      * @param task Actual task
      */
 
-    public String assign(Commands command, String task) {
+    public String assign(Command command, String task) {
         String completedString = "";
         switch (command) {
         case LIST:
@@ -156,14 +156,14 @@ public class Duke {
 
     /**
      * Void method that abstracts away the logic behind assigning a method based on task type.
-     * @param commands Commands of TODO, DEADLINE & EVENT
+     * @param command Commands of TODO, DEADLINE & EVENT
      * @param task Actual activity
      */
 
-    public String decideTaskType(Commands commands, String task) {
+    public String decideTaskType(Command command, String task) {
         Task todo = null;
         try {
-            switch (commands) {
+            switch (command) {
             case TODO:
                 todo = taskList.storeTodo(task);
                 break;
@@ -189,7 +189,7 @@ public class Duke {
     public String getResponse(String input) {
         ui = new Ui();
         parser = new Parser();
-        Commands currentCommand = parser.analyse(input);
+        Command currentCommand = parser.analyse(input);
         String response = assign(currentCommand, input);
         return "Duke says: \n" + response;
     }

@@ -1,4 +1,4 @@
-package duke.classes;
+package duke.gui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -15,7 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
-
+/**
+ * Class that defines the dialog box during interactions between user and Duke.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label text;

@@ -1,5 +1,7 @@
-package duke.classes;
+package duke.gui;
 
+import duke.classes.Duke;
+import duke.classes.Ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,7 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
-
+/**
+ * Class that defines the frontend page for the main window.
+ */
 public class MainWindow {
     @FXML
     private ScrollPane scrollPane;
