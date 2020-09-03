@@ -1,13 +1,13 @@
-package duke;
+package duke.ui.visualUI;
 
-import duke.ui.Ui;
+import duke.Duke;
+import duke.ui.textUI.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 /**

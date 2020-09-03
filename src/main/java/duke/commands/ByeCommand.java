@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import duke.ui.textUI.Ui;
 
 /**
  * Class that simulates the bye command of the user.
@@ -22,6 +22,9 @@ public class ByeCommand extends Command {
     }
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
         return endProgram(tasks, ui, storage);
     }
 
@@ -36,7 +39,6 @@ public class ByeCommand extends Command {
     public String endProgram(TaskList tasks, Ui ui, Storage storage) {
         String bye = ui.goodBye();
         storage.record(tasks);
-        setExitStatus(true);
         return bye;
     }
 }

@@ -147,6 +147,7 @@ public class Parser {
      * YYYY-MM-DD HHMM or YYYY-MM-DD HMMM, an exception will be thrown to notify the user.
      */
     public static LocalDateTime formatDateTime(String dateAndTime) throws InvalidFormatDateException {
+        assert dateAndTime != null;
         String[] dateFormat = dateAndTime.split(" ", 2);
         String[] date = dateFormat[0].split("-");
         String time;
@@ -163,6 +164,8 @@ public class Parser {
                 throw new InvalidFormatDateException();
             }
         }
+        assert date != null;
+        assert time != null;
         try {
             int year = Integer.parseInt(date[0]);
             int month = Integer.parseInt(date[1]);
@@ -189,6 +192,7 @@ public class Parser {
      */
     public static Command parse(String message) throws InvalidFormatByeException, InvalidFormatListException,
             InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException, InvalidFormatFindException {
+        assert message != null;
         String[] inputArr = message.trim().replaceAll("  +", " ").split(" ", 2);
         inputArr[0] = inputArr[0].toLowerCase();
         if (isBye(inputArr[0])) {
