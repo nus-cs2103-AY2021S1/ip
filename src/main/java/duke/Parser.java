@@ -1,11 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.ListCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
+import duke.command.*;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -45,6 +40,8 @@ public class Parser {
                 return new AddCommand(event);
             case "DELETE":
                 return new DeleteCommand(Integer.parseInt(splitCommands[1]));
+            case "FIND":
+                return new FindCommand(splitCommands[1]);
             case "LIST":
                 return new ListCommand();
             case "DONE":

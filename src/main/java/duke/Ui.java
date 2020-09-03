@@ -65,6 +65,16 @@ public class Ui {
     }
 
     /**
+     * Shows a list of tasks from the task list which contains a common keyword.
+     *
+     * @param keyword the specified keyword.
+     * @param tasks the task list.
+     */
+    public void showFindMessage(String keyword, TaskList tasks) {
+        printLines("Here are the matching tasks in your list:\n" + tasks.getMatchingTasks(keyword));
+    }
+
+    /**
      * Shows a message to the user that a task has been successfully added into the task list.
      * Duke will then recalculate the total number of tasks and inform the user.
      *
