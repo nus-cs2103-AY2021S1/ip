@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> ls = new ArrayList<>();
+    private ArrayList<Task> ls = new ArrayList<>();
 
     public TaskList(ArrayList<Task> list) {
         ls.addAll(list);
@@ -9,7 +9,8 @@ public class TaskList {
 
     /**
      * Adds param task into this.ls
-     * @param task
+     *
+     * @param task task to be added to list
      */
     void add(Task task) {
         ls.add(task);
@@ -17,6 +18,7 @@ public class TaskList {
 
     /**
      * Returns size of this.ls
+     *
      * @return int
      */
     int size() {
@@ -25,7 +27,8 @@ public class TaskList {
 
     /**
      * Marks the task at index in this.ls as done
-     * @param index
+     *
+     * @param index index of task that is done
      */
     void done(int index) {
         ls.get(index).done();
@@ -33,7 +36,8 @@ public class TaskList {
 
     /**
      * Removes the task at index in this.ls
-     * @param index
+     *
+     * @param index index of task to be removed
      */
     void remove(int index) {
         ls.remove(index);
@@ -41,7 +45,7 @@ public class TaskList {
 
     /**
      * Returns task at index in this.ls
-     * @param index
+     * @param index index of task to be returned
      * @return Task
      */
     Task get(int index) {
@@ -50,8 +54,8 @@ public class TaskList {
 
     String find(String match) {
         String s = "";
-        for(Task task : ls) {
-            if(task.toString().contains(match)) {
+        for (Task task : ls) {
+            if (task.toString().contains(match)) {
                 s = s.concat(task.toString());
                 s = s.concat("\n");
             }
@@ -62,7 +66,7 @@ public class TaskList {
     @Override
     public String toString() {
         String s = "";
-        for(Task task : ls) {
+        for (Task task : ls) {
             s = s.concat(task.toString());
             s = s.concat("\n");
         }

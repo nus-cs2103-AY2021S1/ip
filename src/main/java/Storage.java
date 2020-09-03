@@ -1,4 +1,9 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Storage {
@@ -13,6 +18,7 @@ public class Storage {
      * Calls initFile first as a check
      * Reads the file at the filepath and
      * parses each line as a task to add to list
+     *
      * @return array list of tasks in the file
      */
     ArrayList<Task> loadFile() {
@@ -23,14 +29,14 @@ public class Storage {
             File f = new File(this.filePath);
             BufferedReader reader = new BufferedReader(new FileReader(f));
             //loads txt into ls
-            while(true) {
+            while (true) {
                 String line = reader.readLine();
-                if(line == null || line.isEmpty()) {
+                if (line == null || line.isEmpty()) {
                     //no more tasks
                     break;
                 }
                 Task task = Task.parseToTask(line);
-                if(task != null) {
+                if (task != null) {
                     ls.add(task);
                 }
             }
@@ -44,7 +50,8 @@ public class Storage {
     /**
      * Saves the param TaskList into
      * the file at the specified filepath
-     * @param ls
+     *
+     * @param ls task list
      */
     void saveFile(TaskList ls) {
         File f = new File(this.filePath);
@@ -64,17 +71,17 @@ public class Storage {
     void initFile() {
         File dir = new File ("data");
         //create dir if not there
-        if(!dir.isDirectory() ) {
-            if(!dir.mkdir()) {
+        if (!dir.isDirectory()) {
+            if (!dir.mkdir()) {
                 System.out.println("Error creating folder");
             }
         }
 
         File f = new File(this.filePath);
         //create file if not there
-        if(!f.exists()) {
+        if (!f.exists()) {
             try {
-                if(!f.createNewFile()) {
+                if (!f.createNewFile()) {
                     System.out.println("Error creating file");
                 }
             } catch (IOException ex) {
