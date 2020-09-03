@@ -137,7 +137,7 @@ public class Parser {
             return new AddCommand(inputArr);
         case KEYWORD_DELETE:
             // checking if the input is valid
-            if (inputArr.length == 1) {
+            if (inputArr.length == 1 || !isNumber(inputArr[1])) {
                 throw new InvalidFormatDeleteException();
             }
             return new DeleteCommand(inputArr);

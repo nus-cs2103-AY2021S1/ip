@@ -1,6 +1,7 @@
 package duke.ui.textUI;
 
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 /**
  * Class that simulates the reaction of duke to the user's input
@@ -43,11 +44,9 @@ public class Ui {
      * @param messageList messages to be wrapped around the formatter.
      */
     public String messageFormatter(String... messageList) {
-        StringBuffer s = new StringBuffer("");
-        for (int i = 0; i < messageList.length; i++) {
-            s.append(messageList[i]).append("\n");
-        }
-        return s.toString();
+        StringBuffer finalMessage = new StringBuffer();
+        Stream.of(messageList).forEachOrdered(message -> finalMessage.append(message).append("\n"));
+        return finalMessage.toString();
     }
 
     /**

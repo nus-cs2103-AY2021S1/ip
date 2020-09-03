@@ -4,6 +4,8 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.textUI.Ui;
 
+import java.util.stream.IntStream;
+
 /**
  * Class that simulates the add command of the user.
  */
@@ -40,12 +42,9 @@ public class ListCommand extends Command {
         if (tasks.size() == 0) {
             return ui.messageFormatter(EMPTY_MSG);
         } else {
-            String[] listMessage = new String[tasks.size() + 1];
-            listMessage[0] = SHOW_TASK;
-            for (int i = 1; i <= tasks.size(); i++) {
-                listMessage[i] = i + ". " + tasks.get(i - 1).toString();
-            }
-            return ui.messageFormatter(listMessage);
+            StringBuffer finalMessage = new StringBuffer(SHOW_TASK).append("\n");
+            IntStream.range(1, tasks.size() + 1).forEach(num -> finalMessage.append(tasks.get(num - 1)).append("\n"));
+            return ui.messageFormatter(finalMessage.toString());
         }
     }
 }
