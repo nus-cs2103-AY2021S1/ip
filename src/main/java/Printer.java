@@ -36,7 +36,7 @@ public class Printer {
   /**
    * Prints the listing size message.
    *
-   * @param l a listing
+   * @param l    a listing
    * @param size the current size of the ArrayList in TaskList.java
    */
   protected void printListing(Listing l, int size) {
@@ -67,9 +67,19 @@ public class Printer {
   }
 
   /**
+   * Prints the undefinedExceptionMessage message.
+   */
+  protected void dateTimeParseExceptionMessage() {
+    System.out
+        .println(LINE + "\n"
+            + "     ☹ OOPS!!! I'm sorry, but that date is invalid. Try using a new date in the format YYYY-MM-DD :-("
+            + "\n" + LINE);
+  }
+
+  /**
    * Prints the delete message
    *
-   * @param size the current size of the ArrayList in TaskList.java
+   * @param size    the current size of the ArrayList in TaskList.java
    * @param listing the detail of the listing
    */
   protected void deleteMessage(int size, String listing) {

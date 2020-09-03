@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
@@ -8,18 +10,19 @@ import java.util.Scanner;
 
 public class Bot {
 
+  Printer printer = new Printer(); //ui
+  Parser parser = new Parser();
+  Storage storage = new Storage("./data/duke.txt");
+  TaskList taskList = new TaskList(storage.load());
+  Scanner sc = new Scanner(System.in);
+  LocalDate localDate;
+
   /**
    * Prints the greeting when created.
    */
   public Bot() {
     printer.greeting();
   }
-
-  Printer printer = new Printer(); //ui
-  Parser parser = new Parser();
-  Storage storage = new Storage("./data/duke.txt");
-  TaskList taskList = new TaskList(storage.load());
-  Scanner sc = new Scanner(System.in);
 
   /**
    * Checks for the next line as inputted by the user. Parses the message through parser.getDetails(
@@ -61,6 +64,8 @@ public class Bot {
           if (commandDetail == null || dateInfo == null) {
             throw new NoDescriptionException("deadline");
           } else {
+            //System.out.println(dateInfo);
+            localDate.parse(dateInfo);
             taskList.addListings(parsedInfo, printer, storage);
           }
           break;
@@ -81,6 +86,8 @@ public class Bot {
         default:
           throw new UndefinedException();
         }
+      } catch(DateTimeParseException e) {
+        printer.dateTimeParseExceptionMessage();
       } catch (NoDescriptionException e) { //incomplete messages
         printer.noDescriptionMessage(e.s);
       } catch (UndefinedException e) { //unknown commands

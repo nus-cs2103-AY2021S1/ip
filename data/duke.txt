@@ -1,9 +1,14 @@
-T | 1 |  b
-T | 0 |  a
 D | 0 |  a | 2019-02-02
-T | 0 |  a
-T | 0 |  b
-T | 0 |  book
 T | 0 |  event
 T | 0 |  event keeping
-T | 0 |  book keeping
+D | 0 |  do gui | 2020-09-04
+E | 0 | upload work  | later
+D | 0 |  fix deadline buy | 2020-09-04
+T | 0 |  get book
+D | 0 |  fix find buy | 2020-09-04
+T | 0 |  a
+T | 0 |  a
+T | 0 |  a
+T | 0 |  a
+D | 0 |  die | 2020-02-02
+D | 0 |  die | 2020-02-20
