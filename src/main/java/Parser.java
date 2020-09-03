@@ -21,6 +21,8 @@ public class Parser {
             try {
                 return new SimpleDateFormat(formatString).parse(str);
             } catch (ParseException e) {
+                // if str is not of that date format, can continue to check if it is of other formats
+                // try catch necessary otherwise there might be a RunTime error
                 continue;
             }
         }
@@ -29,77 +31,77 @@ public class Parser {
     }
 
     /**
-     * Parses in user inputs and generates commands based on the inputs.
+     * Parses in a user input that is a String and generates a command based on the input.
      *
-     * @param display User input.
-     * @return Command based on display.
+     * @param userInput
+     * @return Command based on userInput.
      * @throws DukeException
      * @throws TaskException
      */
-    public static Command parse(String display) throws DukeException, TaskException {
-        if (display.equals("list")) {
+    public static Command parse(String userInput) throws DukeException, TaskException {
+        if (userInput.equals("list")) {
             return new ListCommand(null, null);
-        } else if (display.length() >= 4 && display.startsWith("done")) {
+        } else if (userInput.startsWith("done")) {
             try {
-                int idx = Integer.parseInt(String.valueOf(display.charAt(5))) - 1;
+                int idx = Integer.parseInt(userInput.substring(5)) - 1;
                 return new DoneCommand(idx);
-            } catch (NumberFormatException ex) {
-                throw new DukeException("task index is not a valid number");
+            } catch (StringIndexOutOfBoundsException | NumberFormatException ex) {
+                throw new DukeException("task index is empty / not a valid number");
             }
-        } else if (display.length() >= 6 && display.startsWith("delete")) {
+        } else if (userInput.startsWith("delete")) {
             try {
-                int idx = Integer.parseInt(String.valueOf(display.charAt(7))) - 1;
+                int idx = Integer.parseInt(userInput.substring(7)) - 1;
                 return new DeleteCommand(idx);
-            } catch (IndexOutOfBoundsException ex) {
-                throw new DukeException("task index is not a valid number");
+            } catch (StringIndexOutOfBoundsException | NumberFormatException ex) {
+                throw new DukeException("task index is empty / not a valid number");
             }
-        } else if (display.length() >= 12 && display.startsWith("tasks due on")) {
-            if (parseDate(display.substring(13)) == null) {
-                throw new DukeException("time is of the wrong format");
+        } else if (userInput.startsWith("tasks due on")) {
+            if (userInput.length() == 12 || userInput.substring(12).isBlank() || parseDate(userInput.substring(13)) == null) {
+                throw new DukeException("time is empty / of the wrong format");
             } else {
-                return new ListCommand(parseDate(display.substring(13)), null);
+                return new ListCommand(parseDate(userInput.substring(13)), null);
             }
-        } else if (display.startsWith("find")) {
-            if (display.substring(4).isBlank()) {
-                throw new DukeException("keyword is absent");
+        } else if (userInput.startsWith("find")) {
+            if (userInput.length() == 4 || userInput.substring(4).isBlank()) {
+                throw new DukeException("keyword is empty");
             } else {
-                return new ListCommand(null, display.substring(5));
+                return new ListCommand(null, userInput.substring(5));
             }
-        } else if (display.equals("bye")) {
+        } else if (userInput.equals("bye")) {
             return new ExitCommand();
         } else {
-            if (display.length() >= 4 && display.startsWith("todo")) {
-                if (display.length() == 4 || display.substring(4).isBlank()) {
-                    throw new TaskException(TaskType.TODO, "description", "cannot be empty.");
+            if (userInput.startsWith("todo")) {
+                if (userInput.length() == 4 || userInput.substring(4).isBlank()) {
+                    throw new TaskException(TaskType.TODO, "description", TaskExceptionType.EMPTY);
                 } else {
-                    return new AddCommand(TaskType.TODO, display.substring(5), null);
+                    return new AddCommand(TaskType.TODO, userInput.substring(5), null);
                 }
-            } else if (display.length() >= 8 && display.startsWith("deadline")) {
-                int idx = display.indexOf(" /by ");
-                if (idx == -1 || display.length() == idx + 5 || display.substring(idx + 5).isBlank()) {
-                    throw new TaskException(TaskType.DEADLINE, "time", "cannot be identified.");
-                } else if (idx <= 9 || display.substring(9, idx).isBlank()) {
-                    throw new TaskException(TaskType.DEADLINE, "description", "cannot be empty.");
+            } else if (userInput.startsWith("deadline")) {
+                int idx = userInput.indexOf(" /by ");
+                if (idx == -1 || userInput.substring(idx + 5).isBlank()) {
+                    throw new TaskException(TaskType.DEADLINE, "time", TaskExceptionType.IDENTIFY);
+                } else if (userInput.substring(9, idx).isBlank()) {
+                    throw new TaskException(TaskType.DEADLINE, "description", TaskExceptionType.EMPTY);
                 } else {
-                    if (parseDate(display.substring(idx + 5)) == null) {
-                        throw new TaskException(TaskType.DEADLINE, "time", "format is wrong.");
+                    if (parseDate(userInput.substring(idx + 5)) == null) {
+                        throw new TaskException(TaskType.DEADLINE, "time", TaskExceptionType.FORMAT);
                     } else {
-                        return new AddCommand(TaskType.DEADLINE, display.substring(9, idx),
-                                parseDate(display.substring(idx + 5)));
+                        return new AddCommand(TaskType.DEADLINE, userInput.substring(9, idx),
+                                parseDate(userInput.substring(idx + 5)));
                     }
                 }
-            } else if (display.length() >= 5 && display.startsWith("event")) {
-                int idx = display.indexOf(" /at ");
-                if (idx == -1 || display.length() < idx + 5 || display.substring(idx + 5).isBlank()) {
-                    throw new TaskException(TaskType.EVENT, "time", "cannot be identified.");
-                } else if (idx <= 6 || display.substring(6, idx).isBlank()) {
-                    throw new TaskException(TaskType.EVENT, "description", "cannot be empty.");
+            } else if (userInput.length() >= 5 && userInput.startsWith("event")) {
+                int idx = userInput.indexOf(" /at ");
+                if (idx == -1 || userInput.substring(idx + 5).isBlank()) {
+                    throw new TaskException(TaskType.EVENT, "time", TaskExceptionType.IDENTIFY);
+                } else if (idx <= 6 || userInput.substring(6, idx).isBlank()) {
+                    throw new TaskException(TaskType.EVENT, "description", TaskExceptionType.EMPTY);
                 } else {
-                    if (parseDate(display.substring(idx + 5)) == null) {
-                        throw new TaskException(TaskType.EVENT, "time", "format is wrong.");
+                    if (parseDate(userInput.substring(idx + 5)) == null) {
+                        throw new TaskException(TaskType.EVENT, "time", TaskExceptionType.FORMAT);
                     } else {
-                        return new AddCommand(TaskType.EVENT, display.substring(6, idx),
-                                parseDate(display.substring(idx + 5)));
+                        return new AddCommand(TaskType.EVENT, userInput.substring(6, idx),
+                                parseDate(userInput.substring(idx + 5)));
                     }
                 }
             } else {

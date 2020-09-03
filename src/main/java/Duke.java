@@ -5,6 +5,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 /**
  * Duke is the application that the user is aware of.
  */
@@ -15,7 +17,7 @@ public class Duke extends Application {
     private Ui ui;
 
     /**
-     * Used for GUI.
+     * Creates a new Duke for GUI.
      */
     public Duke() {
         // path is set if GUI
@@ -24,7 +26,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Creates a new Duke.
+     * Creates a new Duke for CommandLineInterface.
      *
      * @param filePath file path where a file containing taskList from last execution of Duke is stored.
      */
@@ -36,7 +38,7 @@ public class Duke extends Application {
     /**
      * Starts a run of GUI.
      *
-     * @param stage
+     * @param stage Display of application.
      */
     @Override
     public void start(Stage stage) {

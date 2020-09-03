@@ -21,7 +21,7 @@ public abstract class Ui {
     }
 
 	/**
-	 * Each feedback message from Duke is properly formatted, e.g. enclosed in two lines.
+	 * Formats each feedback message, e.g. enclosed in two lines.
 	 *
 	 * @param response ArrayList of feedback messages.
 	 * @return String of formatted responses.
@@ -37,6 +37,7 @@ public abstract class Ui {
 	}
 
 	/**
+	 * Formats each feedback message, e.g. enclosed in two lines.
 	 * Overloaded formatResponse, takes in a variable number of strings, puts them in a ArrayList and passes it to the
 	 * other formatResponse method.
 	 *
@@ -51,33 +52,68 @@ public abstract class Ui {
 		return formatResponse(lst);
 	}
 
-	public static String getError(String error) {
-		return formatResponse(error);
+	/**
+	 * Returns formatted error message.
+	 *
+	 * @param errorMsg Error message.
+	 * @return String Formatted error message.
+	 */
+	public static String getError(String errorMsg) {
+		return formatResponse(errorMsg);
 	}
 
-	public abstract void showError(String error);
+	/**
+	 * Displays error message.
+	 *
+	 * @param errorMsg Error message to display.
+	 */
+	public abstract void showError(String errorMsg);
 
+	/**
+	 * Returns formatted welcome message.
+	 *
+	 * @return String Formatted welcome message.
+	 */
 	public String getWelcome() {
 		return formatResponse(WELCOME_MSG);
 	}
 
+	/**
+	 * Displays welcome message.
+	 */
 	public abstract void showWelcome();
 
+	/**
+	 * Returns formatted goodbye message.
+	 *
+	 * @return String Formatted goodbye message.
+	 */
 	public String getGoodbye() {
 		return formatResponse(GOODBYE_MSG);
 	}
 
+	/**
+	 * Displays goodbye message.
+	 */
 	public abstract void showGoodbye();
 
+	/**
+	 * Returns a String with count of tasks.
+	 *
+	 * @param tasks TaskList to count number of tasks from.
+	 * @return String with count of tasks.
+	 */
 	public String getListCount(TaskList tasks) {
 		return "Now you have " + tasks.getCount() + " task" + (tasks.getCount() == 1 ? "" : "s") + " in the list.";
 	}
 
 	/**
-	 * Displays all the tasks, based on date if date is not null.
+	 * Returns a String containing details of all the tasks that pass date and keyWord criteria.
 	 *
-	 * @param tasks Tasks to display.
+	 * @param tasks Tasks to filter from.
 	 * @param date Date to filter tasks by.
+	 * @param keyWord Keyword to filter tasks by.
+	 * @return String containing details of tasks that fulfil the criteria.
 	 */
 	public String getTaskList(TaskList tasks, Date date, String keyWord) {
 		ArrayList<String> lst = tasks.toString(date, keyWord);
@@ -88,28 +124,66 @@ public abstract class Ui {
 	}
 
 	/**
-	 * Displays all the tasks, based on date if date is not null.
+	 * Displays all the tasks that pass date and keyWord criteria.
 	 *
-	 * @param tasks Tasks to display.
+	 * @param tasks Tasks to filter from.
 	 * @param date Date to filter tasks by.
+	 * @param keyWord Keyword to filter tasks by.
 	 */
 	public abstract void showTaskList(TaskList tasks, Date date, String keyWord);
 
+	/**
+	 * Returns a String of a feedback message that task is marked as done.
+	 *
+	 * @param task Task that is done.
+	 * @return Feedback message that task is marked as done.
+	 */
 	public String getDoneTask(Task task) {
 		return formatResponse(DONE_MSG, INDENT + task.toString());
 	}
 
+	/**
+	 * Displays done Task.
+	 *
+	 * @param task Task that is done.
+	 */
 	public abstract void showDoneTask(Task task);
 
+	/**
+	 * Returns a String of a feedback message that task is deleted.
+	 *
+	 * @param task Task that is deleted.
+	 * @param taskList
+	 * @return
+	 */
 	public String getDeletedTask(Task task, TaskList taskList) {
 		return formatResponse(DELETED_MSG, INDENT + task.toString(), getListCount(taskList));
 	}
 
+	/**
+	 * Displays deleted Task.
+	 *
+	 * @param task Task that is deleted.
+	 * @param taskList TaskList.
+	 */
 	public abstract void showDeletedTask(Task task, TaskList taskList);
 
+	/**
+	 * Returns a String of a feedback message that task is added to taskList.
+	 *
+	 * @param task Task that is added.
+	 * @param taskList TaskList
+	 * @return Feedback message that task is added to taskList.
+	 */
 	public String getAddTask(Task task, TaskList taskList) {
 		return formatResponse(ADD_MSG, INDENT + task.toString(), getListCount(taskList));
 	}
 
+	/**
+	 * Displays added Task.
+	 *
+	 * @param task Task that is added.
+	 * @param taskList TaskList
+	 */
 	public abstract void showAddTask(Task task, TaskList taskList);
 }

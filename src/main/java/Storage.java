@@ -40,27 +40,31 @@ public class Storage {
     }
 
 	/**
-	 * When Duke is just started up, it reads from the storage file, goes through each line, each corresponding to a
-	 * task, and returns the tasks.
+	 * Returns arrayList of Tasks from storage file.
+     * When Duke is just started up, it reads from the storage file, goes through each line, each corresponding to a
+	 * task and returns the tasks.
 	 *
 	 * @return ArrayList of Tasks according to the storage file.
 	 */
 	public ArrayList<Task> initializeTasks() {
-		try {
-			File file = new File(filePath);
-			if (!file.exists()) {
-				return new ArrayList<>();
-			}
-			Scanner sc = new Scanner(file);
-			ArrayList<Task> tasks = new ArrayList<>();
-			while (sc.hasNextLine()) {
-				tasks.add(addTaskFromStorage(sc.nextLine()));
-			}
-			return tasks;
-		} catch (IOException | DukeException ex) {
-			System.out.println(ex.getMessage());
-			return new ArrayList<>();
-		}
+	    try {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                return new ArrayList<>();
+            }
+            Scanner sc = new Scanner(file);
+            ArrayList<Task> tasks = new ArrayList<>();
+            while (sc.hasNextLine()) {
+                tasks.add(addTaskFromStorage(sc.nextLine()));
+            }
+            return tasks;
+        } catch (DukeException ex) {
+	        Ui.formatResponse(ex.getMessage());
+	        return new ArrayList<>();
+        } catch (IOException ex) {
+            Ui.formatResponse("Parsing error: file does not exist");
+            return new ArrayList<>();
+        }
 	}
 
     /**
@@ -73,13 +77,14 @@ public class Storage {
     public void saveList(TaskList taskList) throws DukeException {
         ArrayList<Task> tasks = taskList.getTasks();
         String[] directories = filePath.split("/");
-        int nested = 1;
-        File dir = new File(directories[0]);
-        if (nested < directories.length) {
+        String currFilePath = directories[0];
+        String[] directoriesToCreate = Arrays.copyOfRange(directories, 1, directories.length - 1);
+        for (String folder: directoriesToCreate) {
+            File dir = new File(currFilePath);
             if (!dir.exists()) {
                 dir.mkdir();
             }
-            dir = new File(String.join("/", Arrays.copyOfRange(directories, 0, nested++)));
+            currFilePath += "/" + folder;
         }
         try {
             File file = new File(filePath);

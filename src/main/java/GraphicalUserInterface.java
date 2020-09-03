@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Ui that interacts with user through GUI.
+ * GUI that interacts with user.
  */
 public class GraphicalUserInterface extends Ui {
 
@@ -26,6 +26,7 @@ public class GraphicalUserInterface extends Ui {
         textField = new TextField();
         label = new Label(super.getWelcome());
 
+        // set dimensions of GridPane and fill with fields
         grid = new GridPane();
         grid.setPrefWidth(800);
         grid.setPrefHeight(500);
@@ -36,10 +37,10 @@ public class GraphicalUserInterface extends Ui {
     }
 
     /**
-     * Returns TextField of GraphicalUserInterface.
+     * Returns TextField of GUI.
      * Necessary so that Duke will know when there is a new command.
      *
-     * @return TextField
+     * @return TextField of GUI.
      */
     public TextField getTextField() {
         return textField;
@@ -64,29 +65,23 @@ public class GraphicalUserInterface extends Ui {
     }
 
     @Override
-    public void showError(String error) {
-        addResponse(getError(error));
+    public void showError(String errorMsg) {
+        addResponse(getError(errorMsg));
     }
 
     @Override
     public void showWelcome() {
         addResponse(getWelcome());
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+        stage.setScene(scene);
+        stage.show();
     }
 
     @Override
     public void showGoodbye() {
-        addResponse(getGoodbye());
+        addResponse(getGoodbye()); // currently does not display as platform exits immediately after
         Platform.exit();
     }
 
-    /**
-     * Displays all the tasks, based on date if date is not null.
-     *
-     * @param tasks Tasks to display.
-     * @param date Date to filter tasks by.
-     */
     @Override
     public void showTaskList(TaskList tasks, Date date, String keyWord) {
         addResponse(getTaskList(tasks, date, keyWord));

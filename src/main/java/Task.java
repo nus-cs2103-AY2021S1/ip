@@ -48,9 +48,10 @@ public abstract class Task {
     /**
      * Checks if Task fulfil date and keyword criteria.
      *
-     * @param date Date that Task must be on or null.
-     * @param keyWord Keyword that Task description must contain or null.
-     * @return boolean indiating whether Task passed the criteria.
+     * @param date Date that Task must be on but if date is null, Task is deemed to have fulfiled criteria.
+     * @param keyWord Keyword that Task description must contain but if keyWord is null, Task is deemed to have
+     *                fulfiled criteria.
+     * @return boolean indicates whether Task passed the criteria.
      */
     public boolean fulfilCriteria(Date date, String keyWord) {
         return (date == null || isOccuringOn(date)) && (keyWord == null

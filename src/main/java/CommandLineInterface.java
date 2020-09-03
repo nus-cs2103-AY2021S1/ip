@@ -22,8 +22,8 @@ public class CommandLineInterface extends Ui {
     }
 
     @Override
-    public void showError(String error) {
-        System.out.println(getError(error));
+    public void showError(String errorMsg) {
+        System.out.println(getError(errorMsg));
     }
 
     @Override
@@ -36,12 +36,6 @@ public class CommandLineInterface extends Ui {
         System.out.println(getGoodbye());
     }
 
-    /**
-     * Displays all the tasks, based on date if date is not null.
-     *
-     * @param tasks Tasks to display.
-     * @param date Date to filter tasks by.
-     */
     @Override
     public void showTaskList(TaskList tasks, Date date, String keyWord) {
         System.out.println(getTaskList(tasks, date, keyWord));
