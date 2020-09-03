@@ -74,7 +74,7 @@ public class TaskList {
      *
      * @return The total number of tasks in the task list.
      */
-    public int numOfTasks() {
+    public int getNumOfTasks() {
         return tasks.size();
     }
 
@@ -84,7 +84,7 @@ public class TaskList {
      * @return The message detailing the number of tasks in the list.
      */
     public String tasksRemaining() {
-        return String.format("Now you have %d tasks in the list", numOfTasks());
+        return String.format("Now you have %d tasks in the list", getNumOfTasks());
     }
 
 }
