@@ -4,14 +4,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private String path; 
     
-    public Storage() {
-        this.path = "./data/duke.txt";
+    
+    public Storage(String filePath) {
+        this.path = filePath;
     }
-
+    
     public void createFile() {
         try {
             
@@ -29,6 +32,7 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         
         try {
+            createFile();
             File existingData = new File(path);
             Scanner readExistingData = new Scanner(existingData);
             
