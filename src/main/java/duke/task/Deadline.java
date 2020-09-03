@@ -69,6 +69,7 @@ public class Deadline extends Task {
             int indOfTime = messageLowerCase.indexOf("/by");
             String description = message.substring(indOfDescription + 8, indOfTime).trim();
             String deadline = message.substring(indOfTime + 3).trim();
+
             if (description.isBlank() && deadline.isBlank()) {
                 throw new DukeException(errMessage1);
             } else if (deadline.isBlank()) {
@@ -94,6 +95,7 @@ public class Deadline extends Task {
                     throw new DukeException(errMessage);
                 }
             }
+
         } catch (DukeException e) {
             throw e;
         } catch (Exception e) {
