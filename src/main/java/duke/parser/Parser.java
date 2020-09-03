@@ -25,7 +25,7 @@ public class Parser {
      * @throws DukeException If user input does not belong to the list of known commands.
      */
     public static Command parse(String text) throws DukeException {
-        String[] inputArr = deconstruct(text);
+        String[] inputArr = deconstructInput(text);
         String keyWord = getKeyWord(inputArr);
         String details = getRestOfWord(inputArr);
 
@@ -56,7 +56,7 @@ public class Parser {
      * @param input Input String.
      * @return String array of the input.
      */
-    private static String[] deconstruct(String input) {
+    private static String[] deconstructInput(String input) {
         String formattedString = input.trim().replaceAll("\\s{2,}", " ");
         return formattedString.split(" ", 2);
     }
