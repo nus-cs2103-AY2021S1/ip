@@ -12,7 +12,7 @@ abstract class Command {
      * @param storage Handles input output to hard disk.
      * @throws DukeException When date time in wrong format, or description not given, or I/O error.
      */
-    abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Checks if should exit program.

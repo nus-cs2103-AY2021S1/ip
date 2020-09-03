@@ -5,7 +5,6 @@ package duke;
  */
 class ExitCommand extends Command {
 
-
     /**
      * Executes exit.
      *
@@ -14,8 +13,9 @@ class ExitCommand extends Command {
      * @param storage Handles input output to hard disk.
      */
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    String execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showExit();
+        return ui.showExit();
     }
 
     /**

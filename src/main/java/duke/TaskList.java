@@ -43,7 +43,7 @@ class TaskList {
                 handleTodo(taskString.get(2), isDone);
                 break;
             default:
-                throw new DukeException("     Invalid character in storage file :-(");
+                throw new DukeException("Invalid character in storage file :-(");
             }
         }
     }
@@ -75,8 +75,8 @@ class TaskList {
         }
 
         int len = taskList.size();
-        return "     Got it. I've added this task:\n       "
-                + task.toString() + "\n     Now you have " + len
+        return "Got it. I've added this task:\n"
+                + task.toString() + "\nNow you have " + len
                 + " tasks in the list.";
     }
 
@@ -98,7 +98,7 @@ class TaskList {
             taskList.add(deadline);
             return deadline;
         } catch (DateTimeParseException e) {
-            throw new DukeException("     OOPS!!! Pass in a date in yyyy-mm-dd :-(");
+            throw new DukeException("OOPS!!! Pass in a date in yyyy-mm-dd :-(");
         }
     }
 
@@ -108,7 +108,7 @@ class TaskList {
             Task deadline = new Deadline(deadlineTask, deadlineByLocalDate, isDone);
             taskList.add(deadline);
         } catch (DateTimeParseException e) {
-            throw new DukeException("     OOPS!!! Pass in a date in yyyy-mm-dd :-(");
+            throw new DukeException("OOPS!!! Pass in a date in yyyy-mm-dd :-(");
         }
     }
 
@@ -119,7 +119,7 @@ class TaskList {
             taskList.add(event);
             return event;
         } catch (DateTimeParseException e) {
-            throw new DukeException("     OOPS!!! Pass in a date in yyyy-mm-dd :-(");
+            throw new DukeException("OOPS!!! Pass in a date in yyyy-mm-dd :-(");
         }
     }
 
@@ -129,15 +129,15 @@ class TaskList {
             Task event = new Event(eventTask, eventAtLocalDate, isDone);
             taskList.add(event);
         } catch (DateTimeParseException e) {
-            throw new DukeException("     OOPS!!! Pass in a date in yyyy-mm-dd :-(");
+            throw new DukeException("OOPS!!! Pass in a date in yyyy-mm-dd :-(");
         }
     }
 
     String listTasks() {
-        StringBuilder output = new StringBuilder("     Here are the tasks in your list:\n");
+        StringBuilder output = new StringBuilder("Here are the tasks in your list:\n");
         int index = 1;
         for (Task task : taskList) {
-            output.append("     ").append(index).append(".").append(task.toString()).append("\n");
+            output.append(index).append(".").append(task.toString()).append("\n");
             index++;
         }
         return output.toString();
@@ -146,25 +146,25 @@ class TaskList {
     String doTask(int index) {
         Task task = taskList.get(index - 1);
         task.setDone(true);
-        return "     Nice! I've marked this task as done: \n"
-                + "       " + task.toString();
+        return "Nice! I've marked this task as done: \n"
+                + task.toString();
     }
 
     String deleteTask(int index) {
         Task task = taskList.get(index - 1);
         taskList.remove(index - 1);
         int len = taskList.size();
-        return "     Noted. I've removed this task:\n       "
-                + task.toString() + "\n     Now you have " + len
+        return "Noted. I've removed this task:\n"
+                + task.toString() + "\nNow you have " + len
                 + " tasks in the list.";
     }
 
     String findTasks(String search) {
-        StringBuilder output = new StringBuilder("     Here are the matching tasks in your list:\n");
+        StringBuilder output = new StringBuilder("Here are the matching tasks in your list:\n");
         int index = 1;
         for (Task task : taskList) {
             if (task.toString().contains(search)) {
-                output.append("     ").append(index).append(".").append(task.toString()).append("\n");
+                output.append(index).append(".").append(task.toString()).append("\n");
                 index++;
             }
         }

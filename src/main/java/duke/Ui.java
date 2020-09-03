@@ -1,14 +1,9 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Deals with user interaction.
  */
 class Ui {
-
-    /** Takes in user input. */
-    private Scanner scanner = new Scanner(System.in);
 
     /**
      * Constructor used to create UI .
@@ -17,47 +12,29 @@ class Ui {
     }
 
     /**
-     * Reads the next line.
-     *
-     * @return Next line.
-     */
-    String readCommand() {
-        return scanner.nextLine();
-    }
-
-    /**
      * Displays error message.
      *
      * @param e Duke Exception.
      */
-    void showError(DukeException e) {
-        printOutput(e.getMessage(), true);
+    public String showError(DukeException e) {
+        return printOutput(e.getMessage());
     }
 
     /**
      * Prints output in a nice format.
      *
      * @param input String input.
-     * @param hasLastNewLine Option to choose if an extra line break is needed.
      */
-    void printOutput(String input, boolean hasLastNewLine) {
-        if (hasLastNewLine) {
-            System.out.println("    ____________________________________________________________\n"
-                    + input + "\n"
-                    + "    ____________________________________________________________");
-
-        } else {
-            System.out.println("    ____________________________________________________________\n"
-                    + input + "    ____________________________________________________________");
-        }
+    public String printOutput(String input) {
+        return input;
     }
 
-    void showWelcome() {
-        printOutput("     Hello! I'm Duke\n"
-                + "     What can I do for you?", true);
+    public String showWelcome() {
+        return printOutput("Hello! I'm Duke\n"
+                + "What can I do for you?");
     }
 
-    void showExit() {
-        printOutput("     Bye. Hope to see you again soon!", true);
+    public String showExit() {
+        return printOutput("Bye. Hope to see you again soon!");
     }
 }

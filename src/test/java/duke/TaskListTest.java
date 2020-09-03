@@ -15,7 +15,7 @@ class TaskListTest {
             tasks.addTask(deadline, "desc", "2020/10/10");
             fail();
         } catch (DukeException e) {
-            assertEquals("     OOPS!!! Pass in a date in yyyy-mm-dd :-(", e.getMessage());
+            assertEquals("OOPS!!! Pass in a date in yyyy-mm-dd :-(", e.getMessage());
         }
     }
 }

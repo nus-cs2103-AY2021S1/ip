@@ -13,7 +13,7 @@ class ParserTest {
             Parser.parse("event");
             fail();
         } catch (DukeException e) {
-            assertEquals("     OOPS!!! The description of a event cannot be empty.", e.getMessage());
+            assertEquals("OOPS!!! The description of a event cannot be empty.", e.getMessage());
         }
     }
 
@@ -23,7 +23,7 @@ class ParserTest {
             Parser.parse("random");
             fail();
         } catch (DukeException e) {
-            assertEquals("     OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
+            assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
     }
 }

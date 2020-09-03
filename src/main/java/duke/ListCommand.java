@@ -13,9 +13,9 @@ class ListCommand extends Command {
      * @param storage Handles input output to hard disk.
      */
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    String execute(TaskList tasks, Ui ui, Storage storage) {
         String output = tasks.listTasks();
-        ui.printOutput(output, false);
+        return ui.printOutput(output);
     }
 
     /**

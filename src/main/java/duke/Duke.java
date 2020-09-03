@@ -5,11 +5,17 @@ package duke;
  */
 class Duke {
 
-    /** Deals with input output of files. */
+    /**
+     * Deals with input output of files.
+     */
     private Storage storage;
-    /** Task list. */
+    /**
+     * Task list.
+     */
     private TaskList tasks;
-    /** Deals with user input output. */
+    /**
+     * Deals with user input output.
+     */
     private Ui ui;
 
     /**
@@ -28,32 +34,28 @@ class Duke {
         }
     }
 
-    void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e);
-            }
-        }
+    String getWelcome() {
+        return ui.showWelcome();
     }
 
     /**
-     * Creates new Duke object to start operations.
+      * Generate a response to user input.
      */
-    static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e);
+        }
+    }
+
+    boolean isExit(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.isExit();
+        } catch (DukeException e) {
+            return false;
+        }
     }
 }
-
-
-
-
-
-
-

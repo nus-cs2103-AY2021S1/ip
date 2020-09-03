@@ -79,8 +79,8 @@ class Parser {
                 return new AddCommand(commandName, "");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            String error = "     OOPS!!! The description of a " + commandName.toString().toLowerCase()
-                    + " cannot be empty.";
+            String error = "OOPS!!! The description of a " + commandName.toString().toLowerCase()
+                + " cannot be empty.";
             throw new DukeException(error);
         }
     }
@@ -89,7 +89,7 @@ class Parser {
         try {
             return CommandName.valueOf(action);
         } catch (IllegalArgumentException e) {
-            throw new DukeException("     OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
