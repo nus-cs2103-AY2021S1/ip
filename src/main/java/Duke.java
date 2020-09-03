@@ -24,6 +24,7 @@ public class Duke extends Application {
 
   private Image user = new Image(this.getClass().getResourceAsStream("/images/Poring.jpg"));
   private Image duke = new Image(this.getClass().getResourceAsStream("/images/Poro.jpg"));
+  private Bot bot = new Bot();
 
   @Override
   public void start(Stage stage) {
@@ -49,7 +50,8 @@ public class Duke extends Application {
    * You should have your own function to generate a response to user input. Replace this stub with
    * your completed method.
    */
-  String getResponse(String input) {
+  String getResponse(String input) { //where to get response
+    bot.serve(input);
     return "Duke heard: " + input;
   }
 

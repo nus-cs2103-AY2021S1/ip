@@ -34,11 +34,9 @@ public class Bot {
    * undefined and wrong messages exception. Type of commands supported are [bye, list, done, todo,
    * event, deadline, delete, find].
    */
-  public void serve() {
-
-    while (sc.hasNextLine()) {
+  public void serve(String input) {
       try {
-        String s = sc.nextLine();
+        String s = input;
         String[] parsedInfo = parser.getDetails(s);
         String command = parsedInfo[0];
         String commandDetail = parsedInfo[1];
@@ -64,7 +62,6 @@ public class Bot {
           if (commandDetail == null || dateInfo == null) {
             throw new NoDescriptionException("deadline");
           } else {
-            //System.out.println(dateInfo);
             localDate.parse(dateInfo);
             taskList.addListings(parsedInfo, printer, storage);
           }
@@ -93,7 +90,7 @@ public class Bot {
       } catch (UndefinedException e) { //unknown commands
         printer.undefinedExceptionMessage();
       }
-    }
+
   }
 
 }
