@@ -23,34 +23,34 @@ import java.util.regex.Pattern;
 
 /**
  * Enumeration of available commands
- * Contains generate() method to create command from parameters
+ * Contains parse() method to create command from parameters
  */
-public enum CommandFactory {
+public enum ParseToCommand {
 
     HELP {
         @Override
-        public Command generate(List<Task> taskList, String commandParam) {
+        public Command parse(List<Task> taskList, String commandParam) {
             return new HelpCommand();
         }
     },
 
     BYE {
         @Override
-        public Command generate(List<Task> taskList, String commandParam) {
+        public Command parse(List<Task> taskList, String commandParam) {
             return new ExitCommand();
         }
     },
 
     LIST {
         @Override
-        public Command generate(List<Task> taskList, String commandParam) {
+        public Command parse(List<Task> taskList, String commandParam) {
             return new ListCommand(taskList);
         }
     },
 
     DONE {
         @Override
-        public Command generate(List<Task> taskList, String commandParam) {
+        public Command parse(List<Task> taskList, String commandParam) {
             // Generate a DoneCommand which when executed, marks the task specified by the index as done
             try {
                 int index = Integer.parseInt(commandParam.trim()) - 1;
@@ -66,7 +66,7 @@ public enum CommandFactory {
 
     DELETE {
         @Override
-        public Command generate(List<Task> taskList, String commandParam) {
+        public Command parse(List<Task> taskList, String commandParam) {
             // Generate a DeleteCommand which when executed, removes the task specified by the index from the list
             try {
                 int index = Integer.parseInt(commandParam.trim()) - 1;
@@ -82,7 +82,7 @@ public enum CommandFactory {
 
     TODO {
         @Override
-        public Command generate(List<Task> taskList, String commandParam) {
+        public Command parse(List<Task> taskList, String commandParam) {
             if (commandParam.isBlank()) {
                 throw new DukeParserException("Format: todo {description}");
             }
@@ -96,7 +96,7 @@ public enum CommandFactory {
 
     DEADLINE {
         @Override
-        public Command generate(List<Task> taskList, String commandParam) {
+        public Command parse(List<Task> taskList, String commandParam) {
             String usage = "deadline {description} /by {ddMMyyyy HHmm}";
 
             // Regex to obtain param1 and param2 in Deadline(description, deadline)
@@ -125,7 +125,7 @@ public enum CommandFactory {
 
     EVENT {
         @Override
-        public Command generate(List<Task> taskList, String commandParam) {
+        public Command parse(List<Task> taskList, String commandParam) {
             String usage = "event {description} /from {ddMMyyyy HHmm} /till {ddMMyyyy HHmm}";
 
             // Regex to obtain param1, param2 and param3 in Event(description, start, end)
@@ -158,7 +158,7 @@ public enum CommandFactory {
 
     SAVE {
         @Override
-        public Command generate(List<Task> taskList, String commandParam) {
+        public Command parse(List<Task> taskList, String commandParam) {
             if (commandParam.isBlank()) {
                 throw new DukeParserException("Format: save {filepath}");
             }
@@ -170,7 +170,7 @@ public enum CommandFactory {
 
     LOAD {
         @Override
-        public Command generate(List<Task> taskList, String commandParam) {
+        public Command parse(List<Task> taskList, String commandParam) {
             if (commandParam.isBlank()) {
                 throw new DukeParserException("Format: load {filepath}");
             }
@@ -182,7 +182,7 @@ public enum CommandFactory {
 
     FIND {
         @Override
-        public Command generate(List<Task> taskList, String commandParam) {
+        public Command parse(List<Task> taskList, String commandParam) {
             if (commandParam.isBlank()) {
                 throw new DukeParserException("Format: find {keyword}");
             }
@@ -200,6 +200,6 @@ public enum CommandFactory {
      * @throws DukeParserException if the input cannot be parsed. Details about the error can be
      * retrieved by the Throwable.getMessage() method
      */
-    public abstract Command generate(List<Task> taskList, String commandParam) throws DukeParserException;
+    public abstract Command parse(List<Task> taskList, String commandParam) throws DukeParserException;
 
 }

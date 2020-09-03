@@ -38,7 +38,7 @@ public class Parser {
 
         try {
             // Generate duke.command with commandType and commandParameter
-            return CommandFactory.valueOf(commandType).generate(taskList, commandParam);
+            return ParseToCommand.valueOf(commandType).parse(taskList, commandParam);
         } catch (IllegalArgumentException e) {
             throw new DukeParserException("Unrecognised Command!");
         }
