@@ -3,8 +3,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import java.io.File;
 
+import java.io.File;
 
 import java.io.IOException;
 
@@ -12,10 +12,10 @@ import java.io.IOException;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    String path = "."+ File.separator+"data"+File.separator;
-    String fileName = "duke.txt";
+    private String path = "." + File.separator + "data" + File.separator;
+    private String fileName = "duke.txt";
 
-    private Duke duke = new Duke(path,fileName);
+    private Duke duke = new Duke(path, fileName);
 
     @Override
     public void start(Stage stage) {

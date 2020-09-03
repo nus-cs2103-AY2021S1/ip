@@ -1,11 +1,18 @@
 package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
     protected LocalDate by;
-
+    /**
+     * Returns a deadline. This is a constructor of deadline.
+     * @param description describes the deadline task
+     * @param by the deadline of the task
+     *
+     * @return a deadline task
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = LocalDate.parse(by);

@@ -20,7 +20,12 @@ public class TaskList {
     public void add(Task task) {
         this.tasks.add(task);
     }
-
+    /**
+     * Delete the task that is at the index position from the task list
+     * And change the sequence number of the task list
+     *
+     * @param index which is the position of the deleted task
+     */
     public void delete(int index) {
         this.tasks.remove(index);
         for (int i = index; i < tasks.size(); i++) {

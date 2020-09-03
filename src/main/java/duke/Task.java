@@ -6,6 +6,12 @@ public class Task {
     protected boolean isDone;
     protected int sequence;
 
+    /**
+     * Returns a Task which takes in an argument of String description
+     * This is a constructor of task
+     *
+     * @return a Task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -37,10 +43,10 @@ public class Task {
      */
     public String markAsDone () {
         this.isDone = true;
-        String doneString = "____________________________________________________________\n" +
-                " Nice! I've marked this task as done: \n" +
-                "  "+ this.getStatusIcon() + "  " + this.description + "\n" +
-                "____________________________________________________________";
+        String doneString = "____________________________________________________________\n"
+                + " Nice! I've marked this task as done: \n"
+                + "  " + this.getStatusIcon() + "  " + this.description + "\n"
+                + "____________________________________________________________";
         return doneString;
     }
 

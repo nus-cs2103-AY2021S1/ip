@@ -21,12 +21,16 @@ public class Ui {
         String input = sc.nextLine();
         return input;
     }
-
+    /**
+     * Returns a String which indicates welcome from duke when the app is launched
+     *
+     * @return String;
+     */
     public String showWelcome() {
-        return "_____________________________________________\n" +
-                "     Hello! I'm Duke\n" +
-                "     What can I do for you?\n" +
-                "_____________________________________________\n";
+        return "_____________________________________________\n"
+                + "     Hello! I'm Duke\n"
+                + "     What can I do for you?\n"
+                + "_____________________________________________\n";
     }
 
     /**
@@ -37,13 +41,13 @@ public class Ui {
      */
     public String showAdd(Task task) {
 
-        String DukeOutput = "_____________________________________________\n" +
-                "     Got it. I've added this task:\n" +
-                "       " + task.toString() + "\n" +
-                "     Now you have " + this.tasks.size() + " " + "task" + " in the list.\n" +
-                "_____________________________________________\n";
-        System.out.println(DukeOutput);
-        return DukeOutput;
+        String dukeOutput = "_____________________________________________\n"
+                + "     Got it. I've added this task:\n"
+                + "       " + task.toString() + "\n"
+                + "     Now you have " + this.tasks.size() + " " + "task" + " in the list.\n"
+                + "_____________________________________________\n";
+        System.out.println(dukeOutput);
+        return dukeOutput;
 
     }
 
@@ -54,9 +58,9 @@ public class Ui {
      * @return String of information about marked task
      */
     public String showDone(int index) {
-        String DukeOutput = this.tasks.get(index).markAsDone();
-        System.out.println(DukeOutput);
-        return DukeOutput;
+        String dukeOutput = this.tasks.get(index).markAsDone();
+        System.out.println(dukeOutput);
+        return dukeOutput;
     }
 
     /**
@@ -68,13 +72,13 @@ public class Ui {
     public String showDelete(int index) {
         Task removed = this.tasks.get(index);
         this.tasks.delete(index);
-        String DukeOutput = "_____________________________________________\n" +
-                "     Noted. I've removed this task:\n" +
-                "       " + removed.toString() + "\n" +
-                "     Now you have " + this.tasks.size() + " tasks in the list.\n" +
-                "_____________________________________________";
-        System.out.println(DukeOutput);
-        return DukeOutput;
+        String dukeOutput = "_____________________________________________\n"
+                + "     Noted. I've removed this task:\n"
+                + "       " + removed.toString() + "\n"
+                + "     Now you have " + this.tasks.size() + " tasks in the list.\n"
+                + "_____________________________________________";
+        System.out.println(dukeOutput);
+        return dukeOutput;
     }
 
     /**
@@ -83,41 +87,49 @@ public class Ui {
      * @return String of current tasks
      */
     public String showList() {
-        String DukeOutput = "_____________________________________________\n" +
-                "Here are the tasks in your list:\n";
+        String dukeOutput = "_____________________________________________\n"
+                + "Here are the tasks in your list:\n";
 
         for (int i = 0; i < this.tasks.size(); i++) {
             String label = Integer.toString(1 + i);
-            DukeOutput = DukeOutput + label + ". " + this.tasks.get(i).toString() + "\n";
+            dukeOutput = dukeOutput + label + ". " + this.tasks.get(i).toString() + "\n";
         }
 
-        DukeOutput = DukeOutput + "_____________________________________________";
-        System.out.println(DukeOutput);
-        return DukeOutput;
+        dukeOutput = dukeOutput + "_____________________________________________";
+        System.out.println(dukeOutput);
+        return dukeOutput;
     }
-
+    /**
+     * Returns a String which indicates whether the keyword
+     *
+     * @return String;
+     */
     public String showFind(TaskList matchedTasks) {
-        String DukeOutput = "_____________________________________________\n";
+        String dukeOutput = "_____________________________________________\n";
         if (matchedTasks.size() == 0) {
-            DukeOutput = DukeOutput + "Sorry, Duke can not find a matching task.\n";
+            dukeOutput = dukeOutput + "Sorry, Duke can not find a matching task.\n";
         } else {
-            DukeOutput = DukeOutput + "Here are the matching tasks in your list:\n";
+            dukeOutput = dukeOutput + "Here are the matching tasks in your list:\n";
             for (int i = 0; i < matchedTasks.size(); i++) {
                 int index = i + 1;
-                DukeOutput = DukeOutput + index + "." + matchedTasks.get(i).toString() + "\n";
+                dukeOutput = dukeOutput + index + "." + matchedTasks.get(i).toString() + "\n";
             }
         }
-        DukeOutput = DukeOutput + "_____________________________________________";
-        System.out.println(DukeOutput);
-        return DukeOutput;
+        dukeOutput = dukeOutput + "_____________________________________________";
+        System.out.println(dukeOutput);
+        return dukeOutput;
     }
-
+    /**
+     * Returns a String when the user exit
+     *
+     * @return String;
+     */
     public String showBye() {
-        String DukeOutput = "_____________________________________________\n" +
-                "       Bye. Hope to see you again soon!\n" +
-                "_____________________________________________";
-        System.out.println(DukeOutput);
-        return DukeOutput;
+        String dukeOutput = "_____________________________________________\n"
+                + "       Bye. Hope to see you again soon!\n"
+                + "_____________________________________________";
+        System.out.println(dukeOutput);
+        return dukeOutput;
     }
 
 

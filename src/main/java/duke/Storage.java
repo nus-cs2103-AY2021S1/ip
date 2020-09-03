@@ -3,18 +3,27 @@ package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import java.io.IOException;
+
+
 
 public class Storage {
 
     private String pathName;
     private String fileName;
-
-    public Storage(String pathName, String fileName) {
+    /**
+     * Returns a storage class which takes in two String arguments of pathName and fileName (data and duke.txt)
+     * It is a constructor of the storage class which will create duke.txt if it does not exist;
+     * Retrieves tasks from the duke.txt; And write new tasks into the duke.txt when user exits
+     *
+     * @param pathName The path of the file
+     * @param fileName The name of the file
+     * @return A Storage
+     */
+    public Storage (String pathName, String fileName) {
         this.pathName = pathName;
         this.fileName = fileName;
     }
@@ -25,7 +34,7 @@ public class Storage {
      * @return a TaskList with tasks stored in the txt file.
      */
     public TaskList load() {
-        TaskList tasks = new TaskList( new ArrayList<Task>() );
+        TaskList tasks = new TaskList(new ArrayList<Task>());
         try {
             File file = new File("data/duke.txt");
             Scanner sc = new Scanner(file);
@@ -62,7 +71,7 @@ public class Storage {
      * Creates a duke.txt under data directory if the file does not exist at the first place.
      * If the file exist, start loading. (Adding previous stored task in duke.txt into an ArrayList<tasks>)
      *
-     * @throws IOException exception occurs when the file is not found
+     * @throws IOException Exception occurs when the file is not found
      */
     public void createFile() throws IOException {
         File file = new File(this.pathName);
