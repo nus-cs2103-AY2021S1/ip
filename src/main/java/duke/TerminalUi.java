@@ -18,6 +18,14 @@ public class TerminalUi extends Ui {
         return sc.nextLine();
     }
 
+    public void printFormattedMessage(String... response) {
+        System.out.println(LINE);
+        for (String string : response) {
+            System.out.print(string);
+        }
+        System.out.println("\n" + LINE);
+    }
+
     @Override
     public void processClose() {
         System.out.println(EXIT_MESSAGE);
@@ -51,33 +59,24 @@ public class TerminalUi extends Ui {
 
     @Override
     public void processDoneMessage(Task task) {
-        System.out.println(LINE);
-        System.out.println("Quack! I have marked this task as done: \n" + task);
-        System.out.println(LINE);
+        printFormattedMessage("Quack! I have marked this task as done: \n" + task);
     }
 
     @Override
     public void processAddMessage(Task task, int count) {
-        System.out.println(LINE);
-        System.out.println("Quack! I have added: " + task);
-        displayTaskCount(count);
-        System.out.println(LINE);
+        printFormattedMessage("Quack! I have added: " + task + "\n", displayTaskCount(count));
     }
 
     @Override
     public void processDeleteMessage(Task taskToDelete, int count) {
-        System.out.println(LINE);
-        System.out.println("Quack! I have deleted this task: \n" + taskToDelete);
-        displayTaskCount(count);
-        System.out.println(LINE);
+        printFormattedMessage("Quack! I have deleted this task: \n" + taskToDelete + "\n" + displayTaskCount(count));
     }
 
-    @Override
-    public void displayTaskCount(int numOfTasks) {
+    public String displayTaskCount(int numOfTasks) {
         if (numOfTasks == 1) {
-            System.out.println("My duck senses tell me you have 1 task in the list.");
+            return "My duck senses tell me you have 1 task in the list.";
         } else {
-            System.out.println("My duck senses tell me you have " + numOfTasks + " tasks in the list.");
+            return "My duck senses tell me you have " + numOfTasks + " tasks in the list.";
         }
     }
 

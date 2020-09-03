@@ -14,8 +14,6 @@ public abstract class Ui {
 
     public abstract void processAddMessage(Task task, int count);
 
-    public abstract void displayTaskCount(int numOfTasks);
-
     public abstract void processDeleteMessage(Task taskToDelete, int count);
 
     public abstract void processDoneMessage(Task task);

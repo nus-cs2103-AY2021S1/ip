@@ -26,7 +26,6 @@ public class GraphicalUi extends Ui {
         responseMessage = "";
     }
 
-    @Override
     public void displayTaskCount(int numOfTasks) {
         if (numOfTasks == 1) {
             responseMessage += "My duck senses tell me you have 1 task in the list." + "\n";
