@@ -1,5 +1,10 @@
 package sg.christopher.duke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import sg.christopher.duke.entities.Deadline;
 import sg.christopher.duke.entities.Event;
 import sg.christopher.duke.entities.Task;
@@ -11,7 +16,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class Duke {
+public class Duke extends Application {
     private static List<Task> savedItems = loadSavedItems();
 
     /**
@@ -266,5 +271,14 @@ public class Duke {
                 break;
             }
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
