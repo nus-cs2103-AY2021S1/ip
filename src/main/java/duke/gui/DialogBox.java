@@ -43,13 +43,16 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        // Colours to consider:
+        // CURRENT WINNER:
+        // PAPAYAWHIP FFEFD5
+
         dialog.setText(text);
+        dialog.setStyle("-fx-background-color: #FFEFD5; -fx-background-radius: 10; -fx-padding: 10 10 10 10");
+
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(displayPicture.getLayoutX() + 50,
                 displayPicture.getLayoutY() + 50, 50));
-        this.setBorder(new Border(new BorderStroke(Color.TRANSPARENT, Color.TRANSPARENT, Color.BLACK, Color.TRANSPARENT,
-                BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.DOTTED, BorderStrokeStyle.NONE,
-                CornerRadii.EMPTY, new BorderWidths(1), new Insets(0, 10, 0, 10))));
     }
 
     /**

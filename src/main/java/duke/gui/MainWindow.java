@@ -28,12 +28,19 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/gudetamaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/gudetamaDuke.png"));
 
+    /**
+     * Initialises values required for the MainWindow
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setStyle("-fx-background-image: url('/images/yellowBackground.png'); "
+                + "-fx-background-position: center center; "
+                + "-fx-background-repeat: no-repeat; "
+                + "-fx-background-size: cover;");
     }
 
     public void setDuke(Duke d) {
@@ -71,13 +78,5 @@ public class MainWindow extends AnchorPane {
     public void introDuke() {
         String intro = duke.getDukeIntro();
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(intro, dukeImage));
-    }
-
-    /**
-     * Displays Duke outro on the GUI
-     */
-    public void outroDuke() {
-        String outro = duke.getDukeOutro();
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(outro, dukeImage));
     }
 }
