@@ -31,6 +31,8 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            MainWindow mainWindow = new MainWindow();
+            fxmlLoader.setRoot(mainWindow);
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setTitle("Nekobot");
