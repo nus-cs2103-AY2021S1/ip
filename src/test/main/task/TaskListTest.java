@@ -20,13 +20,13 @@ public class TaskListTest {
     class Size {
         @Test
         @DisplayName("should return 0 for empty list")
-        public void size_noInput_size() {
+        public void size_taskList_size() {
             assertEquals(0, new TaskList().size());
         }
 
         @Test
         @DisplayName("should return list size for alternate list")
-        public void size_noInput_altSize() {
+        public void size_altTaskList_altSize() {
             TaskList tasks = new TaskList();
             tasks.add(TASK_ONE);
             tasks.add(TASK_TWO);
@@ -41,7 +41,7 @@ public class TaskListTest {
     class Get {
         @Test
         @DisplayName("should return task from list")
-        public void size_noInput_size() {
+        public void size_taskList_size() {
             TaskList tasks = new TaskList();
             tasks.add(TASK_THREE);
             assertEquals(1, tasks.size());
@@ -51,7 +51,7 @@ public class TaskListTest {
 
         @Test
         @DisplayName("should return alternate task from list")
-        public void size_noInput_altSize() {
+        public void size_altTaskList_altSize() {
             TaskList tasks = new TaskList();
             tasks.add(TASK_ONE);
             tasks.add(TASK_TWO);
@@ -105,7 +105,7 @@ public class TaskListTest {
 
         @Test
         @DisplayName("should remove and return alt task from list")
-        public void remove_index_altRemovedTask() {
+        public void remove_altIndex_altRemovedTask() {
             TaskList tasks = new TaskList();
             tasks.add(TASK_ONE);
             tasks.add(TASK_THREE);

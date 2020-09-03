@@ -17,13 +17,13 @@ public class TaskTest {
     class Write {
         @Test
         @DisplayName("should return a string meant for writing to disk")
-        public void write_noInput_string() {
+        public void write_task_string() {
             assertEquals(",0,task 1\n", TASK_ONE.write());
         }
 
         @Test
         @DisplayName("should return a string meant for writing to disk with alt task")
-        public void write_noInput_altString() {
+        public void write_altTask_altString() {
             assertEquals(",1,task 2\n", TASK_TWO.write());
         }
     }
@@ -33,13 +33,13 @@ public class TaskTest {
     class StringRepresentation {
         @Test
         @DisplayName("should return a string representation of the task instance")
-        public void toString_noInput_string() {
+        public void toString_task_string() {
             assertEquals("[\u2718] task 1", TASK_ONE.toString());
         }
 
         @Test
         @DisplayName("should return a string representation of an alternate task instance")
-        public void toString_noInput_altString() {
+        public void toString_altTask_altString() {
             assertEquals("[\u2713] task 2", TASK_TWO.toString());
         }
     }

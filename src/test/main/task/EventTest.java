@@ -21,14 +21,14 @@ public class EventTest {
     class Write {
         @Test
         @DisplayName("should return a string meant for writing to disk")
-        public void write_noInput_string() {
+        public void write_eventTask_string() {
             assertEquals("E,1993-12-06T10:10,0,task 1\n",
                     EVENT_ONE.write());
         }
 
         @Test
         @DisplayName("should return a string meant for writing to disk with alt event")
-        public void write_noInput_altString() {
+        public void write_altEventTask_altString() {
             assertEquals("E,4198-01-13T23:39,1,task 2\n",
                     EVENT_TWO.write());
         }
@@ -39,14 +39,14 @@ public class EventTest {
     class StringRepresentation {
         @Test
         @DisplayName("should return a string representation of the event instance")
-        public void toString_noInput_string() {
+        public void toString_eventTask_string() {
             assertEquals("[E][\u2718] task 1 (at: Monday, 06 Dec 1993, 10:10AM)",
                     EVENT_ONE.toString());
         }
 
         @Test
         @DisplayName("should return a string representation of an alternate event instance")
-        public void toString_noInput_altString() {
+        public void toString_altEventTask_altString() {
             assertEquals("[E][\u2713] task 2 (at: Saturday, 13 Jan 4198, 11:39PM)",
                     EVENT_TWO.toString());
         }

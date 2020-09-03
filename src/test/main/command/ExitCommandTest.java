@@ -19,7 +19,7 @@ public class ExitCommandTest {
     class Execute {
         @Test
         @DisplayName("should return the exit message")
-        public void execute_taskList_exitMessage() {
+        public void execute_noInput_exitMessage() {
             assertEquals("Bye. Hope to see you again soon!",
                     new ExitCommand().execute(UI, tasks));
         }

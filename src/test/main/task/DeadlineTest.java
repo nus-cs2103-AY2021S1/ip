@@ -21,14 +21,14 @@ public class DeadlineTest {
     class Write {
         @Test
         @DisplayName("should return a string meant for writing to disk")
-        public void write_noInput_string() {
+        public void write_deadlineTask_string() {
             assertEquals("D,1993-12-06T10:10,0,task 1\n",
                     DEADLINE_ONE.write());
         }
 
         @Test
         @DisplayName("should return a string meant for writing to disk with alt deadline")
-        public void write_noInput_altString() {
+        public void write_altDeadlineTask_altString() {
             assertEquals("D,4198-01-13T23:39,1,task 2\n",
                     DEADLINE_TWO.write());
         }
@@ -39,14 +39,14 @@ public class DeadlineTest {
     class StringRepresentation {
         @Test
         @DisplayName("should return a string representation of the deadline instance")
-        public void toString_noInput_string() {
+        public void toString_deadlineTask_string() {
             assertEquals("[D][\u2718] task 1 (by: Monday, 06 Dec 1993, 10:10AM)",
                     DEADLINE_ONE.toString());
         }
 
         @Test
         @DisplayName("should return a string representation of an alternate deadline instance")
-        public void toString_noInput_altString() {
+        public void toString_altDeadlineTask_altString() {
             assertEquals("[D][\u2713] task 2 (by: Saturday, 13 Jan 4198, 11:39PM)",
                     DEADLINE_TWO.toString());
         }

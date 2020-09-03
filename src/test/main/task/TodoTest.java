@@ -17,13 +17,13 @@ public class TodoTest {
     class Write {
         @Test
         @DisplayName("should return a string meant for writing to disk")
-        public void write_noInput_string() {
+        public void write_todoTask_string() {
             assertEquals("T,,0,task 1\n", TODO_ONE.write());
         }
 
         @Test
         @DisplayName("should return a string meant for writing to disk with alt todo")
-        public void write_noInput_altString() {
+        public void write_altTodoTask_altString() {
             assertEquals("T,,1,task 2\n", TODO_TWO.write());
         }
     }
@@ -33,13 +33,13 @@ public class TodoTest {
     class StringRepresentation {
         @Test
         @DisplayName("should return a string representation of the todo instance")
-        public void toString_noInput_string() {
+        public void toString_todoTask_string() {
             assertEquals("[T][\u2718] task 1", TODO_ONE.toString());
         }
 
         @Test
         @DisplayName("should return a string representation of an alternate todo instance")
-        public void toString_noInput_altString() {
+        public void toString_altTodoTask_altString() {
             assertEquals("[T][\u2713] task 2", TODO_TWO.toString());
         }
     }

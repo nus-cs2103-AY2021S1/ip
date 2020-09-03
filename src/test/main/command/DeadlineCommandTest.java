@@ -38,7 +38,7 @@ public class DeadlineCommandTest {
     class Execute {
         @Test
         @DisplayName("should add task to list and return add success string")
-        public void execute_taskList_addSuccess() {
+        public void execute_deadlineTask_addSuccess() {
             String name = "test";
             LocalDateTime time = LocalDateTime.of(1032, 5, 2, 14, 12);
             DeadlineCommand command = new DeadlineCommand(name, time);
@@ -52,7 +52,7 @@ public class DeadlineCommandTest {
 
         @Test
         @DisplayName("should add alternate task to list and return add success string")
-        public void execute_altTaskList_addSuccess() {
+        public void execute_altDeadlineTask_addSuccess() {
             String name = "test 2";
             LocalDateTime time = LocalDateTime.of(9032, 9, 22, 19, 42);
             DeadlineCommand command = new DeadlineCommand(name, time);

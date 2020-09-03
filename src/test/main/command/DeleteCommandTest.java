@@ -41,7 +41,7 @@ public class DeleteCommandTest {
     class Execute {
         @Test
         @DisplayName("should remove task from list and return remove success string")
-        public void execute_taskList_removeSuccess() throws InvalidTaskException {
+        public void execute_index_removeSuccess() throws InvalidTaskException {
             DeleteCommand command = new DeleteCommand(2);
             Task task = tasks.get(1);
 
@@ -52,7 +52,7 @@ public class DeleteCommandTest {
 
         @Test
         @DisplayName("should remove alternate task from list and return remove success string")
-        public void execute_altTaskList_removeSuccess() throws InvalidTaskException {
+        public void execute_altIndex_removeSuccess() throws InvalidTaskException {
             DeleteCommand command = new DeleteCommand(1);
             Task task = tasks.get(0);
 
@@ -63,7 +63,7 @@ public class DeleteCommandTest {
 
         @Test
         @DisplayName("should throw InvalidTaskException if task number out of index")
-        public void execute_taskList_throwException() {
+        public void execute_invalidIndex_throwException() {
             DeleteCommand command = new DeleteCommand(4);
 
             InvalidTaskException exception = assertThrows(

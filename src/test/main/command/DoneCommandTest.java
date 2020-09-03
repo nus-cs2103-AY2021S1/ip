@@ -41,7 +41,7 @@ public class DoneCommandTest {
     class Execute {
         @Test
         @DisplayName("should mark task in list as done and return done success string")
-        public void execute_taskList_doneSuccess() throws InvalidTaskException {
+        public void execute_index_doneSuccess() throws InvalidTaskException {
             DoneCommand command = new DoneCommand(2);
             Task task = tasks.get(1);
             String doneSuccess = command.execute(UI, tasks);
@@ -53,7 +53,7 @@ public class DoneCommandTest {
 
         @Test
         @DisplayName("should mark alternate task in list as done and return done success string")
-        public void execute_altTaskList_doneSuccess() throws InvalidTaskException {
+        public void execute_altIndex_doneSuccess() throws InvalidTaskException {
             DoneCommand command = new DoneCommand(1);
             Task task = tasks.get(0);
             String doneSuccess = command.execute(UI, tasks);
@@ -65,7 +65,7 @@ public class DoneCommandTest {
 
         @Test
         @DisplayName("should throw InvalidTaskException if task number out of index")
-        public void execute_taskList_throwException() {
+        public void execute_invalidIndex_throwException() {
             DoneCommand command = new DoneCommand(0);
 
             InvalidTaskException exception = assertThrows(
