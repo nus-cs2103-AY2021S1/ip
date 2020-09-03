@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
-    
+
     /**
      * Constructor for TaskList
      */
@@ -22,16 +22,15 @@ public class TaskList {
 
     /**
      * summarize prints out all tasks inside a TaskList object.
-     * @param
      * @return String with all tasks
      */
     public String summarize() {
-        String all_tasks = "Here are the tasks in your list:\n";
+        StringBuilder allTasks = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < this.tasks.size(); i++) {
             Task t = tasks.get(i);
-            all_tasks += String.format("%d.%s\n", i+1, t.toString());
+            allTasks.append(String.format("%d.%s\n", i + 1, t.toString()));
         }
-        return all_tasks;
+        return allTasks.toString();
     }
 
     /**
@@ -60,7 +59,8 @@ public class TaskList {
         }
         Task t = this.tasks.get(index);
         this.tasks.remove(index);
-        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.\n", t.toString(), this.tasks.size());
+        return String.format("Noted. I've removed this task:\n  %s\n" +
+                "Now you have %d tasks in the list.\n", t.toString(), this.tasks.size());
     }
 
     /**
@@ -70,7 +70,8 @@ public class TaskList {
      */
     public String addTask(Task t) {
         tasks.add(t);
-        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n", t.toString(), this.tasks.size());
+        return String.format("Got it. I've added this task:\n  %s\n" +
+                "Now you have %d tasks in the list.\n", t.toString(), this.tasks.size());
     }
 
     /**
@@ -80,17 +81,17 @@ public class TaskList {
      */
     public String findTasksWith(String keyword) {
         ArrayList<Task> matches = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            matchName(tasks.get(i), keyword, matches);
+        for (Task task : tasks) {
+            matchName(task, keyword, matches);
         }
-        
+
         // make String
-        String output_msg = "Here are the matching tasks in your list:\n";
-        for (int i = 0; i < matches.size(); i++) {
+        StringBuilder output_msg = new StringBuilder("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < matches.size(); i ++) {
             Task t = matches.get(i);
-            output_msg += String.format("%d.%s\n", i+1, t.toString());
+            output_msg.append(String.format("%d.%s\n", i + 1, t.toString()));
         }
-        return output_msg;
+        return output_msg.toString();
     }
 
     /**

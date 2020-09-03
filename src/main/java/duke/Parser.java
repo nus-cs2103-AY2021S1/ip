@@ -3,15 +3,15 @@ package duke;
 public class Parser {
     /**
      * categorize() place a task to its appropriate type based on String input
-     * @param input_parts an array of Strings derived from input
+     * @param inputParts an array of Strings derived from input
      * @return corresponding TaskType object
      */
-    public static TaskType categorize(String[] input_parts) throws Exception {
-        if (input_parts[0].compareTo("todo") == 0) {
+    public static TaskType categorize(String[] inputParts) throws Exception {
+        if (inputParts[0].compareTo("todo") == 0) {
             return TaskType.ToDo;
-        } else if (input_parts[0].compareTo("deadline") == 0) {
+        } else if (inputParts[0].compareTo("deadline") == 0) {
             return TaskType.Deadline;
-        } else if (input_parts[0].compareTo("event") == 0) {
+        } else if (inputParts[0].compareTo("event") == 0) {
             return TaskType.Event;
         } else {
             throw new UndefinedWordException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
@@ -19,31 +19,31 @@ public class Parser {
     }
 
     /**
-     * extractTask extract a task name from input_parts.
-     * @param input_parts array of strings derived from input
+     * extractTask extract a task name from inputParts.
+     * @param inputParts array of strings derived from input
      * @return task name
      */
-    private static String extractTask(String[] input_parts) {
-        String task = "";
-        for (int i = 1; i < input_parts.length; i++) {
-            task += input_parts[i] + " ";
+    private static String extractTask(String[] inputParts) {
+        StringBuilder task = new StringBuilder();
+        for (int i = 1; i < inputParts.length; i++) {
+            task.append(inputParts[i]).append(" ");
         }
-        return task.trim();
+        return task.toString().trim();
     }
 
     /**
      * Extract details of deadline and event tasks from input.
-     * @param input_parts input in form of String array
+     * @param inputParts input in form of String array
      * @return details of task
      */
-    private static String extractDetails(String[] input_parts) {
-        String task = "";
-        for (int i = 0; i < input_parts.length; i++) {
-            task += input_parts[i] + " ";
+    private static String extractDetails(String[] inputParts) {
+        StringBuilder task = new StringBuilder();
+        for (String inputPart : inputParts) {
+            task.append(inputPart).append(" ");
         }
-        return task.trim();
+        return task.toString().trim();
     }
-    
+
     /**
      * parseTask creates a Task object based on user input String.
      * @param input String of user input
@@ -52,11 +52,7 @@ public class Parser {
     public static Task parseTask(String input) throws Exception { // catch duke exception from extractTask and categorize, throw to op()
         String[] parts = input.split(" ");
         TaskType type;
-        try {
-            type = categorize(parts);
-        } catch (UndefinedWordException e) {
-            throw e;
-        }
+        type = categorize(parts);
 
         if (type == TaskType.ToDo) {
             parts = input.split(" ");
@@ -71,14 +67,14 @@ public class Parser {
             } // if not, chillax and continue
             String name = extractTask(input.split("/by")[0].split(" "));
             String deadline = extractDetails(input.split("/by")[1].split(" "));
-            return new Deadline(name, deadline); 
+            return new Deadline(name, deadline);
         } else {
             if (input.split("/at").length <= 1) {
                 throw new NoDescriptionException("☹ OOPS!!! The description of an event cannot be empty.\n");
             } // if not, chillax and continue
             String name = extractTask(input.split("/at")[0].split(" "));
             String details = extractDetails(input.split("/at")[1].split(" "));
-            
+
             return new Event(name, details);
         }
     }
@@ -97,11 +93,11 @@ public class Parser {
     public static boolean isList(String input) {
         return input.compareTo("list") == 0;
     }
-    
+
     public static boolean isDone(String input) {
         return input.split(" ")[0].compareTo("done") == 0;
     }
-    
+
     public static boolean isDelete(String input) {
         return input.split(" ")[0].compareTo("delete") == 0;
     }
@@ -112,7 +108,7 @@ public class Parser {
     public static int getIndex(String input) {
         return Integer.parseInt(input.split(" ")[1]) - 1;
     }
-    
+
     /**
      * getKeyword obtains user's keyword that they wish to find in tasks
      * @param input user input

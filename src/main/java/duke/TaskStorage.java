@@ -7,12 +7,12 @@ import java.io.FileWriter;
 public class TaskStorage {
     /**
      * saveTask is used to store current tasks into a txt file
-     * @param prev_tasks File object to be written to
+     * @param prevTasks File object to be written to
      * @param tasks TaskList to be saved
      */
-    public static void saveTask(File prev_tasks, TaskList tasks) {
+    public static void saveTask(File prevTasks, TaskList tasks) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(prev_tasks));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(prevTasks));
             for (int i = 0; i < tasks.getSize(); i++) {
                 writer.write(tasks.getTask(i).getFileString());
             }

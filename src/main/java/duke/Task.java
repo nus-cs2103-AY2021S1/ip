@@ -7,9 +7,8 @@ public class Task {
 
     /**
      * Constructor for Task.
-     * @param name: String that represents task
-     * @param type: type of task
-     * @return Task with default isDone = false
+     * @param name String that represents task
+     * @param type type of task
      */
     public Task(String name, TaskType type) {
         this.name = name;
@@ -30,16 +29,16 @@ public class Task {
     }
 
     /**
-     * containsKeyword: Finds out whether this task has a keyword in its name.
-     * @param keyword: keyword to be found
+     * containsKeyword Finds out whether this task has a keyword in its name.
+     * @param keyword keyword to be found
      * @return boolean indicating found or not
      */
     public boolean containsKeyword(String keyword) {
         String[] nameParts = name.split(" ");
-        for (int i = 0; i < nameParts.length; i++) {
-            if (nameParts[i].length() == keyword.length()
-                    && nameParts[i].compareTo(keyword) == 0) {
-                        return true;
+        for (String namePart : nameParts) {
+            if (namePart.length() == keyword.length()
+                    && namePart.compareTo(keyword) == 0) {
+                return true;
             }
         }
         return false;
@@ -54,7 +53,7 @@ public class Task {
         String status = this.isDone() ? "T" : "F";
         return String.format("%s~%s", status, name);
     }
-    
+
     /**
      * done(): Set this task isDone = true
      */
