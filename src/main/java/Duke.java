@@ -28,6 +28,7 @@ public class Duke {
     }
 
     public String getResponse(String input) {
+        assert(tasks != null); //ensure tasklist is initialised by Duke
         StringBuilder response = new StringBuilder();
         try {
             String[] processedCommand = parser.parse(input);
