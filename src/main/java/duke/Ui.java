@@ -7,41 +7,48 @@ import java.util.Scanner;
  * Encapsulates the user interactions.
  */
 public class Ui {
+    private String message;
     /**
      * Instantiates Ui.
      */
     Ui() {
+        this.message = "";
     }
 
     /**
-     * Reads the user input.
-     *
-     * @param sc Scanner object to read user input.
-     * @return String of the user input.
+     * Clear the current message.
      */
-    public String getUserInput(Scanner sc) {
-        return sc.nextLine();
+    public void clearMessage() {
+        this.message = "";
+    }
+
+    /**
+     * Get the current message.
+     * @return current message.
+     */
+    public String getMessage() {
+        return this.message;
     }
 
     /**
      * Prints welcome message for user.
      */
     public void showGreeting() {
-        System.out.println("Hello! I'm Duke" + "\n" + "What can I do for you?");
+        this.message = "Hello! I'm Duke" + "\n" + "What can I do for you?";
     }
 
     /**
      * Prints loading error message.
      */
     public void showLoadingError() {
-        System.out.println("Sorry, an error occurred while loading the data");
+        this.message = "Sorry, an error occurred while loading the data\n";
     }
 
     /**
      * Prints exit message.
      */
     public void showExitMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+        this.message = "Bye. Hope to see you again soon!\n";
     }
 
     /**
@@ -52,9 +59,9 @@ public class Ui {
     public void showTasksList(TaskList tasks) {
         int index = 1;
         ArrayList<Task> tasksList = tasks.getTasksList();
-        System.out.println("Here are the tasks in your list:");
+        this.message = "Here are the tasks in your list:\n";
         for (Task t : tasksList) {
-            System.out.println(index + ". " + t);
+            this.message = this.message + index + ". " + t + "\n";
             index++;
         }
     }
@@ -68,7 +75,7 @@ public class Ui {
     public void showAddTask(Task task, int size) {
         String taskText = "Got it. I've added this task:" + "\n" + task + "\n";
         String totalText = "Now you have " + size + " tasks in the list";
-        System.out.println(taskText + totalText);
+        this.message = taskText + totalText;
     }
 
     /**
@@ -78,9 +85,8 @@ public class Ui {
      * @param size Size of the updated TaskList.
      */
     public void showDeleteTask(Task task, int size) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + size + " tasks in the list");
+        this.message = "Noted. I've removed this task:\n" + task + "\n"
+                + "Now you have " + size + " tasks in the list\n";
     }
 
     /**
@@ -89,15 +95,7 @@ public class Ui {
      * @param task Task completed.
      */
     public void showTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task.toString());
-    }
-
-    /**
-     * Prints line break.
-     */
-    public void lineBreak() {
-        System.out.println("---");
+        this.message = "Nice! I've marked this task as done:\n" + task.toString() + "\n";
     }
 
     /**
@@ -106,7 +104,7 @@ public class Ui {
      * @param message Error message.
      */
     public void showError(String message) {
-        System.out.println(message);
+        this.message = message;
     }
 
     /**
@@ -115,11 +113,11 @@ public class Ui {
      * @param tasks TaskList of tasks that matches keyword.
      */
     public void showTasksFound(TaskList tasks) {
-        System.out.println("Here are the matching tasks in your list:");
+        this.message = "Here are the matching tasks in your list:\n";
         int index = 1;
         ArrayList<Task> tasksList = tasks.getTasksList();
         for (Task t : tasksList) {
-            System.out.println(index + ". " + t);
+            this.message = this.message + index + ". " + t + "\n";
             index++;
         }
     }

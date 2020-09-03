@@ -100,5 +100,4 @@ public class Storage {
             throw new DukeException("Error occurred while saving the tasks.");
         }
     }
-
 }

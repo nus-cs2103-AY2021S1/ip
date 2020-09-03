@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Encapsulates a Duke object.
  */
@@ -9,15 +7,15 @@ public class Duke {
     private static TaskList tasks;
     private Ui ui;
     private Storage storage;
+    private boolean isExit;
+
 
     /**
      * Instantiates a Duke object.
-     *
-     * @param filePath directory of file.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/duke.txt");
 
         try {
             tasks = new TaskList(storage.loadTasksFromFile());
@@ -27,35 +25,21 @@ public class Duke {
         }
     }
 
-    /**
-     * Returns main logic of code.
-     */
-    public void run() {
+    public String showGreetingMessage() {
+        ui.clearMessage();
         ui.showGreeting();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                Scanner sc = new Scanner(System.in);
-                String userInput = ui.getUserInput(sc);
-                ui.lineBreak();
-                Command command = Parser.readUserInput(userInput);
-                command.execute(tasks, storage, ui);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.lineBreak();
-            }
+        return ui.getMessage();
+    }
+
+    public String getResponse(String input) {
+        ui.clearMessage();
+        try {
+            Command command = Parser.readUserInput(input);
+            command.execute(tasks, storage, ui);
+            isExit = command.isExit();
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
         }
+        return ui.getMessage();
     }
-
-    /**
-     * Starts Duke programme.
-     *
-     * @param args Arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
-    }
-
 }
