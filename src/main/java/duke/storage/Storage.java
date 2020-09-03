@@ -1,9 +1,5 @@
 package duke.storage;
 
-import duke.exceptions.DukeException;
-import duke.tasks.Task;
-import duke.tasks.TaskType;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,12 +8,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+import duke.tasks.TaskType;
+
 /**
  * Represents a storage that read from and writes to a file.
  * @version 1.0
  */
 public class Storage {
-    private final File FILE;
+    private final File file;
 
     /**
      * Creates a new Storage object with the given file path.
@@ -25,7 +25,7 @@ public class Storage {
      * @param filePath A String representation of the target file path.
      */
     public Storage(String filePath) {
-        this.FILE = new File(filePath);
+        this.file = new File(filePath);
     }
 
     /**
@@ -39,7 +39,7 @@ public class Storage {
         ArrayList<Task> lst = new ArrayList<>();
 
         try {
-            Scanner fileReader = new Scanner(FILE);
+            Scanner fileReader = new Scanner(file);
             while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
                 String[] command = line.split(" \\| ");
@@ -65,6 +65,7 @@ public class Storage {
                     }
                     lst.add(event);
                     break;
+                default:
                 }
             }
             fileReader.close();
@@ -87,18 +88,18 @@ public class Storage {
      */
     public void write(ArrayList<Task> lst) throws DukeException {
         try {
-            FILE.getParentFile().mkdir();
-            FileWriter fileWriter = new FileWriter(FILE);
+            file.getParentFile().mkdir();
+            FileWriter fileWriter = new FileWriter(file);
             String listToString = "";
             for (Task t : lst) {
                 if (t.getType() == TaskType.TODO) {
                     listToString += "T | " + (t.getStatus() ? 1 : 0) + " | " + t.getDescription() + "\n";
                 } else if (t.getType() == TaskType.DEADLINE) {
-                    listToString += "D | " + (t.getStatus() ? 1 : 0) + " | " + t.getDescription() + " | " +
-                            t.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "\n";
+                    listToString += "D | " + (t.getStatus() ? 1 : 0) + " | " + t.getDescription() + " | "
+                            + t.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "\n";
                 } else {
-                    listToString += "E | " + (t.getStatus() ? 1 : 0) + " | " + t.getDescription() + " | " +
-                            t.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "\n";
+                    listToString += "E | " + (t.getStatus() ? 1 : 0) + " | " + t.getDescription() + " | "
+                            + t.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "\n";
                 }
             }
             fileWriter.write(listToString);

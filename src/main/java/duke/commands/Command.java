@@ -1,9 +1,9 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
 
 /**
  * Represents a general command/command category.
@@ -30,5 +30,5 @@ public abstract class Command {
      * @param storage A Storage object to write/access information to/from a file if required by the command.
      * @throws DukeException if any exception is thrown during execution in the format of DukeException.
      */
-    abstract public void execute(TaskList list, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList list, Ui ui, Storage storage) throws DukeException;
 }

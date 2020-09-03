@@ -1,8 +1,8 @@
 package duke.ui;
 
-import duke.tasks.Task;
-
 import java.util.Scanner;
+
+import duke.tasks.Task;
 
 /**
  * Represents the ui that interacts with the user.
@@ -20,8 +20,8 @@ public class Ui {
      * Shows the welcome interface.
      */
     public void showWelcome() {
-        System.out.println("\tHello!\n\tI am Baymax, your personal idle time companion." +
-                "\n\tHow may I help you?");
+        System.out.println("\tHello!\n\tI am Baymax, your personal idle time companion."
+                + "\n\tHow may I help you?");
     }
 
     /**

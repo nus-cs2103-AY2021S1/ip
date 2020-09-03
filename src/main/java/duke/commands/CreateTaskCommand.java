@@ -1,13 +1,14 @@
 package duke.commands;
 
+import java.time.LocalDate;
+
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
-import duke.tasks.TaskList;
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 import duke.tasks.TaskType;
 import duke.ui.Ui;
 
-import java.time.LocalDate;
 
 /**
  * Represents a command that creates a new task.
@@ -46,7 +47,7 @@ public class CreateTaskCommand extends Command {
      */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
-        Task task = type == TaskType.TODO ? new Task(type,description) : new Task(type, description, date);
+        Task task = type == TaskType.TODO ? new Task(type, description) : new Task(type, description, date);
         list.addTask(task);
         storage.write(list.getList());
         ui.showAdd(task);

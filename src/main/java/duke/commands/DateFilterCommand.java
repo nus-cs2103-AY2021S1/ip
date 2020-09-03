@@ -1,10 +1,10 @@
 package duke.commands;
 
+import java.time.LocalDate;
+
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-
-import java.time.LocalDate;
 
 /**
  * Represents a command that filters the list with the given date.

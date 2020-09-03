@@ -8,10 +8,10 @@ import java.time.format.DateTimeFormatter;
  * @version 1.0
  */
 public class Task {
-    private final TaskType TYPE;
-    private String description;
+    private final TaskType type;
+    private final String description;
     private boolean isDone;
-    private LocalDate date;
+    private final LocalDate date;
 
     /**
      * Creates a new Task object with the given type, description.
@@ -22,7 +22,7 @@ public class Task {
      * @param date The date of deadline or event.
      */
     public Task(TaskType type, String description, LocalDate... date) {
-        this.TYPE = type;
+        this.type = type;
         this.description = description;
         this.isDone = false;
         this.date = date.length > 0 ? date[0] : null;
@@ -34,7 +34,7 @@ public class Task {
      * @return the type of the task.
      */
     public TaskType getType() {
-        return TYPE;
+        return type;
     }
 
     /**
@@ -97,18 +97,19 @@ public class Task {
     @Override
     public String toString() {
         String string = "[";
-        switch (TYPE) {
-            case TODO:
-                string += "T][" + getStatusIcon() + "] " + getDescription();
-                break;
-            case EVENT:
-                string += "E][" + getStatusIcon() + "] " + getDescription() +
-                " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-                break;
-            case DEADLINE:
-                string += "D][" + getStatusIcon() + "] " + getDescription() +
-                        " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-                break;
+        switch (type) {
+        case TODO:
+            string += "T][" + getStatusIcon() + "] " + getDescription();
+            break;
+        case EVENT:
+            string += "E][" + getStatusIcon() + "] " + getDescription()
+                    + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            break;
+        case DEADLINE:
+            string += "D][" + getStatusIcon() + "] " + getDescription()
+                    + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            break;
+        default:
         }
         return string;
     }

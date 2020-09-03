@@ -11,6 +11,10 @@ public enum TaskType {
 
     private String type;
 
+    TaskType(String type) {
+        this.type = type;
+    }
+
     /**
      * Returns the value of the TaskType.
      *
@@ -18,10 +22,6 @@ public enum TaskType {
      */
     public String getType() {
         return this.type;
-    }
-
-    TaskType(String type) {
-        this.type = type;
     }
 
     /**
