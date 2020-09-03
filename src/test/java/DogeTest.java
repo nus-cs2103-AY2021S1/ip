@@ -10,20 +10,14 @@ import org.junit.jupiter.api.Test;
 import duke.task.Task;
 import duke.task.TaskType;
 
+import java.util.ArrayList;
+
 public class DogeTest {
 
     @Test
     public void dummyTest() {
         assertEquals(2, 2);
     }
-
-    /*@Test
-    public void uiTest() {
-        duke.Ui ui = new duke.Ui();
-        String testString = "--------------------------------------" + "\n"
-                + "Added to list : " + "printable message" + "\n"
-                + "--------------------------------------";
-    }*/
 
     @Test
     public void taskTest() {
@@ -49,5 +43,13 @@ public class DogeTest {
             System.out.println(e.getMessage());
         }
         assertTrue(isAddCommand);
+    }
+
+    @Test
+    public void checkCommaTest() {
+        String input = "doge,feed";
+        ArrayList<String> commaSeperated = Parser.checkCommas(input);
+        assertEquals("doge", commaSeperated.get(0));
+        assertEquals("feed", commaSeperated.get(1));
     }
 }

@@ -69,6 +69,7 @@ public class Ui {
                 + "_________$$$$$$$$$$__________________________$$_$_$$$$$$$$\n"
                 + "What can this good boi do for you?\n"
                 + "--------------------------------------";
+        System.out.println(welcomeMessage);
         return welcomeMessage;
     }
 

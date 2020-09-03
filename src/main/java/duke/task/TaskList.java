@@ -29,15 +29,17 @@ public class TaskList {
 
     /**
      * Returns an ArrayList of tasks that match the User keyword given
-     * @param keyword user keyword
+     * @param keywords user keyword
      * @return ArrayList of tasks
      */
-    public static ArrayList<Task> searchList(String keyword) {
+    public static ArrayList<Task> searchList(String... keywords) {
         ArrayList<Task> returnList = new ArrayList<>();
-        for (Task t : toDoList
-             ) {
-            if (t.toString().contains(keyword)) {
-                returnList.add(t);
+        for (String s : keywords) {
+            for (Task t : toDoList
+            ) {
+                if (t.toString().contains(s)) {
+                    returnList.add(t);
+                }
             }
         }
         return returnList;

@@ -152,7 +152,6 @@ public class Duke {
     public String getResponse(String input) {
         Ui ui = new Ui();
         Storage storage = new Storage("\\save.txt");
-        ui.printWelcome();
         try {
             Command c = Parser.manage(input);
             return (c.execute(ui, storage));

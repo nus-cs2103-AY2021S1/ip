@@ -5,10 +5,12 @@ import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.ArrayList;
+
 public class AddCommand extends Command {
-    final Task myTask;
-    public AddCommand(Task myTask) {
-        this.myTask = myTask;
+    final Task[] myTasks;
+    public AddCommand(Task ... myTasks) {
+        this.myTasks = myTasks;
     }
 
     /**
@@ -19,11 +21,13 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(Ui ui, Storage storage) {
-        TaskList.addToList(myTask);
+        String returnStr = "";
+        for (Task t : myTasks) {
+            TaskList.addToList(t);
+            returnStr = returnStr + (ui.printFormat(t.toString()));
+        }
         storage.save(TaskList.getList());
-        String returnStr;
-        returnStr = ui.printFormat(myTask.toString())
-                + ui.printNumberOfTasks(TaskList.getList().size());
+        returnStr = returnStr + ui.printNumberOfTasks(TaskList.getList().size());
         return returnStr;
     }
 }
