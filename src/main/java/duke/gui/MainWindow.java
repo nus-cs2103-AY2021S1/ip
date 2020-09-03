@@ -4,6 +4,9 @@ import duke.Duke;
 import duke.DukeException;
 import duke.Main;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+
 import javafx.application.Platform;
 
 import javafx.fxml.FXML;
@@ -15,6 +18,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -69,13 +74,21 @@ public class MainWindow extends AnchorPane {
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
+     * Solution below adapted from https://github.com/pennhanlee/ip
+     *
+     * @author pennhanlee
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
 
         if (input.equals("bye")) {
-            Platform.exit();
+            dialogContainer.getChildren().add(DialogBox
+                    .getDukeDialog(duke.getUi().printByeMessage(), dukeImage));
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.millis(1500), x -> Platform.exit()
+            ));
+            timeline.play();
         }
 
         try {
