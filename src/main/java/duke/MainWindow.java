@@ -26,6 +26,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image LogoImage = new Image(this.getClass().getResourceAsStream("/images/LOGO.png"));
 
     @FXML
     public void initialize() {
@@ -34,7 +35,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.startMessage(), dukeImage));
+        dialogContainer.getChildren().add(StartingBox.getStartMessage(Ui.startMessage(), LogoImage));
     }
 
     /**
