@@ -8,15 +8,24 @@ public class EventTask extends Task {
         super(summary);
         this.startDate = startDate;
         this.endDate = endDate;
+        this.taskType = "event";
     }
 
     public String getTime() {
         return startDate.getDayOfMonth() + " "
                 + startDate.getMonth().toString() + " "
-                + startDate.getYear()+ " to "
+                + startDate.getYear() + " to "
                 + endDate.getDayOfMonth() + " "
                 + endDate.getMonth().toString() + " "
                 + endDate.getYear();
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
     @Override
