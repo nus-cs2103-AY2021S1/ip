@@ -25,12 +25,14 @@ public class AddDeadlineCommand extends AddCommand {
      * @throws DateTimeParseException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws 
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws 
             DateTimeParseException {
         Task newTask = new Deadline(taskDescription, by);
         tasks.add(newTask);
-        ui.showAdded(newTask, tasks.size());
+        String output = ui.showAdded(newTask, tasks.size());
         
         storage.save(tasks);
+        
+        return output;
     }
 }

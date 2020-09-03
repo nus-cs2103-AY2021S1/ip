@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class Ui {
-    private final static String MSG_LINEBREAK = "____________________________________________________________";
     private final static String MSG_GREET = "Hello! I'm Duke \n" +
             "What can I do for you?\n";
     private final static String MSG_EXIT = "Bye. Hope to see you again soon!";
@@ -12,81 +11,64 @@ public class Ui {
     private final static String MSG_DELETED_TASK = "Noted. I've removed this task:\n";
     private final static String MSG_FOUND_MATCHING_TASK = "Here are the matching tasks in your list:";
     private final static String MSG_NO_MATCHING_TASK = "No matching tasks are found in your list.";
-
-    private Scanner sc;
     
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
-
-    public void showWelcome() {
-        System.out.println(MSG_LINEBREAK + "\n" + MSG_GREET + MSG_LINEBREAK + "\n");
+    
+    public String showWelcome() {
+        return MSG_GREET;
     }
 
-    public void showExit() {
-        System.out.println(MSG_EXIT);
+    public String showExit() {
+        return MSG_EXIT;
     }
     
-    public void showError(Exception e) {
-        System.out.println(e.getMessage());
+    public String showError(Exception e) {
+        return e.getMessage();
     }
 
-    public void showError(String e) {
-        System.out.println(e);
-    }
-
-    public void showLineTop() {
-        System.out.println(MSG_LINEBREAK);
+    public String showError(String e) {
+        return e;
     }
     
-    public void showLineBottom() { 
-        System.out.println(MSG_LINEBREAK + "\n");
+    public String showListWithTasksHeader() {
+        return MSG_LIST_TASK_HAVE_TASK;
     }
     
-    public String readCommand() {
-        return sc.nextLine();
+    public String showListNoTasks() {
+        return MSG_LIST_TASK_NO_TASK;
     }
     
-    public void showListWithTasksHeader() {
-        System.out.println(MSG_LIST_TASK_HAVE_TASK);
+    public String showTaskWithIndex(int i, Task task) {
+        return i + "." + task;
     }
     
-    public void showListNoTasks() {
-        System.out.println(MSG_LIST_TASK_NO_TASK);
-    }
-    
-    public void showTaskWithIndex(int i, Task task) {
-        System.out.println(i + "." + task);
-    }
-    
-    public void showDeleted(Task task, int numOfRemainingTasks) {
-        System.out.println(MSG_DELETED_TASK + task + "\n" 
+    public String showDeleted(Task task, int numOfRemainingTasks) {
+        return MSG_DELETED_TASK + task + "\n" 
                 + (numOfRemainingTasks == 0 
                         ? "Now you have no tasks in the list."
                         : (numOfRemainingTasks == 1 
                                 ? "Now you have 1 task in the list." 
-                                : "Now you have " + numOfRemainingTasks + " tasks in the list.")));
+                                : "Now you have " + numOfRemainingTasks + " tasks in the list."));
     }
     
-    public void showDone(Task task) {
-        System.out.println(MSG_MARK_DONE + task);
+    public String showDone(Task task) {
+        return MSG_MARK_DONE + task;
     }
     
-    public void showAdded(Task task, int numOfTasks) {
-        System.out.println(MSG_ADDED_TASK + task + "\n" 
+    public String showAdded(Task task, int numOfTasks) {
+        return MSG_ADDED_TASK + task + "\n" 
                 + (numOfTasks == 0
                         ? "Now you have no tasks in the list."
                         : (numOfTasks == 1
                                 ? "Now you have 1 task in the list."
-                                : "Now you have " + numOfTasks + " tasks in the list.")));
+                                : "Now you have " + numOfTasks + " tasks in the list."));
     }
     
-    public void showNoMatch() {
-        System.out.println(MSG_NO_MATCHING_TASK);
+    public String showNoMatch() {
+        return MSG_NO_MATCHING_TASK;
     }
     
-    public void showMatchingTaskHeader() {
-        System.out.println(MSG_FOUND_MATCHING_TASK);
+    public String showMatchingTaskHeader() {
+        return MSG_FOUND_MATCHING_TASK;
     }
     
 }

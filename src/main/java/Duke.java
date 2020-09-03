@@ -1,7 +1,19 @@
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.ListIterator;
-import java.util.Scanner;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
 
 /**
  * Represents a task-tracking chat bot with Command Line Interface.
@@ -11,6 +23,15 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     /**
      * Constructs Duke object which represents a chat bot and loads saved tasks if save file exists.
@@ -26,14 +47,30 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * Constructs Duke object and loads saved tasks (from a pre-defined path) if save file exists.
+     */
+    public Duke() {
+        String filePath = "./data/savefile.txt";
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showError(e);
+            tasks = new TaskList();
+        }
+    }
     
+    /*
     public static void main(String[] args) {
         new Duke("./data/savefile.txt").run();
     }
+    */
+    
 
-    /**
-     * Initialises chat session with Duke.
-     */
+    /*
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -53,6 +90,24 @@ public class Duke {
             }
         }
     }
+    */
+    
+    public String getResponse(String input) {
+        try {
+            String fullCommand = input;
+            Command c = Parser.parse(fullCommand);
+            String output = c.execute(tasks, ui, storage);
+            return output;
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (DateTimeParseException e) {
+            return "Incorrect date format. Retry with YYYY-MM-DD.";
+        }
+    }
+
+    
+    
+    
 /*
     public static void main(String[] args) {
         Duke duke = new Duke();
