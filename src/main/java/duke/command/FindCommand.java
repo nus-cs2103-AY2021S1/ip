@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.Task;
+import duke.TaskList;
+import duke.Ui;
 
 public class FindCommand implements Command {
     String cmd;
@@ -12,7 +16,7 @@ public class FindCommand implements Command {
         TaskList res = new TaskList();
         String toSearch = cmd.replaceFirst("find\\s+", "");
         for (Task task : tasks.thingsToDo) {
-            if (task.description.matches(".*?" + toSearch + ".*")) {
+            if (task.getDescription().matches(".*?" + toSearch + ".*")) {
                 res.add(task);
             }
         }

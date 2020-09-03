@@ -1,4 +1,6 @@
-package duke;
+package duke.command;
+
+import duke.TaskList;
 
 public interface Command {
     void execute(TaskList tasks);
