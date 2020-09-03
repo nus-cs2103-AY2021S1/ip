@@ -31,9 +31,9 @@ public class DoneCommand extends Command {
      * @throws StorageException if the Tasks cannot be written to local storage.
      */
     @Override
-    public void execute(TaskList list, Storage storage) throws InvalidTaskException, StorageException {
+    public String execute(TaskList list, Storage storage) throws InvalidTaskException, StorageException {
         Task doneTask = list.completeTask(this.taskIndex);
         storage.writeTaskStorage(list.getSaveString());
-        Ui.doneTaskMessage(doneTask);
+        return Ui.doneTaskMessage(doneTask);
     }
 }

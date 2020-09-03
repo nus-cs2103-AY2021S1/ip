@@ -10,83 +10,74 @@ import duke.task.Task;
 public class Ui {
     /**
      * Prints a welcome message.
+     * @return A string containing a welcome message.
      */
-    public static void welcomeMessage() {
-        String catLogo = "        /\\_____/\\\n"
-                + "       /  o   o  \\\n"
-                + "      ( ==  ^  == )\n"
-                + "       )         (\n"
-                + "      (           )\n"
-                + "     ( (  )   (  ) )\n"
-                + "    (__(__)___(__)__)";
-        System.out.println(catLogo);
-
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Hello! I'm NEKOBOT!!");
-        System.out.println("    What can I do for you :>");
-        System.out.println("    ____________________________________________________________");
+    public static String welcomeMessage() {
+        String introduction = "Hello! I'm NEKOBOT!!\n";
+        String question = "What can I do for you :>";
+        return introduction + question;
     }
 
     /**
      * Prints a goodbye message.
+     * @return A string containing a goodbye message.
      */
-    public static void goodbyeMessage() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Bye~ Hope to see you again soon ;w;");
-        System.out.println("    ____________________________________________________________");
+    public static String goodbyeMessage() {
+        return "Bye~ Hope to see you again soon ;w;";
     }
 
     /**
      * Prints all tasks in the TaskList.
      * @param taskList An ArrayList containing all existing Tasks.
+     * @return A string containing all tasks in the TaskList.
      */
-    public static void listMessage(ArrayList<Task> taskList) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Here are the tasks in your list!!");
+    public static String listMessage(ArrayList<Task> taskList) {
+        String preface = "Here are the tasks in your list!!\n";
+        StringBuilder tasks = new StringBuilder();
         int index = 1;
         for (Task task : taskList) {
-            System.out.println("    " + index + ". " + task);
+            tasks.append(index).append(". ").append(task).append("\n");
             index++;
         }
-        System.out.println("    ____________________________________________________________");
+        return preface + tasks;
     }
 
     /**
      * Prints all tasks whose date is set as the current date (today).
      * @param taskList An ArrayList containing all existing Tasks.
+     * @return A string containing all tasks whose date is set as the current date (today).
      */
-    public static void todayMessage(ArrayList<Task> taskList) {
+    public static String todayMessage(ArrayList<Task> taskList) {
         // TODO: refactor to filter in duke.task.TaskList class
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Here are today's tasks!!");
+        String preface = "Here are today's tasks!!\n";
+        StringBuilder tasks = new StringBuilder();
         int index = 1;
         for (Task task : taskList) {
             if (task.isToday()) {
-                System.out.println("    " + index + ". " + task);
+                tasks.append(index).append(". ").append(task).append("\n");
                 index++;
             }
         }
-        System.out.println("    ____________________________________________________________");
+        return preface + tasks;
     }
 
     /**
-     * Prints all tasks that match the search term provided
-     * @param taskList An ArrayList containing all Tasks that match the search term provided
+     * Prints all tasks that match the search term provided.
+     * @param taskList An ArrayList containing all Tasks that match the search term provided.
+     * @return A string containing all tasks that match the search term provided.
      */
-    public static void findMessage(ArrayList<Task> taskList) {
+    public static String findMessage(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
-            System.out.println("    ____________________________________________________________");
-            System.out.println("    Oh dear, I couldn't find any matching tasks :o");
-            System.out.println("    ____________________________________________________________");
+            return "Oh dear, I couldn't find any matching tasks :o";
         } else {
-            System.out.println("    ____________________________________________________________");
-            System.out.println("    Here are your search results!!");
+            String preface = "Here are your search results!!\n";
+            StringBuilder tasks = new StringBuilder();
             int index = 1;
             for (Task task: taskList) {
-                System.out.println("    " + index + ". " + task);
+                tasks.append(index).append(". ").append(task).append("\n");
                 index++;
             }
-            System.out.println("    ____________________________________________________________");
+            return preface + tasks;
         }
     }
 
@@ -94,46 +85,45 @@ public class Ui {
      * Prints a message indicating the specified task has been added.
      * @param task The Task that has been added.
      * @param size An integer value representing the new size of the TaskList.
+     * @return A string confirming the addition of a specified task.
      */
-    public static void addTaskMessage(Task task, int size) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Okies! I've added this task~");
-        System.out.println("       " + task);
-        System.out.println("     Now you have " + size + " tasks in the list uwu");
-        System.out.println("    ____________________________________________________________");
+    public static String addTaskMessage(Task task, int size) {
+        String preface = "Okies! I've added this task~\n";
+        String taskString = task.toString() + "\n";
+        String currentSize = "Now you have " + size + " tasks in the list uwu";
+        return preface + taskString + currentSize;
     }
 
     /**
      * Prints a message indicating the specified task has been marked completed.
      * @param task The Task that has been marked completed.
+     * @return A string confirming that the specified task has been marked completed.
      */
-    public static void doneTaskMessage(Task task) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Yay! I've marked this task as done :3");
-        System.out.println("       " + task);
-        System.out.println("    ____________________________________________________________");
+    public static String doneTaskMessage(Task task) {
+        String preface = "Yay! I've marked this task as done :3\n";
+        String taskString = task.toString();
+        return preface + taskString;
     }
 
     /**
      * Prints a message indicating the specified task has been deleted.
      * @param task The Task that has been deleted.
      * @param size An integer value representing the new size of the TaskList.
+     * @return A string confirming that the specified task has been deleted.
      */
-    public static void deleteTaskMessage(Task task, int size) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Got it! I'll remove this task :>");
-        System.out.println("       " + task);
-        System.out.println("     Only " + size + " tasks left!!");
-        System.out.println("    ____________________________________________________________");
+    public static String deleteTaskMessage(Task task, int size) {
+        String preface = "Got it! I'll remove this task :>\n";
+        String taskString = task.toString() + "\n";
+        String currentSize = "Only " + size + " tasks left!!";
+        return preface + taskString + currentSize;
     }
 
     /**
      * Prints out the error message of the exception that occurred.
      * @param uiMessage The error message of the exception that occurred.
+     * @return A string that explains the exception that occurred.
      */
-    public static void errorMessage(String uiMessage) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    " + uiMessage);
-        System.out.println("    ____________________________________________________________");
+    public static String errorMessage(String uiMessage) {
+        return uiMessage;
     }
 }

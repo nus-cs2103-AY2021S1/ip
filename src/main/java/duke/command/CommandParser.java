@@ -23,7 +23,7 @@ public class CommandParser {
      * @throws IncompleteTaskException if user input contains incorrect or insufficient information for task creation.
      * @throws InvalidTaskException if task index provided by user is invalid or missing.
      */
-    public Command parseCommand(String command) throws UnknownCommandException, DateParseException,
+    public static Command parseCommand(String command) throws UnknownCommandException, DateParseException,
             IncompleteTaskException, InvalidTaskException, InvalidSearchException {
         command = command.trim();
         if (command.equals("bye")) {
@@ -50,12 +50,12 @@ public class CommandParser {
      * @param command A String value which is the user input.
      * @return A boolean value that indicates whether the user input string constitutes a valid command to add a task.
      */
-    private boolean validAddTaskCommand(String command) {
+    private static boolean validAddTaskCommand(String command) {
         return command.split(" ")[0].equals("todo") || command.split(" ")[0].equals("deadline")
                 || command.split(" ")[0].equals("event");
     }
 
-    private FindCommand parseFindCommand(String command) throws InvalidSearchException {
+    private static FindCommand parseFindCommand(String command) throws InvalidSearchException {
         if (command.length() < 5) {
             throw new InvalidSearchException("Oh noes! I don't think you specified a search string :<");
         }
@@ -69,7 +69,7 @@ public class CommandParser {
      * @return A DoneCommand that when executed, marks a specified task as completed.
      * @throws InvalidTaskException if task index provided by user is invalid or missing.
      */
-    private DoneCommand parseDoneCommand(String command) throws InvalidTaskException {
+    private static DoneCommand parseDoneCommand(String command) throws InvalidTaskException {
         if (command.length() < 5) {
             throw new InvalidTaskException("Oh noes! I don't think you specified a valid task index :<");
         }
@@ -87,7 +87,7 @@ public class CommandParser {
      * @return A DeleteCommand that when executed, deletes a specified task.
      * @throws InvalidTaskException if task index provided by user is invalid or missing.
      */
-    private DeleteCommand parseDeleteCommand(String command) throws InvalidTaskException {
+    private static DeleteCommand parseDeleteCommand(String command) throws InvalidTaskException {
         if (command.length() < 7) {
             throw new InvalidTaskException("Oh noes! I don't think you specified a valid task index :<");
         }
@@ -107,7 +107,7 @@ public class CommandParser {
      * @throws UnknownCommandException if the Task type cannot be determined from user input.
      * @throws DateParseException if the user input contains a date object that cannot be parsed.
      */
-    private AddTaskCommand parseAddTaskCommand(String command) throws IncompleteTaskException,
+    private static AddTaskCommand parseAddTaskCommand(String command) throws IncompleteTaskException,
             UnknownCommandException, DateParseException {
         try {
             String typeOfTask = command.split(" ")[0];

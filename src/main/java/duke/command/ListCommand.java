@@ -14,7 +14,7 @@ public class ListCommand extends Command {
      * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
      */
     @Override
-    public void execute(TaskList list, Storage storage) {
-        Ui.listMessage(list.getTaskList());
+    public String execute(TaskList list, Storage storage) {
+        return Ui.listMessage(list.getTaskList());
     }
 }

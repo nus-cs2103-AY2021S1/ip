@@ -50,19 +50,17 @@ public class AddTaskCommand extends Command {
      * @throws InvalidTaskException if details provided of Task to be created are invalid.
      */
     @Override
-    public void execute(TaskList list, Storage storage) throws StorageException, InvalidTaskException {
+    public String execute(TaskList list, Storage storage) throws StorageException, InvalidTaskException {
         switch (this.type) {
         case TODO:
             Task newTodo = list.addTask(this.taskName);
             storage.appendTaskStorage(newTodo.toSaveString());
-            Ui.addTaskMessage(newTodo, list.taskListSize());
-            break;
+            return Ui.addTaskMessage(newTodo, list.taskListSize());
         case EVENT:
         case DEADLINE:
             Task newTask = list.addTask(this.type, this.taskName, this.taskDate);
             storage.appendTaskStorage(newTask.toSaveString());
-            Ui.addTaskMessage(newTask, list.taskListSize());
-            break;
+            return Ui.addTaskMessage(newTask, list.taskListSize());
         default:
             throw new InvalidTaskException("Oh dear! I'm not sure what kind of task to add ;A;");
         }
