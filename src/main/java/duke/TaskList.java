@@ -26,6 +26,10 @@ public class TaskList {
         return this.tasks;
     }
 
+    public int getTaskListSize() {
+        return this.tasks.size();
+    }
+
     /**
      * Adds new to-do type task to the task list and calls the Ui class to display a message.
      *
@@ -35,7 +39,6 @@ public class TaskList {
     public static void addNewTodoTask(String taskTitle, ArrayList<Task> tasks) {
         ToDos newTodoTask = new ToDos(taskTitle, false);
         tasks.add(newTodoTask);
-        Ui.addTodoTaskMsg(tasks);
     }
 
     /**
@@ -48,7 +51,6 @@ public class TaskList {
     public static void addNewDeadlineTask(String taskTitle, String deadlineTime, ArrayList<Task> tasks) {
         Deadlines newDeadline = new Deadlines(taskTitle, deadlineTime, false);
         tasks.add(newDeadline);
-        Ui.addDeadlineTaskMsg(tasks);
     }
 
     /**
@@ -61,7 +63,6 @@ public class TaskList {
     public static void addNewEventTask(String taskTitle, String eventTime, ArrayList<Task> tasks) {
         Events newEvent = new Events(taskTitle, eventTime, false);
         tasks.add(newEvent);
-        Ui.addEventTaskMsg(tasks);
     }
 
     /**
@@ -70,11 +71,10 @@ public class TaskList {
      * @param index The int of the task series number in the task list.
      * @param tasks The overall user's task list.
      */
-    public static void deleteTask(int index, ArrayList<Task> tasks) {
+    public static Task deleteTask(int index, ArrayList<Task> tasks) {
         Task taskToDelete = tasks.get(index - 1);
         tasks.remove(index - 1);
-        int newSizeOfTasks = tasks.size();
-        Ui.deleteTaskMsg(index, newSizeOfTasks, taskToDelete);
+        return taskToDelete;
     }
 
     /**
@@ -85,7 +85,6 @@ public class TaskList {
      */
     public static void doneTask(int index, ArrayList<Task> tasks) {
         tasks.get(index - 1).markAsDone();
-        Ui.doneTaskMsg(index, tasks);
     }
 
     /**
@@ -94,13 +93,13 @@ public class TaskList {
      * @param keyword A string of keyword to find the matching tasks.
      * @param tasks An ArrayList of all the tasks that match with the keyword.
      */
-    public static void findTask(String keyword, ArrayList<Task> tasks) {
+    public static ArrayList<Task> findTask(String keyword, ArrayList<Task> tasks) {
         ArrayList<Task> matchedTasks = new ArrayList<>();
         for (Task task: tasks) {
             if (task.getTaskTitle().contains(keyword)) {
                 matchedTasks.add(task);
             }
         }
-        Ui.findMatchingTasks(keyword, matchedTasks);
+        return matchedTasks;
     }
 }

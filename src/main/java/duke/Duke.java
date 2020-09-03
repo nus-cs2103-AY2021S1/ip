@@ -1,11 +1,13 @@
 package duke;
 
+import java.util.Scanner;
+
 /**
  * Main class for duke to run.
  */
 public class Duke {
+    protected static TaskList tasks;
     private Storage storage;
-    private TaskList tasks;
     private Ui ui;
 
     /**
@@ -20,20 +22,48 @@ public class Duke {
     }
 
     /**
+     * asd
+     */
+    public Duke() {
+        String filePath = "data/tasks.txt";
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.load());
+    }
+
+    /**
      * Runs Duke.
      */
     public void run() {
         ui.logoMsg();
         ui.greetingMsg();
-        Parser.parseUserInput(tasks);
+
+        Scanner sc = new Scanner(System.in);
+        String inputMsg = sc.nextLine();
+
+        while (!inputMsg.equals("bye")) {
+            Parser.parseUserInput(inputMsg);
+            // waiting for user to key in the next request
+            inputMsg = sc.nextLine();
+        }
         storage.writeTasks(tasks);
+        // say bye to the user
+        Ui.byeMsg();
     }
 
     /**
      * Starts the program.
+     *
      * @param args Arges.
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
+    }
+
+    public String getResponse(String input) {
+        return Parser.parseUserInput(input);
+    }
+    public void save() {
+        storage.writeTasks(tasks);
     }
 }
