@@ -31,7 +31,7 @@ public class DeleteCommandTest {
             fail();
         } catch (Exception e) {
             try {
-                Parser.isValidDelete(s, 1);
+                Parser.getDeleteTaskIndex(s, 1);
                 fail();
             } catch (Exception e2) {
                 assertEquals(e2.getMessage(), e.getMessage());

@@ -31,7 +31,7 @@ public class DoneCommandTest {
             fail();
         } catch (Exception e) {
             try {
-                Parser.isValidDone(s, 1);
+                Parser.getDoneTaskIndex(s, 1);
                 fail();
             } catch (Exception e2) {
                 assertEquals(e2.getMessage(), e.getMessage());

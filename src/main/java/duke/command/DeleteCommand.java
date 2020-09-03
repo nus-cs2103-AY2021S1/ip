@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         int count = list.size();
-        int m = Parser.isValidDelete(input, count) - 1;
+        int m = Parser.getDeleteTaskIndex(input, count) - 1;
         Task toDelete = list.get(m);
         list.remove(toDelete);
         storage.reWrite(list);

@@ -49,6 +49,25 @@ public class Parser {
         return cmd.length() < prefix.length() + 1;
     }
 
+    private static int parseTaskIndex(String cmd, String prefix) throws InvalidCommandException {
+        try {
+            return Integer.parseInt(cmd.substring(prefix.length()));
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException(NONNUMERIC_TASK_INDEX_EXCEPTION);
+        }
+    }
+
+    private static int getInputTaskIndex(String cmd, int count, String prefix) throws InvalidCommandException {
+        int n = parseTaskIndex(cmd, prefix);
+        if (n < 1) {
+            throw new InvalidCommandException(NONPOSITIVE_TASK_INDEX_EXCEPTION);
+        } else if (n > count) {
+            throw new InvalidCommandException(TASK_INDEX_OVERFLOW_EXCEPTION);
+        } else {
+            return n;
+        }
+    }
+
     /**
      * Parses a DoneCommand to tell which task to mark as done.
      * @param cmd the given input command
@@ -57,21 +76,11 @@ public class Parser {
      * @throws InvalidCommandException if the input is invalid, including non-integer, negative values, 0 or large
      * numbers
      */
-    public static int isValidDone(String cmd, int count) throws InvalidCommandException {
+    public static int getDoneTaskIndex(String cmd, int count) throws InvalidCommandException {
         if (hasEmptyContent(cmd, DONE_COMMAND_PREFIX)) {
             throw new InvalidCommandException(EMPTY_DONE_COMMAND_EXCEPTION);
         }
-        try {
-            int n = Integer.parseInt(cmd.substring(5));
-            if (n < 1) {
-                throw new InvalidCommandException(NONPOSITIVE_TASK_INDEX_EXCEPTION);
-            } else if (n > count) {
-                throw new InvalidCommandException(TASK_INDEX_OVERFLOW_EXCEPTION);
-            }
-            return n;
-        } catch (NumberFormatException e) {
-            throw new InvalidCommandException(NONNUMERIC_TASK_INDEX_EXCEPTION);
-        }
+        return getInputTaskIndex(cmd, count, DONE_COMMAND_PREFIX);
     }
 
     /**
@@ -82,21 +91,11 @@ public class Parser {
      * @throws InvalidCommandException if the input is invalid, including non-integer, negative values, 0 or large
      * numbers
      */
-    public static int isValidDelete(String cmd, int count) throws InvalidCommandException {
+    public static int getDeleteTaskIndex(String cmd, int count) throws InvalidCommandException {
         if (hasEmptyContent(cmd, DELETE_COMMAND_PREFIX)) {
             throw new InvalidCommandException(EMPTY_DELETE_COMMAND_EXCEPTION);
         }
-        try {
-            int n = Integer.parseInt(cmd.substring(7));
-            if (n < 1) {
-                throw new InvalidCommandException(NONPOSITIVE_TASK_INDEX_EXCEPTION);
-            } else if (n > count) {
-                throw new InvalidCommandException(TASK_INDEX_OVERFLOW_EXCEPTION);
-            }
-            return n;
-        } catch (NumberFormatException e) {
-            throw new InvalidCommandException(NONNUMERIC_TASK_INDEX_EXCEPTION);
-        }
+        return getInputTaskIndex(cmd, count, DELETE_COMMAND_PREFIX);
     }
 
     private static String generateSuggestion(String taskType, String description) {
