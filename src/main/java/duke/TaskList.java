@@ -54,4 +54,15 @@ public class TaskList {
         return "Task{" + "thingsToDo=" + thingsToDo + '}';
     }
 
+    public String toSave() {
+        String res = "";
+        for (Task task : thingsToDo) {
+            res = res
+                    + task.getType().toString() + " "
+                    + task.getDescription() + " "
+                    + task.getDelimiter() + " "
+                    + task.getDate() + "\n";
+        }
+        return res;
+    }
 }

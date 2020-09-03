@@ -18,4 +18,18 @@ public class Deadline extends Task {
         String sign = isDone ? "✓" : "✗";
         return "[D][" + sign + "] " + description + " (by:" + timeBy + ")";
     }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.DEADLINE;
+    }
+
+    @Override
+    public String getDate() {
+        return timeBy.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+    }
+
+    public String getDelimiter() {
+        return "/by";
+    }
 }

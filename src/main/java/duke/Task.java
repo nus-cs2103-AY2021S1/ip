@@ -3,6 +3,7 @@ package duke;
 public class Task {
     protected boolean isDone;
     protected String description;
+
     public Task(String description) {
         this.isDone = false;
         this.description = description;
@@ -18,5 +19,17 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public TaskType getType() {
+        return TaskType.NONE;
+    }
+
+    public String getDate() {
+        return "";
+    }
+
+    public String getDelimiter() {
+        return "";
     }
 }

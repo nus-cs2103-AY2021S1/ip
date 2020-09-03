@@ -21,4 +21,19 @@ public class Event extends Task {
         String sign = isDone ? "✓" : "✗";
         return "[E][" + sign + "] " + description + " (at:" + timeAt + ")";
     }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.EVENT;
+    }
+
+    @Override
+    public String getDate() {
+        return timeAt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+    }
+
+    @Override
+    public String getDelimiter() {
+        return "/at";
+    }
 }

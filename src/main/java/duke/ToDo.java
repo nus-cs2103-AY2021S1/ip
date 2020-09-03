@@ -10,4 +10,9 @@ public class ToDo extends Task {
         String sign = isDone ? "✓" : "✗";
         return "[T][" + sign + "] " + description;
     }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.TODO;
+    }
 }

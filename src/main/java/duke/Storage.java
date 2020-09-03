@@ -29,7 +29,7 @@ public class Storage {
         }
 
         // Write to file
-        String toWrite = tasks.toString();
+        String toWrite = tasks.toSave();
         BufferedWriter wr = new BufferedWriter(new FileWriter(filePath.toString()));
         wr.write(toWrite);
         wr.close();
