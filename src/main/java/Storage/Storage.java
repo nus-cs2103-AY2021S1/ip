@@ -232,6 +232,7 @@ public class Storage {
      * @throws IOException if there is a problem reading the file
      */
     public String printLine(int lineNumber) throws IOException {
+        assert lineNumber > 0;
         lineNumber = lineNumber - 1;
         String lineToPrint = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
         return lineToPrint;
@@ -283,6 +284,7 @@ public class Storage {
         BufferedReader reader = new BufferedReader(new FileReader(currFile));
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
+        assert lineNumber > 0;
         lineNumber = lineNumber - 1;
         String lineToUpdate = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
         String[] taskInfo = lineToUpdate.trim().split(" [|] ");
