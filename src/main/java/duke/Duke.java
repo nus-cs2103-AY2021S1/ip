@@ -2,11 +2,10 @@ package duke;
 
 import duke.commands.Command;
 import duke.commands.CommandOutput;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidFilePathException;
 import duke.exceptions.StorageOperationException;
-
-import duke.io.IO;
 
 import duke.parser.CommandLineInterfaceParser;
 
@@ -17,6 +16,8 @@ import duke.task.TaskManager;
 import duke.utils.Colour;
 import duke.utils.Messages;
 import duke.utils.Ui;
+
+import java.util.Scanner;
 
 public class Duke {
     private Ui ui;
@@ -37,11 +38,16 @@ public class Duke {
 
     public void run() {
         ui.print(Messages.WELCOME_MESSAGE);
-        IO io = new IO();
+        Scanner scanner = new Scanner(System.in);
         boolean isExit = false;
+        String userInput;
         while (!isExit) {
             try {
-                String userInput = io.readUserInput();
+                if (scanner.hasNextLine()) {
+                    userInput = scanner.nextLine();
+                } else {
+                    userInput = "Bye";
+                }
                 CommandOutput output = getCommandExecutionOutput(userInput);
                 ui.print(output.getCommandOutput());
                 isExit = output.isExit();

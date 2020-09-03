@@ -8,7 +8,6 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskManager;
 
-import duke.utils.Colour;
 import duke.utils.Messages;
 
 /**
