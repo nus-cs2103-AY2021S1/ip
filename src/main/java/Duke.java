@@ -1,11 +1,11 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.nio.file.Path;
-import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -32,17 +32,6 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
     // add: start method
-
-    /*
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-    }
-    */
 
     @Override
     public void start(Stage stage) {
@@ -149,13 +138,14 @@ public class Duke extends Application {
         userInput.clear();
     }
 
+
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a response to user input.
+     * @param input user input string
+     * @return a response string
      */
-    // !!!!!!!!!!!!!!! to be changed
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String input) {
+        return new Parser(input).getRespond(lst);
     }
 
 
@@ -164,6 +154,7 @@ public class Duke extends Application {
     private Ui ui;
     private List<Task> lst = new ArrayList<>();
 
+    public Duke() {}
     public Duke(Path filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
