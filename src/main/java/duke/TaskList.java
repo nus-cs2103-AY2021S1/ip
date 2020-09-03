@@ -1,13 +1,18 @@
 package duke;
 
-import java.text.ParseException;
-
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Date;
 
 import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
+/**
+ * Reads data from the storage files
+ * Stores tasks assigned by users in a list
+ * Adds or deletes the data from the list
+ * If data is empty, a new task list is initiated
+ */
 
 public class TaskList {
     protected List<Task> tasks;
@@ -89,14 +94,27 @@ public class TaskList {
         }
     }
 
+
     public int getTaskCounts() {
         return this.taskCounts;
     }
+
+    /**
+     * Adds task into the task list and increases the task counts
+     *
+     * @param task Task to be added
+     */
 
     public void addTask(Task task) {
         this.tasks.add(task);
         taskCounts++;
     }
+
+    /**
+     * Removes task from the task list and decreases the task counts
+     *
+     * @param task Task to be deleted
+     */
 
     public void deleteTask(Task task) {
         this.tasks.remove(task);

@@ -1,7 +1,19 @@
 package duke;
 
+/**
+ * Parses the data and processes the command from the users
+ */
+
 public class Parser {
 
+    /**
+     * Processes the command entered by the user
+     *
+     * @param command String command entered
+     * @param ui Ui created to interact with users
+     * @param taskList TaskList to be processed with
+     * @param filePath String the path of the data storage
+     */
     public static void processCommand(String command, Ui ui, TaskList taskList, String filePath) {
 
         String[] portions = command.split(" ", 2);

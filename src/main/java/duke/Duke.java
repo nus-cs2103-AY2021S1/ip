@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Presents Duke class with Ka To
+ * Interacts with the user and answers user commands
+ */
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;

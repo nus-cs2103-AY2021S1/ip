@@ -3,6 +3,10 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the task of "deadline" category
+ */
+
 public class Deadline extends Task {
 
     protected LocalDate dateBy;
@@ -12,6 +16,11 @@ public class Deadline extends Task {
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.dateBy = LocalDate.parse(date, inputFormat);
     }
+
+    /**
+     * Prints out the deadline task and converts the date format
+     * @return string representation
+     */
 
     @Override
     public String toString() {

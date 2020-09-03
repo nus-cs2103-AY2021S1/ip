@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Represents the task and includes the task information
+ * Records the status, category and command of the task
+ */
+
 public class Task {
     private int status;
     private int category;
@@ -9,7 +14,6 @@ public class Task {
     protected static int TASK_TODO = 1;
     protected static int TASK_DEADLINE = 2;
     protected static int TASK_EVENT = 3;
-    protected static int TASK_CATEGORY = 0;
 
 
     public Task(int category, int status, String command) {
@@ -26,6 +30,9 @@ public class Task {
         return ((this.status == DONE) ? "\u2713" : "\u2718");
     }
 
+    /**
+     * marks the task as done status
+     */
     public void markTaskAsDone() {
         if (this.status != DONE) {
             this.status = DONE;
@@ -39,6 +46,13 @@ public class Task {
     public void setCategory(int category) {
         this.category = category;
     }
+
+
+    /**
+     * Returns string representation of the task according to the category
+     *
+     * @return String string representation of the task.
+     */
 
     @Override
     public String toString() {

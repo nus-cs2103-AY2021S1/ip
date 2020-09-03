@@ -4,6 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Reads the data from the intended file path and prints
+ *
+ * @throws FileNotFoundException
+ */
 public class FileReader {
     public static String printFileContents(String filePath) throws FileNotFoundException {
         String content = "";
