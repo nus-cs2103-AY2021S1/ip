@@ -38,4 +38,10 @@ done 5
 
 done this
 
+delete
+
+delete 6
+
+delete this
+
 bye

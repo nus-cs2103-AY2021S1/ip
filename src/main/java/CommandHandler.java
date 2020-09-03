@@ -32,7 +32,13 @@ public class CommandHandler {
                     }
                     break;
                 case "delete":
-                    handleDelete();
+                    try {
+                        handleDelete();
+                    } catch (DukeException e) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     " + e.getMessage());
+                        System.out.println("    ____________________________________________________________\n");
+                    }
                     break;
                 case "todo":
                     try {
@@ -116,8 +122,23 @@ public class CommandHandler {
         System.out.println("    ____________________________________________________________\n");
     }
 
-    public void handleDelete() {
-        int index = sc.nextInt();
+    public void handleDelete() throws DukeException {
+        String deleteCommand = sc.nextLine();
+        int index = 0;
+        if (deleteCommand.isEmpty()) {
+            throw new DukeException("\u2639 OOPS!!! I need to know the index of the task to be deleted!");
+        }
+        try {
+            index = Integer.parseInt(deleteCommand.stripLeading());
+        } catch (NumberFormatException e) {
+            System.out.println("    ____________________________________________________________");
+            System.out.println("     \u2639 Please enter a valid integer!!");
+            System.out.println("    ____________________________________________________________\n");
+            return;
+        }
+        if (index > taskList.size()) {
+            throw new DukeException("\u2639 Your number is too large!!");
+        }
         Task currentTask = taskList.get(index - 1);
         taskList.remove(index - 1);
         System.out.println("    ____________________________________________________________");
