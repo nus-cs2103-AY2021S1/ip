@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Represents the exception that is thrown when the task is already completed
+ */
 public class DoneException extends DukeException {
 
     /**

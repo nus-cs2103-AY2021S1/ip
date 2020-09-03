@@ -21,15 +21,6 @@ public abstract class Command {
     }
 
     /**
-     * Returns a boolean stating whether the program is going to exit.
-     *
-     * @return true if program is going end by next call else false
-     */
-    public boolean isExit() {
-        return isExit;
-    }
-
-    /**
      * Abstract method that executes the command.
      *
      * @param taskList The TaskList Object that handles the task operations

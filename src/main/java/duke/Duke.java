@@ -29,7 +29,7 @@ public class Duke {
 
     /**
      * Processes the user input and execute the commands
-     * @return
+     * @return String that should be outputted from the command.
      */
     public String run(String input) {
         try {
