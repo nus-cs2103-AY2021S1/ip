@@ -20,12 +20,13 @@ public class ListCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        String output = "";
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String listItems = "";
         for (int i = 1; i <= taskList.size(); i++) {
-            output = output + i + ". " + taskList.get(i - 1) + "\n";
+            listItems = listItems + i + ". " + taskList.get(i - 1) + "\n";
         }
-        System.out.println(ui.LINE + "Here are the tasks in your list: \n" + output + ui.LINE);
+        String repsonse = "Here are the tasks in your list: \n" + listItems;
+        return repsonse;
     }
 
     @Override

@@ -24,22 +24,21 @@ public class DeleteCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             int taskId = Integer.parseInt(taskIdString);
             if (taskId <= 0 || taskId > taskList.size()) {
-                throw new DukeException(ui.LINE + "Invalid input! That duke.task does not exist! \n" + ui.LINE);
+                throw new DukeException("Invalid input! That duke.task does not exist!");
             } else {
                 int new_size = taskList.size() - 1;
-                System.out.println(ui.LINE + "Noted! I've deleted this duke.task: \n"
-                        + taskList.get(taskId - 1) + "\n"
-                        + "Now you have " + new_size + " tasks in the list."
-                        + "\n" + ui.LINE);
+                String response = "Noted! I've deleted this duke.task: \n" + taskList.get(taskId - 1) + "\n"
+                        + "Now you have " + new_size + " tasks in the list.";
                 taskList.delete(taskId - 1);
+                storage.save(taskList);
+                return response;
             }
-            storage.save(taskList);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(ui.LINE + "Invalid input! Please specify which duke.task you want to delete! \n" + ui.LINE);
+            throw new DukeException("Invalid input! Please specify which duke.task you want to delete!");
         }
     }
 

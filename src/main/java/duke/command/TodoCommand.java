@@ -25,18 +25,16 @@ public class TodoCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             ToDo newToDo = new ToDo(this.todoDetails, false);
             taskList.add(newToDo);
-            String output = ui.LINE + "Got it. I've added this duke.task: \n"
-                    + taskList.get(taskList.size() - 1) + "\n"
-                    + "Now you have " + taskList.size() + " tasks in the list."
-                    + "\n" + ui.LINE;
-            System.out.println(output);
             storage.save(taskList);
+            String response = "Got it. I've added this duke.task: \n" + taskList.get(taskList.size() - 1) + "\n"
+                    + "Now you have " + taskList.size() + " tasks in the list.";
+            return response;
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(ui.LINE + "Invalid input! Please specify your todo description! \n" + ui.LINE);
+            throw new DukeException("Invalid input! Please specify your todo description! \n");
         }
     }
 

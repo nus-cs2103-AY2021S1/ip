@@ -8,12 +8,12 @@ import duke.tasklist.TaskList;
 
 import duke.ui.Ui;
 
-public class InvalidCommand extends Command{
+public class InvalidCommand extends Command {
     public InvalidCommand() {}
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        throw new DukeException(ui.LINE + "Invalid duke.command! \n" + ui.LINE);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        throw new DukeException("Invalid duke.command!");
     }
 
     @Override

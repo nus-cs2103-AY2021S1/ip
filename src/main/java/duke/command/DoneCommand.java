@@ -1,11 +1,8 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
 import duke.storage.Storage;
-
 import duke.tasklist.TaskList;
-
 import duke.ui.Ui;
 
 public class DoneCommand extends Command {
@@ -24,19 +21,19 @@ public class DoneCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             int taskId = Integer.parseInt(this.taskIdString);
             if (taskId <= 0 || taskId > taskList.size()) {
-                throw new DukeException(ui.LINE + "Invalid input! That duke.task does not exist! \n" + ui.LINE);
+                throw new DukeException("Invalid input! That duke.task does not exist!");
             } else {
                 taskList.get(taskId - 1).setCompleted();
-                System.out.println(ui.LINE + "Nice! I've marked this duke.task as done: \n"
-                        + taskList.get(taskId - 1) + "\n" + ui.LINE);
+                storage.save(taskList);
+                String response = "Nice! I've marked this duke.task as done: \n" + taskList.get(taskId - 1);
+                return response;
             }
-            storage.save(taskList);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(ui.LINE + "Invalid input! Please specify which duke.task you have completed! \n" + ui.LINE);
+            throw new DukeException("Invalid input! Please specify which duke.task you have completed!");
         }
     }
 

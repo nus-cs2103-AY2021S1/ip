@@ -5,6 +5,7 @@ import java.util.Scanner;
 /**
  * Deals the interactions with the user.
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class Ui {
     public static final String LINE = "_______________________________________\n";
     private Scanner scanner;
@@ -44,5 +45,18 @@ public class Ui {
                 + "_______________________________________ \n";
         System.out.println(close);
         this.scanner.close();
+    }
+
+    /**
+     * Prints Duke's response with dividing lines
+     *
+     * @param response
+     */
+    public void printResponse(String response) {
+        if (response.equals(" ")) {
+            // Dont print anything
+        } else {
+            System.out.println(LINE + response + "\n" + LINE);
+        }
     }
 }

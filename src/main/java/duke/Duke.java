@@ -36,10 +36,11 @@ public class Duke {
             try {
                 String userInput = ui.getUserInput();
                 Command command = Parser.parse(userInput);
-                command.execute(this.taskList, this.ui, this.storage);
+                String response = command.execute(this.taskList, this.ui, this.storage);
+                ui.printResponse(response);
                 this.exit = command.isExit();
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                ui.printResponse(e.getMessage());
             }
         }
         ui.goodbye();
@@ -47,5 +48,14 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("src/main/java/duke/data/duke.txt").run();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(this.taskList, this.ui, this.storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

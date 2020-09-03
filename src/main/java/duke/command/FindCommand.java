@@ -21,14 +21,15 @@ public class FindCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage){
-        String output = "";
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String listItems = "";
         for (int i = 1; i <= taskList.size(); i++) {
             if (taskList.get(i - 1).toString().contains(keyword)) {
-                output = output + i + ". " + taskList.get(i - 1) + "\n";
+                listItems = listItems + i + ". " + taskList.get(i - 1) + "\n";
             }
         }
-        System.out.println(ui.LINE + "Here are your duke.task that matches your search: \n" + output + ui.LINE);
+        String response = "Here are your duke.task that matches your search: \n" + listItems;
+        return response;
     }
 
     @Override

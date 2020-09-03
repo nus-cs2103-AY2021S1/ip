@@ -28,23 +28,24 @@ public class FilterCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
-            String output = "";
+            String listItems = "";
             String[] dateSplit = date.split("/", 3);
             String reformatedDate = dateSplit[2] + "-" + dateSplit[1] + "-" + dateSplit[0];
             LocalDate filterDate = LocalDate.parse(reformatedDate);
             for (int i = 1; i <= taskList.size(); i++) {
                 if (taskList.get(i - 1).isDate(filterDate)) {
-                    output = output + i + ". " + taskList.get(i - 1) + "\n";
+                    listItems = listItems + i + ". " + taskList.get(i - 1) + "\n";
                 }
             }
-            System.out.println(ui.LINE + "Here are your duke.task due on "
-                    + filterDate.format(DateTimeFormatter.ofPattern("MMM d yyy")) + ": \n" + output + ui.LINE);
+            String response = "Here are your duke.task due on "
+                    + filterDate.format(DateTimeFormatter.ofPattern("MMM d yyy")) + ": \n" + listItems;
+            return response;
         } catch (DateTimeParseException e) {
-            throw new DukeException(ui.LINE + "Invalid input! Please enter a valid date! \n" + ui.LINE);
+            throw new DukeException("Invalid input! Please enter a valid date!");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(ui.LINE + "Invalid input! Please enter a valid date! \n" + ui.LINE);
+            throw new DukeException("Invalid input! Please enter a valid date!");
         }
     }
 

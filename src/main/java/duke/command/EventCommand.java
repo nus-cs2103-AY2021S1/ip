@@ -26,19 +26,17 @@ public class EventCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             String[] details = this.eventDetails.split(" /at ", 2);
             Event newEvent = new Event(details[0], details[1], false);
             taskList.add(newEvent);
-            String output = ui.LINE + "Got it. I've added this duke.task: \n"
-                    + taskList.get(taskList.size() - 1) + "\n"
-                    + "Now you have " + taskList.size() + " tasks in the list."
-                    + "\n" + ui.LINE;
-            System.out.println(output);
             storage.save(taskList);
+            String response = "Got it. I've added this duke.task: \n" + taskList.get(taskList.size() - 1) + "\n"
+                    + "Now you have " + taskList.size() + " tasks in the list.";
+            return response;
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(ui.LINE + "Invalid input! Please specify your event description and details! \n" + ui.LINE);
+            throw new DukeException("Invalid input! Please specify your event description and details!");
         }
     }
 
