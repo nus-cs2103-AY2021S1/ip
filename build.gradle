@@ -69,11 +69,17 @@ task runtest(type: Exec) {
     commandLine 'cmd', '/C', 'runtest.bat'
 }
 
-task myCheck {
+task cmdCheck {
     dependsOn 'checkstyleMain'
     dependsOn 'checkstyleTest'
     dependsOn 'test' // JUnit test
     dependsOn 'runtest' // text-ui-test
+}
+
+task guiCheck {
+    dependsOn 'checkstyleMain'
+    dependsOn 'checkstyleTest'
+    dependsOn 'test' // JUnit test
 }
 
 /**
