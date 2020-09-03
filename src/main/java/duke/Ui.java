@@ -9,15 +9,17 @@ import duke.dependencies.parser.Controller;
  *
  */
 class Ui {
-    private static final String DIVIDER = "____________________________________________________________\n";
+//    private static final String DIVIDER = "____________________________________________________________\n";
+//    private static final String LOGO = " ____        _        \n"
+//                                    + "|  _ \\ _   _| | _____ \n"
+//                                    + "| | | | | | | |/ / _ \\\n"
+//                                    + "| |_| | |_| |   <  __/\n"
+//                                    + "|____/ \\__,_|_|\\_\\___|\n";
+
     private static final String GREETING = "Hello, I'm Duke\nwhat can I do for you?\n";
-    private static final String LOGO = " ____        _        \n"
-                                    + "|  _ \\ _   _| | _____ \n"
-                                    + "| | | | | | | |/ / _ \\\n"
-                                    + "| |_| | |_| |   <  __/\n"
-                                    + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String CIAO = DIVIDER + "Spero di rivederti presto\n" + DIVIDER;
-    private static final String CONVO_START = DIVIDER + LOGO + "\n" + GREETING + DIVIDER;
+
+    private static final String CIAO ="Spero di rivederti presto\n";
+    private static final String CONVO_START = GREETING;
     private static final String END = "end|ciao|bye|close|exit|nights|shutdown";
 
     private  static final Controller CONTROLLER = Controller.initController();
@@ -68,11 +70,11 @@ class Ui {
 
         if (reply.equals("Error")) {            // Error. However this should not occur
 //            System.out.println(DIVIDER + reply + "\n" + DIVIDER);
-            return DIVIDER + reply + DIVIDER;
+            return reply;
         } else {
             // Normal execution
 //            System.out.println(DIVIDER + reply + "\n" + DIVIDER);
-            return String.format("%s%s%s", DIVIDER, reply, DIVIDER);
+            return reply;
         }
     }
 }
