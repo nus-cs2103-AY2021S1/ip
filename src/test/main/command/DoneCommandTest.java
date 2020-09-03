@@ -21,12 +21,12 @@ import main.ui.Ui;
 
 public class DoneCommandTest {
     private static final Ui UI = new Ui();
-    private static TaskList tasks;
     private static final Todo TASK_ONE = new Todo("task 1", true);
     private static final Deadline TASK_TWO = new Deadline("task 2",
             LocalDateTime.of(193, 7, 26, 13, 50));
     private static final Event TASK_THREE = new Event(
             "task 3", "1993-12-06T10:10", false);
+    private static TaskList tasks;
 
     @BeforeEach
     public void beforeEach() {

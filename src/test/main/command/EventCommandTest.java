@@ -16,7 +16,7 @@ import main.task.TaskList;
 import main.task.Todo;
 import main.ui.Ui;
 
-public class DeadlineCommandTest {
+public class EventCommandTest {
     private static final Ui UI = new Ui();
     private static final Todo TASK_ONE = new Todo("task 1", true);
     private static final Deadline TASK_TWO = new Deadline("task 2",
@@ -41,8 +41,8 @@ public class DeadlineCommandTest {
         public void execute_taskList_addSuccess() {
             String name = "test";
             LocalDateTime time = LocalDateTime.of(1032, 5, 2, 14, 12);
-            DeadlineCommand command = new DeadlineCommand(name, time);
-            Deadline task = new Deadline(name, time);
+            EventCommand command = new EventCommand(name, time);
+            Event task = new Event(name, time);
 
             assertEquals(3, tasks.size());
             assertEquals(UI.printAddSuccess(task, 4), command.execute(UI, tasks));
@@ -55,8 +55,8 @@ public class DeadlineCommandTest {
         public void execute_altTaskList_addSuccess() {
             String name = "test 2";
             LocalDateTime time = LocalDateTime.of(9032, 9, 22, 19, 42);
-            DeadlineCommand command = new DeadlineCommand(name, time);
-            Deadline task = new Deadline(name, time);
+            EventCommand command = new EventCommand(name, time);
+            Event task = new Event(name, time);
 
             assertEquals(3, tasks.size());
             assertEquals(UI.printAddSuccess(task, 4), command.execute(UI, tasks));
@@ -71,7 +71,7 @@ public class DeadlineCommandTest {
         @Test
         @DisplayName("should return true")
         public void hasCommandAfter_noInput_true() {
-            assertTrue(new DeadlineCommand("test",
+            assertTrue(new EventCommand("test",
                     LocalDateTime.of(1992, 10, 3, 19, 2)).hasCommandAfter());
         }
     }
