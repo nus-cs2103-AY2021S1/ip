@@ -2,9 +2,6 @@ package duke;
 
 import java.util.ArrayList;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-
 /**
  * The Ui class handles all of the Ui interaction with the users using its various static methods
  */
@@ -30,10 +27,15 @@ public class Ui {
      */
 
     public static String updateDoneTask(String doneTask) {
-        String updatedLine = doneTask.substring(0, 4) + "\u2713" + doneTask.substring(5);
-        return updatedLine;
+        return doneTask.substring(0, 4) + "\u2713" + doneTask.substring(5);
     }
 
+    /**
+     * Returns a string representing the message shown to users when a task is done.
+     *
+     * @param doneTask The task to be updated.
+     * @return the string representing the output message.
+     */
     public static String done(String doneTask) {
         String updatedLine = updateDoneTask(doneTask);
         String message = divider + "Nice! I have marked this task as done:\n";
@@ -74,7 +76,7 @@ public class Ui {
             for (int i = 0; i < lines.size(); i++) {
                 int numbering = i + 1;
                 String task = lines.get(i);
-                list = list + (numbering + "." + task + "\n");
+                list = list + numbering + "." + task + "\n";
             }
         } else {
             list = list + "Unfortunately no tasks matches your keyword :(";
@@ -84,20 +86,13 @@ public class Ui {
     }
 
     /**
-     * returns out a goodbye message when users exit Duke using the goodbye command
+     * Returns a String representing the message shown when users exit Duke.
      *
-     * @return a String representing the goodbye message
+     * @return The string representing the goodbye message.
      */
     public static String bye() {
-       return divider + "Bye! See you next time!" + "\n" + divider;
+        return divider + "Bye! See you next time!" + "\n" + divider;
     }
-
-    /**
-     * Prints out a statement confirming that a task has been deleted, as well as the number of tasks left.
-     *
-     * @param task The task string representing the task that was deleted.
-     * @param numberOfItems the remaining number of tasks.
-     */
 
     /**
      * returns a statement confirming that a task has been deleted, as well as the number of tasks left.
