@@ -53,5 +53,4 @@ public class DukeDateTimeTest {
         assertEquals(1, secondDuke.compareTo(firstDuke));
         assertEquals(0, firstDuke.compareTo(firstDuke));
     }
-
 }

@@ -6,27 +6,35 @@ import static duke.utils.Messages.MESSAGE_WELCOME;
 
 import java.util.Scanner;
 
-/** Represents the Ui of the system that handles user interaction. */
+/**
+ * Represents the Ui of the system that handles user interaction.
+ */
 public class InputOutput {
 
-    private static String line = "\t" + "_".repeat(75);
+    private static final String LINE = "\t" + "_".repeat(75);
     private Scanner sc;
 
-    /** Constructs a Ui object. */
+    /**
+     * Constructs a Ui object.
+     */
     public InputOutput() {
         this.sc = new Scanner(System.in);
     }
 
-    /** Displays a line to the user. */
+    /**
+     * Displays a line to the user.
+     */
     public void showLine() {
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     private void showWelcome() {
         System.out.println(MESSAGE_WELCOME);
     }
 
-    /** Displays the greeting to the user. Called when the user first runs the program. */
+    /**
+     * Displays the greeting to the user. Called when the user first runs the program.
+     */
     public void showGreeting() {
         showWelcome();
         showLine();
@@ -34,14 +42,17 @@ public class InputOutput {
         showLine();
     }
 
-    /** Displays the goodbye message to the user. */
+    /**
+     * Displays the goodbye message to the user.
+     */
     public void showBye() {
         showLine();
         System.out.println(MESSAGE_BYE);
         showLine();
     }
 
-    /** Displays the specified message to the user.
+    /**
+     * Displays the specified message to the user.
      *
      * @param message The message to be displayed.
      */
@@ -51,7 +62,8 @@ public class InputOutput {
         showLine();
     }
 
-    /** Reads the user input.
+    /**
+     * Reads the user input.
      *
      * @return The user input as a String.
      */

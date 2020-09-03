@@ -3,7 +3,7 @@ package duke.utils;
 public class Messages {
 
     public static final String MESSAGE_WELCOME = "Hello from\n"
-        + " ____        _        \n"
+            + " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"

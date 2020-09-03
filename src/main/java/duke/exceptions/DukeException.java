@@ -1,9 +1,12 @@
 package duke.exceptions;
 
-/** Wrapper exception for all exceptions related to Duke. */
+/**
+ * Wrapper exception for all exceptions related to Duke.
+ */
 public class DukeException extends IllegalArgumentException {
 
-    /** Constructs a DukeException with the specified detail message.
+    /**
+     * Constructs a DukeException with the specified detail message.
      *
      * @param message The detail message.
      */

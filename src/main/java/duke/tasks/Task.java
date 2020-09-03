@@ -1,6 +1,8 @@
 package duke.tasks;
 
-/** Represents a task. */
+/**
+ * Represents a task.
+ */
 public class Task {
 
     /** The description of this task. */
@@ -9,7 +11,8 @@ public class Task {
     /** Represents whether the task is done or not. */
     protected boolean isDone;
 
-    /** Constructs the task with the specified description. isDone is by default false.
+    /**
+     * Constructs the task with the specified description. isDone is by default false.
      *
      * @param description The description of this task.
      */
@@ -18,7 +21,8 @@ public class Task {
         this.isDone = false;
     }
 
-    /** Returns the description of the task.
+    /**
+     * Returns the description of the task.
      *
      * @return The task description.
      */
@@ -30,12 +34,15 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    /** Marks this taks as done. */
+    /**
+     * Marks this task as done.
+     */
     public void markAsDone() {
         isDone = true;
     }
 
-    /** Returns the String representation of this task in the format to be saved in the file.
+    /**
+     * Returns the String representation of this task in the format to be saved in the file.
      *
      * @return The String representation of this task in the appropriate format.
      */
@@ -43,7 +50,8 @@ public class Task {
         return String.format("? | %d | %s", isDone ? 1 : 0, description);
     }
 
-    /** Returns the String representation of this task to be displayed to the user.
+    /**
+     * Returns the String representation of this task to be displayed to the user.
      *
      * @return The String representation of this task to be displayed to the user.
      */

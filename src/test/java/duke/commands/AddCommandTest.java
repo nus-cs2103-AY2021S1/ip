@@ -17,7 +17,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(todo);
         CommandResult actual = addCommand.execute(taskList);
         String expectedResponse = String.format("%s\t\t%s\n\t %s", MESSAGE_ADD_TASK, todo.toString(),
-            taskList.tasksRemaining());
+                taskList.tasksRemaining());
         CommandResult expected = new CommandResult(expectedResponse, false);
         assertEquals(expected, actual);
     }
