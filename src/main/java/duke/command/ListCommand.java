@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-import duke.util.Storage;
 
 /**
  * Represents a list command in the Duke program.

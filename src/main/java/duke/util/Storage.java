@@ -1,35 +1,31 @@
 package duke.util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import duke.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 /**
  * Represents the program storage, which can load and save tasks.
  */
 public class Storage {
 
-    private final String FILE_PATH;
+    private final String filePath;
 
     /**
      * Initializes a newly created Storage with a file path.
@@ -37,7 +33,7 @@ public class Storage {
      * @param filePath path of the saved tasks file.
      */
     public Storage(String filePath) {
-        this.FILE_PATH = filePath;
+        this.filePath = filePath;
     }
 
     /**
@@ -49,12 +45,12 @@ public class Storage {
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
         try {
-            int lastSlash = this.FILE_PATH.lastIndexOf('/');
+            int lastSlash = this.filePath.lastIndexOf('/');
             if (lastSlash != -1) {
-                String folderDir = FILE_PATH.substring(0, lastSlash);
+                String folderDir = filePath.substring(0, lastSlash);
                 Files.createDirectories(Paths.get("./" + folderDir));
             }
-            File file = new File(this.FILE_PATH);
+            File file = new File(this.filePath);
             if (!file.createNewFile()) {
                 loadFromFile(tasks);
             }
@@ -72,7 +68,7 @@ public class Storage {
      */
     private void loadFromFile(List<Task> tasks) throws DukeException {
         try {
-            File f = new File(this.FILE_PATH);
+            File f = new File(this.filePath);
             Scanner s = new Scanner(f);
             int lineCounter = 0;
             while (s.hasNext()) {
@@ -164,7 +160,7 @@ public class Storage {
      * @throws IOException if there are any I/O issues.
      */
     private void writeToFile(String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(this.FILE_PATH);
+        FileWriter fw = new FileWriter(this.filePath);
         fw.write(textToAdd);
         fw.close();
     }
