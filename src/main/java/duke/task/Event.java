@@ -9,28 +9,29 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private static final DateTimeFormatter FormatDateTime = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
-    private final LocalDateTime at;
+    private final LocalDateTime eventTime;
     /**
      * Creates a event object the containing details of the task.
      *
      * @param description Details of the task.
-     * @param at LocalDateTime format of the time.
+     * @param eventTime LocalDateTime format of the time.
      */
-    public Event(String description, LocalDateTime at) {
+    public Event(String description, LocalDateTime eventTime) {
         super(description);
-        this.at = at;
+        this.eventTime = eventTime;
     }
 
     /**
      * Creates a event object the containing details of the task.
      *
      * @param description Details of the task.
-     * @param at String format of the time. Either YYYY-MM-DD HHMM or YYYY-MM-DD(Will be reformatted with 2359 as HHMM).
+     * @param eventTime String format of the time. Either YYYY-MM-DD HHMM or
+     *                  YYYY-MM-DD(Will be reformatted with 2359 as HHMM).
      * @param isDone Boolean value of whether a task is completed.
      */
-    public Event(String description, String at, boolean isDone) {
+    public Event(String description, String eventTime, boolean isDone) {
         super(description, isDone);
-        this.at = LocalDateTime.parse(at);
+        this.eventTime = LocalDateTime.parse(eventTime);
     }
 
     /**
@@ -39,11 +40,11 @@ public class Event extends Task {
      * @return A format to be recorded into CSV.
      */
     public String formatStyling() {
-        return String.format("event,%s%s", at, super.formatStyling());
+        return String.format("event,%s%s", eventTime, super.formatStyling());
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(FormatDateTime) + ")";
+        return "[E]" + super.toString() + " (at: " + eventTime.format(FormatDateTime) + ")";
     }
 }

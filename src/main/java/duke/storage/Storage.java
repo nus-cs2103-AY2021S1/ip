@@ -11,6 +11,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import duke.commands.Command;
+import duke.commands.UnknownCommand;
+import duke.exception.UnknownCommandException;
 import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -21,12 +23,6 @@ import duke.tasklist.TaskList;
  * Class that simulates the storing and retrieving of information into the hard-disk
  */
 public class Storage {
-    // might use it at the end
-    private static final String CREATE_FILEPATH = "Creating file path ... ... ... ... ... ... ... ... ... ...";
-    private static final String CREATE_CSV = "Creating file todoList.csv ... ... ... ... ... ... ... ...";
-    private static final String SAVE_INFO = "Saving information ... ... ... ... ... ... ... ... ... ...";
-    private static final String SAVED = "Saved  ... ... ... ... ... ... ... ... ... ... ... ... ... ";
-
     /**
      * Checking if a particular task is completed.
      *
@@ -44,9 +40,8 @@ public class Storage {
      * @throws IOException
      */
     private void createFilePath(Path path) throws IOException {
-        //System.out.println(String.format("%s does not exist...", path.toString()));
+        assert path != null;
         Files.createDirectories(path);
-        //System.out.println(CREATE_FILEPATH);
     }
 
     /**
@@ -56,7 +51,7 @@ public class Storage {
      * @throws IOException
      */
     private void createCsv(File file) throws IOException {
-        //System.out.println(CREATE_CSV);
+        assert file != null;
         file.createNewFile();
     }
 
@@ -68,13 +63,13 @@ public class Storage {
      * @throws IOException
      */
     private void savingFileInfo(File file, TaskList tasks) throws IOException {
-        // System.out.println(SAVE_INFO);
+        assert file != null;
+        assert tasks != null;
         FileWriter fileWriter = new FileWriter(file);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         for (int i = 0; i < tasks.size(); i++) {
             bufferedWriter.write(tasks.get(i).formatStyling());
         }
-        //System.out.println(SAVED);
         bufferedWriter.close();
     }
 
@@ -84,10 +79,10 @@ public class Storage {
      * @param tasks Object contains the task list.
      */
     public void record(TaskList tasks) {
+        assert tasks != null;
         String dir = System.getProperty("user.dir");
         Path path = Paths.get(dir, "duke.Duke");
         try {
-            //System.out.println(String.format("Saving file information into %s", path.toString()));
             // checking if path exist
             if (!Files.exists(path)) {
                 createFilePath(path);
@@ -122,16 +117,22 @@ public class Storage {
                     // todo format type description done
                     // event format type at description done
                     // deadline format type by description done
-                    if (Parser.isToDo(info[0])) {
+                    switch (info[0]) {
+                    case Parser.KEYWORD_TODO:
                         tasks.add(new ToDo(info[1], isTaskDone(info[2])));
-                    } else if (Parser.isEvent(info[0])) {
+                        break;
+                    case Parser.KEYWORD_EVENT:
                         tasks.add(new Event(info[2], info[1], isTaskDone(info[3])));
-                    } else if (Parser.isDeadline(info[0])) {
+                        break;
+                    case Parser.KEYWORD_DEADLINE:
                         tasks.add(new Deadline(info[2], info[1], isTaskDone(info[3])));
+                        break;
+                    default:
+                        throw new UnknownCommandException();
                     }
                     line = bufferedReader.readLine();
                 }
-            } catch (IOException e) {
+            } catch (IOException | UnknownCommandException e) {
                 Command.printErr();
             }
         }
