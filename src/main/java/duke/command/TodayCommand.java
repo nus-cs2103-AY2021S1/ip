@@ -15,6 +15,6 @@ public class TodayCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Storage storage) {
-        return Ui.todayMessage(list.getTaskList());
+        return Ui.printTodayMessage(list.getTaskList());
     }
 }

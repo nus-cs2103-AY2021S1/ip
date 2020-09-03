@@ -34,6 +34,6 @@ public class DeleteCommand extends Command {
     public String execute(TaskList list, Storage storage) throws InvalidTaskException, StorageException {
         Task deletedTask = list.deleteTask(index);
         storage.writeTaskStorage(list.getSaveString());
-        return Ui.deleteTaskMessage(deletedTask, list.taskListSize());
+        return Ui.printDeleteTaskMessage(deletedTask, list.taskListSize());
     }
 }

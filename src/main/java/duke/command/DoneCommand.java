@@ -34,6 +34,6 @@ public class DoneCommand extends Command {
     public String execute(TaskList list, Storage storage) throws InvalidTaskException, StorageException {
         Task doneTask = list.completeTask(this.taskIndex);
         storage.writeTaskStorage(list.getSaveString());
-        return Ui.doneTaskMessage(doneTask);
+        return Ui.printDoneTaskMessage(doneTask);
     }
 }

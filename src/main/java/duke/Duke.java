@@ -36,7 +36,7 @@ public class Duke {
             TaskList taskList = TaskList.initialiseTaskList(storage);
 
             Scanner scanner = new Scanner(System.in);
-            Ui.welcomeMessage();
+            Ui.printWelcomeMessage();
             boolean isExit = false;
 
             while (!isExit) {
@@ -46,17 +46,17 @@ public class Duke {
                     parsedCommand.execute(taskList, storage);
                     isExit = parsedCommand.isExit();
                 } catch (DukeException e) {
-                    Ui.errorMessage(e.getUiMessage());
+                    Ui.printErrorMessage(e.getUiMessage());
                 }
             }
             scanner.close();
         } catch (DukeException e) {
-            Ui.errorMessage(e.getUiMessage());
+            Ui.printErrorMessage(e.getUiMessage());
         }
     }
 
     public static String sendWelcomeMessage() {
-        return Ui.welcomeMessage();
+        return Ui.printWelcomeMessage();
     }
 
     /**
@@ -69,7 +69,7 @@ public class Duke {
             Command parsedCommand = CommandParser.parseCommand(userCommand);
             return parsedCommand.execute(taskList, storage);
         } catch (DukeException e) {
-            return Ui.errorMessage(e.getUiMessage());
+            return Ui.printErrorMessage(e.getUiMessage());
         }
     }
 }

@@ -55,12 +55,12 @@ public class AddTaskCommand extends Command {
         case TODO:
             Task newTodo = list.addTask(this.taskName);
             storage.appendTaskStorage(newTodo.toSaveString());
-            return Ui.addTaskMessage(newTodo, list.taskListSize());
+            return Ui.printAddTaskMessage(newTodo, list.taskListSize());
         case EVENT:
         case DEADLINE:
             Task newTask = list.addTask(this.type, this.taskName, this.taskDate);
             storage.appendTaskStorage(newTask.toSaveString());
-            return Ui.addTaskMessage(newTask, list.taskListSize());
+            return Ui.printAddTaskMessage(newTask, list.taskListSize());
         default:
             throw new InvalidTaskException("Oh dear! I'm not sure what kind of task to add ;A;");
         }

@@ -12,7 +12,7 @@ public class Ui {
      * Prints a welcome message.
      * @return A string containing a welcome message.
      */
-    public static String welcomeMessage() {
+    public static String printWelcomeMessage() {
         String introduction = "Hello! I'm NEKOBOT!!\n";
         String question = "What can I do for you :>";
         return introduction + question;
@@ -22,7 +22,7 @@ public class Ui {
      * Prints a goodbye message.
      * @return A string containing a goodbye message.
      */
-    public static String goodbyeMessage() {
+    public static String printGoodbyeMessage() {
         return "Bye~ Hope to see you again soon ;w;";
     }
 
@@ -31,7 +31,7 @@ public class Ui {
      * @param taskList An ArrayList containing all existing Tasks.
      * @return A string containing all tasks in the TaskList.
      */
-    public static String listMessage(ArrayList<Task> taskList) {
+    public static String printListMessage(ArrayList<Task> taskList) {
         String preface = "Here are the tasks in your list!!\n";
         StringBuilder tasks = new StringBuilder();
         int index = 1;
@@ -47,7 +47,7 @@ public class Ui {
      * @param taskList An ArrayList containing all existing Tasks.
      * @return A string containing all tasks whose date is set as the current date (today).
      */
-    public static String todayMessage(ArrayList<Task> taskList) {
+    public static String printTodayMessage(ArrayList<Task> taskList) {
         // TODO: refactor to filter in duke.task.TaskList class
         String preface = "Here are today's tasks!!\n";
         StringBuilder tasks = new StringBuilder();
@@ -66,7 +66,7 @@ public class Ui {
      * @param taskList An ArrayList containing all Tasks that match the search term provided.
      * @return A string containing all tasks that match the search term provided.
      */
-    public static String findMessage(ArrayList<Task> taskList) {
+    public static String printFindMessage(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
             return "Oh dear, I couldn't find any matching tasks :o";
         } else {
@@ -87,7 +87,7 @@ public class Ui {
      * @param size An integer value representing the new size of the TaskList.
      * @return A string confirming the addition of a specified task.
      */
-    public static String addTaskMessage(Task task, int size) {
+    public static String printAddTaskMessage(Task task, int size) {
         String preface = "Okies! I've added this task~\n";
         String taskString = task.toString() + "\n";
         String currentSize = "Now you have " + size + " tasks in the list uwu";
@@ -99,7 +99,7 @@ public class Ui {
      * @param task The Task that has been marked completed.
      * @return A string confirming that the specified task has been marked completed.
      */
-    public static String doneTaskMessage(Task task) {
+    public static String printDoneTaskMessage(Task task) {
         String preface = "Yay! I've marked this task as done :3\n";
         String taskString = task.toString();
         return preface + taskString;
@@ -111,7 +111,7 @@ public class Ui {
      * @param size An integer value representing the new size of the TaskList.
      * @return A string confirming that the specified task has been deleted.
      */
-    public static String deleteTaskMessage(Task task, int size) {
+    public static String printDeleteTaskMessage(Task task, int size) {
         String preface = "Got it! I'll remove this task :>\n";
         String taskString = task.toString() + "\n";
         String currentSize = "Only " + size + " tasks left!!";
@@ -123,7 +123,7 @@ public class Ui {
      * @param uiMessage The error message of the exception that occurred.
      * @return A string that explains the exception that occurred.
      */
-    public static String errorMessage(String uiMessage) {
+    public static String printErrorMessage(String uiMessage) {
         return uiMessage;
     }
 }
