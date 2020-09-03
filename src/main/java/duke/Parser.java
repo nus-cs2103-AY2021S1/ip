@@ -30,7 +30,7 @@ public class Parser {
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_BY_DATE_COMMAND = "find_by_date";
     private static final String FIND_BY_KEYWORD_COMMAND = "find";
-    private static final String VIEW_FUNCTION_COMMAND = "/commands";
+    private static final String VIEW_FUNCTION_COMMAND = "commands";
 
     /**
      * Parses the input entered by users and returns a Command object to be

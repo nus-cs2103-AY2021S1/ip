@@ -43,7 +43,7 @@ public class DialogBox extends HBox {
         }
 
         // dialog.setStyle("-fx-font-family: monospace");
-        Circle circle = new Circle( 33, 35, 32);
+        Circle circle = new Circle( 32, 35, 32);
         displayPicture.setClip(circle);
         dialog.setText(text);
         displayPicture.setImage(img);
@@ -68,7 +68,6 @@ public class DialogBox extends HBox {
         BackgroundFill backgroundFill = new BackgroundFill(backgroundColor, radii, insets);
         Background background = new Background(backgroundFill);
         dialogBox.setBackground(background);
-        // db.setStyle("-fx-background-color: #F1FEF3");
         return dialogBox;
     }
 
