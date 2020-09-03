@@ -10,7 +10,7 @@
          xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" text="Label"/>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
+        <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true"/>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>

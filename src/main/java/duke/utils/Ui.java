@@ -46,16 +46,15 @@ public class Ui {
 
 
     public void welcome() {
-        String logo = "____        _        \n"
+        String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|";
 
-        displayString(logo);
 
-        displayString(""
-                + "\nHello! I'm duke.Duke, your Windows duke.task.Task Manager"
+        displayString(logo
+                + "\n\nHello! I'm duke.Duke, your Windows duke.task.Task Manager"
                 + "\nValid command:"
                 + "\n- list"
                 + "\n- done <num>"
