@@ -2,11 +2,14 @@
 ../src/main/java/duke/parser/Parser.java
 ../src/main/java/duke/parser/TimeParser.java
 ../src/main/java/duke/storage/Storage.java
+../src/main/java/duke/DialogBox.java
+../src/main/java/duke/Main.java
 ../src/main/java/duke/task/TaskList.java
 ../src/main/java/duke/task/Event.java
 ../src/main/java/duke/task/Task.java
 ../src/main/java/duke/task/Deadline.java
 ../src/main/java/duke/task/Todo.java
+../src/main/java/duke/MainWindow.java
 ../src/main/java/duke/command/DeleteCommand.java
 ../src/main/java/duke/command/ListCommand.java
 ../src/main/java/duke/command/Command.java
@@ -16,6 +19,7 @@
 ../src/main/java/duke/command/DoneCommand.java
 ../src/main/java/duke/command/ErrorCommand.java
 ../src/main/java/duke/Duke.java
+../src/main/java/duke/Launcher.java
 ../src/main/java/duke/exception/InvalidDeadlineException.java
 ../src/main/java/duke/exception/InvalidEventException.java
 ../src/main/java/duke/exception/InvalidFilePathException.java

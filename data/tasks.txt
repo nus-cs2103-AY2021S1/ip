@@ -1,10 +1,7 @@
 todo|✓|read book
-deadline|✓|do this|Mon 1pm
-event|✘|do that|Tue 2-5pm
-todo|✘|make directory
-event|✓|do math|2020-12-10
-deadline|✓|do english|Nov 13 2020
-todo|✘|write homework
+todo|✓|write homework
 deadline|✘|project|Oct 11 2020
 event|✘|meeting|2pm
 event|✘|meeting2|2020-11-10
+deadline|✘|prepare presentation|Sep 10 2020
+todo|✓|complete assignment

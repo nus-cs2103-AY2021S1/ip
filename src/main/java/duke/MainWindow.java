@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final double TIME_DELAY = 1.5;
+    private final double TIME_DELAY = 1;
     private final String USER_IMAGE_PATH = "/images/user.png";
     private final String DUKE_IMAGE_PATH = "/images/duke.png";
     private Image userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE_PATH));
@@ -61,18 +61,19 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        if (duke.canCloseWindow()) {
-            PauseTransition delay = new PauseTransition((Duration.seconds(TIME_DELAY)));
-            delay.setOnFinished(event -> Platform.exit());
-            delay.play();
-        }
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        userInput.clear();
+        if (duke.canCloseWindow()) {
+            PauseTransition delay = new PauseTransition((Duration.seconds(TIME_DELAY)));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
+        } else {
+            userInput.clear();
+        }
 
     }
 }

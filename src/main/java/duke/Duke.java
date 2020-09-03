@@ -41,8 +41,8 @@ public class Duke {
 
     /**
      * Returns duke's response based on the user's input.
-     * Sets the canCloseWindow to true if the input is
-     * "bye."
+     * Sets the canCloseWindow to true if the response of
+     * duke is the exit command.
      *
      * @param userInput The user's input.
      * @return Duke's response.
@@ -50,10 +50,11 @@ public class Duke {
     public String getResponse(String userInput) {
         try {
             Command command = Parser.parse(userInput);
-            if (userInput.equals(byeMessage)) {
+            String response = command.execute(storage, taskList, ui);
+            if (command.isExit()) {
                 canCloseWindow = true;
             }
-            return command.execute(storage, taskList, ui);
+            return response;
         } catch (InvalidInputException e) {
             return e.getMessage();
         }
@@ -61,7 +62,7 @@ public class Duke {
 
     /**
      * Checks if the GUI window can be closed, by checking
-     * whether the user inputs "bye."
+     * whether the Duke displays the exit message.
      *
      * @return true if the GUI window can be closed, false otherwise.
      */

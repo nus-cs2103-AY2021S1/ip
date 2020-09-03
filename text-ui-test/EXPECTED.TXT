@@ -19,6 +19,11 @@
      There are 2 tasks in total in your list.
      _____________________________________
      _____________________________________
+     Here are the task or tasks that match with this keyword:
+     1.[D][✓] return book (by: 2020-10)
+     2.[T][✘] borrow book
+     _____________________________________
+     _____________________________________
      Noted! The duke.task below is added into the list:
         [D][✘] return book (by: 2020-10)
      There are 3 tasks in total in your list.
