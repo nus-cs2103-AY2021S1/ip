@@ -30,14 +30,6 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the date of the deadline in the format mmm d yyyy
-     * @return the date of the deadline in the format mmm d yyyy
-     */
-    public String getBy() {
-        return this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-    }
-
-    /**
      * Overriden toString method for deadline class
      * @return the string representation for deadline
      */

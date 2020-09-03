@@ -55,33 +55,24 @@ public class Storage {
                 String taskLine = printLine(i);
                 String[] taskInfo = taskLine.trim().split(" [|] ");
                 String taskType = taskInfo[0];
-                boolean isDone = taskInfo[1].equals(String.valueOf(1)) ? true : false;
+                boolean isDone = taskInfo[1].equals(String.valueOf(1));
                 String taskName = taskInfo[2];
                 Task taskToAdd;
 
                 switch (taskType) {
                 case "T":
                     taskToAdd = new Todo(taskName);
-                    if (isDone) {
-                        taskToAdd.markAsDone();
-                    }
-                    taskList.add(taskToAdd);
+                    loadDoneTask(taskList, isDone, taskToAdd);
                     break;
                 case "E":
                     String at = taskInfo[3];
                     taskToAdd = new Event(taskName, at);
-                    if (isDone) {
-                        taskToAdd.markAsDone();
-                    }
-                    taskList.add(taskToAdd);
+                    loadDoneTask(taskList, isDone, taskToAdd);
                     break;
                 case "D":
                     String by = taskInfo[3];
                     taskToAdd = new Deadline(taskName, by);
-                    if (isDone) {
-                        taskToAdd.markAsDone();
-                    }
-                    taskList.add(taskToAdd);
+                    loadDoneTask(taskList, isDone, taskToAdd);
                     break;
                 default:
                     break;
@@ -92,6 +83,13 @@ public class Storage {
             printFileError();
             return taskList;
         }
+    }
+
+    protected void loadDoneTask(ArrayList<Task> taskList, boolean isDone, Task taskToAdd) {
+        if (isDone) {
+            taskToAdd.markAsDone();
+        }
+        taskList.add(taskToAdd);
     }
 
     /**
@@ -169,33 +167,6 @@ public class Storage {
             break;
         }
         return result;
-    }
-
-    /**
-     * Reads the data from the data file.
-     */
-    public void readFile() {
-        createFile(this.fileName);
-        BufferedReader reader = null;
-        int i = 1;
-        String curr;
-        try {
-            reader = new BufferedReader(new FileReader(this.fileName));
-            while ((curr = reader.readLine()) != null) {
-                System.out.println(i + ". " + processLine(curr));
-                i++;
-            }
-        } catch (IOException e) {
-            printFileError();
-        } finally {
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                printFileError();
-            }
-        }
     }
 
     /**
