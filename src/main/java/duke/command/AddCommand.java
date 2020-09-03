@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.component.Parser;
+import static duke.component.Parser.getTaskPlural;
 import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
@@ -10,9 +11,6 @@ import duke.task.Task;
  * Represents a command for adding tasks.
  */
 public class AddCommand extends Command {
-
-    public static final String TASK_SINGULAR = " task";
-    public static final String TASK_PLURAL = " tasks";
 
     /**
      * Creates a command for adding tasks.
@@ -40,10 +38,6 @@ public class AddCommand extends Command {
         String res = String.format(Ui.ADD_TASK_OUTPUT_FORMAT, task.toString(), count + 1, tasks);
         ui.output(res);
         return res;
-    }
-
-    private String getTaskPlural(int count) {
-        return count < 1 ? TASK_SINGULAR : TASK_PLURAL;
     }
 
     /**

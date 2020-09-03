@@ -32,6 +32,8 @@ public class Parser {
     public static final String AT_TIME_IDENTIFIER = "/at";
     public static final char SPACE_CHAR = ' ';
     public static final String SPACE_STRING = " ";
+    public static final String TASK_SINGULAR = "task";
+    public static final String TASK_PLURAL = "tasks";
     public static final String SUGGESTION_FORMAT = "Do you mean '%s %s'?";
     public static final String EMPTY_DONE_COMMAND_EXCEPTION = "The task to mark as done cannot be empty.";
     public static final String EMPTY_DELETE_COMMAND_EXCEPTION = "The task to mark to delete cannot be empty.";
@@ -188,5 +190,14 @@ public class Parser {
         } else {
             return new AddCommand(input);
         }
+    }
+
+    /**
+     * Gets the string tasks with proper singular or plural format.
+     * @param count the number of tasks currently have
+     * @return "task" if count <= 1 and "tasks" if count > 1
+     */
+    public static String getTaskPlural(int count) {
+        return count <= 1 ? TASK_SINGULAR : TASK_PLURAL;
     }
 }
