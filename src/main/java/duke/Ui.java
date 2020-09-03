@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.stream.Stream;
+
 /**
  * Class to initiate the Ui object. Contains various methods to handle different duke.commands.
  */
@@ -13,9 +15,8 @@ public class Ui {
      */
     private String messageFormatter(String ... words) {
         StringBuilder string = new StringBuilder();
-        for (String message: words) {
-            string.append(message);
-        }
+        Stream<String> stream = Stream.of(words);
+        stream.forEachOrdered(string::append);
         string.append("\n");
         return string.toString();
     }
