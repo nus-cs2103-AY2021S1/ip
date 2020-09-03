@@ -11,6 +11,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import duke.commands.Command;
+import duke.commands.UnknownCommand;
+import duke.exception.UnknownCommandException;
 import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -115,16 +117,22 @@ public class Storage {
                     // todo format type description done
                     // event format type at description done
                     // deadline format type by description done
-                    if (Parser.isToDo(info[0])) {
+                    switch (info[0]) {
+                    case Parser.KEYWORD_TODO:
                         tasks.add(new ToDo(info[1], isTaskDone(info[2])));
-                    } else if (Parser.isEvent(info[0])) {
+                        break;
+                    case Parser.KEYWORD_EVENT:
                         tasks.add(new Event(info[2], info[1], isTaskDone(info[3])));
-                    } else if (Parser.isDeadline(info[0])) {
+                        break;
+                    case Parser.KEYWORD_DEADLINE:
                         tasks.add(new Deadline(info[2], info[1], isTaskDone(info[3])));
+                        break;
+                    default:
+                        throw new UnknownCommandException();
                     }
                     line = bufferedReader.readLine();
                 }
-            } catch (IOException e) {
+            } catch (IOException | UnknownCommandException e) {
                 Command.printErr();
             }
         }
