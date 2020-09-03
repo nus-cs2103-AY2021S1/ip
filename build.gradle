@@ -52,11 +52,27 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Launcher"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Launcher'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+task customFatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'Launcher'
+    }
+    baseName = 'cait'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "cait"
     archiveClassifier = null
 }
 
@@ -68,3 +84,6 @@ run{
 	systemProperty "file.encoding", "utf-8"
     standardInput = System.in
 }
+
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'

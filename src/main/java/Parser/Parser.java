@@ -79,6 +79,24 @@ public class Parser {
         return "Oh no! Please only type in the date in this format: yyyy-mm-dd (eg, 2019-10-15).";
     }
 
+    protected String showHelp() {
+        String result = "";
+        result += "Here are the commands you can use!\n\n"; //, as well as examples on how to use them!\n\n";
+        result += "1. help\n"; //: list out all the commands and how to use them\n";
+        result += "2. list\n"; //: list out all of your tasks\n";
+        result += "3. todo <task>\n"; //: add a todo to your list of tasks (eg, todo buy eggs)\n";
+        result += "4. event <task> /at <yyyy-mm-dd>\n"; //: add a event to your list of tasks at a specified date"
+                //+ " (eg, event day6 concert /at 2020-10-5)\n";
+        result += "5. deadline <task> /by <yyyy-mm-dd>\n"; //: add a deadline to your list of tasks at a specified date"
+                //+ " (eg, deadline cs2103t assignment /by 2020-09-02\n";
+        result += "6. done <list number>\n"; //: set the task at the number specified on the list to be done (eg, done 1)\n";
+        result += "7. delete <list number>\n"; //: deletes the task at the number specified on the list (eg, delete 2)\n";
+        result += "8. find <keyword>\n"; //: finds all the tasks on the list that has the specified word (eg, find book)\n";
+        result += "9. bye\n\n"; //: closes Cait\n\n";
+        result += "Hope this helped you! :D";
+        return result;
+    }
+
     /**
      * Handles the command for done.
      * @param command the user's input
@@ -91,10 +109,13 @@ public class Parser {
             throw new DukeException("Oh no! This can't be DONE! (The description of done can't be empty!)");
         } else {
             try {
+                assert doneCommand[0].equals("done");
                 int index = parseInt(command.split(" ")[1]);
                 storage.setDoneLine(index);
                 String doneTask = storage.printLine(index);
                 doneTask = storage.processLine(doneTask);
+
+                assert index > 0;
                 reply += "Task marked as done! Good job!\n";
                 reply += doneTask;
             } catch (IndexOutOfBoundsException e) {
@@ -123,11 +144,13 @@ public class Parser {
             throw new DukeException("Oh no! You must DELETE this! (The description of delete can't be empty!)");
         } else {
             try {
+                assert deleteCommand[0].equals("delete");
                 int index = parseInt(command.split(" ")[1]);
                 String deletedTask = storage.printLine(index);
                 deletedTask = storage.processLine(deletedTask);
                 storage.deleteFromFile(index);
 
+                assert index > 0;
                 reply += "This task has been deleted from the list:\n";
                 reply += deletedTask + "\n";
                 reply += "You now have " + storage.getNumOfTasks() + " tasks.";
@@ -156,6 +179,7 @@ public class Parser {
         if (todoCommand.length == 1) {
             throw new DukeException("Oh no! What are you trying TODO? (The description of todo can't be empty!)");
         } else {
+            assert todoCommand[0].equals("todo");
             String taskName = command.substring(command.indexOf("todo") + 5);
             Todo todo = new Todo(taskName);
             reply = tasks.addToFile(todo);
@@ -175,6 +199,7 @@ public class Parser {
             throw new DukeException("Oh no! This LINE has made me DEAD! (The description of deadline can't be empty!)");
         } else {
             try {
+                assert deadlineCommand[0].equals("deadline");
                 String taskName = command.substring(command.indexOf("deadline") + 9);
                 taskName = taskName.substring(0, taskName.indexOf("/by") - 1);
                 String by = command.split("/by ")[1];
@@ -202,6 +227,7 @@ public class Parser {
                     + "(The description of event can't be empty!)");
         } else {
             try {
+                assert eventCommand[0].equals("event");
                 String taskName = command.substring(command.indexOf("event") + 6);
                 taskName = taskName.substring(0, taskName.indexOf("/at") - 1);
                 String at = command.split("/at ")[1];
@@ -227,6 +253,7 @@ public class Parser {
         if (findCommand.length == 1) {
             throw new DukeException("Oh no! Did you FIND out your problem? (The description of find can't be empty!)");
         } else {
+            assert findCommand[0].equals("find");
             String taskName = command.substring(command.indexOf("find") + 5);
             reply = "Here's what I've found for you:\n";
             reply += tasks.findInList(taskName);
@@ -249,6 +276,9 @@ public class Parser {
         try {
             String taskType = command.split(" ")[0];
             switch (taskType) {
+            case "help":
+                reply = showHelp();
+                break;
             case "bye":
                 reply = "Bye! Let's talk again soon!";
                 break;

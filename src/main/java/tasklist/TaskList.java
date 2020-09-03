@@ -89,6 +89,7 @@ public class TaskList {
         try {
             int index = parseInt(command.split(" ")[1]);
             Task doneTask = tasks.get(index - 1);
+            assert index > 0;
             doneTask.markAsDone();
         } catch (IndexOutOfBoundsException e) {
             ;
@@ -106,6 +107,7 @@ public class TaskList {
         try {
             int index = parseInt(command.split(" ")[1]);
             tasks.remove(index - 1);
+            assert index > 0;
         } catch (IndexOutOfBoundsException e) {
             ;
         } catch (NumberFormatException e) {
