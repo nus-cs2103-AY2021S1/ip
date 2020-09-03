@@ -33,18 +33,15 @@ public class Parser {
     public static final char SPACE_CHAR = ' ';
     public static final String SPACE_STRING = " ";
     public static final String SUGGESTION_FORMAT = "Do you mean '%s %s'?";
-    public static final String EMPTY_DONE_COMMAND_EXCEPTION = "\u2639 OOPS!!! "
-            + "The task to mark as done cannot be empty.";
-    public static final String EMPTY_DELETE_COMMAND_EXCEPTION = "\u2639 OOPS!!! "
-            + "The task to mark to delete cannot be empty.";
-    public static final String EMPTY_TASK_DESCRIPTION_EXCEPTION = "\u2639 OOPS!!!"
-            + " The description of a task cannot be empty.";
+    public static final String EMPTY_DONE_COMMAND_EXCEPTION = "The task to mark as done cannot be empty.";
+    public static final String EMPTY_DELETE_COMMAND_EXCEPTION = "The task to mark to delete cannot be empty.";
+    public static final String EMPTY_TASK_DESCRIPTION_EXCEPTION = "The description of a task cannot be empty.";
     public static final String EMPTY_TIME_EXCEPTION = "The time specification cannot be empty.";
-    public static final String NONPOSITIVE_TASK_INDEX_EXCEPTION = "\u2639 OOPS!!! The task index "
-            + "should be a positive integer.";
-    public static final String TASK_INDEX_OVERFLOW_EXCEPTION = "\u2639 OOPS!!! The task index does not exist.";
-    public static final String NONNUMERIC_TASK_INDEX_EXCEPTION = "\u2639 OOPS!!! The task index should be a number.";
-    public static final String LACK_TIME_SPECIFICATION_EXCEPTION = "\u2639 OOPS!!! Time should be specified";
+    public static final String NONPOSITIVE_TASK_INDEX_EXCEPTION = "The task index should be a positive integer.";
+    public static final String TASK_INDEX_OVERFLOW_EXCEPTION = "The task index does not exist.";
+    public static final String NONNUMERIC_TASK_INDEX_EXCEPTION = "The task index should be a number.";
+    public static final String LACK_TIME_SPECIFICATION_EXCEPTION = "Time should be specified";
+    public static final String UNRECOGNIZED_COMMAND_EXCEPTION = "I'm sorry, but I don't know what that means :-(";
 
 
     private static boolean hasEmptyContent(String cmd, String prefix) {
@@ -159,7 +156,7 @@ public class Parser {
             description = description.substring(0, s - 1);
             return new Event(description, time);
         } else {
-            throw new InvalidCommandException();
+            throw new InvalidCommandException(UNRECOGNIZED_COMMAND_EXCEPTION);
         }
     }
 
