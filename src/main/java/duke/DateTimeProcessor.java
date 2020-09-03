@@ -19,7 +19,7 @@ class DateTimeProcessor {
             Arrays.asList(
                     "dd/MM/yyyy", "yyyy/MM/dd", "MM/dd/yyyy",
                     "dd-MM-yyyy", "yyyy-MM-dd", "MM-dd-yyyy"
-                    )
+            )
     );
 
     private final ArrayList<String> possibleDateTimeFormats = new ArrayList<>(
@@ -31,20 +31,24 @@ class DateTimeProcessor {
             )
     );
 
-    private Optional<LocalDateTime> parseDateTime(String input) {
+    private Optional<LocalDateTime> parseDateTime(String input) throws DukeException {
         for (String format : possibleDateTimeFormats) {
             try {
                 return Optional.of(LocalDateTime.parse(input, DateTimeFormatter.ofPattern(format)));
-            } catch (DateTimeParseException e) {}
+            } catch (DateTimeParseException e) {
+                throw new DukeException(e.toString());
+            }
         }
         return Optional.empty();
     }
 
-    private Optional<LocalDate> parseDate(String input) {
+    private Optional<LocalDate> parseDate(String input) throws DukeException {
         for (String format : possibleDateFormats) {
             try {
                 return Optional.of(LocalDate.parse(input, DateTimeFormatter.ofPattern(format)));
-            } catch (DateTimeParseException e) {}
+            } catch (DateTimeParseException e) {
+                throw new DukeException(e.toString());
+            }
         }
         return Optional.empty();
     }
@@ -53,33 +57,38 @@ class DateTimeProcessor {
      * The string passed as date and/or time to an Event or Deadline
      * can be formatted to a neater format if it matches a pattern,
      * such as dd/MM/yyyy HHmm.
+     *
      * @param input The date-time string which may not be formatted properly.
      * @return The neatly formatted date-time string.
      */
-    String getParsedDate(String input) {
+    String getParsedDate(String input) throws DukeException {
         Optional<LocalDateTime> possibleDateTime = parseDateTime(input);
-        Optional<LocalDate> possibleDate = parseDate(input);
-        if (possibleDateTime.isPresent()) {
-            LocalDateTime dateTime = possibleDateTime.get();
-            Month month = dateTime.getMonth();
-            int day = dateTime.getDayOfMonth();
-            int year = dateTime.getYear();
-            int hour = dateTime.getHour();
-            int min = dateTime.getMinute();
-            String meridiem = hour > 12 ? "PM" : "AM";
-            return month.toString() + " " + day + " "
-                    + year + " " + (hour > 12 ? hour - 12 : hour)
-                    + ":" + min + " " + meridiem;
-        } else if (possibleDate.isPresent()) {
-            LocalDate dateTime = possibleDate.get();
-            Month month = dateTime.getMonth();
-            int day = dateTime.getDayOfMonth();
-            int year = dateTime.getYear();
-            return month.toString() + " " + day + " " + year;
-        } else {
-            // If no possible format can be found, just return
-            // the same string.
-            return input;
+        try {
+            Optional<LocalDate> possibleDate = parseDate(input);
+            if (possibleDateTime.isPresent()) {
+                LocalDateTime dateTime = possibleDateTime.get();
+                Month month = dateTime.getMonth();
+                int day = dateTime.getDayOfMonth();
+                int year = dateTime.getYear();
+                int hour = dateTime.getHour();
+                int min = dateTime.getMinute();
+                String meridiem = hour > 12 ? "PM" : "AM";
+                return month.toString() + " " + day + " "
+                        + year + " " + (hour > 12 ? hour - 12 : hour)
+                        + ":" + min + " " + meridiem;
+            } else if (possibleDate.isPresent()) {
+                LocalDate dateTime = possibleDate.get();
+                Month month = dateTime.getMonth();
+                int day = dateTime.getDayOfMonth();
+                int year = dateTime.getYear();
+                return month.toString() + " " + day + " " + year;
+            } else {
+                // If no possible format can be found, just return
+                // the same string.
+                return input;
+            }
+        } catch (DukeException e) {
+            throw e;
         }
     }
 }

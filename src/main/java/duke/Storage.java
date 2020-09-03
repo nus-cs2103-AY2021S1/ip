@@ -1,16 +1,16 @@
 package duke;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 /**
  * Handles the opening and storing of tasks from text files.
@@ -72,6 +72,8 @@ class Storage {
                                     isTaskDone
                             )
                     );
+                    break;
+                default:
                     break;
                 }
             }

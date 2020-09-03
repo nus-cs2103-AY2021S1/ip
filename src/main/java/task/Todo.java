@@ -20,7 +20,7 @@ public class Todo extends Task {
 
     @Override
     public String getDescriptionForDatabase() {
-        return "todo - " + (isTaskDone() ? "1" : "0") +
-                " - " + getDescription();
+        return "todo - " + (isTaskDone() ? "1" : "0")
+                + " - " + getDescription();
     }
 }

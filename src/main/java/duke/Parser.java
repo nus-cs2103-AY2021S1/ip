@@ -64,13 +64,17 @@ class Parser {
                     // Stop index when indicator /at or /by is found.
                 }
             }
-            if (indexToStop == -1) throw new DukeException("Incorrect Input for timed task.");
+            if (indexToStop == -1) {
+                throw new DukeException("Incorrect Input for timed task.");
+            }
 
             // Use StringBuilder Class to recreate the description and time separately.
             StringBuilder sb = new StringBuilder();
             for (int j = 0; j < indexToStop; j++) {
                 sb.append(arr[j]);
-                if (j != indexToStop - 1) sb.append(" ");
+                if (j != indexToStop - 1) {
+                    sb.append(" ");
+                }
             }
             // task.Event / task.Deadline description has been built, pass it to result[0].
             result[0] = sb.toString();
@@ -78,7 +82,9 @@ class Parser {
             sb = new StringBuilder();
             for (int k = indexToStop + 1; k < arr.length; k++) {
                 sb.append(arr[k]);
-                if (k != arr.length - 1) sb.append(" ");
+                if (k != arr.length - 1) {
+                    sb.append(" ");
+                }
             }
             String date = sb.toString();
             // Now to check if this date can be formatted nicely using duke.DateTimeProcessor class.

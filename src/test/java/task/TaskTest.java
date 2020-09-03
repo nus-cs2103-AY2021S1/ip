@@ -1,7 +1,8 @@
 package task;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test class to test the Task class.
@@ -45,8 +46,8 @@ class TaskTest {
                 "ASAP!",
                 false);
         String deadlineDescription = deadline.toString();
-        String deadlineDBDescription = deadline.getDescriptionForDatabase();
-        assertEquals("deadline - 0 - Individual Project Week 5 Deliverables - ASAP!", deadlineDBDescription);
+        String deadlineDatabaseDescription = deadline.getDescriptionForDatabase();
+        assertEquals("deadline - 0 - Individual Project Week 5 Deliverables - ASAP!", deadlineDatabaseDescription);
         assertEquals("[D][X] Individual Project Week 5 Deliverables (by: ASAP!)", deadlineDescription);
     }
 }

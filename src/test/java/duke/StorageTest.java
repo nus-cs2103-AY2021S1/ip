@@ -1,13 +1,14 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
+
 import task.Deadline;
 import task.Event;
 import task.Todo;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * JUnit test class to test the Storage class.
@@ -18,7 +19,7 @@ class StorageTest {
      * Tests if a sample TaskList loads correctly.
      */
     @Test
-    void testStorage_sampleTaskList_LoadsCorrectly() {
+    void testStorage_sampleTaskList_loadsCorrectly() {
         Storage storage = new Storage(
                 System.getProperty("user.dir")
                         + "\\src\\test\\data\\testTaskListToLoad.txt"
@@ -36,15 +37,15 @@ class StorageTest {
      * Tests if a sample TaskList stores correctly..
      */
     @Test
-    void testStorage_sampleTaskList_StoresCorrectly() {
+    void testStorage_sampleTaskList_storesCorrectly() {
         TaskList sampleList = new TaskList();
         sampleList.addTask(new Todo("Make tea tonight!"));
         sampleList.addTask(new Event("Midterm Test", "Sep 30th 2020"));
         sampleList.addTask(new Deadline("Submit tutorial", "tonight!", true));
 
         Storage storage = new Storage(
-                System.getProperty("user.dir") +
-                        "/src/test/data/testTaskListToStore.txt"
+                System.getProperty("user.dir")
+                + "/src/test/data/testTaskListToStore.txt"
         );
 
         try {
