@@ -10,7 +10,7 @@ public class ParserTest {
 
     @BeforeEach
     public void beforeEachTestMethod() {
-        Storage storage = new Storage("../data", "../data/duke.txt", new Ui(), new TaskList());
+        Storage storage = new Storage("../data", "../data/duke.txt", new Ui(false), new TaskList());
         this.parser = new Parser(storage);
     }
 
@@ -50,19 +50,29 @@ public class ParserTest {
 
     @Test
     public void testEventCommand_invalidFormat_dukeExceptionThrown() {
-        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("event project meeting"));
-        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("event project meeting"));
-        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("event project meeting /at"));
-        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("event project meeting /at 01/09/2020"));
-        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("event project meeting /by 01/09/2020 0800"));
+        Assertions.assertThrows(
+                DukeInputException.class, () -> this.parser.processInput("event project meeting"));
+        Assertions.assertThrows(
+                DukeInputException.class, () -> this.parser.processInput("event project meeting"));
+        Assertions.assertThrows(
+                DukeInputException.class, () -> this.parser.processInput("event project meeting /at"));
+        Assertions.assertThrows(
+                DukeInputException.class, () -> this.parser.processInput("event project meeting /at 01/09/2020"));
+        Assertions.assertThrows(
+                DukeInputException.class, () -> this.parser.processInput("event project meeting /by 01/09/2020 0800"));
     }
 
     @Test
     public void testDeadlineCommand_invalidFormat_dukeExceptionThrown() {
-        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("return book"));
-        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("return book"));
-        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("return book /by"));
-        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("return book /by 01/09/2020"));
-        Assertions.assertThrows(DukeInputException.class, () -> this.parser.processInput("return book /at 01/09/2020 1800"));
+        Assertions.assertThrows(
+                DukeInputException.class, () -> this.parser.processInput("return book"));
+        Assertions.assertThrows(
+                DukeInputException.class, () -> this.parser.processInput("return book"));
+        Assertions.assertThrows(
+                DukeInputException.class, () -> this.parser.processInput("return book /by"));
+        Assertions.assertThrows(
+                DukeInputException.class, () -> this.parser.processInput("return book /by 01/09/2020"));
+        Assertions.assertThrows(
+                DukeInputException.class, () -> this.parser.processInput("return book /at 01/09/2020 1800"));
     }
 }

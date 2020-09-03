@@ -10,33 +10,51 @@ public class Duke {
     /** UI for Duke to display messages. */
     private final Ui ui;
 
-    /** Storage for Duke to store tasks. */
-    private final Storage storage;
-
     /** Parser for Duke to parse inputs. */
     private final Parser parser;
 
     /**
      * Creates an instance of Duke.
+     *
+     * @param hasGui If there is a GUI or not.
      */
-    public Duke() {
+    public Duke(boolean hasGui) {
         TaskList taskList = new TaskList();
-        this.ui = new Ui();
-        this.storage = new Storage("../data", "../data/duke.txt", this.ui, taskList);
-        this.parser = new Parser(this.storage);
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.runDuke();
+        this.ui = new Ui(hasGui);
+        Storage storage = new Storage("../data", "../data/duke.txt", this.ui, taskList);
+        storage.checkSavedFile();
+        this.parser = new Parser(storage);
     }
 
     /**
-     * Runs Duke.
+     * Main entry point for a CLI-based Duke.
+     *
+     * @param args Command line arguments.
      */
-    public void runDuke() {
-        this.storage.checkSavedFile();
-        this.ui.printIntroduction();
+    public static void main(String[] args) {
+        Duke duke = new Duke(false);
+        duke.runDukeForCli();
+    }
+
+    /**
+     * Retrieves a response for the GUI.
+     *
+     * @param input Input string.
+     * @return Result of feeding Parser the input.
+     */
+    public String getResponseForGui(String input) {
+        try {
+            return this.parser.processInput(input);
+        } catch (DukeInputException e) {
+            return this.ui.displayError(e.getMessage());
+        }
+    }
+
+    /**
+     * Runs Duke for the CLI.
+     */
+    private void runDukeForCli() {
+        this.ui.displayIntroduction();
         this.readInputs();
     }
 
@@ -50,7 +68,7 @@ public class Duke {
             try {
                 this.parser.processInput(nextInput);
             } catch (DukeInputException e) {
-                this.ui.printError(e.getMessage());
+                this.ui.displayError(e.getMessage());
             }
 
             // Exit the program if user says bye

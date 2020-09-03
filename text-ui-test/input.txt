@@ -4,6 +4,7 @@ todo
 todo borrow book
 done
 done a
+done 3
 done 2
 deadline
 deadline return book
@@ -27,6 +28,7 @@ find z
 find book
 delete
 delete a
+delete 10
 delete 4
 list
 get 1-9-2020

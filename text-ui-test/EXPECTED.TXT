@@ -23,6 +23,8 @@ ERROR: Which task have you done?
 
 ERROR: Include the index of the task done.
 
+ERROR: The index is not within the range of the list.
+
 Nice! I've marked this as done:
 [T][✓] borrow book
 
@@ -84,6 +86,8 @@ Here are the matching task(s) in your list:
 ERROR: Which task do you want to delete?
 
 ERROR: Include the index of the task to be deleted.
+
+ERROR: The index is not within the range of the list.
 
 Noted. I've removed this task:
 [E][✓] project meeting (at: 01 Sep 2020, 08:00 AM)

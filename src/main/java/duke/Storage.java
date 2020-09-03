@@ -88,9 +88,9 @@ public class Storage {
     private void createDataDirectory() {
         boolean hasCreatedDir = directory.mkdir();
         if (hasCreatedDir) {
-            this.ui.printMessage("A data directory has been created in the root folder.");
+            this.ui.displayMessage("A data directory has been created in the root folder.");
         } else {
-            this.ui.printWarning("Failed to create a data directory.");
+            this.ui.displayWarning("Failed to create a data directory.");
         }
     }
 
@@ -102,12 +102,12 @@ public class Storage {
         try {
             boolean hasCreatedFile = textFile.createNewFile();
             if (hasCreatedFile) {
-                this.ui.printMessage("duke.txt has been created in the data directory of the root folder.");
+                this.ui.displayMessage("duke.txt has been created in the data directory of the root folder.");
             } else {
-                this.ui.printWarning(failMessage);
+                this.ui.displayWarning(failMessage);
             }
         } catch (IOException e) {
-            this.ui.printWarning(failMessage);
+            this.ui.displayWarning(failMessage);
         }
     }
 
@@ -122,11 +122,11 @@ public class Storage {
                 Task task;
                 String[] arr = line.split(" / ");
                 boolean isDone = Integer.parseInt(arr[1]) != 0;
-                if (arr[0].equals("T")) {    // Todo
+                if (arr[0].equals("T")) { // Todo
                     task = new Todo(arr[2], isDone);
-                } else if (arr[0].equals("E")) {    // Event
+                } else if (arr[0].equals("E")) { // Event
                     task = new Event(arr[2], isDone, arr[3]);
-                } else {    // Deadline
+                } else { // Deadline
                     task = new Deadline(arr[2], isDone, arr[3]);
                 }
                 this.taskList.addTask(task);
@@ -135,7 +135,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            this.ui.printWarning("Failed to read duke.txt.");
+            this.ui.displayWarning("Failed to read duke.txt.");
         }
     }
 
@@ -153,7 +153,7 @@ public class Storage {
             writer.write(data.toString());
             writer.close();
         } catch (IOException e) {
-            this.ui.printWarning("Failed to write data to duke.txt.");
+            this.ui.displayWarning("Failed to write data to duke.txt.");
         }
     }
 }

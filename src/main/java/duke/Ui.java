@@ -5,14 +5,22 @@ package duke;
  */
 public class Ui {
 
-    public Ui() {
+    /** Checks if there is a GUI. */
+    private final boolean hasGui;
 
+    /**
+     * Creates a UI and checks the presence of GUI.
+     *
+     * @param hasGui If there is a GUI or not.
+     */
+    public Ui(boolean hasGui) {
+        this.hasGui = hasGui;
     }
 
     /**
-     * Prints Duke's introduction message.
+     * Displays Duke's introduction message.
      */
-    public void printIntroduction() {
+    public void displayIntroduction() {
         String divider = "____________________________________________________________\n";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -24,53 +32,83 @@ public class Ui {
     }
 
     /**
-     * Prints message.
+     * Displays a message.
      *
      * @param message Message.
+     * @return Message to be displayed if GUI is used.
      */
-    public void printMessage(String message) {
-        System.out.println(message);
+    public String displayMessage(String message) {
+        if (hasGui) {
+            return message;
+        } else {
+            System.out.println(message);
+            return "";
+        }
     }
 
     /**
-     * Prints a warning message.
+     * Displays a warning message.
      *
-     * @param warningMessage Warning message.
+     * @param message Warning message.
+     * @return Warning message to be displayed if GUI is used.
      */
-    public void printWarning(String warningMessage) {
-        System.out.println("WARNING: " + warningMessage);
+    public String displayWarning(String message) {
+        String warningMessage = "WARNING: " + message;
+        if (hasGui) {
+            return warningMessage;
+        } else {
+            System.out.println(warningMessage);
+            return "";
+        }
     }
 
     /**
-     * Prints an error message.
+     * Displays an error message.
      *
-     * @param errorMessage Error message.
+     * @param message Error message.
+     * @return Error message to be displayed if GUI is used.
      */
-    public void printError(String errorMessage) {
-        System.out.println("ERROR: " + errorMessage);
+    public String displayError(String message) {
+        String errorMessage = "ERROR: " + message;
+        if (hasGui) {
+            return errorMessage;
+        } else {
+            System.out.println(errorMessage);
+            return "";
+        }
     }
 
     /**
-     * Prints the entire list of tasks.
+     * Displays the entire list of tasks.
      *
      * @param taskList Task list.
+     * @return Task list to be displayed if GUI is used.
      */
-    public void printTaskList(TaskList taskList) {
+    public String displayTaskList(TaskList taskList) {
         int numOfTasks = taskList.getNumOfTasks();
+        StringBuilder messageBuilder = new StringBuilder();
         if (numOfTasks == 0) {
-            System.out.println("There are no tasks in your list.\n");
+            messageBuilder.append("There are no tasks in your list.\n");
         } else {
             if (numOfTasks == 1) {
-                System.out.println("This is the only task in your list:");
+                messageBuilder.append("This is the only task in your list:\n");
             } else {
-                System.out.println("Here are the " + numOfTasks + " tasks in your list:");
+                messageBuilder.append("Here are the ").append(numOfTasks).append(" tasks in your list:\n");
             }
 
             for (int i = 0; i < numOfTasks; i++) {
                 int number = i + 1;
-                System.out.println(number + ". " + taskList.getTask(i).toString());
+                messageBuilder.append(number).append(". ").append(taskList.getTask(i).toString());
+                messageBuilder.append("\n");
             }
-            System.out.println();
+        }
+
+        String message = messageBuilder.toString();
+        if (hasGui) {
+            return message;
+        } else {
+            System.out.println(message);
+            return "";
         }
     }
 }
