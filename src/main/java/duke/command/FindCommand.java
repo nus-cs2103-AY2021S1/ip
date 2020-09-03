@@ -20,13 +20,21 @@ public class FindCommand extends Command {
 
     /**
      * Finds all tasks containing the keyword using DukeTaskList,
-     * then use Ui to report to the user.
+     * then use UiResponse to report to the user.
      * @param str the keyword
      * @param duke the current Duke
      */
     @Override
     public void execute(String str, Duke duke) {
         ArrayList<Task> tasksFound = duke.getTaskList().findTasks(str);
-        duke.getUi().reportGiveTasks(tasksFound);
+        response(tasksFound, duke);
+    }
+
+    private void response(ArrayList<Task> tasksFound, Duke duke) {
+        if (duke.getState().getUseGui()) {
+            duke.getGuiResponse().reportGivenTasks(tasksFound);
+        } else {
+            duke.getUiResponse().reportGivenTasks(tasksFound);
+        }
     }
 }

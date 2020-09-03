@@ -3,7 +3,7 @@ package duke.command;
 import duke.Duke;
 
 /**
- * ListCommand asks Ui to print out current tasks.
+ * ListCommand asks UiResponse to print out current tasks.
  */
 public class ListCommand extends Command {
 
@@ -15,12 +15,20 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Asks Ui to print out current tasks.
+     * Asks UiResponse to print out current tasks.
      * @param str any string after command "list" on the same line
      * @param duke the current Duke
      */
     @Override
     public void execute(String str, Duke duke) {
-        duke.getUi().reportCurrentTasks();
+        response(duke);
+    }
+
+    private void response(Duke duke) {
+        if (duke.getState().getUseGui()) {
+            duke.getGuiResponse().reportCurrentTasks();
+        } else {
+            duke.getUiResponse().reportCurrentTasks();
+        }
     }
 }

@@ -24,7 +24,14 @@ public class EventCommand extends Command {
     public void execute(String str, Duke duke) {
         Event newEvent = Event.createEvent(str);
         duke.getTaskList().addTask(newEvent);
-        duke.getUi().reportNewTask(newEvent);
+        response(newEvent, duke);
     }
 
+    private void response(Event newEvent, Duke duke) {
+        if (duke.getState().getUseGui()) {
+            duke.getGuiResponse().reportNewTask(newEvent);
+        } else {
+            duke.getUiResponse().reportNewTask(newEvent);
+        }
+    }
 }

@@ -24,8 +24,14 @@ public class TodoCommand extends Command {
     public void execute(String str, Duke duke) {
         ToDo newToDo = ToDo.createToDo(str);
         duke.getTaskList().addTask(newToDo);
-        duke.getUi().reportNewTask(newToDo);
+        response(newToDo, duke);
     }
 
-
+    private void response(ToDo newToDo, Duke duke) {
+        if (duke.getState().getUseGui()) {
+            duke.getGuiResponse().reportNewTask(newToDo);
+        } else {
+            duke.getUiResponse().reportNewTask(newToDo);
+        }
+    }
 }
