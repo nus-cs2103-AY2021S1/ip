@@ -1,9 +1,9 @@
-
 package duke.task;
-import duke.exception.DukeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.exception.DukeException;
 
 /**
  * Represents a deadline that extends from the Task class, which consists of a description and a due date.
@@ -13,6 +13,12 @@ public class Deadline extends Task {
     private LocalDate deadlineLocalDate;
     private String formatDeadlineDate;
 
+    /**
+     * Constructs a new Deadline object.
+     * @param taskName name of the Deadline.
+     * @param deadlineDate date which the Deadline is due.
+     * @throws DukeException if the date provided is of the wrong format.
+     */
     public Deadline(String taskName, String deadlineDate) throws DukeException {
         super(taskName, "D");
         try {

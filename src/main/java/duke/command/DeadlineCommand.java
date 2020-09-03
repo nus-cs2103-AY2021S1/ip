@@ -14,7 +14,6 @@ public class DeadlineCommand extends Command {
      * A string array that represents the instructions for this command.
      */
     private String[] nextCommandArr;
-    
     public DeadlineCommand(String[] nextCommandArr) {
         this.nextCommandArr = nextCommandArr;
     }
@@ -41,7 +40,6 @@ public class DeadlineCommand extends Command {
                 return new DukeException("Please input a proper due date for your deadline~").toString();
             }
         }
-        
     }
 
     /**

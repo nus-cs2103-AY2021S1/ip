@@ -8,6 +8,11 @@ public class Task {
     protected boolean done;
     protected String taskType;
 
+    /**
+     * Constructs a new Task object.
+     * @param taskName name of the Task.
+     * @param taskType type of Task (Todo, Deadline or Event).
+     */
     public Task(String taskName, String taskType) {
         this.taskName = taskName;
         this.done = false;
@@ -37,7 +42,12 @@ public class Task {
     public boolean checkDone() {
         return this.done;
     }
-    
+
+    /**
+     * Checks if a task contains a keyword.
+     * @param keyword The keyword it is checking for.
+     * @return true if the task contains the keyword and false if it doesn't.
+     */
     public boolean containsKeyword(String keyword) {
         if (this.taskName.contains(keyword)) {
             return true;

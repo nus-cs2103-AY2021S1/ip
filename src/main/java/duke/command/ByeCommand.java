@@ -15,14 +15,12 @@ public class ByeCommand extends Command {
      * @param ui The user interface to read inputs from the user and print messages.
      * @param storage The class that deals with saving tasks into the file and loading tasks
      *                from the file.
-     *                
      * @return A string representing the goodbye message when Duke is shut down.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.storelist(tasks);
         return ui.farewell();
-        
     }
 
     /**

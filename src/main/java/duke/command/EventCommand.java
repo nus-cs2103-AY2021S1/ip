@@ -14,7 +14,6 @@ public class EventCommand extends Command {
      * A string array that represents the instructions of this command.
      */
     private String[] nextCommandArr;
-    
     public EventCommand(String[] nextCommandArr) {
         this.nextCommandArr = nextCommandArr;
     }
@@ -42,7 +41,6 @@ public class EventCommand extends Command {
                 return new DukeException("Please input a proper date for your event~").toString();
             }
         }
-        
     }
 
     /**

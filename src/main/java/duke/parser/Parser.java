@@ -1,16 +1,15 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.EnumCommand;
 import duke.command.ByeCommand;
-import duke.command.ListCommand;
-import duke.command.DoneCommand;
-import duke.command.TodoCommand;
+import duke.command.Command;
 import duke.command.DeadlineCommand;
-import duke.command.EventCommand;
 import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EnumCommand;
+import duke.command.EventCommand;
 import duke.command.FindCommand;
-
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 import duke.exception.DukeException;
 
 /**
@@ -18,9 +17,7 @@ import duke.exception.DukeException;
  */
 public class Parser {
     public Parser() {
-        
     }
-
     /**
      * Parses the input from the user and turn it into a command.
      * @param nextCommand the string of instruction input by the user
@@ -31,9 +28,7 @@ public class Parser {
         String[] nextCommandArr = nextCommand.split(" ", 2);
         Command next;
         EnumCommand enumCommand;
-        
         String command = nextCommandArr[0];
-        
         if (command.equals("bye")) {
             enumCommand = EnumCommand.BYE;
         } else if (command.equals("list")) {
@@ -53,27 +48,26 @@ public class Parser {
         } else {
             throw new DukeException("Sorry, I don't know what that means~");
         }
-        
-        switch (enumCommand) { 
-        case BYE: 
+        switch (enumCommand) {
+        case BYE:
             next = new ByeCommand();
             break;
-        case LIST: 
+        case LIST:
             next = new ListCommand();
             break;
-        case DONE: 
+        case DONE:
             next = new DoneCommand(nextCommandArr);
-            break; 
-        case TODO: 
+            break;
+        case TODO:
             next = new TodoCommand(nextCommandArr);
             break;
-        case DEADLINE: 
+        case DEADLINE:
             next = new DeadlineCommand(nextCommandArr);
             break;
-        case EVENT: 
+        case EVENT:
             next = new EventCommand(nextCommandArr);
             break;
-        case DELETE: 
+        case DELETE:
             next = new DeleteCommand(nextCommandArr);
             break;
         case FIND:
@@ -82,9 +76,6 @@ public class Parser {
         default:
             throw new DukeException("Sorry, I don't know what that means~");
         }
-        
         return next;
-        
-        
     }
 }

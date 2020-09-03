@@ -14,7 +14,6 @@ public class TodoCommand extends Command {
      * A string array that represents the instructions of this command.
      */
     private String[] nextCommandArr;
-    
     public TodoCommand(String[] nextCommandArr) {
         this.nextCommandArr = nextCommandArr;
     }

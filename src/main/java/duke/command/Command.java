@@ -27,5 +27,4 @@ public abstract class Command {
      * @return true if Duke should keep running and false if not.
      */
     public abstract boolean continueRunning();
-    
 }
