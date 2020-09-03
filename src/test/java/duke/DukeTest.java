@@ -68,7 +68,7 @@ public class DukeTest {
     @Test
     public void testInputs() throws IOException, InvalidSaveFileException {
         Duke duke = new Duke(TEST_FILE_PATH);
-        duke.run();
+        duke.runCli();
 
         String expectedFilePath = Paths.get("duke-test", "EXPECTED.txt").toString();
         File file = new File(expectedFilePath);
