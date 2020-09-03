@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import duke.exception.ExceptionMessage;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.IncorrectFormatException;
@@ -31,8 +32,7 @@ public class DeadlineTest {
         Exception exception = assertThrows(
                 IncorrectFormatException.class, () -> Deadline.createDeadline("read book"));
 
-        String line = UiPrint.getLine(UiPrint.STAR, 50);
-        String errMessage = "\nPlease follow the format of deadline <duke.task description> /by <deadline>\n";
+        String errMessage = ExceptionMessage.DEADLINE_INCORRECT_FORMAT_MESSAGE;
 
         assertEquals(errMessage, exception.getMessage());
     }

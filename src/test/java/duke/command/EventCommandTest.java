@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import duke.exception.ExceptionMessage;
 import org.junit.jupiter.api.Test;
 
 import duke.DukeStub;
@@ -55,8 +56,7 @@ public class EventCommandTest {
         Exception exception = assertThrows(
                 IncorrectFormatException.class, () -> command.execute(invalidInput, dukeStub));
 
-        String line = UiPrint.getLine(UiPrint.STAR, 50);
-        String errMessage = "\nPlease follow the format of event <duke.task description> /at <event duke.time>\n";
+        String errMessage = ExceptionMessage.EVENT_INCORRECT_FORMAT_MESSAGE;
 
         assertEquals(errMessage, exception.getMessage());
     }

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 
+import duke.exception.ExceptionMessage;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.InvalidIndexException;
@@ -46,7 +47,7 @@ public class DukeTaskListTest {
         Exception exception = assertThrows(
                 InvalidIndexException.class, () -> taskList.getTask(invalidIndex));
 
-        assertEquals("Invalid Index!", exception.getMessage());
+        assertEquals(ExceptionMessage.getInvalidIndexMessage(invalidIndex + ""), exception.getMessage());
     }
 
     @Test
@@ -88,7 +89,7 @@ public class DukeTaskListTest {
         Exception exception = assertThrows(
                 InvalidIndexException.class, () -> taskList.deleteTask(invalidIndex));
 
-        assertEquals("Invalid Index!", exception.getMessage());
+        assertEquals(ExceptionMessage.getInvalidIndexMessage(invalidIndex + ""), exception.getMessage());
     }
 
     @Test

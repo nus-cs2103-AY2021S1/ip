@@ -11,6 +11,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.exception.ExceptionMessage;
 import duke.exception.UnknownCommandException;
 
 /**
@@ -51,7 +52,7 @@ public class DukeCommandSet {
      */
     public Command getCommand(String commandName) throws UnknownCommandException {
         if (!commandSet.containsKey(commandName)) {
-            String errMessage = "\nOOPS!!! I'm sorry, but I don't know what that means :-(\n";
+            String errMessage = ExceptionMessage.UNKNOWN_COMMAND_MESSAGE;
 
             throw new UnknownCommandException(errMessage);
         }

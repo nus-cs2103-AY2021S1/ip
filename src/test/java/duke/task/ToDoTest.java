@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import duke.exception.ExceptionMessage;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.NoDescriptionException;
@@ -30,8 +31,7 @@ public class ToDoTest {
     public void createToDo_invalidInput_exceptionThrown() {
         Exception exception = assertThrows(NoDescriptionException.class, () -> ToDo.createToDo(""));
 
-        String line = UiPrint.getLine(UiPrint.STAR, 50);
-        String errMessage = "\nOOPS!!! The description of a todo cannot be empty.\n";
+        String errMessage = ExceptionMessage.TODO_NO_DESCRIPTION_MESSAGE;
 
         assertEquals(errMessage, exception.getMessage());
     }

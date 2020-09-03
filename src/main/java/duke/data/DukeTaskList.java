@@ -2,6 +2,7 @@ package duke.data;
 
 import java.util.ArrayList;
 
+import duke.exception.ExceptionMessage;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
 
@@ -75,7 +76,7 @@ public class DukeTaskList {
 
     private void indexCheck(int index) {
         if (index >= getSize() || index < 0) {
-            throw new InvalidIndexException("Invalid Index!");
+            throw new InvalidIndexException(ExceptionMessage.getInvalidIndexMessage(index + ""));
         }
     }
 

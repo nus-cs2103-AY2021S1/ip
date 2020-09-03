@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import duke.exception.ExceptionMessage;
 import org.junit.jupiter.api.Test;
 
 import duke.DukeStub;
@@ -51,8 +52,7 @@ public class DeleteCommandTest {
         Exception exception = assertThrows(
                 InvalidIndexException.class, () -> command.execute(invalidInput, dukeStub));
 
-        String line = UiPrint.getLine(UiPrint.STAR, 50);
-        String errMessage = "\nSorry " + invalidInput + " is not a valid index\n";
+        String errMessage = ExceptionMessage.getInvalidIndexMessage(invalidInput);
 
         assertEquals(errMessage, exception.getMessage());
     }

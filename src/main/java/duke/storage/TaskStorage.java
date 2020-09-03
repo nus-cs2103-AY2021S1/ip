@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exception.ExceptionMessage;
 import duke.exception.UnknownTaskTypeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -62,7 +63,7 @@ public class TaskStorage {
         case "event":
             return Event.createEvent(taskInfo);
         default:
-            throw new UnknownTaskTypeException(taskType + "is not a duke.task type");
+            throw new UnknownTaskTypeException(ExceptionMessage.getUnknownTaskMessage(taskType));
         }
     }
 

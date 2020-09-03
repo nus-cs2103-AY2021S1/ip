@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.ExceptionMessage;
 import duke.exception.IncorrectFormatException;
 import duke.time.Time;
 import duke.ui.UiPrint;
@@ -43,7 +44,7 @@ public class Event extends Task {
 
     private static void checkException(String[] splitStr) throws IncorrectFormatException {
         if (splitStr.length != 2) {
-            String errMessage = "\nPlease follow the format of event <duke.task description> /at <event duke.time>\n";
+            String errMessage = ExceptionMessage.EVENT_INCORRECT_FORMAT_MESSAGE;
             throw new IncorrectFormatException(errMessage);
         }
     }

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import duke.exception.ExceptionMessage;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.UnknownCommandException;
@@ -35,8 +36,7 @@ public class DukeCommandSetTest {
         Exception exception = assertThrows(
                 UnknownCommandException.class, () -> commandSet.getCommand(invalidCommandName));
 
-        String line = UiPrint.getLine(UiPrint.STAR, 50);
-        String errMessage = "\nOOPS!!! I'm sorry, but I don't know what that means :-(\n";
+        String errMessage = ExceptionMessage.UNKNOWN_COMMAND_MESSAGE;
 
         assertEquals(errMessage, exception.getMessage());
     }
