@@ -67,12 +67,12 @@ public class Storage {
                 emptyData.writeToFile("");
             } else {
                 WriteFile firstData = new WriteFile(filePath);
-                firstData.writeToFile(tasks.get(0).toString());
+                firstData.writeToFile(tasks.get(0).toStorageString());
 
                 if (tasks.size() > 1) {
                     WriteFile appendData = new WriteFile(filePath, true);
                     for (int i = 1; i < tasks.size(); ++i) {
-                        appendData.writeToFile(tasks.get(i).toString());
+                        appendData.writeToFile(tasks.get(i).toStorageString());
                     }
                 }
             }

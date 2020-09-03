@@ -23,7 +23,7 @@ public class Parser {
      */
     public static Task getTask(String taskString) throws DukeException {
         char taskType = taskString.charAt(1);
-        boolean isTaskDone = Character.toString(taskString.charAt(4)).equals("✓");
+        boolean isTaskDone = taskString.charAt(4) == '1';
         Task result;
 
         if (taskType == 'T') {

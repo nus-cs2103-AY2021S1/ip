@@ -1,7 +1,10 @@
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
-    /** Deadline of the task. */
+    /** Deadline of the task in String type. */
+    protected String originalBy;
+
+    /** Deadline of the task in LocalDateTime type. */
     protected LocalDateTime by;
 
     /**
@@ -14,6 +17,7 @@ public class Deadline extends Task {
     public Deadline(String description, String by) throws DukeException {
         super(description);
         try {
+            this.originalBy = by;
             this.by = Parser.getLocalDateTimeBy(by);
         } catch (Exception e) {
             throw new DukeException("invalidDeadlineDateTime");
@@ -25,5 +29,14 @@ public class Deadline extends Task {
         String datetime = Parser.getDateTime(by);
         String day = Parser.getDay(by);
         return "[D]" + super.toString() + " (by: " + day + ", " + datetime + ")";
+    }
+
+    /**
+     * Returns the task string to be written to the duke.txt storage file.
+     *
+     * @return task string.
+     */
+    public String toStorageString() {
+        return "[D]" + super.toStorageString() + " (by: " + this.originalBy + ")";
     }
 }

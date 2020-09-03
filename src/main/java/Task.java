@@ -42,7 +42,17 @@ public class Task {
         return Parser.getTask(taskString);
     }
 
+    @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+
+    /**
+     * Returns part of the task string to be written to the duke.txt storage file.
+     *
+     * @return task string.
+     */
+    public String toStorageString() {
+        return "[" + (isDone ? "1" : "0") + "] " + description;
     }
 }

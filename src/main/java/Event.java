@@ -1,6 +1,9 @@
 import java.time.LocalDateTime;
 
 public class Event extends Task {
+    /** Time duration of Event */
+    protected String at;
+
     /** Start datetime of the Event. */
     protected LocalDateTime start;
 
@@ -17,6 +20,7 @@ public class Event extends Task {
     public Event(String description, String at) throws DukeException {
         super(description);
         try {
+            this.at = at;
             LocalDateTime localStart = Parser.getLocalDateTimeStart(at);
             LocalDateTime localEnd = Parser.getLocalDateTimeEnd(at);
 
@@ -34,9 +38,18 @@ public class Event extends Task {
     @Override
     public String toString() {
         String strStart = Parser.getStringStart(start);
-        String strEnd = Parser.getStringEnd(start);
+        String strEnd = Parser.getStringEnd(end);
         String startDay = Parser.getStartDay(start);
-        String endDay = Parser.getEndDay(start);
+        String endDay = Parser.getEndDay(end);
         return "[E]" + super.toString() + " (at: " + startDay + ", " + strStart + " to " + endDay + ", " + strEnd + ")";
+    }
+
+    /**
+     * Returns the task string to be written to the duke.txt storage file.
+     *
+     * @return task string.
+     */
+    public String toStorageString() {
+        return "[E]" + super.toStorageString() + " (at: " + this.at + ")";
     }
 }
