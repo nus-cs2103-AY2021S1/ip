@@ -1,3 +1,5 @@
+package duke;
+
 public class Task {
     private int status;
     private int category;
@@ -44,7 +46,7 @@ public class Task {
         if (this.category == TASK_TODO) {
             category = "ToDo";
         } else if (this.category == TASK_DEADLINE) {
-            category = "DeadLine.java";
+            category = "DeadLine";
         } else if (this.category == TASK_EVENT) {
             category = "Event";
         }

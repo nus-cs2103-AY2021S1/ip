@@ -1,3 +1,4 @@
+package duke;
 
 public class Parser {
 
@@ -61,6 +62,9 @@ public class Parser {
                 switch (commandFront) {
                     case "todo":
                         ToDo toDo = new ToDo(Task.TASK_TODO, Task.DOING, portions[1]);
+                        System.out.println(taskList);
+                        System.out.println(taskList.tasks);
+                        System.out.println(toDo);
                         taskList.addTask(toDo);
                         ui.addTaskSuccessful(toDo, taskList);
                         break;
