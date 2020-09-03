@@ -7,14 +7,13 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import duke.exception.DukeException;
 import duke.exception.InvalidDateInputException;
-
 
 public class TaskListTest {
 
     @Test
-    public void addTask_taskListWithSomeItems_taskAddedAsLastItem()
-            throws InvalidDateInputException {
+    public void addTask_taskListWithSomeItems_taskAddedAsLastItem() throws DukeException {
         List<Task> testInputTasks = new ArrayList<>();
         testInputTasks.add(new Todo("todo desc1"));
         testInputTasks.add(new Todo("todo desc2"));
@@ -29,7 +28,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTask_taskListWithSomeItems_success() throws InvalidDateInputException {
+    public void deleteTask_taskListWithSomeItems_success() throws DukeException {
         List<Task> testInputTasks = new ArrayList<>();
         testInputTasks.add(new Todo("todo desc1"));
         Task taskToDelete = new Todo("todo desc3");

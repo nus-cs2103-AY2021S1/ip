@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.exception.InvalidTaskIdException;
+
 /**
  * Encapsulates a list of {@link Task}s.
  */
@@ -32,7 +34,10 @@ public class TaskList {
      * @param taskId The ID of the task to be retrieved.
      * @return The task with the corresponding ID.
      */
-    public Task getTask(int taskId) {
+    public Task getTask(int taskId) throws InvalidTaskIdException {
+        if (taskId > this.tasks.size()) {
+            throw new InvalidTaskIdException("No task with the given ID was found!");
+        }
         return this.tasks.get(taskId - 1);
     }
 
@@ -52,7 +57,10 @@ public class TaskList {
      * @param taskId The ID of the task to be deleted.
      * @return The {@link Task} that was deleted form the list.
      */
-    public Task deleteTask(int taskId) {
+    public Task deleteTask(int taskId) throws InvalidTaskIdException {
+        if (taskId > this.tasks.size()) {
+            throw new InvalidTaskIdException("No task with the given ID was found!");
+        }
         return this.tasks.remove(taskId - 1);
     }
 
