@@ -43,7 +43,7 @@ public class Ui {
             System.out.println(message);
             return message;
         }
-        String message = "Here are the tasks in your list:";
+        String message = "Here are the tasks in your list:\n";
         for (int i = 1; i <= tasks.size(); i++) {
             String task = null;
             try {
@@ -67,7 +67,7 @@ public class Ui {
             System.out.println(message);
             return message;
         } else {
-            String result = "Here are the matching tasks in your list:";
+            String result = "Here are the matching tasks in your list:\n";
             for (int i = 1; i <= tasks.size(); i++) {
                 String task = i + ". " + tasks.get(i - 1);
                 result += task + "\n";
