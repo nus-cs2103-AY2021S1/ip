@@ -10,6 +10,10 @@ import duke.task.Task;
  * Represents a command for adding tasks.
  */
 public class AddCommand extends Command {
+
+    public static final String TASK_SINGULAR = " task";
+    public static final String TASK_PLURAL = " tasks";
+
     /**
      * Creates a command for adding tasks.
      * @param input the input command classified as AddCommand
@@ -32,11 +36,14 @@ public class AddCommand extends Command {
         Task task = Parser.parseAddTask(input);
         storage.addToList(task);
         list.add(count, task);
-        String temp = count < 1 ? " task" : " tasks";
-        String res = "Got it. I've added this task:\n\t    " + task
-                + "\n\t  Now you have " + (count + 1) + temp + " in the list.";
+        String tasks = getTaskPlural(count);
+        String res = String.format(Ui.ADD_TASK_OUTPUT_FORMAT, task.toString(), count + 1, tasks);
         ui.output(res);
         return res;
+    }
+
+    private String getTaskPlural(int count) {
+        return count < 1 ? TASK_SINGULAR : TASK_PLURAL;
     }
 
     /**
