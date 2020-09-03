@@ -51,7 +51,7 @@ public class Task {
      * Gets the completion status of the task.
      * @return A boolean value representing whether the task has been completed.
      */
-    public boolean getIsCompleted() {
+    public boolean getCompletionStatus() {
         return this.isCompleted;
     }
 

@@ -12,14 +12,14 @@ import duke.exception.StorageException;
  * Storage is a class that handles the interactions between the application and local storage.
  */
 public class Storage {
-    private final String filePath = "data/tasks.txt";
+    private static final String FILEPATH = "data/tasks.txt";
     private File storage;
 
     /**
      * Creates a Storage object.
      */
     public Storage() {
-        this.storage = new File(filePath);
+        this.storage = new File(FILEPATH);
     }
 
     /**
@@ -59,7 +59,7 @@ public class Storage {
      */
     public void appendTaskStorage(String taskString) throws StorageException {
         try {
-            FileWriter appender = new FileWriter(filePath, true);
+            FileWriter appender = new FileWriter(FILEPATH, true);
             appender.write(taskString);
             appender.close();
         } catch (IOException e) {
@@ -72,9 +72,9 @@ public class Storage {
      * @param taskString The String representation of all tasks in the TaskList.
      * @throws StorageException if the storage cannot be accessed or read.
      */
-    public void writeTaskStorage(String taskString) throws StorageException {
+    public void writeToTaskStorage(String taskString) throws StorageException {
         try {
-            FileWriter rewriter = new FileWriter(filePath);
+            FileWriter rewriter = new FileWriter(FILEPATH);
             rewriter.write(taskString);
             rewriter.close();
         } catch (IOException e) {

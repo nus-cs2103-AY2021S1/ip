@@ -73,7 +73,7 @@ public class Ui {
             String preface = "Here are your search results!!\n";
             StringBuilder tasks = new StringBuilder();
             int index = 1;
-            for (Task task: taskList) {
+            for (Task task : taskList) {
                 tasks.append(index).append(". ").append(task).append("\n");
                 index++;
             }

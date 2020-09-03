@@ -22,7 +22,7 @@ public abstract class Command {
      * This is the default implementation for all other subclasses.
      * @return false (default implementation).
      */
-    public boolean isExit() {
+    public boolean shouldExit() {
         return false;
     }
 }

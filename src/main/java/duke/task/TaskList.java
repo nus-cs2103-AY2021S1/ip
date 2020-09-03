@@ -101,7 +101,7 @@ public class TaskList {
      * @return The task marked as completed.
      * @throws InvalidTaskException if index specified is invalid (does not refer to a task in the TaskList).
      */
-    public Task completeTask(int index) throws InvalidTaskException {
+    public Task markTaskAsDone(int index) throws InvalidTaskException {
         if (index > this.taskList.size() || index <= 0) {
             throw new InvalidTaskException("Oh noes! I don't think you specified a valid task index :<");
         }
@@ -150,7 +150,7 @@ public class TaskList {
      * Gets the number of Tasks in the TaskList.
      * @return An integer value representing the number of Tasks in the TaskList.
      */
-    public int taskListSize() {
+    public int getTaskListSize() {
         return this.taskList.size();
     }
 

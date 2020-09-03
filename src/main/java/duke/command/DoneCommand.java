@@ -32,8 +32,8 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Storage storage) throws InvalidTaskException, StorageException {
-        Task doneTask = list.completeTask(this.taskIndex);
-        storage.writeTaskStorage(list.getSaveString());
+        Task doneTask = list.markTaskAsDone(this.taskIndex);
+        storage.writeToTaskStorage(list.getSaveString());
         return Ui.printDoneTaskMessage(doneTask);
     }
 }
