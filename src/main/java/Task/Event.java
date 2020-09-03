@@ -46,9 +46,9 @@ public class Event extends Task {
     public String saveFormat() {
         String base = "[E] ";
         if (isCompleted) {
-            base = base + "[✓]";
+            base = base + "[O]";
         } else {
-            base = base + "[✗]";
+            base = base + "[X]";
         }
         base = base + taskDescription + "at:" + date.format(SAVE_READ_DATETIME_FORMAT);
         return base;
@@ -63,9 +63,9 @@ public class Event extends Task {
     public String toString() {
         String base = "[E] ";
         if (isCompleted) {
-            base = base + "[✓]";
+            base = base + "[O]";
         } else {
-            base = base + "[✗]";
+            base = base + "[X]";
         }
         base = base + taskDescription + "(at:" + date.format(NEW_DATETIME_FORMAT) + ")";
         return base;

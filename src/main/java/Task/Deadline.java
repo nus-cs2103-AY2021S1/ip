@@ -44,9 +44,9 @@ public class Deadline extends Task {
     public String saveFormat() {
         String base = "[D] ";
         if (isCompleted) {
-            base = base + "[✓]";
+            base = base + "[O]";
         } else {
-            base = base + "[✗]";
+            base = base + "[X]";
         }
         base = base + taskDescription + "by:" + date.format(SAVE_READ_DATETIME_FORMAT);
         return base;
@@ -61,9 +61,9 @@ public class Deadline extends Task {
     public String toString() {
         String base = "[D] ";
         if (isCompleted) {
-            base = base + "[✓]";
+            base = base + "[O]";
         } else {
-            base = base + "[✗]";
+            base = base + "[X]";
         }
         base = base + taskDescription + "(by:" + date.format(NEW_DATETIME_FORMAT) + ")";
         return base;

@@ -24,9 +24,9 @@ public class Todo extends Task {
     public String saveFormat() {
         String base = "[T] ";
         if (isCompleted) {
-            base = base + "[✓]";
+            base = base + "[O]";
         } else {
-            base = base + "[✗]";
+            base = base + "[X]";
         }
         base = base + taskDescription;
         return base;
@@ -41,9 +41,9 @@ public class Todo extends Task {
     public String toString() {
         String base = "[T] ";
         if (isCompleted) {
-            base = base + "[✓]";
+            base = base + "[O]";
         } else {
-            base = base + "[✗]";
+            base = base + "[X]";
         }
         base = base + taskDescription;
         return base;
