@@ -1,12 +1,14 @@
 package duke;
 
 import duke.storage.Storage;
-import duke.ui.Ui;
+import duke.ui.Cli;;
 
-public class Duke {
+public class Duke{
+
+
     private static void launchDuke() {
         Storage database = new Storage("data/tasksTable.csv");
-        Ui.loop(database);
+        Cli.loop(database);
     }
     public static void main(String[] args) {
         launchDuke();

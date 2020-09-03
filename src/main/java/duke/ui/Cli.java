@@ -9,9 +9,9 @@ import duke.utils.Constants;
 import duke.utils.UtilFunction;
 
 
-public class Ui {
+public class Cli {
 
-    private Ui() {} //this class is not meant to be instantiated
+    private Cli() {} //this class is not meant to be instantiated
 
     /**
      * Launch the Duke loop.

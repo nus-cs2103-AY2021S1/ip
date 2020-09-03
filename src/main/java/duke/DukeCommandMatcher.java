@@ -18,6 +18,7 @@ import duke.tasks.Event;
 import duke.tasks.SingletonTaskList;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
+import duke.ui.Printer;
 import duke.utils.Constants;
 import duke.utils.UtilFunction;
 
@@ -89,28 +90,25 @@ public class DukeCommandMatcher {
     }
 
     private String handleExit() {
-        System.out.println("Farewell/再見/さようなら～～");
+        Printer.printBye();
         return "EXIT";
     }
 
     private String handleAdd(Task task) {
-        taskList.add(task);
-        return "Duke.Task added";
+        return taskList.add(task);
     }
 
     private String handleList() {
-        taskList.listAll();
-        return "List implemented";
+        return taskList.listAll();
     }
 
     private String handleDone(String[] targetTask) throws TaskOutOfBoundException, TaskNotSpecifyException {
         try {
             int targetTaskPos = Integer.parseInt(targetTask[1]) - 1;
-            taskList.setTaskDone(targetTaskPos);
+            return taskList.setTaskDone(targetTaskPos);
         } catch (IndexOutOfBoundsException e) {
             throw new TaskNotSpecifyException("task to be done not specified", "DONE");
         }
-        return "Task " + targetTask + " has been done";
     }
 
     private String handleTodo(String[] todoStr) throws NullCommandContentException {
@@ -170,21 +168,19 @@ public class DukeCommandMatcher {
         int taskToDelete = -1;
         try {
             taskToDelete = Integer.parseInt(deleteStr[1]);
-            taskList.delete(taskToDelete);
+            return taskList.delete(taskToDelete);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new TaskNotSpecifyException("task to deletion not specified", "DELETE");
         }
-        return "Task " + (taskToDelete - 1) + " has been removed successfully";
     }
 
     private String handleFind(String[] findStr) throws NullCommandContentException {
         try {
             String queryKey = findStr[1];
-            taskList.query(queryKey);
+            return taskList.query(queryKey);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new NullCommandContentException("no query body", "FIND");
         }
-        return "query has been done";
     }
 
 }

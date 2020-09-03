@@ -34,11 +34,12 @@ public class SingletonTaskList {
      * Add task to the task list and the database.
      * @param task task to add
      */
-    public void add(Task task) {
+    public String add(Task task) {
         tasks.add(task);
         int numOfTask = tasks.size();
-        Printer.printAdd(task, numOfTask);
+        String message = Printer.printAdd(task, numOfTask);
         storage.update(tasks);
+        return message;
     }
 
     /**
@@ -47,11 +48,12 @@ public class SingletonTaskList {
      * @throws TaskOutOfBoundException when the idx is not valid
      * @see duke.exceptions.TaskOutOfBoundException
      */
-    public void delete(int idx) throws TaskOutOfBoundException {
+    public String delete(int idx) throws TaskOutOfBoundException {
         try {
-            Printer.printDelete(tasks.get(idx - 1), tasks.size() - 1);
+            String message = Printer.printDelete(tasks.get(idx - 1), tasks.size() - 1);
             tasks.remove(idx - 1);
             storage.update(tasks);
+            return message;
         } catch (IndexOutOfBoundsException e) {
             throw new TaskOutOfBoundException("task number out of bound", idx);
         }
@@ -60,11 +62,11 @@ public class SingletonTaskList {
     /**
      * List all the tasks in the task list.
      */
-    public void listAll() {
+    public String listAll() {
         if (tasks.size() == 0) {
-            Printer.printNoTaskReminder();
+            return Printer.printNoTaskReminder();
         }
-        Printer.printAllTask(tasks, true);
+        return Printer.printAllTask(tasks, true);
     }
 
     /**
@@ -73,12 +75,13 @@ public class SingletonTaskList {
      * @throws TaskOutOfBoundException when the {@code idx} is not valid
      * @see duke.exceptions.TaskOutOfBoundException
      */
-    public void setTaskDone(int idx) throws TaskOutOfBoundException {
+    public String setTaskDone(int idx) throws TaskOutOfBoundException {
         try {
             Task task = this.tasks.get(idx);
             task.setStatus(true);
-            Printer.printDoneTask(task);
+            String message = Printer.printDoneTask(task);
             storage.update(tasks);
+            return message;
         } catch (IndexOutOfBoundsException e) {
             throw new TaskOutOfBoundException("Target number of task out of bound", idx + 1);
         }
@@ -88,9 +91,9 @@ public class SingletonTaskList {
      * Query tasks in the taskList with the {@code queryKey}.
      * @param queryKey the key used to query the tasks
      */
-    public void query(String queryKey) {
+    public String query(String queryKey) {
         List<Task> matchedTasks = storage.query(queryKey);
-        Printer.printAllTask(matchedTasks, false);
+        return Printer.printAllTask(matchedTasks, false);
     }
 
 }
