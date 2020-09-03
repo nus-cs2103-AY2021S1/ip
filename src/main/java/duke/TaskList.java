@@ -48,4 +48,24 @@ public class TaskList {
         }
         System.out.println("-------------------------");
     }
+
+    /**
+     * Finds the Tasks stored in the array that corresponds to the specified String.
+     * @param str input String specified
+     */
+    public String finder(String str) {
+        String result = "";
+        int counter = 1;
+        for (Task task : this.list) {
+            if (task.getDescription().contains(str)) {
+                result = result + counter + ". [" + task.getType() + "]["
+                        + task.getStatusIcon() + "] " + task.getDescription() + "\n";
+                counter++;
+            }
+        }
+        if (counter == 1) {
+            result = "There are no tasks that match your search!";
+        }
+        return result;
+    }
 }
