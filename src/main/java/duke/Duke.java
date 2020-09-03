@@ -8,7 +8,6 @@ public class Duke {
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-        System.out.println(this.storage.load());
         if (this.storage.load().isEmpty()) {
             this.tasks = new TaskList();
 
