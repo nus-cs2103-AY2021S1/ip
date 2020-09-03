@@ -23,7 +23,13 @@ public class CommandHandler {
                     handleList();
                     break;
                 case "done":
-                    handleDone();
+                    try {
+                        handleDone();
+                    } catch (DukeException e) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     " + e.getMessage());
+                        System.out.println("    ____________________________________________________________\n");
+                    }
                     break;
                 case "delete":
                     handleDelete();
@@ -84,8 +90,23 @@ public class CommandHandler {
         System.out.println("    ____________________________________________________________\n");
     }
 
-    public void handleDone() {
-        int index = sc.nextInt();
+    public void handleDone() throws DukeException {
+        String doneCommand = sc.nextLine();
+        int index = 0;
+        if (doneCommand.isEmpty()) {
+            throw new DukeException("\u2639 OOPS!!! I need to know the index of the task to be done!");
+        }
+        try {
+            index = Integer.parseInt(doneCommand.stripLeading());
+        } catch (NumberFormatException e) {
+            System.out.println("    ____________________________________________________________");
+            System.out.println("     \u2639 Please enter a valid integer!!");
+            System.out.println("    ____________________________________________________________\n");
+            return;
+        }
+        if (index > taskList.size()) {
+            throw new DukeException("\u2639 Your number is too large!!");
+        }
         Task currentTask = taskList.get(index - 1);
         currentTask.markAsDone();
         System.out.println("    ____________________________________________________________");

@@ -32,4 +32,10 @@ delete 3
 
 list
 
+done
+
+done 5
+
+done this
+
 bye
