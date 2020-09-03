@@ -21,7 +21,8 @@ public class Ui {
 
     /**
      * Converts a command and input into the corresponding task.
-     *
+     * @param command associated with the input
+     * @param input provided by the user
      * @return the task that is converted
      */
     public Task convertTask(Commands command, String input) {
@@ -49,6 +50,9 @@ public class Ui {
 
     /**
      * Converts a command and index into the corresponding action.
+     * @param command associated with the input
+     * @param index provided by the user
+     * @param input provided by the user
      */
     public void convertAction(Commands command, int index, String input) {
         switch (command) {

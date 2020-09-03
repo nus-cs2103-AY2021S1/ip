@@ -67,7 +67,7 @@ public class Storage {
     }
 
     /**
-     * List out the saved tasks from the specified task list.
+     * Lists out the saved tasks from the specified task list.
      * @param taskList as specified
      */
     public void listSavedTasks(List<Task> taskList) {

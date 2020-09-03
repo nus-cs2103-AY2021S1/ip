@@ -14,6 +14,7 @@ public class DukeException extends Exception {
 
     /**
      * Returns the message indicating the problem and its mitigation.
+     * @return the error message
      */
     public String getMessage() {
         return this.message;

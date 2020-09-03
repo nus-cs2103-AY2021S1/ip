@@ -36,7 +36,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the task specified by the index as done.
+     * Marks the task specified by the index as done.
      * @param index of specified task to be marked done
      */
     public void markTaskAsDone(int index) {
