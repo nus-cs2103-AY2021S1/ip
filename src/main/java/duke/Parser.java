@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.zip.DataFormatException;
 
 import duke.command.AddCommand;
@@ -26,31 +28,32 @@ public class Parser {
      */
     public static String understandText(String userText, TaskList taskList) {
         try {
-            String edittedAnswer = userText.strip().toLowerCase();
-            String[] answers = edittedAnswer.split(" ");
-            if (answers.length == 2 && answers[0].equals(Commands.DONE.text)) {
+            String editedAnswer = userText.strip().toLowerCase();
+            String[] answers = editedAnswer.split(" ");
+            String commandWord = answers[0];
+            if (answers.length == 2 && Commands.DONE.containsKeyWord(commandWord)) {
                 return Parser.understandTaskNumber(answers[0], answers[1], taskList);
 
-            } else if (answers.length == 2 && answers[0].equals(Commands.DELETE.text)) {
+            } else if (answers.length == 2 && Commands.DELETE.containsKeyWord(commandWord)) {
                 Command command = new DeleteCommand();
                 return Parser.understandTaskNumber(answers[0], answers[1], taskList);
 
-            } else if (answers[0].equals(Commands.FIND.text)) {
-                String toMatch = edittedAnswer.split(" ", 2)[1];
+            } else if (Commands.FIND.containsKeyWord(commandWord)) {
+                String toMatch = editedAnswer.split(" ", 2)[1];
                 Command command = new FindCommand();
                 return command.execute(toMatch, taskList);
 
-            } else if (edittedAnswer.equals(Commands.LIST.text)) {
+            } else if (Commands.LIST.containsKeyWord(commandWord)) {
                 Command command = new ListCommand();
                 return command.execute(" ", taskList);
 
-            } else if (edittedAnswer.equals(Commands.EXIT.text)) {
+            } else if (Commands.EXIT.containsKeyWord(commandWord)) {
                 Command command = new ByeCommand();
                 return command.execute(" ", taskList);
 
-            } else if (answers[0].equals(Commands.TODO.text)
-                    || answers[0].equals(Commands.DEADLINE.text)
-                    || answers[0].equals(Commands.EVENT.text)) {
+            } else if (Commands.TODO.containsKeyWord(commandWord)
+                    || Commands.DEADLINE.containsKeyWord(commandWord)
+                    || Commands.EVENT.containsKeyWord(commandWord)) {
                 return Parser.understandTaskDescription(userText, taskList);
 
             } else {
@@ -66,7 +69,7 @@ public class Parser {
             int oneIndex = Integer.parseInt(answer);
             int realIndex = oneIndex - 1;
             Command command;
-            if (stringCommand.equals(Commands.DONE.text)) {
+            if (Commands.DONE.containsKeyWord(stringCommand)) {
                 command = new DoneCommand();
             } else {
                 command = new DeleteCommand();
@@ -84,14 +87,14 @@ public class Parser {
     private static String understandTaskDescription(String answer, TaskList taskList) {
         try {
             String[] answers = answer.split(" ", 2);
+            String type = answers[0].strip();
             if (answers.length > 1) {
-                String type = answers[0].strip();
                 String task = answers[1].strip();
                 String[] partsOfTask = task.split("/");
 
                 // checking for event and deadline if the date is given or not
-                if (type.equals(Commands.TODO.text) || partsOfTask.length == 2) {
-                    if (type.equals(Commands.TODO.text)) {
+                if (Commands.TODO.containsKeyWord(type) || partsOfTask.length == 2) {
+                    if (Commands.TODO.containsKeyWord(type) ) {
                         Command command = new AddCommand(type);
                         return command.execute(task, taskList);
 
@@ -109,7 +112,7 @@ public class Parser {
                     }
                 } else {
                     String instruction = "<type of task> <description> / <deadline>";
-                    if (type.equals(Commands.EVENT.text)) {
+                    if (Commands.EVENT.containsKeyWord(type)) {
                         instruction = "<type of task> <description> / <date of event>";
                     }
                     throw new DukeGotNoArgumentsException(instruction);
@@ -117,9 +120,9 @@ public class Parser {
             } else {
                 // handles the case when no description
                 String instruction = "<type of task> <description>";
-                if (answers[0].equals(Commands.DEADLINE.text)) {
+                if (Commands.DEADLINE.containsKeyWord(type) ) {
                     instruction = "<type of task> <description> / <due date>";
-                } else if (answers[0].equals(Commands.EVENT.text)) {
+                } else if (Commands.EVENT.containsKeyWord(type) ) {
                     instruction = "<type of task> <description> / <date of event>";
                 }
                 throw new DukeGotNoArgumentsException(instruction);
@@ -137,15 +140,21 @@ public class Parser {
         TODO("todo"),
         DEADLINE("deadline"),
         EVENT("event"),
-        LIST("list"),
-        EXIT("bye"),
-        DONE("done"),
-        DELETE("delete"),
-        FIND("find");
-        private String text;
+        LIST("list", "name"),
+        EXIT("bye", "goodbye", "cya", "exit"),
+        DONE("done", "finish"),
+        DELETE("delete", "remove"),
+        FIND("find", "search"),
+        HELLO("hello", "hi", "yo");
 
-        Commands(String text) {
-            this.text = text;
+        private List<String> relevantWords;
+
+        Commands(String... relevantWords) {
+            this.relevantWords = Arrays.asList(relevantWords);
+        }
+
+        public boolean containsKeyWord(String userInput) {
+            return this.relevantWords.contains(userInput);
         }
     }
 

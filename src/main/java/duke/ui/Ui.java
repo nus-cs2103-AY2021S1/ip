@@ -56,4 +56,7 @@ public class Ui {
         return (message);
     }
 
+    public static String printHelloMessage() {
+        return "Hello! What do you wanna do?";
+    }
 }
