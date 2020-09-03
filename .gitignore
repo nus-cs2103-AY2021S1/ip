@@ -15,4 +15,4 @@ bin/
 
 /text-inputOutput-test/ACTUAL.txt
 text-inputOutput-test/EXPECTED-UNIX.TXT
-/.data/
+/data/
