@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private static final String logo =
-            " ____        _        \n"
+    static final String LOGO =
+            " \n____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
@@ -31,7 +31,7 @@ public class Ui {
     }
 
     void showWelcome() {
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + LOGO);
         showDivider();
         System.out.println("     Hello! I'm Duke!\n" + "     What can I do for you?\n");
         showDivider();
