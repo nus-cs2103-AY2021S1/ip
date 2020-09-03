@@ -14,7 +14,8 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke(true);
+    /** Logic for Duke to run. */
+    private final Duke duke = new Duke(true);
 
     @Override
     public void start(Stage stage) {

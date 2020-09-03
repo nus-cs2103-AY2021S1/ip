@@ -47,7 +47,7 @@ public class Task {
      *
      * @return Status icon.
      */
-    protected String getStatusIcon() {
+    private String getStatusIcon() {
         return (this.isDone ? "\u2713" : "\u2718");
     }
 

@@ -7,6 +7,11 @@ public class Parser {
 
     private final Storage storage;
 
+    /**
+     * Creates a parser with a storage for reading and writing data.
+     *
+     * @param storage Storage for reading and writing data.
+     */
     public Parser(Storage storage) {
         this.storage = storage;
     }

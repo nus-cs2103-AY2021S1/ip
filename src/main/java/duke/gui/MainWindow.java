@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
 
+    /** GUI for Duke. */
     private Main dukeGui;
 
     @FXML
@@ -32,6 +33,11 @@ public class MainWindow extends AnchorPane {
         this.scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets GUI for Duke.
+     *
+     * @param dukeGui GUI for Duke.
+     */
     public void setDukeGui(Main dukeGui) {
         this.dukeGui = dukeGui;
     }
