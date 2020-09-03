@@ -1,3 +1,0 @@
-E | 0 | what | when
-T | 0 | what
-D | 1 | what | when
