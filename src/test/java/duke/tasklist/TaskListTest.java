@@ -2,6 +2,8 @@ package duke.tasklist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -13,23 +15,39 @@ import duke.task.ToDo;
 
 public class TaskListTest {
     @Test
-    public void test() {
-        ArrayList<Task> tasks = new ArrayList<>();
-        TaskList taskList = new TaskList(tasks);
-
+    public void testList() {
+        TaskList taskList = new TaskList(new ArrayList<>());
         assertTrue(taskList.isEmpty());
 
-        Task newTask = new ToDo("test1");
-
+        // Additions
+        Task newTask = new ToDo("apple");
+        Task newTask2 = new ToDo("apple and orange");
+        Task newTask3 = new ToDo("test");
+        Task newTask4 = new ToDo("zest");
+        Task newTask5 = new ToDo("war");
         taskList.add(newTask);
-        taskList.add(new ToDo("test2"));
-        taskList.add(new ToDo("test3"));
-        taskList.add(new ToDo("test4"));
-        taskList.add(new ToDo("test5"));
+        taskList.add(newTask2);
+        taskList.add(newTask3);
+        taskList.add(newTask4);
+        taskList.add(newTask5);
 
         assertFalse(taskList.isEmpty());
-        assertEquals(newTask, taskList.get(0));
+        assertSame(newTask, taskList.get(0));
         assertTrue(taskList.checkIfValid(5));
         assertFalse(taskList.checkIfValid(10));
+        assertFalse(taskList.checkIfValid(-2));
+        // Size
+        assertFalse(taskList.isEmpty());
+        assertEquals(5, taskList.size());
+
+        // Match function
+        TaskList newList = taskList.matchAll("ple");
+        assertSame(newTask, newList.get(0));
+        assertSame(newTask2, newList.get(1));
+
+        // Deletions
+        taskList.delete(0);
+        assertNotEquals(5, taskList.size());
+        assertEquals(4, taskList.size());
     }
 }
