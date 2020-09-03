@@ -1,6 +1,5 @@
 package rogue.logic.parser;
 
-import rogue.commons.util.StringUtil;
 import rogue.logic.directives.FindDirective;
 import rogue.logic.parser.exceptions.IncorrectInputException;
 import rogue.model.argument.Argument;
