@@ -15,6 +15,7 @@ public class ListCommand extends Command {
      * @param lst     List containing the current tasks.
      * @param ui      Ui allows execute to carry out ui methods to print to the console.
      * @param storage Storage allows execute to write and read files.
+     * @return String response by the application after executing the command.
      */
     public String execute(TaskList lst, Ui ui, Storage storage) {
         StringBuilder result = new StringBuilder();

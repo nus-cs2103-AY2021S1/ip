@@ -66,6 +66,7 @@ public class Parser {
      * Returns the correct command after parsing the user input.
      *
      * @param command String representing the user input command.
+     * @return Correct command after parsing user input.
      * @throws DukeException If user gave an invalid input command.
      */
     public Command parse(String command) throws DukeException {
