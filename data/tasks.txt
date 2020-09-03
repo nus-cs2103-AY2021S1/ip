@@ -1,3 +1,0 @@
-T | false | homework assignment
-T | false | read book
-D | false | return book | 2020-05-02

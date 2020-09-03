@@ -27,7 +27,7 @@ public class Event extends Task {
      * @return a new instance of the event.
      */
     public static Event load(String eventDetails) {
-        String[] splitEventDetails = eventDetails.split("\\|",4);
+        String[] splitEventDetails = eventDetails.split("\\|", 4);
         Event event = new Event(splitEventDetails[2], LocalDate.parse(splitEventDetails[3]));
         if (splitEventDetails[1].equals("true")) {
             event.markAsDone();

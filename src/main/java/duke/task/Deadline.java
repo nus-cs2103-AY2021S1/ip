@@ -17,7 +17,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate dueDate) {
         super(description);
-        this.dueDate = dueDate ;
+        this.dueDate = dueDate;
     }
 
     /**
