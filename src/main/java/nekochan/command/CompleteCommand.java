@@ -33,7 +33,7 @@ public class CompleteCommand extends Command {
     public void execute(TaskList list, Storage storage) {
         completedTask = list.markAsComplete(index);
         storage.save(list);
-        super.completed = true;
+        super.isCompleted = true;
     }
 
     /**
@@ -43,7 +43,7 @@ public class CompleteCommand extends Command {
      */
     @Override
     public String feedback() throws IncompleteNekoCommandException {
-        if (super.completed) {
+        if (super.isCompleted) {
             return String.format("Nice! I've marked this task as complete:\n  %s\n",
                     completedTask.toString());
         } else {

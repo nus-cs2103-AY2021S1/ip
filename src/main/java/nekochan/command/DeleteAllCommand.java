@@ -20,7 +20,7 @@ public class DeleteAllCommand extends Command {
     public void execute(TaskList list, Storage storage) {
         list.clearList();
         storage.save(list);
-        super.completed = true;
+        super.isCompleted = true;
     }
 
     /**
@@ -30,7 +30,7 @@ public class DeleteAllCommand extends Command {
      */
     @Override
     public String feedback() throws IncompleteNekoCommandException {
-        if (super.completed) {
+        if (super.isCompleted) {
             return "I've cleared all your tasks.\nYou sure are efficient.";
         } else {
             throw new IncompleteNekoCommandException("Delete all command was not completed.");

@@ -9,7 +9,7 @@ import nekochan.task.TaskList;
  */
 public abstract class Command {
 
-    protected boolean completed = false;
+    protected boolean isCompleted = false;
 
     /**
      * Executes the command with the supplied {@code list} and {@code storage}.

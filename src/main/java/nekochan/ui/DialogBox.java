@@ -29,9 +29,12 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.setAlignment(Pos.CENTER_RIGHT);
+
+        // Set nodes.
         dialog.setText(removeNewline(text));
         displayPicture.setImage(img);
+
+        // Apply circle mask to display pictures.
         Circle mask = new Circle(displayPicture.getFitHeight() / 2);
         mask.setCenterX(displayPicture.getFitHeight() / 2);
         mask.setCenterY(displayPicture.getFitWidth() / 2);

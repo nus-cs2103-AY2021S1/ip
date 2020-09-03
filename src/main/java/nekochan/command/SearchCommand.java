@@ -41,7 +41,7 @@ public class SearchCommand extends Command {
                 results.add(task);
             }
         }
-        super.completed = true;
+        super.isCompleted = true;
     }
 
     /**
@@ -51,7 +51,7 @@ public class SearchCommand extends Command {
      */
     @Override
     public String feedback() throws IncompleteNekoCommandException {
-        if (super.completed) {
+        if (super.isCompleted) {
             String resultPrint = "";
             for (Task result : results) {
                 if (resultPrint.length() > 0) {

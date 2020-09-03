@@ -33,9 +33,9 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList list, Storage storage) {
         deletedTask = list.deleteTask(index);
-        remainingTaskCount = list.taskCount();
+        remainingTaskCount = list.getTaskCount();
         storage.save(list);
-        super.completed = true;
+        super.isCompleted = true;
     }
 
     /**
@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String feedback() throws IncompleteNekoCommandException {
-        if (super.completed) {
+        if (super.isCompleted) {
             return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in your list.",
                     deletedTask.toString(),
                     remainingTaskCount);

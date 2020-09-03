@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
      */
     public void execute(TaskList list, Storage storage) {
         storage.save(list);
-        super.completed = true;
+        super.isCompleted = true;
     }
 
     /**
@@ -26,7 +26,7 @@ public class ExitCommand extends Command {
      * @throws IncompleteNekoCommandException if this {@code ExitCommand} was not executed.
      */
     public String feedback() throws IncompleteNekoCommandException {
-        if (super.completed) {
+        if (super.isCompleted) {
             return "Ja ne!\n";
         } else {
             throw new IncompleteNekoCommandException("Exit command was not completed.");

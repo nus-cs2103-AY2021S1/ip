@@ -96,7 +96,7 @@ public class MainWindow extends AnchorPane {
 
     private void greet() {
         String welcomeMessage = "Konnichiwa!\n"
-                + "What can I do for you?\n";;
+                + "What can I do for you?\n";
         dialogContainer.getChildren().add(DialogBox.getNekoDialog(welcomeMessage, botImage));
     }
 }

@@ -28,7 +28,7 @@ public class ListCommand extends Command {
         for (Task task : list) {
             existingTasks.add(task);
         }
-        super.completed = true;
+        super.isCompleted = true;
     }
 
     /**
@@ -38,7 +38,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String feedback() throws IncompleteNekoCommandException {
-        if (super.completed) {
+        if (super.isCompleted) {
             String printout = "";
             if (existingTasks.size() == 0) {
                 printout = "Congratulations! You don't have any tasks left to do.";

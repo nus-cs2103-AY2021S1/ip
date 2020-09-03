@@ -14,7 +14,7 @@ public abstract class Task implements Encodable<Task>, Searchable {
     private static final String INCOMPLETE_ICON = "\u2718";
 
     protected String description;
-    protected boolean completed;
+    protected boolean isCompleted;
 
     /**
      * Constructs an instance of a task.
@@ -27,18 +27,18 @@ public abstract class Task implements Encodable<Task>, Searchable {
             throw new NekoTaskCreationException("That's really descriptive...");
         }
         this.description = description;
-        completed = false;
+        isCompleted = false;
     }
 
     /**
      * Marks a task as complete.
      */
     public void setCompleted() {
-        completed = true;
+        isCompleted = true;
     }
 
     private String getStatusIcon() {
-        return completed ? COMPLETED_ICON : INCOMPLETE_ICON;
+        return isCompleted ? COMPLETED_ICON : INCOMPLETE_ICON;
     }
 
     /**

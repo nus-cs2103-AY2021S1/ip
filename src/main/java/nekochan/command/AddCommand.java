@@ -50,9 +50,9 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList list, Storage storage) {
         list.add(createdTask);
-        remainingTaskCount = list.taskCount();
+        remainingTaskCount = list.getTaskCount();
         storage.save(list);
-        super.completed = true;
+        super.isCompleted = true;
     }
 
     /**
@@ -62,7 +62,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String feedback() throws IncompleteNekoCommandException {
-        if (super.completed) {
+        if (super.isCompleted) {
             return String.format(
                     "Got it. I've added this task:\n  %s\nNow you have %d tasks in your list.\n",
                     createdTask.toString(),

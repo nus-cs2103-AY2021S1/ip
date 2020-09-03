@@ -60,7 +60,7 @@ public class ToDo extends Task {
     @Override
     public String encode() {
         return String.format("T|%s|%s",
-                super.completed ? "Y" : "N",
+                super.isCompleted ? "Y" : "N",
                 super.description);
     }
 
