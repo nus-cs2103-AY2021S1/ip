@@ -41,7 +41,7 @@ public class FindCommand implements Command {
             } else {
                 StringBuilder s = new StringBuilder(" Here is the list of matching tasks in your storage:\n");
                 for (Task t : results) {
-                    s.append("   ").append(results.indexOf(t) + 1).append(".")
+                    s.append("   ").append(results.indexOf(t) + 1).append(". ")
                             .append(t.toString()).append("\n");
                 }
                 return s.toString();
