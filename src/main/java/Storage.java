@@ -139,6 +139,7 @@ public class Storage {
     public Task readTaskFromFile(String string) {
         //<type>!@%<status>!@%<description>!@%<date>(if applicable)!@%<time>(if applicable)
         String[] data = string.split("!@%");
+        assert data.length > 0 : "Cannot read blank input line!";
         String type = data[0];
         String status = data[1];
         String description = data[2];

@@ -115,10 +115,8 @@ public class Command {
      * @param tasks The current list of tasks.
      * @param storage The storage used.
      * @return The done task message.
-     * @throws InvalidFormatException If the input format is wrong.
      */
-    public String doneCommand(String[] splitInput, TaskList tasks, Storage storage)
-            throws InvalidFormatException {
+    public String doneCommand(String[] splitInput, TaskList tasks, Storage storage) {
         // checks the formatting of user input
         if (splitInput.length > 2) {
             return ui.printErrorMessage(new InvalidFormatException("Please use the correct format:"
@@ -178,13 +176,13 @@ public class Command {
         Parser parser = new Parser();
         if (array.length <= 1) {
             if (array[0].equals("event")) {
-                throw new EmptyTaskException("☹ OOPS!!! The description of a event cannot "
+                throw new EmptyTaskException("\u2639 OOPS!!! The description of a event cannot "
                         + "be empty.");
             } else if (array[0].equals("deadline")) {
-                throw new EmptyTaskException("☹ OOPS!!! The description of a deadline cannot "
+                throw new EmptyTaskException("\u2639 OOPS!!! The description of a deadline cannot "
                         + "be empty.");
             } else if (array[0].equals("todo")) {
-                throw new EmptyTaskException("☹ OOPS!!! The description of a todo cannot "
+                throw new EmptyTaskException("\u2639 OOPS!!! The description of a todo cannot "
                         + "be empty.");
             } else {
                 throw new InvalidFormatException("Invalid format error!");
