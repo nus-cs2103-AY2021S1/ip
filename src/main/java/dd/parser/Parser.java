@@ -5,6 +5,7 @@ import dd.commands.Command;
 import dd.commands.DeleteCommand;
 import dd.commands.DoneCommand;
 import dd.commands.ExitCommand;
+import dd.commands.HelpCommand;
 import dd.commands.ListCommand;
 import dd.exception.DukeException;
 import dd.ui.Ui;
@@ -29,6 +30,9 @@ public class Parser {
         if (input.equals("bye")) {
             // exit command
             c = new ExitCommand("exit", "");
+        } else if (input.equals("help")) {
+            // help command
+            c = new HelpCommand("help", "");
         } else if (input.equals("list")) {
             // list command
             new Ui().startList();
@@ -37,7 +41,7 @@ public class Parser {
         } else if (input.startsWith("todo")) {
             // add to-do command
             if (input.length() < 5) {
-                throw new DukeException("To-do item cannot be empty!");
+                throw new DukeException("To-do item cannot be empty! e.g. todo borrow book");
             } else {
                 c = new AddCommand("todo", input.substring(5));
             }
@@ -85,7 +89,8 @@ public class Parser {
             }
         } else {
             // not valid task
-            throw new DukeException("Invalid command, I don't understand :(");
+            throw new DukeException("Invalid command, I don't understand :(\n"
+                    + "Type 'help' for a list of possible commands.");
         }
 
         return c;

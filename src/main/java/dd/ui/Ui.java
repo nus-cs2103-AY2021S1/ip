@@ -44,7 +44,16 @@ public class Ui {
                 + "| | | || | | |\n"
                 + "| |_| || |_| |\n"
                 + "|____/ |____/\n";
-        System.out.println("Hi! I'm\n" + logo + "Your personal task manager! How can I help you? :)");
+        System.out.println("Hi! I'm\n" + logo + "Your personal task manager!\n"
+                + "Type 'help' for a list of possible commands!");
+    }
+
+    /**
+     * Prints all possible user commands.
+     */
+    public void printAllCommands() {
+        System.out.println("Here are all the possible commands:\n"
+                + " todo\n deadline\n event\n list\n find\n check\n done\n delete\n bye");
     }
 
     /**
