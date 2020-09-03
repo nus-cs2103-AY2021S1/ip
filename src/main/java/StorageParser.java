@@ -44,7 +44,7 @@ public class StorageParser {
     }
 
     public static void main(String[] args) {
-        System.out.println(StorageParser.parse("[T][✗] read book"));
+        System.out.println(StorageParser.parse("[T][✓] read book"));
         System.out.println(StorageParser.parse("[D][✗] return book (by: Oct 15 2019, 12:00PM)"));
     }
 }

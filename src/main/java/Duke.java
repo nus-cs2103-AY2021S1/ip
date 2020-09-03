@@ -15,31 +15,25 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Duke construction specifying a filePath to initialise the Storage, Ui and TaskList.
-     *
-     * @param filePath
+     * Duke constructor to initialise the Storage, Ui and TaskList.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
-//            ui.showError(e.getMessage());
-//            ui.showLoadingError();
             tasks = new TaskList();
+        } finally {
+            System.out.println("Duke is started!");
         }
     }
 
     /**
-     * Starts to run Duke by showing welcome.
-     * Uses Ui to scan input.
-     * Uses Parser to parse the input.
-     * Execute Command.
-     * If the command is 'bye', loop terminates.
+     * Starts to run Duke by showing welcome. Uses Ui to scan input. Uses Parser to parse the input.
+     * Execute Command. If the command is 'bye', loop terminates.
      */
     public void run() {
-        ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -58,7 +52,23 @@ public class Duke {
         }
     }
 
+    /**
+     * You should have your own function to generate a response to user input. Replace this stub with
+     * your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException | ParseException e) {
+            return ui.showError(e.getMessage());
+        } catch (IOException e) {
+            return ui.showError(e.getMessage());
+        }
+    }
+
+
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
     }
 }
