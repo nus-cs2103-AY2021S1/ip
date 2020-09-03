@@ -31,6 +31,7 @@ public class Duke {
     }
     //@@ Oleg Mikhailov
     //Reused https://stackoverflow.com/questions/26311470/what-is-the-equivalent-of-javascript-settimeout-in-java
+    // added Lambdas before.
     public static void setTimeout(Runnable runnable, int delay) {
         new Thread(() -> {
             try {
