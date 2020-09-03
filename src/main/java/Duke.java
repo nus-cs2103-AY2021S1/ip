@@ -22,11 +22,6 @@ import javafx.scene.image.Image;
 
 public class Duke extends Application {
 
-  private ScrollPane scrollPane;
-  private VBox dialogContainer;
-  private TextField userInput;
-  private Button sendButton;
-  private Scene scene;
   private Image user = new Image(this.getClass().getResourceAsStream("/images/Poring.jpg"));
   private Image duke = new Image(this.getClass().getResourceAsStream("/images/Poro.jpg"));
 
@@ -49,15 +44,6 @@ public class Duke extends Application {
    * reply and then appends them to the dialog container. Clears the user input after processing.
    * Dialog boxes are now alternating
    */
-  private void handleUserInput() {
-    String userText = (userInput.getText());
-    String dukeText = (getResponse(userInput.getText()));
-    dialogContainer.getChildren().addAll(
-        DialogBox.getUserDialog(userText, (user)),
-        DialogBox.getDukeDialog(dukeText, (duke))
-    );
-    userInput.clear();
-  }
 
   /**
    * You should have your own function to generate a response to user input. Replace this stub with
