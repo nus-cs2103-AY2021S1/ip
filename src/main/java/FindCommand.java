@@ -1,14 +1,14 @@
 public class FindCommand extends Command {
     
-    private final String s;
+    private final String keyword;
     
-    FindCommand(String s) {
-        this.s = s;
+    FindCommand(String keyword) {
+        this.keyword = keyword;
     }
     
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) {
-        String matchingTasks = taskList.findTask(s);
-        ui.showMatchingTask(matchingTasks);
+    String execute(TaskList taskList, Ui ui, Storage storage) {
+        String matchingTasks = taskList.findTask(keyword);
+        return ui.showMatchingTask(matchingTasks);
     }
 }

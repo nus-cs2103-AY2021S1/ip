@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    static final String LOGO =
+    private static final String LOGO =
             " \n____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
@@ -12,54 +12,54 @@ public class Ui {
     private static final String DIVIDER =
             "    ____________________________________________________________\n";
 
-    private final Scanner sc;
+//    private final Scanner sc;
+//
+//    Ui() {
+//        sc = new Scanner(System.in);
+//    }
+//
+//    String readCommand() {
+//        return sc.nextLine();
+//    }
 
-    Ui() {
-        sc = new Scanner(System.in);
+    String showDivider() {
+        return DIVIDER;
     }
 
-    String readCommand() {
-        return sc.nextLine();
+    String showError(DukeException e) {
+        return "     " + e.getMessage();
     }
 
-    void showDivider() {
-        System.out.println(DIVIDER);
+    String showWelcome() {
+        return "Hello from\n" + LOGO
+                + showDivider()
+                + "     Hello! I'm Duke!\n" + "     What can I do for you?\n"
+                + showDivider();
     }
 
-    void showError(DukeException e) {
-        System.out.println("     " + e.getMessage());
+    String showGoodbye() {
+        return "     Bye. Hope to see you again soon!\n";
     }
 
-    void showWelcome() {
-        System.out.println("Hello from\n" + LOGO);
-        showDivider();
-        System.out.println("     Hello! I'm Duke!\n" + "     What can I do for you?\n");
-        showDivider();
+    String showTaskList(String taskListString) {
+        return "     Here are the tasks in your list:\n" +  taskListString;
     }
 
-    void showGoodbye() {
-        System.out.println("     Bye. Hope to see you again soon!\n");
+    String showDoneTask(Task task) {
+        return "     Nice! I've marked this task as done:\n       " + task;
     }
 
-    void showTaskList(String taskListString) {
-        System.out.println("     Here are the tasks in your list:\n" +  taskListString);
+    String showDeleteTask(Task task, int listLength) {
+        return "     Noted. I've removed this task:\n       " + task 
+                + "\n     Now you have " + listLength + " tasks in the list.";
     }
 
-    void showDoneTask(Task task) {
-        System.out.println("     Nice! I've marked this task as done:\n       " + task);
-    }
-
-    void showDeleteTask(Task task, int listLength) {
-        System.out.println("     Noted. I've removed this task:\n       " + task +
-                "\n     Now you have " + listLength + " tasks in the list.");
-    }
-
-    void showAddedTask(Task task, int listLength) {
-        System.out.println("     Got it. I've added this task:\n       " + task +
-                "\n     Now you have " + listLength + " tasks in the list.");
+    String showAddedTask(Task task, int listLength) {
+        return "     Got it. I've added this task:\n       " + task +
+                "\n     Now you have " + listLength + " tasks in the list.";
     }
     
-    void showMatchingTask(String taskList) {
-        System.out.println("     Here are the matching tasks in your list:\n" + taskList);
+    String showMatchingTask(String taskList) {
+        return "     Here are the matching tasks in your list:\n" + taskList;
     }
 }

@@ -7,9 +7,9 @@ public class AddCommand extends Command {
     }
     
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.addNewTask(task);
         storage.updateTasks(taskList);
-        ui.showAddedTask(task, taskList.getListLength());
+        return ui.showAddedTask(task, taskList.getListLength());
     }
 }

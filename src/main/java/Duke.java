@@ -49,23 +49,23 @@ public class Duke extends Application {
         }
     }
 
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showDivider();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e);
-            } finally {
-                ui.showDivider();
-            }
-        }
-    }
+//    public void run() {
+//        ui.showWelcome();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String fullCommand = ui.readCommand();
+//                ui.showDivider();
+//                Command c = Parser.parse(fullCommand);
+//                c.execute(tasks, ui, storage);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.showError(e);
+//            } finally {
+//                ui.showDivider();
+//            }
+//        }
+//    }
 
     @Override
     public void start(Stage stage) {
@@ -166,10 +166,18 @@ public class Duke extends Application {
 
     private String getResponse(String input) {
         
-        return input;
+        String response = "";
+        try {
+            Command c = Parser.parse(input);
+            response += c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            response += ui.showError(e);
+        }
+        
+        return response;
     }
 
-    public static void main(String[] args) {
-        new Duke(FILE_PATH).run();
-    }
+//    public static void main(String[] args) {
+//        new Duke(FILE_PATH).run();
+//    }
 }
