@@ -44,7 +44,13 @@ public class CommandHandler {
                     }
                     break;
                 case "event":
-                    handleEvent();
+                    try {
+                        handleEvent();
+                    } catch (DukeException e) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     " + e.getMessage());
+                        System.out.println("    ____________________________________________________________\n");
+                    }
                     break;
                 default:
                     try {
@@ -123,14 +129,17 @@ public class CommandHandler {
         System.out.println("    ____________________________________________________________\n");
     }
 
-    public void handleEvent() {
-        String eventDescription = "";
-        while (!sc.hasNext("/at")) {
-            eventDescription += sc.next();
-            eventDescription += " ";
+    public void handleEvent() throws DukeException{
+        String eventCommand = sc.nextLine();
+        if (eventCommand.isEmpty()) {
+            throw new DukeException("\u2639 OOPS!!! The description of an event cannot be empty.");
         }
-        sc.next("/at");
-        String date = sc.nextLine();
+        if (!eventCommand.contains("/at")) {
+            throw new DukeException("\u2639 OOPS!!! The timing of an event cannot be empty.");
+        }
+        String[] strings = eventCommand.split("/at");
+        String eventDescription = strings[0];
+        String date = strings[1];
         Event event = new Event(eventDescription, date);
         taskList.add(event);
         System.out.println("    ____________________________________________________________");

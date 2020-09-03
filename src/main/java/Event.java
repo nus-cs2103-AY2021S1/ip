@@ -11,6 +11,6 @@ public class Event extends Task {
     @Override
     public void printDescription() {
         System.out.println("[E][" + getStatusIcon()
-                + "] " + description + "(at:" + time + ")");
+                + "]" + description + "(at:" + time + ")");
     }
 }
