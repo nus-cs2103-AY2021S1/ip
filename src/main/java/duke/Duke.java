@@ -1,5 +1,4 @@
 package duke;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ import duke.logic.UserInputParser;
  * a <code>StorageManager</code> to handle storing of data.
  */
 public class Duke {
+    private boolean isGuiExit = false;
     private final UiManager uiManager;
     private final StorageManager storageManager;
     private TaskList taskList;
@@ -38,7 +38,6 @@ public class Duke {
             taskList = new TaskList(new ArrayList<>());
         }
     }
-
 
     /**
      * Executes Main method for Duke
@@ -66,7 +65,7 @@ public class Duke {
             try {
                 String userInput = uiManager.readCommand();
                 Command command = UserInputParser.parse(userInput);
-                command.execute(taskList, uiManager, storageManager);
+                command.execute(taskList, uiManager, storageManager, false);
                 isExit = command.getExitStatus();
             } catch (UnknownInstructionException | InvalidInstructionFormatException
                     | MissingFieldException | TaskDoneException
@@ -82,5 +81,49 @@ public class Duke {
 
         // OUTRO
         uiManager.printDukeOutro();
+    }
+
+
+
+    /**
+     * Generates a response from Duke by the user input.
+     * @param input String denoting user input from GUI
+     * @return String denoting response from Duke
+     */
+    public String getResponse(String input) {
+        String output;
+        try {
+            Command command = UserInputParser.parse(input);
+            command.execute(taskList, uiManager, storageManager, true);
+            isGuiExit = command.getExitStatus();
+            output = command.getResponse();
+        } catch (UnknownInstructionException | InvalidInstructionFormatException
+                | MissingFieldException | TaskDoneException
+                | InvalidInstructionLengthException | InvalidTaskIndexException e) {
+            output = e.guiString();
+        } catch (IOException e) {
+            output = e.getMessage();
+        }
+        return output;
+    }
+
+    /**
+     * Returns String representation of Duke Intro, via UI Manager
+     * @return String
+     */
+    public String getDukeIntro() {
+        return uiManager.getDukeIntro();
+    }
+
+    /**
+     * Returns String representation of Duke outro, via UI Manager
+     * @return String
+     */
+    public String getDukeOutro() {
+        return uiManager.getDukeOutro();
+    }
+
+    public boolean isGuiExit() {
+        return isGuiExit;
     }
 }

@@ -15,7 +15,7 @@ public class CommandChildStub extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager) {
+    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager, boolean isGuiTask) {
         System.out.println("Testing Command");
     }
 }

@@ -24,15 +24,17 @@ public class DoneCommand extends Command {
      * Marks user's <code>DukeTask</code> in the <code>TaskList</code> as done and prints feedback.
      * Location of the <code>DukeTask</code> is extracted from the given index,
      * and input validation is performed before the command is executed.
+     * If the task is a form of GUI command, sets response to the result instead.
      *
      * @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
      * @param uiManager      <code>UIManager</code> object to handle printing feedback to user.
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
+     * @param isGuiTask      <code>boolean</code> object to denote GUI task
      * @throws InvalidTaskIndexException If index of the task is invalid.
      * @throws TaskDoneException         If Task is completed.
      */
     @Override
-    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager)
+    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager, boolean isGuiTask)
             throws InvalidTaskIndexException, TaskDoneException {
         if (index < 0 || index >= taskList.getSize()) {
             throw new InvalidTaskIndexException();
@@ -40,7 +42,11 @@ public class DoneCommand extends Command {
             throw new TaskDoneException();
         } else {
             taskList.markDone(index);
-            uiManager.printMarkAsDone(taskList.getTaskList().get(index), taskList.getSize());
+            if (isGuiTask) {
+                response = uiManager.getMarkAsDone(taskList.getTaskList().get(index), taskList.getSize());
+            } else {
+                uiManager.printMarkAsDone(taskList.getTaskList().get(index), taskList.getSize());
+            }
         }
     }
 }

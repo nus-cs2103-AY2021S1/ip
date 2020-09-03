@@ -8,4 +8,9 @@ public class TaskDoneException extends DukeException {
     public TaskDoneException() {
         super("The task is already completed!", TaskDoneException.class.getName());
     }
+
+    @Override
+    public String guiString() {
+        return "...you've already finished it...go back to sleep...zzz...";
+    }
 }

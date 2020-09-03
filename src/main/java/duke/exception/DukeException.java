@@ -19,4 +19,6 @@ public abstract class DukeException extends Exception {
                 + getMessage() + "\n"
                 + "See \"help\" for more";
     }
+
+    public abstract String guiString();
 }

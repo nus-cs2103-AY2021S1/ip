@@ -24,13 +24,15 @@ public class FindCommand extends Command {
 
     /**
      * Searches for <code>DukeTask</code> with the keyword in the <code>TaskList</code> and prints feedback.
+     * If the task is a form of GUI command, sets response to the result instead.
      *
      * @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
      * @param uiManager      <code>UIManager</code> object to handle printing feedback to user.
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
+     * @param isGuiTask      <code>boolean</code> object to denote GUI task.
      */
     @Override
-    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager) {
+    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager, boolean isGuiTask) {
 
         ArrayList<DukeTask> filteredList = new ArrayList<>();
         for (DukeTask task : taskList.getTaskList()) {
@@ -40,11 +42,25 @@ public class FindCommand extends Command {
         }
 
         if (filteredList.size() == 0) {
-            uiManager.printFindCannotBeFound(keyword);
+            if (isGuiTask) {
+                response = uiManager.getFindCannotBeFound(keyword);
+            } else {
+                uiManager.printFindCannotBeFound(keyword);
+            }
         } else {
-            uiManager.printFindFilteredList(keyword, filteredList.size() > 1);
-            for (int i = 0; i < filteredList.size(); i++) {
-                uiManager.printNumberedTask(filteredList.get(i), i);
+            if (isGuiTask) {
+                StringBuilder output = new StringBuilder(
+                        uiManager.getFindFilteredList(keyword, filteredList.size() > 1) + "\n");
+                for (int i = 0; i < filteredList.size(); i++) {
+                    output.append(uiManager.getNumberedTask(filteredList.get(i), i));
+                    output.append("\n");
+                }
+                response = output.toString();
+            } else {
+                uiManager.printFindFilteredList(keyword, filteredList.size() > 1);
+                for (int i = 0; i < filteredList.size(); i++) {
+                    uiManager.printNumberedTask(filteredList.get(i), i);
+                }
             }
         }
     }

@@ -16,11 +16,12 @@ import duke.logic.UiManager;
  * Commands must have a method to execute their respective commands.
  */
 public abstract class Command {
-
+    protected String response;
     private final boolean isExit;
 
     public Command(boolean isExit) {
         this.isExit = isExit;
+        this.response = "";
     }
 
     /**
@@ -33,17 +34,27 @@ public abstract class Command {
     }
 
     /**
+     * Returns a <code>String</code> denoting the response from executing command.
+     * @return String response
+     */
+    public String getResponse() {
+        return this.response;
+    }
+    /**
      * Executes the user's command.
      * In most cases, it should validate the user's input as valid
      * before directing other sub-units to execute their respective tasks.
+     * If the task is a form of GUI command, sets response to the result instead.
      *
      * @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
      * @param uiManager      <code>UIManager</code> object to handle printing feedback to user.
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
+     * @param isGuiTask      <code>boolean</code> object to denote GUI task
      * @throws InvalidTaskIndexException If user input validation fails.
      * @throws TaskDoneException         If user input validation fails.
      * @throws IOException               If saving of data fails.
      */
-    public abstract void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager)
+    public abstract void execute(TaskList taskList, UiManager uiManager,
+                                 StorageManager storageManager, boolean isGuiTask)
             throws IOException, InvalidTaskIndexException, TaskDoneException;
 }

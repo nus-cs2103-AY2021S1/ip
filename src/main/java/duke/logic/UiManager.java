@@ -27,7 +27,15 @@ public class UiManager {
      * Prints introduction to Duke.
      */
     public void printDukeIntro() {
-        System.out.println(UserInteractionText.INTRODUCTION);
+        System.out.println(UserInteractionText.INTRODUCTION_WITH_LINE);
+    }
+
+    /**
+     * Returns String representation of Duke intro
+     * @return String
+     */
+    public String getDukeIntro() {
+        return UserInteractionText.INTRODUCTION.value;
     }
 
     /**
@@ -38,50 +46,105 @@ public class UiManager {
     }
 
     /**
+     * Returns String representation of Duke instructions
+     * @return String
+     */
+    public String getDukeInstructions() {
+        return UserInteractionText.INSTRUCTIONS.value;
+    }
+
+    /**
      * Prints outro to Duke.
      */
     public void printDukeOutro() {
-        System.out.println(UserInteractionText.OUTRO);
+        System.out.println(UserInteractionText.OUTRO_WITH_LINE);
+    }
+
+    public String getDukeOutro() {
+        return UserInteractionText.OUTRO.value;
     }
 
     /**
      * Prints when users invoke <code>AddCommand</code>.
      */
     public void printAddTask(DukeTask task, int size) {
-        System.out.println("Task Added: " + task.toString());
-        printTaskStatus(size);
+        System.out.println(getAddTask(task, size));
+    }
+
+    /**
+     * Returns a String representation of add Task response
+     * @param task DukeTask
+     * @param size number of tasks left
+     * @return String
+     */
+    public String getAddTask(DukeTask task, int size) {
+        return "Task Added:\n\n" + task.toString() + "\n\n" + getTaskStatus(size);
     }
 
     /**
      * Prints when users invoke <code>DeleteCommand</code>.
      */
     public void printDeleteTask(DukeTask task, int size) {
-        System.out.println("Alright! I'll delete this task!\n" + "Take note that this is irreversible!");
-        System.out.println(task.toString());
-        printTaskStatus(size);
+        System.out.println(getDeleteTask(task, size));
+    }
+
+    /**
+     * Returns a String representation of delete Task response
+     * @param task DukeTask
+     * @param size number of tasks left
+     * @return String
+     */
+    public String getDeleteTask(DukeTask task, int size) {
+        return "Fine...I'll get rid of that task for you...\n"
+                + "...but it's tiring so I'm not gonna bring it back...ever.\n\n"
+                + task.toString() + "\n\n"
+                + getTaskStatus(size);
     }
 
     /**
      * Prints when users invoke <code>ListCommand</code>.
      */
     public void printNumberedTask(DukeTask task, int num) {
-        System.out.println((num + 1) + ". " + task);
+        System.out.println(getNumberedTask(task, num));
+    }
+
+    public String getNumberedTask(DukeTask task, int num) {
+        return (num + 1) + ". " + task;
     }
 
     /**
      * Prints when users invoke <code>DoneCommand</code>.
      */
     public void printMarkAsDone(DukeTask task, int size) {
-        System.out.println("Alright! I'll mark this task as done!");
-        System.out.println(task.toString());
-        printTaskStatus(size);
+        System.out.println(getMarkAsDone(task, size));
+    }
+
+    /**
+     * Returns a String representation of markAsDone
+     * @param task DukeTask
+     * @param size Number of tasks in list
+     * @return String
+     */
+    public String getMarkAsDone(DukeTask task, int size) {
+        return "Oh...you're done? I'll mark it down for you...\n\n"
+                + task.toString() + "\n\n"
+                + getTaskStatus(size);
     }
 
     /**
      * Prints when FindCommand does not find Task
      */
     public void printFindCannotBeFound(String keyword) {
-        System.out.println("There are no tasks containing " + "\"" + keyword + "\"!");
+        System.out.println(getFindCannotBeFound(keyword));
+    }
+
+    /**
+     * Returns String representation of findCannotBeFound
+     * @param keyword String containing keyword
+     * @return String
+     */
+    public String getFindCannotBeFound(String keyword) {
+        return "...ngghh...I don't know any..." + "\"" + keyword + "\"...zzz...";
     }
 
     /**
@@ -89,6 +152,15 @@ public class UiManager {
      */
     public void printFindFilteredList(String keyword, boolean isPlural) {
         System.out.println((isPlural ? "Tasks" : "Task") + " with the keyword: " + "\"" + keyword + "\"");
+    }
+
+    /**
+     * Returns String representation of findFilteredList
+     * @param keyword String containing keyword
+     * @return String
+     */
+    public String getFindFilteredList(String keyword, boolean isPlural) {
+        return "...*yawns*...I found " + (isPlural ? "some tasks" : "a task") + " with the keyword: " + "\"" + keyword + "\"\n";
     }
 
     /**
@@ -102,8 +174,18 @@ public class UiManager {
      * Prints number of tasks users have in their list.
      */
     public void printTaskStatus(int size) {
+        System.out.println(getTaskStatus(size));
+    }
+
+    /**
+     * Returns a String representation of number of tasks in user's list.
+     * @param size number of tasks remaining
+     * @return String
+     */
+    public String getTaskStatus(int size) {
         String taskSize = size == 1 ? " task" : " tasks";
-        System.out.println("You now have " + size + taskSize);
+        return ("...*Yawns*... You have " + size + taskSize + "\n"
+                + "I'll go back to my nap...please finish them so-...zzz...");
     }
 
     /**
@@ -114,27 +196,31 @@ public class UiManager {
     private enum InstructionGuide {
         // For formatting purposes, except for the last guide, the guides must end with a guideBreaker
         // It splits them into paragraphs
-        Level("* Level 9: Finding Keywords", false),
 
-        DeveloperUpdate("* DEVELOPER UPDATES:\n"
-                + "* I can now save data! Just terminate the program with \"bye\" "
-                + "and I'll save the data automatically!\n"
-                + "* Do take note of the DATE AND TIME notations when inserting DukeTasks!\n"
-                + "* Want to find a specific task? I can do it too!", false),
+        DeveloperUpdate(UserInteractionText.LINE.value + "\n"
+                + "Letter from Duke:\n"
+                + "Hello! I'm Duke, your Personal Chatbot Assistant. Due to COVID, I'm stuck at overseas :(\n"
+                + "\n"
+                + "But don't worry! Gude is here to take over me!\n"
+                + "I've trained Gude before I left and I've listed below some stuff he can do for you!\n"
+                + "\n"
+                + "NOTE: He's a lil bit lazy so he'll only understand if you prompt him properly! Have fun!\n"
+                + "Cheers, Duke\n"
+                + UserInteractionText.LINE.value, false),
 
         AvailableInstruction("AVAILABLE INSTRUCTIONS:\n"
                 + " help - Display Available Instructions\n"
                 + " bye - Terminate Duke\n"
                 + " list - Display current DukeTasks\n"
-                + " done [Task Number] - Complete the specified task number "
-                + "(Specify in numeric format!) Eg: \"done 3\"\n"
-                + " delete [Task Number] - Deletes the task number "
-                + "(Specify in numeric format!) Eg: \"delete 3\"\n"
+                + " done [Task Number] - Complete the specified task number\n"
+                + " \t(Specify in numeric format!) Eg: \"done 3\"\n"
+                + " delete [Task Number] - Deletes the task number\n"
+                + " \t(Specify in numeric format!) Eg: \"delete 3\"\n"
                 + " find [keyword] - Finds related Tasks containing the keyword\n"
                 + "* SEE TASK INPUT INSTRUCTIONS FOR MORE ABOUT TASKS", false),
 
         TaskInputInstruction("TASK INPUT INSTRUCTIONS:\n"
-                + "IMPORTANT: DO AVOID USING THE VERTICAL BAR \"|\" IN YOUR TASK INSTRUCTIONS\n"
+                + "PLEASE AVOID USING THE VERTICAL BAR \"|\" IN YOUR TASK INSTRUCTIONS\n"
                 + " todo [Task Description] - Inputs a TODO DukeTask\n"
                 + " deadline [Task Description] /by [Date] - Inputs a DEADLINE DukeTask, using INDICATOR /by\n"
                 + " event [Task Description] /at [Date] - Inputs an EVENT DukeTask, using INDICATOR /at", false),
@@ -142,8 +228,8 @@ public class UiManager {
         TaskInputSpecification("TO NOTE:\n"
                 + "FORMAT FOR DATE: \"DD/MM/YYYY hh/mm/ss\"\n"
                 + " \tDD, MM, YYYY are the date, month and year respectively (IN INTEGERS)\n"
-                + " \thh, mm, ss are the hour (in 24 HOUR NOTATION), "
-                + "minutes and seconds respectively (IN INTEGERS)", true);
+                + " \thh, mm, ss are the hour (in 24 HOUR NOTATION),\n"
+                + " \tminutes and seconds respectively (IN INTEGERS)", true);
 
         private final String instruction;
         private final boolean last;
@@ -168,20 +254,25 @@ public class UiManager {
     private enum UserInteractionText {
         LINE("____________________________________________________________"), // Single Line for divider{
 
-        INTRODUCTION(LINE + "\n"
-                + "Hello! I am Duke, your Personal Assistant!\n"
-                + "What can I do for you today?\n"
-                + "Type \"help\" to see the available instructions!\n"
+        INTRODUCTION("*Yawns*\n"
+                + "...Oh hello...\n"
+                + "...*zzz*...\n"
+                + "...nggghh...Gude is awake...\n"
+                + "Call for \"help\" and I'll...*zzz*...tell you more..."),
+
+        INTRODUCTION_WITH_LINE(LINE + "\n"
+                + INTRODUCTION.value
                 + LINE), // END OF INTRODUCTIONS)
 
-        INSTRUCTIONS("How to use Duke:\n"
-                + InstructionGuide.Level
+        INSTRUCTIONS("...ngghh...Here's some stuff Duke told me...\n"
                 + InstructionGuide.DeveloperUpdate
                 + InstructionGuide.AvailableInstruction
                 + InstructionGuide.TaskInputInstruction
                 + InstructionGuide.TaskInputSpecification), // END OF INSTRUCTIONS)
 
-        OUTRO("Goodbye. Hope to see you soon!\n"
+        OUTRO("...Oh you're going? Bye then...*yawns*..."),
+
+        OUTRO_WITH_LINE(OUTRO.value + "\n"
                 + CommonString.LOGO + LINE);
 
         private final String value;

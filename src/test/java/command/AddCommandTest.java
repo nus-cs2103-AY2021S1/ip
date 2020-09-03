@@ -24,7 +24,7 @@ public class AddCommandTest {
         // Inherits from DukeTasks but doesn't do anything
         DukeTask task = new DukeTaskStub();
         AddCommand command = new AddCommand(task);
-        command.execute(new TaskListStub(), new UiManager(), null);
+        command.execute(new TaskListStub(), new UiManager(), null, false);
 
         String expected = "Task Added: " + task.toString() + "\n" + "You now have 1 task\n";
 
