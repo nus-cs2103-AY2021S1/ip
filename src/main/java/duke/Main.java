@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
+    
     private Duke duke = new Duke();
 
     @Override
@@ -26,7 +26,7 @@ public class Main extends Application {
             scene.getStylesheets().add("view/MainWindow.css");
             stage.setScene(scene);
             stage.setTitle("Duke");
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(duke, stage);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

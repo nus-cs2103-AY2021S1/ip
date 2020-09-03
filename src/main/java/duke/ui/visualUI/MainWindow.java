@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -34,11 +35,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
+    public void setDuke(Duke d, Stage stage) {
         duke = d;
         Ui ui = new Ui();
         String greet = ui.greetings();
         dialogContainer.getChildren().addAll(OpeningBox.getOpeningMessage(greet, welcomeStitch));
+        dialogContainer.prefHeightProperty().bind(stage.heightProperty().subtract(60));
     }
 
     /**
