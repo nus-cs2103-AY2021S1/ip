@@ -3,13 +3,13 @@ package com.Duke.Commands;
 import com.Duke.TaskManager.DukeException;
 import com.Duke.TaskManager.UI;
 
-public class BlahCommand extends Command{
+public class BlahCommand extends Command {
 
     @Override
     public void execute() {
-        try{
+        try {
             UI.blahCalled();
-        }catch (DukeException e){
+        } catch (DukeException e) {
             UI.printError(e.toString());
         }
     }

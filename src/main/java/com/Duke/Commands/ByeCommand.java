@@ -4,7 +4,7 @@ import com.Duke.TaskManager.DukeException;
 import com.Duke.TaskManager.TaskList;
 import com.Duke.TaskManager.UI;
 
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
     private final TaskList ls;
 
@@ -13,14 +13,14 @@ public class ByeCommand extends Command{
     }
 
     @Override
-    public boolean isDone(){
+    public boolean isDone() {
         return true;
     }
 
-    public void execute(){
+    public void execute() {
         try {
             UI.byeCalled(ls);
-        }catch (DukeException e){
+        } catch (DukeException e) {
             UI.printError(e.toString());
         }
     }

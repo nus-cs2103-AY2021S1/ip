@@ -5,7 +5,7 @@ public abstract class Command {
 
     public abstract void execute();
 
-    public boolean isDone(){
+    public boolean isDone() {
         return false;
     }
 }
