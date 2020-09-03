@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -106,16 +107,16 @@ public class Duke extends Application {
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
         );
         userInput.clear();
     }
 
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         return "Duke heard: " + input;
     }
 
