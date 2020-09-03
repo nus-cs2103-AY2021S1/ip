@@ -147,7 +147,7 @@ public class GuiResponse {
      * Shows description of all commands.
      * @param commandSet the DukeCommandSet
      */
-    public void showAllCommand(DukeCommandSet commandSet) {
+    public void showAllCommands(DukeCommandSet commandSet) {
         resetResponse();
 
         HashMap<String, Command> allCommands = commandSet.getAllCommands();

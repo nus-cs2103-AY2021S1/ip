@@ -19,9 +19,9 @@ public class HelpCommand extends Command {
 
     private void response(Duke duke) {
         if (duke.getState().getUseGui()) {
-            duke.getGuiResponse().showAllCommand(duke.getCommandSet());
+            duke.getGuiResponse().showAllCommands(duke.getCommandSet());
         } else {
-            duke.getUiResponse().showAllCommand(duke.getCommandSet());
+            duke.getUiResponse().showAllCommands(duke.getCommandSet());
         }
     }
 }

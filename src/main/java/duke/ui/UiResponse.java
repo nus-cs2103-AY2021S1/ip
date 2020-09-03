@@ -159,7 +159,7 @@ public class UiResponse {
      * Shows description of all commands.
      * @param commandSet the DukeCommandSet
      */
-    public void showAllCommand(DukeCommandSet commandSet) {
+    public void showAllCommands(DukeCommandSet commandSet) {
         UiPrint.drawLine(UiPrint.STAR, 50);
 
         HashMap<String, Command> allCommands = commandSet.getAllCommands();
