@@ -3,16 +3,26 @@ import java.util.Iterator;
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-public class Duke extends Application {
+public class Duke {
     private final Storage storage;
     private final Parser parser;
     private final Ui ui;
 
-    public Duke() {
-        this.storage = new Storage();
+    public Duke() throws IOException {
+        Storage dukeStorage = Storage.initialiseStorage();
+        dukeStorage.loadFromDisk();
+        this.storage = dukeStorage;
         this.parser = new Parser();
         this.ui = new Ui();
     }
@@ -29,35 +39,24 @@ public class Duke extends Application {
         Duke duke = new Duke(dukeStorage, new Parser(), new Ui());
 
         duke.ui.showWelcomeMessage();
-
-        Scanner scanner = new Scanner(System.in);
-        while(scanner.hasNextLine()) {
-            try {
-                duke.response(scanner, duke.storage.taskList);
-            } catch (DukeException e) {
-                System.out.println(e.toString());
-            } catch (IOException IOe) {
-                IOe.printStackTrace();
-            }
-        }
     }
 
-    private void response(Scanner scanner, TaskList taskList) throws DukeException, IOException {
-        String userInput = scanner.nextLine();
-        ui.showBorder();
+    private String response(String userInput, TaskList taskList) throws DukeException, IOException {
         if (userInput.equals("bye")) {
-            ui.showByeMessage();
-            scanner.close();
+            return ui.showByeMessage();
         } else if (userInput.equals("list")) {
-            ui.showList(returnList());
+            return ui.showList(returnList());
         } else if (userInput.startsWith("todo") || userInput.startsWith("deadline") || userInput.startsWith("event")) {
             Task thisTask = parser.processAddTaskInput(userInput, taskList, ui);
             taskList.addTask(thisTask);
+            storage.saveToDisk();
+            return ui.showAddTaskMessage(thisTask, taskList);
         } else {
+            TaskList originalTaskList = TaskList.copy(taskList);
             parser.processOtherActionInput(userInput, taskList, ui);
+            storage.saveToDisk();
+            return ui.showOtherActionMessage(userInput, originalTaskList);
         }
-        storage.saveToDisk();
-        response(scanner, taskList);
     }
 
     /**
@@ -76,13 +75,11 @@ public class Duke extends Application {
         return returnString;
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) throws IOException, DukeException {
+        return response(input, storage.taskList);
     }
 }

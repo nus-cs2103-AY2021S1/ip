@@ -50,21 +50,18 @@ public class Parser {
         String actionType = userInput.split(" ")[0];
         switch (actionType) {
             case "done" :
-                System.out.println("ok sure good job i guess\n");
+                if (userInput.equals("done")) throw new DukeException();
                 int doneIndex = Integer.parseInt(userInput.substring(5));
-                ui.showDoneMessage(taskList.getList().get(doneIndex));
                 taskList.taskCompleted(doneIndex);
                 System.out.println("\n");
                 break;
             case "delete" :
                 if (userInput.equals("delete")) throw new deleteException();
                 int indexDeleted = Integer.parseInt(userInput.replace("delete ", ""));
-                ui.showDeletedMessage(taskList.getList().get(indexDeleted - 1), taskList);
                 taskList.deleteTask(indexDeleted);
                 break;
             case "find" :
-                if (userInput.equals("delete")) throw new searchException();
-                ui.showSearchList(taskList.searchFor(userInput.replace("find ", "")));
+                if (userInput.equals("find")) throw new searchException();
                 break;
             default :
                 throw new DukeException();

@@ -11,6 +11,10 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
+    private TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
+    }
+
     private void add(Task task) {
         this.taskList.add(task);
     }
@@ -29,7 +33,7 @@ public class TaskList {
             while (scanner.hasNextLine()) {
                 String taskData = scanner.nextLine();
                 String[] taskDataDivided = taskData.split(" ~ ");
-                boolean isDone = taskDataDivided[2].equals("1");
+                boolean isDone = taskDataDivided[1].equals("1");
                 switch (taskDataDivided[0]) {
                     case "E":
                         returnTaskList.add(new Event(taskDataDivided[2], taskDataDivided[3], isDone));
@@ -46,6 +50,10 @@ public class TaskList {
         } else {
             return returnTaskList;
         }
+    }
+
+    public static TaskList copy(TaskList copiedTaskList) {
+        return new TaskList(copiedTaskList.getList());
     }
 
     /**
@@ -103,7 +111,4 @@ public class TaskList {
         }
         return returnArrayList;
     }
-
-
-
 }
