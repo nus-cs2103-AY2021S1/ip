@@ -76,7 +76,7 @@ public class Duke extends Application {
             try {
                 String input = sc.nextLine();
                 Command command = Parser.parse(input);
-                command.execute(tasks, ui, storage);
+                command.executeWithoutResponse(tasks, ui, storage);
                 shouldLoop = command.shouldLoop();
             } catch (DukeException e) {
                 ui.showError(e);

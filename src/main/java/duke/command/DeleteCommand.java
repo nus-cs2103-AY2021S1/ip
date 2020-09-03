@@ -23,30 +23,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes a delete command.
-     *
-     * @param tasks Contains the current tasks.
-     * @param ui Responsible for displaying information to the user.
-     * @param storage Reads and stores data into memory.
-     * @throws InvalidDeleteIndexException If index is out of bounds.
-     */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDeleteIndexException {
-        if (index > tasks.size() || index < 1) {
-            throw new InvalidDeleteIndexException(tasks.size());
-        }
-
-        int previousTaskSize = tasks.size();
-        Task task = tasks.remove(index - 1);
-        int subsequentTaskSize = tasks.size();
-        assert (previousTaskSize == subsequentTaskSize - 1);
-        storage.save(tasks);
-        String response = String.format("Noted. I've removed this task:\n"
-                + "%s\n" + "Now you have %d tasks in the list.", task, tasks.size());
-        ui.printResponse(response);
-    }
-
-    /**
-     * Returns a response after executing the delete command.
+     * Executes a delete command and returns a response.
      *
      * @param tasks Contains the current tasks.
      * @param ui Responsible for displaying information to the user.

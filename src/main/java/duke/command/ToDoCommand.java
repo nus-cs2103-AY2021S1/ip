@@ -23,28 +23,7 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Executes a todo command.
-     *
-     * @param tasks Contains the current tasks.
-     * @param ui Responsible for displaying information to the user.
-     * @param storage Reads and stores data into memory.
-     */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task = new ToDo(description);
-        int previousTaskSize = tasks.size();
-        tasks.add(task);
-        int subsequentTaskSize = tasks.size();
-        assert (previousTaskSize + 1 == subsequentTaskSize);
-        storage.save(tasks);
-        String response = String.format(
-                "I've added this task:\n  %s \nNow you have %s tasks in the list.",
-                task, tasks.size()
-        );
-        ui.printResponse(response);
-    }
-
-    /**
-     * Returns a response after executing the todo command.
+     * Executes a todo command and returns a response.
      *
      * @param tasks Contains the current tasks.
      * @param ui Responsible for displaying information to the user.
