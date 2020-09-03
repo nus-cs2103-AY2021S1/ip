@@ -1,8 +1,8 @@
 import java.util.Arrays;
 import java.util.List;
 
-import duke.CliWrapper;
 import javafx.application.Application;
+import nekochan.CliWrapper;
 
 /**
  * A launcher class to workaround classpath issues.

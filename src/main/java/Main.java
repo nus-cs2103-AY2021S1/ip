@@ -1,14 +1,14 @@
 import java.io.IOException;
 
-import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import nekochan.ui.MainWindow;
 
 /**
- * A GUI for duke.Duke using FXML.
+ * A GUI for NekoChan using FXML.
  */
 public class Main extends Application {
 
@@ -19,6 +19,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Neko-chan");
             fxmlLoader.<MainWindow>getController().start();
             stage.show();
         } catch (IOException e) {
