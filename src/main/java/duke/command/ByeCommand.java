@@ -25,6 +25,11 @@ public class ByeCommand extends Command {
         return true;
     }
 
+    private void printEntireList(Ui ui, TaskList list) {
+        ui.printList(list, t -> true, "");
+
+    }
+
     /**
      * Executes the command, prints the current list on ui.
      * @param ui the user interface object that is currently running
@@ -34,7 +39,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) {
-        ui.printList(list, t -> true, "");
+        printEntireList(ui, list);
         return "bye";
     }
 
