@@ -30,8 +30,8 @@ public class Ui {
      *
      * @param e Duke Exception.
      */
-    public void showError(DukeException e) {
-        printOutput(e.getMessage(), true);
+    public String showError(DukeException e) {
+        return printOutput(e.getMessage(), true);
     }
 
     /**
@@ -40,24 +40,24 @@ public class Ui {
      * @param input String input.
      * @param hasLastNewLine Option to choose if an extra line break is needed.
      */
-    public void printOutput(String input, boolean hasLastNewLine) {
+    public String printOutput(String input, boolean hasLastNewLine) {
         if (hasLastNewLine) {
-            System.out.println("    ____________________________________________________________\n"
+            return "    ____________________________________________________________\n"
                     + input + "\n"
-                    + "    ____________________________________________________________");
+                    + "    ____________________________________________________________";
 
         } else {
-            System.out.println("    ____________________________________________________________\n"
-                    + input + "    ____________________________________________________________");
+            return "    ____________________________________________________________\n"
+                    + input + "    ____________________________________________________________";
         }
     }
 
-    public void showWelcome() {
-        printOutput("     Hello! I'm Duke\n"
+    public String showWelcome() {
+        return printOutput("     Hello! I'm Duke\n"
                 + "     What can I do for you?", true);
     }
 
-    public void showExit() {
-        printOutput("     Bye. Hope to see you again soon!", true);
+    public String showExit() {
+        return printOutput("     Bye. Hope to see you again soon!", true);
     }
 }

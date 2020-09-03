@@ -24,11 +24,12 @@ public class DoneCommand extends Command {
      * @throws DukeException When I/O error occurs.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String output = tasks.doTask(index);
         ArrayList<Task> taskList = tasks.getTasks();
-        ui.printOutput(output, true);
         storage.save(taskList);
+        return ui.printOutput(output, true);
+
     }
 
     /**

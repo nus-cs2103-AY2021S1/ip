@@ -14,9 +14,9 @@ public class ListCommand extends Command {
      * @throws DukeException When date time in wrong format, or description not given,
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String output = tasks.listTasks();
-        ui.printOutput(output, false);
+        return ui.printOutput(output, false);
     }
 
     /**

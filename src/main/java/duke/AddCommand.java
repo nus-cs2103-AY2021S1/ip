@@ -34,11 +34,12 @@ public class AddCommand extends Command {
      * @throws DukeException When date time in wrong format, or description not given,
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String output = tasks.addTask(commandName, description, date);
         ArrayList<Task> taskList = tasks.getTasks();
-        ui.printOutput(output, true);
         storage.save(taskList);
+        return ui.printOutput(output, true);
+
     }
 
     /**
