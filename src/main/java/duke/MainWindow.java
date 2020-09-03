@@ -27,8 +27,8 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private Runnable exitFunction;
 
-    private final Image userImage = new Image(getClass().getResource("/images/User.jpg").toString());
-    private final Image dukeImage = new Image(getClass().getResource("/images/Duke.jpg").toString());
+    private final Image userImage = new Image(getClass().getResource("/images/User.png").toString());
+    private final Image dukeImage = new Image(getClass().getResource("/images/Duke.png").toString());
 
     @FXML
     void initialize() {
@@ -56,6 +56,10 @@ public class MainWindow extends AnchorPane {
     protected void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+
+        if (input.equals("")) {
+            return;
+        }
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

@@ -6,6 +6,7 @@ import duke.exception.DukeException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -37,6 +38,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().setExitFunction(() -> stage.close());
             stage.show();
+            stage.getIcons().add(new Image(getClass().getResource("/images/Icon.png").toString()));
         } catch (IOException e) {
             e.printStackTrace();
         }

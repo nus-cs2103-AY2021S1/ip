@@ -81,7 +81,7 @@ public class Duke {
             response = e.getMessage();
         }
 
-        return "Duke:\n" + response;
+        return response;
     }
 
     protected void loadSave() throws DukeException {
