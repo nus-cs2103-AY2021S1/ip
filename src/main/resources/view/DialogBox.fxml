@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.AmbientLight?>
+<?import javafx.scene.PointLight?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Polygon?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" style="-fx-background-color: #006666;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <Label fx:id="dialog" text="Label" wrapText="true" />
-    <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+      <PointLight color="CHARTREUSE" lightOn="true" style="-fx-blend-mode: #669999;" />
+      <BorderPane prefHeight="79.0" prefWidth="306.0" style="-fx-background-color: #669999;">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <center>
+          <Label fx:id="dialog" text="Label" wrapText="true" BorderPane.alignment="CENTER" />
+         </center>
+         <right>
+            <AmbientLight color="CHARTREUSE" lightOn="true" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+      <AmbientLight color="CHARTREUSE" lightOn="true" />
+      <Polygon fill="DODGERBLUE" points="-100.40042114257812, 102.40032958984375, -70.80061340332031, 46.40032958984375, -100.40040588378906, 22.400192260742188" stroke="#669999" strokeType="INSIDE" style="-fx-fill: #669999;" />
+    <ImageView fx:id="displayPicture" fitHeight="79.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
   </children>
   <padding>
     <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
