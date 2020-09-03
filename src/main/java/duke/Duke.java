@@ -38,16 +38,17 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         while (!str.equals("bye")) {
-            ui.line();
+            ui.displayLine();
             try {
-                System.out.println(parser.command(str, tasks, storage));
+                System.out.println(parser.command(str.trim(), tasks));
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
-            ui.line();
+            ui.displayLine();
             str = sc.nextLine();
         }
         sc.close();
+        storage.save(tasks);
         System.out.println(ui.exit());
     }
 
@@ -55,12 +56,13 @@ public class Duke {
         new Duke().run();
     }
 
-    protected String getResponse(String input) {
+    public String getResponse(String input) {
         if (input.equals("bye")) {
+            storage.save(tasks);
             return ui.exit();
         } else {
             try {
-                return parser.command(input, tasks, storage);
+                return parser.command(input.trim(), tasks);
             } catch (DukeException e) {
                 return e.getMessage();
             }

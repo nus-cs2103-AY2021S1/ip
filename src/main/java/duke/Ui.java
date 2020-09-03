@@ -18,7 +18,7 @@ public class Ui {
     /**
      * Used to wrap around the output.
      */
-    public void line() {
+    public void displayLine() {
         for (int i = 0; i < 75; i++) {
             System.out.print("\u2500");
         }
@@ -32,5 +32,4 @@ public class Ui {
     public String exit() {
         return "Bye. Hope to see you again soon!";
     }
-
 }

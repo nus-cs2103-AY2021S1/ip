@@ -11,19 +11,18 @@ public class Parser {
 
     /**
      * Takes in a line of user input and passes it to the TaskList to handle.
+     *
      * @param str user's input
      * @param tasks current list of tasks
-     * @param storage location of saved tasklist
      * @throws DukeException when user input is not a valid command
      */
-
-    public String command(String str, TaskList tasks, Storage storage) throws DukeException {
+    public String command(String str, TaskList tasks) throws DukeException {
         if (str.equals("list")) {
             return tasks.displayTasks();
         } else if (str.startsWith("find")) {
             return tasks.find(str);
         } else {
-            String result = "";
+            String result;
             if (str.startsWith("done")) {
                 result = tasks.completeTask(str);
             } else if (str.startsWith("delete")) {
@@ -35,7 +34,6 @@ public class Parser {
             } else {
                 throw new InvalidCommandException();
             }
-            storage.save(tasks);
             return result;
         }
     }

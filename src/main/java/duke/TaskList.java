@@ -32,6 +32,7 @@ public class TaskList {
 
     /**
      * Prints all the tasks line by line to the user.
+     *
      * @return All tasks in order.
      */
     public String displayTasks() {
@@ -47,14 +48,13 @@ public class TaskList {
     /**
      * Adds a task to the list based on user input.
      *
-     * @param s User input
+     * @param str User input
      * @return A string to indicate task has been added.
      * @throws InvalidCommandException If command is not valid.
      * @throws EmptyCommandException   If task is missing description.
      * @throws MissingTimeException    If task is missing time.
      */
-    public String addTask(String s) throws InvalidCommandException, EmptyCommandException, MissingTimeException {
-        String str = s.trim();
+    public String addTask(String str) throws InvalidCommandException, EmptyCommandException, MissingTimeException {
         if (str.equals("todo") || str.equals("deadline") || str.equals("event")) {
             throw new EmptyCommandException(str);
         }
@@ -110,29 +110,28 @@ public class TaskList {
      * @throws InvalidCommandException If command is not valid.
      **/
     public String find(String str) throws EmptyFindException, InvalidCommandException {
-        String s = str.trim();
-        if (s.equals("find")) {
+        if (str.equals("find")) {
             throw new EmptyFindException();
-        } else if (s.startsWith("find ")) {
-            String keyword = s.substring(5);
+        } else if (str.startsWith("find ")) {
+            String keyword = str.substring(5);
             int i = 1;
-            boolean flag = false;
+            boolean isFound = false;
             //search if there are any matching tasks
             for (Task t : tasks) {
                 if (t.getDescription().contains(keyword)) {
-                    flag = true;
+                    isFound = true;
                     break;
                 }
             }
-            if (flag) {
-                StringBuilder res = new StringBuilder("Here are the matching tasks in your list:");
+            if (isFound) {
+                StringBuilder result = new StringBuilder("Here are the matching tasks in your list:");
                 for (Task t : tasks) {
                     if (t.getDescription().contains(keyword)) {
-                        res.append("\n").append(i).append(".").append(t);
+                        result.append("\n").append(i).append(".").append(t);
                         i++;
                     }
                 }
-                return res.toString();
+                return result.toString();
             } else {
                 return "No matching task has been found";
             }
@@ -155,6 +154,7 @@ public class TaskList {
         String val = str.substring(5);
         if (isInteger(val)) {
             int i = Integer.parseInt(val);
+            //Check that task is in range
             if (i > 0 && i <= tasks.size()) {
                 if (tasks.get(i - 1).complete()) {
                     return "Task is already completed.\n" + tasks.get(i - 1);
@@ -198,6 +198,7 @@ public class TaskList {
 
     /**
      * Deletes all items in the current list.
+     *
      * @return A string indicating tasks have been cleared.
      */
     public String clear() {
@@ -210,9 +211,8 @@ public class TaskList {
         return "Task has been added:\n" + task + "\nYou now have " + tasks.size() + " tasks in the list";
     }
 
-    private void delete(int i) {
-        Task t = tasks.get(i - 1);
-        tasks.remove(i - 1);
+    private void delete(int index) {
+        tasks.remove(index - 1);
     }
 
     //helper function to check if part of user input is an integer
@@ -224,5 +224,4 @@ public class TaskList {
         }
         return true;
     }
-
 }

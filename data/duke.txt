@@ -1,7 +1,7 @@
 T|true|quack
 D|false|project|2020-03-12 19:14
-E|false|queen|friday
+E|true|queen|friday
 T|false|meeting project
 T|true|quackers
-T|false|quack
 T|false|event quack
+E|false|duck|2021-03-12

@@ -27,9 +27,9 @@ public class Storage {
 
     /**
      * Creates a new storage with the specified directory.
+     *
      * @param filepath directory to save to and load from
      */
-
     public Storage(String filepath) {
         this.filepath = filepath;
     }
@@ -71,19 +71,19 @@ public class Storage {
 
     /**
      * Saves the current list of tasks into the directory.
+     *
      * @param tasks Current list of tasks.
      */
 
     public void save(TaskList tasks) {
         try {
-            FileWriter fw = new FileWriter(filepath);
+            FileWriter writer = new FileWriter(filepath);
             for (Task t : tasks.getTasks()) {
-                fw.write(t.store() + "\n");
+                writer.write(t.store() + "\n");
             }
-            fw.close();
+            writer.close();
         } catch (Exception e) {
             System.out.println("error in saving");
         }
     }
-
 }

@@ -1,5 +1,6 @@
-package duke;
+package duke.javafx;
 
+import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -12,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
- * Controller for duke.MainWindow. Provides the layout for the other controls.
+ * Controller for duke.javafx.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
