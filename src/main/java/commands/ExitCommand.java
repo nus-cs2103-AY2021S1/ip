@@ -23,6 +23,22 @@ public class ExitCommand extends Command {
         // ui.printExitMessage();
         ui.setMessageExit();
         storage.writeToFile("data.txt", tasks.writeString());
-        Platform.exit();
+        setTimeout(Platform::exit, 1000);
+    }
+
+    /**
+     * Delays the execution of a command. Used to ensure exit message is shown before the program ends.
+     * @param runnable A Runnable that you want to delay the execution for.
+     * @param delay Number of milliseconds to delay execution of the command by.
+     */
+    public static void setTimeout(Runnable runnable, int delay) {
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+                runnable.run();
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }).start();
     }
 }
