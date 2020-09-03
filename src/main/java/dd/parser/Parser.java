@@ -20,7 +20,7 @@ public class Parser {
      *
      * @param input Input given by user.
      * @return A Command based on the input given.
-     * @throws DukeException If no empty item description is given,
+     * @throws DukeException If an empty item description is given,
      * or if an invalid command is given.
      */
     public static Command parse(String input) throws DukeException {

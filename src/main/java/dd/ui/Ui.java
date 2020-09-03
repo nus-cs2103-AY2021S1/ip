@@ -32,8 +32,7 @@ public class Ui {
      * Prints exit output.
      */
     public void exit() {
-        System.out.println("You're leaving? Bye :( Come back soon!"
-                + "\n_________________________________________");
+        System.out.println("You're leaving? Bye :( Come back soon!");
     }
 
     /**
@@ -45,8 +44,7 @@ public class Ui {
                 + "| | | || | | |\n"
                 + "| |_| || |_| |\n"
                 + "|____/ |____/\n";
-        System.out.println("Hi! I'm\n" + logo + "How can I help you? :)\n"
-                + "_________________________________________");
+        System.out.println("Hi! I'm\n" + logo + "Your personal task manager! How can I help you? :)");
     }
 
     /**
@@ -65,13 +63,6 @@ public class Ui {
      */
     public void printDoneTask(Task t) {
         System.out.println("Wow!! Good job!!\n  " + t);
-    }
-
-    /**
-     * Prints line.
-     */
-    public void printLine() {
-        System.out.println("_________________________________________");
     }
 
     /**
