@@ -71,6 +71,22 @@ public class Duke {
                     ui.displayFormat("Now you have %d tasks in the list\n", tasks.size());
                     break;
                 }
+                case "find": {
+                    String keyword = parser.getDescription();
+                    int counter = 0;
+                    for (Task task: tasks.getTasks()) {
+                        if (task.description.contains(keyword)) {
+                            if (counter == 0) {
+                                ui.displayMessage("Here are the matching tasks in your list:");
+                            }
+                            ++counter;
+                            ui.displayFormat("%d.%s\n", counter, task.toString());
+                        }
+                    }
+                    if (counter == 0) {
+                        ui.displayMessage("No task was found.");
+                    }
+                }
                 default: {
                     throw new Exception("Unexpected error");
                 }

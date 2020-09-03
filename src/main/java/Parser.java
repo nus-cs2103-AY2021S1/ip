@@ -5,6 +5,7 @@ public class Parser {
     private Task task;
     private String commandType;
     private int index;
+    private String description;
 
     /**
      * Parse a given command string to relevant information
@@ -29,6 +30,12 @@ public class Parser {
                 }
                 this.commandType = "delete";
                 this.index = Integer.parseInt(command.substring(7)) - 1;
+            } else if (command.startsWith("find")) {
+                if (command.length() < 5) {
+                    throw new DukeException(":( OOPS!!! You need to specify a keyword to search.");
+                }
+                this.commandType = "find";
+                this.description = command.substring(5);
             } else {
                 Task newTask = null;
                 if (command.startsWith("todo")) {
@@ -84,5 +91,9 @@ public class Parser {
 
     public String getCommandType() {
         return this.commandType;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 }
