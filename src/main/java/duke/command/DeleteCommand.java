@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.exception.DukeException;
+import duke.exception.InvalidTaskIdException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -34,6 +35,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
+        if (taskId > tasks.size()) {
+            throw new InvalidTaskIdException("No task with the given ID was found!");
+        }
         Task task = tasks.deleteTask(taskId);
 
         storage.deleteExistingTask(taskId);
