@@ -29,18 +29,17 @@ public class DoneCommand extends Command {
      * @param ui the current Ui object being used
      * @param storage the current Storage object being used
      * @throws PandaBotException If any errors occurs when executing the command
+     * @return the String representation to display
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws PandaBotException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws PandaBotException {
         // mark as done
         Task t = tasks.getTaskAt(taskNum);
         t.markTaskDone();
 
-        // print
-        ui.printOnDone(tasks.getTaskAt(taskNum));
-
         // save the changes
         storage.write(tasks.getTaskList());
+        return ui.displayOnDone(tasks.getTaskAt(taskNum));
     }
 
 }

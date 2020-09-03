@@ -6,10 +6,11 @@ import pandabot.tasks.Task;
 import pandabot.tasks.TaskList;
 
 /**
- *  Represents the user interface which prints messages to interact with the user.
+ *  Represents the user interface which is responsible for generating and printing the
+ *  messages that is used to interact with the user.
  */
 public class Ui {
-    private Scanner scanner;
+    private final Scanner scanner;
 
     /**
      * Creates a Ui object.
@@ -30,7 +31,11 @@ public class Ui {
                         + "| |  | |_|   |  _  | |_|  | |_|   |\n"
                         + "|_|  \\____,__|_| |_|\\___,_|\\___,__|" + " bot\n\n";
 
-        System.out.println(logo + "Hello! I'm PandaBot.\n" + "What can I do for you?\n");
+        System.out.println(logo + displayWelcomeMessage());
+    }
+
+    public String displayWelcomeMessage() {
+        return "Hello! I'm PandaBot.\n" + "What can I do for you?\n";
     }
 
     /**
@@ -50,95 +55,81 @@ public class Ui {
     }
 
     /**
-     * Prints an error message.
+     * Prints a message.
      *
-     * @param message the error message to be printed
+     * @param message the message to be printed
      */
-    public void printError(String message) {
+    public void printMessage(String message) {
         System.out.println(message);
     }
 
     /**
-     * Prints the bye message.
+     * Returns a String representation of the bye message.
+     *
+     * @return a String representation of the bye message
      */
-    public void printOnExit() {
-        System.out.println("Bye! Remember to finish the rest of your work! See you soon~");
+    public String displayOnExit() {
         scanner.close();
+        return "Bye! Remember to finish the rest of your work! See you soon~";
     }
 
     /**
-     * Prints the entire list of tasks.
+     * Returns a String representation of the list tasks message.
      *
      * @param tasks the TaskList to be printed
+     * @return a String representation of the list tasks message
      */
-    public void printOnList(TaskList tasks) {
+    public String displayOnList(TaskList tasks) {
         int len = tasks.size();
         if (len == 0) {
-            System.out.println("WOOTS! You don't have any tasks to do at the moment.");
+            return "WOOTS! You don't have any tasks to do at the moment.";
         } else {
-            System.out.println("These are the task(s) you have:");
-            int i = 0;
-            for (Task t : tasks.getTaskList()) {
-                if (t != null) {
-                    System.out.println((i + 1) + ". " + t.toString());
-                    i++;
-                } else {
-                    break;
-                }
-            }
+            return "These are the task(s) you have:\n" + tasks.toString();
         }
     }
 
     /**
-     * Prints the done message.
+     * Returns a String representation of the done message.
      *
      * @param task the task that is done
+     * @return a String representation of the done message
      */
-    public void printOnDone(Task task) {
-        System.out.println("Great! I've marked this task as done:");
-        System.out.println(task);
+    public String displayOnDone(Task task) {
+        return "Great! I've marked this task as done:\n" + task;
     }
 
     /**
-     * Prints the delete message.
+     * Returns a String representation of the delete message.
      *
      * @param task the Task to be deleted
      * @param numOfTasks the number of tasks in the list
+     * @return a String representation of the delete message
      */
-    public void printOnDelete(Task task, int numOfTasks) {
-        System.out.println("Will do! I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + numOfTasks + " task(s) in this list.");
+    public String displayOnDelete(Task task, int numOfTasks) {
+        return "Will do! I've removed this task:\n" + task + "\n" +
+                "Now you have " + numOfTasks + " task(s) in this list.";
     }
 
     /**
-     * Prints the add task message.
+     * Returns a String representation of the add task message.
      *
      * @param task the Task to be printed
      * @param numOfTasks the number of tasks in the list
+     * @return a String representation of the add task message
      */
-    public void printOnAddTask(Task task, int numOfTasks) {
-        System.out.println("Noted! I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + numOfTasks + " task(s) in this list.");
+    public String displayOnAddTask(Task task, int numOfTasks) {
+        return "Noted! I've added this task:\n" + task.toString() + "\n" +
+                "Now you have " + numOfTasks + " task(s) in this list.";
     }
 
     /**
-     * Prints the tasks with matching description.
+     * Returns a String representation of the list of tasks with matching description.
      *
      * @param tasks the TaskList which contains the tasks with matching description.
+     * @return a String representation of the list of tasks with matching description
      */
-    public void printOnFind(TaskList tasks) {
-        System.out.println("Here are the matching tasks:");
-        int i = 0;
-        for (Task t : tasks.getTaskList()) {
-            if (t != null) {
-                System.out.println((i + 1) + ". " + t.toString());
-                i++;
-            } else {
-                break;
-            }
-        }
+    public String displayOnFind(TaskList tasks) {
+        return "Here are the matching tasks I found:\n" + tasks.toString();
     }
 
 }

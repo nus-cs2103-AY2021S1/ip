@@ -1,6 +1,5 @@
 package pandabot.commands;
 
-import pandabot.exceptions.PandaBotException;
 import pandabot.storage.Storage;
 import pandabot.tasks.Task;
 import pandabot.tasks.TaskList;
@@ -10,7 +9,7 @@ import pandabot.ui.Ui;
  * Represents an add command which allows users to add tasks to the TaskList.
  */
 public class AddCommand extends Command {
-    private Task task;
+    private final Task task;
 
     /**
      * Creates an AddCommand object.
@@ -28,15 +27,14 @@ public class AddCommand extends Command {
      * @param tasks the current TaskList object being used
      * @param ui the current Ui object being used
      * @param storage the current Storage object being used
-     * @throws PandaBotException If any errors occurs when executing the command
+     * @return the String representation to display
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws PandaBotException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         // add the task
         tasks.addTask(task);
-        // print
-        ui.printOnAddTask(task, tasks.size());
         // save
         storage.write(tasks.getTaskList());
+        return ui.displayOnAddTask(task, tasks.size());
     }
 }

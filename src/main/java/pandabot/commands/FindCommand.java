@@ -1,6 +1,5 @@
 package pandabot.commands;
 
-import pandabot.exceptions.PandaBotException;
 import pandabot.storage.Storage;
 import pandabot.tasks.TaskList;
 import pandabot.ui.Ui;
@@ -10,7 +9,7 @@ import pandabot.ui.Ui;
  * that matches the search word.
  */
 public class FindCommand extends Command {
-    private String toMatch;
+    private final  String toMatch;
 
     /**
      * Creates a FindCommand object.
@@ -28,14 +27,11 @@ public class FindCommand extends Command {
      * @param tasks the current TaskList object being used
      * @param ui the current Ui object being used
      * @param storage the current Storage object being used
-     * @throws PandaBotException If any errors occurs when executing the command
+     * @return the String representation to display
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws PandaBotException {
-        // find
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = tasks.findTask(toMatch);
-
-        // print
-        ui.printOnFind(matchingTasks);
+        return ui.displayOnFind(matchingTasks);
     }
 }
