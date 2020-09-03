@@ -10,7 +10,7 @@ import main.ui.Ui;
  * Represents the add event command.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.1
+ * @version v0.2
  * @since v0.1
  */
 public class EventCommand implements Command {

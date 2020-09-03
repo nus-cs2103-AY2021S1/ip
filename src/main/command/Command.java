@@ -8,7 +8,7 @@ import main.ui.Ui;
  * Represents the commands that a user can give to the UI.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.1
+ * @version v0.2
  * @since v0.1
  */
 public interface Command {

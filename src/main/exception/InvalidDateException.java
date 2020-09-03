@@ -4,7 +4,7 @@ package main.exception;
  * Thrown to indicate the date of the deadline or event is invalid.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.1
+ * @version v0.2
  * @since v0.1
  */
 public class InvalidDateException extends StuffException {

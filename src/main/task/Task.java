@@ -4,7 +4,7 @@ package main.task;
  * Represents tasks.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.1
+ * @version v0.2
  * @since v0.1
  */
 public class Task {

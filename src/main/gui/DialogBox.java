@@ -13,6 +13,13 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
+/**
+ * Represents the dialog box of the user or stuff.
+ * @author Joshua Liang XingYa
+ * @author joshualiang.xy@gmail.com
+ * @version v0.2
+ * @since v0.2
+ */
 public class DialogBox extends HBox {
     private static final Color DIALOG_COLOR = Color.rgb(255, 255, 255);
     private static final Insets DIALOG_PADDING = new Insets(5);
