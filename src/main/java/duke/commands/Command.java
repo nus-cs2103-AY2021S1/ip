@@ -6,7 +6,7 @@ import duke.exception.InvalidFormatEventException;
 import duke.exception.UnknownCommandException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import duke.ui.textUI.Ui;
 
 /**
  * Class that simulates the command of the user.
@@ -15,7 +15,6 @@ import duke.ui.Ui;
 public abstract class Command {
     private static final String KEYWORD_ERR = "Sorry something went wrong. Duke crashed X.X";
     protected String[] inputArr;
-    private boolean isExit = false;
     /**
      * Creates a Command object.
      *
@@ -26,25 +25,7 @@ public abstract class Command {
     Command(String[] inputArr) {
         this.inputArr = inputArr;
     }
-
-    /**
-     * Checks the exit status of the Duke program.
-     *
-     * @return true if the exit status is true, false otherwise.
-     */
-    public boolean getExitStatus() {
-        return isExit;
-    }
-
-    /**
-     * Set the exit status of the Duke program depending on the input 'status'.
-     *
-     * @param status boolean value to set the exit status.
-     */
-    public void setExitStatus(boolean status) {
-        isExit = status;
-    }
-
+    
     /**
      * Prints the error message when duke crashes.
      */

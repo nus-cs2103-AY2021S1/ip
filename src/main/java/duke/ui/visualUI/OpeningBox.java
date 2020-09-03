@@ -1,4 +1,4 @@
-package duke;
+package duke.ui.visualUI;
 
 import java.io.IOException;
 
@@ -9,7 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-
+/**
+ * UI design that shows Duke logo at the start
+ */
 
 public class OpeningBox extends VBox {
 

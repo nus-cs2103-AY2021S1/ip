@@ -1,8 +1,10 @@
 package duke.commands;
 
+import duke.exception.DukeException;
 import duke.exception.InvalidFormatDateException;
 import duke.exception.InvalidFormatDeadlineException;
 import duke.exception.InvalidFormatEventException;
+import duke.exception.UnknownCommandException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -10,7 +12,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import duke.ui.textUI.Ui;
 
 /**
  * Class that simulates the add command of the user.
@@ -31,7 +33,10 @@ public class AddCommand extends Command {
     }
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDeadlineException,
-            InvalidFormatEventException, InvalidFormatDateException {
+            InvalidFormatEventException, InvalidFormatDateException, UnknownCommandException {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
         return addTask(inputArr[0], inputArr[1], ui, tasks);
     }
 
@@ -49,7 +54,7 @@ public class AddCommand extends Command {
      * @throws InvalidFormatDateException Throws an exception when the format of 'message' is wrong.
      */
     private String addTask(String type, String message, Ui ui, TaskList tasks) throws InvalidFormatDeadlineException,
-            InvalidFormatEventException, InvalidFormatDateException {
+            InvalidFormatEventException, InvalidFormatDateException, UnknownCommandException {
         Task task;
         String[] dateTime;
         if (Parser.isToDo(type)) {
@@ -69,7 +74,7 @@ public class AddCommand extends Command {
             }
             task = new Event(dateTime[0], Parser.formatDateTime(dateTime[1]));
         } else {
-            return "";
+            throw new UnknownCommandException();
         }
         tasks.add(task);
         return ui.messageFormatter(ADDED_NOTIFICATION, task.toString(), printNumTask(tasks));
