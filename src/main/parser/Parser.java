@@ -23,7 +23,7 @@ import main.exception.UnknownCommandException;
  * Handles the parsing of user inputs.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.2
+ * @version v0.3
  * @since v0.1
  */
 public class Parser {
@@ -142,12 +142,14 @@ public class Parser {
             if (isSingleArgument) {
                 throw new InvalidTaskException();
             }
+
             taskNum = Integer.parseInt(input[1]);
             return new DoneCommand(taskNum);
         case COMMAND_DELETE:
             if (isSingleArgument) {
                 throw new InvalidTaskException();
             }
+
             taskNum = Integer.parseInt(input[1]);
             return new DeleteCommand(taskNum);
         case COMMAND_TODO:
@@ -156,11 +158,13 @@ public class Parser {
             if (isSingleArgument) {
                 throw new EmptyMessageException(command);
             }
+
             return parseAdd(input);
         case COMMAND_FIND:
             if (isSingleArgument) {
                 return new FindCommand("");
             }
+
             return new FindCommand(input[1]);
         default:
             throw new UnknownCommandException();
