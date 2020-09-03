@@ -32,11 +32,11 @@ public class FindCommand extends Command {
     public CommandResult execute(TaskList taskList) {
         ArrayList<Task> matchedTasks = new ArrayList<>();
         ArrayList<Task> allTasks = taskList.getTasks();
-        for (Task task : allTasks) {
+        allTasks.forEach(task -> {
             if (matchesAllWords(task)) {
                 matchedTasks.add(task);
             }
-        }
+        });
         String response;
         if (matchedTasks.size() == 0) {
             response = MESSAGE_FIND_NO_MATCH;
