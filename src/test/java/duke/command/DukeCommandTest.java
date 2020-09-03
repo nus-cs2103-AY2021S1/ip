@@ -1,14 +1,15 @@
 package duke.command;
 
+import java.io.File;
+
+import org.junit.jupiter.api.Test;
+
 import duke.DukeException;
 import duke.Ui;
 import duke.io.Storage;
 import duke.io.TaskList;
 import duke.parser.Parser;
 import duke.task.Todo;
-import org.junit.jupiter.api.Test;
-
-import java.io.File;
 
 public class DukeCommandTest {
     final String dataDir = System.getProperty("user.dir") + File.separator + "dataTest";

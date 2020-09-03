@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Ui;
 import duke.io.Storage;
 import duke.io.TaskList;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Find command type.
@@ -48,7 +48,9 @@ public class FindCommand extends Command {
             toFind = fullCommand.substring(fullCommand.indexOf(" ")).trim();
             ArrayList<Task> results = taskList.find(toFind);
             System.out.println("Here are the matching tasks in your list:");
-            for (int i = 0; i < results.size(); i++) {
+            for (int i = 0;
+                 i < results.size();
+                 i++) {
                 System.out.printf("%d. %s%n", i + 1, results.get(i));
             }
             ui.showLine();

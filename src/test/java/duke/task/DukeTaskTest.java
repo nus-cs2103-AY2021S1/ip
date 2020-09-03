@@ -1,8 +1,8 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
 
 public class DukeTaskTest {
     @Test
@@ -24,8 +24,8 @@ public class DukeTaskTest {
         LocalDateTime testEndTime = LocalDateTime.of(2020, 8, 26, 19, 50);
         Event event = new Event("Conduct Event Test: Creation", testStartTime, testEndTime);
         System.out.println(event);
-        assert event.toString().equals("[E][\u2718] Conduct Event Test: " +
-                "Creation (at: Wed, 26/Aug/2020 1250 till Wed, 26/Aug/2020 1950)");
+        assert event.toString().equals("[E][\u2718] Conduct Event Test: "
+                + "Creation (at: Wed, 26/Aug/2020 1250 till Wed, 26/Aug/2020 1950)");
     }
 
     @Test
@@ -51,7 +51,8 @@ public class DukeTaskTest {
         Event event = new Event("Conduct Event Test: Mark Task Done", testStartTime, testEndTime);
         event.markAsDone();
         assert event.toString()
-                .equals("[E][\u2713] Conduct Event Test: Mark Task Done (at: Wed, 26/Aug/2020 1250 till Wed, 26/Aug/2020 1950)");
+                .equals("[E][\u2713] Conduct Event Test: Mark Task Done (at: Wed, 26/Aug/2020 1250 till Wed, "
+                        + "26/Aug/2020 1950)");
     }
 
     @Test

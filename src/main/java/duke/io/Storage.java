@@ -1,11 +1,5 @@
 package duke.io;
 
-import duke.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -16,6 +10,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import duke.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Storage class define rules for create, read and write to file.
@@ -38,9 +38,9 @@ public class Storage {
     }
 
     /**
-     * Read file and convert it into Arraylist<Task>.
+     * Read file and convert it into Arraylist<{Task}>.
      *
-     * @return Arraylist<Task> contains all the task from the file.
+     * @return Arraylist with tasks contains all the task from the file.
      * @throws DukeException exception for file cannot be found.
      */
     public ArrayList<Task> load() throws DukeException {
@@ -53,27 +53,27 @@ public class Storage {
                 String[] tempArr = fileLine.split(",");
                 String command = tempArr[0];
                 switch (command) {
-                    case "duke.task.Todo":
-                        taskArrayList.add(new Todo(tempArr[2]));
-                        break;
-                    case "duke.task.Deadline":
-                        Task tempDeadline = new Deadline(tempArr[2], LocalDateTime.parse(tempArr[3]));
-                        if (tempArr[1].equals("true")) {
-                            tempDeadline.markAsDone();
-                        }
-                        taskArrayList.add(tempDeadline);
-                        break;
-                    case "duke.task.Event":
-                        Task
-                                tempEvent =
-                                new Event(tempArr[2], LocalDateTime.parse(tempArr[3]), LocalDateTime.parse(tempArr[4]));
-                        if (tempArr[1].equals("true")) {
-                            tempEvent.markAsDone();
-                        }
-                        taskArrayList.add(tempEvent);
-                        break;
-                    default:
-                        System.err.println("No event of this type");
+                case "duke.task.Todo":
+                    taskArrayList.add(new Todo(tempArr[2]));
+                    break;
+                case "duke.task.Deadline":
+                    Task tempDeadline = new Deadline(tempArr[2], LocalDateTime.parse(tempArr[3]));
+                    if (tempArr[1].equals("true")) {
+                        tempDeadline.markAsDone();
+                    }
+                    taskArrayList.add(tempDeadline);
+                    break;
+                case "duke.task.Event":
+                    Task
+                            tempEvent =
+                            new Event(tempArr[2], LocalDateTime.parse(tempArr[3]), LocalDateTime.parse(tempArr[4]));
+                    if (tempArr[1].equals("true")) {
+                        tempEvent.markAsDone();
+                    }
+                    taskArrayList.add(tempEvent);
+                    break;
+                default:
+                    System.err.println("No event of this type");
                 }
             }
         } catch (IOException fileNotFoundException) {
@@ -83,7 +83,7 @@ public class Storage {
     }
 
     /**
-     * Convert from Tasklist Arraylist<Task> and write into file.
+     * Convert from Tasklist Arraylist<{Task}> and write into file.
      *
      * @param taskList data to be written to file.
      */
@@ -91,17 +91,17 @@ public class Storage {
         createFile();
         try {
             FileWriter writer = new FileWriter(filePath);
-            for (Task task : taskList.taskArrayList) {
+            for (Task task : taskList.getTaskArrayList()) {
                 String taskType = task.getClass().getTypeName();
                 if (taskType.equals("duke.task.Todo")) {
-                    writer.append(String.format("%s,%s,%s", taskType, task.isDone, task.description));
+                    writer.append(String.format("%s,%s,%s", taskType, task.isDone(), task.getDescription()));
                 } else if (taskType.equals("duke.task.Deadline")) {
-                    writer.append(String.format("%s,%s,%s,%s", taskType, task.isDone, task.description,
-                            ((Deadline) task).by));
+                    writer.append(String.format("%s,%s,%s,%s", taskType, task.isDone(), task.getDescription(), (
+                            (Deadline) task).getBy()));
                 } else {
                     writer.append(
-                            String.format("%s,%s,%s,%s,%s", taskType, task.isDone, task.description, ((Event) task).at,
-                                    ((Event) task).end));
+                            String.format("%s,%s,%s,%s,%s", taskType, task.isDone(), task.getDescription(), (
+                                    (Event) task).getAt(), ((Event) task).getEnd()));
                 }
                 writer.write("\n");
             }

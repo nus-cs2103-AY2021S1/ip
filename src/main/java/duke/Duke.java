@@ -1,11 +1,11 @@
 package duke;
 
+import java.io.File;
+
 import duke.command.Command;
 import duke.io.Storage;
 import duke.io.TaskList;
 import duke.parser.Parser;
-
-import java.io.File;
 
 /**
  * This is the start of the Duke application. There 3 main task that the application can record,

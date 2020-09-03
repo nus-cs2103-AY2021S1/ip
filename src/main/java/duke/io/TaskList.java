@@ -1,8 +1,8 @@
 package duke.io;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Tasklist class define rules the list of tasks.
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @version v1.0
  */
 public class TaskList {
-    public ArrayList<Task> taskArrayList;
+    private ArrayList<Task> taskArrayList;
 
     /**
      * Class constructor.
@@ -31,6 +31,15 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> taskArrayList) {
         this.taskArrayList = taskArrayList;
+    }
+
+    /**
+     * Arraylist that stores all the task.
+     *
+     * @return arraylist of tasks.
+     */
+    public ArrayList<Task> getTaskArrayList() {
+        return taskArrayList;
     }
 
     /**
@@ -70,10 +79,16 @@ public class TaskList {
         this.taskArrayList.remove(index);
     }
 
+    /**
+     * Search is input string is in task description.
+     *
+     * @param toFind search value.
+     * @return arraylist of search result.
+     */
     public ArrayList<Task> find(String toFind) {
         ArrayList<Task> searchResults = new ArrayList<>();
         for (Task task : taskArrayList) {
-            if (task.description.contains(toFind)) {
+            if (task.getDescription().contains(toFind)) {
                 searchResults.add(task);
             }
         }

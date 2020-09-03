@@ -1,8 +1,9 @@
 package duke.parser;
 
+import org.junit.jupiter.api.Test;
+
 import duke.DukeException;
 import duke.command.Command;
-import org.junit.jupiter.api.Test;
 
 public class DukeParserTest {
     @Test
