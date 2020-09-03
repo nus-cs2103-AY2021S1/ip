@@ -6,8 +6,8 @@ public class Todo extends Task {
     /**
      * Constructor that creates a new To-do.
      *
-     * @param description describes the To-do.
-     * @param id position of the To-do.
+     * @param description describes the To-do
+     * @param id position of the To-do
      */
     public Todo(String description, int id) {
         super(description, id);

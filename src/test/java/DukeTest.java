@@ -10,8 +10,7 @@ public class DukeTest {
     private FileWriter fw = new FileWriter("stored.txt");
 
     private ListOfItems listOfItems = new ListOfItems();
-    private HandleFile handleFile = new HandleFile(listOfItems);
-    private Parser parser = new Parser(listOfItems, handleFile);
+    private Parser parser = new Parser(listOfItems);
 
     public DukeTest() throws IOException {
     }

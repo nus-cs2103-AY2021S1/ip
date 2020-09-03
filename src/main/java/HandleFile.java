@@ -16,7 +16,7 @@ public class HandleFile {
     /**
      * Constructor creates a new HandleFile object and passes to checkFile().
      *
-     * @param list list of tasks.
+     * @param list list of tasks
      */
     public HandleFile(ListOfItems list) {
         this.storedData = new File("stored.txt");
@@ -57,7 +57,7 @@ public class HandleFile {
     /**
      * Writes to "stored.txt", where it will copy each line from ListOfItems's list.
      *
-     * @param listOfItems list of tasks.
+     * @param listOfItems list of tasks
      */
     protected void writeFile(ListOfItems listOfItems) {
         try {

@@ -6,7 +6,6 @@
 public class Duke {
 
     private Ui ui;
-    private HandleFile handleFile;
     private Parser parser;
 
     /**
@@ -14,15 +13,14 @@ public class Duke {
      */
     public Duke() {
         ListOfItems listOfItems = new ListOfItems();
-        handleFile = new HandleFile(listOfItems);
-        parser = new Parser(listOfItems, handleFile);
+        parser = new Parser(listOfItems);
         ui = new Ui(parser);
     }
 
     /**
-     * Public getter method for JUnit testing purpose only.
+     * Getter method for JUnit testing purpose only.
      *
-     * @return parser
+     * @return Parser object
      */
     public Parser getParser() {
         return this.parser;
@@ -30,6 +28,25 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke();
+    }
+
+    /**
+     * Retrieve response from Ui after receiving input.
+     *
+     * @param input user's command
+     * @return output given by the chatbot
+     */
+    public String getResponse(String input) {
+        return this.ui.run(input);
+    }
+
+    /**
+     * Getter method to get instance of Ui.
+     *
+     * @return Ui object
+     */
+    public Ui getUi() {
+        return this.ui;
     }
 }
 
