@@ -16,6 +16,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private Duke duke;
 
+    /**
+     * Creates a new Main class.
+     * This starts up the UI and the backend.
+     */
     public Main() {
         // TODO: handle exceptions
         try {

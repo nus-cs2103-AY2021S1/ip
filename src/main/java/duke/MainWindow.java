@@ -26,6 +26,11 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/nekobot.png"));
 
+    /**
+     * Initialises the main window.
+     * Binds the scrollPane height to the height of the dialogContainer.
+     * Prints welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
