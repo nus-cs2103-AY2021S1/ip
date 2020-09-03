@@ -30,16 +30,16 @@ public class DoneCommand extends Command {
      * @param ui unused Ui object
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
         try {
             if (index > tasks.size()) {
                 throw new DukeException("C'mon pardner! That task doesn't exist cos you don't go so many!");
             }
             Task toBeDone = tasks.get(index);
             tasks.markAsDone(index);
-            System.out.println("Sure thing baws! This right here is marked as done!\n" + toBeDone.toString());
+            return "Sure thing baws! This right here is marked as done!\n" + toBeDone.toString();
         } catch (DukeException e) {
-            System.out.println(e);
+            return e.getMessage();
         }
     }
 }

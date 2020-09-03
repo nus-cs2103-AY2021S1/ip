@@ -10,7 +10,7 @@ import duke.core.Ui;
  */
 public class EmptyCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
-
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
+        return "";
     }
 }

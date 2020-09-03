@@ -13,27 +13,31 @@ public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
 
     /**
-     * No-argument method that prints out the current tasks in this TaskList sequentially.
+     * No-argument method that returns out the current tasks in this TaskList sequentially as a String.
+     * @return a string including newline characters that depict the tasks in this TaskList.
      */
-    public void list() {
+    public String list() {
+        StringBuffer buffer = new StringBuffer();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            System.out.println(i + 1 + ". " + task.toString());
+            buffer.append(i + 1 + ". " + task.toString() + "\n");
         }
+        return buffer.toString();
     }
 
     /**
      * Searches the TaskList for all tasks with descriptions containing the search term and prints them out in order.
      * @param searchTerm the string to be searched for within all the task descriptions
      */
-    public void listSearch(String searchTerm) {
-        int count = 1;
+    public String listSearch(String searchTerm) {
+        StringBuffer buffer = new StringBuffer();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            if (task.getDescription().toLowerCase().contains(searchTerm)) {
-                System.out.println(i + 1 + ". " + task.toString());
+            if (task.getDescription().toLowerCase().contains(searchTerm) || task.getDate().toLowerCase().contains(searchTerm)) {
+                buffer.append(i + 1 + ". " + task.toString() + "\n");
             }
         }
+        return buffer.toString();
     }
 
     public Task get(int i) {

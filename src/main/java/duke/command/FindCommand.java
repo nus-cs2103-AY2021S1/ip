@@ -13,8 +13,10 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
-        System.out.println("Lemme look through them records real lickity-split!");
-        tasks.listSearch(searchTerm);
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("Lemme look through them records real lickity-split!\n");
+        buffer.append(tasks.listSearch(searchTerm));
+        return buffer.toString();
     }
 }

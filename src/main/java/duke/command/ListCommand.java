@@ -17,8 +17,11 @@ public class ListCommand extends Command {
      * @param ui unused Ui object
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
-        System.out.println("Here's yer current list of thingymajigs");
-        tasks.list();
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
+        StringBuffer buffer = new StringBuffer();
+
+        buffer.append("Here's yer current list of thingymajigs\n");
+        buffer.append(tasks.list());
+        return buffer.toString();
     }
 }

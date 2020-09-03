@@ -17,8 +17,9 @@ public class EndCommand extends Command {
      * @see duke.core.Duke
      */
     @Override
-    public void execute (TaskList tasks, Storage storage, Ui ui) {
-        System.out.println("Well I'll see you around, pardner!!");
+    public String execute (TaskList tasks, Storage storage, Ui ui) {
         ui.setInactive();
+        storage.saveData(tasks.exportTaskList());
+        return "Well I'll see you around, pardner!!";
     }
 }
