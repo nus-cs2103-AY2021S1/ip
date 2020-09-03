@@ -67,6 +67,7 @@ public class Duke extends Application {
                 // 1. Read input
                 String input = inputField.getText();
                 inputField.setText("");
+                System.out.println("> " + input);
                 // 2. & 3. Parse input and run command
                 try {
                     Parser.parse(taskList, input).execute();
