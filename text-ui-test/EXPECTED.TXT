@@ -5,3 +5,15 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you?
+
+Got it. I've added this task:
+[T][?] todo cs2103 project 1
+Now you have 1 tasks in the list
+Here are the tasks in your list:
+1. [T][?] todo cs2103 project 1
+Nice! I've marked this task as done:
+[T][?] todo cs2103 project 1
+Here are the tasks in your list:
+1. [T][?] todo cs2103 project 1
+Bye. Hope to see you again soon!
