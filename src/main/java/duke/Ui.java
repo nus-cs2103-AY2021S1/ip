@@ -23,8 +23,7 @@ public class Ui {
      * Prints welcome message in the chat bot.
      */
     public void showWelcomeMessage() {
-        System.out.println("Hello! I'm Jarvis.\n"
-                + "What can I do for you?");
+        System.out.println(Ui.showGreeting());
     }
 
     /**

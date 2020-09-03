@@ -18,9 +18,9 @@ public class TodoCommand extends AddCommand {
     public TodoCommand(String content) throws DukeException {
         if (content.equals("")) {
             throw new DukeException("☹ OOPS!!! The name of a todo cannot be empty.");
-        } else {
-            this.name = content;
         }
+
+        this.name = content;
     }
 
     @Override

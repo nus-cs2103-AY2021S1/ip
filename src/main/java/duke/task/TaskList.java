@@ -76,15 +76,15 @@ public class TaskList {
         Task currentTask = this.getTaskById(taskId);
         if (currentTask.isDone) {
             throw new DukeException("☹ OOPS!!! This task is already done!");
-        } else {
-            Task doneTask = currentTask.complete();
-            int index = taskId - 1;
-
-            List<Task> newTaskList = this.tasks;
-            newTaskList.set(index, doneTask);
-
-            return new TaskList(newTaskList);
         }
+
+        Task doneTask = currentTask.complete();
+        int index = taskId - 1;
+
+        List<Task> newTaskList = this.tasks;
+        newTaskList.set(index, doneTask);
+
+        return new TaskList(newTaskList);
     }
 
     /**
@@ -106,9 +106,11 @@ public class TaskList {
      */
     public List<String> formatTaskList() {
         List<String> formattedTaskList = new ArrayList<>();
+
         for (Task t: this.tasks) {
             formattedTaskList.add(t.formatTask());
         }
+
         return formattedTaskList;
     }
 

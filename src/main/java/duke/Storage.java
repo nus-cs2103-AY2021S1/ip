@@ -76,13 +76,16 @@ public class Storage {
      */
     public TaskList loadTaskList(List<String> tasksInFile) {
         List<Task> tasksLoaded = new ArrayList<>();
+        // Reads the datetime from the string representation of tasks as "Month day year" such as "Jan 10 2020".
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH);
 
         for (String s : tasksInFile) {
+            // The array of task content contains task's type + whether it is done + name (+ time).
             String[] taskContentArr = s.split(" [|] ");
             String taskSchedule;
             boolean taskIsDone = taskContentArr[1].equals("1");
 
+            // Creates the task based on the type specified, only deadline and event tasks have time constraint.
             switch(taskContentArr[0]) {
             case ("T"):
                 tasksLoaded.add(new Todo(taskContentArr[2], taskIsDone));

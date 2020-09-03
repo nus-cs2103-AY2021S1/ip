@@ -21,7 +21,7 @@ public class Parser {
      * @return A Command to be processed by the agent.
      * @throws DukeException If the command construction involves error or the DateTime parsing involves error.
      */
-    public static Command parse(String userInput) throws DukeException {
+    public static Command parseCommand(String userInput) throws DukeException {
         String[] words = userInput.split(" ");
         String commandWord = words[0];
         boolean hasOnlyOneWord = words.length == 1;

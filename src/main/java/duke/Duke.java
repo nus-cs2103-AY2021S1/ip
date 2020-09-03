@@ -42,7 +42,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
-                Command c = Parser.parse(fullCommand);
+                Command c = Parser.parseCommand(fullCommand);
                 agent.handleCommand(c, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
@@ -70,7 +70,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            Command c = Parser.parse(input);
+            Command c = Parser.parseCommand(input);
             return agent.handleCommand(c, storage);
         } catch (DukeException e) {
             return e.getMessage();
