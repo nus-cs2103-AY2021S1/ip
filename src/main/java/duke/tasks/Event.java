@@ -8,30 +8,30 @@ import duke.Time;
  * Class to initiate a Event task.
  */
 public class Event extends Task {
-    private LocalDateTime by;
+    private final LocalDateTime activityTime;
 
     /**
      * Constructor for Event.
      */
-    public Event(String description, LocalDateTime by) {
+    public Event(String description, LocalDateTime activityTime) {
         super(description);
-        this.by = by;
+        this.activityTime = activityTime;
     }
 
     /**
      * Constructor for Event with additional argument.
      */
-    public Event(String description, boolean isDone, LocalDateTime by) {
+    public Event(String description, boolean isDone, LocalDateTime activityTime) {
         super(description, isDone);
-        this.by = by;
+        this.activityTime = activityTime;
     }
 
     public String getBy() {
-        return Time.convertTimeToSave(by);
+        return Time.convertTimeToSave(activityTime);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + Time.toString(by) + ")";
+        return "[E]" + super.toString() + " (at: " + Time.toString(activityTime) + ")";
     }
 }
