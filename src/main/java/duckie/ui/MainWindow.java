@@ -1,5 +1,6 @@
 package duckie.ui;
 
+import duckie.Duckie;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,8 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import duckie.Duckie;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -37,10 +36,13 @@ public class MainWindow extends AnchorPane {
         duckie = d;
     }
 
+    /**
+     * Creates two dialog boxes, one is to greet and another one displays the available tasks in the list
+     */
     public void showWelcome() {
-        String LOGO = Ui.getLogo();
+        String logo = Ui.getLogo();
         String toShow = "Quack. Duckie is here to remember your tasks!";
-        dialogContainer.getChildren().add(DialogBox.getDuckieDialog(LOGO + toShow, duckieImage));
+        dialogContainer.getChildren().add(DialogBox.getDuckieDialog(logo + toShow, duckieImage));
         dialogContainer.getChildren().add(DialogBox.getDuckieDialog(duckie.getResponse("list"), duckieImage));
     }
 
