@@ -5,6 +5,8 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+import java.util.stream.IntStream;
+
 /**
  * Class that simulates the find command of the user.
  */
@@ -35,20 +37,20 @@ public class FindCommand extends Command {
      * the user has keyed in.
      */
     public String findTasks(TaskList tasks, String keyword, Ui ui) {
-        StringBuilder s = new StringBuilder();
+        StringBuilder finalMessage = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String description = task.getDescription().toLowerCase();
             if (description.contains(keyword.toLowerCase())) {
-                s.append(task.toString()).append("\n");
+                finalMessage.append(task.toString()).append("\n");
             }
         }
         // this means no available search
-        if (s.toString().equals("")) {
+        if (finalMessage.toString().equals("")) {
             String noTask = String.format("No available task matches %s\n", keyword);
             return ui.messageFormatter(noTask);
         } else {
-            return ui.messageFormatter(FIND_SUCCESS, s.toString());
+            return ui.messageFormatter(FIND_SUCCESS, finalMessage.toString());
         }
     }
 }

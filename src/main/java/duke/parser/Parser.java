@@ -215,7 +215,7 @@ public class Parser {
             return new AddCommand(inputArr);
         } else if (isDelete(inputArr[0])) {
             // checking if the input is valid
-            if (inputArr.length == 1) {
+            if (inputArr.length == 1 || !isNumber(inputArr[1])) {
                 throw new InvalidFormatDeleteException();
             }
             return new DeleteCommand(inputArr);
