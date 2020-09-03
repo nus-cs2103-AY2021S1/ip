@@ -23,13 +23,13 @@ public class Deadline extends Task {
     /**
      * Loads previous deadline details and creates a new instance of the deadline.
      *
-     * @param taskDetails the details of the deadline in 'saved' format.
+     * @param deadlineDetails the details of the deadline in 'saved' format.
      * @return a new instance of the deadline.
      */
-    public static Deadline load(String taskDetails) {
-        String[] splitTaskDetails = taskDetails.strip().split(" \\| ", 4);
-        Deadline deadline = new Deadline(splitTaskDetails[2], LocalDate.parse(splitTaskDetails[3]));
-        if (splitTaskDetails[1].equals("true")) {
+    public static Deadline load(String deadlineDetails) {
+        String[] splitDeadlineDetails = deadlineDetails.split(" \\| ", 4);
+        Deadline deadline = new Deadline(splitDeadlineDetails[2], LocalDate.parse(splitDeadlineDetails[3]));
+        if (splitDeadlineDetails[1].equals("true")) {
             deadline.markAsDone();
         }
         return deadline;

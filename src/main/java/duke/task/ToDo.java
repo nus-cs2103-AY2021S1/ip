@@ -17,16 +17,17 @@ public class ToDo extends Task {
     /**
      * Loads previous to-do details and creates a new instance of the to-do.
      *
-     * @param taskDetails the details of the to-do in 'saved' format.
+     * @param toDoDetails the details of the to-do in 'saved' format.
      * @return a new instance of the to-do.
      */
-    public static ToDo load(String taskDetails) {
-        String[] splitTaskDetails = taskDetails.split("\\|", 3);
-        for (int i = 0; i < splitTaskDetails.length; i++) {
-            splitTaskDetails[i] = splitTaskDetails[i].strip();
+
+    public static ToDo load(String toDoDetails) {
+        String[] splitToDoDetails = toDoDetails.split("\\|", 3);
+        for (int i = 0; i < splitToDoDetails.length; i++) {
+            splitToDoDetails[i] = splitToDoDetails[i].strip();
         }
-        ToDo todo = new ToDo(splitTaskDetails[2].strip());
-        if (splitTaskDetails[1].equals("true")) {
+        ToDo todo = new ToDo(splitToDoDetails[2].strip());
+        if (splitToDoDetails[1].equals("true")) {
             todo.markAsDone();
         }
         return todo;

@@ -28,9 +28,9 @@ public class AddCommand extends Command {
      * @param storage the storage where the tasks will be saved after adding.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void executeCommand(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
-        ui.showAdded(task, tasks);
+        ui.showAddedMessage(task, tasks);
         storage.save(tasks.getTasks());
     }
 

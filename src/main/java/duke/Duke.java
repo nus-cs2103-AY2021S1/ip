@@ -34,13 +34,13 @@ public class Duke {
      * If an Exit command is entered, Duke terminates.
      */
     public void run() {
-        ui.showWelcome();
+        ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.executeCommand(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showErrorMessage(e);

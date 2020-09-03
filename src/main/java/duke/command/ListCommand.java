@@ -17,8 +17,8 @@ public class ListCommand extends Command {
      * @param storage unused.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showList(tasks);
+    public void executeCommand(TaskList tasks, Ui ui, Storage storage) {
+        ui.showAllTasks(tasks);
     }
 
     /**
