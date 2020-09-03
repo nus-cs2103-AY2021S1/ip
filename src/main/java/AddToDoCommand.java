@@ -4,11 +4,13 @@ public class AddToDoCommand extends AddCommand {
     }
     
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    String execute(TaskList tasks, Ui ui, Storage storage) {
         Task newTask = new ToDo(taskDescription);
         tasks.add(newTask);
-        ui.showAdded(newTask, tasks.size());
+        String output = ui.showAdded(newTask, tasks.size());
         
         storage.save(tasks);
+        
+        return output;
     }
 }

@@ -8,9 +8,11 @@ public class FindCommand extends Command {
     }
     
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    String execute(TaskList tasks, Ui ui, Storage storage) {
         int numOfTasks = tasks.size();
         ArrayList<Task> matchedTasks = new ArrayList<>();
+        String output = "";
+        
         for (int i = 1; i <= numOfTasks; i++) {
             Task currTask = tasks.getTask(i);
             String currDesc = currTask.getDesc();
@@ -19,15 +21,17 @@ public class FindCommand extends Command {
             }
         }
         if (matchedTasks.isEmpty()) {
-            ui.showNoMatch();
+            output = ui.showNoMatch();
         } else {
-            ui.showMatchingTaskHeader();
+            output += ui.showMatchingTaskHeader() + "\n";
             int i = 1;
             for (Task t : matchedTasks) {
-                ui.showTaskWithIndex(i, t);
+                output += ui.showTaskWithIndex(i, t) + "\n";
                 i++;
             }
         }
+        
+        return output;
     }
 
     @Override

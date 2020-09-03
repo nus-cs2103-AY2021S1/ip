@@ -1,15 +1,17 @@
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String output = "";
         int numOfTasks = tasks.size();
         if (tasks.isEmpty()) {
-            ui.showListNoTasks();
+            output = ui.showListNoTasks();
         } else {
-            ui.showListWithTasksHeader();
+            output = ui.showListWithTasksHeader() + "\n";
             for (int i = 1; i <= numOfTasks; i++) {
-                ui.showTaskWithIndex(i, tasks.getTask(i));
+                output += ui.showTaskWithIndex(i, tasks.getTask(i)) + "\n";
             }
         }
+        return output;
     }
 
     @Override 

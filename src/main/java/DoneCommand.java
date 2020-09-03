@@ -6,12 +6,13 @@ public class DoneCommand extends Command {
     }
     
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    String execute(TaskList tasks, Ui ui, Storage storage) {
         Task doneTask = tasks.getTask(indexOfDoneTask);
         doneTask.markAsDone();
-        ui.showDone(doneTask);
+        String output = ui.showDone(doneTask);
         
         storage.save(tasks);
+        return output;
     }
     
     /*
