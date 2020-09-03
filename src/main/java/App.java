@@ -24,9 +24,7 @@ public class App extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    private String home = System.getProperty("user.home");
-    private java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "cs2103", "ip", "data", "tasks.txt");
-    private Duke runningDuke = new Duke(path.toString(), false);
+    private Duke runningDuke = new Duke(this.getClass().getResource("/tasks.txt").getPath(), false);
 
     @Override
     public void start(Stage stage) {
