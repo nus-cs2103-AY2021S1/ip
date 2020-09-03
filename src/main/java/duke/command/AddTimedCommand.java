@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 
+import duke.DukeException;
 import duke.task.Task;
+import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-import duke.util.Storage;
-import duke.DukeException;
 
 /**
  * Represents an add timed task command in the Duke program.
@@ -60,8 +60,8 @@ public class AddTimedCommand extends AddCommand {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask = this.time.map(
-                time -> tasks.addTimedTask(this.type, this.desc, this.date, time, false))
-                .orElseGet(() -> tasks.addTimedTask(this.type, this.desc, this.date,false));
+            time -> tasks.addTimedTask(this.type, this.desc, this.date, time, false))
+            .orElseGet(() -> tasks.addTimedTask(this.type, this.desc, this.date, false));
         storage.save(tasks.getList());
         return ui.onAdd(newTask, tasks.size());
     }

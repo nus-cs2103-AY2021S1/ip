@@ -2,19 +2,18 @@ package duke.util;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
-import duke.command.Command;
-import duke.command.ByeCommand;
-import duke.command.ListCommand;
-import duke.command.FindCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
 import duke.command.AddCommand;
 import duke.command.AddTimedCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 
 /**
  * Represents a parser which parses user commands into Command objects.
@@ -102,7 +101,7 @@ public class Parser {
         if (type.equals("event") && !info.contains("/at")) {
             throw new DukeException("Oh dear! An event must contain '/at'!");
         }
-        if (type.equals("deadline") &&  info.substring(idxMeta).length() < 5) {
+        if (type.equals("deadline") && info.substring(idxMeta).length() < 5) {
             throw new DukeException("Oh dear! A deadline must contain a timestamp!");
         }
         if (type.equals("event") && info.substring(idxMeta).length() < 5) {
