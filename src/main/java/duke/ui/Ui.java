@@ -185,4 +185,10 @@ public class Ui {
         System.out.println(msg);
     }
 
+    public String getMsg(String msg) {
+        String outputMsg = "";
+        outputMsg += msg + "\n";
+        return msg;
+    }
+
 }

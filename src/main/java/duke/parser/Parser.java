@@ -50,11 +50,22 @@ public class Parser {
         if (inputString.isBlank()) {
             throw new DukeException("Yo! Enter the task numbers(s).");
         }
-        taskNumbers =
-                Arrays.stream(inputString.split(" "))
-                        .sorted(Collections.reverseOrder())
-                        .mapToInt(Integer::parseInt)
-                        .toArray();
+        try {
+            taskNumbers =
+                    Arrays.stream(inputString.split(" "))
+                            .sorted(Collections.reverseOrder())
+                            .mapToInt(Integer::parseInt)
+                            .toArray();
+
+        } catch (NumberFormatException e) {
+            throw new DukeException("Yo! Enter the task numbers(s) correctly.");
+        }
         return taskNumbers;
+    }
+
+    public static String[] parseCommand(String inputString) {
+        String[] splitStrings;
+        splitStrings = inputString.split(" ", 2);
+        return splitStrings;
     }
 }

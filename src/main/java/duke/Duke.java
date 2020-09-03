@@ -48,7 +48,7 @@ public class Duke {
     }
 
     /**
-     * Main execution of Duke Chat bot
+     * Main execution of Duke Chat bot for CLI
      */
     public void run() {
         String[] userInputArray;
@@ -269,12 +269,16 @@ public class Duke {
         ui.printMsg(ui.showByeMsg());
     }
 
+    /**
+     * Main execution of Duke Chat bot for GUI
+     */
     public void runGui() {
+        String[] GuiInputArray;
         String[] userInputArray;
-        boolean validInput;
 
         userInput = ui.readInput(isGui);
-        switch (userInput) {
+        GuiInputArray = Parser.parseCommand(userInput);
+        switch (GuiInputArray[0]) {
         case "bye":
             ui.printMsg(ui.showByeMsg());
             break;
@@ -290,37 +294,29 @@ public class Duke {
             if (tasks.isEmpty()) {
                 ui.printMsg(ui.showListEmptyMsg());
             } else {
-                ui.printMsg(ui.showListMsg());
-                ui.printMsg(ui.showTaskList(tasks));
-                ;
-                do {
-                    ui.printMsg(ui.showListDoneAskMsg());
-                    try {
-                        userInput = ui.readInput(isGui);
-                        int[] tasksArray = Parser.parse(userInput);
-                        TaskList doneList = new TaskList();
-                        for (int index : tasksArray) {
-                            try {
-                                if (index > tasks.size() || index <= 0) {
-                                    throw new DukeException("This task #" + index + " does not exist.");
-                                }
-                                Task task = tasks.getTask(index);
-                                task.setDone();
-                                doneList.addTask(task);
-                            } catch (DukeException e) {
-                                ui.printMsg(ui.showErrorMsg(e));
+                try {
+                    userInput = GuiInputArray[1];
+                    int[] tasksArray = Parser.parse(userInput);
+                    TaskList doneList = new TaskList();
+                    for (int index : tasksArray) {
+                        try {
+                            if (index > tasks.size() || index <= 0) {
+                                throw new DukeException("This task #" + index + " does not exist.");
                             }
+                            Task task = tasks.getTask(index);
+                            task.setDone();
+                            doneList.addTask(task);
+                        } catch (DukeException e) {
+                            ui.printMsg(ui.showErrorMsg(e));
                         }
-                        if (!doneList.isEmpty()) {
-                            ui.printMsg(ui.showListDoneMsg());
-                            ui.printMsg(ui.showTaskList(doneList));
-                        }
-                        validInput = true;
-                    } catch (DukeException e) {
-                        validInput = false;
-                        ui.printMsg(ui.showErrorMsg(e));
                     }
-                } while (!validInput);
+                    if (!doneList.isEmpty()) {
+                        ui.printMsg(ui.showListDoneMsg());
+                        ui.printMsg(ui.showTaskList(doneList));
+                    }
+                } catch (DukeException e) {
+                    ui.printMsg(ui.showErrorMsg(e));
+                }
             }
 
             try {
@@ -334,46 +330,37 @@ public class Duke {
             if (tasks.isEmpty()) {
                 ui.printMsg(ui.showListEmptyMsg());
             } else {
-                do {
-                    try {
-                        ui.printMsg(ui.showFindPromptMsg());
-                        userInput = ui.readInput(isGui);
-                        if (userInput.equals("")) {
-                            throw new DukeException("Yo! Enter a keyword.");
-                        }
-                        TaskList foundTasks;
-                        foundTasks = tasks.findTasks(userInput);
-                        if (!foundTasks.isEmpty()) {
-                            ui.printMsg(ui.showFoundMsg(userInput));
-                            ui.printMsg(ui.showTaskList(foundTasks));
-                        } else {
-                            ui.printMsg(ui.showNotFoundMsg(userInput));
-                        }
-                        validInput = true;
-                    } catch (DukeException e) {
-                        validInput = false;
-                        ui.printMsg(ui.showErrorMsg(e));
+                try {
+                    ui.printMsg(ui.showFindPromptMsg());
+                    userInput = GuiInputArray[1];
+                    if (userInput.equals("")) {
+                        throw new DukeException("Yo! Enter a keyword.");
                     }
-                } while (!validInput);
+                    TaskList foundTasks;
+                    foundTasks = tasks.findTasks(userInput);
+                    if (!foundTasks.isEmpty()) {
+                        ui.printMsg(ui.showFoundMsg(userInput));
+                        ui.printMsg(ui.showTaskList(foundTasks));
+                    } else {
+                        ui.printMsg(ui.showNotFoundMsg(userInput));
+                    }
+                } catch (DukeException e) {
+                    ui.printMsg(ui.showErrorMsg(e));
+                }
             }
             break;
         case "todo":
-            do {
-                ui.printMsg(ui.showTaskAddAskMsg());
-                try {
-                    userInput = ui.readInput(isGui);
-                    if (userInput.equals("")) {
-                        throw new DukeException("Yo! Task details are missing.");
-                    }
-                    Task toDo = new Todo(userInput);
-                    tasks.addTask(toDo);
-                    ui.printMsg(ui.showTaskAddedMsg(toDo));
-                    validInput = true;
-                } catch (DukeException e) {
-                    validInput = false;
-                    ui.printMsg(ui.showErrorMsg(e));
+            try {
+                userInput = GuiInputArray[1];
+                if (userInput.equals("")) {
+                    throw new DukeException("Yo! Task details are missing.");
                 }
-            } while (!validInput);
+                Task toDo = new Todo(userInput);
+                tasks.addTask(toDo);
+                ui.printMsg(ui.showTaskAddedMsg(toDo));
+            } catch (DukeException e) {
+                ui.printMsg(ui.showErrorMsg(e));
+            }
 
             try {
                 storeFile.saveFile(tasks);
@@ -383,21 +370,15 @@ public class Duke {
 
             break;
         case "deadline":
-            do {
-                ui.printMsg(ui.showTaskAddAskMsg());
-                try {
-                    userInput = ui.readInput(isGui);
-                    userInputArray = Parser.parseDetails(userInput);
-                    Task deadLine = new Deadline(userInputArray[0], userInputArray[1]);
-                    tasks.addTask(deadLine);
-                    ui.printMsg(ui.showTaskAddedMsg(deadLine));
-                    validInput = true;
-
-                } catch (DukeException e) {
-                    ui.printMsg(ui.showErrorMsg(e));
-                    validInput = false;
-                }
-            } while (!validInput);
+            try {
+                userInput = GuiInputArray[1];
+                userInputArray = Parser.parseDetails(userInput);
+                Task deadLine = new Deadline(userInputArray[0], userInputArray[1]);
+                tasks.addTask(deadLine);
+                ui.printMsg(ui.showTaskAddedMsg(deadLine));
+            } catch (DukeException e) {
+                ui.printMsg(ui.showErrorMsg(e));
+            }
 
             try {
                 storeFile.saveFile(tasks);
@@ -407,21 +388,15 @@ public class Duke {
 
             break;
         case "event":
-            do {
-                ui.printMsg(ui.showTaskAddAskMsg());
-                try {
-                    userInput = ui.readInput(isGui);
-                    userInputArray = Parser.parseDetails(userInput);
-                    Task event = new Event(userInputArray[0], userInputArray[1]);
-                    tasks.addTask(event);
-                    ui.printMsg(ui.showTaskAddedMsg(event));
-                    validInput = true;
-
-                } catch (DukeException e) {
-                    ui.printMsg(ui.showErrorMsg(e));
-                    validInput = false;
-                }
-            } while (!validInput);
+            try {
+                userInput = GuiInputArray[1];
+                userInputArray = Parser.parseDetails(userInput);
+                Task event = new Event(userInputArray[0], userInputArray[1]);
+                tasks.addTask(event);
+                ui.printMsg(ui.showTaskAddedMsg(event));
+            } catch (DukeException e) {
+                ui.printMsg(ui.showErrorMsg(e));
+            }
 
             try {
                 storeFile.saveFile(tasks);
@@ -434,36 +409,29 @@ public class Duke {
             if (tasks.isEmpty()) {
                 ui.printMsg(ui.showListEmptyMsg());
             } else {
-                ui.printMsg(ui.showListMsg());
-                ui.printMsg(ui.showTaskList(tasks));
-                do {
-                    ui.printMsg(ui.showTaskDeleteAskMsg());
-                    try {
-                        userInput = ui.readInput(isGui);
-                        TaskList deletedTasks = new TaskList();
-                        int[] tasksArray = Parser.parse(userInput);
-                        for (int index : tasksArray) {
-                            try {
-                                if (index > tasks.size() || index <= 0) {
-                                    throw new DukeException("This task #" + index + " does not exist.");
-                                }
-                                Task task = tasks.getTask(index);
-                                tasks.removeTask(index);
-                                deletedTasks.addTask(task);
-                            } catch (DukeException e) {
-                                ui.printMsg(ui.showErrorMsg(e));
+                try {
+                    userInput = GuiInputArray[1];
+                    TaskList deletedTasks = new TaskList();
+                    int[] tasksArray = Parser.parse(userInput);
+                    for (int index : tasksArray) {
+                        try {
+                            if (index > tasks.size() || index <= 0) {
+                                throw new DukeException("This task #" + index + " does not exist.");
                             }
+                            Task task = tasks.getTask(index);
+                            tasks.removeTask(index);
+                            deletedTasks.addTask(task);
+                        } catch (DukeException e) {
+                            ui.printMsg(ui.showErrorMsg(e));
                         }
-                        if (!deletedTasks.isEmpty()) {
-                            ui.printMsg(ui.showTaskDeleteMsg());
-                            ui.printMsg(ui.showTaskList(deletedTasks));
-                        }
-                        validInput = true;
-                    } catch (DukeException e) {
-                        ui.printMsg(ui.showErrorMsg(e));
-                        validInput = false;
                     }
-                } while (!validInput);
+                    if (!deletedTasks.isEmpty()) {
+                        ui.printMsg(ui.showTaskDeleteMsg());
+                        ui.printMsg(ui.showTaskList(deletedTasks));
+                    }
+                } catch (DukeException e) {
+                    ui.printMsg(ui.showErrorMsg(e));
+                }
             }
 
             try {
