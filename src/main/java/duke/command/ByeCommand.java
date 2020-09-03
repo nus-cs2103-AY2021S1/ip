@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
@@ -40,7 +41,7 @@ public class ByeCommand extends Command {
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) {
         printEntireList(ui, list);
-        return "bye";
+        return Parser.BYE_COMMAND;
     }
 
     /**

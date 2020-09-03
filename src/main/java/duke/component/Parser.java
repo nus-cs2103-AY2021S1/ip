@@ -18,6 +18,14 @@ import duke.task.ToDo;
  * Holds the methods for parsing commands.
  */
 public class Parser {
+
+    public static final String BYE_COMMAND = "bye";
+    public static final String LIST_COMMAND = "list";
+    public static final String DELETE_COMMAND_PREFIX = "delete ";
+    public static final String DONE_COMMAND_PREFIX = "done ";
+    public static final String HAPPEN_COMMAND_PREFIX = "happen ";
+    public static final String FIND_COMMAND_PREFIX = "find ";
+
     /**
      * Parses a DoneCommand to tell which task to mark as done.
      * @param cmd the given input command
@@ -27,7 +35,7 @@ public class Parser {
      * numbers
      */
     public static int isValidDone(String cmd, int count) throws InvalidCommandException {
-        if (cmd.startsWith("done ")) {
+        if (cmd.startsWith(DONE_COMMAND_PREFIX)) {
             if (cmd.length() < 6) {
                 throw new InvalidCommandException("\u2639 OOPS!!! The task to mark as done cannot be empty.");
             }
@@ -56,7 +64,7 @@ public class Parser {
      * numbers
      */
     public static int isValidDelete(String cmd, int count) throws InvalidCommandException {
-        if (cmd.startsWith("delete ")) {
+        if (cmd.startsWith(DELETE_COMMAND_PREFIX)) {
             if (cmd.length() < 8) {
                 throw new InvalidCommandException("\u2639 OOPS!!! The task to mark to delete cannot be empty.");
             }
@@ -143,17 +151,17 @@ public class Parser {
      * @return the Command to be executed
      */
     public static Command parse(String input) {
-        if (input.equals("bye")) {
+        if (input.equals(BYE_COMMAND)) {
             return new ByeCommand(input);
-        } else if (input.equals("list")) {
+        } else if (input.equals(LIST_COMMAND)) {
             return new ListCommand(input);
-        } else if (input.startsWith("delete ")) {
+        } else if (input.startsWith(DELETE_COMMAND_PREFIX)) {
             return new DeleteCommand(input);
-        } else if (input.startsWith("done ")) {
+        } else if (input.startsWith(DONE_COMMAND_PREFIX)) {
             return new DoneCommand(input);
-        } else if (input.startsWith("happen ")) {
+        } else if (input.startsWith(HAPPEN_COMMAND_PREFIX)) {
             return new HappenCommand(input);
-        } else if (input.startsWith("find ")) {
+        } else if (input.startsWith(FIND_COMMAND_PREFIX)) {
             return new FindCommand(input);
         } else {
             return new AddCommand(input);
