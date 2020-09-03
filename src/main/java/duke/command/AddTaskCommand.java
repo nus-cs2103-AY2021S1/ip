@@ -5,8 +5,8 @@ import duke.exceptions.DukeInvalidTaskTimeException;
 import duke.exceptions.DukeLoadingErrorException;
 import duke.messages.Output;
 import duke.storage.Storage;
-import duke.task.Task;
-import duke.task.TaskList;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 /**
  * Represents a command to add a task.

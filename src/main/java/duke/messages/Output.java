@@ -2,7 +2,7 @@ package duke.messages;
 
 import java.util.List;
 
-import duke.task.Task;
+import duke.tasks.Task;
 
 /**
  * Contains the relevant responses and messages.

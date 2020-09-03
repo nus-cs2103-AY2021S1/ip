@@ -1,4 +1,4 @@
-package duke.task;
+package duke.tasks;
 
 /**
  * Represents the different types a task can have.

@@ -5,7 +5,7 @@ import duke.exceptions.DukeException;
 import duke.messages.Output;
 import duke.parsers.Parser;
 import duke.storage.Storage;
-import duke.task.TaskList;
+import duke.tasks.TaskList;
 
 /**
  * Represents the chat bot itself. Main class.

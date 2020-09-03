@@ -16,11 +16,11 @@ import java.util.Scanner;
 import duke.exceptions.DukeFileNotFoundException;
 import duke.exceptions.DukeLoadingErrorException;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskType;
-import duke.task.ToDo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskType;
+import duke.tasks.ToDo;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.

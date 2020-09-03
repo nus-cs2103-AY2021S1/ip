@@ -8,7 +8,7 @@ import duke.exceptions.DukeLoadingErrorException;
 import duke.exceptions.DukeUnknownInputException;
 import duke.messages.Output;
 import duke.storage.Storage;
-import duke.task.TaskList;
+import duke.tasks.TaskList;
 
 /**
  * Represents an action to be taken depending on the <code>tag</code> and <code>input</code>.

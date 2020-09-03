@@ -3,7 +3,7 @@ package duke.command;
 import duke.exceptions.DukeInvalidKeywordException;
 import duke.messages.Output;
 import duke.storage.Storage;
-import duke.task.TaskList;
+import duke.tasks.TaskList;
 
 /**
  * Represents a command to find tasks that match a given keyword.

@@ -4,7 +4,7 @@ import duke.exceptions.DukeInvalidIndexException;
 import duke.exceptions.DukeLoadingErrorException;
 import duke.messages.Output;
 import duke.storage.Storage;
-import duke.task.TaskList;
+import duke.tasks.TaskList;
 
 /**
  * Represents a command to complete a task.
