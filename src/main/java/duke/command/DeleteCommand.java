@@ -28,7 +28,7 @@ public class DeleteCommand implements Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui) throws DukeException, IOException {
         ArrayList<String> lines = new ArrayList<>();
         int taskID = Integer.parseInt(this.parsedInput[1]);
         lines.add(Message.DELETE_MSG.getMsg());
@@ -36,6 +36,7 @@ public class DeleteCommand implements Command {
         lines.add(tasks.getCurrentStatus());
         ui.display(lines);
         Storage.save(tasks);
+        return Command.listLinesToString(lines);
     }
     @Override
     public boolean isExit() {

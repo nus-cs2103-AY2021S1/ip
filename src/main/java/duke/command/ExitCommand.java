@@ -15,8 +15,9 @@ public class ExitCommand implements Command {
      * @param ui    Where the User shall receive messages about the command
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         System.exit(0);
+        return "Stub for ExitCommand.execute()";
     }
     @Override
     public boolean isExit() {

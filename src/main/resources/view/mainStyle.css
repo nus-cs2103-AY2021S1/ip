@@ -1,0 +1,6 @@
+.dialogContainer {
+    -fx-background-size:contain;
+    -fx-background-color: rgba(238, 232, 170, 0.7);
+    -fx-background-repeat:stretch;
+    -fx-background-position:bottom center;
+}

@@ -60,7 +60,15 @@ public class Duke extends Thread {
         }
         sc.close();
         Storage.save(tasks);
-        // todo: handle the ctrl-c event handling for sudden
+    }
+    public String getResponse(String rawUserInput) {
+        try {
+            Command command = parser.parseCommand(rawUserInput);
+            return command.execute(this.tasks, this.ui);
+        } catch (DukeException | IOException e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
     }
     public static void main(String[] args) throws IOException {
         new Duke().runDuke();
