@@ -7,6 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -22,17 +24,23 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    boolean isExit = false;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    public void setDukeAndDisplayWelcome(Duke d) {
+        duke = d;
+
+        String response = duke.getWelcome();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+    }
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    public void setDuke(Duke d) {
-        duke = d;
     }
 
     /**
@@ -41,12 +49,22 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        // After user says "bye", and gives another input e.g. "some_text", the application will exit.
+        if (isExit) {
+            // get a handle to the stage
+            Stage stage = (Stage) scrollPane.getScene().getWindow();
+            stage.close();
+        }
+
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        isExit = duke.isExit(input);
+
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+            DialogBox.getUserDialog(input, userImage),
+            DialogBox.getDukeDialog(response, dukeImage)
         );
+
         userInput.clear();
     }
 }

@@ -43,7 +43,7 @@ public class Storage {
                 return readTasksFromFile();
             }
         } catch (IOException e) {
-            throw new DukeException("     A file error has occurred!");
+            throw new DukeException("A file error has occurred!");
         }
     }
 
@@ -66,7 +66,7 @@ public class Storage {
             }
             return formattedOutput;
         } catch (java.io.FileNotFoundException e) {
-            throw new DukeException("     A file error has occurred!");
+            throw new DukeException("A file error has occurred!");
         }
     }
 
@@ -84,7 +84,7 @@ public class Storage {
             fw.write(textToAppend);
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("     A file error has occurred!");
+            throw new DukeException("A file error has occurred!");
         }
     }
 }

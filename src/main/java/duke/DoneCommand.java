@@ -28,7 +28,7 @@ public class DoneCommand extends Command {
         String output = tasks.doTask(index);
         ArrayList<Task> taskList = tasks.getTasks();
         storage.save(taskList);
-        return ui.printOutput(output, true);
+        return ui.printOutput(output);
 
     }
 

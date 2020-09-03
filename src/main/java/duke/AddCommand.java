@@ -38,7 +38,7 @@ public class AddCommand extends Command {
         String output = tasks.addTask(commandName, description, date);
         ArrayList<Task> taskList = tasks.getTasks();
         storage.save(taskList);
-        return ui.printOutput(output, true);
+        return ui.printOutput(output);
 
     }
 

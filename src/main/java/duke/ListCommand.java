@@ -11,12 +11,11 @@ public class ListCommand extends Command {
      * @param tasks Stores task list.
      * @param ui Handles user interaction.
      * @param storage Handles input output to hard disk.
-     * @throws DukeException When date time in wrong format, or description not given,
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String output = tasks.listTasks();
-        return ui.printOutput(output, false);
+        return ui.printOutput(output);
     }
 
     /**

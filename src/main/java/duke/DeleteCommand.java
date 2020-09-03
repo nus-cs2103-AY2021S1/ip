@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
         String output = tasks.deleteTask(index);
         ArrayList<Task> taskList = tasks.getTasks();
         storage.save(taskList);
-        return ui.printOutput(output, true);
+        return ui.printOutput(output);
 
     }
 
