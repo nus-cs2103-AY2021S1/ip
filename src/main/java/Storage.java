@@ -25,13 +25,12 @@ public class Storage {
      * @throws IOException If the file cannot be created.
      */
     private void createFile() throws IOException {
-        File f = new File(this.filePath);
-        if (f.exists()) {
-            return;
-        } else {
-            f.getParentFile().mkdirs();
-            f.createNewFile();
+        File file = new File(this.filePath);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
         }
+        return;
     }
 
     /**
@@ -42,45 +41,52 @@ public class Storage {
      */
     public List<Task> load() throws IOException {
         this.createFile();
-        File f = new File(this.filePath);
-        Scanner sc = new Scanner(f);
+        File file = new File(this.filePath);
+        Scanner sc = new Scanner(file);
         List<Task> taskList = new ArrayList<>();
         while (sc.hasNext()) {
-            //Format of each line: e.g. T|X|description or D|X|description|date|time
-            String line = sc.nextLine();
-            String[] taskComponent = line.split(Pattern.quote("|"));
-            switch (taskComponent[0]) {
-            case "T":
-                Task todoTask = new Todo(taskComponent[2]);
-                taskList.add(todoTask);
-                if (taskComponent[1].equals("\u2713")) {
-                    todoTask.markAsDone();
-                }
-                break;
-            case "D":
-                Task deadlineTask = new Deadline(taskComponent[2],
-                        LocalDate.parse(taskComponent[3], DateTimeFormatter.ofPattern("dd MMM yyyy")),
-                        LocalTime.parse(taskComponent[4], DateTimeFormatter.ofPattern("hh.mma")));
-                taskList.add(deadlineTask);
-                if (taskComponent[1].equals("\u2713")) {
-                    deadlineTask.markAsDone();
-                }
-                break;
-            case "E":
-                Task eventTask = new Event(taskComponent[2],
-                        LocalDate.parse(taskComponent[3], DateTimeFormatter.ofPattern("dd MMM yyyy")),
-                        LocalTime.parse(taskComponent[4].split(" to ")[0], DateTimeFormatter.ofPattern("hh.mma")),
-                        LocalTime.parse(taskComponent[4].split(" to ")[1], DateTimeFormatter.ofPattern("hh.mma")));
-                taskList.add(eventTask);
-                if (taskComponent[1].equals("\u2713")) {
-                    eventTask.markAsDone();
-                }
-                break;
-            default:
-                break;
-            }
+            Task taskToAdd = processLine(sc.nextLine());
+            taskList.add(taskToAdd);
         }
         return taskList;
+    }
+
+    /**
+     * Processes the line from the file and returns the task represented
+     * by the line
+     * @param lineFromFile
+     * @return the associated task
+     */
+    private Task processLine(String lineFromFile) {
+        //Format of each line: e.g. T|X|description or D|X|description|date|time
+        String[] taskComponent = lineFromFile.split(Pattern.quote("|"));
+        switch (taskComponent[0]) {
+        case "T":
+            Task todoTask = new Todo(taskComponent[2]);
+            if (taskComponent[1].equals("\u2713")) {
+                todoTask.markAsDone();
+            }
+            return todoTask;
+        case "D":
+            Task deadlineTask = new Deadline(taskComponent[2],
+                    LocalDate.parse(taskComponent[3], DateTimeFormatter.ofPattern("dd MMM yyyy")),
+                    LocalTime.parse(taskComponent[4], DateTimeFormatter.ofPattern("hh.mma")));
+            if (taskComponent[1].equals("\u2713")) {
+                deadlineTask.markAsDone();
+            }
+            return deadlineTask;
+        case "E":
+            Task eventTask = new Event(taskComponent[2],
+                    LocalDate.parse(taskComponent[3], DateTimeFormatter.ofPattern("dd MMM yyyy")),
+                    LocalTime.parse(taskComponent[4].split(" to ")[0], DateTimeFormatter.ofPattern("hh.mma")),
+                    LocalTime.parse(taskComponent[4].split(" to ")[1], DateTimeFormatter.ofPattern("hh.mma")));
+            if (taskComponent[1].equals("\u2713")) {
+                eventTask.markAsDone();
+            }
+            return eventTask;
+        default:
+            return null;
+        }
     }
 
     /**

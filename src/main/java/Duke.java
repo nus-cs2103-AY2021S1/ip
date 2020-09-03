@@ -27,61 +27,69 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns the reply for the respective commands after processing them
+     * @param processedCommand
+     * @return the reply for the respective commands
+     * @throws DukeException if user inputs invalid commands
+     */
+    private String generateReply(String[] processedCommand) throws DukeException {
+        switch (processedCommand[0].toLowerCase()) {
+        case "bye":
+            return ui.showByeMessage();
+        case "list":
+            return ui.showListTasks(tasks.getAllTasks()) + "\n" + ui.showTotalTasks(tasks.getNumTasks());
+        case "print":
+            return ui.showRequiredTasks(tasks.getSameDateTasks(processedCommand[1]))
+                    + "\n" + ui.showTotalTasks(tasks.getNumTasks());
+        case "done":
+            Task doneTask = tasks.markDone(Integer.parseInt(processedCommand[1]));
+            return ui.showDoneTask(doneTask) + "\n" + ui.showTotalTasks(tasks.getNumTasks());
+        case "delete":
+            Task deletedTask = tasks.deleteTask(Integer.parseInt(processedCommand[1]));
+            return ui.showDeleteTask(deletedTask) + "\n" + ui.showTotalTasks(tasks.getNumTasks());
+        case "todo":
+            Task todoTsk = new Todo(processedCommand[1]);
+            tasks.addTask(todoTsk);
+            return ui.showAddTask(todoTsk) + "\n" + ui.showTotalTasks(tasks.getNumTasks());
+        case "deadline":
+            Task deadlineTsk = new Deadline(processedCommand[1],
+                    LocalDate.parse(processedCommand[2], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                    LocalTime.parse(processedCommand[3], DateTimeFormatter.ofPattern("HHmm")));
+            tasks.addTask(deadlineTsk);
+            return ui.showAddTask(deadlineTsk) + "\n" + ui.showTotalTasks(tasks.getNumTasks());
+        case "event":
+            Task eventTsk = new Event(processedCommand[1],
+                    LocalDate.parse(processedCommand[2], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                    LocalTime.parse(processedCommand[3], DateTimeFormatter.ofPattern("HHmm")),
+                    LocalTime.parse(processedCommand[4], DateTimeFormatter.ofPattern("HHmm")));
+            tasks.addTask(eventTsk);
+            return ui.showAddTask(eventTsk) + "\n" + ui.showTotalTasks(tasks.getNumTasks());
+        case "find":
+            return ui.showRequiredTasks(tasks.getTasksWithKeyWord(processedCommand[1]))
+                    + "\n" + ui.showTotalTasks(tasks.getNumTasks());
+        default:
+            throw new NotTaskException();
+        }
+    }
+
+    /**
+     * Processes the command and return bot reply
+     * @param input the user command
+     * @return the response from the bot
+     */
     public String getResponse(String input) {
         assert(tasks != null); //ensure tasklist is initialised by Duke
         StringBuilder response = new StringBuilder();
         try {
             String[] processedCommand = parser.parse(input);
-            switch (processedCommand[0].toLowerCase()) {
-            case "bye":
-                return ui.byeMessage();
-            case "list":
-                response.append(ui.showListTasks(tasks.getAllTasks()));
-                break;
-            case "print":
-                response.append(ui.showRequiredTasks(tasks.getSameDateTasks(processedCommand[1])));
-                break;
-            case "done":
-                Task doneTask = tasks.markDone(Integer.parseInt(processedCommand[1]));
-                response.append(ui.showDoneTask(doneTask));
-                break;
-            case "delete":
-                Task deletedTask = tasks.deleteTask(Integer.parseInt(processedCommand[1]));
-                response.append(ui.showDeleteTask(deletedTask));
-                break;
-            case "todo":
-                Task todoTsk = new Todo(processedCommand[1]);
-                tasks.addTask(todoTsk);
-                response.append(ui.showAddTask(todoTsk));
-                break;
-            case "deadline":
-                Task deadlineTsk = new Deadline(processedCommand[1],
-                        LocalDate.parse(processedCommand[2], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                        LocalTime.parse(processedCommand[3], DateTimeFormatter.ofPattern("HHmm")));
-                tasks.addTask(deadlineTsk);
-                response.append(ui.showAddTask(deadlineTsk));
-                break;
-            case "event":
-                Task eventTsk = new Event(processedCommand[1],
-                        LocalDate.parse(processedCommand[2], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                        LocalTime.parse(processedCommand[3], DateTimeFormatter.ofPattern("HHmm")),
-                        LocalTime.parse(processedCommand[4], DateTimeFormatter.ofPattern("HHmm")));
-                tasks.addTask(eventTsk);
-                response.append(ui.showAddTask(eventTsk));
-                break;
-            case "find":
-                response.append(ui.showRequiredTasks(tasks.getTasksWithKeyWord(processedCommand[1])));
-                break;
-            default:
-                break;
-            }
-            response.append("\n" + ui.showTotalTasks(tasks.getNumTasks()));
+            String reply = generateReply(processedCommand);
             storage.updateFile(tasks.toString()); //reload the file
+            return reply;
         } catch (DukeException e) {
-            response.append(ui.showDukeError(e));
+            return ui.showDukeError(e);
         } catch (IOException e) {
-            response.append(ui.showLoadingError());
+            return ui.showLoadingError();
         }
-        return response.toString();
     }
 }

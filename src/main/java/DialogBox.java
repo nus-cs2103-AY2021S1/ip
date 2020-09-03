@@ -22,7 +22,7 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-    private final Circle clip = new Circle(50,50,50);
+    private final Circle CLIP = new Circle(50,50,50);
 
     private DialogBox(String text, Image img) {
         try {
@@ -35,7 +35,7 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         displayPicture.setImage(img);
-        displayPicture.setClip(clip); //convert image to circular
+        displayPicture.setClip(CLIP); //convert image to circular
     }
 
     /**

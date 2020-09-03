@@ -31,7 +31,7 @@ public class MainWindow extends AnchorPane {
         assert(userImage != null);
         assert(dukeImage != null);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.welcomeMessage(), dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.showWelcomeMessage(), dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -46,13 +46,11 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        if (response.equals(Ui.byeMessage())) {
-            Button exitButton = new Button("Exit");
-            exitButton.setPadding(new Insets(10,10,10,10));
+        if (response.equals(Ui.showByeMessage())) {
+            Button exitButton = setExitButton();
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(response, dukeImage),
                     exitButton);
-            exitButton.setOnAction(e -> closeStage());
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
@@ -60,6 +58,13 @@ public class MainWindow extends AnchorPane {
             );
         }
         userInput.clear();
+    }
+
+    private Button setExitButton() {
+        Button exitButton = new Button("Exit");
+        exitButton.setPadding(new Insets(10,10,10,10));
+        exitButton.setOnAction(e -> closeStage());
+        return exitButton;
     }
 
     @FXML
