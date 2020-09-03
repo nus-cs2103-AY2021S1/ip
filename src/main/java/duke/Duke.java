@@ -35,27 +35,26 @@ public class Duke {
     }
 
     /**
-     * A function for Duke to save the current list of tasks into storage.
+     * Saves the current list of tasks into storage.
      */
     public void save() {
         storage.storelist(tasks);
     }
 
     /**
-     * A function for Duke to print the welcome message.
+     * Prints the welcome message.
      * @return A string representing Duke starting up.
      */
     public String welcome() {
         return ui.greet();
     }
-    
-    
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Executes the command entered by the user and generates a response.
+     * @param input The command entered by the user.
+     * @return A string representing the relevant response to the command entered.
      */
-    public String getResponse(String input) throws DukeException {
+    public String getResponse(String input) {
         try {
             Command nextCommand = Parser.parse(input);
             return nextCommand.execute(tasks, ui, storage);

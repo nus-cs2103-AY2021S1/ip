@@ -15,7 +15,7 @@ public class Task {
     }
 
     /**
-     * A function to set a task as done.
+     * Sets a task as done.
      */
     public void setDone() {
         this.done = true;
@@ -23,7 +23,7 @@ public class Task {
 
 
     /**
-     * A function to get the name of the task.
+     * Gets the name of the task.
      * @return a string representing the name of the task.
      */
     public String getTaskName() {
@@ -31,7 +31,7 @@ public class Task {
     }
 
     /**
-     * A function to check if a task is done.
+     * Checks if a task is done.
      * @return true if the task is done and false if it isn't.
      */
     public boolean checkDone() {

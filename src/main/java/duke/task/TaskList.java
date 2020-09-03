@@ -17,7 +17,7 @@ public class TaskList {
     }
 
     /**
-     * A function to add a task to the list.
+     * Adds a task to the list.
      * @param task The task that should be added to the list.
      */
     public void add(Task task) {
@@ -25,7 +25,7 @@ public class TaskList {
     }
 
     /**
-     * A function to get a specific task from the list.
+     * Gets a specific task from the list.
      * @param index the number representing the task in the list.
      * @return a Task from the list.
      */
@@ -34,7 +34,7 @@ public class TaskList {
     }
 
     /**
-     * A function to get the number of tasks in the list.
+     * Gets the number of tasks in the list.
      * @return an integer that represents the number of tasks in the list.
      */
     public int getSize() {
@@ -42,7 +42,7 @@ public class TaskList {
     }
 
     /**
-     * A function to remove a task from the list.
+     * Removes a task from the list.
      * @param index the number representing the task that should be removed.
      */
     public void remove(int index) {
@@ -50,7 +50,7 @@ public class TaskList {
     }
 
     /**
-     * A function to iterate through the list and add them all to a string.
+     * Iterates through the list and add them all to a string.
      * @return A string that contains every task currently in the list.
      */
     public String iterateList() {
@@ -63,7 +63,7 @@ public class TaskList {
     }
 
     /**
-     * A function to iterate through the list and add all relevant tasks to a string.
+     * Iterates through the list and add all relevant tasks to a string.
      * @param keyword the keyword that determines if a task is relevant or not.
      * @return A string containing all relevant tasks from the list.
      */

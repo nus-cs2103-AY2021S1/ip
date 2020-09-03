@@ -25,7 +25,7 @@ public class DeadlineCommand extends Command {
      * @param ui is the user interface to read inputs from the user and print messages.
      * @param storage deals with saving tasks into the file and loading tasks
      *                from the file.
-     * @throws DukeException if the instructions for the command is insufficient or not in the proper format.
+     * @return A string indicating the deadline task added.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

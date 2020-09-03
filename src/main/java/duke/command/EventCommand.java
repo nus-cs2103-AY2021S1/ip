@@ -26,7 +26,7 @@ public class EventCommand extends Command {
      * @param storage deals with saving tasks into the file and loading tasks
      *                from the file.
      *
-     * @throws DukeException if the instructions for the command is insufficient or not in the proper format.
+     * @return A string indicating the event task added.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

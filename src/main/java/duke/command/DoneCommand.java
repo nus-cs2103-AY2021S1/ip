@@ -27,7 +27,7 @@ public class DoneCommand extends Command {
      * @param storage deals with saving tasks into the file and loading tasks
      *                from the file.
      *
-     * @throws DukeException if an invalid task number is provided to be marked as done.
+     * @return A string indicating the task marked as done.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

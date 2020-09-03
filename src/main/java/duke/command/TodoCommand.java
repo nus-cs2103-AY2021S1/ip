@@ -26,7 +26,7 @@ public class TodoCommand extends Command {
      * @param storage deals with saving tasks into the file and loading tasks
      *                from the file.
      *
-     * @throws DukeException if the instructions for this command is insufficient.
+     * @return A string indicating the todo task is added.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
@@ -37,7 +37,6 @@ public class TodoCommand extends Command {
         } catch (Exception e) {
             return new DukeException("The description of a todo cannot be empty~").toString();
         }
-        
     }
 
     /**

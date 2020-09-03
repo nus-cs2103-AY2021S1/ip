@@ -25,7 +25,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * A function to get the due date of the Deadline.
+     * Gets the due date of the Deadline.
      * @return a string representing a due date in DD-MMM-YYYY format.
      */
     public String getDeadlineDate() {

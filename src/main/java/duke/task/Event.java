@@ -24,7 +24,7 @@ public class Event extends Task {
     }
 
     /**
-     * A function to get the date at which the Event is occurring.
+     * Gets the date at which the Event is occurring.
      * @return a string representing the date in DD-MMM-YYYY format.
      */
     public String getEventDate() {

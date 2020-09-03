@@ -27,53 +27,59 @@ public class Ui {
     }
 
     /**
-     * A function to print the welcome message when starting Duke.
+     * Prints the welcome message when starting Duke.
+     * @return A string containing the greeting message.
      */
     public String greet() {
         return MESSAGE_GREETING;
     }
 
     /**
-     * A function to print the goodbye message when stopping Duke.
+     * Prints the goodbye message when stopping Duke.
+     * @return A string containing the goodbye message.
      */
     public String farewell() {
         return (MESSAGE_SEPERATOR + "\n" + MESSAGE_FAREWELL + "\n" + MESSAGE_SEPERATOR);
     }
 
     /**
-     * A function to print the message when marking a task as done.
+     * Prints the message when marking a task as done.
      * @param doneTask the Task marked as done.
+     * @return A string indicating that the task is marked as done.                
      */
     public String doneText(Task doneTask) {
-        return (MESSAGE_SEPERATOR + "\n" + MESSAGE_DONE + "\n" + doneTask + 
-                "\n" + MESSAGE_SEPERATOR);
+        return (MESSAGE_SEPERATOR + "\n" + MESSAGE_DONE + "\n" + doneTask 
+                + "\n" + MESSAGE_SEPERATOR);
     }
 
     /**
-     * A function to print the message when adding a task to the list.
+     * Prints the message when adding a task to the list.
      * @param addTask the Task added to the list.
      * @param result the TaskList the task is added to.
+     * @return A string indicating that the task is added.              
      */
     public String addTaskText(Task addTask, TaskList result) {
-        return (MESSAGE_SEPERATOR + "\n" + MESSAGE_ADD_TASK + "\n" + addTask +
-                "\n" + String.format(MESSAGE_NUMBER_OF_TASKS, result.getSize()) + 
-                "\n" + MESSAGE_SEPERATOR);
+        return (MESSAGE_SEPERATOR + "\n" + MESSAGE_ADD_TASK + "\n" + addTask 
+                + "\n" + String.format(MESSAGE_NUMBER_OF_TASKS, result.getSize()) 
+                + "\n" + MESSAGE_SEPERATOR);
     }
 
     /**
-     * A function to print the message when deleting a task from the list.
+     * Prints the message when deleting a task from the list.
      * @param deleteTask the Task deleted from the list.
      * @param result the TaskList the task is deleted from.
+     * @return A string indicating that the selected task is deleted.              
      */
     public String deleteTaskText(Task deleteTask, TaskList result) {
-       return (MESSAGE_SEPERATOR + "\n" + MESSAGE_REMOVE_TASK + "\n" + deleteTask +
-                "\n" + String.format(MESSAGE_NUMBER_OF_TASKS, result.getSize()) +
-                "\n" + MESSAGE_SEPERATOR);
+       return (MESSAGE_SEPERATOR + "\n" + MESSAGE_REMOVE_TASK + "\n" + deleteTask 
+                + "\n" + String.format(MESSAGE_NUMBER_OF_TASKS, result.getSize()) 
+                + "\n" + MESSAGE_SEPERATOR);
     }
     
     /**
-     * A function to print all the tasks in the list.
+     * Prints all the tasks in the list.
      * @param tasks the TaskList from which all the tasks should be printed from.
+     * @return A string containing all tasks in the list.
      */
     public String listText(TaskList tasks) {
         return MESSAGE_SEPERATOR + "\n" + MESSAGE_LIST + "\n" + tasks.iterateList()
@@ -81,14 +87,21 @@ public class Ui {
         
     }
 
+    /**
+     * Prints all tasks containing the keyword from the list.
+     * @param tasks the TaskList from which all relevant tasks are taken from.
+     * @param keyword the keyword used to determine if a task is relevant.
+     * @return A string containing all relevant tasks from the list.
+     */
     public String listRelevantTasks(TaskList tasks, String keyword) {
-        return MESSAGE_SEPERATOR + "\n" + MESSAGE_FIND + "\n" + tasks.iterateFind(keyword) +
-                "\n" + MESSAGE_SEPERATOR;
+        return MESSAGE_SEPERATOR + "\n" + MESSAGE_FIND + "\n" + tasks.iterateFind(keyword) 
+                + "\n" + MESSAGE_SEPERATOR;
     }
 
     /**
      * A function to print an error message for the user.
      * @param e the error message.
+     * @return A string representing the error message.
      */
     public String printError(Exception e) {
         return e.toString();

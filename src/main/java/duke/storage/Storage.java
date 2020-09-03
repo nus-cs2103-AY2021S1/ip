@@ -1,4 +1,5 @@
 package duke.storage;
+
 import duke.exception.DukeException;
 import duke.task.*;
 
@@ -22,7 +23,7 @@ public class Storage {
 
 
     /**
-     * A function to load all the tasks saved in the file.
+     * Loads all the tasks saved in the file.
      * @param taskList the TaskList where all the tasks should be loaded into.
      */
     public void pullList(TaskList taskList) {
@@ -74,7 +75,7 @@ public class Storage {
     }
     
     /**
-     * A function to save all the tasks into the file.
+     * Saves all the tasks into the file.
      * @param tasks the TaskList whose tasks should be stored into the file.
      */
     public void storelist(TaskList tasks) {

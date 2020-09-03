@@ -22,7 +22,7 @@ public class Parser {
     }
 
     /**
-     * A function to parse the input from the user and turn it into a command.
+     * Parses the input from the user and turn it into a command.
      * @param nextCommand the string of instruction input by the user
      * @return Command that represents what the user wants Duke to do.
      * @throws DukeException if the user's input is not a valid Command type for Duke.
@@ -54,33 +54,33 @@ public class Parser {
             throw new DukeException("Sorry, I don't know what that means~");
         }
         
-        switch (enumCommand) {
-            case BYE: 
-                next = new ByeCommand();
-                break;
-            case LIST: 
-                next = new ListCommand();
-                break;
-            case DONE: 
-                next = new DoneCommand(nextCommandArr);
-                break;
-            case TODO: 
-                next = new TodoCommand(nextCommandArr);
-                break;
-            case DEADLINE: 
-                next = new DeadlineCommand(nextCommandArr);
-                break;
-            case EVENT: 
-                next = new EventCommand(nextCommandArr);
-                break;
-            case DELETE: 
-                next = new DeleteCommand(nextCommandArr);
-                break;
-            case FIND:
-                next = new FindCommand(nextCommandArr);
-                break;
-            default:
-                throw new DukeException("Sorry, I don't know what that means~");
+        switch (enumCommand) { 
+        case BYE: 
+            next = new ByeCommand();
+            break;
+        case LIST: 
+            next = new ListCommand();
+            break;
+        case DONE: 
+            next = new DoneCommand(nextCommandArr);
+            break; 
+        case TODO: 
+            next = new TodoCommand(nextCommandArr);
+            break;
+        case DEADLINE: 
+            next = new DeadlineCommand(nextCommandArr);
+            break;
+        case EVENT: 
+            next = new EventCommand(nextCommandArr);
+            break;
+        case DELETE: 
+            next = new DeleteCommand(nextCommandArr);
+            break;
+        case FIND:
+            next = new FindCommand(nextCommandArr);
+            break;
+        default:
+            throw new DukeException("Sorry, I don't know what that means~");
         }
         
         return next;
