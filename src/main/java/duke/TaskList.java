@@ -59,8 +59,8 @@ public class TaskList {
         }
         Task t = this.tasks.get(index);
         this.tasks.remove(index);
-        return String.format("Noted. I've removed this task:\n  %s\n" +
-                "Now you have %d tasks in the list.\n", t.toString(), this.tasks.size());
+        return String.format("Noted. I've removed this task:\n  %s\n"
+                + "Now you have %d tasks in the list.\n", t.toString(), this.tasks.size());
     }
 
     /**
@@ -70,8 +70,8 @@ public class TaskList {
      */
     public String addTask(Task t) {
         tasks.add(t);
-        return String.format("Got it. I've added this task:\n  %s\n" +
-                "Now you have %d tasks in the list.\n", t.toString(), this.tasks.size());
+        return String.format("Got it. I've added this task:\n  %s\n"
+                + "Now you have %d tasks in the list.\n", t.toString(), this.tasks.size());
     }
 
     /**
@@ -86,12 +86,12 @@ public class TaskList {
         }
 
         // make String
-        StringBuilder output_msg = new StringBuilder("Here are the matching tasks in your list:\n");
-        for (int i = 0; i < matches.size(); i ++) {
+        StringBuilder outputMsg = new StringBuilder("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < matches.size(); i++) {
             Task t = matches.get(i);
-            output_msg.append(String.format("%d.%s\n", i + 1, t.toString()));
+            outputMsg.append(String.format("%d.%s\n", i + 1, t.toString()));
         }
-        return output_msg.toString();
+        return outputMsg.toString();
     }
 
     /**

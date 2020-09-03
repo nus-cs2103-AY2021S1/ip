@@ -4,12 +4,15 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Duke {
-    public TaskList tasks;
+    private TaskList tasks;
 
     public Duke() {
         this.tasks = new TaskList();
     }
 
+    public TaskList getTasks() {
+        return tasks;
+    }
     /**
      * op() is the main driver of Duke operations,
      * with a while loop that only terminates when user types bye;
@@ -21,17 +24,17 @@ public class Duke {
 
         while (!end) {
             String input = Ui.getInput(sc);
-            String output_msg = "";
+            String outputMsg = "";
             if (Parser.isBye(input)) {
                 end = true;
             } else if (Parser.isList(input)) {
-                output_msg = tasks.summarize();
+                outputMsg = getTasks().summarize();
             } else if (Parser.isDone(input)) {
-                output_msg = tasks.markDone(Parser.getIndex(input));
+                outputMsg = getTasks().markDone(Parser.getIndex(input));
             } else if (Parser.isDelete(input)) {
-                output_msg = tasks.deleteTask(Parser.getIndex(input));
+                outputMsg = getTasks().deleteTask(Parser.getIndex(input));
             } else if (Parser.isFind(input)) {
-                output_msg = tasks.findTasksWith(Parser.getKeyword(input));
+                outputMsg = getTasks().findTasksWith(Parser.getKeyword(input));
             } else {
                 Task taskInput;
                 try {
@@ -40,10 +43,10 @@ public class Duke {
                     System.out.println(Formatter.formatResponse(e.getMessage()));
                     continue;
                 }
-                output_msg = tasks.addTask(taskInput);
+                outputMsg = getTasks().addTask(taskInput);
             }
             if (!end) {
-                FormatPrinter.print(output_msg);
+                FormatPrinter.print(outputMsg);
             }
         }
         System.out.println(Formatter.formatResponse("Bye. Hope to see you again soon!\n"));
@@ -52,9 +55,9 @@ public class Duke {
 
     /**
      * main() reads prevTasks.txt file and create
-     * a Duke object with the tasks previously saved
+     * a Duke object with the getTasks() previously saved
      * Invokes op() function
-     * After all are done, save undeleted tasks and exit.
+     * After all are done, save undeleted getTasks() and exit.
      * @param args command line arguments
      */
     public static void main(String[] args) {
@@ -72,8 +75,8 @@ public class Duke {
 
         Duke hal9000 = new Duke();
         File prevTasks = FileOpener.openFile("prevTasks.txt");
-        TaskLoader.loadTasks(prevTasks, hal9000.tasks);
+        TaskLoader.loadTasks(prevTasks, hal9000.getTasks());
         hal9000.op();
-        TaskStorage.saveTask(prevTasks, hal9000.tasks);
+        TaskStorage.saveTask(prevTasks, hal9000.getTasks());
     }
 }

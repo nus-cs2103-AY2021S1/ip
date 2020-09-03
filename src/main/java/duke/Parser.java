@@ -49,7 +49,7 @@ public class Parser {
      * @param input String of user input
      * @return corresponding Task object
      */
-    public static Task parseTask(String input) throws Exception { // catch duke exception from extractTask and categorize, throw to op()
+    public static Task parseTask(String input) throws Exception {
         String[] parts = input.split(" ");
         TaskType type;
         type = categorize(parts);

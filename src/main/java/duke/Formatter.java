@@ -8,7 +8,7 @@ public class Formatter {
      * @return formatted message
      */
     public static String formatResponse(String outputMsg) {
-        return 
+        return
             "____________________________________________________________\n"
             + outputMsg
             + "____________________________________________________________\n";
