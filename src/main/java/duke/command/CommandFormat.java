@@ -25,4 +25,7 @@ public class CommandFormat {
 
     public static final String FIND_CMD_FORMAT =
             "find <keyword>";
+
+    public static final String HELP_CMD_FORMAT =
+            "help";
 }
