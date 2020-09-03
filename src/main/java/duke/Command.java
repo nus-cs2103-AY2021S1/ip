@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents input commands from user to be executed.
  */

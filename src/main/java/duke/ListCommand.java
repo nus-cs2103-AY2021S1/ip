@@ -1,22 +1,18 @@
-/**
- * Represents a find command to find tasks which match a particular search description.
- */
-public class FindCommand extends Command {
+package duke;
 
-    private String description;
+/**
+ * Represents a list command to list the current stored tasks.
+ */
+public class ListCommand extends Command {
 
     /**
-     * Initializes a find command.
-     *
-     * @param description The search description to find the command.
+     * Initializes a list command.
      */
-    public FindCommand(String description) {
-        this.description = description;
+    public ListCommand() {
     }
 
     /**
-     * Generates a task list with descriptions containing the search description and
-     * prints each task in the list.
+     * Lists the current stored tasks.
      *
      * @param taskList The existing task list.
      * @param ui       The UI instance which handles Duke's user interface.
@@ -24,7 +20,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.processResultTaskList(taskList.generateResultTaskList(description));
+        ui.listStoredTasks(taskList.getStoredTasks());
     }
 
     /**

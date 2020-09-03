@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents command type with input format.
  */

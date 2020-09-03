@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents a task with a description and if task is done.
  */
@@ -31,7 +33,7 @@ public class Task {
      *
      * @return Status of task.
      */
-    protected String getStatus() {
+    public String getStatus() {
         return (isDone ? "done" : "not done");
     }
 
@@ -40,7 +42,7 @@ public class Task {
      *
      * @return Task description.
      */
-    protected String getDescription() {
+    public String getDescription() {
         return description;
     }
 

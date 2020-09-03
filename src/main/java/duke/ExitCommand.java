@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents an exit command to exit the program.
  */

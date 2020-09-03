@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents an add command to add a task into the current list of stored tasks.
  */

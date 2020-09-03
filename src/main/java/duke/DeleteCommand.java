@@ -1,30 +1,32 @@
+package duke;
+
 /**
- * Represents a done command to mark a task as complete.
+ * Represents a delete command to delete a particular stored task.
  */
-public class DoneCommand extends Command {
+public class DeleteCommand extends Command {
 
     private int taskNumber;
 
     /**
-     * Initializes a done command.
+     * Initializes a delete command.
      *
-     * @param taskNumber The task number of task to be marked as complete.
+     * @param taskNumber The task number of task to be deleted.
      */
-    public DoneCommand(int taskNumber) {
+    public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 
     /**
-     * Marks a task as complete, prints the done message, then updates the tasks in the storage.
+     * Deletes a task, prints the delete message, then updates the tasks in the storage.
      *
      * @param taskList The existing task list.
      * @param ui       The UI instance which handles Duke's user interface.
      * @param storage  The existing storage for Duke.
-     * @throws DukeException When an error occurs while marking the task as complete.
+     * @throws DukeException When an error occurs while deleting the task.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.processDoneMessage(taskList.markTaskAsDone(taskNumber));
+        ui.processDeleteMessage(taskList.deleteTask(taskNumber), taskList.getCount());
         storage.updateTasks(taskList);
     }
 

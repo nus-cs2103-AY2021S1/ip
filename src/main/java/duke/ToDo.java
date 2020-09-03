@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents a task with a description.
  */

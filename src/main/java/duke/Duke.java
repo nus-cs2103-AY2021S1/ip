@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Duke, more commonly known as Duck, is a Personal Assistant Chat Bot that
  * helps a person to keep track of various tasks.
