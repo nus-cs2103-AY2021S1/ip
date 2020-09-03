@@ -12,11 +12,11 @@ public class EventCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList tasks) {
         // Do TaskList stuff
         tasks.add(toBeAdded);
         // Do UI stuff
-        Ui.printAdd(toBeAdded.getDescription() + "\n", tasks.length());
+        return Ui.printAdd(toBeAdded.getDescription() + "\n", tasks.length());
         // Do storage stuff
         // tbc
     }

@@ -11,8 +11,8 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
-        Ui.exitMessage();
+    public String execute(TaskList tasks) {
+        return Ui.exitMessage();
         // do storage stuff
     }
 

@@ -12,7 +12,7 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList tasks) {
         TaskList res = new TaskList();
         String toSearch = cmd.replaceFirst("find\\s+", "");
         for (Task task : tasks.thingsToDo) {
@@ -21,7 +21,7 @@ public class FindCommand implements Command {
             }
         }
         // do ui stuff
-        Ui.printList(res.printTodoList());
+        return Ui.printList(res.printTodoList());
         // do storage stuff
         // do tasklist stuff
     }

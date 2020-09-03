@@ -4,6 +4,7 @@ import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.ErrorCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
@@ -37,7 +38,7 @@ public class Parser {
             Task toAdd = Parser.parseEvent(echo);
             return new EventCommand(toAdd);
         } else {
-            throw new DukeException("Invalid command.");
+            return new ErrorCommand("Input not recognized.");
         }
     }
 

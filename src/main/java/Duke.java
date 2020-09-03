@@ -31,12 +31,13 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
+    TaskList tasks = new TaskList();
+    Storage storage = new Storage();
+    boolean isFinished = false;
+
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        TaskList tasks = new TaskList();
-        Storage storage = new Storage();
-        boolean isFinished = false;
 
 
 
@@ -134,8 +135,17 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String echo) {
+        Command command = null;
+        try {
+            command = Parser.parseCommand(echo, tasks);
+        } catch (DukeException | ParseException e) {
+            System.out.println(e);
+        }
+        String output = command.execute(tasks);
+        // System.out.println(tasks);
+        // storage.save(tasks);
+        return output;
     }
 
 
