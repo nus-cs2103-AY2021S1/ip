@@ -22,7 +22,7 @@ public class Duke {
     public void execute(Command command) {
         String output = "";
         int commandType = command.getCommandType();
-        boolean exit = false;
+        boolean print = true;
         if (commandType == Command.LIST) {
             output += "Here are the tasks in your list:";
             for (int i = 0; i < taskList.size(); i++) {
@@ -42,10 +42,11 @@ public class Duke {
             }
             output += "\nNow you have " + taskList.size() + " tasks in the list.";
         } else if (commandType == Command.EXIT) {
+            System.out.println("in exit case");
             storage.save(taskList);
-            exit = true;
+            print = false;
         } else if (commandType == Command.INVALID) {
-            runLoopUntilExit();
+            print = false;
         } else {
             Task newTask;
             AdditionalInfo info = command.getAdditionalInfo();
@@ -60,7 +61,7 @@ public class Duke {
             output += "Got it. I've added this task:\n  " + newTask;
             output += "\nNow you have " + taskList.size() + " tasks in the list.";
         }
-        if (!exit) {
+        if (print) {
             ui.printMessage(output);
         }
     }
