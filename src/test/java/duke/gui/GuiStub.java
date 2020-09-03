@@ -1,6 +1,7 @@
 package duke.gui;
 
 import duke.Duke;
+import duke.data.DukeCommandSet;
 import duke.task.Task;
 
 public class GuiStub extends GuiResponse {
@@ -21,23 +22,33 @@ public class GuiStub extends GuiResponse {
         sideEffects.guiEcho = true;
     }
 
+    @Override
     public void reportCurrentTasks() {
         sideEffects.guiReportCurrentTasks = true;
     }
 
+    @Override
     public void reportNewTask(Task task) {
         sideEffects.guiReportNewTask = true;
     }
 
+    @Override
     public void reportDoneTask(Task task) {
         sideEffects.guiReportDoneTask = true;
     }
 
+    @Override
     public void reportDeleteTask(Task task) {
         sideEffects.guiReportDeleteTask = true;
     }
 
+    @Override
     public void reportExit() {
         sideEffects.guiReportExit = true;
+    }
+
+    @Override
+    public void showAllCommands(DukeCommandSet commandSet) {
+        sideEffects.guiShowAllCommands = true;
     }
 }
