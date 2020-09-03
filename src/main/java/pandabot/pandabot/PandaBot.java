@@ -70,6 +70,11 @@ public class PandaBot {
         }
     }
 
+    /**
+     * Returns a String representation of the welcome message to be displayed onto the GUI
+     *
+     * @return a String representation of the welcome message
+     */
     public String displayWelcome() {
         return ui.displayWelcomeMessage();
     }

@@ -9,7 +9,7 @@ import pandabot.ui.Ui;
  * that matches the search word.
  */
 public class FindCommand extends Command {
-    private final  String toMatch;
+    private final String toMatch;
 
     /**
      * Creates a FindCommand object.

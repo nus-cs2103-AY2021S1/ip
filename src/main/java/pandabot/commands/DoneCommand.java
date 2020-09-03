@@ -10,7 +10,7 @@ import pandabot.ui.Ui;
  * Represents the done command which allows users to mark a task as done.
  */
 public class DoneCommand extends Command {
-    private int taskNum;
+    private final int taskNum;
 
     /**
      * Creates a DoneCommand object.
@@ -28,8 +28,8 @@ public class DoneCommand extends Command {
      * @param tasks the current TaskList object being used
      * @param ui the current Ui object being used
      * @param storage the current Storage object being used
-     * @throws PandaBotException If any errors occurs when executing the command
      * @return the String representation to display
+     * @throws PandaBotException If any errors occurs when executing the command
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws PandaBotException {

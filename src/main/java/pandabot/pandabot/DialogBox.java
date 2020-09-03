@@ -1,5 +1,8 @@
 package pandabot.pandabot;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,9 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-import java.io.IOException;
-import java.util.Collections;
-
+/**
+ * Represents a dialog box that is used to display messages in the PandaBot GUI.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -44,11 +47,25 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox from the user with the user's input.
+     *
+     * @param text the message from the user
+     * @param img the user's display picture
+     * @return a DialogBox with the user's input
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    /**
+     * Returns a DialogBox from PandaBot with PandaBot's messages.
+     *
+     * @param text the message from PandaBot
+     * @param img PandaBot's display picture
+     * @return a DialogBox with PandaBot's messages
+     */
+    public static DialogBox getPandaBotDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

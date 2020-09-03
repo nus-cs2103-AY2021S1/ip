@@ -23,8 +23,7 @@ public class Ui {
      * Prints the welcome logo.
      */
     public void printWelcome() {
-        String logo =
-                " ____                    _\n"
+        String logo = " ____                    _\n"
                         + "|  _ \\                  | |\n"
                         + "| |_| |___  _ _  __  ___| | ___  _\n"
                         + "| ___/  _ \\| | |/  |/ _   |/ _ \\| |\n"
@@ -34,6 +33,11 @@ public class Ui {
         System.out.println(logo + displayWelcomeMessage());
     }
 
+    /**
+     * Returns a String representation of the welcome message.
+     *
+     * @return a String representation of the welcome message.
+     */
     public String displayWelcomeMessage() {
         return "Hello! I'm PandaBot.\n" + "What can I do for you?\n";
     }
@@ -106,8 +110,8 @@ public class Ui {
      * @return a String representation of the delete message
      */
     public String displayOnDelete(Task task, int numOfTasks) {
-        return "Will do! I've removed this task:\n" + task + "\n" +
-                "Now you have " + numOfTasks + " task(s) in this list.";
+        return "Will do! I've removed this task:\n" + task + "\n"
+                + "Now you have " + numOfTasks + " task(s) in this list.";
     }
 
     /**
@@ -118,8 +122,8 @@ public class Ui {
      * @return a String representation of the add task message
      */
     public String displayOnAddTask(Task task, int numOfTasks) {
-        return "Noted! I've added this task:\n" + task.toString() + "\n" +
-                "Now you have " + numOfTasks + " task(s) in this list.";
+        return "Noted! I've added this task:\n" + task.toString() + "\n"
+                + "Now you have " + numOfTasks + " task(s) in this list.";
     }
 
     /**

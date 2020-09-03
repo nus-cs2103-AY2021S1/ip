@@ -15,7 +15,7 @@ public class ByeCommand extends Command {
      *  @param tasks the current TaskList object being used
      * @param ui the current Ui object being used
      * @param storage the current Storage object being used
-     * @return
+     * @return the String representation to display
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

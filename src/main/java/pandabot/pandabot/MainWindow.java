@@ -30,20 +30,29 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.jpg"));
     private final Image pandaBotImage = new Image(this.getClass().getResourceAsStream("/images/panda notetaker.png"));
 
+    /**
+     * Initializes the GUI window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets up PandaBot in the GUI. A welcome message will be displayed.
+     *
+     * @param pandaBot the PandaBot program to run
+     */
     public void setPandaBot(PandaBot pandaBot) {
         this.pandaBot = pandaBot;
         // show greetings using a dialog box
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(pandaBot.displayWelcome(), pandaBotImage));
+        dialogContainer.getChildren().add(DialogBox.getPandaBotDialog(pandaBot.displayWelcome(), pandaBotImage));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing PandaBot's reply and then appends them
+     * to the dialog container. Clears the user input after processing. Exits Application when the bye message
+     * is received.
      */
     @FXML
     private void handleUserInput() {
@@ -51,7 +60,7 @@ public class MainWindow extends AnchorPane {
         String response = pandaBot.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, pandaBotImage)
+                DialogBox.getPandaBotDialog(response, pandaBotImage)
         );
         userInput.clear();
 

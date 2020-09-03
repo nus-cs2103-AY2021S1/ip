@@ -27,14 +27,15 @@ public class DeleteCommand extends Command {
      * @param tasks the current TaskList object being used
      * @param ui the current Ui object being used
      * @param storage the current Storage object being used
-     * @throws PandaBotException If any errors occurs when executing the command
      * @return the String representation to display
+     * @throws PandaBotException If any errors occurs when executing the command
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws PandaBotException {
         // delete task
         Task t = tasks.getTaskAt(taskNum);
         tasks.deleteTask(taskNum);
+
         // save
         storage.write(tasks.getTaskList());
         return ui.displayOnDelete(t, tasks.size());
