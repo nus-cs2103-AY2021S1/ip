@@ -22,9 +22,15 @@ public class ToDoCommand implements Command {
      * @throws MissingDescriptionException If the todo command is missing a description.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        String description = COMMAND.substring(4).trim();
+<<<<<<< HEAD
+        String description = command.substring(4).trim();
         if (description.length() == 0) {
+=======
 
+        String[] commandArgs = COMMAND.split(" ");
+
+        if (commandArgs.length != 2) {
+>>>>>>> branch-A-CodingStandard
             throw new MissingDescriptionException();
         } else {
             ToDo t = new ToDo(description, false);

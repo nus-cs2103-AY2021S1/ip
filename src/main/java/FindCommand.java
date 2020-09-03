@@ -14,7 +14,7 @@ public class FindCommand implements Command {
         }
         String query = command.substring(4).trim();
         ArrayList<Task> tasks = new ArrayList<>();
-        for (Task t : taskList.tasks) {
+        for (Task t : taskList.TASKS) {
             if (t.description.matches("(.*)" + query + "(.*)")) {
                 tasks.add(t);
             }
