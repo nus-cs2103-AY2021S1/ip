@@ -16,10 +16,10 @@ public class DeleteCommand extends Command {
     /**
      * Constructor.
      *
-     * @param taskDeleted The index of the task to be deleted.
+     * @param taskIndex The index of the task to be deleted.
      */
-    public DeleteCommand(int taskDeleted) {
-        this.taskIndex = taskDeleted;
+    public DeleteCommand(int taskIndex) {
+        this.taskIndex = taskIndex;
     }
 
     /**

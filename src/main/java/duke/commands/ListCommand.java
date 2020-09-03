@@ -3,6 +3,7 @@ package duke.commands;
 import static duke.utils.Messages.MESSAGE_LIST;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
@@ -32,7 +33,7 @@ public class ListCommand extends Command {
      * @param initialString The initial String that should be at the start of the result.
      * @return The String starting with the initialString followed by the numbered list of tasks.
      */
-    public static String tasksToString(ArrayList<Task> tasks, String initialString) {
+    public static String tasksToString(List<Task> tasks, String initialString) {
         StringBuilder str = new StringBuilder(initialString);
         for (int i = 0; i < tasks.size(); i++) {
             str.append("\t ").append(i + 1).append(".")

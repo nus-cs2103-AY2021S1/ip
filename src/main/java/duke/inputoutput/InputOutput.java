@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class InputOutput {
 
-    private static String line = "\t" + "_".repeat(75);
+    private static final String LINE = "\t" + "_".repeat(75);
     private Scanner sc;
 
     /**
@@ -25,7 +25,7 @@ public class InputOutput {
      * Displays a line to the user.
      */
     public void showLine() {
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     private void showWelcome() {

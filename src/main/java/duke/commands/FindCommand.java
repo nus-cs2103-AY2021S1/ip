@@ -41,7 +41,7 @@ public class FindCommand extends Command {
             }
         }
         String response;
-        if (matchedTasks.size() == 0) {
+        if (matchedTasks.isEmpty()) {
             response = MESSAGE_FIND_NO_MATCH;
         } else {
             response = ListCommand.tasksToString(matchedTasks, MESSAGE_FIND);
