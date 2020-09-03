@@ -9,15 +9,16 @@
     -fx-background-color: #1a1c1e;
 }
 
-.button {
+.sendButton {
     -fx-background-color : #05071F;
     -fx-text-fill : #e7e5e5;
 }
-.button:hover {
+
+.sendButton:hover {
     -fx-background-color : #10165F;
 }
 
-.button:pressed{
+.sendButton:pressed{
     -fx-background-color : #1620A1;
 }
 
