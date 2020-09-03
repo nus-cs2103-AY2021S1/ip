@@ -27,7 +27,7 @@ public class DeleteCommandTest {
         TaskListStub taskListStub = new TaskListStub();
         taskListStub.addToList(stub);
 
-        deleteCommand.execute(taskListStub, new UiManager(), null);
+        deleteCommand.execute(taskListStub, new UiManager(), null, false);
 
         String expected = "Alright! I'll delete this task!\n"
                 + "Take note that this is irreversible!\n"
@@ -46,10 +46,10 @@ public class DeleteCommandTest {
         taskListStub.addToList(stub);
 
         assertThrows(InvalidTaskIndexException.class, (
-        ) -> deleteCommandLessThanZero.execute(taskListStub, new UiManager(), null));
+        ) -> deleteCommandLessThanZero.execute(taskListStub, new UiManager(), null, false));
 
         DeleteCommand deleteCommandLargerThanIndex = new DeleteCommand(100);
         assertThrows(InvalidTaskIndexException.class, (
-        ) -> deleteCommandLargerThanIndex.execute(taskListStub, new UiManager(), null));
+        ) -> deleteCommandLargerThanIndex.execute(taskListStub, new UiManager(), null, false));
     }
 }

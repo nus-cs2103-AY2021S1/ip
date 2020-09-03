@@ -20,14 +20,20 @@ public class AddCommand extends Command {
 
     /**
      * Adds user's <code>DukeTask</code> to the <code>TaskList</code> and prints feedback.
+     * If the task is a form of GUI command, sets response to the result instead.
      *
      * @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
      * @param uiManager      <code>UIManager</code> object to handle printing feedback to user.
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
+     * @param isGuiTask      <code>boolean</code> object to denote GUI task
      */
     @Override
-    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager) {
+    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager, boolean isGuiTask) {
         taskList.addToList(task);
-        uiManager.printAddTask(task, taskList.getSize());
+        if (isGuiTask) {
+            this.response = uiManager.getAddTask(task, taskList.getSize());
+        } else {
+            uiManager.printAddTask(task, taskList.getSize());
+        }
     }
 }

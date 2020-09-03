@@ -20,14 +20,16 @@ public class ExitCommand extends Command {
     /**
      * Saves user's <code>DukeTask</code> from the <code>TaskList</code> and prints feedback.
      * Saving of data is executed by <code>StorageManager</code>.
+     * If the task is a form of GUI command, sets response to the result instead.
      *
      * @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
      * @param uiManager      <code>UIManager</code> object to handle printing feedback to user.
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
+     * @param isGuiTask      <code>boolean</code> object to denote GUI task
      * @throws IOException If saving data fails.
      */
     @Override
-    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager)
+    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager, boolean isGuiTask)
             throws IOException {
         storageManager.saveData(taskList.getTaskList());
     }

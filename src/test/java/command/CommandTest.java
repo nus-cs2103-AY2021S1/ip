@@ -39,7 +39,7 @@ public class CommandTest {
         // After this all System.out.println() statements will come to outContent stream.
         // This is a generic test so the inputs are ignored.
         // Will test more in detail for the specific children of Command
-        testCommand.execute(null, null, null);
+        testCommand.execute(null, null, null, false);
         String expectedOutput = "Testing Command\n";
 
         // Do the actual assertion.

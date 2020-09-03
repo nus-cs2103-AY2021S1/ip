@@ -29,7 +29,7 @@ public class DoneCommandTest {
         TaskListStub taskListStub = new TaskListStub();
         taskListStub.addToList(stub);
 
-        command.execute(taskListStub, new UiManager(), null);
+        command.execute(taskListStub, new UiManager(), null, false);
 
         String expected = "Alright! I'll mark this task as done!\n"
                 + "[✓] Testing DukeTaskStub\n"
@@ -49,9 +49,9 @@ public class DoneCommandTest {
         DoneCommand moreThanIndexCommand = new DoneCommand(100);
 
         assertThrows(InvalidTaskIndexException.class, (
-        ) -> lessThanZeroCommand.execute(taskListStub, new UiManager(), null));
+        ) -> lessThanZeroCommand.execute(taskListStub, new UiManager(), null, false));
         assertThrows(InvalidTaskIndexException.class, (
-        ) -> moreThanIndexCommand.execute(taskListStub, new UiManager(), null));
+        ) -> moreThanIndexCommand.execute(taskListStub, new UiManager(), null, false));
 
     }
 }

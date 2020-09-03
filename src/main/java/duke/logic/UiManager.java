@@ -27,7 +27,15 @@ public class UiManager {
      * Prints introduction to Duke.
      */
     public void printDukeIntro() {
-        System.out.println(UserInteractionText.INTRODUCTION);
+        System.out.println(UserInteractionText.INTRODUCTION_WITH_LINE);
+    }
+
+    /**
+     * Returns String representation of Duke intro
+     * @return String
+     */
+    public String getDukeIntro() {
+        return UserInteractionText.INTRODUCTION.value;
     }
 
     /**
@@ -38,10 +46,22 @@ public class UiManager {
     }
 
     /**
+     * Returns String representation of Duke instructions
+     * @return String
+     */
+    public String getDukeInstructions() {
+        return UserInteractionText.INSTRUCTIONS.value;
+    }
+
+    /**
      * Prints outro to Duke.
      */
     public void printDukeOutro() {
-        System.out.println(UserInteractionText.OUTRO);
+        System.out.println(UserInteractionText.OUTRO_WITH_LINE);
+    }
+
+    public String getDukeOutro() {
+        return UserInteractionText.OUTRO.value;
     }
 
     /**
@@ -50,6 +70,16 @@ public class UiManager {
     public void printAddTask(DukeTask task, int size) {
         System.out.println("Task Added: " + task.toString());
         printTaskStatus(size);
+    }
+
+    /**
+     * Returns a String representation of add Task response
+     * @param task DukeTask
+     * @param size number of tasks left
+     * @return String
+     */
+    public String getAddTask(DukeTask task, int size) {
+        return "Task Added: " + task.toString() + "\n" + getTaskStatus(size);
     }
 
     /**
@@ -62,10 +92,26 @@ public class UiManager {
     }
 
     /**
+     * Returns a String representation of delete Task response
+     * @param task DukeTask
+     * @param size number of tasks left
+     * @return String
+     */
+    public String getDeleteTask(DukeTask task, int size) {
+        return "Alright! I'll delete this task!\n" + "Take note that this is irreversible!" + "\n"
+                + task.toString() + "\n"
+                + getTaskStatus(size);
+    }
+
+    /**
      * Prints when users invoke <code>ListCommand</code>.
      */
     public void printNumberedTask(DukeTask task, int num) {
         System.out.println((num + 1) + ". " + task);
+    }
+
+    public String getNumberedTask(DukeTask task, int num) {
+        return (num + 1) + ". " + task;
     }
 
     /**
@@ -78,6 +124,18 @@ public class UiManager {
     }
 
     /**
+     * Returns a String representation of markAsDone
+     * @param task DukeTask
+     * @param size Number of tasks in list
+     * @return String
+     */
+    public String getMarkAsDone(DukeTask task, int size) {
+        return "Alright! I'll mark this task as done!" + "\n"
+                + task.toString() + "\n"
+                + getTaskStatus(size);
+    }
+
+    /**
      * Prints when FindCommand does not find Task
      */
     public void printFindCannotBeFound(String keyword) {
@@ -85,10 +143,28 @@ public class UiManager {
     }
 
     /**
+     * Returns String representation of findCannotBeFound
+     * @param keyword String containing keyword
+     * @return String
+     */
+    public String getFindCannotBeFound(String keyword) {
+        return "There are no tasks containing " + "\"" + keyword + "\"!";
+    }
+
+    /**
      * Prints Tasks found by FindCommand
      */
     public void printFindFilteredList(String keyword, boolean isPlural) {
         System.out.println((isPlural ? "Tasks" : "Task") + " with the keyword: " + "\"" + keyword + "\"");
+    }
+
+    /**
+     * Returns String representation of findFilteredList
+     * @param keyword String containing keyword
+     * @return String
+     */
+    public String getFindFilteredList(String keyword, boolean isPlural) {
+        return (isPlural ? "Tasks" : "Task") + " with the keyword: " + "\"" + keyword + "\"";
     }
 
     /**
@@ -104,6 +180,15 @@ public class UiManager {
     public void printTaskStatus(int size) {
         String taskSize = size == 1 ? " task" : " tasks";
         System.out.println("You now have " + size + taskSize);
+    }
+
+    /**
+     * Returns a String representation of number of tasks in user's list.
+     * @param size number of tasks remaining
+     * @return String
+     */
+    public String getTaskStatus(int size) {
+        return "You now have " + size + (size == 1 ? " task" : " tasks");
     }
 
     /**
@@ -168,11 +253,15 @@ public class UiManager {
     private enum UserInteractionText {
         LINE("____________________________________________________________"), // Single Line for divider{
 
-        INTRODUCTION(LINE + "\n"
+        INTRODUCTION_WITH_LINE(LINE + "\n"
                 + "Hello! I am Duke, your Personal Assistant!\n"
                 + "What can I do for you today?\n"
                 + "Type \"help\" to see the available instructions!\n"
                 + LINE), // END OF INTRODUCTIONS)
+
+        INTRODUCTION("Hello! I am Duke, your Personal Assistant!\n"
+                + "What can I do for you today?\n"
+                + "Type \"help\" to see the available instructions!"),
 
         INSTRUCTIONS("How to use Duke:\n"
                 + InstructionGuide.Level
@@ -181,8 +270,10 @@ public class UiManager {
                 + InstructionGuide.TaskInputInstruction
                 + InstructionGuide.TaskInputSpecification), // END OF INSTRUCTIONS)
 
-        OUTRO("Goodbye. Hope to see you soon!\n"
-                + CommonString.LOGO + LINE);
+        OUTRO_WITH_LINE("Goodbye. Hope to see you soon!\n"
+                + CommonString.LOGO + LINE),
+
+        OUTRO("Goodbye. Hope to see you soon!");
 
         private final String value;
 
