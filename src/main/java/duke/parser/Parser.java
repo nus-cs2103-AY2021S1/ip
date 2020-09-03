@@ -77,6 +77,8 @@ public class Parser {
                 throw new InvalidFormatDateException();
             }
         }
+        assert date != null;
+        assert time != null;
         try {
             int year = Integer.parseInt(date[0]);
             int month = Integer.parseInt(date[1]);

@@ -19,7 +19,7 @@
          prefWidth="900.0" 
          xmlns="http://javafx.com/javafx/8.0.171" 
          xmlns:fx="http://javafx.com/fxml/1" 
-         fx:controller="duke.MainWindow"
+         fx:controller="duke.ui.visualUI.MainWindow"
 >
     <children>
         <GridPane fx:id="GridPane" 

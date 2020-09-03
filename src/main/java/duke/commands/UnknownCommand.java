@@ -3,7 +3,7 @@ package duke.commands;
 import duke.exception.UnknownCommandException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import duke.ui.textUI.Ui;
 
 /**
  * Class that simulates an unknown command.
