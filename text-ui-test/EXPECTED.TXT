@@ -1,146 +1,129 @@
-    _______________________________________________________________________________________
-    Hello! I'm Dobby
-    You can use the following commands in this chat bot:
-      todo _description_
-      deadline _description_ /by dd/mm/yyyy hhhh(optional)
-      event _description_ /at dd/mm/yyyy hhhh(optional)
-      list
-      done _task_number_
-      delete _task_number_
-      scheduled dd/mm/yyyy
-      find _keyword_
-      findtype _T/D/E_
-      bye
-    How can I help you?
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    1. [D][✘] ip task for week 3 (by: Aug 27 2020 11:59 pm)
-    2. [E][✘] lecture (at: Aug 28 2020 4:00 pm)
-    3. [T][✘] push new levels to github
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Please enter a task number after done.
-      done _task_number_
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Please enter a task number after done.
-      done _task_number_
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Task number must be within the correct range.
-      done _task_number_
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Great! I've marked this task as done:
-      [D][✓] ip task for week 3 (by: Aug 27 2020 11:59 pm)
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    1. [D][✓] ip task for week 3 (by: Aug 27 2020 11:59 pm)
-    2. [E][✘] lecture (at: Aug 28 2020 4:00 pm)
-    3. [T][✘] push new levels to github
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Please enter a task number after delete.
-      delete _task_number_
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Please enter a task number after delete.
-      delete _task_number_
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Task number must be within the correct range.
-      delete _task_number_
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Noted. I've removed this task:
-      [D][✓] ip task for week 3 (by: Aug 27 2020 11:59 pm)
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Noted. I've removed this task:
-      [E][✘] lecture (at: Aug 28 2020 4:00 pm)
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Noted. I've removed this task:
-      [T][✘] push new levels to github
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    The task list is currently empty.
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Description cannot be empty. Please try again.
-      deadline _description_ /by dd/mm/yyyy hhhh(optional)
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Description cannot be empty. Please try again.
-      deadline _description_ /by dd/mm/yyyy hhhh(optional)
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Deadline details cannot be empty. Please try again.
-      deadline _description_ /by dd/mm/yyyy hhhh(optional)
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Great! I've added the following task:
-      [D][✘] ip task for week 3 (by: Aug 27 2020 11:59 pm)
-    Now you have 1 task in the list.
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    1. [D][✘] ip task for week 3 (by: Aug 27 2020 11:59 pm)
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Description cannot be empty. Please try again.
-      event _description_ /at dd/mm/yyyy hhhh(optional)
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Description cannot be empty. Please try again.
-      event _description_ /at dd/mm/yyyy hhhh(optional)
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Schedule details cannot be empty. Please try again.
-      event _description_ /at dd/mm/yyyy hhhh(optional)
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Great! I've added the following task:
-      [E][✘] lecture (at: Aug 28 2020 4:00 pm)
-    Now you have 2 tasks in the list.
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    1. [D][✘] ip task for week 3 (by: Aug 27 2020 11:59 pm)
-    2. [E][✘] lecture (at: Aug 28 2020 4:00 pm)
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Description cannot be empty. Please try again.
-      todo _description_
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Great! I've added the following task:
-      [T][✘] push new levels to github
-    Now you have 3 tasks in the list.
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    1. [D][✘] ip task for week 3 (by: Aug 27 2020 11:59 pm)
-    2. [E][✘] lecture (at: Aug 28 2020 4:00 pm)
-    3. [T][✘] push new levels to github
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    1. [E][✘] lecture (at: Aug 28 2020 4:00 pm)
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Keyword required cannot be empty. Please try again.
-      find _keyword_
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    There are no tasks of containing the word - nomatch
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    1. [E][✘] lecture (at: Aug 28 2020 4:00 pm)
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Incorrect usage of command. Please try again.
-      findtype _T/D/E_
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    1. [D][✘] ip task for week 3 (by: Aug 27 2020 11:59 pm)
-    _______________________________________________________________________________________
-    _______________________________________________________________________________________
-    Goodbye. Hope to see you again soon!
-    _______________________________________________________________________________________
+Hello! I'm Dobby.
+You can use the following commands in this chat bot:
+  todo _description_
+  deadline _description_ /by dd/mm/yyyy hhhh(optional)
+  event _description_ /at dd/mm/yyyy hhhh(optional)
+  list
+  done _task_number_
+  delete _task_number_
+  scheduled dd/mm/yyyy
+  find _keyword_
+  findtype _T/D/E_
+  bye
+How can I help you?
+
+1. [D][✘] ip task for week 3 (by: Aug 27 2020 11:59 pm)
+2. [E][✘] lecture (at: Aug 28 2020 4:00 pm)
+3. [T][✘] push new levels to github
+
+Incorrect usage of command.
+Please enter a task number after done.
+  done _task_number_
+
+Incorrect usage of command.
+Please enter a task number after done.
+  done _task_number_
+
+Incorrect usage of command.
+Task number must be within the correct range.
+  done _task_number_
+
+Great! I've marked this task as done:
+  [D][✓] ip task for week 3 (by: Aug 27 2020 11:59 pm)
+
+1. [D][✓] ip task for week 3 (by: Aug 27 2020 11:59 pm)
+2. [E][✘] lecture (at: Aug 28 2020 4:00 pm)
+3. [T][✘] push new levels to github
+
+Incorrect usage of command.
+Please enter a task number after delete.
+  delete _task_number_
+
+Incorrect usage of command.
+Please enter a task number after delete.
+  delete _task_number_
+
+Incorrect usage of command.
+Task number must be within the correct range.
+  delete _task_number_
+
+Noted. I've removed this task:
+  [D][✓] ip task for week 3 (by: Aug 27 2020 11:59 pm)
+
+Noted. I've removed this task:
+  [E][✘] lecture (at: Aug 28 2020 4:00 pm)
+
+Noted. I've removed this task:
+  [T][✘] push new levels to github
+
+The task list is currently empty.
+
+Incorrect usage of command.
+Description cannot be empty. Please try again.
+  deadline _description_ /by dd/mm/yyyy hhhh(optional)
+
+Incorrect usage of command.
+Description cannot be empty. Please try again.
+  deadline _description_ /by dd/mm/yyyy hhhh(optional)
+
+Incorrect usage of command.
+Deadline details cannot be empty. Please try again.
+  deadline _description_ /by dd/mm/yyyy hhhh(optional)
+
+Great! I've added the following task:
+  [D][✘] ip task for week 3 (by: Aug 27 2020 11:59 pm)
+Now you have 1 task in the list.
+
+1. [D][✘] ip task for week 3 (by: Aug 27 2020 11:59 pm)
+
+Incorrect usage of command.
+Description cannot be empty. Please try again.
+  event _description_ /at dd/mm/yyyy hhhh(optional)
+
+Incorrect usage of command.
+Description cannot be empty. Please try again.
+  event _description_ /at dd/mm/yyyy hhhh(optional)
+
+Incorrect usage of command.
+Schedule details cannot be empty. Please try again.
+  event _description_ /at dd/mm/yyyy hhhh(optional)
+
+Great! I've added the following task:
+  [E][✘] lecture (at: Aug 28 2020 4:00 pm)
+Now you have 2 tasks in the list.
+
+1. [D][✘] ip task for week 3 (by: Aug 27 2020 11:59 pm)
+2. [E][✘] lecture (at: Aug 28 2020 4:00 pm)
+
+Incorrect usage of command.
+Description cannot be empty. Please try again.
+  todo _description_
+
+Great! I've added the following task:
+  [T][✘] push new levels to github
+Now you have 3 tasks in the list.
+
+1. [D][✘] ip task for week 3 (by: Aug 27 2020 11:59 pm)
+2. [E][✘] lecture (at: Aug 28 2020 4:00 pm)
+3. [T][✘] push new levels to github
+
+1. [E][✘] lecture (at: Aug 28 2020 4:00 pm)
+
+
+Incorrect usage of command.
+Keyword required cannot be empty. Please try again.
+  find _keyword_
+
+There are no tasks of containing the word - nomatch
+
+1. [E][✘] lecture (at: Aug 28 2020 4:00 pm)
+
+
+Incorrect usage of command. Please try again.
+  findtype _T/D/E_
+
+1. [D][✘] ip task for week 3 (by: Aug 27 2020 11:59 pm)
+
+Goodbye.
+Hope to see you again soon!
+

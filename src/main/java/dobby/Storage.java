@@ -26,7 +26,7 @@ public class Storage {
      */
     public void readFile() {
         try {
-            File file = new File(this.filePath);
+            File file = new File(filePath);
             Scanner scanner = new Scanner(file);
 
             while (scanner.hasNext()) {
@@ -34,11 +34,11 @@ public class Storage {
                 try {
                     this.tasks.createFromStorage(str);
                 } catch (ParseException e) { // should never be called
-                    Ui.reply("\n    " + e.getMessage() + "\n    ");
+                    Ui.reply(e.getMessage());
                 }
             }
         } catch (FileNotFoundException e) {
-            Ui.reply("\n    " + e.getMessage() + "\n    ");
+            Ui.reply(e.getMessage());
             System.exit(1);
         }
     }
@@ -61,7 +61,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            Ui.reply("\n    " + e.getMessage() + "\n    ");
+            Ui.reply(e.getMessage());
         }
     }
 }

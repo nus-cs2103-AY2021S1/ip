@@ -20,11 +20,11 @@ public class TaskListTest {
         }
 
         String allTasks = tasks.getListedTasks();
-        assertEquals("\n    1. [D][\u2718] ip task for week 3 (by: Aug 27 2020 11:59 pm)\n    ", allTasks);
+        assertEquals("1. [D][\u2718] ip task for week 3 (by: Aug 27 2020 11:59 pm)", allTasks);
 
         LocalDate date = LocalDate.parse("2020-08-27");
         String scheduledTasks = tasks.getScheduledTasks(date);
-        assertEquals("\n    1. [D][\u2718] ip task for week 3 (by: Aug 27 2020 11:59 pm)\n    ", scheduledTasks);
+        assertEquals("1. [D][\u2718] ip task for week 3 (by: Aug 27 2020 11:59 pm)\n", scheduledTasks);
     }
 
 }

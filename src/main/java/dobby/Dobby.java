@@ -13,16 +13,9 @@ public class Dobby {
     private Storage storage;
     private Ui ui;
     private Parser parser;
+    private boolean isInitialized = false;
 
-    /**
-     * Constructor
-     * @param filePath
-     */
-    public Dobby (String filePath) {
-        this.tasks = new TaskList();
-        parser = new Parser(this.tasks);
-        this.storage = new Storage(filePath, tasks);
-        ui = new Ui();
+    public Dobby() {
     }
 
     /**
@@ -33,7 +26,6 @@ public class Dobby {
         ui.greet();
 
         Scanner scanner = new Scanner(System.in);
-        this.storage.readFile();
 
         while (true) {
             String text = ui.getInput();
@@ -50,10 +42,9 @@ public class Dobby {
     }
 
     /**
-     * Main function
-     * @param args
+     * Loads the dobbylist storage file and initializes other components of package
      */
-    public static void main(String[] args) {
+    public void initialize() {
         File dobbyFile = new File("../dobbylist.txt");
 
         try {
@@ -66,6 +57,39 @@ public class Dobby {
             e.printStackTrace();
         }
 
-        new Dobby(dobbyFile.getPath()).run();
+        this.tasks = new TaskList();
+        this.parser = new Parser(this.tasks);
+        this.storage = new Storage(dobbyFile.getPath(), tasks);
+        this.ui = new Ui();
+        this.storage.readFile();
+        isInitialized = true;
+    }
+
+    /**
+     * Returns the text to be replied to the user based on input
+     * @param input
+     * @return response
+     */
+    public String getResponse(String input) {
+        String response;
+        if (!isInitialized) {
+            this.initialize();
+        }
+        try {
+            response = this.parser.getMessage(input);
+        } catch (DobbyException e) {
+            response = e.getMessage();
+        }
+        return response;
+    }
+
+    /**
+     * Main function
+     * @param args
+     */
+    public static void main(String[] args) {
+        Dobby dobby = new Dobby();
+        dobby.initialize();
+        dobby.run();
     }
 }

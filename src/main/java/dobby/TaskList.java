@@ -46,13 +46,14 @@ public class TaskList {
         } else { // EVENT
             String description = str.substring(str.indexOf(' ') + 1, str.indexOf("(at: ") - 1);
             String at = str.substring(str.indexOf("(at: ") + 5, str.length() - 1);
-
             int thirdIndex = at.indexOf(' ', 10);
+
             String dt = at.substring(0, thirdIndex);
-            String tm = at.substring(thirdIndex + 1);
             LocalDate date = LocalDate.parse(dt, DateTimeFormatter.ofPattern("MMM d yyyy"));
 
+            String tm = at.substring(thirdIndex + 1);
             task = new Event(description, tm, date);
+
             tasks.add(task);
         }
 
@@ -75,14 +76,17 @@ public class TaskList {
      */
     public String getListedTasks() {
         int i = 0;
-        String allTasks = "\n    ";
+        String allTasks = "";
         for (Task task : (this.tasks)) {
             i++;
-            allTasks = allTasks + i + ". " + task.getDescription() + "\n    ";
+            allTasks = allTasks + i + ". " + task.getDescription();
+            if (i < tasks.size()) {
+                allTasks = allTasks + "\n";
+            }
         }
 
         if (i == 0) {
-            allTasks = allTasks + "The task list is currently empty.\n    ";
+            allTasks = "The task list is currently empty.";
         }
 
         return allTasks;
@@ -96,18 +100,18 @@ public class TaskList {
      * in a particular format
      */
     public String getScheduledTasks(LocalDate date) {
-        String message = "\n    ";
+        String message = "";
         int counter = 0;
         for (Task task: tasks) {
             if (task instanceof TimedTask) {
                 TimedTask timedTask = (TimedTask) task;
                 if (date.equals(timedTask.getDate())) {
-                    message = message + String.format("%d. %s\n    ", ++counter, timedTask.getDescription());
+                    message = message + String.format("%d. %s\n", ++counter, timedTask.getDescription());
                 }
             }
         }
 
-        return counter == 0 ? message + "The task list is currently empty.\n    " : message;
+        return counter == 0 ? "The task list is currently empty." : message;
     }
 
     /**
@@ -116,18 +120,17 @@ public class TaskList {
      * @return message list of task descriptions of given type
      */
     public String findOfType(String type) {
-        String message = "\n    ";
+        String message = "";
 
         int counter = 0;
         for (Task task: this.tasks) {
             if ((task.getTag()).equals("[" + type + "]")) {
-                message = message
-                        + String.format("%d. %s\n    ", ++counter, task.getDescription());
+                message = String.format("%d. %s", ++counter, task.getDescription());
             }
         }
 
         if (counter == 0) {
-            message = message + "There are no tasks of type " + type + "\n    ";
+            message = "There are no tasks of type " + type;
         }
 
         return message;
@@ -139,18 +142,17 @@ public class TaskList {
      * @return message list of task descriptions of containing given keyword
      */
     public String findWithKeyword(String keyword) {
-        String message = "\n    ";
+        String message = "";
 
         int counter = 0;
         for (Task task: this.tasks) {
             if ((task.getDescription()).indexOf(keyword) >= 0) {
-                message = message
-                        + String.format("%d. %s\n    ", ++counter, task.getDescription());
+                message = String.format("%d. %s\n", ++counter, task.getDescription());
             }
         }
 
         if (counter == 0) {
-            message = "\n    There are no tasks of containing the word - " + keyword + "\n    ";
+            message = "There are no tasks of containing the word - " + keyword;
         }
 
         return message;

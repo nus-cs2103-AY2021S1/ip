@@ -6,27 +6,26 @@ import java.util.Scanner;
  * Interacts with the user
  */
 public class Ui {
-    // String for output format
-    private static final String UNDERSCORE = "_________________________________________"
-            + "______________________________________________";
-    private static final String ALL_COMMANDS = "\n    You can use the following commands in this chat bot:"
-            + (Commands.TODO).getUsage()
-            + (Commands.DEADLINE).getUsage()
-            + (Commands.EVENT).getUsage()
-            + (Commands.LIST).getUsage()
-            + (Commands.DONE).getUsage()
-            + (Commands.DELETE).getUsage()
-            + (Commands.SCHEDULED).getUsage()
-            + (Commands.FIND).getUsage()
-            + (Commands.FINDTYPE).getUsage()
-            + (Commands.BYE).getUsage();
+    private static final String ALL_COMMANDS = "You can use the following commands in this chat bot:"
+            + "\n  " + (Commands.TODO).getUsage()
+            + "\n  " + (Commands.DEADLINE).getUsage()
+            + "\n  " + (Commands.EVENT).getUsage()
+            + "\n  " + (Commands.LIST).getUsage()
+            + "\n  " + (Commands.DONE).getUsage()
+            + "\n  " + (Commands.DELETE).getUsage()
+            + "\n  " + (Commands.SCHEDULED).getUsage()
+            + "\n  " + (Commands.FIND).getUsage()
+            + "\n  " + (Commands.FINDTYPE).getUsage()
+            + "\n  " + (Commands.BYE).getUsage();
     private static final Scanner SC = new Scanner(System.in);
 
     /**
      * Calls reply function with greeting string
      */
-    public static void greet() {
-        reply("\n    Hello! I'm Dobby" + ALL_COMMANDS + "\n    How can I help you?\n    ");
+    public static String greet() {
+        String message = "Hello! I'm Dobby.\n" + ALL_COMMANDS;
+        reply(message);
+        return message;
     }
 
     /**
@@ -45,6 +44,6 @@ public class Ui {
      * Prints reply message
      */
     public static void reply(String message) {
-        System.out.println("    " + UNDERSCORE + message + UNDERSCORE);
+        System.out.println(message + "\n");
     }
 }
