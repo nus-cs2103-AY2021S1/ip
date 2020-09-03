@@ -46,13 +46,14 @@ public class TaskList {
         } else { // EVENT
             String description = str.substring(str.indexOf(' ') + 1, str.indexOf("(at: ") - 1);
             String at = str.substring(str.indexOf("(at: ") + 5, str.length() - 1);
-
             int thirdIndex = at.indexOf(' ', 10);
+
             String dt = at.substring(0, thirdIndex);
-            String tm = at.substring(thirdIndex + 1);
             LocalDate date = LocalDate.parse(dt, DateTimeFormatter.ofPattern("MMM d yyyy"));
 
+            String tm = at.substring(thirdIndex + 1);
             task = new Event(description, tm, date);
+
             tasks.add(task);
         }
 

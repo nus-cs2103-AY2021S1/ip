@@ -26,7 +26,7 @@ public class Storage {
      */
     public void readFile() {
         try {
-            File file = new File(this.filePath);
+            File file = new File(filePath);
             Scanner scanner = new Scanner(file);
 
             while (scanner.hasNext()) {

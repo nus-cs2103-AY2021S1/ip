@@ -22,6 +22,6 @@ public enum Commands {
     }
 
     public String getUsage () {
-        return this.usage;
+        return usage;
     }
 }

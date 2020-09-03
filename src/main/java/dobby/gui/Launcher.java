@@ -1,4 +1,4 @@
-package dobby;
+package dobby.gui;
 
 import javafx.application.Application;
 
@@ -7,6 +7,6 @@ import javafx.application.Application;
  */
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(Dobby.class, args);
+        Application.launch(Main.class, args);
     }
 }
