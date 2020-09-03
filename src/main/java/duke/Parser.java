@@ -18,7 +18,7 @@ public class Parser {
 
     private boolean isQuit = false;
 
-    public boolean getQuit() {
+    public boolean hasQuit() {
         return isQuit;
     }
 

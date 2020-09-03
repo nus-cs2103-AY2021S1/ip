@@ -40,7 +40,7 @@ public class AddCommand extends Command {
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskException, UnknownCmdException,
             InvalidTimeException, BadDtFormatException {
-        String[] info = extractInfo(text);
+        String[] info = extractStringInfo(text);
         if (info[0].equals("todo")) {
             tasks.addItem(new Todo(info[1], false));
             ui.setMessageNewTask(info[1], tasks.size());
@@ -62,7 +62,8 @@ public class AddCommand extends Command {
      * @throws InvalidTimeException If an invalid time is entered for a Deadline or Event task.
      */
 
-    public String[] extractInfo(String str) throws InvalidTaskException, UnknownCmdException, InvalidTimeException {
+    public String[] extractStringInfo(String str) throws InvalidTaskException, UnknownCmdException,
+            InvalidTimeException {
         String[] store = new String[3];
         // Handling the classification of event type
         if (str.startsWith("todo")) {
