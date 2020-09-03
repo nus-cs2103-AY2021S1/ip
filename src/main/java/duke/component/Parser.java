@@ -44,6 +44,11 @@ public class Parser {
     public static final String NONNUMERIC_TASK_INDEX_EXCEPTION = "\u2639 OOPS!!! The task index should be a number.";
     public static final String LACK_TIME_SPECIFICATION_EXCEPTION = "\u2639 OOPS!!! Time should be specified";
 
+
+    private static boolean hasEmptyContent(String cmd, String prefix) {
+        return cmd.length() < prefix.length() + 1;
+    }
+
     /**
      * Parses a DoneCommand to tell which task to mark as done.
      * @param cmd the given input command
@@ -53,23 +58,19 @@ public class Parser {
      * numbers
      */
     public static int isValidDone(String cmd, int count) throws InvalidCommandException {
-        if (cmd.startsWith(DONE_COMMAND_PREFIX)) {
-            if (cmd.length() < 6) {
-                throw new InvalidCommandException(EMPTY_DONE_COMMAND_EXCEPTION);
+        if (hasEmptyContent(cmd, DONE_COMMAND_PREFIX)) {
+            throw new InvalidCommandException(EMPTY_DONE_COMMAND_EXCEPTION);
+        }
+        try {
+            int n = Integer.parseInt(cmd.substring(5));
+            if (n < 1) {
+                throw new InvalidCommandException(NONPOSITIVE_TASK_INDEX_EXCEPTION);
+            } else if (n > count) {
+                throw new InvalidCommandException(TASK_INDEX_OVERFLOW_EXCEPTION);
             }
-            try {
-                int n = Integer.parseInt(cmd.substring(5));
-                if (n < 1) {
-                    throw new InvalidCommandException(NONPOSITIVE_TASK_INDEX_EXCEPTION);
-                } else if (n > count) {
-                    throw new InvalidCommandException(TASK_INDEX_OVERFLOW_EXCEPTION);
-                }
-                return n;
-            } catch (NumberFormatException e) {
-                throw new InvalidCommandException(NONNUMERIC_TASK_INDEX_EXCEPTION);
-            }
-        } else {
-            return -1;
+            return n;
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException(NONNUMERIC_TASK_INDEX_EXCEPTION);
         }
     }
 
@@ -82,23 +83,19 @@ public class Parser {
      * numbers
      */
     public static int isValidDelete(String cmd, int count) throws InvalidCommandException {
-        if (cmd.startsWith(DELETE_COMMAND_PREFIX)) {
-            if (cmd.length() < 8) {
-                throw new InvalidCommandException(EMPTY_DELETE_COMMAND_EXCEPTION);
+        if (hasEmptyContent(cmd, DELETE_COMMAND_PREFIX)) {
+            throw new InvalidCommandException(EMPTY_DELETE_COMMAND_EXCEPTION);
+        }
+        try {
+            int n = Integer.parseInt(cmd.substring(7));
+            if (n < 1) {
+                throw new InvalidCommandException(NONPOSITIVE_TASK_INDEX_EXCEPTION);
+            } else if (n > count) {
+                throw new InvalidCommandException(TASK_INDEX_OVERFLOW_EXCEPTION);
             }
-            try {
-                int n = Integer.parseInt(cmd.substring(7));
-                if (n < 1) {
-                    throw new InvalidCommandException(NONPOSITIVE_TASK_INDEX_EXCEPTION);
-                } else if (n > count) {
-                    throw new InvalidCommandException(TASK_INDEX_OVERFLOW_EXCEPTION);
-                }
-                return n;
-            } catch (NumberFormatException e) {
-                throw new InvalidCommandException(NONNUMERIC_TASK_INDEX_EXCEPTION);
-            }
-        } else {
-            return -1;
+            return n;
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException(NONNUMERIC_TASK_INDEX_EXCEPTION);
         }
     }
 
