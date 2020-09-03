@@ -32,7 +32,7 @@ public class AddCommand extends Command {
     public CommandResult execute(TaskList taskList) {
         taskList.addTask(toAdd);
         String response = String.format("%s\t\t%s\n\t %s", MESSAGE_ADD_TASK, toAdd.toString(),
-            taskList.tasksRemaining());
+                taskList.tasksRemaining());
         return new CommandResult(response, false);
     }
 

@@ -32,7 +32,7 @@ public class TodayCommandTest {
         TodayCommand command = new TodayCommand();
         CommandResult actual = command.execute(taskList);
         String response = MESSAGE_TODAY + "\t 1." + deadline1.toString() + "\n" + "\t 2."
-            + deadline2.toString();
+                + deadline2.toString();
         CommandResult expected = new CommandResult(response, false);
         assertEquals(expected, actual);
 

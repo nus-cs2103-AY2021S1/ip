@@ -47,7 +47,7 @@ public class InputOutputTest {
         InputOutput inputOutput = new InputOutput();
         inputOutput.showGreeting();
         String expected = "Hello from\n" + logo + "\n" + line
-            + "\t Hello! I'm Duke\n\t What can I do for you?\n" + line;
+                + "\t Hello! I'm Duke\n\t What can I do for you?\n" + line;
         assertEquals(expected, outContent.toString());
     }
 
