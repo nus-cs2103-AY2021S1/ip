@@ -11,8 +11,8 @@ public class Duke {
     private final Parser parser = new Parser();
 
     private void printGreeting() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?\n");
+        System.out.println("Hey there, I'm Mr. Meeseeks, look at me!\n");
+        System.out.println("Type 'help' to display all available commands!\n");
     }
 
     private void printGoodbye() {

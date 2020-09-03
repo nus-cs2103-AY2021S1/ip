@@ -71,6 +71,11 @@ public class Ui {
         case FIND:
             this.taskList.findTasks(input);
             break;
+        case HELP:
+            for (Commands c : Commands.values()) {
+                System.out.println(c.toString());
+            }
+            break;
         default:
             break;
         }

@@ -16,7 +16,7 @@ public class TaskList {
      * Prints out the tasks present in the task list.
      */
     public void listTasks() {
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("Yes sireee, look at me! Here are the tasks in your list:");
         for (int i = 0; i < this.taskList.size(); i++) {
             System.out.println((i + 1) + "." + this.taskList.get(i).toString());
         }
@@ -29,7 +29,7 @@ public class TaskList {
     public void addTask(Task task) {
         if (task != null) {
             this.taskList.add(task);
-            System.out.println("Got it. I've added this task:");
+            System.out.println("Ooooohh yeahhhh cannnnn do, I'm Mr. Meeseeks! I've added this task:");
             System.out.println(task.toString());
             printNumberOfTasks();
         }
@@ -41,7 +41,7 @@ public class TaskList {
      */
     public void markTaskAsDone(int index) {
         this.taskList.get(index).markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("Oooh yeahhh, good job! I've marked this task as done:");
         System.out.println(this.taskList.get(index).toString());
     }
 
@@ -51,7 +51,7 @@ public class TaskList {
      */
     public void deleteTask(int index) {
         Task removedTask = this.taskList.remove(index);
-        System.out.println("Noted. I've removed this task:");
+        System.out.println("I'm Mr. Meeseeks, look at me! I've removed this task:");
         System.out.println(removedTask.toString());
         printNumberOfTasks();
     }
@@ -62,7 +62,7 @@ public class TaskList {
      */
     public void findTasks(String toFind) {
         int currentIndex = 1;
-        System.out.println("Here are the matching tasks in your list:");
+        System.out.println("Oohhh look at me! Here are the matching tasks in your list:");
         for (Task task : this.taskList) {
             if (task.getDescription().contains(toFind)) {
                 System.out.println(currentIndex + "." + task.toString());
@@ -78,7 +78,7 @@ public class TaskList {
         if (this.taskList.size() > 0) {
             this.taskList.subList(0, this.taskList.size()).clear();
         }
-        System.out.println("All clear! You have 0 tasks now.");
+        System.out.println("All done! You have 0 tasks now.");
     }
 
     /**

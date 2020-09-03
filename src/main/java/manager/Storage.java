@@ -71,7 +71,7 @@ public class Storage {
      * @param taskList as specified
      */
     public void listSavedTasks(List<Task> taskList) {
-        System.out.println("Here are your saved tasks:");
+        System.out.println("Oohhh okay, remember you have these tasks:");
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println((i + 1) + "." + taskList.get(i));
         }

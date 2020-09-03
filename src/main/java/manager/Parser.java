@@ -36,6 +36,9 @@ public class Parser {
                 if (input.equals("list")) {
                     this.converter.convertAction(Commands.LIST, 0, "");
 
+                } else if (input.equals("help")) {
+                    this.converter.convertAction(Commands.HELP, 0, "");
+
                 } else if (input.equals("delete all")) {
                     this.converter.convertAction(Commands.DELETE_ALL, 0, "");
 
@@ -55,7 +58,8 @@ public class Parser {
                         this.converter.convertAction(Commands.DELETE, index, "");
 
                     } else {
-                        throw new InvalidCommandException("Command is invalid. Try again?");
+                        throw new InvalidCommandException(
+                                "Oohh I'm Mr. Meeseeks, your command is invalid. Try again?");
                     }
 
                 } else {
@@ -70,7 +74,7 @@ public class Parser {
                         this.converter.passTask(this.converter.convertTask(Commands.TODO, input));
 
                     } else {
-                        throw new InvalidCommandException("Not sure what you mean. "
+                        throw new InvalidCommandException("Oohh, I have to fulfill my purpose so I can go away! "
                                 + "Please ensure your command format is correct and try again.");
                     }
 
@@ -134,7 +138,7 @@ public class Parser {
             boolean isValidNumber = index < this.converter.getTotalTasks();
 
             if (!isValidNumber) {
-                throw new InvalidNumberException("The number entered is invalid. "
+                throw new InvalidNumberException("Oohhh, the number entered is invalid, but don't worry! "
                         + "You have " + this.converter.getTotalTasks() + " tasks in your list.");
             }
             return true;
