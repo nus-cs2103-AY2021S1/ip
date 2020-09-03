@@ -4,11 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import duke.exception.ExceptionMessage;
 import org.junit.jupiter.api.Test;
 
+import duke.exception.ExceptionMessage;
 import duke.exception.UnknownCommandException;
-import duke.ui.UiPrint;
 
 public class DukeCommandSetTest {
 

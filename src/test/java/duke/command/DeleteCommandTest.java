@@ -5,13 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import duke.exception.ExceptionMessage;
 import org.junit.jupiter.api.Test;
 
 import duke.DukeStub;
 import duke.data.DukeTaskListSideEffects;
+import duke.exception.ExceptionMessage;
 import duke.exception.InvalidIndexException;
-import duke.ui.UiPrint;
 
 public class DeleteCommandTest {
 

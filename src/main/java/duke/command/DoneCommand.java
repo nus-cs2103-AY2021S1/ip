@@ -4,7 +4,6 @@ import duke.Duke;
 import duke.exception.ExceptionMessage;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
-import duke.ui.UiPrint;
 
 /**
  * DoneCommand marks the task with the index as done, reports to the user.

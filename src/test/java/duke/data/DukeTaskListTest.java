@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 
-import duke.exception.ExceptionMessage;
 import org.junit.jupiter.api.Test;
 
+import duke.exception.ExceptionMessage;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
 import duke.task.ToDo;
