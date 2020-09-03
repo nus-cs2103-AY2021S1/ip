@@ -1,14 +1,14 @@
 package Test;
+
 import com.Duke.Tasks.Deadline;
 import com.Duke.Tasks.Event;
-import com.Duke.Tasks.Task;
 import com.Duke.Tasks.ToDo;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class DukeTest {
     @Test
