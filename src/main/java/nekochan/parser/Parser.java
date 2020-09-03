@@ -73,10 +73,8 @@ public class Parser {
             try {
                 int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
                 return new CompleteCommand(index);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new ParseNekoCommandException("What did you complete exaclty?");
-            } catch (NumberFormatException e) {
-                throw new ParseNekoCommandException("This isn't harry potter, please use only integers.");
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                throw new ParseNekoCommandException("What did you complete exactly?");
             }
         case DELETE:
             try {
@@ -86,16 +84,14 @@ public class Parser {
                     int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
                     return new DeleteCommand(index);
                 }
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 throw new ParseNekoCommandException("What do you want to remove exactly?");
-            } catch (NumberFormatException e) {
-                throw new ParseNekoCommandException("This isn't harry potter, please use only integers.");
             }
         case DEADLINE:
             try {
                 return new AddCommand(TaskType.DEADLINE, inputs[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new ParseNekoCommandException("What are you rushing for? To wait?");
+                throw new ParseNekoCommandException("Are you hiding something from me?");
             }
         case TODO:
             try {
@@ -107,13 +103,13 @@ public class Parser {
             try {
                 return new AddCommand(TaskType.EVENT, inputs[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new ParseNekoCommandException("Are you going to attend a nameless event?");
+                throw new ParseNekoCommandException("Are you going somewhere without me?");
             }
         case SEARCH:
             try {
                 return new SearchCommand(inputs[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new ParseNekoCommandException("I don't have the answer to every or anything");
+                throw new ParseNekoCommandException("I don't have the answer to everything.");
             }
         default:
             throw new ParseNekoCommandException("Wakarimasen~");

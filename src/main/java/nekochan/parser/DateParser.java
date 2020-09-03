@@ -34,7 +34,7 @@ public class DateParser {
      * @return the {@code LocalDateTime} object representing the specified date and time.
      * @throws NekoException if the format of the input is not recognised.
      */
-    public static LocalDateTime parseString(String input) throws NekoException {
+    public static LocalDateTime parseStringToDateTime(String input) throws NekoException {
         if (input.contains(":")) {
             for (String format : ACCEPTED_FORMATS_WITH_TIME) {
                 try {
@@ -70,27 +70,27 @@ public class DateParser {
      * @return the parsed duration in minutes.
      * @throws NekoException if the format of the input is not recognised.
      */
-    public static int parseDuration(String input) throws NekoException {
+    public static int parseDurationToMinutes(String input) throws NekoException {
         try {
             int minutes = 0;
-            if (input.contains("d")) {
-                minutes += MINUTES_IN_DAY * Double.parseDouble(input.split("d")[0].trim());
-                if (input.split("d").length > 1) {
-                    input = input.split("d")[1].replaceAll("[^\\d]", "");
+            if (input.contains("d") || input.contains("D")) {
+                minutes += MINUTES_IN_DAY * Double.parseDouble(input.split("[dD]")[0].trim());
+                if (input.split("[dD]").length > 1) {
+                    input = input.split("[dD]")[1].replaceAll("^[a-zA-Z ]*", "");
                 } else {
                     input = null;
                 }
             }
-            if (input != null && input.contains("h")) {
-                minutes += MINUTES_IN_HOUR * Double.parseDouble(input.split("h")[0].trim());
-                if (input.split("h").length > 1) {
-                    input = input.split("h")[1].replaceAll("[^\\d]", "");
+            if (input != null && (input.contains("h") || input.contains("H"))) {
+                minutes += MINUTES_IN_HOUR * Double.parseDouble(input.split("[hH]")[0].trim());
+                if (input.split("[hH]").length > 1) {
+                    input = input.split("[hH]")[1].replaceAll("^[a-zA-Z ]*", "");
                 } else {
                     input = null;
                 }
             }
-            if (input != null && input.contains("m")) {
-                minutes += Double.parseDouble(input.split("m")[0]);
+            if (input != null && (input.contains("m") || input.contains("M"))) {
+                minutes += Double.parseDouble(input.split("[mM]")[0].trim());
             }
             return minutes;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
@@ -104,7 +104,7 @@ public class DateParser {
      * @param dateTime the {@code LocalDateTime} object to be converted.
      * @return the string representation of the specified {@code LocalDateTime} object.
      */
-    public static String parseLocalDateTime(LocalDateTime dateTime) {
+    public static String parseLocalDateTimeToString(LocalDateTime dateTime) {
         if (dateTime.getSecond() == NULL_TIME_INDICATOR) {
             return dateTime.format(DateTimeFormatter.ofPattern(ACCEPTED_FORMATS_DATE_ONLY.get(0)));
         } else {

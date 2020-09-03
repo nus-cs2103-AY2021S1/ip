@@ -9,19 +9,19 @@
 
     ________________________________________________________
      Got it. I've added this task:
-       [T][✘] borrow book
+     [T][✘] borrow book
      Now you have 1 tasks in your list.
     ________________________________________________________
 
     ________________________________________________________
      Got it. I've added this task:
-       [T][✘] read book
+     [T][✘] read book
      Now you have 2 tasks in your list.
     ________________________________________________________
 
     ________________________________________________________
      Got it. I've added this task:
-       [D][✘] return book (by: 14 Aug 2019)
+     [D][✘] return book (by: 14 Aug 2019)
      Now you have 3 tasks in your list.
     ________________________________________________________
 
@@ -34,19 +34,19 @@
 
     ________________________________________________________
      Got it. I've added this task:
-       [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
+     [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
      Now you have 4 tasks in your list.
     ________________________________________________________
 
     ________________________________________________________
      Got it. I've added this task:
-       [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
+     [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
      Now you have 5 tasks in your list.
     ________________________________________________________
 
     ________________________________________________________
      Got it. I've added this task:
-       [E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
+     [E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
      Now you have 6 tasks in your list.
     ________________________________________________________
 
@@ -93,11 +93,11 @@
     ________________________________________________________
 
     ________________________________________________________
-     Gomen nasai~ What are you rushing for? To wait?
+     Gomen nasai~ Are you hiding something from me?
     ________________________________________________________
 
     ________________________________________________________
-     Gomen nasai~ Are you going to attend a nameless event?
+     Gomen nasai~ Are you going somewhere without me?
     ________________________________________________________
 
     ________________________________________________________
@@ -133,7 +133,7 @@
     ________________________________________________________
 
     ________________________________________________________
-     Gomen nasai~ This isn't harry potter, please use only integers.
+     Gomen nasai~ What do you want to remove exactly?
     ________________________________________________________
 
     ________________________________________________________

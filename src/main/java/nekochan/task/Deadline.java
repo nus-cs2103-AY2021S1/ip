@@ -37,7 +37,7 @@ public class Deadline extends Task {
         try {
             String description = details.substring(0, details.lastIndexOf(DEADLINE_DELIMITER)).trim();
             String dateTimeString = details.substring(details.lastIndexOf(DEADLINE_DELIMITER) + 2).trim().toLowerCase();
-            LocalDateTime dateTime = DateParser.parseString(dateTimeString);
+            LocalDateTime dateTime = DateParser.parseStringToDateTime(dateTimeString);
             return new Deadline(description, dateTime);
         } catch (StringIndexOutOfBoundsException e) {
             throw new NekoTaskCreationException("So you never did plan on doing it huh...");
@@ -59,7 +59,7 @@ public class Deadline extends Task {
         if (content.length != 4) {
             throw new NekoStorageException("There are some holes in my memory...");
         }
-        Deadline newDeadline = new Deadline(content[3], DateParser.parseString(content[2]));
+        Deadline newDeadline = new Deadline(content[3], DateParser.parseStringToDateTime(content[2]));
         if (content[1].equals("Y")) {
             newDeadline.setCompleted();
         } else if (!content[1].equals("N")) {
@@ -76,7 +76,7 @@ public class Deadline extends Task {
     @Override
     public String encode() {
         return String.format("D|%s|%s|%s", super.isCompleted ? "Y" : "N",
-                DateParser.parseLocalDateTime(dateTime),
+                DateParser.parseLocalDateTimeToString(dateTime),
                 super.description);
     }
 
@@ -89,7 +89,7 @@ public class Deadline extends Task {
     @Override
     public boolean match(String searchParameter) {
         try {
-            LocalDate searchDate = DateParser.parseString(searchParameter).toLocalDate();
+            LocalDate searchDate = DateParser.parseStringToDateTime(searchParameter).toLocalDate();
             return searchDate.isEqual(dateTime.toLocalDate());
         } catch (NekoException e) {
             return searchParameter.contains(description) || description.contains(searchParameter);
@@ -103,6 +103,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateParser.parseLocalDateTime(dateTime) + ")";
+        return "[D]" + super.toString() + " (by: " + DateParser.parseLocalDateTimeToString(dateTime) + ")";
     }
 }

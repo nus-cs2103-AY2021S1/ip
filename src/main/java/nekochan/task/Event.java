@@ -47,15 +47,15 @@ public class Event extends Task {
             String dateTimeComponent = details.substring(details.lastIndexOf(EVENT_DELIMITER) + 4).trim().toLowerCase();
             if (dateTimeComponent.contains(ALL_DAY_KEYWORD)) {
                 String start = dateTimeComponent.split(ALL_DAY_KEYWORD)[0].split(DURATION_DELIMITER)[0].trim();
-                LocalDateTime startDateTime = DateParser.parseString(start);
+                LocalDateTime startDateTime = DateParser.parseStringToDateTime(start);
                 LocalDateTime endDateTime = startDateTime.withHour(23).withMinute(59);
                 return new Event(description, startDateTime, endDateTime);
             } else if (dateTimeComponent.contains(END_TIME_DELIMITER)) {
                 try {
                     String start = dateTimeComponent.split(END_TIME_DELIMITER)[0].trim();
                     String end = dateTimeComponent.split(END_TIME_DELIMITER)[1].trim();
-                    LocalDateTime startDateTime = DateParser.parseString(start);
-                    LocalDateTime endDateTime = DateParser.parseString(end);
+                    LocalDateTime startDateTime = DateParser.parseStringToDateTime(start);
+                    LocalDateTime endDateTime = DateParser.parseStringToDateTime(end);
                     return new Event(description, startDateTime, endDateTime);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new NekoTaskCreationException("Does this thing ever end???");
@@ -63,8 +63,8 @@ public class Event extends Task {
             } else if (dateTimeComponent.contains(DURATION_DELIMITER)) {
                 try {
                     String start = dateTimeComponent.split(DURATION_DELIMITER)[0].trim();
-                    int duration = DateParser.parseDuration(dateTimeComponent.split(DURATION_DELIMITER)[1]);
-                    LocalDateTime startDateTime = DateParser.parseString(start);
+                    int duration = DateParser.parseDurationToMinutes(dateTimeComponent.split(DURATION_DELIMITER)[1]);
+                    LocalDateTime startDateTime = DateParser.parseStringToDateTime(start);
                     LocalDateTime endDateTime = startDateTime.plusMinutes(duration);
                     return new Event(description, startDateTime, endDateTime);
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -94,8 +94,8 @@ public class Event extends Task {
             throw new NekoStorageException("There are some holes in my memory...");
         }
         Event newEvent = new Event(content[4],
-                DateParser.parseString(content[2]),
-                DateParser.parseString(content[3]));
+                DateParser.parseStringToDateTime(content[2]),
+                DateParser.parseStringToDateTime(content[3]));
         if (content[1].equals("Y")) {
             newEvent.setCompleted();
         } else if (!content[1].equals("N")) {
@@ -111,8 +111,8 @@ public class Event extends Task {
      */
     public String encode() {
         return String.format("E|%s|%s|%s|%s", super.isCompleted ? "Y" : "N",
-                DateParser.parseLocalDateTime(startDateTime),
-                DateParser.parseLocalDateTime(endDateTime),
+                DateParser.parseLocalDateTimeToString(startDateTime),
+                DateParser.parseLocalDateTimeToString(endDateTime),
                 super.description);
     }
 
@@ -125,7 +125,7 @@ public class Event extends Task {
     @Override
     public boolean match(String searchParameter) {
         try {
-            LocalDate searchDate = DateParser.parseString(searchParameter).toLocalDate();
+            LocalDate searchDate = DateParser.parseStringToDateTime(searchParameter).toLocalDate();
             boolean isEqualStart = searchDate.isEqual(startDateTime.toLocalDate());
             boolean isEqualEnd = searchDate.isEqual(endDateTime.toLocalDate());
             boolean isBetween = searchDate.isBefore(endDateTime.toLocalDate())
@@ -144,11 +144,11 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (DateParser.isDateOnly(startDateTime) && startDateTime.toLocalDate().isEqual(endDateTime.toLocalDate())) {
-            return "[E]" + super.toString() + " (on " + DateParser.parseLocalDateTime(startDateTime)
+            return "[E]" + super.toString() + " (on " + DateParser.parseLocalDateTimeToString(startDateTime)
                     + " for all day)";
         } else {
-            return "[E]" + super.toString() + " (from " + DateParser.parseLocalDateTime(startDateTime)
-                    + " to " + DateParser.parseLocalDateTime(endDateTime) + ")";
+            return "[E]" + super.toString() + " (from " + DateParser.parseLocalDateTimeToString(startDateTime)
+                    + " to " + DateParser.parseLocalDateTimeToString(endDateTime) + ")";
         }
     }
 
