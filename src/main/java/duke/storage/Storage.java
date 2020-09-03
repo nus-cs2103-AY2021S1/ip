@@ -105,7 +105,7 @@ public class Storage {
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeStorageException("There's something wrong with my memory...");
         } catch (FileNotFoundException e) {
-            throw new DukeStorageException("I lost my memories.");
+            throw new DukeStorageException("I think I lost my memory... Let me start afresh.");
         }
     }
 }

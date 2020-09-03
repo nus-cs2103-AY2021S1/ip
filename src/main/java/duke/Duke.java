@@ -30,16 +30,12 @@ public class Duke {
      *
      * @param filePath the file path to store the local save file.
      * @param useHistory true if the local save file should be loaded.
-     * @throws DukeStorageException if the file at the specified {@code filePath} could not be found.
+     * @throws DukeStorageException if the file at the specified {@code filePath} could not be loaded.
      */
     public Duke(String filePath, boolean useHistory) throws DukeStorageException {
         if (useHistory) {
-            try {
-                storage = new Storage(filePath);
-                taskList = new TaskList(storage.load());
-            } catch (DukeStorageException e) {
-                throw new DukeStorageException("I think I lost my memory... Let me start afresh.");
-            }
+            storage = new Storage(filePath);
+            taskList = new TaskList(storage.load());
         } else {
             storage = new Storage(filePath);
             taskList = new TaskList();
