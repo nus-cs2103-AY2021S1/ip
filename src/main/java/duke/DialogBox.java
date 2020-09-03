@@ -23,6 +23,8 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
+    private HBox speechBubble;
+    @FXML
     private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
@@ -50,12 +52,14 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox dialogBox = new DialogBox(text, img);
+        dialogBox.speechBubble.getStyleClass().add("user-speech-bubble");
+        return dialogBox;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+        var dialogBox = new DialogBox(text, img);
+        dialogBox.flip();
+        return dialogBox;
     }
 }

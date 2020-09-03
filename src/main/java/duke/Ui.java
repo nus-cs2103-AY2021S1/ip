@@ -26,7 +26,7 @@ public class Ui {
     /**
      * Introduction message
      */
-    public static final String GREET = "\nHello! I'm Rose\nWhat can I do for you? <3\n";
+    public static final String GREET = "Hello! I'm Rose\nWhat can I do for you? <3\n";
 
     /**
      *  Farewell message
@@ -79,8 +79,8 @@ public class Ui {
      * Show error message.
      * @param e  Exception shown
      */
-    public void showError(DukeException e) {
-        show(e.toString());
+    public static String showError(DukeException e) {
+        return show(e.toString());
     }
 
     /**
@@ -122,7 +122,7 @@ public class Ui {
     }
 
     public static String showTaskFound(String input, String tasksFound) {
-        return show("Here are the matching tasks in your list:\n", tasksFound + "\n");
+        return show("Here are the matching tasks in your list:\n", tasksFound);
     }
 
     public static String showNoTaskFound(String input) {
