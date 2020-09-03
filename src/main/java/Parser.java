@@ -7,32 +7,23 @@ public class Parser {
         while (!input.equals("bye")) {
             ui.printDivider();
             try {
+                if (taskList.isEmpty()) {
+                    throw new EmptyListException("There are no tasks on your list");
+                }
                 if (input.equals("help")) {
                     ui.printHelp();
                 } else if (input.equals("add")) {
                     Parser.processAdd(taskList, sc, ui);
                     Storage.saveTaskChanges(taskList);
                 } else if (input.equals("list")) {
-                    if (taskList.isEmpty()) {
-                        throw new EmptyListException("There are no tasks on your list");
-                    }
                     ui.printList(taskList);
                 } else if (input.equals("done")) {
-                    if (taskList.isEmpty()) {
-                        throw new EmptyListException("There are no tasks on your list");
-                    }
                     Parser.processDone(taskList, sc, ui);
                     Storage.saveTaskChanges(taskList);
                 } else if (input.equals("delete")) {
-                    if (taskList.isEmpty()) {
-                        throw new EmptyListException("There are no tasks on your list");
-                    }
                     Parser.processDelete(taskList, sc, ui);
                     Storage.saveTaskChanges(taskList);
                 } else if (input.equals("find")) {
-                    if (taskList.isEmpty()) {
-                        throw new EmptyListException("There are no tasks on your list");
-                    }
                     Parser.processFind(taskList, sc, ui);
                 } else {
                     throw new UnknownCommandException("Sorry I didn't understand that :(");
