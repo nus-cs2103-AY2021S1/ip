@@ -1,4 +1,4 @@
-package rogue.logic.directives;
+package rogue.model.argument;
 
 import java.util.HashMap;
 import java.util.Map;

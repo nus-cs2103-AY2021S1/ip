@@ -1,11 +1,10 @@
 package rogue.logic.parser;
 
-import rogue.logic.directives.Action;
 import rogue.logic.directives.Executable;
 import rogue.logic.directives.ExitDirective;
 import rogue.logic.directives.ListDirective;
-import rogue.logic.exceptions.IncorrectArgumentException;
-import rogue.logic.parser.exceptions.UnknownCommandException;
+import rogue.logic.parser.exceptions.IncorrectInputException;
+import rogue.model.argument.Argument;
 
 /**
  * Parses user inputs into an {@code Executable} that is understood
@@ -23,18 +22,14 @@ public class Parser {
      * {@code Action}. A valid {@code Action} will result in the appropriate
      * {@code Executable} being created. Otherwise, an exception is thrown.
      *
-     * @param fullCommand The user input.
+     * @param input The user input.
      * @return An {@code Executable} corresponding to the {@code Action}
-     * @throws UnknownCommandException if user input is an invalid {@code Action}
-     * @throws IncorrectArgumentException if the arguments are not suitable for the particular {@code Action}
+     * @throws IncorrectInputException if user input is an invalid {@code Action}
      */
-    public static Executable createExe(String fullCommand)
-            throws UnknownCommandException, IncorrectArgumentException {
-        String[] args = fullCommand.trim().split("\\s"); // User input split by whitespace
+    public static Executable createExe(String input) throws IncorrectInputException {
+        Argument args = ArgumentParser.parseArgs(input);
 
-        Action action = Action.getAction(args[0]);
-
-        switch (action) {
+        switch (args.getAction()) {
         case EXIT:
             return new ExitDirective();
 
@@ -53,10 +48,10 @@ public class Parser {
         case ADD_TODO:
         case ADD_DEADLINE:
         case ADD_EVENT:
-            return new AddDirectiveParser().parse(action, args);
+            return new AddDirectiveParser().parse(args);
 
         default:
-            throw new UnknownCommandException(String.format(ERROR_UNKNOWN_COMMAND, args[0]));
+            throw new IncorrectInputException(String.format(ERROR_UNKNOWN_COMMAND, input));
         }
     }
 }

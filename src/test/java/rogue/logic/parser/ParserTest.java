@@ -2,27 +2,27 @@ package rogue.logic.parser;
 
 import org.junit.jupiter.api.Test;
 
-import rogue.logic.parser.exceptions.UnknownCommandException;
+import rogue.logic.parser.exceptions.IncorrectInputException;
 
-import rogue.logic.exceptions.IncorrectArgumentException;
+import rogue.logic.directives.exceptions.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
     @Test
     public void createExe_invalidArguments_exceptionThrown() {
-        assertThrows(IncorrectArgumentException.class, () -> {
+        assertThrows(ExecutionException.class, () -> {
             Parser.createExe("done book");
         });
 
-        assertThrows(IncorrectArgumentException.class, () -> {
+        assertThrows(ExecutionException.class, () -> {
             Parser.createExe("delete note");
         });
     }
 
     @Test
     public void createExe_invalidInput_exceptionThrown() {
-        assertThrows(UnknownCommandException.class, () -> {
+        assertThrows(IncorrectInputException.class, () -> {
             Parser.createExe("create todo borrow book");
         });
     }

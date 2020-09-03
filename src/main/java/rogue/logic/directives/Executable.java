@@ -1,7 +1,7 @@
 package rogue.logic.directives;
 
-import rogue.logic.Report;
-import rogue.logic.exceptions.IncorrectArgumentException;
+import rogue.model.report.Report;
+import rogue.logic.directives.exceptions.ExecutionException;
 import rogue.model.task.TaskList;
 import rogue.storage.Storage;
 import rogue.storage.exceptions.StorageException;
@@ -18,8 +18,8 @@ public interface Executable {
      * @param tasks     An instance of {@code TaskList}.
      * @param ui        An instance of {@code Ui}.
      * @return A {@code Report} containing a message
-     * @throws IncorrectArgumentException when incorrect parameters are provided for an {@code Action}.
+     * @throws ExecutionException when incorrect parameters are provided for an {@code Action}.
      * @throws StorageException if data cannot be saved to file.
      */
-    Report execute(Storage storage, TaskList tasks, Ui ui) throws IncorrectArgumentException, StorageException;
+    Report execute(Storage storage, TaskList tasks, Ui ui) throws ExecutionException, StorageException;
 }

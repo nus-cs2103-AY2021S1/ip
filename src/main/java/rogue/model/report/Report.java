@@ -1,4 +1,4 @@
-package rogue.logic;
+package rogue.model.report;
 
 /**
  * Feedback generated after an {@code Executable} is executed by {@code Rogue}.

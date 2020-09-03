@@ -1,6 +1,6 @@
 package rogue.logic.directives;
 
-import rogue.logic.Report;
+import rogue.model.report.Report;
 import rogue.model.task.Task;
 import rogue.model.task.TaskList;
 import rogue.storage.Storage;

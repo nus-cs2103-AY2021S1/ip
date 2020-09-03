@@ -1,7 +1,7 @@
 package rogue.logic.directives;
 
-import rogue.logic.Report;
-import rogue.logic.exceptions.IncorrectArgumentException;
+import rogue.model.report.Report;
+import rogue.logic.directives.exceptions.ExecutionException;
 import rogue.model.task.TaskList;
 import rogue.storage.Storage;
 import rogue.storage.exceptions.StorageException;
@@ -36,12 +36,12 @@ public class DoneDirective implements Executable {
      * @param tasks     The {@code TaskList} from which a {@code Task} is marked as complete.
      * @param ui        An instance of {@code Ui}.
      * @return A {@code Report} with a success message
-     * @throws IncorrectArgumentException if the index provided is invalid.
+     * @throws ExecutionException if the index provided is invalid.
      * @throws StorageException if data cannot be saved to file.
      */
     @Override
     public Report execute(Storage storage, TaskList tasks, Ui ui)
-            throws IncorrectArgumentException, StorageException {
+            throws ExecutionException, StorageException {
         try {
             tasks.get(index).markAsDone();
 
@@ -49,7 +49,7 @@ public class DoneDirective implements Executable {
 
             return new Report(String.format(MESSAGE_DONE_SUCCESS, tasks.get(index).toString()));
         } catch (IndexOutOfBoundsException e) {
-            throw new IncorrectArgumentException(String.format(ERROR_INCORRECT_INDEX, index + 1));
+            throw new ExecutionException(String.format(ERROR_INCORRECT_INDEX, index + 1));
         }
     }
 }

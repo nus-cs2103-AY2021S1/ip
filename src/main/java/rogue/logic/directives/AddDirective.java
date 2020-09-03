@@ -1,6 +1,7 @@
 package rogue.logic.directives;
 
-import rogue.logic.Report;
+import rogue.model.report.Report;
+import rogue.model.argument.Action;
 import rogue.model.task.*;
 import rogue.storage.Storage;
 import rogue.storage.exceptions.StorageException;

@@ -1,10 +1,10 @@
 package rogue;
 
-import rogue.logic.Report;
+import rogue.model.report.Report;
 import rogue.logic.directives.Executable;
-import rogue.logic.exceptions.IncorrectArgumentException;
+import rogue.logic.directives.exceptions.ExecutionException;
 import rogue.logic.parser.Parser;
-import rogue.logic.parser.exceptions.UnknownCommandException;
+import rogue.logic.parser.exceptions.IncorrectInputException;
 import rogue.model.task.TaskList;
 import rogue.storage.Storage;
 import rogue.storage.exceptions.StorageException;
@@ -34,7 +34,7 @@ public class Rogue {
         try {
             tasks = new TaskList(storage.load());
         } catch (StorageException e) {
-            // TBD: should let user know that file is not loaded successfully.
+            // TBD: should let user know that file is not loaded successfully
             tasks = new TaskList();
         }
         ui = new Ui();
@@ -57,7 +57,7 @@ public class Rogue {
             Executable e = Parser.createExe(input);
             Report r = e.execute(storage, tasks, ui);
             return r.toString();
-        } catch (UnknownCommandException | IncorrectArgumentException | StorageException e) {
+        } catch (IncorrectInputException | ExecutionException | StorageException e) {
             return e.getMessage();
         }
     }
