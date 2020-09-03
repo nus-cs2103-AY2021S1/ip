@@ -43,9 +43,7 @@ public class Event extends Task {
 
     private static void checkException(String[] splitStr) throws IncorrectFormatException {
         if (splitStr.length != 2) {
-            String line = UiPrint.getLine(UiPrint.STAR, 50);
-            String errMessage =
-                    line + "\nPlease follow the format of event <duke.task description> /at <event duke.time>\n" + line;
+            String errMessage = "\nPlease follow the format of event <duke.task description> /at <event duke.time>\n";
             throw new IncorrectFormatException(errMessage);
         }
     }

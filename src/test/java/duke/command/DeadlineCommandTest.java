@@ -56,8 +56,7 @@ public class DeadlineCommandTest {
                 IncorrectFormatException.class, () -> command.execute(invalidInput, dukeStub));
 
         String line = UiPrint.getLine(UiPrint.STAR, 50);
-        String errMessage =
-                line + "\nPlease follow the format of deadline <duke.task description> /by <deadline>\n" + line;
+        String errMessage = "\nPlease follow the format of deadline <duke.task description> /by <deadline>\n";
 
         assertEquals(errMessage, exception.getMessage());
     }

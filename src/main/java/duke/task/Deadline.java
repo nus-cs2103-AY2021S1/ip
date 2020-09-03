@@ -43,9 +43,7 @@ public class Deadline extends Task {
 
     private static void checkException(String[] splitStr) {
         if (splitStr.length != 2) {
-            String line = UiPrint.getLine(UiPrint.STAR, 50);
-            String errMessage =
-                    line + "\nPlease follow the format of deadline <duke.task description> /by <deadline>\n" + line;
+            String errMessage = "\nPlease follow the format of deadline <duke.task description> /by <deadline>\n";
             throw new IncorrectFormatException(errMessage);
         }
     }

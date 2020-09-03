@@ -56,8 +56,7 @@ public class EventCommandTest {
                 IncorrectFormatException.class, () -> command.execute(invalidInput, dukeStub));
 
         String line = UiPrint.getLine(UiPrint.STAR, 50);
-        String errMessage =
-                line + "\nPlease follow the format of event <duke.task description> /at <event duke.time>\n" + line;
+        String errMessage = "\nPlease follow the format of event <duke.task description> /at <event duke.time>\n";
 
         assertEquals(errMessage, exception.getMessage());
     }
