@@ -12,11 +12,13 @@ public class AddToDoCommand extends Command{
     }
 
 
+    @Override
     public String run(TaskList taskList, Storage storage) {
         Task newTask;
         newTask = new ToDo(commandContent);
         taskList.add(newTask);
         return Ui.addTask(newTask, taskList);
     }
+
 
 }

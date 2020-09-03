@@ -26,5 +26,14 @@ public class Ui {
 			res += (num + "." + task.toString() + "\n");
 			num++;
 		}
+		return res;
+	}
+
+	public static String doneTask(Task task) {
+		return "Nice! I've marked this task as done:\n" + task.toString();
+	}
+
+	public static String deleteTask(Task task, TaskList taskList) {
+		return "Noted. I've removed this task:\n" + task.toString() + "\nNow you have " + taskList.size() + " tasks in the list.";
 	}
 }

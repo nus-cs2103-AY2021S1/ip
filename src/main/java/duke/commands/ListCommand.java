@@ -1,16 +1,17 @@
 package duke.commands;
 
 
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-public class ListCommand {
+public class ListCommand extends Command {
     public ListCommand() {
 
     }
 
-
-    public String run(TaskList taskList) {
+    @Override
+    public String run(TaskList taskList, Storage storage) {
         return Ui.getTasks(taskList);
     }
 }
