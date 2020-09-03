@@ -34,8 +34,8 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws AlisonException {
         String error = "";
         if (task instanceof Deadline) {
-            try {
-                ((Deadline) task).parseTime();
+            try {(
+                    (Deadline) task).parseTime();
             } catch (AlisonException alisonException) {
                 error += alisonException.getMessage() + "\n";
             }

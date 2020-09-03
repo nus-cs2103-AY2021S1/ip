@@ -40,9 +40,9 @@ public class Alison {
         }
     }
 
-    /**
-     * Run Alison Chat bot with this method.
-     */
+//    /**
+//     * Run Alison Chat bot with this method.
+//     */
 //    public void run() {
 //        ui.greeting();
 //        boolean isExit = false;
