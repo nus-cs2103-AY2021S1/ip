@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "sg.christopher.duke.Duke"
 }
 
 shadowJar {
@@ -41,6 +41,6 @@ checkstyle {
     toolVersion = '8.23'
 }
 
-run{
+run {
     standardInput = System.in
 }

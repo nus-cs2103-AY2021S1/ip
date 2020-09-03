@@ -1,4 +1,4 @@
-package christopher.duke;
+package sg.christopher.duke;
 
 import org.junit.jupiter.api.Test;
 import sg.christopher.duke.Duke;

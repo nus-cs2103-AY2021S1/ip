@@ -1,4 +1,4 @@
-package christopher.duke.entities;
+package sg.christopher.duke.entities;
 
 import org.junit.jupiter.api.Test;
 import sg.christopher.duke.entities.Task;
