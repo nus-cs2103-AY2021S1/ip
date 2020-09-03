@@ -51,6 +51,7 @@ public class FormatCommand extends Command {
                 + "\nAdditional Information:"
                 + "\nTo mark a task as done, input 'done <task number>'."
                 + "\nTo delete a task from your list, input 'delete <task number>'."
-                + "\nTo find a task in your list, input 'find <keyword>'.";
+                + "\nTo find a task in your list, input 'find <keyword>'."
+                + "\nTo close Dino, enter 'bye'.";
     }
 }

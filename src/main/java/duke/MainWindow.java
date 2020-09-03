@@ -45,10 +45,7 @@ public class MainWindow extends AnchorPane {
         String greeting = "Rawr! I'm Dino ><\n"
                 + logo
                 + "\nGet started on your task list by entering a task!"
-                + "\nTo see how to format your task, input 'format'"
-                + "\nTo see your list of tasks, input 'list'."
-                + "\nTo mark a task as done, input 'done <task number>'."
-                + "\nTo delete a task from your list, input 'delete <task number>'."
+                + "\nTo see how to format your task or other commands, input 'format'."
                 + "\nTo stop Dino, input 'bye'."
                 + "\n________________________________________";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
