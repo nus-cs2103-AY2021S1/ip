@@ -11,20 +11,23 @@ import java.util.ArrayList;
 
 public class OnC extends Command {
 
-    public void execute(Ui ui, TaskList todoList, Storage store) throws IOException {
+    @Override
+    public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
+        String result = "";
         LocalDate checkOn = LocalDate.parse(ui.sc.nextLine().trim());
-        System.out.println("On this day, you have: ");
+        result += "On this day, you have: \n";
         int eventCount = 0;
         for (Task checkEvent : todoList.getTodoList()) {
             if (checkEvent instanceof Event && ((Event) checkEvent).at.equals(checkOn)) {
-                System.out.println(checkEvent.toString());
+                result += checkEvent.toString() + "\n";
                 eventCount++;
             }
         }
         if (eventCount > 0) {
-            System.out.println("   [ A total of " + eventCount + " event(s)]");
+            result += "   [ A total of " + eventCount + " event(s)]";
         } else {
-            System.out.println("   [ You have no events on this day ]");
+            result += "   [ You have no events on this day ]";
         }
+        return result;
     }
 }

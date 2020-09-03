@@ -10,7 +10,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TodoC extends Command {
-    public void execute(Ui ui, TaskList todoList, Storage store){
+
+    @Override
+    public String execute(Ui ui, TaskList todoList, Storage store){
+        String result = "";
         String name = ui.sc.nextLine();
         try {
             if (name.isEmpty()) {
@@ -18,15 +21,15 @@ public class TodoC extends Command {
             } else {
                 Todo td = new Todo(name);
                 todoList.addTodo(td);
-                System.out.println("Aight new task for you: \n" + td.toString());
-                System.out.println("Now you got " + todoList.size() +
-                        " task(s) waiting man");
-                List<String> arrayList = new ArrayList<>(Arrays.asList("a", "b", "c"));
+                result += "Aight new task for you: \n" + td.toString() + "\n";
+                result += "Now you got " + todoList.size() +
+                        " task(s) waiting man";
                 store.write(td);
 
             }
         } catch (DukeException | IOException e) {
-            System.out.println("Enter a task after schedule!");
+            result += "Enter a task after schedule!";
         }
+        return result;
     }
 }

@@ -25,17 +25,38 @@ public class Duke {
     }
 
 
-    private void run() throws IOException {
+    private void run() throws IOException, DukeException {
         this.ui.showWelcome();
+        String output = "";
         while (ui.sc.hasNext()) {
             ui.showLine();
             Command c = new Parser().parse(ui.sc.next());
-            c.execute(this.ui, tasks, storage);
+            try {
+                output = c.execute(ui, tasks, storage);
+                System.out.println(output);
+                if (output == "See you later alligator!") {
+                    System.exit(0);
+                }
+            } catch (DukeException e) {
+                output = e.getMessage();
+                System.out.println(output);
+            }
             ui.showLine();
         }
     }
 
-    public static void main(String[] args) throws IOException, ParseException {
+    public String getResponse(String input) {
+        String output;
+        try {
+            Command c = Parser.parse(input);
+            output = c.execute(ui, tasks, storage);
+        } catch (DukeException | IOException e) {
+            output = (e.getMessage());
+        }
+        return output;
+    }
+
+    public static void main(String[] args) throws IOException, ParseException, DukeException {
         new Duke("src/main/java/duke/resources/todo.txt").run();
     }
 }

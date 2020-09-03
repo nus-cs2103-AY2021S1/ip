@@ -12,13 +12,12 @@ import java.io.IOException;
  */
 
 public class Parser {
-    public  Parser(){}
 
     /**
      * Constructor for loading deadlines using switch and case
      * @param command   the user's command
      */
-    public Command parse(String command) throws IOException {
+    public static Command parse(String command) throws IOException {
         switch (command) {
             case "bye":
                 return new ByeC();

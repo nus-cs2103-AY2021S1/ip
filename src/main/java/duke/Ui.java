@@ -15,8 +15,8 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
-    public void showWelcome(){
-        System.out.println("What's new scooby doo?\n" + "How can I help you today?");
+    public static String showWelcome(){
+        return "What's new scooby doo?\n" + "How can I help you today?";
     }
 
     public void showLine() {

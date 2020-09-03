@@ -10,8 +10,9 @@ import java.util.ArrayList;
 
 public class ByeC extends Command {
 
-    public void execute(Ui ui, TaskList todoList, Storage store){
-        System.out.println("See you later alligator ");
-        System.exit(0);
+    @Override
+    public String execute(Ui ui, TaskList todoList, Storage store){
+        String result = "See you later alligator!";
+        return result;
     }
 }

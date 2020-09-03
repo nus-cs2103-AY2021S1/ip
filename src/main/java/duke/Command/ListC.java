@@ -13,14 +13,16 @@ public class ListC extends Command {
 
 
     @Override
-    public void execute(Ui ui, TaskList todoList, Storage store){
-        System.out.println("Here's your schedule lil dude");
+    public String execute(Ui ui, TaskList todoList, Storage store){
+        String result = "";
+        result += "Here's your schedule lil dude\n";
         for (Task task :
                 todoList.getTodoList()) {
-            System.out.println(todoList.getID(task) + 1 + ". " + task.toString());
+            result += todoList.getID(task) + 1 + ". " + task.toString() + "\n";
         }
         if (todoList.size() == 0) {
-            System.out.println("Your life is empty now bruh");
+            result += "Your life is empty now bruh";
         }
+        return result;
     }
 }

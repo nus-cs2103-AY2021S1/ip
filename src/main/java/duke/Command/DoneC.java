@@ -1,18 +1,25 @@
 package duke.Command;
 
+import duke.Command.Command;
 import duke.Storage;
+import duke.task.Task;
+import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class DoneC extends Command {
 
-    public void execute(Ui ui, ArrayList<Task> todoList, Storage store){
+    @Override
+    public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
+        String result = "";
         int taskID = ui.sc.nextInt() - 1;
         Task task = todoList.get(taskID);
         task.markAsDone();
-        System.out.println("Gratz, you finished this dawg :");
-        System.out.println(task.toString());
+        result += "Gratz, you finished this dawg :\n";
+        result += task.toString();
+        return result;
     }
 }

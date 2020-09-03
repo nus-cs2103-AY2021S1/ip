@@ -12,18 +12,21 @@ import java.util.ArrayList;
 
 public class FindC extends Command {
 
-    public void execute(Ui ui, TaskList todoList, Storage store) throws IOException {
+    @Override
+    public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
+        String result = "";
         String keyword = ui.sc.nextLine();
         int findCount = 0;
         System.out.println("Here are the matching tasks in your list:");
-        for (Task find: todoList.todoList) {
-            if (find.description.contains(keyword)) {
-                System.out.println(findCount + 1 + find.toString());
+        for (Task found: todoList.todoList) {
+            if (found.description.contains(keyword)) {
+                result += findCount + 1 + "." + found.toString() + "\n";
                 findCount++;
             }
         }
         if (findCount == 0) {
-            System.out.println("No related tasks found");
+            result += "No related tasks found";
         }
+        return result;
     }
 }

@@ -1,5 +1,6 @@
 package duke.Command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.task.Task;
 import duke.TaskList;
@@ -10,7 +11,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Command {
-    public void execute(Ui ui, TaskList tl, Storage store) throws IOException {
-        System.out.println("I don't get it bruv");
+    public String execute(Ui ui, TaskList tl, Storage store) throws IOException, DukeException {
+        String result = "I don't understand, did you type an invalid command?";
+        return result;
     }
 }

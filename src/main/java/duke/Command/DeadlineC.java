@@ -10,18 +10,21 @@ import java.util.ArrayList;
 
 public class DeadlineC extends Command {
 
-    public void execute(Ui ui, TaskList todoList, Storage store){
+    @Override
+    public String execute(Ui ui, TaskList todoList, Storage store) throws DukeException {
         String fullDL = ui.sc.nextLine();
+        String result = "";
         try {
             String dlName = fullDL.split("/by")[0];
             LocalDate dlTime = LocalDate.parse(fullDL.split("/by ")[1]);
             Deadline dl = new Deadline(dlName, dlTime);
             todoList.addDead(dl);
-            System.out.println("Aight new task for you: \n" + dl.toString());
-            System.out.println("Now you got " + todoList.size() + " task(s) waiting man");
+            result += "Aight new task for you: \n" + dl.toString() +"\n";
+            result += "Now you got " + todoList.size() + " task(s) waiting man";
             store.write(dl);
         } catch (ArrayIndexOutOfBoundsException | IOException e) {
-            System.out.println("You either didn't enter a date or a task");
+            throw new DukeException("You either didn't enter a date or a task");
         }
+        return result;
     }
 }
