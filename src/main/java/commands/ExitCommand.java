@@ -20,7 +20,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) throws InvalidFileException {
-        // ui.printExitMessage();
         ui.setMessageExit();
         storage.writeToFile("data.txt", tasks.writeString());
         Platform.exit();

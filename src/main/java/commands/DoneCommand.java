@@ -28,7 +28,6 @@ public class DoneCommand extends Command {
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException,
             InvalidTaskNumberException {
-        // ui.printDoneTask();
         ui.setMessageDoneTask();
         doneTask(index, tasks);
     }
