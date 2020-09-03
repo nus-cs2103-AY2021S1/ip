@@ -9,6 +9,7 @@ public class Parser {
 
     /**
      * Processes all the commands given by the user and triggers functions correspondingly.
+     *
      * @param command command given by the user
      * @param tl the TaskList object defined in Duke.
      * @param ui the Ui object defined in Duke.
