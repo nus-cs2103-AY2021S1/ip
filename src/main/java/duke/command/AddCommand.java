@@ -64,14 +64,10 @@ public class AddCommand extends Command {
         }
 
         if (task != null) {
-            tasks.add(task, storage);
+            tasks.addTask(task, storage);
 
-            System.out.println("Orh. I added:" +
-                "\n  " +
-                task.toString() +
-                "\nNow you got " +
-                tasks.getListLength() +
-                " things in the list.");
+            System.out.println("Orh. I added:" + "\n  " + task.toString()
+                    + "\nNow you got " + tasks.getListLength() + " things in the list.");
         }
     }
 

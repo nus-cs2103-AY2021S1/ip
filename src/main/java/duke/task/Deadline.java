@@ -4,9 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a task to be completed by a given deadline.
+ * Represents a task to be completed by a given deadline. Inherits from Task.
  *
- * Adapted from https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html .
+ * Adapted from <a href="https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html">
+ *     this page</a> .
  */
 public class Deadline extends Task {
     /** Represents the date and time at which to complete the task by */

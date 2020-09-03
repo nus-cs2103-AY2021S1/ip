@@ -150,11 +150,7 @@ public class Storage {
             throw new DukeException("Cannot recognise type");
         }
 
-        return taskType +
-            " | " +
-            status +
-            " | " +
-            taskDescription;
+        return taskType + " | " + status + " | " + taskDescription;
     }
 
     /**

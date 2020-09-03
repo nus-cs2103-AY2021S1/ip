@@ -10,7 +10,7 @@ public class Ui {
     private final Scanner sc = new Scanner(System.in);
 
     /**
-     * Public constructor.
+     * Public constructor. Should only be used by bot.
      */
     public Ui() { }
 

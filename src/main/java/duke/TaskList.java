@@ -15,7 +15,7 @@ public class TaskList {
     private final List<Task> list;
 
     /**
-     * Public constructor that creates a new (empty) list
+     * Public constructor that creates a new (empty) list.
      */
     public TaskList() {
         this.list = new ArrayList<>();
@@ -38,7 +38,7 @@ public class TaskList {
      * @param storage Storage object that updates the relevant file on the hard disk.
      * @throws DukeException If exception is thrown by the update method of the Storage class.
      */
-    public void add(Task task, Storage storage) throws DukeException {
+    public void addTask(Task task, Storage storage) throws DukeException {
         this.list.add(task);
         storage.update(task);
     }
@@ -52,7 +52,7 @@ public class TaskList {
      * @param storage Storage object that updates the relevant file on the hard disk.
      * @throws DukeException If exception is thrown by the update method of the Storage class.
      */
-    public void delete(int taskNum, Storage storage) throws DukeException {
+    public void deleteTask(int taskNum, Storage storage) throws DukeException {
         this.list.remove(taskNum - 1);
         storage.update(this.list);
     }

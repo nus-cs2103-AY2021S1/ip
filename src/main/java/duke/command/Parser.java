@@ -5,28 +5,13 @@ import duke.dukeexception.NoCommandException;
 import duke.dukeexception.NoDescriptionException;
 
 /**
- * Types of user commands.
- * User has to type these commands in each line of input
- * to command the bot.
- */
-enum CommandType {
-    LIST,
-    DONE,
-    DELETE,
-    BYE,
-    TODO,
-    DEADLINE,
-    EVENT,
-    FIND
-}
-
-/**
  * Static class that parses user commands into executable bot commands represented
  * by <code>Command</code> objects.
  */
 public class Parser {
 
     /**
+     * Parse user commands into executable bot commands.
      *
      * @param fullCommand User command (the full line of user input).
      * @return A bot command to be executed.
@@ -50,12 +35,12 @@ public class Parser {
             return new ListCommand();
         } else if (commandType == CommandType.BYE) {
             return new ExitCommand();
-        } else if (commandType == CommandType.DELETE ||
-                commandType == CommandType.DONE ||
-                commandType == CommandType.TODO ||
-                commandType == CommandType.DEADLINE ||
-                commandType == CommandType.EVENT ||
-                commandType == CommandType.FIND) { // Commands that have a description
+        } else if (commandType == CommandType.DELETE
+                || commandType == CommandType.DONE
+                || commandType == CommandType.TODO
+                || commandType == CommandType.DEADLINE
+                || commandType == CommandType.EVENT
+                || commandType == CommandType.FIND) { // Commands that have a description
             try {
                 String description = commandElements[1];
                 if (commandType == CommandType.DELETE) {
