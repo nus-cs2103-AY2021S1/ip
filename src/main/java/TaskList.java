@@ -16,18 +16,40 @@ public class TaskList {
         this.taskList = tasks;
     }
 
+    /**
+     * Gets the number of current tasks.
+     *
+     * @return The number of tasks in the list.
+     */
     public int getNoOfTasks() {
         return this.taskList.size();
     }
 
+    /**
+     * Gts the task at desired index.
+     *
+     * @param index The index of the task in the list to get.
+     * @return The desired task.
+     */
     public Task getTask(int index) {
         return this.taskList.get(index);
     }
 
+    /**
+     * Sets the task at desired index.
+     *
+     * @param index The index of the task in the list to be replaced.
+     * @param task The new task to replace.
+     */
     public void setTask(int index, Task task) {
         this.taskList.set(index, task);
     }
 
+    /**
+     * Removes the task at desired index.
+     *
+     * @param index The index of the task in the list to be removed.
+     */
     public void removeTask(int index) {
         this.taskList.remove(index);
     }
@@ -50,11 +72,11 @@ public class TaskList {
                 return ui.printSuccessfulDelete(removedTask, updated.getNoOfTasks());
             } else {
                 return ui.printErrorMessage(new DeleteFailureException("Duke says: Please try "
-                        + "again with a valid format.").getMessage());
+                        + "again with a valid format."));
             }
         } catch (IndexOutOfBoundsException e) {
             return ui.printErrorMessage(new DeleteFailureException("Duke says: Please try again "
-                    + "with a valid number.").getMessage());
+                    + "with a valid number."));
         }
     }
 
@@ -73,20 +95,22 @@ public class TaskList {
      * @return The added task message.
      */
     public String addTask(String[] data, String keyWord, TaskList tasks, Ui ui) {
-        if (keyWord.equals("todo")) {
+        switch (keyWord) {
+        case "todo":
             ToDo toDo = new ToDo(data[0]);
             tasks.addTask(toDo);
             return ui.printTasksAdded(toDo, tasks.getNoOfTasks());
-        } else if (keyWord.equals("deadline")) {
+        case "deadline":
             Deadline deadline = new Deadline(data[0], data[1], data[2]);
             tasks.addTask(deadline);
             return ui.printTasksAdded(deadline, tasks.getNoOfTasks());
-        } else if (keyWord.equals("event")) {
+        case "event":
             Event event = new Event(data[0], data[1], data[2]);
             tasks.addTask(event);
             return ui.printTasksAdded(event, tasks.getNoOfTasks());
+        default:
+            return "";
         }
-        return "";
     }
 
     /**

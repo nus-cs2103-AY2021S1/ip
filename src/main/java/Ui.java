@@ -8,10 +8,12 @@
 public class Ui {
 
     /** Divides each command call. */
-    static final String LINE_BREAK = "==========================================================";
+    private static final String LINE_BREAK = "==========================================================";
 
     /**
      * Provides the welcome logo and how to start.
+     *
+     * @return The welcome string contents.
      */
     public String printWelcome() {
         String logo = " ____        _        \n"
@@ -24,10 +26,20 @@ public class Ui {
                 + LINE_BREAK;
     }
 
+    /**
+     * Provides line break string.
+     *
+     * @return The line break string.
+     */
     public String printLineBreak() {
         return LINE_BREAK;
     }
 
+    /**
+     * Provides good-bye string.
+     *
+     * @return The good-bye string.
+     */
     public String printGoodbye() {
         return "Duke says: Goodbye and have a nice day! :D";
     }
@@ -50,6 +62,11 @@ public class Ui {
                 + "bye: terminates program";
     }
 
+    /**
+     * Provides a string when no past tasks is found.
+     *
+     * @return The expected string content.
+     */
     public String printNoPastTasks() {
         return "Duke says: No past tasks found";
     }
@@ -99,6 +116,11 @@ public class Ui {
                 + printRemainingTasks(remaining);
     }
 
+    /**
+     * Provides the number of remaining tasks in string.
+     *
+     * @return The expected string content.
+     */
     public String printRemainingTasks(int remaining) {
         return "You now have " + remaining + " task(s) in your list";
     }
@@ -114,8 +136,14 @@ public class Ui {
         return "Duke added into your task list:\n" + task + "\n" + printRemainingTasks(remaining);
     }
 
-    public String printErrorMessage(String message) {
-        return message;
+    /**
+     * Provides a string message from the exception.
+     *
+     * @param exception The exception encountered.
+     * @return The expected exception message.
+     */
+    public String printErrorMessage(Exception exception) {
+        return exception.getMessage();
     }
 
     /**
