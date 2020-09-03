@@ -10,6 +10,7 @@ public class FindCommand extends Command {
 
     /**
      * Build a FindCommand with the keyword used for searching.
+     *
      * @param keyword the keyword used for searching.
      */
     public FindCommand(String keyword) {
@@ -18,13 +19,15 @@ public class FindCommand extends Command {
 
     /**
      * To execute the find command, simply call the showMatching function in UI.
+     *
      * @param tasks TaskList.
      * @param ui User Interface.
      * @param storage Storage.
+     * @return showMatching result.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMatching(tasks, this.keyword);
+    public String  execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showMatching(tasks, this.keyword);
     }
 
 }

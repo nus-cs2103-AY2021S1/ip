@@ -15,6 +15,7 @@ public class Alison {
 
     /**
      * Create a Alison bot with a file path you want to store all your data in.
+     *
      * @param filePath a String on file path in format: "./data/*.txt".
      */
     public Alison(String filePath) {
@@ -29,29 +30,39 @@ public class Alison {
         }
     }
 
-    /**
-     * Run Alison Chat bot with this method.
-     */
-    public void run() {
-        ui.greeting();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.printBorder();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (AlisonException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.printBorder();
-            }
+    public String getResponse(String input) {
+        try {
+            String fullCommand = input;
+            Command c = Parser.parse(fullCommand);
+            return c.execute(tasks, ui, storage);
+        } catch (AlisonException e) {
+            return e.getMessage();
         }
     }
 
-    public static void main(String[] args) {
-        new Alison("./data/tasks.txt").run();
-    }
+    /**
+     * Run Alison Chat bot with this method.
+     */
+//    public void run() {
+//        ui.greeting();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String fullCommand = ui.readCommand();
+//                ui.printBorder();
+//                Command c = Parser.parse(fullCommand);
+//                c.execute(tasks, ui, storage);
+//                isExit = c.isExit();
+//            } catch (AlisonException e) {
+//                ui.showError(e.getMessage());
+//            } finally {
+//                ui.printBorder();
+//            }
+//        }
+//    }
+
+//    public static void main(String[] args) {
+//        new Alison("./data/tasks.txt").run();
+//    }
 
 }
