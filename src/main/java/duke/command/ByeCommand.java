@@ -17,9 +17,9 @@ public class ByeCommand extends Command {
      *                from the file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.storelist(tasks);
-        ui.farewell();
+        return ui.farewell();
         
     }
 
