@@ -1,12 +1,10 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
 /** Represents a command to find and prints tasks that contain a specific keyword.
- * 
  */
 public class FindCommand extends Command {
     private String[] nextCommandArr;

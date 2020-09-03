@@ -16,7 +16,7 @@ public class ListCommand extends Command {
      * @param storage deals with saving tasks into the file and loading tasks
      *                from the file.
      *
-     * @return A string listing all the tasks.               
+     * @return A string listing all the tasks.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

@@ -15,7 +15,6 @@ public class DoneCommand extends Command {
      * A string array that represents the instructions in this command.
      */
     private String[] nextCommandArr;
-    
     public DoneCommand(String[] nextCommandArr) {
         this.nextCommandArr = nextCommandArr;
     }

@@ -1,11 +1,15 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.task.*;
-
 import java.io.File;
-import java.util.Scanner;
 import java.io.FileWriter;
+import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * A class to save tasks into the file and to load tasks from the file.
@@ -16,7 +20,6 @@ public class Storage {
      * The file location where Duke's list of tasks if stored.
      */
     private String filepath;
-    
     public Storage(String filepath) {
         this.filepath = filepath;
     }
@@ -40,7 +43,7 @@ public class Storage {
                 String nextTaskType = nextTaskArr[0].strip();
 
                 if (nextTaskType.equals("T")) {
-                    if (nextTaskLength != 3) { 
+                    if (nextTaskLength != 3) {
                         throw new DukeException("Your data might be corrupted~");
                     }
                     temp = new Todo(nextTaskArr[2].strip());
@@ -73,7 +76,6 @@ public class Storage {
             System.out.println(e);
         }
     }
-    
     /**
      * Saves all the tasks into the file.
      * @param tasks the TaskList whose tasks should be stored into the file.
@@ -91,16 +93,16 @@ public class Storage {
                 }
 
                 if (temp instanceof Todo) {
-                    fileWriter.write("T" + seperator + doneStatus + seperator + 
-                            temp.getTaskName() + "\n");
+                    fileWriter.write("T" + seperator + doneStatus + seperator
+                            + temp.getTaskName() + "\n");
                 } else if (temp instanceof Deadline) {
-                    Deadline tempDeadline = (Deadline) temp; 
-                    fileWriter.write("D" + seperator + doneStatus + seperator +
-                            tempDeadline.getTaskName() + seperator + tempDeadline.getDeadlineDate());
+                    Deadline tempDeadline = (Deadline) temp;
+                    fileWriter.write("D" + seperator + doneStatus + seperator
+                            + tempDeadline.getTaskName() + seperator + tempDeadline.getDeadlineDate());
                 } else if (temp instanceof Event) {
                     Event tempEvent = (Event) temp;
-                    fileWriter.write("E" + seperator + doneStatus + seperator +
-                            tempEvent.getTaskName() + seperator + tempEvent.getEventDate());
+                    fileWriter.write("E" + seperator + doneStatus + seperator
+                            + tempEvent.getTaskName() + seperator + tempEvent.getEventDate());
                 }
             }
             fileWriter.close();
