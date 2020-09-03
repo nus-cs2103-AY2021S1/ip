@@ -39,8 +39,12 @@ public class MainWindow extends AnchorPane {
         //scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.setStyle("-fx-background-image: url('/images/yellowBackground.png'); "
                 + "-fx-background-position: center center; "
-                + "-fx-background-repeat: no-repeat; "
+                + "-fx-background-repeat: repeat; "
                 + "-fx-background-size: cover;");
+        userInput.setStyle("-fx-background-color: #FFEFD5");
+        userInput.setPromptText("Wake GuDukeTama up!");
+        sendButton.setStyle("-fx-background-color: #F5E0C2");
+        //#FFFCD4
     }
 
     public void setDuke(Duke d) {
