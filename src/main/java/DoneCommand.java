@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
      * @param storage Storage to load and save tasks.
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // check if the taskNumber provided is in range
         if (taskNumber > tasks.getNumTasks() || taskNumber <= 0) {
             throw new DukeException("Please enter a valid task number.");
@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
             tasks.doneTask(taskNumber);
             storage.overwriteFile(tasks.getTaskList());
 
-            ui.showMarkedDone(tasks.getTask(taskNumber));
+            return ui.showMarkedDone(tasks.getTask(taskNumber));
         }
     }
 

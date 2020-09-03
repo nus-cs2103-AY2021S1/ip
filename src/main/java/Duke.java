@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 /**
  * Represents a Duke chatbot that can store, delete, mark tasks as done and display them.
  */
@@ -19,6 +21,25 @@ public class Duke {
         } catch (DukeException e) {
             ui.showError(e.getMessage());
             tasks = new TaskList();
+        }
+    }
+
+    public String showWelcomeMessage() {
+        return ui.showWelcome();
+    }
+
+    /**
+     * Generate response to user input from GUI.
+     * @param input The user input.
+     * @return Duke's response.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String result = c.execute(tasks, ui, storage);
+            return result;
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
         }
     }
 

@@ -19,7 +19,7 @@ public class AddCommand extends Command {
      * @param storage Storage to load and save tasks.
      * @throws DukeException if unable to append to file specified in storage's filepath
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(task);
 
         if (task instanceof ToDo) {
@@ -32,7 +32,7 @@ public class AddCommand extends Command {
                     + ((Event) task).at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n");
         }
 
-        ui.showAdded(tasks.getTask(tasks.getNumTasks()), tasks.getNumTasks());
+        return ui.showAdded(tasks.getTask(tasks.getNumTasks()), tasks.getNumTasks());
     }
 
     public boolean isExit() {

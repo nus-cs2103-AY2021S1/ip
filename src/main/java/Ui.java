@@ -24,21 +24,30 @@ public class Ui {
     /**
      * Show a line, which is printed before and after each message for design.
      */
-    public void showLine() {
+    public String showLine() {
         System.out.print(LINE);
+        return LINE;
     }
 
     /**
      * Show a welcome message to the user.
      */
-    public void showWelcome() {
-        showLine();
-        System.out.println(LOGO + " Hello! I'm Duke\n" + " What can I do for you today?");
-        showLine();
+    public String showWelcome() {
+        this.showLine();
+        String result = "Hello there!\n" + "What can I do for you today? \nType 'help' to find out more!";
+        System.out.println(result);
+        this.showLine();
+        return result;
     }
 
-    public void showBye() {
-        System.out.println(" Goodbye! See you again!");
+    /**
+     * Show bye message to the user
+     * @return The string with message.
+     */
+    public String showBye() {
+        String result = "Goodbye! Come back soon!";
+        System.out.println(result);
+        return result;
     }
 
     /**
@@ -47,9 +56,11 @@ public class Ui {
      * @param task Task to be added.
      * @param numTasks Updated number of tasks.
      */
-    public void showAdded(Task task, int numTasks) {
-        System.out.println("Got it. I've added this task:\n    " + task
-                + "\n Now you have " + numTasks + " task(s) in the list.");
+    public String showAdded(Task task, int numTasks) {
+        String result = "Got it. I've added this task:\n    " + task
+                + "\n Now you have " + numTasks + " task(s) in the list.";
+        System.out.println(result);
+        return result;
     }
 
     /**
@@ -58,9 +69,11 @@ public class Ui {
      * @param task Task to be deleted.
      * @param numTasks Updated number of tasks.
      */
-    public void showDeleted(Task task, int numTasks) {
-        System.out.println("Noted. I've removed this task:\n    " + task
-                + "\n Now you have " + numTasks + " task(s) in the list.");
+    public String showDeleted(Task task, int numTasks) {
+        String result = "No problem. I've removed this task:\n    " + task
+                + "\n Now you have " + numTasks + " task(s) in the list.";
+        System.out.println(result);
+        return result;
     }
 
     /**
@@ -68,9 +81,10 @@ public class Ui {
      *
      * @param task Task that is marked as done.
      */
-    public void showMarkedDone(Task task) {
-        System.out.println(
-                "Nice! I've marked this task as done:\n    " + task);
+    public String showMarkedDone(Task task) {
+        String result = "Ok! I've marked this task as done:\n    " + task;
+        System.out.println(result);
+        return result;
     }
 
     /**
@@ -78,15 +92,19 @@ public class Ui {
      *
      * @param msg Error message.
      */
-    public void showError(String msg) {
-        System.out.println(msg);
+    public String showError(String msg) {
+        String result = msg;
+        System.out.println(result);
+        return result;
     }
 
     /**
      * Show a message to indicate there are no tasks currently.
      */
-    public void showEmptyTaskList() {
-        System.out.println("There are currently no tasks in your list.");
+    public String showEmptyTaskList() {
+        String result = "You have no tasks in your list. Add some tasks!";
+        System.out.println(result);
+        return result;
     }
 
     /**
@@ -94,15 +112,19 @@ public class Ui {
      *
      * @param tasksList Task list of all tasks.
      */
-    public void showTaskList(String tasksList) {
-        System.out.println(("Task(s) in your list:\n" + tasksList));
+    public String showTaskList(String tasksList) {
+        String result = "Task(s) in your list:\n" + tasksList;
+        System.out.println(result);
+        return result;
     }
 
     /**
      * Show message to indicate there are no matching tasks to keyword provided.
      */
-    public void showEmptyMatchingList() {
-        System.out.println("There are no matching tasks found.");
+    public String showEmptyMatchingList() {
+        String result = "Hmm.. there are no tasks with that keyword!";
+        System.out.println(result);
+        return result;
     }
 
     /**
@@ -110,8 +132,32 @@ public class Ui {
      *
      * @param matchingTaskList String of all matching tasks enumerated.
      */
-    public void showMatchingTaskList(String matchingTaskList) {
-        System.out.println("Here are the matching tasks in your list:\n" + matchingTaskList);
+    public String showMatchingTaskList(String matchingTaskList) {
+        String result = "Found some matching tasks:\n" + matchingTaskList;
+        System.out.println(result);
+        return result;
+    }
+
+    public String showHelp() {
+        String result = "Here are the things that I can do for you! \n\n"
+                + "- Add a todo task:\n"
+                + "  todo <task description>\n\n"
+                + "- Add an event task:\n"
+                + "  event <task description> /at <task timing (yyyy-mm-dd HH:MM)>\n\n"
+                + "- Add a deadline task:\n"
+                + "  deadline <task description> /by <task timing (yyyy-mm-dd HH:MM)>\n\n"
+                + "- See list of tasks:\n"
+                + "  list\n\n"
+                + "- Mark a task as done:\n"
+                + "  done <number>\n\n"
+                + "- Delete a task:\n"
+                + "  delete <number>\n\n"
+                + "- Find tasks with a keyword:\n"
+                + "  find <keyword>\n\n"
+                + "- End this program :d :\n"
+                + "  bye";
+        System.out.println(result);
+        return result;
     }
 
     /**

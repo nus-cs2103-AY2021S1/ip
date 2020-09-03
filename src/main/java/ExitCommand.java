@@ -10,8 +10,8 @@ public class ExitCommand extends Command {
      * @param ui Ui to deal with interaction with user.
      * @param storage Storage to load and save tasks.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showBye();
     }
 
     public boolean isExit() {

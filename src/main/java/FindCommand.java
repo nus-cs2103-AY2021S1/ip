@@ -15,7 +15,7 @@ public class FindCommand extends Command {
      * @param ui Ui to deal with interaction with user.
      * @param storage Storage to load and save tasks.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String matchingTasks = "";
         int numMatching = 0;
 
@@ -32,9 +32,9 @@ public class FindCommand extends Command {
         }
 
         if (matchingTasks.isEmpty()) {
-            ui.showEmptyMatchingList();
+            return ui.showEmptyMatchingList();
         } else {
-            ui.showMatchingTaskList(matchingTasks);
+            return ui.showMatchingTaskList(matchingTasks);
         }
     }
 
