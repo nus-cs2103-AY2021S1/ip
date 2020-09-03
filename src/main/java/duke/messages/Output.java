@@ -17,7 +17,7 @@ public class Output {
      * @return A string representing the welcome window.
      */
     public String printWelcome() {
-        return printGeneralChatWindow(printLogo(),
+        return printGeneralChatWindow(
                 Message.MESSAGE_GREETING,
                 Message.MESSAGE_WHAT_CAN_I_DO,
                 "",
