@@ -5,7 +5,6 @@ import duke.tasks.Task;
 import duke.util.OutputUi;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 import java.io.IOException;
 
@@ -14,7 +13,6 @@ import java.io.IOException;
  */
 public class DoneCommand extends Command {
     private static int taskIndex;
-//    int taskIndex;
 
     /**
      * Constructor.

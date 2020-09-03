@@ -5,7 +5,6 @@ import duke.util.OutputUi;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.tasks.Task;
-import duke.util.Ui;
 
 import java.io.IOException;
 
@@ -22,13 +21,6 @@ public class AddCommand extends Command {
     public AddCommand(String[] words) {
         this.words = words;
     }
-    
-    private void printAddedOutput(Task t, TaskList tasks, Ui ui) {
-        ui.printDivider();
-        ui.printMsg("Mr Camel has added: " + t);
-        ui.printMsg("\tNumber of tasks: " + tasks.getTasklist().size());
-        ui.printDivider();
-    }
 
     /**
      * Adds a Todo, Event or Deadline object to Tasklist.
@@ -40,7 +32,7 @@ public class AddCommand extends Command {
      */
     public String execute(TaskList tasks, OutputUi ui, Storage storage) throws DukeException {
         String command = words[0];
-        Task t = new Task("null");
+        Task t;
 
         switch (command) {
         case "todo":
