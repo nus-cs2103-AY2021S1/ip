@@ -24,7 +24,7 @@ public class Duke {
         try {
             return command.execute(input, tasks, storage) + "\n" + ui.printLineBreak();
         } catch (DukeException ex) {
-            return ui.printErrorMessage(ex.getMessage());
+            return ui.printErrorMessage(ex);
         }
     }
 
@@ -46,7 +46,7 @@ public class Duke {
                 command.execute(userInput, tasks, storage);
                 isTerminated = command.isTerminated();
             } catch (DukeException ex) {
-                ui.printErrorMessage(ex.getMessage());
+                ui.printErrorMessage(ex);
             } finally {
                 ui.printLineBreak();
             }
