@@ -43,6 +43,22 @@ public class TaskList {
         tasks.get(index).markAsDone();
     }
 
+    /**
+     * Retrieves the list of tasks in the task list which contain the keyword.
+     *
+     * @param keyword the keyword used to find the matching tasks.
+     * @return the list of matching tasks.
+     */
+    public TaskList getMatchingTasks(String keyword) {
+        TaskList matchingTasks = new TaskList();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().contains(keyword)) {
+                matchingTasks.addTask(tasks.get(i));
+            }
+        }
+        return matchingTasks;
+    }
+
     @Override
     public String toString() {
         StringBuilder allTasks = new StringBuilder();

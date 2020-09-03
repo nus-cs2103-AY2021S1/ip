@@ -36,6 +36,16 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows a list of tasks from the task list which contains a common keyword.
+     *
+     * @param keyword the specified keyword.
+     * @param tasks the task list.
+     */
+    public void showFindMessage(String keyword, TaskList tasks) {
+        printLines("Here are the matching tasks in your list:\n" + tasks.getMatchingTasks(keyword));
+    }
+
     public void showAdded(Task task, TaskList tasks) {
         printLines("Task added successfully!\n\t" + task + showNumOfTasks(tasks));
     }
