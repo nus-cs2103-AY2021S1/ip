@@ -1,14 +1,14 @@
 public class DukeException extends Exception {
     /**
      * Prints out the correct error message based on error type.
-     * 
+     *
      * @param errorType Description of error.
      */
     public DukeException(String errorType) {
-        String errorMessage = errorType.equals("invalidCommand") 
+        String errorMessage = errorType.equals("invalidCommand")
                 ? "☹ OOPS!!! I'm sorry, but I don't know what that means :-("
-                : errorType.equals("invalidMarkingDone") 
-                ? "☹ OOPS!!! Command to mark a task done is formatted wrongly." 
+                : errorType.equals("invalidMarkingDone")
+                ? "☹ OOPS!!! Command to mark a task done is formatted wrongly."
                 : errorType.equals("invalidTodo")
                 ? "☹ OOPS!!! The description of a todo cannot be empty."
                 : errorType.equals("invalidDeadlineTask")

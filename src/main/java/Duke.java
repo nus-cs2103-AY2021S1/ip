@@ -1,17 +1,17 @@
 public class Duke {
     /** Object dealing with loading/saving tasks. */
     private final Storage storage;
-    
-    /** Objects containing the list of tasks. */
+
+    /** Object containing the list of tasks. */
     private TaskList tasks;
-    
+
     /** Object dealing with interactions with user. */
     private final Ui ui;
 
     /**
      * Constructs new Duke object.
      *
-     * @param filePath Destination path of duke.txt file.
+     * @param filePath Destination path of the duke.txt storage file.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -28,7 +28,7 @@ public class Duke {
 
         while (!command.equals("bye")) {
             ui.showLine();
-            
+
             if (command.equals("list")) {
                 tasks.printList();
             } else {

@@ -7,11 +7,11 @@ public class Parser {
     /**
      * Gets the relevant task id from command.
      *
-     * @param command User command
-     * @return Id of the task to be modified/deleted
+     * @param command User command.
+     * @return Id of the task to be modified/deleted.
      */
     public static int getTaskId(String command) {
-       return Integer.parseInt(command.split(" ")[1]) - 1;
+        return Integer.parseInt(command.split(" ")[1]) - 1;
     }
 
     /**
@@ -23,9 +23,9 @@ public class Parser {
      */
     public static Task getTask(String taskString) throws DukeException {
         char taskType = taskString.charAt(1);
-        boolean isTaskDone = taskString.charAt(4) == '\u2713';
+        boolean isTaskDone = Character.toString(taskString.charAt(4)).equals("✓");
         Task result;
-        
+
         if (taskType == 'T') {
             String taskDesc = taskString.substring(7);
             result = new ToDo(taskDesc);
@@ -36,7 +36,9 @@ public class Parser {
             result = taskType == 'D' ? new Deadline(taskDesc, time) : new Event(taskDesc, time);
         }
 
-        if (isTaskDone) result.markAsDone();
+        if (isTaskDone) {
+            result.markAsDone();
+        }
         return result;
     }
 
@@ -47,24 +49,24 @@ public class Parser {
      * @return Action keyword.
      */
     public static String getAction(String command) {
-        String[] command_lst = command.split(" ", 2);
-        return command_lst[0];
+        String[] commandList = command.split(" ", 2);
+        return commandList[0];
     }
 
     /**
      * Gets the details for the creation of tasks.
-     * 
+     *
      * @param command User command.
      * @return Details of the task.
      */
     public static String getDetail(String command) {
-        String[] command_lst = command.split(" ", 2);
-        return command_lst[1];
+        String[] commandList = command.split(" ", 2);
+        return commandList[1];
     }
 
     /**
      * Gets the description for the creation of a deadline task.
-     * 
+     *
      * @param command User command.
      * @return Deadline task description.
      */
@@ -74,7 +76,7 @@ public class Parser {
 
     /**
      * Gets the deadline for the creation of a deadline task.
-     * 
+     *
      * @param command User command.
      * @return Deadline of task.
      */
@@ -84,7 +86,7 @@ public class Parser {
 
     /**
      * Gets the description for the creation of an event task.
-     * 
+     *
      * @param command User command.
      * @return Event task description.
      */
@@ -94,7 +96,7 @@ public class Parser {
 
     /**
      * Gets the timing for the creation of an event task.
-     * 
+     *
      * @param command User command.
      * @return Event duration.
      */
@@ -104,7 +106,7 @@ public class Parser {
 
     /**
      * Parses the string representation of datetime to LocalDateTime type.
-     * 
+     *
      * @param by Deadline of task.
      * @return LocalDateTime of deadline.
      */
@@ -115,7 +117,7 @@ public class Parser {
 
     /**
      * Parses the string representation of the start time to LocalDateTime type.
-     * 
+     *
      * @param at Event duration.
      * @return LocalDateTime of start time.
      */
@@ -135,31 +137,65 @@ public class Parser {
         String parsableEnd = dateTimeArr[1].replace(" ", "T");
         return LocalDateTime.parse(parsableEnd);
     }
-    
+
+    /**
+     * Parses the LocalDateTime representation of the start time to String type.
+     *
+     * @param start Start datetime of the Event.
+     * @return String of start datetime of the Event.
+     */
     public static String getStringStart(LocalDateTime start) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm");
         return start.format(formatter);
     }
 
+    /**
+     * Parses the LocalDateTime representation of the end time to String type.
+     *
+     * @param end End datetime of the Event.
+     * @return String of end datetime of the Event.
+     */
     public static String getStringEnd(LocalDateTime end) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm");
         return end.format(formatter);
     }
 
+    /**
+     * Parses the LocalDateTime representation of the deadline to String type.
+     * @param by Deadline of the Task.
+     * @return String of the deadline.
+     */
     public static String getDateTime(LocalDateTime by) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm");
         return by.format(formatter);
 
     }
 
+    /**
+     * Retrieves the day of the deadline.
+     *
+     * @param by Deadline of the Task.
+     * @return Day of the deadline.
+     */
     public static String getDay(LocalDateTime by) {
         return by.getDayOfWeek().getDisplayName(TextStyle.SHORT, new Locale("en"));
     }
 
+    /**
+     * Retrieves the day of the start of the Event.
+     *
+     * @param start Start datetime of the Event.
+     * @return Day of the start of the Event.
+     */
     public static String getStartDay(LocalDateTime start) {
         return start.getDayOfWeek().getDisplayName(TextStyle.SHORT, new Locale("en"));
     }
 
+    /**
+     * Retrieves the day of the end of the Event.
+     * @param end End datetime of the Event.
+     * @return Day of the end of the Event.
+     */
     public static String getEndDay(LocalDateTime end) {
         return end.getDayOfWeek().getDisplayName(TextStyle.SHORT, new Locale("en"));
     }

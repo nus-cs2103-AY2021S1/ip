@@ -1,12 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 
-enum ListChange
-{
+/**
+ * Enumeration indicating the type of change to be acted on the TaskList.
+ */
+enum ListChange {
     ADD, DELETE
 }
 
 public class TaskList {
+    /** The list of tasks present. */
     protected List<Task> tasks;
 
     /**
@@ -20,7 +23,7 @@ public class TaskList {
 
     /**
      * Gets the list of tasks.
-     * 
+     *
      * @return List of Tasks.
      */
     public List<Task> getTasks() {
@@ -29,7 +32,7 @@ public class TaskList {
 
     /**
      * Finds the number of tasks in the task list.
-     * 
+     *
      * @return Number of tasks.
      */
     public String numTasks() {
@@ -39,20 +42,12 @@ public class TaskList {
 
     /**
      * Prints the correct message to signify adding/deleting a task.
-     * 
+     *
      * @param task Task to be added or deleted.
      * @param change Enum of ADD or DELETE depending on command.
      */
     public void listChangePrint(Task task, ListChange change) {
-        String keyword = "";
-        switch (change) {
-            case ADD:
-                keyword = "added";
-                break;
-            case DELETE:
-                keyword = "removed";
-        }
-
+        String keyword = change == ListChange.ADD ? "added" : "removed";
         System.out.println("Noted. I've " + keyword + " this task:\n" + task.toString());
         System.out.println("Now you have " + this.numTasks() + " in the list.");
     }
@@ -65,7 +60,12 @@ public class TaskList {
             System.out.println(i + 1 + "." + tasks.get(i).toString());
         }
     }
-    
+
+    /**
+     * Marks a task as done.
+     *
+     * @param command User command.
+     */
     public void done(String command) {
         try {
             int taskId = Parser.getTaskId(command);
@@ -76,7 +76,12 @@ public class TaskList {
             new DukeException("invalidMarkingDone");
         }
     }
-    
+
+    /**
+     * Creates new ToDo task.
+     *
+     * @param command User command.
+     */
     public void newToDo(String command) {
         if (command.equals("todo")) {
             new DukeException("invalidTodo");
@@ -91,7 +96,12 @@ public class TaskList {
             }
         }
     }
-    
+
+    /**
+     * Creates new Deadline task.
+     *
+     * @param command User command.
+     */
     public void newDeadline(String command) {
         try {
             String desc = Parser.getDeadlineDesc(command);
@@ -103,7 +113,12 @@ public class TaskList {
             new DukeException("invalidDeadlineTask");
         }
     }
-    
+
+    /**
+     * Creates new Event task.
+     *
+     * @param command User command.
+     */
     public void newEvent(String command) {
         try {
             String desc = Parser.getEventDesc(command);
@@ -115,7 +130,12 @@ public class TaskList {
             new DukeException("invalidEvent");
         }
     }
-    
+
+    /**
+     * Deletes a task.
+     *
+     * @param command User command.
+     */
     public void delete(String command) {
         try {
             int taskId = Parser.getTaskId(command);
@@ -125,7 +145,12 @@ public class TaskList {
             new DukeException("invalidDelete");
         }
     }
-    
+
+    /**
+     * Finds task(s).
+     *
+     * @param command User command.
+     */
     public void find(String command) {
         if (command.equals("find")) {
             new DukeException("invalidFind");
@@ -149,7 +174,7 @@ public class TaskList {
 
     /**
      * Returns the default invalid command error.
-     */            
+     */
     public void defaultError() {
         new DukeException("invalidCommand");
     }

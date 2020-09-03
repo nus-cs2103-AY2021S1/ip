@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
 public class Ui {
-    public Scanner sc;
+    /** Scanner object. */
+    private Scanner sc;
 
     /**
      * Constructs new Ui object.
@@ -14,7 +15,7 @@ public class Ui {
      * Prints the divider line.
      */
     public void showLine() {
-        System.out.println("————————————————————————————————————————————————————————————");
+        System.out.println("————————————————————————————");
     }
 
     /**
@@ -28,7 +29,7 @@ public class Ui {
 
     /**
      * Returns a prompt for user input.
-     * 
+     *
      * @return Scanner prompt.
      */
     public String userInput() {
@@ -43,5 +44,5 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
         this.showLine();
         sc.close();
-    }    
+    }
 }

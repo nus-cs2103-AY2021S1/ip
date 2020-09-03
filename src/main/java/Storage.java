@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    /** Destination path of duke.txt file. */
+    /** Destination path of the duke.txt storage file. */
     protected String filePath;
 
     /**
      * Constructs new Storage object.
-     * 
-     * @param path
+     *
+     * @param path Destination path of duke.txt file.
      */
     public Storage(String path) {
         filePath = path;
     }
 
     /**
-     * Creates the data folder and duke.txt file if absent.
+     * Creates the data folder and duke.txt storage file if absent.
      *
      * @return Destination path of duke.txt file.
      */
@@ -28,14 +28,14 @@ public class Storage {
                 new File("./data").mkdir();
                 new File("./data/duke.txt").createNewFile();
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Something went wrong in creating files");
         }
         return "./data/duke.txt";
     }
 
     /**
-     * Loads the contents from the (saved) duke.txt file.
+     * Loads the contents from the (saved) duke.txt storage file.
      *
      * @return List of (saved) Tasks.
      */
@@ -56,7 +56,7 @@ public class Storage {
     }
 
     /**
-     * Writes updated list of tasks into the duke.txt file.
+     * Writes updated list of tasks into the duke.txt storage file.
      *
      * @param tasks List of Tasks to be saved.
      */
