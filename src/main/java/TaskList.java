@@ -24,6 +24,7 @@ public class TaskList {
      * @param tsk the task to be added to the list.
      */
     public void addTask(Task tsk) {
+        assert(taskList != null);
         taskList.add(tsk);
     }
 
@@ -34,6 +35,7 @@ public class TaskList {
      * @throws InvalidTaskNumber If the task number is out of range.
      */
     public Task deleteTask(int taskNum) throws InvalidTaskNumber {
+        assert(taskList != null);
         if (taskNum < 1 || taskNum > taskList.size()) {
             throw new InvalidTaskNumber();
         } else {
@@ -48,6 +50,7 @@ public class TaskList {
      * @return A list of all tasks.
      */
     public List<Task> getAllTasks() {
+        assert(taskList != null); //must make sure task list is initialised
         return taskList;
     }
 
@@ -59,6 +62,7 @@ public class TaskList {
      * @throws InvalidTaskNumber If the task number is out of range.
      */
     public Task markDone(int taskNum) throws InvalidTaskNumber {
+        assert(taskList != null);
         if (taskNum < 1 || taskNum > taskList.size()) {
             throw new InvalidTaskNumber();
         } else {
@@ -74,6 +78,7 @@ public class TaskList {
      * @return A list of task with the specified date.
      */
     public List<Task> getSameDateTasks(String date) {
+        assert(taskList != null);
         List<Task> listOfTasks = new ArrayList<>();
         LocalDate eventDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         for (Task task : taskList) {
@@ -90,10 +95,12 @@ public class TaskList {
      * @return The total number of tasks in list.
      */
     public int getNumTasks() {
+        assert(taskList != null);
         return taskList.size();
     }
 
     public List<Task> getTasksWithKeyWord(String keyword) {
+        assert(taskList != null);
         List<Task> list = new ArrayList<>();
         for (Task task : taskList) {
             if (task.searchFound(keyword)) {

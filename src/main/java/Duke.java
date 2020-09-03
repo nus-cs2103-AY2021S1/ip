@@ -33,7 +33,7 @@ public class Duke {
      * @return the reply for the respective commands
      * @throws DukeException if user inputs invalid commands
      */
-    public String generateReply(String[] processedCommand) throws DukeException {
+    private String generateReply(String[] processedCommand) throws DukeException {
         switch (processedCommand[0].toLowerCase()) {
         case "bye":
             return ui.showByeMessage();
@@ -79,6 +79,8 @@ public class Duke {
      * @return the response from the bot
      */
     public String getResponse(String input) {
+        assert(tasks != null); //ensure tasklist is initialised by Duke
+        StringBuilder response = new StringBuilder();
         try {
             String[] processedCommand = parser.parse(input);
             String reply = generateReply(processedCommand);
