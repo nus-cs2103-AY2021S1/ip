@@ -67,4 +67,12 @@ public class Ui {
     public void showLine() {
         System.out.println("______________________________");
     }
+
+    /**
+     * Returns a String of 30 underscores which represents a line
+     * @return String of 30 underscores which represents a line
+     */
+    public String getLine() {
+        return "______________________________\n";
+    }
 }

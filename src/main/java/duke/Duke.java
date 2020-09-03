@@ -63,7 +63,9 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);
-            response = ui.getMessage();
+            response += ui.getLine();
+            response += ui.getMessage();
+            response += ui.getLine();
             ui.clearMessage();
         } catch (DukeException e) {
             ui.showError(e.getMessage());
