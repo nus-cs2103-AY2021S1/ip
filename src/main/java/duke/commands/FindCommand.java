@@ -3,9 +3,7 @@ package duke.commands;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-import duke.ui.textUI.Ui;
-
-import java.util.stream.IntStream;
+import duke.ui.textui.Ui;
 
 /**
  * Class that simulates the find command of the user.

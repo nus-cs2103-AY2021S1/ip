@@ -5,7 +5,7 @@ import static java.lang.Integer.parseInt;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-import duke.ui.textUI.Ui;
+import duke.ui.textui.Ui;
 
 
 

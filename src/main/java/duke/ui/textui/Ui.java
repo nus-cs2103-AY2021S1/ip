@@ -1,4 +1,4 @@
-package duke.ui.textUI;
+package duke.ui.textui;
 
 import java.util.Scanner;
 import java.util.stream.Stream;

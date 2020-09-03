@@ -1,7 +1,7 @@
-package duke.ui.visualUI;
+package duke.ui.visualui;
 
 import duke.Duke;
-import duke.ui.textUI.Ui;
+import duke.ui.textui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

@@ -6,7 +6,7 @@ import duke.exception.InvalidFormatEventException;
 import duke.exception.UnknownCommandException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.textUI.Ui;
+import duke.ui.textui.Ui;
 
 /**
  * Class that simulates the command of the user.
@@ -25,7 +25,6 @@ public abstract class Command {
     Command(String[] inputArr) {
         this.inputArr = inputArr;
     }
-    
     /**
      * Prints the error message when duke crashes.
      */

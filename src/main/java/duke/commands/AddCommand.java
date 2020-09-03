@@ -11,7 +11,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
-import duke.ui.textUI.Ui;
+import duke.ui.textui.Ui;
 
 /**
  * Class that simulates the add command of the user.
@@ -78,7 +78,7 @@ public class AddCommand extends Command {
             break;
         default:
             throw new UnknownCommandException();
-        }    
+        }
         tasks.add(task);
         return ui.messageFormatter(ADDED_NOTIFICATION, task.toString(), printNumTask(tasks));
     }

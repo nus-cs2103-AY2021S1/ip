@@ -1,10 +1,12 @@
 package duke.commands;
 
+import java.util.stream.IntStream;
+
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.textUI.Ui;
+import duke.ui.textui.Ui;
 
-import java.util.stream.IntStream;
+
 
 /**
  * Class that simulates the add command of the user.
@@ -23,7 +25,7 @@ public class ListCommand extends Command {
     public ListCommand(String[] inputArr) {
         super(inputArr);
     }
-
+    @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         assert tasks != null;
         assert ui != null;

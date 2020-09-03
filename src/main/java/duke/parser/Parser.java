@@ -26,15 +26,14 @@ import duke.exception.InvalidFormatListException;
  */
 
 public class Parser {
-    private static final String KEYWORD_BYE = "bye";
-    private static final String KEYWORD_LIST = "list";
-    private static final String KEYWORD_DONE = "done";
     public static final String KEYWORD_TODO = "todo";
     public static final String KEYWORD_EVENT = "event";
     public static final String KEYWORD_DEADLINE = "deadline";
+    private static final String KEYWORD_BYE = "bye";
+    private static final String KEYWORD_LIST = "list";
+    private static final String KEYWORD_DONE = "done";
     private static final String KEYWORD_DELETE = "delete";
     private static final String KEYWORD_FIND = "find";
-
     /**
      * Checking if the user's string input is a number.
      *
@@ -45,8 +44,7 @@ public class Parser {
         try {
             int num = parseInt(str);
             return true;
-        } catch(NumberFormatException
-                e) {
+        } catch (NumberFormatException e) {
             return false;
         }
     }
@@ -86,7 +84,7 @@ public class Parser {
             int hour = Integer.parseInt(time.substring(0, 2));
             int minute = Integer.parseInt(time.substring(2));
             return LocalDateTime.of(year, month, day, hour, minute);
-        } catch(DateTimeException | NumberFormatException e) {
+        } catch (DateTimeException | NumberFormatException e) {
             throw new InvalidFormatDateException();
         }
     }
@@ -99,11 +97,12 @@ public class Parser {
      * @ throws InvalidFormatByeException Throws an InvalidFormatByeException when the format of Bye is incorrect.
      * @ throws InvalidFormatListException Throws an InvalidFormatListException when the format of List is incorrect.
      * @ throws InvalidFormatDoneException Throws an InvalidFormatDoneException when the format of Done is incorrect.
-     * @ throws EmptyTextException Throws an EmptyTextException when the user did not specific anything after the command.
+     * @ throws EmptyTextException Throws an EmptyTextException when the user did not specific anything after the
+     * command.
      * @ throws InvalidFormatDeleteException Throws an InvalidFormatDeleteException when the format of Delete is
      *incorrect.
      */
-    public static Command parse(String message) throws InvalidFormatByeException, InvalidFormatListException, 
+    public static Command parse(String message) throws InvalidFormatByeException, InvalidFormatListException,
             InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException, InvalidFormatFindException {
         assert message != null;
         String[] inputArr = message.trim().replaceAll("  +", " ").split(" ", 2);
@@ -124,7 +123,7 @@ public class Parser {
         case KEYWORD_DONE:
             // checking if the input is valid
             if (inputArr.length == 1 || !isNumber(inputArr[1])) {
-            throw new InvalidFormatDoneException();
+                throw new InvalidFormatDoneException();
             }
             return new DoneCommand(inputArr);
         case KEYWORD_EVENT:

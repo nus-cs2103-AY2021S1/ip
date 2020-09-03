@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.textUI.Ui;
+import duke.ui.textui.Ui;
 
 /**
  * Class that simulates the bye command of the user.

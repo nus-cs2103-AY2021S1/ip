@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import duke.commands.Command;
-import duke.commands.UnknownCommand;
 import duke.exception.UnknownCommandException;
 import duke.parser.Parser;
 import duke.task.Deadline;

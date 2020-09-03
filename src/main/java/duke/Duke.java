@@ -5,7 +5,7 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.textUI.Ui;
+import duke.ui.textui.Ui;
 import javafx.application.Platform;
 
 /**
@@ -57,5 +57,4 @@ public class Duke {
             return e.getMessage();
         }
     }
-    
 }
