@@ -1,8 +1,10 @@
 package duke;
 
+import duke.command.CommandHandler;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import duke.command.CommandHandler;
 
 public class Duke {
     private TaskList tasks;
@@ -19,46 +21,34 @@ public class Duke {
     }
 
     /**
-     * Runs and serves user.
+     * Runs Duke console mode.
      */
     public void run() {
-        ui.printHello();
-        String command = ui.getCommand();
+        ui.printToConsole(ui.printHello());
+        String input;
+        boolean isRunning = true;
 
-        while (!command.equals("bye")) {
-            try {
-                String[] split = command.split(" ", 2);
+        while (isRunning) {
+            input = ui.getCommand();
+            CommandHandler commandHandler = new CommandHandler(input, ui, tasks);
 
-                switch (split[0]) {
-                case "list":
-                    ui.printTasks(tasks, false);
-                    break;
-                case "done":
-                    tasks.markTaskAsDone(Integer.parseInt(split[1]) - 1);
-                    break;
-                case "todo":
-                case "deadline":
-                case "event":
-                    tasks.addTask(command);
-                    break;
-                case "delete":
-                    tasks.deleteTask(Integer.parseInt(split[1]) - 1);
-                    break;
-                case "find":
-                    ui.printTasks(tasks.findTask(split[1]), true);
+            commandHandler.execute();
+            storage.saveTasks(tasks.getTasks());
+            ui.printToConsole(commandHandler.getLog());
 
-                    break;
-                default:
-                    throw new DukeException("\tApologies! I do not understand what that means :')");
-                }
-
-                command = ui.getCommand();
-                storage.saveTasks(tasks.getTasks());
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
+            if (input.equals("bye")) {
+                isRunning = false;
             }
         }
+        ui.printToConsole(ui.printBye());
+    }
 
-        ui.printBye();
+    /**
+     * Runs Duke GUI mode.
+     */
+    public String getResponse(String input) {
+        CommandHandler commandHandler = new CommandHandler(input, ui, tasks);
+        commandHandler.execute();
+        return commandHandler.getLog();
     }
 }

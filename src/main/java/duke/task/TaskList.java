@@ -5,6 +5,7 @@ import java.util.List;
 
 import duke.DukeException;
 import duke.util.Parser;
+import duke.util.Strings;
 
 /**
  * Represents a list of tasks.
@@ -29,7 +30,7 @@ public class TaskList {
         String[] split = input.split(" ", 2);
 
         if (split.length < 2) {
-            throw new DukeException("\tSorry! The description of a todo cannot be empty :')");
+            throw new DukeException(Strings.ERROR_TODO_DESCRIPTION_EMPTY);
         } else {
             String keyword = split[0];
             String description = split[1];
@@ -38,44 +39,27 @@ public class TaskList {
             case "todo":
                 Task task = new ToDo(description, false);
                 this.tasks.add(task);
-                printAddedConfirmation(task);
                 break;
             case "deadline":
                 String[] splitSlash = description.split(" /by ");
                 if (splitSlash.length != 2) {
-                    throw new DukeException("\tPaise! :') Please use the format: deadline <task> /by <time>"
-                            + "\n\t\t*time format: <yyyy-mm-dd> or  <yyyy-mm-dd HH:mm>");
+                    throw new DukeException(Strings.ERROR_DEADLINE_FORMAT_INCORRECT);
                 }
                 task = new Deadline(splitSlash[0], false, Parser.parseDate(splitSlash[1]));
                 this.tasks.add(task);
-                printAddedConfirmation(task);
                 break;
             case "event":
                 splitSlash = description.split(" /at ");
                 if (splitSlash.length != 2) {
-                    throw new DukeException("\tPaise! :') Please use the correct format: event <task> /at <time> +"
-                            + "\n\t\t*time format: <yyyy-mm-dd> or  <yyyy-mm-dd HH:mm>");
+                    throw new DukeException(Strings.ERROR_EVENT_FORMAT_INCORRECT);
                 }
                 task = new Event(splitSlash[0], false, Parser.parseDate(splitSlash[1]));
                 this.tasks.add(task);
-                printAddedConfirmation(task);
                 break;
             default:
                 break;
             }
         }
-    }
-
-    /**
-     * Prints confirmation for addition of task.
-     * @param task Task object.
-     */
-    public void printAddedConfirmation(Task task) {
-        int size = this.tasks.size();
-        System.out.println("\tOkay! I've added this task:");
-        System.out.println("\t\t" + task.toString());
-        System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D",
-                size, size > 1 ? "tasks" : "task"));
     }
 
     /**
@@ -88,31 +72,24 @@ public class TaskList {
         try {
             this.tasks.set(index, task);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Sorry! THe index is out of bounds! :')");
+            throw new DukeException(Strings.ERROR_INDEX_OUT_OF_BOUNDS);
         } catch (NumberFormatException e) {
-            throw new DukeException("\tPaise! :') Please use the correct format: done <order of task in the list>");
+            throw new DukeException(Strings.ERROR_DONE_FORMAT_INCORRECT);
         }
-        System.out.println("\tNice! I've marked this task as done:\n\t\t" + task);
     }
 
     /**
      * Removes the (index + 1)th task from the task list.
+     *
      * @param index Index of the to-be-deleted task in the task list.
      */
     public void deleteTask(int index) throws DukeException {
         try {
-            Task task = this.tasks.get(index);
-            int size = this.tasks.size();
             this.tasks.remove(index);
-
-            System.out.println("\tOkay! I've removed this task:\n\t\t" + task.toString());
-            System.out.println(String.format("\tNow you have %d %s in the list. Jiayous! :D",
-                    size - 1, size - 1 > 1 ? "tasks" : "task"));
-
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Sorry! The index is out of bounds! :')");
+            throw new DukeException(Strings.ERROR_INDEX_OUT_OF_BOUNDS);
         } catch (NumberFormatException e) {
-            throw new DukeException("\tPaise! :') Please use the correct format: delete <order of task in the list>");
+            throw new DukeException(Strings.ERROR_DELETE_FORMAT_INCORRECT);
         }
     }
 
@@ -135,5 +112,19 @@ public class TaskList {
      */
     public List<Task> getTasks() {
         return this.tasks;
+    }
+
+    /**
+     * Returns task at the specific index.
+     *
+     * @param index Task index
+     * @return Task at the specific index.
+     */
+    public Task getTaskAtIndex(int index) {
+        return tasks.get(index);
+    }
+
+    public int getLength() {
+        return tasks.size();
     }
 }
