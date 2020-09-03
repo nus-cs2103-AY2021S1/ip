@@ -1,5 +1,7 @@
 package duke.parsers;
 
+import static duke.utils.Messages.MESSAGE_HANDLED_INVALID_COMMAND_ASSERTION;
+
 import duke.commands.AddCommand;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
@@ -116,7 +118,7 @@ public class Parser {
             break;
         }
         default:
-            throw new AssertionError("Invalid command scenario has been handled earlier.");
+            assert false : MESSAGE_HANDLED_INVALID_COMMAND_ASSERTION;
         }
         return new AddCommand(task);
     }
