@@ -4,6 +4,7 @@ import static duke.utils.Messages.MESSAGE_FIND;
 import static duke.utils.Messages.MESSAGE_FIND_NO_MATCH;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
@@ -33,6 +34,20 @@ public class FindCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList taskList) {
+        ArrayList<Task> matchedTasks = getMatchedTasks(taskList);
+        String response = getResponse(matchedTasks);
+        return new CommandResult(response, false);
+    }
+
+    private String getResponse(List<Task> matchedTasks) {
+        if (matchedTasks.isEmpty()) {
+            return MESSAGE_FIND_NO_MATCH;
+        } else {
+            return ListCommand.tasksToString(matchedTasks, MESSAGE_FIND);
+        }
+    }
+
+    private ArrayList<Task> getMatchedTasks(TaskList taskList) {
         ArrayList<Task> matchedTasks = new ArrayList<>();
         ArrayList<Task> allTasks = taskList.getTasks();
         for (Task task : allTasks) {
@@ -40,13 +55,7 @@ public class FindCommand extends Command {
                 matchedTasks.add(task);
             }
         }
-        String response;
-        if (matchedTasks.isEmpty()) {
-            response = MESSAGE_FIND_NO_MATCH;
-        } else {
-            response = ListCommand.tasksToString(matchedTasks, MESSAGE_FIND);
-        }
-        return new CommandResult(response, false);
+        return matchedTasks;
     }
 
     private boolean matchesAllWords(Task task) {

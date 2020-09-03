@@ -1,5 +1,6 @@
 package duke.utils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -46,6 +47,15 @@ public class DukeDateTime implements Comparable<DukeDateTime> {
         return dateTime.getYear() == other.dateTime.getYear()
                 && dateTime.getMonthValue() == other.dateTime.getMonthValue()
                 && dateTime.getDayOfMonth() == other.dateTime.getDayOfMonth();
+    }
+
+    /**
+     * Tests if this DukeDateTime object is today.
+     *
+     * @return True if this DukeDateTime object is today.
+     */
+    public boolean isToday() {
+        return this.isSameDate(new DukeDateTime(LocalDate.now().atStartOfDay(), false));
     }
 
     /**

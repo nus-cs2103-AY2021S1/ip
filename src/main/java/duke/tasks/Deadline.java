@@ -5,7 +5,7 @@ import duke.utils.DukeDateTime;
 /**
  * Represents a deadline.
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements TimeBased {
 
     /** The due date of this object. */
     protected DukeDateTime by;
@@ -21,12 +21,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    /**
-     * Gets the due date of this deadline object.
-     *
-     * @return The due date of this deadline object.
-     */
-    public DukeDateTime getBy() {
+    private DukeDateTime getBy() {
         return by;
     }
 
@@ -49,5 +44,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.toString() + ")";
+    }
+
+    @Override
+    public DukeDateTime getTime() {
+        return getBy();
     }
 }

@@ -5,7 +5,7 @@ import duke.utils.DukeDateTime;
 /**
  * Represents an event.
  */
-public class Event extends Task {
+public class Event extends Task implements TimeBased {
 
     /** The date and/or time of the event. */
     protected DukeDateTime at;
@@ -21,12 +21,7 @@ public class Event extends Task {
         this.at = at;
     }
 
-    /**
-     * Returns the date and/or time of this event.
-     *
-     * @return The date and/or time of this event.
-     */
-    public DukeDateTime getAt() {
+    private DukeDateTime getAt() {
         return at;
     }
 
@@ -48,5 +43,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at.toString() + ")";
+    }
+
+    @Override
+    public DukeDateTime getTime() {
+        return getAt();
     }
 }

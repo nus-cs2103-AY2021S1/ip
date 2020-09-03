@@ -2,7 +2,6 @@ package duke.commands;
 
 import static duke.utils.Messages.MESSAGE_LIST;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import duke.tasklist.TaskList;
