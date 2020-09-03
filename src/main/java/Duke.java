@@ -1,5 +1,3 @@
-
-
 public class Duke {
     /** Object dealing with loading/saving tasks. */
     private final Storage storage;
@@ -66,11 +64,19 @@ public class Duke {
     }
 
     /**
-     * Starts the Duke application.
-     *
-     * @param args Typical String[] argument.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        new Duke(Storage.getFilePath()).run();
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
+
+//    /**
+//     * Starts the Duke application.
+//     *
+//     * @param args Typical String[] argument.
+//     */
+//    public static void main(String[] args) {
+//        new Duke(Storage.getFilePath()).run();
+//    }
 }
