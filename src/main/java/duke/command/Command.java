@@ -8,6 +8,7 @@ import duke.Duke;
 public abstract class Command {
 
     protected String[] names;
+    protected String description = "no description provided.";
 
     /**
      * Do something.
@@ -22,5 +23,13 @@ public abstract class Command {
      */
     public String[] getNames() {
         return names;
+    }
+
+    /**
+     * Gets the description of this command.
+     * @return command description
+     */
+    public String getDescription() {
+        return description;
     }
 }
