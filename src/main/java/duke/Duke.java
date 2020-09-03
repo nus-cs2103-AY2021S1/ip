@@ -1,6 +1,6 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.command.Command;
+import duke.command.Command;
 
 /**
  * Represents a Personal Assistant Chatbot that helps a person to keep track of various things.

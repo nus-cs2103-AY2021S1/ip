@@ -1,8 +1,8 @@
-package main.java.duke;
+package duke;
 
 import java.util.ArrayList;
 
-import main.java.duke.tasks.Task;
+import duke.tasks.Task;
 
 /**
  * Represents the current the task list.
