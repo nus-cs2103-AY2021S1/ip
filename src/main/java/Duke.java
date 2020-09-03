@@ -161,7 +161,7 @@ public class Duke {
 
     private void addToStorageList(Task obj) throws DukeException {
         if (obj.getName().length() == 0) {
-            throw new DukeException(obj.missingNameError());
+            throw new DukeException(obj.returnMissingNameError());
         }
         this.taskList.add(obj);
         String numOfTasks = this.taskList.size() == 1 ? "1 task" : this.taskList.size() + " tasks";

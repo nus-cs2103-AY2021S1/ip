@@ -25,7 +25,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String missingNameError() {
+    public String returnMissingNameError() {
         return "The description of an event task cannot be empty.";
     }
 

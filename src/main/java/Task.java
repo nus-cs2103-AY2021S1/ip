@@ -14,7 +14,7 @@ public class Task {
         return String.valueOf(this.name);
     }
 
-    public String missingNameError() {
+    public String returnMissingNameError() {
         return "The description of a task cannot be empty.";
     }
 
