@@ -23,7 +23,7 @@ public class DoneCommand extends Command {
             taskList.update(index);
             return "Nice! I've marked this task as done\n  " + task.toString();
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new InvalidCommandException("Please input a valid index");
+            throw new InvalidCommandException("Please input a valid index.");
         }
     }
 }

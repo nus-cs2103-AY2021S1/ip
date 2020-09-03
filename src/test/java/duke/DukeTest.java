@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 import duke.exception.InvalidSaveFileException;
 
 public class DukeTest {
-    private static final Path TEST_FILE_PATH = Paths.get("test", "data", "duke.txt");
+    private static final Path TEST_FILE_PATH = Paths.get("temp-data", "duke.txt");
     private static final ByteArrayOutputStream OUT_CONTENT = new ByteArrayOutputStream();
     private static final PrintStream ORIGINAL_OUT = System.out;
     private static final InputStream SYSIN_BACKUP = System.in;
@@ -51,7 +51,6 @@ public class DukeTest {
     static void setUpStreams() throws IOException {
         clearPath();
         System.setOut(new PrintStream(OUT_CONTENT));
-        System.out.println();
         BufferedReader reader = new BufferedReader(new FileReader(Paths.get("duke-test", "input.txt").toString()));
         String[] input = reader.lines().toArray(String[]::new);
         reader.close();
