@@ -61,7 +61,7 @@ sourceSets {
 }
 
 application {
-    mainClassName = "main.gui.Stuff"
+    mainClassName = "main.Launcher"
 }
 
 shadowJar {
