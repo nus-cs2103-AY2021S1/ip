@@ -28,4 +28,8 @@ event
 
 event have dinner
 
+delete 3
+
+list
+
 bye

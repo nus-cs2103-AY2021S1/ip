@@ -25,6 +25,9 @@ public class CommandHandler {
                 case "done":
                     handleDone();
                     break;
+                case "delete":
+                    handleDelete();
+                    break;
                 case "todo":
                     try {
                         handleTodo();
@@ -89,6 +92,18 @@ public class CommandHandler {
         System.out.println("     Nice! I've marked this task as done:");
         System.out.print("     ");
         currentTask.printDescription();
+        System.out.println("    ____________________________________________________________\n");
+    }
+
+    public void handleDelete() {
+        int index = sc.nextInt();
+        Task currentTask = taskList.get(index - 1);
+        taskList.remove(index - 1);
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Noted! I've removed this task:");
+        System.out.print("     ");
+        currentTask.printDescription();
+        System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
         System.out.println("    ____________________________________________________________\n");
     }
 
