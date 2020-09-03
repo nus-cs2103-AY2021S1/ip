@@ -11,11 +11,11 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList tasks) {
         // do tasklist stuff here
         tasks.markAsDone(index);
         // do UI stuff here
-        Ui.printDone("     " + tasks.getTask(index).toString() + "\n");
+        return Ui.printDone("     " + tasks.getTask(index).toString() + "\n");
         // do storage stuff here
         // tbc
     }

@@ -12,12 +12,12 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList tasks) {
         // Do TaskList stuff
         Task taskToBeDeleted = tasks.getTask(indexToBeDeleted);
         tasks.delete(indexToBeDeleted);
         // Do UI stuff
-        Ui.printDelete(taskToBeDeleted.getDescription(), tasks.length());
+        return Ui.printDelete(taskToBeDeleted.getDescription(), tasks.length());
         // Do storage stuff
         // tbc
     }

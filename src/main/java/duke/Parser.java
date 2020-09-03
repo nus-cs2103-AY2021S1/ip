@@ -37,7 +37,7 @@ public class Parser {
             Task toAdd = Parser.parseEvent(echo);
             return new EventCommand(toAdd);
         } else {
-            throw new DukeException("Invalid command.");
+            throw new DukeException("Input not recognized.");
         }
     }
 
