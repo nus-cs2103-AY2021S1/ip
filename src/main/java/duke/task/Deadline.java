@@ -26,6 +26,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public LocalDateTime getBy() {
+        return this.by;
+    }
+
     /**
      * Returns a boolean indicating if the deadline is due by the given date.
      *
@@ -47,14 +51,5 @@ public class Deadline extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a");
 
         return "[D]" + super.toString() + " (by: " + this.by.format(formatter) + ")";
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Deadline) {
-            return super.equals(obj) && this.by.equals(((Deadline) obj).by);
-        }
-
-        return false;
     }
 }

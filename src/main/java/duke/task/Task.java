@@ -41,6 +41,10 @@ public abstract class Task {
         return this.isDone ? "\u2713" : "\u2718";
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Marks the task as done.
      */
@@ -65,14 +69,5 @@ public abstract class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Task) {
-            return this.description.equals(((Task) obj).description);
-        }
-
-        return false;
     }
 }

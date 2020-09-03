@@ -26,6 +26,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public LocalDateTime getAt() {
+        return this.at;
+    }
+
     /**
      * Returns a boolean indicating if the event is happening at the given date.
      *
@@ -47,14 +51,5 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a");
 
         return "[E]" + super.toString() + " (at: " + this.at.format(formatter) + ")";
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Event) {
-            return super.equals(obj) && this.at.equals(((Event) obj).at);
-        }
-
-        return false;
     }
 }

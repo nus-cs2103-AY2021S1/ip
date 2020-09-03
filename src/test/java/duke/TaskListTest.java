@@ -21,29 +21,31 @@ public class TaskListTest {
 
     @Test
     public void addTodo_validTodo_todoReturned() throws DukeException {
-        Task expectedTask = new Todo(TaskListTest.DESCRIPTION);
+        Todo expectedTask = new Todo(TaskListTest.DESCRIPTION);
         TaskList taskList = new TaskList();
 
         taskList.addTask(TaskType.TODO, TaskListTest.DESCRIPTION, null);
-        assertEquals(expectedTask, taskList.getTask(1));
+        assertEquals(expectedTask.getDescription(), taskList.getTask(1).getDescription());
     }
 
     @Test
     public void addDeadline_validDeadline_deadlineReturned() throws DukeException {
-        Task expectedTask = new Deadline(TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
+        Deadline expectedTask = new Deadline(TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
         TaskList taskList = new TaskList();
 
         taskList.addTask(TaskType.DEADLINE, TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
-        assertEquals(expectedTask, taskList.getTask(1));
+        assertEquals(expectedTask.getDescription(), taskList.getTask(1).getDescription());
+        assertEquals(expectedTask.getBy(), ((Deadline) taskList.getTask(1)).getBy());
     }
 
     @Test
     public void addEvent_validEvent_eventReturned() throws DukeException {
-        Task expectedTask = new Event(TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
+        Event expectedTask = new Event(TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
         TaskList taskList = new TaskList();
 
         taskList.addTask(TaskType.EVENT, TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
-        assertEquals(expectedTask, taskList.getTask(1));
+        assertEquals(expectedTask.getDescription(), taskList.getTask(1).getDescription());
+        assertEquals(expectedTask.getAt(), ((Event) taskList.getTask(1)).getAt());
     }
 
     @Test
