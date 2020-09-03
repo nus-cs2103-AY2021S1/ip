@@ -22,6 +22,8 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -113,10 +113,15 @@ public class Parser {
         if (input.equals("bye")) {
             return ("Bye. Hope to see you again soon!");
         } else if (input.equals("list")) {
-            String output = "Here are the tasks in your list:\n";
-            for (Task task : taskList.getTasks()) {
-                int index = taskList.getTasks().indexOf(task) + 1;
-                output += (index + "." + task + "\n");
+            String output = "";
+            if (taskList.getTasks().size() == 0) {
+                output += "You have no tasks in your list!";
+            } else {
+                output += "Here are the tasks in your list:\n";
+                for (Task task : taskList.getTasks()) {
+                    int index = taskList.getTasks().indexOf(task) + 1;
+                    output += (index + "." + task + "\n");
+                }
             }
             return output;
         } else {

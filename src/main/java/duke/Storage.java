@@ -34,44 +34,45 @@ public class Storage {
      * a TaskList object so that it can be tracked.
      *
      * @return a List of tasks
-     * @throws FileNotFoundException thrown when an attempt to open the specified file has failed
+     * @throws IOException produced by failed or interrupted I/O operations
      */
-    public List<Task> load() throws FileNotFoundException {
+    public List<Task> load() throws IOException {
         File f = new File(filePath);
+        if (!f.exists()) {
+            f.createNewFile();
+        }
         Scanner s = new Scanner(f);
-        if (f.exists()) {
-            while (s.hasNext()) {
-                String line = s.nextLine();
-                String[] arrOfStr = line.split(" @ ", 0);
-                String symbol = arrOfStr[0];
-                String status = arrOfStr[1];
-                String description = arrOfStr[2];
-                Task newTask;
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            String[] arrOfStr = line.split(" @ ", 0);
+            String symbol = arrOfStr[0];
+            String status = arrOfStr[1];
+            String description = arrOfStr[2];
+            Task newTask;
 
-                if (symbol.equals("[T]")) {
-                    newTask = new Todo(description);
-                } else if (symbol.equals("[D]")) {
-                    String date = arrOfStr[3];
-                    String[] dateSplit = date.split(" ", 0);
-                    if (dateSplit.length > 3) {
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy hhmm a");
-                        LocalDateTime localDateTime = LocalDateTime.parse(date, formatter);
-                        newTask = new Deadline(description, localDateTime);
-                    } else {
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-                        LocalDate localDate = LocalDate.parse(date, formatter);
-                        newTask = new Deadline(description, localDate);
-                    }
+            if (symbol.equals("[T]")) {
+                newTask = new Todo(description);
+            } else if (symbol.equals("[D]")) {
+                String date = arrOfStr[3];
+                String[] dateSplit = date.split(" ", 0);
+                if (dateSplit.length > 3) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy hhmm a");
+                    LocalDateTime localDateTime = LocalDateTime.parse(date, formatter);
+                    newTask = new Deadline(description, localDateTime);
                 } else {
-                    String by = arrOfStr[3];
-                    newTask = new Event(description, by);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                    LocalDate localDate = LocalDate.parse(date, formatter);
+                    newTask = new Deadline(description, localDate);
                 }
-
-                if (status.equals("[✓]")) {
-                    newTask.markAsDone();
-                }
-                tasks.add(newTask);
+            } else {
+                String by = arrOfStr[3];
+                newTask = new Event(description, by);
             }
+
+            if (status.equals("[✓]")) {
+                newTask.markAsDone();
+            }
+            tasks.add(newTask);
         }
         return tasks;
     }

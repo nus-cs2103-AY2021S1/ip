@@ -40,10 +40,14 @@ public class Ui {
      */
     public void list(TaskList taskList) {
         printBorder();
-        System.out.println(indentation + "Here are the tasks in your list:");
-        for (Task task : taskList.getTasks()) {
-            int index = taskList.getTasks().indexOf(task) + 1;
-            System.out.println(indentation + index + "." + task);
+        if (taskList.getTasks().size() == 0) {
+            System.out.println(indentation + "You have no tasks in your list!");
+        } else {
+            System.out.println(indentation + "Here are the tasks in your list:");
+            for (Task task : taskList.getTasks()) {
+                int index = taskList.getTasks().indexOf(task) + 1;
+                System.out.println(indentation + index + "." + task);
+            }
         }
         printBorder();
     }
