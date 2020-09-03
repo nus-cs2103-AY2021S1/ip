@@ -8,6 +8,7 @@ import duke.parser.CommandLineInterfaceParser;
 
 import duke.utils.Messages;
 import javafx.application.Platform;
+import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -35,6 +36,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        BooleanBinding isUserInputEmpty = new BooleanBinding() {
+            {
+                super.bind(userInput.textProperty());
+            }
+            @Override
+            protected boolean computeValue() {
+                return userInput.getText().isEmpty();
+            }
+        };
+        sendButton.disableProperty().bind(isUserInputEmpty);
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Messages.WELCOME_MESSAGE, dukeImage)
         );
@@ -47,6 +58,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (input.isEmpty()) {
+            return;
+        }
+
         CommandOutput executionOutput = duke.getCommandExecutionOutput(input);
         String response = executionOutput.getCommandOutput();
         dialogContainer.getChildren().addAll(
