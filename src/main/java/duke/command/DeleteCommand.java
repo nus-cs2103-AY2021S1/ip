@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Duke;
+import duke.exception.ExceptionMessage;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
 
@@ -14,6 +15,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand() {
         names = new String[] { "delete" };
+        description = "Deletes a task using its index\nFormat: " + CommandFormat.DELETE_CMD_FORMAT;
     }
 
     /**
@@ -53,7 +55,7 @@ public class DeleteCommand extends Command {
 
     private void checkException(int taskIndex, String str, Duke duke) {
         if (duke.getTaskList().getSize() <= taskIndex || taskIndex < 0) {
-            String errMessage = "\nSorry " + str + " is not a valid index\n";
+            String errMessage = ExceptionMessage.getInvalidIndexMessage(str);
             throw new InvalidIndexException(errMessage);
         }
     }

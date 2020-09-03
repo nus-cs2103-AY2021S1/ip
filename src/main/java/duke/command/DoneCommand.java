@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Duke;
+import duke.exception.ExceptionMessage;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
 import duke.ui.UiPrint;
@@ -15,6 +16,7 @@ public class DoneCommand extends Command {
      */
     public DoneCommand() {
         names = new String[] { "done" };
+        description = "Marks a task as done using its index\nFormat: " + CommandFormat.DONE_CMD_FORMAT;
     }
 
     /**
@@ -55,8 +57,7 @@ public class DoneCommand extends Command {
 
     private void checkException(int taskIndex, String str, Duke duke) {
         if (duke.getTaskList().getSize() <= taskIndex || taskIndex < 0) {
-            String line = UiPrint.getLine(UiPrint.STAR, 50);
-            String errMessage = "\nSorry " + str + " is not a valid index\n";
+            String errMessage = ExceptionMessage.getInvalidIndexMessage(str);
             throw new InvalidIndexException(errMessage);
         }
     }

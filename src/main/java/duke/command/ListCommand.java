@@ -12,6 +12,7 @@ public class ListCommand extends Command {
      */
     public ListCommand() {
         names = new String[] { "list" };
+        description = "Lists all current tasks.\nFormat" + CommandFormat.LIST_CMD_FORMAT;
     }
 
     /**

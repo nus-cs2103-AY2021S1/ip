@@ -13,6 +13,7 @@ public class DeadlineCommand extends Command {
      */
     public DeadlineCommand() {
         names = new String[] { "deadline" };
+        description = "Creates a deadline task\nFormat: " + CommandFormat.DEADLINE_CMD_FORMAT;
     }
 
     /**

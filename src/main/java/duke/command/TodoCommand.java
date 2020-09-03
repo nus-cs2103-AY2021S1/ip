@@ -13,6 +13,7 @@ public class TodoCommand extends Command {
      */
     public TodoCommand() {
         names = new String[] { "todo" };
+        description = "Creates a todo task.\nFormat: " + CommandFormat.TODO_CMD_FORMAT;
     }
 
     /**
