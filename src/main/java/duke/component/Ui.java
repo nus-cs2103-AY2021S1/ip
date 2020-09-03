@@ -9,6 +9,6 @@ public interface Ui {
     String printList(TaskList list, Predicate<Task> predicate, String note);
     void output(String message);
     String readInput();
-    String greeting();
+    void greeting();
     void close();
 }
