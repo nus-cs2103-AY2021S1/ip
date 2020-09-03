@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -26,6 +27,8 @@ public class GraphicalUserInterface extends Ui {
         label = new Label(super.getWelcome());
 
         grid = new GridPane();
+        grid.setPrefWidth(800);
+        grid.setPrefHeight(500);
         grid.addRow(0, textField);
         grid.addRow(1, label);
 
@@ -67,7 +70,7 @@ public class GraphicalUserInterface extends Ui {
 
     @Override
     public void showWelcome() {
-        label.setText(getWelcome());
+        addResponse(getWelcome());
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
     }
@@ -75,6 +78,7 @@ public class GraphicalUserInterface extends Ui {
     @Override
     public void showGoodbye() {
         addResponse(getGoodbye());
+        Platform.exit();
     }
 
     /**

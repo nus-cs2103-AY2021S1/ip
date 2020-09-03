@@ -55,9 +55,10 @@ public class Duke extends Application {
                         if (c.isExit()) {
                             ui.showGoodbye();
                         }
-                        textField.setText("");
                     } catch (DukeException | TaskException e) {
                         ui.showError(e.getMessage());
+                    } finally {
+                        textField.setText("");
                     }
                 }
             }
