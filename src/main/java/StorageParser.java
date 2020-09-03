@@ -1,10 +1,11 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class StorageParser {
 
     public static boolean isDone(String symbol) {
-        if (symbol.equals("✓")) {
+        if (symbol.equals("\u2713")) {
             return true;
         } else {
             return false;
@@ -26,9 +27,9 @@ public class StorageParser {
             String organisedDescription = splitTask[1].replaceAll(" \\(by: ","|")
                     .replaceAll("\\)","");
             String[] splitDescription = organisedDescription.split("\\|");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mma");
-            LocalDateTime localDateAndTime = LocalDateTime.parse(splitDescription[1], formatter);
-            task = new Deadline(isDone, splitDescription[0], localDateAndTime);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+            LocalDate localDate = LocalDate.parse(splitDescription[1], formatter);
+            task = new Deadline(isDone, splitDescription[0], localDate);
         } else if (typeAndIsDoneArr[0].equals("E")) {
             boolean isDone = isDone(typeAndIsDoneArr[1]);
             String organisedDescription = splitTask[1].replaceAll(" \\(at: ","|")

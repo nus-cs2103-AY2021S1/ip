@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -121,8 +122,8 @@ public class Command {
         String[] modifiedCommand = removeFirst(commandArr);
         String[] upper = removeAfterWord(modifiedCommand, "/by");
         String[] lower = keepAfterWord(modifiedCommand, "/by");
-        LocalDateTime dateAndTime = Parser.changeDateAndTime(lower);
-        Task newTask = new Deadline(joinString(upper), dateAndTime);
+        LocalDate date = Parser.changeDate(lower);
+        Task newTask = new Deadline(joinString(upper), date);
         return newTask;
     }
 
