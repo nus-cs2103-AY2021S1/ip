@@ -32,11 +32,11 @@ public class EventCommand extends Command {
             Event newEvent = new Event(details[0], details[1], false);
             taskList.add(newEvent);
             storage.save(taskList);
-            String response = "Got it. I've added this duke.task: \n" + taskList.get(taskList.size() - 1) + "\n"
+            String response = "Got it. I've added this task: \n" + taskList.get(taskList.size() - 1) + "\n"
                     + "Now you have " + taskList.size() + " tasks in the list.";
             return response;
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Invalid input! Please specify your event description and details!");
+            throw new DukeException("Please specify your event description and details!");
         }
     }
 

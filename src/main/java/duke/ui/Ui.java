@@ -36,27 +36,11 @@ public class Ui {
     }
 
     /**
-     * Says goodbye to user.
-     * Runs when program is closed.
-     */
-    public void goodbye() {
-        String close = "_______________________________________ \n"
-                + "Goodbye! See you soon! \n"
-                + "_______________________________________ \n";
-        System.out.println(close);
-        this.scanner.close();
-    }
-
-    /**
      * Prints Duke's response with dividing lines
      *
      * @param response
      */
     public void printResponse(String response) {
-        if (response.equals(" ")) {
-            // Dont print anything
-        } else {
-            System.out.println(LINE + response + "\n" + LINE);
-        }
+        System.out.println(LINE + response + "\n" + LINE);
     }
 }

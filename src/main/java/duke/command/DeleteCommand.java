@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
         try {
             int taskId = Integer.parseInt(taskIdString);
             if (taskId <= 0 || taskId > taskList.size()) {
-                throw new DukeException("Invalid input! That duke.task does not exist!");
+                throw new DukeException("That task does not exist!");
             } else {
                 int new_size = taskList.size() - 1;
                 String response = "Noted! I've deleted this duke.task: \n" + taskList.get(taskId - 1) + "\n"
@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
                 return response;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Invalid input! Please specify which duke.task you want to delete!");
+            throw new DukeException("Please specify which duke.task you want to delete!");
         }
     }
 

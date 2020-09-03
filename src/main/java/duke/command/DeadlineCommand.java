@@ -28,11 +28,11 @@ public class DeadlineCommand extends Command {
             Deadline newDeadline = new Deadline(details[0], details[1], false);
             taskList.add(newDeadline);
             storage.save(taskList);
-            String response = "Got it. I've added this duke.task: \n" + taskList.get(taskList.size() - 1) + "\n"
+            String response = "Got it. I've added this task: \n" + taskList.get(taskList.size() - 1) + "\n"
                     + "Now you have " + taskList.size() + " tasks in the list.";
             return response;
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Invalid input! Please specify your deadline description and details!");
+            throw new DukeException("Please specify your deadline description and details!");
         }
     }
 

@@ -9,7 +9,7 @@ public class ByeCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return " ";
+        return "Goodbye! See you soon!";
     }
 
     @Override

@@ -28,7 +28,7 @@ public class FindCommand extends Command {
                 listItems = listItems + i + ". " + taskList.get(i - 1) + "\n";
             }
         }
-        String response = "Here are your duke.task that matches your search: \n" + listItems;
+        String response = "Here are your task that matches your search: \n" + listItems;
         return response;
     }
 

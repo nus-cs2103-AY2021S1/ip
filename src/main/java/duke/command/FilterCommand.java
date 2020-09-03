@@ -39,13 +39,13 @@ public class FilterCommand extends Command {
                     listItems = listItems + i + ". " + taskList.get(i - 1) + "\n";
                 }
             }
-            String response = "Here are your duke.task due on "
+            String response = "Here are your task due on "
                     + filterDate.format(DateTimeFormatter.ofPattern("MMM d yyy")) + ": \n" + listItems;
             return response;
         } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid input! Please enter a valid date!");
+            throw new DukeException("Please enter a valid date!");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Invalid input! Please enter a valid date!");
+            throw new DukeException("Please enter a valid date!");
         }
     }
 

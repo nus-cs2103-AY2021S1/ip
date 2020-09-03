@@ -13,7 +13,7 @@ public class InvalidCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        throw new DukeException("Invalid duke.command!");
+        throw new DukeException("Sorry that is not a valid command!");
     }
 
     @Override

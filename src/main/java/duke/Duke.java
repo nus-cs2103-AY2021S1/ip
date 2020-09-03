@@ -43,7 +43,6 @@ public class Duke {
                 ui.printResponse(e.getMessage());
             }
         }
-        ui.goodbye();
     }
 
     public static void main(String[] args) {

@@ -30,11 +30,11 @@ public class TodoCommand extends Command {
             ToDo newToDo = new ToDo(this.todoDetails, false);
             taskList.add(newToDo);
             storage.save(taskList);
-            String response = "Got it. I've added this duke.task: \n" + taskList.get(taskList.size() - 1) + "\n"
+            String response = "Got it. I've added this task: \n" + taskList.get(taskList.size() - 1) + "\n"
                     + "Now you have " + taskList.size() + " tasks in the list.";
             return response;
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Invalid input! Please specify your todo description! \n");
+            throw new DukeException("Please specify your todo description! \n");
         }
     }
 

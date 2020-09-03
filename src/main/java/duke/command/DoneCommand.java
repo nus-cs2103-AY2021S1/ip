@@ -25,15 +25,15 @@ public class DoneCommand extends Command {
         try {
             int taskId = Integer.parseInt(this.taskIdString);
             if (taskId <= 0 || taskId > taskList.size()) {
-                throw new DukeException("Invalid input! That duke.task does not exist!");
+                throw new DukeException("That task does not exist!");
             } else {
                 taskList.get(taskId - 1).setCompleted();
                 storage.save(taskList);
-                String response = "Nice! I've marked this duke.task as done: \n" + taskList.get(taskId - 1);
+                String response = "Congrats! I've marked this task as done: \n" + taskList.get(taskId - 1);
                 return response;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Invalid input! Please specify which duke.task you have completed!");
+            throw new DukeException("Please specify which task you have completed!");
         }
     }
 

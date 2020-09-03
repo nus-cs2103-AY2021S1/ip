@@ -21,51 +21,51 @@ public class Parser {
     public static Command parse(String userInput) throws DukeException {
         String[] inputSplit = userInput.split(" ", 2);
         String userCommand = inputSplit[0];
-        if (userCommand.equals("bye")) {  // For exiting the program
+        if (userCommand.equals("bye")) {
             return new ByeCommand();
-        } else if (userCommand.equals("list")) {  // For viewing items in to do list
+        } else if (userCommand.equals("list")) {
             return new ListCommand();
-        } else if (userCommand.equals("done")) {  // For marking items in the to do list as done
+        } else if (userCommand.equals("done")) {
             try {
                 return new DoneCommand(inputSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException(LINE + "Invalid input! Please specify which duke.task you have completed! \n" + LINE);
+                throw new DukeException("Please specify which task you have completed!");
             }
-        } else if (userCommand.equals("todo")) { // Add new to do duke.task
+        } else if (userCommand.equals("todo")) {
             try {
                 return new TodoCommand(inputSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException(LINE + "Invalid input! Please specify your todo description! \n" + LINE);
+                throw new DukeException("Please specify your todo description!");
             }
-        } else if (userCommand.equals("deadline")) { // Add new deadline
+        } else if (userCommand.equals("deadline")) {
             try {
                 return new DeadlineCommand(inputSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException(LINE + "Invalid input! Please specify your deadline description and details! \n" + LINE);
+                throw new DukeException("Please specify your deadline description, date and time!");
             }
-        } else if (userCommand.equals("event")) { // Add new event
+        } else if (userCommand.equals("event")) {
             try {
                 return new EventCommand(inputSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException(LINE + "Invalid input! Please specify your event description and details! \n" + LINE);
+                throw new DukeException("Please specify your event description, date and time!");
             }
-        } else if (userCommand.equals("delete")) { // Delete duke.task
+        } else if (userCommand.equals("delete")) {
             try {
                 return new DeleteCommand(inputSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException(LINE + "Invalid input! Please specify which duke.task you want to delete! \n" + LINE);
+                throw new DukeException("Please specify which task you want to delete!");
             }
-        } else if (userCommand.equals("filter")) { // Filter taskList
+        } else if (userCommand.equals("filter")) {
             try {
                 return new FilterCommand(inputSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException(LINE + "Invalid input! Please specify which date you want to filter! \n" + LINE);
+                throw new DukeException("Please specify which date you want to filter!");
             }
         } else if (userCommand.equals("find")) {
             try {
                 return new FindCommand(inputSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException(LINE + "Invalid input! Please specify the keyword to find!! \n" + LINE);
+                throw new DukeException("Please specify the keyword to find!");
             }
         } else {
             return new InvalidCommand();
