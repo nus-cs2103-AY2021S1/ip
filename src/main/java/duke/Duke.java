@@ -5,7 +5,7 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import duke.ui.textUI.Ui;
 import javafx.application.Platform;
 
 /**
@@ -18,7 +18,6 @@ public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
-    private boolean isExit;
 
     /**
      * Initialize the Duke object
@@ -58,22 +57,5 @@ public class Duke {
             return e.getMessage();
         }
     }
-
-    /**
-     * Activates the duke bot.
-     */
-    public void echo() {
-        ui.greetings();
-        isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.readCommand();
-                Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
-                isExit = c.getExitStatus();
-            } catch (DukeException e) {
-                ui.printException(e.getMessage());
-            }
-        }
-    }
+    
 }
