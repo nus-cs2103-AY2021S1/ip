@@ -50,6 +50,9 @@ public class AddCommand extends Command {
 
         String[] tempArray = fullCommand.trim().split(" ");
 
+        assert Parser.isToDoCommand(tempArray[0]) || Parser.isEventCommand(tempArray[0])
+                || Parser.isDeadlineCommand(tempArray[0]) : "Invalid Command";
+
         if (Parser.isToDoCommand(tempArray[0])) {
             if (tempArray.length == 1) {
                 throw new InvalidToDoFormatException();
