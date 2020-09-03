@@ -11,7 +11,7 @@ public class Task {
      * Constructor for creating a task.
      * @param name the name of this task object
      */
-    Task(String name) {
+    public Task(String name) {
         // TODO: initialise the isCompleted field
         this.name = name;
     }
