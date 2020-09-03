@@ -68,11 +68,11 @@ public class Storage {
     /**
      * Saves the user's task list into the file.
      *
-     * @param tasklist The overall user's task list.
+     * @param taskList The overall user's task list.
      */
-    public void writeTasks(TaskList tasklist) {
+    public void writeTasks(TaskList taskList) {
         try {
-            ArrayList<Task> tasks = tasklist.getTaskList();
+            ArrayList<Task> tasks = taskList.getTaskList();
             File file = new File(filePath);
             file.getParentFile().mkdirs();
             FileWriter fileWriter;

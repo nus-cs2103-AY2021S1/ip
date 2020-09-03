@@ -39,7 +39,7 @@ public class Task {
     }
 
     /**
-     * Get the status of the task ("1" means done / "0" means not donw).
+     * Get the status of the task ("1" means done / "0" means not done).
      * @return The int representing the status of the task
      */
     public String getStatusNum() {

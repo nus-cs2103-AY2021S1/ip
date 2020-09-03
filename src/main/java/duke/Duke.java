@@ -54,7 +54,7 @@ public class Duke {
     /**
      * Starts the program.
      *
-     * @param args Arges.
+     * @param args Args.
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
