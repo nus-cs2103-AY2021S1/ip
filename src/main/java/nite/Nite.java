@@ -28,7 +28,6 @@ public class Nite {
         try {
             tasks = new TaskList(storage.load());
         } catch (NiteException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -40,13 +39,13 @@ public class Nite {
      * @return Response to user's input.
      */
     public String getResponse(String input) {
-        boolean isExit = false;
+        boolean isExit;
         try {
             Command command = Parser.parse(input);
             isExit = command.isExit();
             if (isExit) {
-                // System.exit(0);
-                return ui.showFarewell();
+                System.exit(0);
+                //return ui.showFarewell();
             }
             return command.execute(tasks, ui, storage);
         } catch (NiteException e) {

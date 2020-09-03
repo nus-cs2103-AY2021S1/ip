@@ -1,17 +1,19 @@
 package nite.ui;
 
-import nite.Nite;
+import java.io.File;
+
 import javafx.fxml.FXML;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import java.io.File;
+
+import nite.Nite;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -48,14 +50,15 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(greeting, dukeImage)
         );
+        playSound("src/main/resources/audio/meow2.wav");
     }
 
     public void setNite(Nite nite) {
         this.nite = nite;
     }
 
-    private void playSound() {
-        Media sound = new Media(new File("src/main/resources/audio/meow.wav").toURI().toString());
+    private void playSound(String soundPath) {
+        Media sound = new Media(new File(soundPath).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
     }
@@ -72,7 +75,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        playSound();
+        playSound("src/main/resources/audio/meow.wav");
         userInput.clear();
     }
 }

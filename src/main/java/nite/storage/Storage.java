@@ -15,8 +15,8 @@ import nite.task.TaskList;
  */
 public class Storage {
 
-    private File file;
-    private File folder;
+    private final File file;
+    private final File folder;
 
     /**
      * Creates a Storage manager.
