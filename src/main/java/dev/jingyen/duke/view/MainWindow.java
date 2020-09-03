@@ -1,3 +1,7 @@
+package dev.jingyen.duke.view;
+
+import dev.jingyen.duke.Duke;
+import dev.jingyen.duke.Ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

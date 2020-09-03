@@ -1,3 +1,5 @@
+package dev.jingyen.duke.view;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

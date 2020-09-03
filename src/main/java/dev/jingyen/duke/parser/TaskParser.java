@@ -1,3 +1,10 @@
+package dev.jingyen.duke.parser;
+
+import dev.jingyen.duke.model.Deadline;
+import dev.jingyen.duke.model.Event;
+import dev.jingyen.duke.model.Task;
+import dev.jingyen.duke.model.Todo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -5,16 +12,16 @@ import java.time.format.DateTimeParseException;
 // TODO: 26/8/20 Add try-catch clause
 
 /**
- * A class containing a collection of static methods that Duke uses to parse Tasks from Strings.
+ * A class containing a collection of static methods that dev.jingyen.duke.Duke uses to parse Tasks from Strings.
  *
  * @author jingyenloh
  */
 public class TaskParser {
     /**
-     * Parses a Task from an input string.
+     * Parses a dev.jingyen.duke.model.Task from an input string.
      *
      * @param line the input to parse
-     * @return a Task which was parsed from the String
+     * @return a dev.jingyen.duke.model.Task which was parsed from the String
      */
     public static Task parse(String line) {
         String[] tokens = line.split("\\|");
@@ -42,10 +49,10 @@ public class TaskParser {
     /**
      * Returns an Event Task, given its state, task name, and the range it occurs within
      *
-     * @param isDone       whether the Task has been completed
-     * @param taskName     the name of the Task
-     * @param timeRangeStr the interval the Event occurs in
-     * @return an Event Task
+     * @param isDone       whether the dev.jingyen.duke.model.Task has been completed
+     * @param taskName     the name of the dev.jingyen.duke.model.Task
+     * @param timeRangeStr the interval the dev.jingyen.duke.model.Event occurs in
+     * @return an dev.jingyen.duke.model.Event dev.jingyen.duke.model.Task
      */
     public static Event parseEvent(boolean isDone, String taskName, String timeRangeStr) {
         return new Event(isDone, taskName, timeRangeStr);
@@ -54,10 +61,10 @@ public class TaskParser {
     /**
      * Returns a Deadline Task, given its state, task name, and a String representing the deadline.
      *
-     * @param isDone      whether the Task has been completed
-     * @param taskName    the name of the Task
+     * @param isDone      whether the dev.jingyen.duke.model.Task has been completed
+     * @param taskName    the name of the dev.jingyen.duke.model.Task
      * @param deadlineStr a String representing the deadline
-     * @return a Deadline Task
+     * @return a dev.jingyen.duke.model.Deadline dev.jingyen.duke.model.Task
      * @throws DateTimeParseException if <code>deadlineStr</code> is not well formatted
      */
     public static Deadline parseDeadline(boolean isDone, String taskName, String deadlineStr)
@@ -68,11 +75,11 @@ public class TaskParser {
     }
 
     /**
-     * Returns a Todo Task, given its state and task name.
+     * Returns a dev.jingyen.duke.model.Todo dev.jingyen.duke.model.Task, given its state and task name.
      *
-     * @param isDone   whether the Task has been completed
-     * @param taskName the name of the Task
-     * @return a Todo Task
+     * @param isDone   whether the dev.jingyen.duke.model.Task has been completed
+     * @param taskName the name of the dev.jingyen.duke.model.Task
+     * @return a dev.jingyen.duke.model.Todo dev.jingyen.duke.model.Task
      */
     public static Todo parseTodo(boolean isDone, String taskName) {
         return new Todo(isDone, taskName);
@@ -81,12 +88,12 @@ public class TaskParser {
     /**
      * Parses a type of Task out of an input String, given a command on the type of Task to parse into.
      *
-     * @param command the type of Task to parse into
-     * @param input   the input to parse to create the Task from
-     * @return <code>Task</code> a Task that was parsed from the input
+     * @param command the type of dev.jingyen.duke.model.Task to parse into
+     * @param input   the input to parse to create the dev.jingyen.duke.model.Task from
+     * @return <code>dev.jingyen.duke.model.Task</code> a dev.jingyen.duke.model.Task that was parsed from the input
      * @throws InvalidTaskException if the input is malformed
      */
-    // TODO: Consider some cleaner way of validating, perhaps a factory method for each Task
+    // TODO: Consider some cleaner way of validating, perhaps a factory method for each dev.jingyen.duke.model.Task
     public static Task parseInput(String command, String input) throws InvalidTaskException {
         switch (command) {
         case "todo":

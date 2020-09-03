@@ -1,3 +1,5 @@
+package dev.jingyen.duke.model;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -12,10 +14,10 @@ public class Deadline extends Task {
     private final LocalDate deadline;
 
     /**
-     * A constructor for a Deadline Task that is not done yet.
+     * A constructor for a dev.jingyen.duke.model.Deadline dev.jingyen.duke.model.Task that is not done yet.
      *
-     * @param taskName the name of the Task
-     * @param deadline when the Task has to be completed before
+     * @param taskName the name of the dev.jingyen.duke.model.Task
+     * @param deadline when the dev.jingyen.duke.model.Task has to be completed before
      */
     public Deadline(String taskName, LocalDate deadline) {
         super(taskName);
@@ -25,9 +27,9 @@ public class Deadline extends Task {
     /**
      * A constructor for a Deadline Task, which may or may not be done yet.
      *
-     * @param isDone   whether the Task has been completed
-     * @param taskName the name of the Task
-     * @param deadline when the Task has to be completed before
+     * @param isDone   whether the dev.jingyen.duke.model.Task has been completed
+     * @param taskName the name of the dev.jingyen.duke.model.Task
+     * @param deadline when the dev.jingyen.duke.model.Task has to be completed before
      */
     public Deadline(boolean isDone, String taskName, LocalDate deadline) {
         super(isDone, taskName);
@@ -43,7 +45,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Serializes the Deadline into a String that is easy to parse. The String takes the form:
+     * Serializes the dev.jingyen.duke.model.Deadline into a String that is easy to parse. The String takes the form:
      * <code>DEADLINE|isDone|taskName|deadLine</code>.
      * The deadLine is formatted into yyyy-mm-dd, where yyyy is the year, mm- is the month, and dd is the day.
      *

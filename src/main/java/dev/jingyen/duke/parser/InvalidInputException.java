@@ -1,3 +1,5 @@
+package dev.jingyen.duke.parser;
+
 /**
  * An Exception that should be thrown when malformed input is received.
  *

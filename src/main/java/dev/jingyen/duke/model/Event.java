@@ -1,3 +1,5 @@
+package dev.jingyen.duke.model;
+
 /**
  * An Event is a kind of Task that occurs within a certain period/time range.
  *
@@ -23,8 +25,9 @@ public class Event extends Task {
     }
 
     /**
-     * Serializes the Event into a String that is easy to parse. The String takes the form:
-     * <code>Event|isDone|taskName|timeRange</code>.
+     * Serializes the dev.jingyen.duke.model.Event into a String that is easy to parse. The String takes the form:
+     * <code>dev.jingyen.duke.model.Event|isDone|taskName|timeRange</code>.
+     *
      * @return A formatted String ready for saving into a file
      */
     @Override

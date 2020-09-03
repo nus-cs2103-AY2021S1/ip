@@ -1,3 +1,7 @@
+package dev.jingyen.duke;
+
+import dev.jingyen.duke.model.Task;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -33,9 +37,14 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Searches the TaskList for tasks that match a search term
+     * @param term the search term
+     * @return a List of Tasks that match the search term
+     */
     public List<Task> searchTasks(String term) {
         return tasks.stream()
-                .filter(t -> t.taskName.contains(term))
+                .filter(t -> t.contains(term))
                 .collect(Collectors.toList());
     }
 }

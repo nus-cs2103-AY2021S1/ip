@@ -1,7 +1,11 @@
+package dev.jingyen.duke;
+
+import dev.jingyen.duke.model.Task;
+
 import java.util.List;
 
 public class Ui {
-    private static final String LOGO =
+    public static final String LOGO =
             "██████╗ ███████╗███╗   ██╗███████╗██████╗ ██╗ ██████╗████████╗\n"
                     + "██╔══██╗██╔════╝████╗  ██║██╔════╝██╔══██╗██║██╔════╝╚══██╔══╝\n"
                     + "██████╔╝█████╗  ██╔██╗ ██║█████╗  ██║  ██║██║██║        ██║\n"
@@ -46,7 +50,7 @@ public class Ui {
         if (count == 0) {
             return "";
         }
-        if (count == 0) {
+        if (count == 1) {
             return this.displayMessages(
                     "Don't forget you already have one thing to do.",
                     "But okay.");
@@ -67,12 +71,10 @@ public class Ui {
             return this.displayMessages("You didn't tell me to remind you anything.");
         } else {
             String[] messages = new String[noOfTasks + 1];
-            StringBuilder sb = new StringBuilder("Right, you said you wanted to:");
             messages[0] = "Right, you said you wanted to:";
 
             for (int i = 0; i < noOfTasks; i++) {
                 messages[i + 1] = String.format("%3d: %s", i + 1, tasks.get(i));
-                sb.append(String.format("%3d: %s", i + 1, tasks.get(i)));
             }
 
             return this.displayMessages(messages);

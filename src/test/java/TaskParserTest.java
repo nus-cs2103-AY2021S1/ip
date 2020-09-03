@@ -1,3 +1,6 @@
+import dev.jingyen.duke.model.Deadline;
+import dev.jingyen.duke.model.Todo;
+import dev.jingyen.duke.parser.TaskParser;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

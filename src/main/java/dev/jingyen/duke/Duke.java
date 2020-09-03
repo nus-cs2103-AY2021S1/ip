@@ -1,5 +1,11 @@
+package dev.jingyen.duke;
+
+import dev.jingyen.duke.model.Task;
+import dev.jingyen.duke.parser.InvalidInputException;
+import dev.jingyen.duke.parser.InvalidTaskException;
+import dev.jingyen.duke.parser.TaskParser;
+import dev.jingyen.duke.view.DialogBox;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -12,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
@@ -33,7 +40,7 @@ public class Duke extends Application {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * A Constructor for Duke that initializes the save file path to nothing.
+     * A Constructor for dev.jingyen.duke.Duke that initializes the save file path to nothing.
      */
     public Duke() {
         this.ui = new Ui();
@@ -42,7 +49,7 @@ public class Duke extends Application {
     }
 
     /**
-     * A Constructor for Duke that sets the save file path to a given path.
+     * A Constructor for dev.jingyen.duke.Duke that sets the save file path to a given path.
      *
      * @param filePath the path to the saved tasks
      */
@@ -58,7 +65,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Initializes an instance of Duke, and runs it.
+     * Initializes an instance of dev.jingyen.duke.Duke, and runs it.
      *
      * @param args The command line args passed to the program
      */
@@ -107,7 +114,7 @@ public class Duke extends Application {
      * its arguments were malformed, return an error response to the user.
      *
      * @param input The String containing the command, as well as its arguments
-     * @return Duke's response to the input string
+     * @return dev.jingyen.duke.Duke's response to the input string
      */
     private String handleCommand(String input) {
         try {
@@ -183,7 +190,7 @@ public class Duke extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("dev.jingyen.duke.Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -241,7 +248,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Returns Duke's response String to a user's input.
+     * Returns dev.jingyen.duke.Duke's response String to a user's input.
      */
     public String getResponse(String input) {
         return handleCommand(input);

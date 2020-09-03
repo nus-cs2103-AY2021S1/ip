@@ -1,3 +1,5 @@
+package dev.jingyen.duke.parser;
+
 /**
  * An Exception that should be thrown when invalid input is received, while trying to create a Task.
  *
