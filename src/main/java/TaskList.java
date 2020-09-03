@@ -1,9 +1,8 @@
+import java.util.ArrayList;
+
 /**
  * A class representing the tasks in a list.
  */
-
-import java.util.ArrayList;
-
 public class TaskList {
 
     public ArrayList<Task> tasks;

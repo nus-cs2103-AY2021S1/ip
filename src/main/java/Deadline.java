@@ -1,9 +1,8 @@
-/**
- * A class that contians Deadline tasks with the type "D".
- */
-
 import java.time.LocalDate;
 
+/**
+ * A class that contains Deadline tasks with the type "D".
+ */
 public class Deadline extends Task {
 
     public String type;

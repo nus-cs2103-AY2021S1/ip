@@ -1,9 +1,8 @@
+import java.time.LocalDate;
+
 /**
  * A class that contains event tasks with the type "E".
  */
-
-import java.time.LocalDate;
-
 public class Event extends Task {
 
     public String type;

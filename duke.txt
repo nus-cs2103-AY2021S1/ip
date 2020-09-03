@@ -1,2 +1,1 @@
-T | 0 | clean car | -
-T | 0 | borrow book | -
+T | 0 | read book | -

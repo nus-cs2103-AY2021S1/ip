@@ -1,13 +1,12 @@
-/**
- * The main class with the chat bot dealing with the user's inputs.
- */
-
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * The main class with the chat bot dealing with the user's inputs.
+ */
 public class Duke {
 
     public Storage storage;

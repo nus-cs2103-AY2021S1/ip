@@ -1,7 +1,3 @@
-/**
- * A class responsible for saving and loading tasks to and from the hard disk respectively.
- */
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,6 +5,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+/**
+ * A class responsible for saving and loading tasks to and from the hard disk respectively.
+ */
 public class Storage {
 
     public Path path;

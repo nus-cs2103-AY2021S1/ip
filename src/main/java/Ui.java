@@ -1,10 +1,9 @@
-/**
- * A class responsible for interactions with the user and showing success/failure messages.
- */
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class responsible for interactions with the user and showing success/failure messages.
+ */
 public class Ui {
 
     public Scanner sc;

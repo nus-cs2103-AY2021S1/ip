@@ -1,9 +1,8 @@
+import java.time.LocalDate;
+
 /**
  * A class representing the general tasks valid for the Duke class.
  */
-
-import java.time.LocalDate;
-
 public class Task {
 
     protected String description;
