@@ -57,7 +57,7 @@ public class Deadline extends Task {
             LocalDate date = LocalDate.parse(userInputDate);
             String time = timeFormat(userInputTime);
             return new Deadline(description, userInputDate, userInputTime, date, time);
-        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+        } catch (DateTimeParseException | DukeException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."
                     + "\nFormats to input a task can be found by entering 'format'.");
@@ -75,25 +75,32 @@ public class Deadline extends Task {
      * @throws DukeException  If String time contains invalid format of time.
      */
     private static String timeFormat(String time) throws DukeException {
-        int hour = Integer.parseInt(time.substring(0, 2));
-        int min = Integer.parseInt(time.substring(2, 4));
+        try {
+            int hour = Integer.parseInt(time.substring(0, 2));
+            int min = Integer.parseInt(time.substring(2, 4));
 
-        StringBuilder formattedTime = new StringBuilder();
-        if (hour >= 12 && hour < 24 && min < 60 && min >= 0) {
-            formattedTime.append(hour - 12).append(".")
-                    .append(String.format("%02d", min)).append("pm");
-        } else if (hour > 0 && hour < 12 && min < 60 && min >= 0) {
-            formattedTime.append(hour).append(".")
-                    .append(String.format("%02d", min)).append("am");
-        } else if (hour == 0 && min < 60 && min >= 0) {
-            formattedTime.append("12").append(".")
-                    .append(String.format("%02d", min)).append("am");
-        } else {
+            StringBuilder formattedTime = new StringBuilder();
+            if (hour >= 12 && hour < 24 && min < 60 && min >= 0) {
+                formattedTime.append(hour - 12).append(".")
+                        .append(String.format("%02d", min)).append("pm");
+            } else if (hour > 0 && hour < 12 && min < 60 && min >= 0) {
+                formattedTime.append(hour).append(".")
+                        .append(String.format("%02d", min)).append("am");
+            } else if (hour == 0 && min < 60 && min >= 0) {
+                formattedTime.append("12").append(".")
+                        .append(String.format("%02d", min)).append("am");
+            } else {
+                throw new DukeException("Rawr! Dino could not add your task. "
+                        + "Make sure your format is correct."
+                        + "\nFormats to input a task can be found by entering 'format'.");
+            }
+            return formattedTime.toString();
+        } catch (NumberFormatException e) {
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."
                     + "\nFormats to input a task can be found by entering 'format'.");
         }
-        return formattedTime.toString();
+
     }
 
     @Override
@@ -109,7 +116,7 @@ public class Deadline extends Task {
      * @return String task description to be stored in hard disk.
      */
     public String storedTaskString() {
-        return "D" + "@" + super.storedTaskString()
-                + "@" + this.userInputDate + "@" + this.userInputTime;
+        return "D" + "!@#" + super.storedTaskString()
+                + "!@#" + this.userInputDate + "!@#" + this.userInputTime;
     }
 }

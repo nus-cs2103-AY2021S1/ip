@@ -29,6 +29,6 @@ public class Todo extends Task {
      * @return String task description to be stored in hard disk.
      */
     public String storedTaskString() {
-        return "T" + "@" + super.storedTaskString();
+        return "T" + "!@#" + super.storedTaskString();
     }
 }

@@ -69,9 +69,10 @@ public class Storage {
             } else {
                 Scanner scan = new Scanner(taskFile);
                 while (scan.hasNextLine()) {
+
                     String taskString = scan.nextLine();
                     if (!taskString.equals("")) {
-                        String[] taskSplit = taskString.split("@");
+                        String[] taskSplit = taskString.split("!@#");
                         String taskType = taskSplit[0];
                         String taskDone = taskSplit[1];
                         String taskDesc = taskSplit[2];

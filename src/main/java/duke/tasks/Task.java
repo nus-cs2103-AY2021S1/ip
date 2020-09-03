@@ -42,6 +42,6 @@ public class Task {
      * @return String task description to be stored in hard disk.
      */
     public String storedTaskString() {
-        return this.getStatusIcon() + "@" + taskName;
+        return this.getStatusIcon() + "!@#" + taskName;
     }
 }
