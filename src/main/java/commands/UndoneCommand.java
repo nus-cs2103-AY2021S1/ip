@@ -28,6 +28,8 @@ public class UndoneCommand extends Command {
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException,
             InvalidTaskNumberException {
+        assert ui != null : "Null UI";
+        assert tasks != null : "Null TaskList";
         ui.setMessageUndoneTask();
         undoneTask(index, tasks);
     }
@@ -40,6 +42,7 @@ public class UndoneCommand extends Command {
      */
 
     public void undoneTask(int idx, TaskList tasks) throws TaskNotFoundException, InvalidTaskNumberException {
+        assert tasks != null : "Null TaskList";
         try {
             tasks.getTasks().get(idx - 1).setDone(false);
         } catch (IndexOutOfBoundsException e) {

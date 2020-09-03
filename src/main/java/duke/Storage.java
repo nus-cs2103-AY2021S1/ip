@@ -36,6 +36,7 @@ public class Storage {
      */
     public Storage() {
         file = new File("data.txt");
+        tasks = new TaskList();
     }
 
     /**
@@ -43,6 +44,8 @@ public class Storage {
      * @throws FileNotFoundException If required file is not found.
      */
     public void readData() throws FileNotFoundException {
+        assert file != null : "Null file";
+        assert tasks != null : "Null TaskList";
         Scanner reader = new Scanner(file);
         while (reader.hasNextLine()) {
             String[] line = reader.nextLine().split(" # ");
@@ -70,6 +73,7 @@ public class Storage {
      * @throws InvalidFileException File was not found at the end of the input path.
      */
     public void writeToFile(String path, String text) throws InvalidFileException {
+        assert path.equals("data.txt");
         try {
             FileWriter fw = new FileWriter(path);
             fw.write(text);

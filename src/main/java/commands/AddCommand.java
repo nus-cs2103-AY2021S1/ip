@@ -40,6 +40,8 @@ public class AddCommand extends Command {
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskException, UnknownCmdException,
             InvalidTimeException, BadDtFormatException {
+        assert ui != null : "Null UI";
+        assert tasks != null : "Null TaskList";
         String[] info = extractInfo(text);
         if (info[0].equals("todo")) {
             tasks.addItem(new Todo(info[1], false));
@@ -63,10 +65,11 @@ public class AddCommand extends Command {
      */
 
     public String[] extractInfo(String str) throws InvalidTaskException, UnknownCmdException, InvalidTimeException {
+        assert str != null : "Input is null!";
         String[] store = new String[3];
         // Handling the classification of event type
         if (str.startsWith("todo")) {
-            if (str.equals("todo") || str.strip().equals("todo")) {
+            if (str.strip().equals("todo")) {
                 throw new InvalidTaskException("Your task cannot be empty!");
             } else if (!str.startsWith("todo ")) {
                 throw new UnknownCmdException("Unknown command entered!");
@@ -74,7 +77,7 @@ public class AddCommand extends Command {
                 store[0] = "todo";
             }
         } else if (str.startsWith("deadline")) {
-            if (str.equals("deadline") || str.strip().equals("deadline")) {
+            if (str.strip().equals("deadline")) {
                 throw new InvalidTaskException("Your task cannot be empty!");
             } else if (!str.startsWith("deadline ")) {
                 throw new UnknownCmdException("Unknown command entered!");
@@ -82,7 +85,7 @@ public class AddCommand extends Command {
                 store[0] = "deadline";
             }
         } else if (str.startsWith("event")) {
-            if (str.equals("event") || str.strip().equals("event")) {
+            if (str.strip().equals("event")) {
                 throw new InvalidTaskException("Your task cannot be empty!");
             } else if (!str.startsWith("event ")) {
                 throw new UnknownCmdException("Unknown command entered!");
@@ -92,8 +95,7 @@ public class AddCommand extends Command {
         } else {
             throw new UnknownCmdException("Unknown command entered!");
         }
-
-        // handling the content of the event
+        // Handling the content of the event
         int splitPrefix = str.indexOf(" ");
         String content = str.substring(splitPrefix).strip();
         if (content.length() <= 0) {

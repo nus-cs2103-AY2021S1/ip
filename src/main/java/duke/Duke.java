@@ -67,6 +67,7 @@ public class Duke {
     }
 
     public String getResponse() {
+        assert ui.getMessage() != null : "Message is null!";
         return ui.getMessage();
     }
 
