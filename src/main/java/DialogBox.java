@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-//import javafx.scene.shape.Circle;
+import javafx.scene.shape.Circle;
 
 /**
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
@@ -34,9 +34,8 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-//        Attempt to make profile picture circular, but having some cropping issues at the moment.
-//        Circle clip = new Circle(25, 50, 35);
-//        displayPicture.setClip(clip);
+        Circle clip = new Circle(50, 45, 40);
+        displayPicture.setClip(clip);
         displayPicture.setImage(img);
     }
 
