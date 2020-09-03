@@ -35,7 +35,7 @@ public class ParserTest {
         }
         assertEquals("Incorrect usage of command.\n"
                 + "Description cannot be empty. Please try again.\n  "
-                + (Commands.TODO).getUsage(), todoNoDescription);
+                + "todo _description_", todoNoDescription);
 
         // for valid todo command
         String todoTask;
@@ -62,7 +62,7 @@ public class ParserTest {
         }
         assertEquals("Incorrect usage of command.\n"
                 + "Description cannot be empty. Please try again.\n  "
-                + (Commands.DEADLINE).getUsage(), deadlineNoDescription);
+                + "deadline _description_ /by dd/mm/yyyy hhhh(optional)", deadlineNoDescription);
 
         // for deadline command with no deadline details
         String emptyDeadlineDetails;
@@ -73,7 +73,7 @@ public class ParserTest {
         }
         assertEquals("Incorrect usage of command.\n"
                 + "Deadline details cannot be empty. Please try again.\n  "
-                + (Commands.DEADLINE).getUsage(), emptyDeadlineDetails);
+                + "deadline _description_ /by dd/mm/yyyy hhhh(optional)", emptyDeadlineDetails);
 
         // for valid deadline command
         String deadlineTask;
@@ -102,7 +102,7 @@ public class ParserTest {
         }
         assertEquals("Incorrect usage of command."
                 + "\nDescription cannot be empty. Please try again.\n  "
-                + (Commands.EVENT).getUsage(), eventNoDescription);
+                + "event _description_ /at dd/mm/yyyy hhhh(optional)", eventNoDescription);
 
         // for event command with no schedule details
         String emptyEventDetails;
@@ -113,7 +113,7 @@ public class ParserTest {
         }
         assertEquals("Incorrect usage of command."
                 + "\nSchedule details cannot be empty. Please try again.\n  "
-                + (Commands.EVENT).getUsage(), emptyEventDetails);
+                + "event _description_ /at dd/mm/yyyy hhhh(optional)", emptyEventDetails);
 
         // for valid event command
         String eventTask;

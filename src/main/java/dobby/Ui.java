@@ -2,28 +2,19 @@ package dobby;
 
 import java.util.Scanner;
 
+import dobby.command.HelpCommand;
+
 /**
  * Interacts with the user
  */
 public class Ui {
-    private static final String ALL_COMMANDS = "You can use the following commands in this chat bot:"
-            + "\n  " + (Commands.TODO).getUsage()
-            + "\n  " + (Commands.DEADLINE).getUsage()
-            + "\n  " + (Commands.EVENT).getUsage()
-            + "\n  " + (Commands.LIST).getUsage()
-            + "\n  " + (Commands.DONE).getUsage()
-            + "\n  " + (Commands.DELETE).getUsage()
-            + "\n  " + (Commands.SCHEDULED).getUsage()
-            + "\n  " + (Commands.FIND).getUsage()
-            + "\n  " + (Commands.FINDTYPE).getUsage()
-            + "\n  " + (Commands.BYE).getUsage();
     private static final Scanner SC = new Scanner(System.in);
 
     /**
      * Calls reply function with greeting string
      */
     public static String greet() {
-        String message = "Hello! I'm Dobby.\n" + ALL_COMMANDS;
+        String message = "Hello! I'm Dobby.\n" + (new HelpCommand()).getAllCommands();
         reply(message);
         return message;
     }
