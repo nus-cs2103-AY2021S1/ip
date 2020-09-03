@@ -1,6 +1,15 @@
 package main.java.com.jacob.duke;
 
-import main.java.com.jacob.duke.command.*;
+import main.java.com.jacob.duke.command.ByeCommand;
+import main.java.com.jacob.duke.command.Command;
+import main.java.com.jacob.duke.command.DeadlineCommand;
+import main.java.com.jacob.duke.command.DeleteCommand;
+import main.java.com.jacob.duke.command.DoneCommand;
+import main.java.com.jacob.duke.command.EventCommand;
+import main.java.com.jacob.duke.command.FindCommand;
+import main.java.com.jacob.duke.command.PrintFilteredListDateTimeCommand;
+import main.java.com.jacob.duke.command.PrintListCommand;
+import main.java.com.jacob.duke.command.TodoCommand;
 
 public class Parser {
     /**

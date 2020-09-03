@@ -34,9 +34,27 @@ public class MainWindow extends AnchorPane {
     public MainWindow() throws FileNotFoundException {
     }
 
+    /**
+     * Initializes the main window with a welcome message
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String startUpString = "Hi there, I am Duke! Here are some commands that you can use to talk with me :)\n"
+                + "\n\n\nBasic Commands:\n"
+                + "list: gets you list of currently stored tasks\n"
+                + "bye: terminates duke\n"
+                + "\n\n\nAdd Commands:\n"
+                + "todo <task description>: adds todo\n"
+                + "event <task description> /at <YYYY-MM-DD>: adds an event\n"
+                + "deadline <task description> /by <YYYY-MM-DD>: adds deadline\n"
+                + "\n\n\nAdditional Commands:\n"
+                + "delete <number>: deletes selected task\n"
+                + "done <number>: marks selected task done \n"
+                + "list-due <YYYY-MM-DD HHMM>: gets list of tasks due on that date\n"
+                + "find: finds any task that has a description matching the given string\n";
+
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(startUpString, dukeImage));
     }
 
     public void setDuke(Duke d) {
