@@ -15,26 +15,33 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600.0" minWidth="500.0" title="Alice" type="Stage" xmlns="http://javafx.com/javafx"
+<fx:root iconified="true" minHeight="600.0" minWidth="500.0" title="Alice" type="Stage" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml">
     <scene>
         <Scene>
             <root>
                 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                            prefHeight="600.0" prefWidth="500.0">
+                            prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: lightblue;">
                     <children>
-                        <TextField fx:id="userInput" layoutY="558.0" minHeight="-Infinity" minWidth="-Infinity"
-                                   onAction="#handleUserInput" prefHeight="41.0" promptText="Enter your command here..."
-                                   AnchorPane.bottomAnchor="0.39999999999997726" AnchorPane.leftAnchor="0.0"
-                                   AnchorPane.rightAnchor="76.0">
+                        <TextField fx:id="userInput" layoutX="5.0" layoutY="558.0" minHeight="-Infinity"
+                                   minWidth="-Infinity" onAction="#handleUserInput" prefHeight="42.0" prefWidth="450.0"
+                                   promptText="Enter your command here..."
+                                   style="-fx-background-radius: 17; -fx-border-radius: 15; -fx-background-color: white; -fx-border-color: slategray; -fx-border-width: 2;"
+                                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0"
+                                   AnchorPane.rightAnchor="45.0">
                             <font>
                                 <Font name="Lucida Console" size="12.0"/>
                             </font>
+                            <padding>
+                                <Insets left="10.0"/>
+                            </padding>
                         </TextField>
-                        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" minHeight="-Infinity"
+                        <Button fx:id="sendButton" layoutX="463.0" layoutY="563.0" minHeight="-Infinity"
                                 minWidth="-Infinity" mnemonicParsing="false" onAction="#handleUserInput"
-                                prefHeight="41.0" prefWidth="76.0" text="Send"
-                                AnchorPane.bottomAnchor="0.3999999999999986" AnchorPane.rightAnchor="0.0">
+                                prefHeight="30.0" prefWidth="30.0"
+                                style="-fx-shape: &quot;M 700 350 L 200 175 L 200 325 L 550 350 L 200 375 L 200 525 Z&quot;; -fx-background-color: black;"
+                                textFill="#0b06a2" AnchorPane.bottomAnchor="6.600000000000023"
+                                AnchorPane.rightAnchor="6.600000000000023">
                             <font>
                                 <Font name="Lucida Fax Demibold" size="13.0"/>
                             </font>

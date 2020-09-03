@@ -20,7 +20,7 @@ deadline fake deadline /by
 deadline unrecognised datetime /by Monday
 deadline hello
 event
-event fake event /at
+event fake event /on
 event hello
 list
 todo return book

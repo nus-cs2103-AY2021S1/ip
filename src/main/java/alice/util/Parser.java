@@ -197,7 +197,7 @@ public class Parser {
             throw new InvalidCommandException("You cannot create an deadline without the date.");
         } else {
             // No /by marker
-            throw new InvalidCommandException("I can't find the deadline date. "
+            throw new InvalidCommandException("I can't find the deadline date.\n"
                     + "Did you forget to add '/by'?");
         }
     }
@@ -225,7 +225,7 @@ public class Parser {
             throw new InvalidCommandException("You cannot create an event without a date/time.");
         } else {
             // No /on marker
-            throw new InvalidCommandException("I can't find the date/time of the event. "
+            throw new InvalidCommandException("I can't find the date/time of the event.\n"
                     + "Did you forget to add '/on'?");
         }
     }

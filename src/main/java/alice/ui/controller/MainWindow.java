@@ -110,7 +110,12 @@ public class MainWindow {
     }
 
     private void exitAlice() {
-        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        // Disable any additional input.
+        userInput.setOnAction(null);
+        sendButton.setOnAction(null);
+
+        // Set short delay for displaying of exit message.
+        PauseTransition delay = new PauseTransition(Duration.seconds(1));
         delay.setOnFinished(event -> primaryStage.close());
         delay.play();
     }
