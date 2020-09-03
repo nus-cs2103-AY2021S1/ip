@@ -5,9 +5,9 @@ import duke.Ui;
 import duke.task.TaskList;
 
 public class PrintsearchCommand extends Command {
-    final String keyword;
+    final String[] keyword;
 
-    public PrintsearchCommand(String keyword) {
+    public PrintsearchCommand(String[] keyword) {
         this.keyword = keyword;
     }
 
