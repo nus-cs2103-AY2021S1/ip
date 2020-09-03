@@ -194,7 +194,7 @@ public class Storage {
                 throw new DukeException("Cannot read tasks from file.");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             throw new DukeException("Cannot read tasks from file.");
         }
     }
