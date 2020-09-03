@@ -4,6 +4,9 @@ import static duke.utils.Messages.MESSAGE_FIND;
 import static duke.utils.Messages.MESSAGE_FIND_NO_MATCH;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
@@ -30,13 +33,11 @@ public class FindCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList taskList) {
-        ArrayList<Task> matchedTasks = new ArrayList<>();
         ArrayList<Task> allTasks = taskList.getTasks();
-        for (Task task : allTasks) {
-            if (matchesAllWords(task)) {
-                matchedTasks.add(task);
-            }
-        }
+        List<Task> matchedTasks = allTasks.stream()
+                .filter(this::matchesAllWords)
+                .collect(Collectors.toList());
+
         String response;
         if (matchedTasks.size() == 0) {
             response = MESSAGE_FIND_NO_MATCH;
@@ -47,11 +48,7 @@ public class FindCommand extends Command {
     }
 
     private boolean matchesAllWords(Task task) {
-        for (String word : searchWords) {
-            if (!(task.getDescription().contains(word))) {
-                return false;
-            }
-        }
-        return true;
+        return Arrays.stream(searchWords)
+                .allMatch(word -> task.getDescription().contains(word));
     }
 }

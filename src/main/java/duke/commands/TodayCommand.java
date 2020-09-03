@@ -24,6 +24,7 @@ public class TodayCommand extends Command {
     public CommandResult execute(TaskList taskList) {
         LocalDateTime now = LocalDate.now().atStartOfDay();
         ArrayList<Task> tasksToday = new ArrayList<>();
+        // todo: change to stream
         taskList.getTasks().forEach(task -> {
             if (task instanceof Event) {
                 Event event = (Event) task;
