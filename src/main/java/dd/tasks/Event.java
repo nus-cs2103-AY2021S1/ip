@@ -33,9 +33,9 @@ public class Event extends Task {
     @Override
     public String saveString() {
         if (this.isDone) {
-            return "T , 1 , " + description + " , " + at;
+            return "E , 1 , " + description + " , " + at;
         } else {
-            return "T , 0 , " + description + " , " + at;
+            return "E , 0 , " + description + " , " + at;
         }
     }
 

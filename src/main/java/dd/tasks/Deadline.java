@@ -33,9 +33,9 @@ public class Deadline extends Task {
     @Override
     public String saveString() {
         if (this.isDone) {
-            return "T , 1 , " + description + " , " + by;
+            return "D , 1 , " + description + " , " + by;
         } else {
-            return "T , 0 , " + description + " , " + by;
+            return "D , 0 , " + description + " , " + by;
         }
     }
 
