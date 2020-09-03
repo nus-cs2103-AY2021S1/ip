@@ -87,11 +87,11 @@ public class Event extends Task {
      */
     public static Event decode(String code) throws DukeStorageException {
         if (code.charAt(0) == 'E') {
-            String[] content = code.split("\\|", 4);
+            String[] content = code.split("\\|", 5);
             if (content.length != 5) {
                 throw new DukeStorageException("There are some holes in my memory...");
             }
-            Event newEvent = new Event(content[3],
+            Event newEvent = new Event(content[4],
                     DateParser.parseString(content[2]),
                     DateParser.parseString(content[3]));
             if (content[1].equals("Y")) {
