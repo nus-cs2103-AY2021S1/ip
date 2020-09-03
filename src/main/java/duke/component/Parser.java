@@ -30,6 +30,8 @@ public class Parser {
     public static final String EVENT = "event";
     public static final String BY_TIME_IDENTIFIER = "/by";
     public static final String AT_TIME_IDENTIFIER = "/at";
+    public static final char SPACE_CHAR = ' ';
+    public static final String SPACE_STRING = " ";
     public static final String SUGGESTION_FORMAT = "Do you mean '%s %s'?";
     public static final String EMPTY_DONE_COMMAND_EXCEPTION = "\u2639 OOPS!!! "
             + "The task to mark as done cannot be empty.";
@@ -102,6 +104,25 @@ public class Parser {
         return String.format(SUGGESTION_FORMAT, taskType, description.substring(taskType.length()));
     }
 
+    private static boolean hasSpaceAfterType(String cmd, String taskType) {
+        return cmd.charAt(taskType.length()) == SPACE_CHAR;
+    }
+
+    private static void checkValidAddCommand(String cmd, String taskType) throws InvalidCommandException {
+        if (hasEmptyContent(cmd, taskType)) {
+            throw new InvalidCommandException(EMPTY_TASK_DESCRIPTION_EXCEPTION);
+        } else if (!hasSpaceAfterType(cmd, taskType)) {
+            throw new InvalidCommandException(generateSuggestion(taskType, cmd));
+        } else if (hasEmptyContent(cmd, taskType + SPACE_STRING)) {
+            throw new InvalidCommandException(EMPTY_TASK_DESCRIPTION_EXCEPTION);
+        }
+    }
+
+    private static String getTaskDescription(String cmd, String taskType) throws InvalidCommandException {
+        checkValidAddCommand(cmd, taskType);
+        return cmd.substring(taskType.length() + 1);
+    }
+
     /**
      * Parses an AddCommand to tell what is the task need to be added.
      * @param cmd the given input command
@@ -110,23 +131,9 @@ public class Parser {
      */
     public static Task generate(String cmd) throws InvalidCommandException {
         if (cmd.startsWith(TODO)) {
-            if (cmd.length() < 5) {
-                throw new InvalidCommandException(EMPTY_TASK_DESCRIPTION_EXCEPTION);
-            } else if (cmd.charAt(4) != ' ') {
-                throw new InvalidCommandException(generateSuggestion(TODO, cmd));
-            } else if (cmd.length() < 6) {
-                throw new InvalidCommandException(EMPTY_TASK_DESCRIPTION_EXCEPTION);
-            }
-            return new ToDo(cmd.substring(5));
+            return new ToDo(getTaskDescription(cmd, TODO));
         } else if (cmd.startsWith(DEADLINE)) {
-            if (cmd.length() < 9) {
-                throw new InvalidCommandException(EMPTY_TASK_DESCRIPTION_EXCEPTION);
-            } else if (cmd.charAt(8) != ' ') {
-                throw new InvalidCommandException(generateSuggestion(DEADLINE, cmd));
-            } else if (cmd.length() < 10) {
-                throw new InvalidCommandException(EMPTY_TASK_DESCRIPTION_EXCEPTION);
-            }
-            String description = cmd.substring(9);
+            String description = getTaskDescription(cmd, DEADLINE);
             int s = description.indexOf(BY_TIME_IDENTIFIER);
             if (s == -1) {
                 throw new InvalidCommandException(LACK_TIME_SPECIFICATION_EXCEPTION);
@@ -139,14 +146,7 @@ public class Parser {
             description = description.substring(0, s - 1);
             return new Deadline(description, time);
         } else if (cmd.startsWith(EVENT)) {
-            if (cmd.length() < 6) {
-                throw new InvalidCommandException(EMPTY_TASK_DESCRIPTION_EXCEPTION);
-            } else if (cmd.charAt(5) != ' ') {
-                throw new InvalidCommandException(generateSuggestion(EVENT, cmd));
-            } else if (cmd.length() < 7) {
-                throw new InvalidCommandException(EMPTY_TASK_DESCRIPTION_EXCEPTION);
-            }
-            String description = cmd.substring(6);
+            String description = getTaskDescription(cmd, EVENT);
             int s = description.indexOf(AT_TIME_IDENTIFIER);
             if (s == -1) {
                 throw new InvalidCommandException(LACK_TIME_SPECIFICATION_EXCEPTION);
