@@ -1,1 +1,3 @@
 T | ✘ | borrow book
+T | ✓ | read book
+D | ✘ | deadline return book  | Mar 02 2019
