@@ -59,9 +59,9 @@ public class Deadline extends Task {
      */
     public static Deadline createTask(String message) throws DukeException {
         String errMessage1 = " Oops!! You missed out some vital information/keyword... *woof*\n";
-        String errMessage2 = " Oops!! You gonna forget what this is about if you\n"
+        String errMessage2 = " Oops!! You gonna forget what this is about if you"
                 + " dont give me a description... *woof*\n";
-        String errMessage3 = " Oops!! You did not state when you wanna finish this by...\n"
+        String errMessage3 = " Oops!! You did not state when you wanna finish this by..."
                 + " Are you planning to procrastinate? *woof*\n";
         try {
             String messageLowerCase = message.toLowerCase();

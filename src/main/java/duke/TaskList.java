@@ -2,7 +2,10 @@ package duke;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import duke.task.Task;
 
@@ -26,7 +29,6 @@ public class TaskList {
      */
     public int addTask(Task task) {
         listOfTask.add(task);
-
         return listOfTask.size();
     }
 
@@ -80,14 +82,8 @@ public class TaskList {
      * @return a list containing all <code>Task</code> on that day.
      */
     public List<Task> checkDate(LocalDate date) {
-
-        List<Task> sameDates = new ArrayList<>();
-        for (Task t : listOfTask) {
-            if (t.compareDate(date)) {
-                sameDates.add(t);
-            }
-        }
-
+        List<Task> sameDates = new ArrayList<>(listOfTask);
+        sameDates = sameDates.stream().filter((task) -> task.compareDate(date)).collect(Collectors.toList());
         return sameDates;
     }
 
@@ -99,14 +95,11 @@ public class TaskList {
      * @return a list containing all <code>Task</code> with the keyword.
      */
     public List<Task> searchTask(String ... keywords) {
-        List<Task> validTask = new ArrayList<>();
-        for (Task t : listOfTask) {
-            for (String keyword : keywords) {
-                if (t.toString().toLowerCase().contains(keyword.toLowerCase())) {
-                    validTask.add(t);
-                }
-            }
-        }
+        Function<Task, String> parseString = (t) -> t.toString().toLowerCase();
+        List<Task> validTask = new ArrayList<>(listOfTask);
+        validTask = validTask.stream().filter((task) -> Arrays.stream(keywords)
+                .anyMatch(keyword -> parseString.apply(task).contains(keyword.toLowerCase())))
+                .collect(Collectors.toList());
         return validTask;
     }
 

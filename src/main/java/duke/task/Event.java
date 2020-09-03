@@ -52,9 +52,9 @@ public class Event extends Task {
      */
     public static Event createTask(String message) throws DukeException {
         String errMessage1 = " Oops!! You missed out some vital information/keyword... *woof*\n";
-        String errMessage2 = " Oops!! Are you planning to ghost the event?\n"
+        String errMessage2 = " Oops!! Are you planning to ghost the event?"
                 + " You didnt state the time of this event... *woof*\n";
-        String errMessage3 = " Oops!! You gonna forget what this is about if you\n"
+        String errMessage3 = " Oops!! You gonna forget what this is about if you"
                 + " dont give me a description... *woof*\n";
         try {
             String messageLowerCase = message.toLowerCase();

@@ -26,7 +26,7 @@ public class EventTest {
             Event.createTask("EVENT  /at      2019/02/20 16:00-18:00");
             fail();
         } catch (DukeException e) {
-            String err = " Oops!! You gonna forget what this is about if you\n"
+            String err = " Oops!! You gonna forget what this is about if you"
                     + " dont give me a description... *woof*\n";
             assertEquals(err, e.getMessage());
         }
@@ -40,7 +40,7 @@ public class EventTest {
             Event.createTask("EVENT meeting /at  ");
             fail();
         } catch (DukeException e) {
-            String err = " Oops!! Are you planning to ghost the event?\n"
+            String err = " Oops!! Are you planning to ghost the event?"
                     + " You didnt state the time of this event... *woof*\n";
             assertEquals(err, e.getMessage());
         }
