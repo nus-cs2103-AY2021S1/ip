@@ -25,12 +25,32 @@ public class Duke {
         }
     }
 
+    /**
+     * Shows the greeting message when user first launch Duke.
+     * @return greeting message.
+     */
     public String showGreetingMessage() {
         ui.clearMessage();
         ui.showGreeting();
         return ui.getMessage();
     }
 
+    /**
+     * Show exit message when user exits the programme.
+     * @return exit message.
+     */
+    public String showExitMessage() {
+        ui.clearMessage();
+        ui.showExitMessage();
+        return ui.getMessage();
+    }
+
+    /**
+     * Returns the message displayed by Duke after user keys in
+     * an input.
+     * @param input User input.
+     * @return Duke output.
+     */
     public String getResponse(String input) {
         ui.clearMessage();
         try {
@@ -41,5 +61,9 @@ public class Duke {
             ui.showError(e.getMessage());
         }
         return ui.getMessage();
+    }
+
+    public boolean getExitProgram() {
+        return this.isExit;
     }
 }
