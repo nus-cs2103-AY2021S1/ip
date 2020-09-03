@@ -55,7 +55,7 @@ public class Storage {
                     
                 } else if (taskParts[0].contains("E")) {
                     
-                    Task newEventTask = new Event(taskParts[2].trim(), taskParts[3].trim());
+                    Task newEventTask = new Event(taskParts[2], taskParts[3]);
                     if (taskParts[1].contains("1")) {
                         newEventTask.markAsDone();
                     }
