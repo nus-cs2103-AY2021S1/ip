@@ -6,11 +6,7 @@ import duke.Ui;
 
 public abstract class Command {
 
-    public Command() {
-    }
-
     public abstract String run(TaskList taskList, Storage storage);
-
     public boolean isBye() {
         return false;
     }

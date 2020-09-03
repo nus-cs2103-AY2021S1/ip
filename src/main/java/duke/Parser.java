@@ -1,6 +1,15 @@
 package duke;
 
-import duke.commands.*;
+import duke.commands.AddCommand;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddToDoCommand;
+import duke.commands.ByeCommand;
+import duke.commands.ListCommand;
+import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidInputException;
 
@@ -34,31 +43,33 @@ public class Parser {
         if (input.length() == 0) {
             throw new InvalidInputException();
         }
-        String[] inputArr = input.split(" ", 1);
+        String[] inputArr = input.split(" ", 2);
         String commandType = inputArr[0];
-        String commandContent = inputArr[1];
-        try {
-            if (commandType.equals(COMMAND_BYE)) {
-                return new ByeCommand();
-            } else if (commandType.equals(COMMAND_DONE)) {
-
-            } else if (commandType.equals(COMMAND_LIST)) {
-                return new ListCommand();
-            } else if (commandType.equals(COMMAND_FIND)) {
-
-            } else if (commandType.equals(COMMAND_DELETE)) {
-
-            } else if (commandType.equals(COMMAND_TODO)){
-                return new AddToDoCommand(commandContent);
-            } else if (commandType.equals(COMMAND_EVENT)) {
-                return new AddEventCommand(commandContent);
-            } else if (commandType.equals(COMMAND_DEADLINE)) {
-                return new AddDeadlineCommand(commandContent);
-            } else {
-                return new AddCommand(input);
-            }
-        } catch (Exception e) {
-            throw new DukeException("Sorry! No available command for your input! Please try again!");
+        String commandContent;
+        if (commandType.equals(COMMAND_BYE)) {
+            return new ByeCommand();
+        } else if (commandType.equals(COMMAND_DONE)) {
+            commandContent = inputArr[1];
+            return new DoneCommand(commandContent);
+        } else if (commandType.equals(COMMAND_LIST)) {
+            return new ListCommand();
+        } else if (commandType.equals(COMMAND_FIND)) {
+            commandContent = inputArr[1];
+            return new FindCommand(commandContent);
+        } else if (commandType.equals(COMMAND_DELETE)) {
+            commandContent = inputArr[1];
+            return new DeleteCommand(commandContent);
+        } else if (commandType.equals(COMMAND_TODO)){
+            commandContent = inputArr[1];
+            return new AddToDoCommand(commandContent);
+        } else if (commandType.equals(COMMAND_EVENT)) {
+            commandContent = inputArr[1];
+            return new AddEventCommand(commandContent);
+        } else if (commandType.equals(COMMAND_DEADLINE)) {
+            commandContent = inputArr[1];
+            return new AddDeadlineCommand(commandContent);
+        } else {
+            return new AddCommand(input);
         }
     }
 }

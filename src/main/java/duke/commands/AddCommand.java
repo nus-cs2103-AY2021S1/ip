@@ -26,9 +26,4 @@ public class AddCommand extends Command {
 
         return Ui.addTask(newTask, taskList);
     }
-
-    @Override
-    public boolean isBye() {
-        return true;
-    }
 }

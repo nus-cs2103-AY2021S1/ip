@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exceptions.DukeException;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
@@ -41,10 +43,10 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(path, false);
             for (Task task: tasks) {
-                String taskInfo = task.getType() + " | " + (task.isDone() ? 1 : 0) 
-                        + " | " + task.getContent();
+                String taskInfo = task.getType() + "," + (task.isDone() ? 1 : 0)
+                        + "," + task.getContent();
                 if (task.getDate() != "") {
-                    taskInfo = taskInfo + " | " + task.getDate();
+                    taskInfo = taskInfo + "," + task.getDate();
                 }
                 taskInfo = taskInfo + "\n";
                 writer.write(taskInfo);
@@ -58,15 +60,15 @@ public class Storage {
     /**
      * This method fetches all of tasks stored in disk.
      *
-     * @return an ArrayList.
+     * @return an ArrayList consisting of all of tasks stored in the duke.txt.
      */ 
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTaskList() {
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
             Scanner sc = new Scanner(this.file);
             while (sc.hasNext()) {
                 String taskContent = sc.nextLine();
-                String[] taskInfo = taskContent.split(" | ");
+                String[] taskInfo = taskContent.split(",");
                 if (taskInfo[0].equals("T")) {
                     ToDo task = new ToDo(taskInfo[2]);
                     if (taskInfo[2].equals("1")) {
@@ -94,7 +96,7 @@ public class Storage {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Failed to load " + this.path);
+            System.out.println("Failed to load" + this.path);
         }
         return tasks;
     }

@@ -13,6 +13,10 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+    TaskList() {
+        this.taskList = new ArrayList<Task>();
+    }
+
     public void add(Task task) {
         taskList.add(task);
     }
@@ -33,13 +37,13 @@ public class TaskList {
         return taskList;
     }
 
-    public ArrayList<Task> find(String condition) {
+    public TaskList find(String condition) {
         ArrayList<Task> newTaskList = new ArrayList<Task>();
         for (Task task: taskList) {
             if (task.getContent().contains(condition)) {
                 newTaskList.add(task);
             }
         }
-        return newTaskList;
+        return new TaskList(newTaskList);
     }
 }

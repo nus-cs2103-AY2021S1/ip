@@ -9,7 +9,7 @@ public class ByeCommand extends Command {
     public ByeCommand() {
     }
 
-
+    @Override
     public String run(TaskList taskList, Storage storage) {
         storage.write(taskList.getList());
         return Ui.bye();
