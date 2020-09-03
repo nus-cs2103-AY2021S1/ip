@@ -5,21 +5,16 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  * Represent the main class to run the Duke program.
@@ -175,6 +170,14 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        String output;
+
+        try {
+            output = parser.parse(input, tasks, storage);
+        } catch (DukeException e) {
+            output = e.getMessage();
+        }    
+            
+        return output;
     }
 }
