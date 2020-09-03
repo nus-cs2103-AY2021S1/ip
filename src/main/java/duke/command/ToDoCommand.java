@@ -31,7 +31,10 @@ public class ToDoCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new ToDo(description);
+        int previousTaskSize = tasks.size();
         tasks.add(task);
+        int subsequentTaskSize = tasks.size();
+        assert (previousTaskSize + 1 == subsequentTaskSize);
         storage.save(tasks);
         String response = String.format(
                 "I've added this task:\n  %s \nNow you have %s tasks in the list.",
@@ -51,7 +54,10 @@ public class ToDoCommand extends Command {
     @Override
     public String executeWithResponse(TaskList tasks, Ui ui, Storage storage) {
         Task task = new ToDo(description);
+        int previousTaskSize = tasks.size();
         tasks.add(task);
+        int subsequentTaskSize = tasks.size();
+        assert (previousTaskSize + 1 == subsequentTaskSize);
         storage.save(tasks);
         return String.format(
                 "I've added this task:\n  %s \nNow you have %s tasks in the list.",

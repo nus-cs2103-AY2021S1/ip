@@ -27,7 +27,7 @@ public abstract class Command {
      * @param ui Responsible for displaying information to the user.
      * @param storage Reads and stores data into memory.
      *
-     * @throws DukeException If could not executed command.
+     * @throws DukeException If could not execute command.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
@@ -38,7 +38,7 @@ public abstract class Command {
      * @param ui Responsible for displaying information to the user.
      * @param storage Reads and stores data into memory.
      * @return String Message when completing the command.
-     * @throws DukeException If could not executed command.
+     * @throws DukeException If could not execute command.
      */
     public abstract String executeWithResponse(TaskList tasks, Ui ui, Storage storage)
             throws DukeException;
