@@ -3,6 +3,10 @@ package duke;
 import duke.command.Command;
 import duke.command.Parser;
 import duke.dukeexception.DukeException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * The Duke program is an interactive bot that offers commands to help the
@@ -12,13 +16,15 @@ import duke.dukeexception.DukeException;
  *
  * @author Foo Jing Yi
  */
-public class Duke {
+public class Duke extends Application {
     /** Storage object used by Duke to load from and write to hard disk */
     private Storage storage;
     /** TaskList object that contains the list of tasks */
     private TaskList tasks;
     /** Ui object that deals with interactions with the user */
     private Ui ui;
+
+    public Duke() {}
 
     /**
      * Public class constructor that takes in the location of a file as a string
@@ -61,5 +67,14 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
