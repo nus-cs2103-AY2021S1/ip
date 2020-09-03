@@ -8,6 +8,6 @@ public class TodoTest {
 
     @Test
     public void testStringConversion() {
-        assertEquals("[T][✘] Play brawl stars", new Todo("Play brawl stars").toString());
+        assertEquals("[T][\u2718] Play brawl stars", new Todo("Play brawl stars").toString());
     }
 }
