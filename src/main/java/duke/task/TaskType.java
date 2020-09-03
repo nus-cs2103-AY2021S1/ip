@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Represents tasks that can be used.
+ * Represents all valid tasks that can be used.
  */
 public enum TaskType {
     DEADLINE("D"),
@@ -17,7 +17,7 @@ public enum TaskType {
     /**
      * Gets the short form string representation of the task type.
      *
-     * @return The short form string representation of the task type.
+     * @return String representation of the task type in short form.
      */
     public String getShortForm() {
         return this.shortForm;

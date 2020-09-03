@@ -53,21 +53,21 @@ public class Storage {
                 switch (splitTask[0]) {
                 case "T":
                     Todo todo = new Todo(splitTask[2]);
-                    if (splitTask[1] == "1") {
+                    if (splitTask[1].equals("1")) {
                         todo.markAsDone();
                     }
                     tasks.add(todo);
                     break;
                 case "D":
                     Deadline deadline = new Deadline(splitTask[2], Parser.parseDate(splitTask[3]));
-                    if (splitTask[1] == "1") {
+                    if (splitTask[1].equals("1")) {
                         deadline.markAsDone();
                     }
                     tasks.add(deadline);
                     break;
                 case "E":
                     Event event = new Event(splitTask[2], Parser.parseDate(splitTask[3]));
-                    if (splitTask[1] == "1") {
+                    if (splitTask[1].equals("1")) {
                         event.markAsDone();
                     }
                     tasks.add(event);

@@ -33,7 +33,7 @@ public class Deadline extends Task {
     /**
      * Returns a string representation of this deadline.
      *
-     * @return A string representation of this deadline.
+     * @return String representation of this deadline.
      */
     @Override
     public String toString() {

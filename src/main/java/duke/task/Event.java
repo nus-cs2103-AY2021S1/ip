@@ -33,7 +33,7 @@ public class Event extends Task {
     /**
      * Returns a string representation of this event.
      *
-     * @return A string representation of this event.
+     * @return String representation of this event.
      */
     @Override
     public String toString() {

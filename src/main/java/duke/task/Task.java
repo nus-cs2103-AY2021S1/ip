@@ -26,10 +26,10 @@ public abstract class Task {
      * Gets the status icon.
      * "✓" indicates this task is completed and "✘" indicates this task is not completed.
      *
-     * @return A string of the status icon.
+     * @return String of the status icon.
      */
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✘"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     /**
@@ -53,7 +53,7 @@ public abstract class Task {
     /**
      * Gets the short form string representation of this task.
      *
-     * @return The short form string representation of this task.
+     * @return String representation of the task type in short form.
      */
     public String getShortForm() {
         return taskType.getShortForm();
@@ -69,7 +69,7 @@ public abstract class Task {
     /**
      * Returns a string representation of this task.
      *
-     * @return A string representation of this task.
+     * @return String representation of this task.
      */
     @Override
     public String toString() {
