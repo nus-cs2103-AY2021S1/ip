@@ -66,33 +66,16 @@ public class Willy extends Application {
         // JavaFX code
         stage.setTitle("Willy"); // Stage Name
 
-//        BorderPane border = new BorderPane();
-//        border.setPadding(new Insets(10,20, 20,20));
-
-        //Creating a GridPane container
-//        GridPane grid = new GridPane();
-//        grid.setPadding(new Insets(10, 10, 10, 10));
-//        grid.setVgap(5);
-//        grid.setHgap(5);
-
         Label willy = new Label(introGUI); // Creating a new Label control
         Greet startDuke = new Greet();
         Label changingCommands = new Label(startDuke.toString());
         willy.setAlignment(Pos.CENTER);
         TextField inputField = new TextField();
         inputField.setPromptText("State tasks to track");
-//        GridPane.setConstraints(inputField, 0, 0);
-//        grid.getChildren().add(inputField);
         Button enterButton = new Button("Enter");
-//        GridPane.setConstraints(button, 1, 0);
-//        grid.getChildren().add(button);
         Button clearButton = new Button("Clear");
-//        GridPane.setConstraints(clear, 1, 1);
-//        grid.getChildren().add(clear);
-
 
         enterButton.setOnAction(action -> {
-//            System.out.println(inputField.getText());
                 String message = inputField.getText();
                 inputField.clear();
                 changingCommands.setText(parser.javaFXParse(message)); // Returns Response
@@ -107,7 +90,6 @@ public class Willy extends Application {
         hbox.getChildren().addAll(inputField, enterButton, clearButton);
         VBox vbox = new VBox(); // Positions components in a vertical column
         vbox.getChildren().addAll(willy, hbox, changingCommands);
-//        vbox.setAlignment(Pos.CENTER);
 
         StackPane layout = new StackPane();
         layout.getChildren().addAll(vbox);

@@ -70,9 +70,12 @@ public class TaskStore {
                             taskContent + "|" + taskPeriod;
 
                 }
+
                 fw.write(combinedTask + "\n");
             }
+
             fw.close();
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -84,17 +87,20 @@ public class TaskStore {
             File f = new File(FILE_PATH);
             Scanner s = new Scanner(f);
             ArrayList<Task> listOfTasks = new ArrayList<>();
+
             while (s.hasNextLine()) {
                 String[] taskComponents = s.nextLine().split("\\|");
                 String taskType = taskComponents[0];
                 String taskStatus = taskComponents[1];
                 String activity = taskComponents[2];
+
                 if (taskType.contains("T")) {
                     ToDoTask newTask = new ToDoTask(activity, TaskSymbol.TODO);
                     if (taskStatus.contains("\u2713")) { //done
                         newTask.setTaskDone(true);
                     }
                     listOfTasks.add(newTask);
+
                 } else if (taskType.contains("D")) {
                     String deadline = taskComponents[3];
                     DeadlineTask newTask = new DeadlineTask(deadline, activity, TaskSymbol.DEADLINE);
@@ -102,6 +108,7 @@ public class TaskStore {
                         newTask.setTaskDone(true);
                     }
                     listOfTasks.add(newTask);
+
                 } else if (taskType.contains("E")) {
                     String duration = taskComponents[3];
                     EventsTask newTask = new EventsTask(duration, activity, TaskSymbol.EVENT);
@@ -112,6 +119,7 @@ public class TaskStore {
                 }
             }
             return listOfTasks;
+
         } catch (FileNotFoundException e) {
             return new ArrayList<>();
         }

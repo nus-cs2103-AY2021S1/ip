@@ -22,21 +22,25 @@ public class Parser {
             System.out.println(new Greet(message));
             return;
         }
+
         // take note of keyword "list" to display the lists
         if (message.equals("list")) {
             // reads list
             list.readList();
         }
+
         // take note of keyword "done" to update task
         else if (message.contains("done")) {
             int taskNum = Integer.parseInt(message.substring(5));
             list.setTaskDone(taskNum);
         }
+
         // take note of keyword "delete" to remove task from list
         else if (message.contains("delete")) {
             int taskNum = Integer.parseInt(message.substring(7));
             list.removeTask(taskNum);
         }
+
         // take note of keyword "to-do" to add normal task
         else if (message.contains("todo")) {
             try {
@@ -81,6 +85,7 @@ public class Parser {
             }
 
         }
+
         else if (message.contains("find")) {
             String keyword = message.substring(5);
             list.findTask(keyword);
@@ -100,21 +105,25 @@ public class Parser {
             // prints out exit
             response = new Greet(message).getExitGreeting();
         }
+
         // take note of keyword "list" to display the lists
         else if (message.equals("list")) {
             // reads list
             response = list.javaKFReadList();
         }
+
         // take note of keyword "done" to update task
         else if (message.contains("done")) {
             int taskNum = Integer.parseInt(message.substring(5));
             response = list.javaFXSetTaskDone(taskNum);
         }
+
         // take note of keyword "delete" to remove task from list
         else if (message.contains("delete")) {
             int taskNum = Integer.parseInt(message.substring(7));
             response = list.javaFXRemoveTask(taskNum);
         }
+        
         // take note of keyword "to-do" to add normal task
         else if (message.contains("todo")) {
             try {
