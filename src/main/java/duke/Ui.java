@@ -11,7 +11,7 @@ public class Ui {
      * @param words Words to be concatenated.
      * @return String formatted message of the given words.
      */
-    private String messageFormatter(String... words) {
+    private String messageFormatter(String ... words) {
         StringBuilder string = new StringBuilder();
         for (String message: words) {
             string.append(message);
