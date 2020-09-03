@@ -33,7 +33,7 @@ public class Command {
      * @throws DukeException If any Duke-type exceptions are thrown.
      */
     public String execute(String userInput, TaskList tasks, Storage storage) throws DukeException {
-        //determining user input type via the first word
+        // determining user input type via the first word
         String[] splitInput = splitUserInput(userInput);
         String keyWord = getKeyWord(userInput);
         if (keyWord.equals("welcome")) {
@@ -55,7 +55,7 @@ public class Command {
         } else if (keyWord.equals("find")) {
             return findCommand(tasks, splitInput);
         } else {
-            return ui.showErrorMessage(new DukeException("Unknown execution error.").getMessage());
+            return ui.printErrorMessage(new DukeException("Unknown execution error.").getMessage());
         }
     }
 
@@ -64,7 +64,7 @@ public class Command {
     }
 
     public String welcomeCommand() {
-        return ui.showWelcome();
+        return ui.printWelcome();
     }
 
     /**
@@ -74,19 +74,19 @@ public class Command {
      * @return The list of tasks(if applicable).
      */
     public String listCommand(TaskList tasks) {
-        if (tasks.noOfTasks() == 0) {
-            return ui.showNoPastTasks();
+        if (tasks.getNoOfTasks() == 0) {
+            return ui.printNoPastTasks();
         } else {
-            return ui.showPastTasks(tasks);
+            return ui.printPastTasks(tasks);
         }
     }
 
     public String byeCommand() {
-        return ui.showGoodbye();
+        return ui.printGoodbye();
     }
 
     public String helpCommand() {
-        return ui.showHelp();
+        return ui.printHelp();
     }
 
     /**
@@ -119,9 +119,9 @@ public class Command {
      */
     public String doneCommand(String[] splitInput, TaskList tasks, Storage storage)
             throws InvalidFormatException {
-        //checks the formatting of user input
+        // checks the formatting of user input
         if (splitInput.length > 2) {
-            return ui.showErrorMessage(new InvalidFormatException("Please use the correct format:"
+            return ui.printErrorMessage(new InvalidFormatException("Please use the correct format:"
                     + " done <task number>").getMessage());
         }
         String toReturn = tasks.doneTask(splitInput, tasks, ui);
@@ -169,6 +169,7 @@ public class Command {
      * Processes the user input (for task commands only).
      *
      * @param array Contains strings for task type, description, date/time if applicable.
+     * @return An array with index 0 as description, 1 as date and 2 as time (if applicable)
      * @throws InvalidFormatException If the input format is wrong.
      * @throws EmptyTaskException If input task is not tagged with description.
      */
@@ -197,36 +198,36 @@ public class Command {
             int pivotIndex = 0;
             for (int i = 1; i < array.length; i++) {
                 if (array[i].equals("/at")) {
-                    //sets the breaking point of input
+                    // sets the breaking point of input
                     toBreak = true;
                     pivotIndex = i;
                     break;
                 } else {
-                    //before breaking point
+                    // before breaking point
                     des += array[i] + " ";
                 }
             }
             String[] dateTimeArr = Arrays.copyOfRange(array, pivotIndex + 1, array.length);
-            //after breaking point, there should only be a maximum of 2 items remaining
-            //first item is date, second item is time
+            // after breaking point, there should only be a maximum of 2 items remaining
+            // first item is date, second item is time
             if (dateTimeArr.length > 2) {
                 throw new InvalidFormatException("Please enter a valid format");
             } else {
                 if (dateTimeArr.length == 1) {
-                    //only has date but no time
+                    // only has date but no time
                     date = dateTimeArr[0];
                 } else if (dateTimeArr.length == 2) {
-                    //has date and time
+                    // has date and time
                     date = dateTimeArr[0];
                     time = dateTimeArr[1];
                 }
             }
-            //index 0 is description, index 1 is date, index 2 is time
+            // index 0 is description, index 1 is date, index 2 is time
             if (toBreak && parser.isValidDate(date) && parser.isValidTime(time)) {
                 return new String[]{des, date, time};
             } else {
-                //exception is thrown when the format is off, since there is no breaking point, or
-                //if the input date or time is wrong
+                // exception is thrown when the format is off, since there is no breaking point, or
+                // if the input date or time is wrong
                 throw new InvalidFormatException("Please use the correct format and include the "
                         + "keyword: /at");
             }
@@ -239,36 +240,36 @@ public class Command {
             int pivotIndex = 0;
             for (int i = 1; i < array.length; i++) {
                 if (array[i].equals("/by")) {
-                    //sets the breaking point of input
+                    // sets the breaking point of input
                     toBreak = true;
                     pivotIndex = i;
                     break;
                 } else {
-                    //before breaking point
+                    // before breaking point
                     des += array[i] + " ";
                 }
             }
             String[] dateTimeArr = Arrays.copyOfRange(array, pivotIndex + 1, array.length);
-            //after breaking point, there should only be a maximum of 2 items remaining
-            //first item is date, second item is time
+            // after breaking point, there should only be a maximum of 2 items remaining
+            // first item is date, second item is time
             if (dateTimeArr.length > 2) {
                 throw new InvalidFormatException("Please enter a valid format");
             } else {
                 if (dateTimeArr.length == 1) {
-                    //only has date but no time
+                    // only has date but no time
                     date = dateTimeArr[0];
                 } else if (dateTimeArr.length == 2) {
-                    //has date and time
+                    // has date and time
                     date = dateTimeArr[0];
                     time = dateTimeArr[1];
                 }
             }
-            //index 0 is description, index 1 is date, index 2 is time
+            // index 0 is description, index 1 is date, index 2 is time
             if (toBreak && parser.isValidDate(date) && parser.isValidTime(time)) {
                 return new String[]{des, date, time};
             } else {
-                //exception is thrown when the format is off, since there is no breaking point, or
-                //if the input date or time is wrong
+                // exception is thrown when the format is off, since there is no breaking point, or
+                // if the input date or time is wrong
                 throw new InvalidFormatException("Please use the correct format and include the "
                         + "keyword: /by");
             }
@@ -277,11 +278,11 @@ public class Command {
             for (int i = 1; i < array.length; i++) {
                 des += array[i];
                 if (i != array.length - 1) {
-                    //adds a white space in between each word
+                    // adds a white space in between each word
                     des += " ";
                 }
             }
-            //index 0 is description
+            // index 0 is description
             return new String[]{des};
         }
         return new String[]{};
@@ -303,6 +304,6 @@ public class Command {
                 desToFind += " ";
             }
         }
-        return ui.showFoundTasks(tasks, desToFind);
+        return ui.printFoundTasks(tasks, desToFind);
     }
 }

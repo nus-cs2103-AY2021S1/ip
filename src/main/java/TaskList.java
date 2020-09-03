@@ -16,7 +16,7 @@ public class TaskList {
         this.taskList = tasks;
     }
 
-    public int noOfTasks() {
+    public int getNoOfTasks() {
         return this.taskList.size();
     }
 
@@ -47,13 +47,13 @@ public class TaskList {
                 int taskNumber = Integer.parseInt(input[1]);
                 Task removedTask = current.getTask(taskNumber - 1);
                 current.removeTask(taskNumber - 1);
-                return ui.showSuccessfulDelete(removedTask, updated.noOfTasks());
+                return ui.printSuccessfulDelete(removedTask, updated.getNoOfTasks());
             } else {
-                return ui.showErrorMessage(new DeleteFailureException("Duke says: Please try "
+                return ui.printErrorMessage(new DeleteFailureException("Duke says: Please try "
                         + "again with a valid format.").getMessage());
             }
         } catch (IndexOutOfBoundsException e) {
-            return ui.showErrorMessage(new DeleteFailureException("Duke says: Please try again "
+            return ui.printErrorMessage(new DeleteFailureException("Duke says: Please try again "
                     + "with a valid number.").getMessage());
         }
     }
@@ -76,15 +76,15 @@ public class TaskList {
         if (keyWord.equals("todo")) {
             ToDo toDo = new ToDo(data[0]);
             tasks.addTask(toDo);
-            return ui.showTasksAdded(toDo, tasks.noOfTasks());
+            return ui.printTasksAdded(toDo, tasks.getNoOfTasks());
         } else if (keyWord.equals("deadline")) {
             Deadline deadline = new Deadline(data[0], data[1], data[2]);
             tasks.addTask(deadline);
-            return ui.showTasksAdded(deadline, tasks.noOfTasks());
+            return ui.printTasksAdded(deadline, tasks.getNoOfTasks());
         } else if (keyWord.equals("event")) {
             Event event = new Event(data[0], data[1], data[2]);
             tasks.addTask(event);
-            return ui.showTasksAdded(event, tasks.noOfTasks());
+            return ui.printTasksAdded(event, tasks.getNoOfTasks());
         }
         return "";
     }
@@ -104,9 +104,9 @@ public class TaskList {
             Task doneTask = tasks.getTask(taskNumber - 1);
             doneTask.markDone();
             tasks.setTask(taskNumber - 1, doneTask);
-            return ui.showTaskIsDone(doneTask);
+            return ui.printTaskIsDone(doneTask);
         } catch (Exception ex) {
-            return ui.showInvalidTaskNumber();
+            return ui.printInvalidTaskNumber();
         }
     }
 }

@@ -22,9 +22,9 @@ public class Duke {
 
     public String getResponse(String input) {
         try {
-            return command.execute(input, tasks, storage) + "\n" + ui.showLineBreak();
+            return command.execute(input, tasks, storage) + "\n" + ui.printLineBreak();
         } catch (DukeException ex) {
-            return ui.showErrorMessage(ex.getMessage());
+            return ui.printErrorMessage(ex.getMessage());
         }
     }
 
@@ -46,9 +46,9 @@ public class Duke {
                 command.execute(userInput, tasks, storage);
                 isTerminated = command.isTerminated();
             } catch (DukeException ex) {
-                ui.showErrorMessage(ex.getMessage());
+                ui.printErrorMessage(ex.getMessage());
             } finally {
-                ui.showLineBreak();
+                ui.printLineBreak();
             }
         }
         scanner.close();

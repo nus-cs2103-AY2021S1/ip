@@ -11,8 +11,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected LocalDate localDate;
-    protected LocalTime localTime;
+    private LocalDate localDate;
+    private LocalTime localTime;
 
     Event(String description, String localDate, String localTime) {
         super(description);
@@ -26,6 +26,14 @@ public class Event extends Task {
 
     public boolean hasTime() {
         return this.localTime != null;
+    }
+
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    public LocalTime getLocalTime() {
+        return localTime;
     }
 
     /**

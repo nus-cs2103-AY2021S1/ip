@@ -88,7 +88,7 @@ public class Storage {
             if (temp.createNewFile()) {
                 BufferedWriter output = new BufferedWriter(new FileWriter(temp, true));
                 String toAppend;
-                for (int i = 0; i < taskList.noOfTasks(); i++) {
+                for (int i = 0; i < taskList.getNoOfTasks(); i++) {
                     Task curr = taskList.getTask(i);
                     //adds the updated task list to temp file by converting it to the
                     //form: <type>!@%<status>!@%<description>!@%<date/time(if applicable)>
@@ -101,13 +101,13 @@ public class Storage {
                         Deadline deadline = (Deadline) curr;
                         toAppend = "D!@%" + (deadline.isDone ? "1!@%" : "0!@%")
                                 + deadline.description + "!@%"
-                                + (deadline.localDate != null ? deadline.localDate : "") + "!@%"
-                                + (deadline.localTime != null ? deadline.localTime : "");
+                                + (deadline.getLocalDate() != null ? deadline.getLocalDate() : "") + "!@%"
+                                + (deadline.getLocalTime() != null ? deadline.getLocalTime() : "");
                     } else {
                         Event event = (Event) curr;
                         toAppend = "E!@%" + (event.isDone ? "1!@%" : "0!@%") + event.description
-                                + "!@%" + (event.localDate != null ? event.localDate : "") + "!@%"
-                                + (event.localTime != null ? event.localTime : "");
+                                + "!@%" + (event.getLocalDate() != null ? event.getLocalDate() : "") + "!@%"
+                                + (event.getLocalTime() != null ? event.getLocalTime() : "");
                     }
                     output.write(toAppend);
                     output.newLine();

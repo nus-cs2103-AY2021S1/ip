@@ -11,8 +11,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected LocalDate localDate;
-    protected LocalTime localTime;
+    private LocalDate localDate;
+    private LocalTime localTime;
 
     Deadline(String description, String localDate, String localTime) {
         super(description);
@@ -26,6 +26,14 @@ public class Deadline extends Task {
 
     public boolean hasTime() {
         return this.localTime != null;
+    }
+
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    public LocalTime getLocalTime() {
+        return localTime;
     }
 
     /**

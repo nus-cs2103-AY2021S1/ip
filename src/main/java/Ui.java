@@ -13,7 +13,7 @@ public class Ui {
     /**
      * Provides the welcome logo and how to start.
      */
-    public String showWelcome() {
+    public String printWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -24,11 +24,11 @@ public class Ui {
                 + LINE_BREAK;
     }
 
-    public String showLineBreak() {
+    public String printLineBreak() {
         return LINE_BREAK;
     }
 
-    public String showGoodbye() {
+    public String printGoodbye() {
         return "Duke says: Goodbye and have a nice day! :D";
     }
 
@@ -37,7 +37,7 @@ public class Ui {
      *
      * @return The help string.
      */
-    public String showHelp() {
+    public String printHelp() {
         return "list: displays a sequential view of past inputs\n"
                 + "find <task description>: finds all the tasks matched\n"
                 + "done <task number>: denotes a task as done by checking it\n"
@@ -50,7 +50,7 @@ public class Ui {
                 + "bye: terminates program";
     }
 
-    public String showNoPastTasks() {
+    public String printNoPastTasks() {
         return "Duke says: No past tasks found";
     }
 
@@ -60,9 +60,9 @@ public class Ui {
      * @param taskList The current tasks in hard drive.
      * @return The list of past tasks in string.
      */
-    public String showPastTasks(TaskList taskList) {
+    public String printPastTasks(TaskList taskList) {
         String toReturn = "Here are your tasks:\n";
-        for (int i = 1; i <= taskList.noOfTasks(); i++) {
+        for (int i = 1; i <= taskList.getNoOfTasks(); i++) {
             toReturn += i + ".  " + taskList.getTask(i - 1) + "\n";
         }
         return toReturn + "If you wish to mark a task as completed, input: done <task number>";
@@ -74,7 +74,7 @@ public class Ui {
      * @param task The done task.
      * @return The string denoting a successful deletion and the task involved.
      */
-    public String showTaskIsDone(Task task) {
+    public String printTaskIsDone(Task task) {
         return "Duke says: Good Job! I've marked this task as done:\n" + task;
     }
 
@@ -83,7 +83,7 @@ public class Ui {
      *
      * @return The string that prompts a valid task number input.
      */
-    public String showInvalidTaskNumber() {
+    public String printInvalidTaskNumber() {
         return "Duke says: Please try again with a valid task number";
     }
 
@@ -94,12 +94,12 @@ public class Ui {
      * @param remaining The number of remaining tasks.
      * @return The string denoting a successful deletion and the task involved.
      */
-    public String showSuccessfulDelete(Task removedTask, int remaining) {
+    public String printSuccessfulDelete(Task removedTask, int remaining) {
         return "Successfully deleted the task!\n" + removedTask + "\n"
-                + showRemainingTasks(remaining);
+                + printRemainingTasks(remaining);
     }
 
-    public String showRemainingTasks(int remaining) {
+    public String printRemainingTasks(int remaining) {
         return "You now have " + remaining + " task(s) in your list";
     }
 
@@ -110,11 +110,11 @@ public class Ui {
      * @param remaining The number of remaining tasks.
      * @return The string denoting a successful addition and the task involved.
      */
-    public String showTasksAdded(Task task, int remaining) {
-        return "Duke added into your task list:\n" + task + "\n" + showRemainingTasks(remaining);
+    public String printTasksAdded(Task task, int remaining) {
+        return "Duke added into your task list:\n" + task + "\n" + printRemainingTasks(remaining);
     }
 
-    public String showErrorMessage(String message) {
+    public String printErrorMessage(String message) {
         return message;
     }
 
@@ -125,11 +125,11 @@ public class Ui {
      * @param desToFind The string used to search for the relevant tasks.
      * @return The string of found tasks.
      */
-    public String showFoundTasks(TaskList taskList, String desToFind) {
+    public String printFoundTasks(TaskList taskList, String desToFind) {
         int number = 1;
         boolean hasResults = false;
         String toReturn = "";
-        for (int i = 1; i <= taskList.noOfTasks(); i++) {
+        for (int i = 1; i <= taskList.getNoOfTasks(); i++) {
             if (taskList.getTask(i - 1).description.contains(desToFind)) {
                 if (!hasResults) {
                     toReturn += "Here are your tasks:\n";
