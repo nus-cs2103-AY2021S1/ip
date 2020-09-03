@@ -9,10 +9,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import ultron.commands.TaskCommand;
+import com.google.gson.Gson;
+
 import ultron.exceptions.ExceptionType;
 import ultron.exceptions.UltronException;
+import ultron.tasks.Deadline;
+import ultron.tasks.Event;
 import ultron.tasks.Task;
+import ultron.tasks.Todo;
 
 /**
  * The main Storage class for Ultron.
@@ -21,6 +25,8 @@ public final class Storage {
 
     /** To store the datafile location. */
     private final File f;
+    /** For serialization and deserialization*/
+    private final Gson gson = new Gson();
 
     /**
      * The Storage class.
@@ -45,8 +51,7 @@ public final class Storage {
           @param task Task to be encoded to string
          * @return String containing the command
          */
-        return String.format("%s~%d~%s", task.getType(),
-            task.isDone() ? 1 : 0, task.getCommand());
+        return task.getType() + ":" + gson.toJson(task);
     }
 
     /**
@@ -57,25 +62,18 @@ public final class Storage {
      * @throws UltronException If the command or line is invalid.
      **/
     private Task decode(final String string) throws UltronException {
-
-        //Split the string according to the ,
-        String[] data = string.split("~");
-        TaskCommand taskCommand;
-
-        try {
-            //Get the command based on the first entry
-            taskCommand = TaskCommand.valueOf(data[0].toLowerCase());
-        } catch (IllegalArgumentException e) {
-            throw new UltronException(data[0], ExceptionType.INVALID_COMMAND);
+        String[] data = string.split(":", 2);
+        switch(data[0]) {
+        case "DEADLINE":
+            return gson.fromJson(data[1], Deadline.class);
+        case "TODO":
+            return gson.fromJson(data[1], Todo.class);
+        case "EVENT":
+            return gson.fromJson(data[1], Event.class);
+        default:
+            break;
         }
-
-        //Return the task based on the data
-        Task task = taskCommand.getCommandParser().apply(data[2]);
-        if (data[1].equals("1")) {
-            task.markDone();
-        }
-        return task;
-
+        throw new UltronException(string, ExceptionType.IO_EXCEPTION);
     }
 
     /**
