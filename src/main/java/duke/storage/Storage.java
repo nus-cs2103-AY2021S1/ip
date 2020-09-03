@@ -1,5 +1,7 @@
 package duke.storage;
 
+import static duke.utils.Messages.MESSAGE_HANDLED_INVALID_FILEPATH_ASSERTION;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,18 +15,23 @@ import duke.exceptions.StorageException;
 import duke.exceptions.TaskListTranslatorException;
 import duke.tasklist.TaskList;
 
-/** Represents the storage of the system that handles reading and writing to files. */
+/**
+ * Represents the storage of the system that handles reading and writing to files.
+ */
 public class Storage {
 
     private static final String DEFAULT_FILEPATH = "./data/duke.txt";
     private final Path path;
 
-    /** Constructs a Storage object with the default file path. */
+    /**
+     * Constructs a Storage object with the default file path.
+     */
     public Storage() {
         this(DEFAULT_FILEPATH);
     }
 
-    /** Constructs a Storage object with the specified file path.
+    /**
+     * Constructs a Storage object with the specified file path.
      *
      * @param filePath The file path of the file where the tasks are stored.
      * @throws InvalidFilePathException If the file path is invalid (does not end with ".txt").
@@ -42,7 +49,8 @@ public class Storage {
         return filePath.toString().endsWith(".txt");
     }
 
-    /** Loads the file contents.
+    /**
+     * Loads the file contents.
      *
      * @return The {@link TaskList} containing the tasks in the file or an empty {@link TaskList}
      * if the file does not exist.
@@ -55,13 +63,14 @@ public class Storage {
         try {
             return TaskListTranslator.decode(Files.readAllLines(path));
         } catch (FileNotFoundException e) {
-            throw new AssertionError("A non-existent file scenario has been handled earlier.");
+            throw new AssertionError(MESSAGE_HANDLED_INVALID_FILEPATH_ASSERTION);
         } catch (IOException e) {
             return new TaskList();
         }
     }
 
-    /** Saves a {@link TaskList} into the file.
+    /**
+     * Saves a {@link TaskList} into the file.
      *
      * @param taskList The {@link TaskList} to be saved.
      * @throws StorageException If there is a problem writing to the file.

@@ -11,11 +11,11 @@ import duke.utils.DukeDateTime;
 public class DeadlineTest {
 
     @Test
-    public void testGetBy() {
+    public void testTime() {
         DukeDateTime by = new DukeDateTime(LocalDateTime.parse("2020-08-23T13:00"), true);
         String description = "description";
         Deadline deadline = new Deadline(description, by);
-        assertEquals(by, deadline.getBy());
+        assertEquals(by, deadline.getTime());
     }
 
     @Test

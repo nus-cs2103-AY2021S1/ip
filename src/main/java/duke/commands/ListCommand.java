@@ -7,10 +7,13 @@ import java.util.List;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 
-/** Represents the command that lists out all tasks when executed. */
+/**
+ * Represents the command that lists out all tasks when executed.
+ */
 public class ListCommand extends Command {
 
-    /** Returns a CommandResult containing all tasks to the user.
+    /**
+     * Returns a CommandResult containing all tasks to the user.
      *
      * @param taskList The taskList involved.
      * @return The result of the command.
@@ -21,7 +24,8 @@ public class ListCommand extends Command {
         return new CommandResult(response, false);
     }
 
-    /** Converts an ArrayList of tasks to a string which starts with the initialString
+    /**
+     * Converts an ArrayList of tasks to a string which starts with the initialString
      * and the tasks are numbered starting from 1.
      *
      * @param tasks The ArrayList of tasks to be converted.

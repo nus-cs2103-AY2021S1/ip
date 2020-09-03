@@ -83,7 +83,7 @@ public class TaskListTest {
         taskList.addTask(todo);
         taskList.addTask(event);
         taskList.addTask(deadline);
-        assertEquals(3, taskList.numOfTasks());
+        assertEquals(3, taskList.getNumOfTasks());
     }
 
     @Test

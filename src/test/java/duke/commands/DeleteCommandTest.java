@@ -21,7 +21,7 @@ public class DeleteCommandTest {
         taskList.addTask(todo);
         CommandResult actual = command.execute(taskList);
         String response = String.format("%s\t\t%s\n\t %s", MESSAGE_DELETE_TASK,
-            todo.toString(), taskList.tasksRemaining());
+                todo.toString(), taskList.tasksRemaining());
         CommandResult expected = new CommandResult(response, false);
         assertEquals(expected, actual);
     }
