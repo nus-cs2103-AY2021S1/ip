@@ -23,7 +23,7 @@ import main.exception.UnknownCommandException;
  * Handles the parsing of user inputs.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.2
+ * @version v0.3
  * @since v0.1
  */
 public class Parser {
@@ -74,6 +74,8 @@ public class Parser {
                 InvalidDateException,
                 InvalidEventFormatException,
                 UnknownCommandException {
+        assert(input.length > 1);
+
         String command = input[0];
         String description = input[1];
         String[] nameAndTime;
@@ -122,37 +124,41 @@ public class Parser {
         boolean isSingleArgument = input.length == 1;
         int taskNum;
 
-        switch (command) {
-        case COMMAND_EXIT:
-            return new ExitCommand();
-        case COMMAND_LIST:
-            return new ListCommand();
-        case COMMAND_DONE:
-            if (isSingleArgument) {
-                throw new InvalidTaskException();
+        try {
+            switch (command) {
+            case COMMAND_EXIT:
+                return new ExitCommand();
+            case COMMAND_LIST:
+                return new ListCommand();
+            case COMMAND_DONE:
+                if (isSingleArgument) {
+                    throw new InvalidTaskException();
+                }
+                taskNum = Integer.parseInt(input[1]);
+                return new DoneCommand(taskNum);
+            case COMMAND_DELETE:
+                if (isSingleArgument) {
+                    throw new InvalidTaskException();
+                }
+                taskNum = Integer.parseInt(input[1]);
+                return new DeleteCommand(taskNum);
+            case COMMAND_TODO:
+            case COMMAND_DEADLINE:
+            case COMMAND_EVENT:
+                if (isSingleArgument) {
+                    throw new EmptyMessageException(command);
+                }
+                return parseAdd(input);
+            case COMMAND_FIND:
+                if (isSingleArgument) {
+                    return new FindCommand("");
+                }
+                return new FindCommand(input[1]);
+            default:
+                throw new UnknownCommandException();
             }
-            taskNum = Integer.parseInt(input[1]);
-            return new DoneCommand(taskNum);
-        case COMMAND_DELETE:
-            if (isSingleArgument) {
-                throw new InvalidTaskException();
-            }
-            taskNum = Integer.parseInt(input[1]);
-            return new DeleteCommand(taskNum);
-        case COMMAND_TODO:
-        case COMMAND_DEADLINE:
-        case COMMAND_EVENT:
-            if (isSingleArgument) {
-                throw new EmptyMessageException(command);
-            }
-            return parseAdd(input);
-        case COMMAND_FIND:
-            if (isSingleArgument) {
-                return new FindCommand("");
-            }
-            return new FindCommand(input[1]);
-        default:
-            throw new UnknownCommandException();
+        } catch (NumberFormatException e) {
+            throw new InvalidTaskException();
         }
     }
 }

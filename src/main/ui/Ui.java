@@ -7,7 +7,7 @@ import main.task.TaskList;
  * Represents the ui of stuff.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.1
+ * @version v0.3
  * @since v0.1
  */
 public class Ui {
@@ -76,7 +76,10 @@ public class Ui {
      * @return the string indicating a task has been added successfully.
      */
     public String printAddSuccess(Task task, int taskNum) {
+        assert(taskNum >= 0);
+
         boolean isSingular = taskNum == 1;
+
         return String.format("Got it. I've added this task:\n%s\n"
                         + "Now you have %d %s in the list.",
                 task, taskNum, isSingular ? "task" : "tasks");
@@ -98,7 +101,10 @@ public class Ui {
      * @return a string indicating a task has been removed successfully.
      */
     public String printRemoveSuccess(Task removed, int taskNum) {
+        assert(taskNum >= 0);
+
         boolean isSingular = taskNum == 1;
+
         return String.format("Noted. I've removed this task:\n%s\n"
                         + "Now you have %d %s in the list.",
                 removed, taskNum, isSingular ? "task" : "tasks");
