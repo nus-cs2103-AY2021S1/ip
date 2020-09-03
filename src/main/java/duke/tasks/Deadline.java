@@ -11,30 +11,30 @@ import duke.Time;
  * Class to initiate a deadline task.
  */
 public class Deadline extends Task {
-    private LocalDateTime by;
+    private final LocalDateTime activityTime;
 
     /**
      * Constructor for Deadline.
      */
-    public Deadline(String description, LocalDateTime by) {
+    public Deadline(String description, LocalDateTime activityTime) {
         super(description);
-        this.by = by;
+        this.activityTime = activityTime;
     }
 
     /**
      * Another Constructor for deadline with another parameter.
      */
-    public Deadline(String description, boolean isDone, LocalDateTime by) {
+    public Deadline(String description, boolean isDone, LocalDateTime activityTime) {
         super(description, isDone);
-        this.by = by;
+        this.activityTime = activityTime;
     }
 
     public String getBy() {
-        return Time.convertTimeToSave(by);
+        return Time.convertTimeToSave(activityTime);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + Time.toString(by) + ")";
+        return "[D]" + super.toString() + " (by: " + Time.toString(activityTime) + ")";
     }
 }
