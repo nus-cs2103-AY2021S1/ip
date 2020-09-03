@@ -13,24 +13,24 @@ public class Ui {
     }
 
     /**
-     * Prints the welcome message.
+     * Returns the welcome message.
      */
-    public static String welcomeMessage() {
+    public static String showWelcomeMessage() {
         String intro = "Hello, I am Doraemon! I can help you remember and keep track of your tasks.\n"
                 + "I assume that you are as forgetful as Nobita. Remember to bribe me with loads of Dorayaki too!";
         return intro;
     }
 
     /**
-     * Prints the goodbye message.
+     * Returns the goodbye message.
      */
-    public static String byeMessage() {
+    public static String showByeMessage() {
         String bye = "Goodbye, I need to find my sister now! >_<";
         return bye;
     }
 
     /**
-     * Prints the list of tasks when user calls for 'list'.
+     * Returns string of the list of tasks when user calls for 'list'.
      * @param taskList The list of task to be printed.
      */
     public String showListTasks(List<Task> taskList) {
@@ -44,7 +44,7 @@ public class Ui {
     }
 
     /**
-     * Prints the list of tasks with same date as what user demands
+     * Returns string of the list of tasks with same date as what user demands
      * when user calls for 'print /date'.
      * @param taskList The list of tasks with same date.
      */
@@ -57,7 +57,8 @@ public class Ui {
             }
             return reply.toString();
         } else {
-            return "Oh no >_< I can't seem to find any matching tasks.";
+            String failToFindMsg = "Oh no >_< I can't seem to find any matching tasks.";
+            return failToFindMsg;
         }
     }
 
@@ -66,7 +67,8 @@ public class Ui {
      * @param tsk The task that has been added.
      */
     public String showAddTask(Task tsk) {
-        return "I have added this task for you:\n" + tsk;
+        String addTaskMsg = "I have added this task for you:\n" + tsk;
+        return addTaskMsg;
     }
 
     /**
@@ -74,7 +76,8 @@ public class Ui {
      * @param tsk The task that is completed.
      */
     public String showDoneTask(Task tsk) {
-        return "Excellent! Don't procrastinate like Nobita :P. You have completed:\n" + tsk;
+        String doneTaskMsg = "Excellent! Don't procrastinate like Nobita :P. You have completed:\n" + tsk;
+        return doneTaskMsg;
     }
 
     /**
@@ -82,7 +85,8 @@ public class Ui {
      * @param tsk The task that is deleted.
      */
     public String showDeleteTask(Task tsk) {
-        return "I have removed this task for you:\n" + tsk;
+        String deleteTaskMsg = "I have removed this task for you:\n" + tsk;
+        return deleteTaskMsg;
     }
 
     /**
@@ -90,14 +94,16 @@ public class Ui {
      * @param num The total number of tasks.
      */
     public String showTotalTasks(int num) {
-        return "You have " + num + " task(s) in your list!";
+        String totalTaskMsg = "You have " + num + " task(s) in your list!";
+        return totalTaskMsg;
     }
 
     /**
      * Prints the error when an IOException occurs.
      */
     public String showLoadingError() {
-        return "Error with reading / writing file!";
+        String loadErrorMsg = "Error with reading / writing file!";
+        return loadErrorMsg;
     }
 
     /**
