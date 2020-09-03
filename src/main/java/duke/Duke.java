@@ -70,5 +70,4 @@ public class Duke {
         // execute the bot to perform intended functions
         session.run();
     }
-
 }

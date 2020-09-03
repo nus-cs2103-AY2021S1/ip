@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -53,6 +58,21 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (response.equals("Goodbye... For now.")) {
+            handleExit();
+        }
+    }
+
+    private void handleExit() {
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.exit();
+                System.exit(0);
+            }
+        };
+        Timer delay = new Timer();
+        delay.schedule(timerTask, 2000);
     }
 
 }
