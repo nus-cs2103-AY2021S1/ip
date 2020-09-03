@@ -140,7 +140,7 @@ public class Duke extends Application {
         try {
             command = Parser.parseCommand(echo, tasks);
         } catch (DukeException | ParseException e) {
-            System.out.println(e);
+            return e.getMessage();
         }
         String output = command.execute(tasks);
         // System.out.println(tasks);
