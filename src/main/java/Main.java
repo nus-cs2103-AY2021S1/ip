@@ -7,10 +7,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Mug using FXML.
  */
-public class Main extends Application{
-    private Mug mug = new Mug();
+public class Main extends Application {
+    /** Mug Object */
+    private final Mug mug = new Mug();
 
     @Override
     public void start(Stage stage) {

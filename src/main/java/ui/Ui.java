@@ -11,24 +11,6 @@ import tasks.TaskList;
 public class Ui {
 
     /**
-     * Prints welcome messages.
-     */
-    public void welcome() {
-        String logo = " ___    ___        ______\n"
-                + "|   \\  /   |_    _|  ____|\n"
-                + "|    \\/    | |  | |  |  _\n"
-                + "|          | |__| |  |_| |\n"
-                + "|__/\\__/\\__|\\___,_|______|\n";
-
-        String welcome = logo
-                + "\n"
-                + "** Hello! I'm Mug  **\n"
-                + "** What can Mug do for you ?_? **";
-
-        System.out.println(welcome);
-    }
-
-    /**
      * Read the input command.
      *
      * @param input User input.
@@ -76,8 +58,7 @@ public class Ui {
                 output = tasks.searchTask(keyword);
                 break;
             default:
-                String errorCommand = "Hey!!! I'm sorry, but Mug don't know what that means :3";
-                output = errorCommand;
+                output = "Hey!!! I'm sorry, but Mug don't know what that means :3";
                 break;
             }
         } catch (MugException ex) {

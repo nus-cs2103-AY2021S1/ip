@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
@@ -8,8 +6,9 @@ import ui.Ui;
  * A tool to save task.
  */
 public class Mug {
-
+    /** user Interface Object*/
     private final Ui ui;
+    /** A list of Tasks */
     private final TaskList tasks;
     /**
      * Constructs a Mug Object that create/read the file from the given filepath
@@ -22,28 +21,10 @@ public class Mug {
     }
 
     /**
-     * Runs user input.
+     * Returns respond from mug to user.
+     * @param input User's input
+     * @return Mug's responds.
      */
-    public void run() {
-        this.ui.welcome();
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            String input = sc.nextLine();
-            System.out.println(this.ui.readCommand(input, this.tasks));
-            if (input.trim().toUpperCase().equals("BYE")) {
-                break;
-            }
-        }
-    }
-
-    /**
-     * Main.
-     * @param args Arguments.
-     */
-    public static void main(String[] args) {
-        new Mug().run();
-    }
-
     public String getResponse(String input) {
         new Mug();
         return this.ui.readCommand(input, this.tasks);

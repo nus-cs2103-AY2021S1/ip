@@ -23,7 +23,7 @@ import tasks.Todo;
  */
 public class Storage {
 
-    /** File's path*/
+    /** File's path */
     private final String filepath;
 
     /**
@@ -60,16 +60,16 @@ public class Storage {
                 line = sc.next();
                 String[] newLine = line.split("[|]");
                 Command command = Parser.command(newLine[0]);
-                boolean taskStatus = Integer.parseInt(newLine[1]) == 1;
+                boolean hasDone = Integer.parseInt(newLine[1]) == 1;
 
                 if (command == Command.TODO) {
-                    taskList.add(new Todo(newLine[2], taskStatus));
+                    taskList.add(new Todo(newLine[2], hasDone));
                 } else if (command == Command.DEADLINE) {
                     LocalDate date = Parser.date(newLine[3]);
-                    taskList.add(new Deadline(newLine[2], date, taskStatus));
+                    taskList.add(new Deadline(newLine[2], date, hasDone));
                 } else if (command == Command.EVENT) {
                     LocalDate date = Parser.date(newLine[3]);
-                    taskList.add(new Event(newLine[2], date, taskStatus));
+                    taskList.add(new Event(newLine[2], date, hasDone));
                 }
             }
 
@@ -99,19 +99,19 @@ public class Storage {
                 pw.println("TODO|0|" + info);
                 break;
             case DEADLINE:
-                String[] dInfo = info.split(" /by ");
-                Parser.input(command, dInfo.length, true);
-                Parser.info(command, dInfo[1], true);
-                String deadlineEvent = dInfo[0];
-                LocalDate deadlineTime = Parser.date(dInfo[1]);
+                String[] deadlineInfo = info.split(" /by ");
+                Parser.input(command, deadlineInfo.length, true);
+                Parser.info(command, deadlineInfo[1], true);
+                String deadlineEvent = deadlineInfo[0];
+                LocalDate deadlineTime = Parser.date(deadlineInfo[1]);
                 pw.println("DEADLINE|0|" + deadlineEvent + "|" + deadlineTime);
                 break;
             case EVENT:
-                String[] eInfo = info.split(" /at ");
-                Parser.input(command, eInfo.length, true);
-                Parser.info(command, eInfo[1], true);
-                String eventEvent = eInfo[0];
-                LocalDate eventTime = Parser.date(eInfo[1]);
+                String[] eventInfo = info.split(" /at ");
+                Parser.input(command, eventInfo.length, true);
+                Parser.info(command, eventInfo[1], true);
+                String eventEvent = eventInfo[0];
+                LocalDate eventTime = Parser.date(eventInfo[1]);
                 pw.println("EVENT|0|" + eventEvent + "|" + eventTime);
                 break;
             default:
@@ -155,6 +155,7 @@ public class Storage {
                     pw.println(line);
                 }
             }
+
             sc.close();
             pw.flush();
             pw.close();

@@ -30,7 +30,7 @@ public class Todo extends Task {
      * @return New Todo object.
      */
     @Override
-    public Todo markAsDone() {
+    protected Todo markAsDone() {
         return new Todo(super.description, true);
     }
 

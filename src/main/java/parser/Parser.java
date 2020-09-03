@@ -21,8 +21,8 @@ public class Parser {
      */
     public static void input(Command command, int splitNum, boolean isTime) throws MugException {
         if (splitNum < 2) {
-            if ((isTime && command == Command.DEADLINE)
-            ) {
+            if ((isTime
+                    && command == Command.DEADLINE)) {
                 throw new MugException("HEY!!! Feed me with {/by [date]}. Mug is hungry T_T");
             } else if (isTime
                     && command == Command.EVENT) {
@@ -43,8 +43,8 @@ public class Parser {
      */
     public static void info(Command command, String info, boolean isTime) throws MugException {
         if (info.trim().equals("")) {
-            if ((isTime && command == Command.DEADLINE)
-            ) {
+            if ((isTime
+                    && command == Command.DEADLINE)) {
                 throw new MugException("HEY!!! Feed me with {/by [date]}. Mug is hungry T_T");
             } else if (isTime
                     && command == Command.EVENT) {

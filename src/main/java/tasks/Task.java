@@ -44,7 +44,7 @@ public class Task {
      *
      * @return Task's description.
      */
-    public String getDescription() {
+    protected String getDescription() {
         return this.description;
     }
 
@@ -53,7 +53,7 @@ public class Task {
      *
      * @return New Task object.
      */
-    public Task markAsDone() {
+    protected Task markAsDone() {
         return new Task(this.description, true);
     }
 
@@ -62,7 +62,7 @@ public class Task {
      *
      * @return Task's status.
      */
-    public boolean isDone() {
+    protected boolean isDone() {
         return this.isDone;
     }
 

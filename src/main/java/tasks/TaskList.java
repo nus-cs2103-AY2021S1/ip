@@ -75,19 +75,19 @@ public class TaskList {
                 task = new Todo(info);
                 break;
             case DEADLINE:
-                String[] dInfo = info.split(" /by ");
-                Parser.input(command, dInfo.length, true);
-                Parser.info(command, dInfo[1], true);
-                String deadlineEvent = dInfo[0];
-                LocalDate deadlineTime = Parser.date(dInfo[1]);
+                String[] deadlineInfo = info.split(" /by ");
+                Parser.input(command, deadlineInfo.length, true);
+                Parser.info(command, deadlineInfo[1], true);
+                String deadlineEvent = deadlineInfo[0];
+                LocalDate deadlineTime = Parser.date(deadlineInfo[1]);
                 task = new Deadline(deadlineEvent, deadlineTime);
                 break;
             case EVENT:
-                String[] eInfo = info.split(" /at ");
-                Parser.input(command, eInfo.length, true);
-                Parser.info(command, eInfo[1], true);
-                String eventEvent = eInfo[0];
-                LocalDate eventTime = Parser.date(eInfo[1]);
+                String[] eventInfo = info.split(" /at ");
+                Parser.input(command, eventInfo.length, true);
+                Parser.info(command, eventInfo[1], true);
+                String eventEvent = eventInfo[0];
+                LocalDate eventTime = Parser.date(eventInfo[1]);
                 task = new Event(eventEvent, eventTime);
                 break;
             default:
