@@ -29,7 +29,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         int count = list.size();
-        Task task = Parser.generate(input);
+        Task task = Parser.parseAddTask(input);
         storage.addToList(task);
         list.add(count, task);
         String temp = count < 1 ? " task" : " tasks";

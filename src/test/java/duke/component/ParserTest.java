@@ -168,7 +168,7 @@ public class ParserTest {
     @Test
     public void generate_nonTaskInput_throwException() {
         try {
-            Parser.generate("anything");
+            Parser.parseAddTask("anything");
             fail();
         } catch (Exception e) {
             assertEquals("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
@@ -178,42 +178,42 @@ public class ParserTest {
     @Test
     public void generate_emptyDescription_throwException() {
         try {
-            Parser.generate("todo");
+            Parser.parseAddTask("todo");
             fail();
         } catch (Exception e) {
             assertEquals("\u2639 OOPS!!! The description of a todo cannot be empty.", e.getMessage());
         }
 
         try {
-            Parser.generate("todo ");
+            Parser.parseAddTask("todo ");
             fail();
         } catch (Exception e) {
             assertEquals("\u2639 OOPS!!! The description of a todo cannot be empty.", e.getMessage());
         }
 
         try {
-            Parser.generate("deadline");
+            Parser.parseAddTask("deadline");
             fail();
         } catch (Exception e) {
             assertEquals("\u2639 OOPS!!! The description of a deadline cannot be empty.", e.getMessage());
         }
 
         try {
-            Parser.generate("deadline ");
+            Parser.parseAddTask("deadline ");
             fail();
         } catch (Exception e) {
             assertEquals("\u2639 OOPS!!! The description of a deadline cannot be empty.", e.getMessage());
         }
 
         try {
-            Parser.generate("event");
+            Parser.parseAddTask("event");
             fail();
         } catch (Exception e) {
             assertEquals("\u2639 OOPS!!! The description of an event cannot be empty.", e.getMessage());
         }
 
         try {
-            Parser.generate("event ");
+            Parser.parseAddTask("event ");
             fail();
         } catch (Exception e) {
             assertEquals("\u2639 OOPS!!! The description of an event cannot be empty.", e.getMessage());
@@ -223,21 +223,21 @@ public class ParserTest {
     @Test
     public void generate_noSpace_throwExceptionWithTip() {
         try {
-            Parser.generate("todothings");
+            Parser.parseAddTask("todothings");
             fail();
         } catch (Exception e) {
             assertEquals("Do you mean 'todo things'", e.getMessage());
         }
 
         try {
-            Parser.generate("deadlinethings");
+            Parser.parseAddTask("deadlinethings");
             fail();
         } catch (Exception e) {
             assertEquals("Do you mean 'deadline things'", e.getMessage());
         }
 
         try {
-            Parser.generate("eventthings");
+            Parser.parseAddTask("eventthings");
             fail();
         } catch (Exception e) {
             assertEquals("Do you mean 'event things'", e.getMessage());
@@ -247,14 +247,14 @@ public class ParserTest {
     @Test
     public void generate_noTimeIndicator_throwException() {
         try {
-            Parser.generate("deadline things");
+            Parser.parseAddTask("deadline things");
             fail();
         } catch (Exception e) {
             assertEquals("\u2639 OOPS!!! Time should be specified", e.getMessage());
         }
 
         try {
-            Parser.generate("event things");
+            Parser.parseAddTask("event things");
             fail();
         } catch (Exception e) {
             assertEquals("\u2639 OOPS!!! Time should be specified", e.getMessage());
@@ -264,14 +264,14 @@ public class ParserTest {
     @Test
     public void generate_noTimeSpecification_throwException() {
         try {
-            Parser.generate("deadline things /by");
+            Parser.parseAddTask("deadline things /by");
             fail();
         } catch (Exception e) {
             assertEquals("The time specification cannot be empty.", e.getMessage());
         }
 
         try {
-            Parser.generate("event things /at");
+            Parser.parseAddTask("event things /at");
             fail();
         } catch (Exception e) {
             assertEquals("The time specification cannot be empty.", e.getMessage());
@@ -281,14 +281,14 @@ public class ParserTest {
     @Test
     public void generate_invalidDateFormat_throwException() {
         try {
-            Parser.generate("deadline assignment /by 2020/08/31");
+            Parser.parseAddTask("deadline assignment /by 2020/08/31");
             fail();
         } catch (Exception e) {
             assertEquals("Invalid input date, please input as yyyy-mm-dd.", e.getMessage());
         }
 
         try {
-            Parser.generate("event assignment /at 2020-08-01");
+            Parser.parseAddTask("event assignment /at 2020-08-01");
             fail();
         } catch (Exception e) {
             assertEquals("Invalid input datetime, please input as yyyy-MM-dd HH:mm.", e.getMessage());
@@ -298,15 +298,15 @@ public class ParserTest {
     @Test
     public void generate_validInput_validTask() {
         try {
-            Task t = Parser.generate("todo task");
+            Task t = Parser.parseAddTask("todo task");
             Task t2 = new ToDo("task");
             assertEquals(t2, t);
 
-            Task d = Parser.generate("deadline assignment /by 2020-08-31");
+            Task d = Parser.parseAddTask("deadline assignment /by 2020-08-31");
             Task d2 = new Deadline("assignment", "2020-08-31");
             assertEquals(d2, d);
 
-            Task e = Parser.generate("event meeting /at 2020-09-01 11:00");
+            Task e = Parser.parseAddTask("event meeting /at 2020-09-01 11:00");
             Task e2 = new Event("meeting", "2020-09-01 11:00");
             assertEquals(e2, e);
         } catch (Exception e) {

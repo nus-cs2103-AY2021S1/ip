@@ -30,7 +30,7 @@ public class AddCommandTest {
             fail();
         } catch (Exception e) {
             try {
-                Parser.generate(s);
+                Parser.parseAddTask(s);
                 fail();
             } catch (Exception e2) {
                 assertEquals(e2.getMessage(), e.getMessage());
