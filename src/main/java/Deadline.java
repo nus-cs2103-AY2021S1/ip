@@ -2,6 +2,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class to handle the Deadline task type
+ */
 public class Deadline extends Task {
     protected LocalDateTime byTime;
 

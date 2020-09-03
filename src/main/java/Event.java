@@ -2,6 +2,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class to handle the Event task type
+ */
 public class Event extends Task {
     protected LocalDateTime atTime;
 

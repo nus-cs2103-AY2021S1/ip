@@ -1,8 +1,19 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 
+/**
+ * Utility class to handle parsing tasks from local file
+ */
 public class TaskParser {
-    public static Task parseTask(BufferedReader sc) throws Exception {
-        String input = sc.readLine();
+    /**
+     * Parse a task from buffered reader
+     * @param bufferedReader - input stream
+     * @return the parsed task
+     * @throws DukeException if unable to interpret the input
+     * @throws IOException if unable to read from buffered reader
+     */
+    public static Task parseTask(BufferedReader bufferedReader) throws Exception {
+        String input = bufferedReader.readLine();
         String taskType = input.substring(0, 3);
         String status = input.substring(3, 6);
         String rest = input.substring(7);

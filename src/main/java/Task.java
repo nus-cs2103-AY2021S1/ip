@@ -1,3 +1,8 @@
+import java.io.IOException;
+
+/**
+ * Class to handle fields and functions universal to all task types
+ */
 public class Task {
     protected String description;
     private boolean isDone;
@@ -16,6 +21,9 @@ public class Task {
         return isDone ? "O" : "X";
     }
 
+    /**
+     * Mark current task as done
+     */
     public boolean markAsDone() {
         if (this.isDone) {
             return false;

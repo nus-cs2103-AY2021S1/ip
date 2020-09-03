@@ -1,8 +1,15 @@
+/**
+ * Class to handle parsing user command
+ */
 public class Parser {
     private Task task;
     private String commandType;
     private int index;
 
+    /**
+     * Parse a given command string to relevant information
+     * @param command - input command by user
+     */
     public Parser(String command) {
         this.commandType = "undefined";
         try {

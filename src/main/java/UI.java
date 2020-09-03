@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Class to handle UI-related features
+ */
 public class UI {
     private final Scanner sc;
 

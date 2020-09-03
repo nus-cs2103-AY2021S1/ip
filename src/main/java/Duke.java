@@ -1,6 +1,9 @@
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Main class
+ */
 public class Duke {
     private TaskList tasks;
     private Storage storage;

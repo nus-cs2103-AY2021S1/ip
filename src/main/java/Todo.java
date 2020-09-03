@@ -1,3 +1,6 @@
+/**
+ * Class to handle the Todo task type
+ */
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
