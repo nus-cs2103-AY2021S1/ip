@@ -4,17 +4,23 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    protected LocalDate at;
+    protected LocalDate date;
     /**
      * Returns a deadline. This is a constructor of deadline
      * @param description describes the event task
-     * @param at the time when the event task will happen
+     * @param date the time when the event task will happen
      *
      * @return a event task
      */
-    public Event(String description, String at) {
+    public Event(String description, String date) {
         super(description);
-        this.at = LocalDate.parse(at);
+        this.date = LocalDate.parse(date);
+    }
+
+    public String writeToFile() {
+        String isDoneString = this.isDone ? " 1 @ " : " 0 @ ";
+        String date = " @ " + this.date;
+        return "E @" + isDoneString + this.description + date + System.lineSeparator();
     }
 
     /**
@@ -25,6 +31,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + "(at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

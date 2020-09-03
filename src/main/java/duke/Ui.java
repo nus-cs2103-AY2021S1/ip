@@ -5,11 +5,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    protected TaskList tasks;
-
-    public Ui(TaskList tasks) {
-        this.tasks = tasks;
-    }
+    public Ui() {}
 
     /**
      * Reads the user's command and returns the command as a String
@@ -39,12 +35,12 @@ public class Ui {
      * @param task The newly added task
      * @return String of information about the newly added task
      */
-    public String showAdd(Task task) {
+    public String showAdd(Task task, TaskList tasks) {
 
         String dukeOutput = "_____________________________________________\n"
                 + "     Got it. I've added this task:\n"
                 + "       " + task.toString() + "\n"
-                + "     Now you have " + this.tasks.size() + " " + "task" + " in the list.\n"
+                + "     Now you have " + tasks.size() + " " + "task" + " in the list.\n"
                 + "_____________________________________________\n";
         System.out.println(dukeOutput);
         return dukeOutput;
@@ -57,8 +53,8 @@ public class Ui {
      * @param index The position of the task which is going to be marked as done in the TaskList
      * @return String of information about marked task
      */
-    public String showDone(int index) {
-        String dukeOutput = this.tasks.get(index).markAsDone();
+    public String showDone(int index, TaskList tasks) {
+        String dukeOutput = tasks.get(index).markAsDone();
         System.out.println(dukeOutput);
         return dukeOutput;
     }
@@ -69,13 +65,13 @@ public class Ui {
      * @param index The position of the task which is going to be deleted in the TaskList
      * @return String of information about the deleted task
      */
-    public String showDelete(int index) {
-        Task removed = this.tasks.get(index);
-        this.tasks.delete(index);
+    public String showDelete(int index, TaskList tasks) {
+        Task removed = tasks.get(index);
+        tasks.delete(index);
         String dukeOutput = "_____________________________________________\n"
                 + "     Noted. I've removed this task:\n"
                 + "       " + removed.toString() + "\n"
-                + "     Now you have " + this.tasks.size() + " tasks in the list.\n"
+                + "     Now you have " + tasks.size() + " tasks in the list.\n"
                 + "_____________________________________________";
         System.out.println(dukeOutput);
         return dukeOutput;
@@ -86,13 +82,13 @@ public class Ui {
      *
      * @return String of current tasks
      */
-    public String showList() {
+    public String showList(TaskList tasks) {
         String dukeOutput = "_____________________________________________\n"
                 + "Here are the tasks in your list:\n";
 
-        for (int i = 0; i < this.tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             String label = Integer.toString(1 + i);
-            dukeOutput = dukeOutput + label + ". " + this.tasks.get(i).toString() + "\n";
+            dukeOutput = dukeOutput + label + ". " + tasks.get(i).toString() + "\n";
         }
 
         dukeOutput = dukeOutput + "_____________________________________________";

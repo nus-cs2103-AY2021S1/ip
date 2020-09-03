@@ -49,7 +49,6 @@ public class Task {
                 + "____________________________________________________________";
         return doneString;
     }
-
     @Override
     public String toString() {
         return this.getStatusIcon() + "  " + this.description;

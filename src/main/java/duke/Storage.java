@@ -39,26 +39,21 @@ public class Storage {
             File file = new File("data/duke.txt");
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
-                String previousTask = sc.nextLine();
-                String[] words = previousTask.split(" @ ", 0);
+                String previousTaskString = sc.nextLine();
+                String[] words = previousTaskString.split(" @ ", 0);
+                Task PreviousTask = null;
                 if (words[0].equals("D")) {
-                    Deadline previousDeadline = new Deadline(words[2], words[3]);
-                    if (words[1].equals("1")) {
-                        previousDeadline.setIsDone();
-                    }
-                    tasks.add(previousDeadline);
+                    PreviousTask = new Deadline(words[2], words[3]);
+                    tasks.add(PreviousTask);
                 } else if (words[0].equals("T")) {
-                    ToDo previousToDo = new ToDo(words[2]);
-                    if (words[1].equals("1")) {
-                        previousToDo.setIsDone();
-                    }
-                    tasks.add(previousToDo);
+                    PreviousTask = new ToDo(words[2]);
+                    tasks.add(PreviousTask);
                 } else if (words[0].equals("E")) {
-                    Event previousEvent = new Event(words[2], words[3]);
-                    if (words[1].equals("1")) {
-                        previousEvent.setIsDone();
-                    }
-                    tasks.add(previousEvent);
+                    PreviousTask = new Event(words[2], words[3]);
+                    tasks.add(PreviousTask);
+                }
+                if (words[1].equals("1")) {
+                    PreviousTask.setIsDone();
                 }
             }
         } catch (FileNotFoundException e) {
@@ -99,15 +94,12 @@ public class Storage {
         FileWriter fw = new FileWriter("data/duke.txt");
         for (int k = 0; k < tasks.size(); k++) {
             Task currentTask = tasks.get(k);
-            String isDone = currentTask.isDone ? " 1 @ " : " 0 @ ";
             if (currentTask instanceof ToDo) {
-                fw.write("T @" + isDone + currentTask.description + System.lineSeparator());
+                fw.write(((ToDo) currentTask).writeToFile());
             } else if (currentTask instanceof Deadline) {
-                String date = " @ " + ((Deadline) currentTask).by;
-                fw.write("D @" + isDone + currentTask.description + date + System.lineSeparator());
+                fw.write(((Deadline) currentTask).writeToFile());
             } else if (currentTask instanceof Event) {
-                String date = " @ " + ((Event) currentTask).at;
-                fw.write("D @" + isDone + currentTask.description + date + System.lineSeparator());
+                fw.write(((Event) currentTask).writeToFile());
             }
         }
         fw.close();

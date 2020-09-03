@@ -6,6 +6,11 @@ public class ToDo extends Task {
         super(description);
     }
 
+    public String writeToFile() {
+        String isDoneString = this.isDone ? " 1 @ " : " 0 @ ";
+        return "T @" + isDoneString + this.description + System.lineSeparator();
+    }
+
     /**
      * Returns a string that represents the todo task
      *

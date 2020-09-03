@@ -11,6 +11,7 @@ import java.io.IOException;
 /**
  * A GUI for Duke using FXML.
  */
+
 public class Main extends Application {
     private String path = "." + File.separator + "data" + File.separator;
     private String fileName = "duke.txt";

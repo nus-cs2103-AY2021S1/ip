@@ -64,8 +64,8 @@ public class Parser {
     }
 
     /**
-     * Returns a string of response from duke.
-     * The type of response are fixed in Ui.
+     * Returns a string of response from duke
+     * The type of response are fixed in Ui
      *
      * @param userCommand User's command scanned by Ui.
      * @return A string of response from duke.
@@ -103,7 +103,7 @@ public class Parser {
                 deadlineTask = deadlineTask.trim();
                 Deadline newDeadline = new Deadline(deadlineTask, deadlineDate);
                 this.tasks.add(newDeadline);
-                dukeOutput = this.userInteract.showAdd(newDeadline);
+                dukeOutput = this.userInteract.showAdd(newDeadline, this.tasks);
             }
             break;
 
@@ -121,7 +121,7 @@ public class Parser {
                 }
                 ToDo newToDo = new ToDo(todoTask);
                 this.tasks.add(newToDo);
-                dukeOutput = this.userInteract.showAdd(newToDo);
+                dukeOutput = this.userInteract.showAdd(newToDo, this.tasks);
             }
             break;
 
@@ -150,7 +150,7 @@ public class Parser {
                 }
                 Event newEvent = new Event(eventTask, eventDate);
                 this.tasks.add(newEvent);
-                dukeOutput = this.userInteract.showAdd(newEvent);
+                dukeOutput = this.userInteract.showAdd(newEvent, this.tasks);
             }
             break;
 
@@ -172,16 +172,16 @@ public class Parser {
 
         case DONE:
             int number = Integer.parseInt(words[1]) - 1;
-            dukeOutput = this.userInteract.showDone(number);
+            dukeOutput = this.userInteract.showDone(number, this.tasks);
             break;
 
         case DELETE:
             int index = Integer.parseInt(words[1]) - 1;
-            dukeOutput = this.userInteract.showDelete(index);
+            dukeOutput = this.userInteract.showDelete(index, this.tasks);
             break;
 
         case LIST:
-            dukeOutput = this.userInteract.showList();
+            dukeOutput = this.userInteract.showList(this.tasks);
             break;
 
         case BYE:
