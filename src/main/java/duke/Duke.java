@@ -54,8 +54,12 @@ public class Duke {
     }
 */
 
-    public void referStage(Stage stage) {
+    public void getStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public Stage returnStage() {
+        return stage;
     }
     /**
      * Executes all the operations stated.
@@ -64,10 +68,10 @@ public class Duke {
      */
     public String getResponse(String input) {
         Command c = Parser.parse(input);
-        isExit = input.trim().equalsIgnoreCase("bye");
+     /*   isExit = input.trim().equalsIgnoreCase("bye");
         if (isExit) {
             stage.close();
-        }
+        }*/
         return c.execute(tasks, storage);
     }
 
