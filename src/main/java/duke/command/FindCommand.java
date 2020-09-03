@@ -19,6 +19,7 @@ public class FindCommand implements Command {
      *
      * @param tasks List of user's tasks.
      * @param ui UI for the Duke.
+     * @return String of Duke's list of found tasks.
      */
     @Override
     public String execute(TaskList tasks, Ui ui) {

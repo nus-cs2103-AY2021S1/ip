@@ -13,6 +13,7 @@ public class ListCommand implements Command {
      *
      * @param tasks List of user's tasks.
      * @param ui UI of Duke.
+     * @return String of user's task list.
      */
     @Override
     public String execute(TaskList tasks, Ui ui) {

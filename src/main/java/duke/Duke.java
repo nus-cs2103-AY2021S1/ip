@@ -40,29 +40,7 @@ public class Duke {
      * Exits the program.
      */
     void exit() {
-        storage.update(tasks);
-        ui.exit();
-        //System.exit(0);
-    }
-
-    /**
-     * Runs the program, which takes in and executes user input
-     * and exits if the user inputs the exit command or some invalid command.
-     */
-    public void run() {
-        try {
-            ui.displayWelcome();
-            boolean isExit = false;
-            while (!isExit) {
-                String userInput = ui.readInput();
-                Command c = parser.parse(userInput);
-                c.execute(tasks, ui);
-                isExit = c.isExit();
-            }
-            exit();
-        } catch (DukeException e) {
-            ui.displayError(e.toString());
-        }
+        storage.updateData(tasks);
     }
 
     /**

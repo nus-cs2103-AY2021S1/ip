@@ -13,6 +13,7 @@ public interface Command {
      *
      * @param tasks List of user's tasks.
      * @param ui UI of Duke.
+     * @return String of Duke's response.
      */
     String execute(TaskList tasks, Ui ui);
 

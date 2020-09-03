@@ -8,8 +8,8 @@ public class ToDo extends Task {
         super(task);
     }
 
-    public ToDo(String task, boolean done) {
-        super(task, done);
+    public ToDo(String task, boolean isDone) {
+        super(task, isDone);
     }
 
     /**
@@ -20,7 +20,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toDataString() {
-        return "T // " + (done ? "1" : "0") + " // " + task;
+        return "T // " + (isDone ? "1" : "0") + " // " + task;
     }
 
     /**

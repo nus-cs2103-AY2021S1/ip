@@ -124,7 +124,7 @@ public class Storage {
      *
      * @param tasks List of updated tasks.
      */
-    public void update(TaskList tasks) {
+    public void updateData(TaskList tasks) {
         deleteStorage();
         createStorage();
         writeData(tasks);

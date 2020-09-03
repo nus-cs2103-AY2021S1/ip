@@ -34,15 +34,15 @@ public class Deadline extends Task {
      * @param task Task description.
      * @param inputDate String representing the date in the format YYYY-MM-DD
      * @param inputTime String representing the time in the format HH:MM
-     * @param done Status of the task.
+     * @param isDone Status of the task.
      * @return A Deadline instance representing the deadline.
      */
-    public static Deadline of(String task, String inputDate, String inputTime, boolean done) {
+    public static Deadline of(String task, String inputDate, String inputTime, boolean isDone) {
         try {
             LocalDate date = LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
             LocalTime time = LocalTime.parse(inputTime, DateTimeFormatter.ISO_LOCAL_TIME);
             Deadline deadline = new Deadline(task, date, time);
-            if (done) {
+            if (isDone) {
                 deadline.setDone();
             }
             return deadline;
@@ -60,7 +60,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toDataString() {
-        return "D // " + (done ? "1" : "0") + " // " + task + " // "
+        return "D // " + (isDone ? "1" : "0") + " // " + task + " // "
             + date.format(DateTimeFormatter.ISO_LOCAL_DATE) + " // "
             + time.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }

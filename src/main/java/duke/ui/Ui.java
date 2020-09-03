@@ -11,23 +11,12 @@ import duke.task.TaskList;
  * Encapsulates the user interface for Duke.
  */
 public class Ui {
-    private static final String LINE_ADD_TASK = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-    private static final String LINE_BYE = "========================================================";
-    private static final String LINE_DONE_TASK = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    private static final String LINE_LIST_TASK = "________________________________________________________";
     private static final String INDENT = "    ";
-
-    private Scanner scanner;
-
-    /**
-     * Creates a Duke UI instance and starts the scanner.
-     */
-    public Ui() {
-        scanner = new Scanner(System.in);
-    }
 
     /**
      * Prints out the welcome message for the user when Duke is booted up.
+     *
+     * @return String representing user's task list.
      */
     public String displayWelcome() {
         String logo = " ____        _        \n"
@@ -42,6 +31,7 @@ public class Ui {
      * Prints out the list of the user's tasks.
      *
      * @param tasks TaskList of user's tasks.
+     * @return String representing user's task list.
      */
     public String displayTaskList(TaskList tasks) {
         ArrayList<Task> list = tasks.getList();
@@ -59,6 +49,7 @@ public class Ui {
      * Prints the list of matching tasks according to find keyword.
      *
      * @param tasks List of matching tasks.
+     * @return String representing matching tasks.
      */
     public String displayMatchingTaskList(TaskList tasks) {
         ArrayList<Task> list = tasks.getList();
@@ -77,6 +68,7 @@ public class Ui {
      * Prints out a message to confirm that the user has marked a task as done.
      *
      * @param task Task marked as done by user.
+     * @return String representing done message.
      */
     public String displayDoneMessage(Task task) {
         return "The following task has been marked as done:\n"
@@ -88,6 +80,7 @@ public class Ui {
      *
      * @param task Task deleted by user.
      * @param taskCount Updated number of tasks in the user's task list.
+     * @return String representing delete message.
      */
     public String displayDeletedTaskMessage(Task task, int taskCount) {
         return "The following task has been removed:\n"
@@ -100,6 +93,7 @@ public class Ui {
      *
      * @param task Task added by user.
      * @param taskCount Updated number of tasks in the user's task list.
+     * @return String representing add success message.
      */
     public String displayAddTaskSuccess(Task task, int taskCount) {
         return "Added task:" + "\n"
@@ -111,6 +105,7 @@ public class Ui {
      * Prints out an error message when an Duke encounters an error.
      *
      * @param errorMessage Error message.
+     * @return String representing the error message.
      */
     public String displayError(String errorMessage) {
         return errorMessage;
@@ -118,24 +113,10 @@ public class Ui {
 
     /**
      * Prints out a goodbye message when the user exits Duke.
+     *
+     * @return String representing goodbye message.
      */
     public String displayGoodbye() {
         return "Goodbye";
-    }
-
-    /**
-     * Reads user input and returns a String representing the input.
-     *
-     * @return String of user input
-     */
-    public String readInput() {
-        return scanner.nextLine();
-    }
-
-    /**
-     * Closes the scanner when the user exits Duke.
-     */
-    public void exit() {
-        scanner.close();
     }
 }

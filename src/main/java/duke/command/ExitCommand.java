@@ -13,6 +13,7 @@ public class ExitCommand implements Command {
      *
      * @param tasks List of user's tasks.
      * @param ui UI of Duke.
+     * @return String of Duke's goodbye.
      */
     @Override
     public String execute(TaskList tasks, Ui ui) {

@@ -5,16 +5,16 @@ package duke.task;
  */
 public abstract class Task {
     protected String task;
-    protected boolean done;
+    protected boolean isDone;
 
     Task(String task) {
         this.task = task;
-        this.done = false;
+        this.isDone = false;
     }
 
     Task(String task, boolean done) {
         this.task = task;
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
@@ -38,7 +38,7 @@ public abstract class Task {
      * Sets the task as done.
      */
     public void setDone() {
-        this.done = true;
+        isDone = true;
     }
 
     /**
@@ -47,7 +47,7 @@ public abstract class Task {
      * @return A tick if done, a cross otherwise.
      */
     public String getStatusToString() {
-        return done ? "\u2713" : "\u2718";
+        return isDone ? "\u2713" : "\u2718";
     }
 
     /**

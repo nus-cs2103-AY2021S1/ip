@@ -34,15 +34,15 @@ public class Event extends Task {
      * @param task Task description.
      * @param inputDate String representing the date in the format YYYY-MM-DD
      * @param inputTime String representing the time in the format HH:MM(:SS)
-     * @param done Status of the task.
+     * @param isDone Status of the task.
      * @return A Deadline instance representing the deadline.
      */
-    public static Event of(String task, String inputDate, String inputTime, boolean done) {
+    public static Event of(String task, String inputDate, String inputTime, boolean isDone) {
         try {
             LocalDate date = LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
             LocalTime time = LocalTime.parse(inputTime, DateTimeFormatter.ISO_LOCAL_TIME);
             Event event = new Event(task, date, time);
-            if (done) {
+            if (isDone) {
                 event.setDone();
             }
             return event;
@@ -60,7 +60,7 @@ public class Event extends Task {
      */
     @Override
     public String toDataString() {
-        return "E // " + (done ? "1" : "0") + " // " + task + " // "
+        return "E // " + (isDone ? "1" : "0") + " // " + task + " // "
             + date.format(DateTimeFormatter.ISO_LOCAL_DATE) + " // "
             + time.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }
