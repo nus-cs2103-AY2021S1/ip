@@ -3,6 +3,7 @@ package duke.storage;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.exceptions.DukeDateTimeParseException;
 import duke.exceptions.TaskListTranslatorException;
 import duke.parsers.DukeDateTimeParser;
 import duke.tasklist.TaskList;
@@ -51,7 +52,7 @@ public class TaskListTranslator {
             }
             return taskList;
 
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | DukeDateTimeParseException e) {
             throw new TaskListTranslatorException();
         }
     }
