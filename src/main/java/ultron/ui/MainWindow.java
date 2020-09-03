@@ -14,7 +14,7 @@ import ultron.Ultron;
  */
 public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image ultronImage = new Image(this.getClass().getResourceAsStream("/images/Ultron.jpg"));
+    private final Image ultronImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     @FXML
     private ScrollPane scrollPane;
     @FXML
