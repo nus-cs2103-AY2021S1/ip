@@ -1,4 +1,10 @@
-import duke.*;
+import duke.TaskList;
+import duke.Ui;
+import duke.Parser;
+import duke.NoResponseException;
+import duke.EmptyInputException;
+import duke.Storage;
+
 import java.io.IOException;
 
 public class Duke {
