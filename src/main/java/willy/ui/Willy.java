@@ -25,19 +25,19 @@ import willy.command.Parser;
 public class Willy extends Application {
 
     private static TaskStore storage;
-    public static String style = "\t________________________________________________________________\n";
-    public static String logo = "__       ____       __\n"
+    private static String style = "\t________________________________________________________________\n";
+    private static String logo = "__       ____       __\n"
             + "\\  \\    /    \\    /  /\n"
             + " \\  \\  /  /\\  \\  /  /\n"
             + "  \\  \\/  /  \\  \\/  /\n"
             + "   \\____/     \\____/ ILLY ~(^-^)~\n";
-    public static String introGUI = "\t __       ___        __\n"
+    private static String introGUI = "\t __       ___        __\n"
             + "\t \\  \\    /    \\     /  /\n"
             + "\t  \\  \\  /  /\\  \\  /  /\n"
             + "\t   \\  \\/  /  \\  \\/  /\n"
             + "\t    \\___/     \\__/ ILLY ~(^-^)~\n" +
             "\t    Your personal life secretary\n";
-    public boolean isOnJavaFX;
+    private boolean isOnJavaFX;
 
     public Willy() {
         this.isOnJavaFX = false;
@@ -54,6 +54,22 @@ public class Willy extends Application {
         storage = new TaskStore();
         storage.createFile();
     }
+
+    public static String getStyle() {
+        return style;
+    }
+
+    public static String getLogo() {
+        return logo;
+    }
+
+    public static String getIntroGUI() {
+        return introGUI;
+    }
+    public boolean isOnJavaFX() {
+        return isOnJavaFX;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
 

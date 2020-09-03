@@ -4,6 +4,9 @@ import willy.exceptions.WillyException;
 import willy.task.*;
 import willy.ui.Greet;
 
+/**
+ * In charge of executing actions based on the user's command.
+ */
 public class Parser {
     private TaskList list;
     private static String lastGreeting = "bye";
@@ -15,6 +18,12 @@ public class Parser {
     public TaskList getList() {
         return list;
     }
+
+    /**
+     * Interpret the message and carry out an action.
+     *
+     * @param message Instructions that the user wants the bot process and record.
+     */
     public void parse(String message) {
         // check when to end the bot
         if (message.equals(lastGreeting)) {
@@ -98,6 +107,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Interpret the message and carry out an action through GUI.
+     *
+     * @param message Instructions that the user wants the bot process and record.
+     * @return
+     */
     public String javaFXParse(String message) {
         String response="";
         // check when to end the bot

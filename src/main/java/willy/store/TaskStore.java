@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import willy.task.Task;
 import willy.task.TaskSymbol;
 import willy.task.ToDoTask;
@@ -26,6 +27,9 @@ public class TaskStore {
             this.filePath = Paths.get(FILE_PATH);
     }
 
+    /**
+     * Create a file if file does not exist
+     */
     public void createFile() {
         try {
             taskStorage = new File(FILE_PATH);
@@ -40,6 +44,11 @@ public class TaskStore {
         }
     }
 
+    /**
+     * Updates the storage file with the array list of tasks provided.
+     *
+     * @param listOfTasks Tasks that user input for the bot to keep track of.
+     */
     public void updateStorage(ArrayList<Task> listOfTasks) {
         try {
             FileWriter fw = new FileWriter(FILE_PATH);
@@ -81,6 +90,11 @@ public class TaskStore {
         }
     }
 
+    /**
+     * Retrieves the list of tasks kept in the storage file.
+     *
+     * @return List of Tasks the user requested the bot to store.
+     */
     // Format of File Content: [T]|✘|go home
     public ArrayList<Task> retrieveStorage() {
         try {
@@ -125,6 +139,9 @@ public class TaskStore {
         }
     }
 
+    /**
+     * To clear the data in the storage file.
+     */
     public void clearFile() { // For test purposes
         try {
             FileWriter fw = new FileWriter(FILE_PATH);
