@@ -78,6 +78,8 @@ public class Storage {
                         taskToRead.markAsDone();
                     }
                     tasks.add(taskToRead);
+                } else {
+                    throw new DukeException("Data is not recognized while reading from file.\n");
                 }
             }
         } catch (Exception e) {

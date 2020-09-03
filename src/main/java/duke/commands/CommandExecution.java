@@ -62,14 +62,14 @@ public class CommandExecution {
                 throw new DukeException("The description of an event cannot be empty.");
             }
 
-            String[] tempEvent = instruction.substring(5).strip().split("/at");
+            String[] tempEventSplits = instruction.substring(5).strip().split("/at");
 
-            if (tempEvent.length < 2) {
+            if (tempEventSplits.length < 2) {
                 throw new DukeException("The date and time of the event cannot be empty.");
             }
 
-            String eventDescription = tempEvent[0].strip(); // clear the white spaces at the front and at the back
-            String eventDateTime = tempEvent[1].strip(); // clear the white spaces at the front and at the back
+            String eventDescription = tempEventSplits[0].strip(); // clear the white spaces at the front and at the back
+            String eventDateTime = tempEventSplits[1].strip(); // clear the white spaces at the front and at the back
             LocalDateTime eventDate = dateTimeParser(eventDateTime);
             tasks.add(new Event(eventDescription, eventDate));
             return ui.addTaskAlert(tasks);
