@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.exception.DukeException;
 import duke.exception.InvalidFormatDateException;
 import duke.exception.InvalidFormatDeadlineException;
 import duke.exception.InvalidFormatEventException;
@@ -57,25 +56,29 @@ public class AddCommand extends Command {
             InvalidFormatEventException, InvalidFormatDateException, UnknownCommandException {
         Task task;
         String[] dateTime;
-        if (Parser.isToDo(type)) {
+        switch (type) {
+        case Parser.KEYWORD_TODO:
             task = new ToDo(message);
-        } else if (Parser.isDeadline(type)) {
+            break;
+        case Parser.KEYWORD_DEADLINE:
             dateTime = message.split(" /by ", 2);
             // checking if the input is valid
             if (dateTime.length == 1) {
                 throw new InvalidFormatDeadlineException();
             }
             task = new Deadline(dateTime[0], Parser.formatDateTime(dateTime[1]));
-        } else if (Parser.isEvent(type)) {
+            break;
+        case Parser.KEYWORD_EVENT:
             dateTime = message.split(" /at ", 2);
             // checking if the input is valid
             if (dateTime.length == 1) {
                 throw new InvalidFormatEventException();
             }
             task = new Event(dateTime[0], Parser.formatDateTime(dateTime[1]));
-        } else {
+            break;
+        default:
             throw new UnknownCommandException();
-        }
+        }    
         tasks.add(task);
         return ui.messageFormatter(ADDED_NOTIFICATION, task.toString(), printNumTask(tasks));
     }

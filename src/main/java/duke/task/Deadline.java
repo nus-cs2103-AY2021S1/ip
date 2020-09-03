@@ -9,28 +9,29 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private static final DateTimeFormatter FormatDateTime = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
-    private final LocalDateTime by;
+    private final LocalDateTime taskDeadline;
     /**
      * Creates a deadline object the containing details of the task.
      *
      * @param description Details of the task.
-     * @param by LocalDateTime format of the time.
+     * @param taskDeadline LocalDateTime format of the time.
      */
-    public Deadline(String description, LocalDateTime by) {
+    public Deadline(String description, LocalDateTime taskDeadline) {
         super(description);
-        this.by = by;
+        this.taskDeadline = taskDeadline;
     }
 
     /**
      * Creates a deadline object the containing details of the task.
      *
      * @param description Details of the task.
-     * @param by String format of the time. Either YYYY-MM-DD HHMM or YYYY-MM-DD(Will be reformatted with 2359 as HHMM).
+     * @param taskDeadline String format of the time. Either YYYY-MM-DD HHMM or
+     *                     YYYY-MM-DD(Will be reformatted with 2359 as HHMM).
      * @param isDone Boolean value of whether a task is completed.
      */
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String taskDeadline, boolean isDone) {
         super(description, isDone);
-        this.by = LocalDateTime.parse(by);
+        this.taskDeadline = LocalDateTime.parse(taskDeadline);
     }
 
     /**
@@ -39,11 +40,11 @@ public class Deadline extends Task {
      * @return A format to be recorded into CSV.
      */
     public String formatStyling() {
-        return String.format("deadline,%s%s", by, super.formatStyling());
+        return String.format("deadline,%s%s", taskDeadline, super.formatStyling());
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(FormatDateTime) + ")";
+        return "[D]" + super.toString() + " (by: " + taskDeadline.format(FormatDateTime) + ")";
     }
 }
