@@ -31,12 +31,12 @@ public class Willy extends Application {
             + " \\  \\  /  /\\  \\  /  /\n"
             + "  \\  \\/  /  \\  \\/  /\n"
             + "   \\____/     \\____/ ILLY ~(^-^)~\n";
-    public static String introGUI = " __       ___        __\n"
-            + " \\  \\    /    \\     /  /\n"
-            + "  \\  \\  /  /\\  \\  /  /\n"
-            + "   \\  \\/  /  \\  \\/  /\n"
-            + "    \\___/     \\__/ ILLY ~(^-^)~\n" +
-            "    Your personal life secretary\n";
+    public static String introGUI = "\t __       ___        __\n"
+            + "\t \\  \\    /    \\     /  /\n"
+            + "\t  \\  \\  /  /\\  \\  /  /\n"
+            + "\t   \\  \\/  /  \\  \\/  /\n"
+            + "\t    \\___/     \\__/ ILLY ~(^-^)~\n" +
+            "\t    Your personal life secretary\n";
     public boolean isOnJavaFX;
 
     public Willy() {
@@ -56,11 +56,6 @@ public class Willy extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-//        Label Willy = new Label("Hello World! I am Willy"); // Creating a new Label control
-//        Scene scene = new Scene(Willy); // Setting the scene to be our Label
-//
-//        stage.setScene(scene); // Setting the stage to show our screen
-//        stage.show(); // Render the stage.
 
         // normal code to start Willy
         new Willy(true);
@@ -108,7 +103,7 @@ public class Willy extends Application {
 
         HBox hbox = new HBox(); // Positions components in a horizontal row
         hbox.setSpacing(10);
-        hbox.setPadding(new Insets(10, 20, 10, 20));
+        hbox.setPadding(new Insets(10, 20, 5, 30));
         hbox.getChildren().addAll(inputField, enterButton, clearButton);
         VBox vbox = new VBox(); // Positions components in a vertical column
         vbox.getChildren().addAll(willy, hbox, changingCommands);

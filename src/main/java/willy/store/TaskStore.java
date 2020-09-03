@@ -46,26 +46,26 @@ public class TaskStore {
             for (int i = 0; i < listOfTasks.size(); i++) {
                 Task task = listOfTasks.get(i);
                 String combinedTask = "";
-                String taskType = listOfTasks.get(i).taskType.toString();
+                String taskType = listOfTasks.get(i).getTaskType().toString();
 
                 if (taskType.equals("[T]")) {
                     String taskStatus = task.getStatusIcon();
-                    String taskContent = task.task;
+                    String taskContent = task.getTask();
                     combinedTask = taskType + "|" + taskStatus + "|" + taskContent;
 
                 } else if (taskType.equals("[D]")) {
                     DeadlineTask deadlineTask = (DeadlineTask) listOfTasks.get(i);
-                    String taskDeadline = deadlineTask.stringDeadline;
+                    String taskDeadline = deadlineTask.getStringDeadline();
                     String taskStatus = deadlineTask.getStatusIcon();
-                    String taskContent = deadlineTask.task;
+                    String taskContent = deadlineTask.getTask();
                     combinedTask = taskType + "|" + taskStatus + "|" +
                             taskContent + "|" + taskDeadline;
 
                 } else if (taskType.equals("[E]")) {
                     EventsTask eventsTask = (EventsTask) listOfTasks.get(i);
-                    String taskPeriod = eventsTask.stringPeriod;
+                    String taskPeriod = eventsTask.getStringPeriod();
                     String taskStatus = eventsTask.getStatusIcon();
-                    String taskContent = eventsTask.task;
+                    String taskContent = eventsTask.getTask();
                     combinedTask = taskType + "|" + taskStatus + "|" +
                             taskContent + "|" + taskPeriod;
 

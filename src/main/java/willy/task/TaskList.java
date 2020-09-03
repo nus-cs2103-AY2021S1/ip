@@ -123,7 +123,7 @@ public class TaskList {
         ArrayList<Task> keyList = new ArrayList<>();
         for (int i = 0; i < listOfTasks.size(); i++) {
             Task tempTask = listOfTasks.get(i);
-            if (tempTask.task.contains(keyword)) {
+            if (tempTask.getTask().contains(keyword)) {
                 keyList.add(tempTask);
             }
         }
@@ -141,7 +141,7 @@ public class TaskList {
         ArrayList<Task> keyList = new ArrayList<>();
         for (int i = 0; i < listOfTasks.size(); i++) {
             Task tempTask = listOfTasks.get(i);
-            if (tempTask.task.contains(keyword)) {
+            if (tempTask.getTask().contains(keyword)) {
                 keyList.add(tempTask);
             }
         }
