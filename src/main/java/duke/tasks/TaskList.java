@@ -68,6 +68,7 @@ public class TaskList {
             // task number is not valid
             throw new DukeException("Task " + taskNumber + " is not in your list of tasks!");
         } else {
+            assert (taskNumber < taskList.size());
             // Dino deletes task from list
             int taskIndex = taskNumber - 1;
             Task toDelete = this.taskList.get(taskIndex);
@@ -172,6 +173,7 @@ public class TaskList {
             // task number is not valid
             throw new DukeException("Task " + taskNumber + " is not in your list of tasks!");
         } else {
+            assert (taskNumber < taskList.size());
             // Dino marks task as done
             int taskIndex = taskNumber - 1;
             Task doneTask = this.taskList.get(taskIndex);
@@ -202,7 +204,7 @@ public class TaskList {
         for (int i = 0; i < this.taskList.size(); i++) {
             String taskString = taskList.get(i).toString();
             if (taskString.contains(keyWord)) {
-                result.append("\n" + taskString);
+                result.append("\n").append(taskString);
                 matchingTasks++;
             }
         }
@@ -211,6 +213,7 @@ public class TaskList {
             throw new DukeException("Rawr! "
                     + "Dino could not find any matching tasks in your list.");
         } else {
+            assert (matchingTasks > 0);
             return result.toString();
         }
     }
