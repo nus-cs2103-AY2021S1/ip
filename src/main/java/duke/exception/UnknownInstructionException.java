@@ -8,4 +8,9 @@ public class UnknownInstructionException extends DukeException {
     public UnknownInstructionException() {
         super("Instruction is unknown! Please check!", UnknownInstructionException.class.getName());
     }
+
+    @Override
+    public String guiString() {
+        return "...Duketama never taught me this...*rolls around*";
+    }
 }

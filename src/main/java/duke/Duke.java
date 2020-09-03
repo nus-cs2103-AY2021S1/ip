@@ -100,9 +100,9 @@ public class Duke {
         } catch (UnknownInstructionException | InvalidInstructionFormatException
                 | MissingFieldException | TaskDoneException
                 | InvalidInstructionLengthException | InvalidTaskIndexException e) {
-            output = e.toString();
+            output = e.guiString();
         } catch (IOException e) {
-            output = "IO Error: " + e.getMessage();
+            output = e.getMessage();
         }
         return output;
     }

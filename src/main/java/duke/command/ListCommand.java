@@ -32,12 +32,13 @@ public class ListCommand extends Command {
                 output.append(uiManager.getNumberedTask(taskList.getTaskList().get(i), i));
                 output.append("\n");
             }
-            output.append(uiManager.getTaskStatus(taskList.getSize()));
+            output.append("\n").append(uiManager.getTaskStatus(taskList.getSize()));
             response = output.toString();
         } else {
             for (int i = 0; i < taskList.getSize(); i++) {
                 uiManager.printNumberedTask(taskList.getTaskList().get(i), i);
             }
+            System.out.println("");
             uiManager.printTaskStatus(taskList.getSize());
         }
     }

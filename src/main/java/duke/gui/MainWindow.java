@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        //scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.setStyle("-fx-background-image: url('/images/yellowBackground.png'); "
                 + "-fx-background-position: center center; "
                 + "-fx-background-repeat: no-repeat; "
@@ -57,18 +57,26 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
         userInput.clear();
         if (duke.isGuiExit()) {
+            DialogBox userBox = DialogBox.getUserDialog(input, userImage);
+            DialogBox dukeBox = DialogBox.getDukeDialog(duke.getDukeOutro(), dukeImage);
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(duke.getDukeOutro(), dukeImage)
+                    userBox, dukeBox
             );
-            PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+            scrollPane.layout();
+            scrollPane.setVvalue(1.0);
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
         } else {
+            DialogBox userBox = DialogBox.getUserDialog(input, userImage);
+            DialogBox dukeBox = DialogBox.getDukeDialog(response, dukeImage);
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
+                    userBox, dukeBox
             );
+            scrollPane.layout();
+            double ratio = (dialogContainer.getHeight() - dukeBox.getHeight())
+                    / dialogContainer.getHeight();
+            scrollPane.setVvalue(ratio);
         }
     }
 
