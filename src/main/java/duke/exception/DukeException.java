@@ -7,9 +7,9 @@ public class DukeException extends Exception {
     /**
      * Initializes the DukeException object.
      *
-     * @param msg Message to be displayed when exception is thrown.
+     * @param message Message to be displayed when exception is thrown.
      */
-    protected DukeException(String msg) {
-        super(String.format("OOPS!!! %s", msg));
+    protected DukeException(String message) {
+        super(String.format("OOPS!!! %s", message));
     }
 }

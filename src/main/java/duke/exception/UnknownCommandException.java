@@ -6,7 +6,7 @@ package duke.exception;
  */
 public class UnknownCommandException extends DukeException {
 
-    private static final int NUM_OF_COMMANDS = 7;
+    private static final int NUM_OF_COMMANDS = 8;
     private static final String MSG_1 = "I'm sorry, but I don't know what that means.\n";
     private static final String MSG_2 = "Here are the available commands that I know:\n";
     private static final String[] listOfCommands = new String[]{
@@ -27,6 +27,11 @@ public class UnknownCommandException extends DukeException {
         super(UnknownCommandException.getListOfCommands());
     }
 
+    /**
+     * Obtains list of commands.
+     *
+     * @return String containing the command list.
+     */
     private static String getListOfCommands() {
         StringBuilder str1 = new StringBuilder();
         str1.append(MSG_1);

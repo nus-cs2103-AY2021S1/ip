@@ -8,6 +8,12 @@ import duke.tasklist.TaskList;
  */
 public class Ui {
 
+    /**
+     * Concatenates the strings, separating each string with a line separator.
+     *
+     * @param args Strings to concatenate.
+     * @return Concatenated strings.
+     */
     private String stringFormatter(String... args) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < args.length - 1; i++) {
@@ -27,7 +33,7 @@ public class Ui {
     /**
      * Retrieves the goodbye message.
      */
-    public String goodBye() {
+    public String goodbye() {
         return "Bye! Hope to see you again soon!";
     }
 

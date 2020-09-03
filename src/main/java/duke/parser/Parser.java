@@ -50,15 +50,33 @@ public class Parser {
         }
     }
 
+    /**
+     * Deconstructs the string into a string array.
+     *
+     * @param input Input String.
+     * @return String array of the input.
+     */
     private static String[] deconstruct(String input) {
         String formattedString = input.trim().replaceAll("\\s{2,}", " ");
         return formattedString.split(" ", 2);
     }
 
+    /**
+     * Obtains the keyword of the user input.
+     *
+     * @param arr User input in a String array.
+     * @return Keyword.
+     */
     private static String getKeyWord(String[] arr) {
         return arr[0].toLowerCase();
     }
 
+    /**
+     * Obtains the rest of the user input.
+     *
+     * @param arr User input in a String array.
+     * @return Rest of the user input.
+     */
     private static String getRestOfWord(String[] arr) {
         return arr.length == 1 ? "" : arr[1];
     }

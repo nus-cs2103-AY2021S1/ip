@@ -19,7 +19,7 @@ import duke.ui.Ui;
  */
 public class Storage {
 
-    private final String dataDir;
+    private final String dataDirectory;
     private final String filePath;
     private final Ui ui;
 
@@ -28,14 +28,19 @@ public class Storage {
      */
     public Storage() {
         ui = new Ui();
-        dataDir = System.getProperty("user.dir") + "/data";
-        filePath = dataDir + "/tasklist.csv";
+        dataDirectory = System.getProperty("user.dir") + "/data";
+        filePath = dataDirectory + "/tasklist.csv";
         createFile();
     }
 
+    /**
+     * Creates the tasklist.csv file in the storage.
+     * Creation works by creating the folder first (if not found), then afterwards creating the file (if it does not
+     * already exist).
+     */
     private void createFile() {
         try {
-            File newDirectory = new File(dataDir);
+            File newDirectory = new File(dataDirectory);
             newDirectory.mkdir();
             File newFile = new File(filePath);
             newFile.createNewFile();
@@ -89,6 +94,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts the task to a csv format to be stored in a .csv file.
+     *
+     * @param task Task object.
+     * @return String representation of the task in .csv format.
+     */
     private String convertToCsvFormat(Task task) {
         return String.format("%s  ,%s  ,%s  ,%s\n",
             task.getTaskName(), task.getDescription(), task.getTime(), task.getStatus());

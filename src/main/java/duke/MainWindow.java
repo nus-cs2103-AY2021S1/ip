@@ -27,6 +27,9 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/thinkingface.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/happyface.png"));
 
+    /**
+     * Initializes the main GUI screen.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -42,6 +45,9 @@ public class MainWindow extends AnchorPane {
         greetUser();
     }
 
+    /**
+     * Greets the user when the GUI opens.
+     */
     private void greetUser() {
         Ui ui = new Ui();
         dialogContainer.getChildren().addAll(

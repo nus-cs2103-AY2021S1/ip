@@ -35,6 +35,11 @@ public class AddComplexTaskCommand extends AddCommand {
         this.taskType = taskType;
     }
 
+    /**
+     * Returns the unique identifier tied to the ComplexTask.
+     *
+     * @return String identifier of the Task.
+     */
     private String identifier() {
         if (taskType == TaskType.DEADLINE) {
             return " /by";
@@ -75,6 +80,12 @@ public class AddComplexTaskCommand extends AddCommand {
         return addTask(ct, tasks, ui, storage);
     }
 
+    /**
+     * Checks if the description or time section from user input is empty.
+     *
+     * @param inputArr Input array.
+     * @throws DukeException If the description or time section is empty.
+     */
     private void checkIfEmpty(String[] inputArr) throws DukeException {
         String description = inputArr[0];
         String time = inputArr[1];
@@ -85,20 +96,44 @@ public class AddComplexTaskCommand extends AddCommand {
         }
     }
 
+    /**
+     * Formats the date to a fixed MMM d YYYY format.
+     *
+     * @param date Input date from user.
+     * @return Formatted date.
+     */
     private String dateToString(String date) {
         return LocalDate.parse(date).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * Formats the date and time to a fixed MMM d yyyy / h.mm a format.
+     *
+     * @param dateAndTime Input date and time from user.
+     * @return Formatted date and time.
+     */
     private String dateAndTimeToString(String dateAndTime) {
         return LocalDateTime
             .parse(dateAndTime.replace(" ", "T"))
             .format(DateTimeFormatter.ofPattern("MMM d yyyy / h.mm a"));
     }
 
+    /**
+     * Formats the time to a fixed h.mm a format.
+     *
+     * @param time Input time from user.
+     * @return Formatted time.
+     */
     private String timeToString(String time) {
         return LocalTime.parse(time).format(DateTimeFormatter.ofPattern("h.mm a"));
     }
 
+    /**
+     * Checks if the input given is in a LocalDate format.
+     *
+     * @param input User input.
+     * @return True if input is in a LocalDate format, false otherwise.
+     */
     private boolean isDateFormat(String input) {
         try {
             LocalDate.parse(input);
@@ -108,6 +143,12 @@ public class AddComplexTaskCommand extends AddCommand {
         }
     }
 
+    /**
+     * Checks if the input given is in a LocalDateTime format.
+     *
+     * @param input User input.
+     * @return True if input is in a LocalDateTime format, false otherwise.
+     */
     private boolean isDateAndTimeFormat(String input) {
         try {
             LocalDateTime.parse(input);
@@ -117,6 +158,12 @@ public class AddComplexTaskCommand extends AddCommand {
         }
     }
 
+    /**
+     * Checks if the input given is in a LocalTime format.
+     *
+     * @param input User input.
+     * @return True if input is in a LocalTime format, false otherwise.
+     */
     private boolean isTimeFormat(String input) {
         try {
             LocalTime.parse(input);

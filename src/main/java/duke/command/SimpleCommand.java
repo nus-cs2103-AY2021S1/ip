@@ -38,7 +38,7 @@ public class SimpleCommand extends Command {
      * @throws DukeException If an error is found in the user input.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (checkIfNumber(input)) {
+        if (isNumber(input)) {
             int digit = Integer.parseInt(input);
             if (tasks.checkIfValid(digit)) {
                 Task current = tasks.get(digit - 1);
@@ -67,9 +67,15 @@ public class SimpleCommand extends Command {
         }
     }
 
-    private static boolean checkIfNumber(String s) {
+    /**
+     * Checks if the string is a number, returning true if so, false otherwise.
+     *
+     * @param str String to check.
+     * @return true if string is a number, false otherwise.
+     */
+    private static boolean isNumber(String str) {
         try {
-            Integer.parseInt(s);
+            Integer.parseInt(str);
         } catch (NumberFormatException e) {
             return false;
         }

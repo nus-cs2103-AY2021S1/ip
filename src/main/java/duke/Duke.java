@@ -26,6 +26,11 @@ public class Duke {
         this.tasks = new TaskList(storage.getTasks());
     }
 
+    /**
+     * Method to run a method after a 1 second delay.
+     *
+     * @param runnable Method to run.
+     */
     private void setTimeout(Runnable runnable) {
         new Thread(() -> {
             try {

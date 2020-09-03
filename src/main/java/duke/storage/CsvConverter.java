@@ -25,7 +25,7 @@ public class CsvConverter {
         String description = inputArr[1];
         String time = inputArr[2];
         String status = inputArr[3];
-        boolean isDone = checkStatus(status);
+        boolean isDone = checkIfDone(status);
 
         if (taskType.equals("TODO")) {
             return new ToDo(description, isDone);
@@ -38,7 +38,14 @@ public class CsvConverter {
         }
     }
 
-    private static boolean checkStatus(String input) throws InvalidFileFormatException {
+    /**
+     * Checks if task is done.
+     *
+     * @param input Input string.
+     * @return true if word corresponds to done, false otherwise.
+     * @throws InvalidFileFormatException If word does not correspond to either done or not done.
+     */
+    private static boolean checkIfDone(String input) throws InvalidFileFormatException {
         String status = input.toLowerCase();
         if (status.equals("done")) {
             return true;
