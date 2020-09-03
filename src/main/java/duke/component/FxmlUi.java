@@ -17,8 +17,7 @@ public class FxmlUi implements Ui {
     }
 
     @Override
-    public String greeting() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
+    public void greeting() {
     }
 
     @Override

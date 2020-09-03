@@ -31,6 +31,7 @@ public class HappenCommand extends Command {
      */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
+        assert input.startsWith("happen ") : "Happen command does not start with 'happen '";
         String description = input.substring(7);
         String[] detail = description.split(" ");
         DateTimeFormatter parse = DateTimeFormatter.ofPattern("yyyy-MM-dd");

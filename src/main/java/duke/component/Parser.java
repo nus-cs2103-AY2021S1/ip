@@ -27,6 +27,7 @@ public class Parser {
      * numbers
      */
     public static int isValidDone(String cmd, int count) throws InvalidCommandException {
+        assert cmd.startsWith("done ") : "Calling isValidDone not using a done command";
         if (cmd.startsWith("done ")) {
             if (cmd.length() < 6) {
                 throw new InvalidCommandException("\u2639 OOPS!!! The task to mark as done cannot be empty.");
@@ -56,6 +57,7 @@ public class Parser {
      * numbers
      */
     public static int isValidDelete(String cmd, int count) throws InvalidCommandException {
+        assert cmd.startsWith("delete ") : "Calling isValidDelete not using a delete command";
         if (cmd.startsWith("delete ")) {
             if (cmd.length() < 8) {
                 throw new InvalidCommandException("\u2639 OOPS!!! The task to mark to delete cannot be empty.");
