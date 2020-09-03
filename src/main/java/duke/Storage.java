@@ -58,6 +58,11 @@ public class Storage {
         return createTaskList(contentsInString);
     }
 
+    public void createFile() throws IOException {
+        File file = new File(this.filePath);
+        file.createNewFile();
+    }
+
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);

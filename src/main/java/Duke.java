@@ -1,4 +1,6 @@
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import duke.Storage;
 import duke.Task;
@@ -79,15 +81,33 @@ public class Duke {
     }
 
     private void start() {
-        String filePath = "./data/data.txt";
+        String filePath = "./data";
+        String fileName = "data.txt";
         try {
             this.ui = new Ui();
-            this.storage = new Storage(filePath);
-            this.taskList = new TaskList(storage.load());
+            this.storage = new Storage(filePath + "/" + fileName);
+            File dir = new File(filePath);
+            File file = new File(filePath, fileName);
+            if (dir.exists() && file.exists()) {
+                this.taskList = new TaskList(storage.load());
+            } else if (dir.exists()){
+                // case where only folder exist
+                storage.createFile();
+                this.taskList = new TaskList();
+            } else {
+                // case where folder does not exist
+                dir.mkdir();
+                storage.createFile();
+                this.taskList = new TaskList();
+            }
             ui.showWelcomeMessage();
         } catch (FileNotFoundException e) {
             ui.showStartFailedMessage();
-            this.taskList = new TaskList();
+            ui.printException(e);
+            System.exit(1);
+        } catch (IOException e) {
+            ui.printException(e);
+            System.exit(1);
         }
     }
 
