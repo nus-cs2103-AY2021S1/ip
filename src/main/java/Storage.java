@@ -20,8 +20,6 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    //This function creates file if it does not exist, else return
-
     /**
      * Creates a file if the file does not exist. Otherwise, it will use the existing file.
      * @throws IOException If the file cannot be created.
