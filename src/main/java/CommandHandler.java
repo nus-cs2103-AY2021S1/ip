@@ -35,7 +35,13 @@ public class CommandHandler {
                     }
                     break;
                 case "deadline":
-                    handleDeadline();
+                    try {
+                        handleDeadline();
+                    } catch (DukeException e) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     " + e.getMessage());
+                        System.out.println("    ____________________________________________________________\n");
+                    }
                     break;
                 case "event":
                     handleEvent();
@@ -95,14 +101,18 @@ public class CommandHandler {
         System.out.println("    ____________________________________________________________\n");
     }
 
-    public void handleDeadline() {
-        String deadlineDescription = "";
-        while (!sc.hasNext("/by")) {
-            deadlineDescription += sc.next();
-            deadlineDescription += " ";
+    public void handleDeadline() throws DukeException {
+
+        String deadlineCommand = sc.nextLine();
+        if (deadlineCommand.isEmpty()) {
+            throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
         }
-        sc.next("/by");
-        String time = sc.nextLine();
+        if (!deadlineCommand.contains("/by")) {
+            throw new DukeException("\u2639 OOPS!!! The timing of a deadline cannot be empty.");
+        }
+        String[] strings = deadlineCommand.split("/by");
+        String deadlineDescription = strings[0];
+        String time = strings[1];
         Deadline deadline = new Deadline(deadlineDescription, time);
         taskList.add(deadline);
         System.out.println("    ____________________________________________________________");

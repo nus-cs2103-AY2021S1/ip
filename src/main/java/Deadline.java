@@ -11,6 +11,6 @@ public class Deadline extends Task {
     @Override
     public void printDescription() {
         System.out.println("[D][" + getStatusIcon()
-                + "] " + description + "(by:" + deadline + ")");
+                + "]" + description + "(by:" + deadline + ")");
     }
 }
