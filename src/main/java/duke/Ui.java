@@ -12,13 +12,13 @@ public class Ui {
     private static String divider = "************************************************\n";
 
     /**
-     * Returns a scene to be printed as an introduction upon start up Duke
+     * Returns a String to be printed as an introduction upon start up Duke
      *
-     * @return  returns the intro scene
+     * @return  returns the intro String
      */
-    public static Scene introduction() {
+    public static String introduction() {
         String intro = "Hello! I'm Duke\nWhat can i do for you?\n";
-        return new Scene(new Label(divider + intro + divider));
+        return divider + intro + divider;
     }
 
     /**

@@ -102,6 +102,7 @@ public class Duke extends Application {
         Parser parser = new Parser(lines);
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(Ui.introduction()), new ImageView(duke)));
         scrollPane.setContent(dialogContainer);
         userInput = new TextField();
         sendButton = new Button("Send");
