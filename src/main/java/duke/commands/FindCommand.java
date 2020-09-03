@@ -50,11 +50,11 @@ public class FindCommand extends Command {
     private ArrayList<Task> getMatchedTasks(TaskList taskList) {
         ArrayList<Task> matchedTasks = new ArrayList<>();
         ArrayList<Task> allTasks = taskList.getTasks();
-        for (Task task : allTasks) {
+        allTasks.forEach(task -> {
             if (matchesAllWords(task)) {
                 matchedTasks.add(task);
             }
-        }
+        });
         return matchedTasks;
     }
 
