@@ -41,7 +41,11 @@ public class Ui {
         greet();
     }
 
-    /** Says goodbye to the user. */
+    /**
+     * Says goodbye to the user.
+     *
+     * @return The goodbye string.
+     */
     public String bye() {
         sc.close();
         return String.format("Bye! Thank you for chatting with %s!\n"
@@ -53,7 +57,11 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    /** Reads the input from the user. */
+    /**
+     * Reads the input from the user.
+     *
+     * @return The user input.
+     */
     public String readCommand() {
         return sc.nextLine();
     }

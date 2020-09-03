@@ -1,5 +1,7 @@
 package duke.gui;
 
+import java.util.concurrent.CompletableFuture;
+
 import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -34,13 +36,21 @@ public class MainWindow extends AnchorPane {
     /** Initializes the new window. */
     @FXML
     public void initialize() {
-        BackgroundImage bg = new BackgroundImage(bgImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT,
-            BackgroundPosition.DEFAULT, new BackgroundSize(100, 100, true, true, true, false));
+
+        // Background
+        BackgroundSize bgSize = new BackgroundSize(100, 100, true, true, true, false);
+        BackgroundImage bg = new BackgroundImage(bgImage,
+            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT,
+            BackgroundPosition.DEFAULT, bgSize);
         dialogContainer.setBackground(new Background(bg));
 
+        // Scroll Pane
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Hello! I am Bolot, "
-            + "your personal chat-bot companion.\n\nHow may I help you?", dukeImage));
+
+        // Bot Greeting
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(
+            "Hello! I am Bolot, your personal chat-bot companion.\n\n"
+                + "How may I help you?", dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -60,5 +70,17 @@ public class MainWindow extends AnchorPane {
             DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        // Terminate when "bye"
+        if (input.equalsIgnoreCase("bye")) {
+            CompletableFuture.runAsync(() -> {
+                try {
+                    Thread.sleep(500);
+                    System.exit(0);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            });
+        }
     }
 }
