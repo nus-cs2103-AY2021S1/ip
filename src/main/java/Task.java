@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 /**
  * Class to handle fields and functions universal to all task types
  */
@@ -27,8 +25,7 @@ public class Task {
     public boolean markAsDone() {
         if (this.isDone) {
             return false;
-        }
-        else {
+        } else {
             this.isDone = true;
             return true;
         }

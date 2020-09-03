@@ -11,15 +11,15 @@ import java.util.ArrayList;
 public class Storage {
     private final Path filePath;
 
+    public Storage(Path filePath) {
+        this.filePath = filePath;
+    }
+
     private void openFile() throws Exception {
         if (!Files.exists(this.filePath)) {
             Files.createDirectories(this.filePath.getParent());
             Files.createFile(this.filePath);
         }
-    }
-
-    public Storage(Path filePath) {
-        this.filePath = filePath;
     }
 
     /**
@@ -33,7 +33,7 @@ public class Storage {
         openFile();
         BufferedReader reader = Files.newBufferedReader(this.filePath);
         int taskCount = Integer.parseInt(reader.readLine());
-        for(int i = 0; i < taskCount; ++i) {
+        for (int i = 0; i < taskCount; ++i) {
             tasks.add(TaskParser.parseTask(reader));
         }
         reader.close();
@@ -51,7 +51,7 @@ public class Storage {
         BufferedWriter writer = Files.newBufferedWriter(this.filePath);
         writer.write(String.valueOf(tasks.size()));
         writer.newLine();
-        for(Task task : tasks) {
+        for (Task task : tasks) {
             writer.write(task.toString());
             writer.newLine();
         }

@@ -86,6 +86,7 @@ public class Duke {
                     if (counter == 0) {
                         ui.displayMessage("No task was found.");
                     }
+                    break;
                 }
                 default: {
                     throw new Exception("Unexpected error");
@@ -98,7 +99,7 @@ public class Duke {
 
         try {
             storage.saveData(tasks.getTasks());
-        } catch(Exception e) {
+        } catch (Exception e) {
             ui.displayError(e);
         }
         ui.bye();
