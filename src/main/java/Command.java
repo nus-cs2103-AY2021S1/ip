@@ -200,6 +200,7 @@ public class Command {
      * @throws InvalidFormatException If the input format is wrong.
      * @throws EmptyTaskException If input task is not tagged with description.
      */
+
     public static String[] splitIntoDesDateTime(String[] inputSplitByWhiteSpace)
             throws InvalidFormatException, EmptyTaskException {
         String taskType = inputSplitByWhiteSpace[0];
