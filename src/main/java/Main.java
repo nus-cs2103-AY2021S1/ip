@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 
 /**
  * A GUI for Duke using FXML.
@@ -21,6 +22,8 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Bob the Chatbot");
+            Image icon = new Image(this.getClass().getResourceAsStream("/images/icon.jpg"));
+            stage.getIcons().add(icon);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
