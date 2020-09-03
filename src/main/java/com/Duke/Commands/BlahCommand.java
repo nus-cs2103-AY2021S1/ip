@@ -13,4 +13,13 @@ public class BlahCommand extends Command {
             UI.printError(e.toString());
         }
     }
+
+    @Override
+    public String executeGui() {
+        try{
+
+        }
+    }
+
+
 }

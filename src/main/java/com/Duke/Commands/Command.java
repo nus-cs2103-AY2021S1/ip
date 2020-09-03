@@ -8,4 +8,6 @@ public abstract class Command {
     public boolean isDone() {
         return false;
     }
+
+    public abstract String executeGui();
 }

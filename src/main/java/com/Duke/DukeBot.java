@@ -38,4 +38,13 @@ public class DukeBot {
             }
         }
     }
+
+    public static String simulateGui(String input){
+        TaskList ls = new TaskList(Storage.read());
+        DukeParser inputParser = new DukeParser(ls);
+        Command command = inputParser.parse(input);
+        String response = command.execute();
+        return response;
+
+    }
 }
