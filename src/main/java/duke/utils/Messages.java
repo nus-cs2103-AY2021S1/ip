@@ -33,5 +33,10 @@ public class Messages {
     public static final String MESSAGE_STORAGE_EXCEPTION = "OOPS! Error saving file.";
     public static final String MESSAGE_TASKLIST_TRANSLATOR_EXCEPTION = "OOPS! Error reading from file.";
 
+    public static final String MESSAGE_HANDLED_INVALID_COMMAND_ASSERTION =
+            "Invalid command scenario has been handled earlier.";
+    public static final String MESSAGE_HANDLED_INVALID_FILEPATH_ASSERTION =
+            "A non-existent file scenario has been handled earlier.";
+
 
 }

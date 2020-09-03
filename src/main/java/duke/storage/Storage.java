@@ -1,5 +1,7 @@
 package duke.storage;
 
+import static duke.utils.Messages.MESSAGE_HANDLED_INVALID_FILEPATH_ASSERTION;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -55,7 +57,7 @@ public class Storage {
         try {
             return TaskListTranslator.decode(Files.readAllLines(path));
         } catch (FileNotFoundException e) {
-            throw new AssertionError("A non-existent file scenario has been handled earlier.");
+            throw new AssertionError(MESSAGE_HANDLED_INVALID_FILEPATH_ASSERTION);
         } catch (IOException e) {
             return new TaskList();
         }

@@ -38,10 +38,9 @@ public class TaskListTranslator {
                     task = new Event(parsed[2], DukeDateTimeParser.parse(parsed[3]));
                     break;
                 default:
-                    break;
+                    throw new TaskListTranslatorException();
                 }
                 if (parsed[1].equals("1")) {
-                    assert task != null;
                     task.markAsDone();
                 }
                 taskList.addTask(task);
