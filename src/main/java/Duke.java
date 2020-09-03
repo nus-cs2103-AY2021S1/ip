@@ -28,49 +28,49 @@ public class Duke {
                 Parser parser = new Parser(command);
                 String commandType = parser.getCommandType();
                 switch (commandType) {
-                    case "bye": {
-                        isHalted = true;
-                        break;
+                case "bye": {
+                    isHalted = true;
+                    break;
+                }
+                case "list": {
+                    ui.displayMessage("Here are the tasks in your list:");
+                    for (int i = 0; i < tasks.size(); ++i) {
+                        ui.displayFormat("%d. %s\n", i + 1, tasks.get(i));
                     }
-                    case "list": {
-                        ui.displayMessage("Here are the tasks in your list:");
-                        for (int i = 0; i < tasks.size(); ++i) {
-                            ui.displayFormat("%d. %s\n", i + 1, tasks.get(i));
-                        }
-                        break;
+                    break;
+                }
+                case "done": {
+                    int index = parser.getIndex();
+                    if (index >= tasks.size()) {
+                        throw new DukeException(":( OOPS!!! Task index not found.");
                     }
-                    case "done": {
-                        int index = parser.getIndex();
-                        if (index >= tasks.size()) {
-                            throw new DukeException(":( OOPS!!! Task index not found.");
-                        }
-                        tasks.get(index).markAsDone();
-                        ui.displayMessage("Nice! I've marked this task as done:");
-                        ui.displayMessage(tasks.get(index).toString());
-                        break;
+                    tasks.get(index).markAsDone();
+                    ui.displayMessage("Nice! I've marked this task as done:");
+                    ui.displayMessage(tasks.get(index).toString());
+                    break;
+                }
+                case "delete": {
+                    int index = parser.getIndex();
+                    if (index >= tasks.size()) {
+                        throw new DukeException(":( OOPS!!! Task index not found.");
                     }
-                    case "delete": {
-                        int index = parser.getIndex();
-                        if (index >= tasks.size()) {
-                            throw new DukeException(":( OOPS!!! Task index not found.");
-                        }
-                        ui.displayMessage("Noted. I've removed this task:");
-                        ui.displayMessage(tasks.get(index).toString());
-                        tasks.removeTask(index);
-                        ui.displayFormat("Now you have %d tasks in the list.\n", tasks.size());
-                        break;
-                    }
-                    case "add": {
-                        Task newTask = parser.getTask();
-                        tasks.addTask(newTask);
-                        ui.displayMessage("Got it. I've added this task:");
-                        ui.displayMessage(newTask.toString());
-                        ui.displayFormat("Now you have %d tasks in the list\n", tasks.size());
-                        break;
-                    }
-                    default: {
-                        throw new Exception("Unexpected error");
-                    }
+                    ui.displayMessage("Noted. I've removed this task:");
+                    ui.displayMessage(tasks.get(index).toString());
+                    tasks.removeTask(index);
+                    ui.displayFormat("Now you have %d tasks in the list.\n", tasks.size());
+                    break;
+                }
+                case "add": {
+                    Task newTask = parser.getTask();
+                    tasks.addTask(newTask);
+                    ui.displayMessage("Got it. I've added this task:");
+                    ui.displayMessage(newTask.toString());
+                    ui.displayFormat("Now you have %d tasks in the list\n", tasks.size());
+                    break;
+                }
+                default: {
+                    throw new Exception("Unexpected error");
+                }
                 }
             } catch (Exception e) {
                 ui.displayError(e);

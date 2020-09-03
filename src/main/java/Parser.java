@@ -62,7 +62,7 @@ public class Parser {
                 this.commandType = "add";
                 this.task = newTask;
             }
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
     }
