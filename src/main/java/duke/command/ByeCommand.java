@@ -24,6 +24,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        assert(!this.shouldLoop());
         ui.printResponse("Bye. Hope to see you again soon!");
     }
 
@@ -37,6 +38,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public String executeWithResponse(TaskList tasks, Ui ui, Storage storage) {
+        assert(!this.shouldLoop());
         return "Bye. Hope to see you again soon!";
     }
 

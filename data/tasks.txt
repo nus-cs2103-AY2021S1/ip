@@ -1,3 +1,7 @@
-E | 1 | azula's coronation | 1022-08-30 0700
-D | 0 | ip | 2020-09-01 1159
+E | 1 | azula's coronation | 0018-06-02 0700
+D | 0 | ip | 0013-03-07 1159
 T | 0 | get my life in check
+T | 0 | post screenshots to microsoft teams
+D | 0 | x | 0012-04-26 0700
+D | 0 | y | 0013-07-06 1010
+D | 0 | z | 0010-10-10 1010
