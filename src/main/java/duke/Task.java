@@ -1,9 +1,9 @@
 package duke;
 
 public class Task {
-    public String name;
-    public boolean isDone;
-    public String time;
+    private String name;
+    private boolean isDone;
+    private String time;
 
     Task(String name) {
         this.name = name;
@@ -36,6 +36,14 @@ public class Task {
      */
     String getIndicator() {
         return "[T]";
+    }
+
+    String getName() {
+        return name;
+    }
+
+    String getTime() {
+        return time;
     }
 
 }

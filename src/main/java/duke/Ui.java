@@ -1,15 +1,11 @@
 package duke;
-import java.io.File;
-import java.lang.reflect.Array;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    boolean exited = false;
-    TaskList tl;
-    Storage s;
+    private boolean exited = false;
+    private TaskList tl;
+    private Storage s;
     Ui(TaskList tl, Storage s) {
         this.tl = tl;
         this.s = s;
@@ -32,7 +28,7 @@ public class Ui {
                 String command = sc.nextLine();
                 Parser.processCommand(command, tl, this);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -54,14 +50,13 @@ public class Ui {
         String toPrint = "";
         if (t instanceof Deadline) {
             keyword = "by";
-            toPrint = " (" + keyword + ": " + t.time + ")";
+            toPrint = " (" + keyword + ": " + t.getTime() + ")";
         } else if (t instanceof Event) {
             keyword = "at";
-            toPrint = " (" + keyword + ": " + t.time + ")";
+            toPrint = " (" + keyword + ": " + t.getTime() + ")";
         }
-        System.out.println("Got it. I've added this task:" + "\n" +
-                t.getIndicator() + t.getIcon() + t.name + toPrint + "\n" +
-                "Now you have " + arr.size() + " tasks in the list."
+        System.out.println("Got it. I've added this task:" + "\n" + t.getIndicator()
+                + t.getIcon() + t.getName() + toPrint + "\n" + "Now you have " + arr.size() + " tasks in the list."
         );
     }
 
@@ -80,12 +75,12 @@ public class Ui {
                 String toPrint = "";
                 if (t instanceof Deadline) {
                     keyword = "by";
-                    toPrint = " (" + keyword + ": " + t.time + ")";
+                    toPrint = " (" + keyword + ": " + t.getTime() + ")";
                 } else if (t instanceof Event) {
                     keyword = "at";
-                    toPrint = " (" + keyword + ": " + t.time + ")";
+                    toPrint = " (" + keyword + ": " + t.getTime() + ")";
                 }
-                System.out.println(counter + ". " + t.getIndicator() + t.getIcon() + t.name + toPrint);
+                System.out.println(counter + ". " + t.getIndicator() + t.getIcon() + t.getName() + toPrint);
                 counter++;
             }
         }
@@ -100,14 +95,13 @@ public class Ui {
         String toPrint = "";
         if (t instanceof Deadline) {
             keyword = "by";
-            toPrint = " (" + keyword + ": " + t.time + ")";
+            toPrint = " (" + keyword + ": " + t.getTime() + ")";
         } else if (t instanceof Event) {
             keyword = "at";
-            toPrint = " (" + keyword + ": " + t.time + ")";
+            toPrint = " (" + keyword + ": " + t.getTime() + ")";
         }
-        System.out.println("Got it. Duke has marked this task as done:" + "\n" +
-                t.getIndicator() + t.getIcon() + t.name + toPrint + "\n" +
-                "Now you have " + arr.size() + " tasks in the list."
+        System.out.println("Got it. Duke has marked this task as done:" + "\n" + t.getIndicator()
+                + t.getIcon() + t.getName() + toPrint + "\n" + "Now you have " + arr.size() + " tasks in the list."
         );
     }
 
@@ -121,14 +115,13 @@ public class Ui {
         String toPrint = "";
         if (t instanceof Deadline) {
             keyword = "by";
-            toPrint = " (" + keyword + ": " + t.time + ")";
+            toPrint = " (" + keyword + ": " + t.getTime() + ")";
         } else if (t instanceof Event) {
             keyword = "at";
-            toPrint = " (" + keyword + ": " + t.time + ")";
+            toPrint = " (" + keyword + ": " + t.getTime() + ")";
         }
-        System.out.println("Got it. Duke has removed this task:" + "\n" +
-                t.getIndicator() + t.getIcon() + t.name + toPrint + "\n" +
-                "Now you have " + arr.size() + " tasks in the list."
+        System.out.println("Got it. Duke has removed this task:" + "\n" + t.getIndicator()
+                + t.getIcon() + t.getName() + toPrint + "\n" + "Now you have " + arr.size() + " tasks in the list."
         );
     }
 
@@ -171,7 +164,7 @@ public class Ui {
     public void respondToFind(String searchWord) throws Exception {
         ArrayList<Task> temp = new ArrayList<>();
         for (Task t: tl.getArr()) {
-            if (t.name.contains(searchWord)) {
+            if (t.getName().contains(searchWord)) {
                 temp.add(t);
             }
         }
@@ -208,7 +201,7 @@ public class Ui {
      */
     public void respondToTodoWrongSyntax() {
         TodoException te = new TodoException();
-        System.out.println(te.errorMessage);
+        System.out.println(te.getErrorMessage());
     }
 
     /**
@@ -226,7 +219,7 @@ public class Ui {
      */
     public void respondToEventFail() {
         EventException ee = new EventException();
-        System.out.println(ee.errorMessage);
+        System.out.println(ee.getErrorMessage());
     }
 
     /**
@@ -275,7 +268,7 @@ public class Ui {
      */
     public void respondToDeadlineFail() {
         DeadlineException de = new DeadlineException();
-        System.out.println(de.errorMessage);
+        System.out.println(de.getErrorMessage());
     }
 
     /**

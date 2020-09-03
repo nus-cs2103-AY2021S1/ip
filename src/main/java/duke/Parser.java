@@ -51,14 +51,16 @@ public class Parser {
                     ui.respondToTodo(command.substring(5));
                 }
             } else if (command.substring(0, 5).equals("event")) {
-                if (indexOfSlash == -1 || command.length() == 5 || !command.substring(indexOfSlash + 1, indexOfSlash + 3).equals("at")) {
+                if (indexOfSlash == -1 || command.length() == 5
+                        || !command.substring(indexOfSlash + 1, indexOfSlash + 3).equals("at")) {
                     ui.respondToEventFail();
                 } else {
                     try {
                         String time = command.substring(indexOfSlash + 4);
                         LocalDate parsed = LocalDate.parse(time);
-                        ui.respondToEvent(command.substring(6, indexOfSlash - 1), parsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-                    } catch(DateTimeParseException d) {
+                        ui.respondToEvent(command.substring(6, indexOfSlash - 1),
+                                parsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                    } catch (DateTimeParseException d) {
                         ui.respondToEvent(command.substring(6, indexOfSlash - 1), command.substring(indexOfSlash + 4));
                     }
                 }
@@ -75,15 +77,18 @@ public class Parser {
                     }
                 }
             } else if (command.substring(0, 8).equals("deadline")) {
-                if (indexOfSlash == -1 || command.length() == 8 || !command.substring(indexOfSlash + 1, indexOfSlash + 3).equals("by")) {
+                if (indexOfSlash == -1 || command.length() == 8
+                        || !command.substring(indexOfSlash + 1, indexOfSlash + 3).equals("by")) {
                     ui.respondToDeadlineFail();
                 } else {
                     try {
                         String time = command.substring(indexOfSlash + 4);
                         LocalDate parsed = LocalDate.parse(time);
-                        ui.respondToDeadline(command.substring(9, indexOfSlash - 1), parsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-                    } catch(DateTimeParseException d) {
-                        ui.respondToDeadline(command.substring(9, indexOfSlash - 1), command.substring(indexOfSlash + 4));
+                        ui.respondToDeadline(command.substring(9, indexOfSlash - 1),
+                                parsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                    } catch (DateTimeParseException d) {
+                        ui.respondToDeadline(command.substring(9, indexOfSlash - 1),
+                                command.substring(indexOfSlash + 4));
                     }
                 }
             } else {

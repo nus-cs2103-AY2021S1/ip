@@ -4,12 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Storage {
-    String filepath;
-    File file;
+    private String filepath;
+    private File file;
 
     Storage(String path) {
         this.filepath = path;
@@ -62,14 +62,14 @@ public class Storage {
      * @return
      */
     String stringMaker(int startIndex, String[] splits, String str) {
-         return startIndex >= splits.length - 1
+        return startIndex >= splits.length - 1
                  ? str
                  : stringMaker(startIndex + 1, splits, splits[startIndex] + " ");
     }
 
     /**
      * Reads the hard disk and converts it into an arraylist.
-     * @return ArrayList<Task> arr
+     * @return ArrayList(Task)
      * @throws Exception
      */
     ArrayList<Task> toArrayList() throws Exception {
@@ -98,7 +98,7 @@ public class Storage {
                 }
                 return arr;
             }
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println(e);
         }
         return null;
@@ -111,21 +111,20 @@ public class Storage {
      */
     void listWriter(ArrayList<Task> arr) throws IOException {
         FileWriter fw = new FileWriter(filepath);
-        for (Task t: arr) {
+        for (Task t : arr) {
             String keyword = "";
             String toPrint = "";
             if (t instanceof Deadline) {
                 keyword = "by";
-                toPrint = " (" + keyword + ": " + t.time + ")";
+                toPrint = " (" + keyword + ": " + t.getTime() + ")";
             } else if (t instanceof Event) {
                 keyword = "at";
-                toPrint = " (" + keyword + ": " + t.time + ")";
+                toPrint = " (" + keyword + ": " + t.getTime() + ")";
             }
-            String text = t.getIndicator() + t.getIcon() + t.name + toPrint + "\n";
+            String text = t.getIndicator() + t.getIcon() + t.getName() + toPrint + "\n";
 
             fw.write(text);
         }
         fw.close();
     }
-
 }

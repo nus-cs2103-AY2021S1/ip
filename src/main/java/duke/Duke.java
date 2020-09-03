@@ -1,15 +1,15 @@
 package duke;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Duke {
     private Storage s;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke class
+     * @param filePath
+     * @throws Exception
+     */
     public Duke(String filePath) throws Exception {
 
         s = new Storage(filePath);
