@@ -40,14 +40,13 @@ public class Duke {
     private final String MESSAGE_TEMPLATE_ERROR = HORIZONTAL_LINE + NEW_LINE + PADDING
             + "☹ OOPS!!! %s"
             + NEW_LINE + HORIZONTAL_LINE + NEW_LINE + NEW_LINE;
-    private final List<Task> storageList = new ArrayList<>();
+    private final List<Task> taskList = new ArrayList<>();
 
     public void init() {
         sayHello();
         try {
             loadTasksFromDisk();
-        }
-        catch (DukeDataFolderException ex) {
+        } catch (DukeDataFolderException ex) {
             printError(ex.getMessage());
             File dir = new File(DUKE_DATA_DIR_PATH.toUri());
             Boolean isCreated = dir.mkdir();
@@ -56,27 +55,22 @@ public class Duke {
                 try {
                     FileWriter fw = new FileWriter(DUKE_DATA_FILE_PATH.toString());
                     fw.close();
-                }
-                catch (IOException err) {
+                } catch (IOException err) {
                     printError(err.getMessage());
                 }
-            }
-            else {
+            } else {
                 printError("Failed to create Deuk Data Folder");
             }
-        }
-        catch (DukeException ex) {
+        } catch (DukeException ex) {
             printError(ex.getMessage());
-        }
-        catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException ex) {
             printError("Missing Deuk Data File!" + NEW_LINE + PADDING +
                 "Creating new Deuk Data File..."
             );
             try {
                 FileWriter fw = new FileWriter(DUKE_DATA_FILE_PATH.toString());
                 fw.close();
-            }
-            catch (IOException err) {
+            } catch (IOException err) {
                 printError(err.getMessage());
             }
 
@@ -92,8 +86,7 @@ public class Duke {
                 }
                 if (input.toUpperCase().equals(Commands.LIST.getString())) {
                     displayStorageList();
-                }
-                else if (input.length() >= 5 && input.substring(0,5).toUpperCase().equals(Commands.DONE.getString())) {
+                } else if (input.length() >= 5 && input.substring(0,5).toUpperCase().equals(Commands.DONE.getString())) {
                     try {
                         int index = Integer.parseInt(input.substring(5).trim());
                         setTaskDone(index);
@@ -102,15 +95,13 @@ public class Duke {
                     } catch (DukeException ex) {
                         printError(ex.getMessage());
                     }
-                }
-                else if (input.toUpperCase().equals(Commands.DELETEALL.getString())) {
+                } else if (input.toUpperCase().equals(Commands.DELETEALL.getString())) {
                     try {
                         deleteAllTasks();
                     } catch (DukeException ex) {
                         printError(ex.getMessage());
                     }
-                }
-                else if (input.length() >= 7 && input.substring(0,7).toUpperCase().equals(Commands.DELETE.getString())) {
+                } else if (input.length() >= 7 && input.substring(0,7).toUpperCase().equals(Commands.DELETE.getString())) {
                     try {
                         int index = Integer.parseInt(input.substring(7).trim());
                         deleteTask(index);
@@ -119,16 +110,14 @@ public class Duke {
                     } catch (DukeException ex) {
                         printError(ex.getMessage());
                     }
-                }
-                else if (input.length() >= 5 && input.substring(0,5).toUpperCase().equals(Commands.TODO.getString())) {
+                } else if (input.length() >= 5 && input.substring(0,5).toUpperCase().equals(Commands.TODO.getString())) {
                     try {
                         String name = input.substring(5).trim();
                         addToStorageList(Todo.createTodo(name));
                     } catch (DukeException ex) {
                         printError(ex.getMessage());
                     }
-                }
-                else if (input.length() >= 6 && input.substring(0,6).toUpperCase().equals(Commands.EVENT.getString())) {
+                } else if (input.length() >= 6 && input.substring(0,6).toUpperCase().equals(Commands.EVENT.getString())) {
                     try {
                         int limiterPosition = input.indexOf(" /at ");
                         String name;
@@ -143,8 +132,7 @@ public class Duke {
                     } catch (DukeException ex) {
                         printError(ex.getMessage());
                     }
-                }
-                else if (input.length() >= 9 && input.substring(0,9).toUpperCase().equals(Commands.DEADLINE.getString())) {
+                } else if (input.length() >= 9 && input.substring(0,9).toUpperCase().equals(Commands.DEADLINE.getString())) {
                     try {
                         int limiterPosition = input.indexOf(" /by ");
                         String name;
@@ -160,8 +148,7 @@ public class Duke {
                     } catch (DukeException ex) {
                         printError(ex.getMessage());
                     }
-                }
-                else {
+                } else {
                     printError("Sorry I don't know what that means :(");
                 }
             }
@@ -172,12 +159,12 @@ public class Duke {
         System.out.printf(MESSAGE_TEMPLATE_VERBAL, message);
     }
 
-    private void addToStorageList(Task obj) throws DukeException{
+    private void addToStorageList(Task obj) throws DukeException {
         if (obj.getName().length() == 0) {
             throw new DukeException(obj.missingNameError());
         }
-        this.storageList.add(obj);
-        String numOfTasks = this.storageList.size() == 1 ? "1 task" : this.storageList.size() + " tasks";
+        this.taskList.add(obj);
+        String numOfTasks = this.taskList.size() == 1 ? "1 task" : this.taskList.size() + " tasks";
         String message = "Got it. I've added the following task: " + NEW_LINE
                 + PADDING + "  " + obj.toString() + NEW_LINE
                 + PADDING + "Now you have "  + numOfTasks + " in total.";
@@ -185,13 +172,13 @@ public class Duke {
     }
 
     private void displayStorageList() {
-        if (this.storageList.size() == 0) {
+        if (this.taskList.size() == 0) {
             System.out.printf(MESSAGE_TEMPLATE, "Your list is empty, try adding some tasks to it");
             return;
         }
         String output = "You have the following tasks in your list:" + NEW_LINE;
         int counter = 1;
-        for (Task ele: this.storageList) {
+        for (Task ele: this.taskList) {
             output += PADDING + counter + ". " + ele.toString() + NEW_LINE;
             counter++;
         }
@@ -200,22 +187,22 @@ public class Duke {
     }
 
     private void setTaskDone(int index) throws DukeException {
-        if (index <= 0 || index > this.storageList.size()) {
+        if (index <= 0 || index > this.taskList.size()) {
             throw new DukeException("Invalid index, cannot find task.");
         }
-        this.storageList.get(index-1).setDoneness(true);
+        this.taskList.get(index-1).setDoneness(true);
         String message = "Nice job! I'll mark that as done:" + NEW_LINE + PADDING
-                + "  " + this.storageList.get(index-1).toString();
+                + "  " + this.taskList.get(index-1).toString();
         System.out.printf(MESSAGE_TEMPLATE, message);
     }
 
     private void deleteTask(int index) throws DukeException {
-        if (index <= 0 || index > this.storageList.size()) {
+        if (index <= 0 || index > this.taskList.size()) {
             throw new DukeException("Invalid index, cannot find task.");
         }
-        Task task = this.storageList.get(index-1);
-        this.storageList.remove(index-1);
-        String numOfTasks = this.storageList.size() == 1 ? "1 task" : this.storageList.size() + " tasks";
+        Task task = this.taskList.get(index-1);
+        this.taskList.remove(index-1);
+        String numOfTasks = this.taskList.size() == 1 ? "1 task" : this.taskList.size() + " tasks";
         String message = "Noted. The following task has been removed:"
                 + NEW_LINE + PADDING + "  " + task.toString() + NEW_LINE
                 + PADDING + "Now you have "  + numOfTasks + " left.";;
@@ -223,15 +210,15 @@ public class Duke {
     }
 
     private void deleteAllTasks() throws DukeException {
-        if (this.storageList.size() == 0) {
+        if (this.taskList.size() == 0) {
             throw new DukeException("Your list is already empty.");
         }
-        this.storageList.clear();
+        this.taskList.clear();
         String message = "Noted. All tasks have been removed.";
         System.out.printf(MESSAGE_TEMPLATE, message);
     }
 
-    private void loadTasksFromDisk() throws FileNotFoundException, DukeException{
+    private void loadTasksFromDisk() throws FileNotFoundException, DukeException {
         File dukeDataFile = new File(DUKE_DATA_FILE_PATH.toUri());
         if (Files.notExists(DUKE_DATA_DIR_PATH)) {
             throw new DukeDataFolderException("Missing Deuk Data Folder!" + NEW_LINE + PADDING +
@@ -248,20 +235,17 @@ public class Duke {
             Task task;
             if (taskType.equals("T")) {
                 task = Todo.createTodo(taskName);
-            }
-            else if (taskType.equals("D")) {
+            } else if (taskType.equals("D")) {
                 String dueDate = fs.nextLine();
                 task = Deadline.createDeadline(taskName, dueDate);
-            }
-            else if (taskType.equals("E")) {
+            } else if (taskType.equals("E")) {
                 String timing = fs.nextLine();
                 task = Event.createEvent(taskName, timing);
-            }
-            else {
+            } else {
                 throw new DukeException("Save file corrupted!");
             }
             task.setDoneness(isDone);
-            this.storageList.add(task);
+            this.taskList.add(task);
         }
 //        System.out.println("full path: " + dukeDataFile.getAbsolutePath());
 //        System.out.println("file exists?: " + dukeDataFile.exists());
@@ -272,7 +256,7 @@ public class Duke {
         // TODO: check dirty flag before saving to disk
         FileWriter fw = new FileWriter(DUKE_DATA_FILE_PATH.toString());
         String tasksString = "";
-        for (Task task : this.storageList) {
+        for (Task task : this.taskList) {
             tasksString += task.toSaveDataFormat() + NEW_LINE;
         }
         fw.write(tasksString);
@@ -286,8 +270,7 @@ public class Duke {
     private void sayGoodbye() {
         try {
             saveTasksToDisk();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             printError(ex.getMessage());
         }
         System.out.printf(MESSAGE_TEMPLATE_VERBAL, "Goodbye, hope to see you again!");
