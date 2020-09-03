@@ -25,7 +25,7 @@ public class InvalidCommand extends Command {
      * @throws DukeException Always since input is invalid.
      */
     public String execute(String input, TaskList taskList, Storage storage) throws DukeException {
-        throw new DukeException("Oops! I'm not sure what you meant!\n"
-                + "Please try again!");
+        throw new DukeException("\tOops! I'm not sure what you meant!\n"
+                + "\tPlease try again!");
     }
 }

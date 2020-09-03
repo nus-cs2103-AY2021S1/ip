@@ -10,12 +10,21 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/** A GUI for duke.Duke using FXML. */
+/** A GUI for Focus using FXML. */
 public class Main extends Application {
-    /** Creates duke.Duke. */
+    /** Stage object to allow MainWindow class to access. */
+    private static Stage stage;
+    /** Creates Duke. */
     private final Duke duke = new Duke();
-    /** Gets the image for duke.Duke. */
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/rj.jpg"));
+
+    /**
+     * Gets the stage.
+     *
+     * @return Stage.
+     */
+    public static Stage getStage() {
+        return stage;
+    }
 
     /**
      * Overrides start method of JavaFX.
@@ -24,6 +33,7 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) {
+        Main.stage = stage;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

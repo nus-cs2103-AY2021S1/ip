@@ -29,10 +29,10 @@ public class FindCommand extends Command {
         try {
             keyword = input.split("find")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please enter a keyword you wish to find!");
+            throw new DukeException("\tPlease enter a keyword you wish to find!");
         }
         if (keyword.isBlank()) {
-            throw new DukeException("Please enter a keyword you wish to find!");
+            throw new DukeException("\tPlease enter a keyword you wish to find!");
         }
         return taskList.findTasks(keyword.trim());
     }

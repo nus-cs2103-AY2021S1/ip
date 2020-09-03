@@ -26,8 +26,8 @@ public class ListCommand extends Command {
      */
     public String execute(String input, TaskList taskList, Storage storage) throws DukeException {
         if (taskList.getSize() == 0) {
-            throw new DukeException("There are currently no tasks on your list!\n"
-                    + "Start adding one now!");
+            throw new DukeException("\tThere are currently no tasks on your list!\n"
+                    + "\tStart adding one now!");
         } else {
             return taskList.listTasks();
         }

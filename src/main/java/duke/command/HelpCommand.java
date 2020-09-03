@@ -33,10 +33,10 @@ public class HelpCommand extends Command {
         try {
             checker = input.split("help")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Did you meant the command 'help'?");
+            throw new DukeException("\tDid you meant the command 'help'?");
         }
         if (!checker.isBlank()) { // user's input is "help me" for example
-            throw new DukeException("Did you meant the command 'help'?");
+            throw new DukeException("\tDid you meant the command 'help'?");
         } else { // user's input is "help " with spacings
             return UI.listCommands();
         }

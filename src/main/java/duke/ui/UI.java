@@ -8,13 +8,13 @@ public class UI {
      * @return Greetings.
      */
     public static String greetUser() {
-        String logo = " __\n"
-                    + "/ _|   ___   ___  _   _  _ __\n"
-                    + "| |_  / _ \\ / __|  | | | | / __|\n"
-                    + "|  _|| (_) | | (__  | |_| | \\__ \\  _\n"
+        String logo = "\t  __\n\t"
+                    + "/ _|   ___   ___  _   _  _ __\n\t"
+                    + "| |_  / _ \\ / __|  | | | | / __|\n\t"
+                    + "|  _|| (_) | | (__  | |_| | \\__ \\  _\n\t"
                     + "|_|   \\___/ \\___| \\__,_||___/(_)\n\n";
-        String greetings = "Welcome to\n" + logo + "\"\\(*^O^*) I am Pocus, your personal assistant!"
-                + "\nBefore we start, may I know your name?\n";
+        String greetings = "\tWelcome to\n" + logo + "\t\"\\(*^O^*) I am Pocus, your personal assistant!"
+                + "\n\tBefore we start, may I know your name?\n";
         return greetings;
     }
 
@@ -25,9 +25,9 @@ public class UI {
      * @return Addressing of user.
      */
     public static String addressUser(String name) {
-        String address = "Hello there, " + name + "! How can I help you today?\n"
-                + "Note: If you are a first time user,\n"
-                + "type 'help' for the list of commands to get started!\n";
+        String address = "\tHello there, " + name + "! How can I help you today?\n"
+                + "\tNote: If you are a first time user,\n"
+                + "\ttype 'help' for the list of commands to get started!\n";
         return address;
     }
 
@@ -37,21 +37,21 @@ public class UI {
      * @return List of commands.
      */
     public static String listCommands() {
-        String commands = "Here are the commands you can use:"
-                + "\n\tTo add tasks:"
-                + "\n\t\t- todo <todo task name>"
-                + "\n\t\t- deadline <deadline task name> /by <YYYY-MM-DD HH:mm>"
-                + "\n\t\t- event <event task name> /at <YYYY-MM-DD HH:mm>"
-                + "\n\tTo delete tasks:"
-                + "\n\t\t- delete <index of task>"
-                + "\n\tTo mark tasks as done:"
-                + "\n\t\t- done <index of task>"
-                + "\n\tTo list the tasks on your task list:"
-                + "\n\t\t- list"
-                + "\n\tTo find tasks on your task list:"
-                + "\n\t\t- find <keyword>"
-                + "\n\tTo exit Focus:"
-                + "\n\t\t- bye\n";
+        String commands = "\tHere are the commands you can use:"
+                + "\n\t\tTo add tasks:"
+                + "\n\t\t\t- todo <todo task name>"
+                + "\n\t\t\t- deadline <deadline task name> /by <YYYY-MM-DD HH:mm>"
+                + "\n\t\t\t- event <event task name> /at <YYYY-MM-DD HH:mm>"
+                + "\n\t\tTo delete tasks:"
+                + "\n\t\t\t- delete <index of task>"
+                + "\n\t\tTo mark tasks as done:"
+                + "\n\t\t\t- done <index of task>"
+                + "\n\t\tTo list the tasks on your task list:"
+                + "\n\t\t\t- list"
+                + "\n\t\tTo find tasks on your task list:"
+                + "\n\t\t\t- find <keyword>"
+                + "\n\t\tTo exit Focus:"
+                + "\n\t\t\t- bye\n";
         return commands;
     }
 
@@ -61,7 +61,8 @@ public class UI {
      * @return Exit output.
      */
     public String exitFocus() {
-        String exit = "Hopefully I have helped you today. Byeee! (*^O^*)/\"\n";
+        String exit = "\tHopefully I have helped you today. Byeee! (*^O^*)/\"\n"
+                + "\tNote: This window close in 5 seconds.";
         return exit;
     }
 }

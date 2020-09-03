@@ -11,9 +11,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 
 /**
  * A custom control using FXML.
@@ -26,7 +25,7 @@ public class DialogBox extends HBox {
     private Label dialog;
     /** Circle for speaker's images. */
     @FXML
-    private Circle circle;
+    private ImageView imageView;
 
     /**
      * Constructor for duke.ui.DialogBox.
@@ -34,7 +33,7 @@ public class DialogBox extends HBox {
      * @param text Inputs and responses.
      * @param image Speaker's image.
      */
-    private DialogBox(String text, Image image) {
+    private DialogBox(String text, Image image, boolean isUser) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -43,8 +42,12 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if (isUser) {
+            dialog.getStyleClass().remove("duke");
+            dialog.getStyleClass().add("user");
+        }
         dialog.setText(text);
-        circle.setFill(new ImagePattern(image));
+        imageView.setImage(image);
     }
 
     /** Flips the dialog box such that the Circle is on the left and text on the right. */
@@ -63,7 +66,7 @@ public class DialogBox extends HBox {
      * @return duke.ui.DialogBox for user.
      */
     public static DialogBox getUserDialog(String input, Image image) {
-        return new DialogBox(input, image);
+        return new DialogBox("You:\n\t" + input, image, true);
     }
 
     /**
@@ -74,7 +77,7 @@ public class DialogBox extends HBox {
      * @return duke.ui.DialogBox for duke.Duke.
      */
     public static DialogBox getDukeDialog(String response, Image image) {
-        DialogBox dialogBox = new DialogBox(response, image);
+        DialogBox dialogBox = new DialogBox("Pocus:\n" + response, image, false);
         dialogBox.flip();
         return dialogBox;
     }
