@@ -7,12 +7,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
 /**
@@ -43,8 +49,9 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setFont(Font.font("Vandera", 20));
         displayPicture.setImage(img);
+        Circle clip = new Circle(50, 50, 45);
+        displayPicture.setClip(clip); //convert image to circle
     }
 
     /**
