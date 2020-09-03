@@ -11,10 +11,17 @@ import duke.task.TaskList;
  */
 public class Ui {
     private Scanner sc;
-    private final String helloMessage = "Hello! I'm Clara! :D How may I help you? :)";
-    private final String byeMessage = "Bye! Have a great day and hope to see you soon! :D";
-    private final String errorHeader = "Apologies!";
+    private static final String MESSAGE_WELCOME = "Hello! I'm Clara! :D How may I help you? :)\n";
+    private static final String MESSAGE_GOODBYE = "Bye! Have a great day and hope to see you soon! :D\n";
+    private static final String HEADER_ERROR = "Apologies!\n";
+    private static final String HEADER_TASK_FIND = "These are the tasks that you are looking for.:)\n";
+    private static final String HEADER_TASK_ALL = "These are the tasks in your list. Jiayous! :)\n";
+    private static final String HEADER_TASK_NONE = "You have no task in your list. :D\n";
+    private static final String HEADER_TASK_ADD = "Okay! I've added this task:";
 
+    private static final String HEADER_TASK_DONE = "Nice! I've marked this task as done:\n\t\t";
+    private static final String HEADER_TASK_DELETE= "Okay! I've removed this task:\n\t\t";
+    private static final String MESSAGE_TASK_UPDATE = "This is your updated tasks. Jiayous! :D";
     public Ui() {
         this.sc = new Scanner(System.in);
     }
@@ -31,42 +38,71 @@ public class Ui {
      * Prints to the console with a tab.
      * @param message Message to be printed.
      */
-    public void print(String message) {
+    public void printToConsole(String message) {
         System.out.println("\t" + message);
     }
 
     /**
-     * Prints the welcome message.
+     * Returns welcome message string.
+     *
+     * @return Welcome message.
      */
-    public void printHello() {
-        print(helloMessage);
+    public String printHello() {
+        return MESSAGE_WELCOME;
     }
 
     /**
-     * Prints the farewell message.
+     * Returns goodbye message string.
+     *
+     * @return Goodbye message.
      */
-    public void printBye() {
-        print(byeMessage);
+    public String printBye() {
+        return MESSAGE_GOODBYE;
     }
 
     /**
-     * Prints list of tasks.
+     * Returns list of tasks string.
+     *
      * @param taskList List of tasks to be printed.
-     * @param isForFind Is a keyword-matched task list
+     * @param isForFind Is a keyword-matched task list.
+     * @return Display-tasks response message.
      */
-
-    public void printTasks(TaskList taskList, boolean isForFind) {
+    public String printTasks(TaskList taskList, boolean isForFind) {
         List<Task> tasks = taskList.getTasks();
+        StringBuilder str = new StringBuilder();
 
         if (tasks.size() > 0) {
-            print(isForFind ? "These are the tasks that you are looking for.:)"
-                    : "These are the tasks in your list. Jiayous! :)");
+            str.append(isForFind ? HEADER_TASK_FIND : HEADER_TASK_ALL);
         } else {
-            print("You have no task in your list. :D");
+            str.append(HEADER_TASK_NONE);
         }
 
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(String.format("\t%d. %s", i + 1, tasks.get(i).toString()));
+            str.append(printTask(tasks.get(i), i+1));
         }
+        return str.toString();
+    }
+
+    /**
+     * Returns task string.
+     *
+     * @param task Task to be printed.
+     * @param nth Order of task in the task list.
+     * @return Task string.
+     */
+    public String printTask(Task task, int nth) {
+        return String.format("\t%d. %s\n", nth, task.toString());
+    }
+
+    public String printTaskAsDone(Task task) {
+        return HEADER_TASK_DONE + task.toString();
+    }
+
+    public String printTaskDeleted(Task task) {
+        return HEADER_TASK_DELETE + task.toString();
+    }
+
+    public String printTaskAdded(Task task) {
+        return HEADER_TASK_ADD + task.toString();
     }
 }
