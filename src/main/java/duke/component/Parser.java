@@ -120,6 +120,27 @@ public class Parser {
         return cmd.substring(taskType.length() + 1);
     }
 
+    private static int locateTimeIdentifier(String description, String identifier) throws InvalidCommandException {
+        int result = description.indexOf(identifier);
+        if (result == -1) {
+            throw new InvalidCommandException(LACK_TIME_SPECIFICATION_EXCEPTION);
+        }
+        return result;
+    }
+
+    private static String getTimeSpecification(String description, String identifier, int timePosition)
+            throws InvalidCommandException {
+        String timeSpecificationPart = description.substring(timePosition);
+        if (hasEmptyContent(timeSpecificationPart, identifier + SPACE_STRING)) {
+            throw new InvalidCommandException(EMPTY_TIME_EXCEPTION);
+        }
+        return timeSpecificationPart.substring(identifier.length() + 1);
+    }
+
+    private static String getPlainDescription(String description, int timePosition) {
+        return description.substring(0, timePosition - 1);
+    }
+
     /**
      * Parses an AddCommand to tell what is the task need to be added.
      * @param cmd the given input command
@@ -130,30 +151,16 @@ public class Parser {
         if (cmd.startsWith(TODO)) {
             return new ToDo(getTaskDescription(cmd, TODO));
         } else if (cmd.startsWith(DEADLINE)) {
-            String description = getTaskDescription(cmd, DEADLINE);
-            int s = description.indexOf(BY_TIME_IDENTIFIER);
-            if (s == -1) {
-                throw new InvalidCommandException(LACK_TIME_SPECIFICATION_EXCEPTION);
-            }
-            if (description.length() - s < 4) {
-                throw new InvalidCommandException(EMPTY_TIME_EXCEPTION);
-
-            }
-            String time = description.substring(s + 4);
-            description = description.substring(0, s - 1);
+            String fullDescription = getTaskDescription(cmd, DEADLINE);
+            int timePosition = locateTimeIdentifier(fullDescription, BY_TIME_IDENTIFIER);
+            String time = getTimeSpecification(fullDescription, BY_TIME_IDENTIFIER, timePosition);
+            String description = getPlainDescription(fullDescription, timePosition);
             return new Deadline(description, time);
         } else if (cmd.startsWith(EVENT)) {
-            String description = getTaskDescription(cmd, EVENT);
-            int s = description.indexOf(AT_TIME_IDENTIFIER);
-            if (s == -1) {
-                throw new InvalidCommandException(LACK_TIME_SPECIFICATION_EXCEPTION);
-            }
-            if (description.length() - s < 4) {
-                throw new InvalidCommandException(EMPTY_TIME_EXCEPTION);
-
-            }
-            String time = description.substring(s + 4);
-            description = description.substring(0, s - 1);
+            String fullDescription = getTaskDescription(cmd, EVENT);
+            int timePosition = locateTimeIdentifier(fullDescription, AT_TIME_IDENTIFIER);
+            String time = getTimeSpecification(fullDescription, AT_TIME_IDENTIFIER, timePosition);
+            String description = getPlainDescription(fullDescription, timePosition);
             return new Event(description, time);
         } else {
             throw new InvalidCommandException(UNRECOGNIZED_COMMAND_EXCEPTION);
