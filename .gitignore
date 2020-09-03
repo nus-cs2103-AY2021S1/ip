@@ -7,6 +7,9 @@
 /.gradle/
 /build/
 src/main/resources/docs/
+.classpath
+.project
+.settings/
 
 # MacOS custom attributes files created by Finder
 .DS_Store
@@ -14,6 +17,7 @@ src/main/resources/docs/
 bin/
 
 # Testing 
+/data/tasks.txt
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
 /text-ui-test/data/tasks.txt

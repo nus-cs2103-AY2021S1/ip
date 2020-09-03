@@ -3,6 +3,8 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'pmd'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
 repositories {
@@ -29,11 +31,11 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "blue.Main"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "blue"
     archiveClassifier = null
 }
 
@@ -41,6 +43,18 @@ checkstyle {
     toolVersion = '8.29'
 }
 
-run{
+pmd {
+    consoleOutput = true
+    toolVersion = "6.21.0"
+    rulePriority = 5
+    ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
+}
+
+javafx {
+    version = "11"
+    modules = ["javafx.base", "javafx.controls", "javafx.fxml", "javafx.graphics"]
+}
+
+run {
     standardInput = System.in
 }
