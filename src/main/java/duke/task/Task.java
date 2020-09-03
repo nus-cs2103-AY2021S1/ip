@@ -8,8 +8,8 @@ package duke.task;
  * @version v1.0
  */
 public class Task {
-    public String description;
-    public boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Class constructor.
@@ -40,6 +40,24 @@ public class Task {
     }
 
     /**
+     * The description for task object.
+     *
+     * @return string description of task object.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * The status of task object.
+     *
+     * @return true/false status of task object.
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
      * Check if two object are equal.
      * If equal true, else false.
      *
@@ -48,8 +66,12 @@ public class Task {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Task task = (Task) o;
         return isDone == task.isDone && description.equals(task.description);
     }

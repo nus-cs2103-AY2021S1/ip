@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 public class Deadline extends Task {
 
-    public LocalDateTime by;
+    private LocalDateTime by;
 
     /**
      * Class constructor.
@@ -25,6 +25,15 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
+    }
+
+    /**
+     * The date and time of the deadline object.
+     *
+     * @return LocalDateTime of the deadline object
+     */
+    public LocalDateTime getBy() {
+        return by;
     }
 
     /**

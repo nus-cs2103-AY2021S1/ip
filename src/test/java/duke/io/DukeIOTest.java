@@ -1,5 +1,11 @@
 package duke.io;
 
+import java.io.File;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
 import duke.DukeException;
 import duke.Ui;
 import duke.parser.Parser;
@@ -7,13 +13,8 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-public class DukeIOTest {
+public class DukeIoTest {
     final String dataDir = System.getProperty("user.dir") + File.separator + "dataTest";
 
     @Test

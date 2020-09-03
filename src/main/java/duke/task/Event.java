@@ -14,8 +14,8 @@ import java.util.Objects;
  */
 public class Event extends Task {
 
-    public LocalDateTime at;
-    public LocalDateTime end;
+    private LocalDateTime at;
+    private LocalDateTime end;
 
     /**
      * Class constructor.
@@ -32,6 +32,24 @@ public class Event extends Task {
     }
 
     /**
+     * The start date and time of the event object.
+     *
+     * @return localDateTime of start event.
+     */
+    public LocalDateTime getAt() {
+        return at;
+    }
+
+    /**
+     * TThe end date and time of the event object.
+     *
+     * @return localDateTime of start event.
+     */
+    public LocalDateTime getEnd() {
+        return end;
+    }
+
+    /**
      * Check if two object are equal.
      * If equal true, else false.
      *
@@ -40,9 +58,15 @@ public class Event extends Task {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         Event event = (Event) o;
         return Objects.equals(at, event.at) && Objects.equals(end, event.end);
     }
