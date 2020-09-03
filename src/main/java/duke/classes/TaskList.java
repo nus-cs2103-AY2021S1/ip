@@ -24,7 +24,7 @@ public class TaskList {
      */
 
     public TaskList() {
-        this.todoList = new ArrayList<>();
+        todoList = new ArrayList<>();
     }
 
     /**
@@ -34,7 +34,7 @@ public class TaskList {
      */
 
     public TaskList(List<Task> list) {
-        this.todoList = list;
+        todoList = list;
     }
 
     /**
@@ -51,7 +51,7 @@ public class TaskList {
         } else if (item.equals("blah")) {
             throw new BlahException();
         } else {
-            this.todoList.add(new Task(item, count));
+            todoList.add(new Task(item, count));
         }
     }
 
@@ -167,7 +167,7 @@ public class TaskList {
         query = query.substring(5);
         List<Task> queriedList = new ArrayList<>();
 
-        for (Task task : this.todoList) {
+        for (Task task : todoList) {
             String description = task.getDescription();
             String[] keywords;
             switch (task.getType()) {

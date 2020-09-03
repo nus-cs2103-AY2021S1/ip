@@ -13,7 +13,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private Duke duke = new Duke();
-
     @Override
     public void start(Stage stage) {
         try {
@@ -26,5 +25,8 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
     }
 }

@@ -47,9 +47,9 @@ public class Data {
      */
 
     Data() throws IOException {
-        this.path = Path.of("src/main/data/duke.txt");
+        path = Path.of("src/main/data/duke.txt");
         new File("src/main/data").mkdirs();
-        new File(this.path.toString()).createNewFile();
+        new File(path.toString()).createNewFile();
     }
 
     /**
@@ -100,7 +100,7 @@ public class Data {
      * @throws IOException Missing file to write into
      */
     public void save(List<Task> tasks) throws IOException {
-        FileWriter writer = new FileWriter(this.path.toString());
+        FileWriter writer = new FileWriter(path.toString());
 
         for (Task task : tasks) {
             String line = "";

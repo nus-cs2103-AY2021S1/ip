@@ -35,6 +35,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return String.format("%s%s%s", super.type, isDone ? super.done : super.start, this.description);
+        return String.format("%s%s%s", super.type, isDone ? super.done : super.start, description);
     }
 }

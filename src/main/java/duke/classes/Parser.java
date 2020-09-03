@@ -13,7 +13,7 @@ public class Parser {
      * Class constructor.
      */
     public Parser() {
-        this.scan = new Scanner(System.in);
+        scan = new Scanner(System.in);
     }
 
     /**

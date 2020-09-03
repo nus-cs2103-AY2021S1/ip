@@ -20,7 +20,7 @@ public class Task {
 
     public Task(String description, int index) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
         this.index = index;
     }
 
@@ -34,7 +34,7 @@ public class Task {
 
     public Task(String description, int index, boolean isOver) {
         this.description = description;
-        this.isDone = isOver;
+        isDone = isOver;
         this.index = index;
     }
 
@@ -84,6 +84,6 @@ public class Task {
      */
 
     public String toString() {
-        return String.format("%s%s", isDone ? this.done : this.start, this.description);
+        return String.format("%s%s", isDone ? done : start, description);
     }
 }

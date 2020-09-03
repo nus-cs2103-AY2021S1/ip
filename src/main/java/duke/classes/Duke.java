@@ -9,11 +9,6 @@ import duke.tasks.Task;
 
 
 
-
-
-
-
-
 /**
  * The Duke class implements the DukeChatBot that is wired to store, display, update and delete
  * a variety of tasks.
@@ -33,12 +28,12 @@ public class Duke {
     public Duke(String path) {
         try {
             data = new Data(path);
-            this.taskList = new TaskList(data.loadData());
+            taskList = new TaskList(data.loadData());
         } catch (IOException | DukeInvalidTimeException | ArrayIndexOutOfBoundsException e) {
             System.out.println("FAILURE: Unable to load data from local drive.");
             try {
                 data = new Data();
-                this.taskList = new TaskList(data.loadData());
+                taskList = new TaskList(data.loadData());
             } catch (IOException | ArrayIndexOutOfBoundsException | DukeInvalidTimeException err) {
                 System.out.println("FAILURE: Unable to create any file for saving data");
             }
@@ -50,12 +45,12 @@ public class Duke {
     public Duke() {
         try {
             data = new Data("data/duke.txt");
-            this.taskList = new TaskList(data.loadData());
+            taskList = new TaskList(data.loadData());
         } catch (IOException | DukeInvalidTimeException | ArrayIndexOutOfBoundsException e) {
             System.out.println("FAILURE: Unable to load data from local drive.");
             try {
                 data = new Data();
-                this.taskList = new TaskList(data.loadData());
+                taskList = new TaskList(data.loadData());
             } catch (IOException | ArrayIndexOutOfBoundsException | DukeInvalidTimeException err) {
                 System.out.println("FAILURE: Unable to create any file for saving data");
             }
@@ -75,17 +70,17 @@ public class Duke {
      */
     public void run() {
 
-        this.ui = new Ui();
-        this.parser = new Parser();
-        String word = this.parser.scan.nextLine();
+        ui = new Ui();
+        parser = new Parser();
+        String word = parser.scan.nextLine();
 
         while (!word.equals("bye")) {
-            Commands currentCommand = this.parser.analyse(word);
+            Commands currentCommand = parser.analyse(word);
             assign(currentCommand, word);
-            word = this.parser.scan.nextLine();
+            word = parser.scan.nextLine();
         }
 
-        this.ui.endDuke();
+        ui.endDuke();
         localSave();
     }
 
@@ -94,7 +89,7 @@ public class Duke {
      */
     public void localSave() {
         try {
-            data.save(this.taskList.todoList);
+            data.save(taskList.todoList);
         } catch (IOException | NullPointerException e) {
             System.out.println("FAILURE: Could not save data to main/data directory.");
         }
@@ -110,13 +105,13 @@ public class Duke {
         String completedString = "";
         switch (command) {
         case LIST:
-            completedString = this.ui.displayList(this.taskList.todoList);
+            completedString = ui.displayList(taskList.todoList);
             break;
         case FIND:
             try {
-                completedString = this.ui.displayList(this.taskList.find(task));
+                completedString = ui.displayList(taskList.find(task));
             } catch (DukeInvalidTimeException e) {
-                completedString = this.ui.printError(e.toString());
+                completedString = ui.printError(e.toString());
             }
             break;
         case TODO:
@@ -125,12 +120,12 @@ public class Duke {
             completedString = decideTaskType(command, task);
             break;
         case DONE:
-            Task todo = this.taskList.markDone(task);
-            completedString = this.ui.completeTask(todo);
+            Task todo = taskList.markDone(task);
+            completedString = ui.completeTask(todo);
             break;
         case DELETE:
-            Task deletedTask = this.taskList.delete(task);
-            completedString = this.ui.deleteTask(deletedTask, this.taskList.todoList);
+            Task deletedTask = taskList.delete(task);
+            completedString = ui.deleteTask(deletedTask, taskList.todoList);
             break;
         case BLAH:
         case TASK:
@@ -152,10 +147,10 @@ public class Duke {
 
     public String assignOtherTasks(String task) {
         try {
-            this.taskList.storeTask(task);
-            return this.ui.addOtherTask(task);
+            taskList.storeTask(task);
+            return ui.addOtherTask(task);
         } catch (BlahException e) {
-            return this.ui.printError(e.toString());
+            return ui.printError(e.toString());
         }
     }
 
@@ -181,9 +176,9 @@ public class Duke {
             default:
                 break;
             }
-            return this.ui.addTask(todo, this.taskList.todoList);
+            return ui.addTask(todo, taskList.todoList);
         } catch (EmptyDukeException | DukeInvalidTimeException e) {
-            return this.ui.printError(e.toString());
+            return ui.printError(e.toString());
         }
     }
     /**
@@ -192,9 +187,9 @@ public class Duke {
      * @return String message from Duke
      */
     public String getResponse(String input) {
-        this.ui = new Ui();
-        this.parser = new Parser();
-        Commands currentCommand = this.parser.analyse(input);
+        ui = new Ui();
+        parser = new Parser();
+        Commands currentCommand = parser.analyse(input);
         String response = assign(currentCommand, input);
         return "Duke says: \n" + response;
     }

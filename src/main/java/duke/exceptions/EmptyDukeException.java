@@ -8,7 +8,7 @@ public class EmptyDukeException extends DukeException {
     /**
      * Class constructor.
      *
-     * @param message
+     * @param message Error message
      */
 
     public EmptyDukeException(String message) {
