@@ -40,6 +40,8 @@ public class TaskList {
             case "D":
                 addTask(new Deadline(newTaskDescription, Boolean.parseBoolean(newTaskStatus), newTaskTime));
                 break;
+            default:
+                assert newTaskCategory != null : "The text file is corrupted. There is a unrecognised task category.";
             }
         }
     }

@@ -15,6 +15,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert taskNumberToDelete > 0 : "Task number must be greater than 1";
         if (taskNumberToDelete > tasks.getSize() | taskNumberToDelete < 1) {
             throw new DukeException("There is no such task number.");
         } else {
