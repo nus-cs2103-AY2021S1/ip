@@ -41,8 +41,8 @@ public class Ui {
      * @param task Task added
      * @param size size of the list
      */
-    public void writeAdd(Task task, int size) {
-        writeOutput("Got it. I've added this task:", task.toString(),
+    public String writeAdd(Task task, int size) {
+        return writeOutput("Got it. I've added this task:", task.toString(),
                 String.format("Now you have %d tasks in the list.", size));
     }
 
@@ -51,8 +51,8 @@ public class Ui {
      *
      * @param task Task marked done
      */
-    public void writeDone(Task task) {
-        writeOutput("Nice! I've marked this task as done:", "\t" + task.toString());
+    public String writeDone(Task task) {
+        return writeOutput("Nice! I've marked this task as done:", "\t" + task.toString());
     }
 
     /**
@@ -61,8 +61,8 @@ public class Ui {
      * @param task Task deleted
      * @param size size of the list
      */
-    public void writeDelete(Task task, int size) {
-        writeOutput("Noted. I've removed this task:", "\t" + task.toString(),
+    public String writeDelete(Task task, int size) {
+        return writeOutput("Noted. I've removed this task:", "\t" + task.toString(),
                 String.format("Now you have %d tasks in the list.", size));
     }
 
@@ -71,8 +71,8 @@ public class Ui {
      *
      * @param found string representations of Tasks found
      */
-    public void writeSearch(List<String> found) {
-        writeOutput(found.toArray(new String[0]));
+    public String writeSearch(List<String> found) {
+        return writeOutput(found.toArray(new String[0]));
     }
 
     /**
@@ -80,19 +80,22 @@ public class Ui {
      *
      * @param messages messages to be output
      */
-    public void writeOutput(String... messages) {
+    public String writeOutput(String... messages) {
+        StringBuilder finalOut = new StringBuilder();
         System.out.println("\t-----------------------------------------");
         for (String message : messages) {
             System.out.println("\t" + message);
+            finalOut.append(message).append("\n");
         }
         System.out.println("\t-----------------------------------------");
+        return finalOut.toString();
     }
 
     /**
      * Closes the interface.
      */
-    public void exit() {
-        writeOutput("Bye. Hope to see you again soon!");
+    public String exit() {
         scanner.close();
+        return writeOutput("Bye. Hope to see you again soon!");
     }
 }

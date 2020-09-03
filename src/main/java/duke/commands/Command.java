@@ -21,4 +21,5 @@ public abstract class Command {
      * @throws DukeException Duke-related exception due to processing
      */
     public abstract boolean run(TaskList taskList, Storage storage, Ui ui) throws DukeException;
+    public abstract String runNew(TaskList taskList, Storage storage, Ui ui) throws DukeException;
 }

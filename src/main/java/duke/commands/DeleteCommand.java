@@ -27,4 +27,11 @@ public class DeleteCommand extends Command {
         storage.storeList(taskList.getList());
         return true;
     }
+
+    @Override
+    public String runNew(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+        Task deletedTask = taskList.deleteTask(Integer.parseInt(attributes));
+        storage.storeList(taskList.getList());
+        return ui.writeDelete(deletedTask, taskList.getSize());
+    }
 }

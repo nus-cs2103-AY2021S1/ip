@@ -48,4 +48,13 @@ public class Duke {
             }
         }
     }
+
+    public String getResponse(String input) {
+        try {
+            Command command = parser.processInput(input);
+            return command.runNew(taskList, storage, ui);
+        } catch (DukeException ex) {
+            return ex.getMessage();
+        }
+    }
 }

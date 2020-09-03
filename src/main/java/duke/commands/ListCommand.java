@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -18,5 +19,10 @@ public class ListCommand extends Command {
     public boolean run(TaskList taskList, Storage storage, Ui ui) {
         ui.writeOutput(taskList.listTasks());
         return true;
+    }
+
+    @Override
+    public String runNew(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+        return ui.writeOutput(taskList.listTasks());
     }
 }

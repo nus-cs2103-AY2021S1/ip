@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -25,5 +26,11 @@ public class FindCommand extends Command {
         List<String> foundTasks = taskList.findTasks(attributes);
         ui.writeSearch(foundTasks);
         return true;
+    }
+
+    @Override
+    public String runNew(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+        List<String> foundTasks = taskList.findTasks(attributes);
+        return ui.writeSearch(foundTasks);
     }
 }

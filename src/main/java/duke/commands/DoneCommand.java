@@ -27,4 +27,11 @@ public class DoneCommand extends Command {
         storage.storeList(taskList.getList());
         return true;
     }
+
+    @Override
+    public String runNew(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+        Task markedTask = taskList.markDone(Integer.parseInt(attributes));
+        storage.storeList(taskList.getList());
+        return ui.writeDone(markedTask);
+    }
 }
