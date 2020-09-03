@@ -33,6 +33,7 @@ public class TaskList {
      * @return The task with the corresponding ID.
      */
     public Task getTask(int taskId) {
+        assert taskId <= this.tasks.size();
         return this.tasks.get(taskId - 1);
     }
 
@@ -53,6 +54,7 @@ public class TaskList {
      * @return The {@link Task} that was deleted form the list.
      */
     public Task deleteTask(int taskId) {
+        assert taskId <= this.tasks.size();
         return this.tasks.remove(taskId - 1);
     }
 
