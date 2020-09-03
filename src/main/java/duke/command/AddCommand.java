@@ -56,19 +56,19 @@ public class AddCommand implements Command {
      * @param ui UI of Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         if (CommandKey.equalsCommandKey(key, CommandKey.TODO)) {
             Task task = new ToDo(taskDescription);
             tasks.add(task);
-            ui.displayAddTaskSuccess(task, tasks.size());
+            return ui.displayAddTaskSuccess(task, tasks.size());
         } else if (CommandKey.equalsCommandKey(key, CommandKey.DEADLINE)) {
             Task task = new Deadline(taskDescription, date, time);
             tasks.add(task);
-            ui.displayAddTaskSuccess(task, tasks.size());
+            return ui.displayAddTaskSuccess(task, tasks.size());
         } else {
             Task task = new Event(taskDescription, date, time);
             tasks.add(task);
-            ui.displayAddTaskSuccess(task, tasks.size());
+            return ui.displayAddTaskSuccess(task, tasks.size());
         }
     }
 

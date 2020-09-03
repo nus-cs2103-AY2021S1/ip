@@ -9,12 +9,12 @@ import duke.ui.Ui;
  */
 public interface Command {
     /**
-     * Executes the command.
+     * Executes the command and obtains a response String.
      *
      * @param tasks List of user's tasks.
      * @param ui UI of Duke.
      */
-    void execute(TaskList tasks, Ui ui);
+    String execute(TaskList tasks, Ui ui);
 
     /**
      * Returns whether to exit Duke or not.

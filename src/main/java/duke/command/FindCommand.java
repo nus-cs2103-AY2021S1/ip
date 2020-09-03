@@ -21,9 +21,9 @@ public class FindCommand implements Command {
      * @param ui UI for the Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         TaskList matchingTasks = tasks.find(keyword);
-        ui.displayMatchingTaskList(matchingTasks);
+        return ui.displayMatchingTaskList(matchingTasks);
     }
 
     /**

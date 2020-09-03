@@ -15,8 +15,8 @@ public class ListCommand implements Command {
      * @param ui UI of Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.displayTaskList(tasks);
+    public String execute(TaskList tasks, Ui ui) {
+        return ui.displayTaskList(tasks);
     }
 
     /**

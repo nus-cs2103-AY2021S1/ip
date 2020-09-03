@@ -12,6 +12,6 @@ public class EventTest {
         String time = "20:20";
         boolean done = false;
         Event testUnit = Event.of(task, date, time, done);
-        assertEquals(testUnit.toString(), "[E][✘] party (at: Feb 2, 2020 8:20 PM)");
+        assertEquals(testUnit.toString(), "[E][\u2718] party (at: Feb 2, 2020 8:20 PM)");
     }
 }

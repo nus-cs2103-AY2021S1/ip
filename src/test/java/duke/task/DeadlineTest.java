@@ -12,6 +12,6 @@ public class DeadlineTest {
         String time = "23:59";
         boolean done = true;
         Deadline testUnit = Deadline.of(task, date, time, done);
-        assertEquals(testUnit.toString(), "[D][✓] homework (by: Feb 2, 2020 11:59 PM)");
+        assertEquals(testUnit.toString(), "[D][\u2713] homework (by: Feb 2, 2020 11:59 PM)");
     }
 }

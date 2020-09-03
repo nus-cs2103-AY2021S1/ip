@@ -47,7 +47,7 @@ public abstract class Task {
      * @return A tick if done, a cross otherwise.
      */
     public String getStatusToString() {
-        return done ? "✓" : "✘";
+        return done ? "\u2713" : "\u2718";
     }
 
     /**

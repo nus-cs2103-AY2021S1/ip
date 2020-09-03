@@ -11,10 +11,10 @@ import duke.task.TaskList;
  * Encapsulates the user interface for Duke.
  */
 public class Ui {
-    private static final String ADD_TASK_LINE = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-    private static final String DONE_TASK_LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    private static final String LIST_TASK_LINE = "________________________________________________________";
-    private static final String BYE_LINE = "========================================================";
+    private static final String LINE_ADD_TASK = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+    private static final String LINE_BYE = "========================================================";
+    private static final String LINE_DONE_TASK = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    private static final String LINE_LIST_TASK = "________________________________________________________";
     private static final String INDENT = "    ";
 
     private Scanner scanner;
@@ -29,13 +29,13 @@ public class Ui {
     /**
      * Prints out the welcome message for the user when Duke is booted up.
      */
-    public void displayWelcome() {
+    public String displayWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello my name\n" + logo + "\nHow may I help?");
+        return "Hello my name\n" + logo + "\nHow may I help?";
     }
 
     /**
@@ -43,16 +43,16 @@ public class Ui {
      *
      * @param tasks TaskList of user's tasks.
      */
-    public void displayTaskList(TaskList tasks) {
+    public String displayTaskList(TaskList tasks) {
         ArrayList<Task> list = tasks.getList();
-        System.out.println(INDENT + LIST_TASK_LINE);
+        String output = "Here are your tasks:\n";
         for (Task task : list) {
-            System.out.println(INDENT + (list.indexOf(task) + 1) + "." + task.toString());
+            output += INDENT + (list.indexOf(task) + 1) + "." + task.toString() + "\n";
         }
         if (list.size() == 0) {
-            System.out.println(INDENT + "None");
+            output += INDENT + "None";
         }
-        System.out.println(INDENT + LIST_TASK_LINE);
+        return output;
     }
 
     /**
@@ -60,18 +60,16 @@ public class Ui {
      *
      * @param tasks List of matching tasks.
      */
-    public void displayMatchingTaskList(TaskList tasks) {
+    public String displayMatchingTaskList(TaskList tasks) {
         ArrayList<Task> list = tasks.getList();
-        System.out.println(INDENT + LIST_TASK_LINE + "\n"
-            + INDENT + "Duke has found these tasks in your list:");
+        String output = "Duke has found these tasks in your list:\n";
         for (Task task : list) {
-            System.out.println(INDENT + (list.indexOf(task) + 1) + "." + task.toString()
-            );
+            output += INDENT + (list.indexOf(task) + 1) + "." + task.toString() + "\n";
         }
         if (list.size() == 0) {
-            System.out.println(INDENT + "None");
+            output += INDENT + "None";
         }
-        System.out.println(INDENT + LIST_TASK_LINE);
+        return output;
     }
 
 
@@ -80,13 +78,9 @@ public class Ui {
      *
      * @param task Task marked as done by user.
      */
-    public void displayDoneMessage(Task task) {
-        System.out.println(
-            INDENT + DONE_TASK_LINE + "\n"
-            + INDENT + "The following task has been marked as done:\n"
-            + INDENT + task.toString()
-            + "\n" + INDENT + DONE_TASK_LINE
-        );
+    public String displayDoneMessage(Task task) {
+        return "The following task has been marked as done:\n"
+            + INDENT + task.toString();
     }
 
     /**
@@ -95,14 +89,10 @@ public class Ui {
      * @param task Task deleted by user.
      * @param taskCount Updated number of tasks in the user's task list.
      */
-    public void displayDeletedTaskMessage(Task task, int taskCount) {
-        System.out.println(
-            INDENT + DONE_TASK_LINE + "\n"
-            + INDENT + "The following task has been removed:\n"
-            + INDENT + INDENT + task.toString() + "\n"
-            + INDENT + "You now have " + taskCount + " task(s) in the list.\n"
-            + INDENT + DONE_TASK_LINE
-        );
+    public String displayDeletedTaskMessage(Task task, int taskCount) {
+        return "The following task has been removed:\n"
+            + INDENT + task.toString() + "\n"
+            + "You now have " + taskCount + " task(s) in the list.";
     }
 
     /**
@@ -111,14 +101,10 @@ public class Ui {
      * @param task Task added by user.
      * @param taskCount Updated number of tasks in the user's task list.
      */
-    public void displayAddTaskSuccess(Task task, int taskCount) {
-        System.out.println(
-            INDENT + ADD_TASK_LINE + "\n"
-            + INDENT + "Added task:" + "\n"
-            + INDENT + INDENT + task.toString() + "\n"
-            + INDENT + "You now have " + taskCount + " task(s) in the list.\n"
-            + INDENT + ADD_TASK_LINE
-        );
+    public String displayAddTaskSuccess(Task task, int taskCount) {
+        return "Added task:" + "\n"
+            + INDENT + task.toString() + "\n"
+            + "You now have " + taskCount + " task(s) in the list.";
     }
 
     /**
@@ -126,19 +112,15 @@ public class Ui {
      *
      * @param errorMessage Error message.
      */
-    public void displayError(String errorMessage) {
-        System.out.println(INDENT + errorMessage);
+    public String displayError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
      * Prints out a goodbye message when the user exits Duke.
      */
-    public void displayGoodbye() {
-        System.out.println(
-            INDENT + BYE_LINE + "\n"
-            + INDENT + "Goodbye\n"
-            + INDENT + BYE_LINE
-        );
+    public String displayGoodbye() {
+        return "Goodbye";
     }
 
     /**

@@ -36,14 +36,14 @@ public class DoneCommand implements Command {
      * @param ui UI of Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         try {
             checkIndex(tasks);
             Task task = tasks.get(index);
             task.setDone();
-            ui.displayDoneMessage(task);
+            return ui.displayDoneMessage(task);
         } catch (DukeOutOfBoundsException e) {
-            ui.displayError(e.toString());
+            return ui.displayError(e.toString());
         }
     }
 

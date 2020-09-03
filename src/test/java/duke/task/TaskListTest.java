@@ -10,7 +10,7 @@ public class TaskListTest {
         Task testTask = new ToDo("this");
         TaskList testUnit = new TaskList();
         testUnit.add(testTask);
-        assertEquals(testUnit.getList().get(0).toString(), "[T][✘] this");
+        assertEquals(testUnit.getList().get(0).toString(), "[T][\u2718] this");
     }
 
     @Test
@@ -33,6 +33,6 @@ public class TaskListTest {
         Task testTask = new ToDo("this");
         TaskList testUnit = new TaskList();
         testUnit.add(testTask);
-        assertEquals(testUnit.get(1).toString(), "[T][✘] this");
+        assertEquals(testUnit.get(1).toString(), "[T][\u2718] this");
     }
 }

@@ -15,8 +15,8 @@ public class ExitCommand implements Command {
      * @param ui UI of Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.displayGoodbye();
+    public String execute(TaskList tasks, Ui ui) {
+        return ui.displayGoodbye();
     }
 
     /**

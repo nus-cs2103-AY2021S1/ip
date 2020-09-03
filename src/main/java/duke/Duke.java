@@ -20,7 +20,10 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
 
-    Duke() {
+    /**
+     * Boots up Duke.
+     */
+    public Duke() {
         ui = new Ui();
         parser = new Parser();
         String basePath = System.getProperty("user.dir");
@@ -29,13 +32,17 @@ public class Duke {
         tasks = storage.readData();
     }
 
+    String displayWelcome() {
+        return ui.displayWelcome();
+    }
+
     /**
      * Exits the program.
      */
     void exit() {
         storage.update(tasks);
         ui.exit();
-        System.exit(0);
+        //System.exit(0);
     }
 
     /**
@@ -59,11 +66,18 @@ public class Duke {
     }
 
     /**
-     * Runs Duke.
-     *
-     * @param args
+     * Parses and validates user input before executing the command and
+     * returning a response.
      */
-    public static void main(String[] args) {
-        new Duke().run();
+    String getResponse(String input) {
+        try {
+            Command c = parser.parse(input);
+            if (c.isExit()) {
+                exit();
+            }
+            return c.execute(tasks, ui);
+        } catch (DukeException e) {
+            return ui.displayError(e.toString());
+        }
     }
 }
