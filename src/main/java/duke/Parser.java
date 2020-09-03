@@ -5,7 +5,7 @@ package duke;
  */
 public class Parser {
     /**
-     * Returns a type of Instrcution according to the user input.
+     * Returns a type of Instruction according to the user input.
      *
      * @param input The input from the user.
      * @return The type of instruction.
@@ -25,6 +25,8 @@ public class Parser {
             return Instruction.EVENT;
         } else if (input.startsWith("todo")) {
             return Instruction.TODO;
+        } else if (input.equals("bye")) {
+            return Instruction.BYE;
         } else {
             return Instruction.OTHERS;
         }

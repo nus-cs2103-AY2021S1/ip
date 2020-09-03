@@ -2,7 +2,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * Creates a tasklist which contains a arraylist and a list of operations can
+ * Creates a task list which contains a arraylist and a list of operations can
  * be performed on it. The javadoc for methods in this class are omitted.
  */
 public class TaskList {
@@ -30,9 +30,5 @@ public class TaskList {
     
     public void remove(int number) {
         this.list.remove(number);
-    }
-    
-    public int size() {
-        return this.list.size();
     }
 }
