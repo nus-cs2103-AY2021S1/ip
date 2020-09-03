@@ -1,12 +1,12 @@
-package main.java.commands;
+package chatbot.commands;
 
-import main.java.common.Type;
+import chatbot.common.Type;
 
-import main.java.data.Task;
-import main.java.data.TaskList;
+import chatbot.data.Task;
+import chatbot.data.TaskList;
 
-import main.java.storage.Storage;
-import main.java.ui.Ui;
+import chatbot.storage.Storage;
+import chatbot.ui.Ui;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

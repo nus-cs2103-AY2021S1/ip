@@ -1,4 +1,4 @@
-package main.java.data;
+package chatbot.data;
 
 import java.time.LocalDate;
 

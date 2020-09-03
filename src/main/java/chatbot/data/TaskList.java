@@ -1,6 +1,6 @@
-package main.java.data;
+package chatbot.data;
 
-import main.java.exception.ChatbotException;
+import chatbot.exception.ChatbotException;
 
 import java.util.ArrayList;
 import java.time.LocalDate;

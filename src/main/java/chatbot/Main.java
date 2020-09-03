@@ -1,4 +1,4 @@
-package main.java;
+package chatbot;
 
 import java.io.IOException;
 

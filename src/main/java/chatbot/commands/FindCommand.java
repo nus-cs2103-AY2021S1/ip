@@ -1,8 +1,8 @@
-package main.java.commands;
+package chatbot.commands;
 
-import main.java.data.TaskList;
-import main.java.storage.Storage;
-import main.java.ui.Ui;
+import chatbot.data.TaskList;
+import chatbot.storage.Storage;
+import chatbot.ui.Ui;
 
 public class FindCommand extends Command {
 

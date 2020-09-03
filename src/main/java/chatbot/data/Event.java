@@ -1,7 +1,7 @@
-package main.java.data;
+package chatbot.data;
 
-import main.java.common.Message;
-import main.java.exception.ChatbotException;
+import chatbot.common.Message;
+import chatbot.exception.ChatbotException;
 
 import java.time.LocalDate;
 
@@ -16,7 +16,7 @@ public class Event extends Task {
 
     public static Event newEvent(String raw) throws ChatbotException {
         if (raw.length() == 0) {
-            throw new ChatbotException("Oh boy your event is empty.");
+            throw new ChatbotException(Message.TASK_EMPTY);
         }
 
         String description = raw.split("/at")[0].trim();
@@ -26,7 +26,7 @@ public class Event extends Task {
             String dateString = raw.split("/at")[1].trim();
             timestamp = LocalDate.parse(dateString);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new ChatbotException("Ah oh, you forgot the date.");
+            throw new ChatbotException(Message.DATE_MISSING);
         } catch (DateTimeParseException e) {
             throw new ChatbotException(Message.INVALID_DATE);
         }

@@ -1,14 +1,10 @@
-/**
- * A storage class that contains methods for loading and saving tasks.
- */
+package chatbot.storage;
 
-package main.java.storage;
-
-import main.java.data.Deadline;
-import main.java.data.Event;
-import main.java.data.Task;
-import main.java.data.Todo;
-import main.java.exception.ChatbotException;
+import chatbot.data.Deadline;
+import chatbot.data.Event;
+import chatbot.data.Task;
+import chatbot.data.Todo;
+import chatbot.exception.ChatbotException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,6 +13,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.stream.Stream;
+
+/**
+ * A storage class that contains methods for loading and saving tasks.
+ */
 
 public class Storage {
 

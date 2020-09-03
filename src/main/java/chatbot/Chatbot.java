@@ -1,11 +1,11 @@
-package main.java;
+package chatbot;
 
-import main.java.commands.Command;
-import main.java.data.TaskList;
-import main.java.exception.ChatbotException;
-import main.java.parser.Parser;
-import main.java.storage.Storage;
-import main.java.ui.Ui;
+import chatbot.commands.Command;
+import chatbot.data.TaskList;
+import chatbot.exception.ChatbotException;
+import chatbot.parser.Parser;
+import chatbot.storage.Storage;
+import chatbot.ui.Ui;
 
 import java.nio.file.Path;
 
@@ -25,7 +25,6 @@ public class Chatbot {
             taskList = new TaskList(taskStorage.loadTasks());
         } catch (ChatbotException e) {
             e.printStackTrace();
-            System.exit(0);
         }
     }
 

@@ -1,9 +1,9 @@
-package main.java.commands;
+package chatbot.commands;
 
-import main.java.data.TaskList;
-import main.java.exception.ChatbotException;
-import main.java.storage.Storage;
-import main.java.ui.Ui;
+import chatbot.data.TaskList;
+import chatbot.exception.ChatbotException;
+import chatbot.storage.Storage;
+import chatbot.ui.Ui;
 
 public abstract class Command {
     /**

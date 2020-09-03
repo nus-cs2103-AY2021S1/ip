@@ -1,4 +1,4 @@
-package main.java.exception;
+package chatbot.exception;
 
 /**
  * This exception is thrown by the chatbot to indicate that an invalid command is given,

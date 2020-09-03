@@ -1,8 +1,8 @@
-package main.java.parser;
+package chatbot.parser;
 
-import main.java.commands.*;
-import main.java.common.Type;
-import main.java.exception.ChatbotException;
+import chatbot.commands.*;
+import chatbot.common.Type;
+import chatbot.exception.ChatbotException;
 
 /**
  * A class that parses the command input given by the user.
@@ -16,7 +16,7 @@ public class Parser {
      * @return command matching the user input
      * @throws ChatbotException
      */
-    public static Command parse(String fullCmd) throws ChatbotException {
+    public static Command parse(String fullCmd) {
 
         String text = fullCmd.trim();
         String typeStr = text.split(" ")[0].trim();
@@ -44,18 +44,13 @@ public class Parser {
             } else if (isFind){
                 command = new FindCommand(body);
             } else {
-                parseError();
+                command = new InvalidCommand();
             }
 
         } catch (IllegalArgumentException e){
-            parseError();
+            command = new InvalidCommand();
         }
 
         return command;
     }
-
-    private static void parseError() throws ChatbotException {
-        throw new ChatbotException("I'm not sure what you mean.");
-    }
-
 }

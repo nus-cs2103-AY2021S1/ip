@@ -1,15 +1,15 @@
-package main.java.commands;
+package chatbot.commands;
 
-import main.java.common.Type;
+import chatbot.common.Type;
 
-import main.java.data.Deadline;
-import main.java.data.Event;
-import main.java.data.TaskList;
-import main.java.data.Todo;
+import chatbot.data.Deadline;
+import chatbot.data.Event;
+import chatbot.data.TaskList;
+import chatbot.data.Todo;
 
-import main.java.exception.ChatbotException;
-import main.java.storage.Storage;
-import main.java.ui.Ui;
+import chatbot.exception.ChatbotException;
+import chatbot.storage.Storage;
+import chatbot.ui.Ui;
 
 public class AddCommand extends Command {
 

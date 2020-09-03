@@ -1,15 +1,15 @@
-/**
- * A class representing the command line level user interface. Responsible for reading commands
- * from the user and displaying data, success/error messages to the user.
- */
+package chatbot.ui;
 
-package main.java.ui;
-
-import main.java.data.Task;
+import chatbot.data.Task;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+
+/**
+ * A class representing the command line level user interface. Responsible for reading commands
+ * from the user and displaying data, success/error messages to the user.
+ */
 
 public class Ui {
 
@@ -63,6 +63,10 @@ public class Ui {
      * @param ls list of tasks
      */
     public String list(ArrayList<Task> ls) {
+
+        if (ls.size() == 0) {
+            return "No tasks.";
+        }
 
         int index = 1;
         String response = "";

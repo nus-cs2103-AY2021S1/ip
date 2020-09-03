@@ -1,7 +1,7 @@
-package data;
+package chatbot.data;
 
-import main.java.data.Deadline;
-import main.java.exception.ChatbotException;
+import chatbot.common.Message;
+import chatbot.exception.ChatbotException;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ public class DeadlineTest {
             Deadline.newDeadline("return book");
             fail();
         } catch (ChatbotException e) {
-            assertEquals(e.getMessage(), "Deadline? By when??!!");
+            assertEquals(e.getMessage(), Message.DATE_MISSING);
         }
     }
 
@@ -33,7 +33,7 @@ public class DeadlineTest {
             Deadline.newDeadline("return book /by wed");
             fail();
         } catch (ChatbotException e) {
-            assertEquals(e.getMessage(), "Please enter a valid date or date format (yyyy-mm-dd).");
+            assertEquals(e.getMessage(), Message.INVALID_DATE);
         }
     }
 

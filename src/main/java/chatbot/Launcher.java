@@ -1,4 +1,4 @@
-package main.java;
+package chatbot;
 
 import javafx.application.Application;
 

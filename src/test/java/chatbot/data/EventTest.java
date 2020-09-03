@@ -1,8 +1,7 @@
-package data;
+package chatbot.data;
 
-import main.java.data.Event;
-import main.java.exception.ChatbotException;
-
+import chatbot.common.Message;
+import chatbot.exception.ChatbotException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +22,7 @@ public class EventTest {
             Event.newEvent("meeting");
             fail();
         } catch (ChatbotException e) {
-            assertEquals(e.getMessage(), "Event? At what date??!!");
+            assertEquals(e.getMessage(), Message.DATE_MISSING);
         }
     }
 
@@ -33,7 +32,7 @@ public class EventTest {
             Event.newEvent("meeting /at 2020-20-20");
             fail();
         } catch (ChatbotException e) {
-            assertEquals(e.getMessage(), "Please enter a valid date or date format (yyyy-mm-dd).");
+            assertEquals(e.getMessage(), Message.INVALID_DATE);
         }
     }
 }

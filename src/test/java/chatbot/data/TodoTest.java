@@ -1,8 +1,7 @@
-package data;
+package chatbot.data;
 
-import main.java.data.Todo;
-import main.java.exception.ChatbotException;
-
+import chatbot.common.Message;
+import chatbot.exception.ChatbotException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +19,7 @@ public class TodoTest {
             Todo.newTodo("");
             fail();
         } catch (ChatbotException e) {
-            assertEquals(e.getMessage(), "Ooopsss (>.>) Todo task cannot be empty!!");
+            assertEquals(e.getMessage(), Message.TASK_EMPTY);
         }
     }
 }
