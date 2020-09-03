@@ -1,3 +1,5 @@
+package duke.ui;
+
 import java.io.IOException;
 
 import javafx.collections.FXCollections;

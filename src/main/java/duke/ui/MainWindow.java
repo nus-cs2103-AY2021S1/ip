@@ -1,3 +1,5 @@
+package duke.ui;
+
 import duke.Duke;
 import duke.command.Response;
 import duke.exceptions.DukeException;
