@@ -8,14 +8,13 @@ public class DukeException {
      * Line for proper formatting of error messages in DukeException methods.
      */
     private static final String line = "\t____________________________________________________________\n";
-    private static final String javaFxLine = "\t_______________________\n";
 
     /**
      * Renders an error message that user input has been written incorrectly.
      */
     public static String invalidCommand() {
         System.out.println(line + "\tCommand written incorrectly. Please check again.\n" + line);
-        return javaFxLine + "\tCommand written incorrectly. Please check again.\n" + javaFxLine;
+        return "Command written incorrectly. Please check again.\n";
     }
 
     /**
@@ -23,7 +22,7 @@ public class DukeException {
      */
     public static String genericTask() {
         System.out.println(line + "\tPlease specify either a Deadline, To Do, or Event!\n" + line);
-        return javaFxLine + "\tPlease specify either a Deadline, To Do, or Event!\n" + javaFxLine;
+        return "Please specify either a Deadline, To Do, or Event!\n";
     }
 
     /**
@@ -31,7 +30,7 @@ public class DukeException {
      */
     public static String noSuchTask() {
         System.out.println(line + "\tNo such task in list of tasks.\n" + line);
-        return javaFxLine + "\tNo such task in list of tasks.\n" + javaFxLine;
+        return "No such task in list of tasks.\n";
     }
 
     /**
@@ -39,7 +38,7 @@ public class DukeException {
      */
     public static String invalidDeadline() {
         System.out.println(line + "\tDeadline format is invalid\n" + line);
-        return javaFxLine + "\tDeadline format is invalid\n" + javaFxLine;
+        return "Deadline format is invalid\n";
     }
 
     /**
@@ -47,7 +46,7 @@ public class DukeException {
      */
     public static String invalidEvent() {
         System.out.println(line + "\tEvent format is invalid\n" + line);
-        return javaFxLine + "\tEvent format is invalid\n" + javaFxLine;
+        return "Event format is invalid\n";
     }
 
     /**
@@ -55,7 +54,7 @@ public class DukeException {
      */
     public static String invalidTodo() {
         System.out.println(line + "\tTodo format is invalid\n" + line);
-        return javaFxLine + "\tTodo format is invalid\n" + javaFxLine;
+        return "Todo format is invalid\n";
     }
 
     /**

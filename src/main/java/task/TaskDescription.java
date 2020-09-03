@@ -16,15 +16,13 @@ public class TaskDescription {
     public static String showAllTask(List<Task> tasks) {
         String result = "";
         System.out.println("\t____________________________________________________________\n");
-        result += "\t_______________________\n";
         for (int i = 0; i < tasks.size(); i++) {
             int serialNumber = i + 1;
             Task task = tasks.get(i);
             System.out.println("\t" + serialNumber + "." + task);
-            result += "\t" + serialNumber + "." + task + "\n";
+            result += "" + serialNumber + "." + task + "\n";
         }
         System.out.println("\t____________________________________________________________\n");
-        result += "\t_______________________\n";
         return result;
     }
 
@@ -40,11 +38,9 @@ public class TaskDescription {
         System.out.println("\t\t" + newTask + "\n");
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list.\n");
         System.out.println("\t____________________________________________________________\n");
-        return "\t_______________________\n"
-                + "\tGot it. I've added this task:\n"
-                + "\t\t" + newTask + "\n"
-                + "\tNow you have " + tasks.size() + " tasks in the list.\n"
-                + "\t_______________________\n";
+        return "Got it. I've added this task:\n"
+                + "" + newTask + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.\n";
     }
 
     /**
@@ -57,10 +53,8 @@ public class TaskDescription {
         System.out.println("\tNice! I've marked this task as done:\n");
         System.out.println("\t" + doneTask);
         System.out.println("\t____________________________________________________________\n");
-        return "\t_______________________\n"
-                + "\tNice! I've marked this task as done:\n"
-                + "\t" + doneTask
-                + "\t_______________________\n";
+        return "Nice! I've marked this task as done:\n"
+                + "" + doneTask;
     }
 
     /**
@@ -75,11 +69,9 @@ public class TaskDescription {
         System.out.println("\t\t" + deletedTask + "\n");
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list.\n");
         System.out.println("\t____________________________________________________________\n");
-        return "\t_______________________\n"
-                + "\tNoted. I've removed this task:\n"
-                + "\t\t" + deletedTask + "\n"
-                + "\tNow you have " + tasks.size() + " tasks in the list.\n"
-                + "\t_______________________\n";
+        return "Noted. I've removed this task:\n"
+                + "\t" + deletedTask + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.\n";
     }
 
     /**
@@ -91,25 +83,21 @@ public class TaskDescription {
         if (searchedTasks.size() > 0) { // Items found with find command
             String result = "";
             System.out.println("\t____________________________________________________________\n");
-            result += "\t_______________________\n";
             System.out.println("\tHere are the matching tasks in your list:\n");
-            result += "\tHere are the matching tasks in your list:\n";
+            result += "Here are the matching tasks in your list:\n";
             for (int i = 0; i < searchedTasks.size(); i++) {
                 int serialNumber = i + 1;
                 Task task = searchedTasks.get(i);
                 System.out.println("\t" + serialNumber + "." + task);
-                result += "\t" + serialNumber + "." + task + "\n";
+                result += "" + serialNumber + "." + task + "\n";
             }
             System.out.println("\t____________________________________________________________\n");
-            result += "\t_______________________\n";
             return result;
         } else { // No items found with find command
             System.out.println("\t____________________________________________________________\n");
             System.out.println("\tNo items with the finding keyword specified found in list.\n");
             System.out.println("\t____________________________________________________________\n");
-            return "\t_______________________\n"
-                    + "\tNo items with the finding keyword specified found in list.\n"
-                    + "\t_______________________\n";
+            return "No items with the finding keyword specified found in list.\n";
         }
     }
 }

@@ -131,6 +131,6 @@ public class UI {
     }
 
     public static String farewellForJavaFx() {
-        return "\tBYE, GONNA GO NUKE AMERICA NOW!!!!!!!!!!!\n";
+        return "BYE, GONNA GO NUKE AMERICA NOW HAHAHAHAHAHA!!!!!!!!!!!\n";
     }
 }
