@@ -8,8 +8,10 @@ import java.time.format.DateTimeParseException;
 import duke.exceptions.DukeDateTimeParseException;
 import duke.utils.DukeDateTime;
 
-/** Represents a parser that parses String inputs in the accepted formats into a
- * {@link DukeDateTime} object. */
+/**
+ * Represents a parser that parses String inputs in the accepted formats into a
+ * {@link DukeDateTime} object.
+ */
 public class DukeDateTimeParser {
 
     private static final String[] PATTERNS = {"d/M/yyyy", "d MMM yyyy", "d MMMM yyyy", "d-M-yyyy", "yyyy-M-d"};
@@ -19,7 +21,8 @@ public class DukeDateTimeParser {
         "d-M-yyyy H:mm", "d-M-yyyy h:mm a", "d-M-yyyy Hmm",
         "yyyy-M-d H:mm", "yyyy-M-d h:mm a", "yyyy-M-d Hmm"};
 
-    /** Parses the specified input into a {@link DukeDateTime} object.
+    /**
+     * Parses the specified input into a {@link DukeDateTime} object.
      *
      * @param input The user input of the date and/or time.
      * @return The DukeDateTime object.

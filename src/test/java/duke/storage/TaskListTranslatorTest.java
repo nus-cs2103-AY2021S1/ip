@@ -41,7 +41,7 @@ public class TaskListTranslatorTest {
     @Test
     public void decode_emptyInput_success() {
         TaskList taskList = TaskListTranslator.decode(new ArrayList<>());
-        assertEquals(0, taskList.numOfTasks());
+        assertEquals(0, taskList.getNumOfTasks());
     }
 
     @Test

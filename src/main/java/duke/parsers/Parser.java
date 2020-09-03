@@ -1,5 +1,7 @@
 package duke.parsers;
 
+import static duke.utils.Messages.MESSAGE_HANDLED_INVALID_COMMAND_ASSERTION;
+
 import duke.commands.AddCommand;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
@@ -24,10 +26,13 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
-/** Represents a parser that parses user inputs into the relevant commands. */
+/**
+ * Represents a parser that parses user inputs into the relevant commands.
+ */
 public class Parser {
 
-    /** Parses the user input into the relevant command.
+    /**
+     * Parses the user input into the relevant command.
      *
      * @param userInput The user input.
      * @return The command that corresponds to the user input.
@@ -43,36 +48,36 @@ public class Parser {
             EmptyTaskDoneException, EmptyTaskDeletedException,
             EmptyDueDateException, EmptyEventDateException, EmptySearchWordException {
 
-        String[] arr = userInput.strip().split("\\s+", 2);
-        switch (arr[0].strip().toLowerCase()) {
+        String[] splitByCommand = userInput.strip().split("\\s+", 2);
+        switch (splitByCommand[0].strip().toLowerCase()) {
         case "bye":
             return parseBye();
         case "list":
             return parseList();
         case "done":
-            if (arr.length < 2) {
+            if (splitByCommand.length < 2) {
                 throw new EmptyTaskDoneException();
             }
-            return parseDone(arr[1].strip());
+            return parseDone(splitByCommand[1].strip());
         case "todo":
         case "deadline":
         case "event":
-            if (arr.length < 2) {
-                throw new EmptyTaskDescriptionException(arr[0].strip());
+            if (splitByCommand.length < 2) {
+                throw new EmptyTaskDescriptionException(splitByCommand[0].strip());
             }
-            return parseAdd(arr[0].strip(), arr[1].strip());
+            return parseAdd(splitByCommand[0].strip(), splitByCommand[1].strip());
         case "delete":
-            if (arr.length < 2) {
+            if (splitByCommand.length < 2) {
                 throw new EmptyTaskDeletedException();
             }
-            return parseDelete(arr[1].strip());
+            return parseDelete(splitByCommand[1].strip());
         case "today":
             return parseToday();
         case "find":
-            if (arr.length < 2) {
+            if (splitByCommand.length < 2) {
                 throw new EmptySearchWordException();
             }
-            return parseFind(arr[1].strip().toLowerCase());
+            return parseFind(splitByCommand[1].strip().toLowerCase());
         default:
             throw new InvalidCommandException();
         }
@@ -94,29 +99,29 @@ public class Parser {
             task = new Todo(arguments);
             break;
         case "deadline": {
-            String[] parsed = arguments.split(" /by ");
+            String[] splitByTaskAndDate = arguments.split(" /by ");
             if (arguments.startsWith("/by")) {
                 throw new EmptyTaskDescriptionException(commandName);
             }
-            if (parsed.length < 2) {
+            if (splitByTaskAndDate.length < 2) {
                 throw new EmptyDueDateException();
             }
-            task = new Deadline(parsed[0], DukeDateTimeParser.parse(parsed[1]));
+            task = new Deadline(splitByTaskAndDate[0], DukeDateTimeParser.parse(splitByTaskAndDate[1]));
             break;
         }
         case "event": {
-            String[] parsed = arguments.split(" /at ");
+            String[] splitByTaskAndDate = arguments.split(" /at ");
             if (arguments.startsWith("/at")) {
                 throw new EmptyTaskDescriptionException(commandName);
             }
-            if (parsed.length < 2) {
+            if (splitByTaskAndDate.length < 2) {
                 throw new EmptyEventDateException();
             }
-            task = new Event(parsed[0], DukeDateTimeParser.parse(parsed[1]));
+            task = new Event(splitByTaskAndDate[0], DukeDateTimeParser.parse(splitByTaskAndDate[1]));
             break;
         }
         default:
-            throw new AssertionError("Invalid command scenario has been handled earlier.");
+            assert false : MESSAGE_HANDLED_INVALID_COMMAND_ASSERTION;
         }
         return new AddCommand(task);
     }

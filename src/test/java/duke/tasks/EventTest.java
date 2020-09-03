@@ -11,11 +11,11 @@ import duke.utils.DukeDateTime;
 public class EventTest {
 
     @Test
-    public void testGetAt() {
+    public void testGetTime() {
         DukeDateTime at = new DukeDateTime(LocalDateTime.parse("2020-08-23T13:00"), true);
         String description = "description";
         Event event = new Event(description, at);
-        assertEquals(at, event.getAt());
+        assertEquals(at, event.getTime());
     }
 
     @Test

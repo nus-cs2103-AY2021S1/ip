@@ -8,21 +8,27 @@ import duke.parsers.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
-/** Main class where the program is run. */
+/**
+ * Main class where the program is run.
+ */
 public class Duke {
 
     private InputOutput inputOutput;
     private TaskList taskList;
     private Storage storage;
 
-    /** Constructs a Duke object. */
+    /**
+     * Constructs a Duke object.
+     */
     public Duke() {
         this.inputOutput = new InputOutput();
         this.storage = new Storage();
         this.taskList = storage.load();
     }
 
-    /** Runs the program until termination. */
+    /**
+     * Runs the program until termination.
+     */
     public void run() {
         inputOutput.showGreeting();
         boolean isExit = false;
@@ -40,7 +46,8 @@ public class Duke {
         System.exit(0);
     }
 
-    /** Gets the CommandResult from user input.
+    /**
+     * Gets the CommandResult from user input.
      *
      * @param input The user input.
      * @return The CommandResult.

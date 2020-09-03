@@ -63,7 +63,7 @@ public class StorageTest {
     public void load_nonExistentFile_returnsEmptyTaskList() {
         Storage storage = new Storage(TEST_DATA_FOLDER + "/" + NON_EXISTENT_FILE_NAME);
         TaskList taskList = storage.load();
-        assertEquals(0, taskList.numOfTasks());
+        assertEquals(0, taskList.getNumOfTasks());
     }
 
     @Test

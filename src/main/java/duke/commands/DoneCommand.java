@@ -6,12 +6,15 @@ import duke.exceptions.NoSuchTaskException;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 
-/** Represents the command that marks a task as done when executed. */
+/**
+ * Represents the command that marks a task as done when executed.
+ */
 public class DoneCommand extends Command {
 
     private int taskIndex;
 
-    /** Constructor.
+    /**
+     * Constructor.
      *
      * @param taskIndex The index of the task to be marked as done.
      */
@@ -19,7 +22,8 @@ public class DoneCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
-    /** Marks the task, as specified by the taskIndex in the constructor, as done and
+    /**
+     * Marks the task, as specified by the taskIndex in the constructor, as done and
      * returns a relevant message to the user.
      *
      * @param taskList The taskList involved.

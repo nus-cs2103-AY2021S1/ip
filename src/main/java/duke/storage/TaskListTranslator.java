@@ -3,6 +3,7 @@ package duke.storage;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.exceptions.DukeDateTimeParseException;
 import duke.exceptions.TaskListTranslatorException;
 import duke.parsers.DukeDateTimeParser;
 import duke.tasklist.TaskList;
@@ -11,10 +12,13 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
-/** Represents the translator that handles the conversion of {@link TaskList} to a List of Strings. */
+/**
+ * Represents the translator that handles the conversion of {@link TaskList} to a List of Strings.
+ */
 public class TaskListTranslator {
 
-    /** Decodes a List of Strings into a TaskList.
+    /**
+     * Decodes a List of Strings into a TaskList.
      *
      * @param lines The list of Strings.
      * @return The taskList.
@@ -38,22 +42,22 @@ public class TaskListTranslator {
                     task = new Event(parsed[2], DukeDateTimeParser.parse(parsed[3]));
                     break;
                 default:
-                    break;
+                    throw new TaskListTranslatorException();
                 }
                 if (parsed[1].equals("1")) {
-                    assert task != null;
                     task.markAsDone();
                 }
                 taskList.addTask(task);
             }
             return taskList;
 
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | DukeDateTimeParseException e) {
             throw new TaskListTranslatorException();
         }
     }
 
-    /** Encodes a {@link TaskList} into a list of Strings to be saved into a file.
+    /**
+     * Encodes a {@link TaskList} into a list of Strings to be saved into a file.
      *
      * @param taskList The {@link TaskList}.
      * @return The list of Strings.

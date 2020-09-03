@@ -3,7 +3,7 @@ package duke.utils;
 public class Messages {
 
     public static final String MESSAGE_WELCOME = "Hello from\n"
-        + " ____        _        \n"
+            + " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -32,6 +32,11 @@ public class Messages {
     public static final String MESSAGE_NO_SUCH_TASK = "OOPS! No such task exists!";
     public static final String MESSAGE_STORAGE_EXCEPTION = "OOPS! Error saving file.";
     public static final String MESSAGE_TASKLIST_TRANSLATOR_EXCEPTION = "OOPS! Error reading from file.";
+
+    public static final String MESSAGE_HANDLED_INVALID_COMMAND_ASSERTION =
+            "Invalid command scenario has been handled earlier.";
+    public static final String MESSAGE_HANDLED_INVALID_FILEPATH_ASSERTION =
+            "A non-existent file scenario has been handled earlier.";
 
 
 }
