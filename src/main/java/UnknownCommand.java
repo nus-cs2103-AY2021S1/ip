@@ -2,7 +2,7 @@
  * Class to run any other unspecified command.
  * The type of a command is defined as the first word in the command string.
  */
-public class UnknownCommand implements Command{
+public class UnknownCommand implements Command {
 
     protected final String COMMAND;
 

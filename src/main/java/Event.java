@@ -21,8 +21,8 @@ public class Event extends Task {
 
         this.date = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
 
-        String hour = time.substring(0,2);
-        String minute = time.substring(2,4);
+        String hour = time.substring(0, 2);
+        String minute = time.substring(2, 4);
 
         if (Integer.parseInt(hour) <= 23 && Integer.parseInt(minute) <= 59) {
             this.time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
@@ -34,8 +34,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         String formattedTime = String.format("%02d", time.getHour()) + String.format("%02d", time.getMinute());
-        return "  [E]" + super.toString() + " (At: " + date.getDayOfMonth() + " " +
-                date.getMonth().toString().toLowerCase() + " " + date.getYear() + (time == null ? ")" : " " +
-                formattedTime + " hrs)");
+        return "  [E]" + super.toString() + " (At: " + date.getDayOfMonth() + " "
+                + date.getMonth().toString().toLowerCase() + " " + date.getYear() + (time == null ? ")" : " "
+                + formattedTime + " hrs)");
     }
 }

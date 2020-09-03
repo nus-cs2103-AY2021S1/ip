@@ -1,5 +1,3 @@
-import java.lang.Throwable;
-
 /**
  * Class to hold the Exception message of a DukeException.
  */

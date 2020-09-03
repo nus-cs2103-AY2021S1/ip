@@ -78,11 +78,11 @@ public class Ui {
         System.out.println("     Nice! I've marked this task as done: ");
 
         if (t instanceof Event) {
-            System.out.println("       " + taskNumber + ". "+ ((Event)t).toString());
+            System.out.println("       " + taskNumber + ". " + ((Event) t).toString());
         } else if (t instanceof Deadline) {
-            System.out.println("       " + taskNumber + ". "+ ((Deadline)t).toString());
+            System.out.println("       " + taskNumber + ". " + ((Deadline) t).toString());
         } else if (t instanceof ToDo) {
-            System.out.println("       " + taskNumber + ". "+ ((ToDo)t).toString());
+            System.out.println("       " + taskNumber + ". " + ((ToDo) t).toString());
         }
     }
 
@@ -106,18 +106,18 @@ public class Ui {
         System.out.println("     Noted. I've removed this task: ");
 
         if (t instanceof Event) {
-            System.out.println("       " + taskNumber + ". "+ ((Event)t).toString());
+            System.out.println("       " + taskNumber + ". " + ((Event) t).toString());
         } else if (t instanceof Deadline) {
-            System.out.println("       " + taskNumber + ". "+ ((Deadline)t).toString());
+            System.out.println("       " + taskNumber + ". " + ((Deadline) t).toString());
         } else if (t instanceof ToDo) {
-            System.out.println("       " + taskNumber + ". "+ ((ToDo)t).toString());
+            System.out.println("       " + taskNumber + ". " + ((ToDo) t).toString());
         }
     }
 
     public void findResultMessage(ArrayList<Task> results, String query) {
         if (results.size() == 0) {
-            System.out.println("     ☹ OOPS!!! I'm sorry, but I didn't find anything that matches \"" + query +
-                "\" :-(");
+            System.out.println("     ☹ OOPS!!! I'm sorry, but I didn't find anything that matches \"" + query
+                    + "\" :-(");
         } else {
             System.out.println("     Here's what i found: ");
             int counter = 1;
