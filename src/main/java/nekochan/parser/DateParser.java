@@ -23,6 +23,8 @@ public class DateParser {
 
     private static final int HAS_TIME_INDICATOR = 0;
     private static final int NULL_TIME_INDICATOR = 30;
+    private static final int MINUTES_IN_DAY = 1440;
+    private static final int MINUTES_IN_HOUR = 60;
 
     /**
      * Parses the specified {@code input} string into a {@code LocalDateTime} object.
@@ -72,7 +74,7 @@ public class DateParser {
         try {
             int minutes = 0;
             if (input.contains("d")) {
-                minutes += 1440 * Double.parseDouble(input.split("d")[0].trim());
+                minutes += MINUTES_IN_DAY * Double.parseDouble(input.split("d")[0].trim());
                 if (input.split("d").length > 1) {
                     input = input.split("d")[1].replaceAll("[^\\d]", "");
                 } else {
@@ -80,7 +82,7 @@ public class DateParser {
                 }
             }
             if (input != null && input.contains("h")) {
-                minutes += 60 * Double.parseDouble(input.split("h")[0].trim());
+                minutes += MINUTES_IN_HOUR * Double.parseDouble(input.split("h")[0].trim());
                 if (input.split("h").length > 1) {
                     input = input.split("h")[1].replaceAll("[^\\d]", "");
                 } else {

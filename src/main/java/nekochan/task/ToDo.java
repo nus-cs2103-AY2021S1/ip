@@ -35,21 +35,20 @@ public class ToDo extends Task {
      * @throws NekoStorageException if format of the code is incorrect.
      */
     public static ToDo decode(String code) throws NekoStorageException {
-        if (code.charAt(0) == 'T') {
-            String[] content = code.split("\\|", 3);
-            if (content.length != 3) {
-                throw new NekoStorageException("There are some holes in my memory...");
-            }
-            ToDo newToDo = new ToDo(content[2]);
-            if (content[1].equals("Y")) {
-                newToDo.setCompleted();
-            } else if (!content[1].equals("N")) {
-                throw new NekoStorageException("There are some holes in my memory...");
-            }
-            return newToDo;
-        } else {
+        if (code.charAt(0) != 'T') {
             throw new NekoStorageException("Something doesn't seem right...");
         }
+        String[] content = code.split("\\|", 3);
+        if (content.length != 3) {
+            throw new NekoStorageException("There are some holes in my memory...");
+        }
+        ToDo newToDo = new ToDo(content[2]);
+        if (content[1].equals("Y")) {
+            newToDo.setCompleted();
+        } else if (!content[1].equals("N")) {
+            throw new NekoStorageException("There are some holes in my memory...");
+        }
+        return newToDo;
     }
 
     /**

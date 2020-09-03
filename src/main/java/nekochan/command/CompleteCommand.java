@@ -43,12 +43,11 @@ public class CompleteCommand extends Command {
      */
     @Override
     public String feedback() throws IncompleteNekoCommandException {
-        if (super.isCompleted) {
-            return String.format("Nice! I've marked this task as complete:\n  %s\n",
-                    completedTask.toString());
-        } else {
+        if (!super.isCompleted) {
             throw new IncompleteNekoCommandException("Complete command was not completed.");
         }
+        return String.format("Nice! I've marked this task as complete:\n  %s\n",
+                completedTask.toString());
     }
 
     /**

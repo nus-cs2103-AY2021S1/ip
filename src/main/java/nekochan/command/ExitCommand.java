@@ -26,11 +26,10 @@ public class ExitCommand extends Command {
      * @throws IncompleteNekoCommandException if this {@code ExitCommand} was not executed.
      */
     public String feedback() throws IncompleteNekoCommandException {
-        if (super.isCompleted) {
-            return "Ja ne!\n";
-        } else {
+        if (!super.isCompleted) {
             throw new IncompleteNekoCommandException("Exit command was not completed.");
         }
+        return "Ja ne!\n";
     }
 
     /**

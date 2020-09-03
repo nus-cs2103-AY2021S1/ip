@@ -86,23 +86,22 @@ public class Event extends Task {
      * @throws NekoStorageException if format of the code is incorrect.
      */
     public static Event decode(String code) throws NekoStorageException {
-        if (code.charAt(0) == 'E') {
-            String[] content = code.split("\\|", 5);
-            if (content.length != 5) {
-                throw new NekoStorageException("There are some holes in my memory...");
-            }
-            Event newEvent = new Event(content[4],
-                    DateParser.parseString(content[2]),
-                    DateParser.parseString(content[3]));
-            if (content[1].equals("Y")) {
-                newEvent.setCompleted();
-            } else if (!content[1].equals("N")) {
-                throw new NekoStorageException("There are some holes in my memory...");
-            }
-            return newEvent;
-        } else {
+        if (code.charAt(0) != 'E') {
             throw new NekoStorageException("Something doesn't seem right...");
         }
+        String[] content = code.split("\\|", 5);
+        if (content.length != 5) {
+            throw new NekoStorageException("There are some holes in my memory...");
+        }
+        Event newEvent = new Event(content[4],
+                DateParser.parseString(content[2]),
+                DateParser.parseString(content[3]));
+        if (content[1].equals("Y")) {
+            newEvent.setCompleted();
+        } else if (!content[1].equals("N")) {
+            throw new NekoStorageException("There are some holes in my memory...");
+        }
+        return newEvent;
     }
 
     /**
@@ -127,16 +126,14 @@ public class Event extends Task {
     public boolean match(String searchParameter) {
         try {
             LocalDate searchDate = DateParser.parseString(searchParameter).toLocalDate();
-            if (searchDate.isEqual(startDateTime.toLocalDate()) || searchDate.isEqual(endDateTime.toLocalDate())
-                    || (searchDate.isBefore(endDateTime.toLocalDate())
-                    && searchDate.isAfter(startDateTime.toLocalDate()))) {
-                return true;
-            }
+            boolean isEqualStart = searchDate.isEqual(startDateTime.toLocalDate());
+            boolean isEqualEnd = searchDate.isEqual(endDateTime.toLocalDate());
+            boolean isBetween = searchDate.isBefore(endDateTime.toLocalDate())
+                    && searchDate.isAfter(startDateTime.toLocalDate());
+            return isEqualStart || isEqualEnd || isBetween;
         } catch (NekoException e) {
-            // We attempt to parse the string as a LocalDate and compare it to the event date,
-            // but upon failure, we perform a comparison with the event description.
+            return searchParameter.contains(description) || description.contains(searchParameter);
         }
-        return searchParameter.contains(description) || description.contains(searchParameter);
     }
 
     /**

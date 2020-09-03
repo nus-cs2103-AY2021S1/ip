@@ -45,13 +45,12 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String feedback() throws IncompleteNekoCommandException {
-        if (super.isCompleted) {
-            return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in your list.",
-                    deletedTask.toString(),
-                    remainingTaskCount);
-        } else {
+        if (!super.isCompleted) {
             throw new IncompleteNekoCommandException("Delete command was not completed.");
         }
+        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in your list.",
+                deletedTask.toString(),
+                remainingTaskCount);
     }
 
     /**

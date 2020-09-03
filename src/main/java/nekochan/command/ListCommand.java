@@ -38,20 +38,19 @@ public class ListCommand extends Command {
      */
     @Override
     public String feedback() throws IncompleteNekoCommandException {
-        if (super.isCompleted) {
-            String printout = "";
-            if (existingTasks.size() == 0) {
-                printout = "Congratulations! You don't have any tasks left to do.";
-            } else {
-                printout = "Here are the tasks in your list:\n";
-                for (int i = 0; i < existingTasks.size(); i++) {
-                    printout += String.format("%d.%s\n", i + 1, existingTasks.get(i).toString());
-                }
-            }
-            return printout;
-        } else {
+        if (!super.isCompleted) {
             throw new IncompleteNekoCommandException("List command was not completed.");
         }
+        String printout = "";
+        if (existingTasks.size() == 0) {
+            printout = "Congratulations! You don't have any tasks left to do.";
+        } else {
+            printout = "Here are the tasks in your list:\n";
+            for (int i = 0; i < existingTasks.size(); i++) {
+                printout += String.format("%d.%s\n", i + 1, existingTasks.get(i).toString());
+            }
+        }
+        return printout;
     }
 
     /**

@@ -51,18 +51,17 @@ public class SearchCommand extends Command {
      */
     @Override
     public String feedback() throws IncompleteNekoCommandException {
-        if (super.isCompleted) {
-            String resultPrint = "";
-            for (Task result : results) {
-                if (resultPrint.length() > 0) {
-                    resultPrint = resultPrint.concat("\n");
-                }
-                resultPrint = resultPrint.concat(result.toString());
-            }
-            return resultPrint;
-        } else {
+        if (!super.isCompleted) {
             throw new IncompleteNekoCommandException("Search command was not completed.");
         }
+        String resultPrint = "";
+        for (Task result : results) {
+            if (resultPrint.length() > 0) {
+                resultPrint = resultPrint.concat("\n");
+            }
+            resultPrint = resultPrint.concat(result.toString());
+        }
+        return resultPrint;
     }
 
     /**

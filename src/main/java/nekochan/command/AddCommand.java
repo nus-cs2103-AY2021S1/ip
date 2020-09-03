@@ -62,14 +62,13 @@ public class AddCommand extends Command {
      */
     @Override
     public String feedback() throws IncompleteNekoCommandException {
-        if (super.isCompleted) {
-            return String.format(
-                    "Got it. I've added this task:\n  %s\nNow you have %d tasks in your list.\n",
-                    createdTask.toString(),
-                    remainingTaskCount);
-        } else {
+        if (!super.isCompleted) {
             throw new IncompleteNekoCommandException("Add command was not completed.");
         }
+        return String.format(
+                "Got it. I've added this task:\n%s\nNow you have %d tasks in your list.\n",
+                createdTask.toString(),
+                remainingTaskCount);
     }
 
     /**

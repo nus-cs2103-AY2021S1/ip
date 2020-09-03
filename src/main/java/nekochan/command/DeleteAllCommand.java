@@ -30,11 +30,10 @@ public class DeleteAllCommand extends Command {
      */
     @Override
     public String feedback() throws IncompleteNekoCommandException {
-        if (super.isCompleted) {
-            return "I've cleared all your tasks.\nYou sure are efficient.";
-        } else {
+        if (!super.isCompleted) {
             throw new IncompleteNekoCommandException("Delete all command was not completed.");
         }
+        return "I've cleared all your tasks.\nYou sure are efficient.";
     }
 
     /**

@@ -52,21 +52,20 @@ public class Deadline extends Task {
      * @throws NekoStorageException if format of the code is incorrect.
      */
     public static Deadline decode(String code) throws NekoStorageException {
-        if (code.charAt(0) == 'D') {
-            String[] content = code.split("\\|", 4);
-            if (content.length != 4) {
-                throw new NekoStorageException("There are some holes in my memory...");
-            }
-            Deadline newDeadline = new Deadline(content[3], DateParser.parseString(content[2]));
-            if (content[1].equals("Y")) {
-                newDeadline.setCompleted();
-            } else if (!content[1].equals("N")) {
-                throw new NekoStorageException("There are some holes in my memory...");
-            }
-            return newDeadline;
-        } else {
+        if (code.charAt(0) != 'D') {
             throw new NekoStorageException("Something doesn't seem right...");
         }
+        String[] content = code.split("\\|", 4);
+        if (content.length != 4) {
+            throw new NekoStorageException("There are some holes in my memory...");
+        }
+        Deadline newDeadline = new Deadline(content[3], DateParser.parseString(content[2]));
+        if (content[1].equals("Y")) {
+            newDeadline.setCompleted();
+        } else if (!content[1].equals("N")) {
+            throw new NekoStorageException("There are some holes in my memory...");
+        }
+        return newDeadline;
     }
 
     /**
@@ -91,14 +90,10 @@ public class Deadline extends Task {
     public boolean match(String searchParameter) {
         try {
             LocalDate searchDate = DateParser.parseString(searchParameter).toLocalDate();
-            if (searchDate.isEqual(dateTime.toLocalDate())) {
-                return true;
-            }
+            return searchDate.isEqual(dateTime.toLocalDate());
         } catch (NekoException e) {
-            // We attempt to parse the string as a LocalDate and compare it to the deadline date,
-            // but upon failure, we perform a comparison with the deadline description.
+            return searchParameter.contains(description) || description.contains(searchParameter);
         }
-        return searchParameter.contains(description) || description.contains(searchParameter);
     }
 
     /**
