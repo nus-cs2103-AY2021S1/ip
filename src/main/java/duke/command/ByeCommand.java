@@ -39,8 +39,9 @@ public class ByeCommand extends Command {
      * @return the string "bye"
      */
     @Override
-    public String execute(Ui ui, TaskList list, Storage storage) {
+    public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         printEntireList(ui, list);
+        storage.reWrite(list);
         return Parser.BYE_COMMAND;
     }
 

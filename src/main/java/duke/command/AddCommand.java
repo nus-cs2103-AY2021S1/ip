@@ -32,7 +32,6 @@ public class AddCommand extends Command {
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         int count = list.size();
         Task task = Parser.parseAddTask(input);
-        storage.addToList(task);
         list.add(count, task);
         String tasks = getTaskPlural(count);
         String res = String.format(Ui.ADD_TASK_OUTPUT_FORMAT, task.toString(), count + 1, tasks);
