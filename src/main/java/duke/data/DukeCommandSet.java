@@ -9,6 +9,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.ExceptionMessage;
@@ -36,6 +37,7 @@ public class DukeCommandSet {
         registerCommand(new EventCommand());
         registerCommand(new DeleteCommand());
         registerCommand(new FindCommand());
+        registerCommand(new HelpCommand());
     }
 
     private void registerCommand(Command command) {
@@ -58,5 +60,9 @@ public class DukeCommandSet {
         }
 
         return commandSet.get(commandName);
+    }
+
+    public HashMap<String, Command> getAllCommands() {
+        return commandSet;
     }
 }
