@@ -1,11 +1,11 @@
+package duke;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 /**
  * Stroage deals with loading tasks from the file 
@@ -37,7 +37,7 @@ public class Storage {
      *
      * @return nothing.
      */ 
-    void write(ArrayList<? extends Task> tasks) {
+    public void write(ArrayList<? extends Task> tasks) {
         try {
             FileWriter writer = new FileWriter(path, false);
             for (Task task: tasks) {
