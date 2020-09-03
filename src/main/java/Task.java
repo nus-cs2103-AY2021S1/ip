@@ -1,6 +1,8 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    public static final int DONE = 1;
+    public static final int NOT_DONE = 0;
 
     public Task(String description) {
         this.description = description;
@@ -34,7 +36,7 @@ public class Task {
     }
 
     public String toText(String type) {
-        int doneInt = this.isDone ? 1 : 0;
+        int doneInt = this.isDone ? DONE : NOT_DONE;
         return String.format("%s | %d | %s", type, doneInt, this.description);
     }
 }
