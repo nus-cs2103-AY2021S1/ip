@@ -25,6 +25,21 @@ public class Parser {
     public static final String DONE_COMMAND_PREFIX = "done ";
     public static final String HAPPEN_COMMAND_PREFIX = "happen ";
     public static final String FIND_COMMAND_PREFIX = "find ";
+    public static final String TODO = "todo";
+    public static final String DEADLINE = "deadline";
+    public static final String EVENT = "event";
+    public static final String EMPTY_DONE_COMMAND_EXCEPTION = "\u2639 OOPS!!! "
+            + "The task to mark as done cannot be empty.";
+    public static final String EMPTY_DELETE_COMMAND_EXCEPTION = "\u2639 OOPS!!! "
+            + "The task to mark to delete cannot be empty.";
+    public static final String EMPTY_TASK_DESCRIPTION_EXCEPTION = "\u2639 OOPS!!!"
+            + " The description of a task cannot be empty.";
+    public static final String EMPTY_TIME_EXCEPTION = "The time specification cannot be empty.";
+    public static final String NONPOSITIVE_TASK_INDEX_EXCEPTION = "\u2639 OOPS!!! The task index "
+            + "should be a positive integer.";
+    public static final String TASK_INDEX_OVERFLOW_EXCEPTION = "\u2639 OOPS!!! The task index does not exist.";
+    public static final String NONNUMERIC_TASK_INDEX_EXCEPTION = "\u2639 OOPS!!! The task index should be a number.";
+    public static final String LACK_TIME_SPECIFICATION_EXCEPTION = "\u2639 OOPS!!! Time should be specified";
 
     /**
      * Parses a DoneCommand to tell which task to mark as done.
@@ -37,18 +52,18 @@ public class Parser {
     public static int isValidDone(String cmd, int count) throws InvalidCommandException {
         if (cmd.startsWith(DONE_COMMAND_PREFIX)) {
             if (cmd.length() < 6) {
-                throw new InvalidCommandException("\u2639 OOPS!!! The task to mark as done cannot be empty.");
+                throw new InvalidCommandException(EMPTY_DONE_COMMAND_EXCEPTION);
             }
             try {
                 int n = Integer.parseInt(cmd.substring(5));
                 if (n < 1) {
-                    throw new InvalidCommandException("\u2639 OOPS!!! The task index should be a positive integer.");
+                    throw new InvalidCommandException(NONPOSITIVE_TASK_INDEX_EXCEPTION);
                 } else if (n > count) {
-                    throw new InvalidCommandException("\u2639 OOPS!!! The task index does not exist.");
+                    throw new InvalidCommandException(TASK_INDEX_OVERFLOW_EXCEPTION);
                 }
                 return n;
             } catch (NumberFormatException e) {
-                throw new InvalidCommandException("\u2639 OOPS!!! The task index should be a number.");
+                throw new InvalidCommandException(NONNUMERIC_TASK_INDEX_EXCEPTION);
             }
         } else {
             return -1;
@@ -66,18 +81,18 @@ public class Parser {
     public static int isValidDelete(String cmd, int count) throws InvalidCommandException {
         if (cmd.startsWith(DELETE_COMMAND_PREFIX)) {
             if (cmd.length() < 8) {
-                throw new InvalidCommandException("\u2639 OOPS!!! The task to mark to delete cannot be empty.");
+                throw new InvalidCommandException(EMPTY_DELETE_COMMAND_EXCEPTION);
             }
             try {
                 int n = Integer.parseInt(cmd.substring(7));
                 if (n < 1) {
-                    throw new InvalidCommandException("\u2639 OOPS!!! The task index should be a positive integer.");
+                    throw new InvalidCommandException(NONPOSITIVE_TASK_INDEX_EXCEPTION);
                 } else if (n > count) {
-                    throw new InvalidCommandException("\u2639 OOPS!!! The task index does not exist.");
+                    throw new InvalidCommandException(TASK_INDEX_OVERFLOW_EXCEPTION);
                 }
                 return n;
             } catch (NumberFormatException e) {
-                throw new InvalidCommandException("\u2639 OOPS!!! The task index should be a number.");
+                throw new InvalidCommandException(NONNUMERIC_TASK_INDEX_EXCEPTION);
             }
         } else {
             return -1;
@@ -91,50 +106,50 @@ public class Parser {
      * @throws InvalidCommandException if the command does not make sense
      */
     public static Task generate(String cmd) throws InvalidCommandException {
-        if (cmd.startsWith("todo")) {
+        if (cmd.startsWith(TODO)) {
             if (cmd.length() < 5) {
-                throw new InvalidCommandException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+                throw new InvalidCommandException(EMPTY_TASK_DESCRIPTION_EXCEPTION);
             } else if (cmd.charAt(4) != ' ') {
                 throw new InvalidCommandException("Do you mean 'todo " + cmd.substring(4) + "'");
             } else if (cmd.length() < 6) {
-                throw new InvalidCommandException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+                throw new InvalidCommandException(EMPTY_TASK_DESCRIPTION_EXCEPTION);
             }
             return new ToDo(cmd.substring(5));
-        } else if (cmd.startsWith("deadline")) {
+        } else if (cmd.startsWith(DEADLINE)) {
             if (cmd.length() < 9) {
-                throw new InvalidCommandException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+                throw new InvalidCommandException(EMPTY_TASK_DESCRIPTION_EXCEPTION);
             } else if (cmd.charAt(8) != ' ') {
                 throw new InvalidCommandException("Do you mean 'deadline " + cmd.substring(8) + "'");
             } else if (cmd.length() < 10) {
-                throw new InvalidCommandException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+                throw new InvalidCommandException(EMPTY_TASK_DESCRIPTION_EXCEPTION);
             }
             String description = cmd.substring(9);
             int s = description.indexOf("/by");
             if (s == -1) {
-                throw new InvalidCommandException("\u2639 OOPS!!! Time should be specified");
+                throw new InvalidCommandException(LACK_TIME_SPECIFICATION_EXCEPTION);
             }
             if (description.length() - s < 4) {
-                throw new InvalidCommandException("The time specification cannot be empty.");
+                throw new InvalidCommandException(EMPTY_TIME_EXCEPTION);
 
             }
             String time = description.substring(s + 4);
             description = description.substring(0, s - 1);
             return new Deadline(description, time);
-        } else if (cmd.startsWith("event")) {
+        } else if (cmd.startsWith(EVENT)) {
             if (cmd.length() < 6) {
-                throw new InvalidCommandException("\u2639 OOPS!!! The description of an event cannot be empty.");
+                throw new InvalidCommandException(EMPTY_TASK_DESCRIPTION_EXCEPTION);
             } else if (cmd.charAt(5) != ' ') {
                 throw new InvalidCommandException("Do you mean 'event " + cmd.substring(5) + "'");
             } else if (cmd.length() < 7) {
-                throw new InvalidCommandException("\u2639 OOPS!!! The description of an event cannot be empty.");
+                throw new InvalidCommandException(EMPTY_TASK_DESCRIPTION_EXCEPTION);
             }
             String description = cmd.substring(6);
             int s = description.indexOf("/at");
             if (s == -1) {
-                throw new InvalidCommandException("\u2639 OOPS!!! Time should be specified");
+                throw new InvalidCommandException(LACK_TIME_SPECIFICATION_EXCEPTION);
             }
             if (description.length() - s < 4) {
-                throw new InvalidCommandException("The time specification cannot be empty.");
+                throw new InvalidCommandException(EMPTY_TIME_EXCEPTION);
 
             }
             String time = description.substring(s + 4);
