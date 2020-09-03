@@ -36,6 +36,7 @@ public class DeadlineCommand implements Command {
     @Override
     public String execute(Ui ui, TaskList tasks) {
         tasks.add(deadline);
+
         return ui.printAddSuccess(deadline, tasks.size());
     }
 

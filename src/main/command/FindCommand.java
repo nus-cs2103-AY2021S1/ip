@@ -1,5 +1,7 @@
 package main.command;
 
+import java.util.Arrays;
+
 import main.task.Task;
 import main.task.TaskList;
 import main.ui.Ui;
@@ -12,14 +14,14 @@ import main.ui.Ui;
  * @since v0.2
  */
 public class FindCommand implements Command {
-    private final String searchTerm;
+    private final String[] searchTerms;
 
     /**
      * Constructs a FindCommand instance with the string to search for.
-     * @param searchTerm the string to search the task list for.
+     * @param searchTerms the strings to search the task list for.
      */
-    public FindCommand(String searchTerm) {
-        this.searchTerm = searchTerm;
+    public FindCommand(String searchTerms) {
+        this.searchTerms = searchTerms.split(" ");
     }
 
     /**
@@ -32,14 +34,29 @@ public class FindCommand implements Command {
     @Override
     public String execute(Ui ui, TaskList tasks) {
         TaskList foundTasks = new TaskList();
-        if (searchTerm.length() > 0) {
-            for (int j = 0; j < tasks.size(); j++) {
-                Task task = tasks.get(j);
-                if (task.getName().contains(searchTerm)) {
-                    foundTasks.add(task);
+        boolean isValidSearchTerms = searchTerms[0].length() > 0;
+
+        if (isValidSearchTerms) {
+            for (int i = 0; i < tasks.size(); i++) {
+                foundTasks.add(tasks.get(i));
+            }
+
+            for (String searchTerm : searchTerms) {
+                TaskList tempTaskList = new TaskList();
+
+                for (int i = 0; i < foundTasks.size(); i++) {
+                    Task task = foundTasks.get(i);
+                    boolean isFound = task.getName().contains(searchTerm);
+
+                    if (isFound) {
+                        tempTaskList.add(task);
+                    }
                 }
+
+                foundTasks = tempTaskList;
             }
         }
+
         return ui.printFoundList(foundTasks);
     }
 
@@ -56,7 +73,7 @@ public class FindCommand implements Command {
     public boolean equals(Object obj) {
         if (obj instanceof FindCommand) {
             FindCommand o = (FindCommand) obj;
-            return this.searchTerm.equals(o.searchTerm);
+            return Arrays.equals(this.searchTerms, o.searchTerms);
         }
         return false;
     }

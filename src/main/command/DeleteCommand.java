@@ -34,12 +34,15 @@ public class DeleteCommand implements Command {
      */
     @Override
     public String execute(Ui ui, TaskList tasks) throws InvalidTaskException {
-        if (taskNum < 1 || taskNum > tasks.size()) {
+        boolean isInvalidIndex = taskNum < 1 || taskNum > tasks.size();
+
+        if (isInvalidIndex) {
             throw new InvalidTaskException();
         }
-        Task removed = tasks.remove(taskNum - 1);
 
-        return ui.printRemoveSuccess(removed, tasks.size());
+        Task removedTask = tasks.remove(taskNum - 1);
+
+        return ui.printRemoveSuccess(removedTask, tasks.size());
     }
 
     /**

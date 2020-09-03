@@ -38,19 +38,23 @@ public class Parser {
 
     private static LocalDateTime toDateTime(String dateTime) throws InvalidDateException {
         String[] dateTimeSplit = dateTime.split(" ");
-        if (dateTimeSplit.length != 2) {
+        boolean isWrongDateTimeFormat = dateTimeSplit.length != 2;
+
+        if (isWrongDateTimeFormat) {
             throw new InvalidDateException("Your date needs to"
                     + " have this format:\n\"YYYY-MM-DD HHMM\"");
         }
 
         String[] date = dateTimeSplit[0].split("-");
         String time = dateTimeSplit[1];
+        boolean isWrongDateFormat = date.length != 3;
+        boolean isWrongTimeFormat = time.length() != 4;
 
-        if (date.length != 3) {
+        if (isWrongDateFormat) {
             throw new InvalidDateException("Your date needs to"
                     + " have this format:\n\"YYYY-MM-DD\"");
         }
-        if (time.length() != 4) {
+        if (isWrongTimeFormat) {
             throw new InvalidDateException("Your time needs to"
                     + " have this format:\n\"HHMM\"");
         }
@@ -77,21 +81,28 @@ public class Parser {
         String command = input[0];
         String description = input[1];
         String[] nameAndTime;
+        boolean isSingleArgument;
 
         switch (command) {
         case COMMAND_TODO:
             return new TodoCommand(description);
         case COMMAND_DEADLINE:
             nameAndTime = description.split(" /by ", 2);
-            if (nameAndTime.length == 1) {
+            isSingleArgument = nameAndTime.length == 1;
+
+            if (isSingleArgument) {
                 throw new InvalidDeadlineFormatException();
             }
+
             return new DeadlineCommand(nameAndTime[0], toDateTime(nameAndTime[1]));
         case COMMAND_EVENT:
             nameAndTime = description.split(" /at ", 2);
-            if (nameAndTime.length == 1) {
+            isSingleArgument = nameAndTime.length == 1;
+
+            if (isSingleArgument) {
                 throw new InvalidEventFormatException();
             }
+
             return new EventCommand(nameAndTime[0], toDateTime(nameAndTime[1]));
         default:
             throw new UnknownCommandException();

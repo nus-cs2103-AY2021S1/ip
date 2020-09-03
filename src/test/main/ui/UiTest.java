@@ -34,7 +34,7 @@ public class UiTest {
         @DisplayName("should return the greeting message")
         public void printGreeting_noInput_greetingMessage() {
             assertEquals("Hello! I'm Stuff\nWhat can I do for you?",
-                    ui.printGreeting());
+                    ui.printGreetingMessage());
         }
     }
 
@@ -225,7 +225,7 @@ public class UiTest {
         @Test
         @DisplayName("should return generic error message")
         public void printError_noInput_errorMessage() {
-            assertEquals("Seems like something went wrong!", ui.printError());
+            assertEquals("Seems like something went wrong!", ui.printErrorMessage());
         }
     }
 }
