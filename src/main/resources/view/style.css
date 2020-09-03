@@ -1,5 +1,8 @@
 #dialog {
     -fx-background-color: honeydew;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-text-alignment: left;
 }
 
 #dialogField {
@@ -9,3 +12,4 @@
 #dialogContainer {
     -fx-background-color: black;
 }
+
