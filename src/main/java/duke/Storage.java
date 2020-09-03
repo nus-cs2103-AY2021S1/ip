@@ -64,7 +64,7 @@ public class Storage {
      *
      * @throws IOException exception occurs when the file is not found
      */
-    public void createFie() throws IOException {
+    public void createFile() throws IOException {
         File file = new File(this.pathName);
         File dukeSave = new File(this.pathName + this.fileName);
         if (!file.exists()) {

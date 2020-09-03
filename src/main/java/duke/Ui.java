@@ -22,18 +22,11 @@ public class Ui {
         return input;
     }
 
-    public void showWelcome() {
-        System.out.println(
-                "Hello from\n" +
-                        " ____        _        \n" +
-                        "|  _ \\ _   _| | _____ \n" +
-                        "| | | | | | | |/ / _ \\\n" +
-                        "| |_| | |_| |   <  __/\n" +
-                        "|____/ \\__,_|_|\\_\\___|\n" +
-                        "____________________________________________________________\n" +
-                        "     Hello! I'm Duke\n" +
-                        "     What can I do for you?\n" +
-                        "____________________________________________________________\n");
+    public String showWelcome() {
+        return "_____________________________________________\n" +
+                "     Hello! I'm Duke\n" +
+                "     What can I do for you?\n" +
+                "_____________________________________________\n";
     }
 
     /**
@@ -44,11 +37,11 @@ public class Ui {
      */
     public String showAdd(Task task) {
 
-        String DukeOutput = "____________________________________________________________\n" +
+        String DukeOutput = "_____________________________________________\n" +
                 "     Got it. I've added this task:\n" +
                 "       " + task.toString() + "\n" +
                 "     Now you have " + this.tasks.size() + " " + "task" + " in the list.\n" +
-                "____________________________________________________________\n";
+                "_____________________________________________\n";
         System.out.println(DukeOutput);
         return DukeOutput;
 
@@ -75,11 +68,11 @@ public class Ui {
     public String showDelete(int index) {
         Task removed = this.tasks.get(index);
         this.tasks.delete(index);
-        String DukeOutput = "____________________________________________________________\n" +
+        String DukeOutput = "_____________________________________________\n" +
                 "     Noted. I've removed this task:\n" +
                 "       " + removed.toString() + "\n" +
                 "     Now you have " + this.tasks.size() + " tasks in the list.\n" +
-                "____________________________________________________________";
+                "_____________________________________________";
         System.out.println(DukeOutput);
         return DukeOutput;
     }
@@ -90,7 +83,7 @@ public class Ui {
      * @return String of current tasks
      */
     public String showList() {
-        String DukeOutput = "____________________________________________________________\n" +
+        String DukeOutput = "_____________________________________________\n" +
                 "Here are the tasks in your list:\n";
 
         for (int i = 0; i < this.tasks.size(); i++) {
@@ -98,13 +91,13 @@ public class Ui {
             DukeOutput = DukeOutput + label + ". " + this.tasks.get(i).toString() + "\n";
         }
 
-        DukeOutput = DukeOutput + "____________________________________________________________";
+        DukeOutput = DukeOutput + "_____________________________________________";
         System.out.println(DukeOutput);
         return DukeOutput;
     }
 
     public String showFind(TaskList matchedTasks) {
-        String DukeOutput = "____________________________________________________________\n";
+        String DukeOutput = "_____________________________________________\n";
         if (matchedTasks.size() == 0) {
             DukeOutput = DukeOutput + "Sorry, Duke can not find a matching task.\n";
         } else {
@@ -114,15 +107,15 @@ public class Ui {
                 DukeOutput = DukeOutput + index + "." + matchedTasks.get(i).toString() + "\n";
             }
         }
-        DukeOutput = DukeOutput + "____________________________________________________________";
+        DukeOutput = DukeOutput + "_____________________________________________";
         System.out.println(DukeOutput);
         return DukeOutput;
     }
 
     public String showBye() {
-        String DukeOutput = "____________________________________________________________\n" +
+        String DukeOutput = "_____________________________________________\n" +
                 "       Bye. Hope to see you again soon!\n" +
-                "____________________________________________________________";
+                "_____________________________________________";
         System.out.println(DukeOutput);
         return DukeOutput;
     }
