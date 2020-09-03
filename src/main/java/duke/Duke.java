@@ -39,7 +39,6 @@ public class Duke {
             ui.showErrorMsg(e);
             tasks = new TaskList();
         }
-        ui.printMsg(ui.startupMsg());
     }
 
     public Duke() {
@@ -51,6 +50,7 @@ public class Duke {
      * Main execution of Duke Chat bot for CLI
      */
     public void run() {
+        ui.printMsg(ui.startupMsg());
         String[] userInputArray;
         boolean validInput;
 
@@ -280,21 +280,24 @@ public class Duke {
         GuiInputArray = Parser.parseCommand(userInput);
         switch (GuiInputArray[0]) {
         case "bye":
-            ui.printMsg(ui.showByeMsg());
+            ui.setGuiOutput(ui.showByeMsg());
+            hasExit = true;
             break;
         case "list":
             if (tasks.isEmpty()) {
-                ui.printMsg(ui.showListEmptyMsg());
+                ui.setGuiOutput(ui.showListEmptyMsg());
             } else {
-                ui.printMsg(ui.showListMsg());
-                ui.printMsg(ui.showTaskList(tasks));
+                ui.setGuiOutput(ui.showListMsg() + "\n" + ui.showTaskList(tasks));
             }
             break;
         case "done":
             if (tasks.isEmpty()) {
-                ui.printMsg(ui.showListEmptyMsg());
+                ui.setGuiOutput(ui.showListEmptyMsg());
             } else {
                 try {
+                    if (GuiInputArray.length <= 1) {
+                        throw new DukeException("Yo! Enter the task number(s).");
+                    }
                     userInput = GuiInputArray[1];
                     int[] tasksArray = Parser.parse(userInput);
                     TaskList doneList = new TaskList();
@@ -307,31 +310,32 @@ public class Duke {
                             task.setDone();
                             doneList.addTask(task);
                         } catch (DukeException e) {
-                            ui.printMsg(ui.showErrorMsg(e));
+                            ui.setGuiOutput(ui.showErrorMsg(e));
                         }
                     }
                     if (!doneList.isEmpty()) {
-                        ui.printMsg(ui.showListDoneMsg());
-                        ui.printMsg(ui.showTaskList(doneList));
+                        ui.setGuiOutput(ui.showListDoneMsg() + "\n" + ui.showTaskList(doneList));
                     }
                 } catch (DukeException e) {
-                    ui.printMsg(ui.showErrorMsg(e));
+                    ui.setGuiOutput(ui.showErrorMsg(e));
                 }
             }
 
             try {
                 storeFile.saveFile(tasks);
             } catch (DukeException e) {
-                ui.printMsg(ui.showErrorMsg(e));
+                ui.setGuiOutput(ui.showErrorMsg(e));
             }
 
             break;
         case "find":
             if (tasks.isEmpty()) {
-                ui.printMsg(ui.showListEmptyMsg());
+                ui.setGuiOutput(ui.showListEmptyMsg());
             } else {
                 try {
-                    ui.printMsg(ui.showFindPromptMsg());
+                    if (GuiInputArray.length <= 1) {
+                        throw new DukeException("Yo! Enter a keyword.");
+                    }
                     userInput = GuiInputArray[1];
                     if (userInput.equals("")) {
                         throw new DukeException("Yo! Enter a keyword.");
@@ -339,77 +343,88 @@ public class Duke {
                     TaskList foundTasks;
                     foundTasks = tasks.findTasks(userInput);
                     if (!foundTasks.isEmpty()) {
-                        ui.printMsg(ui.showFoundMsg(userInput));
-                        ui.printMsg(ui.showTaskList(foundTasks));
+                        ui.setGuiOutput(ui.showFoundMsg(userInput) + "\n" + ui.showTaskList(foundTasks));
                     } else {
-                        ui.printMsg(ui.showNotFoundMsg(userInput));
+                        ui.setGuiOutput(ui.showNotFoundMsg(userInput));
                     }
                 } catch (DukeException e) {
-                    ui.printMsg(ui.showErrorMsg(e));
+                    ui.setGuiOutput(ui.showErrorMsg(e));
                 }
             }
             break;
         case "todo":
             try {
+                if (GuiInputArray.length <= 1) {
+                    throw new DukeException("Yo! Task details are missing.");
+                }
                 userInput = GuiInputArray[1];
                 if (userInput.equals("")) {
                     throw new DukeException("Yo! Task details are missing.");
                 }
                 Task toDo = new Todo(userInput);
                 tasks.addTask(toDo);
-                ui.printMsg(ui.showTaskAddedMsg(toDo));
+                ui.setGuiOutput(ui.showTaskAddedMsg(toDo));
             } catch (DukeException e) {
-                ui.printMsg(ui.showErrorMsg(e));
+                ui.setGuiOutput(ui.showErrorMsg(e));
             }
 
             try {
                 storeFile.saveFile(tasks);
             } catch (DukeException e) {
-                ui.printMsg(ui.showErrorMsg(e));
+                ui.setGuiOutput(ui.showErrorMsg(e));
             }
 
             break;
         case "deadline":
             try {
+                if (GuiInputArray.length <= 1) {
+                    throw new DukeException("Yo! Command Syntax Error. '<Details> /by or /at <dd/MM/yy [HH:MM]>'");
+                }
                 userInput = GuiInputArray[1];
                 userInputArray = Parser.parseDetails(userInput);
                 Task deadLine = new Deadline(userInputArray[0], userInputArray[1]);
                 tasks.addTask(deadLine);
-                ui.printMsg(ui.showTaskAddedMsg(deadLine));
+                ui.setGuiOutput(ui.showTaskAddedMsg(deadLine));
             } catch (DukeException e) {
-                ui.printMsg(ui.showErrorMsg(e));
+                ui.setGuiOutput(ui.showErrorMsg(e));
             }
 
             try {
                 storeFile.saveFile(tasks);
             } catch (DukeException e) {
-                ui.printMsg(ui.showErrorMsg(e));
+                ui.setGuiOutput(ui.showErrorMsg(e));
             }
 
             break;
         case "event":
             try {
+                if (GuiInputArray.length <= 1) {
+                    throw new DukeException("Yo! Command Syntax Error. '<Details> /by or /at <dd/MM/yy [HH:MM]>'");
+                }
                 userInput = GuiInputArray[1];
                 userInputArray = Parser.parseDetails(userInput);
                 Task event = new Event(userInputArray[0], userInputArray[1]);
                 tasks.addTask(event);
-                ui.printMsg(ui.showTaskAddedMsg(event));
+                ui.setGuiOutput(ui.showTaskAddedMsg(event));
             } catch (DukeException e) {
-                ui.printMsg(ui.showErrorMsg(e));
+                ui.setGuiOutput(ui.showErrorMsg(e));
             }
 
             try {
                 storeFile.saveFile(tasks);
             } catch (DukeException e) {
-                ui.printMsg(ui.showErrorMsg(e));
+                ui.setGuiOutput(ui.showErrorMsg(e));
             }
 
             break;
         case "delete":
             if (tasks.isEmpty()) {
-                ui.printMsg(ui.showListEmptyMsg());
+                ui.setGuiOutput(ui.showListEmptyMsg());
             } else {
                 try {
+                    if (GuiInputArray.length <= 1) {
+                        throw new DukeException("Yo! Enter the task numbers(s).");
+                    }
                     userInput = GuiInputArray[1];
                     TaskList deletedTasks = new TaskList();
                     int[] tasksArray = Parser.parse(userInput);
@@ -422,33 +437,32 @@ public class Duke {
                             tasks.removeTask(index);
                             deletedTasks.addTask(task);
                         } catch (DukeException e) {
-                            ui.printMsg(ui.showErrorMsg(e));
+                            ui.setGuiOutput(ui.showErrorMsg(e));
                         }
                     }
                     if (!deletedTasks.isEmpty()) {
-                        ui.printMsg(ui.showTaskDeleteMsg());
-                        ui.printMsg(ui.showTaskList(deletedTasks));
+                        ui.setGuiOutput(ui.showTaskDeleteMsg() + "\n" + ui.showTaskList(deletedTasks));
                     }
                 } catch (DukeException e) {
-                    ui.printMsg(ui.showErrorMsg(e));
+                    ui.setGuiOutput(ui.showErrorMsg(e));
                 }
             }
 
             try {
                 storeFile.saveFile(tasks);
             } catch (DukeException e) {
-                ui.printMsg(ui.showErrorMsg(e));
+                ui.setGuiOutput(ui.showErrorMsg(e));
             }
 
             break;
         case "help":
-            ui.printMsg(ui.showHelp());
+            ui.setGuiOutput(ui.showHelp());
             break;
         default:
             try {
                 throw new DukeException("Unrecognised Command :(, type 'help' for available commands.");
             } catch (DukeException e) {
-                ui.printMsg(ui.showErrorMsg(e));
+                ui.setGuiOutput(ui.showErrorMsg(e));
             }
         }
     }
@@ -462,7 +476,7 @@ public class Duke {
 
     public String getResponse() {
         runGui();
-        return "test";
+        return ui.getGuiOutput();
     }
 
     public boolean hasExit() {

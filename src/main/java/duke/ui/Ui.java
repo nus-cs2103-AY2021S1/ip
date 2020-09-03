@@ -19,6 +19,7 @@ public class Ui {
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
     private Scanner scanner;
+    private String guiOutput;
 
     /**
      * Constructor to create a scanner object for user inputs.
@@ -28,11 +29,18 @@ public class Ui {
     }
 
     /**
-     * Displays a startup message with Duke's logo and greeting.
+     * Displays a startup message with Duke's logo and greeting for CLI.
      */
     public String startupMsg() {
         String output = "";
         output += logo + "\n";
+        output += duke + "Hi I'm Duke! \n";
+        output += duke + "What can I do for you? \n";
+        return output;
+    }
+
+    public String guiStartupMsg() {
+        String output = "";
         output += duke + "Hi I'm Duke! \n";
         output += duke + "What can I do for you? \n";
         return output;
@@ -185,10 +193,12 @@ public class Ui {
         System.out.println(msg);
     }
 
-    public String getMsg(String msg) {
-        String outputMsg = "";
-        outputMsg += msg + "\n";
-        return msg;
+    public void setGuiOutput(String output) {
+        guiOutput = output;
+    }
+
+    public String getGuiOutput() {
+        return guiOutput;
     }
 
 }
