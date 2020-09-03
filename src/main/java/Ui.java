@@ -4,8 +4,8 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 
 public class Ui {
-    private static final String GREETING = "Ah another dude trying to be productive. Sure. \n"
-                                            + "What do you want, sweetie? \n";
+    private static final String GREETING = "Ah another dude trying to be productive. " +
+                                            "Sure. What do you want, sweetie? \n";
     private static final String BYE = "That's all? Sure. See you again (hopefully LOL).";
     private static final String LIST_REPLY = "Checking the whole list doesn't make you finish anything faster... \n";
     private static final String FIND_REPLY = "Found 'em. But at what cost... \n";
