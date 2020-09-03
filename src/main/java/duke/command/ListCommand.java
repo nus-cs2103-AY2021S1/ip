@@ -28,10 +28,12 @@ public class ListCommand implements Command {
             return " You have no task to complete! *WOOF*\n";
         } else {
             StringBuilder s = new StringBuilder(" Here are the tasks in your list *Woof*:\n");
+
             for (Task task : listOfTask) {
                 s.append("   ").append(listOfTask.indexOf(task) + 1).append(".")
                         .append(task.toString()).append("\n");
             }
+
             return s.toString();
         }
     }

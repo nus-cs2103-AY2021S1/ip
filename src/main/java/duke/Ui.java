@@ -6,14 +6,14 @@ package duke;
  * method that takes in a <code>String</code> object and prints the string in the desired format to users.
  */
 public class Ui {
-    private static final String lines = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+    private static final String LINES = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
 
     public void print (String message) {
-        System.out.println(lines + message + lines);
+        System.out.println(LINES + message + LINES);
     }
 
     public String printFormat (String message) {
-        return lines + message + lines;
+        return LINES + message + LINES;
     }
 
     /**
@@ -35,11 +35,11 @@ public class Ui {
     /**
      * Returns a string representation of the total number of <code>Task</code> in the list.
      *
-     * @param i the number of <code>Task</code> in a list
+     * @param total the number of <code>Task</code> in a list
      * @return a string representation of the total number of <code>Task</code> in the list.
      */
-    public String displayTotal(int i) {
-        return " Now you have " + i + " tasks in the list. Keep going!!\n";
+    public String displayTotal(int total) {
+        return " Now you have " + total + " tasks in the list. Keep going!!\n";
     }
 
 }
