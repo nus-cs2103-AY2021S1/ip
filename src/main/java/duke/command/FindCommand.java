@@ -23,17 +23,13 @@ public class FindCommand implements Command {
             }
         }
         if (list.size() == 0) {
-            System.out.println("There are no task which matches this keyword");
+            ui.setResponse("There is no task which matches this keyword");
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            String response = "Here are the matching tasks in your list:\n";
             for (Task task : list) {
-                System.out.println(task);
+                response += task + "\n";
             }
+            ui.setResponse(response);
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

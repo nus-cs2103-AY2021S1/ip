@@ -8,17 +8,17 @@ import java.time.format.DateTimeFormatter;
  * and duration of a task.
  */
 public class Event extends Task {
-    protected LocalDate duration;
+    protected LocalDate at;
 
     /**
      * Constructor for an Event object.
      *
      * @param name The name of the event.
-     * @param duration The duration of the event.
+     * @param at The time which the event is held at.
      */
-    public Event(String name, LocalDate duration) {
+    public Event(String name, LocalDate at) {
         super(name);
-        this.duration = duration;
+        this.at = at;
     }
 
     /**
@@ -27,7 +27,7 @@ public class Event extends Task {
      * @return A LocalDate which represents the duration of the event.
      */
     public LocalDate getDuration() {
-        return duration;
+        return at;
     }
 
     /**
@@ -39,6 +39,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + duration.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
