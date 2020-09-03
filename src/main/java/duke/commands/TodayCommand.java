@@ -29,6 +29,7 @@ public class TodayCommand extends Command {
 
     private ArrayList<Task> getTasksToday(TaskList taskList) {
         ArrayList<Task> tasksToday = new ArrayList<>();
+        // todo: change to stream
         taskList.getTasks().forEach(task -> {
             if (task instanceof TimeBased) {
                 TimeBased timeBased = (TimeBased) task;

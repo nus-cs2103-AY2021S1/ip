@@ -3,8 +3,9 @@ package duke.commands;
 import static duke.utils.Messages.MESSAGE_FIND;
 import static duke.utils.Messages.MESSAGE_FIND_NO_MATCH;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
@@ -34,7 +35,7 @@ public class FindCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList taskList) {
-        ArrayList<Task> matchedTasks = getMatchedTasks(taskList);
+        List<Task> matchedTasks = getMatchedTasks(taskList);
         String response = getResponse(matchedTasks);
         return new CommandResult(response, false);
     }
@@ -47,23 +48,15 @@ public class FindCommand extends Command {
         }
     }
 
-    private ArrayList<Task> getMatchedTasks(TaskList taskList) {
-        ArrayList<Task> matchedTasks = new ArrayList<>();
-        ArrayList<Task> allTasks = taskList.getTasks();
-        allTasks.forEach(task -> {
-            if (matchesAllWords(task)) {
-                matchedTasks.add(task);
-            }
-        });
-        return matchedTasks;
+    private List<Task> getMatchedTasks(TaskList taskList) {
+        return taskList.getTasks()
+                .stream()
+                .filter(this::matchesAllWords)
+                .collect(Collectors.toList());
     }
 
     private boolean matchesAllWords(Task task) {
-        for (String word : searchWords) {
-            if (!(task.getDescription().contains(word))) {
-                return false;
-            }
-        }
-        return true;
+        return Arrays.stream(searchWords)
+                .allMatch(word -> task.getDescription().contains(word));
     }
 }

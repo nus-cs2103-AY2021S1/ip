@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
 
 import duke.exceptions.DukeDateTimeParseException;
 import duke.utils.DukeDateTime;
@@ -48,27 +50,34 @@ public class DukeDateTimeParser {
     }
 
     private static int patternWithTimeIndex(String input) {
-        for (int i = 0; i < PATTERNS_WITH_TIME.length; i++) {
-            try {
-                LocalDateTime.parse(input, DateTimeFormatter.ofPattern(PATTERNS_WITH_TIME[i]));
-                return i;
-            } catch (DateTimeParseException ignored) {
-                continue;
-            }
-        }
-        return -1;
+        OptionalInt index = IntStream.range(0, PATTERNS_WITH_TIME.length)
+                .filter(i -> isValidDateTimeFormat(input, PATTERNS_WITH_TIME[i]))
+                .findFirst();
+        return index.orElse(-1);
     }
 
     private static int patternIndex(String input) {
-        for (int i = 0; i < PATTERNS.length; i++) {
-            try {
-                LocalDate.parse(input, DateTimeFormatter.ofPattern(PATTERNS[i]));
-                return i;
-            } catch (DateTimeParseException ignored) {
-                continue;
-            }
-        }
-        return -1;
+        OptionalInt index = IntStream.range(0, PATTERNS.length)
+                .filter(i -> isValidDateFormat(input, PATTERNS[i]))
+                .findFirst();
+        return index.orElse(-1);
     }
 
+    private static boolean isValidDateTimeFormat(String input, String format) {
+        try {
+            LocalDateTime.parse(input, DateTimeFormatter.ofPattern(format));
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    private static boolean isValidDateFormat(String input, String format) {
+        try {
+            LocalDate.parse(input, DateTimeFormatter.ofPattern(format));
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
 }
