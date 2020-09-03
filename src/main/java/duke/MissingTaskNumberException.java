@@ -1,3 +1,5 @@
+package duke;
+
 public class MissingTaskNumberException extends Exception{
     
     public MissingTaskNumberException(String message) {

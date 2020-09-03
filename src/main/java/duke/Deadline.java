@@ -1,3 +1,5 @@
+package duke;
+
 public class Deadline extends Task {
     // Deadlines: Tasks that need to be done before a specific time date/time
     // Example: Submit report by 11/10/2019 5pm

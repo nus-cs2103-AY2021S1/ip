@@ -1,3 +1,5 @@
+package duke;
+
 public class Event extends Task {
     // Events: Tasks that start at a specific time and ends at a specific time
     // Example: Team project meeting on 2/10/2019 2-4pm
