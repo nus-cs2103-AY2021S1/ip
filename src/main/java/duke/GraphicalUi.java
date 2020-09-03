@@ -38,7 +38,6 @@ public class GraphicalUi extends Ui {
     public void processAddMessage(Task task, int count) {
         responseMessage += "Quack! I have added: " + task + "\n";;
         displayTaskCount(count);
-        System.out.println(LINE);
     }
 
     @Override

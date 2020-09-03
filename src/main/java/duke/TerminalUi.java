@@ -21,9 +21,9 @@ public class TerminalUi extends Ui {
     public void printFormattedMessage(String... response) {
         System.out.println(LINE);
         for (String string : response) {
-            System.out.print(string);
+            System.out.println(string);
         }
-        System.out.println("\n" + LINE);
+        System.out.println(LINE);
     }
 
     @Override
@@ -34,42 +34,38 @@ public class TerminalUi extends Ui {
 
     @Override
     public void processError(String errorMessage) {
-        System.out.println(LINE);
-        System.out.println(errorMessage);
-        System.out.println(LINE);
+        printFormattedMessage(errorMessage);
     }
 
     @Override
     public void listStoredTasks(List<Task> storedTasks) {
         if (storedTasks.isEmpty()) {
-            System.out.println(LINE);
-            System.out.println("No tasks stored...");
-            System.out.println(LINE);
+            printFormattedMessage("No tasks stored...");
         } else {
-            System.out.println(LINE);
-            System.out.println("Quack! Here are the tasks in your list:");
             int count = 1;
+            String listedTasksString = "";
             for (Task task : storedTasks) {
-                System.out.println(count + ". " + task);
+                listedTasksString += count + ". " + task + "\n";
                 count++;
             }
-            System.out.println(LINE);
+            printFormattedMessage("Quack! Here are the tasks in your list:", listedTasksString);
         }
     }
 
     @Override
     public void processDoneMessage(Task task) {
-        printFormattedMessage("Quack! I have marked this task as done: \n" + task);
+        printFormattedMessage("Quack! I have marked this task as done:", task.toString());
     }
 
     @Override
     public void processAddMessage(Task task, int count) {
-        printFormattedMessage("Quack! I have added: " + task + "\n", displayTaskCount(count));
+        printFormattedMessage("Quack! I have added: ", task.toString(), displayTaskCount(count));
     }
 
     @Override
     public void processDeleteMessage(Task taskToDelete, int count) {
-        printFormattedMessage("Quack! I have deleted this task: \n" + taskToDelete + "\n" + displayTaskCount(count));
+        printFormattedMessage("Quack! I have deleted this task: ",
+                taskToDelete.toString(), displayTaskCount(count));
     }
 
     public String displayTaskCount(int numOfTasks) {
@@ -83,18 +79,15 @@ public class TerminalUi extends Ui {
     @Override
     public void processResultTaskList(List<Task> resultTaskList) {
         if (resultTaskList.isEmpty()) {
-            System.out.println(LINE);
-            System.out.println("No tasks matched...");
-            System.out.println(LINE);
+            printFormattedMessage("No tasks matched...");
         } else {
-            System.out.println(LINE);
-            System.out.println("Quack! Here are the tasks in your list that match:");
             int count = 1;
+            String resultTasksString = "";
             for (Task task : resultTaskList) {
-                System.out.println(count + ". " + task);
+                resultTasksString += count + ". " + task + "\n";
                 count++;
             }
-            System.out.println(LINE);
+            printFormattedMessage("Quack! Here are the tasks in your list that match:", resultTasksString);
         }
     }
 }
