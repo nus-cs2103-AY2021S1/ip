@@ -27,18 +27,19 @@ public class DukeStorage implements Storage {
     public DukeStorage(Path filePath) throws IOException {
         this.filePath = filePath;
         try {
-            createIfNotExist();
-            loadSaveFile();
+            createSaveFile();
+            loadData();
         } catch (IOException e) {
             throw new IOException("An error has occurred when trying to create the save file!");
         }
     }
 
-    private void createIfNotExist() throws IOException {
+    private void createSaveFile() throws IOException {
         int len = filePath.getNameCount();
         Path directoriesToCreate = filePath.subpath(0, len - 1);
         Files.createDirectories(directoriesToCreate);
-        if (!java.nio.file.Files.exists(filePath)) {
+        boolean saveFileExists = java.nio.file.Files.exists(filePath);
+        if (!saveFileExists) {
             new File(filePath.toString()).createNewFile();
         }
     }
@@ -103,7 +104,7 @@ public class DukeStorage implements Storage {
         return saveLines;
     }
 
-    private String[] loadSaveFile() {
+    private String[] loadData() {
         // Prevent saving while loading
         isActive = false;
         String[] result = new String[0];
