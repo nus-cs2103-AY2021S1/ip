@@ -36,8 +36,7 @@ public class DukeCommandSetTest {
                 UnknownCommandException.class, () -> commandSet.getCommand(invalidCommandName));
 
         String line = UiPrint.getLine(UiPrint.STAR, 50);
-        String errMessage =
-                line + "\nOOPS!!! I'm sorry, but I don't know what that means :-(\n" + line;
+        String errMessage = "\nOOPS!!! I'm sorry, but I don't know what that means :-(\n";
 
         assertEquals(errMessage, exception.getMessage());
     }

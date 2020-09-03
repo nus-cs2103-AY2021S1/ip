@@ -12,7 +12,6 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.UnknownCommandException;
-import duke.ui.UiPrint;
 
 /**
  * DukeCommandSet contains all supported commands in Duke, and provides
@@ -52,9 +51,7 @@ public class DukeCommandSet {
      */
     public Command getCommand(String commandName) throws UnknownCommandException {
         if (!commandSet.containsKey(commandName)) {
-            String line = UiPrint.getLine(UiPrint.STAR, 50);
-            String errMessage =
-                    line + "\nOOPS!!! I'm sorry, but I don't know what that means :-(\n" + line;
+            String errMessage = "\nOOPS!!! I'm sorry, but I don't know what that means :-(\n";
 
             throw new UnknownCommandException(errMessage);
         }

@@ -33,7 +33,15 @@ public class DoneCommand extends Command {
         Task task = duke.getTaskList().getTask(taskIndex);
         task.markAsDone();
 
-        duke.getUi().reportDoneTask(task);
+        response(task, duke);
+    }
+
+    private void response(Task task, Duke duke) {
+        if (duke.getState().getUseGui()) {
+            duke.getGuiResponse().reportDoneTask(task);
+        } else {
+            duke.getUiResponse().reportDoneTask(task);
+        }
     }
 
     private boolean tryParseInt(String str) {
@@ -48,8 +56,7 @@ public class DoneCommand extends Command {
     private void checkException(int taskIndex, String str, Duke duke) {
         if (duke.getTaskList().getSize() <= taskIndex || taskIndex < 0) {
             String line = UiPrint.getLine(UiPrint.STAR, 50);
-            String errMessage =
-                    line + "\nSorry " + str + " is not a valid index\n" + line;
+            String errMessage = "\nSorry " + str + " is not a valid index\n";
             throw new InvalidIndexException(errMessage);
         }
     }

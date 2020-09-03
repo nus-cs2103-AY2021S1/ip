@@ -3,7 +3,7 @@ package duke.ui;
 import duke.Duke;
 import duke.task.Task;
 
-public class UiStub extends Ui {
+public class UiStub extends UiResponse {
 
     private UiSideEffects sideEffects = UiSideEffects.getInstance();
 

@@ -31,8 +31,7 @@ public class ToDoTest {
         Exception exception = assertThrows(NoDescriptionException.class, () -> ToDo.createToDo(""));
 
         String line = UiPrint.getLine(UiPrint.STAR, 50);
-        String errMessage =
-                line + "\nOOPS!!! The description of a todo cannot be empty.\n" + line;
+        String errMessage = "\nOOPS!!! The description of a todo cannot be empty.\n";
 
         assertEquals(errMessage, exception.getMessage());
     }

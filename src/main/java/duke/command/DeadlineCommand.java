@@ -24,6 +24,14 @@ public class DeadlineCommand extends Command {
     public void execute(String str, Duke duke) {
         Deadline newDeadline = Deadline.createDeadline(str);
         duke.getTaskList().addTask(newDeadline);
-        duke.getUi().reportNewTask(newDeadline);
+        response(newDeadline, duke);
+    }
+
+    private void response(Deadline newDeadline, Duke duke) {
+        if (duke.getState().getUseGui()) {
+            duke.getGuiResponse().reportNewTask(newDeadline);
+        } else {
+            duke.getUiResponse().reportNewTask(newDeadline);
+        }
     }
 }

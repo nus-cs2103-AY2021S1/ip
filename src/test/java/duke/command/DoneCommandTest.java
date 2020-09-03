@@ -48,8 +48,7 @@ public class DoneCommandTest {
                 InvalidIndexException.class, () -> command.execute(invalidInput, dukeStub));
 
         String line = UiPrint.getLine(UiPrint.STAR, 50);
-        String errMessage =
-                line + "\nSorry " + invalidInput + " is not a valid index\n" + line;
+        String errMessage = "\nSorry " + invalidInput + " is not a valid index\n";
 
         assertEquals(errMessage, exception.getMessage());
     }

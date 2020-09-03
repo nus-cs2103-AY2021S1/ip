@@ -6,10 +6,11 @@ import duke.command.CommandParser;
 import duke.data.DukeCommandSet;
 import duke.data.DukeState;
 import duke.data.DukeTaskList;
+import duke.gui.GuiResponse;
 import duke.input.UserInput;
 import duke.storage.DukeStorage;
 import duke.storage.TaskStorage;
-import duke.ui.Ui;
+import duke.ui.UiResponse;
 
 /**
  * Duke is a console program that can save tasks and modify saved tasks.
@@ -18,16 +19,21 @@ public class Duke {
 
     protected DukeCommandSet commandSet;
     protected DukeState state;
-    protected Ui ui;
+    protected UiResponse uiResponse;
+    protected GuiResponse guiResponse;
     protected CommandParser commandParser;
     protected DukeTaskList taskList;
     protected TaskStorage taskStorage;
     protected DukeStorage storage;
 
-    protected Duke() {
+    /**
+     * Constructs a Duke.
+     */
+    public Duke() {
         commandSet = new DukeCommandSet();
         state = new DukeState();
-        ui = new Ui(this);
+        uiResponse = new UiResponse(this);
+        guiResponse = new GuiResponse(this);
         commandParser = new CommandParser();
         taskList = new DukeTaskList();
         try {
@@ -38,16 +44,47 @@ public class Duke {
         storage = new DukeStorage(this);
     }
 
-    private void run() throws IOException {
+    //---------------------------------------------------------------------------
+
+    /**
+     * Sets up things at start.
+     * @param useGui going to use gui or not
+     */
+    public void onStart(boolean useGui) {
         storage.loadSavedTasks();
-        ui.greet();
+        state.setUseGui(useGui);
+    }
+
+    public void onExit() throws IOException {
+        storage.saveCurrentTasks();
+    }
+
+    /**
+     * Gets the response string based on input.
+     * @param input input string
+     * @return
+     */
+    public String getResponse(String input) {
+        commandParser.parse(input, this);
+        return guiResponse.getResponse();
+    }
+    //---------------------------------------------------------------------------
+
+    /**
+     * Runs the Duke console program.
+     * @throws IOException
+     */
+    public void run() throws IOException {
+        onStart(false);
+
+        uiResponse.greet();
 
         while (!state.getExitLoop()) {
             String inputLine = UserInput.getOneLine();
             commandParser.parse(inputLine, this);
         }
 
-        storage.saveCurrentTasks();
+        onExit();
     }
 
     /**
@@ -60,6 +97,7 @@ public class Duke {
         new Duke().run();
     }
 
+    //region getters
     public DukeCommandSet getCommandSet() {
         return commandSet;
     }
@@ -68,8 +106,12 @@ public class Duke {
         return state;
     }
 
-    public Ui getUi() {
-        return ui;
+    public UiResponse getUiResponse() {
+        return uiResponse;
+    }
+
+    public GuiResponse getGuiResponse() {
+        return guiResponse;
     }
 
     public DukeTaskList getTaskList() {
@@ -83,4 +125,5 @@ public class Duke {
     public DukeStorage getStorage() {
         return storage;
     }
+    //endregion
 }

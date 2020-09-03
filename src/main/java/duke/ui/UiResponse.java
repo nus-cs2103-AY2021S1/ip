@@ -3,23 +3,24 @@ package duke.ui;
 import java.util.ArrayList;
 
 import duke.Duke;
+import duke.exception.DukeException;
 import duke.task.Task;
 
 /**
- * Ui interacts with users by printing out messages in console.
+ * UiResponse interacts with users by printing out messages in console.
  * e.g. When the user enters a command, the command function would be
- * executed, and methods in Ui is usually called in by the execute function
+ * executed, and methods in UiResponse is usually called in by the execute function
  * to respond the user.
  */
-public class Ui {
+public class UiResponse {
 
     private Duke duke;
 
     /**
-     * Constructs a Ui.
-     * @param duke the Duke that will use this Ui
+     * Constructs a UiResponse.
+     * @param duke the Duke that will use this UiResponse
      */
-    public Ui(Duke duke) {
+    public UiResponse(Duke duke) {
         this.duke = duke;
     }
 
@@ -123,7 +124,7 @@ public class Ui {
      * Shows the input tasks to the user.
      * @param tasks tasks to show
      */
-    public void reportGiveTasks(ArrayList<Task> tasks) {
+    public void reportGivenTasks(ArrayList<Task> tasks) {
         UiPrint.drawLine(UiPrint.STAR, 50);
 
         System.out.println("Here are the matching tasks in your list:");
@@ -135,6 +136,18 @@ public class Ui {
                 System.out.println(i + 1 + ". " + tasks.get(i));
             }
         }
+
+        UiPrint.drawLine(UiPrint.STAR, 50);
+    }
+
+    /**
+     * Reports the input exception to user.
+     * @param exception input exception
+     */
+    public void reportException(DukeException exception) {
+        UiPrint.drawLine(UiPrint.STAR, 50);
+
+        System.out.println(exception.getMessage());
 
         UiPrint.drawLine(UiPrint.STAR, 50);
     }
