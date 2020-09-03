@@ -13,6 +13,7 @@ public class AddCommand extends Command {
 
     /**
      * Build a AddCommand with the Task being added.
+     *
      * @param added the Task being added.
      */
     public AddCommand(Task added) {
@@ -21,25 +22,27 @@ public class AddCommand extends Command {
 
     /**
      * When executing a AddCommand, first try parse the time of the task if it is an instance of deadline,
-     * then add the task to the provided TaskList, print the add message of the UI,
+     * then add the task to the provided TaskList,
      * and update the change in the hard disk.
+     *
      * @param tasks TaskList.
      * @param ui User Interface.
      * @param storage Storage.
-     * @throws AlisonException when Command failed to be executed.
+     * @return the add message of the UI
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws AlisonException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws AlisonException {
+        String error = "";
         if (task instanceof Deadline) {
             try {
                 ((Deadline) task).parseTime();
             } catch (AlisonException alisonException) {
-                System.out.println(alisonException.getMessage());
+                error += alisonException.getMessage() + "\n";
             }
         }
         tasks.add(task);
-        ui.addTaskMsg(task, tasks);
         storage.update(tasks);
+        return error + ui.addTaskMsg(task, tasks);
     }
 
 }

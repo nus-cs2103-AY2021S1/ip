@@ -19,7 +19,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✗"); //return ✓ or ✗ symbols
+        return (isDone ? "\u2713": "\u2718");
     }
 
     public void markAsDone() {
@@ -28,6 +28,7 @@ public class Task {
 
     /**
      * This is a string conversion method.
+     *
      * @return the formatted String to be wrote in the text file.
      */
     public String savedFormat() {

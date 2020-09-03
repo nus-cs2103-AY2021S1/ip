@@ -47,6 +47,9 @@ public class Parser {
         String command = words[0];
         if (words.length == 1) {
             switch (command) {
+            case "hi":
+            case "hello":
+                return new GreetingCommand();
             case "bye":
                 return new ExitCommand();
             case "list":
