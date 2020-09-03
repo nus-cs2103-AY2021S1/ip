@@ -31,10 +31,12 @@ public class Main extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets a response from the input.
+     *
+     * @param input Input string
+     * @return String describing the response to the input.
      */
     public String getResponse(String input) {
-        return duke.runDukeGui(input);
+        return this.duke.getResponseForGui(input);
     }
 }

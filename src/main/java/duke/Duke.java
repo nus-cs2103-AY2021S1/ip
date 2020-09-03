@@ -10,9 +10,6 @@ public class Duke {
     /** UI for Duke to display messages. */
     private final Ui ui;
 
-    /** Storage for Duke to store tasks. */
-    private final Storage storage;
-
     /** Parser for Duke to parse inputs. */
     private final Parser parser;
 
@@ -24,8 +21,9 @@ public class Duke {
     public Duke(boolean hasGui) {
         TaskList taskList = new TaskList();
         this.ui = new Ui(hasGui);
-        this.storage = new Storage("../data", "../data/duke.txt", this.ui, taskList);
-        this.parser = new Parser(this.storage);
+        Storage storage = new Storage("../data", "../data/duke.txt", this.ui, taskList);
+        storage.checkSavedFile();
+        this.parser = new Parser(storage);
     }
 
     /**
@@ -35,16 +33,16 @@ public class Duke {
      */
     public static void main(String[] args) {
         Duke duke = new Duke(false);
-        duke.runDukeCli();
+        duke.runDukeForCli();
     }
 
     /**
-     * Runs Duke with GUI.
+     * Retrieves a response for the GUI.
      *
      * @param input Input string.
      * @return Result of feeding Parser the input.
      */
-    public String runDukeGui(String input) {
+    public String getResponseForGui(String input) {
         try {
             return this.parser.processInput(input);
         } catch (DukeInputException e) {
@@ -53,10 +51,9 @@ public class Duke {
     }
 
     /**
-     * Runs Duke with CLI.
+     * Runs Duke for the CLI.
      */
-    private void runDukeCli() {
-        this.storage.checkSavedFile();
+    private void runDukeForCli() {
         this.ui.displayIntroduction();
         this.readInputs();
     }
