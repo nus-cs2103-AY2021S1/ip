@@ -2,19 +2,29 @@ package duke;
 
 import java.util.Scanner;
 
-
+/**
+ * Duke is the main logic of the program.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke Object.
+     * 
+     * @param filePath a new file will be created in the stated filePath.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.loadData());
     }
 
+    /**
+     * Consists of the logic of the program.
+     */
     public void run() {
 
         ui.mochaIntroduction();
@@ -56,7 +66,7 @@ public class Duke {
                 } else {
                     String horizontalLine = "_______________________________________________________";
                     
-                    throw new CommandNotRecognisedException(horizontalLine
+                    throw new CommandNotRecognizedException(horizontalLine
                             + "\r\n"
                             + "Oops! I couldn't understand what you mean :("
                             + "\r\n"
@@ -66,7 +76,7 @@ public class Duke {
                 System.out.println(e.getMessage());
             } catch (MissingTaskNumberException e) {
                 System.out.println(e.getMessage());
-            } catch (CommandNotRecognisedException e) {
+            } catch (CommandNotRecognizedException e) {
                 System.out.println(e.getMessage());
 //            } catch (TaskDoesNotExist e) {
 //                System.out.println(e.getMessage());
@@ -74,7 +84,12 @@ public class Duke {
             }
         }
     }
-    
+
+    /**
+     * Driver of the program.
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

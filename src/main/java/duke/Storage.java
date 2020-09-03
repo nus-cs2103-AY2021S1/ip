@@ -10,13 +10,19 @@ import java.util.Scanner;
  * Deals with loading tasks from the file and saving tasks in the file
  */
 public class Storage {
-    private String path; 
-    
-    
+    private String path;
+
+    /**
+     * Constructor of Storage object
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.path = filePath;
     }
-    
+
+    /**
+     * Creates a file and necessary directories if non-existent.
+     */
     public void createFile() {
         try {
             
@@ -28,7 +34,12 @@ public class Storage {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * Loads the data from the hard drive.
+     * 
+     * @return a list of previously recorded Tasks.
+     */
     public ArrayList<Task> loadData() {
         String savedTask;
         ArrayList<Task> tasks = new ArrayList<>();
@@ -78,7 +89,12 @@ public class Storage {
         return tasks;
         
     }
-    
+
+    /**
+     * Writes to File at the end of the program
+     * 
+     * @param tasks Takes in the most updated list of Tasks.
+     */
     public void writeToFile(ArrayList<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(path);
