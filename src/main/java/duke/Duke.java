@@ -7,7 +7,7 @@ import duke.command.Command;
  * tasks from the user input and store the them in a list.
  *
  * @author yuxuan.
- * @version v0.3.
+ * @version v0.4.
  * @since 2020-08-15.
  */
 public class Duke {
@@ -27,38 +27,25 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            ui.setResponse("File can't be loaded.");
+            ui.showResponse();
             tasks = new TaskList();
         }
     }
 
-    /**
-     * Reads user input and executes the type of reply accordingly.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
+    public String welcomeMessage() {
+        return ui.showWelcome();
     }
 
-    /**
-     * Initialises Duke and runs the chat bot.
-     *
-     * @param args an array of command-line arguments for Duke to read.
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public String getResponse(String input) {
+        String response;
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            response = ui.showResponse();
+        } catch (DukeException e) {
+            response = e.getMessage();
+        }
+        return response;
     }
 }

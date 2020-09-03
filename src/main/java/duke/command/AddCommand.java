@@ -9,6 +9,7 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.TaskType;
 import duke.task.ToDo;
 
@@ -36,25 +37,30 @@ public class AddCommand implements Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
+            Task task = null;
+            String response = "Got it. I've added this task:\n";
             if (type == TaskType.TODO) {
-                tasks.addTask(new ToDo(name));
+                task = new ToDo(name);
             } else if (type == TaskType.DEADLINE) {
                 LocalDate by = LocalDate.parse(time);
-                tasks.addTask(new Deadline(name, by));
+                task = new Deadline(name, by);
             } else if (type == TaskType.EVENT) {
                 LocalDate at = LocalDate.parse(time);
-                tasks.addTask(new Event(name, at));
+                task = new Event(name, at);
             }
+            tasks.addTask(task);
             storage.updateDataFile(tasks.getList());
+            response += task + "\n";
+            if (tasks.getList().size() > 1) {
+                response += "Now you have " + tasks.getList().size() + " tasks in your list.";
+            } else {
+                response += "Now you have 1 task in your list.";
+            }
+            ui.setResponse(response);
         } catch (IOException error) {
-            error.printStackTrace();
+            ui.setResponse(error.getMessage());
         } catch (DateTimeException error) {
-            System.out.println("Please provide a valid date and time");
+            ui.setResponse("Please provide a valid date and time");
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

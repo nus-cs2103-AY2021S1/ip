@@ -12,17 +12,13 @@ public class ListCommand implements Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> list = tasks.getList();
         if (list.size() == 0) {
-            System.out.println("There are no tasks in your list");
+            ui.setResponse("There are no tasks in your list");
         } else {
-            System.out.println("Here are the tasks in your list:");
+            String response = "Here are the tasks in your list:\n";
             for (int i = 1; i < list.size() + 1; i++) {
-                System.out.println(i + ". " + list.get(i - 1));
+                response += i + ". " + list.get(i - 1) + "\n";
             }
+            ui.setResponse(response);
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

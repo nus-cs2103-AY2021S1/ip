@@ -17,19 +17,17 @@ public class DoneCommand implements Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int number = Integer.parseInt(item) - 1;
+            String response = "Nice! I've marked this task as done:\n";
             tasks.markAsDone(number);
+            response += tasks.getList().get(number);
             storage.updateDataFile(tasks.getList());
+            ui.setResponse(response);
         } catch (IOException error) {
-            error.printStackTrace();
+            ui.setResponse(error.getMessage());
         } catch (NumberFormatException error) {
-            System.out.println("Please provide a valid task number to mark as done");
+            ui.setResponse("Please provide a valid task number to mark as done.");
         } catch (IndexOutOfBoundsException error) {
-            System.out.println("This task is not in your list");
+            ui.setResponse("This task is not in your list!");
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

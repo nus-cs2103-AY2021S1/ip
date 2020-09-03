@@ -43,13 +43,6 @@ public class TaskList {
      */
     public void addTask(Task task) {
         list.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        if (list.size() > 1) {
-            System.out.println("Now you have " + list.size() + " tasks in your list");
-        } else {
-            System.out.println("Now you have " + list.size() + " task in your list");
-        }
     }
 
     /**
@@ -60,8 +53,6 @@ public class TaskList {
      */
     public void markAsDone(int number) {
         list.get(number).done();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(list.get(number));
     }
 
     /**
@@ -70,10 +61,6 @@ public class TaskList {
      * @param number The number of the task to be deleted from the list.
      */
     public void deleteTask(int number) {
-        Task deletedTask = list.get(number);
         list.remove(number);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(deletedTask);
-        System.out.println("You now have " + list.size() + " tasks in your list");
     }
 }
