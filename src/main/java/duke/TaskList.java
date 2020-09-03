@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 
 /**
@@ -5,33 +7,33 @@ import java.util.ArrayList;
  * it has operations to add/delete tasks in the list.
  */
 public class TaskList {
-    ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
     TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
-    void add(Task task) {
+    public void add(Task task) {
         taskList.add(task);
     }
 
-    void remove(int index) {
+    public void remove(int index) {
         taskList.remove(index);
     }
 
-    Task get(int index) {
+    public Task get(int index) {
     	return taskList.get(index);
     }
 
-    int size() {
+    public int size() {
     	return taskList.size();
     }
 
-    ArrayList<Task> getList() {
+    public ArrayList<Task> getList() {
         return taskList;
     }
 
-    ArrayList<Task> find(String condition) {
+    public ArrayList<Task> find(String condition) {
         ArrayList<Task> newTaskList = new ArrayList<Task>();
         for (Task task: taskList) {
             if (task.getContent().contains(condition)) {

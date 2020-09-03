@@ -1,3 +1,6 @@
+package duke;
+import duke.exceptions.DukeException;
+
 public class Task {
 	private boolean isDone;
 	private String taskContent;
