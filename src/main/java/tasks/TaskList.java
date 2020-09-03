@@ -115,7 +115,7 @@ public class TaskList {
      * @return Message when task delete.
      */
     public String deleteTask(int taskId) {
-        if (taskId > this.taskListLen()) {
+        if (taskId > this.taskListLen() || taskId < 1) {
             return "MUG don't have this task to Delete @_@";
         } else {
             try {
@@ -142,7 +142,7 @@ public class TaskList {
      * @return Message when task update done.
      */
     public String taskDone(int taskId) {
-        if (taskId > this.taskListLen()) {
+        if (taskId > this.taskListLen() || taskId < 1) {
             return "MUG don't have this task to mark as Done :>";
         } else {
             int taskIndex = taskId - 1;

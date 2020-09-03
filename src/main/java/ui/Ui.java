@@ -23,7 +23,15 @@ public class Ui {
         try {
             String[] splitOrder = input.split(" ", 2);
             Command command = Parser.command(splitOrder[0]);
-
+            // assert
+            assert(command == Command.LIST
+                    || command == Command.BYE
+                    || command == Command.DONE
+                    || command == Command.DELETE
+                    || command == Command.TODO
+                    || command == Command.DEADLINE
+                    || command == Command.EVENT
+                    || command == Command.FIND);
             switch (command) {
             case LIST:
                 output = tasks.readList();
@@ -35,12 +43,16 @@ public class Ui {
                 Parser.input(command, splitOrder.length, false);
                 Parser.info(command, splitOrder[1], false);
                 int doneTaskId = Parser.index(splitOrder[1], splitOrder.length);
+                // assert
+                assert(doneTaskId > 0);
                 output = tasks.taskDone(doneTaskId);
                 break;
             case DELETE:
                 Parser.input(command, splitOrder.length, false);
                 Parser.info(command, splitOrder[1], false);
                 int deleteTaskId = Parser.index(splitOrder[1], splitOrder.length);
+                // assert
+                assert(deleteTaskId > 0);
                 output = tasks.deleteTask(deleteTaskId);
                 break;
             case TODO:
