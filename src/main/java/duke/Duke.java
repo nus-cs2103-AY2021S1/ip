@@ -20,6 +20,8 @@ public class Duke {
     private Storage storeFile;
     private TaskList tasks;
     private Ui ui;
+    private boolean isGui = false;
+    private String userInput;
 
     /**
      * Initialize Duke, UI and load saved file into a TaskList object. If save file is empty, a new
@@ -39,11 +41,14 @@ public class Duke {
         ui.startupMsg();
     }
 
+    public Duke() {
+        this(filePath);
+    }
+
     /**
      * Main execution of Duke Chat bot
      */
     public void run() {
-        String userInput;
         String[] userInputArray;
         boolean validInput;
 
@@ -266,5 +271,9 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke(filePath).run();
+    }
+
+    public String getResponse(String input) {
+        return input;
     }
 }

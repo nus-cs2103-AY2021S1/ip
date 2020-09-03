@@ -1,5 +1,6 @@
 package duke.ui;
 
+
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -41,9 +42,16 @@ public class Ui {
      *
      * @return String from user input.
      */
+
+    private MainWindow mw;
+
     public String readInput() {
         System.out.print(cmd);
         return scanner.nextLine();
+    }
+
+    public String readInputGui() {
+        return mw.getInput();
     }
 
     /**
@@ -169,4 +177,5 @@ public class Ui {
     public void showNotFoundMsg(String keyword) {
         System.out.println(duke + "Found no task(s) matching the keyword: " + keyword);
     }
+
 }
