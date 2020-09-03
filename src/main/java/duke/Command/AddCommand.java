@@ -28,6 +28,7 @@ public class AddCommand extends Command {
      * @param taskDescription The task description from user input, excluding the command word.
      */
     public AddCommand(String taskDescription) {
+        assert taskDescription != null;
         this.desc = taskDescription;
     }
 
@@ -138,6 +139,8 @@ public class AddCommand extends Command {
 
         taskList.add(newTask);
         storage.saveTasks(taskList);
+
+        assert taskList.get(taskList.size()).equals(newTask) : "Task is not added into the taskList!";
 
         return Message.concatLines(Message.MESSAGE_ADDED, newTask.toString(),
                 Ui.LINE_SEPARATOR, Message.getTotalTaskMessage(taskList));
