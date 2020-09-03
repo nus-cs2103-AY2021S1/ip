@@ -39,15 +39,15 @@ public class Storage {
         }
     }
 
-	/**
-	 * Returns arrayList of Tasks from storage file.
+    /**
+     * Returns arrayList of Tasks from storage file.
      * When Duke is just started up, it reads from the storage file, goes through each line, each corresponding to a
-	 * task and returns the tasks.
-	 *
-	 * @return ArrayList of Tasks according to the storage file.
-	 */
-	public ArrayList<Task> initializeTasks() {
-	    try {
+     * task and returns the tasks.
+     *
+     * @return ArrayList of Tasks according to the storage file.
+     */
+    public ArrayList<Task> initializeTasks() {
+        try {
             File file = new File(filePath);
             if (!file.exists()) {
                 return new ArrayList<>();
@@ -59,13 +59,13 @@ public class Storage {
             }
             return tasks;
         } catch (DukeException ex) {
-	        Ui.formatResponse(ex.getMessage());
-	        return new ArrayList<>();
+            Ui.formatResponse(ex.getMessage());
+            return new ArrayList<>();
         } catch (IOException ex) {
             Ui.formatResponse("Parsing error: file does not exist");
             return new ArrayList<>();
         }
-	}
+    }
 
     /**
      * Overwrites the current storage file with updated taskList, or creates a new storage file with updated taskList
@@ -79,7 +79,7 @@ public class Storage {
         String[] directories = filePath.split("/");
         String currFilePath = directories[0];
         String[] directoriesToCreate = Arrays.copyOfRange(directories, 1, directories.length - 1);
-        for (String folder: directoriesToCreate) {
+        for (String folder : directoriesToCreate) {
             File dir = new File(currFilePath);
             if (!dir.exists()) {
                 dir.mkdir();

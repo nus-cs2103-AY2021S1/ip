@@ -56,7 +56,8 @@ public class Parser {
                 throw new DukeException("task index is empty / not a valid number");
             }
         } else if (userInput.startsWith("tasks due on")) {
-            if (userInput.length() == 12 || userInput.substring(12).isBlank() || parseDate(userInput.substring(13)) == null) {
+            if (userInput.length() == 12 || userInput.substring(12).isBlank()
+                    || parseDate(userInput.substring(13)) == null) {
                 throw new DukeException("time is empty / of the wrong format");
             } else {
                 return new ListCommand(parseDate(userInput.substring(13)), null);

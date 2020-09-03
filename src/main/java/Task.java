@@ -28,8 +28,12 @@ public abstract class Task {
         return "[" + (isDone ? "\u2713" : "\u2718") + "]"; //return tick or X symbols
     }
 
-    public void markAsDone() {
-        isDone = true;
+    public void markAsDone() throws TaskException {
+        if (isDone) {
+            throw new TaskException(taskType, "done status", TaskExceptionType.DONE);
+        } else {
+            isDone = true;
+        }
     }
 
     /**

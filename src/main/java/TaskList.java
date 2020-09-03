@@ -23,7 +23,7 @@ public class TaskList {
         return tasks;
     }
 
-    public void markAsDone(int idx) throws DukeException {
+    public void markAsDone(int idx) throws DukeException, TaskException {
         getTask(idx).markAsDone();
     }
 

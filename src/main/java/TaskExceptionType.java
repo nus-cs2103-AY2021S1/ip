@@ -19,5 +19,11 @@ public enum TaskExceptionType {
         public String toString() {
             return "is of the wrong format";
         }
+    },
+    DONE {
+        @Override
+        public String toString() {
+            return "already completed";
+        }
     };
 }

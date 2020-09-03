@@ -1,12 +1,12 @@
+import java.util.ArrayList;
+import java.util.Date;
+
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * GUI that interacts with user.

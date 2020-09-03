@@ -5,8 +5,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
 /**
  * Duke is the application that the user is aware of.
  */
@@ -93,4 +91,5 @@ public class Duke extends Application {
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
+
 }

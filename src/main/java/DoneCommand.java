@@ -20,7 +20,7 @@ public class DoneCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, TaskException {
         tasks.markAsDone(idx);
         ui.showDoneTask(tasks.getTask(idx));
         storage.saveList(tasks);

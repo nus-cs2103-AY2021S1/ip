@@ -11,7 +11,7 @@ public abstract class Command {
      * @param storage Storage to be activated if there are any changes to TaskList.
      * @throws DukeException
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, TaskException;
 
     /**
      * Returns false for all commands except ExitCommand.

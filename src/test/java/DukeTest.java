@@ -1,7 +1,7 @@
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+
+import org.junit.jupiter.api.Test;
 
 public class DukeTest {
 
