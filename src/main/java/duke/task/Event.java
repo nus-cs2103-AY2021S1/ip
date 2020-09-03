@@ -22,9 +22,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns icon representing whether the task is done or not.
+     * Returns a String representation of the task for saving.
      *
-     * @return Icon representing whether the task is done or not.
+     * @return String representation of the task for saving purposes.
      */
     @Override
     public String toSaveFormat() {

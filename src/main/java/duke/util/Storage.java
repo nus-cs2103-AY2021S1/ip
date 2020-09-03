@@ -50,9 +50,11 @@ public class Storage {
                 } else if (taskDetails[0].equals("D")) {
                     task = new Deadline(taskDetails[2],
                             DateFormatter.extractTimestampInput(taskDetails[3]));
-                } else {
+                } else if (taskDetails[0].equals("E")) {
                     task = new Event(taskDetails[2],
                             DateFormatter.extractTimestampInput(taskDetails[3]));
+                } else {
+                    throw new DukeException();
                 }
 
                 if (taskDetails[1].equals("1")) {

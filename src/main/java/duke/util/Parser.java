@@ -35,47 +35,71 @@ public class Parser {
         } else if (input.equals("help")) {
             return new HelpCommand();
         } else if (input.startsWith("deadline")) {
-            try {
-                String[] inputArray = input.substring(input.indexOf(' ') + 1).split(" /by ");
-                String description = inputArray[0];
-                Date by = DateFormatter.extractTimestampInput(inputArray[1]);
-                return new DeadlineCommand(description, by);
-            } catch (ArrayIndexOutOfBoundsException | DukeException e) {
-                throw new InvalidDeadlineException();
-            }
+            return parseDeadline(input);
         } else if (input.matches("delete \\d+")) {
-            int index = Integer.parseInt(input.split(" ")[1]);
-            return new DeleteCommand(index);
+            return parseDelete(input);
         } else if (input.matches("done \\d+")) {
-            int index = Integer.parseInt(input.split(" ")[1]);
-            return new DoneCommand(index);
+            return parseDone(input);
         } else if (input.startsWith("event")) {
-            try {
-                String[] inputArray = input.substring(input.indexOf(' ') + 1).split(" /at ");
-                String description = inputArray[0];
-                Date at = DateFormatter.extractTimestampInput(inputArray[1]);
-                return new EventCommand(description, at);
-            } catch (ArrayIndexOutOfBoundsException | DukeException e) {
-                throw new InvalidEventException();
-            }
+            return parseEvent(input);
         } else if (input.equals("list")) {
             return new ListCommand();
         } else if (input.startsWith("todo")) {
-            String[] split = input.split(" ");
-            if (split.length == 1) {
-                throw new InvalidToDoException();
-            }
-            String[] descriptionArray = Arrays.copyOfRange(split, 1, split.length);
-            String description = String.join(" ", descriptionArray);
-            return new ToDoCommand(description);
+            return parseTodo(input);
         } else if (input.startsWith("find")) {
-            String[] split = input.split("find ");
-            String restOfInput = split[1];
-            String[] keywords = restOfInput.split("\\s*~\\s*"); // splits and trims
-
-            return new FindCommand(keywords);
+            return parseFind(input);
         } else {
             throw new DukeException();
         }
+    }
+
+    private static Command parseDeadline(String input) throws InvalidDeadlineException {
+        try {
+            String[] inputArray = input.substring(input.indexOf(' ') + 1).split(" /by ");
+            String description = inputArray[0];
+            Date by = DateFormatter.extractTimestampInput(inputArray[1]);
+            return new DeadlineCommand(description, by);
+        } catch (ArrayIndexOutOfBoundsException | DukeException e) {
+            throw new InvalidDeadlineException();
+        }
+    }
+
+    private static Command parseDelete(String input) {
+        int index = Integer.parseInt(input.split(" ")[1]);
+        return new DeleteCommand(index);
+    }
+
+    private static Command parseDone(String input) {
+        int index = Integer.parseInt(input.split(" ")[1]);
+        return new DoneCommand(index);
+    }
+
+    private static Command parseEvent(String input) throws InvalidEventException {
+        try {
+            String[] inputArray = input.substring(input.indexOf(' ') + 1).split(" /at ");
+            String description = inputArray[0];
+            Date at = DateFormatter.extractTimestampInput(inputArray[1]);
+            return new EventCommand(description, at);
+        } catch (ArrayIndexOutOfBoundsException | DukeException e) {
+            throw new InvalidEventException();
+        }
+    }
+
+    private static Command parseTodo(String input) throws InvalidToDoException {
+        String[] split = input.split(" ");
+        if (split.length == 1) {
+            throw new InvalidToDoException();
+        }
+        String[] descriptionArray = Arrays.copyOfRange(split, 1, split.length);
+        String description = String.join(" ", descriptionArray);
+        return new ToDoCommand(description);
+    }
+
+    private static Command parseFind(String input) {
+        String[] split = input.split("find ");
+        String restOfInput = split[1];
+        String[] keywords = restOfInput.split("\\s*~\\s*"); // splits and trims
+
+        return new FindCommand(keywords);
     }
 }

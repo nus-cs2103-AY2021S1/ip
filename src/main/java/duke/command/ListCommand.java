@@ -18,25 +18,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Executes a list command.
-     *
-     * @param tasks Contains the current tasks.
-     * @param ui Responsible for displaying information to the user.
-     * @param storage Reads and stores data into memory.
-     */
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        StringJoiner response = new StringJoiner("\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            response.add(String.format("%d.%s", i + 1, tasks.get(i)));
-        }
-        ui.printResponse(response.toString().isEmpty()
-                ? "You have no tasks at the moment :)"
-                : response.toString());
-    }
-
-    /**
-     * Returns a response after executing the list command.
+     * Executes a list command and returns a response.
      *
      * @param tasks Contains the current tasks.
      * @param ui Responsible for displaying information to the user.

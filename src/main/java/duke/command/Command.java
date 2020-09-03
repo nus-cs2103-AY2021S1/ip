@@ -21,18 +21,7 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command.
-     *
-     * @param tasks Contains the current tasks.
-     * @param ui Responsible for displaying information to the user.
-     * @param storage Reads and stores data into memory.
-     *
-     * @throws DukeException If could not executed command.
-     */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
-
-    /**
-     * Executes the command while returning a String message.
+     * Executes the command and then returns a response.
      *
      * @param tasks Contains the current tasks.
      * @param ui Responsible for displaying information to the user.
@@ -42,6 +31,20 @@ public abstract class Command {
      */
     public abstract String executeWithResponse(TaskList tasks, Ui ui, Storage storage)
             throws DukeException;
+
+    /**
+     * Executes the command without returning a response.
+     *
+     * @param tasks Contains the current tasks.
+     * @param ui Responsible for displaying information to the user.
+     * @param storage Reads and stores data into memory.
+     *
+     * @throws DukeException If could not executed command.
+     */
+    public void executeWithoutResponse(TaskList tasks, Ui ui, Storage storage)
+            throws DukeException {
+        this.executeWithResponse(tasks, ui, storage);
+    }
 
     /**
      * Checks whether the command should continue the loop or not.

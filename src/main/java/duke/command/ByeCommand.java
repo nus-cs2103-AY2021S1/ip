@@ -16,19 +16,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Executes a bye command.
-     *
-     * @param tasks Contains the current tasks.
-     * @param ui Responsible for displaying information to the user.
-     * @param storage Reads and stores data into memory.
-     */
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printResponse("Bye. Hope to see you again soon!");
-    }
-
-    /**
-     * Returns a response after executing the bye command.
+     * Executes a bye command and returns a response.
      *
      * @param tasks Contains the current tasks.
      * @param ui Responsible for displaying information to the user.

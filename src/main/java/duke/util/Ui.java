@@ -4,8 +4,6 @@ package duke.util;
  * Responsible for displaying information to the user.
  */
 public class Ui {
-    private String line = "----------------------------------------------------------------";
-
     /**
      * Prints out a greeting.
      */
@@ -31,21 +29,14 @@ public class Ui {
     }
 
     /**
-     * Indents the given message by 1 tab and adds horizontal borders above and below it.
+     * Prints a given string with indentation and horizontal lines at the top and bottom.
      *
      * @param string The string to print in this format.
      */
-    // Wrapper method for printing with horizontal line borders and 1 tab indent
     public void printResponse(String string) {
-        String formatted = String.format("%s\n%s\n%s", line, string, line)
+        String line = "----------------------------------------------------------------";
+        String response = String.format("%s\n%s\n%s", line, string, line)
                 .replaceAll("(?m)^", "\t");
-        System.out.println(formatted);
-    }
-
-    /**
-     * Prints a horizontal line.
-     */
-    private void showLine() {
-        System.out.println(line);
+        System.out.println(response);
     }
 }

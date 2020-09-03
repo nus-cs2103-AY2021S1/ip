@@ -35,23 +35,7 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Executes a help command.
-     *
-     * @param tasks Contains the current tasks.
-     * @param ui Responsible for displaying information to the user.
-     * @param storage Reads and stores data into memory.
-     */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        StringJoiner response = new StringJoiner("\n");
-        response.add("Here are all the available commands:");
-        for (Command command : allCommands) {
-            response.add(command.toString());
-        }
-        ui.printResponse(response.toString());
-    }
-
-    /**
-     * Returns a response after executing the help command.
+     * Executes a help command and returns a response.
      *
      * @param tasks Contains the current tasks.
      * @param ui Responsible for displaying information to the user.

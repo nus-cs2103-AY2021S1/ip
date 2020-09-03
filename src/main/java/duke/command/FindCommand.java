@@ -20,31 +20,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes a find command.
-     *
-     * @param tasks Contains the current tasks.
-     * @param ui Responsible for displaying information to the user.
-     * @param storage Reads and stores data into memory.
-     *
-     */
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        StringJoiner response = new StringJoiner("\n");
-        StringJoiner userStrings = new StringJoiner("\n");
-        for (String string : stringsToFind) {
-            userStrings.add(String.format("\"%s\"", string));
-        }
-        response.add(String.format("Here are the tasks in your list that contain \n%s\n",
-                userStrings.toString()));
-        for (String toFind : stringsToFind) {
-            response.add(tasks.find(toFind));
-        }
-
-        ui.printResponse(response.toString());
-    }
-
-    /**
-     * Returns a response after executing the find command.
+     * Executes a find command and returns a response.
      *
      * @param tasks Contains the current tasks.
      * @param ui Responsible for displaying information to the user.
