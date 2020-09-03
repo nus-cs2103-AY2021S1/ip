@@ -71,7 +71,6 @@ public class Duke extends Application {
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.greet();
-
         boolean shouldLoop = true;
         while (shouldLoop) {
             try {

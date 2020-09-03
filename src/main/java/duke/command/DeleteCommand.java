@@ -38,7 +38,10 @@ public class DeleteCommand extends Command {
             throw new InvalidDeleteIndexException(tasks.size());
         }
 
+        int previousTaskSize = tasks.size();
         Task task = tasks.remove(index - 1);
+        int subsequentTaskSize = tasks.size();
+        assert (previousTaskSize == subsequentTaskSize - 1);
         storage.save(tasks);
         return String.format("Noted. I've removed this task:\n"
                 + "%s\n" + "Now you have %d tasks in the list.", task, tasks.size());
