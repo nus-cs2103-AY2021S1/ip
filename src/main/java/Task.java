@@ -6,7 +6,7 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
-
+  
     public String getStatusIcon() {
         return isDone
                 ? "\u2713"
@@ -21,6 +21,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String getTaskType() {
+        return "Task";
+    }
+    
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();

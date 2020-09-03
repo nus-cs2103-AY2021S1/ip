@@ -9,6 +9,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String getTaskType() {
+        return "Event";
+    }
+    
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
