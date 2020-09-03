@@ -28,6 +28,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        System.out.println("========== [ Tebby started in GUI mode ] ==========");
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -38,6 +39,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        System.out.println("User: " + input);
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 new UserDialogBox(input, userImage),
@@ -45,5 +47,4 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
-
 }

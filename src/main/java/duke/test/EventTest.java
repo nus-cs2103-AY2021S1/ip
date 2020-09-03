@@ -3,7 +3,7 @@ package duke.test;
 import duke.task.Event;
 import duke.util.DukeException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class EventTest {
 

@@ -182,7 +182,7 @@ public class TaskList {
                 msg.append("\n");
             }
             num++;
-            }
+        }
         return msg.toString();
     }
 

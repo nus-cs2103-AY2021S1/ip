@@ -1,6 +1,6 @@
 package duke.test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import duke.util.Parser;
 
