@@ -1,6 +1,6 @@
+package duke;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Parser {
     private static Command parsing(String input) throws DukeException {
@@ -8,7 +8,6 @@ public class Parser {
         AdditionalInfo info;
 
         String firstWord = input.split(" ")[0].trim();
-//        System.out.println("firstWord: " + firstWord);
         if (input.equals("bye")) {
             command = new Command(Command.EXIT);
         } else if (input.equals("list")) {
@@ -16,7 +15,6 @@ public class Parser {
         } else if (firstWord.matches("done|delete")) {
             String[] splitted = input.split("\\s+");
             int taskIndex = Integer.parseInt(splitted[1]) - 1;
-
             info = new AdditionalInfo(taskIndex);
             command = new Command(firstWord.equals("done")
                     ? Command.DONE
@@ -30,7 +28,6 @@ public class Parser {
                 } else {
                     String task = arr[1].trim();
                     info = new AdditionalInfo(task);
-//                    newTask = new ToDo(tsk);
                 }
             } else {
                 String[] arr = input.split(firstWord.equals("deadline") ? "deadline" : "event");
@@ -45,7 +42,7 @@ public class Parser {
                         String deadline = parsing[1].trim();
                         String dateString = deadline.split(" ")[0];
                         String time = deadline.split(" ")[1];
-                        LocalDate date = LocalDate.parse(dateString, Duke.BASIC_FORMATTER);
+                        LocalDate date = LocalDate.parse(dateString, Common.BASIC_FORMATTER);
                         info = new AdditionalInfo(task, time, date);
                     } else {
                         String[] parsing = input.split("/at ");
@@ -72,7 +69,6 @@ public class Parser {
         try {
             return parsing(input);
         } catch (DukeException e) {
-            System.out.println("in catch of Parse");
             Ui.printException(e);
             return new Command(Command.INVALID);
         }

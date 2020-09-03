@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -41,7 +43,7 @@ public class Storage {
                 if (type.equals("D")) {
                     String dateInString = additionalInfo;
                     String time = arr[4].trim();
-                    list.add(new Deadline(description, status == Task.DONE, LocalDate.parse(dateInString, Duke.BASIC_FORMATTER), time));
+                    list.add(new Deadline(description, status == Task.DONE, LocalDate.parse(dateInString, Common.BASIC_FORMATTER), time));
                 } else {
                     list.add(new Event(description, additionalInfo, status == Task.DONE));
                 }

@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -21,7 +23,7 @@ public class Deadline extends Task {
     @Override
     public String toText() {
         String str = super.toText("D");
-        str += "| " + this.date.format(Duke.BASIC_FORMATTER) + " | " + this.time;
+        str += "| " + this.date.format(Common.BASIC_FORMATTER) + " | " + this.time;
         return str;
     }
 
