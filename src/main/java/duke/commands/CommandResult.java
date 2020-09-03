@@ -1,12 +1,15 @@
 package duke.commands;
 
-/** Represents the result of a command. */
+/**
+ * Represents the result of a command.
+ */
 public class CommandResult {
 
     private String feedbackToUser;
     private boolean isExit;
 
-    /** Constructor.
+    /**
+     * Constructor.
      *
      * @param feedbackToUser The feedback to user.
      * @param isExit Whether the program is exiting.
@@ -16,7 +19,8 @@ public class CommandResult {
         this.isExit = isExit;
     }
 
-    /** Gets the feedback to user.
+    /**
+     * Gets the feedback to user.
      *
      * @return Feedback
      */
@@ -24,7 +28,8 @@ public class CommandResult {
         return feedbackToUser;
     }
 
-    /** Gets whether the system is exiting.
+    /**
+     * Gets whether the system is exiting.
      *
      * @return Whether the system is exiting.
      */
@@ -32,7 +37,8 @@ public class CommandResult {
         return isExit;
     }
 
-    /** Checks if the {@code feedbackToUser} is equals to another CommandResult's.
+    /**
+     * Checks if the {@code feedbackToUser} is equals to another CommandResult's.
      *
      * @param obj The other object
      * @return Whether the feedback to user is equal.

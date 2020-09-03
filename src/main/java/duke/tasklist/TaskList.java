@@ -5,17 +5,22 @@ import java.util.ArrayList;
 import duke.exceptions.NoSuchTaskException;
 import duke.tasks.Task;
 
-/** Represents the list of tasks. */
+/**
+ * Represents the list of tasks.
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
 
-    /** Constructs an empty taskList. */
+    /**
+     * Constructs an empty taskList.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
-    /** Gets the ArrayList of tasks.
+    /**
+     * Gets the ArrayList of tasks.
      *
      * @return the ArrayList of tasks.
      */
@@ -23,7 +28,8 @@ public class TaskList {
         return tasks;
     }
 
-    /** Adds a task to the list of tasks.
+    /**
+     * Adds a task to the list of tasks.
      *
      * @param task The task to be added.
      */
@@ -31,7 +37,8 @@ public class TaskList {
         tasks.add(task);
     }
 
-    /** Marks a task as done.
+    /**
+     * Marks a task as done.
      *
      * @param index The index of the task to be marked as done.
      * @return The task that was marked as done.
@@ -47,7 +54,8 @@ public class TaskList {
         }
     }
 
-    /** Deletes a task from the task list.
+    /**
+     * Deletes a task from the task list.
      *
      * @param index The index of the task to be deleted.
      * @return The task that was deleted.
@@ -61,7 +69,8 @@ public class TaskList {
         }
     }
 
-    /** Returns the total number of tasks in the task list.
+    /**
+     * Returns the total number of tasks in the task list.
      *
      * @return The total number of tasks in the task list.
      */
@@ -69,7 +78,8 @@ public class TaskList {
         return tasks.size();
     }
 
-    /** Returns the message detailing the number of tasks in the list.
+    /**
+     * Returns the message detailing the number of tasks in the list.
      *
      * @return The message detailing the number of tasks in the list.
      */

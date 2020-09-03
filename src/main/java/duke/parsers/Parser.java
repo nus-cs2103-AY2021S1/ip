@@ -24,10 +24,13 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
-/** Represents a parser that parses user inputs into the relevant commands. */
+/**
+ * Represents a parser that parses user inputs into the relevant commands.
+ */
 public class Parser {
 
-    /** Parses the user input into the relevant command.
+    /**
+     * Parses the user input into the relevant command.
      *
      * @param userInput The user input.
      * @return The command that corresponds to the user input.

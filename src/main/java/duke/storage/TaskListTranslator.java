@@ -11,10 +11,13 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
-/** Represents the translator that handles the conversion of {@link TaskList} to a List of Strings. */
+/**
+ * Represents the translator that handles the conversion of {@link TaskList} to a List of Strings.
+ */
 public class TaskListTranslator {
 
-    /** Decodes a List of Strings into a TaskList.
+    /**
+     * Decodes a List of Strings into a TaskList.
      *
      * @param lines The list of Strings.
      * @return The taskList.
@@ -53,7 +56,8 @@ public class TaskListTranslator {
         }
     }
 
-    /** Encodes a {@link TaskList} into a list of Strings to be saved into a file.
+    /**
+     * Encodes a {@link TaskList} into a list of Strings to be saved into a file.
      *
      * @param taskList The {@link TaskList}.
      * @return The list of Strings.

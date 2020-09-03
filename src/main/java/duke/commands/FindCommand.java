@@ -8,14 +8,16 @@ import java.util.ArrayList;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 
-/** Represents the command that displays all tasks that match the user's search words
+/**
+ * Represents the command that displays all tasks that match the user's search words
  * when executed.
  */
 public class FindCommand extends Command {
 
     private String[] searchWords;
 
-    /** Constructs a FindCommand with the specified search words.
+    /**
+     * Constructs a FindCommand with the specified search words.
      *
      * @param searchWords The search words that the user input.
      */
@@ -23,7 +25,8 @@ public class FindCommand extends Command {
         this.searchWords = searchWords;
     }
 
-    /** Return CommandResult containing all tasks whose description contains the user's search words.
+    /**
+     * Return CommandResult containing all tasks whose description contains the user's search words.
      *
      * @param taskList The taskList involved.
      * @return The result of the command.

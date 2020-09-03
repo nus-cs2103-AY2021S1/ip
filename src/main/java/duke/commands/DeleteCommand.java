@@ -6,12 +6,15 @@ import duke.exceptions.NoSuchTaskException;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 
-/** Represents the command that deletes a task when executed. */
+/**
+ * Represents the command that deletes a task when executed.
+ */
 public class DeleteCommand extends Command {
 
     private int taskIndex;
 
-    /** Constructor.
+    /**
+     * Constructor.
      *
      * @param taskDeleted The index of the task to be deleted.
      */
@@ -19,7 +22,8 @@ public class DeleteCommand extends Command {
         this.taskIndex = taskDeleted;
     }
 
-    /** Deletes the task as specified by the constructor and returns a relevant message to the user.
+    /**
+     * Deletes the task as specified by the constructor and returns a relevant message to the user.
      *
      * @param taskList The taskList involved.
      * @return The result of the command.

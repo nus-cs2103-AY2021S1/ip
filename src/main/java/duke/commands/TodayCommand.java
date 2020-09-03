@@ -12,10 +12,13 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.utils.DukeDateTime;
 
-/** Represents the command that displays all tasks happening today to the user when executed. */
+/**
+ * Represents the command that displays all tasks happening today to the user when executed.
+ */
 public class TodayCommand extends Command {
 
-    /** Returns a CommandResult containing all tasks happening today to the user.
+    /**
+     * Returns a CommandResult containing all tasks happening today to the user.
      *
      * @param taskList The taskList involved.
      * @return The result of the command.
