@@ -2,6 +2,7 @@ package command;
 
 import java.util.ArrayList;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -47,11 +48,13 @@ public class FindCommand extends Command {
      * @param taskList the taskList that is searched from.
      * @param ui the ui that interacts with the user.
      * @param storage the storage that loads and saves data.
+     * @return output to be displayed to the user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskList.getTaskList().isEmpty()) {
-            ui.showError("La lista de tareas está actualmente vacía, agregue una tarea antes de encontrar una.");
+            throw new DukeException(
+                    "La lista de tareas está actualmente vacía, agregue una tarea antes de encontrar una.");
         }
         for (Task task : taskList.getTaskList()) {
             if (task.toString().contains(wordToFind)) {
@@ -59,9 +62,10 @@ public class FindCommand extends Command {
             }
         }
         if (listOfIncludedTasks.isEmpty()) {
-            ui.showError("Lo sentimos, ninguna de las tareas coincide con sus criterios de búsqueda.");
+            throw new DukeException("Lo sentimos, ninguna de las tareas coincide con sus criterios de búsqueda.");
         } else {
-            ui.showFoundList(listOfIncludedTasks);
+            output = ui.showFoundList(listOfIncludedTasks);
+            return output;
         }
     }
 }

@@ -14,9 +14,11 @@ import task.Task;
  */
 public abstract class Command {
     /**
-     * This is the task that may be involved with the Command.
+     * task is the task that may be involved with the Command.
+     * output is the message to be displayed to the user.
      */
     protected Task task;
+    protected String output = "";
 
     /**
      * Carries out the given Command with the given TaskList, Ui and Storage. This is
@@ -25,9 +27,10 @@ public abstract class Command {
      * @param taskList the TaskList to be updated.
      * @param ui the Ui that interacts with the user.
      * @param storage the Storage that is updated with TaskList.
+     * @return output to be displayed to the user.
      * @throws DukeException throws exception that prints error message.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     public abstract boolean isExit();
 }

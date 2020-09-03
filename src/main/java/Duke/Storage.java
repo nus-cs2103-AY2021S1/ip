@@ -63,13 +63,15 @@ public class Storage {
             Scanner sc1 = new Scanner(dukeFile);
             while (sc1.hasNext()) {
                 String loadedInput = sc1.nextLine();
-                if (loadedInput.substring(0, 3).equals("[T]")) {
+                switch (loadedInput.substring(0, 3)) {
+                case ("[T]") :
                     Todo newTodo = new Todo(loadedInput.substring(7));
                     if (loadedInput.substring(4, 7).equals("[✓]")) {
                         newTodo.completeTask();
                     }
                     listOfTasks.add(newTodo);
-                } else if (loadedInput.substring(0, 3).equals("[D]")) {
+                    break;
+                case("[D]") :
                     int byPosition = loadedInput.indexOf("by:");
                     Deadline newDeadline = new Deadline(
                             loadedInput.substring(7, byPosition));
@@ -80,17 +82,20 @@ public class Storage {
                             SAVE_READ_DATETIME_FORMAT);
                     newDeadline.setTime(date);
                     listOfTasks.add(newDeadline);
-                } else if (loadedInput.substring(0, 3).equals("[E]")) {
+                    break;
+                case("[E]"):
                     int atPosition = loadedInput.indexOf("at:");
                     Event newEvent = new Event(
                             loadedInput.substring(7, atPosition));
                     if (loadedInput.substring(4, 7).equals("[✓]")) {
                         newEvent.completeTask();
                     }
-                    LocalDateTime date = LocalDateTime.parse(loadedInput.substring(atPosition + 3),
+                    date = LocalDateTime.parse(loadedInput.substring(atPosition + 3),
                             SAVE_READ_DATETIME_FORMAT);
                     newEvent.setTime(date);
                     listOfTasks.add(newEvent);
+                    break;
+                default:
                 }
             }
         } catch (FileNotFoundException e) {

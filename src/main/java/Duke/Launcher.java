@@ -7,11 +7,10 @@ import javafx.application.Application;
  */
 public class Launcher {
     /**
-     * Runs Launcher.
+     * Launches Duke from the Main class.
      * @param args arguments to input.
      */
     public static void main(String[] args) {
         Application.launch(Main.class, args);
-        new Duke("D:/uni/CS2103T/Duke(iP)/ip/data/tasks.txt").run();
     }
 }

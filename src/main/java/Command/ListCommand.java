@@ -31,12 +31,14 @@ public class ListCommand extends Command {
      * @param ui the Ui that interacts with the user.
      * @param storage the Storage that is updated with TaskList.
      * @throws DukeException throws exception when list is empty.
+     * @return output to be displayed to the user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskList.getTaskList().isEmpty()) {
             throw new DukeException("☹ OOPS !!! La lista está vacía. ¡Agregue una nueva tarea!");
         }
-        ui.showList(taskList);
+        output = ui.showList(taskList);
+        return output;
     }
 }

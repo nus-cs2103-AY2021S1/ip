@@ -13,7 +13,7 @@ import task.Task;
  */
 public class Ui {
     /**
-     * sc is the Scanner that parses the user's input.
+     * sc is the Scanner that parses the lines in storage.
      */
     private static final String GREETING_MESSAGE = "Buenos Dias! Soy Duke.Duke, como estas mi amigo?";
     private Scanner sc;
@@ -26,95 +26,97 @@ public class Ui {
 
     /**
      * Prints the initialization message for the user.
-     */
-    public void showWelcome() {
-        System.out.println(GREETING_MESSAGE);
-    }
-
-    /**
-     * Parses the input from the user.
      *
-     * @return the input from the user as a String.
+     * @return the welcome message.
      */
-    public String readCommand() {
-        return sc.nextLine();
+    public String showWelcome() {
+        return GREETING_MESSAGE;
     }
 
     /**
-     * Prints the error message given.
+     * Returns the error message given.
      *
      * @param error the error message to be printed.
+     * @return the output to be returned to the user.
      */
-    public void showError(String error) {
-        System.out.println(error);
+    public String showError(String error) {
+        return error;
     }
 
     /**
-     * Prints the tasks in the TaskList.
+     * Returns the tasks in the TaskList.
      *
      * @param taskList the TaskList that contains the tasks.
+     * @return the output to be returned to the user.
      */
-    public void showList(TaskList taskList) {
-        System.out.println("Estas son las tareas de su lista:");
+    public String showList(TaskList taskList) {
+        StringBuilder outputMessage = new StringBuilder("Estas son las tareas de su lista:");
         for (int i = 0; i < taskList.getTaskList().size(); i++) {
-            System.out.println((i + 1) + ". " + taskList.getTaskList().get(i).toString());
+            outputMessage.append("\n").append(i + 1).append(". ").append(taskList.getTaskList().get(i).toString());
         }
+        return outputMessage.toString();
     }
 
     /**
-     * Prints the task that has been added to the Task List.
+     * Returns the task that has been added to the Task List.
      *
      * @param task the task that was added.
+     * @return the output to be returned to the user.
      */
-    public void showAdded(Task task) {
-        System.out.println("Entendido. He agregado esta tarea:\n" + task);
+    public String showAdded(Task task) {
+        return "Entendido. He agregado esta tarea:\n" + task;
     }
 
     /**
-     * Prints the task that has been completed.
+     * Returns the task that has been completed.
      *
      * @param task the task that was completed.
+     * @return the output to be returned to the user.
      */
-    public void showDone(Task task) {
-        System.out.println("Agradable! He marcado esta tarea como hecha:");
-        System.out.println(task);
+    public String showDone(Task task) {
+        return "Agradable! He marcado esta tarea como hecha:" + "\n" + task;
     }
 
     /**
-     * Prints the task that has been deleted.
+     * Returns the task that has been deleted.
      *
      * @param task the task that was deleted.
+     * @return the output to be returned to the user.
      */
-    public void showDeleted(Task task) {
-        System.out.println("Célebre. He eliminado esta tarea:");
-        System.out.println(task);
+    public String showDeleted(Task task) {
+        return "Célebre. He eliminado esta tarea:" + "\n" + task;
     }
 
     /**
-     * Prints the exit message.
+     * Returns the exit message.
+     *
+     * @return the output to be returned to the user.
      */
-    public void showExit() {
-        System.out.println("Adios, amigos!");
+    public String showExit() {
+        return "Adios, amigos!";
     }
 
     /**
-     * Prints the number of tasks in the TaskList.
+     * Returns the number of tasks in the TaskList.
      *
      * @param taskList the tasklist to be accessed.
+     * @return the output to be returned to the user.
      */
-    public void showNumberInList(TaskList taskList) {
-        System.out.println("Ahora tienes " + taskList.getTaskList().size() + " tareas en la lista.");
+    public String showNumberInList(TaskList taskList) {
+        return "Ahora tienes " + taskList.getTaskList().size() + " tareas en la lista.";
     }
 
     /**
-     * Prints the number of found tasks with the keyword.
+     * Returns the number of found tasks with the keyword.
      *
      * @param foundTaskList the list of tasks found.
+     * @return the output to be returned to the user.
      */
-    public void showFoundList(ArrayList foundTaskList) {
-        System.out.println("Aquí están las tareas coincidentes en su lista:");
+    public String showFoundList(ArrayList<Task> foundTaskList) {
+        StringBuilder outputMessage = new StringBuilder("Aquí están las tareas coincidentes en su lista:");
         for (int i = 0; i < foundTaskList.size(); i++) {
-            System.out.println((i + 1) + ". " + foundTaskList.get(i).toString());
+            outputMessage.append("\n").append(i + 1).append(". ").append(foundTaskList.get(i).toString());
         }
+        return outputMessage.toString();
     }
 }

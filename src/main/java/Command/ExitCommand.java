@@ -17,10 +17,12 @@ public class ExitCommand extends Command {
      * @param taskList the TaskList to be updated.
      * @param ui the Ui that interacts with the user.
      * @param storage the Storage that is updated with TaskList.
+     * @return output to be displayed to the user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showExit();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        output = ui.showExit();
+        return output;
     }
 
     /**

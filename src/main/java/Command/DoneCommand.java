@@ -38,19 +38,22 @@ public class DoneCommand extends Command {
     /**
      * Executes the DoneCommand with the following TaskList, Ui and Storage classes.
      * The completed task in the TaskList at the position will change its status to completed.
-     * The Ui will inform the user of the action. The storage will update with the new TaskList.
+     * The Ui will return the output to be displayed to the user. The storage will update
+     * with the new TaskList.
      *
      * @param taskList the TaskList to be updated.
      * @param ui the Ui that interacts with the user.
      * @param storage the Storage that is updated with TaskList.
+     * @return output to be displayed to the user.
      * @throws DukeException throws exception if the position of the task to be completed is incorrect.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskPosition < taskList.getTaskList().size() && taskPosition >= 0) {
             taskList.getTaskList().get(taskPosition).completeTask();
             storage.updateStorage(taskList);
-            ui.showDone(taskList.getTaskList().get(taskPosition));
+            output = ui.showDone(taskList.getTaskList().get(taskPosition));
+            return output;
         } else {
             throw new DukeException("☹ OOPS !!! ¡Esta tarea aún no existe!");
         }

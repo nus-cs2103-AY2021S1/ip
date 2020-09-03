@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import controller.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,11 +11,18 @@ import javafx.stage.Stage;
 
 /**
  * A GUI for Duke using FXML.
+ *
+ * @author Joshua
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke = new Duke("D:/uni/CS2103T/Duke(iP)/ip/data/tasks.txt");
 
+    /**
+     * Initializes Duke Application.
+     *
+     * @param stage the window Duke is run on.
+     */
     @Override
     public void start(Stage stage) {
         try {
