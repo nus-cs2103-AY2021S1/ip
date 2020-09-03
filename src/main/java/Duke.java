@@ -24,6 +24,10 @@ public class Duke {
         }
     }
 
+    public String showWelcomeMessage() {
+        return ui.showWelcome();
+    }
+
     /**
      * Generate response to user input from GUI.
      * @param input The user input.
@@ -31,10 +35,8 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            boolean isExit = false;
             Command c = Parser.parse(input);
             String result = c.execute(tasks, ui, storage);
-            isExit = c.isExit();
             return result;
         } catch (DukeException e) {
             return ui.showError(e.getMessage());

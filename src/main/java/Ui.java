@@ -34,7 +34,7 @@ public class Ui {
      */
     public String showWelcome() {
         this.showLine();
-        String result = LOGO + " Hello! I'm Duke\n" + " What can I do for you today?";
+        String result = "Hello there!\n" + "What can I do for you today? \nType 'help' to find out more!";
         System.out.println(result);
         this.showLine();
         return result;
@@ -45,7 +45,7 @@ public class Ui {
      * @return The string with message.
      */
     public String showBye() {
-        String result = " Goodbye! See you again!";
+        String result = "Goodbye! Come back soon!";
         System.out.println(result);
         return result;
     }
@@ -70,7 +70,7 @@ public class Ui {
      * @param numTasks Updated number of tasks.
      */
     public String showDeleted(Task task, int numTasks) {
-        String result = "Noted. I've removed this task:\n    " + task
+        String result = "No problem. I've removed this task:\n    " + task
                 + "\n Now you have " + numTasks + " task(s) in the list.";
         System.out.println(result);
         return result;
@@ -82,7 +82,7 @@ public class Ui {
      * @param task Task that is marked as done.
      */
     public String showMarkedDone(Task task) {
-        String result = "Nice! I've marked this task as done:\n    " + task;
+        String result = "Ok! I've marked this task as done:\n    " + task;
         System.out.println(result);
         return result;
     }
@@ -102,7 +102,7 @@ public class Ui {
      * Show a message to indicate there are no tasks currently.
      */
     public String showEmptyTaskList() {
-        String result = "There are currently no tasks in your list.";
+        String result = "You have no tasks in your list. Add some tasks!";
         System.out.println(result);
         return result;
     }
@@ -122,7 +122,7 @@ public class Ui {
      * Show message to indicate there are no matching tasks to keyword provided.
      */
     public String showEmptyMatchingList() {
-        String result = "There are no matching tasks found.";
+        String result = "Hmm.. there are no tasks with that keyword!";
         System.out.println(result);
         return result;
     }
@@ -133,7 +133,29 @@ public class Ui {
      * @param matchingTaskList String of all matching tasks enumerated.
      */
     public String showMatchingTaskList(String matchingTaskList) {
-        String result = "Here are the matching tasks in your list:\n" + matchingTaskList;
+        String result = "Found some matching tasks:\n" + matchingTaskList;
+        System.out.println(result);
+        return result;
+    }
+
+    public String showHelp() {
+        String result = "Here are the things that I can do for you! \n\n"
+                + "- Add a todo task:\n"
+                + "  todo <task description>\n\n"
+                + "- Add an event task:\n"
+                + "  event <task description> /at <task timing (yyyy-mm-dd HH:MM)>\n\n"
+                + "- Add a deadline task:\n"
+                + "  deadline <task description> /by <task timing (yyyy-mm-dd HH:MM)>\n\n"
+                + "- See list of tasks:\n"
+                + "  list\n\n"
+                + "- Mark a task as done:\n"
+                + "  done <number>\n\n"
+                + "- Delete a task:\n"
+                + "  delete <number>\n\n"
+                + "- Find tasks with a keyword:\n"
+                + "  find <keyword>\n\n"
+                + "- End this program :d :\n"
+                + "  bye";
         System.out.println(result);
         return result;
     }

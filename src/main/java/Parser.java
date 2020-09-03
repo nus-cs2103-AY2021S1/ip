@@ -48,46 +48,48 @@ public class Parser {
         String[] inputDataWords = fullCommand.split(" ");
         String firstWord = inputDataWords[0];
 
-        if (fullCommand.equals("list")) {
+        if (fullCommand.equals("help")) {
+            return new HelpCommand();
+        } else if (fullCommand.equals("list")) {
             return new ListCommand();
         } else if (firstWord.equals("done")) {
             if (inputDataWords.length != 2) {
-                throw new DukeException("Invalid command provided. Please try again.");
+                throw new DukeException("Sorry, didn't get that :( Try again or press 'help' to find out more!");
             } else {
                 // check if second word is an integer
                 if (isInteger(inputDataWords[1])) {
                     int taskNumber = Integer.parseInt(inputDataWords[1]);
                     return new DoneCommand(taskNumber);
                 } else {
-                    throw new DukeException("Please enter a valid task number.");
+                    throw new DukeException("Hmm.. I dont think you have that task in your list.");
                 }
             }
         } else if (firstWord.equals("delete")) {
             if (inputDataWords.length != 2) {
-                throw new DukeException("Invalid command provided. Please try again.");
+                throw new DukeException("Sorry, didn't get that :( Try again or press 'help' to find out more!");
             } else {
                 // check if second word is an integer
                 if (isInteger(inputDataWords[1])) {
                     int taskNumber = Integer.parseInt(inputDataWords[1]);
                     return new DeleteCommand(taskNumber);
                 } else {
-                    throw new DukeException("Please enter a valid task number.");
+                    throw new DukeException("Hmm.. I dont think you have that task in your list.");
                 }
             }
         } else if (firstWord.equals("todo")) {
             if (inputDataWords.length < 2) {
-                throw new DukeException("The description of a " + firstWord + " cannot be empty.");
+                throw new DukeException("I can't add a task without a description :(");
             } else {
                 ToDo task = new ToDo(fullCommand.split("todo ")[1]);
                 return new AddCommand(task);
             }
         } else if (firstWord.equals("deadline")) {
             if (inputDataWords.length < 2) {
-                throw new DukeException("The description of a " + firstWord + " cannot be empty.");
+                throw new DukeException("I can't add a task without a description :(");
             } else if (fullCommand.split("/by ").length < 2 || inputDataWords[1].equals("/by")) {
                 throw new DukeException("The deadline of this task is not provided.\n"
-                        + "   Please re-enter the desired deadline task\n"
-                        + "   (e.g. deadline xxx /by yyyy-mm-dd HH:MM)");
+                        + "Please re-enter the desired deadline task\n"
+                        + "(e.g. deadline xxx /by yyyy-mm-dd HH:MM)");
             } else {
                 String byString = fullCommand.split("/by ")[1];
                 if (isValidFormat(byString)) {
@@ -98,17 +100,17 @@ public class Parser {
                             fullCommand.split("deadline ")[1].split(" /by ")[0], byLocalDate);
                     return new AddCommand(task);
                 } else {
-                    throw new DukeException("   Please enter a valid deadline task\n"
-                            + "   (e.g. deadline xxx /by yyyy-mm-dd HH:mm)");
+                    throw new DukeException("Please enter a valid deadline task\n"
+                            + "(e.g. deadline xxx /by yyyy-mm-dd HH:mm)");
                 }
             }
         } else if (firstWord.equals("event")) {
             if (fullCommand.split(" ").length < 2 || inputDataWords[1].equals("/at")) {
-                throw new DukeException("The description of a " + firstWord + " cannot be empty.");
+                throw new DukeException("I can't add a task without description :(");
             } else if (fullCommand.split("/at ").length < 2) {
                 throw new DukeException("The duration of this task cannot be empty.\n"
-                        + "   Please re-enter the desired event task\n"
-                        + "   (e.g. event xxx /at yyyy-mm-dd HH:mm)");
+                        + "Please re-enter the desired event task\n"
+                        + "(e.g. event xxx /at yyyy-mm-dd HH:mm)");
             } else {
                 String atString = fullCommand.split("/at ")[1];
                 if (isValidFormat(atString)) {
@@ -119,8 +121,8 @@ public class Parser {
                             fullCommand.split("event ")[1].split(" /at ")[0], atLocalDate);
                     return new AddCommand(task);
                 } else {
-                    throw new DukeException("   Please enter a valid event task\n"
-                            + "   (e.g. event xxx /at yyyy-mm-dd HH:mm)");
+                    throw new DukeException("Please enter a valid event task\n"
+                            + "(e.g. event xxx /at yyyy-mm-dd HH:mm)");
                 }
             }
         } else if (firstWord.equals("find")) {
@@ -130,7 +132,7 @@ public class Parser {
             return new ExitCommand();
         } else {
             // invalid commands
-            throw new DukeException("Invalid command provided. Please try again.");
+            throw new DukeException("Sorry, didn't get that :( Try again or press 'help' to find out more!");
         }
     }
 }

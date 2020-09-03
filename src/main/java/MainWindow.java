@@ -28,8 +28,8 @@ public class MainWindow extends AnchorPane {
     private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/background.png"));
 
     private BackgroundImage backgroundImageCreated = new BackgroundImage(backgroundImage,
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundRepeat.NO_REPEAT,
+            BackgroundRepeat.REPEAT,
+            BackgroundRepeat.REPEAT,
             BackgroundPosition.DEFAULT,
             BackgroundSize.DEFAULT);
 
@@ -44,7 +44,7 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(" Hello, I'm Duke!\n" + " What can I do for you today?", dukeImage)
+                DialogBox.getDukeDialog(d.showWelcomeMessage(), dukeImage)
         );
     }
 
@@ -56,15 +56,19 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage));
+
+        // delay duke's output to come awhile after user's input
+        PauseTransition delayDukeOutput = new PauseTransition(Duration.seconds(0.3));
+        delayDukeOutput.setOnFinished(
+                event -> dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(response, dukeImage)));
+        delayDukeOutput.play();
 
         userInput.clear();
 
+        // delay exiting program
         if (input.equals("bye")) {
-            PauseTransition wait = new PauseTransition(Duration.seconds(0.8));
+            PauseTransition wait = new PauseTransition(Duration.seconds(1));
             wait.setOnFinished(event -> Platform.exit());
             wait.play();
         }

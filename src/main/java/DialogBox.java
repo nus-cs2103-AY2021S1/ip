@@ -13,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
 
@@ -36,13 +35,9 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
 
         dialog.setWrapText(true);
-        dialog.setPadding(new Insets(10, 10, 10, 10));
+        dialog.setPadding(new Insets(12, 14, 12, 14));
 
-//        Circle circle = new Circle(displayPicture.getLayoutX() + 50,
-//                displayPicture.getLayoutY() + 50, 50);
-//        displayPicture.setClip(circle);
-
-        dialog.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, new CornerRadii(20), Insets.EMPTY)));
+        dialog.setBackground(new Background(new BackgroundFill(Color.rgb(242,247,250), new CornerRadii(20), Insets.EMPTY)));
 
     }
 
