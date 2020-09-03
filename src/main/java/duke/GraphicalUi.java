@@ -15,15 +15,11 @@ public class GraphicalUi extends Ui {
 
     @Override
     public void processError(String errorMessage) {
-        responseMessage += errorMessage + "\n";
+        responseMessage = errorMessage + "\n";
     }
 
     public String getResponseMessage() {
         return responseMessage;
-    }
-
-    public void clearResponseMessage() {
-        responseMessage = "";
     }
 
     public void displayTaskCount(int numOfTasks) {
@@ -36,19 +32,19 @@ public class GraphicalUi extends Ui {
 
     @Override
     public void processAddMessage(Task task, int count) {
-        responseMessage += "Quack! I have added: " + task + "\n";;
+        responseMessage = "Quack! I have added: " + task + "\n";;
         displayTaskCount(count);
     }
 
     @Override
     public void processDeleteMessage(Task taskToDelete, int count) {
-        responseMessage += "Quack! I have deleted this task: \n" + taskToDelete + "\n";
+        responseMessage = "Quack! I have deleted this task: \n" + taskToDelete + "\n";
         displayTaskCount(count);
     }
 
     @Override
     public void processDoneMessage(Task task) {
-        responseMessage += "Quack! I have marked this task as done: \n" + task + "\n";
+        responseMessage = "Quack! I have marked this task as done: \n" + task + "\n";
     }
 
     @Override
@@ -58,9 +54,9 @@ public class GraphicalUi extends Ui {
     @Override
     public void processResultTaskList(List<Task> resultTaskList) {
         if (resultTaskList.isEmpty()) {
-            responseMessage += "No tasks matched..." + "\n";
+            responseMessage = "No tasks matched..." + "\n";
         } else {
-            responseMessage += "Quack! Here are the tasks in your list that match:" + "\n";
+            responseMessage = "Quack! Here are the tasks in your list that match:" + "\n";
             int count = 1;
             for (Task task : resultTaskList) {
                 responseMessage += count + ". " + task + "\n";
@@ -72,9 +68,9 @@ public class GraphicalUi extends Ui {
     @Override
     public void listStoredTasks(List<Task> storedTasks) {
         if (storedTasks.isEmpty()) {
-            responseMessage += "No tasks stored..." + "\n";
+            responseMessage = "No tasks stored..." + "\n";
         } else {
-            responseMessage += "Quack! Here are the tasks in your list:" + "\n";
+            responseMessage = "Quack! Here are the tasks in your list:" + "\n";
             int count = 1;
             for (Task task : storedTasks) {
                 responseMessage += count + ". " + task + "\n";

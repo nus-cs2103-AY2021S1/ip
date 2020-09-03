@@ -67,7 +67,6 @@ public class Duke {
      * @return Response which echos the user's input.
      */
     public String getResponse(String input) {
-        ((GraphicalUi) ui).clearResponseMessage();
         try {
             Command command = Parser.parse(input);
             command.execute(taskList, ui, storage);
