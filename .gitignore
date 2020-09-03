@@ -15,5 +15,4 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
-data/duke.txt
-data/tasks.txt
+src/test/data/tasks.txt
