@@ -11,13 +11,12 @@ public class ListCommand extends Command {
      * @throws DukeException If there are no tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.getSize() == 0) {
             throw new DukeException("You don't have any tasks yet!");
         }
 
-        ui.showList();
-        tasks.printList();
+        return ui.showList() + "\n" + tasks.printList();
     }
 
     /**

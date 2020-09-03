@@ -24,7 +24,7 @@ public class DoneCommand extends Command {
      * @throws DukeException If there are no tasks, or an invalid task number is given.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.getSize() == 0) {
             throw new DukeException("You don't have any tasks yet!");
         }
@@ -36,8 +36,8 @@ public class DoneCommand extends Command {
 
         Task t = tasks.getTask(this.taskNum);
         t.markDone();
-        ui.showDone(t);
         storage.updateData(tasks);
+        return ui.showDone(t);
     }
 
     /**

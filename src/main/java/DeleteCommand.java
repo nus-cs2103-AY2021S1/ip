@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException If there are no tasks, or an invalid task number is given.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.getSize() == 0) {
             throw new DukeException("You don't have any tasks yet!");
         }
@@ -36,8 +36,8 @@ public class DeleteCommand extends Command {
 
         Task t = tasks.getTask(this.taskNum);
         tasks.deleteTask(this.taskNum);
-        ui.showDelete(t, tasks);
         storage.updateData(tasks);
+        return ui.showDelete(t, tasks);
     }
 
     /**

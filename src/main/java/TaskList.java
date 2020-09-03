@@ -57,11 +57,14 @@ public class TaskList {
     /**
      * Prints the list of tasks in a numbered format.
      */
-    public void printList() {
+    public String printList() {
+        String list = "";
         for (int i = 0; i < tasks.size(); i++) {
             int num = i + 1;
-            System.out.println(num + ". " + tasks.get(i));
+            list += num + ". " + tasks.get(i) + "\n";
         }
+
+        return list;
     }
 
     /**

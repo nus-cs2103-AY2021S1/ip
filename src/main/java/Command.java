@@ -10,7 +10,7 @@ public abstract class Command {
      * @param storage Stores the new task in the computer.
      * @throws DukeException Throws the required exception as necessary.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Shows whether the command is an exit command or not.

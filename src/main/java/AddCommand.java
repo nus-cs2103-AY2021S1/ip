@@ -32,22 +32,19 @@ public class AddCommand extends Command {
      * @throws DukeException If the deadline or event is not specified in the correct format.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        Task t;
         if (this.taskType == TODO) {
-            Task t = new Todo(this.taskInfos[0]);
-            tasks.addTask(t);
-            ui.showAdd(t, tasks);
+            t = new Todo(this.taskInfos[0]);
         } else if (this.taskType == DEADLINE) {
-            Task t = new Deadline(this.taskInfos[0], this.taskInfos[1]);
-            tasks.addTask(t);
-            ui.showAdd(t, tasks);
+            t = new Deadline(this.taskInfos[0], this.taskInfos[1]);
         } else {
-            Task t = new Event(this.taskInfos[0], this.taskInfos[1]);
-            tasks.addTask(t);
-            ui.showAdd(t, tasks);
+            t = new Event(this.taskInfos[0], this.taskInfos[1]);
         }
 
+        tasks.addTask(t);
         storage.updateData(tasks);
+        return ui.showAdd(t, tasks);
     }
 
     /**
