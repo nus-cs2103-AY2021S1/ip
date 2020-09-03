@@ -2,14 +2,11 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -98,15 +95,16 @@ public class Duke extends Application {
   }
 
   /**
-   * Iteration 2: Creates two dialog boxes, one echoing user input and the other containing Duke's
+   * Iteration 3: Creates two dialog boxes, one echoing user input and the other containing Duke's
    * reply and then appends them to the dialog container. Clears the user input after processing.
+   * Dialog boxes are now alternating
    */
   private void handleUserInput() {
     Label userText = new Label(userInput.getText());
     Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
-        new DialogBox(userText, new ImageView(user)),
-        new DialogBox(dukeText, new ImageView(duke))
+        DialogBox.getUserDialog(userText, new ImageView(user)),
+        DialogBox.getDukeDialog(dukeText, new ImageView(duke))
     );
     userInput.clear();
   }
@@ -118,6 +116,7 @@ public class Duke extends Application {
   private String getResponse(String input) {
     return "Duke heard: " + input;
   }
+
 //  public static void main(String[] args) {
 //
 //    Bot bot = new Bot();
