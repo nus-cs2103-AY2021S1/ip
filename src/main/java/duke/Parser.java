@@ -4,13 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.zip.DataFormatException;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.ui.Ui;
 
 
@@ -49,6 +43,10 @@ public class Parser {
 
             } else if (Commands.EXIT.containsKeyWord(commandWord)) {
                 Command command = new ByeCommand();
+                return command.execute(" ", taskList);
+
+            } else if (Commands.HELLO.containsKeyWord(commandWord)) {
+                Command command = new HelloCommand();
                 return command.execute(" ", taskList);
 
             } else if (Commands.TODO.containsKeyWord(commandWord)
@@ -94,7 +92,7 @@ public class Parser {
 
                 // checking for event and deadline if the date is given or not
                 if (Commands.TODO.containsKeyWord(type) || partsOfTask.length == 2) {
-                    if (Commands.TODO.containsKeyWord(type) ) {
+                    if (Commands.TODO.containsKeyWord(type)) {
                         Command command = new AddCommand(type);
                         return command.execute(task, taskList);
 
@@ -120,9 +118,9 @@ public class Parser {
             } else {
                 // handles the case when no description
                 String instruction = "<type of task> <description>";
-                if (Commands.DEADLINE.containsKeyWord(type) ) {
+                if (Commands.DEADLINE.containsKeyWord(type)) {
                     instruction = "<type of task> <description> / <due date>";
-                } else if (Commands.EVENT.containsKeyWord(type) ) {
+                } else if (Commands.EVENT.containsKeyWord(type)) {
                     instruction = "<type of task> <description> / <date of event>";
                 }
                 throw new DukeGotNoArgumentsException(instruction);
