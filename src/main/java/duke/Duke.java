@@ -18,20 +18,46 @@ public class Duke {
 
     /**
      * Creates an instance of Duke.
+     *
+     * @param hasGui If there is a GUI or not.
      */
-    public Duke() {
+    public Duke(boolean hasGui) {
         TaskList taskList = new TaskList();
-        this.ui = new Ui();
+        this.ui = new Ui(hasGui);
         this.storage = new Storage("../data", "../data/duke.txt", this.ui, taskList);
         this.parser = new Parser(this.storage);
     }
 
     /**
-     * Runs Duke.
+     * Main entry point for a CLI-based Duke.
+     *
+     * @param args Command line arguments.
      */
-    public void runDuke() {
+    public static void main(String[] args) {
+        Duke duke = new Duke(false);
+        duke.runDukeCli();
+    }
+
+    /**
+     * Runs Duke with GUI.
+     *
+     * @param input Input string.
+     * @return Result of feeding Parser the input.
+     */
+    public String runDukeGui(String input) {
+        try {
+            return this.parser.processInput(input);
+        } catch (DukeInputException e) {
+            return this.ui.displayError(e.getMessage());
+        }
+    }
+
+    /**
+     * Runs Duke with CLI.
+     */
+    private void runDukeCli() {
         this.storage.checkSavedFile();
-        this.ui.printIntroduction();
+        this.ui.displayIntroduction();
         this.readInputs();
     }
 
@@ -45,7 +71,7 @@ public class Duke {
             try {
                 this.parser.processInput(nextInput);
             } catch (DukeInputException e) {
-                this.ui.printError(e.getMessage());
+                this.ui.displayError(e.getMessage());
             }
 
             // Exit the program if user says bye

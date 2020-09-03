@@ -10,7 +10,7 @@ public class ParserTest {
 
     @BeforeEach
     public void beforeEachTestMethod() {
-        Storage storage = new Storage("../data", "../data/duke.txt", new Ui(), new TaskList());
+        Storage storage = new Storage("../data", "../data/duke.txt", new Ui(false), new TaskList());
         this.parser = new Parser(storage);
     }
 

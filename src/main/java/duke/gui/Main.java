@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke = new Duke(true);
 
     @Override
     public void start(Stage stage) {
@@ -35,6 +35,6 @@ public class Main extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return duke.runDukeGui(input);
     }
 }
