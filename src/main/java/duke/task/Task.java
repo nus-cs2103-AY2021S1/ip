@@ -7,8 +7,6 @@ package duke.task;
 public class Task {
     private static final String TASK_MARKED_BEFORE = "This task has already been marked!";
     private static final String TASK_MARKED = "Nice! I've marked this task as done:";
-    //@@author Damith C. Rajapakse
-    //Reused from https://nus-cs2103-ay2021s1.github.io/website/schedule/week2/project.html with minor modifications
     protected String description;
     protected boolean isDone;
 
@@ -41,7 +39,6 @@ public class Task {
     private String getStatusIcon() {
         return (isDone ? "\u2714" : "\u2718");
     }
-    //@@author
 
     /**
      * Marks the task as completed.
