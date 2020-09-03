@@ -29,23 +29,23 @@ public class Ui {
     /**
      * A function to print the welcome message when starting Duke.
      */
-    public void greet() {
-        System.out.println(MESSAGE_GREETING);
+    public String greet() {
+        return MESSAGE_GREETING;
     }
 
     /**
      * A function to print the goodbye message when stopping Duke.
      */
-    public void farewell() {
-        System.out.println(MESSAGE_SEPERATOR + "\n" + MESSAGE_FAREWELL + "\n" + MESSAGE_SEPERATOR);
+    public String farewell() {
+        return (MESSAGE_SEPERATOR + "\n" + MESSAGE_FAREWELL + "\n" + MESSAGE_SEPERATOR);
     }
 
     /**
      * A function to print the message when marking a task as done.
      * @param doneTask the Task marked as done.
      */
-    public void doneText(Task doneTask) {
-        System.out.println(MESSAGE_SEPERATOR + "\n" + MESSAGE_DONE + "\n" + doneTask + 
+    public String doneText(Task doneTask) {
+        return (MESSAGE_SEPERATOR + "\n" + MESSAGE_DONE + "\n" + doneTask + 
                 "\n" + MESSAGE_SEPERATOR);
     }
 
@@ -54,8 +54,8 @@ public class Ui {
      * @param addTask the Task added to the list.
      * @param result the TaskList the task is added to.
      */
-    public void addTaskText(Task addTask, TaskList result) {
-        System.out.println(MESSAGE_SEPERATOR + "\n" + MESSAGE_ADD_TASK + "\n" + addTask +
+    public String addTaskText(Task addTask, TaskList result) {
+        return (MESSAGE_SEPERATOR + "\n" + MESSAGE_ADD_TASK + "\n" + addTask +
                 "\n" + String.format(MESSAGE_NUMBER_OF_TASKS, result.getSize()) + 
                 "\n" + MESSAGE_SEPERATOR);
     }
@@ -65,8 +65,8 @@ public class Ui {
      * @param deleteTask the Task deleted from the list.
      * @param result the TaskList the task is deleted from.
      */
-    public void deleteTaskText(Task deleteTask, TaskList result) {
-        System.out.println(MESSAGE_SEPERATOR + "\n" + MESSAGE_REMOVE_TASK + "\n" + deleteTask +
+    public String deleteTaskText(Task deleteTask, TaskList result) {
+       return (MESSAGE_SEPERATOR + "\n" + MESSAGE_REMOVE_TASK + "\n" + deleteTask +
                 "\n" + String.format(MESSAGE_NUMBER_OF_TASKS, result.getSize()) +
                 "\n" + MESSAGE_SEPERATOR);
     }
@@ -75,34 +75,23 @@ public class Ui {
      * A function to print all the tasks in the list.
      * @param tasks the TaskList from which all the tasks should be printed from.
      */
-    public void listText(TaskList tasks) {
-        System.out.println(MESSAGE_SEPERATOR + "\n" + MESSAGE_LIST + "\n");
-        for (int i = 0; i < tasks.getSize(); i++) {
-            String num = (i + 1) + ". ";
-            Task current = tasks.get(i);
-            System.out.println(num + current);
-        }
-        System.out.println("\n" + MESSAGE_SEPERATOR);
+    public String listText(TaskList tasks) {
+        return MESSAGE_SEPERATOR + "\n" + MESSAGE_LIST + "\n" + tasks.iterateList()
+                + "\n" + MESSAGE_SEPERATOR;
+        
     }
 
-    public void listRelevantTasks(TaskList tasks, String keyword) {
-        System.out.println(MESSAGE_SEPERATOR + "\n" + MESSAGE_FIND + "\n");
-        for (int i = 0; i < tasks.getSize(); i++) {
-            Task current = tasks.get(i);
-            if (current.containsKeyword(keyword)) {
-                String num = (i + 1) + ". ";
-                System.out.println(num + current);
-            }
-        }
-        System.out.println("\n" + MESSAGE_SEPERATOR);
+    public String listRelevantTasks(TaskList tasks, String keyword) {
+        return MESSAGE_SEPERATOR + "\n" + MESSAGE_FIND + "\n" + tasks.iterateFind(keyword) +
+                "\n" + MESSAGE_SEPERATOR;
     }
 
     /**
      * A function to print an error message for the user.
      * @param e the error message.
      */
-    public void printError(Exception e) {
-        System.out.println(e);
+    public String printError(Exception e) {
+        return e.toString();
     }
 
     /**

@@ -30,14 +30,14 @@ public class DoneCommand extends Command {
      * @throws DukeException if an invalid task number is provided to be marked as done.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int doneTaskRef = Integer.parseInt(this.nextCommandArr[1]);
             Task doneTask = tasks.get(doneTaskRef - 1);
             doneTask.setDone();
-            ui.doneText(doneTask);
+            return ui.doneText(doneTask);
         } catch (Exception e) {
-            throw new DukeException("Please input a valid task number~");
+            return new DukeException("Please input a valid task number~").toString();
         }
     }
 

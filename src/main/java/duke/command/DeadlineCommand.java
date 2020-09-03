@@ -28,17 +28,17 @@ public class DeadlineCommand extends Command {
      * @throws DukeException if the instructions for the command is insufficient or not in the proper format.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (this.nextCommandArr.length < 2) {
-            throw new DukeException("The description of a deadline cannot be empty~");
+            return new DukeException("The description of a deadline cannot be empty~").toString();
         } else {
             try {
                 String[] deadlineArr = nextCommandArr[1].split("/by");
                 Deadline newDeadline = new Deadline(deadlineArr[0], deadlineArr[1].strip());
                 tasks.add(newDeadline);
-                ui.addTaskText(newDeadline, tasks);
+                return ui.addTaskText(newDeadline, tasks);
             } catch (Exception e) {
-                throw new DukeException("Please input a proper due date for your deadline~");
+                return new DukeException("Please input a proper due date for your deadline~").toString();
             }
         }
         

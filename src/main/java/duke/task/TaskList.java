@@ -48,5 +48,34 @@ public class TaskList {
     public void remove(int index) {
         tasks.remove(index);
     }
+
+    /**
+     * A function to iterate through the list and add them all to a string.
+     * @return A string that contains every task currently in the list.
+     */
+    public String iterateList() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task current = tasks.get(i);
+            builder.append(i + 1).append(". ").append(current).append("\n");
+        }
+        return builder.toString();
+    }
+
+    /**
+     * A function to iterate through the list and add all relevant tasks to a string.
+     * @param keyword the keyword that determines if a task is relevant or not.
+     * @return A string containing all relevant tasks from the list.
+     */
+    public String iterateFind(String keyword) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task current = tasks.get(i);
+            if (current.containsKeyword(keyword)) {
+                builder.append(i + 1).append(". ").append(current).append("\n");
+            }
+        }
+        return builder.toString();
+    }
 }
 

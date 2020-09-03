@@ -30,14 +30,14 @@ public class DeleteCommand extends Command {
      * @throws DukeException if an invalid task number is provided to be deleted.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int deleteTaskRef = Integer.parseInt(this.nextCommandArr[1]);
             Task deleteTask = tasks.get(deleteTaskRef - 1);
             tasks.remove(deleteTaskRef - 1);
-            ui.deleteTaskText(deleteTask, tasks);
+            return ui.deleteTaskText(deleteTask, tasks);
         } catch (Exception e) {
-            throw new DukeException("Please provide a valid task number to delete~");
+            return new DukeException("Please provide a valid task number to delete~").toString();
         }
     }
 

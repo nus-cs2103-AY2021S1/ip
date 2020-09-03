@@ -29,13 +29,13 @@ public class TodoCommand extends Command {
      * @throws DukeException if the instructions for this command is insufficient.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Todo newTodo = new Todo(nextCommandArr[1]);
             tasks.add(newTodo);
-            ui.addTaskText(newTodo, tasks);
+            return ui.addTaskText(newTodo, tasks);
         } catch (Exception e) {
-            throw new DukeException("The description of a todo cannot be empty~");
+            return new DukeException("The description of a todo cannot be empty~").toString();
         }
         
     }
