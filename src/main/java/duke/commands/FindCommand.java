@@ -3,7 +3,7 @@ package duke.commands;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import duke.ui.textUI.Ui;
 
 /**
  * Class that simulates the find command of the user.
@@ -23,6 +23,9 @@ public class FindCommand extends Command {
     }
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
         return findTasks(tasks, inputArr[1], ui);
     }
 

@@ -20,7 +20,7 @@ import duke.exception.InvalidFormatListException;
 import duke.exception.UnknownCommandException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
+import duke.ui.textUI.Ui;
 
 public class ParserTest {
     private Parser p;
