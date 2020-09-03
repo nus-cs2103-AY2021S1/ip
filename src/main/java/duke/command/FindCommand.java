@@ -1,16 +1,19 @@
 package duke.command;
 
 import duke.storage.Storage;
+
 import duke.task.TaskList;
+
 import duke.ui.Ui;
 
 /**
  * Represents a call to find Tasks that contain the keyword.
  */
 public class FindCommand extends Command {
-    public static final String COMMAND_WORD = "find";
 
     private final String keyWords;
+
+    public static final String COMMAND_WORD = "find";
 
     /**
      * Constructor for FindCommand.

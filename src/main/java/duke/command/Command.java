@@ -1,14 +1,18 @@
 package duke.command;
 
 import duke.task.TaskList;
+
 import duke.ui.Ui;
+
 import duke.storage.Storage;
+
 import duke.exception.DukeException;
 
 /**
  * A Command represents an instruction to be executed by Duke.
  */
 public abstract class Command {
+
     /**
      * Identifies of the Command results in the termination of Duke program.
      */

@@ -1,8 +1,8 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.exception.DukeException;
 import duke.command.*;
+
+import duke.exception.DukeException;
 
 /**
  * Parser takes in and makes sense of the user input read by Ui.
@@ -119,6 +119,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a FindCommand if user input is valid.
+     * @param suffix String that follows after "find" command.
+     */
     private static Command prepareFind(String suffix) throws DukeException {
         if (suffix.length() == 0) {
             throw new DukeException("You cannot search for nothing.");

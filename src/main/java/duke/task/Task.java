@@ -6,6 +6,7 @@ import java.util.Optional;
  * This class is a representation of a Task object.
  */
 public abstract class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -43,12 +44,16 @@ public abstract class Task {
     /**
      * Checks if the Task isDone.
      */
-    public boolean isDone() { return isDone; }
+    public boolean isDone() {
+        return isDone;
+    }
 
     /**
      * Returns 1 if Task isDone, 0 otherwise.
      */
-    public String isDoneToString() { return isDone ? "1" : "0"; }
+    public String isDoneToString() {
+        return isDone ? "1" : "0";
+    }
 
     /**
      * Method for returning the letter representation of a Task.

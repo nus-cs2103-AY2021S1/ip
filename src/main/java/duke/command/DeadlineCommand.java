@@ -1,20 +1,24 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Deadline;
+
 import duke.ui.Ui;
+
 import duke.storage.Storage;
+
+import duke.exception.DukeException;
 
 /**
  * Represents a call to create a new Deadline Task.
  */
 public class DeadlineCommand extends Command {
-    public static final String COMMAND_WORD = "deadline";
 
     private final String description;
     private final String deadline;
+
+    public static final String COMMAND_WORD = "deadline";
 
     /**
      * Constructor for DeadlineCommand.

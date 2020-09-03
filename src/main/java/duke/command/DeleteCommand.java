@@ -2,17 +2,21 @@ package duke.command;
 
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.exception.DukeException;
+
 import duke.ui.Ui;
+
 import duke.storage.Storage;
+
+import duke.exception.DukeException;
 
 /**
  * Represents a call to delete a Task from TaskList.
  */
 public class DeleteCommand extends Command {
-    public static final String COMMAND_WORD = "delete";
 
     private final int taskNumber;
+
+    public static final String COMMAND_WORD = "delete";
 
     /**
      * Constructor for DeleteCommand.

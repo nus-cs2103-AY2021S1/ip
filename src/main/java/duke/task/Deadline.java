@@ -16,7 +16,7 @@ public class Deadline extends Task {
     private LocalDate byLocalDate;
 
     /**
-     * Constructs a new Deadline Task
+     * Constructs a new Deadline Task.
      * @param description Description of Task.
      * @param by Date due for the Deadline.
      */
@@ -30,11 +30,17 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the letter D for writing to hard disk file.
+     */
     @Override
     public String getStringType() {
         return "D";
     }
 
+    /**
+     * Returns Optional containing the deadline.
+     */
     @Override
     public Optional<String> getDate() {
         return Optional.of(this.by);

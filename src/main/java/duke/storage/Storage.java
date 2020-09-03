@@ -1,13 +1,17 @@
 package duke.storage;
 
 import duke.task.*;
+
 import duke.exception.DukeException;
+import java.io.IOException;
+
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
+import java.util.Scanner;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 /**
  * The Storage class handles the reading and writing of data from the hard disk.
@@ -36,10 +40,12 @@ public class Storage {
             for (int i = 1; i <= tasks.getNumOfTasks(); i++) {
                 Task t = tasks.retrieve(i);
                 // Insert / separators.
-                String nextEntry =
-                        t.getStringType() + " / " +
-                        t.isDoneToString() + " / " +
-                        t.getDescription() + t.getDate().map(result -> " / " + result).orElse("");
+                String nextEntry = t.getStringType()
+                        + " / " + t.isDoneToString()
+                        + " / " + t.getDescription()
+                        + t.getDate()
+                        .map(result -> " / " + result)
+                        .orElse("");
 
                 textToWrite.append(nextEntry).append("\n");
             }

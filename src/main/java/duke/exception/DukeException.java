@@ -10,7 +10,8 @@ public class DukeException extends Exception {
      * Default constructor.
      */
     public DukeException() {
-        this.e = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        this.e = ">_< OOPS!!! \n"
+                + "I'm sorry, but I don't know what that means :-(";
     }
 
     /**
@@ -18,7 +19,7 @@ public class DukeException extends Exception {
      * @param e Error message to be shown.
      */
     public DukeException(String e) {
-        this.e = "☹ OOPS!!! " + e;
+        this.e = ">_< OOPS!!! \n" + e;
     }
 
     @Override

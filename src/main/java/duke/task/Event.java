@@ -19,11 +19,17 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns the letter E for writing to hard disk file.
+     */
     @Override
     public String getStringType() {
         return "E";
     }
 
+    /**
+     * Returns Optional containing the event date.
+     */
     @Override
     public Optional<String> getDate() {
         return Optional.of(this.at);

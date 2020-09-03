@@ -3,17 +3,20 @@ package duke.command;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Event;
+
 import duke.ui.Ui;
+
 import duke.storage.Storage;
 
 /**
  * Represents a call to create a new Event Task.
  */
 public class EventCommand extends Command {
-    public static final String COMMAND_WORD = "event";
 
     private final String description;
     private final String eventDate;
+
+    public static final String COMMAND_WORD = "event";
 
     /**
      * Constructor for EventCommand.
