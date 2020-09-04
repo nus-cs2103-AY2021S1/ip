@@ -8,8 +8,12 @@ import duke.parser.Parser;
 
 import duke.task.TaskList;
 
-import duke.ui.Message;
 import duke.ui.Ui;
+
+import static duke.Storage.STORAGE_FILEPATH;
+import static duke.ui.Message.MESSAGE_LOADING_ERROR;
+import static duke.ui.Message.MESSAGE_WELCOME;
+import static duke.ui.Message.showError;
 
 /**
  * Main program of the Duke program.
@@ -21,7 +25,7 @@ public class Duke {
     private Ui ui;
 
     public Duke() {
-        this(Storage.STORAGE_FILEPATH);
+        this(STORAGE_FILEPATH);
     }
 
     /**
@@ -35,7 +39,7 @@ public class Duke {
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.printResponse(Message.MESSAGE_LOADING_ERROR);
+            ui.printResponse(MESSAGE_LOADING_ERROR);
             this.tasks = new TaskList();
         }
     }
@@ -54,7 +58,7 @@ public class Duke {
     }
 
     private void run() {
-        ui.printResponse(Message.MESSAGE_WELCOME);
+        ui.printResponse(MESSAGE_WELCOME);
         ui.showLine();
         boolean isExit = false;
         while (!isExit) {
@@ -64,7 +68,7 @@ public class Duke {
                 ui.printResponse(c.execute(tasks, ui, storage));
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.printResponse(Message.showError(e.getMessage()));
+                ui.printResponse(showError(e.getMessage()));
             }
         }
     }
@@ -77,7 +81,7 @@ public class Duke {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            return Message.showError(e.getMessage());
+            return showError(e.getMessage());
         }
     }
 }

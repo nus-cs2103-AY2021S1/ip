@@ -1,6 +1,9 @@
 package duke.ui;
 
 import duke.Duke;
+
+import static duke.ui.Message.MESSAGE_WELCOME;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -59,7 +62,7 @@ public class MainWindow extends AnchorPane {
 
     private void showWelcomeMessage() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Message.MESSAGE_WELCOME, dukeImage)
+                DialogBox.getDukeDialog(MESSAGE_WELCOME, dukeImage)
         );
     }
 }

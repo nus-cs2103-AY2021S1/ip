@@ -7,8 +7,12 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import duke.ui.Message;
 import duke.ui.Ui;
+
+import static duke.ui.Message.concatLines;
+import static duke.ui.Message.MESSAGE_DELETE;
+import static duke.ui.Ui.LINE_SEPARATOR;
+import static duke.ui.Message.getTotalTaskMessage;
 
 /**
  * Deletes a task from the task list.
@@ -34,7 +38,6 @@ public class DeleteCommand extends Command {
 
         assert !taskList.getTasks().contains(task) : "Task is not removed from the taskList!";
 
-        return Message.concatLines(Message.MESSAGE_DELETE, task.toString(),
-                Ui.LINE_SEPARATOR, Message.getTotalTaskMessage(taskList));
+        return concatLines(MESSAGE_DELETE, task.toString(), LINE_SEPARATOR, getTotalTaskMessage(taskList));
     }
 }

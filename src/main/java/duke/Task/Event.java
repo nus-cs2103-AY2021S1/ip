@@ -90,6 +90,7 @@ public class Event extends Task {
     private String atFormat() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("EEE, d MMMM yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
+
         if (endDate == null) {
             return String.format("%s, %s - %s", dateFormatter.format(startDate),
                     timeFormatter.format(startTime),

@@ -2,9 +2,9 @@ package duke.task;
 
 import duke.exception.DukeException;
 
-import duke.ui.Ui;
-
 import java.util.ArrayList;
+
+import static duke.ui.Ui.LINE_SEPARATOR;
 
 /**
  * Represents a list of tasks.
@@ -46,8 +46,7 @@ public class TaskList {
             return tasks.get(taskId - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(String.format("task No.%d is not in your list. "
-                    + "Please enter a valid task ID!",
-                    taskId));
+                    + "Please enter a valid task ID!", taskId));
         }
     }
 
@@ -112,9 +111,10 @@ public class TaskList {
             Task task = tasks.get(i - 1);
             sb.append(String.format("%d.%s", i, task));
             if (i != tasks.size()) {
-                sb.append(Ui.LINE_SEPARATOR);
+                sb.append(LINE_SEPARATOR);
             }
         }
+        sb.append(LINE_SEPARATOR);
         return sb.toString();
     }
 }
