@@ -1,14 +1,13 @@
 package duke;
 
-import java.io.IOException;
-import java.util.Scanner;
-
 import duke.exceptions.DukeException;
 import duke.logic.CommandParser;
 import duke.logic.commands.Command;
 import duke.model.TaskManager;
 import duke.storage.Storage;
 import duke.ui.Ui;
+
+import java.io.IOException;
 
 public class Duke {
     private static final String FILE_PATH = "data/DukeDB.txt";
@@ -44,7 +43,6 @@ public class Duke {
             }
         }
     }
-
 
     public static void main(String[] args) throws IOException {
         new Duke().run();
