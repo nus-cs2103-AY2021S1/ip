@@ -7,6 +7,7 @@ public class CommandNotFoundException extends Exception {
 
     @Override
     public String getMessage() {
-        return "🙈 OOPS!!! Sorry I don't understand what that means";
+        return "🙈 OOPS!!! \n" +
+                "Sorry I don't understand what that means";
     }
 }

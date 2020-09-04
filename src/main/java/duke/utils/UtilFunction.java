@@ -1,8 +1,10 @@
 package duke.utils;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,12 +58,12 @@ public class UtilFunction {
             if (sentence.length() < Constants.CONSOLEWIDTH) {
                 System.out.println(sentence);
             } else {
-                lineSentence(sentence);
+                wrapAndDisplay(sentence);
             }
         }
     }
 
-    private static void lineSentence(String sentence) {
+    private static void wrapAndDisplay(String sentence) {
         String[] words = sentence.split("\\s+");
         int count = 0;
         for (String word: words) {
@@ -75,4 +77,20 @@ public class UtilFunction {
         }
         System.out.print('\n');
     }
+
+    public static String getCurrentTime() {
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        Date now = new Date(System.currentTimeMillis());
+        return formatter.format(now);
+    }
+
+    public static int getPadding(String text) {
+        String[] sentences = text.split("\n");
+        int sol = 0;
+        for(String sentence : sentences) {
+            sol +=  Math.ceil(sentence.length()/(42.0));
+        }
+        return sol * 10 + 30;
+    }
+
 }

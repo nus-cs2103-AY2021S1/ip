@@ -56,6 +56,9 @@ public class Constants {
 
     public static final String FINDPATTERN = ("^(f|F)(i|I)(n|N)(d|D)$");
 
+    public static final String HELPPATTERN = ("^(h|H)(e|E)(l|L)(p|P)$");
+
+
     /**
      * Default console width.
      */

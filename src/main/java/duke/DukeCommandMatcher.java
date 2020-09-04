@@ -30,7 +30,7 @@ public class DukeCommandMatcher {
 
     private static final List<String> commandList = new ArrayList<>(Arrays.asList(Constants.LISTPATTERN,
             Constants.EXITPATTERN, Constants.DONEPATTERN, Constants.TODOPATTERN, Constants.DEADLINEPATTERN,
-            Constants.EVENTPATTERN, Constants.DELETEPATTERN, Constants.FINDPATTERN
+            Constants.EVENTPATTERN, Constants.DELETEPATTERN, Constants.FINDPATTERN, Constants.HELPPATTERN
     ));
 
     private SingletonTaskList taskList;
@@ -81,6 +81,8 @@ public class DukeCommandMatcher {
                     return handleDelete(splitCommand);
                 case Constants.FINDPATTERN:
                     return handleFind(splitCommand);
+                case Constants.HELPPATTERN:
+                    return handleHelp();
                 default:
                     break;
                 }
@@ -181,6 +183,10 @@ public class DukeCommandMatcher {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new NullCommandContentException("no query body", "FIND");
         }
+    }
+
+    private String handleHelp() {
+        return Printer.printListCommands();
     }
 
 }

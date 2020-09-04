@@ -80,4 +80,9 @@ public class Printer {
         System.out.println(message);
         return message;
     }
+
+    public static String printListCommands() {
+        return "help\n" + "done\n" + "todo\n" + "deadline\n" + "event\n" + "bye\n" + "list\n" + "find\n" + "done\n"
+                + "delete";
+    }
 }
