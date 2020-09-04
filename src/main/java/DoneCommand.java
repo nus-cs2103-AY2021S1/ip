@@ -6,10 +6,14 @@ public class DoneCommand extends Command{
 
     @Override
     public void execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
-        String[] commandDetails = command.split(" ");
-        int doneIndex = Integer.parseInt(commandDetails[1]) - 1;
-        Task doneTask = tm.getTask(doneIndex);
-        tm.markTaskDone(doneIndex);
-        ui.showDetails("Task marked as done: " + doneTask);
+        String[] commandDetails = command.split(" ", 2);
+        try {
+            int doneIndex = Integer.parseInt(commandDetails[1]) - 1;
+            Task doneTask = tm.getTask(doneIndex);
+            tm.markTaskDone(doneIndex);
+            ui.showDetails("Task marked as done: " + doneTask);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Index is not a number!");
+        }
     }
 }

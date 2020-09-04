@@ -15,21 +15,37 @@ public class TaskManager {
         taskList.add(task);
     }
 
-    public void markTaskDone(int index) {
-        Task completedTask = taskList.get(index);
-        completedTask.markAsDone();
+    public void markTaskDone(int index) throws DukeException {
+        try {
+            Task completedTask = taskList.get(index);
+            completedTask.markAsDone();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Invalid index!");
+        }
     }
 
-    public void deleteTask(int index) {
-        Task toDeleteTask = taskList.get(index);
-        taskList.remove(toDeleteTask);
+    public void deleteTask(int index) throws DukeException {
+        try {
+            Task toDeleteTask = taskList.get(index);
+            taskList.remove(toDeleteTask);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Invalid index!");
+        }
     }
 
-    public Task getTask(int index) {
-        return taskList.get(index);
+    public Task getTask(int index) throws DukeException {
+        try {
+            return taskList.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Invalid index!");
+        }
     }
 
     public ArrayList<Task> getTaskList() {
         return taskList;
+    }
+
+    public int size() {
+        return taskList.size();
     }
 }
