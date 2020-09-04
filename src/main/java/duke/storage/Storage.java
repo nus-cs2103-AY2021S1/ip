@@ -14,6 +14,7 @@ import duke.DukeAction;
 import duke.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+import duke.tasks.Priority;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
@@ -101,35 +102,19 @@ public class Storage {
             if (!taskString.equals("")) {
                 String[] taskSplit = taskString.split("!@#");
                 String taskType = taskSplit[0];
-                String taskDone = taskSplit[1];
-                String taskDesc = taskSplit[2];
 
                 switch (taskType) {
 
                 case "T":
-                    Todo todo = new Todo(taskDesc);
-                    if (taskDone.equals("1")) {
-                        todo.markAsDone();
-                    }
-                    tasks.add(todo);
+                    loadTodoTask(taskSplit, tasks);
                     break;
 
                 case "D":
-                    String taskDeadline = taskSplit[3] + " " + taskSplit[4];
-                    Deadline deadline = Deadline.createDeadline(taskDesc, taskDeadline);
-                    if (taskDone.equals("1")) {
-                        deadline.markAsDone();
-                    }
-                    tasks.add(deadline);
+                    loadDeadlineTask(taskSplit, tasks);
                     break;
 
                 case "E":
-                    String taskDateTime = taskSplit[3] + " " + taskSplit[4];
-                    Event event = Event.createEvent(taskDesc, taskDateTime);
-                    if (taskDone.equals("1")) {
-                        event.markAsDone();
-                    }
-                    tasks.add(event);
+                    loadEventTask(taskSplit, tasks);
                     break;
 
                 default:
@@ -137,6 +122,107 @@ public class Storage {
                 }
             }
         }
+    }
+
+    /**
+     * Add todo task from file to task list.
+     * @param taskSplit task string in file split by regex !@#
+     * @param tasks task list
+     */
+    public void loadTodoTask(String[] taskSplit, List<Task> tasks) {
+        String taskDone = taskSplit[1];
+        String taskDesc = taskSplit[2];
+
+        Todo todo = new Todo(taskDesc);
+
+        if (taskDone.equals("1")) {
+            todo.markAsDone();
+        }
+
+        String priority = taskSplit[3];
+        switch (priority) {
+        case "HIGH":
+            todo.setPriority(Priority.HIGH);
+            break;
+        case "MID":
+            todo.setPriority(Priority.MID);
+            break;
+        case "LOW":
+            todo.setPriority(Priority.LOW);
+            break;
+        default:
+            break;
+        }
+
+        tasks.add(todo);
+    }
+
+    /**
+     * Add deadline task from file to task list.
+     * @param taskSplit task string in file split by regex !@#
+     * @param tasks task list
+     */
+    public void loadDeadlineTask(String[] taskSplit, List<Task> tasks) throws DukeException {
+        String taskDone = taskSplit[1];
+        String taskDesc = taskSplit[2];
+        String taskDeadline = taskSplit[3] + " " + taskSplit[4];
+
+        Deadline deadline = Deadline.createDeadline(taskDesc, taskDeadline);
+
+        if (taskDone.equals("1")) {
+            deadline.markAsDone();
+        }
+
+        String priority = taskSplit[5];
+        switch (priority) {
+        case "HIGH":
+            deadline.setPriority(Priority.HIGH);
+            break;
+        case "MID":
+            deadline.setPriority(Priority.MID);
+            break;
+        case "LOW":
+            deadline.setPriority(Priority.LOW);
+            break;
+        default:
+            break;
+        }
+
+        tasks.add(deadline);
+    }
+
+    /**
+     * Add event task from file to task list.
+     * @param taskSplit task string in file split by regex !@#
+     * @param tasks task list
+     */
+    public void loadEventTask(String[] taskSplit, List<Task> tasks) throws DukeException {
+        String taskDone = taskSplit[1];
+        String taskDesc = taskSplit[2];
+        String taskDateTime = taskSplit[3] + " " + taskSplit[4];
+
+        Event event = Event.createEvent(taskDesc, taskDateTime);
+
+        if (taskDone.equals("1")) {
+            event.markAsDone();
+        }
+
+        String priority = taskSplit[5];
+        switch (priority) {
+        case "HIGH":
+            event.setPriority(Priority.HIGH);
+            break;
+        case "MID":
+            event.setPriority(Priority.MID);
+            break;
+        case "LOW":
+            event.setPriority(Priority.LOW);
+            break;
+        default:
+            break;
+        }
+
+        tasks.add(event);
     }
 
     /**
@@ -172,6 +258,11 @@ public class Storage {
 
             case MARK_DONE:
                 markTaskDoneInFile(task, reader, writer);
+                deleteAndReplaceFile(inputFile, tempFile);
+                break;
+
+            case SET_PRIORITY:
+                setTaskPriorityInFile(task, reader, writer);
                 deleteAndReplaceFile(inputFile, tempFile);
                 break;
 
@@ -227,6 +318,47 @@ public class Storage {
                 String taskType = currentL.substring(0, 4);
                 String taskDesc = currentL.substring(5);
                 writer.write(taskType + "1" + taskDesc);
+            }
+            writer.newLine();
+        }
+
+        writer.close();
+        reader.close();
+        System.gc();
+    }
+
+    /**
+     * Sets priority of task in file.
+     * @param task Task to set priority
+     * @param reader reader to read file
+     * @param writer writer to write to file
+     * @throws IOException If I/O operation interrupted.
+     * @throws DukeException If priority is not valid.
+     */
+    public void setTaskPriorityInFile(Task task, BufferedReader reader, BufferedWriter writer)
+            throws IOException, DukeException {
+        Priority priority = task.getPriority();
+        String currentTask = task.storedTaskString();
+        String taskToSetPriority;
+
+        switch (priority) {
+        case HIGH:
+            taskToSetPriority = currentTask.substring(0, currentTask.length() - 7);
+            break;
+        case MID:
+        case LOW:
+            taskToSetPriority = currentTask.substring(0, currentTask.length() - 6);
+            break;
+        default:
+            throw new DukeException("Something went wrong in setting priority to task in file.");
+        }
+
+        String currentL;
+        while ((currentL = reader.readLine()) != null) {
+            if (!currentL.contains(taskToSetPriority)) {
+                writer.write(currentL);
+            } else {
+                writer.write(task.storedTaskString());
             }
             writer.newLine();
         }

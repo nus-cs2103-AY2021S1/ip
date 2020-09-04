@@ -27,6 +27,10 @@ public class Task {
         return (isDone ? "1" : "0"); //return 1 or 0 symbols
     }
 
+    public Priority getPriority() {
+        return this.priority;
+    }
+
     /**
      * Marks task as done.
      */

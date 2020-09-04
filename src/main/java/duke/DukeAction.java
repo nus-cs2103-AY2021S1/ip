@@ -10,5 +10,6 @@ package duke;
 public enum DukeAction {
     MARK_DONE,
     ADD,
-    DELETE
+    DELETE,
+    SET_PRIORITY
 }

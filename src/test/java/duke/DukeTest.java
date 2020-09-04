@@ -2,6 +2,7 @@ package duke;
 
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +13,8 @@ public class DukeTest {
 
     @Test
     public void createEvent_wrongDateTimeFormat_exceptionThrown() {
-        String errorMessage = "Rawr! Dino could not add your task. Make sure your format is correct.\n" +
-                "Formats to input a task can be found by entering 'format'.";
+        String errorMessage = "Rawr! Dino could not add your task. Make sure your format is correct.\n"
+                + "Formats to input a task can be found by entering 'format'.";
 
         Exception e = Assertions.assertThrows(DukeException.class, () -> {
             Event.createEvent("travel to japan", "2020-13-12 1800-2400");

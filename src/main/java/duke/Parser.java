@@ -8,6 +8,7 @@ import duke.command.FindCommand;
 import duke.command.FormatCommand;
 import duke.command.ListCommand;
 import duke.command.MarkDoneCommand;
+import duke.command.PriorityCommand;
 
 /**
  * The Parser class parses user input into
@@ -51,8 +52,36 @@ public class Parser {
                 || inputWords[0].equals("event")) {
             // Dino adds task to list
             return new AddCommand(userInput);
+        } else if (checkInputForPriority(userInput)) {
+            // condition checks that user input is in format
+            // "priority <word> X", where X is a numeric
+            return new PriorityCommand(userInput);
         } else {
             throw new DukeException("Invalid command entered! Please enter a valid command.");
+        }
+    }
+
+    /**
+     * Checks the user input format to see if it matches a command to set
+     * priority of task.
+     * @param input user input command
+     * @return boolean true if input format is correct
+     */
+    public static boolean checkInputForPriority(String input) {
+        String[] inputWords = input.split(" ");
+        if (inputWords[0].equals("priority") && inputWords[2].matches("[0-9]+")
+                && inputWords.length == 3) {
+            String priority = inputWords[1];
+            switch (priority) {
+            case "high":
+            case "mid":
+            case "low":
+                return true;
+            default:
+                return false;
+            }
+        } else {
+            return false;
         }
     }
 }

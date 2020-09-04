@@ -256,4 +256,40 @@ public class TaskList {
                     + "Dino could not find any matching tasks in your list.");
         }
     }
+
+    public String setTaskPriority(Storage storage, String input) throws DukeException {
+        String[] inputWords = input.split(" ");
+        String priority = inputWords[1];
+        int taskNumber = Integer.parseInt(inputWords[2]);
+
+        if (taskNumber <= this.taskList.size() && taskNumber > 0) {
+            // task number is valid
+            int taskIndex = taskNumber - 1;
+            Task taskToSetPriority = this.taskList.get(taskIndex);
+
+            switch (priority) {
+            case "high":
+                taskToSetPriority.setPriority(Priority.HIGH);
+                break;
+            case "mid":
+                taskToSetPriority.setPriority(Priority.MID);
+                break;
+            case "low":
+                taskToSetPriority.setPriority(Priority.LOW);
+                break;
+            default:
+                throw new DukeException("Rawr! Please enter either"
+                        + "high/mid/low for priority status.");
+            }
+
+            storage.writeToFile(taskToSetPriority, DukeAction.SET_PRIORITY);
+
+            return "Great! Dino has set " + taskToSetPriority.priority.name()
+                    + " priority for " + "Task " + taskNumber
+                    + " :\n" + taskToSetPriority;
+        } else {
+            assert (taskNumber > taskList.size());
+            throw new DukeException("Task " + taskNumber + " is not in your list of tasks!");
+        }
+    }
 }

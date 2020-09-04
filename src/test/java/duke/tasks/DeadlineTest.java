@@ -1,8 +1,12 @@
 package duke.tasks;
 
-import duke.DukeException;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
+
+
 
 public class DeadlineTest {
     @Test
@@ -13,7 +17,7 @@ public class DeadlineTest {
 
     @Test
     public void testStoredStringFormat() throws DukeException {
-        assertEquals("D@0@homework@2020-12-12@1800",
+        assertEquals("D!@#0!@#homework!@#2020-12-12!@#1800!@#NONE",
                 Deadline.createDeadline("homework", "2020-12-12 1800").storedTaskString());
     }
 

@@ -116,7 +116,7 @@ public class Event extends Task {
         if (!priority.equals(Priority.NONE)) {
             return "[E]" + super.toString() + " (at: "
                     + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                    + ", " + this.time + ") " + " <" + this.priority + ">";
+                    + ", " + this.time + ") " + "<" + this.priority + ">";
         } else {
             return "[E]" + super.toString() + " (at: "
                     + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))

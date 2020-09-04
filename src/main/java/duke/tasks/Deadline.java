@@ -115,7 +115,7 @@ public class Deadline extends Task {
         if (!priority.equals(Priority.NONE)) {
             return "[D]" + super.toString() + " (by: "
                     + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                    + ", " + this.time + ") " + " <" + this.priority + ">";
+                    + ", " + this.time + ") " + "<" + this.priority + ">";
         } else {
             return "[D]" + super.toString() + " (by: "
                     + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
