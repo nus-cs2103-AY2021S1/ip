@@ -14,12 +14,14 @@ public class Deadline extends TimedTask {
 
     /**
      * Loads a Deadline from its stored form.
+     *
      * @param str String representing the task in the storage file.
      * @return The corresponding Deadline.
      */
     public static Deadline load(String str) {
         String[] arr = str.split("\\|", 4);
         Deadline dl = new Deadline(arr[2], arr[3]);
+        assert (arr[0].equals("D"));
         if (arr[1].equals("true")) {
             dl.isDone = true;
         }
