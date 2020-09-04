@@ -65,7 +65,7 @@ public class Ui {
     }
 
     /**
-     * Return String for unknown input.
+     * Returns String for unknown input.
      * @return String for unknown input
      */
     public String unknownInputLine() {

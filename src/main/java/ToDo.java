@@ -11,7 +11,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Overloaded Constructor for Todo tasl object.
+     * Overloaded Constructor for Todo task object.
      * @param name The name of task to be done
      * @param done The boolean for task completion status
      */
