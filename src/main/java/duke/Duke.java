@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.function.Function;
 
 public class Duke {
     private final static String WRONG_FORMAT_MSG = "Wrong format\n"
@@ -72,23 +73,26 @@ public class Duke {
      * @return message to user
      * @throws DukeException
      */
-    protected String furtherProcessing(Commands commandType, String[] tokens, boolean isLoaded) throws DukeException {
+    protected String distributeCommand(Commands commandType, String[] tokens, boolean isLoaded) throws DukeException {
         Task parsedTask = new Task("");
+
+        //pass this to parser to hide storage from it
+        Function<Void, Void> saveTaskListStorage = param -> {
+            storage.saveTasks(tasks.getTaskList());
+            return null;
+        };
+
         if (commandType == Commands.DEADLINE || commandType == Commands.EVENT || commandType == Commands.TODO) {
-            parsedTask = parser.parseCommand(commandType, tokens, isLoaded, getNumTasks());
+            parsedTask = parser.parseTaskCommand(commandType, tokens, isLoaded, getNumTasks());
         } else if (commandType == Commands.DELETE) {
 
             int markNumber = Integer.parseInt(tokens[1]);
-            String result = tasks.deleteTask(markNumber, getNumTasks());
-            storage.saveTasks(this.tasks.getTaskList());
-            return result;
+            return parser.parseOperationCommand(Commands.DELETE, markNumber, getNumTasks(), tasks, saveTaskListStorage);
 
         } else if (commandType == Commands.DONE) {
 
             int markNumber = Integer.parseInt(tokens[1]);
-            String result = tasks.doneTask(markNumber);
-            storage.saveTasks(this.tasks.getTaskList());
-            return result;
+            return parser.parseOperationCommand(Commands.DONE, markNumber, getNumTasks(), tasks, saveTaskListStorage);
 
         }  else if (commandType == Commands.LIST) {
 
@@ -114,12 +118,12 @@ public class Duke {
      * @return message to user
      * @throws DukeException
      */
-    protected String processedCommand(String command, boolean isLoaded) throws DukeException {
+    protected String tokenizeCommand(String command, boolean isLoaded) throws DukeException {
         command = command.strip();
         if (command.equals("")) return "";
         String[] tokens = command.split(" ");
         try {
-            return furtherProcessing(Commands.valueOf(tokens[0].toUpperCase()), tokens, isLoaded);
+            return distributeCommand(Commands.valueOf(tokens[0].toUpperCase()), tokens, isLoaded);
         } catch (IllegalArgumentException e) {
             throw new DukeException(ERROR_MSG);
         }
@@ -132,12 +136,14 @@ public class Duke {
         String result = "";
         result += Ui.printDialog(GREETINGS);
         ArrayList<String> savedTasks = storage.loadSavedTasks();
-        if (savedTasks.size() > 0 && savedTasks.get(0).equals(ERROR_CODE)) {
-            result += Ui.printDialog(FIRST_TIME);
+        assert savedTasks != null : "Storage is null";
+
+        if (savedTasks.size() > 0 && savedTasks.get(0).equals("000")) {
+            result += Ui.printDialog("This is the first time you use Duke!");
         } else {
             try {
                 for (String task : savedTasks) {
-                    processedCommand(task, true);
+                    tokenizeCommand(task, true);
                 }
             } catch (DukeException e) {
                 result += Ui.printDialog(ERROR_LOAD_MSG);
@@ -146,11 +152,12 @@ public class Duke {
         return result;
     }
     public String getResponse(String content) {
+        assert content != null : "Response is null";
+
         content = content.strip();
         if (content.equals(Commands.BYE.getAction())) {
             this.stage.close();
             return Ui.printDialog(EXIT_MSG);
-            //exit the program
         }
         if (content.equals(Commands.HELP.getAction())) {
             String res = "";
@@ -163,7 +170,7 @@ public class Duke {
             return Ui.printStoredTasks(this.tasks.getTaskList());
         } else {
             try {
-                String result = processedCommand(content, false);
+                String result = tokenizeCommand(content, false);
                 if (!result.equals("")) return Ui.printDialog(result);
             } catch (DukeException e) {
                 return Ui.printDialog(e.getMessage());

@@ -15,10 +15,12 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
     public ArrayList<Task> getTaskList() {
+        assert (this.taskList != null) : "Tasklist is null";
         return this.taskList;
     }
 
     public void addTask(Task task) {
+        assert task != null : "Null task";
         this.taskList.add(task);
     }
 

@@ -9,6 +9,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.time.LocalDate;
+import java.util.function.Function;
 
 public class Parser {
     private final static String PARSE_ERROR = "Wrong format\n    Your date and time(optional) "
@@ -27,12 +28,15 @@ public class Parser {
      * @return
      */
     public static Todo stringToTodo(String content, boolean isLoaded, boolean isDone) {
+        assert (content != null && !content.equals("")) : "Empty or null content";
+
         Todo todoTask = new Todo(content);
         if (isLoaded && isDone) {
             todoTask.markAsDone();
         }
         return todoTask;
     }
+
 
     /**
      * Converts string to Deadline
@@ -47,6 +51,11 @@ public class Parser {
     public static Deadline stringToDeadline(String content, LocalDate deadline,
                                             String exactTime, String deadlineStr,
                                             boolean isLoaded, boolean isDone) {
+        assert (content != null && !content.equals("")) : "Empty or null content";
+        assert (deadline != null) : "Null deadline";
+        assert (exactTime != null && !exactTime.equals("")) : "Empty or null time";
+        assert (deadlineStr != null && !deadlineStr.equals("")) : "Empty or null deadline string";
+
         Deadline deadlineTask = new Deadline(content, deadline, exactTime, deadlineStr);
         if (isLoaded && isDone) {
             deadlineTask.markAsDone();
@@ -67,6 +76,11 @@ public class Parser {
     public static Event stringToEvent(String content, LocalDate deadline,
                                       String exactTime, String deadlineStr,
                                       Boolean isLoaded, Boolean isDone) {
+        assert (content != null && !content.equals("")) : "Empty or null content for event";
+        assert (deadline != null) : "Null deadline for event";
+        assert (exactTime != null && !exactTime.equals("")) : "Empty or null time for event";
+        assert (deadlineStr != null && !deadlineStr.equals("")) : "Empty or null deadline string for event";
+
         Event eventTask = new Event(content, deadline, exactTime, deadlineStr);
         if (isLoaded && isDone) {
             eventTask.markAsDone();
@@ -81,6 +95,8 @@ public class Parser {
      * @return content and deadline as strings
      */
     public String[] extractData(boolean isLoaded, String[] tokens) {
+        assert (tokens != null) : "Null tokens";
+
         String content = "";
         String deadlineStr = "";
         //saved items has a final token which decides its completion status
@@ -154,6 +170,36 @@ public class Parser {
     }
 
     /**
+     * Parses operational commands
+     * @param commandType
+     * @param markNumber
+     * @param numTasks
+     * @param tasks
+     * @param saveTaskListStorage
+     * @return string representation of operational commands
+     * @throws DukeException
+     */
+    public String parseOperationCommand(Commands commandType, int markNumber, int numTasks,
+                                        TaskList tasks, Function<Void, Void> saveTaskListStorage) throws DukeException {
+        String result;
+        switch (commandType) {
+            case DONE: {
+                result = tasks.doneTask(markNumber);
+                break;
+            }
+            case DELETE: {
+                result = tasks.deleteTask(markNumber, numTasks - 1);
+                break;
+            }
+            default: {
+                result = "";
+            }
+        }
+        saveTaskListStorage.apply(null);
+        return result;
+    }
+
+    /**
      * Parses task strings
      * @param commandType
      * @param tokens
@@ -165,7 +211,6 @@ public class Parser {
      */
     public Task parseCommand(Commands commandType, String[] tokens, boolean isLoaded,
                              int numTasks) throws DukeException, DukeInvalidArgumentException {
-
         String[] extractedData = extractData(isLoaded, tokens);
         String content = extractedData[0];
         String deadlineStr = extractedData[1];
