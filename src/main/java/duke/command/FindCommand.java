@@ -24,6 +24,7 @@ public class FindCommand extends Command {
 
         // The expected content part is task's index in the task list.
         String[] contentParts = content.split(" ");
+
         if (contentParts.length > KEYWORD_LENGTH | contentParts[0].equals("")) {
             throw new DukeException("☹ OOPS!!! Please enter one keyword at a time");
         }

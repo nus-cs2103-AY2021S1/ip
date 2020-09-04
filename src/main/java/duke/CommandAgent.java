@@ -113,8 +113,13 @@ public class CommandAgent {
      * the identifier is none of "E", "D" or "T".
      */
     public static Task createTask(List<String> taskInfo) throws DateTimeParseException, DukeException {
+        assert taskInfo.size() >= 2 : "the list of task information should have at least 2 parts";
+
         String identifier = taskInfo.get(0);
         String name = taskInfo.get(1);
+
+        assert identifier.equals("E") | identifier.equals("D") | identifier.equals("T") : "identifier is invalid";
+
 
         if (!taskList.findTasksByKeyword(name).equals("")) {
             throw new DukeException("☹ OOPS!!! This task has already been stored in the list!");
@@ -158,6 +163,8 @@ public class CommandAgent {
      * @return A String suggesting the completion of task update.
      */
     public static String generateUpdateResponse(int taskId) {
+        assert taskId > 0 : "task id should be greater than 0";
+
         Task currentTask = taskList.getTaskById(taskId);
         return "Nice! I've marked this task as done:\n  " + currentTask;
     }
