@@ -30,15 +30,6 @@ public class ParserTest {
     }
 
     @Test
-    public void isValidDone_withoutSpace_returnNegative1() {
-        try {
-            assertEquals(-1, Parser.getDoneTaskIndex("done1", 4));
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
     public void isValidDone_nonIntegerInput_throwException() {
         try {
             Parser.getDoneTaskIndex("done anything", 4);
@@ -99,15 +90,6 @@ public class ParserTest {
             fail();
         } catch (Exception e) {
             assertEquals("\u2639 OOPS!!! The task to mark to delete cannot be empty.", e.getMessage());
-        }
-    }
-
-    @Test
-    public void isValidDelete_withoutSpace_returnNegative1() {
-        try {
-            assertEquals(-1, Parser.getDeleteTaskIndex("delete1", 4));
-        } catch (Exception e) {
-            fail();
         }
     }
 
@@ -181,42 +163,42 @@ public class ParserTest {
             Parser.parseAddTask("todo");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! The description of a todo cannot be empty.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! The description of a task cannot be empty.", e.getMessage());
         }
 
         try {
             Parser.parseAddTask("todo ");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! The description of a todo cannot be empty.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! The description of a task cannot be empty.", e.getMessage());
         }
 
         try {
             Parser.parseAddTask("deadline");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! The description of a deadline cannot be empty.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! The description of a task cannot be empty.", e.getMessage());
         }
 
         try {
             Parser.parseAddTask("deadline ");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! The description of a deadline cannot be empty.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! The description of a task cannot be empty.", e.getMessage());
         }
 
         try {
             Parser.parseAddTask("event");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! The description of an event cannot be empty.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! The description of a task cannot be empty.", e.getMessage());
         }
 
         try {
             Parser.parseAddTask("event ");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! The description of an event cannot be empty.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! The description of a task cannot be empty.", e.getMessage());
         }
     }
 
@@ -226,21 +208,21 @@ public class ParserTest {
             Parser.parseAddTask("todothings");
             fail();
         } catch (Exception e) {
-            assertEquals("Do you mean 'todo things'", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Do you mean 'todo things'?", e.getMessage());
         }
 
         try {
             Parser.parseAddTask("deadlinethings");
             fail();
         } catch (Exception e) {
-            assertEquals("Do you mean 'deadline things'", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Do you mean 'deadline things'?", e.getMessage());
         }
 
         try {
             Parser.parseAddTask("eventthings");
             fail();
         } catch (Exception e) {
-            assertEquals("Do you mean 'event things'", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Do you mean 'event things'?", e.getMessage());
         }
     }
 
@@ -250,14 +232,14 @@ public class ParserTest {
             Parser.parseAddTask("deadline things");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! Time should be specified", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Time should be specified.", e.getMessage());
         }
 
         try {
             Parser.parseAddTask("event things");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! Time should be specified", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Time should be specified.", e.getMessage());
         }
     }
 
@@ -267,14 +249,14 @@ public class ParserTest {
             Parser.parseAddTask("deadline things /by");
             fail();
         } catch (Exception e) {
-            assertEquals("The time specification cannot be empty.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! The time specification cannot be empty.", e.getMessage());
         }
 
         try {
             Parser.parseAddTask("event things /at");
             fail();
         } catch (Exception e) {
-            assertEquals("The time specification cannot be empty.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! The time specification cannot be empty.", e.getMessage());
         }
     }
 
@@ -284,14 +266,14 @@ public class ParserTest {
             Parser.parseAddTask("deadline assignment /by 2020/08/31");
             fail();
         } catch (Exception e) {
-            assertEquals("Invalid input date, please input as yyyy-mm-dd.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Invalid input date, please input as yyyy-mm-dd.", e.getMessage());
         }
 
         try {
             Parser.parseAddTask("event assignment /at 2020-08-01");
             fail();
         } catch (Exception e) {
-            assertEquals("Invalid input datetime, please input as yyyy-MM-dd HH:mm.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Invalid input datetime, please input as yyyy-MM-dd HH:mm.", e.getMessage());
         }
     }
 

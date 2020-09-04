@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
     }
 
     private String getUiOutput(Ui ui, TaskList list, int count, Task toDelete) {
-        String tasks = Parser.getTaskPlural(count);
+        String tasks = Parser.getTaskPlural(count - 1);
         String str = String.format(Ui.DELETE_TASK_OUTPUT_FORMAT, toDelete.toString(), list.size(), tasks);
         ui.output(str);
         return str;

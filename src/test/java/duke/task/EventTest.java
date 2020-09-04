@@ -18,7 +18,7 @@ public class EventTest {
             Event e = new Event("Project meeting", "2020-09-03 11");
             fail();
         } catch (Exception e) {
-            assertEquals("Invalid input datetime, please input as yyyy-MM-dd HH:mm.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Invalid input datetime, please input as yyyy-MM-dd HH:mm.", e.getMessage());
         }
     }
 

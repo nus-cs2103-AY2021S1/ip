@@ -37,7 +37,7 @@ public class AddCommand extends Command {
     }
 
     private String getOutput(Ui ui, int count, Task task) {
-        String tasks = Parser.getTaskPlural(count);
+        String tasks = Parser.getTaskPlural(count + 1);
         String res = String.format(Ui.ADD_TASK_OUTPUT_FORMAT, task.toString(), count + 1, tasks);
         ui.output(res);
         return res;

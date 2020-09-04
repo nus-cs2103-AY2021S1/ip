@@ -72,7 +72,7 @@ public class DoneCommandTest {
             String res = new DoneCommand("done 1").execute(ui, list, storage);
             fail();
         } catch (Exception e) {
-            assertEquals("The task " + task + " has already been done.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! The task " + task + " has already been done.", e.getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ public class DoneCommandTest {
 
         try {
             String res = new DoneCommand("done 1").execute(ui, list, storage);
-            assertEquals("Nice! I've marked this task as done:\n\t    " + task1, res);
+            assertEquals("Nice! I've marked this task as done:\n" + task1, res);
         } catch (Exception e) {
             fail();
         }
