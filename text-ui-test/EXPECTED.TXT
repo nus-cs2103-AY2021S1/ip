@@ -1,5 +1,5 @@
 Folder created successfully.
-Text file created: duke.txt
+Text file created: focus.txt
 Welcome to
          __
         / _|   ___    ___  _   _  ___

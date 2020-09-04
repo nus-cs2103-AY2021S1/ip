@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="704.0" prefWidth="650.0" stylesheets="@../stylesheets/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.ui.MainWindow">
+<AnchorPane prefHeight="704.0" prefWidth="650.0" stylesheets="@../stylesheets/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="focus.ui.MainWindow">
     <children>
         <TextField fx:id="userInput" layoutY="555.0" onAction="#handleUserInput" prefHeight="42.0" prefWidth="568.0" promptText="Type here..." AnchorPane.bottomAnchor="0.0">
          <font>
