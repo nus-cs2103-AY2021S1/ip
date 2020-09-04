@@ -26,13 +26,18 @@ public class Parser {
         Task task;
         int index;
 
-
         switch (command) {
         case "list":
             if (remainingText != null) {
                 throw new DukeException(ExceptionTypeEnum.INCORRECT_LIST);
             }
             return new ListCommand();
+
+        case "find":
+            if (remainingText == null) {
+                throw new DukeException(ExceptionTypeEnum.MISSING_FIND_KEYWORD);
+            }
+            return new FindCommand(remainingText);
 
         case "todo":
             if (remainingText == null) {

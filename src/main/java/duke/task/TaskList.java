@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.DukeException;
+import duke.ExceptionTypeEnum;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +51,10 @@ public class TaskList {
      * @param index index of the task to be returned (0-based)
      * @return the task at the specified index (0-based)
      */
-    public Task get(int index) {
+    public Task get(int index) throws DukeException {
+        if(index < 0 || index >= list.size()) {
+            throw new DukeException(ExceptionTypeEnum.INVALID_ITEM_NUMBER);
+        }
         return list.get(index);
     }
 

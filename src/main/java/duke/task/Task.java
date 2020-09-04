@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.DukeException;
+import duke.ExceptionTypeEnum;
+
 public abstract class Task {
     protected String description;
     public boolean isDone;
@@ -18,11 +21,10 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718"); // return tick or X symbols
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void markAsDone() {
+    public void markAsDone() throws DukeException {
+        if(this.isDone) {
+           throw new DukeException(ExceptionTypeEnum.ITEM_ALREADY_DONE);
+        }
         this.isDone = true;
     }
 
