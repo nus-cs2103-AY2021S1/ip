@@ -15,6 +15,9 @@ public class DeleteCommand extends Command{
     @Override
     public void execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
         String[] commandDetails = command.split(" ", 2);
+        if (commandDetails.length == 1) {
+            throw new DukeException("Delete Index not provided!");
+        }
         try {
             int delIndex = Integer.parseInt(commandDetails[1]) - 1;
             Task delTask = tm.getTask(delIndex);

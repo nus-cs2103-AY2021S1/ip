@@ -23,7 +23,7 @@ public class AddCommand extends Command{
             if (command.length() <= 9) {
                 throw new DukeException("Description of a deadline cannot be empty!");
             }
-            String[] commandDetails = command.substring(9).split(" /by ");
+            String[] commandDetails = command.substring(9).split(" /by ", 2);
             if (commandDetails.length != 2) {
                 throw new DukeException("Deadline not properly formatted!");
             }
@@ -39,7 +39,7 @@ public class AddCommand extends Command{
             if (command.length() <= 6) {
                 throw new DukeException("Description of a deadline cannot be empty!");
             }
-            String[] commandDetails = command.substring(6).split(" /at ");
+            String[] commandDetails = command.substring(6).split(" /at ", 2);
             if (commandDetails.length != 2) {
                 throw new DukeException("Event not properly formatted!");
             }

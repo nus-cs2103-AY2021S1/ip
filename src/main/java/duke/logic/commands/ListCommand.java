@@ -16,6 +16,10 @@ public class ListCommand extends Command{
 
     @Override
     public void execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
+        String[] commandDetails = command.split(" ", 2);
+        if (commandDetails.length != 1) {
+            throw new DukeException("List command should not include extra parameters!");
+        }
         ArrayList<Task> taskList = tm.getTaskList();
         String s = "";
         if (taskList.isEmpty()) {
