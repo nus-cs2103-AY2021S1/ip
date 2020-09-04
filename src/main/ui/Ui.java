@@ -78,6 +78,8 @@ public class Ui {
      * @return the string indicating a task has been added successfully.
      */
     public String printAddSuccess(Task task, int taskNum) {
+        assert(taskNum >= 0);
+
         boolean isSingular = taskNum == 1;
 
         return String.format("Got it. I've added this task:\n%s\n"
@@ -101,6 +103,8 @@ public class Ui {
      * @return a string indicating a task has been removed successfully.
      */
     public String printRemoveSuccess(Task removed, int taskNum) {
+        assert(taskNum >= 0);
+
         boolean isSingular = taskNum == 1;
 
         return String.format("Noted. I've removed this task:\n%s\n"
