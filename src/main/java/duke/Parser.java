@@ -24,8 +24,8 @@ import duke.tasks.TodoTask;
  */
 public class Parser {
 
-    private static int SINGLE_INPUT_COMMAND_SIZE = 1;
-    private static int DOUBLE_INPUT_COMMAND_SIZE = 2;
+    private static final int SINGLE_INPUT_COMMAND_SIZE = 1;
+    private static final int DOUBLE_INPUT_COMMAND_SIZE = 2;
 
 
     /**

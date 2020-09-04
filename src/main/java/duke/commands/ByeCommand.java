@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.utils.DukeStdMsg;
 
 /**
@@ -18,10 +18,10 @@ public class ByeCommand implements Command {
      * @param storage The storage object.
      * @param tasks   The taskList.
      * @return The exit message.
-     * @throws DukeIOException IOException when writing data to the data-file.
+     * @throws DukeIoException IOException when writing data to the data-file.
      */
     @Override
-    public String execute(Storage storage, TaskList tasks) throws DukeIOException {
+    public String execute(Storage storage, TaskList tasks) throws DukeIoException {
         ArrayList<String> data = tasks.getData();
         storage.save(data);
         return DukeStdMsg.EXIT.getMsg();

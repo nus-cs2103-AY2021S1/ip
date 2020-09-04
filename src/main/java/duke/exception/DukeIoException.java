@@ -3,9 +3,9 @@ package duke.exception;
 /**
  * Represents an IOException while running Duke.
  */
-public class DukeIOException extends DukeException {
+public class DukeIoException extends DukeException {
 
-    public DukeIOException(String msg) {
+    public DukeIoException(String msg) {
         super(msg);
     }
 

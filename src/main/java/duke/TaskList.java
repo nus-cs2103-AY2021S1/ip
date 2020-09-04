@@ -113,7 +113,7 @@ public class TaskList {
      */
     public String getListStatus() {
         int storeSize = taskStore.size();
-        return "There " + (storeSize > 1 ? "are " : "is ") + "now " + storeSize + " " +
-                (storeSize > 1 ? "tasks " : "task ") + "in your list!";
+        return "There " + (storeSize > 1 ? "are " : "is ") + "now " + storeSize + " "
+                + (storeSize > 1 ? "tasks " : "task ") + "in your list!";
     }
 }

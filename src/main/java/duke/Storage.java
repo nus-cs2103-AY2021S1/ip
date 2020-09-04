@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 
 /**
  * The class that is responsible for reading and writing raw taskList data.
@@ -29,9 +29,9 @@ public class Storage {
      * Retrives The raw data from the data file.
      *
      * @return An ArrayList of each line of raw data.
-     * @throws DukeIOException If file was not found at the filePath.
+     * @throws DukeIoException If file was not found at the filePath.
      */
-    public ArrayList<String> load() throws DukeIOException {
+    public ArrayList<String> load() throws DukeIoException {
         ArrayList<String> res = new ArrayList<>();
         try {
             Scanner sc = new Scanner(dataFile);
@@ -41,7 +41,7 @@ public class Storage {
             }
             return res;
         } catch (FileNotFoundException e) {
-            throw new DukeIOException("PROJ_ROOT/" + dataFile.getPath() + " not found!");
+            throw new DukeIoException("PROJ_ROOT/" + dataFile.getPath() + " not found!");
         }
 
     }
@@ -50,9 +50,9 @@ public class Storage {
      * Writes the raw data into the data file.
      *
      * @param data The raw data to be written.
-     * @throws DukeIOException For exceptional cases where the program is unable to write to the data file.
+     * @throws DukeIoException For exceptional cases where the program is unable to write to the data file.
      */
-    public void save(ArrayList<String> data) throws DukeIOException {
+    public void save(ArrayList<String> data) throws DukeIoException {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < data.size(); i++) {
             sb.append(data.get(i));
@@ -75,7 +75,7 @@ public class Storage {
             fw.write(textToPrint);
             fw.close();
         } catch (IOException e) {
-            throw new DukeIOException(e.getMessage());
+            throw new DukeIoException(e.getMessage());
         }
 
     }
