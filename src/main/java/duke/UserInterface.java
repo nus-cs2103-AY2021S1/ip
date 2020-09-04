@@ -101,9 +101,9 @@ public class UserInterface {
      * @param task Task to be deleted.
      * @param remaining Remaining number of tasks after deletion.
      */
-    public String printDelete(String task, int remaining) {
+    public String printDelete(String task, int remainingNumber) {
         String response = BORDER + "Delete liao boss:" + NEWLINE;
-        response += BORDER + "Remaining Tasks: " + remaining + NEWLINE;
+        response += BORDER + "Remaining Tasks: " + remainingNumber + NEWLINE;
         return response;
     }
 

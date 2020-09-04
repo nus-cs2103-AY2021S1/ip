@@ -42,8 +42,7 @@ public class FindCommand extends Command {
         BiFunction<Integer, String, Boolean> filterFunction = (index, filterWord) -> {
             return wholeTaskList.get(index).getTask().contains(filterWord);
         };
-
-
+        
         String response = ui.listTask();
 
         response += IntStream.range(0, wholeTaskList.size()).filter( index -> {
@@ -58,5 +57,6 @@ public class FindCommand extends Command {
         assert !response.equals("");
       
         return response;
+
     }
 }

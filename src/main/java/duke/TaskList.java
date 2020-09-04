@@ -90,7 +90,7 @@ public class TaskList {
     }
 
     /**
-     * Getter method to retrieve task list
+     * Get function to retrieve the task list in a collection.
      */
     public List<Task> getTaskList() {
         return this.taskList;
