@@ -42,7 +42,7 @@ public class MainWindow extends AnchorPane {
         this.dukeImage = new Image(this.getClass().getResourceAsStream("/images/crown-solid.png"));
 
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/views/MainWindow.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
