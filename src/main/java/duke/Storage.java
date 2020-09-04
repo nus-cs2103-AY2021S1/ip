@@ -20,10 +20,6 @@ import duke.task.ToDo;
 public class Storage {
     private String filepath;
 
-    public Storage() {
-        this.filepath = "";
-    }
-
     /**
      * Creates a new storage with the specified directory.
      *
@@ -37,7 +33,6 @@ public class Storage {
      * Loads the previously saved tasks into an arraylist.
      * If there is no saved directory or file, create a new folder and arraylist.
      */
-
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -46,8 +41,7 @@ public class Storage {
             return tasks;
         } catch (FileNotFoundException e) {
             System.out.println("Starting a new task list");
-            File file = new File("./data");
-            file.mkdir();
+            new File("./data").mkdir();
             return tasks;
         }
     }
@@ -57,7 +51,6 @@ public class Storage {
      *
      * @param tasks Current list of tasks.
      */
-
     public void save(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(filepath);
