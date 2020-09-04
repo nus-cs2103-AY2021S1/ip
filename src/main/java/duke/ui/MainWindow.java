@@ -34,6 +34,11 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        greet();
+    }
+
+    private void greet() {
+        dialogContainer.getChildren().add(DialogBox.getDukeGreeting(dukeImage));
     }
 
     @FXML

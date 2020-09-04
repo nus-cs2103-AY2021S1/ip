@@ -6,6 +6,9 @@ package duke.main;
  * It saves tasks to data/tasks.txt and reads the list upon being initialised.
  */
 public class Duke {
+    public static final String GREETING = "Hello, I'm your chatbot!\n"
+            + "What can I do for you?";
+
     private final Parser parser;
 
     /**
