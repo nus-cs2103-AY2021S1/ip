@@ -1,6 +1,8 @@
 package main.gui;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -144,9 +146,11 @@ public class Stuff extends Application {
         Insets padding = new Insets(10, 0, 10, 0);
 
         ImageView userImageView = new ImageView(userImage);
+        ImageView stuffLoadingImageView = new ImageView(stuffImage);
         ImageView stuffImageView = new ImageView(stuffImage);
 
         userImageView.setClip(new Circle(50, 50, 50));
+        stuffLoadingImageView.setClip(new Circle(50, 50, 50));
         stuffImageView.setClip(new Circle(50, 50, 50));
 
         String[] splitInput = input.trim().split(" ", 2);
@@ -160,19 +164,30 @@ public class Stuff extends Application {
         }
 
         Label userText = new Label(input);
+        Label loadingText = new Label("...");
         Label stuffText = new Label(output);
 
         DialogBox userDialog = DialogBox.getUserDialog(userText, userImageView);
+        DialogBox stuffLoadingDialog = DialogBox.getStuffDialog(
+                loadingText, stuffLoadingImageView);
         DialogBox stuffDialog = DialogBox.getStuffDialog(stuffText, stuffImageView);
 
         userDialog.setPadding(padding);
+        stuffLoadingDialog.setPadding(padding);
         stuffDialog.setPadding(padding);
 
         userDialog.setSpacing(10);
+        stuffLoadingDialog.setSpacing(10);
         stuffDialog.setSpacing(10);
 
-        dialogContainer.getChildren().addAll(userDialog, stuffDialog);
+        dialogContainer.getChildren().addAll(userDialog, stuffLoadingDialog);
         userInput.clear();
+
+        CompletableFuture.delayedExecutor(750, TimeUnit.MILLISECONDS)
+                .execute(() -> Platform.runLater(() -> {
+                    int size = dialogContainer.getChildren().size();
+                    dialogContainer.getChildren().set(size - 1, stuffDialog);
+                }));
 
         if (!hasCommandAfter) {
             try {
@@ -182,7 +197,9 @@ public class Stuff extends Application {
                         .getStuffDialog(new Label(ui.printErrorMessage()), stuffImageView);
                 dialogContainer.getChildren().addAll(stuffError);
             }
-            Platform.exit();
+
+            CompletableFuture.delayedExecutor(2, TimeUnit.SECONDS)
+                    .execute(Platform::exit);
         }
     }
 }
