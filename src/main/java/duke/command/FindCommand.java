@@ -33,6 +33,7 @@ public class FindCommand extends Command {
     public String execute(TaskList tasklist, UserInterface ui) throws DukeListException {
         TaskList tempTaskList = new TaskList(new Storage());
         tempTaskList.clearList();
+
         for (int i = 0; i < tasklist.getTaskSize(); i++) {
             Task taskInCheck = tasklist.getTaskDetail(i);
             if (taskInCheck.getTask().contains(wordToFind)) {
@@ -43,6 +44,9 @@ public class FindCommand extends Command {
         if (tempTaskList.getTaskSize() == 0) {
             throw new DukeListException("Your search result yields nothing.");
         }
+
+        assert tempTaskList.getTaskSize() > 0;
+
         ListCommand listCommand = new ListCommand();
         return listCommand.execute(tempTaskList, new UserInterface());
     }
