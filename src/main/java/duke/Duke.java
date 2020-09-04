@@ -32,27 +32,10 @@ public class Duke {
     }
 
     /**
-     * Main method to start the application
+     * method to call on starting the application
      */
-    public void start() {
-        ui.showWelcomeMessage();
-        boolean isExit = false;
-
-        while (!isExit) {
-            String input = ui.readCommand();
-            ui.buildChatFence();
-
-            // handle commands
-            try {
-                Command command = Parser.parseCommand(input);
-                command.execute(taskList, ui, storage);
-                isExit = command.isExit();
-            } catch (InvalidUsageException | UnknownCommandException ex) {
-                ui.print(ex.getMessage());
-            } finally {
-                ui.buildChatFence();
-            }
-        }
+    public String start() {
+        return ui.showWelcomeMessage();
     }
 
     public String getResponse(String input) {
