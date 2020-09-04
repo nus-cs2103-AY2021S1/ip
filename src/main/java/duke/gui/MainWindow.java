@@ -1,6 +1,8 @@
 package duke.gui;
 
 import duke.Duke;
+import duke.logic.UiManager;
+import duke.logic.UserInteractionUi;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -27,6 +29,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private UserInteractionUi uiManager;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/gudetamaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/gudetamaDuke.png"));
@@ -49,6 +52,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        uiManager = new UiManager();
     }
 
     /**
@@ -61,10 +65,9 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
         userInput.clear();
         if (duke.isGuiExit()) {
-            DialogBox userBox = DialogBox.getUserDialog(input, userImage);
-            DialogBox dukeBox = DialogBox.getDukeDialog(duke.getDukeOutro(), dukeImage);
             dialogContainer.getChildren().addAll(
-                    userBox, dukeBox
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(uiManager.getDukeOutro(), dukeImage)
             );
             scrollPane.layout();
             scrollPane.setVvalue(1.0);
@@ -88,7 +91,7 @@ public class MainWindow extends AnchorPane {
      * Displays Duke introduction on the GUI
      */
     public void introDuke() {
-        String intro = duke.getDukeIntro();
+        String intro = uiManager.getDukeIntro();
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(intro, dukeImage));
     }
 }

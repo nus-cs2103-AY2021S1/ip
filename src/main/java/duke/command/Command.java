@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import duke.exception.InvalidTaskIndexException;
 import duke.exception.TaskDoneException;
+import duke.logic.CommandInteractionUi;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
-import duke.logic.UiManager;
 
 
 /**
@@ -50,7 +50,7 @@ public abstract class Command {
      * @throws TaskDoneException         If user input validation fails.
      * @throws IOException               If saving of data fails.
      */
-    public abstract void execute(TaskList taskList, UiManager uiManager,
+    public abstract void execute(TaskList taskList, CommandInteractionUi uiManager,
                                  StorageManager storageManager, boolean isGuiTask)
             throws IOException, InvalidTaskIndexException, TaskDoneException;
 }

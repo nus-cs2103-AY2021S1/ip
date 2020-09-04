@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.logic.CommandInteractionUi;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
-import duke.logic.UiManager;
 import duke.task.DukeTask;
 
 /**
@@ -33,7 +33,8 @@ public class AddCommand extends Command {
      * @param isGuiTask      <code>boolean</code> object to denote GUI task
      */
     @Override
-    public void execute(TaskList taskList, UiManager uiManager, StorageManager storageManager, boolean isGuiTask) {
+    public void execute(TaskList taskList, CommandInteractionUi uiManager,
+                        StorageManager storageManager, boolean isGuiTask) {
         taskList.addToList(task);
         if (isGuiTask) {
             this.response = uiManager.getAddTask(task, taskList.getSize());

@@ -82,9 +82,6 @@ public class Duke {
         // OUTRO
         uiManager.printDukeOutro();
     }
-
-
-
     /**
      * Generates a response from Duke by the user input.
      * @param input String denoting user input from GUI
@@ -105,22 +102,6 @@ public class Duke {
             output = e.getMessage();
         }
         return output;
-    }
-
-    /**
-     * Returns String representation of Duke Intro, via UI Manager
-     * @return String
-     */
-    public String getDukeIntro() {
-        return uiManager.getDukeIntro();
-    }
-
-    /**
-     * Returns String representation of Duke outro, via UI Manager
-     * @return String
-     */
-    public String getDukeOutro() {
-        return uiManager.getDukeOutro();
     }
 
     /**

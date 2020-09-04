@@ -11,7 +11,7 @@ import duke.task.DukeTask;
  * It contains <code>Enums</code> for pre-defined texts to be printed for the program
  * and methods to print feedback to the users for different commands.
  */
-public class UiManager {
+public class UiManager implements UserInteractionUi, CommandInteractionUi {
     private final Scanner scanner = new Scanner(System.in);
 
     /**
@@ -24,14 +24,22 @@ public class UiManager {
     }
 
     /**
+     * Prints a line separator.
+     */
+    public void printLine() {
+        System.out.println(UserInteractionText.LINE);
+    }
+    /**
      * Prints introduction to Duke.
+     * Method implemented from UserInteractionUi interface.
      */
     public void printDukeIntro() {
         System.out.println(UserInteractionText.INTRODUCTION_WITH_LINE);
     }
 
     /**
-     * Returns String representation of Duke intro
+     * Returns String representation of Duke intro.
+     * Method implemented from UserInteractionUi interface.
      * @return String
      */
     public String getDukeIntro() {
@@ -39,22 +47,8 @@ public class UiManager {
     }
 
     /**
-     * Prints instructions when user invokes <code>HelpCommand</code>.
-     */
-    public void printDukeInstructions() {
-        System.out.println(UserInteractionText.INSTRUCTIONS);
-    }
-
-    /**
-     * Returns String representation of Duke instructions
-     * @return String
-     */
-    public String getDukeInstructions() {
-        return UserInteractionText.INSTRUCTIONS.value;
-    }
-
-    /**
      * Prints outro to Duke.
+     * Method implemented from UserInteractionUi interface.
      */
     public void printDukeOutro() {
         System.out.println(UserInteractionText.OUTRO_WITH_LINE);
@@ -63,16 +57,33 @@ public class UiManager {
     public String getDukeOutro() {
         return UserInteractionText.OUTRO.value;
     }
+    /**
+     * Prints instructions when user invokes <code>HelpCommand</code>.
+     * Method implemented from CommandInteractionUi interface.
+     */
+    public void printDukeInstructions() {
+        System.out.println(UserInteractionText.INSTRUCTIONS);
+    }
 
     /**
+     * Returns String representation of Duke instructions.
+     * Method implemented from CommandInteractionUi interface.
+     * @return String
+     */
+    public String getDukeInstructions() {
+        return UserInteractionText.INSTRUCTIONS.value;
+    }
+    /**
      * Prints when users invoke <code>AddCommand</code>.
+     * Method implemented from CommandInteractionUi interface.
      */
     public void printAddTask(DukeTask task, int size) {
         System.out.println(getAddTask(task, size));
     }
 
     /**
-     * Returns a String representation of add Task response
+     * Returns a String representation of add Task response.
+     * Method implemented from CommandInteractionUi interface.
      * @param task DukeTask
      * @param size number of tasks left
      * @return String
@@ -83,13 +94,15 @@ public class UiManager {
 
     /**
      * Prints when users invoke <code>DeleteCommand</code>.
+     * Method implemented from CommandInteractionUi interface.
      */
     public void printDeleteTask(DukeTask task, int size) {
         System.out.println(getDeleteTask(task, size));
     }
 
     /**
-     * Returns a String representation of delete Task response
+     * Returns a String representation of delete Task response.
+     * Method implemented from CommandInteractionUi interface.
      * @param task DukeTask
      * @param size number of tasks left
      * @return String
@@ -103,24 +116,34 @@ public class UiManager {
 
     /**
      * Prints when users invoke <code>ListCommand</code>.
+     * Method implemented from CommandInteractionUi interface.
      */
     public void printNumberedTask(DukeTask task, int num) {
         System.out.println(getNumberedTask(task, num));
     }
 
+    /**
+     * Returns a String representation of list Task response.
+     * Method implemented from CommandInteractionUi interface.
+     * @param task DukeTask
+     * @param num Index of said task
+     * @return String
+     */
     public String getNumberedTask(DukeTask task, int num) {
         return (num + 1) + ". " + task;
     }
 
     /**
      * Prints when users invoke <code>DoneCommand</code>.
+     * Method implemented from CommandInteractionUi interface.
      */
     public void printMarkAsDone(DukeTask task, int size) {
         System.out.println(getMarkAsDone(task, size));
     }
 
     /**
-     * Returns a String representation of markAsDone
+     * Returns a String representation of markAsDone.
+     * Method implemented from CommandInteractionUi interface.
      * @param task DukeTask
      * @param size Number of tasks in list
      * @return String
@@ -132,14 +155,15 @@ public class UiManager {
     }
 
     /**
-     * Prints when FindCommand does not find Task
+     * Prints when FindCommand does not find Task.
+     * Method implemented from CommandInteractionUi interface.
      */
     public void printFindCannotBeFound(String keyword) {
         System.out.println(getFindCannotBeFound(keyword));
     }
-
     /**
-     * Returns String representation of findCannotBeFound
+     * Returns String representation of find Task response when Task cannot be found.
+     * Method implemented from CommandInteractionUi interface.
      * @param keyword String containing keyword
      * @return String
      */
@@ -149,29 +173,26 @@ public class UiManager {
 
     /**
      * Prints Tasks found by FindCommand
+     * Method implemented from CommandInteractionUi interface.
      */
     public void printFindFilteredList(String keyword, boolean isPlural) {
-        System.out.println((isPlural ? "Tasks" : "Task") + " with the keyword: " + "\"" + keyword + "\"");
+        System.out.println(getFindFilteredList(keyword, isPlural));
     }
 
     /**
-     * Returns String representation of findFilteredList
+     * Returns String representation of response from find command.
+     * Method implemented from CommandInteractionUi interface.
      * @param keyword String containing keyword
      * @return String
      */
     public String getFindFilteredList(String keyword, boolean isPlural) {
-        return "...*yawns*...I found " + (isPlural ? "some tasks" : "a task") + " with the keyword: " + "\"" + keyword + "\"\n";
-    }
-
-    /**
-     * Prints a line separator.
-     */
-    public void printLine() {
-        System.out.println(UserInteractionText.LINE);
+        return "...*yawns*...I found " + (isPlural ? "some tasks" : "a task")
+                + " with the keyword: " + "\"" + keyword + "\"\n";
     }
 
     /**
      * Prints number of tasks users have in their list.
+     * Method implemented from CommandInteractionUi interface.
      */
     public void printTaskStatus(int size) {
         System.out.println(getTaskStatus(size));
@@ -179,6 +200,7 @@ public class UiManager {
 
     /**
      * Returns a String representation of number of tasks in user's list.
+     * Method implemented from CommandInteractionUi interface.
      * @param size number of tasks remaining
      * @return String
      */
@@ -197,7 +219,7 @@ public class UiManager {
         // For formatting purposes, except for the last guide, the guides must end with a guideBreaker
         // It splits them into paragraphs
 
-        DeveloperUpdate(UserInteractionText.LINE.value + "\n"
+        DukeLetter(UserInteractionText.LINE.value + "\n"
                 + "Letter from Duke:\n"
                 + "Hello! I'm Duke, your Personal Chatbot Assistant. Due to COVID, I'm stuck at overseas :(\n"
                 + "\n"
@@ -265,7 +287,7 @@ public class UiManager {
                 + LINE), // END OF INTRODUCTIONS)
 
         INSTRUCTIONS("...ngghh...Here's some stuff Duke told me...\n"
-                + InstructionGuide.DeveloperUpdate
+                + InstructionGuide.DukeLetter
                 + InstructionGuide.AvailableInstruction
                 + InstructionGuide.TaskInputInstruction
                 + InstructionGuide.TaskInputSpecification), // END OF INSTRUCTIONS)
