@@ -168,10 +168,35 @@ public class Ui {
 //    }
     
 //    public String commandNotRecognised() {
+<<<<<<< HEAD
 //        return HORIZONTAL_LINE
 //                + "\r\n"
 //                + "Oops! I couldn't understand what you mean :("
 //                + "\r\n"
 //                + HORIZONTAL_LINE;
 //    }
+=======
+//        return horizontalLine
+//                + "\r\n"
+//                + "Oops! I couldn't understand what you mean :("
+//                + "\r\n"
+//                + horizontalLine;
+//    }
+    
+    public void findTask(ArrayList<Task> matchingTasks) {
+
+        System.out.println(horizontalLine
+                + "\r\n"
+                + "Here are the matching tasks in your list:"
+                + "\r\n");
+
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            System.out.println((i + 1) 
+                    + "." 
+                    + matchingTasks.get(i).toString());
+        }
+        
+        System.out.println(horizontalLine);
+    }
+>>>>>>> branch-Level-9
 }

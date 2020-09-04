@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -63,6 +64,11 @@ public class Duke {
                     tasks.deleteTask(taskNumber);
                     ui.deleteTask(deleteTask, tasks.getSize());
 
+                } else if (commandNumber == 8) {
+                    
+                    ArrayList<Task> matchingTasks = parser.getMatchingTasks(tasks);
+                    ui.findTask(matchingTasks);
+                    
                 } else {
                     String HORIZONTAL_LINE = "_______________________________________________________";
                     
