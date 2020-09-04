@@ -28,6 +28,8 @@ public class DeleteCommand extends Command {
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException,
             InvalidTaskNumberException {
+        assert ui != null : "Null UI";
+        assert tasks != null : "Null TaskList";
         ui.setMessageDeleteTask(tasks, index);
         deleteTask(index, tasks);
     }
@@ -39,6 +41,7 @@ public class DeleteCommand extends Command {
      * @throws InvalidTaskNumberException If user enters a non-integer argument.
      */
     public void deleteTask(int idx, TaskList tasks) throws TaskNotFoundException, InvalidTaskNumberException {
+        assert tasks != null : "Null TaskList";
         try {
             tasks.getTasks().remove(idx - 1);
         } catch (IndexOutOfBoundsException e) {

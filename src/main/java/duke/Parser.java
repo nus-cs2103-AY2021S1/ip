@@ -28,6 +28,7 @@ public class Parser {
      * @return A Command object corresponding to what the user has input.
      */
     public Command parse(String input) {
+        assert !isQuit;
         if (input.equals("exit")) {
             isQuit = true;
             return new ExitCommand();

@@ -24,6 +24,8 @@ public class FindCommand extends Command {
      */
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) {
+        assert ui != null : "Null UI";
+        assert tasks != null : "Null Tasklist";
         StringBuilder output = new StringBuilder();
         int counter = 1;
         for (Task task : tasks.getTasks()) {
