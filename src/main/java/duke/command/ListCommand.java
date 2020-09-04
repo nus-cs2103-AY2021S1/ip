@@ -25,7 +25,7 @@ public class ListCommand implements Command {
     @Override
     public String getResponse() {
         assert !isExit();
-        return TaskList.getTaskListString(tasks);
+        return tasks.getTaskListString();
     }
 
 }
