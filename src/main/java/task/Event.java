@@ -34,8 +34,8 @@ public class Event extends Task {
     }
 
     @Override
-    public String simplifiedTaskString() {
-        return super.simplifiedTaskString() + " - " + this.time.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+    public String getSimplifiedString() {
+        return super.getSimplifiedString() + " - " + this.time.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
     @Override

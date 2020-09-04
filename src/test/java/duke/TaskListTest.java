@@ -18,7 +18,7 @@ import task.ToDo;
 
 public class TaskListTest {
     @Test
-    public void get_success() {
+    public void get_correctInput_taskReturned() {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);
@@ -35,7 +35,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void get_exceptionThrown() {
+    public void get_wrongIndex_exceptionThrown() {
         List<Task> list = new ArrayList<>();
         list.add(new ToDo("watch TV"));
         list.add(new Deadline("homework", LocalDateTime.parse("16/02/2019 1900",
@@ -52,7 +52,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void size() {
+    public void size_correctInput_sizeReturned() {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);
@@ -65,7 +65,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void all() {
+    public void all_correctInput_allTasksReturned() {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);
@@ -78,7 +78,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void remove_success() {
+    public void remove_correctInput_removedTaskReturned() {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);
@@ -96,7 +96,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void remove_exceptionThrown() {
+    public void remove_wrongIndex_exceptionThrown() {
         List<Task> list = new ArrayList<>();
         ToDo toDo = new ToDo("watch TV");
         list.add(toDo);

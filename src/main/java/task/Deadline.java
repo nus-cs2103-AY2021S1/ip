@@ -37,8 +37,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String simplifiedTaskString() {
-        return super.simplifiedTaskString() + " - "
+    public String getSimplifiedString() {
+        return super.getSimplifiedString() + " - "
                 + this.deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
