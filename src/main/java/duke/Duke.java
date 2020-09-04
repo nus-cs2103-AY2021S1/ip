@@ -42,6 +42,8 @@ public class Duke {
         } catch (DukeException e) {
             response += ui.sayException(e);
         }
+        assert response != null : "Response cannot be null";
+        assert response.length() >= 0 : "Response cannot be empty";
         return response;
     }
 
