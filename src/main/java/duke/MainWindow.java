@@ -6,6 +6,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 
 /**
@@ -25,6 +30,12 @@ public class MainWindow extends AnchorPane {
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Vadar.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Obiwan.png"));
+    private final BackgroundImage backgroundImage = new BackgroundImage(new Image("/images/background.jpg"),
+            BackgroundRepeat.REPEAT,
+            BackgroundRepeat.REPEAT,
+            BackgroundPosition.CENTER,
+            BackgroundSize.DEFAULT);
+    private final Background dialogContainerBackground = new Background(backgroundImage);
 
     /**
      * Binds the scroll pane to the dialogContainer so as to set up the main layout.
@@ -33,6 +44,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setBackground(dialogContainerBackground);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.showGreeting(), dukeImage));
     }
 

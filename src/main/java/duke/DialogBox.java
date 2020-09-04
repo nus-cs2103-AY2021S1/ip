@@ -38,7 +38,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-        displayPicture.setClip(new Circle(50, 50, 50));
+        displayPicture.setClip(new Circle(25, 25, 50));
     }
 
     /**
@@ -53,16 +53,18 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         var userDialog = new DialogBox(text, img);
-        userDialog.dialog
-                .setStyle("-fx-background-color: #D0F0C0; -fx-padding: 11 11 11 11; -fx-background-radius: 5;");
+        String userDialogStyle = "-fx-background-color: rgba(199,84,84,0.93); -fx-padding: 11 11 11 11; "
+                + "-fx-background-radius: 5; -fx-text-fill: #EDEDED;";
+        userDialog.dialog.setStyle(userDialogStyle);
         userDialog.dialog.setTranslateX(-5);
         return userDialog;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var dukeDialog = new DialogBox(text, img);
-        dukeDialog.dialog
-                .setStyle("-fx-background-color: #ADD8E6; -fx-padding: 11 11 11 11; -fx-background-radius: 5;");
+        String dukeDialogStyle = "-fx-background-color: rgba(87,178,245,0.96); -fx-padding: 11 11 11 11; "
+                + "-fx-background-radius: 5; -fx-text-fill: #006464;";
+        dukeDialog.dialog.setStyle(dukeDialogStyle);
         dukeDialog.dialog.setTranslateX(5);
         dukeDialog.flip();
         return dukeDialog;
