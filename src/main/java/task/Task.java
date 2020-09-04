@@ -44,7 +44,7 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public String simplifiedTaskString() {
+    public String getSimplifiedString() {
         return this.getTaskType() + " - " + (this.isDone ? "1" : "0") + " - " + this.getDescription();
     }
 }
