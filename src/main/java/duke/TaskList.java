@@ -88,5 +88,12 @@ public class TaskList {
     public int getTaskSize() {
         return this.taskList.size();
     }
+
+    /**
+     * Getter function to retrieve the task list in a collection.
+     */
+    public List<Task> getTaskList() {
+        return this.taskList;
+    }
 }
 

@@ -38,9 +38,6 @@ public class Duke {
      * Method to initialise the acceptance of commands
      */
     public String acceptCommands(String input) {
-        Scanner sc = new Scanner(System.in);
-        //String input = sc.nextLine();
-        //while (!input.equals("bye")) {
         Parser parser = new Parser(input, ui, taskList);
         return parser.retrieveResponse();
     }
@@ -50,8 +47,7 @@ public class Duke {
      * @param input user command.
      * @return the String response.
      */
-    public String getResponse(String input) { // input - whatever the user type
-        // return the chunk of string
+    public String getResponse(String input) {
         this.initialise();
         return acceptCommands(input);
     }

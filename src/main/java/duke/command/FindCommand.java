@@ -6,6 +6,11 @@ import duke.TaskList;
 import duke.UserInterface;
 import duke.exception.DukeListException;
 
+import java.util.List;
+import java.util.function.BiFunction;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 /**
  * FindCommand class to execute find command when given by user.
  * @author Kor Ming Soon
@@ -31,19 +36,24 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasklist, UserInterface ui) throws DukeListException {
-        TaskList tempTaskList = new TaskList(new Storage());
-        tempTaskList.clearList();
-        for (int i = 0; i < tasklist.getTaskSize(); i++) {
-            Task taskInCheck = tasklist.getTaskDetail(i);
-            if (taskInCheck.getTask().contains(wordToFind)) {
-                tempTaskList.addTask(taskInCheck);
-            }
-        }
 
-        if (tempTaskList.getTaskSize() == 0) {
+        List<Task> wholeTaskList = tasklist.getTaskList();
+
+        BiFunction<Integer, String, Boolean> filterFunction = (index, filterWord) -> {
+            return wholeTaskList.get(index).getTask().contains(filterWord);
+        };
+        
+        String response = ui.listTask();
+
+        response += IntStream.range(0, wholeTaskList.size()).filter( index -> {
+            return filterFunction.apply(index, wordToFind);
+        }).mapToObj(filteredIndex -> ui.printTask(filteredIndex + 1,
+                wholeTaskList.get(filteredIndex).toString())).collect(Collectors.joining(""));
+
+        if (response.equals("")) {
             throw new DukeListException("Your search result yields nothing.");
         }
-        ListCommand listCommand = new ListCommand();
-        return listCommand.execute(tempTaskList, new UserInterface());
+
+        return response;
     }
 }
