@@ -36,4 +36,16 @@ public class Deadline extends Task {
     public String getType() {
         return "D";
     }
+
+    @Override
+    public String toFileString() {
+        int stat;
+        if (this.isDone) {
+            stat = 1;
+        } else {
+            stat = 0;
+        }
+        return String.format("%s | %d | %s by %s", this.getType(), stat,
+                this.description, this.by);
+    }
 }

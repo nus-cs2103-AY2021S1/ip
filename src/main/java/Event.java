@@ -34,4 +34,16 @@ public class Event extends Task {
     public String getType() {
         return "E";
     }
+
+    @Override
+    public String toFileString() {
+        int stat;
+        if (this.isDone) {
+            stat = 1;
+        } else {
+            stat = 0;
+        }
+        return String.format("%s | %d | %s at %s", this.getType(), stat,
+                this.description, this.at);
+    }
 }
