@@ -12,15 +12,4 @@ public class Ui {
 
     static final String WELCOME = OPENING + "\nHello I am Duke!\nWhat can I help you with?";
     static final String GOODBYE = "Goodbye. See you soon!";
-    private static final String LINE = "--------------------------------------------------";
-
-    /**
-     * Adds line under given input for aesthetics.
-     *
-     * @param input Input for which line shall be printed under.
-     */
-    public static void addLine(String input) {
-        System.out.println(input);
-        System.out.println(LINE);
-    }
 }

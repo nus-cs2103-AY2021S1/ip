@@ -15,17 +15,33 @@ public class TaskList {
      */
     public TaskList() {
         this.storage = new Storage();
-        this.items = storage.readData();
+        this.items = new ArrayList<>();
+    }
+
+    public void initialise() throws IOException, InvalidTypeException, InvalidDataException {
+        try {
+            this.items = this.storage.readData();
+        } catch (IOException e) {
+            throw e;
+        } catch (InvalidTypeException e) {
+            throw e;
+        } catch (InvalidDataException e) {
+            throw e;
+        }
+    }
+
+    public boolean isEmpty() {
+        return this.items.isEmpty();
     }
 
     /**
      * Exit function for TaskList class, writes data to .txt file.
      */
-    public void saveData() {
+    public void saveData() throws IOException {
         try {
             storage.writeData(this.items);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw e;
         }
     }
 

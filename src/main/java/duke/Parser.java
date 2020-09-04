@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 /**
  * Parser class to handle user inputs.
  */
@@ -51,8 +53,12 @@ public class Parser {
 
         switch (arr[0]) {
         case "bye":
-            tl.saveData();
-            return Ui.GOODBYE;
+            try {
+                tl.saveData();
+                return Ui.GOODBYE;
+            } catch (IOException e) {
+                return e.toString();
+            }
         case "list":
             return tl.display();
         case "find":

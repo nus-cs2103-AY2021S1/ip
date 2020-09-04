@@ -98,7 +98,7 @@ public class Storage {
      *
      * @return An ArrayList of tasks.
      */
-    public ArrayList<Task> readData() {
+    public ArrayList<Task> readData() throws IOException, InvalidTypeException, InvalidDataException {
         boolean pathExists = Files.exists(PATH);
 
         ArrayList<Task> res = new ArrayList<>();
@@ -112,17 +112,13 @@ public class Storage {
                     res.add(stringToTask(str));
                 }
             } catch (IOException e) {
-                e.printStackTrace();
-                Ui.addLine(this.IO_MESSAGE);
+                throw e;
             } catch (InvalidTypeException e) {
-                System.out.println(e.toString());
-                Ui.addLine(this.INVALID_MESSAGE);
+                throw e;
             } catch (InvalidDataException e) {
-                System.out.println(e.toString());
-                Ui.addLine(this.INVALID_MESSAGE);
+                throw e;
             }
         }
-
         return res;
     }
 }
