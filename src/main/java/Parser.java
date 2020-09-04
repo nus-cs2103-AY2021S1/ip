@@ -1,6 +1,3 @@
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * The Parser class handles all the parsing needed.
  *
@@ -17,19 +14,12 @@ public class Parser {
      * @return True if the given string belongs to the set of reserved keywords, false otherwise.
      */
     public boolean isValidKeyWord(String word) {
-        Set<String> reservedKeyWords = new HashSet<>();
-        reservedKeyWords.add("help");
-        reservedKeyWords.add("list");
-        reservedKeyWords.add("find");
-        reservedKeyWords.add("sortdes");
-        reservedKeyWords.add("done");
-        reservedKeyWords.add("delete");
-        reservedKeyWords.add("deadline");
-        reservedKeyWords.add("event");
-        reservedKeyWords.add("todo");
-        reservedKeyWords.add("bye");
-
-        return reservedKeyWords.contains(word);
+        for (Keyword kw : Keyword.values()) {
+            if (word.toUpperCase().equals(kw.toString())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -43,13 +33,17 @@ public class Parser {
             return true;
         }
         String[] splitDate = date.split("-");
-        if (splitDate.length == 3) {
+        boolean isValidDateFormat = splitDate.length == 3;
+        if (isValidDateFormat) {
             String year = splitDate[0];
             String month = splitDate[1];
             String day = splitDate[2];
-            if (year.length() == 4 && month.length() == 2 && day.length() == 2
-                    && Integer.parseInt(month) <= 12 && Integer.parseInt(month) >= 1
-                    && Integer.parseInt(day) >= 1 && Integer.parseInt(day) <= 31) {
+            boolean isValidYear = year.length() == 4;
+            boolean isValidMonth = month.length() == 2 && Integer.parseInt(month) <= 12
+                    && Integer.parseInt(month) >= 1;
+            boolean isValidDay = day.length() == 2 && Integer.parseInt(day) >= 1
+                    && Integer.parseInt(day) <= 31;
+            if (isValidYear && isValidMonth && isValidDay) {
                 return true;
             }
         }
@@ -62,18 +56,20 @@ public class Parser {
      * @param time The given string describing time.
      * @return True if the given string complies the criteria, false otherwise.
      */
-    //checks the format of a given time and checks if it is acceptable
     public boolean isValidTime(String time) {
         if (time.equals("")) {
             return true;
         }
         String[] hoursAndMinutes = time.split(":");
-        if (hoursAndMinutes.length == 2) {
+        boolean isValidTimeFormat = hoursAndMinutes.length == 2;
+        if (isValidTimeFormat) {
             String hour = hoursAndMinutes[0];
             String minutes = hoursAndMinutes[1];
-            if (hour.length() == 2 && minutes.length() == 2 && Integer.parseInt(hour) <= 24
-                    && Integer.parseInt(hour) >= 0 && Integer.parseInt(minutes) >= 0
-                    && Integer.parseInt(minutes) <= 60) {
+            boolean isValidHour = hour.length() == 2 && Integer.parseInt(hour) <= 24
+                    && Integer.parseInt(hour) >= 0;
+            boolean isValidMinute = minutes.length() == 2 && Integer.parseInt(minutes) >= 0
+                    && Integer.parseInt(minutes) <= 60;
+            if (isValidHour && isValidMinute) {
                 return true;
             }
         }

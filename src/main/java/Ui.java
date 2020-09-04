@@ -189,11 +189,11 @@ public class Ui {
         if (size == 0) {
             return "Sorry there are no matching results :(";
         } else {
-            String toReturn = "Here are your tasks sorted by date and time:\n";
+            String toReturn = "Here are your tasks sorted by alphabetical order:\n";
             for (int i = 1; i <= size; i++) {
                 toReturn += i + ".  " + sortedTasks.poll() + "\n";
             }
-            return toReturn + "Note that if you wish to change any task, refer to the "
+            return toReturn + "NOTE that if you wish to change any task, refer to the "
                     + "original list by calling the \"list\" command.";
         }
     }

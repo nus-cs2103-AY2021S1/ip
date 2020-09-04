@@ -94,17 +94,17 @@ public class TaskList {
      * @param ui The UI object used.
      * @return The added task message.
      */
-    public String addTask(String[] data, String keyWord, TaskList tasks, Ui ui) {
+    public String addTask(String[] data, Keyword keyWord, TaskList tasks, Ui ui) {
         switch (keyWord) {
-        case "todo":
+        case TODO:
             ToDo toDo = new ToDo(data[0]);
             tasks.addTask(toDo);
             return ui.printTasksAdded(toDo, tasks.getNoOfTasks());
-        case "deadline":
+        case DEADLINE:
             Deadline deadline = new Deadline(data[0], data[1], data[2]);
             tasks.addTask(deadline);
             return ui.printTasksAdded(deadline, tasks.getNoOfTasks());
-        case "event":
+        case EVENT:
             Event event = new Event(data[0], data[1], data[2]);
             tasks.addTask(event);
             return ui.printTasksAdded(event, tasks.getNoOfTasks());
