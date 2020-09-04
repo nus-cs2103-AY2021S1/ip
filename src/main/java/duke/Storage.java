@@ -99,6 +99,7 @@ public class Storage {
      * @param taskNumber Task number of the data.
      */
     public void updateData(String data, int taskNumber) {
+        assert taskNumber > 0;
         try {
             BufferedReader br = new BufferedReader(new FileReader(String.valueOf(path)));
             String newData = "";

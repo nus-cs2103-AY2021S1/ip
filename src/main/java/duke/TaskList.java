@@ -44,6 +44,7 @@ public class TaskList {
      * @return The task at that position.
      */
     public Task getTask(int taskNumber) {
+        assert taskNumber > 0;
         return list.get(taskNumber - 1);
     }
 
