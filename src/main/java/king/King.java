@@ -8,6 +8,7 @@ package king;
 
 import java.util.Scanner;
 
+import parser.Parser;
 import tasks.TaskList;
 import ui.UI;
 

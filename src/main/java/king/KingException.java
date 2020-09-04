@@ -12,7 +12,7 @@ public class KingException extends Exception {
      * @param error   throwable error resulting in KingException generated.
      * @return KingException
      */
-    KingException(String message, Throwable error) {
+    public KingException(String message, Throwable error) {
         this.error = error;
         this.message = message;
     }

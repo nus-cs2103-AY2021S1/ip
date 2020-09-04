@@ -2,11 +2,10 @@
  * Parser class handles all the commands from the King Program
  * and returns a reply from the commands.
  */
-package king;
+package parser;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
+import king.KingException;
+import king.Storage;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -14,9 +13,13 @@ import tasks.TaskList;
 import tasks.ToDo;
 import ui.UI;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Parser {
 
     private final Storage storage;
+    private final ParserExceptions exceptions = new ParserExceptions();
     private TaskList taskList;
 
     /**
@@ -26,7 +29,7 @@ public class Parser {
      * @param taskList taskList to be manipulated from the commands.
      * @return Parser parser to parse commands.
      */
-    Parser(Storage storage, TaskList taskList) {
+    public Parser(Storage storage, TaskList taskList) {
         this.storage = storage;
         this.taskList = taskList;
     }
@@ -42,71 +45,67 @@ public class Parser {
      * @throws KingException kingException is thrown when phrase is invalid.
      */
     public String parse(String phrase) throws KingException {
-        int phraseLength = phrase.length();
+
+        String mainCommand = phrase.split(" ")[0].toLowerCase();
         String reply;
-        if (phrase.equals("bye")) {
-            return UI.kingChatBox("Bye! Come back soon.");
-        } else if (phrase.equals("list")) {
-            return UI.showTaskList(taskList);
+
+        if (mainCommand.equals("bye")) {
+            reply = UI.kingChatBox("Bye! Come back soon.");
+        } else if (mainCommand.equals("list")) {
+            reply = UI.showTaskList(taskList);
         } else if (phrase.equals("clear list")) {
             taskList.clear();
             reply = UI.kingChatBox("I have cleared the list!");
-        } else if ((phrase.startsWith("done") && phraseLength == 4) || phrase.startsWith("done ")) {
+        } else if (mainCommand.equals("done")) {
             String stringItem = phrase.substring(4).trim();
             try {
-                int itemNo = Integer.parseInt(stringItem) - 1;
-                Task item = taskList.get(itemNo);
+                int taskNumber = Integer.parseInt(stringItem) - 1;
+                Task item = taskList.get(taskNumber);
                 item.markAsDone();
                 reply = UI.doneChatBox(item.toString());
             } catch (IndexOutOfBoundsException e) {
-                throw new KingException("Item " + stringItem + " not found.", e);
+                throw exceptions.itemNotFoundException(stringItem, e);
             } catch (NumberFormatException e) {
                 throw (stringItem.isEmpty())
-                        ? new KingException("Done must be followed by item number", e)
-                        : new KingException(stringItem + " is not a valid item number!", e);
+                        ? exceptions.doneNotFollowedByNumberException()
+                        : exceptions.invalidNumberException(stringItem, e);
             } catch (Exception e) {
-                throw new KingException("Please follow the syntax: done <item no.>", e);
+                throw exceptions.badDoneSyntaxException();
             }
-        } else if (phrase.startsWith("todo ") || (phrase.startsWith("todo") && phraseLength == 4)) {
-            String item;
-            if (phraseLength != 4 && (item = phrase.substring(5).trim()).length() != 0) {
-                ToDo todo = new ToDo(item);
+        } else if (mainCommand.equals("todo")) {
+            String task = phrase.substring(4).trim();
+            if (!task.isEmpty()) {
+                ToDo todo = new ToDo(task);
                 taskList.add(todo);
                 reply = UI.addItemChatBox(todo.toString(), taskList.size());
             } else {
-                throw new KingException("Todo cannot be empty!", new Throwable("empty field"));
+                throw exceptions.emptyTodoException();
             }
-        } else if (phrase.startsWith("event ") || (phrase.startsWith("event") && phraseLength == 5)) {
+        } else if (mainCommand.equals("event")) {
             String item = phrase.substring(5).trim();
             String[] tokens = item.split(" /at ");
             if (tokens.length == 2) {
                 Event event = new Event(tokens[0], tokens[1]);
                 taskList.add(event);
                 reply = UI.addItemChatBox(event.toString(), taskList.size());
-            } else if (tokens.length < 2) {
-                throw new KingException("Event description and time CANNOT be empty!", new Throwable("empty field"));
             } else {
-                throw new KingException("Follow the syntax event: <description> /at <time>", new Throwable(
-                        "bad event"
-                ));
+                throw exceptions.badEventSyntaxException();
             }
-        } else if (phrase.startsWith("deadline ") || (phrase.startsWith("deadline") && phraseLength == 8)) {
+        } else if (mainCommand.equals("deadline")) {
             String item = phrase.substring(8).trim();
             String[] tokens = item.split(" /by ");
             if (tokens.length != 2) {
-                throw new KingException("Follow the syntax: deadline <description> /by <date> <time>", new Throwable(
-                        "bad deadline"
-                ));
+                throw exceptions.badDeadlineSyntaxException();
             }
             try {
                 LocalDateTime datetime = stringToLocalDateTime(tokens[1]);
                 Deadline deadline = new Deadline(tokens[0], datetime);
                 taskList.add(deadline);
                 reply = UI.addItemChatBox(deadline.toString(), taskList.size());
-            } catch (KingException e) {
-                throw e;
+            } catch (KingException badDateTimeSyntax) {
+                throw badDateTimeSyntax;
             }
-        } else if (phrase.startsWith("delete ") || (phrase.startsWith("delete") && phraseLength == 6)) {
+        } else if (mainCommand.equals("delete")) {
             String stringItem = phrase.substring(6).trim();
             try {
                 int itemNo = Integer.parseInt(stringItem) - 1;
@@ -114,19 +113,19 @@ public class Parser {
                 taskList.delete(itemNo);
                 reply = UI.deleteItemChatBox(item.toString(), taskList.size());
             } catch (IndexOutOfBoundsException e) {
-                throw new KingException("Item " + stringItem + " not found.", e);
+                throw exceptions.itemNotFoundException(stringItem, e);
             } catch (NumberFormatException e) {
                 throw (stringItem.isEmpty())
-                        ? new KingException("delete must be followed by item number", e)
-                        : new KingException(stringItem + " is not a valid item number", e);
+                        ? exceptions.deleteNotFollowedByNumberException()
+                        : exceptions.invalidNumberException(stringItem, e);
             } catch (Exception e) {
-                throw new KingException("Please follow the syntax: delete <item no.>", e);
+                throw exceptions.badDeleteSyntaxException();
             }
-        } else if (phrase.startsWith("find ") || (phrase.startsWith("find") && phraseLength == 4)) {
+        } else if (mainCommand.equals("find")) {
             String[] keywords = phrase.substring(4).trim().split(" ");
             return UI.showFoundItems(storage.find(keywords));
         } else {
-            throw new KingException("I don't understand you!", new Throwable("invalid command"));
+            throw exceptions.badCommandException();
         }
         storage.persistTaskList(taskList);
         return reply;
@@ -138,8 +137,7 @@ public class Parser {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             return LocalDateTime.parse(localDateTime, formatter);
         } catch (Exception e) {
-            throw new KingException("Date and Time must be formatted as /by <date> <time>. E.g. 2/1/2020 1400",
-                    new Throwable("bad datetime"));
+            throw exceptions.badLocalDateTimeException(e);
         }
     }
 }
