@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mouseTransparent="true" style="-fx-background-radius: 30.0; -fx-background-color: peachpuff; -fx-padding: 10.0;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-radius: 30.0; -fx-background-color: peachpuff; -fx-padding: 10.0;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" prefHeight="18.0" prefWidth="370.0" text="Label" wrapText="true" HBox.hgrow="NEVER">
+        <Label fx:id="dialog" minHeight="-Infinity" minWidth="-Infinity" text="Label" wrapText="true">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
             <font>
-                <Font size="14.0" />
+                <Font name="Courier New" size="14.0" />
             </font>
             <HBox.margin>
                 <Insets />

@@ -48,18 +48,24 @@ public class Duke {
             case "bye":
                 storage.save(taskList);
                 toReturn += ui.displayGoodbye();
+                break;
             case "list":
                 toReturn += ui.displayList(taskList);
+                break;
             case "done":
                 toReturn += taskList.done(parser);
+                break;
             case "delete":
                 toReturn += taskList.delete(parser);
+                break;
             case "find":
                 toReturn += taskList.find(parser);
+                break;
             case "deadline":
             case "event":
             case "todo":
                 toReturn += taskList.add(parser);
+                break;
             }
         } catch (DukeException e) {
             toReturn += ui.displayMessage(e.toString());

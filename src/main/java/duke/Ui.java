@@ -71,14 +71,14 @@ public class Ui {
         List<Task> tasks = taskList.getTasks();
         int pending = taskList.getNumOfPendingTasks();
         int currId = 1;
-        String toReturn = "TO-DO LIST:";
+        String toReturn = "TO-DO LIST:\n"
+                + String.format("%d pending", pending) ;
 
         for (Task t : tasks) {
-            toReturn += String.format("   %d. %s", currId, t);;
+            toReturn += String.format("\n   %d. %s", currId, t);;
             currId++;
         }
 
-        displayMessage(toReturn);
-        return toReturn;
+        return displayMessage(toReturn);
     }
 }

@@ -1,3 +1,2 @@
 todo:1:call sis
-deadline:0:homework:2017-08-09
-todo:0:call dad
+todo:1:call dad
