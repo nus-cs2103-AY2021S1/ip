@@ -88,6 +88,10 @@ public class App extends Application {
 
         stage.setScene(scene);
         stage.show();
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(new Label(runningDuke.getUi().greeting()), new ImageView(duke))
+        );
         return mainLayout;
     }
 

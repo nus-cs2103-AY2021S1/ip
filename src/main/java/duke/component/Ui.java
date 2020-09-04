@@ -10,10 +10,12 @@ public interface Ui {
     String DONE_TASK_OUTPUT_FORMAT = "Nice! I've marked this task as done:\n%s";
     String FIND_LIST_NOTE_FORMAT = "containing '%s' ";
     String HAPPEN_LIST_NOTE_FORMAT = "happening %s %s ";
+    String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
+    String TASK_LIST_HEADING = "Here are the tasks %sin your list:\n\n";
     void print(String str);
     String printList(TaskList list, Predicate<Task> predicate, String note);
     void output(String message);
     String readInput();
-    void greeting();
+    String greeting();
     void close();
 }

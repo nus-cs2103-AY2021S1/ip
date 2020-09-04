@@ -17,7 +17,8 @@ public class FxmlUi implements Ui {
     }
 
     @Override
-    public void greeting() {
+    public String greeting() {
+        return Ui.GREETING;
     }
 
     @Override
@@ -25,7 +26,7 @@ public class FxmlUi implements Ui {
 
     @Override
     public String printList(TaskList list, Predicate<Task> predicate, String note) {
-        String res = "Here are the tasks " + note + "in your list:\n\n";
+        String res = String.format(Ui.TASK_LIST_HEADING, note);
         return list.print(res, predicate);
     }
 }
