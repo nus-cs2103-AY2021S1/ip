@@ -1,8 +1,10 @@
 package duke;
 
 /**
- * Presents Duke class with Ka To
+ * Presents Duke class with "Ka To"
  * Interacts with the user and answers user commands
+ * Manages the task list of the user
+ * Follows the coding standard
  */
 
 public class Duke {
@@ -22,6 +24,7 @@ public class Duke {
         }
     }
 
+    //run the ui and parser
     private void run() {
         this.ui.printGreet();
         while (this.ui.input.hasNextLine()) {
