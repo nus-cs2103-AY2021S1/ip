@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * A Deadline class to represent tasking that are classified as deadline
+ *
  * @author Kor Ming Soon
  */
 public class Deadline extends Task {
@@ -13,6 +14,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for deadline task.
+     *
      * @param task  Details of the task.
      * @param duration Duration assigned to the task.
      */
@@ -22,6 +24,7 @@ public class Deadline extends Task {
 
     /**
      * Overloaded constructor for the deadline class.
+     *
      * @param task Details of the task.
      * @param duration Duration assigned to the task.
      * @param isDone Completion status of the task.

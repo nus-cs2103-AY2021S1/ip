@@ -13,6 +13,7 @@ public class Event extends Task {
 
     /**
      * Constructor for event class
+     *
      * @param task Details of the task.
      * @param duration Duration assigned to the task.
      */
@@ -23,6 +24,7 @@ public class Event extends Task {
 
     /**
      * Overloaded constructor for the event class.
+     *
      * @param task Details of the task.
      * @param duration Duration assigned to the task.
      * @param isDone Completion status of the task.

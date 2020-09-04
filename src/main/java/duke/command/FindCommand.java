@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Storage;
 import duke.Task;
 import duke.TaskList;
 import duke.UserInterface;
@@ -13,6 +12,7 @@ import java.util.stream.IntStream;
 
 /**
  * FindCommand class to execute find command when given by user.
+ *
  * @author Kor Ming Soon
  */
 public class FindCommand extends Command {
@@ -20,7 +20,8 @@ public class FindCommand extends Command {
     private String wordToFind;
 
     /**
-     * Constructor for FindCommand
+     * Constructor for FindCommand.
+     *
      * @param wordToFind word give by user to filter out relevant tasks.
      */
     public FindCommand(String wordToFind) {
@@ -29,15 +30,16 @@ public class FindCommand extends Command {
 
     /**
      * Execution command to begin search for with relevant word given.
-     * @param tasklist list of tasks to be referenced from.
+     *
+     * @param taskList list of tasks to be referenced from.
      * @param ui UserInterface for the command to prompt.
      * @return a filtered list according to the user input
      * @throws DukeListException When the input index does not match the list.
      */
     @Override
-    public String execute(TaskList tasklist, UserInterface ui) throws DukeListException {
+    public String execute(TaskList taskList, UserInterface ui) throws DukeListException {
 
-        List<Task> wholeTaskList = tasklist.getTaskList();
+        List<Task> wholeTaskList = taskList.getTaskList();
 
         BiFunction<Integer, String, Boolean> filterFunction = (index, filterWord) -> {
             return wholeTaskList.get(index).getTask().contains(filterWord);

@@ -14,6 +14,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructor for DoneCommand.
+     *
      * @param index index of tasking in the list for which to be completed.
      */
     public DoneCommand(int index) {
@@ -21,24 +22,25 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Execution command for Done
-     * @param tasklist list of tasks to be referenced from.
+     * Execution command for Done.
+     *
+     * @param taskList list of tasks to be referenced from.
      * @param ui UserInterface for the command to prompt.
      * @throws DukeIndexException When the input index does not match the list.
      * @return Message sent when the user completes a task.
      */
     @Override
-    public String execute(TaskList tasklist, UserInterface ui) throws DukeIndexException {
+    public String execute(TaskList taskList, UserInterface ui) throws DukeIndexException {
 
-        if (index > tasklist.getTaskSize() - 1 || index < 0) {
+        if (index > taskList.getTaskSize() - 1 || index < 0) {
             String errorMessage = "Wrong list number input. "
                     + "Please put a number between 1 and "
-                    + tasklist.getTaskSize();
+                    + taskList.getTaskSize();
             throw new DukeIndexException(errorMessage);
         }
 
-        tasklist.makeTaskDone(index);
-        return ui.printDone(tasklist.getTaskDetail(index).toString());
+        taskList.makeTaskDone(index);
+        return ui.printDone(taskList.getTaskDetail(index).toString());
 
     }
 }

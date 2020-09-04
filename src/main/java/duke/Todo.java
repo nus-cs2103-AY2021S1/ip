@@ -8,6 +8,7 @@ public class Todo extends Task {
 
     /**
      * Constructor for Todo.
+     *
      * @param task Task detail.
      */
     public Todo (String task) {
@@ -16,6 +17,7 @@ public class Todo extends Task {
 
     /**
      * Overloaded constructor for Todo to, as default is set to not completed.
+     *
      * @param task Task detail.
      * @param isDone To indicate if the task is done or not.
      */
