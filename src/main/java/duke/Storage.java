@@ -22,7 +22,7 @@ public class Storage {
     private TaskList list;
 
     /**
-     * Constructor for Storage.
+     * Creates a Storage.
      * @param list A TaskList object
      */
     public Storage(TaskList list) {

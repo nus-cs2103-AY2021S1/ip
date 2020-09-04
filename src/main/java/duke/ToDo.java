@@ -12,7 +12,7 @@ package duke;
 public class ToDo extends Task {
 
     /**
-     * Constructor for To Do.
+     * Creates a To Do task.
      * @param toDoName name of deadline
      */
     public ToDo(String toDoName) {

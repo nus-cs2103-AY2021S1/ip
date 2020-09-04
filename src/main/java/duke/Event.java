@@ -20,7 +20,7 @@ public class Event extends Task {
     private LocalTime endTime;
 
     /**
-     * Constructor for Event
+     * Creates an Event task.
      * @param taskName Name of Event
      * @param date Date of Event in format of "YYYY-MM-DD"
      * @throws DukeException If date is not in the specified format

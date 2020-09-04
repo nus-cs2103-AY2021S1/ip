@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * @author YanCheng
  */
 public class TaskList {
+    private static final String INVALID_NUMBER = "OOPS!!! Invalid number.";
     private ArrayList<Task> list;
 
     /**
@@ -38,7 +39,7 @@ public class TaskList {
     }
 
     /**
-     * Add method for use during Storage initialisation.
+     * Adds method for use during Storage initialisation.
      * No output will be printed out.
      * @param task Task to be added to task list
      */
@@ -82,11 +83,11 @@ public class TaskList {
             try {
                 index = Integer.parseInt(arr[1]);
             } catch (NumberFormatException e) {
-                throw new DukeException("OOPS!!! Invalid number.");
+                throw new DukeException(INVALID_NUMBER);
             }
 
             if (index > list.size()) {
-                throw new DukeException("OOPS!!! Invalid number.");
+                throw new DukeException(INVALID_NUMBER);
             }
 
             Task task = list.get(index - 1);
@@ -119,11 +120,11 @@ public class TaskList {
                 // if string after done cannot be parsed to integer
                 index = Integer.parseInt(arr[1]);
             } catch (NumberFormatException e) {
-                throw new DukeException("OOPS!!! Invalid number.");
+                throw new DukeException(INVALID_NUMBER);
             }
 
             if (index > list.size()) {
-                throw new DukeException("OOPS!!! Invalid number.");
+                throw new DukeException(INVALID_NUMBER);
             }
 
             Task task = list.get(index - 1);

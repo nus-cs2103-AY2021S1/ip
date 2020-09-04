@@ -11,7 +11,9 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    public static final String HELP_TEXT = "Duke Bot Commands:\n"
+    private static final String SEPARATOR = "    ____________________________________________________________";
+    private static final String UNKNOWN_COMMAND = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String HELP_TEXT = "Duke Bot Commands:\n"
             + "list : list out all current tasks\n"
             + "find <keyword> : find all task that corresponds to the keyword\n"
             + "done <task number> : marks the specified task as done\n"
@@ -26,7 +28,7 @@ public class Ui {
     private Parser parser;
 
     /**
-     * Constructor for Ui class.
+     * Creates an Ui.
      * @param taskList A TaskList object
      * @param storage A Storage object
      * @param parser A Parser object
@@ -65,9 +67,9 @@ public class Ui {
                     System.out.println(taskList.done(input));
                     storage.save();
                 } catch (DukeException e) {
-                    System.out.println("    ____________________________________________________________");
+                    System.out.println(UNKNOWN_COMMAND);
                     System.out.println("     " + e.getMessage());
-                    System.out.println("    ____________________________________________________________");
+                    System.out.println(SEPARATOR);
                     System.out.println();
                 }
             } else if (input.contains("delete")) {
@@ -75,9 +77,9 @@ public class Ui {
                     System.out.println(taskList.delete(input));
                     storage.save();
                 } catch (DukeException e) {
-                    System.out.println("    ____________________________________________________________");
+                    System.out.println(SEPARATOR);
                     System.out.println("     " + e.getMessage());
-                    System.out.println("    ____________________________________________________________");
+                    System.out.println(SEPARATOR);
                     System.out.println();
                 }
             } else {
@@ -91,15 +93,15 @@ public class Ui {
                     } else if (input.contains("event")) {
                         task = parser.handleEvent(input);
                     } else {
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException(UNKNOWN_COMMAND);
                     }
 
                     System.out.println(taskList.add(task));
                     storage.save();
                 } catch (DukeException e) {
-                    System.out.println("    ____________________________________________________________");
+                    System.out.println(SEPARATOR);
                     System.out.println("     " + e.getMessage());
-                    System.out.println("    ____________________________________________________________");
+                    System.out.println(SEPARATOR);
                     System.out.println();
                 }
             }
@@ -150,7 +152,7 @@ public class Ui {
                 } else if (input.contains("event")) {
                     task = parser.handleEvent(input);
                 } else {
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException(UNKNOWN_COMMAND);
                 }
 
                 String output = taskList.add(task);
@@ -166,10 +168,10 @@ public class Ui {
      * Greeting used by Duke.
      */
     public void greet() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println(SEPARATOR);
         System.out.println("     Hello! I'm Duke");
         System.out.println("     What can I do for you?");
-        System.out.println("    ____________________________________________________________");
+        System.out.println(SEPARATOR);
         System.out.println();
     }
 
@@ -177,8 +179,8 @@ public class Ui {
      * Farewell used by Duke.
      */
     public void exit() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println(SEPARATOR);
         System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println("    ____________________________________________________________");
+        System.out.println(SEPARATOR);
     }
 }

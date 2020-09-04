@@ -20,7 +20,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Constructor for DialogBox.
+     * Creates a DialogBox.
      * @param l Contents of the dialog box
      * @param iv Display picture of dialog box
      */

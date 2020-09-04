@@ -17,7 +17,7 @@ public class Deadline extends Task {
     private LocalDate date;
 
     /**
-     * Constructor for Deadline
+     * Creates a deadline task.
      * @param taskName Name of Deadline
      * @param date Date of Deadline in format of "YYYY-MM-DD"
      * @throws DukeException If date is not in the specified format

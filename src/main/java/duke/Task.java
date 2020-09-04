@@ -12,7 +12,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for Task.
+     * Creates a Task.
      * @param taskName Name of task
      */
     public Task(String taskName) {
