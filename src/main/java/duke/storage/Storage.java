@@ -10,11 +10,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.TodoTask;
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.Task;
-import duke.task.TaskList;
+import duke.task.*;
 
 public class Storage {
     String dataDirectory;
@@ -60,6 +56,12 @@ public class Storage {
                     description = deadlineTokens[0];
                     LocalDate by = LocalDate.parse(deadlineTokens[1]);
                     list.add(new DeadlineTask(description, by, isDone));
+                    break;
+                case "N":
+                    String noteTokens[] = remainingText.split("~");
+                    description = noteTokens[0];
+                    String name = noteTokens[1];
+                    list.add(new Note(description, name));
                     break;
                 }
             }

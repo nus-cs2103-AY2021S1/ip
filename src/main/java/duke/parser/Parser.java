@@ -57,6 +57,7 @@ public class Parser {
             task = new TodoTask(remainingText);
             return new AddCommand(task);
 
+
         case "deadline":
             if (remainingText == null) {
                 throw new DukeException(ExceptionTypeEnum.MISSING_DEADLINE_DESCRIPTION);
@@ -81,6 +82,19 @@ public class Parser {
             }
             LocalDate at = LocalDate.parse(taskItems[1].trim());
             task = new EventTask(description, at);
+            return new AddCommand(task);
+
+        case "note":
+            if (remainingText == null) {
+                throw new DukeException(ExceptionTypeEnum.MISSING_NOTE_NAME);
+            }
+            taskItems = remainingText.split(" /desc ");
+            String name = taskItems[0].trim();
+            if (taskItems.length == 1) {
+                throw new DukeException(ExceptionTypeEnum.MISSING_NOTE_DESCRIPTION);
+            }
+            description = taskItems[1].trim();
+            task = new Note(description, name);
             return new AddCommand(task);
 
         case "done":
@@ -119,6 +133,8 @@ public class Parser {
         commandMap.put("d", "deadline");
         commandMap.put("event", "event");
         commandMap.put("e", "event");
+        commandMap.put("note", "note");
+        commandMap.put("n", "note");
         commandMap.put("done", "done");
         commandMap.put("delete", "delete");
         commandMap.put("-d", "delete");
