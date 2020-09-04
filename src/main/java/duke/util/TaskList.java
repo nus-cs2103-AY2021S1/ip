@@ -13,14 +13,14 @@ import java.util.ArrayList;
  * Meant to represent an ArrayList of Tasks to simplify operations done.
  */
 public class TaskList {
-    ArrayList<Task> tasklist;
+    ArrayList<Task> tasks;
 
     /**
      * Constructor.
      * @param tasks an ArrayList of Tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
-        this.tasklist = tasks;
+        this.tasks = tasks;
     }
 
     /**
@@ -28,7 +28,7 @@ public class TaskList {
      * @return the ArrayList of Tasks.
      */
     public ArrayList<Task> getTasklist() {
-        return this.tasklist;
+        return this.tasks;
     }
 
     /**
@@ -39,7 +39,7 @@ public class TaskList {
      */
     public Task addToDo(String description) throws DukeException {
         Task t = new Todo(description);
-        this.tasklist.add(t);
+        this.tasks.add(t);
         return t;
     }
 
@@ -52,7 +52,7 @@ public class TaskList {
      */
     public Task addDeadline(String description, String by) throws DukeException {
         Task t = new Deadline(description, by);
-        this.tasklist.add(t);
+        this.tasks.add(t);
         return t;
     }
 
@@ -65,7 +65,7 @@ public class TaskList {
      */
     public Task addEvent(String description, String at) throws DukeException {
         Task t = new Event(description, at);
-        this.tasklist.add(t);
+        this.tasks.add(t);
         return t;
     }
 
@@ -77,8 +77,8 @@ public class TaskList {
      */
     public Task deleteTask(int taskIndex) throws DukeException {
         try {
-            Task t = this.tasklist.get(taskIndex - 1);
-            this.tasklist.remove(taskIndex - 1);
+            Task t = this.tasks.get(taskIndex - 1);
+            this.tasks.remove(taskIndex - 1);
             return t;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number!");
@@ -93,7 +93,7 @@ public class TaskList {
      */
     public Task doneTask(int taskIndex) throws DukeException {
         try {
-            Task t = tasklist.get(taskIndex - 1);
+            Task t = tasks.get(taskIndex - 1);
             t.markAsDone();
             return t;
         } catch (IndexOutOfBoundsException e) {
@@ -107,7 +107,7 @@ public class TaskList {
      * @return the Task at given index.
      */
     public Task get(int index) {
-        return tasklist.get(index);
+        return tasks.get(index);
     }
 
 }

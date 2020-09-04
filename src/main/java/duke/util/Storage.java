@@ -1,6 +1,5 @@
 package duke.util;
 
-import duke.Duke;
 import duke.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -20,12 +19,9 @@ import java.util.Scanner;
  */
 
 public class Storage {
-    String filePath = Duke.filePath;
     File file = new File("data/duke.txt");
 
-    public Storage() {
-
-    }
+    public Storage() { }
 
     /**
      * If the text file does not exist, create a file.
@@ -44,7 +40,6 @@ public class Storage {
      * @throws DukeException DukeException.
      */
     public void update(TaskList tasks) throws DukeException {
-
         try {
             checkFileExistence(this.file);
             FileWriter fw = new FileWriter(file.getAbsoluteFile());

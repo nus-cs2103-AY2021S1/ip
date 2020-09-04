@@ -5,7 +5,6 @@ import duke.DukeException;
 
 import java.util.Scanner;
 
-
 /**
  * Parses string input and invokes different commands for different inputs.
  */
