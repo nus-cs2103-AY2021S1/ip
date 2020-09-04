@@ -10,7 +10,7 @@ import duke.task.ToDo;
  * Encapsulates data and methods specific to the ToDo command.
  */
 public class ToDoCommand extends Command {
-    
+
     private final String argument;
 
     /**

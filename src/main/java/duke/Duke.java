@@ -11,7 +11,7 @@ import duke.task.TaskList;
  * A personal assistant chat bot to help users keep track of tasks.
  */
 public class Duke {
-    
+
     private final UI ui;
     private final TaskList taskList;
     private final Storage storage;

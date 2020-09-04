@@ -17,13 +17,13 @@ import duke.Storage;
  * Encapsulates behavior and data for the TaskList.
  */
 public class TaskList {
-    
+
     private final List<Task> tasks;
-    
+
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
-    
+
     public String convertTaskListToString() {
         return convertTaskListToString(this.tasks);
     }
@@ -35,7 +35,7 @@ public class TaskList {
      * @return Numbered string representation of task list.
      */
     private String convertTaskListToString(List<Task> tasks) {
-        
+
         assert tasks != null;
 
         if (tasks.isEmpty()) {
@@ -74,9 +74,9 @@ public class TaskList {
         String oldTaskString = task.generateStorageString();
         task.competeTask();
         String newTaskString = task.generateStorageString();
-        
+
         assert storage != null : "Storage object cannot be null";
-        
+
         storage.editLineInStorage(oldTaskString, newTaskString);
 
         return String.format("Nice! I've marked this task as done.\n%s", task.toString());
@@ -139,7 +139,7 @@ public class TaskList {
 
         return convertTaskListToString(temp);
     }
-    
+
     /**
      * Converts a task list to a numbered list filtered by a keyword.
      *
@@ -177,10 +177,10 @@ public class TaskList {
                 if (entry.length != 3) {
                     throw new DukeException("One or more entries in storage have an invalid number of arguments");
                 }
-                
+
                 String taskType = entry[0];
                 String status = entry[1].toUpperCase();
-                
+
                 if (!status.equals("TRUE") && !status.equals("FALSE")) {
                     throw new DukeException("One or more task statuses are not stored correctly");
                 }

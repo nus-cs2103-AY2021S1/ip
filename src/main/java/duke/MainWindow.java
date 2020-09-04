@@ -27,10 +27,13 @@ public class MainWindow extends AnchorPane {
 
     // Image retrieved from https://www.pngfind.com/mpng/hwwTTi_free-png-download-lego-batman-movie-clipart-png/
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    
+
     // Image retrieved from https://www.pngfind.com/mpng/TRwRibh_alfred-lego-batman-movie-lego-batman-alfred-png/
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
+    /**
+     * Initializes the user interface and displays the welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -42,7 +45,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-        
+
         if (!duke.loadedFromStorage()) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog("Unfortunately, I was unable to load from storage", dukeImage)

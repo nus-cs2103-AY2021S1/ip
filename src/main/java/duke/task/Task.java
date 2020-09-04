@@ -17,11 +17,11 @@ public abstract class Task {
     public void competeTask() {
         isDone = true;
     }
-    
+
     public boolean isOnSameDay(LocalDate localDate) {
         return false;
     }
-    
+
     public abstract String generateStorageString();
 
     @Override

@@ -23,7 +23,7 @@ public class Event extends Task {
         this.startDate = startDate;
         this.startTime = startTime;
     }
-    
+
     /**
      * Creates a new instance of the Event class if the argument provided is valid.
      *
@@ -34,7 +34,7 @@ public class Event extends Task {
     public static Event createNewEvent(String argument) throws DukeException {
 
         assert argument != null : "Task argument cannot be null";
-        
+
         String[] eventArguments = argument.split(" /at ");
 
         if (eventArguments.length != 2) {
@@ -50,12 +50,12 @@ public class Event extends Task {
         if (startDateTime.isBlank()) {
             throw new DukeException("Event time cannot be blank!");
         }
-        
+
         String[] datetime = startDateTime.split(" ");
-        
+
         LocalDate startDate;
         LocalTime startTime = null;
-        
+
         try {
             startDate = LocalDate.parse(datetime[0]);
 
@@ -63,22 +63,22 @@ public class Event extends Task {
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH[:]mm");
                 startTime = LocalTime.parse(datetime[1], dtf);
             }
-            
+
         } catch (DateTimeParseException e) {
             throw new DukeException("DateTime format is invalid.");
         }
 
         return new Event(eventName, argument, startDate, startTime);
     }
-    
+
     private String printDateTime() {
-        
+
         String output = startDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
-        
+
         if (startTime != null) {
             output += ", " + startTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
         }
-        
+
         return output;
     }
 

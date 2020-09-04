@@ -10,7 +10,7 @@ import duke.task.TaskList;
  * Encapsulates data and methods specific to the Deadline command.
  */
 public class DeadlineCommand extends Command {
-    
+
     private final String argument;
 
     /**

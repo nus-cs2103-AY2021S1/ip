@@ -10,7 +10,7 @@ public class ToDo extends Task {
     private ToDo(String taskName) {
         super(taskName);
     }
-    
+
     /**
      * Creates a new instance of the class if the input is valid.
      *
@@ -19,9 +19,9 @@ public class ToDo extends Task {
      * @throws DukeException If task name is empty.
      */
     public static ToDo createNewToDo(String argument) throws DukeException {
-        
+
         assert argument != null : "Task argument cannot be null";
-        
+
         if (argument.isBlank()) {
             throw new DukeException("Task name cannot be empty!");
         }

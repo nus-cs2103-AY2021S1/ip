@@ -107,7 +107,7 @@ public class Storage {
 
         assert oldLine != null : "Line to be replaced cannot be null";
         assert newLine != null : "Line that will be used to replace cannot be null";
-        
+
         try {
             FileReader reader = new FileReader(filePath.toString());
             BufferedReader bufferedReader = new BufferedReader(reader);

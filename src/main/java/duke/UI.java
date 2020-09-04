@@ -12,7 +12,7 @@ public class UI {
      */
     public UI() {
     }
-    
+
     /**
      * Greets the user.
      */

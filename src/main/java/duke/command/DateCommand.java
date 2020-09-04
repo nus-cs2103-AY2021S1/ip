@@ -9,9 +9,9 @@ import duke.task.TaskList;
  * Encapsulates data and methods specific to the Date command.
  */
 public class DateCommand extends Command {
-    
+
     private final String argument;
-    
+
     /**
      * Creates a new instance of the Date command class.
      * @param argument Argument passed in by the user.

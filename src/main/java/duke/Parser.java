@@ -27,7 +27,7 @@ public class Parser {
      */
     public static Command parse(String fullCommand) {
         assert fullCommand != null : "Command entered cannot be null";
-        
+
         String[] inputList = fullCommand.split(" ", 2);
         String argument = inputList.length > 1 ? inputList[1] : "";
         CommandType commandType;
@@ -37,7 +37,7 @@ public class Parser {
         } catch (IllegalArgumentException e) {
             commandType = CommandType.INVALID;
         }
-        
+
         switch (commandType) {
         case BYE:
             return new ByeCommand();

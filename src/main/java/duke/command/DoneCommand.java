@@ -9,7 +9,7 @@ import duke.task.TaskList;
  * Encapsulates data and methods specific to the Done command.
  */
 public class DoneCommand extends Command {
-    
+
     private final int argument;
 
     /**

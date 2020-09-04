@@ -9,13 +9,13 @@ import duke.task.Event;
 import duke.task.ToDo;
 
 public class DukeTest {
-    
+
     @Test
     public void newToDo_emptyTaskName_exceptionThrown() {
         Exception e = Assertions.assertThrows(DukeException.class, () -> {
             ToDo.createNewToDo("");
         });
-        
+
         String expected = "Task name cannot be empty!";
         assertTrue(e.getMessage().contains(expected));
     }

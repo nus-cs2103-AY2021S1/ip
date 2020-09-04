@@ -30,7 +30,7 @@ public class Deadline extends Task {
         this.deadlineDate = deadlineDate;
         this.deadlineTime = deadlineTime;
     }
-    
+
     /**
      * Creates a new instance of the Deadline class if the argument provided is valid.
      *
@@ -41,7 +41,7 @@ public class Deadline extends Task {
     public static Deadline createNewDeadline(String argument) throws DukeException {
 
         assert argument != null : "Task argument cannot be null";
-        
+
         String[] deadlineArguments = argument.split(" /by ");
 
         if (deadlineArguments.length != 2) {

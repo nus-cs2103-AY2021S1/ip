@@ -10,7 +10,7 @@ import duke.task.TaskList;
  * Encapsulates data and methods specific to the Event command.
  */
 public class EventCommand extends Command {
-    
+
     private final String argument;
 
     /**
