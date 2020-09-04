@@ -18,7 +18,6 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-
     /**
      * Constructs a Duke object from a specified filePath. If a valid .txt file containing
      * a TaskList is found, it will be loaded. Otherwise, a new TaskList object is created
@@ -44,6 +43,7 @@ public class Duke {
 
     }
 
+
     /**
      * Main program loop until termination when "bye" is called by the user.
      */
@@ -55,7 +55,6 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-
                 String fullCommand = ui.readCommand();
                 ui.printDivider();
                 Command c = Parser.parse(fullCommand);
@@ -76,5 +75,32 @@ public class Duke {
         new Duke("DukenizerTaskList.txt").run();
     }
 
+    /**
+     * Returns Greeting message to user.
+     *
+     * @return Greeting message.
+     */
+    public String getGreeting() {
+        return ui.printGreeting();
+    }
 
+    /**
+     * Returns a String response to the user's input.
+     *
+     * @param input User input.
+     * @return String response from program.
+     */
+    public String getResponse(String input) {
+
+        String output = "";
+
+        try {
+            Command c = Parser.parse(input);
+            output += c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            output += ui.showError(e.getMessage());
+        }
+
+        return output;
+    }
 }

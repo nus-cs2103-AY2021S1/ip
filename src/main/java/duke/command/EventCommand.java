@@ -27,24 +27,26 @@ public class EventCommand extends Command {
 
     /**
      * Creates a new Event Task and adds it into the TaskList. The Storage
-     * is updated with the latest Task and the Ui Object will print out a
-     * relevant message to notify the user on this addition.
+     * is updated with the latest Task and a relevant String message to notify
+     * the user on this addition will be returned.
      *
      * @param tasks   TaskList object containing the list of tasks.
      * @param ui      Ui object to output messages to the user.
      * @param storage Storage object to interact and manipulate data from the hard disk.
+     * @return String response to user.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task event = new Event(this.description, this.at);
         tasks.add(event);
 
         //print output
-        ui.printTaskAdded(tasks, event);
+        String output = ui.printTaskAdded(tasks, event);
 
         //update storage
         storage.saveListToHardDisk(tasks);
 
+        return output;
     }
 
     /**

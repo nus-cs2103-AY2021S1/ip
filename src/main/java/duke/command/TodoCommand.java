@@ -33,23 +33,26 @@ public class TodoCommand extends Command {
 
     /**
      * Creates a new Todo Task and adds it into the TaskList. The Storage
-     * is updated with the latest Task and the Ui Object will print out a
-     * relevant message to notify the user on this addition.
+     * is updated with the latest Task and the Ui Object will return a
+     * relevant string message to notify the user on this addition.
      *
      * @param tasks   TaskList object containing the list of tasks.
      * @param ui      Ui object to output messages to the user.
      * @param storage Storage object to interact and manipulate data from the hard disk.
+     * @return String response to user.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task todo = new Todo(this.description);
         tasks.add(todo);
 
         //print output
-        ui.printTaskAdded(tasks, todo);
+        String output = ui.printTaskAdded(tasks, todo);
 
         //update storage
         storage.saveListToHardDisk(tasks);
+
+        return output;
     }
 
     /**
