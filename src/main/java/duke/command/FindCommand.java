@@ -18,8 +18,13 @@ public class FindCommand extends Command {
     private final String keyword;
 
     public FindCommand(String keyword) {
-        super(false);
+        super();
         this.keyword = keyword;
+    }
+
+    @Override
+    public boolean getExitStatus() {
+        return true;
     }
 
     /**

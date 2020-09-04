@@ -14,8 +14,13 @@ public class AddCommand extends Command {
     private final DukeTask task;
 
     public AddCommand(DukeTask task) {
-        super(false);
+        super();
         this.task = task;
+    }
+
+    @Override
+    public boolean getExitStatus() {
+        return false;
     }
 
     /**

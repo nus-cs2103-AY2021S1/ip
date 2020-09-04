@@ -123,6 +123,10 @@ public class Duke {
         return uiManager.getDukeOutro();
     }
 
+    /**
+     * Returns a boolean to check if program on GUI should terminate
+     * @return boolean
+     */
     public boolean isGuiExit() {
         return isGuiExit;
     }

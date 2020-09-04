@@ -16,8 +16,13 @@ public class DoneCommand extends Command {
     private final int index;
 
     public DoneCommand(int index) {
-        super(false);
+        super();
         this.index = index;
+    }
+
+    @Override
+    public boolean getExitStatus() {
+        return false;
     }
 
     /**

@@ -11,7 +11,12 @@ import duke.logic.UiManager;
 public class HelpCommand extends Command {
 
     public HelpCommand() {
-        super(false);
+        super();
+    }
+
+    @Override
+    public boolean getExitStatus() {
+        return false;
     }
 
     /**

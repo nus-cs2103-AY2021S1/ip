@@ -17,10 +17,8 @@ import duke.logic.UiManager;
  */
 public abstract class Command {
     protected String response;
-    private final boolean isExit;
 
-    public Command(boolean isExit) {
-        this.isExit = isExit;
+    public Command() {
         this.response = "";
     }
 
@@ -29,9 +27,7 @@ public abstract class Command {
      *
      * @return boolean isExit.
      */
-    public boolean getExitStatus() {
-        return isExit;
-    }
+    public abstract boolean getExitStatus();
 
     /**
      * Returns a <code>String</code> denoting the response from executing command.

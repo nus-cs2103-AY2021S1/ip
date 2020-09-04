@@ -12,7 +12,12 @@ import duke.logic.UiManager;
 public class ListCommand extends Command {
 
     public ListCommand() {
-        super(false);
+        super();
+    }
+
+    @Override
+    public boolean getExitStatus() {
+        return false;
     }
 
     /**

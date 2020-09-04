@@ -14,7 +14,12 @@ import duke.logic.UiManager;
  */
 public class ExitCommand extends Command {
     public ExitCommand() {
-        super(true);
+        super();
+    }
+
+    @Override
+    public boolean getExitStatus() {
+        return true;
     }
 
     /**
