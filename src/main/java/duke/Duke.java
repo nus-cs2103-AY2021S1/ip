@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -175,6 +176,7 @@ public class Duke extends Application {
         TaskList tasks = new TaskList(store.load());
         Parser parse = new Parser(tasks);
         String result = parse.parseStr(input);
+        Storage.store(tasks.getList());
         return result;
     }
 
