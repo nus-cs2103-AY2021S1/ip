@@ -9,26 +9,27 @@ public class Ui {
         sc = new Scanner(System.in);
     }
     
-    public void showLoadingError() {
-        System.out.println("ERROR: file does not exist.");
+    public String showLoadingError() {
+        return "ERROR: file does not exist.";
     }
     
-    public void showError(String msg) {
-        System.out.println(msg);
+    public String showError(String msg) {
+        return msg;
     }
     
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String greeting = "Hello! I'm Duke \n" + "What can I do for you?";
-        System.out.println("Hello from\n" + logo + "\n" + greeting);
+    public String showWelcome() {
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        String greeting = "Hello! I'm Duke \n" + "What can I do for you?";
+//        System.out.println("Hello from\n" + logo + "\n" + greeting);
+        return "Welcome!";
     }
 
-    public void showBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     public String readCommand() {
@@ -39,28 +40,29 @@ public class Ui {
         return "    ____________________________________________________________\n";
     }
     
-    public void showDeletedTask(Task task, int length) {
-        System.out.println("Noted. I've removed this task:\n" + task + "\n" 
-                + "Now you have " + length + " tasks in the list.\n");
+    public String showDeletedTask(Task task, int length) {
+        return "Noted. I've removed this task:\n" + task + "\n" 
+                + "Now you have " + length + " tasks in the list.\n";
     }
     
-    public void showAddedTask(Task task, int length) {
+    public String showAddedTask(Task task, int length) {
         length++;
-        System.out.println("Got it. I've added this task:\n" + task + "\n"
-                + "Now you have " + length + " tasks in the list.\n");
+        return "Got it. I've added this task:\n" + task + "\n"
+                + "Now you have " + length + " tasks in the list.\n";
     }
     
-    public void showDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n" + task + "\n");
+    public String showDone(Task task) {
+        return "Nice! I've marked this task as done:\n" + task + "\n";
     }
     
-    public void showList(TaskList taskList) {
+    public String showList(TaskList taskList) {
         for (int i = 0; i < taskList.taskListLength(); i++) {
             if (i == 0) {
-                System.out.println("Here are the tasks in your list:\n");
+                return "Here are the tasks in your list:\n";
             }
             Task task = taskList.getTaskList().get(i);
-            System.out.println((i + 1) + ". " + task + "\n");
+            return (i + 1) + ". " + task + "\n";
         }
+        return "";
     } 
 }

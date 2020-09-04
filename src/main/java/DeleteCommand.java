@@ -21,12 +21,12 @@ public class DeleteCommand extends Command {
      * @throws DukeException throws an exception when the index is more than the length of the taskList.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index > tasks.taskListLength()) {
             throw new DukeException("ERROR: Task does not exist");
         }
         Task deletedTask = tasks.deleteTask(index);
-        ui.showDeletedTask(deletedTask, tasks.taskListLength());
+        return ui.showDeletedTask(deletedTask, tasks.taskListLength());
     }
 
     @Override

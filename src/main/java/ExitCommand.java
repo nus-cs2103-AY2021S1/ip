@@ -8,9 +8,9 @@ public class ExitCommand extends Command {
      * @param storage the current Storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.save(tasks);
+        return ui.showBye();
     }
     
     @Override
