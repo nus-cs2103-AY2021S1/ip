@@ -79,13 +79,16 @@ public class Storage {
                     TaskSymbols type = TaskSymbols.valueOf("SYMBOL_" + taskInfo[0]);
                     switch(type) {
                     case SYMBOL_T:
+                        assert taskInfo.length > 2 : "File format error!";
                         tasks.add(new Todo(taskInfo[1], Boolean.parseBoolean(taskInfo[2])));
                         break;
                     case SYMBOL_E:
+                        assert taskInfo.length > 3 : "File format error!";
                         tasks.add(new Event(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
                                 LocalDate.parse(taskInfo[3])));
                         break;
                     case SYMBOL_D:
+                        assert taskInfo.length > 3 : "File format error!";
                         tasks.add(new Deadline(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
                                 LocalDate.parse(taskInfo[3])));
                         break;

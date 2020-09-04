@@ -29,6 +29,8 @@ public class FindCommand extends Command {
         boolean hasResult = false;
         int i = 1;
         for (Task task : tasks.getTasks()) {
+            assert task.name != null : "Task name could not be found!";
+
             if (task.name.contains(instructions[1])) {
                 response.append("\n>> " + i++ + ". " + task);
                 hasResult = true;

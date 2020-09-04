@@ -27,8 +27,12 @@ public class DoneCommand extends Command {
         if (instructions.length < 2) {
             return ui.incompleteInstructionError();
         }
-        int index = Integer.parseInt(instructions[1]) - 1;
-        return tasks.completeTask(index) + "\n" + storage.save(tasks);
+        try {
+            int index = Integer.parseInt(instructions[1]) - 1;
+            return tasks.completeTask(index) + "\n" + storage.save(tasks);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            return ui.invalidIndexError();
+        }
     }
 }
 

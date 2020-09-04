@@ -27,11 +27,15 @@ public class DeleteCommand extends Command {
         if (instructions.length < 2) {
             return ui.incompleteInstructionError();
         }
-        int index = Integer.parseInt(instructions[1]) - 1;
-        if (index >= tasks.getSize()) {
-            return ui.deleteError();
-        } else {
-            return tasks.deleteTask(index) + "\n" + storage.save(tasks);
+        try {
+            int index = Integer.parseInt(instructions[1]) - 1;
+            if (index >= tasks.getSize()) {
+                return ui.deleteError();
+            } else {
+                return tasks.deleteTask(index) + "\n" + storage.save(tasks);
+            }
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            return ui.invalidIndexError();
         }
     }
 }

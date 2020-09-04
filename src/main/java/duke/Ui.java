@@ -53,6 +53,13 @@ public class Ui {
     }
 
     /**
+     * Displays error when user enters an invalid index for tasks.
+     */
+    public String invalidIndexError() {
+        return ">> Please provide a valid task number!";
+    }
+
+    /**
      * Displays error when user enters an incomplete instruction.
      */
     public String incompleteInstructionError() {
