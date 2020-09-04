@@ -8,6 +8,7 @@ import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.HelpCommand;
+import duke.commands.ReminderCommand;
 import duke.exceptions.InvalidCommandException;
 
 
@@ -25,6 +26,7 @@ public class Parser {
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_COMMAND = "find";
     private static final String HELP_COMMAND = "help";
+    private static final String REMINDER_COMMAND = "reminder";
 
     /**
      * Reads command in string given by the user
@@ -56,6 +58,9 @@ public class Parser {
         }
         if (command.equals(FIND_COMMAND)) {
             return new FindCommand(fullCommand);
+        }
+        if (command.equals(REMINDER_COMMAND)) {
+            return new ReminderCommand(fullCommand);
         }
         if (isTask(command)) {
             return new AddCommand(fullCommand);

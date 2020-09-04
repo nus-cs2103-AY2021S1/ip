@@ -6,6 +6,8 @@ package duke.exceptions;
  */
 public class InvalidCommandException extends DukeException {
     public InvalidCommandException() {
-        super("☹ OOPS!!! Sorry I do not understand this command!");
+        super("☹ OOPS!!! Sorry I do not understand this command!\n"
+                + "Input the \"help\" command to see the list of supported commands."
+        );
     }
 }

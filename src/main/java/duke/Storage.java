@@ -103,11 +103,11 @@ public class Storage {
                 }
 
                 if (currentTask instanceof Event) {
-                    currentLine += "E#" + isTaskDone + "#" + description + "#" + ((Event) currentTask).getBy();
+                    currentLine += "E#" + isTaskDone + "#" + description + "#" + ((Event) currentTask).getActivityTimeInString();
                 }
 
                 if (currentTask instanceof Deadline) {
-                    currentLine += "D#" + isTaskDone + "#" + description + "#" + ((Deadline) currentTask).getBy();
+                    currentLine += "D#" + isTaskDone + "#" + description + "#" + ((Deadline) currentTask).getActivityTimeInString();
                 }
 
                 string.append(currentLine);

@@ -21,7 +21,7 @@ public class EventTester {
     public void testGetByTiming() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime testDate = LocalDateTime.parse("2020-02-02 12:12", formatter);
-        Assertions.assertEquals(new Event("test", testDate).getBy(), "2020-02-02 12:12");
+        Assertions.assertEquals(new Event("test", testDate).getActivityTimeInString(), "2020-02-02 12:12");
     }
 
     /**
