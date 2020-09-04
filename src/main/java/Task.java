@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -21,11 +21,9 @@ public class Task {
     }
 
     @Override
-    public  String toString() {
+    public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    public String toDataString() {
-        return String.format("X|%s|%s", this.isDone, this.description);
-    }
+    public abstract String toDataString();
 }
