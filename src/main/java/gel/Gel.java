@@ -36,7 +36,7 @@ public class Gel {
     /**
      * Starts the task planner <code>gel.Gel</code> and interact with user.
      */
-    public void run() {
+    private void run() {
         // initialise list and scanner
         try {
             Scanner sc = new Scanner(System.in);

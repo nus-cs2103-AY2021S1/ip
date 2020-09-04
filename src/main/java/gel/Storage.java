@@ -23,13 +23,13 @@ public class Storage {
     private String directoryPath;
 
     /**
-     * Constructor of Storage class.
+     * Constructs Storage class at saves data at given filepath.
      *
      * @param filePath ensures that tasks are stored in the file path.
      */
     public Storage(String filePath) {
         int fileIndex = filePath.lastIndexOf("/");
-        this.directoryPath = filePath.substring(0, fileIndex);
+        directoryPath = filePath.substring(0, fileIndex);
         this.filePath = filePath;
     }
 
@@ -37,13 +37,13 @@ public class Storage {
      * Checks for file and directory existence.
      * If they do not exist, create new file/directory.
      *
-     * @throws IOException when createNewFile() fails when filePath is invalid
+     * @throws IOException when createNewFile() fails when filePath is invalid.
      */
     public void checkFileExistence() throws IOException {
         File dataDir = new File(directoryPath);
         if (!dataDir.exists()) {
-            boolean bool = dataDir.mkdir();
-            if (bool) {
+            boolean isDirCreated = dataDir.mkdir();
+            if (isDirCreated) {
                 System.out.println("data directory successfully created");
             } else {
                 System.out.println("Failed to create data directory");

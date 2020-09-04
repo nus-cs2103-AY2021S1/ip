@@ -15,7 +15,7 @@ public class Parser {
      * Ensures that user input of date and time is in the correct format.
      * If is in the correct format, translate the string into <code>LocalDateTime</code>.
      *
-     * @param dateTime User's input
+     * @param dateTime User's input.
      * @return <code>LocalDateTime</code> object.
      * @throws GelException If user's input is in the wrong format.
      */
@@ -58,27 +58,27 @@ public class Parser {
      * @throws IOException If file could not be updated.
      */
     public static void parseUserInput(Scanner sc, Storage storage, Ui ui, TaskList taskList) throws IOException {
-        label:
+        loop:
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             String[] inputArr = input.split(" ");
             String keyword = inputArr[0];
             try {
                 switch (keyword) {
-                case "bye": { //bye
+                case "bye": {
                     storage.updateFile(taskList);
                     ui.farewellMessage();
-                    break label;
+                    break loop;
                 }
-                case "list": { //list
+                case "list": {
                     taskList.showListOfTask();
                     break;
                 }
-                case "done": { //done
+                case "done": {
                     taskList.doneTask(input);
                     break;
                 }
-                case "delete": { //delete
+                case "delete": {
                     if (inputArr.length <= 1) {
                         throw new GelException("    Yo tell me what you want to delete la");
                     }
@@ -89,7 +89,7 @@ public class Parser {
                         throw new GelException("    Yoyoyo please input a valid number after delete");
                     }
                 }
-                case "deadline": { //deadline
+                case "deadline": {
                     int dateIndex = input.lastIndexOf("/");
                     if (dateIndex == -1) {
                         throw new GelException("    Bruh you need the /by tag for deadlines");
@@ -105,7 +105,7 @@ public class Parser {
                     taskList.addDeadline(input, dateIndex);
                     break;
                 }
-                case "event": { //event
+                case "event": {
                     int dateIndex = input.lastIndexOf("/");
                     if (dateIndex == -1) {
                         throw new GelException("    Bruh you need the /at tag for events");
@@ -160,17 +160,17 @@ public class Parser {
         String keyword = inputArr[0];
 
         switch (keyword) {
-        case "bye": { //bye
+        case "bye": {
             storage.updateFile(taskList);
             return ui.farewellMessage();
         }
-        case "list": { //list
+        case "list": {
             return taskList.showListOfTask();
         }
-        case "done": { //done
+        case "done": {
             return taskList.doneTask(input);
         }
-        case "delete": { //delete
+        case "delete": {
             if (inputArr.length <= 1) {
                 throw new GelException("    Yo tell me what you want to delete la");
             }
@@ -180,7 +180,7 @@ public class Parser {
                 throw new GelException("    Yoyoyo please input a valid number after delete");
             }
         }
-        case "deadline": { //deadline
+        case "deadline": {
             int dateIndex = input.lastIndexOf("/");
             if (dateIndex == -1) {
                 throw new GelException("    Bruh you need the /by tag for deadlines");
@@ -195,7 +195,7 @@ public class Parser {
             }
             return taskList.addDeadline(input, dateIndex);
         }
-        case "event": { //event
+        case "event": {
             int dateIndex = input.lastIndexOf("/");
             if (dateIndex == -1) {
                 throw new GelException("    Bruh you need the /at tag for events");
