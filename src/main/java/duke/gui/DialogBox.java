@@ -6,21 +6,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-
 
 /**
  * Represents a DialogBox to be used by JavaFX GUI Application
@@ -42,11 +34,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // Colours to consider:
-        // CURRENT WINNER:
-        // PAPAYAWHIP FFEFD5
-
         dialog.setText(text);
         dialog.setStyle("-fx-background-color: #FFEFD5; -fx-background-radius: 10; -fx-padding: 10 10 10 10");
 
