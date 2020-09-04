@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.exception.EmptyDateException;
-import duke.exception.EmptyDescriptionException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -40,10 +38,8 @@ public class DeleteCommand extends Command {
     }
 
     private String deletedTaskMessage(Task deletedTask, TaskList tasks) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("sure thing. i have removed this task: \n    ")
-                .append(deletedTask).append("\n")
-                .append(tasks.numberOfTasks());
-        return sb.toString();
+        return "of course! i have removed this task: \n    " +
+                deletedTask + "\n" +
+                tasks.numberOfTasks();
     }
 }

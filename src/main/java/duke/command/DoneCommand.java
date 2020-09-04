@@ -39,10 +39,8 @@ public class DoneCommand extends Command {
     }
 
     private String doneTaskMessage(Task deletedTask, TaskList tasks) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("yay! i have marked this task as done: \n    ")
-                .append(deletedTask).append("\n")
-                .append(tasks.numberOfTasks());
-        return sb.toString();
+        return "yay! i have marked this task as done: \n    " +
+                deletedTask + "\n" +
+                tasks.numberOfTasks();
     }
 }

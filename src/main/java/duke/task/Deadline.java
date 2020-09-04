@@ -4,6 +4,7 @@ import duke.exception.EmptyDateException;
 import duke.exception.EmptyDescriptionException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -45,7 +46,7 @@ public class Deadline extends Task {
         String deadline;
         try {
             LocalDate localDate = LocalDate.parse(this.deadline);
-            deadline = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            deadline = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } catch (DateTimeParseException e) {
             deadline = this.deadline;
         }

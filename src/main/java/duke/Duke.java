@@ -5,7 +5,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import parsers.Parser;
+import duke.parsers.Parser;
 
 /**
  * Duke is a personal chatbot cum task manager with the following functionalities:

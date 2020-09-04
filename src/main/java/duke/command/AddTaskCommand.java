@@ -18,7 +18,7 @@ public abstract class AddTaskCommand extends Command {
 
     protected String addedTaskMessage(Task task, TaskList tasks) {
         StringBuilder sb = new StringBuilder();
-        sb.append("got it! i have added the following task to your list:\n    ")
+        sb.append("sure thing! i have added the following task to your list:\n    ")
                 .append(task)
                 .append("\n" + tasks.numberOfTasks());
 

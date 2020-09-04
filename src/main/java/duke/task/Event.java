@@ -45,7 +45,7 @@ public class Event extends Task {
         String eventTime;
         try {
             LocalDate localDate = LocalDate.parse(this.eventTime);
-            eventTime = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            eventTime = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } catch (DateTimeParseException e) {
             eventTime = this.eventTime;
         }

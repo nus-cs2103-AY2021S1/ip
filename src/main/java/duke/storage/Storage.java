@@ -21,6 +21,7 @@ public class Storage {
 
     /**
      * class constructor
+     *
      * @param filePath the file path of the file to load data from and write data to
      */
     public Storage(String filePath) {
@@ -30,6 +31,7 @@ public class Storage {
     /**
      * creates a new file if the it does not exist in the specified file path.
      * afterwards, the text in the file is decoded and converted to a list of tasks stored in an array list
+     *
      * @return the array list of tasks
      * @throws DukeException if there are issues finding the file or decoding the file
      */
@@ -41,6 +43,7 @@ public class Storage {
     /**
      * encodes the tasks in the given task list to a more appropriate format for storage
      * updates the changes in the task list using the encoded versions of the task
+     *
      * @param taskList the task list to reference when updating the file
      */
     public void save(TaskList taskList) {
@@ -88,15 +91,15 @@ public class Storage {
                 string = s.nextLine();
 
                 switch (string.charAt(0)) {
-                    case 'D':
-                        task = Deadline.decode(string);
-                        break;
-                    case 'E':
-                        task = Event.decode(string);
-                        break;
-                    case 'T':
-                        task = ToDo.decode(string);
-                        break;
+                case 'D':
+                    task = Deadline.decode(string);
+                    break;
+                case 'E':
+                    task = Event.decode(string);
+                    break;
+                case 'T':
+                    task = ToDo.decode(string);
+                    break;
                 }
                 decodedTasks.add(task);
             }

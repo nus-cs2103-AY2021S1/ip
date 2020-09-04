@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.exception.EmptyDateException;
-import duke.exception.EmptyDescriptionException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;

@@ -1,4 +1,4 @@
-package parsers;
+package duke.parsers;
 
 import duke.command.*;
 
@@ -6,6 +6,11 @@ import duke.command.*;
  * deals with making sense of the user command
  */
 public class Parser {
+    /**
+     * takes the user's full input and returns the appropriate command that should be run based on the given input
+     * @param fullCommand the entire input given by the user
+     * @return the appropriate command based on the input given by the user
+     */
     public static Command parse(String fullCommand) {
         String firstWord = fullCommand.split(" ")[0];
 

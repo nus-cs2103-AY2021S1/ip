@@ -34,7 +34,7 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyDescriptionException {
         if (fullCommand.length() < 6) {
-            throw new EmptyDescriptionException("oops! the description of 'find' cannot be empty");
+            throw new EmptyDescriptionException("oh dear :-( the description of 'find' cannot be empty");
         }
         ArrayList<Task> matchingTasks = tasks.getMatchingTasks(fullCommand.substring(5));
         return matchingTasksMessage(matchingTasks);
