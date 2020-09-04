@@ -59,7 +59,6 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        //System.out.println("Printing filepath after accessing it: " + filePath.toString());
     }
 
 
@@ -183,47 +182,4 @@ public class Storage {
         lineToEdit = lineToEdit + newLine;
         replacement(lineToEdit, "");
     }
-
-    //test driver code below
-    /* public static void main(String[] args) {
-        Storage storage = new Storage("data/duke.txt");
-        Scanner sc = new Scanner(System.in);
-
-        storage.accessTaskListInFileSystem(storage.getCurrentDirectory());
-        System.out.println(storage.getCurrentDirectory());
-
-        //System.out.println("Please enter your files name and path i.e C:\\test.txt: ");//prompt for file name
-        //String filename = sc.nextLine();//read in the file name
-        storage.readFile();
-
-        System.out.println(storage.stringBufferOfData);
-
-        //prompt for a line in file to edit
-        System.out.println("Please enter the contents of a line you would like to edit: ");
-        String lineToEdit = sc.nextLine();
-
-        //prompt for a line in file to replace
-        System.out.println("Please enter the the replacement text: ");
-        String replacementText = sc.nextLine();
-
-        try {
-            storage.replacement(lineToEdit, replacementText);
-        } catch (StringIndexOutOfBoundsException e) {
-            System.out.println(e.getMessage());
-        }
-
-        //add text
-        System.out.println("Please enter the the append text: "); //prompt for a line in file to replace
-        String appendText = sc.nextLine();
-        storage.appendText(appendText);
-
-        //add text
-        System.out.println("Please enter the text to be removed: "); //prompt for a line in file to replace
-        String removeText = sc.nextLine();
-        storage.removeText(removeText);
-
-        //complete writing to file
-        storage.writeToFile();
-    }
-     */
 }

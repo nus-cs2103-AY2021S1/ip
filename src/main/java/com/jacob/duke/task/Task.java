@@ -84,10 +84,4 @@ public class Task {
     public LocalDateTime getDueDateTime() {
         return dueDateTime;
     }
-
-    public static void main(String[] args) {
-        Task theTask = new Task("Omo");
-        System.out.println(theTask.getStatusIcon());
-        System.out.println("\u2718");
-    }
 }
