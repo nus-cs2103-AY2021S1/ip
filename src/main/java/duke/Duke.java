@@ -14,9 +14,9 @@ public class Duke {
      */
     public Duke() {
         try {
+            ui = new Ui();
             storage = new Storage("./data/Duke.txt");
             taskList = new TaskList(storage.readFromFile());
-            ui = new Ui();
         } catch (DukeException e) {
             ui.addMessage(e.getMessage());
         }

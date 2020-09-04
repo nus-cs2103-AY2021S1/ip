@@ -32,13 +32,13 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    private String dateFormat() {
+    private String getDateFormat() {
         return by.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dateFormat() + ")";
+        return "[D]" + super.toString() + " (by: " + getDateFormat() + ")";
     }
 
     @Override

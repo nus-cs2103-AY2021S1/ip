@@ -32,13 +32,13 @@ public class Event extends Task {
         this.at = at;
     }
 
-    private String dateFormat() {
+    private String getDateFormat() {
         return at.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dateFormat() + ")";
+        return "[E]" + super.toString() + " (at: " + getDateFormat() + ")";
     }
 
     @Override
