@@ -20,6 +20,9 @@ public class FindCommand implements Command {
      */
     public FindCommand(String key) {
         this.keyword = key;
+
+        assert !key.equals("");
+        assert !isExit();
     }
 
 
@@ -32,6 +35,8 @@ public class FindCommand implements Command {
                 resultTaskList.add(task);
             }
         }
+
+        assert !isExit();
     }
 
     @Override
@@ -41,6 +46,7 @@ public class FindCommand implements Command {
 
     @Override
     public String getResponse() {
+        assert !isExit();
         return resultTaskList.getTaskListString();
     }
 
