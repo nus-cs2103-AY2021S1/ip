@@ -11,7 +11,7 @@ import storage.Storage;
 import task.TaskDescription;
 import task.TaskList;
 import task.tasks.Task;
-import ui.UI;
+import ui.UiFX;
 
 /**
  * Deals with making sense of the user command.
@@ -70,7 +70,7 @@ public class Parser {
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
-            return UI.farewellForJavaFx();
+            return UiFX.farewellForJavaFx();
         } else if (userCommand.equals("list")) {
             // Show list of tasks
             return TaskDescription.showAllTask(tasklist.getTasks());
