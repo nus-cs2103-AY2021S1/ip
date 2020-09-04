@@ -22,6 +22,9 @@ public class Parser {
      * @return The appropriate Command object to execute
      */
     public static Command parse(String command, TaskList list, Storage storage) {
+        assert command != null : "Command cannot be empty";
+        assert list != null : "List cannot be empty";
+        assert storage != null : "Storage cannot be empty";
         Command parsedCommand;
         if (command.equals("bye")) {
             parsedCommand = new ByeCommand(command, list, storage);
@@ -66,6 +69,7 @@ public class Parser {
         } else {
             parsedCommand = new InvalidCommand(command, list, storage);
         }
+        assert parsedCommand != null : "Parsed command is empty";
         return parsedCommand;
     }
 }

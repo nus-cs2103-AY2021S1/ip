@@ -36,6 +36,7 @@ public class Storage {
         } catch (FileNotFoundException ex) {
             throw new FileNotFoundException("☹ OOPS!!! I can't find your file leh!");
         } catch (Exception ex) {
+            ex.printStackTrace();
             throw new Exception("☹ OOPS!!! I can't load your file leh...");
         }
         return list;

@@ -35,6 +35,7 @@ public class TaskList {
             output.append(counter).append(". ").append(task.toString()).append("\n");
             counter++;
         }
+        assert counter >= 1 : "Error in iteration";
         return output.toString();
     }
 
@@ -77,6 +78,7 @@ public class TaskList {
      * @return A String format of list of filtered Tasks
      */
     public String iterateFilteredList(List<Task> list) {
+        assert list != null : "List cannot be empty";
         StringBuilder output = new StringBuilder();
         int counter = 1;
         for (Task task : list) {
