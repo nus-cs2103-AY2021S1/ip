@@ -39,6 +39,13 @@ public class Parser {
             }
             return new FindCommand(remainingText);
 
+        case "schedule":
+            if (remainingText == null) {
+                throw new DukeException(ExceptionTypeEnum.MISSING_SCHEDULE_DATE);
+            }
+            LocalDate date = LocalDate.parse(remainingText);
+            return new ScheduleCommand(date);
+
         case "todo":
             if (remainingText == null) {
                 throw new DukeException(ExceptionTypeEnum.MISSING_TODO_DESCRIPTION);

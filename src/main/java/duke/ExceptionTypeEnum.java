@@ -3,6 +3,7 @@ package duke;
 public enum ExceptionTypeEnum {
     UNKNOWN_COMMAND ("OOPS!!! I'm sorry, but I don't know what that means :-("),
     MISSING_FIND_KEYWORD ("Please provide keyword(s) to look for"),
+    MISSING_SCHEDULE_DATE ("Please provide a date to look for"),
     INCORRECT_BYE ("Did you mean to say 'bye'?"),
     MISSING_DELETE_ITEM ("Please specify an item number."),
     INVALID_ITEM_NUMBER ("That is not a valid item number."),

@@ -18,6 +18,16 @@ public class EventTask extends Task {
     }
 
     /**
+     * Checks whether a given date is the same as the event date
+     *
+     * @param date a LocalDate to check for equality
+     * @return true if the event date "at" is the same as the date of the argument, false otherwise
+     */
+    public boolean isSameDate(LocalDate date) {
+        return at.equals(date);
+    }
+
+    /**
      * Converts task to string - task type, tick/check and description
      */
     @Override

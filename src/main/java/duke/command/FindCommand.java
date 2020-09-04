@@ -14,11 +14,10 @@ public class FindCommand implements Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println(keyword);
         if(tasks.isEmpty()) {
             return ui.format("There are no items in the list right now.");
         } else {
-            return ui.format(tasks.filter(keyword).itemize("Here are the matching tasks in your list:"));
+            return ui.format(tasks.filterByDescription(keyword).itemize("Here are the matching tasks in your list:"));
         }
     }
 }

@@ -3,8 +3,11 @@ package duke.task;
 import duke.DukeException;
 import duke.ExceptionTypeEnum;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class TaskList {
     List<Task> list;
@@ -77,7 +80,7 @@ public class TaskList {
      *
      * @return a list of tasks that satisfy the constraints
      */
-    public TaskList filter(String keyword) {
+    public TaskList filterByDescription(String keyword) {
         List<Task> filteredList = new ArrayList<>();
         for(Task task: list) {
             if(task.toString().contains(keyword)) {
@@ -85,6 +88,17 @@ public class TaskList {
             }
         }
         return new TaskList(filteredList);
+    }
+
+    /**
+     * Returns filtered tasks based on exact matching with a date
+     *
+     * @return a list of tasks that satisfy the constraints
+     */
+    public TaskList filterByDate(LocalDate date) {
+        Predicate<Task> byDate = task -> task.isSameDate(date);
+        List<Task> filteredTasks = list.stream().filter(byDate).collect(Collectors.toList());
+        return new TaskList(filteredTasks);
     }
 
     /**

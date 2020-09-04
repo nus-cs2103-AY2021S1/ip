@@ -3,6 +3,8 @@ package duke.task;
 import duke.DukeException;
 import duke.ExceptionTypeEnum;
 
+import java.time.LocalDate;
+
 public abstract class Task {
     protected String description;
     public boolean isDone;
@@ -18,6 +20,17 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Checks whether a task's associated date is the same as the supplied date. Meant to be
+     * overriden in inherited classes such as <code>DeadlineTask</code>.
+     *
+     * @param date a LocalDate to check for equality
+     * @return false
+     */
+    public boolean isSameDate(LocalDate date) {
+        return false;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); // return tick or X symbols
     }
@@ -28,6 +41,7 @@ public abstract class Task {
         }
         this.isDone = true;
     }
+
 
     public String toDBString() {
         return String.format("%s~%s", isDone ? 1 : 0, description);
