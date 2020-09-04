@@ -65,7 +65,10 @@ public class Storage {
                 isDone = true;
             }
 
-            String eventOrDeadlineDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
+            String eventOrDeadlineDescription = "";
+            if (taskType == 'E' || taskType == 'D') {
+                eventOrDeadlineDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
+            }
 
             switch (taskType) {
             case 'T':

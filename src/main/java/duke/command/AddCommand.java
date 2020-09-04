@@ -92,11 +92,7 @@ public class AddCommand extends Command {
     public String addItem(Task newTask, TaskList taskList, Storage storage) {
         taskList.add(newTask);
         storage.createTask(newTask); // Add to storage database
-        int listSize = taskList.size();
-        return ("Got it. I've added this task:\n   "
-                + newTask.toString() + "\nNow you have " + (listSize)
-                + (listSize > 1 ? " tasks" : " task")
-                + " in the list.");
+        return "Got it. I've added this task:\n   " + newTask.toString() + taskList.printNumTasks();
 
     }
 }

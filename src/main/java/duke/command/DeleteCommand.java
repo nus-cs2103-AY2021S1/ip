@@ -32,14 +32,10 @@ public class DeleteCommand extends Command {
             String taskIndex = userInput.substring(7);
             int index = Integer.valueOf(taskIndex) - 1; // taskIndex started from 1
             Task deletedTask = taskList.delete(index);
-            int listSize = taskList.size();
 
             storage.deleteTask(index);
 
-            return ("Noted. I've removed this task:\n"
-                    + deletedTask.toString() + "\nNow you have " + (listSize)
-                    + (listSize > 1 ? " tasks" : " task")
-                    + " in the list.");
+            return "Noted. I've removed this task:\n" + deletedTask.toString() + taskList.printNumTasks();
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("Please enter a valid task number for me delete.");
