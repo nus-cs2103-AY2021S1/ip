@@ -54,7 +54,7 @@ public class TaskList {
                     if (s.length == 1) {
                         throw new EmptyTodoException();
                     }
-                    Todo t = new Todo(fullCommand.substring(5));
+                    Todo t = new Todo(fullCommand.substring(5), addTags(fullCommand));
                     books.add(t);
                     text = "Got it. I've added this task:\n"
                             + "  " + books.get(books.size() - 1) + "\n"
@@ -72,7 +72,7 @@ public class TaskList {
                     LocalDate d = LocalDate.parse(date);
                     String formattedDate = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
-                    Event t = new Event(fullCommand.substring(6, start - 1), formattedDate);
+                    Event t = new Event(fullCommand.substring(6, start - 1), formattedDate, addTags(fullCommand));
                     books.add(t);
                     text = "Got it. I've added this task:\n"
                             + "  " + books.get(books.size() - 1) + "\n"
@@ -92,7 +92,7 @@ public class TaskList {
                     LocalDate d = LocalDate.parse(date);
                     String formattedDate = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
-                    Deadline t = new Deadline(fullCommand.substring(9, start - 1), formattedDate);
+                    Deadline t = new Deadline(fullCommand.substring(9, start - 1), formattedDate, addTags(fullCommand));
                     books.add(t);
                     text = "Got it. I've added this task:\n"
                             + "  " + books.get(books.size() - 1) + "\n"
@@ -125,6 +125,15 @@ public class TaskList {
                         text += l + "." + tempList.get(i) + "\n";
                         storage.appendToFile(text);
                     }
+                } else if (first.equals("tags")) {
+                    int index = Integer.parseInt(s[1]);
+                    ArrayList<String> tags = books.get(index - 1).getTags();
+                    text += "Here are the tags in your list:\n";
+                    for (int i = 0; i < tags.size(); i++) {
+                        int l = i + 1;
+                        text += l + "." + tags.get(i) + "\n";
+                        storage.appendToFile(text);
+                    }
                 } else {
                     throw new UnknownCommandException();
                 }
@@ -136,5 +145,16 @@ public class TaskList {
             storage.appendToFile(text);
         }
         return text;
+    }
+
+    ArrayList<String> addTags(String fullCommand) {
+        ArrayList<String> tags = new ArrayList<>();
+        String[] s = fullCommand.split("\\s");
+        for (int i=0; i<s.length; i++) {
+            if (s[i].substring(0,1).equals("#")) {
+                tags.add(s[i]);
+            }
+        }
+        return tags;
     }
 }

@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Duke extends Application {
     private final String FILEPATH = System.getProperty("user.dir")
@@ -29,6 +30,7 @@ public class Duke extends Application {
     private final TaskList tasks;
     private final Parser parser;
     private final Ui ui;
+    private ArrayList<String> tags = new ArrayList<>();
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;

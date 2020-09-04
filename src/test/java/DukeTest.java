@@ -3,6 +3,7 @@ import duke.tasklist.Todo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,7 +20,7 @@ public class DukeTest {
 
     @Test
     public void Todo_Test()  {
-        assertEquals("[T][✘] borrow book", new Todo("borrow book").toString());
+        assertEquals("[T][✘] borrow book", new Todo("borrow book", new ArrayList<String>()).toString());
     }
 
     @Test
@@ -30,7 +31,18 @@ public class DukeTest {
         LocalDate d = LocalDate.parse(date);
         String formattedDate = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
-        Deadline t = new Deadline(fullCommand.substring(9, start - 1), formattedDate);
+        Deadline t = new Deadline(fullCommand.substring(9, start - 1), formattedDate, addTags(fullCommand));
         assertEquals("[D][✘] ok (by: Oct 15 2019)", t.toString());
+    }
+
+    ArrayList<String> addTags(String fullCommand) {
+        ArrayList<String> tags = new ArrayList<>();
+        String[] s = fullCommand.split("\\s");
+        for (int i=0; i<s.length; i++) {
+            if (s[i].substring(0,1) == "#") {
+                tags.add(s[i]);
+            }
+        }
+        return tags;
     }
 }

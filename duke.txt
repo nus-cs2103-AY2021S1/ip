@@ -605,3 +605,181 @@ Hello! I'm Duke
 What can I do for you?
 Hello! I'm Duke
 What can I do for you?
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] book #cool and []
+Now you have 1 tasks in the list.
+Here are the tasks in your list:
+
+Here are the tasks in your list:
+1.[T][✘] book #cool and []
+
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] read book and []
+Now you have 1 tasks in the list.
+Hello! I'm Duke
+What can I do for you?
+
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Bye. Hope to see you again soon!
+
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] hi #fun
+Now you have 1 tasks in the list.
+Here are the tasks in your list:
+
+Here are the tasks in your list:
+1.[T][✘] hi #fun
+
+Hello! I'm Duke
+What can I do for you?
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] read book
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+  [T][✘] play book #fun
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+
+Here are the tasks in your list:
+1.[T][✘] read book
+
+Here are the tasks in your list:
+1.[T][✘] read book
+2.[T][✘] play book #fun
+
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] read book
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+  [T][✘] add books #fun
+Now you have 2 tasks in the list.
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] coolbook
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+  [T][✘] ok #hi
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+
+Here are the tasks in your list:
+1.[T][✘] coolbook
+
+Here are the tasks in your list:
+1.[T][✘] coolbook
+2.[T][✘] ok #hi
+
+
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] readbook #hi
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+  [T][✘] hi
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+
+Here are the tasks in your list:
+1.[T][✘] readbook #hi
+
+Here are the tasks in your list:
+1.[T][✘] readbook #hi
+2.[T][✘] hi
+
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] addtags #hi
+Now you have 1 tasks in the list.
+Hello! I'm Duke
+What can I do for you?
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] readbook #hi
+Now you have 1 tasks in the list.
+Here are the tasks in your list:
+
+Here are the tasks in your list:
+1.[T][✘] readbook #hi
+
+Got it. I've added this task:
+  [T][✘] bookie #hi #fun
+Now you have 2 tasks in the list.
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] hi #cool
+Now you have 1 tasks in the list.
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] hello #hi
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+  [T][✘] gtg #cool #hor
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+
+Here are the tasks in your list:
+1.[T][✘] hello #hi
+
+Here are the tasks in your list:
+1.[T][✘] hello #hi
+2.[T][✘] gtg #cool #hor
+
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] hi #hoo
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+  [T][✘] eh #koo #rool
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+
+Here are the tasks in your list:
+1.[T][✘] hi #hoo
+
+Here are the tasks in your list:
+1.[T][✘] hi #hoo
+2.[T][✘] eh #koo #rool
+
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] hih #dds #cool
+Now you have 1 tasks in the list.
+1.#dds
+
+1.#dds
+2.#cool
+
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] tags #cool #bro
+Now you have 1 tasks in the list.
+Here are the tags in your list:
+1.#cool
+
+Here are the tags in your list:
+1.#cool
+2.#bro
+

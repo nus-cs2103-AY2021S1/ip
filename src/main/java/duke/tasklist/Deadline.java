@@ -1,5 +1,7 @@
 package duke.tasklist;
 
+import java.util.ArrayList;
+
 /**
  * Deadline class is a subclass of Task.
  * Deadline stores each Deadline's description and deadline.
@@ -10,8 +12,8 @@ package duke.tasklist;
 public class Deadline extends Task {
     protected String by;
 
-    public Deadline(String description, String by) {
-        super(description);
+    public Deadline(String description, String by, ArrayList<String> tags) {
+        super(description, tags);
         this.by = by;
     }
 
