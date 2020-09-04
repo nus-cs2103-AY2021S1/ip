@@ -26,20 +26,20 @@ public class CommandParser {
      */
     public static Command parse(String userInput) throws DukeException {
         String firstWord = userInput.split(" ")[0];
-        if (userInput.equals(INDICATOR_CLOSING)) {
+        switch (firstWord) {
+        case INDICATOR_CLOSING:
             return ExitCommand.create();
-        } else if (userInput.equals(INDICATOR_LIST)) {
+        case INDICATOR_LIST:
             return ListCommand.create();
-        } else if (firstWord.equals(INDICATOR_DONE)) {
+        case INDICATOR_DONE:
             return DoneCommand.parse(userInput);
-        } else if (firstWord.equals(INDICATOR_DELETE)) {
+        case INDICATOR_DELETE:
             return DeleteCommand.parse(userInput);
-        } else if (firstWord.equals(INDICATOR_FIND)) {
+        case INDICATOR_FIND:
             return FindCommand.parse(userInput);
-        } else {
+        default:
             return AddCommand.parse(userInput);
         }
-
     }
 
 
