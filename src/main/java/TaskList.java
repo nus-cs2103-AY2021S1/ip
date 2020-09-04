@@ -103,7 +103,7 @@ public class TaskList {
                     + ". Please try again.");
             } else {
                 Task t = storage.get(i - 1);
-                Task completed = t.setDone(true);
+                Task completed = t.setDone();
                 storage.set(i - 1, completed);
                 return "Nice! I've marked this task as done:\n" + "  "
                         + completed + "\n";

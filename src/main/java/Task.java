@@ -12,7 +12,7 @@ abstract class Task {
         this.done = done;
     }
 
-    abstract Task setDone(boolean b);
+    abstract Task setDone();
 
     public String getStatusIcon() {
         return (done ? "\u2713" : "\u2718");

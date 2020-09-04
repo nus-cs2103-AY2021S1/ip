@@ -21,11 +21,10 @@ public class ToDo extends Task {
 
     /**
      * Setter method for setting done attribute to given input.
-     * @param b The new completion status
      * @return New ToDo task with same parameters but attribute done changed to given input
      */
     @Override
-    public ToDo setDone(boolean b) {
+    public ToDo setDone() {
         return new ToDo(this.getName(), true);
     }
 
