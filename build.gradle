@@ -44,11 +44,12 @@ test {
 }
 
 application {
-    mainClassName = "main.java.Main"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
     archiveBaseName = "duke"
+    archiveVersion = "0.2.0"
     archiveClassifier = null
 }
 
