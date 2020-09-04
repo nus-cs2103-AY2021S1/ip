@@ -9,6 +9,9 @@ import dd.commands.HelpCommand;
 import dd.commands.ListCommand;
 import dd.exception.DukeException;
 import dd.ui.Ui;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.util.Duration;
 
 /**
  * A parser makes sense of the user input and
@@ -30,6 +33,11 @@ public class Parser {
         if (input.equals("bye")) {
             // exit command
             c = new ExitCommand("exit", "");
+
+            // delay 2 seconds before closing application to display bye greeting first
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
         } else if (input.equals("help")) {
             // help command
             c = new HelpCommand("help", "");
