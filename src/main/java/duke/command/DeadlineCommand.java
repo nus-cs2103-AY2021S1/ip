@@ -27,23 +27,26 @@ public class DeadlineCommand extends Command {
 
     /**
      * Creates a new Deadline Task and adds it into the TaskList. The Storage
-     * is updated with the latest Task and the Ui Object will print out a
-     * relevant message to notify the user on this addition.
+     * is updated with the latest Task and a relevant String message to notify
+     * the user on this addition will be returned.
      *
      * @param tasks   TaskList object containing the list of tasks.
      * @param ui      Ui object to output messages to the user.
      * @param storage Storage object to interact and manipulate data from the hard disk.
+     * @return String response to user.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task deadline = new Deadline(this.description, this.by);
         tasks.add(deadline);
 
         //print output
-        ui.printTaskAdded(tasks, deadline);
+        String response = ui.printTaskAdded(tasks, deadline);
 
         //update storage
         storage.saveListToHardDisk(tasks);
+
+        return response;
     }
 
 

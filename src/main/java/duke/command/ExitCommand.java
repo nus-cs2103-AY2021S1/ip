@@ -10,15 +10,17 @@ import duke.ui.Ui;
 public class ExitCommand extends Command {
 
     /**
-     * Exits the program for the user.
+     * Exits the program for the user. Returns a String response.
      *
-     * @param tasks   TaskList object containing the list of tasks.
+     *  @param tasks   TaskList object containing the list of tasks.
      * @param ui      Ui object to output messages to the user.
      * @param storage Storage object to interact and manipulate data from the hard disk.
+     * @return String response to user.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printExit();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String output = ui.printExit();
+        return output;
     }
 
     /**

@@ -26,17 +26,17 @@ public class DeleteCommand extends Command {
     /**
      * Processes the String attribute markItem to make sure that a valid Task number
      * is given. The Task will be deleted from the TaskList if it is valid. Otherwise a
-     * DukeException will be thrown. The Storage is updated with this deletion and the
-     * Ui Object will print out a relevant message to notify the user on this deletion
-     * or exception.
+     * DukeException will be thrown. The Storage is updated with this deletion and a relevant
+     * String message to notify the user on this deletion or exception will be returned.
      *
      * @param tasks   TaskList object containing the list of tasks.
      * @param ui      Ui object to output messages to the user.
      * @param storage Storage object to interact and manipulate data from the hard disk.
+     * @return String response to user.
      * @throws DukeException If number is not a valid item number in the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
         //check if second argument is integer & valid
         try {
@@ -52,10 +52,12 @@ public class DeleteCommand extends Command {
         Task deletedItem = tasks.delete(deleteIndex);
 
         //print output
-        ui.printTaskDeleted(tasks, deletedItem);
+        String output = ui.printTaskDeleted(tasks, deletedItem);
 
         //update storage
         storage.saveListToHardDisk(tasks);
+
+        return output;
     }
 
     /**

@@ -17,50 +17,56 @@ public class Ui {
     }
 
     /**
-     * Print out exit program to user.
+     * Returns a string representation for exiting the program.
      */
-    public void printExit() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String printExit() {
+        String s = "Bye. Hope to see you again soon!";
+        return s;
     }
 
     /**
-     * Print out section divider.
+     * Returns a string representation of a section divider.
      */
-    public void printDivider() {
-        System.out.println("_______________________________________________________________");
+    public String printDivider() {
+        String s = "_______________________________________________________________";
+        return s;
     }
 
     /**
-     * Print out greeting to user.
+     * Returns a string representation of greeting message.
      */
-    public void printGreeting() {
+    public String printGreeting() {
+
         String logo =
-                " ____        _                    \n"
-                        + "|  _ \\ _   _| | _____  ______ ______ ______  ___  _____\n"
-                        + "| | | | | | | |/ / _ \\|  __  |__  __|___   |/ _ \\|  _  \\\n"
-                        + "| |_| | |_| |   <  __/| |  | |__||__ /   /_<  __/|     /\n"
-                        + "|____/ \\__,_|_|\\_\\___|| |  | |______|______|\\___||_|\\__\\ \n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("_______________________________________________________________");
-        System.out.println("Hello! I'm Dukenizer\nWhat can I do for you?");
-        System.out.println("_______________________________________________________________");
-        System.out.println();
+                " ___        _                    \n"
+                        + "|  _ \\ _   _| |  ____   _____ _____ _____  __  ____\n"
+                        + "| | | |  |  |  | | / / _ \\|  __  |__  __|___   | / _ \\|  _  \\\n"
+                        + "| |_| |  |_|  |   <  __/| |   | |__||__ /   /_<  __/|     /\n"
+                        + "|___/ \\__,_|_|\\_\\___|| |  | |______|______|\\___||_|\\__\\ \n";
+
+        String s = "Hello from\n" + logo + "\n"
+                + "Hello! Dukenizer is back!\nWhat can I do for you\n";
+
+        return s;
+
     }
 
     /**
-     * Prints the task list in the program.
+     * Returns a string representation of the task list in the program.
      */
-    public void printList(TaskList lst) {
-        System.out.println(lst.toString());
+    public String printList(TaskList lst) {
+        String s = lst.toString();
+
         if (lst.getSize() == 0) {
-            System.out.println("Your task list is empty!");
+            s = "There are no items found in your task list!";
         }
+        return s;
     }
 
     /**
      * Takes in user input to be processed.
      *
-     * @return String representation of user input.
+     * @return Returns a string representation of the user input.
      */
     public String readCommand() {
         //Take in Input
@@ -69,53 +75,56 @@ public class Ui {
     }
 
     /**
-     * Prints out any error messages.
+     * Returns a string representation of any error messages.
      *
      * @param message error message
      */
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return message;
     }
 
     /**
-     * Prints out to user that task is successfully added.
+     * Returns a string representation of task being successfully added.
      *
      * @param lst  TaskList in the program
      * @param task Task that was added
      */
-    public void printTaskAdded(TaskList lst, Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + lst.getSize() + " tasks in the list.");
+    public String printTaskAdded(TaskList lst, Task task) {
+        String s = "Got it. I've added this task:\n" + task.toString()
+                + "\nNow you have " + lst.getSize() + " tasks in the list.";
+
+        return s;
     }
 
     /**
-     * Print out mark Task as done.
+     * Returns a string representation of marking Task as done.
      *
      * @param task Task to be marked done.
      */
-    public void printTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task.toString());
+    public String printTaskDone(Task task) {
+        String s = "Nice! I've marked this task as done:\n" + task.toString();
+        return s;
     }
 
     /**
-     * Print out Task successfully deleted
+     * Returns a string representation of Task being successfully deleted.
      *
      * @param lst  TaskList in the program
      * @param task Task to be deleted
      */
-    public void printTaskDeleted(TaskList lst, Task task) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + lst.getSize() + " tasks in the list.");
+    public String printTaskDeleted(TaskList lst, Task task) {
+        String s = "Noted. I've removed this task:\n" + task.toString()
+                + "\nNow you have " + lst.getSize() + " tasks in the list.";
+        return s;
     }
 
     /**
-     * Prints out matching tasks line.
+     * Returns a matching tasks message.
      */
-    public void printMatchingTasks() {
-        System.out.println("Here are the matching tasks in your list:");
+    public String printMatchingTasks() {
+        String s = "Here are the matching tasks in your list:";
+        return s;
+
     }
 
 }

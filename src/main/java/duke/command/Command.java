@@ -11,7 +11,22 @@ import duke.ui.Ui;
  * Command will extend from this abstract class and have their own execute and isExit method.
  */
 public abstract class Command {
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
+    /**
+     * Returns a String representation of the response to that command.
+     *
+     * @param tasks TaskList object containing the list of tasks.
+     * @param ui Ui object to output messages to the user.
+     * @param storage Storage object to interact and manipulate data from the hard disk.
+     * @return String response to user.
+     * @throws DukeException When user request is invalid for that command.
+     */
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+
+    /**
+     * Returns a boolean indicator for the Command to exit the program.
+     *
+     * @return Boolean indicator.
+     */
     public abstract boolean isExit();
 }

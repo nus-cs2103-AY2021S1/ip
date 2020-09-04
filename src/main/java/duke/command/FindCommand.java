@@ -20,14 +20,15 @@ public class FindCommand extends Command {
 
     /**
      * Uses the searchTerm attribute to filter out tasks with descriptions containing the searchTerm. The tasks
-     * are added into a new TaskList and printed out by the Ui class to be shown to the user.
+     * are added into a new TaskList and a string response will be returned.
      *
      * @param tasks   TaskList object containing the list of tasks.
      * @param ui      Ui object to output messages to the user.
      * @param storage Storage object to interact and manipulate data from the hard disk.
+     * @return String response to user.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
 
         //Initialize new TaskList for matching tasks
         TaskList searchTasks = new TaskList();
@@ -40,8 +41,11 @@ public class FindCommand extends Command {
         }
 
         //print TaskList of matching tasks
-        ui.printMatchingTasks();
-        ui.printList(searchTasks);
+        String output = ui.printMatchingTasks();
+        output += "\n";
+        output += ui.printList(searchTasks);
+
+        return output;
     }
 
     /**
