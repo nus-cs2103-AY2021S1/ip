@@ -50,7 +50,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Return user Dialog Box with the text and image in it.
+     * Returns user Dialog Box with the text and image in it.
      *
      * @param text Text to be printed out in dialog box.
      * @param img  Image to be display in dialog box.
@@ -61,8 +61,8 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Return Duke Dialog Box with the text and image in it.
-     * Invert the dialog object around the vertical axis.
+     * Returns Duke Dialog Box with the text and image in it.
+     * Inverts the dialog object around the vertical axis.
      *
      * @param text Text to be printed out in dialog box.
      * @param img  Image to be display in dialog box.
