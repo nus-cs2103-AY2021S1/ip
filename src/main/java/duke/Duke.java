@@ -5,11 +5,22 @@ import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
     private TaskList tasks;
+    // Variables for JavaFX
+    private ScrollPane scrollPane; // msg get too long
+    private VBox vBox; // Lays out children in a vertical column
+    private TextField userInput; // Receive input
+    private Button sendButton; // the button that says Send for user
+    private Scene scene; // The final scene that gets shown
 
     public Duke() {
         this.tasks = new TaskList();
@@ -64,8 +75,22 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!");
-        Scene scene = new Scene(helloWorld);
+        // Init / Setting up required components (aka Nodes)
+
+        // Create scrollPane for scrolling content of chat
+        // Input empty now. Can play around with input
+        this.scrollPane = new ScrollPane();
+        this.vBox = new VBox();
+        scrollPane.setContent(vBox); // enables vBox scrolling
+
+        this.userInput = new TextField();
+        this.sendButton = new Button("Send"); // txt for button
+
+        AnchorPane mainLayout = new AnchorPane(); // Initialize what will be shown
+        // Add all nodes as children
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        this.scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
