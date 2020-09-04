@@ -65,6 +65,8 @@ public class Storage {
                         loadEvent(list, savedTask);
                         break;
                     default:
+                        // Execution should never reach here
+                        assert false : savedTask;
                     }
                 }
             } else {
@@ -127,6 +129,9 @@ public class Storage {
 
     private void loadDeadline(List<Task> list, String savedTask) {
         String deadlineDetails = savedTask.substring(4);
+        // Split the savedTask string into description and date in order to create a Deadline object.
+        // deadlineArr[0] contains description of deadline
+        // deadlineArr[1] contains date of deadline
         String[] deadlineArr = deadlineDetails.split("/by");
         Deadline deadline = new Deadline(
                 deadlineArr[0].trim(),
@@ -137,6 +142,9 @@ public class Storage {
 
     private void loadEvent(List<Task> list, String savedTask) {
         String eventDetails = savedTask.substring(4);
+        // Split the savedTask string into description and date in order to create a Deadline object.
+        // eventArr[0] contains description of event
+        // eventArr[1] contains date of event
         String[] eventArr = eventDetails.split("/at");
         Event event = new Event(
                 eventArr[0].trim(),

@@ -50,7 +50,8 @@ public class Task {
      * @return String representation of the Task.
      */
     public String store() {
-        return details;
+        String done = this.isDone ? "T " : "F ";
+        return done + " " + this.details;
     }
 
     /**
