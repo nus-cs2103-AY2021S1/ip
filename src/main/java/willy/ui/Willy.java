@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 import willy.store.TaskStore;
 import willy.task.TaskList;
 import willy.exceptions.WillyException;
@@ -66,6 +67,7 @@ public class Willy extends Application {
     public static String getIntroGUI() {
         return introGUI;
     }
+
     public boolean isOnJavaFX() {
         return isOnJavaFX;
     }
