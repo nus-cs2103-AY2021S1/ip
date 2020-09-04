@@ -1,5 +1,6 @@
 package viscount;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +22,11 @@ import viscount.exception.ViscountMissingDescriptionException;
 import viscount.exception.ViscountNumberFormatException;
 import viscount.exception.ViscountUnknownCommandException;
 import viscount.exception.ViscountUnsupportedOperationException;
+import viscount.task.Deadline;
+import viscount.task.Event;
+import viscount.task.Task;
 import viscount.task.TaskType;
+import viscount.task.Todo;
 
 /**
  * Represent's Viscount's parser.
@@ -37,6 +42,62 @@ public class Parser {
             DateTimeFormatter.ofPattern("MMM dd yyyy");
     public static final DateTimeFormatter OUTPUT_DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
+
+    //@@author sc-arecrow-reused
+    //Reused from https://stackoverflow.com/a/48281350 with minor modifications
+
+    /**
+     * Parses a String representing a date and time using the given formatter.
+     *
+     * @param dateTimeString Date and time string parsed.
+     * @param formatter Formatter used.
+     * @return LocalDateTime object representing the date and time in the String.
+     * @throws DateTimeParseException If string parsed is formatted wrongly.
+     */
+    public static LocalDateTime parseDateTime(String dateTimeString, DateTimeFormatter formatter)
+            throws DateTimeParseException {
+        LocalDateTime dateTime;
+
+        TemporalAccessor ta = formatter.parseBest(dateTimeString, LocalDateTime::from, LocalDate::from);
+
+        if (ta instanceof LocalDateTime) {
+            dateTime = (LocalDateTime) ta;
+        } else {
+            dateTime = ((LocalDate) ta).atStartOfDay();
+        }
+
+        return dateTime;
+    }
+    //@@author
+
+    /**
+     * Parses a String representing raw task data.
+     *
+     * @param rawData Raw task data parsed.
+     * @return Task represented by the raw task data.
+     */
+    public static Task parseTaskData(String rawData) throws IOException {
+        List<String> taskData = Arrays.asList(rawData.split("\\|"));
+
+        TaskType taskType = TaskType.valueOf(taskData.get(0));
+        boolean isDone = !taskData.get(1).equals("0");
+        String taskDescription = taskData.get(2);
+
+        switch (taskType) {
+        case TODO:
+            return new Todo(taskDescription, isDone);
+        case DEADLINE:
+            LocalDateTime dueDate = Parser.parseDateTime(
+                    taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
+            return new Deadline(taskDescription, isDone, dueDate);
+        case EVENT:
+            LocalDateTime eventTime = Parser.parseDateTime(
+                    taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
+            return new Event(taskDescription, isDone, eventTime);
+        default:
+            throw new IOException("Data file corrupted.");
+        }
+    }
 
     /**
      * Parses a raw command.
@@ -128,62 +189,100 @@ public class Parser {
             throw new ViscountMissingArgumentException("task type");
         }
 
-        String taskTypeArgument = arguments.get(1);
+        TaskType taskType = TaskType.valueOf(arguments.get(1).toUpperCase());
 
-        if (taskTypeArgument.equals("todo")) {
-            String description = String.join(" ", arguments.subList(2, arguments.size()));
+        switch (taskType) {
+        case TODO:
+            return parseAddTodoCommand(arguments);
+        case DEADLINE:
+            return parseAddDeadlineCommand(arguments);
+        case EVENT:
+            return parseAddEventCommand(arguments);
+        default:
+            throw new ViscountUnsupportedOperationException("task type " + taskType.name());
+        }
+    }
 
-            if (description.isEmpty()) {
-                throw new ViscountMissingDescriptionException("todo");
-            }
+    /**
+     * Parses an add todo command.
+     *
+     * @param arguments Arguments from user input.
+     * @return Add todo command representing input from user.
+     * @throws ViscountException If command contains unknown arguments or was used wrongly.
+     */
+    private static AddCommand parseAddTodoCommand(List<String> arguments) throws ViscountException {
+        String description = String.join(" ", arguments.subList(2, arguments.size()));
 
-            return new AddCommand(TaskType.Todo, description, null);
-        } else if (taskTypeArgument.equals("deadline")) {
-            int dueDateIndex = arguments.indexOf("/by");
+        if (description.isEmpty()) {
+            throw new ViscountMissingDescriptionException("todo");
+        }
 
-            if (dueDateIndex == -1) {
-                throw new ViscountMissingArgumentException("/by");
-            }
+        return new AddCommand(TaskType.TODO, description, null);
+    }
 
-            String description = String.join(" ", arguments.subList(2, dueDateIndex));
-            String dueDateString = String.join(" ", arguments.subList(dueDateIndex + 1, arguments.size()));
+    /**
+     * Parses an add deadline command.
+     *
+     * @param arguments Arguments from user input.
+     * @return Add deadline command representing input from user.
+     * @throws ViscountException If command contains unknown arguments or was used wrongly.
+     */
+    private static AddCommand parseAddDeadlineCommand(List<String> arguments) throws ViscountException {
+        int dueDateIndex = arguments.indexOf("/by");
 
-            if (description.isEmpty()) {
-                throw new ViscountMissingDescriptionException("deadline");
-            } else if (dueDateString.isEmpty()) {
-                throw new ViscountMissingArgumentDescriptionException("/by");
-            } else {
-                try {
-                    LocalDateTime dueDate = Parser.parseDateTime(dueDateString, INPUT_DATE_TIME_FORMATTER);
-                    return new AddCommand(TaskType.Deadline, description, dueDate);
-                } catch (DateTimeParseException e) {
-                    throw new ViscountDateTimeParseException("due date");
-                }
-            }
-        } else if (taskTypeArgument.equals("event")) {
-            int eventTimeIndex = arguments.indexOf("/at");
+        if (dueDateIndex == -1) {
+            throw new ViscountMissingArgumentException("/by");
+        }
 
-            if (eventTimeIndex == -1) {
-                throw new ViscountMissingArgumentException("/at");
-            }
+        String description = String.join(" ", arguments.subList(2, dueDateIndex));
+        String dueDateString = String.join(" ", arguments.subList(dueDateIndex + 1, arguments.size()));
 
-            String description = String.join(" ", arguments.subList(2, eventTimeIndex));
-            String eventTimeString = String.join(" ", arguments.subList(eventTimeIndex + 1, arguments.size()));
+        if (description.isEmpty()) {
+            throw new ViscountMissingDescriptionException("deadline");
+        }
 
-            if (description.isEmpty()) {
-                throw new ViscountMissingDescriptionException("event");
-            } else if (eventTimeString.isEmpty()) {
-                throw new ViscountMissingArgumentDescriptionException("/at");
-            } else {
-                try {
-                    LocalDateTime eventTime = Parser.parseDateTime(eventTimeString, INPUT_DATE_TIME_FORMATTER);
-                    return new AddCommand(TaskType.Event, description, eventTime);
-                } catch (DateTimeParseException e) {
-                    throw new ViscountDateTimeParseException("event date");
-                }
-            }
-        } else {
-            throw new ViscountUnsupportedOperationException("task type " + taskTypeArgument);
+        if (dueDateString.isEmpty()) {
+            throw new ViscountMissingArgumentDescriptionException("/by");
+        }
+
+        try {
+            LocalDateTime dueDate = Parser.parseDateTime(dueDateString, INPUT_DATE_TIME_FORMATTER);
+            return new AddCommand(TaskType.DEADLINE, description, dueDate);
+        } catch (DateTimeParseException e) {
+            throw new ViscountDateTimeParseException("due date");
+        }
+    }
+
+    /**
+     * Parses an add event command.
+     *
+     * @param arguments Arguments from user input.
+     * @return Add event command representing input from user.
+     * @throws ViscountException If command contains unknown arguments or was used wrongly.
+     */
+    private static AddCommand parseAddEventCommand(List<String> arguments) throws ViscountException {
+        int eventTimeIndex = arguments.indexOf("/at");
+
+        if (eventTimeIndex == -1) {
+            throw new ViscountMissingArgumentException("/at");
+        }
+
+        String description = String.join(" ", arguments.subList(2, eventTimeIndex));
+        String eventTimeString = String.join(" ", arguments.subList(eventTimeIndex + 1, arguments.size()));
+
+        if (description.isEmpty()) {
+            throw new ViscountMissingDescriptionException("event");
+        }
+
+        if (eventTimeString.isEmpty()) {
+            throw new ViscountMissingArgumentDescriptionException("/at");
+        }
+
+        try {
+            LocalDateTime eventTime = Parser.parseDateTime(eventTimeString, INPUT_DATE_TIME_FORMATTER);
+            return new AddCommand(TaskType.EVENT, description, eventTime);
+        } catch (DateTimeParseException e) {
+            throw new ViscountDateTimeParseException("event date");
         }
     }
 
@@ -199,10 +298,8 @@ public class Parser {
             throw new ViscountMissingArgumentException("task number");
         }
 
-        int taskIndex = -1;
-
         try {
-            taskIndex = Integer.parseInt(arguments.get(1)) - 1;
+            int taskIndex = Integer.parseInt(arguments.get(1)) - 1;
             return new DoneCommand(taskIndex);
         } catch (NumberFormatException e) {
             throw new ViscountNumberFormatException(arguments.get(1));
@@ -219,42 +316,13 @@ public class Parser {
     private static DeleteCommand parseDeleteCommand(List<String> arguments) throws ViscountException {
         if (arguments.size() < 2) {
             throw new ViscountMissingArgumentException("task number");
-        } else {
-            int taskIndex = -1;
-
-            try {
-                taskIndex = Integer.parseInt(arguments.get(1)) - 1;
-                return new DeleteCommand(taskIndex);
-            } catch (NumberFormatException e) {
-                throw new ViscountNumberFormatException(arguments.get(1));
-            }
-        }
-    }
-
-    //@@author sc-arecrow-reused
-    //Reused from https://stackoverflow.com/a/48281350 with minor modifications
-
-    /**
-     * Parses a String representing a date and time using the given formatter.
-     *
-     * @param dateTimeString Date and time string parsed.
-     * @param formatter Formatter used.
-     * @return LocalDateTime object representing the date and time in the String.
-     * @throws DateTimeParseException If string parsed is formatted wrongly.
-     */
-    public static LocalDateTime parseDateTime(String dateTimeString, DateTimeFormatter formatter)
-            throws DateTimeParseException {
-        LocalDateTime dateTime;
-
-        TemporalAccessor ta = formatter.parseBest(dateTimeString, LocalDateTime::from, LocalDate::from);
-
-        if (ta instanceof LocalDateTime) {
-            dateTime = (LocalDateTime) ta;
-        } else {
-            dateTime = ((LocalDate) ta).atStartOfDay();
         }
 
-        return dateTime;
+        try {
+            int taskIndex = Integer.parseInt(arguments.get(1)) - 1;
+            return new DeleteCommand(taskIndex);
+        } catch (NumberFormatException e) {
+            throw new ViscountNumberFormatException(arguments.get(1));
+        }
     }
-    //@@author
 }

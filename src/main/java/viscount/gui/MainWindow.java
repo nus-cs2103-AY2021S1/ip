@@ -67,13 +67,14 @@ public class MainWindow extends AnchorPane {
 
         if (input.equals("bye")) {
             Platform.exit();
-        } else {
-            String response = viscount.getResponse(input);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input),
-                    DialogBox.getViscountDialog(response)
-            );
         }
+
+        String response = viscount.getResponse(input);
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input),
+                DialogBox.getViscountDialog(response)
+        );
 
         userInput.clear();
     }

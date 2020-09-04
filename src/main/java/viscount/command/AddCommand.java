@@ -60,13 +60,13 @@ public class AddCommand extends Command {
         Task newTask = null;
 
         switch(taskType) {
-        case Todo:
+        case TODO:
             newTask = new Todo(description, false);
             break;
-        case Deadline:
+        case DEADLINE:
             newTask = new Deadline(description, false, dateTime);
             break;
-        case Event:
+        case EVENT:
             newTask = new Event(description, false, dateTime);
             break;
         default:
