@@ -10,6 +10,9 @@ public class Ui {
 
     public static final String LINE_SEPARATOR = System.lineSeparator();
 
+    /**
+     * Constructs an <code>Ui</code> Object.
+     */
     public Ui() {
         this.scanner = new Scanner(System.in);
     }

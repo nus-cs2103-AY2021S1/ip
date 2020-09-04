@@ -1,10 +1,14 @@
 package duke.task;
 
 import duke.exception.DukeException;
+
 import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;

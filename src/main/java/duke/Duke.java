@@ -70,7 +70,7 @@ public class Duke {
     }
 
     /**
-     * Generate a response to user input.
+     * Generates a response to user input.
      */
     public String getResponse(String input) {
         try {

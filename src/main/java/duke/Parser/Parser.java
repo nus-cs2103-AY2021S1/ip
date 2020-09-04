@@ -1,5 +1,7 @@
 package duke.parser;
 
+import duke.exception.DukeException;
+
 import duke.command.Command;
 import duke.command.CompleteCommand;
 import duke.command.ExitCommand;
@@ -7,7 +9,6 @@ import duke.command.ListCommand;
 import duke.command.DeleteCommand;
 import duke.command.AddCommand;
 import duke.command.FindCommand;
-import duke.exception.DukeException;
 
 /**
  * Handles making sense of the user command.
