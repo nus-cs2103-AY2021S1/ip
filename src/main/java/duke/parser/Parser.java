@@ -10,6 +10,7 @@ import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
 import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.commands.UnknownCommand;
@@ -105,7 +106,7 @@ public class Parser {
      *incorrect.
      */
     public static Command parse(String message) throws InvalidFormatByeException, InvalidFormatListException,
-            InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException, InvalidFormatFindException, 
+            InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException, InvalidFormatFindException,
             InvalidFormatHelpException {
         assert message != null;
         String[] inputArr = message.trim().replaceAll("  +", " ").split(" ", 2);
@@ -123,20 +124,17 @@ public class Parser {
             }
             return new
                     ListCommand(inputArr);
+        case KEYWORD_HELP:
+            if (inputArr.length != 1) {
+                throw new InvalidFormatHelpException();
+            }
+            return new HelpCommand(inputArr);
         case KEYWORD_DONE:
             // checking if the input is valid
             if (inputArr.length == 1 || !isNumber(inputArr[1])) {
                 throw new InvalidFormatDoneException();
             }
             return new DoneCommand(inputArr);
-        case KEYWORD_EVENT:
-        case KEYWORD_DEADLINE:
-        case KEYWORD_TODO:
-            // checking if the input is valid
-            if (inputArr.length == 1) {
-                throw new EmptyTextException(inputArr[0]);
-            }
-            return new AddCommand(inputArr);
         case KEYWORD_DELETE:
             // checking if the input is valid
             if (inputArr.length == 1 || !isNumber(inputArr[1])) {
@@ -151,12 +149,15 @@ public class Parser {
             if (inputArr2.length > 1) {
                 throw new InvalidFormatFindException();
             }
-            
-        case KEYWORD_HELP:
-            if (inputArr.length != 1) {
-                throw new InvalidFormatHelpException();
+            return new FindCommand(inputArr);
+        case KEYWORD_EVENT:
+        case KEYWORD_DEADLINE:
+        case KEYWORD_TODO:
+            // checking if the input is valid
+            if (inputArr.length == 1) {
+                throw new EmptyTextException(inputArr[0]);
             }
-            return new HelpCommand(inputArr);
+            return new AddCommand(inputArr);
         default:
             return new UnknownCommand(inputArr);
         }

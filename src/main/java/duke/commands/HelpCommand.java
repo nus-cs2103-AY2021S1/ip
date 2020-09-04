@@ -1,9 +1,5 @@
 package duke.commands;
 
-import duke.exception.InvalidFormatDateException;
-import duke.exception.InvalidFormatDeadlineException;
-import duke.exception.InvalidFormatEventException;
-import duke.exception.UnknownCommandException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.textui.Ui;
@@ -38,11 +34,10 @@ public class HelpCommand extends Command {
 
     /**
      * Generates the list of commands available in Duke
-     * 
+     *
      * @return A list of commands available in Duke
      */
     public String getListOfCommands() {
         return unsureString + listingString + s1 + s2 + s3 + s4 + s5 + s6 + s7 + s8;
     }
-    
 }
