@@ -83,9 +83,9 @@ public class Task {
 
         // Print tick if done and cross if not done
         if (this.isDone) {
-            checkMark = "\u2713";
+            checkMark = "Y";
         } else {
-            checkMark = "\u2718";
+            checkMark = "N";
         }
 
         return "[" + checkMark + "] " + this.name;
