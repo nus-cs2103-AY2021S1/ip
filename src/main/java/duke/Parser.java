@@ -4,7 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import duke.exceptions.DukeException;
+import duke.commands.*;
+import duke.exceptions.DukeNoTaskDescriptionException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -46,114 +47,104 @@ public class Parser {
         }
         return s;
     }
+    
+    
     /**
-     *Processes user input and returns the appropriate response
+     *Processes user input 
      * @param next next line of user input
-     * @param list list of tasks
+     * @param taskList list of tasks
      * @param storage storage for tasks
      * @param ui ui to show messages
-     * @return returns the appropriate response to the user
      */
-    public String sortInput (String next, TaskList list, Storage storage, Ui ui) {
+    public void sortInput (String next, TaskList taskList, Storage storage, Ui ui) {
         String[] input = next.trim().split(" ");
         String commandWord = input[0].toUpperCase();
-        String output = "";
+        Command command = new Command();
+
         try {
             switch (commandWord) {
             case "LIST":
-                output = ui.showList(list);
+                command = new ListCommand();
                 break;
+
             case "DONE":
-                Task completedTask = done(next, list);
-                storage.writeToDataFile(list);
-                output = ui.showDoneMessage(completedTask);
+                command = new DoneCommand(parseIndex(next));
                 break;
+
             case "DELETE":
-                Task deletedTask = delete(next, list);
-                storage.writeToDataFile(list);
-                output = ui.showRemoveTaskMessage(deletedTask, list.size());
+                command = new RemoveTaskCommand(parseIndex(next));
                 break;
+
             case "TODO":
-                Task addedTodo = addTodo(next, list);
-                storage.writeToDataFile(list);
-                output = ui.showAddTaskMessage(addedTodo, list.size());
+                Task todo = parseTodo(next);
+                command = new AddTaskCommand(todo);
                 break;
+
             case "DEADLINE":
-                Task addedDeadline = addDeadline(next, list);
-                storage.writeToDataFile(list);
-                output = ui.showAddTaskMessage(addedDeadline, list.size());
+                Task deadline = parseDeadline(next);
+                command = new AddTaskCommand(deadline);
                 break;
+
             case "EVENT":
-                Task addedEvent = addEvent(next, list);
-                storage.writeToDataFile(list);
-                output = ui.showAddTaskMessage(addedEvent, list.size());
+                Task event = parseEvent(next);
+                command = new AddTaskCommand(event);
                 break;
+
             case "FIND":
-                TaskList filter = find(next, list);
-                output = ui.showList(filter);
+                String search = next.substring(4).trim();
+                command = new FindCommand(search);
                 break;
-            case "HI":
-                output = ui.showWelcomeMessage();
-                break;
+
             case "BYE":
-                output = ui.showByeMessage();
+                command = new ByeCommand();
                 break;
+
             default:
-                output = "Sorry >_< I don't know what you mean...";
+                ui.defaultMessage();
             }
-        } catch (DukeException e) {
-            ui.showNoTaskInputException();
-        } catch (IndexOutOfBoundsException e) {
-            ui.showNoTaskExistException();
-        } catch (NumberFormatException e) {
-            System.out.println ("Please enter a number");
+            
+        } catch (DukeNoTaskDescriptionException e) {
+            ui.setOutputMessage(e.getExceptionMessage());
+            System.out.println (e.getExceptionMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            ui.setOutputMessage("Please specify a time");
+            System.out.println ("Please specify a time");
         }
-        return output;
+        
+        command.executeCommand(ui, storage, taskList);
     }
 
 
-    private Task done (String s, TaskList list) {
-        int index = Integer.parseInt(s.replaceAll("[^0-9]", "")) - 1;
-        list.setDone(index);
-        return list.get(index);
+    private int parseIndex (String s) {
+        return Integer.parseInt(s.replaceAll("[^0-9]", "")) - 1;
     }
-    private Task delete (String s, TaskList list) throws IndexOutOfBoundsException {
-        int index = Integer.parseInt(s.replaceAll("[^0-9]", "")) - 1;
-        Task t = list.get(index);
-        list.removeTask(index);
-        return t;
-    }
-    private Task addTodo (String s, TaskList list) throws DukeException {
+    
+    private Task parseTodo (String s) throws DukeNoTaskDescriptionException {
         String description = s.substring(4).trim();
         if (description.length() == 0) {
-            throw new DukeException();
+            throw new DukeNoTaskDescriptionException("Please specify a task description");
         }
         Task t = new Todo(description, false);
-        list.addTask(t);
         return t;
     }
-    private Task addDeadline (String s, TaskList list) throws DukeException, IndexOutOfBoundsException {
-        String description = s.split("/by")[0].substring(9).trim();
+    
+    private Task parseDeadline (String s) throws DukeNoTaskDescriptionException, ArrayIndexOutOfBoundsException {
+        String description = s.split("/by")[0].substring(8).trim();
         String deadline = s.split("/by")[1].trim();
         if (description.length() == 0) {
-            throw new DukeException();
+            throw new DukeNoTaskDescriptionException("Please specify a task description");
         }
         Task t = new Deadline(description, deadline, false);
-        list.addTask(t);
         return t;
     }
-    private Task addEvent (String s, TaskList list) throws DukeException, IndexOutOfBoundsException {
+    
+    private Task parseEvent (String s) throws DukeNoTaskDescriptionException, ArrayIndexOutOfBoundsException {
         String description = s.split("/at")[0].substring(5).trim();
         String time = s.split("/at")[1].trim();
         if (description.length() == 0) {
-            throw new DukeException();
+            throw new DukeNoTaskDescriptionException("Please specify a task description");
         }
         Task t = new Event(description, time, false);
-        list.addTask(t);
         return t;
-    }
-    private TaskList find (String s, TaskList list) {
-        String search = s.substring(4).trim();
-        return list.filter(search);
     }
 }

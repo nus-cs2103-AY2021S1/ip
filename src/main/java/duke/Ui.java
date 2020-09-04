@@ -5,6 +5,24 @@ import java.util.Scanner;
 import duke.tasks.Task;
 
 public class Ui {
+    
+    private String outputMessage;
+    
+    public Ui() {
+        this.outputMessage = "";
+    }
+    
+    public void setOutputMessage(String newOutputMessage) {
+        this.outputMessage = newOutputMessage + "\n";
+    }
+    
+    private void appendMessage (String message) {
+        this.outputMessage += (message + "\n");
+    }
+    
+    public String getOutputMessage (){
+        return this.outputMessage;
+    }
 
     /**
      * Shows welcome message upon starting Duke
@@ -26,51 +44,40 @@ public class Ui {
 
     /**
      * Shows bye message when user enters bye
-     * @return bye message
      */
-    public String showByeMessage() {
-        String byeMessage = "Bye!! See you again :)";
-        System.out.println (byeMessage);
-        return byeMessage;
+    public void byeMessage() {
+        setOutputMessage("Bye!! See you again :)");
     }
+    
     /**
-     * Shows message when a task is added to the task list
+     * Changes output message when a task is added to the list
      * @param t task added to the list
      * @param number number of tasks in the list
-     * @return message shown when a task is added
      */
-    public String showAddTaskMessage(Task t, int number) {
-        String addTaskMessage = "Got it! I've added this task:\n";
-        addTaskMessage += (t.toString() + "\n");
-        addTaskMessage += (String.format("Now you have %d tasks in the list \n", number));
-        System.out.println (addTaskMessage);
-        return addTaskMessage;
+    public void addTaskMessage(Task t, int number) {
+        setOutputMessage ("Got it! I've added this task:");
+        appendMessage (t.toString());
+        appendMessage(String.format("Now you have %d tasks in the list", number));
     }
 
     /**
      * Shows message when a task is removed from the task list
      * @param t task removed from list
      * @param number number of tasks in the list
-     * @return message shown when a task is removed
      */
-    public String showRemoveTaskMessage (Task t, int number) {
-        String removeTaskMessage = "Noted. I've removed this task\n";
-        removeTaskMessage += (t.toString() + "\n");
-        removeTaskMessage += (String.format("Now you have %d tasks in the list \n", number));
-        System.out.println (removeTaskMessage);
-        return removeTaskMessage;
+    public void removeTaskMessage (Task t, int number) {
+        setOutputMessage("Noted. I've removed this task");
+        appendMessage(t.toString());
+        appendMessage(String.format("Now you have %d tasks in the list", number));
     }
 
     /**
      * Shows message when a task is marked as done
      * @param t task that is marked done
-     * @return message shown when a task is marked done
      */
-    public String showDoneMessage (Task t) {
-        String doneMessage = "Nice! I've marked this task as done:\n";
-        doneMessage += t;
-        System.out.println(doneMessage);
-        return doneMessage;
+    public void doneMessage (Task t) {
+        setOutputMessage("Nice! I've marked this task as done:");
+        appendMessage(t.toString());
     }
 
     /**
@@ -85,38 +92,21 @@ public class Ui {
     /**
      * Prints out all the tasks in the list
      * @param taskList list containing all the tasks
-     * @return The list of tasks
      */
-    public String showList(TaskList taskList) {
-        String list = "Here are the tasks in your list:\n";
+    public void listMessage(TaskList taskList) {
+        setOutputMessage("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
-            list += String.format("%d. %s \n", i + 1, taskList.get(i));
+            appendMessage(String.format("%d. %s", i + 1, taskList.get(i)));
         }
-        System.out.println (list);
-        return list;
     }
-    public void showLoadingError() {
-        System.out.println ("Sorry, I could not retrieve your previous tasks \n");
+    
+    public void defaultMessage() {
+        setOutputMessage("Sorry >_<!! I don't know what you mean...");
     }
-
-    /**
-     * Shows message if user did not specify description of a task
-     */
-    public void showNoTaskInputException() {
-        System.out.println ("Please specify a task description");
-    }
-
-    /**
-     * Shows message if user did not specify time of a deadline or event
-     */
-    public void showNoTimeInputException() {
-        System.out.println ("Please specify a time");
-    }
-
-    /**
-     * Shows message if user tries to retrieve a task that does not exist
-     */
-    public void showNoTaskExistException() {
-        System.out.println ("Task does not exist");
+    
+    public static void main (String[] args) {
+        Ui ui = new Ui();
+        ui.defaultMessage();
+        System.out.println (ui.getOutputMessage());
     }
 }

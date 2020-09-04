@@ -34,9 +34,8 @@ public class TaskList {
     /**
      * Removes a task from the list
      * @param index position of task in the list to be removed
-     * @throws IndexOutOfBoundsException If index >= size of list
      */
-    public void removeTask (int index) throws IndexOutOfBoundsException {
+    public void removeTask (int index) {
         taskList.remove (taskList.get(index));
     }
 
@@ -60,9 +59,8 @@ public class TaskList {
      * Returns the task at the specified index of the list
      * @param index position in the list to retrieve the task
      * @return Task in the list
-     * @throws IndexOutOfBoundsException If index >= size of list
      */
-    public Task get(int index) throws IndexOutOfBoundsException {
+    public Task get(int index) {
         return taskList.get(index);
     }
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.DukeInvalidStorageException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -18,7 +19,9 @@ public class Storage {
     private final String filePath;
 
     /**
-     * Constructor for storage class. Creates a new file with the specified filePath if it does not exist
+     * Constructor for storage class.
+     * Creates a new file with the specified filePath if it does not exist
+     * 
      * @param filePath filePath to store data
      */
     public Storage(String filePath) {
@@ -31,28 +34,37 @@ public class Storage {
             ioException.printStackTrace();
         }
     }
+    
     /**
      * Loads the tasks that have been stored in the data file
+     * 
      * @return List of tasks
      * @throws DukeException If file is not found
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File f = new File("data/data.txt");
             Scanner diskScanner = new Scanner(f);
+            
             while (diskScanner.hasNext()) {
                 String next = diskScanner.nextLine();
                 tasks.add(decodeTask(next));
             }
+            
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
+            
+        } catch (DukeInvalidStorageException e) {
+            System.out.println(e.getExceptionMessage());
+            tasks = new ArrayList<>();
         }
         return tasks;
     }
 
     /**
      * Stores tasks in the data file
+     * 
      * @param list List of tasks to be stored
      */
     public void writeToDataFile(TaskList list) {
@@ -79,10 +91,11 @@ public class Storage {
         encodedTask += "\n";
         return encodedTask;
     }
-    private Task decodeTask (String encodedLine) throws DukeException {
+    
+    private Task decodeTask (String encodedLine) throws DukeInvalidStorageException {
         String[] parts = encodedLine.split("\\|");
         String type = parts[0].trim();
-        boolean isDone = Boolean.parseBoolean(parts[1]);
+        boolean isDone = Boolean.parseBoolean(parts[1].trim());
         String description = parts[2].trim();
         String time = "";
         switch (type) {
@@ -95,7 +108,7 @@ public class Storage {
             time = parts[3].trim();
             return new Event(description, time, isDone);
         default:
-            throw new DukeException();
+            throw new DukeInvalidStorageException("Storage tasks could not be retrieved");
         }
     }
 }
