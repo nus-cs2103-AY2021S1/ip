@@ -15,7 +15,7 @@ public class ListCommand extends Command {
      * @param storage Storage that reads from and writes to hard disk.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
-        ui.showList(list);
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        return ui.showList(list);
     }
 }

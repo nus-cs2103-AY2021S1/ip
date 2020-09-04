@@ -17,7 +17,7 @@ public abstract class Command {
     }
 
     // different command class will have different execute implementation
-    abstract public void execute(TaskList list, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList list, Ui ui, Storage storage) throws IOException;
 
     public boolean isExit() {
         return this.isExit;

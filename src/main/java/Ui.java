@@ -6,7 +6,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner sc;
-    private String line = "_________________________________________________________________";
+    private String line = "_________________________________________";
 
     public Ui() {
         sc = new Scanner(System.in);
@@ -16,89 +16,90 @@ public class Ui {
         return sc.nextLine().toLowerCase();
     }
 
-    public void showError(String e) {
-        System.out.println(e);
+    public String showError(String e) {
+        return (e);
     }
 
-    public void sayHi() {
+    public String sayHi() {
         String str = ("\t" + line + "\n"
-                + "\tHello! I'm Duke\n"
+                + "\tSup dude! Am duke :D\n"
                 + "\tWhat can I do for you?\n"
                 + "\t" + line);
-        System.out.println(str);
-
+        return (str);
     }
 
-    public void sayBye() {
-        System.out.println("\t" + line + "\n"
+    public String sayBye() {
+        sc.close();
+        return ("\t" + line + "\n"
                 + "\tBye. Hope to see you again soon!\n"
                 + "\t" + line);
-        sc.close();
     }
 
-    public void printAddTask(Task task, int numOfTask) {
+    public String printAddTask(Task task, int numOfTask) {
         String tasks = numOfTask == 1 ? "task" : "tasks";
-        System.out.println("\t" + line + "\n\tGot it. I've added this task:\n"
+        return ("\t" + line + "\n\tGot it. I've added this task:\n"
                 + "\t  " + task + "\n"
                 + "\tNow you have " + numOfTask + " " + tasks + " in the list.\n"
                 + "\t" + line);
     }
 
-    public void showList(TaskList task) {
+    public String showList(TaskList task) {
+        String str;
         if (task.getList().size() > 0) {
-            System.out.println("\t" + line + "\n\tHere are the tasks in your list:");
+            str = ("\t" + line + "\n\tHere are the tasks in your list:\n");
             int index = 1;
             List<Task> ls = task.getList();
             for (Task t : ls) {
-                System.out.println("\t" + index + ". " + t);
+                str += ("\t" + index + ". " + t + "\n");
                 index++;
             }
-            System.out.println("\t" + line);
+            str += ("\t" + line + "\n");
         } else {
-            System.out.println("\t" + line);
-            System.out.println("\tThere is no task in the list.");
-            System.out.println("\t" + line);
+            str = ("\t" + line + "\n");
+            str += ("\tThere is no task in the list.\n");
+            str += ("\t" + line);
         }
+        return str;
     }
 
-    public void printDone(TaskList list, int num) {
-        System.out.println("\t" + line + "\n\tNice! I've marked this task as done:\n\t  "
+    public String printDone(TaskList list, int num) {
+        return ("\t" + line + "\n\tNice! I've marked this task as done:\n\t  "
                 + list.getList().get(num - 1)
                 + "\n\t" + line);
     }
 
-    public void printInvalidNumber() {
-        System.out.println("☹ OOPS!!! The task number is invalid.");
+    public String printInvalidNumber() {
+        return ("☹ OOPS!!! The task number is invalid.");
     }
 
-    public void errorWithFile() {
-        System.out.println("☹ OOPS!!! Cannot store tasks.");
+    public String errorWithFile() {
+        return ("☹ OOPS!!! Cannot store tasks.");
     }
 
-    public void printDelete(TaskList list, int num) {
-        System.out.println("\t" + line + "\n\tNoted. I've removed this task:\n\t  "
+    public String printDelete(TaskList list, int num) {
+        return ("\t" + line + "\n\tNoted. I've removed this task:\n\t  "
                 + list.getList().get(num - 1)
                 + "\n\tNow you have " + (list.getList().size() - 1) + " tasks in the list."
                 + "\n\t" + line);
     }
 
-    public void printNoDescription() {
-        System.err.println("☹ OOPS!!! The description of a todo cannot be empty.");
+    public String printNoDescription() {
+        return ("☹ OOPS!!! The description of a todo cannot be empty.");
     }
 
-    public void printNoDate() {
-        System.err.println("☹ OOPS!!! The description or date of a deadline cannot be empty.");
+    public String printNoDate() {
+        return ("☹ OOPS!!! The description or date of a deadline cannot be empty.");
     }
 
-    public void printNoDateEvent() {
-        System.err.println("☹ OOPS!!! The description or date of an event cannot be empty.");
+    public String printNoDateEvent() {
+        return ("☹ OOPS!!! The description or date of an event cannot be empty.");
     }
 
-    public void printInvalidDate() {
-        System.err.println("☹ OOPS!!! The date must be valid and in the format of YYYY-MM-DD.");
+    public String printInvalidDate() {
+        return ("☹ OOPS!!! The date must be valid and in the format of YYYY-MM-DD.");
     }
 
-    public void errorWithLoading() {
-        System.err.println("☹ OOPS!!! Your file cannot be loaded :-(");
+    public String errorWithLoading() {
+        return ("☹ OOPS!!! Your file cannot be loaded :-(");
     }
 }

@@ -16,14 +16,16 @@ public class ByeCommand extends Command {
      * @param storage Storage that reads from and writes to hard disk.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        String s;
         try {
-            ui.sayBye();
+            s = ui.sayBye();
             storage.writeToFile(list);
             // to get out of loop and terminate the program
             isExit = true;
         } catch (IOException E) {
-            ui.errorWithFile();
+            s = ui.errorWithFile();
         }
+        return s;
     }
 }

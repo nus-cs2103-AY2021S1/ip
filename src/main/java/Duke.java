@@ -1,18 +1,15 @@
 import java.io.IOException;
 
-public class Duke {
+public class Duke{
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    /**
-     * Initialises duke.
-     * @param filePath
-     */
-    public Duke(String filePath) {
+    // Application.launch will automatically call constructor with no para
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/tasks.txt");
         try {
             tasks = new TaskList(storage.load().getList());
         } catch (IOException e) {
@@ -21,22 +18,25 @@ public class Duke {
         }
     }
 
-    public void run() {
-        ui.sayHi();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException | IOException e) {
-                ui.showError(e.getMessage());
-            }
-        }
+    public Ui getUi() {
+        return ui;
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponse(String input) {
+        // take in a user input string
+        // return a string
+        String s;
+        try {
+            Command c = Parser.parse(input);
+            s = c.execute(tasks, ui, storage);
+        } catch (DukeException | IOException e) {
+            s = ui.showError(e.getMessage());
+        }
+        return s;
     }
+
 }

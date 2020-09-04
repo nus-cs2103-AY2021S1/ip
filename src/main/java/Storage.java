@@ -16,7 +16,7 @@ public class Storage {
     // read tasks from hard disk and return a TaskList
     public TaskList load() throws IOException {
         TaskList list = new TaskList();
-        if (file.createNewFile()) {
+        if (!file.createNewFile()) {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String task = sc.nextLine();

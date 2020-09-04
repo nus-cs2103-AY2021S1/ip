@@ -15,13 +15,15 @@ public class DoneCommand extends Command {
      * @param storage Storage that reads from and writes to hard disk.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        String s;
         try {
             int num = Integer.parseInt(str.split(" ")[1]);
             list.getList().get(num - 1).markDone();
-            ui.printDone(list, num);
+            s = ui.printDone(list, num);
         } catch (IndexOutOfBoundsException e) {
-            ui.printInvalidNumber();
+            s = ui.printInvalidNumber();
         }
+        return s;
     }
 }

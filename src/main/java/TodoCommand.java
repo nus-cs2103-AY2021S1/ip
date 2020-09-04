@@ -5,13 +5,15 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        String s;
         try {
             Task newTask = new Todo(str.substring(5));
             list.getList().add(newTask);
-            ui.printAddTask(newTask, list.getList().size());
+            s = ui.printAddTask(newTask, list.getList().size());
         } catch (IndexOutOfBoundsException e) {
-            ui.printNoDescription();
+            s = ui.printNoDescription();
         }
+        return s;
     }
 }

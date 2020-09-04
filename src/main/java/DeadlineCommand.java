@@ -25,7 +25,8 @@ public class DeadlineCommand extends Command {
      * @param storage Storage that reads from and writes to hard disk.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        String s;
         try {
             String string = str.substring(9);
             String description = string.split(" /by ")[0]; // split the stirng by "/by ", take first half
@@ -33,11 +34,12 @@ public class DeadlineCommand extends Command {
             String date = getLocalDate(time);
             Task newTask = new Deadline(description, date);
             list.getList().add(newTask);
-            ui.printAddTask(newTask, list.getList().size());
+            s = ui.printAddTask(newTask, list.getList().size());
         } catch (IndexOutOfBoundsException e) {
-            ui.printNoDate();
+            s = ui.printNoDate();
         } catch (DateTimeParseException e) {
-            ui.printInvalidDate();
+            s = ui.printInvalidDate();
         }
+        return s;
     }
 }
