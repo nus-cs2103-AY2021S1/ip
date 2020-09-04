@@ -13,8 +13,8 @@ public class InputValidator {
     /**
      * Validates the instruction <code>String</code> is of size 1.
      *
-     * @param instrLen  <code>String</code> containing length of user instruction.
-     * @param isLenOne  <code>boolean</code> to note if the output should equate to 1.
+     * @param instrLen <code>String</code> containing length of user instruction.
+     * @param isLenOne <code>boolean</code> to note if the output should equate to 1.
      * @return boolean denoting the validation results
      * @throws InvalidInstructionLengthException If len==1 is not equal to isLenOne.
      */
@@ -112,43 +112,61 @@ public class InputValidator {
     public static boolean validateDateAndTime(String[] instructionArray, int index)
             throws InvalidInstructionFormatException {
 
+        String regex = "/"; // regex to split DateTime format
         String date = instructionArray[index + 1];
         String time = instructionArray[index + 2];
-
-        // INPUT DATE FORMAT: DD/MM/YYYY
-        // INPUT TIME FORMAT: hh/mm/ss
-        int year;
-        int month;
-        int day;
-        int hour;
-        int minute;
-        int second;
-
-        String[] dateArray = date.split("/");
-        String[] timeArray = time.split("/");
+        String[] dateArray = date.split(regex);
+        String[] timeArray = time.split(regex);
 
         if (dateArray.length != 3 || timeArray.length != 3) {
             throw new InvalidInstructionFormatException();
         }
 
         try {
-            day = Integer.parseInt(dateArray[0]);
-            month = Integer.parseInt(dateArray[1]);
-            year = Integer.parseInt(dateArray[2]);
+            // INPUT DATE FORMAT: DD/MM/YYYY
+            // INPUT TIME FORMAT: hh/mm/ss
+            int day = Integer.parseInt(dateArray[0]);
+            int month = Integer.parseInt(dateArray[1]);
+            int year = Integer.parseInt(dateArray[2]);
 
-            hour = Integer.parseInt(timeArray[0]);
-            minute = Integer.parseInt(timeArray[1]);
-            second = Integer.parseInt(timeArray[2]);
+            int hour = Integer.parseInt(timeArray[0]);
+            int minute = Integer.parseInt(timeArray[1]);
+            int second = Integer.parseInt(timeArray[2]);
+
+            // input validation for time
+            validateTimeFormat(hour, minute, second);
+            // input validation for date
+            validateDateFormat(year, month, day);
         } catch (NumberFormatException nfe) {
             throw new InvalidInstructionFormatException();
         }
+        return true;
+    }
 
+    /**
+     * Validates that time format used is correct
+     *
+     * @param hour   Integer denoting the hour
+     * @param minute Integer denoting the minute
+     * @param second Integer denoting the second
+     * @throws InvalidInstructionFormatException if format is wrong
+     */
+    private static void validateTimeFormat(int hour, int minute, int second) throws InvalidInstructionFormatException {
         // input validation for time
         if (hour < 0 || hour > 23 || minute < 0 || minute > 59 || second < 0 || second > 59) {
             throw new InvalidInstructionFormatException();
         }
+    }
 
-        // input validation for date
+    /**
+     * Validates that date format used is correct
+     *
+     * @param year  Integer denoting the year
+     * @param month Integer denoting the month
+     * @param day   Integer denoting the day
+     * @throws InvalidInstructionFormatException if format is wrong
+     */
+    private static void validateDateFormat(int year, int month, int day) throws InvalidInstructionFormatException {
         if (year <= 0 || month <= 0 || month > 12 || day <= 0) {
             throw new InvalidInstructionFormatException();
         }
@@ -178,7 +196,6 @@ public class InputValidator {
                 throw new InvalidInstructionFormatException();
             }
         }
-        return true;
     }
 
     /**
