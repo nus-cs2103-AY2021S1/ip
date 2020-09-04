@@ -88,5 +88,12 @@ public class TaskList {
     public int getTaskSize() {
         return this.taskList.size();
     }
+
+    /**
+     * Getter method to retrieve task list
+     */
+    public List<Task> getTaskList() {
+        return this.taskList;
+    }
 }
 
