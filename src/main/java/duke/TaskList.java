@@ -30,6 +30,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
+        assert tasks.size() != 0;
     }
 
     /**
@@ -48,7 +49,7 @@ public class TaskList {
      * Marks the task with the given index as done.
      *
      * @param idx index of the task to be marked as done.
-     * @param ui ui where the message is shown.
+     * @param ui  ui where the message is shown.
      * @throws DukeException index out of bound.
      */
     public void markTaskAsDone(int idx, Ui ui) throws DukeException {
@@ -64,7 +65,7 @@ public class TaskList {
      * Deletes the task with the given index.
      *
      * @param idx index of the task to be deleted.
-     * @param ui ui where the message is shown.
+     * @param ui  ui where the message is shown.
      * @throws DukeException index out of bound.
      */
     public void deleteTask(int idx, Ui ui) throws DukeException {
@@ -84,7 +85,7 @@ public class TaskList {
      * Finds tasks that contain given keyword.
      *
      * @param keyword keyword to be find.
-     * @param ui ui where the message is shown.
+     * @param ui      ui where the message is shown.
      */
     public void find(String keyword, Ui ui) {
         ArrayList<Task> matches = new ArrayList<>();

@@ -98,6 +98,7 @@ public class Storage {
                 } catch (Exception e) {
                     throw new DukeException("The file format is wrong :((.");
                 }
+                assert tasks.size() != 0;
             }
 
             return tasks;
