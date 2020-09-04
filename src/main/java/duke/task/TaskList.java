@@ -123,7 +123,7 @@ public class TaskList {
     public String findTasksByKeyword(String keyword) {
         return IntStream.range(0, this.getSize())
                 .mapToObj((id) -> String.format("\n%d.%s", id + 1, tasks.get(id)))
-                .filter((s) -> s.contains(keyword))
+                .filter((task) -> task.contains(keyword))
                 .reduce((a, b) -> a + b)
                 .orElse("");
     }
