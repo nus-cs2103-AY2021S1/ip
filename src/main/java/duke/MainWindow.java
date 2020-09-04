@@ -1,6 +1,7 @@
 package duke;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -44,7 +45,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-
         String input = userInput.getText();
         if (!input.equals("bye")) {
             String response = duke.getResponse(input);
@@ -58,3 +58,4 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 }
+
