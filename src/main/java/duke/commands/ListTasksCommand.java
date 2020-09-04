@@ -22,9 +22,9 @@ public class ListTasksCommand extends Command {
             String taskDescriptionInListFormat = String.format("%d) %s\n", i + 1, allTasks.get(i).toString());
             allTasksOutput.append(taskDescriptionInListFormat);
         }
-        String completedTasks = taskManager.getCompletedTasks()
+        String completedTasks = taskManager.getNumberOfCompletedTasks()
                 + (taskManager.isPluralCompletedTasks() ? " tasks" : " task");
-        String uncompletedTasks = taskManager.getUncompletedTasks()
+        String uncompletedTasks = taskManager.getNumberOfUncompletedTasks()
                 + (taskManager.isPluralUncompletedTasks() ? " tasks." : " task");
         allTasksOutput.append("You have completed " + completedTasks + " and have yet to complete "
                 + uncompletedTasks);

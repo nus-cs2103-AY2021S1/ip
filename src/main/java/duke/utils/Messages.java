@@ -10,19 +10,21 @@ public class Messages {
             + "2) Deadline <task description> /by <datetime>\n" + "3) Event <task description> /at <datetime>";
     public static final String INVALID_TASK_INDEX_ERROR_MESSAGE = "Invalid task index! Please choose another index.";
     public static final String INVALID_TODO_COMMAND = "OOPS!!! The description of a todo cannot be empty!\n"
-            + "The correct command is:\nTodo <task description>";
+            + "The correct command is:\ntodo <task description>";
     public static final String INVALID_DEADLINE_COMMAND = "OOPS!!! The description of a deadline cannot be empty.\n"
-            + "The correct command is:\nDeadline <task description> /by <datetime>";
+            + "The correct command is:\ndeadline <task description> /by <datetime>";
     public static final String INVALID_EVENT_COMMAND = "OOPS!!! The description of an event cannot be empty.\n"
-            + "The correct command is:\nEvent <task description> /at <datetime>";
+            + "The correct command is:\nevent <task description> /at <datetime>";
     public static final String INVALID_FIND_COMMAND = "OOPS!!! You are missing a keyword.\n"
-            + "The correct command is:\nFind <keyword>";
+            + "The correct command is:\nfind <keyword>";
     public static final String INVALID_TODAY_COMMAND = "OOPS!!! Invalid Today Command.\n"
-            + "The correct command is:\nToday";
+            + "The correct command is:\ntoday";
+    public static final String INVALID_UNCOMPLETED_COMMAND = "OOPS!!! Invalid Completed Command. \n"
+            + "The correct command is:\nuncompleted";
     public static final String MISSING_DATE_AND_TIME_FOR_DEADLINE = "OOPS!!! Missing date/time.\n"
-            + "Correct command is:\nDeadline <task description> /by <datetime>";
+            + "Correct command is:\ndeadline <task description> /by <datetime>";
     public static final String MISSING_DATE_AND_TIME_FOR_EVENT = "OOPS!!! Missing date/time.\n"
-            + "Correct command is:\nEvent <task description> /at <datetime>";
+            + "Correct command is:\nevent <task description> /at <datetime>";
 
     public static final String TASK_MARKED_AS_DONE_MESSAGE = "Good job on completing this task!"
             + "I have marked this task as done: \n";

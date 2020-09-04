@@ -78,6 +78,9 @@ public class CommandLineInterfaceParser {
             case TODAY:
                 TodayTasksCommand tasksForToday = new TodayTasksCommand();
                 return tasksForToday;
+            case UNCOMPLETED:
+                ListAllUncompletedTasksCommand uncompletedTasksCommand = new ListAllUncompletedTasksCommand();
+                return uncompletedTasksCommand;
             default:
                 throw new DukeException(Messages.INVALID_COMMAND_INPUT_MESSAGE);
             }

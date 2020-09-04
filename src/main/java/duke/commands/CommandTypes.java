@@ -106,6 +106,15 @@ public enum CommandTypes {
                 throw new DukeException(Messages.INVALID_TODAY_COMMAND);
             }
         }
+    },
+    UNCOMPLETED {
+        @Override
+        public void checkInput(String input) throws DukeException {
+            String content = input.replaceFirst("^uncompleted", "");
+            if (!content.isBlank()) {
+                throw new DukeException(Messages.INVALID_UNCOMPLETED_COMMAND);
+            }
+        }
     };
 
     public abstract void checkInput(String input) throws DukeException;

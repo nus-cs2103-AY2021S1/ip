@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class TaskManager {
         return this.tasks.size();
     }
 
-    public int getCompletedTasks() {
+    public int getNumberOfCompletedTasks() {
         int completedTasks = 0;
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getIsDone()) {
@@ -43,7 +42,7 @@ public class TaskManager {
         return completedTasks;
     }
 
-    public int getUncompletedTasks() {
+    public int getNumberOfUncompletedTasks() {
         int uncompletedTasks = 0;
         for (int i = 0; i < tasks.size(); i++) {
             if (!tasks.get(i).getIsDone()) {
@@ -53,26 +52,36 @@ public class TaskManager {
         return uncompletedTasks;
     }
 
-    public List<Task> getAllTasks() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Here are all your tasks: \n");
-        for (int i = 0; i < tasks.size(); i++) {
-            String taskDescriptionInListFormat = String.format("%d) %s\n", i + 1, tasks.get(i).toString());
-            stringBuilder.append(taskDescriptionInListFormat);
-        }
-        String completedTasks = getCompletedTasks() + (this.isPluralCompletedTasks() ? " tasks" : " task");
-        String uncompletedTasks = getUncompletedTasks() + (this.isPluralUncompletedTasks() ? " tasks." : " task");
-        stringBuilder.append("You have completed " + completedTasks + " and have yet to complete "
-                + uncompletedTasks);
-        return this.tasks;
-    }
-
     public boolean isPluralCompletedTasks() {
-        return getCompletedTasks() > 2;
+        return getNumberOfCompletedTasks() > 2;
     }
 
     public boolean isPluralUncompletedTasks() {
-        return getUncompletedTasks() > 2;
+        return getNumberOfUncompletedTasks() > 2;
+    }
+
+    public List<Task> getAllTasks() {
+        return this.tasks;
+    }
+
+    public List<Task> getAllUncompletedTasks() {
+        List<Task> uncompletedTasks = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (!tasks.get(i).getIsDone()) {
+                uncompletedTasks.add(tasks.get(i));
+            }
+        }
+        return uncompletedTasks;
+    }
+
+    public List<Task> getAllCompletedTasks() {
+        List<Task> completedTasks = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getIsDone()) {
+                completedTasks.add(tasks.get(i));
+            }
+        }
+        return completedTasks;
     }
 
     public List<Task> findTasksByKeyword(String keyword) {
