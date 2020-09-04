@@ -20,6 +20,7 @@ public class TaskList {
      * @param task A Task object created by user.
      */
     public void addTask(Task task) {
+        assert task != null: "Task object cannot be null";
         taskList.add(task);
     }
 

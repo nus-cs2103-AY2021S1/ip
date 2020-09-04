@@ -37,6 +37,7 @@ public class Parser {
     public static Command parse(String input)
             throws DukeEmptyArgumentException,
             DukeEmptyDescriptionException {
+        assert input != null: "String object cannot be null";
         String command = input.strip();
         String[] commandWordArray = command.split(SPACE);
         if (command.equals(BYE)) {
