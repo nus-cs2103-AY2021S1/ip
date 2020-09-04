@@ -28,8 +28,9 @@ public class DateTimeHandler {
      * Parses a string be converted into a single LocalDateTime object.
      * @param dateTime string to be converted into LocalDateTime object
      * @return LocalDateTime object from the details given
+     * @throws DukeException if the format of the datetime string is invalid
      */
-    public static LocalDateTime parseDateTime(String dateTime) {
+    public static LocalDateTime parseDateTime(String dateTime) throws DukeException {
         try {
             return LocalDateTime.parse(dateTime, STANDARD_DATETIME_FORMAT);
         } catch (DateTimeParseException e) {
@@ -43,8 +44,9 @@ public class DateTimeHandler {
      * Besides invalid format, this method checks that the latter timing is later than the earlier timing.
      * @param eventTiming string to be converted into a pair of LocalDateTime objects
      * @return pair of LocalDateTime objects from the details given
+     * @throws DukeException if the format of the event-timing string is invalid or end timing later than start
      */
-    public static Pair<LocalDateTime, LocalDateTime> parseEventTimings(String eventTiming) {
+    public static Pair<LocalDateTime, LocalDateTime> parseEventTimings(String eventTiming) throws DukeException {
         int acceptableLength1 = STANDARD_DATETIME_FORMAT_STRING.length() + 1 + STANDARD_2400_FORMAT_STRING.length();
         int acceptableLength2 = STANDARD_DATETIME_FORMAT_STRING.length() * 2 + 1;
         if (eventTiming.length() != acceptableLength1 && eventTiming.length() != acceptableLength2) {

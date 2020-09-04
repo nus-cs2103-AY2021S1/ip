@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -26,8 +27,9 @@ public class AddCommand extends Command {
      * Static factory method for creating the appropriate AddCommand from a String input.
      * @param taskCommand String input of the form "add {task description}"
      * @return command object that adds the task to the task list when executed
+     * @throws DukeException if the description of the command is invalid
      */
-    public static AddCommand parse(String taskCommand) {
+    public static AddCommand parse(String taskCommand) throws DukeException {
         return new AddCommand(TaskParser.parse(taskCommand));
     }
 

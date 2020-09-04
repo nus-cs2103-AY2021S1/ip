@@ -28,8 +28,9 @@ public class FindCommand extends Command {
      * Static factory method for creating the appropriate find command from a String input.
      * @param command String input of the form "find {search string}"
      * @return command object that finds the tasks containing the search string when executed
+     * @throws DukeException if the command given does not provide a string to search for
      */
-    public static FindCommand parse(String command) {
+    public static FindCommand parse(String command) throws DukeException {
         String[] details = command.split(" ", 2);
         if (details.length == 1) {
             throw new DukeException("Please specify a keyword/keyphrase to search!");

@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDateTime;
 
 import duke.DukeException;
+import duke.InvalidSaveException;
 import duke.datetime.DateTimeHandler;
 import duke.util.Pair;
 
@@ -25,8 +26,9 @@ public class Event extends Task {
     /**
      * Creates an Event object with the given event description and timing.
      * @param taskDescription full description of the event including task and timing
+     * @throws DukeException if the format of the description is invalid
      */
-    public Event(String taskDescription) {
+    public Event(String taskDescription) throws DukeException {
         super(taskDescription.split(SPLITTER)[0]);
         String[] details = taskDescription.split(SPLITTER);
         if (details.length == 1) {
@@ -41,8 +43,9 @@ public class Event extends Task {
      * Creates a new Event object by manually setting the description and timing
      * @param eventDescription description of the event task only
      * @param timing string description of the timing of the event
+     * @throws DukeException if the timing provided for the event has an invalid format
      */
-    private Event(String eventDescription, String timing) {
+    private Event(String eventDescription, String timing) throws DukeException {
         super(eventDescription);
         processEventTimingString(timing);
     }
@@ -50,8 +53,9 @@ public class Event extends Task {
     /**
      * Processes an event timing String by assigning the pair of start and end timings to the properties.
      * @param timing String containing the details of the start and end timing
+     * @throws DukeException if the timing provided for the event has an invalid format
      */
-    private void processEventTimingString(String timing) {
+    private void processEventTimingString(String timing) throws DukeException {
         Pair<LocalDateTime, LocalDateTime> pair =
                 DateTimeHandler.parseEventTimings(timing);
         startTiming = pair.getFirst();
@@ -99,20 +103,25 @@ public class Event extends Task {
      * Returns an Event object corresponding to the summary given.
      * @param summary string summary of the Event object to be reconstructed
      * @return Event object representing the summary given
+     * @throws InvalidSaveException if the summary in the save file is invalid
      */
-    public static Event reconstructFromSummary(String summary) {
+    public static Event reconstructFromSummary(String summary) throws InvalidSaveException {
         String[] details = summary.split("\\|");
         if (details.length != 4) {
-            throw new DukeException("Wrong number of details!");
+            throw new InvalidSaveException("Wrong number of details!");
         } else if (!(details[1].equals("1") || details[1].equals("0"))) {
-            throw new DukeException("Invalid completion status! Ensure that it is either 0 or 1");
+            throw new InvalidSaveException("Invalid completion status! Ensure that it is either 0 or 1");
         }
-        Event event = new Event(details[2], details[3]);
-        boolean isDone = details[1].equals("1");
-        if (isDone) {
-            event.markDone();
+        try {
+            Event event = new Event(details[2], details[3]);
+            boolean isDone = details[1].equals("1");
+            if (isDone) {
+                event.markDone();
+            }
+            return event;
+        } catch (DukeException e) {
+            throw new InvalidSaveException("Invalid datetime format in save!");
         }
-        return event;
     }
 
 

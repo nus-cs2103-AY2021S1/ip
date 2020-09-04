@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import duke.DukeException;
+import duke.InvalidSaveException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -55,7 +57,7 @@ public class Storage {
                 String line = scanner.nextLine();
                 try {
                     taskList.add(createTask(line));
-                } catch (InvalidSymbolException e) {
+                } catch (InvalidSaveException e) {
                     System.err.println("Not a valid line: " + line);
                     continue;
                 }
@@ -75,9 +77,9 @@ public class Storage {
      * Method recreates a task from the provided string summary of the task.
      * @param taskSummary string details of the task
      * @return task corresponding to the summary
-     * @throws InvalidSymbolException if the symbol read is not a valid symbol of a task type
+     * @throws InvalidSaveException if the symbol read is not a valid symbol of a task type
      */
-    protected Task createTask(String taskSummary) throws InvalidSymbolException {
+    protected Task createTask(String taskSummary) throws InvalidSaveException {
         String identifier = taskSummary.split("\\|", 2)[0];
         switch (identifier) {
         case Event.SYMBOL:
@@ -87,7 +89,7 @@ public class Storage {
         case Deadline.SYMBOL:
             return Deadline.reconstructFromSummary(taskSummary);
         default:
-            throw new InvalidSymbolException(identifier + " is not a valid type symbol!");
+            throw new InvalidSaveException(identifier + " is not a valid type symbol!");
         }
     }
 

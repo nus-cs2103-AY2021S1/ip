@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.DukeException;
+
 /**
  * Class handles the parsing of Strings into the appropriate type of command objects.
  */
@@ -20,8 +22,9 @@ public class CommandParser {
      * The method uses the first word to determine that type of command to create.
      * @param userInput string containing the command to be created
      * @return command object corresponding to the details provided
+     * @throws DukeException if the user input given is invalid, with the reason provided
      */
-    public static Command parse(String userInput) {
+    public static Command parse(String userInput) throws DukeException {
         String firstWord = userInput.split(" ")[0];
         if (userInput.equals(INDICATOR_CLOSING)) {
             return ExitCommand.create();

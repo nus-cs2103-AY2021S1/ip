@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Ui;
 import duke.storage.Storage;
 import duke.util.TaskList;
@@ -25,7 +26,7 @@ public abstract class Command {
      * @param ui UI element to be used
      * @param storage Storage element to be used
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
 
 }

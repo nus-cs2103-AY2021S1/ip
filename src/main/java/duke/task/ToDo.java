@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.DukeException;
+import duke.InvalidSaveException;
 
 /**
  * Encapsulates Tasks that are to be completed.
@@ -45,13 +46,14 @@ public class ToDo extends Task {
      * Returns a ToDo object corresponding to the summary given.
      * @param summary string summary of the ToDo object to be reconstructed
      * @return ToDo object representing the summary given
+     * @throws InvalidSaveException if the summary in the save file is invalid
      */
-    public static ToDo reconstructFromSummary(String summary) {
+    public static ToDo reconstructFromSummary(String summary) throws InvalidSaveException {
         String[] details = summary.split("\\|");
         if (details.length != 3) {
-            throw new DukeException("Wrong number of details!");
+            throw new InvalidSaveException("Wrong number of details!");
         } else if (!(details[1].equals("1") || details[1].equals("0"))) {
-            throw new DukeException("Invalid completion status! Ensure that it is either 0 or 1");
+            throw new InvalidSaveException("Invalid completion status! Ensure that it is either 0 or 1");
         }
         boolean isDone = details[1].equals("1");
         ToDo newToDo = new ToDo(details[2]);

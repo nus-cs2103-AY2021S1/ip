@@ -2,7 +2,9 @@ package duke.task;
 
 import java.time.LocalDateTime;
 
+import duke.Duke;
 import duke.DukeException;
+import duke.InvalidSaveException;
 import duke.datetime.DateTimeHandler;
 
 /**
@@ -23,8 +25,9 @@ public class Deadline extends Task {
     /**
      * Creates a new Deadline object from the full deadline description that includes the deadline.
      * @param taskDescription description of the Deadline object with both the task and the deadline
+     * @throws DukeException if the string provided to create the deadline is invalid
      */
-    public Deadline(String taskDescription) {
+    public Deadline(String taskDescription) throws DukeException {
         super(taskDescription.split(SPLITTER)[0]);
         String[] details = taskDescription.split(SPLITTER);
         if (details.length == 1) {
@@ -39,8 +42,9 @@ public class Deadline extends Task {
      * Creates a new Deadline object by manually inputting t
      * @param deadlineDescription description of the task only
      * @param deadline string description of the deadline
+     * @throws DukeException if the deadline provided has an invalid datetime format
      */
-    private Deadline(String deadlineDescription, String deadline) {
+    private Deadline(String deadlineDescription, String deadline) throws DukeException {
         super(deadlineDescription);
         this.deadline = DateTimeHandler.parseDateTime(deadline);
     }
@@ -81,20 +85,25 @@ public class Deadline extends Task {
      * Returns an Deadline object corresponding to the summary given.
      * @param summary string summary of the Deadline object to be reconstructed
      * @return Deadline object representing the summary given
+     * @throws InvalidSaveException if the summary in the save file is invalid
      */
-    public static Deadline reconstructFromSummary(String summary) {
+    public static Deadline reconstructFromSummary(String summary) throws InvalidSaveException {
         String[] details = summary.split("\\|");
         if (details.length != 4) {
-            throw new DukeException("Wrong number of details!");
+            throw new InvalidSaveException("Wrong number of details!");
         } else if (!(details[1].equals("1") || details[1].equals("0"))) {
-            throw new DukeException("Invalid completion status! Ensure that it is either 0 or 1");
+            throw new InvalidSaveException("Invalid completion status! Ensure that it is either 0 or 1");
         }
         boolean isDone = details[1].equals("1") ? true : false;
-        Deadline newDeadline = new Deadline(details[2], details[3]);
-        if (isDone) {
-            newDeadline.markDone();
+        try {
+            Deadline newDeadline = new Deadline(details[2], details[3]);
+            if (isDone) {
+                newDeadline.markDone();
+            }
+            return newDeadline;
+        } catch (DukeException e) {
+            throw new InvalidSaveException("Invalid datetime format in save!");
         }
-        return newDeadline;
     }
 
 
