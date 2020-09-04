@@ -1,4 +1,4 @@
-package duke;
+package duke.enums;
 
 import java.util.HashMap;
 
@@ -32,7 +32,7 @@ public enum CommandEnum {
         return this.label;
     }
 
-    static CommandEnum stringToEnum(String commandEnum) {
+    public static CommandEnum stringToEnum(String commandEnum) {
         if (lookup.containsKey(commandEnum)) {
             return lookup.get(commandEnum);
         } else {

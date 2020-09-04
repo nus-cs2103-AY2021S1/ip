@@ -1,4 +1,6 @@
-package duke;
+package duke.storage;
+
+import duke.task.TaskList;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,7 +21,7 @@ public class Storage {
     private String taskDetailsSeparator = " | ";
 
     public Storage() {
-        this.rootPath = System.getProperty("user.dir");;
+        this.rootPath = System.getProperty("user.dir");
         this.directoryPath = this.rootPath + File.separator + "data";
         this.filePath = this.directoryPath + File.separator + "data.txt";
     }

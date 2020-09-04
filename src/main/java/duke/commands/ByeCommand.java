@@ -1,8 +1,8 @@
 package duke.commands;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class ByeCommand extends Command {
     private final boolean HAS_FINISHED = true;

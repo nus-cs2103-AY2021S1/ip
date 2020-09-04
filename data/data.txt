@@ -1,2 +1,6 @@
 T | 1 | read book
 D | 0 | singing contest | 2020-09-11
+T | 0 | do work
+E | 0 | workshop | 2020-09-05 6pm
+T | 0 | plan timetable
+T | 0 | discuss work

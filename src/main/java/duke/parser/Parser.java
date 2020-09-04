@@ -1,4 +1,4 @@
-package duke;
+package duke.parser;
 
 import duke.commands.ByeCommand;
 import duke.commands.Command;
@@ -9,7 +9,9 @@ import duke.commands.EventCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
+import duke.enums.CommandEnum;
 import duke.exceptions.DukeException;
+import duke.ui.Ui;
 
 public class Parser {
     Ui ui;

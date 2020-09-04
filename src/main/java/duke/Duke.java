@@ -3,6 +3,11 @@ package duke;
 import duke.commands.Command;
 import duke.commands.CommandResult;
 import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
