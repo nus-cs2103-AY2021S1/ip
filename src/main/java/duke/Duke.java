@@ -22,6 +22,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filepath);
         parser = new Parser();
+
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -29,6 +30,7 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+
         System.out.println(ui.greet());
     }
 

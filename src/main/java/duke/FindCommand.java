@@ -5,7 +5,7 @@ package duke;
  */
 
 public class FindCommand extends Command {
-    /** duke.Command details */
+    /** duke.Command details in the form [TYPE, INFORMATION] */
     private final String[] instructions;
 
     /**
@@ -26,17 +26,20 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder response = new StringBuilder();
         response.append(">> Your matching tasks:");
+
         boolean hasResult = false;
         int i = 1;
         for (Task task : tasks.getTasks()) {
-            if (task.name.contains(instructions[1])) {
+            if (task.name.contains(instructions[1])) { // instructions[1] contains the search query
                 response.append("\n>> " + i++ + ". " + task);
                 hasResult = true;
             }
         }
+
         if (!hasResult) {
             return ">> No results!";
         }
+
         return response.toString();
     }
 }

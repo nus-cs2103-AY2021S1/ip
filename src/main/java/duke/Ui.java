@@ -17,14 +17,6 @@ public class Ui {
     }
 
     /**
-     * Reads next command from user.
-     * @return Line of user input.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    /**
      * Displays error when user loads the program without an existing saved task list.
      */
     public String showLoadingError() {
