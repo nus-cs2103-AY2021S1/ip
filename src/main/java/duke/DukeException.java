@@ -10,7 +10,7 @@ public class DukeException extends RuntimeException {
      * @param description description of the type of error encountered
      */
     public DukeException(String description) {
-        super("☹ OOPS!!! " + description);
+        super("OOPS!!! " + description);
     }
 
 }

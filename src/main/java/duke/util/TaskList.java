@@ -39,7 +39,9 @@ public class TaskList implements Iterable<Task> {
         StringBuilder builder = new StringBuilder();
         int count = 1;
         for (Task task : listOfTasks) {
-            builder.append('\n');
+            if (count != 1) {
+                builder.append('\n');
+            }
             builder.append(count++ + "." + task.toString());
         }
         return builder.toString();
