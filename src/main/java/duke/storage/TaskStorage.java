@@ -40,6 +40,7 @@ public class TaskStorage {
         if (!dir.exists()) {
             dir.mkdir();
         }
+        assert dir.exists() : "Directory is not created";
         File f = new File(actualPath + DEFAULT_FILENAME);
         return new TaskStorage(f);
     }

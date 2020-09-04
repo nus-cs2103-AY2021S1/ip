@@ -16,6 +16,7 @@ public final class Utils {
      * @return the concatenated <code>String</code>.
      */
     public static String concatenate(String[] arr, int start, int end) {
+        assert start <= end : "start index is greater than end index.";
         StringBuilder builder = new StringBuilder();
         String prefix = "";
         for (int i = start; i < end; i++) {

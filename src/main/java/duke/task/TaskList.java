@@ -64,6 +64,7 @@ public class TaskList implements Iterable<Task> {
     public Task completeTask(int index) {
         Task task = this.taskList.get(index - 1);
         task.completeTask();
+        assert task.isTaskCompleted() : "Task is not marked as complete";
         return task;
     }
 
