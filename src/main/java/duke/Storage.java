@@ -5,21 +5,21 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
 
 /** Storage class to manage the saving of TaskList into hard disk */
 public class Storage {
+    // Reads the datetime from the string representation of tasks as "Month day year" such as "Jan 10 2020".
+    private static final DateTimeFormatter STORAGE_FORMATTER =
+            DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH);
+
     private final Path filePath;
     private final Path folderPath;
 
@@ -74,39 +74,12 @@ public class Storage {
      * @param tasksInFile The list of tasks stored in the file.
      * @return A TaskList based on the tasks recorded in the file.
      */
-    public TaskList loadTaskList(List<String> tasksInFile) {
+    public TaskList loadTaskList(List<String> tasksInFile) throws DukeException {
         List<Task> tasksLoaded = new ArrayList<>();
-
-        // Reads the datetime from the string representation of tasks as "Month day year" such as "Jan 10 2020".
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH);
 
         for (String s : tasksInFile) {
             // The array of task content contains task's type + whether it is done + name (+ time).
-            String[] taskContentParts = s.split(" [|] ");
-            String taskSchedule;
-
-            assert taskContentParts.length >= 3 : "The task information parsed must has at least 3 parts";
-
-            boolean taskIsDone = taskContentParts[1].equals("1");
-
-            // Creates the task based on the type specified, only deadline and event tasks have time constraint.
-            switch(taskContentParts[0]) {
-            case ("T"):
-                tasksLoaded.add(new Todo(taskContentParts[2], taskIsDone));
-                break;
-            case ("D"):
-                taskSchedule = taskContentParts[3];
-                LocalDate deadlineTime = LocalDate.parse(taskSchedule, formatter);
-                tasksLoaded.add(new Deadline(taskContentParts[2], taskIsDone, deadlineTime));
-                break;
-            case ("E"):
-                taskSchedule = taskContentParts[3];
-                LocalDate eventTime = LocalDate.parse(taskSchedule, formatter);
-                tasksLoaded.add(new Event(taskContentParts[2], taskIsDone, eventTime));
-                break;
-            default:
-                break;
-            }
+            tasksLoaded.add(Parser.parseTask(s, STORAGE_FORMATTER));
         }
         return new TaskList(tasksLoaded);
     }

@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.command.Command;
@@ -10,7 +12,12 @@ import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.ReminderCommand;
 import duke.command.TodoCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /** A Parser object to parse the user input */
 public class Parser {
@@ -25,7 +32,6 @@ public class Parser {
         String[] inputParts = userInput.split(" ");
         String commandWord = inputParts[0];
         String content = Parser.generateContent(inputParts);
-
         try {
             switch (commandWord) {
             case "done":
@@ -44,6 +50,8 @@ public class Parser {
                 return new EventCommand(content);
             case "find":
                 return new FindCommand(content);
+            case "remind":
+                return new ReminderCommand(content);
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -72,5 +80,38 @@ public class Parser {
         }
 
         return result.toString();
+    }
+
+    /**
+     * Parse the task from file and convert them into the correct type of task with all the information.
+     *
+     * @param taskInFileFormat The string format of a task recorded in the data file.
+     * @param formatter the formatter specified in the Storage.
+     * @return the task with right type and complete information.
+     * @throws DukeException if the type of task recorded in the string cannot be identified.
+     */
+    public static Task parseTask(String taskInFileFormat, DateTimeFormatter formatter) throws DukeException {
+        String[] taskContentParts = taskInFileFormat.split(" [|] ");
+        String taskSchedule;
+
+        assert taskContentParts.length >= 3 : "The task information parsed must has at least 3 parts";
+
+        boolean taskIsDone = taskContentParts[1].equals("1");
+
+        // Creates the task based on the type specified, only deadline and event tasks have time constraint.
+        switch(taskContentParts[0]) {
+        case ("T"):
+            return new Todo(taskContentParts[2], taskIsDone);
+        case ("D"):
+            taskSchedule = taskContentParts[3];
+            LocalDate deadlineTime = LocalDate.parse(taskSchedule, formatter);
+            return new Deadline(taskContentParts[2], taskIsDone, deadlineTime);
+        case ("E"):
+            taskSchedule = taskContentParts[3];
+            LocalDate eventTime = LocalDate.parse(taskSchedule, formatter);
+            return new Event(taskContentParts[2], taskIsDone, eventTime);
+        default:
+            throw new DukeException("Error in parsing the task. Incorrect task type recorded in the file");
+        }
     }
 }

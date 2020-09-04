@@ -4,8 +4,6 @@ import java.time.LocalDate;
 
 /** Represents an event task */
 public class Event extends Task {
-    private final LocalDate schedule;
-
     /**
      * Initializes an event task.
      *
@@ -16,15 +14,6 @@ public class Event extends Task {
     public Event(String name, boolean isDone, LocalDate schedule) {
         super(name, isDone);
         this.schedule = schedule;
-    }
-
-    /**
-     * Returns a string representation of the Event task's schedule in the pattern "MMM d yyyy".
-     *
-     * @return The string representation of the schedule.
-     */
-    public String getSchedule() {
-        return this.schedule.format(Task.FORMATTER);
     }
 
     @Override
