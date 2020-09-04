@@ -24,7 +24,7 @@ public class Event extends Task {
      * @param eventTime Date and time of the event.
      */
     public Event(String description, boolean isDone, LocalDateTime eventTime) {
-        super(TaskType.Event, description, isDone);
+        super(TaskType.EVENT, description, isDone);
         this.eventTime = eventTime;
     }
 

@@ -7,18 +7,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 import viscount.exception.ViscountSaveDataException;
-import viscount.task.Deadline;
-import viscount.task.Event;
 import viscount.task.Task;
-import viscount.task.TaskType;
-import viscount.task.Todo;
 
 /**
  * Represents Viscount's storage.
@@ -69,51 +63,63 @@ public class Storage {
      * @throws IOException If exception occurs when loading from disk or creating a new data file.
      */
     public List<Task> loadFromDisk() throws IOException {
-        File directory = new File(dataDirectoryPath);
-
-        if (!directory.exists()) {
-            directory.mkdir();
+        if (!hasDataDirectory()) {
+            createDataDirectory();
         }
 
-        Path filePath = Paths.get(filePathString);
-        boolean doesFileExist = Files.exists(filePath);
+        if (hasExistingDataFile()) {
+            return convertTaskDataToTasks();
+        } else {
+            return createNewDataFile();
+        }
+    }
+
+    /**
+     * Converts task data in the data file to a list of tasks.
+     *
+     * @return List of tasks represented by the task data
+     * @throws IOException If exception occurs when reading from data file.
+     */
+    private List<Task> convertTaskDataToTasks() throws IOException {
+        File dataFile = new File(filePathString);
+        Scanner sc = new Scanner(dataFile);
         List<Task> tasks = new ArrayList<>();
 
-        if (doesFileExist) {
-            File f = new File(filePathString);
-            Scanner sc = new Scanner(f);
+        while (sc.hasNext()) {
+            String line = sc.nextLine();
 
-            while (sc.hasNext()) {
-                String line = sc.nextLine();
-
-                if (line.isEmpty()) {
-                    // If the data file has empty lines, skip them
-                    continue;
-                } else {
-                    List<String> taskData = Arrays.asList(line.split("\\|"));
-                    assert taskData.size() > 0 : "List of task data should be non-empty";
-
-                    TaskType taskType = TaskType.valueOf(taskData.get(0));
-                    boolean isDone = !taskData.get(1).equals("0");
-                    String taskDescription = taskData.get(2);
-
-                    if (taskType == TaskType.Todo) {
-                        tasks.add(new Todo(taskDescription, isDone));
-                    } else if (taskType == TaskType.Deadline) {
-                        LocalDateTime dueDate = Parser.parseDateTime(
-                                taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
-                        tasks.add(new Deadline(taskDescription, isDone, dueDate));
-                    } else if (taskType == TaskType.Event) {
-                        LocalDateTime eventTime = Parser.parseDateTime(
-                                taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
-                        tasks.add(new Event(taskDescription, isDone, eventTime));
-                    }
-                }
+            if (!line.isEmpty()) {
+                tasks.add(Parser.parseTaskData(line));
             }
-        } else {
-            Files.write(filePath, new ArrayList<String>(), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
         }
 
         return tasks;
+    }
+
+    /**
+     * Creates a new data file.
+     *
+     * @return An empty list of tasks representing the new data file with no task data saved.
+     * @throws IOException If an error occurs while creating the new data file.
+     */
+    private List<Task> createNewDataFile() throws IOException {
+        Path filePath = Paths.get(filePathString);
+        Files.write(filePath, new ArrayList<String>(), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
+        return new ArrayList<>();
+    }
+
+    private boolean hasDataDirectory() {
+        File directory = new File(dataDirectoryPath);
+        return directory.exists();
+    }
+
+    private void createDataDirectory() {
+        File directory = new File(dataDirectoryPath);
+        directory.mkdir();
+    }
+
+    private boolean hasExistingDataFile() {
+        Path filePath = Paths.get(filePathString);
+        return Files.exists(filePath);
     }
 }

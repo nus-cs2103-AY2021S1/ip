@@ -50,8 +50,11 @@ public class ListCommand extends Command {
      */
     @Override
     public String executeAndGetResponse(TaskList taskList, Ui ui, Storage storage) throws ViscountException {
-        Predicate<Task> filterByModifier = task -> taskTypeModifier.isEmpty()
-                || task.getTaskType() == TaskType.valueOf(taskTypeModifier.toUpperCase());
+        Predicate<Task> filterByModifier = task -> {
+            boolean isEmptyModifier = taskTypeModifier.isEmpty();
+
+            return isEmptyModifier || task.getTaskType() == TaskType.valueOf(taskTypeModifier.toUpperCase());
+        };
 
         Predicate<Task> filterByDescription = task -> task.getDescription().contains(findString);
 
