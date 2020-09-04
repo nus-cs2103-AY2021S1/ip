@@ -10,10 +10,17 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
 
-import duke.ui.Message;
 import duke.ui.Ui;
 
 import java.util.Arrays;
+
+import static duke.task.Deadline.DELIMITER_BY;
+import static duke.task.Event.DELIMITER_AT;
+
+import static duke.ui.Message.concatLines;
+import static duke.ui.Message.MESSAGE_ADDED;
+import static duke.ui.Ui.LINE_SEPARATOR;
+import static duke.ui.Message.getTotalTaskMessage;
 
 /**
  * Adds a task to the task list.
@@ -52,8 +59,8 @@ public class AddCommand extends Command {
     private static String getDateAndTime(String str, String delimiter) throws DukeException {
         String[] splitString = str.split("\\s+");
 
-        boolean isDelimiterByMatched = delimiter.equals(Deadline.DELIMITER_BY);
-        boolean isDelimiterAtMatched = delimiter.equals(Event.DELIMITER_AT);
+        boolean isDelimiterByMatched = delimiter.equals(DELIMITER_BY);
+        boolean isDelimiterAtMatched = delimiter.equals(DELIMITER_AT);
 
         boolean isDeadlineTimeEmpty = splitString[splitString.length - 1].equals("/by");
         boolean isEventTimeEmpty = splitString[splitString.length - 1].equals("/at");
@@ -84,8 +91,8 @@ public class AddCommand extends Command {
     private static String getDescription(String str, String delimiter) throws DukeException {
         String[] splitString = str.split("\\s+");
 
-        boolean isDelimiterByMatched = delimiter.equals(Deadline.DELIMITER_BY);
-        boolean isDelimiterAtMatched = delimiter.equals(Event.DELIMITER_AT);
+        boolean isDelimiterByMatched = delimiter.equals(DELIMITER_BY);
+        boolean isDelimiterAtMatched = delimiter.equals(DELIMITER_AT);
 
         boolean isDeadlineDescrEmpty = splitString[0].equals("/by");
         boolean isEventDescrEmpty = splitString[0].equals("/at");
@@ -109,12 +116,27 @@ public class AddCommand extends Command {
                 && this.stringWithoutKeyword.endsWith(delimiter);
     }
 
+    /**
+     * Creates a new <code>Event</code> Object.
+     */
+    private Event createEventTask(String string) throws DukeException {
+        String description = getDescription(string, DELIMITER_AT);
+        String dateAndTime = getDateAndTime(string, DELIMITER_AT);
+        return new Event(description, dateAndTime);
+    }
+
+    /**
+     * Creates a new <code>Deadline</code> Object.
+     */
+    private Deadline createDeadlineTask(String string) throws DukeException {
+        String dateAndTime = getDateAndTime(string, DELIMITER_BY);
+        String description = getDescription(string, DELIMITER_BY);
+        return new Deadline(description, dateAndTime);
+    }
+
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task newTask;
-        String dateAndTime;
-        String description;
-
         switch (this.keyword) {
         case "todo":
             if (this.stringWithoutKeyword.isEmpty()) {
@@ -126,28 +148,22 @@ public class AddCommand extends Command {
             if (this.stringWithoutKeyword.isEmpty() || isDescrDateAndTimeEmpty("/by")) {
                 throw new DukeException("the description and the due date and time of a deadline cannot be empty.");
             }
-            dateAndTime = getDateAndTime(this.stringWithoutKeyword, Deadline.DELIMITER_BY);
-            description = getDescription(this.stringWithoutKeyword, Deadline.DELIMITER_BY);
-            newTask = new Deadline(description, dateAndTime);
+            newTask = createDeadlineTask(this.stringWithoutKeyword);
             break;
         case "event":
             if (this.stringWithoutKeyword.isEmpty() || isDescrDateAndTimeEmpty("/at")) {
                 throw new DukeException("the description and the date and time of an event cannot be empty.");
             }
-            dateAndTime = getDateAndTime(this.stringWithoutKeyword, Event.DELIMITER_AT);
-            description = getDescription(this.stringWithoutKeyword, Event.DELIMITER_AT);
-            newTask = new Event(description, dateAndTime);
+            newTask = createEventTask(this.stringWithoutKeyword);
             break;
         default:
             throw new DukeException("I don't understand what you are saying. :(");
         }
-
         taskList.add(newTask);
         storage.saveTasks(taskList);
 
         assert taskList.get(taskList.size()).equals(newTask) : "Task is not added into the taskList!";
 
-        return Message.concatLines(Message.MESSAGE_ADDED, newTask.toString(),
-                Ui.LINE_SEPARATOR, Message.getTotalTaskMessage(taskList));
+        return concatLines(MESSAGE_ADDED, newTask.toString(), LINE_SEPARATOR, getTotalTaskMessage(taskList));
     }
 }

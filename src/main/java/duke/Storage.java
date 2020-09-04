@@ -36,6 +36,15 @@ public class Storage {
     }
 
     /**
+     * Marks task as done if {@code taskStatusCode} has status code of 1.
+     */
+    private void markTaskDone(Task task, String taskStatusCode) throws DukeException {
+        if (taskStatusCode.equals("1")) {
+            task.markAsDone();
+        }
+    }
+
+    /**
      * Loads the existing tasks from the data file.
      *
      * @return An ArrayList of tasks which are stored in the data file.
@@ -43,15 +52,11 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
-
         try {
-            File file = new File(filePath);
-            Scanner scanner = new Scanner(file);
-
+            Scanner scanner = new Scanner(new File(filePath));
             while (scanner.hasNextLine()) {
                 String[] data = scanner.nextLine().split(" \\| ");
                 Task task;
-
                 switch (data[0]) {
                 case "T":
                     task = new ToDo(data[2]);
@@ -65,10 +70,7 @@ public class Storage {
                 default:
                     throw new DukeException("Failed to load tasks.");
                 }
-
-                if (data[1].equals("1")) {
-                    task.markAsDone();
-                }
+                markTaskDone(task, data[1]);
                 tasks.add(task);
             }
             scanner.close();

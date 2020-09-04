@@ -7,8 +7,11 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import duke.ui.Message;
 import duke.ui.Ui;
+
+import static duke.ui.Message.concatLines;
+import static duke.ui.Message.MESSAGE_DONE;
+import static duke.ui.Ui.LINE_SEPARATOR;
 
 /**
  * Marks a task as done.
@@ -34,6 +37,6 @@ public class CompleteCommand extends Command {
 
         assert task.getStatusCode() == 1 : "The status of the task is not updated!";
 
-        return Message.concatLines(Message.MESSAGE_DONE, task.toString());
+        return concatLines(MESSAGE_DONE, task.toString(), LINE_SEPARATOR);
     }
 }
