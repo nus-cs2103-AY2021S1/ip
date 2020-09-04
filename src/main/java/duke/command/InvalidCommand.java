@@ -21,6 +21,6 @@ public class InvalidCommand extends Command {
     @Override
     public String execute(String command, TaskList list, Storage storage) {
         String horizontalLine = "____________________________________\n";
-        return horizontalLine + "AIYO!!! I don't understand what you want leh! Can try again?\n" + horizontalLine;
+        return horizontalLine + Warnings.invalidCommandWarning() + horizontalLine;
     }
 }

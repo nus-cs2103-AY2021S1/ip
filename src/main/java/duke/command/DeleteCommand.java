@@ -24,8 +24,9 @@ public class DeleteCommand extends Command {
         String index = command.substring(7);
         try {
             int number = Integer.parseInt(index);
-            if (number <= 0 || number > list.getList().size()) {
-                return "Sorry hor, the number you keyed in is out of range...";
+            Boolean isNumberOutOfRange = number <= 0 || number > list.getList().size();
+            if (isNumberOutOfRange) {
+                return Warnings.inputOutOfRangeWarning();
             } else {
                 String taskMessage = list.getList().get(number - 1).toString();
                 list.deleteTask(number);
@@ -34,7 +35,7 @@ public class DeleteCommand extends Command {
                         + "You got " + list.getList().size() + " tasks left. \n" + horizontalLine;
             }
         } catch (NumberFormatException ex) {
-            return "Sorry hor, the number you keyed in is invalid...";
+            return Warnings.invalidInputWarning();
         }
     }
 }

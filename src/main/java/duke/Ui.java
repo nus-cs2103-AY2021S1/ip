@@ -38,7 +38,7 @@ public class Ui {
      * @param storage Storage object that has access to duke.txt
      * @throws Exception File not found
      */
-    public String initialise(TaskList list, Storage storage, String input) throws Exception {
+    public String initialise(TaskList list, Storage storage, String input) {
         // parses into a command
         Command c = Parser.parse(input, list, storage);
         return c.execute(input, list, storage);

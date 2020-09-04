@@ -24,9 +24,4 @@ public class ByeCommand extends Command {
         String byeMessage = "Bye bye. See you soon bro!\n";
         return horizontalLine + byeMessage + horizontalLine;
     }
-
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }
