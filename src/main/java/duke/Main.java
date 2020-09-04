@@ -20,7 +20,6 @@ public class Main {
             } else if (args[0].equals("gui")) {
                 runGui(args);
             } else {
-                System.out.println(args[0]);
                 System.out.println("Usage: java main <cmd|gui>");
             }
         }

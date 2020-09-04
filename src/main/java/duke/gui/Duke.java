@@ -1,22 +1,25 @@
 package duke.gui;
 
+import duke.command.Command;
+import duke.command.ReversibleCommand;
 import duke.parser.DukeParserException;
 import duke.parser.Parser;
 import duke.task.Task;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * GUI application for Duke (Duke GUI)
@@ -25,7 +28,7 @@ public class Duke extends Application {
 
     private static final String WELCOME_MESSAGE = "Welcome to Duke!";
 
-    private final List<Task> taskList = new ArrayList<>(100);
+    private final ObservableList<Task> taskList = FXCollections.observableArrayList();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -39,20 +42,25 @@ public class Duke extends Application {
         Label outputLabel = new Label(WELCOME_MESSAGE);
         TextField inputField = new TextField();
         Button clearButton = new Button("Clear");
-
-        // UI Elements config
-        outputScrollPane.setPrefSize(400, 300);
-        outputScrollPane.setContent(outputLabel);
+        ListView<Task> taskView = new ListView<>(taskList);
 
         // Configure layout
-        GridPane gridPane = new GridPane();
-        gridPane.add(outputScrollPane, 0, 0);
-        gridPane.add(inputField, 0, 1);
-        gridPane.add(clearButton, 0, 2);
+        taskView.setFocusTraversable(false);
+        clearButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        outputScrollPane.setContent(outputLabel);
+        BorderPane leftPane = new BorderPane();
+        leftPane.setPrefWidth(200d);
+        leftPane.setTop(clearButton);
+        leftPane.setCenter(outputScrollPane);
+        leftPane.setBottom(inputField);
+        BorderPane mainPane = new BorderPane();
+        mainPane.setLeft(leftPane);
+        mainPane.setCenter(taskView);
 
         // Display UI
-        Scene scene = new Scene(gridPane); // Setting the scene to be our Label
+        Scene scene = new Scene(mainPane); // Setting the scene to be our Label
         stage.setScene(scene); // Setting the stage to show our screen
+        stage.setTitle("Duke");
         stage.show(); // Render the stage.
 
         // Add Action Listeners
@@ -70,13 +78,17 @@ public class Duke extends Application {
                 System.out.println("> " + input);
                 // 2. & 3. Parse input and run command
                 try {
-                    Parser.parse(taskList, input).execute();
+                    Command command = Parser.parse(taskList, input);
+                    command.execute();
+                    if (command instanceof ReversibleCommand) {
+                        taskView.refresh(); // TODO: reduce performance hit
+                    }
                 } catch (DukeParserException e) {
                     System.out.println(e.getMessage());
                 }
                 // 4. Show output
                 outputLabel.setText(outputStream.toString()); // Display output
-                gridPane.layout(); // Refresh layout
+                mainPane.layout(); // Refresh layout
                 outputScrollPane.setVvalue(1.0d); // Automatically scroll down
             }
         });
@@ -87,4 +99,5 @@ public class Duke extends Application {
             outputLabel.setText(WELCOME_MESSAGE);
         });
     }
+
 }

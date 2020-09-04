@@ -27,6 +27,12 @@ public class AddCommand implements ReversibleCommand {
      */
     @Override
     public void execute() {
+        // Disallow duplicate
+        if (taskList.contains(task)) {
+            System.err.println("Error: Duplicate Task");
+            return;
+        }
+
         this.taskList.add(task);
         System.out.println("\t+ Add: " + task.toString());
     }
