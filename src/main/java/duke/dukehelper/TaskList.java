@@ -13,13 +13,16 @@ public class TaskList {
         this.taskList = new ArrayList<Task>();
     }
     public ArrayList<Task> getTaskList() {
+        assert (this.taskList != null) : "Tasklist is null";
         return this.taskList;
     }
     public void addTaskStr(String task) {
+        assert (task != null && !task.equals("")) : "Null or empty task";
         Task newTask = new Task(task);
         this.taskList.add(newTask);
     }
     public void addTask(Task task) {
+        assert task != null : "Null task";
         this.taskList.add(task);
     }
 
