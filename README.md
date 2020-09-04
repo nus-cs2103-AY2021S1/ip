@@ -22,4 +22,8 @@ Refer to the fork for the project template.
 <strong>GUI on JavaFXML 01/09/2020: </strong>
 <br> `javaFX` must also be downloaded on local system. Then, fork repo and run `king.launcher`.\
 On running the application successfully, you should see the pop-up window.
+<br> <u><strong> Updated UI v0.1.1 on 05/09/2020: </strong></u>
+![GUI v0.1.1](data/images/ui%20v1.2.PNG)
+![GUI v0.1.1](data/images/ui%20v1.2_2%20PNG.PNG)
+<br><u><strong>v0.1 UI</strong></u>\
 ![GUI v0.1](data/images/king_gui_v0.1.PNG)
