@@ -18,9 +18,14 @@ public class StorageParser {
     private static final String IS_COMPLETED = "1";
     private static final String NOT_COMPLETED = "0";
     private static final String DELIMITER = ";";
+
     private static final int TODO_COMMAND_LENGTH = 3;
     private static final int DEADLINE_COMMAND_LENGTH = 4;
     private static final int EVENT_COMMAND_LENGTH = 4;
+
+    private static final int COMPLETED_INDEX = 1;
+    private static final int DESCRIPTION_INDEX = 2;
+    private static final int DATETIME_INDEX = 3;
 
     /**
      * Converts a <code>Task</code> to a <code>String</code> that will be saved onto the storage text file.
@@ -43,8 +48,8 @@ public class StorageParser {
             String msg = String.format("It appears this todo: '%s' is corrupted.", storageTaskString);
             throw new DukeParseException(msg);
         }
-        boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
-        return new Todo(storageTask[2], isCompleted);
+        boolean isCompleted = storageTask[COMPLETED_INDEX].equals(IS_COMPLETED);
+        return new Todo(storageTask[DESCRIPTION_INDEX], isCompleted);
     }
 
     private Deadline createDeadline(
@@ -53,11 +58,13 @@ public class StorageParser {
             String msg = String.format("It appears this deadline: '%s' is corrupted.", storageTaskString);
             throw new DukeParseException(msg);
         }
-        boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
+        boolean isCompleted = storageTask[COMPLETED_INDEX].equals(IS_COMPLETED);
+
         try {
             LocalDateTime dateTime = Datetime.parseDateTimeString(
-                    storageTask[3], Deadline.DATE_FORMAT_OUTPUT);
-            return new Deadline(storageTask[2], isCompleted, dateTime);
+                    storageTask[DATETIME_INDEX], Deadline.DATE_FORMAT_OUTPUT);
+            return new Deadline(storageTask[DESCRIPTION_INDEX], isCompleted, dateTime);
+
         } catch (DukeParseException exception) {
             String msg = String.format("It appears the datetime of this deadline: '%s' is corrupted. ",
                     storageTaskString);
@@ -70,10 +77,13 @@ public class StorageParser {
             String msg = String.format("It appears this event: '%s' is corrupted.", storageTaskString);
             throw new DukeParseException(msg);
         }
-        boolean isCompleted = storageTask[1].equals(IS_COMPLETED);
+        boolean isCompleted = storageTask[COMPLETED_INDEX].equals(IS_COMPLETED);
+
         try {
-            LocalDateTime time = Datetime.parseTimeString(storageTask[3], Event.TIME_FORMAT_OUTPUT);
-            return new Event(storageTask[2], isCompleted, time);
+            LocalDateTime time = Datetime.parseTimeString(
+                    storageTask[DATETIME_INDEX], Event.TIME_FORMAT_OUTPUT);
+            return new Event(storageTask[DESCRIPTION_INDEX], isCompleted, time);
+
         } catch (DukeParseException exception) {
             String msg = String.format("It appears the time of this event: '%s' is corrupted. ",
                     storageTaskString);

@@ -22,6 +22,8 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    private static final double CLIP_RADIUS = 30.0;
+
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -34,7 +36,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-        clipDisplayPicture(30.0);
+        clipDisplayPicture(CLIP_RADIUS);
     }
 
     private void clipDisplayPicture(double radius) {

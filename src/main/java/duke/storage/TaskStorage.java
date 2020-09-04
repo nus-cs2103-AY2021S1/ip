@@ -51,17 +51,17 @@ public class TaskStorage {
      * @return a <code>String</code> indicating the status of the loading.
      */
     public String loadTaskList(TaskList taskList) {
-        Scanner s;
+        Scanner sc;
         try {
-            s = new Scanner(this.file);
+            sc = new Scanner(this.file);
         } catch (IOException ignore) {
             return "I detect no storage files. I shall create a fresh list.";
         }
 
         StringBuilder sb = new StringBuilder();
-        while (s.hasNext()) {
+        while (sc.hasNext()) {
             try {
-                Task task = this.storageParser.convertStorageToTask(s.nextLine());
+                Task task = this.storageParser.convertStorageToTask(sc.nextLine());
                 taskList.addTask(task);
             } catch (DukeParseException exception) {
                 sb.append(exception.getMessage());

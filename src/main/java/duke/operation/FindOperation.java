@@ -39,12 +39,12 @@ public class FindOperation extends Operation {
      */
     @Override
     public Result execute() {
-        String message;
         String foundTasks = this.taskList.findString(searchWord);
+        String message;
         if (foundTasks.equals("")) {
             message = String.format("I have found no tasks that match: %s", this.searchWord);
         } else {
-            message = "Here are the tasks I have found:\n" + foundTasks.toString();
+            message = "Here are the tasks I have found:\n" + foundTasks;
         }
         return new Result(true, message, this.isExit());
     }
