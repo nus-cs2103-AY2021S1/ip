@@ -17,6 +17,8 @@ public class Parser {
      * @throws DukeException When user input cannot be parsed.
      */
     public Command parse(String input) throws DukeException {
+        assert input != null : "Invalid input!";
+
         String[] commandTypeAndDetails = input.split(" ", 2);
         String action = commandTypeAndDetails[0].toUpperCase();
         Constants.CommandType command;

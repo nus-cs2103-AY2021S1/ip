@@ -41,6 +41,8 @@ public class Duke {
         String response = "";
         try {
             Command cmd = parser.parse(input);
+            assert cmd != null : "Command could not be parsed!";
+
             response = cmd.execute(tasks, ui, storage);
         } catch (DukeException e) {
             response = e.getMessage();

@@ -28,8 +28,12 @@ public class DoneCommand extends Command {
             return ui.incompleteInstructionError(); // User did not provide index of task to mark done.
         }
 
-        int index = Integer.parseInt(instructions[1]) - 1; // instructions[1] contains the index of task.
-        return tasks.completeTask(index) + "\n" + storage.save(tasks);
+        try {
+            int index = Integer.parseInt(instructions[1]) - 1; // instructions[1] contains the index of task.
+            return tasks.completeTask(index) + "\n" + storage.save(tasks);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            return ui.invalidIndexError();
+        }
     }
 }
 

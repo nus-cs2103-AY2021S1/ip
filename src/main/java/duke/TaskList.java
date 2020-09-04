@@ -46,6 +46,8 @@ public class TaskList {
      * @param task duke.Task to be added.
      */
     public String addTask(Task task) {
+        assert task != null : "Task to be added does not exist!";
+
         tasks.add(task);
         return ">> Added the task:\n>> " + task + "\n>> You now have " + tasks.size() + " tasks to do!";
     }
@@ -55,6 +57,8 @@ public class TaskList {
      * @param idx Index of task to be deleted.
      */
     public String deleteTask(int idx) {
+        assert idx < tasks.size() : "Task number provided is not valid!";
+
         Task task = tasks.get(idx);
         tasks.remove(idx);
         return ">> I've eradicated the task:\n>> " + task + "\n>> You now have "
@@ -67,6 +71,8 @@ public class TaskList {
      * @param idx Index of task to be completed.
      */
     public String completeTask(int idx) {
+        assert idx < tasks.size() : "Task number provided is not valid!";
+
         tasks.get(idx).complete();
         return ">> Yay! The following task is marked as done:\n>> " + tasks.get(idx);
     }
