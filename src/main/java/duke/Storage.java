@@ -59,7 +59,7 @@ public class Storage {
                 BufferedReader reader = new BufferedReader(new FileReader(file));
                 while ((fileLine = reader.readLine()) != null) {
                     content += fileLine + "\n";
-                    String[] str = fileLine.split("\\s|\\s");
+                    String[] str = fileLine.split(" \\| ");
                     switch (str[0]) {
                     case "T":
                         taskList.add(new Todo(str[2], Integer.parseInt(str[1])));
