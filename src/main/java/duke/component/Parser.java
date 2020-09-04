@@ -30,6 +30,13 @@ public class Parser {
     public static final String EVENT = "event";
     public static final String BY_TIME_IDENTIFIER = "/by";
     public static final String AT_TIME_IDENTIFIER = "/at";
+    public static final String ON = "on";
+    public static final String BEFORE = "before";
+    public static final String AFTER = "after";
+    public static final String IN = "in";
+    public static final String BETWEEN = "between";
+    public static final String DAYS = "days";
+    public static final String TODAY = "today";
     public static final char SPACE_CHAR = ' ';
     public static final String SPACE_STRING = " ";
     public static final String TASK_SINGULAR = "task";
@@ -42,9 +49,15 @@ public class Parser {
     public static final String NONPOSITIVE_TASK_INDEX_EXCEPTION = "The task index should be a positive integer.";
     public static final String TASK_INDEX_OVERFLOW_EXCEPTION = "The task index does not exist.";
     public static final String NONNUMERIC_TASK_INDEX_EXCEPTION = "The task index should be a number.";
-    public static final String LACK_TIME_SPECIFICATION_EXCEPTION = "Time should be specified";
+    public static final String LACK_TIME_SPECIFICATION_EXCEPTION = "Time should be specified.";
     public static final String UNRECOGNIZED_COMMAND_EXCEPTION = "I'm sorry, but I don't know what that means :-(";
-
+    public static final String HAPPEN_IN_NEGATIVE_DAYS_EXCEPTION =
+            "Please input a positive integer for happen in command.";
+    public static final String HAPPEN_IN_NONNUMERIC_EXCEPTION = "The input number of days to search is not a number.";
+    public static final String HAPPEN_BETWEEN_EMPTY_PERIOD_EXCEPTION =
+            "Latter date is before former date for happen between.";
+    public static final String UNRECOGNIZED_HAPPEN_COMMAND_EXCEPTION = "Invalid happen command input.";
+    public static final String INVALID_DATE_FORMAT_EXCEPTION = "Invalid date format. Please use yyyy-MM-dd.";
 
     private static boolean hasEmptyContent(String cmd, String prefix) {
         return cmd.length() < prefix.length() + 1;
