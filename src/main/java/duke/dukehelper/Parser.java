@@ -9,6 +9,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.time.LocalDate;
+import java.util.function.Function;
 
 public class Parser {
     /**
@@ -27,6 +28,7 @@ public class Parser {
         }
         return todoTask;
     }
+
 
     /**
      * Converts string to Deadline
@@ -107,6 +109,36 @@ public class Parser {
     }
 
     /**
+     * Parses operational commands
+     * @param commandType
+     * @param markNumber
+     * @param numTasks
+     * @param tasks
+     * @param saveTaskListStorage
+     * @return string representation of operational commands
+     * @throws DukeException
+     */
+    public String parseOperationCommand(Commands commandType, int markNumber, int numTasks,
+                                        TaskList tasks, Function<Void, Void> saveTaskListStorage) throws DukeException {
+        String result;
+        switch (commandType) {
+            case DONE: {
+                result = tasks.doneTask(markNumber);
+                break;
+            }
+            case DELETE: {
+                result = tasks.deleteTask(markNumber, numTasks - 1);
+                break;
+            }
+            default: {
+                result = "";
+            }
+        }
+        saveTaskListStorage.apply(null);
+        return result;
+    }
+
+    /**
      * Parses task strings
      * @param commandType
      * @param tokens
@@ -116,8 +148,8 @@ public class Parser {
      * @throws DukeException
      * @throws DukeInvalidArgumentException
      */
-    public Task parseCommand(Commands commandType, String[] tokens, boolean isLoaded,
-                             int numTasks) throws DukeException, DukeInvalidArgumentException {
+    public Task parseTaskCommand(Commands commandType, String[] tokens, boolean isLoaded,
+                                 int numTasks) throws DukeException, DukeInvalidArgumentException {
         String resultPrefix = "Got it. I've added this task:\n      ";
         String resultSubfix = "Now you have " + (numTasks + 1) + " tasks in the list.";
 

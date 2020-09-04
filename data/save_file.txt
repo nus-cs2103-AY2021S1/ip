@@ -3,7 +3,6 @@ deadline ip /by 2020-08-12 1200                                                 
 deadline asjdhb kasjd /by 2020-10-12 1500                                                                              0
 todo saasjdn 0
 todo ashbdaskd 0
-todo askdj 0
 todo askdbsad 1
 deadline sajnas /by 2020-12-12 1500         0
 todo asdas 0
