@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * Deals with making sense of the user command
@@ -29,6 +30,8 @@ public class Parser {
             return 6;
         } else if (commandParts[0].contains("delete")) {
             return 7;
+        } else if (commandParts[0].contains("find")) {
+            return 8;
         } else {
             return -1;
         }
@@ -38,11 +41,11 @@ public class Parser {
         Task task = null;
 //        try {
         if (commandNumber == 1) {
-            task = createNewToDo(command);
+            task = createNewToDo();
         } else if (commandNumber == 2) {
-            task = createNewDeadline(command);
+            task = createNewDeadline();
         } else if (commandNumber == 3) {
-            task = createNewEvent(command);
+            task = createNewEvent();
         }
 //        } catch (MissingTaskDescriptionException e) {
 //            System.out.println(e.getMessage());
@@ -50,7 +53,7 @@ public class Parser {
         return task;
     }
 
-    public Task createNewToDo(String command) throws MissingTaskDescriptionException {
+    public Task createNewToDo() throws MissingTaskDescriptionException {
         try {
 
             Task newToDoTask = new ToDo(commandParts[1]);
@@ -65,7 +68,7 @@ public class Parser {
         }
     }
 
-    public Task createNewDeadline(String command) throws MissingTaskDescriptionException {
+    public Task createNewDeadline() throws MissingTaskDescriptionException {
         try {
 
             String[] deadlineParts = commandParts[1].split("/by");
@@ -84,7 +87,7 @@ public class Parser {
         }
     }
 
-    public Task createNewEvent(String command) throws MissingTaskDescriptionException {
+    public Task createNewEvent() throws MissingTaskDescriptionException {
         try {
 
             String[] eventParts = commandParts[1].split("/at");
@@ -106,12 +109,12 @@ public class Parser {
     public int doneTask() throws MissingTaskNumberException {
 
         int taskNumber = -1;
-        taskNumber = markDoneTask(command);
+        taskNumber = markDoneTask();
         return taskNumber;
     }
         
     
-    public int markDoneTask(String command) throws MissingTaskNumberException {
+    public int markDoneTask() throws MissingTaskNumberException {
         
         try {
             int taskNumber = Integer.parseInt(commandParts[1].trim()) - 1;
@@ -131,14 +134,14 @@ public class Parser {
         int taskNumber = -1;
 
         try {
-            taskNumber = deleteTaskFromList(command);
+            taskNumber = deleteTaskFromList();
         } catch (MissingTaskNumberException e) {
             System.out.println(e.getMessage());
         }
         return taskNumber;
     }
 
-    public int deleteTaskFromList(String command) throws MissingTaskNumberException {
+    public int deleteTaskFromList() throws MissingTaskNumberException {
         try {
             int taskNumber = Integer.parseInt(commandParts[1].trim()) - 1;
             return taskNumber;
@@ -148,6 +151,46 @@ public class Parser {
             throw new MissingTaskNumberException(horizontalLine
                     + "\r\n"
                     + "Oops! The task number cannot be missing :("
+                    + "\r\n"
+                    + horizontalLine);
+        }
+    }
+
+    public ArrayList<Task> getMatchingTasks(TaskList tasks) throws MissingTaskDescriptionException {
+        try {
+            ArrayList<Task> matchingTasks = new ArrayList<>();
+            boolean doesTaskMatch = false;
+            
+            String descriptionToFind = commandParts[1];;
+            
+            for (int i = 0; i < tasks.getSize(); i++) {
+                ArrayList<Task> listOfTasks = tasks.getTaskList();
+                Task task = listOfTasks.get(i);
+                String descriptionOfTask = task.getDescription();
+                String[] taskDescriptionParts = descriptionOfTask.split("\\s");
+                
+                for (int j = 0; j < taskDescriptionParts.length; j++) {
+                    if (!doesTaskMatch) {
+                        if (taskDescriptionParts[j].contains(descriptionToFind)) {
+                            doesTaskMatch = true;
+                            break;
+                        }
+                    }
+                }
+                
+                if (doesTaskMatch) {
+                    matchingTasks.add(task);
+                }
+                
+                doesTaskMatch = false;
+            }
+            return matchingTasks;
+            
+        } catch (Exception e) {
+
+            throw new MissingTaskDescriptionException(horizontalLine
+                    + "\r\n"
+                    + "Oops! The description cannot be empty :("
                     + "\r\n"
                     + horizontalLine);
         }

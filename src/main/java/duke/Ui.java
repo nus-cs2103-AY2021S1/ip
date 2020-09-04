@@ -128,11 +128,27 @@ public class Ui {
 //                + horizontalLine);
 //    }
     
-    public String commandNotRecognised() {
-        return horizontalLine
+//    public String commandNotRecognised() {
+//        return horizontalLine
+//                + "\r\n"
+//                + "Oops! I couldn't understand what you mean :("
+//                + "\r\n"
+//                + horizontalLine;
+//    }
+    
+    public void findTask(ArrayList<Task> matchingTasks) {
+
+        System.out.println(horizontalLine
                 + "\r\n"
-                + "Oops! I couldn't understand what you mean :("
-                + "\r\n"
-                + horizontalLine;
+                + "Here are the matching tasks in your list:"
+                + "\r\n");
+
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            System.out.println((i + 1) 
+                    + "." 
+                    + matchingTasks.get(i).toString());
+        }
+        
+        System.out.println(horizontalLine);
     }
 }
