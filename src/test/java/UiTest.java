@@ -1,4 +1,4 @@
-package main.java.duke;
+import duke.Ui;
 
 import org.junit.jupiter.api.Test;
 

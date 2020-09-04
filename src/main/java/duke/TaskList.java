@@ -56,7 +56,7 @@ public class TaskList {
      *
      * @param taskNum The position of task in task list.
      * @return The task that has been marked done.
-     * @throws DukeException If taskNum < 0 or exceeds total number of tasks in task list.
+     * @throws DukeException If taskNum less than 0 or exceeds total number of tasks in task list.
      */
     public Task doneTask(int taskNum) throws DukeException {
         if (taskNum > 0 && taskNum <= taskList.size()) {
@@ -73,7 +73,7 @@ public class TaskList {
      *
      * @param taskNum The position of task in task list.
      * @return The task that has been deleted.
-     * @throws DukeException If taskNum < 0 or exceeds total number of tasks in task list.
+     * @throws DukeException If taskNum less than 0 or exceeds total number of tasks in task list.
      */
     public Task removeTask(int taskNum) throws DukeException {
         if (taskNum > 0 && taskNum <= taskList.size()) {
@@ -88,6 +88,7 @@ public class TaskList {
     /**
      * Lists all current tasks in list that matches keyword.
      *
+     * @param keyword A string representing the keyword to be found in tasks.
      * @return A string representation of all the current tasks that matches keyword.
      */
     public String findMatchingTasks(String keyword) {
