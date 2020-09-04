@@ -10,7 +10,7 @@ import main.ui.Ui;
  * Represents the add deadline command.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.2
+ * @version v0.3
  * @since v0.1
  */
 public class DeadlineCommand implements Command {
@@ -36,6 +36,7 @@ public class DeadlineCommand implements Command {
     @Override
     public String execute(Ui ui, TaskList tasks) {
         tasks.add(deadline);
+
         return ui.printAddSuccess(deadline, tasks.size());
     }
 

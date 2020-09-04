@@ -104,7 +104,7 @@ public class Stuff extends Application {
         stuffImageView.setClip(new Circle(50, 50, 50));
 
         DialogBox stuffGreeting = DialogBox
-                .getStuffDialog(new Label(ui.printGreeting()), stuffImageView);
+                .getStuffDialog(new Label(ui.printGreetingMessage()), stuffImageView);
 
         stuffGreeting.setSpacing(10);
 
@@ -118,7 +118,7 @@ public class Stuff extends Application {
             stuffImageView.setClip(new Circle(50, 50, 50));
 
             DialogBox stuffDialog = DialogBox
-                    .getStuffDialog(new Label(ui.printError()), stuffImageView);
+                    .getStuffDialog(new Label(ui.printErrorMessage()), stuffImageView);
 
             stuffDialog.setSpacing(10);
 
@@ -134,11 +134,12 @@ public class Stuff extends Application {
     }
 
     private void handleUserInput() {
-        String input = userInput.getText();
+        String input = userInput.getText().trim();
         String output;
-        boolean hasCommand = true;
+        boolean isEmptyInput = input.equals("");
+        boolean hasCommandAfter = true;
 
-        if (input.equals("")) {
+        if (isEmptyInput) {
             return;
         }
 
@@ -157,7 +158,7 @@ public class Stuff extends Application {
         try {
             Command command = Parser.parse(splitInput);
             output = command.execute(ui, tasks);
-            hasCommand = command.hasCommandAfter();
+            hasCommandAfter = command.hasCommandAfter();
         } catch (StuffException e) {
             output = e.getMessage();
         }
@@ -188,12 +189,12 @@ public class Stuff extends Application {
                     dialogContainer.getChildren().set(size - 1, stuffDialog);
                 }));
 
-        if (!hasCommand) {
+        if (!hasCommandAfter) {
             try {
                 Storage.write(tasks);
             } catch (IOException e) {
                 DialogBox stuffError = DialogBox
-                        .getStuffDialog(new Label(ui.printError()), stuffImageView);
+                        .getStuffDialog(new Label(ui.printErrorMessage()), stuffImageView);
                 dialogContainer.getChildren().addAll(stuffError);
             }
 

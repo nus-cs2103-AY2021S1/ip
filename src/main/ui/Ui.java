@@ -7,7 +7,7 @@ import main.task.TaskList;
  * Represents the ui of stuff.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.1
+ * @version v0.3
  * @since v0.1
  */
 public class Ui {
@@ -24,7 +24,7 @@ public class Ui {
      * Returns the greeting message.
      * @return the greeting message.
      */
-    public String printGreeting() {
+    public String printGreetingMessage() {
         return "Hello! I'm Stuff\nWhat can I do for you?";
     }
 
@@ -35,8 +35,9 @@ public class Ui {
      */
     public String printTaskList(TaskList tasks) {
         StringBuilder listMessage = new StringBuilder();
+        boolean isEmptyList = tasks.size() == 0;
 
-        if (tasks.size() == 0) {
+        if (isEmptyList) {
             return "There are no tasks yet!";
         }
 
@@ -54,8 +55,9 @@ public class Ui {
      */
     public String printFoundList(TaskList tasks) {
         StringBuilder foundListMessage;
+        boolean isEmptyList = tasks.size() == 0;
 
-        if (tasks.size() == 0) {
+        if (isEmptyList) {
             return "There are no tasks found!";
         } else {
             foundListMessage = new StringBuilder(
@@ -76,7 +78,10 @@ public class Ui {
      * @return the string indicating a task has been added successfully.
      */
     public String printAddSuccess(Task task, int taskNum) {
+        assert(taskNum >= 0);
+
         boolean isSingular = taskNum == 1;
+
         return String.format("Got it. I've added this task:\n%s\n"
                         + "Now you have %d %s in the list.",
                 task, taskNum, isSingular ? "task" : "tasks");
@@ -98,7 +103,10 @@ public class Ui {
      * @return a string indicating a task has been removed successfully.
      */
     public String printRemoveSuccess(Task removed, int taskNum) {
+        assert(taskNum >= 0);
+
         boolean isSingular = taskNum == 1;
+
         return String.format("Noted. I've removed this task:\n%s\n"
                         + "Now you have %d %s in the list.",
                 removed, taskNum, isSingular ? "task" : "tasks");
@@ -108,7 +116,7 @@ public class Ui {
      * Returns a string with a generic error message.
      * @return a string with a generic error message.
      */
-    public String printError() {
+    public String printErrorMessage() {
         return "Seems like something went wrong!";
     }
 }

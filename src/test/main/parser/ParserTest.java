@@ -379,8 +379,8 @@ public class ParserTest {
         @Test
         @DisplayName("should generate find command object")
         public void parse_findCommand_altDataFindCommand() throws StuffException {
-            assertEquals(new FindCommand("test"),
-                    Parser.parse(new String[] { "find", "test" }));
+            assertEquals(new FindCommand("test test2 test3"),
+                    Parser.parse(new String[] { "find", "test test2 test3" }));
         }
 
         @Test
