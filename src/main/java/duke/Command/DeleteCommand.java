@@ -17,6 +17,11 @@ public class DeleteCommand extends Command {
 
     private final int index;
 
+    /**
+     * Constructs a <code>DeleteCommand</code> Object given index of the task to be deleted.
+     *
+     * @param index The 1-based index of the task to be deleted.
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }

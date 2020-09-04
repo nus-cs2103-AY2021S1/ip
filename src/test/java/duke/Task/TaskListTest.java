@@ -41,8 +41,8 @@ public class TaskListTest {
             taskList.get(1);
             fail();
         } catch (DukeException e) {
-            assertEquals("Task No.1 is not in your list. "
-                    + "Please enter a valid task ID.", e.getMessage());
+            assertEquals("task No.1 is not in your list. "
+                    + "Please enter a valid task ID!", e.getMessage());
         }
     }
 

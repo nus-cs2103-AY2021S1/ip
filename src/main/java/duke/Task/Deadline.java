@@ -1,8 +1,11 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a task with a deadline.
@@ -20,18 +23,25 @@ public class Deadline extends Task {
      * Constructs a <code>Deadline</code> Object to represent a task with a deadline.
      *
      * @param description The description of the deadline.
-     * @param by The deadline containing date and time.
+     * @param by The deadline which contains a date and time (e.g.
+     *           '01/01/2020 1800' means 1st January 2019, 6pm). The time
+     *           can be omitted. The date input must follow d/m/yyyy format
+     *           and the time must follow Hmm format if it exists.
+     * @throws DukeException If invalid time format is passed in.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
         this.by = by;
-
-        String[] dateTime = this.by.split(" ");
-        this.date = parseDate(dateTime[0]);
-        if (dateTime.length == 1) {
-            this.time = null;
-        } else {
-            this.time = parseTime(dateTime[1]);
+        try {
+            String[] dateTime = this.by.split(" ");
+            this.date = parseDate(dateTime[0]);
+            if (dateTime.length == 1) {
+                this.time = null;
+            } else {
+                this.time = parseTime(dateTime[1]);
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("invalid time/date format!");
         }
     }
 
@@ -68,6 +78,10 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Converts a deadline into serialized form (e.g.
+     * 'D | 0 | return book | 19/09/2020 1000').
+     */
     @Override
     public String serialize() {
         return String.format("D | %d | %s | %s", getStatusCode(), description, by);

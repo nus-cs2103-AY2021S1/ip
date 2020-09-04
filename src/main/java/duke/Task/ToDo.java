@@ -14,6 +14,10 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Converts a todo into serialized form (e.g.
+     * 'T | 1 | read book').
+     */
     @Override
     public String serialize() {
         return String.format("T | %d | %s", getStatusCode(), description);

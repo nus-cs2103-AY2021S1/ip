@@ -3,6 +3,7 @@ package duke.task;
 import duke.exception.DukeException;
 
 public abstract class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -36,11 +37,16 @@ public abstract class Task {
      */
     public void markAsDone() throws DukeException {
         if (isDone) {
-            throw new DukeException("This task is already completed!");
+            throw new DukeException("this task is already completed!");
         }
         this.isDone = true;
     }
 
+    /**
+     * Converts a task into serialized form.
+     *
+     * @return The serialized form of a task.
+     */
     public abstract String serialize();
 
     @Override

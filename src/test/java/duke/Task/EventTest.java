@@ -14,7 +14,7 @@ public class EventTest {
             new Event("Test", "02/01/2019-01/01/2019 0700-1500");
             fail();
         } catch (DukeException e) {
-            assertEquals("The start date cannot be after the end date.", e.getMessage());
+            assertEquals("the start date cannot be after the end date.", e.getMessage());
         }
     }
 
@@ -24,7 +24,7 @@ public class EventTest {
             new Event("Test", "01/01/2020 1400-0700");
             fail();
         } catch (DukeException e) {
-            assertEquals("The start time cannot be after the end time.", e.getMessage());
+            assertEquals("the start time cannot be after the end time.", e.getMessage());
         }
     }
 

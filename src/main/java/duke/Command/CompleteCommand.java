@@ -17,6 +17,11 @@ public class CompleteCommand extends Command {
 
     private final int index;
 
+    /**
+     * Constructs a <code>CompleteCommand</code> Object given index of the task to be completed.
+     *
+     * @param index The 1-based index of the task to be completed.
+     */
     public CompleteCommand(int index) {
         this.index = index;
     }

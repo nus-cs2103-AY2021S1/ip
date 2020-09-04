@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (duke.isExit()) {
+        if (input.equals("bye")) {
             Platform.exit();
         }
     }

@@ -41,7 +41,7 @@ public class TaskTest {
             task.markAsDone();
             fail();
         } catch (DukeException e) {
-            assertEquals("This task is already completed!",e.getMessage());
+            assertEquals("this task is already completed!",e.getMessage());
         }
     }
 
