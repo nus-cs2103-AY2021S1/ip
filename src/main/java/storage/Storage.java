@@ -1,8 +1,7 @@
 /**
  * Handles all Files input-output related functions.
- *
  */
-package king;
+package storage;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,12 +12,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import king.KingException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.TaskList;
 import tasks.ToDo;
-import ui.UI;
 
 public class Storage {
 
@@ -31,13 +30,14 @@ public class Storage {
      * the manipulation of asset in the filepath.
      *
      * @param filepath file path for an existing asset or to initialise a new asset.
+     * @throws KingException io exception generated from creating file.
      */
-    Storage(String filepath) {
+    public Storage(String filepath) throws KingException {
         this.filePath = filepath;
         String[] tokens = filepath.split("/");
         int pathLength = tokens.length;
-        if (pathLength == 0) {
-            System.out.println(UI.errorBox("Invalid file path"));
+        if (pathLength == 1) {
+            throw new KingException("Invalid file path: " + filepath, new Throwable("null path"));
         } else {
             String path = tokens[0];
             for (int i = 1; i < pathLength; i++) {
@@ -51,7 +51,7 @@ public class Storage {
                 data = new File(path);
                 data.createNewFile();
             } catch (IOException e) {
-                System.out.println(UI.errorBox("Error occurred while loading asset."));
+                throw new KingException("Error occurred while loading asset file: " + filepath, e);
             }
         }
     }
@@ -61,8 +61,9 @@ public class Storage {
      * Tasks in the asset into an ArrayList.
      *
      * @return ArrayList list of tasks
+     * @throws KingException exception generated from reading asset file.
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws KingException {
         ArrayList<Task> items = new ArrayList<>();
         try {
             FileReader input = new FileReader(data.getAbsoluteFile());
@@ -73,9 +74,9 @@ public class Storage {
             input.close();
             scanner.close();
         } catch (IOException e) {
-            System.out.println(UI.errorBox("Error occurred while reading asset."));
+            throw new KingException("Error occurred while reading asset.", e);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(UI.errorBox("Asset file is corrupted."));
+            throw new KingException("Asset file is corrupted.", e);
         }
         return items;
     }
@@ -106,9 +107,6 @@ public class Storage {
                 output.newLine();
             }
             output.close();
-        } catch (IOException e) {
-            System.out.println(UI.errorBox("Error was encountered when saving list to asset."));
-            return false;
         } catch (Exception e) {
             return false;
         }
@@ -120,10 +118,10 @@ public class Storage {
      * and returns the corresponding tasks found in
      * a taskList.
      *
-     * @param keywords keyword to search for.
+     * @param keywords keywords to search for.
      * @return TaskList containing the tasks with the keywords
      */
-    public TaskList find(String ... keywords) {
+    public TaskList find(String... keywords) throws KingException {
         TaskList tasksFound = new TaskList();
         try {
             Scanner scanner = new Scanner(data);
@@ -136,7 +134,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            System.out.println(UI.errorBox("Error was encountered when reading asset file."));
+            throw new KingException("Error was encountered when reading asset file: " + filePath, e);
         }
         return tasksFound;
     }

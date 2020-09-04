@@ -13,25 +13,35 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ui.controllers.MainWindow;
 
 public class Main extends Application {
 
-    private King king = new King("data/king.txt");
+    private King king;
 
     @Override
     public void start(Stage stage) {
         try {
+            king = new King("data/king.txt");
             stage.setTitle("King Bot");
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setKing(king);
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (KingException e) {
+            StackPane layout = new StackPane();
+            Text text = new Text(e.message);
+            layout.getChildren().add(text);
+            Scene scene = new Scene(layout, 500, 600);
+            stage.setScene(scene);
+        } finally {
+            stage.show();
         }
     }
 }

@@ -9,6 +9,7 @@ package king;
 import java.util.Scanner;
 
 import parser.Parser;
+import storage.Storage;
 import tasks.TaskList;
 import ui.UI;
 
@@ -22,8 +23,10 @@ public class King {
      * Creates the asset needed for the King program in the given file path.
      *
      * @param filepath file path to create the asset file.
+     * @throws KingException kingException generated from Storage.
+     * @see Storage
      */
-    King(String filepath) {
+    King(String filepath) throws KingException {
         storage = new Storage(filepath);
         taskList = new TaskList();
         taskList.addAll(storage.load());

@@ -13,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import king.King;
-import ui.DialogBox;
 import ui.UI;
 
 public class MainWindow extends AnchorPane {
@@ -31,9 +30,12 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/gunter.png"));
     private Image kingImage = new Image(this.getClass().getResourceAsStream("/images/king.jpg"));
 
+    /**
+     * initialise the MainWindow controller
+     */
     @FXML
     public void initialize() {
-        dialogContainer.getChildren().add(DialogBox.getKingDialog(UI.welcome(),kingImage));
+        dialogContainer.getChildren().add(DialogBox.getKingDialog(UI.welcome(), kingImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 

@@ -3,7 +3,7 @@
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-package ui;
+package ui.controllers;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -16,12 +16,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import ui.controllers.MainWindow;
 
 public class DialogBox extends HBox {
     @FXML

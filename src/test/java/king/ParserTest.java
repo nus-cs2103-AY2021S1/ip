@@ -1,5 +1,6 @@
 package king;
 
+import storage.Storage;
 import org.junit.jupiter.api.Test;
 import parser.Parser;
 import tasks.Event;
@@ -13,13 +14,13 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class ParserTest {
 
     TaskList tasklist = new TaskList();
-    Storage storage = new Storage("data/test/parser/parserTest.txt");
 
     @Test
-    public void parseTodoTest() {
-        String testCommand = "todo read book";
-        Parser parser = new Parser(storage, tasklist);
+    public void parseToDoTest() {
         try {
+            Storage storage = new Storage("data/test/parser/parserTest.txt");
+            String testCommand = "todo read book";
+            Parser parser = new Parser(storage, tasklist);
             String actual = parser.parse(testCommand);
             ToDo todo = new ToDo("read book");
             String expected = UI.addItemChatBox(todo.toString(), tasklist.size());
@@ -31,9 +32,10 @@ public class ParserTest {
 
     @Test
     public void parseEventTest() {
-        String testCommand = "event test /at 2pm";
-        Parser parser = new Parser(storage, tasklist);
         try {
+            Storage storage = new Storage("data/test/parser/parserTest.txt");
+            String testCommand = "event test /at 2pm";
+            Parser parser = new Parser(storage, tasklist);
             String actual = parser.parse(testCommand);
             Event testEvent = new Event("test", "2pm");
             String expected = UI.addItemChatBox(testEvent.toString(), tasklist.size());
