@@ -17,30 +17,32 @@ public class Parser {
      * Constructor for loading deadlines using switch and case
      * @param command   the user's command
      */
-    public static Command parse(String command) throws IOException {
+    public static Command parse(String input) throws IOException {
+        String command = input.split(" ")[0];
         switch (command) {
             case "bye":
                 return new ByeC();
             case "list":
                 return new ListC();
             case "done":
-                return new DoneC();
+                return new DoneC(input);
             case "todo":
-                return new TodoC();
+                return new TodoC(input);
             case "deadline":
-                return new DeadlineC();
+                return new DeadlineC(input);
             case "event":
-                return new EventC();
+                return new EventC(input);
             case "delete":
-                return new DeleteC();
+                return new DeleteC(input);
             case "on":
-                return new OnC();
+                return new OnC(input);
             case "by":
-                return new ByC();
+                return new ByC(input);
             case "find":
-                return new FindC();
+                return new FindC(input);
             default:
                 return new Command();
         }
     }
+
 }

@@ -10,11 +10,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TodoC extends Command {
+    private final String input;
+
+    public TodoC(String input) {
+        this.input = input;
+    }
 
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store){
         String result = "";
-        String name = ui.sc.nextLine();
+        String name = input.substring(5);
         try {
             if (name.isEmpty()) {
                 throw new DukeException("no task indicated");

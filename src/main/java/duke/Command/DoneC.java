@@ -12,10 +12,16 @@ import java.util.ArrayList;
 
 public class DoneC extends Command {
 
+    private final String input;
+
+    public DoneC(String input) {
+        this.input = input;
+    }
+
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
         String result = "";
-        int taskID = ui.sc.nextInt() - 1;
+        int taskID = Integer.parseInt( input.substring(5)) - 1;
         Task task = todoList.get(taskID);
         task.markAsDone();
         result += "Gratz, you finished this dawg :\n";

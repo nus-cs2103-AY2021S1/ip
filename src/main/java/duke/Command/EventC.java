@@ -10,11 +10,17 @@ import java.util.ArrayList;
 
 public class EventC extends Command {
 
+    private final String input;
+
+    public EventC(String input) {
+        this.input = input;
+    }
+
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
         String result = "";
         try {
-            String fullE = ui.sc.nextLine();
+            String fullE = input.substring(6) ;
             String eventName = fullE.split("/at")[0];
             LocalDate eventTime = LocalDate.parse(fullE.split("/at ")[1]);
             Event e = new Event(eventName, eventTime);

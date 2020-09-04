@@ -1,47 +1,39 @@
 package duke;
 
+import com.sun.source.util.TaskListener;
 import duke.Command.Command;
+import duke.task.Task;
+import javafx.application.Application;
 
 import java.io.IOException;
 import java.text.ParseException;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * The Duke class is the main class and drives the program
  */
 
-public class Duke {
+public class Duke{
+
     private duke.Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     /**
      * Constructor for a new driver system
-     * @param filePath  the file path of the schedule list
+//     * @param filePath  the file path of the schedule list
      */
-    public Duke(String filePath) throws IOException, ParseException {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = storage.load();
-    }
-
-
-    private void run() throws IOException, DukeException {
-        this.ui.showWelcome();
-        String output = "";
-        while (ui.sc.hasNext()) {
-            ui.showLine();
-            Command c = new Parser().parse(ui.sc.next());
-            try {
-                output = c.execute(ui, tasks, storage);
-                System.out.println(output);
-                if (output == "See you later alligator!") {
-                    System.exit(0);
-                }
-            } catch (DukeException e) {
-                output = e.getMessage();
-                System.out.println(output);
-            }
-            ui.showLine();
+        storage = new Storage("src/main/java/duke/text/todo.txt");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());;
         }
     }
 
@@ -56,7 +48,9 @@ public class Duke {
         return output;
     }
 
-    public static void main(String[] args) throws IOException, ParseException, DukeException {
-        new Duke("src/main/java/duke/resources/todo.txt").run();
+    public String getWelcomeMessage() {
+        return ui.showWelcome();
     }
+
 }
+

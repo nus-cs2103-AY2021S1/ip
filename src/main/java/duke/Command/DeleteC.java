@@ -12,10 +12,16 @@ import java.util.ArrayList;
 
 public class DeleteC extends Command {
 
+    private final String input;
+
+    public DeleteC(String input) {
+        this.input = input;
+    }
+
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
         String result = "";
-        int deleteID = ui.sc.nextInt() - 1;
+        int deleteID = Integer.parseInt( input.substring(7)) - 1;
         Task deleted = todoList.get(deleteID);
         todoList.deleteTask(deleteID);
         store.overwrite(todoList);

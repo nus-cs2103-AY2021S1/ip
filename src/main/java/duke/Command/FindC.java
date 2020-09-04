@@ -12,10 +12,16 @@ import java.util.ArrayList;
 
 public class FindC extends Command {
 
+    private final String input;
+
+    public FindC(String input) {
+        this.input = input;
+    }
+
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
         String result = "";
-        String keyword = ui.sc.nextLine();
+        String keyword = input.substring(5);
         int findCount = 0;
         System.out.println("Here are the matching tasks in your list:");
         for (Task found: todoList.todoList) {

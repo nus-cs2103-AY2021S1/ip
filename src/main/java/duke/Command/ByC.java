@@ -11,9 +11,15 @@ import java.util.ArrayList;
 
 public class ByC extends Command {
 
+    private final String input;
+
+    public ByC(String input) {
+        this.input = input;
+    }
+
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
-        LocalDate checkBy = LocalDate.parse(ui.sc.nextLine().trim());
+        LocalDate checkBy = LocalDate.parse(input.substring(3));
         String result = "";
         result += "By this day, you have: \n" ;
         int deadCount = 0;

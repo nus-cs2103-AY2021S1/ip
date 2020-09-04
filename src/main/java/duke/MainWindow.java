@@ -7,9 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -25,21 +22,19 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/resources/dukeImage.png"));
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/resources/userImage.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    /**
-     * Binds the scroll pane to the dialogContainer so as to set up the main layout.
-     * Start the dialog with a welcome message when the application is opened.
-     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage));
     }
 
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(d.getWelcomeMessage(), dukeImage)
+        );
     }
 
     /**
@@ -47,7 +42,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException, DukeException {
+    private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(

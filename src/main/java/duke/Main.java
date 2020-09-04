@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,11 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final Duke duke = new Duke("data/duke.txt");
-
-    public Main() throws IOException, ParseException {
-    }
-
+    private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {

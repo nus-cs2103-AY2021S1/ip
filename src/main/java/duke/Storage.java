@@ -43,7 +43,7 @@ public class Storage {
      * Loads a schedule file.
      * @return  a TaskList that has all the tasks in the schedule text file
      */
-    public TaskList load() throws IOException {
+    public ArrayList<Task> load() throws IOException {
         ArrayList<Task> todoList = new ArrayList<Task>();
         BufferedReader reader = new BufferedReader(new FileReader(this.filepath));
         String line = null;
@@ -57,7 +57,7 @@ public class Storage {
                 todoList.add(new Deadline(taskArr[1], taskArr[2], LocalDate.parse(taskArr[3])));
             }
         }
-        return new TaskList(todoList);
+        return todoList;
     }
 
     /**

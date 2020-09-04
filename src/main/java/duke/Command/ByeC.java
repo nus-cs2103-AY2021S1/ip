@@ -13,6 +13,7 @@ public class ByeC extends Command {
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store){
         String result = "See you later alligator!";
+        System.exit(0);
         return result;
     }
 }

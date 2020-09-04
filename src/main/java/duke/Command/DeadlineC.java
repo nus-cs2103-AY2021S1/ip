@@ -10,9 +10,15 @@ import java.util.ArrayList;
 
 public class DeadlineC extends Command {
 
+    private final String input;
+
+    public DeadlineC(String input) {
+        this.input = input;
+    }
+
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws DukeException {
-        String fullDL = ui.sc.nextLine();
+        String fullDL = input.substring(9);
         String result = "";
         try {
             String dlName = fullDL.split("/by")[0];
