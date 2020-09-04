@@ -12,7 +12,6 @@ import java.util.Objects;
  * to keep track of pending tasks.
  */
 public class TaskList implements Cloneable {
-    private static final Ui UI = new Ui();
     private static final String DONE_MESSAGE = "Good job! This task is now marked done:";
     private static final String DELETED_MESSAGE = "Alright! This task is now deleted:";
     private static final String LIST_HINT = "(Use 'list' command to see your updated list.)";
@@ -90,24 +89,18 @@ public class TaskList implements Cloneable {
      *
      * @param parser
      */
-    public void done(Parser parser) {
+    public String done(Parser parser) {
         try {
             Task targetTask = tasks.get(getTaskID(parser));
             if (targetTask.isDone) {
                 throw new AlreadyDoneIndexException("Task already done");
             }
-
             targetTask.markAsDone();
-
-            UI.displayStarLine();
-            System.out.println(DONE_MESSAGE);
-            System.out.println(targetTask);
-            UI.displayStarLine();
-
             decrementPendingTasks();
-
+            String toReturn = DONE_MESSAGE + "\n" + targetTask;
+            return Ui.displayMessage(toReturn);
         } catch (DukeException e) {
-            UI.displayMessage(e.toString());
+            return Ui.displayMessage(e.toString());
         }
     }
 
@@ -117,7 +110,7 @@ public class TaskList implements Cloneable {
      *
      * @param parser
      */
-    public void delete(Parser parser) {
+    public String delete(Parser parser) {
         try {
             Task targetTask = tasks.get(getTaskID(parser));
             tasks.remove(targetTask);
@@ -126,12 +119,11 @@ public class TaskList implements Cloneable {
                 decrementPendingTasks();
             }
 
-            UI.displayStarLine();
-            System.out.println(DELETED_MESSAGE);
-            System.out.println(targetTask);
-            UI.displayStarLine();
+            String toReturn = DELETED_MESSAGE + "\n" + targetTask;
+
+            return Ui.displayMessage(toReturn);
         } catch (DukeException e) {
-            UI.displayMessage(e.toString());
+            return Ui.displayMessage(e.toString());
         }
     }
 
@@ -141,7 +133,7 @@ public class TaskList implements Cloneable {
      *
      * @param parser
      */
-    public void add(Parser parser) {
+    public String add(Parser parser) {
         try {
             String commandWord = parser.getCommandWord();
             String taskName = parser.getTaskName();
@@ -152,14 +144,14 @@ public class TaskList implements Cloneable {
             int size = tasks.size();
             incrementPendingTasks();
 
-            UI.displayStarLine();
-            System.out.println("'" + taskName + "' added to list!");
-            System.out.println(tasks.get(size - 1));
-            System.out.println("\nYou now have " + size + " task(s) in your list.\n");
-            System.out.println(LIST_HINT);
-            UI.displayStarLine();
+            String toReturn = "'" + taskName + "' added to list!\n"
+                    + tasks.get(size - 1) + "\n"
+                    + "You now have " + size + " task(s) in your list.\n"
+                    + LIST_HINT;
+
+            return Ui.displayMessage(toReturn);
         } catch (DukeException e) {
-            UI.displayMessage(e.toString());
+            return Ui.displayMessage(e.toString());
         }
     }
 
@@ -169,22 +161,22 @@ public class TaskList implements Cloneable {
      *
      * @param parser
      */
-    public void find(Parser parser) {
+    public String find(Parser parser) {
         List<Task> matches = getMatchingTask(parser.comparator);
 
-        UI.displayStarLine();
         if (matches.isEmpty()) {
-            System.out.println(NO_MATCH);
+            return Ui.displayMessage(NO_MATCH);
         } else {
             int count = 1;
+            String toReturn = String.format("Found %d match(es) for '%s':", matches.size(), parser.comparator);
 
-            System.out.println(String.format("Found %d match(es) for '%s':", matches.size(), parser.comparator));
             for (Task task : matches) {
-                System.out.println(String.format("   %d. %s", count, task.toString()));
+                toReturn += String.format("   %d. %s", count, task.toString());
                 count++;
             }
+
+            return Ui.displayMessage(toReturn);
         }
-        UI.displayStarLine();
     }
 
     /**
