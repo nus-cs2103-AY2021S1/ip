@@ -11,16 +11,16 @@ public class EventTest {
     @Test
     public void testMarkAsDone() {
         event.markAsDone();
-        assertEquals("[E][✓] Lunch with friends (at: Feb 23 2020)", event.toString());
+        assertEquals("[E][\u2713] Lunch with friends (at: Feb 23 2020)", event.toString());
 
         event2.markAsDone();
-        assertEquals("[E][✓] Meeting with prof (at: May 23 2019)", event2.toString());
+        assertEquals("[E][\u2713] Meeting with prof (at: May 23 2019)", event2.toString());
     }
 
     @Test
     public void testToString() {
-        assertEquals("[E][✘] Lunch with friends (at: Feb 23 2020)", event.toString());
-        assertEquals("[E][✓] Meeting with prof (at: May 23 2019)", event2.toString());
+        assertEquals("[E][\u2718] Lunch with friends (at: Feb 23 2020)", event.toString());
+        assertEquals("[E][\u2713] Meeting with prof (at: May 23 2019)", event2.toString());
     }
 
     @Test
