@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> listOfTasks;
+    private ArrayList<Task> keyList;
     private TaskStore storage;
 
     public TaskList(ArrayList<Task> listOfTasks, TaskStore storage) {
@@ -21,6 +22,10 @@ public class TaskList {
 
     public ArrayList<Task> getList() {
         return listOfTasks;
+    }
+
+    public ArrayList<Task> getKeyList() {
+        return keyList;
     }
 
     /**
@@ -158,7 +163,7 @@ public class TaskList {
      * @param keyword The word that the user wants to use to find related tasks.
      */
     public void findTask(String keyword) {
-        ArrayList<Task> keyList = new ArrayList<>();
+        keyList = new ArrayList<>();
         for (int i = 0; i < listOfTasks.size(); i++) {
             Task tempTask = listOfTasks.get(i);
             if (tempTask.getTask().contains(keyword)) {
