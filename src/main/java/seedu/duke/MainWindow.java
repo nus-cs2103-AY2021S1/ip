@@ -35,9 +35,7 @@ public class MainWindow extends BorderPane {
         userInput.setOnAction((event) -> {
             String input = userInput.getText();
             if (!input.trim().equals("")) {
-                dialogContainer.getChildren().addAll(
-                        getInputLabel(input),
-                        getResponseLabel(input));
+                dialogContainer.getChildren().addAll(getInputLabel(input), getResponseLabel(input));
             }
             userInput.clear();
         });
