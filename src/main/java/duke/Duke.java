@@ -3,7 +3,12 @@ package duke;
 import java.io.File;
 import java.util.Scanner;
 
-public class Duke {
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+public class Duke extends Application {
     private TaskList tasks;
 
     public Duke() {
@@ -54,6 +59,19 @@ public class Duke {
     }
 
     /**
+     * start() initiates the whole staging process.
+     * @param stage Stage object
+     */
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**
      * main() reads prevTasks.txt file and create
      * a Duke object with the getTasks() previously saved
      * Invokes op() function
@@ -79,4 +97,5 @@ public class Duke {
         hal9000.op();
         TaskStorage.saveTask(prevTasks, hal9000.getTasks());
     }
+
 }
