@@ -47,6 +47,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
+            assert(dukeState == DukeState.RUNNING);
             Command cmd = Parser.parseInput(input);
             if (cmd.isExit()) {
                 dukeState = DukeState.EXITED;
