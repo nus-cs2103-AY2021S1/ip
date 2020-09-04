@@ -10,7 +10,7 @@ public class EventTest {
     @Test
     public void event() throws EmptyDescriptionException, EmptyDateException {
         Event event = new Event("event project meeting /at 2020-08-30");
-        String eventTime = event.getEventTime();
-        assertEquals("Aug 30 2020", eventTime);
+        String encodedEvent = event.encode();
+        assertEquals("E | 0 | project meeting | 2020-08-30", encodedEvent);
     }
 }
