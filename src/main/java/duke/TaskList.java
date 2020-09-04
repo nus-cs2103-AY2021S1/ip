@@ -4,6 +4,8 @@ import java.util.List;
 
 import exception.DeleteOutOfBoundException;
 import exception.DoneOutOfBoundException;
+import exception.DukeException;
+import exception.TaskExistException;
 
 
 /**
@@ -69,7 +71,10 @@ public class TaskList {
      * A function to add a task to the list.
      * @param task task to be added to the list.
      */
-    public void addTask(Task task) {
+    public void addTask(Task task) throws DukeException {
+        if(this.taskList.contains(task)){
+            throw new TaskExistException();
+        }
         this.taskList.add(task);
     }
 

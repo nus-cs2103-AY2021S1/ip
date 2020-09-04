@@ -13,6 +13,7 @@ import duke.TaskList;
 import duke.Ui;
 import exception.DukeException;
 import exception.EventException;
+import exception.TaskExistException;
 import exception.WrongFormatException;
 
 
@@ -53,6 +54,8 @@ public class AddEventCommand extends Command {
             throw new EventException();
         } catch (DateTimeParseException e) {
             throw new WrongFormatException();
+        } catch (TaskExistException e) {
+            throw e;
         }
     }
 

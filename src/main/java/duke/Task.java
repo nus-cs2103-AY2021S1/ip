@@ -1,5 +1,9 @@
 package duke;
 
+import command.AddDeadlineCommand;
+
+import java.util.Arrays;
+
 /**
  * Represents the task to be saved in the list.
  */
@@ -59,5 +63,21 @@ public class Task {
      */
     public void changeIsDone() {
         this.isDone = !this.isDone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Task) {
+            Task cur = (Task) o;
+            if (cur.description.equals(this.description) && cur.isDone ==this.isDone)  {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }

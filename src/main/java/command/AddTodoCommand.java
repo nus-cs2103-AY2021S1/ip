@@ -9,7 +9,7 @@ import duke.TaskList;
 import duke.Ui;
 import exception.DukeException;
 import exception.TaskException;
-
+import exception.TaskExistException;
 
 
 /**
@@ -40,6 +40,8 @@ public class AddTodoCommand extends Command {
             return e.toString();
         } catch (IndexOutOfBoundsException e) {
             throw new TaskException();
+        } catch (TaskExistException e) {
+            throw e;
         }
     }
 

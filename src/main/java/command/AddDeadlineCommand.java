@@ -13,6 +13,7 @@ import duke.TaskList;
 import duke.Ui;
 import exception.DeadlineException;
 import exception.DukeException;
+import exception.TaskExistException;
 import exception.WrongFormatException;
 
 
@@ -53,6 +54,8 @@ public class AddDeadlineCommand extends Command {
             throw new DeadlineException();
         } catch (DateTimeParseException e) {
             throw new WrongFormatException();
+        } catch (TaskExistException e) {
+            throw e;
         }
     }
 
