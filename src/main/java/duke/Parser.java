@@ -46,7 +46,7 @@ public class Parser {
             return new AddTodoCommand(parsed);
         } else if (parsed[0].equals(BYE_COMMAND)) {
             return new ExitCommand(parsed);
-        } else if (parsed[0].equals("find")) {
+        } else if (parsed[0].equals(FIND_COMMAND)) {
             return new FindCommand(parsed);
         } else {
             return new UnknownCommand(parsed);

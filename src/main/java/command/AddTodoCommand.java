@@ -31,6 +31,7 @@ public class AddTodoCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task temp = new Task(commands[1]);
+            assert temp != null : "Task cannot be empty";
             tasks.addTask(temp);
             String s = "Added new task " + temp;
             storage.saveFile(tasks);
