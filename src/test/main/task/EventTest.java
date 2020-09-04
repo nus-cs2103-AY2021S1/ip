@@ -40,14 +40,14 @@ public class EventTest {
         @Test
         @DisplayName("should return a string representation of the event instance")
         public void toString_eventTask_string() {
-            assertEquals("[E][\u2718] task 1 (at: Monday, 06 Dec 1993, 10:10AM)",
+            assertEquals("[E][\u2718] task 1\n(at: Monday, 06 Dec 1993, 10:10AM)",
                     EVENT_ONE.toString());
         }
 
         @Test
         @DisplayName("should return a string representation of an alternate event instance")
         public void toString_altEventTask_altString() {
-            assertEquals("[E][\u2713] task 2 (at: Saturday, 13 Jan 4198, 11:39PM)",
+            assertEquals("[E][\u2713] task 2\n(at: Saturday, 13 Jan 4198, 11:39PM)",
                     EVENT_TWO.toString());
         }
     }

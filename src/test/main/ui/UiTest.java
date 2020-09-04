@@ -49,9 +49,9 @@ public class UiTest {
             tasks.add(new Deadline("task 2", "1993-12-06T10:10", true));
             tasks.add(new Event("task 3",
                     LocalDateTime.of(3121, 12, 29, 23, 54)));
-            assertEquals("1.[T][\u2718] task 1\n2.[D][\u2713] task 2 "
+            assertEquals("1. [T][\u2718] task 1\n2. [D][\u2713] task 2\n"
                             + "(by: Monday, 06 Dec 1993, 10:10AM)\n"
-                            + "3.[E][\u2718] task 3 (at: Thursday, 29 Dec 3121,"
+                            + "3. [E][\u2718] task 3\n(at: Thursday, 29 Dec 3121,"
                             + " 11:54PM)\n",
                     ui.printTaskList(tasks));
         }
@@ -61,7 +61,7 @@ public class UiTest {
         public void printTaskList_altTaskList_messageWithListOfTasks() {
             TaskList tasks = new TaskList();
             tasks.add(new Todo("test task"));
-            assertEquals("1.[T][\u2718] test task\n", ui.printTaskList(tasks));
+            assertEquals("1. [T][\u2718] test task\n", ui.printTaskList(tasks));
         }
 
         @Test
@@ -84,9 +84,9 @@ public class UiTest {
             tasks.add(new Event("task 3",
                     LocalDateTime.of(3121, 12, 29, 23, 54)));
             assertEquals("Here are the matching tasks in your list:\n"
-                            + "1.[T][\u2718] task 1\n2.[D][\u2713] task 2 "
+                            + "1. [T][\u2718] task 1\n2. [D][\u2713] task 2\n"
                             + "(by: Monday, 06 Dec 1993, 10:10AM)\n"
-                            + "3.[E][\u2718] task 3 (at: Thursday, 29 Dec 3121,"
+                            + "3. [E][\u2718] task 3\n(at: Thursday, 29 Dec 3121,"
                             + " 11:54PM)\n",
                     ui.printFoundList(tasks));
         }
@@ -97,7 +97,7 @@ public class UiTest {
             TaskList tasks = new TaskList();
             tasks.add(new Todo("test task"));
             assertEquals("Here are the matching tasks in your list:\n"
-                            + "1.[T][\u2718] test task\n",
+                            + "1. [T][\u2718] test task\n",
                     ui.printFoundList(tasks));
         }
 
@@ -123,7 +123,7 @@ public class UiTest {
         @Test
         @DisplayName("should return message indicating deadline has been added")
         public void printAddSuccess_deadline_addSuccessMessage() {
-            assertEquals("Got it. I've added this task:\n[D][\u2713] task 2 "
+            assertEquals("Got it. I've added this task:\n[D][\u2713] task 2\n"
                             + "(by: Monday, 06 Dec 1993, 10:10AM)\n"
                             + "Now you have 0 tasks in the list.",
                     ui.printAddSuccess(
@@ -134,7 +134,7 @@ public class UiTest {
         @Test
         @DisplayName("should return message indicating event has been added")
         public void printAddSuccess_event_addSuccessMessage() {
-            assertEquals("Got it. I've added this task:\n[E][\u2718] task 3 "
+            assertEquals("Got it. I've added this task:\n[E][\u2718] task 3\n"
                             + "(at: Thursday, 29 Dec 3121, 11:54PM)\n"
                             + "Now you have 5 tasks in the list.",
                     ui.printAddSuccess(new Event("task 3",
@@ -164,7 +164,7 @@ public class UiTest {
         @Test
         @DisplayName("should return message indicating deadline has been removed")
         public void printRemoveSuccess_deadline_addSuccessMessage() {
-            assertEquals("Noted. I've removed this task:\n[D][\u2713] task 2 "
+            assertEquals("Noted. I've removed this task:\n[D][\u2713] task 2\n"
                             + "(by: Monday, 06 Dec 1993, 10:10AM)\n"
                             + "Now you have 0 tasks in the list.",
                     ui.printRemoveSuccess(
@@ -174,7 +174,7 @@ public class UiTest {
         @Test
         @DisplayName("should return message indicating event has been removed")
         public void printRemoveSuccess_event_addSuccessMessage() {
-            assertEquals("Noted. I've removed this task:\n[E][\u2718] task 3 "
+            assertEquals("Noted. I've removed this task:\n[E][\u2718] task 3\n"
                             + "(at: Thursday, 29 Dec 3121, 11:54PM)\n"
                             + "Now you have 5 tasks in the list.",
                     ui.printRemoveSuccess(new Event("task 3",
@@ -204,7 +204,7 @@ public class UiTest {
         @DisplayName("should return message indicating deadline as done")
         public void printDoneSuccess_deadline_doneSuccessMessage() {
             assertEquals("Nice! I've marked this task as done:\n"
-                            + "[D][\u2713] task 2 (by: Monday, 06 Dec 1993, 10:10AM)",
+                            + "[D][\u2713] task 2\n(by: Monday, 06 Dec 1993, 10:10AM)",
                     ui.printDoneSuccess(
                             new Deadline("task 2", "1993-12-06T10:10", true)));
         }
@@ -213,7 +213,7 @@ public class UiTest {
         @DisplayName("should return message indicating event as done")
         public void printDoneSuccess_event_doneSuccessMessage() {
             assertEquals("Nice! I've marked this task as done:\n"
-                            + "[E][\u2718] task 3 (at: Thursday, 29 Dec 3121, 11:54PM)",
+                            + "[E][\u2718] task 3\n(at: Thursday, 29 Dec 3121, 11:54PM)",
                     ui.printDoneSuccess(new Event("task 3",
                             LocalDateTime.of(3121, 12, 29, 23, 54))));
         }

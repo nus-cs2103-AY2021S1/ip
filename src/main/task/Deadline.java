@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents tasks with a deadline.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.2
+ * @version v0.3
  * @since v0.1
  */
 public class Deadline extends Task {
@@ -49,7 +49,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(),
+        return String.format("[D]%s\n(by: %s)", super.toString(),
                 time.format(FORMATTER));
     }
 
