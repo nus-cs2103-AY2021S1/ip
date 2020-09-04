@@ -13,10 +13,6 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
 
-    private static final String greetMessage =
-            "==================================="
-            + "Hi, my name is Duke.\nWhat can I do for you?";
-
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -28,8 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Initialises the the chat bot.
@@ -63,7 +59,7 @@ public class MainWindow extends AnchorPane {
      * Prints out the greeting message to the user.
      */
     private void printIntro() {
-        DialogBox intro = DialogBox.getDukeDialog(greetMessage,
+        DialogBox intro = DialogBox.getDukeDialog(Ui.GREET_MESSAGE,
                 new Image(this.getClass().getResourceAsStream("/images/DaDuke.png")));
         dialogContainer.getChildren().addAll(intro);
     }

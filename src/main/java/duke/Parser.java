@@ -30,6 +30,7 @@ public class Parser {
 
     /**
      * Parses the user input to determine what command the user intended to run.
+     *
      * @param input String representing user input.
      * @return A Command object.
      * @throws DukeEmptyArgumentException If argument of done and delete commands are empty.
@@ -40,31 +41,34 @@ public class Parser {
         assert input != null: "String object cannot be null";
         String command = input.strip();
         String[] commandWordArray = command.split(SPACE);
-        if (command.equals(BYE)) {
+        switch (commandWordArray[0]) {
+        case BYE:
+            if (commandWordArray.length != 1) {
+                return new UnknownCommand(command);
+            }
             return new ByeCommand(command, true);
-        }
-        if (command.equals(LIST)) {
+        case LIST:
+            if (commandWordArray.length != 1) {
+                return new UnknownCommand(command);
+            }
             return new ListCommand(command);
-        }
-        if (commandWordArray[0].equals(DONE)) {
+        case DONE:
             if (command.substring(commandWordArray[0].length())
                     .isBlank()) {
                 throw new DukeEmptyArgumentException(DONE);
             }
             return new DoneCommand(commandWordArray[0],
                     commandWordArray[1]);
-        }
-        if (commandWordArray[0].equals(DELETE)) {
+        case DELETE:
             if (command.substring(commandWordArray[0].length())
                     .isBlank()) {
                 throw new DukeEmptyArgumentException(DELETE);
             }
             return new DeleteCommand(commandWordArray[0],
                     commandWordArray[1]);
-        }
-        if (commandWordArray[0].equals(TODO)
-                || commandWordArray[0].equals(DEADLINE)
-                || commandWordArray[0].equals(EVENT)) {
+        case TODO:
+        case DEADLINE:
+        case EVENT:
             if (command.substring(commandWordArray[0].length())
                     .isBlank()) {
                 throw new DukeEmptyDescriptionException(commandWordArray[0]);
@@ -72,15 +76,15 @@ public class Parser {
             return new AddCommand(commandWordArray[0],
                     command.substring(commandWordArray[0].length()
                             + SLASH_INDEX));
-        }
-        if (commandWordArray[0].equals(FIND)) {
+        case FIND:
             if (command.substring(commandWordArray[0].length())
                     .isBlank()) {
-                throw new DukeEmptyArgumentException(DONE);
+                throw new DukeEmptyArgumentException(FIND);
             }
             return new FindCommand(commandWordArray[0],
                     commandWordArray[1]);
+        default:
+            return new UnknownCommand(command);
         }
-        return new UnknownCommand(command);
     }
 }

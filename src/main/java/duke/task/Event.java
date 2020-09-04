@@ -8,38 +8,38 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected LocalDateTime at;
+    protected LocalDateTime dateTime;
     private String originalDate;
 
     /**
      * Class constructor without extra arguments.
      * @param description String description of event task.
-     * @param at String argument for date of event task.
+     * @param dateTime String argument for date of event task.
      */
-    public Event(String description, String at) {
+    public Event(String description, String dateTime) {
         super(description);
-        this.at = LocalDateTime.parse(at,
+        this.dateTime = LocalDateTime.parse(dateTime,
                 DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
-        originalDate = at;
+        originalDate = dateTime;
     }
 
     /**
      * Class constructor with extra boolean argument.
      * @param description String description of event task.
      * @param isDone Boolean representing whether task is done.
-     * @param at String argument for date of event task.
+     * @param dateTime String argument for date of event task.
      */
-    public Event(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, String dateTime) {
         super(description, isDone);
-        this.at = LocalDateTime.parse(at,
+        this.dateTime = LocalDateTime.parse(dateTime,
                 DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
-        originalDate = at;
+        originalDate = dateTime;
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (by: "
-                + at.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a"))
+                + dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a"))
                 + ")";
     }
 
