@@ -14,7 +14,7 @@ import exception.DukeException;
 
 public class DoneCommandTest {
     @Test
-    public void testExecute_doneOutOfBoundExceptionThrown() {
+    public void testExecute_doneOutOfBound_exceptionThrown() {
         String[] command = {"done", "100"};
         DoneCommand test = new DoneCommand(command);
         try {
@@ -28,7 +28,7 @@ public class DoneCommandTest {
     }
 
     @Test
-    public void testExecute_doneUnknownExceptionThrown() {
+    public void testExecute_doneUnknown_exceptionThrown() {
         String[] command = {"done", "asdf"};
         DoneCommand test = new DoneCommand(command);
         try {

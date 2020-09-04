@@ -27,7 +27,7 @@ public class AddDeadlineCommandTest {
     }
 
     @Test
-    public void testExecute_wrongFormatExceptionThrown() {
+    public void testExecute_wrongFormat_exceptionThrown() {
         String[] command = {"deadline", "return book /by invalide"};
         AddDeadlineCommand test = new AddDeadlineCommand(command);
         try {

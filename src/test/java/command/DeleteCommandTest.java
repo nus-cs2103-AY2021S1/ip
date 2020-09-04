@@ -14,7 +14,7 @@ import exception.DukeException;
 
 public class DeleteCommandTest {
     @Test
-    public void testExecute_deleteOutOfBoundExceptionThrown() {
+    public void testExecute_deleteOutOfBound_exceptionThrown() {
         String[] command = {"delete", "100"};
         DeleteCommand test = new DeleteCommand(command);
         try {
@@ -28,7 +28,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void testExecute_deleteUnknownExceptionThrown() {
+    public void testExecute_deleteUnknown_exceptionThrown() {
         String[] command = {"delete", "asdf"};
         DeleteCommand test = new DeleteCommand(command);
         try {

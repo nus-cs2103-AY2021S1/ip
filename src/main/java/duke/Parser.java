@@ -30,7 +30,7 @@ public class Parser {
      * @param fullCommand The input of the user which is saved in String.
      * @return Command which is grouped into different command.
      */
-    public static Command parse (String fullCommand) {
+    public static Command parse(String fullCommand) {
         String[] parsed = fullCommand.split(" " , 2);
         if (parsed[0].equals(LIST_COMMAND)) {
             return new PrintListCommand(parsed);
