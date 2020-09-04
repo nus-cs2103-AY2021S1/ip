@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class EditCommand extends Command {
     private CommandType commandType;
     private int index;

@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Ui;
+import duke.Storage;
+
+import duke.task.TaskList;
+
 public class ExitCommand extends Command {
     private CommandType commandType;
 

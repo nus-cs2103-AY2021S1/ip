@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeException extends Exception {
     public static final DukeException INVALID_COMMAND_EXCEPTION = new DukeException(
             "I'm sorry, but I don't know what that means :-(");

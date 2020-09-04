@@ -1,3 +1,17 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.command.AddCommand;
+import duke.command.ExitCommand;
+import duke.command.QueryCommand;
+import duke.command.EditCommand;
+
 import java.util.Scanner;
 
 public class Parser {
