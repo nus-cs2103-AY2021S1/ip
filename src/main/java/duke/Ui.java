@@ -62,7 +62,7 @@ public class Ui {
      */
     public String deleteMessage(String task, int size) {
         return messageFormatter("Noted. I've removed this task:\n",
-                task, "\nNow you have ", String.valueOf(size), " tasks in the list.");
+                task, "\nNow you have ", Integer.toString(size), " tasks in the list.");
     }
 
     /**
@@ -73,7 +73,7 @@ public class Ui {
      */
     public String taskMessage(String task, int size) {
         return messageFormatter("Got it. I've added this task:\n", task,
-                "\nNow you have ", String.valueOf(size), " tasks in the list.");
+                "\nNow you have ", Integer.toString(size), " tasks in the list.");
     }
 
     /**
@@ -86,7 +86,7 @@ public class Ui {
         if (size == 0) {
             return messageFormatter("There are not matching task in your list!");
         } else {
-            return messageFormatter("There are ", String.valueOf(size),
+            return messageFormatter("There are ", Integer.toString(size),
                     " matching tasks in your list:\n", taskList);
         }
     }
@@ -95,7 +95,7 @@ public class Ui {
      * Prints the list of commands available in the duke program.
      */
     public String helpMessage() {
-        String helpMessage = messageFormatter("Here is the list of available commands:\n",
+        return messageFormatter("Here is the list of available commands:\n",
                 "todo <task> : Adds a todo task to your task list.\n",
                 "event <task> /at <YYYY-MM-DD HH:MM> : Adds a event with a date to your task list.\n",
                 "deadline <task> /at <YYYY-MM-DD HH:MM> : Adds a deadline task with a date to your task list.\n",
@@ -105,9 +105,17 @@ public class Ui {
                 "find <keyword> : Finds and shows a list of commands which contains the input keyword.\n",
                 "list : Displays the list of items in your task list.\n",
                 "help : Displays the list of available commands in duke.\n",
-                "bye : Exits the duke bot\n"
+                "bye : Exits the duke bot.\n"
                 );
-        return helpMessage;
     }
 
+    public String reminderMessage(int numberOfDays, String taskInString, int size) {
+        if (size == 0) {
+            return messageFormatter("There are no task that is due within ",
+                    Integer.toString(size), " days.");
+        } else {
+            return messageFormatter("Here is a list of task that is due within ",
+                    Integer.toString(numberOfDays), " days:\n", taskInString);
+        }
+    }
 }

@@ -1,8 +1,11 @@
 package duke;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import duke.exceptions.TaskCompletedException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
 import duke.tasks.Task;
 
 /**
@@ -10,7 +13,7 @@ import duke.tasks.Task;
  * user's task list.
  */
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
@@ -60,6 +63,38 @@ public class TaskList {
     }
 
     /**
+     * Finds task in the task list that is within input number of days from the current date.
+     *
+     * @param numberOfDays Input number of day from the user.
+     * @return TaskList of the matching tasks.
+     */
+    public TaskList findUpcomingEvents(int numberOfDays) {
+        ArrayList<Task> upcomingTask = new ArrayList<>();
+        for (Task task: taskList) {
+            if (task instanceof Event) {
+                Event currentTask = (Event) task;
+                LocalDateTime currentTime = LocalDateTime.now();
+                LocalDateTime limitTime = currentTime.plusDays(numberOfDays).withHour(23).withMinute(59);
+                LocalDateTime activityTime = currentTask.getActivityTime();
+                if (activityTime.isBefore(limitTime) && activityTime.isAfter(currentTime)) {
+                    upcomingTask.add(task);
+                }
+            }
+            if (task instanceof Deadline) {
+                Deadline currentTask = (Deadline) task;
+                LocalDateTime currentTime = LocalDateTime.now();
+                LocalDateTime limitTime = currentTime.plusDays(numberOfDays).withHour(23).withMinute(59);
+                LocalDateTime activityTime = currentTask.getActivityTime();
+                if (activityTime.isBefore(limitTime) && activityTime.isAfter(currentTime)) {
+                    upcomingTask.add(task);
+                }
+            }
+        }
+
+        return new TaskList(upcomingTask);
+    }
+
+    /**
      * Prints out all items in the list and its corresponding status.
      *
      * @return String of the task.
@@ -75,4 +110,5 @@ public class TaskList {
         }
         return string.toString();
     }
+
 }

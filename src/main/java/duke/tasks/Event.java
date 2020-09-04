@@ -26,8 +26,12 @@ public class Event extends Task {
         this.activityTime = activityTime;
     }
 
-    public String getBy() {
+    public String getActivityTimeInString() {
         return Time.convertTimeToSave(activityTime);
+    }
+
+    public LocalDateTime getActivityTime() {
+        return activityTime;
     }
 
     @Override
