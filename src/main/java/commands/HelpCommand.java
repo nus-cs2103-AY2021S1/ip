@@ -17,6 +17,7 @@ public class HelpCommand extends Command {
      */
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) {
+        assert ui != null : "Null UI";
         ui.setMessagePrintHelp();
     }
 }
