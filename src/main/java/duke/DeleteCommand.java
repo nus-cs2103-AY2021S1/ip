@@ -5,7 +5,7 @@ package duke;
  */
 
 public class DeleteCommand extends Command {
-    /** duke.Command details */
+    /** duke.Command details in the form [TYPE, INFORMATION] */
     private final String[] instructions;
 
     /**
@@ -25,10 +25,11 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (instructions.length < 2) {
-            return ui.incompleteInstructionError();
+            return ui.incompleteInstructionError(); // User did not provide index of task for deletion.
         }
+
         try {
-            int index = Integer.parseInt(instructions[1]) - 1;
+            int index = Integer.parseInt(instructions[1]) - 1; // instructions[1] contains the index of task.
             if (index >= tasks.getSize()) {
                 return ui.deleteError();
             } else {

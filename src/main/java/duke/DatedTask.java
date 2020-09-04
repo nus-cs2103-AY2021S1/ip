@@ -24,11 +24,11 @@ public abstract class DatedTask extends Task {
     /**
      * Constructor for Dated Tasks.
      * @param name Description of duke.Task.
-     * @param completed State of completion of duke.Task.
+     * @param isCompleted State of completion of duke.Task.
      * @param date Date of duke.Task.
      */
-    public DatedTask(String name, boolean completed, LocalDate date) {
-        super(name, completed);
+    public DatedTask(String name, boolean isCompleted, LocalDate date) {
+        super(name, isCompleted);
         this.date = date;
     }
 
@@ -38,6 +38,6 @@ public abstract class DatedTask extends Task {
      */
     @Override
     public String format() {
-        return super.format() + getDelimiter() + this.date.format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+        return super.format() + getDelimiter() + this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }

@@ -5,7 +5,7 @@ package duke;
  */
 
 public class AddTodoCommand extends Command {
-    /** duke.Command details */
+    /** duke.Command details in the form [TYPE, INFORMATION] */
     private final String[] instructions;
 
     /**

@@ -60,6 +60,8 @@ public class Storage {
         try {
             String[] directories = filepath.split("/");
             StringBuilder path = new StringBuilder();
+
+            // Creates directories if they don't exist yet.
             for (int i = 0; i < directories.length - 1; i++) {
                 path.append(directories[i]).append("/");
                 File directory = new File(path.toString());
@@ -70,38 +72,41 @@ public class Storage {
                     }
                 }
             }
+
             File file = new File(filepath);
-            if (file.exists()) {
-                Scanner fr = new Scanner(file);
-                while (fr.hasNextLine()) {
-                    String ln = fr.nextLine();
-                    String[] taskInfo = ln.split(Task.getEscapedSaveDelimiter());
-                    TaskSymbols type = TaskSymbols.valueOf("SYMBOL_" + taskInfo[0]);
-                    switch(type) {
-                    case SYMBOL_T:
-                        assert taskInfo.length > 2 : "File format error!";
-                        tasks.add(new Todo(taskInfo[1], Boolean.parseBoolean(taskInfo[2])));
-                        break;
-                    case SYMBOL_E:
-                        assert taskInfo.length > 3 : "File format error!";
-                        tasks.add(new Event(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
-                                LocalDate.parse(taskInfo[3])));
-                        break;
-                    case SYMBOL_D:
-                        assert taskInfo.length > 3 : "File format error!";
-                        tasks.add(new Deadline(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
-                                LocalDate.parse(taskInfo[3])));
-                        break;
-                    default:
-                        break;
-                    }
-                }
-            } else {
+
+            if (!file.exists()) {
                 boolean success = file.createNewFile();
                 if (!success) {
                     throw new DukeException(directoryErrorMsg);
                 }
             }
+
+            Scanner fr = new Scanner(file);
+            while (fr.hasNextLine()) {
+                String ln = fr.nextLine();
+                String[] taskInfo = ln.split(Task.getEscapedSaveDelimiter());
+                TaskSymbols type = TaskSymbols.valueOf("SYMBOL_" + taskInfo[0]);
+                switch(type) {
+                case SYMBOL_T:
+                    assert taskInfo.length > 2 : "File format error!";
+                    tasks.add(new Todo(taskInfo[1], Boolean.parseBoolean(taskInfo[2])));
+                    break;
+                case SYMBOL_E:
+                    assert taskInfo.length > 3 : "File format error!";
+                    tasks.add(new Event(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
+                            LocalDate.parse(taskInfo[3])));
+                    break;
+                case SYMBOL_D:
+                    assert taskInfo.length > 3 : "File format error!";
+                    tasks.add(new Deadline(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
+                            LocalDate.parse(taskInfo[3])));
+                    break;
+                default:
+                    break;
+                }
+            }
+
             return this.tasks;
         } catch (FileNotFoundException e) {
             throw new DukeException(">> Oh no! I can't find your file!");

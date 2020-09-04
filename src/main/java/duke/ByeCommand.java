@@ -5,9 +5,6 @@ package duke;
  */
 
 public class ByeCommand extends Command {
-    /**
-     * Constructor for duke.ByeCommand.
-     */
     public ByeCommand() {
         super();
     }

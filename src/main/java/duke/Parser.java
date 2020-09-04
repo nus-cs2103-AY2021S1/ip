@@ -19,8 +19,8 @@ public class Parser {
     public Command parse(String input) throws DukeException {
         assert input != null : "Invalid input!";
 
-        String[] chunks = input.split(" ", 2);
-        String action = chunks[0].toUpperCase();
+        String[] commandTypeAndDetails = input.split(" ", 2);
+        String action = commandTypeAndDetails[0].toUpperCase();
         Constants.CommandType command;
         try {
             command = Constants.CommandType.valueOf(action);
@@ -33,35 +33,35 @@ public class Parser {
         case LIST:
             return new ListCommand();
         case DELETE:
-            if (chunks.length < 2) {
+            if (commandTypeAndDetails.length < 2) {
                 throw new DukeException(">> Oh no!!! Delete must have the index of the task you're deleting!");
             }
-            return new DeleteCommand(chunks);
+            return new DeleteCommand(commandTypeAndDetails);
         case DONE:
-            if (chunks.length < 2) {
+            if (commandTypeAndDetails.length < 2) {
                 throw new DukeException(">> Oh no!!! Done must have the index of the task you're completing!");
             }
-            return new DoneCommand(chunks);
+            return new DoneCommand(commandTypeAndDetails);
         case TODO:
-            if (chunks.length < 2) {
+            if (commandTypeAndDetails.length < 2) {
                 throw new DukeException(">> Oh no!!! A todo must have a description!");
             }
-            return new AddTodoCommand(chunks);
+            return new AddTodoCommand(commandTypeAndDetails);
         case DEADLINE:
-            if (chunks.length < 2) {
+            if (commandTypeAndDetails.length < 2) {
                 throw new DukeException(">> Oh no!!! A deadline must have a description and date!");
             }
-            return new AddDeadlineCommand(chunks);
+            return new AddDeadlineCommand(commandTypeAndDetails);
         case EVENT:
-            if (chunks.length < 2) {
+            if (commandTypeAndDetails.length < 2) {
                 throw new DukeException(">> Oh no!!! An event must have a description and date!");
             }
-            return new AddEventCommand(chunks);
+            return new AddEventCommand(commandTypeAndDetails);
         case FIND:
-            if (chunks.length < 2) {
+            if (commandTypeAndDetails.length < 2) {
                 throw new DukeException(">> Oh no!!! Find needs a search word or phrase!");
             }
-            return new FindCommand(chunks);
+            return new FindCommand(commandTypeAndDetails);
         default:
             throw new DukeException(">> Oh no!!! I don't understand this input.");
         }
