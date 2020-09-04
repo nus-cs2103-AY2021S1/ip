@@ -31,14 +31,19 @@ public class AddCommand extends Command{
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DateTimeParseException, DukeException {
         Task newTask;
 
+        assert taskCategory != null;
+        assert taskDescription != null;
+
         switch (taskCategory) {
         case "todo":
             newTask = new ToDo(taskDescription);
             break;
         case "event" :
+            assert taskTime != null;
             newTask = new Event(taskDescription, taskTime);
             break;
         case "deadline":
+            assert taskTime != null;
             newTask = new Deadline(taskDescription, taskTime);
             break;
         default:
