@@ -21,11 +21,7 @@ public class Ui {
      * @param strings a list of strings to be displayed on separate lines
      */
     public String format(List<String> strings) {
-        String res = "";
-        for(String s: strings) {
-            res = res + s + "\n";
-        }
-        return res;
+       return strings.stream().reduce("", (x, acc) -> x + "\n" + acc).substring(1);
     }
 
     /**
