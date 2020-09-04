@@ -14,7 +14,7 @@ import duke.exception.DukeIOException;
  */
 public class Storage {
 
-    private final File f;
+    private final File dataFile;
 
     /**
      * Initializes a Storage object.
@@ -22,7 +22,7 @@ public class Storage {
      * @param filePath The path of the data file.
      */
     public Storage(String filePath) {
-        this.f = new File(filePath);
+        this.dataFile = new File(filePath);
     }
 
     /**
@@ -34,14 +34,14 @@ public class Storage {
     public ArrayList<String> load() throws DukeIOException {
         ArrayList<String> res = new ArrayList<>();
         try {
-            Scanner sc = new Scanner(f);
+            Scanner sc = new Scanner(dataFile);
             while (sc.hasNextLine()) {
                 String s = sc.nextLine();
                 res.add(s);
             }
             return res;
         } catch (FileNotFoundException e) {
-            throw new DukeIOException("PROJ_ROOT/" + f.getPath() + " not found!");
+            throw new DukeIOException("PROJ_ROOT/" + dataFile.getPath() + " not found!");
         }
 
     }
@@ -61,8 +61,8 @@ public class Storage {
             }
         }
 
-        if (f.getParent() != null) {
-            String parentDir = f.getParent();
+        if (dataFile.getParent() != null) {
+            String parentDir = dataFile.getParent();
             File dataDir = new File(parentDir);
             if (!dataDir.exists()) {
                 dataDir.mkdir(); // if intellij is slow in displaying data dir, right click -> reload from disk
@@ -71,7 +71,7 @@ public class Storage {
 
         String textToPrint = sb.toString();
         try {
-            FileWriter fw = new FileWriter(f);
+            FileWriter fw = new FileWriter(dataFile);
             fw.write(textToPrint);
             fw.close();
         } catch (IOException e) {
