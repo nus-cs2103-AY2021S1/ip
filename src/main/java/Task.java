@@ -70,11 +70,11 @@ public class Task {
         }
         if (this instanceof Event) {
             return "E//" + this.getTaskStatus() + "//"
-                    + this.description + "//" + ((Event) this).getAt();
+                    + this.description + "//" + ((Event) this).getTaskDeadline();
         }
         if (this instanceof Deadline) {
             return "D//" + this.getTaskStatus() + "//"
-                    + this.description + "//" + ((Deadline) this).getBy();
+                    + this.description + "//" + ((Deadline) this).getTaskDeadline();
         }
         return " ";
     }

@@ -44,7 +44,7 @@ public class ScheduleCommand extends Command {
             }
             return dukeResponse;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("error");
+            throw new WrongDateFormatException();
         }
     }
 
