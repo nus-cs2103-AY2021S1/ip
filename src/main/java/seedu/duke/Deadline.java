@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     private LocalDate localDate;
-    private String due;
+    private String dueDate;
 
     /**
      * Initializes an instance of Deadline.
@@ -21,7 +21,7 @@ public class Deadline extends Task {
         LocalDate formatDate = LocalDate.parse(due);
         localDate = formatDate;
         String convertedDate = formatDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        due = convertedDate;
+        dueDate = convertedDate;
     }
 
     /**
@@ -33,7 +33,7 @@ public class Deadline extends Task {
      */
     public Deadline(String task, boolean isDone, String due) {
         super(task, isDone);
-        due = due;
+        dueDate = due;
     }
 
     /**
@@ -42,7 +42,7 @@ public class Deadline extends Task {
      * @return Formatted version of date.
      */
     public String getFormattedDate() {
-        return due;
+        return dueDate;
     }
 
     /**
@@ -52,6 +52,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + due + ")";
+        return "[D]" + super.toString() + " (by: " + dueDate + ")";
     }
 }
