@@ -21,6 +21,7 @@ public class Parser {
         reservedKeyWords.add("help");
         reservedKeyWords.add("list");
         reservedKeyWords.add("find");
+        reservedKeyWords.add("sortdes");
         reservedKeyWords.add("done");
         reservedKeyWords.add("delete");
         reservedKeyWords.add("deadline");

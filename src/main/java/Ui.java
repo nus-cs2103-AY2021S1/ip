@@ -1,3 +1,5 @@
+import java.util.PriorityQueue;
+
 /**
  * Defines a UI class, that handles any UI in Duke.
  *
@@ -52,6 +54,7 @@ public class Ui {
     public String printHelp() {
         return "list: displays a sequential view of past inputs\n"
                 + "find <task description>: finds all the tasks matched\n"
+                + "sortdes: sorts the tasks in alphabetical order\n"
                 + "done <task number>: denotes a task as done by checking it\n"
                 + "delete <task number>: deletes an existing task\n"
                 + "deadline <description> /by <YYYY-MM-DD> <HH:MM>: adds a deadline with "
@@ -175,4 +178,23 @@ public class Ui {
         return toReturn;
     }
 
+    /**
+     * Provides the sorted tasks in the form of string.
+     *
+     * @param sortedTasks The string sorted based on type.
+     * @param size The number of tasks.
+     * @return The formatted string message.
+     */
+    public String printSortByDes(PriorityQueue<Task> sortedTasks, int size) {
+        if (size == 0) {
+            return "Sorry there are no matching results :(";
+        } else {
+            String toReturn = "Here are your tasks sorted by date and time:\n";
+            for (int i = 1; i <= size; i++) {
+                toReturn += i + ".  " + sortedTasks.poll() + "\n";
+            }
+            return toReturn + "Note that if you wish to change any task, refer to the "
+                    + "original list by calling the \"list\" command.";
+        }
+    }
 }

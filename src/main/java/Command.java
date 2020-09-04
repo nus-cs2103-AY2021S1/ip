@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * The command class handles any command related situations.
@@ -61,6 +61,8 @@ public class Command {
             return addTaskCommand(userInput, keyWord, tasks, storage);
         case "find":
             return findCommand(tasks, userInput);
+        case "sortdes":
+            return sortByDes(tasks);
         default:
             return ui.printErrorMessage(new DukeException("Unknown execution error."));
         }
@@ -373,5 +375,35 @@ public class Command {
         }
         return ui.printFoundTasks(tasks, desToFind);
     }
+
+    /**
+     * Calls for the required methods to sort tasks in alphabetical order
+     *
+     * @param tasks The current list of tasks.
+     * @return String of tasks sorted.
+     */
+    public String sortByDes(TaskList tasks) {
+        Comparator<Task> taskComparator = (thisTask, otherTask) -> {
+            String thisDes = thisTask.description;
+            String otherDes = otherTask.description;
+            int limit = Math.min(thisDes.length(), otherDes.length());
+            for (int i = 0; i < limit; i++) {
+                if (thisDes.charAt(i) < otherDes.charAt(i)) {
+                    return -1;
+                } else if (thisDes.charAt(i) > otherDes.charAt(i)) {
+                    return 1;
+                }
+            }
+            return thisDes.length() > otherDes.length() ? -1 : 1;
+        };
+
+        PriorityQueue<Task> sortedTasks = new PriorityQueue<>(tasks.getNoOfTasks(), taskComparator);
+        for (int i = 0; i < tasks.getNoOfTasks(); i++) {
+            sortedTasks.add(tasks.getTask(i));
+        }
+
+        return ui.printSortByDes(sortedTasks, tasks.getNoOfTasks());
+    }
+
 }
 
