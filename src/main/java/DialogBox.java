@@ -60,6 +60,10 @@ public class DialogBox extends HBox {
         this.setAlignment(Pos.TOP_RIGHT);
         this.setBorder(new Border(new BorderStroke(Color.TRANSPARENT,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        setProperHeight(l);
+    }
+
+    private void setProperHeight(Label l) {
         int count = l.getText().endsWith("\n") ? 1 : 0;
         String[] ss = l.getText().split("\n");
         count += ss.length + 1;
@@ -67,7 +71,6 @@ public class DialogBox extends HBox {
             count += s.length() / 32;
         }
         this.setMinHeight(count * 15 + 30);
-
     }
 
     /**
