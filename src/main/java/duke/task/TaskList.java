@@ -90,10 +90,10 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder("Here are all the items in your list:\n");
-
-        for (int i = 0; i < this.taskList.size(); i++) {
-            builder.append(String.format("%d. %s\n", i + 1, taskList.get(i)));
-        }
+        taskList.forEach(task -> {
+            int taskNumber = taskList.indexOf(task) + 1;
+            builder.append(String.format("%d. %s\n", taskNumber, task));
+        });
 
         return builder.toString().trim();
     }
