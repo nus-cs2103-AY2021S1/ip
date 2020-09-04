@@ -208,7 +208,7 @@ public class Parser {
     /**
      * Gets the string tasks with proper singular or plural format.
      * @param count the number of tasks currently have
-     * @return "task" if count <= 1 and "tasks" if count > 1
+     * @return "task" if count is smaller than 1 and "tasks" if count is biggerthan 1
      */
     public static String getTaskPlural(int count) {
         return count <= 1 ? TASK_SINGULAR : TASK_PLURAL;

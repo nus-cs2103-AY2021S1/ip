@@ -108,6 +108,8 @@ public class App extends Application {
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
+     * @param input the user input to deal with
+     * @return the label of the response to the input
      */
     public Label getResponse(String input) {
         Command c = Parser.parse(input);

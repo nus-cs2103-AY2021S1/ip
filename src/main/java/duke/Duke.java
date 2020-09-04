@@ -23,6 +23,7 @@ public class Duke {
      * Creates a running Duke, initialize the list with data in the input file, if input file is not found,
      * initialize the list with an empty list.
      * @param filePath The file path of the data file holding all existing tasks.
+     * @param isCliApp true if the app is CLI app, and false if it uses javafx.
      */
     public Duke(String filePath, boolean isCliApp) {
         if (isCliApp) {

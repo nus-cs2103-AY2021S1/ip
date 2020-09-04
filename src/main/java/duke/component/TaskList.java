@@ -36,6 +36,9 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Prints a filtered list based on this list with the given predicate on FXML App.
+     * @param initialStatement the heading about the content of the task list
+     * @param predicate checks if a task is wanted to print
+     * @return the entire string of the filtered task list
      */
     public String print(String initialStatement, Predicate<Task> predicate) {
         String res = initialStatement;
