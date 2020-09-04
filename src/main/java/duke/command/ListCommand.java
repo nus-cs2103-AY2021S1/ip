@@ -1,25 +1,39 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * represents a command to display the entire list of tasks
+ */
 public class ListCommand extends Command {
-    public ListCommand(String fullCommand) {
-        super(fullCommand);
+
+    /**
+     * class constructor
+     */
+    public ListCommand() {
+        super("list");
         this.isExit = false;
     }
 
+    /**
+     * returns a string representation of the full list of tasks
+     * @param tasks the list of tasks
+     * @param ui the user interface object responsible for system related commands
+     * @param storage the storage system responsible for saving and loading data
+     * @return a string representation of the full list of tasks
+     */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        ArrayList<Task> tasks = taskList.getTaskList();
-        return getTaskListMessage(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        ArrayList<Task> taskList = tasks.getTaskList();
+        return getTaskListMessage(taskList);
     }
 
-    public String getTaskListMessage(ArrayList<Task> tasks) {
+    private String getTaskListMessage(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
 
         if (tasks.size() == 0) {

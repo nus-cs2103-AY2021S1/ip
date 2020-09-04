@@ -10,10 +10,16 @@ import java.time.format.DateTimeParseException;
 /**
  * represents an event task
  */
-
 public class Event extends Task {
     protected String eventTime;
 
+    /**
+     * creates a new event task based on the given description
+     * @param taskDescription the full description of the event task in the following format:
+     *                        "event event_task_description /by event_date"
+     * @throws EmptyDescriptionException if the description given is empty
+     * @throws EmptyDateException if the date given is empty
+     */
     public Event(String taskDescription) throws EmptyDescriptionException, EmptyDateException {
         if (taskDescription.length() <= 6) {
             throw new EmptyDescriptionException("oops! the description of an event cannot be empty");
@@ -29,6 +35,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * returns a string representation of the event task
+     * @return string representation of the event task
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
@@ -46,29 +56,25 @@ public class Event extends Task {
         return sb.toString();
     }
 
-    public String getEventTime() {
-        String eventTime;
-        try {
-            LocalDate localDate = LocalDate.parse(this.eventTime);
-            eventTime = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        } catch (DateTimeParseException e) {
-            eventTime = this.eventTime;
-        }
-        return eventTime;
-    }
-
+    /**
+     * encodes the event task to a more appropriate format for storage
+     * @return the encoded version of the event task
+     */
     @Override
     public String encode() {
-        StringBuilder encodedTask = new StringBuilder();
-
-        encodedTask.append("E | ")
-                .append(this.isDoneInt() + " | ")
-                .append(this.task + "| ")
-                .append(this.eventTime);
-
-        return encodedTask.toString();
+        return "E | " +
+                this.isDoneInt() + " | " +
+                this.task + "| " +
+                this.eventTime;
     }
 
+    /**
+     * decodes a given line of text and transforms it into a event task
+     * @param string the line of text to decode
+     * @return the event task that has been decoded from the given input
+     * @throws EmptyDescriptionException if the description given is empty
+     * @throws EmptyDateException if the date given is empty
+     */
     public static Event decode(String string) throws EmptyDescriptionException, EmptyDateException {
         String[] split = string.split(" \\| ");
 

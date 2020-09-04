@@ -1,10 +1,10 @@
-package duke;
+package duke.storage;
 
 import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.exception.DukeFileNotFoundException;
+import duke.exception.EmptyDateException;
+import duke.exception.EmptyDescriptionException;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,19 +16,33 @@ import java.util.ArrayList;
 /**
  * deals with loading tasks from the file and saving tasks in the file
  */
-
 public class Storage {
     String filePath;
 
-    Storage(String filePath) {
+    /**
+     * class constructor
+     * @param filePath the file path of the file to load data from and write data to
+     */
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * creates a new file if the it does not exist in the specified file path.
+     * afterwards, the text in the file is decoded and converted to a list of tasks stored in an array list
+     * @return the array list of tasks
+     * @throws DukeException if there are issues finding the file or decoding the file
+     */
     public ArrayList<Task> load() throws DukeException {
-        createFile();
+        createFileIfNotExist();
         return decodeTxtFile();
     }
 
+    /**
+     * encodes the tasks in the given task list to a more appropriate format for storage
+     * updates the changes in the task list using the encoded versions of the task
+     * @param taskList the task list to reference when updating the file
+     */
     public void save(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(this.filePath);
@@ -44,7 +58,7 @@ public class Storage {
         }
     }
 
-    public void createFile() {
+    private void createFileIfNotExist() {
         File dir = new File("data");
         if (!dir.exists()) {
             dir.mkdir();
@@ -60,7 +74,7 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> decodeTxtFile() throws DukeException {
+    private ArrayList<Task> decodeTxtFile() throws DukeException {
         File f = new File(this.filePath);
         ArrayList<Task> decodedTasks = new ArrayList<>();
 
@@ -87,7 +101,9 @@ public class Storage {
                 decodedTasks.add(task);
             }
         } catch (FileNotFoundException e) {
-            throw new DukeException();
+            throw new DukeFileNotFoundException("the file could not be found");
+        } catch (EmptyDescriptionException | EmptyDateException e) {
+            throw new DukeException(e.getMessage());
         }
         return decodedTasks;
     }

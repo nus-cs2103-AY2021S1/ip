@@ -10,10 +10,16 @@ import java.time.format.DateTimeParseException;
 /**
  * represents a deadline task
  */
-
 public class Deadline extends Task {
     protected String deadline;
 
+    /**
+     * creates a new deadline task based on the given description
+     * @param taskDescription the full description of the deadline task in the following format:
+     *                        "deadline deadline_task_description /by due_date"
+     * @throws EmptyDescriptionException if the description given is empty
+     * @throws EmptyDateException if the date given is empty
+     */
     public Deadline(String taskDescription) throws EmptyDescriptionException, EmptyDateException {
         if (taskDescription.length() <= 9) {
             throw new EmptyDescriptionException("oops! the description of a deadline cannot be empty");
@@ -29,6 +35,10 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * returns a string representation of the deadline task
+     * @return string representation of the deadline task
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
@@ -46,18 +56,25 @@ public class Deadline extends Task {
         return sb.toString();
     }
 
+    /**
+     * encodes the deadline task to a more appropriate format for storage
+     * @return the encoded version of the deadline task
+     */
     @Override
     public String encode() {
-        StringBuilder encodedTask = new StringBuilder();
-
-        encodedTask.append("D | ")
-                .append(this.isDoneInt() + " | ")
-                .append(this.task + "| ")
-                .append(this.deadline);
-
-        return encodedTask.toString();
+        return "D | " +
+                this.isDoneInt() + " | " +
+                this.task + "| " +
+                this.deadline;
     }
 
+    /**
+     * decodes a given line of text and transforms it into a deadline task
+     * @param string the line of text to decode
+     * @return the deadline task that has been decoded from the given input
+     * @throws EmptyDescriptionException if the description given is empty
+     * @throws EmptyDateException if the date given is empty
+     */
     public static Deadline decode(String string) throws EmptyDescriptionException, EmptyDateException {
         String[] split = string.split(" \\| ");
 

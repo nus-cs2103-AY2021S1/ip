@@ -1,18 +1,17 @@
-package duke;
+package parsers;
 
 import duke.command.*;
 
 /**
  * deals with making sense of the user command
  */
-
 public class Parser {
     public static Command parse(String fullCommand) {
         String firstWord = fullCommand.split(" ")[0];
 
         switch (firstWord) {
             case "list":
-                return new ListCommand(fullCommand);
+                return new ListCommand();
             case "done":
                 return new DoneCommand(fullCommand);
             case "delete":
@@ -26,13 +25,13 @@ public class Parser {
             case "find":
                 return new FindCommand(fullCommand);
             case "clear":
-                return new ClearCommand(fullCommand);
+                return new ClearCommand();
             case "help":
-                return new HelpCommand(fullCommand);
+                return new HelpCommand();
             case "bye":
-                return new ExitCommand(fullCommand);
+                return new ExitCommand();
             default:
-                return new InvalidCommand(fullCommand);
+                return new InvalidCommand();
         }
     }
 }
