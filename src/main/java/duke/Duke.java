@@ -32,6 +32,7 @@ public class Duke {
      * @return String that should be outputted from the command.
      */
     public String run(String input) {
+        assert !input.equals("");
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);

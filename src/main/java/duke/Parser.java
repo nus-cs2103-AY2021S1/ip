@@ -42,7 +42,7 @@ public class Parser {
             try {
                 date = new SimpleDateFormat(input).parse(str);
             } catch (ParseException ignore) {
-                continue;
+                continue; //ignore exception to allow customized date input
             }
         }
         if (date == null) {
