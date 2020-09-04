@@ -33,7 +33,7 @@ public class TaskList {
                 String category = commandPortions[0];
                 String mark = commandPortions[1].substring(commandPortions[1].length() - 1);
                 int status = (mark == "\u2713") ? Task.DONE : Task.DOING;
-                String commandDetails = commandPortions[2].substring(1, commandPortions[2].length());
+                String commandDetails = commandPortions[2].substring(1);
 
                 Task task = new Task(0, 0, "");
                 String[] array;

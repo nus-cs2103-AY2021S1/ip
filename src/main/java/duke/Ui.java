@@ -12,12 +12,11 @@ import java.util.Scanner;
 public class Ui {
     protected final Scanner input;
     protected final PrintStream output;
-    private static final String Message_GREETING =
-            "Hello :))!  I'm your daily manager, Ka To! Welcome Back! \n" +
-                    "how could I serve you now? \n" +
-                    "You could ask me any question if you like! \n" +
-                    "____________________________________________________________";
-
+    private static final String Message_GREETING
+                    = "Hello :))!  I'm your daily manager, Ka To! Welcome Back! \n"
+                    + "how could I serve you now? \n"
+                    + "You could ask me any question if you like! \n"
+                    + "____________________________________________________________";
     private static final String Message_Bye = "Ka To: \n" +
             "I am happy to serve you. See you soon!";
 
@@ -39,8 +38,7 @@ public class Ui {
     }
 
     public String getInput() {
-        String newInput = input.nextLine();
-        return newInput;
+        return input.nextLine();
     }
 
     /**
@@ -73,7 +71,7 @@ public class Ui {
      * Prints out the current task list
      *
      * @param added Task added successfully
-     * @param list Task List to be added into
+     * @param list  Task List to be added into
      */
     public void addTaskSuccessful(Task added, TaskList list) {
         System.out.println("Ka To:");
@@ -87,7 +85,7 @@ public class Ui {
      * Deletes the task from the list
      *
      * @param deleted Task deleted successfully
-     * @param list Task List to be deleted from
+     * @param list    Task List to be deleted from
      */
     public void deleteTaskSuccessful(Task deleted, TaskList list) {
         System.out.println("Ka To:");
