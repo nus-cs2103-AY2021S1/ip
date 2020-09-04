@@ -65,6 +65,7 @@ run{
  * Solution adapted from: https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Exec.html
  */
 task runtest(type: Exec) {
+    dependsOn 'shadowJar'
     workingDir "./text-ui-test"
     commandLine 'cmd', '/C', 'runtest.bat'
 }

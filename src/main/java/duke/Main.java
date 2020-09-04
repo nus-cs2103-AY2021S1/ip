@@ -14,7 +14,16 @@ public class Main {
      * @param args Program arguments
      */
     public static void main(String[] args) {
-        runGui(args);
+        if (args.length > 0) {
+            if (args[0].equals("cmd")) {
+                runCmd(args);
+            } else if (args[0].equals("gui")) {
+                runGui(args);
+            } else {
+                System.out.println(args[0]);
+                System.out.println("Usage: java main <cmd|gui>");
+            }
+        }
     }
 
     private static void runCmd(String[] args) {
