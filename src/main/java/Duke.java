@@ -59,4 +59,13 @@ public class Duke extends Application {
         new Duke("src/main/java/tasks.txt").run();
 
     }
+
+    public String getResponse(String input) {
+        try {
+            Parser.interpret(input).execute(this.TASKS, this.UI, this.STORAGE);
+            return "Done!";
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    };
 }
