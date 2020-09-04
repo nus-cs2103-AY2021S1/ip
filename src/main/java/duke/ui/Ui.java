@@ -58,6 +58,8 @@ public class Ui {
                 + "\nTo mark a task as done, input 'done <task number>'."
                 + "\nTo delete a task from your list, input 'delete <task number>'."
                 + "\nTo find a task in your list, input 'find <keyword>'."
+                + "\nTo set the priority of task to high/mid/low, "
+                + "input 'priority <high/mid/low> <task number>'."
                 + "\nTo close Dino, enter 'bye'.");
     }
 
