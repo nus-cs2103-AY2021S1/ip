@@ -3,7 +3,6 @@ package duke;
 import duke.dukehelper.uiparts.DialogBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -13,6 +12,9 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private final static String USER_AVATAR = "/images/dnh.jpg";
+    private final static String DUKE_AVATAR = "/images/duke.jpg";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -24,8 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/dnh.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream(USER_AVATAR));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream(DUKE_AVATAR));
 
     @FXML
     public void initialize(Duke duke) {
@@ -35,6 +37,7 @@ public class MainWindow extends AnchorPane {
         setUpFunctionality();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
+
     private void addDialog() {
         String userText = userInput.getText();
         String dukeText = duke.getResponse(userInput.getText());
@@ -45,23 +48,21 @@ public class MainWindow extends AnchorPane {
 
     private void setUpFunctionality() {
         sendButton.setOnMouseClicked((event) -> {
-            if (!userInput.getText().strip().equals("")) addDialog();
+            if (!userInput.getText().strip().equals("")) {
+                addDialog();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            if (!userInput.getText().strip().equals("")) addDialog();
+            if (!userInput.getText().strip().equals("")) {
+                addDialog();
+            }
         });
     }
 
-    public Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and
+     * the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML

@@ -16,7 +16,9 @@ public enum Commands {
     public String getAction() {
         return this.action;
     }
-    public String getDescription() { return this.description; }
+    public String getDescription() {
+        return this.description;
+    }
     private Commands(String action, String description) {
         this.description = description;
         this.action = action;

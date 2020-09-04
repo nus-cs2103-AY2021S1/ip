@@ -14,6 +14,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Duke {
+    private final static String WRONG_FORMAT_MSG = "Wrong format\n"
+            + " Your date and time(optional) should be in this format:\n"
+            + "yyyy-mm-dd HHmm\ne.g: 2019-10-15 1800 or 2019-10-15";
+    private final static String ERROR_MSG = "OOPS!!! CAN YOU PLEASE TYPE SOMETHING MEANINGFUL?";
+    private final static String GREETINGS = "Hello! I'm Elon Musk. Type 'help' if you know nothing\n"
+            + "Your tasks will be saved at /data\nWhat can I do for you?";
+    private final static String ERROR_LOAD_MSG = "Something wrong happened while loading saved tasks";
+    private final static String FIRST_TIME = "This is the first time you use Duke!";
+    public final static String ERROR_CODE = "000";
+    private final static String EXIT_MSG = "Bye. Hope to see you again soon!";
+    private final static String HELP_MSG = "Type 'help' if you know nothing";
+
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
@@ -34,6 +46,25 @@ public class Duke {
     }
 
     /**
+     * Lists all tasks with date/time filter
+     * @param isLoaded
+     * @param tokens
+     * @return string representation of tasks
+     * @throws DukeException
+     */
+    private String listTasks(boolean isLoaded, String[] tokens) throws DukeException {
+        String[] extractedData = parser.extractData(isLoaded, tokens);
+        String content = extractedData[0];
+        DateTimeHelper dtHelper = DateTimeHelper.processDateTime(content);
+        if (dtHelper != null) {
+            LocalDate deadline = dtHelper.getDate();
+            return tasks.filterTaskList(deadline);
+        } else {
+            throw new DukeException(WRONG_FORMAT_MSG);
+        }
+    }
+
+    /**
      * Distributes each command based on its type, then return a string that will be shown to the user.
      * @param commandType
      * @param tokens
@@ -48,7 +79,6 @@ public class Duke {
         } else if (commandType == Commands.DELETE) {
 
             int markNumber = Integer.parseInt(tokens[1]);
-            storage.saveTasks(this.tasks.getTaskList());
             String result = tasks.deleteTask(markNumber, getNumTasks());
             storage.saveTasks(this.tasks.getTaskList());
             return result;
@@ -62,17 +92,7 @@ public class Duke {
 
         }  else if (commandType == Commands.LIST) {
 
-            String[] extractedData = parser.extractData(isLoaded, tokens);
-            String content = extractedData[0];
-            DateTimeHelper dtHelper = DateTimeHelper.processDateTime(content);
-            if (dtHelper != null) {
-                LocalDate deadline = dtHelper.getDate();
-                return tasks.filteredTaskList(deadline);
-            } else {
-                throw new DukeException("Wrong format\n"
-                        + " Your date and time(optional) should be in this format:\n"
-                        + "yyyy-mm-dd HHmm\ne.g: 2019-10-15 1800 or 2019-10-15");
-            }
+            return listTasks(isLoaded, tokens);
 
         } else if (commandType == Commands.FIND) {
             return tasks.findTasks(tokens);
@@ -101,7 +121,7 @@ public class Duke {
         try {
             return furtherProcessing(Commands.valueOf(tokens[0].toUpperCase()), tokens, isLoaded);
         } catch (IllegalArgumentException e) {
-            throw new DukeException("OOPS!!! CAN YOU PLEASE TYPE SOMETHING MEANINGFUL?");
+            throw new DukeException(ERROR_MSG);
         }
     }
 
@@ -110,18 +130,17 @@ public class Duke {
      */
     protected String init() {
         String result = "";
-        result += Ui.printDialog("Hello! I'm Elon Musk. Type 'help' if you know nothing\n"
-                + "Your tasks will be saved at /data\nWhat can I do for you?");
+        result += Ui.printDialog(GREETINGS);
         ArrayList<String> savedTasks = storage.loadSavedTasks();
-        if (savedTasks.size() > 0 && savedTasks.get(0).equals("000")) {
-            result += Ui.printDialog("This is the first time you use Duke!");
+        if (savedTasks.size() > 0 && savedTasks.get(0).equals(ERROR_CODE)) {
+            result += Ui.printDialog(FIRST_TIME);
         } else {
             try {
                 for (String task : savedTasks) {
                     processedCommand(task, true);
                 }
             } catch (DukeException e) {
-                result += Ui.printDialog("Something wrong happened while loading saved tasks");
+                result += Ui.printDialog(ERROR_LOAD_MSG);
             }
         }
         return result;
@@ -130,7 +149,7 @@ public class Duke {
         content = content.strip();
         if (content.equals(Commands.BYE.getAction())) {
             this.stage.close();
-            return Ui.printDialog("Bye. Hope to see you again soon!");
+            return Ui.printDialog(EXIT_MSG);
             //exit the program
         }
         if (content.equals(Commands.HELP.getAction())) {
@@ -150,7 +169,7 @@ public class Duke {
                 return Ui.printDialog(e.getMessage());
             }
         }
-        return "Type 'help' if you know nothing";
+        return HELP_MSG;
     }
 }
 

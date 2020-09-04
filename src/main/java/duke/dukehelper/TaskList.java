@@ -8,17 +8,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
+    private final static String SEARCH_ERROR = "Nothing matches. Watch out for typos\n";
+
     private ArrayList<Task> taskList;
     public TaskList() {
-        this.taskList = new ArrayList<Task>();
+        this.taskList = new ArrayList<>();
     }
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
-    public void addTaskStr(String task) {
-        Task newTask = new Task(task);
-        this.taskList.add(newTask);
-    }
+
     public void addTask(Task task) {
         this.taskList.add(task);
     }
@@ -62,23 +61,27 @@ public class TaskList {
      * @param deadline
      * @return message to user
      */
-    public String filteredTaskList(LocalDate deadline) {
-        String res = "Here are the matching tasks in your list:\n    ";
+    public String filterTaskList(LocalDate deadline) {
+        String result = "Here are the matching tasks in your list:\n    ";
         for (int i = 0;i < taskList.size();i++) {
             Task task = taskList.get(i);
             if (task instanceof Deadline) {
                 if (((Deadline)task).getDeadline().compareTo(deadline) == 0) {
-                    res += ((i + 1) + "." + task.returnStringForm());
-                    if (i < taskList.size() - 1) res += "\n    ";
+                    result += ((i + 1) + "." + task.returnStringForm());
+                    if (i < taskList.size() - 1) {
+                        result += "\n    ";
+                    }
                 }
             } else if (task instanceof Event) {
                 if (((Event)task).getTime().compareTo(deadline) == 0) {
-                    res += ((i + 1) + "." + task.returnStringForm());
-                    if (i < taskList.size() - 1) res += "\n    ";
+                    result += ((i + 1) + "." + task.returnStringForm());
+                    if (i < taskList.size() - 1) {
+                        result += "\n    ";
+                    }
                 }
             }
         }
-        return res;
+        return result;
     }
 
     /**
@@ -87,9 +90,11 @@ public class TaskList {
      * @return matched tasks
      */
     public String findTasks(String[] tokens) {
+        assert tokens != null : "Null tokens";
+
         String keyword = "";
         int numMatch = 0;
-        String res = "Here are the matching tasks in your list:\n    ";
+        String result = "Here are the matching tasks in your list:\n    ";
         for (int i = 1;i < tokens.length;i++) {
             keyword += tokens[i];
         }
@@ -98,14 +103,16 @@ public class TaskList {
             Task task = taskList.get(i);
             if(task.getContent().toLowerCase().contains(keyword)) {
                 numMatch++;
-                res += ((i + 1) + "." + task.returnStringForm());
-                if (i < taskList.size() - 1) res += "\n    ";
+                result += ((i + 1) + "." + task.returnStringForm());
+                if (i < taskList.size() - 1) {
+                    result += "\n    ";
+                }
             }
         }
         if (numMatch == 0) {
-            return "Nothing matches. Watchout for typos\n";
+            return SEARCH_ERROR;
         }
-        return res;
+        return result;
     }
 
 }

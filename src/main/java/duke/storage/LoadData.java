@@ -1,5 +1,7 @@
 package duke.storage;
 
+import duke.Duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class LoadData {
                 savedTasks.add(taskData);
             }
         } catch (FileNotFoundException e) {
-            savedTasks.add("000");
+            savedTasks.add(Duke.ERROR_CODE);
             //e.printStackTrace();
         }
         return savedTasks;
