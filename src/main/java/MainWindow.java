@@ -26,7 +26,7 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    private Timeline exitDelay = new Timeline(new KeyFrame(Duration.millis(2000), ae -> Platform.exit()));
+    private Timeline exitWithDelay = new Timeline(new KeyFrame(Duration.millis(2000), ae -> Platform.exit()));
 
     @FXML
     public void initialize() {
@@ -51,7 +51,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (duke.isExit()) {
-            exitDelay.play();
+            exitWithDelay.play();
             userInput.setDisable(true);
             sendButton.setDisable(true);
         }

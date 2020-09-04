@@ -1,9 +1,3 @@
-import duke.DukeException;
-import duke.Storage;
-import duke.task.Task;
-import duke.task.Todo;
-
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedReader;
@@ -13,6 +7,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class StorageTest {
     @Test
@@ -24,7 +25,7 @@ public class StorageTest {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             List<Task> tasks = new ArrayList<>();
-            
+
             tasks.add(new Todo("test"));
             storage.saveTasks(tasks);
 
@@ -36,7 +37,7 @@ public class StorageTest {
             System.out.println("Error creating test case.");
         }
     }
-    
+
     @Test
     public void getTasks() {
         try {
@@ -47,10 +48,10 @@ public class StorageTest {
 
             fileWriter.write("T | 0 | test\n");
             fileWriter.close();
-            
+
             List<Task> tasks = storage.getTasks();
             String task = tasks.get(0).toString();
-            
+
             assertEquals(task, "[T][✘] test");
         } catch (DukeException e) {
             System.out.println("Error creating test case.");

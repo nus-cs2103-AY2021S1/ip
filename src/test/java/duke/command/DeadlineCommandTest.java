@@ -1,11 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.task.Task;
-
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedReader;
@@ -15,6 +9,13 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.task.Task;
 
 public class DeadlineCommandTest {
     @Test
