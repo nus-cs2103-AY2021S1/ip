@@ -62,7 +62,7 @@ public class Duke {
             } catch (DukeException e) {
                 ui.printException(e);
             }
-            isQuit = parser.getQuit();
+            isQuit = parser.hasQuit();
         }
     }
 
