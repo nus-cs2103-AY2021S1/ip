@@ -15,7 +15,7 @@ import duke.task.ToDo;
 
 public class CsvConverterTest {
     @Test
-    public void testMatchingTask() {
+    public void testMatchingTasks() {
         try {
             String s1 = "TODO  ,cs2103 tutorial  ,-  ,Not done";
             String s2 = "EVENT  ,eat  ,1200-1400  ,Not done";

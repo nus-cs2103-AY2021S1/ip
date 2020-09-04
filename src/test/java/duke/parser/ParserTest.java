@@ -25,7 +25,7 @@ public class ParserTest {
             String s4 = "list";
             String s5 = "done 5";
             String s6 = "delete 2";
-            String s7 = "find book";
+            String s7 = "finD book";
             String s8 = "bYe";
 
             assertTrue(Parser.parse(s1) instanceof AddToDoCommand);
