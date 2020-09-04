@@ -16,14 +16,16 @@ public class DialogBox extends HBox {
     private Label text;
     private Circle displayPicture;
 
-    public DialogBox(Label label, Image image) {
-        text = label;
+    public DialogBox(String text, Image image) {
+        this.text = new Label(text);
         displayPicture = CircleImage.createCircleImage(IMAGE_RADIUS, image);
 
-        text.setWrapText(true);
+        this.text.setWrapText(true);
 
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        setAlignment(Pos.TOP_RIGHT);
+        getChildren().addAll(this.text, displayPicture);
+
+        setSpacing(10.0);
     }
 
     /**
@@ -36,12 +38,12 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, Image iv) {
-        return new DialogBox(l, iv);
+    public static DialogBox getUserDialog(String userMessage, Image image) {
+        return new DialogBox(userMessage, image);
     }
 
-    public static DialogBox getDukeDialog(Label l, Image iv) {
-        var db = new DialogBox(l, iv);
+    public static DialogBox getDukeDialog(String dukeMessage, Image image) {
+        var db = new DialogBox(dukeMessage, image);
         db.flip();
         return db;
     }

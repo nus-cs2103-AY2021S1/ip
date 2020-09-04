@@ -94,10 +94,8 @@ public class DukeGui extends Application implements Ui {
 
     @Override
     public void startup() {
-        Platform.runLater(() -> {
-            Label startupText = new Label(Ui.OPENING_MESSAGE);
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(startupText, dukeImage));
-        });
+        Platform.runLater(() ->
+                dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.OPENING_MESSAGE, dukeImage)));
     }
     /**
      * Iteration 1:
@@ -121,16 +119,12 @@ public class DukeGui extends Application implements Ui {
     private void handleUserInput() {
         String text = userInput.getText();
         registerResponse(text);
-        Label userText = new Label(text);
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, userImage));
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(text, userImage));
         userInput.clear();
     }
 
     public void outputMessage(String message) {
-        Platform.runLater(() -> {
-            Label dukeText = new Label(message);
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeText, dukeImage));
-        });
+        Platform.runLater(() -> dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage)));
     }
 
     private synchronized void registerResponse(String enteredMessage) {
