@@ -75,10 +75,7 @@ public class DeadlineCommand extends Command {
         String[] deadlineInfo = new String[2];
         String description;
         String time;
-        if (this.parsedCommand.length == 0) {
-            String err = "Your deadline task has missing arguments. The task cannot be created.";
-            throw new InvalidTaskException(err);
-        } else {
+        try {
             String[] taskInputArray = this.parsedCommand[1].split(" /by ");
             if (!this.parsedCommand[1].contains(" /by ") && !this.parsedCommand[1].endsWith("/by")) {
                 String err = "Your deadline task has an incorrect format. The task cannot be created.";
@@ -97,10 +94,13 @@ public class DeadlineCommand extends Command {
                 description = taskInputArray[0].trim();
                 time = taskInputArray[1].trim();
             }
+            deadlineInfo[0] = description;
+            deadlineInfo[1] = time;
+            return deadlineInfo;
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            String err = "Your deadline task has missing arguments. The task cannot be created.";
+            throw new InvalidTaskException(err);
         }
-        deadlineInfo[0] = description;
-        deadlineInfo[1] = time;
-        return deadlineInfo;
     }
 
     /**

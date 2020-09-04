@@ -1,10 +1,10 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import duke.Parser;
 import duke.exception.DukeException;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
 
@@ -18,7 +18,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parser_noUserInput_throwsException() {
+    public void parser_missingUserInput_throwsException() {
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
             Parser.parse(" ");
         });

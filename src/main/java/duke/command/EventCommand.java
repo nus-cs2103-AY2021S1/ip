@@ -75,10 +75,7 @@ public class EventCommand extends Command {
         String[] eventInfo = new String[2];
         String description;
         String time;
-        if (this.parsedCommand.length == 0) {
-            String err = "Your event task has missing arguments. The task cannot be created.";
-            throw new InvalidTaskException(err);
-        } else {
+        try {
             String[] taskInputArray = this.parsedCommand[1].split(" /at ");
             if (!this.parsedCommand[1].contains(" /at ") && !this.parsedCommand[1].endsWith("/at")) {
                 String err = "Your event task has an incorrect format. The task cannot be created.";
@@ -97,10 +94,13 @@ public class EventCommand extends Command {
                 description = taskInputArray[0].trim();
                 time = taskInputArray[1].trim();
             }
+            eventInfo[0] = description;
+            eventInfo[1] = time;
+            return eventInfo;
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            String err = "Your event task has missing arguments. The task cannot be created.";
+            throw new InvalidTaskException(err);
         }
-        eventInfo[0] = description;
-        eventInfo[1] = time;
-        return eventInfo;
     }
 
     /**

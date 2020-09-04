@@ -32,6 +32,8 @@ dependencies {
 test {
     useJUnitPlatform()
 
+    systemProperty "file.encoding", "utf-8"
+
     testLogging {
         events "passed", "skipped", "failed"
 
@@ -41,6 +43,12 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 application {
@@ -59,4 +67,5 @@ checkstyle {
 run{
     standardInput = System.in
     enableAssertions = true
+    systemProperty "file.encoding", "utf-8"
 }

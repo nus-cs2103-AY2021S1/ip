@@ -42,12 +42,10 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        // dialog.setStyle("-fx-font-family: monospace");
-        Circle circle = new Circle( 32, 35, 32);
+        Circle circle = new Circle(32, 35, 32);
         displayPicture.setClip(circle);
         dialog.setText(text);
         displayPicture.setImage(img);
-        dialog.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
     }
 
     /**

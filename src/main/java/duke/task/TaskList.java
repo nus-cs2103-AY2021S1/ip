@@ -49,15 +49,6 @@ public class TaskList {
     }
 
     /**
-     * Determines if the list of tasks is empty.
-     *
-     * @return True if the list of tasks is empty, false otherwise.
-     */
-    public boolean isEmpty() {
-        return this.tasks.isEmpty();
-    }
-
-    /**
      * Adds a new task into the list of tasks.
      *
      * @param toAdd Task to be added.

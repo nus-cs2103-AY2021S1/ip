@@ -1,17 +1,17 @@
 package duke;
 
-import duke.command.DeadlineCommand;
-import duke.command.EventCommand;
-import duke.command.ToDoCommand;
 import duke.command.Command;
-import duke.command.DoneCommand;
+import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindByDateCommand;
 import duke.command.FindByKeywordCommand;
+import duke.command.FunctionsCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
-import duke.command.FunctionsCommand;
+import duke.command.ToDoCommand;
 
 import duke.exception.InvalidFunctionException;
 
