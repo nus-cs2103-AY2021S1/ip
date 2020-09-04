@@ -1,5 +1,3 @@
 
 [T][✘] testing
-[T][✘] tester2
 [T][✘] testing
-[T][✘] tester2
