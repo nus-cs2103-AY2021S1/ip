@@ -2,7 +2,6 @@ package duke;
 
 import java.util.Scanner;
 
-
 public class Duke {
 
     private Storage storage;
@@ -16,13 +15,13 @@ public class Duke {
     }
 
     public void run() {
-
-        ui.mochaIntroduction();
+        
+        ui.sayIntroduction();
         Parser parser = ui.createParser();
         Scanner userInput = ui.createUserInputScanner();
 
         while (userInput.hasNextLine()) {
-            try {
+            try { 
                 String nextLine = userInput.nextLine();
                 int commandNumber = parser.parseCommand(nextLine);
                 
@@ -30,37 +29,37 @@ public class Duke {
                     Task newTask = parser.createTask(commandNumber);
                     tasks.addTask(newTask);
                     // TODO: write an exception for 
-                    ui.taskAdded(newTask, tasks.getSize());
+                    ui.addTask(newTask, tasks.getSize());
 
                 } else if (commandNumber == 4) {
-                    int taskNumber = parser.doneTask();
+                    int taskNumber = parser.getDoneTaskNumber();
                     // TODO: have a exception for TaskDoesNotExist (either -1 or more than number of task)
                     // TODO: figure out exception throw catch
-                    Task doneTask = tasks.get(taskNumber);
+                    Task doneTask = tasks.getTask(taskNumber);
                     doneTask.markAsDone();
-                    ui.taskDone(doneTask);
+                    ui.markTaskDone(doneTask);
 
                 } else if (commandNumber == 5) {
                     ui.listAllTasks(tasks);
 
                 } else if (commandNumber == 6) {
-                    ui.mochaGoodbye();
+                    ui.sayGoodbye();
                     storage.writeToFile(tasks.getTaskList());
 
                 } else if (commandNumber == 7) {
-                    int taskNumber = parser.deleteTask();
-                    Task deleteTask = tasks.get(taskNumber);
+                    int taskNumber = parser.getDeleteTaskNumber();
+                    Task deleteTask = tasks.getTask(taskNumber);
                     tasks.deleteTask(taskNumber);
                     ui.deleteTask(deleteTask, tasks.getSize());
 
                 } else {
-                    String horizontalLine = "_______________________________________________________";
+                    String HORIZONTAL_LINE = "_______________________________________________________";
                     
-                    throw new CommandNotRecognisedException(horizontalLine
+                    throw new CommandNotRecognisedException(HORIZONTAL_LINE
                             + "\r\n"
                             + "Oops! I couldn't understand what you mean :("
                             + "\r\n"
-                            + horizontalLine);
+                            + HORIZONTAL_LINE);
                 }
             } catch (MissingTaskDescriptionException e) {
                 System.out.println(e.getMessage());

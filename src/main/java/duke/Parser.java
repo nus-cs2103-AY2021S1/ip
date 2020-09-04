@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class Parser {
     private String command;
     private String[] commandParts;
-    private final String horizontalLine = "_______________________________________________________";
+    private final String HORIZONTAL_LINE = "_______________________________________________________";
 
     public int parseCommand(String command) {
         this.command = command;
@@ -57,11 +57,11 @@ public class Parser {
             return newToDoTask;
 
         } catch (Exception e) {
-            throw new MissingTaskDescriptionException(horizontalLine
+            throw new MissingTaskDescriptionException(HORIZONTAL_LINE
                     + "\r\n"
                     + "Oops! The description cannot be empty :("
                     + "\r\n"
-                    + horizontalLine);
+                    + HORIZONTAL_LINE);
         }
     }
 
@@ -76,11 +76,11 @@ public class Parser {
 
         } catch (Exception e) {
 
-            throw new MissingTaskDescriptionException(horizontalLine
+            throw new MissingTaskDescriptionException(HORIZONTAL_LINE
                     + "\r\n"
                     + "Oops! The description cannot be empty :("
                     + "\r\n"
-                    + horizontalLine);
+                    + HORIZONTAL_LINE);
         }
     }
 
@@ -95,15 +95,15 @@ public class Parser {
 
         } catch (Exception e) {
 
-            throw new MissingTaskDescriptionException(horizontalLine
+            throw new MissingTaskDescriptionException(HORIZONTAL_LINE
                     + "\r\n"
                     + "Oops! The description cannot be empty :("
                     + "\r\n"
-                    + horizontalLine);
+                    + HORIZONTAL_LINE);
         }
     }
 
-    public int doneTask() throws MissingTaskNumberException {
+    public int getDoneTaskNumber() throws MissingTaskNumberException {
 
         int taskNumber = -1;
         taskNumber = markDoneTask(command);
@@ -119,15 +119,15 @@ public class Parser {
 
         } catch (Exception e) {
 
-            throw new MissingTaskNumberException(horizontalLine
+            throw new MissingTaskNumberException(HORIZONTAL_LINE
                     + "\r\n"
                     + "Oops! The task number cannot be missing :("
                     + "\r\n"
-                    + horizontalLine);
+                    + HORIZONTAL_LINE);
         }
     }
 
-    public int deleteTask() {
+    public int getDeleteTaskNumber() {
         int taskNumber = -1;
 
         try {
@@ -145,11 +145,11 @@ public class Parser {
 
         } catch (Exception e) {
 
-            throw new MissingTaskNumberException(horizontalLine
+            throw new MissingTaskNumberException(HORIZONTAL_LINE
                     + "\r\n"
                     + "Oops! The task number cannot be missing :("
                     + "\r\n"
-                    + horizontalLine);
+                    + HORIZONTAL_LINE);
         }
     }
 }
