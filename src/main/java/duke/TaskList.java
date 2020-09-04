@@ -76,7 +76,7 @@ public class TaskList {
      * @return An ArrayList of string representations of tasks that match the keyword.
      */
     public ArrayList<String> find(String[] keywords) {
-        return mapToRepr(filterTasks(taskStore, task -> task.contains(keywords)), Task::toString);
+        return mapTasks(filterTasks(taskStore, task -> task.contains(keywords)), Task::toString);
     }
 
     /**
@@ -85,7 +85,7 @@ public class TaskList {
      * @return An ArrayList of string representation of each task in the taskList.
      */
     public ArrayList<String> getListRepr() {
-        return mapToRepr(taskStore, Task::toString);
+        return mapTasks(taskStore, Task::toString);
     }
 
     /**
@@ -95,7 +95,7 @@ public class TaskList {
      * task in the taskList.
      */
     public ArrayList<String> getData() {
-        return mapToRepr(taskStore, Task::getData);
+        return mapTasks(taskStore, Task::getData);
     }
 
     /**
@@ -109,7 +109,7 @@ public class TaskList {
                 (storeSize > 1 ? "tasks " : "task ") + "in your list!";
     }
 
-    private static ArrayList<String> mapToRepr(ArrayList<Task> taskStore, Function<Task, String> mapper) {
+    private static ArrayList<String> mapTasks(ArrayList<Task> taskStore, Function<Task, String> mapper) {
         return taskStore.stream().map(mapper).collect(Collectors.toCollection(ArrayList::new));
     }
 
