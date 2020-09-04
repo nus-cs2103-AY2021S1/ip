@@ -29,6 +29,7 @@ public abstract class Command {
      * @param command User input
      * @param list TaskList object containing all tasks
      * @param storage Storage object that reads and writes to duke.ser
+     * @return A Duke bot response
      */
     public abstract String execute(String command, TaskList list, Storage storage);
 }

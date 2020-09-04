@@ -11,6 +11,13 @@ public class FindCommand extends Command {
         super(command, list, storage);
     }
 
+    /**
+     * Filters out tasks from task list based on user input.
+     * @param command User input
+     * @param list TaskList object containing all tasks
+     * @param storage Storage object that reads and writes to duke.ser
+     * @return A list of filtered tasks
+     */
     @Override
     public String execute(String command, TaskList list, Storage storage) {
         String horizontalLine = "____________________________________\n";

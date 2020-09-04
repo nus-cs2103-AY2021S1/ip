@@ -18,6 +18,7 @@ public class DeadlineCommand extends Command {
      * @param command User input
      * @param list TaskList object containing all tasks
      * @param storage Storage object that reads and writes to duke.ser
+     * @return A response saying deadline has been added
      */
     @Override
     public String execute(String command, TaskList list, Storage storage) {

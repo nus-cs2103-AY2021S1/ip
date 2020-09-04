@@ -17,10 +17,10 @@ public class InvalidCommand extends Command {
      * @param command User input
      * @param list TaskList object containing all tasks
      * @param storage Storage object that reads and writes to duke.ser
+     * A response saying user has keyed an invalid command
      */
     @Override
     public String execute(String command, TaskList list, Storage storage) {
-        String horizontalLine = "____________________________________\n";
-        return horizontalLine + Warnings.invalidCommandWarning() + horizontalLine;
+        return Warnings.invalidCommandWarning();
     }
 }

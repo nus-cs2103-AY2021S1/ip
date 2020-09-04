@@ -17,6 +17,7 @@ public class DeleteCommand extends Command {
      * @param command User input
      * @param list TaskList object containing all tasks
      * @param storage Storage object that reads and writes to duke.ser
+     * @return A response with deleted task
      */
     @Override
     public String execute(String command, TaskList list, Storage storage) {

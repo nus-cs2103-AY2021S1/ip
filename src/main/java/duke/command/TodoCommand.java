@@ -17,6 +17,7 @@ public class TodoCommand extends Command {
      * @param command User input
      * @param list TaskList object containing all tasks
      * @param storage Storage object that reads and writes to duke.ser
+     * @return A response saying todo has been added
      */
     @Override
     public String execute(String command, TaskList list, Storage storage) {
