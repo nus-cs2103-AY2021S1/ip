@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 
 import java.util.ArrayList;
 
@@ -43,28 +42,12 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filepath));
-            String str;
-            while ((str = reader.readLine()) != null) {
-                Task task;
-                if (str.startsWith("T")) {
-                    task = ToDo.load(str);
-                } else if (str.startsWith("E")) {
-                    task = Event.load(str);
-                } else if (str.startsWith("D")) {
-                    task = Deadline.load(str);
-                } else {
-                    break;
-                }
-                tasks.add(task);
-            }
+            reader.lines().forEach(line -> loadTask(line, tasks));
             return tasks;
         } catch (FileNotFoundException e) {
             System.out.println("Starting a new task list");
             File file = new File("./data");
             file.mkdir();
-            return tasks;
-        } catch (IOException e) {
-            e.printStackTrace();
             return tasks;
         }
     }
@@ -84,6 +67,16 @@ public class Storage {
             writer.close();
         } catch (Exception e) {
             System.out.println("error in saving");
+        }
+    }
+
+    private void loadTask(String str, ArrayList<Task> tasks) {
+        if (str.startsWith("T")) {
+            tasks.add(ToDo.load(str));
+        } else if (str.startsWith("E")) {
+            tasks.add(Event.load(str));
+        } else if (str.startsWith("D")) {
+            tasks.add(Deadline.load(str));
         }
     }
 }
