@@ -8,6 +8,7 @@ import duke.dukehelper.Ui;
 import duke.exception.DukeException;
 import duke.helper.DateTimeHelper;
 import duke.task.Task;
+import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,14 +18,16 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
+    private Stage stage;
     /**
      * Constructor
      */
-    public Duke() {
+    public Duke(Stage stage) {
         this.ui = new Ui();
         this.storage = new Storage("data/save_file.txt");
         this.tasks = new TaskList();
         this.parser = new Parser();
+        this.stage = stage;
     }
     private int getNumTasks() {
         return this.tasks.getTaskList().size();
@@ -107,8 +110,8 @@ public class Duke {
      */
     protected String init() {
         String result = "";
-        result += Ui.printDialog("Hello! I'm Elon Musk. Type 'help' if you know nothing HAHAHA\n"
-                + "Your tasks will be saved at /data\nWhat can WE do for you?");
+        result += Ui.printDialog("Hello! I'm Elon Musk. Type 'help' if you know nothing\n"
+                + "Your tasks will be saved at /data\nWhat can I do for you?");
         ArrayList<String> savedTasks = storage.loadSavedTasks();
         if (savedTasks.size() > 0 && savedTasks.get(0).equals("000")) {
             result += Ui.printDialog("This is the first time you use Duke!");
@@ -126,6 +129,7 @@ public class Duke {
     public String getResponse(String content) {
         content = content.strip();
         if (content.equals(Commands.BYE.getAction())) {
+            this.stage.close();
             return Ui.printDialog("Bye. Hope to see you again soon!");
             //exit the program
         }

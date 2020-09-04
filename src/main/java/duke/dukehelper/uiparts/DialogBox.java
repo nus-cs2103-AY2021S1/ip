@@ -7,15 +7,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -37,29 +33,18 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            this.setSpacing(20);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        this.getStylesheets().add(this.getClass().getClassLoader().getResource("style/dialog.css").toString());
+        this.getStyleClass().add("layout");
+        dialog.getStyleClass().add("message-right");
         dialog.setText(text);
-        Rectangle clip = new Rectangle(
-                displayPicture.getFitWidth(), displayPicture.getFitHeight()
-        );
-        clip.setArcWidth(10);
-        clip.setArcHeight(10);
-        displayPicture.setClip(clip);
-
-        // snapshot the rounded image.
-        SnapshotParameters parameters = new SnapshotParameters();
-        parameters.setFill(Color.TRANSPARENT);
-        WritableImage image = displayPicture.snapshot(parameters, null);
-
-        // remove the rounding clip so that our effect can show through.
-        displayPicture.setClip(null);
-
-        // apply a shadow effect.
-        displayPicture.setEffect(new DropShadow(20, Color.BLACK));
+        Circle clip = new Circle(displayPicture.getX() + 35, displayPicture.getY() + 35, 35);
         displayPicture.setImage(img);
+        displayPicture.setClip(clip);
     }
 
     /**
@@ -70,6 +55,8 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        //dialog.setStyle("-fx-font: 16px \"Serif\"; -fx-text-alignment: left");
+        dialog.getStyleClass().add("message-left");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

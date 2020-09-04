@@ -45,11 +45,11 @@ public class MainWindow extends AnchorPane {
 
     private void setUpFunctionality() {
         sendButton.setOnMouseClicked((event) -> {
-            addDialog();
+            if (!userInput.getText().strip().equals("")) addDialog();
         });
 
         userInput.setOnAction((event) -> {
-            addDialog();
+            if (!userInput.getText().strip().equals("")) addDialog();
         });
     }
 
