@@ -7,9 +7,32 @@ import duke.task.Task;
  */
 public class Ui {
 
+    public static final String BYE_DESCRIPTION = "'bye' - Save task list "
+            + "to local hard disk and exit bot";
+    public static final String DEADLINE_DESCRIPTION = "'deadline [task] /by "
+            + "[date and time]' - Adds a task that is to be done by"
+            + " a certain deadline into the task list.";
+    public static final String DONE_DESCRIPTION = "'done [number]'"
+            + " - Marks the task corresponding with the task index"
+            + "in the task list as done";
+    public static final String DELETE_DESCRIPTION = "'delete [number]'"
+            + "- Deletes the task corresponding with the task index"
+            + "in the task list.";
+    public static final String EVENT_DESCRIPTION = "'event [task] /at "
+            + "[date and time]' - Adds an event that is to be attended into "
+            + "the task list.";
+    public static final String FIND_DESCRIPTION = "'find [keyword]' - Find "
+            + "all tasks matching the keyword from the task list and display them";
     public static final String GREET_MESSAGE =
-            "==================================="
-                    + "Hi, my name is Duke.\nWhat can I do for you?";
+            "===================================" + "Hi, my name is Duke."
+                    + "\nWhat can I do for you?"
+                    + "\nFor more information on the commands you can use, "
+                    + "type 'help'.";
+    public static final String TODO_DESCRIPTION = "'todo [task]' - "
+            + "Adds a task that is to be done into the task list.";
+    public static final String LIST_DESCRIPTION = "'list' - Brings up "
+            + "the task list, displaying all the current tasks "
+            + "you have added thus far.";
     private static final String BORDER =
             "=================================";
 
@@ -105,5 +128,21 @@ public class Ui {
      */
     public String printNoMatch(String match) {
         return "Sorry! No matches found for " + match + ".";
+    }
+
+    /**
+     * Prints out the list of commands to use in the chat bot.
+     * @return String list of all the commands and their descriptions.
+     */
+    public String printHelp() {
+        return "Here are the list of commands you can use:"
+                + "\n" + BYE_DESCRIPTION
+                + "\n" + DEADLINE_DESCRIPTION
+                + "\n" + DONE_DESCRIPTION
+                + "\n" + DELETE_DESCRIPTION
+                + "\n" + EVENT_DESCRIPTION
+                + "\n" + FIND_DESCRIPTION
+                + "\n" + TODO_DESCRIPTION
+                + "\n" + LIST_DESCRIPTION;
     }
 }

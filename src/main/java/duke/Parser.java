@@ -6,6 +6,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.UnknownCommand;
 import duke.exception.DukeEmptyArgumentException;
@@ -24,6 +25,7 @@ public class Parser {
     private static final String DONE = "done";
     private static final String EVENT = "event";
     private static final String FIND = "find";
+    private static final String HELP = "help";
     private static final String LIST = "list";
     private static final String SPACE = " ";
     private static final String TODO = "todo";
@@ -41,48 +43,54 @@ public class Parser {
         assert input != null: "String object cannot be null";
         String command = input.strip();
         String[] commandWordArray = command.split(SPACE);
-        switch (commandWordArray[0]) {
+        String firstWord = commandWordArray[0].toLowerCase();
+        switch (firstWord) {
         case BYE:
             if (commandWordArray.length != 1) {
-                return new UnknownCommand(command);
+                return new UnknownCommand(firstWord);
             }
-            return new ByeCommand(command, true);
+            return new ByeCommand(firstWord, true);
         case LIST:
             if (commandWordArray.length != 1) {
-                return new UnknownCommand(command);
+                return new UnknownCommand(firstWord);
             }
-            return new ListCommand(command);
+            return new ListCommand(firstWord);
         case DONE:
-            if (command.substring(commandWordArray[0].length())
+            if (command.substring(firstWord.length())
                     .isBlank()) {
                 throw new DukeEmptyArgumentException(DONE);
             }
-            return new DoneCommand(commandWordArray[0],
+            return new DoneCommand(firstWord,
                     commandWordArray[1]);
         case DELETE:
-            if (command.substring(commandWordArray[0].length())
+            if (command.substring(firstWord.length())
                     .isBlank()) {
                 throw new DukeEmptyArgumentException(DELETE);
             }
-            return new DeleteCommand(commandWordArray[0],
+            return new DeleteCommand(firstWord,
                     commandWordArray[1]);
         case TODO:
         case DEADLINE:
         case EVENT:
-            if (command.substring(commandWordArray[0].length())
+            if (command.substring(firstWord.length())
                     .isBlank()) {
-                throw new DukeEmptyDescriptionException(commandWordArray[0]);
+                throw new DukeEmptyDescriptionException(firstWord);
             }
-            return new AddCommand(commandWordArray[0],
-                    command.substring(commandWordArray[0].length()
+            return new AddCommand(firstWord,
+                    command.substring(firstWord.length()
                             + SLASH_INDEX));
         case FIND:
-            if (command.substring(commandWordArray[0].length())
+            if (command.substring(firstWord.length())
                     .isBlank()) {
                 throw new DukeEmptyArgumentException(FIND);
             }
-            return new FindCommand(commandWordArray[0],
+            return new FindCommand(firstWord,
                     commandWordArray[1]);
+        case HELP:
+            if (commandWordArray.length != 1) {
+                return new UnknownCommand(command);
+            }
+            return new HelpCommand(firstWord);
         default:
             return new UnknownCommand(command);
         }
