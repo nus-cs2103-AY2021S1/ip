@@ -30,6 +30,9 @@ public class AddCommand extends Command {
     public String execute(Storage storage, TaskList tasks, Ui ui)
             throws DukeInvalidDateException,
             DukeInvalidArgumentException {
+        assert storage != null: "Storage object cannot be null";
+        assert tasks != null: "TaskList object cannot be null";
+        assert ui != null: "Ui object cannot be null";
         Task taskToBeAdded = null;
         if (command.equals("todo")) {
             taskToBeAdded = new Todo(extra);

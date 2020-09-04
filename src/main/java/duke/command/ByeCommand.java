@@ -23,6 +23,9 @@ public class ByeCommand extends Command {
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui)
             throws IOException {
+        assert storage != null: "Storage object cannot be null";
+        assert tasks != null: "TaskList object cannot be null";
+        assert ui != null: "Ui object cannot be null";
         storage.saveTasks(tasks);
         return ui.printSave() + "\n" + ui.printFarewell();
     }

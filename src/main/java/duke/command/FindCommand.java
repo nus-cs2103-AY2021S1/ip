@@ -20,6 +20,9 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) {
+        assert storage != null: "Storage object cannot be null";
+        assert tasks != null: "TaskList object cannot be null";
+        assert ui != null: "Ui object cannot be null";
         int counter = 0;
         String reply = ui.printFind() + "\n";
         for (int i = 0; i < tasks.getSize(); i++) {
