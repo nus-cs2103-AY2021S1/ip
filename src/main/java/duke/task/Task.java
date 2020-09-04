@@ -29,6 +29,7 @@ public abstract class Task {
 
     /**
      * Marks the task as done.
+     *
      * @return Indicator if the task is already completed.
      */
     public boolean complete() {
