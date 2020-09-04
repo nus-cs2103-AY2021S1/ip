@@ -28,7 +28,7 @@ public class Storage {
      */
     public void loadTasks(TaskList tasks)
             throws IOException {
-        assert tasks != null: "TaskList object cannot be null";
+        assert tasks != null : "TaskList object cannot be null";
         String currDir = System.getProperty("user.dir");
         Path filePath = Paths.get(currDir,
                 "data", "tasks.csv");
@@ -74,7 +74,7 @@ public class Storage {
      * @throws IOException If saving of file fails.
      */
     public void saveTasks(TaskList tasks) throws IOException {
-        assert tasks != null: "TaskList object cannot be null";
+        assert tasks != null : "TaskList object cannot be null";
         String currDir = System.getProperty("user.dir");
         Path folderPath = Paths.get(currDir, "data");
         if (!Files.exists(folderPath)) {

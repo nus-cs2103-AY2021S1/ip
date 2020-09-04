@@ -21,9 +21,9 @@ public class UnknownCommand extends Command {
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui)
             throws DukeInvalidCommandException {
-        assert storage != null: "Storage object cannot be null";
-        assert tasks != null: "TaskList object cannot be null";
-        assert ui != null: "Ui object cannot be null";
+        assert storage != null : "Storage object cannot be null";
+        assert tasks != null : "TaskList object cannot be null";
+        assert ui != null : "Ui object cannot be null";
         throw new DukeInvalidCommandException();
     }
 

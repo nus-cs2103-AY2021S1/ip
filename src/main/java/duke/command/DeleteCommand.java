@@ -25,9 +25,9 @@ public class DeleteCommand extends Command {
     public String execute(Storage storage, TaskList tasks, Ui ui)
             throws DukeInvalidArgumentException,
             DukeInvalidTaskException {
-        assert storage != null: "Storage object cannot be null";
-        assert tasks != null: "TaskList object cannot be null";
-        assert ui != null: "Ui object cannot be null";
+        assert storage != null : "Storage object cannot be null";
+        assert tasks != null : "TaskList object cannot be null";
+        assert ui != null : "Ui object cannot be null";
         try {
             int taskNum = Integer.parseInt(extra)
                     - PARSE_INDEX;

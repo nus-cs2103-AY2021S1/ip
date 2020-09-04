@@ -40,10 +40,12 @@ public class Parser {
     public static Command parse(String input)
             throws DukeEmptyArgumentException,
             DukeEmptyDescriptionException {
-        assert input != null: "String object cannot be null";
+        assert input != null : "String object cannot be null";
         String command = input.strip();
         String[] commandWordArray = command.split(SPACE);
         String firstWord = commandWordArray[0].toLowerCase();
+        boolean isSingleWordCommand = command.substring(firstWord.length())
+                .isBlank();
         switch (firstWord) {
         case BYE:
             if (commandWordArray.length != 1) {
@@ -56,15 +58,13 @@ public class Parser {
             }
             return new ListCommand(firstWord);
         case DONE:
-            if (command.substring(firstWord.length())
-                    .isBlank()) {
+            if (isSingleWordCommand) {
                 throw new DukeEmptyArgumentException(DONE);
             }
             return new DoneCommand(firstWord,
                     commandWordArray[1]);
         case DELETE:
-            if (command.substring(firstWord.length())
-                    .isBlank()) {
+            if (isSingleWordCommand) {
                 throw new DukeEmptyArgumentException(DELETE);
             }
             return new DeleteCommand(firstWord,
@@ -72,16 +72,14 @@ public class Parser {
         case TODO:
         case DEADLINE:
         case EVENT:
-            if (command.substring(firstWord.length())
-                    .isBlank()) {
+            if (isSingleWordCommand) {
                 throw new DukeEmptyDescriptionException(firstWord);
             }
             return new AddCommand(firstWord,
                     command.substring(firstWord.length()
                             + SLASH_INDEX));
         case FIND:
-            if (command.substring(firstWord.length())
-                    .isBlank()) {
+            if (isSingleWordCommand) {
                 throw new DukeEmptyArgumentException(FIND);
             }
             return new FindCommand(firstWord,
