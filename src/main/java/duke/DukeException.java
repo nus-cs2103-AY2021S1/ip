@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Custom Exception for the project: Duke
+ * Custom Exception for the project: duke.Duke
  */
 public class DukeException extends Exception {
     public DukeException() {

@@ -12,20 +12,20 @@ public class Parser {
      * @return a String array that contains different components of the input.
      */
     public String[] splitIntoComponents(String input) {
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> inputComponents = new ArrayList<>();
         int spaceIndex = input.indexOf(" ");
         int slashIndex = input.indexOf("/");
         int infoIndex = input.indexOf(" ", slashIndex);
         if (spaceIndex == -1) {
-            list.add(input);
+            inputComponents.add(input);
         } else if (slashIndex == -1) {
-            list.add(input.substring(0,spaceIndex));
-            list.add(input.substring(spaceIndex+1));
+            inputComponents.add(input.substring(0,spaceIndex));
+            inputComponents.add(input.substring(spaceIndex+1));
         } else {
-            list.add(input.substring(0,spaceIndex));
-            list.add(input.substring(spaceIndex+1,slashIndex));
-            list.add(input.substring(infoIndex+1));
+            inputComponents.add(input.substring(0,spaceIndex));
+            inputComponents.add(input.substring(spaceIndex+1,slashIndex));
+            inputComponents.add(input.substring(infoIndex+1));
         }
-        return list.toArray(new String[0]);
+        return inputComponents.toArray(new String[0]);
     }
 }

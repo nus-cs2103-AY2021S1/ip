@@ -21,7 +21,7 @@ public class Ui {
      * Return Welcome Message according to default's style.
      */
     public String showWelcome() {
-        return show("Duke at your service. How may I help?");
+        return show("duke.Duke at your service. How may I help?");
     }
 
     /**

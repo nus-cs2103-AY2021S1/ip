@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 /**
- * Represents Task that the user wants Duke to remember
+ * Represents Task that the user wants duke.Duke to remember
  */
 public abstract class Task {
 
@@ -15,12 +15,12 @@ public abstract class Task {
     protected static final DateTimeFormatter SAVE_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     protected static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
-    private final String name;
+    private final String taskName;
     protected Optional<LocalDate> date;
     private boolean isDone;
 
     protected Task(String name) {
-        this.name = name;
+        this.taskName = name;
         this.isDone = false;
         this.date = Optional.empty();
     }
@@ -31,7 +31,7 @@ public abstract class Task {
      * @return String representing the name of Task.
      */
     public String getName() {
-        return name;
+        return taskName;
     }
 
     /**
@@ -67,7 +67,7 @@ public abstract class Task {
      */
     public String toSaveFormat() {
         String status = isDone ? "1" : "0";
-        return " | " + status + " | " + name ;
+        return " | " + status + " | " + taskName ;
     }
 
     /**
@@ -78,6 +78,6 @@ public abstract class Task {
     public String toString() {
         //String icon = isDone ? "\u2713" : "\u2718";
         String icon = isDone ? "X" : " ";
-        return "[" + icon + "] " + name;
+        return "[" + icon + "] " + taskName;
     }
 }

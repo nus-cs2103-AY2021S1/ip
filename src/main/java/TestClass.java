@@ -1,3 +1,4 @@
+import graphicInterface.DialogBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,7 +11,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class TestClass extends Application {
     private ScrollPane scrollPane;
@@ -42,7 +42,7 @@ public class TestClass extends Application {
         stage.setScene(scene);
         stage.show();
 
-        stage.setTitle("Duke"); // Name of the windows
+        stage.setTitle("duke.Duke"); // Name of the windows
         stage.setResizable(false);
         //Dimensions of Windows
         stage.setMinHeight(600.0);
@@ -102,7 +102,7 @@ public class TestClass extends Application {
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     /*
@@ -110,15 +110,15 @@ public class TestClass extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                new graphicInterface.DialogBox(userText, new ImageView(user)),
+                new graphicInterface.DialogBox(dukeText, new ImageView(duke))
         );
         userInput.clear();
     }
      */
     /**
      * Iteration 3:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      * Unlike Iteration 2, the format for reply is mirror image of the input.
      */
@@ -137,6 +137,6 @@ public class TestClass extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return "duke.Duke heard: " + input;
     }
 }

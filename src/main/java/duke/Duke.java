@@ -1,21 +1,18 @@
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+package duke;
+
 import duke.task.Task;
-import duke.DukeException;
 
 /**
  * Responsible for interpreting the input and interacting with the User.
  */
 public class Duke {
     private final Ui ui;
-    private TaskList taskList;
+    private TaskList tasks;
     private final Storage storage;
     private final Parser parser;
 
     /**
-     * Initialised Duke with a designated location to read and save the data.
+     * Initialised duke.Duke with a designated location to read and save the data.
      * @param filePath File location to read and save data.
      */
     public Duke(String filePath) {
@@ -23,10 +20,10 @@ public class Duke {
         this.storage = new Storage(filePath);
         this.parser = new Parser();
         try {
-            this.taskList = new TaskList(storage.loadFile());
+            this.tasks = new TaskList(storage.loadFile());
         } catch (DukeException e) {
             ui.showError(e.getMessage());
-            this.taskList = new TaskList();
+            this.tasks = new TaskList();
         }
     }
 
@@ -45,40 +42,40 @@ public class Duke {
             switch (command) {
             //Common functions
             case "bye":
-                storage.saveFile(taskList.toSaveFormat());
+                storage.saveFile(tasks.toSaveFormat());
                 return ui.showBye();
             case "done":
                 index = Integer.parseInt(words[1]);
-                taskList.doTask(index);
-                return ui.showTaskDone(taskList.getTaskStatus(index));
+                tasks.doTask(index);
+                return ui.showTaskDone(tasks.getTaskStatus(index));
             case "list":
-                if (taskList.getTotalTask() == 0) {
+                if (tasks.getTotalTask() == 0) {
                     return ui.show("Currently, you have no tasks on hand");
                 } else {
-                    return ui.showTasks(taskList.toString());
+                    return ui.showTasks(tasks.toString());
                 }
 
             //3 different types of task
             case "event":
                 try {
-                    Task addedEvent = taskList.addEvent(words[1], words[2]);
-                    return ui.showTaskAdded(addedEvent.toString(), taskList.getTotalTask());
+                    Task addedEvent = tasks.addEvent(words[1], words[2]);
+                    return ui.showTaskAdded(addedEvent.toString(), tasks.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
                     return ui.showError("Error: Please key in as: \n" +
                             "event [title] /at YYYY-MM-DD [startTime] [endTime] where start and end time is in HH:MM ");
                 }
             case "todo":
                 try {
-                    Task addedToDo = taskList.addTodo(words[1]);
-                    return ui.showTaskAdded(addedToDo.toString(), taskList.getTotalTask());
+                    Task addedToDo = tasks.addTodo(words[1]);
+                    return ui.showTaskAdded(addedToDo.toString(), tasks.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
                     return ui.showError("Error: Please key in as: \n " +
                             "event [title]");
                 }
             case "deadline":
                 try {
-                    Task addedDeadline = taskList.addDeadLine(words[1], words[2]);
-                    return ui.showTaskAdded(addedDeadline.toString(), taskList.getTotalTask());
+                    Task addedDeadline = tasks.addDeadLine(words[1], words[2]);
+                    return ui.showTaskAdded(addedDeadline.toString(), tasks.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
                     return ui.showError("Error: Please key in as: \n " +
                             "event [title] /by YYYY-MM-DD HH:MM");
@@ -88,7 +85,7 @@ public class Duke {
             case "delete":
                 try {
                     index = Integer.parseInt(words[1]);
-                    Task deletedTask = taskList.deleteTask(index);
+                    Task deletedTask = tasks.deleteTask(index);
                     return ui.showDeletedTasks(deletedTask.toString());
                 } catch (NumberFormatException err) {
                     //echo("Error. Please key in an integer after \"done\"");
@@ -98,7 +95,7 @@ public class Duke {
 
             //Find task by keyword
             case "find":
-                String result = taskList.find(words[1]);
+                String result = tasks.find(words[1]);
                 if (result == ""){
                     return ui.show("No match found");
                 } else {
@@ -112,5 +109,10 @@ public class Duke {
         } catch (DukeException err) {
             return ui.showError(err.getMessage());
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(System.getProperty("java.version"));
+        System.out.println(System.getProperty("javafx.version"));
     }
 }
