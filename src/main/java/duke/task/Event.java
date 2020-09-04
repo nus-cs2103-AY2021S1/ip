@@ -12,8 +12,9 @@ public class Event extends Task {
     private LocalDateTime date;
 
     /**
-     * Create a Event with the given details and date.
+     * Creates a Event with the given details and date.
      * The Event is set as not done.
+     *
      * @param details Details of deadline.
      * @param date Date of the deadline.
      */
@@ -23,8 +24,9 @@ public class Event extends Task {
     }
 
     /**
-     * Create a Event with the given details and date.
+     * Creates a Event with the given details and date.
      * The Event is set as done if isDone is true.
+     *
      * @param details Details of the deadline.
      * @param isDone True if the deadline is done.
      * @param date Date of the deadline.
@@ -35,7 +37,8 @@ public class Event extends Task {
     }
 
     /**
-     * Return a string representation of the Event to be saved in hard disk.
+     * Returns a string representation of the Event to be saved in hard disk.
+     *
      * @return String representation of the Event.
      */
     @Override
@@ -45,7 +48,8 @@ public class Event extends Task {
     }
 
     /**
-     * Return a string representation of the Event to be printed.
+     * Returns a string representation of the Event to be printed.
+     *
      * @return String representation of the Event.
      */
     @Override

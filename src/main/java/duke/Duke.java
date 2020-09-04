@@ -17,14 +17,15 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
-    /** Create and initialize Duke. */
+    /** Creates and initializes Duke. */
     public Duke() {
         this.storage = new Storage(PATH);
         this.taskList = new TaskList(storage.load());
     }
 
     /**
-     * Set the ui of Duke.
+     * Sets the ui of Duke.
+     *
      * @param dialogContainer The dialogContainer for Ui.
      */
     public void setUi(VBox dialogContainer) {
@@ -32,7 +33,8 @@ public class Duke {
     }
 
     /**
-     * Get the response from Duke.
+     * Gets the response from Duke.
+     *
      * @param input Input of user.
      * @return The response of Duke.
      */
@@ -47,7 +49,7 @@ public class Duke {
         return false;
     }
 
-    /** Greet the user. */
+    /** Greets the user. */
     public void greet() {
         ui.greet();
     }

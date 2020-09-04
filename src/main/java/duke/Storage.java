@@ -23,10 +23,15 @@ import duke.task.ToDo;
  */
 public class Storage {
 
+    private static final String TODO = "T";
+    private static final String EVENT = "E";
+    private static final String DEADLINE = "D";
+
     private Path path;
 
     /**
-     * Create and initialise a storage object.
+     * Creates and initialises a storage object.
+     *
      * @param path The path where data are saved.
      */
     public Storage(Path path) {
@@ -34,7 +39,8 @@ public class Storage {
     }
 
     /**
-     * Return the list of task saved in file.
+     * Returns the list of task saved in file.
+     *
      * @return list of task saved in file.
      */
     public List<Task> load() {
@@ -49,26 +55,14 @@ public class Storage {
                     String savedTask = buffReader.readLine();
                     String type = savedTask.substring(0, 1);
                     switch (type) {
-                    case "T":
-                        list.add(new ToDo(savedTask.substring(4).trim(), savedTask.substring(2, 3).equals("T")));
+                    case TODO:
+                        loadTodo(list, savedTask);
                         break;
-                    case "D":
-                        String deadlineDetails = savedTask.substring(4);
-                        String[] deadlineArr = deadlineDetails.split("/by");
-                        Deadline deadline = new Deadline(
-                                deadlineArr[0].trim(),
-                                savedTask.substring(2, 3).equals("T"),
-                                LocalDateTime.parse(deadlineArr[1].trim()));
-                        list.add(deadline);
+                    case DEADLINE:
+                        loadDeadline(list, savedTask);
                         break;
-                    case "E":
-                        String eventDetails = savedTask.substring(4);
-                        String[] eventArr = eventDetails.split("/at");
-                        Event event = new Event(
-                                eventArr[0].trim(),
-                                savedTask.substring(2, 3).equals("T"),
-                                LocalDateTime.parse(eventArr[1].trim()));
-                        list.add(event);
+                    case EVENT:
+                        loadEvent(list, savedTask);
                         break;
                     default:
                     }
@@ -79,12 +73,12 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return list;
     }
 
     /**
-     * Add data to the file.
+     * Adds data to the file.
+     *
      * @param data Data to be added.
      */
     public void addData(String data) {
@@ -99,7 +93,8 @@ public class Storage {
     }
 
     /**
-     * Update the data in file.
+     * Updates the data in file.
+     *
      * @param data Data to be updated.
      * @param taskNumber Task number of the data.
      */
@@ -124,5 +119,29 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void loadTodo(List<Task> list, String savedTask) {
+        list.add(new ToDo(savedTask.substring(4).trim(), savedTask.substring(2, 3).equals("T")));
+    }
+
+    private void loadDeadline(List<Task> list, String savedTask) {
+        String deadlineDetails = savedTask.substring(4);
+        String[] deadlineArr = deadlineDetails.split("/by");
+        Deadline deadline = new Deadline(
+                deadlineArr[0].trim(),
+                savedTask.substring(2, 3).equals("T"),
+                LocalDateTime.parse(deadlineArr[1].trim()));
+        list.add(deadline);
+    }
+
+    private void loadEvent(List<Task> list, String savedTask) {
+        String eventDetails = savedTask.substring(4);
+        String[] eventArr = eventDetails.split("/at");
+        Event event = new Event(
+                eventArr[0].trim(),
+                savedTask.substring(2, 3).equals("T"),
+                LocalDateTime.parse(eventArr[1].trim()));
+        list.add(event);
     }
 }

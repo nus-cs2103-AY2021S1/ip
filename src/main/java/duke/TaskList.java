@@ -13,27 +13,24 @@ public class TaskList {
     private List<Task> list;
 
     /**
-     * Create and initialise a task list with the given list.
+     * Creates and initialises a task list with the given list.
+     *
      * @param list List of tasks to be added.
      */
     public TaskList(List<Task> list) {
         this.list = list;
     }
 
-    /** Return string representation all the tasks in the task list. */
+    /** Returns string representation all the tasks in the task list. */
     public String list() {
-        Iterator<Task> iterator = list.iterator();
-        int count = 0;
-        String result = "    Here are the tasks in your list:\n";
-        while (iterator.hasNext()) {
-            count++;
-            result += "    " + count + ". " + iterator.next().toString() + "\n";
-        }
+        String result = "Here are the tasks in your list:\n";
+        result += listToString(list);
         return result;
     }
 
     /**
-     * Return the size of the list.
+     * Returns the size of the list.
+     *
      * @return Size of list.
      */
     public int size() {
@@ -41,7 +38,8 @@ public class TaskList {
     }
 
     /**
-     * Return the task at the specified position.
+     * Returns the task at the specified position.
+     *
      * @param taskNumber The position of the task in the list.
      * @return The task at that position.
      */
@@ -50,7 +48,8 @@ public class TaskList {
     }
 
     /**
-     * Add the task to the list.
+     * Adds the task to the list.
+     *
      * @param task Task to be added to list.
      */
     public void addTask(Task task) {
@@ -58,8 +57,9 @@ public class TaskList {
     }
 
     /**
-     * Remove the task with the specified position in the list and return
+     * Removes the task with the specified position in the list and return
      * the task that is removed.
+     *
      * @param taskNumber The position of the task to be deleted.
      * @return The task that is deleted.
      */
@@ -68,19 +68,26 @@ public class TaskList {
     }
 
     /**
-     * Return string representation of tasks with the specified keyword.
+     * Returns string representation of tasks with the specified keyword.
+     *
      * @param keyword Keyword to be searched.
      */
     public String find(String keyword) {
         List<Task> filteredList = list.stream()
                 .filter(t -> t.getDetails().contains(keyword))
                 .collect(Collectors.toList());
-        Iterator<Task> iterator = filteredList.iterator();
+        String result = "Here are the matching tasks in your list:\n";
+        result += listToString(filteredList);
+        return result;
+    }
+
+    private String listToString(List<Task> list) {
+        Iterator<Task> iterator = list.iterator();
         int count = 0;
-        String result = "    Here are the matching tasks in your list:\n";
+        String result = "";
         while (iterator.hasNext()) {
             count++;
-            result += "    " + count + ". " + iterator.next().toString() + "\n";
+            result += count + ". " + iterator.next().toString() + "\n";
         }
         return result;
     }

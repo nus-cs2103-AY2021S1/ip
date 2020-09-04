@@ -13,12 +13,12 @@ public class Ui {
 
     private VBox dialogContainer;
 
-    /** Create and initiate an Ui object. */
+    /** Creates and initiates an Ui object. */
     public Ui(VBox dialogContainer) {
         this.dialogContainer = dialogContainer;
     }
 
-    /** Greet the user. */
+    /** Greets the user. */
     public void greet() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(
                 "Hello! I'm Duke\n" + "What can I do for you?\n", dukeImage));

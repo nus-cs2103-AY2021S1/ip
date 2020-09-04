@@ -6,8 +6,9 @@ package duke.task;
 public class ToDo extends Task {
 
     /**
-     * Create a ToDo with the given details.
+     * Creates a ToDo with the given details.
      * The ToDo is set as not done.
+     *
      * @param details Details of todo.
      */
     public ToDo(String details) {
@@ -15,8 +16,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Create a ToDo with the given details and date.
+     * Creates a ToDo with the given details and date.
      * The ToDo is set as done if isDone is true.
+     *
      * @param details Details of the todo.
      * @param isDone True if the todo is done.
      */
@@ -25,7 +27,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * Return a string representation of the ToDo to be saved in hard disk.
+     * Returns a string representation of the ToDo to be saved in hard disk.
+     *
      * @return String representation of the ToDo.
      */
     @Override
@@ -35,7 +38,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * Return a string representation of the ToDo to be printed.
+     * Returns a string representation of the ToDo to be printed.
+     *
      * @return String representation of the ToDo.
      */
     @Override

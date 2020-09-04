@@ -37,7 +37,7 @@ public class Parser {
     /** Returns the command based on user input. */
     public static Command parse(String input) throws DukeException {
         int i = input.trim().indexOf(' ');
-        String command = input;
+        String command = input.trim();
         String detail = "";
         if (i > 0) {
             command = input.substring(0, i);
@@ -60,14 +60,15 @@ public class Parser {
         case DELETE:
             return new DeleteCommand(parseNumber(detail));
         case FIND:
-            return new FindCommand(detail.trim());
+            return new FindCommand(detail);
         default:
             throw new DukeException("Oops! I'm sorry, but I don't know what that means");
         }
     }
 
     /**
-     * Parse the date given by user.
+     * Parses the date given by user.
+     *
      * @param dateString Date provided by user in the form of string.
      * @return Date in LocalDateTime.
      */
@@ -83,31 +84,33 @@ public class Parser {
     }
 
     /**
-     * Return the ToDo the user specified.
-     * @param input The todo details given by user.
+     * Returns the ToDo the user specified.
+     *
+     * @param todoDetail The todo details given by user.
      * @return A ToDo with the input given.
      */
-    public static ToDo parseTodo(String input) throws DukeException {
-        if (input.equals("")) {
+    public static ToDo parseTodo(String todoDetail) throws DukeException {
+        if (todoDetail.equals("")) {
             throw new DukeException("Oops! Todo cannot be empty");
         }
-        return new ToDo(input);
+        return new ToDo(todoDetail);
     }
 
     /**
-     * Return the Deadline the user specified.
-     * @param input The deadline details given by user.
+     * Returns the Deadline the user specified.
+     *
+     * @param deadlineDetail The deadline details given by user.
      * @return A Deadline with the input given.
      */
-    public static Deadline parseDeadline(String input) throws DukeException {
-        if (input.equals("")) {
+    public static Deadline parseDeadline(String deadlineDetail) throws DukeException {
+        if (deadlineDetail.equals("")) {
             throw new DukeException("Oops! Deadline cannot be empty");
         }
-        String[] arr = input.split("/by");
-        if (arr.length == 1 || arr[0].trim().equals("")) {
+        String[] arr = deadlineDetail.split("/by");
+        String detail = arr[0].trim();
+        if (arr.length == 1 || detail.equals("")) {
             throw new DukeException("Oops! You need to include both detail and time.");
         }
-        String detail = arr[0].trim();
         LocalDateTime date = parseDate(arr[1].trim());
         if (date == null) {
             throw new DukeException("Oops! Format of date and time might be wrong.");
@@ -116,19 +119,20 @@ public class Parser {
     }
 
     /**
-     * Return the Event the user specified.
-     * @param input The event details given by user.
+     * Returns the Event the user specified.
+     *
+     * @param eventDetail The event details given by user.
      * @return A Event with the input given.
      */
-    public static Event parseEvent(String input) throws DukeException {
-        if (input.trim().equals("")) {
+    public static Event parseEvent(String eventDetail) throws DukeException {
+        if (eventDetail.trim().equals("")) {
             throw new DukeException("Oops! Event cannot be empty");
         }
-        String[] arr = input.split("/at");
-        if (arr.length == 1 || arr[0].trim().equals("")) {
+        String[] arr = eventDetail.split("/at");
+        String detail = arr[0].trim();
+        if (arr.length == 1 || detail.equals("")) {
             throw new DukeException("Oops! You need to include both detail and time.");
         }
-        String detail = arr[0].trim();
         LocalDateTime date = parseDate(arr[1].trim());
         if (date == null) {
             throw new DukeException("Oops! Format of date and time might be wrong.");
@@ -137,13 +141,14 @@ public class Parser {
     }
 
     /**
-     * Parse the number given by user.
-     * @param input The number given by user in string.
+     * Parses the number given by user.
+     *
+     * @param number The number given by user in string.
      * @return An integer representing task number.
      */
-    public static int parseNumber(String input) throws DukeException {
+    public static int parseNumber(String number) throws DukeException {
         try {
-            return Integer.parseInt(input.trim());
+            return Integer.parseInt(number.trim());
         } catch (NumberFormatException e) {
             throw new DukeException("Oops! Please provide a number!");
         }

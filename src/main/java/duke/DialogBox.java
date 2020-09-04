@@ -26,7 +26,8 @@ public class DialogBox extends HBox {
     private Circle displayPicture;
 
     /**
-     * Create a DialogBox with the given text and image.
+     * Creates a DialogBox with the given text and image.
+     *
      * @param text Text to be displayed.
      * @param img Image of person.
      */
@@ -44,9 +45,7 @@ public class DialogBox extends HBox {
         displayPicture.setFill(new ImagePattern(img));
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
+    /** Flips the dialog box such that the ImageView is on the left and text on the right. */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
@@ -58,7 +57,8 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Return a dialog box for user.
+     * Returns a dialog box for user.
+     *
      * @param text The text entered by user.
      * @param img Image of user.
      * @return DialogBox for user.
@@ -69,7 +69,8 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Return a dialog box for Duke.
+     * Returns a dialog box for Duke.
+     *
      * @param text The response from Duke.
      * @param img Image of Duke.
      * @return DialogBox for Duke.

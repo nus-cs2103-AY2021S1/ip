@@ -8,8 +8,9 @@ public class Task {
     protected String details;
 
     /**
-     * Create a Task with the given details.
+     * Creates a Task with the given details.
      * The Task is set as not done.
+     *
      * @param details Details of task.
      */
     public Task(String details) {
@@ -18,8 +19,9 @@ public class Task {
     }
 
     /**
-     * Create a ToDo with the given details and date.
+     * Creates a ToDo with the given details and date.
      * The ToDo is set as done if isDone is true.
+     *
      * @param details Details of the todo.
      * @param isDone True if the todo is done.
      */
@@ -29,20 +31,22 @@ public class Task {
     }
 
     /**
-     * Return the details of the task.
+     * Returns the details of the task.
+     *
      * @return Details of the task.
      */
     public String getDetails() {
         return details;
     }
 
-    /** Mark the task as done. */
+    /** Marks the task as done. */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Return a string representation of the Task to be saved in hard disk.
+     * Returns a string representation of the Task to be saved in hard disk.
+     *
      * @return String representation of the Task.
      */
     public String store() {
@@ -50,7 +54,8 @@ public class Task {
     }
 
     /**
-     * Return a string representation of the ToDo to be printed.
+     * Returns a string representation of the ToDo to be printed.
+     *
      * @return String representation of the ToDo.
      */
     @Override

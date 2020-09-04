@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.concurrent.CompletableFuture;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -43,8 +45,16 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         if (duke.getResponse(input)) {
-            Platform.exit();
+            CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+            cf.thenRun(() -> Platform.exit());
         }
         userInput.clear();
+
     }
 }

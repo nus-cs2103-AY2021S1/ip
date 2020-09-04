@@ -10,6 +10,7 @@ import duke.Ui;
 public abstract class Command {
     /**
      * The actions to be carried out after the command is given.
+     *
      * @param taskList TaskList containing all the tasks.
      * @param storage Storage object which handles storing of data.
      * @param ui Ui that interact with user.
@@ -17,7 +18,8 @@ public abstract class Command {
     public abstract void execute(TaskList taskList, Storage storage, Ui ui);
 
     /**
-     * Return true if the command is ByeCommand.
+     * Returns true if the command is ByeCommand.
+     *
      * @return True if the command is ByeCommand
      */
     public abstract boolean isExit();
