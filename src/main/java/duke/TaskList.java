@@ -199,9 +199,11 @@ public class TaskList {
         } else {
             int i = Integer.parseInt(val);
             if (i > 0 && i <= tasks.size()) {
+                int temp = tasks.size();
                 String res = "Task has been removed.\n" + tasks.get(i - 1);
                 tasks.remove(i - 1);
                 res += "\nYou now have " + tasks.size() + " tasks in the list";
+                assert temp - tasks.size() == 1;
                 return res;
             } else {
                 throw new TaskDeletionException(tasks.size());
