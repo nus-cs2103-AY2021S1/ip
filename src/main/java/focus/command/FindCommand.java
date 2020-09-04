@@ -1,6 +1,7 @@
 package focus.command;
 
 import focus.exception.FocusException;
+import focus.exception.InvalidTaskKeywordException;
 import focus.storage.Storage;
 import focus.task.TaskList;
 
@@ -29,10 +30,10 @@ public class FindCommand extends Command {
         try {
             keyword = input.split("find")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new FocusException("\tPlease enter a keyword you wish to find!");
+            throw new InvalidTaskKeywordException();
         }
         if (keyword.isBlank()) {
-            throw new FocusException("\tPlease enter a keyword you wish to find!");
+            throw new InvalidTaskKeywordException();
         }
         return taskList.findTasks(keyword.trim());
     }

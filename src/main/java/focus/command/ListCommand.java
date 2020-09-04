@@ -1,6 +1,7 @@
 package focus.command;
 
 import focus.exception.FocusException;
+import focus.exception.InvalidListCommandException;
 import focus.storage.Storage;
 import focus.task.TaskList;
 
@@ -26,8 +27,7 @@ public class ListCommand extends Command {
      */
     public String execute(String input, TaskList taskList, Storage storage) throws FocusException {
         if (taskList.getSize() == 0) {
-            throw new FocusException("\tThere are currently no tasks on your list!\n"
-                    + "\tStart adding one now!");
+            throw new InvalidListCommandException();
         } else {
             return taskList.listTasks();
         }

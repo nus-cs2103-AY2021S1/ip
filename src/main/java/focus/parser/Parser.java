@@ -10,8 +10,8 @@ import focus.command.DoneCommand;
 import focus.command.ExitCommand;
 import focus.command.FindCommand;
 import focus.command.HelpCommand;
-import focus.command.InvalidCommand;
 import focus.command.ListCommand;
+import focus.exception.InvalidCommandException;
 import focus.task.Deadline;
 import focus.task.Event;
 import focus.task.Task;
@@ -27,8 +27,9 @@ public class Parser {
      *
      * @param input User's input.
      * @return Different commands depending on user's input.
+     * @throws InvalidCommandException When user inputs an invalid command.
      */
-    public static Command parse(String input) {
+    public static Command parse(String input) throws InvalidCommandException {
         Command command;
         if (input.startsWith("help")) { // list out the commands
             command = new HelpCommand();
@@ -49,7 +50,7 @@ public class Parser {
         } else if (input.equals("bye")) { // exit the bot
             return new ExitCommand();
         } else { // handle invalid inputs
-            command = new InvalidCommand();
+            throw new InvalidCommandException();
         }
         return command;
     }

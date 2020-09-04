@@ -1,6 +1,7 @@
 package focus.command;
 
 import focus.exception.FocusException;
+import focus.exception.InvalidTaskNumberException;
 import focus.storage.Storage;
 import focus.task.TaskList;
 
@@ -29,18 +30,15 @@ public class DoneCommand extends Command {
         try {
             indexString = input.substring(5);
         } catch (IndexOutOfBoundsException e) {
-            throw new FocusException("\tPlease enter a task number you wish to mark done!\n"
-                    + "\tYou have " + taskList.getSize() + " tasks on your list now.");
+            throw new InvalidTaskNumberException();
         }
         if (indexString.isBlank()) {
-            throw new FocusException("\tPlease enter a task number you wish to mark done!\n"
-                    + "\tYou have " + taskList.getSize() + " tasks on your list now.");
+            throw new InvalidTaskNumberException();
         }
 
         int index = Integer.parseInt(indexString);
         if ((index <= 0) || (index > taskList.getSize())) {
-            throw new FocusException("\tThere is no such task number.\n"
-                    + "\tPlease enter a valid one!");
+            throw new InvalidTaskNumberException();
         }
         return taskList.markTaskDone(index, storage);
     }
