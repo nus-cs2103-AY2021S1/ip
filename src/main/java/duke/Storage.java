@@ -78,9 +78,9 @@ public class Storage {
             }
             return tasks;
         } catch (FileNotFoundException e) {
-            throw new DukeException("☹ OOPS!!! No saved tasks were found.");
+            throw new DukeException("OOPS!!! No saved tasks were found.");
         } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException | DateTimeParseException e) {
-            throw new DukeException("☹ OOPS!!! The previous tasks were not saved correctly.");
+            throw new DukeException("OOPS!!! The previous tasks were not saved correctly.");
         }
     }
 
@@ -116,7 +116,7 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
-            throw new DukeException("☹ OOPS!!! There were some problems with saving the tasks.");
+            throw new DukeException("OOPS!!! There were some problems with saving the tasks.");
         }
     }
 }

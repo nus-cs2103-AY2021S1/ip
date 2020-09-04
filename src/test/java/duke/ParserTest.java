@@ -13,7 +13,7 @@ public class ParserTest {
             Parser.parse("deadline project /by 12");
         });
 
-        String expectedMessage = "☹ OOPS!!! The date is not valid.";
+        String expectedMessage = "OOPS!!! The date is not valid.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
@@ -24,7 +24,7 @@ public class ParserTest {
             Parser.parse("event project /at");
         });
 
-        String expectedMessage = "☹ OOPS!!! The description or date cannot be empty.";
+        String expectedMessage = "OOPS!!! The description or date cannot be empty.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
@@ -35,7 +35,7 @@ public class ParserTest {
             Parser.parse("");
         });
 
-        String expectedMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        String expectedMessage = "OOPS!!! I'm sorry, but I don't know what that means :-(";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
@@ -46,7 +46,7 @@ public class ParserTest {
             Parser.parse("hi");
         });
 
-        String expectedMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        String expectedMessage = "OOPS!!! I'm sorry, but I don't know what that means :-(";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
@@ -57,7 +57,7 @@ public class ParserTest {
             Parser.parse("done q");
         });
 
-        String expectedMessage = "☹ OOPS!!! The task number is not valid.";
+        String expectedMessage = "OOPS!!! The task number is not valid.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
@@ -68,7 +68,7 @@ public class ParserTest {
             Parser.parse("delete");
         });
 
-        String expectedMessage = "☹ OOPS!!! The description or date cannot be empty.";
+        String expectedMessage = "OOPS!!! The description or date cannot be empty.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }

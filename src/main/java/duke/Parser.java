@@ -65,13 +65,13 @@ public class Parser {
                 throw new IllegalArgumentException();
             }
         } catch (NumberFormatException e) {
-            throw new DukeException("☹ OOPS!!! The task number is not valid.");
+            throw new DukeException("OOPS!!! The task number is not valid.");
         } catch (IllegalArgumentException e) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The description or date cannot be empty.");
+            throw new DukeException("OOPS!!! The description or date cannot be empty.");
         } catch (DateTimeParseException e) {
-            throw new DukeException("☹ OOPS!!! The date is not valid.");
+            throw new DukeException("OOPS!!! The date is not valid.");
         }
     }
 
