@@ -78,6 +78,7 @@ public class Parser {
      */
     public static Task parseTaskData(String rawData) throws IOException {
         List<String> taskData = Arrays.asList(rawData.split("\\|"));
+        assert taskData.size() > 0 : "List of task data should be non-empty";
 
         TaskType taskType = TaskType.valueOf(taskData.get(0));
         boolean isDone = !taskData.get(1).equals("0");
