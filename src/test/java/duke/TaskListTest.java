@@ -21,9 +21,9 @@ public class TaskListTest {
         taskList.addTask(todo);
         taskList.addTask(deadline);
         taskList.addTask(event);
-        assertEquals("\n\t1.[T]✘ Get bread\n"
-                + "\t2.[D]✘ Finish project (by: Jan 23 2012)\n"
-                + "\t3.[E]✘ Birthday (at: May 30 2020)", taskList.toString());
+        assertEquals("\n\t1.[T]\u2718 Get bread\n"
+                + "\t2.[D]\u2718 Finish project (by: Jan 23 2012)\n"
+                + "\t3.[E]\u2718 Birthday (at: May 30 2020)", taskList.toString());
     }
 
     @Test
@@ -33,8 +33,8 @@ public class TaskListTest {
         taskList.addTask(deadline);
         taskList.addTask(event);
         taskList.deleteTask(2);
-        assertEquals("\n\t1.[T]✘ Get bread\n"
-                + "\t2.[E]✘ Birthday (at: May 30 2020)", taskList.toString());
+        assertEquals("\n\t1.[T]\u2718 Get bread\n"
+                + "\t2.[E]\u2718 Birthday (at: May 30 2020)", taskList.toString());
     }
 
     @Test
@@ -44,9 +44,9 @@ public class TaskListTest {
         taskList.addTask(deadline);
         taskList.addTask(event);
         taskList.markTaskAsDone(3);
-        assertEquals("\n\t1.[T]✘ Get bread\n"
-                + "\t2.[D]✘ Finish project (by: Jan 23 2012)\n"
-                + "\t3.[E]✓ Birthday (at: May 30 2020)", taskList.toString());
+        assertEquals("\n\t1.[T]\u2718 Get bread\n"
+                + "\t2.[D]\u2718 Finish project (by: Jan 23 2012)\n"
+                + "\t3.[E]\u2713 Birthday (at: May 30 2020)", taskList.toString());
     }
 
     @Test
@@ -56,6 +56,6 @@ public class TaskListTest {
         taskList.addTask(deadline);
         taskList.addTask(event);
         TaskList newTL = taskList.getTaskListOnDate(LocalDate.parse("2012-01-23"));
-        assertEquals("\n\t1.[D]✘ Finish project (by: Jan 23 2012)", newTL.toString());
+        assertEquals("\n\t1.[D]\u2718 Finish project (by: Jan 23 2012)", newTL.toString());
     }
 }

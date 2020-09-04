@@ -23,9 +23,7 @@ import duke.task.Todo;
  * Deals with making sense of user inputs.
  */
 public class Parser {
-    /**
-     * List of all the valid date inputs.
-     */
+    /** List of all the valid date inputs */
     private static final List<String> DATE_FORMATS = Arrays.asList("d/M/y", "y-M-d");
 
     /**
@@ -38,7 +36,7 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         try {
             String[] splitCommand = fullCommand.trim().split(" ", 2);
-            CommandInstruction instruction = CommandInstruction.valueOf(splitCommand[0].toUpperCase());
+            CommandInstruction instruction = parseCommandInstruction(splitCommand[0]);
             switch (instruction) {
             case LIST:
                 return new ListCommand();
@@ -96,5 +94,9 @@ public class Parser {
             }
         }
         return null;
+    }
+
+    private static CommandInstruction parseCommandInstruction(String stringCommand) {
+        return CommandInstruction.valueOf(stringCommand.toUpperCase());
     }
 }
