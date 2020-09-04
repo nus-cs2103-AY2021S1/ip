@@ -80,6 +80,9 @@ public class Parser {
         try {
             int givenIndex = Integer.parseInt(answer);
             int realIndex = givenIndex - 1;
+            if (realIndex >= taskList.getNumberOfTasks()) {
+                throw new IndexOutOfBoundsException();
+            }
             Command command;
             if (Commands.DONE.containsKeyWord(stringCommand)) {
                 command = new DoneCommand();

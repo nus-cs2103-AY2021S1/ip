@@ -11,14 +11,14 @@ import duke.ui.Ui;
  */
 public class TaskList {
     private Storage savedStorage;
-    private List<Task> allItems;
+    private List<Task> allTasks;
 
     /**
      * Creates an empty TaskList.
      */
     public TaskList() {
         this.savedStorage = new Storage();
-        this.allItems = this.savedStorage.getSavedTasks();
+        this.allTasks = this.savedStorage.getSavedTasks();
     }
 
     /**
@@ -28,9 +28,9 @@ public class TaskList {
      * @return response to User.
      */
     public String addTask(Task toAdd) {
-        this.allItems.add(toAdd);
+        this.allTasks.add(toAdd);
         String printTask = "Alright, its in your list now!\n\t" + toAdd
-                + "\nNow you have " + this.allItems.size() + " tasks.";
+                + "\nNow you have " + this.allTasks.size() + " tasks.";
         return Ui.printMessage(printTask);
     }
 
@@ -40,7 +40,7 @@ public class TaskList {
      * @return the tasks currently stored in a List
      */
     public List<Task> getAllTasks() {
-        return this.allItems;
+        return this.allTasks;
     }
 
     /**
@@ -50,12 +50,12 @@ public class TaskList {
      */
     public String printStore() {
         String printList;
-        if (this.allItems.size() == 0) {
+        if (this.allTasks.size() == 0) {
             printList = "There are no tasks added till now.\nAdd one by just typing its name.\n";
         } else {
             printList = "Please finish these tasks ASAP!\n";
             int counter = 1;
-            for (Task task : this.allItems) {
+            for (Task task : this.allTasks) {
                 printList = printList.concat("[" + counter + "] " + task + "\n");
                 counter++;
             }
@@ -72,7 +72,8 @@ public class TaskList {
      * @return response to User.
      */
     public String completeTask(int index) {
-        Task toComplete = this.allItems.get(index);
+        assert index < this.allTasks.size();
+        Task toComplete = this.allTasks.get(index);
         return toComplete.finishTask();
     }
 
@@ -83,7 +84,8 @@ public class TaskList {
      * @return response to User.
      */
     public String deleteTask(int index) {
-        this.allItems.remove(index);
+        assert index < this.allTasks.size();
+        this.allTasks.remove(index);
         return Ui.printDeleteTaskMessage();
     }
 
@@ -102,7 +104,7 @@ public class TaskList {
      */
     public String matchTasks(String toMatch) {
         List<Task> matchingTasks = new ArrayList<>();
-        for (Task task : this.allItems) {
+        for (Task task : this.allTasks) {
             if (task.canMatch(toMatch)) {
                 matchingTasks.add(task);
             }
@@ -118,5 +120,9 @@ public class TaskList {
             }
         }
         return Ui.printMessage(printMatchingTasks);
+    }
+
+    public int getNumberOfTasks() {
+        return this.allTasks.size();
     }
 }
