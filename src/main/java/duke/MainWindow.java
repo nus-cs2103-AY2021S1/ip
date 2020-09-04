@@ -42,7 +42,7 @@ public class MainWindow extends AnchorPane {
         makeRoundImage(pingu1);
         makeRoundImage(pingu2);
 
-        dialogContainer.getChildren().addAll(new PinguDialogBox("NOOT NOOT! Pingu says hi\n Enter 'help' for help! ", pingu));
+        dialogContainer.getChildren().addAll(new PinguDialogBox("\tNOOT NOOT! Pingu says hi\n \tEnter 'help' to see help page! ", pingu));
     }
 
     private void makeRoundImage(ImageView imageView) {
@@ -83,10 +83,10 @@ public class MainWindow extends AnchorPane {
             this.dialogContainer.getChildren().addAll(
                     new PinguDialogBox("pingu doesn't understand what that means :(", pingu));
             this.userInput.clear();
-        } catch (DukeException e) {
-            this.dialogContainer.getChildren().addAll(
-                    new PinguDialogBox("pingu doesn't understand what that means :(", pingu));
-            this.userInput.clear();
+//        } catch (DukeException e) {
+//            this.dialogContainer.getChildren().addAll(
+//                    new PinguDialogBox("pingu doesn't understand what that means :(", pingu));
+//            this.userInput.clear();
         }
 
     }

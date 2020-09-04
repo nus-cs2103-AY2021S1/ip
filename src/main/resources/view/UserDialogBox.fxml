@@ -10,7 +10,7 @@
     <children>
         <Text fx:id="dialog">
          <font>
-            <Font name="Tw Cen MT" size="14.0" />
+            <Font name="Tw Cen MT" size="16.0" />
          </font></Text>
         <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
     </children>

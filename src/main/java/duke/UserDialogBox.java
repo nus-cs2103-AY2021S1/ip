@@ -36,7 +36,7 @@ public class UserDialogBox extends HBox {
             e.printStackTrace();
         }
 
-        this.dialog.setText(text);
+        this.dialog.setText("   " + text);
         this.displayPicture.setImage(img);
         this.setHeight(Region.USE_COMPUTED_SIZE);
     }

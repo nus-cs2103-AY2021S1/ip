@@ -12,28 +12,28 @@ public class HelpCommand extends Command {
         ui.addSentence("pingu help page!");
         ui.addSentence("commands to try:");
 
-        ui.addSentence("\ttodo <task>");
+        ui.addSentence("\t- todo <task>");
         ui.addSentence("\t\tadds <task> to the list");
 
-        ui.addSentence("\tevent <event> /at 2015-01-01");
-        ui.addSentence("\t\tadds <event> on 1 Jan 2015");
+        ui.addSentence("\t- event <event> /at YYYY-MM-DD");
+        ui.addSentence("\t\tadds <event> on <date>");
 
-        ui.addSentence("\tdeadline <task> /by 2015-01-01");
-        ui.addSentence("\t\tadds <task> due on 1 Jan 2015");
+        ui.addSentence("\t- deadline <task> /by YYYY-MM-DD");
+        ui.addSentence("\t\tadds <task> due on <date>");
 
-        ui.addSentence("\tlist");
+        ui.addSentence("\t- list");
         ui.addSentence("\t\tlists out all tasks");
 
-        ui.addSentence("\tdelete 3");
+        ui.addSentence("\t- delete 3");
         ui.addSentence("\t\tdeletes the 3rd task in the list");
 
-        ui.addSentence("\tdone 3");
+        ui.addSentence("\t- done 3");
         ui.addSentence("\t\tmarks the 3rd task as done");
 
-        ui.addSentence("\tfind <word>");
+        ui.addSentence("\t- find <word>");
         ui.addSentence("\t\tfinds tasks that contain <word>");
 
-        ui.addSentence("\tbye");
+        ui.addSentence("\t- bye");
         ui.addSentence("\t\texits the app");
 
         return ui.getResponse();

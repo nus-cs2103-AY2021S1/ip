@@ -27,10 +27,14 @@ public class Duke {
         }
     }
 
-    public String getResponse(String input) throws DukeException {
-        Command command = Parser.parse(input);
-        assert command != null;
-        return command.execute(tasks, ui, storage);
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            assert command != null;
+            return command.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
 }

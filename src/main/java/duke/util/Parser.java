@@ -56,7 +56,7 @@ public class Parser {
         String description = temp[0].trim();
         String by = temp[1].trim();
 
-        if (description.length() <= 0 || by.length() <= 0) {
+        if (description == null || by == null) {
             throw new DukeException("Please provide both a description and date in format 'description /by date'!");
         }
 
@@ -69,7 +69,7 @@ public class Parser {
         String description = temp[0].trim();
         String at = temp[1].trim();
 
-        if (description.length() <= 0 || at.length() <= 0) {
+        if (description == null || at == null) {
             throw new DukeException("Please provide both a description and date in format 'description /at date'!");
         }
 

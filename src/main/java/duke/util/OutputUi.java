@@ -12,7 +12,7 @@ public class OutputUi {
     }
 
     public void addSentence(String s) {
-        this.sb.append(s+"\n");
+        this.sb.append("  " + s + "\n");
     }
 
     public String getResponse() {
