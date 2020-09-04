@@ -19,6 +19,7 @@ public class SaveData {
         String commands = "";
         for (Task task : tasks) {
             String command = "";
+            //1 for done, 0 for not done
             String status = task.getStatus() ? " 1" : " 0";
             if (task instanceof Deadline) {
                 command = "deadline " + task.getContent() + " /by " + ((Deadline) task).getDeadlineStr();
@@ -46,7 +47,6 @@ public class SaveData {
             }
             FileWriter writer = new FileWriter(file, false);
             String commands = taskToCommand(data);
-            //System.out.println(duke.commands);
             writer.write(commands);
             writer.flush();
             writer.close();

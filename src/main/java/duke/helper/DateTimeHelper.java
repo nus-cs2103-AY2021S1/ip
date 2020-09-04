@@ -87,7 +87,6 @@ public class DateTimeHelper {
 
     public LocalDate getDate() {
         return this.fullDate;
-        //return date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + " " + fullTime;
     }
 
     /**

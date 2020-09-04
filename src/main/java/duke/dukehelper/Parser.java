@@ -12,6 +12,14 @@ import java.time.LocalDate;
 import java.util.function.Function;
 
 public class Parser {
+    private final static String PARSE_ERROR = "Wrong format\n    Your date and time(optional) "
+            + "should be in this format:\n      yyyy-mm-dd HHmm\n    e.g: 2019-10-15 1800 or 2019-10-15";
+    private final static String EMPTY_DESC_ERROR = "Description cannot be empty PLEASE!!!";
+    private final static String MISSING_INFO_ERROR = "NOT ENOUGH INFORMATION!!!";
+    private final static String NO_TIME = "";
+
+    private DateTimeHelper dtHelper;
+
     /**
      * Converts string to Todo
      * @param content
@@ -108,6 +116,59 @@ public class Parser {
         return new String[]{content, deadlineStr};
     }
 
+    private String extractTime() {
+        String resTime = dtHelper.processTimeStr();
+        if (resTime.equals("success")) {
+            return dtHelper.getTime();
+        }
+        return NO_TIME;
+    }
+
+    private LocalDate extractDate() throws DukeException {
+        if (dtHelper != null) {
+            return dtHelper.getDate();
+        } else {
+            throw new DukeException(PARSE_ERROR);
+        }
+    }
+
+    /**
+     * Classifies the task based on command type
+     * @param commandType
+     * @param content
+     * @param numTasks
+     * @param deadline
+     * @param exactTime
+     * @param deadlineStr to be stored
+     * @param isLoaded
+     * @param isDone
+     * @return classified task
+     */
+    private Task classifyTasks(Commands commandType, String content, int numTasks,
+                               LocalDate deadline, String exactTime, String deadlineStr,
+                               boolean isLoaded, boolean isDone ) {
+        String resultPrefix = "Got it. I've added this task:\n      ";
+        String resultSubfix = "Now you have " + (numTasks + 1) + " tasks in the list.";
+
+        switch (commandType) {
+            case DEADLINE: {
+                Deadline task = stringToDeadline(content, deadline, exactTime, deadlineStr, isLoaded, isDone);
+                task.setUiOutput(resultPrefix + task.returnStringForm() + "\n    " + resultSubfix);
+                return task;
+            }
+            case EVENT: {
+                Event task = stringToEvent(content, deadline, exactTime, deadlineStr, isLoaded, isDone);
+                task.setUiOutput(resultPrefix + task.returnStringForm() + "\n    " + resultSubfix);
+                return task;
+            }
+            default: {
+                Todo task = stringToTodo(content, isLoaded, isDone);
+                task.setUiOutput(resultPrefix + task.returnStringForm() + "\n    " + resultSubfix);
+                return task;
+            }
+        }
+    }
+
     /**
      * Parses operational commands
      * @param commandType
@@ -148,55 +209,30 @@ public class Parser {
      * @throws DukeException
      * @throws DukeInvalidArgumentException
      */
-    public Task parseTaskCommand(Commands commandType, String[] tokens, boolean isLoaded,
-                                 int numTasks) throws DukeException, DukeInvalidArgumentException {
-        String resultPrefix = "Got it. I've added this task:\n      ";
-        String resultSubfix = "Now you have " + (numTasks + 1) + " tasks in the list.";
-
+    public Task parseCommand(Commands commandType, String[] tokens, boolean isLoaded,
+                             int numTasks) throws DukeException, DukeInvalidArgumentException {
         String[] extractedData = extractData(isLoaded, tokens);
         String content = extractedData[0];
         String deadlineStr = extractedData[1];
         boolean isDone = tokens[tokens.length - 1].equals("1");
+
+        //init
         LocalDate deadline = LocalDate.now();
         String exactTime = "";
 
-        //Error handling
         if (deadlineStr.equals("") && (commandType == Commands.DEADLINE || commandType == Commands.EVENT)) {
-            throw new DukeInvalidArgumentException("NOT ENOUGH INFORMATION!!!");
+            throw new DukeInvalidArgumentException(MISSING_INFO_ERROR);
         }
         if (commandType == Commands.DEADLINE || commandType == Commands.EVENT) {
-            DateTimeHelper dtHelper = DateTimeHelper.processDateTime(deadlineStr);
-            if (dtHelper != null) {
-                deadline = dtHelper.getDate();
-                String resTime = dtHelper.processTimeStr();
-                if (resTime.equals("success")) {
-                    exactTime = dtHelper.getTime();
-                }
-            } else {
-                throw new DukeException("Wrong format\n    Your date and time(optional) "
-                        + "should be in this format:\n      yyyy-mm-dd HHmm\n    e.g: 2019-10-15 1800 or 2019-10-15");
-            }
+            dtHelper = DateTimeHelper.processDateTime(deadlineStr);
+            deadline = extractDate();
+            exactTime = extractTime();
         }
         content = content.strip();
         if (content.equals("")) {
-            throw new DukeException("Description cannot be empty PLEASE!!!");
+            throw new DukeException(EMPTY_DESC_ERROR);
         }
-        switch (commandType) {
-            case DEADLINE: {
-                Deadline task = stringToDeadline(content, deadline, exactTime, deadlineStr, isLoaded, isDone);
-                task.setUiOutput(resultPrefix + task.returnStringForm() + "\n    " + resultSubfix);
-                return task;
-            }
-            case EVENT: {
-                Event task = stringToEvent(content, deadline, exactTime, deadlineStr, isLoaded, isDone);
-                task.setUiOutput(resultPrefix + task.returnStringForm() + "\n    " + resultSubfix);
-                return task;
-            }
-            default: {
-                Todo task = stringToTodo(content, isLoaded, isDone);
-                task.setUiOutput(resultPrefix + task.returnStringForm() + "\n    " + resultSubfix);
-                return task;
-            }
-        }
+
+        return classifyTasks(commandType, content, numTasks, deadline, exactTime, deadlineStr, isLoaded, isDone);
     }
 }
