@@ -1,6 +1,5 @@
 package duke.ui;
 
-import duke.ui.PopUpBox;
 import duke.utils.Storage;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -28,17 +27,16 @@ public class DataSaver implements PopUpBox {
         window.setTitle("Are you sure?");
         window.setMinWidth(250);
 
-        Label label = new Label("You are going to exit Duke!");
-
         // create confirmation buttons
         Button saveAndQuit = new Button("Save and quit");
         Button notSaveAndQuit = new Button("Do not save and quit");
         Button cancel = new Button("Cancel");
 
+        Label saveDataMessage = new Label();
         saveAndQuit.setOnAction(e -> {
             isQuitting = true;
-            storage.saveDataToFile(label);
-            label.setText("Content has been Saved for you!");
+            storage.saveDataToFile(saveDataMessage);
+            saveDataMessage.setText("Content has been Saved for you!");
             window.close();
         });
 
@@ -53,7 +51,7 @@ public class DataSaver implements PopUpBox {
         });
 
         VBox layout = new VBox(20);
-        layout.getChildren().addAll(label, saveAndQuit, notSaveAndQuit, cancel);
+        layout.getChildren().addAll(saveDataMessage, saveAndQuit, notSaveAndQuit, cancel);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout, DEFAULT_SCENE_WIDTH, DEFAULT_SCENE_HEIGHT);

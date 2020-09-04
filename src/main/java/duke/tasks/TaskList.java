@@ -108,7 +108,7 @@ public class TaskList {
         output += task + "\n";
         tasks.remove(index - 1);
         assert tasks.size() < size : "Item not deleted successfully";
-        size -= 1;
+        size--;
         output += String.format("Now you have %s %s in the list.\n", size, (size > 1 ? "tasks" : "task"));
         return output;
     }
