@@ -23,8 +23,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/meme.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/meme2.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/meme.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/meme2.png"));
 
     @FXML
     public void initialize() {
@@ -42,11 +42,26 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        printUserDialog(input);
+        duke.handleInput(input);
         userInput.clear();
+    }
+
+    /**
+     * Display duke statement on window.
+     *
+     * @param statement display the input statement.
+     */
+    public void printDukeDialog(String statement) {
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(statement, dukeImage));
+    }
+
+    /**
+     * Display user statement on window.
+     *
+     * @param statement display the input statement.
+     */
+    public void printUserDialog(String statement) {
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(statement, userImage));
     }
 }

@@ -1,6 +1,6 @@
-package duke;
+package duke.common;
 
-import java.util.Scanner;
+import duke.Main;
 
 /**
  * Class create to print items.
@@ -12,14 +12,15 @@ import java.util.Scanner;
 public class Ui {
 
     /**
-     * Print out welcome message with the menu.
+     * Return welcome message.
+     *
+     * @return string welcome message.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo =
                 " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                         + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo + "\nHello ! I'm Duke.\nWhat can I do for you?");
-        System.out.println(getMenu());
+        return logo + "\nHello ! I'm Duke.\nWhat can I do for you?";
     }
 
     /**
@@ -27,7 +28,7 @@ public class Ui {
      *
      * @return String menu
      */
-    private String getMenu() {
+    public String getMenu() {
         return "1. list\n" + "2. done {item number}\n" + "3. todo {description}\n"
                 + "4. deadline {description} /by {dd/mm/yyyy} {hhmm}\n"
                 + "\t e.g. deadline return book /by 1/12/2020 1800\n"
@@ -40,26 +41,14 @@ public class Ui {
      * Print loading error that will use when file fail to load.
      */
     public void showLoadingError() {
-        System.err.println("Error: Fail to load file!");
-    }
-
-    /**
-     * Print prompt to user from command.
-     * Get command from user after prompt.
-     *
-     * @return command that user input.
-     */
-    public String readCommand() {
-        System.out.println("Please enter your command(not the number but the full command):\n");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        showError("Error: Fail to load file!");
     }
 
     /**
      * Use to divide the application to be more user friendly.
      */
-    public void showLine() {
-        System.out.println("_____________________________________________________________________________");
+    public String showLine() {
+        return "____________________________________";
     }
 
     /**
@@ -76,7 +65,7 @@ public class Ui {
      *
      * @param statement any string input
      */
-    public void printString(String statement) {
-        System.out.println(statement);
+    public static void printString(String statement) {
+        Main.getMainWindow().printDukeDialog(statement);
     }
 }

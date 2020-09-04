@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Ui;
+import duke.common.Ui;
 import duke.io.Storage;
 import duke.io.TaskList;
 import duke.task.Todo;
@@ -36,15 +36,14 @@ public class ToDoCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showLine();
         String description = fullCommand.substring(fullCommand.indexOf(" ")).trim();
-        ui.printString("Got it. I've added this task:");
+        StringBuilder resultSb = new StringBuilder(
+                String.format("%s\n %s\n", ui.showLine(), "Got it. I've added this task:"));
         taskList.addTask(new Todo(description));
-        ui.printString("\t" + taskList.retrieveTask(taskList.sizeOfList() - 1));
-        ui.printString(String.format("Now you have %o tasks in list.\n", taskList.sizeOfList()));
-        ui.showLine();
-
+        resultSb.append("\t").append(taskList.retrieveTask(taskList.sizeOfList() - 1)).append("\n");
+        resultSb.append(String.format("Now you have %o tasks in list.\n", taskList.sizeOfList())).append(ui.showLine());
         storage.write(taskList);
+        Ui.printString(resultSb.toString());
     }
 
     /**

@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import duke.DukeException;
-import duke.Ui;
+import duke.common.DukeException;
+import duke.common.Ui;
 import duke.io.Storage;
 import duke.io.TaskList;
 import duke.task.Event;
@@ -71,13 +71,15 @@ public class EventCommand extends Command {
         }
         LocalDateTime startLocalDateTime = LocalDateTime.of(localDate, startLocalTime);
         LocalDateTime endLocalDateTime = LocalDateTime.of(localDate, endLocalTime);
+        StringBuilder resultSb = new StringBuilder(
+                String.format("%s\n %s\n", ui.showLine(), "Got it. I've added this task:"));
 
-        ui.printString("Got it. I've added this task:");
         taskList.addTask(new Event(description, startLocalDateTime, endLocalDateTime));
-        ui.printString("\t" + taskList.retrieveTask(taskList.sizeOfList() - 1));
-        ui.printString(String.format("Now you have %o tasks in list.\n", taskList.sizeOfList()));
-        ui.showLine();
-
+        resultSb.append("\t")
+                .append(taskList.retrieveTask(taskList.sizeOfList() - 1))
+                .append(String.format("Now you have %o tasks in list.\n", taskList.sizeOfList()))
+                .append(ui.showLine());
+        Ui.printString(resultSb.toString());
         storage.write(taskList);
     }
 

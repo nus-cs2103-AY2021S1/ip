@@ -2,8 +2,8 @@ package duke.command;
 
 import java.util.ArrayList;
 
-import duke.DukeException;
-import duke.Ui;
+import duke.common.DukeException;
+import duke.common.Ui;
 import duke.io.Storage;
 import duke.io.TaskList;
 import duke.task.Task;
@@ -44,14 +44,16 @@ public class FindCommand extends Command {
         ui.showLine();
         String[] input = fullCommand.split(" ");
         String toFind;
+        StringBuilder resultSb = new StringBuilder(
+                String.format("%s\n %s\n", ui.showLine(), "Here are the matching tasks in your list:"));
         if (input.length == 2) {
             toFind = fullCommand.substring(fullCommand.indexOf(" ")).trim();
             ArrayList<Task> results = taskList.find(toFind);
-            ui.printString("Here are the matching tasks in your list:");
             for (int i = 0; i < results.size(); i++) {
-                ui.printString(String.format("%d. %s%n", i + 1, results.get(i)));
+                resultSb.append(String.format("%d. %s%n\n", i + 1, results.get(i)));
             }
-            ui.showLine();
+            resultSb.append(ui.showLine());
+            Ui.printString(resultSb.toString());
         } else {
             throw new DukeException("No input search item!");
         }

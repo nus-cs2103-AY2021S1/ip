@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Ui;
+import duke.common.DukeException;
+import duke.common.Ui;
 import duke.io.Storage;
 import duke.io.TaskList;
 
@@ -38,18 +38,19 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.showLine();
         String[] input = fullCommand.split(" ");
-        ui.printString("Noted. I've removed this task: ");
+        StringBuilder resultSb = new StringBuilder(
+                String.format("%s\n %s\n", ui.showLine(), "Noted. I've removed this task: "));
         if (input.length == 2) {
             int index = Integer.parseInt(input[1]);
-            ui.printString(String.format("\t%s\n", taskList.retrieveTask(index - 1)));
+            resultSb.append(String.format("\t%s\n", taskList.retrieveTask(index - 1)));
             taskList.deleteTask(Integer.parseInt(input[1]) - 1);
         } else {
             throw new DukeException("Cannot delete item!");
         }
-        ui.printString(String.format("Now you have %o tasks in the list\n", taskList.sizeOfList()));
-        ui.showLine();
+        resultSb.append(
+                String.format("Now you have %o tasks in the list\n %s", taskList.sizeOfList(), ui.showLine()));
+        Ui.printString(resultSb.toString());
 
         storage.write(taskList);
     }

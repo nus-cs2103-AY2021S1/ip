@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Ui;
+import duke.common.DukeException;
+import duke.common.Ui;
 import duke.io.Storage;
 import duke.io.TaskList;
 import duke.task.Task;
@@ -47,9 +47,10 @@ public class DoneCommand extends Command {
         } else {
             throw new DukeException("Cannot mark item done!");
         }
-        ui.printString("Nice! I've marked this task as done:");
-        ui.printString(String.format("%s\n", task));
-        ui.showLine();
+        StringBuilder resultSb = new StringBuilder(
+                String.format("%s\n %s\n", ui.showLine(), "Nice! I've marked this task as done:"));
+        resultSb.append((String.format("%s\n %s", task, ui.showLine())));
+        Ui.printString(resultSb.toString());
 
         storage.write(taskList);
     }

@@ -11,8 +11,8 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import duke.DukeException;
-import duke.Ui;
+import duke.common.DukeException;
+import duke.common.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -56,7 +56,11 @@ public class Storage {
                 String command = tempArr[0];
                 switch (command) {
                 case "duke.task.Todo":
-                    taskArrayList.add(new Todo(tempArr[2]));
+                    Task tempTodo = new Todo(tempArr[2]);
+                    if (tempArr[1].equals("true")) {
+                        tempTodo.markAsDone();
+                    }
+                    taskArrayList.add(tempTodo);
                     break;
                 case "duke.task.Deadline":
                     Task tempDeadline = new Deadline(tempArr[2], LocalDateTime.parse(tempArr[3]));
@@ -122,9 +126,9 @@ public class Storage {
             try {
                 File file = new File(filePath);
                 if (file.createNewFile()) {
-                    ui.printString("File created at: " + file);
+                    System.out.println("File created at: " + file);
                 } else {
-                    ui.printString("File already exist at: " + file);
+                    System.out.println("File already exist at: " + file);
                 }
             } catch (IOException e) {
                 ui.showError("Failed to create file: " + e.getMessage());
@@ -132,7 +136,7 @@ public class Storage {
         } else {
             try {
                 Files.createDirectories(path);
-                ui.printString("Directory created: " + path);
+                System.out.println("Directory created: " + path);
             } catch (IOException e) {
                 ui.showError("Failed to create directory: " + e.getMessage());
             }
