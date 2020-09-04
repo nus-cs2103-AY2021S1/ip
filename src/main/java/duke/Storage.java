@@ -83,6 +83,7 @@ public class Storage {
         final String type = taskComponents[0].trim();
         final boolean isCompleted = taskComponents[1].trim().equals("1");
         final String description = taskComponents[2].trim();
+        assert(type.equals("T") || type.equals("E") || type.equals("D"));
         if (type.equals("T")) {
             return new Todo(description, isCompleted);
         } else {
