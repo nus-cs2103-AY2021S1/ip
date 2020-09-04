@@ -42,13 +42,17 @@ public class TaskList {
         return this.tasks.size();
     }
 
+<<<<<<< HEAD
     /**
      * Gets the task object according to the taskNumber.
      * 
      * @param taskNumber The task number is according to the user input.
      * @return a Task object.
      */
+    public Task get(int taskNumber) {
+=======
     public Task getTask(int taskNumber) {
+>>>>>>> branch-A-CodingStandard
         return tasks.get(taskNumber);
     }
 

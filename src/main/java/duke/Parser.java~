@@ -133,13 +133,17 @@ public class Parser {
         }
     }
 
+<<<<<<< HEAD
     /**
      * Returns the task number of the task for its status to be updated.
      * 
      * @return the task number of the task.
      * @throws MissingTaskNumberException  Exception is thrown when task number is missing.
      */
+    public int doneTask() throws MissingTaskNumberException {
+=======
     public int getDoneTaskNumber() throws MissingTaskNumberException {
+>>>>>>> branch-A-CodingStandard
 
         int taskNumber = -1;
         taskNumber = markDoneTask(command);
@@ -169,12 +173,16 @@ public class Parser {
         }
     }
 
+<<<<<<< HEAD
     /**
      * Returns the task number of the task that is to be deleted.
      * 
      * @return the task number of the task.
      */
+    public int deleteTask() {
+=======
     public int getDeleteTaskNumber() {
+>>>>>>> branch-A-CodingStandard
         int taskNumber = -1;
 
         try {

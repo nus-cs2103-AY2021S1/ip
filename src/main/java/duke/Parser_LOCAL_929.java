@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class Parser {
     private String command;
     private String[] commandParts;
-    private final String HORIZONTAL_LINE = "_______________________________________________________";
+    private final String horizontalLine = "_______________________________________________________";
 
     /**
      * Returns the commandNumber.
@@ -73,11 +73,11 @@ public class Parser {
             return newToDoTask;
 
         } catch (Exception e) {
-            throw new MissingTaskDescriptionException(HORIZONTAL_LINE
+            throw new MissingTaskDescriptionException(horizontalLine
                     + "\r\n"
                     + "Oops! The description cannot be empty :("
                     + "\r\n"
-                    + HORIZONTAL_LINE);
+                    + horizontalLine);
         }
     }
 
@@ -99,11 +99,11 @@ public class Parser {
 
         } catch (Exception e) {
 
-            throw new MissingTaskDescriptionException(HORIZONTAL_LINE
+            throw new MissingTaskDescriptionException(horizontalLine
                     + "\r\n"
                     + "Oops! The description cannot be empty :("
                     + "\r\n"
-                    + HORIZONTAL_LINE);
+                    + horizontalLine);
         }
     }
 
@@ -125,11 +125,11 @@ public class Parser {
 
         } catch (Exception e) {
 
-            throw new MissingTaskDescriptionException(HORIZONTAL_LINE
+            throw new MissingTaskDescriptionException(horizontalLine
                     + "\r\n"
                     + "Oops! The description cannot be empty :("
                     + "\r\n"
-                    + HORIZONTAL_LINE);
+                    + horizontalLine);
         }
     }
 
@@ -139,7 +139,7 @@ public class Parser {
      * @return the task number of the task.
      * @throws MissingTaskNumberException  Exception is thrown when task number is missing.
      */
-    public int getDoneTaskNumber() throws MissingTaskNumberException {
+    public int doneTask() throws MissingTaskNumberException {
 
         int taskNumber = -1;
         taskNumber = markDoneTask(command);
@@ -161,11 +161,11 @@ public class Parser {
 
         } catch (Exception e) {
 
-            throw new MissingTaskNumberException(HORIZONTAL_LINE
+            throw new MissingTaskNumberException(horizontalLine
                     + "\r\n"
                     + "Oops! The task number cannot be missing :("
                     + "\r\n"
-                    + HORIZONTAL_LINE);
+                    + horizontalLine);
         }
     }
 
@@ -174,7 +174,7 @@ public class Parser {
      * 
      * @return the task number of the task.
      */
-    public int getDeleteTaskNumber() {
+    public int deleteTask() {
         int taskNumber = -1;
 
         try {
@@ -199,11 +199,11 @@ public class Parser {
 
         } catch (Exception e) {
 
-            throw new MissingTaskNumberException(HORIZONTAL_LINE
+            throw new MissingTaskNumberException(horizontalLine
                     + "\r\n"
                     + "Oops! The task number cannot be missing :("
                     + "\r\n"
-                    + HORIZONTAL_LINE);
+                    + horizontalLine);
         }
     }
 }

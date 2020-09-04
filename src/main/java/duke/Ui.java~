@@ -7,13 +7,16 @@ import java.util.Scanner;
  * Ui deals with interactions with users.
  */
 public class Ui {
+       
+/**
+ * Introduction of Mocha.
+     */
+    public void mochaIntroduction() {
+=======
     private final String HORIZONTAL_LINE = "_______________________________________________________";
     
-     /**
-     * Introduction of Mocha.
-     */
     public void sayIntroduction() {
-
+>>>>>>> branch-A-CodingStandard
         String nameIntro = "Hello, I'm Mocha!";
         String greeting = "What's up today!";
         System.out.println(HORIZONTAL_LINE
@@ -42,14 +45,19 @@ public class Ui {
     public Scanner createUserInputScanner() {
         return new Scanner(System.in);
     }
+<<<<<<< HEAD
 
     /**
      * Displays the message when a task is added.
      * 
      * @param task  Takes in a task object.
      * @param sizeOfTasks The size of the list of tasks.
-     */    
+     */
+    public void taskAdded(Task task, int sizeOfTasks) {
+=======
+    
     public void addTask(Task task, int sizeOfTasks) {
+>>>>>>> branch-A-CodingStandard
         if (task.getTaskType() == "ToDo") {
             
             System.out.println(HORIZONTAL_LINE
@@ -91,14 +99,20 @@ public class Ui {
             return;   
         }
     }
+<<<<<<< HEAD
 
     /**
      * Displays the message when a task is marked done.
      * 
      * @param task Takes in a task object.
-     */    
+     */
+    public void taskDone(Task task) {
+        System.out.println(horizontalLine
+=======
+    
     public void markTaskDone(Task task) {
         System.out.println(HORIZONTAL_LINE
+>>>>>>> branch-A-CodingStandard
                 + "\r\n"
                 + "Nice! One thing done: \r\n"
                 + task.toString()
@@ -128,12 +142,18 @@ public class Ui {
                 + "\r\n"
                 + HORIZONTAL_LINE);
     }
+<<<<<<< HEAD
 
     /**
      * Mocha's salutations.
-     */    
+     */
+    public void mochaGoodbye() {
+        System.out.println(horizontalLine
+=======
+    
     public void sayGoodbye() {
         System.out.println(HORIZONTAL_LINE
+>>>>>>> branch-A-CodingStandard
                 + "\r\n"
                 + "Bye! See ya soon!"
                 + "\r\n"
@@ -159,19 +179,34 @@ public class Ui {
                 + HORIZONTAL_LINE);
     }
     
+<<<<<<< HEAD
+//    public void commandNotRecognizedExceptionMessage() {
+//        System.out.println(horizontalLine
+=======
 //    public void commandNotRecognisedExceptionMessage() {
 //        System.out.println(HORIZONTAL_LINE
+>>>>>>> branch-A-CodingStandard
 //                + "\r\n"
 //                + "Oops! I couldn't understand what you mean :("
 //                + "\r\n"
 //                + HORIZONTAL_LINE);
 //    }
     
+<<<<<<< HEAD
+    
+//    public String commandNotRecognised() {
+//        return horizontalLine
+//                + "\r\n"
+//                + "Oops! I couldn't understand what you mean :("
+//                + "\r\n"
+//                + horizontalLine;
+=======
 //    public String commandNotRecognised() {
 //        return HORIZONTAL_LINE
 //                + "\r\n"
 //                + "Oops! I couldn't understand what you mean :("
 //                + "\r\n"
 //                + HORIZONTAL_LINE;
+>>>>>>> branch-A-CodingStandard
 //    }
 }

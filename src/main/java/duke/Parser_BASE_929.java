@@ -4,19 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Parser deals with making sense of the user command
+ * Deals with making sense of the user command
  */
 public class Parser {
     private String command;
     private String[] commandParts;
-    private final String HORIZONTAL_LINE = "_______________________________________________________";
+    private final String horizontalLine = "_______________________________________________________";
 
-    /**
-     * Returns the commandNumber.
-     * 
-     * @param command The user's input.
-     * @return 
-     */
     public int parseCommand(String command) {
         this.command = command;
         this.commandParts = command.split("\\s", 2);
@@ -40,15 +34,9 @@ public class Parser {
         }
     }
 
-    /**
-     * Creates a new Task object.
-     * 
-     * @param commandNumber Takes in the commandNumber that parseCommand returns.
-     * @return a Task object
-     * @throws MissingTaskDescriptionException Exception is thrown when task description is missing.
-     */
     public Task createTask(int commandNumber) throws MissingTaskDescriptionException {
         Task task = null;
+//        try {
         if (commandNumber == 1) {
             task = createNewToDo(command);
         } else if (commandNumber == 2) {
@@ -56,16 +44,12 @@ public class Parser {
         } else if (commandNumber == 3) {
             task = createNewEvent(command);
         }
+//        } catch (MissingTaskDescriptionException e) {
+//            System.out.println(e.getMessage());
+//        }
         return task;
     }
 
-    /**
-     * Creates a new ToDo object.
-     * 
-     * @param command Takes in the command that user inputs.
-     * @return a ToDo object.
-     * @throws MissingTaskDescriptionException Exception is thrown when task description is missing.
-     */
     public Task createNewToDo(String command) throws MissingTaskDescriptionException {
         try {
 
@@ -73,21 +57,14 @@ public class Parser {
             return newToDoTask;
 
         } catch (Exception e) {
-            throw new MissingTaskDescriptionException(HORIZONTAL_LINE
+            throw new MissingTaskDescriptionException(horizontalLine
                     + "\r\n"
                     + "Oops! The description cannot be empty :("
                     + "\r\n"
-                    + HORIZONTAL_LINE);
+                    + horizontalLine);
         }
     }
 
-    /**
-     * Creates a new Deadline object.
-     *
-     * @param command Takes in the command that user inputs.
-     * @return a Deadline object.
-     * @throws MissingTaskDescriptionException Exception is thrown when task description is missing.
-     */
     public Task createNewDeadline(String command) throws MissingTaskDescriptionException {
         try {
 
@@ -99,21 +76,14 @@ public class Parser {
 
         } catch (Exception e) {
 
-            throw new MissingTaskDescriptionException(HORIZONTAL_LINE
+            throw new MissingTaskDescriptionException(horizontalLine
                     + "\r\n"
                     + "Oops! The description cannot be empty :("
                     + "\r\n"
-                    + HORIZONTAL_LINE);
+                    + horizontalLine);
         }
     }
 
-    /**
-     * Creates a new Event object.
-     *
-     * @param command Takes in the command that user inputs.
-     * @return a Event object.
-     * @throws MissingTaskDescriptionException Exception is thrown when task description is missing.
-     */
     public Task createNewEvent(String command) throws MissingTaskDescriptionException {
         try {
 
@@ -125,34 +95,22 @@ public class Parser {
 
         } catch (Exception e) {
 
-            throw new MissingTaskDescriptionException(HORIZONTAL_LINE
+            throw new MissingTaskDescriptionException(horizontalLine
                     + "\r\n"
                     + "Oops! The description cannot be empty :("
                     + "\r\n"
-                    + HORIZONTAL_LINE);
+                    + horizontalLine);
         }
     }
 
-    /**
-     * Returns the task number of the task for its status to be updated.
-     * 
-     * @return the task number of the task.
-     * @throws MissingTaskNumberException  Exception is thrown when task number is missing.
-     */
-    public int getDoneTaskNumber() throws MissingTaskNumberException {
+    public int doneTask() throws MissingTaskNumberException {
 
         int taskNumber = -1;
         taskNumber = markDoneTask(command);
         return taskNumber;
     }
-
-    /**
-     * Helper class for doneTask().
-     *
-     * @param command Takes in the command that user inputs.
-     * @return the task number of the task for status to be updated.
-     * @throws MissingTaskNumberException Exception is thrown when task number is missing.
-     */
+        
+    
     public int markDoneTask(String command) throws MissingTaskNumberException {
         
         try {
@@ -161,20 +119,15 @@ public class Parser {
 
         } catch (Exception e) {
 
-            throw new MissingTaskNumberException(HORIZONTAL_LINE
+            throw new MissingTaskNumberException(horizontalLine
                     + "\r\n"
                     + "Oops! The task number cannot be missing :("
                     + "\r\n"
-                    + HORIZONTAL_LINE);
+                    + horizontalLine);
         }
     }
 
-    /**
-     * Returns the task number of the task that is to be deleted.
-     * 
-     * @return the task number of the task.
-     */
-    public int getDeleteTaskNumber() {
+    public int deleteTask() {
         int taskNumber = -1;
 
         try {
@@ -185,13 +138,6 @@ public class Parser {
         return taskNumber;
     }
 
-    /**
-     * Helper class for deleteTask().
-     * 
-     * @param command Takes in the command that user inputs.
-     * @return the task number of the task that is to be deleted.
-     * @throws MissingTaskNumberException Exception is thrown when task number is missing.
-     */
     public int deleteTaskFromList(String command) throws MissingTaskNumberException {
         try {
             int taskNumber = Integer.parseInt(commandParts[1].trim()) - 1;
@@ -199,11 +145,11 @@ public class Parser {
 
         } catch (Exception e) {
 
-            throw new MissingTaskNumberException(HORIZONTAL_LINE
+            throw new MissingTaskNumberException(horizontalLine
                     + "\r\n"
                     + "Oops! The task number cannot be missing :("
                     + "\r\n"
-                    + HORIZONTAL_LINE);
+                    + horizontalLine);
         }
     }
 }

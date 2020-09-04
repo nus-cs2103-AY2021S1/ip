@@ -67,6 +67,7 @@ public class Duke {
                     String HORIZONTAL_LINE = "_______________________________________________________";
                     
                     throw new CommandNotRecognisedException(HORIZONTAL_LINE
+>>>>>>> branch-A-CodingStandard
                             + "\r\n"
                             + "Oops! I couldn't understand what you mean :("
                             + "\r\n"
