@@ -87,11 +87,11 @@ public class Storage {
      */
     public List<Task> load() throws DukeException {
         try {
-            Scanner s = new Scanner(file);
+            Scanner sc = new Scanner(file);
             List<Task> temporaryList = new ArrayList<>();
 
-            while (s.hasNextLine()) {
-                String task = s.nextLine();
+            while (sc.hasNextLine()) {
+                String task = sc.nextLine();
                 Task t;
                 String taskType = task.substring(0, 3);
                 String status = task.substring(3, 6);
