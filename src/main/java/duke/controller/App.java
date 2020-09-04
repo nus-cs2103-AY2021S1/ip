@@ -30,8 +30,8 @@ public class App extends AnchorPane {
     private Evaluator evaluator;
     private Storage storage;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.jpeg"));
 
     /**
      * Initialize the App class properties.
