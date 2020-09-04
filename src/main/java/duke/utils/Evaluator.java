@@ -62,6 +62,7 @@ public class Evaluator {
                 String[] timeExtracted = parser.extractDate(body);
                 String content = timeExtracted[0];
                 String time = timeExtracted[1];
+                assert time.length() < 15 : "time format is too long";
                 return list.addTask(content, status, time);
             }
         } catch (NumberFormatException e) {
