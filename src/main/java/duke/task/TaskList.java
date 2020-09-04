@@ -78,10 +78,10 @@ public class TaskList {
             throw new DukeException("☹ OOPS!!! This task is already done!");
         }
 
-        Task doneTask = currentTask.complete();
         int index = taskId - 1;
-
+        Task doneTask = currentTask.complete();
         List<Task> newTaskList = this.tasks;
+
         newTaskList.set(index, doneTask);
 
         return new TaskList(newTaskList);
@@ -123,7 +123,7 @@ public class TaskList {
     public String findTasksByKeyword(String keyword) {
         return IntStream.range(0, this.getSize())
                 .mapToObj((index) -> String.format("\n%d.%s", index + 1, tasks.get(index)))
-                .filter((s) -> s.contains(keyword))
+                .filter((task) -> task.contains(keyword))
                 .reduce((a, b) -> a + b)
                 .orElse("");
     }

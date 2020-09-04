@@ -34,10 +34,16 @@ public class Duke {
     /**
      * Runs the program by taking in the command, handling them, storing data to
      * hard disk, and returning to users appropriate response.
-     * The running will terminate when an ExitCommand is called.
      */
     public void run() {
         ui.showWelcomeMessage();
+        runUntilExit();
+    }
+
+    /**
+     * Runs the program until an exit command is called by the user.
+     */
+    public void runUntilExit() {
         boolean isExit = false;
         while (!isExit) {
             try {
