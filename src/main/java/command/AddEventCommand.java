@@ -9,6 +9,7 @@ import java.util.Arrays;
 import duke.Storage;
 import duke.TaskList;
 import exception.DukeException;
+import exception.DuplicateTaskException;
 import exception.EmptyEventException;
 import task.Event;
 import task.Task;
@@ -45,6 +46,9 @@ public class AddEventCommand extends Command {
             Task toAdd = new Event(description, LocalDateTime.parse(deadline,
                     DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
 
+            if (tasks.contains(toAdd)) {
+                throw new DuplicateTaskException();
+            }
             tasks.add(toAdd);
             storage.save(tasks);
             return ui.sayAddedTask(toAdd, tasks.size());
@@ -54,6 +58,8 @@ public class AddEventCommand extends Command {
             throw new EmptyEventException();
         } catch (DateTimeParseException e) {
             return ui.say("The date and time format must be: [dd/MM/yyyy HHmm]\nFor example, 02/12/2019 1800");
+        } catch (DuplicateTaskException e) {
+            throw e;
         }
     }
 

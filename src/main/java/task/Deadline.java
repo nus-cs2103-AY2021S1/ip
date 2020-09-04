@@ -1,7 +1,10 @@
 package task;
 
+import command.TaskListCommand;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 public class Deadline extends Task {
 
@@ -45,5 +48,17 @@ public class Deadline extends Task {
     @Override
     public String getTaskType() {
         return "D";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Deadline) {
+            Deadline other = (Deadline) o;
+            return this.description.equals(other.description) && this.deadline.equals(other.deadline);
+        } else {
+            return false;
+        }
     }
 }

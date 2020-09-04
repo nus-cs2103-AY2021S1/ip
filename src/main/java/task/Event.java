@@ -42,4 +42,16 @@ public class Event extends Task {
     public String getTaskType() {
         return "E";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Event) {
+            Event other = (Event) o;
+            return this.description.equals(other.description) && this.time.equals(other.time);
+        } else {
+            return false;
+        }
+    }
 }

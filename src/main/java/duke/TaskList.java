@@ -37,6 +37,10 @@ public class TaskList {
         }
     }
 
+    public boolean contains(Task task) {
+        return tasks.contains(task);
+    }
+
     /**
      * Returns the task based on the index provided and removes it from the list.
      *

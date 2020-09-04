@@ -6,6 +6,7 @@ import java.util.Arrays;
 import duke.Storage;
 import duke.TaskList;
 import exception.DukeException;
+import exception.DuplicateTaskException;
 import exception.EmptyTodoException;
 import task.Task;
 import task.ToDo;
@@ -38,6 +39,9 @@ public class AddToDoCommand extends Command {
             String description = splitCommand[1];
             Task toAdd = new ToDo(description);
 
+            if (tasks.contains(toAdd)) {
+                throw new DuplicateTaskException();
+            }
             tasks.add(toAdd);
             storage.save(tasks);
             return ui.sayAddedTask(toAdd, tasks.size());
@@ -45,6 +49,8 @@ public class AddToDoCommand extends Command {
             return ui.sayException(e);
         } catch (IndexOutOfBoundsException e) { // No description
             throw new EmptyTodoException();
+        } catch (DuplicateTaskException e) {
+            throw e;
         }
     }
 

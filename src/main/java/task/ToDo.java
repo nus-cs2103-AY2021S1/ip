@@ -15,4 +15,16 @@ public class ToDo extends Task {
         return "T";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof ToDo) {
+            ToDo other = (ToDo) o;
+            return this.description.equals(other.description);
+        } else {
+            return false;
+        }
+    }
+
 }

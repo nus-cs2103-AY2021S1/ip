@@ -1,5 +1,9 @@
 package task;
 
+import command.TaskListCommand;
+
+import java.util.Arrays;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -47,4 +51,5 @@ public abstract class Task {
     public String getSimplifiedString() {
         return this.getTaskType() + " - " + (this.isDone ? "1" : "0") + " - " + this.getDescription();
     }
+
 }
