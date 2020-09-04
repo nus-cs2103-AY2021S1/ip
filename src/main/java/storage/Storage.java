@@ -100,16 +100,20 @@ public class Storage {
                 break;
             case DEADLINE:
                 String[] deadlineInfo = info.split(" /by ");
+                // Validate info
                 Parser.input(command, deadlineInfo.length, true);
                 Parser.info(command, deadlineInfo[1], true);
+                // info
                 String deadlineEvent = deadlineInfo[0];
                 LocalDate deadlineTime = Parser.date(deadlineInfo[1]);
                 pw.println("DEADLINE|0|" + deadlineEvent + "|" + deadlineTime);
                 break;
             case EVENT:
                 String[] eventInfo = info.split(" /at ");
+                // Validate info
                 Parser.input(command, eventInfo.length, true);
                 Parser.info(command, eventInfo[1], true);
+                // info
                 String eventEvent = eventInfo[0];
                 LocalDate eventTime = Parser.date(eventInfo[1]);
                 pw.println("EVENT|0|" + eventEvent + "|" + eventTime);

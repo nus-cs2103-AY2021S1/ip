@@ -15,17 +15,17 @@ public class Parser {
      * Validates user's input.
      *
      * @param command User command.
-     * @param splitNum Length of the split string.
+     * @param splitInputLen Length of the split string.
      * @param isTime About time.
-     * @throws MugException If splitNum less than 2.
+     * @throws MugException If splitInputLen less than 2.
      */
-    public static void input(Command command, int splitNum, boolean isTime) throws MugException {
-        if (splitNum < 2) {
-            if ((isTime
-                    && command == Command.DEADLINE)) {
+    public static void input(Command command, int splitInputLen, boolean isTime) throws MugException {
+        if (splitInputLen < 2) {
+            boolean isDeadline = command == Command.DEADLINE;
+            boolean isEvent = command == Command.EVENT;
+            if ((isTime && isDeadline)) {
                 throw new MugException("HEY!!! Feed me with {/by [date]}. Mug is hungry T_T");
-            } else if (isTime
-                    && command == Command.EVENT) {
+            } else if (isTime && isEvent) {
                 throw new MugException("HEY!!! Feed me with {/at [date]}. Mug is hungry T_T");
             } else {
                 throw new MugException("HEY!!! Don't be stingy give Mug more information >.<");
@@ -42,12 +42,12 @@ public class Parser {
      * @throws MugException If info pass in is empty.
      */
     public static void info(Command command, String info, boolean isTime) throws MugException {
+        boolean isDeadline = command == Command.DEADLINE;
+        boolean isEvent = command == Command.EVENT;
         if (info.trim().equals("")) {
-            if ((isTime
-                    && command == Command.DEADLINE)) {
+            if ((isTime && isDeadline)) {
                 throw new MugException("HEY!!! Feed me with {/by [date]}. Mug is hungry T_T");
-            } else if (isTime
-                    && command == Command.EVENT) {
+            } else if (isTime && isEvent) {
                 throw new MugException("HEY!!! Feed me with {/at [date]}. Mug is hungry T_T");
             } else {
                 throw new MugException("HEY!!! Don't be stingy give Mug more information >.<");
@@ -89,15 +89,15 @@ public class Parser {
      * Parses and validates integer number.
      *
      * @param strIndex Integer in string.
-     * @param splitNum Length of the split string.
+     * @param splitInputLen Length of the split string.
      * @return Integer number.
-     * @throws MugException If splitNum smaller than 2 or strIndex is not integer in string.
+     * @throws MugException If splitInputLen smaller than 2 or strIndex is not integer in string.
      */
-    public static int index(String strIndex, int splitNum) throws MugException {
+    public static int index(String strIndex, int splitInputLen) throws MugException {
         try {
             int index = Integer.parseInt(strIndex);
 
-            if (splitNum < 2) {
+            if (splitInputLen < 2) {
                 throw new MugException("HEY!!! Don't be stingy give Mug more information >.<");
             }
             return index;

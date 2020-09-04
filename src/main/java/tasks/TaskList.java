@@ -76,16 +76,20 @@ public class TaskList {
                 break;
             case DEADLINE:
                 String[] deadlineInfo = info.split(" /by ");
+                //Validate info
                 Parser.input(command, deadlineInfo.length, true);
                 Parser.info(command, deadlineInfo[1], true);
+                // info
                 String deadlineEvent = deadlineInfo[0];
                 LocalDate deadlineTime = Parser.date(deadlineInfo[1]);
                 task = new Deadline(deadlineEvent, deadlineTime);
                 break;
             case EVENT:
                 String[] eventInfo = info.split(" /at ");
+                //Validate info
                 Parser.input(command, eventInfo.length, true);
                 Parser.info(command, eventInfo[1], true);
+                // info
                 String eventEvent = eventInfo[0];
                 LocalDate eventTime = Parser.date(eventInfo[1]);
                 task = new Event(eventEvent, eventTime);
@@ -95,6 +99,7 @@ public class TaskList {
                 break;
             }
             this.taskList.add(task);
+            // append task to local storage
             store.appendTask(command, info);
 
             return "Got it. MUG has added this task:\n"
