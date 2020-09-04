@@ -110,4 +110,27 @@ public class TaskList {
         return false;
     }
 
+    /**
+     * Print the task list in the system.
+     *
+     * @param tasks Task list in the system.
+     */
+    public static String getTaskListString(TaskList tasks) {
+        ArrayList<Task> taskList = tasks.getTasks();
+        StringBuilder builder = new StringBuilder();
+        builder.append("Here are the tasks in your list: \n\t");
+
+        //Check whether there are any task in the list or not
+        if (taskList.isEmpty()) {
+            return "You haven't added any task here !";
+        }
+
+        //Produce output string
+        for (Task task : taskList) {
+            builder.append(taskList.indexOf(task) + 1).append(". ")
+                    .append(task.toString()).append("\n").append("\t");
+        }
+
+        return builder.toString();
+    }
 }
