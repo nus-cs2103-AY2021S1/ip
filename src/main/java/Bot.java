@@ -14,7 +14,6 @@ public class Bot {
   Parser parser = new Parser();
   Storage storage = new Storage("./data/duke.txt");
   TaskList taskList = new TaskList(storage.load());
-  Scanner sc = new Scanner(System.in);
   LocalDate localDate;
 
   /**
@@ -34,52 +33,53 @@ public class Bot {
    * undefined and wrong messages exception. Type of commands supported are [bye, list, done, todo,
    * event, deadline, delete, find].
    */
-  public void serve(String input) {
+  public String serve(String input) {
       try {
         String s = input;
+        String output = "";
         String[] parsedInfo = parser.getDetails(s);
         String command = parsedInfo[0];
         String commandDetail = parsedInfo[1];
         String dateInfo = parsedInfo[2];
         switch (command) {
         case ("bye"):
-          printer.farewell();
-          return;
+          output = printer.farewell();
+          return output;
         case ("list"):
-          taskList.printReturns();
-          break;
+          output = taskList.printReturns();
+          return output;
         case ("done"):
-          taskList.doneListings(Integer.valueOf(commandDetail), printer, storage);
-          break;
+          output = taskList.doneListings(Integer.valueOf(commandDetail), printer, storage);
+          return output;
         case ("todo"):
           if (commandDetail == null) {
             throw new NoDescriptionException("todo");
           } else {
-            taskList.addListings(parsedInfo, printer, storage);
+            output = taskList.addListings(parsedInfo, printer, storage);
           }
-          break;
+          return output;
         case ("deadline"):
           if (commandDetail == null || dateInfo == null) {
             throw new NoDescriptionException("deadline");
           } else {
             localDate.parse(dateInfo);
-            taskList.addListings(parsedInfo, printer, storage);
+            output = taskList.addListings(parsedInfo, printer, storage);
           }
-          break;
+          return output;
         case ("event"):
           if (commandDetail == null || dateInfo == null) {
             throw new NoDescriptionException("event");
           } else {
-            taskList.addListings(parsedInfo, printer, storage);
+            output = taskList.addListings(parsedInfo, printer, storage);
           }
-          break;
+          return output;
         case ("delete"):
           Integer number = Integer.valueOf(parsedInfo[1]) - 1;
-          taskList.deleteListing(number, printer, storage);
-          break;
+          output = taskList.deleteListing(number, printer, storage);
+          return output;
         case ("find"):
-          taskList.find(commandDetail);
-          break;
+          output = taskList.find(commandDetail);
+          return output;
         default:
           throw new UndefinedException();
         }
@@ -91,6 +91,6 @@ public class Bot {
         printer.undefinedExceptionMessage();
       }
 
-  }
+  return "";}
 
 }

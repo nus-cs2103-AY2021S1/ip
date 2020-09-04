@@ -51,8 +51,9 @@ public class Duke extends Application {
    * your completed method.
    */
   String getResponse(String input) { //where to get response
-    bot.serve(input);
-    return "Duke heard: " + input;
+    String output = bot.serve(input);
+
+    return "Duke heard: " + output;
   }
 
 //  public static void main(String[] args) {
