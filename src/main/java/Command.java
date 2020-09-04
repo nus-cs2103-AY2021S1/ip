@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  * The command class handles any command related situations.
@@ -206,7 +208,7 @@ public class Command {
     public static String[] splitIntoDesDateTime(String[] inputSplitByWhiteSpace)
             throws InvalidFormatException, EmptyTaskException {
         String taskType = inputSplitByWhiteSpace[0];
-        Keyword taskTypeEnum = Keyword.valueOf(taskType);
+        Keyword taskTypeEnum = Keyword.valueOf(taskType.toUpperCase());
         if (inputSplitByWhiteSpace.length <= 1) {
             throw new EmptyTaskException("☹ OOPS!!! The description of a " + taskType + " cannot "
                     + "be empty.");
@@ -395,7 +397,8 @@ public class Command {
                     return 1;
                 }
             }
-            return thisDes.length() > otherDes.length() ? -1 : 1;
+            return thisDes.length() > otherDes.length() ? -1
+                    : thisDes.length() < otherDes.length() ? 1 : 0;
         };
 
         PriorityQueue<Task> sortedTasks = new PriorityQueue<>(tasks.getNoOfTasks(), taskComparator);
