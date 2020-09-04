@@ -11,7 +11,7 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n\n"
             + "How can I help you?\n"
             + "Type in your orders below.\n\n"
-            + "(command list: 'list', 'deadline', 'event', 'todo', 'done', 'bye')\n";
+            + "(command list: 'list', 'deadline', 'event', 'todo', 'done', 'bye')";
     public static final String GOODBYE = "Alright, see you soon!";
     public static final String LOADING_FAILED = "Loading failed: Duke continues with empty duke.TaskList.";
     public static final String STAR_LINE = "––––––––––––––––––––– *** –––––––––––––––––––––";
@@ -19,8 +19,10 @@ public class Ui {
     /**
      * Displays the separator star line.
      */
-    public static void displayStarLine() {
+    public static String displayStarLine() {
         System.out.println(STAR_LINE);
+        return STAR_LINE;
+
     }
 
     /**
@@ -28,31 +30,36 @@ public class Ui {
      *
      * @param message
      */
-    public static void displayMessage(String message) {
+    public static String displayMessage(String message) {
         displayStarLine();
         System.out.println(message);
         displayStarLine();
+        System.out.println();
+        return message;
     }
 
     /**
      * Displays the loading error.
      */
-    public static void displayLoadingError() {
+    public static String displayLoadingError() {
         displayMessage(LOADING_FAILED);
+        return LOADING_FAILED;
     }
 
     /**
      * Displays the welcome message.
      */
-    public static void displayWelcome() {
+    public static String displayWelcome() {
         displayMessage(WELCOME);
+        return WELCOME;
     }
 
     /**
      * Displays the goodbye message.
      */
-    public static void displayGoodbye() {
+    public static String displayGoodbye() {
         displayMessage(GOODBYE);
+        return GOODBYE;
     }
 
     /**
@@ -60,18 +67,18 @@ public class Ui {
      * 
      * @param taskList
      */
-    public static void displayList(TaskList taskList) {
+    public static String displayList(TaskList taskList) {
         List<Task> tasks = taskList.getTasks();
         int pending = taskList.getNumOfPendingTasks();
         int currId = 1;
+        String toReturn = "TO-DO LIST:";
 
-        displayStarLine();
-        System.out.println("TO-DO LIST:");
-        System.out.println(String.format("%d pending", pending));
         for (Task t : tasks) {
-            System.out.println(String.format("   %d. %s", currId, t));
+            toReturn += String.format("   %d. %s", currId, t);;
             currId++;
         }
-        displayStarLine();
+
+        displayMessage(toReturn);
+        return toReturn;
     }
 }
