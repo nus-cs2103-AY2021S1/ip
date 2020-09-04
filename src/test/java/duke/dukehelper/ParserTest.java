@@ -36,7 +36,7 @@ public class ParserTest {
             Params params = listOfDeadlines[i];
             LocalDate expectedDate = LocalDate.parse(params.tokens[3]);
 
-            Task result = parse.parseCommand(params.commandType, params.tokens, params.isLoaded, params.numTasks);
+            Task result = parse.parseTaskCommand(params.commandType, params.tokens, params.isLoaded, params.numTasks);
             assertEquals(expectedDate.toString(), ((Deadline)result).getDeadline().toString());
             assertEquals(params.tokens[1], result.getContent());
 

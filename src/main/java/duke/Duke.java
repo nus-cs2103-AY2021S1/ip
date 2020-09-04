@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.function.Function;
 
 public class Duke {
     private Ui ui;
@@ -43,22 +44,24 @@ public class Duke {
      */
     protected String furtherProcessing(Commands commandType, String[] tokens, boolean isLoaded) throws DukeException {
         Task parsedTask = new Task("");
+
+        //pass this to parser to hide storage from it
+        Function<Void, Void> saveTaskListStorage = param -> {
+            storage.saveTasks(tasks.getTaskList());
+            return null;
+        };
+
         if (commandType == Commands.DEADLINE || commandType == Commands.EVENT || commandType == Commands.TODO) {
-            parsedTask = parser.parseCommand(commandType, tokens, isLoaded, getNumTasks());
+            parsedTask = parser.parseTaskCommand(commandType, tokens, isLoaded, getNumTasks());
         } else if (commandType == Commands.DELETE) {
 
             int markNumber = Integer.parseInt(tokens[1]);
-            storage.saveTasks(this.tasks.getTaskList());
-            String result = tasks.deleteTask(markNumber, getNumTasks());
-            storage.saveTasks(this.tasks.getTaskList());
-            return result;
+            return parser.parseOperationCommand(Commands.DELETE, markNumber, getNumTasks(), tasks, saveTaskListStorage);
 
         } else if (commandType == Commands.DONE) {
 
             int markNumber = Integer.parseInt(tokens[1]);
-            String result = tasks.doneTask(markNumber);
-            storage.saveTasks(this.tasks.getTaskList());
-            return result;
+            return parser.parseOperationCommand(Commands.DONE, markNumber, getNumTasks(), tasks, saveTaskListStorage);
 
         }  else if (commandType == Commands.LIST) {
 
