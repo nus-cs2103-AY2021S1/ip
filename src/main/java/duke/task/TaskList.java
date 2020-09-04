@@ -94,7 +94,7 @@ public class TaskList {
      */
     public String printTasks() {
         return IntStream.range(0, this.getSize())
-                .mapToObj((id) -> String.format("\n%d.%s", id + 1, tasks.get(id)))
+                .mapToObj((index) -> String.format("\n%d.%s", index + 1, tasks.get(index)))
                 .reduce((a, b) -> a + b)
                 .orElse("");
     }
@@ -122,7 +122,7 @@ public class TaskList {
      */
     public String findTasksByKeyword(String keyword) {
         return IntStream.range(0, this.getSize())
-                .mapToObj((id) -> String.format("\n%d.%s", id + 1, tasks.get(id)))
+                .mapToObj((index) -> String.format("\n%d.%s", index + 1, tasks.get(index)))
                 .filter((s) -> s.contains(keyword))
                 .reduce((a, b) -> a + b)
                 .orElse("");
