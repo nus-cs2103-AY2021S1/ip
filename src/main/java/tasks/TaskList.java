@@ -2,6 +2,8 @@ package tasks;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 import command.Command;
 import mugexception.MugException;
@@ -45,17 +47,16 @@ public class TaskList {
         if (this.taskListLen() == 0) {
             return "MUG don't have any of your task \"_\"";
         } else {
-            int taskId = 1;
             StringBuilder results = new StringBuilder("Here is your tasks:\n");
-            for (Task tsk : this.taskList) {
-                results.append(taskId);
-                results.append(". ");
-                results.append(tsk);
-                if (taskId != this.taskListLen()) {
-                    results.append("\n");
-                }
-                taskId++;
-            }
+            IntStream.range(0, this.taskListLen())
+                    .forEach(taskIndex -> {
+                        results.append(taskIndex + 1);
+                        results.append(". ");
+                        results.append(this.taskList.get(taskIndex));
+                        if (taskIndex != this.taskListLen()) {
+                            results.append("\n");
+                        }
+                    });
             return results.toString();
         }
     }
@@ -171,21 +172,21 @@ public class TaskList {
      * @return List of Task with the search keyword
      */
     public String searchTask(String keyword) {
-        int taskId = 0;
+        AtomicInteger taskNum = new AtomicInteger();
         StringBuilder results = new StringBuilder("Here is the result:");
-
-        for (int i = 0; i < this.taskListLen(); i++) {
-            Task task = this.taskList.get(i);
-            boolean hasKeyword = task.getDescription().contains(keyword);
-            if (hasKeyword) {
-                taskId++;
-                results.append("\n");
-                results.append(taskId);
-                results.append(". ");
-                results.append(task);
-            }
-        }
-        if (taskId == 0) {
+        IntStream.range(0, this.taskListLen())
+                .forEach(taskIndex -> {
+                    Task task = this.taskList.get(taskIndex);
+                    boolean hasKeyword = task.getDescription().contains(keyword);
+                    if (hasKeyword) {
+                        taskNum.getAndIncrement();
+                        results.append("\n");
+                        results.append(taskNum.get());
+                        results.append(". ");
+                        results.append(task);
+                    }
+                });
+        if (taskNum.get() == 0) {
             return "Opps!! MUG don't have the task you searching :)";
         } else {
             return results.toString();
