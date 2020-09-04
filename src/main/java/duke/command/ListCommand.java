@@ -29,7 +29,13 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.outputMessage(LIST_HEADER + '\n' + taskList.toString());
+        String message;
+        if (taskList.size() == 0) {
+            message = "You have no tasks on your list!";
+        } else {
+            message = LIST_HEADER + '\n' + taskList.toString();
+        }
+        ui.outputMessage(message);
     }
 
 
