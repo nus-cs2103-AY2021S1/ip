@@ -1,7 +1,6 @@
-package luke.gui;
+package luke;
 
 import javafx.application.Application;
-import luke.Main;
 
 /**
  * A launcher class to workaround classpath issues.
