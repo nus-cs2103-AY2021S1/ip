@@ -56,7 +56,7 @@ public abstract class Task implements PrintSummary {
      * Returns the state of th:we Task, whether it is completed or not.
      * @return true if the task is completed, false otherwise
      */
-    protected boolean isCompleted() {
+    public boolean isCompleted() {
         return isDone;
     }
 

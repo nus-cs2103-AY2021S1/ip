@@ -58,9 +58,13 @@ public class DoneCommand extends Command {
             throw new DukeException("Please enter a valid number between 0 and " + taskList.size());
         }
         Task doneTask = taskList.get(doneIndex);
-        doneTask.markDone();
-        ui.outputMessage(createDoneMessage(doneTask));
-        storage.updateFile(taskList);
+        if (doneTask.isCompleted()) {
+            ui.outputMessage(createAlreadyDoneMessage());
+        } else {
+            doneTask.markDone();
+            ui.outputMessage(createDoneMessage(doneTask));
+            storage.updateFile(taskList);
+        }
     }
 
 
@@ -74,7 +78,9 @@ public class DoneCommand extends Command {
         return DONE_MESSAGE + "\n   " + taskDone;
     }
 
-
+    private String createAlreadyDoneMessage() {
+        return "Task has already been marked as completed!";
+    }
 
 
 
