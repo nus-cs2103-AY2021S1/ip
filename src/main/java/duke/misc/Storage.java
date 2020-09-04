@@ -1,4 +1,4 @@
-package duke;
+package duke.misc;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,6 +9,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import duke.exception.InvalidDataException;
+import duke.exception.InvalidTypeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Storage class that interacts with the .txt file to store and retrieve data.

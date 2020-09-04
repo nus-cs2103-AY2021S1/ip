@@ -1,6 +1,14 @@
-package duke;
+package duke.misc;
 
 import java.io.IOException;
+
+import duke.exception.InvalidDescriptionException;
+import duke.exception.InvalidIndexException;
+import duke.exception.InvalidTypeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Parser class to handle user inputs.

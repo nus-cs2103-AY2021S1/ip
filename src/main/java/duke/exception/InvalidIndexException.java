@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Invalid Index Exception that extends Duke Exception class.

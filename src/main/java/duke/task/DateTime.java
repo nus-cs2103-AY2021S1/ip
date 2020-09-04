@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,8 +22,6 @@ public class DateTime {
     public DateTime(String date) {
         if (isValidFormat(date)) {
             this.date = LocalDate.parse(date);
-        } else {
-            System.out.println(INVALID_DATE_MESSAGE);
         }
     }
 

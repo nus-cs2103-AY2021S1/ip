@@ -1,7 +1,13 @@
-package duke;
+package duke.misc;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import duke.exception.InvalidDataException;
+import duke.exception.InvalidDescriptionException;
+import duke.exception.InvalidIndexException;
+import duke.exception.InvalidTypeException;
+import duke.task.Task;
 
 /**
  * TaskList class to store all the tasks in Duke.
@@ -18,14 +24,20 @@ public class TaskList {
         this.items = new ArrayList<>();
     }
 
+    /**
+     * Function to read in data from .txt file.
+     * @throws IOException In case data has errors
+     * @throws InvalidTypeException In cases data has an invalid type.
+     * @throws InvalidDataException In case data is invalid.
+     */
     public void initialise() throws IOException, InvalidTypeException, InvalidDataException {
         try {
             this.items = this.storage.readData();
-        } catch (IOException e) {
-            throw e;
         } catch (InvalidTypeException e) {
             throw e;
         } catch (InvalidDataException e) {
+            throw e;
+        } catch (IOException e) {
             throw e;
         }
     }

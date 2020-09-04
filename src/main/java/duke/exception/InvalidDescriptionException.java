@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Invalid Description Exception that extends Duke Exception class.

@@ -1,10 +1,10 @@
-package duke;
+package duke.task;
 
 /**
  * Task class to represent a task to be manipulated by Duke.
  */
 public class Task {
-    static final String symbol = "T";
+    static final String SYMBOL = "T";
     protected String title;
     protected boolean complete;
 
@@ -43,7 +43,7 @@ public class Task {
      */
     public String saveString() {
         int completeSymbol = this.complete ? 1 : 0;
-        return String.format("%s|%d|%s", symbol, completeSymbol, this.title);
+        return String.format("%s|%d|%s", SYMBOL, completeSymbol, this.title);
     }
 
     /**
@@ -54,6 +54,6 @@ public class Task {
     @Override
     public String toString() {
         String completeSymbol = this.complete ? "[/]" : "[X]";
-        return String.format("[%s]%s %s", symbol, completeSymbol, this.title);
+        return String.format("[%s]%s %s", SYMBOL, completeSymbol, this.title);
     }
 }

@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Todo class for Tasks that need to be completed.
