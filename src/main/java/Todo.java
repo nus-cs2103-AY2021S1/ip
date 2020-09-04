@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Class representing a Todo.
  */
@@ -10,6 +12,11 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+    }
+
+    @Override
+    protected LocalDate getTaskDeadline() {
+        return null;
     }
 
     /**

@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Class to represent a Task object.
  * @author vanGoghhh
@@ -75,5 +77,9 @@ public class Task {
                     + this.description + "//" + ((Deadline) this).getBy();
         }
         return " ";
+    }
+
+    protected LocalDate getTaskDeadline() {
+        return null;
     }
 }

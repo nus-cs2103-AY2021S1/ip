@@ -20,12 +20,9 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    /**
-     * Returns the duedate of the deadline.
-     * @return duedate of the deadline.
-     */
-    protected LocalDate getBy() {
-        return this.by;
+    @Override
+    protected LocalDate getTaskDeadline() {
+        return by;
     }
 
     /**
