@@ -13,7 +13,7 @@ import tasks.TaskList;
 public class UI {
 
     // maximum number of characters across a screen
-    public static final int CHAT_WIDTH = 35;
+    public static final int CHAT_WIDTH = 50;
 
     // Buffer to wrap text to the next line if the text if too long.
     // This buffer helps to keep words intact while wrapping the text
@@ -43,11 +43,13 @@ public class UI {
      * @param chatContent text string.
      * @return String chat box around text.
      * @see king.King
+     * @deprecated no longer in use after moving UI to javafx.
      */
+    @Deprecated
     public static String kingChatBox(String chatContent) {
-        return "\t" + printString("King says", 5, '-') + "\n\t"
+        return "\t" + printKingBorder("King says", 5, '-') + "\n\t"
                 + formatStringIfLong(chatContent) + "\n"
-                + "\t" + printString("", CHAT_WIDTH, '-') + "\n";
+                + "\t" + printKingBorder("", CHAT_WIDTH, '-') + "\n";
     }
 
     /**
@@ -56,11 +58,22 @@ public class UI {
      * @param chatContent text string.
      * @return String chat box around text.
      * @see king.King
+     * @deprecated
      */
+    @Deprecated
     public static String userChatBox(String chatContent) {
-        return "\t" + printString("", CHAT_WIDTH, '=') + "\n\t"
+        return "\t" + printKingBorder("", CHAT_WIDTH, '=') + "\n\t"
                 + formatStringIfLong(chatContent) + "\n"
-                + "\t" + printString("", CHAT_WIDTH, '=') + "\n";
+                + "\t" + printKingBorder("", CHAT_WIDTH, '=') + "\n";
+    }
+
+    /**
+     * Returns an empty chat box.
+     *
+     * @param chatContent text string.
+     */
+    public static String emptyChatBox(String chatContent) {
+        return chatContent;
     }
 
     /**
@@ -70,9 +83,9 @@ public class UI {
      * @return String error box around error message.
      */
     public static String errorBox(String error) {
-        return printString("Error Encountered", 4, '=') + "\n\t"
+        return printKingBorder("Error Encountered", 4, '=') + "\n\t"
                 + formatStringIfLong(error) + "\n"
-                + printString("", CHAT_WIDTH, '=') + "\n";
+                + printKingBorder("", CHAT_WIDTH, '=') + "\n";
     }
 
     /**
@@ -84,9 +97,9 @@ public class UI {
      * @see TaskList
      */
     public static String addItemChatBox(String chatContent, int numOfItems) {
-        return kingChatBox("Got it. I've added this task:\n"
-                + "\t\t" + chatContent
-                + "\n\t Now you have " + numOfItems + " tasks in the list.");
+        return emptyChatBox("Got it. I've added this task:\n"
+                + "\t" + chatContent
+                + "\nNow you have " + numOfItems + " tasks in the list.");
     }
 
     /**
@@ -98,9 +111,9 @@ public class UI {
      * @see TaskList
      */
     public static String deleteItemChatBox(String chatContent, int numOfItemsLeft) {
-        return kingChatBox("I have deleted the following item:\n"
-                + "\t\t" + chatContent
-                + "\n\tYou got " + numOfItemsLeft + " task(s) left.");
+        return emptyChatBox("I have deleted the following item:\n"
+                + "\t" + chatContent
+                + "\nYou got " + numOfItemsLeft + " task(s) left.");
     }
 
     /**
@@ -111,7 +124,7 @@ public class UI {
      * @see tasks.Task
      */
     public static String doneChatBox(String chatContent) {
-        return kingChatBox("Nice! I've marked this task as done:\n\t\t"
+        return emptyChatBox("Nice! I've marked this task as done:\n\t"
                 + chatContent
         );
     }
@@ -128,7 +141,7 @@ public class UI {
         for (int number = 0; number < len; number++) {
             formatted.append("\n\t  " + (number + 1) + ". " + taskList.get(number).toString());
         }
-        return kingChatBox("There are " + len + " items in your list:"
+        return emptyChatBox("There are " + len + " items in your list:"
                 + formatted.toString());
     }
 
@@ -144,7 +157,7 @@ public class UI {
         for (int number = 0; number < len; number++) {
             formatted.append("\n\t  " + (number + 1) + ". " + taskList.get(number).toString());
         }
-        return kingChatBox("I found " + len + " items with the given keyword(s):"
+        return emptyChatBox("I found " + len + " items with the given keyword(s):"
                 + formatted.toString());
     }
 
@@ -179,7 +192,7 @@ public class UI {
         }
     }
 
-    private static String printString(String text, int posOfText, char symbol) {
+    private static String printKingBorder(String text, int posOfText, char symbol) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < posOfText; i++) {
             result.append(symbol);

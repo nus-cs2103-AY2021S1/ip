@@ -41,7 +41,7 @@ public class King {
         try {
             return parser.parse(input);
         } catch (KingException e) {
-            return UI.kingChatBox(e.message);
+            return UI.emptyChatBox(e.message);
         }
     }
 
@@ -58,7 +58,7 @@ public class King {
         while (scanner.hasNextLine() && !(phrase = scanner.nextLine()).equals("bye")) {
             System.out.println(getResponse(phrase));
         }
-        System.out.print(UI.kingChatBox("Bye! Hope to see you again soon."));
+        System.out.print(UI.emptyChatBox("Bye! Hope to see you again soon."));
         scanner.close();
     }
 

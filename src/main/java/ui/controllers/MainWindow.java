@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = king.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(UI.userChatBox(input), userImage),
+                DialogBox.getUserDialog(UI.emptyChatBox(input), userImage),
                 DialogBox.getKingDialog(response, kingImage)
         );
         userInput.clear();

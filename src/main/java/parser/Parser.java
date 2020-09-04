@@ -50,12 +50,12 @@ public class Parser {
         String reply;
 
         if (mainCommand.equals("bye")) {
-            reply = UI.kingChatBox("Bye! Come back soon.");
+            reply = UI.emptyChatBox("Bye! Come back soon.");
         } else if (mainCommand.equals("list")) {
             reply = UI.showTaskList(taskList);
         } else if (phrase.equals("clear list")) {
             taskList.clear();
-            reply = UI.kingChatBox("I have cleared the list!");
+            reply = UI.emptyChatBox("I have cleared the list!");
         } else if (mainCommand.equals("done")) {
             String stringItem = phrase.substring(4).trim();
             try {

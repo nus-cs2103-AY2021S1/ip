@@ -13,7 +13,7 @@ import king.KingException;
 class ParserExceptions {
 
     public KingException itemNotFoundException(String item, Throwable error) {
-        return new KingException(item, error);
+        return new KingException("Item " + item + " is not found!", error);
     }
 
     public KingException doneNotFollowedByNumberException() {
