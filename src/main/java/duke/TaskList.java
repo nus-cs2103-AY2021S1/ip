@@ -36,13 +36,13 @@ public class TaskList {
      * @return All tasks in order.
      */
     public String displayTasks() {
-        StringBuilder res = new StringBuilder("Here are the tasks in your list:");
+        StringBuilder result = new StringBuilder("Here are the tasks in your list:");
         int i = 1;
         for (Task t : tasks) {
-            res.append("\n").append(i).append(".").append(t.toString());
+            result.append("\n").append(i).append(".").append(t.toString());
             i++;
         }
-        return res.toString();
+        return result.toString();
     }
 
     /**
@@ -60,45 +60,54 @@ public class TaskList {
         }
         if (str.contains(" ")) {
             String[] arr = str.split(" ", 2);
-            String str2 = arr[1];
-            switch (arr[0]) {
+            String type = arr[0];
+            String content = arr[1];
+            switch (type) {
             case "todo":
-                ToDo td = new ToDo(str2);
-                return insert(td);
+                return addToDo(content);
             case "deadline":
-                if (str2.contains("/by")) {
-                    String[] arr2 = str2.split("/by", 2);
-                    if (arr2[0].isBlank()) {
-                        throw new EmptyCommandException("deadline");
-                    }
-                    if (arr2[1].isBlank()) {
-                        throw new MissingTimeException("deadline");
-                    }
-                    Deadline dl = new Deadline(arr2[0], arr2[1].trim());
-                    return insert(dl);
-                } else {
-                    throw new MissingTimeException("deadline");
-                }
+                return addDeadline(content);
             case "event":
-                if (str2.contains("/at")) {
-                    String[] arr2 = str2.split("/at", 2);
-                    if (arr2[0].isBlank()) {
-                        throw new EmptyCommandException("event");
-                    }
-                    if (arr2[1].isBlank()) {
-                        throw new MissingTimeException("event");
-                    }
-                    Event ev = new Event(arr2[0], arr2[1].trim());
-                    return insert(ev);
-                } else {
-                    throw new MissingTimeException("event");
-                }
+                return addEvent(content);
             default:
                 throw new InvalidCommandException();
             }
         } else {
             throw new InvalidCommandException();
         }
+    }
+
+    private String addToDo(String content) {
+        ToDo td = new ToDo(content);
+        return insert(td);
+    }
+
+    private String addDeadline(String content) throws MissingTimeException, EmptyCommandException {
+        if (!content.contains("/by")) {
+            throw new MissingTimeException("deadline");
+        }
+        String[] arr = content.split("/by", 2);
+        if (arr[0].isBlank()) {
+            throw new EmptyCommandException("deadline");
+        }
+        if (arr[1].isBlank()) {
+            throw new MissingTimeException("deadline");
+        }
+        return insert(new Deadline(arr[0], arr[1].trim()));
+    }
+
+    private String addEvent(String content) throws MissingTimeException, EmptyCommandException {
+        if (!content.contains("/at")) {
+            throw new MissingTimeException("event");
+        }
+        String[] arr = content.split("/at", 2);
+        if (arr[0].isBlank()) {
+            throw new EmptyCommandException("event");
+        }
+        if (arr[1].isBlank()) {
+            throw new MissingTimeException("event");
+        }
+        return insert(new Event(arr[0], arr[1].trim()));
     }
 
     /**
@@ -112,9 +121,10 @@ public class TaskList {
     public String find(String str) throws EmptyFindException, InvalidCommandException {
         if (str.equals("find")) {
             throw new EmptyFindException();
-        } else if (str.startsWith("find ")) {
-            String keyword = str.substring(5);
-            int i = 1;
+        }
+        if (str.startsWith("find ")) {
+            int startIndex = "find".length() + 1;
+            String keyword = str.substring(startIndex);
             boolean isFound = false;
             //search if there are any matching tasks
             for (Task t : tasks) {
@@ -125,6 +135,7 @@ public class TaskList {
             }
             if (isFound) {
                 StringBuilder result = new StringBuilder("Here are the matching tasks in your list:");
+                int i = 1;
                 for (Task t : tasks) {
                     if (t.getDescription().contains(keyword)) {
                         result.append("\n").append(i).append(".").append(t);
@@ -151,7 +162,8 @@ public class TaskList {
         if (!str.startsWith("done ")) {
             throw new TaskCompletionException(tasks.size());
         }
-        String val = str.substring(5);
+        int startIndex = "done".length() + 1;
+        String val = str.substring(startIndex);
         if (isInteger(val)) {
             int i = Integer.parseInt(val);
             //Check that task is in range
@@ -180,19 +192,20 @@ public class TaskList {
         if (!str.startsWith("delete ")) {
             throw new TaskDeletionException(tasks.size());
         }
-        String val = str.substring(7);
-        if (isInteger(val)) {
+        int startIndex = "delete".length() + 1;
+        String val = str.substring(startIndex);
+        if (!isInteger(val)) {
+            throw new TaskDeletionException(tasks.size());
+        } else {
             int i = Integer.parseInt(val);
             if (i > 0 && i <= tasks.size()) {
                 String res = "Task has been removed.\n" + tasks.get(i - 1);
-                delete(i);
+                tasks.remove(i - 1);
                 res += "\nYou now have " + tasks.size() + " tasks in the list";
                 return res;
             } else {
                 throw new TaskDeletionException(tasks.size());
             }
-        } else {
-            throw new TaskDeletionException(tasks.size());
         }
     }
 
@@ -209,10 +222,6 @@ public class TaskList {
     private String insert(Task task) {
         tasks.add(task);
         return "Task has been added:\n" + task + "\nYou now have " + tasks.size() + " tasks in the list";
-    }
-
-    private void delete(int index) {
-        tasks.remove(index - 1);
     }
 
     //helper function to check if part of user input is an integer
