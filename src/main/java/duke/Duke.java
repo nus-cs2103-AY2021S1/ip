@@ -29,7 +29,6 @@ public class Duke {
      * @param filePath Location of file to load tasks from.
      * @return a duke for the current program.
      */
-
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

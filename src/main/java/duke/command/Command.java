@@ -15,9 +15,6 @@ public abstract class Command {
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
-    public Command() {
-    };
-
     /**
      * Returns whether the command should cause the program to exit.
      *
