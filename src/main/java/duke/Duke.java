@@ -9,10 +9,10 @@ import duke.util.*;
  * Engages all the other classes to execute Duke.
  */
 public class Duke {
-    public static String filePath;
     private TaskList tasks;
     private OutputUi ui;
     private Storage storage;
+
 
     /**
      * Constructor.
