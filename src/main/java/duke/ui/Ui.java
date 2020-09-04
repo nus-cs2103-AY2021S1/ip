@@ -15,7 +15,6 @@ public class Ui {
     private static final String MESSAGE_ADD_TASK = "Got it~ I've added this task:";
     private static final String MESSAGE_NUMBER_OF_TASKS = "You now have %d tasks in the list~";
     private static final String MESSAGE_REMOVE_TASK = "Alright~ I've removed this task:";
-    private static final String MESSAGE_SEPERATOR = "____________________________________________________________";
     private static final String MESSAGE_LIST = "Here are your tasks~";
     private static final String MESSAGE_FIND = "Here are the matching tasks in your list~";
     private Scanner sc;
@@ -36,7 +35,7 @@ public class Ui {
      * @return A string containing the goodbye message.
      */
     public String farewell() {
-        return (MESSAGE_SEPERATOR + "\n" + MESSAGE_FAREWELL + "\n" + MESSAGE_SEPERATOR);
+        return (MESSAGE_FAREWELL);
     }
 
     /**
@@ -45,8 +44,7 @@ public class Ui {
      * @return A string indicating that the task is marked as done.
      */
     public String doneText(Task doneTask) {
-        return (MESSAGE_SEPERATOR + "\n" + MESSAGE_DONE + "\n" + doneTask
-                + "\n" + MESSAGE_SEPERATOR);
+        return (MESSAGE_DONE + "\n" + doneTask);
     }
 
     /**
@@ -56,9 +54,8 @@ public class Ui {
      * @return A string indicating that the task is added.
      */
     public String addTaskText(Task addTask, TaskList result) {
-        return (MESSAGE_SEPERATOR + "\n" + MESSAGE_ADD_TASK + "\n" + addTask
-                + "\n" + String.format(MESSAGE_NUMBER_OF_TASKS, result.getSize())
-                + "\n" + MESSAGE_SEPERATOR);
+        return (MESSAGE_ADD_TASK + "\n" + addTask
+                + "\n" + String.format(MESSAGE_NUMBER_OF_TASKS, result.getSize()));
     }
 
     /**
@@ -68,9 +65,8 @@ public class Ui {
      * @return A string indicating that the selected task is deleted.
      */
     public String deleteTaskText(Task deleteTask, TaskList result) {
-        return (MESSAGE_SEPERATOR + "\n" + MESSAGE_REMOVE_TASK + "\n" + deleteTask
-                + "\n" + String.format(MESSAGE_NUMBER_OF_TASKS, result.getSize())
-                + "\n" + MESSAGE_SEPERATOR);
+        return (MESSAGE_REMOVE_TASK + "\n" + deleteTask
+                + "\n" + String.format(MESSAGE_NUMBER_OF_TASKS, result.getSize()));
     }
     /**
      * Prints all the tasks in the list.
@@ -78,8 +74,7 @@ public class Ui {
      * @return A string containing all tasks in the list.
      */
     public String listText(TaskList tasks) {
-        return MESSAGE_SEPERATOR + "\n" + MESSAGE_LIST + "\n" + tasks.iterateList()
-                + "\n" + MESSAGE_SEPERATOR;
+        return MESSAGE_LIST + "\n" + tasks.iterateList();
     }
 
     /**
@@ -89,8 +84,7 @@ public class Ui {
      * @return A string containing all relevant tasks from the list.
      */
     public String listRelevantTasks(TaskList tasks, String keyword) {
-        return MESSAGE_SEPERATOR + "\n" + MESSAGE_FIND + "\n" + tasks.iterateFind(keyword)
-                + "\n" + MESSAGE_SEPERATOR;
+        return MESSAGE_FIND + "\n" + tasks.iterateFind(keyword);
     }
 
     /**
