@@ -77,7 +77,6 @@ public class TaskList {
             case DEADLINE:
                 String[] deadlineInfo = info.split(" /by ");
                 Parser.input(command, deadlineInfo.length, true);
-                //assert
                 assert(deadlineInfo.length > 1);
                 Parser.info(command, deadlineInfo[1], true);
                 String deadlineEvent = deadlineInfo[0];
@@ -87,7 +86,6 @@ public class TaskList {
             case EVENT:
                 String[] eventInfo = info.split(" /at ");
                 Parser.input(command, eventInfo.length, true);
-                //assert
                 assert(eventInfo.length > 1);
                 Parser.info(command, eventInfo[1], true);
                 String eventEvent = eventInfo[0];

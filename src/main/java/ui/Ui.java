@@ -23,55 +23,49 @@ public class Ui {
         try {
             String[] splitOrder = input.split(" ", 2);
             Command command = Parser.command(splitOrder[0]);
-            // assert
-            assert(command == Command.LIST
-                    || command == Command.BYE
-                    || command == Command.DONE
-                    || command == Command.DELETE
-                    || command == Command.TODO
-                    || command == Command.DEADLINE
-                    || command == Command.EVENT
-                    || command == Command.FIND);
             switch (command) {
             case LIST:
+                assert(command == Command.LIST);
                 output = tasks.readList();
                 break;
             case BYE:
+                assert(command == Command.BYE);
                 output = "** Bye. Hope to see you soon!! **";
                 break;
             case DONE:
+                assert(command == Command.DONE);
                 Parser.input(command, splitOrder.length, false);
-                //assert
                 assert(splitOrder.length > 1);
                 Parser.info(command, splitOrder[1], false);
                 int doneTaskId = Parser.index(splitOrder[1], splitOrder.length);
-                // assert
                 assert(doneTaskId > 0);
                 output = tasks.taskDone(doneTaskId);
                 break;
             case DELETE:
+                assert( command == Command.DELETE);
                 Parser.input(command, splitOrder.length, false);
-                //assert
                 assert(splitOrder.length > 1);
                 Parser.info(command, splitOrder[1], false);
                 int deleteTaskId = Parser.index(splitOrder[1], splitOrder.length);
-                // assert
                 assert(deleteTaskId > 0);
                 output = tasks.deleteTask(deleteTaskId);
                 break;
             case TODO:
             case DEADLINE:
             case EVENT:
+                boolean isTodo = command == Command.TODO;
+                boolean isDeadline = command == Command.DEADLINE;
+                boolean isEvent = command == Command.EVENT;
+                assert( isTodo || isDeadline || isEvent);
                 Parser.input(command, splitOrder.length, false);
-                //assert
                 assert(splitOrder.length > 1);
                 Parser.info(command, splitOrder[1], false);
                 String info = splitOrder[1];
                 output = tasks.addTask(command, info);
                 break;
             case FIND:
+                assert(command == Command.FIND);
                 Parser.input(command, splitOrder.length, false);
-                //assert
                 assert(splitOrder.length > 1);
                 Parser.info(command, splitOrder[1], false);
                 String keyword = splitOrder[1];

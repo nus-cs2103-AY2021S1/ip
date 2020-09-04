@@ -59,7 +59,6 @@ public class Storage {
             while (sc.hasNext()) {
                 line = sc.next();
                 String[] newLine = line.split("[|]");
-                //assert
                 assert(newLine.length <= 4 && newLine.length > 0);
                 Command command = Parser.command(newLine[0]);
                 boolean hasDone = Integer.parseInt(newLine[1]) == 1;
