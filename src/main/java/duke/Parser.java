@@ -24,22 +24,23 @@ public class Parser {
 
     /**
      * Constructor for Parser.
+     *
      * @param parseMessage Message that has to be parsed by the parser.
      * @param ui UserInterface for the parser to trigger printing events.
      * @param taskList taskList that the Parser needs to keep track of.
      */
     public Parser(String parseMessage, UserInterface ui, TaskList taskList) {
-        this.parseMessage = parseMessage;
+        this.parseMessage = (parseMessage);
         this.ui = ui;
         this.taskList = taskList;
     }
 
     /**
      * Initialises the parser to start processing the parseMessage. Continues until user terminates.
+     *
      * @return the response by Duke.
      */
     public String start() {
-
         try {
             String command = parseMessage.split(" ")[0];
             String response = "";
@@ -47,22 +48,18 @@ public class Parser {
                 ByeCommand byeCommand = new ByeCommand();
                 response = byeCommand.execute(taskList, ui);
             } else if (command.equals("list")) {
-                ListCommand listCommand = new ListCommand();
-                response = listCommand.execute(taskList, ui);
+                response = new ListCommand().execute(taskList, ui);
             } else if (command.equals("find")) {
-                String wordToFind = this.parseMessage.substring(command.length());
-                FindCommand findCommand = new FindCommand(wordToFind);
-                response = findCommand.execute(taskList, ui);
+                String wordToFind = parseMessage.substring(command.length());
+                response = new FindCommand(wordToFind).execute(taskList, ui);
             } else if (command.equals("done")) {
                 int index = Integer.parseInt(parseMessage.split(" ")[1]) - 1;
-                DoneCommand doneCommand = new DoneCommand(index);
-                response = doneCommand.execute(taskList, ui);
+                response = new DoneCommand(index).execute(taskList, ui);
             } else if (command.equals("delete")) {
                 int index = Integer.parseInt(parseMessage.split(" ")[1]) - 1;
-                DeleteCommand deleteCommand = new DeleteCommand(index);
-                response = deleteCommand.execute(taskList, ui);
-            } else if (command.equals("event") || command.equals("deadline") || command.equals("todo")) {
-                String dissectedMessage = this.parseMessage.substring(command.length());
+                response = new DeleteCommand(index).execute(taskList, ui);
+            } else if (checkProperCommand(command)) {
+                String dissectedMessage = parseMessage.substring(command.length());
                 response = executeTask(command, dissectedMessage);
             } else {
                 String errorMessage = "Command is wrong. Please start with delete, "
@@ -71,53 +68,65 @@ public class Parser {
             }
             this.taskList.updateStorage();
             return response;
-        } catch (DukeCommandException | DukeIndexException | DukeTaskException | DukeListException e) {
+        } catch (DukeCommandException | DukeIndexException | DukeTaskException | DukeListException | IOException e) {
             return ui.printError(e.getMessage());
         } catch (DateTimeParseException e) {
             return ui.printError("INPUT DATE TIME FORMAT IS WRONG");
-        } catch (IOException e) {
-            return ui.printError(e.getMessage());
         }
     }
 
     /**
+     * Method to check if the input command matches event, deadline or todo.
+     *
+     * @param command input given by user.
+     * @return boolean if the command is correctly typed.
+     */
+    public boolean checkProperCommand(String command) {
+        return equals("event") || command.equals("deadline") || command.equals("todo");
+    }
+
+    /**
      * Helper method to organize the different types of task that can be recorded.
-     * @param tasktype Type of task to be recorded.
+     *
+     * @param taskType Type of task to be recorded.
      * @param message Details of the task.
      * @return response from Duke.
      * @throws DukeTaskException When there is an error in the input.
      */
-    public String executeTask(String tasktype, String message) throws DukeTaskException {
+    public String executeTask(String taskType, String message) throws DukeTaskException {
 
         String[] parsedMessage = null;
         Task newTask = null;
-        int taskListSize = this.taskList.getTaskSize();
+        int sizeofTaskList = this.taskList.getTaskSize();
 
         try {
 
             if (message.isEmpty()) {
                 throw new IndexOutOfBoundsException();
-            } else if (tasktype.equals("todo")) {
-                newTask = new Todo(message);
-            } else if (tasktype.equals("deadline")) {
-                parsedMessage = message.split("/by ");
+            } else if (taskType.equals("todo")) {
+                newTask = new Todo((message));
+            } else if (taskType.equals("deadline")) {
+                parsedMessage = (message).split("/by ");
                 newTask = new Deadline(parsedMessage[0], parsedMessage[1]);
-            } else if (tasktype.equals("event")) {
+            } else if (taskType.equals("event")) {
                 parsedMessage = message.split("/at ");
                 newTask = new Event(parsedMessage[0], parsedMessage[1]);
             }
 
             this.taskList.addTask(newTask);
-            return ui.printAddTask(newTask.toString(), this.taskList.getTaskSize());
+            assert newTask != null;
+
+            return ui.printAddTask(newTask.toString(), sizeofTaskList);
 
         } catch (IndexOutOfBoundsException e) {
             String errorMessage = "You might have left your message or duration empty.";
-            throw new DukeTaskException(errorMessage);
+            throw new DukeTaskException((errorMessage));
         }
     }
 
     /**
      * retrieveResponse method to retrieve the response printed by Duke.
+     *
      * @return response by Duke.
      */
     public String retrieveResponse() {

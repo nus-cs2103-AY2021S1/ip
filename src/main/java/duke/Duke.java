@@ -1,37 +1,24 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Duke class representing the chat bot.
- * author Kor Ming Soon
+ *
+ * @author Kor Ming Soon
  */
 public class Duke {
 
-    private Storage storage;
     private TaskList taskList;
     private UserInterface ui;
-    private Parser parser;
 
     /**
      * Constructor for the Duke chatbot.
      */
     public Duke() {
-        storage = new Storage();
+        Storage storage = new Storage();
         taskList = new TaskList(storage);
         ui = new UserInterface();
-    }
-
-    /**
-     * Method to send the preamble and load, if any, existing list.
-     */
-    public void initialise() {
-        try {
-            taskList.loadList();
-        } catch (IOException e) {
-            System.out.print(e.getStackTrace());
-        }
     }
 
     /**
@@ -44,11 +31,16 @@ public class Duke {
 
     /**
      * Method to retrieve the response of Duke.
+     *
      * @param input user command.
      * @return the String response.
      */
     public String getResponse(String input) {
-        this.initialise();
-        return acceptCommands(input);
+        try {
+            taskList.loadList();
+            return acceptCommands(input);
+        } catch (IOException e) {
+            return ui.printError("File not found.");
+        }
     }
 }

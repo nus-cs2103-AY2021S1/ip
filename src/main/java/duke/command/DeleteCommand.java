@@ -14,6 +14,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for delete command.
+     *
      * @param index index of the task belonging in the list to be deleted.
      */
     public DeleteCommand(int index) {
@@ -22,23 +23,25 @@ public class DeleteCommand extends Command {
 
     /**
      * Execution command for Delete.
-     * @param tasklist list of tasks to be referenced from.
+     *
+     * @param taskList list of tasks to be referenced from.
      * @param ui UserInterface for the command to prompt.
      * @throws DukeIndexException When the input index does not match the list.
      * @return response for when user deletes a task.
      */
     @Override
-    public String execute(TaskList tasklist, UserInterface ui) throws DukeIndexException {
+    public String execute(TaskList taskList, UserInterface ui) throws DukeIndexException {
 
-        if (this.index > tasklist.getTaskSize() - 1 || this.index < 0) {
+        if (this.index > taskList.getTaskSize() - 1 || this.index < 0) {
             String errorMessage = "Wrong list number input. "
                     + "Please put a number between 1 and "
-                    + tasklist.getTaskSize();
+                    + taskList.getTaskSize();
             throw new DukeIndexException(errorMessage);
         }
-        String response = ui.printDelete(tasklist.getTaskDetail(index).toString(), tasklist.getTaskSize() - 1);
-        tasklist.removeTask(index);
-        return response;
 
+        String response = ui.printDelete(taskList.getTaskDetail(index).toString(),
+                taskList.getTaskSize() - 1);
+        taskList.removeTask(index);
+        return response;
     }
 }
