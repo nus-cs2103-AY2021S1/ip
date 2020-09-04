@@ -24,14 +24,7 @@ public class DoneCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if(index < 0 || index >= tasks.size()) {
-            throw new DukeException(ExceptionTypeEnum.INVALID_ITEM_NUMBER);
-        }
-
         Task task = tasks.get(index);
-        if(task.isDone) {
-            throw new DukeException(ExceptionTypeEnum.ITEM_ALREADY_DONE);
-        }
         task.markAsDone();
         storage.write(tasks);
         return ui.format("Nice, I've marked this task as done:", "\t" + task.toString());
