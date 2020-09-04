@@ -7,6 +7,7 @@ import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
+import duke.commands.HelpCommand;
 import duke.exceptions.InvalidCommandException;
 
 
@@ -23,6 +24,7 @@ public class Parser {
     private static final String EVENT_COMMAND = "event";
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_COMMAND = "find";
+    private static final String HELP_COMMAND = "help";
 
     /**
      * Reads command in string given by the user
@@ -42,6 +44,9 @@ public class Parser {
         }
         if (command.equals(LIST_COMMAND)) {
             return new ListCommand(fullCommand);
+        }
+        if (command.equals(HELP_COMMAND)) {
+            return new HelpCommand(fullCommand);
         }
         if (command.equals(DONE_COMMAND)) {
             return new DoneCommand(fullCommand);

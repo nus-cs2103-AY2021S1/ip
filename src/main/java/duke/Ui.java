@@ -29,7 +29,7 @@ public class Ui {
     public String welcomeMessage(String taskList) {
         return messageFormatter("Hello! I'm Duke! Welcome back!\n",
                 "Here are the tasks in your list:\n",
-                taskList);
+                taskList, "\nInput \"help\" to see a list of commands.");
     }
 
     public String byeMessage() {
@@ -89,6 +89,25 @@ public class Ui {
             return messageFormatter("There are ", String.valueOf(size),
                     " matching tasks in your list:\n", taskList);
         }
+    }
+
+    /**
+     * Prints the list of commands available in the duke program.
+     */
+    public String helpMessage() {
+        String helpMessage = messageFormatter("Here is the list of available commands:\n",
+                "todo <task> : Adds a todo task to your task list.\n",
+                "event <task> /at <YYYY-MM-DD HH:MM> : Adds a event with a date to your task list.\n",
+                "deadline <task> /at <YYYY-MM-DD HH:MM> : Adds a deadline task with a date to your task list.\n",
+                "done <number> : Marks the task at the input position as done\n",
+                "delete <number> : Delete the task at the input number position.\n",
+                "reminder <number> : Shows the list of task within the next input number of days.\n",
+                "find <keyword> : Finds and shows a list of commands which contains the input keyword.\n",
+                "list : Displays the list of items in your task list.\n",
+                "help : Displays the list of available commands in duke.\n",
+                "bye : Exits the duke bot\n"
+                );
+        return helpMessage;
     }
 
 }
