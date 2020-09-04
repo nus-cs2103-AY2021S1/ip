@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.response.Response;
 import duke.task.Task;
 
 /**
@@ -20,18 +20,19 @@ public class DeleteCommand extends Command {
      * Executes the command, deleting a task from the given TaskList.
      *
      * @param taskList A TaskList instance.
-     * @param ui A Ui instance.
      * @param storage A Storage instance.
      * @throws DukeException if the task cannot be found.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public Response execute(TaskList taskList, Storage storage) throws DukeException {
         Task task = taskList.deleteTask(this.taskNo);
-        ui.showPrompt("Noted. I've removed this task:\n  "
+        Response response = new Response("Noted. I've removed this task:\n  "
                 + task + "\n"
                 + "Now you have " + taskList.getTasks().size()
                 + (taskList.getTasks().size() == 1 ? " task" : " tasks") + " in the list.");
         storage.save(taskList.getTasks());
+
+        return response;
     }
 
     @Override

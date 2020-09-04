@@ -5,7 +5,7 @@ import java.util.List;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.response.Response;
 import duke.task.Task;
 
 /**
@@ -22,12 +22,11 @@ public class FindCommand extends Command {
      * Executes the command, listing all tasks containing the given keyword.
      *
      * @param taskList A TaskList instance.
-     * @param ui A Ui instance.
      * @param storage A Storage instance.
      * @throws DukeException if there are no tasks containing the given keyword.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public Response execute(TaskList taskList, Storage storage) throws DukeException {
         List<Task> foundTasks = taskList.findTasks(this.keyword);
 
         if (foundTasks.size() == 0) {
@@ -41,7 +40,7 @@ public class FindCommand extends Command {
             output.append(taskList.getTasks().indexOf(task) + 1).append(".").append(task).append('\n');
         }
 
-        ui.showPrompt(output.toString());
+        return new Response(output.toString());
     }
 
     @Override

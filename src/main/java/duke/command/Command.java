@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.response.Response;
 
 /**
  * Represents a command.
@@ -13,11 +13,10 @@ public abstract class Command {
      * Executes the command.
      *
      * @param taskList A TaskList instance.
-     * @param ui A Ui instance.
      * @param storage A storage instance.
      * @throws DukeException if the command cannot be executed.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract Response execute(TaskList taskList, Storage storage) throws DukeException;
 
     /**
      * Returns a boolean indicating the program exit status.

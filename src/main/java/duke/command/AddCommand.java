@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.response.Response;
 import duke.task.Task;
 import duke.task.TaskType;
 
@@ -38,18 +38,19 @@ public class AddCommand extends Command {
      * Executes the command, adding a task to the given TaskList.
      *
      * @param taskList A TaskList instance.
-     * @param ui A Ui instance.
      * @param storage A Storage instance.
      * @throws DukeException if the task cannot be added.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public Response execute(TaskList taskList, Storage storage) throws DukeException {
         Task task = taskList.addTask(this.type, this.description, this.dateTime);
-        ui.showPrompt("Got it. I've added this task:\n  "
+        Response response = new Response("Got it. I've added this task:\n  "
                 + task + "\n"
                 + "Now you have " + taskList.getTasks().size()
                 + (taskList.getTasks().size() == 1 ? " task" : " tasks") + " in the list.");
         storage.save(taskList.getTasks());
+
+        return response;
     }
 
     @Override

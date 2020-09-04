@@ -5,7 +5,7 @@ import java.util.List;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.response.Response;
 import duke.task.Task;
 
 /**
@@ -16,12 +16,11 @@ public class ListCommand extends Command {
      * Executes the command, listing all tasks.
      *
      * @param taskList A TaskList instance.
-     * @param ui A Ui instance.
      * @param storage A Storage instance.
      * @throws DukeException if there are no tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public Response execute(TaskList taskList, Storage storage) throws DukeException {
         List<Task> tasks = taskList.getTasks();
 
         if (tasks.size() == 0) {
@@ -34,7 +33,7 @@ public class ListCommand extends Command {
             output.append(tasks.indexOf(task) + 1).append(".").append(task).append('\n');
         }
 
-        ui.showPrompt(output.toString());
+        return new Response(output.toString());
     }
 
     @Override

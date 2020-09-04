@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.response.Response;
 import duke.task.Task;
 
 /**
@@ -20,15 +20,16 @@ public class DoneCommand extends Command {
      * Executes the command, marking a task as done in the given TaskList.
      *
      * @param taskList A TaskList instance.
-     * @param ui A Ui instance.
      * @param storage A Storage instance.
      * @throws DukeException if the task cannot be found.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public Response execute(TaskList taskList, Storage storage) throws DukeException {
         Task task = taskList.doTask(this.taskNo);
-        ui.showPrompt("Nice! I've marked this task as done:\n  " + task);
+        Response response = new Response("Nice! I've marked this task as done:\n  " + task);
         storage.save(taskList.getTasks());
+
+        return response;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.response.Response;
 
 /**
  * The main program
@@ -8,7 +9,7 @@ import duke.command.Command;
 public class Duke {
     private final Storage storage;
     private final TaskList taskList;
-    private final Ui ui;
+    private final Response initResponse;
 
     /**
      * The main program's constructor.
@@ -16,40 +17,37 @@ public class Duke {
      * @param filePath The path to the data file.
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
         this.storage = new Storage(filePath);
         TaskList taskList;
+        Response initResponse;
 
         try {
             taskList = new TaskList(this.storage.load());
+            initResponse = new Response();
         } catch (DukeException e) {
-            this.ui.showError(e.getMessage());
             taskList = new TaskList();
+            initResponse = new Response(e.getMessage(), true, false);
         }
 
         this.taskList = taskList;
+        this.initResponse = initResponse;
     }
 
-    /**
-     * Runs the main program.
-     */
-    public void run() {
-        this.ui.showWelcome();
-        boolean isExit = false;
+    public String getWelcome() {
+        return "Hello! I'm Duke\n"
+                + "What can I do for you?\n";
+    }
 
-        while (!isExit) {
-            try {
-                String fullCommand = this.ui.readCommand();
-                Command command = Parser.parse(fullCommand);
-                command.execute(this.taskList, this.ui, this.storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                this.ui.showError(e.getMessage());
-            }
+    public Response getInitResponse() {
+        return this.initResponse;
+    }
+
+    public Response getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(this.taskList, this.storage);
+        } catch (DukeException e) {
+            return new Response(e.getMessage(), true, false);
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }
