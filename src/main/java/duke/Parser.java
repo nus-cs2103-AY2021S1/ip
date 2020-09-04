@@ -16,14 +16,14 @@ public class Parser {
             throw new DukeException("The description can't be blank :(.");
         }
 
-        String description = data[1];
+        StringBuilder description = new StringBuilder(data[1]);
         int idx = 2;
         while (idx < data.length && !data[idx].equals(timeDivider)) {
-            description += " " + data[idx];
+            description.append(" ").append(data[idx]);
             idx++;
         }
 
-        return description;
+        return description.toString();
     }
 
     private static LocalDate parseTime(String[] data, String timeDivider) throws DukeException {
@@ -38,17 +38,17 @@ public class Parser {
                     "Please specify the deadline date in this format: \"" + timeDivider + " <date>\". ");
         }
 
-        String time = data[idx];
+        StringBuilder time = new StringBuilder(data[idx]);
         idx++;
         while (idx < data.length) {
-            time += " " + data[idx];
+            time.append(" ").append(data[idx]);
             idx++;
         }
 
         LocalDate date;
 
         try {
-            date = LocalDate.parse(time);
+            date = LocalDate.parse(time.toString());
         } catch (Exception e) {
             throw new DukeException("Please enter the date in yyyy-mm-dd format.");
         }
@@ -106,6 +106,7 @@ public class Parser {
         default:
             throw new DukeException("I'm sorry but I don't recognize your commandLine T__T.");
         }
+        assert command != null;
         return command;
     }
 }
