@@ -28,7 +28,8 @@ public class DoneCommand extends Command {
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException,
             InvalidTaskNumberException {
-        // ui.printDoneTask();
+        assert ui != null : "Null UI";
+        assert tasks != null : "Null TaskList";
         ui.setMessageDoneTask();
         doneTask(index, tasks);
     }
@@ -41,6 +42,7 @@ public class DoneCommand extends Command {
      */
 
     public void doneTask(int idx, TaskList tasks) throws TaskNotFoundException, InvalidTaskNumberException {
+        assert tasks != null;
         try {
             tasks.getTasks().get(idx - 1).setDone(true);
         } catch (IndexOutOfBoundsException e) {
