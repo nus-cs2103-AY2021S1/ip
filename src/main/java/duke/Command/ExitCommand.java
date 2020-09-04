@@ -12,6 +12,9 @@ import duke.ui.Ui;
  */
 public class ExitCommand extends Command {
 
+    /**
+     * Constructs an <code>ExitCommand</code> Object.
+     */
     public ExitCommand() {
         this.isExit = true;
     }

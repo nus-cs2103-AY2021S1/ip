@@ -1,11 +1,16 @@
 package duke.task;
 
 import duke.exception.DukeException;
+
 import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList {
+
     private ArrayList<Task> tasks;
 
     /**
@@ -40,12 +45,17 @@ public class TaskList {
         try {
             return tasks.get(taskId - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(String.format("Task No.%d is not in your list. "
-                    + "Please enter a valid task ID.",
+            throw new DukeException(String.format("task No.%d is not in your list. "
+                    + "Please enter a valid task ID!",
                     taskId));
         }
     }
 
+    /**
+     * Adds the <code>Task</code> Object from user input to the list.
+     *
+     * @param task The <code>Task</code> Object to be added to the task list.
+     */
     public void add(Task task) {
         tasks.add(task);
     }
@@ -54,13 +64,11 @@ public class TaskList {
      * Removes the requested <code>Task</code> Object from the list.
      *
      * @param taskId The 1-based index of the task to be fetched.
-     * @return The requested <code>Task</code> object.
      * @throws DukeException If an invalid taskId is passed in.
      */
-    public Task remove(int taskId) throws DukeException {
+    public void remove(int taskId) throws DukeException {
         Task task = get(taskId);
         tasks.remove(task);
-        return task;
     }
 
     /**

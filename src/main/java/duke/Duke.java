@@ -11,17 +11,24 @@ import duke.task.TaskList;
 import duke.ui.Message;
 import duke.ui.Ui;
 
+/**
+ * Main program of the Duke program.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private boolean isExit;
 
     public Duke() {
         this(Storage.STORAGE_FILEPATH);
     }
 
+    /**
+     * Constructs a <code>Duke</code> Object.
+     *
+     * @param filePath The file path where the data is (to be) stored.
+     */
     private Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -49,35 +56,28 @@ public class Duke {
     private void run() {
         ui.printResponse(Message.MESSAGE_WELCOME);
         ui.showLine();
-        this.isExit = false;
-        while (!this.isExit) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
                 ui.printResponse(c.execute(tasks, ui, storage));
-                this.isExit = c.isExit();
+                isExit = c.isExit();
             } catch (DukeException e) {
                 ui.printResponse(Message.showError(e.getMessage()));
-            } finally {
-                ui.showLine();
             }
         }
     }
 
     /**
-     * Generate a response to user input.
+     * Generates a response to user input.
      */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            this.isExit = c.isExit();
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return Message.showError(e.getMessage());
         }
-    }
-
-    public boolean isExit() {
-        return this.isExit;
     }
 }

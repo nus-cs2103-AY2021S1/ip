@@ -12,8 +12,13 @@ import duke.ui.Ui;
  */
 public class FindCommand extends Command {
 
-    private String keyword;
+    private final String keyword;
 
+    /**
+     * Constructs a <code>FindCommand</code> Object given the specified keyword.
+     *
+     * @param keyword The keyword to be found in the task list.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
