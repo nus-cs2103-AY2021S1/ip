@@ -77,6 +77,8 @@ public class TaskList {
             case DEADLINE:
                 String[] deadlineInfo = info.split(" /by ");
                 Parser.input(command, deadlineInfo.length, true);
+                //assert
+                assert(deadlineInfo.length > 1);
                 Parser.info(command, deadlineInfo[1], true);
                 String deadlineEvent = deadlineInfo[0];
                 LocalDate deadlineTime = Parser.date(deadlineInfo[1]);
@@ -85,6 +87,8 @@ public class TaskList {
             case EVENT:
                 String[] eventInfo = info.split(" /at ");
                 Parser.input(command, eventInfo.length, true);
+                //assert
+                assert(eventInfo.length > 1);
                 Parser.info(command, eventInfo[1], true);
                 String eventEvent = eventInfo[0];
                 LocalDate eventTime = Parser.date(eventInfo[1]);
@@ -118,6 +122,8 @@ public class TaskList {
         if (taskId > this.taskListLen() || taskId < 1) {
             return "MUG don't have this task to Delete @_@";
         } else {
+            //assert
+            assert(taskId <= this.taskListLen());
             try {
                 int taskIndex = taskId - 1;
                 Task deletedTask = this.taskList.get(taskIndex);
@@ -145,6 +151,8 @@ public class TaskList {
         if (taskId > this.taskListLen() || taskId < 1) {
             return "MUG don't have this task to mark as Done :>";
         } else {
+            //assert
+            assert(taskId <= this.taskListLen());
             int taskIndex = taskId - 1;
             Task doneTask = this.taskList.get(taskIndex);
             if (doneTask.isDone()) {

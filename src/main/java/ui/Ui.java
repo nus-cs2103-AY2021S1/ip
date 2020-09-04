@@ -41,6 +41,8 @@ public class Ui {
                 break;
             case DONE:
                 Parser.input(command, splitOrder.length, false);
+                //assert
+                assert(splitOrder.length > 1);
                 Parser.info(command, splitOrder[1], false);
                 int doneTaskId = Parser.index(splitOrder[1], splitOrder.length);
                 // assert
@@ -49,6 +51,8 @@ public class Ui {
                 break;
             case DELETE:
                 Parser.input(command, splitOrder.length, false);
+                //assert
+                assert(splitOrder.length > 1);
                 Parser.info(command, splitOrder[1], false);
                 int deleteTaskId = Parser.index(splitOrder[1], splitOrder.length);
                 // assert
@@ -59,12 +63,16 @@ public class Ui {
             case DEADLINE:
             case EVENT:
                 Parser.input(command, splitOrder.length, false);
+                //assert
+                assert(splitOrder.length > 1);
                 Parser.info(command, splitOrder[1], false);
                 String info = splitOrder[1];
                 output = tasks.addTask(command, info);
                 break;
             case FIND:
                 Parser.input(command, splitOrder.length, false);
+                //assert
+                assert(splitOrder.length > 1);
                 Parser.info(command, splitOrder[1], false);
                 String keyword = splitOrder[1];
                 output = tasks.searchTask(keyword);
