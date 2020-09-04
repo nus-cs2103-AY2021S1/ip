@@ -55,10 +55,13 @@ public class Event extends Task {
         try {
             String userInputDate = dateAndTime[0];
             String userInputTime = dateAndTime[1];
+
             LocalDate date = LocalDate.parse(userInputDate);
             String[] startAndEndTime = userInputTime.split("-");
             String time = timeFormat(startAndEndTime[0]) + " - " + timeFormat(startAndEndTime[1]);
+
             return new Event(description, userInputDate, userInputTime, date, time);
+
         } catch (DateTimeParseException | DukeException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."
@@ -98,6 +101,7 @@ public class Event extends Task {
                         + "\nFormats to input a task can be found by entering 'format'.");
             }
             return formattedTime.toString();
+
         } catch (NumberFormatException e) {
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."
