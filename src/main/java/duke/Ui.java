@@ -31,7 +31,8 @@ public class Ui {
     }
 
     /**
-     * Inform user that the task is marked as done.
+     * Informs user that the task is marked as done.
+     *
      * @param task The task that has being marked as done.
      */
     public void done(Task task) {
@@ -40,15 +41,17 @@ public class Ui {
     }
 
     /**
-     * Display the error message.
-     * @param message The message ti be displayed.
+     * Displays the error message.
+     *
+     * @param message The message to be displayed.
      */
     public void showError(String message) {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage));
     }
 
     /**
-     * Inform the user that the task is deleted.
+     * Informs the user that the task is deleted.
+     *
      * @param task The task that has being deleted.
      * @param taskList The list of task remaining.
      */
@@ -60,7 +63,8 @@ public class Ui {
     }
 
     /**
-     * Inform the user that the task is added to the list.
+     * Informs the user that the task is added to the list.
+     *
      * @param task The task that is added.
      * @param taskList The list containing all tasks.
      */
@@ -73,6 +77,7 @@ public class Ui {
 
     /**
      * Prints the text given.
+     *
      * @param text Text to be printed.
      */
     public void print(String text) {

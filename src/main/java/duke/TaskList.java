@@ -82,6 +82,12 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Returns string representation of the provided list.
+     *
+     * @param list List to be converted to string.
+     * @return String representation of the list.
+     */
     private String listToString(List<Task> list) {
         Iterator<Task> iterator = list.iterator();
         int count = 0;

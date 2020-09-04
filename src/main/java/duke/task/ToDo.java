@@ -33,8 +33,7 @@ public class ToDo extends Task {
      */
     @Override
     public String store() {
-        String done = this.isDone ? "T " : "F ";
-        return "T " + done + this.details;
+        return "T " + super.store();
     }
 
     /**
