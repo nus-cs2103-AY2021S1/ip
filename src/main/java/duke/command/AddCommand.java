@@ -10,6 +10,7 @@ import duke.task.Task;
  * Represents a command for adding tasks.
  */
 public class AddCommand extends Command {
+
     /**
      * Creates a command for adding tasks.
      * @param input the input command classified as AddCommand
@@ -29,12 +30,15 @@ public class AddCommand extends Command {
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         int count = list.size();
-        Task task = Parser.generate(input);
-        storage.addToList(task);
+        Task task = Parser.parseAddTask(input);
         list.add(count, task);
-        String temp = count < 1 ? " task" : " tasks";
-        String res = "Got it. I've added this task:\n\t    " + task
-                + "\n\t  Now you have " + (count + 1) + temp + " in the list.";
+        storage.addToList(task);
+        return getOutput(ui, count, task);
+    }
+
+    private String getOutput(Ui ui, int count, Task task) {
+        String tasks = Parser.getTaskPlural(count + 1);
+        String res = String.format(Ui.ADD_TASK_OUTPUT_FORMAT, task.toString(), count + 1, tasks);
         ui.output(res);
         return res;
     }

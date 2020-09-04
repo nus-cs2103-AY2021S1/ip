@@ -31,7 +31,7 @@ public class DeleteCommandTest {
             fail();
         } catch (Exception e) {
             try {
-                Parser.isValidDelete(s, 1);
+                Parser.getDeleteTaskIndex(s, 1);
                 fail();
             } catch (Exception e2) {
                 assertEquals(e2.getMessage(), e.getMessage());
@@ -67,12 +67,12 @@ public class DeleteCommandTest {
         list.add(task3);
 
         try {
-            assertEquals("Noted. I've removed this task:\n\t    " + task1
-                    + "\n\t  Now you have 2 tasks", new DeleteCommand("delete 1").execute(ui, list, storage));
-            assertEquals("Noted. I've removed this task:\n\t    " + task3
-                    + "\n\t  Now you have 1 task", new DeleteCommand("delete 2").execute(ui, list, storage));
-            assertEquals("Noted. I've removed this task:\n\t    " + task2
-                    + "\n\t  Now you have 0 task", new DeleteCommand("delete 1").execute(ui, list, storage));
+            assertEquals("Noted. I've removed this task:\n" + task1
+                    + "\nNow you have 2 tasks.", new DeleteCommand("delete 1").execute(ui, list, storage));
+            assertEquals("Noted. I've removed this task:\n" + task3
+                    + "\nNow you have 1 task.", new DeleteCommand("delete 2").execute(ui, list, storage));
+            assertEquals("Noted. I've removed this task:\n" + task2
+                    + "\nNow you have 0 task.", new DeleteCommand("delete 1").execute(ui, list, storage));
         } catch (Exception e) {
             fail();
         }

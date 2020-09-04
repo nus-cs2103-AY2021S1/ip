@@ -27,7 +27,7 @@ public class HappenCommandTest {
             new HappenCommand(s).execute(ui, list, storage);
             fail();
         } catch (Exception e) {
-            assertEquals("Invalid happen command input.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Invalid happen command input.", e.getMessage());
         }
     }
 
@@ -52,7 +52,7 @@ public class HappenCommandTest {
             new HappenCommand(s).execute(ui, list, storage);
             fail();
         } catch (Exception e) {
-            assertEquals("Invalid date format. Please use yyyy-MM-dd.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Invalid date format. Please use yyyy-MM-dd.", e.getMessage());
         }
     }
 
@@ -78,14 +78,14 @@ public class HappenCommandTest {
             new HappenCommand("happen in 0 days").execute(ui, list, storage);
             fail();
         } catch (Exception e) {
-            assertEquals("Please input a positive integer for happen in command.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Please input a positive integer for happen in command.", e.getMessage());
         }
 
         try {
             new HappenCommand("happen in -3 days").execute(ui, list, storage);
             fail();
         } catch (Exception e) {
-            assertEquals("Please input a positive integer for happen in command.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Please input a positive integer for happen in command.", e.getMessage());
         }
     }
 
@@ -99,7 +99,7 @@ public class HappenCommandTest {
             new HappenCommand("happen between 2020-09-01 2020-08-01").execute(ui, list, storage);
             fail();
         } catch (Exception e) {
-            assertEquals("Latter date is before former date for happen between.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Latter date is before former date for happen between.", e.getMessage());
         }
     }
 
@@ -124,7 +124,7 @@ public class HappenCommandTest {
             list.add(new Event("today meeting 1", td + " 12:00"));
             list.add(new Event("later meeting", lt + " 13:00"));
 
-            assertEquals("happening today 3",
+            assertEquals("happening on today 3",
                     new HappenCommand("happen on today").execute(ui, list, storage));
             assertEquals("happening on Sep 1 2021 3",
                     new HappenCommand("happen on 2021-09-01").execute(ui, list, storage));
@@ -146,9 +146,9 @@ public class HappenCommandTest {
                     new HappenCommand("happen in 2 days").execute(ui, list, storage));
             assertEquals("happening in 4 days 5",
                     new HappenCommand("happen in 4 days").execute(ui, list, storage));
-            assertEquals("happening between Aug 31 2021 and Sep 30 2021 4",
+            assertEquals("happening between Aug 31 2021 and Sep 30 2021  4",
                     new HappenCommand("happen between 2021-08-31 2021-09-30").execute(ui, list, storage));
-            assertEquals("happening between Sep 1 2021 and Sep 2 2021 4",
+            assertEquals("happening between Sep 1 2021 and Sep 2 2021  4",
                     new HappenCommand("happen between 2021-09-01 2021-09-02").execute(ui, list, storage));
         } catch (Exception e) {
             fail();

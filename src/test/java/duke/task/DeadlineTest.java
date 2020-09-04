@@ -17,7 +17,7 @@ public class DeadlineTest {
             Deadline d = new Deadline("Assignment 1", "2020/09/01");
             fail();
         } catch (Exception e) {
-            assertEquals("Invalid input date, please input as yyyy-mm-dd.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Invalid input date, please input as yyyy-mm-dd.", e.getMessage());
         }
     }
 

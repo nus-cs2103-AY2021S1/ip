@@ -27,7 +27,7 @@ public class FindCommand extends Command {
     public String execute(Ui ui, TaskList list, Storage storage) {
         assert input.startsWith("find ") : "Find command does not start with 'find '";
         String toFind = input.substring(5);
-        return ui.printList(list, t -> t.finds(toFind), "containing '" + toFind + "' ");
+        return ui.printList(list, t -> t.finds(toFind), String.format(Ui.FIND_LIST_NOTE_FORMAT, toFind));
     }
 
     /**

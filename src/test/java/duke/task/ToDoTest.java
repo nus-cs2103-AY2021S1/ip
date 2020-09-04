@@ -99,7 +99,7 @@ public class ToDoTest {
             t.markAsDone();
             fail();
         } catch (Exception e) {
-            assertEquals("The task [T][\u2713] return books has already been done.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! The task [T][\u2713] return books has already been done.", e.getMessage());
         }
     }
 

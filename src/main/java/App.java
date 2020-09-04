@@ -24,31 +24,26 @@ public class App extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    private String home = System.getProperty("user.home");
-    private java.nio.file.Path path = java.nio.file.Paths.get(home, "Desktop", "cs2103", "ip", "data", "tasks.txt");
-    private Duke runningDuke = new Duke(path.toString(), false);
+    private Duke runningDuke = new Duke("src/main/resources/tasks.txt", false);
 
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
+        AnchorPane mainLayout = createContainer(stage);
 
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
+        formatWindow(stage, mainLayout);
 
-        userInput = new TextField();
-        sendButton = new Button("Send");
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
 
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
 
-        scene = new Scene(mainLayout);
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
 
-        stage.setScene(scene);
-        stage.show();
-
-        //Step 2. Formatting the window to look as expected
+    private void formatWindow(Stage stage, AnchorPane mainLayout) {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -76,19 +71,24 @@ public class App extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
 
-        //Step 3. Add functionality to handle user input.
+    private AnchorPane createContainer(Stage stage) {
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
 
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        userInput = new TextField();
+        sendButton = new Button("Send");
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+        return mainLayout;
     }
 
     /**
@@ -108,14 +108,17 @@ public class App extends Application {
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
+     * @param input the user input to deal with
+     * @return the label of the response to the input
      */
     public Label getResponse(String input) {
         Command c = Parser.parse(input);
-        if (c.isExit()) {
-            System.exit(0);
-        }
         try {
-            return new Label(c.execute(runningDuke.getUi(), runningDuke.getList(), runningDuke.getStorage()));
+            String executionOutput = c.execute(runningDuke.getUi(), runningDuke.getList(), runningDuke.getStorage());
+            if (c.isExit()) {
+                System.exit(0);
+            }
+            return new Label(executionOutput);
         } catch (InvalidCommandException e) {
             return new Label(e.getMessage());
         }

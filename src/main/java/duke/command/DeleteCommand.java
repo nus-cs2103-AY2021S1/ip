@@ -30,15 +30,23 @@ public class DeleteCommand extends Command {
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         assert input.startsWith("delete ") : "Delete command does not start with 'delete '";
         int count = list.size();
-        int m = Parser.isValidDelete(input, count) - 1;
-        Task toDelete = list.get(m);
-        list.remove(toDelete);
-        storage.reWrite(list);
-        String temp = count <= 2 ? " task" : " tasks";
-        String str = "Noted. I've removed this task:\n\t    " + toDelete
-                + "\n\t  Now you have " + list.size() + temp;
+        int m = Parser.getDeleteTaskIndex(input, count) - 1;
+        Task toDelete = getTaskToDelete(list, storage, m);
+        return getUiOutput(ui, list, count, toDelete);
+    }
+
+    private String getUiOutput(Ui ui, TaskList list, int count, Task toDelete) {
+        String tasks = Parser.getTaskPlural(count - 1);
+        String str = String.format(Ui.DELETE_TASK_OUTPUT_FORMAT, toDelete.toString(), list.size(), tasks);
         ui.output(str);
         return str;
+    }
+
+    private Task getTaskToDelete(TaskList list, Storage storage, int m) throws InvalidCommandException {
+        Task toDelete = list.get(m);
+        list.remove(m);
+        storage.reWrite(list);
+        return toDelete;
     }
 
     /**
