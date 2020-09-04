@@ -41,7 +41,7 @@ public class Duke {
      * @return message to user
      * @throws DukeException
      */
-    protected String furtherProcessing(Commands commandType, String[] tokens, boolean isLoaded) throws DukeException {
+    protected String distributeCommand(Commands commandType, String[] tokens, boolean isLoaded) throws DukeException {
         Task parsedTask = new Task("");
         if (commandType == Commands.DEADLINE || commandType == Commands.EVENT || commandType == Commands.TODO) {
             parsedTask = parser.parseCommand(commandType, tokens, isLoaded, getNumTasks());
@@ -94,12 +94,12 @@ public class Duke {
      * @return message to user
      * @throws DukeException
      */
-    protected String processedCommand(String command, boolean isLoaded) throws DukeException {
+    protected String tokenizeCommand(String command, boolean isLoaded) throws DukeException {
         command = command.strip();
         if (command.equals("")) return "";
         String[] tokens = command.split(" ");
         try {
-            return furtherProcessing(Commands.valueOf(tokens[0].toUpperCase()), tokens, isLoaded);
+            return distributeCommand(Commands.valueOf(tokens[0].toUpperCase()), tokens, isLoaded);
         } catch (IllegalArgumentException e) {
             throw new DukeException("OOPS!!! CAN YOU PLEASE TYPE SOMETHING MEANINGFUL?");
         }
@@ -113,12 +113,15 @@ public class Duke {
         result += Ui.printDialog("Hello! I'm Elon Musk. Type 'help' if you know nothing\n"
                 + "Your tasks will be saved at /data\nWhat can I do for you?");
         ArrayList<String> savedTasks = storage.loadSavedTasks();
+
+        assert savedTasks != null : "Storage is null";
+
         if (savedTasks.size() > 0 && savedTasks.get(0).equals("000")) {
             result += Ui.printDialog("This is the first time you use Duke!");
         } else {
             try {
                 for (String task : savedTasks) {
-                    processedCommand(task, true);
+                    tokenizeCommand(task, true);
                 }
             } catch (DukeException e) {
                 result += Ui.printDialog("Something wrong happened while loading saved tasks");
@@ -127,11 +130,13 @@ public class Duke {
         return result;
     }
     public String getResponse(String content) {
+        assert content != null : "Response is null";
+
         content = content.strip();
         if (content.equals(Commands.BYE.getAction())) {
             this.stage.close();
-            return Ui.printDialog("Bye. Hope to see you again soon!");
             //exit the program
+            return Ui.printDialog("Bye. Hope to see you again soon!");
         }
         if (content.equals(Commands.HELP.getAction())) {
             String res = "";
@@ -144,7 +149,7 @@ public class Duke {
             return Ui.printStoredTasks(this.tasks.getTaskList());
         } else {
             try {
-                String result = processedCommand(content, false);
+                String result = tokenizeCommand(content, false);
                 if (!result.equals("")) return Ui.printDialog(result);
             } catch (DukeException e) {
                 return Ui.printDialog(e.getMessage());
