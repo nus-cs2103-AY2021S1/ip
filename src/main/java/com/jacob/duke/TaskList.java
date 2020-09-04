@@ -12,15 +12,16 @@ public class TaskList {
     }
 
     /**
-     * Create a taskList object to encapsulate the task list
+     * Create a taskList object to encapsulate the task list.
      */
     public TaskList() {
         taskList = new ArrayList<>();
     }
 
     /**
-     * Get arraylist of task objects
-     * @return List containing the list of to do items
+     * Get arraylist of task objects.
+     *
+     * @return List containing the list of to do items.
      */
     public List<Task> getTaskList() {
         return taskList;

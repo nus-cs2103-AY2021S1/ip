@@ -7,8 +7,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     /**
-     * Constructor for Duke
-     * @param filePath contains file where task list is saved
+     * Constructor for Duke.
+     *
+     * @param filePath contains file where task list is saved.
      */
     public Duke(String filePath) {
         ui = new Ui();

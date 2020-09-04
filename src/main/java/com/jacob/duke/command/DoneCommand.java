@@ -8,37 +8,36 @@ import main.java.com.jacob.duke.Ui;
 
 import main.java.com.jacob.duke.task.Task;
 
-
-
 public class DoneCommand implements Command {
     private String fullCommand;
 
     /**
-     * Constructor for Done Command
-     * @param fullCommand with from console input
+     * Constructor for Done Command.
+     *
+     * @param fullCommand with from console input.
      */
     public DoneCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
 
     /**
-     * Execution command for pre-determined Done Command
-     * @param ui UI object to deal with program output
-     * @param tasks Task List Representation
-     * @param storage Storage object to deal with interfacing with file system
+     * Executes command for pre-determined Done Command.
+     *
+     * @param ui UI object to deal with program output.
+     * @param tasks Task List Representation.
+     * @param storage Storage object to deal with interfacing with file system.
      */
     @Override
     public String execute(Ui ui, TaskList tasks, Storage storage) {
         List<Task> taskList = tasks.getTaskList();
-        //get the integer from the string command and convert to integer
-        Task theTask = taskList.get(Integer.parseInt(fullCommand.substring(5)) - 1);
+
+        int taskNumber = Integer.parseInt(fullCommand.substring(5)) - 1;
+        Task theTask = taskList.get(taskNumber);
         String lineToEdit = theTask.convertToFile();
 
-        //set task as done
         theTask.setDone();
         String replacementText = theTask.convertToFile();
 
-        //replace line
         try {
             storage.replacement(lineToEdit, replacementText);
         } catch (StringIndexOutOfBoundsException e) {
@@ -48,7 +47,8 @@ public class DoneCommand implements Command {
     }
 
     /**
-     * Check if it is the bye Command
+     * Check if it is the bye Command.
+     *
      * @return false since it is not
      */
     @Override

@@ -14,35 +14,35 @@ public class TodoCommand implements Command {
     private String inputCommand;
 
     /**
-     * Constructor for To do Command
-     * @param fullCommand with from console input
+     * Constructor for To do Command.
+     *
+     * @param fullCommand with from console input.
      */
     public TodoCommand(String fullCommand) {
         this.inputCommand = fullCommand;
     }
 
     /**
-     * Execution command for pre-determined To-do Command
-     * @param ui UI object to deal with program output
-     * @param tasks Task List Representation
-     * @param storage Storage object to deal with interfacing with file system
-     * @throws DukeException In case there are internal errors
+     * Execution command for pre-determined To-do Command.
+     *
+     * @param ui UI object to deal with program output.
+     * @param tasks Task List Representation.
+     * @param storage Storage object to deal with interfacing with file system.
+     * @throws DukeException In case there are internal errors.
      */
     @Override
     public String execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
         List<Task> taskList = tasks.getTaskList();
-        String s = inputCommand.substring(4);
+        String description = inputCommand.substring(4);
 
-        if (s.equals("")) {
+        if (description.equals("")) {
             throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
         }
         Task theTodo = new Todo(inputCommand.substring(4 + 1));
         taskList.add(theTodo);
 
-        //append text
         storage.appendText(theTodo.convertToFile());
 
-        //print UI
         return ui.showNewTaskAdded(theTodo.getCurrentStatus(), taskList);
     }
 

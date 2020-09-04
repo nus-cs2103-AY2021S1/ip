@@ -26,16 +26,16 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(new FileInputStream(System.getProperty("user.dir")
+    private final Image USER_IMAGE = new Image(new FileInputStream(System.getProperty("user.dir")
             + "\\data\\userChatBotIcon.png"));
-    private final Image dukeImage = new Image(new FileInputStream(System.getProperty("user.dir")
+    private final Image DUKE_IMAGE = new Image(new FileInputStream(System.getProperty("user.dir")
             + "\\data\\dukeChatBotIcon.png"));
 
     public MainWindow() throws FileNotFoundException {
     }
 
     /**
-     * Initializes the main window with a welcome message
+     * Initializes the main window with a welcome message.
      */
     @FXML
     public void initialize() {
@@ -54,7 +54,7 @@ public class MainWindow extends AnchorPane {
                 + "list-due <YYYY-MM-DD HHMM>: gets list of tasks due on that date\n"
                 + "find: finds any task that has a description matching the given string\n";
 
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(startUpString, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(startUpString, DUKE_IMAGE));
     }
 
     public void setDuke(Duke d) {
@@ -70,8 +70,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, USER_IMAGE),
+                DialogBox.getDukeDialog(response, DUKE_IMAGE)
         );
         userInput.clear();
     }

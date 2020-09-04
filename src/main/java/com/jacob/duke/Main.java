@@ -1,6 +1,5 @@
 package main.java.com.jacob.duke;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.application.Application;

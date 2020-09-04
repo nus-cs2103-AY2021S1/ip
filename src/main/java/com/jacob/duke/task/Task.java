@@ -10,8 +10,9 @@ public class Task {
     protected LocalDateTime dueDateTime;
 
     /**
-     * Constructor for Task
-     * @param description Description for Task
+     * Constructor for Task.
+     *
+     * @param description Description for Task.
      */
     public Task(String description) {
         this.description = description;
@@ -19,9 +20,10 @@ public class Task {
     }
 
     /**
-     * Constructor for parsing date time
-     * @param description Description of task
-     * @param dateTime date time of task
+     * Constructor for parsing date time.
+     *
+     * @param description Description of task.
+     * @param dateTime date time of task.
      */
     public Task(String description, String dateTime) {
         this.description = description;
@@ -31,31 +33,34 @@ public class Task {
     }
 
     /**
-     * Get status of task completion
-     * @return Done status
+     * Get status of task completion.
+     *
+     * @return Done status.
      */
     public String getStatusIcon() {
         return (isDone ? "Done" : "X"); //return ✓ or X symbols
     }
 
     /**
-     * Set task as done
+     * Set task as done.
      */
     public void setDone() {
         isDone = true;
     }
 
     /**
-     * Get description
-     * @return task description
+     * Get description.
+     *
+     * @return task description.
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Get current status of task
-     * @return current status of task
+     * Get current status of task.
+     *
+     * @return current status of task.
      */
     public String getCurrentStatus() {
         if (dueDateTime != null) {
@@ -66,8 +71,9 @@ public class Task {
     }
 
     /**
-     * Convert the description to the format suitable for file
-     * @return String containing suitable format
+     * Convert the description to the format suitable for file.
+     *
+     * @return String containing suitable format.
      */
     public String convertToFile() {
         if (dueDateTime != null) {
@@ -78,8 +84,9 @@ public class Task {
     }
 
     /**
-     * Get Due Date and Time parsed
-     * @return LocalDateTime object with the date time
+     * Get Due Date and Time parsed.
+     *
+     * @return LocalDateTime object with the date time.
      */
     public LocalDateTime getDueDateTime() {
         return dueDateTime;
