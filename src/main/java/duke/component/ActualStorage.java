@@ -23,7 +23,6 @@ public class ActualStorage implements Storage {
     public static final String INPUT_FILE_FORMAT_ERROR = "Input file format error!";
     public static final int FILE_DIVIDER_LENGTH = 6;
     private final String filePath;
-    private final File file;
     private final TaskList list;
 
     /**
@@ -35,7 +34,7 @@ public class ActualStorage implements Storage {
     public ActualStorage(String filePath) throws FileNotFoundException, InvalidCommandException {
         this.filePath = filePath;
         list = new TaskList();
-        file = new File(filePath);
+        File file = new File(filePath);
         readFile(file);
     }
 
@@ -151,9 +150,7 @@ public class ActualStorage implements Storage {
     @Override
     public void reWrite(TaskList list) throws InvalidCommandException {
         try {
-            //FileWriter fw = new FileWriter(filePath);
-            File file = new File(filePath);
-            FileWriter fw = new FileWriter(file);
+            FileWriter fw = new FileWriter(filePath);
             for (Task task : list) {
                 fw.write(task.output());
             }
