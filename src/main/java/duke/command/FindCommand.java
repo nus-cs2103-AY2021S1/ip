@@ -4,7 +4,6 @@ import duke.Storage;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.tool.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a command to find certain task with keyword.
@@ -48,7 +47,8 @@ public class FindCommand implements Command {
     @Override
     public String getResponse() {
         assert !isExit();
-        return Ui.getTaskListString(resultTaskList);
+        return TaskList.getTaskListString(resultTaskList);
+
     }
 
 }

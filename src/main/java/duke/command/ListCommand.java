@@ -3,7 +3,6 @@ package duke.command;
 import duke.Storage;
 import duke.exception.DukeException;
 import duke.tool.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a command which list all tasks in the task list.
@@ -26,7 +25,7 @@ public class ListCommand implements Command {
     @Override
     public String getResponse() {
         assert !isExit();
-        return Ui.getTaskListString(tasks);
+        return TaskList.getTaskListString(tasks);
     }
 
 }

@@ -6,7 +6,6 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.tool.Parser;
 import duke.tool.TaskList;
-import duke.ui.Ui;
 
 
 /**
@@ -14,14 +13,14 @@ import duke.ui.Ui;
  */
 public class Duke {
 
+    /**Welcome message*/
+    public static final String WELCOME_MESSAGE = "Hello, I am Duke! \n\t What can I do for you?";
+
     /** Storage of the system */
     private final Storage storage;
 
     /** Task list that stores tasks */
     private TaskList tasks;
-
-    /** User interface to interact with user */
-    private  Ui ui = null;
 
     /**
      * Creates new Duke chat bot from given storage path.
@@ -33,7 +32,6 @@ public class Duke {
 
         try {
             tasks = new TaskList(storage.load());
-            //ui = new Ui(storage, tasks);
         } catch (IOException e) {
             e.printStackTrace();
         }
