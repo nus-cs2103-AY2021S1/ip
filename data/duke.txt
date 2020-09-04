@@ -1,1 +1,1 @@
-1.[duke.ToDo][✘] hoeword
+1.[ToDo][✓] read book

@@ -17,10 +17,8 @@ public class Duke {
         this.storage = new Storage(filePath);
         if (this.storage.load().isEmpty()) {
             this.tasks = new TaskList();
-
         }else{
             this.tasks = new TaskList(storage.load());
-            System.out.println(this.tasks);
         }
     }
 
