@@ -36,11 +36,13 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasklist, UserInterface ui) throws DukeListException {
+
         List<Task> wholeTaskList = tasklist.getTaskList();
 
         BiFunction<Integer, String, Boolean> filterFunction = (index, filterWord) -> {
             return wholeTaskList.get(index).getTask().contains(filterWord);
         };
+
 
         String response = ui.listTask();
 
@@ -52,7 +54,9 @@ public class FindCommand extends Command {
         if (response.equals("")) {
             throw new DukeListException("Your search result yields nothing.");
         }
-
+      
+        assert !response.equals("");
+      
         return response;
     }
 }
