@@ -1,3 +1,11 @@
+/**
+ * ParserExceptions contains all the king exceptions thrown
+ * by parser during execution of the King program.
+ *
+ * @see parser.Parser
+ * @see king.KingException
+ */
+
 package parser;
 
 import king.KingException;
