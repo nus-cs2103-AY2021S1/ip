@@ -92,7 +92,10 @@ public class Parser {
             LocalDateTime eventDate = LocalDateTime.parse(dateForEvent, FORMATTER);
             newTask = new EventTask(taskName, eventDate);
             break;
+        default:
+            break;
         }
+
 
         if (isDone) {
             newTask.setStatusToDone();

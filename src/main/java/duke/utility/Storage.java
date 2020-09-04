@@ -78,7 +78,7 @@ public class Storage {
     }
 
     /**
-     * Delete a task in the hard disk based on the line number specified.
+     * Deletes a task in the hard disk based on the line number specified.
      * @param line The task line that wanted to be changed
      * @throws DukeException If the Scanner or FileWriter fails to read the file
      */

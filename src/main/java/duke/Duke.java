@@ -8,7 +8,7 @@ import duke.utility.TaskList;
 import duke.utility.Ui;
 
 /**
- * Class to represents the Duke.
+ * Class to represent the Duke.
  */
 public class Duke {
     private Storage storage;
@@ -16,7 +16,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructs a new Duke object to initialized the program.
+     * Constructs a new Duke object to initialize the program.
      */
     public Duke() {
         ui = new Ui();
@@ -59,7 +59,7 @@ public class Duke {
     }
 
     /**
-     * Run the Duke program.
+     * Runs the Duke program.
      * @param args The command line input
      */
     public static void main(String[] args) {
