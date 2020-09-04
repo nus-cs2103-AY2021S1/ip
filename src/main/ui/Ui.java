@@ -9,7 +9,7 @@ import main.task.TaskList;
  * Represents the ui of stuff.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.1
+ * @version v0.3
  * @since v0.1
  */
 public class Ui {
