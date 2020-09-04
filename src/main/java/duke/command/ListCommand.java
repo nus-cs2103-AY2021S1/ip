@@ -24,6 +24,7 @@ public class ListCommand implements Command {
      */
     public String execute(String command, Storage storage, Ui ui, TaskList taskList) {
         List<Task> listOfTask = taskList.getList();
+        assert listOfTask != null : "Failed to obtain list";
         if (listOfTask.isEmpty()) {
             return " You have no task to complete! *WOOF*\n";
         } else {
