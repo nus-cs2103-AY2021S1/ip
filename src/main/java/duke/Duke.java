@@ -53,4 +53,13 @@ public class Duke {
     public String greet() {
         return "Hello! How can I help you today?";
     }
+
+    /**
+     * Main method that starts JavaFX.
+     *
+     * @param args arguments from the command line
+     */
+    public static void main(String[] args) {
+        Launcher.main(args);
+    }
 }

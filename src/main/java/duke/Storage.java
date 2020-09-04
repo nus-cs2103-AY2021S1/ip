@@ -31,6 +31,7 @@ public class Storage {
      */
     public Storage(Path pathToStorage) {
         this.pathToStorage = pathToStorage;
+        assert pathToStorage != null : "Path to storage cannot be null";
         try {
             // Create directory if needed
             Path parentPath = pathToStorage.getParent();
@@ -56,7 +57,9 @@ public class Storage {
         // Convert string to Tasks
         for (String taskString : this.allTasks) {
             char taskType = taskString.charAt(0);
+            assert taskType == 'T' || taskType == 'E' || taskType == 'D' : "Task type is wrong";
             String taskDetails = taskString.substring(taskString.lastIndexOf("|") + 2);
+
             boolean isDone = false;
 
             if (taskString.charAt(4) == '1') {
@@ -85,6 +88,7 @@ public class Storage {
     }
 
     private String formatTaskDateTime(String dateTime) {
+        assert dateTime.length() != 0 : "Date and time cannot be empty";
         String[] dateTimes = dateTime.split(",");
         String date = dateTimes[0]; // MMM DD YYYY
         String time = dateTimes[1]; // HH:MM:SS
@@ -115,6 +119,7 @@ public class Storage {
      */
     public void writeToStorage() {
         try {
+            assert pathToStorage != null : "Path to storage cannot be empty";
             File storageFile = new File(String.valueOf(pathToStorage));
             FileWriter fw = new FileWriter(storageFile);
             for (String task : this.allTasks) {
@@ -132,6 +137,7 @@ public class Storage {
      * @param task the Task to be added.
      */
     public void createTask(Task task) {
+        assert task != null : "Task cannot be null";
         this.allTasks.add(task.toString());
         writeToStorage();
     }
@@ -143,6 +149,8 @@ public class Storage {
      * @param taskIndex the index of the Task in the List of all the Tasks.
      */
     public void updateTask(Task task, int taskIndex) {
+        assert task != null : "Task cannot be null";
+        assert taskIndex < allTasks.size() : "Task index must be within range of allTask size";
         this.allTasks.set(taskIndex, task.toString());
         writeToStorage();
     }
@@ -153,6 +161,7 @@ public class Storage {
      * @param taskIndex the index of the task in the List of all the Tasks to be deleted.
      */
     public void deleteTask(int taskIndex) {
+        assert taskIndex < allTasks.size() && taskIndex >= 0: "Task index must be within range of allTask size";
         this.allTasks.remove(taskIndex);
         writeToStorage();
     }

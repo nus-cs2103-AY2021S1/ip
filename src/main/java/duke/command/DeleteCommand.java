@@ -28,6 +28,8 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert storage != null : "Storage cannot be null";
+        assert taskList != null : "taskList cannot be null";
         try {
             String taskIndex = userInput.substring(7);
             int index = Integer.valueOf(taskIndex) - 1; // taskIndex started from 1

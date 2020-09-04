@@ -29,6 +29,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null : "taskList cannot be null";
         if (userInput.length() <= 4) {
             throw new DukeException("Please enter a keyword to find your task");
         }
