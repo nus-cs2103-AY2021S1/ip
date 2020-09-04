@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,19 +53,26 @@ public class TaskManager {
         return uncompletedTasks;
     }
 
-    public String getAllTasks() {
+    public List<Task> getAllTasks() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are all your tasks: \n");
         for (int i = 0; i < tasks.size(); i++) {
-            stringBuilder.append(String.valueOf(i + 1) + ") " + tasks.get(i).toString() + "\n");
+            String taskDescriptionInListFormat = String.format("%d) %s\n", i + 1, tasks.get(i).toString());
+            stringBuilder.append(taskDescriptionInListFormat);
         }
-        boolean isPluralCompletedTasks = getCompletedTasks() >= 2;
-        boolean isPluralUncompletedTasks = getUncompletedTasks() >= 2;
-        String completedTasks = getCompletedTasks() + (isPluralCompletedTasks ? " tasks" : " task");
-        String uncompletedTasks = getUncompletedTasks() + (isPluralUncompletedTasks ? " tasks." : " task");
+        String completedTasks = getCompletedTasks() + (this.isPluralCompletedTasks() ? " tasks" : " task");
+        String uncompletedTasks = getUncompletedTasks() + (this.isPluralUncompletedTasks() ? " tasks." : " task");
         stringBuilder.append("You have completed " + completedTasks + " and have yet to complete "
                 + uncompletedTasks);
-        return stringBuilder.toString();
+        return this.tasks;
+    }
+
+    public boolean isPluralCompletedTasks() {
+        return getCompletedTasks() > 2;
+    }
+
+    public boolean isPluralUncompletedTasks() {
+        return getUncompletedTasks() > 2;
     }
 
     public List<Task> findTasksByKeyword(String keyword) {
@@ -74,6 +83,20 @@ public class TaskManager {
             }
         }
         return filteredTasks;
+    }
+
+    public List<Task> findTasksByDate(LocalDate queryDate) {
+        List<Task> tasksForQueryDate = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task instanceof TimeBased) {
+                TimeBased timeBasedTask = (TimeBased) task;
+                LocalDate taskLocalDateTime = timeBasedTask.getDate();
+                if (queryDate.isEqual(taskLocalDateTime)) {
+                    tasksForQueryDate.add(task);
+                }
+            }
+        }
+        return tasksForQueryDate;
     }
 
     public void markTaskAsDone(int taskIndex) {

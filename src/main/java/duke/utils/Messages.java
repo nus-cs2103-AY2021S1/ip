@@ -17,6 +17,8 @@ public class Messages {
             + "The correct command is:\nEvent <task description> /at <datetime>";
     public static final String INVALID_FIND_COMMAND = "OOPS!!! You are missing a keyword.\n"
             + "The correct command is:\nFind <keyword>";
+    public static final String INVALID_TODAY_COMMAND = "OOPS!!! Invalid Today Command.\n"
+            + "The correct command is:\nToday";
     public static final String MISSING_DATE_AND_TIME_FOR_DEADLINE = "OOPS!!! Missing date/time.\n"
             + "Correct command is:\nDeadline <task description> /by <datetime>";
     public static final String MISSING_DATE_AND_TIME_FOR_EVENT = "OOPS!!! Missing date/time.\n"

@@ -1,13 +1,6 @@
 package duke.parser;
 
-import duke.commands.AddCommand;
-import duke.commands.Command;
-import duke.commands.CommandTypes;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListTasksCommand;
+import duke.commands.*;
 
 import duke.exceptions.DukeException;
 
@@ -82,6 +75,9 @@ public class CommandLineInterfaceParser {
                 trimmedContent = content.trim();
                 FindCommand findTaskCommand = new FindCommand(trimmedContent);
                 return findTaskCommand;
+            case TODAY:
+                TodayTasksCommand tasksForToday = new TodayTasksCommand();
+                return tasksForToday;
             default:
                 throw new DukeException(Messages.INVALID_COMMAND_INPUT_MESSAGE);
             }

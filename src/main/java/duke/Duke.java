@@ -13,7 +13,6 @@ import duke.storage.Storage;
 
 import duke.task.TaskManager;
 
-import duke.utils.Colour;
 import duke.utils.Messages;
 import duke.utils.Ui;
 
@@ -37,7 +36,6 @@ public class Duke {
     }
 
     public void run() {
-        ui.print(Messages.WELCOME_MESSAGE);
         Scanner scanner = new Scanner(System.in);
         boolean isExit = false;
         String userInput;
@@ -52,9 +50,10 @@ public class Duke {
                 ui.print(output.getCommandOutput());
                 isExit = output.isExit();
             } catch (IllegalArgumentException e) {
-                ui.print(Colour.convertTextToRed(Messages.INVALID_COMMAND_INPUT_MESSAGE));
+                ui.print(Messages.INVALID_COMMAND_INPUT_MESSAGE);
             }
         }
+        scanner.close();
         System.exit(0);
     }
 

@@ -1,2 +1,4 @@
-T | 0 | read book
+T | 1 | read book
 D | 0 | return book  back to library | 18 Oct 2020 6:00 PM
+D | 0 | return book | 04 Sep 2020 6:00 PM
+E | 0 | project meeting | 04 Sep 2020 7:30 PM

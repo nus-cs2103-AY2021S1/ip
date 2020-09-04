@@ -22,6 +22,10 @@ public class DukeDateTime {
         this.hasTime = hasTime;
     }
 
+    public LocalDateTime getDateTime() {
+        return this.dateTime;
+    }
+
     @Override
     public String toString() {
         return hasTime
