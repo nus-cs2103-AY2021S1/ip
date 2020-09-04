@@ -49,7 +49,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(),
+        return String.format("[E]%s\n(at: %s)", super.toString(),
                 time.format(FORMATTER));
     }
 

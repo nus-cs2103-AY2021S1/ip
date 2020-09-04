@@ -40,14 +40,14 @@ public class DeadlineTest {
         @Test
         @DisplayName("should return a string representation of the deadline instance")
         public void toString_deadlineTask_string() {
-            assertEquals("[D][\u2718] task 1 (by: Monday, 06 Dec 1993, 10:10AM)",
+            assertEquals("[D][\u2718] task 1\n(by: Monday, 06 Dec 1993, 10:10AM)",
                     DEADLINE_ONE.toString());
         }
 
         @Test
         @DisplayName("should return a string representation of an alternate deadline instance")
         public void toString_altDeadlineTask_altString() {
-            assertEquals("[D][\u2713] task 2 (by: Saturday, 13 Jan 4198, 11:39PM)",
+            assertEquals("[D][\u2713] task 2\n(by: Saturday, 13 Jan 4198, 11:39PM)",
                     DEADLINE_TWO.toString());
         }
     }

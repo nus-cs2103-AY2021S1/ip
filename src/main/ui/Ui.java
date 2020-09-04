@@ -1,5 +1,7 @@
 package main.ui;
 
+import java.util.stream.IntStream;
+
 import main.task.Task;
 import main.task.TaskList;
 
@@ -34,17 +36,15 @@ public class Ui {
      * @return the string with all tasks listed.
      */
     public String printTaskList(TaskList tasks) {
-        StringBuilder listMessage = new StringBuilder();
-
         if (tasks.size() == 0) {
             return "There are no tasks yet!";
         }
 
-        for (int i = 0; i < tasks.size(); i++) {
-            listMessage.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
-        }
-
-        return listMessage.toString();
+        return IntStream.range(0, tasks.size())
+                .mapToObj(i -> new StringBuilder(
+                        String.format("%d. %s\n", i + 1, tasks.get(i))))
+                .reduce(new StringBuilder(), StringBuilder::append)
+                .toString();
     }
 
     /**
@@ -53,20 +53,17 @@ public class Ui {
      * @return a string with all the tasks found via the find command.
      */
     public String printFoundList(TaskList tasks) {
-        StringBuilder foundListMessage;
-
         if (tasks.size() == 0) {
             return "There are no tasks found!";
-        } else {
-            foundListMessage = new StringBuilder(
-                    "Here are the matching tasks in your list:\n");
         }
 
-        for (int i = 0; i < tasks.size(); i++) {
-            foundListMessage.append(String.format("%d.%s\n", i + 1, tasks.get(i)));
-        }
-
-        return foundListMessage.toString();
+        return IntStream.range(0, tasks.size())
+                .mapToObj(i -> new StringBuilder(
+                        String.format("%d. %s\n", i + 1, tasks.get(i))))
+                .reduce(new StringBuilder("Here are the matching tasks "
+                                + "in your list:\n"),
+                        StringBuilder::append)
+                .toString();
     }
 
     /**
