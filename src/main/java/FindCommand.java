@@ -38,6 +38,7 @@ public class FindCommand extends Command {
                 }
                 secondIndex++;
             }
+
             if (!isMatching) {
                 // Do nothing.
             } else {
