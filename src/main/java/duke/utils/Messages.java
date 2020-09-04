@@ -23,6 +23,8 @@ public class Messages {
             + "The correct command is:\nuncompleted";
     public static final String INVALID_COMPLETED_COMMAND = "OOPS!! Invalid Completed Command. \n"
             + "The correct command is:\ncompleted";
+    public static final String INVALID_OVERDUE_COMMAND = "OOPS!! Invalid Overdue Command. \n"
+            + "The correct command is:\noverdue";
     public static final String MISSING_DATE_AND_TIME_FOR_DEADLINE = "OOPS!!! Missing date/time.\n"
             + "Correct command is:\ndeadline <task description> /by <datetime>";
     public static final String MISSING_DATE_AND_TIME_FOR_EVENT = "OOPS!!! Missing date/time.\n"

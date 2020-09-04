@@ -84,6 +84,9 @@ public class CommandLineInterfaceParser {
             case COMPLETED:
                 ListAllCompletedTasksCommand completedTasksCommand = new ListAllCompletedTasksCommand();
                 return completedTasksCommand;
+            case OVERDUE:
+                OverdueCommand overdueTasksCommand = new OverdueCommand();
+                return overdueTasksCommand;
             default:
                 throw new DukeException(Messages.INVALID_COMMAND_INPUT_MESSAGE);
             }

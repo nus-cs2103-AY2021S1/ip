@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +85,20 @@ public class TaskManager {
         return completedTasks;
     }
 
+    public List<Task> getAllTasksBeforeQueryDate(LocalDate queryDate) {
+        List<Task> tasksBeforeQueryDate = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task instanceof TimeBased) {
+                TimeBased timeBasedTask = (TimeBased) task;
+                LocalDate taskLocalDate = timeBasedTask.getDate();
+                if (queryDate.isAfter(taskLocalDate)) {
+                    tasksBeforeQueryDate.add(task);
+                }
+            }
+        }
+        return tasksBeforeQueryDate;
+    }
+
     public List<Task> findTasksByKeyword(String keyword) {
         List<Task> filteredTasks = new ArrayList<>();
         for (Task task : tasks) {
@@ -99,8 +114,8 @@ public class TaskManager {
         for (Task task : tasks) {
             if (task instanceof TimeBased) {
                 TimeBased timeBasedTask = (TimeBased) task;
-                LocalDate taskLocalDateTime = timeBasedTask.getDate();
-                if (queryDate.isEqual(taskLocalDateTime)) {
+                LocalDate taskLocalDate = timeBasedTask.getDate();
+                if (queryDate.isEqual(taskLocalDate)) {
                     tasksForQueryDate.add(task);
                 }
             }

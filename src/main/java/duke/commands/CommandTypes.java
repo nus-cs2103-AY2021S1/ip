@@ -117,13 +117,22 @@ public enum CommandTypes {
         }
     },
     COMPLETED {
-      @Override
-      public void checkInput(String input) throws DukeException {
-          String content = input.replaceFirst("^completed", "");
-          if (!content.isBlank()) {
-              throw new DukeException(Messages.INVALID_COMPLETED_COMMAND);
-          }
-      }
+        @Override
+        public void checkInput(String input) throws DukeException {
+            String content = input.replaceFirst("^completed", "");
+            if (!content.isBlank()) {
+                throw new DukeException(Messages.INVALID_COMPLETED_COMMAND);
+            }
+        }
+    },
+    OVERDUE {
+        @Override
+        public void checkInput(String input) throws DukeException {
+            String content = input.replaceFirst("^overdue", "");
+            if (!content.isBlank()) {
+                throw new DukeException(Messages.INVALID_OVERDUE_COMMAND);
+            }
+        }
     };
 
     public abstract void checkInput(String input) throws DukeException;
