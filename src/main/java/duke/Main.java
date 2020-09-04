@@ -13,6 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    // set path to "../../data/duke.txt" during jar build
     private Duke duke = new Duke("data/duke.txt");
 
     @Override

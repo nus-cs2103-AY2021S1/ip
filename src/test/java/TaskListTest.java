@@ -13,14 +13,14 @@ import duke.Todo;
 public class TaskListTest {
     @Test
     public void testEmptyTaskList() {
-        assertEquals("", new TaskList().iterateToDo());
+        assertEquals("", new TaskList().iterateAndPrintToDo());
     }
 
     @Test
     public void testFilledTaskList() {
         List<Task> list = new ArrayList<>();
         list.add(new Todo(false, 1, "Wash clothes"));
-        assertEquals("1. [T][✗] Wash clothes\n", new TaskList(list).iterateToDo());
+        assertEquals("1. [T][✗] Wash clothes\n", new TaskList(list).iterateAndPrintToDo());
     }
 
     @Test
@@ -30,6 +30,6 @@ public class TaskListTest {
         list.add(new Deadline(false, 2, "Do testing", "2020-10-10"));
         TaskList test = new TaskList(list);
         test.deleteTask(1);
-        assertEquals("1. [D][✗] Do testing (by: 10 Oct 2020)\n", test.iterateToDo());
+        assertEquals("1. [D][✗] Do testing (by: 10 Oct 2020)\n", test.iterateAndPrintToDo());
     }
 }
