@@ -26,7 +26,7 @@ public class Ui {
      * Returns the greeting message.
      * @return the greeting message.
      */
-    public String printGreeting() {
+    public String printGreetingMessage() {
         return "Hello! I'm Stuff\nWhat can I do for you?";
     }
 
@@ -36,7 +36,9 @@ public class Ui {
      * @return the string with all tasks listed.
      */
     public String printTaskList(TaskList tasks) {
-        if (tasks.size() == 0) {
+        boolean isEmptyList = tasks.size() == 0;
+
+        if (isEmptyList) {
             return "There are no tasks yet!";
         }
 
@@ -53,7 +55,9 @@ public class Ui {
      * @return a string with all the tasks found via the find command.
      */
     public String printFoundList(TaskList tasks) {
-        if (tasks.size() == 0) {
+        boolean isEmptyList = tasks.size() == 0;
+
+        if (isEmptyList) {
             return "There are no tasks found!";
         }
 
@@ -73,7 +77,10 @@ public class Ui {
      * @return the string indicating a task has been added successfully.
      */
     public String printAddSuccess(Task task, int taskNum) {
+        assert(taskNum >= 0);
+
         boolean isSingular = taskNum == 1;
+
         return String.format("Got it. I've added this task:\n%s\n"
                         + "Now you have %d %s in the list.",
                 task, taskNum, isSingular ? "task" : "tasks");
@@ -95,7 +102,10 @@ public class Ui {
      * @return a string indicating a task has been removed successfully.
      */
     public String printRemoveSuccess(Task removed, int taskNum) {
+        assert(taskNum >= 0);
+
         boolean isSingular = taskNum == 1;
+
         return String.format("Noted. I've removed this task:\n%s\n"
                         + "Now you have %d %s in the list.",
                 removed, taskNum, isSingular ? "task" : "tasks");
@@ -105,7 +115,7 @@ public class Ui {
      * Returns a string with a generic error message.
      * @return a string with a generic error message.
      */
-    public String printError() {
+    public String printErrorMessage() {
         return "Seems like something went wrong!";
     }
 }

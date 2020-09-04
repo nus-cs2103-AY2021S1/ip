@@ -53,6 +53,18 @@ public class FindCommandTest {
         }
 
         @Test
+        @DisplayName("should return a string with list of tasks found "
+                + "with multiple search terms")
+        public void execute_multipleSearchTerms_stringOfTasks() {
+            TaskList foundList = new TaskList();
+            foundList.add(TASK_ONE);
+            assertEquals(UI.printFoundList(foundList),
+                    new FindCommand("ta 1").execute(UI, tasks));
+            assertEquals(UI.printFoundList(foundList),
+                    new FindCommand("1 ta").execute(UI, tasks));
+        }
+
+        @Test
         @DisplayName("should return a no tasks found string if no tasks are found")
         public void execute_noTasksSearchTerm_noTasksFound() {
             TaskList foundList = new TaskList();

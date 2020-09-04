@@ -1,6 +1,8 @@
 package main.gui;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -28,7 +30,7 @@ import main.ui.Ui;
  * Stuff application.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.2
+ * @version v0.3
  * @since v0.2
  */
 public class Stuff extends Application {
@@ -102,7 +104,7 @@ public class Stuff extends Application {
         stuffImageView.setClip(new Circle(50, 50, 50));
 
         DialogBox stuffGreeting = DialogBox
-                .getStuffDialog(new Label(ui.printGreeting()), stuffImageView);
+                .getStuffDialog(new Label(ui.printGreetingMessage()), stuffImageView);
 
         stuffGreeting.setSpacing(10);
 
@@ -116,7 +118,7 @@ public class Stuff extends Application {
             stuffImageView.setClip(new Circle(50, 50, 50));
 
             DialogBox stuffDialog = DialogBox
-                    .getStuffDialog(new Label(ui.printError()), stuffImageView);
+                    .getStuffDialog(new Label(ui.printErrorMessage()), stuffImageView);
 
             stuffDialog.setSpacing(10);
 
@@ -132,20 +134,23 @@ public class Stuff extends Application {
     }
 
     private void handleUserInput() {
-        String input = userInput.getText();
+        String input = userInput.getText().trim();
         String output;
-        boolean hasCommand = true;
+        boolean isEmptyInput = input.equals("");
+        boolean hasCommandAfter = true;
 
-        if (input.equals("")) {
+        if (isEmptyInput) {
             return;
         }
 
         Insets padding = new Insets(10, 0, 10, 0);
 
         ImageView userImageView = new ImageView(userImage);
+        ImageView stuffLoadingImageView = new ImageView(stuffImage);
         ImageView stuffImageView = new ImageView(stuffImage);
 
         userImageView.setClip(new Circle(50, 50, 50));
+        stuffLoadingImageView.setClip(new Circle(50, 50, 50));
         stuffImageView.setClip(new Circle(50, 50, 50));
 
         String[] splitInput = input.trim().split(" ", 2);
@@ -153,35 +158,48 @@ public class Stuff extends Application {
         try {
             Command command = Parser.parse(splitInput);
             output = command.execute(ui, tasks);
-            hasCommand = command.hasCommandAfter();
+            hasCommandAfter = command.hasCommandAfter();
         } catch (StuffException e) {
             output = e.getMessage();
         }
 
         Label userText = new Label(input);
+        Label loadingText = new Label("...");
         Label stuffText = new Label(output);
 
         DialogBox userDialog = DialogBox.getUserDialog(userText, userImageView);
+        DialogBox stuffLoadingDialog = DialogBox.getStuffDialog(
+                loadingText, stuffLoadingImageView);
         DialogBox stuffDialog = DialogBox.getStuffDialog(stuffText, stuffImageView);
 
         userDialog.setPadding(padding);
+        stuffLoadingDialog.setPadding(padding);
         stuffDialog.setPadding(padding);
 
         userDialog.setSpacing(10);
+        stuffLoadingDialog.setSpacing(10);
         stuffDialog.setSpacing(10);
 
-        dialogContainer.getChildren().addAll(userDialog, stuffDialog);
+        dialogContainer.getChildren().addAll(userDialog, stuffLoadingDialog);
         userInput.clear();
 
-        if (!hasCommand) {
+        CompletableFuture.delayedExecutor(750, TimeUnit.MILLISECONDS)
+                .execute(() -> Platform.runLater(() -> {
+                    int size = dialogContainer.getChildren().size();
+                    dialogContainer.getChildren().set(size - 1, stuffDialog);
+                }));
+
+        if (!hasCommandAfter) {
             try {
                 Storage.write(tasks);
             } catch (IOException e) {
                 DialogBox stuffError = DialogBox
-                        .getStuffDialog(new Label(ui.printError()), stuffImageView);
+                        .getStuffDialog(new Label(ui.printErrorMessage()), stuffImageView);
                 dialogContainer.getChildren().addAll(stuffError);
             }
-            Platform.exit();
+
+            CompletableFuture.delayedExecutor(2, TimeUnit.SECONDS)
+                    .execute(Platform::exit);
         }
     }
 }
