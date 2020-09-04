@@ -50,10 +50,10 @@ public class Printer {
   /**
    * Prints the undefinedExceptionMessage message.
    */
-  protected void undefinedExceptionMessage() {
-    System.out
-        .println(LINE + "\n" + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-("
-            + "\n" + LINE);
+  protected String undefinedExceptionMessage() {
+    String output = LINE + "\n" + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-("
+        + "\n" + LINE;
+    return output;
   }
 
   /**
@@ -61,20 +61,20 @@ public class Printer {
    *
    * @param s the type of event
    */
-  protected void noDescriptionMessage(String s) {
-    System.out
-        .println(LINE + "\n" + "     ☹ OOPS!!! The description of a " + s + " cannot be empty."
-            + "\n" + LINE);
+  protected String noDescriptionMessage(String s) {
+    String output = (LINE + "\n" + "     ☹ OOPS!!! The description of a " + s + " cannot be empty."
+        + "\n" + LINE);
+    return output;
   }
 
   /**
    * Prints the undefinedExceptionMessage message.
    */
-  protected void dateTimeParseExceptionMessage() {
-    System.out
-        .println(LINE + "\n"
-            + "     ☹ OOPS!!! I'm sorry, but that date is invalid. Try using a new date in the format YYYY-MM-DD :-("
-            + "\n" + LINE);
+  protected String dateTimeParseExceptionMessage() {
+    String output = (LINE + "\n"
+        + "     ☹ OOPS!!! I'm sorry, but that date is invalid. Try using a new date in the format YYYY-MM-DD :-("
+        + "\n" + LINE);
+    return output;
   }
 
   /**

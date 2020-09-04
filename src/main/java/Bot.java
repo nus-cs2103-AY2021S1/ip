@@ -83,14 +83,14 @@ public class Bot {
         default:
           throw new UndefinedException();
         }
-      } catch(DateTimeParseException e) {
-        printer.dateTimeParseExceptionMessage();
+      } catch(DateTimeParseException e) { // wrong dates
+        return printer.dateTimeParseExceptionMessage();
       } catch (NoDescriptionException e) { //incomplete messages
-        printer.noDescriptionMessage(e.s);
+        return printer.noDescriptionMessage(e.s);
       } catch (UndefinedException e) { //unknown commands
-        printer.undefinedExceptionMessage();
+        return printer.undefinedExceptionMessage();
       }
 
-  return "";}
+  }
 
 }
