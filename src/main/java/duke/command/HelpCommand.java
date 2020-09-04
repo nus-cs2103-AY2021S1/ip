@@ -6,23 +6,23 @@ import duke.exception.DukeIndexException;
 import duke.exception.DukeListException;
 
 /**
- * ByeCommand for when the Bye command is prompted by User
+ * HelpCommand for when user requires help.
  *
  * @author Kor Ming Soon
  */
-public class ByeCommand extends Command {
+public class HelpCommand extends Command {
 
     /**
-     * Execution command for Bye.
+     * Execute command for Help.
      *
      * @param taskList list of tasks to be referenced from.
      * @param ui UserInterface for the command to prompt.
-     * @return exit message for when the users stops interacting with the bot.
+     * @return the help message to guide users.
      * @throws DukeListException
      * @throws DukeIndexException
      */
     @Override
     public String execute(TaskList taskList, UserInterface ui) throws DukeListException, DukeIndexException {
-        return ui.exitMessage();
+        return ui.sendWelcomeMessage();
     }
 }

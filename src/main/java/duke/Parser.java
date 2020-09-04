@@ -3,11 +3,7 @@ package duke;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
-import duke.command.ByeCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeIndexException;
 import duke.exception.DukeListException;
@@ -55,6 +51,8 @@ public class Parser {
             } else if (command.equals("done")) {
                 int index = Integer.parseInt(parseMessage.split(" ")[1]) - 1;
                 response = new DoneCommand(index).execute(taskList, ui);
+            } else if (command.equals("help")) {
+                response = new HelpCommand().execute(taskList, ui);
             } else if (command.equals("delete")) {
                 int index = Integer.parseInt(parseMessage.split(" ")[1]) - 1;
                 response = new DeleteCommand(index).execute(taskList, ui);
