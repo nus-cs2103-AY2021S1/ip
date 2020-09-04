@@ -16,7 +16,7 @@ public class Storage {
 
     /** Creates a new Storage with the given filePath.
      *
-     * @param filePath a relative URL giving the base location of the file to write to
+     * @param filePath a relative URL giving the base location of the file to write to.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
