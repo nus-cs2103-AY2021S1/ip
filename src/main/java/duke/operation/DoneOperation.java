@@ -39,13 +39,12 @@ public class DoneOperation extends Operation {
      */
     @Override
     public Result execute() {
-        String message;
         if (!this.taskList.isValidIndex(index)) {
-            message = "The index you have passed in cannot be found in the list of tasks.";
+            String message = "The index you have passed in cannot be found in the list of tasks.";
             return new Result(false, message, this.isExit());
         }
         Task completed = this.taskList.completeTask(this.index);
-        message = "You have completed this task:\n" + completed;
+        String message = "You have completed this task:\n" + completed;
         return new Result(true, message, this.isExit());
     }
 }

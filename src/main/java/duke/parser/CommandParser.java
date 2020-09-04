@@ -38,7 +38,6 @@ public class CommandParser {
             throw new DukeParseException("Ensure a number is passed after a done command.");
         }
         int index = Integer.parseInt(commands[1]);
-
         return new DoneOperation(list, index);
     }
 
@@ -56,10 +55,12 @@ public class CommandParser {
             throw new DukeParseException(
                     "Ensure there is a description and a datetime for a deadline command.");
         }
+
         int splitIndex = Utils.getIndexOf(commands, Deadline.DEADLINE_BREAK);
         if (splitIndex == Utils.INDEX_NOT_FOUND) {
             throw new DukeParseException("Ensure an indication of '/by' after a deadline command.");
         }
+
         String description = Utils.concatenate(commands, 1, splitIndex);
         String datetime = Utils.concatenate(commands, splitIndex + 1, commands.length);
         LocalDateTime parsedDateTime = Datetime.parseDateTimeString(datetime, Deadline.DATE_FORMAT_INPUT);
@@ -70,10 +71,12 @@ public class CommandParser {
         if (CommandType.EVENT.isValidLength(commands.length)) {
             throw new DukeParseException("Ensure there is a description and a time for an event command.");
         }
+
         int splitIndex = Utils.getIndexOf(commands, Event.EVENT_BREAK);
         if (splitIndex == Utils.INDEX_NOT_FOUND) {
             throw new DukeParseException("Ensure an indication of '/at' after an event command.");
         }
+
         String description = Utils.concatenate(commands, 1, splitIndex);
         String time = Utils.concatenate(commands, splitIndex + 1, commands.length);
         LocalDateTime parsedTime = Datetime.parseTimeString(time, Event.TIME_FORMAT_INPUT);
@@ -88,7 +91,6 @@ public class CommandParser {
             throw new DukeParseException("Ensure a number is passed after a delete command.");
         }
         int index = Integer.parseInt(commands[1]);
-
         return new DeleteOperation(list, index);
     }
 
