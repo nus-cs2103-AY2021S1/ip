@@ -16,7 +16,7 @@ public class Parser {
         return str.split("\\s+");
     }
 
-    public  static Deadline parseDeadline(String deadlineInputString) {
+    public  static Task parseDeadline(String deadlineInputString) {
         String[] arr = splitString(deadlineInputString);
         String description="";
         String deadline="";
@@ -36,7 +36,7 @@ public class Parser {
         return new Deadline (description.substring(0,description.length()-1),false,deadline.substring(0,deadline.length()-1));
     }
 
-    public static Event parseEvent (String eventInputString) {
+    public static Task parseEvent (String eventInputString) {
         String[] arr = splitString(eventInputString);
         String description="";
         String duration="";

@@ -7,7 +7,7 @@ import java.util.List;
  */
 
 public class TaskList {
-    private List<Task> taskList;
+    public List<Task> taskList;
 
     /**
      * Constructor to initialize the tasks 

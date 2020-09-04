@@ -1,14 +1,15 @@
 package duke;
+
+        
 import java.io.IOException;
 
 
 public class Duke {
     private TaskList taskList;
-    private UI userInterface;
+    private UI userInterface = new UI();
     
     public Duke() {
         try {
-            this.userInterface = new UI();
             this.taskList = new TaskList(Storage.loadFile());
         } catch (IOException e) {
             System.out.println("An error has occurred: " + e);

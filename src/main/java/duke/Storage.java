@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.IOException;
 
 /**
  * Store and Retrieve tasks from the task list
@@ -31,24 +32,23 @@ public class Storage {
     /**
      * Loads tasks from Database to be stored in the taskList
      * @return list of Tasks
-     * @throws IOException
      */
-    public static List<Task> loadFile() throws IOException {
+    public static List<Task> loadFile() throws IOException{
         List<Task> tasks = new ArrayList<>();
-        File f = new File(writePath);
-        try {
-            Scanner s = new Scanner(f);
-            while (s.hasNext()) {
-                String taskString = s.nextLine();
-                tasks.add(generateTask(taskString));
+            File f = new File(writePath);
+            try {
+                Scanner s = new Scanner(f);
+                while (s.hasNext()) {
+                    String taskString = s.nextLine();
+                    tasks.add(generateTask(taskString));
+                }
+                return tasks;
+            } catch (FileNotFoundException e) {
+                System.out.println("Initializing storage");
+                File f2 = new File(folderPath);
+                f2.mkdir();
+                return tasks;
             }
-            return tasks;
-        } catch (FileNotFoundException e) {
-            System.out.println("Initializing storage");
-            File f2 = new  File(folderPath);
-            f2.mkdir();
-            return tasks;
-        }
     }
 
     /**
