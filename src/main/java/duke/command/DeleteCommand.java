@@ -24,8 +24,10 @@ public class DeleteCommand implements Command {
      */
     public String execute(String command, Storage storage, Ui ui, TaskList taskList) throws DukeException {
         try {
+            int totalTaskBefore = taskList.total();
             int ind = Integer.parseInt(command.substring(6).trim()) - 1;
             Task t = taskList.deleteTask(ind);
+            assert taskList.total() == totalTaskBefore - 1 : "Failed to delete task!";
             storage.save(taskList);
             return " *WOOF* I have removed:\n   " + t + "\n" + ui.displayTotal(taskList.total());
         } catch (IndexOutOfBoundsException e) {

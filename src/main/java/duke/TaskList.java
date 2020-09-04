@@ -71,7 +71,9 @@ public class TaskList {
      * @throws IndexOutOfBoundsException if invalid index is given
      */
     public String markDone(int index) throws IndexOutOfBoundsException {
-        return listOfTask.get(index).markAsDone();
+        String s = listOfTask.get(index).markAsDone();
+        assert listOfTask.get(index).getStatusIcon().equals("\u2713") : "Failed to mark done!";
+        return s;
     }
 
     /**
