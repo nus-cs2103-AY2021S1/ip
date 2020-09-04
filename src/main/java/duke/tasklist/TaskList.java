@@ -55,9 +55,10 @@ public class TaskList {
         if (index < 0 | index >= tasks.size()) {
             throw new DukeTaskNonExistException("error");
         }
-        Task book = this.tasks.get(index);
-        book.complete();
-        return book;
+        Task task = this.tasks.get(index);
+        task.complete();
+        assert task.isComplete() : "Task has failed to complete";
+        return task;
     }
 
 
@@ -108,9 +109,9 @@ public class TaskList {
         Iterator<Task> iter = tasks.iterator();
         ArrayList<Task> temp = new ArrayList<>();
         while (iter.hasNext()) {
-            Task book = iter.next();
-            if (book.getName().contains(response)) {
-                temp.add(book);
+            Task task = iter.next();
+            if (task.getName().contains(response)) {
+                temp.add(task);
             }
         }
         iter = temp.iterator();
