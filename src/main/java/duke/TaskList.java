@@ -254,6 +254,13 @@ public class TaskList {
 
             ArrayList<Task> deletedTasks = new ArrayList<>();
 
+            // Check if all taskNumbers within index
+            for (Integer taskNo: taskNumbers) {
+                if (taskNo < 1 || taskNo > tasks.size()) {
+                    throw new InvalidIndexException(tasks.size());
+                }
+            }
+
             for (Integer taskNo: taskNumbers) {
                 deletedTasks.add(tasks.get(taskNo - 1));
                 tasks.set(taskNo - 1, null);
