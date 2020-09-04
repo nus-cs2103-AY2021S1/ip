@@ -4,4 +4,6 @@ D , 1 , dinner , 2012-01-02
 T , 1 , book taxi , 
 T , 1 , hi , 
 E , 0 , bye , 2020-03-31
-T , 1 , test , 
+T , 1 , erhfh , 
+T , 0 , huhuhu , 
+D , 0 , jump off building , 2020-09-05

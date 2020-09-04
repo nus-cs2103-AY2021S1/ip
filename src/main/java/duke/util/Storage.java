@@ -94,6 +94,7 @@ public class Storage {
      * @param task the task object that is being checked.
      */
     public void checkIfDone(String s, Task task) {
+        assert s.equals("1") || s.equals("0");
         if (s.equals("1")) {
             task.markAsDone();
         }
@@ -106,6 +107,7 @@ public class Storage {
      * @throws DukeException DukeException.
      */
     private Task processTaskToLoad(String line) throws DukeException {
+        assert line.length() > 0;
         String[] data = line.split(" , ");
         Task t = new Task("null");
 
