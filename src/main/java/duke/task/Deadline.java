@@ -8,11 +8,11 @@ import java.time.format.FormatStyle;
 
 import duke.DukeException;
 
+/**
+ * Encapsulates data and methods specific to Deadline tasks.
+ */
 public class Deadline extends Task {
 
-    /**
-     * Encapsulates data and methods specific to Deadline tasks.
-     */
     private final LocalDate deadlineDate;
     private final LocalTime deadlineTime;
     private final String originalArguments;
@@ -39,6 +39,9 @@ public class Deadline extends Task {
      * @throws DukeException If any part of the input argument is invalid.
      */
     public static Deadline createNewDeadline(String argument) throws DukeException {
+
+        assert argument != null : "Task argument cannot be null";
+        
         String[] deadlineArguments = argument.split(" /by ");
 
         if (deadlineArguments.length != 2) {
@@ -89,6 +92,7 @@ public class Deadline extends Task {
 
     @Override
     public boolean isOnSameDay(LocalDate localDate) {
+        assert localDate != null : "Local date argument cannot be null";
         return localDate.isEqual(this.deadlineDate);
     }
 

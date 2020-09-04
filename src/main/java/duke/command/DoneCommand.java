@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.io.IOException;
-
 import duke.DukeException;
 import duke.Storage;
 import duke.UI;
@@ -29,10 +27,14 @@ public class DoneCommand extends Command {
      * @param taskList Task list with the task that needs to be marked as done.
      * @param ui UI object for the instance of Duke.
      * @throws DukeException If the argument for marking a task as done is invalid.
-     * @throws IOException If there are issues with writing to storage.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, UI ui) throws DukeException, IOException {
+    public void execute(Storage storage, TaskList taskList, UI ui) throws DukeException {
+
+        assert ui != null : "UI cannot be null";
+        assert storage != null : "Storage cannot be null";
+        assert taskList != null : "Task list cannot be null";
+
         ui.printToConsole(taskList.markTaskAsDone(argument, storage));
     }
 }

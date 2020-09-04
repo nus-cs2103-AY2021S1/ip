@@ -26,6 +26,7 @@ public class UI {
      * @param message Message to be printed.
      */
     public void printToConsole(String message) {
+        assert message != null : "Message to be printed cannot be null";
         this.nextResponse = message;
     }
 

@@ -32,6 +32,9 @@ public class Event extends Task {
      * @throws DukeException If any part of the input argument is invalid.
      */
     public static Event createNewEvent(String argument) throws DukeException {
+
+        assert argument != null : "Task argument cannot be null";
+        
         String[] eventArguments = argument.split(" /at ");
 
         if (eventArguments.length != 2) {
@@ -91,6 +94,7 @@ public class Event extends Task {
 
     @Override
     public boolean isOnSameDay(LocalDate localDate) {
+        assert localDate != null : "Local date argument cannot be null";
         return localDate.isEqual(this.startDate);
     }
 

@@ -26,6 +26,8 @@ public class Parser {
      * @return Command object of the required type.
      */
     public static Command parse(String fullCommand) {
+        assert fullCommand != null : "Command entered cannot be null";
+        
         String[] inputList = fullCommand.split(" ", 2);
         String argument = inputList.length > 1 ? inputList[1] : "";
         CommandType commandType;

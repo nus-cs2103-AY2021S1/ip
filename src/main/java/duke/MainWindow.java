@@ -43,7 +43,7 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         
-        if (!duke.loadFromStorage()) {
+        if (!duke.loadedFromStorage()) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog("Unfortunately, I was unable to load from storage", dukeImage)
             );

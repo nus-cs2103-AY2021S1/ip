@@ -35,6 +35,8 @@ public class TaskList {
      * @return Numbered string representation of task list.
      */
     private String convertTaskListToString(List<Task> tasks) {
+        
+        assert tasks != null;
 
         if (tasks.isEmpty()) {
             return "You have no tasks!";
@@ -72,6 +74,9 @@ public class TaskList {
         String oldTaskString = task.generateStorageString();
         task.competeTask();
         String newTaskString = task.generateStorageString();
+        
+        assert storage != null : "Storage object cannot be null";
+        
         storage.editLineInStorage(oldTaskString, newTaskString);
 
         return String.format("Nice! I've marked this task as done.\n%s", task.toString());
@@ -90,6 +95,7 @@ public class TaskList {
             throw new DukeException("Task ID is invalid!");
         }
 
+        assert storage != null : "Storage object cannot be null";
         Task task = tasks.get(taskID - 1);
         storage.deleteLineFromStorage(task.generateStorageString());
         tasks.remove(taskID - 1);
@@ -105,6 +111,7 @@ public class TaskList {
      * @return String to be displayed in the user interface that confirms the action.
      */
     public String addTaskToList(Task task) {
+        assert task != null : "Task cannot be null";
         tasks.add(task);
         return String.format("Got it. I've added this task: \n%s\nNow you have %d tasks in the list",
                 task.toString(), tasks.size());
@@ -119,7 +126,7 @@ public class TaskList {
      */
     public String taskListToDateFilteredString(String dateString) throws DukeException {
         LocalDate date;
-
+        assert dateString != null : "Date string cannot be null";
         try {
             date = LocalDate.parse(dateString);
         } catch (DateTimeParseException e) {
@@ -140,7 +147,7 @@ public class TaskList {
      * @return String with numbered list representation of the filtered task list.
      */
     public String taskListToKeywordFilteredString(String keyword) {
-        System.out.println(keyword);
+        assert keyword != null : "Keyword cannot be null";
         List<Task> temp = tasks.stream()
                 .filter(task -> task.toString().contains(keyword))
                 .collect(Collectors.toList());
@@ -156,6 +163,7 @@ public class TaskList {
      * if there are errors reading from the file.
      */
     public void loadDataFromStorage(Path filePath) throws DukeException {
+        assert filePath != null : "Filepath object cannot be null";
         try {
             FileReader reader = new FileReader(filePath.toString());
             BufferedReader bufferedReader = new BufferedReader(reader);
@@ -168,7 +176,8 @@ public class TaskList {
 
                 if (entry.length == 3) {
                     String taskType = entry[0];
-                    if (!entry[1].toUpperCase().equals("TRUE") && !entry[1].toUpperCase().equals("FALSE")) {
+                    if (!entry[1].toUpperCase().equals("TRUE")
+                            && !entry[1].toUpperCase().equals("FALSE")) {
                         throw new DukeException("One or more task statuses are not stored correctly");
                     }
                     boolean taskIsDone = Boolean.parseBoolean(entry[1]);

@@ -26,6 +26,7 @@ public class Duke {
 
     /**
      * Creates a new instance of the Duke chat bot with a custom filepath.
+     *
      * @param filePath File path where Duke should read from and save to.
      */
     public Duke(Path filePath) {
@@ -41,7 +42,7 @@ public class Duke {
      *
      * @return True if data successfully populated. False otherwise.
      */
-    public boolean loadFromStorage() {
+    public boolean loadedFromStorage() {
         try {
             storage.loadFromStorage();
             taskList.loadDataFromStorage(filePath);
@@ -58,6 +59,7 @@ public class Duke {
      * @return Response by Duke to command.
      */
     public String getResponse(String input) {
+        assert input != null : "Input cannot be null";
         Command command = Parser.parse(input);
         try {
             command.execute(storage, taskList, ui);

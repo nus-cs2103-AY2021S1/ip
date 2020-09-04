@@ -20,6 +20,7 @@ public class Storage {
      * @param filePath File path that storage actions should be performed on.
      */
     public Storage(Path filePath) {
+        assert filePath != null : "Storage filepath cannot be null";
         this.filePath = filePath;
     }
 
@@ -53,6 +54,7 @@ public class Storage {
      * @throws DukeException If there are issues with writing to storage.
      */
     public void writeLineToStorage(String line) throws DukeException {
+        assert line != null : "Line to add to storage cannot be null";
         try {
             FileWriter fileWriter = new FileWriter(filePath.toString(), true);
             fileWriter.write(line + System.lineSeparator());
@@ -70,6 +72,7 @@ public class Storage {
      * @throws DukeException If there are issues with deleting the line from storage.
      */
     public void deleteLineFromStorage(String lineToDelete) throws DukeException {
+        assert lineToDelete != null : "Line to delete from storage cannot be null";
         try {
             FileReader reader = new FileReader(filePath.toString());
             BufferedReader bufferedReader = new BufferedReader(reader);
@@ -101,6 +104,10 @@ public class Storage {
      * @throws DukeException If there are issues with writing to storage.
      */
     public void editLineInStorage(String oldLine, String newLine) throws DukeException {
+
+        assert oldLine != null : "Line to be replaced cannot be null";
+        assert newLine != null : "Line that will be used to replace cannot be null";
+        
         try {
             FileReader reader = new FileReader(filePath.toString());
             BufferedReader bufferedReader = new BufferedReader(reader);

@@ -26,6 +26,11 @@ public class InvalidCommand extends Command {
      */
     @Override
     public void execute(Storage storage, TaskList taskList, UI ui) throws DukeException {
+
+        assert ui != null : "UI cannot be null";
+        assert storage != null : "Storage cannot be null";
+        assert taskList != null : "Task list cannot be null";
+
         throw new DukeException("Invalid Command.");
     }
 }
