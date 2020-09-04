@@ -3,7 +3,5 @@ E , 0 , eat book , 2015-04-12
 D , 1 , dinner , 2012-01-02
 T , 1 , book taxi , 
 T , 1 , hi , 
-E , 0 , bye , 2020-03-31
-T , 1 , erhfh , 
-T , 0 , huhuhu , 
+E , 1 , bye , 2020-03-31
 D , 0 , jump off building , 2020-09-05
