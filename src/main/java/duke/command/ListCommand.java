@@ -25,6 +25,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) {
+        assert input.equals("list") : "List command is not 'list'";
         return ui.printList(list, t -> true, "");
     }
 

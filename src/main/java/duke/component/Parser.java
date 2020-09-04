@@ -91,6 +91,7 @@ public class Parser {
      * numbers
      */
     public static int getDoneTaskIndex(String cmd, int count) throws InvalidCommandException {
+        assert cmd.startsWith("done ") : "Calling isValidDone not using a done command";
         if (hasEmptyContent(cmd, DONE_COMMAND_PREFIX)) {
             throw new InvalidCommandException(EMPTY_DONE_COMMAND_EXCEPTION);
         }
@@ -106,6 +107,7 @@ public class Parser {
      * numbers
      */
     public static int getDeleteTaskIndex(String cmd, int count) throws InvalidCommandException {
+        assert cmd.startsWith("delete ") : "Calling isValidDelete not using a delete command";
         if (hasEmptyContent(cmd, DELETE_COMMAND_PREFIX)) {
             throw new InvalidCommandException(EMPTY_DELETE_COMMAND_EXCEPTION);
         }

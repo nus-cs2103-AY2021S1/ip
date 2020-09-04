@@ -27,6 +27,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
+        assert input.startsWith("done ") : "Done command does not start with 'done '";
         int n = Parser.getDoneTaskIndex(input, list.size()) - 1;
         list.get(n).markAsDone();
         storage.reWrite(list);

@@ -38,6 +38,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) {
+        assert input.equals("bye") : "Exit command is not 'bye'";
         return printEntireList(ui, list);
     }
 

@@ -64,12 +64,10 @@ public class CliUi implements Ui {
 
     /**
      * Greets the user when the app is opened.
-     * @return the greeting message
      */
     @Override
-    public String greeting() {
+    public void greeting() {
         output("Hello! I'm Duke\n\t  What can I do for you?");
-        return "\tHello! I'm Duke\n\t  What can I do for you?";
     }
 
     /**
