@@ -62,7 +62,8 @@ public class HappenCommand extends Command {
         }
     }
 
-    private String getHappenBetweenList(Ui ui, TaskList list, String[] detail, DateTimeFormatter inputFormat, DateTimeFormatter outputFormat) throws InvalidCommandException {
+    private String getHappenBetweenList(Ui ui, TaskList list, String[] detail, DateTimeFormatter inputFormat,
+                                        DateTimeFormatter outputFormat) throws InvalidCommandException {
         LocalDate date1 = LocalDate.parse(detail[1], inputFormat);
         LocalDate date2 = LocalDate.parse(detail[2], inputFormat);
         if (!date1.isBefore(date2)) {

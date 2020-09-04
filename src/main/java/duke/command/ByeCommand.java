@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
