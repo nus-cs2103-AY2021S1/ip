@@ -72,7 +72,8 @@ public class AddCommand extends Command {
             if (str.strip().equals("todo")) {
                 throw new InvalidTaskException("Your task cannot be empty!");
             } else if (!str.startsWith("todo ")) {
-                throw new UnknownCmdException("Unknown command entered!");
+                throw new UnknownCmdException("Unknown command entered! Type \"help\" to view a list of all "
+                        + "available commands!");
             } else {
                 store[0] = "todo";
             }
@@ -80,7 +81,8 @@ public class AddCommand extends Command {
             if (str.strip().equals("deadline")) {
                 throw new InvalidTaskException("Your task cannot be empty!");
             } else if (!str.startsWith("deadline ")) {
-                throw new UnknownCmdException("Unknown command entered!");
+                throw new UnknownCmdException("Unknown command entered! Type \"help\" to view a list of all "
+                        + "available commands!");
             } else {
                 store[0] = "deadline";
             }
@@ -88,12 +90,14 @@ public class AddCommand extends Command {
             if (str.strip().equals("event")) {
                 throw new InvalidTaskException("Your task cannot be empty!");
             } else if (!str.startsWith("event ")) {
-                throw new UnknownCmdException("Unknown command entered!");
+                throw new UnknownCmdException("Unknown command entered! Type \"help\" to view a list of all "
+                        + "available commands!");
             } else {
                 store[0] = "event";
             }
         } else {
-            throw new UnknownCmdException("Unknown command entered!");
+            throw new UnknownCmdException("Unknown command entered! Type \"help\" to view a list of all "
+                    + "available commands!");
         }
         // Handling the content of the event
         int splitPrefix = str.indexOf(" ");

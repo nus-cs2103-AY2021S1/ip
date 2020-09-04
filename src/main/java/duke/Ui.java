@@ -32,18 +32,21 @@ public class Ui {
         return INTRO;
     }
     public void setMessageException(DukeException e) {
-        this.message = e.getMessage();
+        message = e.getMessage();
     }
     public void setMessagePrintHelp() {
-        this.message = "Welcome to Duke! Here is a list of commands you can use: \n"
-                + "exit - shuts down the bot\n"
+        message = "Welcome to Duke! Here is a list of commands you can use: \n"
                 + "todo <name> - adds a Todo task to your list\n"
                 + "deadline <name> /by <time> - adds a Deadline task to your list\n"
                 + "event <name> /at <time> - adds an Event task to your list\n"
-                + "done <number> - marks a task as done\n"
-                + "delete <number> - deletes a task from your list\n"
                 + "list - displays the current list of your tasks\n"
-                + "help - displays this helpful message\n";
+                + "done <number> - marks a task as done\n"
+                + "undone <number> - marks a task as not done \n"
+                + "delete <number> - deletes a task from your list\n"
+                + "find <keyword> - displays all tasks containing the exact keyword\n"
+                + "upcoming <number> - displays all tasks occurring within the given number of days\n"
+                + "help - displays this helpful message\n"
+                + "exit - shuts down the bot\n";
     }
     public void setMessagePrintList(TaskList tasks) {
         message = "Here are your tasks:\n"
@@ -75,6 +78,14 @@ public class Ui {
     }
     public void setMessageUndoneTask() {
         message = "I've marked that task as unfinished.";
+    }
+    public void setMessageUpcoming(String tasks, int numTasks, int numDays) {
+        if (numTasks == 0) {
+            message = "I couldn't find any tasks occurring within " + numDays + " days.";
+        } else {
+            message = "I found " + numTasks + (numTasks > 1 ? " tasks " : " task ") + "occurring within " + numDays
+                    + " days.\n" + tasks;
+        }
     }
     public void printException(DukeException e) {
         System.out.println(e.getMessage());
