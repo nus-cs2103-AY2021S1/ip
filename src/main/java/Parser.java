@@ -1,3 +1,5 @@
+import java.util.stream.Stream;
+
 /**
  * The Parser class handles all the parsing needed.
  *
@@ -14,12 +16,8 @@ public class Parser {
      * @return True if the given string belongs to the set of reserved keywords, false otherwise.
      */
     public boolean isValidKeyWord(String word) {
-        for (Keyword kw : Keyword.values()) {
-            if (word.toUpperCase().equals(kw.toString())) {
-                return true;
-            }
-        }
-        return false;
+        return Stream.of(Keyword.values()).map(kw -> kw.toString())
+                .anyMatch(kw -> kw.equals(word.toUpperCase()));
     }
 
     /**
