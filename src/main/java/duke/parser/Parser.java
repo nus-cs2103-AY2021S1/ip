@@ -10,7 +10,7 @@ import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
-import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.commands.UnknownCommand;
 import duke.exception.EmptyTextException;
@@ -19,6 +19,7 @@ import duke.exception.InvalidFormatDateException;
 import duke.exception.InvalidFormatDeleteException;
 import duke.exception.InvalidFormatDoneException;
 import duke.exception.InvalidFormatFindException;
+import duke.exception.InvalidFormatHelpException;
 import duke.exception.InvalidFormatListException;
 
 /**
@@ -34,6 +35,7 @@ public class Parser {
     private static final String KEYWORD_DONE = "done";
     private static final String KEYWORD_DELETE = "delete";
     private static final String KEYWORD_FIND = "find";
+    private static final String KEYWORD_HELP = "help";
     /**
      * Checking if the user's string input is a number.
      *
@@ -103,7 +105,8 @@ public class Parser {
      *incorrect.
      */
     public static Command parse(String message) throws InvalidFormatByeException, InvalidFormatListException,
-            InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException, InvalidFormatFindException {
+            InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException, InvalidFormatFindException, 
+            InvalidFormatHelpException {
         assert message != null;
         String[] inputArr = message.trim().replaceAll("  +", " ").split(" ", 2);
         inputArr[0] = inputArr[0].toLowerCase();
@@ -148,7 +151,12 @@ public class Parser {
             if (inputArr2.length > 1) {
                 throw new InvalidFormatFindException();
             }
-            return new FindCommand(inputArr);
+            
+        case KEYWORD_HELP:
+            if (inputArr.length != 1) {
+                throw new InvalidFormatHelpException();
+            }
+            return new HelpCommand(inputArr);
         default:
             return new UnknownCommand(inputArr);
         }

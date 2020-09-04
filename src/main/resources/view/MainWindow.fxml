@@ -73,6 +73,7 @@
                     <content>
                         <VBox styleClass="mainBodyStyling"
                               fx:id="dialogContainer"
+                              minHeight="559"
                               maxHeight="Infinity"
                               minWidth="-Infinity"
                         >

@@ -40,7 +40,6 @@ public class MainWindow extends AnchorPane {
         Ui ui = new Ui();
         String greet = ui.greetings();
         dialogContainer.getChildren().addAll(OpeningBox.getOpeningMessage(greet, welcomeStitch));
-        dialogContainer.prefHeightProperty().bind(stage.heightProperty().subtract(60));
     }
 
     /**

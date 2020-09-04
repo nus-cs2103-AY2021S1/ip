@@ -30,8 +30,7 @@
                 />
             </children>
         </VBox>
-        <VBox translateY="40" 
-              maxHeight="Infinity" 
+        <VBox translateY="40"
               alignment="BOTTOM_CENTER"
         >
             <ImageView fx:id="displayPicture" 
