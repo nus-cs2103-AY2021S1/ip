@@ -9,6 +9,8 @@ import seedu.duke.command.EventCommand;
 import seedu.duke.command.FindCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.ToDoCommand;
+import seedu.duke.exception.DukeException;
+import seedu.duke.exception.InvalidCommandException;
 
 /**
  * Responsible for the parsing of the user's inputs.
@@ -19,9 +21,9 @@ public class Parser {
      *
      * @param command the input to be parsed
      * @return a <code>Command</code> that can be executed
-     * @throws DukeException if the given input is not supported by Duke
+     * @throws InvalidCommandException if the given input is not supported by Duke
      */
-    public static Command parse(String command) throws DukeException {
+    public static Command parse(String command) throws InvalidCommandException {
         String[] inputArray = command.split("\\s+");
         switch (inputArray[0]) {
         case "bye":
@@ -43,7 +45,7 @@ public class Parser {
         case "find":
             return new FindCommand(command);
         default:
-            throw new DukeException("I'm not sure what you're talking about.");
+            throw new InvalidCommandException("I'm not sure what you're talking about.");
         }
     }
 }

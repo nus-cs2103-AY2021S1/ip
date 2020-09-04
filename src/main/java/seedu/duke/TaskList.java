@@ -1,10 +1,12 @@
 package seedu.duke;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import seedu.duke.exception.InvalidTaskException;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
@@ -36,9 +38,9 @@ public class TaskList {
      * Adds a new task to this task list.
      *
      * @param task the string representation of the task in a file
-     * @throws DukeException if tasks cannot be read from the file correctly
+     * @throws IOException if tasks cannot be read from the file correctly
      */
-    public void add(String task) throws DukeException {
+    public void add(String task) throws IOException {
         // for reading from file
         String[] input = task.split("\\s\\|\\s");
         assert input.length >= 3;
@@ -59,7 +61,7 @@ public class TaskList {
             this.tasks.add(event);
             break;
         default:
-            throw new DukeException("Problem reading file.");
+            throw new IOException("Error reading tasks from file.");
         }
     }
 
@@ -68,11 +70,11 @@ public class TaskList {
      *
      * @param position the position of the task in the list (starting from 1)
      * @return the task that was marked as done
-     * @throws DukeException if there is no task at the given position
+     * @throws InvalidTaskException if there is no task at the given position
      */
-    public Task markAsDone(int position) throws DukeException {
+    public Task markAsDone(int position) throws InvalidTaskException {
         if (position <= 0 || position > this.tasks.size()) {
-            throw new DukeException("Invalid task.");
+            throw new InvalidTaskException("Invalid task number.");
         }
         return this.tasks.get(position - 1).markAsDone();
     }
@@ -82,11 +84,11 @@ public class TaskList {
      *
      * @param position the position of the task in the list (starting from 1)
      * @return the task that was deleted
-     * @throws DukeException if there is no task at the given position
+     * @throws InvalidTaskException if there is no task at the given position
      */
-    public Task delete(int position) throws DukeException {
+    public Task delete(int position) throws InvalidTaskException {
         if (position <= 0 || position > this.tasks.size()) {
-            throw new DukeException("Invalid task.");
+            throw new InvalidTaskException("Invalid task number.");
         }
         return this.tasks.remove(position - 1);
     }

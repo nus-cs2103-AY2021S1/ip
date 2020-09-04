@@ -1,7 +1,10 @@
 package seedu.duke;
 
+import java.io.IOException;
+
 import javafx.application.Platform;
 import seedu.duke.command.Command;
+import seedu.duke.exception.DukeException;
 
 /**
  * Represents a chatbot that takes in and executes commands from the user.
@@ -21,8 +24,8 @@ public class Duke {
             this.storage = new Storage(filepath);
             this.taskList = this.storage.readTasks();
             this.ui = new Ui();
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Problem reading file.");
         }
     }
 
@@ -45,7 +48,7 @@ public class Duke {
                     this.ui.showMessage(message);
                     isExit = command.isDone();
                 }
-            } catch (DukeException e) {
+            } catch (IOException | DukeException e) {
                 this.ui.showMessage(new Message(e.getMessage()));
             }
         }
@@ -61,7 +64,7 @@ public class Duke {
                 Platform.exit();
             }
             response = message.getText();
-        } catch (DukeException e) {
+        } catch (IOException | DukeException e) {
             response = e.getMessage();
         }
         return response;

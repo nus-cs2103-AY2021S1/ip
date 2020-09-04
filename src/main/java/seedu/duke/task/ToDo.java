@@ -2,7 +2,7 @@ package seedu.duke.task;
 
 import java.time.LocalDate;
 
-import seedu.duke.DukeException;
+import seedu.duke.exception.InvalidCommandFormatException;
 
 /**
  * Represents a <code>Task</code> with no additional details.
@@ -16,9 +16,9 @@ public class ToDo extends Task {
         super(title, isDone);
     }
 
-    public static ToDo of(String command) throws DukeException {
+    public static ToDo of(String command) throws InvalidCommandFormatException {
         if (command.length() <= 5) {
-            throw new DukeException("ToDo cannot be empty.");
+            throw new InvalidCommandFormatException("ToDo cannot be empty.");
         }
         String content = command.substring(5);
         return new ToDo(content);

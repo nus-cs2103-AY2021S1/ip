@@ -1,9 +1,12 @@
 package seedu.duke.command;
 
-import seedu.duke.DukeException;
+import java.io.IOException;
+
 import seedu.duke.Message;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
+import seedu.duke.exception.InvalidCommandFormatException;
+import seedu.duke.exception.InvalidTaskException;
 
 /**
  * Represents a command entered by the user for Duke to execute.
@@ -14,9 +17,12 @@ public interface Command {
      *
      * @param taskList a list of the user's tasks
      * @param storage  Deals with the saving of the user's tasks.
-     * @throws DukeException if there is a problem when managing the taskList
+     * @throws InvalidTaskException          if there is no task at the number entered
+     * @throws InvalidCommandFormatException if the command entered does not follow the required format
+     * @throws IOException                   if there is a problem writing tasks to the file
      */
-    Message execute(TaskList taskList, Storage storage) throws DukeException;
+    Message execute(TaskList taskList, Storage storage) throws InvalidTaskException, InvalidCommandFormatException,
+            IOException;
 
     /**
      * Determines if this <code>Command</code> causes Duke to stop running.

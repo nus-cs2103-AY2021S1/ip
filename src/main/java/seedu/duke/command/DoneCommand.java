@@ -1,9 +1,12 @@
 package seedu.duke.command;
 
-import seedu.duke.DukeException;
+import java.io.IOException;
+
 import seedu.duke.Message;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
+import seedu.duke.exception.InvalidCommandFormatException;
+import seedu.duke.exception.InvalidTaskException;
 import seedu.duke.task.Task;
 
 /**
@@ -16,16 +19,17 @@ public class DoneCommand implements Command {
         this.command = command;
     }
 
-    public Message execute(TaskList taskList, Storage storage) throws DukeException {
+    public Message execute(TaskList taskList, Storage storage) throws InvalidCommandFormatException,
+            InvalidTaskException, IOException {
         if (command.length != 2) {
-            throw new DukeException("Wrong format.");
+            throw new InvalidCommandFormatException("Wrong format for done command.");
         }
         try {
             Task task = taskList.markAsDone(Integer.parseInt(command[1]));
             storage.writeToFile(taskList);
             return Message.getTaskDone(task);
         } catch (NumberFormatException e) {
-            throw new DukeException("Wrong format.");
+            throw new InvalidCommandFormatException("Please enter the number of the task you wish to mark as done.");
         }
     }
 

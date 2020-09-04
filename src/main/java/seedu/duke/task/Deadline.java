@@ -1,10 +1,10 @@
 package seedu.duke.task;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-import seedu.duke.DukeException;
+import seedu.duke.exception.InvalidCommandFormatException;
 
 /**
  * Represents a <code>Task</code> that has to be done by certain date.
@@ -22,19 +22,20 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
-    public static Deadline of(String command) throws DukeException {
+    public static Deadline of(String command) throws InvalidCommandFormatException {
         if (command.length() <= 9) {
-            throw new DukeException("Deadline cannot be empty.");
+            throw new InvalidCommandFormatException("Deadline cannot be empty.");
         }
         String[] split = command.substring(9).split("\\s+/by\\s+");
         if (split.length != 2) {
-            throw new DukeException("Wrong format.");
+            throw new InvalidCommandFormatException("Wrong format for deadline command.");
         }
         try {
             return new Deadline(split[0], LocalDate.parse(split[1]));
-        } catch (DateTimeException e) {
-            throw new DukeException("Please provide date in yyyy-mm-dd format.");
+        } catch (DateTimeParseException e) {
+            throw new InvalidCommandFormatException("Please enter a valid date in the yyyy-mm-dd format.");
         }
+
     }
 
     @Override

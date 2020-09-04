@@ -1,9 +1,11 @@
 package seedu.duke.command;
 
-import seedu.duke.DukeException;
+import java.io.IOException;
+
 import seedu.duke.Message;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
+import seedu.duke.exception.InvalidCommandFormatException;
 import seedu.duke.task.ToDo;
 
 /**
@@ -16,7 +18,7 @@ public class ToDoCommand implements Command {
         this.command = command;
     }
 
-    public Message execute(TaskList taskList, Storage storage) throws DukeException {
+    public Message execute(TaskList taskList, Storage storage) throws InvalidCommandFormatException, IOException {
         ToDo toDo = ToDo.of(this.command);
         taskList.add(toDo);
         storage.appendToFile(toDo);

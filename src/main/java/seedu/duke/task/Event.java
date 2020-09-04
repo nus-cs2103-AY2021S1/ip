@@ -1,10 +1,10 @@
 package seedu.duke.task;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-import seedu.duke.DukeException;
+import seedu.duke.exception.InvalidCommandFormatException;
 
 /**
  * Represents a <code>Task</code> that takes place on a certain date.
@@ -22,18 +22,18 @@ public class Event extends Task {
         this.duration = duration;
     }
 
-    public static Event of(String command) throws DukeException {
+    public static Event of(String command) throws InvalidCommandFormatException {
         if (command.length() <= 6) {
-            throw new DukeException("Event cannot be empty.");
+            throw new InvalidCommandFormatException("Event cannot be empty.");
         }
         String[] split = command.substring(6).split("\\s+/at\\s+");
         if (split.length != 2) {
-            throw new DukeException("Wrong format.");
+            throw new InvalidCommandFormatException("Wrong format for event command.");
         }
         try {
             return new Event(split[0], LocalDate.parse(split[1]));
-        } catch (DateTimeException e) {
-            throw new DukeException("Please provide date in yyyy-mm-dd format.");
+        } catch (DateTimeParseException e) {
+            throw new InvalidCommandFormatException("Please enter a valid date in the yyyy-mm-dd format.");
         }
     }
 

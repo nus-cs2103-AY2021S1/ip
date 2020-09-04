@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.exception;
 
 /**
  * Represents an <code>Exception</code> that occurs when Duke is running.

@@ -2,8 +2,6 @@ package seedu.duke.task;
 
 import java.time.LocalDate;
 
-import seedu.duke.DukeException;
-
 /**
  * Represents a task added by the user, which may be done or not done.
  */
@@ -36,15 +34,10 @@ public abstract class Task {
      * Marks the task as completed.
      *
      * @return the task
-     * @throws DukeException if the task is already completed
      */
-    public Task markAsDone() throws DukeException {
-        if (this.isDone) {
-            throw new DukeException("Already marked as done.");
-        } else {
-            this.isDone = true;
-            return this;
-        }
+    public Task markAsDone() {
+        this.isDone = true;
+        return this;
     }
 
     public String toString() {
