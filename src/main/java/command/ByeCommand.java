@@ -2,6 +2,7 @@ package command;
 
 import duke.Storage;
 import duke.TaskList;
+import java.util.concurrent.CompletableFuture;
 import ui.Ui;
 
 /**
@@ -22,6 +23,14 @@ public class ByeCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
+        CompletableFuture.runAsync(() -> {
+            try {
+                Thread.sleep(500);
+                System.exit(0);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        });
         return new CommandResult(ui.showCloseMessage());
     }
 }

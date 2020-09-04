@@ -11,7 +11,7 @@
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
     </padding>
-    <TextFlow fx:id="dialog" styleClass="dialog"/>
+    <TextFlow fx:id="dialog" styleClass="dialog" minHeight="-Infinity"/>
     <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"
                styleClass="displayPicture"/>
 </fx:root>
