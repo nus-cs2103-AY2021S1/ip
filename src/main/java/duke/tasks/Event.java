@@ -93,6 +93,8 @@ public class Event extends Task {
                 formattedTime.append("12").append(".")
                         .append(String.format("%02d", min)).append("am");
             } else {
+                assert (hour > 24 || hour < 0);
+                assert (min > 60 || min < 0);
                 throw new DukeException("Rawr! Dino could not add your task. "
                         + "Make sure your format is correct."
                         + "\nFormats to input a task can be found by entering 'format'.");
