@@ -43,9 +43,13 @@ public class TaskList extends ArrayList<Task> {
         for (int i = 0; i < n; i++) {
             Task task = get(i);
             if (predicate.test(task)) {
-                res = res.concat((i + 1) + "." + task + "\n");
+                res = res.concat(getIndexedTaskString(i, task));
             }
         }
         return res;
+    }
+
+    private String getIndexedTaskString(int i, Task task) {
+        return (i + 1) + "." + task + "\n";
     }
 }
