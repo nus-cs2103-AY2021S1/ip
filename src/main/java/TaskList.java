@@ -97,14 +97,14 @@ public class TaskList {
      */
     public String doneTask(String s) throws DukeException {
         try {
-            int i = Integer.parseInt(s);
-            if (i < 1 || i > storage.size()) {
-                throw new DukeException("You have entered an invalid number: " + i
+            int index = Integer.parseInt(s);
+            if (index < 1 || index > storage.size()) {
+                throw new DukeException("You have entered an invalid number: " + index
                     + ". Please try again.");
             } else {
-                Task t = storage.get(i - 1);
+                Task t = storage.get(index - 1);
                 Task completed = t.setDone();
-                storage.set(i - 1, completed);
+                storage.set(index - 1, completed);
                 return "Nice! I've marked this task as done:\n" + "  "
                         + completed + "\n";
             }
@@ -153,15 +153,15 @@ public class TaskList {
         if (storage.isEmpty()) {
             return "Your list is empty!\n";
         } else {
-            int index = 1;
+            int count = 1;
             String output = "Here are the matching tasks in your list:\n";
             for (Task curr : storage) {
                 if (curr.getName().toLowerCase().contains(s.toLowerCase())) {
-                    output = output.concat(index + "." + curr + "\n");
-                    index++;
+                    output = output.concat(count + "." + curr + "\n");
+                    count++;
                 }
             }
-            if (index == 1) {
+            if (count == 1) {
                 return "There was no match!";
             } else {
                 return output;
