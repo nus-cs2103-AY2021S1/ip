@@ -78,10 +78,10 @@ public class DeadlineCommand extends Command {
 
         LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
 
-        System.out.println("Got it. I've added this task:");
+        ui.printString("Got it. I've added this task:");
         taskList.addTask(new Deadline(description, localDateTime));
-        System.out.println("\t" + taskList.retrieveTask(taskList.sizeOfList() - 1));
-        System.out.printf("Now you have %o tasks in list.\n", taskList.sizeOfList());
+        ui.printString("\t" + taskList.retrieveTask(taskList.sizeOfList() - 1));
+        ui.printString(String.format("Now you have %o tasks in list.\n", taskList.sizeOfList()));
         ui.showLine();
 
         storage.write(taskList);

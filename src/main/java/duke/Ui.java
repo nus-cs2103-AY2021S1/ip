@@ -15,12 +15,11 @@ public class Ui {
      * Print out welcome message with the menu.
      */
     public void showWelcome() {
-        String
-                logo =
+        String logo =
                 " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                         + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo + "\nHello ! I'm Duke.\nWhat can I do for you?");
-        System.out.println(menu());
+        System.out.println(getMenu());
     }
 
     /**
@@ -28,7 +27,7 @@ public class Ui {
      *
      * @return String menu
      */
-    private String menu() {
+    private String getMenu() {
         return "1. list\n" + "2. done {item number}\n" + "3. todo {description}\n"
                 + "4. deadline {description} /by {dd/mm/yyyy} {hhmm}\n"
                 + "\t e.g. deadline return book /by 1/12/2020 1800\n"

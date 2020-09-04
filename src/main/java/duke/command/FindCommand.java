@@ -47,11 +47,9 @@ public class FindCommand extends Command {
         if (input.length == 2) {
             toFind = fullCommand.substring(fullCommand.indexOf(" ")).trim();
             ArrayList<Task> results = taskList.find(toFind);
-            System.out.println("Here are the matching tasks in your list:");
-            for (int i = 0;
-                 i < results.size();
-                 i++) {
-                System.out.printf("%d. %s%n", i + 1, results.get(i));
+            ui.printString("Here are the matching tasks in your list:");
+            for (int i = 0; i < results.size(); i++) {
+                ui.printString(String.format("%d. %s%n", i + 1, results.get(i)));
             }
             ui.showLine();
         } else {

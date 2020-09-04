@@ -72,10 +72,10 @@ public class EventCommand extends Command {
         LocalDateTime startLocalDateTime = LocalDateTime.of(localDate, startLocalTime);
         LocalDateTime endLocalDateTime = LocalDateTime.of(localDate, endLocalTime);
 
-        System.out.println("Got it. I've added this task:");
+        ui.printString("Got it. I've added this task:");
         taskList.addTask(new Event(description, startLocalDateTime, endLocalDateTime));
-        System.out.println("\t" + taskList.retrieveTask(taskList.sizeOfList() - 1));
-        System.out.printf("Now you have %o tasks in list.\n", taskList.sizeOfList());
+        ui.printString("\t" + taskList.retrieveTask(taskList.sizeOfList() - 1));
+        ui.printString(String.format("Now you have %o tasks in list.\n", taskList.sizeOfList()));
         ui.showLine();
 
         storage.write(taskList);

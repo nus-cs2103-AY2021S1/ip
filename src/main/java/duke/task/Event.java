@@ -14,8 +14,8 @@ import java.util.Objects;
  */
 public class Event extends Task {
 
-    private LocalDateTime at;
-    private LocalDateTime end;
+    private final LocalDateTime at;
+    private final LocalDateTime end;
 
     /**
      * Class constructor.

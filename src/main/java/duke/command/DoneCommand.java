@@ -47,8 +47,8 @@ public class DoneCommand extends Command {
         } else {
             throw new DukeException("Cannot mark item done!");
         }
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.printf("%s\n", task);
+        ui.printString("Nice! I've marked this task as done:");
+        ui.printString(String.format("%s\n", task));
         ui.showLine();
 
         storage.write(taskList);
