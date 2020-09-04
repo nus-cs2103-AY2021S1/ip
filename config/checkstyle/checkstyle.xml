@@ -28,6 +28,14 @@
         </module>
 
     <module name="TreeWalker">
+        <module name="SuppressionCommentFilter"/>
+
+        <!--Enable usage SUPPRESS CHECKSTYLE comment-->
+        <module name="SuppressWithNearbyCommentFilter">
+            <property name="commentFormat" value="CHECKSTYLE IGNORE"/>
+            <property name="checkFormat" value=".*"/>
+            <property name="influenceFormat" value="0"/>
+        </module>
         <module name="OuterTypeFilename"/>
         <module name="IllegalTokenText">
             <property name="tokens" value="STRING_LITERAL, CHAR_LITERAL"/>
