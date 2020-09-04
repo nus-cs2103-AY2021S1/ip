@@ -30,23 +30,15 @@ public class Storage {
         D {
             @Override
             Deadline create(String[] line) {
-                try {
-                    return new Deadline(line[2], LocalDate.parse(line[3]),
-                            Boolean.parseBoolean(line[1]));
-                } catch (Exception e) {
-                    throw e;
-                }
+                return new Deadline(line[2], LocalDate.parse(line[3]),
+                        Boolean.parseBoolean(line[1]));
             }
         },
         E {
             @Override
             Event create(String[] line) {
-                try {
-                    return new Event(line[2], LocalDate.parse(line[3]),
-                            Boolean.parseBoolean(line[1]));
-                } catch (Exception e) {
-                    throw e;
-                }
+                return new Event(line[2], LocalDate.parse(line[3]),
+                        Boolean.parseBoolean(line[1]));
             }
         };
 
@@ -83,21 +75,14 @@ public class Storage {
      */
     public ArrayList<Task> readFromFile() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
-        Scanner fileIn = null;
-        try {
-            fileIn = new Scanner(file);
+        try (Scanner fileIn = new Scanner(file)) {
 
             while (fileIn.hasNextLine()) {
                 String[] line = fileIn.nextLine().split(" \\| ");
-
                 TaskType taskType;
-                try {
-                    taskType = TaskType.valueOf(line[0]);
-                    taskType.check(line);
-                    tasks.add(taskType.create(line));
-                } catch (Exception e) {
-                    throw new DukeException("The file format is wrong :((.");
-                }
+                taskType = TaskType.valueOf(line[0]);
+                taskType.check(line);
+                tasks.add(taskType.create(line));
                 assert tasks.size() != 0;
             }
 
@@ -105,11 +90,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeException("The file is not found TwT");
         } catch (Exception e) {
-            throw e;
-        } finally {
-            if (fileIn != null) {
-                fileIn.close();
-            }
+            throw new DukeException("The file format is wrong :((.");
         }
     }
 
