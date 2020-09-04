@@ -15,6 +15,7 @@ import duke.logic.TaskList;
 import duke.logic.UiManager;
 import duke.logic.UserInputParser;
 
+
 /**
  * Represents a Duke Chat bot.
  * It contains a <code>TaskList</code> to track the user's tasks,
@@ -22,9 +23,9 @@ import duke.logic.UserInputParser;
  * a <code>StorageManager</code> to handle storing of data.
  */
 public class Duke {
-    private boolean isGuiExit = false;
     private final UiManager uiManager;
     private final StorageManager storageManager;
+    private boolean isGuiExit = false;
     private TaskList taskList;
 
     public Duke() {
@@ -82,8 +83,10 @@ public class Duke {
         // OUTRO
         uiManager.printDukeOutro();
     }
+
     /**
      * Generates a response from Duke by the user input.
+     *
      * @param input String denoting user input from GUI
      * @return String denoting response from Duke
      */
@@ -106,6 +109,7 @@ public class Duke {
 
     /**
      * Returns a boolean to check if program on GUI should terminate
+     *
      * @return boolean
      */
     public boolean isGuiExit() {

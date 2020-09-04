@@ -1,5 +1,4 @@
 package duke.logic;
-
 import java.time.LocalDateTime;
 
 import duke.CommonMethod;
@@ -19,6 +18,7 @@ import duke.task.DeadlineTask;
 import duke.task.DukeTask;
 import duke.task.EventTask;
 import duke.task.TodoTask;
+
 
 
 /**
@@ -159,8 +159,8 @@ public class UserInputParser {
     /**
      * Parses input variables into a <code>LocalDateTime</code> object.
      *
-     * @param date     <code>String</code> containing the Date of the Task.
-     * @param time     <code>String</code> containing the Time of the Task.
+     * @param date <code>String</code> containing the Date of the Task.
+     * @param time <code>String</code> containing the Time of the Task.
      * @return LocalDateTime object denoting the corresponding Date and Time.
      * @throws InvalidInstructionFormatException Date and time formats are incorrect
      */

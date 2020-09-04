@@ -19,6 +19,8 @@ import javafx.util.Duration;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/gudetamaUser.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/gudetamaDuke.png"));
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -27,12 +29,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Duke duke;
     private UserInteractionUi uiManager;
-
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/gudetamaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/gudetamaDuke.png"));
 
     /**
      * Initialises values required for the MainWindow

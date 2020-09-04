@@ -1,9 +1,9 @@
 package duke.logic;
-
 import java.util.Scanner;
 
 import duke.CommonString;
 import duke.task.DukeTask;
+
 
 /**
  * Represents the User interface.
@@ -29,6 +29,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
     public void printLine() {
         System.out.println(UserInteractionText.LINE);
     }
+
     /**
      * Prints introduction to Duke.
      * Method implemented from UserInteractionUi interface.
@@ -40,6 +41,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
     /**
      * Returns String representation of Duke intro.
      * Method implemented from UserInteractionUi interface.
+     *
      * @return String
      */
     public String getDukeIntro() {
@@ -57,6 +59,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
     public String getDukeOutro() {
         return UserInteractionText.OUTRO.value;
     }
+
     /**
      * Prints instructions when user invokes <code>HelpCommand</code>.
      * Method implemented from CommandInteractionUi interface.
@@ -68,11 +71,13 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
     /**
      * Returns String representation of Duke instructions.
      * Method implemented from CommandInteractionUi interface.
+     *
      * @return String
      */
     public String getDukeInstructions() {
         return UserInteractionText.INSTRUCTIONS.value;
     }
+
     /**
      * Prints when users invoke <code>AddCommand</code>.
      * Method implemented from CommandInteractionUi interface.
@@ -84,6 +89,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
     /**
      * Returns a String representation of add Task response.
      * Method implemented from CommandInteractionUi interface.
+     *
      * @param task DukeTask
      * @param size number of tasks left
      * @return String
@@ -103,6 +109,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
     /**
      * Returns a String representation of delete Task response.
      * Method implemented from CommandInteractionUi interface.
+     *
      * @param task DukeTask
      * @param size number of tasks left
      * @return String
@@ -125,8 +132,9 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
     /**
      * Returns a String representation of list Task response.
      * Method implemented from CommandInteractionUi interface.
+     *
      * @param task DukeTask
-     * @param num Index of said task
+     * @param num  Index of said task
      * @return String
      */
     public String getNumberedTask(DukeTask task, int num) {
@@ -144,6 +152,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
     /**
      * Returns a String representation of markAsDone.
      * Method implemented from CommandInteractionUi interface.
+     *
      * @param task DukeTask
      * @param size Number of tasks in list
      * @return String
@@ -161,9 +170,11 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
     public void printFindCannotBeFound(String keyword) {
         System.out.println(getFindCannotBeFound(keyword));
     }
+
     /**
      * Returns String representation of find Task response when Task cannot be found.
      * Method implemented from CommandInteractionUi interface.
+     *
      * @param keyword String containing keyword
      * @return String
      */
@@ -182,6 +193,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
     /**
      * Returns String representation of response from find command.
      * Method implemented from CommandInteractionUi interface.
+     *
      * @param keyword String containing keyword
      * @return String
      */
@@ -201,6 +213,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
     /**
      * Returns a String representation of number of tasks in user's list.
      * Method implemented from CommandInteractionUi interface.
+     *
      * @param size number of tasks remaining
      * @return String
      */

@@ -7,7 +7,10 @@ package duke.logic;
  */
 public interface UserInteractionUi {
     void printDukeIntro();
+
     String getDukeIntro();
+
     void printDukeOutro();
+
     String getDukeOutro();
 }

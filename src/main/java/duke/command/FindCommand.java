@@ -1,11 +1,11 @@
 package duke.command;
-
 import java.util.ArrayList;
 
 import duke.logic.CommandInteractionUi;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
 import duke.task.DukeTask;
+
 
 
 /**
@@ -30,7 +30,8 @@ public class FindCommand extends Command {
     /**
      * Searches for <code>DukeTask</code> with the keyword in the <code>TaskList</code> and prints feedback.
      * If the task is a form of GUI command, sets response to the result instead.
-     *  @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
+     *
+     * @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
      * @param uiManager      <code>UIManager</code> object to handle printing feedback to user.
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
      * @param isGuiTask      <code>boolean</code> object to denote GUI task.

@@ -13,6 +13,7 @@ public class EventTask extends DukeTaskWithTime {
     public EventTask(String description, LocalDateTime datetime) {
         super(description, datetime);
     }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + String.format(" (at: %s)", getDatetime());

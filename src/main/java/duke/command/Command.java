@@ -1,5 +1,4 @@
 package duke.command;
-
 import java.io.IOException;
 
 import duke.exception.InvalidTaskIndexException;
@@ -7,6 +6,7 @@ import duke.exception.TaskDoneException;
 import duke.logic.CommandInteractionUi;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
+
 
 
 /**
@@ -31,11 +31,13 @@ public abstract class Command {
 
     /**
      * Returns a <code>String</code> denoting the response from executing command.
+     *
      * @return String response
      */
     public String getResponse() {
         return this.response;
     }
+
     /**
      * Executes the user's command.
      * In most cases, it should validate the user's input as valid

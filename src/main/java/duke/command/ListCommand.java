@@ -23,7 +23,8 @@ public class ListCommand extends Command {
     /**
      * Prints all <code>DukeTask</code> for the user.
      * If the task is a form of GUI command, sets response to the result instead.
-     *  @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
+     *
+     * @param taskList       <code>TaskList</code> object containing the user's <code>DukeTask</code>.
      * @param uiManager      <code>UIManager</code> object to handle printing feedback to user.
      * @param storageManager <code>StorageManager</code> object to saving/loading user data.
      * @param isGuiTask      <code>boolean</code> object to denote GUI task
@@ -43,7 +44,7 @@ public class ListCommand extends Command {
             for (int i = 0; i < taskList.getSize(); i++) {
                 uiManager.printNumberedTask(taskList.getTaskList().get(i), i);
             }
-            System.out.println("");
+            System.out.println();
             uiManager.printTaskStatus(taskList.getSize());
         }
     }
