@@ -20,6 +20,8 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final int BASE_HEIGHT = 85;
+
     @FXML
     private Label dialog;
     @FXML
@@ -36,13 +38,24 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        String[] textPortions = text.split("\n");
-        int units = textPortions.length;
-        for (String s : textPortions) {
-            units += Math.max(0, s.length() / 20 - 1);
-        }
-        dialog.setMinHeight(units * 15 + 85);
+        dialog.setMinHeight(getDialogHeight(text));
         displayPicture.setImage(img);
+    }
+
+    /**
+     * Determine optimal height of dialog box based on its number of lines and contents.
+     * @param text Text to be displayed.
+     * @return Height of dialog box.
+     */
+    private int getDialogHeight(String text) {
+        String[] textPortions = text.split("\n");
+
+        int heightUnits = textPortions.length;
+        for (String s : textPortions) {
+            heightUnits += Math.max(0, s.length() / 20 - 1);
+        }
+
+        return heightUnits * 15 + BASE_HEIGHT;
     }
 
     /**

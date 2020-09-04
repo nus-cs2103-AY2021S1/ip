@@ -21,10 +21,12 @@ public class ListCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder response = new StringBuilder();
         response.append(">> Your tasks:");
+
         int i = 1;
         for (Task task : tasks.getTasks()) {
             response.append("\n>> " + i++ + ". " + task);
         }
+
         return response.toString();
     }
 }

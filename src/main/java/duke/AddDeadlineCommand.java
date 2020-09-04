@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
  * Handles addition of deadline-based Tasks.
  */
 public class AddDeadlineCommand extends Command {
-    /** duke.Command details */
+    /** duke.Command details in the form [TYPE, INFORMATION] */
     private final String[] instructions;
 
     /**
@@ -26,10 +26,12 @@ public class AddDeadlineCommand extends Command {
      * @param storage To store the added task.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String[] deadlineInfo = instructions[1].split(" /by ", 2); // [name, deadline]
+        String[] deadlineInfo = instructions[1].split(" /by ", 2); // deadlineInfo = [name, deadline]
+
         if (deadlineInfo.length < 2) {
-            return ui.conditionError(Constants.TaskTypes.DEADLINE);
+            return ui.conditionError(Constants.TaskTypes.DEADLINE); // User provided incomplete information.
         }
+
         try {
             Task deadline = new Deadline(deadlineInfo[0], LocalDate.parse(deadlineInfo[1]));
             return tasks.addTask(deadline) + "\n" + storage.save(tasks);
