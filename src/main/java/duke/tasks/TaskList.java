@@ -52,6 +52,7 @@ public class TaskList {
     public String markTaskAsDone(int index) {
         Task task = tasks.get(index - 1);
         task.markAsDone();
+        assert task.isCompleted() : "Task not marked as done successfully";
         return "Nice! I've marked this task as done:\n    " + task;
     }
 
@@ -67,6 +68,7 @@ public class TaskList {
         Task newTask = new Task(content, type, date);
         tasks.add(newTask);
         int size = tasks.size();
+        assert size >= 1 : "Item not added successfully";
         String output = "Got it. I've added this task:\n    " + newTask.toString() + "\n";
         output += String.format("Now you have %s %s in the list.\n", size, (size > 1 ? "tasks" : "task"));
         return output;
@@ -83,6 +85,7 @@ public class TaskList {
         Task newTask = new Task(content, type);
         tasks.add(newTask);
         int size = tasks.size();
+        assert size >= 1 : "Item not added successfully";
         String output = "Got it. I've added this task:\n    " + newTask.toString() + "\n";
         output += String.format("Now you have %s %s in the list.\n", size, (size > 1 ? "tasks" : "task"));
         return output;
@@ -97,13 +100,14 @@ public class TaskList {
      */
     public String deleteTask(int index) throws DukeException {
         int size = tasks.size();
-        if (index > size) {
+        if (index > size || index < 0) {
             throw new DukeException(Messenger.INDEX_OUT_OF_BOUND_ERROR);
         }
         Task task = tasks.get(index - 1);
         String output = "Noted. I've removed this task:\n";
         output += task + "\n";
         tasks.remove(index - 1);
+        assert tasks.size() < size : "Item not deleted successfully";
         size--;
         output += String.format("Now you have %s %s in the list.\n", size, (size > 1 ? "tasks" : "task"));
         return output;

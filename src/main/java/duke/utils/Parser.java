@@ -32,6 +32,7 @@ public class Parser {
         String[] split = command.split(" ", 2);
 
         String type = split[0];
+        // command type does not match known command types
         if (TaskType.valueOfType(type) == null && ActionType.valueOfType(type) == null) {
             throw new DukeException(Messenger.SPELL_ERROR);
         }
@@ -79,5 +80,6 @@ public class Parser {
         } catch (DateTimeParseException exp) {
             throw new DukeException(Messenger.DATE_FORMAT_ERROR);
         }
+        assert value.split(" -").length == 3 : "date has the wrong format";
     }
 }

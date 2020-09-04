@@ -55,6 +55,7 @@ public class Storage {
                 output += Messenger.DIRECTORY_NOT_FOUND + "\n";
                 directory.mkdir();
             }
+            assert directory.exists() : "directory does not exist";
 
             File f = new File(FILE_PATH);
             if (f.createNewFile()) {
@@ -77,6 +78,7 @@ public class Storage {
                 taskList.getTasks().add(new Task(parsed[1], command));
             }
             output += Messenger.FILE_LOADED + "\n";
+            assert f.exists() : "file does not exist";
         } catch (IOException e) {
             AlertBox.display("IO Error", e.getMessage());
         }
@@ -97,6 +99,7 @@ public class Storage {
             }
             writer.close();
             taskList.clearTasks();
+            assert taskList.getTasks().size() == 0 : "task list is not cleared";
             label.setText(Messenger.CLOSE_MESSAGE);
         } catch (IOException e) {
             AlertBox.display("IO Error!", e.getMessage());
