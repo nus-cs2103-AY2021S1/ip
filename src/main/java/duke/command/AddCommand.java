@@ -33,6 +33,7 @@ public class AddCommand extends Command {
         int count = list.size();
         Task task = Parser.parseAddTask(input);
         list.add(count, task);
+        storage.addToList(task);
         String tasks = getTaskPlural(count);
         String res = String.format(Ui.ADD_TASK_OUTPUT_FORMAT, task.toString(), count + 1, tasks);
         ui.output(res);

@@ -29,6 +29,7 @@ public class DoneCommand extends Command {
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
         int n = Parser.getDoneTaskIndex(input, list.size()) - 1;
         list.get(n).markAsDone();
+        storage.reWrite(list);
         String str = "Nice! I've marked this task as done:\n\t    " + list.get(n);
         ui.output(str);
         return str;

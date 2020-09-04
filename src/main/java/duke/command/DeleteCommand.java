@@ -32,6 +32,7 @@ public class DeleteCommand extends Command {
         int m = Parser.getDeleteTaskIndex(input, count) - 1;
         Task toDelete = list.get(m);
         list.remove(toDelete);
+        storage.reWrite(list);
         String tasks = Parser.getTaskPlural(count);
         String str = String.format(Ui.DELETE_TASK_OUTPUT_FORMAT, toDelete.toString(), list.size(), tasks);
         ui.output(str);

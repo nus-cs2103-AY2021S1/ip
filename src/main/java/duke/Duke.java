@@ -7,6 +7,7 @@ import duke.component.CliUi;
 import duke.component.FxmlUi;
 import duke.component.Parser;
 import duke.component.Storage;
+import duke.component.StorageStub;
 import duke.component.TaskList;
 import duke.component.Ui;
 
@@ -14,9 +15,9 @@ import duke.component.Ui;
  * Is the Main class of this program.
  */
 public class Duke {
-    private Storage storage;
-    private TaskList list;
-    private Ui ui;
+    private final Storage storage;
+    private final TaskList list;
+    private final Ui ui;
 
     /**
      * Creates a running Duke, initialize the list with data in the input file, if input file is not found,
@@ -29,13 +30,15 @@ public class Duke {
         } else {
             ui = new FxmlUi();
         }
+        Storage storage = new StorageStub();
         try {
             storage = new ActualStorage(filePath);
-            list = storage.getList();
         } catch (Exception e) {
+            assert false : "No resource tasks file.";
             ui.output(e.getMessage());
-            list = new TaskList();
         }
+        this.storage = storage;
+        list = storage.getList();
     }
 
     /**

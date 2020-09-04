@@ -26,9 +26,8 @@ public class ByeCommand extends Command {
         return true;
     }
 
-    private void printEntireList(Ui ui, TaskList list) {
-        ui.printList(list, t -> true, "");
-
+    private String printEntireList(Ui ui, TaskList list) {
+        return ui.printList(list, t -> true, "");
     }
 
     /**
@@ -39,10 +38,8 @@ public class ByeCommand extends Command {
      * @return the string "bye"
      */
     @Override
-    public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
-        printEntireList(ui, list);
-        storage.reWrite(list);
-        return Parser.BYE_COMMAND;
+    public String execute(Ui ui, TaskList list, Storage storage) {
+        return printEntireList(ui, list);
     }
 
     /**

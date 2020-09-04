@@ -24,7 +24,7 @@ public class App extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    private Duke runningDuke = new Duke(this.getClass().getResource("/tasks.txt").getPath(), false);
+    private Duke runningDuke = new Duke("src/main/resources/tasks.txt", false);
 
     @Override
     public void start(Stage stage) {
@@ -109,11 +109,12 @@ public class App extends Application {
      */
     public Label getResponse(String input) {
         Command c = Parser.parse(input);
-        if (c.isExit()) {
-            System.exit(0);
-        }
         try {
-            return new Label(c.execute(runningDuke.getUi(), runningDuke.getList(), runningDuke.getStorage()));
+            String executionOutput = c.execute(runningDuke.getUi(), runningDuke.getList(), runningDuke.getStorage());
+            if (c.isExit()) {
+                System.exit(0);
+            }
+            return new Label(executionOutput);
         } catch (InvalidCommandException e) {
             return new Label(e.getMessage());
         }
