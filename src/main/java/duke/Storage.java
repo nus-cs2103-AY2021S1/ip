@@ -76,6 +76,7 @@ public class Storage {
      */
     public TaskList loadTaskList(List<String> tasksInFile) {
         List<Task> tasksLoaded = new ArrayList<>();
+
         // Reads the datetime from the string representation of tasks as "Month day year" such as "Jan 10 2020".
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy", Locale.ENGLISH);
 

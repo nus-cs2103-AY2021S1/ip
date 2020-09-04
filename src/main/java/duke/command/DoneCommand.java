@@ -6,6 +6,7 @@ import duke.DukeException;
 /** A subclass of Command which sends request to mark a task in list as done */
 public class DoneCommand extends Command {
     private static final String DONE_REQUEST = "update";
+    
     /**
      * Creates a DoneCommand.
      *
