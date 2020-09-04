@@ -31,8 +31,15 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Gel g) {
+    private void showWelcomeMsg() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getGelDialog(gel.getWelcomeMsg(), gelImage)
+        );
+    }
+
+    public void setGel(Gel g) {
         gel = g;
+        showWelcomeMsg();
     }
 
     /**
@@ -49,7 +56,6 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (input.equals("bye")) {
-            Thread.sleep(5000);
             Platform.exit();
         }
     }

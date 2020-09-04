@@ -25,8 +25,9 @@ public class Gel {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
+            storage.checkFileExistence();
             taskList = storage.load(ui);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             ui.showLoadingError();
             taskList = new TaskList(ui);
         }
@@ -38,13 +39,14 @@ public class Gel {
     public void run() {
         // initialise list and scanner
         try {
-            storage.checkFileExistence();
             Scanner sc = new Scanner(System.in);
             ui.showWelcomeMessage();
             Parser.parseUserInput(sc, storage, ui, taskList);
         } catch (FileNotFoundException e) {
+            System.out.println();
             System.out.println(e.getMessage());
         } catch (IOException e) {
+            System.out.println();
             System.out.println(e.getLocalizedMessage());
         }
     }
@@ -55,11 +57,13 @@ public class Gel {
 
     public String getResponse(String input) {
         try {
-            storage.checkFileExistence();
-            ui.showWelcomeMessage();
             return Parser.parseUserInputFromGui(storage, ui, taskList, input);
         } catch (Exception e) {
             return e.getMessage();
         }
+    }
+
+    public String getWelcomeMsg() {
+        return ui.showWelcomeMessage();
     }
 }

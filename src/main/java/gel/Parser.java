@@ -145,6 +145,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Translates user input into something understandable by the task planner.
+     *
+     * @param storage  Storage to store date.
+     * @param ui       Ui to communicate with user.
+     * @param taskList List of tasks.
+     * @throws IOException If file could not be updated.
+     */
     public static String parseUserInputFromGui(Storage storage, Ui ui, TaskList taskList, String input)
             throws IOException, GelException {
 
