@@ -36,16 +36,16 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * A Constructor for dev.jingyen.duke.Duke that initializes the save file path to nothing.
      */
     public Duke() {
-        this.ui = new Ui();
-        this.storage = new Storage("");
-        this.tasks = new TaskList();
+        ui = new Ui();
+        storage = new Storage("");
+        tasks = new TaskList();
     }
 
     /**
@@ -54,13 +54,13 @@ public class Duke extends Application {
      * @param filePath the path to the saved tasks
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filePath);
-        this.tasks = new TaskList();
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = new TaskList();
         try {
-            this.tasks.addAllTasks(this.storage.load());
+            tasks.addAllTasks(storage.load());
         } catch (IOException e) {
-            this.ui.showLoadingError();
+            ui.showLoadingError();
         }
     }
 
@@ -84,10 +84,10 @@ public class Duke extends Application {
      */
     private void run() {
         try (Scanner scanner = new Scanner(System.in)) {
-            this.ui.displayGreeting();
+            ui.displayGreeting();
 
-            if (this.storage.hasSavedTasks()) {
-                this.ui.displayGreetingReminder(this.tasks.tasksCount());
+            if (storage.hasSavedTasks()) {
+                ui.displayGreetingReminder(tasks.tasksCount());
             }
 
             System.out.print("> ");
@@ -96,15 +96,15 @@ public class Duke extends Application {
                 String output = handleCommand(input);
 
                 if (output.equalsIgnoreCase(Ui.GOODBYE_MESSAGE)) {
-                    this.storage.saveTasks(this.tasks.getTasks());
+                    storage.saveTasks(tasks.getTasks());
                     break;
                 }
                 System.out.print("> ");
             }
 
-            this.ui.displayGoodbye();
+            ui.displayGoodbye();
         } catch (IOException e) {
-            this.ui.displayMessages(e.getMessage());
+            ui.displayMessages(e.getMessage());
         }
 
     }
@@ -122,10 +122,10 @@ public class Duke extends Application {
             String command = tokens[0].toLowerCase();
             switch (command) {
             case "list": // show tasks available
-                return ui.displayTasks(this.tasks.getTasks());
+                return ui.displayTasks(tasks.getTasks());
             case "find":
                 String term = input.substring("find".length()).strip();
-                List<Task> matchingTasks = this.tasks.searchTasks(term);
+                List<Task> matchingTasks = tasks.searchTasks(term);
                 return ui.displayMatchingTasks(matchingTasks);
             case "done": {
                 if (tokens.length < 2) {
@@ -140,12 +140,12 @@ public class Duke extends Application {
             }
             case "delete":
                 int index = Integer.parseInt(tokens[1]) - 1;
-                Task task = this.tasks.getTask(index);
-                this.tasks.deleteTask(index);
-                return this.ui.displayMessages(
+                Task task = tasks.getTask(index);
+                tasks.deleteTask(index);
+                return ui.displayMessages(
                         "Right, you no longer want me to track:",
                         task.toString(),
-                        this.ui.getTasksLeftMessage(this.tasks.tasksCount()));
+                        ui.getTasksLeftMessage(tasks.tasksCount()));
             case "todo":
             case "deadline":
             case "event": // it's a new task
@@ -162,11 +162,11 @@ public class Duke extends Application {
 
     private String addTask(String command, String input) throws InvalidTaskException {
         Task task = TaskParser.parseInput(command, input);
-        this.tasks.addTask(task);
-        return this.ui.displayMessages(
+        tasks.addTask(task);
+        return ui.displayMessages(
                 "Okay, you want to:",
                 task.toString(),
-                this.ui.getTasksLeftMessage(this.tasks.tasksCount()));
+                ui.getTasksLeftMessage(tasks.tasksCount()));
     }
 
     @Override

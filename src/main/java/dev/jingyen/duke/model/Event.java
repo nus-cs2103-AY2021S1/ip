@@ -21,7 +21,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.timeRange);
+        return String.format("[E]%s (at: %s)", super.toString(), timeRange);
     }
 
     /**
@@ -32,6 +32,6 @@ public class Event extends Task {
      */
     @Override
     public String toSaveString() {
-        return String.format(SAVE_STRING, super.isDone, super.taskName, this.timeRange);
+        return String.format(SAVE_STRING, super.isDone, super.taskName, timeRange);
     }
 }

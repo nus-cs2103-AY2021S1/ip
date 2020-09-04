@@ -51,11 +51,11 @@ public class Ui {
             return "";
         }
         if (count == 1) {
-            return this.displayMessages(
+            return displayMessages(
                     "Don't forget you already have one thing to do.",
                     "But okay.");
         }
-        return this.displayMessages(
+        return displayMessages(
                 "Don't forget you already have " + count + " things to do.",
                 "But okay.");
     }
@@ -68,7 +68,7 @@ public class Ui {
     public String displayTasks(List<Task> tasks) {
         int noOfTasks = tasks.size();
         if (noOfTasks == 0) {
-            return this.displayMessages("You didn't tell me to remind you anything.");
+            return displayMessages("You didn't tell me to remind you anything.");
         } else {
             String[] messages = new String[noOfTasks + 1];
             messages[0] = "Right, you said you wanted to:";
@@ -77,7 +77,7 @@ public class Ui {
                 messages[i + 1] = String.format("%3d: %s", i + 1, tasks.get(i));
             }
 
-            return this.displayMessages(messages);
+            return displayMessages(messages);
         }
     }
 
@@ -119,7 +119,7 @@ public class Ui {
     public String displayMatchingTasks(List<Task> matchingTasks) {
         int noOfTasks = matchingTasks.size();
         if (noOfTasks == 0) {
-            return this.displayMessages("Well, I don't recall you asking me to note down anything like that.");
+            return displayMessages("Well, I don't recall you asking me to note down anything like that.");
         } else {
             String[] messages = new String[noOfTasks + 1];
             messages[0] = "Right, here's some tasks that match what you asked for:";
@@ -128,7 +128,7 @@ public class Ui {
                 messages[i + 1] = String.format("%3d: %s", i + 1, matchingTasks.get(i));
             }
 
-            return this.displayMessages(messages);
+            return displayMessages(messages);
         }
     }
 }

@@ -29,7 +29,7 @@ public class Storage {
     // TODO: 26/8/20 Add more relevant error for parsing
     public List<Task> load() throws IOException {
         List<Task> tasks = new ArrayList<>();
-        try (var br = new BufferedReader(new FileReader(this.filePath))) {
+        try (var br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 Task task = TaskParser.parse(line);
@@ -47,7 +47,7 @@ public class Storage {
      * @return true if the file exists, otherwise false
      */
     public boolean hasSavedTasks() {
-        return new File(this.filePath).exists();
+        return new File(filePath).exists();
     }
 
     /**
@@ -57,7 +57,7 @@ public class Storage {
      * @throws IOException if a problem was encountered while trying to access the file at <code>filePath</code>
      */
     public void saveTasks(List<Task> tasks) throws IOException {
-        File saveFile = new File(this.filePath);
+        File saveFile = new File(filePath);
         if (!saveFile.exists()) {
             boolean directoryCreated = saveFile.getParentFile().mkdirs();
             if (!directoryCreated) {
@@ -70,7 +70,7 @@ public class Storage {
         }
 
         // Use PrintWriter wrapping BufferedWriter in FileWriter
-        try (var out = new PrintWriter(new BufferedWriter(new FileWriter(this.filePath)))) {
+        try (var out = new PrintWriter(new BufferedWriter(new FileWriter(filePath)))) {
             for (Task task : tasks) {
                 out.println(task.toSaveString());
             }

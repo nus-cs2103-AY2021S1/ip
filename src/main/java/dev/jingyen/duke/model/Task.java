@@ -24,12 +24,12 @@ public abstract class Task {
      * Marks a task as done.
      */
     public void markDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", isDone ? "✓" : "✘", this.taskName);
+        return String.format("[%s] %s", isDone ? "✓" : "✘", taskName);
     }
 
     /**

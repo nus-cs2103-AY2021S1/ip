@@ -53,7 +53,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toSaveString() {
-        return String.format(SAVE_STRING, super.isDone, super.taskName, this.deadline);
+        return String.format(SAVE_STRING, super.isDone, super.taskName, deadline);
     }
 
     @Override
@@ -65,6 +65,6 @@ public class Deadline extends Task {
             return false;
         }
         Deadline d = (Deadline) o;
-        return super.equals(d) && this.deadline.equals(d.deadline);
+        return super.equals(d) && deadline.equals(d.deadline);
     }
 }
