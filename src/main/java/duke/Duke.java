@@ -51,6 +51,7 @@ public class Duke {
 
     /** Greets the user. */
     public void greet() {
+        assert ui != null : "Ui not specified!";
         ui.greet();
     }
 }

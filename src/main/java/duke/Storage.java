@@ -54,15 +54,18 @@ public class Storage {
                 while (buffReader.ready()) {
                     String savedTask = buffReader.readLine();
                     String type = savedTask.substring(0, 1);
+                    String isDone = savedTask.substring(2, 3);
+                    assert isDone.equals("T") || isDone.equals("F");
+                    
                     switch (type) {
                     case TODO:
-                        loadTodo(list, savedTask);
+                        loadTodo(list, savedTask, isDone.equals("T"));
                         break;
                     case DEADLINE:
-                        loadDeadline(list, savedTask);
+                        loadDeadline(list, savedTask, isDone.equals("T"));
                         break;
                     case EVENT:
-                        loadEvent(list, savedTask);
+                        loadEvent(list, savedTask, isDone.equals("T"));
                         break;
                     default:
                     }
@@ -99,6 +102,7 @@ public class Storage {
      * @param taskNumber Task number of the data.
      */
     public void updateData(String data, int taskNumber) {
+        assert taskNumber > 0;
         try {
             BufferedReader br = new BufferedReader(new FileReader(String.valueOf(path)));
             String newData = "";
@@ -121,26 +125,26 @@ public class Storage {
         }
     }
 
-    private void loadTodo(List<Task> list, String savedTask) {
-        list.add(new ToDo(savedTask.substring(4).trim(), savedTask.substring(2, 3).equals("T")));
+    private void loadTodo(List<Task> list, String savedTask, boolean isDone) {
+        list.add(new ToDo(savedTask.substring(4).trim(), isDone));
     }
 
-    private void loadDeadline(List<Task> list, String savedTask) {
+    private void loadDeadline(List<Task> list, String savedTask, boolean isDone) {
         String deadlineDetails = savedTask.substring(4);
         String[] deadlineArr = deadlineDetails.split("/by");
         Deadline deadline = new Deadline(
                 deadlineArr[0].trim(),
-                savedTask.substring(2, 3).equals("T"),
+                isDone,
                 LocalDateTime.parse(deadlineArr[1].trim()));
         list.add(deadline);
     }
 
-    private void loadEvent(List<Task> list, String savedTask) {
+    private void loadEvent(List<Task> list, String savedTask, boolean isDone) {
         String eventDetails = savedTask.substring(4);
         String[] eventArr = eventDetails.split("/at");
         Event event = new Event(
                 eventArr[0].trim(),
-                savedTask.substring(2, 3).equals("T"),
+                isDone,
                 LocalDateTime.parse(eventArr[1].trim()));
         list.add(event);
     }
