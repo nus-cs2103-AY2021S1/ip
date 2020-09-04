@@ -17,16 +17,12 @@ public class ByeCommand extends Command {
      * @param command User input
      * @param list TaskList object containing all tasks
      * @param storage Storage object that reads and writes to duke.ser
+     * @return A bye response
      */
     @Override
     public String execute(String command, TaskList list, Storage storage) {
         String horizontalLine = "____________________________________\n";
         String byeMessage = "Bye bye. See you soon bro!\n";
         return horizontalLine + byeMessage + horizontalLine;
-    }
-
-    @Override
-    public boolean isExit() {
-        return true;
     }
 }

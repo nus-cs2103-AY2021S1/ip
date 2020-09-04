@@ -26,18 +26,7 @@ public class Duke {
     /**
      * Generates a response to user input.
      */
-    String getResponse(String input) throws Exception {
+    String getResponse(String input) {
         return this.ui.initialise(tasks, storage, input);
-    }
-
-    /**
-     * Main method
-     * @param args Parameters
-     * @throws Exception File not found exception
-     */
-    public static void main(String[] args) throws Exception {
-        // remember to change filepath to "../../../data/duke.txt" during jar build
-        // Duke duke = new Duke("data/duke.txt");
-        // duke.run();
     }
 }

@@ -16,6 +16,7 @@ public class DoneCommand extends Command {
      * @param command User input
      * @param list TaskList object containing all tasks
      * @param storage Storage object that reads and writes to duke.ser
+     * @return A response showing done task
      */
     @Override
     public String execute(String command, TaskList list, Storage storage) {
@@ -23,8 +24,9 @@ public class DoneCommand extends Command {
         String index = command.substring(5);
         try {
             int number = Integer.parseInt(index);
-            if (number <= 0 || number > list.getList().size()) {
-                return "Sorry hor, the number you keyed in is out of range...";
+            Boolean isNumberOutOfRange = number <= 0 || number > list.getList().size();
+            if (isNumberOutOfRange) {
+                return Warnings.inputOutOfRangeWarning();
             } else {
                 list.getList().set(number - 1, list.getList().get(number - 1).markDone());
                 String taskMessage = list.getList().get(number - 1).toString();
@@ -33,7 +35,7 @@ public class DoneCommand extends Command {
                         + taskMessage + "\n" + horizontalLine;
             }
         } catch (NumberFormatException ex) {
-            return "Sorry hor, the number you keyed in is invalid...";
+            return Warnings.invalidInputWarning();
         }
     }
 }

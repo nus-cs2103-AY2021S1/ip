@@ -16,6 +16,7 @@ public class ListCommand extends Command {
      * @param command User input
      * @param list TaskList object containing all tasks
      * @param storage Storage object that reads and writes to duke.ser
+     * @return Lists all the tasks in TaskList
      */
     @Override
     public String execute(String command, TaskList list, Storage storage) {
