@@ -30,6 +30,8 @@ public class Parser {
     protected static List<String> inputFormat = Arrays.asList("dd/MM/yyyy HHmm", "yyyy-mm-dd Haaa");
     protected static SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd yyyy h:mma");
 
+    protected static List<String> existingCommand = Arrays.asList("done", "delete", "todo", "event", "find", "deadline");
+
     /**
      * Converts the input date to another date format, if it exist
      *
@@ -72,9 +74,7 @@ public class Parser {
 
         String[] inputArray = input.split(" ", 2);
 
-        if (inputArray.length == 1 && (inputArray[0].equals("done") || inputArray[0].equals("delete")
-                || inputArray[0].equals("todo") || inputArray[0].equals("deadline")
-                || inputArray[0].equals("event") || inputArray[0].equals("find"))) {
+        if (inputArray.length == 1 && existingCommand.contains(inputArray[0])) {
             throw new EmptyDescriptionException(("The description of "
                     + inputArray[0]
                     + " cannot be empty. Please re-enter"));
