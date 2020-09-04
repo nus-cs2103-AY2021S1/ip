@@ -1,5 +1,6 @@
 package viscount;
 
+import java.util.Arrays;
 import java.util.List;
 
 import viscount.task.Task;
@@ -33,6 +34,10 @@ public class Ui {
      * @return The appropriate list response.
      */
     public String getListResponse(List<Task> tasks, String modifier, String dateString) {
+        String[] validModifiers = {"", "todo", "deadline", "event"};
+        assert Arrays.asList(validModifiers).contains(modifier)
+                : String.format("Invalid modifier '%s'", modifier);
+
         String finalDateString = dateString.isEmpty()
                 ? dateString
                 : ("occurring " + (dateString.equals("today")
@@ -53,6 +58,8 @@ public class Ui {
      * @return The appropriate add task response.
      */
     public String getAddResponse(Task task, int tasksSize) {
+        assert tasksSize >= 0 : "Size of task list should be non-negative";
+
         return String.format("Very well. I've added this %s:\n%s\nNow you have %d tasks in the list.",
                 task.getTaskType().name().toLowerCase(),
                 task.toString(),
@@ -79,6 +86,8 @@ public class Ui {
      * @return The appropriate delete task response.
      */
     public String getDeleteResponse(Task task, int tasksSize) {
+        assert tasksSize >= 0 : "Size of task list should be non-negative";
+
         return String.format("Very well. I've removed this %s:\n%s\nNow you have %d tasks in the list.",
                 task.getTaskType().name().toLowerCase(),
                 task.toString(),
