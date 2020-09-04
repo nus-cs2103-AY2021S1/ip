@@ -53,7 +53,9 @@ public class FindCommand extends Command {
         if (response.equals("")) {
             throw new DukeListException("Your search result yields nothing.");
         }
-
+      
+        assert !response.equals("");
+      
         return response;
 
     }
