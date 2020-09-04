@@ -21,14 +21,10 @@ public class Ui {
      * Takes in one line of input from the user.
      *
      * @return the user's input
-     * @throws DukeException if there is no more input
      */
-    String readCommand() throws DukeException {
-        if (this.scanner.hasNext()) {
-            return scanner.nextLine().trim();
-        } else {
-            throw new DukeException("No next line");
-        }
+    String readCommand() {
+        assert this.scanner.hasNext();
+        return scanner.nextLine().trim();
     }
 
     /**
