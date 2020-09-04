@@ -34,7 +34,7 @@ public class Parser {
     public static Command parse(String input)
             throws MissingDelimiterException, MissingDateTimeException, InvalidCommandException,
             DateTimeParseException, IndexOutOfBoundsException {
-        String[] commandElements = input.split(" ");
+        String[] commandElements = input.trim().split(" ");
         Command intendedCommand;
         switch (commandElements[0]) {
         case "bye":

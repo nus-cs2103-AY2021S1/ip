@@ -32,6 +32,7 @@ public class Storage {
         StringBuilder taskListString = new StringBuilder();
         for (Task task : tasks) {
             for (String attribute : task.attributeList()) {
+                assert !attribute.isBlank() : "Attribute cannot be empty";
                 taskListString.append(attribute).append("\n");
             }
         }
@@ -74,6 +75,7 @@ public class Storage {
                             LocalTime.parse(data.nextLine()));
                     break;
                 }
+                assert data.hasNextBoolean() : "There should be a boolean for each task";
                 if (data.nextBoolean()) {
                     curr.markAsDone();
                 }

@@ -59,7 +59,7 @@ public class Ui {
                 out.append(LEFT_MARGIN).append(i + 1)
                         .append(".").append(tasks.get(i)).append("\n");
             }
-            return out.substring(0, out.length() - 1);
+            return out.toString();
         }
     }
 
@@ -67,8 +67,8 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public String showAdd(short id, Task task) {
-        return MESSAGE_ADD + "\n" + LEFT_MARGIN + task + "\n" + String.format(MESSAGE_COUNT, id);
+    public String showAdd(short count, Task task) {
+        return MESSAGE_ADD + "\n" + LEFT_MARGIN + task + "\n" + String.format(MESSAGE_COUNT, count);
     }
 
     public String showDelete(short listSize, Task task) {
@@ -76,6 +76,7 @@ public class Ui {
     }
 
     public String showDone(Task task) {
+        assert task.isDone() : "task should be marked as done";
         return MESSAGE_DONE + "\n" + LEFT_MARGIN + task;
     }
 

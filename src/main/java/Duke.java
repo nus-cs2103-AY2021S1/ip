@@ -29,6 +29,7 @@ public class Duke {
         Command c;
         try {
             c = Parser.parse(input);
+            assert c != null : "The command cannot be null";
         } catch (MissingDelimiterException | MissingDateTimeException | InvalidCommandException e) {
             return e.getMessage();
         } catch (DateTimeParseException e) {
@@ -38,6 +39,7 @@ public class Duke {
         }
         try {
             String response=c.execute(tasks, ui, storage);
+            assert !response.isBlank() : "Response should not be empty";
             if (response.equals("exit")){
                 Platform.exit();
             }
