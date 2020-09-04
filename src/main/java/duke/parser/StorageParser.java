@@ -91,6 +91,7 @@ public class StorageParser {
      */
     public Task convertStorageToTask(String storageTaskString) throws DukeParseException {
         String[] storageTask = storageTaskString.split(DELIMITER);
+        assert storageTask.length > 0 : "There is an error in the splitting of the storageTaskString";
         switch(storageTask[0]) {
         case Todo.TODO_SYMBOL:
             return createTodo(storageTask, storageTaskString);

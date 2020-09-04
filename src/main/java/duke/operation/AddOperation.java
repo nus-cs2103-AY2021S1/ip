@@ -48,6 +48,7 @@ public abstract class AddOperation extends Operation {
     @Override
     public Result execute() {
         Task newTask = createTask();
+        assert !newTask.isTaskCompleted() : "Ensure task created is not yet completed";
         this.taskList.addTask(newTask);
         String message = "I have added the task:\n" + newTask + "\n"
                 + String.format("You now have %d tasks.", this.taskList.getCurrCapacity());

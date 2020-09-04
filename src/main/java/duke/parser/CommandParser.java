@@ -114,6 +114,7 @@ public class CommandParser {
     public Operation parse(String commandString, TaskList list, TaskStorage taskStorage)
             throws DukeParseException {
         String[] commands = commandString.split(" ");
+        assert commands.length > 0 : "There is an error in the splitting of the command";
         Function<CommandType, Boolean> isCommand = commandType ->
                 commandType.getCommand().equals(commands[0]);
 
