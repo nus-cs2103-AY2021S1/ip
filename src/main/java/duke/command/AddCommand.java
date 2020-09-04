@@ -5,12 +5,18 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class AddCommand implements Command {
     Task task;
+    public static List<String> names = Arrays.asList("todo", "deadline", "");
 
     public AddCommand(Task task) {
         this.task = task;
     }
+
+    public AddCommand() { }
 
     /**
      * Adds a task to the given list.

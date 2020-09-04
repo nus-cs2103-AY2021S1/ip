@@ -1,6 +1,9 @@
 package duke.parser;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 import duke.DukeException;
 import duke.ExceptionTypeEnum;
@@ -8,6 +11,7 @@ import duke.command.*;
 import duke.task.*;
 
 public class Parser {
+    static Map<String, String> commandMap = new HashMap<>();
 
     /**
      * Parses a line of user input, splits it via regex (~), creates a Command object with required information
@@ -26,7 +30,7 @@ public class Parser {
         Task task;
         int index;
 
-        switch (command) {
+        switch (Parser.getMappedCommand(command)) {
         case "list":
             if (remainingText != null) {
                 throw new DukeException(ExceptionTypeEnum.INCORRECT_LIST);
@@ -39,7 +43,7 @@ public class Parser {
             }
             return new FindCommand(remainingText);
 
-        case "schedule":
+        case "view":
             if (remainingText == null) {
                 throw new DukeException(ExceptionTypeEnum.MISSING_SCHEDULE_DATE);
             }
@@ -99,8 +103,31 @@ public class Parser {
             }
             return new ByeCommand();
 
+        case "unknown":
         default:
             throw new DukeException(ExceptionTypeEnum.UNKNOWN_COMMAND);
         }
+    }
+
+
+    private static String getMappedCommand(String command) {
+        commandMap.put("list", "list");
+        commandMap.put("l", "list");
+        commandMap.put("todo", "todo");
+        commandMap.put("t", "todo");
+        commandMap.put("deadline", "deadline");
+        commandMap.put("d", "deadline");
+        commandMap.put("event", "event");
+        commandMap.put("e", "event");
+        commandMap.put("done", "done");
+        commandMap.put("delete", "delete");
+        commandMap.put("-d", "delete");
+        commandMap.put("find", "find");
+        commandMap.put("f", "find");
+        commandMap.put("view", "view");
+        commandMap.put("v", "view");
+        commandMap.put("bye", "bye");
+        commandMap.put("x", "bye");
+        return Optional.ofNullable(commandMap.get(command)).orElse("unknown");
     }
 }
