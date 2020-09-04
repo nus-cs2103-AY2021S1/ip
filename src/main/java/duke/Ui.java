@@ -2,9 +2,12 @@ package duke;
 
 import java.util.Scanner;
 
+import duke.exception.UiMessageException;
+
 public class Ui {
 
-    private final static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
+    private String message;
 
     /**
      * Prints welcome message
@@ -12,6 +15,34 @@ public class Ui {
     public void showWelcome() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can i do for you?");
+    }
+
+    /**
+     * Set's message in UI to input message
+     * @param message To over write UI's message
+     */
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    /**
+     * Returns the String message embedded in UI
+     * @return String representation of message
+     * @throws UiMessageException Thrown when message is empty
+     */
+    public String getMessage() throws UiMessageException {
+        if (message == null || message.equals("")) {
+            throw new UiMessageException("Message is empty for UI! Please setMessage");
+        } else {
+            return message;
+        }
+    }
+
+    /**
+     * Clears message found in UI
+     */
+    public void clearMessage() {
+        this.setMessage("");
     }
 
     /**
@@ -35,5 +66,13 @@ public class Ui {
      */
     public void showLine() {
         System.out.println("______________________________");
+    }
+
+    /**
+     * Returns a String of 30 underscores which represents a line
+     * @return String of 30 underscores which represents a line
+     */
+    public String getLine() {
+        return "______________________________\n";
     }
 }

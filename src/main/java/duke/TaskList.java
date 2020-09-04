@@ -1,9 +1,9 @@
 package duke;
 
-import duke.Task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
 
 public class TaskList {
     private final List<Task> taskList;
@@ -58,6 +58,10 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    /**
+     * Returns a String that represents a TaskList object
+     * @return String that represents a TaskList object
+     */
     public String toString() {
         return this.taskList.toString();
     }
