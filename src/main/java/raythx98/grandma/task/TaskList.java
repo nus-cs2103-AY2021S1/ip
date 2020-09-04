@@ -53,7 +53,7 @@ public class TaskList {
         if (match.getSize() == 0) {
             throw new InvalidIndexException("No such tasks leh...");
         }
-        return "Got it, here yur task bij\n" + match.toString();
+        return match.toString();
     }
 
     /**
@@ -64,9 +64,9 @@ public class TaskList {
     public String toString() {
         String string = "";
         if (getSize() >= 1) {
-            string = "1." + taskList.get(0).toString();
+            string = "    1. " + taskList.get(0).toString();
             for (int num = 2; num <= getSize(); num++) {
-                string = string + "\n" + num + "." + taskList.get(num - 1).toString();
+                string = string + "\n    " + num + ". " + taskList.get(num - 1).toString();
             }
         } else {
             string = "empty";

@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.addShowOnScreen("okcan done:\n" + tasks.removeTask(deleteIndex)
+        ui.addShowOnScreen("okcan deleted:\n    " + tasks.removeTask(deleteIndex)
                 + "\nNow you have " + tasks.getSize() + " tasks in the list.");
     }
 }

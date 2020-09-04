@@ -24,7 +24,7 @@ public class AddDeadlineCommand extends AddCommand {
             throw new DukeException("Invalid Description");
         }
         tasks.addTask(task);
-        ui.addShowOnScreen("Got it, here yur task bij\n" + task.toString()
+        ui.addShowOnScreen("Got it, here yur task bij\n    " + task.toString()
                 + "\nNow you have " + tasks.getSize() + " tasks in the list.");
     }
 }

@@ -8,8 +8,8 @@ import raythx98.grandma.exception.DukeException;
 import raythx98.grandma.exception.UnknownCommandException;
 import raythx98.grandma.task.Deadline;
 import raythx98.grandma.task.Event;
-import raythx98.grandma.task.ToDos;
 import raythx98.grandma.task.TaskList;
+import raythx98.grandma.task.ToDo;
 
 /**
  * Deals with the manipulation of loading and saving data.
@@ -38,9 +38,14 @@ public class Storage {
      */
     public void save() {
         if (tasks.getSize() > 0) {
-            Writer.overwrite(filepath, tasks.getTask(0).toPrint());
-            for (int i = 1; i < tasks.getSize(); i++) {
-                Writer.writeOn(filepath, "\n" + tasks.getTask(i).toPrint());
+            try {
+                Writer.overwrite(filepath, tasks.getTask(0).toPrint());
+                for (int i = 1; i < tasks.getSize(); i++) {
+                    Writer.writeOn(filepath, "\n" + tasks.getTask(i).toPrint());
+                }
+            } catch (DukeException e) {
+                //Find a way to send error message
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -59,7 +64,7 @@ public class Storage {
                 String[] dataSplit = data.split("\\|");
                 switch (dataSplit[0]) {
                 case TODO:
-                    tasks.addTask(new ToDos(dataSplit));
+                    tasks.addTask(new ToDo(dataSplit));
                     break;
                 case DEADLINE:
                     tasks.addTask(new Deadline(dataSplit));

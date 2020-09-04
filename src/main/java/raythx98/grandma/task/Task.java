@@ -1,14 +1,23 @@
 package raythx98.grandma.task;
 
-import java.time.LocalDate;
+import raythx98.grandma.exception.DukeException;
 
 /**
  * Represents a task.
  */
-public class Task {
+public abstract class Task {
 
-    public static final String tick = "\u2713";
-    public static final String cross = "\u2718";
+    public static final String TICK = "\u2713";
+    public static final String CROSS = "\u2718";
+    public static final int TICK_BINARY = 1;
+    public static final int CROSS_BINARY = 1;
+    public static final String TODO_TAG = "T";
+    public static final String DEADLINE_TAG = "D";
+    public static final String EVENT_TAG = "E";
+    public static final String TIME_FORMAT = "HHmm";
+    public static final String DATE_FORMAT = "DDmmyy";
+    public static final String OUTPUT_TIME_FORMAT = "h:mm a";
+    public static final String OUTPUT_DATE_FORMAT = "MMM dd yyyy";
 
     protected String description;
     protected boolean isDone;
@@ -30,15 +39,11 @@ public class Task {
 
     public String getStatusIcon() {
         //return tick or X symbols
-        return isDone ? tick : cross;
+        return isDone ? TICK : CROSS;
     }
 
     public int getStatusBinary() {
-        return isDone ? 1 : 0;
-    }
-
-    public String getTaskType() {
-        return tag;
+        return isDone ? TICK_BINARY : CROSS_BINARY;
     }
 
     /**
@@ -51,7 +56,7 @@ public class Task {
         return toString();
     }
 
-    public String toPrint() {
+    public String toPrint() throws DukeException {
         return tag + "|" + getStatusBinary() + "|" + getDescription();
     }
 

@@ -18,6 +18,6 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.addShowOnScreen(tasks.findTask(keyWord));
+        ui.addShowOnScreen("Got it, here yur search results bij: \n" + tasks.findTask(keyWord));
     }
 }
