@@ -30,7 +30,7 @@ public class DoneCommand extends Command {
         int n = Parser.getDoneTaskIndex(input, list.size()) - 1;
         list.get(n).markAsDone();
         storage.reWrite(list);
-        String str = "Nice! I've marked this task as done:\n\t    " + list.get(n);
+        String str = String.format(Ui.DONE_TASK_OUTPUT_FORMAT, list.get(n));
         ui.output(str);
         return str;
     }
