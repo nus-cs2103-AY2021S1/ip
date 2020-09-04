@@ -53,7 +53,6 @@ class Storage {
         // E | isDoneInt | description | at
         // T | isDoneInt | description
 
-        // TODO: Can store Deadline, Event, Todo string instead, and can use same Enums
         File f = new File(this.filePath);
         ArrayList<ArrayList<String>> formattedOutput = new ArrayList<>();
         try {

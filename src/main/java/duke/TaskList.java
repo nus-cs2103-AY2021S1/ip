@@ -26,20 +26,21 @@ class TaskList {
      * @throws DukeException  When date is in wrong format.
      */
     TaskList(ArrayList<ArrayList<String>> taskStrings) throws DukeException {
-        //TODO: Create Enum for this, or just store as Deadline, Event, Todo
 
         for (ArrayList<String> taskString : taskStrings) {
 
             int isDoneInt = Integer.parseInt(taskString.get(1));
             boolean isDone = isDoneInt > 0;
-            switch (taskString.get(0)) {
-            case "D":
+            String taskNameString = taskString.get(0);
+            TaskNameInStorage taskNameInStorage = TaskNameInStorage.valueOf(taskNameString);
+            switch (taskNameInStorage) {
+            case D:
                 handleDeadline(taskString.get(2), taskString.get(3), isDone);
                 break;
-            case "E":
+            case E:
                 handleEvent(taskString.get(2), taskString.get(3), isDone);
                 break;
-            case "T":
+            case T:
                 handleTodo(taskString.get(2), isDone);
                 break;
             default:
