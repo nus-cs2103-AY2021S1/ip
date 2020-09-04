@@ -68,7 +68,7 @@ public class Storage {
     }
 
     /**
-     * Returns a loaded TaskList for program data storage.
+     * Returns a loaded TaskList for program data storage from the information in the text file.
      * An empty TaskList is return if content in file is empty.
      *
      * @param tasksInFile The list of tasks stored in the file.
@@ -82,24 +82,27 @@ public class Storage {
 
         for (String s : tasksInFile) {
             // The array of task content contains task's type + whether it is done + name (+ time).
-            String[] taskContentArr = s.split(" [|] ");
+            String[] taskContentParts = s.split(" [|] ");
             String taskSchedule;
-            boolean taskIsDone = taskContentArr[1].equals("1");
+
+            assert taskContentParts.length >= 3 : "The task information parsed must has at least 3 parts";
+
+            boolean taskIsDone = taskContentParts[1].equals("1");
 
             // Creates the task based on the type specified, only deadline and event tasks have time constraint.
-            switch(taskContentArr[0]) {
+            switch(taskContentParts[0]) {
             case ("T"):
-                tasksLoaded.add(new Todo(taskContentArr[2], taskIsDone));
+                tasksLoaded.add(new Todo(taskContentParts[2], taskIsDone));
                 break;
             case ("D"):
-                taskSchedule = taskContentArr[3];
+                taskSchedule = taskContentParts[3];
                 LocalDate deadlineTime = LocalDate.parse(taskSchedule, formatter);
-                tasksLoaded.add(new Deadline(taskContentArr[2], taskIsDone, deadlineTime));
+                tasksLoaded.add(new Deadline(taskContentParts[2], taskIsDone, deadlineTime));
                 break;
             case ("E"):
-                taskSchedule = taskContentArr[3];
+                taskSchedule = taskContentParts[3];
                 LocalDate eventTime = LocalDate.parse(taskSchedule, formatter);
-                tasksLoaded.add(new Event(taskContentArr[2], taskIsDone, eventTime));
+                tasksLoaded.add(new Event(taskContentParts[2], taskIsDone, eventTime));
                 break;
             default:
                 break;

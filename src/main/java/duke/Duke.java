@@ -5,6 +5,7 @@ import duke.task.TaskList;
 
 /** Driver class for duke.Duke chat bot called "Jarvis" */
 public class Duke {
+    private static final String STORAGE_PATH = "data/duke.txt";
     private final Storage storage;
     private final CommandAgent agent;
     private final Ui ui;
@@ -65,7 +66,9 @@ public class Duke {
      * @param args The main() function arguments.
      */
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        assert STORAGE_PATH.contains(".txt") : "The storage path must contains a valid .txt file";
+
+        new Duke(STORAGE_PATH).run();
     }
 
     /**

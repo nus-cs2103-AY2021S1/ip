@@ -10,17 +10,7 @@ public abstract class Task {
     protected final boolean isDone;
 
     /**
-     * Initializes a task instance via its name.
-     *
-     * @param name The name of the task.
-     */
-    public Task(String name) {
-        this.name = name;
-        this.isDone = false;
-    }
-
-    /**
-     * Overloads the initialization of task by checking its name and whether it is done.
+     * Initializes a task by checking its name and whether it is done.
      *
      * @param name The name of the task.
      * @param isDone The boolean indicating if the task is done.

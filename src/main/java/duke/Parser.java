@@ -22,10 +22,9 @@ public class Parser {
      * @throws DukeException If the command construction involves error or the DateTime parsing involves error.
      */
     public static Command parseCommand(String userInput) throws DukeException {
-        String[] words = userInput.split(" ");
-        String commandWord = words[0];
-        boolean hasOnlyOneWord = words.length == 1;
-        String content = hasOnlyOneWord ? "" : Parser.generateContent(words);
+        String[] inputParts = userInput.split(" ");
+        String commandWord = inputParts[0];
+        String content = Parser.generateContent(inputParts);
 
         try {
             switch (commandWord) {
@@ -56,14 +55,22 @@ public class Parser {
     /**
      * Generates content for the input without the command word.
      *
-     * @param words User input parsed into an array of string.
+     * @param inputParts User input parsed into an array of string.
      * @return A String representing the parts of the user input without the command word.
      */
-    public static String generateContent(String[] words) {
-        StringBuilder result = new StringBuilder(words[1]);
-        for (int i = 2; i < words.length; i++) {
-            result.append(" ").append(words[i]);
+    public static String generateContent(String[] inputParts) {
+        assert inputParts.length >= 1 : "Input must not be empty.";
+
+        boolean hasOnlyOneWord = inputParts.length == 1;
+        if (hasOnlyOneWord) {
+            return "";
         }
+
+        StringBuilder result = new StringBuilder(inputParts[1]);
+        for (int i = 2; i < inputParts.length; i++) {
+            result.append(" ").append(inputParts[i]);
+        }
+
         return result.toString();
     }
 }
