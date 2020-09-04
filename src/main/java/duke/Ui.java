@@ -160,6 +160,18 @@ public class Ui {
         System.out.println("Sorry, I could not answer that ..");
     }
 
+    /**
+     * Prints the relevant task to the key word
+     */
+
+    public void printFound(String keyWord, TaskList taskList){
+        for (int i = 1; i < taskList.taskCounts + 1; i++) {
+            Task task = taskList.tasks.get(i - 1);
+            if (task.toString().contains(keyWord)) {
+                System.out.println("" + i + "." + task);
+            }
+        }
+    }
     public void failToLoad() {
         System.out.println("Ka To:");
         System.out.println(" ");

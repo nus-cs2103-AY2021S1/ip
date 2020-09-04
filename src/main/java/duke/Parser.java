@@ -61,6 +61,12 @@ public class Parser {
                 }
             }
             Storage.updateTasks(taskList.getTaskCounts(), taskList.tasks, filePath);
+        } else if (commandFront.equals("find")) {
+            if(taskList.tasks.isEmpty()){
+                ui.printEmptyList();
+            }else {
+                ui.printFound(portions[1], taskList);
+            }
         } else if (commandFront.equals("bye")) {
             ui.printBye();
             System.exit(0);
