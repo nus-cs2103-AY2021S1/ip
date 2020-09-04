@@ -47,6 +47,7 @@ public class AddCommand extends Command {
         default:
             throw new DukeException("Word not recognised!");
         }
+        assert t != null;
 
         ui.reset();
         ui.addSentence("pingu has added: " + t);

@@ -31,4 +31,6 @@ public class Duke {
         Command command = Parser.parse(input);
         return command.execute(tasks, ui, storage);
     }
+
 }
+
