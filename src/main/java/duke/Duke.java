@@ -1,9 +1,9 @@
 package duke;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import duke.command.Command;
+import duke.exception.DukeFileNotFoundException;
+import duke.exception.DukeIoException;
 import duke.exception.InvalidInstructionFormatException;
 import duke.exception.InvalidInstructionLengthException;
 import duke.exception.InvalidTaskIndexException;
@@ -14,6 +14,7 @@ import duke.logic.StorageManager;
 import duke.logic.TaskList;
 import duke.logic.UiManager;
 import duke.logic.UserInputParser;
+
 
 
 /**
@@ -33,9 +34,8 @@ public class Duke {
         this.storageManager = new StorageManager(CommonString.DUKE_FILE_PATH.toString());
         try {
             this.taskList = new TaskList(storageManager.loadData());
-        } catch (FileNotFoundException e) {
-            System.out.println("Cannot Load Data: " + e.getMessage());
-            e.printStackTrace();
+        } catch (DukeFileNotFoundException e) {
+            System.out.println(e.toString());
             taskList = new TaskList(new ArrayList<>());
         }
     }
@@ -70,13 +70,9 @@ public class Duke {
                 isExit = command.getExitStatus();
             } catch (UnknownInstructionException | InvalidInstructionFormatException
                     | MissingFieldException | TaskDoneException
-                    | InvalidInstructionLengthException | InvalidTaskIndexException e) {
+                    | InvalidInstructionLengthException | InvalidTaskIndexException | DukeIoException e) {
                 System.out.println(e);
-            } catch (IOException e) {
-                System.out.println("IO Error: " + e.getMessage());
-                e.printStackTrace();
             }
-
             uiManager.printLine();
         }
 
@@ -99,10 +95,8 @@ public class Duke {
             output = command.getResponse();
         } catch (UnknownInstructionException | InvalidInstructionFormatException
                 | MissingFieldException | TaskDoneException
-                | InvalidInstructionLengthException | InvalidTaskIndexException e) {
+                | InvalidInstructionLengthException | InvalidTaskIndexException | DukeIoException e) {
             output = e.guiString();
-        } catch (IOException e) {
-            output = e.getMessage();
         }
         return output;
     }

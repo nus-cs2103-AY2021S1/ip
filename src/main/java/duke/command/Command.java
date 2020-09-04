@@ -1,12 +1,11 @@
 package duke.command;
-import java.io.IOException;
 
+import duke.exception.DukeIoException;
 import duke.exception.InvalidTaskIndexException;
 import duke.exception.TaskDoneException;
 import duke.logic.CommandInteractionUi;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
-
 
 
 /**
@@ -50,9 +49,8 @@ public abstract class Command {
      * @param isGuiTask      <code>boolean</code> object to denote GUI task
      * @throws InvalidTaskIndexException If user input validation fails.
      * @throws TaskDoneException         If user input validation fails.
-     * @throws IOException               If saving of data fails.
      */
     public abstract void execute(TaskList taskList, CommandInteractionUi uiManager,
                                  StorageManager storageManager, boolean isGuiTask)
-            throws IOException, InvalidTaskIndexException, TaskDoneException;
+            throws InvalidTaskIndexException, TaskDoneException, DukeIoException;
 }

@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import duke.exception.DukeFileNotFoundException;
+import duke.exception.DukeIoException;
 import org.junit.jupiter.api.Test;
 
 import duke.logic.StorageManager;
@@ -15,7 +17,7 @@ import duke.task.TodoTask;
 
 public class StorageManagerTest {
     @Test
-    public void testLoadData() throws FileNotFoundException {
+    public void testLoadData() throws DukeFileNotFoundException {
         String path = "src/test/java/data/input.txt";
         StorageManager manager = new StorageManager(path);
         ArrayList<DukeTask> tasks = new ArrayList<>();
@@ -26,7 +28,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void testSaveData() throws IOException {
+    public void testSaveData() throws IOException, DukeIoException {
         String path = "src/test/java/data/output.txt";
         StorageManager manager = new StorageManager(path);
         ArrayList<DukeTask> tasks = new ArrayList<>();

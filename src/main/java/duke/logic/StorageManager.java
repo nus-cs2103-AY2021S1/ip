@@ -9,10 +9,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.CommonString;
+import duke.exception.DukeFileNotFoundException;
+import duke.exception.DukeIoException;
 import duke.task.DeadlineTask;
 import duke.task.DukeTask;
 import duke.task.EventTask;
 import duke.task.TodoTask;
+
 
 
 /**
@@ -38,9 +41,9 @@ public class StorageManager {
      * Location of the <code>DukeTask</code> is extracted from the <code>filePath</code>.
      *
      * @return ArrayList denoting the list of <code>DukeTask</code>
-     * @throws FileNotFoundException If the file to load from does not exist
+     * @throws DukeFileNotFoundException If the file to load from does not exist
      */
-    public ArrayList<DukeTask> loadData() throws FileNotFoundException {
+    public ArrayList<DukeTask> loadData() throws DukeFileNotFoundException {
         ArrayList<DukeTask> dataList = new ArrayList<>();
 
         File dataFile = new File(filePath);
@@ -52,34 +55,39 @@ public class StorageManager {
         try {
             dataFile.createNewFile();
         } catch (IOException e) {
-            System.out.println("Problem with creating data file\n" + e.getMessage());
+            throw new DukeFileNotFoundException("Problem with creating data file\n" + e.getMessage());
         }
 
         // read from data file
         if (dataFile.exists()) {
-            Scanner fileScanner = new Scanner(dataFile);
-            while (fileScanner.hasNextLine()) {
-                // regenerate the DukeTasks
-                String savedTask = fileScanner.nextLine();
-                String[] taskData = savedTask.split("\\|");
-                DukeTask task;
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
-                        CommonString.DUKE_DATETIME_FORMAT.toString());
-                switch (taskData[0]) {
-                case "T":
-                    task = new TodoTask(taskData[2]);
-                    break;
-                case "E":
-                    task = new EventTask(taskData[2], LocalDateTime.parse(taskData[3], formatter));
-                    break;
-                default: // "D"
-                    task = new DeadlineTask(taskData[2], LocalDateTime.parse(taskData[3], formatter));
+            try {
+                Scanner fileScanner = new Scanner(dataFile);
 
+                while (fileScanner.hasNextLine()) {
+                    // regenerate the DukeTasks
+                    String savedTask = fileScanner.nextLine();
+                    String[] taskData = savedTask.split("\\|");
+                    DukeTask task;
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+                            CommonString.DUKE_DATETIME_FORMAT.toString());
+                    switch (taskData[0]) {
+                    case "T":
+                        task = new TodoTask(taskData[2]);
+                        break;
+                    case "E":
+                        task = new EventTask(taskData[2], LocalDateTime.parse(taskData[3], formatter));
+                        break;
+                    default: // "D"
+                        task = new DeadlineTask(taskData[2], LocalDateTime.parse(taskData[3], formatter));
+
+                    }
+                    if (taskData[1].equals("1")) {
+                        task.markAsDone();
+                    }
+                    dataList.add(task);
                 }
-                if (taskData[1].equals("1")) {
-                    task.markAsDone();
-                }
-                dataList.add(task);
+            } catch (FileNotFoundException e) {
+                throw new DukeFileNotFoundException(e.getMessage());
             }
         }
 
@@ -93,9 +101,9 @@ public class StorageManager {
      * [TYPE]|[DONE]|[DESCRIPTION]|[DATETIME (if applicable)].
      * TYPE: T,E,D. DONE: 1 or 0
      *
-     * @throws IOException If saving of the data fails
+     * @throws DukeIoException If saving of the data fails
      */
-    public void saveData(ArrayList<DukeTask> dataList) throws IOException {
+    public void saveData(ArrayList<DukeTask> dataList) throws DukeIoException {
         StringBuilder dataString = new StringBuilder();
         for (DukeTask task : dataList) {
             String addition = "";
@@ -119,9 +127,13 @@ public class StorageManager {
 
         String output = dataString.toString();
 
-        FileWriter writer = new FileWriter(filePath);
-        writer.write(output);
-        writer.close();
+        try {
+            FileWriter writer = new FileWriter(filePath);
+            writer.write(output);
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeIoException(e.getMessage());
+        }
     }
 
 
