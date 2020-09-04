@@ -5,6 +5,7 @@ import duke.DukeException;
 
 /** A subclass of Command which sends request to mark a task in list as done */
 public class DeleteCommand extends Command {
+    protected static final String DELETE_REQUEST = "create";
 
     /**
      * Creates a DeleteCommand.
@@ -26,6 +27,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public String sendRequest() {
-        return "delete";
+        return DELETE_REQUEST;
     }
 }

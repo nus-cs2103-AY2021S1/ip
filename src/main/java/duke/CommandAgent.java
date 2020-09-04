@@ -59,47 +59,81 @@ public class CommandAgent {
      * @return A String response for the user.
      */
     public static String executeCommand(Command command) {
-        String response = "";
         String commandRequest = command.sendRequest();
-        int taskId;
+        List<String> commandContents = command.getContent();
         try {
             switch (commandRequest) {
             case "end":
-                response += "Bye. Hope to see you again soon!";
-                break;
+                return generateEndResponse();
             case "create":
-                List<String> taskInfo = command.getContent();
-                Task newTask = createTask(taskInfo);
-                taskList = taskList.addTask(newTask);
-                response += generateCreateResponse();
-                break;
+                executeCreateTask(commandContents);
+                return generateCreateResponse();
             case "retrieval":
-                response += generateRetrievalResponse();
-                break;
+                return generateRetrievalResponse();
             case "update":
-                List<String> updateList = command.getContent();
-                taskId = Integer.parseInt(updateList.get(0));
-                taskList = taskList.markAsDone(taskId);
-                response += generateUpdateResponse(taskId);
-                break;
+                int taskId = executeUpdateTask(commandContents);
+                return generateUpdateResponse(taskId);
             case "delete":
-                List<String> deleteList = command.getContent();
-                taskId = Integer.parseInt(deleteList.get(0));
-                Task deletedTask = taskList.getTaskById(taskId);
-                taskList = taskList.deleteTask(taskId);
-                response += generateDeleteResponse(deletedTask);
-                break;
+                Task deletedTask = executeDeleteTask(commandContents);
+                return generateDeleteResponse(deletedTask);
             case "search":
-                List<String> keywordList = command.getContent();
-                response += generateSearchResponse(keywordList.get(0));
-                break;
+                String matchedTasks = executeSearchTask(commandContents);
+                return generateSearchResponse(matchedTasks);
             default:
-                break;
+                throw new DukeException("Something is wrong. The command you input is not processed.");
             }
         } catch (DateTimeParseException | DukeException e) {
-            response += e.getMessage();
+            return e.getMessage();
         }
-        return response;
+    }
+
+    /**
+     * Executes the command which requests the bot to create a task and store it to task list.
+     *
+     * @param commandContents a list of task information used to create a new task.
+     * @throws DateTimeParseException thrown from createTask process.
+     * @throws DukeException if thrown from createTask process.
+     */
+    public static void executeCreateTask(List<String> commandContents) throws DateTimeParseException, DukeException {
+        Task newTask = createTask(commandContents);
+        taskList = taskList.addTask(newTask);
+    }
+
+    /**
+     * Executes the command which requests the bot to update a task as done.
+     *
+     * @param commandContents a list of task information used to update the task.
+     * @return An integer indicating the task getting updated.
+     * @throws DukeException if thrown from markAsDone process.
+     */
+    public static int executeUpdateTask(List<String> commandContents) throws DukeException {
+        int taskId = Integer.parseInt(commandContents.get(0));
+        taskList = taskList.markAsDone(taskId);
+        return taskId;
+    }
+
+    /**
+     * Executes the command which requests the bot to delete a task.
+     *
+     * @param commandContents a list of task information used to delete the task.
+     * @return The task getting deleted.
+     */
+    public static Task executeDeleteTask(List<String> commandContents) {
+        int taskId = Integer.parseInt(commandContents.get(0));
+        Task deletedTask = taskList.getTaskById(taskId);
+        taskList = taskList.deleteTask(taskId);
+        return deletedTask;
+    }
+
+    /**
+     * Executes the command which requests the bot to search for tasks related to a particular keyword.
+     *
+     * @param commandContents a list of task information used to search for the related tasks.
+     * @return The string including all the matching tasks related to the keyword.
+     */
+    public static String executeSearchTask(List<String> commandContents) {
+        String keyword = commandContents.get(0);
+        return taskList.findTasksByKeyword(keyword);
     }
 
     /**
@@ -117,6 +151,7 @@ public class CommandAgent {
 
         String identifier = taskInfo.get(0);
         String name = taskInfo.get(1);
+        String schedule;
 
         assert identifier.equals("E") | identifier.equals("D") | identifier.equals("T") : "identifier is invalid";
 
@@ -125,7 +160,6 @@ public class CommandAgent {
             throw new DukeException("☹ OOPS!!! This task has already been stored in the list!");
         }
 
-        String schedule;
         switch (identifier) {
         case "E":
             schedule = taskInfo.get(2);
@@ -140,6 +174,14 @@ public class CommandAgent {
         default:
             throw new DukeException("☹ OOPS!!! This type of task cannot be created by me!");
         }
+    }
+
+    /**
+     * Informs the user the program is ended.
+     * @return a message telling the user his/her exit message ends the program successfully.
+     */
+    public static String generateEndResponse() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -196,12 +238,12 @@ public class CommandAgent {
     /**
      * Generates the response for the searching of all the tasks containing the specified keyword.
      *
-     * @param keyword The keyword which must be present in the desired task name.
+     * @param matchedTasks The keyword which must be present in the desired task name.
      * @return A String showing the response to the user with all the tasks desired.
      */
-    public static String generateSearchResponse(String keyword) {
+    public static String generateSearchResponse(String matchedTasks) {
         String result = "Here are the matching tasks in your list:";
-        result += taskList.findTasksByKeyword(keyword);
+        result += matchedTasks;
         return result;
     }
 }
