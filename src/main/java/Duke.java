@@ -3,27 +3,41 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String FILE_PATH = "data/DukeDB.txt";
+    private Storage storage;
+    private TaskManager tm;
+    private Ui ui;
 
-    public static void main(String[] args) throws IOException {
-        String welcome = "Hello. I am Claude! What may I do for you today?";
-        String goodbye = "Goodbye! Hope to see you again soon!";
-        Scanner sc = new Scanner(System.in);
-        TaskManager tm = new TaskManager(FILE_PATH);
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage(FILE_PATH);
+        try {
+            tm = new TaskManager((storage.load()));
+        } catch (Exception e) {
+            ui.showLoadingError();
+            tm = new TaskManager();
+        }
+    }
 
-        System.out.println(welcome);
-        while (sc.hasNext()) {
-            String command = sc.nextLine();
-            if (command.equals("bye")) {
-                break;
-            } else {
-                try {
-                    tm.parseCommand(command);
-                } catch (DukeException e) {
-                    System.out.println(e);
-                }
+    public void run() {
+        ui.showWelcome();;
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = CommandParser.parse(fullCommand);
+                c.execute(tm, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e);
+            } finally {
+                ui.showLine();
             }
         }
-        tm.saveToFile(FILE_PATH);
-        System.out.println(goodbye);
+    }
+
+
+    public static void main(String[] args) throws IOException {
+        new Duke().run();
     }
 }

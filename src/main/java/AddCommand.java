@@ -1,0 +1,47 @@
+import java.time.LocalDate;
+
+public class AddCommand extends Command{
+
+    public AddCommand(String command){
+        super(command);
+    }
+
+    @Override
+    public void execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
+        if (command.startsWith("deadline")){
+            if (command.length() <= 9) {
+                throw new DukeException("Description of a deadline cannot be empty!");
+            }
+            String[] commandDetails = command.substring(9).split(" /by ");
+            if (commandDetails.length < 2) {
+                throw new DukeException("Deadline not properly formatted!");
+            }
+            LocalDate dlDate = LocalDate.parse(commandDetails[1]);
+            Deadline deadline = new Deadline(commandDetails[0], dlDate);
+            tm.addTask(deadline);
+            ui.showDetails("Task added: " + deadline);
+        } else if (command.startsWith("event")) {
+            if (command.length() <= 6) {
+                throw new DukeException("Description of a deadline cannot be empty!");
+            }
+            String[] commandDetails = command.substring(6).split(" /at ");
+            if (commandDetails.length < 2) {
+                throw new DukeException("Event not properly formatted!");
+            }
+            LocalDate eventDate = LocalDate.parse(commandDetails[1]);
+            Event event = new Event(commandDetails[0], eventDate);
+            tm.addTask(event);
+            ui.showDetails("Task added: " + event);
+        } else if (command.startsWith("todo")) {
+            if (command.length() <= 5) {
+                throw new DukeException("Description of a deadline cannot be empty!");
+            }
+            String commandDetails = command.substring(5);
+            ToDo todo = new ToDo(commandDetails);
+            tm.addTask(todo);
+            ui.showDetails("Task added: " + todo);
+        } else {
+            throw new DukeException("Command not recognised!");
+        }
+    }
+}
