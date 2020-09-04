@@ -4,6 +4,10 @@ package duke;
  * Presents Duke class with "Ka To"
  * Interacts with the user and answers user commands
  * Manages the task list of the user
+<<<<<<< HEAD
+=======
+ * Follows the coding standard
+>>>>>>> branch-A-CodingStandard
  */
 
 public class Duke {
