@@ -1,17 +1,9 @@
 package duke.main;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-import duke.errors.DeadlineException;
-import duke.errors.EmptyDescException;
-import duke.errors.EventTaskException;
 import duke.errors.InvalidCommandException;
-import duke.errors.InvalidIndexException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
 import duke.tasks.Task;
-import duke.tasks.Todo;
 
 /**
  * The type Ui.
