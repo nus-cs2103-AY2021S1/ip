@@ -31,7 +31,9 @@ public class Parser {
      * @throws DukeException DukeException if command is not in legal form.
      */
     public static String parseCommand(String command) throws DukeException {
-        if (command.equals("bye")) {
+        if (command.equals("hi")) {
+            return Ui.greet();
+        } else if (command.equals("bye")) {
             Storage.writeToFile(taskList);
             return Ui.getExitMessage();
         } else if (command.equals("list")) {
