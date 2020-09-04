@@ -1,6 +1,5 @@
 package duke;
 
-import java.awt.image.BandedSampleModel;
 import java.util.Arrays;
 import java.util.List;
 import java.util.zip.DataFormatException;
@@ -41,16 +40,13 @@ public class Parser {
                 return Parser.understandMatchingString(editedAnswer, taskList);
 
             } else if (Commands.LIST.containsKeyWord(commandWord)) {
-                Command command = new ListCommand();
-                return command.execute(" ", taskList);
+                return (new ListCommand()).execute(" ", taskList);
 
             } else if (Commands.EXIT.containsKeyWord(commandWord)) {
-                Command command = new ByeCommand();
-                return command.execute(" ", taskList);
+                return (new ByeCommand()).execute(" ", taskList);
 
             } else if (Commands.HELLO.containsKeyWord(commandWord)) {
-                Command command = new HelloCommand();
-                return command.execute(" ", taskList);
+                return (new HelloCommand()).execute(" ", taskList);
 
             } else if (Commands.TODO.containsKeyWord(commandWord)
                     || Commands.DEADLINE.containsKeyWord(commandWord)
@@ -111,7 +107,7 @@ public class Parser {
                     Command command = new AddCommand(type);
                     return command.execute(task, taskList);
                 } else {
-                    // it is an event or deadline
+                    // it is either an event or deadline
                     return Parser.understandDeadlineOrEventDate(type, task, taskList);
                 }
             } else {
