@@ -13,7 +13,7 @@ class TaskListTest {
 
     @Test
     // Check: After adding one task, the number of tasks increase by one.
-    void addToList() {
+    void addToList_addOneTask_success() {
         store.clearFile();
         listOfTask = store.retrieveStorage();
         list = new TaskList(listOfTask, store);
@@ -25,7 +25,7 @@ class TaskListTest {
 
     @Test
     // Check: After removing one task, the number of tasks decrease by one.
-    void removeTask() {
+    void removeTask_removeOneTask_success() {
         store.clearFile();
         listOfTask = store.retrieveStorage();
         list = new TaskList(listOfTask, store);
@@ -51,7 +51,7 @@ class TaskListTest {
     }
 
     @Test
-    void findTask() {
+    void findTask_taskExists_success() {
         store.clearFile();
         listOfTask = store.retrieveStorage();
         list = new TaskList(listOfTask, store);
@@ -62,5 +62,19 @@ class TaskListTest {
         list.addToList(new ToDoTask(activity2, TaskSymbol.TODO));
         list.findTask("read");
         assertEquals(1, list.getKeyList().size());
+    }
+
+    @Test
+    void findTask_taskDoesNotExists_success() {
+        store.clearFile();
+        listOfTask = store.retrieveStorage();
+        list = new TaskList(listOfTask, store);
+        String activity1 = "read book";
+        String activity2 = "go Home";
+        // Add 2 tasks
+        list.addToList(new ToDoTask(activity1, TaskSymbol.TODO));
+        list.addToList(new ToDoTask(activity2, TaskSymbol.TODO));
+        list.findTask("library");
+        assertEquals(0, list.getKeyList().size());
     }
 }

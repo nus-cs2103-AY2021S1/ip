@@ -4,12 +4,12 @@ package willy.ui;
  * Greetings that the bot can do.
  */
 public class Greet {
-    String originalGreeting;
-    String greeting;
-    String style = "\t________________________________________________________________\n";
-    String startGreeting = "\tHello I'm Willy and I am here for u! \n" +
+    private String originalGreeting;
+    private String greeting;
+    private String style = "\t________________________________________________________________\n";
+    private String startGreeting = "\tHello I'm Willy and I am here for u! \n" +
             "\tTell me what u need to do and I will help u keep track of it :)\n";
-    String exitGreeting = "\tByee See you again soon!\n";
+    private String exitGreeting = "\t  Byee See you again soon!:)\n";
 
     public Greet() {
         this.originalGreeting = null;

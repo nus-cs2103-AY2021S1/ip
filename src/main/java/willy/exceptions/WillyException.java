@@ -1,5 +1,7 @@
 package willy.exceptions;
 
+import willy.ui.Willy;
+
 /**
  * Handles the errors that may arise in the process of using the bot.
  */
@@ -22,6 +24,6 @@ public class WillyException extends Exception {
 
     @Override
     public String toString() {
-        return style + "\t" + error + "\n" + style;
+        return Willy.response(error);
     }
 }

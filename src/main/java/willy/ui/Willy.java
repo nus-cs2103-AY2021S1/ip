@@ -26,7 +26,7 @@ import willy.command.Parser;
 public class Willy extends Application {
 
     private static TaskStore storage;
-    private static String style = "\t________________________________________________________________\n";
+    private static String style = "\t_____________________________________________________________________________\n";
     private static String logo = "__       ____       __\n"
             + "\\  \\    /    \\    /  /\n"
             + " \\  \\  /  /\\  \\  /  /\n"
@@ -38,7 +38,7 @@ public class Willy extends Application {
             + "\t   \\  \\/  /  \\  \\/  /\n"
             + "\t    \\___/     \\__/ ILLY ~(^-^)~\n" +
             "\t    Your personal life secretary\n";
-    private boolean isOnJavaFX;
+    private static boolean isOnJavaFX;
 
     public Willy() {
         this.isOnJavaFX = false;
@@ -68,8 +68,12 @@ public class Willy extends Application {
         return introGUI;
     }
 
-    public boolean isOnJavaFX() {
+    public static boolean isOnJavaFX() {
         return isOnJavaFX;
+    }
+
+    public static String response(String message) {
+        return  style + "\t" + message + "\n" + style;
     }
 
     @Override
@@ -86,7 +90,7 @@ public class Willy extends Application {
 
         Label willy = new Label(introGUI); // Creating a new Label control
         Greet startDuke = new Greet();
-        Label changingCommands = new Label(startDuke.toString());
+        Label changingCommand = new Label(startDuke.toString());
         willy.setAlignment(Pos.CENTER);
         TextField inputField = new TextField();
         inputField.setPromptText("State tasks to track");
@@ -96,7 +100,7 @@ public class Willy extends Application {
         enterButton.setOnAction(action -> {
                 String message = inputField.getText();
                 inputField.clear();
-                changingCommands.setText(parser.javaFXParse(message)); // Returns Response
+                changingCommand.setText(parser.parse(message, true)); // Returns Response
         });
         clearButton.setOnAction(action -> {
             inputField.clear();
@@ -107,7 +111,7 @@ public class Willy extends Application {
         hbox.setPadding(new Insets(10, 20, 5, 30));
         hbox.getChildren().addAll(inputField, enterButton, clearButton);
         VBox vbox = new VBox(); // Positions components in a vertical column
-        vbox.getChildren().addAll(willy, hbox, changingCommands);
+        vbox.getChildren().addAll(willy, hbox, changingCommand);
 
         StackPane layout = new StackPane();
         layout.getChildren().addAll(vbox);
@@ -128,7 +132,7 @@ public class Willy extends Application {
 
         while (input.hasNext()) {
             String message = input.nextLine();
-            parser.parse(message);
+            parser.parse(message, false);
         }
         input.close();
     }
