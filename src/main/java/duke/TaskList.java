@@ -1,8 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import duke.exception.DukeException;
@@ -76,7 +74,11 @@ public class TaskList {
      * @return An ArrayList of string representations of tasks that match the keyword.
      */
     public ArrayList<String> find(String[] keywords) {
-        return mapTasks(filterTasks(taskStore, task -> task.contains(keywords)), Task::toString);
+        return taskStore
+                .stream()
+                .filter(task -> task.contains(keywords))
+                .map(Task::toString)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
@@ -85,7 +87,10 @@ public class TaskList {
      * @return An ArrayList of string representation of each task in the taskList.
      */
     public ArrayList<String> getListRepr() {
-        return mapTasks(taskStore, Task::toString);
+        return taskStore
+                .stream()
+                .map(Task::toString)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
@@ -95,7 +100,10 @@ public class TaskList {
      * task in the taskList.
      */
     public ArrayList<String> getData() {
-        return mapTasks(taskStore, Task::getData);
+        return taskStore
+                .stream()
+                .map(Task::getData)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
@@ -107,13 +115,5 @@ public class TaskList {
         int storeSize = taskStore.size();
         return "There " + (storeSize > 1 ? "are " : "is ") + "now " + storeSize + " " +
                 (storeSize > 1 ? "tasks " : "task ") + "in your list!";
-    }
-
-    private static ArrayList<String> mapTasks(ArrayList<Task> taskStore, Function<Task, String> mapper) {
-        return taskStore.stream().map(mapper).collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    private static ArrayList<Task> filterTasks(ArrayList<Task> taskStore, Predicate<Task> pred) {
-        return taskStore.stream().filter(pred).collect(Collectors.toCollection(ArrayList::new));
     }
 }
