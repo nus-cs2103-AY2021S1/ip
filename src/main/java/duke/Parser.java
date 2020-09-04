@@ -24,6 +24,9 @@ import duke.tasks.TodoTask;
  */
 public class Parser {
 
+    private static int SINGLE_INPUT_COMMAND_SIZE = 1;
+    private static int DOUBLE_INPUT_COMMAND_SIZE = 2;
+
 
     /**
      * Parses user input.
@@ -118,38 +121,38 @@ public class Parser {
     private static String[] parseSegments(String input, String cmd, String breakPt) throws DukeException {
         checkIllegalChar(input);
 
-        int size = 2;
+        int size = DOUBLE_INPUT_COMMAND_SIZE;
         if (breakPt.equals("")) {
-            size = 1;
+            size = SINGLE_INPUT_COMMAND_SIZE;
         }
         String[] res = new String[size];
 
-        String[] splitByBP1 = input.split(cmd);
-        if (splitByBP1.length <= 1) {
+        String[] splitByCmd = input.split(cmd);
+        if (splitByCmd.length <= 1) {
             throw new DukeException(cmd + " description cannot be empty!");
         }
 
-        String description = splitByBP1[1].trim();
+        String description = splitByCmd[1].trim();
         if (description.equals("")) {
             throw new DukeException(cmd + " description cannot be empty!");
         }
 
-        if (size == 1) {
+        if (size == SINGLE_INPUT_COMMAND_SIZE) {
             res[0] = description;
             return res;
         }
 
-        String[] splitByBP2 = description.split(breakPt);
+        String[] splitByBreakPt = description.split(breakPt);
         if (!description.contains(breakPt)) {
             throw new DukeException(breakPt + " keyword must be in input for all " + cmd + " commands!");
         }
 
-        if (splitByBP2.length <= 1 || splitByBP2[1].trim().equals("")) {
+        if (splitByBreakPt.length <= 1 || splitByBreakPt[1].trim().equals("")) {
             throw new DukeException("Content after " + breakPt + " should not be empty!");
         }
 
-        res[0] = splitByBP2[0].trim();
-        res[1] = splitByBP2[1].trim();
+        res[0] = splitByBreakPt[0].trim();
+        res[1] = splitByBreakPt[1].trim();
 
         return res;
     }
