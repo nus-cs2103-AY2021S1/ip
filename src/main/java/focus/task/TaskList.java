@@ -51,6 +51,7 @@ public class TaskList {
         String printing = "\tGotcha! I've added this task:\n\t"
                 + toDo + "\n\t" + "You have "
                 + taskList.size() + " tasks on your list now.\n";
+        assert !printing.isEmpty() : "Printing should not blank here.";
         return printing;
     }
 
@@ -69,6 +70,7 @@ public class TaskList {
         String printing = "\tGotcha! I've added this task:\n\t"
                 + deadline + "\n\t" + "You have "
                 + taskList.size() + " tasks on your list now.\n";
+        assert !printing.isEmpty() : "Printing should not blank here.";
         return printing;
     }
 
@@ -87,6 +89,7 @@ public class TaskList {
         String printing = "\tGotcha! I've added this task:\n\t"
                 + event + "\n\t" + "You have "
                 + taskList.size() + " tasks on your list now.\n";
+        assert !printing.isEmpty() : "Printing should not blank here.";
         return printing;
     }
 
@@ -105,6 +108,7 @@ public class TaskList {
                 + taskToBeDeleted
                 + "\n\tYou have " + taskList.size()
                 + " tasks on your list now.\n";
+        assert !deletedTask.isEmpty() : "Printing should not blank here.";
         return deletedTask;
     }
 
@@ -121,6 +125,7 @@ public class TaskList {
         storage.updateData(taskList);
         String doneTask = "\t\\(^O^)/ Good job! I've marked this task as done:\n\t"
                 + finishedTask + "\n\tKeep going!\n";
+        assert !doneTask.isEmpty() : "Printing should not blank here.";
         return doneTask;
     }
 
@@ -140,6 +145,7 @@ public class TaskList {
                 printing += "" + number + ". " + taskList.get(i) + "\n\t";
             }
         }
+        assert !printing.isEmpty() : "Printing should not blank here.";
         return printing;
     }
 
@@ -170,6 +176,7 @@ public class TaskList {
         } else {
             return "\tSorry, there are no tasks that match your keyword!\n";
         }
+        assert !printing.isEmpty() : "Printing should not blank here.";
         return printing;
     }
 }

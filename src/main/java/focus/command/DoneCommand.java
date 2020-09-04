@@ -36,12 +36,15 @@ public class DoneCommand extends Command {
             throw new FocusException("\tPlease enter a task number you wish to mark done!\n"
                     + "\tYou have " + taskList.getSize() + " tasks on your list now.");
         }
+        assert !indexString.isEmpty() : "Index string should not be blank here.";
 
         int index = Integer.parseInt(indexString);
         if ((index <= 0) || (index > taskList.getSize())) {
             throw new FocusException("\tThere is no such task number.\n"
                     + "\tPlease enter a valid one!");
         }
+        assert !((index <= 0) || (index > taskList.getSize())) : "Index should not be less than 0 or exceed"
+                + " task list size.";
         return taskList.markTaskDone(index, storage);
     }
 }
