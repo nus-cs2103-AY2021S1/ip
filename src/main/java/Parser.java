@@ -11,6 +11,7 @@ public class Parser {
     public static Command parse(String inputLine) throws DukeException {
         Command newTaskObject;
         String[] userInputArray = inputLine.split(" ");
+        assert(userInputArray.length > 0);
         String commandCheck = userInputArray[0];
         int numOfInput = userInputArray.length;
 
@@ -61,7 +62,7 @@ public class Parser {
 
                 if (numOfInput < 4) {
                     throw new DukeException("\u2620 Oh no! The correct way to log an event is: (event) "
-                            + "(description) (/at) (date)");
+                            + "(description) (/at) (date & time)");
                 }
 
                 boolean checkForEvent = false;
@@ -102,7 +103,7 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException error) {
                 throw new DukeException("Error encountered while parsing event command. Please ensure "
                                         + "that the event command is in the following format: "
-                                        + "(event) (description) (/at) (date).");
+                                        + "(event) (description) (/at) (date & time).");
             }
 
             break;
@@ -116,7 +117,7 @@ public class Parser {
 
                 if (numOfInput < 4) {
                     throw new DukeException("\u2620 Oh no! The correct way to log a deadline is: (deadline) "
-                                           + "(description) (/by) (date)");
+                                           + "(description) (/by) (date & time)");
                 }
 
                 boolean checkForDate = false;
@@ -157,7 +158,7 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException error) {
                 throw new DukeException("Error encountered while parsing deadline command. Please ensure "
                                         + "that the deadline command is in the following format: "
-                                        + "(deadline) (description) (/by) (date).");
+                                        + "(deadline) (description) (/by) (date & time).");
             }
             break;
 
