@@ -8,7 +8,7 @@ public class Task {
 
     protected boolean isDone;
     protected String task;
-    protected Tasktype taskType;
+    protected TaskType taskType;
     protected String duration;
 
     /**
@@ -17,7 +17,7 @@ public class Task {
      * @param taskType Type of a task
      * @param duration Time given to the task.
      */
-    public Task(String task, Tasktype taskType, String duration) {
+    public Task(String task, TaskType taskType, String duration) {
         this.task = task;
         this.taskType = taskType;
         this.isDone = false;
@@ -31,7 +31,7 @@ public class Task {
      * @param duration Time given to the task.
      * @param isDone The completion of a task.
      */
-    public Task(String task, Tasktype taskType, String duration, boolean isDone) {
+    public Task(String task, TaskType taskType, String duration, boolean isDone) {
         this.task = task;
         this.taskType = taskType;
         this.isDone = isDone;
@@ -82,7 +82,7 @@ public class Task {
      * Retrives the type of tasking that was recorded.
      * @return Type of task.
      */
-    public Tasktype getTasktype() {
+    public TaskType getTasktype() {
         return taskType;
     }
 

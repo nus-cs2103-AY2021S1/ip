@@ -1,6 +1,6 @@
 package duke;
 
-public enum Tasktype {
+enum TaskType {
     TODO {
         @Override
         public String toString() {

@@ -17,7 +17,7 @@ public class Deadline extends Task {
      * @param duration Duration assigned to the task.
      */
     public Deadline(String task, String duration) {
-        super(task, Tasktype.DEADLINE, duration);
+        super(task, TaskType.DEADLINE, duration);
     }
 
     /**
@@ -27,7 +27,7 @@ public class Deadline extends Task {
      * @param isDone Completion status of the task.
      */
     public Deadline(String task, String duration, boolean isDone) {
-        super(task, Tasktype.EVENT, duration, isDone);
+        super(task, TaskType.EVENT, duration, isDone);
         this.durationFormatted = LocalDateTime.parse(duration, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 

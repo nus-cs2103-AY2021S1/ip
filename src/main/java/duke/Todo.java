@@ -11,7 +11,7 @@ public class Todo extends Task {
      * @param task Task detail.
      */
     public Todo (String task) {
-        super(task, Tasktype.TODO, "");
+        super(task, TaskType.TODO, "");
     }
 
     /**
@@ -20,7 +20,7 @@ public class Todo extends Task {
      * @param isDone To indicate if the task is done or not.
      */
     public Todo (String task, boolean isDone) {
-        super(task, Tasktype.TODO, "", isDone);
+        super(task, TaskType.TODO, "", isDone);
     }
 
 }

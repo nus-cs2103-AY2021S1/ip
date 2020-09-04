@@ -17,7 +17,7 @@ public class Event extends Task {
      * @param duration Duration assigned to the task.
      */
     public Event (String task, String duration) {
-        super(task, Tasktype.EVENT, duration);
+        super(task, TaskType.EVENT, duration);
         this.durationFormatted = LocalDateTime.parse(duration, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
@@ -28,7 +28,7 @@ public class Event extends Task {
      * @param isDone Completion status of the task.
      */
     public Event (String task, String duration, boolean isDone) {
-        super(task, Tasktype.EVENT, duration, isDone);
+        super(task, TaskType.EVENT, duration, isDone);
         this.durationFormatted = LocalDateTime.parse(duration, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
