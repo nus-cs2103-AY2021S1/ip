@@ -6,8 +6,8 @@ import java.util.Scanner;
  * Represents a group of methods that deal with interactions with the user.
  */
 public class Ui {
-    private static final String horizontalLine = "      ===================================";
-    private static final String indentation = "      ";
+    private static final String HORIZONTAL_LINE = "      ===================================";
+    private static final String INDENTATION = "      ";
     private Scanner scanner;
 
     /**
@@ -33,8 +33,8 @@ public class Ui {
      * @param message the message to be printed
      */
     public void showMessage(Message message) {
-        System.out.println(horizontalLine);
-        message.forEach(line -> System.out.println(indentation + line));
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
+        message.forEach(line -> System.out.println(INDENTATION + line));
+        System.out.println(HORIZONTAL_LINE);
     }
 }

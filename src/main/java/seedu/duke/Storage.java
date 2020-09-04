@@ -12,23 +12,23 @@ import seedu.duke.task.Task;
  * Represents a file on which the user's tasks are stored.
  */
 public class Storage {
-    private String filepath;
+    private String filePath;
     private File file;
 
     /**
      * Class constructor.
      *
-     * @param filepath directory and name of the file to save the user's tasks to
+     * @param filePath directory and name of the file to save the user's tasks to
      * @throws DukeException if there is a problem when creating a new file on the user's system
      */
-    Storage(String filepath) throws DukeException {
-        int i = filepath.lastIndexOf("/");
+    Storage(String filePath) throws DukeException {
+        int i = filePath.lastIndexOf("/");
         if (i != -1) {
-            String directory = filepath.substring(0, i);
+            String directory = filePath.substring(0, i);
             new File(directory).mkdirs();
         }
-        this.filepath = filepath;
-        this.file = new File(filepath);
+        this.filePath = filePath;
+        this.file = new File(filePath);
         try {
             this.file.createNewFile();
         } catch (IOException e) {
@@ -40,8 +40,9 @@ public class Storage {
      * Loads tasks from a file into the <code>TaskList</code> object.
      *
      * @return a list of tasks previously saved by the user
+     * @throws DukeException if tasks cannot be read from the file correctly
      */
-    public TaskList readTasks() {
+    public TaskList readTasks() throws DukeException {
         TaskList taskList = new TaskList();
         try {
             Scanner scanner = new Scanner(this.file);
@@ -64,7 +65,7 @@ public class Storage {
      */
     public void writeToFile(TaskList taskList) {
         try {
-            FileWriter fileWriter = new FileWriter(this.filepath);
+            FileWriter fileWriter = new FileWriter(this.filePath);
             taskList.forEach(task -> {
                 try {
                     fileWriter.write(task.print() + System.lineSeparator());
@@ -85,7 +86,7 @@ public class Storage {
      */
     public void appendToFile(Task task) {
         try {
-            FileWriter fileWriter = new FileWriter(this.filepath, true);
+            FileWriter fileWriter = new FileWriter(this.filePath, true);
             fileWriter.write(task.print() + System.lineSeparator());
             fileWriter.close();
         } catch (IOException e) {

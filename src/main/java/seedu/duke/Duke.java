@@ -41,6 +41,7 @@ public class Duke {
                 Command command = Parser.parse(this.ui.readCommand());
                 if (command != null) {
                     Message message = command.execute(this.taskList, this.storage);
+                    assert message != null;
                     this.ui.showMessage(message);
                     isExit = command.isDone();
                 }
@@ -51,16 +52,15 @@ public class Duke {
     }
 
     String getResponse(String input) {
-        String response = "";
+        String response;
         try {
             Command command = Parser.parse(input);
-            if (command != null) {
-                Message message = command.execute(this.taskList, this.storage);
-                if (command.isDone()) {
-                    Platform.exit();
-                }
-                response = message.getText();
+            assert command != null;
+            Message message = command.execute(this.taskList, this.storage);
+            if (command.isDone()) {
+                Platform.exit();
             }
+            response = message.getText();
         } catch (DukeException e) {
             response = e.getMessage();
         }

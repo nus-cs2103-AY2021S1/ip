@@ -36,8 +36,9 @@ public class TaskList {
      * Adds a new task to this task list.
      *
      * @param task the string representation of the task in a file
+     * @throws DukeException if tasks cannot be read from the file correctly
      */
-    public void add(String task) {
+    public void add(String task) throws DukeException {
         // for reading from file
         String[] input = task.split("\\s\\|\\s");
         assert input.length >= 3;
@@ -58,6 +59,7 @@ public class TaskList {
             this.tasks.add(event);
             break;
         default:
+            throw new DukeException("Problem reading file.");
         }
     }
 
@@ -119,8 +121,8 @@ public class TaskList {
             int totalPosition = 1;
             boolean hasTask = false;
             for (Task task : this.tasks) {
-                if ((task instanceof Event || task instanceof Deadline)
-                        && task.getDate().equals(date)) {
+                boolean hasDate = !(task instanceof ToDo);
+                if (hasDate && task.getDate().equals(date)) {
                     response.add(totalPosition + ". " + task);
                     hasTask = true;
                 }
