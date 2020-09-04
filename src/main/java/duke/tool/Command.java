@@ -30,10 +30,10 @@ public class Command {
     public String markAsDone(int num, TaskList taskList) throws DukeException {
         if (num > 0 && num <= taskList.getSize()) {
             taskList.get(num - 1).markAsDone();
-            String msgForDone = "    ____________________________________________________________\n"
+            String msgForDone = "    ____________________________________________\n"
                     + "    Nice! I 've marked this task as done: \n"
                     + "       " + taskList.get(num - 1).toString() + "\n"
-                    + "    ____________________________________________________________\n";
+                    + "    ____________________________________________\n";
             //System.out.println(msgForDone);
             return msgForDone;
         } else {
@@ -48,13 +48,13 @@ public class Command {
      * @param taskList a list of tasks.
      */
     public String list(TaskList taskList) {
-        String msgForList = "    ____________________________________________________________\n";
+        String msgForList = "    ____________________________________________\n";
         msgForList += "    Here are the tasks in your list: \n";
         for (int i = 0; i < taskList.getSize(); i++) {
             msgForList += "    " + (i + 1) + ". "
                     + taskList.get(i).toString() + "\n";
         }
-        msgForList += "    ____________________________________________________________\n";
+        msgForList += "    ____________________________________________\n";
         //System.out.println(msgForList);
         return msgForList;
     }
@@ -67,12 +67,12 @@ public class Command {
      */
     public String delete(int num, TaskList taskList) throws DukeException {
         if (num > 0 && num <= taskList.getSize()) {
-            String msgForDelete = "    ____________________________________________________________\n"
+            String msgForDelete = "    ____________________________________________\n"
                     + "    Noted. I've removed this task: \n"
                     + "       " + taskList.get(num - 1).toString() + "\n";
             taskList.remove(num - 1);
             msgForDelete += taskList.countNum() + "\n"
-                    + "    ____________________________________________________________\n";
+                    + "    ____________________________________________\n";
             //System.out.println(msgForDelete);
             return msgForDelete;
         } else {
@@ -201,7 +201,7 @@ public class Command {
             String query = input.substring(5);
             int count = 0;
             String output = "";
-            output += "    ____________________________________________________________\n"
+            output += "    ____________________________________________\n"
                     + "    Here are the matching tasks in your list:";
             for (int i = 0; i < taskList.getSize(); i++) {
                 if (taskList.get(i).getTaskDescription().contains(query)) {
@@ -209,7 +209,7 @@ public class Command {
                     output += "    " + count + "." + taskList.get(i).toString();
                 }
             }
-            output += "    ____________________________________________________________\n";
+            output += "    ____________________________________________\n";
             return output;
         }
     }

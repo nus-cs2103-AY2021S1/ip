@@ -17,10 +17,10 @@ public class Ui {
      */
     public String printWelcomeMessage() {
         String emoji = Emoji.CHICKEN.toString();
-        String welcomeMessage = "    ____________________________________________________________\n"
+        String welcomeMessage = "    ____________________________________________\n"
                 + "    Hello! I'm ByteMe " + emoji + emoji + emoji + "\n"
                 + "    What can I do for you? (Don't bite me!)\n"
-                + "    ____________________________________________________________\n";
+                + "    ____________________________________________\n";
 
         //System.out.println(welcomeMessage);
         return welcomeMessage;
@@ -30,9 +30,9 @@ public class Ui {
      * Prints bye message.
      */
     public String sendBye() {
-        String msgForBye = "    ____________________________________________________________\n"
+        String msgForBye = "    ____________________________________________\n"
                 + "    Bye. Hope to see you again soon! \n"
-                + "    ____________________________________________________________\n";
+                + "    ____________________________________________\n";
         //System.out.println(msgForBye);
         return msgForBye;
     }
@@ -52,11 +52,11 @@ public class Ui {
      * @param todo a to-do item.
      */
     public String printAddedToDo(TaskList tl, Todo todo) {
-        String msgForToDo = "    ____________________________________________________________\n"
+        String msgForToDo = "    ____________________________________________\n"
                 + "    Got it. I 've added this task: \n"
                 + "      " + todo.toString() + "\n"
                 + tl.countNum() + "\n"
-                + "    ____________________________________________________________\n";
+                + "    ____________________________________________\n";
         //System.out.println(msgForToDo);
         return msgForToDo;
     }
@@ -67,11 +67,11 @@ public class Ui {
      * @param ddl a deadline item.
      */
     public String printAddedDdl(TaskList tl, Deadline ddl) {
-        String msgForToDo = "    ____________________________________________________________\n"
+        String msgForToDo = "    ____________________________________________\n"
                 + "    Got it. I 've added this task: \n"
                 + "      " + ddl.toString() + "\n"
                 + tl.countNum() + "\n"
-                + "    ____________________________________________________________\n";
+                + "    ____________________________________________\n";
         //System.out.println(msgForToDo);
         return msgForToDo;
     }
@@ -82,11 +82,11 @@ public class Ui {
      * @param event a event item.
      */
     public String printAddedEvent(TaskList tl, Event event) {
-        String msgForEvent = "    ____________________________________________________________\n"
+        String msgForEvent = "    ____________________________________________\n"
                 + "    Got it. I 've added this task: \n"
                 + "      " + event.toString() + "\n"
                 + tl.countNum() + "\n"
-                + "    ____________________________________________________________\n";
+                + "    ____________________________________________\n";
         //System.out.println(msgForEvent);
         return msgForEvent;
     }

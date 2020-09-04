@@ -20,9 +20,9 @@ public class DukeException extends Exception {
     @Override
     public String toString() {
         String emoji = Emoji.ERROR.toString();
-        String msgForException = "    ____________________________________________________________\n"
+        String msgForException = "    ____________________________________________\n"
                 + "    " + emoji + this.getMessage() + "\n"
-                + "    ____________________________________________________________\n";
+                + "    ____________________________________________\n";
         return msgForException;
     }
 }
