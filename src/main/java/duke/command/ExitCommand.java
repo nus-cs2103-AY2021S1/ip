@@ -15,6 +15,7 @@ public class ExitCommand implements Command {
 
     @Override
     public void execute(TaskList tasks, Storage storage) throws DukeException {
+        assert isExit();
     }
 
     @Override
@@ -24,6 +25,7 @@ public class ExitCommand implements Command {
 
     @Override
     public String getResponse() {
+        assert isExit();
         return ExitCommand.EXIT_MESSAGE;
     }
 

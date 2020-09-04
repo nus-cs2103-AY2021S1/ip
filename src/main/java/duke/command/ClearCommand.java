@@ -17,6 +17,8 @@ public class ClearCommand implements Command {
     public void execute(TaskList tasks, Storage storage) throws DukeException {
         tasks.clear();
         storage.save(tasks);
+
+        assert !isExit();
     }
 
     @Override
@@ -26,6 +28,7 @@ public class ClearCommand implements Command {
 
     @Override
     public String getResponse() {
+        assert !isExit();
         return ClearCommand.CLEAR_MESSAGE + "\n\t";
     }
 
