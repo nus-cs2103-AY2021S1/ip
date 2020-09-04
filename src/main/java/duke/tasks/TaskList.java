@@ -64,17 +64,22 @@ public class TaskList {
      */
     public String deleteTask(Storage storage, String input) throws DukeException {
         int taskNumber = Integer.parseInt(input.split(" ")[1]);
+
         if (taskNumber <= this.taskList.size() && taskNumber > 0) {
             // task number is valid
             // Dino deletes task from list
             int taskIndex = taskNumber - 1;
             Task toDelete = this.taskList.get(taskIndex);
             this.taskList.remove(taskIndex);
+
             storage.writeToFile(toDelete, DukeAction.DELETE);
+
             return "Rawr! Dino has deleted " + "Task " + taskNumber
                     + " from your list:\n" + toDelete
                     + "\nNumber of tasks in list: " + this.taskList.size();
+
         } else {
+            assert (taskNumber > taskList.size());
             throw new DukeException("Task " + taskNumber + " is not in your list of tasks!");
         }
     }
@@ -200,16 +205,20 @@ public class TaskList {
      */
     public String markDone(Storage storage, String input) throws DukeException {
         int taskNumber = Integer.parseInt(input.split(" ")[1]);
+
         if (taskNumber <= this.taskList.size() && taskNumber > 0) {
             // task number is valid
             // Dino marks task as done
             int taskIndex = taskNumber - 1;
             Task doneTask = this.taskList.get(taskIndex);
+
             storage.writeToFile(doneTask, DukeAction.MARK_DONE);
+
             doneTask.markAsDone();
             return "Great! Dino has marked " + "Task " + taskNumber
                     + " as done:\n" + doneTask;
         } else {
+            assert (taskNumber > taskList.size());
             throw new DukeException("Task " + taskNumber + " is not in your list of tasks!");
         }
     }
@@ -242,6 +251,7 @@ public class TaskList {
         if (matchingTasks > 0) {
             return result.toString();
         } else {
+            assert (matchingTasks == 0);
             throw new DukeException("Rawr! "
                     + "Dino could not find any matching tasks in your list.");
         }
