@@ -1,12 +1,13 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
+
 public class TaskTest {
-    Task task = new Task("Review this week's lecture");
-    Task task2 = new Task("Review Code", true);
+    private final Task task = new Task("Review this week's lecture");
+    private final Task task2 = new Task("Review Code", true);
 
     @Test
     public void testMarkAsDone() {

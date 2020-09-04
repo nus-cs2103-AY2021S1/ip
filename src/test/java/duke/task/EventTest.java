@@ -1,12 +1,13 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
+
 public class EventTest {
-    Event event = new Event("Lunch with friends", "2020-02-23");
-    Event event2 = new Event("Meeting with prof", true, "2019-05-23");
+    private final Event event = new Event("Lunch with friends", "2020-02-23");
+    private final Event event2 = new Event("Meeting with prof", true, "2019-05-23");
 
     @Test
     public void testMarkAsDone() {
