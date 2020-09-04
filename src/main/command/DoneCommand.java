@@ -9,7 +9,7 @@ import main.ui.Ui;
  * Represents the done command.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.2
+ * @version v0.3
  * @since v0.1
  */
 public class DoneCommand implements Command {
@@ -33,11 +33,15 @@ public class DoneCommand implements Command {
      */
     @Override
     public String execute(Ui ui, TaskList tasks) throws InvalidTaskException {
-        if (taskNum < 1 || taskNum > tasks.size()) {
+        boolean isInvalidIndex = taskNum < 1 || taskNum > tasks.size();
+
+        if (isInvalidIndex) {
             throw new InvalidTaskException();
         }
+
         Task task = tasks.get(taskNum - 1);
         task.setDone();
+
         return ui.printDoneSuccess(task);
     }
 
