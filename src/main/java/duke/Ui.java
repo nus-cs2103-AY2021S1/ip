@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Deals with interactions with users
+ * Ui deals with interactions with users.
  */
 public class Ui {
     private final String horizontalLine = "_______________________________________________________";
-    
+
+    /**
+     * Introduction of Mocha.
+     */
     public void mochaIntroduction() {
         String nameIntro = "Hello, I'm Mocha!";
         String greeting = "What's up today!";
@@ -21,14 +24,30 @@ public class Ui {
                 + horizontalLine);
     }
 
+    /**
+     * Creates a new Parser object.
+     * 
+     * @return a Parser object.
+     */
     public Parser createParser() {
         return new Parser();
     }
-    
+
+    /**
+     * Creates a new Scanner object that uses the same list of Tasks as the existing file.
+     * 
+     * @return s Scanner object.
+     */
     public Scanner createUserInputScanner() {
         return new Scanner(System.in);
     }
-    
+
+    /**
+     * Displays the message when a task is added.
+     * 
+     * @param task  Takes in a task object.
+     * @param sizeOfTasks The size of the list of tasks.
+     */
     public void taskAdded(Task task, int sizeOfTasks) {
         if (task.getTaskType() == "ToDo") {
             
@@ -71,7 +90,12 @@ public class Ui {
             return;   
         }
     }
-    
+
+    /**
+     * Displays the message when a task is marked done.
+     * 
+     * @param task Takes in a task object.
+     */
     public void taskDone(Task task) {
         System.out.println(horizontalLine
                 + "\r\n"
@@ -80,7 +104,12 @@ public class Ui {
                 + "\r\n"
                 + horizontalLine);
     }
-    
+
+    /**
+     * Displays all tasks.
+     * 
+     * @param tasks Takes in a list of tasks.
+     */
     public void listAllTasks(TaskList tasks) {
         System.out.println(horizontalLine
                 + "\r\n"
@@ -98,7 +127,10 @@ public class Ui {
                 + "\r\n"
                 + horizontalLine);
     }
-    
+
+    /**
+     * Mocha's salutations.
+     */
     public void mochaGoodbye() {
         System.out.println(horizontalLine
                 + "\r\n"
@@ -106,7 +138,13 @@ public class Ui {
                 + "\r\n"
                 + horizontalLine);
     }
-    
+
+    /**
+     * Displays the message when a task is deleted.
+     * 
+     * @param task Takes in a task object.
+     * @param sizeOfTasks Takes in the size of the list of tasks.
+     */
     public void deleteTask(Task task, int sizeOfTasks) {
         System.out.println(horizontalLine
                 + "\r\n"
@@ -120,7 +158,7 @@ public class Ui {
                 + horizontalLine);
     }
     
-//    public void commandNotRecognisedExceptionMessage() {
+//    public void commandNotRecognizedExceptionMessage() {
 //        System.out.println(horizontalLine
 //                + "\r\n"
 //                + "Oops! I couldn't understand what you mean :("
@@ -128,11 +166,12 @@ public class Ui {
 //                + horizontalLine);
 //    }
     
-    public String commandNotRecognised() {
-        return horizontalLine
-                + "\r\n"
-                + "Oops! I couldn't understand what you mean :("
-                + "\r\n"
-                + horizontalLine;
-    }
+    
+//    public String commandNotRecognised() {
+//        return horizontalLine
+//                + "\r\n"
+//                + "Oops! I couldn't understand what you mean :("
+//                + "\r\n"
+//                + horizontalLine;
+//    }
 }
