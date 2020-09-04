@@ -107,7 +107,7 @@ public class Parser {
                     Command command = new AddCommand(type);
                     return command.execute(task, taskList);
                 } else {
-                    // it is an event or deadline
+                    // it is either an event or deadline
                     return Parser.understandDeadlineOrEventDate(type, task, taskList);
                 }
             } else {
