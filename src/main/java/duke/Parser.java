@@ -51,7 +51,7 @@ public class Parser {
 
         switch (arr[0]) {
         case "bye":
-            tl.bye();
+            tl.saveData();
             return Ui.GOODBYE;
         case "list":
             return tl.display();

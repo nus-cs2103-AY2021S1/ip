@@ -34,7 +34,7 @@ public class Storage {
      * @param items List of tasks.
      * @return A string that can be stored in the .txt file.
      */
-    String allTasksCombined(ArrayList<Task> items) {
+    String combineAllTasks(ArrayList<Task> items) {
         String res = "";
         for (Task item : items) {
             res += String.format("%s", item.saveString());
@@ -85,7 +85,7 @@ public class Storage {
             FileWriter fw = new FileWriter(PATH.toFile());
             PrintWriter pw = new PrintWriter(fw);
 
-            pw.print(allTasksCombined(items));
+            pw.print(combineAllTasks(items));
 
             pw.close();
         } catch (IOException e) {

@@ -21,7 +21,7 @@ public class TaskList {
     /**
      * Exit function for TaskList class, writes data to .txt file.
      */
-    public void bye() {
+    public void saveData() {
         try {
             storage.writeData(this.items);
         } catch (IOException e) {
