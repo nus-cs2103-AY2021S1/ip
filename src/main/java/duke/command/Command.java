@@ -37,7 +37,7 @@ public abstract class Command {
      */
     public boolean isByeCommand() {
         return this.isByeCommand;
-    };
+    }
 
     /**
      * Returns a String representation of the class which includes the class name.

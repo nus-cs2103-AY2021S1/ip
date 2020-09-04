@@ -22,7 +22,7 @@ public class Deadline extends Task {
      */
     public Deadline(String name, String deadline) {
         super(name);
-        this.deadline = TimePoint.of(deadline);
+        this.deadline = TimePoint.parseTime(deadline);
     }
 
     /**
@@ -35,7 +35,7 @@ public class Deadline extends Task {
      */
     public Deadline(String name, String deadline, boolean isDone) {
         super(name, isDone);
-        this.deadline = TimePoint.of(deadline);
+        this.deadline = TimePoint.parseTime(deadline);
     }
 
     /**

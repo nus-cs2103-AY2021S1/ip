@@ -31,7 +31,7 @@ public class TimePoint {
      * @param timeInfoString Time representation input to be parsed.
      * @return <code>TimePoint</code> object representing inputted time.
      */
-    public static TimePoint of(String timeInfoString) {
+    public static TimePoint parseTime(String timeInfoString) {
 
         try {
             // Attempt to parse information as date and time

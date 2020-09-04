@@ -22,7 +22,7 @@ public class Event extends Task {
      */
     public Event(String name, String when) {
         super(name);
-        this.when = TimePoint.of(when);
+        this.when = TimePoint.parseTime(when);
     }
 
     /**
@@ -35,7 +35,7 @@ public class Event extends Task {
      */
     public Event(String name, String when, boolean isDone) {
         super(name, isDone);
-        this.when = TimePoint.of(when);
+        this.when = TimePoint.parseTime(when);
     }
 
     /**

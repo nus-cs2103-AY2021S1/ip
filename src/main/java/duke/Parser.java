@@ -26,7 +26,7 @@ public class Parser {
         // Separates user input into command and parameters
         String[] inputs = userCommand.split(" ", 2);
         String command = inputs[0];
-        String params = "";
+        String additionalInformation = "";
 
         if (inputs.length == 1) {
             // Determine which simple command with no parameters is being requested
@@ -40,22 +40,22 @@ public class Parser {
             }
         } else if (inputs.length == 2) {
             // Only fill in parameters if they exist
-            params = inputs[1];
+            additionalInformation = inputs[1];
 
             // Determine which complex command is being requested
             switch (command) {
             case "done":
-                return new DoneCommand(params);
+                return new DoneCommand(additionalInformation);
             case "todo":
-                return new ToDoCommand(params);
+                return new ToDoCommand(additionalInformation);
             case "deadline":
-                return new DeadlineCommand(params);
+                return new DeadlineCommand(additionalInformation);
             case "event":
-                return new EventCommand(params);
+                return new EventCommand(additionalInformation);
             case "delete":
-                return new DeleteCommand(params);
+                return new DeleteCommand(additionalInformation);
             case "find":
-                return new FindCommand(params);
+                return new FindCommand(additionalInformation);
             default:
                 break;
             }
