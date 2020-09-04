@@ -45,9 +45,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         Result response = duke.getResponse(input);
+        String responseMessage = response.isSuccessful()
+                ? response.getMessage()
+                : "Apologies. " + response.getMessage();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response.getMessage(), dukeImage)
+                DialogBox.getDukeDialog(responseMessage, dukeImage)
         );
         userInput.clear();
         if (response.isExit()) {

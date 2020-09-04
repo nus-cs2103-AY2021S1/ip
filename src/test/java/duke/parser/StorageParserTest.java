@@ -68,7 +68,7 @@ public class StorageParserTest {
             storageParser.convertStorageToTask(storageString);
         } catch (DukeParseException exception) {
             String err = String.format(
-                    "Apologies. It appears this %s: '%s' is corrupted.", task, storageString);
+                    "It appears this %s: '%s' is corrupted.", task, storageString);
             assertEquals(err, exception.getMessage());
         }
     }

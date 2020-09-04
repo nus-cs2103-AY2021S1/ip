@@ -23,6 +23,15 @@ public class Result {
     }
 
     /**
+     * Determines if the executed <code>Operation</code> was successful.
+     *
+     * @return <code>true</code> if the <code>Operation</code> was successful.
+     */
+    public boolean isSuccessful() {
+        return this.isSuccessful;
+    }
+
+    /**
      * Determines if the executed <code>Operation</code> was an <code>ExitOperation</code>.
      *
      * @return <code>true</code> if it is an <code>ExitOperation</code>.

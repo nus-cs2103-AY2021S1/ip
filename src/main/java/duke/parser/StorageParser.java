@@ -59,9 +59,9 @@ public class StorageParser {
                     storageTask[3], Deadline.DATE_FORMAT_OUTPUT);
             return new Deadline(storageTask[2], isCompleted, dateTime);
         } catch (DukeParseException exception) {
-            String msg = String.format("It appears the datetime of this deadline: '%s' is corrupted.",
+            String msg = String.format("It appears the datetime of this deadline: '%s' is corrupted. ",
                     storageTaskString);
-            throw new DukeParseException(msg);
+            throw new DukeParseException(msg + exception.getMessage());
         }
     }
 
@@ -75,9 +75,9 @@ public class StorageParser {
             LocalDateTime time = Datetime.parseTimeString(storageTask[3], Event.TIME_FORMAT_OUTPUT);
             return new Event(storageTask[2], isCompleted, time);
         } catch (DukeParseException exception) {
-            String msg = String.format("It appears the time of this event: '%s' is corrupted.",
+            String msg = String.format("It appears the time of this event: '%s' is corrupted. ",
                     storageTaskString);
-            throw new DukeParseException(msg);
+            throw new DukeParseException(msg + exception.getMessage());
         }
     }
 

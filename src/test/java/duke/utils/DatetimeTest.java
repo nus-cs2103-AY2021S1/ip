@@ -41,7 +41,7 @@ public class DatetimeTest {
             fail();
         } catch (DukeParseException exception) {
             String expected = String.format(
-                    "Apologies. Ensure the datetime passed in is of the form: '%s'.", pattern);
+                    "Ensure the datetime passed in is of the form: '%s'.", pattern);
             assertEquals(expected, exception.getMessage());
         }
     }
@@ -73,7 +73,7 @@ public class DatetimeTest {
             fail();
         } catch (DukeParseException exception) {
             String expected = String.format(
-                    "Apologies. Ensure the datetime passed in is of the form: '%s'.", pattern);
+                    "Ensure the datetime passed in is of the form: '%s'.", pattern);
             assertEquals(expected, exception.getMessage());
         }
     }
