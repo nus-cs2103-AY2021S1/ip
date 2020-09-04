@@ -26,6 +26,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * A function to return the icon.
+     * @return String which is the icon.
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
@@ -50,6 +54,9 @@ public class Task {
         return result;
     }
 
+    /**
+     * A function to change the isDone to be negated.
+     */
     public void changeIsDone() {
         this.isDone = !this.isDone;
     }

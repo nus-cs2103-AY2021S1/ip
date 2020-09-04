@@ -28,7 +28,7 @@ public class AddEventTest {
     }
 
     @Test
-    public void testExecute_wrongFormatExceptionThrown() {
+    public void testExecute_wrongFormat_exceptionThrown() {
         String[] command = {"event", "return book /at invalide"};
         AddEventCommand test = new AddEventCommand(command);
         try {
