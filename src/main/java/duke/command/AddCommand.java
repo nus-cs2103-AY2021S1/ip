@@ -23,6 +23,9 @@ public class AddCommand implements Command {
      */
     public AddCommand(Task task) {
         this.targetTask = task;
+
+        assert !isExit();
+        assert task != null;
     }
 
     @Override
@@ -30,6 +33,9 @@ public class AddCommand implements Command {
         tasks.add(targetTask);
         storage.save(tasks);
         currentListSize = tasks.getSize();
+
+        assert !isExit();
+        assert targetTask != null;
     }
 
     @Override
@@ -39,6 +45,7 @@ public class AddCommand implements Command {
 
     @Override
     public String getResponse() {
+        assert !isExit();
         return "Got it. I've added this task: " + "\n\t\t"
                 + targetTask.toString() + "\n\t"
                 + String.format("Now you have %d tasks in the list.\n", currentListSize);

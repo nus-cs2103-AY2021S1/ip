@@ -49,7 +49,6 @@ public class Parser {
         //Detect the command and give it parameter
         String[] s = input.split(" ", 2);
 
-        //TODO:Detect command with unresonable space (eg. "done ")
         ValidCommand command = ValidCommand.commandType(s[0]);
 
         switch (command) {
@@ -88,6 +87,7 @@ public class Parser {
                 throw new TimeEmptyException("deadline");
             }
 
+            assert set.length > 1;
             return new AddCommand(new Deadline(set[0], LocalDateTime.parse(set[1], acceptedFormatter)));
         }
         case EVENT: {
@@ -101,6 +101,7 @@ public class Parser {
                 throw new TimeEmptyException("event");
             }
 
+            assert set.length > 1;
             return new AddCommand(new Event(set[0], LocalDateTime.parse(set[1], acceptedFormatter)));
         }
         case DELETE: {

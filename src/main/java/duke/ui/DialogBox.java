@@ -75,16 +75,20 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         DialogBox db = new DialogBox(l, iv);
         db.flip();
+        db.setStyle("-fx-background-color: #E4D7F9");
         return db;
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text,img);
+        db.setStyle("-fx-background-color: #E4D7F9");
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setStyle("-fx-background-color: #9156F0");
         return db;
     }
 }

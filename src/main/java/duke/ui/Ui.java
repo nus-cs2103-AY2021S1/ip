@@ -147,6 +147,7 @@ public class Ui {
                 stage.close();
             }
 
+            assert !c.isExit();
             Label userText = new Label(fullCommand);
             Label dukeText = new Label(c.getResponse());
             dialogContainer.getChildren().addAll(

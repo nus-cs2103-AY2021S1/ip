@@ -21,6 +21,9 @@ public class DeleteCommand implements Command {
      */
     public DeleteCommand(int index) {
         this.targetIndex = index;
+
+        assert !isExit();
+        assert targetIndex >= 0;
     }
 
     @Override
@@ -28,6 +31,9 @@ public class DeleteCommand implements Command {
         deletedTask = tasks.delete(targetIndex);
         storage.save(tasks);
         currentListSize = tasks.getSize();
+
+        assert !isExit();
+        assert deletedTask != null;
     }
 
 
@@ -38,6 +44,7 @@ public class DeleteCommand implements Command {
 
     @Override
     public String getResponse() {
+        assert !isExit();
         return "Noted. I've removed this task: " + "\n\t\t"
                 + deletedTask.toString()
                 + String.format("\nNow you have %d tasks in the list.\n", currentListSize);
