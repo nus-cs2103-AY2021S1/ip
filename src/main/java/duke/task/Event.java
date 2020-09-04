@@ -21,6 +21,7 @@ public class Event extends TimedTask {
     public static Event load(String str) {
         String[] arr = str.split("\\|", 4);
         Event ev = new Event(arr[2], arr[3]);
+        assert (arr[0].equals("E"));
         if (arr[1].equals("true")) {
             ev.isDone = true;
         }

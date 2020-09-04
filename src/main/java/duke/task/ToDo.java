@@ -17,6 +17,7 @@ public class ToDo extends Task {
     public static ToDo load(String str) {
         String[] arr = str.split("\\|", 3);
         ToDo td = new ToDo(arr[2]);
+        assert (arr[0].equals("T"));
         if (arr[1].equals("true")) {
             td.isDone = true;
         }

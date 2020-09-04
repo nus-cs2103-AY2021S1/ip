@@ -17,6 +17,7 @@ public class Parser {
      * @throws DukeException when user input is not a valid command
      */
     public String command(String str, TaskList tasks) throws DukeException {
+        assert (!str.equals("bye"));
         if (str.equals("list")) {
             return tasks.displayTasks();
         } else if (str.startsWith("find")) {
@@ -31,6 +32,7 @@ public class Parser {
                 result = tasks.addTask(str);
             } else if (str.equals("clear")) {
                 result = tasks.clear();
+                assert tasks.getTasks().size() == 0;
             } else {
                 throw new InvalidCommandException();
             }
