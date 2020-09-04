@@ -51,12 +51,16 @@ public class Deadline extends Task {
      */
     public static Deadline createDeadline(String description, String by) throws DukeException {
         String[] dateAndTime = by.split(" ");
+
         try {
             String userInputDate = dateAndTime[0];
             String userInputTime = dateAndTime[1];
+
             LocalDate date = LocalDate.parse(userInputDate);
             String time = timeFormat(userInputTime);
+
             return new Deadline(description, userInputDate, userInputTime, date, time);
+
         } catch (DateTimeParseException | DukeException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."
@@ -97,6 +101,7 @@ public class Deadline extends Task {
                         + "\nFormats to input a task can be found by entering 'format'.");
             }
             return formattedTime.toString();
+
         } catch (NumberFormatException e) {
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."
