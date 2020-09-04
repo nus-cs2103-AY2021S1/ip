@@ -19,7 +19,7 @@ public class CommandAgent {
         CommandAgent.taskList = taskList;
     }
 
-    public static int listSize() {
+    public static int getListSize() {
         return taskList.getSize();
     }
 
@@ -79,6 +79,9 @@ public class CommandAgent {
             case "search":
                 String matchedTasks = executeSearchTask(commandContents);
                 return generateSearchResponse(matchedTasks);
+            case "remind":
+                List<String> mostRecentDues = executeReminderTask(commandContents);
+                return generateReminderResponse(mostRecentDues);
             default:
                 throw new DukeException("Something is wrong. The command you input is not processed.");
             }
@@ -134,6 +137,17 @@ public class CommandAgent {
     public static String executeSearchTask(List<String> commandContents) {
         String keyword = commandContents.get(0);
         return taskList.findTasksByKeyword(keyword);
+    }
+
+    /**
+     * Executes the command which requests the bot the get the most recent k tasks where k is specified from input.
+     *
+     * @param commandContents a list of task information used to search for the related tasks.
+     * @return The list of string including the most recent k task, including those expired ones.
+     */
+    public static List<String> executeReminderTask(List<String> commandContents) {
+        int countLimit = Integer.parseInt(commandContents.get(0));
+        return taskList.findTasksByDueDate(countLimit);
     }
 
     /**
@@ -231,7 +245,7 @@ public class CommandAgent {
     public static String generateDeleteResponse(Task deletedTask) {
         String result = "Noted. I've removed this task:\n  ";
         result += deletedTask;
-        result += String.format("\nNow you have %d tasks in the list.", listSize());
+        result += String.format("\nNow you have %d tasks in the list.", getListSize());
         return result;
     }
 
@@ -245,5 +259,20 @@ public class CommandAgent {
         String result = "Here are the matching tasks in your list:";
         result += matchedTasks;
         return result;
+    }
+
+    /**
+     * Generates the response based on the most recently due tasks identified.
+     *
+     * @param mostRecentDues The list of string containing the most recent due tasks.
+     * @return A String showing the response to the user with the most recent k tasks it wants.
+     */
+    public static String generateReminderResponse(List<String> mostRecentDues) {
+        StringBuilder result = new StringBuilder("Here are your most recent ");
+        result.append(mostRecentDues.size()).append(" tasks that you haven't done:");
+        for (String due: mostRecentDues) {
+            result.append(due);
+        }
+        return result.toString();
     }
 }

@@ -1,7 +1,9 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import duke.DukeException;
@@ -121,10 +123,36 @@ public class TaskList {
      * @return A String including all the tasks found whose name containing the keyword.
      */
     public String findTasksByKeyword(String keyword) {
-        return IntStream.range(0, this.getSize())
-                .mapToObj((index) -> String.format("\n%d.%s", index + 1, tasks.get(index)))
-                .filter((task) -> task.contains(keyword))
+        List<Task> tasksWithKeyword = this.tasks.stream()
+                .filter(task -> task.getName().contains(keyword))
+                .collect(Collectors.toList());
+
+        return IntStream.range(0, tasksWithKeyword.size())
+                .mapToObj((index) -> String.format("\n%d. %s", index + 1, tasksWithKeyword.get(index)))
                 .reduce((a, b) -> a + b)
                 .orElse("");
+    }
+
+    /**
+     * Finds all the k tasks with most recent due dates where k = countLimit;
+     *
+     * @param countLimit the number of task the user wants to know about.
+     * @return A list of string including all the k tasks with most recent due dates.
+     */
+    public List<String> findTasksByDueDate(int countLimit) {
+        List<Task> scheduledTasks = new ArrayList<>();
+        for (Task t: this.tasks) {
+            if (t.isScheduled() & !t.isDoneTask()) {
+                scheduledTasks.add(t);
+            }
+        }
+
+        scheduledTasks.sort(Comparator.comparing(Task::getScheduleInLocalDate));
+        int k = Math.min(scheduledTasks.size(), countLimit);
+
+        return IntStream.range(0, k)
+                .mapToObj((index) ->
+                        String.format("\n%d. %s", index + 1, scheduledTasks.get(index).toStringWithExpiryCheck()))
+                .collect(Collectors.toList());
     }
 }

@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
             throw new DukeException("☹ OOPS!!! Please enter a value");
         } else if (!(Character.isDigit(content.charAt(0)))) {
             throw new DukeException("☹ OOPS!!! Please enter a numerical value");
-        } else if (Integer.parseInt(content) > CommandAgent.listSize()) {
+        } else if (Integer.parseInt(content) > CommandAgent.getListSize()) {
             throw new DukeException("☹ OOPS!!! Please enter a valid index");
         } else if (Integer.parseInt(content) <= 0) {
             throw new DukeException("☹ OOPS!!! Please enter a valid index");

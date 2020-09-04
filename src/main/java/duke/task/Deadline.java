@@ -4,8 +4,6 @@ import java.time.LocalDate;
 
 /** Represents an deadline task */
 public class Deadline extends Task {
-    private final LocalDate schedule;
-
     /**
      * Creates an instance of deadline object.
      *
@@ -16,15 +14,6 @@ public class Deadline extends Task {
     public Deadline(String name, boolean isDone, LocalDate schedule) {
         super(name, isDone);
         this.schedule = schedule;
-    }
-
-    /**
-     * Returns a string representation of the Deadline task's schedule in the pattern "MMM d yyyy".
-     *
-     * @return The string representation of the schedule.
-     */
-    public String getSchedule() {
-        return this.schedule.format(Task.FORMATTER);
     }
 
     @Override
