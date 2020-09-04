@@ -7,8 +7,8 @@ package duke.exception;
 public class UnknownCommandException extends DukeException {
 
     private static final int NUM_OF_COMMANDS = 8;
-    private static final String MSG_1 = "I'm sorry, but I don't know what that means.\n";
-    private static final String MSG_2 = "Here are the available commands that I know:\n";
+    private static final String MSG_1 = "I'm sorry, but I don't know what that means.";
+    private static final String MSG_2 = "Here are the available commands that I know";
     private static final String[] listOfCommands = new String[]{
         "todo _ (e.g. todo 3)",
         "deadline 'task name' /by 'end time' (e.g. deadline Exercise /by Sunday)",
@@ -34,8 +34,8 @@ public class UnknownCommandException extends DukeException {
      */
     private static String getListOfCommands() {
         StringBuilder str1 = new StringBuilder();
-        str1.append(MSG_1);
-        str1.append(MSG_2);
+        str1.append(MSG_1).append("\n");
+        str1.append(MSG_2).append("\n");
         for (int i = 1; i < NUM_OF_COMMANDS; i++) {
             String s = String.format("%d. %s\n", i, listOfCommands[i - 1]);
             str1.append(s);
