@@ -1,3 +1,12 @@
+package duke.logic.commands;
+
+
+import duke.exceptions.DukeException;
+import duke.model.TaskManager;
+import duke.model.task.Task;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
 public class DoneCommand extends Command{
 
     public DoneCommand(String command) {

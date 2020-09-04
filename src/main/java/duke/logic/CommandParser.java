@@ -1,3 +1,13 @@
+package duke.logic;
+
+import duke.exceptions.DukeException;
+import duke.logic.commands.AddCommand;
+import duke.logic.commands.Command;
+import duke.logic.commands.DeleteCommand;
+import duke.logic.commands.DoneCommand;
+import duke.logic.commands.ExitCommand;
+import duke.logic.commands.ListCommand;
+
 public class CommandParser {
 
     public static Command parse(String command) throws DukeException {

@@ -1,6 +1,13 @@
+package duke.storage;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import duke.model.task.Deadline;
+import duke.model.task.Event;
+import duke.model.task.Task;
+import duke.model.task.ToDo;
 
 public class Storage {
     private String saveFilePath;

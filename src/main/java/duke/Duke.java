@@ -1,5 +1,14 @@
+package duke;
+
 import java.io.IOException;
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
+import duke.logic.CommandParser;
+import duke.logic.commands.Command;
+import duke.model.TaskManager;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 public class Duke {
     private static final String FILE_PATH = "data/DukeDB.txt";
