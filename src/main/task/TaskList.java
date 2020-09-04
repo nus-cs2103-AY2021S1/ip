@@ -7,7 +7,7 @@ import java.util.List;
  * Represents the list of tasks.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.2
+ * @version v0.3
  * @since v0.1
  */
 public class TaskList {
@@ -34,6 +34,7 @@ public class TaskList {
      * @return the task that is removed.
      */
     public Task remove(int index) {
+        assert(index >= 0 && index < tasks.size());
         return tasks.remove(index);
     }
 
@@ -52,6 +53,7 @@ public class TaskList {
      * @return the task that corresponds to the index.
      */
     public Task get(int index) {
+        assert(index >= 0 && index < tasks.size());
         return tasks.get(index);
     }
 
