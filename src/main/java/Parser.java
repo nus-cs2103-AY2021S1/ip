@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,22 +15,24 @@ public class Parser {
             detail = userInput.substring(i).trim();
         }
         switch (command) {
-            case ("bye") :
-                return new ByeCommand();
-            case ("list") :
-                return new ListCommand();
-            case ("todo") :
-                return new AddCommand(parseTodo(detail));
-            case ("deadline") :
-                return new AddCommand(parseDeadline(detail));
-            case ("event") :
-                return new AddCommand(parseEvent(detail));
-            case ("delete") :
-                return new DeleteCommand(parseNumber(detail));
-            case ("done") :
-                return new DoneCommand(parseNumber(detail));
-            default:
-                throw new UnexpectedInputException();
+        case ("bye") :
+            return new ByeCommand();
+        case ("list") :
+            return new ListCommand();
+        case ("todo") :
+            return new AddCommand(parseTodo(detail));
+        case ("deadline") :
+            return new AddCommand(parseDeadline(detail));
+        case ("event") :
+            return new AddCommand(parseEvent(detail));
+        case ("delete") :
+            return new DeleteCommand(parseNumber(detail));
+        case ("done") :
+            return new DoneCommand(parseNumber(detail));
+        case ("find") :
+            return new FindCommand(detail);
+        default:
+            throw new UnexpectedInputException();
         }
     }
 
