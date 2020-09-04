@@ -39,27 +39,27 @@ public class Command {
      */
     public String execute(String userInput, TaskList tasks, Storage storage) throws DukeException {
         // determining user input type via the first word
-        String keyWord = getKeyWord(userInput);
-
-        switch (keyWord) {
-        case "welcome":
+        String keyWord = getKeyWord(userInput).toUpperCase();
+        Keyword commandType = Keyword.valueOf(keyWord);
+        switch (commandType) {
+        case WELCOME:
             return welcomeCommand();
-        case "bye":
+        case BYE:
             this.isTerminated = true;
             return byeCommand();
-        case "help":
+        case HELP:
             return helpCommand();
-        case "list":
+        case LIST:
             return listCommand(tasks);
-        case "done":
+        case DONE:
             return doneCommand(userInput, tasks, storage);
-        case "delete":
+        case DELETE:
             return deleteCommand(tasks, userInput, ui, storage);
-        case "todo":
-        case "event":
-        case "deadline":
-            return addTaskCommand(userInput, keyWord, tasks, storage);
-        case "find":
+        case TODO:
+        case EVENT:
+        case DEADLINE:
+            return addTaskCommand(userInput, commandType, tasks, storage);
+        case FIND:
             return findCommand(tasks, userInput);
         default:
             return ui.printErrorMessage(new DukeException("Unknown execution error."));
@@ -165,7 +165,7 @@ public class Command {
      * @return The added task message.
      * @throws DukeException If any Duke-type exceptions are encountered.
      */
-    public String addTaskCommand(String userInput, String keyWord, TaskList tasks, Storage storage)
+    public String addTaskCommand(String userInput, Keyword keyWord, TaskList tasks, Storage storage)
             throws DukeException {
         String[] splitInput = splitUserInputByWhiteSpace(userInput);
         String[] data = splitIntoDesDateTime(splitInput);
@@ -203,16 +203,17 @@ public class Command {
     public static String[] splitIntoDesDateTime(String[] inputSplitByWhiteSpace)
             throws InvalidFormatException, EmptyTaskException {
         String taskType = inputSplitByWhiteSpace[0];
+        Keyword taskTypeEnum = Keyword.valueOf(taskType);
         if (inputSplitByWhiteSpace.length <= 1) {
             throw new EmptyTaskException("☹ OOPS!!! The description of a " + taskType + " cannot "
                     + "be empty.");
         } else {
-            switch (taskType) {
-            case "todo":
+            switch (taskTypeEnum) {
+            case TODO:
                 return handleToDoSplit(inputSplitByWhiteSpace);
-            case "deadline":
+            case DEADLINE:
                 return handleDeadlineSplit(inputSplitByWhiteSpace);
-            case "event":
+            case EVENT:
                 return handleEventSplit(inputSplitByWhiteSpace);
             default:
                 return new String[]{};
