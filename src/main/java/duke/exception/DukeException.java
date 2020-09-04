@@ -1,7 +1,9 @@
+package duke.exception;
+
 /**
  * Represents an exception that can be thrown by the Duke chatbot.
  */
-abstract class DukeException extends Exception {
+public abstract class DukeException extends Exception {
     protected String message;
 
     DukeException(String message) {

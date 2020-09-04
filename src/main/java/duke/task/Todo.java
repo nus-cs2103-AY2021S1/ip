@@ -1,9 +1,11 @@
+package duke.task;
+
 /**
  * Represents a task to be done without a deadline.
  */
 public class Todo extends Task {
 
-    Todo(String desc) {
+    public Todo(String desc) {
         super("T", desc);
     }
 

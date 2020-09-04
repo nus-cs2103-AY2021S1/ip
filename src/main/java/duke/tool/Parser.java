@@ -1,3 +1,5 @@
+package duke.tool;
+
 /**
  * Represents an interpreter for user input and formats the input such that
  * the chat bot is able to understand and handle it.

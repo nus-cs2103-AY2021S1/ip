@@ -1,10 +1,14 @@
+package duke.task;
+
+import duke.exception.MissingDeadlineException;
+
 /**
  * Represents a task that is occurring at a specific time.
  */
 public class Event extends Task {
     protected String eventTime;
 
-    Event(String desc) throws MissingDeadlineException {
+    public Event(String desc) throws MissingDeadlineException {
         super("E", desc.split(" /at ", 2)[0]);
         String[] temp = desc.split(" /at ", 2);
         if (temp.length == 1) {
@@ -17,7 +21,7 @@ public class Event extends Task {
         }
     }
 
-    Event(String desc, String eventTime) {
+    public Event(String desc, String eventTime) {
         super("E", desc);
         this.eventTime = eventTime;
     }

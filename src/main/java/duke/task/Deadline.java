@@ -1,10 +1,14 @@
+package duke.task;
+
+import duke.exception.MissingDeadlineException;
+
 /**
  * Represents a task with a deadline.
  */
 public class Deadline extends Task {
     protected String deadline;
 
-    Deadline(String desc) throws MissingDeadlineException {
+    public Deadline(String desc) throws MissingDeadlineException {
         super("D", desc.split(" /by ", 2)[0]);
         String[] temp = desc.split(" /by ", 2);
         if (temp.length == 1) {
@@ -17,7 +21,7 @@ public class Deadline extends Task {
         }
     }
 
-    Deadline(String desc, String date) {
+    public Deadline(String desc, String date) {
         super("D", desc);
         deadline = date;
     }

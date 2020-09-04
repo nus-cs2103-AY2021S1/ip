@@ -1,3 +1,13 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.exception.MissingDescriptionException;
+import duke.exception.UnknownCommandException;
+import duke.tool.Parser;
+import duke.tool.Storage;
+import duke.tool.TaskList;
+import duke.ui.Ui;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -8,7 +18,7 @@ import java.util.Scanner;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private  Ui ui;
+    private Ui ui;
 
     public Duke() {
         ui = new Ui();
@@ -20,7 +30,7 @@ public class Duke {
         }
     }
 
-    String getResponse(String userInput) {
+    public String getResponse(String userInput) {
         String[] parsedInput = Parser.parse(userInput);
         try {
             switch (parsedInput[0]) {

@@ -1,3 +1,12 @@
+package duke.tool;
+
+import duke.exception.MissingDeadlineException;
+import duke.exception.MissingTaskException;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +16,7 @@ import java.util.List;
 public class TaskList {
     private List<Task> tasks;
 
-    TaskList(List<Task> tasks) {
+    public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -107,7 +116,7 @@ public class TaskList {
         }
     }
 
-    String findTasks(String keyword) {
+    public String findTasks(String keyword) {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task: tasks) {
             if (task.match(keyword)) {

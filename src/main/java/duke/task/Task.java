@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.time.LocalDate;
@@ -7,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a task with a description that can be marked as done.
  */
-abstract class Task {
+public abstract class Task {
     protected String taskType;
     protected String description;
     protected boolean isDone;
@@ -35,7 +37,7 @@ abstract class Task {
         return ldt.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
     }
 
-    protected void completeTask() {
+    public void completeTask() {
         isDone = true;
     }
 
@@ -50,7 +52,7 @@ abstract class Task {
      */
     abstract public String formatTaskForFile();
 
-    protected boolean match(String keyword) {
+    public boolean match(String keyword) {
         return description.contains(keyword);
     }
 
