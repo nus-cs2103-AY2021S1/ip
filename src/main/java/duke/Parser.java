@@ -1,5 +1,6 @@
 package duke;
 
+import java.awt.image.BandedSampleModel;
 import java.util.Arrays;
 import java.util.List;
 import java.util.zip.DataFormatException;
@@ -30,19 +31,14 @@ public class Parser {
     public static String understandText(String userText, TaskList taskList) {
         try {
             String editedAnswer = userText.strip().toLowerCase();
-            String[] answers = editedAnswer.split(" ");
+            String[] answers = editedAnswer.split(" ", 2);
             String commandWord = answers[0];
-            if (answers.length == 2 && Commands.DONE.containsKeyWord(commandWord)) {
-                return Parser.understandTaskNumber(answers[0], answers[1], taskList);
-
-            } else if (answers.length == 2 && Commands.DELETE.containsKeyWord(commandWord)) {
-                Command command = new DeleteCommand();
+            if (answers.length == 2 && Commands.DONE.containsKeyWord(commandWord)
+                    || Commands.DELETE.containsKeyWord(commandWord)) {
                 return Parser.understandTaskNumber(answers[0], answers[1], taskList);
 
             } else if (Commands.FIND.containsKeyWord(commandWord)) {
-                String toMatch = editedAnswer.split(" ", 2)[1];
-                Command command = new FindCommand();
-                return command.execute(toMatch, taskList);
+                return Parser.understandMatchingString(editedAnswer, taskList);
 
             } else if (Commands.LIST.containsKeyWord(commandWord)) {
                 Command command = new ListCommand();
@@ -69,14 +65,30 @@ public class Parser {
         }
     }
 
+    private static String understandMatchingString(String userInput, TaskList taskList) {
+        try {
+            String[] dissectedInput = userInput.split(" ", 2);
+            if (dissectedInput.length > 1) {
+                String toMatch = dissectedInput[1];
+                Command command = new FindCommand();
+                return command.execute(toMatch, taskList);
+            } else {
+                throw new DukeGotNoArgumentsException("find <thing to find>");
+            }
+        } catch (DukeGotNoArgumentsException e) {
+            return Ui.printErrorMessage(e.getMessage());
+        }
+    }
+
     private static String understandTaskNumber(String stringCommand, String answer, TaskList taskList) {
         try {
-            int oneIndex = Integer.parseInt(answer);
-            int realIndex = oneIndex - 1;
+            int givenIndex = Integer.parseInt(answer);
+            int realIndex = givenIndex - 1;
             Command command;
             if (Commands.DONE.containsKeyWord(stringCommand)) {
                 command = new DoneCommand();
             } else {
+                assert Commands.DELETE.containsKeyWord(stringCommand);
                 command = new DeleteCommand();
             }
             return command.execute(String.valueOf(realIndex), taskList);
@@ -93,51 +105,52 @@ public class Parser {
         try {
             String[] answers = answer.split(" ", 2);
             String type = answers[0].strip();
-            if (answers.length > 1) {
+            if (answers.length > 1 || Commands.TODO.containsKeyWord(type)) {
                 String task = answers[1].strip();
-                String[] partsOfTask = task.split("/");
-
-                // checking for event and deadline if the date is given or not
-                if (Commands.TODO.containsKeyWord(type) || partsOfTask.length == 2) {
-                    if (Commands.TODO.containsKeyWord(type)) {
-                        Command command = new AddCommand(type);
-                        return command.execute(task, taskList);
-
-                    } else {
-                        String description = partsOfTask[0].strip();
-                        String date = partsOfTask[1].strip();
-
-                        // check if the date is given in correct format
-                        if (date.length() != 8) {
-                            throw new DataFormatException();
-                        }
-
-                        Command command = new AddCommand(type);
-                        return command.execute(task, taskList);
-                    }
+                if (Commands.TODO.containsKeyWord(type)) {
+                    Command command = new AddCommand(type);
+                    return command.execute(task, taskList);
                 } else {
-                    String instruction = "<type of task> <description> / <deadline>";
-                    if (Commands.EVENT.containsKeyWord(type)) {
-                        instruction = "<type of task> <description> / <date of event>";
-                    }
-                    throw new DukeGotNoArgumentsException(instruction);
+                    // it is an event or deadline
+                    return Parser.understandDeadlineOrEventDate(type, task, taskList);
                 }
             } else {
-                // handles the case when no description
-                String instruction = "<type of task> <description>";
-                if (Commands.DEADLINE.containsKeyWord(type)) {
-                    instruction = "<type of task> <description> / <due date>";
-                } else if (Commands.EVENT.containsKeyWord(type)) {
-                    instruction = "<type of task> <description> / <date of event>";
+                //  no description given
+                String instruction = Commands.DEADLINE.containsKeyWord(type)
+                        ? "<type of task> <description> / <due date>"
+                        : "<type of task> <description> / <date of event>";
+                throw new DukeGotNoArgumentsException(instruction);
+            }
+        } catch (DukeGotNoArgumentsException e) {
+            return Ui.printErrorMessage(e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return Ui.printErrorMessage(answer);
+        }
+    }
+
+    private static String understandDeadlineOrEventDate(String type, String task, TaskList taskList) {
+        try {
+            String[] partsOfTask = task.strip().split("/", 2);
+            if (partsOfTask.length > 1) {
+                String date = partsOfTask[1].strip();
+                // check if the date is given in correct format
+                if (date.length() == 8) {
+                    Command command = new AddCommand(type);
+                    return command.execute(task, taskList);
+                } else {
+                    throw new DataFormatException();
                 }
+            } else {
+                // date details not given
+                String instruction = Commands.DEADLINE.containsKeyWord(type)
+                        ? "<type of task> <description> / <due date>"
+                        : "<type of task> <description> / <date of event>";
                 throw new DukeGotNoArgumentsException(instruction);
             }
         } catch (DukeGotNoArgumentsException e) {
             return Ui.printErrorMessage(e.getMessage());
         } catch (DataFormatException e) {
             return Ui.printErrorMessage("Please key in again with the date in the ddmmyyyy format.");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return Ui.printErrorMessage(answer);
         }
     }
 

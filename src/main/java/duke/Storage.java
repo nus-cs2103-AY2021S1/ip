@@ -36,7 +36,7 @@ class Storage {
     }
 
     private void retrieveStorage() {
-        // LIMITATION CANNOT HAVE COMMA IN DESCRIPTION OF TASKS
+        // LIMITATION: CANNOT HAVE COMMA IN DESCRIPTION OF TASKS
         try {
             FileReader fileReader = new FileReader(this.savedCopy);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -45,37 +45,41 @@ class Storage {
                 String[] simplerData = eachLine.split(",");
                 Task toAdd;
                 if (simplerData.length == 3) {
-                    String description = simplerData[2].strip();
-                    boolean isDone = !simplerData[1].strip().equals("N");
-                    toAdd = new Task(description, isDone);
-                    this.savedTasks.add(toAdd);
+                    assert simplerData[0].equals("T");
+                    toAdd = this.readTask(simplerData);
                 } else {
-                    // assert simplerData.length == 4;
-                    if (simplerData[0].equals("D")) {
-                        String description = simplerData[2].strip();
-                        boolean isDone = !simplerData[1].strip().equals("N");
-                        String date = simplerData[3].strip();
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
-                        LocalDate actualDate = LocalDate.parse(date, formatter);
-                        toAdd = new Deadline(description, actualDate, isDone);
-                        this.savedTasks.add(toAdd);
-
-                    } else if (simplerData[0].equals("E")) {
-                        String description = simplerData[2].strip();
-                        boolean isDone = !simplerData[1].strip().equals("N");
-                        String date = simplerData[3].strip();
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
-                        LocalDate actualDate = LocalDate.parse(date, formatter);
-                        toAdd = new Event(description, actualDate, isDone);
-                        this.savedTasks.add(toAdd);
-                    }
+                     assert simplerData.length == 4;
+                    toAdd = this.readDeadlineOrEvent(simplerData);
                 }
+                this.savedTasks.add(toAdd);
                 eachLine = bufferedReader.readLine();
             }
-
         } catch (IOException e) {
             Ui.printErrorMessage("Something went wrong:  " + e.getMessage());
         }
+    }
+
+    private Task readTask(String[] details) {
+        String description = details[2].strip();
+        boolean isDone = details[1].strip().equals("D");
+        Task toAdd = new Task(description, isDone);
+        return toAdd;
+    }
+
+    private Task readDeadlineOrEvent(String[] details) {
+        String description = details[2].strip();
+        boolean isDone = details[1].strip().equals("D");
+        String date = details[3].strip();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+        LocalDate actualDate = LocalDate.parse(date, formatter);
+        Task toAdd;
+        if (details[0].equals("D")) {
+            toAdd = new Deadline(description, actualDate, isDone);
+        } else {
+            assert details[0].equals("E");
+            toAdd = new Event(description, actualDate, isDone);
+        }
+        return toAdd;
     }
 
     public List<Task> getSavedTasks() {

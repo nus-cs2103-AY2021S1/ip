@@ -2,7 +2,7 @@ package duke;
 
 class DukeGotNoArgumentsException extends IllegalArgumentException {
     public DukeGotNoArgumentsException(String message) {
-        super("Please reenter your tasks in the format " + message + "\nFill in all blanks.");
+        super("Please reenter your input in the format " + message + "\nFill in all blanks.");
     }
 }
 
