@@ -1,17 +1,21 @@
 public class CommandParser {
 
     public static Command parse(String command) throws DukeException {
-        if (command.startsWith("bye")) {
+        String[] extractedCommand = command.split(" ", 2);
+        switch(extractedCommand[0]) {
+        case("bye"):
             return new ExitCommand(command);
-        }if (command.startsWith("list")) {
+        case("list"):
             return new ListCommand(command);
-        } else if (command.startsWith("done")) {
+        case("done"):
             return new DoneCommand(command);
-        } else if (command.startsWith("delete")) {
+        case("delete"):
             return new DeleteCommand(command);
-        } else if (command.startsWith("deadline") || command.startsWith("event") || (command.startsWith("todo"))) {
+        case("deadline"):
+        case("event"):
+        case("todo"):
             return new AddCommand(command);
-        } else {
+        default:
             throw new DukeException("Command not recognised!");
         }
     }
