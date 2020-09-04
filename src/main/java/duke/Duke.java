@@ -26,8 +26,13 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    private Ui ui;
+
     @Override
     public void start(Stage stage) {
+        // Start the UI handlers, store etc...
+        this.ui = new Ui();
+
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -84,6 +89,8 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
+
     }
 
     /**
@@ -119,7 +126,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return this.ui.handleInput(input);
     }
 
     public static void main(String[] args) {

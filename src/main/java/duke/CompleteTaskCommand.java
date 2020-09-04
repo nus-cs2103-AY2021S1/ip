@@ -8,7 +8,7 @@ public class CompleteTaskCommand implements Command {
         this.taskIndex = taskIndex;
     }
 
-    public void execute() {
-        tasks.completeTask(taskIndex);
+    public String execute() {
+        return tasks.completeTask(taskIndex);
     }
 }

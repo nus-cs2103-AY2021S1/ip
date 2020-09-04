@@ -6,7 +6,7 @@ public class DoneCommand implements Command {
         this.store = store;
     }
 
-    public void execute() {
-
+    public String execute() {
+        return "Done";
     }
 }

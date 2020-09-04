@@ -9,7 +9,8 @@ public class DeleteTaskCommand implements Command {
         this.taskIndex = taskIndex;
     }
 
-    public void execute() {
+    public String execute() {
         tasks.deleteTask(taskIndex);
+        return "Deleted";
     }
 }

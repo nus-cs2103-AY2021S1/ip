@@ -4,6 +4,6 @@ package duke;
  * Interface for program commands
  */
 public interface Command {
-    // Execute the command
-    public void execute();
+    // Execute the command and return the response
+    public String execute();
 }

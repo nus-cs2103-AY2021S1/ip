@@ -9,9 +9,9 @@ public class CreateTaskCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         String message = String.format("Added: %s", task.toString());
-        System.out.println(message);
         tasks.addTask(task);
+        return message;
     }
 }

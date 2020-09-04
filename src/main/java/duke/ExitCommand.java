@@ -2,8 +2,8 @@ package duke;
 
 public class ExitCommand implements Command {
     @Override
-    public void execute() {
-        System.out.println("Goodbye!");
+    public String execute() {
         System.exit(0);
+        return "Goodbye!";
     }
 }

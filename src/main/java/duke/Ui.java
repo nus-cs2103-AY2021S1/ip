@@ -53,4 +53,30 @@ public class Ui {
             this.getUserCommands();
         }
     }
+
+    /**
+     * Gets user input from STDIN, executes it
+     */
+    public String handleInput(String input) {
+        try {
+
+            Command command = Parser.parseLine(tasks, input);
+            String result = command.execute();
+
+            // After every command, save to disk
+            store.syncTasks();
+            return result;
+
+        } catch (CommandMissingArgumentException e) {
+            System.out.println("Missing arguments!");
+        } catch (CommandInvalidArgumentFormatException e) {
+            System.out.println("Invalid arguments!");
+        } catch (MissingTaskException e) {
+            System.out.println("Missing task!");
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        } finally {
+            return input;
+        }
+    }
 }

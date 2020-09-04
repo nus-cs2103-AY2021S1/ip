@@ -22,7 +22,7 @@ public class TaskList {
         System.out.println("duke.Task deleted:");
         System.out.println(task);
     }
-    public void completeTask(Integer taskIndex) {
+    public String completeTask(Integer taskIndex) {
         // If the task doesn't exist (It's index is missing)
         if (taskIndex < 0 || taskIndex >= store.size()) {
             throw new MissingTaskException();
@@ -31,15 +31,15 @@ public class TaskList {
         // Set the task to done
         Task task = store.get(taskIndex);
         task.done();
-        System.out.println("duke.Task marked as complete:");
-        System.out.println(task);
+        return String.format("duke task marked as complete: %s", task);
     }
 
-    public void list() {
+    public String list() {
+        String listText = "";
         for (int i = 0; i < store.size(); i++) {
-            String listText = String.format("%d. %s", i + 1, store.get(i));
-            System.out.println(listText);
+            listText += String.format("%d. %s", i + 1, store.get(i));
         }
+        return listText;
     }
 
     public String dumpTasks() {

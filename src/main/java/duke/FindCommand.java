@@ -11,10 +11,12 @@ public class FindCommand implements Command {
         this.taskList = taskList;
     }
 
-    public void execute() {
+    public String execute() {
         ArrayList<Task> Tasks = taskList.find(text);
-        Tasks.forEach(task -> {
-            System.out.println(task.toString());
-        });
+        String taskStrings = "";
+        for (Task task : Tasks) {
+            taskStrings += "\n" + task.toString();
+        };
+        return taskStrings;
     }
 }
