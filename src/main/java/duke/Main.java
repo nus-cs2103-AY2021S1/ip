@@ -20,8 +20,10 @@ public class Main {
             } else if (args[0].equals("gui")) {
                 runGui(args);
             } else {
-                System.out.println("Usage: java main <cmd|gui>");
+                System.out.println("Usage: java -jar duke.jar <cmd|gui>");
             }
+        } else {
+            System.out.println("Usage: java -jar duke.jar <cmd|gui>");
         }
     }
 
