@@ -1,0 +1,80 @@
+2020-09-04T18:38:00.905+0800 [DEBUG] [org.gradle.launcher.daemon.bootstrap.DaemonMain] Assuming the daemon was started with following jvm opts: [--add-opens, java.base/java.util=ALL-UNNAMED, --add-opens, java.base/java.lang=ALL-UNNAMED, --add-opens, java.base/java.lang.invoke=ALL-UNNAMED, --add-opens, java.prefs/java.util.prefs=ALL-UNNAMED, -XX:MaxMetaspaceSize=256m, -XX:+HeapDumpOnOutOfMemoryError, -Xms256m, -Xmx512m, -Dfile.encoding=UTF-8, -Duser.country=SG, -Duser.language=zh, -Duser.variant]
+2020-09-04T18:38:01.026+0800 [INFO] [org.gradle.launcher.daemon.server.Daemon] start() called on daemon - DefaultDaemonContext[uid=4fc1c73c-d338-42b5-ab05-dd05a5dfbba7,javaHome=/Applications/IntelliJ IDEA CE.app/Contents/jbr/Contents/Home,daemonRegistryDir=/Users/yyutong/Desktop/iP/daemon,pid=41239,idleTimeout=10800000,priority=NORMAL,daemonOpts=--add-opens,java.base/java.util=ALL-UNNAMED,--add-opens,java.base/java.lang=ALL-UNNAMED,--add-opens,java.base/java.lang.invoke=ALL-UNNAMED,--add-opens,java.prefs/java.util.prefs=ALL-UNNAMED,-XX:MaxMetaspaceSize=256m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=SG,-Duser.language=zh,-Duser.variant]
+2020-09-04T18:38:01.063+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface utun1
+2020-09-04T18:38:01.063+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2020-09-04T18:38:01.064+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding remote address /fe80:0:0:0:79bc:c8e0:d8f4:f10f%utun1
+2020-09-04T18:38:01.064+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface utun0
+2020-09-04T18:38:01.064+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2020-09-04T18:38:01.067+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding remote address /fe80:0:0:0:797f:b1fc:d76a:4ed8%utun0
+2020-09-04T18:38:01.068+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface llw0
+2020-09-04T18:38:01.068+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2020-09-04T18:38:01.068+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding remote address /fe80:0:0:0:903d:1fff:fe6e:2154%llw0
+2020-09-04T18:38:01.068+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface awdl0
+2020-09-04T18:38:01.068+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2020-09-04T18:38:01.069+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding remote address /fe80:0:0:0:903d:1fff:fe6e:2154%awdl0
+2020-09-04T18:38:01.069+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface en5
+2020-09-04T18:38:01.069+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2020-09-04T18:38:01.069+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding remote address /fe80:0:0:0:aede:48ff:fe00:1122%en5
+2020-09-04T18:38:01.069+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface en0
+2020-09-04T18:38:01.070+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2020-09-04T18:38:01.070+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding remote address /fe80:0:0:0:1039:40c9:c6b5:289a%en0
+2020-09-04T18:38:01.070+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding remote address /192.168.1.108
+2020-09-04T18:38:01.070+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface lo0
+2020-09-04T18:38:01.070+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? true
+2020-09-04T18:38:01.070+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Ignoring remote address on loopback interface /fe80:0:0:0:0:0:0:1%lo0
+2020-09-04T18:38:01.071+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding loopback address /0:0:0:0:0:0:0:1%lo0
+2020-09-04T18:38:01.071+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding loopback address /127.0.0.1
+2020-09-04T18:38:01.075+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Listening on [e57ad4d4-9c73-4411-aae3-3569ab650d0c port:49453, addresses:[localhost/127.0.0.1]].
+2020-09-04T18:38:01.082+0800 [DEBUG] [org.gradle.launcher.daemon.server.Daemon] Daemon starting at: Fri Sep 04 18:38:01 CST 2020, with address: [e57ad4d4-9c73-4411-aae3-3569ab650d0c port:49453, addresses:[localhost/127.0.0.1]]
+2020-09-04T18:38:01.083+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Advertising the daemon address to the clients: [e57ad4d4-9c73-4411-aae3-3569ab650d0c port:49453, addresses:[localhost/127.0.0.1]]
+2020-09-04T18:38:01.083+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Advertised daemon context: DefaultDaemonContext[uid=4fc1c73c-d338-42b5-ab05-dd05a5dfbba7,javaHome=/Applications/IntelliJ IDEA CE.app/Contents/jbr/Contents/Home,daemonRegistryDir=/Users/yyutong/Desktop/iP/daemon,pid=41239,idleTimeout=10800000,priority=NORMAL,daemonOpts=--add-opens,java.base/java.util=ALL-UNNAMED,--add-opens,java.base/java.lang=ALL-UNNAMED,--add-opens,java.base/java.lang.invoke=ALL-UNNAMED,--add-opens,java.prefs/java.util.prefs=ALL-UNNAMED,-XX:MaxMetaspaceSize=256m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=SG,-Duser.language=zh,-Duser.variant]
+2020-09-04T18:38:01.085+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Storing daemon address: [e57ad4d4-9c73-4411-aae3-3569ab650d0c port:49453, addresses:[localhost/127.0.0.1]], context: DefaultDaemonContext[uid=4fc1c73c-d338-42b5-ab05-dd05a5dfbba7,javaHome=/Applications/IntelliJ IDEA CE.app/Contents/jbr/Contents/Home,daemonRegistryDir=/Users/yyutong/Desktop/iP/daemon,pid=41239,idleTimeout=10800000,priority=NORMAL,daemonOpts=--add-opens,java.base/java.util=ALL-UNNAMED,--add-opens,java.base/java.lang=ALL-UNNAMED,--add-opens,java.base/java.lang.invoke=ALL-UNNAMED,--add-opens,java.prefs/java.util.prefs=ALL-UNNAMED,-XX:MaxMetaspaceSize=256m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=SG,-Duser.language=zh,-Duser.variant]
+2020-09-04T18:38:01.093+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2020-09-04T18:38:01.095+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2020-09-04T18:38:01.099+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2020-09-04T18:38:01.100+0800 [LIFECYCLE] [org.gradle.launcher.daemon.server.Daemon] Daemon server started.
+2020-09-04T18:38:01.101+0800 [DEBUG] [org.gradle.launcher.daemon.bootstrap.DaemonStartupCommunication] Completed writing the daemon greeting. Closing streams...
+2020-09-04T18:38:01.104+0800 [DEBUG] [org.gradle.launcher.daemon.server.Daemon] stopOnExpiration() called on daemon
+2020-09-04T18:38:01.104+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Accepted connection from /127.0.0.1:49454 to /127.0.0.1:49453.
+2020-09-04T18:38:01.106+0800 [DEBUG] [org.gradle.launcher.daemon.server.Daemon] awaitExpiration() called on daemon
+2020-09-04T18:38:01.106+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2020-09-04T18:38:01.154+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 19: received class org.gradle.launcher.daemon.protocol.Build
+2020-09-04T18:38:01.154+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 19: Received non-IO message from client: Build{id=c3b90d80-ff7e-4a2b-aff5-1a713f27de05, currentDir=/Users/yyutong/Desktop/iP}
+2020-09-04T18:38:01.155+0800 [INFO] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received command: Build{id=c3b90d80-ff7e-4a2b-aff5-1a713f27de05, currentDir=/Users/yyutong/Desktop/iP}.
+2020-09-04T18:38:01.155+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Starting executing command: Build{id=c3b90d80-ff7e-4a2b-aff5-1a713f27de05, currentDir=/Users/yyutong/Desktop/iP} with connection: socket connection from /127.0.0.1:49453 to /127.0.0.1:49454.
+2020-09-04T18:38:01.158+0800 [ERROR] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: started DaemonCommandExecution[command = Build{id=c3b90d80-ff7e-4a2b-aff5-1a713f27de05, currentDir=/Users/yyutong/Desktop/iP}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:49453 to /127.0.0.1:49454] after 0.0 minutes of idle
+2020-09-04T18:38:01.158+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as busy, address: [e57ad4d4-9c73-4411-aae3-3569ab650d0c port:49453, addresses:[localhost/127.0.0.1]]
+2020-09-04T18:38:01.158+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [e57ad4d4-9c73-4411-aae3-3569ab650d0c port:49453, addresses:[localhost/127.0.0.1]]
+2020-09-04T18:38:01.159+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2020-09-04T18:38:01.159+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2020-09-04T18:38:01.160+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2020-09-04T18:38:01.160+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2020-09-04T18:38:01.161+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2020-09-04T18:38:01.161+0800 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=c3b90d80-ff7e-4a2b-aff5-1a713f27de05, currentDir=/Users/yyutong/Desktop/iP}. Dispatching build started information...
+2020-09-04T18:38:01.161+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 21: dispatching org.gradle.launcher.daemon.protocol.BuildStarted@656e900
+2020-09-04T18:38:01.163+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: {PATH=/Library/Frameworks/Python.framework/Versions/3.8/bin:/opt/anaconda3/bin:/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/usr/local/mongodb/mongodb-osx-x86_64-3.4.2/bin, SHELL=/bin/bash, CONDA_DEFAULT_ENV=base, CONDA_EXE=/opt/anaconda3/bin/conda, MONGO_PATH=/usr/local/mongodb/mongodb-osx-x86_64-3.4.2, CONDA_PYTHON_EXE=/opt/anaconda3/bin/python, USER=yyutong, TMPDIR=/var/folders/lx/r_b543ds75b1jg729g4jv5240000gn/T/, SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.LPojM2T1do/Listeners, CONDA_PREFIX=/opt/anaconda3, _CE_CONDA=, XPC_FLAGS=0x0, _CE_M=, __CF_USER_TEXT_ENCODING=0x1F5:0x19:0x34, CONDA_PROMPT_MODIFIER=(base) , LOGNAME=yyutong, LC_CTYPE=UTF-8, XPC_SERVICE_NAME=com.jetbrains.intellij.ce.8624, HOME=/Users/yyutong, CONDA_SHLVL=1}
+2020-09-04T18:38:01.167+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+2020-09-04T18:38:01.167+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 41239). The daemon log file: /Users/yyutong/Desktop/iP/daemon/6.2/daemon-41239.out.log
+2020-09-04T18:38:01.169+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogAndCheckHealth] Starting build in new daemon [memory: 536.9 MB]
+2020-09-04T18:38:01.175+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+2020-09-04T18:38:01.175+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=4fc1c73c-d338-42b5-ab05-dd05a5dfbba7,javaHome=/Applications/IntelliJ IDEA CE.app/Contents/jbr/Contents/Home,daemonRegistryDir=/Users/yyutong/Desktop/iP/daemon,pid=41239,idleTimeout=10800000,priority=NORMAL,daemonOpts=--add-opens,java.base/java.util=ALL-UNNAMED,--add-opens,java.base/java.lang=ALL-UNNAMED,--add-opens,java.base/java.lang.invoke=ALL-UNNAMED,--add-opens,java.prefs/java.util.prefs=ALL-UNNAMED,-XX:MaxMetaspaceSize=256m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=SG,-Duser.language=zh,-Duser.variant]
+javafx.fxml.LoadException: 
+/Users/yyutong/Desktop/iP/build/resources/main/view/MainWindow.fxml
+
+	at javafx.fxml.FXMLLoader.constructLoadException(FXMLLoader.java:2625)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2568)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2466)
+	at javafx.fxml.FXMLLoader.load(FXMLLoader.java:2435)
+	at duke.Main.start(Main.java:22)
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:846)
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:455)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:428)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:427)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:96)
+Caused by: javax.xml.stream.XMLStreamException: ParseError at [row,col]:[2,6]
+Message: The processing instruction target matching "[xX][mM][lL]" is not allowed.
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl.next(XMLStreamReaderImpl.java:652)
+	at java.xml/javax.xml.stream.util.StreamReaderDelegate.next(StreamReaderDelegate.java:84)
+	at javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2538)
+	... 9 more
