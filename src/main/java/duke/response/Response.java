@@ -9,6 +9,13 @@ public class Response {
         this(null, false, false);
     }
 
+    /**
+     * A Response object.
+     *
+     * @param message The message string.
+     * @param isError The error status.
+     * @param isExit The exit status.
+     */
     public Response(String message, boolean isError, boolean isExit) {
         this.message = message;
         this.isError = isError;

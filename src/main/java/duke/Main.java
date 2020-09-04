@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private final Duke duke;
 
+    /**
+     * The main GUI class.
+     */
     public Main() {
         this.duke = new Duke("data/tasks.txt");
         Response initResponse = this.duke.getInitResponse();

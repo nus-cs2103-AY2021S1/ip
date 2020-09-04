@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class MainWindow extends AnchorPane {
     @FXML
@@ -32,6 +31,11 @@ public class MainWindow extends AnchorPane {
     private final Image userImage;
     private final Image dukeImage;
 
+    /**
+     * The main window for Duke,
+     *
+     * @param duke A Duke instance.
+     */
     public MainWindow(Duke duke) {
         this.duke = duke;
         this.userImage = new Image(this.getClass().getResourceAsStream("/images/user-solid.png"));
