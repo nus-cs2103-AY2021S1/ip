@@ -8,6 +8,8 @@ import java.util.Objects;
  * a <code>boolean</code> isDone to denote if the task is completed.
  */
 public abstract class DukeTask {
+    private static final String tick = "\u2713";
+    private static final String cross = "\u2718";
     private final String description;
     private boolean isDone;
 
@@ -24,7 +26,7 @@ public abstract class DukeTask {
      * @return String status icon.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? tick : cross); //return tick or X symbols
     }
 
     /**

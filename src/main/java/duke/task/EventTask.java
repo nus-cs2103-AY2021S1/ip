@@ -1,9 +1,6 @@
 package duke.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import duke.CommonString;
 
 /**
  * Represents an Event related DukeTask.
@@ -11,25 +8,11 @@ import duke.CommonString;
  * <code>EventTask</code> contains an additional <code>LocalDateTime</code>
  * to store information about the date and time of the Event.
  */
-public class EventTask extends DukeTask {
-    private final LocalDateTime datetime;
+public class EventTask extends DukeTaskWithTime {
 
     public EventTask(String description, LocalDateTime datetime) {
-        super(description);
-        this.datetime = datetime;
+        super(description, datetime);
     }
-
-    /**
-     * Returns a <code>String</code> representing the Date and Time of the task.
-     * The <code>String</code> is formatted by the <code>DateTimeFormatter</code> defined.
-     *
-     * @return String DateTime.
-     */
-    public String getDatetime() {
-        DateTimeFormatter df = DateTimeFormatter.ofPattern(CommonString.DUKE_DATETIME_FORMAT.toString());
-        return datetime.format(df);
-    }
-
     @Override
     public String toString() {
         return "[E]" + super.toString() + String.format(" (at: %s)", getDatetime());
