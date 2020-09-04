@@ -575,3 +575,33 @@ Hello! I'm Duke
 What can I do for you?
 Hello! I'm Duke
 What can I do for you?
+Hello! I'm Duke
+What can I do for you?
+
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+
+☹ OOPS!!! The description of a todo cannot be empty.
+Here are the tasks in your list:
+
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] test
+Now you have 1 tasks in the list.
+Here are the tasks in your list:
+
+Here are the tasks in your list:
+1.[T][✘] test
+
+Hello! I'm Duke
+What can I do for you?
+Hello! I'm Duke
+What can I do for you?
+Hello! I'm Duke
+What can I do for you?
+Hello! I'm Duke
+What can I do for you?
+Hello! I'm Duke
+What can I do for you?
+Hello! I'm Duke
+What can I do for you?
