@@ -113,9 +113,15 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: "
-                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + ", " + this.time + ")";
+        if (!priority.equals(Priority.NONE)) {
+            return "[E]" + super.toString() + " (at: "
+                    + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    + ", " + this.time + ") " + " <" + this.priority + ">";
+        } else {
+            return "[E]" + super.toString() + " (at: "
+                    + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    + ", " + this.time + ")";
+        }
     }
 
     /**
@@ -125,7 +131,7 @@ public class Event extends Task {
      */
     public String storedTaskString() {
         return "E" + "!@#" + super.storedTaskString()
-                + "!@#" + this.userInputDate + "!@#" + this.userInputTime;
+                + "!@#" + this.userInputDate + "!@#" + this.userInputTime + "!@#" + this.priority;
     }
 
 }

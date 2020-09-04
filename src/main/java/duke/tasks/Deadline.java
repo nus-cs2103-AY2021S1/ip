@@ -112,9 +112,15 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
-                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + ", " + this.time + ")";
+        if (!priority.equals(Priority.NONE)) {
+            return "[D]" + super.toString() + " (by: "
+                    + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    + ", " + this.time + ") " + " <" + this.priority + ">";
+        } else {
+            return "[D]" + super.toString() + " (by: "
+                    + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                    + ", " + this.time + ")";
+        }
     }
 
     /**
@@ -124,6 +130,6 @@ public class Deadline extends Task {
      */
     public String storedTaskString() {
         return "D" + "!@#" + super.storedTaskString()
-                + "!@#" + this.userInputDate + "!@#" + this.userInputTime;
+                    + "!@#" + this.userInputDate + "!@#" + this.userInputTime + "!@#" + this.priority;
     }
 }

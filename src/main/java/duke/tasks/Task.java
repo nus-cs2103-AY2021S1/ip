@@ -10,6 +10,7 @@ package duke.tasks;
 public class Task {
     protected String taskName;
     protected boolean isDone;
+    protected Priority priority;
 
     /**
      * Initialises a Task object with the String taskName which describes
@@ -19,6 +20,7 @@ public class Task {
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
+        this.priority = Priority.NONE;
     }
 
     public String getStatusIcon() {
@@ -30,6 +32,14 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Sets the priority of the task.
+     * @param priority Priority ranking of the task
+     */
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public String toString() {

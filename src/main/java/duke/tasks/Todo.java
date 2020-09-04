@@ -20,7 +20,11 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        if (!priority.equals(Priority.NONE)) {
+            return "[T]" + super.toString() + " <" + this.priority + ">";
+        } else {
+            return "[T]" + super.toString();
+        }
     }
 
     /**
@@ -29,6 +33,7 @@ public class Todo extends Task {
      * @return String task description to be stored in hard disk.
      */
     public String storedTaskString() {
-        return "T" + "!@#" + super.storedTaskString();
+        return "T" + "!@#" + super.storedTaskString()
+                + "!@#" + this.priority;
     }
 }
