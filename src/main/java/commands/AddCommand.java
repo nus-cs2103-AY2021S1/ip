@@ -40,9 +40,9 @@ public class AddCommand extends Command {
     @Override
     public void exec(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskException, UnknownCmdException,
             InvalidTimeException, BadDtFormatException {
+        String[] info = extractStringInfo(text);
         assert ui != null : "Null UI";
         assert tasks != null : "Null TaskList";
-        String[] info = extractInfo(text);
         if (info[0].equals("todo")) {
             tasks.addItem(new Todo(info[1], false));
             ui.setMessageNewTask(info[1], tasks.size());
@@ -63,8 +63,8 @@ public class AddCommand extends Command {
      * @throws UnknownCmdException If an unknown command is entered.
      * @throws InvalidTimeException If an invalid time is entered for a Deadline or Event task.
      */
-
-    public String[] extractInfo(String str) throws InvalidTaskException, UnknownCmdException, InvalidTimeException {
+    public String[] extractStringInfo(String str) throws InvalidTaskException, UnknownCmdException,
+            InvalidTimeException {
         assert str != null : "Input is null!";
         String[] store = new String[3];
         // Handling the classification of event type
