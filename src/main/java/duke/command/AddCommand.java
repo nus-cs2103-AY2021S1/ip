@@ -8,6 +8,8 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 
+import java.util.Arrays;
+
 public class AddCommand extends Command {
     private CommandType commandType;
     private String[] description;
@@ -46,5 +48,10 @@ public class AddCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return this.commandType.toString() + " " + Arrays.toString(this.description);
     }
 }

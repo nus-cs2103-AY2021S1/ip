@@ -5,6 +5,8 @@ import duke.Storage;
 
 import duke.task.TaskList;
 
+import java.util.Arrays;
+
 public class ExitCommand extends Command {
     private CommandType commandType;
 
@@ -18,5 +20,10 @@ public class ExitCommand extends Command {
 
     public boolean isExit() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return this.commandType.toString();
     }
 }
