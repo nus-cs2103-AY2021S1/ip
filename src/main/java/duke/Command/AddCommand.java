@@ -29,6 +29,8 @@ public class AddCommand extends Command {
      * @param taskDescription The task description from user input, including the command word.
      */
     public AddCommand(String taskDescription) {
+        assert taskDescription != null;
+      
         String[] splitWords = taskDescription.split("\\s+");
         this.keyword = splitWords[0]; // todo, deadline, event
         this.stringWithoutKeyword = getStringWithoutKeyword(splitWords);
@@ -142,6 +144,9 @@ public class AddCommand extends Command {
 
         taskList.add(newTask);
         storage.saveTasks(taskList);
+
+        assert taskList.get(taskList.size()).equals(newTask) : "Task is not added into the taskList!";
+
         return Message.concatLines(Message.MESSAGE_ADDED, newTask.toString(),
                 Ui.LINE_SEPARATOR, Message.getTotalTaskMessage(taskList));
     }

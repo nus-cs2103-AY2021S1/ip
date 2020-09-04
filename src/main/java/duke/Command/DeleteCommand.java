@@ -31,6 +31,9 @@ public class DeleteCommand extends Command {
         Task task = taskList.get(index);
         taskList.remove(index);
         storage.saveTasks(taskList);
+
+        assert !taskList.getTasks().contains(task) : "Task is not removed from the taskList!";
+
         return Message.concatLines(Message.MESSAGE_DELETE, task.toString(),
                 Ui.LINE_SEPARATOR, Message.getTotalTaskMessage(taskList));
     }
