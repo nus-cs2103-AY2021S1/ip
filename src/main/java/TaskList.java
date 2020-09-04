@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a task list which keeps track of the list of tasks.
@@ -79,15 +80,12 @@ public class TaskList {
      */
     public List<Task> getSameDateTasks(String date) {
         assert(taskList != null);
-        List<Task> listOfTasks = new ArrayList<>();
-        LocalDate eventDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        for (Task task : taskList) {
-            LocalDate dateInTask = task.getDate().orElse(null);
-            if (eventDate.equals(dateInTask)) {
-                listOfTasks.add(task);
-            }
-        }
-        return listOfTasks;
+        return taskList.stream()
+                .filter(task -> {
+                    LocalDate eventDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    return eventDate.equals(task.getDate().orElse(null));
+                })
+                .collect(Collectors.toList());
     }
 
     /**
@@ -101,13 +99,9 @@ public class TaskList {
 
     public List<Task> getTasksWithKeyWord(String keyword) {
         assert(taskList != null);
-        List<Task> list = new ArrayList<>();
-        for (Task task : taskList) {
-            if (task.searchFound(keyword)) {
-                list.add(task);
-            }
-        }
-        return list;
+        return taskList.stream()
+                .filter(task -> task.searchFound(keyword))
+                .collect(Collectors.toList());
     }
 
     @Override
