@@ -15,6 +15,6 @@ public class DukeException extends Exception {
 
     @Override
     public String getMessage() {
-        return super.getMessage() + "\n Please reenter your command!";
+        return super.getMessage() + "\n Please re-enter your command!";
     }
 }

@@ -46,6 +46,11 @@ application {
     mainClassName = "Duke"
 }
 
+
+checkstyle {
+    toolVersion = '8.29'
+}
+
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null

@@ -60,14 +60,16 @@ public class Duke{
     }
 
     public String welcomeMessage() {
-        return "Hello, I'm DukeQ\n"
+        return  "Hello, I'm DukeQ :) \n" + "I am very happy to serve you! \n"
+                + "The valid command formats are as follows and the case is sensitive. \n"
+                + "\n"
                 + "todo then your instructions e.g. todo read book\n"
                 + "deadline then your instructions e.g. deadline by 2020-09-01\n"
                 + "type 'event' followed by the description,\n"
-                + "then '/at', then timing in yyyy-MM-dd format\n"
-                + "then '/by', then due date (yyyy-MM-dd) \n"
-                + "done followed by the task number to marked it as done\"\n"
-                + "type list to see the tasklists\n"
+                + "if '/at', the time should be like 2020-09-01\n"
+                + "if '/by', the due date should be like 2020-09-01 \n"
+                + "done followed by the task number to marked it as done \n"
+                + "type list to see the task lists\n"
                 + "type find followed by keywords to search for tasks \n"
                 + "type bye to exit DukeQ\n";
     }
