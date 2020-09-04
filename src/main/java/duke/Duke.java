@@ -1,8 +1,8 @@
 package duke;
 
-import java.io.File;
-
 import duke.command.Command;
+import duke.common.DukeException;
+import duke.common.Ui;
 import duke.io.Storage;
 import duke.io.TaskList;
 import duke.parser.Parser;
@@ -17,7 +17,6 @@ import duke.parser.Parser;
  */
 public class Duke {
 
-    private static final String CURRENT_DIRECTORY = System.getProperty("user.dir");
     private final Storage storage;
     private TaskList taskList;
     private final Ui ui;
@@ -40,35 +39,18 @@ public class Duke {
     }
 
     /**
-     * Main logic of application execution.
-     * Use Duke class initialised class for application.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    /**
-     * Main class. Entry point for Duke application.
+     * Start duke programme running.
      *
-     * @param args stores hava command line arguments.
+     * @param input String command
      */
-    public static void main(String[] args) {
-        final String dataDir = CURRENT_DIRECTORY + File.separator + "data";
-        final String dataFile = "duke.txt";
-        new Duke(dataDir + File.separator + dataFile).run();
+    public void handleInput(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        } finally {
+            ui.showLine();
+        }
     }
 }

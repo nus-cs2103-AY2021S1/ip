@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Ui;
+import duke.common.Ui;
 import duke.io.Storage;
 import duke.io.TaskList;
 
@@ -13,7 +13,6 @@ import duke.io.TaskList;
  * @version v1.0
  */
 public class ByeCommand extends Command {
-
     /**
      * Execute bye command logic.
      * Print end message.
@@ -24,9 +23,9 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(TaskList task, Ui ui, Storage storage) {
-        ui.showLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        ui.showLine();
+        String result = String.format("%s\n %s\n %s", ui.showLine(), "Bye. Hope to see you again soon!",
+                ui.showLine());
+        Ui.printString(result);
     }
 
     /**

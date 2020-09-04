@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import duke.DukeException;
-import duke.Ui;
+import duke.common.DukeException;
+import duke.common.Ui;
 import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.Event;

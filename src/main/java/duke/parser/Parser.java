@@ -1,6 +1,5 @@
 package duke.parser;
 
-import duke.DukeException;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -10,6 +9,7 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
+import duke.common.DukeException;
 
 /**
  * Parser class.

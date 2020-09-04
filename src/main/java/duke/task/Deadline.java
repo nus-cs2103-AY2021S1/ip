@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 public class Deadline extends Task {
 
-    private LocalDateTime by;
+    private final LocalDateTime by;
 
     /**
      * Class constructor.

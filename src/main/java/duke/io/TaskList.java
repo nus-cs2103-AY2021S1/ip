@@ -12,7 +12,7 @@ import duke.task.Task;
  * @version v1.0
  */
 public class TaskList {
-    private ArrayList<Task> taskArrayList;
+    private final ArrayList<Task> taskArrayList;
 
     /**
      * Class constructor.

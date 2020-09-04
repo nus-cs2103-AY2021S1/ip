@@ -4,8 +4,8 @@ import java.io.File;
 
 import org.junit.jupiter.api.Test;
 
-import duke.DukeException;
-import duke.Ui;
+import duke.common.DukeException;
+import duke.common.Ui;
 import duke.io.Storage;
 import duke.io.TaskList;
 import duke.parser.Parser;
