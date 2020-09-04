@@ -25,6 +25,7 @@ public class DeleteCommand implements Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.get(index);
+        assert index >= 0 && index < tasks.size() : "Invalid item number";
         tasks.delete(index);
         storage.write(tasks);
         return   ui.format("The following task has been removed successfully:", "\t" + task.toString(),

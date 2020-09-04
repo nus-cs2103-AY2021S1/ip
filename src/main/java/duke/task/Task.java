@@ -8,6 +8,7 @@ public abstract class Task {
     public boolean isDone;
 
     public Task(String description) {
+        assert !description.isEmpty() : "Task description should not be empty";
         this.description = description;
         this.isDone = false;
     }

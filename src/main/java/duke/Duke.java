@@ -118,6 +118,7 @@ public class Duke extends Application {
         } catch (DukeException e) {
             output = ui.format(e.getMessage());
         }
+        assert !output.isEmpty() : "Output should not be empty";
 
         // set labels and dialog container
         Label userText = new Label(input);

@@ -8,6 +8,7 @@ public class FindCommand implements Command {
     String keyword;
 
     public FindCommand(String keyword) {
+        assert !keyword.isEmpty() : "Find keyword should not be empty";
         this.keyword = keyword;
     }
 
