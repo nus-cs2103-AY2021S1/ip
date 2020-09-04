@@ -29,14 +29,16 @@ public class Storage {
      * Reads the hard disk and prints the list.
      * @throws FileNotFoundException
      */
-    void printList() throws FileNotFoundException {
+    String printList() throws FileNotFoundException {
         Scanner s = new Scanner(file);
         int counter = 1;
+        String str = "Here are the tasks in your list: ";
         while (s.hasNextLine()) {
             String task = s.nextLine();
-            System.out.println(counter + ". " + task);
+            str += "\n" + counter + ". " + task;
             counter++;
         }
+        return str;
     }
 
     /**

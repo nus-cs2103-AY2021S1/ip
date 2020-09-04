@@ -45,7 +45,7 @@ public class Ui {
      * @param arr temporary list of tasks
      * @param t the task to print out
      */
-    public static void print(ArrayList<Task> arr, Task t) {
+    public static String print(ArrayList<Task> arr, Task t) {
         String keyword = "";
         String toPrint = "";
         if (t instanceof Deadline) {
@@ -55,20 +55,19 @@ public class Ui {
             keyword = "at";
             toPrint = " (" + keyword + ": " + t.getTime() + ")";
         }
-        System.out.println("Got it. I've added this task:" + "\n" + t.getIndicator()
-                + t.getIcon() + t.getName() + toPrint + "\n" + "Now you have " + arr.size() + " tasks in the list."
-        );
+        return "Got it. I've added this task:" + "\n" + t.getIndicator()
+                + t.getIcon() + t.getName() + toPrint + "\n" + "Now you have " + arr.size() + " tasks in the list.";
     }
 
     /**
      * Prints out a list of tasks that match the searchword
      * @param arr temporary list of tasks
      */
-    public static void printForFind(ArrayList<Task> arr) {
+    public static String printForFind(ArrayList<Task> arr) {
         if (arr.size() == 0) {
-            System.out.println("There is no task that matches your searchword");
+            return "There is no task that matches your searchword";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            String str = "Here are the matching tasks in your list:";
             int counter = 1;
             for (Task t: arr) {
                 String keyword = "";
@@ -80,9 +79,10 @@ public class Ui {
                     keyword = "at";
                     toPrint = " (" + keyword + ": " + t.getTime() + ")";
                 }
-                System.out.println(counter + ". " + t.getIndicator() + t.getIcon() + t.getName() + toPrint);
+                str += "\n" + counter + ". " + t.getIndicator() + t.getIcon() + t.getName() + toPrint;
                 counter++;
             }
+            return str;
         }
     }
 
@@ -90,7 +90,7 @@ public class Ui {
      * Prints out a string everytime the user indicates a task as done
      * @param arr arraylist of tasks
      */
-    public static void printForDone(ArrayList<Task> arr, Task t) {
+    public static String printForDone(ArrayList<Task> arr, Task t) {
         String keyword = "";
         String toPrint = "";
         if (t instanceof Deadline) {
@@ -100,9 +100,8 @@ public class Ui {
             keyword = "at";
             toPrint = " (" + keyword + ": " + t.getTime() + ")";
         }
-        System.out.println("Got it. Duke has marked this task as done:" + "\n" + t.getIndicator()
-                + t.getIcon() + t.getName() + toPrint + "\n" + "Now you have " + arr.size() + " tasks in the list."
-        );
+        return "Got it. Duke has marked this task as done:" + "\n" + t.getIndicator()
+                + t.getIcon() + t.getName() + toPrint + "\n" + "Now you have " + arr.size() + " tasks in the list.";
     }
 
     /**
@@ -110,7 +109,7 @@ public class Ui {
      * @param arr temporary list of tasks
      * @param t the task to print out
      */
-    public static void printForDelete(ArrayList<Task> arr, Task t) {
+    public static String printForDelete(ArrayList<Task> arr, Task t) {
         String keyword = "";
         String toPrint = "";
         if (t instanceof Deadline) {
@@ -120,40 +119,38 @@ public class Ui {
             keyword = "at";
             toPrint = " (" + keyword + ": " + t.getTime() + ")";
         }
-        System.out.println("Got it. Duke has removed this task:" + "\n" + t.getIndicator()
-                + t.getIcon() + t.getName() + toPrint + "\n" + "Now you have " + arr.size() + " tasks in the list."
-        );
+        return "Got it. Duke has removed this task:" + "\n" + t.getIndicator()
+                + t.getIcon() + t.getName() + toPrint + "\n" + "Now you have " + arr.size() + " tasks in the list.";
     }
 
     /**
      * Prints out the bye statement
      */
-    public void respondToBye() {
-        System.out.println("Bye. Please come back soon :(");
+    public String respondToBye() {
         this.stop();
+        return "Bye. Please come back soon :(";
     }
 
     /**
      * Prints out a string saying that the list is empty
      */
-    public void respondToEmptyList() {
-        System.out.println("You currently do not have any todos.");
+    public String respondToEmptyList() {
+        return "You currently do not have any todos.";
     }
 
     /**
      * Prints out the list of tasks when the user inputs in "list"
      * @throws Exception
      */
-    public void respondToList() throws Exception {
-        System.out.println("Here are the tasks in the list: ");
-        s.printList();
+    public String respondToList() throws Exception {
+        return s.printList();
     }
 
     /**
      * Prints out a statement when the user forgets to put the searchword.
      */
-    public void respondToFindWrongSyntax() {
-        System.out.println("Provide a number of the todo that you want to mark as done!");
+    public String respondToFindWrongSyntax() {
+        return "Provide a number of the todo that you want to mark as done!";
     }
 
     /**
@@ -161,65 +158,65 @@ public class Ui {
      * @param searchWord the word on which the user wants to base their search.
      * @throws Exception
      */
-    public void respondToFind(String searchWord) throws Exception {
+    public String respondToFind(String searchWord) throws Exception {
         ArrayList<Task> temp = new ArrayList<>();
         for (Task t: tl.getArr()) {
             if (t.getName().contains(searchWord)) {
                 temp.add(t);
             }
         }
-        printForFind(temp);
+        return printForFind(temp);
     }
 
     /**
      * Prints out a string whenever the user inputs in an invalid task number to mark as done
      */
-    public void respondToDoneFail() {
-        System.out.println("The specified todo does not exist!");
+    public String respondToDoneFail() {
+        return "The specified todo does not exist!";
     }
 
     /**
      * Prints out a string whenever the user forgets to input in the task number
      */
-    public void respondToDoneWrongSyntax() {
-        System.out.println("Provide a number of the todo that you want to mark as done!");
+    public String respondToDoneWrongSyntax() {
+        return "Provide a number of the todo that you want to mark as done!";
     }
 
     /**
      * Prints out the statement saying that task has been marked as done and updates the list
      */
-    public void respondToDone(int taskNumber) throws Exception {
+    public String respondToDone(int taskNumber) throws Exception {
         ArrayList<Task> arr = tl.getArr();
         Task t = arr.get(taskNumber - 1);
         t.taskIsDone();
-        printForDone(arr, t);
         s.listWriter(arr);
+        return printForDone(arr, t);
     }
 
     /**
      * Prints out an error message when the user inputs in the wrong syntax for todo
      */
-    public void respondToTodoWrongSyntax() {
+    public String respondToTodoWrongSyntax() {
         TodoException te = new TodoException();
-        System.out.println(te.getErrorMessage());
+        return te.getErrorMessage();
     }
 
     /**
      * Prints out the statement saying that todo has been added and updates the list
      */
-    public void respondToTodo(String name) throws Exception {
+    public String respondToTodo(String name) throws Exception {
         Todo t = new Todo(name);
         tl.addTask(t);
-        print(tl.getArr(), t);
         s.listWriter(tl.getArr());
+        return print(tl.getArr(), t);
     }
 
     /**
      * Prints out an error message when the user forgets to input the deadline details
      */
-    public void respondToEventFail() {
+    public String respondToEventFail() {
         EventException ee = new EventException();
-        System.out.println(ee.getErrorMessage());
+        return ee.getErrorMessage();
     }
 
     /**
@@ -228,26 +225,26 @@ public class Ui {
      * @param time deadline of the event
      * @throws Exception
      */
-    public void respondToEvent(String name, String time) throws Exception {
+    public String respondToEvent(String name, String time) throws Exception {
         ArrayList<Task> arr = tl.getArr();
         Event e = new Event(name, time);
         tl.addTask(e);
-        print(arr, e);
         s.listWriter(arr);
+        return print(arr, e);
     }
 
     /**
      * Prints out an error message when the user inputs in the wrong syntax for delete
      */
-    public void respondToDeleteWrongSyntax() {
-        System.out.println("Provide the number of the todo that you want to delete!");
+    public String respondToDeleteWrongSyntax() {
+        return "Provide the number of the todo that you want to delete!";
     }
 
     /**
      * Prints out a statement saying that the specified task number does not exists
      */
-    public void respondToDeleteFail() {
-        System.out.println("The specified todo does not exist!");
+    public String respondToDeleteFail() {
+        return "The specified todo does not exist!";
     }
 
     /**
@@ -255,20 +252,20 @@ public class Ui {
      * @param taskNumber task number of the task that is being deleted
      * @throws Exception
      */
-    public void respondToDelete(int taskNumber) throws Exception {
+    public String respondToDelete(int taskNumber) throws Exception {
         ArrayList<Task> arr = tl.getArr();
         Task t = arr.get(taskNumber - 1);
         tl.removeTask(t);
-        printForDelete(arr, t);
         s.listWriter(arr);
+        return printForDelete(arr, t);
     }
 
     /**
      * Prints out an error message when the user forgets to input the deadline details
      */
-    public void respondToDeadlineFail() {
+    public String respondToDeadlineFail() {
         DeadlineException de = new DeadlineException();
-        System.out.println(de.getErrorMessage());
+        return de.getErrorMessage();
     }
 
     /**
@@ -277,18 +274,18 @@ public class Ui {
      * @param time deadline of the event
      * @throws Exception
      */
-    public void respondToDeadline(String name, String time) throws Exception {
+    public String respondToDeadline(String name, String time) throws Exception {
         ArrayList<Task> arr = tl.getArr();
         Deadline d = new Deadline(name, time);
         tl.addTask(d);
-        print(arr, d);
         s.listWriter(arr);
+        return print(arr, d);
     }
 
     /**
      * Prints out a statement saying that the command does not exist
      */
-    public void respondToCommandDoesNotExist() {
-        System.out.println("Command does not exist!" + "\n");
+    public String respondToCommandDoesNotExist() {
+        return "Command does not exist!" + "\n";
     }
 }

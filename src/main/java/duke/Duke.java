@@ -26,8 +26,12 @@ public class Duke {
      * Runs the whole program.
      * @throws Exception
      */
-    public void run() throws Exception {
+    public void run() {
         ui.start();
+    }
+
+    public String runCommand(String command) throws Exception {
+        return Parser.processCommand(command, tasks, ui);
     }
 
     public static void main(String[] args) throws Exception {
