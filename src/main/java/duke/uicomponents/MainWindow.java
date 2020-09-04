@@ -27,7 +27,7 @@ public class MainWindow extends Application {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/https _specials-images.forbesimg.com_imageserve_5c76b7d331358e35dd2773a9_0x0.jpg background=000000&cropX1=0&cropX2=4401&cropY1=0&cropY2=4401.jpg"));
 
     public static void main(String[] args) {
         launch(args);

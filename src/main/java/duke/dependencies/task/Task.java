@@ -11,6 +11,9 @@ public abstract class Task implements Serializable, Schedulable {
     protected CompletionState state;
     protected String task;
 
+    private static final String TICK = "\u2713";
+    private static final String CROSS = "\u274c";
+
     protected Task(String task) {
         this.task = task;
         this.state = UNFINISHED;
@@ -182,8 +185,8 @@ public abstract class Task implements Serializable, Schedulable {
         @Override
         public String toString() {
             return String.format(
-                    "[Event][%s] %s (at: %s)", super.state == UNFINISHED ? "X"
-                            : "✓",
+                    "[Event][%s] %s (at: %s)", super.state == UNFINISHED ? CROSS
+                            : TICK,
                     super.task,
                     date);
         }
@@ -202,8 +205,8 @@ public abstract class Task implements Serializable, Schedulable {
         @Override
         public String toString() {
             return String.format(
-                    "[ToDo][%s] %s", super.state == UNFINISHED ? "X"
-                            : "✓",
+                    "[ToDo][%s] %s", super.state == UNFINISHED ? CROSS
+                            : TICK,
                     super.task);
         }
     }
@@ -231,8 +234,8 @@ public abstract class Task implements Serializable, Schedulable {
         @Override
         public String toString() {
             return String.format(
-                    "[Deadline][%s] %s (by: %s)", super.state == UNFINISHED ? "X"
-                            : "✓",
+                    "[Deadline][%s] %s (by: %s)", super.state == UNFINISHED ? CROSS
+                            : TICK,
                     super.task,
                     deadline);
         }

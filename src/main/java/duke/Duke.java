@@ -14,7 +14,6 @@ package duke;
 //import javafx.scene.layout.VBox;
 //import javafx.stage.Stage;
 
-import java.util.Scanner;
 
 /**
  * <h1>Duke IP Project</h1>
