@@ -27,7 +27,9 @@ public class Parser {
      * @throws DukeException If user input command is invalid command.
      */
     public static Command parse(String userInput) throws DukeException {
+
         String[] inputWords = userInput.split(" ");
+
         if (userInput.equals("bye")) {
             return new ByeCommand();
         } else if (userInput.equals("format")) {

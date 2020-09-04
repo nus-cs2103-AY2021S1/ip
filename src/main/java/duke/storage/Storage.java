@@ -51,65 +51,33 @@ public class Storage {
     public List<Task> loadData() throws DukeException {
         //read Duke's data file and load tasks into tasks list
         List<Task> tasks = new ArrayList<>();
+
         try {
             File dir = new File(this.dirpath);
             File taskFile = new File(this.filepath);
             if (dir.mkdir()) {
+                // new directory created
                 System.out.println("Welcome. Dino has created a new directory "
                         + "to store your data.");
                 if (taskFile.createNewFile()) {
+                    // new file created
                     System.out.println("Dino has successfully "
                             + "created a new file to store your task list.");
                 } else {
+                    // file creation failed
                     System.out.println("Dino could not create a new file to store your task list.");
                 }
             } else if (taskFile.createNewFile()) {
+                // directory already exists
+                // new file created
                 System.out.println("Welcome. Dino has successfully created "
                         + "a new file to store your task list.");
             } else {
+                // directory and file already exist
+                // load data from file
                 Scanner scan = new Scanner(taskFile);
-                while (scan.hasNextLine()) {
+                loadDataFromFile(tasks, scan);
 
-                    String taskString = scan.nextLine();
-                    if (!taskString.equals("")) {
-                        String[] taskSplit = taskString.split("!@#");
-                        String taskType = taskSplit[0];
-                        String taskDone = taskSplit[1];
-                        String taskDesc = taskSplit[2];
-
-                        switch (taskType) {
-
-                        case "T":
-                            Todo todo = new Todo(taskDesc);
-                            if (taskDone.equals("1")) {
-                                todo.markAsDone();
-                            }
-                            tasks.add(todo);
-                            break;
-
-                        case "D":
-                            String taskDeadline = taskSplit[3] + " " + taskSplit[4];
-                            Deadline deadline = Deadline.createDeadline(taskDesc, taskDeadline);
-                            if (taskDone.equals("1")) {
-                                deadline.markAsDone();
-                            }
-                            tasks.add(deadline);
-                            break;
-
-                        case "E":
-                            String taskDateTime = taskSplit[3] + " " + taskSplit[4];
-                            Event event = Event.createEvent(taskDesc, taskDateTime);
-                            if (taskDone.equals("1")) {
-                                event.markAsDone();
-                            }
-                            tasks.add(event);
-                            break;
-
-                        default:
-                            throw new DukeException("Invalid task type.");
-                        }
-                    }
-                }
                 System.out.println("Welcome back. Dino has successfully loaded your task data.");
             }
         } catch (IOException e) {
@@ -117,6 +85,58 @@ public class Storage {
         }
         System.out.println("____________________________________________________________");
         return tasks;
+    }
+
+    /**
+     * Loads all the tasks from the file read by scanner, into the task list.
+     * @param tasks task list to update
+     * @param scan scanner that reads file
+     * @throws DukeException If task type is invalid.
+     */
+    public void loadDataFromFile(List<Task> tasks, Scanner scan) throws DukeException {
+
+        while (scan.hasNextLine()) {
+
+            String taskString = scan.nextLine();
+            if (!taskString.equals("")) {
+                String[] taskSplit = taskString.split("!@#");
+                String taskType = taskSplit[0];
+                String taskDone = taskSplit[1];
+                String taskDesc = taskSplit[2];
+
+                switch (taskType) {
+
+                case "T":
+                    Todo todo = new Todo(taskDesc);
+                    if (taskDone.equals("1")) {
+                        todo.markAsDone();
+                    }
+                    tasks.add(todo);
+                    break;
+
+                case "D":
+                    String taskDeadline = taskSplit[3] + " " + taskSplit[4];
+                    Deadline deadline = Deadline.createDeadline(taskDesc, taskDeadline);
+                    if (taskDone.equals("1")) {
+                        deadline.markAsDone();
+                    }
+                    tasks.add(deadline);
+                    break;
+
+                case "E":
+                    String taskDateTime = taskSplit[3] + " " + taskSplit[4];
+                    Event event = Event.createEvent(taskDesc, taskDateTime);
+                    if (taskDone.equals("1")) {
+                        event.markAsDone();
+                    }
+                    tasks.add(event);
+                    break;
+
+                default:
+                    throw new DukeException("Invalid task type.");
+                }
+            }
+        }
     }
 
     /**
@@ -137,6 +157,7 @@ public class Storage {
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
             switch (action) {
+
             case ADD:
                 FileWriter fw = new FileWriter(this.filepath, true);
                 fw.write(task.storedTaskString() + "\n");
@@ -145,55 +166,13 @@ public class Storage {
                 break;
 
             case DELETE:
-                String lineToRemove = task.storedTaskString();
-                String currentLine;
-                while ((currentLine = reader.readLine()) != null) {
-                    if (!currentLine.equals(lineToRemove)) {
-                        writer.write(currentLine);
-                        writer.newLine();
-                    }
-                }
-                writer.close();
-                reader.close();
-                System.gc();
-
-                if (inputFile.delete()) {
-                    if (tempFile.renameTo(inputFile)) {
-                        System.out.println("Success!");
-                    } else {
-                        throw new DukeException("Dino could not write task data to hard disk.");
-                    }
-                } else {
-                    throw new DukeException("Dino could not write task data to hard disk.");
-                }
+                deleteTaskFromFile(task, reader, writer);
+                deleteAndReplaceFile(inputFile, tempFile);
                 break;
 
             case MARK_DONE:
-                String lineToMarkDone = task.storedTaskString();
-                String currentL;
-                while ((currentL = reader.readLine()) != null) {
-                    if (!currentL.equals(lineToMarkDone)) {
-                        writer.write(currentL);
-                    } else {
-                        String taskType = currentL.substring(0, 2);
-                        String taskDesc = currentL.substring(3);
-                        writer.write(taskType + "1" + taskDesc);
-                    }
-                    writer.newLine();
-                }
-                writer.close();
-                reader.close();
-                System.gc();
-
-                if (inputFile.delete()) {
-                    if (tempFile.renameTo(inputFile)) {
-                        System.out.println("Success!");
-                    } else {
-                        throw new DukeException("Dino could not write task data to hard disk.");
-                    }
-                } else {
-                    throw new DukeException("Dino could not write task data to hard disk.");
-                }
+                markTaskDoneInFile(task, reader, writer);
+                deleteAndReplaceFile(inputFile, tempFile);
                 break;
 
             default:
@@ -201,6 +180,79 @@ public class Storage {
             }
 
         } catch (IOException e) {
+            throw new DukeException("Dino could not write task data to hard disk.");
+        }
+    }
+
+    /**
+     * Deletes task from the file.
+     * @param task task to be deleted
+     * @param reader reader to read file
+     * @param writer writer to write to file
+     * @throws IOException If I/O operation interrupted.
+     */
+    public void deleteTaskFromFile(Task task, BufferedReader reader, BufferedWriter writer)
+            throws IOException {
+        String lineToRemove = task.storedTaskString();
+        String currentLine;
+
+        while ((currentLine = reader.readLine()) != null) {
+            if (!currentLine.equals(lineToRemove)) {
+                writer.write(currentLine);
+                writer.newLine();
+            }
+        }
+
+        writer.close();
+        reader.close();
+        System.gc();
+    }
+
+    /**
+     * Marks task in file as done.
+     * @param task task to be marked done
+     * @param reader reader to read file
+     * @param writer writer to write to file
+     * @throws IOException If I/O operation interrupted.
+     */
+    public void markTaskDoneInFile(Task task, BufferedReader reader, BufferedWriter writer)
+            throws IOException {
+        String lineToMarkDone = task.storedTaskString();
+        String currentL;
+
+        while ((currentL = reader.readLine()) != null) {
+            if (!currentL.equals(lineToMarkDone)) {
+                writer.write(currentL);
+            } else {
+                String taskType = currentL.substring(0, 4);
+                String taskDesc = currentL.substring(5);
+                writer.write(taskType + "1" + taskDesc);
+            }
+            writer.newLine();
+        }
+
+        writer.close();
+        reader.close();
+        System.gc();
+    }
+
+    /**
+     * Deletes input file and renames temporary file as the input file.
+     * @param inputFile file to be deleted
+     * @param tempFile file to be renamed
+     * @throws DukeException If input file could not be deleted,
+     * or temporary file could not be renamed.
+     */
+    public void deleteAndReplaceFile(File inputFile, File tempFile) throws DukeException {
+        if (inputFile.delete()) {
+            // original file successfully deleted
+            if (tempFile.renameTo(inputFile)) {
+                // temporary file successfully renamed to original file
+                System.out.println("Success!");
+            } else {
+                throw new DukeException("Dino could not write task data to hard disk.");
+            }
+        } else {
             throw new DukeException("Dino could not write task data to hard disk.");
         }
     }
