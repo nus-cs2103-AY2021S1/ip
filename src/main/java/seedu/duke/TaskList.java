@@ -40,19 +40,22 @@ public class TaskList {
     public void add(String task) {
         // for reading from file
         String[] input = task.split("\\s\\|\\s");
+        assert input.length >= 3;
         boolean isDone = input[1].equals("1");
         switch (input[0]) {
-        case "E":
-            Event event = new Event(input[2], isDone, LocalDate.parse(input[3]));
-            this.tasks.add(event);
-            break;
         case "T":
             ToDo todo = new ToDo(input[2], isDone);
             this.tasks.add(todo);
             break;
         case "D":
+            assert input.length == 4;
             Deadline deadline = new Deadline(input[2], isDone, LocalDate.parse(input[3]));
             this.tasks.add(deadline);
+            break;
+        case "E":
+            assert input.length == 4;
+            Event event = new Event(input[2], isDone, LocalDate.parse(input[3]));
+            this.tasks.add(event);
             break;
         default:
         }
