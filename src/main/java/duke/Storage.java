@@ -66,15 +66,13 @@ public class Storage {
                             LocalDateTime.parse(taskComponents[3])));
                     break;
                 default:
-                    return taskList;
+                    assert false;
                 }
 
             }
         } catch (FileNotFoundException e) {
-            if (!new File(dataPath).exists()) {
-                if (!new File("data").mkdir() || !new File(dataPath).createNewFile()) {
-                    System.out.println("error");
-                }
+            if (!new File("data").mkdir() || !new File(dataPath).createNewFile()) {
+                System.out.println("error");
             }
         }
 
@@ -90,6 +88,7 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter("data/duke.txt", false);
 
+            assert taskList != null;
             //Write the list to the file
             for (Task task : taskList.getTasks()) {
                 writer.write(task.toFileStringFormat() + '\n');

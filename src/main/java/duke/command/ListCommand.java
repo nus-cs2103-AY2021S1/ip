@@ -15,6 +15,7 @@ public class ListCommand implements Command {
     @Override
     public void execute(TaskList tasks, Storage storage) throws DukeException {
         this.tasks = tasks;
+        assert tasks.getSize() > 0;
     }
 
     @Override
@@ -24,6 +25,7 @@ public class ListCommand implements Command {
 
     @Override
     public String getResponse() {
+        assert !isExit();
         return Ui.getTaskListString(tasks);
     }
 
