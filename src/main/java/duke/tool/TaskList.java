@@ -101,36 +101,29 @@ public class TaskList {
      * @return True if there is a task with exact description, false otherwise.
      */
     public boolean containsExactDescription(Task targetTask) {
-        for (Task task : taskList) {
-            if (task.isExactDescription(targetTask)) {
-                return true;
-            }
-        }
-
-        return false;
+        return taskList.stream()
+                .anyMatch(task -> task.isExactDescription(targetTask));
     }
 
     /**
-     * Print the task list in the system.
-     *
-     * @param tasks Task list in the system.
+     * Gets the string representation of task list in the system.
      */
-    public static String getTaskListString(TaskList tasks) {
-        ArrayList<Task> taskList = tasks.getTasks();
-        StringBuilder builder = new StringBuilder();
-        builder.append("Here are the tasks in your list: \n\t");
-
+    public String getTaskListString() {
         //Check whether there are any task in the list or not
         if (taskList.isEmpty()) {
             return "You haven't added any task here !";
         }
 
-        //Produce output string
-        for (Task task : taskList) {
-            builder.append(taskList.indexOf(task) + 1).append(". ")
-                    .append(task.toString()).append("\n").append("\t");
-        }
+        return taskList.stream()
+                .reduce("Here are the tasks in your list: \n\t",
+                        (string,task) -> string + buildTaskString(task),
+                        (string1,string2) -> string1 + string2);
+    }
 
-        return builder.toString();
+    private String buildTaskString(Task task) {
+        assert taskList.contains(task);
+
+        return (taskList.indexOf(task) + 1) + ". " +
+                task.toString() + "\n" + "\t";
     }
 }

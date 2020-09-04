@@ -41,7 +41,7 @@ public class FindCommand implements Command {
 
     @Override
     public String getResponse() {
-        return TaskList.getTaskListString(resultTaskList);
+        return resultTaskList.getTaskListString();
     }
 
 }

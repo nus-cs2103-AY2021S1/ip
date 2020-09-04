@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ public enum ValidCommand {
     DELETE("delete", "DELETE", "del", "DEL"),
     DEADLINE("deadline", "DEADLINE", "ddl", "DDL"),
     EVENT("event", "EVENT", "eve", "EVE"),
-    TODO("todo", "TODO", "to", "TO"),
+    TODO("todo", "TODO", "to", "TO","t"),
     CLEAR("clear", "CLEAR", "clr", "CLR"),
     EXIT("bye", "BYE", "quit", "QUIT", "EXIT", "exit"),
     FIND("find", "search", "FIND", "SEARCH"),
@@ -32,11 +33,8 @@ public enum ValidCommand {
 
 
     static {
-        for (ValidCommand command : ValidCommand.values()) {
-            for (String alias : command.aliases) {
-                aliasMap.put(alias, command);
-            }
-        }
+        Arrays.stream(ValidCommand.values()).forEach(command -> Arrays.stream(command.aliases)
+                .forEach(alias -> aliasMap.put(alias,command)));
     }
 
     /**

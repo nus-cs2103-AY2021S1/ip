@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import duke.task.Deadline;
@@ -49,26 +50,10 @@ public class Storage {
             //Read the file
             while (sc.hasNextLine()) {
                 String nowTask = sc.nextLine();
-
                 String[] taskComponents = nowTask.split(" / ");
 
                 //Decode the file representation of list
-                switch (taskComponents[0]) {
-                case "T":
-                    taskList.add(new Todo(taskComponents[1].equals("1"), taskComponents[2]));
-                    break;
-                case "E":
-                    taskList.add(new Event(taskComponents[1].equals("1"), taskComponents[2],
-                             LocalDateTime.parse(taskComponents[3])));
-                    break;
-                case "D":
-                    taskList.add(new Deadline(taskComponents[1].equals("1"), taskComponents[2],
-                            LocalDateTime.parse(taskComponents[3])));
-                    break;
-                default:
-                    return taskList;
-                }
-
+                handleStorageFormat(taskComponents,taskList);
             }
         } catch (FileNotFoundException e) {
             if (!new File(dataPath).exists()) {
@@ -101,4 +86,21 @@ public class Storage {
         }
     }
 
+    private void handleStorageFormat(String[] taskComponents, List<Task> taskList) {
+        switch (taskComponents[0]) {
+        case "T":
+            taskList.add(new Todo(taskComponents[1].equals("1"), taskComponents[2]));
+            break;
+        case "E":
+            taskList.add(new Event(taskComponents[1].equals("1"), taskComponents[2],
+                    LocalDateTime.parse(taskComponents[3])));
+            break;
+        case "D":
+            taskList.add(new Deadline(taskComponents[1].equals("1"), taskComponents[2],
+                    LocalDateTime.parse(taskComponents[3])));
+            break;
+        default:
+            assert false;
+        }
+    }
 }

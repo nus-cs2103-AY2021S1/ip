@@ -23,7 +23,7 @@ public class ListCommand implements Command {
 
     @Override
     public String getResponse() {
-        return TaskList.getTaskListString(tasks);
+        return tasks.getTaskListString();
     }
 
 }
