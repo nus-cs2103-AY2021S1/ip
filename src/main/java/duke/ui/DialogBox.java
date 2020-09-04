@@ -17,12 +17,12 @@ import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
+    private static final double CLIP_RADIUS = 30.0;
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
-    private static final double CLIP_RADIUS = 30.0;
 
     private DialogBox(String text, Image img) {
         try {
