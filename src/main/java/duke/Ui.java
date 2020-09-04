@@ -7,6 +7,9 @@ import duke.task.Task;
  */
 public class Ui {
 
+    public static final String GREET_MESSAGE =
+            "==================================="
+                    + "Hi, my name is Duke.\nWhat can I do for you?";
     private static final String BORDER =
             "=================================";
 
