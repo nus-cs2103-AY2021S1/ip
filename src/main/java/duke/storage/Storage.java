@@ -44,50 +44,15 @@ public class Storage {
             Scanner sc = new Scanner(file);
 
             while (sc.hasNext()) {
-                Task taskToRead;
                 String line = sc.nextLine();
                 String[] instructions = line.split(" \\| ");
-                int num = instructions.length;
                 String type = instructions[0].strip();
-                if (type.equals("T")) {
-                    if (num != 3) {
-                        throw new DukeException("The data format of the file is incorrect\n");
-                    }
-                    taskToRead = new ToDo(instructions[2].strip());
-                    if (instructions[1].strip().equals("1")) {
-                        taskToRead.markAsDone();
-                    }
-                    tasks.add(taskToRead);
-                } else if (type.equals("D")) {
-                    if (num != 4) {
-                        throw new DukeException("The data format of the file is incorrect\n");
-                    }
-                    LocalDateTime deadlineDateTime = LocalDateTime.parse(instructions[3].strip());
-                    taskToRead = new Deadline(instructions[2].strip(), deadlineDateTime);
-                    if (instructions[1].strip().equals("1")) {
-                        taskToRead.markAsDone();
-                    }
-                    tasks.add(taskToRead);
-                } else if (type.equals("E")) {
-                    if (num != 4) {
-                        throw new DukeException("The data format of the file is incorrect\n");
-                    }
-                    LocalDateTime eventDateTime = LocalDateTime.parse(instructions[3].strip());
-                    taskToRead = new Event(instructions[2].strip(), eventDateTime);
-                    if (instructions[1].strip().equals("1")) {
-                        taskToRead.markAsDone();
-                    }
-                    tasks.add(taskToRead);
-                } else {
-                    throw new DukeException("Data is not recognized while reading from file.\n");
-                }
+                tasks.addAll(processDataIntoList(type, instructions));
             }
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
-
         return tasks;
-
     }
 
     /**
@@ -103,23 +68,17 @@ public class Storage {
             for (int i = 0; i < tasks.getSize(); i++) {
                 Task taskToStore = tasks.get(i);
                 String state = "0";
+                if (taskToStore.isDone()) {
+                    state = "1";
+                }
                 if (taskToStore instanceof ToDo) {
-                    if (taskToStore.isDone()) {
-                        state = "1";
-                    }
                     fileWriter.write("T" + breaker + state + breaker + taskToStore.getDescription() + "\n");
                 } else if (taskToStore instanceof Deadline) {
                     Deadline deadline = (Deadline) taskToStore;
-                    if (deadline.isDone()) {
-                        state = "1";
-                    }
                     fileWriter.write("D" + breaker + state + breaker + deadline.getDescription()
                             + breaker + deadline.getBy() + "\n");
                 } else if (taskToStore instanceof Event) {
                     Event event = (Event) taskToStore;
-                    if (event.isDone()) {
-                        state = "1";
-                    }
                     fileWriter.write("E" + breaker + state + breaker + event.getDescription()
                             + breaker + event.getStartTime() + "\n");
                 }
@@ -130,4 +89,47 @@ public class Storage {
         }
     }
 
+
+    /**
+     * Processes the data read from file into correct objects and stores into a list.
+     *
+     * @param type the type of the task read
+     * @param instructions the string array of instruction splits
+     * @return a list of tasks that is read from the file.
+     * @throws DukeException when the data is not processed correctly from the file
+     */
+    public List<Task> processDataIntoList(String type, String[] instructions) throws DukeException {
+        Task taskToRead;
+        int num = instructions.length;
+        List<Task> tasks = new ArrayList<>();
+
+        if (type.equals("T")) {
+            if (num != 3) {
+                throw new DukeException("The data format of the file is incorrect\n");
+            }
+            taskToRead = new ToDo(instructions[2].strip());
+        } else if (type.equals("D")) {
+            if (num != 4) {
+                throw new DukeException("The data format of the file is incorrect\n");
+            }
+            LocalDateTime deadlineDateTime = LocalDateTime.parse(instructions[3].strip());
+            taskToRead = new Deadline(instructions[2].strip(), deadlineDateTime);
+        } else if (type.equals("E")) {
+            if (num != 4) {
+                throw new DukeException("The data format of the file is incorrect\n");
+            }
+            LocalDateTime eventDateTime = LocalDateTime.parse(instructions[3].strip());
+            taskToRead = new Event(instructions[2].strip(), eventDateTime);
+        } else {
+            throw new DukeException("Data is not recognized while reading from file.\n");
+        }
+
+        if (instructions[1].strip().equals("1")) {
+            taskToRead.markAsDone();
+        }
+        tasks.add(taskToRead);
+
+        return tasks;
+    }
 }
+

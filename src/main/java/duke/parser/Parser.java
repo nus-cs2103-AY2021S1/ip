@@ -72,11 +72,19 @@ public class Parser {
      * @throws DukeException if the user input format is illegal.
      * @throws DateTimeException if the date is an illegal date.
      */
-    public static LocalDate dateParser(String date) throws DukeException, DateTimeException {
+    public static LocalDate parseDate(String date) throws DukeException, DateTimeException {
+        Boolean isFormatValid;
+        Boolean isYearValid;
+        Boolean isMonthValid;
+        Boolean isDayValid;
 
         String[] dateSplit = date.split("-");
-        if (dateSplit.length != 3 || dateSplit[0].strip().length() != 4
-                || dateSplit[1].strip().length() != 2 || dateSplit[2].strip().length() != 2) {
+        isFormatValid = dateSplit.length == 3;
+        isYearValid = dateSplit[0].strip().length() == 4;
+        isMonthValid = dateSplit[1].strip().length() != 2;
+        isDayValid = dateSplit[2].strip().length() != 2;
+
+        if (!isFormatValid || !isYearValid || !isMonthValid || !isDayValid) {
             throw new DukeException("The input date format is incorrect");
         }
         LocalDate localDate = LocalDate.parse(date);
@@ -92,7 +100,7 @@ public class Parser {
      * @throws DukeException if the user input format is illegal.
      * @throws DateTimeException if the date is an illegal date.
      */
-    public static LocalDateTime dateTimeParser(String dateTime) throws DukeException, DateTimeException {
+    public static LocalDateTime parseDateTime(String dateTime) throws DukeException, DateTimeException {
         String[] dateTimeSplit = dateTime.strip().split(" ");
 
         if (dateTimeSplit.length != 2) {
@@ -100,14 +108,7 @@ public class Parser {
         }
 
         String date = dateTimeSplit[0].strip();
-        String[] dateSplit = date.split("-");
-
-        if (dateSplit.length != 3 || dateSplit[0].strip().length() != 4
-                || dateSplit[1].strip().length() != 2 || dateSplit[2].strip().length() != 2) {
-            throw new DukeException("The input date format is incorrect");
-        }
-        LocalDate localDate = LocalDate.parse(date);
-
+        LocalDate localDate = parseDate(date);
         String time = dateTimeSplit[1].strip();
         if (time.length() != 4) {
             throw new DukeException("The input time format is incorrect");
