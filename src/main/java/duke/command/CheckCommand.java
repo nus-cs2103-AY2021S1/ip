@@ -43,10 +43,12 @@ public class CheckCommand implements Command {
             } else {
                 StringBuilder print = new StringBuilder(" Here is the list of ongoing tasks on "
                         + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(dateFormat) + ":\n");
+
                 for (Task t : sameDates) {
-                    print.append("   ").append(sameDates.indexOf(t) + 1).append(".")
+                    print.append("   ").append(sameDates.indexOf(t) + 1).append(". ")
                             .append(t.toString()).append("\n");
                 }
+
                 return print.toString();
             }
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {

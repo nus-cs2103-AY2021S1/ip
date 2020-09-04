@@ -35,12 +35,12 @@ public class Task {
      * @return a string representation of the message informing user if the command has been successfully executed
      */
     public String markAsDone() {
-        if (!isDone) {
+        if (isDone) {
+            return " You have already completed this task! *Woof woof*\n";
+        } else {
             this.isDone = true;
             return " Good Job!!! You cleared this task:\n" + "   ["
                     + this.getStatusIcon() + "] " + this.description + "\n";
-        } else {
-            return " You have already completed this task! *Woof woof*\n";
         }
     }
 

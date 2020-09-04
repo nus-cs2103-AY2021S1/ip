@@ -17,8 +17,8 @@ import duke.task.Todo;
  * The <code>Parser</code> reads a command from user and perform various checks to determine the next action.
  */
 public class Parser {
-    private static final String ignoreCase = "(?i)";
-    private static final String wildcard = "(.*)";
+    private static final String IGNORE_CASE = "(?i)";
+    private static final String WILDCARD = "(.*)";
 
     /**
      * <code>CommandState</code> is an enum representing all possible command direction from user.
@@ -37,17 +37,17 @@ public class Parser {
      * @throws DukeException if the command is unidentifiable
      */
     public static Command parse(String command) throws DukeException {
-        if (command.matches(ignoreCase + CommandState.BYE.name() + wildcard)) {
+        if (command.matches(IGNORE_CASE + CommandState.BYE.name() + WILDCARD)) {
             return new ExitCommand();
-        } else if (command.matches(ignoreCase + CommandState.LIST.name() + wildcard)) {
+        } else if (command.matches(IGNORE_CASE + CommandState.LIST.name() + WILDCARD)) {
             return new ListCommand();
-        } else if (command.matches(ignoreCase + CommandState.DONE.name() + wildcard)) {
+        } else if (command.matches(IGNORE_CASE + CommandState.DONE.name() + WILDCARD)) {
             return new DoneCommand();
-        } else if (command.matches(ignoreCase + CommandState.CHECK.name() + wildcard)) {
+        } else if (command.matches(IGNORE_CASE + CommandState.CHECK.name() + WILDCARD)) {
             return new CheckCommand();
-        } else if (command.matches(ignoreCase + CommandState.DELETE.name() + wildcard)) {
+        } else if (command.matches(IGNORE_CASE + CommandState.DELETE.name() + WILDCARD)) {
             return new DeleteCommand();
-        } else if (command.matches(ignoreCase + CommandState.FIND.name() + wildcard)) {
+        } else if (command.matches(IGNORE_CASE + CommandState.FIND.name() + WILDCARD)) {
             return new FindCommand(command);
         } else {
             Task t = checkAction(command);
@@ -64,11 +64,11 @@ public class Parser {
     public static Task checkAction(String command) throws DukeException {
         Task t;
 
-        if (command.matches(ignoreCase + CommandState.DEADLINE.name() + wildcard)) {
+        if (command.matches(IGNORE_CASE + CommandState.DEADLINE.name() + WILDCARD)) {
             t = Deadline.createTask(command);
-        } else if (command.matches(ignoreCase + CommandState.EVENT.name() + wildcard)) {
+        } else if (command.matches(IGNORE_CASE + CommandState.EVENT.name() + WILDCARD)) {
             t = Event.createTask(command);
-        } else if (command.matches(ignoreCase + CommandState.TODO.name() + wildcard)) {
+        } else if (command.matches(IGNORE_CASE + CommandState.TODO.name() + WILDCARD)) {
             t = Todo.createTask(command);
         } else {
             String errMessage = " I'm sorry but i do not know what you want to do. *woof*\n";

@@ -28,11 +28,13 @@ public class Todo extends Task {
         try {
             int indOfDescription = message.toLowerCase().indexOf("todo");
             String description = message.substring(indOfDescription + 4);
+
             if (description.isBlank()) {
                 throw new DukeException(errMessage);
             } else {
                 return new Todo(description);
             }
+
         } catch (DukeException e) {
             throw e;
         } catch (Exception e) {
