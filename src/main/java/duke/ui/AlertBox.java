@@ -1,6 +1,5 @@
 package duke.ui;
 
-import duke.ui.PopUpBox;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,13 +26,13 @@ public class AlertBox implements PopUpBox {
         window.setTitle(title);
         window.setMinWidth(250);
 
-        Label label = new Label();
-        label.setText(message);
+        Label alertContent = new Label();
+        alertContent.setText(message);
         Button closeButton = new Button("Close");
         closeButton.setOnAction(e -> window.close());
 
         VBox layout = new VBox(20);
-        layout.getChildren().addAll(label, closeButton);
+        layout.getChildren().addAll(alertContent, closeButton);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout, DEFAULT_SCENE_WIDTH, DEFAULT_SCENE_HEIGHT);

@@ -115,6 +115,7 @@ public class Task {
     }
 
     private String getDoneStatusString() {
+        // a tick if completed, and a cross if not completed, in unicode.
         return "[" + (completed ? '\u2713' : '\u2717') + "]";
     }
 }

@@ -30,7 +30,6 @@ public class Parser {
         }
 
         String[] split = command.split(" ", 2);
-        int len = split.length;
 
         String type = split[0];
         if (TaskType.valueOfType(type) == null && ActionType.valueOfType(type) == null) {
@@ -38,6 +37,7 @@ public class Parser {
         }
 
         // no description supplied
+        int len = split.length;
         if (len == 1) {
             throw new DukeException(Messenger.emptyDescriptionError(command));
         }
@@ -56,11 +56,10 @@ public class Parser {
 
         // validate if there are two parts
         if (split.length < 2) {
-            if (split[0].charAt(0) == '/') {
-                throw new DukeException(Messenger.EMPTY_CONTENT_ERROR);
-            } else {
-                throw new DukeException(Messenger.EMPTY_TIME_ERROR);
-            }
+            String errorMessage = (split[0].charAt(0) == '/')
+                    ? Messenger.EMPTY_CONTENT_ERROR
+                    : Messenger.EMPTY_TIME_ERROR;
+            throw new DukeException(errorMessage);
         }
 
         // validate if time is of the correct format

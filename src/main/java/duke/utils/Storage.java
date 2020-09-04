@@ -59,23 +59,24 @@ public class Storage {
             File f = new File(FILE_PATH);
             if (f.createNewFile()) {
                 output += Messenger.FILE_NOT_FOUND + "\n";
-            } else {
-                Scanner sc = new Scanner(f);
-                while (sc.hasNextLine()) {
-                    String line = sc.nextLine();
-                    String[] parsed = line.split("\\|");
-
-                    String command = parsed[0];
-                    if (TaskType.hasTime(command)) {
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-                        LocalDate ld = LocalDate.parse(parsed[2], formatter);
-                        taskList.getTasks().add(new Task(parsed[1], command, ld));
-                    } else {
-                        taskList.getTasks().add(new Task(parsed[1], command));
-                    }
-                }
-                output += Messenger.FILE_LOADED + "\n";
+                return output;
             }
+
+            Scanner sc = new Scanner(f);
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                String[] parsed = line.split("\\|");
+
+                String command = parsed[0];
+                if (TaskType.hasTime(command)) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                    LocalDate ld = LocalDate.parse(parsed[2], formatter);
+                    taskList.getTasks().add(new Task(parsed[1], command, ld));
+                    continue;
+                }
+                taskList.getTasks().add(new Task(parsed[1], command));
+            }
+            output += Messenger.FILE_LOADED + "\n";
         } catch (IOException e) {
             AlertBox.display("IO Error", e.getMessage());
         }
