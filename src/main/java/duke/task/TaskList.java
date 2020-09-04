@@ -174,40 +174,40 @@ public class TaskList {
 
                 String[] entry = line.split(" \\| ");
 
-                if (entry.length == 3) {
-                    String taskType = entry[0];
-                    if (!entry[1].toUpperCase().equals("TRUE")
-                            && !entry[1].toUpperCase().equals("FALSE")) {
-                        throw new DukeException("One or more task statuses are not stored correctly");
-                    }
-                    boolean taskIsDone = Boolean.parseBoolean(entry[1]);
-                    String taskArgument = entry[2];
-
-                    Task newTask;
-
-                    switch (taskType) {
-                    case "TODO":
-                        newTask = ToDo.createNewToDo(taskArgument);
-                        break;
-                    case "EVENT":
-                        newTask = Event.createNewEvent(taskArgument);
-                        break;
-                    case "DEADLINE":
-                        newTask = Deadline.createNewDeadline(taskArgument);
-                        break;
-                    default:
-                        throw new DukeException("One or more task types are not stored correctly");
-                    }
-
-                    if (taskIsDone) {
-                        newTask.competeTask();
-                    }
-
-                    tasks.add(newTask);
-
-                } else {
+                if (entry.length != 3) {
                     throw new DukeException("One or more entries in storage have an invalid number of arguments");
                 }
+                
+                String taskType = entry[0];
+                String status = entry[1].toUpperCase();
+                
+                if (!status.equals("TRUE") && !status.equals("FALSE")) {
+                    throw new DukeException("One or more task statuses are not stored correctly");
+                }
+                boolean taskIsDone = Boolean.parseBoolean(entry[1]);
+                String taskArgument = entry[2];
+
+                Task newTask;
+
+                switch (taskType) {
+                case "TODO":
+                    newTask = ToDo.createNewToDo(taskArgument);
+                    break;
+                case "EVENT":
+                    newTask = Event.createNewEvent(taskArgument);
+                    break;
+                case "DEADLINE":
+                    newTask = Deadline.createNewDeadline(taskArgument);
+                    break;
+                default:
+                    throw new DukeException("One or more task types are not stored correctly");
+                }
+
+                if (taskIsDone) {
+                    newTask.competeTask();
+                }
+
+                tasks.add(newTask);
             }
 
             reader.close();
