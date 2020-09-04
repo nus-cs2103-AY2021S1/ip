@@ -40,6 +40,7 @@ public class AddDeadlineCommand extends Command {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             LocalDateTime date = LocalDateTime.parse(str[1], dateFormatter);
             Task temp = new Deadline(str[0], date);
+            assert temp != null : "Task cannot be empty";
             tasks.addTask(temp);
             String s = "Added new task " + temp;
             try {
