@@ -19,8 +19,10 @@ public class Messages {
             + "The correct command is:\nfind <keyword>";
     public static final String INVALID_TODAY_COMMAND = "OOPS!!! Invalid Today Command.\n"
             + "The correct command is:\ntoday";
-    public static final String INVALID_UNCOMPLETED_COMMAND = "OOPS!!! Invalid Completed Command. \n"
+    public static final String INVALID_UNCOMPLETED_COMMAND = "OOPS!!! Invalid Uncompleted Command. \n"
             + "The correct command is:\nuncompleted";
+    public static final String INVALID_COMPLETED_COMMAND = "OOPS!! Invalid Completed Command. \n"
+            + "The correct command is:\ncompleted";
     public static final String MISSING_DATE_AND_TIME_FOR_DEADLINE = "OOPS!!! Missing date/time.\n"
             + "Correct command is:\ndeadline <task description> /by <datetime>";
     public static final String MISSING_DATE_AND_TIME_FOR_EVENT = "OOPS!!! Missing date/time.\n"

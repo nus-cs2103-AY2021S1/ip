@@ -81,6 +81,9 @@ public class CommandLineInterfaceParser {
             case UNCOMPLETED:
                 ListAllUncompletedTasksCommand uncompletedTasksCommand = new ListAllUncompletedTasksCommand();
                 return uncompletedTasksCommand;
+            case COMPLETED:
+                ListAllCompletedTasksCommand completedTasksCommand = new ListAllCompletedTasksCommand();
+                return completedTasksCommand;
             default:
                 throw new DukeException(Messages.INVALID_COMMAND_INPUT_MESSAGE);
             }
