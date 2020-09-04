@@ -16,7 +16,6 @@ import task.tasks.Event;
 import task.tasks.Task;
 import task.tasks.Todo;
 
-
 /**
  * Deals with loading tasks from duke.txt and saving tasks in duke.txt.
  */

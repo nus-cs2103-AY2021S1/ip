@@ -130,6 +130,11 @@ public class UI {
         System.out.println("\t<CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE>\n");
     }
 
+    public static String greetForJavaFX() {
+        return "YOU HAVE SUMMONED THE GREAT KIM JONG DUKE.\n"
+                + "HURRY UP BEFORE I NUKE YOUR CODE BASE! WHAT DO YOU WANT?\n";
+    }
+
     public static String farewellForJavaFx() {
         return "BYE, GONNA GO NUKE AMERICA NOW HAHAHAHAHAHA!!!!!!!!!!!\n";
     }
