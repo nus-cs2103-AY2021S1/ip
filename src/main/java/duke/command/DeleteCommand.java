@@ -29,6 +29,7 @@ public class DeleteCommand implements Command {
         }
 
         Task task = tasks.get(index);
+        assert index >= 0 && index < tasks.size() : "Invalid item number";
         tasks.delete(index);
         storage.write(tasks);
         return   ui.format("The following task has been removed successfully:", "\t" + task.toString(),
