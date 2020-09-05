@@ -18,25 +18,25 @@ public class Parser {
      * @throws DukeException exception thrown when input is invalid
      */
     public String parse(String input, TaskList tasks, Storage storage) throws DukeException {
-        String[] command = input.split(" ", 2);
+        String[] args = input.split(" ", 2);
 
-        switch (command[0]) { 
+        switch (args[0]) { 
         case "bye":
             return new ByeCommand().execute();
         case "list":
                 return new ListCommand(tasks).execute();
         case "done":
-                return new DoneCommand(command, tasks, storage).execute();
+                return new DoneCommand(args, tasks, storage).execute();
         case "todo":
-                return new ToDoCommand(command, tasks, storage).execute();
+                return new ToDoCommand(args, tasks, storage).execute();
         case "deadline":
-                return new DeadlineCommand(command, tasks, storage).execute();
+                return new DeadlineCommand(args, tasks, storage).execute();
         case "event":
-                return new EventCommand(command, tasks, storage).execute();
+                return new EventCommand(args, tasks, storage).execute();
         case "delete":
-                return new DeleteCommand(command, tasks, storage).execute();
+                return new DeleteCommand(args, tasks, storage).execute();
         case "find":
-                return new FindCommand(command, tasks).execute();
+                return new FindCommand(args, tasks).execute();
         default:
                 return new ErrorCommand("☹ OOPS!!! I'm sorry, but I don't know what that means :-(").execute();
         }
