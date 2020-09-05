@@ -35,6 +35,7 @@ public class Duke {
      * the user.
      */
     public Duke() throws FileNotFoundException, LoadingException {
+        assert FILE_PATH != null: "the file path should not be null";
         ui = new Ui();
         storage = new Storage(FILE_PATH);
         try {
@@ -60,6 +61,7 @@ public class Duke {
     public Result getResponse(String command) {
         try {
             Command parsedCommand = Parser.parseCommand(command);
+            assert parsedCommand != null : "the parsed command should not be null";
             return parsedCommand.excecute(taskList, ui, storage);
             //isContinuing = parsedCommand.isContinuing();
         } catch (CommandNotFoundException commandNotFoundexException) {

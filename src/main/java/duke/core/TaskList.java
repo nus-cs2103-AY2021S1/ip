@@ -34,6 +34,7 @@ public class TaskList {
      * @param task The task to be added.
      */
     public void add(Task task) {
+        assert tasks != null : "the task list should not be null";
         tasks.add(task);
     }
 
@@ -43,6 +44,7 @@ public class TaskList {
      * @param n The count of the task to be removed.
      */
     public Task remove(int n) {
+        assert tasks != null : "the task list should not be null";
         return tasks.remove(n);
     }
 
@@ -52,6 +54,7 @@ public class TaskList {
      * @param n The count of the task to be mark as completed.
      */
     public void markAsCompleted(int n) {
+        assert tasks != null : "the task list should not be null";
         tasks.get(n).markAsCompleted();
     }
 
@@ -61,6 +64,7 @@ public class TaskList {
      * @param n The count of the task.
      */
     public boolean has(int n) {
+        assert tasks != null : "the task list should not be null";
         return n >= 0 && n < tasks.size();
     }
 
@@ -71,6 +75,7 @@ public class TaskList {
      * @return The task list with the corresponding tasks
      */
     public TaskList findTaskAt(LocalDate localDate) {
+        assert tasks != null : "the task list should not be null";
         return new TaskList(
                 new ArrayList<>(
                         tasks.stream()
@@ -87,6 +92,7 @@ public class TaskList {
      * @return The task list with the corresponding tasks
      */
     public TaskList findTaskWithDescription(String key) {
+        assert tasks != null : "the task list should not be null";
         ArrayList<Task> list = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i = i + 1) {
             if (tasks.get(i).getDescription().contains(key)) {
@@ -103,6 +109,7 @@ public class TaskList {
      */
     @Override
     public String toString() {
+        assert tasks != null : "the task list should not be null";
         String result = "";
 
         for (int i = 0; i < tasks.size(); i = i + 1) {
