@@ -1,8 +1,6 @@
 package willy.store;
 
 import java.io.FileNotFoundException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
@@ -19,13 +17,10 @@ import willy.task.EventsTask;
  * Stores the tasks recorded by the bot in a hard drive.
  */
 public class TaskStore {
-    private Path filePath;
     private static final String FILE_PATH = "./storage/tasks.txt";
     private File taskStorage;
 
-    public TaskStore() {
-            this.filePath = Paths.get(FILE_PATH);
-    }
+    public TaskStore() { }
 
     /**
      * Create a file if file does not exist

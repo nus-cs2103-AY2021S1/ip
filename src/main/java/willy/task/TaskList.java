@@ -1,5 +1,6 @@
 package willy.task;
 
+import willy.exceptions.WillyException;
 import willy.store.TaskStore;
 import willy.ui.Willy;
 
@@ -14,6 +15,10 @@ public class TaskList {
     private ArrayList<Task> listOfTasks;
     private ArrayList<Task> keyList;
     private TaskStore storage;
+    private final String NON_EXISTENT_TASK_MESSAGE = "Task does not exist, please check the list again or add the task first ~";
+    private final String TASK_DONE_MESSAGE = "Niceee I've marked this task as done!";
+    private final String NO_MATCHING_TASK_MESSAGE = "There are no matching tasks found in the list. Try something else?";
+    private final String MATCHING_TASK_MESSAGE = "Here are the matching tasks in your list:";
 
     public TaskList(ArrayList<Task> listOfTasks, TaskStore storage) {
         this.listOfTasks = listOfTasks;
@@ -55,20 +60,25 @@ public class TaskList {
      * @param taskNum Task number that the user wants the bot to remove.
      */
     public String removeTask(int taskNum) {
-        int i = taskNum - 1;
-        Task task = listOfTasks.get(i);
-        listOfTasks.remove(i);
-        storage.updateStorage(listOfTasks);
-        String willyResponse = Willy.response(
-                "Okai here is the task you just deleted:\n" +
-                "\t  " + task + "\n" +
-                "\tNow you have " + listOfTasks.size() +
-                " task(s) left ~");
-        if (Willy.isOnJavaFX()) {
-            return willyResponse;
-        } else {
-            System.out.println(willyResponse);
-            return "";
+        try {
+            int i = taskNum - 1;
+            Task task = listOfTasks.get(i);
+            listOfTasks.remove(i);
+            storage.updateStorage(listOfTasks);
+            String willyResponse = Willy.response(
+                    "Okai here is the task you just deleted:\n" +
+                            "\t  " + task + "\n" +
+                            "\tNow you have " + listOfTasks.size() +
+                            " task(s) left ~");
+            if (Willy.isOnJavaFX()) {
+                return willyResponse;
+            } else {
+                System.out.println(willyResponse);
+                return "";
+            }
+        } catch (Exception e) {
+            WillyException error = new WillyException(NON_EXISTENT_TASK_MESSAGE);
+            return error.toString();
         }
     }
 
@@ -78,12 +88,18 @@ public class TaskList {
      * @return All the tasks in the list.
      */
     public String readList() {
-        String list = Willy.getStyle() +
-                "\tHere are the tasks in your list to jolt ur memory:>\n";
-        for (int i = 0; i < listOfTasks.size(); i++) {
-            Task task = listOfTasks.get(i);
-            list = list + "\t" + (i + 1) + ". " + task + "\n";
+        String list = Willy.getStyle();
+        if (listOfTasks.size() == 0) {
+            list += "\tThere is no task in your list:>\n";
+        } else {
+            list += "\tHere are the tasks in your list to jolt ur memory:>\n";
+
+            for (int i = 0; i < listOfTasks.size(); i++) {
+                Task task = listOfTasks.get(i);
+                list = list + "\t" + (i + 1) + ". " + task + "\n";
+            }
         }
+
         list = list + Willy.getStyle();
 
         if (Willy.isOnJavaFX()) {
@@ -100,17 +116,22 @@ public class TaskList {
      * @param taskNum Index of the task according to the list shown to the user.
      */
     public String setTaskDone(int taskNum) {
-        int i = taskNum - 1;
-        Task task = listOfTasks.get(i);
-        task.setTaskDone(true);
-        storage.updateStorage(listOfTasks);
-        String willyResponse = Willy.response("Niceee I've marked this task as done!\n" + "\t   " + task);
+        try {
+            int i = taskNum - 1;
+            Task task = listOfTasks.get(i);
+            task.setTaskDone(true);
+            storage.updateStorage(listOfTasks);
+            String willyResponse = Willy.response(TASK_DONE_MESSAGE + "\n\t   " + task);
 
-        if (Willy.isOnJavaFX()) {
-            return willyResponse;
-        } else {
-            System.out.println(willyResponse);
-            return "";
+            if (Willy.isOnJavaFX()) {
+                return willyResponse;
+            } else {
+                System.out.println(willyResponse);
+                return "";
+            }
+        } catch (Exception e) {
+            WillyException error = new WillyException(NON_EXISTENT_TASK_MESSAGE);
+            return error.toString();
         }
     }
 
@@ -121,7 +142,7 @@ public class TaskList {
      * @return The list of related tasks.
      */
     public String findTask(String keyword) {
-        ArrayList<Task> keyList = new ArrayList<>();
+        keyList = new ArrayList<>();
         for (int i = 0; i < listOfTasks.size(); i++) {
             Task tempTask = listOfTasks.get(i);
             if (tempTask.getTask().contains(keyword)) {
@@ -130,13 +151,12 @@ public class TaskList {
         }
 
         String filteredList = Willy.getStyle() + "\n";
-
         if (keyList.size() == 0) {
-            filteredList = filteredList + "\tThere are no matching tasks found in the list. Try something else?\n";
+            filteredList = filteredList + "\t" + NO_MATCHING_TASK_MESSAGE + "\n";
         } else {
             for (int i = 0; i < keyList.size(); i++) {
                 Task task = keyList.get(i);
-                filteredList = filteredList + "\t Here are the matching tasks in your list:\n"
+                filteredList = filteredList + "\t" + MATCHING_TASK_MESSAGE + "\n"
                         + "\t  " + (i + 1) + "." + task + "\n";
             }
         }

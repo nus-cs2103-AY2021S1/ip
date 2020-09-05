@@ -10,6 +10,9 @@ import willy.ui.Greet;
 public class Parser {
     private TaskList list;
     private static String lastGreeting = "bye";
+    private final String MISSING_INFO_MESSAGE = "Hmmm are you missing description/deadline of the task? \n\tCheck and try again?";
+    private final String NO_TASK_MESSAGE = "Please add in a task!";
+    private final String NO_SENSE_MESSAGE = "Hmmm sorry I'm not sure what you are saying, try something else?:(";
 
     public Parser(TaskList list) {
         this.list = list;
@@ -32,10 +35,11 @@ public class Parser {
             // prints out exit
             String endGreeting = new Greet(message).getExitGreeting();
             response = "\n" + endGreeting;
+            return response;
         }
 
         // take note of keyword "list" to display the lists
-        else if (message.equals("list")) {
+        if (message.equals("list")) {
             // reads list
             response = list.readList();
         }
@@ -57,14 +61,14 @@ public class Parser {
             try {
                 String activity = message.substring(5);
                 if (activity.length() < 1) {
-                    WillyException error = new WillyException("Please add in a task!");
+                    WillyException error = new WillyException(NO_TASK_MESSAGE);
                     response = error.toString();
                 } else {
                     ToDoTask newTask = new ToDoTask(activity, TaskSymbol.TODO);
                     response = list.addToList(newTask);
                 }
             } catch (Exception e) {
-                WillyException error = new WillyException("Hmmm what would you like to do?");
+                WillyException error = new WillyException(NO_TASK_MESSAGE);
                 response = error.toString();
             }
 
@@ -81,7 +85,7 @@ public class Parser {
                 response = list.addToList(newTask);
 
             } catch (Exception e) {
-                WillyException error = new WillyException("Hmmm are you missing description/deadline of the task? \n\tCheck and try again?");
+                WillyException error = new WillyException(MISSING_INFO_MESSAGE);
                 response = error.toString();
             }
         }
@@ -96,7 +100,7 @@ public class Parser {
                 EventsTask newTask = new EventsTask(duration, activity, TaskSymbol.EVENT);
                 response = list.addToList(newTask);
             } catch (Exception e) {
-                WillyException error = new WillyException("Hmmm are you missing the description/timing of event? \n\tCheck and try again?");
+                WillyException error = new WillyException(MISSING_INFO_MESSAGE);
                 response = error.toString();
             }
 
@@ -107,7 +111,7 @@ public class Parser {
 
         // else is nonsense which will produce error
         else {
-            WillyException error = new WillyException("Hmmm sorry I'm not sure what you are saying, try something else?:(");
+            WillyException error = new WillyException(NO_SENSE_MESSAGE);
             response = error.toString();
         }
 

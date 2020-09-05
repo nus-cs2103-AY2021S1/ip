@@ -102,6 +102,7 @@ public class Willy extends Application {
                 inputField.clear();
                 changingCommand.setText(parser.parse(message, true)); // Returns Response
         });
+
         clearButton.setOnAction(action -> {
             inputField.clear();
         });
