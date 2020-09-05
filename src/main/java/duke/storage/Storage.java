@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Represent a storage for the data (TaskList) of Duke program.
+ * Represents a storage for the data (TaskList) of Duke program.
  */
 public class Storage {
     private String filePath;
@@ -22,9 +22,34 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+    
+    private void readFileAndUpdateList(Scanner sc, List<Task> list) {
+        while (sc.hasNext()) {
+            String[] data = sc.nextLine().split("/");
+            String taskType = data[0];
+            boolean status = data[1].equals("1");
+            String description = data[2];
+            String additional;
+
+            switch (taskType) {
+            case "t":
+                list.add(new ToDo(description, status));
+                break;
+            case "d":
+                additional = data[3];
+                list.add(new Deadline(description, additional, status));
+                break;
+            case "e":
+                additional = data[3];
+                list.add(new Event(description, additional, status));
+                break;
+            }
+        }
+    }
 
     /**
      * Return the list of tasks previously saved in the filepath specified.
+     * 
      * @return list of tasks
      */
     public List<Task> load() {
@@ -32,31 +57,11 @@ public class Storage {
         
         try {
             File file = new File(this.filePath);
-
+            
             if (file.exists()) {
                 Scanner sc = new Scanner(file);
 
-                while (sc.hasNext()) {
-                    String[] data = sc.nextLine().split("/");
-                    String taskType = data[0];
-                    boolean status = data[1].equals("1");
-                    String description = data[2];
-                    String additional;
-
-                    switch (taskType) {
-                        case "t":
-                            list.add(new ToDo(description, status));
-                            break;
-                        case "d":
-                            additional = data[3];
-                            list.add(new Deadline(description, additional, status));
-                            break;
-                        case "e":
-                            additional = data[3];
-                            list.add(new Event(description, additional, status));
-                            break;
-                    }
-                }
+                readFileAndUpdateList(sc, list);
             } else {
                 String[] path = filePath.split("/");
                 String[] dirPath = new String[path.length - 1];
@@ -80,6 +85,7 @@ public class Storage {
 
     /**
      * Update the storage with the given list of tasks.
+     * 
      * @param list list of tasks
      */
     public void update(List<Task> list) {
