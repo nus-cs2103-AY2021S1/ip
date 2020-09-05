@@ -12,6 +12,7 @@ import nekochan.util.Messages;
 public class DeleteCommand extends Command {
 
     private static final boolean IS_EXIT = false;
+
     private int index;
     private Task deletedTask;
     private int remainingTaskCount;
@@ -41,8 +42,9 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Prints a feedback confirming the execution of this {@code DeleteCommand}.
+     * Returns a {@link Response} from the execution of this {@code DeleteCommand}.
      *
+     * @return a {@code Response} object containing the result of executing this {@code DeleteCommand}.
      * @throws IncompleteNekoCommandException if this {@code DeleteCommand} was not executed.
      */
     @Override

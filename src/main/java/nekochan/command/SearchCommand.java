@@ -17,6 +17,7 @@ import nekochan.util.Messages;
 public class SearchCommand extends Command {
 
     private static final boolean IS_EXIT = false;
+
     private String searchParameter;
     private List<Task> results;
 
@@ -47,8 +48,9 @@ public class SearchCommand extends Command {
     }
 
     /**
-     * Prints the result of executing this {@code SearchCommand}.
+     * Returns a {@link Response} from executing this {@code SearchCommand}.
      *
+     * @return a {@code Response} object containing the result of executing this {@code SearchCommand}.
      * @throws IncompleteNekoCommandException if this {@code DeleteCommand} was not executed.
      */
     @Override

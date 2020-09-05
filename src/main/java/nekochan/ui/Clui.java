@@ -37,8 +37,8 @@ public class Clui {
         }
         String[] contentArray = content.split("\n");
         String result = "";
-        for (int i = 0; i < contentArray.length; i++) {
-            result += spaces + contentArray[i] + "\n";
+        for (String s : contentArray) {
+            result += spaces + s + "\n";
         }
         return result;
     }
@@ -58,8 +58,8 @@ public class Clui {
      * Prints the default welcome message.
      */
     public void greet() {
-        System.out.printf(prependIndent(DIVIDER, 4));
-        System.out.printf(prependIndent(Messages.MESSAGE_WELCOME, 5));
+        System.out.print(prependIndent(DIVIDER, 4));
+        System.out.print(prependIndent(Messages.MESSAGE_WELCOME, 5));
         System.out.println(prependIndent(DIVIDER, 4));
     }
 

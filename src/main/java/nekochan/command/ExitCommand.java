@@ -24,8 +24,9 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Prints a feedback confirming the execution of this {@code ExitCommand}.
+     * Returns a {@link Response} from the execution of this {@code ExitCommand}.
      *
+     * @return a {@code Response} object containing the result of executing this {@code ExitCommand}.
      * @throws IncompleteNekoCommandException if this {@code ExitCommand} was not executed.
      */
     public Response feedback() throws IncompleteNekoCommandException {

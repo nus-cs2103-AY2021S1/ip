@@ -27,8 +27,9 @@ public class DeleteAllCommand extends Command {
     }
 
     /**
-     * Prints a feedback confirming the execution of this {@code DeleteAllCommand}.
+     * Returns a {@link Response} from the execution of this {@code DeleteAllCommand}.
      *
+     * @return @return a {@code Response} object containing the result of executing this {@code DeleteAllCommand}.
      * @throws IncompleteNekoCommandException if this {@code DeleteAllCommand} was not executed.
      */
     @Override

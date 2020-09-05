@@ -40,8 +40,9 @@ public class CompleteCommand extends Command {
     }
 
     /**
-     * Prints a feedback confirming the execution of this {@code CompleteCommand}.
+     * Returns a {@link Response} from the execution of this {@code CompleteCommand}.
      *
+     * @return @return a {@code Response} object containing the result of executing this {@code CompleteCommand}.
      * @throws IncompleteNekoCommandException if this {@code CompleteCommand} was not executed.
      */
     @Override

@@ -16,6 +16,7 @@ import nekochan.util.Messages;
 public class ListCommand extends Command {
 
     private static final boolean IS_EXIT = false;
+
     private List<Task> existingTasks;
 
     /**
@@ -34,8 +35,9 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Prints the result of executing this {@code ListCommand}.
+     * Returns a {@link Response} from executing this {@code ListCommand}.
      *
+     * @return a {@code Response} object containing the result of executing this {@code ListCommand}.
      * @throws IncompleteNekoCommandException if this {@code ListCommand} was not executed.
      */
     @Override

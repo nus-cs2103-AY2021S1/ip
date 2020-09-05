@@ -22,6 +22,7 @@ public abstract class Command {
     /**
      * Returns a {@link Response} after this {@code Command} has been executed.
      *
+     * @return a {@code Response} object containing the result of executing this {@code Command}.
      * @throws NekoException if this {@code Command} has not been executed.
      */
     public abstract Response feedback() throws NekoException;

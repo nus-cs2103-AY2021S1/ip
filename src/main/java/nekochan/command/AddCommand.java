@@ -17,6 +17,7 @@ import nekochan.util.Messages;
 public class AddCommand extends Command {
 
     private static final boolean IS_EXIT = false;
+
     private Task createdTask;
     private int remainingTaskCount;
 
@@ -58,8 +59,9 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Prints a feedback confirming the execution of this {@code AddCommand}.
+     * Returns a {@link Response} from the execution of this {@code AddCommand}.
      *
+     * @return a {@code Response} object containing the result of executing this {@code AddCommand}.
      * @throws IncompleteNekoCommandException if this {@code AddCommand} was not executed.
      */
     @Override

@@ -68,8 +68,6 @@ public class Storage {
         }
     }
 
-    // TODO: Consider moving decoding switch statement to its own method or under a util class.
-
     /**
      * Returns a list of tasks loaded from the local save file.
      *
@@ -82,11 +80,12 @@ public class Storage {
             String home = System.getProperty("user.home");
             Path path = Paths.get(home, directories);
             File history = new File(path.toString());
+
             Scanner sc = new Scanner(history);
             List<Task> temporaryList = new ArrayList<>();
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
-                Task loadedTask = null;
+                Task loadedTask;
                 switch (line.charAt(0)) {
                 case 'E':
                     loadedTask = Event.decode(line);
