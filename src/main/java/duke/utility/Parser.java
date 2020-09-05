@@ -96,7 +96,6 @@ public class Parser {
             break;
         }
 
-
         if (isDone) {
             newTask.setStatusToDone();
         }
@@ -130,12 +129,7 @@ public class Parser {
                 throw new DoneException();
             }
 
-            int taskNumber;
-            try {
-                taskNumber = Integer.parseInt(arg);
-            } catch (NumberFormatException e) {
-                throw new InvalidTaskNumberException();
-            }
+            int taskNumber = parseStringToNumber(arg);
 
             return new DoneCommand(taskNumber);
         } else if (command.equals(Command.getCommandDelete())) {
@@ -143,12 +137,7 @@ public class Parser {
                 throw new DeleteException();
             }
 
-            int taskNumber;
-            try {
-                taskNumber = Integer.parseInt(arg);
-            } catch (NumberFormatException e) {
-                throw new InvalidTaskNumberException();
-            }
+            int taskNumber = parseStringToNumber(arg);
 
             return new DeleteCommand(taskNumber);
         } else if (command.equals(Command.getCommandTaskAfter())) {
@@ -156,12 +145,7 @@ public class Parser {
                 throw new InvalidDateFormatException();
             }
 
-            LocalDate parsedDate;
-            try {
-                parsedDate = LocalDate.parse(arg);
-            } catch (DateTimeParseException e) {
-                throw new InvalidDateFormatException();
-            }
+            LocalDate parsedDate = parseLocalDate(arg);
 
             return new TaskAfterCommand(parsedDate);
         } else if (command.equals(Command.getCommandTaskBefore())) {
@@ -169,12 +153,7 @@ public class Parser {
                 throw new InvalidDateFormatException();
             }
 
-            LocalDate parsedDate;
-            try {
-                parsedDate = LocalDate.parse(arg);
-            } catch (DateTimeParseException e) {
-                throw new InvalidDateFormatException();
-            }
+            LocalDate parsedDate = parseLocalDate(arg);
 
             return new TaskBeforeCommand(parsedDate);
         } else if (command.equals(Command.getCommandTodo())) {
@@ -197,12 +176,7 @@ public class Parser {
             String taskForDeadline = arrForDeadline[0].trim();
             String dateForDeadline = arrForDeadline[1].trim();
 
-            LocalDateTime deadlineDate;
-            try {
-                deadlineDate = LocalDateTime.parse(dateForDeadline, FORMATTER);
-            } catch (DateTimeParseException e) {
-                throw new InvalidDateTimeFormatException();
-            }
+            LocalDateTime deadlineDate = parseLocalDateTime(dateForDeadline);
 
             return new DeadlineCommand(taskForDeadline, deadlineDate);
         } else if (command.equals(Command.getCommandEvent())) {
@@ -219,12 +193,7 @@ public class Parser {
             String taskForEvent = arrForEvent[0].trim();
             String dateForEvent = arrForEvent[1].trim();
 
-            LocalDateTime eventDate;
-            try {
-                eventDate = LocalDateTime.parse(dateForEvent, FORMATTER);
-            } catch (DateTimeParseException e) {
-                throw new InvalidDateTimeFormatException();
-            }
+            LocalDateTime eventDate = parseLocalDateTime(dateForEvent);
 
             return new EventCommand(taskForEvent, eventDate);
         } else if (command.equals(Command.getCommandFind())) {
@@ -235,6 +204,30 @@ public class Parser {
             return new FindCommand(arg);
         } else {
             throw new NotACommandException();
+        }
+    }
+
+    private static int parseStringToNumber(String stringNumber) throws DukeException {
+        try {
+            return Integer.parseInt(stringNumber);
+        } catch (NumberFormatException e) {
+            throw new InvalidTaskNumberException();
+        }
+    }
+
+    private static LocalDate parseLocalDate(String stringDate) throws DukeException {
+        try {
+            return LocalDate.parse(stringDate);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateFormatException();
+        }
+    }
+
+    private static LocalDateTime parseLocalDateTime(String stringDateTime) throws DukeException {
+        try {
+            return LocalDateTime.parse(stringDateTime, FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeFormatException();
         }
     }
 }
