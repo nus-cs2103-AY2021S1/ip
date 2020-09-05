@@ -29,7 +29,7 @@ public class CommandResponse {
      * @return responseMessage.
      */
     public String getResponseMessage() {
-        return this.responseMessage;
+        return responseMessage;
     }
 
     /**
@@ -38,7 +38,7 @@ public class CommandResponse {
      * @return shouldExit.
      */
     public boolean getShouldExit() {
-        return this.shouldExit;
+        return shouldExit;
     }
 
     @Override

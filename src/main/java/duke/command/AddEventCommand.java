@@ -50,7 +50,7 @@ public class AddEventCommand extends Command {
             String responseMessage = "Got it. I've added this event: \n\t   "
                     + task + "\n\t "
                     + "Now you have "
-                    + getTaskDescription(tasks.getNumberOfTask())
+                    + tasks.getNumberOfTaskDescription()
                     + " in the list.";
             boolean shouldExit = getIsExit();
             return new CommandResponse(responseMessage, shouldExit);
@@ -59,21 +59,6 @@ public class AddEventCommand extends Command {
         }
     }
 
-    /**
-     * Returns a String description of the number of Task.
-     *
-     * @param noOfTask Number of Task in TaskList
-     * @return String description of the number of Task.
-     */
-    public static String getTaskDescription(int noOfTask) {
-        String taskDescription = "";
-        if (noOfTask > 1) {
-            taskDescription = noOfTask + " tasks";
-        } else {
-            taskDescription = noOfTask + " task";
-        }
-        return taskDescription;
-    }
 
     @Override
     public boolean equals(Object obj) {

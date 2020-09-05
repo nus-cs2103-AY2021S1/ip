@@ -61,6 +61,14 @@ public class Parser {
         }
     }
 
+    private static boolean checkForContent(String[] splitCommand) {
+        return splitCommand.length == 2;
+    }
+
+    private static boolean checkForValidTaskNumber(int taskNumber, TaskList tasks) {
+        return taskNumber >= 0 || taskNumber < tasks.getNumberOfTask();
+    }
+
     /**
      * Returns the ListCommand if user input is valid.
      *
@@ -69,11 +77,12 @@ public class Parser {
      * @throws DukeException If user input is not valid.
      */
     public static Command parseList(TaskList tasks) throws DukeException {
-        if (tasks.getNumberOfTask() <= 0) {
+        boolean hasTasks = tasks.getNumberOfTask() > 0;
+
+        if (!hasTasks) {
             throw new NoTaskException();
-        } else {
-            return new ListCommand();
         }
+        return new ListCommand();
     }
 
     /**
@@ -86,16 +95,16 @@ public class Parser {
      */
     public static Command parseDone(String input, TaskList tasks) throws DukeException {
         String[] splitInput = input.split(" ");
-        if (splitInput.length != 2 || !splitInput[1].matches("[0-9]+")) {
+        boolean hasContent = checkForContent(splitInput);
+        if (!hasContent || !splitInput[1].matches("[0-9]+")) {
             throw new InvalidDoneException();
-        } else {
-            int taskNumber = Integer.parseInt(splitInput[1]) - 1;
-            if (taskNumber < 0 || taskNumber >= tasks.getNumberOfTask()) {
-                throw new InvalidTaskNumberException();
-            } else {
-                return new DoneCommand(taskNumber);
-            }
         }
+        int taskNumber = Integer.parseInt(splitInput[1]) - 1;
+        boolean isValidTaskNumber = checkForValidTaskNumber(taskNumber, tasks);
+        if (!isValidTaskNumber) {
+            throw new InvalidTaskNumberException();
+        }
+        return new DoneCommand(taskNumber);
     }
 
     /**
@@ -108,48 +117,61 @@ public class Parser {
     public static Command parseAddTask(String input) throws DukeException {
         String[] splitInput = input.split(" ", 2);
         String taskWord = splitInput[0];
-        if (taskWord.equals("todo")) {
-            if (splitInput.length != 2) {
-                throw new NoTaskContentException("OOPS!!! The description of a todo cannot be empty.");
-            } else {
-                String description = splitInput[1];
-                return new AddTodoCommand(description);
-            }
-        } else if (taskWord.equals("deadline")) {
-            if (splitInput.length != 2) {
-                throw new NoTaskContentException(
-                        "OOPS!!! The description and date/time of a deadline cannot be empty.");
-            } else {
-                String content = splitInput[1];
-                String[] splitContent = content.split(" /by ", 2);
-                if (splitContent.length != 2) {
-                    throw new NoTaskDateTimeException(
-                            "OOPS!!! The date/time of a deadline cannot be empty.");
-                } else {
-                    String description = splitContent[0];
-                    String by = splitContent[1];
-                    return new AddDeadlineCommand(description, by);
-                }
-            }
-        } else if (taskWord.equals("event")) {
-            if (splitInput.length != 2) {
-                throw new NoTaskContentException(
-                        "OOPS!!! The description and duration of an event cannot be empty.");
-            } else {
-                String content = splitInput[1];
-                String[] splitContent = content.split(" /at ", 2);
-                if (splitContent.length != 2) {
-                    throw new NoTaskDurationException(
-                            "OOPS!!! The duration of an event cannot be empty.");
-                } else {
-                    String description = splitContent[0];
-                    String at = splitContent[1];
-                    return new AddEventCommand(description, at);
-                }
-            }
-        } else {
+        switch(taskWord) {
+        case "todo":
+            return parseAddTodo(splitInput);
+        case "deadline":
+            return parseAddDeadline(splitInput);
+        case "event":
+            return parseAddEvent(splitInput);
+        default:
             throw new InvalidCommandException();
         }
+    }
+
+    private static Command parseAddTodo(String[] splitInput) throws DukeException {
+        boolean hasContent = checkForContent(splitInput);
+        if (!hasContent) {
+            throw new NoTaskContentException("OOPS!!! The description of a todo cannot be empty.");
+        }
+        String description = splitInput[1];
+        return new AddTodoCommand(description);
+    }
+
+    private static Command parseAddDeadline(String[] splitInput) throws DukeException {
+        boolean hasContent = checkForContent(splitInput);
+        if (!hasContent) {
+            throw new NoTaskContentException(
+                    "OOPS!!! The description and date/time of a deadline cannot be empty.");
+        }
+        String content = splitInput[1];
+        String[] splitContent = content.split(" /by ", 2);
+        boolean hasDateTime = checkForContent(splitContent);
+        if (!hasDateTime) {
+            throw new NoTaskDateTimeException(
+                    "OOPS!!! The date/time of a deadline cannot be empty.");
+        }
+        String description = splitContent[0];
+        String by = splitContent[1];
+        return new AddDeadlineCommand(description, by);
+    }
+
+    private static Command parseAddEvent(String[] splitInput) throws DukeException {
+        boolean hasContent = checkForContent(splitInput);
+        if (!hasContent) {
+            throw new NoTaskContentException(
+                    "OOPS!!! The description and duration of an event cannot be empty.");
+        }
+        String content = splitInput[1];
+        String[] splitContent = content.split(" /at ", 2);
+        boolean hasDateTime = checkForContent(splitContent);
+        if (!hasDateTime) {
+            throw new NoTaskDurationException(
+                    "OOPS!!! The duration of an event cannot be empty.");
+        }
+        String description = splitContent[0];
+        String at = splitContent[1];
+        return new AddEventCommand(description, at);
     }
 
     /**
@@ -162,16 +184,16 @@ public class Parser {
      */
     public static Command parseDelete(String input, TaskList tasks) throws DukeException {
         String[] splitInput = input.split(" ");
-        if (splitInput.length != 2 || !splitInput[1].matches("[0-9]+")) {
+        boolean hasContent = checkForContent(splitInput);
+        if (!hasContent || !splitInput[1].matches("[0-9]+")) {
             throw new InvalidDeleteException();
-        } else {
-            int taskNumber = Integer.parseInt(splitInput[1]) - 1;
-            if (taskNumber < 0 || taskNumber >= tasks.getNumberOfTask()) {
-                throw new InvalidTaskNumberException();
-            } else {
-                return new DeleteCommand(taskNumber);
-            }
         }
+        int taskNumber = Integer.parseInt(splitInput[1]) - 1;
+        boolean isValidTaskNumber = checkForValidTaskNumber(taskNumber, tasks);
+        if (!isValidTaskNumber) {
+            throw new InvalidTaskNumberException();
+        }
+        return new DeleteCommand(taskNumber);
     }
 
     /**
@@ -184,12 +206,12 @@ public class Parser {
     public static Command parseRetrieve(String input) throws DukeException {
         try {
             String[] splitInput = input.split(" ");
-            if (splitInput.length == 1) {
+            boolean hasContent = checkForContent(splitInput);
+            if (!hasContent) {
                 throw new NoTaskDateTimeException("OOPS!!! Please enter a date.");
-            } else {
-                LocalDate date = LocalDate.parse(splitInput[1], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                return new RetrieveCommand(date);
             }
+            LocalDate date = LocalDate.parse(splitInput[1], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            return new RetrieveCommand(date);
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateException();
         }
@@ -204,12 +226,12 @@ public class Parser {
      */
     private static Command parseFind(String input, TaskList tasks) throws DukeException {
         String[] splitInput = input.split(" ", 2);
-        if (splitInput.length != 2 || splitInput[1].trim().equals("")) {
+        boolean hasContent = checkForContent(splitInput);
+        if (!hasContent || splitInput[1].trim().equals("")) {
             throw new NoFindContentException();
-        } else {
-            String content = splitInput[1];
-            return new FindCommand(content);
         }
+        String content = splitInput[1];
+        return new FindCommand(content);
     }
 }
 

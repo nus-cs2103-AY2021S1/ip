@@ -43,7 +43,7 @@ public class Deadline extends Task {
      * @return A LocalDateTime object.
      */
     public LocalDateTime getDateTime() {
-        return this.by;
+        return by;
     }
 
     /**

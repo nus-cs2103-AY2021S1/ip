@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -31,32 +32,16 @@ public class DeleteCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
-        int noOfTask = tasks.getNumberOfTask() - 1;
+        Task deletedTask = tasks.getTask(taskNumber);
+        tasks.removeTask(taskNumber);
         String responseMessage = "Noted. I've removed this task:\n\t   "
-                + tasks.getTask(taskNumber) + "\n\t "
+                + deletedTask + "\n\t "
                 + "Now you have "
-                + getTaskDescription(noOfTask)
+                + tasks.getNumberOfTaskDescription()
                 + " in the list.";
         boolean shouldExit = getIsExit();
-        tasks.removeTask(taskNumber);
         storage.save(tasks);
         return new CommandResponse(responseMessage, shouldExit);
-    }
-
-    /**
-     * Returns a String description of the number of Task.
-     *
-     * @param noOfTask Number of Task in TaskList
-     * @return String description of the number of Task.
-     */
-    public static String getTaskDescription(int noOfTask) {
-        String taskDescription = "";
-        if (noOfTask > 1) {
-            taskDescription = noOfTask + " tasks";
-        } else {
-            taskDescription = noOfTask + " task";
-        }
-        return taskDescription;
     }
 
     @Override

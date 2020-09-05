@@ -11,23 +11,23 @@ import duke.task.Task;
 public class TaskList {
 
     /** ArrayList of tasks */
-    private final ArrayList<Task> list;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructs a <code>TaskList</code> object.
      */
     public TaskList() {
-        list = new ArrayList<Task>();
+        this.tasks = new ArrayList<Task>();
     }
 
     /**
      * Constructs a <code>TaskList</code> object filled with tasks
      * contained in an ArrayList.
      *
-     * @param list ArrayList of tasks
+     * @param tasks ArrayList of tasks
      */
-    public TaskList(ArrayList<Task> list) {
-        this.list = list;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -36,7 +36,7 @@ public class TaskList {
      * @param task Task to be added.
      */
     public void addTask(Task task) {
-        list.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -45,7 +45,7 @@ public class TaskList {
      * @param index Index of task to be mark as complete.
      */
     public void doTask(int index) {
-        list.get(index).completeTask();
+        tasks.get(index).completeTask();
     }
 
     /**
@@ -54,7 +54,7 @@ public class TaskList {
      * @param index Index of task to be removed.
      */
     public void removeTask(int index) {
-        list.remove(index);
+        tasks.remove(index);
     }
 
     /**
@@ -64,7 +64,7 @@ public class TaskList {
      * @return Task
      */
     public Task getTask(int index) {
-        return list.get(index);
+        return tasks.get(index);
     }
 
     /**
@@ -73,7 +73,7 @@ public class TaskList {
      * @return A list of tasks.
      */
     public ArrayList<Task> getList() {
-        return this.list;
+        return tasks;
     }
 
     /**
@@ -82,7 +82,23 @@ public class TaskList {
      * @return The size of the list.
      */
     public int getNumberOfTask() {
-        return list.size();
+        return tasks.size();
+    }
+
+    /**
+     * Returns a String description of the number of Task.
+     *
+     * @return String description of the number of Task.
+     */
+    public String getNumberOfTaskDescription() {
+        int noOfTask = getNumberOfTask();
+        String taskDescription = "";
+        if (noOfTask > 1) {
+            taskDescription = noOfTask + " tasks";
+        } else {
+            taskDescription = noOfTask + " task";
+        }
+        return taskDescription;
     }
 
     /**
@@ -95,7 +111,7 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n\t ");
         int index = 1;
-        for (Task task : list) {
+        for (Task task : tasks) {
             sb.append(index).append(".").append(task.toString()).append("\n\t ");
             index++;
         }

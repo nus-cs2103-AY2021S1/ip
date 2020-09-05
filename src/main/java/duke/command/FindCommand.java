@@ -32,27 +32,25 @@ public class FindCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
-        String responseMessage = "";
-        StringBuffer sb = new StringBuffer();
-        int index = 1;
-        sb.append("Here are the matching tasks in your list:\n\t ");
-        boolean hasTasks = false;
+        TaskList filteredTasks = new TaskList();
+
         for (Task t : tasks.getList()) {
             CharSequence contentToFind = content.subSequence(0, content.length());
             String taskDescription = t.getDescription();
             if (taskDescription.contains(contentToFind)) {
-                hasTasks = true;
-                sb.append(index).append(".").append(t.toString()).append("\n\t ");
-                index++;
+                filteredTasks.addTask(t);
             }
         }
-        if (hasTasks) {
-            responseMessage = sb.delete(sb.length() - 3, sb.length() - 1).toString();
-        } else {
-            responseMessage = "You do not have any tasks containing " + "\"" + content + "\"!";
-        }
+
         boolean shouldExit = getIsExit();
-        return new CommandResponse(responseMessage, shouldExit);
+        return new CommandResponse(createResponseMessage(filteredTasks), shouldExit);
+    }
+
+    private String createResponseMessage(TaskList tasks) {
+        if (tasks.getNumberOfTask() == 0) {
+            return "You do not have any tasks containing " + "\"" + content + "\"!";
+        }
+        return tasks.toString().replaceFirst("tasks", "matching tasks");
     }
 
     @Override
