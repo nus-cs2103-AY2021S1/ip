@@ -112,6 +112,7 @@ public class ListOfItems {
                 String message = "Good job! I've marked this task as done:";
                 String output = divider + "\n" + message + "\n" + tabSpacing
                         + task + "\n" + divider;
+                assert output.contains("✓") : "task is not marked as done!";
                 return output;
             }
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
@@ -169,6 +170,7 @@ public class ListOfItems {
                 assert list.get(index).id > 0 : "item id cannot be 0 or negative!";
                 output = output + tabSpacing + list.get(index) + "\n"
                     + totalMessage + "\n" + divider;
+                assert output.contains("[T]") : "Todo task is not created properly";
                 index++;
                 handleFile.writeFile(this);
                 return output;
@@ -189,6 +191,7 @@ public class ListOfItems {
                 assert list.get(index).id > 0 : "item id cannot be 0 or negative!";
                 output = output + tabSpacing + list.get(index) + "\n"
                         + totalMessage + "\n" + divider;
+                assert output.contains("[D]") : "Deadline task is not created properly";
                 index++;
                 handleFile.writeFile(this);
                 return output;
@@ -219,6 +222,7 @@ public class ListOfItems {
                 assert list.get(index).id > 0 : "item id cannot be 0 or negative!";
                 output = output + tabSpacing + list.get(index) + "\n"
                         + totalMessage + "\n" + divider;
+                assert output.contains("[E]") : "Event task is not created properly";
                 index++;
                 handleFile.writeFile(this);
                 return output;
