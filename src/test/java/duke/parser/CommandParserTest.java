@@ -19,10 +19,9 @@ import duke.operation.DeleteOperation;
 import duke.operation.DoneOperation;
 import duke.operation.ExitOperation;
 import duke.operation.FindOperation;
-import duke.operation.ListOperation;
+import duke.operation.listoperation.ListTaskOperation;
 import duke.operation.Operation;
 import duke.storage.TaskStorage;
-import duke.list.TaskList;
 import duke.task.Todo;
 
 public class CommandParserTest {
@@ -47,9 +46,9 @@ public class CommandParserTest {
         operation = commandParser.parse(command, listManager, storage);
         assertTrue(operation instanceof AddEventTaskOperation);
 
-        command = "list";
+        command = "list task";
         operation = commandParser.parse(command, listManager, storage);
-        assertTrue(operation instanceof ListOperation);
+        assertTrue(operation instanceof ListTaskOperation);
 
         command = "find book";
         operation = commandParser.parse(command, listManager, storage);
@@ -91,7 +90,8 @@ public class CommandParserTest {
                 Arguments.of("delete -1"),
                 Arguments.of("delete 0"),
                 Arguments.of("delete"),
-                Arguments.of("find")
+                Arguments.of("find"),
+                Arguments.of("list")
         );
     }
 

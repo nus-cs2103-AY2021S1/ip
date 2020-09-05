@@ -3,7 +3,7 @@ package duke.parser;
 /** Represents the various commands that Duke supports. */
 public enum CommandType {
     BYE("bye", 1),
-    LIST("list", 1),
+    LIST("list", 2),
     DONE("done", 2),
     TODO("todo", 2),
     DEADLINE("deadline", 4),
@@ -40,7 +40,7 @@ public enum CommandType {
      * If such, it also means that the <code>command</code> is invalid.
      * @return <code>rue</code> if the given length is greater than or equal to the <code>commandLength</code>.
      */
-    public boolean isValidLength(int length) {
+    public boolean isNotValidLength(int length) {
         return this.commandLength > length;
     }
 }

@@ -22,16 +22,6 @@ public abstract class AddTaskOperation extends Operation {
     }
 
     /**
-     * Specifies that this is not an <code>ExitOperation</code>.
-     *
-     * @return <code>false</code>.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Creates the associated <code>Task</code>.
      *
      * @return an uncompleted <code>Task</code>.

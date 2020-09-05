@@ -36,16 +36,6 @@ public abstract class AddExpenseOperation extends Operation {
      */
     public abstract Expense createExpense();
 
-    /**
-     * Specifies that this is not an <code>ExitOperation</code>.
-     *
-     * @return <code>false</code>.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
     @Override
     public Result execute() {
         Expense newExpense = createExpense();

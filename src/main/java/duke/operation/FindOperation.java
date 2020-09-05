@@ -22,16 +22,6 @@ public class FindOperation extends Operation {
     }
 
     /**
-     * Specifies that this is not an <code>ExitOperation</code>.
-     *
-     * @return <code>false</code>.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Executes the operation by retrieving all <code>Tasks</code> in
      * <code>TaskList</code> containing the search word.
      *

@@ -24,16 +24,6 @@ public class DeleteOperation extends Operation {
     }
 
     /**
-     * Specifies that this is not an <code>ExitOperation</code>.
-     *
-     * @return <code>false</code>.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Removes the given <code>Task</code> from the <code>TaskList</code>.
      *
      * @return a <code>Result</code> indicating the task that has been removed.

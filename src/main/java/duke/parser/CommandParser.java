@@ -16,7 +16,9 @@ import duke.operation.DeleteOperation;
 import duke.operation.DoneOperation;
 import duke.operation.ExitOperation;
 import duke.operation.FindOperation;
-import duke.operation.ListOperation;
+import duke.operation.listoperation.ListExpenseOperation;
+import duke.operation.listoperation.ListOperation;
+import duke.operation.listoperation.ListTaskOperation;
 import duke.operation.Operation;
 import duke.storage.TaskStorage;
 import duke.task.Deadline;
@@ -27,16 +29,31 @@ import duke.utils.Utils;
 
 /** The class that converts commands passed into Duke into <code>Operations</code>.*/
 public class CommandParser {
+    private static final String TASK = "task";
+    private static final String EXPENSE = "expense";
+
     private ExitOperation createExitOp(TaskStorage storage, TaskList list) {
         return new ExitOperation(storage, list);
     }
 
-    private ListOperation createListOp(TaskList list) {
-        return new ListOperation(list);
+    private ListOperation createListOp(
+            String[] commands, ListManager listManager) throws DukeParseException {
+        if (CommandType.LIST.isNotValidLength(commands.length)) {
+            throw new DukeParseException(
+                    "Ensure either 'task' or 'expense' is input after 'list'.");
+        }
+        if (commands[1].equals(TASK)) {
+            return new ListTaskOperation(listManager.getTaskList());
+        } else if (commands[1].equals(EXPENSE)) {
+            return new ListExpenseOperation(listManager.getExpenseList());
+        } else {
+            throw new DukeParseException(
+                    "Ensure either 'task' or 'expense' is spelled correctly.");
+        }
     }
 
     private DoneOperation createDoneOp(String[] commands, TaskList list) throws DukeParseException {
-        if (CommandType.DONE.isValidLength(commands.length)) {
+        if (CommandType.DONE.isNotValidLength(commands.length)) {
             throw new DukeParseException("Ensure a number is passed after a done command.");
         }
         if (!Utils.hasInteger(commands, 1)) {
@@ -47,7 +64,7 @@ public class CommandParser {
     }
 
     private AddTodoTaskOperation createTodoOp(String[] commands, TaskList list) throws DukeParseException {
-        if (CommandType.TODO.isValidLength(commands.length)) {
+        if (CommandType.TODO.isNotValidLength(commands.length)) {
             throw new DukeParseException("Ensure there is description for a todo item.");
         }
         String description = Utils.concatenate(commands, 1, commands.length);
@@ -56,7 +73,7 @@ public class CommandParser {
 
     private AddDeadlineTaskOperation createDeadlineOp(
             String[] commands, TaskList list) throws DukeParseException {
-        if (CommandType.DEADLINE.isValidLength(commands.length)) {
+        if (CommandType.DEADLINE.isNotValidLength(commands.length)) {
             throw new DukeParseException(
                     "Ensure there is a description and a datetime for a deadline command.");
         }
@@ -73,7 +90,7 @@ public class CommandParser {
     }
 
     private AddEventTaskOperation createEventOp(String[] commands, TaskList list) throws DukeParseException {
-        if (CommandType.EVENT.isValidLength(commands.length)) {
+        if (CommandType.EVENT.isNotValidLength(commands.length)) {
             throw new DukeParseException("Ensure there is a description and a time for an event command.");
         }
 
@@ -89,7 +106,7 @@ public class CommandParser {
     }
 
     private DeleteOperation createDeleteOp(String[] commands, TaskList list) throws DukeParseException {
-        if (CommandType.DELETE.isValidLength(commands.length)) {
+        if (CommandType.DELETE.isNotValidLength(commands.length)) {
             throw new DukeParseException("Ensure a number is passed after a delete command.");
         }
         if (!Utils.hasInteger(commands, 1)) {
@@ -100,7 +117,7 @@ public class CommandParser {
     }
 
     private FindOperation createFindOp(String[] commands, TaskList list) throws DukeParseException {
-        if (CommandType.FIND.isValidLength(commands.length)) {
+        if (CommandType.FIND.isNotValidLength(commands.length)) {
             throw new DukeParseException(
                     "Ensure a keyword is entered so that I can perform a search with it.");
         }
@@ -110,7 +127,7 @@ public class CommandParser {
 
     private AddPayableOperation createPayableOp(
             String[] commands, ExpenseList list) throws DukeParseException {
-        if (CommandType.PAY.isValidLength(commands.length)) {
+        if (CommandType.PAY.isNotValidLength(commands.length)) {
             throw new DukeParseException("Ensure a description, value and date are input.");
         }
 
@@ -131,7 +148,7 @@ public class CommandParser {
 
     private AddReceivableOperation createReceivableOp(
             String[] commands, ExpenseList list) throws DukeParseException {
-        if (CommandType.RECEIVE.isValidLength(commands.length)) {
+        if (CommandType.RECEIVE.isNotValidLength(commands.length)) {
             throw new DukeParseException("Ensure a description, value and date are input.");
         }
 
@@ -170,7 +187,7 @@ public class CommandParser {
         if (isCommand.apply(CommandType.BYE)) {
             return createExitOp(taskStorage, listManager.getTaskList());
         } else if (isCommand.apply(CommandType.LIST)) {
-            return createListOp(listManager.getTaskList());
+            return createListOp(commands, listManager);
         } else if (isCommand.apply(CommandType.DONE)) {
             return createDoneOp(commands, listManager.getTaskList());
         } else if (isCommand.apply(CommandType.TODO)) {

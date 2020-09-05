@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /** Represents the list of <code>Tasks</code> that Duke stores in. */
-public class TaskList implements Iterable<Task> {
+public class TaskList implements Iterable<Task>, DukeList {
     private final ArrayList<Task> taskList;
 
     /**
@@ -32,6 +32,7 @@ public class TaskList implements Iterable<Task> {
      *
      * @return the number of <code>Tasks</code>.
      */
+    @Override
     public int getCurrCapacity() {
         return this.taskList.size();
     }
@@ -82,8 +83,8 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Converts the <code>TaskList</code> to a representative <code>String</code>.
-     *
      * This <code>String</code> contains all details of <code>Tasks</code> stored in <code>TaskList</code>.
+     *
      * @return the <code>String</code> representing <code>TaskList</code>.
      */
     @Override

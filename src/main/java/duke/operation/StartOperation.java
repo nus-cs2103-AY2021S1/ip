@@ -23,16 +23,6 @@ public class StartOperation extends Operation {
     }
 
     /**
-     * Specifies that this is not an <code>ExitOperation</code>.
-     *
-     * @return <code>false</code>.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Executes the operation by loading the storage file into <code>TaskList</code>.
      *
      * @return a <code>Result</code> containing the status of the loading.

@@ -23,16 +23,6 @@ public class DoneOperation extends Operation {
     }
 
     /**
-     * Specifies that this is not an <code>ExitOperation</code>.
-     *
-     * @return <code>false</code>.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Executes the operation by converting the specified <code>Task</code> into completed.
      *
      * @return a <code>Result</code> indicating if the <code>Task</code> has been completed.
