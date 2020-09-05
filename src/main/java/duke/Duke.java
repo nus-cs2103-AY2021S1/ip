@@ -17,9 +17,8 @@ public class Duke {
     private TaskList tasks;
 
 
-    Duke(String path) {
+    public Duke(String path) {
         ui = new Ui();
-
         fileHandler = new DukeFileHandler(path);
 
     }
@@ -39,7 +38,7 @@ public class Duke {
     }
 
 
-    private void enteredInput(String input) {
+    public void enteredInput(String input) {
         try {
             Command command = Parser.parse(input);
             command.execute(tasks, ui, fileHandler);
@@ -48,20 +47,6 @@ public class Duke {
         } catch (DukeException ex) {
             ui.displayThis(ex.getMessage());
         }
-    }
-
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     *
-     * @param input The input from the user.
-     * @return dummy string.
-     */
-    public String getResponse(String input) {
-        enteredInput(input);
-
-        return "This is left empty";
     }
 
 
