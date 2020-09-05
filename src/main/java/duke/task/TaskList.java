@@ -2,6 +2,8 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 /**
@@ -92,12 +94,8 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        StringBuilder out = new StringBuilder();
-
-        this.tasks.forEach(task -> {
-            out.append(String.format("%d. %s\n", tasks.indexOf(task) + 1, task));
-        });
-
-        return out.toString();
+        return IntStream.range(0, this.tasks.size())
+                .mapToObj(i -> String.format("%d. %s\n", i + 1, tasks.get(i)))
+                .collect(Collectors.joining("\n")).trim();
     }
 }
