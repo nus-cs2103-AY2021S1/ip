@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * The Listing class is the parent class of Event.java, Deadline.java and ToDo.java. It contains
  * a String that represent the details and a Boolean called isDone that is by default set to false.
@@ -9,6 +11,7 @@ public class Listing {
 
     String title;
     Boolean isDone = false;
+    ArrayList<String> tags = new ArrayList<>();
 
     public Listing(String s) {
         this.title = s;
