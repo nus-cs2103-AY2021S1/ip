@@ -18,6 +18,7 @@ public class RemoveTaskCommand extends Command {
      * @param index index of task in the list to be removed
      */
     public RemoveTaskCommand (int index) {
+        assert index >= 0;
         this.index = index;
     }
     

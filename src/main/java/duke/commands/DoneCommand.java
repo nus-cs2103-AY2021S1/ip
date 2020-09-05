@@ -18,6 +18,7 @@ public class DoneCommand extends Command {
      * @param index index of task in the list to be marked done
      */
     public DoneCommand (int index) {
+        assert index >= 0;
         this.index = index;
     }
     

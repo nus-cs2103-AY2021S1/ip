@@ -12,6 +12,7 @@ import duke.commands.DoneCommand;
 import duke.commands.AddTaskCommand;
 import duke.commands.RemoveTaskCommand;
 
+import duke.exceptions.DukeInvalidIndexException;
 import duke.exceptions.DukeNoTaskDescriptionException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -125,8 +126,12 @@ public class Parser {
             
         } catch (IndexOutOfBoundsException e) {
             ui.setOutputMessage("Task does not exist");
+            
+        } catch (DukeInvalidIndexException e) {
+            ui.setOutputMessage(e.getExceptionMessage());
         }
     }
+    
     
     /**
      * Extract integer from the user input and returns the index of the required task in the taskList
@@ -134,8 +139,12 @@ public class Parser {
      * @param input user input 
      * @return index of specified task in taskList
      */
-    private int parseIndex (String input) {
-        return Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
+    private int parseIndex (String input) throws DukeInvalidIndexException {
+        int index = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
+        if (index < 0) {
+            throw new DukeInvalidIndexException("Index starts from 1 instead of 0 :)");
+        }
+        return index;
     }
     
     private Task parseTodo (String input) throws DukeNoTaskDescriptionException {
