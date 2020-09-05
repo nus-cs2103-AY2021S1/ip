@@ -2,7 +2,6 @@
  * To-do is a type of Task, which has no specific due date/time.
  */
 public class Todo extends Task {
-
     /**
      * Constructor that creates a new To-do.
      *

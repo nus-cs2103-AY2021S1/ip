@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
  * Deadline is a type of Task, which takes in a specific date/time.
  */
 public class Deadline extends Task {
-
     protected String connector;
     protected LocalDate date;
     protected LocalTime time;

@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
  * Event is a type of Task, which takes in a specific date/time.
  */
 public class Event extends Task {
-
     protected String connector;
     protected LocalDate date;
     protected LocalTime startTime;

@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,6 @@ import java.util.List;
  * Contains the task list, handles all of the list manipulations + checks.
  */
 public class ListOfItems {
-
     private HandleFile handleFile;
     protected List<Task> list;
     protected int index;
@@ -32,7 +32,7 @@ public class ListOfItems {
      *
      * @param input a line from "stored.txt"
      */
-    protected void addStored(String input) {
+    protected void addStoredList(String input) {
         char type = input.charAt(1);
         boolean isDone = input.charAt(4) == '✓';
 
@@ -41,7 +41,7 @@ public class ListOfItems {
             String description = input.substring(7);
             Todo todo = new Todo(description, index + 1);
             if (isDone) {
-                todo.markedDone();
+                todo.markAsDone();
             }
             list.add(index, todo);
             index++;
@@ -52,7 +52,7 @@ public class ListOfItems {
             String dueDateTime = info[1].substring(0, info[1].length() - 1);
             Deadline deadline = new Deadline(description, index + 1, dueDateTime, true);
             if (isDone) {
-                deadline.markedDone();
+                deadline.markAsDone();
             }
             list.add(index, deadline);
             index++;
@@ -63,7 +63,7 @@ public class ListOfItems {
             String duration = info[1].substring(0, info[1].length() - 1);
             Event event = new Event(description, index + 1, duration, true);
             if (isDone) {
-                event.markedDone();
+                event.markAsDone();
             }
             list.add(index, event);
             index++;
@@ -106,7 +106,7 @@ public class ListOfItems {
             if (task.isDone) {
                 return "Task already done!";
             } else {
-                task.markedDone();
+                task.markAsDone();
                 handleFile.writeFile(this);
                 String message = "Good job! I've marked this task as done:";
                 String output = divider + "\n" + message + "\n" + tabSpacing
