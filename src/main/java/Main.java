@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Gui duke = new Gui();
+    private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {

@@ -1,111 +1,107 @@
 import task.*;
 
-import java.io.*;
-import java.text.ParseException;
-
 public class Duke {
-
     private static final String FILEPATH = "duke.txt";
-    private Ui ui;
-    private Storage storage;
     private TaskList taskList;
-
     /**
-     * Constructor for Duke class.
-     * @param filePath Path for the Duke save file.
+     * Calculates a response from the given command.
+     * @return A response.
      */
-    public Duke(String filePath) {
-        //storage = new Storage(filePath);
-        taskList = Storage.loadTasks(FILEPATH);
-        ui = new Ui();
-    }
+    public String getResponse(String input) {
+        String reply = "";
+        try {
+            String[] command = Parser.parseCommand(input);
 
-    /**
-     * Method to run the Duke program.
-     */
-    public void run() {
-        Ui.printWelcome();
-        while(true){
-            try {
-                String input = ui.getInput();
-                String[] command = Parser.parseCommand(input);
+            if(command[0].contentEquals("bye")){
+                return "Bye. Hope to see you again soon!";
+            }
+            else if(command[0].contentEquals("list")){
+                StringBuilder replyBuilder = new StringBuilder();
 
-                if(command[0].contentEquals("bye")){
-                    Ui.printBye();
-                    break;
+                for(int i = 0; i < taskList.size(); i++){
+                    replyBuilder.append(i + 1).append(". ").append(taskList.get(i)).append("\n");
                 }
-                else if(command[0].contentEquals("list")){
-                    Ui.printTaskList(taskList);
-                }
-                else if(command[0].contentEquals("remove")){
-                    String indexStr = input.replaceAll("[^0-9]", "");
-                    int index = Integer.parseInt(indexStr) - 1;
-                    Task t = taskList.remove(index);
-                    Ui.printRemovedTask(t, taskList.size());
-                }
-                else if(command[0].contentEquals("done")){
-                    String indexStr = input.replaceAll("[^0-9]", "");
-                    int index = Integer.parseInt(indexStr) - 1;
-                    taskList.get(index).setDone();
-                    Ui.printDoneTask(taskList.get(index));
-                }
-                else if(command[0].contentEquals("find") ){
-                    TaskList foundList = taskList.find(command[1]);
-                    Ui.printFoundList(foundList);
-                }
-                else if(command[0].contentEquals("todo") ){
-                    try {
-                        Task newTask = new Todo(command[1]);
-                        taskList.add(newTask);
-                        Ui.printAddedTask(newTask);
-                    }
-                    catch(EmptyStringException e){
-                        Ui.printException("Todo cannot be empty.");
-                    }
-                }
-                else if(command[0].contentEquals("deadline")){
-                    try {
-                        Task newTask = new Deadline(command[1]);
-                        taskList.add(newTask);
-                        Ui.printAddedTask(newTask);
-                    }
-                    catch(EmptyStringException e){
-                        Ui.printException("Deadline cannot be empty.");
-                    }
-                }
-                else if(command[0].startsWith("event")){
-                    try {
-                        Task newTask = new Event(command[1]);
-                        taskList.add(newTask);
-                        Ui.printAddedTask(newTask);
-                    }
-                    catch(EmptyStringException e){
-                        Ui.printException("Event cannot be empty.");
-                    }
-                }
-                else{
-                    Ui.printException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    continue;
-                }
+                return replyBuilder.toString();
+            }
+            else if(command[0].contentEquals("remove")){
+                String indexStr = input.replaceAll("[^0-9]", "");
+                int index = Integer.parseInt(indexStr) - 1;
+                Task t = taskList.remove(index);
+                reply = "Noted. I've removed this task:\n"
+                        +"\t" + t + "\n"
+                        + "\t" + "Now you have " + taskList.size() + " tasks in the list.";
 
+                Storage.saveTasks(FILEPATH, taskList);
+                return reply;
+            }
+            else if(command[0].contentEquals("done")){
+                String indexStr = input.replaceAll("[^0-9]", "");
+                int index = Integer.parseInt(indexStr) - 1;
+                taskList.get(index).setDone();
+                reply = "Nice! I've marked this task as done:\n"
+                        + taskList.get(index);
+                Storage.saveTasks(FILEPATH, taskList);
+                return reply;
+            }
+            else if(command[0].contentEquals("find") ){
+                TaskList foundList = taskList.find(command[1]);
+                StringBuilder replyBuilder = new StringBuilder();
+
+                for(int i = 0; i < foundList.size(); i++){
+                    replyBuilder.append(i + 1).append(". ").append(foundList.get(i)).append("\n");
+                }
+                return replyBuilder.toString();
+            }
+            else if(command[0].contentEquals("todo") ){
                 try {
+                    Task newTask = new Todo(command[1]);
+                    taskList.add(newTask);
+                    reply = "Got it. I've added this task:\n"
+                            + "\t" + newTask;
                     Storage.saveTasks(FILEPATH, taskList);
+                    return reply;
                 }
-                catch (IOException e){
-                    Ui.printException("Unable to save to file.");
+                catch(EmptyStringException e){
+                    return "Todo cannot be empty.";
                 }
             }
-            catch(Exception e){
-                Ui.printException(e.getMessage());
+            else if(command[0].contentEquals("deadline")){
+                try {
+                    Task newTask = new Deadline(command[1]);
+                    taskList.add(newTask);
+                    reply = "Got it. I've added this task:\n"
+                            + "\t" + newTask;
+                    Storage.saveTasks(FILEPATH, taskList);
+                    return reply;
+                }
+                catch(EmptyStringException e){
+                    return "Deadline cannot be empty.";
+                }
             }
+            else if(command[0].startsWith("event")){
+                try {
+                    Task newTask = new Event(command[1]);
+                    taskList.add(newTask);
+                    reply = "Got it. I've added this task:\n"
+                            + "\t" + newTask;
+                    Storage.saveTasks(FILEPATH, taskList);
+                    return reply;
+                }
+                catch(EmptyStringException e){
+                    return "Event cannot be empty.";
+                }
+            }
+            else{
+                return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            }
+        }
+        catch(Exception e){
+            reply = reply + "\n" + e.getMessage();
+            return reply;
         }
     }
 
-    /**
-     * Main method.
-     * @param args List of arguments.
-     */
-    public static void main(String[] args) {
-        new Duke(FILEPATH).run();
+    public void startDuke() {
+        taskList = Storage.loadTasks(FILEPATH);
     }
 }
