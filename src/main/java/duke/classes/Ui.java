@@ -127,7 +127,7 @@ public class Ui {
      */
     public String printError(String error) {
         System.out.println(error);
-        return error.toString();
+        return error;
     }
 
 }
