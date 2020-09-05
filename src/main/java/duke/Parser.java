@@ -15,7 +15,7 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String[] strings = fullCommand.split(" ");
         String description = String.join(" ", Arrays.copyOfRange(strings, 1, strings.length));
-        switch (convertToEnum(strings[0])) {
+        switch (convertCommandToEnum(strings[0])) {
         case LIST:
             if (strings.length > 1) {
                 throw new DukeException("Please key in a correct command.");
@@ -28,7 +28,7 @@ public class Parser {
         case FIND:
             return new FindCommand(description);
         case TODO: case EVENT: case DEADLINE:
-            return new AddCommand(convertToEnum(strings[0]), description);
+            return new AddCommand(convertCommandToEnum(strings[0]), description);
         case BYE:
             return new ExitCommand();
         default:
@@ -36,7 +36,7 @@ public class Parser {
         }
     }
 
-    private static CommandEnum convertToEnum(String string) throws DukeException {
+    private static CommandEnum convertCommandToEnum(String string) throws DukeException {
         switch (string) {
         case "bye":
             return CommandEnum.BYE;

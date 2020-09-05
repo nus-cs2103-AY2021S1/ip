@@ -31,29 +31,25 @@ public class AddCommand extends Command {
                 }
                 Task todoTask = new Todo(description);
                 tasks.add(todoTask);
-                output += "Got it. I've added this task:\n\t"
-                        + todoTask + "\nYou now have " + tasks.size()
-                        + " tasks in the list.";
+                output += convertToOutputString(todoTask.toString(), tasks.size());
                 storage.writeToFile(tasks);
                 break;
             case DEADLINE:
-                String task = description.split(" /by ")[0];
-                String by = description.split(" /by ")[1];
+                String[] inputArray = description.split(" /by ");
+                String task = inputArray[0];
+                String by = inputArray[1];
                 Task deadlineTask = new Deadline(task, LocalDate.parse(by));
                 tasks.add(deadlineTask);
-                output += "Got it. I've added this task:\n\t"
-                        + deadlineTask + "\nYou now have " + tasks.size()
-                        + " tasks in the list.";
+                output += output += convertToOutputString(deadlineTask.toString(), tasks.size());
                 storage.writeToFile(tasks);
                 break;
             case EVENT:
-                task = description.split(" /at ")[0];
-                String at = description.split(" /at ")[1];
+                inputArray = description.split(" /at ");
+                task = inputArray[0];
+                String at = inputArray[1];
                 Task eventTask = new Event(task, LocalDate.parse(at));
                 tasks.add(eventTask);
-                output += "Got it. I've added this task:\n\t"
-                        + eventTask + "\nYou now have " + tasks.size()
-                        + " tasks in the list.";
+                output += output += convertToOutputString(eventTask.toString(), tasks.size());
                 storage.writeToFile(tasks);
                 break;
             default:
@@ -72,5 +68,9 @@ public class AddCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    private String convertToOutputString(String task, int size) {
+        return "Got it. I've added this task:\n\t" + task + "\nYou now have " + size + " tasks in the list.";
     }
 }

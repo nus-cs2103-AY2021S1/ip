@@ -66,7 +66,7 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public Stream<Task> stream() {
+    public Stream<Task> toStream() {
         return this.tasks.stream();
     }
 }
