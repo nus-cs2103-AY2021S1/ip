@@ -83,14 +83,11 @@ public class TaskList {
      */
     protected ArrayList<Task> findTask(String keyWord) {
         ArrayList<Task> foundTasks = new ArrayList<>();
-        for (Task task : this.taskList) {
-            if (task.description.equals(keyWord)) {
-                foundTasks.add(task);
-            }
-        }
+        foundTasks = this.taskList.stream().filter(task -> task.description.equals(keyWord))
+                                            .collect(Collectors.toCollection(ArrayList::new));
         return foundTasks;
     }
-    
+
     protected ArrayList<Task> filterTask() {
         return this.taskList.stream().filter(task -> task instanceof Deadline ||
                 task instanceof Event).collect(Collectors.toCollection(ArrayList::new));
