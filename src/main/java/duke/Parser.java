@@ -7,6 +7,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -24,7 +25,7 @@ public class Parser {
      * <code>CommandState</code> is an enum representing all possible command direction from user.
      */
     enum CommandState {
-        LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE, CHECK, FIND
+        LIST, DONE, BYE, TODO, DEADLINE, EVENT, DELETE, CHECK, FIND, HELP
     }
 
     /**
@@ -37,22 +38,28 @@ public class Parser {
      * @throws DukeException if the command is unidentifiable
      */
     public static Command parse(String command) throws DukeException {
+        command = command.trim();
+        Command currCommand;
         if (command.matches(IGNORE_CASE + CommandState.BYE.name() + WILDCARD)) {
-            return new ExitCommand();
+            currCommand = new ExitCommand();
         } else if (command.matches(IGNORE_CASE + CommandState.LIST.name() + WILDCARD)) {
-            return new ListCommand();
+            currCommand = new ListCommand();
         } else if (command.matches(IGNORE_CASE + CommandState.DONE.name() + WILDCARD)) {
-            return new DoneCommand();
+            currCommand = new DoneCommand(command);
         } else if (command.matches(IGNORE_CASE + CommandState.CHECK.name() + WILDCARD)) {
-            return new CheckCommand();
+            currCommand = new CheckCommand(command);
         } else if (command.matches(IGNORE_CASE + CommandState.DELETE.name() + WILDCARD)) {
-            return new DeleteCommand();
+            currCommand = new DeleteCommand(command);
         } else if (command.matches(IGNORE_CASE + CommandState.FIND.name() + WILDCARD)) {
-            return new FindCommand(command);
+            currCommand = new FindCommand(command);
+        } else if (command.matches(IGNORE_CASE + CommandState.HELP.name() + WILDCARD)) {
+            currCommand = new HelpCommand();
         } else {
             Task t = checkAction(command);
-            return new AddCommand(t);
+            currCommand = new AddCommand(t);
         }
+
+        return currCommand;
     }
 
     /**

@@ -20,19 +20,47 @@ public class AddCommand implements Command {
     /**
      * Executes a command to add the specified task as requested by user.
      *
-     * @param command String representation of the command to be executed
      * @param storage Storage of this <code>Duke</code>
      * @param ui Ui containing all prints for user interactions
      * @param taskList List of task for this <code>Duke</code>
      * @return a string representation of the message informing user if the command has been successfully executed
      * @throws DukeException if system fails to add the specified task
      */
-    public String execute(String command, Storage storage, Ui ui, TaskList taskList) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
         int totalTaskBefore = taskList.total();
         int totalTask = taskList.addTask(t);
         assert totalTask == totalTaskBefore + 1 : "Failed to add task!";
         storage.save(taskList);
         return " *WOOF* I have added:\n   " + t + "\n" + ui.displayTotal(totalTask);
+    }
+
+    /**
+     * Undo this command.
+     *
+     * @param storage Storage of this <code>Duke</code>
+     * @param ui Ui containing all prints for user interactions
+     * @param taskList List of task for this <code>Duke</code>
+     * @return a string representation of the message informing user if the command has been successfully executed
+     * @throws DukeException if system fails to remove the specified task
+     */
+    public String undo(Storage storage, Ui ui, TaskList taskList) throws DukeException {
+        String command = "delete" + (taskList.getList().indexOf(this.t) + 1);
+        String s = new DeleteCommand(command).execute(storage, ui, taskList);
+        storage.save(taskList);
+        return s;
+    }
+
+    /**
+     * Returns a string representation informing user how to execute this command.
+     *
+     * @return a string representation informing users how to execute this command
+     */
+    public static String commandToExecute() {
+        String header = " Add a task:\n";
+        String todoCommand = "  todo <name>\n";
+        String deadlineCommand = "  deadline <name> /by <YYYY:MM:DD {HH:MM}>\n";
+        String eventCommand = "  event <name> /at <YYYY:MM:DD\n  HH:MM-HH:MM>\n";
+        return header + todoCommand + deadlineCommand + eventCommand;
     }
 
     /**

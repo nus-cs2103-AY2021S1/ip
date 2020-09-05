@@ -14,15 +14,14 @@ import duke.task.Task;
 public class ListCommand implements Command {
 
     /**
-     * Executes a command to list all <code>Task</code> stored in database..
+     * Executes a command to list all <code>Task</code> stored in database.
      *
-     * @param command String representation of the command to be executed
      * @param storage Storage of this <code>Duke</code>
      * @param ui Ui containing all prints for user interactions
      * @param taskList List of task for this <code>Duke</code>
      * @return a string representation of the message informing user if the command has been successfully executed
      */
-    public String execute(String command, Storage storage, Ui ui, TaskList taskList) {
+    public String execute(Storage storage, Ui ui, TaskList taskList) {
         List<Task> listOfTask = taskList.getList();
         assert listOfTask != null : "Failed to obtain list";
         if (listOfTask.isEmpty()) {
@@ -37,6 +36,27 @@ public class ListCommand implements Command {
 
             return s.toString();
         }
+    }
+
+    /**
+     * Undo this command.
+     *
+     * @param storage Storage of this <code>Duke</code>
+     * @param ui Ui containing all prints for user interactions
+     * @param taskList List of task for this <code>Duke</code>
+     * @return a string representation of the message informing user if the command has been successfully executed
+     */
+    public String undo(Storage storage, Ui ui, TaskList taskList) {
+        return " There's no need to undo this action! *woof*\n";
+    }
+
+    /**
+     * Returns a string representation informing user how to execute this command.
+     *
+     * @return a string representation informing users how to execute this command
+     */
+    public static String commandToExecute() {
+        return " list : list all tasks\n";
     }
 
     /**

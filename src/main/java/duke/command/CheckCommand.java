@@ -18,22 +18,25 @@ import duke.task.Task;
  * specific date as specified by user.
  */
 public class CheckCommand implements Command {
+    private final String command;
 
+    public CheckCommand(String command) {
+        this.command = command;
+    }
     /**
      * Executes a command to run a search on the list of <code>Task</code> for <code>Task</code>
      * occurring on this specific date.
      *
-     * @param command String representation of the command to be executed
      * @param storage Storage of this <code>Duke</code>
      * @param ui Ui containing all prints for user interactions
      * @param taskList List of task for this <code>Duke</code>
      * @return a string representation of the message informing user if the command has been successfully executed
      * @throws DukeException if system fails to execute search
      */
-    public String execute(String command, Storage storage, Ui ui, TaskList taskList) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
         try {
-            command = command.substring(5);
-            String[] inputDate = command.trim().split("/");
+            String parseCommand = command.substring(5);
+            String[] inputDate = parseCommand.trim().split("/");
             String formatDate = inputDate[0] + "-" + inputDate[1] + "-" + inputDate[2];
             LocalDate dateFormat = LocalDate.parse(formatDate);
             List<Task> sameDates = taskList.checkDate(dateFormat);
@@ -55,6 +58,27 @@ public class CheckCommand implements Command {
             String message = " Please enter date in YYYY/MM/DD format! *Woof woof*\n";
             throw new DukeException(message);
         }
+    }
+
+    /**
+     * Undo this command.
+     *
+     * @param storage Storage of this <code>Duke</code>
+     * @param ui Ui containing all prints for user interactions
+     * @param taskList List of task for this <code>Duke</code>
+     * @return a string representation of the message informing user if the command has been successfully executed
+     */
+    public String undo(Storage storage, Ui ui, TaskList taskList) {
+        return " There's no need to undo this action! *woof*\n";
+    }
+
+    /**
+     * Returns a string representation informing user how to execute this command.
+     *
+     * @return a string representation informing users how to execute this command
+     */
+    public static String commandToExecute() {
+        return " check <keyword1> {...} : checks for tasks\n";
     }
 
     /**

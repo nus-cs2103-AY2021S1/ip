@@ -25,11 +25,11 @@ public class ParserStub {
         } else if (command.matches(ignoreCase + Parser.CommandState.LIST.name())) {
             return new ListCommand();
         } else if (command.matches(ignoreCase + Parser.CommandState.DONE.name() + wildcard)) {
-            return new DoneCommand();
+            return new DoneCommand("");
         } else if (command.matches(ignoreCase + Parser.CommandState.CHECK.name() + wildcard)) {
-            return new CheckCommand();
+            return new CheckCommand("");
         } else if (command.matches(ignoreCase + Parser.CommandState.DELETE.name() + "(.*)")) {
-            return new DeleteCommand();
+            return new DeleteCommand("");
         } else if (command.matches(ignoreCase + Parser.CommandState.FIND.name() + "(.*)")) {
             return new FindCommand(command);
         } else {

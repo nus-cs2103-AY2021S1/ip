@@ -6,22 +6,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" prefWidth="400.0" style="-fx-background-color: EDE6F9; -fx-background-radius: 15;"
+<fx:root alignment="TOP_RIGHT" prefWidth="400.0" style="-fx-background-color: FBF4F9; -fx-background-radius: 15;"
          type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" lineSpacing="1.0" minHeight="-Infinity" text="Label" textFill="#596186" textOverrun="CLIP" wrapText="true">
-         <font>
-            <Font name="Chalkboard" size="12.0" />
-         </font></Label>
+        <Label fx:id="dialog" lineSpacing="1.0" minHeight="-Infinity" style="-fx-background-color: F9DBDB; -fx-padding: 2 10; -fx-background-radius: 10;" text="Label" textAlignment="CENTER" textFill="#596186" textOverrun="CLIP" wrapText="true">
+            <font>
+                <Font name="Chalkboard" size="12.0" />
+            </font></Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
-         <HBox.margin>
-            <Insets left="10.0" />
-         </HBox.margin></ImageView>
+            <HBox.margin>
+                <Insets left="10.0" />
+            </HBox.margin></ImageView>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
 </fx:root>

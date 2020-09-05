@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import duke.DukeException;
@@ -7,6 +9,7 @@ import duke.TaskList;
 import duke.Ui;
 import duke.command.Command;
 import duke.command.ExitCommand;
+import duke.command.UndoCommand;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -17,6 +20,7 @@ import javafx.util.Duration;
  * existing tasks.
  */
 public class Yuki {
+    protected static final List<Command> PREV_COMMANDS = new ArrayList<>();
     protected static final Ui UI = new Ui();
     protected Storage storage;
     protected TaskList taskList;
@@ -46,13 +50,26 @@ public class Yuki {
         while (!isExit && input.hasNextLine()) {
             try {
                 String commandMessage = input.nextLine();
-                Command c = Parser.parse(commandMessage.trim());
-                String s = c.execute(commandMessage, storage, UI, taskList);
+                Command c;
+
+                if (commandMessage.equalsIgnoreCase("undo")) {
+                    int latestCommand = PREV_COMMANDS.size() - 1;
+                    c = new UndoCommand(PREV_COMMANDS.get(latestCommand));
+                    PREV_COMMANDS.remove(latestCommand);
+                } else {
+                    c = Parser.parse(commandMessage.trim());
+                    PREV_COMMANDS.add(c);
+                }
+
+                String s = c.execute(storage, UI, taskList);
                 UI.print(s);
+
                 if (c instanceof ExitCommand) {
                     isExit = true;
                     input.close();
                 }
+            } catch (IndexOutOfBoundsException e) {
+                UI.print(" There's no more actions to undo! *woof*");
             } catch (DukeException e) {
                 UI.print(e.getMessage());
             }
@@ -76,7 +93,7 @@ public class Yuki {
      * @return a string containing the text in a specific format
      */
     String printFormat(String text) {
-        String headerLine = "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+        String headerLine = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         return headerLine + text + "\n" + headerLine;
     }
 
@@ -89,8 +106,18 @@ public class Yuki {
     String getResponse(String input) {
         try {
             input = input.trim();
-            Command c = Parser.parse(input);
-            String s = c.execute(input, storage, Yuki.UI, taskList);
+            Command c;
+
+            if (input.equalsIgnoreCase("undo")) {
+                int latestCommand = PREV_COMMANDS.size() - 1;
+                c = new UndoCommand(PREV_COMMANDS.get(latestCommand));
+                PREV_COMMANDS.remove(latestCommand);
+            } else {
+                c = Parser.parse(input);
+                PREV_COMMANDS.add(c);
+            }
+
+            String s = c.execute(storage, Yuki.UI, taskList);
 
             if (c instanceof ExitCommand) {
                 PauseTransition delay = new PauseTransition(Duration.seconds(3));
@@ -99,6 +126,8 @@ public class Yuki {
             }
 
             return s;
+        } catch (IndexOutOfBoundsException ex) {
+            return "Error: There's no more actions to undo! *woof*";
         } catch (DukeException ex) {
             return "ERROR: " + ex.getMessage();
         }

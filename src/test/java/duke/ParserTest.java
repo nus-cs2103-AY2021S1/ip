@@ -26,8 +26,8 @@ public class ParserTest {
     @Test
     public void parseTest_nonActionCommands_success() throws DukeException {
         String[] commands = new String[]{"Bye", "list", "DoNe", "CheCK", "Delete", "fiNd"};
-        Command[] expected = new Command[]{new ExitCommand(), new ListCommand(), new DoneCommand(),
-            new CheckCommand(), new DeleteCommand(), new FindCommand("s")};
+        Command[] expected = new Command[]{new ExitCommand(), new ListCommand(), new DoneCommand(""),
+            new CheckCommand(""), new DeleteCommand(""), new FindCommand("s")};
         List<Command> response = new ArrayList<>();
 
         for (String s : commands) {
@@ -75,7 +75,7 @@ public class ParserTest {
     @ParameterizedTest
     @ValueSource(strings = {"Delete"})
     public void parseTest_actionDeleteCommands_success(String s) throws DukeException {
-        assertEquals(new DeleteCommand(), ParserStub.parse(s));
+        assertEquals(new DeleteCommand(""), ParserStub.parse(s));
     }
 
     @ParameterizedTest

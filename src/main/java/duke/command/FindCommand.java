@@ -14,26 +14,25 @@ import duke.task.Task;
  * keywords specified by user.
  */
 public class FindCommand implements Command {
-    private final String taskSearch;
+    private final String command;
 
-    public FindCommand(String taskSearch) {
-        this.taskSearch = taskSearch.trim();
+    public FindCommand(String command) {
+        this.command = command;
     }
 
     /**
      * Executes a command to run a search on the list of <code>Task</code> for <code>Task</code>
      * with specific keywords.
      *
-     * @param command String representation of the command to be executed
      * @param storage Storage of this <code>Duke</code>
      * @param ui Ui containing all prints for user interactions
      * @param taskList List of task for this <code>Duke</code>
      * @return a string representation of the message informing user if the command has been successfully executed
      * @throws DukeException if system fails to execute search
      */
-    public String execute(String command, Storage storage, Ui ui, TaskList taskList) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
         try {
-            String searchName = taskSearch.substring(taskSearch.indexOf("find") + 5).trim();
+            String searchName = command.substring(command.indexOf("find") + 5).trim();
             List<Task> results = taskList.searchTask(searchName.split("\\s+"));
 
             if (results.isEmpty()) {
@@ -53,6 +52,27 @@ public class FindCommand implements Command {
                     + " Or you can just enter *list* to see all your task! *Woof woof!*\n";
             throw new DukeException(message);
         }
+    }
+
+    /**
+     * Undo this command.
+     *
+     * @param storage Storage of this <code>Duke</code>
+     * @param ui Ui containing all prints for user interactions
+     * @param taskList List of task for this <code>Duke</code>
+     * @return a string representation of the message informing user if the command has been successfully executed
+     */
+    public String undo(Storage storage, Ui ui, TaskList taskList) {
+        return " There's no need to undo this action! *woof*\n";
+    }
+
+    /**
+     * Returns a string representation informing user how to execute this command.
+     *
+     * @return a string representation informing users how to execute this command
+     */
+    public static String commandToExecute() {
+        return " find <YYYY:MM:DD> : tasks on this day\n";
     }
 
     /**

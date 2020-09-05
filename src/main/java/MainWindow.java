@@ -42,7 +42,7 @@ public class MainWindow {
         String response = yuki.getResponse(input);
         response = yuki.printFormat(response);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
+                DialogBoxUser.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();

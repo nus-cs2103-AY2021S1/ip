@@ -6,7 +6,7 @@ package duke;
  * method that takes in a <code>String</code> object and prints the string in the desired format to users.
  */
 public class Ui {
-    private static final String LINES = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
+    private static final String LINES = ".~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.\n";
 
     public void print (String message) {
         System.out.println(LINES + message + LINES);
@@ -22,14 +22,16 @@ public class Ui {
     public String fileCreationSuccess() {
         return " Woof! I am Yuki your assigned Task Manager!\n"
                 + " I have just created a new file to store all your tasks!\n"
-                + " So... What is my first assignment? *Woof woof*\n";
+                + " If you ever get stuck, enter help and I will be here for you!\n"
+                + " So... What is my first assignment?\n *Woof woof*\n";
     }
 
     /**
      * Returns a string representation of a message to welcome users back.
      */
     public String welcome() {
-        return " Hello! I'm Yuki *Woof*\n What can I do for you? *Woof woof*\n";
+        return " Hello! I'm Yuki *Woof*\n What can I do for you?\n"
+                + " Remember if you ever get stuck,\n enter help and I will be here for you!\n *Woof woof*\n";
     }
 
     /**

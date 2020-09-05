@@ -45,6 +45,21 @@ public class Task {
     }
 
     /**
+     * Marks this <code>Task</code> as incomplete.
+     *
+     * @return a string representation of the message informing user if the command has been successfully executed
+     */
+    public String undoDone() {
+        if (isDone) {
+            this.isDone = false;
+            return " I've have unmarked this task:\n" + "   ["
+                    + this.getStatusIcon() + "] " + this.description + "\n";
+        } else {
+            return " This task is not done! *Woof woof*\n";
+        }
+    }
+
+    /**
      * Compare the date of this <code>Task</code> with the specified date.
      *
      * @param date the specified Date
