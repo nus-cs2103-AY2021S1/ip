@@ -37,6 +37,7 @@ public class Storage {
             Path directory = Paths.get(filePath).getParent();
             if (!Files.exists(directory)) {
                 Files.createDirectory(directory);
+                assert Files.exists(directory);
             }
             file = new File(filePath);
         } catch (IOException e) {
@@ -67,6 +68,7 @@ public class Storage {
                     taskList.add(readEvent(task));
                     break;
                 default:
+                    assert false : "Unknown format of Data";
                 }
             }
         } catch (FileNotFoundException e) {

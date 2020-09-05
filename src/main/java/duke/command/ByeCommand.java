@@ -19,6 +19,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert storage != null;
         storage.save(tasks.getTasks());
         return ui.showBye();
     }

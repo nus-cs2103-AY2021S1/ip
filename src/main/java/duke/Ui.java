@@ -150,9 +150,8 @@ public class Ui {
      * @return String containing the task added.
      */
     public String showTask(Task task, int numTask) {
-        String output = new StringBuilder().append(" Got it. I've added this task: \n")
-                .append(
-                        String.format("   %s \n Now you have %d tasks in the list. ", task, numTask)).toString();
+        String displayNum = String.format("   %s \n Now you have %d tasks in the list. ", task, numTask);
+        String output = " Got it. I've added this task: \n" + displayNum;
         return output;
     }
 }
