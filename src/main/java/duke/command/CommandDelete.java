@@ -30,6 +30,7 @@ public class CommandDelete implements Command {
         if (index < 0 || index >= tasks.size()) {
             throw new IllegalDoneArgument();
         }
+        assert(index >= 0 || index < tasks.size());
         Task deleted = tasks.getList().get(index);
         tasks.remove(index);
         ui.printLine("Noted! I've removed this task:");
