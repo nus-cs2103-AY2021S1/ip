@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -110,7 +111,8 @@ public class TaskList {
      */
     public List<Task> returnMatchingTasks(String ... matchWords) {
         List<Task> matchList = new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
+        Iterator<Task> iterator = taskList.iterator();
+        iterator.forEachRemaining(matchTask -> {
             for (int j = 0; j < matchWords.length; j++) {
                 //In case of having alot of spaces in between two words.
                 if (matchWords[j].equals("")) {
@@ -119,15 +121,15 @@ public class TaskList {
                 String pattern = "\\b" + matchWords[j] + "\\b";
                 try {
                     Pattern p = Pattern.compile(pattern);
-                    Matcher m = p.matcher(taskList.get(i).toString());
+                    Matcher m = p.matcher(matchTask.toString());
                     if (m.find()) {
-                        matchList.add(taskList.get(i));
+                        matchList.add(matchTask);
                     }
                 } catch (PatternSyntaxException e) {
                     throw new DukeInvalidCommandException("Sorry handsome but I'm not sure about this command :)");
                 }
             }
-        }
+        });
         return matchList;
     }
 }
