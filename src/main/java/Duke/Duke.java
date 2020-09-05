@@ -10,25 +10,28 @@ import exception.DukeException;
  * @version 0.1
  */
 public class Duke {
-
-    private static final String DEFAULT_PATH = "data/tasks.txt";
+    private static final String DEFAULT_ARCHIVED_PATH = "data/archivedTasks.txt";
+    private static final String DEFAULT_MAIN_TASKS_PATH = "data/mainTasks.txt";
     private Storage storage;
-    private TaskList tasks;
+    private TaskList mainTasks;
+    private TaskList archivedTasks;
     private Ui ui;
 
     /**
      * Creates an instance of Duke.
      *
-     * @param filePath The path of the file used for storing saved tasks.
+     * @param unarchivedFilePath The path of the file used for storing saved tasks.
      */
-    public Duke(String filePath) {
+    public Duke(String unarchivedFilePath, String archivedFilePath) {
         ui = new Ui();
         try {
-            storage = new Storage(filePath);
-            tasks = new TaskList(storage.load());
+            storage = new Storage(unarchivedFilePath, archivedFilePath);
+            archivedTasks = new TaskList(storage.load(true));
+            mainTasks = new TaskList(storage.load(false));
         } catch (DukeException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            archivedTasks = new TaskList();
+            mainTasks = new TaskList();
         }
     }
 
@@ -38,11 +41,13 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         try {
-            storage = new Storage(DEFAULT_PATH);
-            tasks = new TaskList(storage.load());
+            storage = new Storage(DEFAULT_MAIN_TASKS_PATH, DEFAULT_ARCHIVED_PATH);
+            archivedTasks = new TaskList(storage.load(true));
+            mainTasks = new TaskList(storage.load(false));
         } catch (DukeException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            archivedTasks = new TaskList();
+            mainTasks = new TaskList();
         }
     }
 
@@ -56,7 +61,7 @@ public class Duke {
         try {
             Command command = Parser.parse(input);
             assert command != null : "command should not be null";
-            return command.execute(tasks, storage);
+            return command.execute(mainTasks, archivedTasks, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -74,7 +79,7 @@ public class Duke {
                 ui.showLine(); // show the divider line ("_______")
                 Command command = Parser.parse(fullCommand);
                 assert command != null : "command should not be null";
-                ui.showMessage(command.execute(tasks, storage));
+                ui.showMessage(command.execute(mainTasks, archivedTasks, storage));
                 isExit = command.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
@@ -85,6 +90,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(DEFAULT_PATH).run();
+        new Duke(DEFAULT_MAIN_TASKS_PATH, DEFAULT_ARCHIVED_PATH).run();
     }
 }

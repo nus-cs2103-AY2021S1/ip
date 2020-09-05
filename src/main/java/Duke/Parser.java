@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import command.AddCommand;
+import command.ArchiveCommand;
 import command.ByeCommand;
 import command.Command;
 import command.DeleteCommand;
@@ -14,6 +15,7 @@ import command.DoneCommand;
 import command.FindCommand;
 import command.ListCommand;
 import command.TasksOnCommand;
+import command.UnarchiveCommand;
 import exception.DukeException;
 import task.Deadline;
 import task.Event;
@@ -43,12 +45,16 @@ public class Parser {
             return getDoneCommand(input);
         } else if (input.startsWith("delete")) {
             return getDeleteCommand(input);
-        } else if (input.equals("list")) {
-            return getListCommand();
+        } else if (input.startsWith("list")) {
+            return getListCommand(input);
         } else if (input.startsWith("find")) {
             return getFindCommand(input);
         } else if (input.startsWith("tasks on")) {
             return getTasksOnCommand(input);
+        } else if (input.startsWith("archive")) {
+            return getArchiveCommand(input);
+        } else if (input.startsWith("unarchive")) {
+            return getUnarchiveCommand(input);
         } else if (input.startsWith("todo")
                 || input.startsWith("deadline")
                 || input.startsWith("event")) {
@@ -174,8 +180,15 @@ public class Parser {
         return new FindCommand(keywordToFind);
     }
 
-    private static ListCommand getListCommand() {
-        return new ListCommand();
+    private static ListCommand getListCommand(String input) throws DukeException {
+        boolean hasHyphenA = input.contains("-a");
+        boolean hasTrailingCharacters = input.length() > 4;
+
+        if (hasTrailingCharacters && !hasHyphenA) {
+            throw new DukeException("Do you mean list -a?");
+        }
+
+        return new ListCommand(hasHyphenA);
     }
 
     private static DeleteCommand getDeleteCommand(String input) throws DukeException {
@@ -194,6 +207,42 @@ public class Parser {
         }
 
         return new DeleteCommand(taskNumber);
+    }
+
+    private static Command getArchiveCommand(String input) throws DukeException {
+        boolean hasNoTaskNumber = input.length() == 7;
+        boolean hasBlankTaskNumber = hasNoTaskNumber || input.substring(8).isBlank();
+        if (hasBlankTaskNumber) {
+            throw new DukeException("\tNo task number specified.");
+        }
+
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(input.substring(8).trim()) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("\tTask number format invalid, "
+                    + "must be a number.");
+        }
+
+        return new ArchiveCommand(taskNumber);
+    }
+
+    private static Command getUnarchiveCommand(String input) throws DukeException {
+        boolean hasNoTaskNumber = input.length() == 9;
+        boolean hasBlankTaskNumber = hasNoTaskNumber || input.substring(10).isBlank();
+        if (hasBlankTaskNumber) {
+            throw new DukeException("\tNo task number specified.");
+        }
+
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(input.substring(10).trim()) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("\tTask number format invalid, "
+                    + "must be a number.");
+        }
+
+        return new UnarchiveCommand(taskNumber);
     }
 
     private static ByeCommand getByeCommand() {

@@ -25,16 +25,13 @@ public class TasksOnCommand extends Command {
     /**
      * Finds the tasks on the specified Date and then proceeds to list them.
      *
-<<<<<<< HEAD
-     *  @param tasks The TaskList which contains all the tasks.
-=======
-     * @param tasks The TaskList which contains all the tasks.
->>>>>>> master
+     * @param mainTasks The TaskList which stores unarchived tasks.
+     * @param archivedTasks The TaskList which stores archived tasks.
      * @param storage The Storage which will record any changes into the file in its path.
      * @return The output to be displayed to the user.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList mainTasks, TaskList archivedTasks, Storage storage) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = date.format(formatter);
 
@@ -45,8 +42,8 @@ public class TasksOnCommand extends Command {
         boolean isFree = true;
         Task task;
 
-        for (int i = 0; i < tasks.size(); i++) {
-            task = tasks.get(i);
+        for (int i = 0; i < mainTasks.size(); i++) {
+            task = mainTasks.get(i);
             assert task != null : "task should not be null";
             assert this.date != null : "date should not be null";
 
