@@ -7,6 +7,7 @@ import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.storage.Storage;
 import nekochan.task.Task;
 import nekochan.task.TaskList;
+import nekochan.util.Messages;
 
 /**
  * The {@code SearchCommand} class represents a command that allows the user to search for tasks.
@@ -52,7 +53,7 @@ public class SearchCommand extends Command {
     @Override
     public String feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
-            throw new IncompleteNekoCommandException("Search command was not completed.");
+            throw new IncompleteNekoCommandException(Messages.INCOMPLETE_SEARCH_COMMAND);
         }
         String resultPrint = "";
         for (Task result : results) {

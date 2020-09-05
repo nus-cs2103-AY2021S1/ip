@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import nekochan.exceptions.NekoException;
+import nekochan.util.Messages;
 
 /**
  * The {@code DateParser} class provides methods for parsing date-time and duration related strings.
@@ -60,7 +61,7 @@ public class DateParser {
                 }
             }
         }
-        throw new NekoException("I can't quite understand what you're saying...");
+        throw new NekoException(Messages.PARSE_DATETIME_ERROR);
     }
 
     /**
@@ -94,7 +95,7 @@ public class DateParser {
             }
             return minutes;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            throw new NekoException("I can't understand what you're saying...");
+            throw new NekoException(Messages.PARSE_DATETIME_ERROR);
         }
     }
 

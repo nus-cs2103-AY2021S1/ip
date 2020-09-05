@@ -14,6 +14,7 @@ import nekochan.NekoChan;
 import nekochan.command.Response;
 import nekochan.exceptions.NekoException;
 import nekochan.exceptions.NekoStorageException;
+import nekochan.util.Messages;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -95,8 +96,6 @@ public class MainWindow extends AnchorPane {
     }
 
     private void greet() {
-        String welcomeMessage = "Konnichiwa!\n"
-                + "What can I do for you?\n";
-        dialogContainer.getChildren().add(DialogBox.getNekoDialog(welcomeMessage, botImage));
+        dialogContainer.getChildren().add(DialogBox.getNekoDialog(Messages.MESSAGE_WELCOME, botImage));
     }
 }

@@ -2,6 +2,7 @@ package nekochan.task;
 
 import nekochan.exceptions.NekoStorageException;
 import nekochan.exceptions.NekoTaskCreationException;
+import nekochan.util.Messages;
 
 /**
  * The {@code ToDo} class represents the most basic task with no additional parameters.
@@ -36,17 +37,17 @@ public class ToDo extends Task {
      */
     public static ToDo decode(String code) throws NekoStorageException {
         if (code.charAt(0) != 'T') {
-            throw new NekoStorageException("Something doesn't seem right...");
+            throw new NekoStorageException(Messages.DECODE_UNEXPECTED_TYPE_ERROR);
         }
         String[] content = code.split("\\|", 3);
         if (content.length != 3) {
-            throw new NekoStorageException("There are some holes in my memory...");
+            throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         }
         ToDo newToDo = new ToDo(content[2]);
         if (content[1].equals("Y")) {
             newToDo.setCompleted();
         } else if (!content[1].equals("N")) {
-            throw new NekoStorageException("There are some holes in my memory...");
+            throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         }
         return newToDo;
     }

@@ -4,6 +4,7 @@ import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.storage.Storage;
 import nekochan.task.Task;
 import nekochan.task.TaskList;
+import nekochan.util.Messages;
 
 /**
  * The {@code DeleteCommand} class represents a command to delete a {@link Task} in a {@link TaskList}.
@@ -46,11 +47,11 @@ public class DeleteCommand extends Command {
     @Override
     public String feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
-            throw new IncompleteNekoCommandException("Delete command was not completed.");
+            throw new IncompleteNekoCommandException(Messages.INCOMPLETE_DELETE_COMMAND);
         }
-        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in your list.",
-                deletedTask.toString(),
-                remainingTaskCount);
+        String feedbackMessage = Messages.MESSAGE_DELETE + deletedTask.toString() + "\n"
+                + Messages.getTotalTaskMessage(remainingTaskCount);
+        return feedbackMessage;
     }
 
     /**

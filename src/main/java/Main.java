@@ -12,6 +12,9 @@ import nekochan.ui.MainWindow;
  */
 public class Main extends Application {
 
+
+    private static final String STAGE_TITLE = "Neko-chan";
+
     @Override
     public void start(Stage stage) {
         try {
@@ -19,7 +22,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Neko-chan");
+            stage.setTitle(STAGE_TITLE);
             fxmlLoader.<MainWindow>getController().start();
             stage.show();
         } catch (IOException e) {

@@ -7,6 +7,7 @@ import nekochan.exceptions.NekoException;
 import nekochan.exceptions.NekoStorageException;
 import nekochan.exceptions.NekoTaskCreationException;
 import nekochan.parser.DateParser;
+import nekochan.util.Messages;
 
 /**
  * The {@code Event} class represents an event with a scheduled time.
@@ -58,7 +59,7 @@ public class Event extends Task {
                     LocalDateTime endDateTime = DateParser.parseStringToDateTime(end);
                     return new Event(description, startDateTime, endDateTime);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new NekoTaskCreationException("Does this thing ever end???");
+                    throw new NekoTaskCreationException(Messages.PARSE_EVENT_MISSING_END_DATETIME_ERROR);
                 }
             } else if (dateTimeComponent.contains(DURATION_DELIMITER)) {
                 try {
@@ -68,13 +69,13 @@ public class Event extends Task {
                     LocalDateTime endDateTime = startDateTime.plusMinutes(duration);
                     return new Event(description, startDateTime, endDateTime);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new NekoTaskCreationException("Does this thing ever end???");
+                    throw new NekoTaskCreationException(Messages.PARSE_EVENT_MISSING_END_DATETIME_ERROR);
                 }
             } else {
-                throw new NekoTaskCreationException("Wow that sure is one long event.");
+                throw new NekoTaskCreationException(Messages.PARSE_EVENT_MISSING_END_DATETIME_ERROR);
             }
         } catch (StringIndexOutOfBoundsException e) {
-            throw new NekoTaskCreationException("Something's missing, oh right I lost track of time.");
+            throw new NekoTaskCreationException(Messages.PARSE_EVENT_DATETIME_ERROR);
         }
     }
 
@@ -91,7 +92,7 @@ public class Event extends Task {
         }
         String[] content = code.split("\\|", 5);
         if (content.length != 5) {
-            throw new NekoStorageException("There are some holes in my memory...");
+            throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         }
         Event newEvent = new Event(content[4],
                 DateParser.parseStringToDateTime(content[2]),
@@ -99,7 +100,7 @@ public class Event extends Task {
         if (content[1].equals("Y")) {
             newEvent.setCompleted();
         } else if (!content[1].equals("N")) {
-            throw new NekoStorageException("There are some holes in my memory...");
+            throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         }
         return newEvent;
     }

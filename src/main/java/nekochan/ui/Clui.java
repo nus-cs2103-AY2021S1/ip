@@ -2,6 +2,8 @@ package nekochan.ui;
 
 import java.util.Scanner;
 
+import nekochan.util.Messages;
+
 /**
  * The {@code Clui} class manages program input and output.
  */
@@ -56,10 +58,8 @@ public class Clui {
      * Prints the default welcome message.
      */
     public void greet() {
-        String welcomeMessage = "Konnichiwa!\n"
-                + "What can I do for you?\n";
         System.out.printf(prependIndent(DIVIDER, 4));
-        System.out.printf(prependIndent(welcomeMessage, 5));
+        System.out.printf(prependIndent(Messages.MESSAGE_WELCOME, 5));
         System.out.println(prependIndent(DIVIDER, 4));
     }
 

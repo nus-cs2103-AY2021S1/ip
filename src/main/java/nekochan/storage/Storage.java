@@ -17,6 +17,7 @@ import nekochan.task.Event;
 import nekochan.task.Task;
 import nekochan.task.TaskList;
 import nekochan.task.ToDo;
+import nekochan.util.Messages;
 
 /**
  * The {@code Storage} class provides persistent local storage for tasks stored in the program.
@@ -53,7 +54,7 @@ public class Storage {
         if (!Files.exists(path.getParent())) {
             boolean directoriesCreated = path.getParent().toFile().mkdirs();
             if (!directoriesCreated) {
-                throw new NekoStorageException("I got lost somewhere in your folders.");
+                throw new NekoStorageException(Messages.STORAGE_ERROR_FOLDER_ERROR);
             }
         }
         try {
@@ -63,7 +64,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            throw new NekoStorageException("I didn't have enough strength to move the bits.");
+            throw new NekoStorageException(Messages.STORAGE_ERROR_UNABLE_TO_WRITE);
         }
     }
 
@@ -97,15 +98,15 @@ public class Storage {
                     loadedTask = ToDo.decode(line);
                     break;
                 default:
-                    throw new NekoStorageException("There's something wrong with my memory...");
+                    throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
                 }
                 temporaryList.add(loadedTask);
             }
             return temporaryList;
         } catch (StringIndexOutOfBoundsException e) {
-            throw new NekoStorageException("There's something wrong with my memory...");
+            throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         } catch (FileNotFoundException e) {
-            throw new NekoStorageException("I think I lost my memory... Let me start afresh.");
+            throw new NekoStorageException(Messages.STORAGE_ERROR_MISSING_SAVE);
         }
     }
 }

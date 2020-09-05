@@ -4,6 +4,7 @@ import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.storage.Storage;
 import nekochan.task.Task;
 import nekochan.task.TaskList;
+import nekochan.util.Messages;
 
 /**
  * The {@code CompleteCommand} class represents a command to mark a {@link Task} in a {@link TaskList} as complete.
@@ -44,10 +45,9 @@ public class CompleteCommand extends Command {
     @Override
     public String feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
-            throw new IncompleteNekoCommandException("Complete command was not completed.");
+            throw new IncompleteNekoCommandException(Messages.INCOMPLETE_COMPLETE_COMMAND);
         }
-        return String.format("Nice! I've marked this task as complete:\n  %s\n",
-                completedTask.toString());
+        return Messages.MESSAGE_COMPLETE + completedTask.toString() + "\n";
     }
 
     /**

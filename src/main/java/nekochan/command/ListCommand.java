@@ -7,6 +7,7 @@ import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.storage.Storage;
 import nekochan.task.Task;
 import nekochan.task.TaskList;
+import nekochan.util.Messages;
 
 /**
  * The {@code ListCommand} class represents a command to print all contents of a {@link TaskList}.
@@ -39,13 +40,13 @@ public class ListCommand extends Command {
     @Override
     public String feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
-            throw new IncompleteNekoCommandException("List command was not completed.");
+            throw new IncompleteNekoCommandException(Messages.INCOMPLETE_LIST_COMMAND);
         }
         String printout = "";
         if (existingTasks.size() == 0) {
-            printout = "Congratulations! You don't have any tasks left to do.";
+            printout = Messages.MESSAGE_EMPTY_LIST;
         } else {
-            printout = "Here are the tasks in your list:\n";
+            printout = Messages.MESSAGE_LIST;
             for (int i = 0; i < existingTasks.size(); i++) {
                 printout += String.format("%d.%s\n", i + 1, existingTasks.get(i).toString());
             }

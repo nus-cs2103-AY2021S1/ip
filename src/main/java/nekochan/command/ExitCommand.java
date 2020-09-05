@@ -3,6 +3,7 @@ package nekochan.command;
 import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.storage.Storage;
 import nekochan.task.TaskList;
+import nekochan.util.Messages;
 
 /**
  * The {@code Exit} class represents a command to safely terminate the program.
@@ -27,9 +28,9 @@ public class ExitCommand extends Command {
      */
     public String feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
-            throw new IncompleteNekoCommandException("Exit command was not completed.");
+            throw new IncompleteNekoCommandException(Messages.INCOMPLETE_EXIT_COMMAND);
         }
-        return "Ja ne!\n";
+        return Messages.MESSAGE_EXIT;
     }
 
     /**
