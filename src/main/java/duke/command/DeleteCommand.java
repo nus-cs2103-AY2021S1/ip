@@ -1,11 +1,11 @@
 package duke.command;
 
 import duke.Storage;
-import duke.ui.DukeMessages;
 import duke.exception.InvalidTaskException;
 import duke.exception.StorageException;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.DukeMessages;
 
 /**
  * Represents a Command given by the user to remove a Task from the TaskList.

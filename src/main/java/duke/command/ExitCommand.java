@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.Storage;
-import duke.ui.DukeMessages;
 import duke.task.TaskList;
+import duke.ui.DukeMessages;
 
 /**
  * Represents a Command given by the user to exit and close the app.
