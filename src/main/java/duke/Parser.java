@@ -19,7 +19,7 @@ public class Parser {
         Scanner parsingScanner = new Scanner(string);
         if (parsingScanner.hasNext()) {
             String commandString = parsingScanner.next();
-            Command command;
+            Command command; // Has to be declared beforehand for correct scope
             switch (commandString.toLowerCase()) {
             case "bye":
                 command = new ExitCommand(CommandType.BYE);
@@ -92,15 +92,14 @@ public class Parser {
     }
 
     public static Task parseTaskFromFile(String line) throws DukeException {
-        Task task;
+        Task task; // Has to be declared beforehand for correct scope
         Scanner parsingScanner = new Scanner(line);
         String type = parsingScanner.next();
-        int isDoneInteger;
 
         switch (type) {
         case "T":
             parsingScanner.next();
-            isDoneInteger = parsingScanner.nextInt();
+            int isDoneInteger = parsingScanner.nextInt();
             parsingScanner.next();
             ToDo toDo = new ToDo(parsingScanner.nextLine());
             if (isDoneInteger == 1) {

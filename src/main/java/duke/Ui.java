@@ -8,14 +8,15 @@ public class Ui {
     private static final String INDENTATION = "\t";
     private static final String HORIZONTAL_LINE = "-------------------------" +
             "------------------------------";
-    private static final String CURRENT_TASKS = "Now you have %d task(s) in the list.";
-    private static final String ADD_TASK = "Got it. I've added this task:";
-    private static final String DONE_TASK = "Nice! I've marked this as done:";
-    private static final String DELETED_TASK = "Noted. I've removed this task:";
+    private static final String MESSAGE_CURRENT_TASKS = "Now you have %d task(s) in the list.";
+    private static final String MESSAGE_ADD_TASK = "Got it. I've added this task:";
+    private static final String MESSAGE_DONE_TASK = "Nice! I've marked this as done:";
+    private static final String MESSAGE_DELETED_TASK = "Noted. I've removed this task:";
 
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
+
     private static void showFormatted(String... lines) {
         System.out.println(INDENTATION + HORIZONTAL_LINE);
         for (String s : lines) {
@@ -53,6 +54,7 @@ public class Ui {
     public String readCommand() {
         return this.scanner.nextLine();
     }
+
     public void showWelcome() {
         showFormatted("Hello! I'm Duke", "What can I do for you?");
     }
@@ -77,14 +79,14 @@ public class Ui {
     }
 
     public void showAddedTask(String task, int numTasks) {
-        showFormatted(ADD_TASK, "  " + task, String.format(CURRENT_TASKS, numTasks));
+        showFormatted(MESSAGE_ADD_TASK, "  " + task, String.format(MESSAGE_CURRENT_TASKS, numTasks));
     }
 
     public void showDoneTask(String task) {
-        showFormatted(DONE_TASK, "  " + task);
+        showFormatted(MESSAGE_DONE_TASK, "  " + task);
     }
 
     public void showDeletedTask(String task, int numTasks) {
-        showFormatted(DELETED_TASK, "  " + task, String.format(CURRENT_TASKS, numTasks));
+        showFormatted(MESSAGE_DELETED_TASK, "  " + task, String.format(MESSAGE_CURRENT_TASKS, numTasks));
     }
 }

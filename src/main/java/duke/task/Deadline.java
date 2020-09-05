@@ -13,7 +13,7 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
         try {
-            this.deadlineDate = LocalDate.parse(by);
+            deadlineDate = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
             //do nothing
         }
@@ -21,9 +21,9 @@ public class Deadline extends Task {
 
     public void printTime() {
         try {
-            System.out.println(this.deadlineDate.getMonth().toString()
-            + " " + this.deadlineDate.getDayOfMonth()
-            + " " + this.deadlineDate.getYear());
+            System.out.println(deadlineDate.getMonth().toString()
+                + " " + deadlineDate.getDayOfMonth()
+                + " " + deadlineDate.getYear());
         } catch (NullPointerException e) {
             System.out.println("No valid date available.");
         }
@@ -31,7 +31,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
     @Override
@@ -41,13 +41,10 @@ public class Deadline extends Task {
 
     @Override
     public String toFileString() {
-        int stat;
-        if (this.isDone) {
+        int stat = 0;
+        if (isDone) {
             stat = 1;
-        } else {
-            stat = 0;
         }
-        return String.format("%s | %d | %s by %s", this.getType(), stat,
-                this.description, this.by);
+        return String.format("%s | %d | %s by %s", getType(), stat, description, by);
     }
 }
