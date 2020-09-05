@@ -51,7 +51,7 @@ public class TaskList {
                     this.add(new EventTask(taskDescription, isDone, taskDate));
                     break;
                 default:
-                    break;
+                    assert false : taskType;
                 }
             }
         }

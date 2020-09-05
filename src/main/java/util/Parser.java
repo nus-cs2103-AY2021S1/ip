@@ -143,7 +143,7 @@ public class Parser {
             resultantCommand = new HelpCommand();
             break;
         default:
-            break;
+            assert false : action;
         }
 
         return resultantCommand;

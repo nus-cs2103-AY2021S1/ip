@@ -75,6 +75,7 @@ public class Duke {
             result = ui.showError(ex.getMessage());
         }
         System.out.println(result);
+        assert !result.isEmpty() : "Response should not be empty";
         return result;
     }
 
