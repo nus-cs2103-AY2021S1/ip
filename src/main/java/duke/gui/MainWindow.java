@@ -56,20 +56,34 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         if (input.toLowerCase().equals("bye")) {
-
-            KeyFrame keyFrame = new KeyFrame(Duration.seconds(0), e -> dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
-            ));
-            KeyFrame exit = new KeyFrame(Duration.seconds(1.5), e -> Platform.exit());
-            Timeline timeline = new Timeline(keyFrame, exit);
-            Platform.runLater(timeline::play);
-        } else {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
-            );
+            exitApplication(input, response);
         }
+        addDialogBox(input, response);
         userInput.clear();
+    }
+
+    /**
+     * Exits the application.
+     *
+     * @param input Input by the user.
+     * @param response Response from duke.
+     */
+    private void exitApplication(String input, String response) {
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0), e -> addDialogBox(input, response));
+        KeyFrame exit = new KeyFrame(Duration.seconds(1.5), e -> Platform.exit());
+        Timeline timeline = new Timeline(keyFrame, exit);
+        Platform.runLater(timeline::play);
+    }
+
+    /**
+     * Adds Duke and User dialog to container.
+     *
+     * @param input Input by the user.
+     * @param response Response from duke.
+     */
+    private void addDialogBox(String input, String response) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage));
     }
 }
