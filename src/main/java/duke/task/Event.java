@@ -5,12 +5,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import duke.command.InvalidCommandException;
+import duke.component.Parser;
 
 /**
  * Represents an event task that consists of a description and a datetime as the happening time of the event.
  */
 public class Event extends Task {
     private final LocalDateTime atTime;
+    private final LocalDateTime[] tentativeSlots;
 
     /**
      * Creates an event task.
@@ -20,9 +22,18 @@ public class Event extends Task {
      */
     public Event(String description, String atTime) throws InvalidCommandException {
         super(description);
+        String[] times = atTime.split(Parser.SPACE_STRING);
+        tentativeSlots = new LocalDateTime[times.length];
         try {
-            this.atTime = LocalDateTime.parse(atTime,
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            for (int i = 0; i < times.length; i++) {
+                tentativeSlots[i] = LocalDateTime.parse(times[i],
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            }
+            if (times.length == 1) {
+                this.atTime = tentativeSlots[0];
+            } else {
+                this.atTime = null;
+            }
         } catch (Exception e) {
             throw new InvalidCommandException("Invalid input datetime, please input as yyyy-MM-dd HH:mm.");
         }
@@ -30,43 +41,47 @@ public class Event extends Task {
 
     @Override
     public boolean isHappeningOn(LocalDate date) {
-        return date.isEqual(atTime.toLocalDate());
+        return atTime != null && date.isEqual(atTime.toLocalDate());
     }
 
     @Override
     public boolean isHappeningToday() {
-        return isHappeningOn(LocalDate.now());
+        return atTime != null && isHappeningOn(LocalDate.now());
     }
 
     @Override
     public boolean hasHappenedBefore(LocalDate date) {
-        return atTime.toLocalDate().isBefore(date);
+        return atTime != null && atTime.toLocalDate().isBefore(date);
     }
 
     @Override
     public boolean hasHappenedBeforeToday() {
-        return hasHappenedBefore(LocalDate.now());
+        return atTime != null && hasHappenedBefore(LocalDate.now());
     }
 
     @Override
     public boolean isHappeningAfter(LocalDate date) {
-        return atTime.toLocalDate().isAfter(date);
+        return atTime != null && atTime.toLocalDate().isAfter(date);
     }
 
     @Override
     public boolean isHappeningAfterToday() {
-        return isHappeningAfter(LocalDate.now());
+        return atTime != null && isHappeningAfter(LocalDate.now());
     }
 
     @Override
     public boolean isHappeningBetween(LocalDate date1, LocalDate date2) {
-        LocalDate date = atTime.toLocalDate();
-        return !date.isAfter(date2) && !date.isBefore(date1);
+        if (atTime != null) {
+            LocalDate date = atTime.toLocalDate();
+            return !date.isAfter(date2) && !date.isBefore(date1);
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean willHappenInDays(int n) {
-        return isHappeningBetween(LocalDate.now(), LocalDate.now().plusDays(n));
+        return atTime != null && isHappeningBetween(LocalDate.now(), LocalDate.now().plusDays(n));
     }
 
     @Override
