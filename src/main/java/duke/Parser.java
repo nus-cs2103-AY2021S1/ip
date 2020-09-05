@@ -21,10 +21,10 @@ public class Parser {
 
 
     /**
-     * Parse inputString to array by delimiter.
+     * Parses user input string to array by delimiter.
      *
-     * @param inputString inputString line.
-     * @return parsed string array.
+     * @param inputString Input string from user.
+     * @return Parsed string array.
      */
     public static String[] parseLineToArray(String inputString) {
         return inputString.split(" ");
@@ -32,10 +32,10 @@ public class Parser {
 
 
     /**
-     * Parses line and gets command.
+     * Parses user input string and gets command.
      *
-     * @param inputString input line.
-     * @return command.
+     * @param inputString Input string from user.
+     * @return Corresponding parsed command..
      */
     public static Command getCommand(String inputString) {
         String keyword = parseLineToArray(inputString)[0];
@@ -52,7 +52,9 @@ public class Parser {
         case ("bye"):
             return Command.TERMINATE;
         case ("todo"):
+            // fallthrough
         case ("event"):
+            // fallthrough
         case ("deadline"):
             return Command.TASK;
         default:
@@ -62,7 +64,7 @@ public class Parser {
 
 
     /**
-     * Parses line and gets task type.
+     * Parses user input string and gets task type.
      *
      * @param inputString input line.
      * @return task type.

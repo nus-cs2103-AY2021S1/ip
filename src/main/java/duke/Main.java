@@ -27,6 +27,11 @@ public class Main extends Application {
     }
 
 
+    /**
+     * Starts the JavaFX Gui.
+     *
+     * @param stage Stage to be used in Gui.
+     */
     @Override
     public void start(Stage stage) {
         try {

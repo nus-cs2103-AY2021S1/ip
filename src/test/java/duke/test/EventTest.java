@@ -3,20 +3,15 @@ package duke.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
-
 import duke.tasks.Event;
+
+import org.junit.jupiter.api.Test;
 
 
 public class EventTest {
 
     private static final char DONE = '\u2713';
     private static final char NOT_DONE = '\u2717';
-
-    // @Test
-    // public void dummyTest() {
-    //     assertEquals(2, 2);
-    // }
 
 
     @Test

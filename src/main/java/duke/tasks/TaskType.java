@@ -3,6 +3,7 @@ package duke.tasks;
 
 /**
  * TaskType enum.
+ * Types: TODO, EVENT, DEADLINE, default INVALID.
  */
 public enum TaskType {
     TODO("todo"),

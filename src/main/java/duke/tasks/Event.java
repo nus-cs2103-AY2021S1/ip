@@ -6,6 +6,8 @@ import java.time.LocalDate;
 
 /**
  * Event class.
+ * Subclass of Task.
+ * Task that starts on a specific date.
  */
 public class Event extends Task {
 
@@ -15,9 +17,9 @@ public class Event extends Task {
 
 
     /**
-     * Constructor for event.
+     * Creates a new Event task.
      *
-     * @param itemString description string.
+     * @param itemString Description string.
      */
     public Event(String itemString) {
         super(Task.getTaskString(itemString, Event.DELIMITER));
@@ -29,8 +31,8 @@ public class Event extends Task {
     /**
      * Constructor for event.
      *
-     * @param itemString description string.
-     * @param isDone     whether this task is done.
+     * @param itemString Description string.
+     * @param isDone     True if task is done, false otherwise.
      */
     public Event(String itemString, boolean isDone) {
         super(Task.getTaskString(itemString, Event.DELIMITER), isDone);
@@ -42,7 +44,7 @@ public class Event extends Task {
     /**
      * Gets string array for storage.
      *
-     * @return string array for storage.
+     * @return String array for storage.
      */
     @Override
     public String[] toStorageStringArr() {

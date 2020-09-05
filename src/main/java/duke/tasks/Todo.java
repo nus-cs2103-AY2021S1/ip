@@ -3,13 +3,15 @@ package duke.tasks;
 
 /**
  * Todo class.
+ * Subclass of Task.
+ * Task without any dates attached to it.
  */
 public class Todo extends Task {
 
     /**
-     * Constructor for todo.
+     * Creates a new Todo task.
      *
-     * @param itemString description string.
+     * @param itemString Description string.
      */
     public Todo(String itemString) {
         super(itemString);
@@ -17,10 +19,10 @@ public class Todo extends Task {
 
 
     /**
-     * Constructor for todo.
+     * Creates a new Todo task.
      *
-     * @param itemString description string.
-     * @param isDone     whether this task is done.
+     * @param itemString Description string.
+     * @param isDone     True if task is done, false otherwise.
      */
     public Todo(String itemString, boolean isDone) {
         super(itemString, isDone);
@@ -30,7 +32,7 @@ public class Todo extends Task {
     /**
      * Gets string array for storage.
      *
-     * @return string array for storage.
+     * @return String array for storage.
      */
     @Override
     public String[] toStorageStringArr() {

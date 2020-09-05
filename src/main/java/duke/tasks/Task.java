@@ -25,9 +25,9 @@ public abstract class Task {
 
 
     /**
-     * Constructor for Task.
+     * Abstract constructor for Task.
      *
-     * @param itemString description string.
+     * @param itemString Description string.
      */
     public Task(String itemString) {
         this.itemString = itemString;
@@ -36,10 +36,10 @@ public abstract class Task {
 
 
     /**
-     * Constructor for Task.
+     * Abstract constructor for Task.
      *
-     * @param itemString description string.
-     * @param isDone     whether this task is done.
+     * @param itemString Description string.
+     * @param isDone     True if task is done, false otherwise.
      */
     public Task(String itemString, boolean isDone) {
         this.itemString = itemString;
@@ -50,7 +50,7 @@ public abstract class Task {
     /**
      * Splits the itemString by the delimiter and returns the task portion.
      *
-     * @param taskString Item String.
+     * @param taskString Item string.
      * @param delimiter  Delimiter used.
      * @return Task portion of the string.
      */
@@ -66,7 +66,7 @@ public abstract class Task {
     /**
      * Splits the taskString by the delimiter and returns the Date portion.
      *
-     * @param taskString Item String.
+     * @param taskString Item string.
      * @param delimiter  Delimiter used.
      * @return Date portion of the string.
      */
@@ -76,16 +76,6 @@ public abstract class Task {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeNoDateException("Date not given in description text.");
         }
-    }
-
-
-    /**
-     * Gets date string.
-     *
-     * @return Date string.
-     */
-    public String getDateString() {
-        return this.dateString;
     }
 
 
@@ -107,6 +97,16 @@ public abstract class Task {
      */
     public String getItemString() {
         return this.itemString;
+    }
+
+
+    /**
+     * Gets date string.
+     *
+     * @return Date string of task.
+     */
+    public String getDateString() {
+        return this.dateString;
     }
 
 
@@ -141,18 +141,16 @@ public abstract class Task {
     /**
      * Gets string array for storage.
      *
-     * @return string array for storage.
+     * @return String array for storage.
      */
-    public String[] toStorageStringArr() {
-        return new String[]{"Task", this.isDone ? "1" : "0", this.itemString};
-    }
+    public abstract String[] toStorageStringArr();
 
 
     /**
      * Checks if task matches keyword.
      *
      * @param keyword keyword to be searched for.
-     * @return if task matches keyword. True if keyword is substring of itemString.
+     * @return True if keyword is substring of itemString, false otherwise.
      */
     public boolean matches(String keyword) {
         return this.itemString.contains(keyword);

@@ -22,24 +22,23 @@ import duke.tasks.Todo;
  */
 public class DukeList {
 
-    private static final int CAPACITY = 100;
+    private static final int DEFAULT_CAPACITY = 100;
     private final List<Task> taskList;
     private final Storage store = new Storage("data", "duke.txt");
 
 
     /**
-     * Constructor for DukeList.
+     * Creates a new DukeList with default capacity of 100.
      */
     public DukeList() {
-        this.taskList = new ArrayList<>(CAPACITY);
+        this.taskList = new ArrayList<>(DEFAULT_CAPACITY);
     }
 
 
     /**
-     * Constructor for DukeList.
-     * Overrides default capacity
+     * Creates a new DukeList with custom capacity.
      *
-     * @param capacity list capacity.
+     * @param capacity List capacity to override default capacity.
      */
     public DukeList(int capacity) {
         this.taskList = new ArrayList<>(capacity);
@@ -47,12 +46,12 @@ public class DukeList {
 
 
     /**
-     * Helper function for adding item.
+     * Helper function for adding an item.
      *
      * @param descriptionString String to be added.
      * @return Task added.
-     * @throws DukeInvalidDescriptionException invalid description.
-     * @throws DukeInvalidCommandException     invalid command.
+     * @throws DukeInvalidDescriptionException Invalid description.
+     * @throws DukeInvalidCommandException     Invalid command.
      */
     private Task addHelper(String descriptionString) throws DukeInvalidDescriptionException, DukeInvalidCommandException {
         Task newTask;
@@ -126,9 +125,9 @@ public class DukeList {
      * This method is only accessed privately.
      *
      * @param descriptionString Description string of task to be added.
-     * @param isDone            If task is done already.
-     * @throws DukeInvalidDescriptionException invalid description text.
-     * @throws DukeInvalidCommandException     invalid command.
+     * @param isDone            True if task is already completed, false otherwise.
+     * @throws DukeInvalidDescriptionException Invalid description text.
+     * @throws DukeInvalidCommandException     Invalid command.
      */
     private void add(String descriptionString, boolean isDone) throws DukeInvalidDescriptionException, DukeInvalidCommandException {
         Task newTask = addHelper(descriptionString);
@@ -143,9 +142,9 @@ public class DukeList {
      * Marks an item as done.
      *
      * @param index Index of item to be marked as done.
-     *              !This index is the printed index, not the actual index in the list.
+     *              This index is the printed index, not the actual index in the list.
      * @return Status string to be printed.
-     * @throws NullPointerException invalid index.
+     * @throws NullPointerException Invalid index.
      */
     public String markAsDone(int index) throws IndexOutOfBoundsException {
         Task targetTask = this.taskList.get(index - 1);
@@ -159,9 +158,9 @@ public class DukeList {
      * Deletes an item from the list.
      *
      * @param index Index of ite to be deleted.
-     *              ! This index is the printed index, not the actual index in the list.
+     *              This index is the printed index, not the actual index in the list.
      * @return Status string to be printed.
-     * @throws IndexOutOfBoundsException invalid index.
+     * @throws IndexOutOfBoundsException Invalid index.
      */
     public String delete(int index) throws IndexOutOfBoundsException {
         Task removedTask = this.taskList.remove(index - 1);
@@ -175,8 +174,8 @@ public class DukeList {
      * Finds tasks based on keyword.
      * Output index are the indexes in original dukeList.
      *
-     * @param keyword keyword to be searched for.
-     * @return string of all matched tasks.
+     * @param keyword Keyword to be searched for.
+     * @return String representation of all matched tasks.
      */
     public String find(String keyword) {
         List<String> matchedTasks = new ArrayList<>();
@@ -199,7 +198,7 @@ public class DukeList {
 
 
     /**
-     * Writes tasks to file.
+     * Writes all tasks in list to file.
      */
     public void writeToFile() {
         for (Task t : this.taskList) {
@@ -210,7 +209,7 @@ public class DukeList {
 
 
     /**
-     * Adds items that are read from file.
+     * Loads items that are read from file into the list.
      */
     public void loadFromFile() {
         String[][] parsedLines = this.store.readFromFile();
@@ -224,9 +223,9 @@ public class DukeList {
 
 
     /**
-     * Gets the string to display the stats of the list.
+     * Gets the string representation of the statistics of the list.
      *
-     * @return stats string.
+     * @return String representation of statistics of the list.
      */
     private String getListStats() {
         return String.format("Now you have %d tasks in the list.", this.taskList.size());

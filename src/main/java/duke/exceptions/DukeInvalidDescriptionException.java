@@ -8,7 +8,7 @@ package duke.exceptions;
 public class DukeInvalidDescriptionException extends DukeException {
 
     /**
-     * Constructor for DukeInvalidDescriptionException.
+     * Creates a new DukeInvalidDescriptionException.
      */
     public DukeInvalidDescriptionException() {
         super();
@@ -16,7 +16,7 @@ public class DukeInvalidDescriptionException extends DukeException {
 
 
     /**
-     * Constructor for DukeInvalidDescriptionException.
+     * Creates a new DukeInvalidDescriptionException.
      *
      * @param errMsg error message.
      */
