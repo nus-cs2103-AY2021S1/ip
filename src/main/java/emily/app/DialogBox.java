@@ -13,6 +13,11 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
 
+    /**
+     * Displays interactions between the user and emily
+     * @param l text to show
+     * @param iv image of the person
+     */
     public DialogBox(Label l, ImageView iv) {
         l.setWrapText(true);
         iv.setFitWidth(100.0);

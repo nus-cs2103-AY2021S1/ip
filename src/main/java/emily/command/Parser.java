@@ -1,5 +1,6 @@
 package main.java.emily.command;
 
+import main.java.emily.exception.DukeException;
 import main.java.emily.task.Deadline;
 import main.java.emily.task.Event;
 import main.java.emily.task.Task;
@@ -17,6 +18,7 @@ public class Parser {
 
     /**
      * Convert the user input string to a proper Task
+     *
      * @param str of user input
      * @return A new Task with the input details
      * @throws DukeException when the user input is invalid or is not in the proper form
@@ -24,27 +26,28 @@ public class Parser {
     public Task parse(String str) throws DukeException {
         Task item = new Task("");
 
-        try {
-            if (str.contains("todo")) {
-                String describe = str.substring(5);
-                item = new ToDos(describe);
-                return item;
-            } else if (str.contains("deadline")) {
+        if (str.contains("todo")) {
+            String describe = str.substring(5);
+            item = new ToDos(describe);
+            return item;
+        } else if (str.contains("deadline")) {
+            try {
                 String description = str.substring(9);
                 String[] temp = description.split("/by ");
-
-                item = new Deadline(temp[0], temp[1]);
+                item = new Deadline(temp[0].trim(), temp[1].trim());
                 return item;
-            } else {
+            } catch (ArrayIndexOutOfBoundsException | java.time.DateTimeException e) {
+                throw new DukeException("Format of deadline should be /by yyyy-mm-dd");
+            }
+        } else {
+            try {
                 String description = str.substring(6);
                 String[] temp = description.split("/at ");
-                item = new Event(temp[0], temp[1]);
+                item = new Event(temp[0].trim(), temp[1].trim());
                 return item;
+            } catch (ArrayIndexOutOfBoundsException | java.time.DateTimeException e) {
+                throw new DukeException("Format of event should be /at yyyy-mm-dd HHmm");
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Invalid index given");
-        } catch (java.time.DateTimeException e) {
-            throw new DukeException("Invalid timestamp, should be in the form of yyy-mm--dd");
         }
     }
 }

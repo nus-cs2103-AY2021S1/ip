@@ -1,5 +1,6 @@
 package main.java.emily.command;
 
+import main.java.emily.exception.DukeException;
 import main.java.emily.storage.Storage;
 import main.java.emily.storage.TaskList;
 import java.io.File;
@@ -15,6 +16,9 @@ public class Emily {
     private final Logic ui;
     private TaskList tasks;
 
+    /**
+     * Manages the app components
+     */
     public Emily() {
         ui = new Logic();
         storage = new Storage(FILE_PATH);
