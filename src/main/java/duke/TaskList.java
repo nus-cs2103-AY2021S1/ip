@@ -46,6 +46,9 @@ public class TaskList {
      */
     public Task createTask(TaskType.TypeOfTask typeOfTask, String description, LocalDateTime timing, boolean isDone) {
 
+        assert typeOfTask != null : "Type of task cannot be null";
+        assert description != null : "Task description cannot be null";
+
         switch (typeOfTask) {
         case TODO:
             return new Todo(description, isDone);
@@ -92,6 +95,8 @@ public class TaskList {
      * @return Tasks matching keyword.
      */
     public ArrayList<Task> findTasks(String keyword) {
+        assert !keyword.isEmpty() : "Keyword cannot be empty";
+
         ArrayList<Task> foundTasks = new ArrayList<>(this.tasks);
         foundTasks.removeIf(task -> !task.getTaskDescription().contains(keyword));
         return foundTasks;
