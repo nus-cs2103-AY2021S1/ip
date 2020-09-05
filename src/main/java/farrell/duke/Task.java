@@ -1,5 +1,7 @@
 package main.java.farrell.duke;
 
+import java.time.LocalDate;
+
 /**
  * Encapsulates data common to a task.
  * This is the base class that all tasks inherit from.

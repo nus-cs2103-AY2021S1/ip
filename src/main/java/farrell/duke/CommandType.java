@@ -13,6 +13,7 @@ public enum CommandType {
     DELETE,
     BYE,
     FIND,
+    SORT,
     UNDEFINED;
 
     /**

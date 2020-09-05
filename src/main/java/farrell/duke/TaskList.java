@@ -1,6 +1,7 @@
 package main.java.farrell.duke;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -88,6 +89,55 @@ public class TaskList {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Returns a formatted string representing a list of tasks sorted by description.
+     * The list is sorted in ascending order by default.
+     * @param descending Whether to sort the list by descending order instead.
+     * @return The list of tasks as a formatted string.
+     */
+    public String sortByDescriptionToString(boolean descending) {
+        Comparator<Task> comparator = descending
+                ? Comparator.comparing(Task::getDescription).reversed()
+                : Comparator.comparing(Task::getDescription);
+        taskList.sort(comparator);
+        return toString();
+    }
+
+    /**
+     * Returns a formatted string representing a list of tasks sorted by time.
+     * The list is sorted in descending order by default.
+     * @param ascending Whether to sort the list by ascending order instead.
+     * @return The list of tasks as a formatted string.
+     * @throws DukeException
+     */
+    public String sortByTimeToString(boolean ascending) throws DukeException {
+        List<TimedTask> tasksWithTime = new ArrayList<>();
+        List<Task> noTimeTasks = new ArrayList<>();
+        for (Task task : taskList) {
+            switch (task.getTaskType()) {
+            case DEADLINE:
+            case EVENT:
+                tasksWithTime.add((TimedTask) task);
+                break;
+            case TODO:
+                noTimeTasks.add(task);
+                break;
+            default:
+                throw new DukeException("Unknown task type found in list!");
+            }
+        }
+
+        Comparator<TimedTask> comparator = ascending
+                ? Comparator.comparing(TimedTask::getTime)
+                : Comparator.comparing(TimedTask::getTime).reversed();
+        tasksWithTime.sort(comparator);
+        taskList.clear();
+        taskList.addAll(tasksWithTime);
+        taskList.addAll(noTimeTasks);
+
+        return toString();
     }
 
     @Override

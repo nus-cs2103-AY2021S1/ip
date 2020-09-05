@@ -105,6 +105,29 @@ public class Duke {
             String filteredList = taskList.filteredToString(parameters);
             uiManager.sendDukeMessage("Here are the matching tasks in your list:\n" + filteredList);
             break;
+        case SORT:
+            String[] sortParameters = parameters.split(" /order ");
+            String sortType = sortParameters[0].toUpperCase();
+
+            boolean sortAscending = false;
+            if (sortParameters.length > 1) {
+                sortAscending = sortParameters[1]
+                        .toUpperCase()
+                        .equals("ASCENDING");
+            }
+            String sortedList = "";
+            switch (sortType) {
+            case "DESCRIPTION":
+                sortedList = taskList.sortByDescriptionToString(sortAscending);
+                break;
+            case "DATE":
+                sortedList = taskList.sortByTimeToString(sortAscending);
+                break;
+            default:
+                throw new DukeException("Unknown sort type!");
+            }
+            uiManager.sendDukeMessage(sortedList);
+            break;
         case UNDEFINED:
             throw new DukeException("I don't know what that means!");
         default:
