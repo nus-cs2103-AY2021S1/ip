@@ -55,6 +55,11 @@ public class MainWindow extends AnchorPane {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
+    /**
+     * Sets duke in MainWindow and creates initial startup dialogContainer displaying welcome message.
+     *
+     * @param d Duke instance.
+     */
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getUi().showWelcome(), dukeImage));
