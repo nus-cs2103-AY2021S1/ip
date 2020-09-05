@@ -15,7 +15,7 @@ public class Duke {
     }
 
     public void printWelcomeMessage() {
-        System.out.println("Hello! I'm Duke baby :)\n" + "What can I do for you?");
+        System.out.println("Hello! I'm duke.Duke baby :)\n" + "What can I do for you?");
     }
 
     /** Helper method to list out all the current tasks **/
@@ -137,7 +137,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String filePath = "data/duke.txt";
+        String filePath = "duke/data/duke.txt";
         Duke duke = new Duke(filePath);
         duke.run();
     }

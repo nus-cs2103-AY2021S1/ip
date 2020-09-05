@@ -64,7 +64,7 @@ public class Storage {
 
     }
 
-    /** Initialise the storage for Duke.
+    /** Initialise the storage for duke.Duke.
      * @return TaskList that contains the collection of Tasks in the storage.
      */
     public ArrayList<Task> init() throws DukeException {
