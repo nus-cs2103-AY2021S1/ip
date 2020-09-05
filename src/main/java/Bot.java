@@ -75,7 +75,7 @@ public class Bot {
           return output;
         case ("delete"):
           Integer number = Integer.valueOf(parsedInfo[1]) - 1;
-          if (number <= 0) {
+          if (number <= 0) {//
             throw new invalidDeleteNumberException();
           }
           assert number >= 1 : "Invalid Number"; //assert
