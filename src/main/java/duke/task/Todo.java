@@ -7,10 +7,10 @@ public class Todo extends Task {
     /**
      * Creates a todo.
      * @param name A string representing the name of the todo.
-     * @param isCompleted A boolean value representing whether the todo has been completed.
+     * @param isComplete A boolean value representing whether the todo has been completed.
      */
-    protected Todo(String name, boolean isCompleted) {
-        super(name, isCompleted);
+    protected Todo(String name, boolean isComplete) {
+        super(name, isComplete);
     }
 
     /**
@@ -28,11 +28,11 @@ public class Todo extends Task {
      * The todo created is an already previously existing todo with its details recorded in storage.
      * Usually called when starting up the application, to populate the TaskList.
      * @param name A string representing the name of the existing todo.
-     * @param isCompleted A boolean value representing whether the todo has been completed.
+     * @param isComplete A boolean value representing whether the todo has been completed.
      * @return The existing todo created.
      */
-    public static Todo existingTodo(String name, boolean isCompleted) {
-        return new Todo(name, isCompleted);
+    public static Todo existingTodo(String name, boolean isComplete) {
+        return new Todo(name, isComplete);
     }
 
     /**

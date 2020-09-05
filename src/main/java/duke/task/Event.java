@@ -14,11 +14,11 @@ public class Event extends Task {
     /**
      * Creates an Event.
      * @param name A string representing the name of the event.
-     * @param isCompleted A boolean value representing whether the event has been completed.
+     * @param isComplete A boolean value representing whether the event has been completed.
      * @param date A LocalDate representing the date of the event.
      */
-    protected Event(String name, boolean isCompleted, LocalDate date) {
-        super(name, isCompleted);
+    protected Event(String name, boolean isComplete, LocalDate date) {
+        super(name, isComplete);
         this.date = date;
     }
 
@@ -38,12 +38,12 @@ public class Event extends Task {
      * The event created is an already previously existing event with its details recorded in storage.
      * Usually called when starting up the application, to populate the TaskList.
      * @param name A string representing the name of the existing event.
-     * @param isCompleted A boolean value representing whether the event has been completed.
+     * @param isComplete A boolean value representing whether the event has been completed.
      * @param date A LocalDate representing the date of the existing event.
      * @return The existing event created.
      */
-    public static Event existingEvent(String name, boolean isCompleted, LocalDate date) {
-        return new Event(name, isCompleted, date);
+    public static Event existingEvent(String name, boolean isComplete, LocalDate date) {
+        return new Event(name, isComplete, date);
     }
 
     /**

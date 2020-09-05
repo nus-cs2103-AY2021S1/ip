@@ -4,17 +4,17 @@ package duke.task;
  * Represents a Task.
  */
 public class Task {
-    protected boolean isCompleted;
+    protected boolean isComplete;
     protected String taskName;
 
     /**
      * Creates a Task.
      * @param name A string representing the name of the task.
-     * @param isCompleted A boolean value representing whether the task has been completed.
+     * @param isComplete A boolean value representing whether the task has been completed.
      */
-    protected Task(String name, boolean isCompleted) {
+    protected Task(String name, boolean isComplete) {
         this.taskName = name;
-        this.isCompleted = isCompleted;
+        this.isComplete = isComplete;
     }
 
     /**
@@ -52,7 +52,7 @@ public class Task {
      * @return A boolean value representing whether the task has been completed.
      */
     public boolean getCompletionStatus() {
-        return this.isCompleted;
+        return this.isComplete;
     }
 
     /**
@@ -60,7 +60,7 @@ public class Task {
      * @return The task that was marked as completed.
      */
     public Task markAsDone() {
-        this.isCompleted = true;
+        this.isComplete = true;
         return this;
     }
 
@@ -69,7 +69,7 @@ public class Task {
      * @return The symbol that represents the completion status of the task.
      */
     public String getStatusIcon() {
-        return (isCompleted ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isComplete ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     /**
@@ -99,6 +99,6 @@ public class Task {
      * @return A string representation of the task object to be saved in storage.
      */
     public String toSaveString() {
-        return (this.isCompleted ? "1" : "0") + " | " + this.taskName;
+        return (this.isComplete ? "1" : "0") + " | " + this.taskName;
     }
 }

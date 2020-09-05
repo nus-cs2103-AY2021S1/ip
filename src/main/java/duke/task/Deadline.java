@@ -14,11 +14,11 @@ public class Deadline extends Task {
     /**
      * Creates a Deadline.
      * @param name A string representing the name of the deadline.
-     * @param isCompleted A boolean value representing whether the deadline has been completed.
+     * @param isComplete A boolean value representing whether the deadline has been completed.
      * @param date A LocalDate representing the date of the deadline.
      */
-    protected Deadline(String name, boolean isCompleted, LocalDate date) {
-        super(name, isCompleted);
+    protected Deadline(String name, boolean isComplete, LocalDate date) {
+        super(name, isComplete);
         this.date = date;
     }
 
@@ -38,12 +38,12 @@ public class Deadline extends Task {
      * The deadline created is an already previously existing deadline with its details recorded in storage.
      * Usually called when starting up the application, to populate the TaskList.
      * @param name A string representing the name of the existing deadline.
-     * @param isCompleted A boolean value representing whether the deadline has been completed.
+     * @param isComplete A boolean value representing whether the deadline has been completed.
      * @param date A LocalDate representing the date of the existing deadline.
      * @return The existing deadline created.
      */
-    public static Deadline existingDeadline(String name, boolean isCompleted, LocalDate date) {
-        return new Deadline(name, isCompleted, date);
+    public static Deadline existingDeadline(String name, boolean isComplete, LocalDate date) {
+        return new Deadline(name, isComplete, date);
     }
 
     /**
