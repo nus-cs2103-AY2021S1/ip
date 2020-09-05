@@ -11,12 +11,28 @@ import duke.ui.Ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Handles 'deadline', 'event' and 'todo' command input by user.
+ */
 public class AddCommand extends Command{
 
+    /**
+     * Constructor for AddCommand class.
+     *
+     * @param command String input by user.
+     */
     public AddCommand(String command){
         super(command);
     }
 
+    /**
+     * Interprets the type of Task the user wishes to add.
+     *
+     * @param tm TaskManager that handles tasks in memory.
+     * @param ui User interface that interacts with the user.
+     * @param storage Storage class that handles saving and loading from file.
+     * @throws DukeException If command is not properly formatted.
+     */
     @Override
     public void execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
         if (command.startsWith("deadline")){

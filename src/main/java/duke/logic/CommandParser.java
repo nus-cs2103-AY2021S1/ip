@@ -8,8 +8,18 @@ import duke.logic.commands.DoneCommand;
 import duke.logic.commands.ExitCommand;
 import duke.logic.commands.ListCommand;
 
+/**
+ * Parses commands that are input into Duke.
+ */
 public class CommandParser {
 
+    /**
+     * Parses user input and returns the relevant Command.
+     *
+     * @param command String input by user
+     * @return Command object the corresponds to the user input
+     * @throws DukeException If command is not on the recogised list of commands.
+     */
     public static Command parse(String command) throws DukeException {
         String[] extractedCommand = command.split(" ", 2);
         switch(extractedCommand[0]) {
