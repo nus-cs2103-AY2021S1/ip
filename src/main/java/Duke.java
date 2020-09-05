@@ -47,36 +47,6 @@ public class Duke extends Application {
         this.tasks = new TaskList(storage.load());
     }
 
-//    /**
-//     * Start the Duke program.
-//     */
-//    public void run() {
-//        String input = "";
-//        String output;
-//        ui.showWelcome();
-//
-//        while (!input.equals("bye")) {
-//            input = ui.readInput();
-//
-//            try {
-//                output = parser.parse(input, tasks, storage);
-//            } catch (DukeException e) {
-//                output = e.getMessage();
-//            }
-//
-//            ui.showOutput(output);
-//        }
-//    }
-//
-//    /**
-//     * The main method for Duke class.
-//     * @param args unused
-//     */
-//    public static void main(String[] args) {
-//        Duke duke = new Duke("data/storage/duke.txt");
-//        duke.run();
-//    }
-
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
