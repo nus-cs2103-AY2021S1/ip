@@ -2,7 +2,7 @@ public class ToDoTask extends Task {
 
     public ToDoTask(String summary) {
         super(summary);
-        this.taskType = "todo";
+        this.taskType = TaskType.TODO;
     }
 
     @Override

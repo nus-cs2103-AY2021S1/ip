@@ -28,17 +28,17 @@ public class Storage {
                 } else {
                     taskDetails = "incomplete";
                 }
-                String taskType = task.getTaskType();
+                TaskType taskType = task.getTaskType();
                 switch (taskType) {
-                    case "todo":
+                    case TODO:
                         taskDetails += " todo " + task.getSummary();
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         DeadlineTask deadlineTask = (DeadlineTask) task;
                         taskDetails += " deadline " + deadlineTask.getSummary()
                                 + " /by " + deadlineTask.getDeadline();
                         break;
-                    case "event":
+                    case EVENT:
                         EventTask eventTask = (EventTask) task;
                         taskDetails += " event " + eventTask.getSummary()
                                 + " /at " + eventTask.getStartDate() + " "

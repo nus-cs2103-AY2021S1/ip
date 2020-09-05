@@ -1,7 +1,7 @@
 public class Task {
     protected String summary;
     protected boolean isComplete;
-    protected String taskType;
+    protected TaskType taskType;
 
     public Task(String summary) {
         this.summary = summary;
@@ -21,7 +21,7 @@ public class Task {
         return isComplete;
     }
 
-    public String getTaskType() {
+    public TaskType getTaskType() {
         return taskType;
     }
 
