@@ -15,8 +15,6 @@ public class Duke {
     /** An object that handles user interaction */
     private UiManager uiManager;
 
-    private boolean shouldExit = false;
-
     public Duke(UiManager uiManager) throws DukeException {
         this.uiManager = uiManager;
         taskList = dataManager.load();
@@ -34,7 +32,6 @@ public class Duke {
      */
     public void run(String input) {
         try {
-            //String input = uiManager.getNextInput();
             uiManager.sendUserMessage(input);
 
             String[] splitInput = input.split(" ", 2);
@@ -45,10 +42,6 @@ public class Duke {
         } catch (DukeException exception) {
                 uiManager.sendDukeMessage(exception.getMessage());
         }
-    }
-
-    public boolean shouldExit() {
-        return shouldExit;
     }
 
     /**
@@ -101,7 +94,6 @@ public class Duke {
                     + deleteTask.toString());
             break;
         case BYE:
-            shouldExit = true;
             uiManager.sendDukeMessage("Bye. Hope to see you again soon!");
             break;
         case FIND:
