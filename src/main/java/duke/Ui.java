@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -120,6 +119,15 @@ public class Ui {
                 + HORIZONTAL_LINE;
     }
 
+    /**
+     * Prints the statistics depending on command.
+     * If command is total, duke will return total number of items in the list.
+     * If command is done, duke will return total number of items that
+     * are done in the list and return the list itself.
+     *
+     * @param command command
+     * @return String string
+     */
     public String printStats(String command) {
         try {
             if (command.toLowerCase().equals("total")) {

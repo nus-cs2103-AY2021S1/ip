@@ -153,6 +153,14 @@ public class Command {
         return ui.printFind(command[1]);
     }
 
+    /**
+     * Parses the command with the description and prints the statistics depending on the
+     * description.
+     *
+     * @param toEcho full description
+     * @return String string of message
+     * @throws DukeEmptyMessageException thrown when message is empty
+     */
     public String findStats(String toEcho) throws DukeEmptyMessageException {
         String[] command = Parser.splitCommandAndDescription(toEcho);
         if (toEcho.length() == 5) {
