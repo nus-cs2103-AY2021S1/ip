@@ -40,29 +40,4 @@ public class Fei {
         }
     }
 
-//    /**
-//     * Run Alison Chat bot with this method.
-//     */
-//    public void run() {
-//        ui.greeting();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String fullCommand = ui.readCommand();
-//                ui.printBorder();
-//                Command c = Parser.parse(fullCommand);
-//                c.execute(tasks, ui, storage);
-//                isExit = c.isExit();
-//            } catch (AlisonException e) {
-//                ui.showError(e.getMessage());
-//            } finally {
-//                ui.printBorder();
-//            }
-//        }
-//    }
-
-//    public static void main(String[] args) {
-//        new Alison("./data/tasks.txt").run();
-//    }
-
 }
