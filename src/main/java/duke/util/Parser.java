@@ -57,7 +57,7 @@ public class Parser {
         try {
             String[] inputArray = input.substring(input.indexOf(' ') + 1).split(" /by ");
             String description = inputArray[0];
-            Date by = DateFormatter.extractTimestampInput(inputArray[1]);
+            Date by = DateFormatter.parseDate(inputArray[1]);
             return new DeadlineCommand(description, by);
         } catch (ArrayIndexOutOfBoundsException | DukeException e) {
             throw new InvalidDeadlineException();
@@ -78,7 +78,7 @@ public class Parser {
         try {
             String[] inputArray = input.substring(input.indexOf(' ') + 1).split(" /at ");
             String description = inputArray[0];
-            Date at = DateFormatter.extractTimestampInput(inputArray[1]);
+            Date at = DateFormatter.parseDate(inputArray[1]);
             return new EventCommand(description, at);
         } catch (ArrayIndexOutOfBoundsException | DukeException e) {
             throw new InvalidEventException();

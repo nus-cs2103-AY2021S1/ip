@@ -49,10 +49,10 @@ public class Storage {
                     task = new ToDo(taskDetails[2]);
                 } else if (taskDetails[0].equals("D")) {
                     task = new Deadline(taskDetails[2],
-                            DateFormatter.extractTimestampInput(taskDetails[3]));
+                            DateFormatter.parseDate(taskDetails[3]));
                 } else if (taskDetails[0].equals("E")) {
                     task = new Event(taskDetails[2],
-                            DateFormatter.extractTimestampInput(taskDetails[3]));
+                            DateFormatter.parseDate(taskDetails[3]));
                 } else {
                     throw new DukeException();
                 }

@@ -27,7 +27,7 @@ public class DateFormatter {
      * @return Date object corresponding to the String given.
      * @throws DukeException If the String representation does not match any defined date format.
      */
-    public static Date extractTimestampInput(String strDate) throws DukeException {
+    public static Date parseDate(String strDate) throws DukeException {
         for (String format: dateFormats) {
             SimpleDateFormat sdf = new SimpleDateFormat(format);
             try {
