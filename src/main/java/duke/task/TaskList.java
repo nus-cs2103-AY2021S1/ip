@@ -3,6 +3,7 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Encapsulates a list of {@link Task}s.
@@ -90,13 +91,8 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < this.tasks.size(); i++) {
-            sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
-        }
-
-        return sb.toString().trim();
+        return IntStream.range(0, this.tasks.size())
+                .mapToObj(i -> String.format("%d. %s", i + 1, tasks.get(i)))
+                .collect(Collectors.joining("\n")).trim();
     }
-
 }
