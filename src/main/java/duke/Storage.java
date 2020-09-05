@@ -94,7 +94,7 @@ public class Storage {
         try {
             StringBuilder content = new StringBuilder();
             FileWriter fw = new FileWriter(file.getPath());
-            for (Task task : taskList) {
+            taskList.forEach(task -> {
                 if (task instanceof ToDo) {
                     String taskDetails = String.format("T | %d | %s", task.isTaskDone() ? 1 : 0, task.getDescription());
                     content.append(taskDetails).append("\n");
@@ -107,7 +107,7 @@ public class Storage {
                             task.isTaskDone() ? 1 : 0, task.getDescription(), ((Event) task).getAt());
                     content.append(taskDetails).append("\n");
                 }
-            }
+            });
             fw.write(content.toString());
             fw.close();
         } catch (IOException e) {
