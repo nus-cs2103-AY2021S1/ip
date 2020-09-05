@@ -31,68 +31,125 @@ public class Parser {
           and the required arguments. */
         String[] commandArgs = command.split(" ", 2);
 
+        // Checks if there are empty arguments for commands.
+        boolean isArgsEmpty = false;
+        if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
+            isArgsEmpty = true;
+        }
+
         switch (commandArgs[0]) {
         case "todo":
-            if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
-                throw new EmptyArgumentException(
-                        "The description of a todo cannot be empty. Please input a valid description.");
-            }
-            return new TodoCommand(commandArgs[1]);
+            return createTodoCommand(commandArgs, isArgsEmpty);
         case "deadline":
-            if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
-                throw new EmptyArgumentException(
-                        "The description of a deadline cannot be empty. Please input a valid description.");
-            }
-            return new DeadlineCommand(commandArgs[1]);
+            return createDeadlineCommand(commandArgs, isArgsEmpty);
         case "event":
-            if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
-                throw new EmptyArgumentException(
-                        "The description of an event cannot be empty. Please input a valid description.");
-            }
-            return new EventCommand(commandArgs[1]);
+            return createEventCommand(commandArgs, isArgsEmpty);
         case "list":
-            return new ListCommand();
+            return createListCommand();
         case "upcoming":
-            if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
-                throw new EmptyArgumentException("Please enter the number of days.");
-            }
-            try {
-                int days = Integer.parseInt(commandArgs[1]);
-                return new UpcomingCommand(days);
-            } catch (NumberFormatException e) {
-                throw new InvalidCommandException("Please enter a valid digit for days.");
-            }
+            return createUpcomingCommand(commandArgs, isArgsEmpty);
         case "find":
-            if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
-                throw new EmptyArgumentException("Please enter a keyword to search for.");
-            }
-            //Splits the input into multiple keywords if possible
-            String[] keywords = commandArgs[1].split(" ");
-            return new FindCommand(keywords);
+            return createFindCommand(commandArgs, isArgsEmpty);
         case "done":
-            if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
-                throw new EmptyArgumentException("Please enter the index of the task you wish to complete.");
-            }
-            try {
-                int taskIndex = Integer.parseInt(commandArgs[1]) - 1;
-                return new DoneCommand(taskIndex);
-            } catch (NumberFormatException e) {
-                throw new InvalidCommandException("Please enter a valid index.");
-            }
+            return createDoneCommand(commandArgs, isArgsEmpty);
         case "delete":
-            if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
-                throw new EmptyArgumentException("Please enter the index of the task you wish to delete.");
-            }
-            try {
-                int taskIndex = Integer.parseInt(commandArgs[1]) - 1;
-                return new DeleteCommand(taskIndex);
-            } catch (NumberFormatException e) {
-                throw new InvalidCommandException("Please enter a valid index.");
-            }
+            return createDeleteCommand(commandArgs, isArgsEmpty);
         case "bye":
-            return new ExitCommand();
+            return createExitCommand();
         default:
             throw new InvalidCommandException("That was not a valid command.\nPlease try again.");
         }
     }
+
+    private static TodoCommand createTodoCommand(String[] commandArgs, boolean isArgsEmpty)
+            throws EmptyArgumentException {
+        if (isArgsEmpty) {
+            throw new EmptyArgumentException(
+                    "The description of a todo cannot be empty. Please input a valid description.");
+        }
+
+        return new TodoCommand(commandArgs[1]);
+    }
+
+    private static DeadlineCommand createDeadlineCommand(String[] commandArgs, boolean isArgsEmpty)
+            throws EmptyArgumentException {
+        if (isArgsEmpty) {
+            throw new EmptyArgumentException(
+                    "The description of a deadline cannot be empty. Please input a valid description.");
+        }
+
+        return new DeadlineCommand(commandArgs[1]);
+    }
+
+    private static EventCommand createEventCommand(String[] commandArgs, boolean isArgsEmpty)
+            throws EmptyArgumentException {
+        if (isArgsEmpty) {
+            throw new EmptyArgumentException(
+                    "The description of an event cannot be empty. Please input a valid description.");
+        }
+
+        return new EventCommand(commandArgs[1]);
+    }
+
+    private static Command createListCommand() {
+        return new ListCommand();
+    }
+
+    private static Command createUpcomingCommand(String[] commandArgs, boolean isArgsEmpty)
+            throws EmptyArgumentException, InvalidCommandException {
+        if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
+            throw new EmptyArgumentException("Please enter the number of days.");
+        }
+
+        try {
+            int days = Integer.parseInt(commandArgs[1]);
+            return new UpcomingCommand(days);
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException("Please enter a valid digit for days.");
+        }
+    }
+
+    private static Command createFindCommand(String[] commandArgs, boolean isArgsEmpty)
+            throws EmptyArgumentException {
+        if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
+            throw new EmptyArgumentException("Please enter a keyword to search for.");
+        }
+
+        //Splits the input into multiple keywords if possible
+        String[] keywords = commandArgs[1].split(" ");
+        return new FindCommand(keywords);
+    }
+
+    private static Command createDoneCommand(String[] commandArgs, boolean isArgsEmpty)
+            throws EmptyArgumentException, InvalidCommandException {
+        if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
+            throw new EmptyArgumentException("Please enter the index of the task you wish to complete.");
+        }
+
+        try {
+            int taskIndex = Integer.parseInt(commandArgs[1]) - 1;
+            return new DoneCommand(taskIndex);
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException("Please enter a valid index.");
+        }
+    }
+
+    private static Command createDeleteCommand(String[] commandArgs, boolean isArgsEmpty)
+            throws EmptyArgumentException, InvalidCommandException {
+        if (commandArgs.length == 1 || commandArgs[1].strip().length() == 0) {
+            throw new EmptyArgumentException("Please enter the index of the task you wish to delete.");
+        }
+
+        try {
+            int taskIndex = Integer.parseInt(commandArgs[1]) - 1;
+            return new DeleteCommand(taskIndex);
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException("Please enter a valid index.");
+        }
+    }
+
+    private static Command createExitCommand() {
+        return new ExitCommand();
+    }
+
 }
