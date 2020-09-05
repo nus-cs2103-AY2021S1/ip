@@ -23,6 +23,7 @@ public class Event extends Task {
         String time = date == null
                 ? String.format(" (at: %s)", eventTime)
                 : " (at: " + DateParser.format(date) + ")";
+        assert !time.isEmpty();
         return "[E]" + super.toString() + time;
     }
 }

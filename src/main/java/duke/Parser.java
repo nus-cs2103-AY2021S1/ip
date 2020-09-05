@@ -33,7 +33,7 @@ public class Parser {
      * @return done or not
      */
     public static boolean isDone(String line) {
-        return line.length() >= 4 && line.substring(0, 4).equals("done");
+        return line.length() >= 4 && line.startsWith("done");
     }
 
     /**
@@ -43,11 +43,11 @@ public class Parser {
      * @return delete or not
      */
     public static boolean isDelete(String line) {
-        return line.length() >= 6 && line.substring(0, 6).equals("delete");
+        return line.length() >= 6 && line.startsWith("delete");
     }
 
     public static boolean isFind(String line) {
-        return line.length() >= 4 && line.substring(0, 4).equals("find");
+        return line.length() >= 4 && line.startsWith("find");
     }
 
     /**
@@ -59,14 +59,14 @@ public class Parser {
      */
     public static TaskType taskType(String line) throws InvalidParameterException {
         if (line.length() > 8
-                && line.substring(0, 8).equals("deadline")
+                && line.startsWith("deadline")
                 && line.contains(" /by ")) {
             return TaskType.DEADLINE;
         } else if (line.length() > 5
-                && line.substring(0, 5).equals("event")
+                && line.startsWith("event")
                 && line.contains(" /at ")) {
             return TaskType.EVENT;
-        } else if (line.length() > 4 && line.substring(0, 4).equals("todo")) {
+        } else if (line.length() > 4 && line.startsWith("todo")) {
             return TaskType.TODO;
         } else throw new InvalidParameterException("Invalid input");
     }
@@ -105,14 +105,10 @@ public class Parser {
      * @throws ArrayIndexOutOfBoundsException if the time does not exist
      */
     public static String getTime(String line) throws ArrayIndexOutOfBoundsException {
-        try {
-            if (taskType(line) == TaskType.DEADLINE) {
-                return line.split(" /by ")[1];
-            } else {
-                return line.split(" /at ")[1];
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw e;
+        if (taskType(line) == TaskType.DEADLINE) {
+            return line.split(" /by ")[1];
+        } else {
+            return line.split(" /at ")[1];
         }
     }
 

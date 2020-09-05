@@ -133,7 +133,7 @@ public class TaskList {
         if (size == 0) {
             throw new NullListException();
         }
-        if (index > taskList.size() || index <= 0) {
+        if (index > size || index <= 0) {
             throw new InvalidParameterException("Out of bound");
         }
         Storage.setDone(index - 1);
@@ -155,7 +155,7 @@ public class TaskList {
         if (size == 0) {
             throw new NullListException();
         }
-        if (index > taskList.size() || index <= 0) {
+        if (index > size || index <= 0) {
             throw new InvalidParameterException("Out of bound");
         }
         Storage.delete(index - 1);

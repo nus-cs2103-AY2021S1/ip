@@ -26,6 +26,7 @@ public class Storage {
      * @return a string representation
      */
     private static String convertToText(TaskType type, int done, String name, String time) {
+        assert done == 0 || done == 1;
         String t = type == TaskType.DEADLINE ? "D"
                 : type == TaskType.EVENT ? "E" : "T";
         return t + "," + done + "," + name
@@ -40,29 +41,26 @@ public class Storage {
      * @throws Exception if text is invalid
      */
     private static Task convertFromText(String text) throws Exception {
-        try {
-            String[] ans = text.split(",");
-            if (ans[0].equals("T")) {
-                Todo todo = new Todo(ans[2]);
-                if (ans[1].equals("1")) {
-                    todo.setDone();
-                }
-                return todo;
-            } else if (ans[0].equals("D")) {
-                Deadline deadline = new Deadline(ans[2], ans[3]);
-                if (ans[1].equals("1")) {
-                    deadline.setDone();
-                }
-                return deadline;
-            } else {
-                Event event = new Event(ans[2], ans[3]);
-                if (ans[1].equals("1")) {
-                    event.setDone();
-                }
-                return event;
+        String[] ans = text.split(",");
+        assert ans.length >= 3;
+        if (ans[0].equals("T")) {
+            Todo todo = new Todo(ans[2]);
+            if (ans[1].equals("1")) {
+                todo.setDone();
             }
-        } catch (Exception e) {
-            throw e;
+            return todo;
+        } else if (ans[0].equals("D")) {
+            Deadline deadline = new Deadline(ans[2], ans[3]);
+            if (ans[1].equals("1")) {
+                deadline.setDone();
+            }
+            return deadline;
+        } else {
+            Event event = new Event(ans[2], ans[3]);
+            if (ans[1].equals("1")) {
+                event.setDone();
+            }
+            return event;
         }
     }
 

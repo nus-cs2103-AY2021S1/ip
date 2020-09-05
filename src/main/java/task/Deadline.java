@@ -23,6 +23,7 @@ public class Deadline extends Task {
         String time = date == null
                 ? String.format(" (by: %s)", deadline)
                 : " (by: " + DateParser.format(date) + ")";
+        assert !time.isEmpty();
         return "[D]" + super.toString() + time;
     }
 

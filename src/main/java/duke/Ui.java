@@ -65,6 +65,7 @@ public class Ui {
      * @return a message or an error
      */
     public static String showAdd(String task) {
+        assert !task.isEmpty();
         String message = "Got it. I've added the task:\n";
         message += task;
         try {
@@ -99,6 +100,7 @@ public class Ui {
      * @return a message to the user
      */
     public static String showDone(String task) {
+        assert !task.isEmpty();
         String message = "Well done! I've marked this as done:\n";
         message += task;
         return message;
@@ -111,6 +113,7 @@ public class Ui {
      * @return a message or an error
      */
     public static String showDelete(String task) {
+        assert !task.isEmpty();
         String message = "Noted! I've removed this task:\n";
         message += task;
         try {
