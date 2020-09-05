@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.util.Objects;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -74,8 +75,8 @@ public class Command {
      * @param date        the date of the task
      */
     public Command(TaskType taskType, String description, LocalDate date) {
-        assert taskType == TaskType.DEADLINE || taskType == TaskType.EVENT :
-            "taskType not supported for this constructor";
+        assert taskType == TaskType.DEADLINE || taskType == TaskType.EVENT
+            : "taskType not supported for this constructor";
         this.taskType = taskType;
         index = null;
         this.description = description;
