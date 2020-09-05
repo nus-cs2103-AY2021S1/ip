@@ -4,14 +4,13 @@ import duke.exception.DukeArgumentException;
 import duke.exception.DukeExecutionException;
 import duke.exception.DukeIoException;
 import duke.storage.Storage;
-import duke.ui.Ui;
 
 /**
  * Represents an request by the user to delete a Task object at the given index from the list of Tasks.
  */
 public class DeleteCommand extends Command {
 
-    private int index;
+    private final int index;
 
     /**
      * Constructor for a DeleteCommand
@@ -20,7 +19,7 @@ public class DeleteCommand extends Command {
      * @throws DukeArgumentException if the index provided in the input string is invalid.
      */
     public DeleteCommand(String args) throws DukeArgumentException {
-        assert !args.isBlank(): "Input is empty.";
+        assert !args.isBlank() : "Input is empty.";
         try {
             int index = Integer.parseInt(args);
             this.index = index - 1;

@@ -13,8 +13,8 @@ import javafx.scene.paint.Color;
 public class DialogBox extends HBox {
 
 
-    private Label text;
-    private ImageView displayPicture;
+    private final Label text;
+    private final ImageView displayPicture;
 
 
     public DialogBox(Label l, ImageView iv) {
@@ -35,6 +35,7 @@ public class DialogBox extends HBox {
         db.getChildren().addAll(db.displayPicture, db.text);
         return db;
     }
+
     public static DialogBox userDialog(Label l, ImageView iv) {
         l.setBackground(new Background(new BackgroundFill(Color.rgb(213, 172, 169), new CornerRadii(3.0),
                 new Insets(0.0))));

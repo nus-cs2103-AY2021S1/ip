@@ -8,8 +8,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import duke.exception.DukeArgumentException;
 import duke.exception.DukeIoException;
-import duke.parser.Parser;
+import duke.parser.FileParser;
 import duke.task.Task;
 
 
@@ -18,14 +19,14 @@ import duke.task.Task;
  */
 public class Storage {
 
-    private File file;
-    private TaskList tasks;
+    private final File file;
+    private final TaskList tasks;
 
     /**
      * Constructor for a Storage object.
      *
      * @param path The path to read/write the file to
-     * @throws IOException if it is unable to create the file or if an IO error occurs
+     * @throws DukeIoException if it is unable to create the file or if an IO error occurs
      */
     public Storage(String path) throws DukeIoException {
         try {
@@ -37,10 +38,10 @@ public class Storage {
             String line;
             // Add all the parsed lines to the ArrayList
             while ((line = csvReader.readLine()) != null) {
-                tasks.add(Parser.parseLine(line));
+                tasks.add(FileParser.parseLine(line));
             }
         } catch (IOException ie) {
-            throw new DukeIoException("Could not create duke.storage.Storage object due to IO error.");
+            throw new DukeIoException("Could not create Storage object due to IO error.");
         }
     }
 
@@ -53,7 +54,7 @@ public class Storage {
     public void add(Task task) throws IOException {
         // TODO: Catch IOException into DukeIoException
         tasks.add(task);
-        String taskString = Parser.convertTask(task);
+        String taskString = FileParser.convertTaskToSaveFormat(task);
         BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
         bw.append(taskString);
         bw.flush();
@@ -78,12 +79,13 @@ public class Storage {
     /**
      * Marks the task at the given index of the TaskList as completed,
      * then clears the existing file and rewrites the contents of the list back to it.
-     * @param index
+     *
+     * @param index the index of the Task to be marked as completed.
      * @return the Task that was marked as completed
-     * @throws DukeIoException
-     * @throws ArrayIndexOutOfBoundsException
+     * @throws DukeIoException       if an error occurs during write to file.
+     * @throws DukeArgumentException if the index given is out of bounds
      */
-    public Task complete(int index) throws DukeIoException, ArrayIndexOutOfBoundsException {
+    public Task complete(int index) throws DukeIoException, DukeArgumentException {
         Task completed = tasks.complete(index);
         rewrite();
         return completed;
@@ -91,6 +93,7 @@ public class Storage {
 
     /**
      * Returns the list of Tasks whose name contains the given keyword.
+     *
      * @param keyword the keyword in lower-case to be searched for
      * @return TaskList containing only matching tasks
      */
@@ -107,14 +110,14 @@ public class Storage {
     /**
      * Clears the existing file and rewrites the contents of the list to the file.
      *
-     * @throws IOException if there are issues with the IO operations
+     * @throws DukeIoException if there are issues with the IO operations
      */
     private void rewrite() throws DukeIoException {
         try {
             new FileWriter(file, false).close();
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
             for (Task t : tasks.list()) {
-                bw.append(Parser.convertTask(t));
+                bw.append(FileParser.convertTaskToSaveFormat(t));
                 bw.flush();
             }
             bw.close();

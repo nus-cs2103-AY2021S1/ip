@@ -8,18 +8,24 @@ import javafx.scene.layout.VBox;
  */
 public class ScrollDialoguePane extends ScrollPane {
 
-    VBox dialog;
+    private VBox dialogContainer;
 
     public ScrollDialoguePane() {
         super();
-        this.dialog = new VBox();
-        this.setContent(this.dialog);
-        this.setFitToWidth(true);
-        dialog.heightProperty().addListener((observable) -> this.setVvalue(1.0));
+
+        dialogContainer = new VBox();
+        dialogContainer.heightProperty().addListener((observable) -> setVvalue(1.0));
+        dialogContainer.setSpacing(20);
+
+        setContent(dialogContainer);
+        setVbarPolicy(ScrollBarPolicy.ALWAYS);
+        setFitToWidth(true);
+
+
     }
 
     public void addDialog(DialogBox dialogBox) {
-        dialog.getChildren().add(dialogBox);
+        dialogContainer.getChildren().add(dialogBox);
     }
 
 

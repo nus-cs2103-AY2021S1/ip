@@ -4,14 +4,13 @@ import duke.exception.DukeArgumentException;
 import duke.exception.DukeExecutionException;
 import duke.exception.DukeIoException;
 import duke.storage.Storage;
-import duke.ui.Ui;
 
 /**
  * Represents an request by the user to mark a Task object at the given index from the list of Tasks as completed.
  */
 public class DoneCommand extends Command {
 
-    private int index;
+    private final int index;
 
     /**
      * Constructor for a DoneCommand
@@ -20,7 +19,7 @@ public class DoneCommand extends Command {
      * @throws DukeArgumentException if the index provided in the input string is invalid.
      */
     public DoneCommand(String args) throws DukeArgumentException {
-        assert !args.isBlank(): "Input is empty.";
+        assert !args.isBlank() : "Input is empty.";
         try {
             int index = Integer.parseInt(args);
             this.index = index - 1;
@@ -39,7 +38,7 @@ public class DoneCommand extends Command {
     public String execute(Storage storage) throws DukeExecutionException {
         try {
             return (storage.complete(index).toString());
-        } catch (IndexOutOfBoundsException e) {
+        } catch (DukeArgumentException e) {
             throw new DukeExecutionException(String.format("Could not execute command due to the index %d being out "
                     + "of range", index));
         } catch (DukeIoException die) {

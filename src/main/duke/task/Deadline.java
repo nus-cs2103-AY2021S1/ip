@@ -5,10 +5,11 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    private LocalDate time;
+    private final LocalDate time;
 
     /**
      * Constructor for a Deadline object.
+     *
      * @param name the name for this Deadline task
      * @param time the time for the deadline
      */
@@ -19,8 +20,9 @@ public class Deadline extends Task {
 
     /**
      * Constructor for a Deadline object with the ability to set completion status.
-     * @param name the name for this Deadline task
-     * @param time the time for the deadline
+     *
+     * @param name      the name for this Deadline task
+     * @param time      the time for the deadline
      * @param completed the completion status of this Deadline.
      */
     public Deadline(String name, LocalDate time, String completed) {
