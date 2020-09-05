@@ -1,23 +1,40 @@
 package duke.task;
 
 public class Task {
-  private String description;
-  private boolean isDone;
 
-  public Task(String description) {
-    this.description = description;
-    this.isDone = false;
+  public static int numTasks = 0;
+  private final int id;
+  private final String desc;
+  private boolean isDone = false;
+
+  public Task(String desc) {
+    this.desc = desc;
+    this.id = ++numTasks;
   }
 
-  public String getDescription() {
-    return description;
+  public int getId() {
+    return id;
   }
 
-  public boolean isDone() {
+  public String getDesc() {
+    return desc;
+  }
+
+
+  public boolean getIsDone() {
     return isDone;
   }
 
   public void setIsDone(boolean isDone) {
     this.isDone = isDone;
+  }
+
+  public void markDone() {
+    setIsDone(true);
+  }
+
+  @Override
+  public String toString() {
+    return String.format("<%d, %s, %s>", id, isDone ? "DONE" : "NOT DONE", desc);
   }
 }
