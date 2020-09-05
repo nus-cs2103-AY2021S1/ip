@@ -52,6 +52,8 @@ public class TaskList {
      * @return task
      */
     public Task remove(int index, Storage storage) {
+        assert index < list.size() || index > 0 : "index out of bound";
+        
         Task task = this.list.remove(index);
         this.updateStorage(storage);
         
