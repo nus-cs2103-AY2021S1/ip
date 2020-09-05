@@ -53,23 +53,31 @@ public class Parser {
                 break;
             case "todo":
                 if (parsingScanner.hasNext()) {
-                    command = new AddCommand(CommandType.TODO, parsingScanner.nextLine());
+                    command = new AddCommand(CommandType.TODO, parsingScanner.nextLine().trim());
                 } else {
                     throw DukeException.INVALID_TASK_DESCRIPTION_EXCEPTION;
                 }
                 break;
             case "deadline":
                 if (parsingScanner.hasNext()) {
-                    command = new AddCommand(CommandType.DEADLINE,
-                            parsingScanner.nextLine().split("( /by )", 2));
+                    try {
+                        String[] details = parsingScanner.nextLine().trim().split("( /by )", 2);
+                        command = new AddCommand(CommandType.DEADLINE, details[0], details[1]);
+                    } catch (IndexOutOfBoundsException e) {
+                        throw DukeException.INVALID_DEADLINE_FORMAT_EXCEPTION;
+                    }
                 } else {
                     throw DukeException.INVALID_TASK_DESCRIPTION_EXCEPTION;
                 }
                 break;
             case "event":
                 if (parsingScanner.hasNext()) {
-                    command = new AddCommand(CommandType.EVENT,
-                            parsingScanner.nextLine().split("( /at )", 2));
+                    try {
+                        String[] details = parsingScanner.nextLine().trim().split("( /at )", 2);
+                        command = new AddCommand(CommandType.EVENT, details[0], details[1]);
+                    } catch (IndexOutOfBoundsException e) {
+                        throw DukeException.INVALID_EVENT_FORMAT_EXCEPTION;
+                    }
                 } else {
                     throw DukeException.INVALID_TASK_DESCRIPTION_EXCEPTION;
                 }

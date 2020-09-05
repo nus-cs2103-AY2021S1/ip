@@ -10,6 +10,14 @@ public class DukeException extends Exception {
     public static final DukeException INVALID_TASK_DESCRIPTION_EXCEPTION = new DukeException(
             "Sorry, the description of a task cannot be empty.");
 
+    public static final DukeException INVALID_DEADLINE_FORMAT_EXCEPTION = new DukeException(
+            "Sorry, the description of a Deadline must be in this format:\n" +
+                    "\tdeadline [task name] /by [deadline]");
+
+    public static final DukeException INVALID_EVENT_FORMAT_EXCEPTION = new DukeException(
+            "Sorry, the description of an Event must be in this format:\n" +
+                    "\tevent [task name] /at [time]");
+
     public static final DukeException FILE_PARSING_EXCEPTION = new DukeException(
             "Sorry, an error occurred while trying to parse the file.");
 
