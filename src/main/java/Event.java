@@ -26,6 +26,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (date == null) {
+            assert date == null : "date should be null";
             return "[E]" + super.toString() + " (at: " + time + ")";
         } else {
             return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter

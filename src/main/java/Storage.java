@@ -55,6 +55,7 @@ public class Storage {
                 if (string.charAt(1) == 'T') {
                     String description = string.substring(string.indexOf(' ') + 1);
                     if (string.charAt(4) == '✓') {
+                        assert string.charAt(4) == '✓' : "The icon of the task state should be '✓'";
                         lists.add(new ToDo(description, true));
                     } else {
                         lists.add(new ToDo(description));

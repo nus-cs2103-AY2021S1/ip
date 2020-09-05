@@ -145,6 +145,7 @@ public class Duke extends Application {
         boolean isExit = false;
 
         while (!isExit) {
+            assert isExit == false : "isExit should be false";
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
