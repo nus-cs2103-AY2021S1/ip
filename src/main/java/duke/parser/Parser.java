@@ -15,42 +15,33 @@ public class Parser {
      * @param tasks task list
      * @param storage storage of the data of the program
      * @return output of the program as String
-     * @throws DukeException exception thrown when input is invalid
      */
-    public String parse(String input, TaskList tasks, Storage storage) throws DukeException {
-        String output;
-        String[] command = input.split(" ", 2);
-
-        switch (command[0]) {
+    public String parse(String input, TaskList tasks, Storage storage) {
+        String[] args = input.split(" ", 2);
+        
+        try {
+            switch (args[0]) {
             case "bye":
-                output = new ByeCommand().execute();
-                break;
+                return new ByeCommand().execute();
             case "list":
-                output = new ListCommand(tasks).execute();
-                break;
+                return new ListCommand(tasks).execute();
             case "done":
-                output = new DoneCommand(command, tasks, storage).execute();
-                break;
+                return new DoneCommand(args, tasks, storage).execute();
             case "todo":
-                output = new ToDoCommand(command, tasks, storage).execute();
-                break;
+                return new ToDoCommand(args, tasks, storage).execute();
             case "deadline":
-                output = new DeadlineCommand(command, tasks, storage).execute();
-                break;
+                return new DeadlineCommand(args, tasks, storage).execute();
             case "event":
-                output = new EventCommand(command, tasks, storage).execute();
-                break;
+                return new EventCommand(args, tasks, storage).execute();
             case "delete":
-                output = new DeleteCommand(command, tasks, storage).execute();
-                break;
+                return new DeleteCommand(args, tasks, storage).execute();
             case "find":
-                output = new FindCommand(command, tasks).execute();
-                break;
+                return new FindCommand(args, tasks).execute();
             default:
-                output = new ErrorCommand("☹ OOPS!!! I'm sorry, but I don't know what that means :-(").execute();
-                break;
+                return new ErrorCommand("☹ OOPS!!! I'm sorry, but I don't know what that means :-(").execute();
+            }
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-
-        return output;
     }
 }
