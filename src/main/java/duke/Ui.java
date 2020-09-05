@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.tasks.Task;
 
 public class Ui {
@@ -9,7 +7,7 @@ public class Ui {
     private String outputMessage;
     
     public Ui() {
-        this.outputMessage = "";
+        this.outputMessage = showWelcomeMessage();
     }
     
     public void setOutputMessage(String newOutputMessage) {
@@ -29,17 +27,15 @@ public class Ui {
      * @return welcome message
      */
     public String showWelcomeMessage() {
-        StringBuilder sb = new StringBuilder();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        sb.append ("Hello from\n" + logo + "\n");
-        sb.append ("Hello! I'm Duke ^_^\n");
-        sb.append("What can I do for you??");
-        System.out.println (sb);
-        return sb.toString();
+        String welcomeMessage = "Hello from\n" + logo + "\n";
+        welcomeMessage += "Hello! I'm Duke ^_^\n";
+        welcomeMessage += "What can I do for you??\n";
+        return welcomeMessage;
     }
 
     /**
@@ -81,20 +77,11 @@ public class Ui {
     }
 
     /**
-     * Reads the user input line by line
-     * @return user input
-     */
-    public String readUserInput() {
-        Scanner sc = new Scanner (System.in);
-        return sc.nextLine();
-    }
-
-    /**
      * Prints out all the tasks in the list
      * @param taskList list containing all the tasks
      */
     public void listMessage(TaskList taskList) {
-        setOutputMessage("Here are the tasks in your list:");
+        setOutputMessage("Here are the tasks in your list:");         
         for (int i = 0; i < taskList.size(); i++) {
             appendMessage(String.format("%d. %s", i + 1, taskList.get(i)));
         }
@@ -102,11 +89,5 @@ public class Ui {
     
     public void defaultMessage() {
         setOutputMessage("Sorry >_<!! I don't know what you mean...");
-    }
-    
-    public static void main (String[] args) {
-        Ui ui = new Ui();
-        ui.defaultMessage();
-        System.out.println (ui.getOutputMessage());
     }
 }

@@ -7,7 +7,7 @@ import duke.tasks.Task;
 
 public class RemoveTaskCommand extends Command {
     
-    private int index;
+    private final int index;
     
     public RemoveTaskCommand (int index) {
         this.index = index;
@@ -15,13 +15,9 @@ public class RemoveTaskCommand extends Command {
     
     @Override
     public void executeCommand (Ui ui, Storage storage, TaskList taskList) {
-        if (index > taskList.size() - 1) {
-            
-        } else {
-            Task removedTask = taskList.get(index);
-            taskList.removeTask(index);
-            ui.removeTaskMessage(removedTask, taskList.size());
-            storage.writeToDataFile(taskList);
-        }
+        Task removedTask = taskList.get(index);         
+        taskList.removeTask(index);
+        ui.removeTaskMessage(removedTask, taskList.size());
+        storage.writeToDataFile(taskList);
     }
 }

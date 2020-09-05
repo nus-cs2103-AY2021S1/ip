@@ -6,7 +6,7 @@ import duke.Ui;
 
 public class FindCommand extends Command {
     
-    private String filter;
+    private final String filter;
     
     public FindCommand(String filter) {
         this.filter = filter;

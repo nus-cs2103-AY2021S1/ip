@@ -4,7 +4,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import duke.commands.*;
+import duke.commands.Command;
+import duke.commands.ByeCommand;
+import duke.commands.ListCommand;
+import duke.commands.FindCommand;
+import duke.commands.DoneCommand;
+import duke.commands.AddTaskCommand;
+import duke.commands.RemoveTaskCommand;
+
 import duke.exceptions.DukeNoTaskDescriptionException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -13,10 +20,11 @@ import duke.tasks.Todo;
 
 
 public class Parser {
+    
     private boolean isDate(String time) {
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+        date.setLenient(false);
         try {
-            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-            date.setLenient(false);
             date.parse(time.trim());
         } catch (ParseException e) {
             return false;
@@ -34,18 +42,18 @@ public class Parser {
      * @return Time in date format
      */
     public String convertDate(String time) {
-        String s = "";
+        String convertDate = "";
         try {
             if (isDate(time)) {
-                Date d = new SimpleDateFormat("yyyy-MM-dd").parse(time);
-                s = new SimpleDateFormat("MMM dd yyyy").format(d);
+                Date date = new SimpleDateFormat("yyyy-MM-dd").parse(time);
+                convertDate = new SimpleDateFormat("MMM dd yyyy").format(date);
             } else {
-                s = time;
+                convertDate = time;
             }
         } catch (ParseException e) {
             System.out.println("Please specify date in the form yyyy-MM-dd");
         }
-        return s;
+        return convertDate;
     }
     
     
@@ -102,16 +110,18 @@ public class Parser {
             default:
                 ui.defaultMessage();
             }
+
+            command.executeCommand(ui, storage, taskList);
             
         } catch (DukeNoTaskDescriptionException e) {
             ui.setOutputMessage(e.getExceptionMessage());
-            System.out.println (e.getExceptionMessage());
+            
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.setOutputMessage("Please specify a time");
-            System.out.println ("Please specify a time");
+            
+        } catch (IndexOutOfBoundsException e) {
+            ui.setOutputMessage("Task does not exist");
         }
-        
-        command.executeCommand(ui, storage, taskList);
     }
 
 
@@ -124,27 +134,29 @@ public class Parser {
         if (description.length() == 0) {
             throw new DukeNoTaskDescriptionException("Please specify a task description");
         }
-        Task t = new Todo(description, false);
-        return t;
+        return new Todo(description, false);
     }
     
     private Task parseDeadline (String s) throws DukeNoTaskDescriptionException, ArrayIndexOutOfBoundsException {
         String description = s.split("/by")[0].substring(8).trim();
-        String deadline = s.split("/by")[1].trim();
+        
         if (description.length() == 0) {
             throw new DukeNoTaskDescriptionException("Please specify a task description");
         }
-        Task t = new Deadline(description, deadline, false);
-        return t;
+        
+        String deadline = s.split("/by")[1].trim();
+
+        return new Deadline(description, deadline, false);
     }
     
     private Task parseEvent (String s) throws DukeNoTaskDescriptionException, ArrayIndexOutOfBoundsException {
         String description = s.split("/at")[0].substring(5).trim();
-        String time = s.split("/at")[1].trim();
         if (description.length() == 0) {
             throw new DukeNoTaskDescriptionException("Please specify a task description");
         }
-        Task t = new Event(description, time, false);
-        return t;
+
+        String time = s.split("/at")[1].trim();
+        
+        return new Event(description, time, false);
     }
 }

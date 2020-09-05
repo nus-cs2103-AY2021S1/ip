@@ -2,10 +2,10 @@ package duke;
 
 
 public class Duke {
-    private Ui ui;
-    private Storage storage;
-    private TaskList tasks;
-    private Parser parser;
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Parser parser;
     
     public Duke () {
         ui = new Ui();

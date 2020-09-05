@@ -39,7 +39,6 @@ public class Storage {
      * Loads the tasks that have been stored in the data file
      * 
      * @return List of tasks
-     * @throws DukeException If file is not found
      */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();

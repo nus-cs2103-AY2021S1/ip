@@ -15,13 +15,9 @@ public class DoneCommand extends Command {
     
     @Override
     public void executeCommand (Ui ui, Storage storage, TaskList taskList) {
-        if (index > taskList.size() - 1) {
-            
-        } else {
-            Task doneTask = taskList.get(index);
-            taskList.setDone(index);
-            ui.doneMessage(doneTask);
-            storage.writeToDataFile(taskList);
-        }
+        Task doneTask = taskList.get(index);
+        taskList.setDone(index);
+        ui.doneMessage(doneTask);
+        storage.writeToDataFile(taskList);
     }
 }

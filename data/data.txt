@@ -1,2 +1,1 @@
-Todo | false | sleep
-Todo | true | eat
+Todo | true | sleep
