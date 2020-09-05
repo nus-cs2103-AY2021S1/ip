@@ -17,10 +17,6 @@ public class Ui {
         System.out.println(this.line);
     }
 
-    public String getWelcomeMessage() {
-        return this.welcomeMessage;
-    }
-
     public String showGoodbye() {
         return "Bye! Message me anytime!!";
     }
@@ -54,10 +50,20 @@ public class Ui {
     public String displayTaskList(TaskList taskList) {
         assert taskList != null;
         StringBuilder s = new StringBuilder("Here are your current tasks:\n");
+        addTasksToStringBuilder(taskList, s);
+        return s.toString();
+    }
+
+    /**
+     * Adds the string representation of tasks in the taskList object to the string builder
+     *
+     * @param taskList Object of the task list class
+     * @param s        Stringbuilder object containing message to be returned to user
+     */
+    private void addTasksToStringBuilder(TaskList taskList, StringBuilder s) {
         for (int i = 0; i < taskList.getTaskList().size(); i++) {
             s.append(i + 1).append(".").append(taskList.getTaskList().get(i)).append("\n");
         }
-        return s.toString();
     }
 
     /**
@@ -86,9 +92,7 @@ public class Ui {
         if (filteredTaskList.getSize() > 0) {
             StringBuilder s = new StringBuilder("Here are the matching tasks in your list\n");
 
-            for (int i = 0; i < filteredTaskList.getTaskList().size(); i++) {
-                s.append(i + 1).append(".").append(filteredTaskList.getTaskList().get(i)).append("\n");
-            }
+            addTasksToStringBuilder(filteredTaskList, s);
             return s.toString();
         } else {
             return "You have no matching tasks!";

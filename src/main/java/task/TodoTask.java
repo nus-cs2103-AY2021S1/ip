@@ -26,6 +26,15 @@ public class TodoTask extends Task {
         }
         TodoTask that = (TodoTask) o;
         return Objects.equals(this.getName(), that.getName())
-                && Objects.equals(this.gethasCompletedInt(), that.gethasCompletedInt());
+                && Objects.equals(this.getHasCompletedInt(), that.getHasCompletedInt());
+    }
+
+    /**
+     * Formats task into a string for file saving
+     *
+     * @return formatted string representing the task
+     */
+    public String getFormattedString() {
+        return String.format("T | %s | %s\n", this.getHasCompletedInt(), this.getName());
     }
 }

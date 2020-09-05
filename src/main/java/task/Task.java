@@ -1,6 +1,6 @@
 package task;
 
-public class Task {
+public abstract class Task {
     private int hasCompletedInt;
     private String name;
 
@@ -29,7 +29,7 @@ public class Task {
         this.hasCompletedInt = 1;
     }
 
-    public int gethasCompletedInt() {
+    public int getHasCompletedInt() {
         return hasCompletedInt;
     }
 
@@ -40,4 +40,6 @@ public class Task {
     public String toString() {
         return String.format("[%s] %s", this.hasCompletedInt == 1 ? "✓" : "✗", this.name);
     }
+
+    public abstract String getFormattedString();
 }

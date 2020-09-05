@@ -136,23 +136,7 @@ public class Storage {
             assert file != null;
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             for (Task task : taskList.getTaskList()) {
-                if (task instanceof TodoTask) {
-                    writer.write(String.format("T | %s | %s\n", task.gethasCompletedInt(), task.getName()));
-                } else if (task instanceof DeadlineTask) {
-                    DeadlineTask deadlineTask = (DeadlineTask) task;
-                    writer.write(
-                            String.format(
-                                    "D | %s | %s | %s\n",
-                                    deadlineTask.gethasCompletedInt(),
-                                    deadlineTask.getName(),
-                                    deadlineTask.getDeadline()));
-                } else if (task instanceof EventTask) {
-                    EventTask eventTask = (EventTask) task;
-                    writer.write(
-                            String.format(
-                                    "E | %s | %s | %s\n",
-                                    eventTask.gethasCompletedInt(), eventTask.getName(), eventTask.getTime()));
-                }
+                writer.write(task.getFormattedString());
             }
             writer.close();
         } catch (IOException e) {
