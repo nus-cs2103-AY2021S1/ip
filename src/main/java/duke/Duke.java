@@ -32,29 +32,6 @@ public class Duke  {
         }
     }
 
-//    /**
-//     * Runs the main logic of the Chat-bot.
-//     */
-//    public void run() {
-//        ui.showWelcome();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String fullCommand = ui.readCommand();
-//                ui.showLine(); // show the divider line ("_______")
-//                Command c = Parser.parse(fullCommand);
-//                c.execute(taskList, ui, storage);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                ui.showError(e.getMessage());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            } finally {
-//                ui.showLine();
-//            }
-//        }
-//    }
-
     /**
      *
      * @param input user's input

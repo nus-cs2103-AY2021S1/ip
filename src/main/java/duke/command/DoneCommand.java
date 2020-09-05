@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -27,7 +28,7 @@ public class DoneCommand extends Command {
      * @param storage storage that handles data storage
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         return taskList.setDoneTask(index, storage);
     }
 
