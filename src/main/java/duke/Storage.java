@@ -19,6 +19,11 @@ import duke.task.ToDo;
  * The Storage class handles the read and write of data from and to the local disk.
  */
 public class Storage {
+    public static final String STORAGE_INIT_MESSAGE =
+            "Storage space for you tasks has been initialized successfully.";
+    public static final String STORAGE_ERROR_MESSAGE =
+            "Oops! Something went wrong when loading your tasks from storage.";
+
     /**
      * Data file path.
      */
@@ -35,11 +40,11 @@ public class Storage {
             File f = new File(filePath);
             if (!f.exists()) {
                 if (f.getParentFile().mkdirs() && f.createNewFile()) {
-                    System.out.println("\tStorage space for you tasks has been initialized successfully.");
+                    System.out.println(STORAGE_INIT_MESSAGE);
                 }
             }
         } catch (IOException e) {
-            System.out.println("Oops! Something went wrong when loading your tasks from storage.");
+            System.out.println(STORAGE_ERROR_MESSAGE);
             e.printStackTrace();
         }
     }

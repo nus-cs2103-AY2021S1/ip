@@ -14,7 +14,7 @@ public class PendingCommand extends Command {
      *
      * @param tasks The list of {@link Task}s.
      * @param storage The Storage object of Duke.
-     * @return
+     * @return A String of all pending tasks.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {

@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Represents a {@link Task} that has a deadline.
  */
 public class Deadline extends Task {
+    private static final String DATE_FORMAT = "MMMM d yyyy";
+
     /**
      * The date on which the {@link Task} is due.
      */
@@ -64,6 +66,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + endDate.format(DateTimeFormatter.ofPattern("MMMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + endDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT)) + ")";
     }
 }

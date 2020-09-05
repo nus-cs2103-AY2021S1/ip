@@ -8,6 +8,8 @@ import duke.task.TaskList;
  * Represents a {@link Command} that will display all tasks.
  */
 public class ListCommand extends Command {
+    private static final String NO_TASKS_MESSAGE = "No tasks on your agenda.";
+
     /**
      * Overrides execute in {@link Command}.
      * Executes the command to display all tasks.
@@ -18,7 +20,7 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         if (tasks.getSize() == 0) {
-            return "No tasks on your agenda.";
+            return NO_TASKS_MESSAGE;
         } else {
             return String.format("Here are the tasks in your agenda:\n%s", tasks.listTasks());
         }
