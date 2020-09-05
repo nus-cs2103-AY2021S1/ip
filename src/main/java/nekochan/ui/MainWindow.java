@@ -14,11 +14,16 @@ import nekochan.NekoChan;
 import nekochan.command.Response;
 import nekochan.exceptions.NekoException;
 import nekochan.exceptions.NekoStorageException;
+import nekochan.util.Messages;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private static final String USER_IMAGE_LOCATION = "/images/User.png";
+    private static final String BOT_IMAGE_LOCATION = "/images/Bot.png";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -35,9 +40,9 @@ public class MainWindow extends AnchorPane {
     // all PNG cliparts in PNGGuru are for Non-Commercial Use, no attribution required.
 
     // Image from https://www.pngguru.com/free-transparent-background-png-clipart-kwdio
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE_LOCATION));
     // Image from https://www.pngguru.com/free-transparent-background-png-clipart-mnsxw
-    private Image botImage = new Image(this.getClass().getResourceAsStream("/images/Bot.png"));
+    private Image botImage = new Image(this.getClass().getResourceAsStream(BOT_IMAGE_LOCATION));
 
     @FXML
     public void initialize() {
@@ -83,22 +88,16 @@ public class MainWindow extends AnchorPane {
     }
 
     private void printInput(String input) {
-        dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(input, userImage)
-        );
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
     }
 
     private void print(String response) {
         assert response.length() > 0 : "response message should not be empty";
-
-        dialogContainer.getChildren().add(
-                DialogBox.getNekoDialog(response, botImage)
-        );
+      
+        dialogContainer.getChildren().add(DialogBox.getNekoDialog(response, botImage));
     }
 
     private void greet() {
-        String welcomeMessage = "Konnichiwa!\n"
-                + "What can I do for you?\n";
-        dialogContainer.getChildren().add(DialogBox.getNekoDialog(welcomeMessage, botImage));
+        dialogContainer.getChildren().add(DialogBox.getNekoDialog(Messages.MESSAGE_WELCOME, botImage));
     }
 }

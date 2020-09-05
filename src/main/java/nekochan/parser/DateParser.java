@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import nekochan.exceptions.NekoException;
+import nekochan.util.Messages;
 
 /**
  * The {@code DateParser} class provides methods for parsing date-time and duration related strings.
@@ -60,7 +61,7 @@ public class DateParser {
                 }
             }
         }
-        throw new NekoException("I can't quite understand what you're saying...");
+        throw new NekoException(Messages.PARSE_DATETIME_ERROR);
     }
 
     /**
@@ -73,28 +74,29 @@ public class DateParser {
     public static int parseDurationToMinutes(String input) throws NekoException {
         try {
             int minutes = 0;
+
+            // Account for and remove days.
             if (input.contains("d") || input.contains("D")) {
                 minutes += MINUTES_IN_DAY * Double.parseDouble(input.split("[dD]")[0].trim());
-                if (input.split("[dD]").length > 1) {
-                    input = input.split("[dD]")[1].replaceAll("^[a-zA-Z ]*", "");
-                } else {
-                    input = null;
-                }
             }
-            if (input != null && (input.contains("h") || input.contains("H"))) {
+            if (input.split("[dD]").length > 1) {
+                input = input.split("[dD]")[1].replaceAll("^[a-zA-Z ]*", "");
+            }
+
+            // Account for and remove hours.
+            if (input.contains("h") || input.contains("H")) {
                 minutes += MINUTES_IN_HOUR * Double.parseDouble(input.split("[hH]")[0].trim());
-                if (input.split("[hH]").length > 1) {
-                    input = input.split("[hH]")[1].replaceAll("^[a-zA-Z ]*", "");
-                } else {
-                    input = null;
-                }
             }
-            if (input != null && (input.contains("m") || input.contains("M"))) {
+            if (input.split("[hH]").length > 1) {
+                input = input.split("[hH]")[1].replaceAll("^[a-zA-Z ]*", "");
+            }
+
+            if (input.contains("m") || input.contains("M")) {
                 minutes += Double.parseDouble(input.split("[mM]")[0].trim());
             }
             return minutes;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            throw new NekoException("I can't understand what you're saying...");
+            throw new NekoException(Messages.PARSE_DATETIME_ERROR);
         }
     }
 

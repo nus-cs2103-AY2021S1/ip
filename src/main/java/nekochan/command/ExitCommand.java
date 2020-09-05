@@ -3,11 +3,14 @@ package nekochan.command;
 import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.storage.Storage;
 import nekochan.task.TaskList;
+import nekochan.util.Messages;
 
 /**
  * The {@code Exit} class represents a command to safely terminate the program.
  */
 public class ExitCommand extends Command {
+
+    private static final boolean IS_EXIT = true;
 
     /**
      * Executes this {@code ExitCommand} by saving the specified {@code list} to file.
@@ -21,21 +24,16 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Prints a feedback confirming the execution of this {@code ExitCommand}.
+     * Returns a {@link Response} from the execution of this {@code ExitCommand}.
      *
+     * @return a {@code Response} object containing the result of executing this {@code ExitCommand}.
      * @throws IncompleteNekoCommandException if this {@code ExitCommand} was not executed.
      */
-    public String feedback() throws IncompleteNekoCommandException {
+    public Response feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
-            throw new IncompleteNekoCommandException("Exit command was not completed.");
+            throw new IncompleteNekoCommandException(Messages.INCOMPLETE_EXIT_COMMAND);
         }
-        return "Ja ne!\n";
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public boolean isExit() {
-        return true;
+        String responseMessage = Messages.MESSAGE_EXIT;
+        return new Response(IS_EXIT, responseMessage);
     }
 }

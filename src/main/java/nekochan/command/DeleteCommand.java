@@ -4,11 +4,14 @@ import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.storage.Storage;
 import nekochan.task.Task;
 import nekochan.task.TaskList;
+import nekochan.util.Messages;
 
 /**
  * The {@code DeleteCommand} class represents a command to delete a {@link Task} in a {@link TaskList}.
  */
 public class DeleteCommand extends Command {
+
+    private static final boolean IS_EXIT = false;
 
     private int index;
     private Task deletedTask;
@@ -39,28 +42,21 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Prints a feedback confirming the execution of this {@code DeleteCommand}.
+     * Returns a {@link Response} from the execution of this {@code DeleteCommand}.
      *
+     * @return a {@code Response} object containing the result of executing this {@code DeleteCommand}.
      * @throws IncompleteNekoCommandException if this {@code DeleteCommand} was not executed.
      */
     @Override
-    public String feedback() throws IncompleteNekoCommandException {
+    public Response feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
-            throw new IncompleteNekoCommandException("Delete command was not completed.");
+            throw new IncompleteNekoCommandException(Messages.INCOMPLETE_DELETE_COMMAND);
         }
 
         assert deletedTask != null : "deleted task should not be null";
 
-        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in your list.",
-                deletedTask.toString(),
-                remainingTaskCount);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        String responseMessage = Messages.MESSAGE_DELETE + deletedTask.toString() + "\n"
+                + Messages.getTotalTaskMessage(remainingTaskCount);
+        return new Response(IS_EXIT, responseMessage);
     }
 }

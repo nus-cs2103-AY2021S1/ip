@@ -4,11 +4,14 @@ import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.storage.Storage;
 import nekochan.task.Task;
 import nekochan.task.TaskList;
+import nekochan.util.Messages;
 
 /**
  * The {@code CompleteCommand} class represents a command to mark a {@link Task} in a {@link TaskList} as complete.
  */
 public class CompleteCommand extends Command {
+
+    private static final boolean IS_EXIT = false;
 
     private int index;
     private Task completedTask;
@@ -37,27 +40,20 @@ public class CompleteCommand extends Command {
     }
 
     /**
-     * Prints a feedback confirming the execution of this {@code CompleteCommand}.
+     * Returns a {@link Response} from the execution of this {@code CompleteCommand}.
      *
+     * @return @return a {@code Response} object containing the result of executing this {@code CompleteCommand}.
      * @throws IncompleteNekoCommandException if this {@code CompleteCommand} was not executed.
      */
     @Override
-    public String feedback() throws IncompleteNekoCommandException {
+    public Response feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
-            throw new IncompleteNekoCommandException("Complete command was not completed.");
+            throw new IncompleteNekoCommandException(Messages.INCOMPLETE_COMPLETE_COMMAND);
         }
 
         assert completedTask != null : "completed task should not be null";
 
-        return String.format("Nice! I've marked this task as complete:\n  %s\n",
-                completedTask.toString());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        String responseMessage = Messages.MESSAGE_COMPLETE + completedTask.toString() + "\n";
+        return new Response(IS_EXIT, responseMessage);
     }
 }

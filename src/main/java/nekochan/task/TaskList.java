@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import nekochan.exceptions.NekoException;
+import nekochan.util.Messages;
 
 /**
  * The {@code TaskList} class is an ordered collection of {@link Task}.
@@ -56,7 +57,7 @@ public class TaskList implements Iterable<Task> {
             selected.setCompleted();
             return selected;
         } catch (IndexOutOfBoundsException e) {
-            throw new NekoException("I couldn't find that task. Are you trying to make 2020 worse?");
+            throw new NekoException(Messages.MISSING_TASK_ERROR);
         }
     }
 
@@ -72,7 +73,7 @@ public class TaskList implements Iterable<Task> {
             Task removed = store.remove(index);
             return removed;
         } catch (IndexOutOfBoundsException e) {
-            throw new NekoException("I couldn't find that task. Are you trying to make 2020 worse?");
+            throw new NekoException(Messages.MISSING_TASK_ERROR);
         }
     }
 

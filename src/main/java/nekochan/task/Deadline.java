@@ -7,6 +7,7 @@ import nekochan.exceptions.NekoException;
 import nekochan.exceptions.NekoStorageException;
 import nekochan.exceptions.NekoTaskCreationException;
 import nekochan.parser.DateParser;
+import nekochan.util.Messages;
 
 /**
  * The {@code Deadline} class represents a task with a specific deadline.
@@ -32,7 +33,7 @@ public class Deadline extends Task {
      */
     public static Deadline createTask(String details) throws NekoTaskCreationException {
         if (details == null) {
-            throw new NekoTaskCreationException("I need something to work with.");
+            throw new NekoTaskCreationException(Messages.PARSE_COMMAND_DEADLINE_MISSING_ARGUMENT);
         }
         try {
             String description = details.substring(0, details.lastIndexOf(DEADLINE_DELIMITER)).trim();
@@ -40,7 +41,7 @@ public class Deadline extends Task {
             LocalDateTime dateTime = DateParser.parseStringToDateTime(dateTimeString);
             return new Deadline(description, dateTime);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new NekoTaskCreationException("So you never did plan on doing it huh...");
+            throw new NekoTaskCreationException(Messages.PARSE_DEADLINE_DUE_DATE_ERROR);
         }
     }
 
@@ -53,17 +54,17 @@ public class Deadline extends Task {
      */
     public static Deadline decode(String code) throws NekoStorageException {
         if (code.charAt(0) != 'D') {
-            throw new NekoStorageException("Something doesn't seem right...");
+            throw new NekoStorageException(Messages.DECODE_UNEXPECTED_TYPE_ERROR);
         }
         String[] content = code.split("\\|", 4);
         if (content.length != 4) {
-            throw new NekoStorageException("There are some holes in my memory...");
+            throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         }
         Deadline newDeadline = new Deadline(content[3], DateParser.parseStringToDateTime(content[2]));
-        if (content[1].equals("Y")) {
+        if (content[1].equals(ENCODED_COMPLETE_FLAG)) {
             newDeadline.setCompleted();
-        } else if (!content[1].equals("N")) {
-            throw new NekoStorageException("There are some holes in my memory...");
+        } else if (!content[1].equals(ENCODED_INCOMPLETE_FLAG)) {
+            throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         }
         return newDeadline;
     }
@@ -75,7 +76,7 @@ public class Deadline extends Task {
      */
     @Override
     public String encode() {
-        return String.format("D|%s|%s|%s", super.isCompleted ? "Y" : "N",
+        return String.format("D|%s|%s|%s", super.isCompleted ? ENCODED_COMPLETE_FLAG : ENCODED_INCOMPLETE_FLAG,
                 DateParser.parseLocalDateTimeToString(dateTime),
                 super.description);
     }

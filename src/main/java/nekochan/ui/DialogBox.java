@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
+
     @FXML
     private Label dialog;
     @FXML
@@ -30,7 +31,6 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        // Set nodes.
         dialog.setText(removeNewline(text));
         displayPicture.setImage(img);
 

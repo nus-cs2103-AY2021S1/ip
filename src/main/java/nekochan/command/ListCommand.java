@@ -7,12 +7,15 @@ import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.storage.Storage;
 import nekochan.task.Task;
 import nekochan.task.TaskList;
+import nekochan.util.Messages;
 
 /**
  * The {@code ListCommand} class represents a command to print all contents of a {@link TaskList}.
  * The output of the {@code ListCommand} retains the same order of tasks in the {@code TaskList}.
  */
 public class ListCommand extends Command {
+
+    private static final boolean IS_EXIT = false;
 
     private List<Task> existingTasks;
 
@@ -32,36 +35,28 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Prints the result of executing this {@code ListCommand}.
+     * Returns a {@link Response} from executing this {@code ListCommand}.
      *
+     * @return a {@code Response} object containing the result of executing this {@code ListCommand}.
      * @throws IncompleteNekoCommandException if this {@code ListCommand} was not executed.
      */
     @Override
-    public String feedback() throws IncompleteNekoCommandException {
+    public Response feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
-            throw new IncompleteNekoCommandException("List command was not completed.");
+            throw new IncompleteNekoCommandException(Messages.INCOMPLETE_LIST_COMMAND);
         }
-        String printout = "";
+        String responseMessage = "";
         if (existingTasks.size() == 0) {
-            printout = "Congratulations! You don't have any tasks left to do.";
+            responseMessage = Messages.MESSAGE_EMPTY_LIST;
         } else {
-            printout = "Here are the tasks in your list:\n";
+            responseMessage = Messages.MESSAGE_LIST;
             for (int i = 0; i < existingTasks.size(); i++) {
-                printout += String.format("%d.%s\n", i + 1, existingTasks.get(i).toString());
+                responseMessage += String.format("%d. %s\n", i + 1, existingTasks.get(i).toString());
             }
         }
 
         assert printout.length() > 0 : "printout should have content";
 
-        return printout;
+        return new Response(IS_EXIT, responseMessage);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
 }

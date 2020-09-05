@@ -51,6 +51,6 @@ public class NekoChan {
     public Response getResponse(String input) {
         Command c = Parser.parse(input);
         c.execute(taskList, storage);
-        return new Response(c.isExit(), c.feedback());
+        return c.feedback();
     }
 }

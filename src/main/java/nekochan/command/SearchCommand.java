@@ -7,6 +7,7 @@ import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.storage.Storage;
 import nekochan.task.Task;
 import nekochan.task.TaskList;
+import nekochan.util.Messages;
 
 /**
  * The {@code SearchCommand} class represents a command that allows the user to search for tasks.
@@ -14,6 +15,8 @@ import nekochan.task.TaskList;
  * their date (if the type of task supports it).
  */
 public class SearchCommand extends Command {
+
+    private static final boolean IS_EXIT = false;
 
     private String searchParameter;
     private List<Task> results;
@@ -45,30 +48,23 @@ public class SearchCommand extends Command {
     }
 
     /**
-     * Prints the result of executing this {@code SearchCommand}.
+     * Returns a {@link Response} from executing this {@code SearchCommand}.
      *
+     * @return a {@code Response} object containing the result of executing this {@code SearchCommand}.
      * @throws IncompleteNekoCommandException if this {@code DeleteCommand} was not executed.
      */
     @Override
-    public String feedback() throws IncompleteNekoCommandException {
+    public Response feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
-            throw new IncompleteNekoCommandException("Search command was not completed.");
+            throw new IncompleteNekoCommandException(Messages.INCOMPLETE_SEARCH_COMMAND);
         }
-        String resultPrint = "";
+        String responseMessage = "";
         for (Task result : results) {
-            if (resultPrint.length() > 0) {
-                resultPrint = resultPrint.concat("\n");
+            if (responseMessage.length() > 0) {
+                responseMessage = responseMessage.concat("\n");
             }
-            resultPrint = resultPrint.concat(result.toString());
+            responseMessage = responseMessage.concat(result.toString());
         }
-        return resultPrint;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return new Response(IS_EXIT, responseMessage);
     }
 }

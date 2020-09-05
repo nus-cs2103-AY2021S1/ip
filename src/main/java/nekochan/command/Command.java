@@ -20,16 +20,10 @@ public abstract class Command {
     public abstract void execute(TaskList list, Storage storage);
 
     /**
-     * Prints a feedback after this {@code Command} has been executed.
+     * Returns a {@link Response} after this {@code Command} has been executed.
      *
+     * @return a {@code Response} object containing the result of executing this {@code Command}.
      * @throws NekoException if this {@code Command} has not been executed.
      */
-    public abstract String feedback() throws NekoException;
-
-    /**
-     * Returns true if this {@code Command} should terminate the program.
-     *
-     * @return true if this {@code Command} should terminate the program.
-     */
-    public abstract boolean isExit();
+    public abstract Response feedback() throws NekoException;
 }

@@ -9,11 +9,14 @@ import nekochan.task.Task;
 import nekochan.task.TaskList;
 import nekochan.task.TaskType;
 import nekochan.task.ToDo;
+import nekochan.util.Messages;
 
 /**
  * The {@code CompleteCommand} class represents a command to create a new {@link Task}.
  */
 public class AddCommand extends Command {
+
+    private static final boolean IS_EXIT = false;
 
     private Task createdTask;
     private int remainingTaskCount;
@@ -37,7 +40,7 @@ public class AddCommand extends Command {
             createdTask = ToDo.createTask(taskDetail);
             break;
         default:
-            throw new NekoException("I don't understand.");
+            throw new NekoException(Messages.INVALID_TASK_TYPE_ERROR);
         }
     }
 
@@ -56,29 +59,21 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Prints a feedback confirming the execution of this {@code AddCommand}.
+     * Returns a {@link Response} from the execution of this {@code AddCommand}.
      *
+     * @return a {@code Response} object containing the result of executing this {@code AddCommand}.
      * @throws IncompleteNekoCommandException if this {@code AddCommand} was not executed.
      */
     @Override
-    public String feedback() throws IncompleteNekoCommandException {
+    public Response feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
-            throw new IncompleteNekoCommandException("Add command was not completed.");
+            throw new IncompleteNekoCommandException(Messages.INCOMPLETE_ADD_COMMAND);
         }
 
         assert createdTask != null : "created task should not be null";
-
-        return String.format(
-                "Got it. I've added this task:\n%s\nNow you have %d tasks in your list.\n",
-                createdTask.toString(),
-                remainingTaskCount);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+      
+        String responseMessage = Messages.MESSAGE_ADD + createdTask.toString() + "\n"
+                + Messages.getTotalTaskMessage(remainingTaskCount);
+        return new Response(IS_EXIT, responseMessage);
     }
 }

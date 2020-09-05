@@ -3,11 +3,14 @@ package nekochan.command;
 import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.storage.Storage;
 import nekochan.task.TaskList;
+import nekochan.util.Messages;
 
 /**
  * The {@code DeleteAllCommand} class represents a command to remove all entries in a {@link TaskList}.
  */
 public class DeleteAllCommand extends Command {
+
+    private static final boolean IS_EXIT = false;
 
     /**
      * Executes this {@code DeleteAllCommand}.
@@ -24,23 +27,17 @@ public class DeleteAllCommand extends Command {
     }
 
     /**
-     * Prints a feedback confirming the execution of this {@code DeleteAllCommand}.
+     * Returns a {@link Response} from the execution of this {@code DeleteAllCommand}.
      *
+     * @return @return a {@code Response} object containing the result of executing this {@code DeleteAllCommand}.
      * @throws IncompleteNekoCommandException if this {@code DeleteAllCommand} was not executed.
      */
     @Override
-    public String feedback() throws IncompleteNekoCommandException {
+    public Response feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
-            throw new IncompleteNekoCommandException("Delete all command was not completed.");
+            throw new IncompleteNekoCommandException(Messages.INCOMPLETE_DELETE_ALL_COMMAND);
         }
-        return "I've cleared all your tasks.\nYou sure are efficient.";
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        String responseMessage = Messages.MESSAGE_DELETE_ALL;
+        return new Response(IS_EXIT, responseMessage);
     }
 }

@@ -3,6 +3,7 @@ package nekochan.task;
 import nekochan.Encodable;
 import nekochan.Searchable;
 import nekochan.exceptions.NekoTaskCreationException;
+import nekochan.util.Messages;
 
 /**
  * The {@code Task} class provides a skeletal implementation of an object representing a task.
@@ -10,8 +11,11 @@ import nekochan.exceptions.NekoTaskCreationException;
  */
 public abstract class Task implements Encodable<Task>, Searchable {
 
+    protected static final String ENCODED_COMPLETE_FLAG = "Y";
+    protected static final String ENCODED_INCOMPLETE_FLAG = "N";
     private static final String COMPLETED_ICON = "\u2713";
     private static final String INCOMPLETE_ICON = "\u2718";
+
 
     protected String description;
     protected boolean isCompleted;
@@ -24,7 +28,7 @@ public abstract class Task implements Encodable<Task>, Searchable {
      */
     protected Task(String description) throws NekoTaskCreationException {
         if (description.trim().length() == 0) {
-            throw new NekoTaskCreationException("That's really descriptive...");
+            throw new NekoTaskCreationException(Messages.PARSE_TASK_DESCRIPTION_ERROR);
         }
         this.description = description;
         isCompleted = false;

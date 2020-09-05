@@ -2,6 +2,7 @@ package nekochan.task;
 
 import nekochan.exceptions.NekoStorageException;
 import nekochan.exceptions.NekoTaskCreationException;
+import nekochan.util.Messages;
 
 /**
  * The {@code ToDo} class represents the most basic task with no additional parameters.
@@ -22,7 +23,7 @@ public class ToDo extends Task {
      */
     public static ToDo createTask(String details) throws NekoTaskCreationException {
         if (details == null) {
-            throw new NekoTaskCreationException("I need something to work with.");
+            throw new NekoTaskCreationException(Messages.PARSE_COMMAND_TODO_MISSING_ARGUMENT);
         }
         return new ToDo(details);
     }
@@ -36,17 +37,17 @@ public class ToDo extends Task {
      */
     public static ToDo decode(String code) throws NekoStorageException {
         if (code.charAt(0) != 'T') {
-            throw new NekoStorageException("Something doesn't seem right...");
+            throw new NekoStorageException(Messages.DECODE_UNEXPECTED_TYPE_ERROR);
         }
         String[] content = code.split("\\|", 3);
         if (content.length != 3) {
-            throw new NekoStorageException("There are some holes in my memory...");
+            throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         }
         ToDo newToDo = new ToDo(content[2]);
-        if (content[1].equals("Y")) {
+        if (content[1].equals(ENCODED_COMPLETE_FLAG)) {
             newToDo.setCompleted();
-        } else if (!content[1].equals("N")) {
-            throw new NekoStorageException("There are some holes in my memory...");
+        } else if (!content[1].equals(ENCODED_INCOMPLETE_FLAG)) {
+            throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         }
         return newToDo;
     }
@@ -59,7 +60,7 @@ public class ToDo extends Task {
     @Override
     public String encode() {
         return String.format("T|%s|%s",
-                super.isCompleted ? "Y" : "N",
+                super.isCompleted ? ENCODED_COMPLETE_FLAG : ENCODED_INCOMPLETE_FLAG,
                 super.description);
     }
 

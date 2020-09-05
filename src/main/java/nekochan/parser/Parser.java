@@ -10,6 +10,7 @@ import nekochan.command.ListCommand;
 import nekochan.command.SearchCommand;
 import nekochan.exceptions.ParseNekoCommandException;
 import nekochan.task.TaskType;
+import nekochan.util.Messages;
 
 /**
  * The {@code Parser} class provides methods for parsing user input.
@@ -48,7 +49,7 @@ public class Parser {
                     return k;
                 }
             }
-            throw new ParseNekoCommandException("Wakarimasen~");
+            throw new ParseNekoCommandException(Messages.PARSE_COMMAND_UNKNOWN);
         }
     }
 
@@ -76,7 +77,7 @@ public class Parser {
                 int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
                 return new CompleteCommand(index);
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-                throw new ParseNekoCommandException("What did you complete exactly?");
+                throw new ParseNekoCommandException(Messages.PARSE_COMMAND_COMPLETE_MISSING_ARGUMENT);
             }
         case DELETE:
             try {
@@ -87,34 +88,34 @@ public class Parser {
                     return new DeleteCommand(index);
                 }
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-                throw new ParseNekoCommandException("What do you want to remove exactly?");
+                throw new ParseNekoCommandException(Messages.PARSE_COMMAND_DELETE_MISSING_ARGUMENT);
             }
         case DEADLINE:
             try {
                 return new AddCommand(TaskType.DEADLINE, inputs[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new ParseNekoCommandException("Are you hiding something from me?");
+                throw new ParseNekoCommandException(Messages.PARSE_COMMAND_DEADLINE_MISSING_ARGUMENT);
             }
         case TODO:
             try {
                 return new AddCommand(TaskType.TODO, inputs[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new ParseNekoCommandException("I know your life is empty but your todo can't be empty.");
+                throw new ParseNekoCommandException(Messages.PARSE_COMMAND_TODO_MISSING_ARGUMENT);
             }
         case EVENT:
             try {
                 return new AddCommand(TaskType.EVENT, inputs[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new ParseNekoCommandException("Are you going somewhere without me?");
+                throw new ParseNekoCommandException(Messages.PARSE_COMMAND_EVENT_MISSING_ARGUMENT);
             }
         case SEARCH:
             try {
                 return new SearchCommand(inputs[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new ParseNekoCommandException("I don't have the answer to everything.");
+                throw new ParseNekoCommandException(Messages.PARSE_COMMAND_SEARCH_MISSING_ARGUMENT);
             }
         default:
-            throw new ParseNekoCommandException("Wakarimasen~");
+            throw new ParseNekoCommandException(Messages.PARSE_COMMAND_UNKNOWN);
         }
     }
 }
