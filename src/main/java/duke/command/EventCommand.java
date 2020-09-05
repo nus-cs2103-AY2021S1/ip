@@ -1,14 +1,20 @@
 package duke.command;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
+import duke.Duke;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.CalendarException;
+import duke.exception.DeadlineException;
 import duke.exception.DukeException;
 import duke.exception.EventException;
+import duke.task.Deadline;
 import duke.task.Event;
 
 public class EventCommand extends Command {
@@ -19,6 +25,7 @@ public class EventCommand extends Command {
 
     /**
      * Processes all the done command to determine the correct output.
+     *
      * @param taskList List of tasks.
      * @param ui       UI of the bot.
      * @param storage  Storage managing the file in hard disk.
@@ -27,13 +34,14 @@ public class EventCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             return processEvent(this.task, taskList, ui, storage);
-        } catch (EventException e) {
+        } catch (DukeException e) {
             return e.getMessage();
         }
     }
 
     /**
      * Processes all the event command to determine the correct output.
+     *
      * @param theRest  Parsed string containing task details.
      * @param taskList List containing all the task(s).
      * @param ui       UI of the bot
@@ -42,62 +50,151 @@ public class EventCommand extends Command {
      */
 
     public String processEvent(
-        String theRest, TaskList taskList, Ui ui, Storage storage) throws EventException {
+        String theRest, TaskList taskList, Ui ui, Storage storage) throws DukeException {
+//        try {
+//            String[] eventAndDateAndTime = theRest.split(" /at ", 2);
+//            Event event;
+//
+//            try {
+//                String eventDesc = eventAndDateAndTime[0];
+//                String eventDateAndTime = eventAndDateAndTime[1];
+//
+//                String[] dateTime = eventDateAndTime.split(" ", 2);
+//
+//                String date = dateTime[0];
+//
+//                try {
+//                    LocalDate localDate = LocalDate.parse(date);
+//
+//                    if (dateTime.length < 2) {
+//                        event = new Event(eventDesc, localDate);
+//                    } else {
+//
+//                        String time = dateTime[1];
+//                        String[] startEndTime = time.split("-");
+//                        if (startEndTime.length < 2) {
+//                            String startTime = startEndTime[0];
+//                            LocalTime localTime = LocalTime.parse(startTime);
+//                            event = new Event(eventDesc, false, localDate, localTime);
+//                        } else {
+//                            String startTime = startEndTime[0];
+//                            String endTime = startEndTime[1];
+//                            LocalTime localStartTime = LocalTime.parse(startTime);
+//                            LocalTime localEndTime = LocalTime.parse(endTime);
+//                            event = new Event(eventDesc, false,
+//                                localDate, localStartTime, localEndTime);
+//                        }
+//                    }
+//
+//                    Storage.updateData(taskList.getTasks());
+//                    return taskList.saveToList(event);
+//
+//                } catch (DateTimeParseException e) {
+//                    return "Please enter the date in "
+//                        + "YYYY/MM/DD format and time in HH:MM format.";
+//                }
+//
+//            } catch (IndexOutOfBoundsException e) {
+//                throw new EventException("Please specify the event name and date.");
+//            }
+//
+//        } catch (DukeException d) {
+//            throw new EventException("Please specify the event name and date.");
+//        }
+        Event event;
         try {
-            String[] eventAndDateAndTime = theRest.split(" /at ", 2);
-            Event event;
+            String task = getEventTask(theRest);
+            String[] details = parseEventDetails(theRest);
+            LocalDate localDate = getEventDate(details);
+            ArrayList<LocalTime> localTime = getDeadlineTime(details);
+            LocalTime startTime;
+            LocalTime endTime;
 
-            try {
-                String eventDesc = eventAndDateAndTime[0];
-                String eventDateAndTime = eventAndDateAndTime[1];
-
-                String[] dateTime = eventDateAndTime.split(" ", 2);
-
-                String date = dateTime[0];
-
-                try {
-                    LocalDate localDate = LocalDate.parse(date);
-
-                    if (dateTime.length < 2) {
-                        event = new Event(eventDesc, localDate);
-                    } else {
-
-                        String time = dateTime[1];
-                        String[] startEndTime = time.split("-");
-                        if (startEndTime.length < 2) {
-                            String startTime = startEndTime[0];
-                            LocalTime localTime = LocalTime.parse(startTime);
-                            event = new Event(eventDesc, false, localDate, localTime);
-                        } else {
-                            String startTime = startEndTime[0];
-                            String endTime = startEndTime[1];
-                            LocalTime localStartTime = LocalTime.parse(startTime);
-                            LocalTime localEndTime = LocalTime.parse(endTime);
-                            event = new Event(eventDesc, false,
-                                localDate, localStartTime, localEndTime);
-                        }
-                    }
-
-                    Storage.updateData(taskList.getTasks());
-                    return taskList.saveToList(event);
-
-                } catch (DateTimeParseException e) {
-                    return "Please enter the date in "
-                        + "YYYY/MM/DD format and time in HH:MM format.";
-                }
-
-            } catch (IndexOutOfBoundsException e) {
-                throw new EventException("Please specify the event name and date.");
+            if(localTime.size() == 2) {
+                startTime = localTime.get(0);
+                endTime = localTime.get(1);
+                event = new Event(task, false, localDate, startTime, endTime);
+            } else if (localTime.size() == 1) {
+                startTime = localTime.get(0);
+                event = new Event(task, localDate, startTime);
+            } else {
+                event = new Event(task, localDate);
             }
 
-        } catch (DukeException d) {
-            throw new EventException("Please specify the event name and date.");
+            Storage.updateData(taskList.getTasks());
+            return taskList.saveToList(event);
+
+        } catch (EventException | CalendarException exc) {
+            throw exc;
         }
     }
+
+    public String[] parseEventDetails(String theRest) throws EventException {
+        try {
+            String[] taskAndEventAndTime = theRest.split(" /at ", 2);
+            String[] dateAndTime = taskAndEventAndTime[1].split(" ");
+            return dateAndTime;
+        } catch (IndexOutOfBoundsException i) {
+            throw new EventException("Please specify the task and event date.");
+        }
+    }
+
+    public String getEventTask(String theRest) {
+        String[] taskAndEventAndTime = theRest.split(" /at ", 2);
+        return taskAndEventAndTime[0];
+    }
+
+    public LocalDate getEventDate(String[] dateDetails) throws DukeException {
+
+        try {
+            String date = dateDetails[0];
+            try {
+                LocalDate localDate = LocalDate.parse(date);
+                return localDate;
+            } catch (DateTimeParseException e) {
+                throw new CalendarException("Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new EventException("Please specify the task and event date.");
+        }
+    }
+
+    public ArrayList<LocalTime> getDeadlineTime(String[] dateDetails) throws DukeException {
+
+        ArrayList<LocalTime> localTime = new ArrayList<>();
+        if (dateDetails.length > 1) {
+
+            String[] startEndTime = dateDetails[1].split(" - ", 2);
+            String startTime = startEndTime[0];
+            String endTime;
+            LocalTime localStartTime;
+            LocalTime localEndTime;
+
+            if (startEndTime.length == 2) {
+                endTime = startEndTime[1];
+
+                try {
+                    localStartTime = LocalTime.parse(startTime);
+                    localEndTime = LocalTime.parse(endTime);
+                    localTime.add(localStartTime);
+                    localTime.add(localEndTime);
+
+                } catch (DateTimeParseException e) {
+                    throw new CalendarException("Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
+                }
+            } else {
+                localStartTime = LocalTime.parse(startTime);
+                localTime.add(localStartTime);
+            }
+        }
+        return localTime;
+    }
+
 
     /**
      * Evaluates whether this and other object if this and
      * other object is the same or of the same type and task details.
+     *
      * @param other Other object to compare.
      * @return True if this object
      */
