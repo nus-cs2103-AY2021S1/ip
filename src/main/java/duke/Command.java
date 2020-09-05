@@ -32,13 +32,13 @@ public class Command {
         String[] command = Parser.splitCommandAndDescription(toEcho);
         if (toEcho.length() == 4) {
             throw new DukeEmptyMessageException("Done");
-        } else if (Integer.parseInt(command[1]) > TaskList.getTaskLists().size()) {
-            throw new DukeInvalidMessageException();
-        } else {
-            int index = Integer.parseInt(command[1]) - 1;
-            taskList.markDone(index);
-            return ui.printDone(index);
         }
+        if (Integer.parseInt(command[1]) > TaskList.getTaskLists().size()) {
+            throw new DukeInvalidMessageException();
+        }
+        int index = Integer.parseInt(command[1]) - 1;
+        taskList.markDone(index);
+        return ui.printDone(index);
     }
 
     /**
@@ -121,7 +121,8 @@ public class Command {
         String[] command = Parser.splitCommandAndDescription(toEcho);
         if (toEcho.length() == 6) {
             throw new DukeEmptyMessageException("Delete");
-        } else if (Integer.parseInt(command[1]) > TaskList.getTaskLists().size()
+        }
+        if (Integer.parseInt(command[1]) > TaskList.getTaskLists().size()
                 || Integer.parseInt(command[1]) < 0) {
             throw new DukeInvalidMessageException();
         }

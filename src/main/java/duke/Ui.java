@@ -89,9 +89,9 @@ public class Ui {
      */
     public String printTask(Task task) {
         return "Got it. I've added this task:" + "\n"
-        + TAB + task + "\n"
-        + "Now you have " + TaskList.getTaskLists().size() + " tasks in the list." + "\n"
-        + HORIZONTAL_LINE;
+                + TAB + task + "\n"
+                + "Now you have " + TaskList.getTaskLists().size() + " tasks in the list." + "\n"
+                + HORIZONTAL_LINE;
     }
 
     /**
