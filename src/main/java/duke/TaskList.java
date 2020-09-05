@@ -51,6 +51,7 @@ public class TaskList {
      * @param index a valid index indicating the task that needs to be marked as done
      */
     public void markAsDone(int index) {
+        assert(index >= 0 && index < list.size());
         list.get(index).markAsDone();
     }
 
@@ -61,6 +62,7 @@ public class TaskList {
      * @param index a valid index indicating the task that needs to be removes.
      */
     public void remove(int index) {
+        assert(index >= 0 && index < list.size());
         list.remove(index);
     }
 
