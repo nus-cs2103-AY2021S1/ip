@@ -36,6 +36,6 @@ public class ListDateCommand extends Command {
      */
     @Override
     public Result excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
-        return new Result(ui.showList(taskList.findTaskAt(localDate)), isContinuing());
+        return new Result(ui.getTaskListMessage(taskList.findTaskAt(localDate)), isContinuing());
     }
 }

@@ -6,8 +6,8 @@ import duke.core.Result;
 import duke.core.Storage;
 import duke.core.TaskList;
 import duke.core.Ui;
-import duke.task.Task;
 import duke.handle.TaskNotFoundException;
+import duke.task.Task;
 
 /**
  * The DeleteCommand class represents a command that deletes a task from the task list.
@@ -36,15 +36,14 @@ public class DeleteCommand extends Command {
      */
     @Override
     public Result excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
-        if(!taskList.has(count - 1)) {
-            //System.out.println(Duke.makeBlock("There is no such task"));
+        if (!taskList.has(count - 1)) {
             throw new TaskNotFoundException("There is no such task");
-        } else {
-            Task task = taskList.remove(count - 1);
-            //ui.showDelete(task, count, taskList.getSize());
-            storage.writeRecord(taskList);
-
-            return new Result(ui.showDelete(task, count, taskList.getSize()), this.isContinuing());
         }
+
+        Task task = taskList.remove(count - 1);
+
+        storage.writeRecord(taskList);
+
+        return new Result(ui.getDeleteMessage(task, count, taskList.getSize()), this.isContinuing());
     }
 }
