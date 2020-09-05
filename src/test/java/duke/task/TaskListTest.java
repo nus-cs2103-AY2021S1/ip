@@ -44,8 +44,8 @@ public class TaskListTest {
         tasks.addTask(event2);
         tasks.addTask(event3);
         assertEquals("Here are the tasks happening on: 2020-08-27\n"
-                + "\t 1. [E][✘] iP Week 3 (at: August 27 2020)\n"
-                + "\t 2. [E][✘] Reading (at: August 27 2020)\n"
-                + "\t 3. [E][✘] Finals (at: August 27 2020)", tasks.showTasksOnDate(date));
+                + "1. [E][✘] iP Week 3 (at: August 27 2020)\n"
+                + "2. [E][✘] Reading (at: August 27 2020)\n"
+                + "3. [E][✘] Finals (at: August 27 2020)", tasks.showTasksOnDate(date));
     }
 }

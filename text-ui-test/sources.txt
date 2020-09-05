@@ -1,6 +1,8 @@
+../src/main/java/duke/ui/DialogBox.java
+../src/main/java/duke/ui/MainWindow.java
 ../src/main/java/duke/Storage.java
 ../src/main/java/duke/Parser.java
-../src/main/java/duke/Ui.java
+../src/main/java/duke/Main.java
 ../src/main/java/duke/task/TaskList.java
 ../src/main/java/duke/task/TaskType.java
 ../src/main/java/duke/task/Event.java
@@ -19,6 +21,7 @@
 ../src/main/java/duke/command/DoneCommand.java
 ../src/main/java/duke/command/ShowCommand.java
 ../src/main/java/duke/Duke.java
+../src/main/java/duke/Launcher.java
 ../src/main/java/duke/exception/InvalidTaskTypeException.java
 ../src/main/java/duke/exception/InvalidArgumentException.java
 ../src/main/java/duke/exception/InvalidCommandException.java
