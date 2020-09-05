@@ -1,7 +1,17 @@
 import java.util.Scanner;
 
+/**
+ * Handles the user input and determine the correct Command to activate.
+ * Contains helper methods to help out with this parsing process.
+ */
 public class Parser {
 
+    /**
+     * Parse the user input and determine the correct Command to activate.
+     * @param inputLine User input line string
+     * @return Command that correspond to the input.
+     * @throws DukeException If the input is not recognised.
+     */
     public static Command parse(String inputLine) throws DukeException {
         Scanner scanner = new Scanner(inputLine);
         String action = scanner.next();
@@ -31,6 +41,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Helper method to parse the remaining string from the input line for new Task.
+     * @param taskType Type of task.
+     * @param remainingString String that contains the description (and due).
+     * @throws DukeException
+     */
     public static String[] parseRemainingString(String taskType, String remainingString) throws DukeException {
         if (remainingString.length() == 0) {
             throw new DukeException("The description can't be empty.");

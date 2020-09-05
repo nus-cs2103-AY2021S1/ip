@@ -4,6 +4,11 @@ import java.time.format.DateTimeParseException;
 public class DukeDate {
     private LocalDate localDate;
 
+    /**
+     * Constructor.
+     * @param datetimeString raw string containing the date time from user input.
+     * @throws DukeException
+     */
     public DukeDate(String datetimeString) throws DukeException {
         String[] datetimeArray = datetimeString.split(" ");
         try {
@@ -13,6 +18,10 @@ public class DukeDate {
         }
     }
 
+    /**
+     * String representation of the datetime format for output.
+     * @return string representation.
+     */
     @Override
     public String toString() {
         String day = String.valueOf(localDate.getDayOfMonth());

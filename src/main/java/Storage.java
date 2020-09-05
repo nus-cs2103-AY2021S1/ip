@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles the file storage for TaskList.
+ */
 public class Storage {
     private final String filePath;
     private File file;
@@ -15,7 +18,7 @@ public class Storage {
     }
 
     /** Helper: creates file if it is not present in filePath.
-     * @throws IOException
+     * @throws IOException If file dosen't exist.
      */
     public void createFileIfNotPresent() throws IOException{
         if (!this.file.exists()) {
@@ -77,8 +80,10 @@ public class Storage {
         }
     }
 
-    /** Updates the file in storage based on new task list.
+    /**
+     * Updates the file in storage based on new task list.
      * @param taskList the list of new tasks
+     * @throws IOException If file don't exist.
      */
     public void updateFile(TaskList taskList) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);

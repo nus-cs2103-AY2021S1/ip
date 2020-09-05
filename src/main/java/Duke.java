@@ -5,12 +5,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Duke program is a Task Management App. It takes in user command for task manipulations
+ * and shows a list of Tasks that is ongoing.
+ */
 public class Duke {
     private String filePath;
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
 
+    /**
+     * Constructor.
+     * @param filePath string path of the file for storage purpose.
+     */
     public Duke(String filePath) {
         this.filePath = filePath;
         this.ui = new Ui();
@@ -23,7 +31,10 @@ public class Duke {
         }
     }
 
-
+    /**
+     * Run start the program.
+     * Initialise the relevant objects to handle user commands.
+     */
     public void run() {
         ui.printWelcomeMessage();
         boolean isExit = false;
@@ -137,6 +148,10 @@ public class Duke {
         fileWriter.close();
     }
 
+    /**
+     * Main program to run the application.
+     * @param args
+     */
     public static void main(String[] args) {
         String filePath = "data/duke.txt";
         Duke duke = new Duke(filePath);
