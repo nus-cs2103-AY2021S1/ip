@@ -33,6 +33,7 @@ public class Parser {
      * @throws CommandNotFoundException If the command cannot be parsed.
      */
     public static Command parseCommand(String command) throws CommandNotFoundException {
+        assert command != null : "the command should not be null";
         Command parsedCommand;
         //HashMap<String, Object> map = new HashMap<>();
         //map.put("type", "add");

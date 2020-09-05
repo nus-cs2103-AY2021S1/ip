@@ -5,15 +5,7 @@ package duke.command;
  * the different types of command and enumerates them.
  */
 public enum CommandType {
-    LIST("list"),
-    LIST_DATE("list date"),
-    ADD_TODO("todo"),
-    ADD_DEADLINE("deadline"),
-    ADD_EVENT("event"),
-    DONE("done"),
-    DELETE("delete"),
-    EXIT("exit"),
-    FIND("find");
+    LIST("list"), LIST_DATE("list date"), ADD_TODO("todo"), ADD_DEADLINE("deadline"), ADD_EVENT("event"), DONE("done"), DELETE("delete"), EXIT("exit"), FIND("find");
 
     private String type;
 
