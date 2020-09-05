@@ -36,7 +36,7 @@ public class ToDo extends Task {
      */
     @Override
     public String generateStorageString() {
-        return String.format("TODO | %s | %s", isDone ? "TRUE" : "FALSE", taskData);
+        return String.format("TODO | %s | %s", isDone ? "TRUE" : "FALSE", taskName);
     }
 
     @Override

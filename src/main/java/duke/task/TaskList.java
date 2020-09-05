@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import duke.DukeException;
@@ -148,8 +149,32 @@ public class TaskList {
      */
     public String taskListToKeywordFilteredString(String keyword) {
         assert keyword != null : "Keyword cannot be null";
+
+        Predicate<? super Task> filterFunction;
+
+        switch (keyword.toUpperCase()) {
+        case "TYPE=TODO":
+            filterFunction = task -> task.toString().contains("T");
+            break;
+        case "TYPE=EVENT":
+            filterFunction = task -> task.toString().contains("E");
+            break;
+        case "TYPE=DEADLINE":
+            filterFunction = task -> task.toString().contains("D");
+            break;
+        case "STATUS=DONE":
+            filterFunction = task -> task.isDone();
+            break;
+        case "STATUS=UNDONE":
+            filterFunction = task -> !task.isDone();
+            break;
+        default:
+            filterFunction = task -> task.getTaskName().contains(keyword);
+            break;
+        }
+
         List<Task> temp = tasks.stream()
-                .filter(task -> task.toString().contains(keyword))
+                .filter(filterFunction)
                 .collect(Collectors.toList());
 
         return convertTaskListToString(temp);

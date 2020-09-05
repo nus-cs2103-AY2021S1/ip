@@ -8,10 +8,10 @@ import java.time.LocalDate;
 public abstract class Task {
 
     protected boolean isDone = false;
-    final String taskData;
+    final String taskName;
 
-    Task(String taskData) {
-        this.taskData = taskData;
+    Task(String taskName) {
+        this.taskName = taskName;
     }
 
     public void competeTask() {
@@ -22,14 +22,22 @@ public abstract class Task {
         return false;
     }
 
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     public abstract String generateStorageString();
 
     @Override
     public String toString() {
         if (isDone) {
-            return "[\u2713] " + taskData;
+            return "[\u2713] " + taskName;
         } else {
-            return "[\u2718] " + taskData;
+            return "[\u2718] " + taskName;
         }
     }
 }
