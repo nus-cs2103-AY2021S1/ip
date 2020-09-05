@@ -40,6 +40,7 @@ public class Storage {
      * @throws StorageException on I/O error or parse error
      */
     public List<Task> load() throws StorageException {
+        assert path != null : "Storage file path cannot be empty!";
         try {
             createFileIfNotExists(path);
 
@@ -68,6 +69,7 @@ public class Storage {
      * @return true indicating storage is updated, or false indicating storage fails to update
      */
     public boolean save(TaskList tasks) {
+        assert path != null : "Storage file path cannot be empty!";
         try {
             BufferedWriter bw = Files.newBufferedWriter(path);
             for (Task task : tasks.getAll()) {

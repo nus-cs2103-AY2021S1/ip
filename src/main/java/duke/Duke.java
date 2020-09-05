@@ -47,6 +47,7 @@ public class Duke {
             ui.print(ex.getMessage());
             response = new CommandResult(ex.getMessage());
         } finally {
+            assert true;
             ui.buildChatFence();
         }
         return response.getResult();
