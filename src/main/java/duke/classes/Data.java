@@ -87,7 +87,6 @@ public class Data {
             default:
                 break;
             }
-            tasks.add(currTask);
             assert currTask != null;
             boolean isTodo = currTask.getType() == TaskType.TODO;
             boolean isDeadline = currTask.getType() == TaskType.DEADLINE;
