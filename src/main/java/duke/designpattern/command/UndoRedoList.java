@@ -35,8 +35,8 @@ public class UndoRedoList {
      */
     public void add(ReversibleExecutable item) throws NullPointerException {
         // Undo() has been called before the execution of this method
+        // Remove all undone items from list
         if (this.index != this.list.size()) {
-            // Remove all undone items from list
             this.list.subList(this.index, this.list.size()).clear();
         }
 

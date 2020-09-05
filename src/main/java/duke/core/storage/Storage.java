@@ -7,7 +7,11 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /**
  * The Storage class provides methods to save/load the taskList to/from a csv file
@@ -31,7 +35,7 @@ public class Storage {
             }
 
             fileWriter.flush();
-            // fileWriter.close(); // fileWriter is automatically closed by try-with-resources
+            // fileWriter is automatically closed by try-with-resources
         }
 
     }
@@ -49,28 +53,27 @@ public class Storage {
         // Attempt to open file for reading
         // throws FileNotFoundException, FileNotFoundException should be passed to the program logic
         File file = new File(filePath);
-        try (Scanner scanner = new Scanner(file)) {
+        Scanner fileScanner = new Scanner(file);
 
-            // Read all lines
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine().trim();
+        Supplier<String> nextLine = () -> {
+            return fileScanner.hasNextLine() ? fileScanner.nextLine() : null;
+        };
 
-                // Line is blank, nothing to process
-                if (line.isEmpty()) {
-                    continue;
-                }
+        Stream.generate(nextLine)
+                .takeWhile(Objects::nonNull)
+                .map(String::trim)
+                .filter(Predicate.not(String::isBlank))
+                .forEach(line -> {
+                    try (Scanner lineScanner = new Scanner(line)) {
+                        lineScanner.useDelimiter(",");
+                        Task task = CsvToTask.valueOf(lineScanner.next()).parse(lineScanner);
+                        taskList.add(task);
+                    } catch (Exception e) { // Many types of parse error
+                        System.err.println("Corrupt entry: " + line); // Todo: logger
+                    }
+                });
 
-                try {
-                    // Attempt to convert line into a Task object
-                    String taskType = line.substring(0, line.indexOf(','));
-                    Task task = CsvToTask.valueOf(taskType).parse(line);
-                    taskList.add(task);
-                } catch (Exception e) {
-                    // Allow program to continue even when encountering corrupt entries
-                    System.err.println("Corrupt entry: " + line); // Todo: logger
-                }
-            }
-        }
+        fileScanner.close();
 
     }
 

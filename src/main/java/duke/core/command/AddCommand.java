@@ -34,6 +34,7 @@ public class AddCommand implements ReversibleExecutable {
             return;
         }
 
+        // Add task
         this.taskList.add(task);
         System.out.println("\t+ Add: " + task.toString());
     }

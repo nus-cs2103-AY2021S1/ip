@@ -108,7 +108,9 @@ public enum ParseToCommand {
             Matcher matcher = pattern.matcher(commandParam);
 
             // Ensure that both param1 and param2 exists
-            if (!matcher.matches() || matcher.group(1).isBlank() || matcher.group(2).isBlank()) {
+            if (!matcher.matches()
+                    || matcher.group(1).isBlank()
+                    || matcher.group(2).isBlank()) {
                 throw new DukeParserException("Format: " + usage);
             }
 

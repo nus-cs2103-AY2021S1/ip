@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Provides the centralised storage for the core components of Duke.
- * A data store contains every data structures that Duke uses.
+ * A centralised storage for the core components of Duke.
  * It facilitates passing of such data structures throughout the application.
  */
 public class DataStore {
@@ -38,7 +37,7 @@ public class DataStore {
      * @return A list of task referenced by this DataStore
      */
     public List<Task> getTaskList() {
-        return taskList;
+        return this.taskList;
     }
 
     /**
@@ -46,6 +45,6 @@ public class DataStore {
      * @return The UndoRedoList reference by this DataStore
      */
     public UndoRedoList getHistory() {
-        return history;
+        return this.history;
     }
 }

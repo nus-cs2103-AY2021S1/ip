@@ -31,8 +31,7 @@ public class LoadCommand implements Executable {
     /**
      * Load taskList from file.
      * The file should be in a defined csv format.
-     * All existing Tasks will be cleared and replaced with
-     * entries from the input csv file.
+     * All existing Tasks will be cleared and replaced with entries from the input csv file.
      * All existing History will be cleared.
      */
     @Override
@@ -40,6 +39,7 @@ public class LoadCommand implements Executable {
         try {
             Storage.load(dataStore.getTaskList(), filePath);
             System.out.println("Load: " + dataStore.getTaskList().size() + " entries");
+            // Clear history
             dataStore.getHistory().clear();
         } catch (FileNotFoundException e) {
             System.out.println("Error: File not found");

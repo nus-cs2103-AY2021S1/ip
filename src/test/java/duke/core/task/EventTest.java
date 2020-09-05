@@ -5,6 +5,7 @@ import duke.core.util.DukeDateTime;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -61,7 +62,10 @@ class EventTest {
     void toCsv_fromCsv() {
         try {
             Task task1 = new Event(string1, time1, time2);
-            Task task2 = CsvToTask.EVENT.parse(task1.toCsv());
+            Scanner scanner = new Scanner(task1.toCsv());
+            scanner.useDelimiter(",");
+            scanner.next(); // discard first
+            Task task2 = CsvToTask.EVENT.parse(scanner);
             assertEquals(task1.hashCode(), task2.hashCode());
         } catch (Exception e) {
             // Failed to convert csv to Event

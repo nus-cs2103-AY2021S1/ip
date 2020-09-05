@@ -14,17 +14,22 @@ public class Main {
      * @param args Program arguments
      */
     public static void main(String[] args) {
-        if (args.length > 0) {
-            if (args[0].equals("cmd")) {
-                runCmd(args);
-            } else if (args[0].equals("gui")) {
-                runGui(args);
-            } else {
-                System.out.println("Usage: java -jar duke.jar <cmd|gui>");
-            }
-        } else {
-            System.out.println("Usage: java -jar duke.jar <cmd|gui>");
+
+        String usage = "Usage: java -jar duke.jar <cmd|gui>";
+
+        if (args.length == 0) {
+            System.out.println(usage);
         }
+
+        // Run either CMD or GUI depending on program argument
+        if (args[0].equals("cmd")) {
+            runCmd(args);
+        } else if (args[0].equals("gui")) {
+            runGui(args);
+        } else {
+            System.out.println(usage);
+        }
+
     }
 
     private static void runCmd(String[] args) {

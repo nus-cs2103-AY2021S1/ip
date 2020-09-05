@@ -3,6 +3,8 @@ package duke.core.task;
 import duke.core.storage.CsvToTask;
 import org.junit.jupiter.api.Test;
 
+import java.util.Scanner;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -31,10 +33,13 @@ class ToDoTest {
     void toCsv_fromCsv() {
         try {
             Task task1 = new ToDo("test");
-            Task task2 = CsvToTask.TODO.parse(task1.toCsv());
+            Scanner scanner = new Scanner(task1.toCsv());
+            scanner.useDelimiter(",");
+            scanner.next(); // discard first
+            Task task2 = CsvToTask.TODO.parse(scanner);
             assertEquals(task1.hashCode(), task2.hashCode());
         } catch (Exception e) {
-            // Failed to convert csv to todo
+            // Failed to convert csv to to-do
             fail();
 
         }

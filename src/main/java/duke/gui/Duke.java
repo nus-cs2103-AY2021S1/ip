@@ -45,7 +45,7 @@ public class Duke extends Application {
         Button clearButton = new Button("Clear");
         ListView<Task> taskView = new ListView<>(taskList);
 
-        // Configure layout
+        // Configure layout for UI Elements
         taskView.setFocusTraversable(false);
         clearButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         outputScrollPane.setContent(outputLabel);

@@ -33,7 +33,7 @@ public class FindCommand implements Executable {
         // Search matching tasks
         int index = 0;
         for (Task task : taskList) {
-            if (task.getDescription().contains(searchString)) {
+            if (task.toString().contains(searchString)) {
                 System.out.println(++index + ". " + task.toString());
             }
         }

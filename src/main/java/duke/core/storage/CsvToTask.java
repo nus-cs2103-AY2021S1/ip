@@ -15,13 +15,7 @@ public enum CsvToTask {
 
     TODO {
         @Override
-        public Task parse(String csv) {
-            // Parse input
-            Scanner scanner = new Scanner(csv);
-            scanner.useDelimiter(",");
-            scanner.next(); // Discard first match
-
-            // Construct task from csv
+        public Task parse(Scanner scanner) {
             return new ToDo(
                     Boolean.parseBoolean(scanner.next()),
                     scanner.next()
@@ -31,13 +25,7 @@ public enum CsvToTask {
 
     DEADLINE {
         @Override
-        public Task parse(String csv) {
-            // Parse input
-            Scanner scanner = new Scanner(csv);
-            scanner.useDelimiter(",");
-            scanner.next(); // Discard first match
-
-            // Construct deadline from csv
+        public Task parse(Scanner scanner) {
             return new Deadline(
                     Boolean.parseBoolean(scanner.next()),
                     scanner.next(),
@@ -48,13 +36,7 @@ public enum CsvToTask {
 
     EVENT {
         @Override
-        public Task parse(String csv) {
-            // Parse input
-            Scanner scanner = new Scanner(csv);
-            scanner.useDelimiter(",");
-            scanner.next(); // Discard first match
-
-            // Construct task from csv
+        public Task parse(Scanner scanner) {
             return new Event(
                     Boolean.parseBoolean(scanner.next()),
                     scanner.next(),
@@ -66,10 +48,11 @@ public enum CsvToTask {
 
     /**
      * Factory method to obtain a Task from its csv representation
-     * @param csv The csv representation of a task
+     * @param scanner The scanner initialized with the csv representation of a task.
+     * The first entry from the scanner should be discarded by the caller.
      * @return The task represented by the csv
      * @throws Exception If the csv cannot be parsed
      */
-    public abstract Task parse(String csv) throws Exception;
+    public abstract Task parse(Scanner scanner) throws Exception;
 
 }

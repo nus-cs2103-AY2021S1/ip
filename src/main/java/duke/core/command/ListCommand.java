@@ -26,15 +26,13 @@ public class ListCommand implements Executable {
     @Override
     public void execute() {
 
-        // Case1 : taskList is empty
-        // Inform user and return
+        // taskList is empty, Inform user and return
         if (taskList.isEmpty()) {
             System.out.println("List is empty!");
             return;
         }
 
-        // Case 2: taskList is not empty
-        // Iterate and print all items in taskList
+        // taskList is not empty, Iterate and print all items in taskList
         int index = 0;
         for (Task task : taskList) {
             System.out.println(++index + ". " + task.toString());
