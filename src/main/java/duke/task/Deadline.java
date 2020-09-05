@@ -78,7 +78,7 @@ public class Deadline extends Task {
     @Override
     public String getSaveFormat() {
         return String.format("%s | %s | %s %s",
-                Event.TASK_TYPE,
+                Deadline.TASK_TYPE,
                 super.getSaveFormat(),
                 this.dateBy.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                 this.timeBy.format(DateTimeFormatter.ofPattern("HH:mm")));
@@ -94,7 +94,7 @@ public class Deadline extends Task {
     public String toString() {
         String modifier = (this.timeBy.isAfter(LocalTime.NOON)) ? "pm" : "am";
         return String.format("[%s]%s (at: %s, %s)",
-                Event.TASK_TYPE,
+                Deadline.TASK_TYPE,
                 super.toString(),
                 this.dateBy.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
                 this.timeBy.format(DateTimeFormatter.ofPattern("hh:mm")) + modifier);
