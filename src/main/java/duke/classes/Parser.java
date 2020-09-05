@@ -22,6 +22,8 @@ public class Parser {
      * @return Commands from the Commands ENUM class
      */
     public Command analyse(String command) {
+        //Assertion: Commands given are valid & accounted for
+        assert command.length() > 2 : "Command might be invalid";
         if (command.startsWith("list")) {
             return Command.LIST;
         } else if (command.startsWith("find")) {
