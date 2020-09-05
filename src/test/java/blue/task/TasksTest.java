@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.function.Function;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,10 +30,13 @@ public class TasksTest {
      * @return the tasks.
      */
     private Tasks createTasks() {
+        Function<String, LocalTime> toTime = time ->
+                LocalTime.parse(time, DateTimeFormatter.ofPattern("hh:mma"));
         Tasks tasks = new Tasks();
         tasks.addTask(createTodo());
         tasks.addTask(new Deadline("deadline", LocalDate.parse("2020-02-12")));
-        tasks.addTask(new Event("event", LocalDate.parse("2020-04-12")));
+        tasks.addTask(new Event("event", LocalDate.parse("2020-04-12"), toTime.apply("08:32AM"),
+                toTime.apply("07:53PM")));
         return tasks;
     }
 
@@ -79,9 +85,12 @@ public class TasksTest {
      */
     @Test
     public void testGetData() {
+        Function<String, LocalTime> toTime = time ->
+                LocalTime.parse(time, DateTimeFormatter.ofPattern("hh:mma"));
         String expected = createTodo().getData() + "\n";
         expected += new Deadline("deadline", LocalDate.parse("2020-02-12")).getData() + "\n";
-        expected += new Event("event", LocalDate.parse("2020-04-12")).getData() + "\n";
+        expected += new Event("event", LocalDate.parse("2020-04-12"), toTime.apply("08:32AM"),
+                toTime.apply("07:53PM")).getData() + "\n";
         assertEquals(expected, createTasks().getData());
     }
 
@@ -95,7 +104,7 @@ public class TasksTest {
         Tasks tasks1 = new Tasks();
         tasks1.addTask(new String[]{"T", "0", "todo"});
         tasks1.addTask(new String[]{"D", "0", "deadline", "2020-02-12"});
-        tasks1.addTask(new String[]{"E", "0", "event", "2020-04-12"});
+        tasks1.addTask(new String[]{"E", "0", "event", "2020-03-23", "08:32", "19:53"});
         assertEquals(3, tasks1.getSize());
     }
 

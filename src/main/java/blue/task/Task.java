@@ -1,6 +1,7 @@
 package blue.task;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.function.Function;
 
 import blue.exception.ReadFailedException;
@@ -96,12 +97,14 @@ public class Task {
     public static Task createTask(String[] stringArr) throws ReadFailedException {
         Function<String, Boolean> isDone = num -> num.equals("1");
         Function<String, LocalDate> toDate = date -> LocalDate.parse(date.trim());
+        Function<String, LocalTime> toTime = time -> LocalTime.parse(time.trim());
 
         switch (stringArr[0]) {
         case "T":
             return new Todo(stringArr[2], isDone.apply(stringArr[0]));
         case "E":
-            return new Event(stringArr[2], toDate.apply(stringArr[3]), isDone.apply(stringArr[0]));
+            return new Event(stringArr[2], toDate.apply(stringArr[3]),
+                    toTime.apply(stringArr[4]), toTime.apply(stringArr[5]), isDone.apply(stringArr[0]));
         case "D":
             return new Deadline(stringArr[2], toDate.apply(stringArr[3]), isDone.apply(stringArr[0]));
         default:

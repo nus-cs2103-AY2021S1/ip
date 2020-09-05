@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.function.Function;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +43,10 @@ public class TaskTest {
      * @return the task.
      */
     private Task createEvent() {
-        return new Event("event", LocalDate.parse("2020-03-23"));
+        Function<String, LocalTime> toTime = time ->
+                LocalTime.parse(time, DateTimeFormatter.ofPattern("hh:mma"));
+        return new Event("event", LocalDate.parse("2020-03-23"), toTime.apply("08:32AM"),
+                toTime.apply("07:53PM"));
     }
 
     /**
@@ -72,7 +78,7 @@ public class TaskTest {
         assertEquals(createTodo().toString(),
                 Task.createTask(new String[]{"T", "0", "todo"}).toString());
         assertEquals(createEvent().toString(),
-                Task.createTask(new String[]{"E", "0", "event", "2020-03-23"}).toString());
+                Task.createTask(new String[]{"E", "0", "event", "2020-03-23", "08:32", "19:53"}).toString());
         assertEquals(createDeadline().toString(),
                 Task.createTask(new String[]{"D", "0", "deadline", "2020-03-07"}).toString());
 
