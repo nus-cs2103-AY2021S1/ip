@@ -194,7 +194,7 @@ public class Event extends Task {
         } else if (other instanceof Event) {
             Event event = (Event) other;
             boolean descIsEqual = this.description.equals(event.getDescription());
-            boolean dateIsEqual = this.getDate().equals(event.getDate());
+            boolean dateIsEqual = this.getEventDate().equals(event.getEventDate());
             boolean startTimeIsEqual = false;
             boolean endTimeIsEqual = false;
 

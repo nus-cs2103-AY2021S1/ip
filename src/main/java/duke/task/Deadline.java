@@ -136,9 +136,9 @@ public class Deadline extends Task {
             boolean dateIsEqual = this.deadline.equals(deadline.getDeadline());
             boolean timeIsEqual = false;
 
-            if(this.time != null && deadline.getTime() != null) {
-                timeIsEqual = this.time.equals(deadline.getTime());
-            } else if (this.time == null && deadline.getTime() == null){
+            if(this.time != null && deadline.getDeadlineTime() != null) {
+                timeIsEqual = this.time.equals(deadline.getDeadlineTime());
+            } else if (this.time == null && deadline.getDeadlineTime() == null){
                 timeIsEqual = true;
             }
             return descIsEqual && dateIsEqual && timeIsEqual;
