@@ -43,7 +43,7 @@ public class DoneCommand extends Command {
         if (indexIsLessThanZero || indexIsMoreThanListSize) {
             throw new InvalidTaskNumberException();
         }
-        assert !((index <= 0) || (index > taskList.getSize())) : "Index should not be less than 0 or exceed"
+        assert !(indexIsLessThanZero || indexIsMoreThanListSize) : "Index should not be less than 0 or exceed"
                 + " task list size.";
         return taskList.markTaskDone(index, storage);
     }

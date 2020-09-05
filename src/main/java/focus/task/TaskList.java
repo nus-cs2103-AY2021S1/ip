@@ -137,13 +137,13 @@ public class TaskList {
      */
     private String checkList(int index) {
         String printing = "";
-        printing += "\tHere are the tasks on your list:\n\t";
         int number = index + 1;
         if (index == taskList.size() - 1) {
             printing += "" + number + ". " + taskList.get(index);
         } else {
             printing += "" + number + ". " + taskList.get(index) + "\n\t";
         }
+        assert !printing.isEmpty() : "Printing should not blank here.";
         return printing;
     }
 
@@ -154,8 +154,9 @@ public class TaskList {
      */
     public String listTasks() {
         String printing = "";
+        printing += "\tHere are the tasks on your list:\n\t";
         for (int i = 0; i < taskList.size(); i++) {
-            printing = checkList(i);
+            printing += checkList(i);
         }
         assert !printing.isEmpty() : "Printing should not blank here.";
         return printing;
@@ -187,13 +188,15 @@ public class TaskList {
     private String printFoundTasks(String keyword) {
         String printing = "";
         int index = 1;
-        printing += "\tHere are the matching tasks on your list:\n\t";
+        printing += "\tHere are the matching tasks on your list:";
         for (Task task : taskList) {
-            if (task.getTaskName().contains(keyword)) {
-                printing += "" + index + ". " + task + "\n\t";
+            boolean taskContainsKeyword = task.getTaskName().contains(keyword);
+            if (taskContainsKeyword) {
+                printing += "\n\t" + index + ". " + task;
                 index++;
             }
         }
+        assert !printing.isEmpty() : "Printing should not blank here.";
         return printing;
     }
 
@@ -204,7 +207,7 @@ public class TaskList {
      * @return String representation of found tasks.
      */
     public String findTasks(String keyword) {
-        String printing = "";
+        String printing;
         boolean canFind = canFindTasks(keyword);
         if (canFind) {
             printing = printFoundTasks(keyword);

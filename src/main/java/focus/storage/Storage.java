@@ -11,10 +11,10 @@ import focus.task.Task;
 
 /** Allows Focus to load and save data in user's files. */
 public class Storage {
-    /** Represents the path for the task list to be saved at. */
-    private final String path;
     /** Represents the current user's directory. */
     private static final String USER_DIRECTORY = "user.dir";
+    /** Represents the path for the task list to be saved at. */
+    private final String path;
 
     /** Creates a storage to allow loading and saving of tasks. */
     public Storage() {
@@ -69,7 +69,7 @@ public class Storage {
         try {
             File data = new File(path);
             Scanner sc = new Scanner(data);
-            String task = "";
+            String task;
             while (sc.hasNextLine()) {
                 task = sc.nextLine();
                 taskList.add(task);
