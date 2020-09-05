@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeStateManager;
 import duke.ui.Response;
 import duke.ui.Ui;
 import duke.Storage;
@@ -31,17 +32,23 @@ public class EventCommand extends Command {
      * @param tasks TaskList containing all tasks
      * @param ui Ui for formatting of message Strings to be displayed to user
      * @param storage Storage to retrieve and store Tasks entered by user
-     * @return Response object containing the feedback String to be displayed by the GUI
+     * @param dukeStateManager DukeStateManager to manage the current state of Duke
+     * @return Response object containing the formatted feedback String to be displayed by the GUI
      * @throws WrongDateFormatException if invalid date String provided
      */
     @Override
-    public Response execute(TaskList tasks, Ui ui, Storage storage) throws WrongDateFormatException, IOException {
+    public Response execute(TaskList tasks, Ui ui, Storage storage, DukeStateManager dukeStateManager)
+            throws WrongDateFormatException, IOException {
+        this.storeState(dukeStateManager, tasks, storage);
+
         LocalDateTime eventDateTime = DateParser.parseString(dateStr);
         Event event = new Event(description, eventDateTime);
+
         tasks.addTask(event);
         String message = ui.formatMessage(String.format("Okay, I've added the following event: \n %s",
                 event.toString()));
         storage.updateTasks(tasks.getListOfTasks());
+
         return new Response(false, message);
     }
 

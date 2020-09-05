@@ -38,7 +38,9 @@ public class TaskList implements Copiable {
      * @return a List object containing all Tasks
      */
     public List<Task> getListOfTasks() {
-        return List.copyOf(taskList);
+        List<Task> newList = new ArrayList<>();
+        newList.addAll(taskList);
+        return newList;
     }
 
     /**

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeStateManager;
 import duke.Storage;
 import duke.task.TaskList;
 import duke.task.Todo;
@@ -26,16 +27,21 @@ public class TodoCommand extends Command {
      * @param tasks TaskList containing all tasks
      * @param ui Ui for formatting of message Strings to be displayed to user
      * @param storage Storage to retrieve and store Tasks entered by user
-     * @return Response object containing the feedback String to be displayed by the GUI
+     * @param dukeStateManager DukeStateManager to manage the current state of Duke
+     * @return Response object containing the formatted feedback String to be displayed by the GUI
      * @throws IOException if there is an error with storing changes into storage file
      */
     @Override
-    public Response execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public Response execute(TaskList tasks, Ui ui, Storage storage, DukeStateManager dukeStateManager)
+            throws IOException {
+        this.storeState(dukeStateManager, tasks, storage);
         Todo todo = new Todo(description);
+
         tasks.addTask(todo);
         String message = ui.formatMessage(String.format("Okay! I've added the following task: \n %s",
                 todo.toString()));
         storage.updateTasks(tasks.getListOfTasks());
+
         return new Response(false, message);
     }
 

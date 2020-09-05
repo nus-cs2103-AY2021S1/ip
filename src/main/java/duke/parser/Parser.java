@@ -1,19 +1,10 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.ByeCommand;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
-import duke.command.FindCommand;
+import duke.command.*;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.UnknownCommandException;
 import duke.exceptions.WrongSyntaxException;
-import duke.exceptions.EmptyBodyException;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -25,8 +16,8 @@ import java.util.Set;
 public class Parser {
 
     private final Set<String> commands = new HashSet<>(Arrays.asList("bye", "list", "done", "delete", "deadline",
-                "event", "todo", "find"));
-    private final Set<String> singleArgCommands = new HashSet<>(Arrays.asList("bye", "list"));
+                "event", "todo", "find", "undo"));
+    private final Set<String> singleArgCommands = new HashSet<>(Arrays.asList("bye", "list", "undo"));
 
     /**
      * Parse a provided String and return the corresponding Command.
@@ -44,6 +35,8 @@ public class Parser {
             return new ByeCommand();
         case "list":
             return new ListCommand();
+        case "undo":
+            return new UndoCommand();
         case "done":
             int doneNumber = getTaskNumber(commandArgs);
             return new DoneCommand(doneNumber);

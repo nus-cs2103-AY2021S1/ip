@@ -102,7 +102,7 @@ public class Storage implements Copiable {
     /**
      * Replaces the storage file with the currentState of this Storage object
      */
-    public void updateStorage() {
+    public void updateStorageFile() {
         Path from = currentState.toPath();
         Path to = Paths.get(STORAGE_PATH);
         try {
@@ -110,7 +110,6 @@ public class Storage implements Copiable {
         } catch (IOException e) {
             System.out.println("Could not replace storage file");
         }
-
     }
 
     private Task parseStorageString(String storageString) throws WrongDateFormatException {

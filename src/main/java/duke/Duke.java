@@ -34,9 +34,7 @@ public class Duke {
             TaskList taskList = currentState.getTaskList();
             Storage store = currentState.getStorage();
             Command c = parser.parse(input);
-            Response r = c.execute(taskList, ui, store);
-            DukeState newState = new DukeState(taskList.getCopyOf(), store.getCopyOf());
-            dukeStateManager.addState(newState);
+            Response r = c.execute(taskList, ui, store, dukeStateManager);
             return r;
         } catch (DukeException e) {
             return new Response(false, e.getFriendlyMessage());

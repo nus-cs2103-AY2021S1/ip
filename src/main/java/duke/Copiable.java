@@ -5,5 +5,10 @@ package duke;
  */
 public interface Copiable {
 
+    /**
+     * Creates a copy of itself.
+     *
+     * @return an independent copy of the calling Copiable
+     */
     public Copiable getCopyOf();
 }

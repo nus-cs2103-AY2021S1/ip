@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeStateManager;
 import duke.task.NumberedTask;
 import duke.task.TaskList;
 import duke.ui.Response;
@@ -26,10 +27,11 @@ public class FindCommand extends Command {
      * @param tasks TaskList containing all tasks
      * @param ui Ui for formatting of message Strings to be displayed to user
      * @param storage Storage to retrieve and store Tasks entered by user
-     * @return Response object containing the String to be displayed to the user by the GUI
+     * @param dukeStateManager DukeStateManager to manage the current state of Duke
+     * @return Response object containing the formatted feedback String to be displayed by the GUI
      */
     @Override
-    public Response execute(TaskList tasks, Ui ui, Storage storage) {
+    public Response execute(TaskList tasks, Ui ui, Storage storage, DukeStateManager dukeStateManager) {
         List<NumberedTask> foundTasks = tasks.getMatchingTasks(searchString);
         String message = ui.foundTasksToString(foundTasks);
         return new Response(false, ui.formatMessage(message));

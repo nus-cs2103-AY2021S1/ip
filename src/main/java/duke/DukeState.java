@@ -2,6 +2,9 @@ package duke;
 
 import duke.task.TaskList;
 
+/**
+ * Represents the state of the Duke app at a point of time
+ */
 public class DukeState {
 
     private TaskList taskList;
