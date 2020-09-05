@@ -1,5 +1,6 @@
 package duke.storage;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,11 +16,11 @@ import java.util.ArrayList;
  * @since 2020-25-08.
  */
 public class Storage {
-    private String fileName;
+    private File file;
     private ArrayList<String> recordArrayLst;
 
     private Storage(String fileName) {
-        this.fileName = fileName;
+        this.file = new File(fileName);
         this.recordArrayLst = new ArrayList<>();
     }
 
@@ -33,7 +34,7 @@ public class Storage {
      * @throws IOException on input error.
      */
     public String saveToFile() throws IOException {
-        FileWriter fileWriter = new FileWriter(fileName);
+        FileWriter fileWriter = new FileWriter(file, true);
         for (String s : recordArrayLst) {
             fileWriter.write(s + "\n");
         }
