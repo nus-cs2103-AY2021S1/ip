@@ -4,6 +4,10 @@ public class DukeException extends Exception {
     public static final DukeException INVALID_COMMAND_EXCEPTION = new DukeException(
             "I'm sorry, but I don't know what that means :-(");
 
+    /** A DukeException thrown when a search query is empty. */
+    public static final DukeException INVALID_QUERY_EXCEPTION = new DukeException(
+            "I'm sorry, what was it you wanted me to find?");
+
     public static final DukeException INVALID_TASK_INDEX_EXCEPTION = new DukeException(
             "Sorry, that is not a valid task.");
 

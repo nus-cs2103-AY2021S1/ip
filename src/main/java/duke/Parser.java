@@ -12,6 +12,7 @@ import duke.command.ExitCommand;
 import duke.command.QueryCommand;
 import duke.command.EditCommand;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Parser {
@@ -26,6 +27,14 @@ public class Parser {
                 break;
             case "list":
                 command = new QueryCommand(CommandType.LIST);
+                break;
+            case "find":
+                try {
+                    String searchQuery = parsingScanner.next();
+                    command = new QueryCommand(CommandType.FIND, searchQuery);
+                } catch (NoSuchElementException e) {
+                    throw DukeException.INVALID_QUERY_EXCEPTION;
+                }
                 break;
             case "done":
                 if (parsingScanner.hasNext()) {
