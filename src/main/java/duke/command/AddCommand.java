@@ -1,16 +1,20 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 import duke.ui.Ui;
 import duke.util.Storage;
 
 /**
  * Class representing an add task command.
  */
-public class AddCommand extends Command{
-    CommandType taskType;
-    String taskContent;
+public class AddCommand extends Command {
+    private CommandType taskType;
+    private String taskContent;
 
     /**
      * Creates a new AddCommand.
@@ -31,12 +35,14 @@ public class AddCommand extends Command{
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assertArgumentsValid(tasks, ui, storage);
+
         if (taskContent == null) {
             throw new DukeException("You have to tell me what's your task!");
         }
-        
-        Task task = null;
-        
+
+        Task task;
+
         switch (taskType) {
         case TODO: {
             ToDo todo = new ToDo(taskContent);
@@ -68,11 +74,14 @@ public class AddCommand extends Command{
             tasks.addTask(event);
             storage.saveEvent(event);
             task = event;
+            break;
         }
+        default:
+            throw new DukeException("Task failed to be created.");
         }
         StringBuilder message = new StringBuilder("Alright! I've added this task:\n");
         message.append(task);
         message.append("\nNow you have ").append(tasks.size()).append(" task(s) in your list.");
         ui.botOutput(message);
-    } 
+    }
 }

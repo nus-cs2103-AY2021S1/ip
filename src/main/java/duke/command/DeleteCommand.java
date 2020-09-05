@@ -10,7 +10,7 @@ import duke.util.Storage;
  * Class representing a delete task command.
  */
 public class DeleteCommand extends Command {
-    
+
     private final int taskIdx;
 
     /**
@@ -35,10 +35,12 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assertArgumentsValid(tasks, ui, storage);
+
         if (taskIdx > tasks.size()) {
             throw new DukeException("No task with this ID!");
         }
-        
+
         Task task = tasks.getTask(taskIdx);
         tasks.deleteTask(task);
         storage.deleteTask(task);

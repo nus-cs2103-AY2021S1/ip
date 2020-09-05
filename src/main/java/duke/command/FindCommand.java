@@ -9,9 +9,9 @@ import duke.task.TaskList;
  * Class representing a find command.
  */
 public class FindCommand extends Command {
-    
+
     private String keyword;
-    
+
     /*
      * Creates a new FindCommand.
      * @param keyword Keyword for the search.
@@ -33,6 +33,8 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assertArgumentsValid(tasks, ui, storage);
+
         ui.botOutput(tasks.listTasksWithKeyword(keyword));
     }
 }
