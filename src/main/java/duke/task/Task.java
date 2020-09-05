@@ -67,6 +67,7 @@ public abstract class Task {
      * @return String containing the description of this task.
      */
     public String getDescription() {
+        assert !this.description.isBlank();
         return this.description;
     }
 

@@ -49,6 +49,7 @@ public class EventCommand extends Command {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
         try {
             String[] eventInfo = retrieveEventInfo();
+            assert !eventInfo[0].isBlank();
             String[] timeStamp = eventInfo[1].split(" ");
 
             LocalDate eventDate = LocalDate.parse(timeStamp[0], dateFormatter);
@@ -73,8 +74,6 @@ public class EventCommand extends Command {
      */
     public String[] retrieveEventInfo() throws InvalidTaskException {
         String[] eventInfo = new String[2];
-        String description;
-        String time;
         try {
             String[] taskInputArray = this.parsedCommand[1].split(" /at ");
             if (!this.parsedCommand[1].contains(" /at ") && !this.parsedCommand[1].endsWith("/at")) {
@@ -90,12 +89,9 @@ public class EventCommand extends Command {
             } else if (taskInputArray[0].isBlank()) {
                 String err = "Your event task is missing a description. The task cannot be created.";
                 throw new InvalidTaskException(err);
-            } else {
-                description = taskInputArray[0].trim();
-                time = taskInputArray[1].trim();
             }
-            eventInfo[0] = description;
-            eventInfo[1] = time;
+            eventInfo[0] = taskInputArray[0].trim();
+            eventInfo[1] = taskInputArray[1].trim();
             return eventInfo;
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "Your event task has missing arguments. The task cannot be created.";
