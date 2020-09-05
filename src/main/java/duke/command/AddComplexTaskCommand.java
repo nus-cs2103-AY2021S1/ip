@@ -41,11 +41,8 @@ public class AddComplexTaskCommand extends AddCommand {
      * @return String identifier of the Task.
      */
     private String identifier() {
-        if (taskType == TaskType.DEADLINE) {
-            return " /by";
-        } else {
-            return " /at";
-        }
+        assert (taskType == TaskType.DEADLINE || taskType == TaskType.EVENT);
+        return taskType == TaskType.DEADLINE ? " /by" : " /at";
     }
 
     /**
@@ -91,7 +88,8 @@ public class AddComplexTaskCommand extends AddCommand {
         String time = inputArr[1];
         if (description.isEmpty()) {
             throw new EmptyTaskException(taskType);
-        } else if (time.isBlank()) {
+        }
+        if (time.isBlank()) {
             throw new EmptyTimeException(taskType);
         }
     }

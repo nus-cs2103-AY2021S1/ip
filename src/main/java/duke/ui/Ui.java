@@ -20,6 +20,7 @@ public class Ui {
             sb.append(args[i]).append("\n");
         }
         sb.append(args[args.length - 1]);
+        assert (sb.length() > 0) : "String builder is empty!";
         return sb.toString();
     }
 
