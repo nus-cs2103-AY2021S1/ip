@@ -122,7 +122,6 @@ public class Parser {
     private Command prepareDelete(String args) {
         try {
             int targetIndex = Integer.parseInt(args.trim());
-            System.out.println("TARGET: " + targetIndex);
             return new DeleteCommand(targetIndex);
         } catch (NumberFormatException e) {
             return new IncorrectCommand(e.getMessage());

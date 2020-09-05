@@ -46,8 +46,6 @@ public class Sparrow {
             ui.replyToUser(result);
             isExit = c.getIsExit();
         }
-        sc.close();
-
     }
 
     public String getResponse(String userInput) {
