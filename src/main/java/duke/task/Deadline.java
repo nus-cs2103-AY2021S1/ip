@@ -83,13 +83,11 @@ public class Deadline extends TimedTask {
 
     @Override
     public boolean isHappeningBetween(LocalDate date1, LocalDate date2) {
-        super.isHappeningBetween(date1, date2);
-        return !byTime.isAfter(date2) && !byTime.isBefore(date1);
+        return isHappeningBetween(date1, date2, byTime);
     }
 
     @Override
     public boolean willHappenInDays(int n) {
-        super.willHappenInDays(n);
         return isHappeningBetween(LocalDate.now(), LocalDate.now().plusDays(n));
     }
 

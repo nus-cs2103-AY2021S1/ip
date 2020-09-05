@@ -40,12 +40,27 @@ public abstract class TimedTask extends Task {
         if (repeat == 0) {
             return date.isEqual(taskDate);
         } else {
-            boolean found = taskDate.isEqual(date);
-            while (taskDate.isBefore(date)) {
-                taskDate = taskDate.plusDays(repeat);
-                found = taskDate.isEqual(date);
+            LocalDate datePointer = taskDate;
+            boolean found = datePointer.isEqual(date);
+            while (!found && datePointer.isBefore(date)) {
+                datePointer = datePointer.plusDays(repeat);
+                found = datePointer.isEqual(date);
             }
             return found;
+        }
+    }
+
+    protected boolean isHappeningBetween(LocalDate date1, LocalDate date2, LocalDate taskDate) {
+        if (repeat == 0) {
+            return !taskDate.isAfter(date2) && !taskDate.isBefore(date1);
+        } else if (taskDate.isAfter(date2)) {
+            return false;
+        } else {
+            LocalDate datePointer = taskDate;
+            while (datePointer.isBefore(date1)) {
+                datePointer = datePointer.plusDays(repeat);
+            }
+            return datePointer.isBefore(date2);
         }
     }
 }

@@ -103,17 +103,12 @@ public class Event extends TimedTask {
 
     @Override
     public boolean isHappeningBetween(LocalDate date1, LocalDate date2) {
-        if (atTime != null) {
-            LocalDate date = atTime.toLocalDate();
-            return !date.isAfter(date2) && !date.isBefore(date1);
-        } else {
-            return false;
-        }
+        return atTime != null && isHappeningBetween(date1, date2, atTime.toLocalDate());
     }
 
     @Override
     public boolean willHappenInDays(int n) {
-        return atTime != null && isHappeningBetween(LocalDate.now(), LocalDate.now().plusDays(n));
+        return isHappeningBetween(LocalDate.now(), LocalDate.now().plusDays(n));
     }
 
     /**
