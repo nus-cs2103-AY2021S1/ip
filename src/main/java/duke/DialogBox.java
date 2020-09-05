@@ -34,7 +34,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.setFont(font);
-        dialog.setWrapText(true);
+
         displayPicture.setImage(img);
 
     }

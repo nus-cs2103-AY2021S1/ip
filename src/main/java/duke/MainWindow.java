@@ -46,8 +46,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        //Label label = new Label(input);
-        //label.setFont(Font.font("Courier New", 12));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage, userFont)
         );
