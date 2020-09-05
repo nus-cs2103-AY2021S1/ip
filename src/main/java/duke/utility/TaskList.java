@@ -23,6 +23,7 @@ public class TaskList {
      * @param tasks List of tasks
      */
     public TaskList(List<Task> tasks) {
+        assert tasks != null : "list to be assigned to the Task List can't be null!";
         this.tasks = tasks;
     }
 

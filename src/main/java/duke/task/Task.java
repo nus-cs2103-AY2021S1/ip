@@ -15,6 +15,7 @@ public abstract class Task {
      * @param taskName The task's name
      */
     public Task(String taskName) {
+        assert taskName != null : "Task name is null!";
         this.taskName = taskName;
         this.status = Status.ONGOING;
     }
