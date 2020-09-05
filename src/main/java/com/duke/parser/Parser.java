@@ -1,6 +1,8 @@
 package com.duke.parser;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.duke.exceptions.DukeException;
 import com.duke.tasks.Deadlines;
@@ -14,6 +16,10 @@ import com.duke.tasks.ToDos;
  */
 
 public class Parser {
+    private static final String PARSE_DATE_ERROR_MESSAGE = "Sorry! Format of date is wrong. "
+            + "Example input should be "
+            + "deadline return book /by 2/12/2019 1800. "
+            + "Please fix storage file before loading Duke again.";
 
     /**
      * Returns boolean on whether format is correct for a 'done' command.
@@ -72,23 +78,39 @@ public class Parser {
      * @param input Input command to check format.
      * @return boolean.
      */
-    public static boolean isCorrectInputFormat(String input) {
+    public static boolean isAddTask(String input) {
         String[] inputArr = input.split(" ", 2);
         if (inputArr.length == 1) {
             return false;
         }
-        //correct todo format
-        boolean isTodoBool = inputArr.length == 2 && inputArr[0].equals("todo");
+        boolean isTodoBool = isToDoFormat(inputArr);
+        boolean isDeadlineBool = isDeadlineFormat(inputArr);
+        boolean isEventBool = isEventFormat(inputArr);
+        return isTodoBool ^ isDeadlineBool ^ isEventBool;
+    }
 
+    private static boolean isToDoFormat(String[] inputArr) {
+        return inputArr.length == 2 && inputArr[0].equals("todo");
+    }
+
+    private static boolean isDeadlineFormat(String[] inputArr) {
         String taskWithDate = inputArr[1];
         String[] taskAndDateArr = taskWithDate.split(" /");
-        //correct deadline format
-        boolean isDeadlineBool = taskAndDateArr.length == 2 && inputArr[0].equals("deadline");
+        return taskAndDateArr.length == 2 && inputArr[0].equals("deadline");
+    }
 
-        //correct event format
-        boolean isEventBool = taskAndDateArr.length == 2 && inputArr[0].equals("event");
+    private static boolean isEventFormat(String[] inputArr) {
+        String taskWithDate = inputArr[1];
+        String[] taskAndDateArr = taskWithDate.split(" /");
+        return taskAndDateArr.length == 2 && inputArr[0].equals("event");
+    }
 
-        return isTodoBool || isDeadlineBool || isEventBool;
+    public static String getTaskType(String input) {
+        return input.substring(0, input.indexOf(" "));
+    }
+
+    public static String getTask(String input) {
+        return input.substring(input.indexOf(" ") + 1);
     }
 
     /**
@@ -104,25 +126,23 @@ public class Parser {
         String[] taskStringArr = taskString.split(" - ");
         String taskCode = taskStringArr[0];
         String isDoneStr = taskStringArr[1];
-        boolean isDone = isDoneStr.equals("1") ? true : false;
         String task = taskStringArr[2];
+        boolean isDone = isDoneStr.equals("1");
 
-        //if toDo item
+        assert taskCode.equals("T") ^ taskCode.equals("D") ^ taskCode.equals("E");
+
         if (taskCode.equals("T")) {
-            ToDos todo = new ToDos(task, isDone);
-            return todo;
-            //if deadline item
+            return new ToDos(task, isDone);
         } else if (taskCode.equals("D")) {
             String date = taskStringArr[3];
             date = parseDate(date);
-            Deadlines deadline = new Deadlines(task, date, isDone);
-            return deadline;
-            //if events item
-        } else {
+            return new Deadlines(task, date, isDone);
+        } else if (taskCode.equals("E")) {
             String date = taskStringArr[3];
             date = parseDate(date);
-            Events event = new Events(task, date, isDone);
-            return event;
+            return new Events(task, date, isDone);
+        } else {
+            throw new DukeException("Task is of invalid input format!");
         }
     }
 
@@ -138,45 +158,72 @@ public class Parser {
     public static String parseDate(String date) throws DukeException {
         //date input could be "at 2/12/2019 1800"
         //returns "2019-12-02 1800"
-        String errMessage = "Sorry! Format of date is wrong. "
-                + "Example input should be "
-                + "deadline return book /by 2/12/2019 1800. "
-                + "Please fix storage file before loading Duke again.";
-
         String[] strArr = date.split(" ");
         if (strArr.length != 3 && strArr.length != 2) {
-            throw new DukeException(errMessage);
+            throw new DukeException(PARSE_DATE_ERROR_MESSAGE);
         }
 
-        String[] dateArr = new String[0];
-        int dateIndex = -1;
-        int timeIndex = -1;
-        if (strArr.length == 2) {
-            dateArr = strArr[0].split("/");
-            dateIndex = 0;
-            timeIndex = 1;
-        } else if (strArr.length == 3) {
-            dateArr = strArr[1].split("/");
-            dateIndex = 1;
-            timeIndex = 2;
-        }
-
+        String[] dateArr = getDateArr(strArr);
+        int dateIndex = getDateIndex(strArr);
+        int timeIndex = getTimeIndex(strArr);
         if (dateArr.length != 3) {
-            throw new DukeException(errMessage);
+            throw new DukeException(PARSE_DATE_ERROR_MESSAGE);
         }
 
-        //if day < 10, add 0 in front
-        if (Integer.parseInt(dateArr[0]) < 10) {
-            dateArr[0] = "0" + dateArr[0];
-        }
         //transform 2/12/2019 to 2019-12-02
-        date = dateArr[2] + "-" + dateArr[1] + "-" + dateArr[0];
-        strArr[dateIndex] = date;
+        String finalDate = reformatDate(dateArr);
+        strArr[dateIndex] = finalDate;
 
-        String res = strArr[dateIndex] + " " + strArr[timeIndex];
-        return res;
+        return strArr[dateIndex] + " " + strArr[timeIndex];
     }
 
+    private static String reformatDate(String[] dateArr) {
+        return dateArr[2] + "-" + dateArr[1] + "-" + dateArr[0];
+    }
+
+    private static int getDateIndex(String[] strArr) {
+        int dateIndex = -1;
+        if (strArr.length == 2) {
+            dateIndex = 0;
+        } else if (strArr.length == 3) {
+            dateIndex = 1;
+        }
+        return dateIndex;
+    }
+
+    private static int getTimeIndex(String[] strArr) {
+        int timeIndex = -1;
+        if (strArr.length == 2) {
+            timeIndex = 1;
+        } else if (strArr.length == 3) {
+            timeIndex = 2;
+        }
+        return timeIndex;
+    }
+
+    private static String[] getDateArr(String[] strArr) throws DukeException {
+        try {
+            String[] dateArr = new String[0];
+            if (strArr.length == 2) {
+                dateArr = strArr[0].split("/");
+            } else if (strArr.length == 3) {
+                dateArr = strArr[1].split("/");
+            }
+
+            //first index in dateArr is day of date
+            dateArr[0] = parseDay(dateArr[0]);
+            return dateArr;
+        } catch (NumberFormatException numberFormatException) {
+            throw new DukeException(PARSE_DATE_ERROR_MESSAGE);
+        }
+    }
+
+    private static String parseDay(String day) {
+        if (Integer.parseInt(day) < 10) {
+            return "0" + day;
+        }
+        return day;
+    }
     /**
      * Parses a date into a format savable to Storage file.
      * Parses from LocalDate format to Storage file format.
@@ -215,8 +262,8 @@ public class Parser {
             task = task.substring(0, task.indexOf("/") - 1);
             String[] res = new String[]{task, date};
             return res;
-        } catch (DukeException e) {
-            throw e;
+        } catch (DukeException dukeException) {
+            throw dukeException;
         }
     }
 }
