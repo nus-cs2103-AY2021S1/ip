@@ -20,6 +20,7 @@ import duke.task.Todo;
  * A class that represents the storage of the data
  */
 public class Storage {
+    private static final String ERROR_WRITING_TO_STORAGE_MSG = "Couldn't save new task to storage!";
 
     private final Path filePath;
     private List<String> serialisedTasks;
@@ -147,7 +148,7 @@ public class Storage {
         try {
             this.writeToFile();
         } catch (IOException e) {
-            throw new CorruptedStorageException("Couldn't save new task to storage!");
+            throw new CorruptedStorageException(ERROR_WRITING_TO_STORAGE_MSG);
         }
     }
 
@@ -164,7 +165,7 @@ public class Storage {
         try {
             this.writeToFile();
         } catch (IOException e) {
-            throw new CorruptedStorageException("Couldn't save new task to storage!");
+            throw new CorruptedStorageException(ERROR_WRITING_TO_STORAGE_MSG);
         }
     }
 
@@ -180,7 +181,7 @@ public class Storage {
         try {
             this.writeToFile();
         } catch (IOException e) {
-            throw new CorruptedStorageException("Couldn't save new task to storage!");
+            throw new CorruptedStorageException(ERROR_WRITING_TO_STORAGE_MSG);
         }
     }
 }
