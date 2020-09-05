@@ -39,6 +39,7 @@ public class DoneCommand extends Command {
         message += "Nice! I've marked this task as done:\n";
         message += tasks.get(listNumber - 1).toString() + "\n";
         ui.setMessage(message);
+        tasks.sort();
     }
 
     /**

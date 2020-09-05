@@ -119,10 +119,10 @@ public class Storage {
             String timeDescription = "";
             if (typeOfTask.equals("Deadline")) {
                 Deadline dl = (Deadline) task;
-                timeDescription = dl.getDateTime();
+                timeDescription = dl.getDateTimeToString();
             } else if (typeOfTask.equals("Event")) {
                 Event event = (Event) task;
-                timeDescription = event.getDateTime();
+                timeDescription = event.getDateTimeToString();
             }
             csvWriter.append(typeOfTask);
             csvWriter.append(",");

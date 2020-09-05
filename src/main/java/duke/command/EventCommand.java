@@ -64,6 +64,7 @@ public class EventCommand extends Command {
         message += task.toString() + "\n";
         message += "Now you have " + tasks.size() + " tasks in the list.\n";
         ui.setMessage(message);
+        tasks.sort();
     }
 
     /**
