@@ -158,6 +158,7 @@ public class Parser {
     }
 
     private void generateAddTaskMessage(Task task) {
+        assert (task != null);
         reply.append("Got it, I have added this task:")
                 .append(System.lineSeparator())
                 .append(task)

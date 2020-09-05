@@ -24,6 +24,7 @@ public class TaskList {
 
     public TaskList(File file) {
         this.tasks = initTasks(file);
+        assert (tasks != null) : "Tasks not initialised";
     }
 
     private TaskList(List<Task> tasks) {
@@ -39,6 +40,7 @@ public class TaskList {
      * @return List of all Task objects saved in the file.
      */
     private static List<Task> initTasks(File file) {
+        assert file.exists() : "Save file should have been created";
         try {
             Scanner sc = new Scanner(file);
             List<Task> tasks = new ArrayList<>();
