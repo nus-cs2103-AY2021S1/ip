@@ -1,7 +1,1 @@
-<<<<<<< HEAD
-T | 0 | hii
-T | 0 | read books
-T | 0 | bye
-=======
-T | 0 | review
->>>>>>> master
+
