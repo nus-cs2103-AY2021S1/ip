@@ -45,23 +45,24 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
         try {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
+
             String[] eventInfo = retrieveEventInfo();
             String[] timeStamp = eventInfo[1].split(" ");
 
             LocalDate eventDate = LocalDate.parse(timeStamp[0], dateFormatter);
             LocalTime eventTime = LocalTime.parse(timeStamp[1], timeFormatter);
 
-            Task toAdd = new Event(eventInfo[0], eventDate, eventTime);
-            tasks.addTask(toAdd);
+            Task event = new Event(eventInfo[0], eventDate, eventTime);
+            tasks.addTask(event);
             storage.saveToFile(tasks);
-            return ui.showNewTask(toAdd, tasks.getListSize());
+            return ui.showNewTask(event, tasks.getListSize());
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException ex) {
-            String err = "The task date format is incorrect. \n"
+            String error = "The task date format is incorrect. \n"
                     + "Please input a valid date using the format: 'dd/mm/yyyy hh:mm'. For eg, 10/8/2020 18:00";
-            throw new InvalidFunctionException(err);
+            throw new InvalidFunctionException(error);
         }
     }
 
@@ -72,34 +73,28 @@ public class EventCommand extends Command {
      * @throws InvalidTaskException If the event information is invalid or is missing arguments.
      */
     public String[] retrieveEventInfo() throws InvalidTaskException {
-        String[] eventInfo = new String[2];
-        String description;
-        String time;
         try {
-            String[] taskInputArray = this.parsedCommand[1].split(" /at ");
+            String[] eventArguments = this.parsedCommand[1].split(" /at ");
             if (!this.parsedCommand[1].contains(" /at ") && !this.parsedCommand[1].endsWith("/at")) {
-                String err = "Your event task has an incorrect format. The task cannot be created.";
-                throw new InvalidTaskException(err);
+                String error = "Your event task has an incorrect format. The task cannot be created.";
+                throw new InvalidTaskException(error);
             } else if (this.parsedCommand[1].trim().equals("/at")) {
-                String err = "Your event task is missing a description and time stamp. "
+                String error = "Your event task is missing a description and time stamp. "
                         + "The task cannot be created.";
-                throw new InvalidTaskException(err);
+                throw new InvalidTaskException(error);
             } else if (this.parsedCommand[1].trim().endsWith("/at")) {
-                String err = "Your event task is missing a time stamp. The task cannot be created.";
-                throw new InvalidTaskException(err);
-            } else if (taskInputArray[0].isBlank()) {
-                String err = "Your event task is missing a description. The task cannot be created.";
-                throw new InvalidTaskException(err);
-            } else {
-                description = taskInputArray[0].trim();
-                time = taskInputArray[1].trim();
+                String error = "Your event task is missing a time stamp. The task cannot be created.";
+                throw new InvalidTaskException(error);
+            } else if (eventArguments[0].isBlank()) {
+                String error = "Your event task is missing a description. The task cannot be created.";
+                throw new InvalidTaskException(error);
             }
-            eventInfo[0] = description;
-            eventInfo[1] = time;
-            return eventInfo;
+            String description = eventArguments[0].trim();
+            String time = eventArguments[1].trim();
+            return new String[]{description, time};
         } catch (ArrayIndexOutOfBoundsException ex) {
-            String err = "Your event task has missing arguments. The task cannot be created.";
-            throw new InvalidTaskException(err);
+            String error = "Your event task has missing arguments. The task cannot be created.";
+            throw new InvalidTaskException(error);
         }
     }
 

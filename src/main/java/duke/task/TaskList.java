@@ -51,10 +51,10 @@ public class TaskList {
     /**
      * Adds a new task into the list of tasks.
      *
-     * @param toAdd Task to be added.
+     * @param task Task to be added.
      */
-    public void addTask(Task toAdd) {
-        this.tasks.add(toAdd);
+    public void addTask(Task task) {
+        this.tasks.add(task);
     }
 
     /**

@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -34,7 +35,7 @@ public class Storage {
      */
     public TaskList readFile() {
 
-        List<Task> taskList = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         try {
             File dataDirectory = new File(Storage.DIRECTORY);
             // make a data directory if the directory does not exist
@@ -44,59 +45,93 @@ public class Storage {
             // create an empty file to store the tasks if the file does not exist
             dataFile.createNewFile();
 
-            Scanner sc = new Scanner(dataFile);
-
-            while (sc.hasNextLine()) {
-                String[] taskData = sc.nextLine().split(" \\|");
+            Scanner scanner = new Scanner(dataFile);
+            while (scanner.hasNextLine()) {
+                String[] taskData = scanner.nextLine().split(" \\|");
                 if (taskData[0].equals("T")) {
-                    Task toAdd = new Todo(taskData[2].trim());
-                    if (taskData[1].equals(" 1")) {
-                        toAdd.markAsDone();
-                    }
-                    taskList.add(toAdd);
-                } else {
-                    String dateTime = taskData[3].trim();
-                    String[] dateTimeArray = dateTime.split(" ");
-                    LocalDate taskDate = LocalDate.parse(dateTimeArray[0]);
-                    LocalTime taskTime = LocalTime.parse(dateTimeArray[1]);
-                    if (taskData[0].equals("D")) {
-                        Task toAdd = new Deadline(taskData[2].trim(), taskDate, taskTime);
-                        if (taskData[1].equals(" 1")) {
-                            toAdd.markAsDone();
-                        }
-                        taskList.add(toAdd);
-                    } else if (taskData[0].equals("E")) {
-                        Task toAdd = new Event(taskData[2].trim(), taskDate, taskTime);
-                        if (taskData[1].equals(" 1")) {
-                            toAdd.markAsDone();
-                        }
-                        taskList.add(toAdd);
-                    }
+                    Task todo = retrieveTodo(taskData);
+                    tasks.add(todo);
+                } else if (taskData[0].equals("D")) {
+                    Task deadline = retrieveDeadline(taskData);
+                    tasks.add(deadline);
+                } else if (taskData[0].equals("E")) {
+                    Task event = retrieveEvent(taskData);
+                    tasks.add(event);
                 }
             }
-            sc.close();
+            scanner.close();
         } catch (IOException ex) {
-            String err = "Oh no! An error was encountered, the file data could not be read.";
-            System.out.println(err);
+            ex.printStackTrace();
         }
-        return new TaskList(taskList);
+        return new TaskList(tasks);
+    }
+
+    /**
+     * Retrieves the todo task from its string representation stored in the designated file.
+     *
+     * @param todoData String array containing the todo task details.
+     * @return Todo task stored in the designated file.
+     */
+    public Todo retrieveTodo(String[] todoData) {
+        Todo todo = new Todo(todoData[2].trim());
+        if (todoData[1].equals(" 1")) {
+            todo.markAsDone();
+        }
+        return todo;
+    }
+
+    /**
+     * Retrieves the deadline task from its string representation stored in the designated file.
+     *
+     * @param deadlineData String array containing the deadline task details.
+     * @return Deadline task stored in the designated file.
+     */
+    public Deadline retrieveDeadline(String[] deadlineData) {
+        String dateTime = deadlineData[3].trim();
+        String[] dateTimeArray = dateTime.split(" ");
+        LocalDate taskDate = LocalDate.parse(dateTimeArray[0]);
+        LocalTime taskTime = LocalTime.parse(dateTimeArray[1]);
+        Deadline deadline = new Deadline(deadlineData[2].trim(), taskDate, taskTime);
+        if (deadlineData[1].equals(" 1")) {
+            deadline.markAsDone();
+        }
+        return deadline;
+    }
+
+    /**
+     * Retrieves the event task from its string representation stored in the designated file.
+     *
+     * @param eventData String array containing the event task details.
+     * @return Event task stored in the designated file.
+     */
+    public Event retrieveEvent(String[] eventData) {
+        String dateTime = eventData[3].trim();
+        String[] dateTimeArray = dateTime.split(" ");
+        LocalDate taskDate = LocalDate.parse(dateTimeArray[0]);
+        LocalTime taskTime = LocalTime.parse(dateTimeArray[1]);
+        Event event = new Event(eventData[2].trim(), taskDate, taskTime);
+        if (eventData[1].equals(" 1")) {
+            event.markAsDone();
+        }
+        return event;
     }
 
     /**
      * Stores the list of tasks, in the TaskList object, into the designated file.
      *
-     * @param taskList TaskList object containing a list of tasks to be saved in the designated file.
+     * @param tasks TaskList object containing a list of tasks to be saved in the designated file.
      */
-    public void saveToFile(TaskList taskList) {
+    public void saveToFile(TaskList tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(Storage.FILE_LOCATION);
-            for (int i = 0; i < taskList.getListSize(); i++) {
-                fileWriter.write(taskList.getTask(i).convertTaskToFileString() + "\n");
+            for (int i = 0; i < tasks.getListSize(); i++) {
+                Task task = tasks.getTask(i);
+                fileWriter.write(task.convertTaskToFileString() + "\n");
             }
             fileWriter.close();
         } catch (IOException ex) {
-            String err = "Oh no! An error is encountered and the task file could not be updated.";
-            System.out.println(err);
+            String error = "The task file could not be updated.";
+            throw new DukeException(error);
         }
     }
 

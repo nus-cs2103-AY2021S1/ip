@@ -41,10 +41,10 @@ public class ToDoCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
         String todoInfo = this.retrieveTodoInfo();
-        Task toAdd = new Todo(todoInfo.trim());
-        tasks.addTask(toAdd);
+        Task todo = new Todo(todoInfo.trim());
+        tasks.addTask(todo);
         storage.saveToFile(tasks);
-        return ui.showNewTask(toAdd, tasks.getListSize());
+        return ui.showNewTask(todo, tasks.getListSize());
     }
 
     /**
@@ -54,13 +54,11 @@ public class ToDoCommand extends Command {
      * @throws InvalidTaskException If the todo description is missing.
      */
     public String retrieveTodoInfo() throws DukeException {
-        String todoInfo;
         if (this.parsedCommand.length == 0) {
-            String err = "Your todo task description is empty. The task cannot be created.";
-            throw new InvalidTaskException(err);
-        } else {
-            todoInfo = this.parsedCommand[1];
+            String error = "Your todo task description is empty. The task cannot be created.";
+            throw new InvalidTaskException(error);
         }
+        String todoInfo = this.parsedCommand[1];
         return todoInfo;
     }
 
