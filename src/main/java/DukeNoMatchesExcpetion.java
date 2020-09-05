@@ -11,5 +11,4 @@ public class DukeNoMatchesExcpetion extends DukeException {
     DukeNoMatchesExcpetion(String s) {
         super("OOPS!!! No matches found!");
     }
-
 }

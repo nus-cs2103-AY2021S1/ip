@@ -6,10 +6,14 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasklist, UI ui) throws DukeInvalidDoneNumException {
+    public String execute(TaskList tasklist, UI ui) throws DukeInvalidDoneNumException, DukeEmptyDoneNumException {
         String message = "";
         try {
-            int doneTask = Integer.parseInt(command.split(" ")[1]) - 1;
+            String[] splitMessage = command.split(" ");
+            if (splitMessage.length == 1) {
+                throw new DukeEmptyDoneNumException(command);
+            }
+            int doneTask = Integer.parseInt(splitMessage[1]) - 1;
             if (doneTask + 1 > tasklist.numOfTasks() || doneTask < 0) {
                 throw new DukeInvalidDoneNumException(command);
             }

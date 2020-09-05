@@ -1,4 +1,3 @@
-
 /**
  * Thrown to indicate that the user has put in an invalid done number.
  */
@@ -10,7 +9,6 @@ public class DukeInvalidDoneNumException extends DukeException {
      * @param s Represents the error message.
      */
     DukeInvalidDoneNumException(String s) {
-        super("OOPS!!! The invalid done number.");
+        super("OOPS!!! You have keyed in an invalid done number.");
     }
-
 }

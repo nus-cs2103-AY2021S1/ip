@@ -3,7 +3,6 @@
  */
 public class DukeDeleteException extends DukeException {
 
-
     /**
      * Constructs a DukeDeleteException with a relevant detail message.
      *

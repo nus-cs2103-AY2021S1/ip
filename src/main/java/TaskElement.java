@@ -13,5 +13,4 @@ public enum TaskElement {
     private TaskElement(String label) {
         this.label = label;
     }
-
 }

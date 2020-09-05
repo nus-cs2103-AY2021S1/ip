@@ -29,7 +29,6 @@ public class Task {
         return UI.printMarkAsDone(this);
     }
 
-
     /**
      * Generates the string format for saving.
      *
@@ -58,6 +57,5 @@ public class Task {
     public boolean containsKeyword(String substring) {
         return this.description.contains(substring);
     }
-
 }
 

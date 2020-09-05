@@ -6,20 +6,20 @@ import java.time.format.DateTimeParseException;
  * Class that makes a deadline reminder.
  */
 public class Deadline extends Task {
-    protected String by;
+    protected String descriptionAfterBy;
     protected LocalDateTime localDate;
 
     /**
      * Constructs a Deadline with a description and a due date.
      *
      * @param description The description of this deadline.
-     * @param by          The due date of this deadline.
+     * @param descriptionAfterBy          The due date of this deadline.
      * @throws DateTimeParseException If date is not in the right format.
      */
-    public Deadline(String description, String by) throws DateTimeParseException {
+    public Deadline(String description, String descriptionAfterBy) throws DateTimeParseException {
         super(description);
-        this.by = by;
-        this.localDate = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        this.descriptionAfterBy = descriptionAfterBy;
+        this.localDate = LocalDateTime.parse(descriptionAfterBy, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
     /**
@@ -29,9 +29,8 @@ public class Deadline extends Task {
      */
     @Override
     public String writeSaveFormat() {
-        return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, by);
+        return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, descriptionAfterBy);
     }
-
 
     /**
      * Constructs a Deadline with a description and a due date.

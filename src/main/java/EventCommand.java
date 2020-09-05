@@ -7,7 +7,6 @@ public class EventCommand extends Command {
         this.command = command;
     }
 
-
     @Override
     public String execute(TaskList tasklist, UI ui) throws DukeEmptyEventTimeException, DukeEmptyEventException,
             DukeTimeParseException {
@@ -33,7 +32,5 @@ public class EventCommand extends Command {
             throw new DukeTimeParseException("");
         }
         return message;
-
     }
-
 }

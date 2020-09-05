@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
-
 /**
  * Main class where Duke program is run.
  */
@@ -23,7 +22,6 @@ public class Duke {
             ui.printFormattedMessage("OOPS!!! File Loading error!");
         }
     }
-
 
     /**
      * Runs the duke program and will terminate upon input "bye"
@@ -65,31 +63,7 @@ public class Duke {
             } else {
                 throw new DukeUnknownInputException(input);
             }
-        } catch (DukeUnknownInputException e) {
-            message = e.getMessage();
-        } catch (DukeEmptyDeadlineException e) {
-            message = e.getMessage();
-        } catch (DukeInvalidDoneNumException e) {
-            message = e.getMessage();
-        } catch (DukeEmptyDeadlineTimeException e) {
-            message = e.getMessage();
-        } catch (DukeDeleteException e) {
-            message = e.getMessage();
-        } catch (DateTimeParseException e) {
-            message = e.getMessage();
-        } catch (DukeEmptyFindException e) {
-            message = e.getMessage();
-        } catch (DukeEmptyEventTimeException e) {
-            message = e.getMessage();
-        } catch (DukeEmptyEventException e) {
-            message = e.getMessage();
-        } catch (DukeEmptyToDoException e) {
-            message = e.getMessage();
-        } catch (DukeEmptyTaskListException e) {
-            message = e.getMessage();
-        } catch (DukeNoMatchesExcpetion e) {
-            message = e.getMessage();
-        } catch (DukeTimeParseException e) {
+        } catch (DukeException e) {
             message = e.getMessage();
         }
 

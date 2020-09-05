@@ -1,4 +1,3 @@
-
 /**
  * Thrown to indicate that the user has put in an invalid duke command.
  */

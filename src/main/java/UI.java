@@ -57,6 +57,4 @@ public class UI {
         }
         return message;
     }
-
-
 }
