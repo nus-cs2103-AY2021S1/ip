@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Represents a {@link Task} that happens on a particular date.
  */
 public class Event extends Task {
+    private static final String DATE_FORMAT = "MMMM d yyyy";
+
     /**
      * The date on which the Event is happening.
      */
@@ -64,6 +66,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern(DATE_FORMAT)) + ")";
     }
 }

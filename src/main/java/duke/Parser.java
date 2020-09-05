@@ -27,6 +27,33 @@ import duke.task.ToDo;
  * The Parser class parses and processes user input.
  */
 public class Parser {
+    public static final String INVALID_DATE_FORMAT_MESSAGE =
+            "☹ OOPS!!! Please enter a date in yyyy-mm-dd format.";
+    public static final String EVENT_EMPTY_DATE_MESSAGE =
+            "☹ OOPS!!! Please specify a date for the event.";
+    public static final String DEADLINE_EMPTY_DATE_MESSAGE =
+            "☹ OOPS!!! Please specify a due date for the deadline.";
+    public static final String SHOW_EMPTY_DATE_MESSAGE =
+            "☹ OOPS!!! The show command requires a date in yyyy-mm-dd.";
+    public static final String UNKNOWN_COMMAND_MESSAGE =
+            "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public static final String EMPTY_TASK_TYPE_MESSAGE =
+            "☹ OOPS!!! The type of a task cannot be empty.";
+    public static final String FIND_EMPTY_KEYWORDS_MESSAGE =
+            "☹ OOPS!!! The find command requires keyword.";
+    public static final String DELETE_EMPTY_INDEX_MESSAGE =
+            "☹ OOPS!!! The delete command requires the index of a task.";
+    public static final String DONE_EMPTY_INDEX_MESSAGE =
+            "☹ OOPS!!! The done command requires the index of a task.";
+    public static final String LIST_EXTRA_ARGUMENTS_MESSAGE =
+            "☹ OOPS!!! The list command does not take any additional argument(s).";
+    public static final String BYE_EXTRA_ARGUMENTS_MESSAGE =
+            "☹ OOPS!!! The bye command does not take any additional argument(s).";
+    public static final String PENDING_EXTRA_ARGUMENTS_MESSAGE =
+            "☹ OOPS!!! The pending command does not take any additional argument(s).";
+    public static final String COMPLETED_EXTRA_ARGUMENTS_MESSAGE =
+            "☹ OOPS!!! The completed command does not take any additional argument(s).";
+
     /**
      * Parses the given command based on different keywords.
      * Returns the appropriate {@link Command} to execute next.
@@ -53,29 +80,27 @@ public class Parser {
         } else if (fullCommand.equals(CommandType.COMPLETED.getType())) {
             return new CompletedCommand();
         } else if (fullCommand.equals(CommandType.SHOW.getType())) {
-            throw new InvalidArgumentException("☹ OOPS!!! The show command requires a date in yyyy-mm-dd.");
+            throw new InvalidArgumentException(SHOW_EMPTY_DATE_MESSAGE);
         } else if (fullCommand.equals(CommandType.FIND.getType())) {
-            throw new InvalidArgumentException("☹ OOPS!!! The find command requires keyword.");
+            throw new InvalidArgumentException(FIND_EMPTY_KEYWORDS_MESSAGE);
         } else if (fullCommand.equals(CommandType.DELETE.getType())) {
-            throw new InvalidCommandException("☹ OOPS!!! The delete command requires the index of a task.");
+            throw new InvalidCommandException(DELETE_EMPTY_INDEX_MESSAGE);
         } else if (fullCommand.equals(CommandType.DONE.getType())) {
-            throw new InvalidCommandException("☹ OOPS!!! The done command requires the index of a task.");
+            throw new InvalidCommandException(DONE_EMPTY_INDEX_MESSAGE);
         } else if (fullCommandArray[0].equals(CommandType.LIST.getType())) {
-            throw new InvalidArgumentException("☹ OOPS!!! The list command does not take any additional argument(s).");
+            throw new InvalidArgumentException(LIST_EXTRA_ARGUMENTS_MESSAGE);
         } else if (fullCommandArray[0].equals(CommandType.BYE.getType())) {
-            throw new InvalidArgumentException("☹ OOPS!!! The bye command does not take any additional argument(s).");
+            throw new InvalidArgumentException(BYE_EXTRA_ARGUMENTS_MESSAGE);
         } else if (fullCommandArray[0].equals(CommandType.PENDING.getType())) {
-            throw new InvalidArgumentException(
-                    "☹ OOPS!!! The pending command does not take any additional argument(s).");
+            throw new InvalidArgumentException(PENDING_EXTRA_ARGUMENTS_MESSAGE);
         } else if (fullCommandArray[0].equals(CommandType.COMPLETED.getType())) {
-            throw new InvalidArgumentException(
-                    "☹ OOPS!!! The completed command does not take any additional argument(s).");
+            throw new InvalidArgumentException(COMPLETED_EXTRA_ARGUMENTS_MESSAGE);
         } else if (fullCommandArray[0].equals(CommandType.SHOW.getType())) {
             try {
                 LocalDate date = LocalDate.parse(fullCommandArray[1]);
                 return new ShowCommand(date);
             } catch (DateTimeParseException e) {
-                throw new InvalidArgumentException("☹ OOPS!!! The show command requires a date in yyyy-mm-dd.");
+                throw new InvalidArgumentException(SHOW_EMPTY_DATE_MESSAGE);
             }
         } else if (fullCommandArray[0].equals(CommandType.DONE.getType())) {
             return new DoneCommand(Integer.parseInt(fullCommandArray[1]));
@@ -109,13 +134,13 @@ public class Parser {
                             + temp
                             + " cannot be empty.");
         } else if (temp.equals("")) {
-            throw new InvalidTaskTypeException("☹ OOPS!!! The type of a task cannot be empty.");
+            throw new InvalidTaskTypeException(EMPTY_TASK_TYPE_MESSAGE);
         }
         if (type == null
                 || (!type.equals(TaskType.TODO.getType())
                 && !type.equals(TaskType.DEADLINE.getType())
                 && !type.equals(TaskType.EVENT.getType()))) {
-            throw new InvalidTaskTypeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidTaskTypeException(UNKNOWN_COMMAND_MESSAGE);
         }
         String details = fullCommand.substring(type.length());
         if (type.equals(TaskType.TODO.getType())) {
@@ -124,26 +149,26 @@ public class Parser {
         } else if (type.equals(TaskType.DEADLINE.getType())) {
             String[] detailsArray = details.split("/by");
             if (detailsArray.length <= 1) {
-                throw new InvalidArgumentException("☹ OOPS!!! Please specify a due date for the deadline.");
+                throw new InvalidArgumentException(DEADLINE_EMPTY_DATE_MESSAGE);
             }
             LocalDate date;
             try {
                 date = LocalDate.parse(detailsArray[1].strip());
             } catch (DateTimeParseException e) {
-                throw new InvalidArgumentException("☹ OOPS!!! Please enter a date in yyyy-mm-dd format.");
+                throw new InvalidArgumentException(INVALID_DATE_FORMAT_MESSAGE);
             }
             Deadline d = new Deadline(detailsArray[0].strip(), date);
             return new AddCommand(d);
         } else {
             String[] detailsArray = details.split("/at");
             if (detailsArray.length <= 1) {
-                throw new InvalidArgumentException("☹ OOPS!!! Please specify a date for the event.");
+                throw new InvalidArgumentException(EVENT_EMPTY_DATE_MESSAGE);
             }
             LocalDate date;
             try {
                 date = LocalDate.parse(detailsArray[1].strip());
             } catch (DateTimeParseException e) {
-                throw new InvalidArgumentException("☹ OOPS!!! Please enter a date in yyyy-mm-dd format.");
+                throw new InvalidArgumentException(INVALID_DATE_FORMAT_MESSAGE);
             }
             Event e = new Event(detailsArray[0].strip(), date);
             return new AddCommand(e);

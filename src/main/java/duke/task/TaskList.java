@@ -12,6 +12,12 @@ import java.util.stream.Collectors;
  * It supports the basic operations of manipulating tasks and answering queries.
  */
 public class TaskList {
+    private static final String COMPLETED_TASKS_MESSAGE = "Here are the tasks that have been completed: \n";
+    private static final String ALL_TASKS_COMPLETED_MESSAGE = "Congratulations! You have completed all your tasks!";
+    private static final String MATCHING_TASKS_MESSAGE = "Here are the tasks containing keyword: ";
+    private static final String NO_TASKS_COMPLETED_MESSAGE = "☹ OOPS!!! You have not completed any task yet.";
+    private static final String NO_MATCHING_TASKS_MESSAGE = "There are no tasks containing keyword: ";
+    private static final String PENDING_TASKS_MESSAGE = "Here are the tasks that are pending: \n";
     private List<Task> tasks;
 
     /**
@@ -130,18 +136,7 @@ public class TaskList {
     public String showPendingTasks() {
         List<Task> pendingTasks = tasks.stream()
                 .filter(task -> !task.isTaskDone()).collect(Collectors.toList());
-        if (pendingTasks.size() == 0) {
-            return "Congratulations! You have completed all your tasks!";
-        }
-        StringBuilder output = new StringBuilder();
-        output.append("Here are the tasks that are pending: \n");
-
-        for (int i = 0; i < pendingTasks.size(); i++) {
-            output.append(String.format("%d. %s" + (i == pendingTasks.size() - 1 ? "" : "\n"),
-                    i + 1, pendingTasks.get(i)));
-        }
-
-        return output.toString();
+        return getFilteredTasksString(pendingTasks, ALL_TASKS_COMPLETED_MESSAGE, PENDING_TASKS_MESSAGE);
     }
 
     /**
@@ -151,15 +146,19 @@ public class TaskList {
      */
     public String showCompletedTasks() {
         List<Task> completedTasks = tasks.stream().filter(Task::isTaskDone).collect(Collectors.toList());
-        if (completedTasks.size() == 0) {
-            return "☹ OOPS!!! You have not completed any task yet.";
+        return getFilteredTasksString(completedTasks, NO_TASKS_COMPLETED_MESSAGE, COMPLETED_TASKS_MESSAGE);
+    }
+
+    private String getFilteredTasksString(List<Task> filteredTasks, String noTasksMessage, String returnMessage) {
+        if (filteredTasks.size() == 0) {
+            return noTasksMessage;
         }
         StringBuilder output = new StringBuilder();
-        output.append("Here are the tasks that have been completed: \n");
+        output.append(returnMessage);
 
-        for (int i = 0; i < completedTasks.size(); i++) {
-            output.append(String.format("%d. %s" + (i == completedTasks.size() - 1 ? "" : "\n"),
-                    i + 1, completedTasks.get(i)));
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            output.append(String.format("%d. %s" + (i == filteredTasks.size() - 1 ? "" : "\n"),
+                    i + 1, filteredTasks.get(i)));
         }
 
         return output.toString();
@@ -175,10 +174,10 @@ public class TaskList {
         List<Task> matchingTasks = tasks.stream()
                 .filter(task -> task.includeKeywords(keywords)).collect(Collectors.toList());
         if (matchingTasks.size() == 0) {
-            return "There are no tasks containing keyword: " + Arrays.toString(keywords);
+            return NO_MATCHING_TASKS_MESSAGE + Arrays.toString(keywords);
         }
         StringBuilder output = new StringBuilder();
-        output.append("Here are the tasks containing keyword: ").append(Arrays.toString(keywords)).append("\n");
+        output.append(MATCHING_TASKS_MESSAGE).append(Arrays.toString(keywords)).append("\n");
 
         for (int i = 0; i < matchingTasks.size(); i++) {
             output.append(String.format("%d. %s" + (i == matchingTasks.size() - 1 ? "" : "\n"),

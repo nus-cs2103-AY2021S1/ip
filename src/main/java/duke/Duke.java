@@ -11,16 +11,18 @@ import javafx.application.Platform;
  * The main class for the project. Initialises the Duke class and runs it.
  */
 public class Duke {
-    private TaskList tasks;
+    public static final String FILE_PATH = "data/data.txt";
+    public static final String GREETING = "Hello! This is Duke\nWhat can I do for you?";
+
     private final Storage storage;
-    private final String filePath = "data/data.txt";
+    private TaskList tasks;
 
     /**
      * Instantiates a Duke object.
      */
     public Duke() {
         tasks = new TaskList();
-        storage = new Storage(filePath);
+        storage = new Storage(FILE_PATH);
         try {
             tasks = new TaskList(storage.processStorage());
         } catch (IOException e) {
@@ -47,6 +49,6 @@ public class Duke {
     }
 
     public static String greetUser() {
-        return "Hello! This is Duke\n" + "What can I do for you?";
+        return GREETING;
     }
 }

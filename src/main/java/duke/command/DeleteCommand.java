@@ -10,6 +10,13 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 public class DeleteCommand extends Command {
+    private static final String ARGUMENT_EXCEPTION =
+            "☹ OOPS!!! The task index you give is not found.";
+    private static final String DELETE_MESSAGE =
+            "Noted. I've removed this task:\n";
+    private static final String STORAGE_EXCEPTION =
+            "☹ OOPS!!! Something went wrong when removing the task from storage.";
+
     /**
      * Index of {@link Task} to be deleted.
      */
@@ -35,9 +42,9 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             if (index > tasks.getSize()) {
-                throw new InvalidArgumentException("☹ OOPS!!! The task index you give is not found.");
+                throw new InvalidArgumentException(ARGUMENT_EXCEPTION);
             }
-            String output = "Noted. I've removed this task:\n";
+            String output = DELETE_MESSAGE;
             output += ("" + tasks.getTask(index) + "\n");
             output += ("Now you have " + (tasks.getSize() - 1) + " tasks in the list.");
             tasks.deleteTask(index);
@@ -46,7 +53,7 @@ public class DeleteCommand extends Command {
         } catch (InvalidArgumentException e) {
             return e.getMessage();
         } catch (IOException e) {
-            throw new StorageAccessException("☹ OOPS!!! Something went wrong when removing the task from storage.");
+            throw new StorageAccessException(STORAGE_EXCEPTION);
         }
     }
 }
