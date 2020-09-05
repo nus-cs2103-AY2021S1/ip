@@ -3,7 +3,6 @@ package duke.ui.visualui;
 import duke.Duke;
 import duke.tasklist.TaskList;
 import duke.ui.textui.Ui;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -18,7 +17,7 @@ import javafx.stage.Stage;
  */
 public class MainWindow extends AnchorPane {
     @FXML
-    private ScrollPane userScreen; 
+    private ScrollPane userScreen;
     @FXML
     private VBox dialogContainer;
     @FXML
@@ -27,9 +26,8 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
     @FXML
     private VBox reminderSection;
-    
     private Duke duke;
-    Stage stage;
+    private Stage stage;
     private Image stitch = new Image(this.getClass().getResourceAsStream("/images/stitch.png"));
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image welcomeStitch = new Image(this.getClass().getResourceAsStream("/images/welcomestitch.png"));
@@ -46,18 +44,7 @@ public class MainWindow extends AnchorPane {
         this.stage = stage;
         dialogContainer.getChildren().addAll(OpeningBox.getOpeningMessage(greet, welcomeStitch));
         userScreen.prefWidthProperty().bind(stage.widthProperty());
-        
-        TaskList taskList = duke.retrieveTaskList();
-        TaskList reminderList = new TaskList();
-        for (int i = 0; i < taskList.size(); i++) {
-            if (taskList.get(i).getReminderStatus() == 1) {
-                reminderList.add(taskList.get(i));
-            }
-        }
-        reminderList.sortByDueDate();
-        for (int i = 0; i < reminderList.size(); i++) {
-            reminderSection.getChildren().addAll(ReminderDisplay.getReminderDisplay(reminderList.get(i)));
-        }
+        loadReminderList(duke.retrieveTaskList());
     }
 
     /**
@@ -73,5 +60,24 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(stage, response, stitch)
         );
         userInput.clear();
+    }
+
+    /**
+     * Checks the list of task to see which is marked as reminders and display to the users these tasks in a sorted.
+     * order by time.
+     *
+     * @param taskList List of tasks.
+     */
+    public void loadReminderList(TaskList taskList) {
+        TaskList reminderList = new TaskList();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).getReminderStatus() == 1) {
+                reminderList.add(taskList.get(i));
+            }
+        }
+        reminderList.sortByDueDate();
+        for (int i = 0; i < reminderList.size(); i++) {
+            reminderSection.getChildren().addAll(ReminderDisplay.getReminderDisplay(reminderList.get(i)));
+        }
     }
 }

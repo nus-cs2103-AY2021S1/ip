@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Event extends Task {
-    private static final DateTimeFormatter FormatDateTime = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
+    private static final DateTimeFormatter Format_Date_Time = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
     /**
      * Creates a event object the containing details of the task.
      *
@@ -18,7 +18,6 @@ public class Event extends Task {
     public Event(String description, LocalDateTime eventTime) {
         super(description, 0, eventTime);
     }
-    
     /**
      * Creates a event object the containing details of the task.
      *
@@ -41,9 +40,8 @@ public class Event extends Task {
     public String formatStyling() {
         return String.format("event,%s%s", getDueDate(), super.formatStyling());
     }
-    
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + getDueDate().format(FormatDateTime) + ")";
+        return "[E]" + super.toString() + " (at: " + getDueDate().format(Format_Date_Time) + ")";
     }
 }

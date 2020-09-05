@@ -65,7 +65,7 @@ public class TaskList {
 
     /**
      * Compares the task priority for reminder *Todo takes the highest priority*.
-     * 
+     *
      * @param task1 First task
      * @param task2 Second task
      * @return returns true if task1 is more important in terms of type and deadline than task2
@@ -94,7 +94,6 @@ public class TaskList {
     public void sortByDueDate() {
         sort(this, 0, this.size() - 1);
     }
-    
     private void sort(TaskList taskList, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
@@ -103,25 +102,22 @@ public class TaskList {
             merge(taskList, left, mid, mid + 1, right);
         }
     }
-    
     private void merge(TaskList taskList, int left1, int right1, int left2, int right2) {
         int left = left1;
         int right = left2;
         int tempIdx = 0;
         Task[] temp = new Task[right2 - left1 + 1];
-        while(left <= right1 && right <= right2) {
-            if (compare(taskList.get(left),(taskList.get(right)))) { // implement comparator
+        while (left <= right1 && right <= right2) {
+            if (compare(taskList.get(left), (taskList.get(right)))) { // implement comparator
                 temp[tempIdx++] = taskList.get(left++);
             } else {
                 temp[tempIdx++] = taskList.get(right++);
             }
         }
-        
-        while(right <= right2) {
+        while (right <= right2) {
             temp[tempIdx++] = taskList.get(right++);
         }
-        
-        while(left <= right1) {
+        while (left <= right1) {
             temp[tempIdx++] = taskList.get(left++);
         }
         for (int i = 0; i < temp.length; i++) {

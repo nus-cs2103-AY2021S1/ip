@@ -23,6 +23,9 @@ import javafx.stage.Stage;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String USER_SPEECH_BUBBLE = "-fx-background-radius: 12 12 0 12;";
+    private static final String DUKE_SPEECH_BUBBLE = "-fx-background-radius: 12 12 12 0;";
+    private static final int IMAGE_SIZE = 80;
     @FXML
     private Label dialog;
     @FXML
@@ -42,14 +45,14 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.getStylesheets().add("view/DialogBox.css");
         if (user.equals("user")) {
-            speechBubble.setStyle("-fx-background-radius: 12 12 0 12;");
+            speechBubble.setStyle(USER_SPEECH_BUBBLE);
         } else {
-            speechBubble.setStyle("-fx-background-radius: 12 12 12 0;");
+            speechBubble.setStyle(DUKE_SPEECH_BUBBLE);
         }
         speechBubble.getStylesheets().add("view/DialogBox.css");
         Rectangle clip = new Rectangle(displayPicture.getFitWidth(), displayPicture.getFitHeight());
-        clip.setArcWidth(80);
-        clip.setArcHeight(80);
+        clip.setArcWidth(IMAGE_SIZE);
+        clip.setArcHeight(IMAGE_SIZE);
         displayPicture.setClip(clip);
         displayPicture.setImage(img);
 

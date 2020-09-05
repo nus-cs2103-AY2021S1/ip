@@ -23,7 +23,7 @@ public class ReminderCommand extends Command {
     }
 
     /**
-     * Remind the user about upcoming deadlines. 
+     * Remind the user about upcoming deadlines.
      *
      * @param command Representing the target task and its reminder option.
      * @param tasks Object contains the task list.

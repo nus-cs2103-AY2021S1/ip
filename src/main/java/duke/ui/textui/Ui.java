@@ -1,6 +1,5 @@
 package duke.ui.textui;
 
-import java.util.Scanner;
 import java.util.stream.Stream;
 
 /**
@@ -10,13 +9,6 @@ import java.util.stream.Stream;
 public class Ui {
     private static final String GOODBYE_MSG = "Bye ^.^, Hope to see you again soon!!!";
     private static final String HELLO_DUKE = "Welcome back";
-
-    private final Scanner sc;
-
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
-
     /**
      * Greets the user.
      */
@@ -47,13 +39,5 @@ public class Ui {
         StringBuffer finalMessage = new StringBuffer();
         Stream.of(messageList).forEachOrdered(message -> finalMessage.append(message).append("\n"));
         return finalMessage.toString();
-    }
-
-    /**
-     * Reads in the user's input
-     * @return String representing the user's input.
-     */
-    public String readCommand() {
-        return sc.nextLine();
     }
 }

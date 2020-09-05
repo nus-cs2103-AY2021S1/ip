@@ -22,10 +22,24 @@ import javafx.scene.text.TextFlow;
  */
 public class ReminderDisplay extends VBox {
     private static final DateTimeFormatter Format_Date_Time = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
-    private static final Insets INSETS = new Insets(10, 10, 0,10);
+    private static final Insets INSETS = new Insets(10, 10, 0, 10);
     private static final int TEXT_SPACE__HEIGHT = 40;
     private static final int TEXT_CENTERING = 7;
-    
+    private static final String TEXT_DATE = "Date: ";
+    private static final String TEXT_TIME = "Time: ";
+    private static final String TEXT_EMPTY = "-";
+    private static final String TEXT_COMPLETED = "Completed: ";
+    private static final String TEXT_COLON = ": ";
+    private static final String TEXT_COMMA = ", ";
+    private static final String TEXT_TICK = "\u2714";
+    private static final String TEXT_CROSS = "\u2718";
+    private static final String TODO_BACKGROUND = "-fx-background-color: #648DFC;";
+    private static final String EVENT_BACKGROUND = "-fx-background-color: #072AC8;";
+    private static final String DEADLINE_BACKGROUND = "-fx-background-color: #8FADFD";
+    private static final String DISPLAY_FONT = "Helvetica";
+    private static final int DISPLAY_SIZE = 12;
+    private static final String TITLE_COLOR = "#363f80";
+    private static final String DESCRIPTION_COLOR = "#8E8FB5";
     @FXML
     private TextFlow description;
     @FXML
@@ -56,31 +70,37 @@ public class ReminderDisplay extends VBox {
         if (task instanceof ToDo) {
             return new ReminderDisplay(description, isDone, "Todo");
         } else if (task instanceof Event) {
-            return new ReminderDisplay(description, isDone, "Event", 
+            return new ReminderDisplay(description, isDone, "Event",
                     task.getDueDate().format(Format_Date_Time));
         } else {
-            return new ReminderDisplay(description, isDone, "Deadline", 
+            return new ReminderDisplay(description, isDone, "Deadline",
                     task.getDueDate().format(Format_Date_Time));
-        } 
+        }
     }
-    
+
+    /**
+     * Creates a text array that constitute the text header of a specific color and text description of a
+     * specific color
+     *
+     * @param title
+     * @param description
+     * @return
+     */
     public Text[] createText(String title, String description) {
         Text text1 = new Text(title);
-        text1.setFill(Color.web("#363f80"));
-        text1.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
+        text1.setFill(Color.web(TITLE_COLOR));
+        text1.setFont(Font.font(DISPLAY_FONT, FontWeight.BOLD, DISPLAY_SIZE));
         Text text2 = new Text(description);
-        text2.setFill(Color.web("#8E8FB5"));
-        text2.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
+        text2.setFill(Color.web(DESCRIPTION_COLOR));
+        text2.setFont(Font.font(DISPLAY_FONT, FontWeight.BOLD, DISPLAY_SIZE));
         return new Text[]{text1, text2};
     }
-    
     public void setPadding() {
         time.setPadding(INSETS);
         date.setPadding(INSETS);
         description.setPadding(INSETS);
         isDone.setPadding(INSETS);
     }
-    
     public void setHeight() {
         description.setPrefHeight(TEXT_SPACE__HEIGHT);
         isDone.setPrefHeight(TEXT_SPACE__HEIGHT);
@@ -91,35 +111,38 @@ public class ReminderDisplay extends VBox {
         date.translateYProperty().setValue(TEXT_CENTERING);
         time.translateYProperty().setValue(TEXT_CENTERING);
     }
-    
     public void setBarColor(String task) {
         switch (task.toLowerCase()) {
         case Parser.KEYWORD_TODO:
-            bar.setStyle("-fx-background-color: #648DFC;");
+            bar.setStyle(TODO_BACKGROUND);
             break;
         case Parser.KEYWORD_EVENT:
-            bar.setStyle("-fx-background-color: #072AC8;");
+            bar.setStyle(EVENT_BACKGROUND);
             break;
         case Parser.KEYWORD_DEADLINE:
-            bar.setStyle("-fx-background-color: #8FADFD");
+            bar.setStyle(DEADLINE_BACKGROUND);
             break;
         default:
             return;
         }
     }
-    
+    /**
+     * Creates the display for the list of tasks that is set on reminder.
+     *
+     * @param taskDetails A list of details regarding the task.
+     */
     public void createReminderList(String ... taskDetails) {
         Text[] dateText;
         Text[] timeText;
-        Text[] descriptionText = createText(taskDetails[2] + ": ", taskDetails[0]);
-        Text[] isDoneText = createText("Completed: ", taskDetails[1] == "0" ? "\u2714" : "\u2718");
+        Text[] descriptionText = createText(taskDetails[2] + TEXT_COLON, taskDetails[0]);
+        Text[] isDoneText = createText(TEXT_COMPLETED, taskDetails[1].equals("0") ? TEXT_TICK : TEXT_CROSS);
         if (taskDetails.length == 4) {
-            String[] dateTimeArray = taskDetails[3].split(", ");
-            dateText = createText("Date: ", dateTimeArray[0] + ", " + dateTimeArray[1]);
-            timeText = createText("Time: ", dateTimeArray[2]);
+            String[] dateTimeArray = taskDetails[3].split(TEXT_COMMA);
+            dateText = createText(TEXT_DATE, dateTimeArray[0] + TEXT_COMMA + dateTimeArray[1]);
+            timeText = createText(TEXT_TIME, dateTimeArray[2]);
         } else {
-            dateText = createText("Date: ", "-");
-            timeText = createText("Time: ", "-");
+            dateText = createText(TEXT_DATE, TEXT_EMPTY);
+            timeText = createText(TEXT_TIME, TEXT_EMPTY);
         }
         setHeight();
         setPadding();

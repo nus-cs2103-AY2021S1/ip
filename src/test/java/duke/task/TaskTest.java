@@ -20,7 +20,7 @@ public class TaskTest {
 
     @Test
     public void formatStyling() {
-        String str = ",hello world,0\n";
+        String str = ",hello world,0,0\n";
         assertEquals(str, task.formatStyling());
     }
 }

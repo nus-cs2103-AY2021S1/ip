@@ -1,6 +1,5 @@
 package duke.task;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -12,11 +11,34 @@ public class Task {
     private static final String TASK_MARKED = "Nice! I've marked this task as done:";
     private static final String TASK_REMINDER_ON = "The reminder of this task %s, has been activated";
     private static final String TASK_REMINDER_OFF = "The reminder of this task %s, has been deactivated";
+    private static final String TICK = "\u2714";
+    private static final String CROSS = "\u2718";
     protected String description;
     protected boolean isDone;
     protected boolean isReminderOn;
     protected int priority;
     protected LocalDateTime dueDate;
+    /**
+     * Creates a task object the containing details of the task.
+     *
+     * @param description Details of the task.
+     */
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+        this.isReminderOn = false;
+    }
+    /**
+     * Creates a task object the containing details of the task.
+     *
+     * @param description Details of the task.
+     * @param isDone Boolean value representing whether a task is completed.
+     */
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+        this.isReminderOn = false;
+    }
     /**
      * Creates a task object the containing details of the task.
      *
@@ -29,7 +51,6 @@ public class Task {
         this.isReminderOn = false;
         this.priority = priority;
     }
-    
     /**
      * Creates a task object the containing details of the task.
      *
@@ -42,7 +63,6 @@ public class Task {
         this.description = description;
         this.priority = priority;
     }
-
     /**
      * Creates a task object the containing details of the task.
      *
@@ -74,16 +94,14 @@ public class Task {
         this.priority = priority;
         this.dueDate = dueDate;
     }
-    
     /**
      * Displays a cross if task is not done, a tick otherwise.
      *
      * @return Byte encoding strings of the symbols tick or X.
      */
     private String getStatusIcon() {
-        return (isDone ? "\u2714" : "\u2718");
+        return (isDone ? TICK : CROSS);
     }
-
     /**
      * Marks the task as completed.
      */
@@ -95,7 +113,6 @@ public class Task {
             return TASK_MARKED + "\n" + this.toString();
         }
     }
-
     /**
      * Set the status of reminder option.
      *
@@ -109,7 +126,6 @@ public class Task {
             return String.format(TASK_REMINDER_OFF, description);
         }
     }
-    
     /**
      * Returns a proper styling to be recorded into CSV.
      *
@@ -118,7 +134,6 @@ public class Task {
     public String formatStyling() {
         return String.format(",%s,%d,%d\n", description, getTaskStatus(), getReminderStatus());
     }
-
     /**
      * If a task has a reminder on, return 1 else 0.
      *
@@ -127,7 +142,6 @@ public class Task {
     public int getReminderStatus() {
         return isReminderOn ? 1 : 0;
     }
-    
     /**
      * If a task is completed, return 1 else 0.
      *
@@ -160,7 +174,6 @@ public class Task {
     public LocalDateTime getDueDate() {
         return dueDate;
     }
-    
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
