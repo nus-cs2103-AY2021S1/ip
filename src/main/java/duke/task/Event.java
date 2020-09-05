@@ -26,7 +26,7 @@ public class Event extends Task {
      *
      * @return A LocalDate which represents the duration of the event.
      */
-    public LocalDate getDuration() {
+    public LocalDate getAt() {
         return at;
     }
 
