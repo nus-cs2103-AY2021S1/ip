@@ -3,15 +3,12 @@ package main.java.farrell.duke;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.util.*;
 
 /**
  * Encapsulates behavior for interacting with the user.
@@ -118,6 +115,4 @@ public class UiManager extends Application {
     public void sendUserMessage(String text) {
         dialogContainer.getChildren().add(new UserDialog(text));
     }
-
-
 }
