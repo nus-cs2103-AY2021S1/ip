@@ -41,6 +41,7 @@ public class DeadlineCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task deadlineTask = new DeadlineTask(this.taskName, this.deadline);
         taskList.addTask(deadlineTask);
+        assert taskList.getSize() > 0;
         return ui.showAdd(deadlineTask, taskList.getSize());
     }
 

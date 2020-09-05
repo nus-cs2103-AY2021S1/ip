@@ -115,11 +115,15 @@ public class Parser {
                 String day = dateMatcher.group(1);
                 if (day.length() == 1) {
                     day = "0" + day;
+                } else {
+                    assert day.length() == 2;
                 }
                 String month = dateMatcher.group(2);
 
                 if (month.length() == 1) {
                     month = "0" + month;
+                } else {
+                    assert month.length() == 2;
                 }
                 String year = dateMatcher.group(3);
                 String time = dateMatcher.group(4);
