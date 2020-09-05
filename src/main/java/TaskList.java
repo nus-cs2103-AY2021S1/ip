@@ -72,6 +72,7 @@ public class TaskList {
                 index++;
             }
         }
+        assert (index >= 0): "Invalid number of tasks";
         return index;
     }
 
@@ -108,6 +109,7 @@ public class TaskList {
 
     }
     protected Task getTaskToUpdate(int taskNumber) {
+        assert (taskNumber >= 1): "invalid task number";
         return this.taskList.get(taskNumber - 1);
     }
 
