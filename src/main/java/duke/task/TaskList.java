@@ -46,6 +46,8 @@ public class TaskList {
      * @param index The index of the task to be marked as completed.
      */
     public void markDone(int index) {
+        // Asserts that the index should not be out of bound.
+        assert index <= tasks.size();
         tasks.get(index - 1).markAsDone();
     }
 
@@ -56,6 +58,8 @@ public class TaskList {
      * @return The task at the provided index.
      */
     public Task getTask(int index) {
+        // Asserts that the index should not be out of bound.
+        assert index <= tasks.size();
         return tasks.get(index - 1);
     }
 
@@ -100,6 +104,8 @@ public class TaskList {
      * @return A formatted String of all the tasks that happen on or due at the provided date.
      */
     public String showTasksOnDate(LocalDate date) {
+        // Asserts that a date object is passed in.
+        assert date != null;
         List<Task> filteredTasks = tasks.stream()
                 .filter(task -> task.getDate() != null && task.getDate().equals(date)).collect(Collectors.toList());
         if (filteredTasks.size() == 0) {
@@ -188,6 +194,8 @@ public class TaskList {
      * @param index The index of the {@link Task} to be deleted.
      */
     public void deleteTask(int index) {
+        // Asserts that the index should not be out of bound.
+        assert index <= tasks.size();
         tasks.remove(index - 1);
     }
 }
