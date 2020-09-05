@@ -1,4 +1,6 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.time.Month;
 import java.util.Scanner;
 
 /**
@@ -87,6 +89,43 @@ public class UI {
                 index++;
             }
             return str2 + allTask;
+        }
+    }
+
+    protected String findScheduleOnDate(TaskList tasks, LocalDate date) {
+        String str1 = "";
+        String str2 = "\nHere is your schedule for this day!\n";
+        int index = 1;
+        ArrayList<Task> allTasks = tasks.getTaskList();
+        for (Task task: allTasks) {
+            if (task.getTaskDeadline().equals(date)) {
+                str1 += index + "." + task + "\n";
+                index++;
+            }
+        }
+        if (str1.compareTo("") == 1) {
+            return "No work for today!";
+        } else {
+            return str2 + str1;
+        }
+    }
+
+    protected String findScheduleForMonth(TaskList tasks, Month month) {
+        String str1 = "";
+        String str2 = "\nHere is your schedule for ths Month!\n";
+        int index = 1;
+        ArrayList<Task> eventAndDeadlineTasks= tasks.filterTask();
+        for (Task eventOrDeadline : eventAndDeadlineTasks) {
+            Month scheduleMonth = eventOrDeadline.getTaskDeadline().getMonth();
+            if (scheduleMonth.equals(month)) {
+                str1 += index + "." + eventOrDeadline+ "\n";
+                index++;
+            }
+        }
+        if (str1.compareTo("") == 1) {
+            return "No work for today!";
+        } else {
+            return str2 + str1;
         }
     }
 }
