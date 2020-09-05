@@ -140,7 +140,7 @@ public class Storage {
      */
     private String iterateTasks(ArrayList<Task> taskList) {
         StringBuilder content = new StringBuilder();
-        for (Task task : taskList) {
+        taskList.forEach(task -> {
             if (task instanceof ToDo) {
                 String taskDetails = String.format("T | %d | %s", task.isTaskDone() ? 1 : 0, task.getDescription());
                 content.append(taskDetails).append("\n");
@@ -153,7 +153,7 @@ public class Storage {
                         task.isTaskDone() ? 1 : 0, task.getDescription(), ((Event) task).getAt());
                 content.append(taskDetails).append("\n");
             }
-        }
+        });
         return content.toString();
     }
 }
