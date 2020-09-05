@@ -10,16 +10,21 @@ import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import task.*;
+
+import java.io.IOException;
 
 public class Gui extends Application {
+    private Duke duke = new Duke("duke.txt");
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -28,22 +33,123 @@ public class Gui extends Application {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, user),
-                DialogBox.getUserDialog(dukeText, duke)
+                DialogBox.getUserDialog(userText, userImage),
+                DialogBox.getUserDialog(dukeText, dukeImage)
         );
         userInput.clear();
     }
 
+
+
+    private static final String FILEPATH = "duke.txt";
+    private Ui ui;
+    private Storage storage;
+    private TaskList taskList;
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            String[] command = Parser.parseCommand(input);
+
+            if(command[0].contentEquals("bye")){
+                return "Bye. Hope to see you again soon!";
+            }
+            else if(command[0].contentEquals("list")){
+                StringBuilder reply = new StringBuilder();
+
+                for(int i = 0; i < taskList.size(); i++){
+                    reply.append(i + 1).append(". ").append(taskList.get(i)).append("\n");
+                }
+                return reply.toString();
+            }
+            else if(command[0].contentEquals("remove")){
+                String indexStr = input.replaceAll("[^0-9]", "");
+                int index = Integer.parseInt(indexStr) - 1;
+                Task t = taskList.remove(index);
+                String reply ="Noted. I've removed this task:\n"
+                        +"\t" + t + "\n"
+                        + "\t" + "Now you have " + taskList.size() + " tasks in the list.";
+                return reply;
+            }
+            else if(command[0].contentEquals("done")){
+                String indexStr = input.replaceAll("[^0-9]", "");
+                int index = Integer.parseInt(indexStr) - 1;
+                taskList.get(index).setDone();
+                String reply = "Nice! I've marked this task as done:\n"
+                        + taskList.get(index);
+                return reply;
+            }
+            else if(command[0].contentEquals("find") ){
+                TaskList foundList = taskList.find(command[1]);
+                StringBuilder reply = new StringBuilder();
+
+                for(int i = 0; i < foundList.size(); i++){
+                    reply.append(i + 1).append(". ").append(foundList.get(i)).append("\n");
+                }
+                return reply.toString();
+            }
+            else if(command[0].contentEquals("todo") ){
+                try {
+                    Task newTask = new Todo(command[1]);
+                    taskList.add(newTask);
+                    String reply = "Got it. I've added this task:\n"
+                            + "\t" + newTask;
+                    return reply;
+                }
+                catch(EmptyStringException e){
+                    return "Todo cannot be empty.";
+                }
+            }
+            else if(command[0].contentEquals("deadline")){
+                try {
+                    Task newTask = new Deadline(command[1]);
+                    taskList.add(newTask);
+                    String reply = "Got it. I've added this task:\n"
+                            + "\t" + newTask;
+                    return reply;
+                }
+                catch(EmptyStringException e){
+                    return "Deadline cannot be empty.";
+                }
+            }
+            else if(command[0].startsWith("event")){
+                try {
+                    Task newTask = new Event(command[1]);
+                    taskList.add(newTask);
+                    String reply = "Got it. I've added this task:\n"
+                            + "\t" + newTask;
+                    return reply;
+                }
+                catch(EmptyStringException e){
+                    return "Event cannot be empty.";
+                }
+            }
+            else{
+                return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            }
+
+            //TODO SAVE THE TASKS!
+//            try {
+//                Storage.saveTasks(FILEPATH, taskList);
+//            }
+//            catch (IOException e){
+//                Ui.printException("Unable to save to file.");
+//            }
+        }
+        catch(Exception e){
+            return e.getMessage();
+        }
     }
 
+    public void startDuke() {
+        taskList = Storage.loadTasks(FILEPATH);
+    }
     @Override
     public void start(Stage stage) {
+
+        taskList = Storage.loadTasks(FILEPATH);
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -125,7 +231,6 @@ public class Gui extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
