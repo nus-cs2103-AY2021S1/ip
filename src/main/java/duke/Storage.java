@@ -53,11 +53,20 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Creates an ArrayList of Tasks using the contents of the file.
+     * @return An ArrayList of Tasks.
+     * @throws FileNotFoundException If the file does not exist in the FilePath.
+     */
     public ArrayList<Task> load() throws FileNotFoundException{
         String contentsInString = Storage.readFileContents(this.filePath);
         return createTaskList(contentsInString);
     }
 
+    /**
+     * Creates a file to so that we are able to save all the tasks in the TaskList.
+     * @throws IOException If the directory of the file being created doesn't exist.
+     */
     public void createFile() throws IOException {
         File file = new File(this.filePath);
         file.createNewFile();
@@ -70,8 +79,12 @@ public class Storage {
     }
 
     //TODO: Throw DukeException
+
+    /**
+     * Saves all the tasks in TaskList to a text file.
+     * @param taskList TaskList containing all the existing tasks entered by user.
+     */
     public void save(TaskList taskList) {
-        String filePath = "./data/data.txt";
         String dataToSave = "";
         for (int i = 0; i < taskList.size(); i++) {
             Task currentTask = taskList.get(i);
@@ -83,7 +96,7 @@ public class Storage {
             }
         }
         try {
-            writeToFile(filePath, dataToSave);
+            writeToFile(this.filePath, dataToSave);
         } catch (IOException e) {
             System.out.println("Error saving data to disk");
             e.printStackTrace();

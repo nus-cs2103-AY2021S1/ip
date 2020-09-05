@@ -22,10 +22,18 @@ public class Command {
         this.commandType = commandType;
     }
 
+    /**
+     * Getter method for commandType.
+     * @return Type of command in integer form.
+     */
     public int getCommandType() {
         return this.commandType;
     }
 
+    /**
+     * Getter method for additionalInfo.
+     * @return AdditionalInfo .
+     */
     public AdditionalInfo getAdditionalInfo() {
         return this.info;
     }
