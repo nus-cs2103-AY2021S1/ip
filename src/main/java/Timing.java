@@ -12,7 +12,6 @@ public class Timing {
      * @param timing Timing read from input text file.
      */
     public Timing(String timing) {
-        assert !timing.equals(""): "Date should not be empty!";
         this.timing = timing;
         int timeInt = Integer.parseInt(timing);
         this.minute = timeInt % 100;

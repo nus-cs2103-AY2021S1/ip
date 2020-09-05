@@ -22,8 +22,6 @@ public class DeleteCommand extends Command {
      * @throws DukeException if there is an issue.
      */
     public Response runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) throws DukeException {
-        assert arrayOfTasks != null || ui != null || storage != null :
-                "arrayOfTasks, Ui and Storage objects cannot be null";
         int arraySize = arrayOfTasks.taskArraySize();
         if (taskIndex < 0 || taskIndex >= arraySize) {
             throw new DukeException("The task number that you want to delete " + "(" + (taskIndex + 1) + ") "
