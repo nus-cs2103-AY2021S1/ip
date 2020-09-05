@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 /**
  * The Bot class is the main brain of the program. It takes in the user input via the Scanner object
@@ -75,10 +74,10 @@ public class Bot {
           return output;
         case ("delete"):
           Integer number = Integer.valueOf(parsedInfo[1]) - 1;
-          if (number <= 0) {//
+          if (number <= 0) {
             throw new invalidDeleteNumberException();
           }
-          assert number >= 1 : "Invalid Number"; //assert
+          assert number >= 1 : "Invalid Number";
           output = taskList.deleteListing(number, printer, storage);
           return output;
         case ("find"):
@@ -93,11 +92,11 @@ public class Bot {
         return printer.noDescriptionMessage(e.s);
       } catch (UndefinedException e) { //unknown commands
         return printer.undefinedExceptionMessage();
-      } catch (invalidDeleteNumberException e){
+      } catch (invalidDeleteNumberException e){ //invalid date number
         return printer.invalidDeleteNumberExceptionMessage();
-      } catch (java.lang.NumberFormatException e) {
+      } catch (java.lang.NumberFormatException e) { //parsed a date number that is not a number
         return printer.invalidDeleteNumberExceptionMessage();
-      } catch (AssertionError e) {
+      } catch (AssertionError e) { //assertion
         return printer.assertionErrorMessage();
       }
 
