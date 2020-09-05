@@ -94,9 +94,9 @@ public class TaskList {
     public String toString() {
         StringBuilder out = new StringBuilder();
 
-        for (int i = 0; i < this.tasks.size(); i++) {
-            out.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
-        }
+        this.tasks.forEach(task -> {
+            out.append(String.format("%d. %s\n", tasks.indexOf(task) + 1, task));
+        });
 
         return out.toString();
     }

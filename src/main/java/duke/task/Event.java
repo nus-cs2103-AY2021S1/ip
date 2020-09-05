@@ -94,7 +94,7 @@ public class Event extends Task {
     public String toString() {
         String modifier = (this.timeBy.isAfter(LocalTime.NOON)) ? "pm" : "am";
         return String.format("[%s]%s (by: %s, %s)",
-                Deadline.TASK_TYPE,
+                Event.TASK_TYPE,
                 super.toString(),
                 this.dateBy.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
                 this.timeBy.format(DateTimeFormatter.ofPattern("hh:mm")) + modifier);
