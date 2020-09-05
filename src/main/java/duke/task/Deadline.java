@@ -126,6 +126,19 @@ public class Deadline extends TimedTask {
     }
 
     @Override
+    public void markAsDone() throws InvalidCommandException {
+        if (repeat == 0) {
+            super.markAsDone();
+            lastDone = LocalDate.now();
+        } else if (!isDone) {
+            isDone = true;
+            lastDone = byTime;
+        } else {
+            lastDone = lastDone.plusDays(repeat);
+        }
+    }
+
+    @Override
     public String outputToFile() {
         return "D" + super.outputToFile() + Storage.splitter + byTime + Storage.splitter
                 + repeat + lastDoneMessage() + "\n";
