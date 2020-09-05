@@ -20,6 +20,7 @@ import tasks.ToDos;
 public class Parser {
     /**
      * Parse the user input and get the right response
+     *
      * @param input String inputted by the user
      * @param list A TaskList containing all the tasks inputted by the user
      * @return String containing the response from duke
@@ -91,6 +92,7 @@ public class Parser {
 
     /**
      * Removes the user requested task from the tasklist
+     *
      * @param request A string containing the integer value of the index.
      * @param list The tasklist object containing all the stored tasks.
      */
@@ -114,6 +116,7 @@ public class Parser {
 
     /**
      * Marks the task at the user requested index as done
+     *
      * @param request A String containing the integer value of the index
      * @param list The tasklist object containing all the stored tasks.
      */
@@ -138,6 +141,7 @@ public class Parser {
 
     /**
      * Checking if the index provided by the user is of the right size
+     *
      * @param n The index provided by the user
      * @param list The tasklist object containing all the stored tasks.
      * @throws InvalidNumberException
@@ -150,6 +154,7 @@ public class Parser {
 
     /**
      * Adds a deadline object with description and datetime into the tasklist provided
+     *
      * @param word The input provided by the user with the description of the deadline as well as the date and time
      * @param list The tasklist object containing all the stored tasks.
      * @return String containing the details of the deadline
@@ -195,6 +200,7 @@ public class Parser {
     }
     /**
      * Adds an event object with description and datetime into the tasklist provided
+     *
      * @param word The input provided by the user with the description of the event as well as the date and time
      * @param list The tasklist object containing all the stored tasks.
      * @return String object containing the details of the event
@@ -241,6 +247,7 @@ public class Parser {
 
     /**
      * Checks if a command provided by the user is valid
+     *
      * @param line The String input from the user
      * @throws UnknownCommandException
      */
@@ -260,6 +267,7 @@ public class Parser {
 
     /**
      * Finds a task based on a keyword
+     *
      * @param input A user-inputted string which is the keyword
      * @throws InvalidNumberException
      */
@@ -280,9 +288,10 @@ public class Parser {
 
     /**
      * Adds a toDo object containing the description provided to the list of tasks
+     *
      * @param work A String containing the description of the todo object that needs to be added
      * @param list The tasklist object containing all the stored tasks.
-     * @return
+     * @return A String containing information about the todo object
      */
     public static String getTodo(String work, TaskList list) throws EmptyTodoException {
         assert work.length() != 0 : "Empty strings are not allowed";

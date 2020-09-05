@@ -9,6 +9,7 @@ public class Event extends Task {
 
     /**
      * Instantiate an event with a date and description
+     *
      * @param work Description of the event
      * @param date Date of the event
      */

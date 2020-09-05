@@ -29,6 +29,7 @@ public class Storage {
     /**
      * Gets the filepath and uses this filepath to find the file which
      * initialize the tasklist.
+     *
      * @param filepath A string to enable us to access the file to get the tasklist
      */
     public Storage (String filepath) {
@@ -50,6 +51,7 @@ public class Storage {
     /**
      * Reads the file at the given path and parses the Strings inside into task objects
      * which can be added to the tasklist
+     *
      * @param line
      * @return A Task object which could be a todo, deadline or event
      */
@@ -78,6 +80,7 @@ public class Storage {
 
     /**
      * Get the list of tasks from the arraylist
+     *
      * @return TaskList containing the tasks
      */
     public static TaskList load() {
@@ -99,6 +102,7 @@ public class Storage {
     /**
      * Reads the file at the given path and parses the Strings inside into task objects
      * which can be added to the tasklist
+     *
      * @param line
      * @return A Task object which could be a todo, deadline or event
      */

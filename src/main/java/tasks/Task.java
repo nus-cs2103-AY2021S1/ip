@@ -13,6 +13,7 @@ public class Task {
 
     /**
      * Initializes a task with the user given description
+     *
      * @param work A String with the user description
      */
     public Task(String work) {
@@ -22,6 +23,7 @@ public class Task {
 
     /**
      * Initializes a task with user given description and datetime
+     *
      * @param work A String containing the user given description
      * @param date A LocalDateTime object containing the timing of the deadline/task
      */
@@ -39,6 +41,7 @@ public class Task {
 
     /**
      * Get a description of the task
+     *
      * @return String containing the description
      */
     public String description() {
@@ -64,6 +67,7 @@ public class Task {
 
     /**
      * Overrides the toString method
+     *
      * @return String representing the task
      */
     public String toString() {

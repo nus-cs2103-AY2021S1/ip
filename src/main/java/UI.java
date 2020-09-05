@@ -6,6 +6,7 @@ public class UI {
 
     /**
      * Initializes a UI object with the ability to scan for user input and store it
+     *
      * @param store
      */
     public UI(Storage store) {
@@ -24,6 +25,7 @@ public class UI {
 
     /**
      * Gets a response to an user input
+     *
      * @param input A String from the user
      * @return String containing the response
      */

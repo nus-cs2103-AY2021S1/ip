@@ -20,6 +20,7 @@ public class Duke {
 
     /**
      * Uses the filepath to intiialize the storage and hence, the UI object
+     *
      * @param filePath
      */
     public Duke(String filePath) {
@@ -39,6 +40,7 @@ public class Duke {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */

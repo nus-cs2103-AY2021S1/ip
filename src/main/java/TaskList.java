@@ -9,6 +9,7 @@ public class TaskList {
 
     /**
      * Initialized the arraylist with a list of tasks
+     *
      * @param tasks The list of tasks provided
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -47,6 +48,7 @@ public class TaskList {
 
     /**
      * The tasklist has to be converted into a String format that is easily parsable when the file is reopened
+     *
      * @return String in a format that easily parsable upon reopening the file
      */
     public String save() {
@@ -66,6 +68,7 @@ public class TaskList {
 
     /**
      * Overriding the default toString method
+     *
      * @return String which prints out the taskList
      */
     public String toString() {

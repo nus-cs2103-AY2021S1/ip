@@ -9,8 +9,9 @@ public class Deadline extends Task {
 
     /**
      * Constructor to instantiate a new deadline object
-     * @param work
-     * @param date
+     *
+     * @param work A String containing the description of the deadline
+     * @param date A datetime object parsed in from user input
      */
     public Deadline(String work, LocalDateTime date) {
         super(work, date);
@@ -19,6 +20,7 @@ public class Deadline extends Task {
 
     /**
      * Get the description of the deadline
+     *
      * @return String containg the description
      */
     public String description() {
