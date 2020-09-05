@@ -3,6 +3,7 @@ package seedu.duke;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Class that stores all the tasks in an arraylist.
@@ -23,6 +24,7 @@ public class TaskList {
     private static final String EVENT = "event";
     private static final String DEADLINE = "deadline";
     private static final String FIND = "find";
+    private static final String SORT_TASK_NAME = "SORTED BY TASK NAME\n";
 
     private static final String TODO_SYMBOL = "T";
     private static final String EVENT_SYMBOL = "E";
@@ -399,6 +401,39 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints a sorted list of tasks by chronological order. Todo tasks will be placed first.
+     */
+    public void sortByTasksForCli() {
+        ArrayList<String> taskListInString = new ArrayList<>();
+        for (Task task : taskLists) {
+            taskListInString.add(task.toString());
+        }
+        Collections.sort(taskListInString);
+        System.out.println(SORT_TASK_NAME);
+        for (String sortedTask : taskListInString) {
+            System.out.println(sortedTask + "\n");
+        }
+    }
+
+    /**
+     * Returns a string of sorted list of tasks by chronological order. Todo tasks will be placed first.
+     *
+     * @return string of tasks in chronological order.
+     */
+    public String sortByTasksForGui() {
+        ArrayList<String> taskListInString = new ArrayList<>();
+        for (Task task : taskLists) {
+            taskListInString.add(task.toString());
+        }
+        Collections.sort(taskListInString);
+        String toPrint = "";
+        toPrint += SORT_TASK_NAME;
+        for (String sortedTask : taskListInString) {
+            toPrint += sortedTask + "\n";
+        }
+        return toPrint;
+    }
     /**
      * Iterates through the arraylist of tasks and print it out.
      *
