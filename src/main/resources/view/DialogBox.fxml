@@ -5,13 +5,23 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="405.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="405.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" graphicTextGap="8.0" lineSpacing="1.0" text="hey tebby, delete my list please" wrapText="true">
+        <Label fx:id="dialog" graphicTextGap="8.0" lineSpacing="1.0" style="-fx-background-color: #42A6FE;" styleClass="textlabel" stylesheets="@../images/stylesheet.css" text="hey tebby, delete my life please" textFill="WHITE" wrapText="true">
          <HBox.margin>
             <Insets right="15.0" top="5.0" />
-         </HBox.margin></Label>
+         </HBox.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+         </padding>
+         <font>
+            <Font name="Candara Bold" size="12.0" />
+         </font></Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/user.PNG" />

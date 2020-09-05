@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="405.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="405.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -16,16 +16,19 @@
          <HBox.margin>
             <Insets />
          </HBox.margin></ImageView>
-        <Label fx:id="dialog" graphicTextGap="8.0" lineSpacing="1.0" text="Sorry I do not know what that means :(" wrapText="true">
+        <Label fx:id="dialog" graphicTextGap="8.0" lineSpacing="1.0" style="-fx-background-color: #42A6FE;" styleClass="textlabel" stylesheets="@../images/stylesheet.css" text="Sorry I do not know what that means :(" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="Consolas" size="12.0" />
+            <Font name="Candara Bold" size="12.0" />
          </font>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
          <HBox.margin>
             <Insets left="15.0" top="5.0" />
-         </HBox.margin></Label>
+         </HBox.margin>
+         <padding>
+            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+         </padding></Label>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />

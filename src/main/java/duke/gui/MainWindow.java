@@ -28,7 +28,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
-        System.out.println("========== [ Tebby started in GUI mode ] ==========");
+        System.out.println("=================== [ Tebby started in GUI mode ] ===================");
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
