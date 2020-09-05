@@ -49,6 +49,7 @@ public class AddCommand extends Command {
         default:
             break;
         }
+        assert newTask != null : "Task has not been created";
         storage.save(taskList);
         return "Alright! Adding one more item:\n" + newTask.toString();
     }
