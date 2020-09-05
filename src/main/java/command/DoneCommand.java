@@ -40,6 +40,7 @@ public class DoneCommand extends Command {
         }
 
         Task toChange = tasks.get(this.taskIndex);
+        assert toChange != null : "toChange should not be null";
         toChange.markAsDone();
         storage.overwrite(tasks);
 

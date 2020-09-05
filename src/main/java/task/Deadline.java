@@ -8,28 +8,28 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task {
 
-    private LocalDateTime by;
+    private LocalDateTime deadlineDate;
 
     /**
      * Creates a Deadline instance containing a description and a Date.
      *
      * @param description Description of Deadline to be done.
-     * @param by Date by which the Deadline should be done latest by.
+     * @param deadlineDate Date by which the Deadline should be done latest by.
      */
-    public Deadline(String description, LocalDateTime by) {
-        this(description, by, false);
+    public Deadline(String description, LocalDateTime deadlineDate) {
+        this(description, deadlineDate, false);
     }
 
     /**
      * Creates a Deadline instance containing a description and a Date.
      *
      * @param description Description of Deadline to be done.
-     * @param by Date by which the Deadline should be done latest by.
+     * @param deadlineDate Date by which the Deadline should be done latest by.
      * @param isDone True if the Deadline is already done otherwise false.
      */
-    public Deadline(String description, LocalDateTime by, boolean isDone) {
+    public Deadline(String description, LocalDateTime deadlineDate, boolean isDone) {
         super(description, isDone);
-        this.by = by;
+        this.deadlineDate = deadlineDate;
     }
 
     /**
@@ -38,8 +38,8 @@ public class Deadline extends Task {
      * @return String format of the Deadline for saving in Storage.
      */
     @Override
-    public String saveFormat() {
-        return "D" + "~" + super.saveFormat() + "~" + this.by;
+    public String getSavingFormat() {
+        return "D" + "~" + super.getSavingFormat() + "~" + this.deadlineDate;
     }
 
     /**
@@ -50,7 +50,8 @@ public class Deadline extends Task {
      */
     @Override
     public boolean hasSameDate(LocalDate theDate) {
-        return by.toLocalDate().equals(theDate);
+        assert theDate != null : "theDate should not be null";
+        return deadlineDate.toLocalDate().equals(theDate);
     }
 
     /**
@@ -60,6 +61,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(this.DATE_FORMAT) + ")";
+        return "[D]" + super.toString() + " (by: " + deadlineDate.format(DATE_FORMAT) + ")";
     }
 }

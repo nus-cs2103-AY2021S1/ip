@@ -43,7 +43,7 @@ public abstract class Task {
      * @return A tick if the task is already done otherwise A cross.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718"); // return tick or X symbols
     }
 
     /**
@@ -58,7 +58,7 @@ public abstract class Task {
      *
      * @return String format of the Task for saving in Storage.
      */
-    public String saveFormat() {
+    public String getSavingFormat() {
         return isDone + "~" + description;
     }
 

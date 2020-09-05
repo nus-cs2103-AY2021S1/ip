@@ -47,6 +47,7 @@ public class Storage {
             Scanner loadedData = new Scanner(taskFile);
             while (loadedData.hasNextLine()) {
                 String[] taskParts = loadedData.nextLine().split("~");
+                assert taskParts.length >= 3 : "Data format of database invalid";
                 String identifier = taskParts[0];
                 String desc = taskParts[2];
                 LocalDateTime timing = taskParts.length == 3 ? null : LocalDateTime.parse(taskParts[3]);
@@ -79,7 +80,7 @@ public class Storage {
     public void append(Task task) throws DukeException {
         try {
             FileWriter fw = new FileWriter(taskFile.getPath(), true);
-            fw.write(task.saveFormat() + System.lineSeparator());
+            fw.write(task.getSavingFormat() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
             throw new DukeException((e.getMessage()));
@@ -99,7 +100,7 @@ public class Storage {
 
             for (int i = 0; i < todos.size(); i++) {
                 todo = todos.get(i);
-                fw.write(todo.saveFormat() + System.lineSeparator());
+                fw.write(todo.getSavingFormat() + System.lineSeparator());
             }
 
             fw.close();

@@ -38,6 +38,7 @@ public class FindCommand extends Command {
 
         for (int i = 0; i < tasks.size(); i++) {
             task = tasks.get(i);
+            assert task != null : "task should not be null";
 
             if (task.hasKeyword(keyword)) {
                 if (isUnavailable) {

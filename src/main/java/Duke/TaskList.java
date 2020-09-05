@@ -16,7 +16,7 @@ public class TaskList {
      * @param tasks ArrayList of Tasks used for initiating TaskList.
      */
     public TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+        this.tasks = new ArrayList<>(tasks);
     }
 
     /**
@@ -32,6 +32,7 @@ public class TaskList {
      * @param task Task to be added into TaskList.
      */
     public void add(Task task) {
+        assert task != null : "task should not be null";
         this.tasks.add(task);
     }
 
@@ -41,6 +42,10 @@ public class TaskList {
      * @param idx Index of Task to be removed from TaskList.
      */
     public void remove(int idx) {
+        boolean isPositiveIndex = idx >= 0;
+        boolean isIndexWithinBounds = idx < this.tasks.size();
+        assert isPositiveIndex && isIndexWithinBounds : "Invalid index";
+
         this.tasks.remove(idx);
     }
 
@@ -51,6 +56,10 @@ public class TaskList {
      * @return Task retrieved from TaskList.
      */
     public Task get(int idx) {
+        boolean isPositiveIndex = idx >= 0;
+        boolean isIndexWithinBounds = idx < this.tasks.size();
+        assert isPositiveIndex && isIndexWithinBounds : "Invalid index";
+
         return tasks.get(idx);
     }
 
