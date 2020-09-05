@@ -3,13 +3,16 @@
  * Contains a task description and a time.
  */
 public class Todo extends Task {
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructor of Todo object.
      * @param description description of the task.
      */
     public Todo(String description) {
-        super(description);
+        this.description = description;
+        this.isDone = false;
     }
 
     /**
@@ -18,9 +21,23 @@ public class Todo extends Task {
      * @param isDone the status of the task.
      */
     public Todo(String description, boolean isDone) {
-        super(description, isDone);
+        this.description = description;
+        this.isDone = isDone;
     }
-
+    /**
+     * Returns the description of the todo task.
+     * @return the description of the todo task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+    /**
+     * Returns the icon for corresponding status of task.
+     * @return sign of tick or cross.
+     */
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
+    }
     /**
      * Marks the Todo task as done.
      * @return new Todo object with true for isDone.
@@ -35,9 +52,9 @@ public class Todo extends Task {
      * @return string in the format of data in data file.
      */
     @Override
-    public String stringify() {
+    public String toStringOfDatabase() {
         String number = isDone ? "1" : "0";
-        return "T | " + number + " | " + super.description;
+        return "T | " + number + " | " + this.description;
     }
 
     /**
@@ -46,6 +63,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + "[" + super.getStatusIcon() + "] " + super.toString();
+        return "[T]" + "[" + this.getStatusIcon() + "] " + this.description;
     }
 }

@@ -3,7 +3,9 @@
  * Contains a task description and a time.
  */
 public class Event extends Task {
-    protected String at;
+    private String description;
+    private boolean isDone;
+    private String at;
 
     /**
      * Constructor of Event object.
@@ -11,7 +13,8 @@ public class Event extends Task {
      * @param at the time of the event.
      */
     public Event(String description, String at) {
-        super(description);
+        this.description = description;
+        this.isDone = false;
         this.at = at;
     }
 
@@ -22,10 +25,26 @@ public class Event extends Task {
      * @param at the time of the event.
      */
     public Event(String description, boolean isDone, String at) {
-        super(description, isDone);
+        this.description = description;
+        this.isDone = isDone;
         this.at = at;
     }
 
+    /**
+     * Returns the description of the deadline task.
+     * @return the description of the deadline task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Returns the icon for corresponding status of task.
+     * @return sign of tick or cross.
+     */
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
+    }
     /**
      * Marks the event task as done.
      * @return new Deadline object with true for isDone.
@@ -39,10 +58,9 @@ public class Event extends Task {
      * Turns task object into a string to be saved in data file.
      * @return string in the format of data in data file.
      */
-    @Override
-    public String stringify() {
+    public String toStringOfDatabase() {
         String number = isDone ? "1" : "0";
-        return "E | " + number + " | " + super.description + " | " + this.at;
+        return "E | " + number + " | " + this.description + " | " + this.at;
     }
 
     /**
@@ -51,6 +69,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (at: " + at + ")";
+        return "[E]" + "[" + this.getStatusIcon() + "] " + this.description + " (at: " + at + ")";
     }
 }

@@ -54,7 +54,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter("./data/duke.txt");
             for (Task task : tasks.getTaskList()) {
-                fw.write(task.stringify() + "\n");
+                fw.write(task.toStringOfDatabase() + "\n");
             }
             fw.close();
         } catch (IOException e) {

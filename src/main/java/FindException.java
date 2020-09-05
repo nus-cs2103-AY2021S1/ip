@@ -1,8 +1,8 @@
 /**
- * A subclass of Exception.
+ * A subclass of DukeException.
  * Show error for find command.
  */
-public class FindException extends Exception {
+public class FindException extends DukeException {
     public FindException(String msg) {
         super(msg);
     }
