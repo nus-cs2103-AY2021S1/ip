@@ -14,11 +14,6 @@ public class Todo extends Task {
         super(description);
     }
 
-    @Override
-    protected LocalDate getTaskDeadline() {
-        return null;
-    }
-
     /**
      * Prints the Todo object.
      * @return string representation of a Todo.
