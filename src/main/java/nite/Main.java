@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import nite.ui.MainWindow;
@@ -29,6 +30,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setNite(nite);
             stage.setTitle("NITE");
+            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/cat_icon_no_bg.png")));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

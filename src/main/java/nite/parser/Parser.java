@@ -38,13 +38,13 @@ public class Parser {
         } else if (fullCommand.startsWith("done")) {
             try {
                 command = new DoneCommand(Integer.parseInt(fullCommand.split(" ")[1]));
-            } catch (NumberFormatException ex) {
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
                 throw new NiteException("Invalid format of task number!");
             }
         } else if (fullCommand.startsWith("delete")) {
             try {
                 command = new DeleteCommand(Integer.parseInt(fullCommand.split(" ")[1]));
-            } catch (NumberFormatException ex) {
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
                 throw new NiteException("Invalid format of task number!");
             }
         } else if (fullCommand.startsWith("todo")) {

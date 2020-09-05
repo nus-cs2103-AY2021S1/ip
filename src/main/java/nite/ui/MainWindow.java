@@ -3,7 +3,6 @@ package nite.ui;
 import java.io.File;
 
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -12,7 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-
 import nite.Nite;
 
 /**
@@ -30,8 +28,8 @@ public class MainWindow extends AnchorPane {
 
     private Nite nite;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/woman.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/blackcat.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/woman_circle.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/blackcat_circle.png"));
 
     /**
      * Initializes the user interface upon starting application.
@@ -50,7 +48,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(greeting, dukeImage)
         );
-        playSound("src/main/resources/audio/meow2.wav");
+        playSound("/audio/meow2.wav");
     }
 
     public void setNite(Nite nite) {
@@ -58,7 +56,8 @@ public class MainWindow extends AnchorPane {
     }
 
     private void playSound(String soundPath) {
-        Media sound = new Media(new File(soundPath).toURI().toString());
+//        Media sound = new Media(new File(soundPath).toURI().toString());
+        Media sound = new Media(this.getClass().getResource(soundPath).toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
     }
@@ -75,7 +74,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        playSound("src/main/resources/audio/meow.wav");
+        playSound("/audio/meow2.wav");
         userInput.clear();
     }
 }
