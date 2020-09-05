@@ -21,6 +21,7 @@ public class Parser {
      * @return an enum representing the command from the user.
      */
     public static Command parse(String fullCommand) throws DukeException {
+        assert fullCommand instanceof String : "Command must be a String";
         String[] splitString = fullCommand.split(" ");
         Commands c;
         try {
@@ -47,6 +48,5 @@ public class Parser {
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
-
     }
 }
