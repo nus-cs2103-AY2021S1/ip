@@ -2,11 +2,16 @@ package main.java.duke;
 
 import java.io.File;
 
+/**
+ * The central class in handling the various objects in the Duke application.
+ * application
+ */
 public class Duke {
 
-    private Storage storage;
+    /**
+     * Ui object for Duke to obtain user input and handle those inputs.
+     */
     private Ui ui;
-    private TaskList taskList;
 
     /**
      * An empty constructor, known as the init method for the method start to
@@ -21,9 +26,9 @@ public class Duke {
      * @param filepath the directory of the tasklist.txt file where tasks are stored
      */
     public Duke(String filepath) {
-        storage = new Storage(filepath);
+        Storage storage = new Storage(filepath);
         // task
-        taskList = new TaskList(storage.getStartupTaskList());
+        TaskList taskList = new TaskList(storage.getStartupTaskList());
         ui = new Ui(taskList, storage);
     }
 
@@ -40,7 +45,7 @@ public class Duke {
      * @return duke's response to be displayed in GUI.
      */
     protected String getResponse(String input) {
-        return "Duke responds:\n" + ui.getResultFromParser(input);
+        return "Duke responds:\n" + ui.getDukeResponse(input);
     }
 
     public static void main(String[] args) {

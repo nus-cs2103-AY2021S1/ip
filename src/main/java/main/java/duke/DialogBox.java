@@ -24,14 +24,13 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private Circle ivCrop = new Circle(50.0, 50.0, 50.0);
-
     /**
      * Private constructor which creates an isntance of DialogBox from a static context
      * @param text To be displayed.
      * @param img To be displayed.
      */
     private DialogBox(String text, Image img) {
+        Circle ivCrop = new Circle(50.0, 50.0, 50.0);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);

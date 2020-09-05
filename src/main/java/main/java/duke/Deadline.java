@@ -4,19 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     String taskType = "D";
     LocalDate localDate = null;
     LocalTime localTime = null;
-    String[] descSplitBySlash = null;
-    String[] descSplitBySpace = null;
 
     public Deadline(String description) {
         super(description);
     }
 
     public LocalTime stringToLocalTime(String hour, String minutes) {
-        LocalTime lc = LocalTime.parse(hour +":" + minutes);
+        LocalTime lc = LocalTime.parse(hour + ":" + minutes);
         return lc;
     }
 
@@ -26,14 +24,14 @@ public class Deadline extends Task{
      */
     public String formattedDescription() {
         // an array where index 0 contains "deadline return book"
-        // an array where index 1 contains "by 2019-10-15 1800"
-        descSplitBySlash = super.description.split("/", 2);
+        // and index 1 contains "by 2019-10-15 1800"
+        String[] descSplitBySlash = super.description.split("/", 2);
         if (descSplitBySlash.length > 1) {
             // description came from user input
             // an array where index 0 contains "by"
             // index 1 contains date
             // index 2 contains time
-            descSplitBySpace = descSplitBySlash[1].split(" ", 3);
+            String[] descSplitBySpace = descSplitBySlash[1].split(" ", 3);
             localDate = LocalDate.parse(descSplitBySpace[1]);
             String timeString = descSplitBySpace[2];
             localTime = stringToLocalTime(timeString.substring(0, timeString.length() - 2),
