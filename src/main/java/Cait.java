@@ -54,6 +54,17 @@ public class Cait {
         }
     }
 
+    protected String printLine() {
+        return "\n*********************************\n";
+    }
+
+    protected String getResponse(String input) {
+        String result = printLine();
+        result += parser.manageTask(input);
+        result += printLine();
+        return result;
+    }
+
     /**
      * Creates a new Cait object and starts running.
      */
@@ -61,14 +72,4 @@ public class Cait {
         new Cait("cait_data.txt").run();
     }
 
-    public String addLine() {
-        return "\n*********************************\n";
-    }
-
-    protected String getResponse(String input) {
-        String result = addLine();
-        result += parser.manageTask(input);
-        result += addLine();
-        return result;
-    }
 }

@@ -30,14 +30,6 @@ public class Event extends Task {
     }
 
     /**
-     * Gets the date of the event in the format mmm d yyyy
-     * @return the date of the event in the format mmm d yyyy
-     */
-    public String getAt() {
-        return this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-    }
-
-    /**
      * Overriden toString method for event class
      * @return the string representation for event
      */

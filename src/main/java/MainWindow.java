@@ -26,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image caitImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialize the main window.
+     */
     @FXML
     public void initialize() {
         DialogBox greeting = DialogBox.getCaitDialog(MainWindow.showGreeting(), caitImage);

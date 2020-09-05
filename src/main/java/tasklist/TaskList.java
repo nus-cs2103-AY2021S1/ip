@@ -86,6 +86,7 @@ public class TaskList {
      * @param command the user's input
      */
     public void setDoneList(String command) {
+        //exceptions are already caught in handleDone() method in Parser class
         try {
             int index = parseInt(command.split(" ")[1]);
             Task doneTask = tasks.get(index - 1);
@@ -104,6 +105,7 @@ public class TaskList {
      * @param command the user's input
      */
     public void deleteList(String command) {
+        //exceptions are already caught in handleDelete() method in Parser class
         try {
             int index = parseInt(command.split(" ")[1]);
             tasks.remove(index - 1);
