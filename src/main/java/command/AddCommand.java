@@ -24,19 +24,20 @@ public class AddCommand extends Command {
     /**
      * Adds the task into the TaskList.
      *
-     * @param tasks The TaskList which accepts the task.
+     * @param mainTasks The TaskList which stores unarchived tasks.
+     * @param archivedTasks The TaskList which stores archived tasks.
      * @param storage The Storage which will record the new task into the location specified in its path.
      * @throws DukeException Relays exception possibly thrown by storage when storing new task.
      * @return The output to be displayed to the user.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) throws DukeException {
-        storage.append(this.newTask);
-        tasks.add(this.newTask);
+    public String execute(TaskList mainTasks, TaskList archivedTasks, Storage storage) throws DukeException {
+        storage.append(this.newTask, false);
+        mainTasks.add(this.newTask);
 
         return "\t Got it. I've added this task:\n"
                 + "\t   " + newTask + "\n"
-                + "\t Now you have " + tasks.size() + " tasks in the list.\n";
+                + "\t Now you have " + mainTasks.size() + " tasks in the list.\n";
     }
 
     /**

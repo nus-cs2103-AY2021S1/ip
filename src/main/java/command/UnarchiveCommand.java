@@ -5,55 +5,55 @@ import duke.TaskList;
 import exception.DukeException;
 import task.Task;
 
-
-/**
- * Represents a DeleteCommand for deleting existing tasks.
- */
-public class DeleteCommand extends Command {
+public class UnarchiveCommand extends Command {
     private int taskIndex;
 
     /**
-     * Creates an instance of a DeleteCommand.
+     * Creates an instance of a UnarchiveCommand.
      *
-     * @param taskIndex The index of the task to delete.
+     * @param taskIndex The index of the task to unarchive.
      */
-    public DeleteCommand(int taskIndex) {
+    public UnarchiveCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
     /**
-     * Deletes the task at the specified index from the TaskList.
+     * Unarchives the task at the specified index from the archivedTasks TaskList.
      *
      * @param mainTasks The TaskList which stores unarchived tasks.
      * @param archivedTasks The TaskList which stores archived tasks.
-     * @param storage The Storage which will delete the task at the location specified in its path.
+     * @param storage The Storage which will unarchive the task at the location specified in its path.
      * @throws DukeException Thrown when task index invalid or relayed from Storage when removing task.
      * @return The output to be displayed to the user.
      */
     @Override
     public String execute(TaskList mainTasks, TaskList archivedTasks, Storage storage) throws DukeException {
         boolean hasNegativeIndex = this.taskIndex < 0;
-        boolean hasIndexOutOfBounds = this.taskIndex > mainTasks.size() - 1;
+        boolean hasIndexOutOfBounds = this.taskIndex > archivedTasks.size() - 1;
         boolean hasInvalidIndex = hasNegativeIndex || hasIndexOutOfBounds;
 
         if (hasInvalidIndex) {
             throw new DukeException("\tThere is no such task.");
         }
 
-        Task toDelete = mainTasks.get(this.taskIndex);
-        assert toDelete != null : "toDelete should not be null";
-        mainTasks.remove(this.taskIndex);
+        Task toUnarchive = archivedTasks.get(this.taskIndex);
+        assert toUnarchive != null : "toUnarchive should not be null";
+
+        archivedTasks.remove(this.taskIndex);
+        storage.overwrite(archivedTasks, true);
+
+        mainTasks.add(toUnarchive);
         storage.overwrite(mainTasks, false);
 
-        return "\t Noted. I've removed this task:\n"
-                + "\t   " + toDelete + "\n"
+        return "\t Noted. I've unarchived this task:\n"
+                + "\t   " + toUnarchive + "\n"
                 + "\t Now you have " + mainTasks.size() + " tasks in the list.\n";
     }
 
     /**
      * Indicates whether the program should exit after executing this Command.
      *
-     * @return False since the program should still go on after removing a task.
+     * @return False since the program should still go on after unarchiving a task.
      */
     @Override
     public boolean isExit() {

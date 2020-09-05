@@ -23,12 +23,13 @@ public class FindCommand extends Command {
     /**
      * Finds the tasks which have the specified keyword in their description and then proceeds to list them.
      *
-     * @param tasks The TaskList which contains all the tasks.
+     * @param mainTasks The TaskList which stores unarchived tasks.
+     * @param archivedTasks The TaskList which stores archived tasks.
      * @param storage The Storage which will record any changes into the file in its path.
      * @return The output to be displayed to the user.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) throws DukeException {
+    public String execute(TaskList mainTasks, TaskList archivedTasks, Storage storage) throws DukeException {
         StringBuilder output = new StringBuilder("\t Here are the tasks containing the keyword ")
                 .append(String.format("\"%s\"", keyword)).append(":\n");
 
@@ -36,8 +37,8 @@ public class FindCommand extends Command {
         boolean isUnavailable = true;
         Task task;
 
-        for (int i = 0; i < tasks.size(); i++) {
-            task = tasks.get(i);
+        for (int i = 0; i < mainTasks.size(); i++) {
+            task = mainTasks.get(i);
             assert task != null : "task should not be null";
 
             if (task.hasKeyword(keyword)) {

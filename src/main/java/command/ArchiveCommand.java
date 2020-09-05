@@ -5,29 +5,25 @@ import duke.TaskList;
 import exception.DukeException;
 import task.Task;
 
-
-/**
- * Represents a DoneCommand for marking existing tasks as done.
- */
-public class DoneCommand extends Command {
+public class ArchiveCommand extends Command {
     private int taskIndex;
 
     /**
-     * Creates an instance of a DoneCommand.
+     * Creates an instance of a ArchiveCommand.
      *
-     * @param taskIndex The index of the task to mark as done.
+     * @param taskIndex The index of the task to archive.
      */
-    public DoneCommand(int taskIndex) {
+    public ArchiveCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
     /**
-     * Marks the task at the specified index in the TaskList as done.
+     * Archives the task at the specified index from the unarchivedTasks TaskList.
      *
      * @param mainTasks The TaskList which stores unarchived tasks.
      * @param archivedTasks The TaskList which stores archived tasks.
-     * @param storage The Storage which will update the task at the location specified in its path.
-     * @throws DukeException Thrown when task index invalid or relayed from Storage when updating task.
+     * @param storage The Storage which will archive the task at the location specified in its path.
+     * @throws DukeException Thrown when task index invalid or relayed from Storage when removing task.
      * @return The output to be displayed to the user.
      */
     @Override
@@ -40,19 +36,24 @@ public class DoneCommand extends Command {
             throw new DukeException("\tThere is no such task.");
         }
 
-        Task toChange = mainTasks.get(this.taskIndex);
-        assert toChange != null : "toChange should not be null";
-        toChange.markAsDone();
+        Task toArchive = mainTasks.get(this.taskIndex);
+        assert toArchive != null : "toDelete should not be null";
+
+        mainTasks.remove(this.taskIndex);
         storage.overwrite(mainTasks, false);
 
-        return "\t Nice! I've marked this task as done:\n"
-                + "\t  " + toChange + "\n";
+        archivedTasks.add(toArchive);
+        storage.overwrite(archivedTasks, true);
+
+        return "\t Noted. I've archived this task:\n"
+                + "\t   " + toArchive + "\n"
+                + "\t Now you have " + mainTasks.size() + " tasks in the list.\n";
     }
 
     /**
      * Indicates whether the program should exit after executing this Command.
      *
-     * @return False since the program should still go on after marking a task as done.
+     * @return False since the program should still go on after archiving a task.
      */
     @Override
     public boolean isExit() {

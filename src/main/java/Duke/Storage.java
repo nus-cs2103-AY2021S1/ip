@@ -17,15 +17,17 @@ import task.Todo;
  * Represents a Storage where the tasks of the user are stored in.
  */
 public class Storage {
-    private File taskFile;
+    private File mainTasksFile;
+    private File archivedTasksFile;
 
     /**
      * Creates a Storage instance containing the filepath leading to it.
      *
-     * @param filepath Filepath leading to Storage.
+     * @param unarchivedTasksFilePath Filepath leading to Storage.
      */
-    public Storage(String filepath) {
-        this.taskFile = new File(filepath);
+    public Storage(String unarchivedTasksFilePath, String archivedTasksFilePath) {
+        this.mainTasksFile = new File(unarchivedTasksFilePath);
+        this.archivedTasksFile = new File(archivedTasksFilePath);
     }
 
     /**
@@ -34,17 +36,21 @@ public class Storage {
      * @return An ArrayList containing data of the user's previous tasks inputted into Duke.
      * @throws DukeException Thrown when it couldn't locate the file in the specified file path.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load(boolean isArchive) throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {
-            taskFile.getParentFile().mkdirs();
-            boolean doesNotExist = taskFile.createNewFile();
-            if (doesNotExist) {
-                throw new DukeException("Database file does not exist");
+            File fileToLoadFrom;
+            if (isArchive) {
+                fileToLoadFrom = this.archivedTasksFile;
+            } else {
+                fileToLoadFrom = this.mainTasksFile;
             }
 
-            Scanner loadedData = new Scanner(taskFile);
+            fileToLoadFrom.getParentFile().mkdirs();
+            fileToLoadFrom.createNewFile();
+
+            Scanner loadedData = new Scanner(fileToLoadFrom);
             while (loadedData.hasNextLine()) {
                 String[] taskParts = loadedData.nextLine().split("~");
                 assert taskParts.length >= 3 : "Data format of database invalid";
@@ -77,9 +83,16 @@ public class Storage {
      * @param task Task to be added in storage file.
      * @throws DukeException thrown when there is an IOException thrown by FileWriter.
      */
-    public void append(Task task) throws DukeException {
+    public void append(Task task, boolean isArchive) throws DukeException {
+        File fileToLoadFrom;
+        if (isArchive) {
+            fileToLoadFrom = this.archivedTasksFile;
+        } else {
+            fileToLoadFrom = this.mainTasksFile;
+        }
+
         try {
-            FileWriter fw = new FileWriter(taskFile.getPath(), true);
+            FileWriter fw = new FileWriter(fileToLoadFrom.getPath(), true);
             fw.write(task.getSavingFormat() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
@@ -93,9 +106,16 @@ public class Storage {
      * @param todos TaskList containing Tasks for overwriting the data in Storage.
      * @throws DukeException Thrown when FileWrite throws an IOException.
      */
-    public void overwrite(TaskList todos) throws DukeException {
+    public void overwrite(TaskList todos, boolean isArchive) throws DukeException {
+        File fileToLoadFrom;
+        if (isArchive) {
+            fileToLoadFrom = this.archivedTasksFile;
+        } else {
+            fileToLoadFrom = this.mainTasksFile;
+        }
+
         try {
-            FileWriter fw = new FileWriter(taskFile.getPath());
+            FileWriter fw = new FileWriter(fileToLoadFrom.getPath());
             Task todo;
 
             for (int i = 0; i < todos.size(); i++) {
