@@ -90,11 +90,12 @@ public class AddCommand extends Command {
                 result = ui.showAddTask(task, taskNum);
                 break;
             default:
-                break;
+                assert false : taskType;
             }
         } catch (IOException e) {
             result = ui.showError(e.getMessage());
         }
+        assert !result.isEmpty() : "Response should not be empty";
         return result;
     }
 

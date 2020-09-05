@@ -45,7 +45,7 @@ public class TaskList {
                     this.add(new EventTask(splitInput[2], splitInput[1].equals(done), splitInput[3]));
                     break;
                 default:
-                    break;
+                    assert false : taskType;
                 }
             }
         }

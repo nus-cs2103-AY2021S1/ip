@@ -24,6 +24,7 @@ public class ListCommand extends Command {
             int num = i + 1;
             result.append(ui.showTask(lst.get(i), num) + "\n");
         }
+        assert result.length() != 0 : "Response should not be empty";
         return result.toString();
     }
 }
