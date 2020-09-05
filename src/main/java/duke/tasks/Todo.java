@@ -1,4 +1,4 @@
-package main.java.duke.tasks;
+package duke.tasks;
 
 /**
  * Represents tasks without any date/time attached to it.

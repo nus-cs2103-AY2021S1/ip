@@ -1,9 +1,9 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.DukeException;
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents an find command.
@@ -29,7 +29,6 @@ public class FindCommand extends Command {
      * @param tasks Task list representing current tasks.
      * @param ui User interface interacting with user.
      * @param storage Storage Storage in charge of saving file to hard disk.
-     * @throws DukeException If unable to either add task or save task file.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

@@ -1,10 +1,10 @@
-package main.java.duke.tasks;
+package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import main.java.duke.DukeException;
+import duke.DukeException;
 
 /**
  * Represents tasks that start at a specific date.

@@ -1,18 +1,17 @@
-package main.java.duke;
+package duke;
 
+import duke.command.ListCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.OwoCommand;
+import duke.command.UwuCommand;
+import duke.command.DoneCommand;
+import duke.command.AddCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
 
-import main.java.duke.command.ListCommand;
-import main.java.duke.command.Command;
-import main.java.duke.command.DeleteCommand;
-import main.java.duke.command.OwoCommand;
-import main.java.duke.command.UwuCommand;
-import main.java.duke.command.DoneCommand;
-import main.java.duke.command.AddCommand;
-import main.java.duke.command.ExitCommand;
-import main.java.duke.command.FindCommand;
-
-import main.java.duke.tasks.Deadline;
-import main.java.duke.tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Todo;
 
 /**
  * Deals with making sense of the user command.
