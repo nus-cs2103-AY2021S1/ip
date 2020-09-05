@@ -33,7 +33,7 @@ public class Deadline extends Task {
      */
     public static Deadline createTask(String details) throws NekoTaskCreationException {
         if (details == null) {
-            throw new NekoTaskCreationException("I need something to work with.");
+            throw new NekoTaskCreationException(Messages.PARSE_COMMAND_DEADLINE_MISSING_ARGUMENT);
         }
         try {
             String description = details.substring(0, details.lastIndexOf(DEADLINE_DELIMITER)).trim();
@@ -61,9 +61,9 @@ public class Deadline extends Task {
             throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         }
         Deadline newDeadline = new Deadline(content[3], DateParser.parseStringToDateTime(content[2]));
-        if (content[1].equals("Y")) {
+        if (content[1].equals(ENCODED_COMPLETE_FLAG)) {
             newDeadline.setCompleted();
-        } else if (!content[1].equals("N")) {
+        } else if (!content[1].equals(ENCODED_INCOMPLETE_FLAG)) {
             throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         }
         return newDeadline;
@@ -76,7 +76,7 @@ public class Deadline extends Task {
      */
     @Override
     public String encode() {
-        return String.format("D|%s|%s|%s", super.isCompleted ? "Y" : "N",
+        return String.format("D|%s|%s|%s", super.isCompleted ? ENCODED_COMPLETE_FLAG : ENCODED_INCOMPLETE_FLAG,
                 DateParser.parseLocalDateTimeToString(dateTime),
                 super.description);
     }

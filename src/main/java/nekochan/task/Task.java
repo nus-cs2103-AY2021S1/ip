@@ -11,8 +11,11 @@ import nekochan.util.Messages;
  */
 public abstract class Task implements Encodable<Task>, Searchable {
 
+    protected static final String ENCODED_COMPLETE_FLAG = "Y";
+    protected static final String ENCODED_INCOMPLETE_FLAG = "N";
     private static final String COMPLETED_ICON = "\u2713";
     private static final String INCOMPLETE_ICON = "\u2718";
+
 
     protected String description;
     protected boolean isCompleted;

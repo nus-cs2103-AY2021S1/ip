@@ -41,7 +41,7 @@ public class Event extends Task {
      */
     public static Event createTask(String details) throws NekoTaskCreationException {
         if (details == null) {
-            throw new NekoTaskCreationException("I need something to work with.");
+            throw new NekoTaskCreationException(Messages.PARSE_COMMAND_EVENT_MISSING_ARGUMENT);
         }
         try {
             String description = details.substring(0, details.lastIndexOf(EVENT_DELIMITER)).trim();
@@ -69,7 +69,7 @@ public class Event extends Task {
      */
     public static Event decode(String code) throws NekoStorageException {
         if (code.charAt(0) != 'E') {
-            throw new NekoStorageException("Something doesn't seem right...");
+            throw new NekoStorageException(Messages.DECODE_UNEXPECTED_TYPE_ERROR);
         }
         String[] content = code.split("\\|", 5);
         if (content.length != 5) {
@@ -78,9 +78,9 @@ public class Event extends Task {
         Event newEvent = new Event(content[4],
                 DateParser.parseStringToDateTime(content[2]),
                 DateParser.parseStringToDateTime(content[3]));
-        if (content[1].equals("Y")) {
+        if (content[1].equals(ENCODED_COMPLETE_FLAG)) {
             newEvent.setCompleted();
-        } else if (!content[1].equals("N")) {
+        } else if (!content[1].equals(ENCODED_INCOMPLETE_FLAG)) {
             throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         }
         return newEvent;
@@ -92,7 +92,7 @@ public class Event extends Task {
      * @return an encoded string representation of this {@code Event}.
      */
     public String encode() {
-        return String.format("E|%s|%s|%s|%s", super.isCompleted ? "Y" : "N",
+        return String.format("E|%s|%s|%s|%s", super.isCompleted ? ENCODED_COMPLETE_FLAG : ENCODED_INCOMPLETE_FLAG,
                 DateParser.parseLocalDateTimeToString(startDateTime),
                 DateParser.parseLocalDateTimeToString(endDateTime),
                 super.description);
