@@ -62,6 +62,8 @@ public class DukeException extends Exception {
                 error += "Error in adding event: Wrong format";
                 error += "\nFormat: event <description> /at <datetime>";
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + commandType);
             }
             break;
         case MISSING_DESCRIPTION:
@@ -75,6 +77,8 @@ public class DukeException extends Exception {
             case EVENT:
                 error += "Error in adding event: Missing description";
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + commandType);
             }
             break;
         case MISSING_TIMING:
@@ -85,6 +89,8 @@ public class DukeException extends Exception {
             case EVENT:
                 error += "Error in adding event: Missing scheduled date";
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + commandType);
             }
             break;
         case INVALID_INDEX:
@@ -95,8 +101,12 @@ public class DukeException extends Exception {
             case DELETE:
                 error += "Error in deleting task: Invalid index";
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + commandType);
             }
             break;
+        default:
+            throw new IllegalStateException("Unexpected value: " + exceptionType);
         }
         return error;
     }

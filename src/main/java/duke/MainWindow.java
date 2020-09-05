@@ -26,12 +26,18 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Mang.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/RJ.png"));
 
+    /**
+     * Greets the user.
+     *
+     * @return greeting
+     */
     public static String greeting() {
         String greet = "Hello! I'm RJ"
                 + "\nHow can I help you?";
         return greet;
     }
 
+    /** Initialises the main window. */
     @FXML
     public void initialize() {
         DialogBox greeting = DialogBox.getDukeDialog(MainWindow.greeting(), dukeImage);

@@ -1,7 +1,12 @@
 package duke;
 
+import static duke.DukeCommandType.DEADLINE;
+import static duke.DukeCommandType.DELETE;
+import static duke.DukeCommandType.DONE;
+import static duke.DukeCommandType.EVENT;
+import static duke.DukeCommandType.TODO;
+
 import java.time.format.DateTimeParseException;
-import static duke.DukeCommandType.*;
 
 /**
  * CommandHandler class will handle all the related mechanisms initiated by user's command.
@@ -30,9 +35,8 @@ public class CommandHandler {
      * @param input
      * @param commandType
      * @param tasks
-     * @throws DukeException
      */
-    public static String handleCommands(String input, DukeCommandType commandType, TaskList tasks) throws DukeException {
+    public static String handleCommands(String input, DukeCommandType commandType, TaskList tasks) {
         String task;
         String output = "";
         switch (commandType) {

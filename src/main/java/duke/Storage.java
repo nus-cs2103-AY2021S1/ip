@@ -46,6 +46,8 @@ public class Storage {
                 case "E":
                     tasks.addStoredTask(new Event(details[2], details[3], isDone));
                     break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + details[0]);
                 }
                 line = br.readLine();
             }

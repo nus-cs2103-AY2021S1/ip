@@ -31,14 +31,14 @@ public class TaskList {
         return str;
     }
 
-   /**
+    /**
     * Adds task from listOfTasks.txt into user's list of tasks.
     *
     * @param task
     */
-   public static void addStoredTask(Task task) {
-       tasks.add(task);
-   }
+    public static void addStoredTask(Task task) {
+        tasks.add(task);
+    }
 
     /**
      * Prints user's list of tasks.

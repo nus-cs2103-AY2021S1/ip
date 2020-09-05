@@ -15,7 +15,7 @@ public class Parser {
     public static String parseInputs(String input) throws DukeException {
         assert !input.isEmpty() : "Input shouldn't be empty!";
         String output = "";
-        if (input.equals("bye")) { 
+        if (input.equals("bye")) {
             output += CommandHandler.handleCommands(input, DukeCommandType.EXIT, tasks);
         } else if (input.equals("help")) {
             output += CommandHandler.handleCommands(input, DukeCommandType.HELP, tasks);

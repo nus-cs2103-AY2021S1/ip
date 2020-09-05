@@ -4,7 +4,6 @@ package duke;
  * ToDos class will handle tasks categorised as to-do
  */
 class ToDo extends Task {
-
     /**
      * Initialises ToDos using description only.
      *
