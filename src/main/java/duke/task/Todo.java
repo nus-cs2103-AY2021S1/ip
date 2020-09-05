@@ -28,7 +28,7 @@ public class Todo extends Task {
 
     /**
      * Overrides the default toString() method in the Task class.
-     * 
+     *
      * @return Returns a String describing the attributes of the todo.
      */
     @Override
