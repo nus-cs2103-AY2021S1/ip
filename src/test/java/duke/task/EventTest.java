@@ -1,6 +1,5 @@
 package duke.task;
 
-import duke.exception.EmptyTaskException;
 import duke.exception.InvalidDateException;
 import duke.exception.MissingDateException;
 import org.junit.jupiter.api.Test;
