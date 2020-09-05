@@ -24,51 +24,38 @@ public class CommandSort implements Command {
 
         switch (comparator) {
             case "name": {
-                taskComparator = new Comparator<>() {
-                    @Override
-                    public int compare(Task o1, Task o2) {
-                        return (o1.getDescription().compareTo(o2.getDescription()));
-                    }
-                };
+                taskComparator = Comparator.comparing(Task::getDescription);
                 break;
             }
             case "kind": {
-                taskComparator = new Comparator<>() {
-                    @Override
-                    public int compare(Task o1, Task o2) {
-                        return o1.getPriority() - o2.getPriority();
-                    }
-                };
+                taskComparator = Comparator.comparingInt(Task::getPriority);
                 break;
             }
             case "date": {
-                taskComparator = new Comparator<>() {
-                    @Override
-                    public int compare(Task o1, Task o2) {
-                        if (o1 instanceof Deadline && o2 instanceof Deadline) {
-                            if (((Deadline) o1).hasDate() && ((Deadline) o2).hasDate()) {
-                                return ((Deadline) o1).getByDate().compareTo(((Deadline) o2).getByDate());
-                            } else if (((Deadline) o1).hasDate()) {
-                                return -1;
-                            } else if (((Deadline) o2).hasDate()) {
-                                return 1;
-                            } else return ((Deadline) o1).getByString().compareTo(((Deadline) o2).getByString());
-                        } else if (o1 instanceof Deadline) {
+                taskComparator = (o1, o2) -> {
+                    if (o1 instanceof Deadline && o2 instanceof Deadline) {
+                        if (((Deadline) o1).hasDate() && ((Deadline) o2).hasDate()) {
+                            return ((Deadline) o1).getByDate().compareTo(((Deadline) o2).getByDate());
+                        } else if (((Deadline) o1).hasDate()) {
                             return -1;
-                        } else if (o2 instanceof Deadline) {
+                        } else if (((Deadline) o2).hasDate()) {
                             return 1;
-                        } else if (o1 instanceof Event) {
-                            if (o2 instanceof Event) {
-                                if (((Event) o1).hasDate()) {
-                                    if (((Event) o2).hasDate()) {
-                                        return ((Event) o1).getAtDate().compareTo(((Event) o2).getAtDate());
-                                    } else return -1;
-                                } else return ((Event) o1).getAtString().compareTo(((Event) o2).getAtString());
-                            } else return -1;
-                        } else if (o2 instanceof Event) {
-                            return 1;
-                        } else return o1.getDescription().compareTo(o2.getDescription());
-                    }
+                        } else return ((Deadline) o1).getByString().compareTo(((Deadline) o2).getByString());
+                    } else if (o1 instanceof Deadline) {
+                        return -1;
+                    } else if (o2 instanceof Deadline) {
+                        return 1;
+                    } else if (o1 instanceof Event) {
+                        if (o2 instanceof Event) {
+                            if (((Event) o1).hasDate()) {
+                                if (((Event) o2).hasDate()) {
+                                    return ((Event) o1).getAtDate().compareTo(((Event) o2).getAtDate());
+                                } else return -1;
+                            } else return ((Event) o1).getAtString().compareTo(((Event) o2).getAtString());
+                        } else return -1;
+                    } else if (o2 instanceof Event) {
+                        return 1;
+                    } else return o1.getDescription().compareTo(o2.getDescription());
                 };
                 break;
             }
