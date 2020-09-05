@@ -1,11 +1,14 @@
 package duke;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import duke.exception.DeadlineInvalidDate;
 import duke.exception.DuplicateTaskException;
@@ -265,19 +268,19 @@ public class TaskList {
         try {
 
             // Check if all taskNumbers within index
-            for (Integer taskNo: taskNumbers) {
-                if (taskNo < 1 || taskNo > tasks.size()) {
-                    throw new InvalidIndexException(tasks.size());
-                }
+            boolean hasInvalidIndex = Stream.of(taskNumbers).anyMatch(
+                taskNo -> taskNo < 1 || taskNo > tasks.size());
+
+            if (hasInvalidIndex) {
+                throw new InvalidIndexException(tasks.size());
             }
 
-            // Store deleted tasks to print and set it to null in the tasks list
-            ArrayList<Task> deletedTasks = new ArrayList<>();
-            for (Integer taskNo: taskNumbers) {
-                deletedTasks.add(tasks.get(taskNo - 1));
-                tasks.set(taskNo - 1, null);
-            }
+            // Store deleted tasks (to print)
+            ArrayList<Task> deletedTasks = Stream.of(taskNumbers).map(taskNo -> tasks.get(taskNo - 1))
+                .collect(Collectors.toCollection(ArrayList::new));
 
+            // Delete the tasks
+            Stream.of(taskNumbers).forEach(taskNo -> tasks.set(taskNo - 1, null));
             tasks.removeIf(Objects::isNull);
 
             // List deleted tasks

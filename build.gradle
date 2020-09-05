@@ -30,6 +30,7 @@ dependencies {
 }
 
 test {
+    systemProperty "file.encoding", "utf-8"
     useJUnitPlatform()
 
     testLogging {
@@ -57,8 +58,11 @@ checkstyle {
 }
 
 run {
+    systemProperty "file.encoding", "utf-8"
     standardInput = System.in
 }
+
+compileJava.options.encoding = 'UTF-8'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
