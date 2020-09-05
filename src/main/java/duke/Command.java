@@ -152,4 +152,13 @@ public class Command {
         assert (toEcho.length() > 4);
         return ui.printFind(command[1]);
     }
+
+    public String findStats(String toEcho) throws DukeEmptyMessageException {
+        String[] command = Parser.splitCommandAndDescription(toEcho);
+        if (toEcho.length() == 5) {
+            throw new DukeEmptyMessageException("Statistics");
+        }
+        assert (toEcho.length() > 5);
+        return ui.printStats(command[1]);
+    }
 }

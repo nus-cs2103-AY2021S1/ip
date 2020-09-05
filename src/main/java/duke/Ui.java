@@ -1,6 +1,9 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Ui class is responsible for printing the necessary messages
@@ -115,6 +118,30 @@ public class Ui {
                 + TaskList.getTaskLists().remove(indexToDelete) + "\n"
                 + "Now you have " + TaskList.getTaskLists().size() + " tasks in the list." + "\n"
                 + HORIZONTAL_LINE;
+    }
+
+    public String printStats(String command) {
+        try {
+            if (command.toLowerCase().equals("total")) {
+                return "You have " + String.valueOf(TaskList.getTaskLists().size())
+                        + " pending jobs to do in total Boss!";
+            } else if (command.equals("done")) {
+                List<Task> tasks = TaskList.getTaskLists();
+                List<Task> tasksDone;
+                tasksDone = tasks.stream().filter(task -> task.isDone).collect(Collectors.toList());
+                String output = "Here are the done list: " + "\n";
+                for (int i = 0; i < tasksDone.size(); i++) {
+                    int number = i + 1;
+                    output += number + "." + tasksDone.get(i) + "\n";
+                }
+                output += "Boss you have a total of " + tasksDone.size() + " things that are done";
+                return output;
+            } else {
+                return "Sorry Boss! There is no tasks that are done.";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     /**

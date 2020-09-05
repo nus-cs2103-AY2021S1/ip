@@ -98,6 +98,8 @@ public class Duke {
                     System.out.println(command.handleDelete(toEcho));
                 } else if (toEcho.startsWith("find")) {
                     System.out.println(command.handleFind(toEcho));
+                } else if (toEcho.startsWith("stats")) {
+                    System.out.println(command.findStats(toEcho));
                 } else {
                     throw new DukeUnknownCommandException();
                 }
@@ -137,6 +139,9 @@ public class Duke {
             } else if (input.startsWith("find")) {
                 storage.saveTasks();
                 return command.handleFind(input);
+            } else if (input.startsWith("stats")) {
+                storage.saveTasks();
+                return command.findStats(input);
             } else {
                 throw new DukeUnknownCommandException();
             }
