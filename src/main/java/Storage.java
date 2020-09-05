@@ -11,6 +11,8 @@ public class Storage {
             if (!savedFile.exists()) {
                 savedFile.createNewFile();
             }
+            // Assert that saved file exists
+            assert savedFile.exists() : "Saved file does not exist";
             this.savedFile = savedFile;
         } catch (IOException e) {
             e.printStackTrace();
@@ -48,6 +50,9 @@ public class Storage {
     public void saveToFile(ArrayList<String> tasksInfo) {
         // Write to file
         try {
+            // Assert saved file exists
+            assert savedFile.exists() : "Saved file does not exist";
+
             BufferedWriter writer = new BufferedWriter(new FileWriter(savedFile));
             for (String info : tasksInfo) {
                 writer.write(info);
