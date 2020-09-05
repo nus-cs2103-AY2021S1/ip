@@ -7,13 +7,13 @@ import java.time.format.DateTimeFormatter;
  * Represents the Event task
  */
 public class Event extends Task {
-    private LocalDateTime at;
+    private LocalDateTime eventAt;
 
-    public Event(String description, LocalDateTime at, boolean isDone) {
+    public Event(String description, LocalDateTime eventAt, boolean isDone) {
         super(description, isDone);
 
-        assert at != null : "Timing cannot be null";
-        this.at = at;
+        assert eventAt != null : "Timing cannot be null";
+        this.eventAt = eventAt;
     }
 
     /**
@@ -22,12 +22,12 @@ public class Event extends Task {
      * @return Date and time of the event.
      */
     public LocalDateTime getTiming() {
-        return this.at;
+        return this.eventAt;
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
+                + this.eventAt.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
     }
 }

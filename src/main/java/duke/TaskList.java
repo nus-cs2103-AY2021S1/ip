@@ -25,7 +25,13 @@ public class TaskList {
      * @return List of all tasks
      */
     public String listTasks() {
-        String listOfTasks = "";
+        String listOfTasks = formatTaskList("");
+
+        return listOfTasks;
+    }
+
+    private String formatTaskList(String initialList) {
+        String listOfTasks = initialList;
 
         for (int i = 0; i < this.tasks.size(); i++) {
             listOfTasks = listOfTasks + (i + 1) + ". " + this.tasks.get(i).toString()

@@ -69,36 +69,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         duke.getParser().setScanner(new Scanner(userInput.getText()));
         String reply = duke.getParser().executeCommand(duke.getTaskList());
-
-        if (reply.equals("bye")) {
-            reply = duke.getUi().bye();
-
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userInput.getText(), userImage),
-                    DialogBox.getDukeDialog(reply, dukeImage)
-            );
-
-            userInput.clear();
-
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3000), e -> {
-                    duke.getStage().close();
-            }));
-            timeline.play();
-        } else {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userInput.getText(), userImage),
-                    DialogBox.getDukeDialog(reply, dukeImage));
-
-            userInput.clear();
-
-            try {
-                duke.getStorage().save(duke.getTaskList());
-            } catch (IOException e) {
-                sendMessage("OOPS!!! Something went wrong... Tasks not saved.");
-            } catch (MissingInfoException e) {
-                sendMessage(e.getMessage());
-            }
-        }
+        checkReply(reply);
     }
 
     /**
@@ -110,5 +81,39 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(text, dukeImage)
         );
+    }
+
+    private void addUserAndBotMessage(String reply) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userInput.getText(), userImage),
+                DialogBox.getDukeDialog(reply, dukeImage));
+    }
+
+    private void checkReply(String reply) {
+        if (reply.equals("bye")) {
+            reply = duke.getUi().bye();
+
+            addUserAndBotMessage(reply);
+            userInput.clear();
+
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3000), e -> {
+                duke.getStage().close();
+            }));
+            timeline.play();
+        } else {
+            addUserAndBotMessage(reply);
+            userInput.clear();
+            saveTasks();
+        }
+    }
+
+    private void saveTasks() {
+        try {
+            duke.getStorage().save(duke.getTaskList());
+        } catch (IOException e) {
+            sendMessage("OOPS!!! Something went wrong... Tasks not saved.");
+        } catch (MissingInfoException e) {
+            sendMessage(e.getMessage());
+        }
     }
 }
