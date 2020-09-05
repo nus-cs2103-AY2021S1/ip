@@ -40,6 +40,7 @@ public class Parser {
      * @return the specified Command class
      */
     public static Command parse(String fullCommand) {
+        assert(fullCommand != null);
         if (fullCommand.toLowerCase().contains(COMMAND_END)) {
             return new ExitCommand(fullCommand);
         } else if (fullCommand.toLowerCase().contains(COMMAND_FIND)) {
