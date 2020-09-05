@@ -1,3 +1,2 @@
-     1.[D][✓] homework (by: FEB 2 2020 17:00)
-     2.[T][✘] test
-     3.[D][✘] ddl (by: FEB 2 2020 12:00)
+     1.[T][Y] test
+     2.[D][N] t (by: JAN 1 2020 18:00)

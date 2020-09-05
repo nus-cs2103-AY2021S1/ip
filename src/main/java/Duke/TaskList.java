@@ -103,6 +103,7 @@ public class TaskList {
             throw new DukeException("      OOPS!!! The description of a todo cannot be empty.");
         }
         Todo t = new Todo(input.substring(5));
+        assert t != null;
         data.add(t);
         res = ui.printTodo(data, t);
         storage.writeFile(data);
@@ -133,6 +134,7 @@ public class TaskList {
                         Integer.parseInt(ss[1].substring(3)),
                         Integer.parseInt(ss[3].split(" ")[1].substring(0, 2)),
                         Integer.parseInt(ss[3].split(" ")[1].substring(2))));
+        assert t != null;
         data.add(t);
         res = ui.printDeadline(data, t);
         storage.writeFile(data);
@@ -164,6 +166,7 @@ public class TaskList {
                         Integer.parseInt(ss[1].substring(3)),
                         Integer.parseInt(ss[3].split(" ")[1].substring(0, 2)),
                         Integer.parseInt(ss[3].split(" ")[1].substring(2))));
+        assert t != null;
         System.out.println(t.getDescription());
         data.add(t);
         res = ui.printEvent(data, t);
