@@ -73,7 +73,7 @@ public class Deadline extends TimedTask {
 
     @Override
     public boolean isHappeningAfter(LocalDate date) {
-        return byTime.isAfter(date);
+        return repeat > 0 || byTime.isAfter(date);
     }
 
     @Override

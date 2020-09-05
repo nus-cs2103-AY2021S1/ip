@@ -88,17 +88,17 @@ public class Event extends TimedTask {
 
     @Override
     public boolean hasHappenedBeforeToday() {
-        return atTime != null && hasHappenedBefore(LocalDate.now());
+        return hasHappenedBefore(LocalDate.now());
     }
 
     @Override
     public boolean isHappeningAfter(LocalDate date) {
-        return atTime != null && atTime.toLocalDate().isAfter(date);
+        return atTime != null && (repeat > 0 || atTime.toLocalDate().isAfter(date));
     }
 
     @Override
     public boolean isHappeningAfterToday() {
-        return atTime != null && isHappeningAfter(LocalDate.now());
+        return isHappeningAfter(LocalDate.now());
     }
 
     @Override
