@@ -4,12 +4,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 
 /**
  * The TaskList class contains the task list and operations on the list.
  */
 public class TaskList {
+
     private List<Task> list;
 
     /**
@@ -83,13 +86,45 @@ public class TaskList {
     }
 
     /**
+     * Sort the deadlines in the taskList by ascending order according to dates.
+     *
+     * @return String representation of sorted deadline list.
+     */
+    public String sortDeadline() {
+        List<Task> sortedList = list.stream()
+                .filter(task -> task instanceof Deadline)
+                .map(deadline -> (Deadline) deadline)
+                .sorted()
+                .collect(Collectors.toList());
+        String result = "Here are your deadlines sorted in order:\n";
+        result += listToString(sortedList);
+        return result;
+    }
+
+    /**
+     * Sort the events in the taskList by ascending order according to dates.
+     *
+     * @return String representation of sorted event list.
+     */
+    public String sortEvent() {
+        List<Task> sortedList = list.stream()
+                .filter(task -> task instanceof Event)
+                .map(event -> (Event) event)
+                .sorted()
+                .collect(Collectors.toList());
+        String result = "Here are your events sorted in order:\n";
+        result += listToString(sortedList);
+        return result;
+    }
+
+    /**
      * Returns string representation of the provided list.
      *
      * @param list List to be converted to string.
      * @return String representation of the list.
      */
-    private String listToString(List<Task> list) {
-        Iterator<Task> iterator = list.iterator();
+    private String listToString(List<? extends Task> list) {
+        Iterator<? extends Task> iterator = list.iterator();
         int count = 0;
         String result = "";
         while (iterator.hasNext()) {

@@ -51,7 +51,7 @@ public class Task {
      */
     public String store() {
         String done = this.isDone ? "T " : "F ";
-        return done + " " + this.details;
+        return done + this.details;
     }
 
     /**

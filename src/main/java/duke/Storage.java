@@ -56,7 +56,6 @@ public class Storage {
                     String type = savedTask.substring(0, 1);
                     String isDone = savedTask.substring(2, 3);
                     assert isDone.equals("T") || isDone.equals("F");
-                    
                     switch (type) {
                     case TODO:
                         loadTodo(list, savedTask, isDone.equals("T"));

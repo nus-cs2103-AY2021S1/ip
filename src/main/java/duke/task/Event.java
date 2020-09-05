@@ -8,7 +8,7 @@ import java.util.Locale;
  * The Event class encapsulates information and methods pertaining to an
  * Event.
  */
-public class Event extends Task {
+public class Event extends Task implements Comparable<Event> {
     private LocalDateTime date;
 
     /**
@@ -55,5 +55,10 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a", Locale.ENGLISH)) + ")";
+    }
+
+    @Override
+    public int compareTo(Event event) {
+        return this.date.compareTo(event.date);
     }
 }

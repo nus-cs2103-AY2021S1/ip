@@ -8,7 +8,7 @@ import java.util.Locale;
  * The Deadline class encapsulates information and methods pertaining to a
  * Deadline.
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Comparable<Deadline> {
     private LocalDateTime date;
 
     /**
@@ -55,5 +55,10 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a", Locale.ENGLISH)) + ")";
+    }
+
+    @Override
+    public int compareTo(Deadline deadline) {
+        return this.date.compareTo(deadline.date);
     }
 }

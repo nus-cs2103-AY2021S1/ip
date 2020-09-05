@@ -14,6 +14,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.command.TodoCommand;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -33,6 +34,7 @@ public class Parser {
     private static final String DEADLINE = "deadline";
     private static final String DELETE = "delete";
     private static final String FIND = "find";
+    private static final String SORT = "sort";
 
     /** Returns the command based on user input. */
     public static Command parse(String input) throws DukeException {
@@ -61,6 +63,8 @@ public class Parser {
             return new DeleteCommand(parseNumber(detail));
         case FIND:
             return new FindCommand(detail);
+        case SORT:
+            return new SortCommand(detail);
         default:
             throw new DukeException("Oops! I'm sorry, but I don't know what that means");
         }

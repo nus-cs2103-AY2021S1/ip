@@ -11,10 +11,10 @@ public class DeadlineTest {
     @Test
     void testStringConversion() {
         assertEquals(
-                "[D][✗] borrow book (by: Aug 25 2020 02:30 PM)",
+                "[D][\u2717] borrow book (by: Aug 25 2020 02:30 PM)",
                 new Deadline("borrow book", LocalDateTime.parse("2020-08-25T14:30")).toString());
         assertEquals(
-                "[D][✓] return book (by: Aug 31 2020 08:00 PM)",
+                "[D][\u2713] return book (by: Aug 31 2020 08:00 PM)",
                 new Deadline("return book", true, LocalDateTime.parse("2020-08-31T20:00")).toString());
     }
 

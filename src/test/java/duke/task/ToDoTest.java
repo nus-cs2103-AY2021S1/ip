@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 public class ToDoTest {
     @Test
     void testStringConversion() {
-        assertEquals("[T][✗] return book", new ToDo("return book").toString());
-        assertEquals("[T][✓] borrow book", new ToDo("borrow book", true).toString());
+        assertEquals("[T][\u2717] return book", new ToDo("return book").toString());
+        assertEquals("[T][\u2713] borrow book", new ToDo("borrow book", true).toString());
     }
 
     @Test
