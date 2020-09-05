@@ -6,3 +6,5 @@ D | 1 | readings | Aug 25 2020, 18:00:00
 T | 1 | training
 E | 0 | party | May 23 2020, 18:30:00
 T | 0 | walk dog
+T | 0 | walk dog
+T | 0 | walk dog

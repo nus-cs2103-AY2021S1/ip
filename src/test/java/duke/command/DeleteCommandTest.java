@@ -21,13 +21,14 @@ public class DeleteCommandTest {
 
     @Test
     public void isTaskDeleted_deleteTask_exceptionThrown() {
-        Command test = new DeleteCommand("delete 3");
+        Command test = new DeleteCommand("delete 0");
         Path storageFilePath = Paths.get(".", "data", "test.txt");
         TaskList l = new TaskList();
         Storage s = new Storage(storageFilePath);
         try {
             test.execute(l, s);
         } catch (DukeException e) {
+            System.out.println(e.getMessage());
             assertTrue(e.getMessage().contains("Please enter a valid task number"));
         }
     }

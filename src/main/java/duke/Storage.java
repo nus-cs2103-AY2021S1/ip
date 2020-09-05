@@ -166,7 +166,7 @@ public class Storage {
      * @param taskIndex the index of the task in the List of all the Tasks to be deleted.
      */
     public void deleteTask(int taskIndex) {
-        assert taskIndex < allTasks.size() && taskIndex >= 0: "Task index must be within range of allTask size";
+        assert taskIndex < allTasks.size() && taskIndex >= 0 : "Task index must be within range of allTask size";
         this.allTasks.remove(taskIndex);
         writeToStorage();
     }

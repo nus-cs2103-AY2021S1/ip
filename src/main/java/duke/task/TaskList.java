@@ -45,7 +45,6 @@ public class TaskList {
      * @return the Task that has been deleted.
      */
     public Task delete(int index) {
-        assert index >= 0 && index < taskList.size() : "Index must be within range";
         return this.taskList.remove(index);
     }
 
@@ -87,7 +86,7 @@ public class TaskList {
      */
     public String printNumTasks() {
         return "\nNow you have " + taskList.size()
-                + (taskList.size()> 1 ? " tasks" : " task")
+                + (taskList.size() > 1 ? " tasks" : " task")
                 + " in the list.";
     }
 
