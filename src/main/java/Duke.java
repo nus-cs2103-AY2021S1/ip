@@ -37,8 +37,8 @@ public class Duke {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/photo1.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/photo2.jpg"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/photo3.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/photo3.png"));
 
     /**
      * Instantiate a Duke Object with the filepath as that name
