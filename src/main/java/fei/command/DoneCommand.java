@@ -1,10 +1,10 @@
-package alison.command;
+package fei.command;
 
-import alison.exception.AlisonException;
-import alison.task.Task;
-import alison.tool.Storage;
-import alison.tool.TaskList;
-import alison.tool.Ui;
+import fei.exception.FeiException;
+import fei.task.Task;
+import fei.tool.Storage;
+import fei.tool.TaskList;
+import fei.tool.Ui;
 
 public class DoneCommand extends Command {
 
@@ -28,17 +28,17 @@ public class DoneCommand extends Command {
      * @param ui User Interface.
      * @param storage Storage.
      * @return the response.
-     * @throws AlisonException when Command failed to be executed.
+     * @throws FeiException when Command failed to be executed.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws AlisonException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws FeiException {
         try {
             Task task = tasks.get(index - 1);
             task.markAsDone();
             storage.update(tasks);
             return ui.markDoneMsg(task);
         } catch (Exception e) {
-            throw AlisonException.invalidIndexException();
+            throw FeiException.invalidIndexException();
         }
     }
 

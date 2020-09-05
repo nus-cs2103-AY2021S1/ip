@@ -1,11 +1,11 @@
-package alison.tool;
+package fei.tool;
 
-import alison.command.*;
-import alison.exception.AlisonException;
-import alison.task.Deadline;
-import alison.task.Event;
-import alison.task.Task;
-import alison.task.ToDo;
+import fei.command.*;
+import fei.exception.FeiException;
+import fei.task.Deadline;
+import fei.task.Event;
+import fei.task.Task;
+import fei.task.ToDo;
 
 public class Parser {
 
@@ -13,9 +13,9 @@ public class Parser {
      * This method parse a task string into its corresponding Task.
      * @param taskString Saved line from file path.
      * @return Corresponding Task.
-     * @throws AlisonException when it is none of the known task.
+     * @throws FeiException when it is none of the known task.
      */
-    public static Task parseTask(String taskString) throws AlisonException {
+    public static Task parseTask(String taskString) throws FeiException {
         String[] words = taskString.split(" \\| ");
         String type = words[0];
         boolean isDone = Boolean.parseBoolean(words[1]);
@@ -32,7 +32,7 @@ public class Parser {
                 return null;
             }
         } catch (Exception e) {
-            throw AlisonException.loadingException();
+            throw FeiException.loadingException();
         }
     }
 
@@ -40,9 +40,9 @@ public class Parser {
      * This method deals with making sense of the user command.
      * @param cmd Full string of command entered by the user.
      * @return a Command object.
-     * @throws AlisonException when Parser fails to parse a command.
+     * @throws FeiException when Parser fails to parse a command.
      */
-    public static Command parse(String cmd) throws AlisonException {
+    public static Command parse(String cmd) throws FeiException {
         String[] words = cmd.split(" ");
         String command = words[0];
         if (words.length == 1) {
@@ -56,14 +56,14 @@ public class Parser {
                 return new ShowCommand();
             case "done":
             case "delete":
-                throw AlisonException.operationException();
+                throw FeiException.operationException();
             case "todo":
             case "deadline":
             case "event":
             case "find":
-                throw AlisonException.emptyDescriptionException();
+                throw FeiException.emptyDescriptionException();
             default:
-                throw AlisonException.defaultException();
+                throw FeiException.defaultException();
             }
         }
         String description = cmd.split(" ", 2)[1];
@@ -73,14 +73,14 @@ public class Parser {
                 int doneIndex = Integer.parseInt(description);
                 return new DoneCommand(doneIndex);
             } catch (Exception e) {
-                throw AlisonException.invalidIndexException();
+                throw FeiException.invalidIndexException();
             }
         case "delete":
             try {
                 int deleteIndex = Integer.parseInt(description);
                 return new DeleteCommand(deleteIndex);
             } catch (Exception e) {
-                throw AlisonException.invalidIndexException();
+                throw FeiException.invalidIndexException();
 
             }
         case "todo":
@@ -89,7 +89,7 @@ public class Parser {
         case "deadline":
             String[] contentAndDate = description.split(" /by ");
             if (contentAndDate.length == 1) {
-                throw AlisonException.deadlineException();
+                throw FeiException.deadlineException();
             } else {
                 Deadline ddl = new Deadline(contentAndDate[0], contentAndDate[1]);
                 return new AddCommand(ddl);
@@ -97,14 +97,14 @@ public class Parser {
         case "event":
             String[] contentAndTime = description.split(" /at ");
             if (contentAndTime.length == 1) {
-                throw AlisonException.eventException();
+                throw FeiException.eventException();
             } else {
                 Event e = new Event(contentAndTime[0], contentAndTime[1]);
                 return new AddCommand(e);
             }
         case "find":
             if (description.split(" ").length > 1) {
-                throw AlisonException.findException();
+                throw FeiException.findException();
             } else {
                 return new FindCommand(description);
             }

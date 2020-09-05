@@ -1,13 +1,13 @@
-package alison;
+package fei;
 
-import alison.command.Command;
-import alison.exception.AlisonException;
-import alison.tool.Parser;
-import alison.tool.Storage;
-import alison.tool.TaskList;
-import alison.tool.Ui;
+import fei.command.Command;
+import fei.exception.FeiException;
+import fei.tool.Parser;
+import fei.tool.Storage;
+import fei.tool.TaskList;
+import fei.tool.Ui;
 
-public class Alison {
+public class Fei {
 
     private TaskList tasks;
     private final Storage storage;
@@ -18,13 +18,13 @@ public class Alison {
      *
      * @param filePath a String on file path in format: "./data/*.txt".
      */
-    public Alison(String filePath) {
+    public Fei(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList();
         try {
             tasks = storage.load();
-        } catch (AlisonException e) {
+        } catch (FeiException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -35,7 +35,7 @@ public class Alison {
             String fullCommand = input;
             Command c = Parser.parse(fullCommand);
             return c.execute(tasks, ui, storage);
-        } catch (AlisonException e) {
+        } catch (FeiException e) {
             return e.getMessage();
         }
     }

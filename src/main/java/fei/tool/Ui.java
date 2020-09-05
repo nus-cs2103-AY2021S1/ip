@@ -1,16 +1,18 @@
-package alison.tool;
+package fei.tool;
 
-import alison.exception.AlisonException;
-import alison.task.Task;
+import fei.exception.FeiException;
+import fei.task.Task;
 
 public class Ui {
     public String showLoadingError() {
-        return AlisonException.loadingException().getMessage();
+        return FeiException.loadingException().getMessage();
     }
 
     public static String greeting() {
 
-        return "Hello! I'm Alison.\n" + "What can I do for you?";
+        return "Hello! It's me!\n"
+                + "I'm Fei.\n"
+                + "What can I do for you?";
 
     }
 
@@ -19,6 +21,9 @@ public class Ui {
     }
 
     public String showList(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            return "There's currently no task in your list.\n";
+        }
         String response = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);

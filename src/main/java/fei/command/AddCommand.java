@@ -1,11 +1,11 @@
-package alison.command;
+package fei.command;
 
-import alison.exception.AlisonException;
-import alison.task.Deadline;
-import alison.task.Task;
-import alison.tool.Storage;
-import alison.tool.TaskList;
-import alison.tool.Ui;
+import fei.exception.FeiException;
+import fei.task.Deadline;
+import fei.task.Task;
+import fei.tool.Storage;
+import fei.tool.TaskList;
+import fei.tool.Ui;
 
 public class AddCommand extends Command {
 
@@ -31,12 +31,12 @@ public class AddCommand extends Command {
      * @return the add message of the UI
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws AlisonException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws FeiException {
         String error = "";
         if (task instanceof Deadline) {
             try {(
                     (Deadline) task).parseTime();
-            } catch (AlisonException alisonException) {
+            } catch (FeiException alisonException) {
                 error += alisonException.getMessage() + "\n";
             }
         }

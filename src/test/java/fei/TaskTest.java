@@ -1,9 +1,6 @@
-package alison;
+package fei;
 
-import alison.exception.AlisonException;
-import alison.task.Deadline;
-import alison.task.Task;
-import alison.tool.Parser;
+import fei.task.Task;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

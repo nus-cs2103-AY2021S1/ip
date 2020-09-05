@@ -1,6 +1,6 @@
-package alison.task;
+package fei.task;
 
-import alison.exception.AlisonException;
+import fei.exception.FeiException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,14 +22,14 @@ public class Deadline extends Task {
     /**
      * This method parse a deadline in format "yyyy-mm-dd" to "MMM d yyyy".
      *
-     * @throws AlisonException when the format is incorrect.
+     * @throws FeiException when the format is incorrect.
      */
-    public void parseTime() throws AlisonException {
+    public void parseTime() throws FeiException {
         try {
             LocalDate ddl = LocalDate.parse(by);
             this.by = ddl.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (Exception exception) {
-            throw AlisonException.deadlineParseException();
+            throw FeiException.deadlineParseException();
         }
     }
 

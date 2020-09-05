@@ -1,4 +1,4 @@
-import alison.Alison;
+import fei.Fei;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Alison alison = new Alison("./data/tasks.txt");
+    private Fei fei = new Fei("./data/tasks.txt");
 
     @Override
     public void start(Stage stage) {
@@ -21,7 +21,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setAlison(alison);
+            fxmlLoader.<MainWindow>getController().setFei(fei);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

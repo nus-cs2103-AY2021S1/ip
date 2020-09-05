@@ -1,5 +1,5 @@
-import alison.Alison;
-import alison.tool.Ui;
+import fei.Fei;
+import fei.tool.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -20,7 +20,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Alison alison;
+    private Fei fei;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image bot = new Image(this.getClass().getResourceAsStream("/images/Bot.png"));
@@ -30,8 +30,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setAlison(Alison a) {
-        alison = a;
+    public void setFei(Fei fei) {
+        this.fei = fei;
         dialogContainer.getChildren().addAll(
                 DialogBox.getBotDialog(Ui.greeting(), bot)
         );
@@ -44,7 +44,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String userText = userInput.getText();
-        String botText = alison.getResponse(userInput.getText());
+        String botText = fei.getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
                 DialogBox.getBotDialog(botText, bot)

@@ -1,8 +1,8 @@
-package alison.command;
+package fei.command;
 
-import alison.tool.Storage;
-import alison.tool.TaskList;
-import alison.tool.Ui;
+import fei.tool.Storage;
+import fei.tool.TaskList;
+import fei.tool.Ui;
 
 public class GreetingCommand extends Command {
 

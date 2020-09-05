@@ -1,10 +1,10 @@
-package alison.command;
+package fei.command;
 
-import alison.exception.AlisonException;
-import alison.task.Task;
-import alison.tool.Storage;
-import alison.tool.TaskList;
-import alison.tool.Ui;
+import fei.exception.FeiException;
+import fei.task.Task;
+import fei.tool.Storage;
+import fei.tool.TaskList;
+import fei.tool.Ui;
 
 public class DeleteCommand extends Command {
 
@@ -26,16 +26,15 @@ public class DeleteCommand extends Command {
      * @param tasks TaskList.
      * @param ui User Interface.
      * @param storage Storage.
-     * @throws AlisonException if fails to find the task with the given index.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws AlisonException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task removedTask = tasks.remove(index - 1);
             storage.update(tasks);
             return ui.removeTaskMsg(removedTask, tasks);
         } catch (Exception e) {
-            return AlisonException.invalidIndexException().getMessage();
+            return FeiException.invalidIndexException().getMessage();
         }
     }
 
