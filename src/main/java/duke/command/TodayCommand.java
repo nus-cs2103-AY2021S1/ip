@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.Storage;
-import duke.ui.DukeMessages;
 import duke.task.TaskList;
+import duke.ui.DukeMessages;
 
 /**
  * Represents a Command given by the user to list all Tasks whose date is the current date (today).
@@ -15,6 +15,6 @@ public class TodayCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Storage storage) {
-        return DukeMessages.printTodayMessage(list.getTaskList());
+        return DukeMessages.printTodayMessage(list.getTasksToday());
     }
 }

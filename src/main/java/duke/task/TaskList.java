@@ -124,9 +124,23 @@ public class TaskList {
     }
 
     /**
-     * Finds tasks that match the search term
-     * @param matchString A string representing the search term
-     * @return An ArrayList containing all Tasks that match the search term provided
+     * Finds tasks that have date set as today.
+     * @return An ArrayList containing all Tasks that have date set as today.
+     */
+    public ArrayList<Task> getTasksToday() {
+        ArrayList<Task> filteredList = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.isToday()) {
+                filteredList.add(task);
+            }
+        }
+        return filteredList;
+    }
+
+    /**
+     * Finds tasks that match the search term.
+     * @param matchString A string representing the search term.
+     * @return An ArrayList containing all Tasks that match the search term provided.
      */
     public ArrayList<Task> findTasks(String matchString) {
         ArrayList<Task> filteredList = new ArrayList<>();

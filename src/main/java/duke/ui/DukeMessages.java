@@ -48,15 +48,12 @@ public class DukeMessages {
      * @return A string containing all tasks whose date is set as the current date (today).
      */
     public static String printTodayMessage(ArrayList<Task> taskList) {
-        // TODO: refactor to filter in duke.task.TaskList class
         String preface = "Here are today's tasks!!\n";
         StringBuilder tasks = new StringBuilder();
         int index = 1;
         for (Task task : taskList) {
-            if (task.isToday()) {
-                tasks.append(index).append(". ").append(task).append("\n");
-                index++;
-            }
+            tasks.append(index).append(". ").append(task).append("\n");
+            index++;
         }
         return preface + tasks;
     }
@@ -69,16 +66,16 @@ public class DukeMessages {
     public static String printFindMessage(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
             return "Oh dear, I couldn't find any matching tasks :o";
-        } else {
-            String preface = "Here are your search results!!\n";
-            StringBuilder tasks = new StringBuilder();
-            int index = 1;
-            for (Task task : taskList) {
-                tasks.append(index).append(". ").append(task).append("\n");
-                index++;
-            }
-            return preface + tasks;
         }
+
+        String preface = "Here are your search results!!\n";
+        StringBuilder tasks = new StringBuilder();
+        int index = 1;
+        for (Task task : taskList) {
+            tasks.append(index).append(". ").append(task).append("\n");
+            index++;
+        }
+        return preface + tasks;
     }
 
     /**
