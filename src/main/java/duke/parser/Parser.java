@@ -17,6 +17,7 @@ import duke.task.TaskType;
  */
 public class Parser {
 
+    private static final String INVALID_ARR_ERROR = "Array is not empty";
     /**
      * Parses the user input and returns the corresponding command.
      *
@@ -68,6 +69,7 @@ public class Parser {
      * @return Keyword.
      */
     private static String getKeyWord(String[] arr) {
+        assert (arr.length > 0) : INVALID_ARR_ERROR;
         return arr[0].toLowerCase();
     }
 
@@ -78,6 +80,7 @@ public class Parser {
      * @return Rest of the user input.
      */
     private static String getRestOfWord(String[] arr) {
+        assert (arr.length > 0) : INVALID_ARR_ERROR;
         return arr.length == 1 ? "" : arr[1];
     }
 }

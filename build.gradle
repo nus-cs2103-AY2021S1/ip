@@ -34,7 +34,6 @@ test {
 
     testLogging {
         events "passed", "skipped", "failed"
-
         showExceptions true
         exceptionFormat "full"
         showCauses true
@@ -57,5 +56,5 @@ checkstyle {
 }
 
 run{
-    standardInput = System.in
+    enableAssertions = true
 }

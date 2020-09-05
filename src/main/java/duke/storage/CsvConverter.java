@@ -46,6 +46,7 @@ public class CsvConverter {
      * @throws InvalidFileFormatException If word does not correspond to either done or not done.
      */
     private static boolean checkIfDone(String input) throws InvalidFileFormatException {
+        assert (input != null) : "String input is invalid";
         String status = input.toLowerCase();
         if (status.equals("done")) {
             return true;
