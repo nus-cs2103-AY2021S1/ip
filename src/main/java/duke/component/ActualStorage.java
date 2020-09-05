@@ -19,9 +19,7 @@ public class ActualStorage implements Storage {
     public static final char TODO_INDICATOR = 'T';
     public static final char DEADLINE_INDICATOR = 'D';
     public static final char EVENT_INDICATOR = 'E';
-    public static final char DIVIDER = '|';
     public static final String INPUT_FILE_FORMAT_ERROR = "Input file format error!";
-    public static final int FILE_DIVIDER_LENGTH = 6;
     private final String filePath;
     private final TaskList list;
 
@@ -46,52 +44,28 @@ public class ActualStorage implements Storage {
     }
 
     private void readNextTask(Scanner sc) throws InvalidCommandException {
-        String taskType = getTaskType(sc);
-        int done = getDoneMarker(sc);
-        String fullDescription = getDescription(sc);
-        Task toAdd = getTask(taskType, done, fullDescription);
+        String[] taskInfo = sc.nextLine().split(Storage.splitter);
+        String taskType = taskInfo[0];
+        Task toAdd = getTask(taskType, taskInfo);
         list.add(toAdd);
     }
 
-    private Task getTask(String taskType, int done, String fullDescription) throws InvalidCommandException {
+    private Task getTask(String taskType, String[] taskInfo) throws InvalidCommandException {
         Task toAdd;
         if (isToDo(taskType)) {
-            toAdd = new ToDo(fullDescription);
+            toAdd = new ToDo(taskInfo);
         } else {
-            int dividerPosition = getDividerPosition(fullDescription);
-            String time = getTimeSpecification(fullDescription, dividerPosition);
-            String description = getPlainDescription(fullDescription, dividerPosition);
             if (isDeadline(taskType)) {
-                toAdd = new Deadline(description, time);
+                toAdd = new Deadline(taskInfo);
             } else if (isEvent(taskType)) {
-                toAdd = new Event(description, time);
+                toAdd = new Event(taskInfo);
             } else {
                 assert false : INPUT_FILE_FORMAT_ERROR;
                 toAdd = new ToDo("error");
             }
         }
-        markAsDoneIfNeeded(done, toAdd);
+        System.out.println(toAdd);
         return toAdd;
-    }
-
-    private void markAsDoneIfNeeded(int done, Task toAdd) throws InvalidCommandException {
-        if (done == 1) {
-            toAdd.markAsDone();
-        }
-    }
-
-    private String getPlainDescription(String fullDescription, int dividerPosition) {
-        return fullDescription.substring(0, dividerPosition - 1);
-    }
-
-    private String getTimeSpecification(String fullDescription, int dividerPosition) {
-        return fullDescription.substring(dividerPosition + FILE_DIVIDER_LENGTH);
-    }
-
-    private int getDividerPosition(String description) {
-        int position = description.indexOf(DIVIDER);
-        assert position >= 0 : INPUT_FILE_FORMAT_ERROR;
-        return position;
     }
 
     private boolean isEvent(String taskType) {
@@ -140,7 +114,7 @@ public class ActualStorage implements Storage {
     public void addToList(Task task) throws InvalidCommandException {
         try {
             FileWriter fw = new FileWriter(filePath, true);
-            fw.write(task.output());
+            fw.write(task.outputToFile());
             fw.close();
         } catch (IOException e) {
             throw new InvalidCommandException(e.getMessage());
@@ -152,7 +126,7 @@ public class ActualStorage implements Storage {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task : list) {
-                fw.write(task.output());
+                fw.write(task.outputToFile());
             }
             fw.close();
             System.out.println(fw);

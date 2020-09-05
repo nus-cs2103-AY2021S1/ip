@@ -1,5 +1,6 @@
-T | 0 | borrow books
-E | 1 | cs2103 project meeting | At: 2020-09-30 12:00
-D | 1 | cs2102 tutorial 1 | By: 2020-08-25
-T | 1 | return books
-D | 1 | cs2101 email | By: 2020-09-14
+T &&& 0 &&& borrow books
+D &&& 1 &&& cs2102 tutorial 1 &&& 2020-09-04 &&& 1 &&& 2020-09-06
+T &&& 1 &&& return books
+D &&& 0 &&& cs2101 email &&& 2020-09-14 &&& 0
+E &&& 0 &&& cs2103 project meeting &&& 2020-09-30 12:00/2020-10-01 12:00
+E &&& 1 &&& cs2102 project meeting &&& 2020-10-01 19:00 &&& 3 &&& 2020-10-07

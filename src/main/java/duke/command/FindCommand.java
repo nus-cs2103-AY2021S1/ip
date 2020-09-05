@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
@@ -25,8 +26,8 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) {
-        assert input.startsWith("find ") : "Find command does not start with 'find '";
-        String toFind = input.substring(5);
+        assert input.startsWith(Parser.FIND_COMMAND_PREFIX) : "Find command does not start with 'find '";
+        String toFind = input.substring(Parser.FIND_COMMAND_PREFIX.length());
         return ui.printList(list, t -> t.finds(toFind), String.format(Ui.FIND_LIST_NOTE_FORMAT, toFind));
     }
 

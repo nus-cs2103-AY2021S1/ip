@@ -1,15 +1,19 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import duke.command.InvalidCommandException;
+import duke.command.SnoozeCommand;
+import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.Ui;
 
 /**
  * Represents a deadline task that consists of a description and a date as the deadline for completing the task.
  */
-public class Deadline extends Task {
-    private final LocalDate byTime;
+public class Deadline extends TimedTask {
+    private LocalDate byTime;
 
     /**
      * Creates a deadline task.
@@ -20,16 +24,44 @@ public class Deadline extends Task {
     public Deadline(String description, String byTime) throws InvalidCommandException {
         super(description);
         try {
-            this.byTime = LocalDate.parse(byTime,
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            this.byTime = LocalDate.parse(byTime, Parser.DATE_INPUT_FORMAT);
         } catch (Exception e) {
-            throw new InvalidCommandException("Invalid input date, please input as yyyy-mm-dd.");
+            throw new InvalidCommandException(Parser.INVALID_DATE_FORMAT_EXCEPTION);
+        }
+    }
+
+    /**
+     * Creates a deadline task using the resource file.
+     * @param taskInfo the full line of the task
+     * @throws InvalidCommandException if the resource file format is invalid
+     */
+    public Deadline(String[] taskInfo) throws InvalidCommandException {
+        super("");
+        assert taskInfo[0].equals("D") : "Wrong read of file";
+        try {
+            int done = Integer.parseInt(taskInfo[1]);
+            if ((done == 0 && taskInfo.length != 5) || (done == 1 && taskInfo.length != 6)) {
+                throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
+            }
+            try {
+                description = taskInfo[2];
+                byTime = LocalDate.parse(taskInfo[3], Parser.DATE_INPUT_FORMAT);
+                repeat = Integer.parseInt(taskInfo[4]);
+                if (done == 1) {
+                    lastDone = LocalDate.parse(taskInfo[5], Parser.DATE_INPUT_FORMAT);
+                    this.isDone = true;
+                }
+            } catch (Exception e) {
+                throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
+            }
+        } catch (StackOverflowError | NumberFormatException e) {
+            throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
         }
     }
 
     @Override
     public boolean isHappeningOn(LocalDate date) {
-        return date.isEqual(byTime);
+        return isHappeningOn(date, byTime);
     }
 
     @Override
@@ -49,7 +81,7 @@ public class Deadline extends Task {
 
     @Override
     public boolean isHappeningAfter(LocalDate date) {
-        return byTime.isAfter(date);
+        return repeat > 0 || byTime.isAfter(date);
     }
 
     @Override
@@ -59,34 +91,55 @@ public class Deadline extends Task {
 
     @Override
     public boolean isHappeningBetween(LocalDate date1, LocalDate date2) {
-        super.isHappeningBetween(date1, date2);
-        return !byTime.isAfter(date2) && !byTime.isBefore(date1);
+        return isHappeningBetween(date1, date2, byTime);
     }
 
     @Override
     public boolean willHappenInDays(int n) {
-        super.willHappenInDays(n);
         return isHappeningBetween(LocalDate.now(), LocalDate.now().plusDays(n));
     }
 
-    /**
-     * Checks whether the task is overdue.
-     * @return true if the task is not done and the deadline is before today
-     */
-    public boolean isOverdue() {
-        return !isDone && byTime.isBefore(LocalDate.now());
+    @Override
+    public String snoozeTo(String[] input) throws InvalidCommandException {
+        if (input.length != SnoozeCommand.SNOOZE_DEADLINE_COMMAND_LENGTH) {
+            throw new InvalidCommandException(Parser.INVALID_DATE_FORMAT_EXCEPTION);
+        }
+        String dateTimeStr = input[3];
+        try {
+            LocalDate newDate = LocalDate.parse(dateTimeStr, Parser.DATE_INPUT_FORMAT);
+            if (newDate.isAfter(byTime)) {
+                LocalDate originalDate = byTime;
+                byTime = newDate;
+                return String.format(Ui.SNOOZE_TASK_OUTPUT_FORMAT, this, originalDate, newDate);
+            } else {
+                throw new InvalidCommandException(Parser.SNOOZE_TO_EARLIER_TIME_EXCEPTION);
+            }
+        } catch (DateTimeParseException e) {
+            throw new InvalidCommandException(Parser.INVALID_DATE_FORMAT_EXCEPTION);
+        }
     }
 
     @Override
-    public String output() {
-        return "D" + super.output() + " | By: " + byTime + "\n";
+    public String repeat(int n) {
+        repeat = n;
+        return String.format(Ui.REPEAT_TASK_OUTPUT_FORMAT, n, this);
+    }
+
+    @Override
+    public void markAsDone() throws InvalidCommandException {
+        markAsDone(byTime);
+    }
+
+    @Override
+    public String outputToFile() {
+        return "D" + super.outputToFile() + Storage.splitter + byTime + Storage.splitter
+                + repeat + lastDoneMessage() + "\n";
     }
 
     @Override
     public String toString() {
-        String overdue = isOverdue() ? " This is overdue! The deadline has passed!!!" : "";
         return "[D]" + super.toString() + " (by: "
-                + byTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" + overdue;
+                + byTime.format(Parser.DATE_OUTPUT_FORMAT) + repeatMessage() + ")";
     }
 
     /**

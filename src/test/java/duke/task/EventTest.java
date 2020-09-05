@@ -144,10 +144,10 @@ public class EventTest {
     public void output_toWriteStorage() {
         try {
             Event e = new Event("Project meeting", "2020-09-03 11:30");
-            assertEquals("E | 0 | Project meeting | At: 2020-09-03 11:30\n", e.output());
+            assertEquals("E | 0 | Project meeting | At: 2020-09-03 11:30\n", e.outputToFile());
 
             e.markAsDone();
-            assertEquals("E | 1 | Project meeting | At: 2020-09-03 11:30\n", e.output());
+            assertEquals("E | 1 | Project meeting | At: 2020-09-03 11:30\n", e.outputToFile());
         } catch (Exception e) {
             fail();
         }

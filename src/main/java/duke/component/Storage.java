@@ -7,6 +7,8 @@ import duke.task.Task;
  * Represents the storage behaviors, including reading data from file, adding lines to file, and re-write file.
  */
 public interface Storage {
+    String splitter = " &&& ";
+
     /**
      * Gets the list of tasks held by the storage.
      * @return the list of tasks

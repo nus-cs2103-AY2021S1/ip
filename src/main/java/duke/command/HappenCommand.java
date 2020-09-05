@@ -79,12 +79,12 @@ public class HappenCommand extends Command {
         try {
             int n = Integer.parseInt(s);
             if (n <= 0) {
-                throw new InvalidCommandException(Parser.HAPPEN_IN_NEGATIVE_DAYS_EXCEPTION);
+                throw new InvalidCommandException(Parser.NEGATIVE_DAYS_EXCEPTION);
             }
             return ui.printList(list, t -> t.willHappenInDays(n), String.format(Ui.HAPPEN_LIST_NOTE_FORMAT,
                     Parser.IN, n + Parser.SPACE_STRING + Parser.DAYS));
         } catch (NumberFormatException e) {
-            throw new InvalidCommandException(Parser.HAPPEN_IN_NONNUMERIC_EXCEPTION);
+            throw new InvalidCommandException(Parser.NONNUMERIC_NUMBER_OF_DAYS_EXCEPTION);
         }
     }
 

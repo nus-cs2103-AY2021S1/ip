@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 
 import duke.command.InvalidCommandException;
+import duke.component.Storage;
 
 /**
  * Represents a task that has a designated description and a state of whether it has been done.
@@ -43,9 +44,9 @@ public abstract class Task {
      * Gets the string to write in the storage file.
      * @return the string to write in the storage file
      */
-    public String output() {
+    public String outputToFile() {
         int done = isDone ? 1 : 0;
-        return " | " + done + " | " + description;
+        return Storage.splitter + done + Storage.splitter + description;
     }
 
     /**
