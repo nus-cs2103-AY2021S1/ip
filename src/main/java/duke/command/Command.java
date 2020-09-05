@@ -38,7 +38,6 @@ public abstract class Command {
      * @param tasks Contains the current tasks.
      * @param ui Responsible for displaying information to the user.
      * @param storage Reads and stores data into memory.
-     * @return String Message when completing the command.
      * @throws DukeException If could not execute command.
      */
     public void executeWithoutResponse(TaskList tasks, Ui ui, Storage storage)
