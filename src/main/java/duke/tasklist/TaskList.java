@@ -52,7 +52,7 @@ public class TaskList {
      * @throws DukeTaskNonExistException if the index provided is out of range of the arraylist
      */
     public Task completeTask(int index) throws DukeTaskNonExistException {
-        if (index < 0 | index >= tasks.size()) {
+        if (index < 0 || index >= tasks.size()) {
             throw new DukeTaskNonExistException("error");
         }
         Task task = this.tasks.get(index);
@@ -89,11 +89,11 @@ public class TaskList {
     /**
      * A method that deletes a given task from the arraylist based on the index given.
      *
-     * @param index Zero-based index of the task in the arraylist
-     * @throws DukeTaskNonExistException if the index provided is out of range of the arraylist
+     * @param index Zero-based index of the task in the arraylist.
+     * @throws DukeTaskNonExistException if the index provided is out of range of the arraylist.
      */
     public void delete(int index) throws DukeTaskNonExistException {
-        if (index < 0 | index >= tasks.size()) {
+        if (index < 0 || index >= tasks.size()) {
             throw new DukeTaskNonExistException("error");
         }
         this.tasks.remove(index);
@@ -103,17 +103,15 @@ public class TaskList {
      * A method that finds a given task from the arraylist based on the respomse given.
      * It will return all tasks that contains the keyword that was specified.
      *
-     * @param response The string that will be identified from the tasks
+     * @param response The string that will be identified from the tasks.
      */
-    public String find(String response) {
-        Iterator<Task> iter = tasks.iterator();
-        ArrayList<Task> temp = new ArrayList<>();
-        while (iter.hasNext()) {
-            Task task = iter.next();
-            if (task.getName().contains(response)) {
-                temp.add(task);
-            }
-        }
+    public String findTask(String response) {
+        ArrayList<Task> temp = getSearchResults(response);
+        return returnSearchResult(temp);
+    }
+
+    private String returnSearchResult(ArrayList<Task> temp) {
+        Iterator<Task> iter;
         iter = temp.iterator();
         int counter = 1;
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list: ").append('\n');
@@ -122,6 +120,18 @@ public class TaskList {
             counter++;
         }
         return sb.toString();
+    }
+
+    private ArrayList<Task> getSearchResults(String response) {
+        Iterator<Task> iter = tasks.iterator();
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (iter.hasNext()) {
+            Task task = iter.next();
+            if (task.getName().contains(response)) {
+                tasks.add(task);
+            }
+        }
+        return tasks;
     }
 
 }

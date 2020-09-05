@@ -28,7 +28,7 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/babyyoda.jpg"));
 
     /**
-     * Initializes the stage
+     * Initializes the stage.
      */
     @FXML
     public void initialize() {
@@ -37,7 +37,6 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-
         showWelcomeMessage();
     }
 
@@ -56,15 +55,19 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = Duke.getResponse(input);
         if (response.equals("CYA PAL. Hope to see you again!")) {
-            userInput.setDisable(true);
-            sendButton.setDisable(true);
+            closeWindow();
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    private void closeWindow() {
+        userInput.setDisable(true);
+        sendButton.setDisable(true);
     }
 }

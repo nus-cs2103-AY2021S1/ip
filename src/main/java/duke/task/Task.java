@@ -76,7 +76,8 @@ public class Task {
 
     /**
      * Get the status icon to indicate whether a task is incomplete or complete.
-     * @return D or - icon where D is done, - means not done.
+     *
+     * @return tick or cross icon.
      */
     protected String getStatusIcon() {
         return (isDone ? "[D]" : "[-]");

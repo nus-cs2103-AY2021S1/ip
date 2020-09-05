@@ -8,6 +8,6 @@ public class DukeKeywordMissingException extends DukeException {
 
     @Override
     public String toString() {
-        return "☹ OOPS!!! Please include " + this.getMessage() + " in your input.";
+        return ":) OOPS!!! Please include " + this.getMessage() + " in your input.";
     }
 }

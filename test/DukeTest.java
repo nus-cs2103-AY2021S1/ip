@@ -51,14 +51,14 @@ public class DukeTest {
 
     @Test
     public void testBye() {
-        ui.replyBye();
+        ui.performBye();
         assertEquals("CYA PAL. Hope to see you again!\r\n", outContent.toString());
     }
 
     @Test
     public void testAddDeadLine_deadlineInput_success() {
         try {
-            ui.addDeadline("finish homework!", "2020-10-02 11:44");
+            ui.performAddDeadline("finish homework!", "2020-10-02 11:44");
             String currentTime = LocalDateTime.now().format(formatter);
             assertEquals("Got it. I've added this task: \r\n  [D][-] finish homework! [created on " +
                             currentTime +
@@ -79,7 +79,7 @@ public class DukeTest {
     @Test
     public void testDelete() {
         try {
-            ui.replyDelete(0);
+            ui.performDelete(0);
             assertEquals("Noted. I've removed this task: \r\nNow you have 0 in the list.\r\n",
                     outContent.toString());
         } catch (Exception e) {

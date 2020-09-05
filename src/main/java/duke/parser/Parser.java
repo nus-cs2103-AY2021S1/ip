@@ -18,14 +18,14 @@ public class Parser {
     /**
      * Constructor for the parser.
      *
-     * @param ui UI which deals with interactions with the user
+     * @param ui UI which deals with interactions with the user.
      */
     public Parser(UI ui) {
         this.ui = ui;
     }
 
     public String welcome() {
-        return ui.welcome();
+        return ui.performWelcome();
     }
 
     /**
@@ -65,60 +65,101 @@ public class Parser {
      * It may throw an error if the description is empty, keywords are missing or the dates are in the wrong format.
      * </p>
      *
-     * @param response String response which represents the user's input
+     * @param response String response which represents the user's input.
      */
     public String listen(String response) {
         try {
+            String date;
             int taskIndex;
-            if (response.equals("bye")) {
-                return ui.replyBye();
-            } else if (response.equals("list")) {
-                return ui.replyList();
-            } else if (response.indexOf("find ") == 0) {
-                if (response.length() <= 5) {
-                    throw new EmptyDescriptionException("find query");
-                }
-                return ui.replyFind(response.substring(5));
-            } else if (response.indexOf("delete") == 0) {
-                taskIndex = Integer.parseInt(response.replaceAll("\\D+", "")) - 1;
-                return ui.replyDelete(taskIndex);
-            } else if (response.indexOf("done ") == 0) {
-                taskIndex = Integer.parseInt(response.replaceAll("\\D+", "")) - 1;
-                return ui.replyDone(taskIndex);
-            } else if (response.indexOf("todo ") == 0) {
-                if (response.length() <= 5) {
-                    throw new EmptyDescriptionException("todo");
-                }
-                return ui.addTodo(response.substring(4));
-            } else if (response.indexOf("deadline ") == 0) {
-                if (response.length() <= 9) {
-                    throw new EmptyDescriptionException("deadline");
-                }
-                if (!response.contains("/by ")) {
-                    throw new DukeKeywordMissingException("/by ");
-                }
-                String date = response.substring(response.indexOf("/by ") + 4);
-                response = response.substring(response.indexOf("deadline ") + 8, response.indexOf("/by "));
-                return ui.addDeadline(response, date);
-            } else if (response.indexOf("event ") == 0) {
-                if (response.length() <= 6) {
-                    throw new EmptyDescriptionException("event");
-                }
-                if (!response.contains("/at ")) {
-                    throw new DukeKeywordMissingException("/at ");
-                }
-                String date = response.substring(response.indexOf("/at ") + 4);
-                response = response.substring(response.indexOf("event ") + 5, response.indexOf("/at "));
-                return ui.addEvent(response, date);
-            } else {
+            switch(keyword(response)) {
+            case BYE:
+                return ui.performBye();
+            case LIST:
+                return ui.performShowList();
+            case FIND:
+                checkEmptyDescription(response, "Find Query");
+                return ui.performFind(response.substring(5));
+            case DELETE:
+                taskIndex = getTaskIndex(response);
+                return ui.performDelete(taskIndex);
+            case DONE:
+                taskIndex = getTaskIndex(response);
+                return ui.performDone(taskIndex);
+            case TODO:
+                checkEmptyDescription(response, "todo");
+                return ui.performAddTodo(response.substring("todo".length()));
+            case DEADLINE:
+                checkEmptyDescription(response, "deadline");
+                checkMissingKeyword(response, "/by ");
+                date = getDate(response, "/by ");
+                response = getResponse(response, "deadline ", "/by ");
+                return ui.performAddDeadline(response, date);
+            case EVENT:
+                checkEmptyDescription(response, "event");
+                checkMissingKeyword(response, "/at ");
+                date = getDate(response, "/at ");
+                response = getResponse(response, "event ", "/at ");
+                return ui.performAddEvent(response, date);
+            case UNKNOWN:
                 throw new DukeUnknownInputException("error");
+            default:
+                assert false : "Parser unidentified response";
+                return null;
             }
         } catch (IOException | DukeTaskNonExistException | EmptyDescriptionException
                 | DukeKeywordMissingException | DukeUnknownInputException e) {
-            return ui.showError(e);
+            return ui.performShowError(e);
         } catch (DateTimeParseException e) {
             return "☹ OOPS!!! Ensure that the datetime input is in the format YYYY-MM-DD HH:MM";
         }
     }
-}
 
+    private String getResponse(String response, String s, String connector) {
+        return response.substring(response.indexOf(s) + s.length() - " ".length(),
+                response.indexOf(connector));
+    }
+
+    private String getDate(String response, String s) {
+        return response.substring(response.indexOf(s) + s.length());
+    }
+
+    private void checkMissingKeyword(String response, String s) throws DukeKeywordMissingException {
+        if (!response.contains(s)) {
+            throw new DukeKeywordMissingException(s);
+        }
+    }
+
+    private void checkEmptyDescription(String response, String s) throws EmptyDescriptionException {
+        if (response.length() <= s.length() + " ".length()) {
+            throw new EmptyDescriptionException(s);
+        }
+    }
+
+    private int getTaskIndex(String response) {
+        int taskIndex;
+        taskIndex = Integer.parseInt(response.replaceAll("\\D+", "")) - 1;
+        return taskIndex;
+    }
+
+    private Command keyword(String response) {
+        if (response.equals("bye")) {
+            return Command.BYE;
+        } else if (response.equals("list")) {
+            return Command.LIST;
+        } else if (response.indexOf("find ") == 0) {
+            return Command.FIND;
+        } else if (response.indexOf("delete") == 0) {
+            return Command.DELETE;
+        } else if (response.indexOf("done ") == 0) {
+            return Command.DONE;
+        } else if (response.indexOf("todo ") == 0) {
+            return Command.TODO;
+        } else if (response.indexOf("deadline ") == 0) {
+            return Command.DEADLINE;
+        } else if (response.indexOf("event ") == 0) {
+            return Command.EVENT;
+        } else {
+            return Command.UNKNOWN;
+        }
+    }
+}

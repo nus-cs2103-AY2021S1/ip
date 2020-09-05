@@ -24,8 +24,8 @@ public class DialogBox extends HBox {
 
     /**
      * Constructor for DialogBox that will be used.
-     * @param text The input message that will be shown as the text
-     * @param img The display picture
+     * @param text The input message that will be shown as the text.
+     * @param img The display picture.
      */
     public DialogBox(String text, Image img) {
         try {

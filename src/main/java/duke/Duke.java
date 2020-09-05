@@ -18,9 +18,8 @@ public class Duke {
      */
     private static Parser parser;
 
-
     /**
-     * The main method that runs the chatbot application.
+     * Constructor for the Duke application.
      */
     public Duke() {
         File f = new File("D:\\24092014\\Joven\\UNI STUFF\\CS2103\\IP\\task.txt");
