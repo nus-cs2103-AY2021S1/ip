@@ -10,6 +10,7 @@ public class DoneCommand extends Command {
     private final int index;
     
     public DoneCommand (int index) {
+        assert index >= 0;
         this.index = index;
     }
     
