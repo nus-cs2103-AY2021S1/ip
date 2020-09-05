@@ -11,6 +11,8 @@ public class Deadline extends Task {
 
     public Deadline(String description, LocalDateTime deadlineBy, boolean isDone) {
         super(description, isDone);
+
+        assert deadlineBy != null : "Timing cannot be null";
         this.deadlineBy = deadlineBy;
     }
 

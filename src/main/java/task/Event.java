@@ -11,6 +11,8 @@ public class Event extends Task {
 
     public Event(String description, LocalDateTime eventAt, boolean isDone) {
         super(description, isDone);
+
+        assert eventAt != null : "Timing cannot be null";
         this.eventAt = eventAt;
     }
 
