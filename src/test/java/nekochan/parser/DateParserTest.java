@@ -12,28 +12,28 @@ public class DateParserTest {
     public void parseStringToDateTime_slashWithTime_success() {
         String dateString = "1/1/1999 12:00";
         LocalDateTime ldt = DateParser.parseStringToDateTime(dateString);
-        assertEquals(LocalDateTime.of(1999, 1, 1, 12,0), ldt);
+        assertEquals(LocalDateTime.of(1999, 1, 1, 12, 0), ldt);
     }
 
     @Test
     public void parseStringToDateTime_hyphenWithTime_success() {
         String dateString = "1-1-1999 12:00";
         LocalDateTime ldt = DateParser.parseStringToDateTime(dateString);
-        assertEquals(ldt, LocalDateTime.of(1999, 1, 1, 12,0));
+        assertEquals(ldt, LocalDateTime.of(1999, 1, 1, 12, 0));
     }
 
     @Test
     public void parseStringToDateTime_naturalWithTime_success() {
         String dateString = "1 Jan 1999 12:00";
         LocalDateTime ldt = DateParser.parseStringToDateTime(dateString);
-        assertEquals(LocalDateTime.of(1999, 1, 1, 12,0), ldt);
+        assertEquals(LocalDateTime.of(1999, 1, 1, 12, 0), ldt);
     }
 
     @Test
     public void parseStringToDateTime_naturalLowercaseWithTime_success() {
         String dateString = "1 jan 1999 12:00";
         LocalDateTime ldt = DateParser.parseStringToDateTime(dateString);
-        assertEquals(LocalDateTime.of(1999, 1, 1, 12,0), ldt);
+        assertEquals(LocalDateTime.of(1999, 1, 1, 12, 0), ldt);
     }
 
     @Test
