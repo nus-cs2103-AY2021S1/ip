@@ -121,13 +121,14 @@ public class Command {
      * @return String of words Duke say in response.
      */
     private String markTaskDone(TaskList tasks, String taskInfo) throws DukeIndexOutOfBoundsException {
-        if (taskInfo.length() <= 5) {
+        String done = "done ";
+        String requiredTask = taskInfo.replace("done", "").trim();
+        if (taskInfo.length() <= done.length()) {
             throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
         }
-        taskInfo = taskInfo.replace("done", "").trim();
         int taskNo;
         try {
-            taskNo = Integer.parseInt(taskInfo);
+            taskNo = Integer.parseInt(requiredTask);
         } catch (NumberFormatException err) {
             throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
         }
@@ -153,9 +154,9 @@ public class Command {
         if (taskInfo.trim().equals("todo")) {
             throw new DukeInvalidCommandException("The command is incomplete handsome :D");
         }
-        taskInfo = taskInfo.replace("todo", "").trim();
+        String requiredTask = taskInfo.replace("todo", "").trim();
         assert taskInfo.length() > 0 : "taskInfo should not be empty";
-        return tasks.addTask(new ToDos(taskInfo));
+        return tasks.addTask(new ToDos(requiredTask));
     }
 
     /**
@@ -167,19 +168,20 @@ public class Command {
      */
     private String handleDeadLine(TaskList tasks, String taskInfo)
         throws DukeInvalidCommandException, DukeDateTimeParseException {
-        taskInfo = taskInfo.replace("deadline", "");
-        String[] stringArr = taskInfo.split("/by", 2);
+        String taskWithBy = taskInfo.replace("deadline", "");
+        // splits task to 2 segments - task information and date
+        String[] stringArr = taskWithBy.split("/by", 2);
         if (stringArr.length != 2) {
             throw new DukeInvalidCommandException("The command is incomplete handsome :D");
         }
-        taskInfo = stringArr[0].trim();
+        String requiredTask = stringArr[0].trim();
         String by = stringArr[1].trim();
-        if (taskInfo.length() == 0 || by.length() == 0) {
+        if (requiredTask.length() == 0 || by.length() == 0) {
             throw new DukeInvalidCommandException("The command is incomplete handsome :D");
         }
-        assert taskInfo.length() > 0 : "taskInfo should not be empty";
+        assert requiredTask.length() > 0 : "taskInfo should not be empty";
         assert by.length() > 0 : "by should not be empty";
-        return tasks.addTask(new Deadlines(taskInfo, by));
+        return tasks.addTask(new Deadlines(requiredTask, by));
     }
 
     /**
@@ -191,19 +193,20 @@ public class Command {
      */
     private String handleEvent(TaskList tasks, String taskInfo)
         throws DukeInvalidCommandException, DukeDateTimeParseException {
-        taskInfo = taskInfo.replace("event", "");
-        String[] stringArr = taskInfo.split("/at", 2);
+        String taskWithAt = taskInfo.replace("event", "");
+        // splits task to 2 segments - task information and date
+        String[] stringArr = taskWithAt.split("/at", 2);
         if (stringArr.length != 2) {
             throw new DukeInvalidCommandException("The command is incomplete handsome :D");
         }
-        taskInfo = stringArr[0].trim();
+        String requiredTask = stringArr[0].trim();
         String at = stringArr[1].trim();
-        if (taskInfo.length() == 0 || at.length() == 0) {
+        if (requiredTask.length() == 0 || at.length() == 0) {
             throw new DukeInvalidCommandException("The command is incomplete handsome :D");
         }
-        assert taskInfo.length() > 0 : "taskInfo should not be empty";
+        assert requiredTask.length() > 0 : "taskInfo should not be empty";
         assert at.length() > 0 : "at should not be empty";
-        return tasks.addTask(new Events(taskInfo, at));
+        return tasks.addTask(new Events(requiredTask, at));
     }
 
     /**
