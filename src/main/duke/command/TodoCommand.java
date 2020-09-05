@@ -5,14 +5,13 @@ import java.io.IOException;
 import duke.exception.DukeExecutionException;
 import duke.storage.Storage;
 import duke.task.Todo;
-import duke.ui.Ui;
 
 /**
  * Represents an request by the user to add a Todo object to the list of Tasks.
  */
 public class TodoCommand extends Command {
 
-    private Todo todo;
+    private final Todo todo;
 
     /**
      * Constructor for a TodoCommand/
@@ -20,7 +19,7 @@ public class TodoCommand extends Command {
      * @param name The name of the Todo object to be created
      */
     public TodoCommand(String name) {
-        assert !name.isBlank(): "Input is empty.";
+        assert !name.isBlank() : "Input is empty.";
         this.todo = new Todo(name);
     }
 

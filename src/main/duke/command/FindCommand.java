@@ -2,14 +2,13 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.storage.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a request from the user to find tasks containing a keyword.
  */
 public class FindCommand extends Command {
 
-    private String keyword;
+    private final String keyword;
 
     /**
      * Constructor for a FindCommand.
@@ -17,7 +16,7 @@ public class FindCommand extends Command {
      * @param input the text to search for
      */
     public FindCommand(String input) {
-        assert !input.isBlank(): "Input is empty.";
+        assert !input.isBlank() : "Input is empty.";
         keyword = input.toLowerCase();
     }
 

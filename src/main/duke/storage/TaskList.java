@@ -2,6 +2,7 @@ package duke.storage;
 
 import java.util.ArrayList;
 
+import duke.exception.DukeArgumentException;
 import duke.task.Task;
 
 /**
@@ -61,10 +62,15 @@ public class TaskList {
      * @param index the index to mark as complete
      * @return the Task that was completed.
      */
-    public Task complete(int index) {
-        Task toComplete = tasks.get(index);
-        toComplete.setCompleted();
-        return toComplete;
+    public Task complete(int index) throws DukeArgumentException {
+        try {
+            Task toComplete = tasks.get(index);
+            toComplete.setCompleted();
+            return toComplete;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeArgumentException(String.format("Array index %d is out of bounds.", index));
+        }
+
     }
 
     @Override

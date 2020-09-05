@@ -8,7 +8,6 @@ import duke.exception.DukeArgumentException;
 import duke.exception.DukeExecutionException;
 import duke.storage.Storage;
 import duke.task.Deadline;
-import duke.ui.Ui;
 
 
 /**
@@ -16,7 +15,7 @@ import duke.ui.Ui;
  */
 public class DeadlineCommand extends Command {
 
-    private Deadline deadline;
+    private final Deadline deadline;
 
     /**
      * Constructor for a DeadlineCommand object.
@@ -25,10 +24,12 @@ public class DeadlineCommand extends Command {
      * @throws DukeArgumentException if the arguments from the input string are invalid.
      */
     public DeadlineCommand(String input) throws DukeArgumentException {
-        assert !input.isBlank(): "Input is empty.";
+        assert !input.isBlank() : "Input is empty.";
         String[] args = input.split("/by ", 2);
         try {
-            this.deadline = new Deadline(args[0].trim(), LocalDate.parse(args[1].trim()));
+            String name = args[0].trim();
+            LocalDate date = LocalDate.parse(args[1].trim());
+            deadline = new Deadline(name, date);
         } catch (ArrayIndexOutOfBoundsException ae) {
             throw new DukeArgumentException("Insufficient arguments provided for duke.Tasks.Deadline.");
         } catch (DateTimeParseException de) {

@@ -5,10 +5,11 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    private LocalDate time;
+    private final LocalDate time;
 
     /**
      * Constructor for a Event object.
+     *
      * @param name the name for this Event task
      * @param time the time for the event
      */
@@ -19,8 +20,9 @@ public class Event extends Task {
 
     /**
      * Constructor for a Event object with the ability to set completion status.
-     * @param name the name for this Event task
-     * @param time the time for the event
+     *
+     * @param name      the name for this Event task
+     * @param time      the time for the event
      * @param completed the completion status of this Event.
      */
     public Event(String name, LocalDate time, String completed) {

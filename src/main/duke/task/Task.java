@@ -30,6 +30,7 @@ public class Task {
 
     /**
      * Converts the task into an array of the type, completion status, and name in Strings.
+     *
      * @return Array of Task details.
      */
     public String[] toSaveFormatArray() {
