@@ -91,7 +91,7 @@ public class Deadline extends Task {
             return true;
         } else if (o instanceof Deadline) {
             Deadline temp = (Deadline) o;
-            return this.name.equals(temp.name) && (this.isDone == temp.isDone) && this.deadline.equals(temp.deadline);
+            return this.name.equals(temp.name) && this.deadline.equals(temp.deadline);
         } else {
             return false;
         }

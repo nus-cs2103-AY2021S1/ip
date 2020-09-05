@@ -3,6 +3,7 @@ package command;
 import exceptions.InvalidCommandException;
 import exceptions.NoDateException;
 import exceptions.NoTaskException;
+import exceptions.SimilarTaskExistsException;
 import exceptions.WrongDateTimeFormatException;
 import parserstorageui.Storage;
 import parserstorageui.Ui;
@@ -24,11 +25,13 @@ public class AddCommand extends Command {
      **/
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws NoDateException, InvalidCommandException,
-        NoTaskException, WrongDateTimeFormatException {
+        NoTaskException, WrongDateTimeFormatException, SimilarTaskExistsException {
         try {
             tasks = tasks.add(this.command);
         } catch (WrongDateTimeFormatException e) {
             throw new WrongDateTimeFormatException(e.getMessage());
+        } catch (SimilarTaskExistsException e) {
+            throw new SimilarTaskExistsException(e.getMessage());
         }
         return ui.showAddedTask(tasks.taskSize(), tasks.getAddedOrDeletedTask());
     }

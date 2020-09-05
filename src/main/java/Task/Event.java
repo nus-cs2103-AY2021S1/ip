@@ -83,7 +83,7 @@ public class Event extends Task {
             return true;
         } else if (o instanceof Event) {
             Event temp = (Event) o;
-            return this.name.equals(temp.name) && (this.isDone == temp.isDone) && this.at.equals(temp.at);
+            return this.name.equals(temp.name) && this.at.equals(temp.at);
         } else {
             return false;
         }

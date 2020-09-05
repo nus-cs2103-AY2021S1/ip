@@ -52,11 +52,12 @@ test {
 sourceCompatibility = 11
 
 application {
-    mainClassName = "Main"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
     archiveBaseName = "duke"
+    archiveVersion = "0.2.0"
     archiveClassifier = null
 }
 
