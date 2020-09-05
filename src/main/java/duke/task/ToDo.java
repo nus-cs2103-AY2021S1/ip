@@ -1,5 +1,10 @@
 package duke.task;
 
+import duke.command.InvalidCommandException;
+import duke.component.Parser;
+
+import java.time.LocalDate;
+
 /**
  * Represents a todo task that contains a description.
  */
@@ -10,6 +15,25 @@ public class ToDo extends Task {
      */
     public ToDo(String description) {
         super(description);
+    }
+
+    /**
+     * Creates a todo task using the resource file.
+     * @param taskInfo the full line of the task
+     * @throws InvalidCommandException if the resource file format is invalid
+     */
+    public ToDo(String[] taskInfo) throws InvalidCommandException {
+        super("");
+        assert taskInfo[0].equals("T") : "Wrong read of file";
+        if (taskInfo.length != 3) {
+            throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
+        }
+        try {
+            isDone = Integer.parseInt(taskInfo[1]) == 1;
+            description = taskInfo[2];
+        } catch (Exception e) {
+            throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
+        }
     }
 
     @Override

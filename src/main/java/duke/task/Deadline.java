@@ -32,22 +32,30 @@ public class Deadline extends TimedTask {
 
     /**
      * Creates a deadline task using the resource file.
-     * @param fullDescription the full line of the task
+     * @param taskInfo the full line of the task
      * @throws InvalidCommandException if the resource file format is invalid
      */
-    public Deadline(String fullDescription) throws InvalidCommandException {
+    public Deadline(String[] taskInfo) throws InvalidCommandException {
         super("");
-        String[] info = fullDescription.split(Storage.splitter);
-        if (info.length != 3) {
-            throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
-        } else {
+        assert taskInfo[0].equals("D") : "Wrong read of file";
+        try {
+            int done = Integer.parseInt(taskInfo[1]);
+            if ((done == 0 && taskInfo.length != 5) || (done == 1 && taskInfo.length != 6)) {
+                throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
+            }
             try {
-                description = info[0];
-                byTime = LocalDate.parse(info[1], Parser.DATE_INPUT_FORMAT);
-                repeat = Integer.parseInt(info[2]);
+                description = taskInfo[2];
+                byTime = LocalDate.parse(taskInfo[3], Parser.DATE_INPUT_FORMAT);
+                repeat = Integer.parseInt(taskInfo[4]);
+                if (done == 1) {
+                    lastDone = LocalDate.parse(taskInfo[5], Parser.DATE_INPUT_FORMAT);
+                    this.isDone = true;
+                }
             } catch (Exception e) {
                 throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
             }
+        } catch (StackOverflowError | NumberFormatException e) {
+            throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
         }
     }
 

@@ -6,10 +6,12 @@ import java.time.LocalDate;
 
 public abstract class TimedTask extends Task {
     protected int repeat;
+    protected LocalDate lastDone;
 
     public TimedTask(String description) {
         super(description);
         repeat = 0;
+        lastDone = null;
     }
 
     /**

@@ -19,9 +19,7 @@ public class ActualStorage implements Storage {
     public static final char TODO_INDICATOR = 'T';
     public static final char DEADLINE_INDICATOR = 'D';
     public static final char EVENT_INDICATOR = 'E';
-    public static final char DIVIDER = '|';
     public static final String INPUT_FILE_FORMAT_ERROR = "Input file format error!";
-    public static final int FILE_DIVIDER_LENGTH = 6;
     private final String filePath;
     private final TaskList list;
 
@@ -46,35 +44,27 @@ public class ActualStorage implements Storage {
     }
 
     private void readNextTask(Scanner sc) throws InvalidCommandException {
-        String taskType = getTaskType(sc);
-        int done = getDoneMarker(sc);
-        String fullDescription = getDescription(sc);
-        Task toAdd = getTask(taskType, done, fullDescription);
+        String[] taskInfo = sc.nextLine().split(Storage.splitter);
+        String taskType = taskInfo[0];
+        Task toAdd = getTask(taskType, taskInfo);
         list.add(toAdd);
     }
 
-    private Task getTask(String taskType, int done, String fullDescription) throws InvalidCommandException {
+    private Task getTask(String taskType, String[] taskInfo) throws InvalidCommandException {
         Task toAdd;
         if (isToDo(taskType)) {
-            toAdd = new ToDo(fullDescription);
+            toAdd = new ToDo(taskInfo);
         } else {
             if (isDeadline(taskType)) {
-                toAdd = new Deadline(fullDescription);
+                toAdd = new Deadline(taskInfo);
             } else if (isEvent(taskType)) {
-                toAdd = new Event(fullDescription);
+                toAdd = new Event(taskInfo);
             } else {
                 assert false : INPUT_FILE_FORMAT_ERROR;
                 toAdd = new ToDo("error");
             }
         }
-        markAsDoneIfNeeded(done, toAdd);
         return toAdd;
-    }
-
-    private void markAsDoneIfNeeded(int done, Task toAdd) throws InvalidCommandException {
-        if (done == 1) {
-            toAdd.markAsDone();
-        }
     }
 
     private boolean isEvent(String taskType) {

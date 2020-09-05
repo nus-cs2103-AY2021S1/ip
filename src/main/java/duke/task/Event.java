@@ -31,23 +31,33 @@ public class Event extends TimedTask {
 
     /**
      * Creates an event task using the resource file.
-     * @param fullDescription the full line of the task
+     * @param taskInfo the full line of the task
      * @throws InvalidCommandException if the resource file format is invalid
      */
-    public Event(String fullDescription) throws InvalidCommandException {
+    public Event(String[] taskInfo) throws InvalidCommandException {
         super("");
-        String[] info = fullDescription.split(" &&& ");
-        description = info[0];
-        if (info.length == 3) {
-            try {
-                atTime = LocalDateTime.parse(info[1], Parser.DATE_TIME_INPUT_FORMAT);
-                repeat = Integer.parseInt(info[2]);
-            } catch (Exception e) {
+        assert taskInfo[0].equals("E") : "Wrong read of file";
+        try {
+            int done = Integer.parseInt(taskInfo[1]);
+            description = taskInfo[2];
+            if (taskInfo.length == 4) {
+                handleTentativeSlots(taskInfo[3]);
+                if (done == 1) {
+                    throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
+                }
+            } else if (taskInfo.length <= 6) {
+                atTime = LocalDateTime.parse(taskInfo[3], Parser.DATE_TIME_INPUT_FORMAT);
+                repeat = Integer.parseInt(taskInfo[4]);
+                if (done == 1) {
+                    lastDone = LocalDate.parse(taskInfo[5], Parser.DATE_INPUT_FORMAT);
+                    this.isDone = true;
+                } else if (taskInfo.length == 6) {
+                    throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
+                }
+            } else {
                 throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
             }
-        } else if (info.length == 2) {
-            handleTentativeSlots(info[1]);
-        } else {
+        } catch (StackOverflowError | NumberFormatException e) {
             throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
         }
     }
