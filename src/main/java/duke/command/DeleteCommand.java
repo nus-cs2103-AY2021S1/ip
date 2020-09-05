@@ -7,6 +7,8 @@ import duke.ui.Response;
 import duke.ui.Ui;
 import duke.exceptions.NoSuchTaskException;
 
+import java.io.IOException;
+
 /**
  * Command to delete a Task. Created by using "delete taskNumber"
  */
@@ -27,9 +29,10 @@ public class DeleteCommand extends Command {
      * @param storage Storage to retrieve and store Tasks entered by user
      * @return Response object containing the feedback String to be displayed by the GUI
      * @throws NoSuchTaskException if invalid taskNumber was provided
+     * @throws IOException if there is an error with storing changes into storage file
      */
     @Override
-    public Response execute(TaskList tasks, Ui ui, Storage storage) throws NoSuchTaskException {
+    public Response execute(TaskList tasks, Ui ui, Storage storage) throws NoSuchTaskException, IOException {
         Task deletedTask = tasks.deleteTask(taskNumber);
         String message = ui.formatMessage(String.format("Okay, I've deleted the following task: \n %s",
                 deletedTask.toString()));

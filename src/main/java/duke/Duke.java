@@ -15,7 +15,7 @@ public class Duke {
     private final Parser parser;
     private final DukeStateManager dukeStateManager;
 
-    private Duke() throws IOException {
+    public Duke() throws IOException {
         try {
             Storage storage = new Storage();
             TaskList taskList = new TaskList(storage.getTasks());
@@ -30,14 +30,18 @@ public class Duke {
 
     public Response getResponse(String input) {
         try {
+            DukeState currentState = dukeStateManager.getCurrentState();
+            TaskList taskList = currentState.getTaskList();
+            Storage store = currentState.getStorage();
             Command c = parser.parse(input);
             Response r = c.execute(taskList, ui, store);
+            DukeState newState = new DukeState(taskList.getCopyOf(), store.getCopyOf());
+            dukeStateManager.addState(newState);
             return r;
         } catch (DukeException e) {
             return new Response(false, e.getFriendlyMessage());
+        } catch (IOException e) {
+            return new Response(false, "Unable to connect to storage :-(");
         }
-    }
-
-    public static void main(String[] args) {
     }
 }

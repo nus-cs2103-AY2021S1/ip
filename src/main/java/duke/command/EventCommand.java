@@ -8,6 +8,7 @@ import duke.parser.DateParser;
 import duke.task.Event;
 import duke.task.TaskList;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 /**
@@ -34,7 +35,7 @@ public class EventCommand extends Command {
      * @throws WrongDateFormatException if invalid date String provided
      */
     @Override
-    public Response execute(TaskList tasks, Ui ui, Storage storage) throws WrongDateFormatException {
+    public Response execute(TaskList tasks, Ui ui, Storage storage) throws WrongDateFormatException, IOException {
         LocalDateTime eventDateTime = DateParser.parseString(dateStr);
         Event event = new Event(description, eventDateTime);
         tasks.addTask(event);

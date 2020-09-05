@@ -18,6 +18,17 @@ public class DukeStateManager {
         this.currentNode = new Node(initialState);
     }
 
+    public DukeState getCurrentState() {
+        return currentNode.state;
+    }
+
+    public void addState(DukeState newState) {
+        Node newNode = new Node(newState);
+        currentNode.next = newNode;
+        newNode.previous = currentNode;
+        currentNode = newNode;
+    }
+
     /**
      * Undo by returning to a previous Node via a previous pointer.
      *

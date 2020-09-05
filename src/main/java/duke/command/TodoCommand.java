@@ -6,6 +6,8 @@ import duke.task.Todo;
 import duke.ui.Response;
 import duke.ui.Ui;
 
+import java.io.IOException;
+
 /**
  * Represents a command to create a Todo Task. Created by using "todo description"
  */
@@ -25,9 +27,10 @@ public class TodoCommand extends Command {
      * @param ui Ui for formatting of message Strings to be displayed to user
      * @param storage Storage to retrieve and store Tasks entered by user
      * @return Response object containing the feedback String to be displayed by the GUI
+     * @throws IOException if there is an error with storing changes into storage file
      */
     @Override
-    public Response execute(TaskList tasks, Ui ui, Storage storage) {
+    public Response execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         Todo todo = new Todo(description);
         tasks.addTask(todo);
         String message = ui.formatMessage(String.format("Okay! I've added the following task: \n %s",

@@ -22,7 +22,7 @@ import java.util.Scanner;
 /**
  * Represents the state of the storage file used to store user's Tasks
  */
-public class Storage {
+public class Storage implements Copiable {
 
     private final  String DIRECTORY_PATH = "data";
     private final  String STORAGE_PATH = "data/duke.txt";
@@ -45,6 +45,15 @@ public class Storage {
             storagePath.createNewFile();
         }
         currentState = new File(STORAGE_PATH);
+    }
+
+    private Storage(File currentState) {
+        this.currentState = currentState;
+    }
+
+    @Override
+    public Storage getCopyOf() {
+        return new Storage(currentState);
     }
 
     /**
@@ -80,14 +89,14 @@ public class Storage {
      * @return A new Storage object representing the new state of the storage file
      * @throws IOException if problem with reading/writing to storage file
      */
-    public Storage updateTasks(List<Task> taskList) throws IOException {
+    public void updateTasks(List<Task> taskList) throws IOException {
         FileWriter storageWriter = new FileWriter(STORAGE_PATH, true);
         clearTasks();
         for (Task t : taskList) {
             addTask(storageWriter, t);
         }
         storageWriter.close();
-        return new Storage();
+        currentState = new File(STORAGE_PATH);
     }
 
     /**
