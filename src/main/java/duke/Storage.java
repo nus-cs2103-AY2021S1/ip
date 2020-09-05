@@ -31,7 +31,7 @@ public class Storage {
      * @param filePath The filePath of the storage text file.
      */
     public Storage(String filePath) {
-        assert(filePath != null);
+        assert(filePath != null && !filePath.equals(""));
         this.filePath = filePath;
     }
 
@@ -48,8 +48,7 @@ public class Storage {
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
-                String next = sc.nextLine();
-                String[] tokens = next.split(" \\| ");
+                String[] tokens = sc.nextLine().split(" \\| ");
                 if (tokens.length < 3) {
                     throw new DukeInvalidDataException("Oops data is invalid");
                 }

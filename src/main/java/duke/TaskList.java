@@ -135,7 +135,7 @@ public class TaskList {
     }
 
     /**
-     * Return the String representing list of task on that date given.
+     * Returns the String representing list of task on that date given.
      *
      * @param date The given date query.
      * @return The String representing the list of tasks.
@@ -159,6 +159,12 @@ public class TaskList {
                 "There are no tasks on this date!");
     }
 
+    /**
+     * Returns the String representing list of tasks with the keyword.
+     *
+     * @param keyword The specified keyword.
+     * @return String representing the list of tasks.
+     */
     public String getTaskWithKeyword(String keyword) {
         List<Task> tasksWithKeyword = new ArrayList<>();
         for (Task t : list) {
