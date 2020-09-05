@@ -23,7 +23,7 @@ public class Duke {
     private Ui ui;
 
     public Duke(String filePath) {
-        new Duke(filePath, System.in);
+        this(filePath, System.in);
     }
 
     public Duke(String filePath, InputStream in) {
@@ -60,7 +60,8 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        new Duke(DEFAULT_STORAGE_FILEPATH).run();
+        Duke duke = new Duke(DEFAULT_STORAGE_FILEPATH);
+        duke.run();
 
     }
 
