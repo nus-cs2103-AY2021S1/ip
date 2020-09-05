@@ -13,8 +13,15 @@ import duke.ui.Ui;
  */
 public class AddToDoCommand extends AddCommand {
 
+    private final String taskDetails;
+
+    /**
+     * Initializes the AddToDoCommand with the taskDetails;
+     *
+     * @param taskDetails Task details.
+     */
     public AddToDoCommand(String taskDetails) {
-        super(taskDetails);
+        this.taskDetails = taskDetails;
     }
 
     /**
@@ -27,10 +34,10 @@ public class AddToDoCommand extends AddCommand {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (getTaskDetails().isEmpty()) {
+        if (taskDetails.isEmpty()) {
             throw new EmptyTaskException(TaskType.TODO);
         } else {
-            return addTask(new ToDo(getTaskDetails()), tasks, ui, storage);
+            return addTask(new ToDo(taskDetails), tasks, ui, storage);
         }
     }
 }
