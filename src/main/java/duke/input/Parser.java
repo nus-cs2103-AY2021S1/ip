@@ -1,8 +1,12 @@
 package duke.input;
 
-import duke.duke.Duke;
-import duke.task.Task;
-import java.util.List;
+import duke.command.Command;
+import duke.command.CompleteTaskCommand;
+import duke.command.DeadlineCommand;
+import duke.command.EventCommand;
+import duke.command.ListTasksCommand;
+import duke.command.TodoCommand;
+import duke.exception.ParserException;
 
 /**
  * duke.input.Parser is the class that handles input parsing. Given a string, it should determine
@@ -13,6 +17,9 @@ public class Parser {
   public static final String CMD_TERMINATE = "bye";
   public static final String CMD_TASK_LIST = "list";
   public static final String CMD_TASK_SET_DONE = "done";
+  public static final String CMD_TASK_ADD_TODO = "todo";
+  public static final String CMD_TASK_ADD_EVENT = "event";
+  public static final String CMD_TASK_ADD_DEADLINE = "deadline";
 
   /**
    * @param s command supplied
@@ -26,39 +33,69 @@ public class Parser {
    * @param s command supplied
    * @return a list of string (tasks) corresponding to command execution output
    */
-  public static String runCommand(String s) {
+  public static Command parseCommand(String s) throws ParserException {
     String[] args = s.split("\\s+", 2);
 
-    List<Task> res;
-    StringBuilder sb = new StringBuilder();
-
     switch (args[0].toLowerCase()) {
-      case CMD_TASK_LIST: {
-        res = Duke.getInstance().getTasks();
-        sb.append("Here are the tasks in your list:\n");
-        break;
+      case CMD_TASK_LIST:
+        return new ListTasksCommand();
+      case CMD_TASK_ADD_TODO: {
+        String todo = parseTodo(args[1]);
+        return new TodoCommand(todo);
+      }
+      case CMD_TASK_ADD_EVENT: {
+        String[] inputArr = parseEvent(args[1]);
+        return new EventCommand(inputArr[0], inputArr[1]);
+      }
+      case CMD_TASK_ADD_DEADLINE: {
+        String[] inputArr = parseDeadline(args[1]);
+        return new DeadlineCommand(inputArr[0], inputArr[1]);
       }
       case CMD_TASK_SET_DONE: {
-        res = Duke.getInstance().editTask(Integer.parseInt(args[1]), true);
-        sb.append("Nice! I've marked this task as done:\n");
-        break;
+        int[] taskIdList = parseMarkDone(args[1]);
+        return new CompleteTaskCommand(taskIdList[0]);
+//        for (int taskId : taskIdList) {
+//          Command command = new CompleteTaskCommand(taskId);
+//          command.execute(Duke.getInstance());
+//        }
       }
-      default: {
-        res = Duke.getInstance().addTask(s);
-        sb.append("You've added task:\n");
-      }
+      default:
+        throw new ParserException("No such command!");
     }
+  }
 
-    for (int i = 0; i < res.size(); ++i) {
-      sb.append(String
-          .format("[%s] %s", res.get(i).isDone() ? "DONE" : "NOT DONE",
-              res.get(i).getDescription()));
-      if (args[0].toLowerCase().equals(CMD_TASK_LIST)) {
-        sb.append(String.format(" [id=%d]", i));
-      }
-      sb.append('\n');
+  public static String parseTodo(String s) throws ParserException {
+    if (s.length() <= 0) {
+      throw new ParserException("Todo format error.");
     }
+    return s;
+  }
 
-    return sb.toString();
+  public static String[] parseEvent(String s) throws ParserException {
+    String[] arr = s.split(" /at ");
+    if (arr.length <= 1) {
+      throw new ParserException("Event format error.");
+    }
+    return arr;
+  }
+
+  public static String[] parseDeadline(String s) throws ParserException {
+    String[] arr = s.split(" /by ");
+    if (arr.length <= 1) {
+      throw new ParserException("Deadline format error.");
+    }
+    return arr;
+  }
+
+  public static int[] parseMarkDone(String s) throws ParserException {
+    String[] arr = s.split(" ");
+    if (arr.length <= 0) {
+      throw new ParserException("Mark tasks done format error.");
+    }
+    int[] taskIdList = new int[arr.length];
+    for (int i = 0; i < arr.length; ++i) {
+      taskIdList[i] = Integer.parseInt(arr[i]);
+    }
+    return taskIdList;
   }
 }
