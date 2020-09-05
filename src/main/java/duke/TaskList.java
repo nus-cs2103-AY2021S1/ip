@@ -65,6 +65,9 @@ public class TaskList {
      *                              but the [description] is in not in a valid date format.
      */
     public String processList(String fullCommand) throws InvalidDateException {
+
+        assert fullCommand != null;
+
         if (fullCommand.trim().equalsIgnoreCase("list")) {
             return printList();
         } else {
@@ -103,6 +106,8 @@ public class TaskList {
      */
     private String printList(LocalDate date) {
 
+        assert date != null;
+
         StringBuilder str = new StringBuilder();
 
         int i = 0;
@@ -135,6 +140,9 @@ public class TaskList {
      * @throws DuplicateTaskException If an existing ToDo task is already on the list.
      */
     public void addToDo(String task) throws DuplicateTaskException {
+
+        assert task != null;
+
         Task toDo = new ToDo(task.trim());
         if (tasks.contains(toDo)) {
             throw new DuplicateTaskException();
@@ -152,6 +160,8 @@ public class TaskList {
      * @throws EventInvalidDate       If the date of the event given is not in a valid date time format.
      */
     public void addEvent(String input) throws DuplicateTaskException, EventInvalidDate, InvalidEndDate {
+
+        assert input != null;
 
         try {
             String task = input.substring(0, input.indexOf('/')).trim();
@@ -200,12 +210,12 @@ public class TaskList {
      */
     public void addDeadline(String input) throws DuplicateTaskException, DeadlineInvalidDate {
 
+        assert input != null;
+
         try {
 
             String task = input.substring(0, input.indexOf('/')).trim();
-
             LocalDateTime date = Parser.getDateTime(input.substring(input.indexOf("/by") + 4));
-
             Deadline deadline = new Deadline(task, date);
 
             if (tasks.contains(deadline)) {
@@ -252,8 +262,6 @@ public class TaskList {
     public String deleteTask(Integer... taskNumbers) throws InvalidIndexException {
         try {
 
-            ArrayList<Task> deletedTasks = new ArrayList<>();
-
             // Check if all taskNumbers within index
             for (Integer taskNo: taskNumbers) {
                 if (taskNo < 1 || taskNo > tasks.size()) {
@@ -261,6 +269,8 @@ public class TaskList {
                 }
             }
 
+            // Delete tasks listed in taskNumbers
+            ArrayList<Task> deletedTasks = new ArrayList<>();
             for (Integer taskNo: taskNumbers) {
                 deletedTasks.add(tasks.get(taskNo - 1));
                 tasks.set(taskNo - 1, null);
@@ -268,6 +278,7 @@ public class TaskList {
 
             tasks.removeIf(Objects::isNull);
 
+            // List deleted tasks
             StringBuilder str = new StringBuilder();
             str.append("Noted. I've removed these tasks:\n");
 
@@ -318,7 +329,7 @@ public class TaskList {
         }
 
         if (i == 0) {
-            System.out.println("OOPS. There are no tasks on your list with the following keyword.");
+            str.append("OOPS. There are no tasks on your list with the following keyword.");
         }
 
         return str.toString().trim();

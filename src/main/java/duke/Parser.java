@@ -38,6 +38,8 @@ public class Parser {
     public static Command parse(String fullCommand)
         throws UnrecognizedTaskException, NoIndexException, EmptyTaskException, NoKeywordException {
 
+        assert fullCommand != null;
+
         fullCommand = fullCommand.trim();
 
         String firstWord = fullCommand.contains(" ")
@@ -136,6 +138,7 @@ public class Parser {
      */
     public static LocalDateTime getDateTime(String dateTimeString) throws InvalidDateException {
 
+        assert dateTimeString != null;
         dateTimeString = dateTimeString.trim();
 
         try {
