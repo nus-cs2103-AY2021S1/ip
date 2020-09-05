@@ -3,6 +3,7 @@ package duke.util;
 import duke.task.Task;
 
 import java.util.Scanner;
+import java.util.List;
 
 /**
  * User Interface (Ui) is the front-end of the application which the user
@@ -122,8 +123,10 @@ public class Ui {
      * @param task the task object to be added to the message.
      * @return the formatted success message.
      */
-    public String getSuccessMessage(String type, Task task) {
+    public String getSuccessMessage(String type, Task task) throws DukeException {
         StringBuilder sb = new StringBuilder("okay I've ");
+        assert List.of("add", "remove", "done").contains(type)
+                : "Task manipulation type can only be one of [add, remove, done].";
         switch(type) {
         case "add":
             sb.append("added:");
@@ -133,6 +136,8 @@ public class Ui {
             break;
         case "done":
             sb.append("marked this task as done:");
+        default:
+            throw new DukeException("Unrecognized task manipulation type!");
         }
         sb.append(String.format("\n    %s", task));
         return sb.toString();
@@ -148,9 +153,13 @@ public class Ui {
         };
         StringBuilder sb = new StringBuilder("here are the available commands:\n");
         for (String command: commands) {
-            sb.append("    - ").append(command).append("\n");
+            sb.append(" - ").append(command).append("\n");
         }
         sb.append("<required> [optional]");
         return sb.toString();
+    }
+
+    public String getGuiWelcomeMessage() {
+        return "hello! Tebby lives to serve :)";
     }
 }

@@ -66,6 +66,7 @@ public class Storage {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
                 String[] t = sc.nextLine().split(",");
+                assert List.of("T", "E", "D").contains(t[0]) : "Subtype should be T, E, or D only";
 
                 switch (t[0]) {
                 case "T":
@@ -77,6 +78,8 @@ public class Storage {
                 case "E":
                     list.add(new Event(t[2], t[3], t[1].equals("1")));
                     break;
+                default:
+                    throw new DukeException("Corrupted file, previous data will not be loaded!");
                 }
             }
             sc.close();

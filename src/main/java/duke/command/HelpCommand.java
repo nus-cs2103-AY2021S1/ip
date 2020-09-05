@@ -17,6 +17,8 @@ public class HelpCommand implements Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String message = ui.getListOfCommands();
+        ui.sendMessage(message);
         return ui.getListOfCommands();
     }
 }

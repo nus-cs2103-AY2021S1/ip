@@ -81,7 +81,7 @@ public class Parser {
             } catch (NumberFormatException nfe) {
                 throw new DukeException("Invalid task number!");
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("Hm? What task number have you done?");
+                return new InvalidCommand("hm? what task number have you done?");
             }
         case "list":
             return new ListCommand();
@@ -96,13 +96,13 @@ public class Parser {
             } catch (NumberFormatException nfe) {
                 throw new DukeException("Invalid task number!");
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("Uh? What task number to remove?");
+                return new InvalidCommand("uh? what task number to remove?");
             }
         case "find":
             try {
                 return new FindCommand(parsed[1]);
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("Hm? What do you want to find?");
+                return new InvalidCommand("hm? what do you want to find?");
             }
         case "help":
             return new HelpCommand();
