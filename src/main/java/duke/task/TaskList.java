@@ -26,6 +26,7 @@ public class TaskList {
      * @return String representation of the Task object that is deleted
      */
     public String deleteTask(int taskNumber) {
+        assert taskNumber >= 0 : "taskNumber cannot be negative";
         int i = taskNumber - 1;
         Task removedTask = this.tasklist.get(i);
         this.tasklist.remove(i);
@@ -38,6 +39,7 @@ public class TaskList {
      * @return String representation of the Task object that is updated
      */
     public String updateTask(int taskNumber) {
+        assert taskNumber >= 0 : "taskNumber cannot be negative";
         int i = taskNumber - 1;
         Task updatedTask = this.tasklist.get(i);
         updatedTask.setDone();
