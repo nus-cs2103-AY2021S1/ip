@@ -32,6 +32,7 @@ public class Parser {
             int index = Integer.parseInt(splitInput[1]);
             return new Command(taskType, index);
         case TODO:
+            // Fallthrough
         case FIND:
             if (input.length() <= 5 || input.split(" ").length < 2) {
                 throw new IllegalArgumentException("The description of this TaskType cannot be empty.");
