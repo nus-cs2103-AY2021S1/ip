@@ -1,10 +1,13 @@
 package duke;
 
+import javax.swing.plaf.synth.SynthToolTipUI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import duke.exception.CalendarException;
 import duke.exception.DeleteException;
@@ -136,7 +139,7 @@ public class TaskList {
                 String type = task.getType();
                 if (type.equals("E")) {
                     Event event = (Event) task;
-                    LocalDate eventDate = event.getDate();
+                    LocalDate eventDate = event.getEventDate();
                     if (eventDate.equals(localDate)) {
                         hasSomething = true;
                         builder.append("\n" + task.toString());
@@ -172,6 +175,12 @@ public class TaskList {
      * @return List containing all of the tasks.
      */
     public List<Task> getTasks() {
+        return this.tasks;
+    }
+
+    public List<Task> sort() {
+        Collections.sort(this.tasks);
+        Storage.updateData(this.tasks);
         return this.tasks;
     }
 
