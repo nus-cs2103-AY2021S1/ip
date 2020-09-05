@@ -1,6 +1,7 @@
 package duke.classes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import duke.exceptions.BlahException;
@@ -148,9 +149,11 @@ public class TaskList {
     public Task delete(String command) {
         int taskNo = Character.getNumericValue(command.charAt(7)) - 1;
         Task task = todoList.remove(taskNo);
-        for (int i = taskNo; i < todoList.size(); i++) {
-            todoList.get(i).setIndex(todoList.get(i).getIndex() - 1);
-        }
+        todoList.forEach((item) -> {
+            if (item.getIndex() > taskNo) {
+                item.setIndex(item.getIndex() - 1);
+            }
+        });
         return task;
     }
     /**
@@ -166,18 +169,18 @@ public class TaskList {
 
         query = query.substring(5);
         List<Task> queriedList = new ArrayList<>();
-
         for (Task task : todoList) {
+            String finalQuery = query;
             String description = task.getDescription();
             String[] keywords;
             switch (task.getType()) {
             case TODO:
                 keywords = description.split("\\s");
-                for (String keyword : keywords) {
-                    if (keyword.equals(query)) {
-                        queriedList.add(new Todo(description, queriedList.size() + 1, task.hasDone()));
-                    }
-                }
+                Arrays.stream(keywords)
+                        .filter((keyword) -> keyword.equals(finalQuery))
+                        .forEach((keyword) -> {
+                            queriedList.add(new Todo(description, queriedList.size() + 1, task.hasDone()));
+                        });
                 break;
             case EVENT:
             case DEADLINE:
