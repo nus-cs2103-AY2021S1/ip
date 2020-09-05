@@ -1,6 +1,10 @@
 package duke.runner;
 
+import duke.command.Command;
+import duke.duke.Duke;
+import duke.exception.ParserException;
 import duke.input.Parser;
+import duke.view.cli.CLI;
 import java.util.Scanner;
 
 /**
@@ -18,12 +22,17 @@ public class Runner {
    * Also runs the event loop.
    */
   public static void run() {
-    System.out.println("Hi. Duke here.\nHow can I help you?");
     Scanner sc = new Scanner(System.in);
+    Duke.getInstance().addObserver(new CLI());
 
     String input;
-    while (!Parser.isExitCommand(input = sc.nextLine())) {
-      System.out.println(Parser.runCommand(input));
+    while (!Parser.isExitCommand(input = sc.nextLine().trim())) {
+      try {
+        Command command = Parser.parseCommand(input);
+        command.execute(Duke.getInstance());
+      } catch (ParserException e) {
+        System.out.println(e.getMessage());
+      }
     }
 
     System.out.println("Bye. Hope to see you again.");
