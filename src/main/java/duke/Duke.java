@@ -41,6 +41,7 @@ public class Duke {
         while (!isExit) {
             try {
                 String input = ui.readCommand();
+                assert !input.isEmpty() || !input.equals("");
                 ui.showLine();
                 Command c = Parser.parse(input);
                 c.execute(tasks, ui, storage);
@@ -63,11 +64,14 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);
+            assert !ui.getMessage().equals("") || !ui.getMessage().isEmpty();
             response += ui.getLine();
             response += ui.getMessage();
             response += ui.getLine();
             ui.clearMessage();
+            assert !response.equals("");
         } catch (DukeException e) {
+            assert !e.getMessage().equals("");
             ui.showError(e.getMessage());
             return e.getMessage();
         } catch (Exception e) {
