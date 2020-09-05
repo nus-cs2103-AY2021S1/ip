@@ -14,6 +14,7 @@ public class ListDateCommand implements Command {
      * @param date The date specified.
      */
     public ListDateCommand(LocalDate date) {
+        assert(date != null);
         this.date = date;
     }
 

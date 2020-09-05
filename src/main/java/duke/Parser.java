@@ -34,6 +34,9 @@ import duke.task.Todo;
  * It then returns the required commands needed.
  */
 public class Parser {
+    private final static int DEADLINE_LENGTH = 9;
+    private final static int EVENT_LENGTH = 6;
+
     /**
      * Reads and convert the date and time in String format to LocalDateTime.
      * Date is stored in index 0 and Time is stored in index 1.
@@ -43,9 +46,8 @@ public class Parser {
      * @return List of LocalDateTime where index 0 is Date and index 1 is Time.
      * @throws DukeInvalidDateTimeInputException If Date or Time is invalid.
      */
-
     protected static List<LocalDateTime> getCustomDateTimeList(String dateTimeString)
-        throws DukeInvalidDateTimeInputException {
+            throws DukeInvalidDateTimeInputException {
         //dateTimeString should be given in "dd/mm/yyyy hhmm"
         //will use manual parser to check for invalid date time inputs
         List<LocalDateTime> results = new ArrayList<>();
@@ -60,8 +62,7 @@ public class Parser {
             int month = Integer.parseInt(dateTokens[1]);
             int day = Integer.parseInt(dateTokens[0]);
             try {
-                LocalDateTime date = LocalDateTime.of(year, month, day, 0, 0);
-                results.add(date);
+                results.add(LocalDateTime.of(year, month, day, 0, 0));
             } catch (DateTimeException e) {
                 throw new DukeInvalidDateTimeInputException("OOPS!!! Invalid date. Date do not exist!");
             }
@@ -77,7 +78,6 @@ public class Parser {
                 int min = Integer.parseInt(timeString.substring(2));
                 results.add(LocalDateTime.of(LocalDate.now(), LocalTime.of(hr, min)));
             } catch (DateTimeException e) {
-
                 throw new DukeInvalidDateTimeInputException(
                     "OOPS!!! Invalid time. You can only input up to 23hr and 59min.");
             }
@@ -97,30 +97,18 @@ public class Parser {
      * @throws DukeInvalidDateTimeInputException If date and time inputted is erroneous.
      */
     public static Command add(String command) throws DukeEmptyDescriptionException,
-        DukeEmptyByException, DukeEmptyAtException, DukeUnknownInputException, DukeInvalidDateTimeInputException {
-        Task toBeAdded;
-        String des;
-        String[] tokens;
+            DukeEmptyByException, DukeEmptyAtException, DukeUnknownInputException, DukeInvalidDateTimeInputException {
         if (command.startsWith("todo")) {
             try {
-                des = command.substring(5);
-                toBeAdded = new Todo(des);
+                String des = command.substring(5);
+                Task toBeAdded = new Todo(des);
                 return new AddCommand(toBeAdded);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeEmptyDescriptionException("todo");
             }
         } else if (command.startsWith("deadline")) {
             try {
-                tokens = command.split(" /by ");
-                des = tokens[0].substring(9);
-                List<LocalDateTime> ldtList = getCustomDateTimeList(tokens[1]);
-                LocalDate date = ldtList.get(0).toLocalDate();
-                LocalTime time = null;
-                if (ldtList.size() == 2) {
-                    time = ldtList.get(1).toLocalTime();
-                }
-                toBeAdded = new Deadline(des, date, time);
-                return new AddCommand(toBeAdded);
+                return new AddCommand(parseTime("/by", command));
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeEmptyDescriptionException("deadline");
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -130,16 +118,7 @@ public class Parser {
             }
         } else if (command.startsWith("event")) {
             try {
-                tokens = command.split(" /at ");
-                des = tokens[0].substring(6);
-                List<LocalDateTime> ldtList = getCustomDateTimeList(tokens[1]);
-                LocalDate date = ldtList.get(0).toLocalDate();
-                LocalTime time = null;
-                if (ldtList.size() == 2) {
-                    time = ldtList.get(1).toLocalTime();
-                }
-                toBeAdded = new Event(des, date, time);
-                return new AddCommand(toBeAdded);
+                return new AddCommand(parseTime("/at", command));
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeEmptyDescriptionException("event");
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -148,6 +127,38 @@ public class Parser {
         } else {
             throw new DukeUnknownInputException();
         }
+    }
+
+    private static Task parseTime(String type, String command) throws DukeInvalidDateTimeInputException {
+        assert(type.equals("/by") || type.equals("/at"));
+        String[] tokens = command.split(String.format(" %s ", type));
+        String des = type.equals("/by")
+            ? tokens[0].substring(DEADLINE_LENGTH)
+            : tokens[0].substring(EVENT_LENGTH);
+        List<LocalDateTime> ldtList = getCustomDateTimeList(tokens[1]);
+        return type.equals("/by")
+            ? parseDeadlineDateTimeList(des, ldtList)
+            : parseEventDateTimeList(des, ldtList);
+    }
+
+    private static Deadline parseDeadlineDateTimeList(String description,
+            List<LocalDateTime> localDateTimeList) {
+        LocalDate date = localDateTimeList.get(0).toLocalDate();
+        LocalTime time = null;
+        if (localDateTimeList.size() == 2) {
+            time = localDateTimeList.get(1).toLocalTime();
+        }
+        return new Deadline(description, date, time);
+    }
+
+    private static Event parseEventDateTimeList(String description,
+            List<LocalDateTime> localDateTimeList) {
+        LocalDate date = localDateTimeList.get(0).toLocalDate();
+        LocalTime time = null;
+        if (localDateTimeList.size() == 2) {
+            time = localDateTimeList.get(1).toLocalTime();
+        }
+        return new Event(description, date, time);
     }
 
     /**
@@ -236,9 +247,9 @@ public class Parser {
      * @throws DukeInvalidDateTimeInputException If date and time inputted is erroneous.
      */
     public static Command parse(String command) throws DukeEmptyIndexException,
-        DukeEmptyDescriptionException, DukeEmptyAtException,
-        DukeEmptyByException, DukeInvalidDateTimeInputException,
-        DukeEmptyKeywordException {
+            DukeEmptyDescriptionException, DukeEmptyAtException,
+            DukeEmptyByException, DukeInvalidDateTimeInputException,
+            DukeEmptyKeywordException {
         if (command.equals("bye")) {
             return new ByeCommand();
         } else if (command.equals("list")) {

@@ -20,6 +20,7 @@ public class Event extends Task {
      */
     public Event(String description, LocalDate atDate, LocalTime atTime) {
         super(description, TaskType.EVENT);
+        assert(atDate != null);
         this.atDate = atDate;
         this.atTime = atTime;
     }

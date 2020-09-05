@@ -136,30 +136,36 @@ public class TaskList {
     }
 
     /**
-     * Return the String representing list of task on that date given.
+     * Returns the String representing list of task on that date given.
      *
      * @param date The given date query.
      * @return The String representing the list of tasks.
      */
     public String getTasksOnDate(LocalDate date) {
         List<Task> tasksOnDate = new ArrayList<>();
-        for (Task t : list) {
-            if (t instanceof Deadline) {
-                Deadline d = (Deadline) t;
+        list.forEach(task -> {
+            if (task instanceof Deadline) {
+                Deadline d = (Deadline) task;
                 if (d.getDate().isEqual(date)) {
                     tasksOnDate.add(d);
                 }
-            } else if (t instanceof Event) {
-                Event e = (Event) t;
+            } else if (task instanceof Event) {
+                Event e = (Event) task;
                 if (e.getDate().isEqual(date)) {
                     tasksOnDate.add(e);
                 }
             }
-        }
+        });
         return getListAsStringFromList(tasksOnDate,
                 "There are no tasks on this date!");
     }
 
+    /**
+     * Returns the String representing list of tasks with the keyword.
+     *
+     * @param keyword The specified keyword.
+     * @return String representing the list of tasks.
+     */
     public String getTaskWithKeyword(String keyword) {
         List<Task> tasksWithKeyword = list.stream().filter(
             task -> {
