@@ -40,7 +40,7 @@ public class Ui {
      * @return string representation of a task.
      */
     public String showTask(Task task, int taskNum) {
-        return taskNum + ". " + task;
+        return taskNum + ". " + task + "\n";
     }
 
     /**
@@ -82,19 +82,19 @@ public class Ui {
      * @return List command statement.
      */
     public String showListStatement() {
-        return "Here are your current tasks: ";
+        return "Here are your current tasks: \n";
     }
 
     /**
      * Returns the find command statement string.
      *
-     * @return The find command statement stromg/
+     * @return The find command statement string/
      */
     public String showFindStatement(boolean isEmpty) {
         if (isEmpty) {
-            return "No tasks match your query, try searching for something else.";
+            return "No tasks match your query, try searching for something else. \n";
         } else {
-            return "Here are your search results: ";
+            return "Here are your search results: \n";
         }
     }
 
