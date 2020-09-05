@@ -3,6 +3,7 @@ package nekochan.task;
 import nekochan.Encodable;
 import nekochan.Searchable;
 import nekochan.exceptions.NekoTaskCreationException;
+import nekochan.util.Messages;
 
 /**
  * The {@code Task} class provides a skeletal implementation of an object representing a task.
@@ -24,7 +25,7 @@ public abstract class Task implements Encodable<Task>, Searchable {
      */
     protected Task(String description) throws NekoTaskCreationException {
         if (description.trim().length() == 0) {
-            throw new NekoTaskCreationException("That's really descriptive...");
+            throw new NekoTaskCreationException(Messages.PARSE_TASK_DESCRIPTION_ERROR);
         }
         this.description = description;
         isCompleted = false;

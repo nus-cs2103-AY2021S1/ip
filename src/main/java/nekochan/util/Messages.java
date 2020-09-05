@@ -15,16 +15,19 @@ public class Messages {
     public static final String PARSE_COMMAND_COMPLETE_MISSING_ARGUMENT = "What did you complete exactly?\n";
     public static final String PARSE_COMMAND_DELETE_MISSING_ARGUMENT = "What do you want to remove exactly?\n";
     public static final String PARSE_COMMAND_DEADLINE_MISSING_ARGUMENT = "Are you hiding something from me?\n";
-    public static final String PARSE_COMMAND_TODO_MISSING_ARGUMENT = "I know your life is empty but your todo can't be empty.\n";
+    public static final String PARSE_COMMAND_TODO_MISSING_ARGUMENT = "I know your life is empty "
+            + "but your todo can't be empty.\n";
     public static final String PARSE_COMMAND_EVENT_MISSING_ARGUMENT = "Are you going somewhere without me?\n";
     public static final String PARSE_COMMAND_SEARCH_MISSING_ARGUMENT = "I don't have the answer to everything.\n";
     public static final String PARSE_COMMAND_UNKNOWN = "Wakarimasen~\n";
 
     public static final String PARSE_DATETIME_ERROR = "I can't understand what you're saying...\n";
 
+    public static final String PARSE_TASK_DESCRIPTION_ERROR = "That's really descriptive...\n";
     public static final String PARSE_DEADLINE_DUE_DATE_ERROR = "So you never did plan on doing it huh...\n";
     public static final String PARSE_EVENT_DATETIME_ERROR = "Does this thing ever end???\n";
-    public static final String PARSE_EVENT_MISSING_END_DATETIME_ERROR = "Something's missing, oh right I lost track of time.\n";
+    public static final String PARSE_EVENT_MISSING_END_DATETIME_ERROR = "Something's missing, "
+            + "oh right I lost track of time.\n";
 
     public static final String INVALID_TASK_TYPE_ERROR = "I don't understand.\n";
 
