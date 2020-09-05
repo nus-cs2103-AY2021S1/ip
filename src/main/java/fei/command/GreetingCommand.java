@@ -7,7 +7,7 @@ import fei.tool.Ui;
 public class GreetingCommand extends Command {
 
     /**
-     * Deal with all the changes in Alison's tools.
+     * Deal with all the changes in Fei's tools.
      *
      * @param tasks   TaskList.
      * @param ui      User Interface.

@@ -14,7 +14,7 @@ public class Fei {
     private final Ui ui;
 
     /**
-     * Create a Alison bot with a file path you want to store all your data in.
+     * Create a Fei's chatterbox with a file path you want to store all your data in.
      *
      * @param filePath a String on file path in format: "./data/*.txt".
      */
