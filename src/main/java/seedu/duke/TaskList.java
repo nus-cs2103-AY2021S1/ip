@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -17,6 +18,7 @@ public class TaskList {
     private final String NOT_FOUND = "There are no tasks related to this keyword!\n";
     private final String FOUND_KEYWORD = "Here are the matching tasks in your list: \n";
     private final String DESCRIPTION = "    Here are the tasks in your list:\n";
+    private final String MUST_BE_NUMBER = "Index must be a number!\n";
 
     private final String TODO = "todo";
     private final String EVENT = "event";
@@ -58,6 +60,7 @@ public class TaskList {
         try {
             String[] splitUserInput = userInput.split(" ");
             int index = Integer.parseInt(splitUserInput[1]);
+            assert index > 0 && index <= taskLists.size(); //Must be within range
             if (index < 1 || index > taskLists.size()) {
                 Ui.print(INVALID_RANGE);
             } else {
@@ -75,6 +78,8 @@ public class TaskList {
             Ui.print(INVALID_RANGE);
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.print(MISSING_INDEX);
+        } catch (NumberFormatException e) {
+            Ui.print(MUST_BE_NUMBER);
         }
     }
 
@@ -91,6 +96,7 @@ public class TaskList {
             }
             String[] splitUserInput = userInput.split(" ");
             int index = Integer.parseInt(splitUserInput[1]);
+            assert index > 0 && index <= taskLists.size(); //Must be within range
             if (index < 1 || index > taskLists.size()) {
                 return (INVALID_RANGE);
             } else {
@@ -108,6 +114,8 @@ public class TaskList {
             return INVALID_RANGE;
         } catch (ArrayIndexOutOfBoundsException e) {
             return MISSING_INDEX;
+        } catch (NumberFormatException e) {
+            return MUST_BE_NUMBER;
         }
     }
 
@@ -126,17 +134,22 @@ public class TaskList {
      * @param userInput String of the task to be deleted.
      */
     public void deleteTaskForCli(String userInput) {
-        String[] splitUserInput = userInput.split(" ");
-        int index = Integer.parseInt(splitUserInput[1]);
-        if (index < 1 || index > taskLists.size()) {
-            Ui.print(INVALID_RANGE);
-        } else {
-            String info = DELETE_TASK;
-            info += "  " + taskLists.get(index - 1).toString() + "\n";
-            taskLists.remove(index - 1);
-            Storage.deleteTaskOnFile(index - 1, taskLists.size());
-            info += sizeOfTaskList();
-            Ui.print(info);
+        try {
+            String[] splitUserInput = userInput.split(" ");
+            int index = Integer.parseInt(splitUserInput[1]);
+            assert index > 0 && index <= taskLists.size(); //Must be within range
+            if (index < 1 || index > taskLists.size()) {
+                Ui.print(INVALID_RANGE);
+            } else {
+                String info = DELETE_TASK;
+                info += "  " + taskLists.get(index - 1).toString() + "\n";
+                taskLists.remove(index - 1);
+                Storage.deleteTaskOnFile(index - 1, taskLists.size());
+                info += sizeOfTaskList();
+                Ui.print(info);
+            }
+        } catch (NumberFormatException e) {
+            Ui.print(MUST_BE_NUMBER);
         }
     }
     /**
@@ -146,17 +159,22 @@ public class TaskList {
      * @return String output after deleting task.
      */
     public String deleteTaskForGui(String userInput) {
-        String[] splitUserInput = userInput.split(" ");
-        int index = Integer.parseInt(splitUserInput[1]);
-        if (index < 1 || index > taskLists.size()) {
-            return (INVALID_RANGE);
-        } else {
-            String info = DELETE_TASK;
-            info += "  " + taskLists.get(index - 1).toString() + "\n";
-            taskLists.remove(index - 1);
-            Storage.deleteTaskOnFile(index - 1, taskLists.size());
-            info += sizeOfTaskList();
-            return info;
+       try {
+            String[] splitUserInput = userInput.split(" ");
+            int index = Integer.parseInt(splitUserInput[1]);
+            assert index > 0 && index <= taskLists.size(); //Must be within range
+            if (index < 1 || index > taskLists.size()) {
+                return (INVALID_RANGE);
+            } else {
+                String info = DELETE_TASK;
+                info += "  " + taskLists.get(index - 1).toString() + "\n";
+                taskLists.remove(index - 1);
+                Storage.deleteTaskOnFile(index - 1, taskLists.size());
+                info += sizeOfTaskList();
+                return info;
+            }
+        } catch (NumberFormatException e) {
+            return MUST_BE_NUMBER;
         }
     }
 
@@ -168,6 +186,7 @@ public class TaskList {
     public void addToDoForCli(String userInput) {
         try {
             checkForItem(userInput.substring(4), TODO);
+            assert userInput.length() > 5; //Need to have input
             String task = userInput.substring(5);
             String info = ADD_TASK;
             Todo tempTodo = new Todo(task);
@@ -190,6 +209,7 @@ public class TaskList {
     public String addToDoForGui(String userInput) {
         try {
             checkForItem(userInput.substring(4), TODO);
+            assert userInput.length() > 5; //Need to have input
             String task = userInput.substring(5);
             String info = ADD_TASK;
             Todo tempTodo = new Todo(task);
@@ -211,6 +231,8 @@ public class TaskList {
     public void addDeadlineForCli(String userInput) {
         try {
             checkForItem(userInput.substring(8), DEADLINE);
+            assert userInput.length() > 8; //Need to have input
+            assert userInput.contains("/"); //Must have date;
             int dateIndex = userInput.indexOf("/");
             String task = userInput.substring(9, dateIndex);
             String time = userInput.substring(dateIndex + 1);
@@ -224,6 +246,8 @@ public class TaskList {
             Ui.print(info);
         } catch (DukeException | IOException err) {
             System.out.println(err.getMessage());
+        } catch (DateTimeParseException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -236,6 +260,8 @@ public class TaskList {
     public String addDeadlineForGui(String userInput) {
         try {
             checkForItem(userInput.substring(8), DEADLINE);
+            assert userInput.length() > 8; //Need to have input
+            assert userInput.contains("/"); //Must have date;
             int dateIndex = userInput.indexOf("/");
             String task = userInput.substring(9, dateIndex);
             String time = userInput.substring(dateIndex + 1);
@@ -249,6 +275,8 @@ public class TaskList {
             return info;
         } catch (DukeException | IOException err) {
             return err.getMessage();
+        } catch (DateTimeParseException e) {
+            return e.getMessage();
         }
     }
 
@@ -260,6 +288,8 @@ public class TaskList {
     public void addEventForCli(String userInput) {
         try {
             checkForItem(userInput.substring(5), EVENT);
+            assert userInput.length() > 5; //Need to have input
+            assert userInput.contains("/"); //Must have date;
             int dateIndex = userInput.indexOf("/");
             String task = userInput.substring(6, dateIndex);
             String time = userInput.substring(dateIndex + 1);
@@ -273,6 +303,8 @@ public class TaskList {
             Ui.print(info);
         } catch (DukeException | IOException err) {
             System.out.println(err.getMessage());
+        } catch (DateTimeParseException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -285,6 +317,8 @@ public class TaskList {
     public String addEventForGui(String userInput) {
         try {
             checkForItem(userInput.substring(5), EVENT);
+            assert userInput.length() > 5; //Need to have input
+            assert userInput.contains("/"); //Must have date;
             int dateIndex = userInput.indexOf("/");
             String task = userInput.substring(6, dateIndex);
             String time = userInput.substring(dateIndex + 1);
@@ -298,6 +332,8 @@ public class TaskList {
             return info;
         } catch (DukeException | IOException err) {
             return err.getMessage();
+        } catch (DateTimeParseException e) {
+            return e.getMessage();
         }
     }
 
