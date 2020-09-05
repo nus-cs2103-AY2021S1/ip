@@ -1,7 +1,12 @@
+import duke.util.DukeException;
+import duke.util.Parser;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Testing class for Parser object.
+ */
 public class ParserTest {
 
     @Test

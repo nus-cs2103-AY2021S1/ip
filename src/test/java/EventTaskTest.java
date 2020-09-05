@@ -1,7 +1,12 @@
+import duke.util.DukeException;
+import duke.tasks.EventTask;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Testing class for EventTask object.
+ */
 public class EventTaskTest {
     @Test
     public void StringAndFileFormatTest() throws DukeException {

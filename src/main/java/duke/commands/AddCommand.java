@@ -1,8 +1,14 @@
 package duke.commands;
 
-import duke.*;
-import duke.util.*;
-import duke.tasks.*;
+
+import duke.tasks.Task;
+import duke.tasks.EventTask;
+import duke.tasks.DeadlineTask;
+import duke.tasks.TodoTask;
+import duke.tasks.TaskList;
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.util.Ui;
 
 import java.io.IOException;
 

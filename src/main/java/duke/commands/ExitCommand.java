@@ -4,7 +4,6 @@ import duke.util.Ui;
 import duke.util.Storage;
 import duke.util.DukeException;
 import duke.tasks.TaskList;
-import duke.tasks.Task;
 
 import java.io.IOException;
 

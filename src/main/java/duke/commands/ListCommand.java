@@ -2,9 +2,7 @@ package duke.commands;
 
 import duke.util.Ui;
 import duke.util.Storage;
-import duke.util.DukeException;
 import duke.tasks.TaskList;
-import duke.tasks.Task;
 
 /**
  * commands.Command that list out the task in the TaskList.
