@@ -8,7 +8,7 @@ import duke.task.TaskList;
 public class EventCommand extends Command {
     TaskList tasks;
     Storage storage;
-    
+
     public EventCommand(String[] args, TaskList tasks, Storage storage) {
         super.args = args;
         this.tasks = tasks;
@@ -38,8 +38,9 @@ public class EventCommand extends Command {
             return new ErrorCommand("☹ OOPS!!! The /at description of a event cannot be empty.").execute();
         }
 
-        if (!at.matches(
-                "\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) ([1-9]|1[012]):([0-5][0-9]) [AP]M")) {
+        String dateTimeRegex = "\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) ([1-9]|1[012]):([0-5][0-9]) [AP]M";
+        
+        if (!at.matches(dateTimeRegex)) {
             return new ErrorCommand("☹ OOPS!!! The date-time format must be yyyy-mm-dd h:mm AM/PM.").execute();
         }
 

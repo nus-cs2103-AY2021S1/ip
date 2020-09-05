@@ -10,6 +10,7 @@ public class FindCommand extends Command {
         super.args = args;
         this.tasks = tasks;
     }
+    
     @Override
     public String execute() throws DukeException {
         if (args.length < 2) {
