@@ -9,12 +9,11 @@ import java.util.List;
  * Contains the task list, handles all of the list manipulations + checks.
  */
 public class ListOfItems {
-
-    private HandleFile handleFile;
     protected List<Task> list;
     protected int index;
     protected String divider = "____________________________________________________________";
     protected String tabSpacing = "   ";
+    private HandleFile handleFile;
 
     /**
      * Initialises a new ArrayList, and index starts from 0.
@@ -56,7 +55,7 @@ public class ListOfItems {
             }
             list.add(index, deadline);
             index++;
-        } else {
+        } else if (type == 'E') {
             //Event
             String[] info = input.split("[(]");
             String description = info[0].substring(7);
@@ -68,13 +67,14 @@ public class ListOfItems {
             list.add(index, event);
             index++;
         }
+        assert this.index != 0 : "items not added properly from stored.txt";
     }
 
     /**
      * Retrieves the list and prints out every task.
      *
-     * @throws DukeException if list is empty
      * @return output of chatbot
+     * @throws DukeException if list is empty
      */
     protected String getList() throws DukeException {
         String output = divider + "\n";
@@ -83,6 +83,7 @@ public class ListOfItems {
         } else {
             output = output + "Here are the task(s) in your list: \n";
             for (int i = 0; i < index; i++) {
+                assert list.get(i).id > 0 : "item id cannot be 0 or negative!";
                 output = output + list.get(i).id + "." + list.get(i) + "\n";
             }
         }
@@ -94,8 +95,8 @@ public class ListOfItems {
      * Marks a particular task is done.
      *
      * @param input user input
-     * @throws DukeException if number given is invalid
      * @return output of chatbot
+     * @throws DukeException if number given is invalid
      */
     protected String doneItem(String input) throws DukeException {
         try {
@@ -124,8 +125,8 @@ public class ListOfItems {
      * Modifies other task's index if necessary, so that list is still in chronological order.
      *
      * @param input user input
-     * @throws DukeException if number given is invalid
      * @return output of chatbot
+     * @throws DukeException if number given is invalid
      */
     protected String deleteItem(String input) throws DukeException {
         try {
@@ -152,8 +153,8 @@ public class ListOfItems {
      * Checks what type of task is given and initialise a new sub-class of Task (To-do, Deadline, or Event).
      *
      * @param input user input
-     * @throws DukeException if incomplete commands are given
      * @return output of chatbot
+     * @throws DukeException if incomplete commands are given
      */
     protected String addItem(String input) throws DukeException {
         String addedMessage = "Got it. I've added this task: ";
@@ -165,6 +166,7 @@ public class ListOfItems {
                 Todo todo = new Todo(description, index + 1);
                 String output = divider + "\n" + addedMessage + "\n";
                 list.add(index, todo);
+                assert list.get(index).id > 0 : "item id cannot be 0 or negative!";
                 output = output + tabSpacing + list.get(index) + "\n"
                     + totalMessage + "\n" + divider;
                 index++;
@@ -184,6 +186,7 @@ public class ListOfItems {
                 Deadline deadline = new Deadline(description, index + 1, dueDateTime, false);
                 String output = divider + "\n" + addedMessage + "\n";
                 list.add(index, deadline);
+                assert list.get(index).id > 0 : "item id cannot be 0 or negative!";
                 output = output + tabSpacing + list.get(index) + "\n"
                         + totalMessage + "\n" + divider;
                 index++;
@@ -213,6 +216,7 @@ public class ListOfItems {
                 Event event = new Event(description, index + 1, duration, false);
                 String output = divider + "\n" + addedMessage + "\n";
                 list.add(index, event);
+                assert list.get(index).id > 0 : "item id cannot be 0 or negative!";
                 output = output + tabSpacing + list.get(index) + "\n"
                         + totalMessage + "\n" + divider;
                 index++;
@@ -245,8 +249,8 @@ public class ListOfItems {
      * Checks and outputs all of the tasks that are due by a specific date.
      *
      * @param input user input
-     * @throws DukeException if input does not follow this format: "items due by DD/MM/YYYY"
      * @return output of chatbot
+     * @throws DukeException if input does not follow this format: "items due by DD/MM/YYYY"
      */
     protected String checkBy(String input) throws DukeException {
         try {
@@ -260,6 +264,7 @@ public class ListOfItems {
                 if ((this.list.get(i) instanceof Deadline && ((Deadline) this.list.get(i)).date.equals(date))
                         || (this.list.get(i) instanceof Event && ((Event) this.list.get(i)).date.equals(date))) {
                     hasResults = true;
+                    assert list.get(i).id > 0 : "item id cannot be 0 or negative!";
                     output = output + this.list.get(i) + "\n";
                 }
             }
@@ -281,9 +286,9 @@ public class ListOfItems {
      * Checks and outputs all of the task that are due before a specific date and/or time.
      *
      * @param input user input
+     * @return output of chatbot
      * @throws DukeException if input does not follow this format: "items due before DD/MM/YYYY"
      * or "items due before DD/MM/YYYY HHmm"
-     * @return output of chatbot
      */
     protected String checkBefore(String input) throws DukeException {
         try {
@@ -301,6 +306,7 @@ public class ListOfItems {
                     if ((this.list.get(i) instanceof Deadline && !((Deadline) this.list.get(i)).date.isAfter(date))
                             || (this.list.get(i) instanceof Event && !((Event) this.list.get(i)).date.isAfter(date))) {
                         hasResults = true;
+                        assert list.get(i).id > 0 : "item id cannot be 0 or negative!";
                         output = output + this.list.get(i) + "\n";
                     }
                 }
@@ -325,6 +331,7 @@ public class ListOfItems {
                             && ((Event) this.list.get(i)).endTime != null
                             && !((Event) this.list.get(i)).endTime.isAfter(time))) {
                         hasResults = true;
+                        assert list.get(i).id > 0 : "item id cannot be 0 or negative!";
                         output = output + this.list.get(i) + "\n";
                     }
                 }
@@ -348,8 +355,8 @@ public class ListOfItems {
      * Finds all tasks that contains the phrase given by the user's input.
      *
      * @param input user input
-     * @throws DukeException if input does not follow the proper search syntax
      * @return output of chatbot
+     * @throws DukeException if input does not follow the proper search syntax
      */
     protected String find(String input) throws DukeException {
         try {
@@ -358,6 +365,7 @@ public class ListOfItems {
             String output = divider + "\n" + "Here are the matching tasks in your list:\n";
             for (int i = 0; i < this.list.size(); i++) {
                 if (this.list.get(i).description.contains(info)) {
+                    assert this.list.get(i).id > 0 : "id cannot be <= 0!";
                     output = output + this.list.get(i).id + ". " + this.list.get(i) + "\n";
                     hasResults = true;
                 }
