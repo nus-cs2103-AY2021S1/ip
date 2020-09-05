@@ -37,9 +37,9 @@ public class DeleteCommand extends ComplexCommand {
             Task temp = taskManager.removeTask(index - 1);
 
             // Display status message to user
-            ui.display("Alright. I've removed this task:");
-            ui.display("\t" + temp.toString());
-            ui.display("Now you have " + taskManager.size() + " tasks in the list.");
+            ui.queueDisplay("Alright. I've removed this task:");
+            ui.queueDisplay("\t" + temp.toString());
+            ui.queueDisplay("Now you have " + taskManager.size() + " tasks in the list.");
 
         } catch (DukeInputException e) {
             ui.displayException(e);

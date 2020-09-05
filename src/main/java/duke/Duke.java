@@ -33,15 +33,23 @@ public class Duke {
         this(Path.of("/data", "data.txt"));
     }
 
+    public Duke(Path filePath) {
+        this(filePath, new OutputHandler());
+    }
+
+    public Duke(OutputHandler outputHandler) {
+        this(Path.of("/data", "data.txt"), outputHandler);
+    }
+
     /**
      * Constructs new Duke object with custom save file directory.
      *
      * @param filePath Path object representing save file directory.
      */
-    public Duke(Path filePath) {
+    public Duke(Path filePath, OutputHandler outputHandler) {
         // Initialise properties
         this.filePath = filePath;
-        this.ui = new Ui(new InputHandler(), new OutputHandler());
+        this.ui = new Ui(new InputHandler(), outputHandler);
         this.saveManager = new SaveManager(this.filePath);
 
         // Attempts to load save file.
@@ -74,6 +82,9 @@ public class Duke {
                 // Execute user command.
                 command.execute(this.ui, this.taskManager, this.saveManager);
 
+                // Send messages from app
+                this.ui.display();
+
                 // Terminate software loop if exit command is given.
                 if (command.isByeCommand()) {
                     break;
@@ -88,6 +99,31 @@ public class Duke {
 
     }
 
+    public boolean processOneCommand(String userInput) {
+
+        try {
+            // Parse user input
+            Command command = Parser.parse(userInput);
+
+            // Execute user command
+            command.execute(this.ui, this.taskManager, this.saveManager);
+
+            // Send messages from app
+            this.ui.display();
+
+            return command.isByeCommand();
+
+        } catch (DukeInputException e) {
+            ui.displayException(e);
+            return false;
+        }
+
+    }
+
+    public void greet() {
+        this.ui.displayGreet();
+    }
+
     /**
      * Initializes software.
      *
@@ -96,7 +132,7 @@ public class Duke {
     public static void main(String[] args) {
         // Initialize Duke with save data and send welcome message
         Duke duke = new Duke(Path.of("data/data.txt"));
-        duke.ui.displayGreet();
+        duke.greet();
 
         // Start input loop
         duke.run();

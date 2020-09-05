@@ -34,22 +34,32 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        this.display("Hello from\n" + logo);
+        this.displayNow("Hello from\n" + logo);
     }
 
     /**
      * Prints farewell message to display.
      */
     public void displayGoodbye() {
-        this.display("Bye. Hope to see you again soon!");
+        this.displayNow("Bye. Hope to see you again soon!");
     }
 
     /**
      * Passes a string to <code>outputHandler</code>.
      * @param output String to be printed by <code>inputHandler</code>
      */
-    public void display(String output) {
-        this.outputHandler.print(output);
+    public void queueDisplay(String output) {
+        this.outputHandler.storeOutput(output);
+    }
+
+    public void display() {
+        if (!this.outputHandler.isEmpty()) {
+            this.outputHandler.flush();
+        }
+    }
+
+    public void displayNow(String output) {
+        this.outputHandler.printNow(output);
     }
 
     /**
@@ -57,7 +67,7 @@ public class Ui {
      * @param e <code>Exception</code> whose error message is to be printed.
      */
     public void displayException(Exception e) {
-        this.display(e.getMessage());
+        this.displayNow(e.getMessage());
     }
 
     /**
@@ -67,9 +77,9 @@ public class Ui {
      * @param taskManagerSize Number of tasks already in Duke.
      */
     public void displayAfterAddTask(Task task, int taskManagerSize) {
-        this.display("Successfully added a new task:");
-        this.display("\t" + task.toString());
-        this.display("Now you have " + taskManagerSize + " tasks in the list.");
+        this.queueDisplay("Successfully added a new task:");
+        this.queueDisplay("\t" + task.toString());
+        this.queueDisplay("Now you have " + taskManagerSize + " tasks in the list.");
     }
 
     /**

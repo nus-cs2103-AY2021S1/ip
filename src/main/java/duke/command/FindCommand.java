@@ -36,8 +36,8 @@ public class FindCommand extends ComplexCommand {
             TaskManager filteredTasks = taskManager.filter(task -> task.getName().contains(keywords));
 
             // Display filtered tasks to screen
-            ui.display("Here are the matching tasks in your list:");
-            ui.display(filteredTasks.toString());
+            ui.queueDisplay("Here are the matching tasks in your list:");
+            ui.queueDisplay(filteredTasks.toString());
 
         } catch (DukeInputException e) {
             ui.displayException(e);
