@@ -3,6 +3,7 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.InvalidCommand;
 
 /**
  * Represents the Command object to handle logic of user inputs.
@@ -39,5 +40,5 @@ public abstract class Command {
      * @param taskList
      * @return UI message representing the relevant execution.
      */
-    public abstract String execute(Ui ui, Storage listStorage, TaskList taskList);
+    public abstract String execute(Ui ui, Storage listStorage, TaskList taskList) throws InvalidCommand;
 }

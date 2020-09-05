@@ -108,6 +108,7 @@ public class Ui {
      * @return UI message for done task.
      */
     public String markAsDone(int taskIndex, TaskList currList) {
+        assert currList.contains(currList.get(taskIndex)) : "Something went wrong while marking as done!";
         String markedDoneMessage = this.lines + "\n" + "     Nice! I've marked this task as done:"
                 + "\n" + "       " + currList.get(taskIndex) + "\n" + this.lines;
         return markedDoneMessage;
@@ -121,6 +122,7 @@ public class Ui {
      * @return UI message for task added.
      */
     public String addTask(Task newTask, TaskList currList) {
+        assert currList.getNumTask() >= 0 : "Something went wrong in your task list!";
         String taskAddedUi = this.lines + "\n" + "     Got it. I've added this task:" + "\n" + "       "
                 + newTask + "\n" + "     Now you have " + String.valueOf(currList.getNumTask())
                 + " task(s) in the list." + "\n" + this.lines;
@@ -157,11 +159,12 @@ public class Ui {
      * Returns UI message when users input an invalid command.
      *
      * @param ex Relevant invalid command message.
+     * @return String representation of invalid action attempted.
      */
-    public static void commandError(InvalidCommand ex) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     " + ex);
-        System.out.println("    ____________________________________________________________");
+    public static String commandError(InvalidCommand ex) {
+        String invalidCommandMessage = "______________________________________________________" + "\n"
+                + "     " + ex + "\n" + "______________________________________________________";
+        return invalidCommandMessage;
     }
 
     /**

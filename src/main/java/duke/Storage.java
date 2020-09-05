@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import duke.exception.InvalidCommand;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -37,17 +38,19 @@ public class Storage {
      *
      * @param currTaskList Task list of bot.
      * @return Message after loading data.
+     * @throws InvalidCommand Unable to read or create data file.
      */
-    public String loadData(TaskList currTaskList) {
+    public String loadData(TaskList currTaskList) throws InvalidCommand {
         String loadingDataFileMessage = this.checkHistory();
-        BufferedReader rb = null;
-        try {
-            rb = new BufferedReader(new FileReader(this.storageFile));
-        } catch (FileNotFoundException e) {
-            System.out.println("File cannot be found");
+        if (loadingDataFileMessage.length() == 0) {
+            loadingDataFileMessage = "________________________________________________________" + "\n"
+                    + "     Found directories and file" + "\n"
+                    + "________________________________________________________" + "\n";
         }
-        String newLine = "";
         try {
+            assert this.storageFile.exists() : "Storage file went missing, please restart your bot!";
+            BufferedReader rb = new BufferedReader(new FileReader(this.storageFile));
+            String newLine = "";
             newLine = rb.readLine();
             while (newLine != null) {
                 String[] taskInput = newLine.split("\\|");
@@ -55,6 +58,10 @@ public class Storage {
                     break;
                 }
                 if (taskInput[0].charAt(0) == 'T') {
+                    assert taskInput.length == 3 : "Task in storage file is missing information!";
+                    assert taskInput[2].trim().length() != 0 : "Task name is corrupted!";
+                    assert Integer.parseInt(taskInput[1].trim()) == 1
+                            | Integer.parseInt(taskInput[1].trim()) == 0 : "Task status is corrupted!";
                     ToDo pastToDo = new ToDo(taskInput[2].trim());
                     if (Integer.parseInt(taskInput[1].trim()) == 1) {
                         pastToDo.markDone();
@@ -62,6 +69,11 @@ public class Storage {
                     currTaskList.add(pastToDo);
                     newLine = rb.readLine();
                 } else if (newLine.charAt(0) == 'E') {
+                    assert taskInput.length == 4 : "Task name and/or date in storage file is lost!";
+                    assert taskInput[2].trim().length() != 0 : "Task name is corrupted!";
+                    assert taskInput[3].trim().length() != 0 : "Task date is corrupted!";
+                    assert Integer.parseInt(taskInput[1].trim()) == 1
+                            | Integer.parseInt(taskInput[1].trim()) == 0 : "Task status is corrupted!";
                     Event pastEvent = new Event(taskInput[2].trim(), LocalDate.parse(taskInput[3].trim()));
                     if (Integer.parseInt(taskInput[1].trim()) == 1) {
                         pastEvent.markDone();
@@ -69,6 +81,11 @@ public class Storage {
                     currTaskList.add(pastEvent);
                     newLine = rb.readLine();
                 } else if (newLine.charAt(0) == 'D') {
+                    assert taskInput.length == 4 : "Task name and/or date in storage file is lost!";
+                    assert taskInput[2].trim().length() != 0 : "Task name is corrupted!";
+                    assert taskInput[3].trim().length() != 0 : "Task date is corrupted!";
+                    assert Integer.parseInt(taskInput[1].trim()) == 1
+                            | Integer.parseInt(taskInput[1].trim()) == 0 : "Task status is corrupted!";
                     Deadline pastDeadline = new Deadline(taskInput[2].trim(),
                             LocalDate.parse(taskInput[3].trim()));
                     if (Integer.parseInt(taskInput[1].trim()) == 1) {
@@ -80,12 +97,7 @@ public class Storage {
             }
             rb.close();
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (loadingDataFileMessage.length() == 0) {
-            return "________________________________________________________" + "\n"
-                    + "     Found directories and file" + "\n"
-                    + "________________________________________________________" + "\n";
+            throw new InvalidCommand("Unable to read file");
         }
         return loadingDataFileMessage;
     }
@@ -96,7 +108,7 @@ public class Storage {
      *
      * @return Message indicating directory and/or datafile found (if applicable).
      */
-    private String checkHistory() {
+    private String checkHistory() throws InvalidCommand {
         String overallHistoryMessage = "";
         try {
             FileReader readFile = new FileReader(DATA_FILE_DIRECTORY);
@@ -115,7 +127,7 @@ public class Storage {
                 overallHistoryMessage += "\n";
             }
         } catch (IOException e) {
-            System.out.println("Unable to create file");
+            throw new InvalidCommand("Unable to create file");
         }
         return overallHistoryMessage;
     }
@@ -124,11 +136,11 @@ public class Storage {
      * Adds the new task into storage file.
      *
      * @param newTask New Task that has been added.
+     * @throws InvalidCommand Unable write to file.
      */
-    public void addTask(Task newTask) {
-        FileWriter fw = null;
+    public void addTask(Task newTask) throws InvalidCommand {
         try {
-            fw = new FileWriter(this.storageFile, true);
+            FileWriter fw = new FileWriter(this.storageFile, true);
             if (newTask instanceof ToDo) {
                 fw.write(((ToDo) newTask).getDataStorageName() + "\n");
                 fw.close();
@@ -140,7 +152,7 @@ public class Storage {
                 fw.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new InvalidCommand("Unable to write to file");
         }
     }
 
@@ -150,10 +162,12 @@ public class Storage {
      * @param editedTask Task to be edited.
      * @param taskIndex Index of task in the task list.
      * @param currentList Current task list used by bot.
+     * @throws InvalidCommand Unable to remove old data file.
      */
-    public void editTask(Task editedTask, int taskIndex, TaskList currentList) {
+    public void editTask(Task editedTask, int taskIndex, TaskList currentList) throws InvalidCommand {
         File toBeDeleted = new File (DATA_FILE_DIRECTORY + "dataList1.txt");
         BufferedReader readerBuffer = null;
+        assert this.storageFile.exists() : "Storage file is lost while application is running!";
         try {
             readerBuffer = new BufferedReader(new FileReader(this.storageFile));
             BufferedWriter writerBuffer = new BufferedWriter(new FileWriter(toBeDeleted));
@@ -196,10 +210,8 @@ public class Storage {
             } else {
                 throw new IOException("Could not delete old data file");
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new InvalidCommand(e.getMessage());
         }
 
     }
@@ -208,10 +220,12 @@ public class Storage {
      * Deletes task from storage file when it is removed from task list.
      *
      * @param removedTask Task to be removed.
+     * @throws InvalidCommand Unable to remove old data file.
      */
-    public void deleteTask(Task removedTask) {
+    public void deleteTask(Task removedTask) throws InvalidCommand {
         try {
             File removed = new File (DATA_FILE_DIRECTORY + "dataList1.txt");
+            assert this.storageFile.exists() : "Storage file is lost while application is running!";
             BufferedReader reader = new BufferedReader(new FileReader(this.storageFile));
             BufferedWriter writer = new BufferedWriter(new FileWriter(removed));
             String currentLine = reader.readLine();
@@ -245,10 +259,8 @@ public class Storage {
             } else {
                 throw new IOException("Could not delete old data file");
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new InvalidCommand(e.getMessage());
         }
     }
 
