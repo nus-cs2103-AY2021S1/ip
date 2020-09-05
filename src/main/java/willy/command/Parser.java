@@ -38,25 +38,21 @@ public class Parser {
             return response;
         }
 
-        // take note of keyword "list" to display the lists
         if (message.equals("list")) {
             // reads list
             response = list.readList();
         }
 
-        // take note of keyword "done" to update task
         else if (message.contains("done")) {
             int taskNum = Integer.parseInt(message.substring(5));
             response = list.setTaskDone(taskNum);
         }
 
-        // take note of keyword "delete" to remove task from list
         else if (message.contains("delete")) {
             int taskNum = Integer.parseInt(message.substring(7));
             response = list.removeTask(taskNum);
         }
-        
-        // take note of keyword "to-do" to add normal task
+
         else if (message.contains("todo")) {
             try {
                 String activity = message.substring(5);
@@ -75,7 +71,6 @@ public class Parser {
         }
 
         // deadline input format: dd/MM/yyyy HHmm, output format: dd MMM yyyy HH:mm a
-        // take note of keyword "deadline" to add task with deadline
         else if (message.contains("deadline")) {
             try {
                 int separatorIndex = message.indexOf("/");
@@ -91,7 +86,6 @@ public class Parser {
         }
 
         // deadline input format: dd/MM/yyyy HH:mm, output format: dd MMM yyyy HH:mm a
-        // take note of keyword "event" to add task with duration
         else if (message.contains("event")) {
             try {
                 int separatorIndex = message.indexOf("/");
@@ -109,7 +103,6 @@ public class Parser {
             response = list.findTask(keyword);
         }
 
-        // else is nonsense which will produce error
         else {
             WillyException error = new WillyException(NO_SENSE_MESSAGE);
             response = error.toString();
