@@ -27,6 +27,9 @@ public class DoneCommand extends Command {
      * @throws DukeException when task number does not exist.
      */
     public String execute(TaskList tasklist, Storage storage) throws DukeException {
+        assert tasklist != null : "Tasklist cannot be null.";
+        assert storage != null : "Storage cannot be null.";
+        assert description != null : "Description cannot be null.";
         try {
             int index = Integer.parseInt(description.split(" ")[0]);
             if (tasklist.getSize() < index || index <= 0) {

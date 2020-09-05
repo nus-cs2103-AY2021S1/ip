@@ -61,6 +61,10 @@ public class Storage {
     private void getSavedTasks(String s) {
         Task t;
         String[] descriptions = s.split("\\|");
+        assert descriptions[0].equals("T")
+                || descriptions[0].equals("D")
+                || descriptions[0].equals("E")
+                : "Task type does not exist.";
         if (descriptions[0].equals("T")) {
             t = new Todo(descriptions[2]);
             if (descriptions[1].equals("T")) {
@@ -90,9 +94,14 @@ public class Storage {
      * @throws DukeException throw when error occurs and need to print error message.
      */
     public void saveToFile(List<Task> tasks) throws IOException, DukeException {
+        assert database != null : "Path to database cannot be null";
         try {
             FileWriter fw = new FileWriter(database);
             for (Task task : tasks) {
+                assert task instanceof Todo
+                        || task instanceof Deadline
+                        || task instanceof Event
+                        : "Task type does not exist.";
                 if (task instanceof Todo) {
                     if (task.getDone()) {
                         fw.write("T" + "|" + "T" + "|" + task.getDescription() + System.lineSeparator());

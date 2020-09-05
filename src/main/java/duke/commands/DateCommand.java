@@ -33,6 +33,9 @@ public class DateCommand extends Command {
      * @throws DukeException if tasks with date is not in tasklist.
      */
     public String execute(TaskList tasklist, Storage storage) throws DukeException {
+        assert tasklist != null : "Tasklist cannot be null.";
+        assert storage != null : "Storage cannot be null.";
+        assert description != null : "Description cannot be null.";
         boolean dateExists = false;
         String response = "";
         LocalDate dateSearched;

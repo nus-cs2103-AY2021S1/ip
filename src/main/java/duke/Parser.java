@@ -27,6 +27,7 @@ public class Parser {
      * @throws DukeException throw when error occurs.
      */
     public Command findCommand(String description) throws DukeException {
+        assert description instanceof String : "Description must be a String";
         if (description.length() == 0 && entered) {
             throw new DukeException("there's no commands");
         } else if (description.equals("list")) {
