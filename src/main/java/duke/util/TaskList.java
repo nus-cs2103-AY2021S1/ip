@@ -197,7 +197,7 @@ public class TaskList {
         if (indices.isEmpty()) {
             return "Search result is empty!";
         }
-        StringBuilder msg = new StringBuilder();
+        StringBuilder msg = new StringBuilder("Here are the tasks:\n");
         for (int i: indices) {
             msg.append(String.format("%d. %s", i + 1, list.get(i)));
             msg.append("\n");

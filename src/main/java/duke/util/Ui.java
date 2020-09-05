@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.List;
 
 /**
- * User Interface (Ui) is the front-end of the application which the user
+ * User Interface (Ui) is the front-end of the CLI application which the user
  * interacts with for both inputs and outputs. Majority of the chat bot's
  * personality is being portrayed onto this class. A snippet of this
  * interaction is as shown:
@@ -51,14 +51,14 @@ public class Ui {
                 + "                                               `-'     `-'\n"
                 + "By: Andy Wu";
         System.out.println(logo);
-        sendMessage("hello! Tebby lives to serve :)");
+        sendMessage("Hello! Tebby lives to serve :)");
     }
 
     /**
      * Prints the exit message before the application closes.
      */
     public void showExit() {
-        String msg = LINE + "\n    have a good day! Tebby logging off...\n";
+        String msg = LINE + "\n    Have a good day! Tebby logging off...\n";
         msg += "    ----------------------------X---------------------------------";
         System.out.println(msg);
     }
@@ -124,7 +124,7 @@ public class Ui {
      * @return the formatted success message.
      */
     public String getSuccessMessage(String type, Task task) throws DukeException {
-        StringBuilder sb = new StringBuilder("okay I've ");
+        StringBuilder sb = new StringBuilder("Okay I've ");
         assert List.of("add", "remove", "done").contains(type)
                 : "Task manipulation type can only be one of [add, remove, done].";
         switch(type) {
@@ -136,6 +136,7 @@ public class Ui {
             break;
         case "done":
             sb.append("marked this task as done:");
+            break;
         default:
             throw new DukeException("Unrecognized task manipulation type!");
         }
@@ -151,7 +152,7 @@ public class Ui {
                 "done <task number>", "remove <task number>",
                 "remove all", "bye"
         };
-        StringBuilder sb = new StringBuilder("here are the available commands:\n");
+        StringBuilder sb = new StringBuilder("Here are the available commands:\n");
         for (String command: commands) {
             sb.append(" - ").append(command).append("\n");
         }
@@ -160,6 +161,6 @@ public class Ui {
     }
 
     public String getGuiWelcomeMessage() {
-        return "hello! Tebby lives to serve :)";
+        return "Hello! Tebby lives to serve :)\nType help for list of commands!";
     }
 }
