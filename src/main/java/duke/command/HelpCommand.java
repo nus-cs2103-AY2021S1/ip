@@ -31,7 +31,7 @@ public class HelpCommand extends Command {
                 + "example, typing `done 1` would mark the first item (as per what is "
                 + "shown when you type the `list` command) as complete.\n";
         String findHelpMessage = "To find all items containing a certain keyword, type `find "
-                + "{keyword}`.\n -- For example, typing `find CS2103T` would display all items "
+                + "{keyword}`.\n  - For example, typing `find CS2103T` would display all items "
                 + "that contains CS2103T in their description.\n";
 
         return String
