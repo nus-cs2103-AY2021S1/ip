@@ -52,7 +52,7 @@ public class StorageTest {
             List<Task> tasks = storage.getTasks();
             String task = tasks.get(0).toString();
 
-            assertEquals(task, "[T][✘] test");
+            assertEquals(task, "[T][\u2718] test");
         } catch (DukeException e) {
             System.out.println("Error creating test case.");
         } catch (IOException e) {
