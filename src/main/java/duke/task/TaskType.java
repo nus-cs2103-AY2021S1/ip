@@ -6,23 +6,34 @@ package duke.task;
  * @author Alvin Chee
  */
 public enum TaskType {
-    TODO ("[T]"),
-    DEADLINE ("[D]"),
-    EVENT ("[E]");
+//    TODO ("[T]"),
+//    DEADLINE ("[D]"),
+//    EVENT ("[E]");
+    TODO ('T'),
+    DEADLINE ('D'),
+    EVENT ('E');
 
-    private String taskSymbol;
 
+    //private String taskSymbol;
+    private char taskSymbol;
     /**
      * Constructs a task type.
      *
      * @param taskSymbol  Symbol representing the type of task.
      */
-    TaskType(String taskSymbol) {
+    TaskType(char taskSymbol) {
         this.taskSymbol = taskSymbol;
+    }
+
+    /**
+     * Returns the task symbol.
+     */
+    public char returnTaskSymbol() {
+        return taskSymbol;
     }
 
     @Override
     public String toString() {
-        return taskSymbol;
+        return "[" + taskSymbol + "]";
     }
 }

@@ -29,6 +29,10 @@ public class Main extends Application {
         return path.toString();
     }
 
+    /**
+     * Stages the stage.
+     * @param stage Stage where the application is shown.
+     */
     @Override
     public void start(Stage stage) {
         try {

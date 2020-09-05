@@ -1,17 +1,17 @@
 package duke.storage;
 
 /**
- * The class DukeIOException denotes a Duke IOexception.
+ * The class DukeLoadFileException denotes a DukeLoadFilexception.
  *
  * @author Alvin Chee
  */
-public class DukeIOException extends DukeCompileTimeException {
+public class DukeLoadFileException extends DukeCompileTimeException {
     /**
      * Constructs a DukeCompileTimeException
      *
      * @param errorMessage  Error message of the exception.
      */
-    public DukeIOException(String errorMessage) {
+    public DukeLoadFileException(String errorMessage) {
         super(errorMessage);
     }
 }
