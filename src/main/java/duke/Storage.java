@@ -111,10 +111,10 @@ public class Storage {
                 } else if (task instanceof Deadline) {
                     if (task.getDone()) {
                         fw.write("D" + "|" + "T" + "|" + task.getDescription()
-                                + "|" + ((Deadline) task).getDate() + System.lineSeparator());
+                                + "|" + ((Deadline) task).getDateorTime() + System.lineSeparator());
                     } else {
                         fw.write("D" + "|" + "F" + "|" + task.getDescription()
-                                + "|" + ((Deadline) task).getDate() + System.lineSeparator());
+                                + "|" + ((Deadline) task).getDateorTime() + System.lineSeparator());
                     }
                 } else if (task instanceof Event) {
                     if (task.getDone()) {

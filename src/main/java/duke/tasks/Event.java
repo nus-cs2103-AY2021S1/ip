@@ -11,7 +11,7 @@ import duke.DukeException;
  * Type of task which includes date.
  */
 public class Event extends Task {
-    private String date;
+    private String dateOrTime;
 
     /**
      * Constructor to create Event object.
@@ -21,7 +21,7 @@ public class Event extends Task {
      */
     public Event(String description, String date) {
         super(description);
-        this.date = date;
+        this.dateOrTime = date;
     }
 
     /**
@@ -30,7 +30,7 @@ public class Event extends Task {
      * @return date of the Event.
      */
     public String getDate() {
-        return this.date;
+        return dateOrTime;
     }
 
     /**
@@ -40,7 +40,7 @@ public class Event extends Task {
     private String convertDateAndTime() {
         assert description != null : "Description cannot be empty.";
         String d1 = "";
-        String[] descriptions = date.split(" ");
+        String[] descriptions = dateOrTime.split(" ");
         for (int i = 0; i < descriptions.length; i++) {
             try {
                 d1 += " " + LocalDate.parse(descriptions[i]).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
@@ -65,11 +65,11 @@ public class Event extends Task {
      * @throws DukeException if description provided does not match format of date.
      */
     public boolean isSameDate(LocalDate date) throws DukeException {
-        assert date != null;
-        LocalDate d1 = date;
-        LocalDate d2 = null;
-        String[] descriptions = this.date.split(" ");
+        assert dateOrTime != null;
+        String[] descriptions = dateOrTime.split(" ");
         for (int i = 0; i < descriptions.length; i++) {
+            LocalDate d1 = date;
+            LocalDate d2 = null;
             try {
                 d2 = LocalDate.parse(descriptions[i]);
                 return d2.equals(d1);
@@ -88,15 +88,16 @@ public class Event extends Task {
      * @throws DukeException if description provided does not match format of time.
      */
     public boolean isSameTime(LocalTime time) throws DukeException {
-        assert date != null;
-        LocalTime d1 = time;
-        LocalTime d2 = null;
-        String[] descriptions = date.split(" ");
+
+        assert dateOrTime != null;
+        String[] descriptions = dateOrTime.split(" ");
         for (int i = 0; i < descriptions.length; i++) {
             try {
-                d2 = LocalTime.parse(descriptions[i]);
-                if (d2.equals(d1)) {
-                    return d2.equals(d1);
+                LocalTime t1 = time;
+                LocalTime t2 = null;
+                t2 = LocalTime.parse(descriptions[i]);
+                if (t2.equals(t1)) {
+                    return t2.equals(t1);
                 } else {
                     continue;
                 }

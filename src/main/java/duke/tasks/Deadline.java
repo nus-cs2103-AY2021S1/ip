@@ -14,7 +14,7 @@ import duke.DukeException;
  * Type of task which includes end date.
  */
 public class Deadline extends Task {
-    private String date;
+    private String dateorTime;
 
     /**
      * Constructor to create Deadline object.
@@ -24,7 +24,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String date) {
         super(description);
-        this.date = date;
+        this.dateorTime = date;
     }
 
     /**
@@ -32,8 +32,8 @@ public class Deadline extends Task {
      *
      * @return date of the deadline.
      */
-    public String getDate() {
-        return date;
+    public String getDateorTime() {
+        return dateorTime;
     }
 
     /**
@@ -43,7 +43,7 @@ public class Deadline extends Task {
     private String convertDateAndTime() {
         assert description != null : "Description cannot be empty.";
         String d1 = "";
-        String[] descriptions = date.split(" ");
+        String[] descriptions = dateorTime.split(" ");
         for (int i = 0; i < descriptions.length; i++) {
             try {
                 d1 += " " + LocalDate.parse(descriptions[i]).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
@@ -68,11 +68,11 @@ public class Deadline extends Task {
      * @throws DukeException if description provided does not match format of date.
      */
     public boolean isSameDate(LocalDate date) throws DukeException {
-        assert this.date != null;
-        LocalDate d1 = date;
-        LocalDate d2 = null;
-        String[] descriptions = this.date.split(" ");
+        assert dateorTime != null;
+        String[] descriptions = dateorTime.split(" ");
         for (int i = 0; i < descriptions.length; i++) {
+            LocalDate d1 = date;
+            LocalDate d2 = null;
             try {
                 d2 = LocalDate.parse(descriptions[i]);
                 return d2.equals(d1);
@@ -91,15 +91,15 @@ public class Deadline extends Task {
      * @throws DukeException if description provided does not match format of time.
      */
     public boolean isSameTime(LocalTime time) throws DukeException {
-        assert this.date != null;
-        LocalTime d1 = time;
-        LocalTime d2 = null;
-        String[] descriptions = date.split(" ");
+        assert dateorTime != null;
+        String[] descriptions = dateorTime.split(" ");
         for (int i = 0; i < descriptions.length; i++) {
+            LocalTime t1 = time;
+            LocalTime t2 = null;
             try {
-                d2 = LocalTime.parse(descriptions[i]);
-                if (d2.equals(d1)) {
-                    return d2.equals(d1);
+                t2 = LocalTime.parse(descriptions[i]);
+                if (t2.equals(t1)) {
+                    return t2.equals(t1);
                 } else {
                     continue;
                 }
