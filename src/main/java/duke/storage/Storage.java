@@ -152,29 +152,30 @@ public class Storage {
      * Saves individual task to list.
      * @param bw    Buffered writer
      * @param tasks List of tasks to be saved
-     * @param index Index of each individual task
      * @throws IOException
      */
-    private void saveTaskToList(BufferedWriter bw, TaskList tasks, int index) throws IOException{
-        Task task = tasks.get(index);
-        TaskType taskType = task.returnTaskType();
-        String taskInfo = task.returnTaskInfo();
-        String when = "";
-        switch(taskType.returnTaskSymbol()) {
-        case 'D' :
-            Deadlines deadline = (Deadlines) tasks.get(index);
-            when = " : " + deadline.returnTime().trim();
-            break;
-        case 'E' :
-            Events event = (Events) tasks.get(index);
-            when = " : " + event.returnTime().trim();
-            break;
-        default :
-            break;
+    private void saveTasksToList(BufferedWriter bw, TaskList tasks) throws IOException{
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            TaskType taskType = task.returnTaskType();
+            String taskInfo = task.returnTaskInfo();
+            String when = "";
+            switch(taskType.returnTaskSymbol()) {
+            case 'D' :
+                Deadlines deadline = (Deadlines) tasks.get(i);
+                when = " : " + deadline.returnTime().trim();
+                break;
+            case 'E' :
+                Events event = (Events) tasks.get(i);
+                when = " : " + event.returnTime().trim();
+                break;
+            default :
+                break;
+            }
+            String toWrite = taskType.returnTaskSymbol() + " : " + task.returnDoneStatus() + " : " + taskInfo.trim() + when;
+            bw.write(toWrite);
+            bw.newLine();
         }
-        String toWrite = taskType.returnTaskSymbol() + " : " + task.returnDoneStatus() + " : " + taskInfo.trim() + when;
-        bw.write(toWrite);
-        bw.newLine();
     }
 
     /**
@@ -187,9 +188,7 @@ public class Storage {
             File file = new File(filePath);
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
-            for (int i = 0; i < tasks.size(); i++) {
-                saveTaskToList(bw, tasks, i);
-            }
+            saveTasksToList(bw, tasks);
             bw.close();
         } catch (IOException e) {
             throw new DukeIOException("Sorry handsome but file is not found.");
