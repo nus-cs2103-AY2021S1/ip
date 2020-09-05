@@ -19,6 +19,15 @@ public class Ui {
     }
 
     /**
+     * Returns the Parser object in this Ui.
+     *
+     * @return Parse object in this Ui.
+     */
+    public Parser getParser() {
+        return this.parser;
+    }
+
+    /**
      * Responds after the user keyed in the input.
      *
      * @return String of the response from Duke.

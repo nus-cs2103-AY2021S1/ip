@@ -1,13 +1,17 @@
-package duke.ui;
+package duke.ui.controller;
 
 import duke.main.Duke;
 import duke.tools.Format;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -19,7 +23,10 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
+    @FXML
+    private Button sendButton;
 
+    private Stage stage;
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
@@ -30,6 +37,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+
+    /**
+     * Sets the Duke object to the given duke.
+     *
+     * @param duke
+     */
     public void setDuke(Duke duke) {
         this.duke = duke;
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getUi().greet(), dukeImage));
@@ -49,6 +62,19 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(format.toString(), userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+
+        if (duke.getUi().getParser().isEnd(input)) {
+            closeWindow();
+        }
         userInput.clear();
+    }
+
+    /**
+     * Closes the interaction window for
+     * when the user types in "bye" command.
+     */
+    private void closeWindow() {
+        userInput.setOnAction(null);
+        sendButton.setOnAction(null);
     }
 }
