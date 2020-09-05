@@ -22,6 +22,7 @@ public class Taskbot {
      * @return A line of text signifying success or failure of carrying out the command.
      */
     public String getResponse(String input) {
+        assert input.length() > 0 : "Empty input";
         try {
             // Process user input and get the relevant command
             Command cmd = Parser.parse(input);

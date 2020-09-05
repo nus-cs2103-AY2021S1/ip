@@ -13,6 +13,7 @@ public abstract class Task {
      * @param task Description of task.
      */
     public Task(String task) {
+        assert task.length() > 0 : "Empty task length";
         this.task = task;
         this.isDone = false;
     }
