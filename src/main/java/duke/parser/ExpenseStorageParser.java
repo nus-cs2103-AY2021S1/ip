@@ -6,6 +6,7 @@ import duke.exception.DukeParseException;
 import duke.expense.Expense;
 import duke.expense.Payable;
 import duke.expense.Receivable;
+import duke.storage.Storable;
 import duke.utils.Datetime;
 import duke.utils.Utils;
 
@@ -15,8 +16,6 @@ import duke.utils.Utils;
  * that will be saved into the storage text file.
  */
 public class ExpenseStorageParser {
-    private static final String DELIMITER = ";";
-
     private static final int DESCRIPTION_INDEX = 1;
     private static final int VALUE_INDEX = 2;
     private static final int DATE_INDEX = 3;
@@ -64,7 +63,7 @@ public class ExpenseStorageParser {
      * @throws DukeParseException if there are any errors in parsing.
      */
     public Expense convertStorageToExpense(String storageExpenseString) throws DukeParseException {
-        String[] storageExpense = storageExpenseString.split(DELIMITER);
+        String[] storageExpense = storageExpenseString.split(Storable.DELIMITER);
         assert storageExpense.length > 0 : "There is an error in the splitting of the storageExpenseString";
 
         if (storageExpense.length < STORAGE_LENGTH) {

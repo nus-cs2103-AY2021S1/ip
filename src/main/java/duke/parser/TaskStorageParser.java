@@ -3,6 +3,7 @@ package duke.parser;
 import java.time.LocalDateTime;
 
 import duke.exception.DukeParseException;
+import duke.storage.Storable;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -13,7 +14,6 @@ import duke.utils.Datetime;
 public class TaskStorageParser {
     private static final String IS_COMPLETED = "1";
     private static final String NOT_COMPLETED = "0";
-    private static final String DELIMITER = ";";
 
     private static final int TODO_LENGTH = 3;
     private static final int DEADLINE_LENGTH = 4;
@@ -80,7 +80,7 @@ public class TaskStorageParser {
      * format of the <code>String</code> being parsed.
      */
     public Task convertStorageToTask(String storageTaskString) throws DukeParseException {
-        String[] storageTask = storageTaskString.split(DELIMITER);
+        String[] storageTask = storageTaskString.split(Storable.DELIMITER);
         assert storageTask.length > 0 : "There is an error in the splitting of the storageTaskString";
         switch(storageTask[0]) {
         case Todo.TODO_SYMBOL:
