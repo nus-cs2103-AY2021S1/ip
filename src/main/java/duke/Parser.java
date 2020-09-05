@@ -10,6 +10,7 @@ import duke.command.CompletedCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.PendingCommand;
 import duke.command.ShowCommand;
@@ -53,6 +54,8 @@ public class Parser {
             "☹ OOPS!!! The pending command does not take any additional argument(s).";
     public static final String COMPLETED_EXTRA_ARGUMENTS_MESSAGE =
             "☹ OOPS!!! The completed command does not take any additional argument(s).";
+    public static final String HELP_EXTRA_ARGUMENTS_MESSAGE =
+            "☹ OOPS!!! The help command does not take any additional argument(s).";
 
     /**
      * Parses the given command based on different keywords.
@@ -79,6 +82,8 @@ public class Parser {
             return new PendingCommand();
         } else if (fullCommand.equals(CommandType.COMPLETED.getType())) {
             return new CompletedCommand();
+        } else if (fullCommand.equals(CommandType.HELP.getType())) {
+            return new HelpCommand();
         } else if (fullCommand.equals(CommandType.SHOW.getType())) {
             throw new InvalidArgumentException(SHOW_EMPTY_DATE_MESSAGE);
         } else if (fullCommand.equals(CommandType.FIND.getType())) {
@@ -95,6 +100,8 @@ public class Parser {
             throw new InvalidArgumentException(PENDING_EXTRA_ARGUMENTS_MESSAGE);
         } else if (fullCommandArray[0].equals(CommandType.COMPLETED.getType())) {
             throw new InvalidArgumentException(COMPLETED_EXTRA_ARGUMENTS_MESSAGE);
+        } else if (fullCommandArray[0].equals(CommandType.HELP.getType())) {
+            throw new InvalidArgumentException(HELP_EXTRA_ARGUMENTS_MESSAGE);
         } else if (fullCommandArray[0].equals(CommandType.SHOW.getType())) {
             try {
                 LocalDate date = LocalDate.parse(fullCommandArray[1]);

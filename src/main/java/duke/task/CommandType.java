@@ -9,7 +9,8 @@ public enum CommandType {
     ADD("add"),
     FIND("find"),
     PENDING("pending"),
-    COMPLETED("completed");
+    COMPLETED("completed"),
+    HELP("help");
 
     /**
      * Type of Command.
