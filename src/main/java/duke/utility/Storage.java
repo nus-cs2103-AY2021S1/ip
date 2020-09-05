@@ -17,6 +17,7 @@ import duke.task.Task;
  * This class deals with saving, changing, or deleting data in the hard disk.
  */
 public class Storage {
+    private static final int STATUS_POSITION_IN_DISK = 4;
     private Path storagePath;
 
     /**
@@ -61,7 +62,7 @@ public class Storage {
                 String taskLine = sc.nextLine() + "\n";
 
                 if (count == line) {
-                    if (taskLine.charAt(4) == '0') {
+                    if (taskLine.charAt(STATUS_POSITION_IN_DISK) == '0') {
                         taskLine = taskLine.replaceFirst("0", "1");
                     }
                 }

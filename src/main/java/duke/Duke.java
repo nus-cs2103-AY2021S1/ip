@@ -53,9 +53,9 @@ public class Duke {
     }
 
     private void run() {
-        ui.welcome();
+        ui.sendMessage(ui.welcome());
         takeUserInput();
-        ui.exit();
+        ui.sendMessage(ui.exit());
     }
 
     /**
