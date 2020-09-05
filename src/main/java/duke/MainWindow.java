@@ -23,22 +23,13 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Chicken.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Chicken.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Koya.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/RJ.png"));
 
     public static String greeting() {
-        String logo = "         ███▄ ▄███▓  ██▓     ▄████▄    ██░   ██ "
-                + "\n         ▓██▀█▀ ██▒ ▓██▒ ▒██▀ ██   ▓██░  ██▒"
-                + "\n         ▓██       ▓██░ ▒██▒ ▓█        ▄   ▒██▀▀██░"
-                + "\n         ▒██       ▒██   ░██░  ▓▓▄ ▄██▒ ██    ░██ "
-                + "\n         ▒██▒     ░██▒ ░██░▒  ▓███▀░██▒ ░██▓";
-
-        String greet = "\n_____________________________________________________"
-                + "\n Hello! I'm Mich"
-                + "\n What can I do for you?"
-                + "\n_____________________________________________________\n";
-        String str = logo + greet;
-        return str;
+        String greet = "Hello! I'm RJ"
+                + "\nHow can I help you?";
+        return greet;
     }
 
     @FXML

@@ -25,11 +25,14 @@ public class TaskList {
 
     public static String addTask(Task task) {
         tasks.add(task);
-        String str = "_____________________________________________________"
-                + "\nGot it. I've added this task:"
+//        String str = "_____________________________________________________"
+//                + "\nGot it. I've added this task:"
+//                + "\n" + task
+//                + "\nNow you have " + tasks.size() + " task(s) in the list."
+//                + "\n_____________________________________________________\n";
+        String str = "Got it. I've added this task:"
                 + "\n" + task
-                + "\nNow you have " + tasks.size() + " task(s) in the list."
-                + "\n_____________________________________________________\n";
+                + "\nNow you have " + tasks.size() + " task(s) in the list.";
         return str;
     }
 
@@ -57,13 +60,14 @@ public class TaskList {
                 str += e;
             }
         } else {
-            String lst = "_____________________________________________________"
-                    + "\nHere are the tasks in your list:";
+//            String lst = "_____________________________________________________"
+//                    + "\nHere are the tasks in your list:";
+            String lst = "Here are the tasks in your list:";
             for (int i = 0; i < tasks.size(); i++) {
                 int index = i + 1;
                 lst += "\n" + index + ". " + tasks.get(i);
             }
-            lst += "\n_____________________________________________________\n";
+//            lst += "\n_____________________________________________________\n";
             str = lst;
         }
         System.out.println(str);
@@ -77,10 +81,12 @@ public class TaskList {
      */
     public static String done(Integer index) {
         tasks.get(index - 1).markAsDone();
-        String str = "_____________________________________________________"
-                + "\nNice! I've marked this task as done:\n      "
-                + tasks.get(index - 1)
-                + "\n_____________________________________________________\n";
+//        String str = "_____________________________________________________"
+////                + "\nNice! I've marked this task as done:\n      "
+////                + tasks.get(index - 1)
+////                + "\n_____________________________________________________\n";
+        String str = "Nice! I've marked this task as done:\n      "
+                + tasks.get(index - 1);
         return str;
     }
 
@@ -90,11 +96,14 @@ public class TaskList {
      * @param index
      */
     public static String delete(Integer index) {
-        String str = "_____________________________________________________"
-                + "\nNoted. I've removed this task:\n      "
+//        String str = "_____________________________________________________"
+//                + "\nNoted. I've removed this task:\n      "
+//                + tasks.remove(index - 1)
+//                + "\n    Now you have " + tasks.size() + " task(s) in the list."
+//                + "\n_____________________________________________________\n";
+        String str = "Noted. I've removed this task:\n      "
                 + tasks.remove(index - 1)
-                + "\n    Now you have " + tasks.size() + " task(s) in the list."
-                + "\n_____________________________________________________\n";
+                + "\n    Now you have " + tasks.size() + " task(s) in the list.";
         return str;
     }
 
@@ -119,13 +128,14 @@ public class TaskList {
             }
         } else {
             int index = 1;
-            str += "_____________________________________________________"
-                    + "\nHere are the matching tasks in your list:";
+//            str += "_____________________________________________________"
+////                    + "\nHere are the matching tasks in your list:";
+            str += "Here are the matching tasks in your list:";
             for (Task task : matchingTasks) {
                 str += "\n" + index + ". " + task;
                 index++;
             }
-            str += "\n_____________________________________________________\n";
+//            str += "\n_____________________________________________________\n";
         }
         return str;
     }
