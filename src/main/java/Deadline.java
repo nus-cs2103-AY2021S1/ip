@@ -3,14 +3,17 @@
  * Contains a task description and a time.
  */
 public class Deadline extends Task {
-    protected String by;
+    private String description;
+    private boolean isDone;
+    private String by;
     /**
      * Constructor of Deadline object.
      * @param description description of the task.
      * @param by the deadline of the task.
      */
     public Deadline(String description, String by) {
-        super(description);
+        this.description = description;
+        this.isDone = false;
         this.by = by;
     }
 
@@ -21,10 +24,25 @@ public class Deadline extends Task {
      * @param by the deadline of the task.
      */
     public Deadline(String description, boolean isDone, String by) {
-        super(description, isDone);
+        this.description = description;
+        this.isDone = isDone;
         this.by = by;
     }
 
+    /**
+     * Returns the description of the deadline task.
+     * @return the description of the deadline task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+    /**
+     * Returns the icon for corresponding status of task.
+     * @return sign of tick or cross.
+     */
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
+    }
     /**
      * Marks the deadline task as done.
      * @return new Deadline object with true for isDone.
@@ -39,9 +57,9 @@ public class Deadline extends Task {
      * @return string in the format of data in data file.
      */
     @Override
-    public String stringify() {
+    public String toStringOfDatabase() {
         String number = isDone ? "1" : "0";
-        return "D | " + number + " | " + super.description + " | " + this.by;
+        return "D | " + number + " | " + this.description + " | " + this.by;
     }
 
     /**
@@ -50,6 +68,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (by: " + by + ")";
+        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + by + ")";
     }
 }

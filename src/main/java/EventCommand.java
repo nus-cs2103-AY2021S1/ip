@@ -30,7 +30,7 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EventException {
-        ArrayList<Task> store = new ArrayList<>();
+        ArrayList<Task> store = tasks.getTaskList();
         int index = 0;
         for (int i = 1; i < input.length; i++) {
             if (input[i].equals("/at")) {
