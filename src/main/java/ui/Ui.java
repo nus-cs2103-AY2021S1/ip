@@ -72,8 +72,8 @@ public class Ui {
         print("Got it. I've added this task:");
         print(message);
         print(String.format("Now you have %d %s in the list", size, size > 1 ? "tasks" : "task"));
-        return "Got it. I've added this task:\n" 
-                + message + "\n" 
+        return "Got it. I've added this task:\n"
+                + message + "\n"
                 + String.format("Now you have %d %s in the list", size, size > 1 ? "tasks" : "task");
     }
 }

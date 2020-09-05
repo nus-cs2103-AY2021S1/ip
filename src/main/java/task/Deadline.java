@@ -1,10 +1,10 @@
 package task;
 
-import exception.DeadlineInvalidUsageException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import exception.DeadlineInvalidUsageException;
 
 public class Deadline extends Task {
     protected LocalDate by;

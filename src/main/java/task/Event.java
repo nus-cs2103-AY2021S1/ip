@@ -1,10 +1,10 @@
 package task;
 
-import exception.EventInvalidUsageException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import exception.EventInvalidUsageException;
 
 /**
  * Represents an {@code Event} object. Inherits from {@code Task} object

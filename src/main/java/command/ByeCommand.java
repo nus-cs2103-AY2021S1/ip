@@ -1,8 +1,9 @@
 package command;
 
+import java.util.concurrent.CompletableFuture;
+
 import duke.Storage;
 import duke.TaskList;
-import java.util.concurrent.CompletableFuture;
 import ui.Ui;
 
 /**

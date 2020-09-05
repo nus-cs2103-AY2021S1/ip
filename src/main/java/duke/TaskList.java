@@ -1,12 +1,12 @@
 package duke;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
 
 /**
  * Represents a {@code Tasklist} object to store tasks in memory
@@ -18,6 +18,12 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+    /**
+     * Add a task into taskList
+     *
+     * @param task to be added
+     * @return the task added
+     */
     public Task add(Task task) {
         taskList.add(task);
         return task;

@@ -11,12 +11,12 @@ import ui.Ui;
  * Main class for the Duke application
  */
 public class Duke {
-    // current task list
-    private TaskList taskList;
     // storage file
     private final Storage storage;
     // text ui interface
     private final Ui ui;
+    // current task list
+    private TaskList taskList;
 
     /**
      * Constructor for Duke application
@@ -34,7 +34,7 @@ public class Duke {
     /**
      * method to call on starting the application
      */
-    public String start() {
+    public String onStart() {
         return ui.showWelcomeMessage();
     }
 
