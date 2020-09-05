@@ -13,11 +13,13 @@ public class Parser {
      */
     public static String parseCode(TaskList taskList, UI ui, boolean flag, String userInput) {
        // while (!flag) {
-
+            assert userInput.length() > 0;
             String echo = userInput;//ui.sc.nextLine();
             try {
                 String split = echo;
                 String arr[] = split.split(" ", 2);
+                assert  arr[0].length() > 0;
+
                 String keyword = arr[0];
                 Commands command = Commands.findCommand(keyword);
                 switch (command) {
@@ -54,7 +56,7 @@ public class Parser {
                         }
                     case TODO:
                         try {
-
+                            assert  arr[1].length() > 0;
                             ToDo item = new ToDo(arr[1]);
                           return ui.addLines(taskList.add(item));
                            // break;
@@ -73,7 +75,7 @@ public class Parser {
                         }
                     case DELETE:
                         try {
-
+                            assert  Integer.parseInt(arr[1]) >= 1;
                             int index2 = Integer.parseInt(arr[1]) - 1;
                            return ui.addLines(taskList.deleteTask(index2));
                            // break;
@@ -84,6 +86,7 @@ public class Parser {
                     case FIND:
 
                         String findWord = arr[1];
+                        assert findWord.length() > 0;
                         taskList.findTask(findWord);
                        return ui.addLines(taskList.printOutKeyWordList());
 
