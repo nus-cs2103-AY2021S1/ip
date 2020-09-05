@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import nekochan.exceptions.NekoException;
 import nekochan.exceptions.NekoStorageException;
 import nekochan.exceptions.NekoTaskCreationException;
+import nekochan.util.Messages;
 
 public class DeadlineTest {
 
@@ -29,7 +30,7 @@ public class DeadlineTest {
         NekoException thrown = assertThrows(NekoException.class, () -> {
             Deadline deadline = Deadline.createTask("Fix parsing by 20th January 2019");
         });
-        assertTrue(thrown.getMessage().contains("I can't quite understand what you're saying..."));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_DATETIME_ERROR));
     }
 
     @Test
@@ -37,7 +38,7 @@ public class DeadlineTest {
         NekoException thrown = assertThrows(NekoException.class, () -> {
             Deadline deadline = Deadline.createTask("Fix parsing by 20-03-2019 1200");
         });
-        assertTrue(thrown.getMessage().contains("I can't quite understand what you're saying..."));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_DATETIME_ERROR));
     }
 
     @Test
@@ -45,7 +46,7 @@ public class DeadlineTest {
         NekoException thrown = assertThrows(NekoTaskCreationException.class, () -> {
             Deadline deadline = Deadline.createTask("Submit homework");
         });
-        assertTrue(thrown.getMessage().contains("So you never did plan on doing it huh..."));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_DEADLINE_DUE_DATE_ERROR));
     }
 
     @Test
@@ -73,7 +74,7 @@ public class DeadlineTest {
         NekoException thrown = assertThrows(NekoStorageException.class, () -> {
             Deadline deadline = Deadline.decode("D|1 Jan 2020 11:59|Description");
         });
-        assertTrue(thrown.getMessage().contains("There are some holes in my memory..."));
+        assertTrue(thrown.getMessage().contains(Messages.STORAGE_ERROR_CORRUPT));
     }
 
     @Test
@@ -81,7 +82,7 @@ public class DeadlineTest {
         NekoException thrown = assertThrows(NekoStorageException.class, () -> {
             Deadline deadline = Deadline.decode("D|N");
         });
-        assertTrue(thrown.getMessage().contains("There are some holes in my memory..."));
+        assertTrue(thrown.getMessage().contains(Messages.STORAGE_ERROR_CORRUPT));
     }
 
     @Test
@@ -89,7 +90,7 @@ public class DeadlineTest {
         NekoException thrown = assertThrows(NekoStorageException.class, () -> {
             Deadline deadline = Deadline.decode("D|X|Description");
         });
-        assertTrue(thrown.getMessage().contains("There are some holes in my memory..."));
+        assertTrue(thrown.getMessage().contains(Messages.STORAGE_ERROR_CORRUPT));
     }
 
     @Test
@@ -97,6 +98,6 @@ public class DeadlineTest {
         NekoException thrown = assertThrows(NekoStorageException.class, () -> {
             Deadline deadline = Deadline.decode("E|X|Description");
         });
-        assertTrue(thrown.getMessage().contains("Something doesn't seem right..."));
+        assertTrue(thrown.getMessage().contains(Messages.DECODE_UNEXPECTED_TYPE_ERROR));
     }
 }

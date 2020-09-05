@@ -15,6 +15,7 @@ import nekochan.command.ExitCommand;
 import nekochan.command.SearchCommand;
 import nekochan.exceptions.NekoException;
 import nekochan.exceptions.ParseNekoCommandException;
+import nekochan.util.Messages;
 
 public class ParserTest {
 
@@ -59,7 +60,7 @@ public class ParserTest {
             String commandString = "complete";
             Command c = Parser.parse(commandString);
         });
-        assertTrue(thrown.getMessage().contains("What did you complete exactly?"));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_COMMAND_COMPLETE_MISSING_ARGUMENT));
     }
 
     @Test
@@ -68,7 +69,7 @@ public class ParserTest {
             String commandString = "complete 1.2";
             Command c = Parser.parse(commandString);
         });
-        assertTrue(thrown.getMessage().contains("What did you complete exactly?"));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_COMMAND_COMPLETE_MISSING_ARGUMENT));
     }
 
     @Test
@@ -98,7 +99,7 @@ public class ParserTest {
             String commandString = "delete";
             Command c = Parser.parse(commandString);
         });
-        assertTrue(thrown.getMessage().contains("What do you want to remove exactly?"));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_COMMAND_DELETE_MISSING_ARGUMENT));
     }
 
     @Test
@@ -107,7 +108,7 @@ public class ParserTest {
             String commandString = "delete 1.1";
             Command c = Parser.parse(commandString);
         });
-        assertTrue(thrown.getMessage().contains("What do you want to remove exactly?"));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_COMMAND_DELETE_MISSING_ARGUMENT));
     }
 
     @Test
@@ -123,7 +124,7 @@ public class ParserTest {
             String commandString = "deadline";
             Command c = Parser.parse(commandString);
         });
-        assertTrue(thrown.getMessage().contains("Are you hiding something from me?"));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_COMMAND_DEADLINE_MISSING_ARGUMENT));
     }
 
     @Test
@@ -139,7 +140,7 @@ public class ParserTest {
             String commandString = "todo";
             Command c = Parser.parse(commandString);
         });
-        assertTrue(thrown.getMessage().contains("I know your life is empty but your todo can't be empty."));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_COMMAND_TODO_MISSING_ARGUMENT));
     }
 
     @Test
@@ -155,7 +156,7 @@ public class ParserTest {
             String commandString = "event";
             Command c = Parser.parse(commandString);
         });
-        assertTrue(thrown.getMessage().contains("Are you going somewhere without me?"));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_COMMAND_EVENT_MISSING_ARGUMENT));
     }
 
     @Test
@@ -171,6 +172,6 @@ public class ParserTest {
             String commandString = "search";
             Command c = Parser.parse(commandString);
         });
-        assertTrue(thrown.getMessage().contains("I don't have the answer to everything."));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_COMMAND_SEARCH_MISSING_ARGUMENT));
     }
 }

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import nekochan.exceptions.NekoException;
 import nekochan.exceptions.NekoTaskCreationException;
+import nekochan.util.Messages;
 
 public class TaskTest {
 
@@ -22,7 +23,7 @@ public class TaskTest {
         NekoException thrown = assertThrows(NekoTaskCreationException.class, () -> {
             ConcreteTaskStub task = new ConcreteTaskStub("");
         });
-        assertTrue(thrown.getMessage().contains("That's really descriptive..."));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_TASK_DESCRIPTION_ERROR));
     }
 
     @Test

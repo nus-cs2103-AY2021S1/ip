@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import nekochan.exceptions.NekoException;
 import nekochan.exceptions.NekoStorageException;
 import nekochan.exceptions.NekoTaskCreationException;
+import nekochan.util.Messages;
 
 public class ToDoTest {
 
@@ -43,7 +44,8 @@ public class ToDoTest {
         NekoException thrown = assertThrows(NekoStorageException.class, () -> {
             ToDo todo = ToDo.decode("T|Description");
         });
-        assertTrue(thrown.getMessage().contains("There are some holes in my memory..."));
+        System.out.println(thrown.getMessage());
+        assertTrue(thrown.getMessage().contains(Messages.STORAGE_ERROR_CORRUPT));
     }
 
     @Test
@@ -51,7 +53,7 @@ public class ToDoTest {
         NekoException thrown = assertThrows(NekoStorageException.class, () -> {
             ToDo todo = ToDo.decode("T|N");
         });
-        assertTrue(thrown.getMessage().contains("There are some holes in my memory..."));
+        assertTrue(thrown.getMessage().contains(Messages.STORAGE_ERROR_CORRUPT));
     }
 
     @Test
@@ -59,7 +61,7 @@ public class ToDoTest {
         NekoException thrown = assertThrows(NekoStorageException.class, () -> {
             ToDo todo = ToDo.decode("T|X|Description");
         });
-        assertTrue(thrown.getMessage().contains("There are some holes in my memory..."));
+        assertTrue(thrown.getMessage().contains(Messages.STORAGE_ERROR_CORRUPT));
     }
 
     @Test
@@ -67,6 +69,6 @@ public class ToDoTest {
         NekoException thrown = assertThrows(NekoStorageException.class, () -> {
             ToDo todo = ToDo.decode("E|X|Description");
         });
-        assertTrue(thrown.getMessage().contains("Something doesn't seem right..."));
+        assertTrue(thrown.getMessage().contains(Messages.DECODE_UNEXPECTED_TYPE_ERROR));
     }
 }
