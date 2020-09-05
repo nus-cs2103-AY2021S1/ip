@@ -34,20 +34,32 @@ public class Storage {
     public void load(TaskList taskList) throws IOException, MissingInfoException {
         try {
             File directory = new File("data");
+            checkDirectory(directory);
 
-            if (!directory.exists()) {
-                directory.mkdir();
-            }
+            File file = new File(this.pathname);
+            file.createNewFile();
+            Scanner scanner = new Scanner(file);
+            processData(scanner, taskList);
 
-            File f = new File(this.pathname);
-            f.createNewFile();
-            Scanner s = new Scanner(f);
+        } catch (IOException e) {
+            throw e;
+        } catch (MissingInfoException e) {
+            throw e;
+        }
+    }
 
-            while (s.hasNextLine()) {
-                String[] data;
-                data = s.nextLine().split(" \\| ");
+    private void checkDirectory(File directory) {
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+    }
 
-                switch (data[0]) {
+    private void processData(Scanner scanner, TaskList taskList) throws MissingInfoException {
+        while (scanner.hasNextLine()) {
+            String[] data;
+            data = scanner.nextLine().split(" \\| ");
+
+            switch (data[0]) {
                 case "T":
                     taskList.addTask(taskList.createTask(TaskType.TypeOfTask.TODO, data[2],
                             null, data[1].equals("1") ? true : false));
@@ -62,12 +74,7 @@ public class Storage {
                     break;
                 default:
                     throw new MissingInfoException("There is something wrong with your database file...");
-                }
             }
-        } catch (IOException e) {
-            throw e;
-        } catch (MissingInfoException e) {
-            throw e;
         }
     }
 
@@ -78,8 +85,19 @@ public class Storage {
      * @throws IOException If file is not found or error writing to file.
      */
     public void save(TaskList taskList) throws IOException, MissingInfoException {
-        String taskString = "";
-        ArrayList<Task> tasks = taskList.getTasks();
+        try {
+            ArrayList<Task> tasks = taskList.getTasks();
+            String taskString = convertTasksToString(tasks, "");
+            writeToFile(taskString);
+        } catch (IOException e) {
+            throw e;
+        } catch (MissingInfoException e) {
+            throw e;
+        }
+    }
+
+    private String convertTasksToString(ArrayList<Task> tasks, String initialString) throws MissingInfoException {
+        String taskString = initialString;
 
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
@@ -87,19 +105,19 @@ public class Storage {
             String timing = "";
 
             switch (typeOfTask) {
-            case "task.Todo":
-                taskString = taskString + "T";
-                break;
-            case "task.Deadline":
-                taskString = taskString + "D";
-                timing = timing + ((Deadline) task).getTiming();
-                break;
-            case "task.Event":
-                taskString = taskString + "E";
-                timing = timing + ((Event) task).getTiming();
-                break;
-            default:
-                throw new MissingInfoException("Something wrong with your function parameter?");
+                case "task.Todo":
+                    taskString = taskString + "T";
+                    break;
+                case "task.Deadline":
+                    taskString = taskString + "D";
+                    timing = timing + ((Deadline) task).getTiming();
+                    break;
+                case "task.Event":
+                    taskString = taskString + "E";
+                    timing = timing + ((Event) task).getTiming();
+                    break;
+                default:
+                    throw new MissingInfoException("Something wrong with your function parameter?");
             }
 
             taskString = taskString + " | " + (task.getStatus() ? "1" : "0") + " | " + task.getTaskDescription()
@@ -110,6 +128,10 @@ public class Storage {
             taskString = taskString + "\n";
         }
 
+        return taskString;
+    }
+
+    private void writeToFile(String taskString) throws IOException {
         try {
             FileWriter fw = new FileWriter(this.pathname);
             fw.write(taskString);
