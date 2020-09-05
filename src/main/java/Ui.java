@@ -21,7 +21,7 @@ public class Ui {
     }
 
     /**
-     * Method to print the welcome message for the user.
+     * Print the welcome message for the user.
      */
     public static void printWelcome(){
         System.out.println("Hello from\n" + LOGO);
@@ -30,14 +30,14 @@ public class Ui {
     }
 
     /**
-     * Method to print the line separator.
+     * Print the line separator.
      */
     public static void printLineSeparator(){
         System.out.println("----------------------------------------------------");
     }
 
     /**
-     * Method to print a newly added Task.
+     * Print a newly added Task.
      * @param t Newly added Task.
      */
     public static void printAddedTask(Task t){
@@ -48,7 +48,7 @@ public class Ui {
     }
 
     /**
-     * Method to print a removed Task.
+     * Print a removed Task.
      * @param t Removed Task
      * @param taskListSize Remaining number of Tasks in Duke.
      */
@@ -79,7 +79,7 @@ public class Ui {
     }
 
     /**
-     * Method to print error message for exceptions.
+     * Print error message for exceptions.
      * @param errorMessage Error message
      */
     public static void printException(String errorMessage){
@@ -88,7 +88,7 @@ public class Ui {
     }
 
     /**
-     * Method to print bye.
+     * Print bye.
      */
     public static void printBye(){
         System.out.println("\t" + "Bye. Hope to see you again soon!");
@@ -96,7 +96,7 @@ public class Ui {
     }
 
     /**
-     * Method to print the list of Tasks.
+     * Print the list of Tasks.
      * @param taskList List of Tasks
      */
     public static void printTaskList(TaskList taskList){
@@ -107,7 +107,7 @@ public class Ui {
     }
 
     /**
-     * Method to print the list found.
+     * Print the list found.
      * @param foundList The list found.
      */
     public static void printFoundList(TaskList foundList) {
@@ -119,7 +119,7 @@ public class Ui {
 
 
     /**
-     * Method to get input from the user.
+     * Get input from the user.
      * @return The next line of the user input.
      */
     public String getInput(){
