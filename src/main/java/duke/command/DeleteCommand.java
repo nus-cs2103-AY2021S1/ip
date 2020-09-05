@@ -7,19 +7,19 @@ import duke.TaskList;
 import duke.Ui;
 
 public class DeleteCommand implements Command {
-    private final String item;
+    private final String itemToDelete;
 
-    public DeleteCommand(String item) {
-        this.item = item;
+    public DeleteCommand(String itemToDelete) {
+        this.itemToDelete = itemToDelete;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String response = "Noted. I've removed this task:\n";
-            int number = Integer.parseInt(item) - 1;
-            response += tasks.getList().get(number) + "\n";
-            tasks.deleteTask(number);
+            int itemNumber = Integer.parseInt(itemToDelete) - 1;
+            response += tasks.getList().get(itemNumber) + "\n";
+            tasks.deleteTask(itemNumber);
             storage.updateDataFile(tasks.getList());
             if (tasks.getList().size() > 1) {
                 response += "Now you have " + tasks.getList().size() + " tasks in your list.";

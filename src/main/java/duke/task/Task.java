@@ -21,7 +21,7 @@ public abstract class Task {
     /**
      * Changes the completion status of the task to done.
      */
-    public void done() {
+    public void setAsDone() {
         isDone = true;
     }
 

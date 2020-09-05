@@ -63,11 +63,14 @@ public class Storage {
                     } else {
                         taskType = "unknown";
                     }
+                    if (isTaskDone.equals("1")) {
+                        list.get(list.size() - 1).setAsDone();
+                    }
                     assert taskType != "unknown" : "Task type was not saved properly";
                     assert isTaskDone.equals("0") || isTaskDone.equals("1")
                             : "IsDone was not saved properly";
                     if (isTaskDone.equals("1")) {
-                        list.get(list.size() - 1).done();
+                        list.get(list.size() - 1).setAsDone();
                     }
                 }
                 sc.close();
