@@ -194,7 +194,7 @@ public class Event extends TimedTask {
     public String toString() {
         if (atTime != null) {
             return "[E]" + super.toString() + " (at: "
-                    + atTime.format(Parser.DATE_TIME_OUTPUT_FORMAT) + ")";
+                    + atTime.format(Parser.DATE_TIME_OUTPUT_FORMAT) + repeatMessage() + ")";
         } else {
             return "[E]" + super.toString() + " (at: " + tentativeSlotsStr + ")";
         }

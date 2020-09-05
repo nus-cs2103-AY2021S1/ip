@@ -93,14 +93,6 @@ public class Deadline extends TimedTask {
         return isHappeningBetween(LocalDate.now(), LocalDate.now().plusDays(n));
     }
 
-    /**
-     * Checks whether the task is overdue.
-     * @return true if the task is not done and the deadline is before today
-     */
-    public boolean isOverdue() {
-        return !isDone && byTime.isBefore(LocalDate.now());
-    }
-
     @Override
     public String snoozeTo(String[] input) throws InvalidCommandException {
         if (input.length != SnoozeCommand.SNOOZE_DEADLINE_COMMAND_LENGTH) {
@@ -134,9 +126,8 @@ public class Deadline extends TimedTask {
 
     @Override
     public String toString() {
-        String overdue = isOverdue() ? " This is overdue! The deadline has passed!!!" : "";
         return "[D]" + super.toString() + " (by: "
-                + byTime.format(Parser.DATE_OUTPUT_FORMAT) + ")" + overdue;
+                + byTime.format(Parser.DATE_OUTPUT_FORMAT) + repeatMessage() + ")";
     }
 
     /**

@@ -25,4 +25,12 @@ public abstract class TimedTask extends Task {
      * @throws InvalidCommandException if the task does not have a fixed time yet
      */
     abstract public String repeat(int n) throws InvalidCommandException;
+
+    protected String repeatMessage() {
+        if (repeat == 0) {
+            return "";
+        } else {
+            return String.format(" repeat every %d days", repeat);
+        }
+    }
 }
