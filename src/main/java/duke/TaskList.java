@@ -142,19 +142,19 @@ public class TaskList {
      */
     public String getTasksOnDate(LocalDate date) {
         List<Task> tasksOnDate = new ArrayList<>();
-        for (Task t : list) {
-            if (t instanceof Deadline) {
-                Deadline d = (Deadline) t;
+        list.forEach(task -> {
+            if (task instanceof Deadline) {
+                Deadline d = (Deadline) task;
                 if (d.getDate().isEqual(date)) {
                     tasksOnDate.add(d);
                 }
-            } else if (t instanceof Event) {
-                Event e = (Event) t;
+            } else if (task instanceof Event) {
+                Event e = (Event) task;
                 if (e.getDate().isEqual(date)) {
                     tasksOnDate.add(e);
                 }
             }
-        }
+        });
         return getListAsStringFromList(tasksOnDate,
                 "There are no tasks on this date!");
     }
@@ -167,12 +167,12 @@ public class TaskList {
      */
     public String getTaskWithKeyword(String keyword) {
         List<Task> tasksWithKeyword = new ArrayList<>();
-        for (Task t : list) {
-            String description = t.getDescription();
+        list.forEach(task -> {
+            String description = task.getDescription();
             if (description.contains(keyword)) {
-                tasksWithKeyword.add(t);
+                tasksWithKeyword.add(task);
             }
-        }
+        });
         return getListAsStringFromList(tasksWithKeyword,
                 "No tasks with " + keyword + " was found");
     }
