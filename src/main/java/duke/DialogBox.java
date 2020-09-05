@@ -11,12 +11,7 @@ import javafx.scene.layout.HBox;
 public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
-
-    /**
-     * sdf
-     * @param l sdf
-     * @param iv sdf
-     */
+    
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;

@@ -5,10 +5,18 @@ import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Task;
 
+/**
+ * Command to add a task to the taskList
+ */
 public class AddTaskCommand extends Command {
     
     private final Task task;
-    
+
+    /**
+     * Constructor for the class
+     * 
+     * @param task task to be added to the taskList
+     */
     public AddTaskCommand (Task task) {
         this.task = task;
     }
@@ -19,7 +27,7 @@ public class AddTaskCommand extends Command {
         int numberOfTasks = tasklist.size();
         assert numberOfTasks >= 1;
         ui.addTaskMessage(task, numberOfTasks);
-        storage.writeToDataFile(tasklist);
+        storage.writeDataToFile(tasklist);
     }
     
 }
