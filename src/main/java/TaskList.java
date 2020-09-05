@@ -89,11 +89,19 @@ public class TaskList {
         return foundTasks;
     }
 
+    /**
+     * Retrieve a tasklist with only events and deadlines.
+     * @return ArrayList containing only events and deadlines.
+     */
     protected ArrayList<Task> filterTask() {
         return this.taskList.stream().filter(task -> task instanceof Deadline ||
                 task instanceof Event).collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * Sorts tasks in tasklist in chronological order.
+     * @return ArrayList of tasks sorted in chronological order.
+     */
     protected ArrayList<Task> sortTask() {
         ArrayList<Task> sortedEventAndDeadline = this.taskList.stream()
                 .filter(task -> task instanceof Deadline
@@ -108,11 +116,23 @@ public class TaskList {
         return sortedEventAndDeadline;
 
     }
+
+    /**
+     * Retrieves task to be updated.
+     * @param taskNumber index of the updating tasks.
+     * @return the task to be updated.
+     */
     protected Task getTaskToUpdate(int taskNumber) {
         assert (taskNumber >= 1): "invalid task number";
         return this.taskList.get(taskNumber - 1);
     }
 
+    /**
+     * Returns the updated version of a task.
+     * @param detailToUpdate string containing what to update.
+     * @return new updated task.
+     * @throws DukeException
+     */
     protected Task getUpdatedTask(String detailToUpdate) throws DukeException {
         try {
             Task updatingTask = null;
@@ -146,6 +166,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Updates the tasklist with the updated task.
+     * @param updatedTask the new updated task.
+     */
     protected void updateTask(Task updatedTask) {
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).isBeingUpdated) {

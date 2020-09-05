@@ -19,6 +19,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns deadline for the event.
+     * @return deadline of event.
+     */
     @Override
     protected LocalDate getTaskDeadline() {
         return at;
