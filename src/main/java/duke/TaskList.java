@@ -1,11 +1,14 @@
 package duke;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import duke.exception.DeadlineInvalidDate;
 import duke.exception.DuplicateTaskException;
@@ -252,22 +255,23 @@ public class TaskList {
     public String deleteTask(Integer... taskNumbers) throws InvalidIndexException {
         try {
 
-            ArrayList<Task> deletedTasks = new ArrayList<>();
-
             // Check if all taskNumbers within index
-            for (Integer taskNo: taskNumbers) {
-                if (taskNo < 1 || taskNo > tasks.size()) {
-                    throw new InvalidIndexException(tasks.size());
-                }
+            boolean hasInvalidIndex = Stream.of(taskNumbers).anyMatch(
+                taskNo -> taskNo < 1 || taskNo > tasks.size());
+
+            if (hasInvalidIndex) {
+                throw new InvalidIndexException(tasks.size());
             }
 
-            for (Integer taskNo: taskNumbers) {
-                deletedTasks.add(tasks.get(taskNo - 1));
-                tasks.set(taskNo - 1, null);
-            }
+            // Store deleted tasks (to print)
+            ArrayList<Task> deletedTasks = Stream.of(taskNumbers).map(taskNo -> tasks.get(taskNo - 1))
+                .collect(Collectors.toCollection(ArrayList::new));
 
+            // Delete the tasks
+            Stream.of(taskNumbers).forEach(taskNo -> tasks.set(taskNo - 1, null));
             tasks.removeIf(Objects::isNull);
 
+            // Print deleted tasks
             StringBuilder str = new StringBuilder();
             str.append("Noted. I've removed these tasks:\n");
 
@@ -318,7 +322,7 @@ public class TaskList {
         }
 
         if (i == 0) {
-            System.out.println("OOPS. There are no tasks on your list with the following keyword.");
+            str.append("OOPS. There are no tasks on your list with the following keyword.");
         }
 
         return str.toString().trim();
