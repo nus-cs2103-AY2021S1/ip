@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import main.java.farrell.duke.Duke;
+import main.java.farrell.duke.Main;
 
 public class DukeTest {
     private TestManager testManager = new TestManager();
@@ -30,7 +30,7 @@ public class DukeTest {
             String output = Files.readString(Paths.get("ExpectedOutputs", "CreateToDo.txt"));
             String input = Files.readString(Paths.get("TestInputs", "CreateToDo.txt"));
             testManager.giveInput(input);
-            Duke.main(new String[0]);
+            Main.main(new String[0]);
             assertEquals(output, testManager.getOutput());
         } catch (IOException e) {
             System.out.println(e.getMessage());

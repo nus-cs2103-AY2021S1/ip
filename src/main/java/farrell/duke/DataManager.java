@@ -15,7 +15,9 @@ import java.util.Scanner;
  */
 public class DataManager {
     /** The file path to save and load data from */
-    private final String filePath = "data/data.txt";
+    private final String filePath = "data.txt";
+
+    private final String directory = "data/";
 
     /**
      * Writes the contents of a list of tasks to a file.
@@ -26,8 +28,14 @@ public class DataManager {
     public void save(TaskList taskList) throws DukeException {
         List<Task> tasks = taskList.getAllTasks();
         try {
+            File dataDirectory = new File(directory);
+            if(!dataDirectory.exists()) {
+                dataDirectory.mkdir();
+            }
+
             File dataFile = new File(filePath);
             dataFile.createNewFile();
+
             FileWriter fw = new FileWriter(dataFile);
             String stringToWrite = "";
             for (Task task : tasks) {

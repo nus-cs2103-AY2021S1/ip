@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'farrell.duke'
-version '0.1'
+version '0.2'
 
 repositories {
     mavenCentral()
@@ -48,6 +48,6 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
-mainClassName = 'main.java.farrell.duke.Duke'
+mainClassName = 'main.java.farrell.duke.Main'
 
 apply plugin: 'com.github.johnrengelman.shadow'
