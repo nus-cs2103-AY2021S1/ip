@@ -110,7 +110,8 @@ public class TaskList implements Iterable<Task>, DukeList {
      * @param searchWord the <code>String</code> that is to be search with.
      * @return a <code>String</code> containing all <code>Tasks</code> that are found.
      */
-    public String findString(String searchWord) {
+    @Override
+    public String search(String searchWord) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.getCurrCapacity(); i++) {
             Task task = this.taskList.get(i);

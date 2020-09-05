@@ -91,4 +91,27 @@ public class ExpenseList implements Iterable<Expense>, DukeList {
         }
         return sb.toString();
     }
+
+    /**
+     * Finds all <code>Expenses</code> containing the specified search word.
+     *
+     * @param searchWord the <code>String</code> that is to be search with.
+     * @return a <code>String</code> containing all <code>Expenses</code> that are found.
+     */
+    @Override
+    public String search(String searchWord) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.getCurrCapacity(); i++) {
+            Expense expense = expenseList.get(i);
+            if (expense.getExpenseDescription().contains(searchWord)) {
+                String expenseString = String.format("%d. %s", i + 1, expense.toString());
+                sb.append(expenseString);
+                sb.append("\n");
+            }
+        }
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        return sb.toString();
+    }
 }

@@ -65,11 +65,15 @@ public class CommandParserTest {
         operation = commandParser.parse(command, listManager, storageManager);
         assertTrue(operation instanceof ListExpenseOperation);
 
-        command = "find book";
+        command = "find task book";
         operation = commandParser.parse(command, listManager, storageManager);
         assertTrue(operation instanceof FindOperation);
 
-        command = "find read book";
+        command = "find task read book";
+        operation = commandParser.parse(command, listManager, storageManager);
+        assertTrue(operation instanceof FindOperation);
+
+        command = "find expense lunch";
         operation = commandParser.parse(command, listManager, storageManager);
         assertTrue(operation instanceof FindOperation);
 
@@ -112,6 +116,8 @@ public class CommandParserTest {
                 Arguments.of("delete task"),
                 Arguments.of("delete expense"),
                 Arguments.of("find"),
+                Arguments.of("find task"),
+                Arguments.of("find expense"),
                 Arguments.of("list")
         );
     }

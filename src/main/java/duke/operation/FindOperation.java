@@ -1,40 +1,40 @@
 package duke.operation;
 
-import duke.list.TaskList;
+import duke.list.DukeList;
 import duke.result.Result;
 
 /**
  * The operation that finds <code>Tasks</code> in <code>TaskList</code> associated with a search word.
  */
 public class FindOperation extends Operation {
-    private final TaskList taskList;
+    private final DukeList dukeList;
     private final String searchWord;
 
     /**
      * Constructor method.
      *
-     * @param taskList the <code>TaskList</code> that is to be searched on.
-     * @param searchWord the <code>String</code> that <code>TaskList</code> is to be search with.
+     * @param dukeList the <code>DukeList</code> that is to be searched on.
+     * @param searchWord the <code>String</code> that <code>DukeList</code> is to be search with.
      */
-    public FindOperation(TaskList taskList, String searchWord) {
-        this.taskList = taskList;
+    public FindOperation(DukeList dukeList, String searchWord) {
+        this.dukeList = dukeList;
         this.searchWord = searchWord;
     }
 
     /**
-     * Executes the operation by retrieving all <code>Tasks</code> in
-     * <code>TaskList</code> containing the search word.
+     * Executes the operation by retrieving all <code>Storables</code> in
+     * <code>DukeList</code> containing the search word.
      *
-     * @return a <code>Result</code> containing all <code>Tasks</code> found.
+     * @return a <code>Result</code> containing all <code>Storables</code> found.
      */
     @Override
     public Result execute() {
-        String foundTasks = this.taskList.findString(searchWord);
+        String found = this.dukeList.search(searchWord);
         String message;
-        if (foundTasks.equals("")) {
+        if (found.equals("")) {
             message = String.format("I have found no tasks that match: %s", this.searchWord);
         } else {
-            message = "Here are the tasks I have found:\n" + foundTasks;
+            message = "Here is what I have found:\n" + found;
         }
         return new Result(true, message, this.isExit());
     }

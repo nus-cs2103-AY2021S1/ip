@@ -125,13 +125,21 @@ public class CommandParser {
         }
     }
 
-    private FindOperation createFindOp(String[] commands, TaskList list) throws DukeParseException {
+    private FindOperation createFindOp(
+            String[] commands, ListManager listManager) throws DukeParseException {
         if (CommandType.FIND.isNotValidLength(commands.length)) {
             throw new DukeParseException(
-                    "Ensure a keyword is entered so that I can perform a search with it.");
+                    "Ensure a 'task' or 'expense' and search word is entered.");
         }
-        String searchWord = Utils.concatenate(commands, 1, commands.length);
-        return new FindOperation(list, searchWord);
+        String searchWord = Utils.concatenate(commands, 2, commands.length);
+
+        if (commands[1].equals(TASK)) {
+            return new FindOperation(listManager.getTaskList(), searchWord);
+        } else if (commands[1].equals(EXPENSE)) {
+            return new FindOperation(listManager.getExpenseList(), searchWord);
+        } else {
+            throw new DukeParseException("Ensure a 'task' or 'expense' is passed in.");
+        }
     }
 
     private AddPayableOperation createPayableOp(
@@ -209,7 +217,7 @@ public class CommandParser {
         } else if (isCommand.apply(CommandType.DELETE)) {
             return createDeleteOp(commands, listManager);
         } else if (isCommand.apply(CommandType.FIND)) {
-            return createFindOp(commands, listManager.getTaskList());
+            return createFindOp(commands, listManager);
         } else if (isCommand.apply(CommandType.RECEIVE)) {
             return createReceivableOp(commands, listManager.getExpenseList());
         } else if (isCommand.apply(CommandType.PAY)) {
