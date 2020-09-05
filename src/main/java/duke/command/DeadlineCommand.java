@@ -36,8 +36,10 @@ public class DeadlineCommand extends Command {
         if (by.isBlank()) {
             return new ErrorCommand("☹ OOPS!!! The /by description of a deadline cannot be empty.").execute();
         }
-
-        if (!by.matches("\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])")) {
+        
+        String dateRegex = "\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])";
+        
+        if (!by.matches(dateRegex)) {
             return new ErrorCommand("☹ OOPS!!! The date format must be yyyy-mm-dd.").execute();
         }
 
