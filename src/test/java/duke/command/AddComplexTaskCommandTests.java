@@ -25,7 +25,7 @@ public class AddComplexTaskCommandTests extends CommandTests {
             ComplexTask complexTask2 = new ComplexTask("test2", TaskType.DEADLINE, "2pm");
             AddComplexTaskCommand cmd1 = new AddComplexTaskCommand("test /at 2-4pm", TaskType.EVENT);
             AddComplexTaskCommand cmd2 = new AddComplexTaskCommand("test2 /by 2pm", TaskType.DEADLINE);
-            // Test
+
             assertEquals(ui.addTask(complexTask1, 1), cmd1.execute(taskList, ui, storage));
             assertEquals(1, storage.getTasks().size());
             assertEquals(ui.addTask(complexTask2, 2), cmd2.execute(taskList, ui, storage));
@@ -44,7 +44,7 @@ public class AddComplexTaskCommandTests extends CommandTests {
         AddComplexTaskCommand cmd2 = new AddComplexTaskCommand("read /at 2-4pm", TaskType.DEADLINE);
         AddComplexTaskCommand cmd3 = new AddComplexTaskCommand("read/at 2-4pm", TaskType.EVENT);
         AddComplexTaskCommand cmd4 = new AddComplexTaskCommand("read/at2-4pm", TaskType.EVENT);
-        // Test
+
         assertThrows(InvalidEventException.class, () -> cmd1.execute(taskList, ui, storage));
         assertThrows(InvalidDeadlineException.class, () -> cmd2.execute(taskList, ui, storage));
         assertThrows(InvalidEventException.class, () -> cmd3.execute(taskList, ui, storage));
