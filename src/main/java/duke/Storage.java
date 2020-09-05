@@ -20,6 +20,7 @@ import duke.task.Todo;
  * A class that represents the storage of the data
  */
 public class Storage {
+    private static final String ERROR_WRITING_TO_STORAGE_MSG = "Couldn't save new task to storage!";
 
     private final Path filePath;
     private List<String> serialisedTasks;
@@ -85,34 +86,13 @@ public class Storage {
 
             switch (taskType) {
             case "T":
-                tasks.add(new Todo(desc, isDone));
-
+                tasks.add(deserialiseTodo(desc, isDone));
                 break;
             case "D":
-                if (tokens.length < 4) {
-                    throw new CorruptedStorageException("Deadline task is missing due date!");
-                }
-                String by = tokens[3];
-
-                try {
-                    tasks.add(new Deadline(desc, by, isDone));
-                } catch (InvalidDateInputException e) {
-                    throw new CorruptedStorageException("Date was not stored properly!");
-                }
-
+                tasks.add(deserialiseDeadline(tokens, desc, isDone));
                 break;
             case "E":
-                if (tokens.length < 4) {
-                    throw new CorruptedStorageException("Event task is missing date!");
-                }
-                String at = tokens[3];
-
-                try {
-                    tasks.add(new Event(desc, at, isDone));
-                } catch (InvalidDateInputException e) {
-                    throw new CorruptedStorageException("Date was not stored properly!");
-                }
-
+                tasks.add(deserialiseEvent(tokens, desc, isDone));
                 break;
             default:
                 throw new CorruptedStorageException(
@@ -122,6 +102,38 @@ public class Storage {
         }
 
         return tasks;
+    }
+
+    private Todo deserialiseTodo(String desc, boolean isDone) {
+        return new Todo(desc, isDone);
+    }
+
+    private Deadline deserialiseDeadline(String[] tokens, String desc, boolean isDone)
+            throws CorruptedStorageException {
+        if (tokens.length < 4) {
+            throw new CorruptedStorageException("Deadline task is missing due date!");
+        }
+        String by = tokens[3];
+
+        try {
+            return new Deadline(desc, by, isDone);
+        } catch (InvalidDateInputException e) {
+            throw new CorruptedStorageException("Date was not stored properly!");
+        }
+    }
+
+    private Event deserialiseEvent(String[] tokens, String desc, boolean isDone)
+            throws CorruptedStorageException {
+        if (tokens.length < 4) {
+            throw new CorruptedStorageException("Event task is missing date!");
+        }
+        String at = tokens[3];
+
+        try {
+            return new Event(desc, at, isDone);
+        } catch (InvalidDateInputException e) {
+            throw new CorruptedStorageException("Date was not stored properly!");
+        }
     }
 
     /**
@@ -136,7 +148,7 @@ public class Storage {
         try {
             this.writeToFile();
         } catch (IOException e) {
-            throw new CorruptedStorageException("Couldn't save new task to storage!");
+            throw new CorruptedStorageException(ERROR_WRITING_TO_STORAGE_MSG);
         }
     }
 
@@ -148,12 +160,13 @@ public class Storage {
      * @throws CorruptedStorageException If there are issues reading/writing to the file.
      */
     public void updateExistingTask(int taskId, Task task) throws CorruptedStorageException {
+        assert taskId <= this.serialisedTasks.size();
         this.serialisedTasks.set(taskId - 1, task.serialise());
 
         try {
             this.writeToFile();
         } catch (IOException e) {
-            throw new CorruptedStorageException("Couldn't save new task to storage!");
+            throw new CorruptedStorageException(ERROR_WRITING_TO_STORAGE_MSG);
         }
     }
 
@@ -164,12 +177,13 @@ public class Storage {
      * @throws CorruptedStorageException If there are issues reading/writing to the file.
      */
     public void deleteExistingTask(int taskId) throws CorruptedStorageException {
+        assert taskId <= this.serialisedTasks.size();
         this.serialisedTasks.remove(taskId - 1);
 
         try {
             this.writeToFile();
         } catch (IOException e) {
-            throw new CorruptedStorageException("Couldn't save new task to storage!");
+            throw new CorruptedStorageException(ERROR_WRITING_TO_STORAGE_MSG);
         }
     }
 }

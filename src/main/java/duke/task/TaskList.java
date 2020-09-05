@@ -3,6 +3,7 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Encapsulates a list of {@link Task}s.
@@ -33,6 +34,7 @@ public class TaskList {
      * @return The task with the corresponding ID.
      */
     public Task getTask(int taskId) {
+        assert taskId <= this.tasks.size();
         return this.tasks.get(taskId - 1);
     }
 
@@ -53,6 +55,7 @@ public class TaskList {
      * @return The {@link Task} that was deleted form the list.
      */
     public Task deleteTask(int taskId) {
+        assert taskId <= this.tasks.size();
         return this.tasks.remove(taskId - 1);
     }
 
@@ -88,13 +91,8 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < this.tasks.size(); i++) {
-            sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
-        }
-
-        return sb.toString().trim();
+        return IntStream.range(0, this.tasks.size())
+                .mapToObj(i -> String.format("%d. %s", i + 1, tasks.get(i)))
+                .collect(Collectors.joining("\n")).trim();
     }
-
 }

@@ -18,6 +18,11 @@ public class Duke {
     private static final Path FILE_PATH = Paths.get(".", "data", "duke.txt");
 
     /**
+     * The message that is used to greet the user.
+     */
+    private static final String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
+
+    /**
      * The storage associated with the chat bot.
      */
     private final Storage storage;
@@ -47,7 +52,7 @@ public class Duke {
      * @return The greeting message.
      */
     public String greetUser() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
+        return Duke.GREETING;
     }
 
 
