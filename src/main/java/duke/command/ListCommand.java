@@ -20,6 +20,6 @@ public class ListCommand extends Command {
      */
     @Override
     public Result excecute(TaskList taskList, Ui ui, Storage storage) {
-        return new Result(ui.showList(taskList), isContinuing());
+        return new Result(ui.getTaskListMessage(taskList), isContinuing());
     }
 }

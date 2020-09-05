@@ -44,7 +44,7 @@ public class DoneCommand extends Command {
             //ui.showDone(taskList.getTask(count - 1), count);
             storage.writeRecord(taskList);
 
-            return new Result(ui.showDone(taskList.getTask(count - 1), count), this.isContinuing());
+            return new Result(ui.getDoneMessage(taskList.getTask(count - 1), count), this.isContinuing());
         }
     }
 }

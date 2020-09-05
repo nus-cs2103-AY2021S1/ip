@@ -7,11 +7,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import duke.task.Task;
-import duke.task.Event;
-import duke.task.ToDo;
-import duke.task.Deadline;
+
 import duke.handle.LoadingException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * The Storage class reads the local task record and the task list, and updates
@@ -51,43 +52,93 @@ public class Storage {
                 next = scanner.nextLine();
                 assert next != null: "the command should not be null";
                 String[] strings = next.split(" \\| ");
+
                 if (strings[1].equals("0") || strings[1].equals("1")) {
                     if (strings[0].equals("T") && strings.length == 3) {
-                        ToDo todo = new ToDo(strings[2]);
-                        if (strings[1].equals("1")) {
-                            todo.markAsCompleted();
-                        }
-                        tasks.add(todo);
+                        readToDo(tasks, strings[2], strings[1]);
+
                     } else if (strings[0].equals("D") && strings.length == 4) {
-                        Deadline deadline = new Deadline(strings[2], LocalDate.parse(strings[3]));
-                        if (strings[1].equals("1")) {
-                            deadline.markAsCompleted();
-                        }
-                        tasks.add(deadline);
+                        readDeadline(tasks, strings[2], strings[3], strings[1]);
+
                     } else if (strings[0].equals("E") && strings.length == 4) {
-                        Event event = new Event(strings[2], LocalDate.parse(strings[3]));
-                        if (strings[1].equals("1")) {
-                            event.markAsCompleted();
-                        }
-                        tasks.add(event);
+                        readEvent(tasks, strings[2], strings[3], strings[1]);
+
                     } else {
                         throw new LoadingException(
-                                "The previous record cannot be read becuase the format of a task is incorrect\nCleaning the record to start again");
+                                "The previous record cannot be read becuase the format of a task is incorrect\n"
+                                        + "Cleaning the record to start again");
                     }
                 } else {
                     throw new LoadingException(
-                            "The previous record cannot be read because the complete state of a task is incorrect\nCleaning the record to start again");
+                            "The previous record cannot be read because the complete state of a task is incorrect\n"
+                                    + "Cleaning the record to start again");
                 }
             }
             return tasks;
         } catch (FileNotFoundException fileNotFoundException) {
             throw fileNotFoundException;
+
         } catch (Exception exception) {
             throw new LoadingException(exception.getMessage());
+
         } finally {
             scanner.close();
         }
     }
+
+    /**
+     * Reads the description and state of the task, and adds the task to the taks list.
+     *
+     * @param tasks The task list.
+     * @param description The description of the task.
+     * @param state The state of the task.
+     */
+    private void readToDo(ArrayList<Task> tasks, String description, String state) {
+        ToDo todo = new ToDo(description);
+
+        if (state.equals("1")) {
+            todo.markAsCompleted();
+        }
+
+        tasks.add(todo);
+    }
+
+    /**
+     * Reads the description, time, and state of the task, and adds the task to the taks list.
+     *
+     * @param tasks The task list.
+     * @param description The description of the task.
+     * @param time The time of the task.
+     * @param state The state of the task.
+     */
+    private void readDeadline(ArrayList<Task> tasks, String description, String time, String state) {
+        Deadline deadline = new Deadline(description, LocalDate.parse(time));
+
+        if (state.equals("1")) {
+            deadline.markAsCompleted();
+        }
+
+        tasks.add(deadline);
+    }
+
+    /**
+     * Reads the description, time, and state of the task, and adds the task to the taks list.
+     *
+     * @param tasks The task list.
+     * @param description The description of the task.
+     * @param time The time of the task.
+     * @param state The state of the task.
+     */
+    private void readEvent(ArrayList<Task> tasks, String description, String time, String state) {
+        Event event = new Event(description, LocalDate.parse(time));
+
+        if (state.equals("1")) {
+            event.markAsCompleted();
+        }
+
+        tasks.add(event);
+    }
+
 
     /**
      * Updates the local record when the list of tasks is changed.
