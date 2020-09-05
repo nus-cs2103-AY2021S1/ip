@@ -84,15 +84,11 @@ public class MainWindow extends AnchorPane {
     }
 
     private void printInput(String input) {
-        dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(input, userImage)
-        );
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
     }
 
     private void print(String response) {
-        dialogContainer.getChildren().add(
-                DialogBox.getNekoDialog(response, botImage)
-        );
+        dialogContainer.getChildren().add(DialogBox.getNekoDialog(response, botImage));
     }
 
     private void greet() {

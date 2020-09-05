@@ -30,7 +30,6 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        // Set nodes.
         dialog.setText(removeNewline(text));
         displayPicture.setImage(img);
 

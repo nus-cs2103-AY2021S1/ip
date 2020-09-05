@@ -44,7 +44,6 @@ public class ToDoTest {
         NekoException thrown = assertThrows(NekoStorageException.class, () -> {
             ToDo todo = ToDo.decode("T|Description");
         });
-        System.out.println(thrown.getMessage());
         assertTrue(thrown.getMessage().contains(Messages.STORAGE_ERROR_CORRUPT));
     }
 

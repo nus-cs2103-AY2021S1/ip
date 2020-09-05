@@ -74,23 +74,24 @@ public class DateParser {
     public static int parseDurationToMinutes(String input) throws NekoException {
         try {
             int minutes = 0;
+
+            // Account for and remove days.
             if (input.contains("d") || input.contains("D")) {
                 minutes += MINUTES_IN_DAY * Double.parseDouble(input.split("[dD]")[0].trim());
-                if (input.split("[dD]").length > 1) {
-                    input = input.split("[dD]")[1].replaceAll("^[a-zA-Z ]*", "");
-                } else {
-                    input = null;
-                }
             }
-            if (input != null && (input.contains("h") || input.contains("H"))) {
+            if (input.split("[dD]").length > 1) {
+                input = input.split("[dD]")[1].replaceAll("^[a-zA-Z ]*", "");
+            }
+
+            // Account for and remove hours.
+            if (input.contains("h") || input.contains("H")) {
                 minutes += MINUTES_IN_HOUR * Double.parseDouble(input.split("[hH]")[0].trim());
-                if (input.split("[hH]").length > 1) {
-                    input = input.split("[hH]")[1].replaceAll("^[a-zA-Z ]*", "");
-                } else {
-                    input = null;
-                }
             }
-            if (input != null && (input.contains("m") || input.contains("M"))) {
+            if (input.split("[hH]").length > 1) {
+                input = input.split("[hH]")[1].replaceAll("^[a-zA-Z ]*", "");
+            }
+
+            if (input.contains("m") || input.contains("M")) {
                 minutes += Double.parseDouble(input.split("[mM]")[0].trim());
             }
             return minutes;

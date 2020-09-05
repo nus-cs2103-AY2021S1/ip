@@ -66,9 +66,8 @@ public class AddCommand extends Command {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_ADD_COMMAND);
         }
-        String feedback = Messages.MESSAGE_ADD + createdTask.toString() + "\n"
+        return Messages.MESSAGE_ADD + createdTask.toString() + "\n"
                 + Messages.getTotalTaskMessage(remainingTaskCount);
-        return feedback;
     }
 
     /**
