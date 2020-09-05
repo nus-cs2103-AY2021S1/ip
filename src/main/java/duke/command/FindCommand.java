@@ -33,7 +33,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        TaskList filtered = taskList.findTask(input);
+        TaskList filtered = taskList.searchTasks(input);
         if (filtered.size() == 0) {
             return ui.replyNoTasksFound();
         } else {
