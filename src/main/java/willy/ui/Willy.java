@@ -44,8 +44,7 @@ public class Willy extends Application {
         this.isOnJavaFX = false;
         System.out.println(logo + "    Your personal life secretary");
         Greet startDuke = new Greet();
-        // prints out intro
-        System.out.println(startDuke);
+        System.out.println(startDuke); // prints out intro
         storage = new TaskStore();
         storage.createFile();
     }
@@ -88,7 +87,8 @@ public class Willy extends Application {
         // JavaFX code
         stage.setTitle("Willy"); // Stage Name
 
-        Label willy = new Label(introGUI); // Creating a new Label control
+        // Responsible for Willy Greetings & Input Section
+        Label willy = new Label(introGUI);
         Greet startDuke = new Greet();
         Label changingCommand = new Label(startDuke.toString());
         willy.setAlignment(Pos.CENTER);
@@ -97,16 +97,17 @@ public class Willy extends Application {
         Button enterButton = new Button("Enter");
         Button clearButton = new Button("Clear");
 
+        // Handles Actions of Buttons
         enterButton.setOnAction(action -> {
                 String message = inputField.getText();
                 inputField.clear();
                 changingCommand.setText(parser.parse(message, true)); // Returns Response
         });
-
         clearButton.setOnAction(action -> {
             inputField.clear();
         });
 
+        // Putting together Layout Components
         HBox hbox = new HBox(); // Positions components in a horizontal row
         hbox.setSpacing(10);
         hbox.setPadding(new Insets(10, 20, 5, 30));
@@ -117,6 +118,7 @@ public class Willy extends Application {
         StackPane layout = new StackPane();
         layout.getChildren().addAll(vbox);
 
+        // Build & Show Scene
         Scene scene = new Scene(layout, 500, 450, Color.BLACK);
         stage.setScene(scene);
         stage.show(); // To display stage to users
