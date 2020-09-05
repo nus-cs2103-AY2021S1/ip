@@ -17,6 +17,7 @@ public class UndoCommand implements Executable {
      */
     public UndoCommand(UndoRedoList history) {
         this.history = history;
+        assert this.history != null;
     }
 
     /**

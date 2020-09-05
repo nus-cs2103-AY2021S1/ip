@@ -18,6 +18,7 @@ public class ListCommand implements Executable {
      */
     public ListCommand(List<Task> taskList) {
         this.taskList = taskList;
+        assert this.taskList != null;
     }
 
     /**

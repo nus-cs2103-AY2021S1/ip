@@ -29,6 +29,7 @@ public class DukeDateTime {
      * @param dateTime A String in DukeDateTime.DEFAULT format ("ddMMyyyy HHmm")
      */
     public DukeDateTime(String dateTime) {
+        assert dateTime != null;
         this.localDateTime = LocalDateTime.parse(dateTime, DukeDateTime.DEFAULT);
     }
 
@@ -38,6 +39,7 @@ public class DukeDateTime {
      * @return A LocalDateTime with only day, month, year, hour and minute attributes
      */
     private static LocalDateTime trim(LocalDateTime localDateTime) {
+        assert localDateTime != null;
         return LocalDateTime.parse(localDateTime.format(DukeDateTime.DEFAULT), DukeDateTime.DEFAULT);
     }
 

@@ -27,6 +27,8 @@ public class SaveCommand implements Executable {
     public SaveCommand(List<Task> taskList, String filePath) {
         this.taskList = taskList;
         this.filePath = filePath;
+        assert this.taskList != null;
+        assert this.filePath != null;
     }
 
     /**

@@ -31,6 +31,7 @@ public class DataStore {
     public DataStore(List<Task> taskList) {
         this.taskList = taskList;
         this.history = new UndoRedoList();
+        assert taskList != null;
     }
 
     /**
@@ -38,7 +39,7 @@ public class DataStore {
      * @return A list of task referenced by this DataStore
      */
     public List<Task> getTaskList() {
-        return taskList;
+        return this.taskList;
     }
 
     /**
@@ -46,6 +47,6 @@ public class DataStore {
      * @return The UndoRedoList reference by this DataStore
      */
     public UndoRedoList getHistory() {
-        return history;
+        return this.history;
     }
 }

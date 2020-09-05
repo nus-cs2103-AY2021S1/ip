@@ -21,6 +21,8 @@ public class AddCommand implements ReversibleExecutable {
     public AddCommand(List<Task> taskList, Task task) {
         this.taskList = taskList;
         this.task = task;
+        assert this.taskList != null;
+        assert this.task != null;
     }
 
     /**
