@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Encapsulates a task to be completed by the user.
  * Contains a string description and a boolean representation of whether the task has been completed.
@@ -7,6 +9,7 @@ package duke.task;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected LocalDate doneDate;
 
     /**
      * Creates a task with the given description.
@@ -15,6 +18,18 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         isDone = false;
+        doneDate = null;
+    }
+
+    /**
+     * Creates a task that has been completed on the given doneDate with the given description.
+     * @param description Description of the task.
+     * @param doneDate Date of completion.
+     */
+    public Task(String description, LocalDate doneDate) {
+        this.description = description;
+        isDone = true;
+        this.doneDate = doneDate;
     }
 
     private String getStatusIcon() {
@@ -26,6 +41,7 @@ public abstract class Task {
      */
     public void markAsDone() {
         isDone = true;
+        doneDate = LocalDate.now();
     }
 
     public boolean contains(String keyword) {
@@ -38,8 +54,11 @@ public abstract class Task {
      * @return String representation of the task.
      */
     public String toData() {
-        int binary = isDone ? 1 : 0;
-        return binary + " | " + description;
+        if (isDone) {
+            return 1 + " | " + description + " | " + doneDate;
+        } else {
+            return 0 + " | " + description;
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -17,6 +18,11 @@ public class Event extends Task {
      */
     public Event(String description, LocalDateTime at) {
         super(description);
+        this.at = at;
+    }
+
+    public Event(String description, LocalDateTime at, LocalDate doneDate) {
+        super(description, doneDate);
         this.at = at;
     }
 

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,27 +85,44 @@ public class Storage {
                 Task task;
                 switch (type) {
                 case ("T"):
-                    task = new Todo(description);
+                    if (isDone) {
+                        assert entryBreakdown.length > 3;
+                        String doneDate = entryBreakdown[3];
+                        task = new Todo(description, LocalDate.parse(doneDate));
+                    } else {
+                        task = new Todo(description);
+                    }
                     break;
                 case ("D"):
-                    if (entryBreakdown.length != 4) {
+                    if (entryBreakdown.length < 4) {
                         throw new DukeException("File corrupted");
                     }
-                    String by = entryBreakdown[3];
-                    task = new Deadline(description, LocalDateTime.parse(by));
+                    if (isDone) {
+                        assert entryBreakdown.length > 4;
+                        String doneDate = entryBreakdown[3];
+                        String by = entryBreakdown[4];
+                        task = new Deadline(description, LocalDateTime.parse(by), LocalDate.parse(doneDate));
+                    } else {
+                        String by = entryBreakdown[3];
+                        task = new Deadline(description, LocalDateTime.parse(by));
+                    }
                     break;
                 case ("E"):
-                    if (entryBreakdown.length != 4) {
+                    if (entryBreakdown.length < 4) {
                         throw new DukeException("File corrupted");
                     }
-                    String at = entryBreakdown[3];
-                    task = new Event(description, LocalDateTime.parse(at));
+                    if (isDone) {
+                        assert entryBreakdown.length > 4;
+                        String doneDate = entryBreakdown[3];
+                        String at = entryBreakdown[4];
+                        task = new Event(description, LocalDateTime.parse(at), LocalDate.parse(doneDate));
+                    } else {
+                        String at = entryBreakdown[3];
+                        task = new Event(description, LocalDateTime.parse(at));
+                    }
                     break;
                 default:
                     throw new DukeException("File corrupted.");
-                }
-                if (isDone) {
-                    task.markAsDone();
                 }
                 tasks.add(task);
                 input = bufferedReader.readLine();
