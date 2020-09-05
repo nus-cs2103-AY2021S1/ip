@@ -1,8 +1,11 @@
 package duke.duke;
 
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
 import duke.task.Task;
+import duke.task.TodoTask;
+import duke.view.cli.CLI;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -11,6 +14,7 @@ import java.util.List;
  */
 public class Duke {
 
+  private CLI observer;
   private static Duke duke = null;
   private final List<Task> tasks;
 
@@ -26,20 +30,41 @@ public class Duke {
     return duke;
   }
 
-  public List<Task> addTask(String description) {
-    Task task = new Task(description);
-    tasks.add(task);
-    return Collections.singletonList(task);
+  // TODO: observer list
+  public void addObserver(CLI observer) {
+    this.observer = observer;
   }
 
-  // TODO: FP. Method parameters is placeholder for now
-  public List<Task> editTask(int id, boolean isDone) {
+  public void notifyObservers(String s) {
+    observer.update(s);
+  }
+
+  public void addTodoTask(String description) {
+    Task task = new TodoTask(description);
+    tasks.add(task);
+    notifyObservers(task.toString());
+  }
+
+  public void addEventTask(String description, String at) {
+    Task task = new EventTask(description, at);
+    tasks.add(task);
+    notifyObservers(task.toString());
+  }
+
+  public void addDeadlineTask(String description, String by) {
+    Task task = new DeadlineTask(description, by);
+    tasks.add(task);
+    notifyObservers(task.toString());
+  }
+
+  public void markTaskDone(int id) {
     Task task = tasks.get(id);
-    task.setIsDone(isDone);
-    return Collections.singletonList(task);
+    task.markDone();
+    notifyObservers(task.toString());
   }
 
   public List<Task> getTasks() {
+    notifyObservers(tasks.toString());
     return tasks;
   }
 }
