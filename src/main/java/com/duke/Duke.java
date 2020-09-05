@@ -40,9 +40,9 @@ public class Duke extends Application {
             this.tasks = new TaskList(storage.load());
             this.ui = new Ui(tasks);
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
             this.ui = new Ui(tasks);
+            ui.showLoadingError();
         }
     }
     /**

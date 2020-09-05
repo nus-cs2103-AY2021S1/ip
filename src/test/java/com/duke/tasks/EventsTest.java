@@ -16,7 +16,7 @@ public class EventsTest {
     @Test
     public void toStringTest() {
         Events event = new Events("project meeting", "2020-08-06 2130", false);
-        String res = "[E][✗] project meeting (at: 6 AUGUST 2020, 930pm)";
+        String res = "[E][\u2718] project meeting (at: 6 AUGUST 2020, 930pm)";
         assertEquals(res, event.toString());
     }
 }
