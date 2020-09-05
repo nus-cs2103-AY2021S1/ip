@@ -132,6 +132,7 @@ public class Storage {
             for (String line : lines) {
                 // E.g [[D][Y], return book (by: Sunday)]
                 String[] parts = line.split(" ", 2);
+                assert parts.length == 2 : "Something went wrong while loading text into task list.";
 
                 // E.g [D][Y]
                 String prefix = parts[0];
@@ -162,6 +163,7 @@ public class Storage {
                         task.markAsDone();
                     }
                 } else { // prefix.contains("[E]"))
+                    assert prefix.contains("[E]") : "Prefix does not contain [E]";
                     // Take words before brackets
                     String agenda = description.substring(0, description.lastIndexOf(" ("));
 
@@ -177,6 +179,7 @@ public class Storage {
                     if (prefix.contains("[Y]")) {
                         task.markAsDone();
                     }
+                    assert !prefix.contains("[Y]") : "Prefix contains [Y]";
                 }
                 // Add task to list of task
                 tasks.add(task);

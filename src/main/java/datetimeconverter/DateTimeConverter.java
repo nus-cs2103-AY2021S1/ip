@@ -40,14 +40,17 @@ public class DateTimeConverter {
         for (String formatString : formatStrings) {
             try {
                 formatter = DateTimeFormatter.ofPattern(formatString);
+                assert formatter instanceof DateTimeFormatter : formatter;
                 dateTime = LocalDateTime.parse(result, formatter);
-
+                assert dateTime instanceof LocalDateTime : dateTime;
                 // E.g Convert 2/12/2019 1800 to Monday, December 02, 2019 06:00 PM
                 result = dateTime.format(DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy hh:mm a"));
+                assert result instanceof String : result;
             } catch (DateTimeParseException e) {
                 // Pass and don't format input if the date and time format does not match any element in formatString
             }
         }
+        assert result instanceof String : result;
         return result;
     }
 }

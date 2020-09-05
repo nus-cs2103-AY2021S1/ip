@@ -125,8 +125,9 @@ public class TaskList {
                 TaskList tasklist = this;
                 return TaskHelper.handleTaskDeletion(userCommandSplit, tasklist);
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (Exception e) {
             // E.g "delete 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements
+            // E.g "delete all" is not valid as "all" is not a numerical value
             return DukeException.noSuchTask();
         }
     }
