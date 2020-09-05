@@ -104,8 +104,7 @@ public class Ui {
      * Static method to end Duke GUI when user input "Bye".
      */
     public static String endDuke() {
-        String goodBye = BYE;
-        String exit = goodBye;
+        String exit = BYE;
         return exit;
     }
 }

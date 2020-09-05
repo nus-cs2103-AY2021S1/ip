@@ -84,7 +84,10 @@ public class Storage {
                 break;
             }
             String[] arrTasks = tasks.split(" ~ ");
+            assert arrTasks.length >= 3; //Must be a valid Task string
             String typeOfTask = arrTasks[0];
+            assert typeOfTask.equals(TODO_SYMBOL) || typeOfTask.equals(DEADLINE_SYMBOL)
+                    || typeOfTask.equals(EVENT_SYMBOL); //Valid Symbol
             String isDone = arrTasks[1];
             String nameOfTask = arrTasks[2];
             if (typeOfTask.equals(TODO_SYMBOL)) {
@@ -133,6 +136,7 @@ public class Storage {
             for (int i = 0; i < size; i++) {
                 String task = br.readLine();
                 if (i == taskNo) {
+                    assert task.contains(NOT_DONE); //Must contain an uncompleted task
                     String tempTask = task.replaceFirst(NOT_DONE, DONE);
                     task = tempTask;
                 }
