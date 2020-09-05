@@ -18,9 +18,10 @@ public abstract class Command {
      * @param tasks the current TaskList object being used
      * @param ui the current Ui object being used
      * @param storage the current Storage object being used
+     * @return the String representation to display
      * @throws PandaBotException If any errors occurs when executing the command
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws PandaBotException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws PandaBotException;
 
     /**
      * Returns true if the program should exit.

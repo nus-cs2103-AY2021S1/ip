@@ -12,6 +12,7 @@ public class TaskList {
 
     /**
      * Creates a TaskList object that stores the tasks.
+     *
      * @param taskList an ArrayList of tasks to be stored
      */
     public TaskList(ArrayList<Task> taskList) {
@@ -94,5 +95,21 @@ public class TaskList {
         }
 
         return new TaskList(matchingTasks);
+    }
+
+    /**
+     * Returns a String representation of the current list of tasks.
+     *
+     * @return a String representation of the current list of tasks
+     */
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        int i = 0;
+        for (Task t : taskList) {
+            result.append(i + 1).append(". ").append(t.toString()).append("\n");
+            i++;
+        }
+        return result.toString();
     }
 }
