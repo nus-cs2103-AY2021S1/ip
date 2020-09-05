@@ -246,10 +246,10 @@ public class TaskList {
             StringBuilder str = new StringBuilder();
             str.append("Nice! I've marked these tasks as done:\n");
 
-            for (int taskNo: taskNumbers) {
+            Stream.of(taskNumbers).forEach(taskNo -> {
                 tasks.set(taskNo - 1, tasks.get(taskNo - 1).markDone());
                 str.append(String.format("%s\n", tasks.get(taskNo - 1)));
-            }
+            });
 
             return str.toString().trim();
 
