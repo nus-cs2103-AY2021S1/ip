@@ -151,6 +151,7 @@ public class Duke extends Application {
     }
 
     private void handleExceptions(String errorName) {
+        assert (errorName != null) : "The error name cannot be null!";
         String printedStatement = "";
         if (errorName.equals("FileNotFound")) {
             printedStatement = ui.loadFileError();
@@ -174,6 +175,7 @@ public class Duke extends Application {
     }
 
     private String getResponse(String input) {
+        assert (input != null) : "The input cannot be null!";
         ui.showCurrentTasks(tasks.getTaskList());
         try {
             Command c = parser.parse(input);
