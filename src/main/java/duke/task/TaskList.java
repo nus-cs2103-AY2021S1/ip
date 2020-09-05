@@ -21,6 +21,7 @@ public class TaskList {
      * @param tasks is the List of Tasks that is created from loading the Storage's tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null : "Tasks cannot be null";
         this.taskList = tasks;
     }
 
@@ -30,6 +31,7 @@ public class TaskList {
      * @param newTask the task to be added.
      */
     public void add(Task newTask) {
+        assert newTask != null : "New task cannot be null";
         this.taskList.add(newTask);
 
     }
@@ -41,6 +43,7 @@ public class TaskList {
      * @return the Task that has been deleted.
      */
     public Task delete(int index) {
+        assert index >= 0 && index < taskList.size() : "Index must be within range";
         return this.taskList.remove(index);
     }
 
@@ -78,7 +81,6 @@ public class TaskList {
                 filteredTasks.add(item);
             }
         });
-
         return filteredTasks.toString();
     }
 
