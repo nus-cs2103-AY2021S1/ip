@@ -15,7 +15,6 @@ public class Storage {
 
     private String filepath;
     private Parser parser;
-    private File file;
 
     /**
      * Constructor for instantiating a Storage
@@ -29,7 +28,7 @@ public class Storage {
 
 
     private void createNewTextFileCalledTask() {
-        file = new File(filepath);
+        File file = new File(filepath);
         try {
             if (file.createNewFile()) {
                 System.out.print("File created");
@@ -73,7 +72,7 @@ public class Storage {
      */
     public void populateToLstOfTask(List<Task> lstOfTask) throws IOException {
 
-        createNewTextFileCalledTask();
+        File file = new File("Tasks.txt");
 
         BufferedReader br = new BufferedReader(new FileReader(file));
 

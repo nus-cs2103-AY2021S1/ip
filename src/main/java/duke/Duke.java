@@ -119,7 +119,7 @@ public class Duke  {
 
     private String addToDo(String[] parsedUserInput) {
         try {
-            String test = parsedUserInput[1];
+            String test = parsedUserInput[1];// why do we need this?
             String taskDescription = "";
             for (int i = 1; i < parsedUserInput.length; i++) {
                 if (i == parsedUserInput.length - 1) {
