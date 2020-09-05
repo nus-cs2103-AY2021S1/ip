@@ -28,7 +28,7 @@ public class Storage {
     /**
      * Initializes Storage with filePath as the parameter
      *
-     * @param filePath
+     * @param filePath the fe
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -93,11 +93,7 @@ public class Storage {
             FileWriter fw = new FileWriter(this.filePath + "/duke.txt");
             PrintWriter pw = new PrintWriter(fw);
             for (Task task : tasks) {
-                if (task instanceof Todo) {
-                    pw.println(task.getType() + " | " + task.isDone() + " | " + task.getName());
-                } else {
-                    pw.println(task.getType() + " | " + task.isDone() + " | " + task.getName() + " | " + task.getEnd());
-                }
+                pw.println(task.getDatabaseFormat());
             }
             pw.close();
         } catch (IOException e) {
