@@ -109,11 +109,11 @@ public class TaskList {
      * @throws Exception the exception
      */
     public List<Task> findTasks(String filter) throws Exception {
-        List<Task> filterdContents = storage.getFileContents()
+        List<Task> filteredContents = storage.getFileContents()
             .stream()
             .filter(Task -> Task.getDescription().contains(filter))
             .collect(Collectors.toList());
-        return filterdContents;
+        return filteredContents;
     }
 
     /**
