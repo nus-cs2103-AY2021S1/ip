@@ -20,6 +20,7 @@ public class ShowCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null : "Task List is null!";
         try {
             return processShow(this.task, taskList, ui, storage);
         } catch (CalendarException cal) {
@@ -39,6 +40,7 @@ public class ShowCommand extends Command {
 
     public String processShow(
         String date, TaskList taskList, Ui ui, Storage storage) throws CalendarException {
+        assert date != null : "Please input the date!";
         return taskList.showDate(date);
     }
 

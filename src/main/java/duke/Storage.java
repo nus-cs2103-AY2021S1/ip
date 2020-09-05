@@ -55,6 +55,7 @@ public class Storage {
             try {
                 System.out.println(currentLine);
                 Task task = parseData(currentLine);
+                assert task != null : "File read error!";
                 tasks.add(task);
             } catch (StorageException e) {
                 System.out.println(e.getMessage());
@@ -73,7 +74,7 @@ public class Storage {
      * @throws DukeException If there is incorrect data format.
      */
     private static Task parseData(String line) throws DukeException {
-
+        assert line != null : "Nothing to parse";
         try {
             String[] parsed = line.split("\\s\\|\\s");
             Task task;

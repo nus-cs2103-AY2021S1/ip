@@ -49,42 +49,7 @@ public class DeadlineCommand extends Command {
 
     public String processDeadline(
         String theRest, TaskList taskList, Ui ui, Storage storage) throws DukeException {
-//        try {
-//            String[] taskAndDeadlineAndTime = theRest.split(" /by ", 2);
-//            Deadline deadline;
-//
-//            try {
-//                String task = taskAndDeadlineAndTime[0];
-//                String dateAndTime = taskAndDeadlineAndTime[1];
-//                String[] dateTime = dateAndTime.split(" ", 2);
-//
-//                String date = dateTime[0];
-//
-//                try {
-//                    LocalDate localDate = LocalDate.parse(date);
-//
-//                    if (dateTime.length < 2) {
-//                        deadline = new Deadline(task, localDate);
-//                    } else {
-//                        String time = dateTime[1];
-//                        LocalTime localTime = LocalTime.parse(time);
-//                        deadline = new Deadline(task, false, localDate, localTime);
-//                    }
-//                    Storage.updateData(taskList.getTasks());
-//                    return taskList.saveToList(deadline);
-//
-//                } catch (DateTimeParseException e) {
-//                    throw new CalendarException("Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
-//                }
-//
-//            } catch (IndexOutOfBoundsException e) {
-//                throw new DeadlineException("Please specify the task and deadline.");
-//            }
-//
-//        } catch (DukeException d) {
-//            throw new DeadlineException("Please specify the task and deadline.");
-//        }
-
+        assert taskList != null : "No Task List provided!";
         Deadline deadline;
         try {
             String task = getDeadlineTask(theRest);
@@ -101,10 +66,8 @@ public class DeadlineCommand extends Command {
             Storage.updateData(taskList.getTasks());
             return taskList.saveToList(deadline);
 
-        } catch (DeadlineException deadlineExc) {
-            throw deadlineExc;
-        } catch (CalendarException calendarExc) {
-            throw calendarExc;
+        } catch (DeadlineException | CalendarException exc) {
+            throw exc;
         }
     }
 
@@ -126,27 +89,22 @@ public class DeadlineCommand extends Command {
     public LocalDate getDeadlineDate(String[] dateDetails) throws DukeException {
 
         try {
-
             String date = dateDetails[0];
-
             try {
                 LocalDate localDate = LocalDate.parse(date);
                 return localDate;
-
             } catch (DateTimeParseException e) {
                 throw new CalendarException("Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
             }
-
         } catch (IndexOutOfBoundsException e) {
             throw new DeadlineException("Please specify the task and deadline.");
         }
     }
 
     public LocalTime getDeadlineTime(String[] dateDetails) throws DukeException {
+        //assert dateDetails.length > 1 : "Please input the date!";
         if (dateDetails.length > 1) {
-
             String time = dateDetails[1];
-
             try {
                 LocalTime localTime = LocalTime.parse(time);
                 return localTime;
@@ -154,13 +112,10 @@ public class DeadlineCommand extends Command {
             } catch (DateTimeParseException e) {
                 throw new CalendarException("Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
             }
-
         } else {
             return null;
         }
     }
-
-
 
     /**
      * Evaluates whether this and other object if this and

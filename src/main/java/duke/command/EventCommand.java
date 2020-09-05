@@ -32,6 +32,7 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null : "No task list provided.";
         try {
             return processEvent(this.task, taskList, ui, storage);
         } catch (DukeException e) {
@@ -51,56 +52,8 @@ public class EventCommand extends Command {
 
     public String processEvent(
         String theRest, TaskList taskList, Ui ui, Storage storage) throws DukeException {
-//        try {
-//            String[] eventAndDateAndTime = theRest.split(" /at ", 2);
-//            Event event;
-//
-//            try {
-//                String eventDesc = eventAndDateAndTime[0];
-//                String eventDateAndTime = eventAndDateAndTime[1];
-//
-//                String[] dateTime = eventDateAndTime.split(" ", 2);
-//
-//                String date = dateTime[0];
-//
-//                try {
-//                    LocalDate localDate = LocalDate.parse(date);
-//
-//                    if (dateTime.length < 2) {
-//                        event = new Event(eventDesc, localDate);
-//                    } else {
-//
-//                        String time = dateTime[1];
-//                        String[] startEndTime = time.split("-");
-//                        if (startEndTime.length < 2) {
-//                            String startTime = startEndTime[0];
-//                            LocalTime localTime = LocalTime.parse(startTime);
-//                            event = new Event(eventDesc, false, localDate, localTime);
-//                        } else {
-//                            String startTime = startEndTime[0];
-//                            String endTime = startEndTime[1];
-//                            LocalTime localStartTime = LocalTime.parse(startTime);
-//                            LocalTime localEndTime = LocalTime.parse(endTime);
-//                            event = new Event(eventDesc, false,
-//                                localDate, localStartTime, localEndTime);
-//                        }
-//                    }
-//
-//                    Storage.updateData(taskList.getTasks());
-//                    return taskList.saveToList(event);
-//
-//                } catch (DateTimeParseException e) {
-//                    return "Please enter the date in "
-//                        + "YYYY/MM/DD format and time in HH:MM format.";
-//                }
-//
-//            } catch (IndexOutOfBoundsException e) {
-//                throw new EventException("Please specify the event name and date.");
-//            }
-//
-//        } catch (DukeException d) {
-//            throw new EventException("Please specify the event name and date.");
-//        }
+
+        assert theRest != null : "No details available";
         Event event;
         try {
             String task = getEventTask(theRest);

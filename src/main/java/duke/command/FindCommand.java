@@ -28,6 +28,7 @@ public class FindCommand extends Command {
     }
 
     public String processFind(String[] toFind, TaskList taskList, Ui ui, Storage storage) throws FindException {
+        assert toFind != null : "Please specify what you want to find.";
         return findTask(toFind, taskList);
     }
 
@@ -43,8 +44,6 @@ public class FindCommand extends Command {
     }
 
     private String findTask(String[] toFind, TaskList taskList) {
-
-        //try {
         List<Task> tasks = taskList.getTasks();
         List<Task> tasksFound = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
