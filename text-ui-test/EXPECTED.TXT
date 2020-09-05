@@ -21,6 +21,7 @@ Here are the tasks in your list:
 3.[D][✗] return book (by: 6 Jun 2020, 12:00 pm)
 4.[E][✗] project meeting (at: 8 Aug 2020, 03:00 pm)
 5.[T][✗] join sports club
+
 Nice! I've marked this task as done:
 [D][✓] return book (by: 6 Jun 2020, 12:00 pm)
 Here are the tasks in your list:
@@ -29,4 +30,5 @@ Here are the tasks in your list:
 3.[D][✓] return book (by: 6 Jun 2020, 12:00 pm)
 4.[E][✗] project meeting (at: 8 Aug 2020, 03:00 pm)
 5.[T][✗] join sports club
+
 Bye. Hope to see you soon!
