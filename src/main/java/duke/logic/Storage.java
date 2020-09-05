@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
+import duke.exception.DukeLoadDataException;
+import duke.exception.DukeSaveDataException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -56,18 +58,27 @@ public class Storage {
                 String data = sc.nextLine();
                 String[] dataArray = data.split(" \\| ");
                 String letter = dataArray[0];
-                int bit = Integer.parseInt(dataArray[1]);
                 String description = dataArray[2];
                 Task task;
-                if (letter.equals("T")) {
+                switch (letter) {
+                case "T":
                     task = new Todo(description);
-                } else if (letter.equals("D")) {
+                    break;
+                case "D": {
                     LocalDate time = LocalDate.parse(dataArray[3]);
                     task = new Deadline(description, time);
-                } else {
+                    break;
+                }
+                case "E": {
                     LocalDate time = LocalDate.parse(dataArray[3]);
                     task = new Event(description, time);
+                    break;
                 }
+                default:
+                    throw new DukeLoadDataException();
+                }
+
+                int bit = Integer.parseInt(dataArray[1]);
                 if (bit == 1) {
                     task.markAsDone();
                 }
@@ -76,9 +87,7 @@ public class Storage {
             sc.close();
             return tasks;
         } catch (FileNotFoundException e) {
-            String errorMessage = "No previous save file found, "
-                    + "starting up with no saved records...\n";
-            throw new DukeException(errorMessage);
+            throw new DukeLoadDataException();
         }
     }
 
@@ -97,22 +106,23 @@ public class Storage {
                 int bit = task.isDone() ? 1 : 0;
                 String description = task.getDescription();
                 String data;
-                if (letter == 'T') {
+                switch (letter) {
+                case 'T':
                     data = letter + " | " + bit + " | " + description;
-                } else if (letter == 'D') {
+                    break;
+                case 'D':
+                case 'E':
                     String time = task.getDate().toString();
                     data = letter + " | " + bit + " | " + description + " | " + time;
-                } else { // letter == 'E'
-                    String time = task.getDate().toString();
-                    data = letter + " | " + bit + " | " + description + " | " + time;
+                    break;
+                default:
+                    throw new DukeSaveDataException();
                 }
                 myWriter.write(data + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
-            String errorMessage = "An error occurred, "
-                    + "unable to save tasks to file :(";
-            throw new DukeException(errorMessage);
+            throw new DukeSaveDataException();
         }
     }
 }

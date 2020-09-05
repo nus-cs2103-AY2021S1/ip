@@ -50,11 +50,10 @@ public class TaskManager {
     /**
      * Deletes a task from the list.
      *
-     * @param index The index of the task in the list.
-     * @return The deleted task.
+     * @param task The task to be deleted.
      */
-    public Task deleteTask(int index) {
-        return tasks.remove(index);
+    public void deleteTask(Task task) {
+        tasks.remove(task);
     }
 
     /**
@@ -76,7 +75,9 @@ public class TaskManager {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {
             for (String keyword : keywords) {
-                if (task.getDescription().contains(keyword) && !matchingTasks.contains(task)) {
+                boolean isTaskMatched = task.getDescription().contains(keyword);
+                boolean hasTaskBeenAdded = matchingTasks.contains(task);
+                if (isTaskMatched && !hasTaskBeenAdded) {
                     matchingTasks.add(task);
                 }
             }

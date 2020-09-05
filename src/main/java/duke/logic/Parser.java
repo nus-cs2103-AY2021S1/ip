@@ -2,6 +2,7 @@ package duke.logic;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -13,7 +14,14 @@ import duke.command.FindCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.exception.DukeDateTimeParseException;
 import duke.exception.DukeException;
+import duke.exception.DukeInvalidTaskNumberException;
+import duke.exception.DukeMissingFindKeywordException;
+import duke.exception.DukeMissingTaskDescriptionException;
+import duke.exception.DukeMissingTaskKeywordException;
+import duke.exception.DukeMissingTaskNumberException;
+import duke.task.Task;
 
 /**
  * Represents a helper class that deals with making sense of the user command.
@@ -28,22 +36,25 @@ public class Parser {
      * @throws DukeException If the input command is deemed invalid or the format is incorrect.
      */
     public static Command parseCommand(String fullCommand) throws DukeException {
-        Command command;
         String[] splitCommand = fullCommand.split(" ", 2);
         String action = splitCommand[0];
-        boolean isMissingTaskDescription = isTask(action) && splitCommand.length < 2;
-        boolean isMissingTaskNumber = isDoneOrDeleteOperation(action) && splitCommand.length < 2;
-        boolean isMissingFindKeyword = action.equals("find") && splitCommand.length < 2;
+
+        boolean hasOnlyOneWord = splitCommand.length < 2;
+        boolean isMissingTaskDescription = isTask(action) && hasOnlyOneWord;
+        boolean isMissingTaskNumber = isDoneOrDeleteCommand(action) && hasOnlyOneWord;
+        boolean isMissingFindKeyword = action.equals("find") && hasOnlyOneWord;
+
         if (isMissingTaskDescription) {
-            throw new DukeException("OOPS!!! Description of a task cannot be empty :(\n");
+            throw new DukeMissingTaskDescriptionException(action);
         }
         if (isMissingTaskNumber) {
-            throw new DukeException("Missing task number! "
-                    + "Please ensure to key in the task number :)\n");
+            throw new DukeMissingTaskNumberException();
         }
         if (isMissingFindKeyword) {
-            throw new DukeException("Please indicate the keyword which you want to find.\n");
+            throw new DukeMissingFindKeywordException();
         }
+
+        Command command;
         try {
             switch (action) {
             case "bye":
@@ -61,7 +72,7 @@ public class Parser {
                 String[] splitDeadline = splitCommand[1].split("/by");
                 boolean isMissingKeyword = splitDeadline.length < 2;
                 if (isMissingKeyword) {
-                    throw new DukeException("Please indicate a deadline using the \"/by\" keyword.\n");
+                    throw new DukeMissingTaskKeywordException("\"/by\"");
                 }
                 String description = splitDeadline[0].trim();
                 String by = splitDeadline[1].trim();
@@ -73,7 +84,7 @@ public class Parser {
                 String[] splitEvent = splitCommand[1].split("/at");
                 boolean isMissingKeyword = splitEvent.length < 2;
                 if (isMissingKeyword) {
-                    throw new DukeException("Please indicate a timing using the \"/at\" keyword.\n");
+                    throw new DukeMissingTaskKeywordException("\"/at\"");
                 }
                 String description = splitEvent[0].trim();
                 String at = splitEvent[1].trim();
@@ -97,14 +108,12 @@ public class Parser {
                 command = new FindCommand(keywords);
                 break;
             default:
-                command = new InvalidCommand();
+                command = new InvalidCommand(fullCommand);
                 break;
             }
             return command;
         } catch (DateTimeParseException e) {
-            String errorMessage = "Invalid date format! "
-                    + "Please use the proper date format i.e. yyyy-MM-dd\n";
-            throw new DukeException(errorMessage);
+            throw new DukeDateTimeParseException();
         }
     }
 
@@ -113,7 +122,23 @@ public class Parser {
                 || action.equals("deadline") || action.equals("event");
     }
 
-    private static boolean isDoneOrDeleteOperation(String action) {
+    private static boolean isDoneOrDeleteCommand(String action) {
         return action.equals("done") || action.equals("delete");
+    }
+
+    /**
+     * Returns the task in the list after parsing the task number.
+     * @param taskNumber The task number.
+     * @param tasks The list of tasks.
+     * @return The task in the list corresponding to the correct task number.
+     * @throws DukeException If the input could not be parsed as a number or the number out of range.
+     */
+    public static Task parseTaskNumber(String taskNumber, List<Task> tasks) throws DukeException {
+        try {
+            int index = Integer.parseInt(taskNumber) - 1;
+            return tasks.get(index);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeInvalidTaskNumberException(taskNumber);
+        }
     }
 }

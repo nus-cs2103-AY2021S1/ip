@@ -12,8 +12,7 @@ public class Ui {
     /**
      * The greeting message to be shown when the programme starts.
      */
-    private static final String GREETINGS = "Hello! I'm Duke.\n"
-            + "What can I do for you?\n";
+    private static final String GREETINGS = "Hello! I'm Duke. What can I do for you?\n";
 
     /**
      * The exit message to be shown when the programme terminates.

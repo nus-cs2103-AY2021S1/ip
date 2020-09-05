@@ -26,7 +26,7 @@ public class TaskManagerTest {
         ArrayList<Task> tasks = new ArrayList<>();
         tasks.add(task);
         TaskManager manager = new TaskManager(tasks);
-        assertEquals(task, manager.deleteTask(0));
+        manager.deleteTask(task);
         assertEquals(0, manager.getTasks().size());
     }
 

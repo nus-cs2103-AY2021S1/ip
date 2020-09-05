@@ -9,6 +9,9 @@ import java.time.LocalDate;
  */
 public class Task {
 
+    private static final String TICK_ICON = "\u2713";
+    private static final String CROSS_ICON = "\u2718";
+
     /**
      * The description of the task.
      */
@@ -55,7 +58,7 @@ public class Task {
      * @return A tick icon if the task is done, and a cross otherwise.
      */
     public String getStatusIcon() {
-        return isDone ? "\u2713" : "\u2718"; //return tick or X symbols
+        return isDone ? TICK_ICON : CROSS_ICON;
     }
 
     /**
