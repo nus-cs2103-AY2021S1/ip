@@ -26,11 +26,12 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+            assert ap != null : "AnchorPane should not be null.";
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setNite(nite);
             stage.setTitle("NITE");
-            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/cat_icon_no_bg.png")));
+            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/blackcat_circle.png")));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

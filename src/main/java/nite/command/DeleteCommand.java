@@ -33,14 +33,13 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws NiteException {
-        try {
-            Task t = tasks.remove(taskNumber);
-            storage.save(tasks);
-            return ui.showAction(String.format("  Noted. I've removed this task:\n"
-                    + "    %s\n"
-                    + "  Now you have %d tasks in the list.\n", t, tasks.size()));
-        } catch (IndexOutOfBoundsException ex) {
+        if (taskNumber < 0 || taskNumber >= tasks.size()) {
             throw new NiteException("Can't delete a task that does not exist.");
         }
+        Task t = tasks.remove(taskNumber);
+        storage.save(tasks);
+        return ui.showAction(String.format("  Noted. I've removed this task:\n"
+                + "    %s\n"
+                + "  Now you have %d tasks in the list.\n", t, tasks.size()));
     }
 }

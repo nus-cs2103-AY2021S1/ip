@@ -47,6 +47,8 @@ public class Storage {
             }
             throw new NiteException("Data folder does not exist");
         }
+        assert folder.exists() : "Folder should have been created";
+        assert file.exists() : "File should have been created";
 
         ArrayList<String> taskList = new ArrayList<>();
         try {

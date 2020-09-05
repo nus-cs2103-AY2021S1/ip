@@ -13,6 +13,7 @@ public class Task {
      * @param description Description of task.
      */
     public Task(String description) {
+        assert !description.isEmpty() : "Description should not be empty.";
         this.description = description;
         this.isDone = false;
     }
@@ -54,6 +55,7 @@ public class Task {
     }
 
     public boolean hasKeyword(String keyword) {
+        assert !keyword.isEmpty() : "Keyword should not be empty.";
         return description.contains(keyword);
     }
 }

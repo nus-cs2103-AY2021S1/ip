@@ -33,13 +33,12 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws NiteException {
-        try {
-            Task t = tasks.markTask(taskNumber);
-            storage.save(tasks);
-            return ui.showAction(String.format("  Nice! I've marked this task as done:\n"
-                    + "    %s\n", t));
-        } catch (IndexOutOfBoundsException ex) {
+        if (taskNumber < 0 || taskNumber >= tasks.size()) {
             throw new NiteException("Can't complete a task that does not exist.");
         }
+        Task t = tasks.markTask(taskNumber);
+        storage.save(tasks);
+        return ui.showAction(String.format("  Nice! I've marked this task as done:\n"
+                + "    %s\n", t));
     }
 }

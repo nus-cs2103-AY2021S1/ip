@@ -101,6 +101,7 @@ public class Parser {
             }
             break;
         default:
+            assert false : "Cases should be exhaustive."
             throw new NiteException("Unexpected value: " + type);
         }
         return task;

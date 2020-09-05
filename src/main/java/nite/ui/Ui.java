@@ -49,6 +49,7 @@ public class Ui {
      * @return String representation of an error message.
      */
     public String showError(String errorMessage) {
+        assert !errorMessage.isEmpty() : "Message to be displayed should not be empty.";
         return "  :-( OOPS!!! " + errorMessage + "\n";
     }
 
@@ -59,6 +60,7 @@ public class Ui {
      * @return String representation of a completed action.
      */
     public String showAction(String actionMessage) {
+        assert !actionMessage.isEmpty() : "Message to be displayed should not be empty.";
         return actionMessage;
     }
 }
