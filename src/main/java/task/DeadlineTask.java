@@ -22,6 +22,7 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String description, boolean isDone, String deadline) {
         super(description, isDone);
         String[] splitDeadline = deadline.split(" ");
+        // formats deadline date and time to the correct format, for example: 2007-12-03T10:15:30
         String inputDeadline = splitDeadline[0] + "T" + splitDeadline[1].substring(0, 2) + ":"
                 + splitDeadline[1].substring(2, 4);
         this.deadline = LocalDateTime.parse(inputDeadline);

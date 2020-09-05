@@ -22,6 +22,7 @@ public class EventTask extends Task {
     public EventTask(String description, boolean isDone, String eventTime) {
         super(description, isDone);
         String[] splitEventTime = eventTime.split(" ");
+        // formats eventTime date and time to the correct format, for example: 2007-12-03T10:15:30
         String inputEventTime = splitEventTime[0] + "T" + splitEventTime[1].substring(0, 2) + ":"
                 + splitEventTime[1].substring(2, 4);
         this.eventTime = LocalDateTime.parse(inputEventTime);

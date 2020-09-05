@@ -1,5 +1,6 @@
 package command;
 
+import task.Task;
 import util.Storage;
 import util.TaskList;
 import util.Ui;
@@ -19,10 +20,11 @@ public class ListCommand extends Command {
      */
     public String execute(TaskList lst, Ui ui, Storage storage) {
         StringBuilder result = new StringBuilder();
-        result.append(ui.showListStatement() + "\n");
+        result.append(ui.showListStatement());
         for (int i = 0; i < lst.size(); i++) {
-            int num = i + 1;
-            result.append(ui.showTask(lst.get(i), num) + "\n");
+            int taskNum = i + 1;
+            Task task = lst.get(i);
+            result.append(ui.showTask(task, taskNum));
         }
         assert result.length() != 0 : "Response should not be empty";
         return result.toString();

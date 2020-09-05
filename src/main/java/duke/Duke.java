@@ -65,12 +65,10 @@ public class Duke {
      * @return returns appropriate response after command execution.
      */
     public String getResponse(String input) {
-        String result = "";
+        String result;
         try {
             Command c = parser.parse(input);
-            if (c != null) {
-                result = c.execute(tasks, ui, storage);
-            }
+            result = c.execute(tasks, ui, storage);
         } catch (IllegalArgumentException ex) {
             result = ui.showError("I can't help you with that request, try something else.");
         } catch (DukeException ex) {
