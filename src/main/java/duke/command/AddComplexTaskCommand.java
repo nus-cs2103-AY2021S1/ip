@@ -7,10 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeException;
-import duke.exception.EmptyTaskException;
-import duke.exception.EmptyTimeException;
-import duke.exception.InvalidDeadlineException;
-import duke.exception.InvalidEventException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.ComplexTask;
 import duke.task.TaskType;
@@ -22,27 +19,22 @@ import duke.ui.Ui;
  */
 public class AddComplexTaskCommand extends AddCommand {
 
+    private static final String DATE_TIME_FORMAT = "MMM d yyyy / h.mm a";
+    private static final String DATE_FORMAT = "MMM d yyyy";
+    private static final String TIME_FORMAT = "h.mm a";
+
     private final TaskType taskType;
+    private final String description;
 
     /**
      * Initialises the AddComplexTaskCommand object with the task details and task type.
      *
-     * @param taskDetails Task details.
+     * @param description Task description.
      * @param taskType Type of Task.
      */
-    public AddComplexTaskCommand(String taskDetails, TaskType taskType) {
-        super(taskDetails);
+    public AddComplexTaskCommand(String description, TaskType taskType) {
+        this.description = description;
         this.taskType = taskType;
-    }
-
-    /**
-     * Returns the unique identifier tied to the ComplexTask.
-     *
-     * @return String identifier of the Task.
-     */
-    private String identifier() {
-        assert (taskType == TaskType.DEADLINE || taskType == TaskType.EVENT);
-        return taskType == TaskType.DEADLINE ? " /by" : " /at";
     }
 
     /**
@@ -54,54 +46,35 @@ public class AddComplexTaskCommand extends AddCommand {
      * @throws DukeException If input format is wrong.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String[] inputArr = getTaskDetails().split(identifier(), 2);
-        if (inputArr.length == 1) {
-            if (taskType == TaskType.DEADLINE) {
-                throw new InvalidDeadlineException();
-            } else {
-                throw new InvalidEventException();
-            }
-        }
-        checkIfEmpty(inputArr);
-        String date = inputArr[1].trim();
+        String[] inputArr = Parser.parseComplexTaskDescription(description, taskType);
+        String taskDetails = inputArr[0];
+        String date = inputArr[1];
         ComplexTask complexTask;
-        if (isDateAndTimeFormat(date.replace(" ", "T"))) {
-            complexTask = new ComplexTask(inputArr[0], taskType, dateAndTimeToString(date));
+        if (isDateAndTimeFormat(date)) {
+            complexTask = new ComplexTask(taskDetails, taskType, dateAndTimeToString(date));
         } else if (isDateFormat(date)) {
-            complexTask = new ComplexTask(inputArr[0], taskType, dateToString(date));
+            complexTask = new ComplexTask(taskDetails, taskType, dateToString(date));
         } else if (isTimeFormat(date)) {
-            complexTask = new ComplexTask(inputArr[0], taskType, timeToString(date));
+            complexTask = new ComplexTask(taskDetails, taskType, timeToString(date));
         } else {
-            complexTask = new ComplexTask(inputArr[0], taskType, date);
+            complexTask = new ComplexTask(taskDetails, taskType, date);
         }
         return addTask(complexTask, tasks, ui, storage);
     }
 
     /**
-     * Checks if the description or time section from user input is empty.
+     * Checks if the input given is in a LocalDateTime format.
      *
-     * @param inputArr Input array.
-     * @throws DukeException If the description or time section is empty.
+     * @param input User input.
+     * @return True if input is in a LocalDateTime format, false otherwise.
      */
-    private void checkIfEmpty(String[] inputArr) throws DukeException {
-        String description = inputArr[0];
-        String time = inputArr[1];
-        if (description.isEmpty()) {
-            throw new EmptyTaskException(taskType);
+    private boolean isDateAndTimeFormat(String input) {
+        try {
+            LocalDateTime.parse(matchDateTimeFormat(input));
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
         }
-        if (time.isBlank()) {
-            throw new EmptyTimeException(taskType);
-        }
-    }
-
-    /**
-     * Formats the date to a fixed MMM d YYYY format.
-     *
-     * @param date Input date from user.
-     * @return Formatted date.
-     */
-    private String dateToString(String date) {
-        return LocalDate.parse(date).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**
@@ -112,18 +85,18 @@ public class AddComplexTaskCommand extends AddCommand {
      */
     private String dateAndTimeToString(String dateAndTime) {
         return LocalDateTime
-            .parse(dateAndTime.replace(" ", "T"))
-            .format(DateTimeFormatter.ofPattern("MMM d yyyy / h.mm a"));
+            .parse(matchDateTimeFormat(dateAndTime))
+            .format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
     }
 
     /**
-     * Formats the time to a fixed h.mm a format.
+     * Tries to match the input to the date and time format.
      *
-     * @param time Input time from user.
-     * @return Formatted time.
+     * @param input Input String.
+     * @return Formatted String.
      */
-    private String timeToString(String time) {
-        return LocalTime.parse(time).format(DateTimeFormatter.ofPattern("h.mm a"));
+    private String matchDateTimeFormat(String input) {
+        return input.replace(" ", "T");
     }
 
     /**
@@ -142,18 +115,13 @@ public class AddComplexTaskCommand extends AddCommand {
     }
 
     /**
-     * Checks if the input given is in a LocalDateTime format.
+     * Formats the date to a fixed MMM d YYYY format.
      *
-     * @param input User input.
-     * @return True if input is in a LocalDateTime format, false otherwise.
+     * @param date Input date from user.
+     * @return Formatted date.
      */
-    private boolean isDateAndTimeFormat(String input) {
-        try {
-            LocalDateTime.parse(input);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
+    private String dateToString(String date) {
+        return LocalDate.parse(date).format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
     /**
@@ -169,5 +137,15 @@ public class AddComplexTaskCommand extends AddCommand {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    /**
+     * Formats the time to a fixed h.mm a format.
+     *
+     * @param time Input time from user.
+     * @return Formatted time.
+     */
+    private String timeToString(String time) {
+        return LocalTime.parse(time).format(DateTimeFormatter.ofPattern(TIME_FORMAT));
     }
 }

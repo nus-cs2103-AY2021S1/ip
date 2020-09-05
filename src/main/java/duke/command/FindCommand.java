@@ -32,13 +32,12 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyFindException {
         if (input.isEmpty()) {
             throw new EmptyFindException();
+        }
+        TaskList taskList = tasks.matchAll(input);
+        if (taskList.isEmpty()) {
+            return ui.emptyFind(input);
         } else {
-            TaskList taskList = tasks.matchAll(input);
-            if (taskList.isEmpty()) {
-                return ui.emptyFind(input);
-            } else {
-                return ui.showTaskList(taskList, "matching");
-            }
+            return ui.showTaskList(taskList, "matching");
         }
     }
 }
