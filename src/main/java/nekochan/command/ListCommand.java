@@ -48,7 +48,7 @@ public class ListCommand extends Command {
         } else {
             printout = Messages.MESSAGE_LIST;
             for (int i = 0; i < existingTasks.size(); i++) {
-                printout += String.format("%d.%s\n", i + 1, existingTasks.get(i).toString());
+                printout += String.format("%d. %s\n", i + 1, existingTasks.get(i).toString());
             }
         }
         return printout;
