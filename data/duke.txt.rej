@@ -1,0 +1,11 @@
+diff a/data/duke.txt b/data/duke.txt	(rejected hunks)
+@@ -1,4 +1,3 @@
+-T | 0 |  get book
+ D | 0 |  fix find buy | 2020-09-04
+ T | 0 |  a
+ T | 0 |  a
+@@ -19,3 +18,4 @@
+ D | 0 |  | 2012-02-02
+ T | 0 |  a
+ T | 0 |  a
++T | 0 |  a
