@@ -39,6 +39,8 @@ public class Parser {
             command = instruction.substring(0, indexOfSplit);
         }
 
+        assert command.length() > 0 : "The parsing command should not be empty";
+
         if (command.equals("bye")) {
             enumCommand = EnumCommand.BYE;
         } else if (command.equals("done")) {

@@ -45,14 +45,16 @@ public class CommandExecution {
                 throw new DukeException("The description of a deadline cannot be empty.");
             }
 
-            String[] tempDeadline = instruction.substring(8).strip().split("/by");
+            String[] tempDeadlineSplits = instruction.substring(8).strip().split("/by");
 
-            if (tempDeadline.length < 2) {
+            if (tempDeadlineSplits.length < 2) {
                 throw new DukeException("The date and time of the deadline cannot be empty.");
             }
 
-            String deadlineDescription = tempDeadline[0].strip();
-            String deadlineDateTime = tempDeadline[1].strip();
+            assert tempDeadlineSplits.length == 2 : "There should be only one set of date and time.";
+
+            String deadlineDescription = tempDeadlineSplits[0].strip();
+            String deadlineDateTime = tempDeadlineSplits[1].strip();
             LocalDateTime deadlineDate = dateTimeParser(deadlineDateTime);
             tasks.add(new Deadline(deadlineDescription, deadlineDate));
             return ui.addTaskAlert(tasks);
@@ -67,6 +69,8 @@ public class CommandExecution {
             if (tempEventSplits.length < 2) {
                 throw new DukeException("The date and time of the event cannot be empty.");
             }
+
+            assert tempEventSplits.length == 2 : "There should be only one set of date and time.";
 
             String eventDescription = tempEventSplits[0].strip(); // clear the white spaces at the front and at the back
             String eventDateTime = tempEventSplits[1].strip(); // clear the white spaces at the front and at the back
@@ -89,6 +93,8 @@ public class CommandExecution {
                 throw new DukeException("The index of the task to be done is out of range.");
             }
 
+            assert indexDone >= 0 : "The index should be greater or equal than 0.";
+
             Task tempDone = tasks.get(indexDone);
             tempDone.markAsDone();
             tasks.set(indexDone, tempDone);
@@ -104,6 +110,8 @@ public class CommandExecution {
             if (indexDelete + 1 > tasks.getSize()) {
                 throw new DukeException("The index of the task to be deleted is out of range.");
             }
+
+            assert indexDelete >= 0 : "The index should be greater or equal than 0.";
 
             Task tempDelete = tasks.get(indexDelete);
             tasks.remove((int) indexDelete);
@@ -149,6 +157,8 @@ public class CommandExecution {
     public static TaskList searchTasksByTime(LocalDate localDate, TaskList tasks) {
         TaskList occurrings = new TaskList();
 
+        assert tasks.getSize() > 0 : "The list currently is empty";
+
         for (int i = 0; i < tasks.getSize(); i++) {
             boolean isMatch = false;
             Task temp = tasks.get(i);
@@ -182,6 +192,8 @@ public class CommandExecution {
      */
     public static TaskList findTaskByKeyword(String keyword, TaskList tasks) {
         TaskList matches = new TaskList();
+
+        assert tasks.getSize() > 0 : "The list currently is empty";
 
         for (int i = 0; i < tasks.getSize(); i++) {
             boolean isMatch = false;
