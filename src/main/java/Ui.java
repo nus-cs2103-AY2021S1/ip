@@ -25,7 +25,9 @@ public class Ui {
      * @return String next line.
      */
     public String readNextLine() {
-        return scanner.nextLine();
+        String query = "";
+        query = scanner.nextLine();
+        return query;
     }
 
     /**

@@ -18,4 +18,9 @@ public class ExitCommand extends Command {
         ui.printExitMessage();
         super.execute(taskList, ui, storage);
     }
+
+    @Override
+    public boolean isExit() {
+        return true;
+    }
 }
