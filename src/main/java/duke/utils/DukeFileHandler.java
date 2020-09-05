@@ -26,8 +26,8 @@ public class DukeFileHandler {
     /**
      * Reads the files from the file path.
      *
-     * @return a List of Tasks created from the file data.txt
-     * @throws FileNotFoundException if the file is not found, not created
+     * @return a List of Tasks created from the file data.txt.
+     * @throws FileNotFoundException if the file is not found, not created.
      */
     public List<Task> readFile() throws FileNotFoundException {
         File file = new File(path);
@@ -54,7 +54,9 @@ public class DukeFileHandler {
     }
 
 
-    // input is of format TaskType | isDone | Detail | Date (can be null)
+    /**
+     * Input is of format TaskType | isDone | Detail | Date (can be null).
+     */
     private Task createTask(String... inputArr) {
         boolean isDone = inputArr[1].trim().equals("1");
 
@@ -75,8 +77,8 @@ public class DukeFileHandler {
     /**
      * Writes the list to the file.
      *
-     * @param list the data to write to the file
-     * @throws IOException if the file could not be found
+     * @param list the data to write to the file.
+     * @throws IOException if the file could not be found.
      */
     public void writeToFile(List<Task> list) throws IOException {
 
@@ -91,7 +93,7 @@ public class DukeFileHandler {
             fileWriter.close();
 
         } catch (IOException e) {
-            // e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
