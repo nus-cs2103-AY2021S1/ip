@@ -46,8 +46,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gives the user responses based on the user input.
+     *
+     * @param input The user input.
+     * @return A string representing Duke's response to the user input.
      */
     public String getResponse(String input) {
         try {
