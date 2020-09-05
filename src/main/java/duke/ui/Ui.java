@@ -27,7 +27,7 @@ public class Ui {
     /**
      * Greets the user upon starting the program.
      */
-    public String greetings() {
+    public static String greetings() {
         return stringFormatter("Hello, I'm Duke!", "What can I do for you?");
     }
 

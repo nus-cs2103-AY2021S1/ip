@@ -22,6 +22,7 @@ import duke.task.TaskType;
 public class Parser {
 
     private static final String INVALID_ARR_ERROR = "Array is not empty";
+
     /**
      * Parses the user input and returns the corresponding command.
      *
@@ -108,6 +109,7 @@ public class Parser {
      */
     public static String[] parseComplexTaskDescription(String description, TaskType taskType) throws DukeException {
         String[] inputArr = description.split(getIdentifier(taskType), 2);
+
         if (inputArr.length == 1) {
             if (taskType == TaskType.DEADLINE) {
                 throw new InvalidDeadlineException();
@@ -116,14 +118,17 @@ public class Parser {
                 throw new InvalidEventException();
             }
         }
+
         String taskDetails = inputArr[0];
         String time = inputArr[1];
+
         if (taskDetails.isEmpty()) {
             throw new EmptyTaskException(taskType);
         }
         if (time.isBlank()) {
             throw new EmptyTimeException(taskType);
         }
+
         inputArr[1] = inputArr[1].trim();
         return inputArr;
     }

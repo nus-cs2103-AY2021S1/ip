@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -49,9 +50,8 @@ public class MainWindow extends AnchorPane {
      * Greets the user when the GUI opens.
      */
     private void greetUser() {
-        Ui ui = new Ui();
         dialogContainer.getChildren().addAll(
-            DialogBox.getDukeDialog(ui.greetings(), dukeImage)
+            DialogBox.getDukeDialog(Ui.greetings(), dukeImage)
         );
     }
 

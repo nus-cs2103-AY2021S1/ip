@@ -6,6 +6,7 @@ import duke.task.TaskType;
  * Thrown when the task detail of a Task object is empty.
  */
 public class EmptyTaskException extends DukeException {
+
     /**
      * Initializes the EmptyTaskException object.
      *

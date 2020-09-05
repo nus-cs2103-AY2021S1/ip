@@ -44,8 +44,11 @@ public class ComplexTask extends Task {
     public String toString() {
         if (taskType == TaskType.EVENT) {
             return "[E]" + super.toString() + " (at: " + time + ")";
-        } else { // DEADLINE
+        }
+        if (taskType == TaskType.DEADLINE) {
             return "[D]" + super.toString() + " (by: " + time + ")";
         }
+        assert false : "Invalid complex task!";
+        return null;
     }
 }

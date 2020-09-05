@@ -6,6 +6,7 @@ import duke.task.TaskType;
  * Thrown when the Complex Task does not have its time specified.
  */
 public class EmptyTimeException extends DukeException {
+
     /**
      * Initializes the EmptyTimeException object.
      *

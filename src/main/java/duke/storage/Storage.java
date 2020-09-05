@@ -59,6 +59,7 @@ public class Storage {
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             String header = br.readLine();
+
             if (header != null) {
                 String line = br.readLine();
                 while (line != null) {
@@ -84,6 +85,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(filePath);
             String header = "Task type  ,Description  ,Time  ,Status\n";
             StringBuilder stringBuilder = new StringBuilder(header);
+
             for (Task task : tasks.getTasks()) {
                 stringBuilder.append(convertToCsvFormat(task));
             }
