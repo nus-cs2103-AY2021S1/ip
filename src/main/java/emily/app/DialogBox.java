@@ -1,4 +1,4 @@
-package main.java.emily.app;
+package emily.app;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

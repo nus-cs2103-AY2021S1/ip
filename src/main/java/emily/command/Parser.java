@@ -1,10 +1,10 @@
-package main.java.emily.command;
+package emily.command;
 
-import main.java.emily.exception.DukeException;
-import main.java.emily.task.Deadline;
-import main.java.emily.task.Event;
-import main.java.emily.task.Task;
-import main.java.emily.task.ToDos;
+import emily.exception.DukeException;
+import emily.task.Deadline;
+import emily.task.Event;
+import emily.task.Task;
+import emily.task.ToDos;
 
 /**
  * Deals with making sense of the user command

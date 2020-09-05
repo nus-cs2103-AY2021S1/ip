@@ -1,8 +1,8 @@
-package main.java.emily.command;
+package emily.command;
 
-import main.java.emily.exception.DukeException;
-import main.java.emily.storage.Storage;
-import main.java.emily.storage.TaskList;
+import emily.exception.DukeException;
+import emily.storage.Storage;
+import emily.storage.TaskList;
 import java.io.File;
 
 
@@ -13,14 +13,14 @@ public class Emily {
 
     private static final String FILE_PATH = "data/emily.txt";
     private final Storage storage;
-    private final Logic ui;
+    private final Logic logic;
     private TaskList tasks;
 
     /**
      * Manages the app components
      */
     public Emily() {
-        ui = new Logic();
+        logic = new Logic();
         storage = new Storage(FILE_PATH);
         try {
             tasks = new TaskList(storage.loadData());
@@ -42,7 +42,7 @@ public class Emily {
 
         while (!end) {
             try {
-                output = ui.readsLine(userInputText, tasks);
+                output = logic.readsLine(userInputText, tasks);
                 storage.saveData(tasks.getTaskArrayList());
                 end = true;
             } catch (DukeException e) {

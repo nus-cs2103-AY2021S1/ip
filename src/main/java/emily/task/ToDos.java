@@ -1,4 +1,4 @@
-package main.java.emily.task;
+package emily.task;
 
 /**
  * Represents a task that has a simple description
