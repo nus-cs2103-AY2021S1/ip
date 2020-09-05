@@ -17,80 +17,97 @@ public class GuiParser {
      * @param input Current input string of the user.
      * @param taskList Current list of tasks of the user.
      * @param storage Current storage of the user.
-     * @throws duke.DukeException
+     * @throws DukeException
      * @throws FileNotFoundException
      */
-    public String interpretGui(String input, duke.TaskList taskList, duke.Storage storage)
-            throws duke.DukeException, FileNotFoundException {
-        ArrayList<duke.Task> list = taskList.getList();
+    public String interpretGui(String input, TaskList taskList, Storage storage)
+            throws DukeException, FileNotFoundException {
+        assert taskList != null : "TaskList should not be null";
+        assert storage != null : "Storage should not be null";
+
+        if (input.equals("bye")) {
+            return "Bye. Hope to see you again soon!";
+        }
+
+        ArrayList<Task> list = taskList.getList();
+
         if (input.equals("list")) {
             return showListGui(list);
-        } else {
-            if (input.contains(" ")) {
-                int i = input.indexOf(" ");
-                String firstWord = input.substring(0, i);
-                if (firstWord.equals("done")) {
+        }
+
+        if (input.contains(" ")) {
+            int i = input.indexOf(" ");
+            String firstWord = input.substring(0, i);
+
+            switch (firstWord) {
+                case "done":
                     return setDoneGui(input, i, list, storage);
-                } else if (firstWord.equals("delete")) {
+                case "delete":
                     return dealWithDeleteGui(input, i, taskList, list, storage);
-                } else if (firstWord.equals("todo")) {
+                case "todo":
                     return dealWithTodoGui(input, i, taskList, list, storage);
-                } else if (firstWord.equals("deadline")) {
+                case "deadline":
                     return dealWithDeadlineGui(input, i, taskList, list, storage);
-                } else if (firstWord.equals("event")) {
+                case "event":
                     return dealWithEventGui(input, i, taskList, list, storage);
-                } else if (firstWord.equals("find")) {
+                case "find":
                     return dealWithFindGui(input, i, list);
-                } else {
-                    throw new duke.DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task " +
+                default:
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task " +
                             "with the starting keyword \"todo\" or \"deadline\" or \"event\".");
-                }
+            }
+        } else {
+            if (input.equals("todo")) {
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            } else if (input.equals("deadline")) {
+                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+            } else if (input.equals("event")) {
+                throw new DukeException("OOPS!!! The description of an event cannot be empty.");
             } else {
-                if (input.equals("todo")) {
-                    throw new duke.DukeException("OOPS!!! The description of a todo cannot be empty.");
-                } else if (input.equals("deadline")) {
-                    throw new duke.DukeException("OOPS!!! The description of a deadline cannot be empty.");
-                } else if (input.equals("event")) {
-                    throw new duke.DukeException("OOPS!!! The description of an event cannot be empty.");
-                } else {
-                    throw new duke.DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task " +
-                            "with the starting keyword \"todo\" or \"deadline\" or \"event\".");
-                }
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task " +
+                        "with the starting keyword \"todo\" or \"deadline\" or \"event\".");
             }
         }
+
     }
 
-    private String showListGui(ArrayList<duke.Task> list) {
+    private String showListGui(ArrayList<Task> list) {
+        assert list != null : "List object should not be null";
+
         if (list.isEmpty()) {
             return "List is empty.";
         } else {
             StringBuilder listOutput = new StringBuilder();
             for (int j = 0; j < list.size(); j++) {
                 int num = j + 1;
-                duke.Task task = list.get(j);
+                Task task = list.get(j);
                 listOutput.append(num + "." + task.toString() + "\n");
             }
             return listOutput.toString();
         }
     }
 
-    private String setDoneGui(String input, int indexOfSpace, ArrayList<duke.Task> list, duke.Storage storage) throws DukeException, FileNotFoundException {
+    private String setDoneGui(String input, int indexOfSpace, ArrayList<Task> list, Storage storage) throws DukeException, FileNotFoundException {
+        assert indexOfSpace > -1 : "Index of space should not be negative";
+
         int num = Integer.parseInt(input.substring(indexOfSpace + 1));
         if (list.size() < num) {
-            throw new duke.DukeException("List does not have that item.");
+            throw new DukeException("List does not have that item.");
         } else {
-            duke.Task taskToSetToDone = list.get(num - 1);
+            Task taskToSetToDone = list.get(num - 1);
             taskToSetToDone.setDone();
             storage.update(list);
             return "Nice! I've marked this task as done:" + "\n" + taskToSetToDone.toString();
         }
     }
 
-    private String dealWithDeleteGui(String input, int indexOfSpace, duke.TaskList taskList, ArrayList<duke.Task> list, duke.Storage storage)
+    private String dealWithDeleteGui(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
             throws DukeException, FileNotFoundException {
+        assert indexOfSpace > -1 : "Index of space should not be negative";
+
         int num = Integer.parseInt(input.substring(indexOfSpace + 1));
         if (list.size() < num) {
-            throw new duke.DukeException("List does not have that item.");
+            throw new DukeException("List does not have that item.");
         } else {
             Task taskToDelete = list.get(num - 1);
             taskList.remove(num - 1);
@@ -100,8 +117,10 @@ public class GuiParser {
         }
     }
 
-    private String dealWithTodoGui(String input, int indexOfSpace, duke.TaskList taskList, ArrayList<duke.Task> list, duke.Storage storage)
+    private String dealWithTodoGui(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
             throws FileNotFoundException {
+        assert indexOfSpace > -1 : "Index of space should not be negative";
+
         String todoName = input.substring(indexOfSpace + 1);
         Todo newTodo = new Todo(todoName);
         taskList.add(newTodo);
@@ -111,8 +130,10 @@ public class GuiParser {
         return str;
     }
 
-    private String dealWithDeadlineGui(String input, int indexOfSpace, duke.TaskList taskList, ArrayList<duke.Task> list, duke.Storage storage)
+    private String dealWithDeadlineGui(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
             throws FileNotFoundException {
+        assert indexOfSpace > -1 : "Index of space should not be negative";
+
         int index = input.indexOf("/");
         String deadlineName = input.substring(indexOfSpace + 1, index);
         String deadlineTime = input.substring(index + 4);
@@ -124,8 +145,10 @@ public class GuiParser {
         return str;
     }
 
-    private String dealWithEventGui(String input, int indexOfSpace, duke.TaskList taskList, ArrayList<duke.Task> list, duke.Storage storage)
+    private String dealWithEventGui(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
             throws FileNotFoundException {
+        assert indexOfSpace > -1 : "Index of space should not be negative";
+
         int index = input.indexOf("/");
         String eventName = input.substring(indexOfSpace + 1, index);
         String eventTime = input.substring(index + 4);
@@ -138,6 +161,8 @@ public class GuiParser {
     }
 
     private String dealWithFindGui(String input, int indexOfSpace, ArrayList<Task> list) {
+        assert indexOfSpace > -1 : "Index of space should not be negative";
+
         String nameOfItemToBeFound = input.substring(indexOfSpace + 1);
         // search the list of the item to be found, add them to a new list and print them out
         ArrayList<Task> newList = new ArrayList<>();
@@ -153,7 +178,7 @@ public class GuiParser {
             StringBuilder listOutput = new StringBuilder();
             for (int j = 0; j < newList.size(); j++) {
                 int num = j + 1;
-                duke.Task task = newList.get(j);
+                Task task = newList.get(j);
                 listOutput.append(num + "." + task.toString() + "\n");
             }
             String str = "Here are the matching tasks in your list:" + "\n" + listOutput;

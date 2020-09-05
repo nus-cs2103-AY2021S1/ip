@@ -10,9 +10,9 @@ public class Deadline extends duke.Task {
 
     private LocalDate date;
 
-    public Deadline(String name, String dateTime) {
+    public Deadline(String name, String date) {
         super(name);
-        this.date = LocalDate.parse(dateTime);
+        this.date = LocalDate.parse(date);
     }
 
     @Override
