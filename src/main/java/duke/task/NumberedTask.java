@@ -5,16 +5,16 @@ package duke.task;
  */
 public class NumberedTask {
 
-    private int number;
+    private int taskNumber;
     private Task task;
 
-    public NumberedTask(int number, Task task) {
-        this.number = number;
+    public NumberedTask(int taskNumber, Task task) {
+        this.taskNumber = taskNumber;
         this.task = task;
     }
 
     @Override
     public String toString() {
-        return String.format("%d.%s", number, task);
+        return String.format("%d.%s", taskNumber, task);
     }
 }

@@ -11,9 +11,9 @@ import java.time.format.DateTimeParseException;
  */
 public class DateParser {
 
-    private static final String format = "dd MMM uuuu HHmm";
-    private static final String readableFormat = "DD MMM YYYY HHMM";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+    private static final String FORMAT = "dd MMM uuuu HHmm";
+    private static final String READABLE_FORMAT = "DD MMM YYYY HHMM";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(FORMAT);
 
     /**
      * Parses a datetime String into a LocalDateTime object.
@@ -25,10 +25,10 @@ public class DateParser {
      */
     public static LocalDateTime parseString(String dateTime) throws WrongDateFormatException {
         try {
-            LocalDateTime result = LocalDateTime.parse(dateTime, DateParser.formatter);
+            LocalDateTime result = LocalDateTime.parse(dateTime, DateParser.FORMATTER);
             return result;
         } catch (DateTimeParseException e) {
-            throw new WrongDateFormatException(DateParser.readableFormat);
+            throw new WrongDateFormatException(DateParser.READABLE_FORMAT);
         }
     }
 
