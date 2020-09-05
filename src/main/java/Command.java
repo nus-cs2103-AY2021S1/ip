@@ -43,20 +43,20 @@ public class Command {
      * @param storage The storage object
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        List<Task> lists = tasks.getTasks();
+        List<Task> taskList = tasks.getTasks();
 
         String message = "";
 
         if (command.equals("list")) {
             System.out.println("Here are the tasks in your list:");
             message = message + "Here are the tasks in your list:\n";
-            for (int i = 0; i < lists.size(); i++) {
-                Task task = lists.get(i);
+            for (int i = 0; i < taskList.size(); i++) {
+                Task task = taskList.get(i);
                 System.out.println((i + 1) + "." + task.toString());
                 message = message + (i + 1) + "." + task.toString() + "\n";
             }
         } else if (command.contains("done")) {
-            Task task = lists.get(order - 1);
+            Task task = taskList.get(order - 1);
             task.markAsDone();
             System.out.println("____________________________________________________________\n" +
                     "  Nice! I've marked this task as done:");
@@ -64,14 +64,14 @@ public class Command {
             message = message + "  Nice! I've marked this task as done:" + "    [" + task.getStatusIcon() + "] "
                     + task.getDescription();
         } else if (command.contains("delete")) {
-            Task task = lists.get(order - 1);
-            lists.remove(order - 1);
+            Task task = taskList.get(order - 1);
+            taskList.remove(order - 1);
             System.out.println("____________________________________________________________\n" +
                     "Noted. I've removed this task:");
             System.out.println("  " + task.toString());
-            System.out.println("Now you have " + lists.size() + " tasks in the list.\n");
+            System.out.println("Now you have " + taskList.size() + " tasks in the list.\n");
             message = message + "Noted. I've removed this task:\n" + "  " + task.toString() + "\nNow you have "
-                    + lists.size() + " tasks in the list.\n";
+                    + taskList.size() + " tasks in the list.\n";
         } else if (command.equals("bye")) {
             isExit = true;
             String message1 = "  Bye. Hope to see you again soon!";
@@ -80,22 +80,22 @@ public class Command {
         } else {
             if (type.equals("deadline")) {
                 if (hasDate) {
-                    lists.add(new Deadline(command, time, date));
+                    taskList.add(new DeadlineTask(command, time, date));
                 } else {
-                    lists.add(new Deadline(command, time));
+                    taskList.add(new DeadlineTask(command, time));
                 }
             } else if (type.equals("event")) {
                 if (hasDate) {
-                    lists.add(new Event(command, time, date));
+                    taskList.add(new EventTask(command, time, date));
                 } else {
-                    lists.add(new Event(command, time));
+                    taskList.add(new EventTask(command, time));
                 }
             } else if (type.equals("find")) {
                 System.out.println("Here are the matching tasks in your list:");
                 message = message + "Here are the matching tasks in your list:\n";
                 int j = 1;
-                for (int i = 0; i < lists.size(); i++) {
-                    Task task = lists.get(i);
+                for (int i = 0; i < taskList.size(); i++) {
+                    Task task = taskList.get(i);
                     if (task.toString().contains(command)) {
                         System.out.println(j + "." + task.toString());
                         message = message + j + "." + task.toString() + "\n";
@@ -104,20 +104,20 @@ public class Command {
                 }
                 return message;
             } else {
-                lists.add(new ToDo(command));
+                taskList.add(new ToDoTask(command));
             }
 
             String message1 = "Got it. I've added this task:\n  "
-                    + lists.get(lists.size() - 1).toString() + "\n" +
-                    "Now you have " + lists.size() + " tasks in the list.";
+                    + taskList.get(taskList.size() - 1).toString() + "\n" +
+                    "Now you have " + taskList.size() + " tasks in the list.";
             message = message + "Got it. I've added this task:\n  "
-                    + lists.get(lists.size() - 1).toString() + "\n" +
-                    "Now you have " + lists.size() + " tasks in the list.";
+                    + taskList.get(taskList.size() - 1).toString() + "\n" +
+                    "Now you have " + taskList.size() + " tasks in the list.";
             System.out.println(message1);
         }
 
         try {
-            storage.writeToFile(lists);
+            storage.writeToFile(taskList);
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
