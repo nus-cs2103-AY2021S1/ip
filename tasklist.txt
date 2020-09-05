@@ -1,5 +1,5 @@
-[D][?] sdfa
-[D][?] sdfasdf \by sdf
-[D][?] sdf (by: OCTOBER 15 2019, 18:00 PM)
-[T][?] meow
-[T][?] 222
+[T][?] Homework
+[D][?] assignment 
+[D][?] Buy groceries (by: OCTOBER 19 2020, 19:00 PM)
+[E][?] webcast lectures \by 2020-10-19 1900
+[E][?] Buy groceries (by: OCTOBER 19 2020, 19:00 PM)
