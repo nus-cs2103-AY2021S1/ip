@@ -59,4 +59,6 @@ abstract public class Task {
         return this.name.toLowerCase().contains(keyword);
     }
 
+    public abstract String getDatabaseFormat();
+
 }

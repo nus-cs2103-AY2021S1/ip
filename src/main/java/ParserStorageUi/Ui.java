@@ -13,42 +13,10 @@ public class Ui {
     }
 
     /**
-     * Show welcome message to the user
-     **/
-    public void showWelcome() {
-        String logo = "Hello I'm Verzachtend \n"
-            + "What can I do for you?\n"
-            + "BE YOURSELF, NEVER SURRENDER AND KEEP A SMILE ON YOUR FACE";
-        System.out.println(logo);
-    }
-
-
-    /**
-     * Receive input from user
-     **/
-    public String readCommand() {
-        return new Scanner(System.in).nextLine();
-    }
-
-    /**
      * Show loading error to the user
      **/
     public void showLoadingError() {
         System.out.println("No task found, please blablbalba");
-    }
-
-    /**
-     * Show error message to the user
-     **/
-    public void showError(String message) {
-        System.out.println(message);
-    }
-
-    /**
-     * Show line to the user
-     **/
-    public void showLine() {
-        System.out.println("________________________________________________");
     }
 
     /**

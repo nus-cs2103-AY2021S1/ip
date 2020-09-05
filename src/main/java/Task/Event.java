@@ -88,4 +88,9 @@ public class Event extends Task {
             return false;
         }
     }
+
+    @Override
+    public String getDatabaseFormat() {
+        return this.getType() + " | " + this.isDone() + " | " + this.getName() + " | " + this.getEnd();
+    }
 }

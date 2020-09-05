@@ -1,14 +1,15 @@
 import command.Command;
+
 import exceptions.DukeException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 import parserstorageui.Parser;
 
 /**
@@ -32,9 +33,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        /*dialogContainer.getChildren().add(new Label("Hello I'm Verzachtend \n"
-        + "What can I do for you?\n"
-            + "BE YOURSELF, NEVER SURRENDER AND KEEP A SMILE ON YOUR FACE"));*/
         dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello I'm Verzachtend \n"
             + "What can I do for you?\n"
             + "BE YOURSELF, NEVER SURRENDER AND KEEP A SMILE ON YOUR FACE" , dukeImage));
@@ -51,7 +49,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-
         String fullCommand = userInput.getText();
         try {
             Command c = Parser.parse(fullCommand);
