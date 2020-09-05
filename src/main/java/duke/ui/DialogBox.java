@@ -12,10 +12,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
-
+/**
+ * Controller for the dialog box.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;

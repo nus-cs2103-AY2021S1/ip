@@ -37,10 +37,10 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
-            int num = Integer.parseInt(this.input);
-            Task curr = taskList.getTask(num);
+            int taskID = Integer.parseInt(this.input);
+            Task curr = taskList.getTask(taskID); // throws IndexOutOfBoundsException if taskID is <= 0
             curr.markAsDone();
-            storage.updateTask(num, curr);
+            storage.updateTask(taskID, curr);
             return ui.replyDone(curr.toString());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please key in the number of an existing task to be marked as done!");

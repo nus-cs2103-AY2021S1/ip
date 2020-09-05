@@ -20,8 +20,7 @@ public class ListCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (taskList.size() == 0) {
             return ui.showError("No tasks found");
-        } else {
-            return ui.replyList(taskList.toString());
         }
+        return ui.replyList(taskList.toString());
     }
 }

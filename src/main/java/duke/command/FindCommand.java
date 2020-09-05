@@ -36,8 +36,7 @@ public class FindCommand extends Command {
         TaskList filtered = taskList.searchTasks(input);
         if (filtered.size() == 0) {
             return ui.replyNoTasksFound();
-        } else {
-            return ui.replyFoundTasks(filtered.toString());
         }
+        return ui.replyFoundTasks(filtered.toString());
     }
 }

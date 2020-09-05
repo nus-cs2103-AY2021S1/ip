@@ -39,9 +39,9 @@ public class Event extends Task {
     public Event(String description, String at) throws DukeException {
         super(description);
         try {
-            String[] parts = at.split(" ", 2);
-            this.dateBy = LocalDate.parse(parts[0]);
-            this.timeBy = LocalTime.parse(parts[1]);
+            String[] dateTime = at.split(" ", 2);
+            this.dateBy = LocalDate.parse(dateTime[0]);
+            this.timeBy = LocalTime.parse(dateTime[1]);
         } catch (DateTimeParseException e) {
             throw new DukeException("Please input date and time in correct format:"
                     + " 'yyyy-MM-dd HH:MM' (24-hour time format).");
@@ -94,7 +94,7 @@ public class Event extends Task {
     public String toString() {
         String modifier = (this.timeBy.isAfter(LocalTime.NOON)) ? "pm" : "am";
         return String.format("[%s]%s (by: %s, %s)",
-                Deadline.TASK_TYPE,
+                Event.TASK_TYPE,
                 super.toString(),
                 this.dateBy.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
                 this.timeBy.format(DateTimeFormatter.ofPattern("hh:mm")) + modifier);
