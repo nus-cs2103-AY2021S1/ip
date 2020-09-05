@@ -2,7 +2,6 @@ package duke;
 
 
 import java.io.InputStream;
-import java.util.Scanner;
 
 import duke.commands.Command;
 import duke.exceptions.DukeException;
@@ -125,13 +124,9 @@ public class Duke {
         String statusMessage = null;
 
         switch (keywordCommand) {
-        case TERMINATE:
-            this.shouldQuit = true;
-            statusMessage = "bye";
-            break;
 
         case INVALID:
-            this.ui.printErrorMessage(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", msgArr[0]));
+            statusMessage = this.ui.printErrorMessage(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", msgArr[0]));
             break;
 
         case LIST:
@@ -144,9 +139,9 @@ public class Duke {
                 statusMessage = this.markAsDone(msgArr);
                 this.ui.printMessage(statusMessage);
             } catch (ArrayIndexOutOfBoundsException e) {
-                this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
+                statusMessage = this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
             } catch (IndexOutOfBoundsException e) {
-                this.ui.printInvalidIndexErrorMsg();
+                statusMessage = this.ui.printInvalidIndexErrorMsg();
             }
             break;
 
@@ -155,9 +150,9 @@ public class Duke {
                 statusMessage = this.delete(msgArr);
                 this.ui.printMessage(statusMessage);
             } catch (ArrayIndexOutOfBoundsException e) {
-                this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
+                statusMessage = this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
             } catch (IndexOutOfBoundsException e) {
-                this.ui.printInvalidIndexErrorMsg();
+                statusMessage = this.ui.printInvalidIndexErrorMsg();
             }
             break;
 
@@ -166,9 +161,9 @@ public class Duke {
                 statusMessage = this.find(msgArr);
                 this.ui.printMessage(statusMessage);
             } catch (ArrayIndexOutOfBoundsException e) {
-                this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
+                statusMessage = this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
             } catch (IndexOutOfBoundsException e) {
-                this.ui.printInvalidIndexErrorMsg();
+                statusMessage = this.ui.printInvalidIndexErrorMsg();
             }
             break;
 
@@ -177,16 +172,19 @@ public class Duke {
                 statusMessage = this.taskList.add(msgInput);
                 this.ui.printMessage(statusMessage);
             } catch (DukeException e) {
-                this.ui.printErrorMessage(e.getMessage());
+                statusMessage = this.ui.printErrorMessage(e.getMessage());
             }
             break;
 
+        case TERMINATE:
+            // Fallthrough
         default:
-            statusMessage = "bye";
-            Platform.exit();
+            this.shouldQuit = true;
+            statusMessage = "Bye. Hope to see you again soon!";
+            this.exit();
             break;
         }
-
+        
         return statusMessage;
 
     }
@@ -209,18 +207,57 @@ public class Duke {
     /**
      * Starts the Duke programme logic.
      */
-    public void start() {
-        Ui.printStartMessage();
+    public void start(boolean isCli) {
         this.taskList.loadFromFile();
 
-        Scanner sc = new Scanner(System.in);
-        this.dukeLogic();
+        if (isCli) {
+            // programme starts
+            this.ui.printStartMessage();
 
-        this.ui.printMessage("Bye. Hope to see you again soon!");
+            // programme execution here
+            this.dukeLogic();
 
+            // programme ends
+            this.ui.printEndMessage();
+            this.taskList.writeToFile();
+        }
+
+    }
+
+
+    /**
+     * Gets the start message for Duke.
+     *
+     * @return Start message string.
+     */
+    public String getStartMessage() {
+        return Ui.getStartMessage();
+    }
+
+
+    /**
+     * Gets the end message for Duke.
+     *
+     * @return End message string.
+     */
+    public String getEndMessage() {
+        return Ui.getEndMessage();
+    }
+
+
+    /**
+     * Exits duke and quit GUI platform.
+     */
+    private void exit() {
         this.taskList.writeToFile();
 
-        sc.close();
+        try {
+            Thread.sleep(1000);
+        } catch (Exception ignored) {
+        }
+
+        Platform.exit();
+        System.exit(0);
     }
 
 
@@ -240,7 +277,7 @@ public class Duke {
      */
     public static void main(String[] args) {
 
-        new Duke().start();
+        new Duke().start(true);
 
     }
 

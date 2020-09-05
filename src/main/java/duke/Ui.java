@@ -17,6 +17,9 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+    private static final String START_MESSAGE = "Hello! I'm Duke!\nWhat can I do for you?";
+    private static final String END_MESSAGE = "Bye. Hope to see you again soon!";
+
     private final Scanner sc;
 
 
@@ -40,14 +43,35 @@ public class Ui {
 
 
     /**
+     * Gets the start message for Duke.
+     *
+     * @return Start message string.
+     */
+    public static String getStartMessage() {
+        return Ui.START_MESSAGE;
+    }
+
+
+    public static String getEndMessage() {
+        return Ui.getEndMessage();
+    }
+
+
+    /**
      * Prints start message.
      */
-    public static void printStartMessage() {
-        Ui.printSeparator();
-        // System.out.println(Ui.LOGO);
-        System.out.println("Hello! I'm Duke.");
-        System.out.println("What can I do for you?");
-        Ui.printSeparator();
+    public void printStartMessage() {
+        String startMsg = Ui.getStartMessage();
+        this.printMessage(startMsg);
+    }
+
+
+    /**
+     * Prints end message.
+     */
+    public void printEndMessage() {
+        String endMessage = Ui.getEndMessage();
+        this.printMessage(endMessage);
     }
 
 
@@ -92,18 +116,24 @@ public class Ui {
     }
 
 
-    public void printEmptyIndexErrorMsg(String commandStr) {
-        this.printErrorMessage(String.format("OOPS!!! The index of `%s` cannot be empty.", commandStr));
+
+    public String printEmptyIndexErrorMsg(String commandStr) {
+        String errorMsg = String.format("OOPS!!! The index of `%s` cannot be empty.", commandStr);
+        this.printErrorMessage(errorMsg);
+        return errorMsg;
     }
 
 
-    public void printInvalidIndexErrorMsg() {
-        this.printErrorMessage("OOPS!!! The index given is invalid.");
+    public String printInvalidIndexErrorMsg() {
+        String errorMsg = "OOPS!!! The index given is invalid.";
+        this.printErrorMessage(errorMsg);
+        return errorMsg;
     }
 
 
-    public void printErrorMessage(String errMsg) {
+    public String printErrorMessage(String errMsg) {
         this.printMessage(errMsg);
+        return errMsg;
     }
 
 }
