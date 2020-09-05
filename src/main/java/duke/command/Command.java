@@ -84,6 +84,7 @@ public class Command {
         } catch (DukeNumberFormatException err) {
             dukeResponse = "\t" + err.getMessage();
         } finally {
+            assert dukeResponse != null;
             return dukeResponse;
         }
     }
@@ -93,7 +94,7 @@ public class Command {
      *
      * @return String of farewell.
      */
-    public String bidFarewell() {
+    private String bidFarewell() {
         return "\tBye. Hope to see you again soon!";
     }
 
@@ -103,7 +104,7 @@ public class Command {
      * @param tasks List of tasks to print.
      * @return List of tasks in taskList.
      */
-    public String printList(TaskList tasks) {
+    private String printList(TaskList tasks) {
         String toPrint = "\tHere are the tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
             toPrint += String.format("\n\t%d. %s", i + 1, tasks.get(i));
@@ -118,7 +119,7 @@ public class Command {
      * @param taskInfo Description of task.
      * @return String of words Duke say in response.
      */
-    public String markTaskDone(TaskList tasks, String taskInfo) throws DukeIndexOutOfBoundsException {
+    private String markTaskDone(TaskList tasks, String taskInfo) throws DukeIndexOutOfBoundsException {
         if (taskInfo.length() <= 5) {
             throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
         }
@@ -133,7 +134,9 @@ public class Command {
             throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
         }
         int index = taskNo - 1;
+        assert index >= 0 : "Index should not be lesser than 0";
         Task task = tasks.remove(index).doneTask();
+        assert task != null : "Task should not be null";
         tasks.add(index, task);
         return "\tNice! I've marked this task as done:" + "\n\t" + task;
     }
@@ -145,11 +148,12 @@ public class Command {
      * @param taskInfo Description of todos task.
      * @return String of words Duke say in response.
      */
-    public String handleToDo(TaskList tasks, String taskInfo) throws DukeInvalidCommandException {
+    private String handleToDo(TaskList tasks, String taskInfo) throws DukeInvalidCommandException {
         if (taskInfo.trim().equals("todo")) {
             throw new DukeInvalidCommandException("The command is incomplete handsome :D");
         }
         taskInfo = taskInfo.replace("todo", "").trim();
+        assert taskInfo.length() > 0 : "taskInfo should not be empty";
         return tasks.addTask(new ToDos(taskInfo));
     }
 
@@ -160,7 +164,7 @@ public class Command {
      * @param taskInfo Description of deadline task.
      * @return String of words Duke say in response.
      */
-    public String handleDeadLine(TaskList tasks, String taskInfo)
+    private String handleDeadLine(TaskList tasks, String taskInfo)
         throws DukeInvalidCommandException, DukeDateTimeParseException {
         taskInfo = taskInfo.replace("deadline", "");
         String[] stringArr = taskInfo.split("/by", 2);
@@ -169,6 +173,11 @@ public class Command {
         }
         taskInfo = stringArr[0].trim();
         String by = stringArr[1].trim();
+        if (taskInfo.length() == 0 || by.length() == 0) {
+            throw new DukeInvalidCommandException("The command is incomplete handsome :D");
+        }
+        assert taskInfo.length() > 0 : "taskInfo should not be empty";
+        assert by.length() > 0 : "by should not be empty";
         return tasks.addTask(new Deadlines(taskInfo, by));
     }
 
@@ -179,7 +188,7 @@ public class Command {
      * @param taskInfo Description of event task.
      * @return String of words Duke say in response.
      */
-    public String handleEvent(TaskList tasks, String taskInfo)
+    private String handleEvent(TaskList tasks, String taskInfo)
         throws DukeInvalidCommandException, DukeDateTimeParseException {
         taskInfo = taskInfo.replace("event", "");
         String[] stringArr = taskInfo.split("/at", 2);
@@ -188,6 +197,11 @@ public class Command {
         }
         taskInfo = stringArr[0].trim();
         String at = stringArr[1].trim();
+        if (taskInfo.length() == 0 || at.length() == 0) {
+            throw new DukeInvalidCommandException("The command is incomplete handsome :D");
+        }
+        assert taskInfo.length() > 0 : "taskInfo should not be empty";
+        assert at.length() > 0 : "at should not be empty";
         return tasks.addTask(new Events(taskInfo, at));
     }
 
@@ -198,9 +212,11 @@ public class Command {
      * @param taskInfo Description of todos task.
      * @return List of matching tasks if any.
      */
-    public String foundMatchingTasks(TaskList tasks, String taskInfo) {
+    private String foundMatchingTasks(TaskList tasks, String taskInfo) {
         String[] taskInfos = taskInfo.trim().split(" ");
+        assert taskInfos.length > 0 : "taskInfos length should be >= 1";
         List<Task> matchList = tasks.returnMatchingTasks(taskInfos);
+        assert matchList != null : "matchList should not be null";
         String dukeResponse = "";
         for (int i = 0; i < matchList.size(); i++) {
             if (i == 0) {

@@ -121,6 +121,8 @@ public class TaskList {
                 String pattern = "\\b" + matchWords[j] + "\\b";
                 try {
                     Pattern p = Pattern.compile(pattern);
+                    assert p != null : "PatternSyntaxException not thrown," +
+                            " unknown exception occured without being caught.";
                     Matcher m = p.matcher(matchTask.toString());
                     if (m.find()) {
                         matchList.add(matchTask);
