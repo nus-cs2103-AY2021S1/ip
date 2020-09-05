@@ -99,6 +99,9 @@ public class Storage {
                 default:
                     throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
                 }
+
+                assert loadedTask != null : "loaded task should not be null";
+
                 temporaryList.add(loadedTask);
             }
             return temporaryList;

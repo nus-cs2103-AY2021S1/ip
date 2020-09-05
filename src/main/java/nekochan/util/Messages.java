@@ -49,6 +49,8 @@ public class Messages {
     public static final String MESSAGE_DELETE_ALL = "I've cleared all your tasks.\nYou sure are efficient.\n";
     public static final String MESSAGE_COMPLETE = "Nice! I've marked this task as complete:\n";
     public static final String MESSAGE_TASK_COUNT = "Now you have %d tasks in your list.\n";
+    public static final String MESSAGE_SEARCH = "Here's everything I found:\n";
+    public static final String MESSAGE_EMPTY_SEARCH = "I couldn't find anything for you.\n";
 
     public static String getTotalTaskMessage(int count) {
         return String.format(MESSAGE_TASK_COUNT, count);

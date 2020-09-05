@@ -59,12 +59,17 @@ public class SearchCommand extends Command {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_SEARCH_COMMAND);
         }
         String responseMessage = "";
-        for (Task result : results) {
-            if (responseMessage.length() > 0) {
-                responseMessage = responseMessage.concat("\n");
+        if (results.size() == 0) {
+            responseMessage = Messages.MESSAGE_EMPTY_SEARCH;
+        } else {
+            responseMessage = Messages.MESSAGE_SEARCH;
+            for (Task result : results) {
+                responseMessage = responseMessage.concat(result.toString() + "\n");
             }
-            responseMessage = responseMessage.concat(result.toString());
         }
+
+        assert responseMessage.length() > 0 : "response message should not be empty";
+
         return new Response(IS_EXIT, responseMessage);
     }
 }

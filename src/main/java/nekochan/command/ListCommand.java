@@ -55,7 +55,7 @@ public class ListCommand extends Command {
             }
         }
 
-        assert printout.length() > 0 : "printout should have content";
+        assert responseMessage.length() > 0 : "response message should not be empty";
 
         return new Response(IS_EXIT, responseMessage);
     }
