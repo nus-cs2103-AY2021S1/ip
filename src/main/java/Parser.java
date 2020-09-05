@@ -4,11 +4,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import exceptions.EmptyTodoException;
-import exceptions.InvalidDeadlineException;
-import exceptions.InvalidEventException;
-import exceptions.InvalidNumberException;
-import exceptions.UnknownCommandException;
+import exceptions.*;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -80,6 +76,13 @@ public class Parser {
         case "number":
             str = "Number of tasks to do is " + list.getSize();
             break;
+        case "update":
+            try {
+                str = changeTask(input, list);
+            } catch(InvalidTaskException ex){
+                return "Invalid task provided";
+            }
+            break;
         default:
             if (inputs.length != 2) {
                 return "Invalid number of arguments";
@@ -88,6 +91,84 @@ public class Parser {
         }
         Storage.save(list);
         return str;
+    }
+
+    /**
+     *
+     * @param request
+     * @param list
+     * @return
+     */
+    public static String changeTask(String request, TaskList list) throws InvalidTaskException {
+        String[] requests = request.split(" ");
+        if (requests.length < 4){
+            throw new InvalidTaskException();
+        }
+        int index = 0;
+        try {
+            index = Integer.parseInt(requests[1]);
+            isNumeric(index, list);
+        } catch (NumberFormatException e) {
+            return "You have not provided a valid number";
+        } catch (InvalidNumberException e) {
+            return "The number provided was greater or lesser than the number of items in the list";
+        }
+        Task task = list.get(index);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 3; i < requests.length; i++){
+            sb.append(requests[i]);
+            sb.append(" ");
+        }
+        String updatedString = task + " has been updated to ";
+        String newWork = sb.toString();
+        if (requests[2].equals("date") && task.istodo()){
+            return "Not possible to change the date of a todo";
+        }
+        if (requests[2].equals("date")){
+            try {
+                LocalDateTime date = parseDate(requests[3] + " " + requests[4]);
+                task.setDate(date);
+                System.out.println(task.toString());
+            } catch (InvalidDateException ex){
+                return "Invalid date format used";
+            }
+        } else {
+            task.setWork(newWork);
+        }
+
+        return updatedString + task.toString();
+    }
+
+    public static LocalDateTime parseDate(String str) throws InvalidDateException{
+        str = str.trim();
+        String datestr = str.replaceAll("-", "/");
+        String[] datearr = datestr.split("/");
+        System.out.println(datestr);
+        if (datearr.length < 2) {
+            throw new InvalidDateException();
+        }
+        if (datearr[0].length() < 2) {
+            datestr = "0" + datestr;
+            datearr[0] = "0" + datearr[0];
+        }
+        if (datearr[1].length() < 2) {
+            datestr = datearr[0] + "/0" + datearr[1] + "/" + datearr[2];
+        }
+        if (!datestr.contains(":")) {
+            String[] arr = datestr.split(" ");
+            if (arr.length != 2) {
+                throw new InvalidDateException();
+            }
+            arr[1] = arr[1].substring(0, 2) + ":" + arr[1].substring(2);
+            datestr = arr[0] + " " + arr[1];
+        }
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            LocalDateTime date = LocalDateTime.parse(datestr, formatter);
+            return date;
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
     }
 
     /**
@@ -251,7 +332,7 @@ public class Parser {
      */
     public static void validity(String line) throws UnknownCommandException {
         ArrayList<String> list = new ArrayList<>(Arrays.asList("delete", "done", "todo",
-                "event", "deadline", "find", "list", "bye", "number"));
+                "event", "deadline", "find", "list", "bye", "number", "update"));
         String[] words = line.split(" ");
         if (line.equals("list") || line.equals("bye") || line.equals("number")) {
             return;

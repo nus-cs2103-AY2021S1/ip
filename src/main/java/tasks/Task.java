@@ -65,6 +65,14 @@ public class Task {
         return false;
     }
 
+    public void setWork(String work){
+        this.work = work;
+    }
+
+    public void setDate(LocalDateTime date){
+        this.date = date;
+    }
+
     /**
      * Overrides the toString method
      *

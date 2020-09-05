@@ -1,12 +1,8 @@
 package tasks;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private LocalDateTime deadline;
-    private final DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy hhmm");
-
     /**
      * Constructor to instantiate a new deadline object
      *
@@ -15,7 +11,6 @@ public class Deadline extends Task {
      */
     public Deadline(String work, LocalDateTime date) {
         super(work, date);
-        this.deadline = date;
     }
 
     /**
@@ -30,6 +25,6 @@ public class Deadline extends Task {
     }
 
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + deadline.format(format) + ")";
+        return "[D]" + super.toString() + "(by: " + super.getDate() + ")";
     }
 }
