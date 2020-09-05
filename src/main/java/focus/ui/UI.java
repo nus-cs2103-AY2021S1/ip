@@ -52,6 +52,10 @@ public class UI {
                 + "\n\t\t\t- list"
                 + "\n\t\tTo find tasks on your task list:"
                 + "\n\t\t\t- find <keyword>"
+                + "\n\t\tTo have a glossary of upcoming deadlines:"
+                + "\n\t\t\t- remind"
+                + "\n\t\tTo edit settings:"
+                + "\n\t\t\t- settings /days <input>"
                 + "\n\t\tTo exit Focus:"
                 + "\n\t\t\t- bye\n";
         assert !commands.isEmpty() : "Printing should not blank here.";

@@ -14,11 +14,25 @@ public class Storage {
     /** Represents the current user's directory. */
     private static final String USER_DIRECTORY = "user.dir";
     /** Represents the path for the task list to be saved at. */
-    private final String path;
+    private final String focusPath;
+    /** Represents the path for the settings to be saved at. */
+    private final String settingsPath;
+    /** Number of days user has set. */
+    private int numberOfDays;
 
     /** Creates a storage to allow loading and saving of tasks. */
     public Storage() {
-        this.path = System.getProperty(USER_DIRECTORY) + "/data/focus.txt";
+        this.focusPath = System.getProperty(USER_DIRECTORY) + "/data/focus.txt";
+        this.settingsPath = System.getProperty(USER_DIRECTORY) + "/data/settings.txt";
+    }
+
+    /**
+     * Gets the number of days.
+     *
+     * @return Number of days.
+     */
+    public int getNumberOfDays() {
+        return this.numberOfDays;
     }
 
     /** Creates a folder to store text file. If present, it will not create. */
@@ -39,12 +53,12 @@ public class Storage {
      * @return True if user has an existing text file,
      * false if user does not have an existing text file.
      */
-    public boolean retrieveTextFile() {
+    public boolean retrieveFocusTextFile() {
         File data = null;
         boolean hasCreatedTextFile = false;
         boolean hasTextFile = false;
         try {
-            data = new File(path);
+            data = new File(focusPath);
             hasCreatedTextFile = data.createNewFile();
         } catch (IOException e) { // creation or retrieving data has errors
             System.out.println("An error occurred.");
@@ -67,7 +81,7 @@ public class Storage {
     public ArrayList<String> loadData() {
         ArrayList<String> taskList = new ArrayList<>();
         try {
-            File data = new File(path);
+            File data = new File(focusPath);
             Scanner sc = new Scanner(data);
             String task;
             while (sc.hasNextLine()) {
@@ -89,7 +103,7 @@ public class Storage {
      */
     public void addData(Task item) {
         try {
-            FileWriter fileWriter = new FileWriter(path, true);
+            FileWriter fileWriter = new FileWriter(focusPath, true);
             String task = item.taskToText() + "\n";
             assert !task.isEmpty() : "Task should not be blank here.";
             fileWriter.write(task);
@@ -107,7 +121,7 @@ public class Storage {
      */
     public void updateData(ArrayList<Task> tasks) {
         try {
-            FileWriter fileWriter = new FileWriter(path);
+            FileWriter fileWriter = new FileWriter(focusPath);
             for (Task item : tasks) {
                 String task = item.taskToText() + "\n";
                 assert !task.isEmpty() : "Task should not be blank here.";
@@ -118,5 +132,67 @@ public class Storage {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Creates or retrieves the settings file from user's files.
+     *
+     * @return True if user has an existing settings file,
+     * false if user does not have an existing settings file.
+     */
+    public boolean retrieveSettingsTextFile() {
+        File data = null;
+        boolean hasCreatedTextFile = false;
+        boolean hasTextFile = false;
+        try {
+            data = new File(settingsPath);
+            hasCreatedTextFile = data.createNewFile();
+        } catch (IOException e) { // creation or retrieving data has errors
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        if (hasCreatedTextFile) {
+            System.out.println("Settings file created: " + data.getName());
+            try {
+                FileWriter fileWriter = new FileWriter(settingsPath);
+                fileWriter.write("7"); // default number of days
+                fileWriter.close();
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+        } else {
+            hasTextFile = true;
+            System.out.println("Settings file already exists.");
+        }
+        return hasTextFile;
+    }
+
+    /** Loads the data from user's settings file if it already exists. */
+    public void loadSettings() {
+        try {
+            File data = new File(settingsPath);
+            Scanner sc = new Scanner(data);
+            while (sc.hasNextLine()) {
+                numberOfDays = Integer.parseInt(sc.nextLine());
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    /** Updates the data in user's settings file. */
+    public void updateSettings(String userInput) {
+        try {
+            FileWriter fileWriter = new FileWriter(settingsPath);
+            fileWriter.write(userInput);
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        this.numberOfDays = Integer.parseInt(userInput);
     }
 }

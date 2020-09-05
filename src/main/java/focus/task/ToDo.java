@@ -1,5 +1,7 @@
 package focus.task;
 
+import java.time.LocalDateTime;
+
 /** Represents task with a type of To-Do. */
 public class ToDo extends Task {
 
@@ -20,6 +22,16 @@ public class ToDo extends Task {
     @Override
     public String taskToText() {
         return "T|" + super.completed + "|" + super.taskDescription;
+    }
+
+    /**
+     * Gets LocalDateTime of To-Do task.
+     *
+     * @return Null since a To-Do task has no deadline.
+     */
+    @Override
+    public LocalDateTime getDeadline() {
+        return null;
     }
 
     /**

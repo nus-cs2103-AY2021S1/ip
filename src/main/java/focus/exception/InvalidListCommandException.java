@@ -1,10 +1,9 @@
 package focus.exception;
 
-/** Represents exception when user wants to view task list but there is no tasks. */
+/** Represents exception for inputs which Focus thinks that user wants to input 'list'. */
 public class InvalidListCommandException extends FocusException {
     /** Creates InvalidListCommandException for ListCommand class to throw. */
     public InvalidListCommandException() {
-        super("\tThere are currently no tasks on your list!\n"
-                + "\tStart adding one now!");
+        super("\tDid you meant the command 'list'?");
     }
 }

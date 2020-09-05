@@ -1,7 +1,9 @@
 package focus.task;
 
-/** Represents a Task to allow different types of tasks to inherit. */
-public class Task {
+import java.time.LocalDateTime;
+
+/** Represents an abstract Task class to allow different types of tasks to inherit. */
+public abstract class Task {
     /** Description of task. */
     protected String taskDescription;
     /** Checks if task is completed or not. */
@@ -49,11 +51,16 @@ public class Task {
     /**
      * Converts Task to string form to be saved in user's files.
      *
-     * @return Empty string.
+     * @return String representation of task.
      */
-    public String taskToText() {
-        return "";
-    }
+    public abstract String taskToText();
+
+    /**
+     * Gets LocalDateTime of tasks.
+     *
+     * @return LocalDateTime if task is not a To-Do task.
+     */
+    public abstract LocalDateTime getDeadline();
 
     /**
      * Returns string format of Task.
