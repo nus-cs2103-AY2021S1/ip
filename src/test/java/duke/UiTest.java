@@ -41,7 +41,7 @@ public class UiTest {
 
     @Test
     public void display_testString_correctPrint() {
-        new Ui(new InputHandlerStub(), new OutputHandlerStub()).display("duke test string.\"@#$\"\\");
+        new Ui(new InputHandlerStub(), new OutputHandlerStub()).queueDisplay("duke test string.\"@#$\"\\");
         assertEquals("duke test string.\"@#$\"\\", outputStreamCaptor.toString().trim());
     }
 

@@ -82,6 +82,9 @@ public class Duke {
                 // Execute user command.
                 command.execute(this.ui, this.taskManager, this.saveManager);
 
+                // Send messages from app
+                this.ui.display();
+
                 // Terminate software loop if exit command is given.
                 if (command.isByeCommand()) {
                     break;
@@ -104,6 +107,9 @@ public class Duke {
 
             // Execute user command
             command.execute(this.ui, this.taskManager, this.saveManager);
+
+            // Send messages from app
+            this.ui.display();
 
             return command.isByeCommand();
 

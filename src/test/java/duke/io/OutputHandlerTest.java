@@ -26,7 +26,7 @@ public class OutputHandlerTest extends OutputHandler {
 
     @Test
     public void printCommand_testString_correctPrintOutput() {
-        new OutputHandler().print("duke test string");
+        new OutputHandler().storeOutput("duke test string");
         assertEquals("duke test string", outputStreamCaptor.toString().trim());
     }
 }

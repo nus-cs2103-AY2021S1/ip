@@ -41,8 +41,8 @@ public class DoneCommand extends ComplexCommand {
             temp.doTask();
 
             // Display status message to user
-            ui.display("Nice! I've marked this task as done:");
-            ui.display("\t" + temp.toString());
+            ui.queueDisplay("Nice! I've marked this task as done:");
+            ui.queueDisplay("\t" + temp.toString());
 
         } catch (DukeInputException e) {
             ui.displayException(e);
