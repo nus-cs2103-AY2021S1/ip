@@ -31,8 +31,13 @@ public class DialogBox extends HBox {
 
     private DialogBox(double spacing, String text, Image img, BackgroundFill backgroundColor, Circle circle) {
         super(spacing);
+        assert text != null;
+        assert img != null;
+        assert backgroundColor != null;
+        assert circle != null;
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -42,7 +47,8 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
         displayPicture.setClip(circle);
-        this.setBackground(new Background(backgroundColor));
+        this.setBackground(
+                new Background(backgroundColor));
     }
 
     private void flip() {
@@ -53,12 +59,16 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image iv) {
+        assert text != null;
+        assert iv != null;
         return new DialogBox(10, text, iv,
                 new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY),
                 new Circle(48, 43, 45));
     }
 
     public static DialogBox getDukeDialog(String text, Image iv) {
+        assert text != null;
+        assert iv != null;
         var db = new DialogBox(10, text, iv,
                 new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY),
                 new Circle(45, 45, 45));

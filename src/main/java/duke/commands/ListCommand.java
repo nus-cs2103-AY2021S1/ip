@@ -21,6 +21,8 @@ public class ListCommand extends Command {
      * @throws DukeException when no task in list.
      */
     public String execute(TaskList tasklist, Storage storage) throws DukeException {
+        assert tasklist != null : "Tasklist cannot be null.";
+        assert storage != null : "Storage cannot be null.";
         if (tasklist.getSize() == 0) {
             throw new DukeException("there's nothing on the list yet.");
         } else {

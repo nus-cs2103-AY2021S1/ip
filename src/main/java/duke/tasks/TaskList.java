@@ -32,6 +32,7 @@ public class TaskList {
      * @param task task to be added into list of tasks.
      */
     public void add(Task task) {
+        assert tasks != null : "Tasklist cannot be null.";
         tasks.add(task);
     }
 
@@ -41,6 +42,7 @@ public class TaskList {
      * @param index position of task being deleted in the TaskList.
      */
     public void delete(int index) {
+        assert tasks != null : "Tasklist cannot be null.";
         List<Task> newList = this.tasks;
         tasks = newList.stream().filter((task) -> tasks.indexOf(task) != index)
                 .collect(Collectors.toList());
@@ -53,6 +55,7 @@ public class TaskList {
      * @return task at the index position in TaskList.
      */
     public Task get(int index) {
+        assert tasks != null : "Tasklist cannot be null.";
         return tasks.get(index);
     }
 
@@ -62,6 +65,7 @@ public class TaskList {
      * @return the number of tasks in the TaskList.
      */
     public int getSize() {
+        assert tasks != null : "Tasklist cannot be null.";
         return tasks.size();
     }
 
@@ -71,6 +75,7 @@ public class TaskList {
      * @return the entire lists of tasks.
      */
     public List<Task> getList() {
+        assert tasks != null : "Tasklist cannot be null.";
         return tasks;
     }
 }

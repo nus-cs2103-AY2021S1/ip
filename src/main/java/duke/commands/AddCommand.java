@@ -33,6 +33,9 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasklist, Storage storage) throws DukeException {
+        assert tasklist != null : "Tasklist cannot be null.";
+        assert storage != null : "Storage cannot be null.";
+        assert description != null : "Description cannot be null.";
         switch (c) {
         case TODO:
             tasklist.add(new Todo(description));
