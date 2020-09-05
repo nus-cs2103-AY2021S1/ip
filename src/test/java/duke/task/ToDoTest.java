@@ -31,10 +31,8 @@ public class ToDoTest {
     @Test
     public void testConstructor() {
         ToDo newTodo = new ToDo(description, false);
-        // Check default
         assertFalse(newTodo.isDone());
         newTodo = new ToDo(description, true);
-        // Check default
         assertTrue(newTodo.isDone());
     }
 
