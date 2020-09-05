@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.List;
 import java.util.Scanner;
 
 import duke.commands.CommandExecution;
@@ -7,6 +8,7 @@ import duke.commands.EnumCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
@@ -28,7 +30,10 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            results = new TaskList(storage.readFromFile());
+            results = new TaskList();
+            results = new TaskList();
+            List<Task> taskList = storage.readFromFile();
+            taskList.stream().forEach(task -> results.add(task));
         } catch (DukeException e) {
             ui.showError(e);
             results = new TaskList();
