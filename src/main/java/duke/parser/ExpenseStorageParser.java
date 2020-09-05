@@ -24,20 +24,6 @@ public class ExpenseStorageParser {
     private static final int STORAGE_LENGTH = 4;
 
     /**
-     * Converts an <code>Expense</code> to a <code>String</code> that will be saved onto the storage text file.
-     *
-     * @param expense the <code>Expense</code> that is to be converted.
-     * @return the <code>String</code> representing the <code>Expense</code>.
-     */
-    public String convertExpenseToStorage(Expense expense) {
-        String symbol = expense.getExpenseSymbol();
-        String description = DELIMITER + expense.getExpenseDescription();
-        String value = DELIMITER + expense.getPrintValue();
-        String datetime = DELIMITER + expense.getExpenseDate();
-        return symbol + description + value + datetime + "\n";
-    }
-
-    /**
      * Parses a <code>String</code> into <code>double</code> value.
      *
      * @param money the <code>String</code> to be parsed.

@@ -69,7 +69,7 @@ public class TaskStorage extends Storage {
     public void saveToDisk(TaskList taskList) throws DukeOperationException {
         StringBuilder sb = new StringBuilder();
         for (Task task : taskList) {
-            String storageTask = this.taskStorageParser.convertTaskToStorage(task);
+            String storageTask = task.convertToStorageString();
             sb.append(storageTask);
         }
         try {

@@ -39,13 +39,6 @@ public class TaskStorageParserTest {
 
     @ParameterizedTest
     @MethodSource("getArguments")
-    public void testConvertTaskToStorage(Task task, String actual) {
-        String converted = TASK_STORAGE_PARSER.convertTaskToStorage(task);
-        assertEquals(converted, actual + "\n");
-    }
-
-    @ParameterizedTest
-    @MethodSource("getArguments")
     public void convertStorageToTask_correctSymbol_success(
             Task actual, String storage) throws DukeParseException {
         Task converted = TASK_STORAGE_PARSER.convertStorageToTask(storage);

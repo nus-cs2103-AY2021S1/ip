@@ -106,15 +106,23 @@ public class CommandParser {
         return new AddEventTaskOperation(description, parsedTime, list);
     }
 
-    private DeleteOperation createDeleteOp(String[] commands, TaskList list) throws DukeParseException {
+    private DeleteOperation createDeleteOp(
+            String[] commands, ListManager listManager) throws DukeParseException {
         if (CommandType.DELETE.isNotValidLength(commands.length)) {
-            throw new DukeParseException("Ensure a number is passed after a delete command.");
+            throw new DukeParseException("Ensure a 'task' or 'expense' and number is passed.");
         }
-        if (!Utils.hasInteger(commands, 1)) {
-            throw new DukeParseException("Ensure a number is passed after a delete command.");
+        if (!Utils.hasInteger(commands, 2)) {
+            throw new DukeParseException("Ensure a number is present in a delete command.");
         }
-        int index = Integer.parseInt(commands[1]);
-        return new DeleteOperation(list, index);
+        int index = Integer.parseInt(commands[2]);
+
+        if (commands[1].equals(TASK)) {
+            return new DeleteOperation(listManager.getTaskList(), index);
+        } else if (commands[1].equals(EXPENSE)) {
+            return new DeleteOperation(listManager.getExpenseList(), index);
+        } else {
+            throw new DukeParseException("Ensure a 'task' or 'expense' is passed in.");
+        }
     }
 
     private FindOperation createFindOp(String[] commands, TaskList list) throws DukeParseException {
@@ -199,7 +207,7 @@ public class CommandParser {
         } else if (isCommand.apply(CommandType.EVENT)) {
             return createEventOp(commands, listManager.getTaskList());
         } else if (isCommand.apply(CommandType.DELETE)) {
-            return createDeleteOp(commands, listManager.getTaskList());
+            return createDeleteOp(commands, listManager);
         } else if (isCommand.apply(CommandType.FIND)) {
             return createFindOp(commands, listManager.getTaskList());
         } else if (isCommand.apply(CommandType.RECEIVE)) {

@@ -29,7 +29,7 @@ public class TaskListTest {
         assertEquals(taskList.addTask(TASK_THREE), TASK_THREE);
         assertEquals(taskList.getCurrCapacity(), 3);
 
-        assertEquals(taskList.removeTask(1), TASK_ONE);
+        assertEquals(taskList.remove(1), TASK_ONE);
         assertEquals(taskList.getCurrCapacity(), 2);
     }
 }

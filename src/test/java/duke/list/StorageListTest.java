@@ -11,7 +11,7 @@ public class StorageListTest {
     private static final ExpenseStub EXPENSE_TWO = new ExpenseStub("expense 2", 3);
 
     @Test
-    public void testTaskList() {
+    public void testStorageList() {
         ExpenseList expenseList = new ExpenseList();
         assertEquals(expenseList.getCurrCapacity(), 0);
 
@@ -20,5 +20,8 @@ public class StorageListTest {
 
         assertEquals(expenseList.addExpense(EXPENSE_TWO), EXPENSE_TWO);
         assertEquals(expenseList.getCurrCapacity(), 2);
+
+        assertEquals(expenseList.remove(1), EXPENSE_ONE);
+        assertEquals(expenseList.getCurrCapacity(), 1);
     }
 }

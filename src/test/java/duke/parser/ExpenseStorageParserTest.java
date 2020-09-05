@@ -35,13 +35,6 @@ public class ExpenseStorageParserTest {
 
     @ParameterizedTest
     @MethodSource("getArguments")
-    public void testConvertExpenseToStorage(Expense expense , String actual) {
-        String converted = EXPENSE_STORAGE_PARSER.convertExpenseToStorage(expense);
-        assertEquals(converted, actual + "\n");
-    }
-
-    @ParameterizedTest
-    @MethodSource("getArguments")
     public void convertStorageToExpense_correctSymbol_success(
             Expense actual, String storage) throws DukeParseException {
         Expense converted = EXPENSE_STORAGE_PARSER.convertStorageToExpense(storage);

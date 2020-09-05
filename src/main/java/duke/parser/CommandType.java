@@ -8,7 +8,7 @@ public enum CommandType {
     TODO("todo", 2),
     DEADLINE("deadline", 4),
     EVENT("event", 4),
-    DELETE("delete", 2),
+    DELETE("delete", 3),
     FIND("find", 2),
     PAY("pay", 5),
     RECEIVE("receive", 5);

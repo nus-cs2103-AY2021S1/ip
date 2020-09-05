@@ -68,7 +68,7 @@ public class ExpenseStorage extends Storage {
     public void saveToDisk(ExpenseList expenseList) throws DukeOperationException {
         StringBuilder sb = new StringBuilder();
         for (Expense expense : expenseList) {
-            String storageExpense = this.expenseStorageParser.convertExpenseToStorage(expense);
+            String storageExpense = expense.convertToStorageString();
             sb.append(storageExpense);
         }
         try {

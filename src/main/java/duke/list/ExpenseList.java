@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import duke.expense.Expense;
+import duke.storage.Storable;
 
 /** Represents the list of <code>Expenses</code>.*/
 public class ExpenseList implements Iterable<Expense>, DukeList {
@@ -46,6 +47,28 @@ public class ExpenseList implements Iterable<Expense>, DukeList {
     @Override
     public int getCurrCapacity() {
         return this.expenseList.size();
+    }
+
+    /**
+     * Checks if the given <code>index</code> is within the capacity of <code>ExpenseList</code>.
+     *
+     * @param index the value to be checked on.
+     * @return <code>true</code> if <code>index</code> is within the capacity.
+     */
+    @Override
+    public boolean isValidIndex(int index) {
+        return index <= expenseList.size() && index > 0;
+    }
+
+    /**
+     * Removes a specified <code>Expense</code> from <code>ExpenseList</code>.
+     *
+     * @param index the index of the <code>Expense</code> that is to be deleted.
+     * @return the <code>Expense</code> that has been removed.
+     */
+    @Override
+    public Storable remove(int index) {
+        return expenseList.remove(index - 1);
     }
 
     /**

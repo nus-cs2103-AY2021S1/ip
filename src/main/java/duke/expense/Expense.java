@@ -2,10 +2,11 @@ package duke.expense;
 
 import java.time.LocalDateTime;
 
+import duke.storage.Storable;
 import duke.utils.Datetime;
 
 /** Represents the user's expense. */
-public abstract class Expense {
+public abstract class Expense implements Storable {
     public static final String DATE_FORMAT_INPUT = "dd-MM-yyyy";
     public static final String DATE_FORMAT_OUTPUT = "MMM dd yyyy";
     public static final String EXPENSE_BREAK = "/on";
@@ -99,5 +100,18 @@ public abstract class Expense {
     protected String toStringSuffix() {
         String date = getExpenseDate();
         return String.format("%s (on: %s), %s", this.description, date, getPrintValue());
+    }
+
+    /**
+     * Converts this to a <code>String</code> that will be saved onto the storage text file.
+     *
+     * @return the <code>String</code> representing the <code>Expense</code>.
+     */
+    public String convertToStorageString() {
+        String symbol = getExpenseSymbol();
+        String description = Storable.DELIMITER + getExpenseDescription();
+        String value = Storable.DELIMITER + getPrintValue();
+        String datetime = Storable.DELIMITER + getExpenseDate();
+        return symbol + description + value + datetime + "\n";
     }
 }

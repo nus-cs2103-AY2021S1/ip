@@ -77,7 +77,11 @@ public class CommandParserTest {
         operation = commandParser.parse(command, listManager, storageManager);
         assertTrue(operation instanceof DoneOperation);
 
-        command = "delete 1";
+        command = "delete task 1";
+        operation = commandParser.parse(command, listManager, storageManager);
+        assertTrue(operation instanceof DeleteOperation);
+
+        command = "delete expense 1";
         operation = commandParser.parse(command, listManager, storageManager);
         assertTrue(operation instanceof DeleteOperation);
 
@@ -105,6 +109,8 @@ public class CommandParserTest {
                 Arguments.of("delete -1"),
                 Arguments.of("delete 0"),
                 Arguments.of("delete"),
+                Arguments.of("delete task"),
+                Arguments.of("delete expense"),
                 Arguments.of("find"),
                 Arguments.of("list")
         );

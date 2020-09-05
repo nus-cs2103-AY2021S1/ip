@@ -2,10 +2,15 @@ package duke.task;
 
 import java.util.Optional;
 
+import duke.storage.Storable;
+
 /** Represents the Task object. */
-public abstract class Task {
+public abstract class Task implements Storable {
     private static final String TICK = "\u2713";
     private static final String CROSS = "\u2717";
+
+    private static final String IS_COMPLETED = "1";
+    private static final String NOT_COMPLETED = "0";
 
     protected final String description;
     protected boolean isCompleted;
@@ -77,4 +82,21 @@ public abstract class Task {
      * @return an <code>Optional</code> containing the formatted <code>Datetime String</code>.
      */
     public abstract Optional<String> getTaskDatetime();
+
+    /**
+     * Converts this to a <code>String</code> that will be saved onto the storage text file.
+     * Overrides <code>Storable</code>.
+     *
+     * @return the <code>String</code> representing the <code>Task</code>.
+     */
+    @Override
+    public String convertToStorageString() {
+        String symbol = getTaskSymbol();
+        String completed = isTaskCompleted()
+                ? Storable.DELIMITER + IS_COMPLETED
+                : Storable.DELIMITER + NOT_COMPLETED;
+        String description = Storable.DELIMITER + getTaskDescription();
+        String datetime = getTaskDatetime().map(d -> Storable.DELIMITER + d).orElse("");
+        return symbol + completed + description + datetime + "\n";
+    }
 }

@@ -3,6 +3,7 @@ package duke.list;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import duke.storage.Storable;
 import duke.task.Task;
 
 /** Represents the list of <code>Tasks</code> that Duke stores in. */
@@ -43,6 +44,7 @@ public class TaskList implements Iterable<Task>, DukeList {
      * @param index the value to be checked on.
      * @return <code>true</code> if <code>index</code> is within the capacity.
      */
+    @Override
     public boolean isValidIndex(int index) {
         return index <= this.taskList.size() && index > 0;
     }
@@ -77,7 +79,8 @@ public class TaskList implements Iterable<Task>, DukeList {
      * @param index the index of the <code>Task</code> that is to be deleted.
      * @return the <code>Task</code> that has been removed.
      */
-    public Task removeTask(int index) {
+    @Override
+    public Storable remove(int index) {
         return this.taskList.remove(index - 1);
     }
 

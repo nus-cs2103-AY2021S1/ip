@@ -9,11 +9,7 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.utils.Datetime;
 
-/**
- * Represents a class that parses lines in a saved storage text file into actual <code>Task</code>.
- * This class also parses <code>Task</code> into <code>Strings</code>
- * that will be saved into the storage text file.
- */
+/** Represents a class that parses lines in a saved storage text file into actual <code>Task</code>. */
 public class TaskStorageParser {
     private static final String IS_COMPLETED = "1";
     private static final String NOT_COMPLETED = "0";
@@ -26,22 +22,6 @@ public class TaskStorageParser {
     private static final int COMPLETED_INDEX = 1;
     private static final int DESCRIPTION_INDEX = 2;
     private static final int DATETIME_INDEX = 3;
-
-    /**
-     * Converts a <code>Task</code> to a <code>String</code> that will be saved onto the storage text file.
-     *
-     * @param task the <code>Task</code> that is to be converted.
-     * @return the <code>String</code> representing the <code>Task</code>.
-     */
-    public String convertTaskToStorage(Task task) {
-        String symbol = task.getTaskSymbol();
-        String completed = task.isTaskCompleted()
-                ? DELIMITER + IS_COMPLETED
-                : DELIMITER + NOT_COMPLETED;
-        String description = DELIMITER + task.getTaskDescription();
-        String datetime = task.getTaskDatetime().map(d -> DELIMITER + d).orElse("");
-        return symbol + completed + description + datetime + "\n";
-    }
 
     private Todo createTodo(String[] storageTask, String storageTaskString) throws DukeParseException {
         if (storageTask.length < TODO_LENGTH) {
