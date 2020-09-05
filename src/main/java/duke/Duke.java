@@ -26,25 +26,43 @@ public class Duke {
     private SaveManager saveManager;
 
     /**
-     * Constructs new Duke object with default save file directory.
+     * Constructs new Duke object with default save file directory and default <code>OutputHandler</code>.
      * Defaults save file directory to "/data/data.txt".
+     * Defaults <code>OutputHandler</code> displays to <code>System.out</code>.
+     * Attempts to load the save file from the default directory.
      */
     public Duke() {
         this(Path.of("/data", "data.txt"));
     }
 
+    /**
+     * Constructs new Duke object with given save file directory and default <code>OutputHandler</code>.
+     * Default <code>OutputHandler</code> displays to <code>System.out</code>.
+     * Attempts to load the save file from the given directory.
+     *
+     * @param filePath Save file directory.
+     */
     public Duke(Path filePath) {
         this(filePath, new OutputHandler());
     }
 
+    /**
+     * Constructs new Duke object with custom <code>OutputHandler</code> and default save file directory.
+     * Defaults save file directory to "/data/data.txt".
+     * Attempts to load the save file from the default directory.
+     *
+     * @param outputHandler Custom <code>OutputHandler</code>.
+     */
     public Duke(OutputHandler outputHandler) {
         this(Path.of("/data", "data.txt"), outputHandler);
     }
 
     /**
-     * Constructs new Duke object with custom save file directory.
+     * Constructs new Duke object with custom save file directory and custom <code>OutputHandler</code>.
+     * Attempts to load the save file from the given directory.
      *
      * @param filePath Path object representing save file directory.
+     * @param outputHandler Custom <code>OutputHandler</code>.
      */
     public Duke(Path filePath, OutputHandler outputHandler) {
         // Initialise properties
@@ -99,6 +117,13 @@ public class Duke {
 
     }
 
+    /**
+     * Executes a command parsed from a given user input.
+     * This method is meant to be used with the GUI version of Duke where input and outputs are handled differently.
+     *
+     * @param userInput Given user input processed by other modules.
+     * @return Boolean representing if the command has been parsed as a "bye" command.
+     */
     public boolean processOneCommand(String userInput) {
 
         try {
@@ -120,19 +145,23 @@ public class Duke {
 
     }
 
-    public void greet() {
+    /**
+     * Runs through processes to be done after loading data.
+     * Currently just asks UI to send greeting to user.
+     */
+    public void initialize() {
         this.ui.displayGreet();
     }
 
     /**
-     * Initializes software.
+     * Initializes the CLI version of the app.
      *
-     * @param args No args required.
+     * @param args CLI arguments. None required.
      */
     public static void main(String[] args) {
         // Initialize Duke with save data and send welcome message
         Duke duke = new Duke(Path.of("data/data.txt"));
-        duke.greet();
+        duke.initialize();
 
         // Start input loop
         duke.run();

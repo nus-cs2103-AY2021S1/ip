@@ -45,19 +45,29 @@ public class Ui {
     }
 
     /**
-     * Passes a string to <code>outputHandler</code>.
+     * Passes a string to <code>outputHandler</code>, to be printed when flushed.
      * @param output String to be printed by <code>inputHandler</code>
      */
     public void queueDisplay(String output) {
         this.outputHandler.storeOutput(output);
     }
 
+    /**
+     * Prints all messages stored in <code>outputHandler</code> buffer.
+     * Does nothing if no messages in buffer.
+     */
     public void display() {
         if (!this.outputHandler.isEmpty()) {
             this.outputHandler.flush();
         }
     }
 
+    /**
+     * Immediately prints a given string using <code>outputHandler</code>.
+     * Buffer of <code>outputHandler</code> does not change.
+     *
+     * @param output String to be printed.
+     */
     public void displayNow(String output) {
         this.outputHandler.printNow(output);
     }

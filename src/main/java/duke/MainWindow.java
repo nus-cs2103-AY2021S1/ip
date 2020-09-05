@@ -11,6 +11,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+/**
+ * Controller for <code>Node</code> that represents the frame of the main window of the application.
+ */
 public class MainWindow extends AnchorPane {
 
     @FXML
@@ -22,39 +25,80 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
+    /**
+     * Reference to <code>DukeGui</code> class that manages the main logic.
+     */
     private DukeGui dukeGui;
 
+    /**
+     * Sets <code>dukeGui</code>.
+     *
+     * @param d Given <code>DukeGui</code> object.
+     */
     public void setDukeGui(DukeGui d) {
         dukeGui = d;
     }
 
+    /**
+     * User avatar image.
+     */
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+
+    /**
+     * Duke avatar image.
+     */
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/galaxybrain.jpg"));
 
+    /**
+     * Default font for user.
+     */
     private Font userFont = Font.font("Courier New", 12);
+
+    /**
+     * Default font for Duke.
+     */
     private Font dukeFont = Font.font("Consolas", 12);
 
+    /**
+     * Initialization of <code>Listener</code> that sets the window to the latest messages.
+     */
     @FXML
     private void initialize() {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates a <code>DialogBox</code> containing the user's input and passes the input for processing.
+     * User input is then cleared.
+     *
+     * This method is triggered on user entering and sending a new user input.
+     *
+     * If a "bye" command is parsed and executed, the program will exit.
      */
     @FXML
     private void handleUserInput() {
+        // Gets user input from text field
         String input = userInput.getText();
+
+        // Echos user input in GUI
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage, userFont)
         );
+
+        // Close application if exit is detected
         if (dukeGui.handleUserInput(input)) {
             Platform.exit();
         }
+
+        // Clear user input from text field.
         userInput.clear();
     }
 
+    /**
+     * Creates a <code>DialogBox</code> for a given response from user.
+     *
+     * @param response Generated response from Duke's command handling modules.
+     */
     public void handleDukeResponse(String response) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage, dukeFont)
