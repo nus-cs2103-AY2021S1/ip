@@ -34,6 +34,7 @@ public class Parser {
             if (inputBreakdown.length < 2) {
                 throw new DukeException("Error! Note the syntax: find [keyword]");
             } else {
+                assert inputBreakdown.length > 1;
                 String keyword = inputBreakdown[1];
                 return new FindCommand(keyword);
             }
@@ -41,6 +42,7 @@ public class Parser {
             if (inputBreakdown.length < 2) {
                 throw new DukeException("Error! Note the syntax: done [task number]");
             } else {
+                assert inputBreakdown.length > 1;
                 String taskNumber = inputBreakdown[1];
                 return new DoneCommand(taskNumber);
             }
@@ -48,6 +50,7 @@ public class Parser {
             if (inputBreakdown.length < 2) {
                 throw new DukeException("Error! Note the syntax: todo [description]");
             } else {
+                assert inputBreakdown.length > 1;
                 String description = inputBreakdown[1];
                 return new TodoCommand(description);
             }
@@ -59,6 +62,7 @@ public class Parser {
                 if (deadlineBreakdown.length < 2) {
                     throw new DukeException("Error! Note the syntax: deadline [description] /by [date]");
                 } else {
+                    assert inputBreakdown.length > 1;
                     String description = deadlineBreakdown[0];
                     String by = deadlineBreakdown[1];
                     return new DeadlineCommand(description, parseDateTime(by));
@@ -72,6 +76,7 @@ public class Parser {
                 if (eventBreakdown.length < 2) {
                     throw new DukeException("Error! Note the syntax: event [description] /at [date]");
                 } else {
+                    assert inputBreakdown.length > 1;
                     String description = eventBreakdown[0];
                     String at = eventBreakdown[1];
                     return new EventCommand(description, parseDateTime(at));
@@ -81,6 +86,7 @@ public class Parser {
             if (inputBreakdown.length < 2) {
                 throw new DukeException("Error! Note the syntax: delete [task number]");
             } else {
+                assert inputBreakdown.length > 1;
                 String taskNumber = inputBreakdown[1];
                 return new DeleteCommand(taskNumber);
             }
