@@ -2,3 +2,6 @@ T|1|sleep
 E|0|project meeting|30/3/2019 1412
 D|0|concert preparation|14/12/2020 1312
 D|1|project|12/12/2012 1212
+T|0|eat mala project
+E|0|malay project|12/12/2012 1212
+T|0|meet someone
