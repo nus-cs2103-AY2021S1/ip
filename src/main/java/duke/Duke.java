@@ -56,6 +56,7 @@ public class Duke {
     }
 
     protected String getResponse(String input) throws DukeException {
+        storage.save(TaskList.tasks);
         return parser.parseInputs(input);
     }
 }
