@@ -5,6 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import duke.command.Command;
+import duke.command.CommandType;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
@@ -37,15 +38,15 @@ public class Parser {
      */
     public static Command parseCommand(String fullCommand) throws DukeException {
         String[] splitCommand = fullCommand.split(" ", 2);
-        String action = splitCommand[0];
+        CommandType type = CommandType.getCommandType(splitCommand[0]);
 
         boolean hasOnlyOneWord = splitCommand.length < 2;
-        boolean isMissingTaskDescription = isTask(action) && hasOnlyOneWord;
-        boolean isMissingTaskNumber = isDoneOrDeleteCommand(action) && hasOnlyOneWord;
-        boolean isMissingFindKeyword = action.equals("find") && hasOnlyOneWord;
+        boolean isMissingTaskDescription = isTask(type) && hasOnlyOneWord;
+        boolean isMissingTaskNumber = isDoneOrDeleteCommand(type) && hasOnlyOneWord;
+        boolean isMissingFindKeyword = type == CommandType.FIND && hasOnlyOneWord;
 
         if (isMissingTaskDescription) {
-            throw new DukeMissingTaskDescriptionException(action);
+            throw new DukeMissingTaskDescriptionException(splitCommand[0]);
         }
         if (isMissingTaskNumber) {
             throw new DukeMissingTaskNumberException();
@@ -56,19 +57,19 @@ public class Parser {
 
         Command command;
         try {
-            switch (action) {
-            case "bye":
+            switch (type) {
+            case BYE:
                 command = new ExitCommand();
                 break;
-            case "list":
+            case LIST:
                 command = new ListCommand();
                 break;
-            case "todo": {
+            case TODO: {
                 String description = splitCommand[1];
                 command = new TodoCommand(description);
                 break;
             }
-            case "deadline": {
+            case DEADLINE: {
                 String[] splitDeadline = splitCommand[1].split("/by");
                 boolean isMissingKeyword = splitDeadline.length < 2;
                 if (isMissingKeyword) {
@@ -80,7 +81,7 @@ public class Parser {
                 command = new DeadlineCommand(description, date);
                 break;
             }
-            case "event": {
+            case EVENT: {
                 String[] splitEvent = splitCommand[1].split("/at");
                 boolean isMissingKeyword = splitEvent.length < 2;
                 if (isMissingKeyword) {
@@ -92,17 +93,17 @@ public class Parser {
                 command = new EventCommand(description, date);
                 break;
             }
-            case "done": {
+            case DONE: {
                 String taskNumber = splitCommand[1];
                 command = new DoneCommand(taskNumber);
                 break;
             }
-            case "delete": {
+            case DELETE: {
                 String taskNumber = splitCommand[1];
                 command = new DeleteCommand(taskNumber);
                 break;
             }
-            case "find":
+            case FIND:
                 String keyword = splitCommand[1];
                 String[] keywords = keyword.split(" ");
                 command = new FindCommand(keywords);
@@ -117,13 +118,13 @@ public class Parser {
         }
     }
 
-    private static boolean isTask(String action) {
-        return action.equals("todo")
-                || action.equals("deadline") || action.equals("event");
+    private static boolean isTask(CommandType type) {
+        return type == CommandType.TODO
+                || type == CommandType.DEADLINE || type == CommandType.EVENT;
     }
 
-    private static boolean isDoneOrDeleteCommand(String action) {
-        return action.equals("done") || action.equals("delete");
+    private static boolean isDoneOrDeleteCommand(CommandType type) {
+        return type == CommandType.DONE || type == CommandType.DELETE;
     }
 
     /**

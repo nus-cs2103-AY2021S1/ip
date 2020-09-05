@@ -2,4 +2,4 @@ D | 1 | finish assignment | 2020-08-28
 T | 1 | math tutorial
 E | 1 | birthday party | 2020-08-30
 T | 0 | read book
-T | 0 | buy book
+T | 1 | buy book
