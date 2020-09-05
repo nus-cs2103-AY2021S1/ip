@@ -22,12 +22,12 @@ public class DeadlineTest {
 
     @Test
     public void testToString() {
-        assertEquals(DEADLINE_ONE.toString(), "[D][\u2717] test (by: Dec 12 2020 06:00 am)");
-        assertEquals(DEADLINE_TWO.toString(), "[D][\u2713] test 2 (by: Dec 12 2020 06:00 am)");
+        assertEquals(DEADLINE_ONE.toString(), "[D][\u2717] test (by: Dec 12 2020 06:00)");
+        assertEquals(DEADLINE_TWO.toString(), "[D][\u2713] test 2 (by: Dec 12 2020 06:00)");
     }
 
     @Test
     public void testGetTaskDatetime() {
-        assertEquals(DEADLINE_ONE.getTaskDatetime(), Optional.of("Dec 12 2020 06:00 am"));
+        assertEquals(DEADLINE_ONE.getTaskDatetime(), Optional.of("Dec 12 2020 06:00"));
     }
 }

@@ -27,13 +27,13 @@ public class StorageParserTest {
                 Arguments.of(new Todo("return", false),
                         "T;0;return"),
                 Arguments.of(new Deadline("complete assignment", true, dateTimeOne),
-                        "D;1;complete assignment;May 30 2010 02:20 pm"),
+                        "D;1;complete assignment;May 30 2010 14:20"),
                 Arguments.of(new Deadline("long long long description", false, dateTimeTwo),
-                        "D;0;long long long description;Aug 08 2020 08:08 am"),
+                        "D;0;long long long description;Aug 08 2020 08:08"),
                 Arguments.of(new Event("short event", true, dateTimeTwo),
-                        "E;1;short event;08:08 am"),
+                        "E;1;short event;08:08"),
                 Arguments.of(new Event("return book", false, dateTimeOne),
-                        "E;0;return book;02:20 pm")
+                        "E;0;return book;14:20")
         );
     }
 

@@ -12,7 +12,7 @@ import duke.utils.Datetime;
 public class Event extends Task {
     public static final String EVENT_SYMBOL = "E";
     public static final String TIME_FORMAT_INPUT = "HHmm";
-    public static final String TIME_FORMAT_OUTPUT = "hh:mm a";
+    public static final String TIME_FORMAT_OUTPUT = "HH:mm";
     public static final String EVENT_BREAK = "/at";
 
     private final Datetime time;

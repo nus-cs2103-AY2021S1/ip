@@ -22,12 +22,12 @@ public class EventTest {
 
     @Test
     public void testToString() {
-        assertEquals(EVENT_ONE.toString(), "[E][\u2717] test (at: 06:00 am)");
-        assertEquals(EVENT_TWO.toString(), "[E][\u2713] test 2 (at: 06:00 am)");
+        assertEquals(EVENT_ONE.toString(), "[E][\u2717] test (at: 06:00)");
+        assertEquals(EVENT_TWO.toString(), "[E][\u2713] test 2 (at: 06:00)");
     }
 
     @Test
     public void testGetTaskDatetime() {
-        assertEquals(EVENT_ONE.getTaskDatetime(), Optional.of("06:00 am"));
+        assertEquals(EVENT_ONE.getTaskDatetime(), Optional.of("06:00"));
     }
 }

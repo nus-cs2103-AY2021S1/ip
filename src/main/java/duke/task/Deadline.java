@@ -12,7 +12,7 @@ import duke.utils.Datetime;
 public class Deadline extends Task {
     public static final String DEADLINE_SYMBOL = "D";
     public static final String DATE_FORMAT_INPUT = "dd-MM-yyyy HHmm";
-    public static final String DATE_FORMAT_OUTPUT = "MMM dd yyyy hh:mm a";
+    public static final String DATE_FORMAT_OUTPUT = "MMM dd yyyy HH:mm";
     public static final String DEADLINE_BREAK = "/by";
 
     private final Datetime datetime;
