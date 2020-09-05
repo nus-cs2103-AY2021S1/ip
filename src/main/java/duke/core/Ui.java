@@ -49,9 +49,11 @@ public class Ui {
     public String makeBlock(String string) {
         String[] strings = string.split("\n");
         String result = INDENTATION + DIVIDER + "\n";
+
         for (int i = 0; i < strings.length; i = i + 1) {
             result = result + INDENTATION + strings[i] + "\n";
         }
+
         result = result + INDENTATION + DIVIDER + "\n";
         return result;
     }
@@ -79,7 +81,7 @@ public class Ui {
      *
      * @param exception The exception corresponding to the problem.
      */
-    public String handle(Exception exception) {
+    public String handleException(Exception exception) {
         //out.println(makeBlock(exception.getMessage()));
         return makeBlock(exception.getMessage());
     }
@@ -90,8 +92,10 @@ public class Ui {
      * @param task The task to be added.
      * @param size The number of tasks after the execution.
      */
-    public String showAdd(Task task, int size) {
-        String result = "Got it. I have added this task:\n  " + task.toString() + "\nNow you have " + size + " tasks in the list.";
+    public String getAddMessage(Task task, int size) {
+        String result = "Got it. I have added this task:\n  "
+                + task.toString() + "\nNow you have "
+                + size + " tasks in the list.";
         //System.out.println(makeBlock(result));
         //out.println(makeBlock(result));
         return makeBlock(result);
@@ -102,7 +106,7 @@ public class Ui {
      *
      * @param taskList The task list.
      */
-    public String showList(TaskList taskList) {
+    public String getTaskListMessage(TaskList taskList) {
         //out.println(makeBlock(taskList.toString()));
         return makeBlock(taskList.toString());
     }
@@ -113,9 +117,10 @@ public class Ui {
      * @param task The task to be marked as completed.
      * @param count The count of the task to be completed.
      */
-    public String showDone(Task task, int count) {
-        //out.println(makeBlock("Nice! I have marked this task as done:\n" + String.valueOf(count) + "." + task.toString()));
-        return makeBlock("Nice! I have marked this task as done:\n" + String.valueOf(count) + "." + task.toString());
+    public String getDoneMessage(Task task, int count) {
+        return makeBlock("Nice! I have marked this task as done:\n"
+                + String.valueOf(count)
+                + "." + task.toString());
     }
 
     /**
@@ -125,7 +130,7 @@ public class Ui {
      * @param count The count of the task.
      * @param size The number of tasks in the task list.
      */
-    public String showDelete(Task task, int count, int size) {
+    public String getDeleteMessage(Task task, int count, int size) {
         /*
         out.println(makeBlock("Noted. I have removed this task:\n" +
                 String.valueOf(count) +
@@ -133,7 +138,10 @@ public class Ui {
                 "\nNow you have " + size + " tasks in the list."));
         */
         return makeBlock(
-                "Noted. I have removed this task:\n" + String.valueOf(count) + "." + task.toString() + "\nNow you have " + size + " tasks in the list.");
+                "Noted. I have removed this task:\n"
+                        + String.valueOf(count) + "."
+                        + task.toString() + "\nNow you have "
+                        + size + " tasks in the list.");
     }
 
     public String showLoad() {

@@ -6,12 +6,13 @@ import java.io.IOException;
 import duke.command.Command;
 import duke.core.Parser;
 import duke.core.Result;
-import duke.core.Ui;
 import duke.core.Storage;
 import duke.core.TaskList;
+import duke.core.Ui;
 import duke.handle.CommandNotFoundException;
-import duke.handle.TaskNotFoundException;
 import duke.handle.LoadingException;
+import duke.handle.TaskNotFoundException;
+
 import javafx.scene.image.Image;
 
 /**
@@ -27,32 +28,27 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
     private static final String FILE_PATH = "data/duke.txt";
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Takes in the path of the local record, and creates a duke bot to interact with
      * the user.
      */
-    public Duke() throws FileNotFoundException, LoadingException {
+    public Duke() throws FileNotFoundException, LoadingException, IOException {
         ui = new Ui();
         storage = new Storage(FILE_PATH);
         try {
             taskList = new TaskList(storage.readRecord());
         } catch (FileNotFoundException fileNotFoundException) {
             taskList = new TaskList();
-            try {
-                storage.writeRecord(taskList);
-            } catch (IOException ioException) {
-            }
+
+            storage.writeRecord(taskList);
+
             throw fileNotFoundException;
         } catch (LoadingException loadingException) {
-            //ui.handle(loadingException);
             taskList = new TaskList();
-            try {
-                storage.writeRecord(taskList);
-            } catch (IOException ioException) {
-            }
+
+            storage.writeRecord(taskList);
+
             throw loadingException;
         }
     }
@@ -61,20 +57,14 @@ public class Duke {
         try {
             Command parsedCommand = Parser.parseCommand(command);
             return parsedCommand.excecute(taskList, ui, storage);
-            //isContinuing = parsedCommand.isContinuing();
-        } catch (CommandNotFoundException commandNotFoundexException) {
+        } catch (CommandNotFoundException commandNotFoundException) {
             //System.out.println(commandNotFoundexException.getMessage());
-            return new Result(ui.handle(commandNotFoundexException), true);
+            return new Result(ui.handleException(commandNotFoundException), true);
         } catch (TaskNotFoundException taskNotFoundException) {
-            return new Result(ui.handle(taskNotFoundException), true);
+            return new Result(ui.handleException(taskNotFoundException), true);
         } catch (IOException ioException) {
-            return new Result(ui.handle(ioException), true);
+            return new Result(ui.handleException(ioException), true);
         }
-
-        //Command parsedCommand = Parser.parseCommand(command);
-        //return parsedCommand.excecute(taskList, ui, storage);
-
-        //return "Smith heard: " + string;
     }
 
     public Ui getUi() {

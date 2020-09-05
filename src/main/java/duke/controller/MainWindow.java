@@ -1,5 +1,8 @@
 package duke.controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import duke.Duke;
 import duke.control.DialogueBox;
 import duke.core.Result;
@@ -14,8 +17,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.io.FileNotFoundException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -63,6 +64,10 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().addAll(
                     DialogueBox.getDukeDialogueBox(loadingException.getMessage(), dukeImage)
             );
+        } catch (IOException ioException) {
+            dialogContainer.getChildren().addAll(
+                    DialogueBox.getDukeDialogueBox(ioException.getMessage(), dukeImage)
+            );
         } finally {
             dialogContainer.getChildren().addAll(
                     DialogueBox.getDukeDialogueBox(duke.getUi().showGreeting(), dukeImage)
@@ -85,7 +90,6 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         if (!(response.isContinuing())) {
 
-            //Stage stage = (Stage) this.getScene().getWindow();
             PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
             pauseTransition.setOnFinished((event) -> {
                 stage.close();

@@ -34,6 +34,7 @@ public enum CommandType {
      */
     public static String[] getTypeName(CommandType ... types) {
         String[] typeNames = new String[10];
+
         for (int i = 0; i < types.length; i = i + 1) {
             typeNames[i] = types[i].type;
         }

@@ -37,6 +37,6 @@ public class AddCommand extends Command {
         taskList.add(task);
         storage.writeRecord(taskList);
 
-        return new Result(ui.showAdd(task, taskList.getSize()), this.isContinuing());
+        return new Result(ui.getAddMessage(task, taskList.getSize()), this.isContinuing());
     }
 }
