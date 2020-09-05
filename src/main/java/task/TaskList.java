@@ -51,21 +51,25 @@ public class TaskList {
             } else {
                 // Add and report that the todo is added
                 String[] userCommandSplit = userCommand.split(" ", 2);
+                assert userCommandSplit.length == 2 : "Something went wrong when splitting user input.";
                 String description = userCommandSplit[1];
                 Task newTask = new Todo(description);
                 this.tasks.add(newTask);
+                assert this.tasks.size() != 0 : "Task list is empty.";
                 Storage.appendToFile(newTask.toString());
                 return TaskDescription.addedTaskDescription(this.tasks, newTask);
             }
         } else if (userCommand.contains("deadline")) { // Deadline
             try {
                 String[] userCommandSplit = userCommand.split(" /by ");
+                assert userCommandSplit.length == 2 : "Something went wrong when splitting user input.";
                 String description = userCommandSplit[0].split(" ", 2)[1];
                 String by = userCommandSplit[1];
 
                 // Add and report that the deadline is added
                 Task newTask = new Deadline(description, by);
                 this.tasks.add(newTask);
+                assert this.tasks.size() != 0 : "Task list is empty.";
                 Storage.appendToFile(newTask.toString());
                 return TaskDescription.addedTaskDescription(this.tasks, newTask);
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -73,14 +77,17 @@ public class TaskList {
                 return DukeException.invalidDeadline();
             }
         } else { // Event
+            assert userCommand.contains("deadline") : "User command does not contain deadline.";
             try {
                 String[] userCommandSplit = userCommand.split(" /at ");
+                assert userCommandSplit.length == 2 : "Something went wrong when splitting user input.";
                 String description = userCommandSplit[0].split(" ", 2)[1];
                 String at = userCommandSplit[1];
 
                 // Add and report that the event is added
                 Task newTask = new Event(description, at);
                 this.tasks.add(newTask);
+                assert this.tasks.size() != 0 : "Task list is empty.";
                 Storage.appendToFile(newTask.toString());
                 return TaskDescription.addedTaskDescription(this.tasks, newTask);
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -109,6 +116,7 @@ public class TaskList {
             if (userCommandSplit.length != 2) {
                 return DukeException.invalidCommand();
             } else {
+                assert userCommandSplit.length == 2 : "Something went wrong when splitting user input.";
                 // Take serial number e.g 1 "done 1"
                 int serialNumber = Integer.parseInt(userCommandSplit[1]);
                 int index = serialNumber - 1;
@@ -148,13 +156,16 @@ public class TaskList {
             if (userCommandSplit.length != 2) {
                 return DukeException.invalidCommand();
             } else {
+                assert userCommandSplit.length == 2 : "Something went wrong when splitting user input.";
                 // Take serial number e.g 1 "delete 1" and delete
                 int serialNumber = Integer.parseInt(userCommandSplit[1]);
                 int index = serialNumber - 1;
 
                 // Mark as deleted and report that the task is deleted
                 Task deletedTask = this.tasks.get(index);
+                int initialSize = this.tasks.size();
                 this.tasks.remove(index);
+                assert this.tasks.size() == initialSize - 1 : "Something went wrong while deleting task.";
                 Storage.deleteFromFile(deletedTask.toString());
                 return TaskDescription.deletedTaskDescription(this.tasks, deletedTask);
             }
@@ -176,6 +187,7 @@ public class TaskList {
         if (userCommandSplit.length != 2) {
             return DukeException.invalidCommand();
         } else {
+            assert userCommandSplit.length == 2 : "Something went wrong when splitting user input.";
             String keyword = userCommandSplit[1];
             // Make a copy of the existing tasks and remove a task if keyword is not found
             List<Task> tasksCopy = this.tasks;

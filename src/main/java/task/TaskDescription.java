@@ -94,6 +94,7 @@ public class TaskDescription {
             System.out.println("\t____________________________________________________________\n");
             return result;
         } else { // No items found with find command
+            assert searchedTasks.size() == 0 : searchedTasks;
             System.out.println("\t____________________________________________________________\n");
             System.out.println("\tNo items with the finding keyword specified found in list.\n");
             System.out.println("\t____________________________________________________________\n");
