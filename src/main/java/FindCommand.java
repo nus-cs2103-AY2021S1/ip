@@ -20,6 +20,7 @@ public class FindCommand extends Command {
         } catch (DukeNoMatchesExcpetion e) {
             message = e.getMessage();
         }
+        assert tasklist.numOfTasks() > 0;
         return message;
     }
 }
