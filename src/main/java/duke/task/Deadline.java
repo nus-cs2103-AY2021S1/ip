@@ -27,7 +27,14 @@ public class Deadline extends Task {
         return this.deadline;
     }
 
+    /**
+     * Creates a Deadline object
+     * @param task the task as per user input
+     * @param deadline the deadline as per user input
+     * @return a Deadline object
+     */
     public static Deadline createDeadline(String task, LocalDate deadline) {
+        assert deadline != null : "Assertion Failure: Deadline is Null";
         return new Deadline(task, deadline);
     }
 
