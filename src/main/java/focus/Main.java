@@ -14,8 +14,6 @@ import javafx.stage.Stage;
 public class Main extends Application {
     /** Stage object to allow MainWindow class to access. */
     private static Stage stage;
-    /** Creates Focus. */
-    private final Focus focus = new Focus();
 
     /**
      * Gets the stage.
@@ -34,8 +32,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         Main.stage = stage;
+        Focus focus = new Focus();
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            String mainWindowFxml = "/view/MainWindow.fxml";
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(mainWindowFxml));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setTitle("focus.");

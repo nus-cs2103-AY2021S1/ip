@@ -64,26 +64,33 @@ public class Parser {
     public static Task textToTask(String text) {
         String[] task = text.split("\\|");
         Task existingTask = null;
-        if ("T".equals(task[0])) {
+        String pattern = "yyyy-MM-dd'T'HH:mm";
+        switch (task[0]) {
+        case "T":
             existingTask = new ToDo(task[2]);
             if (task[1].equals("1")) {
                 existingTask.markAsDone();
             }
-        } else if ("D".equals(task[0])) {
-            DateTimeFormatter deadlineFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            return existingTask;
+        case "D":
+            DateTimeFormatter deadlineFormatter = DateTimeFormatter.ofPattern(pattern);
             LocalDateTime by = LocalDateTime.parse(task[3], deadlineFormatter);
             existingTask = new Deadline(task[2], by);
             if (task[1].equals("1")) {
                 existingTask.markAsDone();
             }
-        } else if ("E".equals(task[0])) {
-            DateTimeFormatter eventFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            return existingTask;
+        case "E":
+            DateTimeFormatter eventFormatter = DateTimeFormatter.ofPattern(pattern);
             LocalDateTime at = LocalDateTime.parse(task[3], eventFormatter);
             existingTask = new Event(task[2], at);
             if (task[1].equals("1")) {
                 existingTask.markAsDone();
             }
+            return existingTask;
+        default:
+            assert false : "Program should not reach here.";
+            return existingTask;
         }
-        return existingTask;
     }
 }

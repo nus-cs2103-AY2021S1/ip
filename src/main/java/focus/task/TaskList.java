@@ -125,19 +125,67 @@ public class TaskList {
     }
 
     /**
+     * Checks the list if index is last index of task list.
+     *
+     * @param index Index of task.
+     * @return String representation of list of tasks.
+     */
+    private String checkList(int index) {
+        String printing = "";
+        printing += "\tHere are the tasks on your list:\n\t";
+        int number = index + 1;
+        if (index == taskList.size() - 1) {
+            printing += "" + number + ". " + taskList.get(index);
+        } else {
+            printing += "" + number + ". " + taskList.get(index) + "\n\t";
+        }
+        return printing;
+    }
+
+    /**
      * Lists all the tasks on task list.
      *
      * @return String representation of list of tasks.
      */
     public String listTasks() {
         String printing = "";
-        printing += "\tHere are the tasks on your list:\n\t";
         for (int i = 0; i < taskList.size(); i++) {
-            int number = i + 1;
-            if (i == taskList.size() - 1) {
-                printing += "" + number + ". " + taskList.get(i);
-            } else {
-                printing += "" + number + ". " + taskList.get(i) + "\n\t";
+            printing = checkList(i);
+        }
+        return printing;
+    }
+
+    /**
+     * Checks if there are matches for tasks according to the keyword user input.
+     *
+     * @param keyword Keyword provided by user.
+     * @return True if can find tasks that match keyword or false if cannot.
+     */
+    private boolean canFindTasks(String keyword) {
+        boolean canFind = false;
+        for (Task task : taskList) {
+            if (task.getTaskName().contains(keyword)) {
+                canFind = true;
+                break;
+            }
+        }
+        return canFind;
+    }
+
+    /**
+     * Prints the found tasks according to the keyword user input.
+     *
+     * @param keyword Keyword provided by user.
+     * @return String representation of found tasks.
+     */
+    private String printFoundTasks(String keyword) {
+        String printing = "";
+        int index = 1;
+        printing += "\tHere are the matching tasks on your list:\n\t";
+        for (Task task : taskList) {
+            if (task.getTaskName().contains(keyword)) {
+                printing += "" + index + ". " + task + "\n\t";
+                index++;
             }
         }
         return printing;
@@ -150,23 +198,10 @@ public class TaskList {
      * @return String representation of found tasks.
      */
     public String findTasks(String keyword) {
-        boolean canFind = false;
         String printing = "";
-        for (Task task : taskList) {
-            if (task.getTaskName().contains(keyword)) {
-                canFind = true;
-                break;
-            }
-        }
+        boolean canFind = canFindTasks(keyword);
         if (canFind) {
-            int index = 1;
-            printing += "\tHere are the matching tasks on your list:\n\t";
-            for (Task task : taskList) {
-                if (task.getTaskName().contains(keyword)) {
-                    printing += "" + index + ". " + task + "\n\t";
-                    index++;
-                }
-            }
+            printing = printFoundTasks(keyword);
         } else {
             return "\tSorry, there are no tasks that match your keyword!\n";
         }

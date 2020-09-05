@@ -114,9 +114,9 @@ public class AddCommand extends Command {
             throw new InvalidTaskDateException();
         }
 
-        String formattedBy = by.replace(' ', 'T');
         LocalDateTime date;
         try { // user did not input correct format of date of deadline task
+            String formattedBy = by.replace(' ', 'T');
             date = LocalDateTime.parse(formattedBy);
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateException();
@@ -160,9 +160,9 @@ public class AddCommand extends Command {
             throw new InvalidTaskDateException();
         }
 
-        String formattedAt = at.replace(' ', 'T');
         LocalDateTime date;
         try { // user did not input correct format of date of event task
+            String formattedAt = at.replace(' ', 'T');
             date = LocalDateTime.parse(formattedAt);
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateException();

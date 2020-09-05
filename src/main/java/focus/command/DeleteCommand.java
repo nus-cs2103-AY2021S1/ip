@@ -37,7 +37,9 @@ public class DeleteCommand extends Command {
         }
 
         int index = Integer.parseInt(indexString);
-        if ((index <= 0) || (index > taskList.getSize())) {
+        boolean indexIsLessThanZero = index <= 0;
+        boolean indexIsMoreThanListSize = index > taskList.getSize();
+        if (indexIsLessThanZero || indexIsMoreThanListSize) {
             throw new InvalidTaskNumberException();
         }
         return taskList.deleteTask(index, storage);
