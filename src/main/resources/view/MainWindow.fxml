@@ -32,7 +32,8 @@
                 onAction="#handleUserInput" 
                 prefHeight="40.0" 
                 prefWidth="70.0" 
-                text="Send" />
+                text="Send"
+                AnchorPane.bottomAnchor="1.0" />
         <ScrollPane 
                 fx:id="scrollPane" 
                 hbarPolicy="NEVER" 
