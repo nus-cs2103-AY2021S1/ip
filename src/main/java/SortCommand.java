@@ -11,7 +11,7 @@ public class SortCommand extends Command {
     @Override
     String execute(TaskList tasks, UI ui) {
             ArrayList<Task> sortedTasks = tasks.sortTask();
-            String dukeResponse = ui.sortTasks();
+            String dukeResponse = ui.sortTasks(sortedTasks);
             return dukeResponse;
 
     }

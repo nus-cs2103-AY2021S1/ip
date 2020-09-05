@@ -90,7 +90,14 @@ public class UI {
         }
     }
 
-    protected String sortTasks() {
-        return "\nYour Tasks has been sorted! :)\n";
+    protected String sortTasks(ArrayList<Task> sortedTasks) {
+        String str1 = "\nYour Tasks has been sorted! :)\n";
+        String str2 = "";
+        int index = 1;
+        for (Task task: sortedTasks) {
+            str2 += index + ". " + task + "\n";
+            index++;
+        }
+        return str1 + str2;
     }
 }
