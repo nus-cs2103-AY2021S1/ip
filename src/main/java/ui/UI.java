@@ -104,14 +104,6 @@ public class UI {
     }
 
     /**
-     * Renders Kim Jong Un's portrait and greeting message to user.
-     */
-    public static void summonSupremeLeaderAndGreet() {
-        summonSupremeLeader();
-        greet();
-    }
-
-    /**
      * Renders farewell message to user.
      */
     public static void farewell() {
@@ -128,5 +120,13 @@ public class UI {
                 "\t  /  |  |  |  \\\n" +
                 "\t  |,-'--|--'-.|\n");
         System.out.println("\t<CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE><CAKE>\n");
+    }
+
+    /**
+     * Renders Kim Jong Un's portrait and greeting message to user.
+     */
+    public static void summonSupremeLeaderAndGreet() {
+        summonSupremeLeader();
+        greet();
     }
 }

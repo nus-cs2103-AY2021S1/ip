@@ -3,11 +3,8 @@ package task;
 import java.util.List;
 
 import exception.DukeException;
-import storage.Storage;
-import task.tasks.Deadline;
-import task.tasks.Event;
+import systemexit.SystemExit;
 import task.tasks.Task;
-import task.tasks.Todo;
 
 /**
  * Contains list of tasks and provide operations to manipulate this list of tasks.
@@ -16,7 +13,7 @@ public class TaskList {
     /**
      * Task list.
      */
-    protected List<Task> tasks;
+    private List<Task> tasks;
 
     /**
      * Creates TaskList object containing a list of tasks.
@@ -48,52 +45,31 @@ public class TaskList {
             // E.g todowork
             if (userCommand.split(" ").length == 1) {
                 return DukeException.invalidTodo();
-            } else {
+            } else if (userCommand.split(" ").length != 1) {
                 // Add and report that the todo is added
-                String[] userCommandSplit = userCommand.split(" ", 2);
-                assert userCommandSplit.length == 2 : "Something went wrong when splitting user input.";
-                String description = userCommandSplit[1];
-                Task newTask = new Todo(description);
-                this.tasks.add(newTask);
-                assert this.tasks.size() != 0 : "Task list is empty.";
-                Storage.appendToFile(newTask.toString());
-                return TaskDescription.addedTaskDescription(this.tasks, newTask);
+                TaskList tasklist = this;
+                return TaskHelper.handleTodo(userCommand, tasklist);
+            } else {
+                return SystemExit.terminateDuke("todo error");
             }
         } else if (userCommand.contains("deadline")) { // Deadline
             try {
-                String[] userCommandSplit = userCommand.split(" /by ");
-                assert userCommandSplit.length == 2 : "Something went wrong when splitting user input.";
-                String description = userCommandSplit[0].split(" ", 2)[1];
-                String by = userCommandSplit[1];
-
-                // Add and report that the deadline is added
-                Task newTask = new Deadline(description, by);
-                this.tasks.add(newTask);
-                assert this.tasks.size() != 0 : "Task list is empty.";
-                Storage.appendToFile(newTask.toString());
-                return TaskDescription.addedTaskDescription(this.tasks, newTask);
+                TaskList tasklist = this;
+                return TaskHelper.handleDeadline(userCommand, tasklist);
             } catch (ArrayIndexOutOfBoundsException e) {
                 // E.g deadline return book /bylmklmlmlkmlkmlmlmlmlmkl Sunday
                 return DukeException.invalidDeadline();
             }
-        } else { // Event
-            assert userCommand.contains("deadline") : "User command does not contain deadline.";
+        } else if (userCommand.contains("event")) { // Event
             try {
-                String[] userCommandSplit = userCommand.split(" /at ");
-                assert userCommandSplit.length == 2 : "Something went wrong when splitting user input.";
-                String description = userCommandSplit[0].split(" ", 2)[1];
-                String at = userCommandSplit[1];
-
-                // Add and report that the event is added
-                Task newTask = new Event(description, at);
-                this.tasks.add(newTask);
-                assert this.tasks.size() != 0 : "Task list is empty.";
-                Storage.appendToFile(newTask.toString());
-                return TaskDescription.addedTaskDescription(this.tasks, newTask);
+                TaskList tasklist = this;
+                return TaskHelper.handleEvent(userCommand, tasklist);
             } catch (ArrayIndexOutOfBoundsException e) {
                 // E.g event project meeting /atlmklmlmlkmlkmlmlmlmlmkl Mon 2-4pm
                 return DukeException.invalidEvent();
             }
+        } else {
+            return SystemExit.terminateDuke("add error");
         }
     }
 
@@ -111,23 +87,14 @@ public class TaskList {
         try {
             // E.g given "done 1", we split to ["done", "1"]
             String[] userCommandSplit = userCommand.split(" ");
-
             // To prevent cases such as "done 1 7", "done", "done123123123"
             if (userCommandSplit.length != 2) {
                 return DukeException.invalidCommand();
+            } else if (userCommandSplit.length == 2) {
+                TaskList tasklist = this;
+                return TaskHelper.handleCompletedTask(userCommandSplit, tasklist);
             } else {
-                assert userCommandSplit.length == 2 : "Something went wrong when splitting user input.";
-                // Take serial number e.g 1 "done 1"
-                int serialNumber = Integer.parseInt(userCommandSplit[1]);
-                int index = serialNumber - 1;
-
-                // Mark as done and report that the task is done
-                Task doneTask = this.tasks.get(index);
-                String currentText = doneTask.toString();
-                doneTask.markAsDone();
-                String amendedText = doneTask.toString();
-                Storage.amendFile(currentText, amendedText);
-                return TaskDescription.doneTaskDescription(doneTask);
+                return SystemExit.terminateDuke("done error");
             }
         } catch (IndexOutOfBoundsException e) {
             // E.g "done 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements
@@ -151,26 +118,16 @@ public class TaskList {
         try {
             // E.g given "delete 1", we split to ["delete", "1"]
             String[] userCommandSplit = userCommand.split(" ");
-
             // To prevent cases such as "delete 1 7", "delete", "delete123123123"
             if (userCommandSplit.length != 2) {
                 return DukeException.invalidCommand();
             } else {
-                assert userCommandSplit.length == 2 : "Something went wrong when splitting user input.";
-                // Take serial number e.g 1 "delete 1" and delete
-                int serialNumber = Integer.parseInt(userCommandSplit[1]);
-                int index = serialNumber - 1;
-
-                // Mark as deleted and report that the task is deleted
-                Task deletedTask = this.tasks.get(index);
-                int initialSize = this.tasks.size();
-                this.tasks.remove(index);
-                assert this.tasks.size() == initialSize - 1 : "Something went wrong while deleting task.";
-                Storage.deleteFromFile(deletedTask.toString());
-                return TaskDescription.deletedTaskDescription(this.tasks, deletedTask);
+                TaskList tasklist = this;
+                return TaskHelper.handleTaskDeletion(userCommandSplit, tasklist);
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (Exception e) {
             // E.g "delete 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements
+            // E.g "delete all" is not valid as "all" is not a numerical value
             return DukeException.noSuchTask();
         }
     }
@@ -186,13 +143,11 @@ public class TaskList {
         // To prevent cases such as "findasd"
         if (userCommandSplit.length != 2) {
             return DukeException.invalidCommand();
+        } else if (userCommandSplit.length == 2) {
+            TaskList tasklist = this;
+            return TaskHelper.handleTaskFinding(userCommandSplit, tasklist);
         } else {
-            assert userCommandSplit.length == 2 : "Something went wrong when splitting user input.";
-            String keyword = userCommandSplit[1];
-            // Make a copy of the existing tasks and remove a task if keyword is not found
-            List<Task> tasksCopy = this.tasks;
-            tasksCopy.removeIf(task -> !task.getDescription().contains(keyword));
-            return TaskDescription.searchedTaskDescription(tasksCopy);
+            return SystemExit.terminateDuke("find error");
         }
     }
 }
