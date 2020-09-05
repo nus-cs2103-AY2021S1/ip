@@ -4,7 +4,6 @@
  * @author Chen Ler
  */
 public class Duke {
-
     private Ui ui;
     private Parser parser;
 

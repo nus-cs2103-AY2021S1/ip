@@ -2,7 +2,6 @@
  * Task is the parent class of To-do, Deadline, and Event.
  */
 public class Task {
-
     protected String description;
     protected boolean isDone;
     protected int id;
@@ -31,7 +30,7 @@ public class Task {
     /**
      *  Marks a task as completed.
      */
-    public void markedDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 

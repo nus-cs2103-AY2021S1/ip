@@ -2,7 +2,6 @@
  * Parser deals with deciphering the user commands.
  */
 public class Parser {
-
     protected ListOfItems listOfItems;
 
     /**

@@ -2,7 +2,6 @@
  * Ui class deals with all of the interactions with the user.
  */
 public class Ui {
-
     protected Parser parser;
     protected String divider = "____________________________________________________________";
 

@@ -9,7 +9,6 @@ import java.util.Scanner;
  * Handles all of the file operations of "stored.txt" file.
  */
 public class HandleFile {
-
     protected File storedData;
     protected ListOfItems list;
 
@@ -25,7 +24,7 @@ public class HandleFile {
     }
 
     /**
-     * It checks whether if "stored.txt" file exists, which it will pass to readFile().
+     * Checks whether if "stored.txt" file exists, which it will pass to readFile().
      * Else, it creates a new "stored.txt" file.
      */
     protected void checkFile() {
@@ -47,7 +46,7 @@ public class HandleFile {
         try {
             Scanner sc = new Scanner(this.storedData);
             while (sc.hasNextLine()) {
-                this.list.addStored(sc.nextLine());
+                this.list.addStoredList(sc.nextLine());
             }
         } catch (IOException e) {
             e.printStackTrace();

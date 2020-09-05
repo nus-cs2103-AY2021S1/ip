@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +10,11 @@ import java.util.List;
  * Contains the task list, handles all of the list manipulations + checks.
  */
 public class ListOfItems {
+    private final HandleFile handleFile;
     protected List<Task> list;
     protected int index;
     protected String divider = "____________________________________________________________";
     protected String tabSpacing = "   ";
-    private HandleFile handleFile;
 
     /**
      * Initialises a new ArrayList, and index starts from 0.
@@ -31,7 +32,7 @@ public class ListOfItems {
      *
      * @param input a line from "stored.txt"
      */
-    protected void addStored(String input) {
+    protected void addStoredList(String input) {
         char type = input.charAt(1);
         boolean isDone = input.charAt(4) == '✓';
 
@@ -40,7 +41,7 @@ public class ListOfItems {
             String description = input.substring(7);
             Todo todo = new Todo(description, index + 1);
             if (isDone) {
-                todo.markedDone();
+                todo.markAsDone();
             }
             list.add(index, todo);
             index++;
@@ -51,7 +52,7 @@ public class ListOfItems {
             String dueDateTime = info[1].substring(0, info[1].length() - 1);
             Deadline deadline = new Deadline(description, index + 1, dueDateTime, true);
             if (isDone) {
-                deadline.markedDone();
+                deadline.markAsDone();
             }
             list.add(index, deadline);
             index++;
@@ -62,7 +63,7 @@ public class ListOfItems {
             String duration = info[1].substring(0, info[1].length() - 1);
             Event event = new Event(description, index + 1, duration, true);
             if (isDone) {
-                event.markedDone();
+                event.markAsDone();
             }
             list.add(index, event);
             index++;
@@ -107,7 +108,7 @@ public class ListOfItems {
             if (task.isDone) {
                 return "Task already done!";
             } else {
-                task.markedDone();
+                task.markAsDone();
                 handleFile.writeFile(this);
                 String message = "Good job! I've marked this task as done:";
                 String output = divider + "\n" + message + "\n" + tabSpacing
@@ -139,10 +140,9 @@ public class ListOfItems {
             list.remove(task);
             index--;
             handleFile.writeFile(this);
-            String output = divider + "\n" + "Noted. I've removed this task:\n"
+            return divider + "\n" + "Noted. I've removed this task:\n"
                     + tabSpacing + task + "\n" + "Now you have " + index + " tasks in the list.\n"
                     + divider;
-            return output;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("\n" + divider + "\n" + "Whoops, you did not enter a valid number."
                     + "\n" + divider);
@@ -151,100 +151,133 @@ public class ListOfItems {
 
     /**
      * Adds a new task to the list.
-     * Checks what type of task is given and initialise a new sub-class of Task (To-do, Deadline, or Event).
+     * Checks what type of task is given and passes on to the respective add function.
      *
      * @param input user input
      * @return output of chatbot
      * @throws DukeException if incomplete commands are given
      */
     protected String addItem(String input) throws DukeException {
-        String addedMessage = "Got it. I've added this task: ";
-        String totalMessage = "Now you have " + (index + 1) + " task(s) in the list.";
-
         if (input.contains("todo")) {
-            try {
-                String description = input.substring(5);
-                Todo todo = new Todo(description, index + 1);
-                String output = divider + "\n" + addedMessage + "\n";
-                list.add(index, todo);
-                assert list.get(index).id > 0 : "item id cannot be 0 or negative!";
-                output = output + tabSpacing + list.get(index) + "\n"
-                    + totalMessage + "\n" + divider;
-                assert output.contains("[T]") : "Todo task is not created properly";
-                index++;
-                handleFile.writeFile(this);
-                return output;
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("\n" + divider + "\n"
-                        + "Whoops, you did not fill in the details of the Todo properly :("
-                        + "\n" + "Please try again."
-                        + "\n" + divider);
-            }
+            return addTodo(input);
         } else if (input.contains("deadline")) {
-            try {
-                String[] info = input.split("/", 2);
-                String description = info[0].substring(9);
-                String dueDateTime = info[1];
-                Deadline deadline = new Deadline(description, index + 1, dueDateTime, false);
-                String output = divider + "\n" + addedMessage + "\n";
-                list.add(index, deadline);
-                assert list.get(index).id > 0 : "item id cannot be 0 or negative!";
-                output = output + tabSpacing + list.get(index) + "\n"
-                        + totalMessage + "\n" + divider;
-                assert output.contains("[D]") : "Deadline task is not created properly";
-                index++;
-                handleFile.writeFile(this);
-                return output;
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("\n" + divider + "\n"
-                        + "Whoops, you did not fill in the details of the Deadline properly :("
-                        + "\n" + "Please try again."
-                        + "\n" + divider);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("\n" + divider + "\n"
-                        + "Whoops, you did not fill in the due date/time of the Deadline properly."
-                        + "\n" + "Please try again."
-                        + "\n" + divider);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("\n" + divider + "\n"
-                        + "Sorry, you did not fill in the due date(DD/MM/YYYY)"
-                        + "\n" + "and/or time(HHmm) properly. Please try again."
-                        + "\n" + divider);
-            }
+            return addDeadline(input);
         } else if (input.contains("event")) {
-            try {
-                String[] info = input.split("/", 2);
-                String description = info[0].substring(6);
-                String duration = info[1];
-                Event event = new Event(description, index + 1, duration, false);
-                String output = divider + "\n" + addedMessage + "\n";
-                list.add(index, event);
-                assert list.get(index).id > 0 : "item id cannot be 0 or negative!";
-                output = output + tabSpacing + list.get(index) + "\n"
-                        + totalMessage + "\n" + divider;
-                assert output.contains("[E]") : "Event task is not created properly";
-                index++;
-                handleFile.writeFile(this);
-                return output;
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("\n" + divider + "\n"
-                        + "Whoops, you did not fill in the details of the Event properly :("
-                        + "\n" + "Please try again."
-                        + "\n" + divider);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("\n" + divider + "\n"
-                        + "Whoops, you did not fill in the duration of the Event properly."
-                        + "\n" + "Please try again."
-                        + "\n" + divider);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("\n" + divider + "\n"
-                        + "Sorry, you did not fill in the due date(DD/MM/YYYY)"
-                        + "\n" + "and/or time(HHmm) properly. Please try again."
-                        + "\n" + divider);
-            }
+            return addEvent(input);
         } else {
             throw new DukeException("\n" + divider + "\n"
                     + "Sorry, you did not enter a valid command! Please try again."
+                    + "\n" + divider);
+        }
+    }
+
+    /**
+     * Adds a new To-do item to the list.
+     *
+     * @param input user input
+     * @return output of chatbot
+     * @throws DukeException if an invalid To-do item is given
+     */
+    protected String addTodo(String input) throws DukeException {
+        String addedMessage = "Got it. I've added this task: ";
+        String totalMessage = "Now you have " + (index + 1) + " task(s) in the list.";
+
+        try {
+            String description = input.substring(5);
+            Todo todo = new Todo(description, index + 1);
+            String output = divider + "\n" + addedMessage + "\n";
+            list.add(index, todo);
+            output = output + tabSpacing + list.get(index) + "\n"
+                    + totalMessage + "\n" + divider;
+            index++;
+            handleFile.writeFile(this);
+            return output;
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("\n" + divider + "\n"
+                    + "Whoops, you did not fill in the details of the Todo properly :("
+                    + "\n" + "Please try again."
+                    + "\n" + divider);
+        }
+    }
+
+    /**
+     * Adds a new Deadline item to the list.
+     *
+     * @param input user input
+     * @return output of chatbot
+     * @throws DukeException if an invalid Deadline item is given
+     */
+    protected String addDeadline(String input) throws DukeException {
+        String addedMessage = "Got it. I've added this task: ";
+        String totalMessage = "Now you have " + (index + 1) + " task(s) in the list.";
+
+        try {
+            String[] info = input.split("/", 2);
+            String description = info[0].substring(9);
+            String dueDateTime = info[1];
+            Deadline deadline = new Deadline(description, index + 1, dueDateTime, false);
+            String output = divider + "\n" + addedMessage + "\n";
+            list.add(index, deadline);
+            output = output + tabSpacing + list.get(index) + "\n"
+                    + totalMessage + "\n" + divider;
+            index++;
+            handleFile.writeFile(this);
+            return output;
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("\n" + divider + "\n"
+                    + "Whoops, you did not fill in the details of the Deadline properly :("
+                    + "\n" + "Please try again."
+                    + "\n" + divider);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("\n" + divider + "\n"
+                    + "Whoops, you did not fill in the due date/time of the Deadline properly."
+                    + "\n" + "Please try again."
+                    + "\n" + divider);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("\n" + divider + "\n"
+                    + "Sorry, you did not fill in the due date(DD/MM/YYYY)"
+                    + "\n" + "and/or time(HHmm) properly. Please try again."
+                    + "\n" + divider);
+        }
+    }
+
+    /**
+     * Adds a new Event item to the list.
+     *
+     * @param input user input
+     * @return output of chatbot
+     * @throws DukeException if an invalid Event item is given
+     */
+    protected String addEvent(String input) throws DukeException {
+        String addedMessage = "Got it. I've added this task: ";
+        String totalMessage = "Now you have " + (index + 1) + " task(s) in the list.";
+
+        try {
+            String[] info = input.split("/", 2);
+            String description = info[0].substring(6);
+            String duration = info[1];
+            Event event = new Event(description, index + 1, duration, false);
+            String output = divider + "\n" + addedMessage + "\n";
+            list.add(index, event);
+            output = output + tabSpacing + list.get(index) + "\n"
+                    + totalMessage + "\n" + divider;
+            index++;
+            handleFile.writeFile(this);
+            return output;
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("\n" + divider + "\n"
+                    + "Whoops, you did not fill in the details of the Event properly :("
+                    + "\n" + "Please try again."
+                    + "\n" + divider);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("\n" + divider + "\n"
+                    + "Whoops, you did not fill in the duration of the Event properly."
+                    + "\n" + "Please try again."
+                    + "\n" + divider);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("\n" + divider + "\n"
+                    + "Sorry, you did not fill in the due date(DD/MM/YYYY)"
+                    + "\n" + "and/or time(HHmm) properly. Please try again."
                     + "\n" + divider);
         }
     }
@@ -264,12 +297,14 @@ public class ListOfItems {
             LocalDate date = LocalDate.parse(info, dateFormat);
             String output = divider + "\n" + "Task(s) due by " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
                     + " :" + "\n";
-            for (int i = 0; i < this.list.size(); i++) {
-                if ((this.list.get(i) instanceof Deadline && ((Deadline) this.list.get(i)).date.equals(date))
-                        || (this.list.get(i) instanceof Event && ((Event) this.list.get(i)).date.equals(date))) {
+            for (Task task : this.list) {
+                boolean isDeadlineAndEqualsDate = task instanceof Deadline && ((Deadline) task).date.equals(date);
+                boolean isEventAndEqualsDate = task instanceof Event && ((Event) task).date.equals(date);
+
+                if (isDeadlineAndEqualsDate || isEventAndEqualsDate) {
                     hasResults = true;
-                    assert list.get(i).id > 0 : "item id cannot be 0 or negative!";
-                    output = output + this.list.get(i) + "\n";
+                    assert task.id > 0 : "item id cannot be 0 or negative!";
+                    output = output + task + "\n";
                 }
             }
             if (!hasResults) {
@@ -306,12 +341,14 @@ public class ListOfItems {
                 LocalDate date = LocalDate.parse(info, dateFormat);
                 String output = divider + "\n" + "Task(s) due before "
                         + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " :\n";
-                for (int i = 0; i < this.list.size(); i++) {
-                    if ((this.list.get(i) instanceof Deadline && !((Deadline) this.list.get(i)).date.isAfter(date))
-                            || (this.list.get(i) instanceof Event && !((Event) this.list.get(i)).date.isAfter(date))) {
+                for (Task task : this.list) {
+                    boolean isDeadlineAndDue = task instanceof Deadline && !((Deadline) task).date.isAfter(date);
+                    boolean isEventAndDue = task instanceof Event && !((Event) task).date.isAfter(date);
+
+                    if (isDeadlineAndDue || isEventAndDue) {
                         hasResults = true;
-                        assert list.get(i).id > 0 : "item id cannot be 0 or negative!";
-                        output = output + this.list.get(i) + "\n";
+                        assert task.id > 0 : "item id cannot be 0 or negative!";
+                        output = output + task + "\n";
                     }
                 }
                 if (!hasResults) {
@@ -327,16 +364,29 @@ public class ListOfItems {
                 String output = divider + "\n" + "Task(s) due before "
                         + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
                         + ", " + time.format(DateTimeFormatter.ofPattern("h:mma")) + " :\n";
-                for (int i = 0; i < this.list.size(); i++) {
-                    if ((this.list.get(i) instanceof Deadline && !((Deadline) this.list.get(i)).date.isAfter(date)
-                            && ((Deadline) this.list.get(i)).time != null
-                            && !((Deadline) this.list.get(i)).time.isAfter(time))
-                            || (this.list.get(i) instanceof Event && !((Event) this.list.get(i)).date.isAfter(date)
-                            && ((Event) this.list.get(i)).endTime != null
-                            && !((Event) this.list.get(i)).endTime.isAfter(time))) {
+                for (Task task : this.list) {
+                    boolean checkDate = false;
+                    boolean checkTime = false;
+
+                    boolean isDeadline = task instanceof Deadline;
+                    if (isDeadline) {
+                        checkDate = !((Deadline) task).date.isAfter(date);
+                        checkTime = ((Deadline) task).time != null
+                                && !((Deadline) task).time.isAfter(time);
+                    }
+
+                    boolean isEvent = task instanceof Event;
+                    if (isEvent) {
+                        checkDate = !((Event) task).date.isAfter(date);
+                        checkTime = ((Event) task).endTime != null
+                                && !((Event) task).endTime.isAfter(time);
+                    }
+
+
+                    if ((isDeadline || isEvent) && (checkDate && checkTime)) {
                         hasResults = true;
-                        assert list.get(i).id > 0 : "item id cannot be 0 or negative!";
-                        output = output + this.list.get(i) + "\n";
+                        assert task.id > 0 : "item id cannot be 0 or negative!";
+                        output = output + task + "\n";
                     }
                 }
                 if (!hasResults) {
@@ -367,10 +417,10 @@ public class ListOfItems {
             boolean hasResults = false;
             String info = input.substring(5);
             String output = divider + "\n" + "Here are the matching tasks in your list:\n";
-            for (int i = 0; i < this.list.size(); i++) {
-                if (this.list.get(i).description.contains(info)) {
-                    assert this.list.get(i).id > 0 : "id cannot be <= 0!";
-                    output = output + this.list.get(i).id + ". " + this.list.get(i) + "\n";
+            for (Task task : this.list) {
+                if (task.description.contains(info)) {
+                    assert task.id > 0 : "id cannot be <= 0!";
+                    output = output + task.id + ". " + task + "\n";
                     hasResults = true;
                 }
             }
