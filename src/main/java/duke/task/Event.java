@@ -21,6 +21,13 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Creates a event task object that has been completed on the given done date
+     * with the given description and date.
+     * @param description Description of the event.
+     * @param at Date of the event.
+     * @param doneDate Date of completion.
+     */
     public Event(String description, LocalDateTime at, LocalDate doneDate) {
         super(description, doneDate);
         this.at = at;

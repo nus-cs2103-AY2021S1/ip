@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Encapsulates a task to be completed by the user.
@@ -59,6 +60,21 @@ public abstract class Task {
         } else {
             return 0 + " | " + description;
         }
+    }
+
+    /**
+     * Returns true if the task has been completed within 7 days before the given date.
+     * @param date Date of reference.
+     * @return True if the task has been completed within 7 days before the given date.
+     */
+    public boolean isDoneThisWeek(LocalDate date) {
+        if (isDone) {
+            long daysApart = ChronoUnit.DAYS.between(doneDate, date);
+            if (daysApart <= 7) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

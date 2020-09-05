@@ -11,6 +11,7 @@ import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.StatsCommand;
 import duke.command.TodoCommand;
 import duke.command.UnknownCommand;
 
@@ -37,6 +38,8 @@ public class Parser {
         switch (command) {
         case ("list"):
             return new ListCommand();
+        case ("stats"):
+            return new StatsCommand();
         case ("find"):
             if (inputBreakdown.length < 2) {
                 throw new DukeException(FIND_SYNTAX_ERROR_MESSAGE);
