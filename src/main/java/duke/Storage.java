@@ -47,15 +47,26 @@ public class Storage {
                 Scanner sc = new Scanner(file);
                 while (sc.hasNext()) {
                     String task = sc.nextLine();
-                    String[] details = task.split(" \\| ");
-                    if (details[0].equals("T")) {
-                        list.add(new ToDo(details[2]));
-                    } else if (details[0].equals("D")) {
-                        list.add(new Deadline(details[2], LocalDate.parse(details[3])));
+                    String[] taskDetails = task.split(" \\| ");
+                    String taskType = taskDetails[0];
+                    String isTaskDone = taskDetails[1];
+                    String taskName = taskDetails[2];
+                    String taskTime;
+                    if (taskType.equals("T")) {
+                        list.add(new ToDo(taskName));
+                    } else if (taskType.equals("D")) {
+                        taskTime = taskDetails[3];
+                        list.add(new Deadline(taskName, LocalDate.parse(taskTime)));
+                    } else if (taskType.equals("E")) {
+                        taskTime = taskDetails[3];
+                        list.add(new Event(taskName, LocalDate.parse(taskTime)));
                     } else {
-                        list.add(new Event(details[2], LocalDate.parse(details[3])));
+                        taskType = "unknown";
                     }
-                    if (details[1].equals("1")) {
+                    assert taskType != "unknown" : "Task type was not saved properly";
+                    assert isTaskDone.equals("0") || isTaskDone.equals("1")
+                            : "IsDone was not saved properly";
+                    if (isTaskDone.equals("1")) {
                         list.get(list.size() - 1).done();
                     }
                 }
@@ -77,25 +88,21 @@ public class Storage {
         FileWriter writer = new FileWriter(filePath);
         PrintWriter printLine = new PrintWriter(writer);
         for (Task task : list) {
-            String[] details = new String[4];
-            details[2] = task.getName();
+            String taskDetails;
+            String isTaskDone = task.getIsDone() ? "1" : "0";
             if (task instanceof ToDo) {
-                details[0] = "T";
+                taskDetails = "T | " + isTaskDone + " | " + task.getName();
             } else if (task instanceof Deadline) {
-                details[0] = "D";
-                details[3] = ((Deadline) task).getBy().toString();
+                taskDetails = "D | " + isTaskDone + " | " + task.getName() + " | "
+                        + ((Deadline) task).getBy().toString();
+            } else if (task instanceof Event) {
+                taskDetails = "E | " + isTaskDone + " | " + task.getName() + " | "
+                        + ((Event) task).getAt().toString();
             } else {
-                details[0] = "E";
-                details[3] = ((Event) task).getDuration().toString();
+                taskDetails = "no details";
             }
-            if (task.getIsDone()) {
-                details[1] = "1";
-            } else {
-                details[1] = "0";
-            }
-            String textLine = details[0] + " | " + details[1] + " | " + details[2]
-                    + " | " + details[3];
-            printLine.printf("%s\n", textLine);
+            assert !taskDetails.equals("no details") : "Unable to update data file";
+            printLine.printf("%s\n", taskDetails);
         }
         printLine.close();
     }
