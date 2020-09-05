@@ -28,6 +28,7 @@ public class Task {
 
     public void markAsDone() {
         isDone = true;
+        assert isDone : "isDone should be true";
     }
 
     public String toString() {
