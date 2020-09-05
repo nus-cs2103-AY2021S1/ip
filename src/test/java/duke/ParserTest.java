@@ -1,5 +1,10 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import command.ByeCommand;
 import command.Command;
 import command.DeadlineCommand;
@@ -14,10 +19,6 @@ import exception.EventInvalidUsageException;
 import exception.InvalidUsageException;
 import exception.UnknownCommandException;
 import exception.ViewallInvalidUsageException;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
 
