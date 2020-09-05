@@ -33,10 +33,10 @@ public class Ui {
     }
 
     /**
-     * Text parser string.
+     * Parses String array into String
      *
-     * @param strArr the str arr
-     * @return the string
+     * @param strArr array of String
+     * @return parsed String
      */
     public String textParser(String[] strArr) {
         String comText = "";
@@ -47,11 +47,11 @@ public class Ui {
     }
 
     /**
-     * Command parser string.
+     * Takes the input from user, runs the relevant command
      *
-     * @param sentence the sentence
-     * @param tasks    the tasks
-     * @return the string
+     * @param sentence user input
+     * @param tasks tasks handler to interact with database
+     * @return output to acknowledge user's command
      */
     public String commandParser(String sentence, TaskList tasks) {
         String[] arr = sentence.split("\\s+");
