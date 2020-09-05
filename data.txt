@@ -1,7 +1,0 @@
-[E],, 1,, bruh,, Aug 3 2020,, 
-[T],, 1,, 12,, 
-[T],, 0,, asdf,, 
-[T],, 0,, bruh,, 
-[T],, 0,, asdlfhnasdf,, 
-[T],, 0,, alsdkfjadf,, 
-[D],, 0,, laskdjasd,, Mar 9 1239,, 
