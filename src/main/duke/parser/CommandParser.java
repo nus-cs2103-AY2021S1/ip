@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeArgumentException;
@@ -24,6 +25,7 @@ public final class CommandParser {
     private static final String TODO = "todo";
     private static final String EVENT = "event";
     private static final String DEADLINE = "deadline";
+    private static final String HELP = "help";
 
     /**
      * Converts input text into the appropriate command.
@@ -52,6 +54,12 @@ public final class CommandParser {
                 return new EventCommand(parsedInput[1]);
             case DEADLINE:
                 return new DeadlineCommand(parsedInput[1]);
+            case HELP:
+                if (parsedInput.length > 1) {
+                    return new HelpCommand(parsedInput[1]);
+                } else {
+                    return new HelpCommand();
+                }
             default:
                 throw new DukeArgumentException("Command did not match any known commands.");
             }
