@@ -31,7 +31,7 @@ public class Deadline extends Task {
      *
      * @param description Description of the task.
      * @param date Date that the task is due by.
-     * @param done Completion status of the task.
+     * @param isDone Completion status of the task.
      */
     public Deadline(String description, String date, boolean isDone) {
         super(description, isDone);

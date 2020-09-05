@@ -31,11 +31,11 @@ public class Task {
      * Overloaded constructor which specifies the completion status of the task.
      *
      * @param description Description of the task.
-     * @param done Completion status of the task.
+     * @param isDone Completion status of the task.
      */
-    Task(String description, boolean done) {
+    Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = done;
+        this.isDone = isDone;
     }
 
     /**
