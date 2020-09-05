@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private final LocalDate eventTime;
 
     /**

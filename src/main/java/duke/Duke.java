@@ -1,18 +1,9 @@
 package duke;
 
-import java.io.IOException;
-
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-
 /**
  * Duke main class
  */
-public class Duke{
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
