@@ -37,7 +37,7 @@ public class AddCommand implements Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            Task task = null;
+            Task task;
             String response = "Got it. I've added this task:\n";
             if (type == TaskType.TODO) {
                 task = new ToDo(name);
@@ -47,7 +47,10 @@ public class AddCommand implements Command {
             } else if (type == TaskType.EVENT) {
                 LocalDate at = LocalDate.parse(time);
                 task = new Event(name, at);
+            } else {
+                task = null;
             }
+            assert task != null: "Task should never be null";
             tasks.addTask(task);
             storage.updateDataFile(tasks.getList());
             response += task + "\n";
