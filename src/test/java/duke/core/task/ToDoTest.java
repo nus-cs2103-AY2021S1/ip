@@ -33,10 +33,7 @@ class ToDoTest {
     void toCsv_fromCsv() {
         try {
             Task task1 = new ToDo("test");
-            Scanner scanner = new Scanner(task1.toCsv());
-            scanner.useDelimiter(",");
-            scanner.next(); // discard first
-            Task task2 = CsvToTask.TODO.parse(scanner);
+            Task task2 = CsvToTask.TODO.parse(task1.toCsv());
             assertEquals(task1.hashCode(), task2.hashCode());
         } catch (Exception e) {
             // Failed to convert csv to to-do

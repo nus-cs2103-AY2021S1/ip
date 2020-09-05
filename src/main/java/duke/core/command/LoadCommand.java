@@ -42,7 +42,7 @@ public class LoadCommand implements Executable {
             // Clear history
             dataStore.getHistory().clear();
         } catch (FileNotFoundException e) {
-            System.out.println("Error: File not found");
+            System.err.println("Error: File not found");
         }
     }
 

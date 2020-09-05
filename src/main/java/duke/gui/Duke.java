@@ -64,8 +64,6 @@ public class Duke extends Application {
         stage.setTitle("Duke");
         stage.show(); // Render the stage.
 
-        // Add Action Listeners
-
         // Run main logic when user presses enter
         inputField.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {

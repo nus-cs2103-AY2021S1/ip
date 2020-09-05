@@ -50,28 +50,17 @@ public class Storage {
         // Empty current list
         taskList.clear();
 
-        // Attempt to open file for reading
-        // throws FileNotFoundException, FileNotFoundException should be passed to the program logic
+        // Attempt to open file for reading (throws FileNotFoundException)
         File file = new File(filePath);
         Scanner fileScanner = new Scanner(file);
-
-        Supplier<String> nextLine = () -> {
-            return fileScanner.hasNextLine() ? fileScanner.nextLine() : null;
-        };
+        Supplier<String> nextLine = () -> fileScanner.hasNextLine() ? fileScanner.nextLine() : null;
 
         Stream.generate(nextLine)
                 .takeWhile(Objects::nonNull)
                 .map(String::trim)
                 .filter(Predicate.not(String::isBlank))
-                .forEach(line -> {
-                    try (Scanner lineScanner = new Scanner(line)) {
-                        lineScanner.useDelimiter(",");
-                        Task task = CsvToTask.valueOf(lineScanner.next()).parse(lineScanner);
-                        taskList.add(task);
-                    } catch (Exception e) { // Many types of parse error
-                        System.err.println("Corrupt entry: " + line); // Todo: logger
-                    }
-                });
+                .map(CsvToTask::parse)
+                .forEach(taskList::add);
 
         fileScanner.close();
 

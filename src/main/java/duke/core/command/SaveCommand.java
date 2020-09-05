@@ -39,7 +39,7 @@ public class SaveCommand implements Executable {
             Storage.save(taskList, filePath);
             System.out.println("Save: " + taskList.size() + " entries");
         } catch (IOException e) {
-            System.out.println("Error: Could not save to file. Ensure directory exists and file is not in use");
+            System.err.println("Error: Ensure directory exists and file is not in use");
         }
     }
 

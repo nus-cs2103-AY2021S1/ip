@@ -62,10 +62,7 @@ class EventTest {
     void toCsv_fromCsv() {
         try {
             Task task1 = new Event(string1, time1, time2);
-            Scanner scanner = new Scanner(task1.toCsv());
-            scanner.useDelimiter(",");
-            scanner.next(); // discard first
-            Task task2 = CsvToTask.EVENT.parse(scanner);
+            Task task2 = CsvToTask.EVENT.parse(task1.toCsv());
             assertEquals(task1.hashCode(), task2.hashCode());
         } catch (Exception e) {
             // Failed to convert csv to Event

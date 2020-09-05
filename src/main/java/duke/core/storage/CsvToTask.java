@@ -15,7 +15,7 @@ public enum CsvToTask {
 
     TODO {
         @Override
-        public Task parse(Scanner scanner) {
+        protected Task parse(Scanner scanner) {
             return new ToDo(
                     Boolean.parseBoolean(scanner.next()),
                     scanner.next()
@@ -25,7 +25,7 @@ public enum CsvToTask {
 
     DEADLINE {
         @Override
-        public Task parse(Scanner scanner) {
+        protected Task parse(Scanner scanner) {
             return new Deadline(
                     Boolean.parseBoolean(scanner.next()),
                     scanner.next(),
@@ -36,7 +36,7 @@ public enum CsvToTask {
 
     EVENT {
         @Override
-        public Task parse(Scanner scanner) {
+        protected Task parse(Scanner scanner) {
             return new Event(
                     Boolean.parseBoolean(scanner.next()),
                     scanner.next(),
@@ -47,12 +47,28 @@ public enum CsvToTask {
     };
 
     /**
+     * Task specific parser (Helper method).
+     * Parses the csv into its String representation
+     * @param scanner A scanner initialized with the csv.
+     *                The first token should be discarded
+     * @return The Task represented by the csv
+     */
+    protected abstract Task parse(Scanner scanner) throws Exception;
+
+    /**
      * Factory method to obtain a Task from its csv representation
-     * @param scanner The scanner initialized with the csv representation of a task.
-     * The first entry from the scanner should be discarded by the caller.
+     * @param csv The csv representation of a task.
      * @return The task represented by the csv
      * @throws Exception If the csv cannot be parsed
      */
-    public abstract Task parse(Scanner scanner) throws Exception;
+    public static Task parse(String csv) {
+        try (Scanner scanner = new Scanner(csv)) {
+            scanner.useDelimiter(",");
+            return CsvToTask.valueOf(scanner.next()).parse(scanner);
+        } catch (Exception e) { // Many types of parse error
+            System.err.println("Corrupt entry: " + csv);
+            return null;
+        }
+    }
 
 }
