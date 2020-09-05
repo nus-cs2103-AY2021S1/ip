@@ -12,28 +12,29 @@ public class TaskList {
     }
 
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     public int getNumTasks() {
-        return this.tasks.size();
+        return tasks.size();
     }
 
     public String[] getTasks() {
-        String[] taskStrings = new String[this.tasks.size()];
-        for (int i = 0; i < this.tasks.size(); i++) {
-            taskStrings[i] = this.tasks.get(i).toString();
+        int numTasks = tasks.size();
+        String[] taskStrings = new String[numTasks];
+        for (int i = 0; i < numTasks; i++) {
+            taskStrings[i] = tasks.get(i).toString();
         }
         return taskStrings;
     }
 
     public void addTask(Task task) {
-        this.tasks.add(task);
+        tasks.add(task);
     }
 
     public Task markTaskAsDone(int index) throws DukeException {
         try {
-            Task task = this.tasks.get(index - 1);
+            Task task = tasks.get(index - 1);
             task.markAsDone();
             return task;
         } catch (IndexOutOfBoundsException e) {
@@ -43,7 +44,7 @@ public class TaskList {
 
     public Task deleteTask(int index) throws DukeException {
         try {
-            return this.tasks.remove(index - 1);
+            return tasks.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {
             throw DukeException.INVALID_TASK_INDEX_EXCEPTION;
         }

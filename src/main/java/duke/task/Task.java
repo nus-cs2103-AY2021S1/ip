@@ -22,7 +22,7 @@ public abstract class Task {
 
     /** Marks the task as done. */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -30,7 +30,11 @@ public abstract class Task {
      * @return A symbol as a String
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        if (isDone) {
+            return "\u2713";
+        } else {
+            return "\u2718";
+        }
     }
 
     /**
@@ -41,7 +45,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+        return String.format("[%s] %s", getStatusIcon(), description);
     }
 
     /**
@@ -49,12 +53,10 @@ public abstract class Task {
      * @return The task as a string formatted for being written to the file
      */
     public String toFileString() {
-        int stat;
-        if (this.isDone) {
+        int stat = 0;
+        if (isDone) {
             stat = 1;
-        } else {
-            stat = 0;
         }
-        return String.format("%s | %d | %s", this.getType(), stat, this.description);
+        return String.format("%s | %d | %s", getType(), stat, description);
     }
 }

@@ -22,13 +22,13 @@ public class DukeException extends Exception {
 
     /** A DukeException thrown when user inputs a deadline with an incorrect format. */
     public static final DukeException INVALID_DEADLINE_FORMAT_EXCEPTION = new DukeException(
-            "Sorry, the description of a Deadline must be in this format:\n" +
-                    "\tdeadline [task name] /by [deadline]");
+            "Sorry, the description of a Deadline must be in this format:\n"
+            + "\tdeadline [task name] /by [deadline]");
 
     /** A DukeException thrown when user inputs an event with an incorrect format. */
     public static final DukeException INVALID_EVENT_FORMAT_EXCEPTION = new DukeException(
-            "Sorry, the description of an Event must be in this format:\n" +
-                    "\tevent [task name] /at [time]");
+            "Sorry, the description of an Event must be in this format:\n"
+            + "\tevent [task name] /at [time]");
 
     /** A DukeException thrown when a line in the specified file cannot be parsed. */
     public static final DukeException FILE_PARSING_EXCEPTION = new DukeException(

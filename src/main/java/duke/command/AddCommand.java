@@ -12,33 +12,33 @@ import java.util.Arrays;
 
 public class AddCommand extends Command {
     private CommandType commandType;
-    private String[] description;
+    private String[] details;
 
-    public AddCommand(CommandType commandType, String... description) {
+    public AddCommand(CommandType commandType, String... details) {
         this.commandType = commandType;
-        this.description = description;
+        this.details = details;
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage){
-        switch (this.commandType) {
+    public void execute(TaskList tasks, Ui ui, Storage storage){
+        switch (commandType) {
         case TODO:
-            ToDo toDo = new ToDo(this.description[0]);
-            taskList.addTask(toDo);
+            ToDo toDo = new ToDo(details[0]);
+            tasks.addTask(toDo);
             storage.addLine(toDo.toFileString());
-            ui.showAddedTask(toDo.toString(), taskList.getNumTasks());
+            ui.showAddedTask(toDo.toString(), tasks.getNumTasks());
             break;
         case DEADLINE:
-            Deadline deadline = new Deadline(this.description[0], this.description[1]);
-            taskList.addTask(deadline);
+            Deadline deadline = new Deadline(details[0], details[1]);
+            tasks.addTask(deadline);
             storage.addLine(deadline.toFileString());
-            ui.showAddedTask(deadline.toString(), taskList.getNumTasks());
+            ui.showAddedTask(deadline.toString(), tasks.getNumTasks());
             break;
         case EVENT:
-            Event event = new Event(this.description[0], this.description[1]);
-            taskList.addTask(event);
+            Event event = new Event(details[0], details[1]);
+            tasks.addTask(event);
             storage.addLine(event.toFileString());
-            ui.showAddedTask(event.toString(), taskList.getNumTasks());
+            ui.showAddedTask(event.toString(), tasks.getNumTasks());
             break;
         default:
             break;
@@ -52,6 +52,6 @@ public class AddCommand extends Command {
 
     @Override
     public String toString() {
-        return this.commandType.toString() + " " + Arrays.toString(this.description);
+        return commandType.toString() + " " + Arrays.toString(details);
     }
 }

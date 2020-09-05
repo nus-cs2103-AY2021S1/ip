@@ -41,12 +41,12 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         try {
-            String parentFilepath = Path.of(this.filepath).getParent().toString();
+            String parentFilepath = Path.of(filepath).getParent().toString();
             File parentFolder = new File(parentFilepath);
             if (!parentFolder.exists()) {
                 parentFolder.mkdir();
             }
-            File taskFile = new File(this.filepath);
+            File taskFile = new File(filepath);
             if (!taskFile.exists()) {
                 taskFile.createNewFile();
             }
@@ -69,9 +69,9 @@ public class Storage {
      */
     public void addLine(String line) {
         try {
-            FileWriter fw = new FileWriter(this.filepath, true);
-            fw.write(line + System.lineSeparator());
-            fw.close();
+            FileWriter fileWriter = new FileWriter(filepath, true);
+            fileWriter.write(line + System.lineSeparator());
+            fileWriter.close();
         } catch (IOException e) {
             System.out.println("Encountered an unexpected error with the file :(");
         }
@@ -89,21 +89,21 @@ public class Storage {
      */
     public void deleteLine(int index) {
         try {
-            String tempFilepath = Path.of(this.filepath).getParent().toString() + "/temp.txt";
-            Files.copy(Path.of(this.filepath), Path.of((tempFilepath)));
-            FileWriter fw = new FileWriter(this.filepath);
+            String tempFilepath = Path.of(filepath).getParent().toString() + "/temp.txt";
+            Files.copy(Path.of(filepath), Path.of((tempFilepath)));
+            FileWriter fileWriter = new FileWriter(filepath);
             File copy = new File(tempFilepath);
             Scanner scanner = new Scanner(copy);
             int lineNumber = 1;
             while (scanner.hasNext()) {
                 if (lineNumber != index) {
-                    fw.write(scanner.nextLine() + System.lineSeparator());
+                    fileWriter.write(scanner.nextLine() + System.lineSeparator());
                 } else {
                     scanner.nextLine();
                 }
                 lineNumber++;
             }
-            fw.close();
+            fileWriter.close();
             scanner.close();
             Files.delete(Path.of(tempFilepath));
         } catch (IOException e) {
@@ -121,22 +121,22 @@ public class Storage {
      */
     public void replaceLine(int index, String line) {
         try {
-            String tempFilepath = Path.of(this.filepath).getParent().toString() + "/temp.txt";
-            Files.copy(Path.of(this.filepath), Path.of((tempFilepath)));
-            FileWriter fw = new FileWriter(this.filepath);
+            String tempFilepath = Path.of(filepath).getParent().toString() + "/temp.txt";
+            Files.copy(Path.of(filepath), Path.of((tempFilepath)));
+            FileWriter fileWriter = new FileWriter(filepath);
             File copy = new File(tempFilepath);
             Scanner scanner = new Scanner(copy);
             int lineNumber = 1;
             while (scanner.hasNext()) {
                 if (lineNumber != index) {
-                    fw.write(scanner.nextLine() + System.lineSeparator());
+                    fileWriter.write(scanner.nextLine() + System.lineSeparator());
                 } else {
-                    fw.write(line + System.lineSeparator());
+                    fileWriter.write(line + System.lineSeparator());
                     scanner.nextLine();
                 }
                 lineNumber++;
             }
-            fw.close();
+            fileWriter.close();
             scanner.close();
             Files.delete(Path.of(tempFilepath));
         } catch (IOException e) {

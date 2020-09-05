@@ -23,7 +23,7 @@ public class Event extends Task {
         super(description);
         this.at = at;
         try {
-            this.eventDate = LocalDate.parse(at);
+            eventDate = LocalDate.parse(at);
         } catch (DateTimeParseException e) {
             //do nothing
         }
@@ -35,9 +35,9 @@ public class Event extends Task {
      */
     public void printTime() {
         try {
-            System.out.println(this.eventDate.getMonth().toString()
-                    + " " + this.eventDate.getDayOfMonth()
-                    + " " + this.eventDate.getYear());
+            System.out.println(eventDate.getMonth().toString()
+                + " " + eventDate.getDayOfMonth()
+                + " " + eventDate.getYear());
         } catch (NullPointerException e) {
             System.out.println("No valid date available.");
         }
@@ -45,7 +45,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
     @Override
@@ -55,13 +55,10 @@ public class Event extends Task {
 
     @Override
     public String toFileString() {
-        int stat;
-        if (this.isDone) {
+        int stat = 0;
+        if (isDone) {
             stat = 1;
-        } else {
-            stat = 0;
         }
-        return String.format("%s | %d | %s at %s", this.getType(), stat,
-                this.description, this.at);
+        return String.format("%s | %d | %s at %s", getType(), stat, description, at);
     }
 }

@@ -13,8 +13,8 @@ public class QueryCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-            String[] lines = taskList.getTasks();
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+            String[] lines = tasks.getTasks();
             ui.showTasks(lines);
     }
 
@@ -25,6 +25,6 @@ public class QueryCommand extends Command {
 
     @Override
     public String toString() {
-        return this.commandType.toString();
+        return commandType.toString();
     }
 }
