@@ -18,6 +18,10 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Creates a TaskList object with an existing task list from the hard drive.
+     * @param taskList The saved task list from hard drive.
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
         assert (this.taskList != null) : "List cannot be null!";
