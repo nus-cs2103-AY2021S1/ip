@@ -2,6 +2,7 @@ package duke.logic;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -14,6 +15,7 @@ import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeException;
+import duke.task.Task;
 
 /**
  * Represents a helper class that deals with making sense of the user command.
@@ -28,12 +30,14 @@ public class Parser {
      * @throws DukeException If the input command is deemed invalid or the format is incorrect.
      */
     public static Command parseCommand(String fullCommand) throws DukeException {
-        Command command;
         String[] splitCommand = fullCommand.split(" ", 2);
         String action = splitCommand[0];
-        boolean isMissingTaskDescription = isTask(action) && splitCommand.length < 2;
-        boolean isMissingTaskNumber = isDoneOrDeleteOperation(action) && splitCommand.length < 2;
-        boolean isMissingFindKeyword = action.equals("find") && splitCommand.length < 2;
+
+        boolean hasOnlyOneWord = splitCommand.length < 2;
+        boolean isMissingTaskDescription = isTask(action) && hasOnlyOneWord;
+        boolean isMissingTaskNumber = isDoneOrDeleteCommand(action) && hasOnlyOneWord;
+        boolean isMissingFindKeyword = action.equals("find") && hasOnlyOneWord;
+
         if (isMissingTaskDescription) {
             throw new DukeException("OOPS!!! Description of a task cannot be empty :(\n");
         }
@@ -44,6 +48,8 @@ public class Parser {
         if (isMissingFindKeyword) {
             throw new DukeException("Please indicate the keyword which you want to find.\n");
         }
+
+        Command command;
         try {
             switch (action) {
             case "bye":
@@ -113,7 +119,24 @@ public class Parser {
                 || action.equals("deadline") || action.equals("event");
     }
 
-    private static boolean isDoneOrDeleteOperation(String action) {
+    private static boolean isDoneOrDeleteCommand(String action) {
         return action.equals("done") || action.equals("delete");
+    }
+
+    /**
+     * Returns the task in the list after parsing the task number.
+     * @param taskNumber The task number.
+     * @param tasks The list of tasks.
+     * @return The task in the list corresponding to the correct task number.
+     * @throws DukeException If the input could not be parsed as a number or the number out of range.
+     */
+    public static Task parseTaskNumber(String taskNumber, List<Task> tasks) throws DukeException {
+        try {
+            int index = Integer.parseInt(taskNumber) - 1;
+            return tasks.get(index);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            String errorMessage = "Invalid task number! Please enter a valid task number :)\n";
+            throw new DukeException(errorMessage);
+        }
     }
 }
