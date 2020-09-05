@@ -20,7 +20,8 @@ public class Duke {
     /**
      * The message that is used to greet the user.
      */
-    private static final String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String GREETING =
+            "Hello! I'm Duke\nType `help` to see what I can do for you!";
 
     /**
      * The storage associated with the chat bot.

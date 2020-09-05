@@ -6,6 +6,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidTaskIdException;
@@ -55,6 +56,9 @@ public class Parser {
         String command = commandInputs[0].trim().toLowerCase();
 
         switch (command) {
+        case "help":
+            return Parser.getHelpCommand();
+
         case "list":
             return Parser.getListCommand();
 
@@ -82,6 +86,10 @@ public class Parser {
 
     private static ByeCommand getByeCommand() {
         return new ByeCommand();
+    }
+
+    private static HelpCommand getHelpCommand() {
+        return new HelpCommand();
     }
 
     private static DeleteCommand getDeleteCommand(String[] commandInputs) throws DukeException {
