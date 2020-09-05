@@ -36,6 +36,7 @@ public class Ui {
      */
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("test");
         String string1 = scanner.nextLine();
         return string1;
     }
