@@ -9,7 +9,7 @@ import nite.ui.Ui;
  */
 public class FindCommand extends Command {
 
-    private String keyword;
+    private final String keyword;
 
     /**
      * Creates a FindCommand.

@@ -17,14 +17,14 @@ public class Deadline extends Task {
      * Creates a Deadline Task.
      *
      * @param description Description of Deadline.
-     * @param by The date and time which Deadline is due.
+     * @param timeByString The date and time which Deadline is due.
      * @throws NiteException If format of time is wrong.
      */
-    public Deadline(String description, String by) throws NiteException {
+    public Deadline(String description, String timeByString) throws NiteException {
         super(description);
         LocalDateTime timeBy;
         try {
-            timeBy = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            timeBy = LocalDateTime.parse(timeByString, super.inputDateTimePattern);
         } catch (DateTimeParseException ignored) {
             throw new NiteException("Wrong format of for deadline time.");
         }
@@ -38,7 +38,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String timeBy = this.timeBy.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
+        String timeBy = this.timeBy.format(super.displayDateTimePattern);
         return "[D]" + super.toString() + " (by: " + timeBy + ")";
     }
 
@@ -51,7 +51,7 @@ public class Deadline extends Task {
     public String toData() {
         String isDone = super.isDone ? "1" : "0";
         String separator = "~";
-        String timeBy = this.timeBy.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        String timeBy = this.timeBy.format(super.inputDateTimePattern);
         return String.format("D%s%s%s%s%s%s%n", separator, isDone, separator,
                 super.description, separator, timeBy);
     }

@@ -18,13 +18,16 @@ public class Nite {
     private Storage storage;
     private TaskList tasks;
 
+    private final String filePath = "/data/duke.txt";
+    private final String folderPath = "/data";
+
     /**
      * Creates a Duke.
      * Initialises the Ui, Storage and TaskList upon starting.
      */
     public Nite() {
         ui = new Ui();
-        storage = new Storage("/data/duke.txt", "/data");
+        storage = new Storage(filePath, folderPath);
         try {
             tasks = new TaskList(storage.load());
         } catch (NiteException e) {

@@ -26,8 +26,11 @@ public class MainWindow extends AnchorPane {
 
     private Nite nite;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/woman_circle.png"));
-    private Image niteImage = new Image(this.getClass().getResourceAsStream("/images/blackcat_circle.png"));
+    private final Image userImage = new Image(this.getClass()
+            .getResourceAsStream("/images/woman_circle.png"));
+    private final Image niteImage = new Image(this.getClass()
+            .getResourceAsStream("/images/blackcat_circle.png"));
+    private final String meowSoundPath = "/audio/meow2.wav";
 
     /**
      * Initializes the user interface upon starting application.
@@ -47,9 +50,9 @@ public class MainWindow extends AnchorPane {
         assert !greeting.isEmpty() : "Welcome message should not be empty.";
         assert niteImage != null : "Image should not be empty.";
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(greeting, niteImage)
+                DialogBox.getNiteDialog(greeting, niteImage)
         );
-        playSound("/audio/meow2.wav");
+        playSound(meowSoundPath);
     }
 
     public void setNite(Nite nite) {
@@ -79,9 +82,9 @@ public class MainWindow extends AnchorPane {
         assert niteImage != null : "Image should not be empty.";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, niteImage)
+                DialogBox.getNiteDialog(response, niteImage)
         );
-        playSound("/audio/meow2.wav");
+        playSound(meowSoundPath);
         userInput.clear();
     }
 }
