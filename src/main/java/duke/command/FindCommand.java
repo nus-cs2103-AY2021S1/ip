@@ -3,9 +3,7 @@ package duke.command;
 import java.util.List;
 
 import duke.storage.Storage;
-import duke.storage.StorageException;
 import duke.task.Task;
-import duke.task.TaskException;
 import duke.task.TaskList;
 
 /**
@@ -22,8 +20,16 @@ public class FindCommand extends Command {
         super(searchTerm);
     }
 
+    /**
+     * Performs a search on all the task descriptions.
+     * The search is fuzzy.
+     *
+     * @param taskList The taskList to operate with.
+     * @param storage The storage to operate with.
+     * @return A list of tasks whose description contains the search term
+     */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws TaskException, StorageException {
+    public String execute(TaskList taskList, Storage storage) {
         List<Task> results = taskList.findTasks(args);
         StringBuilder string = new StringBuilder();
         for (int i = 0; i < results.size(); i++) {

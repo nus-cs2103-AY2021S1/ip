@@ -11,13 +11,9 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.TaskException;
 import duke.task.TaskList;
-import duke.task.TaskType;
 import duke.task.TaskTypeDecodeException;
-import duke.task.Todo;
 
 /**
  * Encapsulates the logic for storing tasks.
@@ -53,23 +49,25 @@ public class Storage {
      * @throws StorageException If the path cannot be created.
      */
     private void createFileIfMissing(File file) throws StorageException {
-        if (!file.exists()) {
-            File parentDirectory = file.getParentFile();
-            if (!parentDirectory.exists()) {
-                boolean didSucceed = parentDirectory.mkdirs();
-                if (!didSucceed) {
-                    throw new StorageException("Failed to create parent directory.");
-                }
-            }
+        if (file.exists()) {
+            return;
+        }
 
-            try {
-                boolean didSucceed = file.createNewFile();
-                if (!didSucceed) {
-                    throw new StorageException("Failed to create file.");
-                }
-            } catch (IOException e) {
+        File parentDirectory = file.getParentFile();
+        if (!parentDirectory.exists()) {
+            boolean didSucceed = parentDirectory.mkdirs();
+            if (!didSucceed) {
+                throw new StorageException("Failed to create parent directory.");
+            }
+        }
+
+        try {
+            boolean didSucceed = file.createNewFile();
+            if (!didSucceed) {
                 throw new StorageException("Failed to create file.");
             }
+        } catch (IOException e) {
+            throw new StorageException("Failed to create file.");
         }
     }
 
@@ -84,23 +82,8 @@ public class Storage {
         try {
             Scanner reader = new Scanner(file, StandardCharsets.UTF_8);
             while (reader.hasNextLine()) {
-                String line = reader.nextLine();
-                assert line != null : "Null string was read from storage";
-                TaskType taskType = TaskType.decodeTaskType(line);
-                String taskStorageLine = TaskType.getStorageLine(line, taskType);
-                switch (taskType) {
-                case DEADLINE:
-                    taskList.addTask(Deadline.parseStorageString(taskStorageLine));
-                    break;
-                case EVENT:
-                    taskList.addTask(Event.parseStorageString(taskStorageLine));
-                    break;
-                case TODO:
-                    taskList.addTask(Todo.parseStorageString(taskStorageLine));
-                    break;
-                default:
-                    break;
-                }
+                String storageLine = reader.nextLine();
+                taskList.parseStorageLine(storageLine);
             }
         } catch (IOException e) {
             throw new StorageException("File remains missing even after initialisation.");
@@ -122,17 +105,15 @@ public class Storage {
      */
     public File save(TaskList taskList) throws StorageException {
         try {
+            String storageDocument = taskList.getStorageDocument();
             Writer out = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(file), StandardCharsets.UTF_8));
-            try {
-                out.write(taskList.getStorageDocument());
-            } finally {
-                out.close();
-            }
-        } catch (IOException e) {
-            throw new StorageException("File remains missing even after initialisation.");
+            out.write(storageDocument);
+            out.close();
         } catch (TaskTypeDecodeException e) {
             throw new StorageException("One or more tasks cannot be saved.");
+        } catch (IOException e) {
+            throw new StorageException("File remains missing even after initialisation.");
         }
 
         return file;

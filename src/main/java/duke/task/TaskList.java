@@ -176,6 +176,29 @@ public class TaskList {
     }
 
     /**
+     * Creates an task by reading a storage line.
+     *
+     * @param line The storage line to interpret.
+     */
+    public void parseStorageLine(String line) throws TaskTypeDecodeException, TaskException {
+        TaskType taskType = TaskType.decodeTaskType(line);
+        String taskStorageLine = TaskType.getStorageLine(line, taskType);
+        switch (taskType) {
+        case DEADLINE:
+            addTask(Deadline.parseStorageString(taskStorageLine));
+            break;
+        case EVENT:
+            addTask(Event.parseStorageString(taskStorageLine));
+            break;
+        case TODO:
+            addTask(Todo.parseStorageString(taskStorageLine));
+            break;
+        default:
+            break;
+        }
+    }
+
+    /**
      * Returns the list of tasks.
      *
      * @return The tasks in a string format.
