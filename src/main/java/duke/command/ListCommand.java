@@ -9,6 +9,7 @@ public class ListCommand extends Command {
     public ListCommand(TaskList tasks) {
         this.tasks = tasks;
     }
+    
     @Override
     public String execute() throws DukeException {
         if (tasks.isEmpty()) {

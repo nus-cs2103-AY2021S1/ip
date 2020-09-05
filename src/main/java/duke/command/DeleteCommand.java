@@ -14,6 +14,7 @@ public class DeleteCommand extends Command {
         this.tasks = tasks;
         this.storage = storage;
     }
+    
     @Override
     public String execute() throws DukeException {
         if (args.length < 2) {
