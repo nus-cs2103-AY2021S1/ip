@@ -6,6 +6,7 @@ import exceptions.InvalidCommandException;
 import exceptions.MissingSpecifiedDeleteError;
 import exceptions.NoDateException;
 import exceptions.NoTaskException;
+import exceptions.SimilarTaskExistsException;
 import exceptions.WrongDateTimeFormatException;
 import exceptions.WrongIndexError;
 
@@ -177,7 +178,7 @@ public class TaskList {
      * @throws WrongDateTimeFormatException
      */
     public TaskList add(String task)
-        throws NoTaskException, InvalidCommandException, NoDateException, WrongDateTimeFormatException {
+        throws NoTaskException, InvalidCommandException, NoDateException, WrongDateTimeFormatException, SimilarTaskExistsException {
         String firstWord = task.toLowerCase().contains("todo") ? "todo"
             : task.toLowerCase().contains("deadline") ? "deadline"
             : task.toLowerCase().contains("event") ? "event"
@@ -187,7 +188,12 @@ public class TaskList {
         ArrayList<Task> tempTasks = this.tasks;
         try {
             curr = assignTask(firstWord, task);
-            tempTasks.add(curr);
+            boolean isDuplicateExists = tempTasks.contains(curr);
+            if (isDuplicateExists) {
+                throw new SimilarTaskExistsException("☹ OOPS!!! Similar task already exists. Please insert a different task");
+            } else {
+                tempTasks.add(curr);
+            }
         } catch (NoTaskException e) {
             throw new NoTaskException(e.getMessage());
         } catch (InvalidCommandException e) {

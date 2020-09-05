@@ -64,7 +64,7 @@ public class Todo extends Task {
             return true;
         } else if (o instanceof Todo) {
             Todo temp = (Todo) o;
-            return this.name.equals(temp.name) && (this.isDone == temp.isDone);
+            return this.name.equals(temp.name);
         } else {
             return false;
         }
