@@ -6,18 +6,11 @@ import com.Duke.TaskManager.UI;
 public class BlahCommand extends Command {
 
     @Override
-    public void execute() {
+    public String execute() {
         try {
-            UI.blahCalled();
+            return UI.blahCalled();
         } catch (DukeException e) {
-            UI.printError(e.toString());
-        }
-    }
-
-    @Override
-    public String executeGui() {
-        try{
-
+            return UI.printError(e.toString());
         }
     }
 

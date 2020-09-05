@@ -13,12 +13,12 @@ public class ToDoCommand extends Command{
         this.ls = ls;
     }
 
-    public void execute(){
+    public String execute(){
         try {
             ToDo todo = new ToDo(task, false);
-            UI.toDoCalled(ls,todo);
+            return UI.toDoCalled(ls,todo);
         }catch (Exception e) {
-            UI.printError("     \u2639 OOPS!!! The description of a todo cannot be empty.");
+            return UI.printError("     \u2639 OOPS!!! The description of a todo cannot be empty.");
         }
     }
 }

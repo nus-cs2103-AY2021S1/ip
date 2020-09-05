@@ -14,11 +14,11 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         try {
-            UI.findCalled(ls, hint);
+            return UI.findCalled(ls, hint);
         }catch (DukeException e){
-            UI.printError(e.toString());
+            return UI.printError(e.toString());
         }
     }
 }

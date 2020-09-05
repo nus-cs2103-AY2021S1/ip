@@ -19,16 +19,16 @@ public class EventCommand extends Command{
 
 
     @Override
-    public void execute() {
+    public String execute() {
         try {
             String[] splitList2 = this.splitList[1].split("/at ", 2);
             String[] splitList3 = splitList2[1].split("-", 2);
             Event event = new Event(splitList2[0], LocalTime.parse(splitList3[0]), LocalTime.parse(splitList3[1]), false);
-            UI.eventCalled(ls,event);
+            return UI.eventCalled(ls,event);
         }catch(DateTimeParseException e){
-            UI.printError("     \u2639 OOPS!!! The format of your start or end time is not correct, format it as HH:mm");
+            return UI.printError("     \u2639 OOPS!!! The format of your start or end time is not correct, format it as HH:mm");
         } catch(Exception e){
-            UI.printError("     \u2639 OOPS!!! The description or the time duration of a event cannot be empty.");
+            return UI.printError("     \u2639 OOPS!!! The description or the time duration of a event cannot be empty.");
         }
     }
 }

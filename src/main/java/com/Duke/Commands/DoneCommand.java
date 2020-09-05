@@ -14,13 +14,13 @@ public class DoneCommand extends Command{
         this.taskIndex = taskIndex;
     }
 
-    public void execute(){
+    public String execute(){
         try{
-            UI.doneCalled(ls,taskIndex);
+            return UI.doneCalled(ls,taskIndex);
         }catch (DukeException e){
-            UI.printError(e.toString());
+            return UI.printError(e.toString());
         }catch(Exception e){
-            UI.printError("     ☹ OOPS!!! There arent that many tasks in your list");
+            return UI.printError("     ☹ OOPS!!! There arent that many tasks in your list");
         }
     }
 }

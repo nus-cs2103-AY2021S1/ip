@@ -15,12 +15,12 @@ public class TaskCommand extends Command{
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         try {
             Task newTask = new Task(task, false);
-            UI.taskCalled(ls,newTask);
+            return UI.taskCalled(ls,newTask);
         }catch(DukeException e){
-            UI.printError(e.toString());
+            return UI.printError(e.toString());
         }
     }
 }

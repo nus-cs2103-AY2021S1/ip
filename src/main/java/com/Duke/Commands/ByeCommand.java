@@ -17,11 +17,11 @@ public class ByeCommand extends Command {
         return true;
     }
 
-    public void execute() {
+    public String execute() {
         try {
-            UI.byeCalled(ls);
+            return UI.byeCalled(ls);
         } catch (DukeException e) {
-            UI.printError(e.toString());
+            return UI.printError(e.toString());
         }
     }
 }

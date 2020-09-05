@@ -39,13 +39,15 @@ public class TaskList {
         return this.ls;
     }
 
-    public void delete(int task) throws DukeException{
+    public String delete(int task) throws DukeException{
         if(task>ls.size()){
             throw new DukeException("You don't have that many tasks");
         }else{
             System.out.println("     Noted. I've removed this task: ");
             System.out.println("       " + ls.get(task-1).toString());
+            String deleted = ls.get(task-1).toString();
             ls.remove(task-1);
+            return "Noted. I've removed this task: \n"+deleted;
         }
     }
 

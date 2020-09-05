@@ -12,11 +12,11 @@ public class ListCommand extends Command{
         this.ls = ls;
     }
 
-    public void execute(){
+    public String execute(){
         try {
-            UI.listCalled(ls);
+            return UI.listCalled(ls);
         }catch(DukeException e){
-            UI.printError(e.toString());
+            return UI.printError(e.toString());
         }
     }
 }

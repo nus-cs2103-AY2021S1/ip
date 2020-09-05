@@ -93,10 +93,7 @@ public class Duke extends Application {
     }
 
     String getResponse(String input) {
-        DukeBot
-        c.execute(list, ui, storage);
-        String response = c.executeChat(list, ui, storage);
-        return response;
+        return DukeBot.simulateGui(input);
     }
 
     private Label getDialogLabel(String text) {

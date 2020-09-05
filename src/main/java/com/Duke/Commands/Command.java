@@ -3,11 +3,10 @@ package com.Duke.Commands;
 
 public abstract class Command {
 
-    public abstract void execute();
+    public abstract String execute();
 
     public boolean isDone() {
         return false;
     }
 
-    public abstract String executeGui();
 }

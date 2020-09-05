@@ -14,11 +14,11 @@ public class DeleteCommand extends Command{
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         try{
-            UI.deleteCalled(ls, taskIndex);
+            return UI.deleteCalled(ls, taskIndex);
         }catch(DukeException e){
-            UI.printError(e.toString());
+            return UI.printError(e.toString());
         }
     }
 }
