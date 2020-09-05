@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.core.Result;
 import duke.core.Storage;
 import duke.core.TaskList;
 import duke.core.Ui;
 import duke.handle.TaskNotFoundException;
-
-import java.io.IOException;
 
 /**
  * The SearchCommand class represents a command that searches for the task in the task list using a search key.
@@ -35,6 +35,6 @@ public class SearchCommand extends Command {
      */
     @Override
     public Result excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
-        return new Result(ui.showList(taskList.findTaskWithDescription(key)), this.isContinuing());
+        return new Result(ui.getTaskListMessage(taskList.findTaskWithDescription(key)), this.isContinuing());
     }
 }
