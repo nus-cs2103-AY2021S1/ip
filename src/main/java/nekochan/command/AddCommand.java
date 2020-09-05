@@ -69,6 +69,9 @@ public class AddCommand extends Command {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_ADD_COMMAND);
         }
+
+        assert createdTask != null : "created task should not be null";
+      
         String responseMessage = Messages.MESSAGE_ADD + createdTask.toString() + "\n"
                 + Messages.getTotalTaskMessage(remainingTaskCount);
         return new Response(IS_EXIT, responseMessage);

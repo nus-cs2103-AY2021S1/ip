@@ -92,6 +92,8 @@ public class MainWindow extends AnchorPane {
     }
 
     private void print(String response) {
+        assert response.length() > 0 : "response message should not be empty";
+      
         dialogContainer.getChildren().add(DialogBox.getNekoDialog(response, botImage));
     }
 

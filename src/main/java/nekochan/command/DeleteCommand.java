@@ -52,6 +52,9 @@ public class DeleteCommand extends Command {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_DELETE_COMMAND);
         }
+
+        assert deletedTask != null : "deleted task should not be null";
+
         String responseMessage = Messages.MESSAGE_DELETE + deletedTask.toString() + "\n"
                 + Messages.getTotalTaskMessage(remainingTaskCount);
         return new Response(IS_EXIT, responseMessage);

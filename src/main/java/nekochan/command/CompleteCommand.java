@@ -50,6 +50,9 @@ public class CompleteCommand extends Command {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_COMPLETE_COMMAND);
         }
+
+        assert completedTask != null : "completed task should not be null";
+
         String responseMessage = Messages.MESSAGE_COMPLETE + completedTask.toString() + "\n";
         return new Response(IS_EXIT, responseMessage);
     }
