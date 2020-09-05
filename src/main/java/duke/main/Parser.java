@@ -96,10 +96,10 @@ public class Parser {
      */
     private String extractCommand(String input) throws InvalidCommandException {
         int spaceIndex = input.indexOf(' ');
-        if (spaceIndex > 0) {
-            return input.substring(0, spaceIndex);
-        } else {
+        if (spaceIndex <= 0) {
             throw new InvalidCommandException();
         }
+
+        return input.substring(0, spaceIndex);
     }
 }

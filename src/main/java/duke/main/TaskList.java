@@ -60,8 +60,8 @@ public class TaskList {
     }
 
     private static Task getTaskFromLine(String[] data) {
-        Task task = null;
         try {
+            Task task;
             switch (data[0]) {
             case "T":
                 task = ToDo.createFromFile(data);
@@ -79,10 +79,12 @@ public class TaskList {
             if (data[1].equals("1")) {
                 task.setDone();
             }
+
+            return task;
         } catch (UnreadableSaveTaskException e) {
             e.printStackTrace();
+            return null;
         }
-        return task;
     }
 
     /**
@@ -91,14 +93,16 @@ public class TaskList {
      * @return String representation of a saved TaskList.
      */
     public String toSaveFormat() {
+        if (tasks.isEmpty()) {
+            return "";
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
         for (Task task : tasks) {
             stringBuilder.append(task.toDataString())
                     .append(System.lineSeparator());
         }
-        if (stringBuilder.length() != 0) {
-            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-        }
+
         return stringBuilder.toString();
     }
 
@@ -122,6 +126,7 @@ public class TaskList {
         if (index < 0 || index >= tasks.size()) {
             throw new InvalidIndexException();
         }
+
         return tasks.remove(index);
     }
 
@@ -136,6 +141,7 @@ public class TaskList {
         if (index < 0 || index >= tasks.size()) {
             throw new InvalidIndexException();
         }
+
         Task task = tasks.get(index);
         task.setDone();
         return task;
@@ -168,6 +174,10 @@ public class TaskList {
 
     @Override
     public String toString() {
+        if (tasks.isEmpty()) {
+            return "You have no tasks";
+        }
+
         StringBuilder list = new StringBuilder();
         int number = 1;
         for (Task task : tasks) {
@@ -175,9 +185,7 @@ public class TaskList {
                     .append(task)
                     .append(System.lineSeparator());
         }
-        if (list.length() != 0) {
-            list.deleteCharAt(list.length() - 1);
-        }
+
         return list.toString();
     }
 }
