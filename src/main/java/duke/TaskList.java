@@ -52,9 +52,9 @@ public class TaskList {
         } else if (o instanceof TaskList) {
             TaskList t = (TaskList) o;
             return tasks.equals(t.tasks);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -65,16 +65,15 @@ public class TaskList {
      *                              but the [description] is in not in a valid date format.
      */
     public String processList(String fullCommand) throws InvalidDateException {
+
         if (fullCommand.trim().equalsIgnoreCase("list")) {
             return printList();
-        } else {
-
-            LocalDate date = Parser.getDateTime(fullCommand.substring(
-                "list".length()).trim()).toLocalDate();
-
-            return printList(date);
-
         }
+
+        LocalDate date = Parser.getDateTime(fullCommand.substring(
+            "list".length()).trim()).toLocalDate();
+
+        return printList(date);
     }
 
     /** Prints the tasks in the list. */
@@ -107,7 +106,6 @@ public class TaskList {
 
         int i = 0;
         for (Task task : tasks) {
-
             if (task.getDate().equals(date)) {
                 if (i == 0) {
                     str.append("Here's your list on ");
@@ -156,14 +154,17 @@ public class TaskList {
         try {
             String task = input.substring(0, input.indexOf('/')).trim();
             LocalDateTime date = input.contains("to ")
-                ? Parser.getDateTime(input.substring(input.indexOf("/at") + 4, input.indexOf("to ")))
-                : Parser.getDateTime(input.substring(input.indexOf("/at") + 4));
+                ? Parser.getDateTime(input.substring(input.indexOf(
+                    "/at") + "/at ".length(), input.indexOf("to ")))
+                : Parser.getDateTime(input.substring(input.indexOf(
+                    "/at") + "/at ".length()));
 
             LocalDateTime endDate = null;
             if (input.contains("to ")) {
-                String endDateString = input.substring(input.indexOf("to ") + 3);
+                String timeFormat = "hh:mm:ss";
+                String endDateString = input.substring(input.indexOf("to ") + "to ".length());
 
-                if (endDateString.length() <= 8) {
+                if (endDateString.length() <= timeFormat.length()) {
                     endDate = LocalDateTime.of(date.toLocalDate(), LocalTime.parse(endDateString));
                 } else {
                     endDate = Parser.getDateTime(endDateString);
@@ -180,9 +181,9 @@ public class TaskList {
 
             if (tasks.contains(event)) {
                 throw new DuplicateTaskException();
-            } else {
-                tasks.add(event);
             }
+
+            tasks.add(event);
 
         } catch (StringIndexOutOfBoundsException | InvalidDateException e) {
             throw new EventInvalidDate();
@@ -194,7 +195,7 @@ public class TaskList {
      * Adds a Deadline to the task list.
      *
      * @param input The description of the deadline.
-     * @throws DuplicateTaskException If an exsiting Deadline with the same description
+     * @throws DuplicateTaskException If an existing Deadline with the same description
      *                                and date is already on the list.
      * @throws DeadlineInvalidDate    If the date of the deadline given is not in a valid date time format.
      */
@@ -203,8 +204,8 @@ public class TaskList {
         try {
 
             String task = input.substring(0, input.indexOf('/')).trim();
-
-            LocalDateTime date = Parser.getDateTime(input.substring(input.indexOf("/by") + 4));
+            LocalDateTime date = Parser.getDateTime(input.substring(
+                input.indexOf("/by") + "/by ".length()));
 
             Deadline deadline = new Deadline(task, date);
 
@@ -261,6 +262,7 @@ public class TaskList {
                 }
             }
 
+            // Store deleted tasks to print and set it to null in the tasks list
             for (Integer taskNo: taskNumbers) {
                 deletedTasks.add(tasks.get(taskNo - 1));
                 tasks.set(taskNo - 1, null);
@@ -268,6 +270,7 @@ public class TaskList {
 
             tasks.removeIf(Objects::isNull);
 
+            // Print deleted tasks
             StringBuilder str = new StringBuilder();
             str.append("Noted. I've removed these tasks:\n");
 
@@ -278,6 +281,7 @@ public class TaskList {
             return str.toString().trim();
 
         } catch (IndexOutOfBoundsException e) {
+            tasks.removeIf(Objects::isNull);
             throw new InvalidIndexException(tasks.size());
         }
     }

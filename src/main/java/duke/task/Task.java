@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /** The task to be put on the list. */
 public abstract class Task {
@@ -10,6 +11,18 @@ public abstract class Task {
 
     /** The completion status. */
     protected final boolean isDone;
+
+    /** Save Date Format. */
+    protected static final DateTimeFormatter SAVE_DATE_FORMAT = DateTimeFormatter.ofPattern("y-MM-dd");
+
+    /** Save Time Format. */
+    protected static final DateTimeFormatter SAVE_TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+    /** Print DateTime Format. */
+    protected static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd MMM y, h:mm a");
+
+    /** Print Time Format. */
+    protected static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("h:mm a");
 
     /**
      * Constructs a Task.
