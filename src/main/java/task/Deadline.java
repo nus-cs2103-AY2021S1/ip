@@ -34,6 +34,7 @@ public class Deadline extends Task {
      * @return Date of deadline.
      */
     public LocalDate getDate() {
+        assert date != null;
         return date;
     }
 
@@ -43,7 +44,7 @@ public class Deadline extends Task {
      * @return Time of deadline.
      */
     public LocalTime getTime() {
-        return time;
+        return (time != null) ? time : LocalTime.MIDNIGHT;
     }
 
     /**
