@@ -52,8 +52,8 @@ public class AddCommand extends Command {
 
         case DEADLINE:
             try {
-                String[] split = this.input.split(" /by ", 2);
-                Task newDeadlineTask = new Deadline(split[0], split[1]);
+                String[] detailsDateTime = this.input.split(" /by ", 2);
+                Task newDeadlineTask = new Deadline(detailsDateTime[0], detailsDateTime[1]);
                 return addTask(newDeadlineTask, taskList, ui, storage);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Please enter a deadline to complete the task by"
@@ -62,8 +62,8 @@ public class AddCommand extends Command {
 
         case EVENT:
             try {
-                String[] split = this.input.split(" /at ", 2);
-                Task newEventTask = new Event(split[0], split[1]);
+                String[] detailsDateTime = this.input.split(" /at ", 2);
+                Task newEventTask = new Event(detailsDateTime[0], detailsDateTime[1]);
                 return addTask(newEventTask, taskList, ui, storage);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Please enter the time at which the event will take place"

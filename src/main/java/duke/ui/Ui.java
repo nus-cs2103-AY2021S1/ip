@@ -32,7 +32,7 @@ public class Ui {
             out.append(s).append("\n");
         }
 
-        return out.toString();
+        return out.toString().trim();
     }
 
     /**

@@ -104,7 +104,6 @@ public class Storage {
             default:
                 throw new DukeException("I received an unknown task!");
             }
-
         }
         return tasks;
     }
