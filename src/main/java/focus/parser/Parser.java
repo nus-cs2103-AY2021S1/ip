@@ -52,6 +52,7 @@ public class Parser {
         } else { // handle invalid inputs
             throw new InvalidCommandException();
         }
+        assert !command.equals(null) : "Command should not be null here.";
         return command;
     }
 

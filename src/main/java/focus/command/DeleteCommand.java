@@ -35,6 +35,7 @@ public class DeleteCommand extends Command {
         if (indexString.isBlank()) {
             throw new InvalidTaskNumberException();
         }
+        assert !indexString.isEmpty() : "Index string should not be blank here.";
 
         int index = Integer.parseInt(indexString);
         boolean indexIsLessThanZero = index <= 0;
@@ -42,6 +43,8 @@ public class DeleteCommand extends Command {
         if (indexIsLessThanZero || indexIsMoreThanListSize) {
             throw new InvalidTaskNumberException();
         }
+        assert !((index <= 0) || (index > taskList.getSize())) : "Index should not be less than 0 or exceed"
+                + " task list size.";
         return taskList.deleteTask(index, storage);
     }
 }

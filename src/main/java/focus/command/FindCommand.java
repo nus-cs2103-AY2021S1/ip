@@ -35,6 +35,7 @@ public class FindCommand extends Command {
         if (keyword.isBlank()) {
             throw new InvalidTaskKeywordException();
         }
+        assert !keyword.isEmpty() : "Keyword should not be blank here.";
         return taskList.findTasks(keyword.trim());
     }
 }

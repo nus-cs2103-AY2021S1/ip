@@ -29,6 +29,7 @@ public class ListCommand extends Command {
         if (taskList.getSize() == 0) {
             throw new InvalidListCommandException();
         } else {
+            assert !(taskList.getSize() < 0) : "Task list size should not be less than zero at all.";
             return taskList.listTasks();
         }
     }

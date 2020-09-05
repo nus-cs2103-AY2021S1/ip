@@ -51,6 +51,7 @@ public class AddCommand extends Command {
         case "event":
             return addEvent(input, taskList, storage);
         default:
+            assert false : "All types of tasks are dealt with and program should not reach here.";
             return "";
         }
     }
@@ -65,6 +66,7 @@ public class AddCommand extends Command {
      * @throws FocusException If input does not meet criteria.
      */
     private String addToDo(String input, TaskList taskList, Storage storage) throws FocusException {
+        assert !input.isEmpty() : "Input should not be blank here.";
         String information;
         try { // user did not input description of to-do task
             information = input.split("todo")[1];
@@ -75,6 +77,7 @@ public class AddCommand extends Command {
             throw new InvalidTaskDescriptionException();
         }
         String description = information.substring(1);
+        assert !description.isEmpty() : "Description should not be blank here.";
         return taskList.addToDo(description, storage);
     }
 
@@ -88,6 +91,7 @@ public class AddCommand extends Command {
      * @throws FocusException If input does not meet criteria.
      */
     private String addDeadline(String input, TaskList taskList, Storage storage) throws FocusException {
+        assert !input.isEmpty() : "Input should not be blank here.";
         String information;
         try { // user did not input description of deadline task
             information = input.split("deadline")[1];
@@ -121,6 +125,7 @@ public class AddCommand extends Command {
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateException();
         }
+        assert !description.isEmpty() : "Description should not be blank here.";
         return taskList.addDeadline(description, date, storage);
     }
 
@@ -134,6 +139,7 @@ public class AddCommand extends Command {
      * @throws FocusException If input does not meet criteria.
      */
     private String addEvent(String input, TaskList taskList, Storage storage) throws FocusException {
+        assert !input.isEmpty() : "Input should not be blank here.";
         String information;
         try { // user did not input description of event task
             information = input.split("event")[1];
@@ -167,6 +173,7 @@ public class AddCommand extends Command {
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateException();
         }
+        assert !description.isEmpty() : "Description should not be blank here.";
         return taskList.addEvent(description, date, storage);
     }
 }

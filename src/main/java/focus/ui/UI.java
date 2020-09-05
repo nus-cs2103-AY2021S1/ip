@@ -15,6 +15,7 @@ public class UI {
                     + "|_|   \\___/ \\___| \\__,_||___/(_)\n\n";
         String greetings = "\tWelcome to\n" + logo + "\t\"\\(*^O^*) I am Pocus, your personal assistant!"
                 + "\n\tBefore we start, may I know your name?\n";
+        assert !greetings.isEmpty() : "Printing should not blank here.";
         return greetings;
     }
 
@@ -28,6 +29,7 @@ public class UI {
         String address = "\tHello there, " + name + "! How can I help you today?\n"
                 + "\tNote: If you are a first time user,\n"
                 + "\ttype 'help' for the list of commands to get started!\n";
+        assert !address.isEmpty() : "Printing should not blank here.";
         return address;
     }
 
@@ -52,6 +54,7 @@ public class UI {
                 + "\n\t\t\t- find <keyword>"
                 + "\n\t\tTo exit Focus:"
                 + "\n\t\t\t- bye\n";
+        assert !commands.isEmpty() : "Printing should not blank here.";
         return commands;
     }
 
@@ -63,6 +66,7 @@ public class UI {
     public String exitFocus() {
         String exit = "\tHopefully I have helped you today. Byeee! (*^O^*)/\"\n"
                 + "\tNote: This window close in 5 seconds.";
+        assert !exit.isEmpty() : "Printing should not blank here.";
         return exit;
     }
 }

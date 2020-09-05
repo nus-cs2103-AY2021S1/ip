@@ -31,6 +31,7 @@ public class HelpCommand extends Command {
         if (input.length() == 4) { // user's input is "help"
             return UI.listCommands();
         }
+        assert !(input.length() <= 4) : "Input length should be more than 4 here.";
         try {
             checker = input.split("help")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -39,6 +40,7 @@ public class HelpCommand extends Command {
         if (!checker.isBlank()) { // user's input is "help me" for example
             throw new InvalidHelpCommandException();
         } else { // user's input is "help " with spacings
+            assert !checker.isEmpty() : "Checker should not be blank here.";
             return UI.listCommands();
         }
     }
