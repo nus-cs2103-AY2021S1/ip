@@ -1,6 +1,8 @@
 package nite.task;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import nite.exception.NiteException;
 
@@ -105,10 +107,12 @@ public class TaskList {
      * @return List containing lines of text.
      */
     public ArrayList<String> tasksToText() {
-        ArrayList<String> strings = new ArrayList<>();
-        for (Task task : tasks) {
-            strings.add(task.toData());
-        }
+        ArrayList<String> strings = tasks.stream().map(Task::toData)
+                .collect(Collectors.toCollection(ArrayList::new));
+//        ArrayList<String> strings = new ArrayList<>();
+//        for (Task task : tasks) {
+//            strings.add(task.toData());
+//        }
         return strings;
     }
 
@@ -119,19 +123,23 @@ public class TaskList {
      */
     public String findTasks(String keyword) {
         assert !keyword.isEmpty() : "Keyword should not be empty.";
-        String tasksString = "";
-        Task t;
-        int numMatch = 0;
-        for (Task task : tasks) {
-            t = task;
-            if (!t.hasKeyword(keyword)) {
-                continue;
-            }
-            numMatch++;
-            tasksString += String.format("  %d.%s%n", numMatch, t);
-            assert numMatch > 0 : "Matching tasks should be more than 0 after adding task.";
-        }
-        return tasksString;
+        Stream<Task> matchingTasks = tasks.stream().filter(t -> t.hasKeyword(keyword));
+        Stream<String> stringsStream = matchingTasks.map(t -> String.format("  %s%n", t));
+        String matchingTasksString = stringsStream.reduce("",
+                (s, t) -> s += String.format("  %s%n", t));
+//        String tasks = "";
+//        Task t;
+//        int numMatch = 0;
+//        for (int i = 0; i < this.tasks.size(); i++) {
+//            t = this.tasks.get(i);
+//            if (t.hasKeyword(keyword)) {
+//                numMatch++;
+//                tasks += String.format("  %d.%s%n", numMatch, t);
+//                assert numMatch > 0 : "Matching tasks should be more than 0 after adding task.";
+//            }
+//        }
+//        return tasks;
+        return matchingTasksString;
     }
 
     /**
