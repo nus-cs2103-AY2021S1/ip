@@ -71,6 +71,9 @@ public class Ui {
      * @return the list message.
      */
     public String getListMessage(Tasks tasks) {
+        if (tasks.getSize() == 0) {
+            return "Your list is empty!";
+        }
         StringBuilder builder = new StringBuilder("Here are the tasks in your list:\n");
         return this.getListItems(builder, tasks.getTasks()).toString();
     }
