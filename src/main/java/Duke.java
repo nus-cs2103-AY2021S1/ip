@@ -40,7 +40,7 @@ public class Duke {
     }
 
     /**
-     * Get reply from Duke.
+     * Gets reply from Duke chatbot program.
      */
     public String getResponse(String input) {
         ByteArrayOutputStream formattedOutput = new ByteArrayOutputStream();
@@ -81,7 +81,7 @@ public class Duke {
     }
 
     /**
-     * Main method to start the Duke chatbot programme
+     * Main method to start the Duke chatbot programme.
      *
      * @param args The command line arguments.
      */

@@ -18,7 +18,7 @@ public class TaskList {
     }
 
     /**
-     * Return the size of the list.
+     * Returns the size of the list.
      *
      * @return The size of the list.
      */
@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Return the Task at the given index.
+     * Returns the Task at the given index.
      *
      * @param index Index of the Task.
      * @return The Task at the given index.
@@ -37,7 +37,7 @@ public class TaskList {
     }
 
     /**
-     * Add a Task to the list.
+     * Adds a Task to the list.
      *
      * @param task Task to be added.
      * @return true when Task is added.
@@ -47,7 +47,7 @@ public class TaskList {
     }
 
     /**
-     * Remove the Task at the given index.
+     * Removes the Task at the given index.
      *
      * @param index Index of the Task.
      * @return The Task that was removed.
@@ -57,7 +57,7 @@ public class TaskList {
     }
 
     /**
-     * Find the all Tasks with descriptions containing the word.
+     * Finds all the Tasks with descriptions containing the word.
      *
      * @param word Word to find.
      * @return The lists of Tasks containing the word.
