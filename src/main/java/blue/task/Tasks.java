@@ -38,6 +38,7 @@ public class Tasks {
      * @throws IndexOutOfBoundsException If the task is not in the task list.
      */
     public Task getTask(int taskIndex) throws IndexOutOfBoundsException {
+        assert taskIndex >= 0 : "index of task is less than 0";
         return this.tasks.get(taskIndex);
     }
 
@@ -92,6 +93,7 @@ public class Tasks {
      * @throws IndexOutOfBoundsException If the task is not in the task list.
      */
     public void removeTask(int taskIndex) throws IndexOutOfBoundsException {
+        assert taskIndex >= 0 : "index of task is less than 0";
         this.tasks.remove(taskIndex);
     }
 

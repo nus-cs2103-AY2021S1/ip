@@ -53,7 +53,7 @@ public class Event extends Task {
      */
     @Override
     public String getData() {
-        return String.format("%s_%s ", super.getData(), date);
+        return String.format("%s_%s ", super.getData(), this.date);
     }
 
     /**
@@ -73,6 +73,6 @@ public class Event extends Task {
      */
     private String getFormattedDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        return date.format(formatter);
+        return this.date.format(formatter);
     }
 }

@@ -53,7 +53,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getData() {
-        return String.format("%s_%s ", super.getData(), deadline);
+        return String.format("%s_%s ", super.getData(), this.deadline);
     }
 
     /**
@@ -73,6 +73,6 @@ public class Deadline extends Task {
      */
     private String getFormattedDeadline() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        return deadline.format(formatter);
+        return this.deadline.format(formatter);
     }
 }
