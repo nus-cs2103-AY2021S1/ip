@@ -2,6 +2,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.Month;
 import java.util.HashMap;
+import java.util.Optional;
+
 import static java.time.Month.*;
 
 public class ScheduleCommand extends Command {
@@ -41,8 +43,8 @@ public class ScheduleCommand extends Command {
             throw new WrongDateFormatException();
         } catch (DateTimeParseException e) {
             String[] taskDetails = this.command.split(" ");
-            Month targetMonth = monthsHashMap.get(taskDetails[1]);
-            dukeResponse = dukeUI.findScheduleForMonth(tasks, targetMonth);
+            dukeResponse =  Optional.ofNullable(monthsHashMap.get(taskDetails[1]))
+                    .map(month -> dukeUI.findScheduleForMonth(tasks, month)).orElse("Invalid Date!");
             return dukeResponse;
         }
     }

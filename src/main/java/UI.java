@@ -112,7 +112,7 @@ public class UI {
 
     protected String findScheduleForMonth(TaskList tasks, Month month) {
         String str1 = "";
-        String str2 = "\nHere is your schedule for this day!\n";
+        String str2 = "\nHere is your schedule for ths Month!\n";
         int index = 1;
         ArrayList<Task> eventAndDeadlineTasks= tasks.filterTask();
         for (Task eventOrDeadline : eventAndDeadlineTasks) {
