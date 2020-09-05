@@ -1,5 +1,4 @@
 T|1|sleep
 E|0|project meeting|30/3/2019 1412
 D|0|concert preparation|14/12/2020 1312
-T|0|test long string
-E|1|concert|13/1/2012 0011
+D|1|project|12/12/2012 1212

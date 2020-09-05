@@ -26,39 +26,28 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         try {
-            ArrayList<Task> outputTaskArray = new ArrayList<>();
+            ArrayList<Task> outputTaskArray = new ArrayList<Task>();
             FileReader fileToRead = new FileReader(path);
             assert fileToRead != null : "File to be read should not be empty!";
             BufferedReader bufferedReader = new BufferedReader(fileToRead);
             String inputData = bufferedReader.readLine();
 
             while (inputData != null) {
-                String taskDate;
-                String taskTime;
-                String[] dateTimeArray;
-                String[] userInputArray = inputData.split("\\|");
-                int boolDone = Integer.parseInt(userInputArray[1]);
-                String descriptions = userInputArray[2];
+                String taskType = getTaskType(inputData);
 
-                switch (userInputArray[0]) {
+                switch (taskType) {
                 case "T":
-                    Todo newTodo = new Todo(descriptions, boolDone);
+                    Todo newTodo = parseToDo(inputData);
                     outputTaskArray.add(newTodo);
                     break;
 
                 case "D":
-                    dateTimeArray = userInputArray[3].split(" ");
-                    taskDate = dateTimeArray[0];
-                    taskTime = dateTimeArray[1];
-                    Deadline newDeadline = new Deadline(boolDone, descriptions, taskDate, taskTime);
+                    Deadline newDeadline = parseDeadline(inputData);
                     outputTaskArray.add(newDeadline);
                     break;
 
                 case "E":
-                    dateTimeArray = userInputArray[3].split(" ");
-                    taskDate = dateTimeArray[0];
-                    taskTime = dateTimeArray[1];
-                    Event newEvent = new Event(boolDone, descriptions, taskDate, taskTime);
+                    Event newEvent = parseEvent(inputData);
                     outputTaskArray.add(newEvent);
                     break;
 
@@ -70,9 +59,8 @@ public class Storage {
             bufferedReader.close();
             return outputTaskArray;
         } catch (IOException error) {
-            throw new DukeException("'duke.txt' cannot be loaded from the specified file path. Please try again.");
+            throw new DukeException("File cannot be loaded from the specified file path. Please try again!");
         }
-
     }
 
     /**
@@ -82,30 +70,32 @@ public class Storage {
      */
     public void saveToDisk(TaskList arrayOfTasks) throws DukeException {
         try {
+            final int isDone = 1;
+            final int notDone = 0;
             String outputLine = "";
             FileWriter writer = new FileWriter(path);
             int sizeOfArray = arrayOfTasks.taskArraySize();
             int index = 0;
-            int isDone;
+            int check;
 
             while (index < sizeOfArray) {
                 Task task = arrayOfTasks.get(index);
 
                 if (task.isDone) {
-                    isDone = 1;
+                    check = isDone;
                 } else {
-                    isDone = 0;
+                    check = notDone;
                 }
 
                 if ((task.getClass().equals(Todo.class))) {
-                    outputLine = "T" + "|" + isDone + "|" + task.description;
+                    outputLine = "T" + "|" + check + "|" + task.description;
                 } else if ((task.getClass().equals(Deadline.class))) {
                     Deadline deadlineTask = (Deadline) task;
-                    outputLine = "D" + "|" + isDone + "|" + deadlineTask.description + "|"
+                    outputLine = "D" + "|" + check + "|" + deadlineTask.description + "|"
                             + deadlineTask.deadlineDate.date + " " + deadlineTask.deadlineTime.timing;
                 } else if ((task.getClass().equals(Event.class))) {
                     Event eventTask = (Event) task;
-                    outputLine = "E" + "|" + isDone + "|" + eventTask.description + "|"
+                    outputLine = "E" + "|" + check + "|" + eventTask.description + "|"
                             + eventTask.eventDate.date + " " + eventTask.eventTime.timing;
                 } else {
                     // Do nothing
@@ -116,7 +106,7 @@ public class Storage {
             }
             writer.close();
         } catch (Exception error) {
-            throw new DukeException("Error saving tasks to specified file path. Please try again.");
+            throw new DukeException("Error writing to specified file path. Please try again.");
         }
     }
 
@@ -133,5 +123,58 @@ public class Storage {
      */
     public boolean isStorageChanged() {
         return isFileChanged;
+    }
+
+    /**
+     * Parses deadline command.
+     * @param inputData String input by user on command line.
+     * @return Deadline object.
+     */
+    private Deadline parseDeadline(String inputData) {
+        String[] userInputArray = inputData.split("\\|");
+        String[] dateTimeTokens = userInputArray[3].split(" ");
+        String taskDate = dateTimeTokens[0];
+        String taskTime = dateTimeTokens[1];
+        String taskDesc = userInputArray[2];
+        int boolDone = Integer.valueOf(userInputArray[1]);
+        return new Deadline(boolDone, taskDesc, taskDate, taskTime);
+    }
+
+    /**
+     * Parses Todo command.
+     * @param inputData String input by user on command line.
+     * @return Todo object.
+     */
+    private Todo parseToDo(String inputData) {
+        String[] userInputArray = inputData.split("\\|");
+        int boolDone = Integer.valueOf(userInputArray[1]);
+        String taskDesc = userInputArray[2];
+        return new Todo(taskDesc, boolDone);
+
+    }
+
+    /**
+     * Parses Event command.
+     * @param inputData String input by user on command line.
+     * @return Event object.
+     */
+    private Event parseEvent(String inputData) {
+        String[] userInputArray = inputData.split("\\|");
+        String[] dateTimeTokens = userInputArray[3].split(" ");
+        String taskDate = dateTimeTokens[0];
+        String taskTime = dateTimeTokens[1];
+        String taskDesc = userInputArray[2];
+        int boolDone = Integer.valueOf(userInputArray[1]);
+        return new Event(boolDone, taskDesc, taskDate, taskTime);
+    }
+
+    /**
+     * Obtains type of task/command.
+     * @param inputData String input by user on command line.
+     * @return First alphabet of task in string.
+     */
+    private String getTaskType(String inputData) {
+        String[] userInputArray = inputData.split("\\|");
+        return userInputArray[0];
     }
 }

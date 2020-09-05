@@ -4,7 +4,7 @@
 public class Parser {
     /**
      * Parse method to handle all types of commands.
-     * @param inputLine Description of the input command.
+     * @param inputLine String that is input by user on command line.
      * @return Command object that has been specified by input file.
      * @throws DukeException if there is an issue.
      */
@@ -17,178 +17,47 @@ public class Parser {
 
         switch (commandCheck) {
         case "bye":
-            newTaskObject = new ByeCommand();
+            newTaskObject = processByeCommand();
             break;
 
         case "list":
-            newTaskObject = new ListCommand();
+            newTaskObject = processListCommand();
             break;
 
         case "done":
-            if (numOfInput < 2) {
-                throw new DukeException("Please specify which task you have completed.");
-            }
-
-            try {
-                Integer.parseInt(userInputArray[1]);
-            } catch (NumberFormatException error) {
-                throw new DukeException("Please input task index as a valid integer.");
-            }
-
-            int indexOfDoneTask = Integer.parseInt(userInputArray[1]) - 1;
-            newTaskObject = new DoneCommand(indexOfDoneTask);
+            newTaskObject = processDoneCommand(userInputArray, numOfInput);
             break;
 
         case "todo":
-            if (numOfInput == 1) {
-                throw new DukeException("\u2620 Oh no! The description of a todo task cannot be empty.");
-            }
-            StringBuilder todoString = new StringBuilder();
-            int j = 1;
-            while (j < numOfInput) {
-                todoString.append(userInputArray[j]);
-                todoString.append(" ");
-                j++;
-            }
-            String outputTodoDesc = todoString.toString().trim();
-            newTaskObject = new TodoCommand(outputTodoDesc);
+            newTaskObject = processTodoCommand(userInputArray, numOfInput);
             break;
 
         case "event":
-            try {
-                if (numOfInput == 1) {
-                    throw new DukeException("\u2620 Oh no! The description of an event task cannot be empty.");
+                try {
+                    newTaskObject = processEventCommand(userInputArray, numOfInput, inputLine);
+                } catch (ArrayIndexOutOfBoundsException error) {
+                    throw new DukeException("Error encountered while parsing event command. Please ensure "
+                                            + "that the event command is in the following format: "
+                                            + "(event) (description) (/at) (date).");
                 }
-
-                if (numOfInput < 4) {
-                    throw new DukeException("\u2620 Oh no! The correct way to log an event is: (event) "
-                            + "(description) (/at) (date & time)");
-                }
-
-                boolean checkForEvent = false;
-                StringBuilder eventString = new StringBuilder();
-                StringBuilder eventDateField = new StringBuilder();
-                StringBuilder eventTimingField = new StringBuilder();
-                String trimmedEvent = inputLine.split("/at")[1].trim();
-                String[] splitElements = trimmedEvent.split(" ");
-                int numOfElements = splitElements.length;
-
-                if (numOfElements != 2) {
-                    throw new DukeException("Date and Timing fields has not been specified correctly. "
-                                            + "Please try again!");
-                }
-
-                int z = 1;
-                while (z < numOfInput) {
-                    if (userInputArray[z].equals("/at")) {
-                        checkForEvent = true;
-                    } else {
-                        if (!checkForEvent) {
-                            eventString.append(userInputArray[z]);
-                            eventString.append(" ");
-                        } else {
-                            if (z == numOfInput - 1) {
-                                eventTimingField.append(userInputArray[z]);
-                            } else {
-                                eventDateField.append(userInputArray[z]);
-                            }
-                        }
-                    }
-                    z++;
-                }
-                String outputEventDesc = eventString.toString().trim();
-                String outputEventDate = eventDateField.toString().trim();
-                String outputEventTime = eventTimingField.toString().trim();
-                newTaskObject = new EventCommand(outputEventDesc, outputEventDate, outputEventTime);
-            } catch (ArrayIndexOutOfBoundsException error) {
-                throw new DukeException("Error encountered while parsing event command. Please ensure "
-                                        + "that the event command is in the following format: "
-                                        + "(event) (description) (/at) (date & time).");
-            }
-
-            break;
+                break;
 
         case "deadline":
             try {
-                if (numOfInput == 1) {
-                    throw new DukeException("\u2620 Oh no! The description of a deadline task "
-                                            + "cannot be empty.");
-                }
-
-                if (numOfInput < 4) {
-                    throw new DukeException("\u2620 Oh no! The correct way to log a deadline is: (deadline) "
-                                           + "(description) (/by) (date & time)");
-                }
-
-                boolean checkForDate = false;
-                StringBuilder deadlineString = new StringBuilder();
-                StringBuilder dateField = new StringBuilder();
-                StringBuilder timingField = new StringBuilder();
-                String trimmedDeadline = inputLine.split("/by")[1].trim();
-                String[] splitElements1 = trimmedDeadline.split(" ");
-                int noOfElements = splitElements1.length;
-
-                if (noOfElements != 2) {
-                    throw new DukeException("Date and Timing fields has not been specified correctly. "
-                                            + "Please try again.");
-                }
-
-                int m = 1;
-                while (m < numOfInput) {
-                    if (userInputArray[m].equals("/by")) {
-                        checkForDate = true;
-                    } else {
-                        if (!checkForDate) {
-                            deadlineString.append(userInputArray[m]);
-                            deadlineString.append(" ");
-                        } else {
-                            if (m == numOfInput - 1) {
-                                timingField.append(userInputArray[m]);
-                            } else {
-                                dateField.append(userInputArray[m]);
-                            }
-                        }
-                    }
-                    m++;
-                }
-                String outputDeadlineDesc = deadlineString.toString().trim();
-                String outputDeadlineDate = dateField.toString().trim();
-                String outputDeadlineTime = timingField.toString().trim();
-                newTaskObject = new DeadlineCommand(outputDeadlineDesc, outputDeadlineDate, outputDeadlineTime);
+                newTaskObject = processDeadlineCommand(userInputArray, numOfInput, inputLine);
             } catch (ArrayIndexOutOfBoundsException error) {
                 throw new DukeException("Error encountered while parsing deadline command. Please ensure "
                                         + "that the deadline command is in the following format: "
-                                        + "(deadline) (description) (/by) (date & time).");
+                                        + "(deadline) (description) (/by) (date).");
             }
             break;
 
         case "delete":
-            if (numOfInput < 2) {
-                throw new DukeException("Please specify which task you wish to delete.");
-            }
-
-            try {
-                Integer.parseInt(userInputArray[1]);
-            } catch (NumberFormatException error) {
-                throw new DukeException("Please input task index as a valid integer.");
-            }
-
-            String indexToDelete = inputLine.split(" ")[1];
-            int indexOfTemp = Integer.parseInt(indexToDelete);
-            int currentTaskIndex = indexOfTemp - 1;
-
-            newTaskObject = new DeleteCommand(currentTaskIndex);
+            newTaskObject = processDeleteCommand(userInputArray, numOfInput, inputLine);
             break;
 
         case "find":
-            String[] arrayOfElements = inputLine.split(" ");
-            int numOfTokens = arrayOfElements.length;
-            if (numOfTokens < 2) {
-                throw new DukeException("Please specific keyword to locate task. Eg. find book");
-            }
-            String tempString = inputLine.split("find")[1];
-            String strippedKeyword = tempString.strip();
-            newTaskObject = new FindCommand(strippedKeyword);
+            newTaskObject = processFindCommand(inputLine);
             break;
 
         default:
@@ -196,5 +65,170 @@ public class Parser {
                                     + "' is not within my realm of knowledge. " + "\u2620 ");
         }
         return newTaskObject;
+    }
+
+    private static ByeCommand processByeCommand() {
+        return new ByeCommand();
+    }
+
+    private static ListCommand processListCommand() {
+        return new ListCommand();
+    }
+
+    private static DoneCommand processDoneCommand(String[] userInputArray, Integer numOfInput) throws DukeException {
+        if (numOfInput < 2) {
+            throw new DukeException("Please specify which task you have completed.");
+        }
+
+        try {
+            Integer.parseInt(userInputArray[1]);
+        } catch (NumberFormatException error) {
+            throw new DukeException("Please input task index as a valid integer.");
+        }
+
+        int indexOfDoneTask = Integer.parseInt(userInputArray[1]) - 1;
+        return new DoneCommand(indexOfDoneTask);
+    }
+
+    private static TodoCommand processTodoCommand(String[] userInputArray, Integer numOfInput) throws DukeException {
+        if (numOfInput == 1) {
+            throw new DukeException("\u2620 Oh no! The description of a todo task cannot be empty.");
+        }
+        StringBuilder todoString = new StringBuilder();
+        int j = 1;
+        while (j < numOfInput) {
+            todoString.append(userInputArray[j]);
+            todoString.append(" ");
+            j++;
+        }
+        String outputTodoDesc = todoString.toString().trim();
+        return new TodoCommand(outputTodoDesc);
+    }
+
+    private static EventCommand processEventCommand(String[] userInputArray, Integer numOfInput, String inputLine)
+                                                    throws DukeException {
+        if (numOfInput == 1) {
+            throw new DukeException("\u2620 Oh no! The description of an event task cannot be empty.");
+        }
+
+        if (numOfInput < 4) {
+            throw new DukeException("\u2620 Oh no! The correct way to log an event is: (event) "
+                    + "(description) (/at) (date)");
+        }
+
+        boolean checkForEvent = false;
+        StringBuilder eventString = new StringBuilder();
+        StringBuilder eventDateField = new StringBuilder();
+        StringBuilder eventTimingField = new StringBuilder();
+        String trimmedEvent = inputLine.split("/at")[1].trim();
+        String[] splitElements = trimmedEvent.split(" ");
+        int numOfElements = splitElements.length;
+
+        if (numOfElements != 2) {
+            throw new DukeException("Date and Timing fields has not been specified correctly. "
+                                    + "Please try again.");
+        }
+
+        int z = 1;
+        while (z < numOfInput) {
+            if (userInputArray[z].equals("/at")) {
+                checkForEvent = true;
+            } else {
+                if (!checkForEvent) {
+                    eventString.append(userInputArray[z]);
+                    eventString.append(" ");
+                } else {
+                    if (z == numOfInput - 1) {
+                        eventTimingField.append(userInputArray[z]);
+                    } else {
+                        eventDateField.append(userInputArray[z]);
+                    }
+                }
+            }
+            z++;
+        }
+        String outputEventDesc = eventString.toString().trim();
+        String outputEventDate = eventDateField.toString().trim();
+        String outputEventTime = eventTimingField.toString().trim();
+        return new EventCommand(outputEventDesc, outputEventDate, outputEventTime);
+    }
+
+    private static DeadlineCommand processDeadlineCommand(String[] userInputArray, Integer numOfInput, String inputLine)
+                                                          throws DukeException {
+        if (numOfInput == 1) {
+            throw new DukeException("\u2620 Oh no! The description of a deadline task "
+                                    + "cannot be empty.");
+        }
+
+        if (numOfInput < 4) {
+            throw new DukeException("\u2620 Oh no! The correct way to log a deadline is: (deadline) "
+                                    + "(description) (/by) (date)");
+        }
+
+        boolean checkForDate = false;
+        StringBuilder deadlineString = new StringBuilder();
+        StringBuilder dateField = new StringBuilder();
+        StringBuilder timingField = new StringBuilder();
+        String trimmedDeadline = inputLine.split("/by")[1].trim();
+        String[] splitElements1 = trimmedDeadline.split(" ");
+        int noOfElements = splitElements1.length;
+
+        if (noOfElements != 2) {
+            throw new DukeException("Date and Timing fields has not been specified correctly. "
+                                    + "Please try again.");
+        }
+
+        int m = 1;
+        while (m < numOfInput) {
+            if (userInputArray[m].equals("/by")) {
+                checkForDate = true;
+            } else {
+                if (!checkForDate) {
+                    deadlineString.append(userInputArray[m]);
+                    deadlineString.append(" ");
+                } else {
+                    if (m == numOfInput - 1) {
+                        timingField.append(userInputArray[m]);
+                    } else {
+                        dateField.append(userInputArray[m]);
+                    }
+                }
+            }
+            m++;
+        }
+        String outputDeadlineDesc = deadlineString.toString().trim();
+        String outputDeadlineDate = dateField.toString().trim();
+        String outputDeadlineTime = timingField.toString().trim();
+        return new DeadlineCommand(outputDeadlineDesc, outputDeadlineDate, outputDeadlineTime);
+    }
+
+    private static DeleteCommand processDeleteCommand(String[] userInputArray, Integer numOfInput, String inputLine)
+                                                      throws DukeException {
+        if (numOfInput < 2) {
+            throw new DukeException("Please specify which task you wish to delete.");
+        }
+
+        try {
+            Integer.parseInt(userInputArray[1]);
+        } catch (NumberFormatException error) {
+            throw new DukeException("Please input task index as a valid integer.");
+        }
+
+        String indexToDelete = inputLine.split(" ")[1];
+        int indexOfTemp = Integer.parseInt(indexToDelete);
+        int currentTaskIndex = indexOfTemp - 1;
+
+        return new DeleteCommand(currentTaskIndex);
+    }
+
+    private static FindCommand processFindCommand(String inputLine) throws DukeException {
+        String[] arrayOfElements = inputLine.split(" ");
+        int numOfTokens = arrayOfElements.length;
+        if (numOfTokens < 2) {
+            throw new DukeException("Please specific keyword to locate task. Eg. find book");
+        }
+        String tempString = inputLine.split("find")[1];
+        String strippedKeyword = tempString.strip();
+        return new FindCommand(strippedKeyword);
     }
 }

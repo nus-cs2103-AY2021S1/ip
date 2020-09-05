@@ -12,7 +12,7 @@ public class StorageTest {
             new Storage(wrongPath).load();
             fail();
         } catch (DukeException error) {
-            assertEquals("'duke.txt' cannot be loaded from the specified file path. Please try again.",
+            assertEquals("File cannot be loaded from the specified file path. Please try again!",
                                   error.getMessage());
         }
     }

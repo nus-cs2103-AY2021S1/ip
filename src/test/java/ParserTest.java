@@ -45,7 +45,7 @@ public class ParserTest {
             Parser.parse("event project meeting /at 4/1/2018");
             fail();
         } catch (DukeException error) {
-            assertEquals("Date and Timing fields has not been specified correctly. Please try again!",
+            assertEquals("Date and Timing fields has not been specified correctly. Please try again.",
                          error.getMessage());
         }
     }
