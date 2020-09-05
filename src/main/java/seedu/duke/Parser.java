@@ -4,9 +4,9 @@ package seedu.duke;
  * Parser processes each command from Ui and executes program accordingly.
  */
 public class Parser {
-    private TaskList taskLists;
-    private static final String INVALID_INPUT = "I don't know what that means! Try again.";
     private static final String LINES = "\n-----------------------------------------------\n";
+    private static final String INVALID_INPUT = "I don't know what that means! Try again.";
+    private TaskList taskLists;
 
     /**
      * Initializes an instance of a Parser.

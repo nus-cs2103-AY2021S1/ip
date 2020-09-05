@@ -8,7 +8,6 @@ import java.util.ArrayList;
  * Class that stores all the tasks in an arraylist.
  */
 public class TaskList {
-    private ArrayList<Task> taskLists;
     private static final String INVALID_RANGE = "Index out of range! Try again.\n";
     private static final String COMPLETED_TASK = "This task has already been completed!";
     private static final String MARK_DONE_TASK = "    Nice! I have marked this task as done:\n";
@@ -27,7 +26,9 @@ public class TaskList {
 
     private static final String TODO_SYMBOL = "T";
     private static final String EVENT_SYMBOL = "E";
-    private static final String DEADLINE_SYMBOL  = "D";
+    private static final String DEADLINE_SYMBOL = "D";
+
+    private ArrayList<Task> taskLists;
 
     /**
      * Initializes an instance of Tasklist.
@@ -91,7 +92,7 @@ public class TaskList {
      */
     public String completeTaskForGui(String userInput) {
         try {
-            if  (userInput.length() < 5) {
+            if (userInput.length() < 5) {
                 return (MISSING_INDEX);
             }
             String[] splitUserInput = userInput.split(" ");
@@ -397,7 +398,7 @@ public class TaskList {
             return err.getMessage();
         }
     }
-    
+
     /**
      * Iterates through the arraylist of tasks and print it out.
      *
