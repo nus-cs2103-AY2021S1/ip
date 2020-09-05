@@ -1,21 +1,10 @@
-import org.junit.Assert;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class TaskListTest {
-    private final PrintStream standardOut = System.out;
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-
-    @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(outputStreamCaptor));
-    }
-
     @Test
     public void taskListAddTask_addThreeTasks_success() {
         try {
@@ -35,7 +24,7 @@ public class TaskListTest {
             expectedTasks.add(new ToDo("buy gifts"));
 
             for(int i = 0; i < expectedTasks.size(); i++) {
-                Assert.assertEquals(tasks.get(i).toString(), expectedTasks.get(i).toString());
+                assertEquals(tasks.get(i).toString(), expectedTasks.get(i).toString());
             }
         } catch (DukeException e) {
             System.out.println("Error occurred while testing");
@@ -56,8 +45,8 @@ public class TaskListTest {
             taskList.markDone(2);
             ArrayList<Task> tasks = taskList.getTasks();
 
-            Assert.assertEquals(tasks.get(0).toString(), new Event("team meeting", "2020-09-01").toString());
-            Assert.assertEquals(tasks.get(2).toString(), "[T][✓] buy gifts");
+            assertEquals(tasks.get(0).toString(), new Event("team meeting", "2020-09-01").toString());
+            assertEquals(tasks.get(2).toString(), "[T][✓] buy gifts");
         } catch (DukeException e) {
             System.out.println("Error occurred while testing");
         }

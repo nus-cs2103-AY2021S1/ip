@@ -2,8 +2,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a task that has a deadline.
+ */
 public class Deadline extends Task {
-    protected LocalDate by;
+    private LocalDate by;
 
     public Deadline(String description, String by) throws DukeException {
         super(description);
@@ -15,7 +18,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toData() {
+    protected String toData() {
         return "D | " + super.toData() + " | " + by;
     }
 

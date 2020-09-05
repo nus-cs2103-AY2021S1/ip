@@ -1,15 +1,29 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the duke object which is a Personal Assistant Chatbot
+ * that helps a person keep track of various things.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;
     private Parser parser;
     private TaskList tasks;
 
-    protected final static String DATA_FILE_PATH = "data/dukeData.txt";
+    private final static String DATA_FILE_PATH = "data/dukeData.txt";
 
-    public Duke(String filePath) {
+    /**
+     * Returns lateral location of the specified position.
+     * If the position is unset, NaN is returned.
+     *
+     * @param filePath  Relative path of the data file
+     * @param y Y coordinate of position.
+     * @param zone Zone of position.
+     * @return Lateral location.
+     * @throws IllegalArgumentException  If zone is <= 0.
+     */
+    private Duke(String filePath) {
         ui = new Ui();
 
         ui.printLogo();
@@ -28,7 +42,10 @@ public class Duke {
         }
     }
 
-    public void run() {
+    /**
+     * Initializes Duke.
+     */
+    private void run() {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
