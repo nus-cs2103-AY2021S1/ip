@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.storage.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a request from the user to find tasks containing a keyword.

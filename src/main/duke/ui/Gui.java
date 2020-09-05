@@ -17,30 +17,25 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Gui extends Application {
 
-    private final String PATH = "data.txt";
-    private final Image IMG_USER = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
-    private final Image IMG_DUKE = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
-
-    private final DialogBox GREETING = DialogBox.dukeDialog(getDialogLabel("Hello."), new ImageView(IMG_DUKE));
+    private final String filePath = "data.txt";
+    private final Image imgUser = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
+    private final Image imgDuke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
     /* Sets a black 1px border with 2px padding around the Label.*/
-    private final String CSS_LABEL =
-            "-fx-padding: 5px;\n" +
-            "-fx-text-fill: EEEBE7;\n";
-
-    private TextField userInput = new TextField();
-    private Button sendButton = new Button("Send");
-    ScrollDialoguePane scrollDialoguePane = new ScrollDialoguePane();
-    Storage storage = new Storage(PATH);
-
+    private final String cssLabel =
+            "-fx-padding: 5px;\n"
+                    + "-fx-text-fill: EEEBE7;\n";
+    private ScrollDialoguePane scrollDialoguePane = new ScrollDialoguePane();
+    private Storage storage = new Storage(filePath);
+    private final TextField userInput = new TextField();
+    private final Button sendButton = new Button("Send");
     // One second delay for sending the "bye" before closing.
-    PauseTransition PAUSE = new PauseTransition(Duration.seconds(1));
+    private final PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
 
     public Gui() throws DukeIoException {
     }
@@ -49,7 +44,8 @@ public class Gui extends Application {
     public void start(Stage stage) throws Exception {
         stage.setTitle("Duke");
         scrollDialoguePane.setPrefSize(385, 535);
-        scrollDialoguePane.addDialog(GREETING);
+        DialogBox greeting = DialogBox.dukeDialog(getDialogLabel("Hello."), new ImageView(imgDuke));
+        scrollDialoguePane.addDialog(greeting);
 
         AnchorPane layout = new AnchorPane();
         layout.getChildren().addAll(userInput, sendButton, scrollDialoguePane);
@@ -66,20 +62,20 @@ public class Gui extends Application {
 
         sendButton.setOnMouseClicked(event -> {
             if (handleUserInput()) {
-                PAUSE.setOnFinished(event1 -> {
+                pauseTransition.setOnFinished(event1 -> {
                     stage.close();
                 });
-                PAUSE.playFromStart();
+                pauseTransition.playFromStart();
             }
             userInput.clear();
         });
 
         userInput.setOnAction(event -> {
             if (handleUserInput()) {
-                PAUSE.setOnFinished(event1 -> {
+                pauseTransition.setOnFinished(event1 -> {
                     stage.close();
                 });
-                PAUSE.playFromStart();
+                pauseTransition.playFromStart();
             }
             userInput.clear();
         });
@@ -88,7 +84,7 @@ public class Gui extends Application {
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-        textToAdd.setStyle(CSS_LABEL);
+        textToAdd.setStyle(cssLabel);
         textToAdd.setTextFill(Color.web("#FFFFFF")); // white text
         return textToAdd;
     }
@@ -115,10 +111,10 @@ public class Gui extends Application {
     }
 
     private DialogBox dukeDialog(String text) {
-        return  DialogBox.dukeDialog(getDialogLabel(text), new ImageView(IMG_DUKE));
+        return DialogBox.dukeDialog(getDialogLabel(text), new ImageView(imgDuke));
     }
 
     private DialogBox userDialog(String text) {
-        return  DialogBox.userDialog(getDialogLabel(text), new ImageView(IMG_USER));
+        return DialogBox.userDialog(getDialogLabel(text), new ImageView(imgUser));
     }
 }
