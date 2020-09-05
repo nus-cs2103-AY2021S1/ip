@@ -1,15 +1,17 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class EventTask extends Task {
+public class TaskEvent extends Task {
 
     private LocalDate eventDate;
     private LocalTime startTime;
     private LocalTime endTime;
 
 
-    public EventTask(String description) {
+    public TaskEvent(String description) {
         super(description.split(" /")[0]);
         String[] output = description.split("/");
         String pattern = ("(at?)(\\s)(\\S+)(\\s)(\\d{4})([-])(\\d{4})");
@@ -22,15 +24,33 @@ public class EventTask extends Task {
                 + endTemp.substring(2,4));
     }
 
-    public EventTask(String description, boolean done, String eventTime) {
+    public TaskEvent(String description, LocalDate eventDate, LocalTime startTime, LocalTime endTime) {
+        super(description);
+        this.eventDate = eventDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    public TaskEvent(String description, boolean done, String eventTime) {
         super(description);
         isDone = done;
-        this.eventTime = eventTime;
+
+        String pattern = ("(\\S+)(\\s)(\\d{4})([-])(\\d{4})");
+        eventDate = LocalDate.parse(eventTime.replaceAll(pattern, "$1"));
+        String startTemp = eventTime.replaceAll(pattern, "$3");
+        String endTemp = eventTime.replaceAll(pattern, "$5");
+        startTime = LocalTime.parse(startTemp.substring(0,2) + ":"
+                + startTemp.substring(2,4));
+        endTime = LocalTime.parse(endTemp.substring(0,2) + ":"
+                + endTemp.substring(2,4));
     }
 
     @Override
     public String[] getSaveData() {
-        return new String[] {"E", isDone ? "1" : "0", description, eventTime};
+        return new String[] {"E", isDone ? "1" : "0", description,
+                String.format("%s %s-%s", eventDate.format(DateTimeFormatter.ISO_LOCAL_DATE),
+                        startTime.format(DateTimeFormatter.ofPattern("Hmm")),
+                        endTime.format(DateTimeFormatter.ofPattern("Hmm")))};
     }
 
     @Override

@@ -1,10 +1,12 @@
-public class ToDoTask extends Task {
+package duke;
 
-    public ToDoTask(String description) {
+public class TaskToDo extends Task {
+
+    public TaskToDo(String description) {
         super(description);
     }
 
-    public ToDoTask(String description, boolean done)
+    public TaskToDo(String description, boolean done)
     {
         super(description);
         isDone = done;
