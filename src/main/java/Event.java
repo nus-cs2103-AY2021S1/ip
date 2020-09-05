@@ -19,12 +19,9 @@ public class Event extends Task {
         this.at = at;
     }
 
-    /**
-     * Returns the duedate of the event.
-     * @return
-     */
-    protected LocalDate getAt() {
-        return this.at;
+    @Override
+    protected LocalDate getDeadline() {
+        return at;
     }
 
     /**

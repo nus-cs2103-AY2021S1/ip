@@ -89,4 +89,8 @@ public class UI {
             return str2 + allTask;
         }
     }
+
+    protected String sortTasks() {
+        return "\nYour Tasks has been sorted! :)\n";
+    }
 }

@@ -12,6 +12,7 @@ public class Todo extends Task {
         super(description);
     }
 
+
     /**
      * Prints the Todo object.
      * @return string representation of a Todo.

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Class to represent all the tasks.
@@ -79,5 +80,19 @@ public class TaskList {
             }
         }
         return foundTasks;
+    }
+
+    protected ArrayList<Task> sortTask() {
+        ArrayList<Task> sortedEventAndDeadline = this.taskList.stream()
+                                                    .filter(task -> task instanceof Deadline
+                                                            || task instanceof Event)
+                                                    .sorted((task1, task2) -> task1.getDeadline()
+                                                            .compareTo(task2.getDeadline()))
+                                                    .collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Task> onlyTodo = this.taskList.stream()
+                                    .filter(task -> task instanceof Todo)
+                                    .collect(Collectors.toCollection(ArrayList::new));
+        sortedEventAndDeadline.addAll(onlyTodo);
+        return sortedEventAndDeadline;
     }
 }

@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Class to represent a Task object.
  * @author vanGoghhh
@@ -57,6 +59,10 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    protected LocalDate getDeadline() {
+        return null;
+    }
+
     /**
      * Transform the task into a file friendly format.
      * @return string representation of task in file format.
@@ -68,11 +74,11 @@ public class Task {
         }
         if (this instanceof Event) {
             return "E//" + this.getTaskStatus() + "//"
-                    + this.description + "//" + ((Event) this).getAt();
+                    + this.description + "//" + ((Event) this).getDeadline();
         }
         if (this instanceof Deadline) {
             return "D//" + this.getTaskStatus() + "//"
-                    + this.description + "//" + ((Deadline) this).getBy();
+                    + this.description + "//" + ((Deadline) this).getDeadline();
         }
         return " ";
     }

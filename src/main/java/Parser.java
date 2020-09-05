@@ -29,7 +29,10 @@ public class Parser {
             return new ByeCommand();
         } else if (command[0].equals("find")) {
             return new FindCommand(userCommand);
-        } else {
+        } else if (command[0].equals("sort")) {
+            return new SortCommand(userCommand);
+        }
+        else {
             throw new InvalidCommandException();
         }
     }
