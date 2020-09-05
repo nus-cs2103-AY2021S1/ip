@@ -45,74 +45,89 @@ public class Parser {
         } else if (command.equals("list")) {
             return "Here are the tasks in your list:\n" + taskList.listTasks();
         } else if (command.equals("done")) {
-            try {
-                Task task = taskList.getTasks().get(this.input.nextInt() - 1);
-                task.completeTask();
-                return "This task has been marked as done:\n" + task.toString();
-            } catch (IndexOutOfBoundsException e) {
-                return "OOPS!!! Task number is invalid.";
-            } catch (NoSuchElementException e) {
-                if (this.input.hasNextLine()) {
-                    this.input.nextLine();
-                }
-                return "OOPS!!! Task number must be a number.";
-            }
+            return executeDone(taskList);
         } else if (command.equals("delete")) {
-            try {
-                int taskNumber = this.input.nextInt();
-                Task task = taskList.getTasks().get(taskNumber - 1);
-                taskList.removeTask(taskNumber - 1);
-                return "This task has been removed:\n" + task.toString()
-                        + "\nNow you have " + taskList.getTasks().size() + " in the list.";
-            } catch (IndexOutOfBoundsException e) {
-                return "OOPS!!! Task number is invalid.";
-            } catch (NoSuchElementException e) {
-                if (this.input.hasNextLine()) {
-                    this.input.nextLine();
-                }
-                return "OOPS!!! Task number must be a number.";
-            }
+            return executeDelete(taskList);
         } else if (command.equals("find")) {
-            String keyword;
-            try {
-                keyword = input.nextLine().substring(1);
-            } catch (StringIndexOutOfBoundsException | NoSuchElementException e) {
-                return "OOPS!!! Keyword cannot be empty.";
-            }
-            TaskList foundTasks = new TaskList(taskList.findTasks(keyword));
-            return "Here are the matching tasks in your list:\n" + foundTasks.listTasks();
+            return executeFind(taskList);
         } else {
-            try {
-                TaskType.TypeOfTask typeOfTask;
+            return executeNewTask(taskList, command);
+        }
+    }
 
-                switch (command) {
-                case "todo":
-                    typeOfTask = TaskType.TypeOfTask.TODO;
-                    break;
-                case "deadline":
-                    typeOfTask = TaskType.TypeOfTask.DEADLINE;
-                    break;
-                case "event":
-                    typeOfTask = TaskType.TypeOfTask.EVENT;
-                    break;
-                default:
-                    if (this.input.hasNextLine()) {
-                        this.input.nextLine();
-                    }
-                    throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
+    private String executeDone(TaskList taskList) {
+        try {
+            Task task = taskList.getTasks().get(this.input.nextInt() - 1);
+            task.completeTask();
+            return "This task has been marked as done:\n" + task.toString();
+        } catch (IndexOutOfBoundsException e) {
+            return "OOPS!!! Task number is invalid.";
+        } catch (NoSuchElementException e) {
+            clearInputLine();
+            return "OOPS!!! Task number must be a number.";
+        }
+    }
 
-                Task newTask = getTask(command, typeOfTask, taskList);
-                taskList.addTask(newTask);
-                return "Got it. I've added this task:\n" + newTask.toString()
-                        + "\nNow you have " + taskList.getTasks().size() + " tasks in the list.";
-            } catch (InvalidCommandException e) {
-                return e.getMessage();
-            } catch (MissingInfoException e) {
-                return e.getMessage();
-            } catch (DateTimeParseException e) {
-                return "OOPS!!! Date format is invalid. Make sure it is yyyy-mm-ddTHH:mm.";
-            }
+    private String executeDelete(TaskList taskList) {
+        try {
+            int taskNumber = this.input.nextInt();
+            Task task = taskList.getTasks().get(taskNumber - 1);
+            taskList.removeTask(taskNumber - 1);
+            return "This task has been removed:\n" + task.toString()
+                    + "\nNow you have " + taskList.getTasks().size() + " in the list.";
+        } catch (IndexOutOfBoundsException e) {
+            return "OOPS!!! Task number is invalid.";
+        } catch (NoSuchElementException e) {
+            clearInputLine();
+            return "OOPS!!! Task number must be a number.";
+        }
+    }
+
+    private String executeFind(TaskList taskList) {
+        String keyword;
+        try {
+            keyword = input.nextLine().substring(1);
+        } catch (StringIndexOutOfBoundsException | NoSuchElementException e) {
+            return "OOPS!!! Keyword cannot be empty.";
+        }
+        TaskList foundTasks = new TaskList(taskList.findTasks(keyword));
+        return "Here are the matching tasks in your list:\n" + foundTasks.listTasks();
+    }
+
+    private String executeNewTask(TaskList taskList, String command) {
+        try {
+            TaskType.TypeOfTask typeOfTask = getTypeOfTask(command);
+
+            Task newTask = getTask(command, typeOfTask, taskList);
+            taskList.addTask(newTask);
+            return "Got it. I've added this task:\n" + newTask.toString()
+                    + "\nNow you have " + taskList.getTasks().size() + " tasks in the list.";
+        } catch (InvalidCommandException e) {
+            return e.getMessage();
+        } catch (MissingInfoException e) {
+            return e.getMessage();
+        } catch (DateTimeParseException e) {
+            return "OOPS!!! Date format is invalid. Make sure it is yyyy-mm-ddTHH:mm.";
+        }
+    }
+
+    private TaskType.TypeOfTask getTypeOfTask(String command) throws InvalidCommandException {
+        switch (command) {
+            case "todo":
+                return TaskType.TypeOfTask.TODO;
+            case "deadline":
+                return TaskType.TypeOfTask.DEADLINE;
+            case "event":
+                return TaskType.TypeOfTask.EVENT;
+            default:
+                clearInputLine();
+                throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    private void clearInputLine() {
+        if (this.input.hasNextLine()) {
+            this.input.nextLine();
         }
     }
 
