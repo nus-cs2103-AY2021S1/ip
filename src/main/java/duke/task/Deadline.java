@@ -89,7 +89,7 @@ public class Deadline extends Task {
      *
      * @return Deadline time in LocalTime.
      */
-    public LocalTime getTime() {
+    public LocalTime getDeadlineTime() {
         return this.time;
     }
 

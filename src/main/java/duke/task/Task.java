@@ -1,6 +1,10 @@
 package duke.task;
 
-public abstract class Task {
+import java.time.LocalDate;
+import java.time.LocalTime;
+import duke.command.Command;
+
+public abstract class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
@@ -66,6 +70,60 @@ public abstract class Task {
      * @return Done version of the old task.
      */
     public abstract Task markAsDone();
+
+    public LocalDate getTaskDate() {
+        if(this instanceof Todo) {
+            return LocalDate.MAX;
+        } else if (this instanceof Event) {
+            return ((Event) this).getEventDate();
+        } else if (this instanceof Deadline) {
+            return ((Deadline) this).getDeadline();
+        } else {
+            return null;
+        }
+    }
+
+    public LocalTime getTaskTime() {
+        if (this instanceof Todo) {
+            return LocalTime.MAX;
+        } else if (this instanceof Event) {
+            LocalTime eventTime = ((Event) this).getStartTime();
+            return eventTime == null
+                ? LocalTime.MAX
+                : eventTime;
+        } else if (this instanceof Deadline) {
+            LocalTime deadlineTime = ((Deadline) this).getDeadlineTime();
+            return deadlineTime == null
+                ? LocalTime.MAX
+                : deadlineTime;
+
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public int compareTo(Task other) {
+        if(this.getTaskDate().compareTo(other.getTaskDate()) > 0) {
+            if (this.getTaskTime().compareTo(other.getTaskTime()) > 0) {
+                if (this.getDescription().compareTo(other.getDescription()) > 0) {
+                    return 1;
+                } else if (this.getDescription().compareTo(other.getDescription()) == 0) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            } else if (this.getTaskTime().compareTo(other.getTaskTime()) == 0) {
+                return 0;
+            } else {
+                return -1;
+            }
+        } else if (this.getTaskDate().compareTo(other.getTaskDate()) == 0) {
+            return 0;
+        } else {
+            return -1;
+        }
+    }
 
     /**
      * Returns string representation of this task.
