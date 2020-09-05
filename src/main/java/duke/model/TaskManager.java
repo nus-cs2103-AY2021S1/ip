@@ -1,9 +1,9 @@
 package duke.model;
 
+import java.util.ArrayList;
+
 import duke.exceptions.DukeException;
 import duke.model.task.Task;
-
-import java.util.ArrayList;
 
 public class TaskManager {
     private ArrayList<Task> taskList;

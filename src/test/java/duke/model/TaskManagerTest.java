@@ -1,15 +1,15 @@
 package duke.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.time.LocalDate;
+
 import duke.exceptions.DukeException;
 import duke.model.task.Deadline;
 import duke.model.task.Event;
 import duke.model.task.ToDo;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TaskManagerTest {
     private TaskManager tm = new TaskManager();
@@ -41,7 +41,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    public void markTaskDone_ValidIndex() throws DukeException {
+    public void markTaskDone_validIndex() throws DukeException {
         assertEquals(0, tm.getTaskList().size());
         ToDo todo = new ToDo("Test");
         tm.addTask(todo);
@@ -51,7 +51,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    public void markTaskDone_InvalidIndex_exceptionThrown(){
+    public void markTaskDone_invalidIndex_exceptionThrown(){
         assertEquals(0, tm.getTaskList().size());
         ToDo todo = new ToDo("Test");
         tm.addTask(todo);
@@ -63,7 +63,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    public void deleteTask_ValidIndex() throws DukeException {
+    public void deleteTask_validIndex() throws DukeException {
         assertEquals(0, tm.getTaskList().size());
         ToDo todo = new ToDo("Test");
         tm.addTask(todo);
@@ -73,7 +73,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    public void deleteTask_InvalidIndex_exceptionThrown() {
+    public void deleteTask_invalidIndex_exceptionThrown() {
         assertEquals(0, tm.getTaskList().size());
         ToDo todo = new ToDo("Test");
         tm.addTask(todo);

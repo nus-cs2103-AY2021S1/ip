@@ -6,7 +6,7 @@ import duke.model.task.Task;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     public DoneCommand(String command) {
         super(command);

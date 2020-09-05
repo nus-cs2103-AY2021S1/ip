@@ -1,5 +1,8 @@
 package duke.logic.commands;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.exceptions.DukeException;
 import duke.model.TaskManager;
 import duke.model.task.Deadline;
@@ -8,18 +11,15 @@ import duke.model.task.ToDo;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+public class AddCommand extends Command {
 
-public class AddCommand extends Command{
-
-    public AddCommand(String command){
+    public AddCommand(String command) {
         super(command);
     }
 
     @Override
     public void execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
-        if (command.startsWith("deadline")){
+        if (command.startsWith("deadline")) {
             if (command.length() <= 9) {
                 throw new DukeException("Description of a deadline cannot be empty!");
             }

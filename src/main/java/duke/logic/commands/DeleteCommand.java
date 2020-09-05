@@ -6,7 +6,7 @@ import duke.model.task.Task;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
     public DeleteCommand(String command) {
         super(command);

@@ -1,15 +1,15 @@
 package duke.logic.commands;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.exceptions.DukeException;
 import duke.model.TaskManager;
 import duke.model.task.Task;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     public ExitCommand(String command) {
         super(command);
