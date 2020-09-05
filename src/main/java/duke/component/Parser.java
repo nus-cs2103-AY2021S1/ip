@@ -27,6 +27,7 @@ public class Parser {
     public static final String DONE_COMMAND_PREFIX = "done ";
     public static final String HAPPEN_COMMAND_PREFIX = "happen ";
     public static final String FIND_COMMAND_PREFIX = "find ";
+    public static final String FIX_COMMAND_PREFIX = "fix ";
     public static final String TODO = "todo";
     public static final String DEADLINE = "deadline";
     public static final String EVENT = "event";
@@ -60,6 +61,9 @@ public class Parser {
             "Latter date is before former date for happen between.";
     public static final String UNRECOGNIZED_HAPPEN_COMMAND_EXCEPTION = "Invalid happen command input.";
     public static final String INVALID_DATE_FORMAT_EXCEPTION = "Invalid date format. Please use yyyy-MM-dd.";
+    public static final String INVALID_EVENT_INDEX_EXCEPTION = "The index of task is not of the desired task type.";
+    public static final String FIX_COMMAND_FORMAT_EXCEPTION = "The format for fix command should be"
+            + "fix <task_index of event> <datetime to fix>";
     public static final DateTimeFormatter DATE_TIME_INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     public static final DateTimeFormatter DATE_TIME_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("hh:mm a   MMM d yyyy");
 
