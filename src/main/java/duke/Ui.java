@@ -57,8 +57,8 @@ public class Ui {
     /**
      * Adds the string representation of tasks in the taskList object to the string builder
      *
-     * @param taskList Object of the task list class
-     * @param s        Stringbuilder object containing message to be returned to user
+     * @param taskList Object of the task list class.
+     * @param s        Stringbuilder object containing message to be returned to user.
      */
     private void addTasksToStringBuilder(TaskList taskList, StringBuilder s) {
         for (int i = 0; i < taskList.getTaskList().size(); i++) {
@@ -69,8 +69,8 @@ public class Ui {
     /**
      * Uses the Java Scanner to read User Input and trims it
      *
-     * @return String containing the trimmed user input
-     * @throws DukeException When the user input given is invalid
+     * @return String containing the trimmed user input.
+     * @throws DukeException When the user input given is invalid.
      */
     public String readCommand() throws DukeException {
         String line = sc.nextLine();
@@ -84,8 +84,8 @@ public class Ui {
     /**
      * Function to display matching tasks
      *
-     * @param filteredTaskList TaskList containing already filtered task objects
-     * @return String containing information of matching tasks
+     * @param filteredTaskList TaskList containing already filtered task objects.
+     * @return String containing information of matching tasks.
      */
     public String displayMatchingTasks(TaskList filteredTaskList) {
 

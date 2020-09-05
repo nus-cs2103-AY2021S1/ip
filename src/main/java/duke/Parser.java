@@ -37,8 +37,8 @@ public class Parser {
      * Static method that takes in a String and returns a Command
      *
      * @param str String to be parsed
-     * @return Object of the Command Class
-     * @throws DukeException Any exceptions with parsing
+     * @return Object of the Command Class.
+     * @throws DukeException Any exceptions with parsing.
      */
     public static Command parse(String str) throws DukeException {
         switch (str.split(" ")[0]) {
@@ -67,8 +67,8 @@ public class Parser {
      * Parses the string str into a Find Command
      *
      * @param str String to be parsed
-     * @return Object of the Find Command Class
-     * @throws EmptyDescriptionException Exception thrown if str has no arguments
+     * @return Object of the Find Command Class.
+     * @throws EmptyDescriptionException Exception thrown if str has no arguments.
      */
     private static Command parseFindCommand(String str) throws EmptyDescriptionException {
         Matcher findMatcher = find.matcher(str);
@@ -83,8 +83,8 @@ public class Parser {
      * Parses the string str into a Event Command
      *
      * @param str String to be parsed
-     * @return Object of the Event Command Class
-     * @throws EmptyDescriptionException Exception thrown if str has no arguments
+     * @return Object of the Event Command Class.
+     * @throws EmptyDescriptionException Exception thrown if str has no arguments.
      */
     private static Command parseEventCommand(String str) throws InvalidDateException, EmptyDescriptionException {
         Matcher eventMatcher = event.matcher(str);
@@ -100,8 +100,8 @@ public class Parser {
      * Parses the string str into a Deadline Command
      *
      * @param str String to be parsed
-     * @return Object of the Deadline Command Class
-     * @throws EmptyDescriptionException Exception thrown if str has no arguments
+     * @return Object of the Deadline Command Class.
+     * @throws EmptyDescriptionException Exception thrown if str has no arguments.
      */
     private static Command parseDeadlineCommand(String str) throws InvalidDateException, EmptyDescriptionException {
         Matcher deadlineMatcher = deadline.matcher(str);
@@ -117,8 +117,8 @@ public class Parser {
      * Parses the string str into a Todo Command
      *
      * @param str String to be parsed
-     * @return Object of the Todo Command Class
-     * @throws EmptyDescriptionException Exception thrown if str has no arguments
+     * @return Object of the Todo Command Class.
+     * @throws EmptyDescriptionException Exception thrown if str has no arguments.
      */
     private static Command parseTodoCommand(String str) throws EmptyDescriptionException {
         Matcher todoMatcher = todo.matcher(str);
@@ -134,8 +134,8 @@ public class Parser {
      * Parses the string str into a Delete Command
      *
      * @param str String to be parsed
-     * @return Object of the Delete Command Class
-     * @throws EmptyDescriptionException Exception thrown if str has no arguments
+     * @return Object of the Delete Command Class.
+     * @throws EmptyDescriptionException Exception thrown if str has no arguments.
      */
     private static Command parseDeleteCommand(String str) throws EmptyDescriptionException {
         Matcher deleteMatcher = delete.matcher(str);
@@ -152,8 +152,8 @@ public class Parser {
      * Parses the string str into a Done Command
      *
      * @param str String to be parsed
-     * @return Object of the Done Command Class
-     * @throws EmptyDescriptionException Exception thrown if str has no arguments
+     * @return Object of the Done Command Class.
+     * @throws EmptyDescriptionException Exception thrown if str has no arguments.
      */
     private static Command parseDoneCommand(String str) throws EmptyDescriptionException {
         Matcher doneMatcher = done.matcher(str);
@@ -169,8 +169,8 @@ public class Parser {
      * Static method that takes in a string and converts it into a LocalDateTime object
      *
      * @param dateString String representing a date in dd/MM/yyyy HHmm format
-     * @return Object of the LocalDateTime class
-     * @throws InvalidDateException Exception when the format of the string is invalid
+     * @return Object of the LocalDateTime class.
+     * @throws InvalidDateException Exception when the format of the string is invalid.
      */
     public static LocalDateTime parseDate(String dateString) throws InvalidDateException {
         Matcher dateMatcher = datePattern.matcher(dateString);
