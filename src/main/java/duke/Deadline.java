@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Deadlines class will handle tasks categorised as deadline.
  */
-public class Deadlines extends Task {
+public class Deadline extends Task {
 
     /** Deadline in LocalDate format */
     protected LocalDate deadline;
@@ -19,7 +19,7 @@ public class Deadlines extends Task {
      * @param description
      * @param deadline
      */
-    public Deadlines(String description, String deadline) {
+    public Deadline(String description, String deadline) {
         super(description);
         this.due = deadline;
         this.deadline = LocalDate.parse(deadline);
@@ -33,7 +33,7 @@ public class Deadlines extends Task {
      * @param deadline
      * @param isDone
      */
-    public Deadlines(String description, String deadline, boolean isDone) {
+    public Deadline(String description, String deadline, boolean isDone) {
         super(description, isDone);
         this.due = deadline;
         this.deadline = LocalDate.parse(deadline);
