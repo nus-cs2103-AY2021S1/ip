@@ -24,7 +24,7 @@ public class Ui {
 
 
     /**
-     * Constructor for Ui.
+     * Creates a new Ui object.
      * Default to System.in as input stream.
      */
     public Ui() {
@@ -33,9 +33,10 @@ public class Ui {
 
 
     /**
-     * Constructor for Ui.
+     * Creates a bew Ui object.
+     * Overrides default input stream.
      *
-     * @param sys input stream.
+     * @param sys Input stream to override default input stream.
      */
     public Ui(InputStream sys) {
         this.sc = new Scanner(sys);
@@ -53,12 +54,12 @@ public class Ui {
 
 
     public static String getEndMessage() {
-        return Ui.getEndMessage();
+        return Ui.END_MESSAGE;
     }
 
 
     /**
-     * Prints start message.
+     * Prints the start message.
      */
     public void printStartMessage() {
         String startMsg = Ui.getStartMessage();
@@ -67,7 +68,7 @@ public class Ui {
 
 
     /**
-     * Prints end message.
+     * Prints the end message.
      */
     public void printEndMessage() {
         String endMessage = Ui.getEndMessage();
@@ -76,7 +77,7 @@ public class Ui {
 
 
     /**
-     * Prints separator.
+     * Prints a separator.
      */
     private static void printSeparator() {
         System.out.println("____________________________________________________________");
@@ -116,7 +117,12 @@ public class Ui {
     }
 
 
-
+    /**
+     * Prints empty index error message.
+     *
+     * @param commandStr String representation of command.
+     * @return Error string printed.
+     */
     public String printEmptyIndexErrorMsg(String commandStr) {
         String errorMsg = String.format("OOPS!!! The index of `%s` cannot be empty.", commandStr);
         this.printErrorMessage(errorMsg);
@@ -124,6 +130,11 @@ public class Ui {
     }
 
 
+    /**
+     * Prints invalid index error message.
+     *
+     * @return Error string printed.
+     */
     public String printInvalidIndexErrorMsg() {
         String errorMsg = "OOPS!!! The index given is invalid.";
         this.printErrorMessage(errorMsg);
@@ -131,6 +142,12 @@ public class Ui {
     }
 
 
+    /**
+     * Prints generic error message.
+     *
+     * @param errMsg Error message to be printed.
+     * @return Error string printed.
+     */
     public String printErrorMessage(String errMsg) {
         this.printMessage(errMsg);
         return errMsg;

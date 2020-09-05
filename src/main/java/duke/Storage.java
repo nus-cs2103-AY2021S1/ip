@@ -34,7 +34,7 @@ public class Storage {
 
 
     /**
-     * Constructor for Parser.
+     * Creates a new Storage object.
      *
      * @param pathStrArr varargs: path to storage file.
      */
@@ -121,10 +121,10 @@ public class Storage {
 
 
     /**
-     * Parses line input to an array.
+     * Parses line input string to an array.
      *
-     * @param inputString input string.
-     * @return parsed array, Array[0] => itemString, Array[1] => isDone.
+     * @param inputString Input string.
+     * @return Parsed array, Array[0] => itemString, Array[1] => isDone.
      */
     private static String[] parseLine(String inputString) {
         String[] splitStr = inputString.split(DELIMITER);

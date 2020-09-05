@@ -3,21 +3,16 @@ package duke.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
-
 import duke.tasks.Todo;
+
+import org.junit.jupiter.api.Test;
 
 
 public class TodoTest {
 
     private static final char DONE = '\u2713';
     private static final char NOT_DONE = '\u2717';
-
-    // @Test
-    // public void dummyTest() {
-    //     assertEquals(2, 2);
-    // }
-
+    
 
     @Test
     public void constructorNotDone_toString_printedCorrectly() {

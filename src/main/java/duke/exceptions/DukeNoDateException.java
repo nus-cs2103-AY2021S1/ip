@@ -8,7 +8,7 @@ package duke.exceptions;
 public class DukeNoDateException extends DukeInvalidDescriptionException {
 
     /**
-     * Constructor for DukeNoDateException.
+     * Creates a new DukeNoDateException.
      */
     public DukeNoDateException() {
         super();
@@ -16,7 +16,7 @@ public class DukeNoDateException extends DukeInvalidDescriptionException {
 
 
     /**
-     * Constructor for DukeNoDateException.
+     * Creates a new DukeNoDateException.
      *
      * @param errMsg error message.
      */

@@ -3,6 +3,7 @@ package duke.commands;
 
 /**
  * Command enum.
+ * TYPES: LIST, DONE, DELETE, TERMINATE, FIND, TASK, default INVALID.
  */
 public enum Command {
     LIST("list"),

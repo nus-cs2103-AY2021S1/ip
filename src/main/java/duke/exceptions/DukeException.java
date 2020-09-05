@@ -3,11 +3,12 @@ package duke.exceptions;
 
 /**
  * Duke Exception class.
+ * Throws custom exception commands if Duke encounters an error during runtime.
  */
 public class DukeException extends RuntimeException {
 
     /**
-     * Constructor for DukeException.
+     * Creates a new DukeException.
      */
     public DukeException() {
         super();
@@ -15,7 +16,7 @@ public class DukeException extends RuntimeException {
 
 
     /**
-     * Constructor for DukeException.
+     * Creates a new DukeException.
      *
      * @param errMsg error message.
      */

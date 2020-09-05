@@ -23,7 +23,7 @@ public class Duke {
 
 
     /**
-     * Constructor for Duke.
+     * Creates a new Duke object.
      */
     public Duke() {
         this.ui = new Ui();
@@ -31,9 +31,9 @@ public class Duke {
 
 
     /**
-     * Constructor for Duke.
+     * Creates a new Duke object.
      *
-     * @param inputStream input stream to read user inputs from.
+     * @param inputStream Input stream from which user inputs will be read.
      */
     public Duke(InputStream inputStream) {
         this.ui = new Ui(inputStream);
@@ -41,10 +41,10 @@ public class Duke {
 
 
     /**
-     * Determine if programme should quit given the input message.
+     * Checks if programme should quit given the input message.
      *
      * @param msgInput Message input from user.
-     * @return if programme should quit.
+     * @return True if programme should quit, false otherwise.
      */
     private static Boolean shouldQuit(String msgInput) {
         return msgInput.equals(Duke.QUIT_STRING);
@@ -55,7 +55,7 @@ public class Duke {
      * Marks an item as done.
      *
      * @param inputTextArr String array of the input text, split by " ".
-     * @return statusMSg to be printed.
+     * @return Status message to be printed.
      * @throws IndexOutOfBoundsException Invalid index given or input text array is invalid.
      */
     private String markAsDone(String[] inputTextArr) throws IndexOutOfBoundsException {
@@ -79,8 +79,8 @@ public class Duke {
     /**
      * Deletes an item from the taskList.
      *
-     * @param inputTextArr String array of the input text, split by " "
-     * @return statusMsg to be printed.
+     * @param inputTextArr String array of the input text, split by " ".
+     * @return Status message to be printed.
      * @throws IndexOutOfBoundsException Invalid index given or input text array is invalid.
      */
     private String delete(String[] inputTextArr) throws IndexOutOfBoundsException {
@@ -102,7 +102,7 @@ public class Duke {
 
     /**
      * Finds tasks based on keyword.
-     * Output index are the indexes in original dukeList.
+     * Output indexes are the indexes of elements in the original dukeList.
      *
      * @param inputTextArr String array of the input text, split by " ".
      */
@@ -184,7 +184,7 @@ public class Duke {
             this.exit();
             break;
         }
-        
+
         return statusMessage;
 
     }
@@ -206,6 +206,9 @@ public class Duke {
 
     /**
      * Starts the Duke programme logic.
+     *
+     * @param isCli Whether programme should run as command line.
+     *              Cmd launchers will pass in true, Gui launchers will pass in false.
      */
     public void start(boolean isCli) {
         this.taskList.loadFromFile();
@@ -246,7 +249,7 @@ public class Duke {
 
 
     /**
-     * Exits duke and quit GUI platform.
+     * Exits duke and quit the Gui platform.
      */
     private void exit() {
         this.taskList.writeToFile();
@@ -262,8 +265,9 @@ public class Duke {
 
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets user response to the input string.
+     *
+     * @param input Input string from user to be processed.
      */
     public String getResponse(String input) {
         return this.dukeLogicHelper(input);

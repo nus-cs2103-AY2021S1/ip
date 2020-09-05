@@ -6,6 +6,8 @@ import java.time.LocalDate;
 
 /**
  * Deadline class.
+ * Subclass of Task.
+ * Task that needs to be done by a specific date.
  */
 public class Deadline extends Task {
 
@@ -15,9 +17,9 @@ public class Deadline extends Task {
 
 
     /**
-     * Constructor for deadline.
+     * Creates a new Deadline task.
      *
-     * @param itemString description string.
+     * @param itemString Description string.
      */
     public Deadline(String itemString) {
         super(Task.getTaskString(itemString, Deadline.DELIMITER));
@@ -29,8 +31,8 @@ public class Deadline extends Task {
     /**
      * Constructor for deadline.
      *
-     * @param itemString description string.
-     * @param isDone     whether this task is done.
+     * @param itemString Description string.
+     * @param isDone     True is task is done, false otherwise.
      */
     public Deadline(String itemString, boolean isDone) {
         super(Task.getTaskString(itemString, Deadline.DELIMITER), isDone);
@@ -42,7 +44,7 @@ public class Deadline extends Task {
     /**
      * Gets string array for storage.
      *
-     * @return string array for storage.
+     * @return String array for storage.
      */
     @Override
     public String[] toStorageStringArr() {
