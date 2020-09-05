@@ -77,7 +77,7 @@ public class Storage {
                     taskList.add(new Deadline(task[2], task[3], task[1].equals("1")));
                     break;
                 default:
-                    break;
+                    assert false : "Local data cannot be interpreted!";
                 }
 
             }
