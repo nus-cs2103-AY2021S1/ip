@@ -14,7 +14,22 @@ import duke.command.EditCommand;
 
 import java.util.Scanner;
 
+/**
+ * A non-instantiable class with static methods to parse a String into a Command or Task.
+ */
 public class Parser {
+
+    /**
+     * Sole constructor. (Not instantiable.)
+     */
+    private Parser() {}
+
+    /**
+     * Parses a specified string and converts it into a Command to be executed.
+     * @param string the String from the user input
+     * @return the Command parsed from the string
+     * @throws DukeException If the string deviates from any of the acceptable formats
+     */
     public static Command parse(String string) throws DukeException {
         Scanner parsingScanner = new Scanner(string);
         if (parsingScanner.hasNext()) {
@@ -91,6 +106,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a specified line from a File and converts it into a Task.
+     * Used for the initialization of the TaskList when a new Duke is initialized.
+     * @param line a String read from a File
+     * @return the Task parsed from the line
+     * @throws DukeException If the line deviates from any of the acceptable formats
+     */
     public static Task parseTaskFromFile(String line) throws DukeException {
         Task task;
         Scanner parsingScanner = new Scanner(line);
