@@ -26,6 +26,7 @@ public class Duke { //extends Application {
 
     /**
      * Constructs Duke bot.
+     *
      * @param filePath File path containing data.
      */
     public Duke(String filePath) {

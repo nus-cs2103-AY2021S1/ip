@@ -1,20 +1,16 @@
 package duke.command;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import duke.Duke;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.CalendarException;
-import duke.exception.DeadlineException;
 import duke.exception.DukeException;
 import duke.exception.EventException;
-import duke.task.Deadline;
 import duke.task.Event;
 
 public class EventCommand extends Command {
@@ -51,66 +47,16 @@ public class EventCommand extends Command {
 
     public String processEvent(
         String theRest, TaskList taskList, Ui ui, Storage storage) throws DukeException {
-//        try {
-//            String[] eventAndDateAndTime = theRest.split(" /at ", 2);
-//            Event event;
-//
-//            try {
-//                String eventDesc = eventAndDateAndTime[0];
-//                String eventDateAndTime = eventAndDateAndTime[1];
-//
-//                String[] dateTime = eventDateAndTime.split(" ", 2);
-//
-//                String date = dateTime[0];
-//
-//                try {
-//                    LocalDate localDate = LocalDate.parse(date);
-//
-//                    if (dateTime.length < 2) {
-//                        event = new Event(eventDesc, localDate);
-//                    } else {
-//
-//                        String time = dateTime[1];
-//                        String[] startEndTime = time.split("-");
-//                        if (startEndTime.length < 2) {
-//                            String startTime = startEndTime[0];
-//                            LocalTime localTime = LocalTime.parse(startTime);
-//                            event = new Event(eventDesc, false, localDate, localTime);
-//                        } else {
-//                            String startTime = startEndTime[0];
-//                            String endTime = startEndTime[1];
-//                            LocalTime localStartTime = LocalTime.parse(startTime);
-//                            LocalTime localEndTime = LocalTime.parse(endTime);
-//                            event = new Event(eventDesc, false,
-//                                localDate, localStartTime, localEndTime);
-//                        }
-//                    }
-//
-//                    Storage.updateData(taskList.getTasks());
-//                    return taskList.saveToList(event);
-//
-//                } catch (DateTimeParseException e) {
-//                    return "Please enter the date in "
-//                        + "YYYY/MM/DD format and time in HH:MM format.";
-//                }
-//
-//            } catch (IndexOutOfBoundsException e) {
-//                throw new EventException("Please specify the event name and date.");
-//            }
-//
-//        } catch (DukeException d) {
-//            throw new EventException("Please specify the event name and date.");
-//        }
         Event event;
         try {
             String task = getEventTask(theRest);
             String[] details = parseEventDetails(theRest);
             LocalDate localDate = getEventDate(details);
-            ArrayList<LocalTime> localTime = getDeadlineTime(details);
+            ArrayList<LocalTime> localTime = getEventTime(details);
             LocalTime startTime;
             LocalTime endTime;
 
-            if(localTime.size() == 2) {
+            if (localTime.size() == 2) {
                 startTime = localTime.get(0);
                 endTime = localTime.get(1);
                 event = new Event(task, false, localDate, startTime, endTime);
@@ -129,6 +75,13 @@ public class EventCommand extends Command {
         }
     }
 
+    /**
+     * Parses the event details.
+     *
+     * @param theRest event details.
+     * @return Parsed Event data.
+     * @throws EventException
+     */
     public String[] parseEventDetails(String theRest) throws EventException {
         try {
             String[] taskAndEventAndTime = theRest.split(" /at ", 2);
@@ -159,19 +112,18 @@ public class EventCommand extends Command {
         }
     }
 
-    public ArrayList<LocalTime> getDeadlineTime(String[] dateDetails) throws DukeException {
+    public ArrayList<LocalTime> getEventTime(String[] dateDetails) throws DukeException {
 
         ArrayList<LocalTime> localTime = new ArrayList<>();
         if (dateDetails.length > 1) {
 
-            String[] startEndTime = dateDetails[1].split(" - ", 2);
+            String[] startEndTime = dateDetails[1].split("-", 2);
             String startTime = startEndTime[0];
-            String endTime;
             LocalTime localStartTime;
             LocalTime localEndTime;
 
             if (startEndTime.length == 2) {
-                endTime = startEndTime[1];
+                String endTime = startEndTime[1];
 
                 try {
                     localStartTime = LocalTime.parse(startTime);

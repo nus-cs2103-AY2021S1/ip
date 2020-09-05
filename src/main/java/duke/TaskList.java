@@ -27,6 +27,7 @@ public class TaskList {
 
     /**
      * Lists all the tasks in the list.
+     *
      * @return All the tasks in the list.
      */
     public String listItems() {
