@@ -18,39 +18,27 @@ public class Parser {
      * @throws DukeException exception thrown when input is invalid
      */
     public String parse(String input, TaskList tasks, Storage storage) throws DukeException {
-        String output;
         String[] command = input.split(" ", 2);
 
-        switch (command[0]) {
-            case "bye":
-                output = new ByeCommand().execute();
-                break;
-            case "list":
-                output = new ListCommand(tasks).execute();
-                break;
-            case "done":
-                output = new DoneCommand(command, tasks, storage).execute();
-                break;
-            case "todo":
-                output = new ToDoCommand(command, tasks, storage).execute();
-                break;
-            case "deadline":
-                output = new DeadlineCommand(command, tasks, storage).execute();
-                break;
-            case "event":
-                output = new EventCommand(command, tasks, storage).execute();
-                break;
-            case "delete":
-                output = new DeleteCommand(command, tasks, storage).execute();
-                break;
-            case "find":
-                output = new FindCommand(command, tasks).execute();
-                break;
-            default:
-                output = new ErrorCommand("☹ OOPS!!! I'm sorry, but I don't know what that means :-(").execute();
-                break;
+        switch (command[0]) { 
+        case "bye":
+            return new ByeCommand().execute();
+        case "list":
+                return new ListCommand(tasks).execute();
+        case "done":
+                return new DoneCommand(command, tasks, storage).execute();
+        case "todo":
+                return new ToDoCommand(command, tasks, storage).execute();
+        case "deadline":
+                return new DeadlineCommand(command, tasks, storage).execute();
+        case "event":
+                return new EventCommand(command, tasks, storage).execute();
+        case "delete":
+                return new DeleteCommand(command, tasks, storage).execute();
+        case "find":
+                return new FindCommand(command, tasks).execute();
+        default:
+                return new ErrorCommand("☹ OOPS!!! I'm sorry, but I don't know what that means :-(").execute();
         }
-
-        return output;
     }
 }

@@ -143,14 +143,10 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        String output;
-
         try {
-            output = parser.parse(input, tasks, storage);
+            return parser.parse(input, tasks, storage);
         } catch (DukeException e) {
-            output = e.getMessage();
-        }    
-            
-        return output;
+            return e.getMessage();
+        }
     }
 }
