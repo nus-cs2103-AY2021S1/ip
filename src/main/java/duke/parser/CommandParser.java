@@ -149,8 +149,11 @@ public class CommandParser {
         }
 
         int splitIndex = Utils.getIndexOf(commands, Expense.EXPENSE_BREAK);
-        int moneyIndex = splitIndex - 1;
+        if (splitIndex == Utils.INDEX_NOT_FOUND) {
+            throw new DukeParseException("Ensure an indication of '/on' after a pay command.");
+        }
 
+        int moneyIndex = splitIndex - 1;
         if (!Utils.isMoney(commands[moneyIndex])) {
             throw new DukeParseException("Ensure money passed in is of the format: $30 or $30.00");
         }
@@ -170,8 +173,11 @@ public class CommandParser {
         }
 
         int splitIndex = Utils.getIndexOf(commands, Expense.EXPENSE_BREAK);
-        int moneyIndex = splitIndex - 1;
+        if (splitIndex == Utils.INDEX_NOT_FOUND) {
+            throw new DukeParseException("Ensure an indication of '/on' after a receivable command.");
+        }
 
+        int moneyIndex = splitIndex - 1;
         if (!Utils.isMoney(commands[moneyIndex])) {
             throw new DukeParseException("Ensure money passed in is of the format: $30 or $30.00");
         }
