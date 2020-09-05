@@ -24,8 +24,6 @@ public class DeadlineCommand extends Command {
      * @return Response object
      */
     public Response runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
-        assert arrayOfTasks != null || ui != null || storage != null :
-                "arrayOfTasks, Ui and Storage objects cannot be null";
         arrayOfTasks.addTask(deadlineTask);
         ui.printTaskCount();
         storage.changeFile();

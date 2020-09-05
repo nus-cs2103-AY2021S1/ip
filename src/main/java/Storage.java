@@ -28,7 +28,6 @@ public class Storage {
         try {
             ArrayList<Task> outputTaskArray = new ArrayList<>();
             FileReader fileToRead = new FileReader(path);
-            assert fileToRead != null : "File to be read should not be empty!";
             BufferedReader bufferedReader = new BufferedReader(fileToRead);
             String inputData = bufferedReader.readLine();
 

@@ -12,8 +12,6 @@ public class ByeCommand extends Command {
      * @param storage Storage object to aid in program execution.
      */
     public Response runCommand(TaskList taskList, Ui ui, Storage storage) {
-        assert taskList != null || ui != null || storage != null :
-                "taskList, Ui and Storage objects cannot be null";
         Response responseObject = ui.printByeMessage();
         if (storage.isStorageChanged()) {
             try {
