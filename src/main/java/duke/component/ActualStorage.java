@@ -58,13 +58,10 @@ public class ActualStorage implements Storage {
         if (isToDo(taskType)) {
             toAdd = new ToDo(fullDescription);
         } else {
-            int dividerPosition = getDividerPosition(fullDescription);
-            String time = getTimeSpecification(fullDescription, dividerPosition);
-            String description = getPlainDescription(fullDescription, dividerPosition);
             if (isDeadline(taskType)) {
-                toAdd = new Deadline(description, time);
+                toAdd = new Deadline(fullDescription);
             } else if (isEvent(taskType)) {
-                toAdd = new Event(description, time);
+                toAdd = new Event(fullDescription);
             } else {
                 assert false : INPUT_FILE_FORMAT_ERROR;
                 toAdd = new ToDo("error");
@@ -78,20 +75,6 @@ public class ActualStorage implements Storage {
         if (done == 1) {
             toAdd.markAsDone();
         }
-    }
-
-    private String getPlainDescription(String fullDescription, int dividerPosition) {
-        return fullDescription.substring(0, dividerPosition - 1);
-    }
-
-    private String getTimeSpecification(String fullDescription, int dividerPosition) {
-        return fullDescription.substring(dividerPosition + FILE_DIVIDER_LENGTH);
-    }
-
-    private int getDividerPosition(String description) {
-        int position = description.indexOf(DIVIDER);
-        assert position >= 0 : INPUT_FILE_FORMAT_ERROR;
-        return position;
     }
 
     private boolean isEvent(String taskType) {

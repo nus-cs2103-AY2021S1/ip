@@ -31,6 +31,27 @@ public class Deadline extends TimedTask {
         }
     }
 
+    /**
+     * Creates a deadline task using the resource file.
+     * @param fullDescription the full line of the task
+     * @throws InvalidCommandException if the resource file format is invalid
+     */
+    public Deadline(String fullDescription) throws InvalidCommandException {
+        super("");
+        String[] info = fullDescription.split(" &&& ");
+        if (info.length != 3) {
+            throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
+        } else {
+            try {
+                description = info[0];
+                byTime = LocalDate.parse(info[1], Parser.DATE_INPUT_FORMAT);
+                repeat = Integer.parseInt(info[2]);
+            } catch (Exception e) {
+                throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
+            }
+        }
+    }
+
     @Override
     public boolean isHappeningOn(LocalDate date) {
         return date.isEqual(byTime);

@@ -14,8 +14,8 @@ import duke.component.Ui;
  */
 public class Event extends TimedTask {
     private LocalDateTime atTime;
-    private final LocalDateTime[] tentativeSlots;
-    private final String tentativeSlotsStr;
+    private LocalDateTime[] tentativeSlots;
+    private String tentativeSlotsStr;
 
     /**
      * Creates an event task.
@@ -25,7 +25,34 @@ public class Event extends TimedTask {
      */
     public Event(String description, String atTime) throws InvalidCommandException {
         super(description);
-        String[] times = atTime.split("/");
+        handleTentativeSlots(atTime);
+    }
+
+    /**
+     * Creates an event task using the resource file.
+     * @param fullDescription the full line of the task
+     * @throws InvalidCommandException if the resource file format is invalid
+     */
+    public Event(String fullDescription) throws InvalidCommandException {
+        super("");
+        String[] info = fullDescription.split(" &&& ");
+        description = info[0];
+        if (info.length == 3) {
+            try {
+                atTime = LocalDateTime.parse(info[1], Parser.DATE_TIME_INPUT_FORMAT);
+                repeat = Integer.parseInt(info[2]);
+            } catch (Exception e) {
+                throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
+            }
+        } else if (info.length == 2) {
+            handleTentativeSlots(info[1]);
+        } else {
+            throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
+        }
+    }
+
+    private void handleTentativeSlots(String timeStr) throws InvalidCommandException {
+        String[] times = timeStr.split("/");
         tentativeSlots = new LocalDateTime[times.length];
         try {
             for (int i = 0; i < times.length; i++) {

@@ -57,24 +57,32 @@ public class RepeatCommand extends Command {
 
     private int getNumberOfDays(String[] input) throws InvalidCommandException {
         if (input.length == RepeatCommand.REPEAT_COMMAND_SHORTCUT_LENGTH) {
-            if (input[2].equals("daily")) {
-                return 1;
-            } else if (input[2].equals("weekly")) {
-                return 7;
-            } else {
-                throw new InvalidCommandException(Parser.REPEAT_COMMAND_FORMAT_EXCEPTION);
-            }
+            return handleShortCutRepeat(input[2]);
         } else if (input.length == REPEAT_COMMAND_CUSTOMIZED_LENGTH
                 && input[2].equals(Parser.EVERY) && input[4].equals(Parser.DAYS)) {
-            try {
-                int n = Integer.parseInt(input[3]);
-                if (n < 0) {
-                    throw new InvalidCommandException(Parser.NEGATIVE_DAYS_EXCEPTION);
-                }
-                return n;
-            } catch (NumberFormatException e) {
-                throw new InvalidCommandException(Parser.NONNUMERIC_NUMBER_OF_DAYS_EXCEPTION);
+            return handleCustomizedRepeat(input[3]);
+        } else {
+            throw new InvalidCommandException(Parser.REPEAT_COMMAND_FORMAT_EXCEPTION);
+        }
+    }
+
+    private int handleCustomizedRepeat(String s) throws InvalidCommandException {
+        try {
+            int n = Integer.parseInt(s);
+            if (n < 0) {
+                throw new InvalidCommandException(Parser.NEGATIVE_DAYS_EXCEPTION);
             }
+            return n;
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException(Parser.NONNUMERIC_NUMBER_OF_DAYS_EXCEPTION);
+        }
+    }
+
+    private int handleShortCutRepeat(String s) throws InvalidCommandException {
+        if (s.equals(Parser.DAILY)) {
+            return 1;
+        } else if (s.equals(Parser.WEEKLY)) {
+            return 7;
         } else {
             throw new InvalidCommandException(Parser.REPEAT_COMMAND_FORMAT_EXCEPTION);
         }
