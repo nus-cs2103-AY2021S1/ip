@@ -22,7 +22,7 @@ public class InvalidCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.setMessage("I'm sorry, but I don't know what that means! :-(");
+        ui.setMessage("I'm sorry, but I don't know what that means! :-(\n");
         System.out.println("I'm sorry, but I don't know what that means! :-(");
     }
 
