@@ -7,23 +7,23 @@ import duke.exception.DukeParseException;
 import duke.expense.Expense;
 import duke.list.ExpenseList;
 import duke.list.ListManager;
+import duke.list.TaskList;
+import duke.operation.DeleteOperation;
+import duke.operation.DoneOperation;
+import duke.operation.ExitOperation;
+import duke.operation.FindOperation;
+import duke.operation.Operation;
 import duke.operation.addexpenseoperation.AddPayableOperation;
 import duke.operation.addexpenseoperation.AddReceivableOperation;
 import duke.operation.addtaskoperation.AddDeadlineTaskOperation;
 import duke.operation.addtaskoperation.AddEventTaskOperation;
 import duke.operation.addtaskoperation.AddTodoTaskOperation;
-import duke.operation.DeleteOperation;
-import duke.operation.DoneOperation;
-import duke.operation.ExitOperation;
-import duke.operation.FindOperation;
 import duke.operation.listoperation.ListExpenseOperation;
 import duke.operation.listoperation.ListOperation;
 import duke.operation.listoperation.ListTaskOperation;
-import duke.operation.Operation;
-import duke.storage.TaskStorage;
+import duke.storage.StorageManager;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.list.TaskList;
 import duke.utils.Datetime;
 import duke.utils.Utils;
 
@@ -32,8 +32,9 @@ public class CommandParser {
     private static final String TASK = "task";
     private static final String EXPENSE = "expense";
 
-    private ExitOperation createExitOp(TaskStorage storage, TaskList list) {
-        return new ExitOperation(storage, list);
+    private ExitOperation createExitOp(
+            StorageManager storageManager, ListManager listManager) {
+        return new ExitOperation(storageManager, listManager);
     }
 
     private ListOperation createListOp(
@@ -172,12 +173,13 @@ public class CommandParser {
      *
      * @param commandString the <code>String</code> that has been input by the user into Duke.
      * @param listManager the <code>ListManager</code> of Duke to be operated on.
-     * @param taskStorage the <code>TaskStorage</code> to be operated on,
+     * @param storageManager the <code>TaskStorage</code> to be operated on,
      *                    if the <code>Operation</code> requires a save of the <code>TaskList</code>.
      * @return the parsed <code>Operation</code>.
      * @throws DukeParseException if the command cannot be recognised or is erroneous.
      */
-    public Operation parse(String commandString, ListManager listManager, TaskStorage taskStorage)
+    public Operation parse(
+            String commandString, ListManager listManager, StorageManager storageManager)
             throws DukeParseException {
         String[] commands = commandString.split(" ");
         assert commands.length > 0 : "There is an error in the splitting of the command";
@@ -185,7 +187,7 @@ public class CommandParser {
                 commandType.getCommand().equals(commands[0]);
 
         if (isCommand.apply(CommandType.BYE)) {
-            return createExitOp(taskStorage, listManager.getTaskList());
+            return createExitOp(storageManager, listManager);
         } else if (isCommand.apply(CommandType.LIST)) {
             return createListOp(commands, listManager);
         } else if (isCommand.apply(CommandType.DONE)) {

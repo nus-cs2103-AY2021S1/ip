@@ -1,10 +1,11 @@
 package duke.list;
 
-import duke.expense.Expense;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import duke.expense.Expense;
+
+/** Represents the list of <code>Expenses</code>.*/
 public class ExpenseList implements Iterable<Expense>, DukeList {
     private final ArrayList<Expense> expenseList;
 
@@ -26,11 +27,22 @@ public class ExpenseList implements Iterable<Expense>, DukeList {
         return this.expenseList.iterator();
     }
 
+    /**
+     * Adds the <code>Expense</code> to <code>ExpenseList</code>.
+     *
+     * @param expense the <code>Expense</code> to be added.
+     * @return the added <code>ExpenseList</code>.
+     */
     public Expense addExpense(Expense expense) {
         this.expenseList.add(expense);
         return expense;
     }
 
+    /**
+     * Gets the number of <code>Expenses</code> currently.
+     *
+     * @return the number of <code>Expenses</code> in <code>ExpenseList</code>.
+     */
     @Override
     public int getCurrCapacity() {
         return this.expenseList.size();

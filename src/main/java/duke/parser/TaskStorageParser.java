@@ -14,14 +14,14 @@ import duke.utils.Datetime;
  * This class also parses <code>Task</code> into <code>Strings</code>
  * that will be saved into the storage text file.
  */
-public class StorageParser {
+public class TaskStorageParser {
     private static final String IS_COMPLETED = "1";
     private static final String NOT_COMPLETED = "0";
     private static final String DELIMITER = ";";
 
-    private static final int TODO_COMMAND_LENGTH = 3;
-    private static final int DEADLINE_COMMAND_LENGTH = 4;
-    private static final int EVENT_COMMAND_LENGTH = 4;
+    private static final int TODO_LENGTH = 3;
+    private static final int DEADLINE_LENGTH = 4;
+    private static final int EVENT_LENGTH = 4;
 
     private static final int COMPLETED_INDEX = 1;
     private static final int DESCRIPTION_INDEX = 2;
@@ -44,7 +44,7 @@ public class StorageParser {
     }
 
     private Todo createTodo(String[] storageTask, String storageTaskString) throws DukeParseException {
-        if (storageTask.length < TODO_COMMAND_LENGTH) {
+        if (storageTask.length < TODO_LENGTH) {
             String msg = String.format("It appears this todo: '%s' is corrupted.", storageTaskString);
             throw new DukeParseException(msg);
         }
@@ -54,7 +54,7 @@ public class StorageParser {
 
     private Deadline createDeadline(
             String[] storageTask, String storageTaskString) throws DukeParseException {
-        if (storageTask.length < DEADLINE_COMMAND_LENGTH) {
+        if (storageTask.length < DEADLINE_LENGTH) {
             String msg = String.format("It appears this deadline: '%s' is corrupted.", storageTaskString);
             throw new DukeParseException(msg);
         }
@@ -73,7 +73,7 @@ public class StorageParser {
     }
 
     private Event createEvent(String[] storageTask, String storageTaskString) throws DukeParseException {
-        if (storageTask.length < EVENT_COMMAND_LENGTH) {
+        if (storageTask.length < EVENT_LENGTH) {
             String msg = String.format("It appears this event: '%s' is corrupted.", storageTaskString);
             throw new DukeParseException(msg);
         }

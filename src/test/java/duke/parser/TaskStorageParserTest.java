@@ -15,8 +15,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-public class StorageParserTest {
-    private static final StorageParser storageParser = new StorageParser();
+public class TaskStorageParserTest {
+    private static final TaskStorageParser TASK_STORAGE_PARSER = new TaskStorageParser();
 
     private static Stream<Arguments> getArguments() {
         LocalDateTime dateTimeOne = LocalDateTime.of(2010, 5, 30, 14, 20);
@@ -40,7 +40,7 @@ public class StorageParserTest {
     @ParameterizedTest
     @MethodSource("getArguments")
     public void testConvertTaskToStorage(Task task, String actual) {
-        String converted = storageParser.convertTaskToStorage(task);
+        String converted = TASK_STORAGE_PARSER.convertTaskToStorage(task);
         assertEquals(converted, actual + "\n");
     }
 
@@ -48,7 +48,7 @@ public class StorageParserTest {
     @MethodSource("getArguments")
     public void convertStorageToTask_correctSymbol_success(
             Task actual, String storage) throws DukeParseException {
-        Task converted = storageParser.convertStorageToTask(storage);
+        Task converted = TASK_STORAGE_PARSER.convertStorageToTask(storage);
         assertEquals(converted, actual);
     }
 
@@ -65,7 +65,7 @@ public class StorageParserTest {
     @MethodSource("getConvertStorageToTaskExceptionArguments")
     public void convertStorageToTask_wrongSymbol_exceptionThrown(String storageString, String task) {
         try {
-            storageParser.convertStorageToTask(storageString);
+            TASK_STORAGE_PARSER.convertStorageToTask(storageString);
         } catch (DukeParseException exception) {
             String err = String.format(
                     "It appears this %s: '%s' is corrupted.", task, storageString);

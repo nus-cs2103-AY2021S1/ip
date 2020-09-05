@@ -5,23 +5,26 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.stream.Stream;
 
-import duke.list.ListManager;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import duke.exception.DukeParseException;
-import duke.operation.addtaskoperation.AddDeadlineTaskOperation;
-import duke.operation.addtaskoperation.AddEventTaskOperation;
-import duke.operation.addtaskoperation.AddTodoTaskOperation;
+import duke.list.ListManager;
 import duke.operation.DeleteOperation;
 import duke.operation.DoneOperation;
 import duke.operation.ExitOperation;
 import duke.operation.FindOperation;
-import duke.operation.listoperation.ListTaskOperation;
 import duke.operation.Operation;
-import duke.storage.TaskStorage;
+import duke.operation.addexpenseoperation.AddPayableOperation;
+import duke.operation.addexpenseoperation.AddReceivableOperation;
+import duke.operation.addtaskoperation.AddDeadlineTaskOperation;
+import duke.operation.addtaskoperation.AddEventTaskOperation;
+import duke.operation.addtaskoperation.AddTodoTaskOperation;
+import duke.operation.listoperation.ListExpenseOperation;
+import duke.operation.listoperation.ListTaskOperation;
+import duke.storage.StorageManager;
 import duke.task.Todo;
 
 public class CommandParserTest {
@@ -32,42 +35,54 @@ public class CommandParserTest {
         Todo mockTodo = new Todo("mock", false);
         ListManager listManager = new ListManager();
         listManager.getTaskList().addTask(mockTodo);
-        TaskStorage storage = TaskStorage.createTaskStorage();
+        StorageManager storageManager = StorageManager.createStorageManager();
 
         String command = "todo read book";
-        Operation operation = commandParser.parse(command, listManager, storage);
+        Operation operation = commandParser.parse(command, listManager, storageManager);
         assertTrue(operation instanceof AddTodoTaskOperation);
 
         command = "deadline return book /by 09-09-2019 1010";
-        operation = commandParser.parse(command, listManager, storage);
+        operation = commandParser.parse(command, listManager, storageManager);
         assertTrue(operation instanceof AddDeadlineTaskOperation);
 
         command = "event meeting /at 1430";
-        operation = commandParser.parse(command, listManager, storage);
+        operation = commandParser.parse(command, listManager, storageManager);
         assertTrue(operation instanceof AddEventTaskOperation);
 
+        command = "pay lunch $3.00 /on 12-12-2020";
+        operation = commandParser.parse(command, listManager, storageManager);
+        assertTrue(operation instanceof AddPayableOperation);
+
+        command = "receive money $1.01 /on 09-09-2019";
+        operation = commandParser.parse(command, listManager, storageManager);
+        assertTrue(operation instanceof AddReceivableOperation);
+
         command = "list task";
-        operation = commandParser.parse(command, listManager, storage);
+        operation = commandParser.parse(command, listManager, storageManager);
         assertTrue(operation instanceof ListTaskOperation);
 
+        command = "list expense";
+        operation = commandParser.parse(command, listManager, storageManager);
+        assertTrue(operation instanceof ListExpenseOperation);
+
         command = "find book";
-        operation = commandParser.parse(command, listManager, storage);
+        operation = commandParser.parse(command, listManager, storageManager);
         assertTrue(operation instanceof FindOperation);
 
         command = "find read book";
-        operation = commandParser.parse(command, listManager, storage);
+        operation = commandParser.parse(command, listManager, storageManager);
         assertTrue(operation instanceof FindOperation);
 
         command = "done 1";
-        operation = commandParser.parse(command, listManager, storage);
+        operation = commandParser.parse(command, listManager, storageManager);
         assertTrue(operation instanceof DoneOperation);
 
         command = "delete 1";
-        operation = commandParser.parse(command, listManager, storage);
+        operation = commandParser.parse(command, listManager, storageManager);
         assertTrue(operation instanceof DeleteOperation);
 
         command = "bye";
-        operation = commandParser.parse(command, listManager, storage);
+        operation = commandParser.parse(command, listManager, storageManager);
         assertTrue(operation instanceof ExitOperation);
     }
 
@@ -101,9 +116,9 @@ public class CommandParserTest {
         Todo mockTodo = new Todo("mock", false);
         ListManager listManager = new ListManager();
         listManager.getTaskList().addTask(mockTodo);
-        TaskStorage storage = TaskStorage.createTaskStorage();
+        StorageManager storageManager = StorageManager.createStorageManager();
         try {
-            commandParser.parse(command, listManager, storage);
+            commandParser.parse(command, listManager, storageManager);
         } catch (DukeParseException exception) {
             assertNotNull(exception.getMessage());
         }

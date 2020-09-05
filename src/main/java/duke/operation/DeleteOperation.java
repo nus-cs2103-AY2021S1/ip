@@ -1,8 +1,8 @@
 package duke.operation;
 
+import duke.list.TaskList;
 import duke.result.Result;
 import duke.task.Task;
-import duke.list.TaskList;
 
 /**
  * The operation that deletes a <code>Task</code> from the <code>TaskList</code>.

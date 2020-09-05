@@ -1,8 +1,8 @@
 package duke.utils;
 
-import duke.exception.DukeParseException;
-
 import java.util.Arrays;
+
+import duke.exception.DukeParseException;
 
 /** The utilities class for Duke. */
 public final class Utils {

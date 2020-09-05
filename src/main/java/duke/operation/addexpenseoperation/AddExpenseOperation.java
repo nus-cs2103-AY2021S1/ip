@@ -1,11 +1,11 @@
 package duke.operation.addexpenseoperation;
 
+import java.time.LocalDateTime;
+
 import duke.expense.Expense;
 import duke.list.ExpenseList;
 import duke.operation.Operation;
 import duke.result.Result;
-
-import java.time.LocalDateTime;
 
 /** Abstract class representing the operations that add various types of <code>Expenses</code>. */
 public abstract class AddExpenseOperation extends Operation {
@@ -30,12 +30,18 @@ public abstract class AddExpenseOperation extends Operation {
     }
 
     /**
-     * Creates the associated <code>Task</code>.
+     * Creates the associated <code>Expense</code>.
      *
-     * @return an uncompleted <code>Task</code>.
+     * @return a <code>Expense</code>.
      */
     public abstract Expense createExpense();
 
+    /**
+     * Executes the <code>AddExpenseOperation</code>.
+     * The <code>Expense</code> is added to the <code>ExpenseList</code>.
+     *
+     * @return the <code>Result</code> of the exeucted <code>Operation</code>.
+     */
     @Override
     public Result execute() {
         Expense newExpense = createExpense();

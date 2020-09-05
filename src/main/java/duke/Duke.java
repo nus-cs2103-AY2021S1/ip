@@ -7,11 +7,11 @@ import duke.operation.Operation;
 import duke.operation.StartOperation;
 import duke.parser.CommandParser;
 import duke.result.Result;
-import duke.storage.TaskStorage;
+import duke.storage.StorageManager;
 
 /** Represents the main driver class of Duke. */
 public class Duke {
-    private final TaskStorage taskStorage;
+    private final StorageManager storageManager;
     private final ListManager listManager;
     private final CommandParser commandParser;
 
@@ -19,7 +19,7 @@ public class Duke {
      * Constructor method for Duke.
      */
     public Duke() {
-        this.taskStorage = TaskStorage.createTaskStorage();
+        this.storageManager = StorageManager.createStorageManager();
         this.listManager = new ListManager();
         this.commandParser = new CommandParser();
     }
@@ -30,7 +30,7 @@ public class Duke {
      * @return status of the <code>StartOperation</code>.
      */
     public Result initialize() {
-        return new StartOperation(this.listManager.getTaskList(), this.taskStorage).execute();
+        return new StartOperation(this.listManager, this.storageManager).execute();
     }
 
     /**
@@ -39,7 +39,7 @@ public class Duke {
      * @return status of the <code>ExitOperation</code>.
      */
     public Result stopDuke() {
-        return new ExitOperation(this.taskStorage, this.listManager.getTaskList()).execute();
+        return new ExitOperation(this.storageManager, this.listManager).execute();
     }
 
     /**
@@ -50,7 +50,7 @@ public class Duke {
      */
     public Result getResponse(String input) {
         try {
-            Operation operation = this.commandParser.parse(input, this.listManager, this.taskStorage);
+            Operation operation = this.commandParser.parse(input, this.listManager, this.storageManager);
             return operation.execute();
         } catch (DukeException exception) {
             return new Result(false, exception.getMessage(), false);

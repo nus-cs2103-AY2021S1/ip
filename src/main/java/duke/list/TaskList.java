@@ -1,9 +1,9 @@
 package duke.list;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import duke.task.Task;
 
 /** Represents the list of <code>Tasks</code> that Duke stores in. */
 public class TaskList implements Iterable<Task>, DukeList {

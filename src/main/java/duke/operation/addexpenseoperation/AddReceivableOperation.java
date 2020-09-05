@@ -1,11 +1,13 @@
 package duke.operation.addexpenseoperation;
 
-import duke.list.ExpenseList;
-import duke.expense.Receivable;
-
 import java.time.LocalDateTime;
 
+import duke.expense.Receivable;
+import duke.list.ExpenseList;
+
+/** Represents the operation that adds a <code>Receivable</code>. */
 public class AddReceivableOperation extends AddExpenseOperation {
+
     /**
      * Constructor method.
      *

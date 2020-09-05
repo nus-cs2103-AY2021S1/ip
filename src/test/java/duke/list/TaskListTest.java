@@ -1,9 +1,10 @@
-package duke.task;
+package duke.list;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.list.TaskList;
 import org.junit.jupiter.api.Test;
+
+import duke.task.TaskStub;
 
 public class TaskListTest {
     private static final TaskStub TASK_ONE = new TaskStub("task 1", false);
@@ -31,6 +32,4 @@ public class TaskListTest {
         assertEquals(taskList.removeTask(1), TASK_ONE);
         assertEquals(taskList.getCurrCapacity(), 2);
     }
-
-
 }

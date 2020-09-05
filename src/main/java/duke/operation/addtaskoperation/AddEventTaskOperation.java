@@ -2,8 +2,8 @@ package duke.operation.addtaskoperation;
 
 import java.time.LocalDateTime;
 
-import duke.task.Event;
 import duke.list.TaskList;
+import duke.task.Event;
 
 /**
  * Represents the operation that adds <code>Events</code>.

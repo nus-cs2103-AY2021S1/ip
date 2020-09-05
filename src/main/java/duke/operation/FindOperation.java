@@ -1,7 +1,7 @@
 package duke.operation;
 
-import duke.result.Result;
 import duke.list.TaskList;
+import duke.result.Result;
 
 /**
  * The operation that finds <code>Tasks</code> in <code>TaskList</code> associated with a search word.

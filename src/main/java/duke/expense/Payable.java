@@ -2,6 +2,7 @@ package duke.expense;
 
 import java.time.LocalDateTime;
 
+/** Represents a Payable expense. */
 public class Payable extends Expense {
     public static final String PAYABLE_SYMBOL = "P";
 
@@ -34,6 +35,33 @@ public class Payable extends Expense {
     @Override
     public double getValue() {
         return this.value * -1;
+    }
+
+    /**
+     * Gets the <code>Payable</code> symbol.
+     *
+     * @return the <code>Payable</code> symbol.
+     */
+    @Override
+    public String getExpenseSymbol() {
+        return PAYABLE_SYMBOL;
+    }
+
+    /**
+     * Checks if this is equal to the other object.
+     *
+     * @param other the other object to be compared to.
+     * @return <code>true</code> if equal.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other instanceof Payable) {
+            Payable otherExpense = (Payable) other;
+            return this.isEqual(otherExpense);
+        }
+        return false;
     }
 
     /**

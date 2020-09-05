@@ -1,9 +1,9 @@
 package duke.operation.addtaskoperation;
 
+import duke.list.TaskList;
 import duke.operation.Operation;
 import duke.result.Result;
 import duke.task.Task;
-import duke.list.TaskList;
 
 /** Abstract class representing the operations that add various types of <code>Tasks</code>. */
 public abstract class AddTaskOperation extends Operation {

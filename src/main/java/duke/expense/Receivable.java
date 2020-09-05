@@ -2,6 +2,7 @@ package duke.expense;
 
 import java.time.LocalDateTime;
 
+/** Represents a Receivable expense. */
 public class Receivable extends Expense {
     public static final String RECEIVABLE_SYMBOL = "R";
 
@@ -34,6 +35,33 @@ public class Receivable extends Expense {
     @Override
     public double getValue() {
         return this.value;
+    }
+
+    /**
+     * Gets the <code>Receivable</code> symbol.
+     *
+     * @return the <code>Receivable</code> symbol.
+     */
+    @Override
+    public String getExpenseSymbol() {
+        return RECEIVABLE_SYMBOL;
+    }
+
+    /**
+     * Checks if this is equal to the other object.
+     *
+     * @param other the other object to be compared to.
+     * @return <code>true</code> if equal.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other instanceof Receivable) {
+            Receivable otherReceivable = (Receivable) other;
+            return this.isEqual(otherReceivable);
+        }
+        return false;
     }
 
     /**

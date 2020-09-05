@@ -1,10 +1,11 @@
 package duke.operation.addexpenseoperation;
 
-import duke.list.ExpenseList;
-import duke.expense.Payable;
-
 import java.time.LocalDateTime;
 
+import duke.expense.Payable;
+import duke.list.ExpenseList;
+
+/** Represents the operation that adds a <code>Payable</code>. */
 public class AddPayableOperation extends AddExpenseOperation {
 
     /**

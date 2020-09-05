@@ -3,7 +3,7 @@ package duke.task;
 import java.util.Optional;
 
 public class TaskStub extends Task {
-    TaskStub(String description, boolean isCompleted) {
+    public TaskStub(String description, boolean isCompleted) {
         super(description, isCompleted);
     }
 

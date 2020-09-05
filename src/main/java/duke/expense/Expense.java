@@ -1,8 +1,8 @@
 package duke.expense;
 
-import duke.utils.Datetime;
-
 import java.time.LocalDateTime;
+
+import duke.utils.Datetime;
 
 /** Represents the user's expense. */
 public abstract class Expense {
@@ -10,8 +10,8 @@ public abstract class Expense {
     public static final String DATE_FORMAT_OUTPUT = "MMM dd yyyy";
     public static final String EXPENSE_BREAK = "/on";
 
-    private final String description;
     protected final double value;
+    private final String description;
     private final Datetime date;
 
     /**
@@ -34,8 +34,30 @@ public abstract class Expense {
      */
     public abstract boolean isPayable();
 
+    /** Checks if the attributes that are found in <code>Expense</code> are equal.
+     *
+     * @param other the other <code>Expense</code> object to be compared to.
+     * @return <code>true</code> if equal.
+     */
+    protected boolean isEqual(Expense other) {
+        boolean isDescriptionEqual = description.equals(other.description);
+        boolean isValueEqual = value == other.value;
+        boolean isDateEqual = date.getOutputDatetimeString().equals(
+                other.date.getOutputDatetimeString());
+        return isDescriptionEqual && isValueEqual && isDateEqual;
+    }
+
     /**
-     * Gets the value of the <code>Expense</code>.
+     * Gets the <code>String</code> description of <code>Expense</code>.
+     *
+     * @return the <code>String</code> description.
+     */
+    public String getExpenseDescription() {
+        return this.description;
+    }
+
+    /**
+     * Gets the actual calculable value of the <code>Expense</code>.
      *
      * @return a negative value if <code>Payable</code> and
      * positive value if <code>Receivable</code>
@@ -43,13 +65,39 @@ public abstract class Expense {
     public abstract double getValue();
 
     /**
+     * Gets the <code>String</code> value of <code>value</code>, rounded off to 2 decimal places.
+     *
+     * @return a <code>String</code> of value.
+     */
+    public String getPrintValue() {
+        return String.format("$%.2f", this.value);
+    }
+
+    /**
+     * Gets the <code>String</code> symbol of either
+     * <code>Payable</code> or <code>Receivable</code>.
+     *
+     * @return the <code>String</code> symbol.
+     */
+    public abstract String getExpenseSymbol();
+
+    /**
+     * Gets the formatted <code>String</code> of the date.
+     *
+     * @return <code>String</code> of the date.
+     */
+    public String getExpenseDate() {
+        return this.date.getOutputDatetimeString();
+    }
+
+    /**
      * Converts the <code>Expense</code> to a <code>String</code>.
-     * Indicates the date of the <code>Expense</code>, its description and its value.
+     * Indicates the date, description, value of the <code>Expense</code>.
      *
      * @return a <code>String</code> representing the <code>Expense</code>.
      */
     protected String toStringSuffix() {
-        String date = this.date.getOutputDatetimeString();
-        return String.format("%s (on: %s) Amount: $%.2f", this.description, date, this.value);
+        String date = getExpenseDate();
+        return String.format("%s (on: %s), %s", this.description, date, getPrintValue());
     }
 }
