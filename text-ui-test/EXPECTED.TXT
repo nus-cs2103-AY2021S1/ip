@@ -153,4 +153,3 @@ Undo: Already at earliest change
 Undo: Already at earliest change
 	+ Add: [T][O] 123
 Redo: Already at latest change
-Bye. Hope to see you again soon!

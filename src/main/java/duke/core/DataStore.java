@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Provides the centralised storage for the core components of Duke.
  * A data store contains every data structures that Duke uses.
- * It serves as a centralised storage of these data structures to
- * facilitate passing of such data structures throughout the application.
+ * It facilitates passing of such data structures throughout the application.
  */
 public class DataStore {
 

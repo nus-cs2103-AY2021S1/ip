@@ -1,11 +1,7 @@
 package duke.cmd;
 
 import duke.core.DataStore;
-import duke.core.command.ExitCommand;
-import duke.core.parser.DukeParserException;
-import duke.core.parser.Parser;
-import duke.designpattern.command.Executable;
-import duke.designpattern.command.ReversibleExecutable;
+import duke.core.Logic;
 
 import java.util.Scanner;
 
@@ -21,7 +17,6 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String GREETING = "Hello! I'm Duke\nWhat can i do for you?";
-    private static final String ENDING_GREETING = "Bye. Hope to see you again soon!";
 
     private final DataStore dataStore;
     private final Scanner scanner;
@@ -44,39 +39,17 @@ public class Duke {
         System.out.println("Hello from\n" + LOGO);
         System.out.println(GREETING);
 
-        // Loop until 'bye' input received
         while (true) {
-            Executable executable;
-
-            // Prompt for input
+            // Get input
             String input = this.scanner.nextLine();
-            if (input.isBlank()) {
-                continue;
-            }
 
-            try {
-                // Attempt to parse input
-                executable = Parser.parse(this.dataStore, input);
-                if (executable instanceof ReversibleExecutable) {
-                    this.dataStore.getHistory().add((ReversibleExecutable) executable);
-                }
-            } catch (DukeParserException e) {
-                System.out.println(e.getMessage());
-                continue;
-            }
+            // Execute logic
+            Logic.execute(this.dataStore, input);
 
-            // Check for exit command
-            if (executable instanceof ExitCommand) {
-                break;
-            }
-
-            // Execute command
-            executable.execute();
-
+            // Post processing
+            // Nothing to do
         }
 
-        // Print ending greetings
-        System.out.println(ENDING_GREETING);
     }
 
 }
