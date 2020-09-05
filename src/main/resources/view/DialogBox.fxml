@@ -4,13 +4,29 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <!-- -->
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true" />
+        <Label fx:id="dialog" minHeight="-Infinity" style="-fx-background-color: #dbfffe; -fx-border-color: #4280c2; -fx-border-width: 2 2; -fx-border-radius: 10; -fx-label-padding: 10; -fx-background-radius: 10;" text="Label" textOverrun="CLIP" wrapText="true" />
+        <StackPane id="StackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: blanchedalmond;" xmlns="http://javafx.com/javafx/2.2" xmlns:fx="http://javafx.com/fxml/1">
+            <children>
+                <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+            </children>
+            <padding>
+                <Insets left="10.0" right="5.0" />
+            </padding>
+        </StackPane>
+        <!--
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+        <Circle fx:id="displayPicture" fill="WHITE" radius="49.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+            <HBox.margin>
+                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+            </HBox.margin>
+        </Circle> -->
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets bottom="7.0" left="5.0" right="5.0" top="7.0" />
     </padding>
 </fx:root>

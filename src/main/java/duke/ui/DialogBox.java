@@ -1,3 +1,5 @@
+package duke.ui;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -16,6 +18,8 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -25,6 +29,10 @@ import javafx.scene.paint.Color;
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
+
+//    @FXML
+//    private Circle displayPicture;
+
     @FXML
     private ImageView displayPicture;
 
@@ -39,6 +47,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+//        displayPicture.setFill(new ImagePattern(img));
         displayPicture.setImage(img);
     }
 
@@ -54,32 +63,23 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
-        dialogBox.setBackground(new Background(new BackgroundFill(Color.AZURE,
-                new CornerRadii(10), new Insets(0))));
 
         // Spacing between Image and Text
         dialogBox.setSpacing(10.0);
-
-        // Border for Duke Dialog
-        dialogBox.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
-                + "-fx-border-width: 2;" + "-fx-border-insets: 0;"
-                + "-fx-border-radius: 10;" + "-fx-border-color: skyblue;");
         return dialogBox;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.setBackground(new Background(new BackgroundFill(Color.HONEYDEW,
-                new CornerRadii(10), new Insets(0))));
 
         // Spacing between Image and Text
         db.setSpacing(10.0);
 
         // Border for Duke Dialog
-        db.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
-                + "-fx-border-width: 2;" + "-fx-border-insets: 0;"
-                + "-fx-border-radius: 10;" + "-fx-border-color: darkseagreen;");
+//        db.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
+//                + "-fx-border-width: 2;" + "-fx-border-insets: 0;"
+//                + "-fx-border-radius: 10;" + "-fx-border-color: darkseagreen;");
         return db;
     }
 }

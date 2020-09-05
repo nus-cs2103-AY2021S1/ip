@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -58,11 +60,11 @@ public class Duke  {
      * @param input user's input
      * @return reply by Duke
      */
-    String getResponse(String input) {
+    public String getResponse(String input) {
 
         try {
             Command c = Parser.parse(input);
-            return "Duke:\n" + c.execute(taskList, ui, storage);
+            return c.execute(taskList, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
         } catch (IOException e) {

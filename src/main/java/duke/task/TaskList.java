@@ -32,11 +32,10 @@ public class TaskList {
     }
 
     private String printTotalNumberOfTasks() {
-        int numTasks = tasks.size();
-        if (numTasks < 2) {
-            return "Now you have " + numTasks + " task in the list.";
+        if (tasks.size() < 2) {
+            return "\nNow you have " + tasks.size() + " task in the list.";
         } else {
-            return "Now you have " + numTasks + " tasks in the list.";
+            return "\nNow you have " + tasks.size() + " tasks in the list.";
         }
     }
 

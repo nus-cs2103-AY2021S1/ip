@@ -11,16 +11,10 @@ public class Ui {
     /**
      * Prints a welcome message.
      */
-    public void showWelcome() {
-        String logo =
-                " ____        _        \n"
-                        + "|  _ \\ _   _| | _____ \n"
-                        + "| | | | | | | |/ / _ \\\n"
-                        + "| |_| | |_| |   <  __/\n"
-                        + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.print("Hello, I am\n" + logo);
-        System.out.println("___________________________________________________"
-                + "\nDuke: What can i do for you?");
+    public static String showWelcome() {
+        return "Hello, I'm Pico, no time to waste. "
+                + "\nLet's start started!"
+                + "\nWhat shall we do now?";
     }
 
     /**

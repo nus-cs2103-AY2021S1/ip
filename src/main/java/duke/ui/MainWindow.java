@@ -1,11 +1,19 @@
+package duke.ui;
+
+import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
+import duke.ui.Ui;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -21,12 +29,16 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserAvatar.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DukeAvatar.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setBackground(new Background(new BackgroundFill(Color.BLANCHEDALMOND, null, null)));
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -40,11 +52,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+
+        if (input.equals("bye")) {
+            Platform.exit();
+        } else {
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        }
         userInput.clear();
     }
 }
