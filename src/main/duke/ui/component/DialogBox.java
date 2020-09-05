@@ -17,6 +17,11 @@ public class DialogBox extends HBox {
     private final ImageView displayPicture;
 
 
+    /**
+     * Constructor for a DialogBox.
+     * @param l the Label containing the text to be displayed.
+     * @param iv the ImageView containing the Image to be displayed.
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -27,6 +32,12 @@ public class DialogBox extends HBox {
 
     }
 
+    /**
+     * Constructor method for a DialogBox sent by the Duke.
+     * @param l the Label containing the text to be displayed.
+     * @param iv the ImageView containing the Image to be displayed.
+     * @return a DialogBox with the Duke's image and alignment.
+     */
     public static DialogBox dukeDialog(Label l, ImageView iv) {
         l.setBackground(new Background(new BackgroundFill(Color.rgb(179, 141, 151), new CornerRadii(3.0),
                 new Insets(0.0))));
@@ -36,6 +47,12 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Constructor method for a DialogBox sent by the User.
+     * @param l the Label containing the text to be displayed.
+     * @param iv the ImageView containing the Image to be displayed.
+     * @return a DialogBox with the User's image and alignment.
+     */
     public static DialogBox userDialog(Label l, ImageView iv) {
         l.setBackground(new Background(new BackgroundFill(Color.rgb(213, 172, 169), new CornerRadii(3.0),
                 new Insets(0.0))));

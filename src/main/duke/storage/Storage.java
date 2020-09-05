@@ -33,7 +33,7 @@ public class Storage {
             tasks = new TaskList();
             file = new File(path);
             file.createNewFile(); // makes new file only if not already existing
-            assert(file.exists()): "File does not exist";
+            assert(file.exists()) : "File does not exist";
             BufferedReader csvReader = new BufferedReader(new FileReader(file));
             String line;
             // Add all the parsed lines to the ArrayList

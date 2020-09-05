@@ -10,6 +10,9 @@ public class ScrollDialoguePane extends ScrollPane {
 
     private VBox dialogContainer;
 
+    /**
+     * Constructor for a ScrollDialoguePane containing the Dialog boxes within a ScrollPane.
+     */
     public ScrollDialoguePane() {
         super();
 
