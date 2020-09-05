@@ -10,6 +10,7 @@ import duke.command.FixCommand;
 import duke.command.HappenCommand;
 import duke.command.InvalidCommandException;
 import duke.command.ListCommand;
+import duke.command.SnoozeCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -29,6 +30,7 @@ public class Parser {
     public static final String HAPPEN_COMMAND_PREFIX = "happen ";
     public static final String FIND_COMMAND_PREFIX = "find ";
     public static final String FIX_COMMAND_PREFIX = "fix ";
+    public static final String SNOOZE_COMMAND_PREFIX = "snooze ";
     public static final String TODO = "todo";
     public static final String DEADLINE = "deadline";
     public static final String EVENT = "event";
@@ -41,6 +43,7 @@ public class Parser {
     public static final String BETWEEN = "between";
     public static final String DAYS = "days";
     public static final String TODAY = "today";
+    public static final String TO = "to";
     public static final char SPACE_CHAR = ' ';
     public static final String SPACE_STRING = " ";
     public static final String TASK_SINGULAR = "task";
@@ -64,12 +67,19 @@ public class Parser {
     public static final String INVALID_DATE_FORMAT_EXCEPTION = "Invalid date format. Please use yyyy-MM-dd.";
     public static final String INVALID_DATE_TIME_FORMAT_EXCEPTION = "Invalid input datetime, please input as"
             + "yyyy-MM-dd HH:mm.";
-    public static final String INVALID_EVENT_INDEX_EXCEPTION = "The index of task is not of the desired task type.";
-    public static final String FIX_COMMAND_FORMAT_EXCEPTION = "The format for fix command should be"
-            + "fix <task_index of event> <datetime to fix>";
-    public static final String FIX_TIME_NOT_EXIST_EXCEPTION = "The time to fix for the event does not exist";
+    public static final String INVALID_TASK_TYPE_INDEX_EXCEPTION = "The index of task is not of the desired task type.";
+    public static final String FIX_COMMAND_FORMAT_EXCEPTION = "The format for fix command should be."
+            + "'fix <task_index of event> <datetime to fix>'.";
+    public static final String FIX_TIME_NOT_EXIST_EXCEPTION = "The time to fix for the event does not exist.";
+    public static final String SNOOZE_COMMAND_FORMAT_EXCEPTION = "The format for snooze command should be"
+            + "'snooze <task_index of timed task> to <date/datetime to reschedule to>'.";
+    public static final String SNOOZE_UNFIXED_EVENT_EXCEPTION = "Cannot snooze an event with multiple tentative slots.";
+    public static final String SNOOZE_TO_EARLIER_TIME_EXCEPTION = "Sorry, you cannot snooze a task to a time earlier"
+            + "than its original scheduled time.";
     public static final DateTimeFormatter DATE_TIME_INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     public static final DateTimeFormatter DATE_TIME_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("hh:mm a   MMM d yyyy");
+    public static final DateTimeFormatter DATE_INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter DATE_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     private static boolean hasEmptyContent(String cmd, String prefix) {
         return cmd.length() < prefix.length() + 1;
@@ -91,6 +101,27 @@ public class Parser {
             throw new InvalidCommandException(TASK_INDEX_OVERFLOW_EXCEPTION);
         } else {
             return n;
+        }
+    }
+
+    /**
+     * Gets the task index from the input string of task index and checks its validity.
+     * @param list the task list of the running duke app
+     * @param inputN the string of the input task index
+     * @return the task index if it is valid
+     * @throws InvalidCommandException if the index is not a number or valid index in the list
+     */
+    public static int getTaskIndex(TaskList list, String inputN) throws InvalidCommandException {
+        try {
+            int n = Integer.parseInt(inputN);
+            if (n < 1) {
+                throw new InvalidCommandException(Parser.NONPOSITIVE_TASK_INDEX_EXCEPTION);
+            } else if (n > list.size()) {
+                throw new InvalidCommandException(Parser.TASK_INDEX_OVERFLOW_EXCEPTION);
+            }
+            return n - 1;
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException(Parser.NONNUMERIC_TASK_INDEX_EXCEPTION);
         }
     }
 
@@ -216,6 +247,8 @@ public class Parser {
             return new FindCommand(input);
         } else if (input.startsWith(FIX_COMMAND_PREFIX)) {
             return new FixCommand(input);
+        } else if (input.startsWith(SNOOZE_COMMAND_PREFIX)) {
+            return new SnoozeCommand(input);
         } else {
             return new AddCommand(input);
         }

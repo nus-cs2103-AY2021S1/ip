@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 import duke.command.InvalidCommandException;
+import duke.command.SnoozeCommand;
 import duke.component.Parser;
 import duke.component.Ui;
 
@@ -114,6 +115,30 @@ public class Event extends TimedTask {
         }
         if (!found) {
             throw new InvalidCommandException(Parser.FIX_TIME_NOT_EXIST_EXCEPTION);
+        }
+    }
+
+    @Override
+    public String snoozeTo(String[] input) throws InvalidCommandException {
+        if (input.length != SnoozeCommand.SNOOZE_EVENT_COMMAND_LENGTH) {
+            throw new InvalidCommandException(Parser.INVALID_DATE_TIME_FORMAT_EXCEPTION);
+        }
+        if (atTime == null) {
+            throw new InvalidCommandException(Parser.SNOOZE_UNFIXED_EVENT_EXCEPTION);
+        } else {
+            String dateTimeStr = input[3] + Parser.SPACE_STRING + input[4];
+            try {
+                LocalDateTime newTime = LocalDateTime.parse(dateTimeStr, Parser.DATE_TIME_INPUT_FORMAT);
+                if (newTime.isAfter(atTime)) {
+                    LocalDateTime originalTime = atTime;
+                    atTime = newTime;
+                    return String.format(Ui.SNOOZE_TASK_OUTPUT_FORMAT, this, originalTime, newTime);
+                } else {
+                    throw new InvalidCommandException(Parser.SNOOZE_TO_EARLIER_TIME_EXCEPTION);
+                }
+            } catch (DateTimeParseException e) {
+                throw new InvalidCommandException(Parser.INVALID_DATE_TIME_FORMAT_EXCEPTION);
+            }
         }
     }
 

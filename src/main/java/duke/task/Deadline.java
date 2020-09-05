@@ -1,15 +1,20 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import duke.command.InvalidCommandException;
+import duke.command.SnoozeCommand;
+import duke.component.Parser;
+import duke.component.Ui;
 
 /**
  * Represents a deadline task that consists of a description and a date as the deadline for completing the task.
  */
 public class Deadline extends TimedTask {
-    private final LocalDate byTime;
+    private LocalDate byTime;
 
     /**
      * Creates a deadline task.
@@ -20,10 +25,9 @@ public class Deadline extends TimedTask {
     public Deadline(String description, String byTime) throws InvalidCommandException {
         super(description);
         try {
-            this.byTime = LocalDate.parse(byTime,
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            this.byTime = LocalDate.parse(byTime, Parser.DATE_INPUT_FORMAT);
         } catch (Exception e) {
-            throw new InvalidCommandException("Invalid input date, please input as yyyy-mm-dd.");
+            throw new InvalidCommandException(Parser.INVALID_DATE_FORMAT_EXCEPTION);
         }
     }
 
@@ -78,6 +82,25 @@ public class Deadline extends TimedTask {
     }
 
     @Override
+    public String snoozeTo(String[] input) throws InvalidCommandException {
+        if (input.length != SnoozeCommand.SNOOZE_DEADLINE_COMMAND_LENGTH) {
+            throw new InvalidCommandException(Parser.INVALID_DATE_FORMAT_EXCEPTION);
+        }
+        String dateTimeStr = input[3];
+        try {
+            LocalDate newDate = LocalDate.parse(dateTimeStr, Parser.DATE_INPUT_FORMAT);
+            if (newDate.isAfter(byTime)) {
+                LocalDate originalDate = byTime;
+                byTime = newDate;
+                return String.format(Ui.SNOOZE_TASK_OUTPUT_FORMAT, this, originalDate, newDate);
+            } else {
+                throw new InvalidCommandException(Parser.SNOOZE_TO_EARLIER_TIME_EXCEPTION);
+            }
+        } catch (DateTimeParseException e) {
+            throw new InvalidCommandException(Parser.INVALID_DATE_FORMAT_EXCEPTION);
+        }
+    }
+    @Override
     public String output() {
         return "D" + super.output() + " | By: " + byTime + "\n";
     }
@@ -86,7 +109,7 @@ public class Deadline extends TimedTask {
     public String toString() {
         String overdue = isOverdue() ? " This is overdue! The deadline has passed!!!" : "";
         return "[D]" + super.toString() + " (by: "
-                + byTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" + overdue;
+                + byTime.format(Parser.DATE_OUTPUT_FORMAT) + ")" + overdue;
     }
 
     /**
