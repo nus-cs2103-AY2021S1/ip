@@ -11,6 +11,6 @@ public class InvalidDateFormatException extends DukeException {
      * The message is "Invalid date format! Please put it something like 2020-12-31!."
      */
     public InvalidDateFormatException() {
-        super("Invalid date format! Please put it something like 2020-12-31!");
+        super("Invalid date format! Please put in something like 2020-12-31!");
     }
 }

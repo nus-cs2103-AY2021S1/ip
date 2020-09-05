@@ -6,8 +6,7 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import duke.exception.DukeException;
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
+import duke.task.DateTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
 
@@ -79,6 +78,10 @@ public class Ui {
                 + "Now you have " + taskSize + " " + (taskSize == 1 ? "task " : "tasks ") + "in the list.";
     }
 
+    public String changeDateSuccess(Task task) {
+        return "Successfully change this task's date:\n" + INDENTATION + task;
+    }
+
     /**
      * Returns a message showing all of tasks in the list.
      * @param tasks TaskList to be shown
@@ -110,12 +113,9 @@ public class Ui {
                 .filter((task) -> {
                     if (task instanceof ToDoTask) {
                         return false;
-                    } else if (task instanceof DeadlineTask) {
-                        DeadlineTask deadlineTask = (DeadlineTask) task;
-                        return date.isBefore(deadlineTask.getDate().toLocalDate());
-                    } else if (task instanceof EventTask) {
-                        EventTask eventTask = (EventTask) task;
-                        return date.isBefore(eventTask.getDate().toLocalDate());
+                    } else if (task instanceof DateTask) {
+                        DateTask dateTask = (DateTask) task;
+                        return date.isBefore(dateTask.getDate().toLocalDate());
                     }
 
                     return false;
@@ -146,14 +146,10 @@ public class Ui {
                 .filter((task) -> {
                     if (task instanceof ToDoTask) {
                         return false;
-                    } else if (task instanceof DeadlineTask) {
-                        DeadlineTask deadlineTask = (DeadlineTask) task;
-                        return date.isAfter(deadlineTask.getDate().toLocalDate())
-                                || date.isEqual(deadlineTask.getDate().toLocalDate());
-                    } else if (task instanceof EventTask) {
-                        EventTask eventTask = (EventTask) task;
-                        return date.isAfter(eventTask.getDate().toLocalDate())
-                                || date.isEqual(eventTask.getDate().toLocalDate());
+                    } else if (task instanceof DateTask) {
+                        DateTask dateTask = (DateTask) task;
+                        return date.isAfter(dateTask.getDate().toLocalDate())
+                                || date.isEqual(dateTask.getDate().toLocalDate());
                     }
 
                     return false;

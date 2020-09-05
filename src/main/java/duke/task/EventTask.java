@@ -6,35 +6,14 @@ import java.time.format.DateTimeFormatter;
 /**
  * Class to represents the EventTask object. This task object is used to represent an event happening at a certain date.
  */
-public class EventTask extends Task {
-    private LocalDateTime date;
-
+public class EventTask extends DateTask {
     /**
      * Constructs a new EventTask object with the specified task name and date.
      * @param taskName The task's name
      * @param date The event's date
      */
     public EventTask(String taskName, LocalDateTime date) {
-        super(taskName);
-        assert date != null : "Date can't be null!";
-        this.date = date;
-    }
-
-    /**
-     * Gets the eventTask's date.
-     * @return The event's date
-     */
-    public LocalDateTime getDate() {
-        return this.date;
-    }
-
-    /**
-     * Gets the string representation of the date in the format of
-     * yyyy-MM-dd HHmm e.g. 2020-01-01 1400 represents Jan 01 2019 2 pm.
-     * @return A string representation of the date
-     */
-    public String getDateString() {
-        return this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        super(taskName, date);
     }
 
     /**
@@ -46,6 +25,6 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
+                + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 }

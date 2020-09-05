@@ -37,7 +37,7 @@ public class DoneCommand extends Command {
         } else {
             Task task = tasks.getTask(taskNumber - 1);
             task.setStatusToDone();
-            storage.changeTaskInFile(taskNumber);
+            storage.changeTaskStatusInFile(taskNumber);
             ui.sendMessage(ui.doneSuccess(task));
             return ui.doneSuccess(task);
         }

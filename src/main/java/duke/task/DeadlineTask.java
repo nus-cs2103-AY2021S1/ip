@@ -7,8 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Class to represents the DeadlineTask object. This task object
  * is used to represent a task that has a certain deadline date.
  */
-public class DeadlineTask extends Task {
-    private LocalDateTime date;
+public class DeadlineTask extends DateTask {
 
     /**
      * Constructs a new DeadlineTask object with the specified task name and date.
@@ -16,26 +15,7 @@ public class DeadlineTask extends Task {
      * @param date The task's date
      */
     public DeadlineTask(String taskName, LocalDateTime date) {
-        super(taskName);
-        assert date != null : "Date can't be null!";
-        this.date = date;
-    }
-
-    /**
-     * Gets the deadlineTask's date.
-     * @return The deadline's date
-     */
-    public LocalDateTime getDate() {
-        return this.date;
-    }
-
-    /**
-     * Gets the string representation of the date in the format of
-     * yyyy-MM-dd HHmm e.g. 2020-01-01 1400 represents Jan 01 2019 2 pm.
-     * @return A string representation of the date
-     */
-    public String getDateString() {
-        return this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        super(taskName, date);
     }
 
     /**
@@ -47,6 +27,6 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
+                + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 }

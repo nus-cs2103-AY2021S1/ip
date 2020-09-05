@@ -84,7 +84,7 @@ public class StorageTest {
             storage.saveTaskToFile(toDoTask);
             storage.saveTaskToFile(deadlineTask);
             storage.saveTaskToFile(eventTask);
-            storage.changeTaskInFile(3);
+            storage.changeTaskStatusInFile(3);
         });
 
         Assertions.assertDoesNotThrow(() -> {
