@@ -22,6 +22,11 @@ public class Todo extends Task {
         }
     }
 
+    @Override
+    public int getPriority() {
+        return 3;
+    }
+
     /**
      * Return the string representation of the task.
      * @return the string representation of the task

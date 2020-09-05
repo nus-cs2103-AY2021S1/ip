@@ -56,6 +56,14 @@ public class Task {
     }
 
     /**
+     * Return the priority of the task as an integer, sorted by its type.
+     * @return 4 if it is a raw task without any other kind
+     */
+    public int getPriority() {
+        return 4;
+    }
+
+    /**
      * Return the string representation of the task.
      * @return the string representation of the task
      */

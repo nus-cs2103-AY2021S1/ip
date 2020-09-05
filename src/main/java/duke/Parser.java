@@ -1,12 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.CommandAdd;
-import duke.command.CommandBye;
-import duke.command.CommandDelete;
-import duke.command.CommandDone;
-import duke.command.CommandFind;
-import duke.command.CommandList;
+import duke.command.*;
 import duke.exception.IllegalCommandException;
 import duke.exception.IllegalDeleteArgument;
 import duke.exception.IllegalDoneArgument;
@@ -76,6 +70,13 @@ public class Parser {
                 }
                 int index = Integer.parseInt(response.split(" ")[1]) - 1;
                 return new CommandDelete(index);
+            }
+            case "sort": {
+                if (!response.startsWith("sort /by")) {
+                    throw new NoDescriptionException("sort");
+                }
+                String comparator = response.substring(9);
+                return new CommandSort(comparator);
             }
             default:
                 String firstCmd = response.split(" ")[0];

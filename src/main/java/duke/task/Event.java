@@ -31,6 +31,18 @@ public class Event extends Task {
         }
     }
 
+    public boolean hasDate() {
+        return atDate != null;
+    }
+
+    public LocalDate getAtDate() {
+        return atDate;
+    }
+
+    public String getAtString() {
+        return atString;
+    }
+
     /**
      * Return the string that is intended to be stored in the local database.
      * @return the string to be stored in the local database, the format is
@@ -57,5 +69,10 @@ public class Event extends Task {
         } else {
             return "[E]" + super.toString() + " (at: " + atString + ")";
         }
+    }
+
+    @Override
+    public int getPriority() {
+        return 2;
     }
 }
