@@ -13,15 +13,17 @@ import focus.task.Task;
 public class Storage {
     /** Represents the path for the task list to be saved at. */
     private final String path;
+    /** Represents the current user's directory. */
+    private static final String USER_DIRECTORY = "user.dir";
 
     /** Creates a storage to allow loading and saving of tasks. */
     public Storage() {
-        this.path = System.getProperty("user.dir") + "/data/focus.txt";
+        this.path = System.getProperty(USER_DIRECTORY) + "/data/focus.txt";
     }
 
     /** Creates a folder to store text file. If present, it will not create. */
     public static void createFolder() {
-        String folderPath = System.getProperty("user.dir") + "/data";
+        String folderPath = System.getProperty(USER_DIRECTORY) + "/data";
         File folder = new File(folderPath);
         boolean isSuccessful = folder.mkdir();
         if (isSuccessful) {
@@ -38,18 +40,21 @@ public class Storage {
      * false if user does not have an existing text file.
      */
     public boolean retrieveTextFile() {
+        File data = null;
+        boolean hasCreatedTextFile = false;
         boolean hasTextFile = false;
         try {
-            File data = new File(path);
-            if (data.createNewFile()) {
-                System.out.println("Text file created: " + data.getName());
-            } else {
-                hasTextFile = true;
-                System.out.println("Text file already exists.");
-            }
+            data = new File(path);
+            hasCreatedTextFile = data.createNewFile();
         } catch (IOException e) { // creation or retrieving data has errors
             System.out.println("An error occurred.");
             e.printStackTrace();
+        }
+        if (hasCreatedTextFile) {
+            System.out.println("Text file created: " + data.getName());
+        } else {
+            hasTextFile = true;
+            System.out.println("Text file already exists.");
         }
         return hasTextFile;
     }

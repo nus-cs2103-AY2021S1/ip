@@ -30,17 +30,21 @@ public class MainWindow extends AnchorPane {
     private Focus focus;
     /** Number of times user has input their name. */
     private int numberOfTimes;
+    /** Image path of User. */
+    private final String userPath = "/images/koya.png";
+    /** Image path of Pocus. */
+    private final String pocusPath = "/images/rj.png";
     /** Gets the image for User. */
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/koya.png"));
-    /** Gets the image for Focus. */
-    private final Image focusImage = new Image(this.getClass().getResourceAsStream("/images/rj.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream(userPath));
+    /** Gets the image for Pocus. */
+    private final Image pocusImage = new Image(this.getClass().getResourceAsStream(pocusPath));
 
     /** Initialises the main window. */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getPocusDialog(UI.greetUser(), focusImage)
+                DialogBox.getPocusDialog(UI.greetUser(), pocusImage)
         );
     }
 
@@ -64,7 +68,7 @@ public class MainWindow extends AnchorPane {
         if (numberOfTimes == 0) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getPocusDialog(UI.addressUser(input), focusImage)
+                    DialogBox.getPocusDialog(UI.addressUser(input), pocusImage)
             );
             numberOfTimes++;
         } else {
@@ -72,7 +76,7 @@ public class MainWindow extends AnchorPane {
             String response = focus.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getPocusDialog(response, focusImage)
+                    DialogBox.getPocusDialog(response, pocusImage)
             );
             if (input.equals("bye")) {
                 PauseTransition delay = new PauseTransition(Duration.seconds(5));

@@ -1,6 +1,7 @@
 package focus.command;
 
 import focus.exception.FocusException;
+import focus.exception.InvalidHelpCommandException;
 import focus.storage.Storage;
 import focus.task.TaskList;
 import focus.ui.UI;
@@ -34,10 +35,10 @@ public class HelpCommand extends Command {
         try {
             checker = input.split("help")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new FocusException("\tDid you meant the command 'help'?");
+            throw new InvalidHelpCommandException();
         }
         if (!checker.isBlank()) { // user's input is "help me" for example
-            throw new FocusException("\tDid you meant the command 'help'?");
+            throw new InvalidHelpCommandException();
         } else { // user's input is "help " with spacings
             assert !checker.isEmpty() : "Checker should not be blank here.";
             return UI.listCommands();

@@ -1,6 +1,7 @@
 package focus.command;
 
 import focus.exception.FocusException;
+import focus.exception.InvalidTaskNumberException;
 import focus.storage.Storage;
 import focus.task.TaskList;
 
@@ -29,19 +30,18 @@ public class DeleteCommand extends Command {
         try {
             indexString = input.substring(7);
         } catch (IndexOutOfBoundsException e) {
-            throw new FocusException("\tPlease enter a task number you wish to delete!\n"
-                    + "\tYou have " + taskList.getSize() + " tasks on your list now.");
+            throw new InvalidTaskNumberException();
         }
         if (indexString.isBlank()) {
-            throw new FocusException("\tPlease enter a task number you wish to delete!\n"
-                    + "\tYou have " + taskList.getSize() + " tasks on your list now.");
+            throw new InvalidTaskNumberException();
         }
         assert !indexString.isEmpty() : "Index string should not be blank here.";
 
         int index = Integer.parseInt(indexString);
-        if ((index <= 0) || (index > taskList.getSize())) {
-            throw new FocusException("\tThere is no such task number.\n"
-                    + "\tPlease enter a valid one!");
+        boolean indexIsLessThanZero = index <= 0;
+        boolean indexIsMoreThanListSize = index > taskList.getSize();
+        if (indexIsLessThanZero || indexIsMoreThanListSize) {
+            throw new InvalidTaskNumberException();
         }
         assert !((index <= 0) || (index > taskList.getSize())) : "Index should not be less than 0 or exceed"
                 + " task list size.";

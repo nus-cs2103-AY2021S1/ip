@@ -36,12 +36,12 @@ public class Focus {
      */
     public String getResponse(String input) {
         boolean isExit;
-        Command command = Parser.parse(input);
-        isExit = command.isExit();
-        if (isExit) {
-            return ui.exitFocus();
-        }
         try {
+            Command command = Parser.parse(input);
+            isExit = command.isExit();
+            if (isExit) {
+                return ui.exitFocus();
+            }
             return command.execute(input, taskList, storage);
         } catch (FocusException e) {
             return e.getMessage();

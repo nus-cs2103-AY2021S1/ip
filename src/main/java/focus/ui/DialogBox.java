@@ -35,7 +35,8 @@ public class DialogBox extends HBox {
      */
     private DialogBox(String text, Image image, boolean isUser) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            String dialogBoxFxml = "/view/DialogBox.fxml";
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(dialogBoxFxml));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -66,7 +67,8 @@ public class DialogBox extends HBox {
      * @return DialogBox for user.
      */
     public static DialogBox getUserDialog(String input, Image image) {
-        return new DialogBox("You:\n\t" + input, image, true);
+        String userTag = "You:\n\t";
+        return new DialogBox(userTag + input, image, true);
     }
 
     /**
@@ -77,7 +79,8 @@ public class DialogBox extends HBox {
      * @return DialogBox for Pocus.
      */
     public static DialogBox getPocusDialog(String response, Image image) {
-        DialogBox dialogBox = new DialogBox("Pocus:\n" + response, image, false);
+        String pocusTag = "Pocus:\n";
+        DialogBox dialogBox = new DialogBox(pocusTag + response, image, false);
         dialogBox.flip();
         return dialogBox;
     }

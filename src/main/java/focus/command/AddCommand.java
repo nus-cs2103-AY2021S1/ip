@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 import focus.exception.FocusException;
+import focus.exception.InvalidTaskCommandException;
+import focus.exception.InvalidTaskDateException;
+import focus.exception.InvalidTaskDescriptionException;
 import focus.storage.Storage;
 import focus.task.TaskList;
 
@@ -40,15 +43,17 @@ public class AddCommand extends Command {
      * @throws FocusException If input does not meet criteria.
      */
     public String execute(String input, TaskList taskList, Storage storage) throws FocusException {
-        if ("todo".equals(taskType)) {
+        switch (taskType) {
+        case "todo":
             return addToDo(input, taskList, storage);
-        } else if ("deadline".equals(taskType)) {
+        case "deadline":
             return addDeadline(input, taskList, storage);
-        } else if ("event".equals(taskType)) {
+        case "event":
             return addEvent(input, taskList, storage);
+        default:
+            assert false : "All types of tasks are dealt with and program should not reach here.";
+            return "";
         }
-        assert false : "All types of tasks are dealt with and program should not reach here.";
-        return "";
     }
 
     /**
@@ -66,14 +71,10 @@ public class AddCommand extends Command {
         try { // user did not input description of to-do task
             information = input.split("todo")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new FocusException("\tThe description of a todo cannot be empty!\n"
-                    + "\tAn example would be:\n"
-                    + "\ttodo week 3 quiz");
+            throw new InvalidTaskDescriptionException();
         }
         if (information.isBlank()) {
-            throw new FocusException("\tThe description of a todo cannot be empty!\n"
-                    + "\tAn example would be:\n"
-                    + "\ttodo week 3 quiz");
+            throw new InvalidTaskDescriptionException();
         }
         String description = information.substring(1);
         assert !description.isEmpty() : "Description should not be blank here.";
@@ -95,21 +96,15 @@ public class AddCommand extends Command {
         try { // user did not input description of deadline task
             information = input.split("deadline")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new FocusException("\tPlease input an appropriate description!\n"
-                    + "\tAn example would be:\n"
-                    + "\tdeadline return book /by 2020-01-30 08:00");
+            throw new InvalidTaskDescriptionException();
         }
         if (information.isBlank()) {
-            throw new FocusException("\tPlease input an appropriate description!\n"
-                    + "\tAn example would be:\n"
-                    + "\tdeadline return book /by 2020-01-30 08:00");
+            throw new InvalidTaskDescriptionException();
         }
 
         int end = information.indexOf("/");
         if (end == -1) { // user did not input correct command
-            throw new FocusException("\tPlease input the appropriate command!\n"
-                    + "\tAn example would be:\n"
-                    + "\tdeadline return book /by 2020-01-30 08:00");
+            throw new InvalidTaskCommandException();
         }
 
         String description = information.substring(1, end - 1);
@@ -117,24 +112,18 @@ public class AddCommand extends Command {
         try { // user did not input date of deadline task
             by = information.substring(end + 4);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new FocusException("\tPlease input the date!\n"
-                    + "\tAn example would be:\n"
-                    + "\tdeadline return book /by 2020-01-30 08:00");
+            throw new InvalidTaskDateException();
         }
         if (by.isBlank()) {
-            throw new FocusException("\tPlease input the date!\n"
-                    + "\tAn example would be:\n"
-                    + "\tdeadline return book /by 2020-01-30 08:00");
+            throw new InvalidTaskDateException();
         }
 
-        String formattedBy = by.replace(' ', 'T');
         LocalDateTime date;
         try { // user did not input correct format of date of deadline task
+            String formattedBy = by.replace(' ', 'T');
             date = LocalDateTime.parse(formattedBy);
         } catch (DateTimeParseException e) {
-            throw new FocusException("\tPlease input the correct date format!\n"
-                    + "\tAn example would be:\n"
-                    + "\tdeadline return book /by 2020-01-30 08:00");
+            throw new InvalidTaskDateException();
         }
         assert !description.isEmpty() : "Description should not be blank here.";
         return taskList.addDeadline(description, date, storage);
@@ -155,21 +144,15 @@ public class AddCommand extends Command {
         try { // user did not input description of event task
             information = input.split("event")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new FocusException("\tPlease input an appropriate description!\n"
-                    + "\tAn example would be:\n"
-                    + "\tevent Christmas party /at 2020-12-25 17:00");
+            throw new InvalidTaskDescriptionException();
         }
         if (information.isBlank()) {
-            throw new FocusException("\tPlease input an appropriate description!\n"
-                    + "\tAn example would be:\n"
-                    + "\tevent Christmas party /at 2020-12-25 17:00");
+            throw new InvalidTaskDescriptionException();
         }
 
         int end = information.indexOf("/");
         if (end == -1) { // user did not input correct command
-            throw new FocusException("\tPlease input the appropriate command!\n"
-                    + "\tAn example would be:\n"
-                    + "\tevent Christmas party /at 2020-12-25 17:00");
+            throw new InvalidTaskCommandException();
         }
 
         String description = information.substring(1, end - 1);
@@ -177,24 +160,18 @@ public class AddCommand extends Command {
         try { // user did not input date of event task
             at = information.substring(end + 4);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new FocusException("\tPlease input the date!\n"
-                    + "\tAn example would be:\n"
-                    + "\tevent Christmas party /at 2020-12-25 17:00");
+            throw new InvalidTaskDateException();
         }
         if (at.isBlank()) {
-            throw new FocusException("\tPlease input the date!\n"
-                    + "\tAn example would be:\n"
-                    + "\tevent Christmas party /at 2020-12-25 17:00");
+            throw new InvalidTaskDateException();
         }
 
-        String formattedAt = at.replace(' ', 'T');
         LocalDateTime date;
         try { // user did not input correct format of date of event task
+            String formattedAt = at.replace(' ', 'T');
             date = LocalDateTime.parse(formattedAt);
         } catch (DateTimeParseException e) {
-            throw new FocusException("\tPlease input the correct date format!\n"
-                    + "\tAn example would be:\n"
-                    + "\tevent Christmas party /at 2020-12-25 17:00");
+            throw new InvalidTaskDateException();
         }
         assert !description.isEmpty() : "Description should not be blank here.";
         return taskList.addEvent(description, date, storage);

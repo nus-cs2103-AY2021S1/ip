@@ -24,20 +24,23 @@ public class DoneCommandTest {
         try {
             doneCommand.execute("done", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tPlease enter a task number you wish to mark done!\n"
-                    + "\tYou have " + taskList.getSize() + " tasks on your list now.", e.getMessage());
+            assertEquals("\tThere is no such task number.\n"
+                    + "\tPlease enter a valid one!\n"
+                    + "\tType 'list' to view your list of tasks!", e.getMessage());
         }
         try {
             doneCommand.execute("done 0", taskList, storage);
         } catch (FocusException e) {
             assertEquals("\tThere is no such task number.\n"
-                    + "\tPlease enter a valid one!", e.getMessage());
+                    + "\tPlease enter a valid one!\n"
+                    + "\tType 'list' to view your list of tasks!", e.getMessage());
         }
         try {
             doneCommand.execute("done 5", taskList, storage);
         } catch (FocusException e) {
             assertEquals("\tThere is no such task number.\n"
-                    + "\tPlease enter a valid one!", e.getMessage());
+                    + "\tPlease enter a valid one!\n"
+                    + "\tType 'list' to view your list of tasks!", e.getMessage());
         }
     }
 }
