@@ -1,7 +1,7 @@
-package duke.command;
+package duke.commands;
 
-import duke.Task;
-import duke.TaskList;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 public class CommandAdd extends Command {

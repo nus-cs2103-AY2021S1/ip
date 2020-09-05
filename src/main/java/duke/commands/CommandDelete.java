@@ -1,8 +1,7 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Task;
-import duke.TaskList;
+import duke.exceptions.DukeException;
+import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 public class CommandDelete extends Command {

@@ -1,19 +1,18 @@
 package duke.ui;
 
-import duke.DukeException;
-import duke.Task;
-import duke.TaskList;
-import duke.TaskToDo;
-import duke.TaskDeadline;
-import duke.TaskEvent;
-import duke.command.Command;
-import duke.command.Command;
-import duke.command.CommandAddDeadline;
-import duke.command.CommandAddEvent;
-import duke.command.CommandAddToDo;
-import duke.command.CommandDelete;
-import duke.command.CommandDone;
-import duke.command.CommandList;
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.TaskToDo;
+import duke.tasks.TaskDeadline;
+import duke.tasks.TaskEvent;
+import duke.commands.Command;
+import duke.commands.CommandAddDeadline;
+import duke.commands.CommandAddEvent;
+import duke.commands.CommandAddToDo;
+import duke.commands.CommandDelete;
+import duke.commands.CommandDone;
+import duke.commands.CommandList;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

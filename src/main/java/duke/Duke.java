@@ -1,10 +1,13 @@
 package duke;
 
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.storage.Storage.StorageOperationException;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 import duke.ui.Parser;
 import duke.ui.Ui;
-import duke.command.Command;
+import duke.commands.Command;
 
 import java.util.List;
 
@@ -64,7 +67,7 @@ public class Duke {
         }
         int index = Integer.parseInt(inputList[1]) - 1;
         if (index < 0 || index > taskList.getSize() - 1) {
-            throw new DukeException(String.format("☹ BLEHHHHHH. duke.Task no. %d does not exist. Please try again.", (index + 1)));
+            throw new DukeException(String.format("☹ BLEHHHHHH. duke.task.Task no. %d does not exist. Please try again.", (index + 1)));
         }
         return index;
     }
