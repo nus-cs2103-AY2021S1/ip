@@ -109,10 +109,6 @@ public class TaskList {
     public ArrayList<String> tasksToText() {
         ArrayList<String> strings = tasks.stream().map(Task::toData)
                 .collect(Collectors.toCollection(ArrayList::new));
-//        ArrayList<String> strings = new ArrayList<>();
-//        for (Task task : tasks) {
-//            strings.add(task.toData());
-//        }
         return strings;
     }
 
@@ -125,20 +121,8 @@ public class TaskList {
         assert !keyword.isEmpty() : "Keyword should not be empty.";
         Stream<Task> matchingTasks = tasks.stream().filter(t -> t.hasKeyword(keyword));
         Stream<String> stringsStream = matchingTasks.map(t -> String.format("  %s%n", t));
-        String matchingTasksString = stringsStream.reduce("",
-                (s, t) -> s += String.format("  %s%n", t));
-//        String tasks = "";
-//        Task t;
-//        int numMatch = 0;
-//        for (int i = 0; i < this.tasks.size(); i++) {
-//            t = this.tasks.get(i);
-//            if (t.hasKeyword(keyword)) {
-//                numMatch++;
-//                tasks += String.format("  %d.%s%n", numMatch, t);
-//                assert numMatch > 0 : "Matching tasks should be more than 0 after adding task.";
-//            }
-//        }
-//        return tasks;
+        String matchingTasksString = stringsStream.reduce("", (s, t)
+                -> s += String.format("  %s%n", t));
         return matchingTasksString;
     }
 
