@@ -44,6 +44,9 @@ public class Duke {
      * sends result to be saved in storage.
      */
     public String getResponse(String input) {
+        assert storage != null;
+        assert parser != null;
+        assert tasks != null;
         try {
             Command command = parser.findCommand(input);
             if (command.isExit()) {

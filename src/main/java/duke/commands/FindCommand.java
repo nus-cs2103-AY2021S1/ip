@@ -28,6 +28,9 @@ public class FindCommand extends Command {
      * @throws DukeException when no words are found matching in list.
      */
     public String execute(TaskList tasklist, Storage storage) throws DukeException {
+        assert tasklist != null : "Tasklist cannot be null.";
+        assert storage != null : "Storage cannot be null.";
+        assert description != null : "Description cannot be null.";
         boolean wordExist = false;
         String response = "";
         for (Task i : tasklist.getList()) {
