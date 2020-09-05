@@ -123,12 +123,26 @@ public class TaskList {
      *
      * @return The String representation of the task list.
      */
-    @Override
-    public String toString() {
+    public String toStringForGui() {
         int index = 1;
         StringBuilder result = new StringBuilder();
         for (Task task : tasks) {
-            result.append("\n").append(index++).append(".").append(task);
+            result.append("\n").append(index++).append(".").append(task.toStringForGui());
+        }
+        return result.toString();
+    }
+
+    /**
+     * Returns the String representation of the task list where all the tasks are represented in a top-down
+     * sequential order based on their indexes in the list. Each task occupies one line.
+     *
+     * @return The String representation of the task list.
+     */
+    public String toStringForCli() {
+        int index = 1;
+        StringBuilder result = new StringBuilder();
+        for (Task task : tasks) {
+            result.append("\n").append(index++).append(".").append(task.toStringForCli());
         }
         return result.toString();
     }

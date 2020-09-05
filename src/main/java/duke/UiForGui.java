@@ -42,8 +42,8 @@ public class UiForGui {
      * @param tasks The list of tasks that the task is being added to.
      */
     public String showReplyForAddTask(Task newTask, TaskList tasks) {
-        return "Got it. I've added this task:\n" + newTask + "\nNow you have " + tasks.getNumberOfTasks()
-                + " tasks in the list.";
+        return "Got it. I've added this task:\n" + newTask.toStringForGui() + "\nNow you have "
+                + tasks.getNumberOfTasks() + " tasks in the list.";
     }
 
     /**
@@ -52,7 +52,7 @@ public class UiForGui {
      * @param doneTask The task that has been completed.
      */
     public String showReplyForDoneTask(Task doneTask) {
-        return "Nice! I've marked this task as done:\n" + doneTask;
+        return "Nice! I've marked this task as done:\n" + doneTask.toStringForGui();
     }
 
     /**
@@ -62,8 +62,8 @@ public class UiForGui {
      * @param tasks The list of tasks that the task is being removed from.
      */
     public String showReplyForDeleteTask(Task removedTask, TaskList tasks) {
-        return "Noted. I've removed this task:\n" + removedTask + "\nNow you have " + tasks.getNumberOfTasks()
-                + " tasks in the list.";
+        return "Noted. I've removed this task:\n" + removedTask.toStringForGui() + "\nNow you have "
+                + tasks.getNumberOfTasks() + " tasks in the list.";
     }
 
     /**
@@ -75,7 +75,7 @@ public class UiForGui {
         if (tasks.isEmpty()) {
             return "Your list is empty! Let's add some tasks!";
         } else {
-            return "Here are the tasks in your list:" + tasks.toString();
+            return "Here are the tasks in your list:" + tasks.toStringForGui();
         }
     }
 
@@ -86,7 +86,7 @@ public class UiForGui {
         if (tasks.isEmpty()) {
             return "Sorry! No tasks were found with the word(s)\n\"" + keyWords + "\".";
         } else {
-            return "Here are the tasks in your list with the word(s)\n\"" + keyWords + "\":" + tasks.toString();
+            return "Here are the tasks in your list with the word(s)\n\"" + keyWords + "\":" + tasks.toStringForGui();
         }
     }
 }

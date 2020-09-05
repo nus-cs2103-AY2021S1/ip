@@ -69,8 +69,14 @@ public class Deadline extends Task {
      * @return The String that represents the deadline task when it is presented to the user as part of the task list.
      */
     @Override
-    public String toString() {
-        return super.toString() + " (by: " + dateAndTime.format(DateTimeFormatter.ofPattern("d MMM yyyy @ hh:mma"))
-                + ")";
+    public String toStringForGui() {
+        return super.toStringForGui() + " (by: " + dateAndTime.format(DateTimeFormatter
+                .ofPattern("d MMM yyyy @ hh:mma")) + ")";
+    }
+
+    @Override
+    public String toStringForCli() {
+        return super.toStringForCli() + " (by: " + dateAndTime.format(DateTimeFormatter
+                .ofPattern("d MMM yyyy @ hh:mma")) + ")";
     }
 }

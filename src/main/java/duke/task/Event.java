@@ -61,7 +61,12 @@ public class Event extends Task {
      * @return The String that represents the event task when it is presented to the user as part of the task list.
      */
     @Override
-    public String toString() {
-        return super.toString() + " (at: " + at + ")";
+    public String toStringForGui() {
+        return super.toStringForGui() + " (at: " + at + ")";
+    }
+
+    @Override
+    public String toStringForCli() {
+        return super.toStringForCli() + " (at: " + at + ")";
     }
 }

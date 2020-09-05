@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 import duke.task.Task;
 
-
-
 /**
  * Handles all interactions with the user.
  */
@@ -84,8 +82,8 @@ public class Ui {
      * @param tasks The list of tasks that the task is being added to.
      */
     public void showReplyForAddTask(Task newTask, TaskList tasks) {
-        showReply("Got it. I've added this task:\n" + newTask + "\nNow you have " + tasks.getNumberOfTasks()
-                + " tasks in the list.");
+        showReply("Got it. I've added this task:\n" + newTask.toStringForCli() + "\nNow you have "
+                + tasks.getNumberOfTasks() + " tasks in the list.");
     }
 
     /**
@@ -94,7 +92,7 @@ public class Ui {
      * @param doneTask The task that has been completed.
      */
     public void showReplyForDoneTask(Task doneTask) {
-        showReply("Nice! I've marked this task as done:\n" + doneTask);
+        showReply("Nice! I've marked this task as done:\n" + doneTask.toStringForCli());
     }
 
     /**
@@ -104,8 +102,8 @@ public class Ui {
      * @param tasks The list of tasks that the task is being removed from.
      */
     public void showReplyForDeleteTask(Task removedTask, TaskList tasks) {
-        showReply("Noted. I've removed this task:\n" + removedTask + "\nNow you have " + tasks.getNumberOfTasks()
-                + " tasks in the list.");
+        showReply("Noted. I've removed this task:\n" + removedTask.toStringForCli() + "\nNow you have "
+                + tasks.getNumberOfTasks() + " tasks in the list.");
     }
 
     /**
@@ -117,7 +115,7 @@ public class Ui {
         if (tasks.isEmpty()) {
             showReply("Your list is empty! Let's add some tasks!");
         } else {
-            showReply("Here are the tasks in your list:" + tasks.toString());
+            showReply("Here are the tasks in your list:" + tasks.toStringForCli());
         }
     }
 
@@ -128,7 +126,8 @@ public class Ui {
         if (tasks.isEmpty()) {
             showReply("Sorry! No tasks were found with the word(s)\n\"" + keyWords + "\".");
         } else {
-            showReply("Here are the tasks in your list with the word(s)\n\"" + keyWords + "\":" + tasks.toString());
+            showReply("Here are the tasks in your list with the word(s)\n\"" + keyWords + "\":"
+                    + tasks.toStringForCli());
         }
     }
 }

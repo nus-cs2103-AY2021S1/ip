@@ -45,10 +45,13 @@ public class Task {
      *
      * @return "✓" if the task is completed; "✘" if it is not completed.
      */
-    public String getStatusIcon() {
+    public String getStatusIconForGui() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    public String getStatusIconForCli() {
+        return (isDone ? "✓" : "✘");
+    }
 
     /**
      * Changes the task's completion indicator to either completed or not completed.
@@ -82,8 +85,11 @@ public class Task {
      *
      * @return The String that represents the task when it is presented to the user as part of the task list.
      */
-    @Override
-    public String toString() {
-        return taskTypeSymbol + "[" + getStatusIcon() + "] " + description;
+    public String toStringForGui() {
+        return taskTypeSymbol + "[" + getStatusIconForGui() + "] " + description;
+    }
+
+    public String toStringForCli() {
+        return taskTypeSymbol + "[" + getStatusIconForCli() + "] " + description;
     }
 }
