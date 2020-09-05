@@ -92,7 +92,6 @@ public class UI {
         }
     }
 
-<<<<<<< HEAD
     protected String findScheduleOnDate(TaskList tasks, LocalDate date) {
         String str1 = "";
         String str2 = "\nHere is your schedule for this day!\n";
