@@ -7,6 +7,9 @@ import duke.task.Deadline;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.Optional;
 
 /**
  * The TaskList encapsulates the list of tasks and is in charge of
@@ -172,36 +175,35 @@ public class TaskList {
         if (list.isEmpty()) {
             return "Your list is empty!";
         }
-        int num = 1;
-        StringBuilder msg = new StringBuilder((list.size() > 1)
+        String msg = (list.size() > 1
                 ? "Here are the tasks in your list:\n"
                 : "Here's your one and only task:\n");
-        for (Task task: list) {
-            msg.append(String.format("%d. %s", num, task));
-            if (num < list.size()) {
-                msg.append("\n");
-            }
-            num++;
-        }
-        return msg.toString();
+
+        msg += IntStream.range(0, list.size())
+                .mapToObj(i -> String.format("%d. %s", i + 1, list.get(i)))
+                .reduce((t1, t2) -> String.format("%s\n%s", t1, t2))
+                .orElse("");
+
+        return msg;
     }
 
     /**
-     * Generates a print message containing the list of tasks with the
-     * input indices. This method is used to filter out tasks to be displayed
-     * to the user.
-     * @param indices the list of task numbers.
+     * Generates a print message containing the list of tasks that the user
+     * is interested in seeing based on the input query keyword. Keywords are
+     * matched as whole words instead of substrings.
+     * The search result may be empty.
+     * @param query the keyword to filter tasks.
      * @return the formatted print message of the filtered list.
      */
-    public String getQueryResultMessage(List<Integer> indices) {
-        if (indices.isEmpty()) {
+    public String getFilteredListMessage(String query) {
+        Optional<String> filtered = IntStream.range(0, list.size())
+                .mapToObj(i -> String.format("%d. %s", i + 1, list.get(i)))
+                .filter(s -> Arrays.asList(s.split(" ")).contains(query))
+                .reduce((t1, t2) -> String.format("%s\n%s", t1, t2));
+
+        if (filtered.isEmpty()) {
             return "Search result is empty!";
         }
-        StringBuilder msg = new StringBuilder();
-        for (int i: indices) {
-            msg.append(String.format("%d. %s", i + 1, list.get(i)));
-            msg.append("\n");
-        }
-        return msg.toString().strip();
+        return "Search result:\n" + filtered.get();
     }
 }
