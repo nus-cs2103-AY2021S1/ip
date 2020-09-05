@@ -163,9 +163,8 @@ public class TaskList {
      */
 
     public List<Task> find(String query) throws DukeInvalidTimeException {
-
         query = query.substring(5);
-        List<Task> queriedList = new ArrayList<>();
+        List<Task> queriedTasks = new ArrayList<>();
 
         for (Task task : todoList) {
             String description = task.getDescription();
@@ -175,7 +174,7 @@ public class TaskList {
                 keywords = description.split("\\s");
                 for (String keyword : keywords) {
                     if (keyword.equals(query)) {
-                        queriedList.add(new Todo(description, queriedList.size() + 1, task.hasDone()));
+                        queriedTasks.add(new Todo(description, queriedTasks.size() + 1, task.hasDone()));
                     }
                 }
                 break;
@@ -183,11 +182,10 @@ public class TaskList {
             case DEADLINE:
                 // to retrieve just the activity
                 keywords = description.substring(0, description.indexOf("/") - 1).split("\\s");
+                // add to collection
                 for (String keyword : keywords) {
                     if (keyword.equals(query)) {
-                        queriedList.add(task.getType() == TaskType.DEADLINE
-                                ? new Deadline(description, queriedList.size() + 1, task.hasDone())
-                                : new Event(description, queriedList.size() + 1, task.hasDone()));
+                        queriedTasks.add(insertTasks(queriedTasks.size() + 1, task, description));
                     }
                 }
                 break;
@@ -195,8 +193,19 @@ public class TaskList {
                 break;
             }
         }
-        return queriedList;
+        return queriedTasks;
     }
 
-
+    /**
+     * Decides & re-indexes tasks of deadline/event type queried by user into collection.
+     * @param task Current task
+     * @param description Content of task
+     * @return Task
+     * @throws DukeInvalidTimeException if there is any index timings in task
+     */
+    private Task insertTasks(int len, Task task, String description) throws DukeInvalidTimeException {
+        return task.getType() == TaskType.DEADLINE
+                ? new Deadline(description, len, task.hasDone())
+                : new Event(description, len, task.hasDone());
+    }
 }

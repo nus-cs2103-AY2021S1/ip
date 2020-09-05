@@ -1,5 +1,11 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import duke.exceptions.DukeInvalidTimeException;
+
 /**
  * Base class for tasks in the chatbot and utilised by the main types of tasks.
  */
@@ -10,6 +16,7 @@ public class Task {
     protected final String done = "[\u2713] ";
     protected final String start = "[\u2718] ";
     protected TaskType type;
+    private LocalDateTime time;
 
     /**
      * Constructor for a new Task, the task is set to incomplete by default.
@@ -65,8 +72,20 @@ public class Task {
     public TaskType getType() {
         return type;
     }
-
-
+    public LocalDateTime getTime() {
+        return time;
+    }
+    public void setTime(int idx) throws DukeInvalidTimeException {
+        try {
+            time = LocalDateTime.parse(description.substring(idx + 4, idx + 20),
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
+            throw new DukeInvalidTimeException();
+        }
+    }
+    public String getIcon(boolean isDone) {
+        return isDone ? done : start;
+    }
     /**
      * Returns the text version of task with index.
      *
