@@ -1,5 +1,4 @@
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -15,8 +14,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
@@ -25,9 +22,10 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        //Makes Duke greet the user.
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("Yooo, I'm Grizz.\nWhat can I do for you today?\n"
-                        + "Please enter dates and times like this: yyyy-mm-dd hhmm", dukeImage)
+                DialogBox.getDukeDialog("Heyy, I'm Grizz.\n" +
+                                "What can I do for you today?\n", dukeImage)
         );
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
