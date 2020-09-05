@@ -1,4 +1,2 @@
-[T][✘] this
-[D][✘] proj (by 1 Sep 2020)
-[E][✘] party (from 4 Sep 2020, 12:00AM - 11:59PM)
-[D][✘] sleep (by 6 Sep 2020)
+[T][✘] a
+[D][✘] IP (by 10 Sep 2020, 11:59PM)
