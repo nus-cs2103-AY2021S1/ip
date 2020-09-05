@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class DeadlineTest {
     @Test
     public void constructor_validCreation_success() {
-        assertEquals("[D][✘] Dinner (by: Aug 24 2020)", new Deadline("Dinner", "2020-08-24").toString());
+        assertEquals("[D][NOT DONE] Dinner (by: Aug 24 2020)", new Deadline("Dinner", "2020-08-24").toString());
     }
 
     @Test

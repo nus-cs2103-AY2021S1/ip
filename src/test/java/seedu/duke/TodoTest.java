@@ -8,7 +8,7 @@ public class TodoTest {
 
     @Test
     public void constructor_validCreation_success() {
-        assertEquals("[T][✘] Dinner", new Todo("Dinner").toString());
+        assertEquals("[T][NOT DONE] Dinner", new Todo("Dinner").toString());
     }
 
     @Test
