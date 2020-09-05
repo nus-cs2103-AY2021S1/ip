@@ -48,6 +48,6 @@ public class Event extends Task {
      */
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + this.startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH : mm")) + ")";
+                + this.startTime.format(DateTimeFormatter.ofPattern("MM d yyyy HH : mm")) + ")";
     }
 }

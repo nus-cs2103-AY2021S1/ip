@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class EventTest {
     @Test
     public void testStringConversion() {
-        assertEquals("[E][✘] work hard (at: 12月 12 2020 12 : 21)",
+        assertEquals("[E][✘] work hard (at: 12 12 2020 12 : 21)",
                 new Event("work hard",
                         LocalDateTime.of(2020, 12, 12, 12, 21)).toString());
     }

@@ -83,8 +83,8 @@ public class Parser {
         String[] dateSplit = date.split("-");
         isFormatValid = dateSplit.length == 3;
         isYearValid = dateSplit[0].strip().length() == 4;
-        isMonthValid = dateSplit[1].strip().length() != 2;
-        isDayValid = dateSplit[2].strip().length() != 2;
+        isMonthValid = dateSplit[1].strip().length() == 2;
+        isDayValid = dateSplit[2].strip().length() == 2;
 
         if (!isFormatValid || !isYearValid || !isMonthValid || !isDayValid) {
             throw new DukeException("The input date format is incorrect");
