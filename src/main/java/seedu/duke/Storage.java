@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -17,6 +18,7 @@ public class Storage {
     private static final String TODO_SYMBOL = "T";
     private static final String EVENT_SYMBOL = "E";
     private static final String DEADLINE_SYMBOL  = "D";
+    private static final String INVALID_SYMBOL = "Invalid Symbol!";
     private static final String DONE = "1";
     private static final String NOT_DONE = "0";
 
@@ -87,36 +89,78 @@ public class Storage {
             String typeOfTask = arrTasks[0];
             String isDone = arrTasks[1];
             String nameOfTask = arrTasks[2];
-            if (typeOfTask.equals(TODO_SYMBOL)) {
-                Todo tempTodo;
-                if (isDone.equals(DONE)) {
-                    tempTodo = new Todo(nameOfTask, true);
-                } else {
-                    tempTodo = new Todo(nameOfTask, false);
-                }
-                listOfTasks.add(tempTodo);
-            } else if (typeOfTask.equals(DEADLINE_SYMBOL)) {
+            switch (typeOfTask) {
+            case TODO_SYMBOL:
+                loadToDo(nameOfTask, isDone, listOfTasks);
+                break;
+            case DEADLINE_SYMBOL:
                 String date = arrTasks[3];
-                Deadline tempDeadline;
-                if (isDone.equals(DONE)) {
-                    tempDeadline = new Deadline(nameOfTask, true, date);
-                } else {
-                    tempDeadline = new Deadline(nameOfTask, false, date);
-                }
-                listOfTasks.add(tempDeadline);
-            } else if (typeOfTask.equals(EVENT_SYMBOL)) {
-                String date = arrTasks[3];
-                Event tempEvent;
-                if (isDone.equals(DONE)) {
-                    tempEvent = new Event(nameOfTask, true, date);
-                } else {
-                    tempEvent = new Event(nameOfTask, false, date);
-                }
-                listOfTasks.add(tempEvent);
+                loadDeadline(nameOfTask, isDone, date, listOfTasks);
+                break;
+            case EVENT_SYMBOL:
+                date = arrTasks[3];
+                loadEvent(nameOfTask, isDone, date, listOfTasks);
+                break;
+            default:
+                System.out.println(INVALID_SYMBOL);
+                break;
             }
         }
         return listOfTasks;
     }
+
+    /**
+     * Retrieves Todo tasks from local text file to Duke.
+     *
+     * @param nameOfTask name of Todo task.
+     * @param isDone status of Todo task.
+     * @param listOfTasks Arraylist storing all the tasks.
+     */
+    private static void loadToDo(String nameOfTask, String isDone, ArrayList<Task> listOfTasks) {
+        Todo tempTodo;
+        if (isDone.equals(DONE)) {
+            tempTodo = new Todo(nameOfTask, true);
+        } else {
+            tempTodo = new Todo(nameOfTask, false);
+        }
+        listOfTasks.add(tempTodo);
+    }
+
+    /**
+     * Retrieves Deadlube tasks from local text file to Duke.
+     *
+     * @param nameOfTask name of Deadline task.
+     * @param isDone status of Deadline task.
+     * @param listOfTasks Arraylist storing all the tasks.
+     */
+    private static void loadDeadline(String nameOfTask, String isDone, String date, ArrayList<Task> listOfTasks) {
+        Deadline tempDeadline;
+        if (isDone.equals(DONE)) {
+            tempDeadline = new Deadline(nameOfTask, true, date);
+        } else {
+            tempDeadline = new Deadline(nameOfTask, false, date);
+        }
+        listOfTasks.add(tempDeadline);
+    }
+
+    /**
+     * Retrieves Event tasks from local text file to Duke.
+     *
+     * @param nameOfTask name of Event task.
+     * @param isDone status of Event task.
+     * @param listOfTasks Arraylist storing all the tasks.
+     */
+    private static void loadEvent(String nameOfTask, String isDone, String date, ArrayList<Task> listOfTasks) {
+        Event tempEvent;
+        if (isDone.equals(DONE)) {
+            tempEvent = new Event(nameOfTask, true, date);
+        } else {
+            tempEvent = new Event(nameOfTask, false, date);
+        }
+        listOfTasks.add(tempEvent);
+    }
+
+
 
     /**
      * Makes task as complete in a local txt file.
@@ -133,8 +177,7 @@ public class Storage {
             for (int i = 0; i < size; i++) {
                 String task = br.readLine();
                 if (i == taskNo) {
-                    String tempTask = task.replaceFirst(NOT_DONE, DONE);
-                    task = tempTask;
+                    task = task.replaceFirst(NOT_DONE, DONE);
                 }
                 tempArr.add(task);
             }

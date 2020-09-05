@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.security.Key;
 import java.util.Scanner;
 
 /**
@@ -10,7 +11,6 @@ public class Ui {
     private static final String INTRO = "Hello! I'm Duke!\n" + "What can I do for you?\n";
     private static final String BYE = "    Bye! Hope to see you again soon.\n";
     private Scanner sc;
-    private String userInput;
     private Parser parse;
     private boolean isAlive = true;
 
@@ -42,9 +42,9 @@ public class Ui {
      * Gets userInput from user on CLI.
      */
     public void getNewInput() {
-        userInput = sc.nextLine();
+        String userInput = sc.nextLine();
         parse.readCliInput(userInput);
-        if (userInput.equals("bye")) {
+        if (userInput.equals(Keyword.BYE.label)) {
             discontinue();
         }
     }
@@ -56,11 +56,10 @@ public class Ui {
      * @return String output by DUI on GUI.
      */
     public String getUserInput(String input) {
-        if (input.equals("bye")) {
+        if (input.equals(Keyword.BYE.label)) {
             return Ui.endDuke();
         } else {
-            String output = parse.readGuiInput(input);
-            return output;
+            return parse.readGuiInput(input);
         }
     }
 
@@ -104,8 +103,6 @@ public class Ui {
      * Static method to end Duke GUI when user input "Bye".
      */
     public static String endDuke() {
-        String goodBye = BYE;
-        String exit = goodBye;
-        return exit;
+        return BYE;
     }
 }

@@ -27,7 +27,7 @@ public class Duke {
             System.out.println(e.getMessage());
         }
         try {
-            taskLists = new TaskList(storage.loadFromStorage(new ArrayList<Task>()));
+            taskLists = new TaskList(storage.loadFromStorage(new ArrayList<>()));
             parser = new Parser(taskLists);
             ui = new Ui(parser);
         } catch (IOException e) {
@@ -51,7 +51,7 @@ public class Duke {
                 }
             }, 3000);
         }
-        return this.ui.getUserInput(input);
+        return ui.getUserInput(input);
     }
 
     /**
