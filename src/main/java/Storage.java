@@ -23,7 +23,7 @@ public class Storage {
             for (int i = 0; i < size; i++) {
                 Task task = taskList.getTask(i);
                 String taskDetails;
-                if (task.isComplete) {
+                if (task.isComplete()) {
                     taskDetails = "complete";
                 } else {
                     taskDetails = "incomplete";
@@ -84,11 +84,11 @@ public class Storage {
                 Files.createDirectory(Paths.get("./data/"));
                 Files.createFile(Paths.get(filePath));
             } catch (IOException f) {
-                System.out.println("Code should never reach here." + f.getMessage());
+                throw new DukeException("Code should never reach here." + f.getMessage());
             }
             throw new DukeException("There is no file to access.");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("There is an error inside the file.");
+            throw new DukeException("There is an error inside the file. The task has incomplete details.");
         } catch (ClassCastException e) {
             throw new DukeException("Instead of tasks, a command was written into the file.");
         } catch (DukeException e) {

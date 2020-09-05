@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 // Class deals with interactions with the user
 public class Ui {
-    Scanner sc;
+    private Scanner sc;
 
     public Ui() {
         sc = new Scanner(System.in);
@@ -19,7 +19,7 @@ public class Ui {
     }
 
     public void showLine() {
-        System.out.println("------------------------------");
+        System.out.println("\n------------------------------\n");
     }
 
     public void showError(String errorMessage) {
@@ -33,13 +33,13 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        String loadingErrorMessage = "taskList.txt file was not detected.\n"
+        String loadingErrorMessage = "tasks.txt file was not detected.\n"
                 + "A new task list will be created.";
         System.out.println(loadingErrorMessage);
     }
 
-    public void showTaskCompleted(int i) {
-        String msg = "Task " + i + " has been marked as complete.";
+    public void showTaskCompleted(int taskIndex) {
+        String msg = "Task " + taskIndex + " has been marked as complete.";
         System.out.println(msg);
     }
 
@@ -60,7 +60,7 @@ public class Ui {
     }
 
     public void showTaskDeleted(int taskIndex) {
-        String msg = "Task " + taskIndex + " has been deleted.\n";
+        String msg = "Task " + taskIndex + " has been deleted.";
         System.out.println(msg);
     }
 }

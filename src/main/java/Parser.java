@@ -32,7 +32,7 @@ public class Parser {
                         } else {
                             indexList.add(i);
                         }
-                    } catch (Exception e) {
+                    } catch (NumberFormatException e) {
                         throw new DukeException("An invalid index was given.\n"
                                 + index + " is not an integer.");
                     }
@@ -49,7 +49,7 @@ public class Parser {
                 try {
                     int index = Integer.parseInt(stringIndex);
                     return new DeleteCommand(index);
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                     throw new DukeException("An invalid index was given.\n"
                             + stringIndex + " is not an integer.");
                 }
