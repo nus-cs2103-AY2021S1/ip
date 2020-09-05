@@ -20,9 +20,7 @@ public class Event extends Task {
      * @param end The end datetime of the event
      */
     public Event(String description, DukeDateTime start, DukeDateTime end) {
-        super(description);
-        this.start = start;
-        this.end = end;
+        this(false, description, start, end);
     }
 
     /**
@@ -37,6 +35,8 @@ public class Event extends Task {
         super(isCompleted, description);
         this.start = start;
         this.end = end;
+        assert this.start != null;
+        assert this.end != null;
     }
 
     /**

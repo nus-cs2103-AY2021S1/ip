@@ -30,6 +30,7 @@ public class DataStore {
     public DataStore(List<Task> taskList) {
         this.taskList = taskList;
         this.history = new UndoRedoList();
+        assert taskList != null;
     }
 
     /**

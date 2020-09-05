@@ -18,8 +18,7 @@ public class Deadline extends Task {
      * @param deadline in which task should be completed by
      */
     public Deadline(String description, DukeDateTime deadline) {
-        super(description);
-        this.deadline = deadline;
+        this(false, description, deadline);
     }
 
     /**
@@ -31,6 +30,7 @@ public class Deadline extends Task {
     public Deadline(boolean isCompleted, String description, DukeDateTime deadline) {
         super(isCompleted, description);
         this.deadline = deadline;
+        assert this.deadline != null;
     }
 
     /**

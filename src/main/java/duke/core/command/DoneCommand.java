@@ -16,6 +16,7 @@ public class DoneCommand implements ReversibleExecutable {
      */
     public DoneCommand(Task task) {
         this.task = task;
+        assert this.task != null;
     }
 
     /**
