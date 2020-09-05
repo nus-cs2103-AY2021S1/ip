@@ -67,24 +67,33 @@ public class Data {
         // Reading tasks from file
         for (int i = 1; scanner.hasNextLine(); i++) {
             Task currTask = null;
-            String[] curr = scanner.nextLine().split("---");
-            String type = curr[0];
-            boolean isDone = Integer.parseInt(curr[1]) == 1;
-            String activity = curr[2];
+            // Assertion: The data has been saved in expected format on disk already
+            assert scanner.nextLine().substring(1, 4).equals("---") : "Data has not been saved in proper format";
+            String[] currStrings = scanner.nextLine().split("---");
+            String type = currStrings[0];
+            boolean isDone = Integer.parseInt(currStrings[1]) == 1;
+            String activity = currStrings[2];
             String description;
-
+            // Loading tasks from file
             switch (type) {
             case "T":
                 currTask = new Todo(activity, i, isDone);
                 break;
             case "D":
             case "E":
-                description = activity + " " + curr[3];
+                description = activity + " " + currStrings[3];
                 currTask = readTask(description, type, i, isDone);
                 break;
             default:
                 break;
             }
+            tasks.add(currTask);
+            assert currTask != null;
+            boolean isTodo = currTask.getType() == TaskType.TODO;
+            boolean isDeadline = currTask.getType() == TaskType.DEADLINE;
+            boolean isEvent = currTask.getType() == TaskType.EVENT;
+            // Assertion: Tasks belong to the three main defined types
+            assert isTodo || isDeadline || isEvent : "Task(s) don't belong to the main types of tasks";
             tasks.add(currTask);
         }
         return tasks;
@@ -114,7 +123,7 @@ public class Data {
             String line = "";
             int done = task.hasDone() ? 1 : 0;
             String description = task.getDescription();
-
+            // Saving tasks to disk in specific format
             switch (task.getType()) {
             case TODO:
                 line = String.format("T---%d---%s", done, description);

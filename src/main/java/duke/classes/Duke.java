@@ -71,17 +71,17 @@ public class Duke {
      * Void method that abstracts away most the logic behind running the Duke chatbot.
      */
     public void run() {
-
+        // Initialise
         ui = new Ui();
         parser = new Parser();
         String word = parser.scan.nextLine();
-
+        // Take in inputs
         while (!word.equals("bye")) {
             Command currentCommand = parser.analyse(word);
             assign(currentCommand, word);
             word = parser.scan.nextLine();
         }
-
+        // Completion of program
         ui.endDuke();
         localSave();
     }
@@ -134,6 +134,8 @@ public class Duke {
             break;
         }
         System.out.println(completedString);
+        // Assertion: Duke can associate a command to the task
+        assert completedString != null : "Assignment of command to task has failed.";
         return completedString;
     }
 
@@ -202,6 +204,8 @@ public class Duke {
         parser = new Parser();
         Command currentCommand = parser.analyse(input);
         String response = assign(currentCommand, input);
+        // Assertion: Duke is able to parse the command given
+        assert !response.isBlank() || !response.isEmpty() : "Response from duke is empty.";
         return "Duke says: \n" + response;
     }
 }
