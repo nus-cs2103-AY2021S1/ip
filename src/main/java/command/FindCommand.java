@@ -15,11 +15,11 @@ public class FindCommand extends Command {
     public CommandResult execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList filtered = taskList.find(keyword);
         ui.print("Here are the matching tasks in your list:");
-        String response = "Here are the matching tasks in your list:\n";
+        StringBuilder response = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 0; i < filtered.size(); i++) {
             ui.print(String.format("%d. %s", i + 1, filtered.show(i)));
-            response += String.format("%d. %s%n", i + 1, filtered.show(i));
+            response.append(String.format("%d. %s%n", i + 1, filtered.show(i)));
         }
-        return new CommandResult(response);
+        return new CommandResult(response.toString());
     }
 }

@@ -25,13 +25,13 @@ public class ViewallCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList tasks, Ui ui, Storage storage) {
-        TaskList filtered = tasks.viewAll(date);
+        TaskList filtered = tasks.viewAllOnDate(date);
         ui.print("Here are the tasks on given date:");
-        String response = "Here are the tasks on given date:\n";
+        StringBuilder response = new StringBuilder("Here are the tasks on given date:\n");
         for (int i = 0; i < filtered.size(); i++) {
             ui.print(String.format("%d. %s", i + 1, filtered.show(i)));
-            response += String.format("%d. %s%n", i + 1, filtered.show(i));
+            response.append(String.format("%d. %s%n", i + 1, filtered.show(i)));
         }
-        return new CommandResult(response);
+        return new CommandResult(response.toString());
     }
 }
