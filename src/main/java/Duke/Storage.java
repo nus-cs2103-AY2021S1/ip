@@ -43,8 +43,8 @@ public class Storage {
             if (doesNotExist) {
                 throw new DukeException("Database file does not exist");
             }
-            Scanner loadedData = new Scanner(taskFile);
 
+            Scanner loadedData = new Scanner(taskFile);
             while (loadedData.hasNextLine()) {
                 String[] taskParts = loadedData.nextLine().split("~");
                 String identifier = taskParts[0];
@@ -96,10 +96,12 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(taskFile.getPath());
             Task todo;
+
             for (int i = 0; i < todos.size(); i++) {
                 todo = todos.get(i);
                 fw.write(todo.saveFormat() + System.lineSeparator());
             }
+
             fw.close();
         } catch (IOException e) {
             throw new DukeException(e.getMessage());

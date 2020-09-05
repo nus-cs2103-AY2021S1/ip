@@ -11,7 +11,8 @@ public class ListCommand extends Command {
 
     /**
      * Lists the tasks in the TaskList.
-     *  @param tasks The TaskList which contains all the tasks.
+     *
+     * @param tasks The TaskList which contains all the tasks.
      * @param storage The Storage which will record any changes into the file in its path.
      * @return The output to be displayed to the user.
      */
