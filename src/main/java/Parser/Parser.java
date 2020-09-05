@@ -5,6 +5,8 @@ import static java.lang.Integer.parseInt;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.Collections;
 
 import dukeexception.DukeException;
 import storage.Storage;
@@ -104,26 +106,53 @@ public class Parser {
         } else {
             try {
                 assert doneCommand[0].equals("done");
-                int index = parseInt(command.split(" ")[1]);
-                storage.setDoneLine(index);
-                String doneTask = storage.printLine(index);
-                doneTask = storage.processLine(doneTask);
+                String[] strIndexes = command.split(" ");
+                int[] indexes = new int[strIndexes.length - 1];
+                for (int i = 1; i < strIndexes.length; i++) {
+                    indexes[i - 1] = parseInt(strIndexes[i]);
+                }
 
-                assert index > 0;
-                reply += "Task marked as done! Good job!\n";
-                reply += doneTask;
+                for (int i : indexes) {
+                    reply = tasks.getFromList(i).toString();
+                }
+
+                reply = "Completing tasks...\n";
+                reply += setMultipleDoneTask(indexes);
+                reply += "Task marked as done! Good job!";
+
+                //int index = parseInt(command.split(" ")[1]);
+                //storage.setDoneLine(index);
+                //String doneTask = storage.printLine(index);
+                //doneTask = storage.processLine(doneTask);
+                //assert index > 0;
+                //reply += doneTask;
+
             } catch (IndexOutOfBoundsException e) {
                 reply = printIndexOutOfBounds();
             } catch (NumberFormatException e) {
                 reply = printNumberFormat();
-            } catch (FileNotFoundException e) {
-                reply = printFileError();
-            } catch (IOException e) {
-                reply = printFileError();
             } finally {
                 return reply;
             }
         }
+    }
+
+    protected String setMultipleDoneTask(int ... indexes) {
+        String reply = "";
+        try {
+            for (int index : indexes) {
+                storage.setDoneLine(index);
+                String doneTask = storage.printLine(index);
+                doneTask = storage.processLine(doneTask);
+                tasks.setDoneList(index);
+                reply += doneTask + "\n";
+            }
+        } catch (FileNotFoundException e) {
+            reply = printFileError();
+        } catch (IOException e) {
+            reply = printFileError();
+        }
+        return reply;
     }
 
     /**
@@ -139,27 +168,60 @@ public class Parser {
         } else {
             try {
                 assert deleteCommand[0].equals("delete");
-                int index = parseInt(command.split(" ")[1]);
-                String deletedTask = storage.printLine(index);
-                deletedTask = storage.processLine(deletedTask);
-                storage.deleteFromFile(index);
 
-                assert index > 0;
-                reply += "This task has been deleted from the list:\n";
-                reply += deletedTask + "\n";
+                String[] strIndexes = command.split(" ");
+                Integer[] indexes = new Integer[strIndexes.length - 1];
+                for (int i = 1; i < strIndexes.length; i++) {
+                    indexes[i - 1] = parseInt(strIndexes[i]);
+                }
+
+                for (int i : indexes) {
+                    reply = tasks.getFromList(i).toString();
+                }
+
+                //sort list
+                Arrays.sort(indexes, Collections.reverseOrder());
+                //int index = parseInt(command.split(" ")[1]);
+                //String deletedTask = storage.printLine(index);
+                //deletedTask = storage.processLine(deletedTask);
+                //storage.deleteFromFile(index);
+
+                //assert index > 0;
+
+                reply = "Deleting tasks...\n";
+                reply += deleteMultipleTasks(indexes);
                 reply += "You now have " + storage.getNumOfTasks() + " tasks.";
+
+
             } catch (IndexOutOfBoundsException e) {
                 reply = printIndexOutOfBounds();
             } catch (NumberFormatException e) {
                 reply = printNumberFormat();
-            } catch (FileNotFoundException e) {
-                reply = printFileError();
-            } catch (IOException e) {
-                reply = printFileError();
             } finally {
                 return reply;
             }
         }
+    }
+
+
+    protected String deleteMultipleTasks(Integer ... indexes) {
+        String reply = "";
+        try {
+            for (int index : indexes) {
+
+                String deletedTask = storage.printLine(index);
+                deletedTask = storage.processLine(deletedTask);
+                storage.deleteFromFile(index);
+                tasks.deleteList(index);
+
+                reply += deletedTask + "\n";
+            }
+        } catch (FileNotFoundException e) {
+            reply = printFileError();
+        } catch (IOException e) {
+            reply = printFileError();
+        }
+        return reply;
     }
 
     /**
@@ -281,11 +343,9 @@ public class Parser {
                 break;
             case "done":
                 reply = setDoneTask(command);
-                tasks.setDoneList(command);
                 break;
             case "delete":
                 reply = deleteTask(command);
-                tasks.deleteList(command);
                 break;
             case "todo":
                 reply = handleTodo(command);

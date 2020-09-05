@@ -46,6 +46,10 @@ public class TaskList {
         tasks.add(task);
     }
 
+    public Task getFromList(int index) {
+        return tasks.get(index - 1);
+    }
+
     /**
      * Gets the number of tasks in the task list.
      * @return the number of tasks in the task list.
@@ -83,12 +87,12 @@ public class TaskList {
 
     /**
      * Updates the task in the list to be done.
-     * @param command the user's input
+     * @param index the index of task in the list
      */
-    public void setDoneList(String command) {
+    public void setDoneList(int index) {
         //exceptions are already caught in handleDone() method in Parser class
         try {
-            int index = parseInt(command.split(" ")[1]);
+            //int index = parseInt(command.split(" ")[1]);
             Task doneTask = tasks.get(index - 1);
             assert index > 0;
             doneTask.markAsDone();
@@ -102,12 +106,12 @@ public class TaskList {
 
     /**
      * Deletes a task in the task list
-     * @param command the user's input
+     * @param index the index of task in the list
      */
-    public void deleteList(String command) {
+    public void deleteList(int index) {
         //exceptions are already caught in handleDelete() method in Parser class
         try {
-            int index = parseInt(command.split(" ")[1]);
+            //int index = parseInt(command.split(" ")[1]);
             tasks.remove(index - 1);
             assert index > 0;
         } catch (IndexOutOfBoundsException e) {
