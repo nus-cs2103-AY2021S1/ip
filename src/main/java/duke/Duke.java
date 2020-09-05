@@ -9,6 +9,7 @@ import duke.ui.Parser;
 import duke.ui.Ui;
 import duke.commands.Command;
 
+import java.io.InputStream;
 import java.util.List;
 
 import static duke.storage.Storage.DEFAULT_STORAGE_FILEPATH;
@@ -22,10 +23,14 @@ public class Duke {
     private Ui ui;
 
     public Duke(String filePath) {
+        new Duke(filePath, System.in);
+    }
+
+    public Duke(String filePath, InputStream in) {
         try {
             storage = new Storage(filePath);
             taskList = storage.loadTasks();
-            ui = new Ui();
+            ui = new Ui(in);
             parser = new Parser(taskList, ui);
         } catch (StorageOperationException e ) {
             System.out.println(e.getMessage());
@@ -58,20 +63,6 @@ public class Duke {
         new Duke(DEFAULT_STORAGE_FILEPATH).run();
 
     }
-
-
-    private static int checkDoneDeleteException(String[] inputList, TaskList taskList) {
-        if (inputList.length < 2)
-        {
-            throw new DukeException("☹ BLEHHHHHH. Tell me which task??");
-        }
-        int index = Integer.parseInt(inputList[1]) - 1;
-        if (index < 0 || index > taskList.getSize() - 1) {
-            throw new DukeException(String.format("☹ BLEHHHHHH. duke.task.Task no. %d does not exist. Please try again.", (index + 1)));
-        }
-        return index;
-    }
-
 
     private static int getRemainingTaskCount(List<Task> taskList)
     {

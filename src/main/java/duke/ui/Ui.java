@@ -1,5 +1,6 @@
 package duke.ui;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class Ui {
@@ -13,7 +14,7 @@ public class Ui {
     private static final String GREETING = "Hello, Alpha here... welcome to my help centre... again :/\n"
             + "Would you like to explain what you want?\n";
 
-    private static final String GOODBYE = "Bye. Try not to come again please... let me live.\n";
+    public static final String GOODBYE = "Bye. Try not to come again please... let me live.\n";
     private static final String LINE_PREFIX = "    ";
 
     private static final String LINE_SEPARATOR = System.lineSeparator();
@@ -22,8 +23,8 @@ public class Ui {
 
     private Scanner sc;
 
-    public Ui() {
-        sc = new Scanner(System.in);
+    public Ui(InputStream in) {
+        sc = new Scanner(in);
     }
 
     public void showWelcomeMessage() {

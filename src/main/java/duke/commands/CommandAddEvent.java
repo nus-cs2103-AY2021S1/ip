@@ -11,4 +11,5 @@ public class CommandAddEvent extends CommandAdd {
     public CommandAddEvent(TaskList taskList, Ui ui, Task task) {
         super(taskList, ui, task);
     }
+
 }

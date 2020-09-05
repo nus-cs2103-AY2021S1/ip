@@ -24,4 +24,8 @@ public class CommandAdd extends Command {
         int size = taskList.getSize();
         ui.outputBlockToUser(String.format(ADD_TASK_CONFIRMATION, task, size, (size == 1 ? "task" : "tasks")));
     }
+
+    public Task getTask() {
+        return task;
+    }
 }
