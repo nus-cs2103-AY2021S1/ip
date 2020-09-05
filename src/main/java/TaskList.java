@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -81,7 +82,48 @@ public class TaskList {
         return foundTasks;
     }
 
-    protected Task updateTask(int taskNumber) {
+    protected Task getTaskToUpdate(int taskNumber) {
         return this.taskList.get(taskNumber - 1);
+    }
+
+    protected Task getUpdatedTask(String detailToUpdate) throws DukeException {
+        try {
+            Task updatingTask = null;
+            for (Task task: taskList) {
+                if (task.isBeingUpdated) {
+                    updatingTask = task;
+                }
+            }
+            String[] updateDetails = detailToUpdate.split(" ");
+            if (updateDetails[0].equals("date")) {
+                LocalDate newDate = LocalDate.parse(updateDetails[1]);
+                if (updatingTask instanceof Deadline) {
+                    return new Deadline(updatingTask.description, newDate);
+                } else {
+                    return new Event(updatingTask.description, newDate);
+                }
+            } else if (updateDetails[0].equals("desc")) {
+                String newDescription = updateDetails[1];
+                if (updatingTask instanceof Deadline) {
+                    return new Deadline(newDescription, ((Deadline) updatingTask).getBy() );
+                } else if (updatingTask instanceof Event){
+                    return new Event(newDescription, ((Event) updatingTask).getAt());
+                } else {
+                    return new Todo(newDescription);
+                }
+            } else {
+                throw new InvalidCommandException();
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidCommandException();
+        }
+    }
+
+    protected void updateTask(Task updatedTask) {
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).isBeingUpdated) {
+                taskList.set(i, updatedTask);
+            }
+        }
     }
 }

@@ -7,6 +7,7 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
+    protected boolean isBeingUpdated = false;
 
     /**
      * Constructor for Task.
@@ -46,6 +47,10 @@ public class Task {
      */
     private int getTaskStatus() {
         return this.isDone ? 1 : 0;
+    }
+
+    protected void toBeUpdated() {
+        isBeingUpdated = true;
     }
 
     /**

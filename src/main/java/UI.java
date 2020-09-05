@@ -95,4 +95,9 @@ public class UI {
                 "\nOk tell me what to update!]n";
     }
 
+    protected String updatedTask(Task updatedTask) {
+        String str1 = "\nThis task has been updated!\n";
+        return str1 + updatedTask;
+    }
+
 }
