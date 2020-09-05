@@ -1,7 +1,7 @@
 package duke.command;
 
 import java.util.List;
-
+import java.util.stream.IntStream;
 import duke.storage.DukeIOException;
 import duke.storage.Storage;
 import duke.task.Deadlines;
@@ -107,7 +107,7 @@ public class Command {
     public String printList(TaskList tasks) {
         String toPrint = "\tHere are the tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
-            toPrint += String.format("\n\t%d. %s", i + 1, tasks.get(i));
+            toPrint += String.format("\n\t\t%d. %s", i + 1, tasks.get(i));
         }
         return toPrint;
     }
@@ -136,7 +136,7 @@ public class Command {
         int index = taskNo - 1;
         Task task = tasks.remove(index).doneTask();
         tasks.add(index, task);
-        return "\tNice! I've marked this task as done:" + "\n\t" + task;
+        return "\tNice! I've marked this task as done:" + "\n\t\t" + task;
     }
 
     /**
@@ -202,13 +202,12 @@ public class Command {
     public String foundMatchingTasks(TaskList tasks, String taskInfo) {
         String[] taskInfos = taskInfo.trim().split(" ");
         List<Task> matchList = tasks.returnMatchingTasks(taskInfos);
-        String dukeResponse = "";
-        for (int i = 0; i < matchList.size(); i++) {
-            if (i == 0) {
-                dukeResponse = "\n\t\tHere are the matching tasks in your list:";
-            }
-            dukeResponse += String.format("\n\t\t%d. %s", i + 1, matchList.get(i));
-        }
-        return dukeResponse.trim();
+        String dukeResponse = matchList.size() == 0 ? "" : "\tHere are the matching tasks in your list:";
+        String matches = IntStream
+            .range(0, matchList.size())
+            .mapToObj(i -> String.format("\n\t\t%d. %s", i + 1, matchList.get(i)))
+            .reduce("", (prevStr, nextStr) -> prevStr + nextStr);
+        dukeResponse += matches;
+        return dukeResponse;
     }
 }
