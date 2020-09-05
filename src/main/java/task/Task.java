@@ -3,25 +3,33 @@ package task;
 public abstract class Task {
     private int hasCompletedInt;
     private String name;
+    private TaskType taskType;
+
+    public TaskType getTaskType() {
+        return taskType;
+    }
 
     /**
      * Default Constructor for Task
      *
-     * @param name Name of Task
+     * @param name Name of Task.
      */
-    public Task(String name) {
+    public Task(String name, TaskType taskType) {
         this.hasCompletedInt = 0;
         this.name = name;
+        this.taskType = taskType;
     }
 
     /**
      * Alternative Constructor for Task
      *
-     * @param name         Name of Task
-     * @param hasCompletedInt boolean to determine whether task is completed
+     * @param name            Name of Task.
+     * @param taskType        Type of Task.
+     * @param hasCompletedInt boolean to determine whether task is completed.
      */
-    public Task(String name, int hasCompletedInt) {
+    public Task(String name, TaskType taskType, int hasCompletedInt) {
         this.hasCompletedInt = hasCompletedInt;
+        this.taskType = taskType;
         this.name = name;
     }
 
@@ -42,4 +50,8 @@ public abstract class Task {
     }
 
     public abstract String getFormattedString();
+
+    public enum TaskType {
+        TODO, EVENT, DEADLINE;
+    }
 }

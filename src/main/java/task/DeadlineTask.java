@@ -10,23 +10,23 @@ public class DeadlineTask extends Task {
     /**
      * Default Constructor for Deadline Task
      *
-     * @param name     Name of Task
-     * @param deadline Deadline of Task
+     * @param name     Name of Task.
+     * @param deadline Deadline of Task.
      */
     public DeadlineTask(String name, LocalDateTime deadline) {
-        super(name);
+        super(name, TaskType.DEADLINE);
         this.deadline = deadline;
     }
 
     /**
      * Alternative Constructor for Deadline Task
      *
-     * @param name         Name of Task
-     * @param hasCompletedInt boolean to show if task has been completed
-     * @param deadline     Deadline of task
+     * @param name         Name of Task.
+     * @param hasCompletedInt boolean to show if task has been completed.
+     * @param deadline     Deadline of task.
      */
     public DeadlineTask(String name, int hasCompletedInt, LocalDateTime deadline) {
-        super(name, hasCompletedInt);
+        super(name, TaskType.DEADLINE, hasCompletedInt);
         this.deadline = deadline;
     }
 
@@ -58,7 +58,7 @@ public class DeadlineTask extends Task {
     /**
      * Formats task into a string for file saving
      *
-     * @return formatted string representing the task
+     * @return formatted string representing the task.
      */
     public String getFormattedString() {
         return String.format(

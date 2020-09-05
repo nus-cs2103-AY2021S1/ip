@@ -9,23 +9,23 @@ public class EventTask extends Task {
     /**
      * Default Constructor for Event Task
      *
-     * @param name Name of Task
-     * @param time Time of Task
+     * @param name Name of Task.
+     * @param time Time of Task.
      */
     public EventTask(String name, LocalDateTime time) {
-        super(name);
+        super(name, TaskType.EVENT);
         this.time = time;
     }
 
     /**
      * Alternative Constructor for Event Task
      *
-     * @param name            Name of Task
-     * @param hasCompletedInt boolean to show if task is completed
-     * @param time            Time of Task
+     * @param name            Name of Task.
+     * @param hasCompletedInt boolean to show if task is completed.
+     * @param time            Time of Task.
      */
     public EventTask(String name, int hasCompletedInt, LocalDateTime time) {
-        super(name, hasCompletedInt);
+        super(name, TaskType.EVENT, hasCompletedInt);
         this.time = time;
     }
 
@@ -45,7 +45,7 @@ public class EventTask extends Task {
     /**
      * Formats task into a string for file saving
      *
-     * @return formatted string representing the task
+     * @return formatted string representing the task.
      */
     public String getFormattedString() {
         return String.format(

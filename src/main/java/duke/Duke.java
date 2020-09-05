@@ -11,6 +11,7 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    private Reminder reminder;
 
     /**
      * Constructor for the Duke class
@@ -22,6 +23,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
 
+
         // Retrieve data from the file to the taskList
         try {
             taskList = new TaskList(storage.load());
@@ -29,12 +31,21 @@ public class Duke {
             ui.showError(e.getMessage());
             taskList = new TaskList();
         }
+        reminder = new Reminder(taskList);
     }
 
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 
+
+    /**
+     * Gets the string representation of reminder
+     * @return String containing deadline tasks that have deadlines within 3 days.
+     */
+    public String getReminderString() {
+        return ui.displayReminder(reminder.getUpcomingTasks());
+    }
 
     /**
      * This method runs the chatbot, accepting user input and adding it to a task list.
