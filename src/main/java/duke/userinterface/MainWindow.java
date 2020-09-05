@@ -1,4 +1,4 @@
-package duke.ui;
+package duke.userinterface;
 
 import duke.Duke;
 import javafx.fxml.FXML;
