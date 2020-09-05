@@ -1,13 +1,12 @@
 package duke.cmd;
 
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.parser.DukeParserException;
-import duke.parser.Parser;
-import duke.task.Task;
+import duke.core.DataStore;
+import duke.core.command.ExitCommand;
+import duke.core.parser.DukeParserException;
+import duke.core.parser.Parser;
+import duke.designpattern.command.Executable;
+import duke.designpattern.command.ReversibleExecutable;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -24,14 +23,14 @@ public class Duke {
     private static final String GREETING = "Hello! I'm Duke\nWhat can i do for you?";
     private static final String ENDING_GREETING = "Bye. Hope to see you again soon!";
 
-    private final List<Task> taskList;
+    private final DataStore dataStore;
     private final Scanner scanner;
 
     /**
-     * Initialize Duke cmd with default array size of 100 and default input/output
+     * Initialize Duke cmd with default dataStore and default input/output
      */
     public Duke() {
-        this.taskList = new ArrayList<>(100);
+        this.dataStore = new DataStore();
         this.scanner = new Scanner(System.in);
     }
 
@@ -47,29 +46,32 @@ public class Duke {
 
         // Loop until 'bye' input received
         while (true) {
-            Command command;
+            Executable executable;
 
             // Prompt for input
-            String input = scanner.nextLine();
+            String input = this.scanner.nextLine();
             if (input.isBlank()) {
                 continue;
             }
 
             try {
                 // Attempt to parse input
-                command = Parser.parse(taskList, input);
+                executable = Parser.parse(this.dataStore, input);
+                if (executable instanceof ReversibleExecutable) {
+                    this.dataStore.getHistory().add((ReversibleExecutable) executable);
+                }
             } catch (DukeParserException e) {
                 System.out.println(e.getMessage());
                 continue;
             }
 
             // Check for exit command
-            if (command instanceof ExitCommand) {
+            if (executable instanceof ExitCommand) {
                 break;
             }
 
             // Execute command
-            command.execute();
+            executable.execute();
 
         }
 

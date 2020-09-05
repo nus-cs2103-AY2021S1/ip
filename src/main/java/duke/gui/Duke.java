@@ -1,10 +1,11 @@
 package duke.gui;
 
-import duke.command.Command;
-import duke.command.ReversibleCommand;
-import duke.parser.DukeParserException;
-import duke.parser.Parser;
-import duke.task.Task;
+import duke.core.DataStore;
+import duke.designpattern.command.Executable;
+import duke.designpattern.command.ReversibleExecutable;
+import duke.core.parser.DukeParserException;
+import duke.core.parser.Parser;
+import duke.core.task.Task;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,7 +29,9 @@ public class Duke extends Application {
 
     private static final String WELCOME_MESSAGE = "Welcome to Duke!";
 
+    // Todo: replace observableList with java.beans.PropertyChangeListener
     private final ObservableList<Task> taskList = FXCollections.observableArrayList();
+    private final DataStore dataStore = new DataStore(taskList);
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -78,11 +81,12 @@ public class Duke extends Application {
                 System.out.println("> " + input);
                 // 2. & 3. Parse input and run command
                 try {
-                    Command command = Parser.parse(taskList, input);
-                    command.execute();
-                    if (command instanceof ReversibleCommand) {
-                        taskView.refresh(); // TODO: reduce performance hit
+                    Executable executable = Parser.parse(dataStore, input);
+                    executable.execute();
+                    if (executable instanceof ReversibleExecutable) {
+                        dataStore.getHistory().add((ReversibleExecutable) executable);
                     }
+                    taskView.refresh(); // TODO: reduce performance hit
                 } catch (DukeParserException e) {
                     System.out.println(e.getMessage());
                 }

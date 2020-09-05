@@ -50,4 +50,23 @@ find lkaksdjfl
 find 12342341234
 find book
 find ts cl
+todo one
+todo two
+list
+done 7
+done 8
+undo
+list
+todo three
+redo
+undo
+todo four
+list
+load save.txt
+undo
+todo 123
+undo
+undo
+redo
+redo
 bye
