@@ -24,6 +24,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
+        assert !text.equals("") && img != null : "A null label or image was provided";
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -48,10 +49,12 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(Label text, Image img) {
+        assert text != null && img != null : "A null label or image was provided";
         return new DialogBox(text.getText(), img);
     }
 
     public static DialogBox getDukeDialog(Label text, Image img) {
+        assert text != null && img != null : "A null label or image was provided";
         DialogBox db = new DialogBox(text.getText(), img);
         db.flip();
         return db;

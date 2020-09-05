@@ -23,6 +23,7 @@ public class Duke {
      * @param filePath
      */
     public Duke(String filePath) {
+        assert filePath.length() != 0 : "An empty filepath was provided";
         Storage storage = new Storage(filePath);
         this.ui = new UI(storage);
     }

@@ -16,26 +16,32 @@ public class TaskList {
     }
 
     public ArrayList<Task> getTasks() {
+        assert this.tasks != null : "The arraylist of tasks can never be null";
         return this.tasks;
     }
 
     public void update(Task task) {
+        assert task != null : "A null task was passed in";
         tasks.add(task);
     }
 
     public Task get(int i) {
+        assert this.tasks != null : "The arraylist of tasks can never be null";
         return tasks.get(i - 1);
     }
 
     public void delete(int i) {
+        assert this.tasks != null : "The arraylist of tasks can never be null";
         tasks.remove(i - 1);
     }
 
     public void updateStatus(int i) {
+        assert this.tasks != null : "The arraylist of tasks can never be null";
         tasks.get(i - 1).updateStatus();
     }
 
     public int getSize() {
+        assert this.tasks != null : "The arraylist of tasks can never be null";
         return tasks.size();
     }
 
@@ -45,6 +51,7 @@ public class TaskList {
      */
     public String save() {
         StringBuilder line = new StringBuilder();
+        assert this.tasks != null : "The arraylist of tasks can never be null";
         for (Task task : tasks) {
             String append = "";
             if (!task.istodo()) {
@@ -63,6 +70,7 @@ public class TaskList {
      */
     public String toString() {
         StringBuilder line = new StringBuilder();
+        assert this.tasks != null : "The arraylist of tasks can never be null";
         for (Task task : tasks) {
             line.append(task.toString());
             line.append('\n');

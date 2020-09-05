@@ -32,6 +32,7 @@ public class Storage {
      * @param filepath A string to enable us to access the file to get the tasklist
      */
     public Storage (String filepath) {
+        assert filepath.length() != 0 : "Invalid filepath provided";
         this.filePath = filepath;
         try {
             FileReader file = new FileReader(filepath);
@@ -70,6 +71,7 @@ public class Storage {
         if (line.charAt(4) == '0') {
             task.updateStatus();
         }
+        assert task != null : "A task object can never be null";
         return task;
     }
 
@@ -118,6 +120,7 @@ public class Storage {
         if (line.charAt(4) == '0') {
             task.updateStatus();
         }
+        assert task != null : "A task can never be null";
         return task;
     }
 
@@ -152,6 +155,7 @@ public class Storage {
      * a new file will be made
      */
     public static void save(TaskList tasks) {
+        assert tasks != null : "A null object was passed in";
         try {
             String folderPath = "Data";
             File directory = new File(folderPath);

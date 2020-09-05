@@ -9,6 +9,7 @@ public class UI {
      * @param store
      */
     public UI(Storage store) {
+        assert store != null : "A null storage object was provided";
         this.storage = store;
     }
 

@@ -32,6 +32,7 @@ public class Parser {
             return "Unknown command";
         }
         String[] inputs = input.split(" ");
+        assert inputs.length != 0 : "Input cannot be empty";
         String str;
         switch(inputs[0]) {
         case "todo":
@@ -95,6 +96,7 @@ public class Parser {
      */
 
     public static String delete(String request, TaskList list) {
+        assert !request.equals("") : "Invalid input";
         try {
             int index = Integer.parseInt(request);
             isNumeric(index, list);
@@ -117,8 +119,8 @@ public class Parser {
      */
 
     public static String update(String request, TaskList list) {
+        assert !request.equals("") : "Input is invalid";
         try {
-            System.out.println(request);
             int index = Integer.parseInt(request);
             isNumeric(index, list);
             list.updateStatus(index);
@@ -263,6 +265,7 @@ public class Parser {
      */
     public static String find(String input, TaskList list) throws InvalidNumberException {
         String[] requests = input.split(" ");
+        assert requests.length != 0 : "Invalid request provided";
         ArrayList<Task> tasks = new ArrayList<>();
         if (requests.length != 2) {
             throw new InvalidNumberException("More than one keyword was provided");
@@ -282,6 +285,7 @@ public class Parser {
      * @return
      */
     public static String getTodo(String work, TaskList list) throws EmptyTodoException {
+        assert work.length() != 0 : "Empty strings are not allowed";
         if (work.length() > 4) {
             ToDos todo = new ToDos(work.substring(4));
             list.update(todo);
