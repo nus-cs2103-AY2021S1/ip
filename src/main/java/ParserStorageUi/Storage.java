@@ -89,6 +89,7 @@ public class Storage {
      * Put back all tasks from ArrayList to the save file (duke.txt)
      **/
     public void putToDatabase(ArrayList<Task> tasks) throws DukeException {
+        assert (tasks != null);
         try {
             FileWriter fw = new FileWriter(this.filePath + "/duke.txt");
             PrintWriter pw = new PrintWriter(fw);
