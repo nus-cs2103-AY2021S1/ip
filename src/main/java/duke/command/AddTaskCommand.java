@@ -3,12 +3,10 @@ package duke.command;
 import java.time.LocalDate;
 
 import duke.Storage;
-import duke.ui.DukeMessages;
-import duke.exception.InvalidTaskException;
-import duke.exception.StorageException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
+import duke.ui.DukeMessages;
 
 /**
  * Represents a Command given by the user to add a Task.
@@ -46,11 +44,9 @@ public class AddTaskCommand extends Command {
      * Then, a message is printed to indicate the Task was successfully created.
      * @param list A TaskList containing the user's Tasks.
      * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
-     * @throws StorageException if Task cannot be stored in local storage.
-     * @throws InvalidTaskException if details provided of Task to be created are invalid.
      */
     @Override
-    public String execute(TaskList list, Storage storage) throws StorageException, InvalidTaskException {
+    public String execute(TaskList list, Storage storage) {
         switch (this.type) {
         case TODO:
             Task newTodo = list.addTask(this.taskName);
@@ -62,7 +58,7 @@ public class AddTaskCommand extends Command {
             storage.appendTaskStorage(newTask.toSaveString());
             return DukeMessages.printAddTaskMessage(newTask, list.getTaskListSize());
         default:
-            throw new InvalidTaskException("Oh dear! I'm not sure what kind of task to add ;A;");
+            throw new AssertionError("Invalid TaskType");
         }
     }
 }
