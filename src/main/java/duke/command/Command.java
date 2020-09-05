@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.util.List;
 import java.util.stream.IntStream;
 import duke.storage.DukeIOException;
 import duke.storage.Storage;
@@ -64,10 +65,10 @@ public class Command {
                 dukeResponse =  tasks.deleteTask(taskInfo);
                 break;
             default:
-                if (foundMatchingTasks(tasks, taskInfo).length() <= 0) {
+                if (findMatchingTasks(tasks, taskInfo).length() <= 0) {
                     throw new DukeInvalidCommandException("Sorry handsome but I'm not sure about this command :)");
                 } else {
-                    dukeResponse = foundMatchingTasks(tasks, taskInfo);
+                    dukeResponse = findMatchingTasks(tasks, taskInfo);
                 }
             }
             storage.saveTaskList(tasks);
@@ -215,7 +216,7 @@ public class Command {
      * @param taskInfo Description of todos task.
      * @return List of matching tasks if any.
      */
-    private String foundMatchingTasks(TaskList tasks, String taskInfo) {
+    private String findMatchingTasks(TaskList tasks, String taskInfo) {
         String[] taskInfos = taskInfo.trim().split(" ");
         assert taskInfos.length > 0 : "taskInfos length should be >= 1";
         List<Task> matchList = tasks.returnMatchingTasks(taskInfos);
