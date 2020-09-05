@@ -35,8 +35,7 @@ public class Duke {
                 + " but I don't know what that means :-(");
     }
 
-    private void printGreetingMessage() {
-        DukeOutput.outputGreeting();
-        DukeOutput.output(DukeConstants.INITIAL_RESPONSE);
+    public static String getGreetingMessage() {
+        return DukeOutput.output(DukeConstants.INITIAL_RESPONSE);
     }
 }
