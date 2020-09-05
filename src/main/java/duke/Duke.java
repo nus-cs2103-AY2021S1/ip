@@ -7,19 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 public class Duke  {
 
     private UserInterface ui;
@@ -38,6 +25,7 @@ public class Duke  {
         this.storage = new Storage(filePath);
         this.parser = new Parser();
         this.taskList = new TaskList(new ArrayList<>());
+        this.startup();// copy the task data
     }
 
     private void startup() {
@@ -226,7 +214,8 @@ public class Duke  {
     public static void main(String[] args) {
         Duke duke = new Duke("Tasks.txt");
         Scanner sc = new Scanner(System.in);
-        duke.startup();
+
+        //duke.startup(); // startup alr run when instantiating duke
 
         while (sc.hasNext()) {
             String input = sc.nextLine();
