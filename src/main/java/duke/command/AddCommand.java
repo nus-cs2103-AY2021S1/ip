@@ -40,11 +40,11 @@ public class AddCommand implements Command {
      * @throws DukeException if the task list cannot be saved to the storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ui = new Ui();
         taskList.add(newTask);
         storage.saveList(taskList);
-        ui.giveResponse("Got it. I've added this task:\n       "
+        return ui.giveResponse("Got it. I've added this task:\n       "
             + newTask
             + "\n\t Now you have " + taskList.size()
             + " task" + (taskList.size() > 1 ? "s" : "") + " in the list.");

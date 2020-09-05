@@ -23,7 +23,7 @@ public class ByeCommand implements Command {
      * Says bye and closes Duke
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.giveResponse("Bye. Hope to see you again soon!");
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return ui.giveResponse("Bye. Hope to see you again soon!");
     }
 }

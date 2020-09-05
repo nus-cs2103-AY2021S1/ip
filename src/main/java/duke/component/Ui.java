@@ -6,6 +6,7 @@ import java.util.Scanner;
  * The class that receive user's input and print corresponding responses on the screen.
  */
 public class Ui {
+    public static final String greeting = "Hello! I'm Duke\n" + "\t What can I do for you?";
     private static final String divider = "\t____________________________________________________________\n";
     private Scanner sc;
 
@@ -28,17 +29,18 @@ public class Ui {
     /**
      * Prints out the response on the screen
      */
-    public void giveResponse(String response) {
-        System.out.println(divider + "\t " + response + "\n" + divider);
+    public String giveResponse(String response) {
+        String formattedResponse = divider + "\t " + response + "\n" + divider;
+        System.out.println(formattedResponse);
+        return response;
     }
-
 
     /**
      * Displays the task list given
      *
      * @param taskList the task list to be displayed
      */
-    public void displayList(TaskList taskList, String description) {
+    public String displayList(TaskList taskList, String description) {
 
         String list = description + "\n";
         for (int i = 1; i <= taskList.size(); i++) {
@@ -51,6 +53,7 @@ public class Ui {
         }
 
         giveResponse(list);
+        return list;
     }
 
     /**
@@ -63,11 +66,10 @@ public class Ui {
     }
 
     /**
-     * Prints out greeting.
+     * Prints out the welcome message.
      */
-    public void greeting() {
-        String greeting = "Hello! I'm Duke\n" + "\t What can I do for you?";
-        giveResponse(greeting);
+    public void welcome() {
+        giveResponse(Ui.greeting);
     }
 
 }

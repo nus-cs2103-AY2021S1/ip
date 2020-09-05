@@ -1,4 +1,8 @@
-package duke.gui;
+package duke;
+
+//import duke.gui.App;
+
+import duke.gui.Main;
 import javafx.application.Application;
 
 /**
@@ -6,7 +10,7 @@ import javafx.application.Application;
  */
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(App.class, args);
+        Application.launch(Main.class, args);
     }
 }
 
