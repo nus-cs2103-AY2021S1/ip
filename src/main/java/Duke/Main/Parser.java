@@ -16,6 +16,7 @@ public class Parser {
      *
      * @param by the by
      * @return LocalDateTime object
+     * @throws Exception the exception
      */
     public static LocalDateTime strToDate(String by) throws Exception {
         String[] arr = by.split("\\s+");

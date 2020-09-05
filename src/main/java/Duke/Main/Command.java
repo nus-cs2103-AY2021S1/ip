@@ -13,7 +13,19 @@ import duke.tasks.Todo;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * The type Command.
+ */
 public class Command {
+    /**
+     * Todo command string.
+     *
+     * @param arr     the arr
+     * @param comText the com text
+     * @param tasks   the tasks
+     * @return the string
+     * @throws Exception the exception
+     */
     public static String todoCommand(String[] arr, String comText, TaskList tasks) throws Exception {
         if (arr.length == 1) {
             throw new EmptyDescException();
@@ -28,6 +40,15 @@ public class Command {
         }
     }
 
+    /**
+     * Event command string.
+     *
+     * @param arr     the arr
+     * @param comText the com text
+     * @param tasks   the tasks
+     * @return the string
+     * @throws Exception the exception
+     */
     public static String eventCommand(String[] arr, String comText, TaskList tasks) throws Exception {
         int eIdx = comText.lastIndexOf("/at");
         if (arr.length == 1) {
@@ -49,6 +70,15 @@ public class Command {
         }
     }
 
+    /**
+     * Deadline command string.
+     *
+     * @param arr     the arr
+     * @param comText the com text
+     * @param tasks   the tasks
+     * @return the string
+     * @throws Exception the exception
+     */
     public static String deadlineCommand(String[] arr, String comText, TaskList tasks) throws Exception {
         int dIdx = comText.lastIndexOf("/by");
         if (arr.length == 1) {
@@ -70,6 +100,15 @@ public class Command {
         }
     }
 
+    /**
+     * Done command string.
+     *
+     * @param arr     the arr
+     * @param comText the com text
+     * @param tasks   the tasks
+     * @return the string
+     * @throws Exception the exception
+     */
     public static String doneCommand(String[] arr, String comText, TaskList tasks) throws Exception {
         if (arr.length != 2) {
             throw new InvalidCommandException();
@@ -86,6 +125,15 @@ public class Command {
         }
     }
 
+    /**
+     * Delete command string.
+     *
+     * @param arr     the arr
+     * @param comText the com text
+     * @param tasks   the tasks
+     * @return the string
+     * @throws Exception the exception
+     */
     public static String deleteCommand(String[] arr, String comText, TaskList tasks) throws Exception {
         if (arr.length != 2) {
             throw new InvalidCommandException();
@@ -102,6 +150,14 @@ public class Command {
         }
     }
 
+    /**
+     * Find command string.
+     *
+     * @param comText the com text
+     * @param tasks   the tasks
+     * @return the string
+     * @throws Exception the exception
+     */
     public static String findCommand(String comText, TaskList tasks) throws Exception {
         List<Task> foundTasks = tasks.findTasks(comText);
         return String.format(

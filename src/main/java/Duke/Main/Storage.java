@@ -65,7 +65,7 @@ public class Storage {
      * Returns the entire txt file
      *
      * @return List of Tasks from file
-     * @throws IOException the io exception
+     * @throws Exception the exception
      */
     public List<Task> getFileContents() throws Exception {
         FileReader fr = new FileReader(filepath);
