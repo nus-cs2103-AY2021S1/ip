@@ -18,6 +18,7 @@ public class Ui {
 
     /**
      * Gets the provided List
+     *
      * @param lst List of Tasks
      */
     public static String getList(List<Task> lst) {
@@ -30,6 +31,12 @@ public class Ui {
         return s;
     }
 
+    /**
+     * Parses String array into String
+     *
+     * @param strArr array of String
+     * @return parsed String
+     */
     public String textParser(String[] strArr) {
         String comText = "";
         for (int i = 1; i < strArr.length; i++) {
@@ -38,6 +45,13 @@ public class Ui {
         return comText.trim();
     }
 
+    /**
+     * Takes the input from user, runs the relevant command
+     *
+     * @param sentence user input
+     * @param tasks tasks handler to interact with database
+     * @return output to acknowledge user's command
+     */
     public String commandParser(String sentence, TaskList tasks) {
         String[] arr = sentence.split("\\s+");
         String command = arr[0];
