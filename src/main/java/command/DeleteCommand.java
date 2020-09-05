@@ -31,19 +31,22 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        if (this.taskIndex < 0 || this.taskIndex > tasks.size() - 1) {
+        boolean hasNegativeIndex = this.taskIndex < 0;
+        boolean hasIndexOutOfBounds = this.taskIndex > tasks.size() - 1;
+        boolean hasInvalidIndex = hasNegativeIndex || hasIndexOutOfBounds;
+
+        if (hasInvalidIndex) {
             throw new DukeException("\tThere is no such task.");
         }
+
         Task toDelete = tasks.get(this.taskIndex);
         assert toDelete != null : "toDelete should not be null";
         tasks.remove(this.taskIndex);
         storage.overwrite(tasks);
 
-        String output = "\t Noted. I've removed this task:\n"
+        return "\t Noted. I've removed this task:\n"
                 + "\t   " + toDelete + "\n"
                 + "\t Now you have " + tasks.size() + " tasks in the list.\n";
-
-        return output;
     }
 
     /**

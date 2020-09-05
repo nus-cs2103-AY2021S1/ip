@@ -11,6 +11,7 @@ import exception.DukeException;
  */
 public class Duke {
 
+    private static final String DEFAULT_PATH = "data/tasks.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -37,7 +38,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         try {
-            storage = new Storage("data/tasks.txt");
+            storage = new Storage(DEFAULT_PATH);
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
@@ -84,6 +85,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke(DEFAULT_PATH).run();
     }
 }

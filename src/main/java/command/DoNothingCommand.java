@@ -11,7 +11,7 @@ public class DoNothingCommand extends Command {
     /**
      * Does Nothing.
      *
-     *  @param tasks The TaskList manipulated by the Command.
+     * @param tasks The TaskList manipulated by the Command.
      * @param storage The Storage which will record changes of tasks into the file specified by its path.
      * @return The output to be displayed to the user.
      */

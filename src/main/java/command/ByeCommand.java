@@ -11,7 +11,7 @@ public class ByeCommand extends Command {
     /**
      * Exits the program
      *
-     *  @param tasks The TaskList manipulated by the program
+     * @param tasks The TaskList manipulated by the program
      * @param storage The Storage for recording tasks passed in by user.
      * @return The output to be displayed to the user.
      */

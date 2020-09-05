@@ -31,9 +31,14 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        if (this.taskIndex < 0 || this.taskIndex > tasks.size() - 1) {
+        boolean hasNegativeIndex = this.taskIndex < 0;
+        boolean hasIndexOutOfBounds = this.taskIndex > tasks.size() - 1;
+        boolean hasInvalidIndex = hasNegativeIndex || hasIndexOutOfBounds;
+
+        if (hasInvalidIndex) {
             throw new DukeException("\tThere is no such task.");
         }
+
         Task toChange = tasks.get(this.taskIndex);
         assert toChange != null : "toChange should not be null";
         toChange.markAsDone();
