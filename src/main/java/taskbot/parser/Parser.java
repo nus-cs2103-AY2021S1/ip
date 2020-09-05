@@ -26,6 +26,7 @@ public class Parser {
      * @throws EmptyArgumentException if a command requires arguments but received none.
      */
     public static Command parse(String command) throws InvalidCommandException, EmptyArgumentException {
+        assert command.length() > 0 : "Empty command string";
         /*Separates the command into the command keyword
           and the required arguments. */
         String[] commandArgs = command.split(" ", 2);

@@ -30,6 +30,7 @@ public class Storage {
      * @param dirPath The directory path.
      */
     public Storage(String dirPath) {
+        assert dirPath.length() > 0 : "Empty directory path";
         tasks = new ArrayList<>();
         //Path of project directory
         this.dirPath = dirPath;
