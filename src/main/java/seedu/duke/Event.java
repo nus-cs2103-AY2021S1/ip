@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
  * Creates events that are a subtype of Task and stores the name of the event and its date.
  */
 public class Event extends Task {
-    private LocalDate localDate;
     private String date;
 
     /**
@@ -19,8 +18,7 @@ public class Event extends Task {
     public Event(String event, String dateToFormat) {
         super(event);
         LocalDate formatDate = LocalDate.parse(dateToFormat);
-        localDate = formatDate;
-        String convertedDate = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String convertedDate = formatDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         date = convertedDate;
     }
 

@@ -56,7 +56,7 @@ public class TaskList {
      *
      * @param userInput Task to be completed.
      */
-    public void completeTask(String userInput) {
+    public void completeTaskForCli(String userInput) {
         try {
             String[] splitUserInput = userInput.split(" ");
             int index = Integer.parseInt(splitUserInput[1]);
@@ -89,7 +89,7 @@ public class TaskList {
      * @param userInput Task to be completed.
      * @return String output after completing Task.
      */
-    public String completeTaskToString(String userInput) {
+    public String completeTaskForGui(String userInput) {
         try {
             if  (userInput.length() < 5) {
                 return (MISSING_INDEX);
@@ -119,7 +119,13 @@ public class TaskList {
         }
     }
 
-    public String sizeOfTaskList() {
+    /**
+     * Outputs the size of tasklist.
+     *
+     * @return String describing size of tasklist.
+     */
+
+    private String sizeOfTaskList() {
         return "Now you have " + taskLists.size() + " tasks in the list" + "\n";
     }
     /**
@@ -127,7 +133,7 @@ public class TaskList {
      *
      * @param userInput String of the task to be deleted.
      */
-    public void deleteTask(String userInput) {
+    public void deleteTaskForCli(String userInput) {
         try {
             String[] splitUserInput = userInput.split(" ");
             int index = Integer.parseInt(splitUserInput[1]);
@@ -152,8 +158,8 @@ public class TaskList {
      * @param userInput String of the task to be deleted.
      * @return String output after deleting task.
      */
-    public String deleteTaskToString(String userInput) {
-        try {
+    public String deleteTaskForGui(String userInput) {
+       try {
             String[] splitUserInput = userInput.split(" ");
             int index = Integer.parseInt(splitUserInput[1]);
             assert index > 0 && index <= taskLists.size(); //Must be within range
@@ -177,7 +183,7 @@ public class TaskList {
      *
      * @param userInput String of the todo.
      */
-    public void addToDo(String userInput) {
+    public void addToDoForCli(String userInput) {
         try {
             checkForItem(userInput.substring(4), TODO);
             assert userInput.length() > 5; //Need to have input
@@ -189,10 +195,8 @@ public class TaskList {
             taskLists.add(tempTodo);
             info += sizeOfTaskList();
             Ui.print(info);
-        } catch (DukeException err) {
+        } catch (DukeException | IOException err) {
             System.out.println(err.getMessage());
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         }
     }
 
@@ -202,7 +206,7 @@ public class TaskList {
      * @param userInput String of the todo.
      * @return String output after creating Todo object.
      */
-    public String addToDoToString(String userInput) {
+    public String addToDoForGui(String userInput) {
         try {
             checkForItem(userInput.substring(4), TODO);
             assert userInput.length() > 5; //Need to have input
@@ -214,10 +218,8 @@ public class TaskList {
             taskLists.add(tempTodo);
             info += sizeOfTaskList();
             return info;
-        } catch (DukeException err) {
+        } catch (DukeException | IOException err) {
             return err.getMessage();
-        } catch (IOException e) {
-            return e.getMessage();
         }
     }
 
@@ -226,7 +228,7 @@ public class TaskList {
      *
      * @param userInput String of the deadline.
      */
-    public void addDeadline(String userInput) {
+    public void addDeadlineForCli(String userInput) {
         try {
             checkForItem(userInput.substring(8), DEADLINE);
             assert userInput.length() > 8; //Need to have input
@@ -242,10 +244,8 @@ public class TaskList {
             Storage.addTask(tempDeadline.getStorageString(DEADLINE_SYMBOL, formatDate));
             info += sizeOfTaskList();
             Ui.print(info);
-        } catch (DukeException err) {
+        } catch (DukeException | IOException err) {
             System.out.println(err.getMessage());
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         } catch (DateTimeParseException e) {
             System.out.println(e.getMessage());
         }
@@ -257,7 +257,7 @@ public class TaskList {
      * @param userInput String of the deadline.
      * @return String output after creating Deadline object.
      */
-    public String addDeadlineToString(String userInput) {
+    public String addDeadlineForGui(String userInput) {
         try {
             checkForItem(userInput.substring(8), DEADLINE);
             assert userInput.length() > 8; //Need to have input
@@ -273,10 +273,8 @@ public class TaskList {
             Storage.addTask(tempDeadline.getStorageString(DEADLINE_SYMBOL, formatDate));
             info += sizeOfTaskList();
             return info;
-        } catch (DukeException err) {
+        } catch (DukeException | IOException err) {
             return err.getMessage();
-        } catch (IOException e) {
-            return e.getMessage();
         } catch (DateTimeParseException e) {
             return e.getMessage();
         }
@@ -287,7 +285,7 @@ public class TaskList {
      *
      * @param userInput String of the event.
      */
-    public void addEvent(String userInput) {
+    public void addEventForCli(String userInput) {
         try {
             checkForItem(userInput.substring(5), EVENT);
             assert userInput.length() > 5; //Need to have input
@@ -303,10 +301,8 @@ public class TaskList {
             taskLists.add(tempEvent);
             info += sizeOfTaskList();
             Ui.print(info);
-        } catch (DukeException err) {
+        } catch (DukeException | IOException err) {
             System.out.println(err.getMessage());
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         } catch (DateTimeParseException e) {
             System.out.println(e.getMessage());
         }
@@ -318,7 +314,7 @@ public class TaskList {
      * @param userInput String of the event.
      * @return String output after creating Event object.
      */
-    public String addEventToString(String userInput) {
+    public String addEventForGui(String userInput) {
         try {
             checkForItem(userInput.substring(5), EVENT);
             assert userInput.length() > 5; //Need to have input
@@ -334,10 +330,8 @@ public class TaskList {
             taskLists.add(tempEvent);
             info += sizeOfTaskList();
             return info;
-        } catch (DukeException err) {
+        } catch (DukeException | IOException err) {
             return err.getMessage();
-        } catch (IOException e) {
-            return e.getMessage();
         } catch (DateTimeParseException e) {
             return e.getMessage();
         }
@@ -348,7 +342,7 @@ public class TaskList {
      *
      * @param input Keyword that is used to find related tasks.
      */
-    public void find(String input) {
+    public void findForCli(String input) {
         try {
             checkForItem(input.substring(5), FIND);
             String keyword = input.substring(5);
@@ -379,7 +373,7 @@ public class TaskList {
      * @param input Keyword that is used to find related tasks.
      * @return String output after finding keyword in TaskList.
      */
-    public String findToString(String input) {
+    public String findForGui(String input) {
         try {
             checkForItem(input.substring(5), FIND);
             String keyword = input.substring(5);

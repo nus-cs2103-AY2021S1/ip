@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
  * Creates deadlines that are a subtype of Task and stores the name of the deadline and its deadline.
  */
 public class Deadline extends Task {
-    private LocalDate localDate;
     private String dueDate;
 
     /**
@@ -19,8 +18,7 @@ public class Deadline extends Task {
     public Deadline(String description, String due) {
         super(description);
         LocalDate formatDate = LocalDate.parse(due);
-        localDate = formatDate;
-        String convertedDate = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String convertedDate = formatDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         dueDate = convertedDate;
     }
 
