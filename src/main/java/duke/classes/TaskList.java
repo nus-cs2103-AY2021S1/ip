@@ -2,6 +2,7 @@ package duke.classes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import duke.exceptions.BlahException;
 import duke.exceptions.DukeInvalidTimeException;
@@ -165,13 +166,13 @@ public class TaskList {
     public List<Task> find(String query) throws DukeInvalidTimeException {
         query = query.substring(5);
         List<Task> queriedTasks = new ArrayList<>();
-
+        Function<String, String[]> stringSplit = str -> str.split("\\s");
         for (Task task : todoList) {
             String description = task.getDescription();
             String[] keywords;
             switch (task.getType()) {
             case TODO:
-                keywords = description.split("\\s");
+                keywords = stringSplit.apply(description);
                 for (String keyword : keywords) {
                     if (keyword.equals(query)) {
                         queriedTasks.add(new Todo(description, queriedTasks.size() + 1, task.hasDone()));
