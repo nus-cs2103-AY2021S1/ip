@@ -46,6 +46,13 @@ public class EventTask extends Task {
         return new EventTask(description, true, timePeriod);
     }
 
+    /**
+     * Updates the current eventTask and returns the updated eventTask.
+     *
+     * @param updateString A string that represents the updated task: [description] /at [timePeriod].
+     * @return The updated eventTask.
+     * @throws DukeException If updateString's date format is wrong.
+     */
     @Override
     public EventTask update(String updateString) throws DukeException {
         String[] segments = updateString.split("/at", 2);

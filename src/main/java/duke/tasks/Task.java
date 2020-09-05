@@ -25,6 +25,13 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Updates this task to the information specified in updateString.
+     *
+     * @param updateString A string that represents the updated task.
+     * @return The updated Task.
+     * @throws DukeException If updateString format is wrong.
+     */
     public abstract Task update(String updateString) throws DukeException;
 
     /**
