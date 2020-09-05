@@ -48,19 +48,16 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 System.out.println(c.execute(tasks, ui, storage));
                 isExit = c.isExit();
-            } catch (DukeException | DoneException | DeleteException
-                    | TodoException | EventException | DeadlineException | FindException e) {
+            } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
             }
         }
     }
-    
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
     }
-
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
@@ -69,8 +66,7 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
-        } catch (DukeException | DoneException | DeleteException
-                | TodoException | EventException | DeadlineException | FindException e) {
+        } catch (DukeException e) {
             return e.getMessage();
         }
     }

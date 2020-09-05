@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 class ByeCommandTest {
 
     @Test
-    void isExitTest() {
+    void isExitTest_getIsExitOfByeCmd_returnsTrue() {
         assertEquals(new ByeCommand().isExit(), true);
     }
 

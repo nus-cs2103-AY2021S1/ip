@@ -33,7 +33,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog("Hello! I'm Duke" + "\n" + "What can I do for you?" , dukeImage)
         );
     }
-    
+
+    /**
+     * Sets the duke.
+     * @param d duke.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
