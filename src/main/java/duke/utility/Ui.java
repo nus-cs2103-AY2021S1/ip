@@ -3,6 +3,7 @@ package duke.utility;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import duke.exception.DukeException;
 import duke.task.DeadlineTask;
@@ -102,29 +103,31 @@ public class Ui {
      */
     public String showTaskAfter(LocalDate date, TaskList tasks) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here is the tasks after "
-                + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ":\n");
-        int count = 1;
+        AtomicInteger index = new AtomicInteger(1);
 
-        for (Task task : tasks.getTasks()) {
-            if (task instanceof ToDoTask) {
-                continue;
-            } else if (task instanceof DeadlineTask) {
-                DeadlineTask deadlineTask = (DeadlineTask) task;
-                if (date.isBefore(deadlineTask.getDate().toLocalDate())) {
-                    sb.append(count + ". " + task + "\n");
-                    count++;
-                }
-            } else if (task instanceof EventTask) {
-                EventTask eventTask = (EventTask) task;
-                if (date.isBefore(eventTask.getDate().toLocalDate())) {
-                    sb.append(count + ". " + task + "\n");
-                    count++;
-                }
-            }
+        tasks.getTasks()
+                .stream()
+                .filter((task) -> {
+                    if (task instanceof ToDoTask) {
+                        return false;
+                    } else if (task instanceof DeadlineTask) {
+                        DeadlineTask deadlineTask = (DeadlineTask) task;
+                        return date.isBefore(deadlineTask.getDate().toLocalDate());
+                    } else if (task instanceof EventTask) {
+                        EventTask eventTask = (EventTask) task;
+                        return date.isBefore(eventTask.getDate().toLocalDate());
+                    }
+
+                    return false;
+                })
+                .forEach((task) -> sb.append(index.getAndIncrement() + ". " + task + "\n"));
+
+        if (sb.length() == 0) {
+            return "There is no task after this date!";
         }
 
-        return sb.toString().trim();
+        return "Here is the tasks after " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ":\n"
+                + sb.toString().trim();
     }
 
     /**
@@ -136,31 +139,33 @@ public class Ui {
      */
     public String showTaskBefore(LocalDate date, TaskList tasks) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here is the tasks before "
-                + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ":\n");
-        int count = 1;
+        AtomicInteger index = new AtomicInteger(1);
 
-        for (Task task : tasks.getTasks()) {
-            if (task instanceof ToDoTask) {
-                continue;
-            } else if (task instanceof DeadlineTask) {
-                DeadlineTask deadlineTask = (DeadlineTask) task;
-                if (date.isAfter(deadlineTask.getDate().toLocalDate())
-                        || date.isEqual(deadlineTask.getDate().toLocalDate())) {
-                    sb.append(count + ". " + task + "\n");
-                    count++;
-                }
-            } else if (task instanceof EventTask) {
-                EventTask eventTask = (EventTask) task;
-                if (date.isAfter(eventTask.getDate().toLocalDate())
-                        || date.isEqual(eventTask.getDate().toLocalDate())) {
-                    sb.append(count + ". " + task + "\n");
-                    count++;
-                }
-            }
+        tasks.getTasks()
+                .stream()
+                .filter((task) -> {
+                    if (task instanceof ToDoTask) {
+                        return false;
+                    } else if (task instanceof DeadlineTask) {
+                        DeadlineTask deadlineTask = (DeadlineTask) task;
+                        return date.isAfter(deadlineTask.getDate().toLocalDate())
+                                || date.isEqual(deadlineTask.getDate().toLocalDate());
+                    } else if (task instanceof EventTask) {
+                        EventTask eventTask = (EventTask) task;
+                        return date.isAfter(eventTask.getDate().toLocalDate())
+                                || date.isEqual(eventTask.getDate().toLocalDate());
+                    }
+
+                    return false;
+                })
+                .forEach((task) -> sb.append(index.getAndIncrement() + ". " + task + "\n"));
+
+        if (sb.length() == 0) {
+            return "There is no task before this date!";
         }
 
-        return sb.toString().trim();
+        return "Here is the tasks before " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ":\n"
+                + sb.toString().trim();
     }
 
     /**
@@ -171,22 +176,18 @@ public class Ui {
      */
     public String findTask(String keyword, TaskList tasks) {
         StringBuilder sb = new StringBuilder();
-        boolean isFound = false;
-        int count = 1;
+        AtomicInteger index = new AtomicInteger(1);
 
-        for (Task task : tasks.getTasks()) {
-            if (task.getTaskName().contains(keyword)) {
-                isFound = true;
-                sb.append(count + ". " + task + "\n");
-                count++;
-            }
-        }
+        tasks.getTasks()
+                .stream()
+                .filter((task) -> task.getTaskName().contains(keyword))
+                .forEach((task) -> sb.append(index.getAndIncrement() + ". " + task + "\n"));
 
-        if (isFound) {
-            return "Here are the matching tasks in your list:\n" + sb.toString().trim();
-        } else {
+        if (sb.length() == 0) {
             return "No task found with that keyword!";
         }
+
+        return "Here are the matching tasks in your list:\n" + sb.toString().trim();
     }
 
     /**
