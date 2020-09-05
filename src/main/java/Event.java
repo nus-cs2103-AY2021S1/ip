@@ -12,7 +12,7 @@ public class Event extends Listing {
      * Note that deadline is not in a strict localDate format.
      *
      * @param s        detail of the listing
-     * @param deadline deadline of the listing in any form of a string
+     * @param deadLine deadline of the listing in any form of a string
      * @return A Event object
      */
     public Event(String s, String deadLine) {
@@ -27,7 +27,7 @@ public class Event extends Listing {
      * @param doneness can be 0 or 1 and which gets passed to checkDoneness that converts \ it to a
      *                 boolean
      * @param s        detail of the listing
-     * @param deadline in the format YYYY-MM-DD
+     * @param doneness in the format YYYY-MM-DD
      * @return A Event object
      */
     public Event(String doneness, String s, String time) {
@@ -57,6 +57,7 @@ public class Event extends Listing {
      */
     @Override
     public String toString() {
-        return "[E]" + super.doneness() + " " + this.title + "(at:" + this.deadLine + ")";
+        return this.tags.isEmpty()? "[E]" + super.doneness() + " " + this.title + "(at:" + this.deadLine + ")"
+                : "[E]" + super.doneness() + " " + this.title + "(at:" + this.deadLine + ")" + this.tags;
     }
 }

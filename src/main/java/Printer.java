@@ -91,6 +91,19 @@ public class Printer {
     }
 
     /**
+     * Prints the delete message
+     *
+     * @param size    the current size of the ArrayList in TaskList.java
+     * @param listing the detail of the listing
+     */
+    protected String tagMessage(String tagDetails, String listing) {
+        String output = "";
+        output = (LINE + "\n" + "     Noted. I've tagged this task: \n" + WHITE_SPACE_SEVEN
+                + listing + "\n" + "     with " + tagDetails + "!\n" + LINE);
+        return output;
+    }
+
+    /**
      * Prints the assertion error message
      */
     protected String assertionErrorMessage() {
@@ -106,6 +119,17 @@ public class Printer {
     protected String invalidDeleteNumberExceptionMessage() {//
         String output = "";
         output = (LINE + "\n" + "     Sorry, that number/character isn't valid! ): \n"
+                + "try writing tag (number) (message) instead! \n"
+                + WHITE_SPACE_SEVEN + "\n" + LINE);
+        return output;
+    }
+
+    /**
+     * Prints the assertion error message
+     */
+    protected String invalidTagExceptionMessage() {//
+        String output = "";
+        output = (LINE + "\n" + "     Sorry, that tag command isn't valid! ): \n"
                 + WHITE_SPACE_SEVEN + "\n" + LINE);
         return output;
     }

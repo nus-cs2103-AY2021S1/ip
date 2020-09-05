@@ -73,16 +73,24 @@ public class Bot {
                     }
                     return output;
                 case ("delete"):
-                    Integer number = Integer.valueOf(parsedInfo[1]) - 1;
-                    if (number <= 0) {
+                    Integer deleteNumber = Integer.valueOf(parsedInfo[1]) - 1;
+                    if (deleteNumber <= 0) {
                         throw new invalidDeleteNumberException();
                     }
-                    assert number >= 1 : "Invalid Number";
-                    output = taskList.deleteListing(number, printer, storage);
+                    assert deleteNumber >= 1 : "Invalid Number";
+                    output = taskList.deleteListing(deleteNumber, printer, storage);
                     return output;
                 case ("find"):
                     output = taskList.find(commandDetail);
                     return output;
+                case ("tag"):
+                  if (commandDetail == null & dateInfo == null) {
+                    throw new invalidTagException();
+                  }
+                  Integer tagNumber = Integer.valueOf(commandDetail) - 1; //catch bug
+                  String tagDetail = dateInfo;
+                  output = taskList.tagListing(tagNumber,tagDetail,printer,storage);
+                  return output;
                 default:
                     throw new UndefinedException();
             }
@@ -96,6 +104,8 @@ public class Bot {
             return printer.invalidDeleteNumberExceptionMessage();
         } catch (java.lang.NumberFormatException e) { //parsed a date number that is not a number
             return printer.invalidDeleteNumberExceptionMessage();
+        } catch (invalidTagException e) {
+          return printer.invalidTagExceptionMessage();
         } catch (AssertionError e) { //assertion
             return printer.assertionErrorMessage();
         }

@@ -96,6 +96,14 @@ public class Parser {
                 break;
             case ("find"):
                 s[1] = details[1];
+            case("tag"):
+                if (details.length < 3) {
+                    s[1] = null;
+                    s[2] = null;
+                } else {
+                    s[1] = details[1];
+                    s[2] = details[2];
+                }
             default:
                 break;
         }

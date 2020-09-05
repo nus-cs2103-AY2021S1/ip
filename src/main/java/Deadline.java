@@ -60,8 +60,10 @@ public class Deadline extends Listing {
      */
     @Override
     public String toString() {
-        return "[D]" + super.doneness() + this.title + " (by:"
-                + deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return this.tags.isEmpty()? "[D]" + super.doneness() + this.title + " (by:"
+                + deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"
+                : "[D]" + super.doneness() + this.title + " (by:"
+                + deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"  + this.tags;
     }
 
 }

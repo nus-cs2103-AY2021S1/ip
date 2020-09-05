@@ -70,6 +70,24 @@ public class TaskList {
     }
 
     /**
+     * Tags the listing object from the list . Print the correct message through printer and
+     * updates storage through the storage input
+     *
+     * @param tagNum     used to find the listing
+     * @param printer to print the object message
+     * @param storage to update Duke.txt
+     */
+    public String tagListing(Integer tagNum,String tagDetail, Printer printer, Storage storage) {
+        String output = "";
+        output = printer.tagMessage(tagDetail, list.get(tagNum).toString());
+        list.get((int) tagNum).tags.add(tagDetail);
+        storage.save(list);
+        System.out.println(output);
+        return output;
+    }
+
+
+    /**
      * Adds the listing object to the list . Print the correct message through printer and updates
      * storage through the storage input
      *
