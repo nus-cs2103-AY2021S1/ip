@@ -31,6 +31,18 @@ public class Deadline extends Task {
         }
     }
 
+    public boolean hasDate() {
+        return byDate != null;
+    }
+
+    public LocalDate getByDate() {
+        return byDate;
+    }
+
+    public String getByString() {
+        return byString;
+    }
+
     /**
      * Return the string that is intended to be stored in the local database.
      * @return the string to be stored in the local database, the format is
@@ -57,5 +69,10 @@ public class Deadline extends Task {
         } else {
             return "[D]" + super.toString() + " (by: " + byString + ")";
         }
+    }
+
+    @Override
+    public int getPriority() {
+        return 1;
     }
 }
