@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  *  Parses user input.
  */
@@ -231,9 +233,9 @@ public class Parser {
         if (numOfTokens < 2) {
             throw new DukeException("Please specific keyword to locate task. Eg. find book");
         }
-        String tempString = inputLine.split("find")[1];
-        String strippedKeyword = tempString.strip();
-        return new FindCommand(strippedKeyword);
+
+        String[] copiedArray = Arrays.copyOfRange(arrayOfElements, 1, arrayOfElements.length);
+        return new FindCommand(copiedArray);
     }
 
     private static HelpCommand processHelpCommand() {
