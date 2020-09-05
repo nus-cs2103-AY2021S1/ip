@@ -43,4 +43,5 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s][%s] %s", getTaskType(), getStatusIcon(), description);
     }
+
 }

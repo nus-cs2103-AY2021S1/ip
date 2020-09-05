@@ -17,10 +17,10 @@ public class DoneTaskCommand implements Command {
 
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) throws DukeError {
-        if (n < 1 || n > taskList.numberOfTasks()) {
+        if (n < 1 || n > taskList.size()) {
             throw new InvalidRangeError();
         }
-        Task task = taskList.getTaskList().get(n - 1);
+        Task task = taskList.get(n - 1);
         if (task.getIsDone()) {
             throw new TaskAlreadyCompletedError(task);
         }
@@ -33,4 +33,5 @@ public class DoneTaskCommand implements Command {
     public boolean isExit() {
         return false;
     }
+
 }

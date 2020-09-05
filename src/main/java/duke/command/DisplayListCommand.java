@@ -8,7 +8,7 @@ public class DisplayListCommand implements Command {
 
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
-        return ui.displayList(taskList.getTaskList());
+        return ui.displayList(taskList);
     }
 
     @Override
@@ -26,4 +26,5 @@ public class DisplayListCommand implements Command {
             return true;
         }
     }
+
 }

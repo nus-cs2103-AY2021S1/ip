@@ -27,4 +27,5 @@ public interface Command {
      * @return Returns true if the command wants to exit the Duke program and vice versa
      */
     boolean isExit();
+
 }

@@ -31,4 +31,5 @@ public class Deadline extends Task {
         return String.format("%s (by: %s)", super.toString(),
                 dateEnd.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));
     }
+
 }

@@ -31,4 +31,5 @@ public class Event extends Task {
         return String.format("%s (at: %s)", super.toString(),
                 time.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));
     }
+
 }

@@ -23,7 +23,7 @@ public class Storage {
     private final String filepath;
 
     /**
-     * Initialisation of the Storage class which requires a filepath to save and load data from.
+     * Initialises the Storage class which requires a filepath to save and load data from.
      *
      * @param filepath The relative filepath from where Duke was ran, to save and load data from
      */
@@ -59,21 +59,21 @@ public class Storage {
                     if (str[1].equals("true")) {
                         toDo.markAsDone();
                     }
-                    taskList.addTask(toDo);
+                    taskList.add(toDo);
                     break;
                 case "D":
                     Deadline deadline = new Deadline(str[2], LocalDateTime.parse(str[3], dateFormatter));
                     if (str[1].equals("true")) {
                         deadline.markAsDone();
                     }
-                    taskList.addTask(deadline);
+                    taskList.add(deadline);
                     break;
                 case "E":
                     Event event = new Event(str[2], LocalDateTime.parse(str[3], dateFormatter));
                     if (str[1].equals("true")) {
                         event.markAsDone();
                     }
-                    taskList.addTask(event);
+                    taskList.add(event);
                     break;
                 default:
                     throw new IOException();
@@ -104,7 +104,7 @@ public class Storage {
             PrintWriter writer = new PrintWriter(fileWriter);
 
             String save = ui.startSaving();
-            for (Task task : taskList.getTaskList()) {
+            for (Task task : taskList) {
                 String s = String.format("%s|%b|%s", task.getTaskType(),
                         task.getIsDone(), task.getDescription());
                 if (!task.getTaskType().equals("T")) {
