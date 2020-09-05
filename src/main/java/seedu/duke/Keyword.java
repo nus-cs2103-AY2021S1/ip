@@ -8,7 +8,8 @@ public enum Keyword {
     LIST("list"),
     DELETE("delete"),
     FIND("find"),
-    BYE("bye");
+    BYE("bye"),
+    SORT("sort");
 
 
     public final String label;
