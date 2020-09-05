@@ -13,7 +13,8 @@ public enum CommandType {
     DONE("done"),
     DELETE("delete"),
     EXIT("exit"),
-    FIND("find");
+    FIND("find"),
+    ADD_PERIOD_TASK("period task");
 
     private String type;
 

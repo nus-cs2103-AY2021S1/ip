@@ -2,6 +2,8 @@ package duke.core;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import duke.command.AddCommand;
 import duke.command.Command;
@@ -14,6 +16,7 @@ import duke.command.ListDateCommand;
 import duke.command.SearchCommand;
 import duke.handle.CommandNotFoundException;
 import duke.task.Deadline;
+import duke.task.DoWithinPeriodTask;
 import duke.task.Event;
 import duke.task.ToDo;
 
@@ -55,6 +58,8 @@ public class Parser {
             parsedCommand = evaluateAddCommand(" /by ", command, CommandType.ADD_DEADLINE);
         } else if (command.split(" ")[0].equals("event")) {
             parsedCommand = evaluateAddCommand(" /at ", command, CommandType.ADD_EVENT);
+        } else if (command.split(" ")[0].equals("periodTask")) {
+            parsedCommand = evaluateAddCommand("", command, CommandType.ADD_PERIOD_TASK);
         } else if (command.split(" ")[0].equals("find")) {
             parsedCommand = evaluateSearchCommand(command);
         } else {
@@ -74,7 +79,9 @@ public class Parser {
      */
     public static Command evaluateAddCommand(String string, String command, CommandType commandType)
             throws CommandNotFoundException {
-        if (commandType == CommandType.ADD_TODO) {
+        if (commandType == CommandType.ADD_PERIOD_TASK) {
+            return evaluateAddPeriodTask(command);
+        } else if (commandType == CommandType.ADD_TODO) {
             if (command.strip().split(" ").length == 1) {
                 throw new CommandNotFoundException("The description for todo should not be empty");
             }
@@ -110,6 +117,36 @@ public class Parser {
             }
         } else {
             throw new CommandNotFoundException("The command is not found");
+        }
+    }
+
+    /**
+     * Parses the add period task command and returns a parsed command.
+     *
+     * @param command The command to be parsed.
+     * @return The parsed command.
+     * @throws CommandNotFoundException If the command cannot be parsed.
+     */
+    public static Command evaluateAddPeriodTask(String command) throws CommandNotFoundException {
+        String stringPattern = "periodTask (.+) /start (.+) /end (.+)";
+        Pattern pattern = Pattern.compile(stringPattern);
+        Matcher matcher = pattern.matcher(command);
+        if(!matcher.find()) {
+            throw new CommandNotFoundException("The period task command should have the format " +
+                    "periodTask description /start start time /end end time");
+        }
+
+        try{
+            String description = matcher.group(1).strip();
+            String start = matcher.group(2).strip();
+            String end = matcher.group(3).strip();
+
+            LocalDate startTime = LocalDate.parse(start);
+            LocalDate endTime = LocalDate.parse(end);
+
+            return new AddCommand(new DoWithinPeriodTask(description, startTime, endTime));
+        } catch (DateTimeParseException dateTimeParseException) {
+            throw new CommandNotFoundException("the time should be in the format yyyy-MM-dd");
         }
     }
 

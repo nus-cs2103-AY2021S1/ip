@@ -9,10 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.handle.LoadingException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.*;
 
 /**
  * The Storage class reads the local task record and the task list, and updates
@@ -62,6 +59,9 @@ public class Storage {
 
                     } else if (strings[0].equals("E") && strings.length == 4) {
                         readEvent(tasks, strings[2], strings[3], strings[1]);
+
+                    } else if (strings[0].equals("P") && strings.length == 5) {
+                        readPeriodTask(tasks, strings[2], strings[3], strings[4], strings[1]);
 
                     } else {
                         throw new LoadingException(
@@ -137,6 +137,29 @@ public class Storage {
         }
 
         tasks.add(event);
+    }
+
+    /**
+     * Reads the description, time, and state of the task, and adds the task to the taks list.
+     *
+     * @param tasks The task list.
+     * @param description The description of the task.
+     * @param start The start time of the task.
+     * @param end The end time of the task.
+     * @param state The state of the task.
+     */
+    private void readPeriodTask(ArrayList<Task> tasks, String description, String start, String end, String state) {
+        DoWithinPeriodTask doWithinPeriodTask = new DoWithinPeriodTask(
+                description,
+                LocalDate.parse(start),
+                LocalDate.parse(end)
+        );
+
+        if (state.equals("1")) {
+            doWithinPeriodTask.markAsCompleted();
+        }
+
+        tasks.add(doWithinPeriodTask);
     }
 
 
