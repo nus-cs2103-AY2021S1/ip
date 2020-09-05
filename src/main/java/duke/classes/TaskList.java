@@ -3,6 +3,7 @@ package duke.classes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 import duke.exceptions.BlahException;
 import duke.exceptions.DukeInvalidTimeException;
@@ -168,6 +169,7 @@ public class TaskList {
     public List<Task> find(String query) throws DukeInvalidTimeException {
         query = query.substring(5);
         List<Task> queriedTasks = new ArrayList<>();
+        Function<String, String[]> stringSplit = str -> str.split("\\s");
         for (Task task : todoList) {
             String finalQuery = query;
             String description = task.getDescription();
