@@ -31,6 +31,8 @@ public class Parser {
             return new FindCommand(userCommand);
         } else if (command[0].equals("schedule")) {
             return new ScheduleCommand(userCommand);
+        } else if (command[0].equals("sort")) {
+            return new SortCommand(userCommand);
         } else {
             throw new InvalidCommandException();
         }

@@ -59,6 +59,10 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    protected LocalDate getTaskDeadline() {
+        return null;
+    }
+
     /**
      * Transform the task into a file friendly format.
      * @return string representation of task in file format.
@@ -79,7 +83,4 @@ public class Task {
         return " ";
     }
 
-    protected LocalDate getTaskDeadline() {
-        return null;
-    }
 }

@@ -90,8 +90,23 @@ public class TaskList {
         return foundTasks;
     }
 
+
     protected ArrayList<Task> filterTask() {
         return this.taskList.stream().filter(task -> task instanceof Deadline ||
                 task instanceof Event).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    protected ArrayList<Task> sortTask() {
+        ArrayList<Task> sortedEventAndDeadline = this.taskList.stream()
+                                                    .filter(task -> task instanceof Deadline
+                                                            || task instanceof Event)
+                                                    .sorted((task1, task2) -> task1.getTaskDeadline()
+                                                            .compareTo(task2.getTaskDeadline()))
+                                                    .collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Task> onlyTodo = this.taskList.stream()
+                                    .filter(task -> task instanceof Todo)
+                                    .collect(Collectors.toCollection(ArrayList::new));
+        sortedEventAndDeadline.addAll(onlyTodo);
+        return sortedEventAndDeadline;
     }
 }
