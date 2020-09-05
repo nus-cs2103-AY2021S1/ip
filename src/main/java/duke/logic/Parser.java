@@ -14,7 +14,13 @@ import duke.command.FindCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.exception.DukeDateTimeParseException;
 import duke.exception.DukeException;
+import duke.exception.DukeInvalidTaskNumberException;
+import duke.exception.DukeMissingFindKeywordException;
+import duke.exception.DukeMissingTaskDescriptionException;
+import duke.exception.DukeMissingTaskKeywordException;
+import duke.exception.DukeMissingTaskNumberException;
 import duke.task.Task;
 
 /**
@@ -39,14 +45,13 @@ public class Parser {
         boolean isMissingFindKeyword = action.equals("find") && hasOnlyOneWord;
 
         if (isMissingTaskDescription) {
-            throw new DukeException("OOPS!!! Description of a task cannot be empty :(\n");
+            throw new DukeMissingTaskDescriptionException(action);
         }
         if (isMissingTaskNumber) {
-            throw new DukeException("Missing task number! "
-                    + "Please ensure to key in the task number :)\n");
+            throw new DukeMissingTaskNumberException();
         }
         if (isMissingFindKeyword) {
-            throw new DukeException("Please indicate the keyword which you want to find.\n");
+            throw new DukeMissingFindKeywordException();
         }
 
         Command command;
@@ -67,7 +72,7 @@ public class Parser {
                 String[] splitDeadline = splitCommand[1].split("/by");
                 boolean isMissingKeyword = splitDeadline.length < 2;
                 if (isMissingKeyword) {
-                    throw new DukeException("Please indicate a deadline using the \"/by\" keyword.\n");
+                    throw new DukeMissingTaskKeywordException("\"/by\"");
                 }
                 String description = splitDeadline[0].trim();
                 String by = splitDeadline[1].trim();
@@ -79,7 +84,7 @@ public class Parser {
                 String[] splitEvent = splitCommand[1].split("/at");
                 boolean isMissingKeyword = splitEvent.length < 2;
                 if (isMissingKeyword) {
-                    throw new DukeException("Please indicate a timing using the \"/at\" keyword.\n");
+                    throw new DukeMissingTaskKeywordException("\"/at\"");
                 }
                 String description = splitEvent[0].trim();
                 String at = splitEvent[1].trim();
@@ -103,14 +108,12 @@ public class Parser {
                 command = new FindCommand(keywords);
                 break;
             default:
-                command = new InvalidCommand();
+                command = new InvalidCommand(fullCommand);
                 break;
             }
             return command;
         } catch (DateTimeParseException e) {
-            String errorMessage = "Invalid date format! "
-                    + "Please use the proper date format i.e. yyyy-MM-dd\n";
-            throw new DukeException(errorMessage);
+            throw new DukeDateTimeParseException();
         }
     }
 
@@ -135,8 +138,7 @@ public class Parser {
             int index = Integer.parseInt(taskNumber) - 1;
             return tasks.get(index);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            String errorMessage = "Invalid task number! Please enter a valid task number :)\n";
-            throw new DukeException(errorMessage);
+            throw new DukeInvalidTaskNumberException(taskNumber);
         }
     }
 }

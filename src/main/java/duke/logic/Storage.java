@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
+import duke.exception.DukeLoadDataException;
+import duke.exception.DukeSaveDataException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -73,7 +75,7 @@ public class Storage {
                     break;
                 }
                 default:
-                    throw new DukeException("Error loading tasks, starting up with no saved records...\n");
+                    throw new DukeLoadDataException();
                 }
 
                 int bit = Integer.parseInt(dataArray[1]);
@@ -85,9 +87,7 @@ public class Storage {
             sc.close();
             return tasks;
         } catch (FileNotFoundException e) {
-            String errorMessage = "No previous save file found, "
-                    + "starting up with no saved records...\n";
-            throw new DukeException(errorMessage);
+            throw new DukeLoadDataException();
         }
     }
 
@@ -116,13 +116,13 @@ public class Storage {
                     data = letter + " | " + bit + " | " + description + " | " + time;
                     break;
                 default:
-                    throw new DukeException("An error occurred, unable to save tasks to file :(");
+                    throw new DukeSaveDataException();
                 }
                 myWriter.write(data + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
-            throw new DukeException("An error occurred, unable to save tasks to file :(");
+            throw new DukeSaveDataException();
         }
     }
 }
