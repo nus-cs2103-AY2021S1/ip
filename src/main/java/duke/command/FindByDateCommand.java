@@ -16,6 +16,10 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.util.function.Predicate;
+
+import java.util.stream.Collectors;
+
 /**
  * Represents a command to search for tasks by date.
  */
@@ -49,12 +53,13 @@ public class FindByDateCommand extends Command {
             String date = parsedCommand[1].trim();
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate dateToSearch = LocalDate.parse(date, dateFormatter);
-            List<Task> searchResults = new ArrayList<>();
-            for (Task task : tasks.getTaskList()) {
-                if (task.getDate() != null && task.getDate().isEqual(dateToSearch)) {
-                    searchResults.add(task);
-                }
-            }
+            Predicate<Task> searchDateFilter = task -> {
+                return task.getDate() != null && task.getDate().isEqual(dateToSearch);
+            };
+            List<Task> searchResults = new ArrayList<>(tasks.getTaskList())
+                    .stream()
+                    .filter(searchDateFilter)
+                    .collect(Collectors.toList());
             return ui.showTaskList(searchResults);
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No task date provided. Please input a valid date using the format: 'dd/mm/yyyy' ";
