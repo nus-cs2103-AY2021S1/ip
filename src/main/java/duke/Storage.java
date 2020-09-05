@@ -69,7 +69,7 @@ public class Storage {
      */
     public boolean save(TaskList tasks) {
         try {
-            BufferedWriter bw = Files.newBufferedWriter(Path.of("data/duke.txt"));
+            BufferedWriter bw = Files.newBufferedWriter(path);
             for (Task task : tasks.getAll()) {
                 String storeFormat = String.format(
                         "%s | %d | %s",
@@ -95,8 +95,8 @@ public class Storage {
      * @throws IOException on I/O error
      */
     private void createFileIfNotExists(Path path) throws IOException {
-        Path folderPath = Path.of("data");
-        Path filePath = folderPath.resolve("duke.txt");
+        Path folderPath = path.getParent();
+        Path filePath = folderPath.resolve(path.getFileName());
 
         // create folders containing the file and its parents
         Files.createDirectories(folderPath);
