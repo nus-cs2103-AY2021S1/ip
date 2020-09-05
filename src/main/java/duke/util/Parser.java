@@ -34,6 +34,9 @@ public class Parser {
                 remainingString = scanner.nextLine();
                 parsedStrings = parseRemainingString(action, remainingString);
                 return new AddCommand(parsedStrings);
+            case "find":
+                remainingString = scanner.nextLine();
+                return new FindCommand(remainingString);
             case "done":
                 index = scanner.nextInt() - 1;
                 return new DoneCommand(index);

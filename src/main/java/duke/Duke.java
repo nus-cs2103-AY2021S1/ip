@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * duke.Duke program is a Task Management App. It takes in user command for task manipulations
+ * Duke program is a Task Management App. It takes in user command for task manipulations
  * and shows a list of Tasks that is ongoing.
  */
 public class Duke {
@@ -79,7 +79,7 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        String filePath = "duke/data/duke.txt";
+        String filePath = "data/duke.txt";
         Duke duke = new Duke(filePath);
         duke.run();
     }
