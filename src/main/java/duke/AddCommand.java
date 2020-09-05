@@ -21,7 +21,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String output = "";
         try {
             switch (type) {
@@ -40,7 +40,7 @@ public class AddCommand extends Command {
                 String by = inputArray[1];
                 Task deadlineTask = new Deadline(task, LocalDate.parse(by));
                 tasks.add(deadlineTask);
-                output += output += convertToOutputString(deadlineTask.toString(), tasks.size());
+                output += convertToOutputString(deadlineTask.toString(), tasks.size());
                 storage.writeToFile(tasks);
                 break;
             case EVENT:
@@ -49,20 +49,18 @@ public class AddCommand extends Command {
                 String at = inputArray[1];
                 Task eventTask = new Event(task, LocalDate.parse(at));
                 tasks.add(eventTask);
-                output += output += convertToOutputString(eventTask.toString(), tasks.size());
+                output += convertToOutputString(eventTask.toString(), tasks.size());
                 storage.writeToFile(tasks);
                 break;
             default:
                 throw new DukeException("Please key in a valid command");
             }
-            ui.showOutputOnScreen(output);
+            return ui.showOutput(output);
         } catch (IOException | DateTimeException ex) {
             throw new DukeException(ex.getMessage());
         } catch (ArrayIndexOutOfBoundsException ex) {
             throw new DukeException("Please follow a valid command format!");
         }
-
-
     }
 
     @Override

@@ -5,8 +5,8 @@ package duke;
  */
 public class ExitCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showOutputOnScreen("Bye, hope to chat again soon!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showOutput("Bye, hope to chat again soon!");
     }
 
     @Override

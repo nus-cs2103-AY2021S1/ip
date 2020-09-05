@@ -2,5 +2,4 @@ T | 0 | sleep
 D | 0 | make pastry | 2020-12-04
 E | 1 | marathon | 2020-03-04
 D | 0 | drink water | 2020-04-01
-T | 0 | relax
-D | 1 | drink coffee | 2020-12-12
+T | 0 | make my bed brush my teeth then sleep again

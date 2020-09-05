@@ -1,16 +1,9 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Encapsulates user interface interactions.
  */
 public class Ui {
-    private final String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
 
     private final String instructions = "Hello! I'm duke.Duke\n"
             + "Send me a task in one of the following formats and I'll store it for you.\n"
@@ -23,58 +16,27 @@ public class Ui {
             + "Send \"delete <item number>\" to delete and item from the list\n"
             + "Send \"bye\" to end our conversation.";
 
-    private final Scanner scanner = new Scanner(System.in);
-
     /**
-     * Prints error message when error occurs whil loading data.
+     * Prints error message when error occurs while loading data.
      */
     public void showLoadingError() {
         System.out.println("Error occurred while loading data.");
     }
 
     /**
-     * Prints specified error message.
-     * @param message Error message.
+     * Shows welcome message.
+     * @return The welcome message by duke.
      */
-    public void showError(String message) {
-        System.out.println(message);
-    }
-
-    /**
-     * Prints welcome words and instructions on how to use bot.
-     */
-    public void showWelcome() {
-        System.out.println(logo + "\n" + instructions);
+    public String showWelcome() {
+        return instructions + "\n";
     }
 
     /**
      * Prints specified output message for user.
      * @param output Message for the user.
+     * @return The output by Duke.
      */
-    public void showOutput(String output) {
-        System.out.println(output);
-    }
-
-    /**
-     * Prints specified output message for user on the GUI
-     * @param output Message for the user.
-     */
-    public void showOutputOnScreen(String output) {
-        Duke.getOutputLabel().setText(output);
-    }
-
-    /**
-     * Prints a dividing line.
-     */
-    public void showLine() {
-        System.out.println("___________________________________________");
-    }
-
-    /**
-     * Reads the next input line by user.
-     * @return Input line by user.
-     */
-    public String readCommand() {
-        return scanner.nextLine();
+    public String showOutput(String output) {
+        return output;
     }
 }

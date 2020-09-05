@@ -11,9 +11,10 @@ public abstract class Command {
      * @param tasks List of the current tasks.
      * @param ui Ui object.
      * @param storage Stored copy of tasks.
+     * @return The reply message from Duke.
      * @throws DukeException If errors occur for any of the processes involved.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * @return True if exit command.

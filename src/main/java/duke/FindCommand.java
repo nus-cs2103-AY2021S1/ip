@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks = new TaskList(new ArrayList<>(tasks.toStream()
                 .filter(x -> x.description.contains(description)).collect(Collectors.toList())));
         StringBuilder output = new StringBuilder();
@@ -31,7 +31,7 @@ public class FindCommand extends Command {
                 }
             }
         }
-        ui.showOutputOnScreen(output.toString());
+        return ui.showOutput(output.toString());
     }
 
     @Override

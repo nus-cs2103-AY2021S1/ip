@@ -16,15 +16,15 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             int itemNumber = Integer.parseInt(description);
             String output = "";
             output += "Noted. I've removed this task:\n\t" + tasks.get(itemNumber - 1);
             tasks.remove(itemNumber - 1);
             output += "\nYou now have " + tasks.size() + " tasks in the list.";
-            ui.showOutputOnScreen(output);
             storage.writeToFile(tasks);
+            return ui.showOutput(output);
         } catch (NumberFormatException | IndexOutOfBoundsException ex) {
             throw new DukeException("Please key in a valid number for \"delete\"");
         } catch (IOException ex) {

@@ -5,7 +5,7 @@ package duke;
  */
 public class ShowCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder output = new StringBuilder();
         if (tasks.isEmpty()) {
             output = new StringBuilder("Theres currently nothing in your list.");
@@ -18,7 +18,7 @@ public class ShowCommand extends Command {
                 }
             }
         }
-        ui.showOutputOnScreen(output.toString());
+        return ui.showOutput(output.toString());
     }
 
     @Override
