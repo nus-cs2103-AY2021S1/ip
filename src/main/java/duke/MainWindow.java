@@ -36,6 +36,12 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    public void displayWelcomeMessage() {
+        String s = duke.welcomeMessage();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(s, dukeImage));
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -52,11 +58,5 @@ public class MainWindow extends AnchorPane {
         if (input.equals("bye")) {
             Platform.exit();
         }
-    }
-
-    public void displayWelcomeMessage() {
-        String s = duke.welcomeMessage();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(s, dukeImage));
     }
 }
