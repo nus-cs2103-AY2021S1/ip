@@ -100,6 +100,7 @@ public class Parser {
      * @return
      */
     public static String changeTask(String request, TaskList list) throws InvalidTaskException {
+        assert !request.equals(""): "An empty string is not allowed";
         String[] requests = request.split(" ");
         if (requests.length < 4){
             throw new InvalidTaskException();
@@ -246,6 +247,7 @@ public class Parser {
             throw new InvalidDeadlineException();
         }
         word = word.substring(8);
+        assert word.length() > 0 : "A deadline cannot be empty";
         int index = word.indexOf("/by");
         String str = word.substring(index + 3).trim();
         String datestr = str.replaceAll("-", "/");
