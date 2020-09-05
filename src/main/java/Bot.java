@@ -75,6 +75,7 @@ public class Bot {
           return output;
         case ("delete"):
           Integer number = Integer.valueOf(parsedInfo[1]) - 1;
+          assert number >= 1 : "Invalid Number";
           output = taskList.deleteListing(number, printer, storage);
           return output;
         case ("find"):
