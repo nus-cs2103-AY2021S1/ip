@@ -13,7 +13,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
+/**
+ * Main class to run Application
+ */
 public class Main extends Application {
 
     private final Duke duke = new Duke();
@@ -81,7 +83,6 @@ public class Main extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */

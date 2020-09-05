@@ -14,7 +14,9 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
-
+/**
+ * Storage to write data to the data file or retrieve data from the file
+ */
 public class Storage {
     private final String filePath;
 
@@ -27,9 +29,9 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
         try {
-            File f = new File(filePath);
-            f.getParentFile().mkdir();
-            f.createNewFile();
+            File file = new File(filePath);
+            file.getParentFile().mkdir();
+            file.createNewFile();
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
@@ -40,15 +42,15 @@ public class Storage {
      * 
      * @return List of tasks
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            File f = new File("data/data.txt");
-            Scanner diskScanner = new Scanner(f);
+            File file = new File("data/data.txt");
+            Scanner diskScanner = new Scanner(file);
             
             while (diskScanner.hasNext()) {
-                String next = diskScanner.nextLine();
-                tasks.add(decodeTask(next));
+                String nextLine = diskScanner.nextLine();
+                tasks.add(decodeTask(nextLine));
             }
             
         } catch (FileNotFoundException e) {
@@ -64,13 +66,13 @@ public class Storage {
     /**
      * Stores tasks in the data file
      * 
-     * @param list List of tasks to be stored
+     * @param taskList List of tasks to be stored
      */
-    public void writeToDataFile(TaskList list) {
+    public void writeDataToFile(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (int i = 0; i < list.size(); i++) {
-                String write = encodeTask (list.get(i));
+            for (int i = 0; i < taskList.size(); i++) {
+                String write = encodeTask (taskList.getTask(i));
                 fw.write (write);
             }
             fw.close();
@@ -81,31 +83,32 @@ public class Storage {
 
     private String encodeTask(Task task) {
         String encodedTask = "";
-        encodedTask += (task.getType() + " | ");
+        encodedTask += (task.getTypeOfTask() + " | ");
         encodedTask += (task.getDone() + " | ");
         encodedTask += (task.getDescription());
-        if ((task.getType().equals("Event")) || (task.getType().equals("Deadline"))) {
+        if (!task.getTypeOfTask().equals("Todo")) {
             encodedTask += (" | " + task.getTime());
         }
         encodedTask += "\n";
         return encodedTask;
     }
     
+    
     private Task decodeTask (String encodedLine) throws DukeInvalidStorageException {
         String[] parts = encodedLine.split("\\|");
-        String type = parts[0].trim();
+        String typeOfTask = parts[0].trim();
         boolean isDone = Boolean.parseBoolean(parts[1].trim());
         String description = parts[2].trim();
-        String time = "";
-        switch (type) {
+        
+        switch (typeOfTask) {
         case "Todo":
             return new Todo(description, isDone);
         case "Deadline":
-            time = parts[3].trim();
-            return new Deadline (description, time, isDone);
+            String deadline = parts[3].trim();
+            return new Deadline (description, deadline, isDone);
         case "Event":
-            time = parts[3].trim();
-            return new Event(description, time, isDone);
+            String at = parts[3].trim();
+            return new Event(description, at, isDone);
         default:
             throw new DukeInvalidStorageException("Storage tasks could not be retrieved");
         }

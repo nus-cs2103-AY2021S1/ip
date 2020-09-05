@@ -1,24 +1,34 @@
 package duke.tasks;
 
+/**
+ * Task which Duke keeps track of
+ */
 public class Task {
 
     protected String description;
-    protected String type;
+    protected String typeOfTask;
     protected boolean isDone;
 
     /**
      * Constructor for Task class
      * @param description description of the task
-     * @param type type of task
-     * @param isDone whether the task has been completed of not
+     * @param typeOfTask type of task
+     * @param isDone indicates whether the task has been completed or not
      */
-    public Task (String description, String type, boolean isDone) {
+    public Task (String description, String typeOfTask, boolean isDone) {
         this.description = description;
-        this.type = type;
+        this.typeOfTask = typeOfTask;
         this.isDone = isDone;
     }
+
+    /**
+     * Sets the boolean isDone to true
+     */
     public void markDone() {
         this.isDone = true;
+    }
+    public String getTime() {
+        return "";
     }
     public Boolean getDone() {
         return this.isDone;
@@ -26,11 +36,8 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
-    public String getType() {
-        return this.type;
-    }
-    public String getTime() {
-        return "";
+    public String getTypeOfTask() {
+        return this.typeOfTask;
     }
 
     @Override
