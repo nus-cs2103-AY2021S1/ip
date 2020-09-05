@@ -12,14 +12,11 @@ import javafx.scene.paint.Color;
 
 public class DialogBox extends HBox {
 
+
     private Label text;
     private ImageView displayPicture;
 
-    /**
-     * Constructor for a DialogBox
-     * @param l the Label containing the text to be displayed
-     * @param iv the ImageView containing the image to use as the sender's picture
-     */
+
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -30,12 +27,6 @@ public class DialogBox extends HBox {
 
     }
 
-    /**
-     * Constructor for a DialogBox with the Duke as the sender
-     * @param l the Label containing the text to be displayed
-     * @param iv  the ImageView containing the image to use as Duke's picture
-     * @return
-     */
     public static DialogBox dukeDialog(Label l, ImageView iv) {
         l.setBackground(new Background(new BackgroundFill(Color.rgb(179, 141, 151), new CornerRadii(3.0),
                 new Insets(0.0))));
@@ -44,14 +35,6 @@ public class DialogBox extends HBox {
         db.getChildren().addAll(db.displayPicture, db.text);
         return db;
     }
-
-
-    /**
-     * Constructor for a DialogBox with the User as the sender
-     * @param l the Label containing the text to be displayed
-     * @param iv  the ImageView containing the image to use as User's picture
-     * @return
-     */
     public static DialogBox userDialog(Label l, ImageView iv) {
         l.setBackground(new Background(new BackgroundFill(Color.rgb(213, 172, 169), new CornerRadii(3.0),
                 new Insets(0.0))));

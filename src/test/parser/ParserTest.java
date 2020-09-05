@@ -1,14 +1,13 @@
 package parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import duke.exception.DukeIoException;
 import duke.parser.Parser;
 import duke.task.Todo;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
 
@@ -17,7 +16,7 @@ public class ParserTest {
     @DisplayName("parseLine called on '[T],, 1,, todo'")
     public void parseLineFromFile_validTodo_todoReturned() {
         try {
-            assertEquals("[T] [\u2713] todo", Parser.parseLine("[T],, 1,, todo").toString());
+            assertEquals("[T] [✓] todo", Parser.parseLine("[T],, 1,, todo").toString());
         } catch (DukeIoException e) {
             fail(e.getMessage());
         }

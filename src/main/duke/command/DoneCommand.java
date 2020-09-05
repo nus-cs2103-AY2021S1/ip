@@ -4,6 +4,7 @@ import duke.exception.DukeArgumentException;
 import duke.exception.DukeExecutionException;
 import duke.exception.DukeIoException;
 import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
  * Represents an request by the user to mark a Task object at the given index from the list of Tasks as completed.

@@ -8,11 +8,8 @@ import javafx.scene.layout.VBox;
  */
 public class ScrollDialoguePane extends ScrollPane {
 
-    private VBox dialog;
+    VBox dialog;
 
-    /**
-     * Constructor for a ScrollDialoguePane.
-     */
     public ScrollDialoguePane() {
         super();
         this.dialog = new VBox();
