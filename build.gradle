@@ -64,5 +64,6 @@ checkstyle {
 
 run {
     standardInput = System.in
+    enableAssertions = true
     systemProperty "file.encoding", "utf-8"
 }

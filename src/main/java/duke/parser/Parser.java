@@ -105,7 +105,7 @@ public class Parser {
                     content = input.substring(6).split(" /at ");
                     if (content.length <= 1) {
                         isError = true;
-                        errorMessage = " Deadline date cannot be empty :(";
+                        errorMessage = " Event date cannot be empty :(";
                         break;
                     }
                     description = content[0];
