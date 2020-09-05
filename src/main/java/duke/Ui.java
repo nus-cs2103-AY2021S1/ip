@@ -3,6 +3,7 @@ package duke;
 import duke.io.InputHandler;
 import duke.io.OutputHandler;
 import duke.task.Task;
+import javafx.scene.text.Font;
 
 /** Handles IO between Duke and user */
 public class Ui {

@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -7,6 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 public class MainWindow extends AnchorPane {
 
@@ -32,16 +34,22 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        Label label = new Label(input);
+        label.setFont(Font.font("Courier New", 12));
         dialogContainer.getChildren().addAll(
-                new Label(input)
+                label
         );
-        dukeGui.handleUserInput(input);
+        if (dukeGui.handleUserInput(input)) {
+            Platform.exit();
+        }
         userInput.clear();
     }
 
     public void handleDukeResponse(String response) {
+        Label label = new Label(response);
+        label.setFont(Font.font("Consolas", 12));
         dialogContainer.getChildren().addAll(
-                new Label(response)
+                label
         );
     }
 

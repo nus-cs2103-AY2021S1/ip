@@ -114,6 +114,10 @@ public class Duke {
 
     }
 
+    public void greet() {
+        this.ui.displayGreet();
+    }
+
     /**
      * Initializes software.
      *
@@ -122,7 +126,7 @@ public class Duke {
     public static void main(String[] args) {
         // Initialize Duke with save data and send welcome message
         Duke duke = new Duke(Path.of("data/data.txt"));
-        duke.ui.displayGreet();
+        duke.greet();
 
         // Start input loop
         duke.run();
