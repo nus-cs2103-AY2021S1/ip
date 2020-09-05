@@ -2,7 +2,6 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import duke.command.InvalidCommandException;
 import duke.component.Parser;
@@ -13,6 +12,7 @@ import duke.component.Parser;
 public class Event extends Task {
     private final LocalDateTime atTime;
     private final LocalDateTime[] tentativeSlots;
+    private final String tentativeSlotsStr;
 
     /**
      * Creates an event task.
@@ -22,7 +22,7 @@ public class Event extends Task {
      */
     public Event(String description, String atTime) throws InvalidCommandException {
         super(description);
-        String[] times = atTime.split(Parser.SPACE_STRING);
+        String[] times = atTime.split("/");
         tentativeSlots = new LocalDateTime[times.length];
         try {
             for (int i = 0; i < times.length; i++) {
@@ -30,8 +30,10 @@ public class Event extends Task {
             }
             if (times.length == 1) {
                 this.atTime = tentativeSlots[0];
+                tentativeSlotsStr = "";
             } else {
                 this.atTime = null;
+                tentativeSlotsStr = String.join("/", times);
             }
         } catch (Exception e) {
             throw new InvalidCommandException("Invalid input datetime, please input as yyyy-MM-dd HH:mm.");
@@ -85,14 +87,22 @@ public class Event extends Task {
 
     @Override
     public String output() {
-        return "E" + super.output() + " | At: "
-                + atTime.format(Parser.DATE_TIME_INPUT_FORMAT) + "\n";
+        if (atTime != null) {
+            return "E" + super.output() + " | At: "
+                    + atTime.format(Parser.DATE_TIME_INPUT_FORMAT) + "\n";
+        } else {
+            return "E" + super.output() + " | At: " + tentativeSlotsStr + "\n";
+        }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: "
-                + atTime.format(Parser.DATE_TIME_OUTPUT_FORMAT) + ")";
+        if (atTime != null) {
+            return "[E]" + super.toString() + " (at: "
+                    + atTime.format(Parser.DATE_TIME_OUTPUT_FORMAT) + ")";
+        } else {
+            return "[E]" + super.toString() + " (at: " + tentativeSlotsStr + ")";
+        }
     }
 
     /**
