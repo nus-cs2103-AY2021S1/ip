@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.security.Key;
+
 /**
  * Parser processes each command from Ui and executes program accordingly.
  */
@@ -24,11 +26,22 @@ public class Parser {
      * @throws DukeException if input does not contain any of the keywords in the method.
      */
     public void checkForInvalidInput(String input) throws DukeException {
-        if (!input.contains("todo") && !input.contains("deadline") && !input.contains("event")
-                && !input.contains("done") && !input.contains("bye") && !input.contains("list")
-                && !input.contains("delete") && !input.contains("find")) {
-            throw new DukeException(LINES + INVALID_INPUT + LINES);
+        if (isInvalidInput(input)) {
+            throw new DukeException(INVALID_INPUT + LINES);
         }
+    }
+
+    /**
+     * Checks for invalid string input.
+     *
+     * @param input command input by user.
+     * @return boolean value depending on valid or invalid input.
+     */
+    public boolean isInvalidInput(String input) {
+        return (!input.contains(Keyword.TODO.label) && !input.contains(Keyword.DEADLINE.label)
+                && !input.contains(Keyword.EVENT.label) && !input.contains(Keyword.DONE.label)
+                && !input.contains(Keyword.BYE.label) && !input.contains(Keyword.LIST.label)
+                && !input.contains(Keyword.DELETE.label) && !input.contains(Keyword.FIND.label));
     }
 
     /**
@@ -38,21 +51,23 @@ public class Parser {
      */
     public void readCliInput(String input) {
         try {
-            checkForInvalidInput(input);
-            if (input.equals("list")) {
+            this.checkForInvalidInput(input);
+            if (input.equals(Keyword.LIST.label)) {
                 showTaskList();
-            } else if (input.contains("done")) {
-                taskLists.completeTask(input);
-            } else if (input.contains("delete")) {
-                taskLists.deleteTask(input);
-            } else if (input.contains("todo")) {
-                taskLists.addToDo(input);
-            } else if (input.contains("deadline")) {
-                taskLists.addDeadline(input);
-            } else if (input.contains("event")) {
-                taskLists.addEvent(input);
-            } else if (input.contains("find")) {
-                taskLists.find(input);
+            } else if (input.contains(Keyword.DONE.label)) {
+                taskLists.completeTaskForCli(input);
+            } else if (input.contains(Keyword.DELETE.label)) {
+                taskLists.deleteTaskForCli(input);
+            } else if (input.contains(Keyword.TODO.label)) {
+                taskLists.addToDoForCli(input);
+            } else if (input.contains(Keyword.DEADLINE.label)) {
+                taskLists.addDeadlineForCli(input);
+            } else if (input.contains(Keyword.EVENT.label)) {
+                taskLists.addEventForCli(input);
+            } else if (input.contains(Keyword.FIND.label)) {
+                taskLists.findForCli(input);
+            } else {
+                System.out.println(INVALID_INPUT);
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
@@ -67,23 +82,23 @@ public class Parser {
      */
     public String readGuiInput(String input) {
         try {
-            checkForInvalidInput(input);
-            if (input.equals("list")) {
-                return showTaskListToString();
-            } else if (input.contains("done")) {
-                return taskLists.completeTaskToString(input);
-            } else if (input.contains("delete")) {
-                return taskLists.deleteTaskToString(input);
-            } else if (input.contains("todo")) {
-                return taskLists.addToDoToString(input);
-            } else if (input.contains("deadline")) {
-                return taskLists.addDeadlineToString(input);
-            } else if (input.contains("event")) {
-                return taskLists.addEventToString(input);
-            } else if (input.contains("find")) {
-                return taskLists.findToString(input);
+            this.checkForInvalidInput(input);
+            if (input.equals(Keyword.LIST.label)) {
+                return showTaskListForGui();
+            } else if (input.contains(Keyword.DONE.label)) {
+                return taskLists.completeTaskForGui(input);
+            } else if (input.contains(Keyword.DELETE.label)) {
+                return taskLists.deleteTaskForGui(input);
+            } else if (input.contains(Keyword.TODO.label)) {
+                return taskLists.addToDoForGui(input);
+            } else if (input.contains(Keyword.DEADLINE.label)) {
+                return taskLists.addDeadlineForGui(input);
+            } else if (input.contains(Keyword.EVENT.label)) {
+                return taskLists.addEventForGui(input);
+            } else if (input.contains(Keyword.FIND.label)) {
+                return taskLists.findForGui(input);
             } else {
-                return "Not valid input!";
+                return INVALID_INPUT;
             }
         } catch (DukeException e) {
             return e.getMessage();
@@ -97,7 +112,7 @@ public class Parser {
         Ui.print(taskLists.toString());
     }
 
-    public String showTaskListToString() {
+    public String showTaskListForGui() {
         return taskLists.toString();
     }
 }
