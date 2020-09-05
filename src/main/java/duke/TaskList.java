@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +90,30 @@ public class TaskList {
             for (int i = 0; i < size; i++) {
                 int taskNumber = i + 1;
                 String task = String.format("%d. %s", taskNumber, tasks.get(i));
+                Ui.addMessage(task);
+            }
+        }
+    }
+
+    /**
+     * Displays all tasks that were completed in the past 7 days.
+     */
+    public void displayStatistics() {
+        List<Task> doneTasks = new ArrayList<>();
+        for (Task task: taskList) {
+            if (task.isDoneThisWeek(LocalDate.now())) {
+                doneTasks.add(task);
+            }
+        }
+        int size = doneTasks.size();
+        if (size == 0) {
+            Ui.addMessage("You did not complete any task in the past 7 days.");
+        } else {
+            String taskWord = size <= 1 ? "task" : "tasks";
+            Ui.addMessage("You completed " + size + " " + taskWord + " in the past 7 days.");
+            for (int i = 0; i < size; i++) {
+                int taskNumber = i + 1;
+                String task = String.format("%d. %s", taskNumber, doneTasks.get(i));
                 Ui.addMessage(task);
             }
         }
