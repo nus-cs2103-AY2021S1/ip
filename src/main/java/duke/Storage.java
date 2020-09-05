@@ -40,6 +40,7 @@ public class Storage {
      */
     public List<Task> load() throws DukeException {
         File file = readFile();
+        assert file != null;
         return parseFile(file);
     }
 
@@ -132,6 +133,7 @@ public class Storage {
     public void saveTasks(TaskList taskList) throws DukeException {
         try {
             File file = readFile();
+            assert file != null;
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             for (Task task : taskList.getTaskList()) {
                 if (task instanceof TodoTask) {

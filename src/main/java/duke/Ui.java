@@ -11,7 +11,6 @@ import task.Task;
 public class Ui {
     private String line = "____________________________________________________________";
     private String welcomeMessage = "Hello! I'm Duke\n What can I do for you?";
-    private String goodbyeMessage = "Bye! Message me anytime!!";
     private Scanner sc = new Scanner(System.in);
 
     public void showLine() {
@@ -23,7 +22,7 @@ public class Ui {
     }
 
     public String showGoodbye() {
-        return this.goodbyeMessage;
+        return "Bye! Message me anytime!!";
     }
 
     public String showDone(Task task) {
@@ -53,6 +52,7 @@ public class Ui {
      * @return String containing information of tasks
      */
     public String displayTaskList(TaskList taskList) {
+        assert taskList != null;
         StringBuilder s = new StringBuilder("Here are your current tasks:\n");
         for (int i = 0; i < taskList.getTaskList().size(); i++) {
             s.append(i + 1).append(".").append(taskList.getTaskList().get(i)).append("\n");
