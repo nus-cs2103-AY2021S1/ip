@@ -25,6 +25,7 @@ public class Parser {
 
     public static Command parse(String command) throws DukeException {
 
+        assert command != null : "Please input a valid command";
         try {
             String[] cmd = command.split(" ", 2);
             String firstWord = cmd[0];
