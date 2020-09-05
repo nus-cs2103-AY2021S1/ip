@@ -114,6 +114,7 @@ public class UI {
      * @return Returns the String message to be concatenated with the display message.
      */
     public String displayListSize(int n) {
+        assert n > -1 : "Error in UI code";
         if (n == 0) {
             return ("Great job! You're left with no more tasks!");
         } else if (n == 1) {
