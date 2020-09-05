@@ -16,6 +16,7 @@ public class FindCommand implements Command {
      * @param keyword The key word to be searched for.
      */
     public FindCommand(String keyword) {
+        assert(keyword != null && keyword != "");
         this.keyword = keyword;
     }
 

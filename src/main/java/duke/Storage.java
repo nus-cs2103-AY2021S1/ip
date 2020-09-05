@@ -89,7 +89,7 @@ public class Storage {
     }
 
     private static Deadline loadDeadline(String description,
-                                         List<LocalDateTime> localDateTimeList) {
+            List<LocalDateTime> localDateTimeList) {
         LocalDate date = localDateTimeList.get(0).toLocalDate();
         LocalTime time = localDateTimeList.size() == 2
             ? localDateTimeList.get(1).toLocalTime()
@@ -98,7 +98,7 @@ public class Storage {
     }
 
     private static Event loadEvent(String description,
-                                   List<LocalDateTime> localDateTimeList) {
+            List<LocalDateTime> localDateTimeList) {
         LocalDate date = localDateTimeList.get(0).toLocalDate();
         LocalTime time = localDateTimeList.size() == 2
             ? localDateTimeList.get(1).toLocalTime()
