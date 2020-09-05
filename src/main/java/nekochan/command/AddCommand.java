@@ -16,6 +16,7 @@ import nekochan.util.Messages;
  */
 public class AddCommand extends Command {
 
+    private static final boolean IS_EXIT = false;
     private Task createdTask;
     private int remainingTaskCount;
 
@@ -62,19 +63,12 @@ public class AddCommand extends Command {
      * @throws IncompleteNekoCommandException if this {@code AddCommand} was not executed.
      */
     @Override
-    public String feedback() throws IncompleteNekoCommandException {
+    public Response feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_ADD_COMMAND);
         }
-        return Messages.MESSAGE_ADD + createdTask.toString() + "\n"
+        String responseMessage = Messages.MESSAGE_ADD + createdTask.toString() + "\n"
                 + Messages.getTotalTaskMessage(remainingTaskCount);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return new Response(IS_EXIT, responseMessage);
     }
 }

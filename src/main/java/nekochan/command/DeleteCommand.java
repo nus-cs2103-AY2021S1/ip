@@ -11,6 +11,7 @@ import nekochan.util.Messages;
  */
 public class DeleteCommand extends Command {
 
+    private static final boolean IS_EXIT = false;
     private int index;
     private Task deletedTask;
     private int remainingTaskCount;
@@ -45,19 +46,12 @@ public class DeleteCommand extends Command {
      * @throws IncompleteNekoCommandException if this {@code DeleteCommand} was not executed.
      */
     @Override
-    public String feedback() throws IncompleteNekoCommandException {
+    public Response feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_DELETE_COMMAND);
         }
-        return Messages.MESSAGE_DELETE + deletedTask.toString() + "\n"
+        String responseMessage = Messages.MESSAGE_DELETE + deletedTask.toString() + "\n"
                 + Messages.getTotalTaskMessage(remainingTaskCount);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return new Response(IS_EXIT, responseMessage);
     }
 }

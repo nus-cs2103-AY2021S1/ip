@@ -10,6 +10,8 @@ import nekochan.util.Messages;
  */
 public class DeleteAllCommand extends Command {
 
+    private static final boolean IS_EXIT = false;
+
     /**
      * Executes this {@code DeleteAllCommand}.
      * Deletes all contents in the specified {@code list}.
@@ -30,18 +32,11 @@ public class DeleteAllCommand extends Command {
      * @throws IncompleteNekoCommandException if this {@code DeleteAllCommand} was not executed.
      */
     @Override
-    public String feedback() throws IncompleteNekoCommandException {
+    public Response feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_DELETE_ALL_COMMAND);
         }
-        return Messages.MESSAGE_DELETE_ALL;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        String responseMessage = Messages.MESSAGE_DELETE_ALL;
+        return new Response(IS_EXIT, responseMessage);
     }
 }

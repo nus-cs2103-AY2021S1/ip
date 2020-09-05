@@ -32,6 +32,48 @@ public class Event extends Task {
         endDateTime = end;
     }
 
+    private static Event createAllDayEvent(String description, String dateTimeComponent) {
+        String start = dateTimeComponent.split(ALL_DAY_KEYWORD)[0].split(DURATION_DELIMITER)[0].trim();
+        LocalDateTime startDateTime = DateParser.parseStringToDateTime(start);
+        return new Event(description, startDateTime, startDateTime);
+    }
+
+    private static Event createEventUsingEndDateTime(String description, String dateTimeComponent)
+            throws NekoTaskCreationException {
+        try {
+            String start = dateTimeComponent.split(END_TIME_DELIMITER)[0].trim();
+            String end = dateTimeComponent.split(END_TIME_DELIMITER)[1].trim();
+            LocalDateTime startDateTime = DateParser.parseStringToDateTime(start);
+            LocalDateTime endDateTime = DateParser.parseStringToDateTime(end);
+            return new Event(description, startDateTime, endDateTime);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new NekoTaskCreationException(Messages.PARSE_EVENT_MISSING_END_DATETIME_ERROR);
+        }
+    }
+
+    private static Event createEventUsingDuration(String description, String dateTimeComponent)
+            throws NekoTaskCreationException {
+        try {
+            String start = dateTimeComponent.split(DURATION_DELIMITER)[0].trim();
+            int duration = DateParser.parseDurationToMinutes(dateTimeComponent.split(DURATION_DELIMITER)[1]);
+            LocalDateTime startDateTime = DateParser.parseStringToDateTime(start);
+            LocalDateTime endDateTime = startDateTime.plusMinutes(duration);
+
+            // Check if the endDateTime should be brought forward by 1 day to prevent over counting of days.
+            // E.g. 3 days after 1 Jan 00:00 should end at 3 Jan 23:59 instead of 4 Jan 00:00.
+            boolean isStartOfNewDay = endDateTime.isEqual(endDateTime.toLocalDate().atStartOfDay());
+            boolean isDateOnly = DateParser.isDateOnly(endDateTime);
+            boolean isDifferentFromStart = endDateTime.toLocalDate().isAfter(startDateTime.toLocalDate());
+            if (isDateOnly && isStartOfNewDay && isDifferentFromStart) {
+                endDateTime = endDateTime.minusDays(1);
+            }
+
+            return new Event(description, startDateTime, endDateTime);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new NekoTaskCreationException(Messages.PARSE_EVENT_MISSING_END_DATETIME_ERROR);
+        }
+    }
+
     /**
      * Returns an {@code Event} object with the specified {@code details}.
      *
@@ -96,48 +138,6 @@ public class Event extends Task {
                 DateParser.parseLocalDateTimeToString(startDateTime),
                 DateParser.parseLocalDateTimeToString(endDateTime),
                 super.description);
-    }
-
-    private static Event createAllDayEvent(String description, String dateTimeComponent) {
-        String start = dateTimeComponent.split(ALL_DAY_KEYWORD)[0].split(DURATION_DELIMITER)[0].trim();
-        LocalDateTime startDateTime = DateParser.parseStringToDateTime(start);
-        return new Event(description, startDateTime, startDateTime);
-    }
-
-    private static Event createEventUsingEndDateTime(String description, String dateTimeComponent)
-            throws NekoTaskCreationException {
-        try {
-            String start = dateTimeComponent.split(END_TIME_DELIMITER)[0].trim();
-            String end = dateTimeComponent.split(END_TIME_DELIMITER)[1].trim();
-            LocalDateTime startDateTime = DateParser.parseStringToDateTime(start);
-            LocalDateTime endDateTime = DateParser.parseStringToDateTime(end);
-            return new Event(description, startDateTime, endDateTime);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new NekoTaskCreationException(Messages.PARSE_EVENT_MISSING_END_DATETIME_ERROR);
-        }
-    }
-
-    private static Event createEventUsingDuration(String description, String dateTimeComponent)
-            throws NekoTaskCreationException {
-        try {
-            String start = dateTimeComponent.split(DURATION_DELIMITER)[0].trim();
-            int duration = DateParser.parseDurationToMinutes(dateTimeComponent.split(DURATION_DELIMITER)[1]);
-            LocalDateTime startDateTime = DateParser.parseStringToDateTime(start);
-            LocalDateTime endDateTime = startDateTime.plusMinutes(duration);
-
-            // Check if the endDateTime should be brought forward by 1 day to prevent over counting of days.
-            // E.g. 3 days after 1 Jan 00:00 should end at 3 Jan 23:59 instead of 4 Jan 00:00.
-            boolean isStartOfNewDay = endDateTime.isEqual(endDateTime.toLocalDate().atStartOfDay());
-            boolean isDateOnly = DateParser.isDateOnly(endDateTime);
-            boolean isDifferentFromStart = endDateTime.toLocalDate().isAfter(startDateTime.toLocalDate());
-            if (isDateOnly && isStartOfNewDay && isDifferentFromStart) {
-                endDateTime = endDateTime.minusDays(1);
-            }
-
-            return new Event(description, startDateTime, endDateTime);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new NekoTaskCreationException(Messages.PARSE_EVENT_MISSING_END_DATETIME_ERROR);
-        }
     }
 
     /**

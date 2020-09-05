@@ -10,6 +10,8 @@ import nekochan.util.Messages;
  */
 public class ExitCommand extends Command {
 
+    private static final boolean IS_EXIT = true;
+
     /**
      * Executes this {@code ExitCommand} by saving the specified {@code list} to file.
      *
@@ -26,17 +28,11 @@ public class ExitCommand extends Command {
      *
      * @throws IncompleteNekoCommandException if this {@code ExitCommand} was not executed.
      */
-    public String feedback() throws IncompleteNekoCommandException {
+    public Response feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_EXIT_COMMAND);
         }
-        return Messages.MESSAGE_EXIT;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public boolean isExit() {
-        return true;
+        String responseMessage = Messages.MESSAGE_EXIT;
+        return new Response(IS_EXIT, responseMessage);
     }
 }

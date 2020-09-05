@@ -16,6 +16,7 @@ import nekochan.util.Messages;
  */
 public class SearchCommand extends Command {
 
+    private static final boolean IS_EXIT = false;
     private String searchParameter;
     private List<Task> results;
 
@@ -51,25 +52,17 @@ public class SearchCommand extends Command {
      * @throws IncompleteNekoCommandException if this {@code DeleteCommand} was not executed.
      */
     @Override
-    public String feedback() throws IncompleteNekoCommandException {
+    public Response feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_SEARCH_COMMAND);
         }
-        String resultPrint = "";
+        String responseMessage = "";
         for (Task result : results) {
-            if (resultPrint.length() > 0) {
-                resultPrint = resultPrint.concat("\n");
+            if (responseMessage.length() > 0) {
+                responseMessage = responseMessage.concat("\n");
             }
-            resultPrint = resultPrint.concat(result.toString());
+            responseMessage = responseMessage.concat(result.toString());
         }
-        return resultPrint;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return new Response(IS_EXIT, responseMessage);
     }
 }

@@ -15,6 +15,7 @@ import nekochan.util.Messages;
  */
 public class ListCommand extends Command {
 
+    private static final boolean IS_EXIT = false;
     private List<Task> existingTasks;
 
     /**
@@ -38,28 +39,19 @@ public class ListCommand extends Command {
      * @throws IncompleteNekoCommandException if this {@code ListCommand} was not executed.
      */
     @Override
-    public String feedback() throws IncompleteNekoCommandException {
+    public Response feedback() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_LIST_COMMAND);
         }
-        String printout = "";
+        String responseMessage = "";
         if (existingTasks.size() == 0) {
-            printout = Messages.MESSAGE_EMPTY_LIST;
+            responseMessage = Messages.MESSAGE_EMPTY_LIST;
         } else {
-            printout = Messages.MESSAGE_LIST;
+            responseMessage = Messages.MESSAGE_LIST;
             for (int i = 0; i < existingTasks.size(); i++) {
-                printout += String.format("%d. %s\n", i + 1, existingTasks.get(i).toString());
+                responseMessage += String.format("%d. %s\n", i + 1, existingTasks.get(i).toString());
             }
         }
-        return printout;
+        return new Response(IS_EXIT, responseMessage);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
 }
