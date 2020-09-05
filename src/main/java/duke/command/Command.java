@@ -9,6 +9,7 @@ import duke.ui.Ui;
  * Handles all possible actions of the program, as given by the user input.
  */
 public abstract class Command {
+
     /**
      * Executes a specific command.
      *

@@ -37,7 +37,7 @@ public class FindCommand extends Command {
         if (taskList.isEmpty()) {
             return ui.emptyFind(input);
         } else {
-            return ui.showTaskList(taskList, "matching");
+            return ui.showTaskList(taskList, "matching ");
         }
     }
 }

@@ -20,7 +20,7 @@ public class UiTest {
      */
     @Test
     public void testGreeting() {
-        assertEquals("Hello, I'm Duke!\nWhat can I do for you?", ui.greetings());
+        assertEquals("Hello, I'm Duke!\nWhat can I do for you?", Ui.greetings());
     }
 
     /**
@@ -79,11 +79,18 @@ public class UiTest {
         tasks.add(toDo2);
         tasks.add(toDo3);
         TaskList taskList = new TaskList(tasks);
+        // Test 1
         String expectedString = "Here are the matching tasks in your list:\n"
-            + "   1.[T][\u2718] todo1\n"
-            + "   2.[T][\u2718] todo2\n"
-            + "   3.[T][\u2718] todo3";
-        assertEquals(expectedString, ui.showTaskList(taskList, "matching"));
+            + "1. [T][\u2718] todo1\n"
+            + "2. [T][\u2718] todo2\n"
+            + "3. [T][\u2718] todo3";
+        assertEquals(expectedString, ui.showTaskList(taskList, "matching "));
+        // Test 2
+        expectedString = "Here are the tasks in your list:\n"
+            + "1. [T][\u2718] todo1\n"
+            + "2. [T][\u2718] todo2\n"
+            + "3. [T][\u2718] todo3";
+        assertEquals(expectedString, ui.showTaskList(taskList, ""));
     }
 
     /**

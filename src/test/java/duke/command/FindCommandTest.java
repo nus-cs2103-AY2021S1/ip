@@ -28,7 +28,7 @@ public class FindCommandTest extends CommandTests {
             taskList.add(deadline);
             // Test 1
             TaskList newTaskList = taskList.matchAll("test");
-            assertEquals(ui.showTaskList(newTaskList, "matching"), fc.execute(taskList, ui, storage));
+            assertEquals(ui.showTaskList(newTaskList, "matching "), fc.execute(taskList, ui, storage));
             // Test 2
             fc = new FindCommand("TEST");
             assertEquals(ui.emptyFind("TEST"), fc.execute(taskList, ui, storage));

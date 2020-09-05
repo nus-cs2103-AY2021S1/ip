@@ -16,6 +16,6 @@ bin/
 # text files from testing
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
-text-ui-test/data/tasklist.csv
 
-data/tasklist.csv
+# storage file
+**/tasklist.csv
