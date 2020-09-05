@@ -93,13 +93,13 @@ public class TaskList {
      */
     public TaskList findTaskWithDescription(String key) {
         assert tasks != null : "the task list should not be null";
-        ArrayList<Task> list = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i = i + 1) {
-            if (tasks.get(i).getDescription().contains(key)) {
-                list.add(tasks.get(i));
-            }
-        }
-        return new TaskList(list);
+        return new TaskList(
+                new ArrayList<>(
+                        tasks.stream()
+                                .filter((task) -> task.getDescription().toUpperCase().contains(key.toUpperCase()))
+                                .collect(Collectors.toList())
+                )
+        );
     }
 
     /**
