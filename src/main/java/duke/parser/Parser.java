@@ -88,9 +88,11 @@ public class Parser {
         if (commandStr.isBlank()) {
             throw new WrongSyntaxException();
         }
+
         String[] parts = commandStr.trim().split(" ", 2);
         String commandName = parts[0].trim();
         boolean isSingleArgCommand = singleArgCommands.contains(commandName);
+
         if (parts.length < 2 && !isSingleArgCommand) {
             throw new WrongSyntaxException();
         }
@@ -99,12 +101,12 @@ public class Parser {
         }
         if (isSingleArgCommand) {
             return new String[]{ commandName, "" };
-        } else {
-            String commandArgs = parts[1].trim();
-            if (commandArgs.isBlank()) {
-                throw new EmptyBodyException();
-            }
-            return new String[]{ commandName, commandArgs };
         }
+
+        String commandArgs = parts[1].trim();
+        if (commandArgs.isBlank()) {
+            throw new EmptyBodyException();
+        }
+        return new String[]{ commandName, commandArgs };
     }
 }

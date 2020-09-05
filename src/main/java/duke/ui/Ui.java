@@ -11,10 +11,9 @@ import java.util.List;
 public class Ui {
 
     private final String LINE_SEPARATOR = "***********************";
-    private Scanner scanner;
 
     public Ui() {
-        this.scanner = new Scanner(System.in);
+
     }
 
     /**
@@ -26,15 +25,6 @@ public class Ui {
     public String formatMessage(String msg) {
         String result = String.format("%s \n %s \n %s", LINE_SEPARATOR, msg, LINE_SEPARATOR);
         return result;
-    }
-
-    public String greet() {
-        return formatMessage("Hi! I'm Duke :-) What can I do for you?");
-    }
-
-    public String readCommand() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
     }
 
     private String listAllTasks(List<NumberedTask> taskList) {
@@ -70,9 +60,5 @@ public class Ui {
     public String foundTasksToString(List<NumberedTask> taskList) {
         StringBuilder tasks = new StringBuilder("Here are the matching tasks in your list: \n");
         return tasks.append(listAllTasks(taskList)).toString();
-    }
-
-    public void stopReading() {
-        scanner.close();
     }
 }
