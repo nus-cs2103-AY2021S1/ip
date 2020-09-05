@@ -49,6 +49,9 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Initiates an instance of NekoChan for logic processing.
+     */
     public void start() {
         try {
             nekoChan = new NekoChan(true);
@@ -93,7 +96,7 @@ public class MainWindow extends AnchorPane {
 
     private void print(String response) {
         assert response.length() > 0 : "response message should not be empty";
-      
+
         dialogContainer.getChildren().add(DialogBox.getNekoDialog(response, botImage));
     }
 
