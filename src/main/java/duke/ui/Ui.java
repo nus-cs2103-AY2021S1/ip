@@ -25,6 +25,25 @@ public class Ui {
     }
 
     /**
+     * Prints out the list of commands.
+     *
+     * @param array Input array.
+     * @param header Header title.
+     * @return Numbered list of commands.
+     */
+    public String printNumberedArray(Object[] array, String header) {
+        int numOfCommands = array.length;
+        StringBuilder str1 = new StringBuilder();
+        str1.append(header).append("\n");
+        for (int i = 1; i < numOfCommands; i++) {
+            String s = String.format("%d. %s\n", i, array[i - 1]);
+            str1.append(s);
+        }
+        str1.append(String.format("%d. %s", numOfCommands, array[numOfCommands - 1]));
+        return str1.toString();
+    }
+
+    /**
      * Greets the user upon starting the program.
      */
     public static String greetings() {
@@ -83,14 +102,8 @@ public class Ui {
      * @param extra Extra word to add in, if any.
      */
     public String showTaskList(TaskList tasks, String extra) {
-        StringBuilder str1 = new StringBuilder();
-        str1.append(String.format("Here are the %s tasks in your list:\n", extra));
-        int size = tasks.size();
-        for (int i = 0; i < size - 1; i++) {
-            str1.append(String.format("   %d.%s\n", i + 1, tasks.get(i)));
-        }
-        str1.append(String.format("   %d.%s", size, tasks.get(size - 1)));
-        return str1.toString();
+        String header = String.format("Here are the %stasks in your list:", extra);
+        return printNumberedArray(tasks.getTasks().toArray(), header);
     }
 
     /**

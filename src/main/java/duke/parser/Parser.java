@@ -5,6 +5,7 @@ import duke.command.AddToDoCommand;
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ShowCommand;
 import duke.command.SimpleCommand;
 import duke.command.SimpleCommandType;
@@ -51,6 +52,8 @@ public class Parser {
             return new FindCommand(details);
         } else if (keyWord.equals("bye")) {
             return new ExitCommand();
+        } else if (keyWord.equals("help")) {
+            return new HelpCommand();
         } else {
             throw new UnknownCommandException();
         }
