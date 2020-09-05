@@ -2,23 +2,38 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
+/**
+ * An extension of the Task class with an additional field specifying the deadline of the task.
+ */
 public class Deadline extends Task {
 
+    /** The deadline of the task. */
     protected String by;
+    /** The deadline of the task parsed as a LocalDate. */
     protected LocalDate deadlineDate;
 
+    /**
+     * Constructs a new Deadline object.
+     * @param description {@inheritDoc}
+     * @param by The deadline of the task
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
         try {
             this.deadlineDate = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
-            //do nothing
+            // Do nothing, since there is no deterministic way to convert all possible
+            // strings into a LocalDate object meaningfully without adding more
+            // prohibitions to the user input.
         }
     }
 
+    /**
+     * Prints the deadline in the format "%B %d %Y", such as JANUARY 1 2000, if available.
+     * Otherwise, shows an error message.
+     */
     public void printTime() {
         try {
             System.out.println(this.deadlineDate.getMonth().toString()
