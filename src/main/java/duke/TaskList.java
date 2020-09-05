@@ -32,7 +32,7 @@ public class TaskList {
 
     private String formatTaskList(String initialList) {
         String listOfTasks = initialList;
-        
+
         for (int i = 0; i < this.tasks.size(); i++) {
             listOfTasks = listOfTasks + (i + 1) + ". " + this.tasks.get(i).toString()
                     + (i == this.tasks.size() - 1 ? "" : "\n");
