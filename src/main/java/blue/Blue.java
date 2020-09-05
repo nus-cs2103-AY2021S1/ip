@@ -45,7 +45,7 @@ public class Blue {
             this.storage = initialiseStorage(filePath);
             this.tasks = storage.getTasks();
         } catch (ReadFailedException ex) {
-            //            this.ui.printDukeException(ex);
+            // this.ui.printDukeException(ex);
             this.tasks = new Tasks();
         }
     }

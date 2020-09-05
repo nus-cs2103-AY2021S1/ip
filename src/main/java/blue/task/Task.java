@@ -116,7 +116,7 @@ public class Task {
      * @return the boolean.
      */
     public boolean containsDescription(String string) {
-        return description.contains(string);
+        return this.description.contains(string);
     }
 
     /**
@@ -133,7 +133,8 @@ public class Task {
      * @return the data.
      */
     public String getData() {
-        return String.format("%s_%s_%s", type.toString().charAt(0), isDone ? 1 : 0, description);
+        return String.format("%s_%s_%s", this.type.toString().charAt(0), this.isDone ? 1 : 0,
+                this.description);
     }
 
     /**
@@ -143,7 +144,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%S][%s] %s", type.toString().charAt(0), this.getStatusIcon(),
+        return String.format("[%S][%s] %s", this.type.toString().charAt(0), this.getStatusIcon(),
                 this.description);
     }
 
@@ -153,6 +154,6 @@ public class Task {
      * @return the status icon.
      */
     public String getStatusIcon() {
-        return (isDone ? TICK_ICON : CROSS_ICON); // return tick or cross symbols
+        return (this.isDone ? TICK_ICON : CROSS_ICON); // return tick or cross symbols
     }
 }
