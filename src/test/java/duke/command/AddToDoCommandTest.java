@@ -13,6 +13,9 @@ import duke.task.ToDo;
 
 public class AddToDoCommandTest extends CommandTests {
 
+    /**
+     * Tests adding of tasks.
+     */
     @Test
     public void testAddingOfTasks() {
         try {
@@ -31,12 +34,18 @@ public class AddToDoCommandTest extends CommandTests {
             fail();
         }
     }
+
+    /**
+     * Tests empty task details.
+     */
     @Test
     public void testEmptyTaskDetails() {
         String emptyTaskDetails = "";
+        String expectedMessage = "OOPS!!! The description of a todo cannot be empty.";
         AddToDoCommand cmd = new AddToDoCommand(emptyTaskDetails);
+        // Tests
         EmptyTaskException e = assertThrows(EmptyTaskException.class, () -> cmd.execute(taskList, ui, storage));
-        assertEquals("OOPS!!! The description of a todo cannot be empty.", e.getMessage());
+        assertEquals(expectedMessage, e.getMessage());
         assertTrue(taskList.isEmpty());
     }
 }

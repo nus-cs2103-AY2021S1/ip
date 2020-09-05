@@ -3,6 +3,7 @@ package duke.tasklist;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -14,6 +15,10 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 public class TaskListTest {
+
+    /**
+     * Tests all methods in task list.
+     */
     @Test
     public void testList() {
         TaskList taskList = new TaskList(new ArrayList<>());
@@ -31,22 +36,23 @@ public class TaskListTest {
         taskList.add(newTask4);
         taskList.add(newTask5);
 
+        // Basic methods
         assertFalse(taskList.isEmpty());
+        assertEquals(5, taskList.size());
         assertSame(newTask, taskList.get(0));
         assertTrue(taskList.checkIfValid(5));
         assertFalse(taskList.checkIfValid(10));
         assertFalse(taskList.checkIfValid(-2));
-        // Size
-        assertFalse(taskList.isEmpty());
-        assertEquals(5, taskList.size());
 
-        // Match function
+        // On match
         TaskList newList = taskList.matchAll("ple");
         assertSame(newTask, newList.get(0));
         assertSame(newTask2, newList.get(1));
 
         // Deletions
         taskList.delete(0);
+        assertNotSame(newTask, taskList.get(0));
+        assertSame(newTask2, taskList.get(0));
         assertNotEquals(5, taskList.size());
         assertEquals(4, taskList.size());
     }

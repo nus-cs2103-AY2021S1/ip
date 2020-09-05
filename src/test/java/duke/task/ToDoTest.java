@@ -10,6 +10,9 @@ public class ToDoTest {
 
     private final String description = "workout";
 
+    /**
+     * Tests basic methods in todo.
+     */
     @Test
     public void testWithDefault() {
         ToDo newToDo = new ToDo(description);
@@ -22,12 +25,16 @@ public class ToDoTest {
         assertEquals(description, newToDo.getDescription());
         assertEquals(String.format("[T][\u2718] %s", description), newToDo.toString());
 
-        // Mark as done
+        // Check done
         newToDo.markAsDone();
         assertTrue(newToDo.isDone());
         assertEquals("Done", newToDo.getStatus());
         assertEquals(String.format("[T][\u2713] %s", description), newToDo.toString());
     }
+
+    /**
+     * Tests both constructors.
+     */
     @Test
     public void testConstructor() {
         ToDo newTodo = new ToDo(description, false);
@@ -36,6 +43,9 @@ public class ToDoTest {
         assertTrue(newTodo.isDone());
     }
 
+    /**
+     * Tests match method.
+     */
     @Test
     public void testMatch() {
         String description1 = "man";

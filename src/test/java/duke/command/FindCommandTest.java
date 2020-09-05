@@ -12,6 +12,10 @@ import duke.task.ToDo;
 import duke.tasklist.TaskList;
 
 public class FindCommandTest extends CommandTests {
+
+    /**
+     * Tests the find command with 2 different query words.
+     */
     @Test
     public void testFindMethod() {
         try {
@@ -33,6 +37,10 @@ public class FindCommandTest extends CommandTests {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Tests find command with empty query word.
+     */
     @Test
     public void testEmptyFind() {
         FindCommand fc = new FindCommand("");

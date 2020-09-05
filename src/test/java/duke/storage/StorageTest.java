@@ -17,6 +17,9 @@ public class StorageTest {
 
     private final Storage storage = new Storage();
 
+    /**
+     * Tests updating of tasks in storage.
+     */
     @Test
     public void testTaskUpdate() {
         try {
@@ -27,8 +30,11 @@ public class StorageTest {
             taskList.add(task1);
             taskList.add(task2);
             taskList.add(task3);
+            // Update
             storage.update(taskList);
+            // After updating
             ArrayList<Task> tasks = storage.getTasks();
+            // Tests
             assertEquals(3, tasks.size());
             assertEquals(task1.getDescription(), tasks.get(0).getDescription());
             assertEquals(task2.getDescription(), tasks.get(1).getDescription());
@@ -38,9 +44,14 @@ public class StorageTest {
                 assertEquals("-", task.getTime());
             }
         } catch (FileUpdateFailException e) {
+            System.out.println(e.getMessage());
             fail();
         }
     }
+
+    /**
+     * Tests updating of empty tasks in storage.
+     */
     @Test
     public void testEmptyTasks() {
         TaskList emptyTaskList = new TaskList(new ArrayList<>());
@@ -49,6 +60,7 @@ public class StorageTest {
             ArrayList<Task> emptyTasks = storage.getTasks();
             assertTrue(emptyTasks.isEmpty());
         } catch (FileUpdateFailException e) {
+            System.out.println(e.getMessage());
             fail();
         }
     }

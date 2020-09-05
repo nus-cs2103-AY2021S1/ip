@@ -9,6 +9,7 @@ public class ExitCommandTest extends CommandTests {
     @Test
     public void test() {
         ExitCommand cmd = new ExitCommand();
+        // Tests
         assertTrue(cmd.isExit());
         assertEquals(ui.goodbye(), cmd.execute(taskList, ui, storage));
     }

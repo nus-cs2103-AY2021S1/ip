@@ -15,8 +15,9 @@ import duke.task.ComplexTask;
 import duke.task.TaskType;
 
 public class AddComplexTaskCommandTests extends CommandTests {
+
     /**
-     * Test for adding of simple tasks.
+     * Tests for adding of simple tasks.
      */
     @Test
     public void testAddingStandard() {
@@ -25,7 +26,7 @@ public class AddComplexTaskCommandTests extends CommandTests {
             ComplexTask complexTask2 = new ComplexTask("test2", TaskType.DEADLINE, "2pm");
             AddComplexTaskCommand cmd1 = new AddComplexTaskCommand("test /at 2-4pm", TaskType.EVENT);
             AddComplexTaskCommand cmd2 = new AddComplexTaskCommand("test2 /by 2pm", TaskType.DEADLINE);
-
+            // Tests
             assertEquals(ui.addTask(complexTask1, 1), cmd1.execute(taskList, ui, storage));
             assertEquals(1, storage.getTasks().size());
             assertEquals(ui.addTask(complexTask2, 2), cmd2.execute(taskList, ui, storage));
@@ -36,7 +37,7 @@ public class AddComplexTaskCommandTests extends CommandTests {
     }
 
     /**
-     * Test for invalid complex task formats.
+     * Tests for invalid complex task formats.
      */
     @Test
     public void testInvalidFormat() {
@@ -44,7 +45,7 @@ public class AddComplexTaskCommandTests extends CommandTests {
         AddComplexTaskCommand cmd2 = new AddComplexTaskCommand("read /at 2-4pm", TaskType.DEADLINE);
         AddComplexTaskCommand cmd3 = new AddComplexTaskCommand("read/at 2-4pm", TaskType.EVENT);
         AddComplexTaskCommand cmd4 = new AddComplexTaskCommand("read/at2-4pm", TaskType.EVENT);
-
+        // Tests
         assertThrows(InvalidEventException.class, () -> cmd1.execute(taskList, ui, storage));
         assertThrows(InvalidDeadlineException.class, () -> cmd2.execute(taskList, ui, storage));
         assertThrows(InvalidEventException.class, () -> cmd3.execute(taskList, ui, storage));
@@ -53,14 +54,14 @@ public class AddComplexTaskCommandTests extends CommandTests {
     }
 
     /**
-     * Test for blank descriptions.
+     * Tests for blank descriptions.
      */
     @Test
     public void testBlankDescription() {
         AddComplexTaskCommand cmd1 = new AddComplexTaskCommand("", TaskType.EVENT);
         AddComplexTaskCommand cmd2 = new AddComplexTaskCommand("/at 2-4pm", TaskType.EVENT);
         AddComplexTaskCommand cmd3 = new AddComplexTaskCommand("/by 2-4pm", TaskType.DEADLINE);
-
+        // Tests
         assertThrows(InvalidEventException.class, () -> cmd1.execute(taskList, ui, storage));
         assertThrows(InvalidEventException.class, () -> cmd2.execute(taskList, ui, storage));
         assertThrows(InvalidDeadlineException.class, () -> cmd3.execute(taskList, ui, storage));
@@ -68,7 +69,7 @@ public class AddComplexTaskCommandTests extends CommandTests {
     }
 
     /**
-     * Test for empty time in description.
+     * Tests for empty time in description.
      */
     @Test
     public void testEmptyTime() {
@@ -78,7 +79,7 @@ public class AddComplexTaskCommandTests extends CommandTests {
         AddComplexTaskCommand cmd4 = new AddComplexTaskCommand("meeting /by ", TaskType.DEADLINE);
         String eventMsg = "OOPS!!! Deadline / time of event is not specified";
         String deadlineMsg = "OOPS!!! Deadline / time of deadline is not specified";
-
+        // Tests
         EmptyTimeException e = assertThrows(EmptyTimeException.class, () -> cmd1.execute(taskList, ui, storage));
         assertEquals(eventMsg, e.getMessage());
         EmptyTimeException e1 = assertThrows(EmptyTimeException.class, () -> cmd2.execute(taskList, ui, storage));
@@ -104,7 +105,7 @@ public class AddComplexTaskCommandTests extends CommandTests {
             AddComplexTaskCommand cmd3 = new AddComplexTaskCommand("test2 /by 2020-08-23T10:15", TaskType.DEADLINE);
             AddComplexTaskCommand cmd4 = new AddComplexTaskCommand("test2 /by 2020-08-23 10:15:33", TaskType.DEADLINE);
             AddComplexTaskCommand cmd5 = new AddComplexTaskCommand("test2 /by 22:15", TaskType.DEADLINE);
-            // Test
+            // Tests
             assertEquals(ui.addTask(ct1, 1), cmd1.execute(taskList, ui, storage));
             assertEquals(1, storage.getTasks().size());
             assertEquals(ui.addTask(ct2, 2), cmd2.execute(taskList, ui, storage));
