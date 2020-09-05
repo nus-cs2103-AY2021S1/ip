@@ -29,9 +29,10 @@ public class AddCommand extends Command {
      * @param ui The Ui which will generate outputs significant to the user.
      * @param storage The Storage which will record the new task into the location specified in its path.
      * @throws DukeException Relays exception possibly thrown by storage when storing new task.
+     * @return The output to be displayed to the user.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.append(newTask);
         tasks.add(newTask);
 
@@ -39,7 +40,7 @@ public class AddCommand extends Command {
                 + "\t   " + newTask + "\n"
                 + "\t Now you have " + tasks.size() + " tasks in the list.\n";
 
-        ui.showMessage(output);
+        return output;
     }
 
     /**

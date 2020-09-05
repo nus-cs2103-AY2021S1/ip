@@ -29,18 +29,21 @@ public class DoneCommand extends Command {
      * @param ui The Ui which will generate outputs significant to the user.
      * @param storage The Storage which will update the task at the location specified in its path.
      * @throws DukeException Thrown when task index invalid or relayed from Storage when updating task.
+     * @return The output to be displayed to the user.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.taskIndex < 0 || this.taskIndex > tasks.size() - 1) {
             throw new DukeException("\tThere is no such task.");
         }
         Task toChange = tasks.get(this.taskIndex);
         toChange.markAsDone();
         storage.overwrite(tasks);
+
         String output = "\t Nice! I've marked this task as done:\n"
                 + "\t  " + toChange + "\n";
-        ui.showMessage(output);
+
+        return output;
     }
 
     /**

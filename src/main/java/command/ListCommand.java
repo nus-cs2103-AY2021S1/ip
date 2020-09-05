@@ -12,15 +12,15 @@ public class ListCommand extends Command {
 
     /**
      * Lists the tasks in the TaskList.
-     *
-     * @param tasks The TaskList which contains all the tasks.
+     *  @param tasks The TaskList which contains all the tasks.
      * @param ui The Ui which will generate outputs significant to the user.
      * @param storage The Storage which will record any changes into the file in its path.
+     * @return The output to be displayed to the user.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.size() == 0) {
-            ui.showMessage("\tYay! You have nothing to do at the moment! :-)\n");
+            return "\tYay! You have nothing to do at the moment! :-)\n";
         } else {
             StringBuilder output = new StringBuilder("\t Here are the tasks in your list:\n");
 
@@ -29,7 +29,7 @@ public class ListCommand extends Command {
                 output.append("\t ").append(i).append(".").append(theTask).append("\n");
             }
 
-            ui.showMessage(output.toString());
+            return output.toString();
         }
     }
 

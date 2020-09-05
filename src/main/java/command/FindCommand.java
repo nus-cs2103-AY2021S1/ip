@@ -23,13 +23,13 @@ public class FindCommand extends Command {
 
     /**
      * Finds the tasks which have the specified keyword in their description and then proceeds to list them.
-     *
-     * @param tasks The TaskList which contains all the tasks.
+     *  @param tasks The TaskList which contains all the tasks.
      * @param ui The Ui which will generate outputs significant to the user.
      * @param storage The Storage which will record any changes into the file in its path.
+     * @return The output to be displayed to the user.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
         StringBuilder output = new StringBuilder("\t Here are the tasks containing the keyword ")
                 .append(String.format("\"%s\"", keyword)).append(":\n");
@@ -49,10 +49,10 @@ public class FindCommand extends Command {
         }
 
         if (isUnavailable) {
-            ui.showMessage("\tThere are no tasks containing the keyword "
-                    + String.format("\"%s\"", keyword) + "!\n");
+            return "\tThere are no tasks containing the keyword "
+                    + String.format("\"%s\"", keyword) + "!\n";
         } else {
-            ui.showMessage(output.toString());
+            return output.toString();
         }
     }
 
