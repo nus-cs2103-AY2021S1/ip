@@ -18,6 +18,12 @@ import duke.command.UnknownCommand;
  * Encapsulates a parser that breaks down user inputs to generate commands to be executed by Dude.
  */
 public class Parser {
+    private final static String FIND_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: find [keyword]";
+    private final static String DONE_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: done [task number]";
+    private final static String TODO_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: todo [description]";
+    private final static String DEADLINE_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: deadline [description] /by [date]";
+    private final static String EVENT_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: event [description] /at [date]";
+    private final static String DELETE_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: delete [task number]";
     /**
      * Parses user inputs to generate commands.
      * @param input Input by user.
@@ -32,58 +38,50 @@ public class Parser {
             return new ListCommand();
         case ("find"):
             if (inputBreakdown.length < 2) {
-                throw new DukeException("Error! Note the syntax: find [keyword]");
-            } else {
-                String keyword = inputBreakdown[1];
-                return new FindCommand(keyword);
+                throw new DukeException(FIND_SYNTAX_ERROR_MESSAGE);
             }
+            String keyword = inputBreakdown[1];
+            return new FindCommand(keyword);
         case ("done"):
             if (inputBreakdown.length < 2) {
-                throw new DukeException("Error! Note the syntax: done [task number]");
-            } else {
-                String taskNumber = inputBreakdown[1];
-                return new DoneCommand(taskNumber);
+                throw new DukeException(DONE_SYNTAX_ERROR_MESSAGE);
             }
+            String doneTaskNumber = inputBreakdown[1];
+            return new DoneCommand(doneTaskNumber);
         case ("todo"):
             if (inputBreakdown.length < 2) {
-                throw new DukeException("Error! Note the syntax: todo [description]");
-            } else {
-                String description = inputBreakdown[1];
-                return new TodoCommand(description);
+                throw new DukeException(TODO_SYNTAX_ERROR_MESSAGE);
             }
+            String todoDescription = inputBreakdown[1];
+            return new TodoCommand(todoDescription);
         case ("deadline"):
             if (inputBreakdown.length < 2) {
-                throw new DukeException("Error! Note the syntax: deadline [description] /by [date]");
-            } else {
-                String[] deadlineBreakdown = inputBreakdown[1].split(" /by ", 2);
-                if (deadlineBreakdown.length < 2) {
-                    throw new DukeException("Error! Note the syntax: deadline [description] /by [date]");
-                } else {
-                    String description = deadlineBreakdown[0];
-                    String by = deadlineBreakdown[1];
-                    return new DeadlineCommand(description, parseDateTime(by));
-                }
+                throw new DukeException(DEADLINE_SYNTAX_ERROR_MESSAGE);
             }
+            String[] deadlineBreakdown = inputBreakdown[1].split(" /by ", 2);
+            if (deadlineBreakdown.length < 2) {
+                throw new DukeException(DEADLINE_SYNTAX_ERROR_MESSAGE);
+            }
+            String deadlineDescription = deadlineBreakdown[0];
+            String by = deadlineBreakdown[1];
+            return new DeadlineCommand(deadlineDescription, parseDateTime(by));
         case ("event"):
             if (inputBreakdown.length < 2) {
-                throw new DukeException("Error! Note the syntax: event [description] /at [date]");
-            } else {
-                String[] eventBreakdown = inputBreakdown[1].split(" /at ", 2);
-                if (eventBreakdown.length < 2) {
-                    throw new DukeException("Error! Note the syntax: event [description] /at [date]");
-                } else {
-                    String description = eventBreakdown[0];
-                    String at = eventBreakdown[1];
-                    return new EventCommand(description, parseDateTime(at));
-                }
+                throw new DukeException(EVENT_SYNTAX_ERROR_MESSAGE);
             }
+            String[] eventBreakdown = inputBreakdown[1].split(" /at ", 2);
+            if (eventBreakdown.length < 2) {
+                throw new DukeException(EVENT_SYNTAX_ERROR_MESSAGE);
+            }
+            String eventDescription = eventBreakdown[0];
+            String at = eventBreakdown[1];
+            return new EventCommand(eventDescription, parseDateTime(at));
         case ("delete"):
             if (inputBreakdown.length < 2) {
-                throw new DukeException("Error! Note the syntax: delete [task number]");
-            } else {
-                String taskNumber = inputBreakdown[1];
-                return new DeleteCommand(taskNumber);
+                throw new DukeException(DELETE_SYNTAX_ERROR_MESSAGE);
             }
+            String deleteTaskNumber = inputBreakdown[1];
+            return new DeleteCommand(deleteTaskNumber);
         case ("bye"):
             return new ExitCommand();
         default:
