@@ -2,7 +2,7 @@
 
 ## Preliminary Design
 
-The task is to build an extensible terminal chat application named Duke. Having some experience with Android, FullStack web development, and system design, I decided to glance over the future specs and enhancements and read up a bit about JavaFX FXML (the GUI library) before starting. This gives me a feel of the scope and scale of project Duke so I can choose an architectural pattern to roll with. For now, the MVVM (Model-View-ViewModel) pattern seems promising, along with a DAO (Data Access Object) to encapsulate communication with the data layer.
+The task is to build an extensible terminal chat application named duke.runner.Runner. Having some experience with Android, FullStack web development, and system design, I decided to glance over the future specs and enhancements and read up a bit about JavaFX FXML (the GUI library) before starting. This gives me a feel of the scope and scale of project duke.runner.Runner so I can choose an architectural pattern to roll with. For now, the MVVM (Model-View-ViewModel) pattern seems promising, along with a DAO (Data Access Object) to encapsulate communication with the data layer.
 
 Since I like microservice architecture and modular applications a lot, my goal is to make the transition from CLI to GUI or file-based storage to DB-based storage as simple as "plug-n-play". Perhaps my design may evolve or change over the next few weeks. We'll see.
 
