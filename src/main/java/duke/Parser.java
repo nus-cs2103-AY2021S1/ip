@@ -53,11 +53,11 @@ public class Parser {
             case FIND:
                 return parseFind(command[1].trim());
             default:
+                throw new DukeInputNotRecognizedException(" ERROR... INPUT NOT RECOGNIZED. \n PLEASE TRY AGAIN. ");
             }
         } else {
             throw new DukeInputNotRecognizedException(" ERROR... INPUT NOT RECOGNIZED. \n PLEASE TRY AGAIN. ");
         }
-        return null;
     }
 
     /**
