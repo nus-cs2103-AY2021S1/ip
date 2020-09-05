@@ -7,45 +7,46 @@
 
 public class Listing {
 
-  String title;
-  Boolean isDone = false;
+    String title;
+    Boolean isDone = false;
 
-  public Listing(String s) {
-    this.title = s;
-  }
-
-  public void complete() {
-    isDone = true;
-  }
-
-  /**
-   * @return a String checkbox that represents if the listing is done or not
-   */
-  public String doneness() {
-    if (isDone) {
-      return "[Y]";
-    } else {
-      return "[N]";
+    public Listing(String s) {
+        this.title = s;
     }
-  }
 
-  /**
-   * Sets the isDone boolean based on the input String s.
-   * @param s which can be either 0 or 1
-   */
-  public void setDoneness(String s) {
-    if (s.equals("1")) {
-      this.isDone = true;
-    } else {
-      this.isDone = false;
+    public void complete() {
+        isDone = true;
     }
-  }
 
-  public String[] toArray() {
-    return new String[2];
-  }
+    /**
+     * @return a String checkbox that represents if the listing is done or not
+     */
+    public String doneness() {
+        if (isDone) {
+            return "[Y]";
+        } else {
+            return "[N]";
+        }
+    }
 
-  public String toString() {
-    return this.title;
-  }
+    /**
+     * Sets the isDone boolean based on the input String s.
+     *
+     * @param s which can be either 0 or 1
+     */
+    public void setDoneness(String s) {
+        if (s.equals("1")) {
+            this.isDone = true;
+        } else {
+            this.isDone = false;
+        }
+    }
+
+    public String[] toArray() {
+        return new String[2];
+    }
+
+    public String toString() {
+        return this.title;
+    }
 }

@@ -1,4 +1,5 @@
 import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
+
 /**
  * A personalized chat bot that is designed to help users manage their schedule. There are three
  * different types of listings - ToDos, Deadlines and Events.
@@ -22,39 +24,39 @@ import javafx.scene.image.Image;
 
 public class Duke extends Application {
 
-  private Image user = new Image(this.getClass().getResourceAsStream("/images/Poring.jpg"));
-  private Image duke = new Image(this.getClass().getResourceAsStream("/images/Poro.jpg"));
-  private Bot bot = new Bot();
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/Poring.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Poro.jpg"));
+    private Bot bot = new Bot();
 
-  @Override
-  public void start(Stage stage) {
-    try {
-      FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
-      AnchorPane ap = fxmlLoader.load();
-      Scene scene = new Scene(ap);
-      stage.setScene(scene);
-      fxmlLoader.<MainWindow>getController().setDuke(this);
-      stage.show();
-    } catch (IOException e) {
-      e.printStackTrace();
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(this);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-  }
 
-  /**
-   * Iteration 3: Creates two dialog boxes, one echoing user input and the other containing Duke's
-   * reply and then appends them to the dialog container. Clears the user input after processing.
-   * Dialog boxes are now alternating
-   */
+    /**
+     * Iteration 3: Creates two dialog boxes, one echoing user input and the other containing Duke's
+     * reply and then appends them to the dialog container. Clears the user input after processing.
+     * Dialog boxes are now alternating
+     */
 
-  /**
-   * You should have your own function to generate a response to user input. Replace this stub with
-   * your completed method.
-   */
-  String getResponse(String input) { //where to get response
-    String output = bot.serve(input);
+    /**
+     * You should have your own function to generate a response to user input. Replace this stub with
+     * your completed method.
+     */
+    String getResponse(String input) { //where to get response
+        String output = bot.serve(input);
 
-    return "Duke heard: " + output;
-  }
+        return "Duke heard: " + output;
+    }
 
 //  public static void main(String[] args) {
 //
