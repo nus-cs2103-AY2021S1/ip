@@ -10,14 +10,14 @@ public class ByeCommand extends Command {
 
     /**
      * Exits the program
+     *
      *  @param tasks The TaskList manipulated by the program
      * @param storage The Storage for recording tasks passed in by user.
      * @return The output to be displayed to the user.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        String byeMessage = "\t Bye. Hope to see you again soon!\n";
-        return byeMessage;
+        return "\t Bye. Hope to see you again soon!\n";
     }
 
     /**

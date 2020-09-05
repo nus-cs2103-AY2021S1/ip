@@ -35,6 +35,7 @@ public class DeleteCommand extends Command {
             throw new DukeException("\tThere is no such task.");
         }
         Task toDelete = tasks.get(this.taskIndex);
+        assert toDelete != null : "toDelete should not be null";
         tasks.remove(this.taskIndex);
         storage.overwrite(tasks);
 

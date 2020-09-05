@@ -53,8 +53,9 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            Command c = Parser.parse(input);
-            return c.execute(tasks, storage);
+            Command command = Parser.parse(input);
+            assert command != null : "command should not be null";
+            return command.execute(tasks, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -70,9 +71,10 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                ui.showMessage(c.execute(tasks, storage));
-                isExit = c.isExit();
+                Command command = Parser.parse(fullCommand);
+                assert command != null : "command should not be null";
+                ui.showMessage(command.execute(tasks, storage));
+                isExit = command.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {

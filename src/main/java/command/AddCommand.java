@@ -31,14 +31,12 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        storage.append(newTask);
-        tasks.add(newTask);
+        storage.append(this.newTask);
+        tasks.add(this.newTask);
 
-        String output = "\t Got it. I've added this task:\n"
+        return "\t Got it. I've added this task:\n"
                 + "\t   " + newTask + "\n"
                 + "\t Now you have " + tasks.size() + " tasks in the list.\n";
-
-        return output;
     }
 
     /**

@@ -11,12 +11,14 @@ public class ListCommand extends Command {
 
     /**
      * Lists the tasks in the TaskList.
+     *
      *  @param tasks The TaskList which contains all the tasks.
      * @param storage The Storage which will record any changes into the file in its path.
      * @return The output to be displayed to the user.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
+        assert tasks.size() >= 0 : "tasks should not have negative size";
         if (tasks.size() == 0) {
             return "\tYay! You have nothing to do at the moment! :-)\n";
         } else {
@@ -24,6 +26,7 @@ public class ListCommand extends Command {
 
             for (int i = 1; i <= tasks.size(); i++) {
                 Task theTask = tasks.get(i - 1);
+                assert theTask != null : "theTask should not be null";
                 output.append("\t ").append(i).append(".").append(theTask).append("\n");
             }
 

@@ -8,28 +8,28 @@ import java.time.LocalDateTime;
  */
 public class Event extends Task {
 
-    private LocalDateTime at;
+    private LocalDateTime eventTime;
 
     /**
      * Creates an Event instance containing a description and a Date.
      *
      * @param description Description of Event to be done.
-     * @param at Date on which the event will be happening.
+     * @param eventTime Date on which the event will be happening.
      */
-    public Event(String description, LocalDateTime at) {
-        this(description, at, false);
+    public Event(String description, LocalDateTime eventTime) {
+        this(description, eventTime, false);
     }
 
     /**
      * Creates an Event instance containing a description and a Date.
      *
      * @param description Description of Event to be done.
-     * @param at Date on which the event will be happening.
+     * @param eventTime Date on which the event will be happening.
      * @param isDone True if the Event is already done otherwise false.
      */
-    public Event(String description, LocalDateTime at, boolean isDone) {
+    public Event(String description, LocalDateTime eventTime, boolean isDone) {
         super(description, isDone);
-        this.at = at;
+        this.eventTime = eventTime;
     }
 
     /**
@@ -38,8 +38,8 @@ public class Event extends Task {
      * @return String format of the Event for saving in Storage.
      */
     @Override
-    public String saveFormat() {
-        return "E" + "~" + super.saveFormat() + "~" + this.at;
+    public String getSavingFormat() {
+        return "E" + "~" + super.getSavingFormat() + "~" + this.eventTime;
     }
 
     /**
@@ -49,7 +49,8 @@ public class Event extends Task {
      * @return True if the Event occurred on the specified date otherwise false.
      */
     public boolean hasSameDate(LocalDate theDate) {
-        return at.toLocalDate().equals(theDate);
+        assert theDate != null : "theDate should not be null";
+        return eventTime.toLocalDate().equals(theDate);
     }
 
     /**
@@ -59,6 +60,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(this.DATE_FORMAT) + ")";
+        return "[E]" + super.toString() + " (at: " + eventTime.format(DATE_FORMAT) + ")";
     }
 }

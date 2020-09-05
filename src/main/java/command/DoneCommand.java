@@ -35,13 +35,12 @@ public class DoneCommand extends Command {
             throw new DukeException("\tThere is no such task.");
         }
         Task toChange = tasks.get(this.taskIndex);
+        assert toChange != null : "toChange should not be null";
         toChange.markAsDone();
         storage.overwrite(tasks);
 
-        String output = "\t Nice! I've marked this task as done:\n"
+        return "\t Nice! I've marked this task as done:\n"
                 + "\t  " + toChange + "\n";
-
-        return output;
     }
 
     /**

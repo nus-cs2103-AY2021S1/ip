@@ -32,8 +32,8 @@ public class Todo extends Task {
      * @return String format of the Todo for saving in Storage.
      */
     @Override
-    public String saveFormat() {
-        return "T" + "~" + super.saveFormat();
+    public String getSavingFormat() {
+        return "T" + "~" + super.getSavingFormat();
     }
 
     /**

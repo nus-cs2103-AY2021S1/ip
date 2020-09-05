@@ -22,6 +22,7 @@ public class FindCommand extends Command {
 
     /**
      * Finds the tasks which have the specified keyword in their description and then proceeds to list them.
+     *
      *  @param tasks The TaskList which contains all the tasks.
      * @param storage The Storage which will record any changes into the file in its path.
      * @return The output to be displayed to the user.
@@ -37,6 +38,7 @@ public class FindCommand extends Command {
         Task task;
         for (int i = 0; i < tasks.size(); i++) {
             task = tasks.get(i);
+            assert task != null : "toChange should not be null";
             if (task.hasKeyword(keyword)) {
                 if (isUnavailable) {
                     isUnavailable = false;

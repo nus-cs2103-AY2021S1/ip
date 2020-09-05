@@ -69,7 +69,6 @@ public class Parser {
             if (input.length() == 4 || input.substring(5).isBlank()) {
                 throw new DukeException("\tNo keyword specified.");
             }
-
             return new FindCommand(input.substring(5).trim());
         } else if (input.startsWith("tasks on")) {
             if (input.length() == 8 || input.substring(9).isBlank()) {
@@ -83,7 +82,6 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new DukeException("\tDate should be in format dd/mm/yyyy");
             }
-
             return new TasksOnCommand(date);
         } else if (!input.isBlank()) {
             Task newTask;
