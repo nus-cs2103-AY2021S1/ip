@@ -37,9 +37,9 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
-            int num = Integer.parseInt(this.input);
-            Task curr = taskList.deleteTask(num);
-            storage.deleteTask(num);
+            int taskID = Integer.parseInt(this.input);
+            Task curr = taskList.deleteTask(taskID); // throws IndexOutOfBoundsException if taskID <= 0
+            storage.deleteTask(taskID);
             String numTasks = "Now you have " + taskList.size() + " tasks in the list.\n";
             return ui.replyDelete(String.format("%s\n%s", curr.toString(), numTasks));
         } catch (IndexOutOfBoundsException e) {

@@ -39,9 +39,9 @@ public class Deadline extends Task {
     public Deadline(String description, String by) throws DukeException {
         super(description);
         try {
-            String[] parts = by.split(" ", 2);
-            this.dateBy = LocalDate.parse(parts[0]);
-            this.timeBy = LocalTime.parse(parts[1]);
+            String[] dateTime = by.split(" ", 2);
+            this.dateBy = LocalDate.parse(dateTime[0]);
+            this.timeBy = LocalTime.parse(dateTime[1]);
         } catch (DateTimeParseException e) {
             throw new DukeException("Please input date and time in correct format:"
                     + " 'yyyy-MM-dd HH:MM' (24-hour time format).");

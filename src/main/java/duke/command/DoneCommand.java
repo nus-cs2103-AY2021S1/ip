@@ -38,7 +38,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             int taskID = Integer.parseInt(this.input);
-            Task curr = taskList.getTask(taskID); //
+            Task curr = taskList.getTask(taskID); // throws IndexOutOfBoundsException if taskID is <= 0
             curr.markAsDone();
             storage.updateTask(taskID, curr);
             return ui.replyDone(curr.toString());

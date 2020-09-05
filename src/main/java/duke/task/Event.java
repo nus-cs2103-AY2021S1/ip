@@ -39,9 +39,9 @@ public class Event extends Task {
     public Event(String description, String at) throws DukeException {
         super(description);
         try {
-            String[] parts = at.split(" ", 2);
-            this.dateBy = LocalDate.parse(parts[0]);
-            this.timeBy = LocalTime.parse(parts[1]);
+            String[] dateTime = at.split(" ", 2);
+            this.dateBy = LocalDate.parse(dateTime[0]);
+            this.timeBy = LocalTime.parse(dateTime[1]);
         } catch (DateTimeParseException e) {
             throw new DukeException("Please input date and time in correct format:"
                     + " 'yyyy-MM-dd HH:MM' (24-hour time format).");
