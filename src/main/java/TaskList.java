@@ -36,10 +36,12 @@ public class TaskList {
      *
      */
 
-    public void listTask() {
+    public String listTask() {
+        StringBuilder outputString = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(String.format("%d. %s", i + 1, taskList.get(i).toString()));
+            outputString.append(String.format("%d. %s\n", i + 1, taskList.get(i).toString()));
         }
+        return outputString.toString();
     }
 
     /**
@@ -48,12 +50,15 @@ public class TaskList {
      * @param newTask The task to be added into taskList
      * @param print If true, prints out the details of the task being added into the list
      */
-    public void addTask(Task newTask, Boolean print) {
+    public String addTask(Task newTask, Boolean print) {
         taskList.add(newTask);
+        String outputString = "";
         if (print) {
-            newTask.printAddTask();
-            printNumberOfTask(taskList.size());
+            outputString += newTask.printAddTask();
+            outputString += printNumberOfTask(taskList.size());
         }
+
+        return outputString;
     }
 
     /**
@@ -61,8 +66,9 @@ public class TaskList {
      *
      * @param description of the task
      */
-    public void findTask(String description) {
+    public String findTask(String description) {
         ArrayList<Task> taskMatchingDescription = new ArrayList<>();
+        StringBuilder outputString = new StringBuilder();
 
         for (Task task : taskList) {
             if (task.fitsTask(description)) {
@@ -71,8 +77,10 @@ public class TaskList {
         }
 
         for (int i = 0; i < taskMatchingDescription.size(); i++) {
-            System.out.println(String.format("%d. %s", i + 1, taskMatchingDescription.get(i).toString()));
+            outputString.append(String.format("%d. %s\n", i + 1, taskMatchingDescription.get(i).toString()));
         }
+
+        return outputString.toString();
     }
     /**
      * return the size of the taskList
@@ -117,13 +125,16 @@ public class TaskList {
      * @throws DukeException  If the index is not within the range of tasks.
      */
 
-    public void deleteTask(int index) throws DukeException {
+    public String deleteTask(int index) throws DukeException {
+        String outputString = "";
         if (index < 0 || index > taskList.size() - 1) {
             throw new DukeException("please give a correct task index");
         }
-        taskList.get(index).printDeleteTask();
+
+        outputString += taskList.get(index).printDeleteTask() + "\n";
         taskList.remove(index);
-        printNumberOfTask(taskList.size());
+        outputString += printNumberOfTask(taskList.size());
+        return outputString;
     }
 
     /**
@@ -131,7 +142,7 @@ public class TaskList {
      *
      * @param i The number of tasks in the list
      */
-    static void printNumberOfTask(int i) {
-        System.out.println(String.format("Now you have %d tasks in the list.", i));
+    static String printNumberOfTask(int i) {
+        return String.format("Now you have %d tasks in the list.", i);
     }
 }

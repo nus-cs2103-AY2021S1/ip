@@ -1,5 +1,7 @@
-D | 0 | return book | 2019-12-20 18:00 
-T | 0 | read book        
-T | 0 | sleep       
-T | 0 | sell book     
-T | 0 | throw book 
+T | 1 | read book                          
+T | 0 | sell book                          
+T | 0 | eat book                          
+T | 0 | drink dinner                          
+E | 0 | drink lunch | 2019-12-19 18:00 
+T | 0 | study                    
+T | 0 | jump book                 

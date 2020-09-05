@@ -13,7 +13,6 @@ public class Duke {
      *Class constructor
      */
     public Duke() {
-
         taskList = new TaskList();
         parser = new Parser(taskList);
         ui = new Ui();
@@ -22,18 +21,6 @@ public class Duke {
             storage = new Storage(taskList);
         } catch (DukeException e) {
             ui.showLoadingError();
-        }
-    }
-
-    /**
-     * Initialize the start of the program
-     */
-    public void run() {
-        ui.printStarting();
-        while (taskList.isUpdating()) {
-            String[] fullCommand = ui.readCommand();
-            parser.parseCommand(fullCommand);
-            ui.printLine();
         }
     }
 
@@ -50,12 +37,15 @@ public class Duke {
     }
 
     /**
-     * main method
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-        duke.stop();
+    public String getResponse(String input) {
+        return parser.parseCommand(splitCommand(input));
+    }
+
+    public String[] splitCommand(String input){
+        return input.trim().split(" ", 2);
     }
 
 }
