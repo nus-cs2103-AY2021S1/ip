@@ -19,6 +19,18 @@ public class Event extends Task {
     }
 
     /**
+     * Constructs an event with a deadline.
+     * @param description the description of the event.
+     * @param at the happening time of the event.
+     * @param isDone whether the task is done or not.
+     */
+    public Event(String description, LocalDateTime at, boolean isDone) {
+        super(description);
+        this.at = at;
+        this.isDone = isDone;
+    }
+
+    /**
      * Returns a string representation of the object.
      * @return a string representation of the object.
      */

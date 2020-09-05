@@ -9,8 +9,8 @@ import java.util.List;
  * Encapsulates the operations related to the I/O of the log file.
  */
 public class Storage {
-    String pathname;
-    List<Task> data = new ArrayList<>();
+    private String pathname;
+    private List<Task> data = new ArrayList<>();
 
     /**
      * Constructs a storage object.
@@ -34,12 +34,9 @@ public class Storage {
         line = br.readLine();
         while (line != null) {
             char type = line.charAt(8);
-            boolean isDone = line.charAt(11) == '\u2713';
+            boolean isDone = line.charAt(11) == 'Y';
             if(type == 'T') {
-                Todo t = new Todo(line.substring(14));
-                if(isDone) {
-                    t.done();
-                }
+                Todo t = new Todo(line.substring(14), isDone);
                 data.add(t);
             } else if(type == 'D') {
                 String[] parts = line.substring(5).split(" ");
@@ -52,10 +49,7 @@ public class Storage {
                         getMonth(parts[length - 4]), Integer.parseInt(parts[length - 3]),
                         Integer.parseInt(parts[length - 1].split(":")[0]),
                         Integer.parseInt(parts[length - 1].split(":")[1].substring(
-                                0, parts[length - 1].split(":")[1].length() - 1))));
-                if(isDone) {
-                    d.done();
-                }
+                                0, parts[length - 1].split(":")[1].length() - 1))), isDone);
                 data.add(d);
             } else {
                 String[] parts = line.substring(5).split(" ");
@@ -68,10 +62,7 @@ public class Storage {
                         getMonth(parts[length - 4]), Integer.parseInt(parts[length - 3]),
                         Integer.parseInt(parts[length - 1].split(":")[0]),
                         Integer.parseInt(parts[length - 1].split(":")[1].substring(
-                                0, parts[length - 1].split(":")[1].length() - 1))));
-                if(isDone) {
-                    e.done();
-                }
+                                0, parts[length - 1].split(":")[1].length() - 1))), isDone);
                 data.add(e);
             }
             line = br.readLine();

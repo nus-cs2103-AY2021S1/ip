@@ -19,6 +19,18 @@ public class Deadline extends Task {
     }
 
     /**
+     * Constructs an event with a deadline.
+     * @param description the description of the event.
+     * @param by the deadline of the event.
+     * @param isDone whether the task is done or not.
+     */
+    public Deadline(String description, LocalDateTime by, boolean isDone) {
+        super(description);
+        this.by = by;
+        this.isDone = isDone;
+    }
+
+    /**
      * Returns a string representation of the object.
      * @return a string representation of the object.
      */
