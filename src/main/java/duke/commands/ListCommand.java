@@ -1,9 +1,12 @@
 package duke.commands;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.tasks.Task;
 import duke.tasks.TaskList;
+
+
 
 /**
  * Shows list of tasks of user so far.
@@ -18,14 +21,13 @@ public class ListCommand extends Command {
      * @throws DukeException when no task in list.
      */
     public String execute(TaskList tasklist, Storage storage) throws DukeException {
-        String response = "";
         if (tasklist.getSize() == 0) {
             throw new DukeException("there's nothing on the list yet.");
         } else {
-            for (Task i : tasklist.getList()) {
-                response += (tasklist.getList().indexOf(i) + 1 + "." + i) + "\n";
-            }
+            return IntStream.range(0, tasklist.getSize())
+                    .mapToObj(index -> String.format("%d . %s", index + 1, tasklist.get(index)))
+                    .collect(Collectors.joining("\n"))
+                    .trim();
         }
-        return response;
     }
 }
