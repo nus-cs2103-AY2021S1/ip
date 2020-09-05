@@ -27,17 +27,11 @@ public class Command {
 
     /**
      * Creates a Command representing a task of either LIST/BYE.
+     *
      * @param taskType the type of task
      */
     public Command(TaskType taskType) {
-        switch (taskType) {
-        case LIST:
-            // Fallthrough
-        case BYE:
-            break;
-        default:
-            throw new IllegalArgumentException("You need to provide an index or description.");
-        }
+        assert taskType == TaskType.LIST || taskType == TaskType.BYE : "taskType not supported for this constructor";
         this.taskType = taskType;
         index = null;
         description = null;
@@ -46,18 +40,12 @@ public class Command {
 
     /**
      * Creates a Command representing a task of either DELETE or DONE.
+     *
      * @param taskType the type of task
-     * @param index index of TaskList the action is to be applied to
+     * @param index    index of TaskList the action is to be applied to
      */
     public Command(TaskType taskType, Integer index) {
-        switch (taskType) {
-        case DELETE:
-            // Fallthrough
-        case DONE:
-            break;
-        default:
-            throw new IllegalArgumentException("A description parameter is required for this kind of TaskType");
-        }
+        assert taskType == TaskType.DELETE || taskType == TaskType.DONE : "taskType not supported for this constructor";
         this.taskType = taskType;
         this.index = index;
         description = null;
@@ -66,18 +54,12 @@ public class Command {
 
     /**
      * Creates a Command representing a task of TODO.
-     * @param taskType the type of task
+     *
+     * @param taskType    the type of task
      * @param description the description of the task
      */
     public Command(TaskType taskType, String description) {
-        switch (taskType) {
-        case TODO:
-            // Fallthrough
-        case FIND:
-            break;
-        default:
-            throw new IllegalArgumentException("A date parameter is required for this kind of TaskType");
-        }
+        assert taskType == TaskType.TODO || taskType == TaskType.FIND : "taskType not supported for this constructor";
         this.taskType = taskType;
         index = null;
         this.description = description;
@@ -86,19 +68,14 @@ public class Command {
 
     /**
      * Creates a Command representing a task of either a DEADLINE or EVENT.
-     * @param taskType the type of task
+     *
+     * @param taskType    the type of task
      * @param description the description of the task
-     * @param date the date of the task
+     * @param date        the date of the task
      */
     public Command(TaskType taskType, String description, LocalDate date) {
-        switch (taskType) {
-        case DEADLINE:
-            // Fallthrough
-        case EVENT:
-            break;
-        default:
-            throw new IllegalArgumentException("A date parameter is irrelevant to the TaskType.");
-        }
+        assert taskType == TaskType.DEADLINE || taskType == TaskType.EVENT :
+            "taskType not supported for this constructor";
         this.taskType = taskType;
         index = null;
         this.description = description;
@@ -107,6 +84,7 @@ public class Command {
 
     /**
      * Returns the TaskType of the Command.
+     *
      * @return the TaskType of the command
      */
     public TaskType getTaskType() {
@@ -115,6 +93,7 @@ public class Command {
 
     /**
      * Returns the respective date of the Command.
+     *
      * @return the date of the command
      */
     public LocalDate getDate() {
@@ -123,6 +102,7 @@ public class Command {
 
     /**
      * Returns true if the Command object is valid.
+     *
      * @return true if the command is valid
      */
     public boolean isValid() {
@@ -137,6 +117,7 @@ public class Command {
 
     /**
      * Executes the Command.
+     *
      * @param list the TaskList this command is to be applied to
      */
     public String execute(TaskList list) {
