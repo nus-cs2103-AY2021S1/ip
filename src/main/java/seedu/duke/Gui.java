@@ -1,11 +1,15 @@
 package seedu.duke;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Hold the GUI interaction with user.
+ */
 public class Gui extends AnchorPane {
 
     @FXML
@@ -24,11 +28,19 @@ public class Gui extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Assigns Duke to the GUI.
+     * Initializes UI object.
+     * @param d Assigned Duke object.
+     */
     public void setDuke(Duke d) {
         duke = d;
         ui = new Ui();
     }
 
+    /**
+     * Sets welcome words to GUI.
+     */
     public void setWelcomeWords() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(ui.welcomeWord(), dukeProfile),
