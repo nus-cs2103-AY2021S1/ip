@@ -1,14 +1,16 @@
+package duke;
+
 import task.*;
 
 import java.io.*;
 import java.util.Scanner;
 
 /**
- * Storage is a utility class that handles the saving and loading of tasks for the Duke program.
+ * duke.Storage is a utility class that handles the saving and loading of tasks for the duke.Duke program.
  */
 public class Storage {
     /**
-     * Saves the a TaskList into a specified file.
+     * Saves the a duke.TaskList into a specified file.
      * @param path  Path of the file.
      * @param taskList List of tasks to be saved.
      * @throws IOException Throws IOException when it encounters an IO error.

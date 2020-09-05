@@ -1,3 +1,5 @@
+package duke;
+
 import task.*;
 
 public class Duke {

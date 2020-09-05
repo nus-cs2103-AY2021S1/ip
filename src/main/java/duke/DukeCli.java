@@ -1,3 +1,5 @@
+package duke;
+
 import task.*;
 
 import java.io.*;
@@ -10,17 +12,17 @@ public class DukeCli {
     private TaskList taskList;
 
     /**
-     * Constructor for Duke class.
-     * @param filePath Path for the Duke save file.
+     * Constructor for duke.Duke class.
+     * @param filePath Path for the duke.Duke save file.
      */
     public DukeCli(String filePath) {
-        //storage = new Storage(filePath);
+        //storage = new duke.Storage(filePath);
         taskList = Storage.loadTasks(FILEPATH);
         ui = new Ui();
     }
 
     /**
-     * Method to run the Duke program.
+     * Method to run the duke.Duke program.
      */
     public void run() {
         Ui.printWelcome();
@@ -101,7 +103,7 @@ public class DukeCli {
     }
 
     /**
-     * Main method.
+     * duke.Main method.
      * @param args List of arguments.
      */
     public static void main(String[] args) {

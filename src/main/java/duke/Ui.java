@@ -1,9 +1,11 @@
+package duke;
+
 import task.Task;
 
 import java.util.Scanner;
 
 /**
- * Ui is a class that provides interaction with the user.
+ * duke.Ui is a class that provides interaction with the user.
  */
 public class Ui {
     private Scanner scanner;
@@ -14,7 +16,7 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
-     * Creates an instance of the Ui.
+     * Creates an instance of the duke.Ui.
      */
     public Ui(){
         scanner = new Scanner(System.in);
@@ -50,7 +52,7 @@ public class Ui {
     /**
      * Print a removed Task.
      * @param t Removed Task
-     * @param taskListSize Remaining number of Tasks in Duke.
+     * @param taskListSize Remaining number of Tasks in duke.Duke.
      */
     public static void printRemovedTask(Task t, int taskListSize){
         System.out.println("\t" + "Noted. I've removed this task:");
