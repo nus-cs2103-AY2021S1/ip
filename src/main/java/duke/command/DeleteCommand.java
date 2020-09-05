@@ -10,11 +10,11 @@ import duke.util.Storage;
  * Class representing a delete task command.
  */
 public class DeleteCommand extends Command {
-    
+
     private final int taskIdx;
 
     /**
-     * Creates a new DeleteCommand.
+     * Creates a new {@code DeleteCommand}.
      * @param taskIdx Index of the task to be deleted.
      * @throws DukeException If no task index is provided, or if the format provided is invalid.
      */
@@ -28,9 +28,9 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes the task
-     * @param tasks List of tasks.
-     * @param ui Ui object.
-     * @param storage Storage object.
+     * @param tasks {@link TaskList} containing list of tasks.
+     * @param ui {@link Ui} object.
+     * @param storage {@link Storage} object.
      * @throws DukeException If the provided index is not associated with a task.
      */
     @Override
@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
         if (taskIdx > tasks.size()) {
             throw new DukeException("No task with this ID!");
         }
-        
+
         Task task = tasks.getTask(taskIdx);
         tasks.deleteTask(task);
         storage.deleteTask(task);

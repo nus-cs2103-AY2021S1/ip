@@ -1,19 +1,23 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 import duke.ui.Ui;
 import duke.util.Storage;
 
 /**
  * Class representing an add task command.
  */
-public class AddCommand extends Command{
-    CommandType taskType;
-    String taskContent;
+public class AddCommand extends Command {
+    private final CommandType taskType;
+    private final String taskContent;
 
     /**
-     * Creates a new AddCommand.
+     * Creates a new {@code AddCommand}.
      * @param taskType Type of the task to be created.
      * @param taskContent Contents of the task.
      */
@@ -24,9 +28,9 @@ public class AddCommand extends Command{
 
     /**
      * Executes the command and creates the respective tasks.
-     * @param tasks List of tasks.
-     * @param ui Ui object.
-     * @param storage Storage object.
+     * @param tasks {@link TaskList} containing list of tasks.
+     * @param ui {@link Ui} object.
+     * @param storage {@link Storage} object.
      * @throws DukeException If the tasks fails to create.
      */
     @Override
@@ -34,9 +38,9 @@ public class AddCommand extends Command{
         if (taskContent == null) {
             throw new DukeException("You have to tell me what's your task!");
         }
-        
-        Task task = null;
-        
+
+        Task task;
+
         switch (taskType) {
         case TODO: {
             ToDo todo = new ToDo(taskContent);
@@ -68,11 +72,14 @@ public class AddCommand extends Command{
             tasks.addTask(event);
             storage.saveEvent(event);
             task = event;
+            break;
         }
+        default:
+            throw new DukeException("Failed to create event.");
         }
         StringBuilder message = new StringBuilder("Alright! I've added this task:\n");
         message.append(task);
         message.append("\nNow you have ").append(tasks.size()).append(" task(s) in your list.");
         ui.botOutput(message);
-    } 
+    }
 }

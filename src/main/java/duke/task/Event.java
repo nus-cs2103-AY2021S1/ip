@@ -16,7 +16,7 @@ public class Event extends Task {
     private LocalTime taskTime;
 
     /**
-     * Creates a brand new event.
+     * Creates a brand new {@code Event}.
      * @param description Description of the event.
      * @param at Time that the event is happening at.
      */
@@ -40,7 +40,7 @@ public class Event extends Task {
     }
 
     /**
-     * Create an Event from existing data.
+     * Create an {@code Event} from existing data.
      * @param uniqueId Unique Id of the event.
      * @param isDone Event completion status.
      * @param description Description of the event.

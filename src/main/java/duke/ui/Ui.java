@@ -1,22 +1,12 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 import duke.exception.DukeException;
 
 /**
  * Utility class that handles interactions with the user.
  */
 public class Ui {
-    private Scanner sc;
-    String nextMessage;
-
-    /**
-     * Initialises a new Ui object
-     */
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
+    private String nextMessage;
 
     /**
      * Show a greeting message to the user.
@@ -38,13 +28,13 @@ public class Ui {
     }
 
     /**
-     * Shows an error message from a DukeException to the user.
+     * Shows an error message from a {@link DukeException} to the user.
      * @param e Exception containing the error message.
      */
     public void showError(DukeException e) {
         botOutput(e.getMessage());
     }
-    
+
     public void botOutput(String message) {
         this.nextMessage = message;
     }
@@ -52,16 +42,9 @@ public class Ui {
     public void botOutput(StringBuilder message) {
         botOutput(message.toString());
     }
-    
+
     public String getNextMessage() {
         return this.nextMessage;
     }
 
-    /**
-     * Reads a command from the user.
-     * @return Command read from the user.
-     */
-    public String readNextCommand() {
-        return sc.nextLine();
-    }
 }

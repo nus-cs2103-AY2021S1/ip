@@ -13,7 +13,7 @@ public class Task {
     protected String uniqueId;
 
     /**
-     * Creates a brand new Task object.
+     * Creates a brand new {@code Task}.
      * @param description Description of the task.
      */
     public Task(String description) {
@@ -22,7 +22,7 @@ public class Task {
     }
 
     /**
-     * Creates a Task from existing data.
+     * Creates a {@code Task} from existing data.
      * @param uniqueId Unique Id of the task.
      * @param isDone Task completion status.
      * @param description Task description.
@@ -32,11 +32,11 @@ public class Task {
         this.isDone = isDone;
         this.description = description;
     }
-    
+
     public void markDone() {
         isDone = true;
     }
-    
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or cross symbols
     }
@@ -54,7 +54,7 @@ public class Task {
     }
 
     /**
-     * Generates a unique id for the task. 
+     * Generates a unique id for the task.
      */
     public void generateUniqueId() {
         this.uniqueId = UUID.randomUUID().toString();

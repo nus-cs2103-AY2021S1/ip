@@ -16,7 +16,7 @@ public class Deadline extends Task {
     private LocalTime taskTime;
 
     /**
-     * Creates a brand new deadline.
+     * Creates a brand new {@code Deadline}.
      * @param description Description of the deadline.
      * @param by Time that the deadline is due by.
      */
@@ -40,7 +40,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Create a Deadline from existing data.
+     * Creates a {@code Deadline} from existing data.
      * @param uniqueId Unique Id of the deadline.
      * @param isDone Deadline completion status.
      * @param description Description of the deadline.
@@ -68,7 +68,7 @@ public class Deadline extends Task {
     public String getTime() {
         return by;
     }
-    
+
     private String formatTaskTime() {
         String output = taskDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
         if (taskTime != null) {

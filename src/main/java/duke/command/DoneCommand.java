@@ -10,11 +10,11 @@ import duke.util.Storage;
  * Class representing a command to mark a task as done.
  */
 public class DoneCommand extends Command {
-    
+
     private final int taskIdx;
 
     /**
-     * Creates a new DoneCommand.
+     * Creates a new {@code DoneCommand}.
      * @param taskIdx Index of the task to mark as done.
      * @throws DukeException If no task index is provided, or if the format provided is invalid.
      */
@@ -28,9 +28,9 @@ public class DoneCommand extends Command {
 
     /**
      * Marks a task as done.
-     * @param tasks List of tasks.
-     * @param ui Ui object.
-     * @param storage Storage object.
+     * @param tasks {@link TaskList} containing list of tasks.
+     * @param ui {@link Ui} object.
+     * @param storage {@link Storage} object.
      * @throws DukeException If the provided index is not associated with a task.
      */
     @Override
@@ -38,7 +38,7 @@ public class DoneCommand extends Command {
         if (taskIdx > tasks.size()) {
             throw new DukeException("No task with this ID!");
         }
-        
+
         Task task = tasks.getTask(taskIdx);
         tasks.markAsDone(task);
         storage.doneTask(tasks.getTask(taskIdx));
