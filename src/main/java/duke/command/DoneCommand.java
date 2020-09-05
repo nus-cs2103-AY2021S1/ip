@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
+import duke.ui.DukeMessages;
 import duke.exception.InvalidTaskException;
 import duke.exception.StorageException;
 import duke.task.Task;
@@ -34,6 +34,6 @@ public class DoneCommand extends Command {
     public String execute(TaskList list, Storage storage) throws InvalidTaskException, StorageException {
         Task doneTask = list.markTaskAsDone(this.taskIndex);
         storage.writeToTaskStorage(list.getSaveString());
-        return Ui.printDoneTaskMessage(doneTask);
+        return DukeMessages.printDoneTaskMessage(doneTask);
     }
 }

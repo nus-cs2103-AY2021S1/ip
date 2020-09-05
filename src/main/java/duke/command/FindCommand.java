@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
+import duke.ui.DukeMessages;
 import duke.task.TaskList;
 
 public class FindCommand extends Command {
@@ -10,8 +10,9 @@ public class FindCommand extends Command {
     public FindCommand(String matchString) {
         this.matchString = matchString;
     }
+
     @Override
     public String execute(TaskList list, Storage storage) {
-        return Ui.printFindMessage(list.findTasks(this.matchString));
+        return DukeMessages.printFindMessage(list.findTasks(this.matchString));
     }
 }

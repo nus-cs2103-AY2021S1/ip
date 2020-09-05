@@ -1,7 +1,8 @@
-package duke;
+package duke.ui;
 
 import java.io.IOException;
 
+import duke.Duke;
 import duke.exception.DateParseException;
 import duke.exception.StorageException;
 import javafx.application.Application;

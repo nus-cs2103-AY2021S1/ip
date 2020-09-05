@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
+import duke.ui.DukeMessages;
 import duke.task.TaskList;
 
 /**
@@ -15,6 +15,6 @@ public class TodayCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Storage storage) {
-        return Ui.printTodayMessage(list.getTaskList());
+        return DukeMessages.printTodayMessage(list.getTaskList());
     }
 }

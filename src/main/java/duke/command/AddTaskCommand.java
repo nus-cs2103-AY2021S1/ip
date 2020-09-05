@@ -3,7 +3,7 @@ package duke.command;
 import java.time.LocalDate;
 
 import duke.Storage;
-import duke.Ui;
+import duke.ui.DukeMessages;
 import duke.exception.InvalidTaskException;
 import duke.exception.StorageException;
 import duke.task.Task;
@@ -55,12 +55,12 @@ public class AddTaskCommand extends Command {
         case TODO:
             Task newTodo = list.addTask(this.taskName);
             storage.appendTaskStorage(newTodo.toSaveString());
-            return Ui.printAddTaskMessage(newTodo, list.getTaskListSize());
+            return DukeMessages.printAddTaskMessage(newTodo, list.getTaskListSize());
         case EVENT:
         case DEADLINE:
             Task newTask = list.addTask(this.type, this.taskName, this.taskDate);
             storage.appendTaskStorage(newTask.toSaveString());
-            return Ui.printAddTaskMessage(newTask, list.getTaskListSize());
+            return DukeMessages.printAddTaskMessage(newTask, list.getTaskListSize());
         default:
             throw new InvalidTaskException("Oh dear! I'm not sure what kind of task to add ;A;");
         }

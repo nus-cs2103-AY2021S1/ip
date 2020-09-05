@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import duke.task.Task;
 /**
  * Ui is a class that prints messages to the user.
  */
-public class Ui {
+public class DukeMessages {
     /**
      * Prints a welcome message.
      * @return A string containing a welcome message.

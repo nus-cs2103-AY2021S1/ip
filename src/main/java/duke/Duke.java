@@ -8,6 +8,7 @@ import duke.exception.DateParseException;
 import duke.exception.DukeException;
 import duke.exception.StorageException;
 import duke.task.TaskList;
+import duke.ui.DukeMessages;
 
 /**
  * Duke is the class encapsulating all application processes.
@@ -36,7 +37,7 @@ public class Duke {
             TaskList taskList = TaskList.initialiseTaskList(storage);
 
             Scanner scanner = new Scanner(System.in);
-            Ui.printWelcomeMessage();
+            DukeMessages.printWelcomeMessage();
             boolean isExit = false;
 
             while (!isExit) {
@@ -46,17 +47,17 @@ public class Duke {
                     parsedCommand.execute(taskList, storage);
                     isExit = parsedCommand.shouldExit();
                 } catch (DukeException e) {
-                    Ui.printErrorMessage(e.getUiMessage());
+                    DukeMessages.printErrorMessage(e.getUiMessage());
                 }
             }
             scanner.close();
         } catch (DukeException e) {
-            Ui.printErrorMessage(e.getUiMessage());
+            DukeMessages.printErrorMessage(e.getUiMessage());
         }
     }
 
     public static String sendWelcomeMessage() {
-        return Ui.printWelcomeMessage();
+        return DukeMessages.printWelcomeMessage();
     }
 
     /**
@@ -69,7 +70,7 @@ public class Duke {
             Command parsedCommand = CommandParser.parseCommand(userCommand);
             return parsedCommand.execute(taskList, storage);
         } catch (DukeException e) {
-            return Ui.printErrorMessage(e.getUiMessage());
+            return DukeMessages.printErrorMessage(e.getUiMessage());
         }
     }
 }
