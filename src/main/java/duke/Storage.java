@@ -20,6 +20,7 @@ public class Storage {
      * @param filename the name of the data file
      */
     public Storage(String filename) {
+        assert (!filename.isEmpty());
         try {
             file = new File(filename);
             if (file.createNewFile()) {
