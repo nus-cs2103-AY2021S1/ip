@@ -1,13 +1,8 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.util.TaskList;
 import duke.util.Ui;
 import duke.util.Storage;
-
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Arrays;
 
 /**
  * The find command allows user to search for tasks with descriptions that
@@ -44,15 +39,7 @@ public class FindCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        List<Integer> indices = new LinkedList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task t = tasks.get(i);
-            List<String> descriptionWords = Arrays.asList(t.getDescription().split(" "));
-            if (descriptionWords.contains(query)) {
-                indices.add(i);
-            }
-        }
-        String msg = tasks.getQueryResultMessage(indices);
+        String msg = tasks.getFilteredListMessage(query);
         ui.sendMessage(msg);
         return msg;
     }
