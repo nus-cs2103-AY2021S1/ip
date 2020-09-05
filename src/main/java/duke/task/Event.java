@@ -2,11 +2,10 @@ package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class Event extends Task {
 
-    /** Event time of a task */
-    protected LocalDateTime at;
 
     /**
      * Creates an events with given time.
@@ -16,7 +15,7 @@ public class Event extends Task {
      */
     public Event(String description, LocalDateTime at) {
         super(description);
-        this.at = at;
+        this.time = Optional.of(at);
     }
 
     /**
@@ -28,20 +27,21 @@ public class Event extends Task {
      */
     public Event(boolean isDone, String description, LocalDateTime at) {
         super(description);
-        this.at = at;
+        this.time = Optional.of(at);
         this.isDone = isDone;
     }
 
     @Override
     public String toFileStringFormat() {
-        return String.format("E / %d / %s / %s", isDone ? 1 : 0, this.desciption, this.at);
+        assert time.isPresent();
+        return String.format("E / %d / %s / %s", isDone ? 1 : 0, this.desciption, this.time.get());
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-
-        return "[E]" + super.toString() + " (at: " + at.format(formatter) + ")";
+        assert time.isPresent();
+        return "[E]" + super.toString() + " (at: " + time.get().format(formatter) + ")";
     }
 
 }

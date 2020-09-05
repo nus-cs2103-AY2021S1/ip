@@ -12,6 +12,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.RescheduleCommand;
 import duke.exception.AmbiguousInputException;
 import duke.exception.DeletionIndexEmptyException;
 import duke.exception.DescriptionEmptyException;
@@ -52,6 +53,15 @@ public class Parser {
         ValidCommand command = ValidCommand.commandType(s[0]);
 
         switch (command) {
+        case RESCHEDULE:
+            String[] indexAndDate = s[1].split(" /to ");
+
+            if (indexAndDate.length != 2) {
+                throw new DukeException("Parameter error.");
+            }
+
+            return new RescheduleCommand(Integer.parseInt(indexAndDate[0]),
+                    LocalDateTime.parse(indexAndDate[1],acceptedFormatter));
         case CLEAR:
             return new ClearCommand();
         case LIST:

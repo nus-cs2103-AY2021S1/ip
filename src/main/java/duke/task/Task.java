@@ -1,5 +1,8 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 /**
  * Represents a task.
  */
@@ -13,6 +16,9 @@ public class Task {
 
     /** The status of the task*/
     protected boolean isDone;
+
+    /** Time for certain task*/
+    protected Optional<LocalDateTime> time;
 
     /**
      * Creates a task with description.
@@ -76,6 +82,11 @@ public class Task {
      */
     public boolean isExactDescription(Task task) {
         return this.desciption.equals(task.desciption);
+    }
+
+    public Task reschedule(LocalDateTime time) {
+        this.time = Optional.of(time);
+        return this;
     }
 
     @Override

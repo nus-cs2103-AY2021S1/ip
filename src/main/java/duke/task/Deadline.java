@@ -2,11 +2,9 @@ package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class Deadline extends Task {
-
-    /** Deadline of a task */
-    protected LocalDateTime by;
 
     /**
      * Creates a task with description and deadline.
@@ -16,7 +14,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDateTime by) {
         super(description);
-        this.by = by;
+        this.time = Optional.of(by);
     }
 
     /**
@@ -27,19 +25,21 @@ public class Deadline extends Task {
      */
     public Deadline(boolean isDone, String description, LocalDateTime by) {
         super(description);
-        this.by = by;
+        this.time = Optional.of(by);
         this.isDone = isDone;
     }
 
     @Override
     public String toFileStringFormat() {
-        return String.format("D / %d / %s / %s", isDone ? 1 : 0, this.desciption, this.by);
+        assert time.isPresent();
+        return String.format("D / %d / %s / %s", isDone ? 1 : 0, this.desciption, this.time.get());
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        return "[D]" + super.toString() + " (by: " + by.format(formatter) + ")";
+        assert time.isPresent();
+        return "[D]" + super.toString() + " (by: " + time.get().format(formatter) + ")";
     }
 
 }

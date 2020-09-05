@@ -11,6 +11,7 @@ import duke.exception.AmbiguousInputException;
  */
 public enum ValidCommand {
 
+    RESCHEDULE("reschedule","change","delay"),
     DELETE("delete", "DELETE", "del", "DEL"),
     DEADLINE("deadline", "DEADLINE", "ddl", "DDL"),
     EVENT("event", "EVENT", "eve", "EVE"),
@@ -20,6 +21,7 @@ public enum ValidCommand {
     FIND("find", "search", "FIND", "SEARCH"),
     DONE("done", "DONE", "FINISH", "finish"),
     LIST("list", "LIST", "ls", "LS");
+
 
     /**
      * Map that match alias with valid command
