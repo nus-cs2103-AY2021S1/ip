@@ -75,6 +75,9 @@ public class Bot {
           return output;
         case ("delete"):
           Integer number = Integer.valueOf(parsedInfo[1]) - 1;
+          if (number <= 0) {
+            throw new invalidDeleteNumberException();
+          }
           output = taskList.deleteListing(number, printer, storage);
           return output;
         case ("find"):
@@ -89,6 +92,12 @@ public class Bot {
         return printer.noDescriptionMessage(e.s);
       } catch (UndefinedException e) { //unknown commands
         return printer.undefinedExceptionMessage();
+      } catch (invalidDeleteNumberException e){
+        return printer.invalidDeleteNumberExceptionMessage();
+      } catch (java.lang.NumberFormatException e) {
+        return printer.invalidDeleteNumberExceptionMessage();
+      } catch (AssertionError e) {
+        return printer.assertionErrorMessage();
       }
 
   }

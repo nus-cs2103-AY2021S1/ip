@@ -91,6 +91,26 @@ public class Printer {
   }
 
   /**
+   * Prints the assertion error message
+   */
+  protected String assertionErrorMessage() {
+    String output = "";
+    output = (LINE + "\n" + "     Assertion error detected \n" + WHITE_SPACE_SEVEN
+        + "\n" + LINE);
+    return output;
+  }
+
+  /**
+   * Prints the assertion error message
+   */
+  protected String invalidDeleteNumberExceptionMessage() {
+    String output = "";
+    output = (LINE + "\n" + "     Sorry, that number/character isn't valid! ): \n"
+        + WHITE_SPACE_SEVEN + "\n" + LINE);
+    return output;
+  }
+
+  /**
    * Prints the done message
    *
    * @param s the detail of the listing
