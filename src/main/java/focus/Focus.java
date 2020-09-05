@@ -21,10 +21,13 @@ public class Focus {
         ui = new UI();
         Storage.createFolder();
         storage = new Storage();
-        if (storage.retrieveTextFile()) {
+        if (storage.retrieveFocusTextFile()) {
             taskList = new TaskList(storage.loadData());
         } else {
             taskList = new TaskList();
+        }
+        if (storage.retrieveSettingsTextFile()) {
+            storage.loadSettings();
         }
     }
 

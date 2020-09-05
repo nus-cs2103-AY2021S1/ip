@@ -6,7 +6,8 @@ import focus.exception.NoTasksException;
 import focus.storage.Storage;
 import focus.task.TaskList;
 
-/** Represents the RemindCommand to remind user of the tasks (within a specified time frame) on task list. */
+/** Represents the RemindCommand to remind user of the tasks
+ * (within a specified time frame) on task list. */
 public class RemindCommand extends Command {
     /**
      * Returns false since RemindCommand is not an ExitCommand.
@@ -33,7 +34,7 @@ public class RemindCommand extends Command {
         }
         assert !(taskList.getSize() < 0) : "Task list size should not be less than zero at all.";
         if (input.length() == 6) {
-            return taskList.remindUserOfTasksWithin(7);
+            return taskList.remindUserOfTasksWithin(storage.getNumberOfDays());
         }
         assert !(input.length() <= 6) : "Input length should be more than 6 here.";
         try {
@@ -45,7 +46,7 @@ public class RemindCommand extends Command {
             throw new InvalidRemindCommandException();
         } else { // user's input is "remind " with spacings
             assert !checker.isEmpty() : "Checker should not be blank here.";
-            return taskList.remindUserOfTasksWithin(7);
+            return taskList.remindUserOfTasksWithin(storage.getNumberOfDays());
         }
     }
 }
