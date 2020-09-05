@@ -61,7 +61,9 @@ public class Parser {
      */
     public static Command parse(String userInput) throws ParseNekoCommandException {
         String[] inputs = userInput.split(" ", 2);
-        // By spec, inputs is guaranteed to have at least one element.
+
+        assert inputs.length > 0 : "inputs should have at least 1 element";
+
         String inputKeyword = inputs[0];
         Keyword keyword = Keyword.findKeyword(inputKeyword);
         switch (keyword) {

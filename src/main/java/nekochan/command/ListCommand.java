@@ -50,6 +50,9 @@ public class ListCommand extends Command {
                 printout += String.format("%d.%s\n", i + 1, existingTasks.get(i).toString());
             }
         }
+
+        assert printout.length() > 0 : "printout should have content";
+
         return printout;
     }
 

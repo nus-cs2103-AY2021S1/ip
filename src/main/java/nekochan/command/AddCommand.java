@@ -65,6 +65,9 @@ public class AddCommand extends Command {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException("Add command was not completed.");
         }
+
+        assert createdTask != null : "created task should not be null";
+
         return String.format(
                 "Got it. I've added this task:\n%s\nNow you have %d tasks in your list.\n",
                 createdTask.toString(),

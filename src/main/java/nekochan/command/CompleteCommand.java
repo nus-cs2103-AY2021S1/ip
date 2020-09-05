@@ -46,6 +46,9 @@ public class CompleteCommand extends Command {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException("Complete command was not completed.");
         }
+
+        assert completedTask != null : "completed task should not be null";
+
         return String.format("Nice! I've marked this task as complete:\n  %s\n",
                 completedTask.toString());
     }

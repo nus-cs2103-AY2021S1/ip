@@ -29,6 +29,9 @@ public class CliWrapper {
             try {
                 String fullCommand = ui.readCommand();
                 Response response = nekoChan.getResponse(fullCommand);
+
+                assert response.getResponseMessage().length() > 0 : "response message should not be empty";
+
                 ui.print(response.getResponseMessage());
                 isExit = response.shouldExit();
             } catch (IncompleteNekoCommandException e) {

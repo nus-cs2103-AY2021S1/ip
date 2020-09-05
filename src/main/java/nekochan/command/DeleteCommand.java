@@ -48,6 +48,9 @@ public class DeleteCommand extends Command {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException("Delete command was not completed.");
         }
+
+        assert deletedTask != null : "deleted task should not be null";
+
         return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in your list.",
                 deletedTask.toString(),
                 remainingTaskCount);
