@@ -44,7 +44,7 @@ public class Duke {
      * @return Response object
      */
     public Response getResponse(String userInput) {
-        assert !userInput.equals("") :  "String from user input should not be empty!";
+        assert !userInput.equals("") : "String from user input should not be empty!";
         Response response = execute(userInput);
         return response;
     }
@@ -56,8 +56,8 @@ public class Duke {
      */
     private Response execute(String userInput) {
         Response responseObject;
-        assert arrayOfTasks != null || ui != null || storage != null :
-                "arrayOfTasks, Ui and Storage objects cannot be null";
+        assert arrayOfTasks != null || ui != null || storage != null
+                : "arrayOfTasks, Ui and Storage objects cannot be null";
         try {
             Command parsedCommand = Parser.parse(userInput);
             responseObject = parsedCommand.runCommand(arrayOfTasks, ui, storage);

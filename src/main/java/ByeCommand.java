@@ -7,17 +7,17 @@ public class ByeCommand extends Command {
     /**
      * Runs command to exit Duke.
      *
-     * @param taskList Array of tasks that we have parsed.
+     * @param arrayOfTasks Array of tasks that we have parsed.
      * @param ui Ui object to aid in program execution.
      * @param storage Storage object to aid in program execution.
      */
-    public Response runCommand(TaskList taskList, Ui ui, Storage storage) {
-        assert taskList != null || ui != null || storage != null :
-                "taskList, Ui and Storage objects cannot be null";
+    public Response runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
+        assert arrayOfTasks != null || ui != null || storage != null
+                : "arrayOfTasks, Ui and Storage objects cannot be null";
         Response responseObject = ui.printByeMessage();
         if (storage.isStorageChanged()) {
             try {
-                storage.saveToDisk(taskList);
+                storage.saveToDisk(arrayOfTasks);
                 responseObject = ui.finishWriting();
             } catch (DukeException error) {
                 return ui.writeError();

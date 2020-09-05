@@ -156,4 +156,32 @@ public class Ui {
         Response responseObject = new Response(output);
         return responseObject;
     }
+
+    /**
+     * Output help message for list of commands.
+     * @return Response object
+     */
+    public Response helpText() {
+        String finalOutput = "List of commands are as follows:\n"
+                +
+                "[list]: List all tasks\n"
+                +
+                "[delete <index>]: Removes task from list\n"
+                +
+                "[done <index>]: Mark task as done \n"
+                +
+                "[todo <task>]: Create a todo Task \n"
+                +
+                "[deadline <task> /by dd/mm/yy hhmm]: \n Create task with desired date \n"
+                +
+                "[event <task> /at dd/mm/yy hhmm-hhmm]: \n Create task with desired date \n"
+                +
+                "[find <query>] Return matched results in list \n"
+                +
+                "[edit]: Edit details of items\n"
+                +
+                "[bye]: Closes program";
+        Response responseObject = new Response(finalOutput);
+        return responseObject;
+    }
 }

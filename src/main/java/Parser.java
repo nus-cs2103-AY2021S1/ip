@@ -33,14 +33,14 @@ public class Parser {
             break;
 
         case "event":
-                try {
-                    newTaskObject = processEventCommand(userInputArray, numOfInput, inputLine);
-                } catch (ArrayIndexOutOfBoundsException error) {
-                    throw new DukeException("Error encountered while parsing event command. Please ensure "
-                                            + "that the event command is in the following format: "
-                                            + "(event) (description) (/at) (date).");
-                }
-                break;
+            try {
+                newTaskObject = processEventCommand(userInputArray, numOfInput, inputLine);
+            } catch (ArrayIndexOutOfBoundsException error) {
+                throw new DukeException("Error encountered while parsing event command. Please ensure "
+                                        + "that the event command is in the following format: "
+                                        + "(event) (description) (/at) (date).");
+            }
+            break;
 
         case "deadline":
             try {
@@ -58,6 +58,10 @@ public class Parser {
 
         case "find":
             newTaskObject = processFindCommand(inputLine);
+            break;
+
+        case "help":
+            newTaskObject = processHelpCommand();
             break;
 
         default:
@@ -230,5 +234,9 @@ public class Parser {
         String tempString = inputLine.split("find")[1];
         String strippedKeyword = tempString.strip();
         return new FindCommand(strippedKeyword);
+    }
+
+    private static HelpCommand processHelpCommand() {
+        return new HelpCommand();
     }
 }
