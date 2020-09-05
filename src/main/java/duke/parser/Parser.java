@@ -5,9 +5,10 @@ import duke.command.CommandType;
 
 public class Parser {
     /**
-     * Adds task to list of tasks based on type specified.
+     * Returns a command based on the task information provided.
      *
      * @param taskInfo  Description of task.
+     * @Return Command based on task information.
      */
     public static Command parse(String taskInfo) {
         String cmd = taskInfo.trim();
