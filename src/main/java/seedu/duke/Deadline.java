@@ -20,7 +20,7 @@ public class Deadline extends Task {
         super(description);
         LocalDate formatDate = LocalDate.parse(due);
         localDate = formatDate;
-        String convertedDate = formatDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String convertedDate = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         dueDate = convertedDate;
     }
 

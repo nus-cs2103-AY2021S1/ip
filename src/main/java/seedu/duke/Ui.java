@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Ui {
     private static final String LINES = "------------------------------------------------\n";
     private static final String INTRO = "Hello! I'm Duke!\n" + "What can I do for you?\n";
+    private static final String BYE = "    Bye! Hope to see you again soon.\n";
     private Scanner sc;
     private String userInput;
     private Parser parse;
@@ -22,8 +23,6 @@ public class Ui {
         sc = new Scanner(System.in);
         parse = parser;
     }
-
-    public Ui() throws NullPointerException {}
 
     /**
      * Prints out introduction when Duke start up.
@@ -97,7 +96,7 @@ public class Ui {
      */
     public static void bye() {
         Ui.printLines();
-        System.out.println("    Bye! Hope to see you again soon." + "\n");
+        System.out.println(BYE);
         Ui.printLines();
     }
 
@@ -105,7 +104,7 @@ public class Ui {
      * Static method to end Duke GUI when user input "Bye".
      */
     public static String endDuke() {
-        String goodBye = "Bye! Hope to see you again soon." + "\n";
+        String goodBye = BYE;
         String exit = goodBye;
         return exit;
     }

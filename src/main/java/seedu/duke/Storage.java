@@ -14,6 +14,11 @@ import java.util.ArrayList;
 public class Storage {
     private static final String DIRECTORY_PATH = "data";
     private static final String STORAGE_PATH = "data/duke.txt";
+    private static final String TODO_SYMBOL = "T";
+    private static final String EVENT_SYMBOL = "E";
+    private static final String DEADLINE_SYMBOL  = "D";
+    private static final String DONE = "1";
+    private static final String NOT_DONE = "0";
 
     /**
      * Initializes an instance of Storage class.
@@ -82,27 +87,27 @@ public class Storage {
             String typeOfTask = arrTasks[0];
             String isDone = arrTasks[1];
             String nameOfTask = arrTasks[2];
-            if (typeOfTask.equals("T")) {
+            if (typeOfTask.equals(TODO_SYMBOL)) {
                 Todo tempTodo;
-                if (isDone.equals("1")) {
+                if (isDone.equals(DONE)) {
                     tempTodo = new Todo(nameOfTask, true);
                 } else {
                     tempTodo = new Todo(nameOfTask, false);
                 }
                 listOfTasks.add(tempTodo);
-            } else if (typeOfTask.equals("D")) {
+            } else if (typeOfTask.equals(DEADLINE_SYMBOL)) {
                 String date = arrTasks[3];
                 Deadline tempDeadline;
-                if (isDone.equals("1")) {
+                if (isDone.equals(DONE)) {
                     tempDeadline = new Deadline(nameOfTask, true, date);
                 } else {
                     tempDeadline = new Deadline(nameOfTask, false, date);
                 }
                 listOfTasks.add(tempDeadline);
-            } else if (typeOfTask.equals("E")) {
+            } else if (typeOfTask.equals(EVENT_SYMBOL)) {
                 String date = arrTasks[3];
                 Event tempEvent;
-                if (isDone.equals("1")) {
+                if (isDone.equals(DONE)) {
                     tempEvent = new Event(nameOfTask, true, date);
                 } else {
                     tempEvent = new Event(nameOfTask, false, date);
@@ -128,7 +133,7 @@ public class Storage {
             for (int i = 0; i < size; i++) {
                 String task = br.readLine();
                 if (i == taskNo) {
-                    String tempTask = task.replaceFirst("0", "1");
+                    String tempTask = task.replaceFirst(NOT_DONE, DONE);
                     task = tempTask;
                 }
                 tempArr.add(task);

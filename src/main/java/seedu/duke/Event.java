@@ -20,7 +20,7 @@ public class Event extends Task {
         super(event);
         LocalDate formatDate = LocalDate.parse(dateToFormat);
         localDate = formatDate;
-        String convertedDate = formatDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String convertedDate = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         date = convertedDate;
     }
 

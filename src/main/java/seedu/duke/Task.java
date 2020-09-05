@@ -75,13 +75,7 @@ public class Task {
      * @return String formatted to be saved in a txt file.
      */
     public String getStorageString(String task) {
-        String done = "";
-        if (isDone) {
-            done = "1";
-        } else {
-            done = "0";
-        }
-        return task + " ~ " + done + " ~ " + getTask();
+        return task + " ~ " + (isDone ? "1" : "0") + " ~ " + getTask();
     }
 
     /**

@@ -5,6 +5,8 @@ package seedu.duke;
  */
 public class Parser {
     private TaskList taskLists;
+    private final String INVALID_INPUT = "I don't know what that means! Try again.";
+    private final String LINES = "\n-----------------------------------------------\n";
 
     /**
      * Initializes an instance of a Parser.
@@ -26,8 +28,7 @@ public class Parser {
                 && !input.contains("done") && !input.contains("bye") && !input.contains("list")
                 && !input.contains("delete") && !input.contains("find")) {
             Ui.printLines();
-            throw new DukeException("I don't know what that means! Try again.\n"
-                    + "\n-----------------------------------------------\n");
+            throw new DukeException(INVALID_INPUT + LINES);
         }
     }
 
@@ -40,7 +41,7 @@ public class Parser {
         try {
             this.checkForInvalidInput(input);
             if (input.equals("list")) {
-                this.showTaskList();
+                showTaskList();
             } else if (input.contains("done")) {
                 taskLists.completeTask(input);
             } else if (input.contains("delete")) {
