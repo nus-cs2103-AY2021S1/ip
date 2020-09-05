@@ -1,6 +1,7 @@
 package duke.ui;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 import duke.task.Task;
 
@@ -89,9 +90,10 @@ public class Ui {
             message = "No tasks added to your list yet!\n";
         } else {
             message = "Here are the tasks in your list:\n";
-            for (int i = 0; i < tasks.size(); i++) {
-                message = message.concat(i + 1 + ". " + tasks.get(i) + "\n");
-            }
+            message = IntStream
+                    .range(0, tasks.size())
+                    .mapToObj(i -> i + 1 + ". " + tasks.get(i) + "\n")
+                    .reduce(message, String::concat);
         }
         return message;
     }
@@ -107,9 +109,10 @@ public class Ui {
             message = "No matching tasks found in your list!\n";
         } else {
             message = "Here are the matching tasks in your list:\n";
-            for (int i = 0; i < tasks.size(); i++) {
-                message = message.concat(i + 1 + ". " + tasks.get(i) + "\n");
-            }
+            message = IntStream
+                    .range(0, tasks.size())
+                    .mapToObj(i -> i + 1 + ". " + tasks.get(i) + "\n")
+                    .reduce(message, String::concat);
         }
         return message;
     }

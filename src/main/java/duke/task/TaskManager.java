@@ -1,7 +1,9 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a manager that deals with task operations.
@@ -72,16 +74,11 @@ public class TaskManager {
      * @return The list of tasks that match the keyword(s).
      */
     public List<Task> findTasks(String... keywords) {
-        List<Task> matchingTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            for (String keyword : keywords) {
-                boolean isTaskMatched = task.getDescription().contains(keyword);
-                boolean hasTaskBeenAdded = matchingTasks.contains(task);
-                if (isTaskMatched && !hasTaskBeenAdded) {
-                    matchingTasks.add(task);
-                }
-            }
-        }
-        return matchingTasks;
+        List<Task> matchingTasks = new ArrayList<>(tasks);
+        return matchingTasks
+                .stream()
+                .filter(task -> Arrays.stream(keywords)
+                        .anyMatch(keyword -> task.getDescription().contains(keyword)))
+                .collect(Collectors.toList());
     }
 }
