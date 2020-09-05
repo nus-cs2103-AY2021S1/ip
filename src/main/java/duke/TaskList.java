@@ -102,11 +102,11 @@ public class TaskList {
      */
     public List<Task> findTasks(String keyword) {
         List<Task> relatedTasks = new ArrayList<>();
-        for (Task task : this.tasks) {
+        this.tasks.forEach(task -> {
             if (task.getDescription().contains(keyword)) {
                 relatedTasks.add(task);
             }
-        }
+        });
         return relatedTasks;
     }
 
