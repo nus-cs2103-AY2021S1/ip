@@ -15,12 +15,17 @@ public class Parser {
             int order = parseInt(commandMessage.substring(commandMessage.length() - 1));
             command = new Command("done", order);
         } else if (commandMessage.contains("delete")) {
-            int order = parseInt(commandMessage.substring(commandMessage.length() - 1));
+            int order = parseInt(commandMessage.substring(commandMessage.indexOf(' ') + 1));
             command = new Command("delete", order);
         } else if (commandMessage.contains("find")) {
             command = new Command("find", commandMessage.substring(commandMessage.indexOf(' ') + 1));
         } else if (commandMessage.equals("bye")) {
             command = new Command("bye");
+        } else if (commandMessage.contains("priority")) {
+            String message = commandMessage.substring(commandMessage.indexOf(' ') + 1);
+            int order = parseInt(message.substring(0, message.indexOf(' ')));
+            int priority = parseInt(message.substring(message.indexOf(' ') + 1));
+            command = new Command("priority", order, priority);
         } else {
             String type;
             if (commandMessage.contains(" ")) {

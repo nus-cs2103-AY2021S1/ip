@@ -7,6 +7,8 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected int priority;
+    protected boolean hasPriority;
 
     public Task(String description) {
         this.description = description;
@@ -31,7 +33,16 @@ public class Task {
         assert isDone : "isDone should be true";
     }
 
+    public void setPriority(int priority) {
+        this.priority = priority;
+        this.hasPriority = true;
+    }
+
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription();
+        if (hasPriority) {
+            return "[" + getStatusIcon() + "] " + getDescription() + " priority " + priority;
+        } else {
+            return "[" + getStatusIcon() + "] " + getDescription();
+        }
     }
 }
