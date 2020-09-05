@@ -55,10 +55,11 @@ public class TaskList {
             task = new Event(taskLine[2], taskLine[3]);
             break;
         default:
+            assert false : "Cases should be exhaustive.";
             break;
         }
         if (taskLine[1].equals("1")) {
-            assert task != null;
+            assert task != null : "Task should not be null.";
             task.markAsDone();
         }
         return task;
@@ -85,6 +86,7 @@ public class TaskList {
      * @param task Task to be added.
      */
     public void add(Task task) {
+        assert task != null : "Task should not be null.";
         tasks.add(task);
     }
 
@@ -116,6 +118,7 @@ public class TaskList {
      * @return String representation of list of tasks.
      */
     public String findTasks(String keyword) {
+        assert !keyword.isEmpty() : "Keyword should not be empty.";
         String tasks = "";
         Task t;
         int numMatch = 0;
@@ -124,6 +127,7 @@ public class TaskList {
             if (t.hasKeyword(keyword)) {
                 numMatch++;
                 tasks += String.format("  %d.%s%n", numMatch, t);
+                assert numMatch > 0 : "Matching tasks should be more than 0 after adding task.";
             }
         }
         return tasks;
@@ -132,12 +136,13 @@ public class TaskList {
     /**
      * Deletes and returns the task at a position in the list.
      *
-     * @param idx Position of the Task in the list of tasks.
+     * @param taskNumber Position of the Task in the list of tasks.
      * @return Task which was deleted.
      */
-    public Task remove(int idx) {
-        Task t = tasks.get(idx - 1);
-        tasks.remove(idx - 1);
+    public Task remove(int taskNumber) {
+        assert (taskNumber > 0 && taskNumber < size()) : "Task number should be within bounds";
+        Task t = tasks.get(taskNumber - 1);
+        tasks.remove(taskNumber - 1);
         return t;
     }
 
@@ -148,6 +153,7 @@ public class TaskList {
      * @return Task which was marked as done.
      */
     public Task markTask(int taskNumber) {
+        assert (taskNumber > 0 && taskNumber < size()) : "Task number should be within bounds";
         Task t = tasks.get(taskNumber - 1);
         t.markAsDone();
         return t;

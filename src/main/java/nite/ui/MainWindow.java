@@ -1,7 +1,5 @@
 package nite.ui;
 
-import java.io.File;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -29,13 +27,14 @@ public class MainWindow extends AnchorPane {
     private Nite nite;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/woman_circle.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/blackcat_circle.png"));
+    private Image niteImage = new Image(this.getClass().getResourceAsStream("/images/blackcat_circle.png"));
 
     /**
      * Initializes the user interface upon starting application.
      */
     @FXML
     public void initialize() {
+        assert scrollPane != null : "ScrollPane should not be null.";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         greet();
     }
@@ -45,18 +44,22 @@ public class MainWindow extends AnchorPane {
      */
     public void greet() {
         String greeting = Ui.showWelcome();
+        assert !greeting.isEmpty() : "Welcome message should not be empty.";
+        assert niteImage != null : "Image should not be empty.";
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(greeting, dukeImage)
+                DialogBox.getDukeDialog(greeting, niteImage)
         );
         playSound("/audio/meow2.wav");
     }
 
     public void setNite(Nite nite) {
+        assert nite != null : "Nite should not be null.";
         this.nite = nite;
     }
 
     private void playSound(String soundPath) {
-//        Media sound = new Media(new File(soundPath).toURI().toString());
+        // Media sound = new Media(new File(soundPath).toURI().toString());
+        assert !soundPath.isEmpty() : "Path should not be empty";
         Media sound = new Media(this.getClass().getResource(soundPath).toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
@@ -69,10 +72,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        assert !input.isEmpty() : "Input should not be empty.";
         String response = nite.getResponse(input);
+        assert !response.isEmpty() : "Response should not be empty.";
+        assert userImage != null : "Image should not be empty.";
+        assert niteImage != null : "Image should not be empty.";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, niteImage)
         );
         playSound("/audio/meow2.wav");
         userInput.clear();

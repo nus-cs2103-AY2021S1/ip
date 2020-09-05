@@ -47,6 +47,7 @@ public class Nite {
                 System.exit(0);
                 //return ui.showFarewell();
             }
+            assert !command.isExit() : "Exit command should not reach here.";
             return command.execute(tasks, ui, storage);
         } catch (NiteException e) {
             return ui.showError(e.getMessage());
