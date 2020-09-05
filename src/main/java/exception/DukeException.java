@@ -7,13 +7,13 @@ public class DukeException {
     /**
      * Line for proper formatting of error messages in DukeException methods.
      */
-    private static final String line = "\t____________________________________________________________\n";
+    private static final String divider = "\t____________________________________________________________\n";
 
     /**
      * Renders an error message that user input has been written incorrectly.
      */
     public static String invalidCommand() {
-        System.out.println(line + "\tCommand written incorrectly. Please check again.\n" + line);
+        System.out.println(divider + "\tCommand written incorrectly. Please check again.\n" + divider);
         return "Command written incorrectly. Please check again.\n";
     }
 
@@ -21,7 +21,7 @@ public class DukeException {
      * Renders an error message that user did not specify the type of task (ie Deadline, To Do, Event).
      */
     public static String genericTask() {
-        System.out.println(line + "\tPlease specify either a Deadline, To Do, or Event!\n" + line);
+        System.out.println(divider + "\tPlease specify either a Deadline, To Do, or Event!\n" + divider);
         return "Please specify either a Deadline, To Do, or Event!\n";
     }
 
@@ -29,7 +29,7 @@ public class DukeException {
      * Renders an error message that there is no such task in the list of tasks.
      */
     public static String noSuchTask() {
-        System.out.println(line + "\tNo such task in list of tasks.\n" + line);
+        System.out.println(divider + "\tNo such task in list of tasks.\n" + divider);
         return "No such task in list of tasks.\n";
     }
 
@@ -37,7 +37,7 @@ public class DukeException {
      * Renders an error message that user input format for deadline is invalid.
      */
     public static String invalidDeadline() {
-        System.out.println(line + "\tDeadline format is invalid\n" + line);
+        System.out.println(divider + "\tDeadline format is invalid\n" + divider);
         return "Deadline format is invalid\n";
     }
 
@@ -45,7 +45,7 @@ public class DukeException {
      * Renders an error message that user input format for event is invalid.
      */
     public static String invalidEvent() {
-        System.out.println(line + "\tEvent format is invalid\n" + line);
+        System.out.println(divider + "\tEvent format is invalid\n" + divider);
         return "Event format is invalid\n";
     }
 
@@ -53,7 +53,7 @@ public class DukeException {
      * Renders an error message that user input format for todo is invalid.
      */
     public static String invalidTodo() {
-        System.out.println(line + "\tTodo format is invalid\n" + line);
+        System.out.println(divider + "\tTodo format is invalid\n" + divider);
         return "Todo format is invalid\n";
     }
 
