@@ -98,28 +98,20 @@ public class Parser {
      */
     public static Command add(String command) throws DukeEmptyDescriptionException,
         DukeEmptyByException, DukeEmptyAtException, DukeUnknownInputException, DukeInvalidDateTimeInputException {
-        Task toBeAdded;
-        String des;
-        String[] tokens;
         if (command.startsWith("todo")) {
             try {
-                des = command.substring(5);
-                toBeAdded = new Todo(des);
+                String des = command.substring(5);
+                Task toBeAdded = new Todo(des);
                 return new AddCommand(toBeAdded);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeEmptyDescriptionException("todo");
             }
         } else if (command.startsWith("deadline")) {
             try {
-                tokens = command.split(" /by ");
-                des = tokens[0].substring(9);
+                String[] tokens = command.split(" /by ");
+                String des = tokens[0].substring(9);
                 List<LocalDateTime> ldtList = getCustomDateTimeList(tokens[1]);
-                LocalDate date = ldtList.get(0).toLocalDate();
-                LocalTime time = null;
-                if (ldtList.size() == 2) {
-                    time = ldtList.get(1).toLocalTime();
-                }
-                toBeAdded = new Deadline(des, date, time);
+                Task toBeAdded = parseDeadlineDateTimeList(des, ldtList);
                 return new AddCommand(toBeAdded);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeEmptyDescriptionException("deadline");
@@ -130,16 +122,10 @@ public class Parser {
             }
         } else if (command.startsWith("event")) {
             try {
-                tokens = command.split(" /at ");
-                des = tokens[0].substring(6);
+                String[] tokens = command.split(" /at ");
+                String des = tokens[0].substring(6);
                 List<LocalDateTime> ldtList = getCustomDateTimeList(tokens[1]);
-                LocalDate date = ldtList.get(0).toLocalDate();
-                LocalTime time = null;
-                if (ldtList.size() == 2) {
-                    time = ldtList.get(1).toLocalTime();
-                }
-                toBeAdded = new Event(des, date, time);
-                return new AddCommand(toBeAdded);
+                return new AddCommand(parseEventDateTimeList(des, ldtList));
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeEmptyDescriptionException("event");
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -148,6 +134,26 @@ public class Parser {
         } else {
             throw new DukeUnknownInputException();
         }
+    }
+
+    private static Deadline parseDeadlineDateTimeList(String description,
+                                               List<LocalDateTime> localDateTimeList) {
+        LocalDate date = localDateTimeList.get(0).toLocalDate();
+        LocalTime time = null;
+        if (localDateTimeList.size() == 2) {
+            time = localDateTimeList.get(1).toLocalTime();
+        }
+        return new Deadline(description, date, time);
+    }
+
+    private static Event parseEventDateTimeList(String description,
+           List<LocalDateTime> localDateTimeList) {
+        LocalDate date = localDateTimeList.get(0).toLocalDate();
+        LocalTime time = null;
+        if (localDateTimeList.size() == 2) {
+            time = localDateTimeList.get(1).toLocalTime();
+        }
+        return new Event(description, date, time);
     }
 
     /**

@@ -31,6 +31,7 @@ public class Storage {
      * @param filePath The filePath of the storage text file.
      */
     public Storage(String filePath) {
+        assert(filePath != null);
         this.filePath = filePath;
     }
 
@@ -62,42 +63,48 @@ public class Storage {
                     throw new DukeInvalidDataException("Oops data is invalid");
                 } else if (taskType.equals("D")) {
                     List<LocalDateTime> ldtList = Parser.getCustomDateTimeList(tokens[3]);
-                    LocalDate date = ldtList.get(0).toLocalDate();
-                    LocalTime time = ldtList.size() == 2
-                            ? ldtList.get(1).toLocalTime()
-                            : null;
-                    task = new Deadline(description, date, time);
+                    task = loadDeadline(description, ldtList);
                 } else if (taskType.equals("E")) {
                     List<LocalDateTime> ldtList = Parser.getCustomDateTimeList(tokens[3]);
-                    LocalDate date = ldtList.get(0).toLocalDate();
-                    LocalTime time = ldtList.size() == 2
-                            ? ldtList.get(1).toLocalTime()
-                            : null;
-                    task = new Event(description, date, time);
+                    task = loadEvent(description, ldtList);
                 } else {
                     throw new DukeInvalidDataException("Oops data is invalid");
                 }
 
                 if (isDone.equals("1")) {
                     task.markAsDone();
-                    list.add(task);
-                } else if (isDone.equals("0")) {
-                    list.add(task);
-                } else {
+                } else if (!isDone.equals("0")){
                     throw new DukeInvalidDataException("Oops data is invalid");
                 }
+                list.add(task);
             }
         } catch (FileNotFoundException e) {
-            FileWriter writer;
             try {
-                writer = new FileWriter(filePath);
-                writer.write("");
+                new FileWriter(filePath).write("");
             } catch (IOException ioException) {
                 System.out.println(ioException.getMessage());
                 list = new ArrayList<>();
             }
         }
         return list;
+    }
+
+    private static Deadline loadDeadline(String description,
+             List<LocalDateTime> localDateTimeList) {
+        LocalDate date = localDateTimeList.get(0).toLocalDate();
+        LocalTime time = localDateTimeList.size() == 2
+            ? localDateTimeList.get(1).toLocalTime()
+            : null;
+        return new Deadline(description, date, time);
+    }
+
+    private static Event loadEvent(String description,
+                                         List<LocalDateTime> localDateTimeList) {
+        LocalDate date = localDateTimeList.get(0).toLocalDate();
+        LocalTime time = localDateTimeList.size() == 2
+            ? localDateTimeList.get(1).toLocalTime()
+            : null;
+        return new Event(description, date, time);
     }
 
     /**

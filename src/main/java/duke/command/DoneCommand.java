@@ -19,6 +19,7 @@ public class DoneCommand implements Command {
      * @param index The index of the Task to be marked as done.
      */
     public DoneCommand(int index) {
+        assert(index >= 0);
         this.index = index;
     }
 

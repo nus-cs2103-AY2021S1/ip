@@ -12,7 +12,7 @@ import duke.task.Task;
  * Represents a delete task action.
  */
 public class DeleteCommand implements Command {
-    private final int index; //0 to tasks.getSize() - 1
+    private final int index;
 
     /**
      * Class constructor with specified index.
@@ -20,6 +20,7 @@ public class DeleteCommand implements Command {
      * @param index The index of the Task to be deleted.
      */
     public DeleteCommand(int index) {
+        assert(index >= 0);
         this.index = index;
     }
 
