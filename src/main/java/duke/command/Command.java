@@ -1,6 +1,5 @@
 package duke.command;
 
-import java.util.List;
 import java.util.stream.IntStream;
 import duke.storage.DukeIOException;
 import duke.storage.Storage;
