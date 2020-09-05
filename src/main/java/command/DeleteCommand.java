@@ -46,6 +46,7 @@ public class DeleteCommand extends Command {
         } catch (IOException e) {
             result = ui.showError(e.getMessage());
         }
+        assert !result.isEmpty() : "Response should not be empty";
         return result;
     }
 }
