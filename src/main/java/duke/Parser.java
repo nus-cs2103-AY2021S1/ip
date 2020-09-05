@@ -18,12 +18,13 @@ import duke.command.UnknownCommand;
  * Encapsulates a parser that breaks down user inputs to generate commands to be executed by Dude.
  */
 public class Parser {
-    private final static String FIND_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: find [keyword]";
-    private final static String DONE_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: done [task number]";
-    private final static String TODO_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: todo [description]";
-    private final static String DEADLINE_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: deadline [description] /by [date]";
-    private final static String EVENT_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: event [description] /at [date]";
-    private final static String DELETE_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: delete [task number]";
+    private static final String FIND_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: find [keyword]";
+    private static final String DONE_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: done [task number]";
+    private static final String TODO_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: todo [description]";
+    private static final String DEADLINE_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax:"
+                                                                + "deadline [description] /by [date]";
+    private static final String EVENT_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: event [description] /at [date]";
+    private static final String DELETE_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: delete [task number]";
     /**
      * Parses user inputs to generate commands.
      * @param input Input by user.
@@ -79,7 +80,7 @@ public class Parser {
             if (eventBreakdown.length < 2) {
                 throw new DukeException(EVENT_SYNTAX_ERROR_MESSAGE);
             }
-            assert eventDescription.length > 1;
+            assert eventBreakdown.length > 1;
             String eventDescription = eventBreakdown[0];
             String at = eventBreakdown[1];
             return new EventCommand(eventDescription, parseDateTime(at));
