@@ -55,14 +55,17 @@ public class Event extends Task {
     }
 
     private LocalTime formatTime(String at) {
-        String timePortion = at.substring(at.indexOf(" ") + 1);
+        int timeIndex = at.indexOf(" ") + 1;
+        String timePortion = at.substring(timeIndex);
         LocalTime time = LocalTime.parse(timePortion);
         return time;
     }
 
     private LocalDate formatDate(String at) {
-        String datePortion = at.substring(0, at.indexOf(" ")).replaceAll("/", "-");
-        LocalDate date = LocalDate.parse(datePortion);
+        int dateIndex = at.indexOf(" ");
+        String datePortion = at.substring(0, dateIndex);
+        String formattedDate = datePortion.replaceAll("/", "-");
+        LocalDate date = LocalDate.parse(formattedDate);
         return date;
     }
 
