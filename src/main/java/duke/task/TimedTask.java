@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.command.InvalidCommandException;
+import duke.component.Storage;
 
 import java.time.LocalDate;
 
@@ -35,6 +36,14 @@ public abstract class TimedTask extends Task {
             return "";
         } else {
             return String.format(" repeat every %d days", repeat);
+        }
+    }
+
+    protected String lastDoneMessage() {
+        if (isDone) {
+            return Storage.splitter + lastDone;
+        } else {
+            return "";
         }
     }
 

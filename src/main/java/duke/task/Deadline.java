@@ -127,7 +127,8 @@ public class Deadline extends TimedTask {
 
     @Override
     public String outputToFile() {
-        return "D" + super.outputToFile() + Storage.splitter + byTime + Storage.splitter + repeat + "\n";
+        return "D" + super.outputToFile() + Storage.splitter + byTime + Storage.splitter
+                + repeat + lastDoneMessage() + "\n";
     }
 
     @Override
