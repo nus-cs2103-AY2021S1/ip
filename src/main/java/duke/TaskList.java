@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.exception.DukeInvalidIndexException;
 import duke.task.Deadline;
@@ -166,13 +167,11 @@ public class TaskList {
      * @return String representing the list of tasks.
      */
     public String getTaskWithKeyword(String keyword) {
-        List<Task> tasksWithKeyword = new ArrayList<>();
-        list.forEach(task -> {
-            String description = task.getDescription();
-            if (description.contains(keyword)) {
-                tasksWithKeyword.add(task);
-            }
-        });
+        List<Task> tasksWithKeyword = list.stream().filter(
+            task -> {
+                String description = task.getDescription();
+                return description.contains(keyword);
+            }).collect(Collectors.toList());
         return getListAsStringFromList(tasksWithKeyword,
                 "No tasks with " + keyword + " was found");
     }
