@@ -21,6 +21,8 @@ public class FindCommand implements Executable {
     public FindCommand(List<Task> taskList, String searchString) {
         this.taskList = taskList;
         this.searchString = searchString;
+        assert this.taskList != null;
+        assert this.searchString != null;
     }
 
     /**

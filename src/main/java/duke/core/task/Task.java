@@ -18,8 +18,7 @@ public abstract class Task {
      * @param description A description of this task
      */
     public Task(String description) {
-        this.isCompleted = false;
-        this.description = description;
+        this(false, description);
     }
 
     /**
@@ -31,6 +30,7 @@ public abstract class Task {
     public Task(boolean isCompleted, String description) {
         this.isCompleted = isCompleted;
         this.description = description;
+        assert this.description != null;
     }
 
     /**

@@ -26,6 +26,8 @@ public class LoadCommand implements Executable {
     public LoadCommand(DataStore dataStore, String filePath) {
         this.dataStore = dataStore;
         this.filePath = filePath;
+        assert this.dataStore != null;
+        assert this.filePath != null;
     }
 
     /**

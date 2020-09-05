@@ -23,6 +23,9 @@ public class Storage {
      */
     public static void save(List<Task> taskList, String filePath) throws IOException {
 
+        assert taskList != null;
+        assert filePath != null;
+
         // Open file for write/overwrite
         // throws IOException, IOException should be passed to the program logic
         try (FileWriter fileWriter = new FileWriter(filePath)) {
@@ -43,6 +46,10 @@ public class Storage {
      * @throws FileNotFoundException If filePath cannot be opened
      */
     public static void load(List<Task> taskList, String filePath) throws FileNotFoundException {
+
+        assert taskList != null;
+        assert filePath != null;
+
         // Empty current list
         taskList.clear();
 

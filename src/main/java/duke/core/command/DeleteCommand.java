@@ -22,6 +22,8 @@ public class DeleteCommand implements ReversibleExecutable {
     public DeleteCommand(List<Task> taskList, Task task) {
         this.taskList = taskList;
         this.task = task;
+        assert this.taskList != null;
+        assert this.task != null;
     }
 
     /**
