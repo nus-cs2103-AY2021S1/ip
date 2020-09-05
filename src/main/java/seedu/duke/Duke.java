@@ -54,6 +54,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Carries out what the user tells it to do
+     *
+     * @param input the user's input
+     * @return the chatbot's response to the input
+     */
     String getResponse(String input) {
         String response;
         try {

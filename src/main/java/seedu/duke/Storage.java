@@ -56,6 +56,7 @@ public class Storage {
      * Writes the list of tasks into a file from the start.
      *
      * @param taskList the user's current list of tasks
+     * @throws IOException if tasks cannot be written to the file correctly
      */
     public void writeToFile(TaskList taskList) throws IOException {
         FileWriter fileWriter = new FileWriter(this.filePath);
@@ -73,6 +74,7 @@ public class Storage {
      * Appends a task to the back of a file.
      *
      * @param task the new task to be saved
+     * @throws IOException if the task cannot be written to the file correctly
      */
     public void appendToFile(Task task) throws IOException {
         FileWriter fileWriter = new FileWriter(this.filePath, true);

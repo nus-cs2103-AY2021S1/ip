@@ -4,17 +4,35 @@ import java.util.function.Consumer;
 
 import seedu.duke.task.Task;
 
+/**
+ * Represents a response from Duke to the user
+ */
 public class Message {
     private String[] message;
 
+    /**
+     * Class constructor.
+     *
+     * @param message to be shown to the user
+     */
     public Message(String[] message) {
         this.message = message;
     }
 
+    /**
+     * Class constructor.
+     *
+     * @param message to be shown to the user
+     */
     public Message(String message) {
         this.message = new String[]{message};
     }
 
+    /**
+     * Returns a welcome message from Duke.
+     *
+     * @return the welcome message
+     */
     public static Message getWelcome() {
         return new Message(new String[]{"Hello from",
             " ____        _        ",
@@ -24,6 +42,11 @@ public class Message {
             "|____/ \\__,_|_|\\_\\___|"});
     }
 
+    /**
+     * Returns a farewell message from Duke.
+     *
+     * @return the farewell message
+     */
     public static Message getGoodbye() {
         return new Message("Have a nice day.");
     }

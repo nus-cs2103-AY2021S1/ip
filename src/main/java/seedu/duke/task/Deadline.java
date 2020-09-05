@@ -12,16 +12,37 @@ import seedu.duke.exception.InvalidCommandFormatException;
 public class Deadline extends Task {
     private LocalDate deadline;
 
+    /**
+     * Class constructor.
+     *
+     * @param title the content of the <code>Deadline</code>
+     * @param deadline the date on which the <code>Deadline</code> is due
+     */
     public Deadline(String title, LocalDate deadline) {
         super(title);
         this.deadline = deadline;
     }
 
+    /**
+     * Class constructor.
+     *
+     * @param title the content of the <code>Deadline</code>
+     * @param isDone whether or not the <code>Deadline</code> is marked as completed
+     * @param deadline the date on which the <code>Deadline</code> is due
+     */
     public Deadline(String title, boolean isDone, LocalDate deadline) {
         super(title, isDone);
         this.deadline = deadline;
     }
 
+    /**
+     * Creates a new Deadline from the user's input.
+     *
+     * @param command the user's input
+     * @return the <code>Deadline</code> created
+     * @throws InvalidCommandFormatException if the format of the user's input does not follow
+     *                                       "deadline [content] /by yyyy-mm-dd"
+     */
     public static Deadline of(String command) throws InvalidCommandFormatException {
         if (command.length() <= 9) {
             throw new InvalidCommandFormatException("Deadline cannot be empty.");

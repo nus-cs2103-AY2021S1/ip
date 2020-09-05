@@ -95,6 +95,8 @@ public class TaskList {
 
     /**
      * Prints out all the tasks in this list.
+     *
+     * @return a message with all tasks
      */
     public Message showList() {
         if (this.tasks.size() <= 0) {
@@ -114,6 +116,7 @@ public class TaskList {
      * Prints out tasks that take place or are due by a certain date.
      *
      * @param date the date entered by the user
+     * @return a message with the appropriate tasks
      */
     public Message showList(LocalDate date) {
         if (this.tasks.size() <= 0) {
@@ -136,6 +139,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Searches for tasks which contain a certain keyword
+     *
+     * @param keyword the keyword the user is looking for
+     * @return a message with the appropriate tasks
+     */
     public Message find(String keyword) {
         if (this.tasks.size() <= 0) {
             return new Message("No tasks added.");

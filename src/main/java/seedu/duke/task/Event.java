@@ -12,16 +12,37 @@ import seedu.duke.exception.InvalidCommandFormatException;
 public class Event extends Task {
     private LocalDate duration;
 
+    /**
+     * Class constructor.
+     *
+     * @param title the content of the <code>Event</code>
+     * @param duration the date on which the <code>Event</code> takes place
+     */
     public Event(String title, LocalDate duration) {
         super(title);
         this.duration = duration;
     }
 
+    /**
+     * Class constructor.
+     *
+     * @param title the content of the <code>Event</code>
+     * @param isDone whether or not the <code>Event</code> is marked as completed
+     * @param duration the date on which the <code>Event</code> takes place
+     */
     public Event(String title, boolean isDone, LocalDate duration) {
         super(title, isDone);
         this.duration = duration;
     }
 
+    /**
+     * Creates a new Event from the user's input.
+     *
+     * @param command the user's input
+     * @return the <code>Event</code> created
+     * @throws InvalidCommandFormatException if the format of the user's input does not follow
+     *                                       "event [content] /at yyyy-mm-dd"
+     */
     public static Event of(String command) throws InvalidCommandFormatException {
         if (command.length() <= 6) {
             throw new InvalidCommandFormatException("Event cannot be empty.");
