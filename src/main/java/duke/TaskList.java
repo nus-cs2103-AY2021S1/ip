@@ -82,6 +82,20 @@ public class TaskList {
     }
 
     /**
+     * Updates task at taskNum in the taskList.
+     *
+     * @param taskNum      The number of the task to be updated in the taskList.
+     * @param updateString The string that represents the new updated task.
+     * @return The updated task.
+     * @throws DukeException If updateString format is wrong.
+     */
+    public Task update(int taskNum, String updateString) throws DukeException {
+        Task updatedTask = taskStore.get(taskNum - 1).update(updateString);
+        taskStore.set(taskNum - 1, updatedTask);
+        return updatedTask;
+    }
+
+    /**
      * Gets the string representation of each task in the taskList.
      *
      * @return An ArrayList of string representation of each task in the taskList.

@@ -88,4 +88,26 @@ public class DeadlineTaskTest {
             fail();
         }
     }
+
+    @Test
+    public void update_wrongDateFormat_throwDukeException() {
+        try {
+            DeadlineTask deadlineTask = new DeadlineTask("test", "2020-09-05");
+            deadlineTask.update("testing /by 20-09-4");
+            fail();
+        } catch (DukeException e) {
+            assertEquals("Date format should be YYYY-MM-DD", e.getMessage());
+        }
+    }
+
+    @Test
+    public void update_correctInput_correctOutput() {
+        try {
+            DeadlineTask deadlineTask = new DeadlineTask("test", "2020-09-05");
+            deadlineTask = deadlineTask.update("testing /by 2020-09-04");
+            assertEquals("[D][\u2718] testing (by: Sep 4 2020)", deadlineTask.toString());
+        } catch (DukeException e) {
+            fail();
+        }
+    }
 }

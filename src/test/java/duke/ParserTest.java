@@ -188,6 +188,16 @@ public class ParserTest {
     }
 
     @Test
+    public void parseInput_updateInputEmptyDescription_throwDukeException() {
+        try {
+            Parser.parseInput("update 1 ");
+            fail();
+        } catch (DukeException e) {
+            assertEquals("Empty description is not valid", e.getMessage());
+        }
+    }
+
+    @Test
     public void parseInput_inputWithIllegalChar_throwDukeException() {
         try {
             Parser.parseInput("event test| 2020-08-22");

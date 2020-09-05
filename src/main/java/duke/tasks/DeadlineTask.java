@@ -46,6 +46,23 @@ public class DeadlineTask extends Task {
         return new DeadlineTask(description, true, deadline);
     }
 
+    /**
+     * Updates the current deadlineTask and returns the updated deadlineTask.
+     *
+     * @param updateString A string that represents the updated task: [description] /by [deadline].
+     * @return The updated deadlineTask.
+     * @throws DukeException If updateString's date format is wrong.
+     */
+    @Override
+    public DeadlineTask update(String updateString) throws DukeException {
+        String[] segments = updateString.split("/by", 2);
+        DeadlineTask newDeadlineTask = new DeadlineTask(segments[0].trim(), segments[1].trim());
+        if (isDone) {
+            newDeadlineTask = newDeadlineTask.markAsDone();
+        }
+        return newDeadlineTask;
+    }
+
     @Override
     public String getData() {
         return "D|" + super.getData() + "|" + deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));

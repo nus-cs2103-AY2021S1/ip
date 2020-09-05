@@ -13,6 +13,7 @@ import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.SaveCommand;
 import duke.commands.TodoCommand;
+import duke.commands.UpdateCommand;
 import duke.exception.DukeException;
 import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
@@ -59,6 +60,14 @@ public class Parser {
                     throw new IndexOutOfBoundsException();
                 }
                 return new FindCommand(segments[1].trim().split(" "));
+            case "update":
+                String[] updateSegments = segments[1].split(" ", 2);
+                if (updateSegments[1].trim().length() == 0) {
+                    throw new DukeException("Empty description is not valid");
+                }
+                return new UpdateCommand(
+                        Integer.parseInt(updateSegments[0].trim()),
+                        updateSegments[1].trim());
             case "todo":
             case "deadline":
             case "event":

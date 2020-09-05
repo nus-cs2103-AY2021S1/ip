@@ -68,6 +68,26 @@ public class TaskListTest {
     }
 
     @Test
+    public void update_correctInput_correctOutput() {
+        try {
+            Task t = new TodoTask("test");
+            Task t1 = new TodoTask("abc");
+            TaskList taskList = new TaskList();
+            taskList.add(t);
+            taskList.add(t1);
+            Task t2 = taskList.update(1, "testing");
+
+            assertEquals("[T][\u2718] testing", t2.toString());
+            ArrayList<String> res = taskList.getListRepr();
+            assertEquals("[T][\u2718] testing", res.get(0));
+            assertEquals("[T][\u2718] abc", res.get(1));
+            assertEquals(2, res.size());
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
     public void getListRepr_taskList_correctOutput() {
         try {
             Task t = new TodoTask("test");

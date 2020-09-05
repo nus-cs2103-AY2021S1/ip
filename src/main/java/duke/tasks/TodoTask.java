@@ -29,6 +29,17 @@ public class TodoTask extends Task {
         return new TodoTask(description, true);
     }
 
+    /**
+     * Updates the current todoTask and returns the updated todoTask.
+     *
+     * @param updateString A string that represents the todoTask description.
+     * @return The updated todoTask.
+     */
+    @Override
+    public TodoTask update(String updateString) {
+        return new TodoTask(updateString, isDone);
+    }
+
     @Override
     public String getData() {
         return "T|" + super.getData();

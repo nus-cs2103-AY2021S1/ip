@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.exception.DukeException;
+
 /**
  * An abstract class that represents a basic Task.
  */
@@ -22,6 +24,15 @@ public abstract class Task {
         this.description = description;
         this.isDone = isDone;
     }
+
+    /**
+     * Updates this task to the information specified in updateString.
+     *
+     * @param updateString A string that represents the updated task.
+     * @return The updated Task.
+     * @throws DukeException If updateString format is wrong.
+     */
+    public abstract Task update(String updateString) throws DukeException;
 
     /**
      * Gets the raw data representation of the Task.
