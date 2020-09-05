@@ -27,9 +27,9 @@
 
     ________________________________________________________
      Here are the tasks in your list:
-     1.[T][✘] borrow book
-     2.[T][✘] read book
-     3.[D][✘] return book (by: 14 Aug 2019)
+     1. [T][✘] borrow book
+     2. [T][✘] read book
+     3. [D][✘] return book (by: 14 Aug 2019)
     ________________________________________________________
 
     ________________________________________________________
@@ -52,12 +52,12 @@
 
     ________________________________________________________
      Here are the tasks in your list:
-     1.[T][✘] borrow book
-     2.[T][✘] read book
-     3.[D][✘] return book (by: 14 Aug 2019)
-     4.[E][✘] celebrate birthday (on 22 Aug 2020 for all day)
-     5.[E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
-     6.[E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
+     1. [T][✘] borrow book
+     2. [T][✘] read book
+     3. [D][✘] return book (by: 14 Aug 2019)
+     4. [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
+     5. [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
+     6. [E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
     ________________________________________________________
 
     ________________________________________________________
@@ -66,12 +66,12 @@
 
     ________________________________________________________
      Here are the tasks in your list:
-     1.[T][✘] borrow book
-     2.[T][✘] read book
-     3.[D][✘] return book (by: 14 Aug 2019)
-     4.[E][✘] celebrate birthday (on 22 Aug 2020 for all day)
-     5.[E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
-     6.[E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
+     1. [T][✘] borrow book
+     2. [T][✘] read book
+     3. [D][✘] return book (by: 14 Aug 2019)
+     4. [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
+     5. [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
+     6. [E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
     ________________________________________________________
 
     ________________________________________________________
@@ -80,12 +80,12 @@
 
     ________________________________________________________
      Here are the tasks in your list:
-     1.[T][✘] borrow book
-     2.[T][✘] read book
-     3.[D][✘] return book (by: 14 Aug 2019)
-     4.[E][✘] celebrate birthday (on 22 Aug 2020 for all day)
-     5.[E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
-     6.[E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
+     1. [T][✘] borrow book
+     2. [T][✘] read book
+     3. [D][✘] return book (by: 14 Aug 2019)
+     4. [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
+     5. [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
+     6. [E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
     ________________________________________________________
 
     ________________________________________________________
@@ -105,11 +105,11 @@
     ________________________________________________________
 
     ________________________________________________________
-     Gomen nasai~ Wow that sure is one long event.
+     Gomen nasai~ Something's missing, oh right I lost track of time.
     ________________________________________________________
 
     ________________________________________________________
-     Gomen nasai~ Something's missing, oh right I lost track of time.
+     Gomen nasai~ Does this thing ever end???
     ________________________________________________________
 
     ________________________________________________________
@@ -118,17 +118,17 @@
 
     ________________________________________________________
      Here are the tasks in your list:
-     1.[T][✘] borrow book
-     2.[T][✘] read book
-     3.[D][✘] return book (by: 14 Aug 2019)
-     4.[E][✘] celebrate birthday (on 22 Aug 2020 for all day)
-     5.[E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
-     6.[E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
+     1. [T][✘] borrow book
+     2. [T][✘] read book
+     3. [D][✘] return book (by: 14 Aug 2019)
+     4. [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
+     5. [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
+     6. [E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
     ________________________________________________________
 
     ________________________________________________________
      Noted. I've removed this task:
-       [D][✘] return book (by: 14 Aug 2019)
+     [D][✘] return book (by: 14 Aug 2019)
      Now you have 5 tasks in your list.
     ________________________________________________________
 
@@ -138,16 +138,16 @@
 
     ________________________________________________________
      Noted. I've removed this task:
-       [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
+     [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
      Now you have 4 tasks in your list.
     ________________________________________________________
 
     ________________________________________________________
      Here are the tasks in your list:
-     1.[T][✘] borrow book
-     2.[T][✘] read book
-     3.[E][✘] celebrate birthday (on 22 Aug 2020 for all day)
-     4.[E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
+     1. [T][✘] borrow book
+     2. [T][✘] read book
+     3. [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
+     4. [E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
     ________________________________________________________
 
     ________________________________________________________
