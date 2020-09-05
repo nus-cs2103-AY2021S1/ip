@@ -75,6 +75,7 @@ public class Parser {
     }
 
     private String[] splitTime (String type, String commandArgs) throws WrongSyntaxException {
+        assert(type.equals("deadline") || type.equals("event"));
         String splitBy = type.equals("deadline") ? "/by" : "/at";
         String[] parts = commandArgs.split(splitBy, 2);
         if (parts.length != 2) {
