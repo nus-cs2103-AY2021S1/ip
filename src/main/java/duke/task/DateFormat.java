@@ -27,13 +27,14 @@ enum DateFormat {
             try {
                 out = LocalDate.parse(date, format.toDateFormat());
             } catch (DateTimeParseException ignored) {
-                continue;
+                // This date format does not work, better try the next.
             }
         }
 
         if (out == null) {
             throw new InvalidDateException();
         }
+
         return out;
     }
 

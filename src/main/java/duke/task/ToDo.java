@@ -34,6 +34,7 @@ public class ToDo extends Task {
         if (data.length != 3) {
             throw new UnreadableSaveTaskException();
         }
+
         return new ToDo(data[2]);
     }
 

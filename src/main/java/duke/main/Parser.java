@@ -77,14 +77,19 @@ public class Parser {
 
     private String extractCommand(String input) throws InvalidCommandException {
         int spaceIndex = input.indexOf(' ');
-        if (spaceIndex > 0) {
-            return input.substring(0, spaceIndex);
-        } else {
+        if (spaceIndex <= 0) {
             throw new InvalidCommandException();
         }
+
+        return input.substring(0, spaceIndex);
     }
 
     private void list() {
+        if (taskList.size() == 0) {
+            reply.append(taskList);
+            return;
+        }
+
         reply.append("Here are the tasks in your list:")
                 .append(System.lineSeparator())
                 .append(taskList);
@@ -95,7 +100,7 @@ public class Parser {
         reply.append(BYE);
     }
 
-    private void done(String taskNumber) {
+    private void done(String taskNumber) throws InvalidCommandException {
         try {
             int index = Integer.parseInt(taskNumber) - 1;
             Task completed = taskList.complete(index);
@@ -104,10 +109,12 @@ public class Parser {
                     .append(completed);
         } catch (InvalidIndexException e) {
             reply.append(e.toString());
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException();
         }
     }
 
-    private void delete(String taskNumber) {
+    private void delete(String taskNumber) throws InvalidCommandException {
         try {
             int index = Integer.parseInt(taskNumber) - 1;
             Task deleted = taskList.delete(index);
@@ -120,12 +127,14 @@ public class Parser {
                     .append(" task(s) left");
         } catch (InvalidIndexException e) {
             reply.append(e.toString());
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException();
         }
     }
 
     private void find(String searchString) {
         TaskList searchResults = taskList.find(searchString);
-        if (searchResults.size() > 0) {
+        if (searchResults.size() == 0) {
             reply.append("The following task(s) match your search:")
                     .append(System.lineSeparator())
                     .append(searchResults);

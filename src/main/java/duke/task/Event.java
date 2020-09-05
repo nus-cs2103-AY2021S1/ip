@@ -36,6 +36,7 @@ public class Event extends Task {
         if (taskInfo.length < 2) {
             throw new MissingDateException();
         }
+
         LocalDate date = DateFormat.getLocalDate(taskInfo[1]);
         return new Event(taskInfo[0], date);
     }
@@ -54,6 +55,7 @@ public class Event extends Task {
         if (data.length != 4) {
             throw new UnreadableSaveTaskException();
         }
+
         DateTimeFormatter format = DateFormat.FORMAT6.toDateFormat();
         return new Event(data[2], LocalDate.parse(data[3], format));
     }
