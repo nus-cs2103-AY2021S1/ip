@@ -29,6 +29,7 @@ public class CommandDone implements Command {
         if (index < 0 || index >= tasks.size()) {
             throw new IllegalDoneArgument();
         }
+        assert(index >= 0 && index < tasks.size());
         tasks.markAsDone(index);
         ui.printLine("Nice! I've marked this task as done:");
         message += "Nice! I've marked this task as done:\n";
