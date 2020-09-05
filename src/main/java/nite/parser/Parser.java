@@ -73,37 +73,55 @@ public class Parser {
         Task task;
         switch (type) {
         case "todo":
-            if (taskString.length() <= 5) {
-                throw new NiteException("The description of a todo cannot be empty.");
-            }
-            task = new ToDo(taskString.substring(5));
+            task = getTodo(taskString);
             break;
         case "deadline":
-            if (taskString.length() <= 9) {
-                throw new NiteException("The description of a deadline cannot be empty.");
-            }
-            String[] taskArr = taskString.substring(9).split(" /by ");
-            try {
-                task = new Deadline(taskArr[0], taskArr[1]);
-            } catch (IndexOutOfBoundsException ex) {
-                throw new NiteException("Invalid description of a deadline.");
-            }
+            task = getDeadline(taskString);
             break;
         case "event":
-            if (taskString.length() <= 6) {
-                throw new NiteException("The description of an event cannot be empty.");
-            }
-            String[] taskArr2 = taskString.substring(6).split(" /at ");
-            try {
-                task = new Event(taskArr2[0], taskArr2[1]);
-            } catch (IndexOutOfBoundsException ex) {
-                throw new NiteException("Invalid description of an event.");
-            }
+            task = getEvent(taskString);
             break;
         default:
             assert false : "Cases should be exhaustive.";
             throw new NiteException("Unexpected value: " + type);
         }
+        return task;
+    }
+
+    private static Task getEvent(String taskString) throws NiteException {
+        Task task;
+        if (taskString.length() <= 6) {
+            throw new NiteException("The description of an event cannot be empty.");
+        }
+        String[] taskArr2 = taskString.substring(6).split(" /at ");
+        try {
+            task = new Event(taskArr2[0], taskArr2[1]);
+        } catch (IndexOutOfBoundsException ex) {
+            throw new NiteException("Invalid description of an event.");
+        }
+        return task;
+    }
+
+    private static Task getDeadline(String taskString) throws NiteException {
+        Task task;
+        if (taskString.length() <= 9) {
+            throw new NiteException("The description of a deadline cannot be empty.");
+        }
+        String[] taskArr = taskString.substring(9).split(" /by ");
+        try {
+            task = new Deadline(taskArr[0], taskArr[1]);
+        } catch (IndexOutOfBoundsException ex) {
+            throw new NiteException("Invalid description of a deadline.");
+        }
+        return task;
+    }
+
+    private static Task getTodo(String taskString) throws NiteException {
+        Task task;
+        if (taskString.length() <= 5) {
+            throw new NiteException("The description of a todo cannot be empty.");
+        }
+        task = new ToDo(taskString.substring(5));
         return task;
     }
 }

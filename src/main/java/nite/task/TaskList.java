@@ -32,7 +32,7 @@ public class TaskList {
             try {
                 this.tasks.add(dataToTask(taskString));
             } catch (NiteException ignored) {
-                continue;
+                // Line in data which cannot be converted to Task is ignored.
             }
         }
     }

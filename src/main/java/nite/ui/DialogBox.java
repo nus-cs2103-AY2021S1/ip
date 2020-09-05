@@ -51,16 +51,30 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a DialogBox for user's dialog.
+     *
+     * @param text Text to be shown.
+     * @param img Image to be shown.
+     * @return A DialogBox containing the text and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         assert !text.isEmpty() : "Text should not be empty.";
         assert img != null : "Image should not be null.";
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    /**
+     * Creates a DialogBox for Nite's dialog.
+     *
+     * @param text Text to be shown.
+     * @param img Image to be shown.
+     * @return A DialogBox containing the text and image.
+     */
+    public static DialogBox getNiteDialog(String text, Image img) {
         assert !text.isEmpty() : "Text should not be empty.";
         assert img != null : "Image should not be null.";
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
         return db;
     }
