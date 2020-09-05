@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// Duke Class
+// Duke is a program for users to keep track of and organize tasks
 public class Duke {
 
     private static Storage storage;
@@ -22,114 +22,19 @@ public class Duke {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    /* 
-    Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    
-    @Override
-    public void start(Stage stage) {
-        // Step 1
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
 
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-        // Step 2
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-        
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-        //Step 3
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-    }
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) throws DukeException, UnsupportedEncodingException {
-        //return "Duke heard: " + input;
-        /*ByteArrayOutputStream os = new ByteArrayOutputStream();
-        String utf8 = StandardCharsets.UTF_8.name();
-        try (PrintStream ps = new PrintStream(os, true, utf8)) {
-            new Duke("listStore.ser").run(input);
-        }
-        String data = new String(os.toByteArray(), utf8);
-        System.out.println(data);
-        return data;
-        */
         return new Duke("listStore.ser").run(input);
     }
     
     /**
-     * Duke runs the program, and ends process when user input is "bye"
+     * Duke runs the program, and ends process when user input is "bye".
      * @param filepath
-     * @throws DukeException if an exception arises while reading input or creating parser object
+     * @throws DukeException if an exception arises while reading input or creating parser object.
      */
     public Duke(String filepath) {
         ui = new UI();
@@ -141,14 +46,16 @@ public class Duke {
             inputs = new TaskList();
         }
     }
+    
+    //Empty Constructor
     public Duke() {
         
     }
 
     /**
      * run() method constructs Duke Object, constructs UI,
-     * storage and TaskList object to initialize
-     * @return
+     * storage and TaskList object to initialize.
+     * @return output string
      */
     public String run(String input) throws DukeException {
         while (true) {
@@ -169,7 +76,7 @@ public class Duke {
 
     // Input class represents user inputted tasks
     public static class Input implements Serializable {
-        boolean done = false;
+        boolean isDone = false;
         String content;
         String id;
         LocalDate time;
@@ -177,18 +84,18 @@ public class Duke {
 
         Input(String content) {
             this.content = content;
-            boolean done = false;
+            boolean isDone = false;
         }
 
         Input(boolean done, String content) {
-            this.done = done;
+            this.isDone = done;
             this.content = content;
         }
 
         // Marks task as done
         public void taskDone() {
             System.out.println("check");
-            this.done = true;
+            this.isDone = true;
         }
     }
 
@@ -363,7 +270,7 @@ public class Duke {
             Input inputType = inputs.get(numTaskDone - 1);
             inputs.remove(numTaskDone - 1);
             storage.writeToFile(inputs);
-            if (inputType.done) {
+            if (inputType.isDone) {
                 return ("Noted. I've removed this task:" + "\n" + inputType.id + "[/] " + inputType.content 
                         + inputType.printTime + "\n" + "Now you have " + inputs.size() + " tasks in the list.");
             } else {
@@ -441,7 +348,7 @@ public class Duke {
             for (int i = 0; i < len; i++) {
                 Input input = inputs.get(i);
                 if (input.content.contains(keyword)) {
-                    if (input.done) {
+                    if (input.isDone) {
                         return ((i + 1) + ". " + input.id + "[/] " + input.content
                                 + input.printTime);
                     } else {
@@ -519,7 +426,7 @@ public class Duke {
                         String stringList = "Here are the tasks in your list: \n";
                         for (int i = 0; i <= len-1; i++) {
                             Input inputType = inputs.inputs.get(i);
-                            if (inputType.done) {
+                            if (inputType.isDone) {
                                 stringList += ((i+1) + ". " + inputType.id + "[/] " + inputType.content + inputType.printTime + "\n");
                             } else {
                                 stringList += ((i+1) + ". " + inputType.id + "[x] " + inputType.content + inputType.printTime + "\n");
