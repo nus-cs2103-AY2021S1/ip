@@ -14,7 +14,7 @@ import java.util.Scanner;
  * Encapsulates behavior for reading and writing to files.
  */
 public class DataManager {
-    /** The file path to save and load data from */
+    /** The file name to save and load data from */
     private final String fileName = "data.txt";
 
     private final String directory = "data/";
@@ -29,11 +29,13 @@ public class DataManager {
         List<Task> tasks = taskList.getAllTasks();
         try {
             File dataDirectory = new File(directory);
-            if(!dataDirectory.exists()) {
+
+            if (!dataDirectory.exists()) {
                 dataDirectory.mkdir();
             }
 
             File dataFile = new File(directory + fileName);
+
             dataFile.createNewFile();
 
             FileWriter fw = new FileWriter(dataFile);

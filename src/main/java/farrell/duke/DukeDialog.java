@@ -11,6 +11,10 @@ public class DukeDialog extends HBox {
     private ImageView displayPicture;
     private Image image = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Creates a new DukeDialog containing some text.
+     * @param text Text to display in the dialog.
+     */
     public DukeDialog(String text) {
         textLabel = new Label(text);
         displayPicture = new ImageView(image);

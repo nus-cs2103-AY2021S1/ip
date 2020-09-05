@@ -15,11 +15,17 @@ public class Duke {
     /** An object that handles user interaction */
     private UiManager uiManager;
 
+    /**
+     * Starts a new instance of the program.
+     * Existing data is loaded (if available).
+     * Display a startup message.
+     * @param uiManager The UIManager to handle the startup message.
+     * @throws DukeException
+     */
     public Duke(UiManager uiManager) throws DukeException {
         this.uiManager = uiManager;
         taskList = dataManager.load();
         uiManager.displayStartMessage();
-
     }
 
     /**
@@ -40,7 +46,7 @@ public class Duke {
             String parameters = splitInput.length > 1 ? splitInput[1] : null;
             processCommand(command, parameters);
         } catch (DukeException exception) {
-                uiManager.sendDukeMessage(exception.getMessage());
+            uiManager.sendDukeMessage(exception.getMessage());
         }
     }
 
@@ -49,10 +55,9 @@ public class Duke {
      *
      * @param command The command to execute.
      * @param parameters Parameters relevant to the execution of the command.
-     * @return 1 if the program should continue. 0 if the program should exit.
      * @throws DukeException If an invalid command is given.
      */
-    public void processCommand(CommandType command, String parameters) throws DukeException{
+    public void processCommand(CommandType command, String parameters) throws DukeException {
         switch(command) {
         case TODO:
             ToDo todo = new ToDo(parameters);
