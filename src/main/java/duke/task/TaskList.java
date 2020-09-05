@@ -15,6 +15,7 @@ public class TaskList {
      *
      * @author Alvin Chee
      */
+    private static final int STARTINDEX = 1;
     private static List<Task> taskList;
 
     /**
@@ -85,7 +86,8 @@ public class TaskList {
      * @throws DukeIndexOutOfBoundsException
      */
     public String deleteTask(String taskInfo) throws DukeIndexOutOfBoundsException {
-        if (taskInfo.length() <= 7) {
+        String delete = "delete";
+        if (taskInfo.trim().length() <= delete.length()) {
             throw new DukeIndexOutOfBoundsException("The task you want to delete is invalid");
         }
         String taskNoString = taskInfo.replace("delete", "").trim();
@@ -95,7 +97,7 @@ public class TaskList {
         } catch (NumberFormatException err) {
             throw new DukeNumberFormatException("Please input a number for the task you want to delete.");
         }
-        if (taskNo < 1 || taskNo > taskList.size()) {
+        if (taskNo < STARTINDEX || taskNo > taskList.size()) {
             throw new DukeIndexOutOfBoundsException("The task you want to delete is invalid");
         }
         int index = taskNo - 1;
@@ -114,7 +116,7 @@ public class TaskList {
         Iterator<Task> iterator = taskList.iterator();
         iterator.forEachRemaining(matchTask -> {
             for (int j = 0; j < matchWords.length; j++) {
-                //In case of having alot of spaces in between two words.
+                //In case of having alot of spaces in between two words, skip the iteration.
                 if (matchWords[j].equals("")) {
                     continue;
                 }
