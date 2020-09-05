@@ -88,7 +88,6 @@ public class Event extends Task {
      * @throws DukeException if description provided does not match format of time.
      */
     public boolean isSameTime(LocalTime time) throws DukeException {
-
         assert dateOrTime != null;
         String[] descriptions = dateOrTime.split(" ");
         for (int i = 0; i < descriptions.length; i++) {
