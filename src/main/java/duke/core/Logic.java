@@ -1,7 +1,7 @@
 package duke.core;
 
 import duke.core.parser.DukeParserException;
-import duke.core.parser.Parser;
+import duke.core.parser.ParseToCommand;
 import duke.designpattern.command.Executable;
 import duke.designpattern.command.ReversibleExecutable;
 
@@ -19,7 +19,7 @@ public class Logic {
     public static void execute(DataStore dataStore, String input) {
         try {
             // Parse user input
-            Executable command = Parser.parse(dataStore, input);
+            Executable command = ParseToCommand.parse(dataStore, input);
 
             // Execute command
             command.execute();

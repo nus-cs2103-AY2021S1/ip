@@ -31,31 +31,31 @@ public enum ParseToCommand {
 
     HELP {
         @Override
-        public Executable parse(DataStore dataStore, String commandParam) {
+        protected Executable parseParameter(DataStore dataStore, String commandParameter) {
             return new HelpCommand();
         }
     },
 
     BYE {
         @Override
-        public Executable parse(DataStore dataStore, String commandParam) {
+        protected Executable parseParameter(DataStore dataStore, String commandParameter) {
             return new ExitCommand();
         }
     },
 
     LIST {
         @Override
-        public Executable parse(DataStore dataStore, String commandParam) {
+        protected Executable parseParameter(DataStore dataStore, String commandParameter) {
             return new ListCommand(dataStore.getTaskList());
         }
     },
 
     DONE {
         @Override
-        public Executable parse(DataStore dataStore, String commandParam) {
+        protected Executable parseParameter(DataStore dataStore, String commandParameter) {
             // Generate a DoneCommand which when executed, marks the task specified by the index as done
             try {
-                int index = Integer.parseInt(commandParam.trim()) - 1;
+                int index = Integer.parseInt(commandParameter.trim()) - 1;
                 Task task = dataStore.getTaskList().get(index);
                 return new DoneCommand(task);
             } catch (NumberFormatException e) {
@@ -68,10 +68,10 @@ public enum ParseToCommand {
 
     DELETE {
         @Override
-        public Executable parse(DataStore dataStore, String commandParam) {
+        protected Executable parseParameter(DataStore dataStore, String commandParameter) {
             // Generate a DeleteCommand which when executed, removes the task specified by the index from the list
             try {
-                int index = Integer.parseInt(commandParam.trim()) - 1;
+                int index = Integer.parseInt(commandParameter.trim()) - 1;
                 Task task = dataStore.getTaskList().get(index);
                 return new DeleteCommand(dataStore.getTaskList(), task);
             } catch (NumberFormatException e) {
@@ -84,28 +84,28 @@ public enum ParseToCommand {
 
     TODO {
         @Override
-        public Executable parse(DataStore dataStore, String commandParam) {
-            if (commandParam.isBlank()) {
+        protected Executable parseParameter(DataStore dataStore, String commandParameter) {
+            if (commandParameter.isBlank()) {
                 throw new DukeParserException("Format: todo {description}");
             }
 
             // Generate an AddCommand which when executed, adds
             // the new To-Do task to the taskList
-            Task task = new ToDo(commandParam.trim());
+            Task task = new ToDo(commandParameter.trim());
             return new AddCommand(dataStore.getTaskList(), task);
         }
     },
 
     DEADLINE {
         @Override
-        public Executable parse(DataStore dataStore, String commandParam) {
+        protected Executable parseParameter(DataStore dataStore, String commandParameter) {
             String usage = "deadline {description} /by {ddMMyyyy HHmm}";
 
             // Regex to obtain param1 and param2 in Deadline(description, deadline)
             // param1: Description (String class)
             // param2: Deadline (DukeDateTime class)
             Pattern pattern = Pattern.compile("^(.+)/by(.+)$");
-            Matcher matcher = pattern.matcher(commandParam);
+            Matcher matcher = pattern.matcher(commandParameter);
 
             // Ensure that both param1 and param2 exists
             if (!matcher.matches()
@@ -129,7 +129,7 @@ public enum ParseToCommand {
 
     EVENT {
         @Override
-        public Executable parse(DataStore dataStore, String commandParam) {
+        protected Executable parseParameter(DataStore dataStore, String commandParameter) {
             String usage = "event {description} /from {ddMMyyyy HHmm} /till {ddMMyyyy HHmm}";
 
             // Regex to obtain param1, param2 and param3 in Event(description, start, end)
@@ -137,7 +137,7 @@ public enum ParseToCommand {
             // param2: start (DukeDateTime class)
             // param3: end (DukeDateTime class)
             Pattern pattern = Pattern.compile("^(.+)/from(.+)/till(.+)$");
-            Matcher matcher = pattern.matcher(commandParam);
+            Matcher matcher = pattern.matcher(commandParameter);
 
             // Ensure that both param1, param2 and param3 exists
             if (!matcher.matches()
@@ -162,62 +162,94 @@ public enum ParseToCommand {
 
     SAVE {
         @Override
-        public Executable parse(DataStore dataStore, String commandParam) {
-            if (commandParam.isBlank()) {
+        protected Executable parseParameter(DataStore dataStore, String commandParameter) {
+            if (commandParameter.isBlank()) {
                 throw new DukeParserException("Format: save {filepath}");
             }
 
             // Generate a SaveCommand which when executed, saves the taskList into specified file path
-            return new SaveCommand(dataStore.getTaskList(), commandParam.trim());
+            return new SaveCommand(dataStore.getTaskList(), commandParameter.trim());
         }
     },
 
     LOAD {
         @Override
-        public Executable parse(DataStore dataStore, String commandParam) {
-            if (commandParam.isBlank()) {
+        protected Executable parseParameter(DataStore dataStore, String commandParameter) {
+            if (commandParameter.isBlank()) {
                 throw new DukeParserException("Format: load {filepath}");
             }
 
             // Generate a LoadCommand which when executed, loads data from specified file path into taskList
-            return new LoadCommand(dataStore, commandParam.trim());
+            return new LoadCommand(dataStore, commandParameter.trim());
         }
     },
 
     FIND {
         @Override
-        public Executable parse(DataStore dataStore, String commandParam) {
-            if (commandParam.isBlank()) {
+        protected Executable parseParameter(DataStore dataStore, String commandParameter) {
+            if (commandParameter.isBlank()) {
                 throw new DukeParserException("Format: find {keyword}");
             }
 
             // Generate a FindCommand which when executed, search for all instance of searchString in taskList
-            return new FindCommand(dataStore.getTaskList(), commandParam.trim());
+            return new FindCommand(dataStore.getTaskList(), commandParameter.trim());
         }
     },
 
     UNDO {
         @Override
-        public Executable parse(DataStore dataStore, String commandParam) throws DukeParserException {
+        protected Executable parseParameter(DataStore dataStore, String commandParameter) throws DukeParserException {
             return new UndoCommand(dataStore.getHistory());
         }
     },
 
     REDO {
         @Override
-        public Executable parse(DataStore dataStore, String commandParam) throws DukeParserException {
+        protected Executable parseParameter(DataStore dataStore, String commandParameter) throws DukeParserException {
             return new RedoCommand(dataStore.getHistory());
         }
     };
 
     /**
-     * Generate the Command by providing command parameters (if required)
-     * @param dataStore The dataStore which Command will execute on
-     * @param commandParam Command parameters needed to construct the Command (As required)
+     * Parse the commandParameter based on the commandType.
+     * @param dataStore The data which the Duke Command will execute on
+     * @param commandParameter Command parameters needed to construct the Command (As required)
      * @return A Command which executes on the dataStore
      * @throws DukeParserException if the input cannot be parsed. Details about the error can be
      * retrieved by the Throwable.getMessage() method
      */
-    public abstract Executable parse(DataStore dataStore, String commandParam) throws DukeParserException;
+    protected abstract Executable parseParameter(DataStore dataStore, String commandParameter)
+            throws DukeParserException;
 
+    /**
+     * Parse user input and convert it into an executable command.
+     * The resulting command, when will execute on the data in DataStore
+     * @param dataStore The data which the Duke Command will execute on
+     * @param input The raw user input
+     * @return A Command which executes on the dataStore
+     * @throws DukeParserException if the input cannot be parsed. Details about the error can be
+     * retrieved by the Throwable.getMessage() method
+     */
+    public static Executable parse(DataStore dataStore, String input) throws DukeParserException {
+
+        // Match the input pattern
+        Pattern pattern = Pattern.compile("^\\s*(\\S+)\\s*(.*)$");
+        Matcher matcher = pattern.matcher(input);
+
+        // No input received
+        if (!matcher.matches()) {
+            throw new DukeParserException("Empty input!");
+        }
+
+        // Extract commandType and commandParameter
+        String commandType = matcher.group(1).toUpperCase();
+        String commandParam = matcher.group(2);
+
+        try {
+            // Generate duke.core.command with commandType and commandParameter
+            return ParseToCommand.valueOf(commandType).parseParameter(dataStore, commandParam);
+        } catch (IllegalArgumentException e) {
+            throw new DukeParserException("Unrecognised Command!");
+        }
+    }
 }

@@ -1,6 +1,6 @@
 package duke.core.task;
 
-import duke.core.storage.CsvToTask;
+import duke.core.parser.CsvToTask;
 
 /**
  * A Task with no defined datetime

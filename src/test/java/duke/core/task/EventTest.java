@@ -1,11 +1,10 @@
 package duke.core.task;
 
-import duke.core.storage.CsvToTask;
+import duke.core.parser.CsvToTask;
 import duke.core.util.DukeDateTime;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

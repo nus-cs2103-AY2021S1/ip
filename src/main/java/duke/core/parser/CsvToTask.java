@@ -1,4 +1,4 @@
-package duke.core.storage;
+package duke.core.parser;
 
 import duke.core.util.DukeDateTime;
 import duke.core.task.Deadline;
