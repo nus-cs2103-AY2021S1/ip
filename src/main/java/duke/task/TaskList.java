@@ -76,14 +76,10 @@ public class TaskList {
      * @param keyword User input keyword.
      * @return Task(s) that contain the keyword.
      */
-    public TaskList findTask(String keyword) {
-        TaskList filtered = new TaskList();
-        this.tasks.forEach((task) -> {
-            if (task.containsKeyword(keyword)) {
-                filtered.addTask(task);
-            }
-        });
-        return filtered;
+    public TaskList searchTasks(String keyword) {
+        List<Task> filtered = this.tasks.stream().filter(task -> task.containsKeyword(keyword))
+                .collect(Collectors.toList());
+        return new TaskList(filtered);
     }
 
     /**
