@@ -8,7 +8,7 @@ import duke.util.DateFormatter;
  * Models an event task.
  */
 public class Event extends Task {
-    private Date at;
+    protected Date at;
 
     /**
      * Constructs an Event.
@@ -17,7 +17,7 @@ public class Event extends Task {
      * @param at The date of the event.
      */
     public Event(String description, Date at) {
-        super(description);
+        super(description, at);
         this.at = at;
         assert (this.at != null);
     }

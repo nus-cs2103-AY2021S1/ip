@@ -8,7 +8,7 @@ import duke.util.DateFormatter;
  * Models a deadline task.
  */
 public class Deadline extends Task {
-    private Date by;
+    protected Date by;
 
     /**
      * Constructs a Deadline.
@@ -17,7 +17,7 @@ public class Deadline extends Task {
      * @param by The date of the deadline.
      */
     public Deadline(String description, Date by) {
-        super(description);
+        super(description, by);
         this.by = by;
         assert (this.by != null);
     }

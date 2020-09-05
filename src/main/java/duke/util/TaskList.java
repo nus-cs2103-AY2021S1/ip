@@ -1,6 +1,7 @@
 package duke.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.StringJoiner;
 
 import duke.task.Task;
@@ -92,5 +93,12 @@ public class TaskList {
             }
         }
         return response.toString();
+    }
+
+    /**
+     * Sorts the task list by date.
+     */
+    public void sort() {
+        Collections.sort(this.tasks);
     }
 }
