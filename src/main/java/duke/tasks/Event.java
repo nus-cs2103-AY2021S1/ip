@@ -38,6 +38,7 @@ public class Event extends Task {
      * @return Formatted String version of LocalDate and LocalTime in input.
      */
     private String convertDateAndTime() {
+        assert description != null : "Description cannot be empty.";
         String d1 = "";
         String[] descriptions = date.split(" ");
         for (int i = 0; i < descriptions.length; i++) {
@@ -64,6 +65,7 @@ public class Event extends Task {
      * @throws DukeException if description provided does not match format of date.
      */
     public boolean isSameDate(LocalDate date) throws DukeException {
+        assert date != null;
         LocalDate d1 = date;
         LocalDate d2 = null;
         String[] descriptions = this.date.split(" ");
@@ -86,6 +88,7 @@ public class Event extends Task {
      * @throws DukeException if description provided does not match format of time.
      */
     public boolean isSameTime(LocalTime time) throws DukeException {
+        assert date != null;
         LocalTime d1 = time;
         LocalTime d2 = null;
         String[] descriptions = date.split(" ");

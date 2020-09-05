@@ -17,6 +17,8 @@ public class ByeCommand extends Command {
      * @throws DukeException throw when error occurs
      */
     public String execute(TaskList tasklist, Storage storage) throws DukeException {
+        assert tasklist != null : "Tasklist cannot be null.";
+        assert storage != null : "Storage cannot be null.";
         return ("Bye. Hope to see you again soon!");
     }
 
