@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.exception.InvalidDateException;
 import duke.exception.InvalidIndexException;
-import duke.exception.MissingDateException;
 import duke.exception.UnreadableSaveTaskException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -103,42 +101,12 @@ public class TaskList {
     }
 
     /**
-     * Creates a new ToDo instance and adds it to the list.
-     * @param details Description of task to create.
-     * @return Newly-created task.
+     * Adds a new Task to the list.
+     *
+     * @param task New task to be added.
      */
-    public ToDo addToDo(String details) {
-        ToDo toDo = ToDo.create(details);
-        tasks.add(toDo);
-        return toDo;
-    }
-
-    /**
-     * Creates a new Event instance and adds it to the list.
-     * @param details Description of task to create.
-     * @return Newly-created task.
-     * @throws MissingDateException If date field is missing.
-     * @throws InvalidDateException If date is not provided in the correct format.
-     */
-    public Event addEvent(String details)
-            throws MissingDateException, InvalidDateException {
-        Event event = Event.create(details);
-        tasks.add(event);
-        return event;
-    }
-
-    /**
-     * Creates a new Deadline instance and adds it to the list.
-     * @param details Description of task to create.
-     * @return Newly-created task.
-     * @throws MissingDateException If date field is missing.
-     * @throws InvalidDateException If date is not provided in the correct format.
-     */
-    public Deadline addDeadline(String details)
-            throws MissingDateException, InvalidDateException {
-        Deadline deadline = Deadline.create(details);
-        tasks.add(deadline);
-        return deadline;
+    public void add(Task task) {
+        tasks.add(task);
     }
 
     /**

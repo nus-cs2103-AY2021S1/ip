@@ -1,24 +1,30 @@
 package duke.main;
 
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddToDoCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.InvalidCommandException;
-import duke.exception.InvalidDateException;
-import duke.exception.InvalidIndexException;
-import duke.exception.MissingDateException;
-import duke.task.Task;
 
 /**
  * Parser is a class used by Duke to interpret user inputs as commands.
  */
 public class Parser {
-    private static final String BYE = "All changes saved, hope to see you again!";
-    private static final String NO_TASK_FOUND = "Sorry, there are no tasks that "
-            + "match your description!";
-
     private final Storage storage;
     private final TaskList taskList;
-    private StringBuilder reply = new StringBuilder();
 
-    Parser(Storage storage, TaskList taskList) {
+    /**
+     * Constructs a new Parser object.
+     *
+     * @param storage Storage for saving the TaskList to a file with.
+     * @param taskList TaskList to be operated on.
+     */
+    public Parser(Storage storage, TaskList taskList) {
         this.storage = storage;
         this.taskList = taskList;
     }
@@ -33,48 +39,61 @@ public class Parser {
      */
     public String parse(String input) {
         if (input.equals("list")) {
-            list();
+            return new ListCommand(taskList).execute();
         } else if (input.equals("bye")) {
-            close();
+            return new ByeCommand(storage, taskList).execute();
         } else {
-            operateOnTaskList(input);
+            return operateOnTaskList(input);
         }
-
-        StringBuilder output = reply;
-        reply = new StringBuilder();
-        return output.toString();
     }
 
-    private void operateOnTaskList(String input) {
+    /**
+     * Performs operations on the TaskList and returns a message detailing the outcome.
+     *
+     * @param input User command parsed into Duke.
+     * @return Response detailing outcome of operation.
+     */
+    private String operateOnTaskList(String input) {
         try {
-            String command = extractCommand(input);
-            switch (command) {
+            String keyword = extractCommand(input);
+            Command command;
+            switch (keyword) {
             case "done":
-                done(input.substring(5));
+                command = new DoneCommand(input.substring(5), taskList);
                 break;
             case "delete":
-                delete(input.substring(7));
+                command = new DeleteCommand(input.substring(7), taskList);
                 break;
             case "find":
-                find(input.substring(5));
+                command = new FindCommand(input.substring(5), taskList);
                 break;
             case "todo":
-                addToDo(input.substring(5));
+                command = new AddToDoCommand(input.substring(5), taskList);
                 break;
             case "event":
-                addEvent(input.substring(6));
+                command = new AddEventCommand(input.substring(5), taskList);
                 break;
             case "deadline":
-                addDeadline(input.substring(9));
+                command = new AddDeadlineCommand(input.substring(5), taskList);
                 break;
             default:
                 throw new InvalidCommandException();
             }
+
+            return command.execute();
         } catch (InvalidCommandException e) {
-            reply.append(e);
+            return e.toString();
         }
     }
 
+    /**
+     * Returns the command word in the user input that is not "list" or "bye".
+     * This is the first word in the input line.
+     *
+     * @param input User input.
+     * @return Command word.
+     * @throws InvalidCommandException If only one word was provided.
+     */
     private String extractCommand(String input) throws InvalidCommandException {
         int spaceIndex = input.indexOf(' ');
         if (spaceIndex > 0) {
@@ -82,88 +101,5 @@ public class Parser {
         } else {
             throw new InvalidCommandException();
         }
-    }
-
-    private void list() {
-        reply.append("Here are the tasks in your list:")
-                .append(System.lineSeparator())
-                .append(taskList);
-    }
-
-    private void close() {
-        storage.writeToFile(taskList);
-        reply.append(BYE);
-    }
-
-    private void done(String taskNumber) {
-        try {
-            int index = Integer.parseInt(taskNumber) - 1;
-            Task completed = taskList.complete(index);
-            reply.append("Well done! The following task is complete:")
-                    .append(System.lineSeparator())
-                    .append(completed);
-        } catch (InvalidIndexException e) {
-            reply.append(e.toString());
-        }
-    }
-
-    private void delete(String taskNumber) {
-        try {
-            int index = Integer.parseInt(taskNumber) - 1;
-            Task deleted = taskList.delete(index);
-            reply.append("Noted, I have removed the below task:")
-                    .append(System.lineSeparator())
-                    .append(deleted)
-                    .append(System.lineSeparator())
-                    .append("Now you have ")
-                    .append(taskList.size())
-                    .append(" task(s) left");
-        } catch (InvalidIndexException e) {
-            reply.append(e.toString());
-        }
-    }
-
-    private void find(String searchString) {
-        TaskList searchResults = taskList.find(searchString);
-        if (searchResults.size() > 0) {
-            reply.append("The following task(s) match your search:")
-                    .append(System.lineSeparator())
-                    .append(searchResults);
-        } else {
-            reply.append(NO_TASK_FOUND);
-        }
-    }
-
-    private void addToDo(String details) {
-        Task toDo = taskList.addToDo(details);
-        generateAddTaskMessage(toDo);
-    }
-
-    private void addEvent(String details) {
-        try {
-            Task event = taskList.addEvent(details);
-            generateAddTaskMessage(event);
-        } catch (MissingDateException | InvalidDateException e) {
-            reply.append(e);
-        }
-    }
-
-    private void addDeadline(String details) {
-        try {
-            Task deadline = taskList.addDeadline(details);
-            generateAddTaskMessage(deadline);
-        } catch (MissingDateException | InvalidDateException e) {
-            reply.append(e);
-        }
-    }
-
-    private void generateAddTaskMessage(Task task) {
-        reply.append("Got it, I have added this task:")
-                .append(System.lineSeparator())
-                .append(task)
-                .append(System.lineSeparator())
-                .append("You now have ")
-                .append(taskList.size())
-                .append(" task(s) in this list");
     }
 }

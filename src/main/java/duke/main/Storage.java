@@ -12,7 +12,12 @@ import java.io.IOException;
 public class Storage {
     private final File file;
 
-    Storage(String filePath) {
+    /**
+     * Constructs a new Storage object.
+     *
+     * @param filePath Location of file to be read from and written to.
+     */
+    public Storage(String filePath) {
         this.file = new File(filePath);
     }
 
@@ -45,7 +50,7 @@ public class Storage {
      *
      * @param taskList List of tasks to be written and saved to a file.
      */
-    void writeToFile(TaskList taskList) {
+    public void writeToFile(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(file.getPath());
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
