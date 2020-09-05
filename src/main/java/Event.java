@@ -28,6 +28,13 @@ public class Event extends Task {
     }
 
     @Override
+    public void updateSaveRep(){
+        this.saveRep = "[E] " + super.toString() + " (" + preposition + ": " +
+                date + " " +
+                time + ")";
+    }
+
+    @Override
     public String toString() {
         return "[E] " + super.toString() + " (" + preposition + ": " +
                 date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +

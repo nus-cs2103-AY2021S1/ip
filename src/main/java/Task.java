@@ -21,8 +21,11 @@ public abstract class Task extends Command {
     }
 
     public String saveStringRepresentation() {
+        this.updateSaveRep();
         return saveRep;
     }
+
+    public abstract void updateSaveRep();
 
     public String getTitle() {
         return title;

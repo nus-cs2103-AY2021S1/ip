@@ -10,7 +10,9 @@ public class Find extends Command {
     }
 
     public String response() {
-        return "Here are the matching tasks in your list:\n" +
+        return "Do I look like Google Morty? I-Is that what I am nowadays?" +
+                " I searched for your stuff anyway cause I'm not an aaaa*BUURRPPS*ss." +
+                " You better be grateful for all these things that I'm helping you with.\n\n" +
                 DataStorageInterface.filteredTasks(searchQuery);
     }
 }

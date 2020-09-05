@@ -6,11 +6,12 @@ public class Bye extends Command {
     Bye() {
         this.name = "bye";
         this.usage = "bye";
-        this.description = "Duke Chatbot will power down";
+        this.description = "I will go to sleep";
     }
 
     public String response() {
-        return "Bye. Hope to see you again soon!";
+        return "I-I'm gonna go sleep Morty, d-dont disturb me anymore unless you " +
+                " wanna get blasted by my *BURRRRRPPP* lazers";
     }
 
     /**

@@ -10,6 +10,7 @@ public class Clear extends Command {
     }
 
     public String response() {
-        return "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+        return "Dont you get it Morty? We're in a GUI you idiot, you cant" +
+                " just clear all the stuff I've said away.";
     }
 }

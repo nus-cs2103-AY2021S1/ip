@@ -40,7 +40,8 @@ public class DataStorageInterface {
     public static Task markDone(int index) throws CustomException {
         Task curr = DataStorage.taskList.get(index);
         if (curr.isDone()) {
-            throw new CustomException("Error: This task has already been marked as done");
+            throw new CustomException("Error: H-How many times are you gonna *BUUURRRRRP* mark " +
+                    "this thing as done? I-Its already done Morty");
         }
         curr.markDone();
         return curr;
@@ -87,7 +88,7 @@ public class DataStorageInterface {
      * @return Task Added Response with number of tasks Not Done.
      */
     public static String taskAdded(Task task) {
-        return "Got it. I've added this task:\n\t" + task.toString() +
+        return "Got it. I've added this task:\n" + task.toString() +
                 String.format("\nNow you have %d tasks in the list",
                         DataStorageInterface.getTasksNotDone());
     }
@@ -168,7 +169,8 @@ public class DataStorageInterface {
             i++;
             acc.append(String.format("%d. %s\n", i, t));
         }
-        return acc.toString().isEmpty() ? "There are no Tasks in the list" : acc.toString();
+        return acc.toString().isEmpty() ? "You have no Tasks in the list. Not like " +
+                "they *BUUURRRRP* matter" : acc.toString();
     }
 
     /**

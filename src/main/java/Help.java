@@ -8,7 +8,7 @@ public class Help extends Command {
 
     Help(String[] query) throws WrongUsageException {
         this.name = "help";
-        this.usage = "help [CommandName](optional)";
+        this.usage = "\nhelp [CommandName] (optional)";
         this.description = "Provides the list of all commands, " +
                 "or a detailed description of a single command";
         if (query.length > 2) {
@@ -32,7 +32,9 @@ public class Help extends Command {
     }
 
     private String listCommands() {
-        return "COMMAND: USAGE\n" + DataStorageInterface.listCommands();
+        return "OH MY GOD MORTY THIS AGAIN?? REALLY? I expected this from Jerry but YOU? " +
+                "I guess the apple really doesn't fall from the tree.\n\n" +
+                "COMMAND: USAGE\n" + DataStorageInterface.listCommands();
     }
 
     private String singleCommandHelp(String query) throws UnknownCommandException {

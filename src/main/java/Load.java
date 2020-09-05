@@ -34,9 +34,10 @@ public class Load extends Command {
     public String load() throws FileNotFoundException, DukeException {
         boolean success = readFile();
         if (success) {
-            return "Successfully loaded tasks:\n" + DataStorageInterface.listOfTasks();
+            return "Successfully loaded tasks, obviously:\n" + DataStorageInterface.listOfTasks();
         } else {
-            return "There was some error. Could not load tasks successfully.";
+            return "There was some error. Could not load tasks successfully. " +
+                    "Your idiot father must have *BUURRRRRPS* messed up the files somehow";
         }
     }
 

@@ -24,15 +24,17 @@ public class Done extends Command {
         try {
             idx = Integer.parseInt(listIndex) - 1;
         } catch (Exception e) {
-            throw new CustomException("Error: Please enter a valid integer!");
+            throw new CustomException("Error: Dammit Morty, give me a *BUURRRP* valid integer!");
         }
         if (idx < 0 || idx > DataStorageInterface.getSize() - 1) {
-            throw new CustomException("Error: Please enter a number " +
+            throw new CustomException("Error: Morty y-you idiot give me a number *BUURRP*" +
                     "that is in range of the task numbers");
         } else {
             Task curr = DataStorageInterface.markDone(idx);
-            return String.format("Nice I have marked this task as done:\n\t%s\n" +
-                    "Now you have %d tasks left",curr,DataStorageInterface.getTasksNotDone());
+            return String.format("“h-h-how did you take *BURRRRPPPP* so long to-to finish " +
+                    "a task morty? HOW? Anyways you finished this\n%s\n" +
+                    "Now you have just another %d meaningless things to do",
+                    curr,DataStorageInterface.getTasksNotDone());
         }
     }
 

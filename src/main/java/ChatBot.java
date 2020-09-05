@@ -13,22 +13,25 @@ public class ChatBot {
     /**
      * Main static method for ChatBot to be started in Main class.
      */
-    public static void start() {
+    public static String start() {
         try {
             DataStorageInterface.initStorage();
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Hello I'm Duke!\nWhat can I do for you?");
-            while (!ChatBot.hasEnded) {
-                try {
-                    String query = scanner.nextLine();
-                    String resp = ChatBot.response(query);
-                    System.out.println(resp);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            }
+            return RickCustom.SUCCESS_INTRO;
         } catch (DukeException e) {
-            System.out.println("ChatBot initialisation failed.");
+            return RickCustom.FAILED_INTRO;
+        }
+    }
+
+    public static String getResponse(String query){
+        try{
+            if(!hasEnded) {
+                String resp = ChatBot.response(query);
+                return resp;
+            } else {
+                return "";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
         }
     }
 

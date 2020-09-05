@@ -105,7 +105,8 @@ public class Parser {
         i++;
         String[] splitDate = splitQuery[i].split(Pattern.quote("/"));
         if (splitDate.length != 3) {
-            throw new CustomException("Date is wrongly formatted!");
+            throw new CustomException("Error: You formatted the date wrongly Morty!" +
+                    " Is your entire family just a bunch of idiots?");
         }
         //Format required is DD/MM/YYYY
         LocalDate date = LocalDate.parse(splitDate[2] + "-" + splitDate[1] + "-" + splitDate[0]);
