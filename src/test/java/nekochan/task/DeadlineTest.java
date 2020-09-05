@@ -54,7 +54,7 @@ public class DeadlineTest {
         NekoException thrown = assertThrows(NekoTaskCreationException.class, () -> {
             Deadline deadline = Deadline.createTask(null);
         });
-        assertTrue(thrown.getMessage().contains("I need something to work with."));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_COMMAND_DEADLINE_MISSING_ARGUMENT));
     }
 
     @Test

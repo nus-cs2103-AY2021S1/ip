@@ -44,7 +44,7 @@ public class EventTest {
         NekoException thrown = assertThrows(NekoTaskCreationException.class, () -> {
             Event event = Event.createTask(null);
         });
-        assertTrue(thrown.getMessage().contains("I need something to work with."));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_COMMAND_EVENT_MISSING_ARGUMENT));
     }
 
     @Test

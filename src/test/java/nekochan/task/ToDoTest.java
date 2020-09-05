@@ -24,7 +24,7 @@ public class ToDoTest {
         NekoException thrown = assertThrows(NekoTaskCreationException.class, () -> {
             ToDo todo = ToDo.createTask(null);
         });
-        assertTrue(thrown.getMessage().contains("I need something to work with."));
+        assertTrue(thrown.getMessage().contains(Messages.PARSE_COMMAND_TODO_MISSING_ARGUMENT));
     }
 
     @Test
