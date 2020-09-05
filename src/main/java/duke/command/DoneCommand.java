@@ -25,8 +25,8 @@ public class DoneCommand extends Command {
      * @param tasks TaskList containing all tasks
      * @param ui Ui for formatting of message Strings to be displayed to user
      * @param storage Storage to retrieve and store Tasks entered by user
-     * @throws NoSuchTaskException if invalid taskNumber was provided
      * @return Response object containing the feedback String to be displayed by the GUI
+     * @throws NoSuchTaskException if invalid taskNumber was provided
      */
     @Override
     public Response execute(TaskList tasks, Ui ui, Storage storage) throws NoSuchTaskException {

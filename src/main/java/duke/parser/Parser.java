@@ -74,7 +74,16 @@ public class Parser {
         }
     }
 
-    private String[] splitTime (String type, String commandArgs) throws WrongSyntaxException {
+    /**
+     * Split user input arguments for Deadline and Event Commands into two parts, a description and the
+     * datetime String entered by user.
+     *
+     * @param type the type of Command, either Deadline or Event
+     * @param commandArgs the arguments provided by user to create the Command
+     * @return String array of size 2 with first element being the description, second element being the datetime String
+     * @throws WrongSyntaxException if necessary arguments for the Command were not provided
+     */
+    private String[] splitTime(String type, String commandArgs) throws WrongSyntaxException {
         assert(type.equals("deadline") || type.equals("event"));
         String splitBy = type.equals("deadline") ? "/by" : "/at";
         String[] parts = commandArgs.split(splitBy, 2);
@@ -85,13 +94,23 @@ public class Parser {
         }
     }
 
-    private String[] split(String commandStr) throws UnknownCommandException, WrongSyntaxException, EmptyBodyException {
+    /**
+     * Split a user input Command String into two parts, the Command name and the Command arguments.
+     *
+     * @param commandStr the command String that user entered
+     * @return String array of size two with first element being the Command name, second element the Command arguments
+     * @throws UnknownCommandException if Command name entered is not included in the list of all valid Commands
+     * @throws WrongSyntaxException if necessary arguments for the Command were not provided
+     */
+    private String[] split(String commandStr) throws UnknownCommandException, WrongSyntaxException {
         if (commandStr.isBlank()) {
             throw new WrongSyntaxException();
         }
+
         String[] parts = commandStr.trim().split(" ", 2);
         String commandName = parts[0].trim();
         boolean isSingleArgCommand = singleArgCommands.contains(commandName);
+
         if (parts.length < 2 && !isSingleArgCommand) {
             throw new WrongSyntaxException();
         }
@@ -100,12 +119,9 @@ public class Parser {
         }
         if (isSingleArgCommand) {
             return new String[]{ commandName, "" };
-        } else {
-            String commandArgs = parts[1].trim();
-            if (commandArgs.isBlank()) {
-                throw new EmptyBodyException();
-            }
-            return new String[]{ commandName, commandArgs };
         }
+
+        String commandArgs = parts[1].trim();
+        return new String[]{ commandName, commandArgs };
     }
 }

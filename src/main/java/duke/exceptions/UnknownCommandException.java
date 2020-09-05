@@ -1,5 +1,8 @@
 package duke.exceptions;
 
+/**
+ * Exception thrown when user inputs a command that is not included in the list of valid commands.
+ */
 public class UnknownCommandException extends DukeException {
 
     public UnknownCommandException(String command) {
