@@ -143,6 +143,16 @@ public class Event extends TimedTask {
     }
 
     @Override
+    public String repeat(int n) throws InvalidCommandException {
+        if (atTime == null) {
+            throw new InvalidCommandException(Parser.REPEAT_UNFIXED_EVENT_EXCEPTION);
+        } else {
+            repeat = n;
+            return String.format(Ui.REPEAT_TASK_OUTPUT_FORMAT, n, this);
+        }
+    }
+
+    @Override
     public String output() {
         if (atTime != null) {
             return "E" + super.output() + " | At: "

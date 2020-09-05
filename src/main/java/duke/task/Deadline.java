@@ -100,6 +100,13 @@ public class Deadline extends TimedTask {
             throw new InvalidCommandException(Parser.INVALID_DATE_FORMAT_EXCEPTION);
         }
     }
+
+    @Override
+    public String repeat(int n) {
+        repeat = n;
+        return String.format(Ui.REPEAT_TASK_OUTPUT_FORMAT, n, this);
+    }
+
     @Override
     public String output() {
         return "D" + super.output() + " | By: " + byTime + "\n";

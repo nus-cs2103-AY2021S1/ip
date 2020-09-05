@@ -3,8 +3,11 @@ package duke.task;
 import duke.command.InvalidCommandException;
 
 public abstract class TimedTask extends Task {
+    protected int repeat;
+
     public TimedTask(String description) {
         super(description);
+        repeat = 0;
     }
 
     /**
@@ -14,4 +17,12 @@ public abstract class TimedTask extends Task {
      * @throws InvalidCommandException if the input format, or the task index and the time is invalid
      */
     abstract public String snoozeTo(String[] input) throws InvalidCommandException;
+
+    /**
+     * Sets the task to repeat regularly.
+     * @param n the number of days to repeat
+     * @return the output notice string of the repeat command
+     * @throws InvalidCommandException if the task does not have a fixed time yet
+     */
+    abstract public String repeat(int n) throws InvalidCommandException;
 }

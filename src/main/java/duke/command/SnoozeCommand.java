@@ -64,8 +64,8 @@ public class SnoozeCommand extends Command {
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
-        } else if (obj instanceof FindCommand) {
-            return input.equals(((FindCommand) obj).input);
+        } else if (obj instanceof SnoozeCommand) {
+            return input.equals(((SnoozeCommand) obj).input);
         } else {
             return false;
         }

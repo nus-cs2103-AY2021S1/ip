@@ -10,6 +10,7 @@ import duke.command.FixCommand;
 import duke.command.HappenCommand;
 import duke.command.InvalidCommandException;
 import duke.command.ListCommand;
+import duke.command.RepeatCommand;
 import duke.command.SnoozeCommand;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -31,6 +32,7 @@ public class Parser {
     public static final String FIND_COMMAND_PREFIX = "find ";
     public static final String FIX_COMMAND_PREFIX = "fix ";
     public static final String SNOOZE_COMMAND_PREFIX = "snooze ";
+    public static final String REPEAT_COMMAND_PREFIX = "repeat ";
     public static final String TODO = "todo";
     public static final String DEADLINE = "deadline";
     public static final String EVENT = "event";
@@ -44,6 +46,9 @@ public class Parser {
     public static final String DAYS = "days";
     public static final String TODAY = "today";
     public static final String TO = "to";
+    public static final String DAILY = "daily";
+    public static final String WEEKLY = "weekly";
+    public static final String EVERY = "every";
     public static final char SPACE_CHAR = ' ';
     public static final String SPACE_STRING = " ";
     public static final String TASK_SINGULAR = "task";
@@ -58,9 +63,8 @@ public class Parser {
     public static final String NONNUMERIC_TASK_INDEX_EXCEPTION = "The task index should be a number.";
     public static final String LACK_TIME_SPECIFICATION_EXCEPTION = "Time should be specified.";
     public static final String UNRECOGNIZED_COMMAND_EXCEPTION = "I'm sorry, but I don't know what that means :-(";
-    public static final String HAPPEN_IN_NEGATIVE_DAYS_EXCEPTION =
-            "Please input a positive integer for happen in command.";
-    public static final String HAPPEN_IN_NONNUMERIC_EXCEPTION = "The input number of days to search is not a number.";
+    public static final String NEGATIVE_DAYS_EXCEPTION = "Number of days should be a positive integer.";
+    public static final String NONNUMERIC_NUMBER_OF_DAYS_EXCEPTION = "Number of days is not a number.";
     public static final String HAPPEN_BETWEEN_EMPTY_PERIOD_EXCEPTION =
             "Latter date is before former date for happen between.";
     public static final String UNRECOGNIZED_HAPPEN_COMMAND_EXCEPTION = "Invalid happen command input.";
@@ -68,14 +72,17 @@ public class Parser {
     public static final String INVALID_DATE_TIME_FORMAT_EXCEPTION = "Invalid input datetime, please input as"
             + "yyyy-MM-dd HH:mm.";
     public static final String INVALID_TASK_TYPE_INDEX_EXCEPTION = "The index of task is not of the desired task type.";
-    public static final String FIX_COMMAND_FORMAT_EXCEPTION = "The format for fix command should be."
+    public static final String FIX_COMMAND_FORMAT_EXCEPTION = "The format for fix command should be "
             + "'fix <task_index of event> <datetime to fix>'.";
     public static final String FIX_TIME_NOT_EXIST_EXCEPTION = "The time to fix for the event does not exist.";
-    public static final String SNOOZE_COMMAND_FORMAT_EXCEPTION = "The format for snooze command should be"
+    public static final String SNOOZE_COMMAND_FORMAT_EXCEPTION = "The format for snooze command should be "
             + "'snooze <task_index of timed task> to <date/datetime to reschedule to>'.";
     public static final String SNOOZE_UNFIXED_EVENT_EXCEPTION = "Cannot snooze an event with multiple tentative slots.";
     public static final String SNOOZE_TO_EARLIER_TIME_EXCEPTION = "Sorry, you cannot snooze a task to a time earlier"
             + "than its original scheduled time.";
+    public static final String REPEAT_COMMAND_FORMAT_EXCEPTION = "The format for repeat command should be "
+            + "'repeat <task_index of timed task> [daily/weekly/every {n} days]'.";
+    public static final String REPEAT_UNFIXED_EVENT_EXCEPTION = "Cannot repeat an event with multiple tentative slots.";
     public static final DateTimeFormatter DATE_TIME_INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     public static final DateTimeFormatter DATE_TIME_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("hh:mm a   MMM d yyyy");
     public static final DateTimeFormatter DATE_INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -249,6 +256,8 @@ public class Parser {
             return new FixCommand(input);
         } else if (input.startsWith(SNOOZE_COMMAND_PREFIX)) {
             return new SnoozeCommand(input);
+        } else if (input.startsWith(REPEAT_COMMAND_PREFIX)) {
+            return new RepeatCommand(input);
         } else {
             return new AddCommand(input);
         }
