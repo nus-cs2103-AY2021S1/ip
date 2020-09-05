@@ -27,10 +27,5 @@ public class FindCommand extends Command {
     public String execute(TaskManager manager, Ui ui, Storage storage) {
         return ui.displayMatchingTasks(manager.findTasks(keywords));
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
 

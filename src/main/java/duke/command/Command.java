@@ -20,11 +20,4 @@ public abstract class Command {
      * @throws DukeException If command is deemed invalid or the tasks could not be saved.
      */
     public abstract String execute(TaskManager manager, Ui ui, Storage storage) throws DukeException;
-
-    /**
-     * Returns true if and only if the command is an exit command.
-     *
-     * @return True if command is an exit command, and false otherwise.
-     */
-    public abstract boolean isExit();
 }

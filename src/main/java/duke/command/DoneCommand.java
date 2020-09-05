@@ -36,9 +36,4 @@ public class DoneCommand extends Command {
         storage.saveTasks(tasks);
         return ui.showDoneMessage(task);
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

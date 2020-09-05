@@ -13,9 +13,4 @@ public class ListCommand extends Command {
     public String execute(TaskManager manager, Ui ui, Storage storage) {
         return ui.displayTasks(manager.getTasks());
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

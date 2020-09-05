@@ -28,9 +28,4 @@ public class InvalidCommand extends Command {
     public String execute(TaskManager manager, Ui ui, Storage storage) throws DukeException {
         throw new DukeInvalidCommandException(command);
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
