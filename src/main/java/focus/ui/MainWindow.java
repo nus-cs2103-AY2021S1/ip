@@ -68,6 +68,7 @@ public class MainWindow extends AnchorPane {
             );
             numberOfTimes++;
         } else {
+            assert (numberOfTimes > 0) : "Number of times user typed should be more than 0 here.";
             String response = focus.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),

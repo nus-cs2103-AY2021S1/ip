@@ -51,6 +51,7 @@ public class Parser {
         } else { // handle invalid inputs
             command = new InvalidCommand();
         }
+        assert !command.equals(null) : "Command should not be null here.";
         return command;
     }
 
@@ -83,6 +84,7 @@ public class Parser {
                 existingTask.markAsDone();
             }
         }
+        assert !existingTask.equals(null) : "Existing task should not be null here.";
         return existingTask;
     }
 }

@@ -34,6 +34,7 @@ public class FindCommand extends Command {
         if (keyword.isBlank()) {
             throw new FocusException("\tPlease enter a keyword you wish to find!");
         }
+        assert !keyword.isEmpty() : "Keyword should not be blank here.";
         return taskList.findTasks(keyword.trim());
     }
 }

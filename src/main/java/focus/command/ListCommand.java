@@ -29,6 +29,7 @@ public class ListCommand extends Command {
             throw new FocusException("\tThere are currently no tasks on your list!\n"
                     + "\tStart adding one now!");
         } else {
+            assert !(taskList.getSize() < 0) : "Task list size should not be less than zero at all.";
             return taskList.listTasks();
         }
     }

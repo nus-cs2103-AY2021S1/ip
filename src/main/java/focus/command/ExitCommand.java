@@ -23,6 +23,7 @@ public class ExitCommand extends Command {
      * @return Empty string.
      */
     public String execute(String input, TaskList taskList, Storage storage) {
+        assert false : "Program should not reach here.";
         return "";
     }
 }

@@ -60,11 +60,11 @@ public class Storage {
      * @return Arraylist of tasks in string format.
      */
     public ArrayList<String> loadData() {
-        String task;
         ArrayList<String> taskList = new ArrayList<>();
         try {
             File data = new File(path);
             Scanner sc = new Scanner(data);
+            String task = "";
             while (sc.hasNextLine()) {
                 task = sc.nextLine();
                 taskList.add(task);
@@ -86,6 +86,7 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(path, true);
             String task = item.taskToText() + "\n";
+            assert !task.isEmpty() : "Task should not be blank here.";
             fileWriter.write(task);
             fileWriter.close();
         } catch (IOException e) {
@@ -104,6 +105,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(path);
             for (Task item : tasks) {
                 String task = item.taskToText() + "\n";
+                assert !task.isEmpty() : "Task should not be blank here.";
                 fileWriter.write(task);
             }
             fileWriter.close();
