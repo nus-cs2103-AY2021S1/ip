@@ -40,12 +40,10 @@ public class FindCommand extends Command {
             if (task.getDescription().toLowerCase().contains(keyword)) {
                 taskArrayList.add(task);
             }
-        });
-        if (!taskArrayList.isEmpty()) {
-            return ui.showMatchingTask(taskArrayList);
-        } else {
+        if (taskArrayList.isEmpty()) {
             throw new DukeTaskNotFoundException(" NO MATCHING TASK FOUND. \n PLEASE TRY AGAIN. ");
         }
+        return ui.showMatchingTask(taskArrayList);
     }
 
     /**

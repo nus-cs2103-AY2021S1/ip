@@ -34,12 +34,11 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeTaskNotFoundException {
         int taskNumber = Character.getNumericValue(commandDetails[1].charAt(0)) - 1;
-        if (!tasks.getTasks().isEmpty() && taskNumber < tasks.getTasks().size()) {
-            Task removedTask = tasks.getTasks().remove(taskNumber);
-            return ui.showDeletedTask(removedTask, tasks.getTasks().size());
-        } else {
+        if (tasks.getTasks().isEmpty() || taskNumber > tasks.getTasks().size()) {
             throw new DukeTaskNotFoundException(" ERROR... TASK NOT FOUND. \n PLEASE TRY AGAIN ");
         }
+        Task removedTask = tasks.getTasks().remove(taskNumber);
+        return ui.showDeletedTask(removedTask, tasks.getTasks().size());
     }
 
     /**
