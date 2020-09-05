@@ -30,7 +30,7 @@ public class DialogBox extends HBox {
     @FXML
     private Circle displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String dialogColor) {
         try {
             FXMLLoader fxmlLoader =
                     new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -42,6 +42,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        setDialogColour(dialogColor);
         displayPicture.setFill(new ImagePattern(img));
     }
 
@@ -61,15 +62,12 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.setDialogColour(USER_DIALOG_COLOUR);
-        return db;
+        return new DialogBox(text, img, USER_DIALOG_COLOUR);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, DUKE_DIALOG_COLOUR);
         db.flip();
-        db.setDialogColour(DUKE_DIALOG_COLOUR);
         return db;
     }
 }
