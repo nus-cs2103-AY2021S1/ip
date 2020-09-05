@@ -14,8 +14,8 @@ public class Deadline extends Task {
     /**
      * Constructor for the deadline task object.
      *
-     * @param name    name of the deadline task
-     * @param date    Date when the deadline task is created
+     * @param name    name of the deadline task.
+     * @param date    Date when the deadline task is created.
      * @param dueDate Date indicated by the user on when the deadline is due.
      */
     public Deadline(String name, LocalDateTime date, String dueDate) {
@@ -26,12 +26,19 @@ public class Deadline extends Task {
     /**
      * Overloaded constructor when the deadline task object is re-created from a tasklist.txt file.
      *
-     * @param line input from the tasklist.txt file
+     * @param line input from the tasklist.txt file.
      */
     public Deadline(String line) {
         super(line);
-        this.dueDate = LocalDateTime.parse(line.substring(line.indexOf("(by: ") + 5, line.lastIndexOf(")")),
-                DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
+        this.dueDate = createDueDate(line);
+    }
+
+    private LocalDateTime createDueDate(String line) {
+        return LocalDateTime.parse(getDateString(line), DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
+    }
+
+    private String getDateString(String line) {
+        return line.substring(line.indexOf("(by: ") + "(by: ".length(), line.lastIndexOf(")"));
     }
 
     private String getdueDate() {

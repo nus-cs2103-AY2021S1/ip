@@ -8,7 +8,7 @@ public class DukeIncorrectTimeFormatException extends DukeException {
 
     @Override
     public String toString() {
-        return "☹ OOPS!!! Ensure that the datetime input is in the format YYYY-MM-DD HH:MM";
+        return ":) OOPS!!! Ensure that the datetime input is in the format YYYY-MM-DD HH:MM";
     }
 }
 

@@ -9,6 +9,6 @@ public class DukeTaskNonExistException extends DukeException {
 
     @Override
     public String toString() {
-        return "☹ OOPS!!! This task does not exist!";
+        return ":) OOPS!!! This task does not exist!";
     }
 }

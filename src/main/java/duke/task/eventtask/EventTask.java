@@ -14,8 +14,8 @@ public class EventTask extends Task {
     /**
      * Constructor for the event task object.
      *
-     * @param name      name of the event task
-     * @param date      Date when the entry for this event task is created
+     * @param name      name of the event task.
+     * @param date      Date when the entry for this event task is created.
      * @param eventDate Date indicated by the user on when the event will happen.
      */
     public EventTask(String name, LocalDateTime date, String eventDate) {
@@ -31,10 +31,18 @@ public class EventTask extends Task {
      */
     public EventTask(String line) {
         super(line);
-        this.eventDate = LocalDateTime.parse(line.substring(line.indexOf("(at: ") + 5, line.lastIndexOf(")")),
+        this.eventDate = createEventDate(line);
+    }
+
+    private LocalDateTime createEventDate(String line) {
+        return LocalDateTime.parse(getDateString(line),
                 DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
     }
 
+    private String getDateString(String line) {
+        return line.substring(line.indexOf("(at: ") + "(at: "
+                .length(), line.lastIndexOf(")"));
+    }
 
     private String getEventDate() {
         return eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));

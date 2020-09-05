@@ -26,7 +26,7 @@ public class Storage {
      * Constructor for creating a storage variable. It will create a new tasklist.txt if it does not exist, or
      * use existing one if it is pressent.
      *
-     * @param file Contains the filepath to wear the tasklist.txt will be stored
+     * @param file Contains the filepath to wear the tasklist.txt will be stored.
      */
     public Storage(File file) {
         this.file = file;
@@ -45,7 +45,7 @@ public class Storage {
     /**
      * If a tasklist.txt file exists, this method would load it into the TaskList.
      *
-     * @return A TaskList that is loaded with the tasks recorded on the txt file
+     * @return A TaskList that is loaded with the tasks recorded on the txt file.
      */
     public ArrayList<Task> loadFile() {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -59,13 +59,13 @@ public class Storage {
     /**
      * Updates the Tasklist.txt file with the existing tasks and states in the tasklist.
      *
-     * @param shelf the TaskList that we are updating
-     * @throws IOException if the file cannot be found
+     * @param taskList the TaskList that we are updating.
+     * @throws IOException if the file cannot be found.
      */
-    public void updateFile(TaskList shelf) throws IOException {
+    public void updateFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(file.getAbsolutePath());
-        for (int i = 0; i < shelf.getSize(); i++) {
-            fw.write(shelf.getTask(i).toString());
+        for (int i = 0; i < taskList.getSize(); i++) {
+            fw.write(taskList.getTask(i).toString());
             fw.write(System.lineSeparator());
         }
         fw.close();
@@ -83,8 +83,11 @@ public class Storage {
             return new ToDo(task);
         case 'D':
             return new Deadline(task);
-        default:
+        case 'E':
             return new EventTask(task);
+        default:
+            assert false : "no such task from taskCreator";
+            return null;
         }
     }
 
