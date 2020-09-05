@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -10,6 +11,7 @@ import exception.InvalidCommandException;
 import exception.MissingInfoException;
 
 import task.Task;
+import task.TaskDateTimeComparator;
 
 /**
  * Parser deals with making sense of the user command.
@@ -25,6 +27,7 @@ public class Parser {
     private static final String EMPTY_KEYWORD = "OOPS!!! Keyword cannot be empty.";
     private static final String FIND_REPLY = "Here are the matching tasks in your list:\n";
     private static final String INVALID_DATE = "OOPS!!! Date format is invalid. Make sure it is yyyy-mm-ddTHH:mm.";
+    private static final String SORT_REPLY = "Here are the tasks sorted by date and time:\n";
 
     public Parser(Scanner input) {
         this.input = input;
@@ -58,6 +61,8 @@ public class Parser {
             return executeDelete(taskList);
         } else if (command.equals("find")) {
             return executeFind(taskList);
+        } else if (command.equals("sort")) {
+            return executeSort(taskList);
         } else {
             return executeNewTask(taskList, command);
         }
@@ -209,5 +214,12 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw e;
         }
+    }
+
+    private String executeSort(TaskList taskList) {
+        ArrayList<Task> copyOfTaskList = new ArrayList<>(taskList.getTasks());
+        TaskList sortedTasks = new TaskList(copyOfTaskList);
+        sortedTasks.getTasks().sort(new TaskDateTimeComparator());
+        return SORT_REPLY + sortedTasks.listTasks();
     }
 }
