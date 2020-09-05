@@ -1,7 +1,7 @@
 package duke.operation;
 
 import duke.result.Result;
-import duke.task.TaskList;
+import duke.list.TaskList;
 
 /**
  * The operation that lists all the <code>Tasks</code> in <code>TaskList</code>.

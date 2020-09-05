@@ -9,7 +9,7 @@ import duke.exception.DukeOperationException;
 import duke.exception.DukeParseException;
 import duke.parser.StorageParser;
 import duke.task.Task;
-import duke.task.TaskList;
+import duke.list.TaskList;
 
 /** Class that loads and converts the <code>TaskList</code> in Duke with a text file. */
 public class TaskStorage {

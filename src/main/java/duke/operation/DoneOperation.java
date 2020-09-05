@@ -2,7 +2,7 @@ package duke.operation;
 
 import duke.result.Result;
 import duke.task.Task;
-import duke.task.TaskList;
+import duke.list.TaskList;
 
 /**
  * The operation that changes a specified <code>Task</code> into completed.

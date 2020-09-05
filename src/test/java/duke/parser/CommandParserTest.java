@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.stream.Stream;
 
+import duke.list.ListManager;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -21,7 +22,7 @@ import duke.operation.FindOperation;
 import duke.operation.ListOperation;
 import duke.operation.Operation;
 import duke.storage.TaskStorage;
-import duke.task.TaskList;
+import duke.list.TaskList;
 import duke.task.Todo;
 
 public class CommandParserTest {
@@ -30,44 +31,44 @@ public class CommandParserTest {
     @Test
     public void parse_correctInput_success() throws DukeParseException {
         Todo mockTodo = new Todo("mock", false);
-        TaskList taskList = new TaskList();
-        taskList.addTask(mockTodo);
+        ListManager listManager = new ListManager();
+        listManager.getTaskList().addTask(mockTodo);
         TaskStorage storage = TaskStorage.createTaskStorage();
 
         String command = "todo read book";
-        Operation operation = commandParser.parse(command, taskList, storage);
+        Operation operation = commandParser.parse(command, listManager, storage);
         assertTrue(operation instanceof AddTodoTaskOperation);
 
         command = "deadline return book /by 09-09-2019 1010";
-        operation = commandParser.parse(command, taskList, storage);
+        operation = commandParser.parse(command, listManager, storage);
         assertTrue(operation instanceof AddDeadlineTaskOperation);
 
         command = "event meeting /at 1430";
-        operation = commandParser.parse(command, taskList, storage);
+        operation = commandParser.parse(command, listManager, storage);
         assertTrue(operation instanceof AddEventTaskOperation);
 
         command = "list";
-        operation = commandParser.parse(command, taskList, storage);
+        operation = commandParser.parse(command, listManager, storage);
         assertTrue(operation instanceof ListOperation);
 
         command = "find book";
-        operation = commandParser.parse(command, taskList, storage);
+        operation = commandParser.parse(command, listManager, storage);
         assertTrue(operation instanceof FindOperation);
 
         command = "find read book";
-        operation = commandParser.parse(command, taskList, storage);
+        operation = commandParser.parse(command, listManager, storage);
         assertTrue(operation instanceof FindOperation);
 
         command = "done 1";
-        operation = commandParser.parse(command, taskList, storage);
+        operation = commandParser.parse(command, listManager, storage);
         assertTrue(operation instanceof DoneOperation);
 
         command = "delete 1";
-        operation = commandParser.parse(command, taskList, storage);
+        operation = commandParser.parse(command, listManager, storage);
         assertTrue(operation instanceof DeleteOperation);
 
         command = "bye";
-        operation = commandParser.parse(command, taskList, storage);
+        operation = commandParser.parse(command, listManager, storage);
         assertTrue(operation instanceof ExitOperation);
     }
 
@@ -98,11 +99,11 @@ public class CommandParserTest {
     @MethodSource("getParse_wrongInput_exceptionThrownArguments")
     public void parse_wrongInput_exceptionThrown(String command) {
         Todo mockTodo = new Todo("mock", false);
-        TaskList taskList = new TaskList();
-        taskList.addTask(mockTodo);
+        ListManager listManager = new ListManager();
+        listManager.getTaskList().addTask(mockTodo);
         TaskStorage storage = TaskStorage.createTaskStorage();
         try {
-            commandParser.parse(command, taskList, storage);
+            commandParser.parse(command, listManager, storage);
         } catch (DukeParseException exception) {
             assertNotNull(exception.getMessage());
         }

@@ -2,7 +2,7 @@ package duke.operation;
 
 import duke.result.Result;
 import duke.storage.TaskStorage;
-import duke.task.TaskList;
+import duke.list.TaskList;
 
 /**
  * The operation that initialises Duke.

@@ -3,9 +3,10 @@ package duke.parser;
 import java.time.LocalDateTime;
 import java.util.function.Function;
 
-import duke.Duke;
 import duke.exception.DukeParseException;
 import duke.expense.Expense;
+import duke.list.ExpenseList;
+import duke.list.ListManager;
 import duke.operation.addexpenseoperation.AddPayableOperation;
 import duke.operation.addexpenseoperation.AddReceivableOperation;
 import duke.operation.addtaskoperation.AddDeadlineTaskOperation;
@@ -20,7 +21,7 @@ import duke.operation.Operation;
 import duke.storage.TaskStorage;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.TaskList;
+import duke.list.TaskList;
 import duke.utils.Datetime;
 import duke.utils.Utils;
 
@@ -107,7 +108,8 @@ public class CommandParser {
         return new FindOperation(list, searchWord);
     }
 
-    private AddPayableOperation createPayableOp(String[] commands) throws DukeParseException {
+    private AddPayableOperation createPayableOp(
+            String[] commands, ExpenseList list) throws DukeParseException {
         if (CommandType.PAY.isValidLength(commands.length)) {
             throw new DukeParseException("Ensure a description, value and date are input.");
         }
@@ -124,10 +126,11 @@ public class CommandParser {
         String dateString = Utils.concatenate(commands, splitIndex + 1, commands.length);
         LocalDateTime date = Datetime.parseDateString(dateString, Expense.DATE_FORMAT_INPUT);
 
-        return new AddPayableOperation(description, value, date);
+        return new AddPayableOperation(description, value, date, list);
     }
 
-    private AddReceivableOperation createReceivableOp(String[] commands) throws DukeParseException {
+    private AddReceivableOperation createReceivableOp(
+            String[] commands, ExpenseList list) throws DukeParseException {
         if (CommandType.RECEIVE.isValidLength(commands.length)) {
             throw new DukeParseException("Ensure a description, value and date are input.");
         }
@@ -144,20 +147,20 @@ public class CommandParser {
         String dateString = Utils.concatenate(commands, splitIndex + 1, commands.length);
         LocalDateTime date = Datetime.parseDateString(dateString, Expense.DATE_FORMAT_INPUT);
 
-        return new AddReceivableOperation(description, value, date);
+        return new AddReceivableOperation(description, value, date, list);
     }
 
     /**
      * Parses the String given into an <code>Operation</code>.
      *
      * @param commandString the <code>String</code> that has been input by the user into Duke.
-     * @param list the <code>TaskList</code> to be operated on.
+     * @param listManager the <code>ListManager</code> of Duke to be operated on.
      * @param taskStorage the <code>TaskStorage</code> to be operated on,
      *                    if the <code>Operation</code> requires a save of the <code>TaskList</code>.
      * @return the parsed <code>Operation</code>.
      * @throws DukeParseException if the command cannot be recognised or is erroneous.
      */
-    public Operation parse(String commandString, TaskList list, TaskStorage taskStorage)
+    public Operation parse(String commandString, ListManager listManager, TaskStorage taskStorage)
             throws DukeParseException {
         String[] commands = commandString.split(" ");
         assert commands.length > 0 : "There is an error in the splitting of the command";
@@ -165,25 +168,25 @@ public class CommandParser {
                 commandType.getCommand().equals(commands[0]);
 
         if (isCommand.apply(CommandType.BYE)) {
-            return createExitOp(taskStorage, list);
+            return createExitOp(taskStorage, listManager.getTaskList());
         } else if (isCommand.apply(CommandType.LIST)) {
-            return createListOp(list);
+            return createListOp(listManager.getTaskList());
         } else if (isCommand.apply(CommandType.DONE)) {
-            return createDoneOp(commands, list);
+            return createDoneOp(commands, listManager.getTaskList());
         } else if (isCommand.apply(CommandType.TODO)) {
-            return createTodoOp(commands, list);
+            return createTodoOp(commands, listManager.getTaskList());
         } else if (isCommand.apply(CommandType.DEADLINE)) {
-            return createDeadlineOp(commands, list);
+            return createDeadlineOp(commands, listManager.getTaskList());
         } else if (isCommand.apply(CommandType.EVENT)) {
-            return createEventOp(commands, list);
+            return createEventOp(commands, listManager.getTaskList());
         } else if (isCommand.apply(CommandType.DELETE)) {
-            return createDeleteOp(commands, list);
+            return createDeleteOp(commands, listManager.getTaskList());
         } else if (isCommand.apply(CommandType.FIND)) {
-            return createFindOp(commands, list);
+            return createFindOp(commands, listManager.getTaskList());
         } else if (isCommand.apply(CommandType.RECEIVE)) {
-            return createReceivableOp(commands);
+            return createReceivableOp(commands, listManager.getExpenseList());
         } else if (isCommand.apply(CommandType.PAY)) {
-            return createPayableOp(commands);
+            return createPayableOp(commands, listManager.getExpenseList());
         } else {
             throw new DukeParseException("This command is not recognised unfortunately.");
         }

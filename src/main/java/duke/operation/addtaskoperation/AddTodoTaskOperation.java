@@ -1,6 +1,6 @@
 package duke.operation.addtaskoperation;
 
-import duke.task.TaskList;
+import duke.list.TaskList;
 import duke.task.Todo;
 
 /**
