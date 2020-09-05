@@ -1,4 +1,3 @@
-E|1|help people|2020-04-12
 T|0|Exercise
 T|0|Run
 T|0|Walk
