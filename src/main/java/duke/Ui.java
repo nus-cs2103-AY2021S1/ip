@@ -7,7 +7,7 @@ public class Ui {
     private String response;
 
     /**
-     * Shows the Duke logo and welcomes the user.
+     * Welcomes the user.
      */
     public String showWelcome() {
         return "Welcome to Duke!";

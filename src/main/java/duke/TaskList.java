@@ -52,7 +52,7 @@ public class TaskList {
      * @param number The number of the task to be marked as done.
      */
     public void markAsDone(int number) {
-        list.get(number).done();
+        list.get(number).setAsDone();
     }
 
     /**

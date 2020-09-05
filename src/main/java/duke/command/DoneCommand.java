@@ -7,19 +7,19 @@ import duke.TaskList;
 import duke.Ui;
 
 public class DoneCommand implements Command {
-    private final String item;
+    private final String itemToMarkAsDone;
 
-    public DoneCommand(String item) {
-        this.item = item;
+    public DoneCommand(String itemToMarkAsDone) {
+        this.itemToMarkAsDone = itemToMarkAsDone;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            int number = Integer.parseInt(item) - 1;
+            int itemNumber = Integer.parseInt(itemToMarkAsDone) - 1;
             String response = "Nice! I've marked this task as done:\n";
-            tasks.markAsDone(number);
-            response += tasks.getList().get(number);
+            tasks.markAsDone(itemNumber);
+            response += tasks.getList().get(itemNumber);
             storage.updateDataFile(tasks.getList());
             ui.setResponse(response);
         } catch (IOException error) {

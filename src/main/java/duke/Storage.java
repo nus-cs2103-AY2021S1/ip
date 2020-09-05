@@ -56,7 +56,7 @@ public class Storage {
                         list.add(new Event(details[2], LocalDate.parse(details[3])));
                     }
                     if (details[1].equals("1")) {
-                        list.get(list.size() - 1).done();
+                        list.get(list.size() - 1).setAsDone();
                     }
                 }
                 sc.close();
