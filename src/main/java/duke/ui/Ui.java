@@ -51,6 +51,7 @@ public class Ui {
     /**
      * Prints the list of current tasks.
      * @param tasks The list of tasks.
+     * @return The string representation of the task list.
      */
     public String showCurrentTasks(ArrayList<Task> tasks) {
         String start = startLine + "Here are the task(s) in your list:\n";
@@ -140,7 +141,7 @@ public class Ui {
      * Prints ending comment to user.
      * @return A farewell message.
      */
-    public String sayBye() {
+    public String showEndMessage() {
         return startLine + "Bye. Hope to see you again soon!\n"
             + endLine;
     }

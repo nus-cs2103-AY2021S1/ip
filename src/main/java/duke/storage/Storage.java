@@ -40,7 +40,7 @@ public class Storage {
     }
 
     /**
-     * Load the contents of the text file onto an ArrayList to create a task list.
+     * Loads the contents of the text file onto an ArrayList to create a task list.
      * @return A task list.
      * @throws FileNotFoundException If file cannot be found.
      * @throws DukeException If date format is incorrect.
@@ -53,25 +53,25 @@ public class Storage {
         while (reader.hasNext()) {
             String next = reader.nextLine();
 
-            String[] modNext = next.split(">");
-            if (modNext[0].trim().equals("D")) {
+            String[] parsedNext = next.split(">");
+            if (parsedNext[0].trim().equals("D")) {
 
-                String[] time = modNext[3].trim().split(" ");
-                Deadline deadline = new Deadline(modNext[2].trim(),
-                        time[1], modNext[1].trim().equals("✓"));
+                String[] time = parsedNext[3].trim().split(" ");
+                Deadline deadline = new Deadline(parsedNext[2].trim(),
+                        time[1], parsedNext[1].trim().equals("✓"));
                 lib.add(deadline);
             }
-            if (modNext[0].trim().equals("E")) {
+            if (parsedNext[0].trim().equals("E")) {
 
-                String[] time = modNext[3].trim().split(" ");
-                Event event = new Event(modNext[2].trim(),
-                        time[1], modNext[1].trim().equals("✓"));
+                String[] time = parsedNext[3].trim().split(" ");
+                Event event = new Event(parsedNext[2].trim(),
+                        time[1], parsedNext[1].trim().equals("✓"));
                 lib.add(event);
             }
-            if (modNext[0].trim().equals("T")) {
+            if (parsedNext[0].trim().equals("T")) {
 
-                ToDo toDo = new ToDo(modNext[2].trim(),
-                        modNext[1].trim().equals("✓")
+                ToDo toDo = new ToDo(parsedNext[2].trim(),
+                        parsedNext[1].trim().equals("✓")
                 );
                 lib.add(toDo);
             }

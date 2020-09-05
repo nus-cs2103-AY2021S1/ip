@@ -42,23 +42,23 @@ public class Parser {
      * @throws DukeException If command is invalid or missing details.
      */
     public Command parse(String command) throws DukeException {
-        String[] modEcho = command.split(" ", 2);
+        String[] parsedCommand = command.split(" ", 2);
 
-        if (modEcho.length == 1) {
+        if (parsedCommand.length == 1) {
             return checkOneWord(command);
         } else {
-            return checkTwoWords(modEcho);
+            return checkTwoWords(parsedCommand);
         }
     }
 
     /**
      * Parses one word commands. (e.g. bye, list)
-     * @param echo The command entered by the user.
+     * @param command The command entered by the user.
      * @return A command
      * @throws DukeException If command is invalid or is missing some details.
      */
-    public Command checkOneWord(String echo) throws DukeException {
-        switch (echo) {
+    public Command checkOneWord(String command) throws DukeException {
+        switch (command) {
         case "bye":
             return new ExitCommand();
         case "list":
@@ -86,45 +86,45 @@ public class Parser {
 
     /**
      * Parses two word commands. (e.g. done 2, delete 3)
-     * @param modEcho The command entered by the user.
+     * @param parsedCommand The parsed command entered by the user.
      * @return A command.
      * @throws DukeException If the command entered is invalid.
      */
-    public Command checkTwoWords(String[] modEcho) throws DukeException {
-        String task = modEcho[0];
+    public Command checkTwoWords(String[] parsedCommand) throws DukeException {
+        String task = parsedCommand[0];
 
         switch (task) {
         case "done":
-            if (!isNumeric(modEcho[1])) {
+            if (!isNumeric(parsedCommand[1])) {
                 throw new DukeException("Please enter a valid task number to complete!");
             } else {
-                int index = Integer.parseInt(modEcho[1]) - 1;
+                int index = Integer.parseInt(parsedCommand[1]) - 1;
                 return new DoneCommand(index);
             }
 
         case "delete":
-            if (!isNumeric(modEcho[1])) {
+            if (!isNumeric(parsedCommand[1])) {
                 throw new DukeException("Please enter a valid task number for deletion!");
             } else {
-                int index = Integer.parseInt(modEcho[1]) - 1;
+                int index = Integer.parseInt(parsedCommand[1]) - 1;
                 return new DeleteCommand(index);
             }
 
         case "check":
             try {
-                LocalDate checkedDate = LocalDate.parse(modEcho[1]);
+                LocalDate checkedDate = LocalDate.parse(parsedCommand[1]);
                 return new CheckCommand(checkedDate);
             } catch (DateTimeParseException ex) {
                 throw new DukeException("Please enter the date in this format: yyyy-mm-dd");
             }
 
         case "find":
-            return new FindCommand(modEcho[1]);
+            return new FindCommand(parsedCommand[1]);
         default:
             if (task.equals("todo")) {
-                return new TodoCommand(modEcho[1]);
+                return new TodoCommand(parsedCommand[1]);
             } else if (task.equals("deadline") || task.equals("event")) {
-                return checkValidTime(modEcho);
+                return checkValidTime(parsedCommand);
             } else {
                 throw new DukeException("Please enter a valid task name to add into the list!");
             }
@@ -134,29 +134,29 @@ public class Parser {
 
     /**
      * Parses commands involving time-based tasks.
-     * @param modEcho The command entered by the user.
+     * @param parsedCommand The parsed command entered by the user.
      * @return A command.
      * @throws DukeException If the date entered is in the wrong format.
      */
-    public Command checkValidTime(String[] modEcho) throws DukeException {
-        String task = modEcho[0];
-        String[] processTime = modEcho[1].split("/");
+    public Command checkValidTime(String[] parsedCommand) throws DukeException {
+        String task = parsedCommand[0];
+        String[] processTimePrefix = parsedCommand[1].split("/");
 
-        if (processTime.length == 1) {
+        if (processTimePrefix.length == 1) {
             throw new DukeException("You need to include '/by' or '/at' for this task to describe the time.");
         } else {
-            String[] time = processTime[1].split(" ", 2);
+            String[] time = processTimePrefix[1].split(" ", 2);
 
             if (time.length == 1) {
                 throw new DukeException("The time description cannot be left blank!");
             } else {
 
                 if (task.equals("deadline")) {
-                    return new DeadlineCommand(processTime[0].trim(),
+                    return new DeadlineCommand(processTimePrefix[0].trim(),
                             time[1].trim());
                 } else {
                     assert (task.equals("event")) : "This task name does not exist!";
-                    return new EventCommand(processTime[0].trim(),
+                    return new EventCommand(processTimePrefix[0].trim(),
                             time[1].trim());
                 }
             }
