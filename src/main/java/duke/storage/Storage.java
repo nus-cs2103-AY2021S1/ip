@@ -54,8 +54,8 @@ public class Storage {
         }
 
         assert tasks.size() >= 0 : "The size of tasks should be greater or equal to 0";
-        
         return tasks;
+
     }
 
     /**
