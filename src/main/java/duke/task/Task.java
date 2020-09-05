@@ -1,10 +1,12 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+
+import duke.DukeException;
+
+
 
 /**
  * Represents Task that the user wants duke.Duke to remember
@@ -15,8 +17,8 @@ public abstract class Task {
     protected static final DateTimeFormatter SAVE_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     protected static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
+    private Optional<LocalDate> date;
     private final String taskName;
-    protected Optional<LocalDate> date;
     private boolean isDone;
 
     protected Task(String name) {
@@ -67,7 +69,7 @@ public abstract class Task {
      */
     public String toSaveFormat() {
         String status = isDone ? "1" : "0";
-        return " | " + status + " | " + taskName ;
+        return " | " + status + " | " + taskName;
     }
 
     /**

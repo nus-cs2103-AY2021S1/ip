@@ -4,7 +4,7 @@ package duke.task;
  * Represents a ToDo Task.
  */
 public class ToDo extends Task {
-    public ToDo(String name){
+    public ToDo(String name) {
         super(name);
     }
 

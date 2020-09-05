@@ -61,24 +61,25 @@ public class Duke {
                     Task addedEvent = tasks.addEvent(words[1], words[2]);
                     return ui.showTaskAdded(addedEvent.toString(), tasks.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
-                    return ui.showError("Error: Please key in as: \n" +
-                            "event [title] /at YYYY-MM-DD [startTime] [endTime] where start and end time is in HH:MM ");
+                    return ui.showError("Error: Please key in as: \n"
+                            + "event [title] /at YYYY-MM-DD [startTime] [endTime]"
+                            + "where start and end time is in HH:MM ");
                 }
             case "todo":
                 try {
                     Task addedToDo = tasks.addTodo(words[1]);
                     return ui.showTaskAdded(addedToDo.toString(), tasks.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
-                    return ui.showError("Error: Please key in as: \n " +
-                            "event [title]");
+                    return ui.showError("Error: Please key in as: \n "
+                            + "event [title]");
                 }
             case "deadline":
                 try {
                     Task addedDeadline = tasks.addDeadLine(words[1], words[2]);
                     return ui.showTaskAdded(addedDeadline.toString(), tasks.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
-                    return ui.showError("Error: Please key in as: \n " +
-                            "event [title] /by YYYY-MM-DD HH:MM");
+                    return ui.showError("Error: Please key in as: \n "
+                            + "event [title] /by YYYY-MM-DD HH:MM");
                 }
 
             //Delete Task
@@ -92,11 +93,12 @@ public class Duke {
                 } catch (IndexOutOfBoundsException err) {
                     return ui.showError("Key in \"delete [x]\" to delete x^th item");
                 }
+                break;
 
             //Find task by keyword
             case "find":
                 String result = tasks.find(words[1]);
-                if (result == ""){
+                if (result.equals("")) {
                     return ui.show("No match found");
                 } else {
                     return ui.show("These following tasks match the keyword you entered: \n" + result);
@@ -109,10 +111,5 @@ public class Duke {
         } catch (DukeException err) {
             return ui.showError(err.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.println(System.getProperty("java.version"));
-        System.out.println(System.getProperty("javafx.version"));
     }
 }

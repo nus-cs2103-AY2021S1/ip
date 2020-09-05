@@ -1,13 +1,16 @@
 package duke;
 
-import duke.DukeException;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import duke.task.Deadline;
 
-import java.util.List;
-import java.util.ArrayList;
+
 
 /**
  * Represents a Manager to manage different tasks on hand.
@@ -18,7 +21,7 @@ public class TaskList {
     /**
      * Initialise with no initial task on hand.
      */
-    public TaskList(){
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
@@ -48,7 +51,7 @@ public class TaskList {
     public String find(String keyword) {
         String result = "";
         for (Task t : tasks) {
-            if (t.getName().contains(keyword)){
+            if (t.getName().contains(keyword)) {
                 if (result.equals("")) {
                     result += "\n   " + t.toString();
                 } else {
@@ -67,7 +70,7 @@ public class TaskList {
      * @throws DukeException If time is wrongly formatted.
      */
     public Task addDeadLine(String name, String time) throws DukeException {
-        Task newTask = new Deadline(name,time);
+        Task newTask = new Deadline(name, time);
         tasks.add(newTask);
         return newTask;
     }
@@ -79,7 +82,7 @@ public class TaskList {
      * @return The new Task added.
      * @throws DukeException If time is wrongly formatted.
      */
-    public Task addEvent(String name, String time) throws DukeException{
+    public Task addEvent(String name, String time) throws DukeException {
         Task newTask = new Event(name, time);
         tasks.add(newTask);
         return newTask;
@@ -88,7 +91,7 @@ public class TaskList {
     /**
      * @return The total number of tasks at hands.
      */
-    public int getTotalTask(){
+    public int getTotalTask() {
         return this.tasks.size();
     }
 
@@ -98,7 +101,7 @@ public class TaskList {
      * @throws DukeException If the task at index is already done.
      */
     public void doTask(int index) throws DukeException {
-        this.tasks.get(index-1).setDone();
+        this.tasks.get(index - 1).setDone();
     }
 
     /**
@@ -107,7 +110,7 @@ public class TaskList {
      */
     public String[] toSaveFormat() {
         String[] result = new String[this.tasks.size()];
-        for(int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             result[i] = tasks.get(i).toSaveFormat();
         }
         return result;
@@ -120,11 +123,11 @@ public class TaskList {
      * @throws DukeException If the task does not exists.
      */
     public Task deleteTask(int index) throws DukeException {
-        if (index-1 < 1 || index > this.tasks.size()) {
-            throw new DukeException("Task #" + index + "does not exist.\n" +
-                    "To check for lists of Tasks, type \"list\"");
+        if (index - 1 < 1 || index > this.tasks.size()) {
+            throw new DukeException("Task #" + index + "does not exist.\n"
+                    + "To check for lists of Tasks, type \"list\"");
         }
-        return this.tasks.remove(index-1);
+        return this.tasks.remove(index - 1);
     }
 
     /**
@@ -133,7 +136,7 @@ public class TaskList {
      * @return String representation of the task at concerned.
      */
     public String getTaskStatus(int index) {
-        return tasks.get(index-1).toString();
+        return tasks.get(index - 1).toString();
     }
 
     /**
@@ -144,7 +147,7 @@ public class TaskList {
     public String toString() {
         String output = "";
         for (int i = 1; i <= tasks.size(); i++) {
-            output += i + "." + tasks.get(i-1).toString();
+            output += i + "." + tasks.get(i - 1).toString();
             if (i != tasks.size()) {
                 output += "\n";
             }

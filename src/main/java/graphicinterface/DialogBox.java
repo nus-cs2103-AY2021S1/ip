@@ -1,4 +1,4 @@
-package graphicInterface;
+package graphicinterface;
 
 import java.io.IOException;
 import java.util.Collections;

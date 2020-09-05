@@ -19,12 +19,12 @@ public class Parser {
         if (spaceIndex == -1) {
             inputComponents.add(input);
         } else if (slashIndex == -1) {
-            inputComponents.add(input.substring(0,spaceIndex));
-            inputComponents.add(input.substring(spaceIndex+1));
+            inputComponents.add(input.substring(0, spaceIndex));
+            inputComponents.add(input.substring(spaceIndex + 1));
         } else {
-            inputComponents.add(input.substring(0,spaceIndex));
-            inputComponents.add(input.substring(spaceIndex+1,slashIndex));
-            inputComponents.add(input.substring(infoIndex+1));
+            inputComponents.add(input.substring(0, spaceIndex));
+            inputComponents.add(input.substring(spaceIndex + 1, slashIndex));
+            inputComponents.add(input.substring(infoIndex + 1));
         }
         return inputComponents.toArray(new String[0]);
     }

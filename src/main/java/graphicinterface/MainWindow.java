@@ -1,4 +1,4 @@
-package graphicInterface;
+package graphicinterface;
 
 import duke.Duke;
 import javafx.fxml.FXML;
@@ -37,12 +37,12 @@ public class MainWindow extends AnchorPane {
     }
 
     public void welcomeMessage() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getWelcome(),dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getWelcome(), dukeImage));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then
+     * appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {

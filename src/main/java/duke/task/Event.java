@@ -1,10 +1,9 @@
 package duke.task;
 
-import duke.DukeException;
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import duke.DukeException;
 
 /**
  * Represents a Event Task.
@@ -27,8 +26,8 @@ public class Event extends Task {
             startTime = LocalTime.parse(input[1]);
             endTime = LocalTime.parse(input[2]);
         } catch (Exception err) {
-            throw new DukeException("Error: Please key in as: \n" +
-                    "event [title] /at YYYY-MM-DD [startTime] [endTime] where start and end time is in HH:MM ");
+            throw new DukeException("Error: Please key in as: \n"
+                    + "event [title] /at YYYY-MM-DD [startTime] [endTime] where start and end time is in HH:MM ");
         }
     }
 

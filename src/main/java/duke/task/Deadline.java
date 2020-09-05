@@ -1,9 +1,11 @@
 package duke.task;
 
-import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
 
 /**
  * Represents a Deadline Task.
@@ -24,12 +26,12 @@ public class Deadline extends Task {
             super.setDate(LocalDate.parse(input[0]));
             if (input.length == 2) {
                 time = LocalTime.parse(input[1]);
-            } else{
+            } else {
                 time = null;
             }
         } catch (DateTimeParseException err) {
-            throw new DukeException("Error: Please key in as: \n " +
-                    "event [title] /by YYYY-MM-DD HH:MM");
+            throw new DukeException("Error: Please key in as: \n "
+                    + "event [title] /by YYYY-MM-DD HH:MM");
         }
     }
 

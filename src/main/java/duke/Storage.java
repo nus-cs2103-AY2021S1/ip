@@ -1,16 +1,18 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
+
 
 /**
  * Represents a file location that user's input. Capable of reading from and writing to the file.
@@ -65,7 +67,7 @@ public class Storage {
         } catch (FileNotFoundException err) {
             String[] fileDirectory = this.filePath.split("/");
             String parentDirectory = "";
-            for (int i = 0; i < fileDirectory.length -1 ; i++) {
+            for (int i = 0; i < fileDirectory.length - 1; i++) {
                 parentDirectory += fileDirectory[i] + "/";
             }
             File f = new File(parentDirectory);
@@ -96,7 +98,7 @@ public class Storage {
      */
     private Task createSavedTask(String[] args) throws DukeException {
         Task newTask;
-        try{
+        try {
             switch(args[0]) {
             case "D":
                 newTask = new Deadline(args[2], args[3]);

@@ -14,14 +14,14 @@ public class Ui {
      */
     public String show(String input) {
         String line = "_______________________________________________________";
-        return String.format("%s\n%s\n%s",line, input, line);
+        return String.format("%s\n%s\n%s", line, input, line);
     }
 
     /**
      * Return Welcome Message according to default's style.
      */
     public String showWelcome() {
-        return show("duke.Duke at your service. How may I help?");
+        return show("Duke at your service. How may I help?");
     }
 
     /**
@@ -38,8 +38,8 @@ public class Ui {
      * Return the detail of the task that is just set to done according to default's style.
      */
     public String showTaskDone(String taskDetail) {
-        return show("Nice! I have marked this task as done:\n" +
-                taskDetail);
+        return show("Nice! I have marked this task as done:\n"
+                + taskDetail);
     }
 
     /**
@@ -64,7 +64,7 @@ public class Ui {
      */
     public String showError(String err) {
         String line = "*******************************************************";
-        return String.format("%s\n%s\n%s",line, err, line);
+        return String.format("%s\n%s\n%s", line, err, line);
     }
 
     /**
@@ -73,5 +73,4 @@ public class Ui {
     public String showBye() {
         return show("Bye. See you again");
     }
-
 }
