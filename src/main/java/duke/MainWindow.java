@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -50,16 +51,28 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
-        if (input.equals("bye")) {
+        if (input.equals("help")) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Help");
+            alert.setHeaderText("Guide to DUKE's chatbot");
+            alert.setContentText(ui.help());
+            alert.showAndWait();
+        } else if (input.equals("bye")) {
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
             ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-            executorService.schedule(this::exitApplication, 5, TimeUnit.SECONDS);
+            executorService.schedule(this::exitApplication, 2, TimeUnit.SECONDS);
+        } else {
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
         }
+        userInput.clear();
     }
 
     /**

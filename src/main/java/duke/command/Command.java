@@ -11,15 +11,6 @@ import duke.exception.DukeException;
  */
 public abstract class Command {
 
-    protected boolean isExit;
-
-    /**
-     * Constructor of the Command class
-     */
-    public Command() {
-        this.isExit = false;
-    }
-
     /**
      * Abstract method that executes the command.
      *
