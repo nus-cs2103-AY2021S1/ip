@@ -187,4 +187,33 @@ public class Event extends Task {
         return this;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if(this == other) {
+            return true;
+        } else if (other instanceof Event) {
+            Event event = (Event) other;
+            boolean descIsEqual = this.description.equals(event.getDescription());
+            boolean dateIsEqual = this.getDate().equals(event.getDate());
+            boolean startTimeIsEqual = false;
+            boolean endTimeIsEqual = false;
+
+            if(this.startTime != null && event.getStartTime() != null) {
+                startTimeIsEqual = this.startTime.equals(event.getStartTime());
+            } else if (this.startTime == null && event.getStartTime() == null){
+                startTimeIsEqual = true;
+            }
+
+            if(this.endTime != null && event.getEndTime() != null) {
+                endTimeIsEqual = this.endTime.equals(event.getEndTime());
+            } else if (this.endTime == null && event.endTime == null) {
+                endTimeIsEqual = true;
+            }
+
+            return descIsEqual && dateIsEqual && startTimeIsEqual && endTimeIsEqual;
+        } else {
+            return false;
+        }
+    }
+
 }

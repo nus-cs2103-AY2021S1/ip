@@ -133,4 +133,6 @@ public abstract class Task implements Comparable<Task> {
     @Override
     public abstract String toString();
 
+    @Override
+    public abstract boolean equals(Object other);
 }

@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.StorageException;
 import duke.task.Todo;
 
 public class TodoCommand extends Command {
@@ -20,7 +21,11 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return processTodo(this.task, taskList, ui, storage);
+        try {
+            return processTodo(this.task, taskList, ui, storage);
+        } catch (StorageException s) {
+            return s.getMessage();
+        }
     }
 
     /**
@@ -31,7 +36,8 @@ public class TodoCommand extends Command {
      * @param ui       UI of the bot
      * @param storage  Storage managing the file in hard disk.
      */
-    public String processTodo(String theRest, TaskList taskList, Ui ui, Storage storage) {
+    public String processTodo(
+        String theRest, TaskList taskList, Ui ui, Storage storage) throws StorageException {
         Todo todo = new Todo(theRest);
         Storage.updateData(taskList.getTasks());
         return taskList.saveToList(todo);
