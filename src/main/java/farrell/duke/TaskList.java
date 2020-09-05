@@ -25,6 +25,7 @@ public class TaskList {
      * @return The task at the index.
      */
     public Task getTask(int taskNumber) {
+        assert taskList.size() > taskNumber;
         return taskList.get(taskNumber - 1);
     }
 
@@ -52,6 +53,7 @@ public class TaskList {
      * @param taskNumber Index of the task to delete.
      */
     public void deleteTask(int taskNumber) {
+        assert taskList.size() > taskNumber;
         Task deleteTask = taskList.get(taskNumber - 1);
         taskList.remove(taskNumber - 1);
     }
@@ -62,6 +64,7 @@ public class TaskList {
      * @param taskNumber Index of the task to update.
      */
     public void updateDone(int taskNumber) {
+        assert taskList.size() > taskNumber;
         Task task = taskList.get(taskNumber - 1);
         task.markAsDone(true);
     }
