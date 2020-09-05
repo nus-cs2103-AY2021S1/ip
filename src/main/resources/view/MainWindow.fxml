@@ -16,7 +16,7 @@
          minHeight="-Infinity"
          minWidth="-Infinity"
          prefHeight="600.0"
-         prefWidth="900.0"
+         prefWidth="1000.0"
          xmlns="http://javafx.com/javafx/8.0.171"
          xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="duke.ui.visualui.MainWindow"
@@ -35,17 +35,29 @@
                 <RowConstraints vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
+                <VBox
+                        fx:id="reminderSection"
+                        styleClass="reminderSectionStyling"
+                        minWidth="200"
+                        GridPane.columnIndex="0"
+                        GridPane.columnSpan="1"
+                        GridPane.rowIndex="0"
+                        GridPane.rowSpan="4"
+                        minHeight="-Infinity"
+                >
+                </VBox>
                 <TextField styleClass="textFieldStyling"
                            fx:id="userInput"
                            onAction="#handleUserInput"
                            minHeight="41.0"
                            maxWidth="Infinity"
                            AnchorPane.bottomAnchor="1.0"
-                           GridPane.columnIndex="0"
+                           GridPane.columnIndex="1"
                            GridPane.rowIndex="3"
                            GridPane.valignment="CENTER"
                            promptText="Enter your command here..."
                            focusTraversable="false"
+                           prefWidth="1500"
                 />
                 <Button fx:id="sendButton"
                         mnemonicParsing="false"
@@ -53,22 +65,23 @@
                         minHeight="41.0"
                         minWidth="76.0"
                         text=">"
-                        GridPane.columnIndex="1"
+                        GridPane.columnIndex="3"
                         GridPane.rowIndex="3"
                         GridPane.valignment="CENTER"
                         styleClass="buttonStyling"
                         AnchorPane.bottomAnchor="12.0"
                         AnchorPane.rightAnchor="8.0"
                 />
-                <ScrollPane  fx:id="scrollPane"
+                <ScrollPane  fx:id="userScreen"
                              hbarPolicy="NEVER"
                              hvalue="1.0"
                              fitToWidth="true"
                              vvalue="1.0"
                              maxHeight="Infinity"
-                             GridPane.columnIndex="0"
+                             GridPane.columnIndex="1"
                              GridPane.rowIndex="0"
-                             GridPane.columnSpan="2"
+                             GridPane.columnSpan="4"
+                             styleClass="userScreenStyling"
                 >
                     <content>
                         <VBox styleClass="mainBodyStyling"

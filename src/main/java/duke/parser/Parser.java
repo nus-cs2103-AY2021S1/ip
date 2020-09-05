@@ -13,6 +13,7 @@ import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
+import duke.commands.ReminderCommand;
 import duke.commands.UnknownCommand;
 import duke.exception.EmptyTextException;
 import duke.exception.InvalidFormatByeException;
@@ -22,6 +23,7 @@ import duke.exception.InvalidFormatDoneException;
 import duke.exception.InvalidFormatFindException;
 import duke.exception.InvalidFormatHelpException;
 import duke.exception.InvalidFormatListException;
+import duke.exception.InvalidFormatReminderException;
 
 /**
  * Class that simulates reading the user's input and making sense of it.
@@ -37,6 +39,7 @@ public class Parser {
     private static final String KEYWORD_DELETE = "delete";
     private static final String KEYWORD_FIND = "find";
     private static final String KEYWORD_HELP = "help";
+    private static final String KEYWORD_REMIND = "remind";
     /**
      * Checking if the user's string input is a number.
      *
@@ -107,7 +110,7 @@ public class Parser {
      */
     public static Command parse(String message) throws InvalidFormatByeException, InvalidFormatListException,
             InvalidFormatDoneException, EmptyTextException, InvalidFormatDeleteException, InvalidFormatFindException,
-            InvalidFormatHelpException {
+            InvalidFormatHelpException, InvalidFormatReminderException {
         assert message != null;
         String[] inputArr = message.trim().replaceAll("  +", " ").split(" ", 2);
         inputArr[0] = inputArr[0].toLowerCase();
@@ -150,6 +153,15 @@ public class Parser {
                 throw new InvalidFormatFindException();
             }
             return new FindCommand(inputArr);
+        case KEYWORD_REMIND:
+            if (inputArr.length == 1) {
+                throw new InvalidFormatReminderException();
+            }
+            String[] inputArr3 = inputArr[1].split(" ");
+            if (inputArr3.length != 2) {
+                throw new InvalidFormatReminderException();
+            }
+            return new ReminderCommand(inputArr);
         case KEYWORD_EVENT:
         case KEYWORD_DEADLINE:
         case KEYWORD_TODO:

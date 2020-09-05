@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private static final DateTimeFormatter FormatDateTime = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
-    private final LocalDateTime taskDeadline;
     /**
      * Creates a deadline object the containing details of the task.
      *
@@ -17,8 +16,7 @@ public class Deadline extends Task {
      * @param taskDeadline LocalDateTime format of the time.
      */
     public Deadline(String description, LocalDateTime taskDeadline) {
-        super(description);
-        this.taskDeadline = taskDeadline;
+        super(description, 0, taskDeadline);
     }
 
     /**
@@ -28,23 +26,22 @@ public class Deadline extends Task {
      * @param taskDeadline String format of the time. Either YYYY-MM-DD HHMM or
      *                     YYYY-MM-DD(Will be reformatted with 2359 as HHMM).
      * @param isDone Boolean value of whether a task is completed.
+     * @param isReminderOn Boolean value of whether this task needs a reminder.
      */
-    public Deadline(String description, String taskDeadline, boolean isDone) {
-        super(description, isDone);
-        this.taskDeadline = LocalDateTime.parse(taskDeadline);
+    public Deadline(String description, String taskDeadline, boolean isDone, boolean isReminderOn) {
+        super(description, isDone, isReminderOn, 0, LocalDateTime.parse(taskDeadline));
     }
-
     /**
      * Returns a proper styling to be recorded into CSV.
      *
      * @return A format to be recorded into CSV.
      */
     public String formatStyling() {
-        return String.format("deadline,%s%s", taskDeadline, super.formatStyling());
+        return String.format("deadline,%s%s", getDueDate(), super.formatStyling());
     }
-
+    
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + taskDeadline.format(FormatDateTime) + ")";
+        return "[D]" + super.toString() + " (by: " + getDueDate().format(FormatDateTime) + ")";
     }
 }

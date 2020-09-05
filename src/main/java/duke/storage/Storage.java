@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import duke.commands.Command;
 import duke.exception.UnknownCommandException;
@@ -29,6 +30,15 @@ public class Storage {
      * @return Returns true if the task is completed, false otherwise.
      */
     private boolean isTaskDone(String s) {
+        return !s.equals("0");
+    }
+    /**
+     * Checking if a particular task has reminder on.
+     *
+     * @param s A string encoding whether a task has reminder on.
+     * @return Returns true if the task has reminder on, false otherwise.
+     */
+    private boolean isReminderOn(String s) {
         return !s.equals("0");
     }
 
@@ -112,19 +122,19 @@ public class Storage {
                 BufferedReader bufferedReader = Files.newBufferedReader(path);
                 String line = bufferedReader.readLine();
                 while (line != null) {
-                    String[] info = line.split(",", 4);
-                    // todo format type description done
-                    // event format type at description done
-                    // deadline format type by description done
+                    String[] info = line.split(",", 5);
+                    // todo format type description done reminderOn
+                    // event format type at description done reminderOn
+                    // deadline format type by description done reminderOn
                     switch (info[0]) {
                     case Parser.KEYWORD_TODO:
-                        tasks.add(new ToDo(info[1], isTaskDone(info[2])));
+                        tasks.add(new ToDo(info[1], isTaskDone(info[2]), isReminderOn(info[3])));
                         break;
                     case Parser.KEYWORD_EVENT:
-                        tasks.add(new Event(info[2], info[1], isTaskDone(info[3])));
+                        tasks.add(new Event(info[2], info[1], isTaskDone(info[3]), isReminderOn(info[4])));
                         break;
                     case Parser.KEYWORD_DEADLINE:
-                        tasks.add(new Deadline(info[2], info[1], isTaskDone(info[3])));
+                        tasks.add(new Deadline(info[2], info[1], isTaskDone(info[3]), isReminderOn(info[4])));
                         break;
                     default:
                         throw new UnknownCommandException();
