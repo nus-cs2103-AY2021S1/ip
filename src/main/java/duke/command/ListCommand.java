@@ -1,9 +1,6 @@
 package duke.command;
 
-import java.util.List;
-
 import duke.storage.Storage;
-import duke.task.Task;
 import duke.task.TaskList;
 
 /**

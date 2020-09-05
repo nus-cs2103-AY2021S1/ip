@@ -39,6 +39,7 @@ public class Storage {
             Path path = Path.of(filePath);
             File file = path.toFile();
             createFileIfMissing(file);
+            assert file.exists() : "File does not exist after initialisation";
             this.file = file;
         } catch (InvalidPathException e) {
             throw new StorageException("Invalid path.");
@@ -84,6 +85,7 @@ public class Storage {
             Scanner reader = new Scanner(file, StandardCharsets.UTF_8);
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
+                assert line != null : "Null string was read from storage";
                 TaskType taskType = TaskType.decodeTaskType(line);
                 String taskStorageLine = TaskType.getStorageLine(line, taskType);
                 switch (taskType) {
