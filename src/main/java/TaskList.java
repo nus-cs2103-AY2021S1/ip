@@ -86,12 +86,18 @@ public class TaskList {
 
     public Task markDone(int index) {
         int itemToMark = index - 1;
+        // Assert that item to mark done exists
+        assert itemToMark < this.getSize() : "Item to mark done is out of bounds";
+
         tasks.get(itemToMark).markDone();
         return tasks.get(itemToMark);
     }
 
     public Task deleteTask(int index) {
         int itemToDelete = index - 1;
+        // Assert that item to delete exists
+        assert itemToDelete < this.getSize() : "Item to mark done is out of bounds";
+
         Task removedTask = tasks.remove(itemToDelete);
         return removedTask;
     }
