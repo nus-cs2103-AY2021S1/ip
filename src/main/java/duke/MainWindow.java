@@ -23,7 +23,7 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Koya.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Mang.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/RJ.png"));
 
     public static String greeting() {
