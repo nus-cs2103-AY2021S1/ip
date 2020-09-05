@@ -1,7 +1,5 @@
 package duke;
 
-import java.time.LocalDate;
-
 /**
  * Handles addition of todo-based Tasks.
  */
@@ -30,7 +28,7 @@ public class AddTodoCommand extends Command {
 
         if (instructions[1].contains(" /tags ")) {
             String[] tags;
-            String[] nameAndTags = instructions[1].split(" /tags " );
+            String[] nameAndTags = instructions[1].split(" /tags ");
             String todoName = nameAndTags[0];
             tags = nameAndTags[1].split(",");
             // cleanup whitespace

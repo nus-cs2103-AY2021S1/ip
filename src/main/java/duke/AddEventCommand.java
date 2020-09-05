@@ -38,7 +38,7 @@ public class AddEventCommand extends Command {
 
             if (eventInfo[1].contains(" /tags ")) {
                 String[] tags;
-                String[] dateAndTags = eventInfo[1].split(" /tags " );
+                String[] dateAndTags = eventInfo[1].split(" /tags ");
                 eventDate = dateAndTags[0];
                 tags = dateAndTags[1].split(",");
                 // cleanup whitespace

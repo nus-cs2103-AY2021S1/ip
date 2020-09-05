@@ -38,7 +38,7 @@ public class AddDeadlineCommand extends Command {
 
             if (deadlineInfo[1].contains(" /tags ")) {
                 String[] tags;
-                String[] deadlineAndTags = deadlineInfo[1].split(" /tags " );
+                String[] deadlineAndTags = deadlineInfo[1].split(" /tags ");
                 deadline = deadlineAndTags[0];
                 tags = deadlineAndTags[1].split(",");
                 // cleanup whitespace
