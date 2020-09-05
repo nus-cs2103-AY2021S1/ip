@@ -24,7 +24,7 @@
          </font></Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/user.PNG" />
+            <Image url="@../images/user.png" />
          </image>
          <HBox.margin>
             <Insets />

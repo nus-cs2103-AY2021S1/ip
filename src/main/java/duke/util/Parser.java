@@ -8,6 +8,7 @@ import duke.command.ListCommand;
 import duke.command.FindCommand;
 import duke.command.ExitCommand;
 import duke.command.InvalidCommand;
+import duke.command.HelpCommand;
 
 import java.util.Arrays;
 
@@ -103,6 +104,8 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException aioobe) {
                 return new InvalidCommand("Hm? What do you want to find?");
             }
+        case "help":
+            return new HelpCommand();
         default:
             return new InvalidCommand();
         }

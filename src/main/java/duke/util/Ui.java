@@ -50,14 +50,14 @@ public class Ui {
                 + "                                               `-'     `-'\n"
                 + "By: Andy Wu";
         System.out.println(logo);
-        sendMessage("Hello! Tebby lives to serve :)");
+        sendMessage("hello! Tebby lives to serve :)");
     }
 
     /**
      * Prints the exit message before the application closes.
      */
     public void showExit() {
-        String msg = LINE + "\n    Have a good day! Tebby logging off...\n";
+        String msg = LINE + "\n    have a good day! Tebby logging off...\n";
         msg += "    ----------------------------X---------------------------------";
         System.out.println(msg);
     }
@@ -111,7 +111,7 @@ public class Ui {
     public String getTaskReportMessage(int size) {
         String task = size == 1 ? "task" : "tasks";
         String num = size == 0 ? "no" : String.valueOf(size);
-        return "Now you have " + num + " " + task + " in the list!";
+        return "now you have " + num + " " + task + " in the list!";
     }
 
     /**
@@ -123,7 +123,7 @@ public class Ui {
      * @return the formatted success message.
      */
     public String getSuccessMessage(String type, Task task) {
-        StringBuilder sb = new StringBuilder("Okay I've ");
+        StringBuilder sb = new StringBuilder("okay I've ");
         switch(type) {
         case "add":
             sb.append("added:");
@@ -135,6 +135,22 @@ public class Ui {
             sb.append("marked this task as done:");
         }
         sb.append(String.format("\n    %s", task));
+        return sb.toString();
+    }
+
+    public String getListOfCommands() {
+        String[] commands = new String[] {
+                "help", "list", "todo <description>",
+                "event <description> /at <date> [time]",
+                "deadline <description> /by <date> [time]",
+                "done <task number>", "remove <task number>",
+                "remove all", "bye"
+        };
+        StringBuilder sb = new StringBuilder("here are the available commands:\n");
+        for (String command: commands) {
+            sb.append("    - ").append(command).append("\n");
+        }
+        sb.append("<required> [optional]");
         return sb.toString();
     }
 }
