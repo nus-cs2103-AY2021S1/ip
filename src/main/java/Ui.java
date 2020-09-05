@@ -41,66 +41,73 @@ public class Ui {
     /**
      * Prints the welcome message for the user.
      */
-    public void welcome() {
-        printMessage("Wazzup! I am Duke the Nuke \uD83D\uDE08\n"
-                + "What do you want?");
+    public String welcome() {
+        return "Wazzup! I am Duke the Nuke \uD83D\uDE08\n"
+                + "What do you want?\n";
     }
 
     /**
      * Prints the exit message for the user.
      */
-    public void exit() {
-        printMessage("Sayonara!");
+    public String exit() {
+
+        return "Sayonara!\n";
     }
 
     /**
      * Prints the "invalid input" error message.
      */
-    public void invalidInput() {
-        printMessage("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public String invalidInput() {
+
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
     }
 
     /**
      * Prints the addTask message.
      */
-    public void addTask() {
-        printMessage("Got it. I've added this task:");
+    public String addTask() {
+
+        return "Got it. I've added this task:\n";
     }
 
     /**
      * Prints the removeTask message.
      */
-    public void removeTask() {
-        printMessage("Noted. I've removed this task:");
+    public String removeTask() {
+
+        return "Noted. I've removed this task:\n";
     }
 
     /**
      * Prints the doneTask message.
      */
-    public void doneTask() {
-        printMessage("Nice! I've marked this task as done:");
+    public String doneTask() {
+
+        return "Nice! I've marked this task as done:\n";
     }
 
     /**
      * Prints the showList message.
      */
-    public void showList() {
-        printMessage("Here are the tasks in your list:");
+    public String showList() {
+
+        return "Here are the tasks in your list:\n";
     }
 
     /**
      * Prints the statement with the number of tasks.
      * @param tasks the list containing the tasks.
      */
-    public void showNumberOfTasks(ArrayList<Task> tasks) {
-        printMessage("Now you have " + tasks.size() + " tasks in the list.");
+    public String showNumberOfTasks(ArrayList<Task> tasks) {
+        return "Now you have " + tasks.size() + " tasks in the list.\n";
     }
 
     /**
      * Prints the matchingTasks message.
      */
-    public void printMatchingTasks() {
-        printMessage("Here are the matching tasks in your list:");
+    public String printMatchingTasks() {
+
+        return "Here are the matching tasks in your list:\n";
     }
 }
 

@@ -3,7 +3,7 @@
  */
 public class Todo extends Task {
 
-    public String type;
+    private String type;
 
     /**
      * Constructor

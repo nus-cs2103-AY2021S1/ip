@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    public ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -16,7 +16,16 @@ public class TaskList {
      * @param task task to be added.
      */
     public void addTask(Task task) {
+
         this.tasks.add(task);
+    }
+
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
+    }
+
+    public Task getTask(int index) {
+        return this.tasks.get(index);
     }
 
     /**

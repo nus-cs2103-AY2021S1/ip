@@ -40,17 +40,17 @@ public class Storage {
                 Task task = null;
 
                 switch (type) {
-                    case "T":
-                        task = new Todo(description, isDone);
-                        break;
-                    case "D":
-                        task = new Deadline(description, isDone, LocalDate.parse(time));
-                        break;
-                    case "E":
-                        task = new Event(description, isDone, LocalDate.parse(time));
-                        break;
-                    default:
-                        break;
+                case "T":
+                    task = new Todo(description, isDone);
+                    break;
+                case "D":
+                    task = new Deadline(description, isDone, LocalDate.parse(time));
+                    break;
+                case "E":
+                    task = new Event(description, isDone, LocalDate.parse(time));
+                    break;
+                default:
+                    break;
                 }
 
                 return task;

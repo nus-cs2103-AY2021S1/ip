@@ -5,7 +5,7 @@ import java.time.LocalDate;
  */
 public class Event extends Task {
 
-    public String type;
+    private String type;
 
     /**
      * Constructor
