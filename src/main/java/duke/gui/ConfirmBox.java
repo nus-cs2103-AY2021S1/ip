@@ -10,8 +10,17 @@ import javafx.stage.Stage;
 
 public class ConfirmBox {
 
-    static boolean answer;
+    private static boolean answer;
 
+    /**
+     * Displays a pop up box to with a yes or no button,
+     * user is able to put generic title and message
+     * to this method.
+     *
+     * @param title title
+     * @param message message
+     * @return boolean true or false
+     */
     public static boolean display(String title, String message) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);

@@ -46,8 +46,8 @@ public class Command {
     /**
      * Adds todo into the list and print the relevant todo message.
      *
-     * @return String string returned from ui.printTask.
      * @param description description of todo.
+     * @return String string returned from ui.printTask.
      */
     public String handleTodo(String description) throws DukeEmptyMessageException {
         String[] command = Parser.splitCommandAndDescription(description);
