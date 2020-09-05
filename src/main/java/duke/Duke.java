@@ -4,14 +4,14 @@ import java.io.File;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -113,8 +113,11 @@ public class Duke extends Application {
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true); // what is this
+
+
         // 2.4. dialogContainer
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, new CornerRadii(20.0), new Insets(5.0, 0.0, 5.0, 0.0)))); // time to create some background value
 
         // 2.5. userInput bar
         userInput.setPrefWidth(325.0);
@@ -163,14 +166,14 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText())); // impl getResponse
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(userImg)),
-                new DialogBox(dukeText, new ImageView(dukeImg))
+                DialogBox.getUserDialogBox(userText, new ImageView(userImg)),
+                DialogBox.getDukeDialogBox(dukeText, new ImageView(dukeImg))
         );
         userInput.clear();
     }
 
     private String getResponse(String userText) {
-        return "Hal9000 heard: " + userText;
+        return "Haha " + userText + " makes Hal9000 go brrrrr";
     }
 
     /**
