@@ -123,7 +123,7 @@ public class ActualStorage implements Storage {
     public void addToList(Task task) throws InvalidCommandException {
         try {
             FileWriter fw = new FileWriter(filePath, true);
-            fw.write(task.output());
+            fw.write(task.outputToFile());
             fw.close();
         } catch (IOException e) {
             throw new InvalidCommandException(e.getMessage());
@@ -135,7 +135,7 @@ public class ActualStorage implements Storage {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task : list) {
-                fw.write(task.output());
+                fw.write(task.outputToFile());
             }
             fw.close();
             System.out.println(fw);

@@ -43,7 +43,7 @@ public abstract class Task {
      * Gets the string to write in the storage file.
      * @return the string to write in the storage file
      */
-    public String output() {
+    public String outputToFile() {
         int done = isDone ? 1 : 0;
         return " | " + done + " | " + description;
     }

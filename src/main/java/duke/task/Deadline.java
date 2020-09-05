@@ -1,8 +1,6 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.command.InvalidCommandException;
@@ -130,8 +128,8 @@ public class Deadline extends TimedTask {
     }
 
     @Override
-    public String output() {
-        return "D" + super.output() + Storage.splitter + byTime + Storage.splitter + repeat + "\n";
+    public String outputToFile() {
+        return "D" + super.outputToFile() + Storage.splitter + byTime + Storage.splitter + repeat + "\n";
     }
 
     @Override

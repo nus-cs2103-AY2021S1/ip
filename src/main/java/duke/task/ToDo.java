@@ -13,8 +13,8 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String output() {
-        return "T" + super.output() + "\n";
+    public String outputToFile() {
+        return "T" + super.outputToFile() + "\n";
     }
 
     @Override

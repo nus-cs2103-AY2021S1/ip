@@ -181,12 +181,12 @@ public class Event extends TimedTask {
     }
 
     @Override
-    public String output() {
+    public String outputToFile() {
         if (atTime != null) {
-            return "E" + super.output() + Storage.splitter
+            return "E" + super.outputToFile() + Storage.splitter
                     + atTime.format(Parser.DATE_TIME_INPUT_FORMAT) + Storage.splitter + repeat + "\n";
         } else {
-            return "E" + super.output() + Storage.splitter + tentativeSlotsStr + "\n";
+            return "E" + super.outputToFile() + Storage.splitter + tentativeSlotsStr + "\n";
         }
     }
 
