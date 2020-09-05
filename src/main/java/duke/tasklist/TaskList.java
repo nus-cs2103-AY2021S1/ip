@@ -124,4 +124,18 @@ public class TaskList {
             taskList.set(i + left1, temp[i]);
         }
     }
+    /**
+     * Checks if a task already exist in the list of tasks.
+     *
+     * @param task The new to be added task.
+     * @return Boolean value representing whether the task exist in the lsit of tasks.
+     */
+    public boolean checkExistBefore(Task task) {
+        for (int i = 0; i < listTasks.size(); i++) {
+            if (listTasks.get(i).toString().substring(7).equals(task.toString().substring(7))) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

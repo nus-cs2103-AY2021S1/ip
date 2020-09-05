@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exception.DuplicateException;
 import duke.exception.InvalidFormatDateException;
 import duke.exception.InvalidFormatDeadlineException;
 import duke.exception.InvalidFormatEventException;
@@ -49,5 +50,5 @@ public abstract class Command {
      * @param storage Object that deals with loading tasks from the file and saving tasks in the file
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws UnknownCommandException,
-            InvalidFormatDeadlineException, InvalidFormatEventException, InvalidFormatDateException;
+            InvalidFormatDeadlineException, InvalidFormatEventException, InvalidFormatDateException, DuplicateException;
 }
