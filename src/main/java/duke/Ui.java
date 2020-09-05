@@ -53,7 +53,7 @@ public class Ui {
     //
     //    static final String HORIZONTAL_LINE =
     //            "____________________________________________________________";
-    static final String INDENT = "";
+    static final String TWO_INDENT = "  ";
 
     /**
      * Returns the Bye message.
@@ -82,7 +82,7 @@ public class Ui {
      */
     public String showMarkDone(Task task) {
         return ("Nice! I've marked this task as done: \n"
-                + "  " + task);
+                + TWO_INDENT + task);
     }
 
     /**
@@ -94,7 +94,7 @@ public class Ui {
      */
     public String showAdded(Task addedTask, int listSize) {
         return ("Got it. I've added this task:\n"
-                + "  " + addedTask + "\n"
+                + TWO_INDENT + addedTask + "\n"
                 + String.format("Now you have %d tasks in the in the list", listSize));
     }
 
@@ -107,8 +107,8 @@ public class Ui {
      */
     public String showDeleted(Task deletedTask, int listSize) {
         return ("Noted. I've removed this task: \n"
-                + INDENT + deletedTask
-                + String.format("\n     Now you have %d tasks in the list.", listSize));
+                + TWO_INDENT + deletedTask
+                + String.format("\nNow you have %d tasks in the list.", listSize));
     }
 
     /**
@@ -128,7 +128,7 @@ public class Ui {
      * @return String representation of Tasks in the list.
      */
     public String showList(TaskList tasks) {
-        return (tasks.getListAsString());
+        return "Currently, you have: \n" + tasks.getListAsString();
     }
 
     /**

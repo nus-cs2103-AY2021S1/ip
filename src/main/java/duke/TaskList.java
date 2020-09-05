@@ -88,9 +88,9 @@ public class TaskList {
     public static String getListAsStringFromList(List<Task> list, String alternative) {
         String s = "";
         for (int i = 0; i < list.size(); i++) {
-            s += (i + 1) + "." + list.get(i);
+            s += Ui.TWO_INDENT + (i + 1) + "." + list.get(i);
             if (i != list.size() - 1) {
-                s += '\n' + Ui.INDENT;
+                s += '\n';
             }
         }
         if (s.equals("")) {
