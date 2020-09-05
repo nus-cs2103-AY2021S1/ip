@@ -36,6 +36,21 @@ public class Ui {
     }
 
     /**
+     * Prints a find message of the list of tasks that matches the find description.
+     * @param taskList The list of tasks that matches the find description.
+     */
+    public void printFindMessage(TaskList taskList) {
+        if (taskList.size() == 0) {
+            System.out.println("I can't find anything that match!");
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+            String stringCount = String.valueOf(i + 1);
+            System.out.println(stringCount + ". " + taskList.get(i));
+        }
+    }
+
+    /**
      * Prints a done message for the given Task.
      * @param doneTask Task that is marked as completed.
      */
