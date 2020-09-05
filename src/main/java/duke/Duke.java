@@ -28,6 +28,7 @@ public class Duke {
         TaskList taskList = new TaskList(storage.loadFile());
         UI ui = new UI(taskList, storage);
         parser = new Parser(ui);
+        assert f.exists() : "file does not exist";
     }
 
     public String welcome() {
@@ -35,6 +36,8 @@ public class Duke {
     }
 
     public static String getResponse(String input) {
-        return parser.listen(input);
+        String response = parser.listen(input);
+        assert !response.equals(input) : "input is not processed";
+        return response;
     }
 }
