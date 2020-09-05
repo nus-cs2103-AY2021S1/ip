@@ -5,5 +5,3 @@ E | 0 | walk in the park | Nov 15 2020, 15:30:00
 D | 1 | readings | Aug 25 2020, 18:00:00
 T | 0 | walk dog
 T | 1 | training
-T | 0 | walk dog
-T | 0 | walk dog
