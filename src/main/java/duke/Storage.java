@@ -148,6 +148,7 @@ public class Storage {
      * @throws CorruptedStorageException If there are issues reading/writing to the file.
      */
     public void updateExistingTask(int taskId, Task task) throws CorruptedStorageException {
+        assert taskId <= this.serialisedTasks.size();
         this.serialisedTasks.set(taskId - 1, task.serialise());
 
         try {
@@ -164,6 +165,7 @@ public class Storage {
      * @throws CorruptedStorageException If there are issues reading/writing to the file.
      */
     public void deleteExistingTask(int taskId) throws CorruptedStorageException {
+        assert taskId <= this.serialisedTasks.size();
         this.serialisedTasks.remove(taskId - 1);
 
         try {
