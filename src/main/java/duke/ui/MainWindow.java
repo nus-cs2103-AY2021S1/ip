@@ -39,6 +39,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText() + "\t";
         String response = duke.getResponse(input);
+        assert response.length() > 0 : "Duke should not be speechless";
         dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(input, userImage),
             DialogBox.getDukeDialog(response, dukeImage)
