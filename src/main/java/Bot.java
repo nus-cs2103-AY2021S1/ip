@@ -78,7 +78,7 @@ public class Bot {
           if (number <= 0) {
             throw new invalidDeleteNumberException();
           }
-          assert number >= 1 : "Invalid Number";
+          assert number >= 1 : "Invalid Number"; //assert
           output = taskList.deleteListing(number, printer, storage);
           return output;
         case ("find"):
