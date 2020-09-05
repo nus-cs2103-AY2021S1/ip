@@ -1,6 +1,5 @@
 package com.duke.ui;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -34,6 +33,8 @@ public class Ui {
      * Adds entry into Duke and replies with response.
      */
     private String addItem(String taskType, String task) throws DukeException {
+        assert this.taskList != null;
+
         Ui.sectionize();
         String date = "";
         switch (taskType) {
@@ -67,13 +68,24 @@ public class Ui {
         System.out.println(reply);
     }
 
+    private String replyEmptyList() {
+        return "The tasklist is currently empty.";
+    }
+
     /**
      * Prints entries stored in Duke.
      */
     private String listItems() {
-        System.out.println(this.taskList);
-        Ui.sectionize();
+        assert this.taskList != null;
         String res = "";
+
+        if (this.taskList.size() == 0) {
+            res = this.replyEmptyList();
+            reply(res);
+            return res;
+        }
+
+        Ui.sectionize();
         res += "\tHere are the tasks in your list:";
         int counter = 1;
         for (int i = 0; i < this.taskList.size(); i++) {
@@ -92,6 +104,13 @@ public class Ui {
      * @param input input keyword to match.
      */
     private String findItem(String input) {
+        if (input.isBlank()) {
+            return this.replyNoEmptyString(input);
+        }
+
+        assert input != null;
+        assert !input.isBlank();
+
         int len = this.taskList.size();
         ArrayList<Task> matchingTaskList = new ArrayList<>();
         //loop through taskstring in tasklist and find matching keywords
@@ -109,6 +128,14 @@ public class Ui {
         }
     }
 
+    private String replyNoEmptyString(String input) {
+        Ui.sectionize();
+        String result = "\tI'm sorry, please specify what you want to find!";
+        this.reply(result);
+        Ui.sectionize();
+        return result;
+    }
+
     private String replyNoTaskFound(String input) {
         Ui.sectionize();
         String result = "\tI'm sorry, there are no tasks found with keyword " + input + ".";
@@ -123,6 +150,8 @@ public class Ui {
      * @param taskList list of tasks that match input keyword.
      */
     private String replyTasksFound(List<Task> taskList) {
+        assert taskList != null;
+
         Ui.sectionize();
         String result = "\tHere are the matching tasks in your list:";
         for (Task task : taskList) {
@@ -143,8 +172,8 @@ public class Ui {
             this.reply(result);
             Ui.sectionize();
             return result;
-        } catch (IOException e) {
-            result = "Sorry! The file failed to save. Please try again.";
+        } catch (DukeException dukeException) {
+            result = dukeException.getMessage();
             this.reply(result);
             return result;
         } finally {
@@ -153,14 +182,23 @@ public class Ui {
     }
 
     private String markDone(int index) {
+
         String result = "";
-        this.taskList.setDone(index);
-        Ui.sectionize();
-        result += "\tNice! I've marked this task as done:\n";
-        result += "\t" + this.taskList.getItem(index).toString();
-        this.reply(result);
-        Ui.sectionize();
-        return result;
+        try {
+            this.taskList.setDone(index);
+            Ui.sectionize();
+            result += "\tNice! I've marked this task as done:\n";
+            result += "\t" + this.taskList.getItem(index).toString();
+            this.reply(result);
+            Ui.sectionize();
+            return result;
+        } catch (IndexOutOfBoundsException exception) {
+            Ui.sectionize();
+            result += "\t\u2639 OOPS!!! I'm sorry, this task does not exist in your list!";
+            this.reply(result);
+            Ui.sectionize();
+            return result;
+        }
     }
 
     /**
@@ -181,7 +219,7 @@ public class Ui {
             return result;
         } catch (IndexOutOfBoundsException e) {
             Ui.sectionize();
-            result += "\t☹ OOPS!!! I'm sorry, this task does not exist in your list!";
+            result += "\t\u2639 OOPS!!! I'm sorry, this task does not exist in your list!";
             this.reply(result);
             Ui.sectionize();
             return result;
@@ -264,7 +302,7 @@ public class Ui {
 
     private String handleCommand(String input) {
         if (Parser.isDone(input)) {
-            int index = Integer.parseInt(input.substring(5, 6)) - 1;
+            int index = Integer.parseInt(input.split(" ")[1]) - 1;
             return this.markDone(index);
         } else if (Parser.isDelete(input)) {
             int index = Integer.parseInt(input.split(" ")[1]) - 1;

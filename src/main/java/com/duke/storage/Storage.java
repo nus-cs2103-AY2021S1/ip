@@ -1,5 +1,6 @@
 package com.duke.storage;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -76,16 +77,20 @@ public class Storage {
      *
      * @throws IOException throws IOException if file saving fails.
      */
-    public static void saveListToFile(TaskList taskList) throws IOException {
-        FileWriter fileWriter = new FileWriter((FILE_PATH));
-        String input = "";
-        FileWriter fw = new FileWriter(FILE_PATH, true); // create a FileWriter in append mode
-        for (int i = 0; i < taskList.getList().size(); i++) {
-            List<Task> list = taskList.getList();
-            input += parseTaskToString(list.get(i)) + "\n";
+    public static void saveListToFile(TaskList taskList) throws DukeException {
+        try {
+            String input = "";
+            FileWriter fw = new FileWriter(FILE_PATH, true); // create a FileWriter in append mode
+            for (int i = 0; i < taskList.getList().size(); i++) {
+                List<Task> list = taskList.getList();
+                input += parseTaskToString(list.get(i)) + "\n";
+            }
+            fw.write(input);
+            fw.close();
+        } catch (IOException ioException) {
+            String errMessage = "Sorry! The file failed to save.";
+            throw new DukeException(errMessage);
         }
-        fw.write(input);
-        fw.close();
     }
 
 }
