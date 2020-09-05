@@ -114,10 +114,12 @@ public class UI {
         String str2 = "\nHere is your schedule for this day!\n";
         int index = 1;
         for (Task task: tasks) {
-            Month scheduleMonth = task.getTaskDeadline().getMonth();
-            if (scheduleMonth.equals(month)) {
-                str1 += index + "." + task + "\n";
-                index++;
+            if (task instanceof Deadline || task instanceof Event) {
+                Month scheduleMonth = task.getTaskDeadline().getMonth();
+                if (scheduleMonth.equals(month)) {
+                    str1 += index + "." + task + "\n";
+                    index++;
+                }
             }
         }
         if (str1.compareTo("") == 1) {

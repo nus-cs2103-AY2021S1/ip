@@ -8,7 +8,7 @@ public class ScheduleCommand extends Command {
 
     private String command;
 
-    HashMap<String, Month> monthsHashMap = new HashMap<>() {
+    static HashMap<String, Month> monthsHashMap = new HashMap<>() {
         {
             put("January", JANUARY);
             put("Febuary", FEBRUARY);
@@ -31,33 +31,19 @@ public class ScheduleCommand extends Command {
 
     @Override
     String execute(TaskList tasks, UI dukeUI) throws DukeException {
+        String dukeResponse = "";
         try {
             String[] taskDetails = this.command.split(" ");
-            String scheduleDate = getScheduleFor(taskDetails[1]);
-            String dukeResponse;
-            if (inputDateIsMonth(scheduleDate)) {
-                Month targetMonth = monthsHashMap.get(scheduleDate);
-                dukeResponse = dukeUI.findScheduleForMonth(tasks.getTaskList(), targetMonth);
-            } else {
-                LocalDate dateToFind = LocalDate.parse(scheduleDate);
-                dukeResponse = dukeUI.findScheduleOnDate(tasks.getTaskList(), dateToFind);
-            }
+            LocalDate dateToFind = LocalDate.parse(taskDetails[1]);
+            dukeResponse += dukeUI.findScheduleOnDate(tasks.getTaskList(), dateToFind);
             return dukeResponse;
         } catch (IndexOutOfBoundsException e) {
             throw new WrongDateFormatException();
-        }
-    }
-
-    private String getScheduleFor(String date) {
-        try {
-            LocalDate taskDate = LocalDate.parse(date);
-            return date;
         } catch (DateTimeParseException e) {
-            return "month: " + date;
+            String[] taskDetails = this.command.split(" ");
+            Month targetMonth = monthsHashMap.get(taskDetails[1]);
+            dukeResponse += dukeUI.findScheduleForMonth(tasks.getTaskList(), targetMonth);
+            return dukeResponse;
         }
-    }
-
-    private boolean inputDateIsMonth(String date) {
-        return date.split(" ")[0].equals("month:");
     }
 }
