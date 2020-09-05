@@ -23,6 +23,7 @@ public class DeadlineTask extends Task {
      */
     public DeadlineTask(String description, boolean isDone, String deadline) {
         super(description, isDone);
+        // formats deadline date and time to the correct format, for example: 2007-12-03T10:15:30
         SplitOperation deadlineSplit = (input) -> {
             String[] splitInput = input.split(" ");
             return splitInput[0] + "T" + splitInput[1].substring(0, 2) + ":"

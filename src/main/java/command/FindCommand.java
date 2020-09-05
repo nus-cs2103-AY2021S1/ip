@@ -37,11 +37,13 @@ public class FindCommand extends Command {
      */
     public String execute(TaskList lst, Ui ui, Storage storage) {
         StringBuilder result = new StringBuilder();
+        // uses filter method defined in TaskList class
         List<Task> filteredTasks = lst.filter(query);
-        result.append(ui.showFindStatement(filteredTasks.size() <= 0) + "\n");
+        result.append(ui.showFindStatement(filteredTasks.isEmpty()));
         for (int i = 0; i < filteredTasks.size(); i++) {
-            int num = i + 1;
-            result.append(ui.showTask(filteredTasks.get(i), num) + "\n");
+            int taskNum = i + 1;
+            Task task = filteredTasks.get(i);
+            result.append(ui.showTask(task, taskNum));
         }
         assert result.length() != 0 : "Response should not be empty";
         return result.toString();

@@ -21,7 +21,7 @@ public class TaskList {
     private final List<Task> lst;
 
     /**
-     * Creates a new TaskList of tasks based on an input list of strings.
+     * Creates a new TaskList of tasks based on an input list of strings obtained from Serina.txt.
      * The constructor parses these strings to create tasks before adding them to the TaskList.
      *
      * @param inputLst List containing tasks represented as strings. (Param can have 0 arguments)
@@ -32,17 +32,23 @@ public class TaskList {
         this.lst = new ArrayList<>();
         if (inputLst.length >= 1) {
             for (String line : inputLst[0]) {
+                // splits each task string to get its task type, task description and task datetime (if applicable)
                 String[] splitInput = line.split(" \\| ");
                 TaskType taskType = TaskType.valueOf(splitInput[0]);
+                String taskDescription = splitInput[2];
+                String taskDate;
+                boolean isDone = splitInput[1].equals(done);
                 switch (taskType) {
                 case TODO:
-                    this.add(new ToDoTask(splitInput[2], splitInput[1].equals(done)));
+                    this.add(new ToDoTask(taskDescription, isDone));
                     break;
                 case DEADLINE:
-                    this.add(new DeadlineTask(splitInput[2], splitInput[1].equals(done), splitInput[3]));
+                    taskDate = splitInput[3];
+                    this.add(new DeadlineTask(taskDescription, isDone, taskDate));
                     break;
                 case EVENT:
-                    this.add(new EventTask(splitInput[2], splitInput[1].equals(done), splitInput[3]));
+                    taskDate = splitInput[3];
+                    this.add(new EventTask(taskDescription, isDone, taskDate));
                     break;
                 default:
                     assert false : taskType;

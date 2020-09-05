@@ -16,7 +16,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 
 /**
- * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
@@ -36,6 +35,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        // clips the ImageView into a rounded frame to display the picture as a circle
         Rectangle clip = new Rectangle(displayPicture.getFitWidth(), displayPicture.getFitHeight());
         clip.setArcWidth(100);
         clip.setArcHeight(100);
