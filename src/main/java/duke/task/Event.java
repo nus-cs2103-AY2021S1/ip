@@ -26,8 +26,7 @@ public class Event extends Task {
         tentativeSlots = new LocalDateTime[times.length];
         try {
             for (int i = 0; i < times.length; i++) {
-                tentativeSlots[i] = LocalDateTime.parse(times[i],
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                tentativeSlots[i] = LocalDateTime.parse(times[i], Parser.DATE_TIME_INPUT_FORMAT);
             }
             if (times.length == 1) {
                 this.atTime = tentativeSlots[0];
@@ -87,13 +86,13 @@ public class Event extends Task {
     @Override
     public String output() {
         return "E" + super.output() + " | At: "
-                + atTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n";
+                + atTime.format(Parser.DATE_TIME_INPUT_FORMAT) + "\n";
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + atTime.format(DateTimeFormatter.ofPattern("hh:mm a   MMM d yyyy")) + ")";
+                + atTime.format(Parser.DATE_TIME_OUTPUT_FORMAT) + ")";
     }
 
     /**

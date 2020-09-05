@@ -14,6 +14,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Holds the methods for parsing commands.
  */
@@ -58,6 +60,8 @@ public class Parser {
             "Latter date is before former date for happen between.";
     public static final String UNRECOGNIZED_HAPPEN_COMMAND_EXCEPTION = "Invalid happen command input.";
     public static final String INVALID_DATE_FORMAT_EXCEPTION = "Invalid date format. Please use yyyy-MM-dd.";
+    public static final DateTimeFormatter DATE_TIME_INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    public static final DateTimeFormatter DATE_TIME_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("hh:mm a   MMM d yyyy");
 
     private static boolean hasEmptyContent(String cmd, String prefix) {
         return cmd.length() < prefix.length() + 1;
