@@ -1,8 +1,6 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.storage.StorageException;
-import duke.task.TaskException;
 import duke.task.TaskList;
 import duke.ui.UI;
 
@@ -30,8 +28,15 @@ public class ExitCommand extends Command {
         return true;
     }
 
+    /**
+     * Sends a signal to the main process to end the application.
+     *
+     * @param taskList The taskList to operate with.
+     * @param storage The storage to operate with.
+     * @return The exit message taken from the duke.ui.ui class.
+     */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws TaskException, StorageException {
+    public String execute(TaskList taskList, Storage storage) {
         return UI.getExitMessage();
     }
 }

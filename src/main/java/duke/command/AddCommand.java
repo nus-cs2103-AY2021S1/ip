@@ -35,7 +35,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws TaskException, StorageException {
-        Task newTask = null;
+        Task newTask;
         switch (taskType) {
         case DEADLINE:
             newTask = taskList.addDeadline(args);
@@ -47,7 +47,7 @@ public class AddCommand extends Command {
             newTask = taskList.addTodo(args);
             break;
         default:
-            break;
+            throw new TaskException("Oops. I didn't recognise this task.");
         }
         assert newTask != null : "Task has not been created";
         storage.save(taskList);
