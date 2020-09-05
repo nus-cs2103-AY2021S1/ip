@@ -18,13 +18,34 @@ public class Deadline extends DatedTask {
     }
 
     /**
-     * Constructor for duke.Deadline-based Tasks.
+     * Constructor for duke.Deadline-based Tasks with Tags.
      * @param name Description of duke.Task.
-     * @param completed State of completion of duke.Task.
+     * @param deadline duke.Deadline of duke.Task.
+     * @param tags Tags associated with Task.
+     */
+    public Deadline(String name, LocalDate deadline, String[] tags) {
+        super(name, deadline, tags);
+    }
+
+    /**
+     * Constructor for duke.Deadline-based Tasks with completed state.
+     * @param name Description of duke.Task.
+     * @param isCompleted State of completion of duke.Task.
      * @param deadline duke.Deadline of duke.Task.
      */
-    public Deadline(String name, boolean completed, LocalDate deadline) {
-        super(name, completed, deadline);
+    public Deadline(String name, boolean isCompleted, LocalDate deadline) {
+        super(name, isCompleted, deadline);
+    }
+
+    /**
+     * Constructor for duke.Deadline-based Tasks with completed state and tags.
+     * @param name Description of duke.Task.
+     * @param isCompleted State of completion of duke.Task.
+     * @param deadline duke.Deadline of duke.Task.
+     * @param tags Tags associated with Task.
+     */
+    public Deadline(String name, boolean isCompleted, LocalDate deadline, String[] tags) {
+        super(name, isCompleted, deadline, tags);
     }
 
     /**

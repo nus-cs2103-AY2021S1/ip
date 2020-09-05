@@ -26,15 +26,32 @@ public class AddEventCommand extends Command {
      * @param storage To store the added task.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String[] eventInfo = instructions[1].split(" /at ", 2); // eventInfo = [name, date]
+        String[] eventInfo = instructions[1].split(" /at ", 2); // eventInfo = [name, date & tags]
 
         if (eventInfo.length < 2) {
             return ui.conditionError(Constants.TaskTypes.EVENT); // User provided incomplete information.
         }
 
         try {
-            Task event = new Event(eventInfo[0], LocalDate.parse(eventInfo[1]));
-            return tasks.addTask(event) + "\n" + storage.save(tasks);
+            String eventDate = eventInfo[1];
+            Task eventTask;
+
+            if (eventInfo[1].contains(" /tags ")) {
+                String[] tags;
+                String[] dateAndTags = eventInfo[1].split(" /tags " );
+                eventDate = dateAndTags[0];
+                tags = dateAndTags[1].split(",");
+                // cleanup whitespace
+                for (int i = 0; i < tags.length; i++) {
+                    tags[i] = tags[i].strip();
+                }
+
+                eventTask = new Event(eventInfo[0], LocalDate.parse(eventDate), tags);
+            } else {
+                eventTask = new Event(eventInfo[0], LocalDate.parse(eventDate));
+            }
+
+            return tasks.addTask(eventTask) + "\n" + storage.save(tasks);
         } catch (DateTimeParseException e) {
             return ui.invalidDateError();
         }

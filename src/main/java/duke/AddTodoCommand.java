@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+
 /**
  * Handles addition of todo-based Tasks.
  */
@@ -24,7 +26,23 @@ public class AddTodoCommand extends Command {
      * @param storage To store the added task.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Task todo = new Todo(instructions[1]);
-        return tasks.addTask(todo) + "\n" + storage.save(tasks);
+        Task todoTask;
+
+        if (instructions[1].contains(" /tags ")) {
+            String[] tags;
+            String[] nameAndTags = instructions[1].split(" /tags " );
+            String todoName = nameAndTags[0];
+            tags = nameAndTags[1].split(",");
+            // cleanup whitespace
+            for (int i = 0; i < tags.length; i++) {
+                tags[i] = tags[i].strip();
+            }
+
+            todoTask = new Todo(todoName, tags);
+        } else {
+            todoTask = new Todo(instructions[1]);
+        }
+
+        return tasks.addTask(todoTask) + "\n" + storage.save(tasks);
     }
 }

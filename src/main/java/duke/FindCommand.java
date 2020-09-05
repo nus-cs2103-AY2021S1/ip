@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Arrays;
+
 /**
  * Handles searching of tasks given a search phrase.
  */
@@ -32,7 +34,8 @@ public class FindCommand extends Command {
         for (Task task : tasks.getTasks()) {
             assert task.name != null : "Task name could not be found!";
 
-            if (task.name.contains(instructions[1])) { // instructions[1] contains the search query
+            if (task.name.contains(instructions[1]) || (task.tags != null &&
+                    Arrays.asList(task.tags).contains(instructions[1]))) { // instructions[1] contains the search query
                 response.append("\n>> " + i++ + ". " + task);
                 hasResult = true;
             }

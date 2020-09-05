@@ -14,12 +14,30 @@ public class Todo extends Task {
     }
 
     /**
-     * Constructor for duke.Todo-type Tasks.
+     * Constructor for duke.Todo-type Tasks with tags.
      * @param name Description of duke.Task.
-     * @param completed Completion state of duke.Task.
+     * @param tags Tags associated with Task.
      */
-    public Todo(String name, boolean completed) {
-        super(name, completed);
+    public Todo(String name, String[] tags) {
+        super(name, tags);
+    }
+
+    /**
+     * Constructor for duke.Todo-type Tasks with completed state.
+     * @param name Description of duke.Task.
+     * @param isCompleted Completion state of duke.Task.
+     */
+    public Todo(String name, boolean isCompleted) {
+        super(name, isCompleted);
+    }
+
+    /**
+     * Constructor for duke.Todo-type Tasks with completed state and tags.
+     * @param name Description of duke.Task.
+     * @param isCompleted Completion state of duke.Task.
+     */
+    public Todo(String name, boolean isCompleted, String[] tags) {
+        super(name, isCompleted, tags);
     }
 
     /**

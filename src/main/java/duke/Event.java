@@ -18,13 +18,33 @@ public class Event extends DatedTask {
     }
 
     /**
-     * Constructor for duke.Event-based Tasks.
+     * Constructor for duke.Event-based Tasks with Tags.
      * @param name Description of duke.Task.
-     * @param completed State of completion of duke.Task.
+     * @param deadline duke.Deadline of duke.Task.
+     * @param tags Tags associated with Task.
+     */
+    public Event(String name, LocalDate deadline, String[] tags) {
+        super(name, deadline, tags);
+    }
+
+    /**
+     * Constructor for duke.Event-based Tasks with completed state.
+     * @param name Description of duke.Task.
+     * @param isCompleted State of completion of duke.Task.
      * @param date Date of duke.Task.
      */
-    public Event(String name, boolean completed, LocalDate date) {
-        super(name, completed, date);
+    public Event(String name, boolean isCompleted, LocalDate date) {
+        super(name, isCompleted, date);
+    }
+
+    /**
+     * Constructor for duke.Event-based Tasks with completed state and tags.
+     * @param name Description of duke.Task.
+     * @param isCompleted State of completion of duke.Task.
+     * @param date Date of duke.Task.
+     */
+    public Event(String name, boolean isCompleted, LocalDate date, String[] tags) {
+        super(name, isCompleted, date, tags);
     }
 
     /**

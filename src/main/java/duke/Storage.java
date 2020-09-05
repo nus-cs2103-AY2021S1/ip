@@ -90,17 +90,32 @@ public class Storage {
                 switch(type) {
                 case SYMBOL_T:
                     assert taskInfo.length > 2 : "File format error!";
-                    tasks.add(new Todo(taskInfo[1], Boolean.parseBoolean(taskInfo[2])));
+                    if (taskInfo.length == 3) { // no tags
+                        tasks.add(new Todo(taskInfo[1], Boolean.parseBoolean(taskInfo[2])));
+                    } else { // tags
+                        tasks.add(new Todo(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
+                                taskInfo[3].split(",")));
+                    }
                     break;
                 case SYMBOL_E:
                     assert taskInfo.length > 3 : "File format error!";
-                    tasks.add(new Event(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
-                            LocalDate.parse(taskInfo[3])));
+                    if (taskInfo.length == 4) { // no tags
+                        tasks.add(new Event(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
+                                LocalDate.parse(taskInfo[3])));
+                    } else { // tags
+                        tasks.add(new Event(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
+                                LocalDate.parse(taskInfo[4]), taskInfo[3].split(",")));
+                    }
                     break;
                 case SYMBOL_D:
                     assert taskInfo.length > 3 : "File format error!";
-                    tasks.add(new Deadline(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
-                            LocalDate.parse(taskInfo[3])));
+                    if (taskInfo.length == 4) { // no tags
+                        tasks.add(new Deadline(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
+                                LocalDate.parse(taskInfo[3])));
+                    } else { // tags
+                        tasks.add(new Deadline(taskInfo[1], Boolean.parseBoolean(taskInfo[2]),
+                                LocalDate.parse(taskInfo[4]), taskInfo[3].split(",")));
+                    }
                     break;
                 default:
                     break;

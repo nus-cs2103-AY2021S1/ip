@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Arrays;
+
 /**
  * Handles maintenance and display of duke.Task objects.
  */
@@ -16,6 +18,9 @@ public class Task {
     /** Completion state of task */
     protected boolean isCompleted;
 
+    /** Tags associated with task */
+    protected String[] tags;
+
     /**
      * Constructor for Tasks.
      * @param name Description of duke.Task.
@@ -26,13 +31,36 @@ public class Task {
     }
 
     /**
-     * Constructor for Tasks.
+     * Constructor for Task with tags.
      * @param name Description of duke.Task.
-     * @param completed Completion state of duke.Task.
+     * @param tags Tags associated with Task.
      */
-    public Task(String name, boolean completed) {
+    public Task(String name, String[] tags) {
         this.name = name;
-        this.isCompleted = completed;
+        this.isCompleted = false;
+        this.tags = tags;
+    }
+
+    /**
+     * Constructor for Tasks with completed state.
+     * @param name Description of duke.Task.
+     * @param isCompleted Completion state of duke.Task.
+     */
+    public Task(String name, boolean isCompleted) {
+        this.name = name;
+        this.isCompleted = isCompleted;
+    }
+
+    /**
+     * Constructor for Task with completed state and tags.
+     * @param name Description of duke.Task.
+     * @param isCompleted Completion state of duke.Task.
+     * @param tags Tags associated with Task.
+     */
+    public Task(String name, boolean isCompleted, String[] tags) {
+        this.name = name;
+        this.isCompleted = isCompleted;
+        this.tags = tags;
     }
 
     /**
@@ -71,7 +99,24 @@ public class Task {
      * @return Saved representation of duke.Task object.
      */
     public String format() {
-        return this.name + SAVE_DELIMITER + this.isCompleted;
+        String base = this.name + SAVE_DELIMITER + this.isCompleted;
+        if (tags == null || tags.length == 0) {
+            return base;
+        } else {
+            return base + SAVE_DELIMITER + Arrays.stream(tags).reduce((a, b) -> a + "," + b).orElse("");
+        }
+    }
+
+    /**
+     * Displays the list of tags for the task.
+     * @return List of tags.
+     */
+    public String showTags() {
+        if (tags == null || tags.length == 0) {
+            return "";
+        }
+        System.out.println(Arrays.toString(tags));
+        return "#" + Arrays.stream(tags).reduce((a, b) -> a + " #" + b).orElse("");
     }
 
     /**
@@ -80,6 +125,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.name;
+        return "[" + getStatusIcon() + "] " + this.name + " " + showTags();
     }
 }

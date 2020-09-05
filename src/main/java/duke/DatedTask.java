@@ -22,13 +22,35 @@ public abstract class DatedTask extends Task {
     }
 
     /**
-     * Constructor for Dated Tasks.
+     * Constructor for Dated Task with tags.
+     * @param name Description of duke.Task.
+     * @param tags Tags associated with Task.
+     */
+    public DatedTask(String name, LocalDate date, String[] tags) {
+        super(name);
+        this.date = date;
+        this.tags = tags;
+    }
+
+    /**
+     * Constructor for Dated Tasks with completed state.
      * @param name Description of duke.Task.
      * @param isCompleted State of completion of duke.Task.
      * @param date Date of duke.Task.
      */
     public DatedTask(String name, boolean isCompleted, LocalDate date) {
         super(name, isCompleted);
+        this.date = date;
+    }
+
+    /**
+     * Constructor for Dated Tasks with completed state and tags.
+     * @param name Description of duke.Task.
+     * @param isCompleted State of completion of duke.Task.
+     * @param date Date of duke.Task.
+     */
+    public DatedTask(String name, boolean isCompleted, LocalDate date, String[] tags) {
+        super(name, isCompleted, tags);
         this.date = date;
     }
 
