@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -17,7 +18,7 @@ public class Duke extends Application {
     private TaskList tasks;
     // Variables for JavaFX
     private ScrollPane scrollPane; // msg get too long
-    private VBox vBox; // Lays out children in a vertical column
+    private VBox dialogBox; // Lays out children in a vertical column
     private TextField userInput; // Receive input
     private Button sendButton; // the button that says Send for user
     private Scene scene; // The final scene that gets shown
@@ -80,8 +81,8 @@ public class Duke extends Application {
         // Create scrollPane for scrolling content of chat
         // Input empty now. Can play around with input
         this.scrollPane = new ScrollPane();
-        this.vBox = new VBox();
-        scrollPane.setContent(vBox); // enables vBox scrolling
+        this.dialogBox = new VBox();
+        scrollPane.setContent(dialogBox); // enables dialogBox scrolling
 
         this.userInput = new TextField();
         this.sendButton = new Button("Send"); // txt for button
@@ -90,10 +91,76 @@ public class Duke extends Application {
         // Add all nodes as children
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
+        // Format Nodes (individual components) to look as expected
+        // 2.1. stage
+        stage.setTitle("Hal9000");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        // 2.2. mainLayout
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        // 2.3. Scroll Pane
+        scrollPane.setPrefSize(385, 535);
+        // Hbar, Vbar = Horizontal bar, Vertical bar
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true); // what is this
+        // 2.4. dialogBox
+        dialogBox.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        // 2.5. userInput bar
+        userInput.setPrefWidth(325.0);
+
+        // 2.6. Send button
+        sendButton.setPrefWidth(55.0);
+
+        // 2.7. AnchorPane. This is where all the nodes / components are arranged.
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput, 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        // STEP 3: Interacting with user using setOnMouseClicked and setOnAction (press Enter)
+        sendButton.setOnMouseClicked((event) -> {
+            // lambda handle function
+            dialogBox.getChildren().add(getDialogLabel(userInput.getText())); // implement getDialogLabel below
+            userInput.clear();
+        });
+
+        userInput.setOnAction((event) -> {
+            // lambda handle func
+            dialogBox.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        // ScrollPane automaticly scrolls down when text exceeds size of dialogBox
+        dialogBox.heightProperty().addListener((observable) -> {
+            scrollPane.setVvalue(1.0); // scroll down til end
+        });
+
         this.scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
+    }
+
+    /**
+     * Iteration 1
+     * Ctrates label with specified text, add it to dialogue box.
+     * @param txt specified text given
+     * @return label to dialogBox
+     */
+    private Label getDialogLabel(String txt) {
+        Label textToAdd = new Label(txt);
+        textToAdd.setWrapText(true); //  enable wrap text (add lines etc)
+
+        return textToAdd;
     }
 
     /**
