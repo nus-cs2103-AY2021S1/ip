@@ -162,7 +162,7 @@ public class Duke extends Application {
         });
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        //Part 3. Add functionality to handle user input.
+        //Part 3. Add functionality to handle user input by using Lambdas.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
