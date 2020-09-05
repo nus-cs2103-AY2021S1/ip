@@ -18,7 +18,7 @@ public class Nite {
     private Storage storage;
     private TaskList tasks;
 
-    private final String filePath = "/data/duke.txt";
+    private final String filePath = "/data/nite.txt";
     private final String folderPath = "/data";
 
     /**
