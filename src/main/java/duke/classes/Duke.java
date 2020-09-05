@@ -31,16 +31,11 @@ public class Duke {
             taskList = new TaskList(data.loadData());
         } catch (IOException | DukeInvalidTimeException | ArrayIndexOutOfBoundsException e) {
             System.out.println("FAILURE: Unable to load data from local drive.");
-            try {
-                data = new Data();
-                taskList = new TaskList(data.loadData());
-            } catch (IOException | ArrayIndexOutOfBoundsException | DukeInvalidTimeException err) {
-                System.out.println("FAILURE: Unable to create any file for saving data");
-            }
+            setDuke();
         }
     }
 
-    /** Constructor whereby the duke class loads data from a given path on the hard disk */
+    /** Constructor whereby the duke class loads data from a default path on the hard disk */
 
     public Duke() {
         try {
@@ -48,12 +43,19 @@ public class Duke {
             taskList = new TaskList(data.loadData());
         } catch (IOException | DukeInvalidTimeException | ArrayIndexOutOfBoundsException e) {
             System.out.println("FAILURE: Unable to load data from local drive.");
-            try {
-                data = new Data();
-                taskList = new TaskList(data.loadData());
-            } catch (IOException | ArrayIndexOutOfBoundsException | DukeInvalidTimeException err) {
-                System.out.println("FAILURE: Unable to create any file for saving data");
-            }
+            setDuke();
+        }
+    }
+
+    /**
+     * Sets up a new default path for storage of data.
+     */
+    public void setDuke() {
+        try {
+            data = new Data();
+            taskList = new TaskList(data.loadData());
+        } catch (IOException | ArrayIndexOutOfBoundsException | DukeInvalidTimeException err) {
+            System.out.println("FAILURE: Unable to create any file for saving data");
         }
     }
 
@@ -108,11 +110,7 @@ public class Duke {
             completedString = ui.displayList(taskList.todoList);
             break;
         case FIND:
-            try {
-                completedString = ui.displayList(taskList.find(task));
-            } catch (DukeInvalidTimeException e) {
-                completedString = ui.printError(e.toString());
-            }
+            completedString = findTask(task);
             break;
         case TODO:
         case EVENT:
@@ -139,6 +137,19 @@ public class Duke {
         // Assertion: Duke can associate a command to the task
         assert completedString != null : "Assignment of command to task has failed.";
         return completedString;
+    }
+
+    /**
+     * Outputs the string upon query of a task in task list.
+     * @param task Task to be searched for
+     * @return String representation of tasks queried
+     */
+    public String findTask(String task) {
+        try {
+            return ui.displayList(taskList.find(task));
+        } catch (DukeInvalidTimeException e) {
+            return ui.printError(e.toString());
+        }
     }
 
     /**

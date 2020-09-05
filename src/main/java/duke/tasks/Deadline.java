@@ -1,8 +1,6 @@
 package duke.tasks;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import duke.exceptions.DukeInvalidTimeException;
 
@@ -11,7 +9,6 @@ import duke.exceptions.DukeInvalidTimeException;
  * Deadline class which carries tasks of type Deadline and extends of the base Task class.
  */
 public class Deadline extends Task {
-    protected LocalDateTime time;
 
     /**
      * Constructor for tasks of deadline type.
@@ -25,12 +22,7 @@ public class Deadline extends Task {
         super(description, index, isDone);
         super.type = TaskType.DEADLINE;
         int idx = description.indexOf('/');
-        try {
-            time = LocalDateTime.parse(description.substring(idx + 4, idx + 20),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
-            throw new DukeInvalidTimeException();
-        }
+        super.setTime(idx);
     }
 
     /**
@@ -43,8 +35,9 @@ public class Deadline extends Task {
     public String getStatusWithIndex() {
         int idx = description.indexOf('/');
         String task = description.substring(0, idx);
-        String end = String.format("by: %s", time.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")));
-        return String.format("%s. %s%s%s(%s)", index, super.type, isDone ? super.done : super.start, task, end);
+        String end = String.format("by: %s", super.getTime().format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")));
+        String icon = super.getIcon(isDone);
+        return String.format("%s. %s%s%s(%s)", index, super.type, icon, task, end);
     }
 
     /**
@@ -58,6 +51,7 @@ public class Deadline extends Task {
         int idx = description.indexOf('/');
         String task = description.substring(0, idx);
         String end = new StringBuilder(description.substring(idx + 1)).insert(2, ':').toString();
-        return String.format("%s%s%s(%s)", super.type, isDone ? super.done : super.start, task, end);
+        String icon = super.getIcon(isDone);
+        return String.format("%s%s%s(%s)", super.type, icon, task, end);
     }
 }
