@@ -35,6 +35,7 @@ public class Storage {
      */
     public List<Task> load() throws DukeException {
         File f = new File(this.filePath);
+        assert f.exists();
         try {
             List<Task> tasks = new ArrayList<>();
             Scanner sc = new Scanner(f);
@@ -44,6 +45,7 @@ public class Storage {
                     char bool = s.charAt(4);
                     boolean done = (bool == '1');
                     if(s.charAt(0) == 'T'){
+                        assert !s.substring(8).contains("|");
                         tasks.add(new ToDo(s.substring(8), done));
                     }else if(s.charAt(0) == 'E'){
                         String string = "";
@@ -63,6 +65,9 @@ public class Storage {
                             }
                             another = another + s.charAt(i);
                         }
+                        assert !string.contains("|");
+                        assert !another.contains("|");
+                        assert !s.substring(index + 1).contains("|");
                         tasks.add(new Event(string, done, another, s.substring(index + 1)));
                     }else {
                         String string = "";
@@ -74,6 +79,8 @@ public class Storage {
                             }
                             string = string + s.charAt(i);
                         }
+                        assert !string.contains("|");
+                        assert !s.substring(index +2).contains("|");
                         tasks.add(new Deadline(string, done, s.substring(index + 2)));
                     }
                     } while (sc.hasNextLine());
