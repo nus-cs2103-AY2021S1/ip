@@ -1,7 +1,7 @@
 package duke.storage;
 
 /**
- * The class DukeCompileTimeException denotes a Duke IOexception.
+ * The class DukeIOException denotes a Duke IOexception.
  *
  * @author Alvin Chee
  */
