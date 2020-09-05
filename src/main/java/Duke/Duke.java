@@ -46,7 +46,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Starts the todo list feature of the .
+     * Starts running Duke.
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
@@ -98,7 +98,7 @@ public class Duke extends Application {
 
     /**
      * Starts Duke in GUI.
-     * @param stage is necessary component.
+     * @param stage is a necessary component for setting GUI.
      */
     @Override
     public void start(Stage stage) {
@@ -226,7 +226,6 @@ public class Duke extends Application {
             } else if (input.startsWith(Operations.FIND.name().toLowerCase())) {
                 res = tasks.find(input, ui);
             } else {
-                // Exception: eg. ???
                 res = "      OOPS!!! I'm sorry, but I don't know what that means :-(";
             }
         } catch (NumberFormatException e) {
