@@ -20,7 +20,7 @@ public class Event extends Task {
     }
 
     @Override
-    protected LocalDate getDeadline() {
+    protected LocalDate getTaskDeadline() {
         return at;
     }
 

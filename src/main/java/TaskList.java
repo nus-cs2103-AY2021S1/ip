@@ -86,8 +86,8 @@ public class TaskList {
         ArrayList<Task> sortedEventAndDeadline = this.taskList.stream()
                                                     .filter(task -> task instanceof Deadline
                                                             || task instanceof Event)
-                                                    .sorted((task1, task2) -> task1.getDeadline()
-                                                            .compareTo(task2.getDeadline()))
+                                                    .sorted((task1, task2) -> task1.getTaskDeadline()
+                                                            .compareTo(task2.getTaskDeadline()))
                                                     .collect(Collectors.toCollection(ArrayList::new));
         ArrayList<Task> onlyTodo = this.taskList.stream()
                                     .filter(task -> task instanceof Todo)

@@ -21,7 +21,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    protected LocalDate getDeadline() {
+    protected LocalDate getTaskDeadline() {
         return by;
     }
 

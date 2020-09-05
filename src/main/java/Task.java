@@ -59,7 +59,7 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
-    protected LocalDate getDeadline() {
+    protected LocalDate getTaskDeadline() {
         return null;
     }
 
@@ -74,11 +74,11 @@ public class Task {
         }
         if (this instanceof Event) {
             return "E//" + this.getTaskStatus() + "//"
-                    + this.description + "//" + ((Event) this).getDeadline();
+                    + this.description + "//" + ((Event) this).getTaskDeadline();
         }
         if (this instanceof Deadline) {
             return "D//" + this.getTaskStatus() + "//"
-                    + this.description + "//" + ((Deadline) this).getDeadline();
+                    + this.description + "//" + ((Deadline) this).getTaskDeadline();
         }
         return " ";
     }
