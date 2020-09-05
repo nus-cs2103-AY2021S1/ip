@@ -22,8 +22,6 @@ public class FindCommand extends Command {
      * @return Response object
      */
     public Response runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
-        assert arrayOfTasks != null || ui != null || storage != null :
-                "arrayOfTasks, Ui and Storage objects cannot be null";
         TaskList matchedTasksList = new TaskList();
         int arraySize = arrayOfTasks.taskArraySize();
         int index = 0;

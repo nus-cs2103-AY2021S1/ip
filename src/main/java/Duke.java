@@ -11,7 +11,6 @@ public class Duke {
      * @param path File path giving the location of the input file.
      */
     public Duke(String path) {
-        assert !path.equals("") : "File path should not be empty!";
         this.storage = new Storage(path);
         this.ui = new Ui();
     }
@@ -44,7 +43,6 @@ public class Duke {
      * @return Response object
      */
     public Response getResponse(String userInput) {
-        assert !userInput.equals("") :  "String from user input should not be empty!";
         Response response = execute(userInput);
         return response;
     }
@@ -56,8 +54,6 @@ public class Duke {
      */
     private Response execute(String userInput) {
         Response responseObject;
-        assert arrayOfTasks != null || ui != null || storage != null :
-                "arrayOfTasks, Ui and Storage objects cannot be null";
         try {
             Command parsedCommand = Parser.parse(userInput);
             responseObject = parsedCommand.runCommand(arrayOfTasks, ui, storage);
@@ -65,7 +61,6 @@ public class Duke {
             String errorMsg = error.getMessage();
             responseObject = ui.returnError(errorMsg);
         }
-        assert responseObject != null : "There is no Response object being returned by Command object.";
         return responseObject;
     }
 }
