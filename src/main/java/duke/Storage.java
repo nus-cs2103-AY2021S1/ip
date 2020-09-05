@@ -31,7 +31,7 @@ public class Storage {
      * @param filePath The filePath of the storage text file.
      */
     public Storage(String filePath) {
-        assert(filePath != null);
+        assert(filePath != null && !filePath.equals(""));
         this.filePath = filePath;
     }
 
@@ -48,8 +48,7 @@ public class Storage {
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
-                String next = sc.nextLine();
-                String[] tokens = next.split(" \\| ");
+                String[] tokens = sc.nextLine().split(" \\| ");
                 if (tokens.length < 3) {
                     throw new DukeInvalidDataException("Oops data is invalid");
                 }
@@ -90,7 +89,7 @@ public class Storage {
     }
 
     private static Deadline loadDeadline(String description,
-             List<LocalDateTime> localDateTimeList) {
+            List<LocalDateTime> localDateTimeList) {
         LocalDate date = localDateTimeList.get(0).toLocalDate();
         LocalTime time = localDateTimeList.size() == 2
             ? localDateTimeList.get(1).toLocalTime()
@@ -99,7 +98,7 @@ public class Storage {
     }
 
     private static Event loadEvent(String description,
-                                         List<LocalDateTime> localDateTimeList) {
+            List<LocalDateTime> localDateTimeList) {
         LocalDate date = localDateTimeList.get(0).toLocalDate();
         LocalTime time = localDateTimeList.size() == 2
             ? localDateTimeList.get(1).toLocalTime()
@@ -128,12 +127,12 @@ public class Storage {
             case DEADLINE:
                 Deadline deadline = (Deadline) task;
                 s = String.format("D | %d | %s | %s", deadline.getIsDone() ? 1 : 0,
-                        deadline.getDescription(), deadline.getBy());
+                    deadline.getDescription(), deadline.getBy());
                 break;
             case EVENT:
                 Event event = (Event) task;
                 s = String.format("E | %d | %s | %s", event.getIsDone() ? 1 : 0,
-                        event.getDescription(), event.getAt());
+                    event.getDescription(), event.getAt());
                 break;
             default:
                 break;
