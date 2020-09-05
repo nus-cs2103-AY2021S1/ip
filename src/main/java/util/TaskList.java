@@ -92,6 +92,7 @@ public class TaskList {
     public List<Task> filter(String query) {
         return lst.stream().filter(task -> {
             String taskDesc = task.getDescription();
+            // check if any string in the task description matches the query string
             String[] wordsInTask = taskDesc.split(" ");
             return Arrays.asList(wordsInTask).contains(query);
         }).collect(Collectors.toList());
