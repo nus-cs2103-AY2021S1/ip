@@ -41,6 +41,22 @@ public class TaskList {
     }
 
     /**
+     * Checks if index is within acceptable range
+     *
+     * @param i index for fileContents
+     * @param fileContents List of Tasks
+     * @throws Exception the exception
+     */
+    private void checkIndex(int i, List<Task> fileContents) throws Exception {
+        boolean greaterThanOne = i > 0;
+        boolean smallerThanFileSize = i <= fileContents.size();
+        assert (greaterThanOne || smallerThanFileSize) : "Index out of range";
+        if (!(greaterThanOne && smallerThanFileSize)) {
+            throw new InvalidIndexException();
+        }
+    }
+
+    /**
      * Pulls from txt file into a Task object
      *
      * @param i Line to get
@@ -48,11 +64,11 @@ public class TaskList {
      * @throws Exception the exception
      */
     public Task getTask(int i) throws Exception {
-        List<Task> filecontents = storage.getFileContents();
-        if (i <= 0 || i > filecontents.size()) {
-            throw new InvalidIndexException();
-        }
-        return filecontents.get(i - 1);
+        List<Task> fileContents = storage.getFileContents();
+
+        checkIndex(i, fileContents);
+
+        return fileContents.get(i - 1);
     }
 
     /**
@@ -73,13 +89,13 @@ public class TaskList {
      * @throws Exception the exception
      */
     public Task completeTask(int i) throws Exception {
-        List<Task> filecontents = storage.getFileContents();
-        Task t = filecontents.get(i - 1);
-        if (i <= 0 || i > filecontents.size()) {
-            throw new InvalidIndexException();
-        }
-        filecontents.get(i - 1).setStatus("1");
-        storage.rewriteFileContents(filecontents);
+        List<Task> fileContents = storage.getFileContents();
+        checkIndex(i, fileContents);
+
+        Task t = fileContents.get(i - 1);
+
+        fileContents.get(i - 1).setStatus("1");
+        storage.rewriteFileContents(fileContents);
         return t;
     }
 
@@ -91,13 +107,13 @@ public class TaskList {
      * @throws Exception the exception
      */
     public Task deleteTask(int i) throws Exception {
-        List<Task> filecontents = storage.getFileContents();
-        Task t = filecontents.get(i - 1);
-        if (i <= 0 || i > filecontents.size()) {
-            throw new InvalidIndexException();
-        }
-        filecontents.remove(i - 1);
-        storage.rewriteFileContents(filecontents);
+        List<Task> fileContents = storage.getFileContents();
+        checkIndex(i, fileContents);
+
+        Task t = fileContents.get(i - 1);
+
+        fileContents.remove(i - 1);
+        storage.rewriteFileContents(fileContents);
         return t;
     }
 
@@ -119,11 +135,11 @@ public class TaskList {
     /**
      * Gets total number of lines on txt
      *
-     * @return size
+     * @return size size
      * @throws Exception the exception
      */
     public int getSize() throws Exception {
-        List<Task> filecontents = storage.getFileContents();
-        return filecontents.size();
+        List<Task> fileContents = storage.getFileContents();
+        return fileContents.size();
     }
 }

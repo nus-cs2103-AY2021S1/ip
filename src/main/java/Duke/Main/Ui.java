@@ -20,6 +20,7 @@ public class Ui {
      * Gets the provided List
      *
      * @param lst List of Tasks
+     * @return the list
      */
     public static String getList(List<Task> lst) {
         String s = "";
