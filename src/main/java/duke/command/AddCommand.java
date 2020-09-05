@@ -11,26 +11,6 @@ import duke.ui.Ui;
  */
 public abstract class AddCommand extends Command {
 
-    private final String taskDetails;
-
-    /**
-     * Initializes the add command with the task details.
-     *
-     * @param taskDetails Task details.
-     */
-    protected AddCommand(String taskDetails) {
-        this.taskDetails = taskDetails;
-    }
-
-    /**
-     * Retrieves the task details of this complex task.
-     *
-     * @return Task details.
-     */
-    protected String getTaskDetails() {
-        return taskDetails;
-    }
-
     /**
      * Adds the new task into the Task List.
      *

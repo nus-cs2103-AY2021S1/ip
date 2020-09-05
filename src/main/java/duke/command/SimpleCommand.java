@@ -15,6 +15,8 @@ import duke.ui.Ui;
  */
 public class SimpleCommand extends Command {
 
+    private static final String INVALID_SIMPLE_COMMAND_MESSAGE = "Command type is neither delete or done";
+
     private final String input;
     private final SimpleCommandType type;
 
@@ -38,32 +40,34 @@ public class SimpleCommand extends Command {
      * @throws DukeException If an error is found in the user input.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (isNumber(input)) {
-            int digit = Integer.parseInt(input);
-            if (tasks.checkIfValid(digit)) {
-                Task current = tasks.get(digit - 1);
-                if (type == SimpleCommandType.DONE) {
-                    if (current.isDone()) {
-                        throw new TaskAlreadyDoneException();
-                    } else {
-                        current.markAsDone();
-                        storage.update(tasks);
-                        return ui.markTaskAsDone(current);
-                    }
-                } else {
-                    tasks.delete(digit - 1);
-                    storage.update(tasks);
-                    return ui.deleteTask(current, tasks.size());
-                }
-            } else {
-                throw new InvalidTaskNumberException(tasks.size());
-            }
-        } else {
+        if (!isNumber(input)) {
             if (type == SimpleCommandType.DONE) {
                 throw new InvalidDoneException();
-            } else {
+            } else if (type == SimpleCommandType.DELETE) {
                 throw new InvalidDeleteException();
+            } else {
+                assert false : INVALID_SIMPLE_COMMAND_MESSAGE;
             }
+        }
+        int digit = Integer.parseInt(input);
+        if (!tasks.checkIfValid(digit)) {
+            throw new InvalidTaskNumberException(tasks.size());
+        }
+        Task current = tasks.get(digit - 1);
+        if (type == SimpleCommandType.DONE) {
+            if (current.isDone()) {
+                throw new TaskAlreadyDoneException();
+            }
+            current.markAsDone();
+            storage.update(tasks);
+            return ui.markTaskAsDone(current);
+        } else if (type == SimpleCommandType.DELETE) {
+            tasks.delete(digit - 1);
+            storage.update(tasks);
+            return ui.deleteTask(current, tasks.size());
+        } else {
+            assert false : INVALID_SIMPLE_COMMAND_MESSAGE;
+            return null;
         }
     }
 

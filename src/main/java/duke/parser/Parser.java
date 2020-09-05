@@ -9,6 +9,10 @@ import duke.command.ShowCommand;
 import duke.command.SimpleCommand;
 import duke.command.SimpleCommandType;
 import duke.exception.DukeException;
+import duke.exception.EmptyTaskException;
+import duke.exception.EmptyTimeException;
+import duke.exception.InvalidDeadlineException;
+import duke.exception.InvalidEventException;
 import duke.exception.UnknownCommandException;
 import duke.task.TaskType;
 
@@ -82,5 +86,45 @@ public class Parser {
     private static String getRestOfWord(String[] arr) {
         assert (arr.length > 0) : INVALID_ARR_ERROR;
         return arr.length == 1 ? "" : arr[1];
+    }
+
+    /**
+     * Returns the unique identifier tied to the ComplexTask.
+     *
+     * @return String identifier of the Task.
+     */
+    private static String getIdentifier(TaskType taskType) {
+        assert (taskType == TaskType.DEADLINE || taskType == TaskType.EVENT);
+        return taskType == TaskType.DEADLINE ? " /by" : " /at";
+    }
+
+    /**
+     * Parses the description for ComplexTask.
+     *
+     * @param description Description of Complex task.
+     * @param taskType Task type of Complex task.
+     * @return String Array consisting of task details and time.
+     * @throws DukeException If the format inputted is not correct.
+     */
+    public static String[] parseComplexTaskDescription(String description, TaskType taskType) throws DukeException {
+        String[] inputArr = description.split(getIdentifier(taskType), 2);
+        if (inputArr.length == 1) {
+            if (taskType == TaskType.DEADLINE) {
+                throw new InvalidDeadlineException();
+            }
+            if (taskType == TaskType.EVENT) {
+                throw new InvalidEventException();
+            }
+        }
+        String taskDetails = inputArr[0];
+        String time = inputArr[1];
+        if (taskDetails.isEmpty()) {
+            throw new EmptyTaskException(taskType);
+        }
+        if (time.isBlank()) {
+            throw new EmptyTimeException(taskType);
+        }
+        inputArr[1] = inputArr[1].trim();
+        return inputArr;
     }
 }
