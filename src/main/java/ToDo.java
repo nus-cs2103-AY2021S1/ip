@@ -32,6 +32,11 @@ public class ToDo extends Listing {
         this.tags = new ArrayList<>(Arrays.asList(tagList));
     }
 
+    public ToDo(String doneness, String s) {
+        super(s);
+        setDoneness(doneness);
+    }
+
     /**
      * Summarises the details of the ToDo object into a size 3 string array containing a code "T" that
      * represents ToDO, isDone boolean in the form of a string and the detail message
@@ -44,7 +49,7 @@ public class ToDo extends Listing {
         details[0] = "T";
         details[1] = this.isDone ? "1" : "0";
         details[2] = this.title;
-        details[3] = this.tags.toString();
+        details[3] = this.tags.toString().substring(1, this.tags.toString().length() - 1);
         return details;
     }
 
@@ -53,7 +58,7 @@ public class ToDo extends Listing {
      */
     @Override
     public String toString() {
-        return this.tags.isEmpty()? "[T]" + super.doneness() + this.title
-                :"[T]" + super.doneness() + this.title + " tags:" + this.tags.toString();
+        return this.tags.isEmpty() ? "[T]" + super.doneness() + this.title
+                : "[T]" + super.doneness() + this.title + " tags:" + this.tags.toString();
     }
 }

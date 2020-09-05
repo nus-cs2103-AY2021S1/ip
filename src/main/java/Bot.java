@@ -84,13 +84,13 @@ public class Bot {
                     output = taskList.find(commandDetail);
                     return output;
                 case ("tag"):
-                  if (commandDetail == null & dateInfo == null) {
-                    throw new invalidTagException();
-                  }
-                  Integer tagNumber = Integer.valueOf(commandDetail) - 1; //catch bug
-                  String tagDetail = dateInfo;
-                  output = taskList.tagListing(tagNumber,tagDetail,printer,storage);
-                  return output;
+                    if (commandDetail == null & dateInfo == null) {
+                        throw new invalidTagException();
+                    }
+                    Integer tagNumber = Integer.valueOf(commandDetail) - 1; //catch bug
+                    String tagDetail = dateInfo;
+                    output = taskList.tagListing(tagNumber, tagDetail, printer, storage);
+                    return output;
                 default:
                     throw new UndefinedException();
             }
@@ -105,7 +105,7 @@ public class Bot {
         } catch (java.lang.NumberFormatException e) { //parsed a date number that is not a number
             return printer.invalidDeleteNumberExceptionMessage();
         } catch (invalidTagException e) {
-          return printer.invalidTagExceptionMessage();
+            return printer.invalidTagExceptionMessage();
         } catch (AssertionError e) { //assertion
             return printer.assertionErrorMessage();
         }

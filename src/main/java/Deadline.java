@@ -1,5 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The Deadline class is a type of listing that contains a String as the detail of the listing, a
@@ -33,6 +35,13 @@ public class Deadline extends Listing {
      * @param doneness in the format YYYY-MM-DD
      * @return A DeadLine object
      */
+    public Deadline(String doneness, String s, String time, String tagList) {
+        super(s);
+        setDoneness(doneness);
+        this.deadLine = LocalDate.parse(time);
+        this.tags = new ArrayList<>(Arrays.asList(tagList));
+    }
+
     public Deadline(String doneness, String s, String time) {
         super(s);
         setDoneness(doneness);
@@ -47,11 +56,12 @@ public class Deadline extends Listing {
      * @return A size 4 String array consisting of the details of the object
      */
     public String[] toArray() {
-        String[] details = new String[4];
+        String[] details = new String[5];
         details[0] = "D";
         details[1] = this.isDone ? "1" : "0";
         details[2] = this.title;
         details[3] = this.deadLine.toString();
+        details[4] = this.tags.toString().substring(1, this.tags.toString().length() - 1);
         return details;
     }
 
@@ -60,10 +70,10 @@ public class Deadline extends Listing {
      */
     @Override
     public String toString() {
-        return this.tags.isEmpty()? "[D]" + super.doneness() + this.title + " (by:"
+        return this.tags.isEmpty() ? "[D]" + super.doneness() + this.title + " (by:"
                 + deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"
                 : "[D]" + super.doneness() + this.title + " (by:"
-                + deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"  + "tags:" +  this.tags;
+                + deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" + " tags:" + this.tags;
     }
 
 }

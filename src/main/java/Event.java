@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * The Event class is a type of listing that contains a String as the detail of the listing, a
  * boolean called isDone and a String called deadLine.
@@ -30,6 +33,13 @@ public class Event extends Listing {
      * @param doneness in the format YYYY-MM-DD
      * @return A Event object
      */
+    public Event(String doneness, String s, String time, String tagList) {
+        super(s);
+        setDoneness(doneness);
+        this.deadLine = time;
+        this.tags = new ArrayList<>(Arrays.asList(tagList));
+    }
+
     public Event(String doneness, String s, String time) {
         super(s);
         setDoneness(doneness);
@@ -44,11 +54,12 @@ public class Event extends Listing {
      * @return A size 4 String array consisting of the details of this object
      */
     public String[] toArray() {
-        String[] details = new String[4];
+        String[] details = new String[5];
         details[0] = "E";
         details[1] = this.isDone ? "1" : "0";
         details[2] = this.title;
         details[3] = this.deadLine;
+        details[4] = this.tags.toString().substring(1, this.tags.toString().length() - 1);
         return details;
     }
 
@@ -57,7 +68,7 @@ public class Event extends Listing {
      */
     @Override
     public String toString() {
-        return this.tags.isEmpty()? "[E]" + super.doneness() + " " + this.title + "(at:" + this.deadLine + ")"
-                : "[E]" + super.doneness() + " " + this.title + "(at:" + this.deadLine + ")" + "tags:" + this.tags;
+        return this.tags.isEmpty() ? "[E]" + super.doneness() + " " + this.title + "(at:" + this.deadLine + ")"
+                : "[E]" + super.doneness() + " " + this.title + "(at:" + this.deadLine + ")" + " tags:" + this.tags;
     }
 }
