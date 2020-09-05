@@ -1,6 +1,25 @@
 Hi. Duke here.
 How can I help you?
-[read book]
-[return book]
-[read book, return book]
+You've added task:
+[NOT DONE] read book
+
+You've added task:
+[NOT DONE] return book
+
+You've added task:
+[NOT DONE] buy bread
+
+Here are the tasks in your list:
+[NOT DONE] read book [id=0]
+[NOT DONE] return book [id=1]
+[NOT DONE] buy bread [id=2]
+
+Nice! I've marked this task as done:
+[DONE] return book
+
+Here are the tasks in your list:
+[NOT DONE] read book [id=0]
+[DONE] return book [id=1]
+[NOT DONE] buy bread [id=2]
+
 Bye. Hope to see you again.
