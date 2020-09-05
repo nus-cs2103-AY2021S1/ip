@@ -46,13 +46,7 @@ public class Duke {
         }
     }
 
-    public String greetUser() {
-        String logo = "\t██████╗ ██╗   ██╗██╗  ██╗███████╗\n"
-                + "\t██╔══██╗██║   ██║██║ ██╔╝██╔════╝\n"
-                + "\t██║  ██║██║   ██║█████╔╝ █████╗  \n"
-                + "\t██║  ██║██║   ██║██╔═██╗ ██╔══╝  \n"
-                + "\t██████╔╝╚██████╔╝██║  ██╗███████╗\n"
-                + "\t╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝\n";
-        return "Hello! This is\n\n" + logo + "What can I do for you?";
+    public static String greetUser() {
+        return "Hello! This is Duke\n" + "What can I do for you?";
     }
 }

@@ -23,6 +23,9 @@ import javafx.scene.shape.Shape;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String DUKE_DIALOG_COLOUR = "#D9D9D9";
+    private static final String USER_DIALOG_COLOUR = "#95EC69";
+
     @FXML
     private Label dialog;
     @FXML
@@ -57,13 +60,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    private void setDialogColour(String colour) {
+        String existingStyle = this.dialog.styleProperty().getValue();
+        this.dialog.setStyle(String.format("%s -fx-background-color: %s;", existingStyle, colour));
+    }
+
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setDialogColour(USER_DIALOG_COLOUR);
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setDialogColour(DUKE_DIALOG_COLOUR);
+        db.setFillHeight(true);
         return db;
     }
 }
