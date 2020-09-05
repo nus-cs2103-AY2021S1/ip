@@ -114,8 +114,6 @@ public class Storage {
         char taskCode = task.charAt(0);
         boolean isDone = task.charAt(1) == '1';
 
-        String endDateString = task.substring(task.length() - isoFormat.length());
-
         switch (taskCode) {
             case 'T':
                 ToDo toDo = new ToDo(task.substring(3).trim());
@@ -128,6 +126,7 @@ public class Storage {
                 // Fallthrough
 
             case 'D':
+                String endDateString = task.substring(task.length() - isoFormat.length());
                 Deadline deadline = new Deadline(task.substring(3, task.length() - isoFormat.length()).trim(),
                     LocalDateTime.parse(endDateString));
 
@@ -140,10 +139,12 @@ public class Storage {
 
             case 'E':
 
-                String taskText = task.substring(3, task.length() - (eventDateFormat.length() + 1)).trim();
+                String taskText = task.substring(3,
+                    task.length() - (eventDateFormat + " ").length()).trim();
                 String startDateString = task.substring(
                     task.length() - eventDateFormat.length(),
-                    task.length() - (eventDateFormat + " to ").length());
+                    task.length() - (isoFormat + " to ").length());
+                endDateString = task.substring(task.length() - isoFormat.length());
 
                 boolean hasEndDate = !endDateString.equals(Event.EMPTY_END_DATE);
 

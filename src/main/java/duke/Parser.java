@@ -91,7 +91,7 @@ public class Parser {
      */
     private static String getTask(String fullCommand, String firstWord) throws EmptyTaskException {
         try {
-            return fullCommand.substring(firstWord.length()).trim();
+            return fullCommand.substring(firstWord.length() + 1).trim(); // take whitespace into account
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyTaskException();
         }
