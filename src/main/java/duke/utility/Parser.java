@@ -13,6 +13,7 @@ import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.RescheduleCommand;
 import duke.command.TaskAfterCommand;
 import duke.command.TaskBeforeCommand;
 import duke.command.ToDoCommand;
@@ -26,6 +27,7 @@ import duke.exception.InvalidDateFormatException;
 import duke.exception.InvalidDateTimeFormatException;
 import duke.exception.InvalidTaskNumberException;
 import duke.exception.NotACommandException;
+import duke.exception.RescheduleFormatException;
 import duke.exception.ToDoException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
@@ -36,6 +38,17 @@ import duke.task.ToDoTask;
  * Class to parse the user input. This class will try to change the user input to a functional command.
  */
 public class Parser {
+    private static final String COMMAND_BYE = "bye";
+    private static final String COMMAND_LIST = "list";
+    private static final String COMMAND_DONE = "done";
+    private static final String COMMAND_DELETE = "delete";
+    private static final String COMMAND_TODO = "todo";
+    private static final String COMMAND_DEADLINE = "deadline";
+    private static final String COMMAND_EVENT = "event";
+    private static final String COMMAND_TASK_AFTER = "taskafter";
+    private static final String COMMAND_TASK_BEFORE = "taskbefore";
+    private static final String COMMAND_FIND = "find";
+    private static final String COMMAND_RESCHEDULE = "reschedule";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     /**
@@ -120,11 +133,11 @@ public class Parser {
             arg = userInputArr[1];
         }
 
-        if (command.equals(Command.getCommandBye())) {
+        if (command.equals(COMMAND_BYE)) {
             return new ExitCommand();
-        } else if (command.equals(Command.getCommandList())) {
+        } else if (command.equals(COMMAND_LIST)) {
             return new ListCommand();
-        } else if (command.equals(Command.getCommandDone())) {
+        } else if (command.equals(COMMAND_DONE)) {
             if (arg == null) {
                 throw new DoneException();
             }
@@ -132,7 +145,7 @@ public class Parser {
             int taskNumber = parseStringToNumber(arg);
 
             return new DoneCommand(taskNumber);
-        } else if (command.equals(Command.getCommandDelete())) {
+        } else if (command.equals(COMMAND_DELETE)) {
             if (arg == null) {
                 throw new DeleteException();
             }
@@ -140,7 +153,7 @@ public class Parser {
             int taskNumber = parseStringToNumber(arg);
 
             return new DeleteCommand(taskNumber);
-        } else if (command.equals(Command.getCommandTaskAfter())) {
+        } else if (command.equals(COMMAND_TASK_AFTER)) {
             if (arg == null) {
                 throw new InvalidDateFormatException();
             }
@@ -148,7 +161,7 @@ public class Parser {
             LocalDate parsedDate = parseLocalDate(arg);
 
             return new TaskAfterCommand(parsedDate);
-        } else if (command.equals(Command.getCommandTaskBefore())) {
+        } else if (command.equals(COMMAND_TASK_BEFORE)) {
             if (arg == null) {
                 throw new InvalidDateFormatException();
             }
@@ -156,13 +169,13 @@ public class Parser {
             LocalDate parsedDate = parseLocalDate(arg);
 
             return new TaskBeforeCommand(parsedDate);
-        } else if (command.equals(Command.getCommandTodo())) {
+        } else if (command.equals(COMMAND_TODO)) {
             if (arg == null) {
                 throw new ToDoException();
             }
 
             return new ToDoCommand(arg);
-        } else if (command.equals(Command.getCommandDeadline())) {
+        } else if (command.equals(COMMAND_DEADLINE)) {
             if (arg == null) {
                 throw new DeadlineException();
             }
@@ -179,7 +192,7 @@ public class Parser {
             LocalDateTime deadlineDate = parseLocalDateTime(dateForDeadline);
 
             return new DeadlineCommand(taskForDeadline, deadlineDate);
-        } else if (command.equals(Command.getCommandEvent())) {
+        } else if (command.equals(COMMAND_EVENT)) {
             if (arg == null) {
                 throw new EventException();
             }
@@ -196,12 +209,27 @@ public class Parser {
             LocalDateTime eventDate = parseLocalDateTime(dateForEvent);
 
             return new EventCommand(taskForEvent, eventDate);
-        } else if (command.equals(Command.getCommandFind())) {
+        } else if (command.equals(COMMAND_FIND)) {
             if (arg == null) {
                 throw new FindException();
             }
 
             return new FindCommand(arg);
+        } else if (command.equals(COMMAND_RESCHEDULE)) {
+            if (arg == null) {
+                throw new RescheduleFormatException();
+            }
+
+            String[] arrForReschedule = arg.split("\\s", 2);
+
+            if (arrForReschedule.length == 1) {
+                throw new RescheduleFormatException();
+            }
+
+            int taskNumber = parseStringToNumber(arrForReschedule[0].trim());
+            LocalDateTime dateForReschedule = parseLocalDateTime(arrForReschedule[1].trim());
+
+            return new RescheduleCommand(taskNumber, dateForReschedule);
         } else {
             throw new NotACommandException();
         }

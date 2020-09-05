@@ -18,6 +18,7 @@ import duke.task.Task;
  */
 public class Storage {
     private static final int STATUS_POSITION_IN_DISK = 4;
+    private static final int TO_START_POSITION_OF_DATE = 16;
     private Path storagePath;
 
     /**
@@ -49,10 +50,10 @@ public class Storage {
 
     /**
      * Changes the task's status to done in the hard disk based on the line number specified.
-     * @param line The task line that wanted to be changed
+     * @param line The task's line that wanted to be changed
      * @throws DukeException If the Scanner or FileWriter fails to read the file
      */
-    public void changeTaskInFile(int line) throws DukeException {
+    public void changeTaskStatusInFile(int line) throws DukeException {
         try {
             StringBuilder sb = new StringBuilder();
             File file = new File(storagePath.toString());
@@ -81,7 +82,7 @@ public class Storage {
 
     /**
      * Deletes a task in the hard disk based on the line number specified.
-     * @param line The task line that wanted to be changed
+     * @param line The task's line that wanted to be deleted
      * @throws DukeException If the Scanner or FileWriter fails to read the file
      */
     public void deleteTaskInFile(int line) throws DukeException {
@@ -96,6 +97,38 @@ public class Storage {
                 if (count != line) {
                     sb.append(taskLine);
                 }
+                count++;
+            }
+
+            FileWriter fw = new FileWriter(storagePath.toString());
+            fw.write(sb.toString());
+            fw.close();
+        } catch (IOException e) {
+            throw new FailToReadFileException();
+        }
+    }
+
+    /**
+     * Change the task's date to the specified date in the hard disk based on the line number specified.
+     * @param line the task's line that wanted to be changed
+     * @param newDate the new date for the task
+     * @throws DukeException If the Scanner of FileWriter fails to read the file
+     */
+    public void changeTaskDateInFile(int line, String newDate) throws DukeException {
+        try {
+            StringBuilder sb = new StringBuilder();
+            File file = new File(storagePath.toString());
+            Scanner sc = new Scanner(file);
+            int count = 1;
+
+            while (sc.hasNext()) {
+                String taskLine = sc.nextLine() + "\n";
+
+                if (count == line) {
+                    String subStringTaskLine = taskLine.substring(0, taskLine.length() - TO_START_POSITION_OF_DATE);
+                    taskLine = subStringTaskLine + newDate + "\n";
+                }
+                sb.append(taskLine);
                 count++;
             }
 

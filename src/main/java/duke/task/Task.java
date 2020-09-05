@@ -14,7 +14,7 @@ public abstract class Task {
      * Constructs a new Task object with the specified task name.
      * @param taskName The task's name
      */
-    public Task(String taskName) {
+    protected Task(String taskName) {
         assert taskName != null : "Task name is null!";
         this.taskName = taskName;
         this.status = Status.ONGOING;
