@@ -70,7 +70,7 @@ public class TaskList {
     }
 
     private boolean isValidTaskNumber(int taskNumber) {
-        return !(taskNumber < 1 || taskNumber > taskList.size());
+        return taskNumber >= 1 && taskNumber <= taskList.size();
     }
 
     /**

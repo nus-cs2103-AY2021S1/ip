@@ -1,5 +1,8 @@
 package duke.exceptions;
 
+/**
+ * Exception thrown when users provide a task number that is not mapped to any existing tasks.
+ */
 public class NoSuchTaskException extends DukeException {
 
     public NoSuchTaskException() {

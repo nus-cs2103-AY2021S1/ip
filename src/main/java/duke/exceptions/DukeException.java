@@ -1,5 +1,8 @@
 package duke.exceptions;
 
+/**
+ * Exceptions caused by invalid user input.
+ */
 public class DukeException extends Exception {
 
     protected String message;
@@ -20,6 +23,11 @@ public class DukeException extends Exception {
         return this.message;
     }
 
+    /**
+     * Returns a user-friendly message describing the cause of the Exception.
+     *
+     * @return A user-friendly message String describing the cause of the Exception
+     */
     public String getFriendlyMessage() {
         return this.friendlyMessage;
     }
