@@ -13,15 +13,19 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Duke extends Application {
     private TaskList tasks;
     // Variables for JavaFX
     private ScrollPane scrollPane; // msg get too long
-    private VBox dialogBox; // Lays out children in a vertical column
+    private VBox dialogContainer; // Lays out children in a vertical column
     private TextField userInput; // Receive input
     private Button sendButton; // the button that says Send for user
     private Scene scene; // The final scene that gets shown
+    private Image userImg = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImg = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke() {
         this.tasks = new TaskList();
@@ -81,8 +85,8 @@ public class Duke extends Application {
         // Create scrollPane for scrolling content of chat
         // Input empty now. Can play around with input
         this.scrollPane = new ScrollPane();
-        this.dialogBox = new VBox();
-        scrollPane.setContent(dialogBox); // enables dialogBox scrolling
+        this.dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer); // enables dialogContainer scrolling
 
         this.userInput = new TextField();
         this.sendButton = new Button("Send"); // txt for button
@@ -109,8 +113,8 @@ public class Duke extends Application {
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true); // what is this
-        // 2.4. dialogBox
-        dialogBox.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        // 2.4. dialogContainer
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         // 2.5. userInput bar
         userInput.setPrefWidth(325.0);
@@ -128,21 +132,19 @@ public class Duke extends Application {
 
         // STEP 3: Interacting with user using setOnMouseClicked and setOnAction (press Enter)
         sendButton.setOnMouseClicked((event) -> {
-            // lambda handle function
-            dialogBox.getChildren().add(getDialogLabel(userInput.getText())); // implement getDialogLabel below
-            userInput.clear();
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            // lambda handle func
-            dialogBox.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
-        // ScrollPane automaticly scrolls down when text exceeds size of dialogBox
-        dialogBox.heightProperty().addListener((observable) -> {
+        // ScrollPane automaticly scrolls down when text exceeds size of dialogContainer
+        dialogContainer.heightProperty().addListener((observable) -> {
             scrollPane.setVvalue(1.0); // scroll down til end
         });
+
+        // Step 4: Import images
 
         this.scene = new Scene(mainLayout);
 
@@ -151,16 +153,24 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 1
-     * Ctrates label with specified text, add it to dialogue box.
-     * @param txt specified text given
-     * @return label to dialogBox
+     * Iteration 2: Iteration 1 did not enable picture
+     * and distinction between Duke and User;
+     * Handles interrupt, obtain user text, pair it with user photo in a DialogBox Object
+     * Do the same thing with Duke response (which is just echoing for now)
+     * Finally, clear user text input node.
      */
-    private Label getDialogLabel(String txt) {
-        Label textToAdd = new Label(txt);
-        textToAdd.setWrapText(true); //  enable wrap text (add lines etc)
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText())); // impl getResponse
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(userImg)),
+                new DialogBox(dukeText, new ImageView(dukeImg))
+        );
+        userInput.clear();
+    }
 
-        return textToAdd;
+    private String getResponse(String userText) {
+        return "Hal9000 heard: " + userText;
     }
 
     /**
