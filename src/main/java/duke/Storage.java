@@ -20,6 +20,18 @@ public class Storage {
      */
     public Storage() {
         this.storage = new File(FILEPATH);
+        try {
+            if (!this.storage.exists()) {
+                this.storage.getParentFile().mkdirs();
+                this.storage.createNewFile();
+
+                if (!this.storage.exists()) {
+                    throw new IOException();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Irrecoverable error");
+        }
     }
 
     /**
@@ -30,21 +42,9 @@ public class Storage {
     public ArrayList<String> readTaskStorage() throws StorageException {
         ArrayList<String> existingTasks = new ArrayList<>();
         try {
-            if (this.storage.exists()) {
-                // Load into taskList if file is not empty
-                Scanner s = new Scanner(this.storage);
-                if (this.storage.length() != 0) {
-                    while (s.hasNext()) {
-                        existingTasks.add(s.nextLine());
-                    }
-                }
-            } else {
-                this.storage.getParentFile().mkdirs();
-                this.storage.createNewFile();
-            }
-
-            if (!this.storage.exists()) {
-                throw new IOException();
+            Scanner s = new Scanner(this.storage);
+            while (s.hasNext()) {
+                existingTasks.add(s.nextLine());
             }
         } catch (IOException e) {
             throw new StorageException("Oh noes! I can't seem to find the tasks you saved previously ;A;");
