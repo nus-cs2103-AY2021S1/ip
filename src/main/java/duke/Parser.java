@@ -40,28 +40,33 @@ public class Parser {
             if (inputBreakdown.length < 2) {
                 throw new DukeException(FIND_SYNTAX_ERROR_MESSAGE);
             }
+            assert inputBreakdown.length > 1;
             String keyword = inputBreakdown[1];
             return new FindCommand(keyword);
         case ("done"):
             if (inputBreakdown.length < 2) {
                 throw new DukeException(DONE_SYNTAX_ERROR_MESSAGE);
             }
+            assert inputBreakdown.length > 1;
             String doneTaskNumber = inputBreakdown[1];
             return new DoneCommand(doneTaskNumber);
         case ("todo"):
             if (inputBreakdown.length < 2) {
                 throw new DukeException(TODO_SYNTAX_ERROR_MESSAGE);
             }
+            assert inputBreakdown.length > 1;
             String todoDescription = inputBreakdown[1];
             return new TodoCommand(todoDescription);
         case ("deadline"):
             if (inputBreakdown.length < 2) {
                 throw new DukeException(DEADLINE_SYNTAX_ERROR_MESSAGE);
             }
+            assert inputBreakdown.length > 1;
             String[] deadlineBreakdown = inputBreakdown[1].split(" /by ", 2);
             if (deadlineBreakdown.length < 2) {
                 throw new DukeException(DEADLINE_SYNTAX_ERROR_MESSAGE);
             }
+            assert deadlineBreakdown.length > 1;
             String deadlineDescription = deadlineBreakdown[0];
             String by = deadlineBreakdown[1];
             return new DeadlineCommand(deadlineDescription, parseDateTime(by));
@@ -69,10 +74,12 @@ public class Parser {
             if (inputBreakdown.length < 2) {
                 throw new DukeException(EVENT_SYNTAX_ERROR_MESSAGE);
             }
+            assert inputBreakdown.length > 1;
             String[] eventBreakdown = inputBreakdown[1].split(" /at ", 2);
             if (eventBreakdown.length < 2) {
                 throw new DukeException(EVENT_SYNTAX_ERROR_MESSAGE);
             }
+            assert eventDescription.length > 1;
             String eventDescription = eventBreakdown[0];
             String at = eventBreakdown[1];
             return new EventCommand(eventDescription, parseDateTime(at));
@@ -80,6 +87,7 @@ public class Parser {
             if (inputBreakdown.length < 2) {
                 throw new DukeException(DELETE_SYNTAX_ERROR_MESSAGE);
             }
+            assert inputBreakdown.length > 1;
             String deleteTaskNumber = inputBreakdown[1];
             return new DeleteCommand(deleteTaskNumber);
         case ("bye"):
