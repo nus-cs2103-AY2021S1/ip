@@ -19,9 +19,9 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            MainWindow mw = new MainWindow();
             stage.setScene(scene);
-            //fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setResizable(false);
+            stage.setTitle("Tebby the Task Manager");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package duke.gui;
+package duke;
 
 import duke.command.Command;
 import duke.util.DukeException;
@@ -13,6 +13,9 @@ import duke.util.Ui;
  *     (ii) Checking Tasks as completed
  *     (iii) Viewing current task list
  *     (iv) Searching for tasks using query string
+ *
+ * This bot has two main ways of usage; the Command Line Interface (CLI)
+ * or Graphical User Interface (GUI), both handled by this class.
  *
  * @author Andy Wu
  */
@@ -48,7 +51,7 @@ public class Duke {
     public Duke() {
         TaskList temp;
         ui = new Ui();
-        storage = new Storage("data/duke.txt");
+        storage = new Storage("data/tasks.txt");
         try {
             temp = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -59,16 +62,9 @@ public class Duke {
     }
 
     /**
-     * THIS METHOD IS FOR THE CLI INTERFACE.
-     * The main algorithm of the bot which runs indefinitely as long as
-     * the running flag is true. The algorithm is summarized as:
-     *
-     *     0. Show the welcome message
-     *     1. Read raw user input
-     *     2. Parse user input and create the appropriate command
-     *     3. Execute the command
-     *     4. Repeat 1-3 until an exit command
-     *     5. Show the exit message
+     * The run method is mainly used in the CLI mode. It contains the main
+     * algorithm for receiving user inputs, processing and returning the
+     * appropriate response.
      *
      * Throughout the process, DukeExceptions may be created but are
      * caught and handled by the respective classes.
@@ -106,6 +102,6 @@ public class Duke {
      * @param args optional and will be treated as the first user input.
      */
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke("data/tasks.txt").run();
     }
 }
