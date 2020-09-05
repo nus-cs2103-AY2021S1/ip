@@ -1,18 +1,12 @@
-import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
+import java.util.Scanner;
 
 /**
  * Duke is the application that the user is aware of.
  */
-public class Duke extends Application {
+public class Duke {
 
     private final Storage storage;
     private final TaskList tasks;
-    private Ui ui;
 
     /**
      * Creates a new Duke for GUI.
@@ -33,36 +27,13 @@ public class Duke extends Application {
         tasks = new TaskList(storage.initializeTasks());
     }
 
-    /**
-     * Starts a run of GUI.
-     *
-     * @param stage Display of application.
-     */
-    @Override
-    public void start(Stage stage) {
-        GraphicalUserInterface graphicalUserInterface = new GraphicalUserInterface(stage);
-        ui = graphicalUserInterface;
-        ui.showWelcome();
-
-        TextField textField = graphicalUserInterface.getTextField();
-        textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent ke) {
-                if (ke.getCode().equals(KeyCode.ENTER)) {
-                    try {
-                        Command c = Parser.parse(textField.getText());
-                        c.execute(tasks, ui, storage);
-                        if (c.isExit()) {
-                            ui.showGoodbye();
-                        }
-                    } catch (DukeException | TaskException e) {
-                        ui.showError(e.getMessage());
-                    } finally {
-                        textField.setText("");
-                    }
-                }
-            }
-        });
+    public String getResponse(String text) {
+        try {
+            Command c = Parser.parse(text);
+            return c.execute(tasks, storage);
+        } catch (DukeException | TaskException e) {
+            return e.getMessage();
+        }
     }
 
     /**
@@ -70,22 +41,18 @@ public class Duke extends Application {
      * There is a Welcome, a series of Commands and finally a Goodbye from Duke.
      */
     public void run() {
-        CommandLineInterface commandLineInterface = new CommandLineInterface();
-        ui = commandLineInterface;
-
-        ui.showWelcome();
+        System.out.println(Ui.formatResponse(Ui.getWelcome()));
+        Scanner sc = new Scanner(System.in);
         boolean isExit = false;
         while (!isExit) {
             try {
-                String command = commandLineInterface.readCommand();
-                Command c = Parser.parse(command);
-                c.execute(tasks, ui, storage);
+                Command c = Parser.parse(sc.nextLine());
+                System.out.println(Ui.formatResponse(c.execute(tasks, storage)));
                 isExit = c.isExit();
-            } catch (DukeException | TaskException e) {
-                ui.showError(e.getMessage());
+            } catch (DukeException | TaskException ex) {
+                System.out.println(Ui.formatResponse(ex.getMessage()));
             }
         }
-        ui.showGoodbye();
     }
 
     public static void main(String[] args) {

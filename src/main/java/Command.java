@@ -4,14 +4,13 @@
 public abstract class Command {
 
     /**
-     * Modifies tasks, ui and storage of the Duke instance depending on the type of Command.
+     * Modifies tasks and storage of the Duke instance depending on the type of Command.
      *
      * @param tasks   TaskList to be modified.
-     * @param ui      Ui to be used to display feedback messages.
      * @param storage Storage to be activated if there are any changes to TaskList.
      * @throws DukeException
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, TaskException;
+    public abstract String execute(TaskList tasks, Storage storage) throws DukeException, TaskException;
 
     /**
      * Returns false for all commands except ExitCommand.

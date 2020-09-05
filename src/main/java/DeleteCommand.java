@@ -11,16 +11,15 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes a task from the TaskList, alerts user that a task is deleted, updates storage with deleted task.
+     * Deletes a task from the TaskList updates storage with deleted task.
      *
      * @param tasks   TaskList to be modified.
-     * @param ui      Ui to be used to display feedback messages.
      * @param storage Storage to be updated.
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showDeletedTask(tasks.removeTask(idx), tasks);
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         storage.saveList(tasks);
+        return Ui.getDeletedTask(tasks.removeTask(idx), tasks);
     }
 }

@@ -24,15 +24,14 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds a task to the TaskList, alerts user that a task is added, updates storage with added task.
+     * Adds a task to the TaskList, updates storage with added task.
      *
      * @param tasks   TaskList to be modified.
-     * @param ui      Ui to be used to display feedback messages.
      * @param storage Storage to be updated.
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         Task task = null;
         if (taskType == TaskType.TODO) {
             task = new ToDo(description, false);
@@ -41,10 +40,8 @@ public class AddCommand extends Command {
         } else if (taskType == TaskType.EVENT) {
             task = new Event(description, date, false);
         }
-        if (task != null) {
-            tasks.addTask(task);
-            ui.showAddTask(task, tasks);
-            storage.saveList(tasks);
-        }
+        tasks.addTask(task);
+        storage.saveList(tasks);
+        return Ui.getAddTask(task, tasks);
     }
 }

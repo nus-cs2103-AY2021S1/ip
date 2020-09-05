@@ -24,11 +24,11 @@ public class ListCommand extends Command {
      * Displays all current tasks with their TaskType, done status and description.
      *
      * @param tasks   TaskList to be printed.
-     * @param ui      Ui to be used to display feedback messages.
      * @param storage Storage is not activated.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showTaskList(tasks, on, keyWord);
+    public String execute(TaskList tasks, Storage storage) {
+        return Ui.getTaskList(tasks, on, keyWord);
+//        ui.showTaskList(tasks, on, keyWord);
     }
 }
