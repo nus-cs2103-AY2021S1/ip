@@ -3,6 +3,8 @@ package task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import util.SplitOperation;
+
 /**
  * Inherits from task and represents a task with an event time.
  */
@@ -21,10 +23,12 @@ public class EventTask extends Task {
      */
     public EventTask(String description, boolean isDone, String eventTime) {
         super(description, isDone);
-        String[] splitEventTime = eventTime.split(" ");
-        String inputEventTime = splitEventTime[0] + "T" + splitEventTime[1].substring(0, 2) + ":"
-                + splitEventTime[1].substring(2, 4);
-        this.eventTime = LocalDateTime.parse(inputEventTime);
+        SplitOperation eventSplit = (input) -> {
+            String[] splitInput = input.split(" ");
+            return splitInput[0] + "T" + splitInput[1].substring(0, 2) + ":"
+                    + splitInput[1].substring(2, 4);
+        };
+        this.eventTime = LocalDateTime.parse(eventSplit.operate(eventTime));
     }
 
     /**
