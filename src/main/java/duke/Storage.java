@@ -90,18 +90,14 @@ public class Storage {
      * Writes the list of tasks into text file 'database.txt' and saves it for future use.
      *
      * @param tasks current list of tasks of user.
-     * @throws IOException throw when FileWriter operations fail.
+     * @throws IOException   throw when FileWriter operations fail.
      * @throws DukeException throw when error occurs and need to print error message.
      */
     public void saveToFile(List<Task> tasks) throws IOException, DukeException {
         assert database != null : "Path to database cannot be null";
-        try {
-            FileWriter fw = new FileWriter(database);
-            for (Task task : tasks) {
-                assert task instanceof Todo
-                        || task instanceof Deadline
-                        || task instanceof Event
-                        : "Task type does not exist.";
+        FileWriter fw = new FileWriter(database);
+        tasks.forEach((task) -> {
+            try {
                 if (task instanceof Todo) {
                     if (task.getDone()) {
                         fw.write("T" + "|" + "T" + "|" + task.getDescription() + System.lineSeparator());
@@ -125,11 +121,15 @@ public class Storage {
                                 + "|" + ((Event) task).getDate() + System.lineSeparator());
                     }
                 }
+            } catch (IOException e) {
+                try {
+                    throw new DukeException("error while saving :(");
+                } catch (DukeException dukeException) {
+                    dukeException.printStackTrace();
+                }
             }
-            fw.close();
-        } catch (IOException e) {
-            throw new DukeException("error while saving :(");
-        }
+        });
+        fw.close();
     }
 }
 
