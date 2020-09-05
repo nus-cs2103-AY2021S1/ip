@@ -2,11 +2,11 @@ package task;
 
 public abstract class Task {
     protected String name;
-    protected boolean done;
+    protected boolean isDone;
 
     public Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -21,7 +21,7 @@ public abstract class Task {
      * Sets the task to be done
      */
     public void setDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -30,12 +30,12 @@ public abstract class Task {
      * @return whether done or not
      */
     public boolean getDone() {
-        return this.done;
+        return this.isDone;
     }
 
     @Override
     public String toString() {
-        return this.getName();
+        return String.format("[%s] ", (this.isDone ? "✓" : "✗")) + this.getName();
     }
 
 }

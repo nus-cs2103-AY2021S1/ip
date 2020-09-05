@@ -1,6 +1,7 @@
 package duke;
 
 import task.TaskType;
+import utility.NullListException;
 
 import java.io.IOException;
 import java.security.InvalidParameterException;
@@ -13,63 +14,43 @@ public class Command {
     }
 
     /**
-     * Executes the command.
+     * Executes the command
      *
      * @return a string representing the result of command
      */
     public String execute() {
-        if (line.isBlank() || line.isEmpty()) {
-            return "";
-        } else if (Parser.isExit(line)) {
-            return Ui.exit();
-        } else if (Parser.isList(line)) {
-            try {
-                return TaskList.printList();
-            } catch (IOException e) {
-                return Ui.fileError();
-            }
-        } else if (Parser.isDone(line)) {
-            try {
+        try {
+            if (line.isBlank() || line.isEmpty()) {
+                return "";
+            } else if (Parser.isExit(line)) { // exit command
+                return Ui.exit();
+            } else if (Parser.isList(line)) { // list command
+                return Ui.userMessage(TaskList.printList());
+            } else if (Parser.isDone(line)) { // done command
                 int index = Integer.parseInt(line.substring(5));
-                return TaskList.setDone(index);
-            } catch (IOException e) {
-                return Ui.fileError();
-            } catch (Exception e) {
-                return Ui.commandError();
-            }
-        } else if (Parser.isFind(line)) {
-            try {
+                return Ui.showDone(TaskList.setDone(index));
+            } else if (Parser.isFind(line)) { // find command
                 String word = line.substring(5);
-                return TaskList.findTask(word);
-            } catch (IOException e) {
-                return Ui.fileError();
-            } catch (Exception e) {
-                return Ui.commandError();
-            }
-        } else if (Parser.isDelete(line)) {
-            try {
+                return Ui.showFind(TaskList.findTask(word));
+            } else if (Parser.isDelete(line)) { // delete command
                 int index = Integer.parseInt(line.substring(7));
-                return TaskList.delete(index);
-            } catch (IOException e) {
-                return Ui.fileError();
-            } catch (Exception e) {
-                return Ui.commandError();
-            }
-        } else {
-            try {
+                return Ui.showDelete(TaskList.delete(index));
+            } else { // add command
                 TaskType type = Parser.taskType(line);
+                String task;
                 if (type == TaskType.TODO) {
-                    return TaskList.add(type, Parser.getName(line));
+                    task = TaskList.add(type, Parser.getName(line));
                 } else {
-                    return TaskList.add(type, Parser.getName(line), Parser.getTime(line));
+                    task = TaskList.add(type, Parser.getName(line), Parser.getTime(line));
                 }
-            } catch (NullPointerException
-                    | ArrayIndexOutOfBoundsException
-                    | InvalidParameterException e) {
-                return Ui.commandError();
-            } catch (IOException e) {
-                return Ui.fileError();
+                return Ui.showAdd(task);
             }
+        } catch (IOException e) {
+            return Ui.fileError();
+        } catch (NullListException e) {
+            return Ui.listError();
+        } catch (Exception e) {
+            return Ui.commandError();
         }
     }
 

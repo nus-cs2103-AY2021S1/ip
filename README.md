@@ -15,13 +15,4 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. Click `Open or Import`.
    1. Select the project directory, and click `OK`
    1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/duke.Duke.java` file, right-click it, and choose `Run duke.Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   Hello! This is Duke.
-   What can I do for you?
-   ```
+1. After the importing is complete, locate the `src/main/java/gui/Launcher.java` file, right-click it, and choose `Run Luancher.main()`. If the setup is correct, you should see a GUI popped up saying ```Hello! This is Duke. What can I do for you?```

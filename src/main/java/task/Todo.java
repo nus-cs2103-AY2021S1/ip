@@ -8,8 +8,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        String status = String.format("[T][%s] ", (super.done ? "✓" : "✗"));
-        return status + this.getName();
+        return "[T]" + super.toString();
     }
 
 

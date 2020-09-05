@@ -1,13 +1,8 @@
 package duke;
 
-public class Ui {
-    private static final String logo =
-            " ____        _        \n"
-                    + "|  _ \\ _   _| | _____\n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|";
+import java.io.IOException;
 
+public class Ui {
     /**
      * Returns a greeting message
      *
@@ -62,5 +57,70 @@ public class Ui {
     public static String userMessage(String msg) {
         return msg;
     }
+
+    /**
+     * Returns a message for an add command result
+     *
+     * @param task the task added
+     * @return a message or an error
+     */
+    public static String showAdd(String task) {
+        String message = "Got it. I've added the task:\n";
+        message += task;
+        try {
+            int size = TaskList.getTaskListSize();
+            message += "\nNow you have " + size + " tasks in the list.";
+            return message;
+        } catch (IOException e) {
+            return Ui.fileError();
+        }
+    }
+
+    /**
+     * Returns a message for a find command result
+     *
+     * @param task the list of tasks found
+     * @return a message or an error
+     */
+    public static String showFind(String task) {
+        if (task.isEmpty()) {
+            return "There is no match in the list :)";
+        } else {
+            String message = "Here are the matching tasks in your list:";
+            message += task;
+            return message;
+        }
+    }
+
+    /**
+     * Returns a message for a done command result
+     *
+     * @param task the task done
+     * @return a message to the user
+     */
+    public static String showDone(String task) {
+        String message = "Well done! I've marked this as done:\n";
+        message += task;
+        return message;
+    }
+
+    /**
+     * Returns a message for a delete command result
+     *
+     * @param task the task deleted
+     * @return a message or an error
+     */
+    public static String showDelete(String task) {
+        String message = "Noted! I've removed this task:\n";
+        message += task;
+        try {
+            int size = TaskList.getTaskListSize();
+            message += "\nNow you have " + size + " tasks in the list.";
+            return message;
+        } catch (IOException e) {
+            return Ui.fileError();
+        }
+    }
+
 
 }
