@@ -26,7 +26,7 @@ public class MainWindow extends AnchorPane {
     /**
      * The Blue image.
      */
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/blue.png"));
+    private final Image blueImage = new Image(this.getClass().getResourceAsStream("/images/blue.png"));
     /**
      * The Ui.
      */
@@ -61,6 +61,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        this.blue = new Blue();
         this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
         this.showWelcomeMessage();
     }
@@ -70,9 +71,23 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void showWelcomeMessage() {
+        // show welcome message
         this.dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(this.ui.getWelcomeMessage(), this.dukeImage)
+                DialogBox.getBlueDialog(this.ui.getWelcomeMessage(), this.blueImage)
         );
+
+        // get today's tasks
+        String message;
+        try {
+            CommandResponse response = this.blue.execute("today");
+            message = response.getMessage();
+        } catch (BlueException ex) {
+            message = this.ui.getDukeExceptionMessage(ex);
+        }
+        this.dialogContainer.getChildren().addAll(
+                DialogBox.getBlueDialog(message, this.blueImage)
+        );
+
         this.userInput.clear();
     }
 
@@ -104,7 +119,7 @@ public class MainWindow extends AnchorPane {
 
         this.dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, this.userImage),
-                DialogBox.getDukeDialog(message, this.dukeImage)
+                DialogBox.getBlueDialog(message, this.blueImage)
         );
         this.userInput.clear();
 

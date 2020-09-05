@@ -9,8 +9,16 @@ event dads /at
 event efaws /at 
 event /at 2020-10-23
 event/at 2020-10-23
-event a /at 2020-10-32
 event a /at 2020-10-23
+event a /at 2020-10-23 
+event a /at 2020-10-2308:30PM
+event a /at 2020-10-23 08:30PM
+event a /at 2020-10-23 08:30PM 
+event a /at 2020-10-23 53:30PM
+event a /at 2020-10-23 08:30PM10:12PM
+event a /at 2020-10-23 08:30PM 8121:12PM
+event a /at 2020-10-32 08:30PM 10:12PM  
+event a /at 2020-10-23 08:30PM 10:12PM  
 deadline
 deadline 
 deadlineedasfa
@@ -47,3 +55,5 @@ find
 findasdf
 find argwf
 find d
+today
+

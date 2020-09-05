@@ -1,6 +1,8 @@
 package blue;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import blue.command.ByeCommand;
@@ -60,6 +62,8 @@ public class Parser {
             return getFindDateCommand(input);
         case "find":
             return getFindCommand(input);
+        case "today":
+            return getTodayCommand();
         default:
             throw new UnknownInputException();
         }
@@ -158,30 +162,73 @@ public class Parser {
      */
     private static TaskCommand getEventTaskCommand(String input) throws EmptyTaskException,
             InvalidTaskException {
+        int currStrIndex = 6;
         int slashIndex = input.indexOf("/at");
         if (slashIndex == -1) {
             throw new InvalidTaskException("The /at command couldn't be found.");
         }
 
-        String description = input.substring(6, slashIndex).trim();
+        String description = input.substring(currStrIndex, slashIndex).trim();
         if (description.length() < minStringLength) {
             throw new EmptyTaskException("description", TaskType.EVENT);
         }
+        currStrIndex = slashIndex + 3;
 
-        String dateStr = input.substring(slashIndex + 3).trim();
-        if (dateStr.length() < minStringLength) {
+        String dateStr;
+        try {
+            dateStr = input.substring(currStrIndex, currStrIndex + 11).trim();
+        } catch (IndexOutOfBoundsException ex) {
             throw new EmptyTaskException("date", TaskType.EVENT);
         }
+        currStrIndex += 11;
 
         LocalDate localDate;
         try {
-            localDate = LocalDate.parse(dateStr.trim());
+            localDate = LocalDate.parse(dateStr);
         } catch (DateTimeParseException ex) {
             String message = "The date of event is invalid, it should be in YYYY-MM-DD format.";
             throw new InvalidTaskException(message);
         }
 
-        Event event = new Event(description, localDate);
+        String startTimeStr;
+        try {
+            startTimeStr = input.substring(currStrIndex, currStrIndex + 8).trim();
+        } catch (IndexOutOfBoundsException ex) {
+            throw new EmptyTaskException("start time", TaskType.EVENT);
+        }
+        currStrIndex += 9;
+
+        LocalTime startTimeLocal;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("hh:mma");
+        try {
+            startTimeLocal = LocalTime.parse(startTimeStr, dateTimeFormatter);
+        } catch (DateTimeParseException ex) {
+            String message = "The start time of the event is invalid, it should be in HH:MMAA format.";
+            throw new InvalidTaskException(message);
+        }
+
+        if (input.length() < currStrIndex) {
+            throw new EmptyTaskException("end time", TaskType.EVENT);
+        }
+        String endTimeStr = input.substring(currStrIndex).trim();
+        if (endTimeStr.length() < minStringLength) {
+            throw new EmptyTaskException("end time", TaskType.EVENT);
+        }
+
+        LocalTime endTimeLocal;
+        try {
+            endTimeLocal = LocalTime.parse(endTimeStr, dateTimeFormatter);
+        } catch (DateTimeParseException ex) {
+            String message = "The end time of the event is invalid, it should be in HH:MMAA format.";
+            throw new InvalidTaskException(message);
+        }
+
+        if (startTimeLocal.compareTo(endTimeLocal) > 0) {
+            String message = "The end time of the event is invalid, it should be after the start time.";
+            throw new InvalidTaskException(message);
+        }
+
+        Event event = new Event(description, localDate, startTimeLocal, endTimeLocal);
         return new TaskCommand(event);
     }
 
@@ -274,5 +321,14 @@ public class Parser {
         }
 
         return new FindDescriptionCommand(itemStr);
+    }
+
+    /**
+     * Returns find date command with today as date.
+     *
+     * @return the find date command.
+     */
+    private static FindDateCommand getTodayCommand() {
+        return new FindDateCommand(LocalDate.now());
     }
 }

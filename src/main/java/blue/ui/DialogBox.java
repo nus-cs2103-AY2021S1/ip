@@ -68,7 +68,7 @@ public class DialogBox extends HBox {
      * @param image the image.
      * @return the blue dialog.
      */
-    public static DialogBox getDukeDialog(String text, Image image) {
+    public static DialogBox getBlueDialog(String text, Image image) {
         var dialogBox = new DialogBox(text, image);
         dialogBox.flip();
         return dialogBox;
