@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HelpCommand extends Command {
     private final List<String> helpList;
