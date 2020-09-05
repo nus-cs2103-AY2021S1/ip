@@ -80,6 +80,7 @@ public class TaskList {
      * @param index
      */
     public static String done(Integer index) {
+
         tasks.get(index - 1).markAsDone();
 //        String str = "_____________________________________________________"
 ////                + "\nNice! I've marked this task as done:\n      "
