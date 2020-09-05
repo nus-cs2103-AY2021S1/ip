@@ -14,6 +14,7 @@ public class Date {
      * @param date Date from input file.
      */
     public Date(String date) {
+        assert !date.equals(""): "Date cannot be empty.";
         this.date = date;
         String[] dateElements = date.split("/");
         this.day = Integer.parseInt(dateElements[0]);

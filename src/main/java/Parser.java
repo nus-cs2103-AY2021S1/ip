@@ -11,6 +11,7 @@ public class Parser {
     public static Command parse(String inputLine) throws DukeException {
         Command newTaskObject;
         String[] userInputArray = inputLine.split(" ");
+        assert(userInputArray.length > 0);
         String commandCheck = userInputArray[0];
         int numOfInput = userInputArray.length;
 
@@ -32,14 +33,14 @@ public class Parser {
             break;
 
         case "event":
-            try {
-                newTaskObject = processEventCommand(userInputArray, numOfInput, inputLine);
-            } catch (ArrayIndexOutOfBoundsException error) {
-                throw new DukeException("Error encountered while parsing event command. Please ensure "
-                                        + "that the event command is in the following format: "
-                                        + "(event) (description) (/at) (date).");
-            }
-            break;
+                try {
+                    newTaskObject = processEventCommand(userInputArray, numOfInput, inputLine);
+                } catch (ArrayIndexOutOfBoundsException error) {
+                    throw new DukeException("Error encountered while parsing event command. Please ensure "
+                                            + "that the event command is in the following format: "
+                                            + "(event) (description) (/at) (date).");
+                }
+                break;
 
         case "deadline":
             try {

@@ -55,6 +55,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         Response response = duke.getResponse(input);
         String responseMessage = response.getInputMessage();
+        assert responseMessage != null : "Response message should not be empty!";
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
