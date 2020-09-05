@@ -62,7 +62,7 @@ public class Printer {
    * @param s the type of event
    */
   protected String noDescriptionMessage(String s) {
-    String output = (LINE + "\n" + "     ☹ OOPS!!! The description of a " + s + " cannot be empty."
+    String output = (LINE + "\n" + "     ): OOPS!!! The description of a " + s + " cannot be empty."
         + "\n" + LINE);
     return output;
   }
@@ -72,7 +72,7 @@ public class Printer {
    */
   protected String dateTimeParseExceptionMessage() {
     String output = (LINE + "\n"
-        + "     ☹ OOPS!!! I'm sorry, but that date is invalid. Try using a new date in the format YYYY-MM-DD :-("
+        + "     ): OOPS!!! I'm sorry, but that date is invalid. Try using a new date in the format YYYY-MM-DD :-("
         + "\n" + LINE);
     return output;
   }

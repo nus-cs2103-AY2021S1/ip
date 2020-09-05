@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 
 /**
  * The Deadline class is a type of listing that contains a String as the detail of the listing, a

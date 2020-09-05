@@ -23,9 +23,9 @@ public class Listing {
    */
   public String doneness() {
     if (isDone) {
-      return "[✓]";
+      return "[Y]";
     } else {
-      return "[✗]";
+      return "[N]";
     }
   }
 

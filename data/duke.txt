@@ -1,8 +1,3 @@
-T | 0 |  event
-T | 0 |  event keeping
-D | 0 |  do gui | 2020-09-04
-E | 0 | upload work  | later
-D | 0 |  fix deadline buy | 2020-09-04
 T | 0 |  get book
 D | 0 |  fix find buy | 2020-09-04
 T | 0 |  a
@@ -22,3 +17,5 @@ T | 0 |  a
 D | 0 |  b | 2012-02-02
 E | 0 | c  | today
 D | 0 |  | 2012-02-02
+T | 0 |  a
+T | 0 |  a
