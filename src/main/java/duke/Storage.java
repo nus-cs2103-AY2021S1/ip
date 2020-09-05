@@ -15,6 +15,7 @@ public class Storage {
 
     private String filepath;
     private Parser parser;
+    private File file;
 
     /**
      * Constructor for instantiating a Storage
@@ -28,7 +29,7 @@ public class Storage {
 
 
     private void createNewTextFileCalledTask() {
-        File file = new File(filepath);
+        file = new File(filepath);
         try {
             if (file.createNewFile()) {
                 System.out.print("File created");
@@ -71,8 +72,8 @@ public class Storage {
      * @throws IOException The exception arises when there are issues reading from a file
      */
     public void populateToLstOfTask(List<Task> lstOfTask) throws IOException {
-
-        File file = new File("Tasks.txt");
+        createNewTextFileCalledTask();
+        assert file != null;
 
         BufferedReader br = new BufferedReader(new FileReader(file));
 
