@@ -124,7 +124,6 @@ public class TaskList {
      * @throws CalendarException If the date input is in invalid format.
      */
     public String showDate(String date) throws CalendarException {
-        assert date != null : "Please input a valid date!";
         try {
             LocalDate localDate = LocalDate.parse(date);
             Boolean hasSomething = false;
@@ -141,6 +140,7 @@ public class TaskList {
                         hasSomething = true;
                         builder.append("\n" + task.toString());
                     }
+
                 } else if (type.equals("D")) {
                     Deadline deadline = (Deadline) task;
                     LocalDate deadlineDate = deadline.getDeadline();
@@ -148,14 +148,18 @@ public class TaskList {
                         hasSomething = true;
                         builder.append("\n" + task.toString());
                     }
+
                 } else {
                     continue;
                 }
             }
+
             if (!hasSomething) {
                 return "You have nothing to do on this day!";
             }
+
             return builder.toString();
+
         } catch (DateTimeParseException e) {
             throw new CalendarException("Invalid input date format. Please try again.");
         }

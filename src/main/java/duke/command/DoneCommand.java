@@ -24,7 +24,6 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        assert taskList != null : "No Task List provided.";
         try {
             return processDone(this.tasks, taskList, ui, storage);
         } catch (DoneException done) {
@@ -43,7 +42,6 @@ public class DoneCommand extends Command {
 
     public String processDone(
         String[] taskNumbers, TaskList taskList, Ui ui, Storage storage) throws DoneException {
-        assert taskNumbers != null : "Please input the task numbers";
         try {
             int num = 1;
             Integer[] parsedNumbers = Stream.of(taskNumbers).map(Integer::valueOf).toArray(Integer[]::new);

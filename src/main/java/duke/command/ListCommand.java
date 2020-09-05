@@ -19,7 +19,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        assert taskList != null : "No task list!";
+        //try {
         return processList(taskList);
     }
 

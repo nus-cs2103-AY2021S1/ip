@@ -20,7 +20,6 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        assert taskList != null : "No Task List provided.";
         return processTodo(this.task, taskList, ui, storage);
     }
 
@@ -33,7 +32,6 @@ public class TodoCommand extends Command {
      * @param storage  Storage managing the file in hard disk.
      */
     public String processTodo(String theRest, TaskList taskList, Ui ui, Storage storage) {
-        assert theRest != null : "No details provided.";
         Todo todo = new Todo(theRest);
         Storage.updateData(taskList.getTasks());
         return taskList.saveToList(todo);
