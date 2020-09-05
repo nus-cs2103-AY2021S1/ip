@@ -1,11 +1,26 @@
+/**
+ * Class to handle update commmands entered by the user.
+ */
+
 public class UpdateCommand extends Command {
 
     private String userCommand;
 
+    /**
+     * Constructor for the update command.
+     * @param userCommand
+     */
     public UpdateCommand(String userCommand) {
         this.userCommand = userCommand;
     }
 
+    /**
+     * Method to execute entirely when a todo command is entered by the user.
+     * @param tasks TaskList containing all the tasks.
+     * @param ui UI to print all string responses by the bot.
+     * @return String response by the bot.
+     * @throws DukeException
+     */
     @Override
     String execute(TaskList tasks, UI ui) throws DukeException {
         try {
