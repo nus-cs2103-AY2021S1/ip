@@ -16,16 +16,17 @@ public class DeleteTaskCommand implements Command {
 
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) throws DukeError {
-        if (n < 1 || n > taskList.numberOfTasks()) {
+        if (n < 1 || n > taskList.size()) {
             throw new InvalidRangeError();
         }
-        Task task = taskList.getTaskList().get(n - 1);
-        taskList.deleteTask(task);
-        return ui.deleteTask(task.toString(), taskList.numberOfTasks());
+        Task task = taskList.get(n - 1);
+        taskList.remove(task);
+        return ui.deleteTask(task.toString(), taskList.size());
     }
 
     @Override
     public boolean isExit() {
         return false;
     }
+
 }

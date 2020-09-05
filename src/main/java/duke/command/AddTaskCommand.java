@@ -19,12 +19,13 @@ public class AddTaskCommand implements Command {
         if (task.getDescription().contains("|") || task.getDate().contains("|")) {
             throw new IllegalCharacterError();
         }
-        taskList.addTask(task);
-        return ui.addTask(task.toString(), taskList.numberOfTasks());
+        taskList.add(task);
+        return ui.addTask(task.toString(), taskList.size());
     }
 
     @Override
     public boolean isExit() {
         return false;
     }
+
 }

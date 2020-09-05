@@ -12,6 +12,6 @@ public class StorageTest {
     public void LoadEmptyTest() {
         Storage storage = new Storage("non-existent-path");
         TaskList taskList = storage.loadData(new UI());
-        assertEquals(new ArrayList<Task>(), taskList.getTaskList());
+        assertEquals(new ArrayList<Task>(), taskList);
     }
 }

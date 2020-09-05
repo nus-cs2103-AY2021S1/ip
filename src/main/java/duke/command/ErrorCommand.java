@@ -20,4 +20,5 @@ public class ErrorCommand implements Command {
     public boolean isExit() {
         return false;
     }
+
 }

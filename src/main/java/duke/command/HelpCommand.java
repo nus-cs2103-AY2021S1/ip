@@ -26,4 +26,5 @@ public class HelpCommand implements Command {
             return true;
         }
     }
+
 }
