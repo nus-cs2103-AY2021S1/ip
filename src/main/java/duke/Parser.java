@@ -30,15 +30,12 @@ public class Parser {
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             // when user inputs bye
-
             return new ExitCommand(input);
         } else if (input.equals("list")) {
             // when user wants to print list of task
-
             return new ListCommand(input);
         } else if (input.startsWith("done")) {
             // when user completes task
-
             String[] temp = input.split(" ");
             if (temp.length == 1) {
                 throw new DoneException("Please input number after done!"
@@ -52,7 +49,6 @@ public class Parser {
             return new DoneCommand(input, listNumber);
         } else if (input.startsWith("deadline")) {
             // when user inputs a deadline
-
             String[] temp = input.split("/");
             String[] commandTemp = temp[0].split(" ");
             String command = commandTemp[0];
@@ -70,7 +66,6 @@ public class Parser {
             for (int i = 1; i < commandTemp.length; i++) {
                 description += commandTemp[i] + " ";
             }
-
 
             String[] timeTemp = temp[1].split(" ");
 
@@ -101,7 +96,6 @@ public class Parser {
             return new DeadlineCommand(description, day, month, year, hour, min);
         } else if (input.startsWith("event")) {
             // when user inputs an event
-
             String[] temp = input.split("/");
             String[] commandTemp = temp[0].split(" ");
             String command = commandTemp[0];
@@ -119,7 +113,6 @@ public class Parser {
             for (int i = 1; i < commandTemp.length; i++) {
                 description += commandTemp[i] + " ";
             }
-
 
             String[] timeTemp = temp[1].split(" ");
 
@@ -150,7 +143,6 @@ public class Parser {
             return new EventCommand(description, day, month, year, hour, min);
         } else if (input.startsWith("todo")) {
             // when user inputs a todo
-
             String[] temp = input.split(" ");
 
             String command = temp[0];
@@ -201,7 +193,6 @@ public class Parser {
                     keyword += temp[i] + " ";
                 }
             }
-
             return new FindCommand(keyword);
         } else {
             // invalid input

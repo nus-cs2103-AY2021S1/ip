@@ -48,7 +48,7 @@ public class DeadlineCommand extends Command {
 
         String message = "";
 
-        LocalDateTime dateTime = null;
+        LocalDateTime dateTime;
         try {
             dateTime = LocalDateTime.of(year, month, day, hour, min);
         } catch (DateTimeException e) {

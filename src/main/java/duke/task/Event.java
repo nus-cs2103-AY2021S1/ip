@@ -32,6 +32,7 @@ public class Event extends Task {
      * Returns a String that represents a event object
      * @return String that represents a deadline object
      */
+    @Override
     public String toString() {
         String mmm = this.dateTime.getMonth().toString().substring(0, 3);
         String ddd = this.dateTime.getDayOfWeek().toString().substring(0, 3);
