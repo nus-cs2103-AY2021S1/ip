@@ -30,7 +30,8 @@ public class Parser {
     protected static List<String> inputFormat = Arrays.asList("dd/MM/yyyy HHmm", "yyyy-mm-dd Haaa");
     protected static SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd yyyy h:mma");
 
-    protected static List<String> existingCommand = Arrays.asList("done", "delete", "todo", "event", "find", "deadline");
+    protected static List<String> existingCommand = Arrays.asList("done", "delete", "todo",
+                                                                    "event", "find", "deadline");
 
     /**
      * Converts the input date to another date format, if it exist
