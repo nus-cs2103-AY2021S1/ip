@@ -1,4 +1,4 @@
-package duke.task;
+package junimo.task;
 
 /**
  * Represents a Todo object which inherits from Task.

@@ -1,4 +1,4 @@
-package duke.task;
+package junimo.task;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,6 @@ import java.util.List;
  * Contains and handles the task list.
  */
 public class TaskList {
-    private static final String STAR_LINE = "**************************************************************************";
     private List<Task> list;
 
     /**
@@ -35,7 +34,7 @@ public class TaskList {
                     add(line, isDone, false);
                 } catch (IllegalArgumentException e) {
                     if (!isFileCorrupted) {
-                        System.out.println(STAR_LINE + "WARNING: Your stored data appears to be in a corrupted format. "
+                        System.out.println("WARNING: Your stored data appears to be in a corrupted format. "
                                 + "Some tasks may be lost.");
                         isFileCorrupted = true;
                     }
@@ -56,37 +55,41 @@ public class TaskList {
         return list;
     }
 
-    private void printList(List<Task> list, String listObjectDescription) {
-        System.out.println(STAR_LINE + String.format("\nHere are the %s in your list:", listObjectDescription));
+    private String printList(List<Task> list, String listObjectDescription) {
+        StringBuilder response = new StringBuilder();
+        response.append(String.format("Here are the %s in your list:", listObjectDescription));
         for (int i = 0; i < list.size(); i++) {
-            printTask(i + 1, list.get(i));
+            response.append("\n");
+            response.append(printTask(i + 1, list.get(i)));
         }
-        System.out.println(STAR_LINE);
+        System.out.println(response.toString());
+        return response.toString();
     }
 
     /**
      * Prints a list of the user's tasks.
      */
-    public void list() {
-        printList(list, "tasks");
+    public String list() {
+        return printList(list, "tasks");
     }
 
     /**
      * Prints a specific task.
      * @param listIndex Index of the task as shown in the printed list (starting from 1).
      */
-    public void printTask(int listIndex, Task task) {
-        String taskString = String.format("%d.%s", listIndex, task);
-        System.out.println(taskString);
+    public String printTask(int listIndex, Task task) {
+        String taskString = String.format("%d. %s", listIndex, task);
+        return taskString;
     }
 
     /**
      * Prints the task added and number of tasks in the list.
      * @param task The task added.
      */
-    public void echo(String task) {
-        System.out.println("added: " + task);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    public String echo(String task) {
+        String echo = String.format("added: %s.\nNow you have %d tasks in the list.", task, list.size());
+        System.out.println(echo);
+        return echo;
     }
 
     private void throwEmptyFieldException(String taskType, String ... fields) {
@@ -108,10 +111,12 @@ public class TaskList {
                 Task.getFormat(taskType)));
     }
 
-    private void addTaskToList(Task task, boolean shouldEcho) {
+    private String addTaskToList(Task task, boolean shouldEcho) {
         list.add(task);
         if (shouldEcho) {
-            echo(task.toString());
+            return echo(task.toString());
+        } else {
+            return null;
         }
     }
 
@@ -122,7 +127,7 @@ public class TaskList {
      * @param isDone Whether task is done or not.
      * @param shouldEcho Whether or not to echo the task added.
      */
-    public void add(String input, boolean isDone, boolean shouldEcho) {
+    public String add(String input, boolean isDone, boolean shouldEcho) {
         String[] splitInput = input.split(" ", 2);
         String taskType = splitInput[0];
 
@@ -130,9 +135,8 @@ public class TaskList {
         case "todo":
             if (input.matches("todo (\\S+\\s?)+")) {
                 Task newTask = new Todo(splitInput[1], isDone);
-                addTaskToList(newTask, shouldEcho);
-                break;
-            } else if (input.matches("todo\\s?")) {
+                return addTaskToList(newTask, shouldEcho);
+            } else if (input.matches("todo\\p{Blank}?")) {
                 throwEmptyFieldException("todo", "description");
             } else {
                 throwInvalidTaskSyntaxException("todo");
@@ -144,9 +148,9 @@ public class TaskList {
                 String deadlineDesc = splitDeadline[0];
                 String by = splitDeadline[1];
                 Task newTask = new Deadline(deadlineDesc, by, isDone);
-                addTaskToList(newTask, shouldEcho);
-                break;
-            } else if (input.matches("deadline\\s?") || !input.contains(" by ")) {
+                return addTaskToList(newTask, shouldEcho);
+            } else if (input.matches("deadline.+/by\\p{Blank}?")
+                    || input.matches("deadline\\p{Blank}+/by.?")) {
                 throwEmptyFieldException("deadline", "description", "date");
             } else {
                 throwInvalidTaskSyntaxException("deadline");
@@ -158,9 +162,9 @@ public class TaskList {
                 String eventDesc = splitEvent[0];
                 String at = splitEvent[1];
                 Task newTask = new Event(eventDesc, at, isDone);
-                addTaskToList(newTask, shouldEcho);
-                break;
-            } else if (input.matches("event\\s?") || !input.contains(" at ")) {
+                return addTaskToList(newTask, shouldEcho);
+            } else if (input.matches("event.+/at\\p{Blank}?")
+                    || input.matches("event\\p{Blank}+/at.?")) {
                 throwEmptyFieldException("event", "description", "location");
             } else {
                 throwInvalidTaskSyntaxException("event");
@@ -169,23 +173,30 @@ public class TaskList {
         default:
             throw new IllegalArgumentException("OOPS! There is no task of type " + taskType + "!");
         }
+        return null;
     }
 
     /**
      * Handles the marking of tasks in the list as done. Feedbacks to user if list index of task is invalid.
      * @param listIndexString List index of task to mark as done (starting from 1).
      */
-    public void markTaskAsDone(String listIndexString) {
+    public String markTaskAsDone(String listIndexString) {
         try {
             int listIndexNumber = Integer.parseInt(listIndexString);
             Task task = list.get(listIndexNumber - 1);
             task.setDoneAsTrue();
-            System.out.println("Nice! I've marked this task as done:\n" + task);
+            String response = String.format("Nice! I've marked this task as done:\n%s", task);
+            System.out.println(response);
+            return response;
         } catch (IndexOutOfBoundsException ex) { // if list index is not in the list
-            System.out.println("OOPS! This task index does not exist! Type 'list' to check out your tasks.");
+            String response = "OOPS! This task index does not exist! Type 'list' to check out your tasks.";
+            System.out.println(response);
+            return response;
         } catch (NumberFormatException ex) { // if list index string is not an integer
-            System.out.println("OOPS! The keyword 'done' is used to check off tasks as follows:"
-                    + "   done <task index>");
+            String response = "OOPS! The keyword 'done' is used to check off tasks as follows:"
+                    + "   done <task index>";
+            System.out.println(response);
+            return response;
         }
     }
 
@@ -193,17 +204,23 @@ public class TaskList {
      * Handles the deleting of tasks from task list. Feedbacks to user if list index of task is invalid.
      * @param listIndexString List index of task to delete (starting from 1).
      */
-    public void deleteTask(String listIndexString) {
+    public String deleteTask(String listIndexString) {
         try {
             int listIndexNumber = Integer.parseInt(listIndexString);
             Task task = list.get(listIndexNumber - 1);
             list.remove(listIndexNumber - 1);
-            System.out.println("The following task has been deleted:\n" + task);
+            String response = "The following task has been deleted:\n" + task;
+            System.out.println(response);
+            return response;
         } catch (IndexOutOfBoundsException ex) {
-            System.out.println("OOPS! This task index does not exist! Type 'list' to check out your tasks.");
+            String response = "OOPS! This task index does not exist! Type 'list' to check out your tasks.";
+            System.out.println(response);
+            return response;
         } catch (NumberFormatException ex) { // if list index string is not an integer
-            System.out.println("OOPS! The keyword 'delete' is used to delete tasks as follows:"
-                    + "   delete <task index>");
+            String response = "OOPS! The keyword 'delete' is used to delete tasks as follows:"
+                    + "   delete <task index>";
+            System.out.println(response);
+            return response;
         }
     }
 
@@ -212,14 +229,13 @@ public class TaskList {
      * @param keyword The keyword used to filter Task descriptions.
      * @return A list of Task with descriptions containing the keyword.
      */
-    public List<Task> find(String keyword) {
+    public String find(String keyword) {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task : list) {
             if (task.description.contains(keyword)) {
                 matchingTasks.add(task);
             }
         }
-        printList(matchingTasks, "matching tasks");
-        return matchingTasks;
+        return printList(matchingTasks, "matching tasks");
     }
 }

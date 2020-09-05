@@ -1,7 +1,7 @@
-package duke.backend;
+package junimo.backend;
 
-import duke.task.Task;
-import duke.task.TaskList;
+import junimo.task.Task;
+import junimo.task.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;

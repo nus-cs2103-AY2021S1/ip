@@ -1,12 +1,14 @@
-import duke.backend.Storage;
-import duke.frontend.Parser;
-import duke.frontend.Ui;
-import duke.task.TaskList;
+package junimo;
+
+import junimo.backend.Storage;
+import junimo.interaction.Parser;
+import junimo.interaction.Greeting;
+import junimo.task.TaskList;
 
 import java.io.FileNotFoundException;
 
 /**
- * Runs the main method that in turn instantiates and runs the Duke object.
+ * The junimo.Junimo Class handles all the internal (non-GUI) logic of the application.
  *
  * The program is a CLI Application that allows users to:
  * <ul>
@@ -22,13 +24,13 @@ import java.io.FileNotFoundException;
  * @author Jiachen
  * @author Jeanne Toh
  */
-public class Duke {
+public class Junimo {
     private Storage storage;
 
     private TaskList taskList;
     private Parser parser;
 
-    private Duke(String filePath) {
+    public Junimo(String filePath) {
         try {
             storage = new Storage(filePath);
             taskList = new TaskList(storage.load());
@@ -38,19 +40,19 @@ public class Duke {
         }
     }
 
-    private void run() {
-        Ui.greet();
-        parser.parseInputCommands();
-        storage.save(taskList);
-        Ui.exit();
+    public String getWelcome() {
+        return Greeting.welcome();
     }
 
-    /**
-     * Creates a new instance of Duke that saves tasks to filePath "./data/saved-tasks.txt" and runs it.
-     *
-     * @param args unused.
-     */
-    public static void main(String[] args) {
-        new Duke("./data/saved-tasks.txt").run();
+    public String getBye() {
+        return Greeting.exit();
+    }
+
+    public String parseInputCommand(String inputCommand) {
+        return parser.parseInputCommand(inputCommand);
+    }
+
+    public void save() {
+        storage.save(taskList);
     }
 }

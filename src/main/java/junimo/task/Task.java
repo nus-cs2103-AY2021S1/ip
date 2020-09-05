@@ -1,4 +1,4 @@
-package duke.task;
+package junimo.task;
 
 /**
  * Represents an abstract Task object. Inherited by Deadline, Event and Todo classes.
