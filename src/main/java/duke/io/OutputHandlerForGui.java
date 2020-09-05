@@ -1,8 +1,6 @@
 package duke.io;
 
-import com.sun.tools.javac.Main;
-import duke.DukeGui;
-import duke.MainWindow;
+import duke.gui.MainWindow;
 
 /**
  * <code>OutputHandler</code> connected for display via GUI.
