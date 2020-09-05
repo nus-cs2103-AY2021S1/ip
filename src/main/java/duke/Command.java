@@ -72,6 +72,7 @@ public class Command {
     public Command(TaskType taskType, String description) {
         switch (taskType) {
         case TODO:
+            // Fallthrough
         case FIND:
             break;
         default:

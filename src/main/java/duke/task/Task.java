@@ -41,7 +41,7 @@ public abstract class Task implements Serializable {
      * @return Y if the task has been done, X otherwise
      */
     public String getStatusIcon() {
-        return (isDone ? "Y" : "X"); //return tick or X symbols
+        return isDone ? "Y" : "X"; //return tick or X symbols
     }
 
     @Override
