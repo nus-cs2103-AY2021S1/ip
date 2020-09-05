@@ -72,7 +72,7 @@ public class Gui extends Application {
 
 
         // Send greeting message
-        DialogBox greetingDialog = dukeDialog("Hello");
+        DialogBox greetingDialog = dukeDialog("Hello. You can use \"help\" to see the help menu.");
         scrollDialoguePane.addDialog(greetingDialog);
     }
 
