@@ -5,6 +5,7 @@ package duke.exception;
  *      to wrap and display exceptions in a user-friendly message.
  */
 public class DukeException extends RuntimeException {
+
     /**
      * Constructor of a {@code DukeException}.
      *

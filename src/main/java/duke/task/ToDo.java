@@ -23,7 +23,7 @@ public class ToDo extends Task {
      * {@inheritDoc}
      */
     public String getSaveToFileString() {
-        return "T`" + super.getSaveToFileString();
+        return String.format("T%s%s", TASK_DELIMITER, super.getSaveToFileString());
     }
 
 

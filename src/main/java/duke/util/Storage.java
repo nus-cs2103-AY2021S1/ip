@@ -25,6 +25,9 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.file = new File(filePath);
+        if (file.isDirectory()) {
+            throw new DukeException("Required File, Given Directory");
+        }
     }
 
     /**
@@ -32,7 +35,7 @@ public class Storage {
      *
      * @throws DukeException if the creation of new file is not successful.
      */
-    private void createFileIfNotExist() {
+    private void createFileIfNotExist() throws DukeException {
         if (file.isDirectory()) {
             file.mkdirs();
         }
@@ -56,7 +59,13 @@ public class Storage {
         return readAllLines();
     }
 
-    private List<String> readAllLines() {
+    /**
+     * Reads all the content from the file provided.
+     *
+     * @return content of file as a {@code List} of String.
+     * @throws DukeException when file is not found.
+     */
+    private List<String> readAllLines() throws DukeException {
         List<String> content = new ArrayList<>();
 
         try {

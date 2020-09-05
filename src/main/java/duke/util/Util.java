@@ -17,6 +17,15 @@ public class Util {
     private static final String TASK_DELIMITER = "`";
 
     /**
+     * Gets the TASK_DELIMITER static variable from Utility / Config file.
+     *
+     * @return TASK_DELIMITER used for file exports.
+     */
+    public static String getTaskDelimiter() {
+        return TASK_DELIMITER;
+    }
+
+    /**
      * Converts a String type date and time into a {@code LocalDateTime} object
      *
      * @param dateTime The String of Date/Time. Formats accepted: "YYYY-MM-dd HHmm", "dd/MM/yyyy HHmm"
@@ -24,7 +33,7 @@ public class Util {
      * @return The {@code LocalDateTime} object from the given input.
      * @throws DukeException if the input string does not follow the above format.
      */
-    public static LocalDateTime convertStringToDateTime(String dateTime) {
+    public static LocalDateTime convertStringToDateTime(String dateTime) throws DukeException {
         //Allow format of "YYYY-MM-dd HHmm", "dd/MM/yyyy HHmm"; Set HHmm to 0000 if not found.
 
         try {
@@ -51,7 +60,7 @@ public class Util {
      * @return The {@code Task} object from the given input
      * @throws DukeException if the given input does not match the input format.
      */
-    public static Task convertStringToTask(String string) {
+    public static Task convertStringToTask(String string) throws DukeException {
         String[] split = string.split(TASK_DELIMITER);
         Task t;
 
@@ -70,8 +79,9 @@ public class Util {
             throw new DukeException("Error in reading this line...");
         }
 
-        if (split[1].equals("1"))
+        if (split[1].equals("1")) {
             t.setDone();
+        }
 
         return t;
     }

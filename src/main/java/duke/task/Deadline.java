@@ -30,7 +30,7 @@ public class Deadline extends Task {
      * {@inheritDoc}
      */
     public String getSaveToFileString() {
-        return "D`" + super.getSaveToFileString() + "`" +
+        return "D" + TASK_DELIMITER + super.getSaveToFileString() + TASK_DELIMITER +
                 taskBy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 

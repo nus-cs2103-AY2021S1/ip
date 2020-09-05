@@ -6,8 +6,6 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
-import java.util.Scanner;
-
 //TODO: Stretch Goals: Level 8- Use date related command
 
 /**
@@ -36,49 +34,15 @@ public class Duke {
     }
 
     /**
-     * Initialises the Duke programme and load tasks from data file.
-     *
-     * @param filePath Path of data file to be loaded from.
-     */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            taskList = new TaskList(storage.load());
-            ui.showLoadSuccess(taskList);
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            taskList = new TaskList();
-        }
-    }
-
-    /**
-     * Executes the {@code Duke} programme.
-     *
-     * @deprecated For GUI, use {@link #run(String)} instead.
-     */
-    @Deprecated
-    public void run() {
-        Scanner scanner = new Scanner(System.in);
-        while (!Command.isTerminated) {
-            try {
-                String input = scanner.nextLine();
-                Command c = Parser.parse(input);
-                c.execute(taskList, ui);
-            } catch (DukeException de) {
-                ui.printError(de);
-            }
-        }
-    }
-
-    /**
      * Executes the {@code Duke} programe using the input provided
      *
      * @param input Command to run.
      */
     public void run(String input) {
-        if (Command.isTerminated)
+        if (Command.isTerminated) {
             return;
+        }
+
         try {
             Command c = Parser.parse(input);
             c.execute(taskList, ui);
@@ -98,12 +62,6 @@ public class Duke {
     public void terminate() {
         storage.saveToFile(taskList.export());
         ui.showExit();
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke(DATA_FILE);
-        duke.run();
-        duke.terminate();
     }
 
     /**
