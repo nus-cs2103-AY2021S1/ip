@@ -77,6 +77,22 @@ public abstract class Task {
     public abstract String[] getStringArr();
 
     @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Task)) {
+            return false;
+        }
+
+        Task c = (Task) o;
+
+        // Compare the data members and return accordingly
+        return description.equals(c.description);
+    }
+
+    @Override
     public String toString() {
         String icon = this.done.equals("1") ? "[✓]" : "[✗]";
         return String.format("%s %s", icon, this.description);

@@ -3,6 +3,7 @@ package duke.main;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.errors.DuplicateTaskException;
 import duke.errors.InvalidIndexException;
 import duke.tasks.Task;
 
@@ -78,7 +79,22 @@ public class TaskList {
      * @throws Exception the exception
      */
     public void addTask(String[] arr) throws Exception {
-        storage.appendToFile(Task.stringFormat(arr));
+        List<Task> fileContents = storage.getFileContents();
+
+        // We append first since it helps us to parse into the correct format
+        String dataToStore = Task.stringFormat(arr);
+        storage.appendToFile(dataToStore);
+
+        // Check for duplicate and delete
+        int newFileSize = getSize();
+        Task addedTask = getTask(newFileSize);
+        for (int i = 0; i < fileContents.size(); i++) {
+            if ((fileContents.get(i)).equals(addedTask)) {
+                // Delete newly added task if it's a duplicate
+                deleteTask(newFileSize);
+                throw new DuplicateTaskException();
+            }
+        }
     }
 
     /**
