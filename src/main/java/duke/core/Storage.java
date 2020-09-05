@@ -50,7 +50,7 @@ public class Storage {
             }
             while (scanner.hasNextLine()) {
                 next = scanner.nextLine();
-                assert next != null: "the command should not be null";
+                assert next != null : "the command should not be null";
                 String[] strings = next.split(" \\| ");
 
                 if (strings[1].equals("0") || strings[1].equals("1")) {

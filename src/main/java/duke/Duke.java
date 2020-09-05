@@ -1,3 +1,4 @@
+
 package duke;
 
 import java.io.FileNotFoundException;
@@ -22,17 +23,16 @@ import duke.handle.TaskNotFoundException;
  * search for a specific task for the user.
  */
 public class Duke {
+    private static final String FILE_PATH = "data/duke.txt";
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-    private static final String FILE_PATH = "data/duke.txt";
-
     /**
      * Takes in the path of the local record, and creates a duke bot to interact with
      * the user.
      */
     public Duke() throws FileNotFoundException, LoadingException, IOException {
-        assert FILE_PATH != null: "the file path should not be null";
+        assert FILE_PATH != null : "the file path should not be null";
 
         ui = new Ui();
         storage = new Storage(FILE_PATH);
