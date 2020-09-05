@@ -74,4 +74,7 @@ public abstract class Task {
      */
     @Override
     public abstract String toString();
+
+    @Override
+    public abstract boolean equals(Object other);
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import duke.exception.CalendarException;
 import duke.exception.DeleteException;
 import duke.exception.DoneException;
+import duke.exception.StorageException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -72,13 +73,17 @@ public class TaskList {
      * @param task Task to save to the list.
      * @return Save message.
      */
-    public String saveToList(Task task) {
-        this.tasks.add(task);
-        Storage.updateData(this.tasks);
-        String msg;
-        msg = "Okay~ I've added this task: \n" + task.toString()
-            + "\nNow you have " + this.tasks.size() + " task(s) in the list.";
-        return msg;
+    public String saveToList(Task task) throws StorageException {
+        if(this.tasks.contains(task)) {
+            throw new StorageException("This task already exist!");
+        } else {
+            this.tasks.add(task);
+            Storage.updateData(this.tasks);
+            String msg;
+            msg = "Okay~ I've added this task: \n" + task.toString()
+                + "\nNow you have " + this.tasks.size() + " task(s) in the list.";
+            return msg;
+        }
     }
 
     /**

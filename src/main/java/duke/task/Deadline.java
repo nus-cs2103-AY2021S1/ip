@@ -126,4 +126,24 @@ public class Deadline extends Task {
         return this;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if(this == other) {
+            return true;
+        } else if (other instanceof Deadline) {
+            Deadline deadline = (Deadline) other;
+            boolean descIsEqual = this.description.equals(deadline.getDescription());
+            boolean dateIsEqual = this.deadline.equals(deadline.getDeadline());
+            boolean timeIsEqual = false;
+
+            if(this.time != null && deadline.getTime() != null) {
+                timeIsEqual = this.time.equals(deadline.getTime());
+            } else if (this.time == null && deadline.getTime() == null){
+                timeIsEqual = true;
+            }
+            return descIsEqual && dateIsEqual && timeIsEqual;
+        } else {
+            return false;
+        }
+    }
 }
