@@ -35,6 +35,7 @@ public class Command {
         } else if (Integer.parseInt(command[1]) > TaskList.getTaskLists().size()) {
             throw new DukeInvalidMessageException();
         } else {
+            assert (toEcho.length() > 4);
             int index = Integer.parseInt(command[1]) - 1;
             taskList.markDone(index);
             return ui.printDone(index);
@@ -52,6 +53,7 @@ public class Command {
         if (description.length() == 4) {
             throw new DukeEmptyMessageException("Todo");
         }
+        assert (description.length() > 4);
         Todo todo = new Todo(command[1]);
         TaskList.getTaskLists().add(todo);
         return ui.printTask(todo);
@@ -70,6 +72,7 @@ public class Command {
             if (toEcho.length() == 8) {
                 throw new DukeEmptyMessageException("Deadline");
             }
+            assert (toEcho.length() > 8);
             String[] strArr = Parser.splitDeadlineTime(command[1]);
             String todo = strArr[0];
             String time = strArr[1];
@@ -96,6 +99,7 @@ public class Command {
             if (toEcho.length() == 5) {
                 throw new DukeEmptyMessageException("Event");
             }
+            assert (toEcho.length() > 5);
             String[] strArr = Parser.splitEventTime(command[1]);
             String todo = strArr[0];
             String time = strArr[1];
@@ -125,6 +129,7 @@ public class Command {
                 || Integer.parseInt(command[1]) < 0) {
             throw new DukeInvalidMessageException();
         }
+        assert (toEcho.length() > 6);
         int indexToDelete = Integer.parseInt(command[1]) - 1;
         return ui.printDelete(indexToDelete);
     }
@@ -142,6 +147,7 @@ public class Command {
         if (toEcho.length() == 4) {
             throw new DukeEmptyMessageException("Find");
         }
+        assert (toEcho.length() > 4);
         return ui.printFind(command[1]);
     }
 }
