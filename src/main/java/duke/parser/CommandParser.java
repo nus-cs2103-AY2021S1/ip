@@ -3,10 +3,14 @@ package duke.parser;
 import java.time.LocalDateTime;
 import java.util.function.Function;
 
+import duke.Duke;
 import duke.exception.DukeParseException;
-import duke.operation.AddDeadlineOperation;
-import duke.operation.AddEventOperation;
-import duke.operation.AddTodoOperation;
+import duke.expense.Expense;
+import duke.operation.addexpenseoperation.AddPayableOperation;
+import duke.operation.addexpenseoperation.AddReceivableOperation;
+import duke.operation.addtaskoperation.AddDeadlineTaskOperation;
+import duke.operation.addtaskoperation.AddEventTaskOperation;
+import duke.operation.addtaskoperation.AddTodoTaskOperation;
 import duke.operation.DeleteOperation;
 import duke.operation.DoneOperation;
 import duke.operation.ExitOperation;
@@ -41,15 +45,15 @@ public class CommandParser {
         return new DoneOperation(list, index);
     }
 
-    private AddTodoOperation createTodoOp(String[] commands, TaskList list) throws DukeParseException {
+    private AddTodoTaskOperation createTodoOp(String[] commands, TaskList list) throws DukeParseException {
         if (CommandType.TODO.isValidLength(commands.length)) {
             throw new DukeParseException("Ensure there is description for a todo item.");
         }
         String description = Utils.concatenate(commands, 1, commands.length);
-        return new AddTodoOperation(description, list);
+        return new AddTodoTaskOperation(description, list);
     }
 
-    private AddDeadlineOperation createDeadlineOp(
+    private AddDeadlineTaskOperation createDeadlineOp(
             String[] commands, TaskList list) throws DukeParseException {
         if (CommandType.DEADLINE.isValidLength(commands.length)) {
             throw new DukeParseException(
@@ -64,10 +68,10 @@ public class CommandParser {
         String description = Utils.concatenate(commands, 1, splitIndex);
         String datetime = Utils.concatenate(commands, splitIndex + 1, commands.length);
         LocalDateTime parsedDateTime = Datetime.parseDateTimeString(datetime, Deadline.DATE_FORMAT_INPUT);
-        return new AddDeadlineOperation(description, parsedDateTime, list);
+        return new AddDeadlineTaskOperation(description, parsedDateTime, list);
     }
 
-    private AddEventOperation createEventOp(String[] commands, TaskList list) throws DukeParseException {
+    private AddEventTaskOperation createEventOp(String[] commands, TaskList list) throws DukeParseException {
         if (CommandType.EVENT.isValidLength(commands.length)) {
             throw new DukeParseException("Ensure there is a description and a time for an event command.");
         }
@@ -80,7 +84,7 @@ public class CommandParser {
         String description = Utils.concatenate(commands, 1, splitIndex);
         String time = Utils.concatenate(commands, splitIndex + 1, commands.length);
         LocalDateTime parsedTime = Datetime.parseTimeString(time, Event.TIME_FORMAT_INPUT);
-        return new AddEventOperation(description, parsedTime, list);
+        return new AddEventTaskOperation(description, parsedTime, list);
     }
 
     private DeleteOperation createDeleteOp(String[] commands, TaskList list) throws DukeParseException {
@@ -101,6 +105,46 @@ public class CommandParser {
         }
         String searchWord = Utils.concatenate(commands, 1, commands.length);
         return new FindOperation(list, searchWord);
+    }
+
+    private AddPayableOperation createPayableOp(String[] commands) throws DukeParseException {
+        if (CommandType.PAY.isValidLength(commands.length)) {
+            throw new DukeParseException("Ensure a description, value and date are input.");
+        }
+
+        int splitIndex = Utils.getIndexOf(commands, Expense.EXPENSE_BREAK);
+        int moneyIndex = splitIndex - 1;
+
+        if (!Utils.isMoney(commands[moneyIndex])) {
+            throw new DukeParseException("Ensure money passed in is of the format: $30 or $30.00");
+        }
+
+        String description = Utils.concatenate(commands, 1, moneyIndex);
+        double value = Utils.convertMoneyToValue(commands[moneyIndex]);
+        String dateString = Utils.concatenate(commands, splitIndex + 1, commands.length);
+        LocalDateTime date = Datetime.parseDateString(dateString, Expense.DATE_FORMAT_INPUT);
+
+        return new AddPayableOperation(description, value, date);
+    }
+
+    private AddReceivableOperation createReceivableOp(String[] commands) throws DukeParseException {
+        if (CommandType.RECEIVE.isValidLength(commands.length)) {
+            throw new DukeParseException("Ensure a description, value and date are input.");
+        }
+
+        int splitIndex = Utils.getIndexOf(commands, Expense.EXPENSE_BREAK);
+        int moneyIndex = splitIndex - 1;
+
+        if (!Utils.isMoney(commands[moneyIndex])) {
+            throw new DukeParseException("Ensure money passed in is of the format: $30 or $30.00");
+        }
+
+        String description = Utils.concatenate(commands, 1, moneyIndex);
+        double value = Utils.convertMoneyToValue(commands[moneyIndex]);
+        String dateString = Utils.concatenate(commands, splitIndex + 1, commands.length);
+        LocalDateTime date = Datetime.parseDateString(dateString, Expense.DATE_FORMAT_INPUT);
+
+        return new AddReceivableOperation(description, value, date);
     }
 
     /**
@@ -136,6 +180,10 @@ public class CommandParser {
             return createDeleteOp(commands, list);
         } else if (isCommand.apply(CommandType.FIND)) {
             return createFindOp(commands, list);
+        } else if (isCommand.apply(CommandType.RECEIVE)) {
+            return createReceivableOp(commands);
+        } else if (isCommand.apply(CommandType.PAY)) {
+            return createPayableOp(commands);
         } else {
             throw new DukeParseException("This command is not recognised unfortunately.");
         }

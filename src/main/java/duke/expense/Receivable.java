@@ -43,6 +43,6 @@ public class Receivable extends Expense {
      */
     @Override
     public String toString() {
-        return "[" + RECEIVABLE_SYMBOL + "]" + toStringSuffix();
+        return "[" + RECEIVABLE_SYMBOL + "] " + toStringSuffix();
     }
 }

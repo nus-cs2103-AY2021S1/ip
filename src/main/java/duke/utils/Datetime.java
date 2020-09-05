@@ -48,16 +48,39 @@ public class Datetime {
      * @param datetime the <code>String</code> that is to be parsed.
      * @param pattern the specified format of the datetime <code>String</code>.
      * @return the parsed <code>LocalDateTime</code>.
-     * @throws DukeException if the datetime <code>String</code> does not match the
+     * @throws DukeParseException if the datetime <code>String</code> does not match the
      * pattern <code>String</code>.
      */
-    public static LocalDateTime parseDateTimeString(String datetime, String pattern)
-            throws DukeParseException {
+    public static LocalDateTime parseDateTimeString(
+            String datetime, String pattern) throws DukeParseException {
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
             return LocalDateTime.parse(datetime, dtf);
         } catch (DateTimeParseException exception) {
             String msg = String.format("Ensure the datetime passed in is of the form: '%s'.", pattern);
+            throw new DukeParseException(msg);
+        }
+    }
+
+    /**
+     * Parses the date <code>String</code> into a <code>LocalDateTime</code>.
+     * The date is converted into a <code>LocalDate</code> first,
+     * and then converted into a <code>LocalDateTime</code> with the time of noon.
+     *
+     * @param date the <code>String</code> that is to be parsed.
+     * @param pattern the specified format of the date <code>String</code>.
+     * @return the parsed <code>LocalDateTime</code>.
+     * @throws DukeParseException if the date <code>String</code> does not match
+     * the pattern <code>String</code>.
+     */
+    public static LocalDateTime parseDateString(
+            String date, String pattern) throws DukeParseException {
+        try {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
+            LocalDate localDate = LocalDate.parse(date, dtf);
+            return LocalDateTime.of(localDate, LocalTime.of(12, 00));
+        } catch (DateTimeParseException exception) {
+            String msg = String.format("Ensure the date passed in is of the form: '%s'.", pattern);
             throw new DukeParseException(msg);
         }
     }
@@ -70,10 +93,11 @@ public class Datetime {
      * @param time the <code>String</code> that is to be parsed.
      * @param pattern the specified format of the time <code>String</code>.
      * @return the parsed <code>LocalDateTime</code>.
-     * @throws DukeException if the time <code>String</code> does not match
+     * @throws DukeParseException if the time <code>String</code> does not match
      * the pattern <code>String</code>.
      */
-    public static LocalDateTime parseTimeString(String time, String pattern) throws DukeParseException {
+    public static LocalDateTime parseTimeString(
+            String time, String pattern) throws DukeParseException {
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
             LocalTime localTime = LocalTime.parse(time, dtf);

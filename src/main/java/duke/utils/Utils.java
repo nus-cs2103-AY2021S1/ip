@@ -1,5 +1,7 @@
 package duke.utils;
 
+import duke.exception.DukeParseException;
+
 import java.util.Arrays;
 
 /** The utilities class for Duke. */
@@ -53,5 +55,29 @@ public final class Utils {
             return false;
         }
         return command[index].matches("\\d+");
+    }
+
+    /**
+     * Checks that the <code>String</code> passed in is a currency value.
+     * Ensures that there are only 2 digits for cents.
+     *
+     * @param money the <code>String</code> to be checked against.
+     * @return <code>true</code> if the <code>String</code> conforms to the format.
+     */
+    public static boolean isMoney(String money) {
+        return money.matches("^(\\p{Sc})(\\d)+(.\\d{2})?$");
+    }
+
+    /**
+     * Converts a correctly formatted <code>String</code> value to a <code>double</code>.
+     *
+     * @param money the <code>String</code> to be converted.
+     * @return the converted <code>double</code> value.
+     * @throws DukeParseException if the <code>String</code> is not of the correct format.
+     */
+    public static double convertMoneyToValue(String money) {
+        assert isMoney(money) : "money passed in is of a wrong format";
+        String actual = money.substring(1);
+        return Double.parseDouble(actual);
     }
 }

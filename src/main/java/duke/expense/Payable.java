@@ -43,7 +43,7 @@ public class Payable extends Expense {
      */
     @Override
     public String toString() {
-        return "[" + PAYABLE_SYMBOL + "]" + toStringSuffix();
+        return "[" + PAYABLE_SYMBOL + "] " + toStringSuffix();
     }
 
 }

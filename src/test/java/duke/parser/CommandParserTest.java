@@ -11,9 +11,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import duke.exception.DukeParseException;
-import duke.operation.AddDeadlineOperation;
-import duke.operation.AddEventOperation;
-import duke.operation.AddTodoOperation;
+import duke.operation.addtaskoperation.AddDeadlineTaskOperation;
+import duke.operation.addtaskoperation.AddEventTaskOperation;
+import duke.operation.addtaskoperation.AddTodoTaskOperation;
 import duke.operation.DeleteOperation;
 import duke.operation.DoneOperation;
 import duke.operation.ExitOperation;
@@ -36,15 +36,15 @@ public class CommandParserTest {
 
         String command = "todo read book";
         Operation operation = commandParser.parse(command, taskList, storage);
-        assertTrue(operation instanceof AddTodoOperation);
+        assertTrue(operation instanceof AddTodoTaskOperation);
 
         command = "deadline return book /by 09-09-2019 1010";
         operation = commandParser.parse(command, taskList, storage);
-        assertTrue(operation instanceof AddDeadlineOperation);
+        assertTrue(operation instanceof AddDeadlineTaskOperation);
 
         command = "event meeting /at 1430";
         operation = commandParser.parse(command, taskList, storage);
-        assertTrue(operation instanceof AddEventOperation);
+        assertTrue(operation instanceof AddEventTaskOperation);
 
         command = "list";
         operation = commandParser.parse(command, taskList, storage);

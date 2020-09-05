@@ -1,4 +1,4 @@
-package duke.operation;
+package duke.operation.addtaskoperation;
 
 import java.time.LocalDateTime;
 
@@ -8,7 +8,7 @@ import duke.task.TaskList;
 /**
  * Represents the operation that adds <code>Deadlines</code>.
  */
-public class AddDeadlineOperation extends AddOperation {
+public class AddDeadlineTaskOperation extends AddTaskOperation {
     private final LocalDateTime dateTime;
 
     /**
@@ -18,7 +18,7 @@ public class AddDeadlineOperation extends AddOperation {
      * @param dateTime the datetime when the <code>Deadline</code> occurs.
      * @param taskList the <code>TaskList</code> that <code>Deadline</code> is to be added into.
      */
-    public AddDeadlineOperation(String description, LocalDateTime dateTime, TaskList taskList) {
+    public AddDeadlineTaskOperation(String description, LocalDateTime dateTime, TaskList taskList) {
         super(description, taskList);
         this.dateTime = dateTime;
     }

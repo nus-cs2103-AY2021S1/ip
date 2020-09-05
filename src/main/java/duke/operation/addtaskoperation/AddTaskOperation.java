@@ -1,13 +1,12 @@
-package duke.operation;
+package duke.operation.addtaskoperation;
 
+import duke.operation.Operation;
 import duke.result.Result;
 import duke.task.Task;
 import duke.task.TaskList;
 
-/**
- * Abstract class representing the operations that add various types of <code>Tasks</code>.
- */
-public abstract class AddOperation extends Operation {
+/** Abstract class representing the operations that add various types of <code>Tasks</code>. */
+public abstract class AddTaskOperation extends Operation {
     protected String description;
     protected TaskList taskList;
 
@@ -17,7 +16,7 @@ public abstract class AddOperation extends Operation {
      * @param description the description of the <code>Task</code>.
      * @param taskList the <code>TaskList</code> that <code>Task</code> is to be added into.
      */
-    AddOperation(String description, TaskList taskList) {
+    AddTaskOperation(String description, TaskList taskList) {
         this.description = description;
         this.taskList = taskList;
     }

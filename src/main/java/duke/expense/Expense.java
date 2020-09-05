@@ -50,6 +50,6 @@ public abstract class Expense {
      */
     protected String toStringSuffix() {
         String date = this.date.getOutputDatetimeString();
-        return String.format("(on: %s) %s. Amount: %d", date, this.description, this.getValue());
+        return String.format("%s (on: %s) Amount: $%.2f", this.description, date, this.value);
     }
 }
