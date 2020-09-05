@@ -36,16 +36,14 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeTaskNotFoundException {
         ArrayList<Task> taskArrayList = new ArrayList<>();
-        for (Task task : tasks.getTasks()) {
+        tasks.getTasks().forEach(task -> {
             if (task.getDescription().toLowerCase().contains(keyword)) {
                 taskArrayList.add(task);
             }
-        }
-        if (!taskArrayList.isEmpty()) {
-            return ui.showMatchingTask(taskArrayList);
-        } else {
+        if (taskArrayList.isEmpty()) {
             throw new DukeTaskNotFoundException(" NO MATCHING TASK FOUND. \n PLEASE TRY AGAIN. ");
         }
+        return ui.showMatchingTask(taskArrayList);
     }
 
     /**
