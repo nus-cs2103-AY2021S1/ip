@@ -63,6 +63,8 @@ public class Duke extends Application {
                     tasks.done(res, ui, storage);
                 } else if (res.startsWith(Operations.DELETE.name().toLowerCase())) {
                     tasks.delete(res, ui, storage);
+                } else if (res.startsWith(Operations.DURATIONTASK.name().toLowerCase())) {
+                    tasks.durationTask(res, ui, storage);
                 } else if (res.startsWith(Operations.TODO.name().toLowerCase())) {
                     tasks.todo(res, ui, storage);
                 } else if (res.startsWith(Operations.DEADLINE.name().toLowerCase())) {
@@ -207,7 +209,6 @@ public class Duke extends Application {
      */
     String getResponse(String input) {
         String res = "";
-        System.out.println(tasks);
         try {
             if (input.equalsIgnoreCase(Operations.BYE.name())) {
                 res = ui.bye();
@@ -217,6 +218,8 @@ public class Duke extends Application {
                 res = tasks.done(input, ui, storage);
             } else if (input.startsWith(Operations.DELETE.name().toLowerCase())) {
                 res = tasks.delete(input, ui, storage);
+            }  else if (input.startsWith(Operations.DURATIONTASK.name().toLowerCase())) {
+                res = tasks.durationTask(input, ui, storage);
             } else if (input.startsWith(Operations.TODO.name().toLowerCase())) {
                 res = tasks.todo(input, ui, storage);
             } else if (input.startsWith(Operations.DEADLINE.name().toLowerCase())) {

@@ -123,12 +123,12 @@ public class Ui {
     }
 
     /**
-     * Displays the message to inform the success of adding todo event operation.
-     * @param data the list of the events.
-     * @param t the todo event that will be added.
-     * @return String result for GUI
+     * Displays the message to inform the success of adding task operation.
+     * @param data the list of the task.
+     * @param t the task that will be added.
+     * @return String result for GUI.
      */
-    public String printTodo(List<Task> data, Todo t) {
+    public String printTask(List<Task> data, Task t) {
         System.out.println(line);
         System.out.println("     Got it. I've added this task: ");
         System.out.printf("       %s\n", t.toString());
@@ -138,38 +138,6 @@ public class Ui {
                 + "     Got it. I've added this task: \n       " + t.toString() + "\n"
                 + "     Now you have " + data.size() + " tasks in the list.\n"
                 + line + "\n";
-    }
-
-    /**
-     * Displays the message to inform the success of adding deadline event operation.
-     * @param data the list of the events.
-     * @param t the deadline event that will be added.
-     * @return String result for GUI
-     */
-    public String printDeadline(List<Task> data, Deadline t) {
-        System.out.println(line);
-        System.out.println("     Got it. I've added this task: ");
-        System.out.printf("       %s\n", t.toString());
-        System.out.printf("     Now you have %d tasks in the list.\n", data.size());
-        System.out.println(line);
-        return line + "\n" + "     Got it. I've added this task: \n       " + t.toString() + "\n"
-                + "     Now you have " + data.size() + " tasks in the list.\n" + line + "\n";
-    }
-
-    /**
-     * Displays the message to inform the success of adding event operation.
-     * @param data the list of the events.
-     * @param t the event that will be added.
-     * @return String result for GUI
-     */
-    public String printEvent(List<Task> data, Event t) {
-        System.out.println(line);
-        System.out.println("     Got it. I've added this task: ");
-        System.out.printf("       %s\n", t.toString());
-        System.out.printf("     Now you have %d tasks in the list.\n", data.size());
-        System.out.println(line);
-        return line + "\n" + "     Got it. I've added this task: \n       " + t.toString() + "\n"
-                + "     Now you have " + data.size() + " tasks in the list.\n" + line + "\n";
     }
 
     /**

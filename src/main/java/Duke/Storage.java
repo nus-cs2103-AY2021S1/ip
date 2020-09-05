@@ -38,6 +38,16 @@ public class Storage {
             if(type == 'T') {
                 Todo t = new Todo(line.substring(14), isDone);
                 data.add(t);
+            } else if(type == 'U') {
+                String[] parts = line.substring(5).split(" ");
+                String description = "";
+                int length = parts.length;
+                for(int i = 1; i < length - 2; i++) {
+                    description += parts[i] + " ";
+                }
+                DurationTask u = new DurationTask(description,
+                        Integer.parseInt(parts[parts.length - 2].substring(1)), isDone);
+                data.add(u);
             } else if(type == 'D') {
                 String[] parts = line.substring(5).split(" ");
                 String description = "";

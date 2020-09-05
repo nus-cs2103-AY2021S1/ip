@@ -6,7 +6,7 @@ package Duke;
 public class Todo extends Task {
     /**
      * Constructs a todo event.
-     * @param description Constructs a todo event.
+     * @param description is the description of a todo event.
      */
     public Todo(String description) {
         super(description);
@@ -14,7 +14,7 @@ public class Todo extends Task {
 
     /**
      * Constructs a todo event.
-     * @param description Constructs a todo event.
+     * @param description is the description of a todo event.
      * @param isDone whether the task is done or not.
      */
     public Todo(String description, boolean isDone) {

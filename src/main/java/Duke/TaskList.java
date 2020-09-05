@@ -87,6 +87,24 @@ public class TaskList {
         return res;
     }
 
+    public String durationTask(String input, Ui ui, Storage storage) throws DukeException, FileNotFoundException {
+        String res = "";
+        if (input.length() <= 13) {
+            // Exception: eg. durationtask
+            throw new DukeException("      OOPS!!! The description of a duration task cannot be empty.");
+        }
+        String[] ss = input.split(" ");
+        if (ss.length != 3) {
+            throw new DukeException("      OOPS!!! Please following the format: durationtask XXX Y");
+        }
+        DurationTask t = new DurationTask(ss[1], Integer.parseInt(ss[2]));
+        assert t != null;
+        data.add(t);
+        res = ui.printTask(data, t);
+        storage.writeFile(data);
+        return res;
+    }
+
     /**
      * Adds a todo event into the list.
      * @param input the input from the user.
@@ -105,7 +123,7 @@ public class TaskList {
         Todo t = new Todo(input.substring(5));
         assert t != null;
         data.add(t);
-        res = ui.printTodo(data, t);
+        res = ui.printTask(data, t);
         storage.writeFile(data);
         return res;
     }
@@ -136,7 +154,7 @@ public class TaskList {
                         Integer.parseInt(ss[3].split(" ")[1].substring(2))));
         assert t != null;
         data.add(t);
-        res = ui.printDeadline(data, t);
+        res = ui.printTask(data, t);
         storage.writeFile(data);
         return res;
     }
@@ -169,7 +187,7 @@ public class TaskList {
         assert t != null;
         System.out.println(t.getDescription());
         data.add(t);
-        res = ui.printEvent(data, t);
+        res = ui.printTask(data, t);
         storage.writeFile(data);
         return res;
     }

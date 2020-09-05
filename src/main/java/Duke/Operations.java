@@ -12,4 +12,5 @@ public enum Operations {
     EVENT,
     BYE,
     FIND,
+    DURATIONTASK;
 }
