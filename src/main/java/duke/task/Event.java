@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a {@link Task} that happens on a particular date.
  */
 public class Event extends Task {
-    private static final String DATE_FORMAT = "MMMM d yyyy";
+    private static final String DATE_FORMAT = "MMMM dd yyyy";
 
     /**
      * The date on which the Event is happening.

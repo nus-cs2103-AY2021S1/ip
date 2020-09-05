@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a {@link Task} that has a deadline.
  */
 public class Deadline extends Task {
-    private static final String DATE_FORMAT = "MMMM d yyyy";
+    private static final String DATE_FORMAT = "MMMM dd yyyy";
 
     /**
      * The date on which the {@link Task} is due.
