@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import blue.exception.ReadFailedExceptionTest;
+import blue.exception.ReadFailedException;
 
 /**
  * Test Tasks.
@@ -88,10 +88,10 @@ public class TasksTest {
     /**
      * Test addTask method with success.
      *
-     * @throws ReadFailedExceptionTest If the task cannot be read.
+     * @throws ReadFailedException If the task cannot be read.
      */
     @Test
-    public void testAddTask_success() throws ReadFailedExceptionTest {
+    public void testAddTask_success() throws ReadFailedException {
         Tasks tasks1 = new Tasks();
         tasks1.addTask(new String[]{"T", "0", "todo"});
         tasks1.addTask(new String[]{"D", "0", "deadline", "2020-02-12"});
@@ -107,7 +107,7 @@ public class TasksTest {
         try {
             createTasks().addTask(new String[]{"A", "0", "todo"});
             fail(); // the test should not reach this line
-        } catch (ReadFailedExceptionTest ex) {
+        } catch (ReadFailedException ex) {
             assertEquals("Failed to read tasks!", ex.getMessage());
         }
     }
