@@ -39,7 +39,7 @@ public class StorageTest {
     }
 
     @Test
-    public void getTasks() {
+    public void getTasks_normalFile_getCorrectly() {
         try {
             String path = "../data/duke.txt";
             Storage storage = new Storage(path);
