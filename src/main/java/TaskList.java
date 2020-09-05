@@ -56,10 +56,11 @@ public class TaskList {
         assert this.tasks != null : "The arraylist of tasks can never be null";
         for (Task task : tasks) {
             String append = "";
-            if (!task.istodo()) {
-                append = task.description() + task.getWork() + "|" + task.getDate() + "\n";
-            } else {
+            boolean istodo = task.istodo();
+            if (istodo) {
                 append = task.description() + task.getWork() + "\n";
+            } else {
+                append = task.description() + task.getWork() + "|" + task.getDate() + "\n";
             }
             line.append(append);
         }

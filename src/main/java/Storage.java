@@ -139,9 +139,7 @@ public class Storage {
             File directory = new File(folderPath);
             if (!directory.isDirectory()) {
                 File folder = new File(folderPath);
-                if (!folder.mkdir()) {
-                    System.out.println("cannot make a folder");
-                }
+                folder.mkdir();
             }
             File file = new File(this.filePath);
             file.createNewFile();
@@ -165,9 +163,7 @@ public class Storage {
             File directory = new File(folderPath);
             if (!directory.isDirectory()) {
                 File folder = new File(folderPath);
-                if (!folder.mkdir()) {
-                    System.out.println("cannot make a folder");
-                }
+                folder.mkdir();
             }
             File file = new File(path);
             file.delete();
