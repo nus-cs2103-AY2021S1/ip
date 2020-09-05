@@ -27,6 +27,7 @@ public class ExitCommand extends Command {
      * Returns the boolean value to indicates that this is an exit command.
      *
      * @return The boolean value of whether this command is an exit command.
+     *         All the command will return true except for the exit cammand.
      */
     @Override
     public boolean isContinuing() {
