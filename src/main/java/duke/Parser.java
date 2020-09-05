@@ -49,6 +49,8 @@ public class Parser {
             throw new UnknownCommandException();
         }
 
+        assert command != null : "command cannot be empty";
+
         switch (command) {
         case BYE:
             return new ByeCommand();
