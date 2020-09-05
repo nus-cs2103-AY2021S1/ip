@@ -27,6 +27,7 @@ public class ListCommand extends Command {
     public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
         String responseMessage = tasks.toString();
         boolean shouldExit = getIsExit();
+        assert !shouldExit : "shouldExit should be false";
         return new CommandResponse(responseMessage, shouldExit);
     }
 }

@@ -91,6 +91,7 @@ public class Storage {
                     task = new Event(description, isDone, time);
                     break;
                 default:
+                    assert false : "Task type does not exist";
                     break;
                 }
                 list.add(task);

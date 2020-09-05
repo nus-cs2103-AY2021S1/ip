@@ -45,6 +45,7 @@ public class TaskList {
      * @param index Index of task to be mark as complete.
      */
     public void doTask(int index) {
+        assert index >= 0 : "Task index should not be less than 0";
         list.get(index).completeTask();
     }
 
@@ -54,6 +55,7 @@ public class TaskList {
      * @param index Index of task to be removed.
      */
     public void removeTask(int index) {
+        assert index >= 0 : "Task index should not be less than 0";
         list.remove(index);
     }
 
@@ -64,6 +66,7 @@ public class TaskList {
      * @return Task
      */
     public Task getTask(int index) {
+        assert index >= 0 : "Task index should not be less than 0";
         return list.get(index);
     }
 

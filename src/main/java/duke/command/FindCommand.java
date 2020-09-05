@@ -21,6 +21,7 @@ public class FindCommand extends Command {
     public FindCommand(String content) {
         super(false);
         this.content = content;
+        assert !content.equals("") : "content should not be empty";
     }
 
     /**
@@ -52,6 +53,7 @@ public class FindCommand extends Command {
             responseMessage = "You do not have any tasks containing " + "\"" + content + "\"!";
         }
         boolean shouldExit = getIsExit();
+        assert !shouldExit : "shouldExit should be false";
         return new CommandResponse(responseMessage, shouldExit);
     }
 
