@@ -12,7 +12,13 @@ import exception.EventInvalidUsageException;
 public class Event extends Task {
     protected LocalDate at;
 
-    private Event(String description, LocalDate at) {
+    /**
+     * Represents an Event Object
+     *
+     * @param description event description
+     * @param at          event date
+     */
+    public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
     }
@@ -61,7 +67,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String getDescription() {
+    public String getStorageDescription() {
         return super.getDescription() + " | " + this.at;
     }
 

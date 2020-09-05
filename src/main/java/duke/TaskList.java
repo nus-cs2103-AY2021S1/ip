@@ -19,13 +19,25 @@ public class TaskList {
     }
 
     /**
-     * Add a task into taskList
+     * Add a task into taskList at the end
      *
      * @param task to be added
      * @return the task added
      */
     public Task add(Task task) {
         taskList.add(task);
+        return task;
+    }
+
+    /**
+     * Add a task into taskList at a specific index
+     *
+     * @param task  to be added
+     * @param index where to put task in taskList
+     * @return the task added
+     */
+    public Task add(Task task, int index) {
+        taskList.add(index, task);
         return task;
     }
 

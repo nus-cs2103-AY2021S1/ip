@@ -9,7 +9,13 @@ import exception.DeadlineInvalidUsageException;
 public class Deadline extends Task {
     protected LocalDate by;
 
-    private Deadline(String description, LocalDate by) {
+    /**
+     * Represents a deadline object
+     *
+     * @param description deadline description
+     * @param by          deadline date
+     */
+    public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
     }
@@ -58,7 +64,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getDescription() {
+    public String getStorageDescription() {
         return super.getDescription() + " | " + this.by;
     }
 

@@ -3,6 +3,7 @@ package duke;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Optional;
 
 import command.ByeCommand;
 import command.Command;
@@ -14,12 +15,14 @@ import command.EventCommand;
 import command.FindCommand;
 import command.ListCommand;
 import command.TodoCommand;
+import command.UpdateCommand;
 import command.ViewallCommand;
 import exception.DeadlineInvalidUsageException;
 import exception.EventInvalidUsageException;
 import exception.InvalidUsageException;
 import exception.TodoInvalidUsageException;
 import exception.UnknownCommandException;
+import exception.UpdateInvalidUsageException;
 import exception.ViewallInvalidUsageException;
 import task.Deadline;
 import task.Event;
@@ -129,6 +132,50 @@ public class Parser {
                 return new FindCommand(commands[1]);
             } catch (ArrayIndexOutOfBoundsException ex) {
                 throw new InvalidUsageException("Usage: find <keyword>");
+            }
+        case UPDATE:
+            try {
+                String[] options = parseInput(commands[1]);
+                int taskNumber = Integer.parseInt(options[0]);
+                options[1] = " " + options[1];
+                int descriptionDelimiter = commands[1].indexOf(" /d ");
+                int timeDelimiter = commands[1].indexOf(" /t ");
+                String descRegex = "(\\s+)(/d)(\\s+)";
+                String timeRegex = "(\\s+)(/t)(\\s+)";
+
+                Optional<String> description;
+                Optional<LocalDate> date;
+                if (descriptionDelimiter < 0 && timeDelimiter < 0) {
+                    description = Optional.empty();
+                    date = Optional.empty();
+                } else if (timeDelimiter < 0) {
+                    String[] findDescription = commands[1].split(descRegex, 2);
+                    description = Optional.of(findDescription[1]);
+                    date = Optional.empty();
+                } else if (descriptionDelimiter < 0) {
+                    String[] findDate = commands[1].split(timeRegex, 2);
+                    description = Optional.empty();
+                    date = Optional.of(LocalDate.parse(findDate[1]));
+                } else if (timeDelimiter < descriptionDelimiter) {
+                    String[] findDate = commands[1].split(timeRegex, 2);
+                    System.out.println(findDate[1]);
+                    String[] findDescription = findDate[1].split(descRegex, 2);
+                    description = Optional.of(findDescription[1]);
+                    date = Optional.of(LocalDate.parse(findDescription[0]));
+                } else {
+                    String[] findDescription = commands[1].split(descRegex, 2);
+                    System.out.println(findDescription[1]);
+                    String[] findDate = findDescription[1].split(timeRegex, 2);
+                    description = Optional.of(findDate[0]);
+                    date = Optional.of(LocalDate.parse(findDate[1]));
+                }
+                return new UpdateCommand(taskNumber, description, date);
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                throw new UpdateInvalidUsageException("Please re-check your command format!");
+            } catch (NumberFormatException ex) {
+                throw new UpdateInvalidUsageException("Don't forget to key in the task number to be updated!");
+            } catch (DateTimeException ex) {
+                throw new UpdateInvalidUsageException("Date should be in yyyy-mm-dd format.");
             }
         default:
             throw new UnknownCommandException();

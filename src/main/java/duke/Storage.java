@@ -77,7 +77,7 @@ public class Storage {
                         "%s | %d | %s",
                         task.getType(),
                         task.getStatus() ? 1 : 0,
-                        task.getDescription()
+                        task.getStorageDescription()
                 );
                 bw.write(storeFormat);
                 bw.newLine();

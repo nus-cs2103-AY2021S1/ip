@@ -26,6 +26,10 @@ public abstract class Task {
         return this.name;
     }
 
+    public String getStorageDescription() {
+        return this.name;
+    }
+
     public abstract String getType();
 
     /**
