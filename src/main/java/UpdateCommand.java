@@ -1,0 +1,30 @@
+public class UpdateCommand extends Command {
+
+    private String userCommand;
+
+    public UpdateCommand(String userCommand) {
+        this.userCommand = userCommand;
+    }
+
+    @Override
+    String execute(TaskList tasks, UI ui) throws DukeException {
+        try {
+            String[] parsedCommand = userCommand.split(" ", 2);
+            String dukeResponse = "";
+            if (parsedCommand[1].matches("\\d+")) {
+                int taskNumber = Integer.parseInt(parsedCommand[1]);
+                Task updatingTask = tasks.getTaskToUpdate(taskNumber);
+                updatingTask.toBeUpdated();
+                dukeResponse = ui.enterNewUpdateForTask(updatingTask);
+            } else {
+                String detailToChange = parsedCommand[1];
+                Task updatedTask = tasks.getUpdatedTask(detailToChange);
+                tasks.updateTask(updatedTask);
+                dukeResponse = ui.updatedTask(updatedTask);
+            }
+            return dukeResponse;
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidTaskNumberException();
+        }
+    }
+}

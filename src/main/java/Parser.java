@@ -33,6 +33,8 @@ public class Parser {
             return new ScheduleCommand(userCommand);
         } else if (command[0].equals("sort")) {
             return new SortCommand(userCommand);
+        } else if (command[0].equals("update")) {
+            return new UpdateCommand(userCommand);
         } else {
             throw new InvalidCommandException();
         }

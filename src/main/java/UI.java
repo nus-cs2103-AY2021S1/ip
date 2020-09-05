@@ -139,4 +139,14 @@ public class UI {
         }
         return str1 + str2;
     }
+
+    protected String enterNewUpdateForTask(Task taskToBeUpdated) {
+        return "\nThis is the current task:\n" + taskToBeUpdated +
+                "\nOk tell me what to update!]n";
+    }
+
+    protected String updatedTask(Task updatedTask) {
+        String str1 = "\nThis task has been updated!\n";
+        return str1 + updatedTask;
+    }
 }
