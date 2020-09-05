@@ -3,14 +3,14 @@ package duke;
 /**
  * ToDos class will handle tasks categorised as to-do
  */
-class ToDos extends Task {
+class ToDo extends Task {
 
     /**
      * Initialises ToDos using description only.
      *
      * @param description
      */
-    public ToDos(String description) {
+    public ToDo(String description) {
         super(description);
     }
 
@@ -21,7 +21,7 @@ class ToDos extends Task {
      * @param description
      * @param isDone
      */
-    public ToDos(String description, boolean isDone) {
+    public ToDo(String description, boolean isDone) {
         super(description, isDone);
     }
 

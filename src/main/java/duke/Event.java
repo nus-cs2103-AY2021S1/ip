@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Events class will handle tasks categorised as event.
  */
-public class Events extends Task {
+public class Event extends Task {
 
     /** Scheduled event date in LocalDate format */
     protected LocalDate scheduled;
@@ -19,7 +19,7 @@ public class Events extends Task {
      * @param description
      * @param scheduled
      */
-    public Events(String description, String scheduled) {
+    public Event(String description, String scheduled) {
         super(description);
         this.date = scheduled;
         this.scheduled = LocalDate.parse(scheduled);
@@ -33,7 +33,7 @@ public class Events extends Task {
      * @param scheduled
      * @param isDone
      */
-    public Events(String description, String scheduled, boolean isDone) {
+    public Event(String description, String scheduled, boolean isDone) {
         super(description, isDone);
         this.date = scheduled;
         this.scheduled = LocalDate.parse(scheduled);

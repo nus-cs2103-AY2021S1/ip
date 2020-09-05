@@ -40,7 +40,7 @@ public class CommandHandler {
             try {
                 task = input.split("todo ")[1];
                 assert !task.isEmpty() : "Task shouldn't be empty!";
-                Task newTask = new ToDos(task);
+                Task newTask = new ToDo(task);
                 output += tasks.addTask(newTask);
             } catch (ArrayIndexOutOfBoundsException exception) {
                 try {
@@ -78,7 +78,7 @@ public class CommandHandler {
                             throw new DukeException("", DukeExceptionType.MISSING_TIMING, DEADLINE);
                         } else {
                             try {
-                                Task newTask = new Deadlines(task, due);
+                                Task newTask = new Deadline(task, due);
                                 output += tasks.addTask(newTask);
                             } catch (DateTimeParseException e) {
                                 DukeException.wrongTimeFormat();
@@ -119,7 +119,7 @@ public class CommandHandler {
                         } else if (due.equals("")) {
                             throw new DukeException("", DukeExceptionType.MISSING_TIMING, DEADLINE);
                         } else {
-                            Task newTask = new Events(task, due);
+                            Task newTask = new Event(task, due);
                             output += tasks.addTask(newTask);
                         }
                     } catch (DukeException e) {
@@ -146,7 +146,7 @@ public class CommandHandler {
                 String indexString = input.split(" ")[1];
                 assert !indexString.isEmpty() : "Index shouldn't be empty!";
                 int index = Integer.parseInt(indexString);
-                output += tasks.done(index);
+                output += tasks.markDone(index);
             } catch (IndexOutOfBoundsException exception) {
                 try {
                     throw new DukeException("", DukeExceptionType.INVALID_INDEX, DONE);
@@ -160,7 +160,7 @@ public class CommandHandler {
                 String indexString = input.split(" ")[1];
                 assert !indexString.isEmpty() : "Index shouldn't be empty!";
                 int index = Integer.parseInt(indexString);
-                output += tasks.delete(index);
+                output += tasks.deleteTask(index);
             } catch (IndexOutOfBoundsException exception) {
                 try {
                     throw new DukeException("", DukeExceptionType.INVALID_INDEX, DELETE);

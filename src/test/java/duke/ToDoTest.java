@@ -2,11 +2,10 @@ package duke;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.time.LocalDate;
 
-class ToDosTest {
+class ToDoTest {
     @Test
     public void testToDos() {
-        assertEquals("T | 0 | meeting", new ToDos("meeting").writeToFile());
+        assertEquals("T | 0 | meeting", new ToDo("meeting").writeToFile());
     }
 }
