@@ -5,14 +5,14 @@ package junimo.interaction;
  * Contains methods that greets user on start and exit of program.
  */
 public class Greeting {
-    private static final String STAR_LINE = "************************************************************";
+    private static final String STAR_LINE = "*******************************************************";
 
     /**
      * Prints welcome greeting to user at start of program.
      */
     public static String welcome() {
         String welcomeMessage = STAR_LINE
-                + "\nWelcome! I am junimo.Junimo!\n"
+                + "\nWelcome! I am Junimo!\n"
                 + "\nHere are some magic words to get you going:"
                 + "\n* To add a todo, say: 'todo <task description>'."
                 + "\n* To add a deadline, say:"
