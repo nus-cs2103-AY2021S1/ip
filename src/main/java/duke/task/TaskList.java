@@ -4,6 +4,8 @@ import duke.exceptions.NoSuchTaskException;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Contains the user's Tasks while the app is running.
@@ -78,12 +80,12 @@ public class TaskList {
      * @return a List of NumberedTasks created from all Tasks stored in this TaskList
      */
     public List<NumberedTask> tasksToString() {
-        List<NumberedTask> result = new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
-            Task currentTask = taskList.get(i);
-            result.add(new NumberedTask(i + 1 , currentTask));
-        }
-        return result;
+        return IntStream.range(0, taskList.size())
+                .mapToObj(i -> {
+                    Task currentTask = taskList.get(i);
+                    return new NumberedTask(i + 1, currentTask);
+                })
+                .collect(Collectors.toList());
     }
 
     /**
@@ -94,13 +96,12 @@ public class TaskList {
      * @return a List of NumberedTasks created from Tasks stored in this TaskList that match the given keyword
      */
     public List<NumberedTask> getMatchingTasks(String keyword) {
-        List<NumberedTask> result = new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
-            Task currentTask = taskList.get(i);
-            if (currentTask.toString().contains(keyword)) {
-                result.add(new NumberedTask(i + 1, currentTask));
-            }
-        }
-        return result;
+        return IntStream.range(0, taskList.size())
+                .filter(i -> {
+                    Task currentTask = taskList.get(i);
+                    return currentTask.toString().contains(keyword);
+                })
+                .mapToObj(i -> new NumberedTask(i + 1, taskList.get(i)))
+                .collect(Collectors.toList());
     }
 }
