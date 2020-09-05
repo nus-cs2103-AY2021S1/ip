@@ -41,7 +41,6 @@ public class TaskHelper {
      */
     public static String handleDeadline(String userCommand, TaskList tasklist) {
         String[] userCommandSplit = userCommand.split(" /by ");
-        assert userCommandSplit.length == 2 : "Something went wrong when splitting user input for adding deadline.";
         String description = userCommandSplit[0].split(" ", 2)[1];
         String by = userCommandSplit[1];
 
@@ -50,7 +49,6 @@ public class TaskHelper {
         List<Task> tasks = tasklist.getTasks();
         int initialSize = tasks.size();
         tasks.add(newTask);
-        assert tasks.size() == initialSize + 1 : "Size of tasks list is incorrect after adding deadline.";
         Storage.appendToFile(newTask.toString());
         return TaskDescription.addedTaskDescription(tasks, newTask);
     }
@@ -64,7 +62,6 @@ public class TaskHelper {
      */
     public static String handleEvent(String userCommand, TaskList tasklist) {
         String[] userCommandSplit = userCommand.split(" /at ");
-        assert userCommandSplit.length == 2 : "Something went wrong when splitting user input for adding event.";
         String description = userCommandSplit[0].split(" ", 2)[1];
         String at = userCommandSplit[1];
 
@@ -73,7 +70,6 @@ public class TaskHelper {
         List<Task> tasks = tasklist.getTasks();
         int initialSize = tasks.size();
         tasks.add(newTask);
-        assert tasks.size() == initialSize + 1 : "Size of tasks list is incorrect after adding event.";
         Storage.appendToFile(newTask.toString());
         return TaskDescription.addedTaskDescription(tasks, newTask);
     }

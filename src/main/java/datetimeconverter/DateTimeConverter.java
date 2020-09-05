@@ -1,7 +1,5 @@
 package datetimeconverter;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +12,9 @@ public class DateTimeConverter {
     /**
      * Accept dates in "dd/MM/yyyy HHmm", "d/MM/yyyy HHmm", "dd-MM-yyyy HHmm", "d-MM-yyyy HHmm",
      * "dd/M/yyyy HHmm", "d/M/yyyy HHmm", "dd-M-yyyy HHmm", "d-M-yyyy HHmm" format and convert
-     * it to English date format (E.g Saturday, March 02, 2019 06:00 PM).
+     * it to English date-time format (E.g Saturday, March 02, 2019 06:00 PM). It can also accept
+     * actual days of the week, specifically short word forms ("mon") and exact word
+     * forms ("Monday"), and convert them to English date format.
      *
      * @param input Date-Time pattern.
      * @return English date format.
@@ -23,34 +23,16 @@ public class DateTimeConverter {
      *                                output from formatDateTime(...).
      */
     public static String formatDateTime(String input) {
-        // Make a copy of the input string
-        String result = input;
+        List<String> formatDays = Arrays.asList(
+                "mon", "tue", "wed", "thurs", "fri", "sat", "sun",
+                "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat", "Sun",
+                "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",
+                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
 
-        // Format the following date and time formats
-        List<String> formatStrings = Arrays.asList(
-                "dd/MM/yyyy HHmm", "d/MM/yyyy HHmm",
-                "dd-MM-yyyy HHmm", "d-MM-yyyy HHmm",
-                "dd/M/yyyy HHmm", "d/M/yyyy HHmm",
-                "dd-M-yyyy HHmm", "d-M-yyyy HHmm");
-
-        DateTimeFormatter formatter;
-        LocalDateTime dateTime;
-
-        // Try to fit the input string into a format in formatString
-        for (String formatString : formatStrings) {
-            try {
-                formatter = DateTimeFormatter.ofPattern(formatString);
-                assert formatter instanceof DateTimeFormatter : formatter;
-                dateTime = LocalDateTime.parse(result, formatter);
-                assert dateTime instanceof LocalDateTime : dateTime;
-                // E.g Convert 2/12/2019 1800 to Monday, December 02, 2019 06:00 PM
-                result = dateTime.format(DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy hh:mm a"));
-                assert result instanceof String : result;
-            } catch (DateTimeParseException e) {
-                // Pass and don't format input if the date and time format does not match any element in formatString
-            }
+        if (formatDays.contains(input)) {
+            return DateTimeHelper.tryConvertingToEnglishDate(input);
+        } else {
+            return DateTimeHelper.tryConvertingToEnglishDateTime(input);
         }
-        assert result instanceof String : result;
-        return result;
     }
 }

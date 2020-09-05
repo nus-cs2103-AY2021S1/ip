@@ -1,3 +1,9 @@
-[T][Y] north korea
-[D][Y] this (by: tmr)
-[D][N] do this (by: tmr)
+[D][N] return book (by: Sunday, September 13, 2020)
+[D][N] return book (by: Sunday, September 13, 2020)
+[D][N] return book (by: Sunday, September 13, 2020)
+[D][N] return book (by: Sunday, September 13, 2020)
+[E][N] thisevent (at: Monday, September 07, 2020)
+[E][N] thisevent (at: Monday, September 07, 2020)
+[E][N] thisevent (at: Monday, September 07, 2020)
+[E][N] thisevent (at: Monday, September 07, 2020)
+[E][N] thisevent (at: mond)

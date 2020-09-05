@@ -18,6 +18,9 @@ public class TaskDescription {
      * @param tasks Outstanding tasks.
      */
     public static String showAllTask(List<Task> tasks) {
+        if (tasks.size() == 0) {
+            return "List of tasks is empty.";
+        }
         String result = "";
         System.out.println(divider);
         for (int i = 0; i < tasks.size(); i++) {

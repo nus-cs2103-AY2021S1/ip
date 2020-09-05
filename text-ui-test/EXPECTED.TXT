@@ -109,7 +109,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[D][N] return book (by: Sunday)
+		[D][N] return book (by: Sunday, September 13, 2020)
 
 	Now you have 2 tasks in the list.
 
@@ -123,7 +123,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+		[D][N] return book (by: Sunday, September 13, 2020)
 
 	Now you have 3 tasks in the list.
 
@@ -133,7 +133,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+		[D][N] return book (by: Sunday, September 13, 2020)
 
 	Now you have 4 tasks in the list.
 
@@ -143,7 +143,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+		[D][N] return book (by: Sunday, September 13, 2020)
 
 	Now you have 5 tasks in the list.
 
@@ -163,7 +163,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
+		[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
 
 	Now you have 7 tasks in the list.
 
@@ -173,7 +173,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+		[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
 
 	Now you have 8 tasks in the list.
 
@@ -183,7 +183,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[E][N] meet friend (at: Tuesday, March 12, 2019 06:00 PM)
+		[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
 
 	Now you have 9 tasks in the list.
 
@@ -193,7 +193,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+		[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
 
 	Now you have 10 tasks in the list.
 
@@ -201,9 +201,23 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	____________________________________________________________
 
+	1.[T][N] work
+	2.[D][N] return book (by: Sunday, September 13, 2020)
+	3.[D][N] return book (by: Sunday, September 13, 2020)
+	4.[D][N] return book (by: Sunday, September 13, 2020)
+	5.[D][N] return book (by: Sunday, September 13, 2020)
+	6.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	7.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	8.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	9.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	10.[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
+	____________________________________________________________
+
+	____________________________________________________________
+
 	Got it. I've added this task:
 
-		[E][N] meet friend (at: 1800 02/12/2019)
+		[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
 
 	Now you have 11 tasks in the list.
 
@@ -213,9 +227,39 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[E][N] project meeting (at: Mon 2-4pm)
+		[E][N] meet friend (at: Tuesday, March 12, 2019 06:00 PM)
 
 	Now you have 12 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Got it. I've added this task:
+
+		[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+
+	Now you have 13 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Got it. I've added this task:
+
+		[E][N] meet friend (at: 1800 02/12/2019)
+
+	Now you have 14 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Got it. I've added this task:
+
+		[E][N] project meeting (at: Mon 2-4pm)
+
+	Now you have 15 tasks in the list.
 
 	____________________________________________________________
 
@@ -226,17 +270,83 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 	____________________________________________________________
 
 	1.[T][N] work
-	2.[D][N] return book (by: Sunday)
-	3.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
-	4.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
-	5.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	2.[D][N] return book (by: Sunday, September 13, 2020)
+	3.[D][N] return book (by: Sunday, September 13, 2020)
+	4.[D][N] return book (by: Sunday, September 13, 2020)
+	5.[D][N] return book (by: Sunday, September 13, 2020)
 	6.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
-	7.[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
-	8.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
-	9.[E][N] meet friend (at: Tuesday, March 12, 2019 06:00 PM)
-	10.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
-	11.[E][N] meet friend (at: 1800 02/12/2019)
-	12.[E][N] project meeting (at: Mon 2-4pm)
+	7.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	8.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	9.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	10.[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
+	11.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	12.[E][N] meet friend (at: Tuesday, March 12, 2019 06:00 PM)
+	13.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	14.[E][N] meet friend (at: 1800 02/12/2019)
+	15.[E][N] project meeting (at: Mon 2-4pm)
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Got it. I've added this task:
+
+		[E][N] meet friend (at: Monday, September 07, 2020)
+
+	Now you have 16 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Got it. I've added this task:
+
+		[E][N] meet friend (at: Monday, September 07, 2020)
+
+	Now you have 17 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Got it. I've added this task:
+
+		[E][N] meet friend (at: Monday, September 07, 2020)
+
+	Now you have 18 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+
+	Got it. I've added this task:
+
+		[E][N] meet friend (at: Monday, September 07, 2020)
+
+	Now you have 19 tasks in the list.
+
+	____________________________________________________________
+
+	____________________________________________________________
+
+	1.[T][N] work
+	2.[D][N] return book (by: Sunday, September 13, 2020)
+	3.[D][N] return book (by: Sunday, September 13, 2020)
+	4.[D][N] return book (by: Sunday, September 13, 2020)
+	5.[D][N] return book (by: Sunday, September 13, 2020)
+	6.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	7.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	8.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	9.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	10.[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
+	11.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	12.[E][N] meet friend (at: Tuesday, March 12, 2019 06:00 PM)
+	13.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	14.[E][N] meet friend (at: 1800 02/12/2019)
+	15.[E][N] project meeting (at: Mon 2-4pm)
+	16.[E][N] meet friend (at: Monday, September 07, 2020)
+	17.[E][N] meet friend (at: Monday, September 07, 2020)
+	18.[E][N] meet friend (at: Monday, September 07, 2020)
+	19.[E][N] meet friend (at: Monday, September 07, 2020)
 	____________________________________________________________
 
 	____________________________________________________________
@@ -250,30 +360,37 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Nice! I've marked this task as done:
 
-	[D][Y] return book (by: Sunday)
+	[D][Y] return book (by: Sunday, September 13, 2020)
 	____________________________________________________________
 
 	____________________________________________________________
 
 	Nice! I've marked this task as done:
 
-	[E][Y] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	[D][Y] submit work (by: Monday, December 02, 2019 06:00 PM)
 	____________________________________________________________
 
 	____________________________________________________________
 
 	1.[T][Y] work
-	2.[D][Y] return book (by: Sunday)
-	3.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
-	4.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
-	5.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	2.[D][Y] return book (by: Sunday, September 13, 2020)
+	3.[D][N] return book (by: Sunday, September 13, 2020)
+	4.[D][N] return book (by: Sunday, September 13, 2020)
+	5.[D][N] return book (by: Sunday, September 13, 2020)
 	6.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
-	7.[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
-	8.[E][Y] meet friend (at: Saturday, March 02, 2019 06:00 PM)
-	9.[E][N] meet friend (at: Tuesday, March 12, 2019 06:00 PM)
-	10.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
-	11.[E][N] meet friend (at: 1800 02/12/2019)
-	12.[E][N] project meeting (at: Mon 2-4pm)
+	7.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	8.[D][Y] submit work (by: Monday, December 02, 2019 06:00 PM)
+	9.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	10.[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
+	11.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	12.[E][N] meet friend (at: Tuesday, March 12, 2019 06:00 PM)
+	13.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	14.[E][N] meet friend (at: 1800 02/12/2019)
+	15.[E][N] project meeting (at: Mon 2-4pm)
+	16.[E][N] meet friend (at: Monday, September 07, 2020)
+	17.[E][N] meet friend (at: Monday, September 07, 2020)
+	18.[E][N] meet friend (at: Monday, September 07, 2020)
+	19.[E][N] meet friend (at: Monday, September 07, 2020)
 	____________________________________________________________
 
 	____________________________________________________________
@@ -282,7 +399,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 		[T][Y] work
 
-	Now you have 11 tasks in the list.
+	Now you have 18 tasks in the list.
 
 	____________________________________________________________
 
@@ -290,9 +407,9 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Noted. I've removed this task:
 
-		[D][Y] return book (by: Sunday)
+		[D][Y] return book (by: Sunday, September 13, 2020)
 
-	Now you have 10 tasks in the list.
+	Now you have 17 tasks in the list.
 
 	____________________________________________________________
 
@@ -300,23 +417,30 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Noted. I've removed this task:
 
-		[E][N] meet friend (at: Tuesday, March 12, 2019 06:00 PM)
+		[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
 
-	Now you have 9 tasks in the list.
-
-	____________________________________________________________
+	Now you have 16 tasks in the list.
 
 	____________________________________________________________
 
-	1.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
-	2.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
-	3.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	____________________________________________________________
+
+	1.[D][N] return book (by: Sunday, September 13, 2020)
+	2.[D][N] return book (by: Sunday, September 13, 2020)
+	3.[D][N] return book (by: Sunday, September 13, 2020)
 	4.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
-	5.[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
-	6.[E][Y] meet friend (at: Saturday, March 02, 2019 06:00 PM)
-	7.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
-	8.[E][N] meet friend (at: 1800 02/12/2019)
-	9.[E][N] project meeting (at: Mon 2-4pm)
+	5.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
+	6.[D][Y] submit work (by: Monday, December 02, 2019 06:00 PM)
+	7.[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
+	8.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	9.[E][N] meet friend (at: Tuesday, March 12, 2019 06:00 PM)
+	10.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
+	11.[E][N] meet friend (at: 1800 02/12/2019)
+	12.[E][N] project meeting (at: Mon 2-4pm)
+	13.[E][N] meet friend (at: Monday, September 07, 2020)
+	14.[E][N] meet friend (at: Monday, September 07, 2020)
+	15.[E][N] meet friend (at: Monday, September 07, 2020)
+	16.[E][N] meet friend (at: Monday, September 07, 2020)
 	____________________________________________________________
 
 	____________________________________________________________
@@ -325,9 +449,8 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	1.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
 	2.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
-	3.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
-	4.[D][N] submit work (by: Monday, December 02, 2019 06:00 PM)
-	5.[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
+	3.[D][Y] submit work (by: Monday, December 02, 2019 06:00 PM)
+	4.[D][N] submit work (by: Tuesday, March 12, 2019 06:00 PM)
 	____________________________________________________________
 
 	____________________________________________________________
