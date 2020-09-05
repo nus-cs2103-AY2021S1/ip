@@ -21,7 +21,7 @@ public class ToDos extends Task {
      */
     @Override
     public String toString() {
-        String doneIndicator = this.isDone ? "[\u2713]" : "[\u2718]";
+        String doneIndicator = getDoneIndicator();
         return "[T]" + doneIndicator + " " + this.task;
     }
 

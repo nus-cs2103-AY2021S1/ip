@@ -49,12 +49,23 @@ public class Events extends Task {
      */
     @Override
     public String toString() {
-        String doneIndicator = this.isDone ? "[\u2713]" : "[\u2718]";
+        String doneIndicator = getDoneIndicator();
+        String date = generateDateString();
+        String time = generateTimeString();
+        assert !time.equals("");
+
+        return "[E]" + doneIndicator + " " + this.task + " (at: " + date + ", " + time + ")";
+    }
+
+    private String generateDateString() {
         int dayOfMonth = this.date.getDayOfMonth();
         String month = this.date.getMonth().toString();
         int year = this.date.getYear();
-        String date = dayOfMonth + " " + month + " " + year;
-        String time = "";
+        return dayOfMonth + " " + month + " " + year;
+    }
+
+    private String generateTimeString() {
+        String time;
         if (this.time < 100) {
             time = "12" + this.time + "am";
         } else if (this.time < 1200) {
@@ -62,8 +73,7 @@ public class Events extends Task {
         } else {
             time = (this.time - 1200) + "pm";
         }
-
-        return "[E]" + doneIndicator + " " + this.task + " (at: " + date + ", " + time + ")";
+        return time;
     }
 
     /**

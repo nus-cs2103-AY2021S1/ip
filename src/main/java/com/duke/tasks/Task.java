@@ -5,6 +5,9 @@ package com.duke.tasks;
  */
 
 public abstract class Task {
+    protected static final String COMPLETED_INDICATOR = "[\u2713]";
+    protected static final String INCOMPLETE_INDICATOR = "[\u2718]";
+
     protected String task;
     protected boolean isDone;
 
@@ -76,6 +79,10 @@ public abstract class Task {
                 + ":"
                 + input.substring(input.indexOf(" "))
                 + ")";
+    }
+
+    protected String getDoneIndicator() {
+        return this.isDone ? COMPLETED_INDICATOR : INCOMPLETE_INDICATOR;
     }
 
     /**

@@ -40,30 +40,30 @@ public class Ui {
     }
 
     private void reply() {
-        Ui.sectionize();
+
         System.out.println("\tGot it. I've added this task: ");
         System.out.println("\t\t" + this.taskList.getList().get(this.taskList.size() - 1).toString());
         System.out.println("\tNow you have " + this.taskList.size() + " tasks in the list.");
-        Ui.sectionize();
+
     }
 
     private void listItems() {
-        Ui.sectionize();
+
         System.out.println("\tHere are the tasks in your list:");
         int counter = 1;
         for (int i = 0; i < this.taskList.size(); i++) {
             System.out.println("\t" + counter + "." + this.taskList.getItem(i).toString());
             counter++;
         }
-        Ui.sectionize();
+
     }
 
     private void sayBye() {
         try {
             Storage.saveListToFile(taskList);
-            Ui.sectionize();
+
             System.out.println("\tBye. Hope to see you again soon!");
-            Ui.sectionize();
+
         } catch (IOException e) {
             System.out.println("Sorry! The file failed to save. Please try again.");
         }
@@ -71,24 +71,24 @@ public class Ui {
 
     private void markDone(int index) {
         this.taskList.setDone(index);
-        Ui.sectionize();
+
         System.out.println("\tNice! I've marked this task as done: ");
         System.out.println("\t" + this.taskList.getItem(index).toString());
-        Ui.sectionize();
+
     }
 
     private void remove(int index) {
         try {
             Task task = this.taskList.remove(index);
-            Ui.sectionize();
+
             System.out.println("\tNoted. I've removed this task: ");
             System.out.println("\t\t" + task.toString());
             System.out.println("\tNow you have " + this.taskList.size() + " tasks in the list.");
-            Ui.sectionize();
+
         } catch (IndexOutOfBoundsException e) {
-            Ui.sectionize();
+
             System.out.println("\t☹ OOPS!!! I'm sorry, this task does not exist in your list!");
-            Ui.sectionize();
+
         }
     }
 
@@ -151,9 +151,9 @@ public class Ui {
                     throw new DukeException(Ui.errorMessage());
                 }
             } catch (DukeException e) {
-                Ui.sectionize();
+
                 System.out.println("\t\t" + e.getMessage());
-                Ui.sectionize();
+
             }
         }
         this.listen();
