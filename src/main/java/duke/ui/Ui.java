@@ -210,6 +210,7 @@ public class Ui {
 
     /**
      * Returns welcome message.
+     *
      * @return Welcome message.
      */
     public String getGreetings() {

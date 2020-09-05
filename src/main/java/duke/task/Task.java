@@ -6,8 +6,10 @@ package duke.task;
  * @author Audrey Felicio Anwar
  */
 public class Task {
+    protected static final String TICK = "\u2713";
+    protected static final String CROSS = "\u2718";
     protected String description;
-    protected boolean done;
+    protected boolean isDone;
 
     /**
      * Initializes a task object.
@@ -17,14 +19,14 @@ public class Task {
      */
     public Task(String description, boolean done) {
         this.description = description;
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
      * Completes a task.
      */
     public void completeTask() {
-        done = true;
+        isDone = true;
     }
 
     /**
@@ -34,7 +36,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        String symbol = (this.done ? "[\u2713] " : "[\u2718] ");
+        String symbol = (this.isDone ? String.format("[%s] ", TICK) : String.format("[%s] ", CROSS));
         return symbol + description;
     }
 
@@ -44,7 +46,7 @@ public class Task {
      * @return String that will be stored on hard disk.
      */
     public String saveToHardDisk() {
-        int isDone = done ? 1 : 0;
+        int isDone = this.isDone ? 1 : 0;
         return " | " + isDone + " | " + description;
     }
 
