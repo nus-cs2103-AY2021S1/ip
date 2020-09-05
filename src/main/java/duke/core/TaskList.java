@@ -87,13 +87,13 @@ public class TaskList {
      * @return The task list with the corresponding tasks
      */
     public TaskList findTaskWithDescription(String key) {
-        return new TaskList(
-                new ArrayList<>(
-                        tasks.stream()
-                                .filter((task) -> task.getDescription().toUpperCase().contains(key.toUpperCase()))
-                                .collect(Collectors.toList())
-                )
-        );
+        ArrayList<Task> list = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i = i + 1) {
+            if (tasks.get(i).getDescription().contains(key)) {
+                list.add(tasks.get(i));
+            }
+        }
+        return new TaskList(list);
     }
 
     /**
