@@ -60,7 +60,7 @@ public class AddComplexTaskCommandTests extends CommandTests {
         AddComplexTaskCommand cmd1 = new AddComplexTaskCommand("", TaskType.EVENT);
         AddComplexTaskCommand cmd2 = new AddComplexTaskCommand("/at 2-4pm", TaskType.EVENT);
         AddComplexTaskCommand cmd3 = new AddComplexTaskCommand("/by 2-4pm", TaskType.DEADLINE);
-        // Test
+
         assertThrows(InvalidEventException.class, () -> cmd1.execute(taskList, ui, storage));
         assertThrows(InvalidEventException.class, () -> cmd2.execute(taskList, ui, storage));
         assertThrows(InvalidDeadlineException.class, () -> cmd3.execute(taskList, ui, storage));
@@ -78,7 +78,7 @@ public class AddComplexTaskCommandTests extends CommandTests {
         AddComplexTaskCommand cmd4 = new AddComplexTaskCommand("meeting /by ", TaskType.DEADLINE);
         String eventMsg = "OOPS!!! Deadline / time of event is not specified";
         String deadlineMsg = "OOPS!!! Deadline / time of deadline is not specified";
-        // Test
+
         EmptyTimeException e = assertThrows(EmptyTimeException.class, () -> cmd1.execute(taskList, ui, storage));
         assertEquals(eventMsg, e.getMessage());
         EmptyTimeException e1 = assertThrows(EmptyTimeException.class, () -> cmd2.execute(taskList, ui, storage));

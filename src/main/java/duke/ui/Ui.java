@@ -14,7 +14,7 @@ public class Ui {
      * @param args Strings to concatenate.
      * @return Concatenated strings.
      */
-    private String stringFormatter(String... args) {
+    public static String stringFormatter(String... args) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < args.length - 1; i++) {
             sb.append(args[i]).append("\n");

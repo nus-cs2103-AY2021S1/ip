@@ -18,9 +18,11 @@ public class CsvConverter {
      */
     protected static Task parseToTask(String input) throws InvalidFileFormatException {
         String[] inputArr = input.split("\\s{2},", 4);
+
         if (inputArr.length < 4) {
             throw new InvalidFileFormatException();
         }
+
         String taskType = inputArr[0].toUpperCase();
         String description = inputArr[1];
         String time = inputArr[2];
@@ -47,6 +49,7 @@ public class CsvConverter {
      */
     private static boolean checkIfDone(String input) throws InvalidFileFormatException {
         assert (input != null) : "String input is invalid";
+
         String status = input.toLowerCase();
         if (status.equals("done")) {
             return true;
