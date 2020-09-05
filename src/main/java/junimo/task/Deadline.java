@@ -1,4 +1,4 @@
-package duke.task;
+package junimo.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

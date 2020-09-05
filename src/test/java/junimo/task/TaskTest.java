@@ -1,5 +1,6 @@
-package duke.task;
+package junimo.task;
 
+import junimo.task.Task;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

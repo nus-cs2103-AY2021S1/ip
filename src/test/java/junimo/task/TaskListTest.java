@@ -1,5 +1,10 @@
-package duke.task;
+package junimo.task;
 
+import junimo.task.Deadline;
+import junimo.task.Event;
+import junimo.task.Task;
+import junimo.task.TaskList;
+import junimo.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;

@@ -1,4 +1,4 @@
-package duke.task;
+package junimo.task;
 
 /**
  * Represents a Deadline object which inherits from Task.
