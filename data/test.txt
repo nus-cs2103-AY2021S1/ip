@@ -1,5 +1,7 @@
-T | 1 | read book     
-T | 0 | sell book     
-T | 0 | eat book     
-T | 0 | drink dinner     
+T | 1 | read book                          
+T | 0 | sell book                          
+T | 0 | eat book                          
+T | 0 | drink dinner                          
 E | 0 | drink lunch | 2019-12-19 18:00 
+T | 0 | study                    
+T | 0 | jump book                 
