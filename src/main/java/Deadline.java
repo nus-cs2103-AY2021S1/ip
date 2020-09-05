@@ -14,7 +14,7 @@ public class Deadline extends Task {
             throws WrongUsageException {
         super(title);
         this.name = "deadline";
-        this.usage = "deadline [TaskToBeDone] /by [DD/MM/YYYY] [HH:MM]";
+        this.usage = "\ndeadline [TaskToBeDone] /by [DD/MM/YYYY] [HH:MM]";
         this.description = "Stores a task in the list marked as a deadline";
         if (title.isEmpty() || preposition.isEmpty()) {
             throw new WrongUsageException(this.name, this.usage);
@@ -22,6 +22,13 @@ public class Deadline extends Task {
         this.preposition = preposition;
         this.date = date;
         this.time = time;
+        this.saveRep = "[D] " + super.toString() + " (" + preposition + ": " +
+                date + " " +
+                time + ")";
+    }
+
+    @Override
+    public void updateSaveRep(){
         this.saveRep = "[D] " + super.toString() + " (" + preposition + ": " +
                 date + " " +
                 time + ")";

@@ -24,15 +24,16 @@ public class Delete extends Command {
         try {
             idx = Integer.parseInt(listIndex) - 1;
         } catch (Exception e) {
-            throw new CustomException("Error: Please enter a valid integer!");
+            throw new CustomException("Error: Dammit Morty, give me a *BUURRRP* valid integer!");
         }
         if (idx < 0 || idx > DataStorageInterface.getSize() - 1) {
-            throw new CustomException("Error: Please enter a number " +
+            throw new CustomException("Error: Morty y-you idiot give me a number *BUURRP*" +
                     "that is in range of the task numbers");
         } else {
             Task curr = DataStorageInterface.remove(idx);
-            return String.format("Nice I have removed this task:\n\t%s\n" +
-                    "Now you have %d tasks left",curr, DataStorageInterface.getTasksNotDone());
+            return String.format("Wow Morty look at you go huh just deleting things like:\n%s\n" +
+                    "Now you have just another %d meaningless things to do",
+                    curr, DataStorageInterface.getTasksNotDone());
         }
     }
 }

@@ -12,6 +12,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public void updateSaveRep(){
+        this.saveRep = "[T] " + super.toString();
+    }
+
+    @Override
     public String toString() {
         return "[T] " + super.toString();
     }
