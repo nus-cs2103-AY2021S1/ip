@@ -22,9 +22,10 @@ public class Deadline extends Task {
         try {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Datetime could not be recognised. Use yyyy-mm-dd format e.g. 2019-10-15");
+            throw new DukeException("Datetime could not be recognised.");
         }
     }
+
      /** Creates a Deadline with the specified description, completion status and deadline time.
       *
       * @param description the description of the task.
@@ -37,7 +38,7 @@ public class Deadline extends Task {
         try {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Loading: Datetime could not be recognised. Use yyyy-mm-dd format e.g. 2019-10-15");
+            throw new DukeException("Datetime could not be recognised. Use yyyy-mm-dd format e.g. 2019-10-15");
         }
     }
 

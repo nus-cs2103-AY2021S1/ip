@@ -67,6 +67,7 @@ public class Duke {
 
     /**
      * Runs the program with each of the strings in the argument. For testing purposes.
+     *
      * @param input test commands for Duke to carry out.
      */
     public void testRun(String[] input) {

@@ -1,10 +1,16 @@
 package duke;
 
+import com.joestelmach.natty.DateGroup;
 import duke.command.*;
 
 import duke.exception.CommandNotFoundException;
 import duke.exception.DukeException;
 import duke.exception.IncompleteCommandException;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 public class Parser {
     /** the string input by the user to be parsed. */
@@ -64,7 +70,14 @@ public class Parser {
         if (!hasTime) {
             throw new DukeException("Please specify the time of task e.g. event finish book /by 2019-15-10");
         } else {
-            return taskMessageArr[1].split(" ", 2)[1];
+            String originalTime = taskMessageArr[1].split(" ", 2)[1];
+            com.joestelmach.natty.Parser parser = new com.joestelmach.natty.Parser();
+            List<DateGroup> groups = parser.parse(originalTime);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//            for (DateGroup dates:groups) {
+//                System.out.println(dates.getDates());
+//            }
+            return format.format(groups.get(0).getDates().get(0));
         }
     }
 
@@ -108,7 +121,7 @@ public class Parser {
         case "deadline":
             try {
                 return new AddCommand(getTaskCategory(), getTaskDescription(), getTaskTime());
-            } catch (Exception e) {
+            } catch (DukeException e) {
                 throw new DukeException("Datetime could not be recognised. Use yyyy-mm-dd format e.g. 2019-10-15");
             }
         default:
