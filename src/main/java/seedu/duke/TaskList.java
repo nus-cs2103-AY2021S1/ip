@@ -361,8 +361,7 @@ public class TaskList {
             return err.getMessage();
         }
     }
-
-
+    
     /**
      * Iterates through the arraylist of tasks and print it out.
      *
