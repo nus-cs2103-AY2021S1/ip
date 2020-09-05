@@ -13,9 +13,9 @@ import duke.command.HelpCommand;
 import java.util.Arrays;
 
 /**
- * The <code>Parser</code> is in charge of parsing raw strings of user inputs
+ * The Parser is in charge of parsing raw strings of user inputs
  * and generating the appropriate response to the inputs. For example,
- * when the user sends "exit", the parser will return an <code>ExitCommand</code>
+ * when the user sends "exit", the parser will return an ExitCommand
  * to be executed by the program.
  *
  * All methods of this class are static as this class is meant to be used functionally.
@@ -23,7 +23,8 @@ import java.util.Arrays;
 public class Parser {
 
     /**
-     * Splits the raw string using single spaces as delimiters.
+     * Splits the raw string using single spaces as delimiters to generate
+     * tokenized strings. This is required for the program to parse commands.
      * Example:
      *
      * "a user input" -> ["a", "user", "input"]
@@ -42,6 +43,7 @@ public class Parser {
      * "todo sleep for 20 hrs"          -> "sleep for 20 hrs"
      * "event lecture /at today 10:00"  -> "lecture /at today 10:00"
      *
+     * The output string will be passed onto the respective task constructors.
      * @param raw the raw string input.
      * @return the task description.
      */
@@ -51,11 +53,10 @@ public class Parser {
     }
 
     /**
-     * The parse method first grabs the command keyword from the raw user input,
-     * then creates and returns the appropriate Command object based on the keyword.
-     * If the command involves task creation, the method will get task description
-     * from the same raw input.
-     *
+     * Generates the appropriate command object based on the user input.
+     * This requires a series of string analysis such as checking of the
+     * command denoted as the first word of the user's message, and further
+     * parsing of the rest of the message accordingly.
      * @param input the raw string input.
      * @return the appropriate Command object in response to the user input.
      * @throws DukeException when task creation fails or task indices are incorrect.
@@ -81,28 +82,29 @@ public class Parser {
             } catch (NumberFormatException nfe) {
                 throw new DukeException("Invalid task number!");
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("hm? what task number have you done?");
+                return new InvalidCommand("Hm? What task number have you done?");
             }
         case "list":
             return new ListCommand();
         case "delete":
         case "remove":
             try {
-                if (parsed[1].equals("all")) {
+                String taskSelection = parsed[1];
+                if (taskSelection.equals("all")) {
                     return new RemoveCommand();
                 }
-                int i = Integer.parseInt(parsed[1]);
-                return new RemoveCommand(i);
+                int taskNumber = Integer.parseInt(taskSelection);
+                return new RemoveCommand(taskNumber);
             } catch (NumberFormatException nfe) {
                 throw new DukeException("Invalid task number!");
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("uh? what task number to remove?");
+                return new InvalidCommand("Uh? What task number to remove?");
             }
         case "find":
             try {
                 return new FindCommand(parsed[1]);
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("hm? what do you want to find?");
+                return new InvalidCommand("Hm? What do you want to find?");
             }
         case "help":
             return new HelpCommand();

@@ -20,6 +20,10 @@ import java.util.ArrayList;
  * comma-separated value (csv) format. Each time the task list in
  * the program is being updated, the Storage object will rewrite
  * the txt file.
+ *
+ * This class enables the saving and loading feature of the task list, which
+ * makes the program more usable as users do not have to rewrite all their
+ * tasks whenever the program restarts.
  */
 public class Storage {
 
@@ -47,9 +51,10 @@ public class Storage {
     }
 
     /**
-     * Reads the txt file and creates the tasks accordingly. The parsing of
-     * the csv values in the file is hardcoded since writing to the file has
-     * a standard format:
+     * Reads the txt file and creates the tasks accordingly. This allows
+     * users to retrieve their last edited task list to resume usage. Interestingly,
+     * csv files should be usable as the duke.txt replacement since the format of
+     * saving and writing are comma-separated.
      *
      *     Subtype , Description , DateTime
      *
@@ -91,10 +96,8 @@ public class Storage {
     }
 
     /**
-     * Since updating of the list may involve a combination of adding, removing,
-     * and mutating of values, the txt file is constantly being rewritten from
-     * scratch in this update method. Since task numbers are relatively low for
-     * individual users, this approach is not too detrimental to performance.
+     * Updates the task list txt file by rewriting the file using the input task list.
+     * This allows users to save their progress while using the task list.
      * @param list the list of task to be read and written into txt file.
      */
     public void update(List<Task> list) {
@@ -103,7 +106,7 @@ public class Storage {
             for (Task t: list) {
                 String toWrite = String.format("%s,%s", t.getType(), (t.getDone() ? "1" : "0"));
                 String desc = t.getDescription();
-                if ("DE".contains(t.getType())) {
+                if (List.of("D", "E").contains(t.getType())) {
                     String[] descSplit = desc.split(" / ");
                     toWrite += "," + descSplit[descSplit.length - 2];
                     toWrite += "," + descSplit[descSplit.length - 1];
