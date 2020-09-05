@@ -62,7 +62,9 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (response.equals(new Ui().showExitMessage())) {
+        boolean isExit = response.equals(new Ui().showExitMessage());
+
+        if (isExit) {
             userInput.setDisable(true);
             // Exit programme after 2 seconds
             new Thread(() -> {

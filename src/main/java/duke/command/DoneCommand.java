@@ -1,6 +1,9 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.exception.DukeException;
+import duke.logic.Parser;
 import duke.logic.Storage;
 import duke.task.Task;
 import duke.task.TaskManager;
@@ -27,22 +30,10 @@ public class DoneCommand extends Command {
 
     @Override
     public String execute(TaskManager manager, Ui ui, Storage storage) throws DukeException {
-        try {
-            int index = Integer.parseInt(taskNumber) - 1;
-            Task task = manager.getTasks().get(index);
-            manager.markTaskAsDone(task);
-            storage.saveTasks(manager.getTasks());
-            return ui.showDoneMessage(task);
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            // Invalid task number or number out of range
-            String errorMessage = "Invalid task number! "
-                    + "Please enter a valid task number :)\n";
-            throw new DukeException(errorMessage);
-        }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
+        List<Task> tasks = manager.getTasks();
+        Task task = Parser.parseTaskNumber(taskNumber, tasks);
+        manager.markTaskAsDone(task);
+        storage.saveTasks(tasks);
+        return ui.showDoneMessage(task);
     }
 }

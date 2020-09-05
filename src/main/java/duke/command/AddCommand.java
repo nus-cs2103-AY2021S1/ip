@@ -18,9 +18,4 @@ public abstract class AddCommand extends Command {
     public AddCommand(String description) {
         this.description = description;
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

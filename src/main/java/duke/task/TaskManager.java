@@ -52,11 +52,10 @@ public class TaskManager {
     /**
      * Deletes a task from the list.
      *
-     * @param index The index of the task in the list.
-     * @return The deleted task.
+     * @param task The task to be deleted.
      */
-    public Task deleteTask(int index) {
-        return tasks.remove(index);
+    public void deleteTask(Task task) {
+        tasks.remove(task);
     }
 
     /**

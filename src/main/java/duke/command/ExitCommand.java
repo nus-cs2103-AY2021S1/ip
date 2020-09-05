@@ -13,9 +13,4 @@ public class ExitCommand extends Command {
     public String execute(TaskManager manager, Ui ui, Storage storage) {
         return ui.showExitMessage();
     }
-
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }
