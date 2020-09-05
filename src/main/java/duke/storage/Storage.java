@@ -52,6 +52,9 @@ public class Storage {
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
+
+        assert tasks.size() >= 0 : "The size of tasks should be greater or equal to 0";
+        
         return tasks;
     }
 
@@ -84,6 +87,7 @@ public class Storage {
                 }
             }
             fileWriter.close();
+
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }

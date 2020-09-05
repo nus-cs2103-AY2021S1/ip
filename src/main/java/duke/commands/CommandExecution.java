@@ -30,6 +30,7 @@ public class CommandExecution {
             return ui.addTaskAlert(tasks);
 
         case DEADLINE:
+
             DeadLineCommand.executeCommand(instruction, tasks);
             return ui.addTaskAlert(tasks);
 
@@ -41,6 +42,7 @@ public class CommandExecution {
             return ui.farewell();
 
         case DONE:
+
             Task tempDone = DoneCommand.executeCommand(instruction, tasks);
             return ui.doneAlert(tempDone);
 
@@ -63,4 +65,5 @@ public class CommandExecution {
             return "";
         }
     }
+
 }
