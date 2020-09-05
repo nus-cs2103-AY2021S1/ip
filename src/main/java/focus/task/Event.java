@@ -30,6 +30,16 @@ public class Event extends Task {
     }
 
     /**
+     * Gets LocalDateTime of Event task.
+     *
+     * @return LocalDateTime at.
+     */
+    @Override
+    public LocalDateTime getDeadline() {
+        return this.at;
+    }
+
+    /**
      * Returns string format of Event.
      *
      * @return A string representation of Event.

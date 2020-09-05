@@ -30,6 +30,16 @@ public class Deadline extends Task {
     }
 
     /**
+     * Gets LocalDateTime of Deadline task.
+     *
+     * @return LocalDateTime by.
+     */
+    @Override
+    public LocalDateTime getDeadline() {
+        return this.by;
+    }
+
+    /**
      * Returns string format of Deadline.
      *
      * @return A string representation of Deadline.

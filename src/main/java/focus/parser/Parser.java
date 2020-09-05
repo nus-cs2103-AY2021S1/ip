@@ -11,6 +11,7 @@ import focus.command.ExitCommand;
 import focus.command.FindCommand;
 import focus.command.HelpCommand;
 import focus.command.ListCommand;
+import focus.command.RemindCommand;
 import focus.exception.InvalidCommandException;
 import focus.task.Deadline;
 import focus.task.Event;
@@ -43,10 +44,12 @@ public class Parser {
             command = new DeleteCommand();
         } else if (input.startsWith("done")) { // mark tasks done
             command = new DoneCommand();
-        } else if (input.equals("list")) { // list out the tasks
+        } else if (input.startsWith("list")) { // list out the tasks
             command = new ListCommand();
         } else if (input.startsWith("find")) { // find the tasks
             command = new FindCommand();
+        } else if (input.startsWith("remind")) { // reminders
+            command = new RemindCommand();
         } else if (input.equals("bye")) { // exit the bot
             return new ExitCommand();
         } else { // handle invalid inputs

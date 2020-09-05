@@ -1,6 +1,7 @@
 package focus.task;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import focus.parser.Parser;
@@ -214,6 +215,65 @@ public class TaskList {
         } else {
             return "\tSorry, there are no tasks that match your keyword!\n";
         }
+        assert !printing.isEmpty() : "Printing should not blank here.";
+        return printing;
+    }
+
+    /**
+     * Checks the tasks in task list for tasks that are due soon.
+     *
+     * @param numberOfDays Number of days user sets.
+     * @return String representation of tasks within specified time frame.
+     */
+    private String checkTasks(int numberOfDays) {
+        String printing = "";
+        int index = 1;
+        ArrayList<Task> todoList = new ArrayList<>();
+        LocalDateTime currentDate = LocalDateTime.now();
+        printing += "\tHere are the deadlines and events tasks due in " + numberOfDays + " days:";
+        for (Task task : taskList) {
+            if (task.getDeadline() != null) { // not to-do tasks
+                long daysDifference = ChronoUnit.DAYS.between(currentDate, task.getDeadline());
+                if (daysDifference < numberOfDays) {
+                    printing += "\n\t" + index + ". " + task;
+                    index++;
+                }
+            } else {
+                todoList.add(task);
+            }
+        }
+        printing += addTodoToPrint(todoList);
+        assert !printing.isEmpty() : "Printing should not blank here.";
+        return printing;
+    }
+
+    /**
+     * Adds To-Do tasks to print out.
+     *
+     * @param todoList To-Do list.
+     * @return String representation of To-Do tasks.
+     */
+    private String addTodoToPrint(ArrayList<Task> todoList) {
+        String printing = "";
+        int todoIndex = 1;
+        printing += "\n\n\tHere are the to-do tasks:";
+        for (Task task : todoList) {
+            printing += "\n\t" + todoIndex + ". " + task;
+            todoIndex++;
+        }
+        assert !printing.isEmpty() : "Printing should not blank here.";
+        return printing;
+    }
+
+    /**
+     * Reminds user of tasks within a specified time frame.
+     * If task is a To-Do task, Pocus will show it too.
+     *
+     * @param numberOfDays Number of days user sets.
+     * @return String representation of tasks within specified time frame.
+     */
+    public String remindUserOfTasksWithin(int numberOfDays) {
+        String printing = checkTasks(numberOfDays);
         assert !printing.isEmpty() : "Printing should not blank here.";
         return printing;
     }
