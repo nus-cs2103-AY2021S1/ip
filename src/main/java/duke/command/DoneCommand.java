@@ -38,6 +38,9 @@ public class DoneCommand extends Command {
         }
 
         int index = inputNumber - 1;
+        
+        assert index < tasks.size();
+        
         Task targetTask = tasks.get(index);
 
         if (targetTask.getStatus()) {
