@@ -68,10 +68,27 @@ public class Ui {
     }
 
     public void showTasks(String... tasks) {
-        String[] lines = new String[tasks.length + 1];
-        lines[0] = "Here are the tasks in your list:";
-        System.arraycopy(tasks, 0, lines, 1, tasks.length);
-        showNumbered(true, false, lines);
+        String message = "Here are the tasks in your list:";
+        if (tasks.length == 0) {
+            showFormatted(message, "\tThere are no tasks in your list.");
+        } else {
+            String[] lines = new String[tasks.length + 1];
+            lines[0] = message;
+            System.arraycopy(tasks, 0, lines, 1, tasks.length);
+            showNumbered(true, false, lines);
+        }
+    }
+
+    public void showFoundTasks(String... finds) {
+        String message = "Here are the matching tasks in your list:";
+        if (finds.length == 0) {
+            showFormatted(message, "\tThere are no matching tasks in your list.");
+        } else {
+            String[] lines = new String[finds.length + 1];
+            lines[0] = message;
+            System.arraycopy(finds, 0, lines, 1, finds.length);
+            showNumbered(true, false, lines);
+        }
     }
 
     public void showLoadingError(String message) {

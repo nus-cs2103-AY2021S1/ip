@@ -8,4 +8,5 @@ done 4
 todo borrow book
 list
 delete 3
+find book
 bye

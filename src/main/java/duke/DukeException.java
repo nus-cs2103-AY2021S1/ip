@@ -9,6 +9,10 @@ public class DukeException extends Exception {
     public static final DukeException INVALID_COMMAND_EXCEPTION = new DukeException(
             "I'm sorry, but I don't know what that means :-(");
 
+    /** A DukeException thrown when a search query is empty. */
+    public static final DukeException INVALID_QUERY_EXCEPTION = new DukeException(
+            "I'm sorry, what was it you wanted me to find?");
+
     /**
      * A DukeException thrown when the integer expected after 'done' or 'delete'
      * is missing, or cannot be parsed due to incorrect formatting in the user input.
