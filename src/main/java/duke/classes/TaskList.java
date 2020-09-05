@@ -2,6 +2,7 @@ package duke.classes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import duke.exceptions.BlahException;
 import duke.exceptions.DukeInvalidTimeException;
@@ -166,13 +167,13 @@ public class TaskList {
 
         query = query.substring(5);
         List<Task> queriedList = new ArrayList<>();
-
+        Function<String, String[]> stringSplit = str -> str.split("\\s");
         for (Task task : todoList) {
             String description = task.getDescription();
             String[] keywords;
             switch (task.getType()) {
             case TODO:
-                keywords = description.split("\\s");
+                keywords = stringSplit.apply(description);
                 for (String keyword : keywords) {
                     if (keyword.equals(query)) {
                         queriedList.add(new Todo(description, queriedList.size() + 1, task.hasDone()));
@@ -182,7 +183,7 @@ public class TaskList {
             case EVENT:
             case DEADLINE:
                 // to retrieve just the activity
-                keywords = description.substring(0, description.indexOf("/") - 1).split("\\s");
+                keywords = stringSplit.apply(description.substring(0, description.indexOf("/") - 1));
                 for (String keyword : keywords) {
                     if (keyword.equals(query)) {
                         queriedList.add(task.getType() == TaskType.DEADLINE

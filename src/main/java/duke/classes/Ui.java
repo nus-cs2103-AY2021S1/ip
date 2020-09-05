@@ -48,10 +48,10 @@ public class Ui {
             //System.out.println("Sorry. No matches found!");
         } else {
             StringBuilder tasklist = new StringBuilder();
-            for (Task task : list) {
+            list.forEach((task) -> {
                 tasklist.append(task.getStatusWithIndex()).append("\n");
                 System.out.println(task.getStatusWithIndex());
-            }
+            });
             return tasklist.toString();
         }
     }
