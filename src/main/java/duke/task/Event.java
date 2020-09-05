@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 import duke.command.InvalidCommandException;
 import duke.command.SnoozeCommand;
 import duke.component.Parser;
+import duke.component.Storage;
 import duke.component.Ui;
 
 /**
@@ -182,10 +183,10 @@ public class Event extends TimedTask {
     @Override
     public String output() {
         if (atTime != null) {
-            return "E" + super.output() + " | At: "
-                    + atTime.format(Parser.DATE_TIME_INPUT_FORMAT) + "\n";
+            return "E" + super.output() + Storage.splitter
+                    + atTime.format(Parser.DATE_TIME_INPUT_FORMAT) + Storage.splitter + repeat + "\n";
         } else {
-            return "E" + super.output() + " | At: " + tentativeSlotsStr + "\n";
+            return "E" + super.output() + Storage.splitter + tentativeSlotsStr + "\n";
         }
     }
 

@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import duke.command.InvalidCommandException;
 import duke.command.SnoozeCommand;
 import duke.component.Parser;
+import duke.component.Storage;
 import duke.component.Ui;
 
 /**
@@ -38,7 +39,7 @@ public class Deadline extends TimedTask {
      */
     public Deadline(String fullDescription) throws InvalidCommandException {
         super("");
-        String[] info = fullDescription.split(" &&& ");
+        String[] info = fullDescription.split(Storage.splitter);
         if (info.length != 3) {
             throw new InvalidCommandException(Parser.INVALID_FILE_EXCEPTION);
         } else {
@@ -130,7 +131,7 @@ public class Deadline extends TimedTask {
 
     @Override
     public String output() {
-        return "D" + super.output() + " | By: " + byTime + "\n";
+        return "D" + super.output() + Storage.splitter + byTime + Storage.splitter + repeat + "\n";
     }
 
     @Override
