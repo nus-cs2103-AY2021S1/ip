@@ -20,6 +20,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 public class DukeTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
