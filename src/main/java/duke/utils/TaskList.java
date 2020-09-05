@@ -2,6 +2,7 @@ package duke.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.task.Task;
 
@@ -106,8 +107,11 @@ public class TaskList {
             if (task.getDescription().contains(keyword)) {
                 containsKeywords.add(task);
             }
+
         }
 
-        return containsKeywords;
+        return list.stream().filter(x -> x.getDescription().contains(keyword)).collect(Collectors.toList());
+
+//        return containsKeywords;
     }
 }
