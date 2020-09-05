@@ -2,6 +2,7 @@ package duke.core;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import duke.task.Task;
 
@@ -70,13 +71,13 @@ public class TaskList {
      * @return The task list with the corresponding tasks
      */
     public TaskList findTaskAt(LocalDate localDate) {
-        ArrayList<Task> list = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i = i + 1) {
-            if (tasks.get(i).isAt(localDate)) {
-                list.add(tasks.get(i));
-            }
-        }
-        return new TaskList(list);
+        return new TaskList(
+                new ArrayList<>(
+                        tasks.stream()
+                                .filter((task) -> task.isAt(localDate))
+                                .collect(Collectors.toList())
+                )
+        );
     }
 
     /**
@@ -86,13 +87,13 @@ public class TaskList {
      * @return The task list with the corresponding tasks
      */
     public TaskList findTaskWithDescription(String key) {
-        ArrayList<Task> list = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i = i + 1) {
-            if (tasks.get(i).getDescription().contains(key)) {
-                list.add(tasks.get(i));
-            }
-        }
-        return new TaskList(list);
+        return new TaskList(
+                new ArrayList<>(
+                        tasks.stream()
+                                .filter((task) -> task.getDescription().toUpperCase().contains(key.toUpperCase()))
+                                .collect(Collectors.toList())
+                )
+        );
     }
 
     /**
