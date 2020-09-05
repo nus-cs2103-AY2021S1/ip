@@ -8,7 +8,7 @@ import duke.command.InvalidCommandException;
 /**
  * Represents a deadline task that consists of a description and a date as the deadline for completing the task.
  */
-public class Deadline extends Task {
+public class Deadline extends TimedTask {
     private final LocalDate byTime;
 
     /**

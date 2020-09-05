@@ -11,7 +11,7 @@ import duke.component.Ui;
 /**
  * Represents an event task that consists of a description and a datetime as the happening time of the event.
  */
-public class Event extends Task {
+public class Event extends TimedTask {
     private LocalDateTime atTime;
     private final LocalDateTime[] tentativeSlots;
     private final String tentativeSlotsStr;
