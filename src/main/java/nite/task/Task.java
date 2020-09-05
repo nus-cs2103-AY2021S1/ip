@@ -1,11 +1,17 @@
 package nite.task;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a Task created by the user.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected final DateTimeFormatter inputDateTimePattern =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    protected final DateTimeFormatter displayDateTimePattern =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     /**
      * Default constructor for a Task.
@@ -54,6 +60,12 @@ public class Task {
         return "";
     }
 
+    /**
+     * Checks if a task contains the given keyword in its description.
+     *
+     * @param keyword Word to find in task description.
+     * @return True if description contains keyword, false otherwise.
+     */
     public boolean hasKeyword(String keyword) {
         assert !keyword.isEmpty() : "Keyword should not be empty.";
         return description.contains(keyword);

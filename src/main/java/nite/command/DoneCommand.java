@@ -11,7 +11,7 @@ import nite.ui.Ui;
  */
 public class DoneCommand extends Command {
 
-    private int taskNumber;
+    private final int taskNumber;
 
     /**
      * Creates a DoneCommand.

@@ -9,7 +9,7 @@ import nite.exception.NiteException;
  */
 public class TaskList {
 
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Creates an empty TaskList.
@@ -30,7 +30,7 @@ public class TaskList {
             try {
                 this.tasks.add(dataToTask(taskString));
             } catch (NiteException ignored) {
-                continue;
+                // Line in data which cannot be converted to Task is ignored.
             }
         }
     }
@@ -119,18 +119,19 @@ public class TaskList {
      */
     public String findTasks(String keyword) {
         assert !keyword.isEmpty() : "Keyword should not be empty.";
-        String tasks = "";
+        String tasksString = "";
         Task t;
         int numMatch = 0;
-        for (int i = 0; i < this.tasks.size(); i++) {
-            t = this.tasks.get(i);
-            if (t.hasKeyword(keyword)) {
-                numMatch++;
-                tasks += String.format("  %d.%s%n", numMatch, t);
-                assert numMatch > 0 : "Matching tasks should be more than 0 after adding task.";
+        for (Task task : tasks) {
+            t = task;
+            if (!t.hasKeyword(keyword)) {
+                continue;
             }
+            numMatch++;
+            tasksString += String.format("  %d.%s%n", numMatch, t);
+            assert numMatch > 0 : "Matching tasks should be more than 0 after adding task.";
         }
-        return tasks;
+        return tasksString;
     }
 
     /**
