@@ -48,117 +48,118 @@ public class Parser {
             output += "Now you have " + taskList.getSize() + " tasks in the list.\n";
 
         } else if (input.indexOf("find ") == 0) {
-
-            if (input.contains("/on ")) {
-
-                int index = input.indexOf("/on ");
-
-                String dateString = input.substring(index + 4);
-
-                try {
-                    LocalDate date = LocalDate.parse(dateString);
-
-                    output += taskList.printList((task) -> {
-
-                        if (task instanceof Event && ((Event) task).getDate().equals(date)) {
-                            return true;
-                        }
-
-                        if (task instanceof Deadline && ((Deadline) task).getDate().equals(date)) {
-                            return true;
-                        }
-
-                        return false;
-                    });
-
-
-                } catch (DateTimeException e) {
-                    throw new DukeException("Enter date in the following format: YYYY-MM-DD");
-                }
-
-            } else if (input.length() > 5) {
-
-                String query = input.substring(5);
-                output += taskList.printList((task) -> task.contains(query));
-
-            } else {
-                throw new DukeException("Enter a valid find command");
-            }
-
+            output = find(input, output, taskList, ui);
         } else {
-
-            if (input.indexOf("todo ") == 0 && input.length() > 5) {
-
-                taskList.addTask(new ToDo(input.substring(5)));
-
-            } else if (input.indexOf("deadline ") == 0) {
-
-                int deadlineIndex = input.indexOf("/by ");
-
-                if (deadlineIndex != -1 && input.length() > deadlineIndex + 4) {
-
-                    String datetime = input.substring(deadlineIndex + 4);
-
-                    try {
-                        if (datetime.contains(" ")) {
-                            String[] datetimeArr = datetime.split(" ");
-                            taskList.addTask(
-                                    new Deadline(
-                                            input.substring(9, deadlineIndex - 1),
-                                            datetimeArr[0],
-                                            datetimeArr[1]));
-                        } else {
-                            taskList.addTask(
-                                    new Deadline(
-                                            input.substring(9, deadlineIndex - 1),
-                                            datetime,
-                                            ""));
-                        }
-                    } catch (DateTimeException e) {
-                        throw new DukeException("Enter date in the following format: YYYY-MM-DD HH:mm(optional) "
-                                + "(e.g. 2020-06-18 or 2020-07-20 18:00)");
-                    }
-                }
-
-            } else if (input.indexOf("event ") == 0) {
-
-                int timeIndex = input.indexOf("/at ");
-
-                if (timeIndex != -1 && input.length() > timeIndex + 4) {
-
-                    String datetime = input.substring(timeIndex + 4);
-
-                    try {
-                        if (datetime.contains(" ")) {
-                            String[] datetimeArr = datetime.split(" ");
-                            taskList.addTask(
-                                    new Event(
-                                            input.substring(6, timeIndex - 1),
-                                            datetimeArr[0],
-                                            datetimeArr[1]));
-                        } else {
-                            taskList.addTask(
-                                    new Event(
-                                            input.substring(6, timeIndex - 1),
-                                            datetime,
-                                            ""));
-                        }
-                    } catch (DateTimeException e) {
-                        throw new DukeException("Enter date in the following format: YYYY-MM-DD HH:mm(optional) "
-                                + "(e.g. 2020-06-18 or 2020-07-20 18:00)");
-                    }
-                }
-
-            } else {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-
-            output += "Got it. I've added this task:\n";
-            output += taskList.printTask(taskList.getSize() - 1);
-            output += "Now you have " + taskList.getSize() + " tasks in the list.\n";
+            output = addToList(input, output, taskList, ui);
         }
 
         output += ui.getLine();
+
+        return output;
+    }
+
+    private static String find(String input, String output, TaskList taskList, Ui ui) throws DukeException {
+
+        if (input.contains("/on ")) {
+
+            int index = input.indexOf("/on ");
+
+            String dateString = input.substring(index + 4);
+
+            try {
+                LocalDate date = LocalDate.parse(dateString);
+
+                output += taskList.printList((task) -> {
+                    return (task instanceof Event && ((Event) task).getDate().equals(date))
+                            || (task instanceof Deadline && ((Deadline) task).getDate().equals(date));
+                });
+            } catch (DateTimeException e) {
+                throw new DukeException("Enter date in the following format: YYYY-MM-DD");
+            }
+
+        } else if (input.length() > 5) {
+
+            String query = input.substring(5);
+            output += taskList.printList((task) -> task.contains(query));
+
+        } else {
+            throw new DukeException("Enter a valid find command");
+        }
+
+        return output;
+    }
+
+    private static String addToList(String input, String output, TaskList taskList, Ui ui) throws DukeException {
+
+        Task task = null;
+
+        if (input.indexOf("todo ") == 0 && input.length() > 5) {
+
+            task = new ToDo(input.substring(5));
+
+        } else if (input.indexOf("deadline ") == 0) {
+
+            int deadlineIndex = input.indexOf("/by ");
+
+            if (deadlineIndex != -1 && input.length() > deadlineIndex + 4) {
+
+                String datetime = input.substring(deadlineIndex + 4);
+
+                try {
+                    if (datetime.contains(" ")) {
+                        String[] datetimeArr = datetime.split(" ");
+                        task = new Deadline(
+                                input.substring(9, deadlineIndex - 1),
+                                datetimeArr[0],
+                                datetimeArr[1]);
+                    } else {
+                        task = new Deadline(
+                                input.substring(9, deadlineIndex - 1),
+                                datetime,
+                                "");
+                    }
+                } catch (DateTimeException e) {
+                    throw new DukeException("Enter date in the following format: YYYY-MM-DD HH:mm(optional) "
+                            + "(e.g. 2020-06-18 or 2020-07-20 18:00)");
+                }
+            }
+
+        } else if (input.indexOf("event ") == 0) {
+
+            int timeIndex = input.indexOf("/at ");
+
+            if (timeIndex != -1 && input.length() > timeIndex + 4) {
+
+                String datetime = input.substring(timeIndex + 4);
+
+                try {
+                    if (datetime.contains(" ")) {
+                        String[] datetimeArr = datetime.split(" ");
+                        task = new Event(
+                                input.substring(6, timeIndex - 1),
+                                datetimeArr[0],
+                                datetimeArr[1]);
+                    } else {
+                        task = new Event(
+                                input.substring(6, timeIndex - 1),
+                                datetime,
+                                "");
+                    }
+                } catch (DateTimeException e) {
+                    throw new DukeException("Enter date in the following format: YYYY-MM-DD HH:mm(optional) "
+                            + "(e.g. 2020-06-18 or 2020-07-20 18:00)");
+                }
+            }
+        }
+
+        if (task != null) {
+            taskList.addTask(task);
+            output += "Got it. I've added this task:\n";
+            output += task + "\n";
+            output += "Now you have " + taskList.getSize() + " tasks in the list.\n";
+        } else {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
 
         return output;
     }
