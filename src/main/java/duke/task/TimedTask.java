@@ -74,4 +74,16 @@ public abstract class TimedTask extends Task {
             return datePointer.isBefore(date2);
         }
     }
+
+    protected void markAsDone(LocalDate initial) throws InvalidCommandException {
+        if (repeat == 0) {
+            super.markAsDone();
+            lastDone = LocalDate.now();
+        } else if (!isDone) {
+            isDone = true;
+            lastDone = initial;
+        } else {
+            lastDone = lastDone.plusDays(repeat);
+        }
+    }
 }

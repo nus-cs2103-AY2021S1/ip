@@ -64,6 +64,7 @@ public class ActualStorage implements Storage {
                 toAdd = new ToDo("error");
             }
         }
+        System.out.println(toAdd);
         return toAdd;
     }
 

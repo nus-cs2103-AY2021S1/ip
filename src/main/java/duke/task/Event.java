@@ -186,12 +186,21 @@ public class Event extends TimedTask {
     }
 
     @Override
+    public void markAsDone() throws InvalidCommandException {
+        if (atTime == null) {
+            throw new InvalidCommandException(Parser.DONE_UNFIXED_EVENT_EXCEPTION);
+        } else {
+            markAsDone(atTime.toLocalDate());
+        }
+    }
+
+    @Override
     public String outputToFile() {
         if (atTime != null) {
             return "E" + super.outputToFile() + Storage.splitter
-                    + atTime.format(Parser.DATE_TIME_INPUT_FORMAT) + Storage.splitter + repeat + "\n";
+                    + atTime.format(Parser.DATE_TIME_INPUT_FORMAT) + Storage.splitter + repeat + lastDoneMessage() + "\n";
         } else {
-            return "E" + super.outputToFile() + Storage.splitter + tentativeSlotsStr + lastDoneMessage() + "\n";
+            return "E" + super.outputToFile() + Storage.splitter + tentativeSlotsStr + "\n";
         }
     }
 

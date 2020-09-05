@@ -84,6 +84,8 @@ public class Parser {
             + "'repeat <task_index of timed task> [daily/weekly/every {n} days]'.";
     public static final String REPEAT_UNFIXED_EVENT_EXCEPTION = "Cannot repeat an event with multiple tentative slots.";
     public static final String INVALID_FILE_EXCEPTION = "The resource file format is incorrect.";
+    public static final String DONE_UNFIXED_EVENT_EXCEPTION =
+            "Cannot mark an event as done with multiple tentative slots.";
     public static final DateTimeFormatter DATE_TIME_INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     public static final DateTimeFormatter DATE_TIME_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("hh:mm a   MMM d yyyy");
     public static final DateTimeFormatter DATE_INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
