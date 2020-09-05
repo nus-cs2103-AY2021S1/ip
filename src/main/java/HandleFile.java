@@ -68,6 +68,7 @@ public class HandleFile {
 
             for (int i = 0; i < list.size(); i++) {
                 Task task = list.get(i);
+                assert list.get(i).id > 0 : "item id cannot be <= 0!";
                 String taskText = task.toString();
                 bw.write(taskText);
                 bw.write("\n");
