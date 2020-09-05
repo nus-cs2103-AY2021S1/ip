@@ -48,7 +48,7 @@ public class DeleteCommand extends Command {
                 Task toRemove = tasks.getTask(index - 1);
                 tasks.removeTask(index - 1);
                 storage.saveToFile(tasks);
-                return ui.printDeleteTask(toRemove, tasks.getListSize());
+                return ui.showDeletedTask(toRemove, tasks.getListSize());
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No Task ID provided! Please input the ID of the task you wish to delete.";

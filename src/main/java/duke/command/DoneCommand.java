@@ -46,7 +46,7 @@ public class DoneCommand extends Command {
             } else {
                 tasks.completeTask(index - 1);
                 storage.saveToFile(tasks);
-                return ui.printDoneTask(tasks.getTask(index - 1));
+                return ui.showCompletedTask(tasks.getTask(index - 1));
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";

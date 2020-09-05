@@ -57,7 +57,7 @@ public class DeadlineCommand extends Command {
             Task toAdd = new Deadline(deadlineInfo[0], deadlineDate, deadlineTime);
             tasks.addTask(toAdd);
             storage.saveToFile(tasks);
-            return ui.printNewTask(toAdd, tasks.getListSize());
+            return ui.showNewTask(toAdd, tasks.getListSize());
         } catch (DateTimeParseException | ArrayIndexOutOfBoundsException ex) {
             String err = "The task date format is incorrect. \n"
                     + "Please input a valid date using the format: 'dd/mm/yyyy hh:mm'. For eg, 10/8/2020 18:00";

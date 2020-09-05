@@ -28,6 +28,7 @@ public class Ui {
      * is initialised.
      */
     public static String showWelcome() {
+
         /**
         String text = "      ______    ______           __      ___            __     _______  \n"
                 + "      |__  __|   |  ___  |         |    \\   |     |           /_ \\    |   ___|   \n"
@@ -48,8 +49,6 @@ public class Ui {
                 + "  \nI am a task manager bot that will keep track of all your tasks. \n"
                 + "  \nTo view a list of all my commands, input 'commands' \n"
                 + "  \nNow that you are familiar with the commands, how may I assist you today?";
-
-        // this.showLine();
         return (greeting);
     }
 
@@ -63,13 +62,13 @@ public class Ui {
     }
 
     /**
-     * Prints a reply when a new task has been successfully created.
+     * Prints a reply when a new task has been successfully created and added.
      *
      * @param task Task that was created.
      * @param listSize Current number of tasks in the user's list of tasks.
      * @return String containing a reply for successful task creation.
      */
-    public String printNewTask(Task task, int listSize) {
+    public String showNewTask(Task task, int listSize) {
         String message = "Success! This task has been added:\n" + task.toString()
                 + "\nYou have " + listSize + " tasks in your list now.";
         return message;
@@ -82,7 +81,7 @@ public class Ui {
      * @param listSize Current number of tasks in the user's list of tasks.
      * @return String containing a reply for successful task deletion.
      */
-    public String printDeleteTask(Task task, int listSize) {
+    public String showDeletedTask(Task task, int listSize) {
         String message = "Found it! This task has been successfully deleted: \n"
                 + task.toString() + "\nYou have " + listSize + " tasks in your list now.";
         return message;
@@ -94,7 +93,7 @@ public class Ui {
      * @param task Task which was marked as done.
      * @return String containing a reply for when a task is marked as done.
      */
-    public String printDoneTask(Task task) {
+    public String showCompletedTask(Task task) {
         String message = "Nice! I've marked this task as done:\n" + task.toString();
         return message;
     }
@@ -105,7 +104,7 @@ public class Ui {
      * @param tasks List of tasks.
      * @return String containing the list of tasks.
      */
-    public String printTasks(List<Task> tasks) {
+    public String showTaskList(List<Task> tasks) {
         StringBuilder message;
         if (tasks.isEmpty()) {
             message = new StringBuilder("No tasks were found!");
@@ -125,22 +124,23 @@ public class Ui {
      *
      * @return String containing Duke functions and commands.
      */
-    public String printFunctions() {
-        String commands = "  Below is a list of all the commands for my functions: \n\n"
-                + "  1. Create a new task: \n\n"
-                + "\t  1.1 Todo: 'todo' {task description}. For eg, todo eat \n"
-                + "\t  1.2 Deadline: 'deadline' {task description} '/by' {deadline date}.\n\t\t"
-                + "  Input the date using the format: 'dd/mm/yyyy hh:mm'. "
-                + "For eg, deadline return book /by 12/2/2020 13:00 \n"
-                + "\t  1.3 Event: 'event' {task description} '/at' {event date}.\n\t\t"
-                + "  Input the date using the format: 'dd/mm/yyyy hh:mm'. "
-                + "For eg, event project meeting /at 1/3/2020 12:00 \n"
-                + "  \n  2. To display all tasks in your list: 'list' \n"
-                + "  \n  3. To mark a task as completed: 'done' {task ID}. For eg, 'done 2' \n"
-                + "  \n  4. To delete a task: 'delete' {task ID}. For eg, 'delete 2' \n"
-                + "  \n  6. To search for a task by date: 'find_by_date' {date}. \n"
-                + "     Input the date using the format: 'dd/mm/yyyy'. For eg, 'find_by_date 12/2/2020' \n"
-                + "  \n  5. To end this chat: 'bye' \n";
+    public String showFunctions() {
+        String commands = "Below is a list of all the commands for my functions: \n\n"
+                + "1. Create a new task: \n\n"
+                + "1.1 Todo: 'todo <task description>'. For eg, todo eat \n\n"
+                + "1.2 Deadline: 'deadline <task description> /by <deadline date>'. "
+                + "Input the date using the format: 'dd/mm/yyyy hh:mm'. "
+                + "For eg, deadline return book /by 12/2/2020 13:00 \n\n"
+                + "1.3 Event: 'event <task description> /at <event date>'. "
+                + "Input the date using the format: 'dd/mm/yyyy hh:mm'. "
+                + "For eg, event project meeting /at 1/3/2020 12:00 \n\n"
+                + "2. To display all tasks in your list: 'list' \n\n"
+                + "3. To mark a task as completed: 'done <task ID>'. For eg, 'done 2' \n\n"
+                + "4. To delete a task: 'delete <task ID>'. For eg, 'delete 2' \n\n"
+                + "5. To search for a task by keyword: 'find <keyword>'. For eg, find book\n\n"
+                + "6. To search for a task by date: 'find_by_date <date>'. "
+                + "Input the date using the format: 'dd/mm/yyyy'. For eg, 'find_by_date 12/2/2020' \n\n"
+                + "7. To end this chat: 'bye'. ";
         return commands;
     }
 

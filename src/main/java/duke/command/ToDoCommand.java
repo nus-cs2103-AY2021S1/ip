@@ -44,7 +44,7 @@ public class ToDoCommand extends Command {
         Task toAdd = new Todo(todoInfo.trim());
         tasks.addTask(toAdd);
         storage.saveToFile(tasks);
-        return ui.printNewTask(toAdd, tasks.getListSize());
+        return ui.showNewTask(toAdd, tasks.getListSize());
     }
 
     /**

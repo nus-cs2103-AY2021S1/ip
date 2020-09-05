@@ -52,11 +52,11 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "JonasBot"
     archiveClassifier = null
 }
 

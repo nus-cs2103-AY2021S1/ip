@@ -1,2 +1,0 @@
-T | 0 | finish ip
-E | 0 | start tp | 2020-09-01 12:00
