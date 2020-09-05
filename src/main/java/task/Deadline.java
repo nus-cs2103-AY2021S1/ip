@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter;
  * Represents the Deadline task
  */
 public class Deadline extends Task {
-    private LocalDateTime by;
+    private LocalDateTime deadlineBy;
 
-    public Deadline(String description, LocalDateTime by, boolean isDone) {
+    public Deadline(String description, LocalDateTime deadlineBy, boolean isDone) {
         super(description, isDone);
-        this.by = by;
+        this.deadlineBy = deadlineBy;
     }
 
     /**
@@ -20,12 +20,12 @@ public class Deadline extends Task {
      * @return Date and time of the deadline.
      */
     public LocalDateTime getTiming() {
-        return this.by;
+        return this.deadlineBy;
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
+                + this.deadlineBy.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
     }
 }
