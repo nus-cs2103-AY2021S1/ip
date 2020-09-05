@@ -27,8 +27,7 @@ public class Parser {
         if (!input.contains("todo") && !input.contains("deadline") && !input.contains("event")
                 && !input.contains("done") && !input.contains("bye") && !input.contains("list")
                 && !input.contains("delete") && !input.contains("find")) {
-            Ui.printLines();
-            throw new DukeException(INVALID_INPUT + LINES);
+            throw new DukeException(LINES + INVALID_INPUT + LINES);
         }
     }
 
@@ -39,7 +38,7 @@ public class Parser {
      */
     public void readCliInput(String input) {
         try {
-            this.checkForInvalidInput(input);
+            checkForInvalidInput(input);
             if (input.equals("list")) {
                 showTaskList();
             } else if (input.contains("done")) {
@@ -68,9 +67,9 @@ public class Parser {
      */
     public String readGuiInput(String input) {
         try {
-            this.checkForInvalidInput(input);
+            checkForInvalidInput(input);
             if (input.equals("list")) {
-                return this.showTaskListToString();
+                return showTaskListToString();
             } else if (input.contains("done")) {
                 return taskLists.completeTaskToString(input);
             } else if (input.contains("delete")) {
