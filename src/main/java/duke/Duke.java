@@ -2,10 +2,11 @@ package duke;
 
 
 import java.io.InputStream;
-import java.util.Scanner;
 
 import duke.commands.Command;
 import duke.exceptions.DukeException;
+
+import javafx.application.Platform;
 
 
 /**
@@ -17,6 +18,8 @@ public class Duke {
 
     private final DukeList taskList = new DukeList();
     private final Ui ui;
+
+    private boolean shouldQuit = false;
 
 
     /**
@@ -110,81 +113,93 @@ public class Duke {
     }
 
 
-    /**
-     * Logic framework of Duke.
-     */
-    private void dukeLogic() {
-        boolean shouldQuit = false;
-        String msgInput;
+    private String dukeLogicHelper(String msgInput) {
 
         String[] msgArr;
         Command keywordCommand;
 
+        msgArr = Parser.parseLineToArray(msgInput);
+        keywordCommand = Parser.getCommand(msgInput);
+
+        String statusMessage = null;
+
+        switch (keywordCommand) {
+
+        case INVALID:
+            statusMessage = this.ui.printErrorMessage(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", msgArr[0]));
+            break;
+
+        case LIST:
+            statusMessage = this.taskList.toString();
+            this.ui.printMessage(statusMessage);
+            break;
+
+        case DONE:
+            try {
+                statusMessage = this.markAsDone(msgArr);
+                this.ui.printMessage(statusMessage);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                statusMessage = this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
+            } catch (IndexOutOfBoundsException e) {
+                statusMessage = this.ui.printInvalidIndexErrorMsg();
+            }
+            break;
+
+        case DELETE:
+            try {
+                statusMessage = this.delete(msgArr);
+                this.ui.printMessage(statusMessage);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                statusMessage = this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
+            } catch (IndexOutOfBoundsException e) {
+                statusMessage = this.ui.printInvalidIndexErrorMsg();
+            }
+            break;
+
+        case FIND:
+            try {
+                statusMessage = this.find(msgArr);
+                this.ui.printMessage(statusMessage);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                statusMessage = this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
+            } catch (IndexOutOfBoundsException e) {
+                statusMessage = this.ui.printInvalidIndexErrorMsg();
+            }
+            break;
+
+        case TASK:
+            try {
+                statusMessage = this.taskList.add(msgInput);
+                this.ui.printMessage(statusMessage);
+            } catch (DukeException e) {
+                statusMessage = this.ui.printErrorMessage(e.getMessage());
+            }
+            break;
+
+        case TERMINATE:
+            // Fallthrough
+        default:
+            this.shouldQuit = true;
+            statusMessage = "Bye. Hope to see you again soon!";
+            this.exit();
+            break;
+        }
+        
+        return statusMessage;
+
+    }
+
+
+    /**
+     * Logic framework of Duke.
+     */
+    private void dukeLogic() {
+        this.shouldQuit = false;
+        String msgInput;
+
         while (!shouldQuit && this.ui.hasNextLine()) {
             msgInput = this.ui.nextLine();
-
-            msgArr = Parser.parseLineToArray(msgInput);
-            keywordCommand = Parser.getCommand(msgInput);
-
-            switch (keywordCommand) {
-            case TERMINATE:
-                shouldQuit = true;
-                break;
-
-            case INVALID:
-                this.ui.printErrorMessage(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", msgArr[0]));
-                break;
-
-            case LIST:
-                String taskListString = this.taskList.toString();
-                this.ui.printMessage(taskListString);
-                break;
-
-            case DONE:
-                try {
-                    String statusMsg = this.markAsDone(msgArr);
-                    this.ui.printMessage(statusMsg);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
-                } catch (IndexOutOfBoundsException e) {
-                    this.ui.printInvalidIndexErrorMsg();
-                }
-                break;
-
-            case DELETE:
-                try {
-                    String statusMsg = this.delete(msgArr);
-                    this.ui.printMessage(statusMsg);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
-                } catch (IndexOutOfBoundsException e) {
-                    this.ui.printInvalidIndexErrorMsg();
-                }
-                break;
-
-            case FIND:
-                try {
-                    String statusMsg = this.find(msgArr);
-                    this.ui.printMessage(statusMsg);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
-                } catch (IndexOutOfBoundsException e) {
-                    this.ui.printInvalidIndexErrorMsg();
-                }
-                break;
-
-            case TASK:
-                try {
-                    String statusString = this.taskList.add(msgInput);
-                    this.ui.printMessage(statusString);
-                } catch (DukeException e) {
-                    this.ui.printErrorMessage(e.getMessage());
-                }
-                break;
-
-            default:
-                break;
-            }
+            dukeLogicHelper(msgInput);
         }
     }
 
@@ -192,18 +207,66 @@ public class Duke {
     /**
      * Starts the Duke programme logic.
      */
-    public void start() {
-        Ui.printStartMessage();
+    public void start(boolean isCli) {
         this.taskList.loadFromFile();
 
-        Scanner sc = new Scanner(System.in);
-        this.dukeLogic();
+        if (isCli) {
+            // programme starts
+            this.ui.printStartMessage();
 
-        this.ui.printMessage("Bye. Hope to see you again soon!");
+            // programme execution here
+            this.dukeLogic();
 
+            // programme ends
+            this.ui.printEndMessage();
+            this.taskList.writeToFile();
+        }
+
+    }
+
+
+    /**
+     * Gets the start message for Duke.
+     *
+     * @return Start message string.
+     */
+    public String getStartMessage() {
+        return Ui.getStartMessage();
+    }
+
+
+    /**
+     * Gets the end message for Duke.
+     *
+     * @return End message string.
+     */
+    public String getEndMessage() {
+        return Ui.getEndMessage();
+    }
+
+
+    /**
+     * Exits duke and quit GUI platform.
+     */
+    private void exit() {
         this.taskList.writeToFile();
 
-        sc.close();
+        try {
+            Thread.sleep(1000);
+        } catch (Exception ignored) {
+        }
+
+        Platform.exit();
+        System.exit(0);
+    }
+
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return this.dukeLogicHelper(input);
     }
 
 
@@ -214,7 +277,7 @@ public class Duke {
      */
     public static void main(String[] args) {
 
-        new Duke().start();
+        new Duke().start(true);
 
     }
 

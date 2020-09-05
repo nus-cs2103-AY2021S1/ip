@@ -116,7 +116,7 @@ public abstract class Task {
      * @param dateString New date string to be set.
      */
     public void setDateString(String dateString) {
-        this.dateString = itemString;
+        this.dateString = dateString;
     }
 
 

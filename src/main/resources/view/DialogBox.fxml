@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="dialog" maxWidth="280.0" text="Message box" textFill="#00498d" wrapText="true">
+        <padding>
+        <Insets bottom="10.0" left="8.0" right="8.0" top="10.0" />
+        </padding>
+      <font>
+         <Font size="14.0" />
+      </font>
+    </Label>
+   <Pane prefHeight="99.0" prefWidth="99.0">
+      <children>
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="90.0" layoutX="4.0" layoutY="4.0" stroke="#042a63" strokeType="OUTSIDE" strokeWidth="1.5" width="90.0" />
+          <ImageView fx:id="displayPicture" fitHeight="90.0" fitWidth="90.0" layoutX="4.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+      </children>
+      <HBox.margin>
+         <Insets bottom="4.0" left="2.0" right="4.0" top="2.0" />
+      </HBox.margin>
+   </Pane>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+   </padding>
+</fx:root>
