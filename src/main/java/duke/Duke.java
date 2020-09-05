@@ -1,12 +1,5 @@
 package duke;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -14,41 +7,40 @@ import java.util.Scanner;
 /**
  * Represents a task manager bot named Duke.
  */
-public class Duke{
+public class Duke {
 
-    private duke.Storage storage;
-    private duke.TaskList tasks;
+    private Storage storage;
+    private TaskList tasks;
     private Ui ui;
     private Gui gui;
 
-    public Duke(String filepath) throws IOException {
+    public Duke(String filePath) throws IOException {
         ui = new Ui();
-        storage = new duke.Storage(filepath);
+        storage = new Storage(filePath);
         try {
-            tasks = new duke.TaskList(storage.loadTask());
-        } catch (duke.DukeException e) {
+            tasks = new TaskList(storage.loadTask());
+        } catch (DukeException e) {
             ui.showLoadingError();
-            tasks = new duke.TaskList();
+            tasks = new TaskList();
         }
     }
 
-    // For the Gui
     public Duke() throws IOException {
         gui = new Gui();
-        storage = new duke.Storage("data/tasks.txt");
+        storage = new Storage("data/tasks.txt");
         try {
-            tasks = new duke.TaskList(storage.loadTask());
-        } catch (duke.DukeException e) {
+            tasks = new TaskList(storage.loadTask());
+        } catch (DukeException e) {
             gui.showLoadingError();
-            tasks = new duke.TaskList();
+            tasks = new TaskList();
         }
     }
 
-    public static void main(String[] args) throws duke.DukeException, IOException {
+    public static void main(String[] args) throws DukeException, IOException {
         new Duke("data/tasks.txt").runBot();
     }
 
-    public void runBot() throws duke.DukeException, FileNotFoundException {
+    public void runBot() throws DukeException, FileNotFoundException {
         ui.introduce();
 
         Scanner sc = new Scanner(System.in);
@@ -62,12 +54,8 @@ public class Duke{
         ui.printExit();
     }
 
-    String getResponse(String input) throws FileNotFoundException, DukeException {
-        if (input.equals("bye")) {
-            return "Bye. Hope to see you again soon!";
-        } else {
-            GuiParser guiParser = new GuiParser();
-            return guiParser.interpretGui(input, tasks, storage);
-        }
+    public String getResponseGui(String input) throws FileNotFoundException, DukeException {
+        GuiParser guiParser = new GuiParser();
+        return guiParser.interpretGui(input, tasks, storage);
     }
 }

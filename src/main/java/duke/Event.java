@@ -10,9 +10,9 @@ public class Event extends Task {
 
     private LocalDate date;
 
-    public Event(String name, String dateTime) {
+    public Event(String name, String date) {
         super(name);
-        this.date = LocalDate.parse(dateTime);
+        this.date = LocalDate.parse(date);
     }
 
     @Override
