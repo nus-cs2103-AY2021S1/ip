@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task implements Saveable {
+public class Event extends Task implements Savable {
     LocalDate date;
 
     Event(String label, String date, boolean done) {

@@ -1,6 +1,5 @@
 /**
- * ListCommand inherits from Command and is called to print
- * the todo items when user inputs "list".
+ * Prints the todo items when user inputs "list".
  */
 class ListCommand extends Command {
 

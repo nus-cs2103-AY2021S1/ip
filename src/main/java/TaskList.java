@@ -27,6 +27,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in Duke.
+     *
      * @return The number of tasks.
      */
 
@@ -36,6 +37,7 @@ public class TaskList {
 
     /**
      * Returns a list of string containing the minimal information of each task in the task list.
+     *
      * @return A list of each task's information.
      */
 
@@ -80,6 +82,7 @@ public class TaskList {
 
     /**
      * Mark the specified task as done and return it.
+     *
      * @param index The task number to be marked done.
      * @return The task that was marked done.
      */

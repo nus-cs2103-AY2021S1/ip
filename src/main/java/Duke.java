@@ -31,9 +31,6 @@ public class Duke {
             System.out.println(exception.getMessage());
         }
         String reply = formattedOutput.toString();
-//        while (reply.contains(Ui.demarcation)) {
-//            reply = reply.replace(Ui.demarcation, "");
-//        }
         reply = reply.trim();
         System.setOut(System.out);
         return reply;

@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task implements Saveable {
+public class Deadline extends Task implements Savable {
     LocalDate deadline;
 
     Deadline(String label, String deadline, boolean done) {
@@ -12,6 +12,7 @@ public class Deadline extends Task implements Saveable {
 
     /**
      * Returns a minimalistic string representation of the task
+     *
      * @return A string that describes the task.
      */
 

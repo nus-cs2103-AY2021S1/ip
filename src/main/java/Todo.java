@@ -1,4 +1,4 @@
-public class Todo extends Task implements Saveable {
+public class Todo extends Task implements Savable {
     Todo(String label, boolean done) {
         super(label, done);
     }

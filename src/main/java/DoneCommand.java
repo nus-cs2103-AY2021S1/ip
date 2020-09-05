@@ -1,7 +1,5 @@
 /**
- * The DoneCommand inherits from Command and is used whenever the markAsDone() method
- * from Task is called. This marks done the specified task in the TaskList
- * and saves it.
+ * Marks done the specified task in the TaskList and saves it.
  */
 class DoneCommand extends Command {
 

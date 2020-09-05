@@ -1,10 +1,7 @@
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 /**
- * The AddCommand class is used to update the current TaskList with the newly added task
+ * Updates the current TaskList with the newly added task
  * and prints the added task to the user.
  */
 class AddCommand extends Command {
