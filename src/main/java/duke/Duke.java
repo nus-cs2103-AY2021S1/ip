@@ -13,8 +13,6 @@ import duke.handle.CommandNotFoundException;
 import duke.handle.LoadingException;
 import duke.handle.TaskNotFoundException;
 
-import javafx.scene.image.Image;
-
 /**
  * The Duke class represents a duke bot that can interact with
  * the user and help the user to manage their tasks, which can
@@ -34,6 +32,8 @@ public class Duke {
      * the user.
      */
     public Duke() throws FileNotFoundException, LoadingException, IOException {
+        assert FILE_PATH != null: "the file path should not be null";
+
         ui = new Ui();
         storage = new Storage(FILE_PATH);
         try {
@@ -56,6 +56,7 @@ public class Duke {
     public Result getResponse(String command) {
         try {
             Command parsedCommand = Parser.parseCommand(command);
+            assert parsedCommand != null : "the parsed command should not be null";
             return parsedCommand.excecute(taskList, ui, storage);
         } catch (CommandNotFoundException commandNotFoundException) {
             //System.out.println(commandNotFoundexException.getMessage());

@@ -38,6 +38,7 @@ public class Storage {
      * @throws LoadingException If the local record cannot be read.
      */
     public ArrayList<Task> readRecord() throws FileNotFoundException, LoadingException {
+        assert path != null : "the path should not be null";
         File record = new File(path);
         Scanner scanner = new Scanner(record);
 
@@ -49,6 +50,7 @@ public class Storage {
             }
             while (scanner.hasNextLine()) {
                 next = scanner.nextLine();
+                assert next != null: "the command should not be null";
                 String[] strings = next.split(" \\| ");
 
                 if (strings[1].equals("0") || strings[1].equals("1")) {
