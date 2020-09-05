@@ -8,7 +8,7 @@ public class ScheduleCommand extends Command {
 
     private String command;
 
-    static HashMap<String, Month> monthsHashMap = new HashMap<>() {
+    HashMap<String, Month> monthsHashMap = new HashMap<>() {
         {
             put("January", JANUARY);
             put("Febuary", FEBRUARY);
@@ -31,18 +31,18 @@ public class ScheduleCommand extends Command {
 
     @Override
     String execute(TaskList tasks, UI dukeUI) throws DukeException {
-        String dukeResponse = "";
+        String dukeResponse;
         try {
             String[] taskDetails = this.command.split(" ");
             LocalDate dateToFind = LocalDate.parse(taskDetails[1]);
-            dukeResponse += dukeUI.findScheduleOnDate(tasks.getTaskList(), dateToFind);
+            dukeResponse = dukeUI.findScheduleOnDate(tasks, dateToFind);
             return dukeResponse;
         } catch (IndexOutOfBoundsException e) {
             throw new WrongDateFormatException();
         } catch (DateTimeParseException e) {
             String[] taskDetails = this.command.split(" ");
             Month targetMonth = monthsHashMap.get(taskDetails[1]);
-            dukeResponse += dukeUI.findScheduleForMonth(tasks.getTaskList(), targetMonth);
+            dukeResponse = dukeUI.findScheduleForMonth(tasks, targetMonth);
             return dukeResponse;
         }
     }

@@ -92,11 +92,12 @@ public class UI {
         }
     }
 
-    protected String findScheduleOnDate(ArrayList<Task> tasks, LocalDate date) {
+    protected String findScheduleOnDate(TaskList tasks, LocalDate date) {
         String str1 = "";
         String str2 = "\nHere is your schedule for this day!\n";
         int index = 1;
-        for (Task task: tasks) {
+        ArrayList<Task> allTasks = tasks.getTaskList();
+        for (Task task: allTasks) {
             if (task.getTaskDeadline().equals(date)) {
                 str1 += index + "." + task + "\n";
                 index++;
@@ -109,17 +110,16 @@ public class UI {
         }
     }
 
-    protected String findScheduleForMonth(ArrayList<Task> tasks, Month month) {
+    protected String findScheduleForMonth(TaskList tasks, Month month) {
         String str1 = "";
         String str2 = "\nHere is your schedule for this day!\n";
         int index = 1;
-        for (Task task: tasks) {
-            if (task instanceof Deadline || task instanceof Event) {
-                Month scheduleMonth = task.getTaskDeadline().getMonth();
-                if (scheduleMonth.equals(month)) {
-                    str1 += index + "." + task + "\n";
-                    index++;
-                }
+        ArrayList<Task> eventAndDeadlineTasks= tasks.filterTask();
+        for (Task eventOrDeadline : eventAndDeadlineTasks) {
+            Month scheduleMonth = eventOrDeadline.getTaskDeadline().getMonth();
+            if (scheduleMonth.equals(month)) {
+                str1 += index + "." + eventOrDeadline+ "\n";
+                index++;
             }
         }
         if (str1.compareTo("") == 1) {
