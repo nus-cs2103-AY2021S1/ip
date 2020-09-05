@@ -115,6 +115,4 @@ public class UiManager extends Application {
     public void sendUserMessage(String text) {
         dialogContainer.getChildren().add(new UserDialog(text));
     }
-
-
 }

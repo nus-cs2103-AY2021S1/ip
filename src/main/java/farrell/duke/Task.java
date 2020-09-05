@@ -14,10 +14,6 @@ public class Task {
     /** The completion status of the task */
     private boolean isDone;
 
-    Task(String description) {
-        this(description, false);
-    }
-
     Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
