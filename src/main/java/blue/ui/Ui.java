@@ -102,13 +102,14 @@ public class Ui {
     public String getFoundMessage(LocalDate localDate, ArrayList<Task> list) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         String formattedDate = localDate.format(formatter);
+        
         if (list.isEmpty()) {
             return String.format("I couldn't find anything on %s.", formattedDate);
-        } else {
-            String intro = String.format("Here are the tasks that I've found on %s:\n", formattedDate);
-            StringBuilder builder = new StringBuilder(intro);
-            return this.getListItems(builder, list).toString();
         }
+        
+        String intro = String.format("Here are the tasks that I've found on %s:\n", formattedDate);
+        StringBuilder builder = new StringBuilder(intro);
+        return this.getListItems(builder, list).toString();        
     }
 
     /**
@@ -121,11 +122,11 @@ public class Ui {
     public String getFoundMessage(String description, ArrayList<Task> list) {
         if (list.isEmpty()) {
             return String.format("I couldn't find anything matching %s.", description);
-        } else {
-            String intro = String.format("Here are the tasks that I've found matching %s:\n", description);
-            StringBuilder builder = new StringBuilder(intro);
-            return this.getListItems(builder, list).toString();
-        }
+        } 
+        
+        String intro = String.format("Here are the tasks that I've found matching %s:\n", description);
+        StringBuilder builder = new StringBuilder(intro);
+        return this.getListItems(builder, list).toString();
     }
 
     /**
