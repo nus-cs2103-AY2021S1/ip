@@ -46,17 +46,18 @@ public class TaskList {
 
     /**
      * Prints out the task added to the Bot.
-     * @param ls
+     * @param ls an arraylist of tasks
      */
-    public static void printAddedTask(ArrayList<Task> ls) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(ls.get(ls.size() - 1));
-        System.out.println("Now you have " + ls.size() + " tasks in the list.");
+    public static String printAddedTask(ArrayList<Task> ls) {
+        String out = "Got it. I've added this task:\n";
+        out += ls.get(ls.size() - 1) + "\n";
+        out += "Now you have " + ls.size() + " tasks in the list.\n";
+        return out;
     }
 
     /**
      * Returns the taskList as an ArrayList
-     * @return
+     * @return arraylist of tasks
      */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
@@ -65,43 +66,39 @@ public class TaskList {
     /**
      * Display all tasks in a list format.
      */
-    public void listAllTasks() {
-        System.out.println("Here are the tasks in your list:");
+    public String listAllTasks() {
+        StringBuilder out = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
-            if (taskList.get(i).isDone()) {
-                System.out.println((i + 1) + ". " + taskList.get(i));
-            } else {
-                System.out.println((i + 1) + ". " + taskList.get(i));
-            }
+            out.append(i + 1).append(". ").append(taskList.get(i)).append("\n");
         }
+        return String.valueOf(out);
     }
 
     /**
      * Search for tasks for the same name.
      * @param input the name of the task to search for.
      */
-    public void findTasks(String input) {
+    public String findTasks(String input) {
         String query = input.substring(5);
+        StringBuilder out = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
             Task t = taskList.get(i);
             if (t.getDescription().contains(query)) {
-                System.out.println((i + 1) + ". " + t);
+                out.append(i + 1).append(". ").append(t);
             }
         }
+        return String.valueOf(out);
     }
 
     /**
      * Mark a task as done.
      * @param input the number of the task to be marked as complete.
      */
-    public void completeTask(String input) {
+    public String completeTask(String input) {
         // mark task as done
         int position = Integer.parseInt(input.substring(5));
         taskList.get(position - 1).markDone();
-
-        // print out
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(taskList.get(position - 1));
+        return "Nice! I've marked this task as done:\n" + taskList.get(position - 1);
     }
 
     /**
@@ -109,7 +106,7 @@ public class TaskList {
      * @param input name of the event task
      * @throws DukeException Custom Duke Exception
      */
-    public void addEvent(String input) throws DukeException {
+    public String addEvent(String input) throws DukeException {
         if (input.length() <= 6) {
             throw new DukeException("Exception occurred: Name not found for Tasks.Event.");
         }
@@ -117,7 +114,7 @@ public class TaskList {
         String description = input.substring(6, pos);
         String at = input.substring(pos + 4);
         taskList.add(new Event(description, at));
-        printAddedTask(taskList);
+        return printAddedTask(taskList);
     }
 
     /**
@@ -125,15 +122,17 @@ public class TaskList {
      * @param input name of deadline task
      * @throws DukeException Custom Duke Exception
      */
-    public void addDeadline(String input) throws DukeException {
+    public String addDeadline(String input) throws DukeException {
         if (input.length() <= 9) {
             throw new DukeException("Exception occurred: Name not found for Tasks.Deadline.");
         }
         int pos = getPosition(input, '/');
         String description = input.substring(9, pos);
         String by = input.substring(pos + 4);
+        System.out.println("Description: " + description);
+        System.out.println("By: " + by);
         taskList.add(new Deadline(description, by));
-        printAddedTask(taskList);
+        return printAddedTask(taskList);
     }
 
     /**
@@ -141,9 +140,9 @@ public class TaskList {
      *
      * @param input name of Todo task.
      */
-    public void addTodo(String input) {
+    public String addTodo(String input) {
         taskList.add(new Todo(input.substring(5)));
-        printAddedTask(taskList);
+        return printAddedTask(taskList);
     }
 
     /**
@@ -152,14 +151,14 @@ public class TaskList {
      * @param input position of task to be deleted.
      * @throws DukeException Custom Duke Exception.
      */
-    public void deleteTask(String input) throws DukeException {
+    public String deleteTask(String input) throws DukeException {
         if (input.length() <= 7) {
             throw new DukeException("Exception occurred: Kindly enter a number for deletion.");
         }
         int position = Integer.parseInt(input.substring(7));
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(this.taskList.get(position - 1));
+        String out = "Noted. I've removed this task:\n" + this.taskList.get(position - 1);
         this.taskList.remove(position - 1);
+        return out;
     }
 
 

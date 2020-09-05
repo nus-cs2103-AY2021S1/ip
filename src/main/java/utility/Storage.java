@@ -78,8 +78,13 @@ public class Storage {
                 System.out.println("Can't read line - load()");
             }
         }
-        // NO IDEA WHY IS THERE ANOTHER LAST ELEMENT CAUSING EXCEPTION BUT JUST DELETE IT WTV
-        newList.remove(newList.size() - 1);
+
+        // this line of code should not be here logic wise. temp fix only.
+//        if (newList.size() > 0) {
+//            // temp fix
+//            newList.remove(newList.size() - 1);
+//        }
+
         return newList;
     }
 

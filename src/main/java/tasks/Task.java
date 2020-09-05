@@ -31,9 +31,9 @@ public class Task {
      */
     public String toString() {
         if (isDone()) {
-            return "[✓] " + this.name;
+            return "[Completed] " + this.name;
         } else {
-            return "[✗] " + this.name;
+            return "[Pending] " + this.name;
         }
     }
 
