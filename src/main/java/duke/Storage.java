@@ -97,7 +97,7 @@ public class Storage {
      * @throws IOException on I/O error
      */
     private void createFileIfNotExists(Path path) throws IOException {
-        Path folderPath = Path.of(path.getParent().toString());
+        Path folderPath = path.getParent();
         Path filePath = folderPath.resolve(path.getFileName());
 
         // create folders containing the file and its parents

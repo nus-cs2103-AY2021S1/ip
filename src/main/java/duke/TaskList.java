@@ -84,7 +84,7 @@ public class TaskList {
      * @param date date in ISO-8601 format
      * @return all tasks on 1 date
      */
-    public TaskList viewAll(LocalDate date) {
+    public TaskList viewAllOnDate(LocalDate date) {
         return new TaskList(
                 this.taskList
                         .stream()
