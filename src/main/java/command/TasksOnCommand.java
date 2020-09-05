@@ -24,7 +24,8 @@ public class TasksOnCommand extends Command {
 
     /**
      * Finds the tasks on the specified Date and then proceeds to list them.
-     *  @param tasks The TaskList which contains all the tasks.
+     *
+     * @param tasks The TaskList which contains all the tasks.
      * @param storage The Storage which will record any changes into the file in its path.
      * @return The output to be displayed to the user.
      */
@@ -39,12 +40,15 @@ public class TasksOnCommand extends Command {
         int numbering = 1;
         boolean isFree = true;
         Task task;
+
         for (int i = 0; i < tasks.size(); i++) {
             task = tasks.get(i);
+
             if (task.hasSameDate(this.date)) {
                 if (isFree) {
                     isFree = false;
                 }
+
                 output.append("\t ").append(numbering).append(".").append(task).append("\n");
                 numbering++;
             }

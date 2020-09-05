@@ -22,25 +22,28 @@ public class FindCommand extends Command {
 
     /**
      * Finds the tasks which have the specified keyword in their description and then proceeds to list them.
-     *  @param tasks The TaskList which contains all the tasks.
+     *
+     * @param tasks The TaskList which contains all the tasks.
      * @param storage The Storage which will record any changes into the file in its path.
      * @return The output to be displayed to the user.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-
         StringBuilder output = new StringBuilder("\t Here are the tasks containing the keyword ")
                 .append(String.format("\"%s\"", keyword)).append(":\n");
 
         int numbering = 1;
         boolean isUnavailable = true;
         Task task;
+
         for (int i = 0; i < tasks.size(); i++) {
             task = tasks.get(i);
+
             if (task.hasKeyword(keyword)) {
                 if (isUnavailable) {
                     isUnavailable = false;
                 }
+
                 output.append("\t ").append(numbering).append(".").append(task).append("\n");
                 numbering++;
             }
