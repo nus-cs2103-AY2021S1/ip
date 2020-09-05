@@ -50,7 +50,7 @@ public class TaskHelper {
         List<Task> tasks = tasklist.getTasks();
         int initialSize = tasks.size();
         tasks.add(newTask);
-        assert tasks.size() == initialSize - 1 : "Size of tasks list is incorrect after adding deadline.";
+        assert tasks.size() == initialSize + 1 : "Size of tasks list is incorrect after adding deadline.";
         Storage.appendToFile(newTask.toString());
         return TaskDescription.addedTaskDescription(tasks, newTask);
     }
@@ -73,7 +73,7 @@ public class TaskHelper {
         List<Task> tasks = tasklist.getTasks();
         int initialSize = tasks.size();
         tasks.add(newTask);
-        assert tasks.size() == initialSize - 1 : "Size of tasks list is incorrect after adding event.";
+        assert tasks.size() == initialSize + 1 : "Size of tasks list is incorrect after adding event.";
         Storage.appendToFile(newTask.toString());
         return TaskDescription.addedTaskDescription(tasks, newTask);
     }
@@ -95,11 +95,19 @@ public class TaskHelper {
         // Mark as done and report that the task is done
         List<Task> tasks = tasklist.getTasks();
         Task doneTask = tasks.get(index);
-        String currentText = doneTask.toString();
-        doneTask.markAsDone();
-        String amendedText = doneTask.toString();
-        Storage.amendFile(currentText, amendedText);
-        return TaskDescription.doneTaskDescription(doneTask);
+
+        // If task has already been marked as done, don't mark it as done again
+        if (doneTask.getStatusIcon().equals("Y")) {
+            return TaskDescription.taskAlreadyMarkedDone();
+        } else {
+            assert doneTask.getStatusIcon().equals("N") : "Status icon should be [N] but something is wrong.";
+            // Proceed to mark task as done/completed
+            String currentText = doneTask.toString();
+            doneTask.markAsDone();
+            String amendedText = doneTask.toString();
+            Storage.amendFile(currentText, amendedText);
+            return TaskDescription.doneTaskDescription(doneTask);
+        }
     }
 
     /**

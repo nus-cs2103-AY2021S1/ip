@@ -62,6 +62,14 @@ public class TaskDescription {
     }
 
     /**
+     * Renders message that task has already been marked as completed (ie [Y]).
+     */
+    public static String taskAlreadyMarkedDone() {
+        System.out.println("This task has already been completed.\n");
+        return "This task has already been completed.\n";
+    }
+
+    /**
      * Renders successful deletion of task from outstanding tasks.
      *
      * @param tasks       Outstanding tasks.

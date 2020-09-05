@@ -76,7 +76,7 @@ public class Parser {
             return TaskDescription.showAllTask(tasklist.getTasks());
         } else if (userCommand.contains("done")) {
             // e.g done 1
-            tasklist.markTaskDone(userCommand);
+            return tasklist.markTaskDone(userCommand);
         } else if (userCommand.contains("todo")
                 || userCommand.contains("deadline")
                 || userCommand.contains("event")) {
@@ -90,6 +90,5 @@ public class Parser {
             // If a task is specified as a Task but not a Deadline / To Do / Event, throw an error
             return DukeException.genericTask();
         }
-        return "";
     }
 }

@@ -1,1 +1,3 @@
-[T][N] north korea
+[T][Y] north korea
+[D][Y] this (by: tmr)
+[D][N] do this (by: tmr)
