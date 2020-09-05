@@ -1,6 +1,7 @@
 package duke.classes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
@@ -149,9 +150,11 @@ public class TaskList {
     public Task delete(String command) {
         int taskNo = Character.getNumericValue(command.charAt(7)) - 1;
         Task task = todoList.remove(taskNo);
-        for (int i = taskNo; i < todoList.size(); i++) {
-            todoList.get(i).setIndex(todoList.get(i).getIndex() - 1);
-        }
+        todoList.forEach((item) -> {
+            if (item.getIndex() > taskNo) {
+                item.setIndex(item.getIndex() - 1);
+            }
+        });
         return task;
     }
     /**
@@ -168,16 +171,17 @@ public class TaskList {
         List<Task> queriedTasks = new ArrayList<>();
         Function<String, String[]> stringSplit = str -> str.split("\\s");
         for (Task task : todoList) {
+            String finalQuery = query;
             String description = task.getDescription();
             String[] keywords;
             switch (task.getType()) {
             case TODO:
-                keywords = stringSplit.apply(description);
-                for (String keyword : keywords) {
-                    if (keyword.equals(query)) {
-                        queriedTasks.add(new Todo(description, queriedTasks.size() + 1, task.hasDone()));
-                    }
-                }
+                keywords = description.split("\\s");
+                Arrays.stream(keywords)
+                        .filter((keyword) -> keyword.equals(finalQuery))
+                        .forEach((keyword) -> {
+                            queriedTasks.add(new Todo(description, queriedTasks.size() + 1, task.hasDone()));
+                        });
                 break;
             case EVENT:
             case DEADLINE:
