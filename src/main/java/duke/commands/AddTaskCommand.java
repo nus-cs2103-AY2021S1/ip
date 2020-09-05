@@ -17,6 +17,7 @@ public class AddTaskCommand extends Command {
     public void executeCommand (Ui ui, Storage storage, TaskList tasklist) {
         tasklist.addTask(task);
         int numberOfTasks = tasklist.size();
+        assert numberOfTasks >= 1;
         ui.addTaskMessage(task, numberOfTasks);
         storage.writeToDataFile(tasklist);
     }

@@ -10,6 +10,7 @@ public class RemoveTaskCommand extends Command {
     private final int index;
     
     public RemoveTaskCommand (int index) {
+        assert index >= 0;
         this.index = index;
     }
     

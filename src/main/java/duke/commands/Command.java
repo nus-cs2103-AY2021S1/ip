@@ -6,7 +6,5 @@ import duke.Ui;
 
 public class Command {
     
-    public void executeCommand (Ui ui, Storage storage, TaskList tasklist) {
-        
-    }
+    public void executeCommand (Ui ui, Storage storage, TaskList tasklist) {}
 }

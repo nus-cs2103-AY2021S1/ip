@@ -12,6 +12,7 @@ import duke.commands.DoneCommand;
 import duke.commands.AddTaskCommand;
 import duke.commands.RemoveTaskCommand;
 
+import duke.exceptions.DukeInvalidIndexException;
 import duke.exceptions.DukeNoTaskDescriptionException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -121,12 +122,19 @@ public class Parser {
             
         } catch (IndexOutOfBoundsException e) {
             ui.setOutputMessage("Task does not exist");
+            
+        } catch (DukeInvalidIndexException e) {
+            ui.setOutputMessage(e.getExceptionMessage());
         }
     }
 
 
-    private int parseIndex (String s) {
-        return Integer.parseInt(s.replaceAll("[^0-9]", "")) - 1;
+    private int parseIndex (String s) throws DukeInvalidIndexException {
+        int index = Integer.parseInt(s.replaceAll("[^0-9]", "")) - 1;
+        if (index < 0) {
+            throw new DukeInvalidIndexException("Index starts from 1 instead of 0 :)");
+        }
+        return index;
     }
     
     private Task parseTodo (String s) throws DukeNoTaskDescriptionException {

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.exceptions.DukeException;
 import duke.exceptions.DukeInvalidStorageException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -16,6 +15,7 @@ import duke.tasks.Todo;
 
 
 public class Storage {
+    
     private final String filePath;
 
     /**
@@ -74,6 +74,7 @@ public class Storage {
                 fw.write (write);
             }
             fw.close();
+            
         } catch (IOException e) {
             System.out.println ("Something went wrong: " + e.getMessage());
         }

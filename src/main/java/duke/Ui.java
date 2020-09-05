@@ -51,6 +51,7 @@ public class Ui {
      * @param number number of tasks in the list
      */
     public void addTaskMessage(Task t, int number) {
+        assert number >= 0;
         setOutputMessage ("Got it! I've added this task:");
         appendMessage (t.toString());
         appendMessage(String.format("Now you have %d tasks in the list", number));
@@ -62,6 +63,7 @@ public class Ui {
      * @param number number of tasks in the list
      */
     public void removeTaskMessage (Task t, int number) {
+        assert number >= 0;
         setOutputMessage("Noted. I've removed this task");
         appendMessage(t.toString());
         appendMessage(String.format("Now you have %d tasks in the list", number));
