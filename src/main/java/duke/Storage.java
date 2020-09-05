@@ -85,34 +85,13 @@ public class Storage {
 
             switch (taskType) {
             case "T":
-                tasks.add(new Todo(desc, isDone));
-
+                tasks.add(deserialiseTodo(desc, isDone));
                 break;
             case "D":
-                if (tokens.length < 4) {
-                    throw new CorruptedStorageException("Deadline task is missing due date!");
-                }
-                String by = tokens[3];
-
-                try {
-                    tasks.add(new Deadline(desc, by, isDone));
-                } catch (InvalidDateInputException e) {
-                    throw new CorruptedStorageException("Date was not stored properly!");
-                }
-
+                tasks.add(deserialiseDeadline(tokens, desc, isDone));
                 break;
             case "E":
-                if (tokens.length < 4) {
-                    throw new CorruptedStorageException("Event task is missing date!");
-                }
-                String at = tokens[3];
-
-                try {
-                    tasks.add(new Event(desc, at, isDone));
-                } catch (InvalidDateInputException e) {
-                    throw new CorruptedStorageException("Date was not stored properly!");
-                }
-
+                tasks.add(deserialiseEvent(tokens, desc, isDone));
                 break;
             default:
                 throw new CorruptedStorageException(
@@ -122,6 +101,38 @@ public class Storage {
         }
 
         return tasks;
+    }
+
+    private Todo deserialiseTodo(String desc, boolean isDone) {
+        return new Todo(desc, isDone);
+    }
+
+    private Deadline deserialiseDeadline(String[] tokens, String desc, boolean isDone)
+            throws CorruptedStorageException {
+        if (tokens.length < 4) {
+            throw new CorruptedStorageException("Deadline task is missing due date!");
+        }
+        String by = tokens[3];
+
+        try {
+            return new Deadline(desc, by, isDone);
+        } catch (InvalidDateInputException e) {
+            throw new CorruptedStorageException("Date was not stored properly!");
+        }
+    }
+
+    private Event deserialiseEvent(String[] tokens, String desc, boolean isDone)
+            throws CorruptedStorageException {
+        if (tokens.length < 4) {
+            throw new CorruptedStorageException("Event task is missing date!");
+        }
+        String at = tokens[3];
+
+        try {
+            return new Event(desc, at, isDone);
+        } catch (InvalidDateInputException e) {
+            throw new CorruptedStorageException("Date was not stored properly!");
+        }
     }
 
     /**
