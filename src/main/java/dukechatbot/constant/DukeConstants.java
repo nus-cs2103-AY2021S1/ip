@@ -4,12 +4,6 @@ package dukechatbot.constant;
  * Represents the constants of Duke.
  */
 public class DukeConstants {
-    public static final String LOGO = " ____        _        \n"
-                                    + "|  _ \\ _   _| | _____ \n"
-                                    + "| | | | | | | |/ / _ \\\n"
-                                    + "| |_| | |_| |   <  __/\n"
-                                    + "|____/ \\__,_|_|\\_\\___|\n";
-
     public static final String INDENT = "    ";
     public static final String LINE = INDENT + "------------------------------";
     public static final String INITIAL_RESPONSE = "Hello! I'm Duke\n\tWhat can I do for you?";

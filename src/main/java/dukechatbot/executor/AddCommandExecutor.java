@@ -29,20 +29,20 @@ public class AddCommandExecutor extends CommandExecutor {
      * @param taskList
      */
     @Override
-    public void execute(Command command, TaskList taskList) {
+    public String execute(Command command, TaskList taskList) {
         Task task;
         try {
             task = TaskParser.parseTask(((AddCommand) command).getArgument(), (
                     (AddCommand) command).getTaskType());
         } catch (IndexOutOfBoundsException | DateTimeParseException exception) {
-            DukeOutput.output(exception.getMessage());
-            return;
+           return DukeOutput.output(exception.getMessage());
+            
         }
         taskList.add(task);
         String taskListSizeInfo = String.format("Now you have %d tasks in the list.",
                 taskList.getCurrentSize());
         List<String> responses = Arrays.asList(DukeConstants.ADD_TASK_OUTPUT,
                 task.toString(), taskListSizeInfo);
-        DukeOutput.output(responses, Collections.singletonList(1));
+        return DukeOutput.output(responses, Collections.singletonList(1));
     }
 }
