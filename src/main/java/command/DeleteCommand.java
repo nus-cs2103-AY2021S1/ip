@@ -2,7 +2,6 @@ package command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import exception.DukeException;
 import task.Task;
 
@@ -26,13 +25,12 @@ public class DeleteCommand extends Command {
      * Deletes the task at the specified index from the TaskList.
      *
      * @param tasks The TaskList which contains the existing task.
-     * @param ui The Ui which will generate outputs significant to the user.
      * @param storage The Storage which will delete the task at the location specified in its path.
      * @throws DukeException Thrown when task index invalid or relayed from Storage when removing task.
      * @return The output to be displayed to the user.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (this.taskIndex < 0 || this.taskIndex > tasks.size() - 1) {
             throw new DukeException("\tThere is no such task.");
         }

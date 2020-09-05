@@ -43,18 +43,18 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveClassifier = null
+    archiveBaseName = "Duke"
+    archiveClassifier = "0.1"
 }
 
 checkstyle {
     toolVersion = '8.29'
 }
 
-run{
+run {
     standardInput = System.in
 }

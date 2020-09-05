@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import task.Task;
 
 /**
@@ -26,12 +25,11 @@ public class TasksOnCommand extends Command {
     /**
      * Finds the tasks on the specified Date and then proceeds to list them.
      *  @param tasks The TaskList which contains all the tasks.
-     * @param ui The Ui which will generate outputs significant to the user.
      * @param storage The Storage which will record any changes into the file in its path.
      * @return The output to be displayed to the user.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = date.format(formatter);
 

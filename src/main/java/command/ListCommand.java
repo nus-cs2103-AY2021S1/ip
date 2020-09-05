@@ -2,7 +2,6 @@ package command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import task.Task;
 
 /**
@@ -13,12 +12,11 @@ public class ListCommand extends Command {
     /**
      * Lists the tasks in the TaskList.
      *  @param tasks The TaskList which contains all the tasks.
-     * @param ui The Ui which will generate outputs significant to the user.
      * @param storage The Storage which will record any changes into the file in its path.
      * @return The output to be displayed to the user.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         if (tasks.size() == 0) {
             return "\tYay! You have nothing to do at the moment! :-)\n";
         } else {

@@ -2,7 +2,6 @@ package command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import exception.DukeException;
 import task.Task;
 
@@ -26,13 +25,12 @@ public class AddCommand extends Command {
      * Adds the task into the TaskList.
      *
      * @param tasks The TaskList which accepts the task.
-     * @param ui The Ui which will generate outputs significant to the user.
      * @param storage The Storage which will record the new task into the location specified in its path.
      * @throws DukeException Relays exception possibly thrown by storage when storing new task.
      * @return The output to be displayed to the user.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         storage.append(newTask);
         tasks.add(newTask);
 

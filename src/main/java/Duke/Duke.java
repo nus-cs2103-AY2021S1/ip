@@ -54,7 +54,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasks, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -71,7 +71,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                ui.showMessage(c.execute(tasks, storage));
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
