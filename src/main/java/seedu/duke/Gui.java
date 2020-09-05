@@ -44,6 +44,7 @@ public class Gui extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.run(input);
+        assert !response.isEmpty();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userProfile),
                 DialogBox.getDukeDialog(response, dukeProfile)

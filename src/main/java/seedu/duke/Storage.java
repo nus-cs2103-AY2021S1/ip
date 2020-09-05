@@ -15,7 +15,7 @@ public class Storage {
     /**
      * File object of data file.
      */
-    File storageFile;
+    private File storageFile;
 
     /**
      * Initializes the storage object.
@@ -38,6 +38,7 @@ public class Storage {
         } else {
             storageFile = temp;
         }
+        assert storageFile.exists(); //Ensure the storage file exists.
     }
 
     /**
@@ -51,7 +52,7 @@ public class Storage {
         List<Task> result = new ArrayList<>();
         Scanner storage;
         try {
-            storage = new Scanner(storageFile);
+            storage = new Scanner(this.storageFile);
 
             while (storage.hasNext()) {
                 String type = storage.nextLine();
@@ -69,7 +70,7 @@ public class Storage {
             }
             storage.close();
         } catch (FileNotFoundException e) {
-
+            e.getStackTrace();
         }
         return result;
     }
@@ -85,34 +86,30 @@ public class Storage {
 
             String data = "";
             for (int i = 0; i < taskList.size(); i++) {
-                String temp = "";
+                String temp;
                 if (taskList.get(i) instanceof Todo) {
                     Todo holding = (Todo) taskList.get(i);
-                    temp += "T\n";
-                    temp += (holding.isDone() ? "1" : "0") + "\n";
-                    temp += holding.getContent() + "\n";
+                    temp = "T\n"
+                            + (holding.isDone() ? "1" : "0") + "\n"
+                            + holding.getContent() + "\n";
                     data += temp;
-                    temp = "";
                 } else if (taskList.get(i) instanceof Event) {
                     Event holding = (Event) taskList.get(i);
-                    temp += "E\n";
-                    temp += (holding.isDone() ? "1" : "0") + "\n";
-                    temp += holding.getContent() + "\n";
-                    temp += holding.getTime() + "\n";
+                    temp = "E\n"
+                            + (holding.isDone() ? "1" : "0") + "\n"
+                            + holding.getContent() + "\n"
+                            + holding.getTime() + "\n";
                     data += temp;
-                    temp = "";
                 } else if (taskList.get(i) instanceof Deadline) {
                     Deadline holding = (Deadline) taskList.get(i);
-                    temp += "D\n";
-                    temp += (holding.isDone() ? "1" : "0") + "\n";
-                    temp += holding.getContent() + "\n";
-                    temp += holding.getTime() + "\n";
+                    temp = "D\n"
+                            + (holding.isDone() ? "1" : "0") + "\n"
+                            + holding.getContent() + "\n"
+                            + holding.getTime() + "\n";
                     data += temp;
-                    temp = "";
                 }
             }
             fileWriter.write(data);
-
             fileWriter.close();
         } catch (Exception e) {
             e.getStackTrace();

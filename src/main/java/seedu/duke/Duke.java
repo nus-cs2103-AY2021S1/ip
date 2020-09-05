@@ -102,6 +102,8 @@ public class Duke {
             } catch (InvalidParameterException e) {
                 result = ui.invalidFindOrder();
             }
+        } else if (userInput.isEmpty()) {
+            result = ui.noOrder();
         } else {
             result = ui.generalError();
         }

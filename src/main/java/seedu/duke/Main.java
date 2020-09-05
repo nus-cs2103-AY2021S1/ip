@@ -14,6 +14,10 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Starts Duke GUI.
+     * @param stage Stage of Duke GUI.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -23,8 +27,8 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<Gui>getController().setDuke(duke);
             fxmlLoader.<Gui>getController().setWelcomeWords();
+            stage.setTitle("Duke");
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

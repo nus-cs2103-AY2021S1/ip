@@ -94,6 +94,7 @@ public class TaskList {
      */
     public List<Task> find(String keyWord) {
         List<Task> resultList = new ArrayList<>();
+        assert !keyWord.isEmpty(); //Ensure the keyword is not empty.
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).getContent().contains(keyWord)) {
                 resultList.add(taskList.get(i));

@@ -52,6 +52,7 @@ public class Parser {
         } else {
             throw new InvalidParameterException();
         }
+        assert result != null; //Ensure parser task result is not null.
         return result;
     }
 
@@ -118,10 +119,11 @@ public class Parser {
      * @throws InvalidParameterException If there is no keyword followed.
      */
     public String parseFindOrder(String resource) throws InvalidParameterException {
-        if (resource.length() <= 4) {
+        if (resource.length() <= 5) {
             throw new InvalidParameterException();
         }
         String findingKeyWord = resource.substring(5);
+        assert !findingKeyWord.isEmpty(); //Ensure the keyword is not empty.
         return findingKeyWord;
     }
 }

@@ -226,6 +226,15 @@ public class Ui {
     }
 
     /**
+     * Gives response to null order.
+     *
+     * @return Response to null order.
+     */
+    public String noOrder() {
+        return "I can't guess your heart man.";
+    }
+
+    /**
      * Say Goodbye to user.
      */
     public String goodBye() {
