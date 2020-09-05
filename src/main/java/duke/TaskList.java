@@ -179,9 +179,24 @@ public class TaskList {
     }
 
     public List<Task> sort() {
-        Collections.sort(this.tasks);
+        Collections.sort(this.tasks, new TaskComparator());
         Storage.updateData(this.tasks);
         return this.tasks;
+    }
+
+    public List<Task> sortList() {
+        List<Task> tasks = new ArrayList<>(this.tasks);
+        for(int i = 0; i < tasks.size(); i++) {
+            for(int j = 0; j < tasks.size() - 1; j++) {
+                if (tasks.get(j).compareTo(tasks.get(j+1)) < 0) {
+                    Task temp = tasks.get(j+1);
+                    Task before = tasks.get(j);
+                    tasks.set(j+1, before);
+                    tasks.set(j, temp);
+                }
+            }
+        }
+        return tasks;
     }
 
 }
