@@ -33,7 +33,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public LocalDate getDate() {
-        return null;
+    public boolean hasSameDate(LocalDate date) {
+        return false;
     }
 }

@@ -37,11 +37,6 @@ public class Event extends Task {
         }
     }
 
-    @Override
-    public LocalDate getDate() {
-        return this.duration;
-    }
-
     public String toString() {
         String date = this.duration.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
         return "[E]" + super.toString() + " (at: " + date + ")";
@@ -49,5 +44,10 @@ public class Event extends Task {
 
     public String print() {
         return "E | " + super.print() + " | " + this.duration;
+    }
+
+    @Override
+    public boolean hasSameDate(LocalDate date) {
+        return this.duration.equals(date);
     }
 }

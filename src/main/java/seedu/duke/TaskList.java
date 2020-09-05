@@ -123,8 +123,7 @@ public class TaskList {
             int totalPosition = 1;
             boolean hasTask = false;
             for (Task task : this.tasks) {
-                boolean hasDate = !(task instanceof ToDo);
-                if (hasDate && task.getDate().equals(date)) {
+                if (task.hasSameDate(date)) {
                     response.add(totalPosition + ". " + task);
                     hasTask = true;
                 }

@@ -38,11 +38,6 @@ public class Deadline extends Task {
 
     }
 
-    @Override
-    public LocalDate getDate() {
-        return this.deadline;
-    }
-
     public String toString() {
         String date = this.deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
         return "[D]" + super.toString() + " (by: " + date + ")";
@@ -50,5 +45,10 @@ public class Deadline extends Task {
 
     public String print() {
         return "D | " + super.print() + " | " + this.deadline;
+    }
+
+    @Override
+    public boolean hasSameDate(LocalDate date) {
+        return this.deadline.equals(date);
     }
 }

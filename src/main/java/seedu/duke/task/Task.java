@@ -56,11 +56,12 @@ public abstract class Task {
     }
 
     /**
-     * Returns the date by or at which this task takes place, if any.
+     * Checks if the task has the same date as the given date.
      *
-     * @return a date
+     * @param date the date to compare with
+     * @return whether the task has the same date as the given date
      */
-    public abstract LocalDate getDate();
+    public abstract boolean hasSameDate(LocalDate date);
 
     public boolean containsKeyword(String keyword) {
         return this.title.contains(keyword);

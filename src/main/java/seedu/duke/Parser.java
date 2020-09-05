@@ -9,7 +9,6 @@ import seedu.duke.command.EventCommand;
 import seedu.duke.command.FindCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.ToDoCommand;
-import seedu.duke.exception.DukeException;
 import seedu.duke.exception.InvalidCommandException;
 
 /**
