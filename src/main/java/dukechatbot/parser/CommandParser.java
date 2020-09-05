@@ -4,6 +4,7 @@ import dukechatbot.command.AddCommand;
 import dukechatbot.command.Command;
 import dukechatbot.command.DeleteCommand;
 import dukechatbot.command.DoneCommand;
+import dukechatbot.command.ExitCommand;
 import dukechatbot.command.FindCommand;
 import dukechatbot.command.ListCommand;
 import dukechatbot.constant.DukeConstants;
@@ -37,6 +38,8 @@ public class CommandParser {
             return new AddCommand(input, TaskEnum.EVENT);
         } else if (isFindCommand(input)) {
             return new FindCommand(input);
+        } else if (isExitCommand(input)) {
+            return new ExitCommand(input);
         } else {
             return null;
         }
@@ -69,14 +72,8 @@ public class CommandParser {
     private static boolean isFindCommand(String input) {
         return input.split("\\s+")[0].equals(DukeConstants.FIND_COMMAND);
     }
-
-    /**
-     * Checks if the input is requesting to exit.
-     *
-     * @param input
-     * @return Boolean result if input is requesting to exit.
-     */
-    public static boolean isExit(String input) {
+    
+    private static boolean isExitCommand(String input) {
         return input.equals(DukeConstants.EXIT_INPUT);
     }
 

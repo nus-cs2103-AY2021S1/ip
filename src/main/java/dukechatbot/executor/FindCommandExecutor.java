@@ -26,11 +26,11 @@ public class FindCommandExecutor extends CommandExecutor {
      * @param taskList
      */
     @Override
-    public void execute(Command command, TaskList taskList) {
+    public String execute(Command command, TaskList taskList) {
         String searchKeyword = ((FindCommand) command).getArgument();
         List<String> responses = new ArrayList<>(Collections.singletonList(DukeConstants.FIND_OUTPUT));
         List<Task> matchedTasks = taskList.findMatches(searchKeyword);
         matchedTasks.stream().map(Task::toString).forEach(responses::add);
-        DukeOutput.output(responses);
+        return DukeOutput.output(responses);
     }
 }

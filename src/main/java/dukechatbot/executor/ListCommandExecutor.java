@@ -17,7 +17,7 @@ public class ListCommandExecutor extends CommandExecutor {
      * @param taskList
      */
     @Override
-    public void execute(Command command, TaskList taskList) {
-        DukeOutput.output(taskList.getListInfo());
+    public String execute(Command command, TaskList taskList) {
+        return DukeOutput.output(taskList.getListInfo());
     }
 }

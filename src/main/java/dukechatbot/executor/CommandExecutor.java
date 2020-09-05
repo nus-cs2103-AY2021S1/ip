@@ -8,5 +8,5 @@ import dukechatbot.tasklist.TaskList;
  * Executes the command given to Duke.
  */
 public abstract class CommandExecutor {
-    public abstract void execute(Command command, TaskList taskList);
+    public abstract String execute(Command command, TaskList taskList);
 }
