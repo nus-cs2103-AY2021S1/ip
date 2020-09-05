@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import duke.Duke;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -28,6 +29,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle("Dongo");
             stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

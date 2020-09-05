@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import javafx.application.Platform;
 
 public class ExitCommand extends Command {
 
@@ -12,6 +13,7 @@ public class ExitCommand extends Command {
 
     /**
      * Processes the exit command to exit the bot.
+     *
      * @param taskList List of tasks.
      * @param ui       UI of the bot.
      * @param storage  Storage managing the file in hard disk.
@@ -23,6 +25,7 @@ public class ExitCommand extends Command {
 
     /**
      * Exits the bot.
+     *
      * @param ui UI to show the goodbye message.
      */
     public String processBye(Ui ui) {

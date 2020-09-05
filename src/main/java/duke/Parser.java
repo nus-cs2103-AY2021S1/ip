@@ -17,6 +17,7 @@ public class Parser {
 
     /**
      * Returns the command based on user's input.
+     *
      * @param command User's input.
      * @return Corresponding command.
      * @throws DukeException If user's input is not compatible to any command.
@@ -44,7 +45,7 @@ public class Parser {
                 String taskDetails = removeFirstWord(command);
 
                 if (firstWord.equals("done")) {
-                    return new DoneCommand(taskDetails);
+                    return new DoneCommand(taskDetails.split(", "));
 
                 } else if (firstWord.equals("todo")) {
                     return new TodoCommand(taskDetails);
@@ -62,7 +63,7 @@ public class Parser {
                     return new ShowCommand(taskDetails);
 
                 } else if (firstWord.equals("find")) {
-                    return new FindCommand(taskDetails);
+                    return new FindCommand(taskDetails.split(", "));
 
                 } else {
                     throw new WrongInputException();
@@ -77,6 +78,7 @@ public class Parser {
 
     /**
      * Returns the task details by removing the command.
+     *
      * @param command User's input.
      * @return task details containing the description, date, and time.
      * @throws DukeException if the command consists of only one word.
