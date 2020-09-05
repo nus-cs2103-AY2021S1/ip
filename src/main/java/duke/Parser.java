@@ -36,9 +36,7 @@ public class Parser {
         public String getMessage() {
             return this.message;
         }
-
     }
-
 
     /**
      * Parses the full command given by the user as input.
@@ -56,68 +54,87 @@ public class Parser {
 
         String command = commandInputs[0].trim().toLowerCase();
 
-        String commandDetails;
-
         switch (command) {
         case "list":
-            return new ListCommand();
+            return Parser.getListCommand();
 
         case "find":
-            // "find" needs to be accompanied by a keyword
-            if (commandInputs.length < 2) {
-                throw new MissingKeywordException("I'm not sure what tasks to search for...");
-            }
-
-            commandDetails = commandInputs[1].trim();
-
-            return new FindCommand(commandDetails);
+            return Parser.getFindCommand(commandInputs);
 
         case "done":
-            // "done" needs to be accompanied by task ID
-            if (commandInputs.length < 2) {
-                throw new MissingTaskIdException(
-                        ErrorMessage.FAILED_TO_MARK_TASK_AS_COMPLETE.getMessage());
-            }
-
-            commandDetails = commandInputs[1].trim();
-
-            try {
-                int taskId = Integer.parseInt(commandDetails);
-                return new DoneCommand(taskId);
-            } catch (NumberFormatException e) {
-                throw new InvalidTaskIdException(
-                        ErrorMessage.FAILED_TO_MARK_TASK_AS_COMPLETE.getMessage());
-            }
+            return Parser.getDoneCommand(commandInputs);
 
         case "delete":
-            // "delete" needs to be accompanied by task ID
-            if (commandInputs.length < 2) {
-                throw new MissingTaskIdException(ErrorMessage.FAILED_TO_DELETE_TASK.getMessage());
-            }
-
-            commandDetails = commandInputs[1].trim();
-
-            try {
-                int taskId = Integer.parseInt(commandDetails);
-                return new DeleteCommand(taskId);
-            } catch (NumberFormatException e) {
-                throw new InvalidTaskIdException(ErrorMessage.FAILED_TO_DELETE_TASK.getMessage());
-            }
+            return Parser.getDeleteCommand(commandInputs);
 
         case "todo":
         case "deadline":
         case "event":
-            return Parser.handleTaskCreationInput(command, commandInputs);
+            return Parser.getAddCommand(command, commandInputs);
 
         case "bye":
-            return new ByeCommand();
+            return Parser.getByeCommand();
 
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    private static Command handleTaskCreationInput(String command, String[] commandInputs)
+    private static ByeCommand getByeCommand() {
+        return new ByeCommand();
+    }
+
+    private static DeleteCommand getDeleteCommand(String[] commandInputs) throws DukeException {
+        // "delete" needs to be accompanied by task ID
+        if (commandInputs.length < 2) {
+            throw new MissingTaskIdException(ErrorMessage.FAILED_TO_DELETE_TASK.getMessage());
+        }
+
+        String commandDetails = commandInputs[1].trim();
+
+        try {
+            int taskId = Integer.parseInt(commandDetails);
+            return new DeleteCommand(taskId);
+        } catch (NumberFormatException e) {
+            throw new InvalidTaskIdException(ErrorMessage.FAILED_TO_DELETE_TASK.getMessage());
+        }
+    }
+
+    private static DoneCommand getDoneCommand(String[] commandInputs)
+            throws MissingTaskIdException, InvalidTaskIdException {
+        // "done" needs to be accompanied by task ID
+        if (commandInputs.length < 2) {
+            throw new MissingTaskIdException(
+                    ErrorMessage.FAILED_TO_MARK_TASK_AS_COMPLETE.getMessage());
+        }
+
+        String commandDetails = commandInputs[1].trim();
+
+        try {
+            int taskId = Integer.parseInt(commandDetails);
+            return new DoneCommand(taskId);
+        } catch (NumberFormatException e) {
+            throw new InvalidTaskIdException(
+                    ErrorMessage.FAILED_TO_MARK_TASK_AS_COMPLETE.getMessage());
+        }
+    }
+
+    private static FindCommand getFindCommand(String[] commandInputs) throws DukeException {
+        // "find" needs to be accompanied by a keyword
+        if (commandInputs.length < 2) {
+            throw new MissingKeywordException("I'm not sure what tasks to search for...");
+        }
+
+        String commandDetails = commandInputs[1].trim();
+
+        return new FindCommand(commandDetails);
+    }
+
+    private static ListCommand getListCommand() {
+        return new ListCommand();
+    }
+
+    private static AddCommand getAddCommand(String command, String[] commandInputs)
             throws DukeException {
         // "todo", "deadline", "event" needs to be accompanied with details on the task to be
         // created
