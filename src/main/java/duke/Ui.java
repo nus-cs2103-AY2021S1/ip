@@ -48,6 +48,7 @@ public class Ui {
      * @return String containing information of tasks
      */
     public String displayTaskList(TaskList taskList) {
+        assert taskList != null;
         StringBuilder s = new StringBuilder("Here are your current tasks:\n");
         addTasksToStringBuilder(taskList, s);
         return s.toString();
