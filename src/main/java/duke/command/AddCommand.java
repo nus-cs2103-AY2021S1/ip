@@ -40,6 +40,8 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert storage != null : "Storage cannot be null";
+        assert taskList != null : "taskList cannot be null";
         switch (c) {
         case TODO:
             return addToDoTask(this.userInput, taskList, storage);
@@ -90,13 +92,10 @@ public class AddCommand extends Command {
      * @param storage the database for Duke to save all tasks to the user's local storage.
      */
     public String addItem(Task newTask, TaskList taskList, Storage storage) {
+        assert newTask != null : "Task input cannot be null";
         taskList.add(newTask);
         storage.createTask(newTask); // Add to storage database
-        int listSize = taskList.size();
-        return ("Got it. I've added this task:\n   "
-                + newTask.toString() + "\nNow you have " + (listSize)
-                + (listSize > 1 ? " tasks" : " task")
-                + " in the list.");
+        return "Got it. I've added this task:\n   " + newTask.toString() + taskList.printNumTasks();
 
     }
 }
