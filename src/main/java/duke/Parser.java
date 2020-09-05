@@ -34,36 +34,36 @@ public class Parser {
      */
     static Command parse(String fullCommand) throws DukeEmptyInputException, DukeInvalidDateTimeException,
             DukeInvalidCommandException, DukeInvalidKeywordException {
-        String[] commandArr = fullCommand.trim().split(" ", 2);
-        switch(commandArr[0]) {
+        String[] commands = fullCommand.trim().split(" ", 2);
+        switch(commands[0]) {
         case "bye":
             return parseBye();
         case "list":
             return parseList();
         case "done":
-            return parseDone(Integer.parseInt(commandArr[1]));
+            return parseDone(Integer.parseInt(commands[1]));
         case "delete":
-            return parseDelete(Integer.parseInt(commandArr[1]));
+            return parseDelete(Integer.parseInt(commands[1]));
         case "find":
-            if (commandArr.length < 2) {
+            if (commands.length < 2) {
                 throw new DukeInvalidKeywordException();
             }
-            return parseFind(commandArr[1]);
+            return parseFind(commands[1]);
         case "todo":
-            if (commandArr.length < 2) {
+            if (commands.length < 2) {
                 throw new DukeEmptyInputException("The description of a todo cannot be empty.");
             }
-            return parseToDo(commandArr[1]);
+            return parseToDo(commands[1]);
         case "deadline":
-            if (commandArr.length < 2) {
+            if (commands.length < 2) {
                 throw new DukeEmptyInputException("The description of a todo cannot be empty.");
             }
-            return parseDeadline(commandArr[1]);
+            return parseDeadline(commands[1]);
         case "event":
-            if (commandArr.length < 2) {
+            if (commands.length < 2) {
                 throw new DukeEmptyInputException("The description of a todo cannot be empty.");
             }
-            return parseEvent(commandArr[1]);
+            return parseEvent(commands[1]);
         default:
             throw new DukeInvalidCommandException("Unknown command.");
         }
