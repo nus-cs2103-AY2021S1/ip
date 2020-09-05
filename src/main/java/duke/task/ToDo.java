@@ -12,7 +12,7 @@ public class ToDo extends Task {
      * @param description Details of the task.
      */
     public ToDo(String description) {
-        super(description);
+        super(description, 1);
     }
 
     /**
@@ -21,9 +21,10 @@ public class ToDo extends Task {
      * @param description Details of the task.
      * @param isDone Boolean value of whether a task is completed.
      */
-    public ToDo(String description, boolean isDone) {
-        super(description, isDone);
+    public ToDo(String description, boolean isDone, boolean isReminderOn) {
+        super(description, isDone, isReminderOn, 1);
     }
+
 
     /**
      * Returns a proper styling to be recorded into CSV.

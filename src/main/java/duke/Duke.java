@@ -57,4 +57,8 @@ public class Duke {
             return e.getMessage();
         }
     }
+    
+    public TaskList retrieveTaskList() {
+        return tasks;
+    }
 }

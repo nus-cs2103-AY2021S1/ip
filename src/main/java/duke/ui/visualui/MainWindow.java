@@ -1,7 +1,9 @@
 package duke.ui.visualui;
 
 import duke.Duke;
+import duke.tasklist.TaskList;
 import duke.ui.textui.Ui;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -16,30 +18,46 @@ import javafx.stage.Stage;
  */
 public class MainWindow extends AnchorPane {
     @FXML
-    private ScrollPane scrollPane;
+    private ScrollPane userScreen; 
     @FXML
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
     @FXML
     private Button sendButton;
-
+    @FXML
+    private VBox reminderSection;
+    
     private Duke duke;
-
+    Stage stage;
     private Image stitch = new Image(this.getClass().getResourceAsStream("/images/stitch.png"));
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image welcomeStitch = new Image(this.getClass().getResourceAsStream("/images/welcomestitch.png"));
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        userScreen.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d, Stage stage) {
-        duke = d;
+    public void setDuke(Duke duke, Stage stage) {
+        this.duke = duke;
         Ui ui = new Ui();
         String greet = ui.greetings();
+        this.stage = stage;
         dialogContainer.getChildren().addAll(OpeningBox.getOpeningMessage(greet, welcomeStitch));
+        userScreen.prefWidthProperty().bind(stage.widthProperty());
+        
+        TaskList taskList = duke.retrieveTaskList();
+        TaskList reminderList = new TaskList();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).getReminderStatus() == 1) {
+                reminderList.add(taskList.get(i));
+            }
+        }
+        reminderList.sortByDueDate();
+        for (int i = 0; i < reminderList.size(); i++) {
+            reminderSection.getChildren().addAll(ReminderDisplay.getReminderDisplay(reminderList.get(i)));
+        }
     }
 
     /**
@@ -51,8 +69,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, user),
-                DialogBox.getDukeDialog(response, stitch)
+                DialogBox.getUserDialog(stage, input, user),
+                DialogBox.getDukeDialog(stage, response, stitch)
         );
         userInput.clear();
     }

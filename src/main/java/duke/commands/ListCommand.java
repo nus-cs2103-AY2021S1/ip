@@ -45,7 +45,8 @@ public class ListCommand extends Command {
             return ui.messageFormatter(EMPTY_MSG);
         } else {
             StringBuffer finalMessage = new StringBuffer(SHOW_TASK).append("\n");
-            IntStream.range(1, tasks.size() + 1).forEach(num -> finalMessage.append(tasks.get(num - 1)).append("\n"));
+            IntStream.range(1, tasks.size() + 1).forEach(num -> finalMessage.append(num).append(". ")
+                    .append(tasks.get(num - 1)).append("\n"));
             return ui.messageFormatter(finalMessage.toString());
         }
     }

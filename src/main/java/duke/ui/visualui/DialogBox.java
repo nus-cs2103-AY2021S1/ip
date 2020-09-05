@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 /**
  * An example of a custom control using FXML.
@@ -29,7 +30,7 @@ public class DialogBox extends HBox {
     @FXML
     private VBox speechBubble;
 
-    private DialogBox(String text, Image img, String user) {
+    private DialogBox(Stage stage, String text, Image img, String user) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -64,12 +65,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, "user");
+    public static DialogBox getUserDialog(Stage stage, String text, Image img) {
+        return new DialogBox(stage, text, img, "user");
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img, "duke");
+    public static DialogBox getDukeDialog(Stage stage, String text, Image img) {
+        var db = new DialogBox(stage, text, img, "duke");
         db.flip();
         return db;
     }
