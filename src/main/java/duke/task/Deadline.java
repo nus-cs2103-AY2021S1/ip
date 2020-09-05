@@ -2,13 +2,12 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /** A task of type deadline. */
 public class Deadline extends Task {
 
     /** The deadline of the task. */
-    private LocalDateTime deadline;
+    private final LocalDateTime deadline;
 
     /**
      * Constructs a Deadline.
@@ -29,8 +28,7 @@ public class Deadline extends Task {
      * @param deadline The date of the deadline.
      */
     public Deadline(String task, LocalDateTime deadline) {
-        super(task);
-        this.deadline = deadline;
+        this(task, deadline, false);
     }
 
     /**
@@ -56,9 +54,9 @@ public class Deadline extends Task {
         } else if (o instanceof Deadline) {
             Deadline d = (Deadline) o;
             return d.task.equals(this.task) && d.deadline.equals(deadline);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     @Override
@@ -74,8 +72,8 @@ public class Deadline extends Task {
     @Override
     public String saveFormat() {
         return "D" + super.saveFormat() + String.format("%sT%s",
-            deadline.format(DateTimeFormatter.ofPattern("y-MM-dd")),
-            deadline.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+            deadline.format(SAVE_DATE_FORMAT),
+            deadline.format(SAVE_TIME_FORMAT));
     }
 
     /**
@@ -86,6 +84,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + String.format(" (by: %s)",
-            deadline.format(DateTimeFormatter.ofPattern("dd MMM y, h:mm a")));
+            deadline.format(DATE_TIME_FORMAT));
     }
 }

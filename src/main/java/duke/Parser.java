@@ -40,76 +40,46 @@ public class Parser {
 
         assert fullCommand != null;
 
+        // Removes unnecessary whitespace
         fullCommand = fullCommand.trim();
 
-        String firstWord = fullCommand.contains(" ")
-            ? fullCommand.substring(0, fullCommand.indexOf(" ")).toLowerCase()
-            : fullCommand.toLowerCase();
+        // Determines the case for each command
+        switch (getFirstWord(fullCommand)) {
+            case "todo":
+                return new ToDoCommand(getTask(fullCommand, "todo"));
+                // Fallthrough
 
-        switch (firstWord) {
-        case "todo":
-            return new ToDoCommand(getTask(fullCommand, "todo"));
-            // Fallthrough
+            case "event":
+                return new EventCommand(getTask(fullCommand, "event"));
+                // Fallthrough
 
-        case "event":
-            return new EventCommand(getTask(fullCommand, "event"));
-            // Fallthrough
+            case "deadline":
+                return new DeadlineCommand(getTask(fullCommand, "deadline"));
+                // Fallthrough
 
-        case "deadline":
-            return new DeadlineCommand(getTask(fullCommand, "deadline"));
-            // Fallthrough
+            case "list":
+                return new ListCommand(fullCommand);
+                // Fallthrough
 
-        case "list":
-            return new ListCommand(fullCommand);
-            // Fallthrough
+            case "find":
+                return new FindCommand(getKeywords(fullCommand));
+                // Fallthrough
 
-        case "find":
-            String[] keywords = fullCommand.substring("find".length() + 1).trim().split(" ");
-            return new FindCommand(keywords);
-            // Fallthrough
+            case "done":
+                return new DoneCommand(getTaskNumbers(fullCommand, "done"));
+                // Fallthrough
 
-        case "done":
+            case "delete":
+                return new DeleteCommand(getTaskNumbers(fullCommand, "delete"));
+                // Fallthrough
 
-            if (fullCommand.equalsIgnoreCase("done")) {
-                throw new NoIndexException("done");
-            } else {
+            case "bye":
+                return new ExitCommand();
+                // Fallthrough
 
-                try {
-
-                    String[] taskNumbers = fullCommand.substring("done".length() + 1).split(" ");
-                    Integer[] taskNo = Stream.of(taskNumbers).map(Integer::valueOf).toArray(Integer[]::new);
-                    return new DoneCommand(taskNo);
-
-                } catch (NumberFormatException numError) {
-                    throw new NoIndexException("done");
-                }
-            }
-            // Fallthrough
-
-        case "delete":
-            if (fullCommand.equalsIgnoreCase("delete")) {
-                throw new NoIndexException("delete");
-            } else {
-
-                try {
-                    String[] taskNumbers = fullCommand.substring("delete".length() + 1).split(" ");
-                    Integer[] taskNo = Stream.of(taskNumbers).map(Integer::valueOf).toArray(Integer[]::new);
-                    return new DeleteCommand(taskNo);
-
-                } catch (NumberFormatException numError) {
-                    throw new NoIndexException("delete");
-                }
-
-            }
-            // Fallthrough
-
-        case "bye":
-            return new ExitCommand();
-            // Fallthrough
-
-        default:
-            throw new UnrecognizedTaskException();
-            // Fallthrough
+            default:
+                throw new UnrecognizedTaskException();
+                // Fallthrough
         }
     }
 
@@ -118,12 +88,12 @@ public class Parser {
      *
      * @param fullCommand   The input given by the user.
      * @param firstWord     The command.
-     * @return The task description
+     * @return The task description.
      * @throws EmptyTaskException If the input is an empty string, or contains only whitespaces.
      */
     private static String getTask(String fullCommand, String firstWord) throws EmptyTaskException {
         try {
-            return fullCommand.substring(firstWord.length() + 1);
+            return fullCommand.substring(firstWord.length() + 1).trim(); // take whitespace into account
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyTaskException();
         }
@@ -133,17 +103,25 @@ public class Parser {
      * Makes sense of a string that represents date time in ISO format.
      *
      * @param dateTimeString A String that represents the date time.
-     * @return The date time in LocalDateTime
+     * @return The date time in LocalDateTime.
      * @throws InvalidDateException If the dateTimeString is not in a valid date time format.
      */
     public static LocalDateTime getDateTime(String dateTimeString) throws InvalidDateException {
 
         assert dateTimeString != null;
+
+        // Remove unnecessary whitespace
         dateTimeString = dateTimeString.trim();
+
+        // Determine the dateTime format
+        String isoFormat = "yyyy-mm-ddThh:mm:ss";
+        String isoFormatShort = "yyyy-mm-ddThh:mm";
+        boolean isIsoFormat = dateTimeString.length() == isoFormat.length()
+            || dateTimeString.length() == isoFormatShort.length();
 
         try {
 
-            if (dateTimeString.length() == 19 || dateTimeString.length() == 16) {
+            if (isIsoFormat) {
                 return LocalDateTime.parse(dateTimeString);
             } else if (dateTimeString.contains("-")) {
                 return LocalDateTime.of(LocalDate.parse(dateTimeString), LocalTime.parse("23:59"));
@@ -156,5 +134,49 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new InvalidDateException();
         }
+    }
+
+    /**
+     * Parses the taskNumbers given.
+     *
+     * @param fullCommand   The full command given by the user.
+     * @param firstWord     The first word (command) given by the user.
+     * @return The array of task numbers.
+     * @throws NoIndexException If there are no integers following the command.
+     */
+    public static Integer[] getTaskNumbers(String fullCommand, String firstWord) throws NoIndexException {
+        if (fullCommand.equalsIgnoreCase(firstWord)) {
+            throw new NoIndexException(firstWord);
+        }
+
+        try {
+            String[] taskNumbers = fullCommand.substring(firstWord.length()).trim().split(" ");
+            return Stream.of(taskNumbers).map(Integer::valueOf).toArray(Integer[]::new);
+
+        } catch (NumberFormatException numError) {
+            throw new NoIndexException(firstWord);
+        }
+    }
+
+    /**
+     * Parses the keywords given (separated by whitespace).
+     *
+     * @param fullCommand The full command given by the user.
+     * @return An array of keywords.
+     */
+    public static String[] getKeywords(String fullCommand) {
+        return fullCommand.substring("find ".length()).trim().split(" ");
+    }
+
+    /**
+     * Obtains the command (first word) given by the user.
+     *
+     * @param fullCommand The full command given by the user.
+     * @return The command (first word).
+     */
+    public static String getFirstWord(String fullCommand) {
+        return fullCommand.contains(" ")
+            ? fullCommand.substring(0, fullCommand.indexOf(" ")).toLowerCase()
+            : fullCommand.toLowerCase();
     }
 }

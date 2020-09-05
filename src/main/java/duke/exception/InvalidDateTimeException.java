@@ -11,11 +11,6 @@ public class InvalidDateTimeException extends InvalidDateException {
         + "{HH:MM:SS}\n"
         + "{HH:MM}";
 
-    /** Constructs an InvalidDateTimeException. */
-    public InvalidDateTimeException() {
-        super("" + dateTimeFormat);
-    }
-
     /**
      * Constructs an InvalidDateTimeException with the given message.
      *

@@ -2,7 +2,6 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /** A task of type Event. */
 public class Event extends Task {
@@ -12,6 +11,9 @@ public class Event extends Task {
 
     /** The end date time of the event. */
     private final LocalDateTime endDate;
+
+    /** Save format for empty endDate. */
+    public static final String EMPTY_END_DATE = "XXXXXXXXXXXXXXXXXXX";
 
     /**
      * Constructs an Event.
@@ -35,9 +37,7 @@ public class Event extends Task {
      * @param endDate   The end date of the event.
      */
     public Event(String task, LocalDateTime startDate, LocalDateTime endDate) {
-        super(task);
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this(task, startDate, endDate, false);
     }
 
     /**
@@ -47,9 +47,7 @@ public class Event extends Task {
      * @param date The date of the event.
      */
     public Event(String task, LocalDateTime date) {
-        super(task);
-        this.startDate = date;
-        this.endDate = null;
+        this(task, date, null);
     }
 
     /**
@@ -60,13 +58,13 @@ public class Event extends Task {
     private String dateFormat() {
         if (endDate != null) {
             return String.format(" (at: %s to %s)",
-                startDate.format(DateTimeFormatter.ofPattern("dd MMM y, h:mm a")),
+                startDate.format(DATE_TIME_FORMAT),
                 startDate.toLocalDate().equals(endDate.toLocalDate())
-                    ? endDate.format(DateTimeFormatter.ofPattern("h:mm a"))
-                    : endDate.format(DateTimeFormatter.ofPattern("dd MMM y, h:mm a")));
+                    ? endDate.format(TIME_FORMAT)
+                    : endDate.format(DATE_TIME_FORMAT));
         } else {
             return String.format(" (at: %s)",
-                startDate.format(DateTimeFormatter.ofPattern("dd MMM y, h:mm a")));
+                startDate.format(DATE_TIME_FORMAT));
         }
     }
 
@@ -77,13 +75,13 @@ public class Event extends Task {
      */
     private String dateSaveFormat() {
         String startDateString = String.format("%sT%s",
-            startDate.format(DateTimeFormatter.ofPattern("y-MM-dd")),
-            startDate.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+            startDate.format(SAVE_DATE_FORMAT),
+            startDate.format(SAVE_TIME_FORMAT));
 
         String endDateString = endDate != null
-            ? String.format("%sT%s", endDate.format(DateTimeFormatter.ofPattern("y-MM-dd")),
-            endDate.format(DateTimeFormatter.ofPattern("HH:mm:ss")))
-            : "XXXXXXXXXXXXXXXXXXX";
+            ? String.format("%sT%s", endDate.format(SAVE_DATE_FORMAT),
+            endDate.format(SAVE_TIME_FORMAT))
+            : EMPTY_END_DATE;
 
         return startDateString + " to " + endDateString;
     }
@@ -116,18 +114,16 @@ public class Event extends Task {
         } else if (obj instanceof Event) {
             Event event = (Event) obj;
 
-            if (event.endDate == null && endDate == null) {
-                return event.task.equals(this.task) && event.startDate.equals(startDate);
-            } else if (event.endDate != null && endDate != null) {
-                return event.task.equals(this.task) && event.startDate.equals(startDate)
-                    && event.endDate.equals(endDate);
-            } else {
-                return false;
-            }
+            boolean isSameTask = event.task.equals(this.task);
+            boolean isSameStartDate = event.startDate.equals(startDate);
+            boolean isSameEndDate = event.endDate != null && endDate != null
+                    ? event.endDate.equals(endDate)
+                    : event.endDate == null && endDate == null;
 
-        } else {
-            return false;
+            return isSameTask && isSameStartDate && isSameEndDate;
         }
+
+        return false;
     }
 
     /**
