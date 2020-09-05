@@ -15,7 +15,7 @@ public class Deadline extends Listing {
    * LocalDate.
    *
    * @param s        detail of the listing
-   * @param deadline in the format YYYY-MM-DD
+   * @param deadLine in the format YYYY-MM-DD
    * @return A DeadLine object
    */
   public Deadline(String s, String deadLine) {
@@ -30,7 +30,7 @@ public class Deadline extends Listing {
    * @param doneness can be 0 or 1 and which gets passed to setDoneness that converts \ it to a
    *                 boolean
    * @param s        detail of the listing
-   * @param deadline in the format YYYY-MM-DD
+   * @param deadLine in the format YYYY-MM-DD
    * @return A DeadLine object
    */
   public Deadline(String doneness, String s, String time) {
