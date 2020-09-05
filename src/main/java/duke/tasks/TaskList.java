@@ -2,6 +2,7 @@ package duke.tasks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * List that contains all the task.
@@ -42,7 +43,9 @@ public class TaskList {
      */
     public void delete(int index) {
         assert tasks != null : "Tasklist cannot be null.";
-        tasks.remove(index);
+        List<Task> newList = this.tasks;
+        tasks = newList.stream().filter((task) -> tasks.indexOf(task) != index)
+                .collect(Collectors.toList());
     }
 
     /**

@@ -1,9 +1,11 @@
 package duke.commands;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.tasks.Task;
 import duke.tasks.TaskList;
+
 
 /**
  * Command to find words in list.
@@ -31,16 +33,12 @@ public class FindCommand extends Command {
         assert tasklist != null : "Tasklist cannot be null.";
         assert storage != null : "Storage cannot be null.";
         assert description != null : "Description cannot be null.";
-        boolean wordExist = false;
-        String response = "";
-        for (Task i : tasklist.getList()) {
-            String task = i.toString();
-            if (task.contains(description)) {
-                response += task + "\n";
-                wordExist = true;
-            }
-        }
-        if (!wordExist) {
+        String response = IntStream.range(0, tasklist.getSize())
+                .filter(index -> tasklist.get(index).toString().contains(description))
+                .mapToObj(index -> String.format("%d. %s", index + 1, tasklist.get(index)))
+                .collect(Collectors.joining("\n"))
+                .trim();
+        if (response.length() == 0) {
             throw new DukeException("word does not exist in TaskList!");
         }
         return response;
