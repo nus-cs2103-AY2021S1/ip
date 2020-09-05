@@ -1,9 +1,8 @@
 /**
- * ExitCommand inherits from Command and is called to
- * terminate the program when user inputs "bye".
+ * Terminates the program when user inputs "bye".
  */
 class ByeCommand extends Command {
-    static String farewellMsg = "Bye. Hope to see you again soon!";
+    static private String farewellMsg = "Bye. Hope to see you again soon!";
     /**
      * Prints a goodbye message and terminates Duke.
      *

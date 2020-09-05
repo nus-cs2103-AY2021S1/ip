@@ -21,6 +21,7 @@ public class Parser {
 
     /**
      * Returns an array of strings that make up the details of one task. Eg: ["T", "Read Book"].
+     *
      * @param addType The type of todo that is to be added.
      * @param inputArr A string array of input commands.
      * @return Details of a single task.

@@ -1,15 +1,12 @@
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * The DeleteCommand inherits from Command and is used to delete tasks in the saved TaskList.
+ * Deletes tasks in the saved TaskList.
  */
 class DeleteCommand extends Command {
     protected int taskNum;
 
     /**
      * The constructor for DeleteCommand which takes in the task number to be deleted.
+     *
      * @param taskNum Task number to be deleted
      */
     DeleteCommand(int taskNum) {

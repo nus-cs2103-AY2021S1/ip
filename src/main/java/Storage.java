@@ -19,6 +19,7 @@ public class Storage {
 
     /**
      * Returns a list of task details loaded from the text file that contains saved data.
+     *
      * @return A list of string arrays, each containing the details of the saved tasks.
      */
 
@@ -40,6 +41,7 @@ public class Storage {
 
     /**
      * Takes in a list of task details and saves them line-by-line to the specified text file.
+     *
      * @param tasksInfo A list of string containing the details of each task.
      */
 

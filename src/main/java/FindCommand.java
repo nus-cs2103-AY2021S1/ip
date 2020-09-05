@@ -1,9 +1,5 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
- * FindCommand inherits from Command and is used when user input starts with "find".
+ * Called when user input starts with "find".
  */
 class FindCommand extends Command {
     protected String word;
