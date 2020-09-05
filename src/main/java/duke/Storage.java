@@ -85,9 +85,8 @@ public class Storage {
 
             for (String task : Files.readAllLines(dukeFile)) {
                 Task t = readTask(task);
-                if (t != null) {
-                    taskList.add(readTask(task));
-                }
+                assert t != null: "File read error.";
+                taskList.add(readTask(task));
             }
 
             return taskList;
