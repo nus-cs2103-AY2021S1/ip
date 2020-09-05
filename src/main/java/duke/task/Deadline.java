@@ -48,7 +48,7 @@ public class Deadline extends Task {
             throw new TaskException("I need more arguments for to track an Event.\n"
                     + "The format should be <description> /by <time in DD/MM/YYYY HH:mm>");
         } else {
-            LocalDateTime date = LocalDateTime.parse(argsList[1], Task.READER_FORMAT);
+            LocalDateTime date = LocalDateTime.parse(argsList[1], Task.DATE_FORMAT_PARSE);
             return new Deadline(argsList[0], date);
         }
     }
@@ -95,6 +95,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return printCompletionFlag() + " | D | " + description + " | By: " + deadline.format(Task.DISPLAY_FORMAT);
+        return printCompletionFlag() + " | D | " + description + " | By: " + deadline.format(Task.DATE_FORMAT_DISPLAY);
     }
 }

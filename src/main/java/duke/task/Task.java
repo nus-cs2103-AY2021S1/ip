@@ -12,8 +12,8 @@ import java.time.format.DateTimeFormatter;
  */
 public abstract class Task {
     protected static final String DELIMITER_STORAGE = " :: ";
-    protected static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("dd MMM YY HH:mm");
-    protected static final DateTimeFormatter READER_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    protected static final DateTimeFormatter DATE_FORMAT_DISPLAY = DateTimeFormatter.ofPattern("dd MMM YY HH:mm");
+    protected static final DateTimeFormatter DATE_FORMAT_PARSE = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     private static final String COMPLETE = "✓";
     private static final String NOT_COMPLETE = "✘";

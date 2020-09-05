@@ -48,7 +48,7 @@ public class Event extends Task {
             throw new TaskException("I need more arguments for to track an Event.\n"
             + "The format should be <description> /at <time in DD/MM/YYYY HH:mm>");
         } else {
-            LocalDateTime date = LocalDateTime.parse(argsList[1], Task.READER_FORMAT);
+            LocalDateTime date = LocalDateTime.parse(argsList[1], Task.DATE_FORMAT_PARSE);
             return new Event(argsList[0], date);
         }
     }
@@ -95,6 +95,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return printCompletionFlag() + " | E | " + description + " | At: " + dateInfo.format(Task.DISPLAY_FORMAT);
+        return printCompletionFlag() + " | E | " + description + " | At: " + dateInfo.format(Task.DATE_FORMAT_DISPLAY);
     }
 }
