@@ -13,7 +13,10 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = Duke.startDuke();
+    private Duke duke = new Duke();
+
+    public Main() throws IOException {
+    }
 
     @Override
     public void start(Stage stage) {

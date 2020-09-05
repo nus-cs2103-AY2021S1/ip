@@ -11,42 +11,35 @@ import java.io.IOException;
 
 public class Duke {
 
-    private Storage store;
-    private TaskList taskList;
-    private Ui ui;
-    private Parser parser;
+    private final Ui ui;
+    private final Parser parser;
+    private final DukeStateManager dukeStateManager;
 
-    private Duke(Storage store, TaskList taskList, Ui ui, Parser parser) {
-        this.store = store;
-        this.taskList = taskList;
-        this.ui = ui;
-        this.parser = parser;
-    }
-
-    public static Duke startDuke() {
-        Storage store = new Storage();
-        TaskList taskList = new TaskList();
-        Ui ui =  new Ui();
-        Parser parser = new Parser();
+    public Duke() throws IOException {
         try {
-            store.initializeStorage();
-            taskList = new TaskList(store.getTasks());
+            Storage storage = new Storage();
+            TaskList taskList = new TaskList(storage.getTasks());
+            DukeState initialState = new DukeState(taskList, storage);
+            this.dukeStateManager = new DukeStateManager(initialState);
+            this.ui = new Ui();
+            this.parser = new Parser();
         } catch (IOException e) {
-            System.out.println("Error connecting to storage, actions made will not be saved");
+            throw new IOException(e);
         }
-        return new Duke(store, taskList, ui, parser);
     }
 
     public Response getResponse(String input) {
         try {
+            DukeState currentState = dukeStateManager.getCurrentState();
+            TaskList taskList = currentState.getTaskList();
+            Storage store = currentState.getStorage();
             Command c = parser.parse(input);
-            Response r = c.execute(taskList, ui, store);
+            Response r = c.execute(taskList, ui, store, dukeStateManager);
             return r;
         } catch (DukeException e) {
             return new Response(false, e.getFriendlyMessage());
+        } catch (IOException e) {
+            return new Response(false, "Unable to connect to storage :-(");
         }
-    }
-
-    public static void main(String[] args) {
     }
 }

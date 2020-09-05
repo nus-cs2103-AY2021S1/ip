@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.Copiable;
 import duke.exceptions.NoSuchTaskException;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.stream.IntStream;
 /**
  * Contains the user's Tasks while the app is running.
  */
-public class TaskList {
+public class TaskList implements Copiable {
 
     private final List<Task> taskList;
 
@@ -26,13 +27,20 @@ public class TaskList {
         taskList.add(task);
     }
 
+    @Override
+    public TaskList getCopyOf() {
+        return new TaskList(getListOfTasks());
+    }
+
     /**
      * Gets an unordered List object containing all Tasks stored in this TaskList.
      *
      * @return a List object containing all Tasks
      */
     public List<Task> getListOfTasks() {
-        return List.copyOf(taskList);
+        List<Task> newList = new ArrayList<>();
+        newList.addAll(taskList);
+        return newList;
     }
 
     /**

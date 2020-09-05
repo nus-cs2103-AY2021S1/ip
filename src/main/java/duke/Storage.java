@@ -11,21 +11,28 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the state of the storage file used to store user's Tasks
+ */
 public class Storage {
 
-    private final static String DIRECTORY_PATH = "data";
-    private final static String STORAGE_PATH = "data/duke.txt";
+    private final  String DIRECTORY_PATH = "data";
+    private final  String STORAGE_PATH = "data/duke.txt";
 
     /**
-     * Initialize storage by checking if storage file path exists and if not create the appropriate directory and file.
+     * Constructs a Storage by checking if storage file path exists and if not create the appropriate directory and file.
      *
      * @throws IOException if error when creating the storage directory and/or file
      */
-    public void initializeStorage() throws IOException {
+    public Storage() throws IOException {
         File storageDirectory = new File(DIRECTORY_PATH);
         if (!storageDirectory.exists()) {
             storageDirectory.mkdir();
@@ -66,18 +73,16 @@ public class Storage {
      * Replace the contents of the storage file with the Tasks in the given List of tasks.
      *
      * @param taskList a List containing Tasks to replace existing Tasks stored in the storage file
+     * @return A new Storage object representing the new state of the storage file
+     * @throws IOException if problem with reading/writing to storage file
      */
-    public void updateTasks(List<Task> taskList) {
-        try {
-            FileWriter storageWriter = new FileWriter(STORAGE_PATH, true);
-            clearTasks();
-            for (Task t : taskList) {
-                addTask(storageWriter, t);
-            }
-            storageWriter.close();
-        } catch (IOException e) {
-            System.out.println("Problem accessing storage file");
+    public void updateTasks(List<Task> taskList) throws IOException {
+        FileWriter storageWriter = new FileWriter(STORAGE_PATH, true);
+        clearTasks();
+        for (Task t : taskList) {
+            addTask(storageWriter, t);
         }
+        storageWriter.close();
     }
 
     private Task parseStorageString(String storageString) throws WrongDateFormatException {

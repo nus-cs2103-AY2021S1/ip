@@ -1,11 +1,14 @@
 package duke.command;
 
+import duke.DukeStateManager;
 import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Response;
 import duke.ui.Ui;
 import duke.exceptions.NoSuchTaskException;
+
+import java.io.IOException;
 
 /**
  * Command to mark a Task as complete. Created by using "done taskNumber"
@@ -25,15 +28,21 @@ public class DoneCommand extends Command {
      * @param tasks TaskList containing all tasks
      * @param ui Ui for formatting of message Strings to be displayed to user
      * @param storage Storage to retrieve and store Tasks entered by user
-     * @return Response object containing the feedback String to be displayed by the GUI
+     * @param dukeStateManager DukeStateManager to manage the current state of Duke
+     * @return Response object containing the formatted feedback String to be displayed by the GUI
      * @throws NoSuchTaskException if invalid taskNumber was provided
+     * @throws IOException if there is an error with storing changes into storage file
      */
     @Override
-    public Response execute(TaskList tasks, Ui ui, Storage storage) throws NoSuchTaskException {
+    public Response execute(TaskList tasks, Ui ui, Storage storage, DukeStateManager dukeStateManager)
+            throws NoSuchTaskException, IOException {
+        this.storeState(dukeStateManager, tasks, storage);
+
         Task completedTask = tasks.completeTask(taskNumber);
         String message = ui.formatMessage(String.format("Great! I've marked the following task as done: \n %s",
                 completedTask));
         storage.updateTasks(tasks.getListOfTasks());
+
         return new Response(false, message);
     }
 
