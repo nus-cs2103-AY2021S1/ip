@@ -38,8 +38,7 @@ public class DoneCommand extends Command {
             Task completedTask = taskList.get(index);
             completedTask.markAsDone();
             storage.updateTask(completedTask, index);
-            return ("Nice! I've marked this task as done:\n"
-                    + completedTask.toString());
+            return "Nice! I've marked this task as done:\n" + completedTask.toString();
 
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {

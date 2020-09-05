@@ -54,14 +54,17 @@ public class Deadline extends Task {
     }
 
     private LocalTime formatTime(String by) {
-        String timePortion = by.substring(by.indexOf(" ") + 1);
+        int timeIndex = by.indexOf(" ") + 1;
+        String timePortion = by.substring(timeIndex);
         LocalTime time = LocalTime.parse(timePortion);
         return time;
     }
 
     private LocalDate formatDate(String by) {
-        String datePortion = by.substring(0, by.indexOf(" ")).replaceAll("/", "-");
-        LocalDate date = LocalDate.parse(datePortion);
+        int dateIndex = by.indexOf(" ");
+        String datePortion = by.substring(0, dateIndex);
+        String formattedDate = datePortion.replaceAll("/", "-");
+        LocalDate date = LocalDate.parse(formattedDate);
         return date;
     }
 

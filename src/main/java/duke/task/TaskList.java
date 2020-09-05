@@ -33,7 +33,6 @@ public class TaskList {
     public void add(Task newTask) {
         assert newTask != null : "New task cannot be null";
         this.taskList.add(newTask);
-
     }
 
     /**
@@ -82,6 +81,15 @@ public class TaskList {
             }
         });
         return filteredTasks.toString();
+    }
+
+    /**
+     * Prints a string representation of the number of tasks currently in the TaskList.
+     */
+    public String printNumTasks() {
+        return "\nNow you have " + taskList.size()
+                + (taskList.size()> 1 ? " tasks" : " task")
+                + " in the list.";
     }
 
     /**

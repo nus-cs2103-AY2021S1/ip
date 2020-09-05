@@ -8,4 +8,3 @@ E | 0 | party | May 23 2020, 18:30:00
 T | 0 | walk dog
 T | 0 |  walk dog
 T | 0 | walk dog
-T | 0 | walk dog

@@ -48,6 +48,7 @@ public class DialogBox extends HBox {
         displayPicture.setFitHeight(40);
         displayPicture.setFitWidth(40);
 
+        // Auto resize dialog box when there is a long list
         this.setAlignment(Pos.TOP_RIGHT);
         this.setBorder(new Border(new BorderStroke(Paint.valueOf("blue"),
                 BorderStrokeStyle.DASHED, CornerRadii.EMPTY, BorderWidths.DEFAULT)));

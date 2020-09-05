@@ -58,12 +58,19 @@ public class Storage {
         for (String taskString : this.allTasks) {
             char taskType = taskString.charAt(0);
             assert taskType == 'T' || taskType == 'E' || taskType == 'D' : "Task type is wrong";
-            String taskDetails = taskString.substring(taskString.lastIndexOf("|") + 2);
 
             boolean isDone = false;
 
+            int descriptionIndex = taskString.lastIndexOf("|") + 2;
+            String taskDetails = taskString.substring(descriptionIndex);
+
             if (taskString.charAt(4) == '1') {
                 isDone = true;
+            }
+
+            String eventOrDeadlineDescription = "";
+            if (taskType == 'E' || taskType == 'D') {
+                eventOrDeadlineDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
             }
 
             switch (taskType) {
@@ -71,12 +78,10 @@ public class Storage {
                 taskList.add(new ToDo(taskDetails, isDone));
                 break;
             case 'E':
-                String eventDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
-                taskList.add(new Event(eventDescription, isDone, formatTaskDateTime(taskDetails)));
+                taskList.add(new Event(eventOrDeadlineDescription, isDone, formatTaskDateTime(taskDetails)));
                 break;
             case 'D':
-                String deadlineDescription = taskString.substring(8, taskString.lastIndexOf("|") - 1);
-                taskList.add(new Deadline(deadlineDescription, isDone, formatTaskDateTime(taskDetails)));
+                taskList.add(new Deadline(eventOrDeadlineDescription, isDone, formatTaskDateTime(taskDetails)));
                 break;
             default:
                 System.out.println("Unable to determine type of task");
