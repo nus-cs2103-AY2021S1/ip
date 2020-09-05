@@ -1,14 +1,12 @@
 package seedu.duke;
 
-import java.security.Key;
-
 /**
  * Parser processes each command from Ui and executes program accordingly.
  */
 public class Parser {
     private TaskList taskLists;
-    private final String INVALID_INPUT = "I don't know what that means! Try again.";
-    private final String LINES = "\n-----------------------------------------------\n";
+    private static final String INVALID_INPUT = "I don't know what that means! Try again.";
+    private static final String LINES = "\n-----------------------------------------------\n";
 
     /**
      * Initializes an instance of a Parser.

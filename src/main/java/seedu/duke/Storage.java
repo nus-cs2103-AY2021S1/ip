@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +16,7 @@ public class Storage {
     private static final String STORAGE_PATH = "data/duke.txt";
     private static final String TODO_SYMBOL = "T";
     private static final String EVENT_SYMBOL = "E";
-    private static final String DEADLINE_SYMBOL  = "D";
+    private static final String DEADLINE_SYMBOL = "D";
     private static final String INVALID_SYMBOL = "Invalid Symbol!";
     private static final String DONE = "1";
     private static final String NOT_DONE = "0";
@@ -75,7 +74,8 @@ public class Storage {
      * @throws FileNotFoundException If no file is found on the local directory.
      * @throws IOException If invalid input given.
      */
-    public static ArrayList<Task> loadFromStorage(ArrayList<Task> listOfTasks) throws FileNotFoundException, IOException {
+    public static ArrayList<Task> loadFromStorage(ArrayList<Task> listOfTasks)
+            throws FileNotFoundException, IOException {
         File data = new File(STORAGE_PATH);
         FileReader fr = new FileReader(data);
         BufferedReader br = new BufferedReader(fr);

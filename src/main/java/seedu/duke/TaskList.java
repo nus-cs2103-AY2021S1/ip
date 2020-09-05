@@ -9,21 +9,21 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> taskLists;
-    private final String INVALID_RANGE = "Index out of range! Try again.\n";
-    private final String COMPLETED_TASK = "This task has already been completed!";
-    private final String MARK_DONE_TASK = "    Nice! I have marked this task as done:\n";
-    private final String MISSING_INDEX = "No index found! Try again.\n";
-    private final String DELETE_TASK = "Noted. I have removed this task:\n";
-    private final String ADD_TASK = "Got it. I have added this task:\n";
-    private final String NOT_FOUND = "There are no tasks related to this keyword!\n";
-    private final String FOUND_KEYWORD = "Here are the matching tasks in your list: \n";
-    private final String DESCRIPTION = "    Here are the tasks in your list:\n";
-    private final String MUST_BE_NUMBER = "Index must be a number!\n";
+    private static final String INVALID_RANGE = "Index out of range! Try again.\n";
+    private static final String COMPLETED_TASK = "This task has already been completed!";
+    private static final String MARK_DONE_TASK = "    Nice! I have marked this task as done:\n";
+    private static final String MISSING_INDEX = "No index found! Try again.\n";
+    private static final String DELETE_TASK = "Noted. I have removed this task:\n";
+    private static final String ADD_TASK = "Got it. I have added this task:\n";
+    private static final String NOT_FOUND = "There are no tasks related to this keyword!\n";
+    private static final String FOUND_KEYWORD = "Here are the matching tasks in your list: \n";
+    private static final String DESCRIPTION = "    Here are the tasks in your list:\n";
+    private static final String MUST_BE_NUMBER = "Index must be a number!\n";
 
-    private final String TODO = "todo";
-    private final String EVENT = "event";
-    private final String DEADLINE = "deadline";
-    private final String FIND = "find";
+    private static final String TODO = "todo";
+    private static final String EVENT = "event";
+    private static final String DEADLINE = "deadline";
+    private static final String FIND = "find";
 
     private static final String TODO_SYMBOL = "T";
     private static final String EVENT_SYMBOL = "E";
@@ -159,7 +159,7 @@ public class TaskList {
      * @return String output after deleting task.
      */
     public String deleteTaskForGui(String userInput) {
-       try {
+        try {
             String[] splitUserInput = userInput.split(" ");
             int index = Integer.parseInt(splitUserInput[1]);
             assert index > 0 && index <= taskLists.size(); //Must be within range

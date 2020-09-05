@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.security.Key;
 import java.util.Scanner;
 
 /**
