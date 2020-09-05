@@ -18,7 +18,7 @@
          </HBox.margin></ImageView>
         <Label fx:id="dialog" graphicTextGap="8.0" lineSpacing="1.0" style="-fx-background-color: #42A6FE;" styleClass="textlabel" stylesheets="@../images/stylesheet.css" text="Sorry I do not know what that means :(" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="Candara Bold" size="12.0" />
+            <Font name="Segoe UI" size="12.0" />
          </font>
          <opaqueInsets>
             <Insets />

@@ -99,10 +99,10 @@ public class Event extends Task {
      * @return the LocalTime object representing the time.
      */
     private LocalTime parseTime(String raw) {
-        String t = String.format("%1$" + 5 + "s",
+        String timeString = String.format("%1$" + 5 + "s",
                 raw.replace(".", ":"))
                 .replace(" ", "0");
-        return LocalTime.parse(t);
+        return LocalTime.parse(timeString);
     }
 
     @Override

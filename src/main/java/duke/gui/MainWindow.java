@@ -30,6 +30,11 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         System.out.println("=================== [ Tebby started in GUI mode ] ===================");
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        duke = new Duke();
+        String welcomeMessage = duke.getWelcomeMessage();
+        dialogContainer.getChildren().addAll(
+                new DukeDialogBox(welcomeMessage, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {

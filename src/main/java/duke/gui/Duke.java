@@ -14,7 +14,6 @@ import duke.util.Ui;
  *     (iii) Viewing current task list
  *     (iv) Searching for tasks using query string
  *
- * This class serves as the main driver for the entire chat bot.
  * @author Andy Wu
  */
 public class Duke {
@@ -60,6 +59,7 @@ public class Duke {
     }
 
     /**
+     * THIS METHOD IS FOR THE CLI INTERFACE.
      * The main algorithm of the bot which runs indefinitely as long as
      * the running flag is true. The algorithm is summarized as:
      *
@@ -95,6 +95,10 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    public String getWelcomeMessage() {
+        return ui.getGuiWelcomeMessage();
     }
 
     /**
