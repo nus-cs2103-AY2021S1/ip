@@ -39,6 +39,7 @@ public class CommandHandler {
         case TODO:
             try {
                 task = input.split("todo ")[1];
+                assert !task.isEmpty() : "Task shouldn't be empty!";
                 Task newTask = new ToDos(task);
                 output += tasks.addTask(newTask);
             } catch (ArrayIndexOutOfBoundsException exception) {
@@ -66,7 +67,9 @@ public class CommandHandler {
                 } else {
                     try {
                         task = input.split("deadline ")[1].split("/by ")[0];
+                        assert !task.isEmpty() : "Task shouldn't be empty!";
                         String due = input.split("deadline ")[1].split("/by ")[1];
+                        assert !due.isEmpty() : "Deadline shouldn't be empty!";
                         if (task.equals("") && due.equals("")) {
                             throw new DukeException("", DukeExceptionType.WRONG_FORMAT, DEADLINE);
                         } else if (task.equals("")) {
@@ -106,7 +109,9 @@ public class CommandHandler {
                 } else {
                     try {
                         task = input.split("event ")[1].split("/at ")[0];
+                        assert !task.isEmpty() : "Event shouldn't be empty!";
                         String due = input.split("event ")[1].split("/at ")[1];
+                        assert !due.isEmpty() : "Scheduled date shouldn't be empty!";
                         if (task.equals("") && due.equals("")) {
                             throw new DukeException("", DukeExceptionType.WRONG_FORMAT, EVENT);
                         } else if (task.equals("")) {
@@ -132,12 +137,15 @@ public class CommandHandler {
             break;
         case FIND:
             String keyword = input.split(" ")[1];
+            assert !keyword.isEmpty() : "Keyword shouldn't be empty!";
             System.out.println(keyword);
             output += tasks.findTasks(keyword);
             break;
         case DONE:
             try {
-                int index = Integer.parseInt(input.split(" ")[1]);
+                String indexString = input.split(" ")[1];
+                assert !indexString.isEmpty() : "Index shouldn't be empty!";
+                int index = Integer.parseInt(indexString);
                 output += tasks.done(index);
             } catch (IndexOutOfBoundsException exception) {
                 try {
@@ -149,7 +157,9 @@ public class CommandHandler {
             break;
         case DELETE:
             try {
-                int index = Integer.parseInt(input.split(" ")[1]);
+                String indexString = input.split(" ")[1];
+                assert !indexString.isEmpty() : "Index shouldn't be empty!";
+                int index = Integer.parseInt(indexString);
                 output += tasks.delete(index);
             } catch (IndexOutOfBoundsException exception) {
                 try {
@@ -173,6 +183,7 @@ public class CommandHandler {
             }
             break;
         }
+        assert !output.equals(null) : "Output should not be null.";
         return output;
     }
 }

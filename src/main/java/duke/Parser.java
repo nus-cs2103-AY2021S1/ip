@@ -13,6 +13,7 @@ public class Parser {
      * @throws DukeException
      */
     public static String parseInputs(String input) throws DukeException {
+        assert !input.isEmpty() : "Input shouldn't be empty!";
         String output = "";
         if (input.equals("bye")) { 
             output += CommandHandler.handleCommands(input, DukeCommandType.EXIT, tasks);
@@ -35,6 +36,7 @@ public class Parser {
         } else {
             output += CommandHandler.handleCommands(input, DukeCommandType.UNKNOWN, tasks);
         }
+        assert !output.equals(null) : "Output should not be null.";
         return output;
     }
 }
