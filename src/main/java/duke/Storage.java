@@ -20,7 +20,9 @@ import duke.task.ToDo;
  * Takes care of file related operation.
  */
 public class Storage {
-
+    private static final String TODO = "T";
+    private static final String DEADLINE = "D";
+    private static final String EVENT = "E";
     private File file;
 
     /**
@@ -55,26 +57,14 @@ public class Storage {
             while (sc.hasNext()) {
                 String[] task = sc.nextLine().split("\\|");
                 switch (task[0].trim()) {
-                case "T":
-                    ToDo todo = new ToDo(task[2].trim());
-                    if (task[1].equals("1")) {
-                        todo.doneTask();
-                    }
-                    taskList.add(todo);
+                case TODO:
+                    taskList.add(readTodo(task));
                     break;
-                case "D":
-                    Deadline deadline = new Deadline(task[2].trim(), task[3].trim());
-                    if (task[1].equals("1")) {
-                        deadline.doneTask();
-                    }
-                    taskList.add(deadline);
+                case DEADLINE:
+                    taskList.add(readDeadline(task));
                     break;
-                case "E":
-                    Event event = new Event(task[2].trim(), task[3].trim());
-                    if (task[1].equals("1")) {
-                        event.doneTask();
-                    }
-                    taskList.add(event);
+                case EVENT:
+                    taskList.add(readEvent(task));
                     break;
                 default:
                 }
@@ -86,32 +76,84 @@ public class Storage {
     }
 
     /**
+     * Creates a ToDo using the task details.
+     *
+     * @param task Details of task.
+     * @return ToDo.
+     */
+    private ToDo readTodo(String[] task) {
+        ToDo toDo = new ToDo(task[2].trim());
+        if (task[1].equals("1")) {
+            toDo.doneTask();
+        }
+        return toDo;
+    }
+
+    /**
+     * Creates a Deadline using the task details.
+     *
+     * @param task Details of task.
+     * @return Deadline.
+     */
+    private Deadline readDeadline(String[] task) {
+        Deadline deadline = new Deadline(task[2].trim(), task[3].trim());
+        if (task[1].equals("1")) {
+            deadline.doneTask();
+        }
+        return deadline;
+    }
+
+    /**
+     * Creates a Event using the task details.
+     *
+     * @param task Details of task.
+     * @return Event.
+     */
+    private Event readEvent(String[] task) {
+        Event event = new Event(task[2].trim(), task[3].trim());
+        if (task[1].equals("1")) {
+            event.doneTask();
+        }
+        return event;
+    }
+
+    /**
      * Saves the TaskList to a file.
      *
      * @param taskList ArrayList of Task.
      */
     public void save(ArrayList<Task> taskList) {
         try {
-            StringBuilder content = new StringBuilder();
             FileWriter fw = new FileWriter(file.getPath());
-            for (Task task : taskList) {
-                if (task instanceof ToDo) {
-                    String taskDetails = String.format("T | %d | %s", task.isTaskDone() ? 1 : 0, task.getDescription());
-                    content.append(taskDetails).append("\n");
-                } else if (task instanceof Deadline) {
-                    String taskDetails = String.format("T | %d | %s |%s",
-                            task.isTaskDone() ? 1 : 0, task.getDescription(), ((Deadline) task).getDate());
-                    content.append(taskDetails).append("\n");
-                } else {
-                    String taskDetails = String.format("T | %d | %s |%s",
-                            task.isTaskDone() ? 1 : 0, task.getDescription(), ((Event) task).getAt());
-                    content.append(taskDetails).append("\n");
-                }
-            }
-            fw.write(content.toString());
+            fw.write(iterateTasks(taskList));
             fw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    /**
+     * Iterates through the list of tasks and combine them into a string.
+     *
+     * @param taskList ArrayList of tasks.
+     * @return String containing all the task and its details.
+     */
+    private String iterateTasks(ArrayList<Task> taskList) {
+        StringBuilder content = new StringBuilder();
+        for (Task task : taskList) {
+            if (task instanceof ToDo) {
+                String taskDetails = String.format("T | %d | %s", task.isTaskDone() ? 1 : 0, task.getDescription());
+                content.append(taskDetails).append("\n");
+            } else if (task instanceof Deadline) {
+                String taskDetails = String.format("T | %d | %s |%s",
+                        task.isTaskDone() ? 1 : 0, task.getDescription(), ((Deadline) task).getDate());
+                content.append(taskDetails).append("\n");
+            } else {
+                String taskDetails = String.format("T | %d | %s |%s",
+                        task.isTaskDone() ? 1 : 0, task.getDescription(), ((Event) task).getAt());
+                content.append(taskDetails).append("\n");
+            }
+        }
+        return content.toString();
     }
 }

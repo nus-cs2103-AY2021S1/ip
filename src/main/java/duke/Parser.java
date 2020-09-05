@@ -32,32 +32,31 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeInputNotRecognizedException, DukeTaskNotFoundException {
         String[] command = fullCommand.split(" ", 2);
-        if (hasInputs(command[0])) {
-            switch (Input.valueOf(command[0].toUpperCase())) {
-            case LIST:
-                return parseList();
-            case BYE:
-                return parseBye();
-            case DONE:
-                return parseDone(command);
-            case TODO:
-                return parseToDo(command);
-            case DEADLINE:
-                return parseDeadline(command);
-            case EVENT:
-                return parseEvent(command);
-            case DELETE:
-                return parseDelete(command);
-            case UNDO:
-                return parseUndo(command);
-            case FIND:
-                return parseFind(command[1].trim());
-            default:
-            }
-        } else {
+        if (!hasInputs(command[0])) {
             throw new DukeInputNotRecognizedException(" ERROR... INPUT NOT RECOGNIZED. \n PLEASE TRY AGAIN. ");
         }
-        return null;
+        switch (Input.valueOf(command[0].toUpperCase())) {
+        case LIST:
+            return parseList();
+        case BYE:
+            return parseBye();
+        case DONE:
+            return parseDone(command);
+        case TODO:
+            return parseToDo(command);
+        case DEADLINE:
+            return parseDeadline(command);
+        case EVENT:
+            return parseEvent(command);
+        case DELETE:
+            return parseDelete(command);
+        case UNDO:
+            return parseUndo(command);
+        case FIND:
+            return parseFind(command[1].trim());
+        default:
+            throw new DukeInputNotRecognizedException(" ERROR... INPUT NOT RECOGNIZED. \n PLEASE TRY AGAIN. ");
+        }
     }
 
     /**
@@ -83,12 +82,11 @@ public class Parser {
      * @throws DukeTaskNotFoundException If the task is not found.
      */
     public static DoneCommand parseDone(String[] commandDetails) throws DukeTaskNotFoundException {
-        if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
-            return new DoneCommand(commandDetails);
-        } else {
+        if (commandDetails.length < 1 || !Character.isDigit(commandDetails[1].charAt(0))) {
             throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n "
                     + "PLEASE TRY AGAIN. ");
         }
+        return new DoneCommand(commandDetails);
     }
 
     /**
@@ -99,11 +97,10 @@ public class Parser {
      * @throws DukeTaskNotFoundException If the task is not found.
      */
     public static ToDoCommand parseToDo(String[] commandDetails) throws DukeTaskNotFoundException {
-        if (commandDetails.length > 1) {
-            return new ToDoCommand(commandDetails);
-        } else {
+        if (commandDetails.length < 1) {
             throw new DukeTaskNotFoundException(" ERROR... TODO DESCRIPTION EMPTY. \n PLEASE TRY AGAIN. ");
         }
+        return new ToDoCommand(commandDetails);
     }
 
     /**
@@ -114,16 +111,14 @@ public class Parser {
      * @throws DukeTaskNotFoundException If the task is not found.
      */
     public static DeadlineCommand parseDeadline(String[] commandDetails) throws DukeTaskNotFoundException {
-        if (commandDetails.length > 1) {
-            String[] stringArray = commandDetails[1].split("/", 2);
-            if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
-                return new DeadlineCommand(stringArray);
-            } else {
-                throw new DukeTaskNotFoundException(" ERROR... DEADLINE DATE EMPTY. \n PLEASE TRY AGAIN. ");
-            }
-        } else {
+        if (commandDetails.length < 1) {
             throw new DukeTaskNotFoundException(" ERROR... DEADLINE DESCRIPTION EMPTY . \n PLEASE TRY AGAIN. ");
         }
+        String[] stringArray = commandDetails[1].split("/", 2);
+        if (stringArray.length < 1 || stringArray[1].split(" ", 2).length < 1) {
+            throw new DukeTaskNotFoundException(" ERROR... DEADLINE DATE EMPTY. \n PLEASE TRY AGAIN. ");
+        }
+        return new DeadlineCommand(stringArray);
     }
 
     /**
@@ -134,16 +129,14 @@ public class Parser {
      * @throws DukeTaskNotFoundException If the task is not found.
      */
     public static EventCommand parseEvent(String[] commandDetails) throws DukeTaskNotFoundException {
-        if (commandDetails.length > 1) {
-            String[] stringArray = commandDetails[1].split("/", 2);
-            if (stringArray.length > 1 && stringArray[1].split(" ", 2).length > 1) {
-                return new EventCommand(stringArray);
-            } else {
-                throw new DukeTaskNotFoundException(" ERROR... EVENT DATE EMPTY. \n PLEASE TRY AGAIN. ");
-            }
-        } else {
+        if (commandDetails.length < 1) {
             throw new DukeTaskNotFoundException(" ERROR... EVENT DESCRIPTION EMPTY. \n PLEASE TRY AGAIN. ");
         }
+        String[] stringArray = commandDetails[1].split("/", 2);
+        if (stringArray.length < 1 || stringArray[1].split(" ", 2).length < 1) {
+            throw new DukeTaskNotFoundException(" ERROR... EVENT DATE EMPTY. \n PLEASE TRY AGAIN. ");
+        }
+        return new EventCommand(stringArray);
     }
 
     /**
@@ -154,12 +147,11 @@ public class Parser {
      * @throws DukeTaskNotFoundException If the task is not found.
      */
     public static DeleteCommand parseDelete(String[] commandDetails) throws DukeTaskNotFoundException {
-        if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
-            return new DeleteCommand(commandDetails);
-        } else {
+        if (commandDetails.length < 1 || !Character.isDigit(commandDetails[1].charAt(0))) {
             throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n "
                     + "PLEASE TRY AGAIN. ");
         }
+        return new DeleteCommand(commandDetails);
     }
 
     /**
@@ -171,11 +163,10 @@ public class Parser {
      */
     public static UndoCommand parseUndo(String[] commandDetails) throws DukeTaskNotFoundException {
         if (commandDetails.length > 1 && Character.isDigit(commandDetails[1].charAt(0))) {
-            return new UndoCommand(commandDetails);
-        } else {
             throw new DukeTaskNotFoundException(" ERROR... NON-INTEGER RECOGNIZED OR TASK NUMBER NOT INPUTTED. \n "
                     + "PLEASE TRY AGAIN. ");
         }
+        return new UndoCommand(commandDetails);
     }
 
     /**
