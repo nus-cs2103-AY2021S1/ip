@@ -31,7 +31,8 @@ public class DateParser {
                 LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern(formats[i]));
                 return Optional.of(date);
             } catch (DateTimeParseException e) {
-                // do nothing
+                // exception is thrown means that cannot parse date in that format
+                // if cannot parse date in any format, simply return an empty optional
             }
         }
         return Optional.empty();

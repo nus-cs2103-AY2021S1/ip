@@ -1,7 +1,5 @@
-package duke.command;
+package duke.task;
 
-import duke.task.Deadline;
-import duke.task.Task;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,7 +23,7 @@ public class DeadlineTest {
         String actual = test.markAsDone().toString();
         assertEquals(expected, actual);
     }
-    
+
     @Test
     public void doneTaskToString_validDateInput1_stringPresentation() {
         Task test = new Deadline("test task", "20/04/2019");

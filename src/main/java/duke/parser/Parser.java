@@ -24,58 +24,58 @@ public class Parser {
      * @throws DukeException If the parsing process faces any problem
      */
     public static Command parse(String fullCommand) throws DukeException {
-        String[] splitted = fullCommand.split("\\s+", 2);
+        String[] splittedInput = fullCommand.split("\\s+", 2);
 
         // command: bye
-        if (splitted[0].equals(ExitCommand.COMMAND)) {
+        if (splittedInput[0].equals(ExitCommand.COMMAND)) {
             return new ExitCommand();
         }
 
         // command: list
-        if (splitted[0].equals(ListCommand.COMMAND)) {
+        if (splittedInput[0].equals(ListCommand.COMMAND)) {
             return new ListCommand();
         }
 
         // command: delete [index]
-        if (splitted[0].equals(DeleteCommand.COMMAND)) {
-            if (splitted.length == 1) {
+        if (splittedInput[0].equals(DeleteCommand.COMMAND)) {
+            if (splittedInput.length == 1) {
                 throw new InvalidIndexException();
             }
-            return new DeleteCommand(splitted[1]);
+            return new DeleteCommand(splittedInput[1]);
         }
 
         // command: done [index]
-        if (splitted[0].equals(DoneCommand.COMMAND)) {
-            if (splitted.length == 1) {
+        if (splittedInput[0].equals(DoneCommand.COMMAND)) {
+            if (splittedInput.length == 1) {
                 throw new InvalidIndexException();
             }
-            return new DoneCommand(splitted[1]);
+            return new DoneCommand(splittedInput[1]);
         }
 
         //command: find [keyword(s)]
-        if (splitted[0].equals(FindCommand.COMMAND)) {
-            if (splitted.length == 1) {
+        if (splittedInput[0].equals(FindCommand.COMMAND)) {
+            if (splittedInput.length == 1) {
                 throw new DukeException("Missing keyword");
             } else {
-                return new FindCommand(splitted[1].split("\\s+"));
+                return new FindCommand(splittedInput[1].split("\\s+"));
             }
         }
 
         // command: todo [description]
-        if (splitted[0].equals(ToDoCommand.COMMAND)) {
-            if (splitted.length == 1 || splitted[1].equals("")) {
+        if (splittedInput[0].equals(ToDoCommand.COMMAND)) {
+            if (splittedInput.length == 1 || splittedInput[1].equals("")) {
                 throw new InadequateCommandException("todo", new String[] {"description"});
             }
-            return new ToDoCommand(splitted[1]);
+            return new ToDoCommand(splittedInput[1]);
         }
 
         // command: deadline [description] /by [time]
         // or: event [description] /at [time]
-        if (splitted[0].equals(DeadlineCommand.COMMAND) || splitted[0].equals(EventCommand.COMMAND)) {
+        if (splittedInput[0].equals(DeadlineCommand.COMMAND) || splittedInput[0].equals(EventCommand.COMMAND)) {
             String type;
             String timeSpecifier;
             boolean isDeadline;
-            if (splitted[0].equals(DeadlineCommand.COMMAND)) {
+            if (splittedInput[0].equals(DeadlineCommand.COMMAND)) {
                 type = "deadline";
                 timeSpecifier = DeadlineCommand.TIME_SPECIFIER;
                 isDeadline = true;
@@ -85,10 +85,10 @@ public class Parser {
                 isDeadline = false;
             }
 
-            if (splitted.length == 1) {
+            if (splittedInput.length == 1) {
                 throw new InadequateCommandException(type, new String[] {"description", "time"});
             } else {
-                String content = splitted[1];
+                String content = splittedInput[1];
                 String[] split2Test = content.split("\\s+");
                 int timeIdx = content.indexOf(" " + timeSpecifier);
                 if (split2Test.length == 0 || (
