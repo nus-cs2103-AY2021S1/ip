@@ -23,7 +23,7 @@ class DeadlineTest {
         try {
             new Deadline("test desc", "2020-8-25 2359");
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Please input date and time in correct format:"
+            assertEquals("OOPS!!! Please input date and time in correct format:"
                     + " 'yyyy-MM-dd HH:MM' (24-hour time format).", e.getMessage());
         }
     }
