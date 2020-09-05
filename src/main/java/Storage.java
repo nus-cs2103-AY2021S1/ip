@@ -60,7 +60,7 @@ public class Storage { //deals with loading task and saving task in file
                 String[] details = sc.nextLine().split(" \\| ");
                 switch (details[0]) {
                     case "T":
-                        list.add(new ToDo(details[1], details[2]));
+                        list.add(new ToDo(details[1], details[2], details[3]));
                         break;
                     case "D":
                         list.add(new Deadline(details[1], details[2], details[3]));

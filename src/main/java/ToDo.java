@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * The ToDo class is a type of listing that contains a String as the detail of the listing and a
  * boolean called isDone.
@@ -23,9 +26,10 @@ public class ToDo extends Listing {
      * @param s        the message detail
      * @return a ToDo object
      */
-    public ToDo(String doneness, String s) {
+    public ToDo(String doneness, String s, String tagList) {
         super(s);
         setDoneness(doneness);
+        this.tags = new ArrayList<>(Arrays.asList(tagList));
     }
 
     /**
@@ -36,10 +40,11 @@ public class ToDo extends Listing {
      * detail of the object
      */
     public String[] toArray() {
-        String[] details = new String[3];
+        String[] details = new String[4];
         details[0] = "T";
         details[1] = this.isDone ? "1" : "0";
         details[2] = this.title;
+        details[3] = this.tags.toString();
         return details;
     }
 
@@ -49,6 +54,6 @@ public class ToDo extends Listing {
     @Override
     public String toString() {
         return this.tags.isEmpty()? "[T]" + super.doneness() + this.title
-                :"[T]" + super.doneness() + this.title + this.tags.toString();
+                :"[T]" + super.doneness() + this.title + " tags:" + this.tags.toString();
     }
 }

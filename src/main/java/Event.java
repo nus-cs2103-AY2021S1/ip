@@ -58,6 +58,6 @@ public class Event extends Listing {
     @Override
     public String toString() {
         return this.tags.isEmpty()? "[E]" + super.doneness() + " " + this.title + "(at:" + this.deadLine + ")"
-                : "[E]" + super.doneness() + " " + this.title + "(at:" + this.deadLine + ")" + this.tags;
+                : "[E]" + super.doneness() + " " + this.title + "(at:" + this.deadLine + ")" + "tags:" + this.tags;
     }
 }
