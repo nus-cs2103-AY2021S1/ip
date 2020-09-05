@@ -54,4 +54,17 @@ public class DeadlineTask extends Task {
         DeadlineTask that = (DeadlineTask) o;
         return Objects.equals(deadline, that.deadline);
     }
+
+    /**
+     * Formats task into a string for file saving
+     *
+     * @return formatted string representing the task
+     */
+    public String getFormattedString() {
+        return String.format(
+                "D | %s | %s | %s\n",
+                this.getHasCompletedInt(),
+                this.getName(),
+                this.getDeadline());
+    }
 }
