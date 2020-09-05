@@ -19,7 +19,9 @@ public class Ui {
             stringBuilder.append(message).append("\n");
         }
         messages = new ArrayList<>(); // clear all messages
-        return stringBuilder.toString();
+        String message = stringBuilder.toString();
+        System.out.println(message);
+        return message;
     }
 
     /**
