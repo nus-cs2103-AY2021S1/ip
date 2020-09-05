@@ -1,3 +1,16 @@
+package butler.io;
+
+import butler.command.AddCommand;
+import butler.command.Command;
+import butler.command.CompleteCommand;
+import butler.command.DeleteCommand;
+import butler.command.ExitCommand;
+import butler.command.PrintCommand;
+import butler.exception.ButlerException;
+import butler.task.DeadlineTask;
+import butler.task.EventTask;
+import butler.task.Task;
+import butler.task.ToDoTask;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -6,7 +19,7 @@ import java.util.Arrays;
 // Class  deals with making sense of the user command
 public class Parser {
 
-    public static Command parse(String input) throws DukeException {
+    public static Command parse(String input) throws ButlerException {
         String commandType = input.split(" ")[0];
 
         if (input.equals("bye")) {
@@ -27,19 +40,19 @@ public class Parser {
                     try {
                         Integer i = Integer.parseInt(index);
                         if (i < 1) {
-                            throw new DukeException("An invalid index was given.\n"
+                            throw new ButlerException("An invalid index was given.\n"
                                     + "Index must be positive.");
                         } else {
                             indexList.add(i);
                         }
                     } catch (NumberFormatException e) {
-                        throw new DukeException("An invalid index was given.\n"
+                        throw new ButlerException("An invalid index was given.\n"
                                 + index + " is not an integer.");
                     }
                 }
 
                 if (indexList.size() == 0) {
-                    throw new DukeException("No index was given . Please provide a valid index.");
+                    throw new ButlerException("No index was given . Please provide a valid index.");
                 }
 
                 return new CompleteCommand(indexList);
@@ -50,7 +63,7 @@ public class Parser {
                     int index = Integer.parseInt(stringIndex);
                     return new DeleteCommand(index);
                 } catch (NumberFormatException e) {
-                    throw new DukeException("An invalid index was given.\n"
+                    throw new ButlerException("An invalid index was given.\n"
                             + stringIndex + " is not an integer.");
                 }
 
@@ -60,7 +73,7 @@ public class Parser {
                     Task task = new ToDoTask(taskDetails);
                     return new AddCommand(task);
                 } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Please add a description for the ToDo task.");
+                    throw new ButlerException("Please add a description for the ToDo task.");
                 }
 
             case "event":
@@ -76,12 +89,12 @@ public class Parser {
                     return new AddCommand(task);
 
                 } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Please provide a summary and date of event.\n"
+                    throw new ButlerException("Please provide a summary and date of event.\n"
                             + "Separate the dates from summary using \" /at \" and "
                             + "separate the two dates using a space.");
 
                 } catch (DateTimeParseException e) {
-                    throw new DukeException("Please input a valid Date format.\n"
+                    throw new ButlerException("Please input a valid Date format.\n"
                             + "Valid Date format is YYYY-MM-DD.");
                 }
 
@@ -97,16 +110,16 @@ public class Parser {
                     return new AddCommand(task);
 
                 } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Please provide a summary and deadline.\n"
+                    throw new ButlerException("Please provide a summary and deadline.\n"
                             + "Separate the deadline from summary using \" /by \".");
 
                 } catch (DateTimeParseException e) {
-                    throw new DukeException("Please input a valid Date format.\n"
+                    throw new ButlerException("Please input a valid Date format.\n"
                             + "Valid Date format is YYYY-MM-DD.");
                 }
         }
 
-        throw new DukeException("This is not a valid command type.\n" +
+        throw new ButlerException("This is not a valid command type.\n" +
                 "Valid commands start with list, done, delete, todo, deadline, event or bye.");
     }
 }

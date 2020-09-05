@@ -1,3 +1,12 @@
+package butler.io;
+
+import butler.command.AddCommand;
+import butler.exception.ButlerException;
+import butler.task.DeadlineTask;
+import butler.task.EventTask;
+import butler.task.Task;
+import butler.task.TaskList;
+import butler.task.TaskType;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,7 +24,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void storeTaskList(TaskList taskList) throws DukeException{
+    public void storeTaskList(TaskList taskList) throws ButlerException{
         try {
             FileWriter fw = new FileWriter(filePath);
             String fileText = "";
@@ -45,20 +54,20 @@ public class Storage {
                                 + eventTask.getEndDate();
                         break;
                     default:
-                        throw new DukeException("Something is wrong. This place should be unreachable.");
+                        throw new ButlerException("Something is wrong. This place should be unreachable.");
                 }
                 fileText += taskDetails + System.lineSeparator();
             }
             fw.write(fileText);
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("There is an error with writing to the path. File is not detected.");
+            throw new ButlerException("There is an error with writing to the path. File is not detected.");
         } catch (ClassCastException e) {
-            throw new DukeException("Something is wrong. ClassCastException should be unreachable.");
+            throw new ButlerException("Something is wrong. ClassCastException should be unreachable.");
         }
     }
 
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws ButlerException {
         try {
             File f = new File(filePath);
             Scanner s = new Scanner(f);
@@ -84,15 +93,15 @@ public class Storage {
                 Files.createDirectory(Paths.get("./data/"));
                 Files.createFile(Paths.get(filePath));
             } catch (IOException f) {
-                throw new DukeException("Code should never reach here." + f.getMessage());
+                throw new ButlerException("Code should never reach here." + f.getMessage());
             }
-            throw new DukeException("There is no file to access.");
+            throw new ButlerException("There is no file to access.");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("There is an error inside the file. The task has incomplete details.");
+            throw new ButlerException("There is an error inside the file. The task has incomplete details.");
         } catch (ClassCastException e) {
-            throw new DukeException("Instead of tasks, a command was written into the file.");
-        } catch (DukeException e) {
-            throw new DukeException("There is an error within the task in the file.");
+            throw new ButlerException("Instead of tasks, a command was written into the file.");
+        } catch (ButlerException e) {
+            throw new ButlerException("There is an error within the task in the file.");
         }
     }
 }

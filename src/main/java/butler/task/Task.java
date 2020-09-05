@@ -1,3 +1,5 @@
+package butler.task;
+
 public class Task {
     protected String summary;
     protected boolean isComplete;

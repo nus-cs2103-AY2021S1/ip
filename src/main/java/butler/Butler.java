@@ -1,3 +1,12 @@
+package butler;
+
+import butler.command.Command;
+import butler.exception.ButlerException;
+import butler.io.Parser;
+import butler.io.Storage;
+import butler.io.Ui;
+import butler.task.TaskList;
+
 public class Butler {
 
     private Storage storage;
@@ -9,7 +18,7 @@ public class Butler {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (ButlerException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -25,7 +34,7 @@ public class Butler {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException e) { // reaches here due to invalid command
+            } catch (ButlerException e) { // reaches here due to invalid command
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
