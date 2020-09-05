@@ -6,3 +6,5 @@ D | 1 | gfewrg / | 2020-08-23T20:00
 T | 1 | sleep
 T | 1 | sleep2
 T | 1 | sleep
+D | 0 | eat | 2020-09-09T19:40
+D | 0 | wref | 2020-08-20T19:20

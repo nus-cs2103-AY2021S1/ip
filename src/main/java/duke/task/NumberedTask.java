@@ -9,6 +9,7 @@ public class NumberedTask {
     private Task task;
 
     public NumberedTask(int taskNumber, Task task) {
+        assert(taskNumber > 0);
         this.taskNumber = taskNumber;
         this.task = task;
     }
