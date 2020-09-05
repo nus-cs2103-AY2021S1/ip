@@ -3,17 +3,26 @@ todo work
 todowork
 deadline return book /by Sunday
 deadline return book /byasdasd Sunday
+deadline return book /by sun
+deadline return book /by sunday
+deadline return book /by Sun
 deadline submit work /by 02/12/2019 1800
 deadline submit work /by 2/12/2019 1800
 deadline submit work /by 02-12-2019 1800
 deadline submit work /by 2-12-2019 1800
 deadline submit work /by 12/3/2019 1800
+list
 event meet friend /at 2/3/2019 1800
 event meet friend /at 12-3-2019 1800
 event meet friend /at 2-3-2019 1800
 event meet friend /at 1800 02/12/2019
 event project meeting /at Mon 2-4pm
 event project meeting /asdasd Mon 2-4pm
+list
+event meet friend /at Monday
+event meet friend /at Mon
+event meet friend /at mon
+event meet friend /at monday
 list
 done 1
 done 2
