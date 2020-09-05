@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.command.InvalidCommandException;
 
+import java.time.LocalDate;
+
 public abstract class TimedTask extends Task {
     protected int repeat;
 
@@ -31,6 +33,19 @@ public abstract class TimedTask extends Task {
             return "";
         } else {
             return String.format(" repeat every %d days", repeat);
+        }
+    }
+
+    protected boolean isHappeningOn(LocalDate date, LocalDate taskDate) {
+        if (repeat == 0) {
+            return date.isEqual(taskDate);
+        } else {
+            boolean found = taskDate.isEqual(date);
+            while (taskDate.isBefore(date)) {
+                taskDate = taskDate.plusDays(repeat);
+                found = taskDate.isEqual(date);
+            }
+            return found;
         }
     }
 }

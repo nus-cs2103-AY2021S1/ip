@@ -73,12 +73,12 @@ public class Event extends TimedTask {
 
     @Override
     public boolean isHappeningOn(LocalDate date) {
-        return atTime != null && date.isEqual(atTime.toLocalDate());
+        return atTime != null && isHappeningOn(date, atTime.toLocalDate());
     }
 
     @Override
     public boolean isHappeningToday() {
-        return atTime != null && isHappeningOn(LocalDate.now());
+        return isHappeningOn(LocalDate.now());
     }
 
     @Override

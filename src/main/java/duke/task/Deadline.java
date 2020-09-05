@@ -53,7 +53,7 @@ public class Deadline extends TimedTask {
 
     @Override
     public boolean isHappeningOn(LocalDate date) {
-        return date.isEqual(byTime);
+        return isHappeningOn(date, byTime);
     }
 
     @Override
