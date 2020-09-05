@@ -59,9 +59,9 @@ public class Cait {
     }
 
     protected String getResponse(String input) {
-        String result = printLine();
-        result += parser.manageTask(input);
-        result += printLine();
+        //String result = printLine();
+        String result = parser.manageTask(input);
+        //result += printLine();
         return result;
     }
 

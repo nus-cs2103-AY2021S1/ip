@@ -9,10 +9,21 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <Label fx:id="dialog" text="Label" textOverrun="CENTER_ELLIPSIS" wrapText="true">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
+      <HBox fx:id="speechBubble" maxHeight="-Infinity" styleClass="speech-bubble" stylesheets="@cait.css">
+          <children>
+              <Label fx:id="dialog" text="Label" textFill="BLACK" wrapText="true">
+                  <padding>
+                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+              </Label>
+          </children>
+          <HBox.margin>
+              <Insets left="10.0" right="10.0" />
+          </HBox.margin>
+      </HBox>
     <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
          <effect>
             <Blend />

@@ -4,7 +4,8 @@ event project meeting /at 2020-10-15
 find book
 find nothing
 list
-done 1
+done 2 3 99
+done 1 2
 list
 done
 done 9
@@ -25,4 +26,8 @@ delete
 delete 9
 delete u
 delete 1
+todo test1
+todo test2
+delete 1 2 3 4 
+delete 1 2
 bye
