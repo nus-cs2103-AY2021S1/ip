@@ -11,6 +11,10 @@ public class UserDialog extends HBox {
     private ImageView displayPicture;
     private Image image = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
 
+    /**
+     * Creates a new UserDialog containing some text.
+     * @param text Text to display in the dialog.
+     */
     public UserDialog(String text) {
         textLabel = new Label(text);
         displayPicture = new ImageView(image);

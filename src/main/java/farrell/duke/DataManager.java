@@ -29,7 +29,7 @@ public class DataManager {
         List<Task> tasks = taskList.getAllTasks();
         try {
             File dataDirectory = new File(directory);
-            if(!dataDirectory.exists()) {
+            if (!dataDirectory.exists()) {
                 dataDirectory.mkdir();
             }
 
