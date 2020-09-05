@@ -16,7 +16,6 @@ public class ByeCommand extends UserCommand {
         this.isExit = true;
     }
 
-
     /**
      * @param taskList task list containing all the tasks.
      * @param ui       ui that prints output.
