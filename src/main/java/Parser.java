@@ -161,41 +161,40 @@ public class Parser {
      * @throws InvalidDeadlineException
      */
     public static String getDeadline(String word, TaskList list) throws InvalidDeadlineException {
-        if (word.contains("/by") && !word.substring(word.indexOf("/by") + 3).equals("")) {
-            word = word.substring(8);
-            int index = word.indexOf("/by");
-            String str = word.substring(index + 3).trim();
-            String datestr = str.replaceAll("-", "/");
-            String[] datearr = datestr.split("/");
-            if (datearr.length < 2) {
+        if (!(word.contains("/by") && !word.substring(word.indexOf("/by") + 3).equals(""))) {
+            throw new InvalidDeadlineException();
+        }
+        word = word.substring(8);
+        int index = word.indexOf("/by");
+        String str = word.substring(index + 3).trim();
+        String datestr = str.replaceAll("-", "/");
+        String[] datearr = datestr.split("/");
+        if (datearr.length < 2) {
+            throw new InvalidDeadlineException();
+        }
+        if (datearr[0].length() < 2) {
+            datestr = "0" + datestr;
+            datearr[0] = "0" + datearr[0];
+        }
+        if (datearr[1].length() < 2) {
+            datestr = datearr[0] + "/0" + datearr[1] + "/" + datearr[2];
+        }
+        if (!datestr.contains(":")) {
+            String[] arr = datestr.split(" ");
+            if (arr.length > 2) {
                 throw new InvalidDeadlineException();
             }
-            if (datearr[0].length() < 2) {
-                datestr = "0" + datestr;
-                datearr[0] = "0" + datearr[0];
-            }
-            if (datearr[1].length() < 2) {
-                datestr = datearr[0] + "/0" + datearr[1] + "/" + datearr[2];
-            }
-            if (!datestr.contains(":")) {
-                String[] arr = datestr.split(" ");
-                if (arr.length > 2) {
-                    throw new InvalidDeadlineException();
-                }
-                arr[1] = arr[1].substring(0, 2) + ":" + arr[1].substring(2);
-                datestr = arr[0] + " " + arr[1];
-            }
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                LocalDateTime date = LocalDateTime.parse(datestr, formatter);
-                Deadline deadline = new Deadline(word.substring(0, index), date);
-                list.update(deadline);
-                return deadline.toString();
-            } catch (DateTimeParseException e) {
-                return "Invalid Date provided";
-            }
-        } else {
-            throw new InvalidDeadlineException();
+            arr[1] = arr[1].substring(0, 2) + ":" + arr[1].substring(2);
+            datestr = arr[0] + " " + arr[1];
+        }
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            LocalDateTime date = LocalDateTime.parse(datestr, formatter);
+            Deadline deadline = new Deadline(word.substring(0, index), date);
+            list.update(deadline);
+            return deadline.toString();
+        } catch (DateTimeParseException e) {
+            return "Invalid Date provided";
         }
     }
     /**
@@ -207,41 +206,40 @@ public class Parser {
      * @throws InvalidEventException
      */
     public static String getEventTest(String word, TaskList list) throws InvalidEventException {
-        if (word.contains("/at") && !word.substring(word.indexOf("/at") + 3).equals("")) {
-            word = word.substring(5);
-            int index = word.indexOf("/at");
-            String str = word.substring(index + 3).trim();
-            String datestr = str.replaceAll("-", "/");
-            String[] datearr = datestr.split("/");
-            if (datearr.length < 2) {
+        if (!(word.contains("/at") && !word.substring(word.indexOf("/at") + 3).equals(""))) {
+            throw new InvalidEventException();
+        }
+        word = word.substring(5);
+        int index = word.indexOf("/at");
+        String str = word.substring(index + 3).trim();
+        String datestr = str.replaceAll("-", "/");
+        String[] datearr = datestr.split("/");
+        if (datearr.length < 2) {
+            throw new InvalidEventException();
+        }
+        if (datearr[0].length() < 2) {
+            datestr = "0" + datestr;
+            datearr[0] = "0" + datearr[0];
+        }
+        if (datearr[1].length() < 2) {
+            datestr = datearr[0] + "/0" + datearr[1] + "/" + datearr[2];
+        }
+        if (!datestr.contains(":")) {
+            String[] arr = datestr.split(" ");
+            if (arr.length > 2) {
                 throw new InvalidEventException();
             }
-            if (datearr[0].length() < 2) {
-                datestr = "0" + datestr;
-                datearr[0] = "0" + datearr[0];
-            }
-            if (datearr[1].length() < 2) {
-                datestr = datearr[0] + "/0" + datearr[1] + "/" + datearr[2];
-            }
-            if (!datestr.contains(":")) {
-                String[] arr = datestr.split(" ");
-                if (arr.length > 2) {
-                    throw new InvalidEventException();
-                }
-                arr[1] = arr[1].substring(0, 2) + ":" + arr[1].substring(2);
-                datestr = arr[0] + " " + arr[1];
-            }
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                LocalDateTime date = LocalDateTime.parse(datestr, formatter);
-                Event event = new Event(word.substring(0, index), date);
-                list.update(event);
-                return event.toString();
-            } catch (DateTimeParseException e) {
-                return "Incorrect Date format used";
-            }
-        } else {
-            throw new InvalidEventException();
+            arr[1] = arr[1].substring(0, 2) + ":" + arr[1].substring(2);
+            datestr = arr[0] + " " + arr[1];
+        }
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            LocalDateTime date = LocalDateTime.parse(datestr, formatter);
+            Event event = new Event(word.substring(0, index), date);
+            list.update(event);
+            return event.toString();
+        } catch (DateTimeParseException e) {
+            return "Incorrect Date format used";
         }
     }
 
