@@ -33,7 +33,6 @@ public class Data {
      * @throws IOException For missing files
      */
     public Data(String path) throws IOException {
-        //System.out.println("Path being located");
         this.path = Paths.get("src/main/data/duke.txt").toAbsolutePath();
         if (Files.notExists(this.path)) {
             new File(String.valueOf(path)).createNewFile();
@@ -47,6 +46,7 @@ public class Data {
      */
 
     Data() throws IOException {
+        // Initialise new default path from scratch
         path = Path.of("src/main/data/duke.txt");
         new File("src/main/data").mkdirs();
         new File(path.toString()).createNewFile();
@@ -60,37 +60,45 @@ public class Data {
      * @throws DukeInvalidTimeException For invalid times saved for event/deadline events
      * @throws ArrayIndexOutOfBoundsException For incorrectly typed descriptions for deadline/event tasks
      */
-    public List<Task> loadData() throws FileNotFoundException, DukeInvalidTimeException,
-            ArrayIndexOutOfBoundsException {
-        List<Task> todoList = new ArrayList<>();
+    public List<Task> loadData() throws FileNotFoundException,
+            DukeInvalidTimeException, ArrayIndexOutOfBoundsException {
+        List<Task> tasks = new ArrayList<>();
         Scanner scanner = new Scanner(path.toFile());
-
+        // Reading tasks from file
         for (int i = 1; scanner.hasNextLine(); i++) {
             Task currTask = null;
             String[] curr = scanner.nextLine().split("---");
-            String task = curr[0];
+            String type = curr[0];
             boolean isDone = Integer.parseInt(curr[1]) == 1;
             String activity = curr[2];
             String description;
 
-            switch (task) {
+            switch (type) {
             case "T":
                 currTask = new Todo(activity, i, isDone);
                 break;
             case "D":
-                description = activity + " " + curr[3];
-                currTask = new Deadline(description, i, isDone);
-                break;
             case "E":
                 description = activity + " " + curr[3];
-                currTask = new Event(description, i, isDone);
+                currTask = readTask(description, type, i, isDone);
                 break;
             default:
                 break;
             }
-            todoList.add(currTask);
+            tasks.add(currTask);
         }
-        return todoList;
+        return tasks;
+    }
+
+    /**
+     * Abstracts the process of reading deadline/event tasks.
+     * @return Task - either Deadline/Event
+     */
+    private Task readTask(String description, String type, int index, boolean isComplete)
+            throws DukeInvalidTimeException {
+        return type.equals("D")
+                ? new Deadline(description, index, isComplete)
+                : new Event(description, index, isComplete);
     }
 
     /**
@@ -101,7 +109,7 @@ public class Data {
      */
     public void save(List<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter(path.toString());
-
+        // Writing tasks into disk
         for (Task task : tasks) {
             String line = "";
             int done = task.hasDone() ? 1 : 0;
@@ -116,8 +124,7 @@ public class Data {
                 int idx = description.indexOf('/');
                 String activity = description.substring(0, idx - 1);
                 String timing = description.substring(idx);
-                line = String.format("%s---%d---%s---%s",
-                        task.getType() == TaskType.DEADLINE ? "D" : "E", done, activity, timing);
+                line = formatTask(task, idx, activity, timing);
                 break;
             default:
                 break;
@@ -125,6 +132,19 @@ public class Data {
             writer.write(line + "\n");
         }
         writer.close();
+    }
+
+    /**
+     * Outputs the format of string for deadline/event tasks that are saved into disk.
+     * @param task Task
+     * @param index Index of task
+     * @param activity Content of task
+     * @param timing Time of task
+     * @return String saved into disk
+     */
+    private String formatTask(Task task, int index, String activity, String timing) {
+        String type = task.getType() == TaskType.DEADLINE ? "D" : "E";
+        return String.format("%s---%d---%s---%s", type, index, activity, timing);
     }
 
 }
