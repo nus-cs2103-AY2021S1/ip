@@ -59,11 +59,11 @@ public class TaskList {
     }
 
     public String findTask(String str) {
-        String returnStr = ("Here are the matching tasks in your list:");
+        String returnStr = ("Here are the matching tasks in your list:\n");
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
             if (task.task.contains(str)) {
-                returnStr += ((i + 1) + "." + task.stringify());
+                returnStr += ((i + 1) + "." + task.stringify() + "\n");
             }
         }
         return returnStr;
