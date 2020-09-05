@@ -21,6 +21,8 @@ public class TodoCommand extends Command {
      * @param storage Storage object to aid in program execution.
      */
     public Response runCommand(TaskList arrayOfTasks, Ui ui, Storage storage) {
+        assert arrayOfTasks != null || ui != null || storage != null :
+                "arrayOfTasks, Ui and Storage objects cannot be null";
         arrayOfTasks.addTask(toDoTask);
         ui.printTaskCount();
         storage.changeFile();
