@@ -11,6 +11,9 @@ import duke.task.Task;
  * Represents a command for fixing events with tentative slots to one slot.
  */
 public class FixCommand extends Command {
+
+    public static final int FIX_COMMAND_VALID_LENGTH = 4;
+
     /**
      * Creates a fix command.
      * @param input the input command
@@ -30,30 +33,35 @@ public class FixCommand extends Command {
      */
     @Override
     public String execute(Ui ui, TaskList list, Storage storage) throws InvalidCommandException {
-        assert input.startsWith("fix ") : "Fix command does not start with 'fix '";
+        assert input.startsWith(Parser.FIX_COMMAND_PREFIX) : "Fix command does not start with 'fix '";
         String[] inputs = input.split(Parser.SPACE_STRING);
-        if (inputs.length != 3) {
+        if (inputs.length != FIX_COMMAND_VALID_LENGTH) {
             throw new InvalidCommandException(Parser.FIX_COMMAND_FORMAT_EXCEPTION);
         }
         try {
-            int n = Integer.parseInt(inputs[1]);
-            if (n < 1) {
-                throw new InvalidCommandException(Parser.NONPOSITIVE_TASK_INDEX_EXCEPTION);
-            } else if (n > list.size()) {
-                throw new InvalidCommandException(Parser.TASK_INDEX_OVERFLOW_EXCEPTION);
-            }
-            Task t = list.get(n - 1);
+            int n = getTaskIndex(list, inputs[1]);
+            Task t = list.get(n);
             if (!(t instanceof Event)) {
                 throw new InvalidCommandException(Parser.INVALID_EVENT_INDEX_EXCEPTION);
             } else {
                 Event e = (Event) t;
-                e.fixSlot(inputs[2]);
+                String output = e.fixSlot(inputs[2] + Parser.SPACE_STRING + inputs[3]);
+                storage.reWrite(list);
+                return output;
             }
         } catch (NumberFormatException e) {
             throw new InvalidCommandException(Parser.NONNUMERIC_TASK_INDEX_EXCEPTION);
         }
-        String toFind = input.substring(5);
-        return ui.printList(list, t -> t.finds(toFind), String.format(Ui.FIND_LIST_NOTE_FORMAT, toFind));
+    }
+
+    private int getTaskIndex(TaskList list, String input) throws InvalidCommandException {
+        int n = Integer.parseInt(input);
+        if (n < 1) {
+            throw new InvalidCommandException(Parser.NONPOSITIVE_TASK_INDEX_EXCEPTION);
+        } else if (n > list.size()) {
+            throw new InvalidCommandException(Parser.TASK_INDEX_OVERFLOW_EXCEPTION);
+        }
+        return n - 1;
     }
 
     /**

@@ -2,15 +2,17 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 import duke.command.InvalidCommandException;
 import duke.component.Parser;
+import duke.component.Ui;
 
 /**
  * Represents an event task that consists of a description and a datetime as the happening time of the event.
  */
 public class Event extends Task {
-    private final LocalDateTime atTime;
+    private LocalDateTime atTime;
     private final LocalDateTime[] tentativeSlots;
     private final String tentativeSlotsStr;
 
@@ -36,7 +38,7 @@ public class Event extends Task {
                 tentativeSlotsStr = String.join("/", times);
             }
         } catch (Exception e) {
-            throw new InvalidCommandException("Invalid input datetime, please input as yyyy-MM-dd HH:mm.");
+            throw new InvalidCommandException(Parser.INVALID_DATE_TIME_FORMAT_EXCEPTION);
         }
     }
 
@@ -83,6 +85,36 @@ public class Event extends Task {
     @Override
     public boolean willHappenInDays(int n) {
         return atTime != null && isHappeningBetween(LocalDate.now(), LocalDate.now().plusDays(n));
+    }
+
+    /**
+     * Fixes a slot from the tentative slots of the event.
+     * @param timeToFix the time to fix this event at
+     * @return the string output for the result of this execution
+     * @throws InvalidCommandException if the input is invalid, e.g. wrong date-time format, extra arguments
+     */
+    public String fixSlot(String timeToFix) throws InvalidCommandException {
+        try {
+            LocalDateTime toFix = LocalDateTime.parse(timeToFix, Parser.DATE_TIME_INPUT_FORMAT);
+            checkExist(toFix);
+            atTime = toFix;
+            return String.format(Ui.FIX_TASK_OUTPUT_FORMAT, this);
+        } catch (DateTimeParseException e) {
+            throw new InvalidCommandException(Parser.INVALID_DATE_TIME_FORMAT_EXCEPTION);
+        }
+    }
+
+    private void checkExist(LocalDateTime toFix) throws InvalidCommandException {
+        boolean found = false;
+        for (LocalDateTime dt : tentativeSlots) {
+            if (dt.isEqual(toFix)) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            throw new InvalidCommandException(Parser.FIX_TIME_NOT_EXIST_EXCEPTION);
+        }
     }
 
     @Override

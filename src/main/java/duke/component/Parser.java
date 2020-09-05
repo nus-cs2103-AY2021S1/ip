@@ -6,6 +6,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.FixCommand;
 import duke.command.HappenCommand;
 import duke.command.InvalidCommandException;
 import duke.command.ListCommand;
@@ -61,9 +62,12 @@ public class Parser {
             "Latter date is before former date for happen between.";
     public static final String UNRECOGNIZED_HAPPEN_COMMAND_EXCEPTION = "Invalid happen command input.";
     public static final String INVALID_DATE_FORMAT_EXCEPTION = "Invalid date format. Please use yyyy-MM-dd.";
+    public static final String INVALID_DATE_TIME_FORMAT_EXCEPTION = "Invalid input datetime, please input as"
+            + "yyyy-MM-dd HH:mm.";
     public static final String INVALID_EVENT_INDEX_EXCEPTION = "The index of task is not of the desired task type.";
     public static final String FIX_COMMAND_FORMAT_EXCEPTION = "The format for fix command should be"
             + "fix <task_index of event> <datetime to fix>";
+    public static final String FIX_TIME_NOT_EXIST_EXCEPTION = "The time to fix for the event does not exist";
     public static final DateTimeFormatter DATE_TIME_INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     public static final DateTimeFormatter DATE_TIME_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("hh:mm a   MMM d yyyy");
 
@@ -210,6 +214,8 @@ public class Parser {
             return new HappenCommand(input);
         } else if (input.startsWith(FIND_COMMAND_PREFIX)) {
             return new FindCommand(input);
+        } else if (input.startsWith(FIX_COMMAND_PREFIX)) {
+            return new FixCommand(input);
         } else {
             return new AddCommand(input);
         }

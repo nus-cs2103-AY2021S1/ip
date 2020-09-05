@@ -8,6 +8,7 @@ public interface Ui {
     String ADD_TASK_OUTPUT_FORMAT = "Got it. I've added this task:\n%s\nNow you have %d %s in the list.";
     String DELETE_TASK_OUTPUT_FORMAT = "Noted. I've removed this task:\n%s\nNow you have %d %s.";
     String DONE_TASK_OUTPUT_FORMAT = "Nice! I've marked this task as done:\n%s";
+    String FIX_TASK_OUTPUT_FORMAT = "Nice! I've fixed the slot for the event:\n%s";
     String FIND_LIST_NOTE_FORMAT = "containing '%s' ";
     String HAPPEN_LIST_NOTE_FORMAT = "happening %s %s ";
     String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
