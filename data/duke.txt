@@ -1,4 +1,4 @@
 T > N > this thing
 E > N > attend meeting > at: 2020-08-29
-T > Y > another task
+T > N > another task
 D > N > do project > by: 2019-01-09

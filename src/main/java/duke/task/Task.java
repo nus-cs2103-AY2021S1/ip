@@ -6,6 +6,10 @@ import java.time.LocalDate;
  * Encapsulates the parent class for all types of tasks.
  */
 public class Task {
+
+    private static final String DONE = "Y";
+    private static final String NOT_DONE = "N";
+
     protected String description;
     protected boolean isDone;
     protected LocalDate date;
@@ -21,8 +25,8 @@ public class Task {
 
     public String getStatusIcon() {
         return isDone
-                ? "Y"
-                : "N";
+                ? DONE
+                : NOT_DONE;
     }
 
     public String getDescription() {
