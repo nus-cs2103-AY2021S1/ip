@@ -122,7 +122,7 @@ public class Event extends Task {
      *
      * @return Event date in LocalDate.
      */
-    public LocalDate getDate() {
+    public LocalDate getEventDate() {
         return this.date;
     }
 

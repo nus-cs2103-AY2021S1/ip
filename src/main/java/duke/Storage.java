@@ -217,7 +217,7 @@ public class Storage {
 
                 } else if (type.equals("E")) {
                     Event event = (Event) task;
-                    LocalDate date = event.getDate();
+                    LocalDate date = event.getEventDate();
                     LocalTime startTime = event.getStartTime();
                     LocalTime endTime = event.getEndTime();
 
@@ -235,7 +235,7 @@ public class Storage {
                 } else if (type.equals("D")) {
                     Deadline deadline = (Deadline) task;
                     LocalDate date = deadline.getDeadline();
-                    LocalTime time = deadline.getTime();
+                    LocalTime time = deadline.getDeadlineTime();
 
                     if (time == null) {
                         stored = String.format("%s | %d | %s | %s",
