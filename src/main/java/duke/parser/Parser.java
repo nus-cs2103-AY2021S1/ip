@@ -5,6 +5,8 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
+import java.util.Arrays;
+
 /**
  * Represent a parser to parse user input.
  */
@@ -18,6 +20,8 @@ public class Parser {
      * @throws DukeException exception thrown when input is invalid
      */
     public String parse(String input, TaskList tasks, Storage storage) throws DukeException {
+        assert input != null && tasks != null && storage != null;
+        
         String output;
         String[] command = input.split(" ", 2);
 
