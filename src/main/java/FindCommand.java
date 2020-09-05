@@ -24,12 +24,10 @@ public class FindCommand extends Command {
 
         ArrayList<Task> tasksWithWord = tasks.find(splitStr[1]);
 
-        System.out.println("    Here are the matching tasks in your list:");
-        String response = "Here are the matching items in your list:";
+        System.out.println("Here are the matching tasks in your list:");
         for (int i = 0; i < tasksWithWord.size(); i++) {
             Task task = tasksWithWord.get(i);
-            System.out.println("    " + (i + 1) + "." + task);
-            response += "\n" + (i+1) + "." + task;
+            System.out.println((i + 1) + "." + task);
         }
     }
 }
