@@ -68,7 +68,7 @@ public class Deadline extends Task {
     public String getTime() {
         return by;
     }
-    
+
     private String formatTaskTime() {
         String output = taskDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
         if (taskTime != null) {

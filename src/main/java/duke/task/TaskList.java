@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Class the holds the tasks provided by the user.
  */
 public class TaskList {
-    
+
     private ArrayList<Task> tasks;
 
     /**
@@ -25,23 +25,23 @@ public class TaskList {
     public void loadFromStorage(Storage storage) {
         storage.loadData(this);
     }
-    
+
     public void addTask(Task task) {
         tasks.add(task);
     }
-    
+
     public void deleteTask(Task task) {
         tasks.remove(task);
     }
-    
+
     public void markAsDone(Task task) {
         task.markDone();
-    } 
-    
+    }
+
     public Task getTask(int taskIdx) {
         return tasks.get(taskIdx - 1);
     }
-    
+
     public int size() {
         return tasks.size();
     }
@@ -52,33 +52,35 @@ public class TaskList {
      * @return
      */
     public String listTasksWithKeyword(String keyword) {
+        assert keyword != null : "Search keyword is null";
+
         StringBuilder output = new StringBuilder();
         int i = 1;
-        
+
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
                 output.append(i).append(". ").append(task).append("\n");
             }
             i++;
         }
-        
+
         output.deleteCharAt(output.length() - 1);
         return output.toString();
     }
-    
+
     @Override
     public String toString() {
-        
+
         if (size() == 0) {
             return "No tasks added yet!";
         }
-        
+
         StringBuilder output = new StringBuilder();
-        
+
         for (int i = 0; i < size(); i++) {
             output.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
-        
+
         output.deleteCharAt(output.length() - 1);
         return output.toString();
     }
