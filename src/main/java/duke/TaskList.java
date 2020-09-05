@@ -135,7 +135,7 @@ public class TaskList {
     public String toString() {
         String numberedList = "";
         for (int i = 0; i < this.tasks.size(); i++) {
-            numberedList += "\n\t" + (i + 1) + "." + this.tasks.get(i);
+            numberedList += "\t" + (i + 1) + "." + this.tasks.get(i) + "\n";
         }
         return numberedList;
     }

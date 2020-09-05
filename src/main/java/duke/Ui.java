@@ -8,18 +8,11 @@ import duke.task.Task;
  * Deals with coming up with responses to the user.
  */
 public class Ui {
-    /** Divider line enclosing all responses. */
-    private static final String DIVIDER_LINE = "________________________________________________\n";
-
-    /**
-     * Returns a response to the user, enclosed within two divider lines.
-     *
-     * @param response The response to be printed.
-     * @return The response within two divider lines.
-     */
-    public static String respondWith(String response) {
-        return DIVIDER_LINE + response + "\n" + DIVIDER_LINE;
-    }
+    /** Logo of the Chatbot. */
+    private static final String LOGO = "    _  \\     \\     __ __|    _  \\     _ _|    ___|   |    /\n"
+                    + "   |     |   _  \\       |      |     |      |     |        '   /\n"
+                    + "  ___/    ___  \\     |     __ <       |     |        .   \\\n"
+                    + " _|     _/        _\\ _|    _|   \\_\\  ___|  \\____| _| \\_\\\n";
 
     /**
      * Returns a welcome message to the user.
@@ -27,12 +20,9 @@ public class Ui {
      * @return The welcome message to the user.
      */
     public static String greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return "Hello from\n" + logo + respondWith("Hello! I'm Duke\nWhat can I do for you?\n");
+        return "Hello from\n"
+                + LOGO
+                + "Hello! This is Patrick\nWhat can I do for you?\n";
     }
 
     /**
@@ -41,7 +31,7 @@ public class Ui {
      * @return The exit message to the user.
      */
     public static String respondExit() {
-        return respondWith("Bye. Hope to see you again soon!");
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -51,7 +41,7 @@ public class Ui {
      * @return The list of tasks from the specified task list.
      */
     public static String respondList(TaskList taskList) {
-        return respondWith("Here are the tasks in your list:" + taskList);
+        return "Here are the tasks in your list: \n" + taskList;
     }
 
     /**
@@ -63,7 +53,7 @@ public class Ui {
      * @return An acknowledgement that the task has been added.
      */
     public static String respondAddTask(Task task, TaskList taskList) {
-        return respondWith("Got it. I've added this task: \n\t" + task + "\n" + getHowManyTasks(taskList));
+        return "Got it. I've added this task: \n\t" + task + "\n" + getHowManyTasks(taskList);
     }
 
     /**
@@ -75,7 +65,7 @@ public class Ui {
      * @return An acknowledgement that the task has been removed.
      */
     public static String respondDeleteTask(Task task, TaskList taskList) {
-        return respondWith("Noted. I've removed this task: \n\t" + task + "\n" + getHowManyTasks(taskList));
+        return "Noted. I've removed this task: \n\t" + task + "\n" + getHowManyTasks(taskList);
     }
 
     /**
@@ -85,7 +75,7 @@ public class Ui {
      * @return An acknowledgement that the task has been marked as done.
      */
     public static String respondDoneTask(Task task) {
-        return respondWith("Nice! I've marked this task as done:\n\t" + task);
+        return "Nice! I've marked this task as done: \n\t" + task;
     }
 
     /**
@@ -98,9 +88,9 @@ public class Ui {
     public static String respondViewTasks(TaskList taskList, LocalDate localDate) {
         TaskList taskListOnDate = taskList.getTaskListOnDate(localDate);
         if (taskListOnDate.getNumberOfTasks() == 0) {
-            return respondWith("You do not have any tasks on this date.");
+            return "You do not have any tasks on this date.";
         }
-        return respondWith("Here are the tasks on this date:" + taskListOnDate);
+        return "Here are the tasks on this date: \n" + taskListOnDate;
     }
 
     /**
@@ -112,7 +102,7 @@ public class Ui {
      */
     public static String respondFindTasks(TaskList taskList, String keyword) {
         TaskList tasksWithKeyword = taskList.getTasksWithKeyword(keyword);
-        return respondWith("Here are the matching tasks in your list:" + tasksWithKeyword);
+        return "Here are the matching tasks in your list: \n" + tasksWithKeyword;
     }
 
     /**
@@ -139,6 +129,6 @@ public class Ui {
      * @return The error message of the exception.
      */
     public static String respondError(Exception e) {
-        return respondWith(e.getMessage());
+        return e.getMessage();
     }
 }

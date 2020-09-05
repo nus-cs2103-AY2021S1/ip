@@ -37,7 +37,7 @@ public class ViewCommand extends Command {
         try {
             return new CommandResponse(Ui.respondViewTasks(tasks, Parser.parseDate(date)), this.isExit());
         } catch (DateTimeParseException e) {
-            throw new DukeException("☹ OOPS!!! The date is not valid.");
+            throw new DukeException("OOPS!!! The date is not valid.");
         }
     }
 }

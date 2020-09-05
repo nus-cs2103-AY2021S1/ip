@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
             storage.save(tasks.getTasks());
             return new CommandResponse(Ui.respondDeleteTask(removedTask, tasks), this.isExit());
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The task number is not valid.");
+            throw new DukeException("OOPS!!! The task number is not valid.");
         }
     }
 }

@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
             storage.save(tasks.getTasks());
             return new CommandResponse(Ui.respondDoneTask(tasks.getTask(taskNumber)), this.isExit());
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The task number is not valid.");
+            throw new DukeException("OOPS!!! The task number is not valid.");
         }
     }
 }
