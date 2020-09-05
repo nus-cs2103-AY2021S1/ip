@@ -10,4 +10,5 @@ public enum CommandTypes {
     EVENT,
     VIEWALL,
     FIND,
+    UPDATE,
 }
