@@ -29,6 +29,8 @@ public class Parser {
             return new ByeCommand();
         } else if (command[0].equals("find")) {
             return new FindCommand(userCommand);
+        } else if (command[0].equals("update")) {
+            return new UpdateCommand(userCommand);
         } else {
             throw new InvalidCommandException();
         }

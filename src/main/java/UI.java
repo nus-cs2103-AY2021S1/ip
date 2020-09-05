@@ -89,4 +89,10 @@ public class UI {
             return str2 + allTask;
         }
     }
+
+    protected String enterNewUpdateForTask(Task taskToBeUpdated) {
+        return "\nThis is the current task:\n" + taskToBeUpdated +
+                "\nOk tell me what to update!]n";
+    }
+
 }

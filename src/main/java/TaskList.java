@@ -80,4 +80,8 @@ public class TaskList {
         }
         return foundTasks;
     }
+
+    protected Task updateTask(int taskNumber) {
+        return this.taskList.get(taskNumber - 1);
+    }
 }
