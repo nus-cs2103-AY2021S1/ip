@@ -39,7 +39,8 @@ public class Parser {
         return (!input.contains(Keyword.TODO.label) && !input.contains(Keyword.DEADLINE.label)
                 && !input.contains(Keyword.EVENT.label) && !input.contains(Keyword.DONE.label)
                 && !input.contains(Keyword.BYE.label) && !input.contains(Keyword.LIST.label)
-                && !input.contains(Keyword.DELETE.label) && !input.contains(Keyword.FIND.label));
+                && !input.contains(Keyword.DELETE.label) && !input.contains(Keyword.FIND.label)
+                && !input.equals(Keyword.SORT.label));
     }
 
     /**
@@ -64,6 +65,8 @@ public class Parser {
                 taskLists.addEventForCli(input);
             } else if (input.contains(Keyword.FIND.label)) {
                 taskLists.findForCli(input);
+            } else if (input.equals(Keyword.SORT.label)) {
+                taskLists.sortByTasksForCli();
             } else {
                 System.out.println(INVALID_INPUT);
             }
@@ -95,6 +98,8 @@ public class Parser {
                 return taskLists.addEventForGui(input);
             } else if (input.contains(Keyword.FIND.label)) {
                 return taskLists.findForGui(input);
+            } else if (input.equals(Keyword.SORT.label)) {
+                return taskLists.sortByTasksForGui();
             } else {
                 return INVALID_INPUT;
             }
