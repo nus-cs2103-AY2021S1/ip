@@ -1,24 +1,24 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
+public class EventTask extends Task {
     protected String time;
     protected LocalDate date;
 
-    public Event(String description, String time) {
+    public EventTask(String description, String time) {
         super(description);
         this.time = time;
         this.date = null;
     }
 
-    public Event(String description, String time, LocalDate date) {
+    public EventTask(String description, String time, LocalDate date) {
         super(description);
         this.time = time;
         this.date = date;
     }
 
 
-    public Event(String description, String time, boolean isDone) {
+    public EventTask(String description, String time, boolean isDone) {
         super(description, isDone);
         this.time = time;
     }

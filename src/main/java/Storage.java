@@ -55,25 +55,25 @@ public class Storage {
                 if (string.charAt(1) == 'T') {
                     String description = string.substring(string.indexOf(' ') + 1);
                     if (string.charAt(4) == '✓') {
-                        lists.add(new ToDo(description, true));
+                        lists.add(new ToDoTask(description, true));
                     } else {
-                        lists.add(new ToDo(description));
+                        lists.add(new ToDoTask(description));
                     }
                 } else if (string.charAt(1) == 'D') {
                     String description = string.substring(string.indexOf(' ') + 1, string.indexOf('('));
                     String by = string.substring(string.indexOf("(by") + 5);
                     if (string.charAt(4) == '✓') {
-                        lists.add(new Deadline(description, by, true));
+                        lists.add(new DeadlineTask(description, by, true));
                     } else {
-                        lists.add(new Deadline(description, by));
+                        lists.add(new DeadlineTask(description, by));
                     }
                 } else {
                     String time = string.substring(string.indexOf("(at") + 5);
                     String description = string.substring(string.indexOf(' ') + 1, string.indexOf('('));
                     if (string.charAt(4) == '✓') {
-                        lists.add(new Event(description, time, true));
+                        lists.add(new EventTask(description, time, true));
                     } else {
-                        lists.add(new Event(description, time));
+                        lists.add(new EventTask(description, time));
                     }
                 }
             }

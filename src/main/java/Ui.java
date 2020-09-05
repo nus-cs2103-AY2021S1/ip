@@ -16,7 +16,7 @@ public class Ui {
     /**
      * Show the welcome message.
      */
-    public void showWelcome() {
+    public void showWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
