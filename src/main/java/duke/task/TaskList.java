@@ -1,12 +1,15 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * The <code>ArrayList</code> containing all the Tasks that Duke is storing.
  */
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private List<Task> taskList;
 
     /**
      * Constructor to create a new TaskList.
@@ -20,7 +23,7 @@ public class TaskList {
      *
      * @param tasks is the List of Tasks that is created from loading the Storage's tasks.
      */
-    public TaskList(ArrayList<Task> tasks) {
+    public TaskList(List<Task> tasks) {
         assert tasks != null : "Tasks cannot be null";
         this.taskList = tasks;
     }
@@ -72,15 +75,11 @@ public class TaskList {
      * @return String representing all the filtered items in the TaskList.
      */
     public String showSpecifiedItems(String keyword) {
-        TaskList filteredTasks = new TaskList();
+        List<Task> currList = this.taskList;
+        List<Task> filteredList = currList.stream().filter((task) -> task.hasKeyword(keyword))
+                .collect(Collectors.toList());
 
-        ArrayList<Task> currList = this.taskList;
-        currList.forEach(item -> {
-            if (item.description.contains(keyword)) {
-                filteredTasks.add(item);
-            }
-        });
-        return filteredTasks.toString();
+        return new TaskList(filteredList).toString();
     }
 
     /**
@@ -99,12 +98,9 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder("Here are all the items in your list:\n");
-        taskList.forEach(task -> {
-            int taskNumber = taskList.indexOf(task) + 1;
-            builder.append(String.format("%d. %s\n", taskNumber, task));
-        });
-
-        return builder.toString().trim();
+        return IntStream.range(0, this.taskList.size())
+                .mapToObj(index -> String.format("%d. %s", index + 1, this.taskList.get(index)))
+                .collect(Collectors.joining("\n"))
+                .trim();
     }
 }

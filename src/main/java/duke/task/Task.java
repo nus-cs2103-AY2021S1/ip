@@ -31,6 +31,15 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Checks if Task description contains the give keyword.
+     *
+     * @param keyword is the pattern string inputted by the user.
+     * @return true if the Task description contains the keyword.
+     */
+    public boolean hasKeyword(String keyword) {
+        return description.contains(keyword);
+    }
 
     public String getStatusIcon() {
         return (isDone ? "1" : "0");
