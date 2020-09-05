@@ -4,7 +4,6 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.parsers.Parser;
 
 /**
@@ -21,7 +20,6 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     static final String FILE_PATH = "data/tasks.txt";
 
@@ -30,12 +28,11 @@ public class Duke {
      * @param filePath a string representing the destination file path where the list of tasks is stored
      */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            System.out.println(Output.loadingErrorMessage());
             tasks = new TaskList();
         }
     }
@@ -48,7 +45,7 @@ public class Duke {
     public String getResponse(String command) {
         try {
             Command c = Parser.parse(command);
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasks, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
