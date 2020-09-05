@@ -49,4 +49,11 @@ public class TodoTaskTest {
     public void contains_wrongKeyword_false() {
         assertFalse(new TodoTask("test").contains(new String[]{"wrong"}));
     }
+
+    @Test
+    public void update_correctInput_correctOutput() {
+        TodoTask todoTask = new TodoTask("test");
+        todoTask = todoTask.update("testing");
+        assertEquals("[T][\u2718] testing", todoTask.toString());
+    }
 }

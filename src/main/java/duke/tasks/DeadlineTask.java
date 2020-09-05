@@ -47,6 +47,16 @@ public class DeadlineTask extends Task {
     }
 
     @Override
+    public DeadlineTask update(String updateString) throws DukeException {
+        String[] segments = updateString.split("/by", 2);
+        DeadlineTask newDeadlineTask = new DeadlineTask(segments[0].trim(), segments[1].trim());
+        if (isDone) {
+            newDeadlineTask = newDeadlineTask.markAsDone();
+        }
+        return newDeadlineTask;
+    }
+
+    @Override
     public String getData() {
         return "D|" + super.getData() + "|" + deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }

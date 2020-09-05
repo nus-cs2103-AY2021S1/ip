@@ -30,6 +30,11 @@ public class TodoTask extends Task {
     }
 
     @Override
+    public TodoTask update(String updateString) {
+        return new TodoTask(updateString, isDone);
+    }
+
+    @Override
     public String getData() {
         return "T|" + super.getData();
     }

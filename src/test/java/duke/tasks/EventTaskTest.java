@@ -88,4 +88,26 @@ public class EventTaskTest {
             fail();
         }
     }
+
+    @Test
+    public void update_wrongDateFormat_throwDukeException() {
+        try {
+            EventTask eventTask = new EventTask("test", "2020-09-05");
+            eventTask.update("testing /at 20-09-4");
+            fail();
+        } catch (DukeException e) {
+            assertEquals("Date format should be YYYY-MM-DD", e.getMessage());
+        }
+    }
+
+    @Test
+    public void update_correctInput_correctOutput() {
+        try {
+            EventTask eventTask = new EventTask("test", "2020-09-05");
+            eventTask = eventTask.update("testing /at 2020-09-04");
+            assertEquals("[E][\u2718] testing (at: Sep 4 2020)", eventTask.toString());
+        } catch (DukeException e) {
+            fail();
+        }
+    }
 }

@@ -81,6 +81,12 @@ public class TaskList {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    public Task update(int taskNum, String updateString) throws DukeException {
+        Task updatedTask = taskStore.get(taskNum - 1).update(updateString);
+        taskStore.set(taskNum - 1, updatedTask);
+        return updatedTask;
+    }
+
     /**
      * Gets the string representation of each task in the taskList.
      *

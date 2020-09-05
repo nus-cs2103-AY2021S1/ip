@@ -47,6 +47,16 @@ public class EventTask extends Task {
     }
 
     @Override
+    public EventTask update(String updateString) throws DukeException {
+        String[] segments = updateString.split("/at", 2);
+        EventTask newEventTask = new EventTask(segments[0].trim(), segments[1].trim());
+        if (isDone) {
+            newEventTask = newEventTask.markAsDone();
+        }
+        return newEventTask;
+    }
+
+    @Override
     public String getData() {
         return "E|" + super.getData() + "|" + timePeriod.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
