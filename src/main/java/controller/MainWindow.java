@@ -37,11 +37,19 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Method to display the welcome message in the GUI
+     * Display the welcome message in the GUI
      */
     public void dukeWelcome() {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog("Hello! I'm Duke\n What can I do for you?", dukeImage));
+    }
+
+    /**
+     * Displays reminder for deadline tasks that are upcoming in 3 days to user
+     */
+    public void displayReminder() {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(duke.getReminderString(),dukeImage));
     }
 
     /**

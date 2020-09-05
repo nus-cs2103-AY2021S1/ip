@@ -25,6 +25,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().dukeWelcome();
+            fxmlLoader.<MainWindow>getController().displayReminder();
             stage.show();
 
         } catch (IOException e) {

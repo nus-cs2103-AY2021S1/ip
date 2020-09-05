@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class TodoTask extends Task {
     public TodoTask(String name) {
-        super(name);
+        super(name, TaskType.TODO);
     }
 
     public TodoTask(String name, int hasCompletedInt) {
-        super(name, hasCompletedInt);
+        super(name, TaskType.TODO, hasCompletedInt);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class TodoTask extends Task {
     /**
      * Formats task into a string for file saving
      *
-     * @return formatted string representing the task
+     * @return formatted string representing the task.
      */
     public String getFormattedString() {
         return String.format("T | %s | %s\n", this.getHasCompletedInt(), this.getName());

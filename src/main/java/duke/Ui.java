@@ -44,14 +44,31 @@ public class Ui {
     /**
      * Returns a string displaying the list of tasks
      *
-     * @param taskList Object of task list class
-     * @return String containing information of tasks
+     * @param taskList Object of task list class.
+     * @return String containing information of tasks.
      */
     public String displayTaskList(TaskList taskList) {
         assert taskList != null;
         StringBuilder s = new StringBuilder("Here are your current tasks:\n");
         addTasksToStringBuilder(taskList, s);
         return s.toString();
+    }
+
+    /**
+     * Returns a string displaying the reminder list of tasks
+     *
+     * @param taskList Object of task list class.
+     * @return String containing information of reminder tasks.
+     */
+    public String displayReminder(TaskList taskList) {
+        assert taskList != null;
+        if (taskList.getSize() > 0) {
+            StringBuilder s = new StringBuilder("Here are your upcoming tasks:\n");
+            addTasksToStringBuilder(taskList, s);
+            return s.toString();
+        } else {
+            return "You have no tasks that have deadlines coming soon!";
+        }
     }
 
     /**
