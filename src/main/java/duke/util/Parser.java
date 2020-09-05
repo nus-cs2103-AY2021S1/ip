@@ -12,6 +12,7 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.command.ToDoCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidDeadlineException;
@@ -48,6 +49,8 @@ public class Parser {
             return parseTodo(input);
         } else if (input.startsWith("find")) {
             return parseFind(input);
+        } else if (input.equals("sort")) {
+            return new SortCommand();
         } else {
             throw new DukeException();
         }
