@@ -1,5 +1,10 @@
 package duke;
 
+import duke.task.Task;
+
+import java.io.IOException;
+import java.util.List;
+
 /**
  * Manages the history of the Duke app.
  */
@@ -47,10 +52,18 @@ public class DukeStateManager {
      *
      * @return the new current DukeState after the undo is complete
      */
-    public DukeState undo() {
-        currentNode = currentNode.previous;
-        currentNode.state.getStorage().updateStorageFile();
+    public DukeState undo() throws IOException {
+        Node original = currentNode;
+        try {
+            currentNode = currentNode.previous;
+            List<Task> tasks = currentNode.state.getTaskList().getListOfTasks();
+            currentNode.state.getStorage().updateTasks(tasks);
+        } catch (IOException e) {
+            currentNode = original;
+            throw new IOException(e);
+        }
         return currentNode.state;
+
     }
 
 }

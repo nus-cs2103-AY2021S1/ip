@@ -42,7 +42,7 @@ public abstract class Command {
      * Instructs the given DukeStateManager to add a new DukeState created with the given TaskList and Storage
      */
     protected void storeState(DukeStateManager dukeStateManager, TaskList tasks, Storage storage) {
-        DukeState newState = new DukeState(tasks.getCopyOf(), storage.getCopyOf());
+        DukeState newState = new DukeState(tasks.getCopyOf(), storage);
         dukeStateManager.addHistory(newState);
     }
 

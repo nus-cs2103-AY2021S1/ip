@@ -43,7 +43,6 @@ public class DeleteCommand extends Command {
                 deletedTask.toString()));
         storage.updateTasks(tasks.getListOfTasks());
 
-        this.storeState(dukeStateManager, tasks, storage);
         return new Response(false, message);
     }
 

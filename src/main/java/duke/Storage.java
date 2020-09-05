@@ -22,13 +22,10 @@ import java.util.Scanner;
 /**
  * Represents the state of the storage file used to store user's Tasks
  */
-public class Storage implements Copiable {
+public class Storage {
 
     private final  String DIRECTORY_PATH = "data";
     private final  String STORAGE_PATH = "data/duke.txt";
-
-    /* the current state of the storage file */
-    private File currentState;
 
     /**
      * Constructs a Storage by checking if storage file path exists and if not create the appropriate directory and file.
@@ -44,16 +41,6 @@ public class Storage implements Copiable {
         if (!storagePath.exists()) {
             storagePath.createNewFile();
         }
-        currentState = new File(STORAGE_PATH);
-    }
-
-    private Storage(File currentState) {
-        this.currentState = currentState;
-    }
-
-    @Override
-    public Storage getCopyOf() {
-        return new Storage(currentState);
     }
 
     /**
@@ -96,20 +83,6 @@ public class Storage implements Copiable {
             addTask(storageWriter, t);
         }
         storageWriter.close();
-        currentState = new File(STORAGE_PATH);
-    }
-
-    /**
-     * Replaces the storage file with the currentState of this Storage object
-     */
-    public void updateStorageFile() {
-        Path from = currentState.toPath();
-        Path to = Paths.get(STORAGE_PATH);
-        try {
-            Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            System.out.println("Could not replace storage file");
-        }
     }
 
     private Task parseStorageString(String storageString) throws WrongDateFormatException {
