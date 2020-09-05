@@ -138,47 +138,43 @@ public class Parser {
     public static String parseDate(String date) throws DukeException {
         //date input could be "at 2/12/2019 1800"
         //returns "2019-12-02 1800"
-        try {
-            String errMessage = "Sorry! Format of date is wrong. "
-                    + "Example input should be "
-                    + "deadline return book /by 2/12/2019 1800. "
-                    + "Please fix storage file before loading Duke again.";
+        String errMessage = "Sorry! Format of date is wrong. "
+                + "Example input should be "
+                + "deadline return book /by 2/12/2019 1800. "
+                + "Please fix storage file before loading Duke again.";
 
-            String[] strArr = date.split(" ");
-            if (strArr.length != 3 && strArr.length != 2) {
-                throw new DukeException(errMessage);
-            }
-
-            String[] dateArr = new String[0];
-            int dateIndex = -1;
-            int timeIndex = -1;
-            if (strArr.length == 2) {
-                dateArr = strArr[0].split("/");
-                dateIndex = 0;
-                timeIndex = 1;
-            } else if (strArr.length == 3) {
-                dateArr = strArr[1].split("/");
-                dateIndex = 1;
-                timeIndex = 2;
-            }
-
-            if (dateArr.length != 3) {
-                throw new DukeException(errMessage);
-            }
-
-            //if day < 10, add 0 in front
-            if (Integer.parseInt(dateArr[0]) < 10) {
-                dateArr[0] = "0" + dateArr[0];
-            }
-            //transform 2/12/2019 to 2019-12-02
-            date = dateArr[2] + "-" + dateArr[1] + "-" + dateArr[0];
-            strArr[dateIndex] = date;
-
-            String res = strArr[dateIndex] + " " + strArr[timeIndex];
-            return res;
-        } catch (DukeException e) {
-            throw e;
+        String[] strArr = date.split(" ");
+        if (strArr.length != 3 && strArr.length != 2) {
+            throw new DukeException(errMessage);
         }
+
+        String[] dateArr = new String[0];
+        int dateIndex = -1;
+        int timeIndex = -1;
+        if (strArr.length == 2) {
+            dateArr = strArr[0].split("/");
+            dateIndex = 0;
+            timeIndex = 1;
+        } else if (strArr.length == 3) {
+            dateArr = strArr[1].split("/");
+            dateIndex = 1;
+            timeIndex = 2;
+        }
+
+        if (dateArr.length != 3) {
+            throw new DukeException(errMessage);
+        }
+
+        //if day < 10, add 0 in front
+        if (Integer.parseInt(dateArr[0]) < 10) {
+            dateArr[0] = "0" + dateArr[0];
+        }
+        //transform 2/12/2019 to 2019-12-02
+        date = dateArr[2] + "-" + dateArr[1] + "-" + dateArr[0];
+        strArr[dateIndex] = date;
+
+        String res = strArr[dateIndex] + " " + strArr[timeIndex];
+        return res;
     }
 
     /**
