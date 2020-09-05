@@ -155,6 +155,7 @@ public class Parser {
                     return new DeadlineCommand(processTime[0].trim(),
                             time[1].trim());
                 } else {
+                    assert (task.equals("event")) : "This task name does not exist!";
                     return new EventCommand(processTime[0].trim(),
                             time[1].trim());
                 }

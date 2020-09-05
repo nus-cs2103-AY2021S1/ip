@@ -20,6 +20,7 @@ public class TaskList {
 
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
+        assert (this.taskList != null) : "List cannot be null!";
     }
 
     public ArrayList<Task> getTaskList() {

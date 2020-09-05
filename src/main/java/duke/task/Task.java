@@ -17,6 +17,8 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+
+        assert (this.description != null) : "The description cannot be left empty.";
     }
 
     public String getStatusIcon() {
