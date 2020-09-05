@@ -19,6 +19,7 @@ public class TodoCommand extends Command {
      * @param name The name of the Todo object to be created
      */
     public TodoCommand(String name) {
+        assert !name.isBlank(): "Input is empty.";
         this.todo = new Todo(name);
     }
 

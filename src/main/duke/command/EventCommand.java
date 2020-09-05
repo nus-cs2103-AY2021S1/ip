@@ -25,13 +25,14 @@ public class EventCommand extends Command {
      * @throws DukeArgumentException if the arguments from the input string are invalid.
      */
     public EventCommand(String input) throws DukeArgumentException {
+        assert !input.isBlank(): "Input is empty.";
         String[] args = input.split("/at ", 2);
         try {
             this.event = new Event(args[0].trim(), LocalDate.parse(args[1].trim()));
         } catch (ArrayIndexOutOfBoundsException ae) {
             throw new DukeArgumentException("Insufficient arguments provided for duke.Tasks.Event.");
         } catch (DateTimeParseException de) {
-            throw new DukeArgumentException("duke.Tasks.Event date/time could not be parsed.");
+            throw new DukeArgumentException("Event date/time could not be parsed.");
         }
     }
 

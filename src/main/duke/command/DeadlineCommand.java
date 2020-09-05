@@ -24,6 +24,7 @@ public class DeadlineCommand extends Command {
      * @throws DukeArgumentException if the arguments from the input string are invalid.
      */
     public DeadlineCommand(String input) throws DukeArgumentException {
+        assert !input.isBlank(): "Input is empty.";
         String[] args = input.split("/by ", 2);
         try {
             this.deadline = new Deadline(args[0].trim(), LocalDate.parse(args[1].trim()));

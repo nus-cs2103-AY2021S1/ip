@@ -19,6 +19,7 @@ public class DeleteCommand extends Command {
      * @throws DukeArgumentException if the index provided in the input string is invalid.
      */
     public DeleteCommand(String args) throws DukeArgumentException {
+        assert !args.isBlank(): "Input is empty.";
         try {
             int index = Integer.parseInt(args);
             this.index = index - 1;

@@ -16,6 +16,7 @@ public class FindCommand extends Command {
      * @param input the text to search for
      */
     public FindCommand(String input) {
+        assert !input.isBlank(): "Input is empty.";
         keyword = input.toLowerCase();
     }
 
