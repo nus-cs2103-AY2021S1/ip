@@ -26,8 +26,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Sets the utility tools <code>tm</code> and <code>ui</code>.
-     * In addition, it sets the initial response to ask for the task number to be marked
-     * as completed.
+     * In addition, it sets the initial response to ask for the task number to be deleted.
      * @param tm the task manager.
      * @param ui the ui.
      */
