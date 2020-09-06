@@ -11,7 +11,7 @@ import duke.ui.UI;
  */
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
-    public final int sizeOffset = -1;
+    private static final int SIZE_OFFSET = -1;
 
     /**
      * Creates an instance of a Done Command with the appropriate
@@ -34,9 +34,15 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
-        Task task = taskList.getTaskAtIndex(Integer.parseInt(commandDescription) + sizeOffset);
-        task.setDone();
-        storage.saveData(taskList, ui);
-        return ui.displayDoneTask(task);
+        try {
+            Task task = taskList.getTaskAtIndex(Integer.parseInt(commandDescription) + SIZE_OFFSET);
+            task.setDone();
+            storage.saveData(taskList, ui);
+            return ui.displayDoneTask(task);
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showError("There's no such element!");
+        } catch (NumberFormatException e) {
+            return ui.showError("Looks like your input was invalid! Enter --help for more information");
+        }
     }
 }

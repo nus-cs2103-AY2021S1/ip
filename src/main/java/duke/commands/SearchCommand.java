@@ -16,7 +16,7 @@ import duke.ui.UI;
  */
 public class SearchCommand extends Command {
     public static final String COMMAND_WORD = "search";
-    public String[] commandKeywords;
+    private String[] commandKeywords;
 
     /**
      * Creates an instance of a Search Command with the appropriate
@@ -42,16 +42,20 @@ public class SearchCommand extends Command {
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
         Set<Task> tasksFound = new HashSet<>();
-        for (String keyword : commandKeywords) {
-            String keywordPattern = "(.*)" + keyword + "(.*)";
-            for (int i = 0; i < taskList.getListSize(); i++) {
-                Task task = taskList.getTaskAtIndex(i);
-                if (task.toString().matches(keywordPattern)) {
-                    tasksFound.add(task);
+        try {
+            for (String keyword : commandKeywords) {
+                String keywordPattern = "(.*)" + keyword + "(.*)";
+                for (int i = 0; i < taskList.getListSize(); i++) {
+                    Task task = taskList.getTaskAtIndex(i);
+                    if (task.toString().matches(keywordPattern)) {
+                        tasksFound.add(task);
+                    }
                 }
             }
+            ArrayList<Task> tasks = new ArrayList<>(tasksFound);
+            return ui.displayAllItems(tasks);
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showError("There's no such element!");
         }
-        ArrayList<Task> tasks = new ArrayList<>(tasksFound);
-        return ui.displayAllItems(tasks);
     }
 }

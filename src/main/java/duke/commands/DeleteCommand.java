@@ -11,7 +11,7 @@ import duke.ui.UI;
  */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
-    public final int sizeOffset = -1;
+    private static final int SIZE_OFFSET = -1;
 
     /**
      * Creates an instance of a DeleteCommand with the appropriate
@@ -33,9 +33,17 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
-        Task task = taskList.getTaskAtIndex(Integer.parseInt(commandDescription) + sizeOffset);
-        taskList.removeFromList(Integer.parseInt(commandDescription) + sizeOffset);
-        storage.saveData(taskList, ui);
-        return ui.displayDeletedTask(task, taskList.getListSize());
+        assert ui != null;
+        assert storage != null;
+        try {
+            Task task = taskList.getTaskAtIndex(Integer.parseInt(commandDescription) + SIZE_OFFSET);
+            taskList.removeFromList(Integer.parseInt(commandDescription) + SIZE_OFFSET);
+            storage.saveData(taskList, ui);
+            return ui.displayDeletedTask(task, taskList.getListSize());
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showError("There's no such element!");
+        } catch (NumberFormatException e) {
+            return ui.showError("Looks like your input was invalid! Enter --help for more information");
+        }
     }
 }

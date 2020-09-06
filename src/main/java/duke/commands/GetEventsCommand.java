@@ -40,6 +40,8 @@ public class GetEventsCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
+        assert ui != null;
+        assert storage != null;
         try {
             ArrayList<Task> listOfTasks = new ArrayList<>();
             for (int i = 0; i < taskList.getListSize(); i++) {
@@ -52,6 +54,8 @@ public class GetEventsCommand extends Command {
             return ui.displayEventsOnDate(listOfTasks, localDate);
         } catch (DateTimeParseException e) {
             return ui.showError("Please input a valid date format");
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showError("There's no such element!");
         }
     }
 }
