@@ -17,6 +17,11 @@ public class Statistics extends HBox {
     private final static String path = "data/stat.txt";
     private final static String[] categories = new String[]{"Todo", "Deadline", "Event"};
     private BarChart<String, Number> chart;
+
+    /**
+     * Saves current counter data
+     * @param data current counter data
+     */
     public void saveData(int[] data) {
         try {
             File file = new File(path);
@@ -36,6 +41,11 @@ public class Statistics extends HBox {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Loads current counter data
+     * @return current counter data
+     */
     public int[] getData() {
         int[] data = new int[]{0,0,0};
         try {
@@ -68,7 +78,7 @@ public class Statistics extends HBox {
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Since the start");
-        for(int i = 0; i < data.length; i++) {
+        for (int i = 0; i < data.length; i++) {
             series.getData().add(new XYChart.Data<String, Number>(categories[i], data[i]));
         }
         chart = new BarChart<>(xAxis, yAxis);
