@@ -38,7 +38,7 @@ public class Duke {
         return response;
     }
 
-    protected void checkFilePath() throws IOException {
+    protected static void checkFilePath() throws IOException {
         if (!Files.exists(Paths.get("data"))) {
             Files.createDirectory(Paths.get("data"));
         }
@@ -52,7 +52,6 @@ public class Duke {
      */
     public void run() throws IOException {
 
-        checkFilePath();
         Scanner sc = new Scanner(System.in);
         String input;
         Ui.makeStartUi().printMessage();
@@ -70,6 +69,7 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
+        checkFilePath();
         new Duke().run();
     }
 
