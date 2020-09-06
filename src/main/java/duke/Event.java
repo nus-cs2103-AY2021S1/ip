@@ -37,6 +37,11 @@ public class Event extends Task {
         return "E" + super.convertToText() + " >> " + this.getAt().toString();
     }
 
+    @Override
+    public boolean checkTask(LocalDate date) {
+        return getAt().equals(date) && isNotDone();
+    }
+
     /**
      * Overridden toString method to output name, type and status of task.
      * @return String This returns a string.

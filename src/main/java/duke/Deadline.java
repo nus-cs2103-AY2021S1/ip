@@ -50,6 +50,11 @@ public class Deadline extends Task {
         return "D" + super.convertToText() + " >> " + this.getDate().toString() + " " + this.getTime().toString();
     }
 
+    @Override
+    public boolean checkTask(LocalDate date) {
+        return getDate().equals(date) && isNotDone();
+    }
+
     /**
      * Overridden toString method to output name, type and status of task.
      * @return String This returns a string.
