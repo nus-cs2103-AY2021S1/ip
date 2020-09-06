@@ -1,13 +1,13 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.exceptions.DukeException;
 import duke.logic.CommandParser;
 import duke.logic.commands.Command;
 import duke.model.TaskManager;
 import duke.storage.Storage;
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * The Duke program is a chatbot for managing tasks and deadlines.

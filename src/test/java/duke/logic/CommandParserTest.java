@@ -1,5 +1,7 @@
 package duke.logic;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import duke.exceptions.DukeException;
 import duke.logic.commands.AddCommand;
 import duke.logic.commands.Command;
@@ -9,32 +11,31 @@ import duke.logic.commands.ExitCommand;
 import duke.logic.commands.ListCommand;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 public class CommandParserTest {
+
     @Test
-    public void parse_ExitCommand() throws DukeException {
+    public void parse_exitCommand() throws DukeException {
         String commandString = "bye";
         Command c = CommandParser.parse(commandString);
         assertTrue(c instanceof ExitCommand);
     }
 
     @Test
-    public void parse_ListCommand() throws DukeException {
+    public void parse_listCommand() throws DukeException {
         String commandString = "list";
         Command c = CommandParser.parse(commandString);
         assertTrue(c instanceof ListCommand);
     }
 
     @Test
-    public void parse_DoneCommand() throws DukeException {
+    public void parse_doneCommand() throws DukeException {
         String commandString = "done 1";
         Command c = CommandParser.parse(commandString);
         assertTrue(c instanceof DoneCommand);
     }
 
     @Test
-    public void parse_DeleteCommand() throws DukeException {
+    public void parse_deleteCommand() throws DukeException {
         String commandString = "delete 1";
         Command c = CommandParser.parse(commandString);
         assertTrue(c instanceof DeleteCommand);

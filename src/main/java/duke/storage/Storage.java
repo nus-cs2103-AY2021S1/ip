@@ -1,10 +1,5 @@
 package duke.storage;
 
-import duke.model.task.Deadline;
-import duke.model.task.Event;
-import duke.model.task.Task;
-import duke.model.task.ToDo;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,6 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import duke.model.task.Deadline;
+import duke.model.task.Event;
+import duke.model.task.Task;
+import duke.model.task.ToDo;
 
 /**
  * Handles the saving and loading of tasks.
@@ -66,7 +66,8 @@ public class Storage {
                 break;
             case("D"):
                 LocalDate deadlineDate = LocalDate.parse(taskLine[3]);
-                Deadline deadline = new Deadline(taskLine[2], Boolean.parseBoolean(taskLine[1]), deadlineDate);
+                Deadline deadline = new Deadline(
+                        taskLine[2], Boolean.parseBoolean(taskLine[1]), deadlineDate);
                 taskList.add(deadline);
                 break;
             case("E"):

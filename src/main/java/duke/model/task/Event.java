@@ -35,7 +35,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String formattedDate = at.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        return "[E]" + super.toString() + "(at: " + formattedDate + ")";
+        return "[E]" + super.toString() + " (at: " + formattedDate + ")";
     }
 
     /**

@@ -1,5 +1,8 @@
 package duke.logic.commands;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.exceptions.DukeException;
 import duke.model.TaskManager;
 import duke.model.task.Deadline;
@@ -7,9 +10,6 @@ import duke.model.task.Event;
 import duke.model.task.ToDo;
 import duke.storage.Storage;
 import duke.ui.Ui;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * Handles 'deadline', 'event' and 'todo' command input by user.
@@ -35,7 +35,7 @@ public class AddCommand extends Command{
      */
     @Override
     public void execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
-        if (command.startsWith("deadline")){
+        if (command.startsWith("deadline")) {
             if (command.length() <= 9) {
                 throw new DukeException("Description of a deadline cannot be empty!");
             }
