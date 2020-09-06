@@ -161,6 +161,51 @@ public class Event extends Task {
     }
 
     /**
+     * Returns true if the specified {@code obj} is an {@code Event} and has the same (case insensitive) description,
+     * start and end datetime as this {@code Event}.
+     *
+     * @param obj the reference object with which to compare.
+     * @return true if the {@code Object} is an {@code Event} and are similar.
+     */
+    @Override
+    boolean isSimilar(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Event)) {
+            return false;
+        }
+
+        Event other = (Event) obj;
+        return other.description.toLowerCase().equals(description.toLowerCase())
+                && other.startDateTime.equals(startDateTime)
+                && other.endDateTime.equals(endDateTime);
+    }
+
+    /**
+     * Returns true if the specified {@code obj} is an {@code Event} and has the same details.
+     *
+     * @param obj the reference object with which to compare.
+     * @return true if the {@code Object} is an {@code Event} and has the same details.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Event)) {
+            return false;
+        }
+
+        Event other = (Event) obj;
+        return other.description.equals(description)
+                && other.startDateTime.equals(startDateTime)
+                && other.endDateTime.equals(endDateTime);
+    }
+
+    /**
      * Returns a string representation of this {@code Event} object.
      *
      * @return a string representation of this {@code Event} object.

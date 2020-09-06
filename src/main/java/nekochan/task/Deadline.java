@@ -17,11 +17,11 @@ public class Deadline extends Task {
 
     private static final String DEADLINE_DELIMITER = "by";
 
-    private LocalDateTime dateTime;
+    private LocalDateTime due;
 
-    private Deadline(String description, LocalDateTime dateTime) {
+    private Deadline(String description, LocalDateTime due) {
         super(description);
-        this.dateTime = dateTime;
+        this.due = due;
     }
 
     /**
@@ -77,7 +77,7 @@ public class Deadline extends Task {
     @Override
     public String encode() {
         return String.format("D|%s|%s|%s", super.isCompleted ? ENCODED_COMPLETE_FLAG : ENCODED_INCOMPLETE_FLAG,
-                DateParser.parseLocalDateTimeToString(dateTime),
+                DateParser.parseLocalDateTimeToString(due),
                 super.description);
     }
 
@@ -91,10 +91,53 @@ public class Deadline extends Task {
     public boolean match(String searchParameter) {
         try {
             LocalDate searchDate = DateParser.parseStringToDateTime(searchParameter).toLocalDate();
-            return searchDate.isEqual(dateTime.toLocalDate());
+            return searchDate.isEqual(due.toLocalDate());
         } catch (NekoException e) {
             return searchParameter.contains(description) || description.contains(searchParameter);
         }
+    }
+
+    /**
+     * Returns true if the specified {@code obj} is a {@code Deadline} and has the same (case insensitive) description
+     * and due datetime as this {@code Deadline}.
+     *
+     * @param obj the reference object with which to compare.
+     * @return true if the {@code Object} is a {@code Deadline} and are similar.
+     */
+    @Override
+    boolean isSimilar(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline other = (Deadline) obj;
+        return other.description.toLowerCase().equals(description.toLowerCase())
+                && other.due.equals(due);
+    }
+
+    /**
+     * Returns true if the specified {@code obj} is a {@code Deadline} and has the same details.
+     *
+     * @param obj the reference object with which to compare.
+     * @return true if the {@code Object} is a {@code Deadline} and has the same details.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline other = (Deadline) obj;
+        return other.description.equals(description)
+                && other.due.equals(due);
     }
 
     /**
@@ -104,6 +147,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateParser.parseLocalDateTimeToString(dateTime) + ")";
+        return "[D]" + super.toString() + " (by: " + DateParser.parseLocalDateTimeToString(due) + ")";
     }
 }

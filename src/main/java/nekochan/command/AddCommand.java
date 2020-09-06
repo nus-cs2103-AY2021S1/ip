@@ -1,7 +1,10 @@
 package nekochan.command;
 
+import java.util.List;
+
 import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.exceptions.NekoException;
+import nekochan.exceptions.NekoSimilarTaskException;
 import nekochan.storage.Storage;
 import nekochan.task.Deadline;
 import nekochan.task.Event;
@@ -20,6 +23,7 @@ public class AddCommand extends Command {
 
     private Task createdTask;
     private int remainingTaskCount;
+    private List<Task> similarTasks;
 
     /**
      * Constructs an {@code AddCommand} with the specified type and specified task details.
@@ -52,10 +56,15 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList list, Storage storage) {
-        list.add(createdTask);
-        remainingTaskCount = list.getTaskCount();
-        storage.save(list);
-        super.isCompleted = true;
+        try {
+            list.add(createdTask);
+        } catch (NekoSimilarTaskException e) {
+            similarTasks = e.getSimilarTask();
+        } finally {
+            remainingTaskCount = list.getTaskCount();
+            storage.save(list);
+            super.isCompleted = true;
+        }
     }
 
     /**
@@ -73,7 +82,11 @@ public class AddCommand extends Command {
         assert createdTask != null : "created task should not be null";
 
         String responseMessage = Messages.MESSAGE_ADD + createdTask.toString() + "\n"
-                + Messages.getTotalTaskMessage(remainingTaskCount);
+                + Messages.getTotalTaskMessage(remainingTaskCount);;
+        if (similarTasks != null && !similarTasks.isEmpty()) {
+            responseMessage += "\n" + Messages.SIMILAR_TASK_ERROR
+                    + similarTasks.stream().map(Task::toString).reduce("", (str1, str2) -> str1 + str2 + "\n");
+        }
         return new Response(IS_EXIT, responseMessage);
     }
 }

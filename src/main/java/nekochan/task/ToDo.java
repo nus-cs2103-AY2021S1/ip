@@ -74,6 +74,47 @@ public class ToDo extends Task {
         return description.contains(searchParameter) || searchParameter.contains(description);
     }
 
+    /**
+     * Returns true if the specified {@code obj} is a {@code ToDo} and has the same (case insensitive) description as
+     * this {@code ToDo}.
+     *
+     * @param obj the reference object with which to compare.
+     * @return true if the {@code Object} is a {@code ToDo} and has the same (case insensitive) description.
+     */
+    @Override
+    boolean isSimilar(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof ToDo)) {
+            return false;
+        }
+
+        ToDo other = (ToDo) obj;
+        return other.description.toLowerCase().equals(description.toLowerCase());
+    }
+
+    /**
+     * Returns true if the specified {@code obj} is a {@code ToDo} and has the same details.
+     *
+     * @param obj the reference object with which to compare.
+     * @return true if the {@code Object} is a {@code ToDo} and has the same details.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof ToDo)) {
+            return false;
+        }
+
+        ToDo other = (ToDo) obj;
+        return other.description.equals(description);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

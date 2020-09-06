@@ -34,6 +34,8 @@ public class Messages {
     public static final String DECODE_UNEXPECTED_TYPE_ERROR = "Something doesn't seem right...\n";
 
     public static final String MISSING_TASK_ERROR = "I couldn't find that task. Are you trying to make 2020 worse?\n";
+    public static final String DUPLICATE_TASK_ERROR = "You already have this task!\n";
+    public static final String SIMILAR_TASK_ERROR = "However, I found something similar:\n";
 
     public static final String STORAGE_ERROR_UNABLE_TO_WRITE = "I didn't have enough strength to move the bits.\n";
     public static final String STORAGE_ERROR_FOLDER_ERROR = "I got lost somewhere in your folders.\n";
