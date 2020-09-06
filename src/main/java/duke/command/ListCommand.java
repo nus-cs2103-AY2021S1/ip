@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.LinkedList;
+
 import duke.component.DukeException;
 import duke.component.Storage;
 import duke.component.TaskList;
@@ -24,7 +26,8 @@ public class ListCommand implements Command {
      * Prints out the task list.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage,
+                          LinkedList<ReversibleCommand> reversibleCommands) throws DukeException {
         return ui.displayList(taskList, "Here are the tasks in your list:");
     }
 }

@@ -7,6 +7,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UndoCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -31,6 +32,8 @@ public class Parser {
             return new ByeCommand();
         } else if (input.equals("list")) {
             return new ListCommand();
+        } else if (input.equals("undo")) {
+            return new UndoCommand();
         } else if (input.startsWith("find")) {
             return generateFindCommand(input);
         } else if (input.startsWith("done")) {

@@ -1,6 +1,9 @@
 package duke;
 
+import java.util.LinkedList;
+
 import duke.command.Command;
+import duke.command.ReversibleCommand;
 import duke.component.DukeException;
 import duke.component.Parser;
 import duke.component.Storage;
@@ -19,6 +22,7 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
+    private LinkedList<ReversibleCommand> reversibleCommands;
 
     /**
      * Initializes Duke with the given file path.
@@ -26,6 +30,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage(FILE_PATH);
+        reversibleCommands = new LinkedList<>();
         try {
             taskList = new TaskList(storage.readList());
         } catch (DukeException e) {
@@ -51,7 +56,7 @@ public class Duke {
             try {
                 String input = ui.getInput();
                 Command c = Parser.parse(input);
-                c.execute(taskList, ui, storage);
+                c.execute(taskList, ui, storage, reversibleCommands);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.giveResponse(e.getMessage());
@@ -67,7 +72,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(taskList, ui, storage);
+            return c.execute(taskList, ui, storage, reversibleCommands);
         } catch (DukeException e) {
             return ui.giveResponse(e.getMessage());
         }

@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.LinkedList;
+
 import duke.component.DukeException;
 import duke.component.Storage;
 import duke.component.TaskList;
@@ -32,12 +34,13 @@ public class FindCommand implements Command {
 
     /**
      * Executes the command to search tasks that contains the keyword.
-     *
-     * @param taskList the task list given.
+     *  @param taskList the task list given.
      * @param ui       the ui object that handles inputs and outputs.
+     * @param reversibleCommands
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage,
+                          LinkedList<ReversibleCommand> reversibleCommands) throws DukeException {
         TaskList results = new TaskList();
         for (Task task : taskList.getList()) {
             if (task.getDescription().contains(keyword)) {
