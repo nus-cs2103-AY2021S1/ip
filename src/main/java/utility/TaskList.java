@@ -8,31 +8,30 @@ import tasks.Task;
 import tasks.Todo;
 
 public class TaskList {
-    /**
-     * Main ArrayList containing all tasks
-     */
-    private ArrayList<Task> taskList;
+
+    /** Main ArrayList containing all tasks. */
+    private final ArrayList<Task> taskList;
 
     /**
      * Data structure for managing tasks.
+     *
      * @param taskList arraylist of tasks
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
-    /**
-     * Used when no file is found and new TaskList needs to be made.
-     */
+    /** Overloaded constructor, when no existing database is found. */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
     /**
-     * returns the index of a specified character (first instance) in a string
+     * Returns the index of a specified character (first instance) in a string
+     *
      * @param s The String input.
      * @param target The character input.
-     * @return index.
+     * @return index as an integer
      */
     public static int getPosition(String s, char target) {
         for (int i = 0; i < s.length(); i++) {
@@ -46,6 +45,7 @@ public class TaskList {
 
     /**
      * Prints out the task added to the Bot.
+     *
      * @param ls an arraylist of tasks
      */
     public static String printAddedTask(ArrayList<Task> ls) {
@@ -56,8 +56,9 @@ public class TaskList {
     }
 
     /**
-     * Returns the taskList as an ArrayList
-     * @return arraylist of tasks
+     * Returns the taskList as an ArrayList.
+     *
+     * @return arraylist of tasks.
      */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
@@ -76,6 +77,7 @@ public class TaskList {
 
     /**
      * Search for tasks for the same name.
+     *
      * @param input the name of the task to search for.
      */
     public String findTasks(String input) {
@@ -93,6 +95,7 @@ public class TaskList {
 
     /**
      * Mark a task as done.
+     *
      * @param input the number of the task to be marked as complete.
      */
     public String completeTask(String input) {
@@ -104,9 +107,10 @@ public class TaskList {
     }
 
     /**
-     * Add an Event Task, which contains a datetime as well.
-     * @param input name of the event task
-     * @throws DukeException Custom Duke Exception
+     * Adds an Event Task to the taskList.
+     *
+     * @param input name of the event task.
+     * @throws DukeException Custom Duke Exception.
      */
     public String addEvent(String input) throws DukeException {
         assert input != null : "Input is null";
@@ -121,9 +125,10 @@ public class TaskList {
     }
 
     /**
-     * Add a Deadline Task, which contains a datetime as well.
-     * @param input name of deadline task
-     * @throws DukeException Custom Duke Exception
+     * Adds a Deadline Task to the taskList.
+     *
+     * @param input name of deadline task.
+     * @throws DukeException Custom Duke Exception.
      */
     public String addDeadline(String input) throws DukeException {
         assert input != null : "Input is null";
@@ -140,7 +145,7 @@ public class TaskList {
     }
 
     /**
-     * Add a Todo task.
+     * Adds a Todo Task to the taskList.
      *
      * @param input name of Todo task.
      */
@@ -151,7 +156,7 @@ public class TaskList {
     }
 
     /**
-     * Remove a task from the bot.
+     * Removes a task from the taskList.
      *
      * @param input position of task to be deleted.
      * @throws DukeException Custom Duke Exception.
@@ -166,6 +171,4 @@ public class TaskList {
         this.taskList.remove(position - 1);
         return out;
     }
-
-
 }
