@@ -36,7 +36,7 @@ public class Task {
     public Task(String taskName, boolean hasFormattedDate, LocalDate localDate) {
         this.taskName = taskName;
         this.isDone = false;
-        this.hasFormattedDate = true;
+        this.hasFormattedDate = hasFormattedDate;
         this.localDate = localDate;
     }
 

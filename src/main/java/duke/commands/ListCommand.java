@@ -33,10 +33,14 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
         ArrayList<Task> tasks = new ArrayList<>();
+        getAllTasks(tasks, taskList);
+        return ui.displayAllItems(tasks);
+    }
+
+    private void getAllTasks(ArrayList<Task> tasks, TaskList taskList) {
         for (int i = 0; i < taskList.getListSize(); i++) {
             Task task = taskList.getTaskAtIndex(i);
             tasks.add(task);
         }
-        return ui.displayAllItems(tasks);
     }
 }

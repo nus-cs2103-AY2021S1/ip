@@ -43,15 +43,19 @@ public class SearchCommand extends Command {
     public String execute(TaskList taskList, UI ui, Storage storage) {
         Set<Task> tasksFound = new HashSet<>();
         for (String keyword : commandKeywords) {
-            String keywordPattern = "(.*)" + keyword + "(.*)";
-            for (int i = 0; i < taskList.getListSize(); i++) {
-                Task task = taskList.getTaskAtIndex(i);
-                if (task.toString().matches(keywordPattern)) {
-                    tasksFound.add(task);
-                }
-            }
+            findTasksWithKeyword(keyword, tasksFound, taskList);
         }
         ArrayList<Task> tasks = new ArrayList<>(tasksFound);
         return ui.displayAllItems(tasks);
+    }
+
+    private void findTasksWithKeyword(String keyword, Set<Task> taskSet, TaskList taskList) {
+        String keywordPattern = "(.*)" + keyword + "(.*)";
+        for (int i = 0; i < taskList.getListSize(); i++) {
+            Task task = taskList.getTaskAtIndex(i);
+            if (task.toString().matches(keywordPattern)) {
+                taskSet.add(task);
+            }
+        }
     }
 }

@@ -12,9 +12,6 @@ import duke.tasks.Task;
  */
 public class UI {
 
-    private static final String HORIZONTAL_BREAK = "____________________________________________________________";
-    private static final String OFFSET = "     ";
-    private static final String ITEM_OFFSET = "       ";
     private static final String BLANK_LINE = "";
 
     private Scanner scanner;
@@ -27,34 +24,10 @@ public class UI {
     }
 
     /**
-     * Prints a horizontal line to the screen.
-     */
-    public void showLine() {
-        System.out.println(UI.OFFSET + UI.HORIZONTAL_BREAK);
-    }
-
-    /**
      * Returns the display greeting.
      * @return Display greeting as a String.
      */
     public String displayGreeting() {
-        String logo = "        ___\n"
-                + "    . -^   `--,\n"
-                + "   /# =========`-_\n"
-                + "  /# (--====___====\\\n"
-                + " /#   .- --.  . --.|\n"
-                + "/##   |  * ) (   * ),\n"
-                + "|##   \\    /\\ \\   / |\n"
-                + "|###   ---   \\ ---  |\n"
-                + "|####      ___)    #|\n"
-                + "|######           ##|\n"
-                + " \\##### ---------- /\n"
-                + "  \\####           (\n"
-                + "   `\\###          |\n"
-                + "     \\###         |\n"
-                + "      \\##         |\n"
-                + "       \\###.     .)\n"
-                + "         `======/";
         return "I am duke, keeper of all tasks. How may I help you?";
     }
 
@@ -143,14 +116,14 @@ public class UI {
      * @return All tasks in the list as a String.
      * */
     public String displayAllItems(ArrayList<Task> tasks) {
+        if (tasks.size() == 0) {
+            return "This is a very empty list... UwU";
+        }
         String result = "Here are the tasks in your list:\n";
         int taskCount = 1;
         for (Task task : tasks) {
             result += (taskCount) + ". " + task + "\n";
             taskCount++;
-        }
-        if (tasks.size() == 0) {
-            return "This is a very empty list... UwU";
         }
         return result;
     }

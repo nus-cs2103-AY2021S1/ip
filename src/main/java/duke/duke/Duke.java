@@ -5,6 +5,7 @@ import java.io.File;
 import duke.commands.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.UI;
 import javafx.application.Application;
@@ -50,10 +51,10 @@ public class Duke extends Application {
     public Duke() {
         store = new Storage("./data", "duke.txt");
         File loadFile = store.loadData(ui);
-        if (loadFile != null) {
-            tasks = new TaskList(loadFile);
-        } else {
+        if (loadFile == null) {
             tasks = new TaskList();
+        } else {
+            tasks = new TaskList(loadFile);
         }
         this.ui = new UI();
         userImage = new Image(
