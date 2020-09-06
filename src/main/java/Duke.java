@@ -6,7 +6,9 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
-//TODO: Stretch Goals: Level 8- Use date related command
+//TODO: [W3] Stretch Goals: Level 8- Use date related command
+//TODO: [W5] branch-A-Lambdas
+//TODO: [W5] branch-A-Streams
 
 /**
  * Driver of {@code Duke} programme.
