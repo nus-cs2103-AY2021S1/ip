@@ -50,9 +50,9 @@ public class DeleteCommand implements Command {
         taskList.remove(index);
         storage.saveList(taskList);
 
-        return ui.giveResponse(" Noted. I've removed this task:\n       "
+        return ui.giveResponse("\tNoted. I've removed this task:\n\t\t"
             + task
-            + "\n\t Now you have " + taskList.size()
+            + "\n\tNow you have " + taskList.size()
             + " task" + (taskList.size() > 1 ? "s" : "") + " in the list.");
     }
 }

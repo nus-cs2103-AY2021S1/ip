@@ -50,6 +50,6 @@ public class DoneCommand implements Command {
         taskList.markAsDone(index);
         storage.saveList(taskList);
 
-        return ui.giveResponse("Nice! I've marked this task as done:\n       " + task);
+        return ui.giveResponse("\tNice! I've marked this task as done:\n\t\t" + task);
     }
 }
