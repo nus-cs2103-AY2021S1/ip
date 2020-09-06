@@ -1,5 +1,6 @@
 package main.java.Duke;
 
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import main.java.Duke.Commands.Command;
@@ -67,6 +68,9 @@ class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        if(text.contains("Bye.")){
+            Platform.exit();
+        }
         return db;
     }
 }
@@ -180,6 +184,8 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput(duke);
         });
+
+
     }
     private Label getDialogLabel(String text) {
         // You will need to import `javafx.scene.control.Label`.
@@ -191,6 +197,8 @@ public class Duke extends Application {
     private void handleUserInput(Duke duke) {
         String userText = new String(userInput.getText());
         String dukeText = new String(getResponse(userInput.getText(),duke));
+
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new Image(String.valueOf(user))),
                 DialogBox.getDukeDialog(dukeText, new Image(String.valueOf(dukeImage)))
@@ -205,12 +213,12 @@ public class Duke extends Application {
     public String getResponse(String input,Duke duke) {
         Parser parser = new Parser(duke);
         duke.ui.prompt();
-        //userinput = duke.ui.readCommand();
         Command command = parser.parse(input, duke.tasklist);
         String string =command.execute();
         isExit = command.isExit;
-        if(!this.isExit){
-        return string;
+
+        if(!this.isExit) {
+            return string;
         }else {
             duke.storage.saveTasks(duke.tasklist.list);
             return "Bye. Hope to see you again soon!";

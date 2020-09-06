@@ -32,6 +32,7 @@ public class Parser {
          String commandType;
          String description = null;
 
+         //Splits the userInput into type of command and its description
         if (userInput.contains(" ")) {
             commandType = userInput.substring(0, userInput.indexOf(' '));
             description = userInput.substring(userInput.indexOf(' ') + 1);
