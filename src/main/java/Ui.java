@@ -28,11 +28,8 @@ public class Ui {
         return s.nextLine();
     }
 
-    public void showWelcome() {
-        System.out.println(line);
-        System.out.println("Welcome to Hyu's drive-in!");
-        System.out.println("What would you like to have?");
-        System.out.println(line);
+    public static String welcome() {
+        return "Welcome to Hyu's drive-in!" + "\n" + "What would you like to have?" + "\n";
     }
 
     public void showLine() {

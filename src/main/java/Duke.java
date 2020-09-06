@@ -77,7 +77,7 @@ public class Duke {
     public static void main(String[] args) {
         Duke d = new Duke("data/Duke.txt");
 
-        ui.showWelcome();
+        System.out.println(ui.welcome());
 
         String nextLine = ui.readCommand();
 
