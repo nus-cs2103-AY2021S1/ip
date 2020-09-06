@@ -1,5 +1,6 @@
 package duke;
 
+import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.exception.InvalidCommand;
 import duke.parser.Parser;
@@ -45,6 +46,7 @@ public class Duke {
             assert c != null : "Something went wrong!";
             if (c != null) {
                 uiMessage = c.execute(this.ui, this.listStorage, this.taskList);
+                checkExit(c);
             }
         } catch (InvalidCommand ex) {
             uiMessage = Ui.commandError(ex);
@@ -85,4 +87,9 @@ public class Duke {
         return this.ui.loadFile();
     }
 
+    private void checkExit(Command commandExecuted) {
+        if (commandExecuted instanceof ByeCommand) {
+            System.exit(0);
+        }
+    }
 }
