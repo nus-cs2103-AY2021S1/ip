@@ -1,5 +1,5 @@
-T | 0 | sleep
-D | 0 | make pastry | 2020-12-04
 E | 1 | marathon | 2020-03-04
 D | 0 | drink water | 2020-04-01
-T | 0 | make my bed brush my teeth then sleep again
+T | 0 | make bed
+D | 0 | eat | 2020-12-03
+E | 1 | snack | 2020-07-12
