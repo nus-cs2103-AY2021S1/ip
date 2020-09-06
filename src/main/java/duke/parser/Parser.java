@@ -32,6 +32,7 @@ public class Parser {
      * @throws DukeException If there are any parse errors, or Command has any errors.
      */
     public void parseAndRun(String input) throws DukeException {
+        assert input != null : "input can not be null";
         for (Command command : Command.values()) {
             Optional<Matcher> maybeMatcher = command.matcher(input);
             if (maybeMatcher.isEmpty()) {

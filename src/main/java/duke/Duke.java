@@ -19,6 +19,7 @@ public class Duke {
      * Constructor for the Duke object.
      */
     public Duke(Ui ui) {
+        assert ui != null : "ui should never be null";
         this.ui = ui;
         try {
             this.storage = new Storage("duke.json");

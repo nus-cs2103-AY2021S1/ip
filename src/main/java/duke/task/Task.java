@@ -25,6 +25,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
+        assert this.getTaskIdentifier() != null : "task identifier string needs to be defined properly.";
         String checkMark = this.isDone ? "X" : " ";
         return squareBox(this.getTaskIdentifier())
             + squareBox(checkMark)

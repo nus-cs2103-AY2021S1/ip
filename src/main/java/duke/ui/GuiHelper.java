@@ -19,11 +19,13 @@ public class GuiHelper implements Ui {
 
     @Override
     public void start() {
+        assert !this.isActive : "GuiHelper instance should not be initialized twice.";
         this.isActive = true;
     }
 
     @Override
     public void close() {
+        assert this.isActive : "GuiHelper instance should not be closed twice or closed before initialization.";
         this.isActive = false;
     }
 
