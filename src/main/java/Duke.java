@@ -18,7 +18,6 @@ public class Duke {
         saver = new DukeSaver(savePath);
         taskList = new TaskList();
         parser = new Parser(taskList, saver);
-
         saver.loadData(taskList);
     }
 

@@ -26,9 +26,11 @@ public class Parser {
      * Handles a user command and designates task to helper functions.
      *
      * @param response User's command.
-     * @throws DukeException Thrown when invalid commands are invoked.
      *
      * @return A string response.
+     *
+     * @throws DukeException Thrown when invalid commands are invoked.
+     *
      */
     public String handleResponse(String response) throws DukeException {
         String[] parsedResponse = response.split(" ", 2);
@@ -61,7 +63,7 @@ public class Parser {
         case INVALID:
             throw new DukeException("Unrecognized command!");
         default:
-            throw new DukeException("Passed through invalid command switch case. Should not have happened.");
+            assert true : "Fell through INVALID command switch case. Should not have reached here.";
         }
     }
 
