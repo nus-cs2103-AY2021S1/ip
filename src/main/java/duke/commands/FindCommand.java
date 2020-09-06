@@ -25,4 +25,9 @@ public class FindCommand extends Command {
         TaskList filteredList = taskList.filterList(filter);
         ui.listMessage(filteredList);
     }
+    
+    @Override
+    public String toString() {
+        return "FindCommand";
+    }
 }

@@ -30,4 +30,9 @@ public class AddTaskCommand extends Command {
         storage.writeDataToFile(tasklist);
     }
     
+    @Override
+    public String toString() {
+        return "AddTaskCommand " + task.toString();
+    }
+    
 }

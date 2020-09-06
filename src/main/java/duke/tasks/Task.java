@@ -22,10 +22,11 @@ public class Task {
     }
 
     /**
-     * Sets the boolean isDone to true
+     * Sets the boolean isDone
+     * @param isDone indicates whether the task has been completed or not
      */
-    public void markDone() {
-        this.isDone = true;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
     public String getTime() {
         return "";

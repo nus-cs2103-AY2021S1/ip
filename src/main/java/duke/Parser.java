@@ -4,15 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import duke.commands.Command;
-import duke.commands.ByeCommand;
-import duke.commands.ListCommand;
-import duke.commands.FindCommand;
-import duke.commands.DoneCommand;
-import duke.commands.AddTaskCommand;
-import duke.commands.RemoveTaskCommand;
+import duke.commands.*;
 
 import duke.exceptions.DukeInvalidIndexException;
+import duke.exceptions.DukeInvalidUndoException;
 import duke.exceptions.DukeNoTaskDescriptionException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -24,6 +19,9 @@ import duke.tasks.Todo;
  * Parser processes date input for deadline class and event class
  */
 public class Parser {
+    
+    private CommandList commandList = new CommandList();
+    private DeletedTaskList deletedTaskList = new DeletedTaskList();
     
     private boolean isDate(String time) {
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
@@ -73,34 +71,43 @@ public class Parser {
         String[] input = nextLine.trim().split(" ");
         String commandWord = input[0].toUpperCase();
         Command command = new Command();
+        
 
         try {
+            
             switch (commandWord) {
             case "LIST":
                 command = new ListCommand();
                 break;
 
             case "DONE":
-                command = new DoneCommand(parseIndex(nextLine));
+                command = new DoneCommand(parseIndex(nextLine), true);
+                commandList.addCommand(command);
                 break;
 
             case "DELETE":
-                command = new RemoveTaskCommand(parseIndex(nextLine));
+                int index = parseIndex(nextLine);
+                command = new RemoveTaskCommand(index);
+                deletedTaskList.addDeletedTask(taskList.getTask(index));
+                commandList.addCommand(command);
                 break;
 
             case "TODO":
                 Task todo = parseTodo(nextLine);
                 command = new AddTaskCommand(todo);
+                commandList.addCommand(command);
                 break;
 
             case "DEADLINE":
                 Task deadline = parseDeadline(nextLine);
                 command = new AddTaskCommand(deadline);
+                commandList.addCommand(command);
                 break;
 
             case "EVENT":
                 Task event = parseEvent(nextLine);
                 command = new AddTaskCommand(event);
+                commandList.addCommand(command);
                 break;
 
             case "FIND":
@@ -110,6 +117,12 @@ public class Parser {
 
             case "BYE":
                 command = new ByeCommand();
+                commandList.clear();
+                deletedTaskList.clear();
+                break;
+                
+            case "UNDO":
+                new UndoCommand().executeCommand(ui, storage, taskList, commandList, deletedTaskList);
                 break;
 
             default:
@@ -128,6 +141,9 @@ public class Parser {
             ui.setOutputMessage("Task does not exist");
             
         } catch (DukeInvalidIndexException e) {
+            ui.setOutputMessage(e.getExceptionMessage());
+            
+        } catch (DukeInvalidUndoException e) {
             ui.setOutputMessage(e.getExceptionMessage());
         }
     }
