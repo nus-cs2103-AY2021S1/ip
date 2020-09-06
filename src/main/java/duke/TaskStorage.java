@@ -22,7 +22,7 @@ import duke.tasks.Todo;
  * Handles the saving, loading and creating of the tasks.
  */
 public class TaskStorage {
-    private static final String taskStoragePath = "./tmp/storage.txt";
+    private static final String TASK_STORAGE_PATH = "./tmp/storage.txt";
 
     private final List<Task> taskList;
 
@@ -39,7 +39,7 @@ public class TaskStorage {
      * @throws DukeException If an exception related to Duke occurred.
      */
     public static TaskStorage init() throws IOException, DukeException {
-        File tempStorage = new File(taskStoragePath);
+        File tempStorage = new File(TASK_STORAGE_PATH);
         if (tempStorage.exists() && tempStorage.isFile()) {
             return TaskStorage.load(tempStorage);
         } else if (tempStorage.isDirectory()) {
@@ -69,6 +69,7 @@ public class TaskStorage {
 
     private static Task parseLine(String line) throws DukeException {
         String[] lineSplit = line.split("/");
+        assert lineSplit.length == 4 : "Invalid line format found in storage";
         try {
             String taskType = lineSplit[0];
             Boolean isTaskComplete = convertToBoolean(lineSplit[1]);
@@ -108,7 +109,7 @@ public class TaskStorage {
         Object[] objectArray = taskList.stream().map(Task::toSaveString).toArray();
         String[] lineArray = Arrays.copyOf(objectArray, objectArray.length, String[].class);
         String fileString = String.join("\n", lineArray);
-        FileWriter fileWriter = new FileWriter(taskStoragePath);
+        FileWriter fileWriter = new FileWriter(TASK_STORAGE_PATH);
         fileWriter.write(fileString);
         fileWriter.close();
         return this;
