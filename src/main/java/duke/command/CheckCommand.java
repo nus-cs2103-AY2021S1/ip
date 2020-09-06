@@ -1,5 +1,10 @@
 package duke.command;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -14,25 +19,19 @@ public class CheckCommand extends Command {
 
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
-        String out = "";
-        boolean hasFound = false;
-        int count = 1;
-        for (Task task : list.getList()) {
-            if (task.getDate().equals(this.target)) {
-                if (!hasFound) {
-                    out = out + ui.showCheck() + "\n";
-                    hasFound = true;
-                }
-                out = out + ui.showTask(count, task) + "\n";
-                count++;
-            }
-        }
 
-        if (!hasFound) {
-            out = ui.showNothingFound();
-        }
+        AtomicInteger count = new AtomicInteger(1);
+        Predicate<Task> checkDate = x -> x.getDate().equals(this.target);
+        Function<Task, String> taskString = x -> ui.showTask(count.getAndIncrement(), x);
+        BinaryOperator<String> accumulator = (x, y) -> (x + "\n" + y);
 
-        return out;
+        String output = list.getList().stream()
+                                      .filter(checkDate)
+                                      .map(taskString)
+                                      .reduce(accumulator)
+                                      .orElse("empty");
+
+        return output.equals("empty") ? ui.showNothingFound() : ui.showCheck() + "\n" + output;
     }
 
     @Override
