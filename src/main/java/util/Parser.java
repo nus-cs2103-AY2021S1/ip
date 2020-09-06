@@ -9,7 +9,7 @@ import task.Task;
 import task.ToDo;
 
 /**
- * Processor and excecutor for user inputs.
+ * Processor and executor for user inputs.
  */
 public class Parser {
 
@@ -23,6 +23,8 @@ public class Parser {
      * @throws DukeException If input is invalid.
      */
     public static String parse(String input, TaskList taskList, Ui ui) throws DukeException {
+
+        assert taskList != null && ui != null;
 
         String output = "";
 
