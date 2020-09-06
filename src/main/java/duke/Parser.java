@@ -73,7 +73,7 @@ public class Parser {
      * This method provides a LocalDateTime object based on a given input string.
      *
      * @param dateTime The string that consists of date and time information.
-     *                 It must be in a fixed format.
+     * It must be in a fixed format.
      * @return returns a LocalDateTime object with
      * information stored for easy retrieval later on
      */
