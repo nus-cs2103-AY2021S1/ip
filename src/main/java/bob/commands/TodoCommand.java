@@ -21,13 +21,15 @@ public class TodoCommand extends Command {
      * @throws BobEmptyTaskException If there is no description for task.
      */
     public TodoCommand(String input) throws BobEmptyTaskException {
-        if (input.trim().length() == 0) {
+        boolean isEmptyInput = input.trim().length() == 0;
+        boolean isNotEmptyInput = !isEmptyInput;
+
+        if (isEmptyInput) {
             throw new BobEmptyTaskException();
         }
 
-        this.input = input.startsWith(" ")
-                    ? input.substring(1)
-                    : input;
+        assert isNotEmptyInput;
+        this.input = input.trim();
     }
 
 

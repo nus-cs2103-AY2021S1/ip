@@ -11,6 +11,8 @@ public class MsgGenerator {
      * @param message Message to be shown.
      */
     private static String generateMsg(String ... message) {
+        boolean isNotEmptyMessage = message.length > 0;
+        assert isNotEmptyMessage;
         String response = "";
         for (String m : message) {
             response += m;
