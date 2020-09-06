@@ -58,17 +58,6 @@ public class Storage {
     }
 
     /**
-     * Refreshes the TaskList saved file by deleting all content.
-     * @return A String representation of the TaskList refreshing action
-     * @throws IOException on input error
-     */
-    public String overwriteFile() throws IOException {
-        FileWriter fileWriter = new FileWriter(file, false);
-        fileWriter.close();
-        return "TaskList refreshed";
-    }
-
-    /**
      * Stores the current task (Record) into the arraylist
      * as a String.
      *

@@ -80,18 +80,10 @@ public class Duke {
         //String cmd = sc.nextLine().trim().toLowerCase();
         StringBuilder stringBuilder = new StringBuilder();
         if (!input.equals("bye") && input.length() != 0) {
-            if (input.equals("refresh")) {
-                try {
-                    stringBuilder.append(this.storage.overwriteFile());
-                } catch (IOException e) {
-                    stringBuilder.append(Ui.showError(e.getMessage()));
-                }
-            } else {
-                try {
-                    stringBuilder.append(Parser.process(input, this.taskList, this.storage));
-                } catch (DukeException e) {
-                    stringBuilder.append(Ui.showError(e.getMessage()));
-                }
+            try {
+                stringBuilder.append(Parser.process(input, this.taskList, this.storage));
+            } catch (DukeException e) {
+                stringBuilder.append(Ui.showError(e.getMessage()));
             }
         } else {
             try {
