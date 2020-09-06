@@ -14,7 +14,7 @@ import luke.gui.MainWindow;
  */
 public class Main extends Application {
 
-    private Luke luke = new Luke();
+    private Luke luke = new Luke("data/tasks.txt");
 
     @Override
     public void start(Stage stage) {

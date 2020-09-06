@@ -3,7 +3,12 @@ package luke.task;
 public class Todo extends Task {
 
     public Todo(String description) {
-        super(description);
+        super(TaskType.TODO, description);
+    }
+
+    @Override
+    public String toDataString() {
+        return String.format("T|%s|", super.toDataString());
     }
 
     @Override

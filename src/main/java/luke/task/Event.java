@@ -3,14 +3,18 @@ package luke.task;
 public class Event extends Task {
     protected String at;
 
-
     public Event(String description, String at) {
-        super(description);
+        super(TaskType.EVENT, description);
         this.at = at;
     }
 
     public String getAt() {
         return at;
+    }
+
+    @Override
+    public String toDataString() {
+        return String.format("E|%s|%s", super.toDataString(), this.getAt());
     }
 
     @Override

@@ -1,14 +1,14 @@
 package luke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
-    protected LocalDate by;
+    protected LocalDateTime by;
 
-    public Deadline(String description, LocalDate by) {
-        super(description);
+    public Deadline(String description, LocalDateTime by) {
+        super(TaskType.DEADLINE, description);
         this.by = by;
     }
 
@@ -18,6 +18,11 @@ public class Deadline extends Task {
 
     public String stringifyBy() {
         return by.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+    }
+
+    @Override
+    public String toDataString() {
+        return String.format("D|%s|%s", super.toDataString(), this.getBy());
     }
 
     @Override
