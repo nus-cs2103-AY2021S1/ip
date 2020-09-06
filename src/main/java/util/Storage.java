@@ -39,7 +39,7 @@ public class Storage {
     public List<Task> readFile() {
 
         File file = new File(filePath);
-        List<Task> output = new ArrayList<Task>();
+        List<Task> output = new ArrayList<>();
 
         try {
 
@@ -93,7 +93,8 @@ public class Storage {
             file.getParentFile().mkdirs();
             file.createNewFile();
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("YYYY-MM-dd");
+
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
             tasks.forEach(task -> {
                 int completed = task.isCompleted() ? 1 : 0;
