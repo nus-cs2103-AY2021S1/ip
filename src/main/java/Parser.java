@@ -23,98 +23,64 @@ public class Parser {
         isFinished = false;
     }
 
-    /**
-     * interprets the command from user.
-     * @param command a string array of length 2. Command[1] represents type and command[2] represents description.
-     * @throws DukeException possible exception when executing the commands
-     */
-    public void parse(String[] command) throws DukeException {
-        type = command[0];
-        description = command[1];
-
-        if (type.equals("list")) {
-            ui.list();
-        } else if(type.equals("bye")) {
-            ui.showEnd();
+    public String parse(String input) throws DukeException {
+        if(input.equals("list")) {
+            return ui.list();
+        } else if(input.equals("bye")) {
             isFinished = true;
+            return ui.showEnd();
+        } else if(input.equals("todo")) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        } else if(input.equals("deadline")) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+        } else if(input.equals("event")) {
+            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+        } else if(input.startsWith("todo ")) {
+            description = input.substring(5);
+            tasks.addTask(new Todo(description));
+            return "Got it. I've added this task:\n"
+                    + "  " + tasks.get(tasks.count() - 1).toString()
+                    + "\nNow you have " + (tasks.count()) + " tasks in the list.";
+        } else if(input.startsWith("deadline ")) {
+            description = input.substring(9);
+            location = description.indexOf("/");
+            date = description.substring(location + 4);
+            time = LocalDate.parse(date);
+            description = description.substring(0, location - 1);
+            tasks.addTask(new Deadline(description, time));
+            return "Got it. I've added this task:\n"
+                    + "  " + tasks.get(tasks.count() - 1).toString()
+                    + "\nNow you have " + (tasks.count()) + " tasks in the list.";
+        } else if(input.startsWith("event ")) {
+            description = input.substring(6);
+            location = description.indexOf("/");
+            date = description.substring(location + 4);
+            time = LocalDate.parse(date);
+            description = description.substring(0, location - 1);
+            tasks.addTask(new Event(description, time));
+            return "Got it. I've added this task:\n"
+                    + "  " + tasks.get(tasks.count() - 1).toString()
+                    + "\nNow you have " + (tasks.count()) + " tasks in the list.";
+        } else if(input.startsWith("done ")) {
+            description = input.substring(5);
+            int selected = Integer.parseInt(description);
+            tasks.get(selected - 1).markAsDone();
+            return "Nice! I've marked this task as done:\n" + "  "
+                    + tasks.get(selected - 1).toString();
+        } else if(input.startsWith("delete ")) {
+            description = input.substring(7);
+            int selected = Integer.parseInt(description);
+            Task task = tasks.get(selected - 1);
+            tasks.deleteTask(selected - 1);
+            return "Noted. I've removed this task:\n"
+                    + "  " + task.toString()
+                    + "\nNow you have " + (tasks.count()) + " tasks in the list.";
+        } else if(input.startsWith("find ")) {
+            description = input.substring(5);
+            TaskList matchingTasks = tasks.findTasks(description);
+            return ui.find(matchingTasks);
         } else {
-            switch (type) {
-                case "todo":
-                    if (!(description.length() > 1)) {
-                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-                    } else {
-                        tasks.addTask(new Todo(description.substring(1)));
-                        ui.printPart("Got it. I've added this task:\n"
-                                + "  " + tasks.get(tasks.count() - 1).toString()
-                                + "\nNow you have " + (tasks.count()) + " tasks in the list.");
-                    }
-                    break;
-
-                case "deadline":
-                    if (!(description.length() > 1)) {
-                        throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-                    } else {
-                        location = description.indexOf("/");
-                        date = description.substring(location + 4);
-                        time = LocalDate.parse(date);
-                        description = description.substring(1, location - 1);
-                        tasks.addTask(new Deadline(description, time));
-                        ui.printPart("Got it. I've added this task:\n"
-                                + "  " + tasks.get(tasks.count() - 1).toString()
-                                + "\nNow you have " + (tasks.count()) + " tasks in the list.");
-                    }
-                    break;
-
-                case "event":
-                    if (!(description.length() > 1)) {
-                        throw new DukeException("OOPS!!! The description of a event cannot be empty.");
-                    } else {
-                        location = description.indexOf("/");
-                        date = description.substring(location + 4);
-                        time = LocalDate.parse(date);
-                        description = description.substring(1, location - 1);
-                        tasks.addTask(new Event(description, time));
-                        ui.printPart("Got it. I've added this task:\n"
-                                + "  " + tasks.get(tasks.count() - 1).toString()
-                                + "\nNow you have " + (tasks.count()) + " tasks in the list.");
-                    }
-                    break;
-
-                case "find":
-                    if (!(description.length() > 1)) {
-                        throw new DukeException("OOPS!!! The key word cannot be empty.");
-                    } else {
-                        TaskList matchingTasks = tasks.findTasks(description.substring(1));
-                        ui.find(matchingTasks);
-                    }
-                    break;
-
-                case "done":
-                    if (!(description.length() > 1)) {
-                        throw new DukeException("OOPS!!! The number to be marked done cannot be empty.");
-                    } else {
-                        int n = Integer.parseInt(description.substring(1));
-                        tasks.get(n - 1).markAsDone();
-                        ui.printPart("Nice! I've marked this task as done:\n" + "  "
-                                + tasks.get(n - 1).toString());
-                    }
-                    break;
-
-                case "delete":
-                    if (!(description.length() > 1)) {
-                        throw new DukeException("OOPS!!! The number to be deleted cannot be empty.");
-                    } else {
-                        int selected = Integer.parseInt(description.substring(1));
-                        ui.printPart("Noted. I've removed this task:\n"
-                                + "  " + tasks.get(selected - 1).toString()
-                                + "\nNow you have " + (tasks.count() - 1) + " tasks in the list.");
-                        tasks.deleteTask(selected - 1);
-                    }
-                    break;
-
-                default:
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 

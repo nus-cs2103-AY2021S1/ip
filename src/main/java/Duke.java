@@ -21,11 +21,13 @@ public class Duke extends Application {
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -37,29 +39,12 @@ public class Duke extends Application {
         try {
             storage.loadTasks(tasks);
         } catch (IOException e) {
-            ui.printLoadingError();
+            System.out.println(ui.printLoadingError());
         }
     }
 
-    public void run() {
-        ui.showWelcome();
-        while(!parser.isFinished()) {
-            try {
-                parser.parse(ui.read());
-            } catch(DukeException e) {
-                ui.printException(e);
-            }
-        }
-
-        try {
-            storage.saveTasks(tasks);
-        } catch (IOException e) {
-            ui.printSavingError();
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("duke.txt").run();
+    public Duke() {
+        this("duke.txt");
     }
 
     @Override
@@ -170,7 +155,18 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            String response = parser.parse(input);
+            if(parser.isFinished()) {
+                storage.saveTasks(tasks);
+                System.exit(0);
+            }
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (IOException e) {
+            return ui.printSavingError();
+        }
     }
 
 }

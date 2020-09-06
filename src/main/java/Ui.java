@@ -5,7 +5,6 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    public static String LINE = "===================================================";
     protected TaskList tasks;
     protected String[] command;
     protected Scanner scanner;
@@ -20,12 +19,12 @@ public class Ui {
         command = new String[2];
     }
 
-    public void showWelcome() {
-        printPart("Hello! I'm Duke\n" + "What can I do for you?");
+    public String showWelcome() {
+        return "Hello! I'm Duke\n" + "What can I do for you?";
     }
 
-    public void showEnd() {
-        printPart("Bye. Hope to see you again soon!");
+    public String showEnd() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -45,43 +44,37 @@ public class Ui {
     /**
      * lists out all the tasks in the task list.
      */
-    public void list() {
-        System.out.println(LINE);
-        System.out.println("Here are the tasks in your list:");
+    public String list() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.count(); i++) {
-            System.out.println(String.format("  %d. ", i + 1) + tasks.get(i).toString());
+            builder.append(String.format("  %d. ", i + 1) + tasks.get(i).toString() + "\n");
         }
-        System.out.println(LINE + "\n");
+        return builder.toString();
     }
 
     /**
      * lists out all the tasks in the matching task list.
      * @param taskList a task list that contains all the matching tasks.
      */
-    public void find(TaskList taskList) {
-        System.out.println(LINE);
-        System.out.println("Here are the matching tasks in your list:");
+    public String find(TaskList taskList) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < taskList.count(); i++) {
-            System.out.println(String.format("  %d. ", i + 1) + taskList.get(i).toString());
+            builder.append(String.format("  %d. ", i + 1) + taskList.get(i).toString() + "\n");
         }
-        System.out.println(LINE + "\n");
+        return builder.toString();
     }
 
-    public void printException(DukeException e) {
-        printPart(e.getMessage());
+    public String printException(DukeException e) {
+        return e.getMessage();
     }
 
-    public void printPart(String str) {
-        System.out.println(LINE);
-        System.out.println(str);
-        System.out.println(LINE + "\n");
+    public String printLoadingError() {
+        return "Some error occurred when loading.";
     }
 
-    public void printLoadingError() {
-        System.out.println("Some error occurred when loading.");
-    }
-
-    public void printSavingError() {
-        System.out.println("Some error occurred when saving.");
+    public String printSavingError() {
+        return "Some error occurred when saving.";
     }
 }
