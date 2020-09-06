@@ -9,18 +9,24 @@ import duke.dependencies.parser.Controller;
  *
  */
 class Ui {
-    private static final String DIVIDER = "____________________________________________________________\n";
+//    private static final String DIVIDER = "____________________________________________________________\n";
+//    private static final String LOGO = " ____        _        \n"
+//                                    + "|  _ \\ _   _| | _____ \n"
+//                                    + "| | | | | | | |/ / _ \\\n"
+//                                    + "| |_| | |_| |   <  __/\n"
+//                                    + "|____/ \\__,_|_|\\_\\___|\n";
+
     private static final String GREETING = "Hello, I'm Duke\nwhat can I do for you?\n";
-    private static final String LOGO = " ____        _        \n"
-                                    + "|  _ \\ _   _| | _____ \n"
-                                    + "| | | | | | | |/ / _ \\\n"
-                                    + "| |_| | |_| |   <  __/\n"
-                                    + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String CIAO = DIVIDER + "Spero di rivederti presto\n" + DIVIDER;
-    private static final String CONVO_START = DIVIDER + LOGO + "\n" + GREETING + DIVIDER;
+
+    private static final String CIAO ="Spero di rivederti presto\n";
+    private static final String CONVO_START = GREETING;
     private static final String END = "end|ciao|bye|close|exit|nights|shutdown";
 
-    private  static final Controller CONTROLLER = Controller.initController();
+    private static final Controller CONTROLLER = Controller.init();
+
+    private boolean enterPasswordMode = false;
+    private boolean confirmPasswordMode = false;
+    private String password;
 
 
     /**
@@ -28,14 +34,6 @@ class Ui {
      */
     public void start() {
         System.out.println(CONVO_START);
-    }
-
-    public boolean checkAuth() {
-        return CONTROLLER.checkIsUserPwCached();
-    }
-
-    public void setPw(String pw) {
-        CONTROLLER.savedUserPw(pw);
     }
 
     /**
@@ -59,6 +57,31 @@ class Ui {
         if (!s.isEmpty() && END.contains(s)) {
             return "See yall around!!!";
         }
+        // Checks if the second entering of the password matches the first entering.
+        if (confirmPasswordMode) {
+            // The second entering of password matches the first entering.
+            if (password.equals(s)) {
+                CONTROLLER.saveUserDetails(password);
+                confirmPasswordMode = false;
+                enterPasswordMode = false;
+                return "Password saved successfully.";
+            } else {
+                enterPasswordMode = false;
+                confirmPasswordMode = false;
+                return "The password you have entered does not match.";
+            }
+        }
+        // First attempt of entering the password by the user.
+        if (enterPasswordMode) {
+            password = s;
+            confirmPasswordMode = true;
+            enterPasswordMode = false;
+            return "Please enter your password again.";
+        }
+        if (!CONTROLLER.hasUserEnteredDetails()) {
+            enterPasswordMode = true;
+            return "You are somebody new! Please state your user password.";
+        }
         // Initiating a conversation with duke with 'hi'
         if (s.length() == 2 && s.contains("hi")) {
             return CONVO_START;
@@ -68,11 +91,11 @@ class Ui {
 
         if (reply.equals("Error")) {            // Error. However this should not occur
 //            System.out.println(DIVIDER + reply + "\n" + DIVIDER);
-            return DIVIDER + reply + DIVIDER;
+            return reply;
         } else {
             // Normal execution
 //            System.out.println(DIVIDER + reply + "\n" + DIVIDER);
-            return String.format("%s%s%s", DIVIDER, reply, DIVIDER);
+            return reply;
         }
     }
 }
