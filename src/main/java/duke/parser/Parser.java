@@ -2,6 +2,7 @@ package duke.parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.function.Predicate;
 
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -20,6 +21,7 @@ import duke.exception.DukeException;
  * @author Audrey Felicio Anwar
  */
 public class Parser {
+    private static final Predicate<String[]> CHECK_LENGTH = (s) -> s.length <= 1;
     private enum Commands {
         BYE,
         LIST,
@@ -59,7 +61,7 @@ public class Parser {
             break;
         case DEADLINE:
             contents = input.substring(9).split(" /by ");
-            if (contents.length <= 1) {
+            if (CHECK_LENGTH.test(contents)) {
                 errorMessage = " Deadline date cannot be empty :(";
                 break;
             }
@@ -69,7 +71,7 @@ public class Parser {
             break;
         case EVENT:
             contents = input.substring(6).split(" /at ");
-            if (contents.length <= 1) {
+            if (CHECK_LENGTH.test(contents)) {
                 errorMessage = " Event date cannot be empty :(";
                 break;
             }
@@ -104,7 +106,7 @@ public class Parser {
                 break;
             case DONE:
             case DELETE:
-                if (separated.length <= 1) {
+                if (CHECK_LENGTH.test(separated)) {
                     errorMessage = " Task index must be specified :(";
                     break;
                 }
@@ -118,14 +120,14 @@ public class Parser {
             case TODO:
             case DEADLINE:
             case EVENT:
-                if (separated.length <= 1) {
+                if (CHECK_LENGTH.test(separated)) {
                     errorMessage = " Task description cannot be empty :(";
                     break;
                 }
                 command = handleAddTask(commandType, input);
                 break;
             case FIND:
-                if (separated.length <= 1) {
+                if (CHECK_LENGTH.test(separated)) {
                     errorMessage = " Keyword cannot be empty :(";
                     break;
                 }
