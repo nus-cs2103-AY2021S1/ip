@@ -33,6 +33,8 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
         try {
+            assert !this.isExit() : "Delete command should not be an exit command.";
+            assert tasks != null && storage != null : "tasks and storage cannot be null.";
             Task removedTask = tasks.deleteTask(taskNumber);
             storage.save(tasks.getTasks());
             return new CommandResponse(Ui.respondDeleteTask(removedTask, tasks), this.isExit());
