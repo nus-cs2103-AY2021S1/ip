@@ -10,35 +10,71 @@ import duke.exception.InvalidArgumentException;
 
 
 public class Parser {
+    private static String getCommandType(String command) {
+        return command.split(" ")[0].toLowerCase();
+    }
+
+    private static String getTaskTitle(String command) {
+        return command.split(" ", 2)[0].split("/")[0];
+    }
+
+    private static String getTimeString(String command) {
+        String commandType = getCommandType(command);
+        if (commandType.equals("todo")) return Const.NO_TIME;
+
+        String afterSlash = command.split("/",2)[1];
+        return afterSlash.split(" ", 2)[1];
+    }
+
+    private static String[] getArguments(String command) {
+        return command.split(" ", 2)[1].split(" ");
+    }
+
     /**
      * Parses the user's input into a list of tokens.
-     *
+     * Command syntax:
+     *      bye
+     *      clear
+     *      delete <index>
+     *      done <index>
+     *      find <query string>
+     *      list
+     *      save
+     *      todo <title>
+     *      deadline <title> /by DD/MM/YY HHMM
+     *      event <title> /at DD/MM/YY HHMM
      * @param command user's input
      * @return the list of tokens
      */
     public static List<String> parseCommand(String command) {
-        String[] splitBySlash = command.split(" /");
+        String[] splitByFirstWhiteSpace = command.split(" ", 2);
         List<String> tokens = new ArrayList<>();
-        for (String token : splitBySlash) {
-            String[] splitByWhiteSpace = token.split(" ", 2);
-            Collections.addAll(tokens, splitByWhiteSpace);
+        String commandType = splitByFirstWhiteSpace[0];
+
+        switch (commandType) {
+        case "bye":
+        case "clear":
+        case "list":
+        case "save":
+            tokens.add(commandType);
+            return tokens;
+        case "delete":
+        case "done":
+        case "find":
+            tokens.add(commandType);
+            Collections.addAll(tokens, getArguments(command));
+            return tokens;
+        case "todo":
+        case "deadline":
+        case "event":
+            tokens.add(commandType);
+            tokens.add(getTaskTitle(command));
+            tokens.add(getTimeString(command));
+            tokens.add("0");
+            return tokens;
+        default:
+            throw new Error("An unexpected error occurred");
         }
-
-        if (!tokens.get(0).equals("todo")
-                && !tokens.get(0).equals("deadline")
-                && !tokens.get(0).equals("event")) { return tokens; }
-
-        if (tokens.size() >= 3) {
-            tokens.remove(2);
-        }
-
-        if (tokens.size() <= 2) {
-            tokens.add(Const.NO_TIME);
-        }
-
-        tokens.add("0");
-
-        return tokens;
     }
 
     /**
