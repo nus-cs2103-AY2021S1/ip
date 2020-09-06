@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -96,7 +96,7 @@ public class Storage {
         try {
             FileWriter csvWriter = new FileWriter(this.file);
             for (int i = 0; i < taskList.getNumOfTasks(); i++) {
-                String[] dataStringArray = taskList.getTaskAt(i).getDataString();
+                String[] dataStringArray = taskList.getTaskAt(i).getDataStrings();
                 for (String s : dataStringArray) {
                     csvWriter.append(s);
                     csvWriter.append(this.dataSeparator);

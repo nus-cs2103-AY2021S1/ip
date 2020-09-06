@@ -1,6 +1,6 @@
 package test.java.duke.task;
 
-import main.java.duke.task.ToDo;
+import duke.task.ToDo;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ public class ToDoTest {
     void getDataString_noInput_correctOutput() {
         ToDo todo = new ToDo("todo1", false);
         String[] expected = new String[] {"todo", "false", "todo1"};
-        String[] actual = todo.getDataString();
+        String[] actual = todo.getDataStrings();
         assertEquals(expected.length, actual.length);
         for (int i = 0; i < 3; i++) {
             assertEquals(expected[i], actual[i]);

@@ -1,8 +1,8 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Encapsulates a command to handle an invalid input
@@ -10,12 +10,12 @@ import main.java.duke.Ui;
 public class InvalidInputCommand extends Command {
 
     /**
-     * Executes the command to handle an invalid input
+     * Executes the command to handle an invalid input.
      *
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
-     * @return Output strings
+     * @return Output strings displayed on the UI signifying invalid input
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
