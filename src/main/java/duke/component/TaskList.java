@@ -6,38 +6,38 @@ import duke.task.Task;
 
 /**
  * List that stores the task list.
- * Operations related to a task list has been abstracted in this class
+ * Operations related to a task list has been abstracted in this class.
  */
 public class TaskList {
     private final LinkedList<Task> list;
 
     /**
-     * Initializes a task list using the given Task LinkedList
+     * Initializes a task list using the given Task LinkedList.
      */
     public TaskList() {
         this.list = new LinkedList<>();
     }
 
     /**
-     * Initializes an empty task list
+     * Initializes an empty task list.
      */
     public TaskList(LinkedList<Task> list) {
         this.list = list;
     }
 
     /**
-     * Adds the given task to the task list
+     * Adds the given task to the task list.
      *
-     * @param newTask the task to be added
+     * @param newTask the task to be added.
      */
     public void add(Task newTask) {
         list.add(newTask);
     }
 
     /**
-     * Removes the task at the given index
+     * Removes the task at the given index.
      *
-     * @param index the index of the task to be removed
+     * @param index the index of the task to be removed.
      */
     public void remove(int index) {
         assert(index >= 0 && index < list.size());
@@ -45,10 +45,10 @@ public class TaskList {
     }
 
     /**
-     * Gets the task at the given index
+     * Gets the task at the given index.
      *
-     * @param index the index given indicating the position of the task
-     * @return the task at the given index
+     * @param index the index given indicating the position of the task.
+     * @return the task at the given index.
      */
     public Task get(int index) {
         assert(index >= 0 && index < list.size());
@@ -56,18 +56,18 @@ public class TaskList {
     }
 
     /**
-     * Gets the task list in LinkedList format
+     * Gets the task list in LinkedList format.
      *
-     * @return the task LinkedList
+     * @return the task LinkedList.
      */
     public LinkedList<Task> getList() {
         return list;
     }
 
     /**
-     * Marks the task at the given index as done
+     * Marks the task at the given index as done.
      *
-     * @param index the index given indicating the position of the task
+     * @param index the index given indicating the position of the task.
      */
     public void markAsDone(int index) {
         assert(index >= 0 && index < list.size());
@@ -75,9 +75,9 @@ public class TaskList {
     }
 
     /**
-     * Returns the size of the task list
+     * Returns the size of the task list.
      *
-     * @return the size of the task list
+     * @return the size of the task list.
      */
     public int size() {
         return list.size();

@@ -6,14 +6,14 @@ import duke.component.TaskList;
 import duke.component.Ui;
 
 /**
- * Command that prints out the task list
+ * Command that prints out the task list.
  */
 public class ListCommand implements Command {
 
     /**
-     * Returns whether this is an exit command
+     * Returns whether this is an exit command.
      *
-     * @return false at all times
+     * @return false at all times.
      */
     @Override
     public boolean isExit() {
@@ -21,7 +21,7 @@ public class ListCommand implements Command {
     }
 
     /**
-     * Prints out the task list
+     * Prints out the task list.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

@@ -11,21 +11,21 @@ import duke.component.Ui;
  * Chat bot that can manage your tasks!
  *
  * @author Tian Fang
- * @version v0.1
+ * @version v0.2
  * @since 2020-08-18
  */
 public class Duke {
+    private static final String FILE_PATH = "data/tasks.txt";
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
 
     /**
-     * Initializes Duke with the given file path
+     * Initializes Duke with the given file path.
      */
     public Duke() {
-        String filePath = "data/tasks.txt";
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILE_PATH);
         try {
             taskList = new TaskList(storage.readList());
         } catch (DukeException e) {
@@ -35,14 +35,14 @@ public class Duke {
     }
 
     /**
-     * main method of Duke
+     * main method of Duke.
      */
     public static void main(String[] args) {
         new Duke().run();
     }
 
     /**
-     * Runs the Duke
+     * Runs the Duke.
      */
     public void run() {
         ui.welcome();
@@ -61,8 +61,8 @@ public class Duke {
 
     /**
      * Gives response to the given input.
-     * @param input the given input
-     * @return      corresponding repsonse
+     * @param input the given input.
+     * @return      corresponding response.
      */
     public String getResponse(String input) {
         try {
