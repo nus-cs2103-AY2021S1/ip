@@ -5,6 +5,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
+
 public class DoneCommand extends Command {
     private final int index;
 
@@ -20,6 +21,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         try{
             Task task = list.getList().get(index);
+            assert index >= 0 : "Index out of bound";
             task.markAsDone();
             storage.generateTxt(list);
             return ui.showDone(task);

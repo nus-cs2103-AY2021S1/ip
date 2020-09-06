@@ -46,8 +46,9 @@ public class AddCommand extends Command {
                 case "deadline": {
                     int byIndex = this.description.indexOf(" /by ");
                     if (byIndex == -1) {
-                        throw new DukeException("I need a better description of the task");
+                        throw new DukeException("Keyword \" /by \" not found, note the white space!");
                     }
+                    assert byIndex > 1 :  "there is no task";
                     String deadline = this.description.substring(byIndex + 4).trim();
                     String description = this.description.substring(0, byIndex).trim();
                     current = new Deadline(description, deadline);
@@ -56,8 +57,9 @@ public class AddCommand extends Command {
                 case "event": {
                     int atIndex = this.description.indexOf(" /at ");
                     if (atIndex == -1) {
-                        throw new DukeException("I need a better description of the task");
+                        throw new DukeException("Keyword \" /at \" not found, note the white space!");
                     }
+                    assert atIndex > 1 :  "there is no task";
                     String deadline = this.description.substring(atIndex + 4).trim();
                     String description = this.description.substring(0, atIndex).trim();
                     current = new Event(description, deadline);
@@ -67,15 +69,15 @@ public class AddCommand extends Command {
                     throw new DukeException("I don't understand you at all...");
                 }
             }
-
+            assert current != null : "The task pending to add is null";
             list.add(current);
             storage.appendTxt(current);
             return ui.showAdd(current, list);
 
         } catch (NumberFormatException | DateTimeException e) {
-            throw new DukeException("Invalid date format detected!");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("I need a better description of the task");
+            throw new DukeException("Invalid date and time content detected!");
+        }  catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Invalid date and time format detected!");
         }
 
 

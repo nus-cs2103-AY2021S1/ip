@@ -9,7 +9,7 @@ public class CheckCommand extends Command {
     private final String target;
 
     public CheckCommand(String detail) {
-        this.target = detail;
+        this.target = detail.trim();
     }
 
     @Override
