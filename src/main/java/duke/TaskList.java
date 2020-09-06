@@ -40,7 +40,7 @@ public class TaskList {
             StringBuilder todoList = new StringBuilder("Here are the task(s) in your list: \n");
             IntStream.range(0, this.tasks.size())
                 .forEach(i -> todoList.append(String.format(
-                    "%d. %s\n", i+1, this.tasks.get(i))));
+                    "%d. %s\n", i + 1, this.tasks.get(i))));
             return todoList.toString();
         }
     }
