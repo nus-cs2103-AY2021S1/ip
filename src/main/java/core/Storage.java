@@ -24,7 +24,8 @@ public class Storage {
                 .boxed()
                 .map(i ->  {
                     Task t = TaskList.get(i - 1);
-                    return t.getParentCommand() + (t.getDoneStatus() ? "\ndone " + i : "");
+                    return t.getParentCommand()
+                            + (t.getDoneStatus() ? "\ndone " + i : "");
                 })
                 .collect(Collectors.joining("\n")));
         fw.close();
