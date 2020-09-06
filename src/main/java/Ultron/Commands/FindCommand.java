@@ -40,15 +40,13 @@ public class FindCommand extends Command {
         message.append("Why do you always bothering me?\n");
         for (Task task : taskList.getList()) {
             if (task.getMessage().contains(getArguments())) {
-                message.append((String.format("%d. %s\n", ++count, task.toString())));
+                message.append((String.format("%d. %s\n", ++count, task)));
                 printed = true;
             }
         }
-
         if (!printed) {
             message.append("There is literally nothing here\n");
         }
-
         ui.setMessage(message.toString());
     }
 }
