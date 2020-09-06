@@ -17,6 +17,9 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "tasks have not been initialised";
+        assert ui != null : "ui have not been initialised";
+        assert storage != null : "storage have not been initialised";
         tasks = new TaskList(new ArrayList<>(tasks.toStream()
                 .filter(x -> x.description.contains(description)).collect(Collectors.toList())));
         StringBuilder output = new StringBuilder();
