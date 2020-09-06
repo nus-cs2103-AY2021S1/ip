@@ -7,6 +7,7 @@ import luoyi.duke.commands.DeleteCommand;
 import luoyi.duke.commands.DoneCommand;
 import luoyi.duke.commands.EventCommand;
 import luoyi.duke.commands.FindCommand;
+import luoyi.duke.commands.HelpCommand;
 import luoyi.duke.commands.ListCommand;
 import luoyi.duke.commands.ToDoCommand;
 import luoyi.duke.common.Message;
@@ -47,10 +48,21 @@ public class Parser {
         } else if (commandStr.matches("^find.*")) {
             // Handle find command
             return parseFindCommand(commandStr);
+        } else if (commandStr.matches("^help.*")) {
+            // Handle help command
+            return parseHelpCommand(commandStr);
         } else if (commandStr.equals("bye")) {
             return ByeCommand.getByeCommand();
         }
         throw new DukeUnrecognizedArgumentException(Message.ERR_WRONG_CMD.toString());
+    }
+
+    private static HelpCommand parseHelpCommand(String commandStr) {
+        if (!commandStr.matches("^help .+")) {
+            return HelpCommand.getHelpCommand(null);
+        }
+        String param = commandStr.split(" ", 2)[1];
+        return HelpCommand.getHelpCommand(param);
     }
 
     private static FindCommand parseFindCommand(String commandStr) {
