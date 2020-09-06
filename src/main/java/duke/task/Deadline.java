@@ -33,7 +33,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String done = this.done ? "\u2713" : "\u2718";
+        String done = this.done ? "\u2713" : "X";
         String date = this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return "[D][" + done + "] " + this.task + "by: " + date;
     }

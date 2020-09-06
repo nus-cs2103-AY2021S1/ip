@@ -24,7 +24,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        String done = this.done ? "\u2713" : "\u2718";
+        String done = this.done ? "\u2713" : "X";
         return "[T][" + done + "] " + this.task;
     }
 }

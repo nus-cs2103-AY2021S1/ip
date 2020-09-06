@@ -31,7 +31,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String done = this.done ? "\u2713" : "\u2718";
+        String done = this.done ? "\u2713" : "X";
         return "[E][" + done + "] " + this.task + "at:" + this.event;
     }
 }
