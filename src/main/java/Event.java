@@ -17,6 +17,7 @@ public class Event extends Task implements Savable {
         str.append(super.getInfo());
         str.append(super.separator);
         str.append(date.toString());
+
         return str.toString();
     }
 

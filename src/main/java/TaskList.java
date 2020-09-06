@@ -1,6 +1,4 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class TaskList {
     ArrayList<Task> tasks;
@@ -20,6 +18,11 @@ public class TaskList {
                 break;
             case ("E"):
                 tasks.add(new Event(taskArr[2], taskArr[3], done));
+                break;
+            case ("A"):
+                tasks.add(new DoAfter(taskArr[2], taskArr[3], done));
+                break;
+            default:
                 break;
             }
         }
@@ -46,6 +49,7 @@ public class TaskList {
         for (Task task : tasks) {
             tasksInfo.add(task.getInfo());
         }
+
         return tasksInfo;
     }
 
@@ -54,6 +58,7 @@ public class TaskList {
         for (Task task : tasks) {
             tasksDescription.add(task.toString());
         }
+
         return tasksDescription;
     }
 
@@ -68,15 +73,18 @@ public class TaskList {
         case ("D"):
             task = new Deadline(newTaskDetails[1],  newTaskDetails[2], false);
             break;
-        case("E"):
+        case ("E"):
             task = new Event(newTaskDetails[1],  newTaskDetails[2], false);
+            break;
+        case ("A"):
+            task = new DoAfter(newTaskDetails[1], newTaskDetails[2], false);
             break;
         default:
             throw new DukeException();
         }
-
         // Add task
         tasks.add(task);
+
         return task;
     }
 
@@ -93,6 +101,7 @@ public class TaskList {
         assert itemToMark < this.getSize() : "Item to mark done is out of bounds";
 
         tasks.get(itemToMark).markDone();
+
         return tasks.get(itemToMark);
     }
 
@@ -102,6 +111,7 @@ public class TaskList {
         assert itemToDelete < this.getSize() : "Item to mark done is out of bounds";
 
         Task removedTask = tasks.remove(itemToDelete);
+
         return removedTask;
     }
 
@@ -110,6 +120,7 @@ public class TaskList {
         for (Task task : tasks) {
             if (task.containsWord(word)) tasksWithWord.add(task.toString());
         }
+
         return tasksWithWord;
     }
 }
