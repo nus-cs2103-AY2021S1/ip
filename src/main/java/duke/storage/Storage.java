@@ -46,6 +46,7 @@ public class Storage {
                 }
                 this.filePath = filePath;
                 this.directoryPath = directoryPath;
+                assert directory.exists() : "Failed to create the directory";
             }
         } catch (InvalidFilePathException e) {
             e.getMessage();
