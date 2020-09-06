@@ -13,6 +13,9 @@ import chatterbox.ui.Ui;
  */
 public class TaskList {
     private static final String ERROR_INVALID_TASK_NUMBER = "Invalid task number.";
+    private static final String ERROR_ARCHIVE_FAILED = "Unable to archive your tasks, please try again later.";
+    private static final String INFO_TASKS_ARCHIVED = "I have archived all your tasks,"
+            + " you can find the archived file in the data folder";
     private static final String INFO_MATCHING_TASKS = "I've found these matching tasks in your list!";
     private static final String INFO_LIST_EMPTY = "Your list is currently empty.";
 
@@ -28,6 +31,26 @@ public class TaskList {
      */
     public void loadTasks() throws IOException, ChatterboxException {
         tasks = storage.getItems();
+    }
+
+    /**
+     * Archives the task list into a file and starts it from a clean slate.
+     *
+     * @return Archive task message if successful else archive error message.
+     */
+    public String archive() {
+        // No point archiving if the list is currently empty
+        if (tasks.size() == 0) {
+            return INFO_LIST_EMPTY;
+        }
+
+        try {
+            storage.archiveItems();
+            tasks = new ArrayList<>();
+            return INFO_TASKS_ARCHIVED;
+        } catch (IOException e) {
+            return ERROR_ARCHIVE_FAILED;
+        }
     }
 
     /**
