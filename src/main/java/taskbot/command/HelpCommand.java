@@ -26,8 +26,8 @@ public class HelpCommand extends Command {
      */
     public static String getInstruction() throws TaskbotException {
         return "Use 'help' to learn about a specific command.\n"
-                + "List of available commands: " + getCommandList()
-                + "Format: help [command]\n"
+                + "List of available commands: \n" + getCommandList()
+                + "\nFormat: help [command]\n"
                 + "command: One of the commands specified in the list, in lower case.";
     }
 
