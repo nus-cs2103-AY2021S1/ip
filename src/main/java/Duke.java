@@ -19,7 +19,7 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
-    public void execute(Command command) {
+    private void execute(Command command) {
         String output = "";
         int commandType = command.getCommandType();
         boolean print = true;
@@ -66,13 +66,14 @@ public class Duke {
         }
     }
 
-    public void run() {
+
+    private void run() {
         start();
         runLoopUntilExit();
         exit();
     }
 
-    public void runLoopUntilExit() {
+    private void runLoopUntilExit() {
         Command command;
         do {
             String input = ui.getUserInput();
