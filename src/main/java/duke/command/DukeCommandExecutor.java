@@ -38,7 +38,8 @@ public class DukeCommandExecutor implements CommandExecutor {
             return ListCommand.execute(taskList);
         case Task:
             return TaskCommand.execute(in, taskList);
-        default: // Invalid
+        default:
+            assert cmdType.equals(CommandType.Invalid) : "CommandType should be Invalid";
             throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
         }
     }
