@@ -10,7 +10,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
-    private Duke duke = new Duke();
+    public static final String APPLICATION_NAME = "Benedict";
+
+    private final Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
@@ -19,6 +21,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle(APPLICATION_NAME);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

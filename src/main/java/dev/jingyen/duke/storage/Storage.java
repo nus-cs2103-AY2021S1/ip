@@ -1,4 +1,4 @@
-package dev.jingyen.duke;
+package dev.jingyen.duke.storage;
 
 import dev.jingyen.duke.model.Task;
 import dev.jingyen.duke.parser.TaskParser;
@@ -29,7 +29,7 @@ public class Storage {
     // TODO: 26/8/20 Add more relevant error for parsing
     public List<Task> load() throws IOException {
         List<Task> tasks = new ArrayList<>();
-        try (var br = new BufferedReader(new FileReader(this.filePath))) {
+        try (var br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 Task task = TaskParser.parse(line);
@@ -39,41 +39,33 @@ public class Storage {
         return tasks;
     }
 
-    // TODO: 26/8/20 consider a more robust check
-
     /**
      * Checks if the file at <code>filePath</code> exists.
      *
      * @return true if the file exists, otherwise false
      */
     public boolean hasSavedTasks() {
-        return new File(this.filePath).exists();
+        return new File(filePath).exists();
     }
 
     /**
      * Saves a list of tasks into a file.
      *
-     * @param tasks the list of tasks to serialize and save
+     * @param storables the list of tasks to serialize and save
      * @throws IOException if a problem was encountered while trying to access the file at <code>filePath</code>
      */
-    public void saveTasks(List<Task> tasks) throws IOException {
-        assert tasks != null;
-        File saveFile = new File(this.filePath);
+    public void saveTasks(List<? extends Storable> storables) throws IOException {
+        assert storables != null;
+        File saveFile = new File(filePath);
         if (!saveFile.exists()) {
-            boolean directoryCreated = saveFile.getParentFile().mkdirs();
-            if (!directoryCreated) {
-                throw new IOException("Unable to create parent directories to save file");
-            }
-            boolean saveFileCreated = saveFile.createNewFile();
-            if (!saveFileCreated) {
-                throw new IOException("Unable to create save file");
-            }
+            saveFile.getParentFile().mkdirs();
+            saveFile.createNewFile();
         }
 
         // Use PrintWriter wrapping BufferedWriter in FileWriter
-        try (var out = new PrintWriter(new BufferedWriter(new FileWriter(this.filePath)))) {
-            for (Task task : tasks) {
-                out.println(task.toSaveString());
+        try (var out = new PrintWriter(new BufferedWriter(new FileWriter(filePath)))) {
+            for (Storable storable : storables) {
+                out.println(storable.toSaveString());
             }
         }
     }

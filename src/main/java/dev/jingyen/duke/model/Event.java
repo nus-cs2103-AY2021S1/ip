@@ -7,7 +7,7 @@ package dev.jingyen.duke.model;
  */
 public class Event extends Task {
     private static final String SAVE_STRING = "EVENT|%s|%s|%s";
-    private String timeRange;
+    private final String timeRange;
 
     public Event(String taskName, String timeRange) {
         super(taskName);
@@ -23,7 +23,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.timeRange);
+        return String.format("[E]%s (at: %s)", super.toString(), timeRange);
     }
 
     /**
@@ -34,6 +34,6 @@ public class Event extends Task {
      */
     @Override
     public String toSaveString() {
-        return String.format(SAVE_STRING, super.isDone, super.taskName, this.timeRange);
+        return String.format(SAVE_STRING, super.isDone, super.taskName, timeRange);
     }
 }
