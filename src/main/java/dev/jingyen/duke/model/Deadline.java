@@ -2,7 +2,6 @@ package dev.jingyen.duke.model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 /**
  * A Deadline is a Task, with the addition of a deadline, signifying when it has to be completed before.
@@ -11,7 +10,7 @@ import java.time.format.FormatStyle;
  */
 public class Deadline extends Task {
     private static final String SAVE_STRING = "DEADLINE|%s|%s|%s";
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d MMMM uuuu");
     private final LocalDate deadline;
 
     /**
