@@ -39,7 +39,11 @@ public class UserInterface {
 
     }
 
-    //Given contents output line by line between the output lines
+    /**
+     * This method outputs given String contents in a pre-defined format.
+     * @param contents String values to be output
+     * @return formatted String values to be shown to user
+     */
     public String outputUi(String... contents) {
         StringBuilder result = new StringBuilder(UPPER_LINE);
         for (String s : contents) {
@@ -81,8 +85,16 @@ public class UserInterface {
         return outputUi(DELETE_TASK_MARKED_MESSAGE, INDENT + task.toString(), numOfTaskInList(numOfTaskInList));
     }
 
+    /**
+     * This method outputs the string when user adds task to list
+     * @param task The task that is being added by the user
+     * @param numOfTaskInList the number of task in the list after adding
+     * @return String output that is shown to user
+     */
     public String showAddedTaskMessage(Task task, int numOfTaskInList) {
-       return outputUi(ADDED_TASK_MESSAGE, INDENT + task.toString(), numOfTaskInList(numOfTaskInList));
+        return outputUi(ADDED_TASK_MESSAGE,
+               INDENT + task.toString(),
+               numOfTaskInList(numOfTaskInList));
     }
 
     private String numOfTaskInList(int numOfTaskInList) {
@@ -101,6 +113,12 @@ public class UserInterface {
         return outputUi(MATCH_SEARCH_RESULT_MESSAGE, listTaskOnly(lstOfTask));
     }
 
+    /**
+     * This method list the tasks currently in the taskList when the user
+     * runs the list task command.
+     * @param lstOfTask the task lists consisting the tasks
+     * @return String that is formatted to output to user
+     */
     public String listTaskOnly(List<Task> lstOfTask) {
         String outputIndent = "    ";
         StringBuilder concat = new StringBuilder();
@@ -118,6 +136,12 @@ public class UserInterface {
         return concat.toString();
     }
 
+    /**
+     * This method list the tasks currently in the taskList when the user
+     *  runs the list task command. (I dont think we need this method its a repeat)
+     * @param lstOfTask
+     * @return
+     */
     public String listTask(List<Task> lstOfTask) {
         String outputIndent = "    ";
         StringBuilder concat = new StringBuilder();

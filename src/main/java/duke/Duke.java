@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Duke  {
+public class Duke {
 
     private UserInterface ui;
     private Storage storage;
     private Parser parser;
-    private TaskList taskList;
+    private TaskList tasksList;
 
     public Duke() {} // empty constructor needed for javaFX
 
@@ -24,13 +24,14 @@ public class Duke  {
         this.ui = new UserInterface();
         this.storage = new Storage(filePath);
         this.parser = new Parser();
-        this.taskList = new TaskList(new ArrayList<>());
-        this.startup();// copy the task data
+        this.tasksList = new TaskList(new ArrayList<>());
+        // this method copy the task data to the taskList
+        this.startup();
     }
 
     private void startup() {
         try {
-            storage.populateToLstOfTask(taskList.getLstOfTask());
+            storage.populateToLstOfTask(tasksList.getLstOfTask());
             ui.greetUser();
         } catch (IOException e) {
             System.out.println(e.toString() + " Error trying to load tasks");
@@ -47,7 +48,7 @@ public class Duke  {
             } else {
                 switch (checkedCommand) {
                 case LIST:
-                    result = ui.listTask(taskList.getLstOfTask());
+                    result = ui.listTask(tasksList.getLstOfTask());
                     break;
                 case BYE:
                     exit();
@@ -84,16 +85,15 @@ public class Duke  {
     }
 
     private void exit() {
-        storage.saveTaskContents(taskList.getLstOfTask());
+        storage.saveTaskContents(tasksList.getLstOfTask());
     }
 
     private String done(String[] parsedUserInput) {
-
         try {
             String doneTask = parsedUserInput[1];
             int doneTaskNumber = Integer.parseInt(doneTask);
             int identifierNumberInArrayList = doneTaskNumber - 1;
-            Task task = taskList.getLstOfTask()
+            Task task = tasksList.getLstOfTask()
                     .get(identifierNumberInArrayList);
             task.markAsDone();
             return ui.showMarkedTaskDoneMessage(task);
@@ -107,11 +107,11 @@ public class Duke  {
             String deleteTask = parsedUserInput[1];
             int doneTaskNumber = Integer.parseInt(deleteTask);
             int identifierNumberInArrayList = doneTaskNumber - 1;
-            List<Task> lstOfTask = taskList.getLstOfTask();
+            List<Task> lstOfTask = tasksList.getLstOfTask();
             Task task = lstOfTask
                     .get(identifierNumberInArrayList);
             lstOfTask.remove(identifierNumberInArrayList);
-            return ui.showDeleteTaskMessage(task, taskList.getNumOfTask());
+            return ui.showDeleteTaskMessage(task, tasksList.getNumOfTask());
         } catch (IndexOutOfBoundsException e1) {
             return ui.showInvalidDeleteCommand();
         }
@@ -119,7 +119,10 @@ public class Duke  {
 
     private String addToDo(String[] parsedUserInput) {
         try {
-            String test = parsedUserInput[1];// why do we need this?
+            //think of a way to avoid this test for exception
+            //currently this test if user input to do command
+            //w/o any description
+            String test = parsedUserInput[1];
             String taskDescription = "";
             for (int i = 1; i < parsedUserInput.length; i++) {
                 if (i == parsedUserInput.length - 1) {
@@ -129,8 +132,8 @@ public class Duke  {
                 }
             }
             ToDo td = new ToDo(taskDescription);
-            taskList.add(td);
-            return ui.showAddedTaskMessage(td, taskList.getNumOfTask());
+            tasksList.add(td);
+            return ui.showAddedTaskMessage(td, tasksList.getNumOfTask());
         } catch (IndexOutOfBoundsException e1) {
             return ui.showInvalidTodoCommand();
         }
@@ -151,8 +154,8 @@ public class Duke  {
         String date = eventArray[1];
 
         Event event = new Event(description, date.trim());
-        taskList.add(event);
-        return ui.showAddedTaskMessage(event, taskList.getNumOfTask());
+        tasksList.add(event);
+        return ui.showAddedTaskMessage(event, tasksList.getNumOfTask());
     }
 
     private String addDeadline(String[] parsedUserInput) {
@@ -174,8 +177,8 @@ public class Duke  {
 
             LocalDateTime d1 = parser.parseDateAndTime(date);
             Deadline deadline = new Deadline(description, d1);
-            taskList.add(deadline);
-            return ui.showAddedTaskMessage(deadline, taskList.getNumOfTask());
+            tasksList.add(deadline);
+            return ui.showAddedTaskMessage(deadline, tasksList.getNumOfTask());
         } catch (DateTimeParseException e) {
             return ui.showInvalidDateFormatGiven();
         }
@@ -188,9 +191,9 @@ public class Duke  {
                 keyword.append(parsedUserInput[i]);
             }
 
-            List<Task> lst = taskList.getLstOfTask();
+            List<Task> lst = tasksList.getLstOfTask();
             List<Task> resultList = new ArrayList<>();
-            for (int j = 0; j < taskList.getNumOfTask(); j++) {
+            for (int j = 0; j < tasksList.getNumOfTask(); j++) {
                 Task t = lst.get(j);
                 String description = t.getDescription();
                 if (description.contains(keyword)) {
@@ -211,11 +214,14 @@ public class Duke  {
 
     }
 
+    /**
+     * This is the main entry of of the duke if app is run
+     * on CLI
+     * @param args
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("Tasks.txt");
         Scanner sc = new Scanner(System.in);
-
-        //duke.startup(); // startup alr run when instantiating duke
 
         while (sc.hasNext()) {
             String input = sc.nextLine();

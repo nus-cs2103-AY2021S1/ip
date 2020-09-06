@@ -4,11 +4,11 @@ import java.util.List;
 
 /**
  * This class provides an simple functionality to store and operate the List of task in Duke.
- * It is essentially a wrapper class around the List<Task>
+ * It is essentially a wrapper class around the List of Task
  */
 public class TaskList {
 
-    List<Task> lstOfTask;
+    private List<Task> lstOfTask;
 
     /**
      * The constructor for the TaskList object
