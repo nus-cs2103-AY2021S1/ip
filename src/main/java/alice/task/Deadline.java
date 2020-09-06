@@ -25,9 +25,7 @@ public class Deadline extends Task {
      * @param by          the latest datetime by which the task should be completed.
      */
     public Deadline(String description, LocalDateTime by) {
-        super(description);
-        this.by = by;
-        this.hasTime = !by.toLocalTime().equals(LocalTime.MIDNIGHT);
+        this(false, description, by);
     }
 
     /**
@@ -41,6 +39,8 @@ public class Deadline extends Task {
         super(isDone, description);
         this.by = by;
         this.hasTime = !by.toLocalTime().equals(LocalTime.MIDNIGHT);
+
+        assert !description.isBlank() : "Cannot create a Deadline with no description";
     }
 
     /**
@@ -51,8 +51,10 @@ public class Deadline extends Task {
      */
     public String getDeadlineDateTime() {
         if (hasTime) {
+            assert !by.toLocalTime().equals(LocalTime.MIDNIGHT) : "Supposed to have time input";
             return by.format(D_DATETIME_FORMAT);
         } else {
+            assert by.toLocalTime().equals(LocalTime.MIDNIGHT) : "Not supposed to have time input";
             return by.format(D_DATE_FORMAT);
         }
     }

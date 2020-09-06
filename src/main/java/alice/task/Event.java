@@ -25,9 +25,7 @@ public class Event extends Task {
      * @param on          the date and time of the event.
      */
     public Event(String description, LocalDateTime on) {
-        super(description);
-        this.on = on;
-        this.hasTime = !on.toLocalTime().equals(LocalTime.MIDNIGHT);
+        this(false, description, on);
     }
 
     /**
@@ -41,6 +39,8 @@ public class Event extends Task {
         super(isDone, description);
         this.on = on;
         this.hasTime = !on.toLocalTime().equals(LocalTime.MIDNIGHT);
+
+        assert !description.isBlank() : "Cannot create an Event with no description";
     }
 
     /**
@@ -51,8 +51,10 @@ public class Event extends Task {
      */
     public String getEventDateTime() {
         if (hasTime) {
+            assert !on.toLocalTime().equals(LocalTime.MIDNIGHT) : "Supposed to have time input";
             return on.format(E_DATETIME_FORMAT);
         } else {
+            assert on.toLocalTime().equals(LocalTime.MIDNIGHT) : "Not supposed to have time input";
             return on.format(E_DATE_FORMAT);
         }
     }

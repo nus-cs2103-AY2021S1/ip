@@ -108,8 +108,8 @@ public class Parser {
             return new ByeCommand();
         } else {
             // Invalid command
-            throw new InvalidCommandException("Sorry I cannot register that command!\n"
-                    + "Use 'help' command to see the lists of available command");
+            throw new InvalidCommandException("Sorry I don't understand that command!\n"
+                    + "Use 'help' to see what I can do for you.");
         }
     }
 

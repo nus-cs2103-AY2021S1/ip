@@ -33,6 +33,8 @@ public class EventCommand implements Command {
     public EventCommand(String description, LocalDateTime on) {
         this.description = description;
         this.on = on;
+
+        assert !description.isBlank() : "Cannot create an EventCommand without providing description";
     }
 
     /**

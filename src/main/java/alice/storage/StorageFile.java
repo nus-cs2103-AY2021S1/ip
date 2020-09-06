@@ -40,11 +40,9 @@ public class StorageFile {
      * Loads the data file located at the filePath.
      * If file does not exists, create the file and directory to file.
      *
-     * @return list of encoded tasks in the data file, or
-     * null if the data file does not exist.
-     * @throws AliceStorageException if there were errors reading or creating the file.
+     * @return list of encoded tasks in the data file, or null if the data file does not exist.
      */
-    public List<String> load() throws AliceStorageException {
+    public List<String> load() {
         boolean fileExists = Files.exists(filePath);
         try {
             if (fileExists) {
@@ -55,6 +53,7 @@ public class StorageFile {
                 // Create data file and directory
                 createFile();
                 loadMessage = "New file created";
+                assert Files.exists(filePath) : "File is supposed to be successfully created";
                 return null;
             }
         } catch (AliceStorageException ex) {
@@ -129,6 +128,7 @@ public class StorageFile {
      * @throws AliceStorageException if there were errors writing to the file.
      */
     public void saveToLastLine(String taskToAdd) throws AliceStorageException {
+        assert !taskToAdd.isBlank() : "Cannot save empty string to data file";
         try {
             Files.write(filePath, (taskToAdd + "\n").getBytes(),
                     StandardOpenOption.APPEND);

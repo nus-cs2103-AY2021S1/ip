@@ -28,6 +28,8 @@ public class TodoCommand implements Command {
      */
     public TodoCommand(String description) {
         this.description = description;
+
+        assert !description.isBlank() : "Cannot create a TodoCommand without providing description";
     }
 
     /**

@@ -33,6 +33,8 @@ public class DeadlineCommand implements Command {
     public DeadlineCommand(String description, LocalDateTime by) {
         this.description = description;
         this.by = by;
+
+        assert !description.isBlank() : "Cannot create an DeadlineCommand without providing description";
     }
 
     /**

@@ -24,6 +24,8 @@ public class FindCommand implements Command {
      */
     public FindCommand(String... keywords) {
         this.keywords = keywords;
+
+        assert keywords.length != 0 : "Cannot execute FindCommand with not keywords";
     }
 
     /**

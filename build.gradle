@@ -82,6 +82,7 @@ task runCli(type: JavaExec) {
     args '-c'
 }
 
+// Depreciated
 task textUiTest(type: Exec) {
     workingDir './text-ui-test'
 

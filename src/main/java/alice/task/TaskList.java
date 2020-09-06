@@ -97,6 +97,7 @@ public class TaskList {
      * @return the string representation of all tasks that matches.
      */
     public String find(String... keywords) {
+        assert keywords.length != 0 : "Keywords used for find tasks cannot be empty";
         StringBuilder s = new StringBuilder();
 
         boolean hasZeroResults = true;
@@ -109,10 +110,10 @@ public class TaskList {
 
         if (hasZeroResults) {
             return null;
-        } else {
-            s.setLength(s.length() - 1);
-            return s.toString();
         }
+
+        s.setLength(s.length() - 1);
+        return s.toString();
     }
 
     /**
@@ -130,6 +131,7 @@ public class TaskList {
      * @param t the task to be added.
      */
     public void addTask(Task t) {
+        assert !t.getDescription().isBlank() : "Cannot add a task with empty description";
         tasks.add(t);
     }
 
