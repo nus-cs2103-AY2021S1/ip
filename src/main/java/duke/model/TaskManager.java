@@ -92,6 +92,17 @@ public class TaskManager {
         return taskList;
     }
 
+
+    public ArrayList<Task> findTasks(String searchTerm) {
+        ArrayList<Task> matchingTasks = new ArrayList<Task>();
+        for (Task task : taskList) {
+            if (task.getDescription().contains(searchTerm)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
     /**
      * Returns number of Tasks currently in taskList.
      *

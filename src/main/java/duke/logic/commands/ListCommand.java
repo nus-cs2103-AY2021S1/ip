@@ -37,14 +37,11 @@ public class ListCommand extends Command{
             throw new DukeException("List command should not include extra parameters!");
         }
         ArrayList<Task> taskList = tm.getTaskList();
-        String s = "";
         if (taskList.isEmpty()) {
-            s = "List is empty!";
+            String s = "List is empty!";
+            ui.showDetails(s);
         } else {
-            for (int i = 0; i < taskList.size(); i++) {
-                s = s + (i + 1) + ". " + taskList.get(i) + "\n";
-            }
+            ui.showTaskList(taskList);
         }
-        ui.showDetails(s);
     }
 }
