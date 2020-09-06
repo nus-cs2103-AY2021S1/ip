@@ -25,6 +25,9 @@ public class AddDeadlineCommand extends Command {
         if (input.length() <= 9 || !input.contains("/by")) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
+
+        assert input.contains("/by") : "input in AddDeadline should contain /by";
+
         String[] splitStr = input.split("/by ");
         String description = splitStr[0].substring(9).trim();
         Deadline deadline = new Deadline(description, splitStr[1]);

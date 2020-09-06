@@ -52,6 +52,7 @@ public class Duke {
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
+
         String reply = formattedOutput.toString();
 
         reply = reply.trim();

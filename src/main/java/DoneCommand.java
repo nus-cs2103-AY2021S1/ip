@@ -28,6 +28,8 @@ public class DoneCommand extends Command {
             throw new DukeException("☹ OOPS!!! I don't know which task to mark as done.");
         }
 
+        assert splitStr.length == 2 : "Input for Done does not follow the correct format";
+
         int taskIndex = Integer.parseInt(splitStr[1]) - 1;
         Task task = tasks.getTask(taskIndex);
         task.markAsDone();
