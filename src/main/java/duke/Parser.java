@@ -1,5 +1,10 @@
 package duke;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.CompleteCommand;
@@ -13,14 +18,14 @@ import duke.task.TaskType;
  * Encapsulates the parsing of user inputs.
  */
 public class Parser {
-    private static final String COMMAND_EXIT = "bye";
-    private static final String COMMAND_LIST = "list";
-    private static final String COMMAND_FIND = "find";
-    private static final String COMMAND_COMPLETE = "done";
-    private static final String COMMAND_ADD_TODO = "todo";
-    private static final String COMMAND_ADD_EVENT = "event";
-    private static final String COMMAND_ADD_DEADLINE = "deadline";
-    private static final String COMMAND_DELETE = "delete";
+    private static final Set<String> COMMAND_EXIT = new HashSet<>(Arrays.asList("bye", "exit", "q"));
+    private static final Set<String> COMMAND_LIST = new HashSet<>(Arrays.asList("list", "ls"));
+    private static final Set<String> COMMAND_FIND = new HashSet<>(Arrays.asList("find", "search"));
+    private static final Set<String> COMMAND_COMPLETE = new HashSet<>(Arrays.asList("done", "complete"));
+    private static final Set<String> COMMAND_ADD_TODO = new HashSet<>(Collections.singletonList("todo"));
+    private static final Set<String> COMMAND_ADD_EVENT = new HashSet<>(Collections.singletonList("event"));
+    private static final Set<String> COMMAND_ADD_DEADLINE = new HashSet<>(Collections.singletonList("deadline"));
+    private static final Set<String> COMMAND_DELETE = new HashSet<>(Arrays.asList("delete", "remove"));
 
     /**
      * Processes the full user input.
@@ -46,21 +51,21 @@ public class Parser {
         String command = commandInput.toString();
         String args = argsInput.toString();
 
-        if (command.equals(COMMAND_ADD_DEADLINE)) {
+        if (COMMAND_ADD_DEADLINE.contains(command)) {
             return new AddCommand(args, TaskType.DEADLINE);
-        } else if (command.equals(COMMAND_ADD_EVENT)) {
+        } else if (COMMAND_ADD_EVENT.contains(command)) {
             return new AddCommand(args, TaskType.EVENT);
-        } else if (command.equals(COMMAND_ADD_TODO)) {
+        } else if (COMMAND_ADD_TODO.contains(command)) {
             return new AddCommand(args, TaskType.TODO);
-        } else if (command.equals(COMMAND_COMPLETE)) {
+        } else if (COMMAND_COMPLETE.contains(command)) {
             return new CompleteCommand(args);
-        } else if (command.equals(COMMAND_DELETE)) {
+        } else if (COMMAND_DELETE.contains(command)) {
             return new DeleteCommand(args);
-        } else if (command.equals(COMMAND_EXIT)) {
+        } else if (COMMAND_EXIT.contains(command)) {
             return new ExitCommand(args);
-        } else if (command.equals(COMMAND_LIST)) {
+        } else if (COMMAND_LIST.contains(command)) {
             return new ListCommand(args);
-        } else if (command.equals(COMMAND_FIND)) {
+        } else if (COMMAND_FIND.contains(command)) {
             return new FindCommand(args);
         } else {
             throw new UnknownCommandException("Unknown command");
