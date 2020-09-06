@@ -96,6 +96,7 @@ public class Storage {
      * @return String message of the outcome from updating save file.
      */
     public String updateFile(TaskList list) {
+        assert (list != null) : "Storage - updateFile: TaskList is null!";
         try {
             System.out.println("Saving changes...");
             File file = getFile();
@@ -108,7 +109,6 @@ public class Storage {
             System.out.println("Changes saved.");
             return "Changes saved.";
         } catch (IOException e) {
-            e.printStackTrace();
             System.out.println("Something went wrong during saving!");
             return "Error in writing to the save file!";
         } catch (DukeException e) {
@@ -134,22 +134,22 @@ public class Storage {
                 String task = matcher.group(3);
                 String date = matcher.group(4);
                 LocalDate localDate = null;
-
-                if (date != null && !date.equals("null")) {
-                    localDate = LocalDate.parse(date);
-                }
-                switch (matcher.group(1)) {
-                case ("T"):
-                    list.addItem(new Todo(task, done));
-                    break;
-                case ("D"):
-                    list.addItem(new Deadline(task, done, localDate));
-                    break;
-                case ("E"):
-                    list.addItem(new Event(task, done, localDate));
-                    break;
-                default:
-                    System.out.println("Error in reading input from save file.");
+                    if (date != null && !date.equals("null")) {
+                        localDate = LocalDate.parse(date);
+                    }
+                    switch (matcher.group(1)) {
+                    case ("T"):
+                        list.addItem(new Todo(task, done));
+                        break;
+                    case ("D"):
+                        list.addItem(new Deadline(task, done, localDate));
+                        break;
+                    case ("E"):
+                        list.addItem(new Event(task, done, localDate));
+                        break;
+                    default:
+                        System.out.println("Could not parse: " + matcher.group(0));
+                    }
                 }
             }
             return list;
