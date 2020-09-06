@@ -1,13 +1,13 @@
 package dev.jingyen.duke.parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import dev.jingyen.duke.Command;
 import dev.jingyen.duke.model.Deadline;
 import dev.jingyen.duke.model.Event;
 import dev.jingyen.duke.model.Task;
 import dev.jingyen.duke.model.Todo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 // TODO: 26/8/20 Consider a visitor pattern
 // TODO: 26/8/20 Add try-catch clause

@@ -1,5 +1,7 @@
 package dev.jingyen.duke.view;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,8 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-import java.io.IOException;
-
 
 public class DialogBox extends HBox {
     @FXML
@@ -20,6 +20,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * A constructor for a chat dialog, which displays the avatar of an entity, and its text.
+     *
+     * @param text the text of the entity
+     * @param img  the avatar of the entity
+     */
     public DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));

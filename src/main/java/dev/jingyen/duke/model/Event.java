@@ -9,12 +9,25 @@ public class Event extends Task {
     private static final String SAVE_STRING = "EVENT|%s|%s|%s";
     private final String timeRange;
 
+    /**
+     * A constructor for an Event, which defaults to undone.
+     *
+     * @param taskName  the name of the Event
+     * @param timeRange the period in which the Event occurs
+     */
     public Event(String taskName, String timeRange) {
         super(taskName);
         assert timeRange != null && !timeRange.isBlank();
         this.timeRange = timeRange;
     }
 
+    /**
+     * A constructor for an Event, which allows setting its done state.
+     *
+     * @param isDone    whether the Event has been completed
+     * @param taskName  the name of the Event
+     * @param timeRange the period in which the Event occurs
+     */
     public Event(boolean isDone, String taskName, String timeRange) {
         super(isDone, taskName);
         assert timeRange != null && !timeRange.isBlank();

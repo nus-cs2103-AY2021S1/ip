@@ -1,11 +1,11 @@
 package dev.jingyen.duke;
 
-import dev.jingyen.duke.model.Task;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import dev.jingyen.duke.model.Task;
 
 public class TaskList {
     private final List<Task> tasks = new ArrayList<>();

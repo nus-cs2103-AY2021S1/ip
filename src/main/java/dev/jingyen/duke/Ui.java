@@ -1,8 +1,8 @@
 package dev.jingyen.duke;
 
-import dev.jingyen.duke.model.Task;
-
 import java.util.List;
+
+import dev.jingyen.duke.model.Task;
 
 public class Ui {
     public static final String LOGO =

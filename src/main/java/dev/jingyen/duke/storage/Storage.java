@@ -1,8 +1,5 @@
 package dev.jingyen.duke.storage;
 
-import dev.jingyen.duke.model.Task;
-import dev.jingyen.duke.parser.TaskParser;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,6 +9,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import dev.jingyen.duke.model.Task;
+import dev.jingyen.duke.parser.TaskParser;
 
 public class Storage {
     private final String filePath;

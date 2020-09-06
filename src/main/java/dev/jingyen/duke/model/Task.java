@@ -1,8 +1,8 @@
 package dev.jingyen.duke.model;
 
-import dev.jingyen.duke.storage.Storable;
-
 import java.util.Objects;
+
+import dev.jingyen.duke.storage.Storable;
 
 /**
  * The dev.jingyen.duke.model.Task represents something that can be done.
@@ -13,11 +13,11 @@ public abstract class Task implements Storable {
     protected boolean isDone;
     protected String taskName;
 
-    public Task(String taskName) {
+    protected Task(String taskName) {
         this(false, taskName);
     }
 
-    public Task(boolean isDone, String taskName) {
+    protected Task(boolean isDone, String taskName) {
         assert taskName != null && !taskName.isBlank();
         this.isDone = isDone;
         this.taskName = taskName;

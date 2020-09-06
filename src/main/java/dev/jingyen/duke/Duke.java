@@ -1,15 +1,15 @@
 package dev.jingyen.duke;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Scanner;
+
 import dev.jingyen.duke.model.Task;
 import dev.jingyen.duke.parser.InvalidInputException;
 import dev.jingyen.duke.parser.InvalidTaskException;
 import dev.jingyen.duke.parser.TaskParser;
 import dev.jingyen.duke.storage.Storage;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.Scanner;
 
 public class Duke {
     private static final String SAVE_FILE_PATH =
