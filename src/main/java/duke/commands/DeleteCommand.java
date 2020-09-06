@@ -34,6 +34,6 @@ public class DeleteCommand extends Command {
     @Override
     public void init(TaskManager tm, Ui ui) {
         setUtility(tm, ui);
-        setResponse(ui.askTaskNumToComplete());
+        setResponse(ui.askTaskNumToDelete());
     }
 }
