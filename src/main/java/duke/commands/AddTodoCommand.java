@@ -15,7 +15,7 @@ import duke.tasks.Todo;
  */
 public class AddTodoCommand extends Command {
     /**
-     * Class constructor.
+     * Initializes an add todo command.
      *
      * @param input User input.
      */

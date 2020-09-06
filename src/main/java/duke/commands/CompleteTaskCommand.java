@@ -15,7 +15,7 @@ import duke.tasks.Task;
  */
 public class CompleteTaskCommand extends Command {
     /**
-     * Class constructor.
+     * Initializes a complete task command.
      *
      * @param input User input.
      */

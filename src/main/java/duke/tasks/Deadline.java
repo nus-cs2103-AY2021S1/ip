@@ -14,7 +14,7 @@ public class Deadline extends Task {
     private final LocalDateTime datetimeDue;
 
     /**
-     * Class constructor specifying whether the deadline is complete.
+     * Initializes a deadline specifying whether the deadline is complete.
      *
      * @param content Contents of the deadline.
      * @param datetimeDueString Due datetime of the deadline.
@@ -35,7 +35,7 @@ public class Deadline extends Task {
 
 
     /**
-     * Class constructor.
+     * Initializes an incomplete deadline.
      *
      * @param content Contents of the deadline.
      * @param datetimeDueString Due datetime of the deadline.

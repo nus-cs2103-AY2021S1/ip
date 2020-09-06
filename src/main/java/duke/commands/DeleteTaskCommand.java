@@ -15,7 +15,7 @@ import duke.tasks.Task;
  */
 public class DeleteTaskCommand extends Command {
     /**
-     * Class constructor.
+     * Initializes a delete task command.
      *
      * @param input User input.
      */

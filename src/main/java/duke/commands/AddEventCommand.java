@@ -15,7 +15,7 @@ import duke.tasks.Event;
  */
 public class AddEventCommand extends Command {
     /**
-     * Class constructor.
+     * Initializes an add event command.
      *
      * @param input User input.
      */

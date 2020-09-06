@@ -8,7 +8,7 @@ import duke.TaskManager;
  */
 public class ListCommand extends Command {
     /**
-     * Class constructor.
+     * Initializes a command that lists all tasks.
      *
      * @param input User input.
      */

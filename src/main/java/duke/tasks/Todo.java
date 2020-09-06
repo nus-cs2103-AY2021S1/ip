@@ -8,7 +8,7 @@ import duke.exceptions.DukeException;
 public class Todo extends Task {
 
     /**
-     * Class constructor specifying whether the todo is complete.
+     * Initializes a todo specifying whether the todo is complete.
      *
      * @param content Contents of the todo.
      * @param isComplete Completion status of the todo.
@@ -19,7 +19,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Class constructor.
+     * Initializes an incomplete todo.
      *
      * @param content Contents of the todo.
      * @throws DukeException If an exception related to Duke occurred.
