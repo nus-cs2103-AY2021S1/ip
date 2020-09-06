@@ -50,18 +50,27 @@ public class Storage {
         //read from file
         BufferedReader reader = Files.newBufferedReader(file);
         List<Task> tasks = new ArrayList<>(); //this does not update this.todos
-        String currentLine;
-        while ((currentLine = reader.readLine()) != null) {
+//        while ((currentLine = reader.readLine()) != null) {
+//            try {
+//                System.out.println(currentLine);
+//                Task task = parseData(currentLine);
+//                tasks.add(task);
+//            } catch (StorageException e) {
+//                System.out.println(e.getMessage());
+//            } catch (DukeException d) {
+//                System.out.println(d.getMessage());
+//            }
+//        }
+        reader.lines().forEach(line -> {
             try {
-                System.out.println(currentLine);
-                Task task = parseData(currentLine);
+                Task task = parseData(line);
                 tasks.add(task);
             } catch (StorageException e) {
                 System.out.println(e.getMessage());
             } catch (DukeException d) {
                 System.out.println(d.getMessage());
             }
-        }
+        });
         return tasks;
     }
 
@@ -216,36 +225,12 @@ public class Storage {
                     stored = String.format("%s | %d | %s", type, status ? 1 : 0, taskName);
 
                 } else if (type.equals("E")) {
-                    Event event = (Event) task;
-                    LocalDate date = event.getEventDate();
-                    LocalTime startTime = event.getStartTime();
-                    LocalTime endTime = event.getEndTime();
 
-                    if (startTime == null && endTime == null) {
-                        stored = String.format(
-                            "%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
-                    } else if (endTime == null) {
-                        stored = String.format("%s | %d | %s | %s | %s",
-                            type, status ? 1 : 0, taskName, date, startTime);
-                    } else {
-                        stored = String.format("%s | %d | %s | %s | %s-%s",
-                            type, status ? 1 : 0, taskName, date, startTime, endTime);
-                    }
+                    stored = updateEventData(task);
 
                 } else if (type.equals("D")) {
-                    Deadline deadline = (Deadline) task;
-                    LocalDate date = deadline.getDeadline();
-                    LocalTime time = deadline.getDeadlineTime();
 
-                    if (time == null) {
-                        stored = String.format("%s | %d | %s | %s",
-                            type, status ? 1 : 0, taskName, date);
-                    } else {
-                        stored = String.format("%s | %d | %s | %s | %s",
-                            type, status ? 1 : 0, taskName, date, time);
-
-                    }
-
+                    stored = updateDeadlineData(task);
                 }
                 writer.write(stored);
                 writer.newLine();
@@ -257,4 +242,51 @@ public class Storage {
         }
     }
 
+
+    public static String updateEventData(Task task) {
+        String type = task.getType();
+        Boolean status = task.getStatus();
+        String taskName = task.getDescription();
+        String stored = "";
+        Event event = (Event) task;
+
+        LocalDate date = event.getDate();
+        LocalTime startTime = event.getStartTime();
+        LocalTime endTime = event.getEndTime();
+
+        if (startTime == null && endTime == null) {
+            stored = String.format(
+                "%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
+        } else if (endTime == null) {
+            stored = String.format("%s | %d | %s | %s | %s",
+                type, status ? 1 : 0, taskName, date, startTime);
+        } else {
+            stored = String.format("%s | %d | %s | %s | %s-%s",
+                type, status ? 1 : 0, taskName, date, startTime, endTime);
+        }
+
+        return stored;
+    }
+
+    public static String updateDeadlineData(Task task) {
+        String type = task.getType();
+        Boolean status = task.getStatus();
+        String taskName = task.getDescription();
+        String stored = "";
+        Deadline deadline = (Deadline) task;
+
+        LocalDate date = deadline.getDeadline();
+        LocalTime time = deadline.getTime();
+
+        if (time == null) {
+            stored = String.format("%s | %d | %s | %s",
+                type, status ? 1 : 0, taskName, date);
+        } else {
+            stored = String.format("%s | %d | %s | %s | %s",
+                type, status ? 1 : 0, taskName, date, time);
+
+        }
+
+        return stored;
+    }
 }
