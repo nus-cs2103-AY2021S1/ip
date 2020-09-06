@@ -7,6 +7,9 @@ import java.util.TimerTask;
 import duke.exception.DukeFrequencyNotFoundException;
 import duke.exception.DukeInputNotRecognizedException;
 
+/**
+ * Represents a RecurringTask.
+ */
 public class RecurringTask extends Task {
     enum Frequency {
         DAILY, WEEKLY, MONTHLY, TEST;
@@ -16,7 +19,14 @@ public class RecurringTask extends Task {
     private String time;
     private Timer timer = new Timer();
 
-    protected RecurringTask(String description, String date) {
+
+    /**
+     * Constructs a RecurringTask object
+     *
+     * @param description Description of task.
+     * @param date Either Daily, weekly or monthly.
+     */
+    private RecurringTask(String description, String date) {
         super(description);
         this.date = date;
     }
@@ -33,11 +43,15 @@ public class RecurringTask extends Task {
         return date;
     }
 
+
     /**
-     * @param description
-     * @param date
-     * @return
-     * @throws DukeFrequencyNotFoundException
+     * Creates an RecurringTask object.
+     *
+     * @param description Description of task.
+     * @param date Either Daily, weekly or monthly.
+     * @param time A string that contains the time for the task.
+     * @return RecurringTask.
+     * @throws DukeInputNotRecognizedException Input not recognized as time is not in correct format.
      */
     public static RecurringTask createRecurringTask(String description, String date, String time)
             throws DukeInputNotRecognizedException {
@@ -57,9 +71,11 @@ public class RecurringTask extends Task {
     }
 
     /**
-     * @param date
-     * @return
-     * @throws DukeFrequencyNotFoundException
+     * Calculates how long before the recurring task will undo itself.
+     *
+     * @param date Either daily, weekly or monthly.
+     * @return A long that contains the time for the next undo.
+     * @throws DukeFrequencyNotFoundException User input is not daily, weekly or monthly.
      */
     protected static long getTimeDelay(String date) throws DukeFrequencyNotFoundException {
         Calendar calendar = Calendar.getInstance();
@@ -102,8 +118,12 @@ public class RecurringTask extends Task {
         return false;
     }
 
+
     /**
-     * @param date
+     * Schedules the task to be repeated.
+     *
+     * @param date Either daily, weekly or monthly.
+     * @param calendar Calender object.
      * @throws DukeFrequencyNotFoundException
      */
     public void repeatTask(String date, Calendar calendar) throws DukeFrequencyNotFoundException {
@@ -117,14 +137,14 @@ public class RecurringTask extends Task {
     }
 
     /**
-     *
+     * Cancels the timer.
      */
     public void cancelRepeat() {
         timer.cancel();
     }
 
     /**
-     * Converts a Deadline object to a string.
+     * Converts a RecurringTask object to a string.
      *
      * @return A string displaying the task and its status.
      */

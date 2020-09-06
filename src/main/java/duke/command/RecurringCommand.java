@@ -38,10 +38,19 @@ public class RecurringCommand extends Command {
         return ui.showTask(recurringTask, tasks.getTasks().size());
     }
 
+    /**
+     * Creates a RecurrringTask object.
+     *
+     * @param frequency Either Daily, Weekly or Monthly.
+     * @param taskDetails Details of task.
+     * @return RecurringTask.
+     * @throws DukeFrequencyNotFoundException No frequency is inputted by user.
+     * @throws DukeInputNotRecognizedException Input time is not in correct format.
+     */
     private RecurringTask handleRecurring(String frequency, String[] taskDetails)
             throws DukeFrequencyNotFoundException, DukeInputNotRecognizedException {
         if (taskDetails.length < 2) {
-            throw new DukeFrequencyNotFoundException("Please give a time for daily recurring tasks.");
+            throw new DukeFrequencyNotFoundException("Please give a time for recurring tasks.");
         }
         String time = taskDetails[1];
         if (time.length() > 4) {

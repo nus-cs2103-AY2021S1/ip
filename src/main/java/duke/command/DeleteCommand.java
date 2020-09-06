@@ -39,7 +39,8 @@ public class DeleteCommand extends Command {
             throw new DukeTaskNotFoundException(" ERROR... TASK NOT FOUND. \n PLEASE TRY AGAIN ");
         }
         if (tasks.getTasks().get(taskNumber) instanceof RecurringTask) {
-            ((RecurringTask) tasks.getTasks().get(taskNumber)).cancelRepeat();
+            RecurringTask recurringTask = (RecurringTask) tasks.getTasks().get(taskNumber);
+            recurringTask.cancelRepeat();
         }
         Task removedTask = tasks.getTasks().remove(taskNumber);
         return ui.showDeletedTask(removedTask, tasks.getTasks().size());

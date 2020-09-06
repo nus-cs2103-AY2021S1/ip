@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exception.DukeFileNotFoundException;
-import duke.exception.DukeFrequencyNotFoundException;
 import duke.exception.DukeInputNotRecognizedException;
 import duke.task.Deadline;
 import duke.task.Event;
