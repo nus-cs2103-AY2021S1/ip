@@ -13,12 +13,17 @@ public class Event extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * Represents a Event task.
+     * @param description information for the task itself
+     * @param at information for the time and date of occurrence
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;
         String[] timeComponent = at.split(" ");
         this.date = LocalDate.parse(format(timeComponent[0].trim()));
-        String hour = timeComponent[1].substring(0,2);
+        String hour = timeComponent[1].substring(0, 2);
         String minute = timeComponent[1].substring(2);
         this.time = LocalTime.of(Integer.parseInt(hour),
                 Integer.parseInt(minute));
@@ -29,8 +34,7 @@ public class Event extends Task {
         if (component[0].length() == 1) {
             component[0] = "0" + component[0];
         }
-        return component[2] + "-" + component[1] +
-                "-" + component[0];
+        return component[2] + "-" + component[1] + "-" + component[0];
     }
 
     @Override

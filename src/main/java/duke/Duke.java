@@ -1,27 +1,27 @@
 package duke;
 
+import duke.command.Command;
 import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
-import duke.command.Command;
-import duke.parser.Parser;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Duke extends Application{
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -35,6 +35,10 @@ public class Duke extends Application{
     private Image user = new Image(this.getClass().getResourceAsStream("/images/User.jfif"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.jpg"));
 
+    /**
+     * Represents a Duke object that servers as a tracking bot
+     * @param filePath the path for the file which will be loaded into the app
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.tasks = new TaskList();
@@ -189,7 +193,7 @@ public class Duke extends Application{
             userInput.setDisable(true);
             sendButton.setDisable(true);
             PauseTransition delay = new PauseTransition(Duration.seconds(2));
-            delay.setOnFinished( event -> stage.close() );
+            delay.setOnFinished(event -> stage.close());
             delay.play();
         }
     }

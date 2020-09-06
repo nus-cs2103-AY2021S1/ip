@@ -1,6 +1,7 @@
 package duke.ui;
 
 import java.util.Scanner;
+
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
@@ -9,11 +10,9 @@ import duke.tasklist.TaskList;
  * This includes reading user input and displaying the correspondent output.
  */
 public class Ui {
-    private final String LINE_BREAK = "   ____________________________" +
-            "________________________________";
-    private final String SPACE1 = "    ";
-    private final String SPACE2 = "     ";
-    private final String LOGO = " ____        _\n"
+    private final String lineBreak = "   ____________________________"
+            + "________________________________";
+    private final String logo = " ____        _\n"
             + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -25,7 +24,7 @@ public class Ui {
     }
 
     public String showWelcome() {
-        return "Hello from\n" + LOGO + "\nHey, I'm Emilia \u2764 !\nWhat can I do for you?";
+        return "Hello from\n" + logo + "\nHey, I'm Emilia \u2764 !\nWhat can I do for you?";
     }
 
     public String showError(String errorMessage) {
@@ -36,7 +35,7 @@ public class Ui {
         return errorMessage + "\n" + "Initialize an empty TaskList!\n";
     }
     public void showLine() {
-        System.out.println(LINE_BREAK);
+        System.out.println(lineBreak);
     }
 
     public String readLine() {
@@ -59,18 +58,30 @@ public class Ui {
         return "Understood, I've marked this task as done:\n" + task;
     }
 
+    /**
+     * Represents the text message to be displayed upon a DeleteCommand.
+     * @param task the task being deleted
+     * @param list list of tasks
+     * @return confirm message for delete command
+     */
     public String showDelete(Task task, TaskList list) {
-        return "Understood, I've deleted this task\n" + task + "\n" + "You have " +
-                list.getSize() + " tasks in your list now!";
+        return "Understood, I've deleted this task\n" + task + "\n" + "You have "
+                + list.getSize() + " tasks in your list now!";
     }
 
     public String showCheck() {
         return "Hey! I have printed out the tasks that match the date:";
     }
 
+    /**
+     * Represents the text message to be displayed upon a AddCommand.
+     * @param current task being added
+     * @param list list of tasks
+     * @return confirm message for AddCommand
+     */
     public String showAdd(Task current, TaskList list) {
-        return "Understood! I've added this task:\n" + current + "\n You have " +
-                list.getSize() + " tasks in your list now!";
+        return "Understood! I've added this task:\n" + current + "\n You have "
+                + list.getSize() + " tasks in your list now!";
     }
 
     public String showFind() {

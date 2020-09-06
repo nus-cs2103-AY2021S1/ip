@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class FindCommand extends Command {
     private final String target;
@@ -28,7 +28,7 @@ public class FindCommand extends Command {
             }
         }
 
-        if(!hasFound) {
+        if (!hasFound) {
             out = ui.showNothingFound();
         }
         return out;
