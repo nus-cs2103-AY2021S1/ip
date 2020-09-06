@@ -80,16 +80,16 @@ public class Parser {
     static AddCommand createAddCommand(String[] stringArray) throws DukeException {
         Task taskToAdd = null;
         if (stringArray[0].equals(Duke.TaskType.TODO.name)) {
-            taskToAdd = todo(stringArray);
+            taskToAdd = createTodoTask(stringArray);
         } else if (stringArray[0].equals(Duke.TaskType.DEADLINE.name)) {
-            taskToAdd = deadline(stringArray);
+            taskToAdd = createDeadlineTask(stringArray);
         } else if (stringArray[0].equals(Duke.TaskType.EVENT.name)) {
-            taskToAdd = event(stringArray);
+            taskToAdd = createEventTask(stringArray);
         }
         return new AddCommand(taskToAdd);
     }
 
-    static ToDo todo(String[] stringArray) throws DukeException {
+    static ToDo createTodoTask(String[] stringArray) throws DukeException {
         if (stringArray.length == 1) {
             throw new DukeException("Oops! A todo task needs a description.");
         } else {
@@ -100,7 +100,7 @@ public class Parser {
         }
     }
 
-    static Deadline deadline(String[] stringArray) throws DukeException {
+    static Deadline createDeadlineTask(String[] stringArray) throws DukeException {
         int indexOfBy = -1;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals("/by")) {
@@ -126,7 +126,7 @@ public class Parser {
     }
 
     // Takes input as a string array, then adds a new event to list, then prints the message
-    static Event event(String[] stringArray) throws DukeException {
+    static Event createEventTask(String[] stringArray) throws DukeException {
         int indexOfAt = -1;
         for (int i = 0; i < stringArray.length; i++) {
             if (stringArray[i].equals("/at")) {
