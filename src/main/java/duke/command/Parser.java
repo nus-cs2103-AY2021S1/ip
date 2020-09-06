@@ -62,7 +62,7 @@ public class Parser {
             case ("undo"):
             case ("done"):
             case ("delete"):
-            case("find"):
+            case ("find"):
                 return this.processList(com, index);
             case ("todo"):
             case ("deadline"):
@@ -71,6 +71,7 @@ public class Parser {
             default:
                 throw new DukeException("Sorry, I did not understand: " + command
                         + "\nUse \"help\" to look at available commands.");
+            }
         } else {
             switch (command) {
             case (""):
