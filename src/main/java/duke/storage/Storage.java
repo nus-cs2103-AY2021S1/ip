@@ -120,6 +120,7 @@ public class Storage {
             default:
             }
 
+            assert task != null : "Task cannot be null!";
             tasks.add(task);
         }
 
