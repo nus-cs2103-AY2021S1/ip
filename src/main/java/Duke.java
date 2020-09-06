@@ -38,13 +38,13 @@ public class Duke {
         try {
             Command command = parser.parse(input, this.taskList);
             response = command.execute();
-            if (response.equals("exit")) {
-                // Save tasks before terminating program
-                this.storage.saveTasks(this.taskList.tasks);
-                return this.ui.goodbye();
-            }
         } catch (DukeException ex) {
             response = ex.getMessage();
+        }
+        if (response.equals("exit")) {
+            // Save tasks before terminating program
+            this.storage.saveTasks(this.taskList.tasks);
+            response = this.ui.goodbye();
         }
         return response;
     }
