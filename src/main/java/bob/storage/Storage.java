@@ -28,10 +28,12 @@ public class Storage {
     public Storage(String filePath) throws IOException {
         File tempFile = new File(filePath);
 
-        // If file does not exist, creates file in directory
-        if (!tempFile.exists()) {
+        boolean doesNotExist = !tempFile.exists();
+
+        if (doesNotExist) {
             tempFile.createNewFile();
         }
+
         this.file = tempFile;
         this.filePath = filePath;
     }
@@ -45,8 +47,7 @@ public class Storage {
     public ArrayList<Task> getList() throws FileNotFoundException, BobInvalidDateAndTimeException {
         Scanner scanner = new Scanner(this.file);
         ArrayList<Task> list = new ArrayList<>();
-        // Format of task in file is "D/0/return book/June 6th"
-        // where "0" means undone while "1" means done
+
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] split = line.split("/");
@@ -96,9 +97,11 @@ public class Storage {
     public void updateFile(ArrayList<Task> list) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         StringBuilder textToAdd = new StringBuilder();
+
         for (Task task : list) {
             textToAdd.append(task.convertToStringData()).append(System.lineSeparator());
         }
+
         fw.write(textToAdd.toString());
         fw.close();
     }
