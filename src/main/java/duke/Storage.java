@@ -50,17 +50,7 @@ public class Storage {
         //read from file
         BufferedReader reader = Files.newBufferedReader(file);
         List<Task> tasks = new ArrayList<>(); //this does not update this.todos
-//        while ((currentLine = reader.readLine()) != null) {
-//            try {
-//                System.out.println(currentLine);
-//                Task task = parseData(currentLine);
-//                tasks.add(task);
-//            } catch (StorageException e) {
-//                System.out.println(e.getMessage());
-//            } catch (DukeException d) {
-//                System.out.println(d.getMessage());
-//            }
-//        }
+
         reader.lines().forEach(line -> {
             try {
                 Task task = parseData(line);
@@ -243,6 +233,11 @@ public class Storage {
     }
 
 
+    /**
+     * Updates the Event data in the file.
+     *
+     * @param task Event task.
+     */
     public static String updateEventData(Task task) {
         String type = task.getType();
         Boolean status = task.getStatus();
@@ -250,7 +245,7 @@ public class Storage {
         String stored = "";
         Event event = (Event) task;
 
-        LocalDate date = event.getDate();
+        LocalDate date = event.getEventDate();
         LocalTime startTime = event.getStartTime();
         LocalTime endTime = event.getEndTime();
 
@@ -268,6 +263,11 @@ public class Storage {
         return stored;
     }
 
+    /**
+     * Updates the Deadline data in the file.
+     *
+     * @param task Deadline task.
+     */
     public static String updateDeadlineData(Task task) {
         String type = task.getType();
         Boolean status = task.getStatus();
@@ -276,7 +276,7 @@ public class Storage {
         Deadline deadline = (Deadline) task;
 
         LocalDate date = deadline.getDeadline();
-        LocalTime time = deadline.getTime();
+        LocalTime time = deadline.getDeadlineTime();
 
         if (time == null) {
             stored = String.format("%s | %d | %s | %s",
