@@ -5,6 +5,7 @@ import java.io.IOException;
 import exception.AnonymousException;
 import exception.DescriptionException;
 import exception.DukeDateTimeParserException;
+import exception.DukeInvalidIndexException;
 import exception.DukeKeywordException;
 import exception.NoIndexException;
 import storage.Storage;
@@ -64,7 +65,7 @@ public abstract class Command {
      * @throws DukeKeywordException Thrown when user failed to specify the keyword in the command.
      */
     public abstract String execute (TaskList tasks, Ui ui, Storage storage) throws IOException, AnonymousException,
-            DescriptionException, DukeDateTimeParserException, NoIndexException, DukeKeywordException;
+            DescriptionException, DukeDateTimeParserException, NoIndexException, DukeKeywordException, DukeInvalidIndexException;
 
     /**
      * A getter method that returns the state whether a program is ready to exit or not.
