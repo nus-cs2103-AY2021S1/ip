@@ -25,6 +25,8 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
     
     private DialogBox(String text, Image img) {
+        assert text.length() > 0 : "Dialogbox cannot have empty text";
+        
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(DialogBox.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
