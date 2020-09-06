@@ -58,7 +58,7 @@ public class Storage {
      * @return An ArrayList of Tasks.
      * @throws FileNotFoundException If the file does not exist in the FilePath.
      */
-    public ArrayList<Task> load() throws FileNotFoundException{
+    public ArrayList<Task> load() throws FileNotFoundException {
         String contentsInString = Storage.readFileContents(this.filePath);
         return createTaskList(contentsInString);
     }
@@ -88,10 +88,9 @@ public class Storage {
         String dataToSave = "";
         for (int i = 0; i < taskList.size(); i++) {
             Task currentTask = taskList.get(i);
-            if (i == taskList.size() - 1){
+            if (i == taskList.size() - 1) {
                 dataToSave += currentTask.toText();
-            }
-            else {
+            } else {
                 dataToSave += currentTask.toText() + System.lineSeparator();
             }
         }
