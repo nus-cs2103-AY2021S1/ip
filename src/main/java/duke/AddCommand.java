@@ -1,5 +1,4 @@
 package duke;
-
 import java.time.LocalDate;
 
 
@@ -62,6 +61,8 @@ public class AddCommand extends Command {
                 newTask = new Deadline(deadlineDesc, deadline, false);
             }
             break;
+        default:
+            assert false : actionType; // only one of the three commands belongs to addcommand
         }
 
         tasks.addTask(newTask);
