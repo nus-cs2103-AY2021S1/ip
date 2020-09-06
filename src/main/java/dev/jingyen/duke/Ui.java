@@ -47,6 +47,7 @@ public class Ui {
      * @param count the number of tasks
      */
     public String displayGreetingReminder(int count) {
+        assert count >= 0;
         if (count == 0) {
             return "";
         }

@@ -55,6 +55,8 @@ public class TaskParser {
      * @return an dev.jingyen.duke.model.Event dev.jingyen.duke.model.Task
      */
     public static Event parseEvent(boolean isDone, String taskName, String timeRangeStr) {
+        assert taskName != null;
+        assert timeRangeStr != null;
         return new Event(isDone, taskName, timeRangeStr);
     }
 
@@ -70,6 +72,8 @@ public class TaskParser {
     public static Deadline parseDeadline(boolean isDone, String taskName, String deadlineStr)
             throws DateTimeParseException {
         // TODO: 26/8/20 Handle DateTimeParseException
+        assert taskName != null;
+        assert deadlineStr != null;
         LocalDate deadline = LocalDate.parse(deadlineStr);
         return new Deadline(isDone, taskName, deadline);
     }
@@ -82,6 +86,7 @@ public class TaskParser {
      * @return a dev.jingyen.duke.model.Todo dev.jingyen.duke.model.Task
      */
     public static Todo parseTodo(boolean isDone, String taskName) {
+        assert taskName != null;
         return new Todo(isDone, taskName);
     }
 
@@ -95,6 +100,8 @@ public class TaskParser {
      */
     // TODO: Consider some cleaner way of validating, perhaps a factory method for each dev.jingyen.duke.model.Task
     public static Task parseInput(String command, String input) throws InvalidTaskException {
+        assert command != null && !command.isBlank();
+        assert input != null && !input.isBlank();
         switch (command) {
         case "todo":
             String[] todoDetails = input.split("todo ");

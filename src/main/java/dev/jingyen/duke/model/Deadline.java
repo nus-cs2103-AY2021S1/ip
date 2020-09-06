@@ -33,6 +33,7 @@ public class Deadline extends Task {
      */
     public Deadline(boolean isDone, String taskName, LocalDate deadline) {
         super(isDone, taskName);
+        assert deadline != null;
         this.deadline = deadline;
     }
 

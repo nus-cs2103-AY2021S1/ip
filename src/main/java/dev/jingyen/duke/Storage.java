@@ -57,6 +57,7 @@ public class Storage {
      * @throws IOException if a problem was encountered while trying to access the file at <code>filePath</code>
      */
     public void saveTasks(List<Task> tasks) throws IOException {
+        assert tasks != null;
         File saveFile = new File(this.filePath);
         if (!saveFile.exists()) {
             boolean directoryCreated = saveFile.getParentFile().mkdirs();

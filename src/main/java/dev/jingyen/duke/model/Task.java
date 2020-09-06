@@ -16,6 +16,7 @@ public abstract class Task {
     }
 
     public Task(boolean isDone, String taskName) {
+        assert taskName != null && !taskName.isBlank();
         this.isDone = isDone;
         this.taskName = taskName;
     }

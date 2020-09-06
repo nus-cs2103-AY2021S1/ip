@@ -11,11 +11,13 @@ public class Event extends Task {
 
     public Event(String taskName, String timeRange) {
         super(taskName);
+        assert timeRange != null && !timeRange.isBlank();
         this.timeRange = timeRange;
     }
 
     public Event(boolean isDone, String taskName, String timeRange) {
         super(isDone, taskName);
+        assert timeRange != null && !timeRange.isBlank();
         this.timeRange = timeRange;
     }
 
