@@ -1,5 +1,9 @@
+package juke;
+
+import juke.command.Command;
+
 /**
- * The Ui class holds commonly used phrases used by the bot to
+ * The juke.Ui class holds commonly used phrases used by the bot to
  * communicate with the user.
  */
 public class Ui {

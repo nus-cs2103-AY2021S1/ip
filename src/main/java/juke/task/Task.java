@@ -1,5 +1,7 @@
+package juke.task;
+
 /**
- * A Task class is a general class that represents a Task.
+ * A juke.task.Task class is a general class that represents a juke.task.Task.
  * It has a Description, and boolean whether it is done or not.
  */
 public class Task {
@@ -12,7 +14,7 @@ public class Task {
     }
 
     /**
-     * Gets the appropriate icon to represent current Done status of task.
+     * Gets the appropriate icon to represent current Done status of juke.task.
      * @return Icon String.
      */
     public String getStatusIcon() {
@@ -20,14 +22,14 @@ public class Task {
     }
 
     /**
-     * Marks Task as Done.
+     * Marks juke.task.Task as Done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Returns the representative text of the Task.
+     * Returns the representative text of the juke.task.Task.
      * @return Representative text.
      */
     public String taskSaver() {
@@ -35,9 +37,13 @@ public class Task {
         return doneStatus + "/" + description;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
-     * Outputs the Task as a String.
-     * @return String representation of Task.
+     * Outputs the juke.task.Task as a String.
+     * @return String representation of juke.task.Task.
      */
     @Override
     public String toString() {

@@ -1,9 +1,11 @@
+package juke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A Deadline class that represents a Task with a deadline.
- * It has a Task description, as well as a deadline date.
+ * A juke.task.Deadline class that represents a juke.task.Task with a deadline.
+ * It has a juke.task.Task description, as well as a deadline date.
  */
 public class Deadline extends Task {
 
@@ -15,7 +17,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the representative text of the Deadline.
+     * Returns the representative text of the juke.task.Deadline.
      * @return Representative text.
      */
     @Override
@@ -25,8 +27,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Outputs the Deadline as a String.
-     * @return String representation of Deadline.
+     * Outputs the juke.task.Deadline as a String.
+     * @return String representation of juke.task.Deadline.
      */
     @Override
     public String toString() {

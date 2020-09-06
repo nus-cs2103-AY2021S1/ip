@@ -1,7 +1,11 @@
+package juke;
+
+import juke.task.Task;
+
 import java.util.ArrayList;
 
 /**
- * The TaskList class holds and manages the current list of Tasks stored
+ * The juke.TaskList class holds and manages the current list of Tasks stored
  * by the user.
  */
 public class TaskList {
@@ -14,7 +18,7 @@ public class TaskList {
     /**
      * Prints a list of current tasks.
      */
-    protected String printList() {
+    public String printList() {
         StringBuilder output = new StringBuilder();
         for (int i = 1; i <= this.list.size(); i++) {
             output.append(i).append(". ").append(this.list.get(i - 1)).append("\n");
@@ -23,11 +27,11 @@ public class TaskList {
     }
 
     /**
-     * Removes a task from the list of current tasks.
+     * Removes a juke.task from the list of current tasks.
      *
-     * @param taskNo Index of task to remove.
+     * @param taskNo Index of juke.task to remove.
      */
-    protected String removeFromList(int taskNo) {
+    public String removeFromList(int taskNo) {
         StringBuilder output = new StringBuilder();
         Task removedTask = this.list.remove(taskNo);
         output.append("Well, if you insist. I've removed:\n")
@@ -36,13 +40,13 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the list of current tasks.
+     * Adds a juke.task to the list of current tasks.
      *
-     * @param task Task to be added.
+     * @param task juke.task.Task to be added.
      */
-    protected String addToList(Task task) {
+    public String addToList(Task task) {
         StringBuilder output = new StringBuilder();
-        output.append("Alright matey, I've added this task:\n");
+        output.append("Alright matey, I've added this juke.task:\n");
         this.list.add(task);
         output.append(task)
                 .append("\n")
@@ -53,25 +57,25 @@ public class TaskList {
     }
 
     /**
-     * Marks a task in list of current tasks as completed.
+     * Marks a juke.task in list of current tasks as completed.
      *
-     * @param taskNo Index of task to mark.
+     * @param taskNo Index of juke.task to mark.
      */
-    protected String makeTaskDone(int taskNo) {
+    public String makeTaskDone(int taskNo) {
         StringBuilder output = new StringBuilder();
         Task toBeDone = this.list.get(taskNo);
         toBeDone.markAsDone();
         this.list.set(taskNo, toBeDone);
-        output.append("Good Job, this task is now done:\n").append(toBeDone);
+        output.append("Good Job, this juke.task is now done:\n").append(toBeDone);
         return output.toString();
     }
 
-    protected String findTasks(String keyword) {
+    public String findTasks(String keyword) {
         StringBuilder output = new StringBuilder();
         int count = 0;
         for (int i = 0; i < this.list.size(); i++) {
             Task task = this.list.get(i);
-            String description = task.description;
+            String description = task.getDescription();
             boolean thereIsMatch = description.matches(".*\\b" + keyword + "\\b.*");
             if (thereIsMatch) {
                 if (count == 0) {

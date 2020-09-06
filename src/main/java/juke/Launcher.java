@@ -1,3 +1,5 @@
+package juke;
+
 import javafx.application.Application;
 
 /**

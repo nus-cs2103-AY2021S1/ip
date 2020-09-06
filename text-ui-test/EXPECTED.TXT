@@ -3,7 +3,7 @@ Yo what's up! The name's Juke
 What do you need?
 ___________________________________________________
 ___________________________________________________
-Alright matey, I've added this task:
+Alright matey, I've added this juke.task:
 [T][?] Shopping
 Looks like you have 1 tasks in total.
 ___________________________________________________
@@ -11,17 +11,17 @@ ___________________________________________________
 1. [T][?] Shopping
 ___________________________________________________
 ___________________________________________________
-Alright matey, I've added this task:
+Alright matey, I've added this juke.task:
 [D][?]  CS2103T Project  (by: Thursday Night)
 Looks like you have 2 tasks in total.
 ___________________________________________________
 ___________________________________________________
-Alright matey, I've added this task:
+Alright matey, I've added this juke.task:
 [E][?]  National Day Holiday  (at: August 9)
 Looks like you have 3 tasks in total.
 ___________________________________________________
 ___________________________________________________
-Good Job, this task is now done:
+Good Job, this juke.task is now done:
 [E][?]  National Day Holiday  (at: August 9)
 ___________________________________________________
 ___________________________________________________

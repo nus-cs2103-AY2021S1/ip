@@ -1,8 +1,8 @@
-package exception;
+package juke.exception;
 
 /**
  * Represents a DukeExceptions.DukeException when a user does not input a time
- * for a Task.
+ * for a juke.task.Task.
  */
 public class EmptyTimeException extends DukeException {
     public EmptyTimeException(String message) {

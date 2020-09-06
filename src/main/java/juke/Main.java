@@ -1,3 +1,5 @@
+package juke;
+
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -7,11 +9,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for juke.Duke using FXML.
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Juke Juke = new Juke();
 
     @Override
     public void start(Stage stage) {
@@ -20,7 +22,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(Juke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,4 +1,7 @@
+import juke.Parser;
 import org.junit.jupiter.api.Test;
+import juke.task.Event;
+import juke.task.Todo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

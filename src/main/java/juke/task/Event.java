@@ -1,9 +1,11 @@
+package juke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * An Event class that represents a Task that occurs on a day.
- * It has a Task Description, as well as a Event date.
+ * An juke.task.Event class that represents a juke.task.Task that occurs on a day.
+ * It has a juke.task.Task Description, as well as a juke.task.Event date.
  */
 public class Event extends Task {
 
@@ -15,7 +17,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the representative text of the Event.
+     * Returns the representative text of the juke.task.Event.
      * @return Representative text.
      */
     @Override
@@ -25,8 +27,8 @@ public class Event extends Task {
     }
 
     /**
-     * Outputs the Event as a String.
-     * @return String representation of Event.
+     * Outputs the juke.task.Event as a String.
+     * @return String representation of juke.task.Event.
      */
     @Override
     public String toString() {

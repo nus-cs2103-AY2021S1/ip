@@ -1,11 +1,26 @@
-import exception.EmptyDescriptionException;
-import exception.EmptyTimeException;
-import exception.UnknownCommandException;
-import exception.UnknownTaskException;
-import exception.UnknownTimeException;
+package juke;
+
+import juke.exception.EmptyDescriptionException;
+import juke.exception.EmptyTimeException;
+import juke.exception.UnknownCommandException;
+import juke.exception.UnknownTaskException;
+import juke.exception.UnknownTimeException;
+
+import juke.task.Deadline;
+import juke.task.Event;
+import juke.task.Todo;
+
+import juke.command.Command;
+import juke.command.TaskCommand;
+import juke.command.ExitCommand;
+import juke.command.DeleteCommand;
+import juke.command.ErrorCommand;
+import juke.command.FindCommand;
+import juke.command.ListCommand;
+import juke.command.DoneCommand;
 
 /**
- * Represents the Parser class, that interprets user input commands.
+ * Represents the juke.Parser class, that interprets user input commands.
  */
 public class Parser {
 
@@ -22,23 +37,23 @@ public class Parser {
 
             if (command.equals("find")) {
                 String keyword = splitArr[1];
-                return new Command("find", keyword);
+                return new FindCommand(keyword);
             } else if (command.equals("bye")) {
-                return new Command("bye");
+                return new ExitCommand();
             } else if (command.equals("list")) {
-                return new Command("list");
+                return new ListCommand();
             } else if (command.equals("done")) {
                 if (splitArr.length == 1) {
-                    throw new UnknownTaskException("No task number entered");
+                    throw new UnknownTaskException("No juke.task number entered");
                 }
                 int taskNo = Integer.parseInt(splitArr[1]) - 1;
-                return new Command("done", taskNo);
+                return new DoneCommand(taskNo);
             } else if (command.equals("todo")) {
                 if (inputText.length() <= 5) {
                     throw new EmptyDescriptionException("No Description entered");
                 }
                 String description = inputText.substring(5);
-                return new Command("todo", new Todo(description));
+                return new TaskCommand(new Todo(description));
 
             } else if (command.equals("deadline")) {
                 if (inputText.length() <= 9) {
@@ -53,7 +68,7 @@ public class Parser {
                 }
                 String description = newSplitArr[0];
                 String by = newSplitArr[1];
-                return new Command("deadline", new Deadline(description, by));
+                return new TaskCommand(new Deadline(description, by));
             } else if (command.equals("event")) {
                 if (inputText.length() <= 6) {
                     throw new EmptyDescriptionException("No Description entered");
@@ -67,26 +82,26 @@ public class Parser {
                 }
                 String description = newSplitArr[0];
                 String at = newSplitArr[1];
-                return new Command("event", new Event(description, at));
+                return new TaskCommand(new Event(description, at));
             } else if (command.equals("delete")) {
                 if (splitArr.length == 1) {
-                    throw new UnknownTaskException("No task number entered");
+                    throw new UnknownTaskException("No juke.task number entered");
                 }
                 int taskNo = Integer.parseInt(splitArr[1]) - 1;
-                return new Command("delete", taskNo);
+                return new DeleteCommand(taskNo);
             } else {
-                throw new UnknownCommandException("Unknown command entered");
+                throw new UnknownCommandException("Unknown juke.command entered");
             }
         } catch (EmptyDescriptionException empty) {
-            return new Command("error", "Mate, you've gotta let me know what you're gonna be doing.");
+            return new ErrorCommand( "Mate, you've gotta let me know what you're gonna be doing.");
         } catch (UnknownCommandException com) {
-            return new Command("error", "Um, are you sure that's not gibberish?");
+            return new ErrorCommand("Um, are you sure that's not gibberish?");
         } catch (UnknownTimeException by) {
-            return new Command("error", "You've gotta let me know the time.");
+            return new ErrorCommand("You've gotta let me know the time.");
         } catch (EmptyTimeException at) {
-            return new Command("error", "There has to be a time, surely. Don't leave it blank!");
+            return new ErrorCommand("There has to be a time, surely. Don't leave it blank!");
         } catch (UnknownTaskException ex) {
-            return new Command("error", "C'mon, I don't live in your head, you gotta tell me the task number!");
+            return new ErrorCommand("C'mon, I don't live in your head, you gotta tell me the juke.task number!");
         }
 
     }

@@ -1,8 +1,8 @@
-package exception;
+package juke.exception;
 
 /**
  * Represents a DukeExceptions.DukeException when a user does not input an appropriate
- * command.
+ * juke.command.
  */
 public class UnknownCommandException extends DukeException {
     public UnknownCommandException(String message) {

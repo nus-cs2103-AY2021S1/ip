@@ -1,3 +1,10 @@
+package juke;
+
+import juke.task.Deadline;
+import juke.task.Event;
+import juke.task.Task;
+import juke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Storage class that handles all the hard-disk storage of the Tasklist.
+ * juke.Storage class that handles all the hard-disk storage of the Tasklist.
  */
 public class Storage {
 
@@ -53,7 +60,7 @@ public class Storage {
      * Checks and identifies storage file (if available), or else
      * creates a new and empty file.
      * @param root User project root path.
-     * @return Storage file.
+     * @return juke.Storage file.
      */
     protected File checkAndCreateFile(String root) {
         try {
