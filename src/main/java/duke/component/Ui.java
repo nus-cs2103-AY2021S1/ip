@@ -6,8 +6,8 @@ import java.util.Scanner;
  * The class that receive user's input and print corresponding responses on the screen.
  */
 public class Ui {
-    public static final String greeting = "\tHello! I'm Duke\n" + "\tWhat can I do for you?";
-    private static final String divider = "\t____________________________________________________________\n";
+    public static final String GREETING = "\tHello! I'm Duke\n" + "\tWhat can I do for you?";
+    private static final String DIVIDER = "\t____________________________________________________________\n";
     private Scanner sc;
 
     /**
@@ -30,7 +30,7 @@ public class Ui {
      * Prints out the response on the screen
      */
     public String giveResponse(String response) {
-        String formattedResponse = divider + response + "\n" + divider;
+        String formattedResponse = DIVIDER + response + "\n" + DIVIDER;
         System.out.println(formattedResponse);
         return response;
     }
@@ -69,7 +69,7 @@ public class Ui {
      * Prints out the welcome message.
      */
     public void welcome() {
-        giveResponse(Ui.greeting);
+        giveResponse(Ui.GREETING);
     }
 
 }
