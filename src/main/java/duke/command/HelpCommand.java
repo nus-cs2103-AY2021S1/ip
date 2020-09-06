@@ -8,7 +8,7 @@ public class HelpCommand implements Command {
 
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
-        return ui.showHelp();
+        return UI.HELP_MESSAGE;
     }
 
     @Override

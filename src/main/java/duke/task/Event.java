@@ -27,6 +27,11 @@ public class Event extends Task {
     }
 
     @Override
+    public LocalDateTime getActualDate() {
+        return time;
+    }
+
+    @Override
     public String toString() {
         return String.format("%s (at: %s)", super.toString(),
                 time.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));

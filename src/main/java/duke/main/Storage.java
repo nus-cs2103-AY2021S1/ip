@@ -47,7 +47,6 @@ public class Storage {
             TaskList taskList = new TaskList();
             File data = new File(filepath);
             Scanner scanner = new Scanner(data);
-            ui.startLoading();
 
             while (scanner.hasNextLine()) {
                 String s = scanner.nextLine();
@@ -80,7 +79,6 @@ public class Storage {
                 }
             }
             scanner.close();
-            ui.loadSuccess();
             return taskList;
         } catch (IOException e) {
             System.out.println("Uh oh! An error has occurred. T_T");
@@ -103,7 +101,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(data);
             PrintWriter writer = new PrintWriter(fileWriter);
 
-            String save = ui.startSaving();
+            String save = UI.SAVE_START;
             for (Task task : taskList) {
                 String s = String.format("%s|%b|%s", task.getTaskType(),
                         task.getIsDone(), task.getDescription());
@@ -114,7 +112,7 @@ public class Storage {
                 writer.println(s);
             }
             writer.close();
-            return save + "\n" + ui.saveSuccess();
+            return save + "\n" + UI.SAVE_SUCCESS;
         } catch (IOException e) {
             System.out.println("Uh oh! An error has occurred. T_T");
             System.out.println(e.getMessage());

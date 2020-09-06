@@ -28,7 +28,6 @@ public class Duke {
      * Runs Duke, the ChatBot.
      */
     public void run() {
-        ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {

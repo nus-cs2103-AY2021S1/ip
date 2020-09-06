@@ -9,7 +9,7 @@ public class ByeCommand implements Command {
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
         storage.saveData(ui, taskList);
-        return ui.showGoodbye();
+        return UI.GOODBYE_MESSAGE;
     }
 
     @Override

@@ -21,4 +21,5 @@ public class CommandTest {
     public void HelpTest() {
         assertEquals(new HelpCommand(), Parser.parse("help"));
     }
+
 }

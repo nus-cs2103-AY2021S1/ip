@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 public class ToDo extends Task {
 
     public ToDo(String description) {
@@ -14,6 +16,11 @@ public class ToDo extends Task {
     @Override
     public String getDate() {
         return "";
+    }
+
+    @Override
+    public LocalDateTime getActualDate() {
+        return LocalDateTime.MAX;
     }
 
 }

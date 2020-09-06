@@ -11,6 +11,20 @@ import duke.task.Task;
 public class UI {
     private static Scanner sc;
 
+    public final static String WELCOME_MESSAGE = " Hello! I'm Duke!";
+
+    public final static String GOODBYE_MESSAGE = " Bye. Hope to see you again soon!\n"
+            + " You can now safely close the app!";
+
+    public final static String HELP_MESSAGE = "Here are the list of commands you can use:\n"
+            + "help, list, save, bye, todo 'TASK', deadline 'TASK' /by 'dd/MM/yyyy HH:mm', "
+            + "event 'TASK' /at 'dd/MM/yyyy HH:mm', done 'n', delete 'n'";
+
+    public final static String SORT_MESSAGE = "Tasks successfully sorted by date!";
+
+    public final static String SAVE_START = "Saving...";
+
+    public final static String SAVE_SUCCESS = "Saved successfully!";
     /**
      * Initialises the UI class.
      */
@@ -25,20 +39,6 @@ public class UI {
      */
     public String readCommand() {
         return sc.nextLine().trim();
-    }
-
-    /**
-     * Displays the welcome message to the user.
-     */
-    public static String showWelcome() {
-        return " Hello! I'm Duke!";
-    }
-
-    /**
-     * Displays the goodbye message to the user.
-     */
-    public String showGoodbye() {
-        return (" Bye. Hope to see you again soon!\nYou can now safely close the app!");
     }
 
     /**
@@ -125,34 +125,6 @@ public class UI {
     }
 
     /**
-     * Displays the start saving message to the user.
-     */
-    public String startSaving() {
-        return "Saving...";
-    }
-
-    /**
-     * Displays the save was successful message to the user.
-     */
-    public String saveSuccess() {
-        return "Saved successfully!";
-    }
-
-    /**
-     * Displays the start loading message to the user.
-     */
-    public void startLoading() {
-        System.out.println("Fetching old data...");
-    }
-
-    /**
-     * Displays the load was successful message to the user.
-     */
-    public void loadSuccess() {
-        System.out.println("Data successfully loaded! ^^");
-    }
-
-    /**
      * Displays the task was successfully done message to the user.
      *
      * @param task The task that was successfully completed
@@ -170,15 +142,6 @@ public class UI {
     public String deleteTask(String task, int n) {
         String s = "Noted. I've removed this task:\n  " + task + "\n";
         return s.concat(displayListSize(n));
-    }
-
-    /**
-     * Displays the help message to the user.
-     */
-    public String showHelp() {
-        return ("Here are the list of commands you can use:\n"
-                + "help, list, save, bye, todo 'TASK', deadline 'TASK' /by 'dd/MM/yyyy HH:mm', "
-                + "event 'TASK' /at 'dd/MM/yyyy HH:mm', done 'n', delete 'n'");
     }
 
 }

@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * The base task class for other tasks class to inherit from.
  */
@@ -38,6 +40,8 @@ public abstract class Task {
     public abstract String getTaskType();
 
     public abstract String getDate();
+
+    public abstract LocalDateTime getActualDate();
 
     @Override
     public String toString() {

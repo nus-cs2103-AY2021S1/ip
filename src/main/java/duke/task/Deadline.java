@@ -27,6 +27,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public LocalDateTime getActualDate() {
+        return dateEnd;
+    }
+
+    @Override
     public String toString() {
         return String.format("%s (by: %s)", super.toString(),
                 dateEnd.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));
