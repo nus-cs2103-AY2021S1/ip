@@ -136,8 +136,8 @@ public class Parser {
             } else {
                 try {
                     String[] secondarr = stringarr[1].split("/by", 2);
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    LocalDate date = LocalDate.parse(secondarr[1].trim());
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+                    LocalDateTime date = LocalDateTime.parse(secondarr[1].trim(), formatter);
                     Deadline deadline = Deadline.createDeadline(secondarr[0], date);
                     taskObj = deadline;
                 } catch (DateTimeParseException e) {
@@ -193,8 +193,8 @@ public class Parser {
             return "todo " + stringArr[1];
         case 'D':
             String[] secondArr = stringArr[1].split("by: ", 2);
-            DateTimeFormatter deadlineFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-            LocalDate deadlineDate = LocalDate.parse(secondArr[1], deadlineFormatter);
+            DateTimeFormatter deadlineFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+            LocalDateTime deadlineDate = LocalDateTime.parse(secondArr[1], deadlineFormatter);
             return "deadline " + secondArr[0] + "/by " + deadlineDate;
         case 'E':
             String[] thirdArr = stringArr[1].split("at: ", 2);

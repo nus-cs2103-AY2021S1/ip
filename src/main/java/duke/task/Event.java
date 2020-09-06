@@ -16,25 +16,19 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected LocalDateTime event;
-
-    protected Event(String task, LocalDateTime event) {
+    protected Event(String task, LocalDateTime date) {
         super(task);
-        this.event = event;
+        this.date = date;
     }
 
-    private LocalDateTime getEvent() {
-        return this.event;
-    }
-
-    public static Event createEvent(String task, LocalDateTime event) {
-        return new Event(task, event);
+    public static Event createEvent(String task, LocalDateTime date) {
+        return new Event(task, date);
     }
 
     @Override
     public String toString() {
         String done = this.done ? "O" : "X";
-        String date = this.event.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
+        String date = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
         return "[E][" + done + "] " + this.task + "at: " + date;
     }
 }

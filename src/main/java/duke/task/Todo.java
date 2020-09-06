@@ -1,6 +1,8 @@
 package duke.task;
 
 
+import java.time.LocalDateTime;
+
 /**
  * <h1> Todo Task class </h1>
  *
@@ -16,6 +18,7 @@ public class Todo extends Task {
 
     protected Todo(String task) {
         super(task);
+        this.date = LocalDateTime.now();
     }
 
     public static Todo createTodo(String task) {

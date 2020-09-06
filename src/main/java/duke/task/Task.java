@@ -1,6 +1,8 @@
 package duke.task;
 
 
+import java.time.LocalDateTime;
+
 /**
  * <h1> Task Class </h1>
  * This is the parent task class that contains
@@ -14,10 +16,13 @@ package duke.task;
 public class Task {
     protected String task;
     protected boolean done;
+    protected LocalDateTime date;
+    protected boolean isImportant;
 
     protected Task(String task) {
         this.task = task;
         this.done = false;
+        this.isImportant = false;
     }
 
     /**
@@ -40,6 +45,12 @@ public class Task {
     }
 
     /**
+     * Returns the date of the task
+     * @return LocalDateTime
+     */
+    public LocalDateTime getDate() { return this.date; }
+
+    /**
      * Instantiates a Task object.
      *
      * @param task the task to be done from User Input.
@@ -56,4 +67,8 @@ public class Task {
     public void setDone() {
         this.done = true;
     }
+
+    public void setAsImportant() { this.isImportant = true; }
+
+    public boolean isTaskImportant() { return this.isImportant; }
 }

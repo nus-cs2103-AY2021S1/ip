@@ -5,13 +5,16 @@ import duke.command.Parser;
 import duke.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class TaskList {
 
     private ArrayList<Task> tasklist;
+    private PriorityQueue<Task> taskPriority;
 
     private TaskList() {
         this.tasklist = new ArrayList<>();
+        this.taskPriority = new PriorityQueue<>();
     }
 
     /**
