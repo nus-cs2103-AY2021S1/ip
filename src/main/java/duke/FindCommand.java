@@ -27,7 +27,7 @@ public class FindCommand extends Command {
         if (tasks.isEmpty()) {
             output.append("I'm sorry, there's nothing that matches your search.");
         } else {
-            IntStream.of(0, filteredTaskList.size()).forEach(i -> {
+            IntStream.range(0, filteredTaskList.size()).forEach(i -> {
                 if (i == filteredTaskList.size() - 1) {
                     output.append(String.format("%d. %s", i + 1, filteredTaskList.get(i)));
                 } else {
