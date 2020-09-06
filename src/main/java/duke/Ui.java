@@ -83,7 +83,7 @@ public class Ui {
      *
      * @param taskList The task list to get the tasks from.
      * @param localDate The date that you want to get the tasks for.
-     * @return The tasks that occur on the specified date.
+     * @return The tasks that occur on the specified date, or none if there are no tasks on that date.
      */
     public static String respondViewTasks(TaskList taskList, LocalDate localDate) {
         TaskList taskListOnDate = taskList.getTaskListOnDate(localDate);
@@ -98,10 +98,13 @@ public class Ui {
      *
      * @param taskList The task list to find the tasks in.
      * @param keyword The string that the tasks you are finding should contain.
-     * @return The tasks that contain the keyword.
+     * @return The tasks that contain the keyword, or none if there are no tasks that contain the keyword.
      */
     public static String respondFindTasks(TaskList taskList, String keyword) {
         TaskList tasksWithKeyword = taskList.getTasksWithKeyword(keyword);
+        if (tasksWithKeyword.getNumberOfTasks() == 0) {
+            return "You do not have any tasks that contain this keyword.";
+        }
         return "Here are the matching tasks in your list: \n" + tasksWithKeyword;
     }
 
