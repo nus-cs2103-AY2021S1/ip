@@ -3,7 +3,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
@@ -23,16 +22,10 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Image sunsetImage = new Image(this.getClass().getResourceAsStream("/images/sunset.jpg"));
-
-    private ImageView sunsetImageView = new ImageView(sunsetImage);
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-//      scrollPane.setContent(sunsetImageView);
-//        scrollPane.setStyle("-fx-background: rgb(255, 0, 0);");
-//        scrollPane.setStyle("-fx-background-image: url('/resources/images/sunset.jpg');");
     }
 
     /**

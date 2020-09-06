@@ -9,6 +9,8 @@ public class DukeInterpreter {
      * @return String representation for storage.
      */
     public static String encode(Task task) {
+        assert task != null : "There should be a task to encode!";
+
         String taskString = task.toString();
         char type = taskString.charAt(1);
         char symbol = taskString.charAt(4);
@@ -39,6 +41,8 @@ public class DukeInterpreter {
      * @throws DukeException If invalid date/time is provided.
      */
     public static Task decode(String code) throws DukeException {
+        assert code != null : "There should be a task to decode!";
+
         char taskType = code.charAt(0);
         String[] splittedWords = code.split("\\|");
         boolean isCompleted = splittedWords[1].trim().equals("✓");

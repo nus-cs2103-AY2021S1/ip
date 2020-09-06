@@ -10,6 +10,8 @@ public class Parser {
      */
     // main driver function for duke to tackle and parse commands
     public static Command parse(String input) throws DukeException {
+        assert input != null : "There should be an input!";
+
         String[] splittedWords = input.split("\\s", 2); // splits string based on whitespace
         String command = splittedWords[0];
         String afterCommand = null;
