@@ -12,7 +12,7 @@ import com.siawsam.duke.Todo;
 public class TaskListTest {
 
     @Test
-    public void testTaskListAddItemTodo() throws DukeException {
+    public void taskList_todoLiteral_addTodo() throws DukeException {
         TaskList taskList = new TaskList();
         Task actualTask = taskList.addItem("todo hello world");
         Task expectedTask = new Todo("hello world");
@@ -20,7 +20,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testTaskListAddItemDateline() throws DukeException {
+    public void taskList_deadlineLiteral_addDeadline() throws DukeException {
         TaskList taskList = new TaskList();
         Task actualTask = taskList.addItem("deadline return book /by 2020-08-30");
         Task expectedTask = new Deadline("return book", "2020-08-30");
@@ -28,7 +28,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testTaskListAddItemEvent () throws DukeException {
+    public void taskList_eventLiteral_addEvent() throws DukeException {
         TaskList taskList = new TaskList();
         Task actualTask = taskList.addItem("event birthday party /at 2pm Wednesday");
         Task expectedTask = new Event("birthday party", "2pm Wednesday");

@@ -17,14 +17,14 @@ import com.siawsam.duke.Todo;
 
 public class TaskSearchTest {
     @Test
-    public void testTaskIncludesKeyword() {
+    public void task_searchTermInDescription_true() {
         Task task = new Task("Do something nice");
         assertTrue(task.includesKeyword("nice"));
         assertFalse(task.includesKeyword("bad"));
     }
     
     @Test
-    public void testTaskListSearch() throws DukeException {
+    public void taskList_searchString_listOfMatchingTasks() throws DukeException {
         TaskList taskList = new TaskList();
         taskList.addItem("todo borrow book");
         taskList.addItem("todo borrow umbrella");
@@ -42,7 +42,7 @@ public class TaskSearchTest {
     }
     
     @Test
-    public void testTaskSearcher() throws DukeException {
+    public void taskSearcher_searchString_respondWithMatchingTasks() throws DukeException {
         TaskList taskList = new TaskList();
         taskList.addItem("todo borrow book");
         taskList.addItem("todo borrow umbrella");
