@@ -11,8 +11,8 @@ import duke.tasks.Task;
  */
 public class Ui {
     private static final Scanner sc = new Scanner(System.in);
+    private static final String lines = "______________________________________________________";
     private String logo;
-    private String lines;
     private String defaultGreeting;
     private Parser commandParser;
 
@@ -36,12 +36,16 @@ public class Ui {
                 + "                                       " + "  Y8b d88P                                 \n"
                 + "                                       "
                 + "     \"Y88P\"                                  ";
-
-        this.lines = "______________________________________________________";
-        this.defaultGreeting = this.lines + "\n" + "     Hello! I'm Chatty Bot ^~^ \n"
+        this.defaultGreeting = Ui.lines + "\n" + "     Hello! I'm Chatty Bot ^~^ \n"
                 + "     What can I do for you?\n" + "Type 'help' if you wish to know more about"
-                + " what I can do!" + "\n" + lines + "\n";
+                + " what I can do!" + "\n" + Ui.lines + "\n";
         this.commandParser = new Parser();
+    }
+
+    public static String allFilesFound() {
+        return "________________________________________________________" + "\n"
+                + "     Found directories and file" + "\n"
+                + "________________________________________________________" + "\n";
     }
 
     /**
@@ -69,8 +73,8 @@ public class Ui {
      * @return Load files message.
      */
     public String loadFile() {
-        String loadFileMessage = this.lines + "\n" + "     Previously saved list (if any) loaded."
-                + " You may enter your commands now:" + "\n" + this.lines;
+        String loadFileMessage = Ui.lines + "\n" + "     Previously saved list (if any) loaded."
+                + " You may enter your commands now:" + "\n" + Ui.lines;
         return loadFileMessage;
     }
 
@@ -108,8 +112,8 @@ public class Ui {
      * @return UI message for done task.
      */
     public String markAsDone(int taskIndex, TaskList currList) {
-        String markedDoneMessage = this.lines + "\n" + "     Nice! I've marked this task as done:"
-                + "\n" + "       " + currList.get(taskIndex) + "\n" + this.lines;
+        String markedDoneMessage = Ui.lines + "\n" + "     Nice! I've marked this task as done:"
+                + "\n" + "       " + currList.get(taskIndex) + "\n" + Ui.lines;
         return markedDoneMessage;
     }
 
@@ -121,9 +125,9 @@ public class Ui {
      * @return UI message for task added.
      */
     public String addTask(Task newTask, TaskList currList) {
-        String taskAddedUi = this.lines + "\n" + "     Got it. I've added this task:" + "\n" + "       "
+        String taskAddedUi = Ui.lines + "\n" + "     Got it. I've added this task:" + "\n" + "       "
                 + newTask + "\n" + "     Now you have " + String.valueOf(currList.getNumTask())
-                + " task(s) in the list." + "\n" + this.lines;
+                + " task(s) in the list." + "\n" + Ui.lines;
         return taskAddedUi;
     }
 
@@ -134,8 +138,8 @@ public class Ui {
      * @return UI message of task list.
      */
     public String listItems(TaskList currList) {
-        String listInString = this.lines + "\n" + "     Here are the tasks in your list:" + "\n"
-                + currList.listItems() + this.lines + "\n";
+        String listInString = Ui.lines + "\n" + "     Here are the tasks in your list:" + "\n"
+                + currList.listItems() + Ui.lines + "\n";
         return listInString;
     }
 
@@ -147,9 +151,9 @@ public class Ui {
      * @return UI message of removed task.
      */
     public String deleteTask(Task removeTask, TaskList currList) {
-        String deleteMessage = this.lines + "\n" + "     Alright, the following task has been removed" + "\n"
+        String deleteMessage = Ui.lines + "\n" + "     Alright, the following task has been removed" + "\n"
                 + "       " + removeTask + "\n" + "     Now you have " + String.valueOf(currList.getNumTask())
-                + " task(s) in the list." + "\n" + this.lines;
+                + " task(s) in the list." + "\n" + Ui.lines;
         return deleteMessage;
     }
 
@@ -170,7 +174,7 @@ public class Ui {
      * @return UI message for goodbye.
      */
     public String goodBye() {
-        String endGreeting = this.lines + "\n" + "     Bye. Hope to see you again soon!\n" + this.lines;
+        String endGreeting = Ui.lines + "\n" + "     Bye. Hope to see you again soon!\n" + Ui.lines;
         return endGreeting;
     }
 
@@ -181,8 +185,8 @@ public class Ui {
      * @return UI message for found tasks.
      */
     public String printFoundItems(TaskList foundTasks, String keyword) {
-        String foundItemsMessage = this.lines + "\n" + "     Here are the matching tasks for keyword \""
-                + keyword + "\" in your list:" + "\n" + foundTasks.listItems() + this.lines;
+        String foundItemsMessage = Ui.lines + "\n" + "     Here are the matching tasks for keyword \""
+                + keyword + "\" in your list:" + "\n" + foundTasks.listItems() + Ui.lines;
         return foundItemsMessage;
     }
 
@@ -216,10 +220,10 @@ public class Ui {
                 + " as done.";
         String exitBotInstructions = "     If you are done editing your task list, feel free to close down"
                 + "  this bot with the bye command by typing 'bye'.";
-        String helpMessageToBePrinted = this.lines + "\n" + helpMessage + "\n" + addTasksInstructions
+        String helpMessageToBePrinted = Ui.lines + "\n" + helpMessage + "\n" + addTasksInstructions
                 + addToDoInstructions + "\n" + addDeadlineInstructions + "\n" + addEventInstructions
                 + "\n" + deleteTaskInstructions + "\n" + listTasksInstructions + "\n" + findTasksInstructions
-                + "\n" + markTaskAsDoneInstructions + "\n" + exitBotInstructions + "\n" + lines + "\n";
+                + "\n" + markTaskAsDoneInstructions + "\n" + exitBotInstructions + "\n" + Ui.lines + "\n";
         return helpMessageToBePrinted;
     }
 
