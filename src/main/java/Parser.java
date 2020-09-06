@@ -13,7 +13,7 @@ public class Parser {
 
     private TaskList list;
 
-    protected Parser(){}
+    protected Parser() {}
 
     protected Parser(TaskList list) {
         this.list = list;
