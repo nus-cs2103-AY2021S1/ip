@@ -9,18 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import alice.command.ByeCommand;
-import alice.command.ClearCommand;
 import alice.command.Command;
-import alice.command.DeadlineCommand;
-import alice.command.DeleteCommand;
-import alice.command.DoneCommand;
-import alice.command.EventCommand;
-import alice.command.FindCommand;
-import alice.command.HelpCommand;
+import alice.command.CommandType;
 import alice.command.InvalidCommandException;
-import alice.command.ListCommand;
-import alice.command.TodoCommand;
 
 /**
  * Represents a parser that makes sense of user input.
@@ -74,8 +65,9 @@ public class Parser {
         String cmd = arr[0];
         String argument = arr.length == 2 ? arr[1] : "";
 
+        // Iterate through the command types
         CommandType[] commands = CommandType.values();
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < commands.length; i++) {
             if (commands[i].hasCommandWord(cmd)) {
                 return commands[i].createCmd(argument);
             }

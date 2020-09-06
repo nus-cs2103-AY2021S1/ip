@@ -23,11 +23,15 @@ public abstract class Task {
 
     /**
      * Marks the task as done.
+     *
+     * @return true if successful; false otherwise.
      */
-    public void markAsDone() {
-        if (!isDone) {
-            isDone = true;
+    public boolean markAsDone() {
+        if (isDone) {
+            return false;
         }
+        isDone = true;
+        return true;
     }
 
     /**
