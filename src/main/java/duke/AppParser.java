@@ -78,9 +78,9 @@ public class AppParser extends Parser {
             if (newTodos == null) {
                 return appUi.getDescriptionEmptyMsg();
             }
-            for(Todo newTodo : newTodos){
-                list.add(newTodo);
-            }
+
+            newTodos.stream().forEach(list::add);
+
             return appUi.getAfterAddMsgVarargs(TODO, list.getSize(), newTodos.toArray(new Task[newTodos.size()]));
         } else if (command[ptr].equals("deadline")) {
             Deadline deadline = Deadline.of(inputCommand);
