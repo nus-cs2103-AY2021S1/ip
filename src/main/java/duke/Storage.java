@@ -75,8 +75,12 @@ public class Storage {
      */
     public Todo retrieveTodo(String[] todoData) {
         Todo todo = new Todo(todoData[2].trim());
+        String tag = todoData[3].trim();
         if (todoData[1].equals(" 1")) {
             todo.markAsDone();
+        }
+        if (!tag.isBlank()) {
+            todo.setTaskTag(tag);
         }
         return todo;
     }
@@ -88,13 +92,17 @@ public class Storage {
      * @return Deadline task stored in the designated file.
      */
     public Deadline retrieveDeadline(String[] deadlineData) {
-        String dateTime = deadlineData[3].trim();
+        String dateTime = deadlineData[4].trim();
+        String tag = deadlineData[3].trim();
         String[] dateTimeArray = dateTime.split(" ");
         LocalDate taskDate = LocalDate.parse(dateTimeArray[0]);
         LocalTime taskTime = LocalTime.parse(dateTimeArray[1]);
         Deadline deadline = new Deadline(deadlineData[2].trim(), taskDate, taskTime);
         if (deadlineData[1].equals(" 1")) {
             deadline.markAsDone();
+        }
+        if (!tag.isBlank()) {
+            deadline.setTaskTag(tag);
         }
         return deadline;
     }
@@ -106,13 +114,17 @@ public class Storage {
      * @return Event task stored in the designated file.
      */
     public Event retrieveEvent(String[] eventData) {
-        String dateTime = eventData[3].trim();
+        String dateTime = eventData[4].trim();
+        String tag = eventData[3].trim();
         String[] dateTimeArray = dateTime.split(" ");
         LocalDate taskDate = LocalDate.parse(dateTimeArray[0]);
         LocalTime taskTime = LocalTime.parse(dateTimeArray[1]);
         Event event = new Event(eventData[2].trim(), taskDate, taskTime);
         if (eventData[1].equals(" 1")) {
             event.markAsDone();
+        }
+        if (!tag.isBlank()) {
+            event.setTaskTag(tag);
         }
         return event;
     }

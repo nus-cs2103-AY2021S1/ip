@@ -11,6 +11,8 @@ public abstract class Task {
     private String description;
     /** Boolean describing whether the task has been completed. */
     private boolean isDone;
+    /** Tag attached to a task. */
+    private String tag;
 
     /**
      * Creates and initialises a new task object.
@@ -19,6 +21,7 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
+        this.tag = "";
         this.isDone = false;
     }
 
@@ -44,6 +47,15 @@ public abstract class Task {
      * @return String containing the relevant information of this task object to be saved in a file.
      */
     public abstract String convertTaskToFileString();
+
+    /**
+     * Attaches a tag to the task object.
+     *
+     * @param tag Task tag to be attached.
+     */
+    public void setTaskTag(String tag) {
+        this.tag = tag;
+    }
 
     /**
      * Returns the date of this task.
@@ -72,12 +84,22 @@ public abstract class Task {
     }
 
     /**
+     * Returns the tag of this task object.
+     *
+     * @return String containing the tag of this task.
+     */
+    public String getTaskTag() {
+        return this.tag;
+    }
+
+    /**
      * Converts the task object into a string to be displayed.
      *
      * @return String representation of this task object.
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "]"
+                + (this.tag.isBlank() ? " " : "[#" + this.tag + "] ") + this.description;
     }
 }
