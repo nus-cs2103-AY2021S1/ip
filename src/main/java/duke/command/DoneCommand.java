@@ -33,7 +33,7 @@ public class DoneCommand implements Command {
         if (t.isDone()) {
             sb.append("You've already completed this task:\n");
         } else {
-            list.markAsDone(taskNumber);
+            list.markAsDone(taskNumber - 1);
             sb.append("Nice! I've marked this task as done:\n");
         }
         sb.append("  " + t.displayString());
