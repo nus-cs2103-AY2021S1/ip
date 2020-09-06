@@ -12,7 +12,7 @@ public class Deadline extends Task {
      * @param input  User input without the command word.
      */
     public Deadline(String input) {
-        inputString = this.getClass().getSimpleName().toLowerCase() + " " + input;
+        inputString = "deadline " + input;
         try {
             String[] split = input.split("/", 2);
             String dateTime = split[1].substring(split[1].indexOf(' ') + 1);

@@ -25,8 +25,8 @@ public class Parser {
      * Tries to parse a raw string into a date and time, and returns a LocalDateTime if possible.
      * If parsing fails, this functions returns null.
      *
-     * @param dateTime  The raw string to be parsed into datetime.
-     * @return  The string parsed as a LocalDateTime if possible, else null
+     * @param dateTime The raw string to be parsed into datetime.
+     * @return The string parsed as a LocalDateTime if possible, else null
      */
     public static LocalDateTime parseDateTime(String dateTime) {
         for (String format : dateFormats) {
@@ -34,7 +34,7 @@ public class Parser {
                 Date d = new SimpleDateFormat(format).parse(dateTime);
                 return d.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
             } catch (ParseException e) {
-                continue;
+                // Intentionally left blank
             }
         }
         return null;
@@ -65,14 +65,16 @@ public class Parser {
      *
      * @param input Raw user input.
      * @return Task object created based on user input.
-     * @throws ChatterboxException  If description of the task command is empty or the command is invalid.
+     * @throws ChatterboxException If description of the task command is empty or the command is invalid.
      */
     public static Task parseTask(String input) throws ChatterboxException {
+        assert !input.strip().equals("");
+
         // Get first word of input
         String command = (input + " ").split(" ")[0];
 
         // Check if description of command is empty
-        if (!input.contains(" ") || input.substring(input.indexOf(' ')).strip().equals("")) {
+        if (!input.contains(" ")) {
             throw new ChatterboxException("The description of a " + command + " cannot be empty");
         }
 

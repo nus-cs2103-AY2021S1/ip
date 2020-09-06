@@ -10,7 +10,7 @@ public class ToDo extends Task {
      * @param contents  User input without the command word.
      */
     public ToDo(String contents) {
-        inputString = this.getClass().getSimpleName().toLowerCase() + " " + contents;
+        inputString = "todo " + contents;
         this.contents = contents;
         prefix = "T";
     }
