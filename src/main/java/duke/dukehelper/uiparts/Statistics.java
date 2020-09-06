@@ -66,10 +66,10 @@ public class Statistics extends HBox {
         NumberAxis yAxis = new NumberAxis(0.0, max, 1.0);
         yAxis.setLabel("Times used");
 
-        XYChart.Series series = new XYChart.Series();
-        series.setName("Last week");
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Since the start");
         for(int i = 0; i < data.length; i++) {
-            series.getData().add(new XYChart.Data<String, Integer>(categories[i], data[i]));
+            series.getData().add(new XYChart.Data<String, Number>(categories[i], data[i]));
         }
         chart = new BarChart<>(xAxis, yAxis);
         chart.getData().add(series);
