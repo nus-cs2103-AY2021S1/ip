@@ -32,7 +32,7 @@ jobs:
 
       - name: Build and check with Gradle
         run: ./gradlew check
-#
+
 #      - name: Perform IO redirection test (*NIX)
 #        if: runner.os == 'Linux'
 #        working-directory:  ${{ github.workspace }}/text-ui-test
