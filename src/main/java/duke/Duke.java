@@ -56,6 +56,14 @@ public class Duke extends Application {
 
         font = new Font("Calibri", 14);
 
+        setStyle(stage);
+        setActions();
+
+        dialogContainer.getChildren().add(getDialogLabel(ui.getWelcome()));
+    }
+
+    private void setStyle(Stage stage) {
+
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
@@ -91,6 +99,9 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
+
+    private void setActions() {
 
         sendButton.setOnMouseClicked((event) -> {
             updateDialog();
@@ -101,14 +112,12 @@ public class Duke extends Application {
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        dialogContainer.getChildren().add(getDialogLabel(ui.getWelcome()));
     }
 
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-        textToAdd.setMinHeight(text.split("\n").length * font.getSize() * 1.5);
+        textToAdd.setMinHeight((text.split("\n").length + 1) * font.getSize() * 1.4);
         textToAdd.setFont(font);
 
         return textToAdd;
@@ -125,6 +134,7 @@ public class Duke extends Application {
     private String getReply(String input) {
 
         if (input.equals("bye")) {
+            storage.saveFile(taskList.getList());
             Platform.exit();
             return "";
         } else {
