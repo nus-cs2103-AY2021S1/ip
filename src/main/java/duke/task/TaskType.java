@@ -6,15 +6,10 @@ package duke.task;
  * @author Alvin Chee
  */
 public enum TaskType {
-//    TODO ("[T]"),
-//    DEADLINE ("[D]"),
-//    EVENT ("[E]");
     TODO ('T'),
     DEADLINE ('D'),
     EVENT ('E');
 
-
-    //private String taskSymbol;
     private char taskSymbol;
     /**
      * Constructs a task type.

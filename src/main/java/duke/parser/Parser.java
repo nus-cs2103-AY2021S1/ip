@@ -26,6 +26,10 @@ public class Parser {
             return new Command(CommandType.HANDLEVENT, taskInfo);
         } else if (taskInfo.startsWith("delete")) {
             return new Command(CommandType.DELETETASK, taskInfo);
+        } else if (taskInfo.startsWith("duplicate")) {
+            return new Command(CommandType.DUPLICATE, taskInfo);
+        } else if (taskInfo.startsWith("remove duplicates")) {
+            return new Command(CommandType.REMOVEDUPLICATES, taskInfo);
         } else {
             return new Command(CommandType.FINDMATCHINGTASK, taskInfo);
         }

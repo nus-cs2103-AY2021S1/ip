@@ -64,6 +64,13 @@ public class Command {
             case DELETETASK:
                 dukeResponse =  tasks.deleteTask(taskInfo);
                 break;
+            case DUPLICATE:
+                List<String> duplicateList = tasks.detectDuplicates();
+                dukeResponse =  findDuplicateTasks(duplicateList);
+                break;
+            case REMOVEDUPLICATES:
+                dukeResponse = removeDuplicates(tasks);
+                break;
             default:
                 if (findMatchingTasks(tasks, taskInfo).length() <= 0) {
                     throw new DukeInvalidCommandException("Sorry handsome but I'm not sure about this command :)");
@@ -227,6 +234,33 @@ public class Command {
             .mapToObj(i -> String.format("\n\t\t%d. %s", i + 1, matchList.get(i)))
             .reduce("", (prevStr, nextStr) -> prevStr + nextStr);
         dukeResponse += matches;
+        return dukeResponse;
+    }
+
+    /**
+     * Returns string of duke response of list containing duplicate tasks.
+     *
+     * @param duplicateTaskList List of duplicate tasks.
+     * @return String of duke response containing duplicate tasks.
+     */
+    private String findDuplicateTasks(List<String> duplicateTaskList) {
+        String dukeResponse = "\tHere are the duplicate tasks:";
+        String duplicates = IntStream.range(0, duplicateTaskList.size())
+            .mapToObj(i -> String.format("\n\t\t%d. %s", i + 1, duplicateTaskList.get(i)))
+            .reduce("", (prevStr, nextStr) -> prevStr + nextStr);
+        return dukeResponse += duplicates;
+    }
+
+    /**
+     * Removes all duplicate tasks except for the first entry.
+     *
+     * @param tasks List of tasks.
+     * @return String of duke response containing new task list.
+     */
+    private String removeDuplicates(TaskList tasks) {
+        tasks.removeDuplicatesExceptFirst();
+        String dukeResponse = "\tDuplicates removed. Only first copies remain.\n";
+        dukeResponse += printList(tasks);
         return dukeResponse;
     }
 }

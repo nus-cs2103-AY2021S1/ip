@@ -136,4 +136,51 @@ public class TaskList {
         });
         return matchList;
     }
+
+    /**
+     * Returns a list of duplicate tasks.
+     */
+    public List<String> detectDuplicates() {
+        List<String> duplicateList = new ArrayList<>();
+        List<String> finalDuplicateList = new ArrayList<>();
+        for (int i = 0; i < taskList.size() - 1; i++) {
+            for (int j = i + 1; j < taskList.size(); j++) {
+                if (taskList.get(i).returnTaskInfo().equalsIgnoreCase(taskList.get(j).returnTaskInfo())) {
+                    duplicateList.add(taskList.get(i).returnTaskInfo());
+                }
+            }
+        }
+        duplicateList.sort(null);
+        String taskAdded = "";
+        for(int i = 0; i < duplicateList.size(); i++) {
+            String currentTask = duplicateList.get(i);
+            if (!taskAdded.equalsIgnoreCase(currentTask)) {
+                taskAdded = currentTask;
+                finalDuplicateList.add(duplicateList.get(i));
+            }
+        }
+        return finalDuplicateList;
+    }
+
+    /**
+     * Removes all duplicate tasks except first copies.
+     */
+    public void removeDuplicatesExceptFirst() {
+        List<String> duplicates = detectDuplicates();
+        List<String> removedDuplicates = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            for (int j = 0; j < duplicates.size(); j++) {
+                String taskInfo = taskList.get(i).returnTaskInfo();
+                if (taskInfo.equalsIgnoreCase(duplicates.get(j))) {
+                    if (!removedDuplicates.contains(taskInfo)) {
+                        removedDuplicates.add(taskInfo);
+                    } else {
+                        taskList.set(i, null);
+                    }
+                    break;
+                }
+            }
+        }
+        taskList.removeIf(task -> task == null);
+    }
 }

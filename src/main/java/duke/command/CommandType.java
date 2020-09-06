@@ -14,5 +14,7 @@ public enum CommandType {
         HANDLEDEADLINE,
         HANDLEVENT,
         DELETETASK,
-        FINDMATCHINGTASK;
+        FINDMATCHINGTASK,
+        DUPLICATE,
+        REMOVEDUPLICATES;
 }
