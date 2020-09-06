@@ -53,21 +53,21 @@ public class Parser {
         String command = commandInput.toString();
         String args = argsInput.toString();
 
-        if (command.has(COMMAND_ADD_DEADLINE)) {
+        if (COMMAND_ADD_DEADLINE.contains(command)) {
             return new AddCommand(args, TaskType.DEADLINE);
-        } else if (command.equals(COMMAND_ADD_EVENT)) {
+        } else if (COMMAND_ADD_EVENT.contains(command)) {
             return new AddCommand(args, TaskType.EVENT);
-        } else if (command.equals(COMMAND_ADD_TODO)) {
+        } else if (COMMAND_ADD_TODO.contains(command)) {
             return new AddCommand(args, TaskType.TODO);
-        } else if (command.equals(COMMAND_COMPLETE)) {
+        } else if (COMMAND_COMPLETE.contains(command)) {
             return new CompleteCommand(args);
-        } else if (command.equals(COMMAND_DELETE)) {
+        } else if (COMMAND_DELETE.contains(command)) {
             return new DeleteCommand(args);
-        } else if (command.equals(COMMAND_EXIT)) {
+        } else if (COMMAND_EXIT.contains(command)) {
             return new ExitCommand(args);
-        } else if (command.equals(COMMAND_LIST)) {
+        } else if (COMMAND_LIST.contains(command)) {
             return new ListCommand(args);
-        } else if (command.equals(COMMAND_FIND)) {
+        } else if (COMMAND_FIND.contains(command)) {
             return new FindCommand(args);
         } else {
             throw new UnknownCommandException("Unknown command");
