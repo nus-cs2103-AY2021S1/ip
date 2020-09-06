@@ -26,7 +26,7 @@ public class MainWindow extends AnchorPane {
     private Ultron ultron = new Ultron();
 
     /**
-     * Initialise the Mainwindow.
+     * Initialise the MainWindow.
      */
     @FXML
     public void initialize() {
@@ -34,6 +34,9 @@ public class MainWindow extends AnchorPane {
         introMessage();
     }
 
+    /**
+     * Prints the intro message.
+     */
     private void introMessage() {
         dialogContainer.getChildren().addAll(
             DialogBox.getUltronDialog(UI.getIntro(), ultronImage)
