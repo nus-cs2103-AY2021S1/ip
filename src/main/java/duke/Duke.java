@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -37,6 +38,30 @@ public class Duke {
     }
 
     /**
+     * Getter method to get storage.
+     * @return Storage.
+     */
+    private Storage getStorage() {
+        return storage;
+    }
+
+    /**
+     * Get the file in Storage.
+     * @return File.
+     */
+    private File getStorageFile() {
+        return getStorage().getFile();
+    }
+
+    /**
+     * Check if the to-do file exists.
+     * @return boolean True is the file exist.
+     */
+    private boolean isFileInStorage() {
+        return getStorageFile().exists();
+    }
+
+    /**
      * Returns the response of Duke given the input.
      * @param str String User input.
      * @return String Duke's response.
@@ -55,8 +80,9 @@ public class Duke {
 
         switch (cmd) {
         case BYE:
+            assert(isFileInStorage()): "File should exist.";
             // rewrite the file to update latest changes
-            Storage.saveFile(this.storage.getFile(), ls);
+            Storage.saveFile(getStorageFile(), ls);
             return ui.outputBye();
         case LIST:
             if (ls.isEmpty()) {
