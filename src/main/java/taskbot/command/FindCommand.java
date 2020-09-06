@@ -14,6 +14,7 @@ public class FindCommand extends Command {
 
     /**
      * Creates a FindCommand.
+     *
      * @param keywords The keywords used to find tasks.
      */
     public FindCommand(String ... keywords) {
@@ -26,6 +27,7 @@ public class FindCommand extends Command {
 
     /**
      * Gives instructions on how to use the find command.
+     *
      * @return A string of instructions to use the command.
      */
     public static String getInstruction() {

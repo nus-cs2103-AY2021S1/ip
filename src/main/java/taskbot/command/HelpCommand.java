@@ -14,6 +14,8 @@ public class HelpCommand extends Command {
 
     /**
      * Creates a HelpCommand.
+     *
+     * @param command The command to get instructions on.
      */
     public HelpCommand(String command) {
         super(false);
@@ -22,9 +24,10 @@ public class HelpCommand extends Command {
 
     /**
      * Informs the user on how to use the help function
+     *
      * @return A string of instructions to use the command.
      */
-    public static String getInstruction() throws TaskbotException {
+    public static String getInstruction() {
         return "Use 'help' to learn about a specific command.\n"
                 + "List of available commands: \n" + getCommandList()
                 + "\nFormat: help [command]\n"
@@ -33,9 +36,10 @@ public class HelpCommand extends Command {
 
     /**
      * Produces the list of available commands.
+     *
      * @return a list of commands the user can use.
      */
-    public static String getCommandList() throws TaskbotException {
+    public static String getCommandList() {
         ArrayList<String> commands = new ArrayList<>();
 
         // Add every available command to the list.

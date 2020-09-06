@@ -22,6 +22,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Gives instructions on how to use the delete command.
+     *
      * @return A string of instructions to use the command.
      */
     public static String getInstruction() {

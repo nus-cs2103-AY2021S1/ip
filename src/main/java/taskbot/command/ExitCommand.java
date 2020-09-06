@@ -15,6 +15,7 @@ public class ExitCommand extends Command {
 
     /**
      * Gives instructions on how to use the exit command.
+     *
      * @return A string of instructions to use the command.
      */
     public static String getInstruction() {

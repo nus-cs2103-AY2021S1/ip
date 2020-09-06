@@ -22,6 +22,7 @@ public class EventCommand extends Command {
 
     /**
      * Gives instructions on how to use the event command.
+     *
      * @return A string of instructions to use the command.
      */
     public static String getInstruction() {

@@ -1,7 +1,6 @@
 package taskbot.command;
 
 import taskbot.exceptions.InvalidCommandException;
-import taskbot.exceptions.TaskbotException;
 
 /**
  * This class gets the instruction from the specified command.
@@ -9,10 +8,12 @@ import taskbot.exceptions.TaskbotException;
 public class CommandHelp {
     /**
      * Gets help on the specific command given.
+     *
      * @param command The command to retrieve instructions for.
      * @return The relevant command's instruction.
+     * @throws InvalidCommandException if input command does not match any known command types.
      */
-    public static String getCommandInstruction(String command) throws TaskbotException {
+    public static String getCommandInstruction(String command) throws InvalidCommandException {
         switch (command) {
         case "help":
             return HelpCommand.getInstruction();

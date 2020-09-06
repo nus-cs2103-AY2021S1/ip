@@ -11,6 +11,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Creates a command to make a deadline task.
+     *
      * @param task The description of the task.
      */
     public DeadlineCommand(String task) {
@@ -20,6 +21,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Gives instructions on how to use the deadline command.
+     *
      * @return A string of instructions to use the command.
      */
     public static String getInstruction() {
