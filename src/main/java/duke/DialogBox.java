@@ -1,32 +1,36 @@
 package duke;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-import javafx.scene.paint.Color;
-
 
 public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Represents a DialogBox that will be displayed in the GUI
+     * @param l the text to be displayed in the container
+     * @param iv the image to be displayed in the container
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
-
-        iv.setClip(new Circle(60,60,60));
-        displayPicture = iv;
-
         text.setWrapText(true);
+
+        iv.setClip(new Circle(60, 60, 60));
+        displayPicture = iv;
         displayPicture.setFitWidth(120.0);
         displayPicture.setFitHeight(120.0);
+
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
         this.setSpacing(20);
@@ -47,7 +51,7 @@ public class DialogBox extends HBox {
 
         DialogBox userDialog = new DialogBox(l, iv);
         userDialog.setStyle("-fx-background-color: #f1f3f8;");
-        userDialog.setPadding(new Insets(15,10,15,0));
+        userDialog.setPadding(new Insets(15, 10, 15, 0));
         return userDialog;
     }
 

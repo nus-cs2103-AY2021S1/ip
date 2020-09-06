@@ -1,9 +1,9 @@
 package duke.command;
 
+import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
-import duke.exception.DukeException;
 
 /**
  * Represents a general Command that is abstract.

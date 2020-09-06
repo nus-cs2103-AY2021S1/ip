@@ -1,9 +1,11 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.CheckCommand;
 import duke.command.Command;
 import duke.parser.Parser;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
 
@@ -19,7 +21,8 @@ public class ParserTest {
             Command test = Parser.parse("onlyOneWord");
             fail();
         } catch (Exception e) {
-            assertEquals("The description of the task cannot be empty!", e.getMessage());
+            assertEquals("Only one word detected. Remember to add whitespace "
+                    + "between information or enter a valid one word command!", e.getMessage());
         }
     }
 }

@@ -8,6 +8,10 @@ public abstract class Task {
     protected String name;
     protected boolean status;
 
+    /**
+     * Represents the most basic task.
+     * @param name the description of the task
+     */
     public Task(String name) {
         this.name = name;
         this.status = false;

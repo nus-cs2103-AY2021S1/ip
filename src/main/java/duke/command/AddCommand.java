@@ -1,14 +1,14 @@
 package duke.command;
-
 import java.time.DateTimeException;
+
 import duke.exception.DukeException;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
-import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.ToDo;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a command that will append a task to the list.
@@ -21,6 +21,11 @@ public class AddCommand extends Command {
     protected final String taskType;
     protected final String description;
 
+    /**
+     * Instantiates a AddCommand object
+     * @param taskType an indication of the task type
+     * @param description the detail information of the task
+     */
     public AddCommand(String taskType, String description) {
         this.taskType = taskType.trim();
         this.description = description.trim();
@@ -39,44 +44,50 @@ public class AddCommand extends Command {
         Task current;
         try {
             switch (this.taskType) {
-                case "todo": {
-                    current = new ToDo(this.description.trim());
-                    break;
-                }
-                case "deadline": {
-                    int byIndex = this.description.indexOf(" /by ");
-                    if (byIndex == -1) {
-                        throw new DukeException("Keyword \" /by \" not found, note the white space!");
-                    }
-                    assert byIndex > 1 :  "there is no task";
-                    String deadline = this.description.substring(byIndex + 4).trim();
-                    String description = this.description.substring(0, byIndex).trim();
-                    current = new Deadline(description, deadline);
-                    break;
-                }
-                case "event": {
-                    int atIndex = this.description.indexOf(" /at ");
-                    if (atIndex == -1) {
-                        throw new DukeException("Keyword \" /at \" not found, note the white space!");
-                    }
-                    assert atIndex > 1 :  "there is no task";
-                    String deadline = this.description.substring(atIndex + 4).trim();
-                    String description = this.description.substring(0, atIndex).trim();
-                    current = new Event(description, deadline);
-                    break;
-                }
-                default: {
-                    throw new DukeException("I don't understand you at all...");
-                }
+            case "todo": {
+                current = new ToDo(this.description.trim());
+                break;
             }
+            case "deadline": {
+                int byIndex = this.description.indexOf(" /by ");
+                if (byIndex == -1) {
+                    throw new DukeException("Keyword \" /by \" not found, note the white space!");
+                }
+
+                assert byIndex > 1 : "there is no task";
+
+                String deadline = this.description.substring(byIndex + 4).trim();
+                String description = this.description.substring(0, byIndex).trim();
+                current = new Deadline(description, deadline);
+                break;
+            }
+            case "event": {
+                int atIndex = this.description.indexOf(" /at ");
+                if (atIndex == -1) {
+                    throw new DukeException("Keyword \" /at \" not found, note the white space!");
+                }
+
+                assert atIndex > 1 : "there is no task";
+
+                String deadline = this.description.substring(atIndex + 4).trim();
+                String description = this.description.substring(0, atIndex).trim();
+                current = new Event(description, deadline);
+                break;
+            }
+            default: {
+                throw new DukeException("I don't understand you at all...");
+            }
+            }
+
             assert current != null : "The task pending to add is null";
+
             list.add(current);
             storage.appendTxt(current);
             return ui.showAdd(current, list);
 
         } catch (NumberFormatException | DateTimeException e) {
             throw new DukeException("Invalid date and time content detected!");
-        }  catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Invalid date and time format detected!");
         }
 
@@ -87,4 +98,5 @@ public class AddCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
 }

@@ -1,14 +1,19 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class DoneCommand extends Command {
     private final int index;
 
+    /**
+     * Represents a DoneCommand
+     * @param number the index of the task to be marked done
+     * @throws DukeException if the task does not exist in the list
+     */
     public DoneCommand(String number) throws DukeException {
         try {
             this.index = Integer.parseInt(number) - 1;
@@ -19,7 +24,7 @@ public class DoneCommand extends Command {
 
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
-        try{
+        try {
             Task task = list.getList().get(index);
             assert index >= 0 : "Index out of bound";
             task.markAsDone();

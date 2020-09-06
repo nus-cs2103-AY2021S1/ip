@@ -5,11 +5,10 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
-
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class CheckCommand extends Command {
     private final String target;
@@ -20,10 +19,11 @@ public class CheckCommand extends Command {
 
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
+
         AtomicInteger count = new AtomicInteger(1);
-        Predicate<Task> checkDate =  x -> x.getDate().equals(this.target);
-        Function<Task, String> taskString = x -> ui.showTask(count.getAndIncrement() ,x);
-        BinaryOperator<String> accumulator = (x,y) -> (x + "\n" + y);
+        Predicate<Task> checkDate = x -> x.getDate().equals(this.target);
+        Function<Task, String> taskString = x -> ui.showTask(count.getAndIncrement(), x);
+        BinaryOperator<String> accumulator = (x, y) -> (x + "\n" + y);
 
         String output = list.getList().stream()
                                       .filter(checkDate)
@@ -31,8 +31,7 @@ public class CheckCommand extends Command {
                                       .reduce(accumulator)
                                       .orElse("empty");
 
-        return output.equals("empty")? ui.showNothingFound() : ui.showCheck() +
-                "\n" + output;
+        return output.equals("empty") ? ui.showNothingFound() : ui.showCheck() + "\n" + output;
     }
 
     @Override

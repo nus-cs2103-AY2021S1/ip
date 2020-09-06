@@ -1,14 +1,19 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
     private final int index;
 
+    /**
+     * Initializes a DeleteCommand instance
+     * @param number index of the task to be deleted
+     * @throws DukeException if the task does not exist in the list
+     */
     public DeleteCommand(String number) throws DukeException {
         try {
             this.index = Integer.parseInt(number) - 1;
@@ -19,7 +24,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
-        try{
+        try {
             Task task = list.getList().get(index);
             assert index >= 0 : "Index out of bound";
             list.delete(task);
