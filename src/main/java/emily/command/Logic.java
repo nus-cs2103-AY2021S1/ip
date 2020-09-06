@@ -84,8 +84,8 @@ public class Logic {
             outputDialogue += ("\n    I have deleted this task for you: " + current
                     + "\n    You have " + ls.getTaskArrayList().size() + " tasks in your list now");
             break;
-        default:
-            assert false: "checksValidInput has failed";
+        default: //failure of the checkValidInput to check commands
+            assert false : "checksValidInput has failed";
             throw new DukeException("Command is not recognised");
         }
         return outputDialogue;
@@ -101,7 +101,7 @@ public class Logic {
      * @throws DukeException thrown when the input is invalid
      */
     public Command checksValidInput(String input, int currentTasklistSize) throws DukeException {
-        Command c = Command.BLANK;
+        Command c;
         String shortened = input.trim();
 
         if (input.isEmpty() || shortened.isEmpty()) {
@@ -137,7 +137,7 @@ public class Logic {
                 throw new DukeException("Missing keyword");
             }
             c = Command.FIND;
-        } else {
+        } else { //Unrecognised command given by the user
             throw new DukeException("Invalid input");
         }
         return c;

@@ -26,6 +26,7 @@ public class Task {
         return this.description;
     }
 
+    //return a String of a tick or cross indicating completion of task
     public String getStatusIcon() {
         return (hasFinished ? "\u2713" : "\u2718");
     }

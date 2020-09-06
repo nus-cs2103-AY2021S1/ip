@@ -39,7 +39,7 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException | java.time.DateTimeException e) {
                 throw new DukeException("Format of deadline should be /by yyyy-mm-dd");
             }
-        } else {
+        } else if (str.contains("event")){
             try {
                 String description = str.substring(6);
                 String[] temp = description.split("/at ");
@@ -48,6 +48,9 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException | java.time.DateTimeException e) {
                 throw new DukeException("Format of event should be /at yyyy-mm-dd HHmm");
             }
+        } else{
+            assert false: "String passed into parser fails logic";
+            throw new DukeException("Unrecognised command");
         }
     }
 }

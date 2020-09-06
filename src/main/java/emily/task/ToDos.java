@@ -8,7 +8,7 @@ public class ToDos extends Task {
     /**
      * Subclass of Task with a given type
      *
-     * @param description
+     * @param description time provided
      */
     public ToDos(String description) {
         super(description);

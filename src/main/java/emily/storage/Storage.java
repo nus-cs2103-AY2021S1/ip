@@ -91,18 +91,17 @@ public class Storage {
             FileWriter fw = new FileWriter(this.filepath);
             String txt = "";
 
-            for (int i = 0; i < store.size(); i++) {
+            for (Task task : store) {
                 String temp = "";
-                Task current = store.get(i);
-                if (current instanceof ToDos) {
-                    temp = "T" + (current.isHasFinished() ? "1" : "0")
-                            + "," + current.getDescription();
-                } else if (current instanceof Deadline) {
-                    temp = "D" + (current.isHasFinished() ? "1" : "0")
-                            + "," + current.getDescription() + "," + ((Deadline) current).getBy();
-                } else if (current instanceof Event) {
-                    temp = "E" + (current.isHasFinished() ? "1" : "0")
-                            + "," + current.getDescription() + "," + ((Event) current).getAt();
+                if (task instanceof ToDos) {
+                    temp = "T" + (task.isHasFinished() ? "1" : "0")
+                            + "," + task.getDescription();
+                } else if (task instanceof Deadline) {
+                    temp = "D" + (task.isHasFinished() ? "1" : "0")
+                            + "," + task.getDescription() + "," + ((Deadline) task).getBy();
+                } else if (task instanceof Event) {
+                    temp = "E" + (task.isHasFinished() ? "1" : "0")
+                            + "," + task.getDescription() + "," + ((Event) task).getAt();
                 }
                 txt = txt + temp + System.lineSeparator();
             }

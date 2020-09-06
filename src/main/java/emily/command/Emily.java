@@ -3,6 +3,7 @@ package emily.command;
 import emily.exception.DukeException;
 import emily.storage.Storage;
 import emily.storage.TaskList;
+
 import java.io.File;
 
 
@@ -42,6 +43,8 @@ public class Emily {
         boolean end = false;
         String output = "";
 
+        /*The program within the loop
+        will set end as true once the command is completed without errors*/
         while (!end) {
             try {
                 output = logic.readsLine(userInputText, tasks);
