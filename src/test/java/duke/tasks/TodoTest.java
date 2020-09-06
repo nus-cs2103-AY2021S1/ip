@@ -1,10 +1,11 @@
 package duke.tasks;
 
-import duke.exceptions.DukeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.DukeException;
 
 class TodoTest {
 

@@ -1,14 +1,15 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
 
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Task;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MessageManagerTest {
 
