@@ -23,34 +23,28 @@ public class Ui {
     /**
      * Shows goodbye message.
      */
-    public void sayGoodbye() {
-        System.out.println("    _______________________________________________________________________________");
-        System.out.println("        Bye. Hope to see you again soon!");
-        System.out.println("    _______________________________________________________________________________");
+    public String sayGoodbye() {
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
      * Shows invalid format command error message.
      */
-    public void showInvalidFormatCommandDescription() {
-        System.out.println("    _______________________________________________________________________________");
-        System.out.println("        ☹ OOPS!!! The description of a done cannot be empty or in wrong format");
-        System.out.println("    _______________________________________________________________________________");
+    public String showInvalidFormatCommandDescription() {
+        return "☹ OOPS!!! The description of a done cannot be empty or in wrong format\n";
     }
 
     /**
      * Shows meaningless command message.
      */
-    public void showMeaninglessCommandDescription() {
-        System.out.println("    _______________________________________________________________________________");
-        System.out.println("        ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        System.out.println("    _______________________________________________________________________________");
+    public String showMeaninglessCommandDescription() {
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
     }
 
     /**
      * Prints out line background.
      */
-    public void printLineBackground() {
-        System.out.println("    _______________________________________________________________________________");
+    public String printLineBackground() {
+        return "    _______________________________________________________________________________\n";
     }
 }
