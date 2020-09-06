@@ -54,6 +54,8 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
+        assert ui != null;
+        assert storage != null;
         Event eventTask;
         if (this.hasLocalDate) {
             eventTask = new Event(commandDescription, eventLocalDate);

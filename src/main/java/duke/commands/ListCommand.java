@@ -32,11 +32,16 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
+        assert ui != null;
         ArrayList<Task> tasks = new ArrayList<>();
-        for (int i = 0; i < taskList.getListSize(); i++) {
-            Task task = taskList.getTaskAtIndex(i);
-            tasks.add(task);
+        try {
+            for (int i = 0; i < taskList.getListSize(); i++) {
+                Task task = taskList.getTaskAtIndex(i);
+                tasks.add(task);
+            }
+            return ui.displayAllItems(tasks);
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showError("There's no such element!");
         }
-        return ui.displayAllItems(tasks);
     }
 }

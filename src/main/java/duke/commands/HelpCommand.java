@@ -29,6 +29,7 @@ public class HelpCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
+        assert ui != null;
         return ui.showHelp();
     }
 }

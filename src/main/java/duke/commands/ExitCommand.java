@@ -28,6 +28,8 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
+        assert ui != null;
+        assert storage != null;
         storage.saveData(taskList, ui);
         return ui.displayGoodbye();
     }
