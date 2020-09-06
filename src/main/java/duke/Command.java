@@ -5,6 +5,7 @@ public class Command {
     public static final int LIST = 1;
     public static final int DONE = 2;
     public static final int DELETE = 3;
+    public static final int FIND = 4;
     public static final int INVALID = 99;
     public static final int CREATE_TODO = 11;
     public static final int CREATE_DEADLINE = 12;
