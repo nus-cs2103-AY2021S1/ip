@@ -78,6 +78,7 @@ public class TaskList {
 
 
     /**
+     * Depreciated
      * Adds a task to the task storage
      *
      * @param type the type of task to be added
@@ -98,7 +99,7 @@ public class TaskList {
 
     /**
      * Overloaded store that reads from save file
-     *
+     * NOT depreciated
      * @param wholeLine each line in the save file
      */
     public void addTask(String wholeLine) {
