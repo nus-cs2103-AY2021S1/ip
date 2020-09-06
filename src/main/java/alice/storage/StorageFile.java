@@ -46,20 +46,28 @@ public class StorageFile {
         boolean fileExists = Files.exists(filePath);
         try {
             if (fileExists) {
-                List<String> taskDatas = readFile();
-                loadMessage = "Save file loaded";
-                return taskDatas;
+                // Read from file.
+                List<String> taskStrings = readFile();
+                setLoadStatus("Save file loaded");
+                return taskStrings;
             } else {
-                // Create data file and directory
+                // Create data file and directory.
                 createFile();
-                loadMessage = "New file created";
+                setLoadStatus("New file created");
                 assert Files.exists(filePath) : "File is supposed to be successfully created";
                 return null;
             }
         } catch (AliceStorageException ex) {
-            loadMessage = ex.getMessage();
+            setLoadStatus(ex.getMessage());
             return null;
         }
+    }
+
+    /**
+     * Set load status message.
+     */
+    private void setLoadStatus(String message) {
+        loadMessage = message;
     }
 
     /**

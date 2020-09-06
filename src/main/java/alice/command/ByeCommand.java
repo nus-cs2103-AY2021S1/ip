@@ -16,13 +16,17 @@ public class ByeCommand implements Command {
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "]";
 
     /**
-     * Checks if the command word triggers the <code>ByeCommand</code>.
+     * Checks if the command word triggers the {@code ByeCommand}.
      *
      * @param name the command word to check.
-     * @return true if the command word belongs to <code>ByeCommand</code>; false otherwise.
+     * @return true if the command word belongs to {@code ByeCommand}; false otherwise.
      */
     public static boolean hasCommandWord(String name) {
         return NAMES.contains(name);
+    }
+
+    public static ByeCommand createCommand() {
+        return new ByeCommand();
     }
 
     @Override

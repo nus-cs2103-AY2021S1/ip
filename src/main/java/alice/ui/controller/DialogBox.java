@@ -56,6 +56,7 @@ public class DialogBox extends HBox {
         ObservableList<Node> nodes = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(nodes);
         getChildren().setAll(nodes);
+
         chatBubble.setAlignment(Pos.TOP_LEFT);
         setAlignment(Pos.CENTER_LEFT);
     }

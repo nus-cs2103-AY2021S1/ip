@@ -26,18 +26,34 @@ public class DoneCommand implements Command {
      *
      * @param taskIndex the index indicating the completed task to mark as done.
      */
-    public DoneCommand(int taskIndex) {
+    private DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
     /**
-     * Checks if the command word triggers the <code>DoneCommand</code>.
+     * Checks if the command word triggers the {@code DoneCommand}.
      *
      * @param name the command word to check.
-     * @return true if the command word belongs to <code>DoneCommand</code>; false otherwise.
+     * @return true if the command word belongs to {@code DoneCommand}; false otherwise.
      */
     public static boolean hasCommandWord(String name) {
         return NAMES.contains(name);
+    }
+
+    /**
+     * Creates a new command to mark the task indicated by the user as done.
+     *
+     * @param inputIndex he string representing the task number given by user.
+     * @return the {@code DoneCommand} with the verified task number.
+     * @throws InvalidCommandException if the task number provided is invalid.
+     */
+    public static DoneCommand createCommand(String inputIndex) throws InvalidCommandException {
+        try {
+            int index = Integer.parseInt(inputIndex) - 1;
+            return new DoneCommand(index);
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException("Don't play around. Give me a proper number!");
+        }
     }
 
     @Override

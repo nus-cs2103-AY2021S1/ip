@@ -7,7 +7,7 @@ import alice.AliceException;
  */
 public class AliceStorageException extends AliceException {
     /**
-     * Constructs a <code>AliceStorageException</code> with the
+     * Constructs a {@code AliceStorageException} with the
      * specified detail message.
      *
      * @param msg the detail message.

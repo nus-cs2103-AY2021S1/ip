@@ -31,7 +31,7 @@ public class Todo extends Task {
      * Decode an encoded string representation of the todo task.
      *
      * @param saved the string representation of the encoded task.
-     * @return the <code>Todo</code> task described in the string representation.
+     * @return the {@code Todo} task described in the string representation.
      * @throws AliceException if the encoded string is corrupted.
      */
     public static Todo decode(String saved) throws AliceException {

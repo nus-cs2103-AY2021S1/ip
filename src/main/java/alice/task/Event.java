@@ -63,7 +63,7 @@ public class Event extends Task {
      * Decode an encoded string representation of the event.
      *
      * @param saved the string representation of the encoded event.
-     * @return the <code>Event</code> described in the string representation.
+     * @return the {@code Event} described in the string representation.
      * @throws AliceException if the encoded string is corrupted.
      */
     public static Event decode(String saved) throws AliceException {

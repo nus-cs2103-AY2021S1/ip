@@ -39,7 +39,7 @@ public class Alice {
             // Read stored data
             tasks = new TaskList(storageFile.load());
         } catch (AliceException ex) {
-            // Cannot load, create or read data file.
+            // If save file is corrupted
             // Starts with a new file.
             tasks = new TaskList();
         }

@@ -22,24 +22,39 @@ public class TodoCommand implements Command {
     private final String description;
 
     /**
-     * Creates a new command to create a new <code>Todo</code> with the provided description.
+     * Creates a new command to create a new {@code Todo} with the provided description.
      *
      * @param description the description of the task to be done.
      */
-    public TodoCommand(String description) {
+    private TodoCommand(String description) {
         this.description = description;
 
         assert !description.isBlank() : "Cannot create a TodoCommand without providing description";
     }
 
     /**
-     * Checks if the command word triggers the <code>TodoCommand</code>.
+     * Checks if the command word triggers the {@code TodoCommand}.
      *
      * @param name the command word to check.
-     * @return true if the command word belongs to <code>TodoCommand</code>; false otherwise.
+     * @return true if the command word belongs to {@code TodoCommand}; false otherwise.
      */
     public static boolean hasCommandWord(String name) {
         return NAMES.contains(name);
+    }
+
+    /**
+     * Creates a new command to create a new {@code Todo} with the description given by the user.
+     *
+     * @param description the description input given by user.
+     * @return the {@code TodoCommand} with the verified description.
+     * @throws InvalidCommandException if the user gives an empty description.
+     */
+    public static TodoCommand createCommand(String description) throws InvalidCommandException {
+        if (!description.isBlank()) {
+            return new TodoCommand(description);
+        } else {
+            throw new InvalidCommandException("The todo description cannot be left empty.");
+        }
     }
 
     @Override
