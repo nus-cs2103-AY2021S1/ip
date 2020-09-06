@@ -12,7 +12,7 @@ public class Todo extends Task {
      * @param description describes the task to be done.
      */
     public Todo(String description) {
-        super(false, description);
+        this(false, description);
     }
 
     /**
@@ -23,6 +23,8 @@ public class Todo extends Task {
      */
     private Todo(boolean isDone, String description) {
         super(isDone, description);
+
+        assert !description.isBlank() : "Cannot create a Todo with no description";
     }
 
     /**

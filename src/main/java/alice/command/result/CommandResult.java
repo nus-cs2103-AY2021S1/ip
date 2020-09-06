@@ -22,6 +22,8 @@ public abstract class CommandResult {
         this.commandMessage = commandMessage;
         this.saveStatus = saveStatus;
         this.isCommandSuccess = isCommandSuccess;
+
+        assert !commandMessage.isBlank() : "Cannot create CommandResult without a message";
     }
 
     /**

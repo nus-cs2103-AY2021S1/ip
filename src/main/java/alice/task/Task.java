@@ -41,6 +41,8 @@ public abstract class Task {
      * @return true if any keywords matches the task description; false otherwise.
      */
     public boolean containKeywords(String... keywords) {
+        assert keywords.length != 0 : "Keywords used for checking with task description cannot be empty";
+
         List<String> descriptionTokens = Arrays.asList(description.split(" "));
         return Arrays.stream(keywords).anyMatch(descriptionTokens::contains);
     }

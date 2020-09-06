@@ -55,7 +55,7 @@ public class Cli {
      * Prints the file loading status message for initialisation of ALICE.
      */
     public void displayInitMessage(String msg) {
-        displayOutput(msg);
+        displayOutput(String.format("<%s>", msg));
     }
 
     /**
