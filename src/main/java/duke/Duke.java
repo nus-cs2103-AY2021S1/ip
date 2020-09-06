@@ -38,6 +38,7 @@ public class Duke {
      */
     public void run() {
         this.ui.greet();
+        assert !this.isQuitting;
         while (!this.isQuitting) {
             try {
                 Command c = Parser.parse(this.ui.getInput());
@@ -50,8 +51,10 @@ public class Duke {
     }
 
     public String getResponse(String input) {
+        assert input != null;
         try {
             Command c = Parser.parse(input);
+            assert c != null;
             return c.execute(this.tasks, this.ui, this.storage);
         } catch (DukeException e) {
             this.ui.chatPrint(e.getMessage());

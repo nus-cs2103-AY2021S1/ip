@@ -44,8 +44,10 @@ public class Task {
      * @return task set as done.
      */
     public Task setDone() {
+        boolean wasDone = this.isDone;
         Task doneTask = new Task(this.desc);
         doneTask.isDone = true;
+        assert this.isDone == wasDone;
         return doneTask;
     }
 

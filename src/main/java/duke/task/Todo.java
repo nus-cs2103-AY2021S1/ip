@@ -31,8 +31,10 @@ public class Todo extends Task {
      */
     @Override
     public Task setDone() {
+        boolean wasDone = this.isDone;
         Task doneTask = new Todo(this.desc);
         doneTask.isDone = true;
+        assert this.isDone == wasDone;
         return doneTask;
     }
 

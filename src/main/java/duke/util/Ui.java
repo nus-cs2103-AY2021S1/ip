@@ -59,6 +59,7 @@ public class Ui {
      * @return the printed message.
      */
     public String onList(List<Task> tasks) {
+        assert tasks != null;
         int id = 1;
         StringBuilder output = new StringBuilder("Here are the tasks in your list:");
         for (Task task : tasks) {
@@ -66,6 +67,7 @@ public class Ui {
             id++;
         }
         chatPrint(output.toString());
+        assert id == tasks.size() + 1;
         return output.toString();
     }
 
@@ -76,6 +78,7 @@ public class Ui {
      * @return the printed message.
      */
     public String onFind(List<Task> tasks) {
+        assert tasks != null;
         int id = 1;
         StringBuilder output = new StringBuilder("Here are the matching tasks in your list:");
         for (Task task : tasks) {
@@ -83,6 +86,7 @@ public class Ui {
             id++;
         }
         chatPrint(output.toString());
+        assert id == tasks.size() + 1;
         return output.toString();
     }
 
@@ -93,6 +97,7 @@ public class Ui {
      * @return the printed message.
      */
     public String onDone(Task task) {
+        assert task != null;
         String textToPrint = "Nice! I've marked this task as done:\n"
                 + "   " + task;
         chatPrint(textToPrint);
@@ -107,6 +112,7 @@ public class Ui {
      * @return the printed message.
      */
     public String onDelete(Task task, int size) {
+        assert task != null && size >= 0;
         String textToPrint = "Noted. I've removed this task:\n"
                 + "   " + task + "\n"
                 + "Now you have " + size + " tasks in the list.";
@@ -122,6 +128,7 @@ public class Ui {
      * @return the printed message.
      */
     public String onAdd(Task task, int size) {
+        assert task != null && size >= 0;
         String textToPrint = "Got it. I've added this task:\n"
                 + "   " + task + "\n"
                 + "Now you have " + size + " tasks in the list.";
@@ -135,6 +142,7 @@ public class Ui {
      * @param toPrint string to print.
      */
     public void chatPrint(String toPrint) {
+        assert toPrint != null;
         System.out.println(line);
         System.out.println(toPrint);
         System.out.println(line + "\n");

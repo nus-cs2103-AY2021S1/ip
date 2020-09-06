@@ -33,10 +33,13 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (this.idx >= tasks.size()) {
+        assert tasks != null && ui != null && storage != null;
+        int previousSize = tasks.size();
+        if (this.idx >= tasks.size() || this.idx < 0) {
             throw new DukeException("Oh dear! That task doesn't exist!");
         }
         Task doneTask = tasks.setDone(this.idx);
+        assert tasks.size() == previousSize;
         storage.save(tasks.getList());
         return ui.onDone(doneTask);
     }
