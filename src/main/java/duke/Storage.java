@@ -147,11 +147,11 @@ public class Storage {
                 String taskDetails = String.format("T | %d | %s", task.isTaskDone() ? 1 : 0, task.getDescription());
                 content.append(taskDetails).append("\n");
             } else if (task instanceof Deadline) {
-                String taskDetails = String.format("T | %d | %s |%s",
+                String taskDetails = String.format("D | %d | %s |%s",
                         task.isTaskDone() ? 1 : 0, task.getDescription(), ((Deadline) task).getDate());
                 content.append(taskDetails).append("\n");
             } else {
-                String taskDetails = String.format("T | %d | %s |%s",
+                String taskDetails = String.format("E | %d | %s |%s",
                         task.isTaskDone() ? 1 : 0, task.getDescription(), ((Event) task).getAt());
                 content.append(taskDetails).append("\n");
             }
