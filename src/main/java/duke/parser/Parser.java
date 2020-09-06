@@ -14,6 +14,7 @@ import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.RetrieveCommand;
+import duke.command.SortCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDeleteException;
@@ -55,7 +56,9 @@ public class Parser {
         } else if (input.startsWith("retrieve")) {
             return parseRetrieve(input);
         } else if (input.startsWith("find")) {
-            return parseFind(input, tasks);
+            return parseFind(input);
+        } else if (input.equals("sort")) {
+            return parseSort(input, tasks);
         } else {
             throw new InvalidCommandException();
         }
@@ -227,7 +230,7 @@ public class Parser {
      * @return FindCommand.
      * @throws DukeException If user input is not valid.
      */
-    private static Command parseFind(String input, TaskList tasks) throws DukeException {
+    private static Command parseFind(String input) throws DukeException {
         assert input.startsWith("find") : "input should start with find";
         String[] splitInput = input.split(" ", 2);
         boolean hasContent = checkForContent(splitInput);
@@ -236,6 +239,24 @@ public class Parser {
         }
         String content = splitInput[1];
         return new FindCommand(content);
+    }
+
+    /**
+     * Returns the SortCommand if user input is valid.
+     *
+     * @param input User input to Duke.
+     * @param tasks TaskList containing Task to sort.
+     * @return SortCommand.
+     * @throws NoTaskException If there is no Task in the TaskList to sort.
+     */
+    private static Command parseSort(String input, TaskList tasks) throws NoTaskException {
+        assert input.startsWith("sort") : "input should start with sort";
+        boolean hasTasks = tasks.getNumberOfTask() > 0;
+
+        if (!hasTasks) {
+            throw new NoTaskException();
+        }
+        return new SortCommand();
     }
 }
 
