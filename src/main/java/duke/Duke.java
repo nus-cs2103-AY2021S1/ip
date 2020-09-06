@@ -8,6 +8,7 @@ import exception.AnonymousException;
 import exception.DescriptionException;
 import exception.DukeCreateFileException;
 import exception.DukeDateTimeParserException;
+import exception.DukeException;
 import exception.DukeFileException;
 import exception.DukeFileNotFoundException;
 import exception.DukeKeywordException;
@@ -74,14 +75,8 @@ public class Duke {
                 ui.getExceptionTemplate(new DukeFileException());
             } catch (AnonymousException e) {
                 ui.getExceptionTemplate(new AnonymousException(command));
-            } catch (DescriptionException e) {
-                ui.getExceptionTemplate(new DescriptionException());
-            } catch (DukeDateTimeParserException e) {
-                ui.getExceptionTemplate(new DukeDateTimeParserException());
-            } catch (NoIndexException e) {
-                ui.getExceptionTemplate(new NoIndexException());
-            } catch (DukeKeywordException e) {
-                ui.getExceptionTemplate(new DukeKeywordException());
+            } catch (DukeException e) {
+                ui.getExceptionTemplate(e);
             }
         }
     }
@@ -97,16 +92,9 @@ public class Duke {
         } catch (IOException e) {
             return new DukeFileException().toString();
         } catch (AnonymousException e) {
-            System.out.println(command);
             return new AnonymousException(command).toString();
-        } catch (DescriptionException e) {
-            return new DescriptionException().toString();
-        } catch (DukeDateTimeParserException e) {
-            return new DukeDateTimeParserException().toString();
-        } catch (NoIndexException e) {
-            return new NoIndexException().toString();
-        } catch (DukeKeywordException e) {
-            return new DukeKeywordException().toString();
+        } catch(DukeException e) {
+            return e.toString();
         }
     }
 
