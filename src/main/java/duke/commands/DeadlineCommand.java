@@ -30,17 +30,17 @@ public class DeadlineCommand extends Command {
     @Override
     public boolean execute(String input) throws DukeException {
         switch (stage) {
-            case 0:
-                setDeadlineName(input);
-                setResponse(ui.askDeadlineDate());
-                incrementStage();
-                break;
-            case 1:
-                setDeadlineDate(input);
-                tm.add(new Deadline(deadlineName, deadlineDate));
-                setResponse("Deadline added"); // TODO: refactor this line
-                setDone();
-                break;
+        case 0:
+            setDeadlineName(input);
+            setResponse(ui.askDeadlineDate());
+            incrementStage();
+            break;
+        case 1:
+            setDeadlineDate(input);
+            tm.add(new Deadline(deadlineName, deadlineDate));
+            setResponse("Deadline added"); // TODO: refactor this line
+            setDone();
+            break;
         }
         return true;
     }
