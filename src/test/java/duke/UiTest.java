@@ -205,7 +205,7 @@ public class UiTest {
         PrintStream ps = new PrintStream(out);
         System.setOut(ps);
         Ui ui = new Ui();
-        ui.greetUser();
+        ui.printMessage(ui.getGreetings());
         assertEquals(LOGO + SEPARATOR
                 + WELCOME_MESSAGE + SEPARATOR, out.toString());
         System.setOut(originalOut);

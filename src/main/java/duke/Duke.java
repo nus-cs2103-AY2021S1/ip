@@ -13,6 +13,7 @@ import duke.ui.Ui;
  * @author Audrey Felicio Anwar
  */
 public class Duke {
+    private static final String SEPARATOR = System.getProperty("line.separator");
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -41,43 +42,6 @@ public class Duke {
     }
 
     /**
-     * Runs the main logic of chat bot.
-     */
-    public void run() {
-        ui.greetUser();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.readInput();
-                ui.printMessage(ui.showLine());
-                Command command = Parser.parse(input);
-                if (command != null) {
-                    ui.printMessage(command.executeCommand(tasks, ui, storage));
-                    isExit = command.isExit();
-                }
-            } catch (DukeException error) {
-                ui.printMessage(error.getMessage());
-            } finally {
-                ui.printMessage(ui.showLine());
-            }
-        }
-        try {
-            storage.saveTasks(tasks.getTasks());
-        } catch (DukeException error) {
-            ui.printMessage(error.getMessage());
-        }
-    }
-
-    /**
-     * Initializes and runs the program.
-     *
-     * @param args Command line inputs.
-     */
-    public static void main(String[] args) {
-        new Duke("./tasks.txt").run();
-    }
-
-    /**
      * Returns a response to be shown to the user.
      *
      * @param input Input from the user.
@@ -86,15 +50,13 @@ public class Duke {
     public String getResponse(String input) {
         StringBuilder response = new StringBuilder();
         try {
-            response.append(ui.showLine() + "\n");
+            response.append(ui.showLine() + SEPARATOR);
             Command command = Parser.parse(input);
-            if (command != null) {
-                response.append(command.executeCommand(tasks, ui, storage) + "\n");
-            }
+            response.append(command.executeCommand(tasks, ui, storage) + SEPARATOR);
         } catch (DukeException error) {
-            response.append(error.getMessage() + "\n");
+            response.append(error.getMessage() + SEPARATOR);
         } finally {
-            response.append(ui.showLine() + "\n");
+            response.append(ui.showLine() + SEPARATOR);
         }
         return response.toString();
     }

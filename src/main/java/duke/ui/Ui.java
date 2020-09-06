@@ -201,37 +201,36 @@ public class Ui {
     }
 
     /**
-     * Prints welcome message.
-     */
-    public void greetUser() {
-        System.out.println(LOGO);
-        System.out.println(WELCOME_MESSAGE);
-    }
-
-    /**
      * Returns welcome message.
+     *
      * @return Welcome message.
      */
     public String getGreetings() {
-        return LOGO + "\n" + WELCOME_MESSAGE;
+        return LOGO + SEPARATOR + WELCOME_MESSAGE;
     }
 
     /**
-     * Prints line divider.
+     * Returns line divider.
+     *
+     * @return Line divider.
      */
     public String showLine() {
         return DIVIDER;
     }
 
     /**
-     * Prints goodbye message.
+     * Returns goodbye message.
+     *
+     * @return Goodbye message.
      */
     public String showGoodbyeUser() {
         return GOODBYE_MESSAGE;
     }
 
     /**
-     * Prints loading error message.
+     * Returns loading error message.
+     *
+     * @return Loading error message.
      */
     public String showLoadingError() {
         return " Failed to load saved data :(";
@@ -260,6 +259,7 @@ public class Ui {
 
     /**
      * Accumulates response from various functionalities.
+     *
      * @param responses Responses to be accumulated.
      */
     public void accumulateResponses(String... responses) {
@@ -270,6 +270,7 @@ public class Ui {
 
     /**
      * Returns the accumulated responses and reset.
+     *
      * @return Accumulated responses.
      */
     public String getResponses() {

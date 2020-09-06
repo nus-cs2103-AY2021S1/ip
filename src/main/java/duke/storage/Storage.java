@@ -35,6 +35,7 @@ public class Storage {
             File data = new File(filePath);
             if (!data.exists()) {
                 data.createNewFile();
+                assert data.exists() : " Directory cannot be made";
             }
             this.data = data;
         } catch (IOException error) {
@@ -66,6 +67,8 @@ public class Storage {
                 } else if (type.equals("E")) {
                     time = LocalDate.parse(inputs[3]);
                     tasks.add(new Event(description, isDone, time));
+                } else {
+                    throw new DukeException(" I cannot identify the task type :(");
                 }
             }
             return tasks;
