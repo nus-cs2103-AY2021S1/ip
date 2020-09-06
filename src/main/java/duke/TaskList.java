@@ -25,7 +25,7 @@ public class TaskList {
     /**
      * Construction a TaskList object
      * @param reader a BufferedReader to read the ./data/main.java.duke.txt
-     * @throws IOException
+     * @throws IOException for reading file
      */
     public TaskList(BufferedReader reader) throws IOException {
         if (reader == null) {
@@ -39,9 +39,10 @@ public class TaskList {
      * Reads all the Tasks in ./data/main.java.duke.txt and puts all the Tasks in an ArrayList
      * @param reader a BufferedReader for reading ./data/main.java.duke.txt
      * @return an ArrayList of all Tasks in ./data/main.java.duke.txt
-     * @throws IOException
+     * @throws IOException for reading file
      */
     public static ArrayList<Task> readTextFile2List(BufferedReader reader) throws IOException {
+        assert reader != null : "BufferedReader passed into readTextFile2List is null";
         ArrayList<Task> list = new ArrayList<>();
         String line;
         while ((line = reader.readLine()) != null) {
@@ -115,6 +116,7 @@ public class TaskList {
      * @param task the Task to be added
      */
     public void add(Task task) {
+        assert task != null : "Task passed into add method of TaskList class is null";
         list.add(task);
     }
 

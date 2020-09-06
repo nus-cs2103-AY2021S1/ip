@@ -24,6 +24,7 @@ public class Todo extends Task {
      * @return the Todo object
      */
     public static ArrayList<Todo> of(String input) {
+        assert !input.equals("") : "input string passed into of method of Todo class is empty";
         String description = getDescription(input);
         if (description.equals("")) {
             return null;

@@ -15,6 +15,7 @@ public class Finder {
      * @param keyword the keyword for searching
      */
     public static void find(TaskList list, String keyword) {
+        assert !keyword.equals("") : "keyword for searching is empty";
         ArrayList<Task> res = new ArrayList<>();
         for (int i = 0; i < list.getSize(); i++) {
             if (list.get(i) instanceof Todo) {
@@ -44,6 +45,7 @@ public class Finder {
      * @return a list of matching tasks
      */
     public static ArrayList<Task> appFind(TaskList list, String keyword){
+        assert !keyword.equals("") : "keyword for searching is empty";
         ArrayList<Task> res = new ArrayList<>();
         for (int i = 0; i < list.getSize(); i++) {
             if (list.get(i) instanceof Todo) {
