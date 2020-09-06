@@ -104,19 +104,13 @@ public class DukeStorage implements Storage {
         return saveLines;
     }
 
-    private void loadData() {
+    private void loadData() throws IOException {
         // Prevent saving while loading
         isActive = false;
-        String[] result = new String[0];
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(filePath.toString()));
-            result = in.lines().toArray(String[]::new);
-            in.close();
-        } catch (IOException e) {
-            System.out.println(ERROR_READ_SAVE);
-        } finally {
-            isActive = true;
-            this.saveLines = new ArrayList<>(Arrays.asList(result));
-        }
+        BufferedReader in = new BufferedReader(new FileReader(filePath.toString()));
+        String[] result = in.lines().toArray(String[]::new);
+        in.close();
+        isActive = true;
+        this.saveLines = new ArrayList<>(Arrays.asList(result));
     }
 }
