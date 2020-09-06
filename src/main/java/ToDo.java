@@ -24,6 +24,7 @@ public class ToDo extends Task {
      * @throws DukeException in the event it is unable to decode the string
      */
     public static ToDo decode(String code) throws DukeException {
+        assert code.length() > 0;
         if (code.charAt(0) == 'T') {
             String[] content = code.split("\\|", 3);
             if (content.length != 3) {

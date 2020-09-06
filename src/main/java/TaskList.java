@@ -41,6 +41,7 @@ public class TaskList implements Iterable<Task> {
      */
     public String markCompleted(int index) throws DukeException {
         try {
+            //assert index > 0 && index < this.listOfItems.size();
             Task item = this.listOfItems.get(index);
             item.markAsDone();
 
@@ -59,7 +60,9 @@ public class TaskList implements Iterable<Task> {
      * @throws DukeException if the number given is not on the list
      */
     public String deleteTask(int index) throws DukeException {
+
         try {
+
             Task item = this.listOfItems.remove(index);
 
             return String.format("\nNoted. I've removed this task:\n  %s\nNow you have %d tasks in your list.\n",
@@ -77,7 +80,9 @@ public class TaskList implements Iterable<Task> {
      * @return String output of the entire list
      */
 
-    public void findTask(String Keyword) {
+
+    public void findTask(String Keyword){
+        assert Keyword.length() > 0;
         ListOfKeyWordItems.clear();
         for (Task item : listOfItems) {
             if (item.toString().indexOf(Keyword) != -1) {

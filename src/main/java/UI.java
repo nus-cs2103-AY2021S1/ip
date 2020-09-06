@@ -20,7 +20,8 @@ public class UI {
      * @param content String item to be wrapped by two lines
      */
     public static String addLines(String content) {
-        return line + "\n" + content + "\n" + line;
+        assert content.length() > 0;
+        return line + "\n" + content +"\n" + line;
     }
 
 

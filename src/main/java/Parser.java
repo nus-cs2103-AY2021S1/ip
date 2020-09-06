@@ -10,6 +10,7 @@ public class Parser {
      * @param taskList main list where all tasks are kept on
      * @param ui       scanner that takes user inputs
      */
+
     public static String parseCode(TaskList taskList, UI ui, String userInput) {
 
         String echo = userInput;
@@ -76,7 +77,6 @@ public class Parser {
                     String findWord = arr[1];
                     taskList.findTask(findWord);
                     return ui.addLines(taskList.printOutKeyWordList());
-
             }
 
 
