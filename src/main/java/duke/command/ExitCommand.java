@@ -26,6 +26,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
+        assert tasks != null && storage != null : "tasks and storage cannot be null.";
         storage.save(tasks.getTasks());
         return new CommandResponse(Ui.respondExit(), true);
     }

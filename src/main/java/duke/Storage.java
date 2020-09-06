@@ -70,6 +70,7 @@ public class Storage {
                     task = new Event(eventDescription, eventDate);
                     break;
                 default:
+                    assert false : splitTask[0];
                     throw new IllegalArgumentException();
                 }
                 if (isDone) {
@@ -109,6 +110,7 @@ public class Storage {
                             + " | " + task.getDate() + "\n");
                     break;
                 default:
+                    assert false : task.getShortForm();
                     throw new IllegalArgumentException();
                 }
             }

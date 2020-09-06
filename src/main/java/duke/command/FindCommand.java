@@ -29,6 +29,8 @@ public class FindCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList tasks, Storage storage) {
+        assert tasks != null && storage != null : "tasks and storage cannot be null.";
         return new CommandResponse(Ui.respondFindTasks(tasks, keyword));
     }
+
 }

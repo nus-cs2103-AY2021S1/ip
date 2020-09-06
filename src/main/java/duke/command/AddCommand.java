@@ -32,6 +32,7 @@ public class AddCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
+        assert tasks != null && storage != null : "tasks and storage cannot be null.";
         tasks.addTask(task);
         storage.save(tasks.getTasks());
         return new CommandResponse(Ui.respondAddTask(task, tasks));

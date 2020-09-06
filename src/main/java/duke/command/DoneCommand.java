@@ -32,6 +32,7 @@ public class DoneCommand extends Command {
     @Override
     public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
         try {
+            assert tasks != null && storage != null : "tasks and storage cannot be null.";
             tasks.markTaskAsDone(taskNumber);
             storage.save(tasks.getTasks());
             return new CommandResponse(Ui.respondDoneTask(tasks.getTask(taskNumber)));
