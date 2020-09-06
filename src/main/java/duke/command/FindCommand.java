@@ -37,6 +37,7 @@ public class FindCommand implements Command {
                 message = "Here are the matching tasks in your list:\n" + Helper.tasksToDisplayListString(matches);
             }
         }
+        assert !message.isBlank();
         ui.say(message);
     }
 }

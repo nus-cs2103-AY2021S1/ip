@@ -37,6 +37,7 @@ public class DoneCommand implements Command {
             sb.append("Nice! I've marked this task as done:\n");
         }
         sb.append("  " + t.displayString());
+        assert !sb.toString().isBlank();
         ui.say(sb.toString());
     }
 }
