@@ -31,6 +31,11 @@ public class Parser {
             return;
         }
 
+        if (input.equals("help")) {
+            showHelpInterface();
+            return;
+        }
+
         if (input.contains(" ")) {
             int i = input.indexOf(" ");
             String firstWord = input.substring(0, i);
@@ -69,6 +74,18 @@ public class Parser {
                     throw new DukeUnknownCommandException();
             }
         }
+    }
+
+    /**
+     * Prints the help interface.
+     */
+    private void showHelpInterface() {
+        System.out.println("List of available commands: \ntodo - creates a todo (e.g todo read book)" +
+                "\ndeadline - creates a deadline with a date (e.g deadline return book /by 2019-10-15)" +
+                "\nevent - creates an event with a date (e.g event go library /at 2019-10-15)" +
+                "\ndone - sets item at index to done (e.g done 1)" +
+                "\ndelete - deletes item at index (e.g delete 1)" +
+                "\nfind - finds task (e.g find book)");
     }
 
     private void showList(ArrayList<Task> list) {

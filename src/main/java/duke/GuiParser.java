@@ -35,6 +35,10 @@ public class GuiParser {
             return showListGui(list);
         }
 
+        if (input.equals("help")) {
+            return helpInterface();
+        }
+
         if (input.contains(" ")) {
             int i = input.indexOf(" ");
             String firstWord = input.substring(0, i);
@@ -68,6 +72,21 @@ public class GuiParser {
             }
         }
 
+    }
+
+    /**
+     * Returns a help interface.
+     *
+     * @return
+     */
+    private String helpInterface() {
+        String helpInterface = "List of available commands: \ntodo - creates a todo (e.g todo read book)" +
+                "\ndeadline - creates a deadline with a date (e.g deadline return book /by 2019-10-15)" +
+                "\nevent - creates an event with a date (e.g event go library /at 2019-10-15)" +
+                "\ndone - sets item at index to done (e.g done 1)" +
+                "\ndelete - deletes item at index (e.g delete 1)" +
+                "\nfind - finds task (e.g find book)";
+        return helpInterface;
     }
 
     private String showListGui(ArrayList<Task> list) {

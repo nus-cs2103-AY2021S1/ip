@@ -1,4 +1,4 @@
-1.[T][✘] read book
-2.[T][✘] study
-3.[T][✘] work
+1.[T][✓] study
+2.[T][✘] work
+3.[T][✘] read
 
