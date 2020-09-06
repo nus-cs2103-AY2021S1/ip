@@ -34,6 +34,7 @@ public class Parser {
         String command;
         String description = null;
 
+        assert input != null : "Input is empty.";
         if (input.contains(" ")) {
             command = input.substring(0, input.indexOf(" "));
             description = input.substring(input.indexOf(" ") + 1);
@@ -67,6 +68,7 @@ public class Parser {
             }
         case "deadline":
             if (description != null) {
+                assert description.contains("/by") : "Deadline must include '/by'.";
                 try {
                     LocalDate deadlineDate = LocalDate.parse(description.substring(description.indexOf("/by") + 4));
                     String deadlineDescription = description.substring(0, description.indexOf("/by") - 1);
@@ -80,6 +82,7 @@ public class Parser {
             }
         case "event":
             if (description != null) {
+                assert description.contains("/at") : "Event must include '/at'.";
                 try {
                     String eventAt = description.substring(description.indexOf("/at") + 4);
                     String eventDescription = description.substring(0, description.indexOf("/at") - 1);
@@ -94,6 +97,7 @@ public class Parser {
         case "bye":
             return new EndCommand(tasks);
         case "find":
+            assert description != null : "Keyword for 'find' is empty.";
             return new FindCommand(tasks, description);
 
         default:
