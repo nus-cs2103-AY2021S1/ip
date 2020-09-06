@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
@@ -57,7 +58,7 @@ public class Parser {
             String response = processorRefresh(taskList, storage);
             finalString = Ui.showCommandMessage(response);
         } else {
-            String response = processorAdd(command, taskList);
+            String response = processorAdd(command, taskList, false);
             storage.saveRecord(response);
             finalString = Ui.showResponse(response, command);
         }
@@ -70,8 +71,8 @@ public class Parser {
      * @param taskList the tasklist that stores the tasks
      * @throws DukeException for invalid commands
      */
-    public static void process(String command, TaskList taskList) throws DukeException {
-        processorAdd(command, taskList);
+    public static void process(String command, TaskList taskList, boolean isDone) throws DukeException {
+        processorAdd(command, taskList, isDone);
     }
 
     private static String processorRefresh(TaskList taskList, Storage storage) {
@@ -116,16 +117,16 @@ public class Parser {
         return stringBuilder.toString();
     }
 
-    private static String processorAdd(String cmd, TaskList taskList) throws DukeException {
+    private static String processorAdd(String cmd, TaskList taskList, boolean isDone) throws DukeException {
         String[] stringarr = cmd.split(" ", 2);
+        Task taskObj = null;
         if (stringarr[0].equals("todo")) {
             if (stringarr.length <= 1) {
                 String message = "The description of a Todo cannot be empty";
                 throw new DukeException(message);
             } else {
                 Todo todo = Todo.createTodo(stringarr[1]);
-                taskList.addTask(todo);
-                return todo.toString();
+                taskObj = todo;
             }
         } else if (stringarr[0].equals("deadline")) {
             if (stringarr.length <= 1) {
@@ -136,8 +137,7 @@ public class Parser {
                     String[] secondarr = stringarr[1].split("/by", 2);
                     LocalDate date = LocalDate.parse(secondarr[1].trim());
                     Deadline deadline = Deadline.createDeadline(secondarr[0], date);
-                    taskList.addTask(deadline);
-                    return deadline.toString();
+                    taskObj = deadline;
                 } catch (DateTimeParseException e) {
                     String message = "That does not look like a proper Date. Please input YYYY-MM-DD";
                     throw new DukeException(message);
@@ -150,13 +150,17 @@ public class Parser {
             } else {
                 String[] secondarr = stringarr[1].split("/at", 2);
                 Event event = Event.createEvent(secondarr[0], secondarr[1]);
-                taskList.addTask(event);
-                return event.toString();
+                taskObj = event;
             }
         } else {
             String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw new DukeException(message);
         }
+        taskList.addTask(taskObj);
+        if (isDone) {
+            taskObj.setDone();
+        }
+        return taskObj.toString();
     }
 
     /**
@@ -165,10 +169,12 @@ public class Parser {
      * @return
      */
     public static String processOldTasks(ArrayList<String> taskHistory, TaskList taskList) {
-        for (String task : taskHistory) {
+        for (int i = 0; i < taskHistory.size(); i++) {
+            String oldTask = taskHistory.get(i);
+            boolean isDone = oldTask.charAt(4) == 'O';
             try {
-                String command = processStoredTask(task);
-                Parser.process(command, taskList);
+                String command = processStoredTask(oldTask);
+                Parser.process(command, taskList, isDone);
             } catch (DukeException e) {
                 return Ui.showError(e.getMessage());
             }
