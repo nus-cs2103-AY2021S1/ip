@@ -12,15 +12,17 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
-
+/**
+ * Storage class in charge of reading and writing data to a text file.
+ */
 public class Storage {
-    /**
-     * The directory path of the text file Duke reads and saves to.
-     */
+
+    /** The directory path of the text file Duke reads and saves to. */
     private final String filePath;
 
     /**
-     * Controls the reading and writing of data to hard disk.
+     * Constructs a Storage object responsible for reading and writing of data to hard disk.
+     *
      * @param filePath The directory path of the text file Duke reads and saves to.
      */
     public Storage(String filePath) {
@@ -28,7 +30,8 @@ public class Storage {
     }
 
     /**
-     * returns the index of a specified character (first instance) in a string
+     * Returns the index of a specified character (first instance) in a string
+     *
      * @param s The String input.
      * @param target The character input.
      * @return index.
@@ -44,9 +47,10 @@ public class Storage {
     }
 
     /**
-     * Reads the text file into ArrayList format to start the program
-     * @return ArrayList that will be the TaskList
-     * @throws FileNotFoundException exception if file isn't found
+     * Reads the text file into ArrayList format to start the program.
+     *
+     * @return ArrayList that will be the TaskList.
+     * @throws FileNotFoundException exception if file isn't found.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(filePath);
@@ -55,7 +59,7 @@ public class Storage {
         while (s.hasNext()) {
             String line = s.nextLine();
             char taskType = line.charAt(1);
-            char isDone = line.charAt(4);
+            // char isDone = line.charAt(4);
             switch (taskType) {
             case 'T':
                 newList.add(new Todo(line.substring(7)));
@@ -83,8 +87,9 @@ public class Storage {
 
     /**
      * Saves the tasks to a text file.
+     *
      * @param ls the TaskList used.
-     * @throws IOException
+     * @throws IOException Exception.
      */
     public void writeToFile(ArrayList<Task> ls) throws IOException {
         FileWriter fw = new FileWriter(filePath);
@@ -96,7 +101,6 @@ public class Storage {
             } else {
                 textToAdd.append(t.toString()).append("\n");
             }
-
         }
         fw.write(textToAdd.toString());
         fw.close();

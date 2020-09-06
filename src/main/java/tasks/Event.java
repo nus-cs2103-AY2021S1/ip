@@ -4,7 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private LocalDateTime at;
+
+    /** The date and time the task is at. */
+    private final LocalDateTime at;
 
     /**
      * Creates an Event task.

@@ -11,6 +11,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    /** Creates a Duke object. */
     private Duke duke = new Duke();
 
     @Override

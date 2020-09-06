@@ -3,14 +3,18 @@ package utility;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * A Parser class that is in charge of parsing user input.
+ */
 public class Parser {
 
     /**
      * Reads user input and takes the first word to convert it
      * into ENUM format.
+     *
      * @param input User input in string.
-     * @return Choice ENUM
-     * @throws DukeException Duke Custom Exception
+     * @return Choice ENUM.
+     * @throws DukeException Duke Custom Exception.
      */
     public Choice parseCommand(String input) throws DukeException {
         ArrayList<String> commands = new ArrayList<>(

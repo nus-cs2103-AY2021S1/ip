@@ -3,12 +3,16 @@ package tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline class responsible for creating deadlines.
+ */
 public class Deadline extends Task {
 
-    private LocalDateTime by;
+    /** The date and time this task is due by. */
+    private final LocalDateTime by;
 
     /**
-     * Creates a Deadline Task
+     * Creates a Deadline Task.
      *
      * @param description details of the Task.
      * @param by Deadline the task is due by.
