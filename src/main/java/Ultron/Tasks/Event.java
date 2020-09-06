@@ -64,6 +64,7 @@ public final class Event extends Task {
     public static Event parseCommand(final String args) {
         Matcher matcher = DATE_MATCH.matcher(args);
         boolean match = matcher.find();
+        assert match;
         String name = matcher.group(NAME_INDEX);
         String date = matcher.group(DATE_INDEX);
         try {
