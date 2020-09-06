@@ -3,7 +3,7 @@ package duke.exceptions;
 /** Represents a Duke-related exception. */
 public class DukeException extends IllegalArgumentException {
 
-    /** Constructor.
+    /** Constructs a new DukeException object with the specified error message.
      *
      * @param message The error message.
      */

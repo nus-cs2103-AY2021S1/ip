@@ -13,7 +13,7 @@ public class FindCommand extends Command {
     /** The keyword to query. */
     private String keyword;
 
-    /** Constructor.
+    /** Constructs a new FindCommand object with the specified keyword.
      *
      * @param keyword The keyword to query.
      */

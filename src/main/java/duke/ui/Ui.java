@@ -15,12 +15,12 @@ public class Ui {
     private Scanner sc;
 
     /** The welcome message in Duke format. */
-    public static final String showWelcome = "Hello! I'm Milk.\nWhat can I help you with?";
+    public static final String DIALOG_WELCOME = "Hello! I'm Milk.\nWhat can I help you with?";
 
     /** The goodbye message in Duke format. */
-    public static final String showBye = "You're going? Bye :( Hope to see you again soon.";
+    public static final String DIALOG_BYE = "You're going? Bye :( Hope to see you again soon.";
 
-    /** Constructor. */
+    /** Constructs a new Ui object. */
     public Ui() {
         sc = new Scanner(System.in);
     }

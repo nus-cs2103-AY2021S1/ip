@@ -10,7 +10,7 @@ public class TaskList {
     /** The list of tasks. */
     private ArrayList<Task> tasks;
 
-    /** Constructor.
+    /** Constructs a new TaskList object with the specified ArrayList of tasks.
      *
      * @param tasks The list of tasks.
      */

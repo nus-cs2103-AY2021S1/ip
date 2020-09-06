@@ -19,7 +19,7 @@ public class Storage {
     /** The file that stores in the list of tasks in the hard disk. */
     private File dataFile;
 
-    /** Constructor. */
+    /** Constructs a new Storage object. */
     public Storage() {
         try {
             File directory = new File(DIRECTORY_PATH);

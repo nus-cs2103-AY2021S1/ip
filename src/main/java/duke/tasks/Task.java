@@ -7,7 +7,7 @@ public class Task {
     /** The description of the task. */
     private String name;
 
-    /** Constructor.
+    /** Constructs a new Task object with the specified description.
      *
      * @param name The description of the task.
      */
@@ -16,7 +16,7 @@ public class Task {
         this.name = name;
     }
 
-    /** Constructor.
+    /** Constructs a new Task object with the specified indicator and description.
      *
      * @param isDone The indicator of whether the task is done.
      * @param name The description of the task.

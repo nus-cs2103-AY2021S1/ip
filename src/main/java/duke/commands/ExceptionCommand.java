@@ -10,7 +10,7 @@ public class ExceptionCommand extends Command {
     /** The exception that is resulted from the erroneous user input.*/
     private Exception exception;
 
-    /** Constructor.
+    /** Constructs a new ExceptionCommand object with the specified exception.
      *
      * @param exception The exception that is resulted from the erroneous user input.
      */

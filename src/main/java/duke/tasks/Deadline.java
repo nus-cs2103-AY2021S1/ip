@@ -9,7 +9,7 @@ public class Deadline extends Task {
     /** The date which the deadline should be done by. */
     private LocalDate date;
 
-    /** Constructor.
+    /** Constructs a new Deadline object with the specified description and date.
      *
      * @param name The description of the task.
      * @param date The date which the deadline should be done by.
@@ -19,7 +19,7 @@ public class Deadline extends Task {
         this.date = date;
     }
 
-    /** Constructor.
+    /** Constructs a new Deadline object with the specified indicator, description and date.
      *
      * @param isDone The indicator of whether the task is done.
      * @param name The description of the task.

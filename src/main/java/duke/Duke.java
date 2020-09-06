@@ -17,7 +17,7 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    /** Constructor. */
+    /** Constructs a new Duke object. */
     public Duke() {
         ui = new Ui();
         storage = new Storage();

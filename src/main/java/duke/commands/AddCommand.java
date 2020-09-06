@@ -11,7 +11,7 @@ public class AddCommand extends Command {
     /** The task to be added. */
     private Task task;
 
-    /** Constructor.
+    /** Constructs a new AddCommand object with the specified task.
      *
      * @param task The task to be added.
      */

@@ -1,6 +1,6 @@
 package duke.gui;
 
-import static duke.ui.Ui.showWelcome;
+import static duke.ui.Ui.DIALOG_WELCOME;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -43,7 +43,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-            DialogBox.getDukeDialog(showWelcome, dukeImage)
+            DialogBox.getDukeDialog(DIALOG_WELCOME, dukeImage)
         );
     }
 

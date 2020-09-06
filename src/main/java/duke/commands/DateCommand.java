@@ -16,7 +16,7 @@ public class DateCommand extends Command {
     /** The inputted date. */
     private LocalDate queryDate;
 
-    /** Constructor.
+    /** Constructs a new DateCommand object with the specified queryDate.
      *
      * @param queryDate The inputted date.
      */
