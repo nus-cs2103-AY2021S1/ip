@@ -32,6 +32,8 @@ public class Parser {
      * @throws DukeException
      */
     protected String processInput(String input) throws DukeException {
+        int stringLength = input.length();
+        assert stringLength >= 1 : "Input cannot be empty";
         if (input.equals("list")) {
             return this.provideList();
         } else if (input.startsWith("done")) {
@@ -56,6 +58,8 @@ public class Parser {
      * @return
      */
     private String find(String input) {
+        int stringLength = input.length();
+        assert stringLength >= 1 : "Input cannot be empty";
         String keyword = input.substring(5);
         ArrayList<Task> temp = new ArrayList<>();
         for (int i = 0; i < tasks.length(); i++) {
@@ -100,6 +104,8 @@ public class Parser {
      * @return
      */
     private String markAsDone(String input) {
+        int stringLength = input.length();
+        assert stringLength >= 1 : "Input cannot be empty";
         String stringIndex = input.substring(5, input.length());
         int index = Integer.parseInt(stringIndex);
         Task chosen = this.tasks.get(index - 1);
@@ -117,6 +123,8 @@ public class Parser {
      * @return
      */
     private String newTaskEntry(String input) throws EmptyDescriptionException, WrongFormatException {
+        int stringLength = input.length();
+        assert stringLength >= 1 : "Input cannot be empty";
         if (input.contains("todo")) {
             return this.createAndAddTodo(input);
         } else if (input.contains("deadline")) {
@@ -135,6 +143,8 @@ public class Parser {
      * @return
      */
     private String createAndAddTodo(String input) throws EmptyDescriptionException, WrongFormatException {
+        int stringLength = input.length();
+        assert stringLength >= 1 : "Input cannot be empty";
         if (input.length() < 5 || input.substring(5).replaceAll("\\s", "").equals("")) {
             return new EmptyDescriptionException("todo").toString();
         } else if (!Character.toString(input.charAt(4)).equals(" ")) {
@@ -154,6 +164,8 @@ public class Parser {
      * @return
      */
     private String createAndAddDeadline(String input) throws EmptyDescriptionException, WrongFormatException {
+        int stringLength = input.length();
+        assert stringLength >= 1 : "Input cannot be empty";
         if (input.length() < 9 || input.substring(8).replaceAll("\\s", "").equals("")) {
             throw new EmptyDescriptionException("deadline");
         } else if (input.contains("/by")
@@ -197,6 +209,8 @@ public class Parser {
      * @return
      */
     private String createAndAddEvent(String input) throws EmptyDescriptionException, WrongFormatException {
+        int stringLength = input.length();
+        assert stringLength >= 1 : "Input cannot be empty";
         if (input.length() < 6 || input.substring(5).replaceAll("\\s", "").equals("")) {
             throw new EmptyDescriptionException("event");
         } else if (input.contains("/at")
@@ -230,6 +244,8 @@ public class Parser {
      * @return
      */
     private String delete(String input) throws EmptyListException, InvalidListIndexException {
+        int stringLength = input.length();
+        assert stringLength >= 1 : "Input cannot be empty";
         String stringIndex = input.substring(7, input.length());
         if (input.matches(".*[a-zA-Z]+.*")) {
             return new InvalidListIndexException().toString();
