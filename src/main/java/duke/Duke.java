@@ -34,7 +34,9 @@ public class Duke {
      * @throws IOException if filePath does not exist
      */
     public String getResponse(String input) throws IOException {
-        return Parser.parse(input, tasks, storage, "");
+        Parser.setTasks(tasks);
+        Parser.setStorage(storage);
+        return Parser.parse(input);
     }
 
     /**
@@ -44,33 +46,5 @@ public class Duke {
      */
     public static TaskList getTasks() {
         return tasks;
-    }
-
-    /**
-     * Main function that runs the program
-     * If the exit command is not given, the program will continue to read user inputs
-     * Otherwise the storage is cleared and updated with the existing tasks
-     *
-     * @throws IOException if storage is not found
-     */
-    public void run() throws IOException {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.readCommand();
-            ui.showLine();
-            Parser.parse(fullCommand);
-            isExit = Parser.getExitStatus();
-            if (!isExit) {
-                ui.showLine();
-            }
-        }
-        storage.clear();
-        storage.save(tasks);
-        ui.showGoodbye();
-    }
-
-    public static void main(String[] args) throws IOException {
-        new Duke("src/main/java/data/duke.txt").run();
     }
 }
