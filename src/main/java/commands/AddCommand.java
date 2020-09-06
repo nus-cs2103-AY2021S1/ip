@@ -42,7 +42,7 @@ public class AddCommand extends Command {
      */
     @Override
     public DukeResponse execute(DukeService service) throws Exception {
-        if (!super.isParse) {
+        if (!super.isParsed) {
             throw new Exception("Command has not been parsed");
         }
         return service.addTask(this.toAdd);
@@ -66,7 +66,7 @@ public class AddCommand extends Command {
         String[] taskTokens = TokenUtils.dropFirst(tokens);
         this.toAdd = taskParser.parse(taskTokens);
         this.toAdd.parse();
-        super.isParse = true;
+        super.isParsed = true;
     }
 
 }

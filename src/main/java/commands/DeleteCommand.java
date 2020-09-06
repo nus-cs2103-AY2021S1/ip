@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public DukeResponse execute(DukeService service) throws DukeException {
-        if (!super.isParse) {
+        if (!super.isParsed) {
             throw new DukeException("Command has not been parsed");
         }
         return service.deleteTask(this.position);
@@ -54,7 +54,7 @@ public class DeleteCommand extends Command {
 
         try {
             this.position = Integer.parseInt(tokens[1]);
-            super.isParse = true;
+            super.isParsed = true;
         } catch (Exception e) {
             throw new InvalidCommandException("Please input an integer :(");
         }

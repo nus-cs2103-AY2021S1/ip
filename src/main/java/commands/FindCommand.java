@@ -20,7 +20,7 @@ public class FindCommand extends Command {
 
     @Override
     public DukeResponse execute(DukeService service) throws ServiceException {
-        if (!super.isParse) {
+        if (!super.isParsed) {
             throw new ServiceException("This command has not been parsed");
         }
         return service.findTasks(this.predicate);
@@ -37,6 +37,6 @@ public class FindCommand extends Command {
         String[] finalTokens = TokenUtils.dropFirst(tokens);
         assert finalTokens.length >= 1;
         this.predicate = S -> TokenUtils.isSubsequence(TokenUtils.tokensToString(finalTokens), S.getDescription());
-        super.isParse = true;
+        super.isParsed = true;
     }
 }

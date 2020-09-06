@@ -28,7 +28,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public DukeResponse execute(DukeService service) throws Exception {
-        if (!super.isParse) {
+        if (!super.isParsed) {
             throw new Exception("Command has not been parsed");
         }
         assert(position >= 0);
@@ -48,7 +48,7 @@ public class DoneCommand extends Command {
 
         try {
             this.position = Integer.parseInt(tokens[1]);
-            super.isParse = true;
+            super.isParsed = true;
         } catch (NumberFormatException e) {
             throw new Exception("Done command invalid: input should be an integer");
         }

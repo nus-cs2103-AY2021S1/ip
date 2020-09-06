@@ -8,7 +8,7 @@ import service.DukeService;
  */
 public abstract class Command {
     protected String raw;
-    protected boolean isParse;
+    protected boolean isParsed;
 
     /**
      * Constructs a new Command
@@ -16,7 +16,7 @@ public abstract class Command {
      */
     public Command(String raw) {
         this.raw = raw;
-        this.isParse = false;
+        this.isParsed = false;
     }
 
     public abstract DukeResponse execute(DukeService service) throws Exception;
