@@ -15,10 +15,10 @@ public class StorageListTest {
         ExpenseList expenseList = new ExpenseList();
         assertEquals(expenseList.getCurrCapacity(), 0);
 
-        assertEquals(expenseList.addExpense(EXPENSE_ONE), EXPENSE_ONE);
+        assertEquals(expenseList.add(EXPENSE_ONE), EXPENSE_ONE);
         assertEquals(expenseList.getCurrCapacity(), 1);
 
-        assertEquals(expenseList.addExpense(EXPENSE_TWO), EXPENSE_TWO);
+        assertEquals(expenseList.add(EXPENSE_TWO), EXPENSE_TWO);
         assertEquals(expenseList.getCurrCapacity(), 2);
 
         assertEquals(expenseList.remove(1), EXPENSE_ONE);

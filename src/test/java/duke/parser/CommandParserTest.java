@@ -34,7 +34,7 @@ public class CommandParserTest {
     public void parse_correctInput_success() throws DukeParseException {
         Todo mockTodo = new Todo("mock", false);
         ListManager listManager = new ListManager();
-        listManager.getTaskList().addTask(mockTodo);
+        listManager.getTaskList().add(mockTodo);
         StorageManager storageManager = StorageManager.createStorageManager();
 
         String command = "todo read book";
@@ -127,7 +127,7 @@ public class CommandParserTest {
     public void parse_wrongInput_exceptionThrown(String command) {
         Todo mockTodo = new Todo("mock", false);
         ListManager listManager = new ListManager();
-        listManager.getTaskList().addTask(mockTodo);
+        listManager.getTaskList().add(mockTodo);
         StorageManager storageManager = StorageManager.createStorageManager();
         try {
             commandParser.parse(command, listManager, storageManager);

@@ -1,13 +1,13 @@
 package duke.operation.listoperation;
 
-import duke.list.DukeList;
+import duke.list.StorableList;
 import duke.operation.Operation;
 import duke.result.Result;
 
 public abstract class ListOperation extends Operation {
-    protected final DukeList list;
+    protected final StorableList list;
 
-    public ListOperation(DukeList list) {
+    public ListOperation(StorableList list) {
         this.list = list;
     }
 

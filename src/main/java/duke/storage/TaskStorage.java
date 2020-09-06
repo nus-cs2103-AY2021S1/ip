@@ -44,7 +44,7 @@ public class TaskStorage extends Storage {
         while (sc.hasNext()) {
             try {
                 Task task = this.taskStorageParser.convertStorageToTask(sc.nextLine());
-                taskList.addTask(task);
+                taskList.add(task);
             } catch (DukeParseException exception) {
                 sb.append(exception.getMessage());
                 sb.append("\n");

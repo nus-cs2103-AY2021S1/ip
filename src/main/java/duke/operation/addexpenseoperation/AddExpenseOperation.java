@@ -45,7 +45,7 @@ public abstract class AddExpenseOperation extends Operation {
     @Override
     public Result execute() {
         Expense newExpense = createExpense();
-        this.expenseList.addExpense(newExpense);
+        expenseList.add(newExpense);
         String message = "I have added the expense:\n" + newExpense + "\n"
                 + String.format("You now have %d expenses.", this.expenseList.getCurrCapacity());
         return new Result(true, message, this.isExit());

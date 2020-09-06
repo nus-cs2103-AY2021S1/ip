@@ -17,16 +17,16 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
         assertEquals(taskList.getCurrCapacity(), 0);
 
-        assertEquals(taskList.addTask(TASK_ONE), TASK_ONE);
+        assertEquals(taskList.add(TASK_ONE), TASK_ONE);
         assertEquals(taskList.getCurrCapacity(), 1);
 
-        assertEquals(taskList.addTask(TASK_TWO), TASK_TWO);
+        assertEquals(taskList.add(TASK_TWO), TASK_TWO);
         assertEquals(taskList.getCurrCapacity(), 2);
 
         assertEquals(taskList.completeTask(2), TASK_TWO_COMPLETE);
         assertEquals(taskList.getCurrCapacity(), 2);
 
-        assertEquals(taskList.addTask(TASK_THREE), TASK_THREE);
+        assertEquals(taskList.add(TASK_THREE), TASK_THREE);
         assertEquals(taskList.getCurrCapacity(), 3);
 
         assertEquals(taskList.remove(1), TASK_ONE);

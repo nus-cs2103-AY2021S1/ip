@@ -44,7 +44,7 @@ public class ExpenseStorage extends Storage {
         while (sc.hasNext()) {
             try {
                 Expense expense = this.expenseStorageParser.convertStorageToExpense(sc.nextLine());
-                expenseList.addExpense(expense);
+                expenseList.add(expense);
             } catch (DukeParseException exception) {
                 sb.append(exception.getMessage());
                 sb.append("\n");

@@ -1,63 +1,18 @@
 package duke.list;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import duke.storage.Storable;
 import duke.task.Task;
 
 /** Represents the list of <code>Tasks</code> that Duke stores in. */
-public class TaskList implements Iterable<Task>, DukeList {
-    private final ArrayList<Task> taskList;
+public class TaskList extends StorableList<Task> {
 
     /**
      * Constructor method.
      * Initialise a new <code>ArrayList</code> of <code>Task</code>.
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
-    }
-
-    /**
-     * Implements the <code>Iterable</code> interface in order for <code>TaskList</code> to be iterable.
-     *
-     * @return the iterator form of <code>TaskList</code>.
-     */
-    @Override
-    public Iterator<Task> iterator() {
-        return this.taskList.iterator();
-    }
-
-    /**
-     * Gets the number of <code>Tasks</code> that are being stored currently.
-     *
-     * @return the number of <code>Tasks</code>.
-     */
-    @Override
-    public int getCurrCapacity() {
-        return this.taskList.size();
-    }
-
-    /**
-     * Checks if the given <code>index</code> is within the capacity of <code>TaskList</code>.
-     *
-     * @param index the value to be checked on.
-     * @return <code>true</code> if <code>index</code> is within the capacity.
-     */
-    @Override
-    public boolean isValidIndex(int index) {
-        return index <= this.taskList.size() && index > 0;
-    }
-
-    /**
-     * Adds the given <code>Task</code> into <code>TaskList</code>.
-     *
-     * @param task the <code>Task</code> that is to be added.
-     * @return the <code>Task</code> that has been added.
-     */
-    public Task addTask(Task task) {
-        this.taskList.add(task);
-        return task;
+       super(new ArrayList<>());
     }
 
     /**
@@ -67,21 +22,10 @@ public class TaskList implements Iterable<Task>, DukeList {
      * @return the <code>Task</code> that has been completed.
      */
     public Task completeTask(int index) {
-        Task task = this.taskList.get(index - 1);
+        Task task = list.get(index - 1);
         task.completeTask();
         assert task.isTaskCompleted() : "Task is not marked as complete";
         return task;
-    }
-
-    /**
-     * Removes a specified <code>Task</code> from <code>TaskList</code>.
-     *
-     * @param index the index of the <code>Task</code> that is to be deleted.
-     * @return the <code>Task</code> that has been removed.
-     */
-    @Override
-    public Storable remove(int index) {
-        return this.taskList.remove(index - 1);
     }
 
     /**
@@ -93,8 +37,8 @@ public class TaskList implements Iterable<Task>, DukeList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < this.taskList.size(); i++) {
-            String taskLine = String.format("%d. %s", i + 1, this.taskList.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            String taskLine = String.format("%d. %s", i + 1, list.get(i));
             sb.append(taskLine);
             sb.append("\n");
         }
@@ -114,7 +58,7 @@ public class TaskList implements Iterable<Task>, DukeList {
     public String search(String searchWord) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < this.getCurrCapacity(); i++) {
-            Task task = this.taskList.get(i);
+            Task task = list.get(i);
             if (task.getTaskDescription().contains(searchWord)) {
                 String taskString = String.format("%d. %s", i + 1, task.toString());
                 sb.append(taskString);
