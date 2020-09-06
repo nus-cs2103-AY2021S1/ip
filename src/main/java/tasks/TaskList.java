@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Represents the List of all the tasks that logic.Duke
- * is handling this iteration
+ * is handling this iteration.
  */
 public class TaskList {
 
@@ -19,8 +19,9 @@ public class TaskList {
     }
 
     /**
-     * Returns this Arraylist
-     * @return the Arraylist that the class has
+     * Returns this Arraylist.
+     *
+     * @return the Arraylist that the class has.
      */
     public List<Task> getTasks() {
         return this.taskList;

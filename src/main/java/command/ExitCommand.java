@@ -26,13 +26,4 @@ public class ExitCommand extends Command {
         storage.saveFile(tasks.getTasks());
         return ui.printOutput("\tBye. Hope to see you again soon!");
     }
-
-    /**
-     * Lets the main logic know to exit the loop
-     * @return true to exiting the loop
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }
