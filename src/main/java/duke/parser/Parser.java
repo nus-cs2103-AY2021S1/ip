@@ -30,7 +30,9 @@ public class Parser {
      */
     public static Command parse(String input) {
         input = input.strip();
-        String[] split = input.split("\\s+", 2); // guaranteed to contain at least ""
+        String[] split = input.split("\\s+", 2); // this should contain at least "", even when input is empty
+        assert split.length >= 1;
+
         String command = split[0];
         String args = split.length == 2 ? split[1] : "";
 
