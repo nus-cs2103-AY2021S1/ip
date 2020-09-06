@@ -49,6 +49,7 @@ public class DeadlineCommand extends Command {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
         try {
             String[] deadlineInfo = retrieveDeadlineInfo();
+            assert !deadlineInfo[0].isBlank();
             String[] timeStamp = deadlineInfo[1].split(" ");
 
             LocalDate deadlineDate = LocalDate.parse(timeStamp[0], dateFormatter);
@@ -72,11 +73,8 @@ public class DeadlineCommand extends Command {
      * @throws InvalidTaskException If the deadline information is invalid or is missing arguments.
      */
     public String[] retrieveDeadlineInfo() throws InvalidTaskException {
-        String[] deadlineInfo = new String[2];
-        String description;
-        String time;
         try {
-            String[] taskInputArray = this.parsedCommand[1].split(" /by ");
+            String[] deadlineInfo = this.parsedCommand[1].split(" /by ");
             if (!this.parsedCommand[1].contains(" /by ") && !this.parsedCommand[1].endsWith("/by")) {
                 String err = "Your deadline task has an incorrect format. The task cannot be created.";
                 throw new InvalidTaskException(err);
@@ -87,15 +85,12 @@ public class DeadlineCommand extends Command {
             } else if (this.parsedCommand[1].trim().endsWith("/by")) {
                 String err = "Your deadline task is missing a time stamp. The task cannot be created.";
                 throw new InvalidTaskException(err);
-            } else if (taskInputArray[0].isBlank()) {
+            } else if (deadlineInfo[0].isBlank()) {
                 String err = "Your deadline task is missing a description. The task cannot be created.";
                 throw new InvalidTaskException(err);
-            } else {
-                description = taskInputArray[0].trim();
-                time = taskInputArray[1].trim();
             }
-            deadlineInfo[0] = description;
-            deadlineInfo[1] = time;
+            deadlineInfo[0] = deadlineInfo[0].trim();
+            deadlineInfo[1] = deadlineInfo[1].trim();
             return deadlineInfo;
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "Your deadline task has missing arguments. The task cannot be created.";
