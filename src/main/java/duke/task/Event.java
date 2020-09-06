@@ -1,5 +1,9 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 /**
@@ -8,15 +12,21 @@ import java.util.Optional;
  */
 public class Event extends Task {
     protected String at;
+    protected LocalDate atLocalDate;
 
     /**
      * Constructs a new Event Task.
      * @param description Description of Task
      * @param at Time at which the Event occurs.
      */
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException {
         super(description);
         this.at = at;
+        try {
+            this.atLocalDate = LocalDate.parse(at);
+        } catch (Exception e) {
+            throw new DukeException("Date is not in YYYY-MM-DD format");
+        }
     }
 
     /**
@@ -37,6 +47,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: "
+                + atLocalDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }
