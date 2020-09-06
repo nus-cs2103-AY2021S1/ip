@@ -45,11 +45,13 @@ public class Duke {
         }
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
 
+    /**
+     * Takes the input argument, executes a command based on the input, and returns a command result object
+     *
+     * @param input The string input from user
+     * @return CommandResult object from the execution of a command
+     */
     public CommandResult getResponse(String input) {
         try {
             Command c = Parser.parse(input);

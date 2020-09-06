@@ -30,7 +30,6 @@ public class FindCommand extends Command {
      * @return CommandResult object for ui
      * @throws DukeException
      */
-
     @Override
     public CommandResult execute(TaskList taskList, Storage storage) throws DukeException {
         if (taskList.numberOfTasks() > 0) {

@@ -25,6 +25,7 @@ public class Deadline extends Task {
 
     /**
      * Returns deadline date and time as a String.
+     *
      * @return The deadline date and time as a String.
      */
     public String getBy() {

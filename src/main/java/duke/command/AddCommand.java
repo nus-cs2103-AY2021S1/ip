@@ -21,7 +21,7 @@ public class AddCommand extends Command {
     /**
      * Adds the taskToAdd to the TaskList, prints a message in the Ui and updates the Storage.
      *
-     * @param tasks   The TaskList.
+     * @param tasks The TaskList.
      * @param storage The Storage.
      * @return CommandResult object for ui
      * @throws DukeException If storage could not be updated.
@@ -32,6 +32,6 @@ public class AddCommand extends Command {
         storage.updateStorage(tasks);
         return new CommandResult("Got it. I've added this task:\n"
                 + taskToAdd.toString() + "\n"
-                    + "Now you have " + tasks.numberOfTasks() + " tasks in the list.");
+                + "Now you have " + tasks.numberOfTasks() + " tasks in the list.");
     }
 }
