@@ -31,7 +31,7 @@ public class Storage {
         assert tasks != null : "tasks have not been initialised";
         FileWriter file = new FileWriter(filePath);
         StringBuilder s = new StringBuilder();
-        IntStream.of(0, tasks.size()).forEach(i -> {
+        IntStream.range(0, tasks.size()).forEach(i -> {
             if (tasks.get(i) instanceof Todo) {
                 s.append(String.format("T | %d | %s", tasks.get(i).getStatus() ? 1 : 0, tasks.get(i).getDescription()));
             } else if (tasks.get(i) instanceof Deadline) {
