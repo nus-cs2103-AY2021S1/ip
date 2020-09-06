@@ -2,6 +2,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the task which has an event date.
+ */
 public class Event extends Task {
     protected LocalDate at;
 
@@ -15,7 +18,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String toData() {
+    protected String toData() {
         return "E | " + super.toData() + " | " + at;
     }
 

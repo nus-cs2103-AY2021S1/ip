@@ -7,6 +7,10 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Represents a storage object where data can be retrieved from and
+ * written to.
+ */
 public class Storage {
     String filePath;
 
@@ -42,6 +46,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the tasks from the data file.
+     *
+     * @return Array list of existing tasks.
+     * @throws IOException If data file cannot be read.
+     * @throws DukeException If data file is corrupted.
+     */
     public ArrayList<Task> loadExistingData() throws IOException, DukeException {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         ArrayList<Task> tasks = new ArrayList<>();
@@ -83,7 +94,12 @@ public class Storage {
         return tasks;
     }
 
-    public void updateHardDisk(List<Task> tasks) {
+    /**
+     * Rewrites the data file with an array list of tasks.
+     *
+     * @param tasks Array list of tasks to be saved to the data file.
+     */
+    public void updateHardDisk(ArrayList<Task> tasks) {
         try {
             FileWriter writer = new FileWriter(filePath, false);
             for (Task t : tasks) {

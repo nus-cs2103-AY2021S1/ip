@@ -1,6 +1,17 @@
 import java.io.IOException;
 
+/**
+ * Represents a parser object that deals with making sense of the user command.
+ */
 public class Parser {
+    /**
+     * Parses the user input and gives the corresponding instructions.
+     *
+     * @param input User input.
+     * @param taskList Duke's existing task list.
+     * @param storage Duke's storage.
+     * @param ui Duke's ui.
+     */
     public void parse(String input, TaskList taskList, Storage storage, Ui ui) {
         String[] inputInfo = input.split(" ", 2);
         String command = inputInfo[0];
@@ -71,13 +82,13 @@ public class Parser {
         }
     }
 
-    public void handleToDo(String info, TaskList taskList, Storage storage) {
+    private void handleToDo(String info, TaskList taskList, Storage storage) {
         Task toDo = new ToDo(info);
         taskList.addTask(toDo);
         storage.updateHardDisk(taskList.getTasks());
     }
 
-    public void handleDeadline(String info, TaskList taskList, Storage storage) throws DukeException {
+    private void handleDeadline(String info, TaskList taskList, Storage storage) throws DukeException {
         String[] descriptionAndBy = info.split(" /by ", 2);
         if (descriptionAndBy.length < 2) {
             throw new DukeException("Error! To add a deadline, please enter 'deadline [description] /by [date in yyyy-mm-dd format]'.\n");
@@ -88,7 +99,7 @@ public class Parser {
         }
     }
 
-    public void handleEvent(String info, TaskList taskList, Storage storage) throws DukeException{
+    private void handleEvent(String info, TaskList taskList, Storage storage) throws DukeException{
         String[] descriptionAndAt = info.split(" /at ", 2);
         if (descriptionAndAt.length < 2) {
             throw new DukeException("Error! To add an event, please enter 'event [description] /at [date in yyyy-mm-dd format]'.\n");
@@ -99,7 +110,7 @@ public class Parser {
         }
     }
 
-    public void handleDelete(String info, TaskList taskList, Storage storage) throws DukeException {
+    private void handleDelete(String info, TaskList taskList, Storage storage) throws DukeException {
         try {
             int deleteIndex = Integer.valueOf(info) - 1;
             taskList.deleteTask(deleteIndex);
@@ -111,7 +122,7 @@ public class Parser {
         }
     }
 
-    public void handleDone(String info, TaskList taskList, Storage storage) throws DukeException {
+    private void handleDone(String info, TaskList taskList, Storage storage) throws DukeException {
         try {
             int doneIndex = Integer.valueOf(info) - 1;
             taskList.markDone(doneIndex);
