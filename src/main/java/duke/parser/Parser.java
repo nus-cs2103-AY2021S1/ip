@@ -124,7 +124,11 @@ public class Parser {
             throw new DukeParsingException("Couldn't add deadline! To add a deadline, talk to me using "
                     + "the format deadline <description> /by <date>!");
         }
+
+        // allow DukeParsingException thrown here to be propagated, since it contains a useful error message
+        // for the user
         Date date = parseDate(argsSplit[1]);
+
         return new Deadline(description, date);
     }
 
@@ -133,11 +137,13 @@ public class Parser {
      * not exist, or if either of the tokens are blank.
      */
     private static String[] splitAround(String string, String pattern) throws DukeParsingException {
-        int n = 2;
-        String[] argSplit = string.split(pattern, n);
-        if (argSplit.length != n) {
+        int splitSize = 2;
+        String[] argSplit = string.split(pattern, splitSize);
+
+        if (argSplit.length != splitSize) {
             throw new DukeParsingException("");
         }
+
         for (String s : argSplit) {
             if (s.isBlank()) {
                 throw new DukeParsingException("");
@@ -155,7 +161,7 @@ public class Parser {
         try {
             return withTime.parse(dateString);
         } catch (ParseException e) {
-            // ignore, because we want to try parsing with date only
+            // ignore, because we want to try parsing with date only after this
         }
 
         try {
