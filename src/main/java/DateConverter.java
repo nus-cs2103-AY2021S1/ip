@@ -19,6 +19,7 @@ public class DateConverter {
 
     /**
      * compares accepted date formats with the string input. If it matches, it will create the Date in the fomrat
+     *
      * @param input String containing date
      * @return LoacalDateTime object
      */
@@ -33,8 +34,6 @@ public class DateConverter {
 
             for (String format : ACCEPTED_FORMATS_DATE_ONLY) {
                 try {
-                    // Since we do not support seconds for date and time based information, we use the second field to
-                    // differentiate between a LocalDateTime with no defined time and one with time defined at midnight.
                     return LocalDate.parse(input, DateTimeFormatter.ofPattern(format)).atStartOfDay().withSecond(NULL_TIME_INDICATOR);
                 } catch (DateTimeParseException ignored) {
                 }
@@ -47,6 +46,7 @@ public class DateConverter {
 
     /**
      * takes a LocalDateTime Object and converts it back into String
+     *
      * @param dateTime LocalDateTime object
      * @return String form of dateTime
      */

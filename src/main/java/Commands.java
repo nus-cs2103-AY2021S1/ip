@@ -19,6 +19,7 @@ public enum Commands {
 
     /**
      * compares keyword with the enum commands
+     *
      * @param keyword
      * @return Commands that corresponds to the keyword
      * @throws DukeException if it is unable to match any of the enum commands

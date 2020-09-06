@@ -10,6 +10,7 @@ public class Event extends Task {
 
     /**
      * constructor to mkae Event
+     *
      * @param description
      * @param date
      */
@@ -17,8 +18,10 @@ public class Event extends Task {
         super(description);
         this.date = date;
     }
+
     /**
      * creates a Event from string
+     *
      * @param details input from user
      * @return Event object
      */
@@ -36,15 +39,19 @@ public class Event extends Task {
             throw new DukeException("Out of Bounds Exceptions");
         }
     }
+
     /**
      * convertes a String into a condensed form
+     *
      * @return condesnsed form of inputted string
      */
     public String encode() {
         return String.format("E|%s|%s|%s", super.isDone ? "Y" : "N", this.date, super.description);
     }
+
     /**
      * unravels encoded Strings
+     *
      * @param code String that has been previously encoded()
      * @return Event object
      * @throws DukeException in the event it is unable to decode the string
@@ -64,12 +71,14 @@ public class Event extends Task {
             throw new DukeException("Unable to decode event");
         }
     }
+
     /**
      * overrides Event String output to be formatted
+     *
      * @return String of formatted Event
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + DateConverter.parseLocalDateTime(this.date) + ")";
+        return "[E]" + super.toString() + " (at: " + DateConverter.parseLocalDateTime(this.date) + ")";
     }
 }

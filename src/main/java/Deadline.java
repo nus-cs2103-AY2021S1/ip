@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task {
 
-
+    private static final int dividerNum = 4;
     private LocalDateTime date;
 
     public Deadline(String description, LocalDateTime date) {
@@ -15,6 +15,7 @@ public class Deadline extends Task {
 
     /**
      * creates a deadline a string
+     *
      * @param str input form user
      * @return Deadline object
      */
@@ -34,7 +35,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * convertes a String into a condensed form
+     * converts a String into a condensed form
+     *
      * @return condesnsed form of inputted string
      */
     public String encode() {
@@ -43,16 +45,17 @@ public class Deadline extends Task {
 
     /**
      * unravels encoded Strings
+     *
      * @param code String that has been previously encoded()
      * @return Deadline object
      * @throws DukeException in the event it is unable to decode the string
      */
     public static Deadline decode(String code) throws DukeException {
         if (code.charAt(0) == 'D') {
-            String[] content = code.split("\\|", 4);
+            String[] content = code.split("\\|", dividerNum);
 
-            if (content.length != 4) {
-                throw new Error("data string is not equal to 4");
+            if (content.length != dividerNum) {
+                throw new DukeException("data string is not equal to 4");
             }
 
             Deadline newDeadline = new Deadline(content[3], DateConverter.parseString(content[2]));
@@ -66,14 +69,14 @@ public class Deadline extends Task {
     }
 
 
-
     /**
      * overrides Deadline String output to be formatted
+     *
      * @return String of formatted Deadline
      */
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + DateConverter.parseLocalDateTime(this.date) + ")";
+        return "[D]" + super.toString() + " (by: " + DateConverter.parseLocalDateTime(this.date) + ")";
     }
 }

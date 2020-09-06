@@ -16,6 +16,7 @@ public class UI {
 
     /**
      * adds the lines to make it look nice
+     *
      * @param content String item to be wrapped by two lines
      */
     public static String addLines(String content) {
@@ -23,14 +24,5 @@ public class UI {
         return line + "\n" + content +"\n" + line;
     }
 
-    /**
-     * introductory paragraph when Duke is first initialised
-     */
-    public static void introduction() {
 
-        String introduction = "Hello! I'm Duke \nWhat can I do for you?";
-        System.out.println(line);
-        System.out.println(introduction);
-        System.out.println(line);
-    }
 }

@@ -9,6 +9,7 @@ public class ToDo extends Task {
 
     /**
      * convertes a String into a condensed form
+     *
      * @return condesnsed form of inputted string
      */
     public String encode() {
@@ -17,6 +18,7 @@ public class ToDo extends Task {
 
     /**
      * unravels encoded Strings
+     *
      * @param code String that has been previously encoded()
      * @return ToDo object
      * @throws DukeException in the event it is unable to decode the string
@@ -40,6 +42,7 @@ public class ToDo extends Task {
 
     /**
      * overrides ToDo String output to be formatted
+     *
      * @return String of formatted ToDo
      */
     @Override
