@@ -15,16 +15,9 @@ public class Ui {
         + "| |_| | |_| |   <  __/\n"
         + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static String OPENING = "Hello from\n" + LOGO;
 
-    private Scanner scanner = new Scanner(System.in);
-
-    /**
-     * Prints the entire opening message.
-     */
-    public void showWelcome() {
-        System.out.println(OPENING);
-        printMessage("Hello! I'm Duke.\nHow can I help you today?");
+    public String getWelcomeMessage() {
+        return LOGO + "Hello! I'm Duke.\nHow can I help you today?";
     }
 
     /**
@@ -40,16 +33,6 @@ public class Ui {
         showLine();
     }
 
-
-    /**
-     * Reads a line of command from the CLI and returns it as a String.
-     *
-     * @return The String of the input in CLI.
-     */
-    public String readCommand() {
-        String command = scanner.nextLine();
-        return command;
-    }
 
     /**
      * Prints the input String with exclamation marks at the front and end of

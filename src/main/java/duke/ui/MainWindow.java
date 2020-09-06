@@ -33,8 +33,22 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the duke object for the MainWindow controller
+     *
+     * @param d The Duke object
+     */
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    /**
+     * Duke sends his regards in the chat.
+     */
+    public void printOpeningMessage() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage)
+        );
     }
 
     /**
