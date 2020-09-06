@@ -1,7 +1,10 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Keeps track of the tasks.
@@ -13,8 +16,8 @@ public class TaskList {
      * Creates a task list with elements.
      * @param tasks Elements of the task list
      */
-    public TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+    public TaskList(Collection<Task> tasks) {
+        this.tasks = new ArrayList<>(tasks);
     }
 
     /**
@@ -86,13 +89,7 @@ public class TaskList {
      * @return A new <code>TaskList</code> of the selected tasks
      */
     public TaskList filter(Predicate<Task> predicate) {
-        ArrayList<Task> filtered = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            if (predicate.test(task)) {
-                filtered.add(task);
-            }
-        }
-        return new TaskList(filtered);
+        List<Task> filteredTask = tasks.stream().filter(predicate).collect(Collectors.toList());
+        return new TaskList(filteredTask);
     }
 }
