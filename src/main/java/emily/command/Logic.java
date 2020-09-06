@@ -32,9 +32,9 @@ public class Logic {
      * @param ls    to be modified
      * @throws DukeException when there is invalid command
      */
-    public String readsLine(String input, TaskList ls) throws DukeException {
+    public ArrayList<String> readsLine(String input, TaskList ls) throws DukeException {
 
-        String outputDialogue = "";
+        ArrayList<String> outputLines = new ArrayList<>();
         Task current;
         int index;
         int counter;
@@ -46,17 +46,17 @@ public class Logic {
             for (Task c : ls.getTaskArrayList()) {
                 String item = "    " + num + ". " + c;
                 num++;
-                outputDialogue += "\n" + item + "\n";
+                outputLines.add(item);
             }
             break;
         case FIND: //find all tasks with matching keyword
             String keyword = input.substring(5);
             ArrayList<Task> arr = ls.findSameKeyword(keyword);
 
-            outputDialogue += "\n    Here are the matching tasks in your list";
+            outputLines.add("Here are the matching tasks in your list");
             counter = 1;
             for (Task t : arr) {
-                outputDialogue += ("\n    " + counter + ". " + t);
+                outputLines.add(counter + ". " + t);
                 counter++;
             }
             break;
@@ -65,15 +65,15 @@ public class Logic {
             current = ls.getTaskArrayList().get(index);
             current.setHasFinished(true);
 
-            outputDialogue += ("\n    Nice work, I have marked this task as done: "
+            outputLines.add("Nice work, I have marked this task as done: "
                     + current);
             break;
         case TASK: //call parser to convert to task
             current = p.parse(input);
             ls.addTask(current);
 
-            outputDialogue += "\n    Got it! I have added this task: " + current;
-            outputDialogue += ("\n    Now you have " + (ls.getTaskArrayList().size())
+            outputLines.add("Got it! I have added this task: " + current);
+            outputLines.add("Now you have " + (ls.getTaskArrayList().size())
                     + " tasks in the list");
             break;
         case DELETE:
@@ -81,14 +81,14 @@ public class Logic {
             current = ls.getTaskArrayList().get(index);
             ls.deleteTask(index);
 
-            outputDialogue += ("\n    I have deleted this task for you: " + current
-                    + "\n    You have " + ls.getTaskArrayList().size() + " tasks in your list now");
+            outputLines.add("I have deleted this task for you: " + current);
+            outputLines.add("You have " + ls.getTaskArrayList().size() + " tasks in your list now");
             break;
         default: //failure of the checkValidInput to check commands
             assert false : "checksValidInput has failed";
             throw new DukeException("Command is not recognised");
         }
-        return outputDialogue;
+        return outputLines;
     }
 
     /**

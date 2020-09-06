@@ -5,6 +5,8 @@ import emily.storage.Storage;
 import emily.storage.TaskList;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 
 /**
@@ -32,6 +34,10 @@ public class Emily {
         }
     }
 
+    public String formatOutput(ArrayList<String> outputLines) {
+        return outputLines.stream().map(x -> ("\n    " + x)).collect(Collectors.joining());
+    }
+
     /**
      * Reads the string of user command and return the corresponding output
      * by the program.
@@ -41,19 +47,21 @@ public class Emily {
      */
     public String receiveCommandLine(String userInputText) {
         boolean end = false;
-        String output = "";
+        ArrayList<String> outputLines = new ArrayList<>();
 
         /*The program within the loop
         will set end as true once the command is completed without errors*/
         while (!end) {
             try {
-                output = logic.readsLine(userInputText, tasks);
+                outputLines = logic.readsLine(userInputText, tasks);
                 storage.saveData(tasks.getTaskArrayList());
                 end = true;
             } catch (DukeException e) {
                 return "    OOPS! " + e.getMessage() + "\n";
             }
         }
+
+        String output = formatOutput(outputLines);
         return output;
     }
 }
