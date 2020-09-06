@@ -63,6 +63,7 @@ public class EventCommand extends Command {
      */
     private String handleEvent(String description, String time)
             throws DukeIllegalArgumentException {
+        assert duke != null : Message.ERR_DUKE_NOT_INIT.toString();
         if (description.matches("\\s*")) {
             throw new DukeIllegalArgumentException(
                     "The description of event cannot be empty!");
@@ -86,6 +87,7 @@ public class EventCommand extends Command {
      * @param task The tasks to be stored.
      */
     public void storeTask(ITask task) {
+        assert duke != null : Message.ERR_DUKE_NOT_INIT.toString();
         Storage storage = duke.getStorage();
         TaskList list = duke.getTasks();
         list.add(task);

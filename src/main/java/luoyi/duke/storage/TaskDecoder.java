@@ -34,7 +34,7 @@ public class TaskDecoder {
      */
     private static ITask decodeTask(String taskString) {
         String[] list = taskString.split("\\|");
-        ITask task;
+        ITask task = null;
         switch (list[0]) {
         case "T":
             task = ToDo.getToDo(list[2]);
@@ -51,6 +51,7 @@ public class TaskDecoder {
 
         if (list[1].equals("1")) {
             task = task.markComplete();
+            assert task.isDone();
         }
 
         return task;
