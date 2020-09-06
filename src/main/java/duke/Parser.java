@@ -6,13 +6,12 @@ package duke;
 public class Parser {
 
     /**
-     * Returns a specific command after parsing.
-     *
+     * Returns the command of user input as an enumeration.
      * @param userInput User input as a String.
-     * @return Specific input command.
-     * @throws DukeException When invalid command or formatting is entered.
+     * @return Command as enumeration.
+     * @throws DukeException When an invalid input is keyed in.
      */
-    public static Command parseCommands(String userInput) throws DukeException {
+    public static CommandEnum getCommand(String userInput) throws DukeException {
         CommandEnum command;
         try {
             String[] input = userInput.split(" ");
@@ -24,7 +23,18 @@ public class Parser {
                             + "(Valid commands: todo, deadline, event, list,"
                             + " delete, bye, done, find)");
         }
+        return command;
+    }
 
+    /**
+     * Returns a specific command after parsing.
+     *
+     * @param userInput User input as a String.
+     * @return Specific input command.
+     * @throws DukeException When invalid command or formatting is entered.
+     */
+    public static Command parseCommands(String userInput) throws DukeException {
+        CommandEnum command = getCommand(userInput);
         switch (command) {
         case BYE:
             return new ByeCommand();

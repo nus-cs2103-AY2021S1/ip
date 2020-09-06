@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * Tests size of task list.
+ */
 public class TaskListTest {
     @Test
     public void size_getIntSize_success() {
