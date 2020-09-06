@@ -33,7 +33,7 @@ public class Event extends Task {
     public String getSaveToFileString() {
         assert(!this.desc.isBlank() && this.taskDateTime != null);
 
-        return "E`" + super.getSaveToFileString() + "`" +
+        return "E" + TASK_DELIMITER + super.getSaveToFileString() + TASK_DELIMITER +
                 taskDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 

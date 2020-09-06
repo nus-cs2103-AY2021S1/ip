@@ -82,7 +82,7 @@ public class Ui {
         }
 
         String[] output = new String[taskList.size() + 1];
-        output[0] = " Here are the tasks in your list:";
+        output[0] = "Here are the tasks in your list:";
 
         for (int i = 1; i <= taskList.size(); i++) {
             output[i] = i + "." + taskList.get(i-1);
@@ -164,7 +164,7 @@ public class Ui {
         }
 
         String[] output = new String[tasks.size() + 1];
-        output[0] = " Here are the matching tasks according to your search keyword: \"" + searchTerm + "\"";
+        output[0] = "Here are the matching tasks according to your search keyword: \"" + searchTerm + "\"";
 
         for (int i = 1; i <= tasks.size(); i++) {
             output[i] = idxList.get(i-1) + "." + tasks.get(i-1);

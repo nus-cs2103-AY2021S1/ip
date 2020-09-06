@@ -29,17 +29,26 @@ public class Parser {
      * @return Command object that is related to user's input.
      * @throws DukeException if the input string does not contain a valid command.
      */
-    public static Command parse(String cmd) {
-        int idx = cmd.indexOf(' ');
+    public static Command parse(String cmd) throws DukeException {
         CommandList commandList;
-        Command command = null;
+        int indexOfFirstSpace = cmd.indexOf(' ');
+        String commandString, contentString;
+
+        if (indexOfFirstSpace < 0) {
+            commandString = cmd;
+            contentString = null;
+        } else {
+            commandString = cmd.substring(0, indexOfFirstSpace);
+            contentString = cmd.substring(indexOfFirstSpace + 1).strip();
+        }
 
         try {
-            commandList = (idx > 0) ? CommandList.valueOf(cmd.substring(0, idx)) : CommandList.valueOf(cmd);
+            commandList = CommandList.valueOf(commandString);
         } catch (IllegalArgumentException iae) {
             throw new DukeException("This is not in my command list");
         }
 
+        Command command = null;
         switch (commandList) {
         case bye: //fallthrough
         case exit:
@@ -49,32 +58,32 @@ public class Parser {
             command = new ListCommand();
             break;
         case todo:
-            command = new AddCommand(todo(cmd.substring(4).strip()));
+            command = new AddCommand(todo(contentString));
             break;
         case deadline:
-            command = new AddCommand(deadline(cmd.substring(8)));
+            command = new AddCommand(deadline(contentString));
             break;
         case event:
-            command = new AddCommand(event(cmd.substring(5)));
+            command = new AddCommand(event(contentString));
             break;
         case done:
             try {
-                int selected = Integer.parseInt(cmd.substring(4).strip());
+                int selected = Integer.parseInt(contentString);
                 command = new DoneCommand(selected - 1);
             } catch (NumberFormatException nfe) {
-                throw new DukeException("This is not a number for \"done\" command: " + cmd.substring(4));
+                throw new DukeException("This is not a number for \"done\" command: " + contentString);
             }
             break;
         case delete:
             try {
-                int selected = Integer.parseInt(cmd.substring(6).strip());
+                int selected = Integer.parseInt(contentString);
                 command = new DeleteCommand(selected - 1);
             } catch (NumberFormatException nfe) {
-                throw new DukeException("This is not a number for \"delete\" command: " + cmd.substring(6));
+                throw new DukeException("This is not a number for \"delete\" command: " + contentString);
             }
             break;
         case find:
-            command = new FindCommand(cmd.substring(4).strip());
+            command = new FindCommand(contentString);
             break;
         }
         return command;

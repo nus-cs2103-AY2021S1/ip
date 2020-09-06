@@ -32,7 +32,7 @@ public class Deadline extends Task {
     public String getSaveToFileString() {
         assert(!this.desc.isBlank() && this.taskBy != null);
 
-        return "D`" + super.getSaveToFileString() + "`" +
+        return "D" + TASK_DELIMITER + super.getSaveToFileString() + TASK_DELIMITER +
                 taskBy.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 

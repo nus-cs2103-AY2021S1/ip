@@ -1,10 +1,11 @@
 package duke.task;
 
 /**
- * {@code Task} is an abstract object which dictates the minimal structure every Task should have
+ * {@code Task} is an abstract class which dictates the minimal structure every Task should have
  *      and capable of performing.
  */
-public class Task { //TODO: convert to abstract class
+public abstract class Task {
+    protected static final String TASK_DELIMITER = duke.util.Util.getTaskDelimiter();
 
     /** Description for this task. */
     protected String desc;
@@ -53,9 +54,8 @@ public class Task { //TODO: convert to abstract class
      * @return Export-style string.
      */
     public String getSaveToFileString() {
-        return String.format("%d`%s", (this.isDone) ? 1 : 0, this.desc);
+        return String.format("%d%s%s", (this.isDone) ? 1 : 0, TASK_DELIMITER, this.desc);
     }
-
 
     /**
      * Returns the string output of this task for user's display.

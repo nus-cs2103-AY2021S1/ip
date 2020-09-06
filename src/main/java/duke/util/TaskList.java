@@ -34,7 +34,7 @@ public class TaskList {
     }
 
     /**
-     * Exports all the task within the task list into a list of Strings.
+     * Exports all the task within the task list into a list of Strings to save into file.
      *
      * @return List of task outputs.
      */

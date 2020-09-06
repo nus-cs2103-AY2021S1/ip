@@ -24,7 +24,8 @@ public class ToDo extends Task {
      */
     public String getSaveToFileString() {
         assert(!this.desc.isBlank());
-        return "T`" + super.getSaveToFileString();
+
+        return String.format("T%s%s", TASK_DELIMITER, super.getSaveToFileString());
     }
 
 
