@@ -61,9 +61,15 @@ public class DoneCommand implements Command {
         String reply = "";
         try {
             Task completedTask = tasks.markTaskAsDone(taskIndex);
+            if (completedTask == null) {
+                reply = "You already completed this task!";
+                return new DoneCommandResult(reply, false, SaveStatus.SAVE_NOT_APPLICABLE);
+            }
+
             reply = "Great work! I've marked this task as done:\n    " + completedTask;
             storageFile.save(tasks.encode());
             return new DoneCommandResult(reply, true, SaveStatus.SAVE_SUCCESS);
+
         } catch (InvalidCommandException ex) {
             String errorMessage = "Failed to mark task as done.\n" + ex.getMessage();
             return new InvalidCommandResult(errorMessage);

@@ -9,18 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import alice.command.ByeCommand;
-import alice.command.ClearCommand;
 import alice.command.Command;
-import alice.command.DeadlineCommand;
-import alice.command.DeleteCommand;
-import alice.command.DoneCommand;
-import alice.command.EventCommand;
-import alice.command.FindCommand;
-import alice.command.HelpCommand;
+import alice.command.CommandType;
 import alice.command.InvalidCommandException;
-import alice.command.ListCommand;
-import alice.command.TodoCommand;
 
 /**
  * Represents a parser that makes sense of user input.
@@ -74,51 +65,15 @@ public class Parser {
         String cmd = arr[0];
         String argument = arr.length == 2 ? arr[1] : "";
 
-        if (ListCommand.hasCommandWord(cmd)) {
-            // Command to display task list
-            return ListCommand.createCommand();
-
-        } else if (FindCommand.hasCommandWord(cmd)) {
-            // Command to find specific tasks
-            return FindCommand.createCommand(argument);
-
-        } else if (ClearCommand.hasCommandWord(cmd)) {
-            // Command to clear task list
-            return ClearCommand.createCommand();
-
-        } else if (HelpCommand.hasCommandWord(cmd)) {
-            // Command to get list of commands
-            return HelpCommand.createCommand();
-
-        } else if (DoneCommand.hasCommandWord(cmd)) {
-            // Command to mark task as done
-            return DoneCommand.createCommand(argument);
-
-        } else if (DeleteCommand.hasCommandWord(cmd)) {
-            // Command to mark task as done
-            return DeleteCommand.createCommand(argument);
-
-        } else if (TodoCommand.hasCommandWord(cmd)) {
-            // Command to add to-do
-            return TodoCommand.createCommand(argument);
-
-        } else if (DeadlineCommand.hasCommandWord(cmd)) {
-            // Command to add deadline
-            return DeadlineCommand.createCommand(argument);
-
-        } else if (EventCommand.hasCommandWord(cmd)) {
-            // Command to add event
-            return EventCommand.createCommand(argument);
-
-        } else if (ByeCommand.hasCommandWord(cmd)) {
-            // Command to exit program
-            return ByeCommand.createCommand();
-
-        } else {
-            // Invalid command
-            throw new InvalidCommandException("Sorry I cannot register that command!\n"
-                    + "Use 'help' command to see the lists of available command");
+        // Iterate through the command types
+        CommandType[] commands = CommandType.values();
+        for (int i = 0; i < commands.length; i++) {
+            if (commands[i].hasCommandWord(cmd)) {
+                return commands[i].createCmd(argument);
+            }
         }
+        throw new InvalidCommandException("Sorry I cannot register that command!\n"
+                + "Use 'help' command to see the lists of available command");
     }
 
     /**
