@@ -26,10 +26,22 @@ public class TaskList {
      *
      * @param newTask The task to be added.
      */
-    public void addTask(Task newTask) {
+    public void addTask(Task newTask) throws InvalidRequestException {
         int numberOfTasks = listOfTasks.size();
-        listOfTasks.add(newTask);
-        assert listOfTasks.size() > numberOfTasks : "Addition failed";
+        boolean isDuplicate = false;
+        for (int i = 0; i < numberOfTasks; i++) {
+            if (newTask.writeToFile().equals(listOfTasks.get(i).writeToFile())) {
+                isDuplicate = true;
+                break;
+            }
+        }
+        if (!isDuplicate) {
+            listOfTasks.add(newTask);
+            assert listOfTasks.size() > numberOfTasks : "Addition failed";
+        } else {
+            throw new InvalidRequestException("Replicates detected."
+                    + " This task has already been marked as done!");
+        }
     }
 
     /**
