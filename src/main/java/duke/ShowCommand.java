@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.stream.IntStream;
+
 /**
  * Represents a show command.
  */
@@ -11,15 +13,15 @@ public class ShowCommand extends Command {
         assert storage != null : "storage have not been initialised";
         StringBuilder output = new StringBuilder();
         if (tasks.isEmpty()) {
-            output = new StringBuilder("Theres currently nothing in your list.");
+            output.append("Theres currently nothing in your list.");
         } else {
-            for (int i = 0; i < tasks.size(); i++) {
+            IntStream.range(0, tasks.size()).forEach(i -> {
                 if (i == tasks.size() - 1) {
                     output.append(String.format("%d. %s", i + 1, tasks.get(i)));
                 } else {
                     output.append(String.format("%d. %s%n", i + 1, tasks.get(i)));
                 }
-            }
+            });
         }
         return ui.showOutput(output.toString());
     }
