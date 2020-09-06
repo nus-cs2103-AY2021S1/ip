@@ -351,13 +351,14 @@ public class Duke {
             }
             String keyword = nextLine.substring(5);
             int len = inputs.size();
+            String stringList = "Tasks Found: \n";
             for (int i = 0; i < len; i++) {
                 Input input = inputs.get(i);
                 if (input.content.contains(keyword)) {
-                    printTask(input, i);
+                    stringList += printTask(input, i);
                 }
             }
-            return "";
+            return stringList;
         }
         
         String printList() {
