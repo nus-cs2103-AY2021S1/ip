@@ -41,6 +41,17 @@ public class Ui {
     }
 
     /**
+     * Shows the program's response to the user's input. The look of these replies are standardised by wrapping them in
+     * dividers.
+     *
+     * @param reply The text to present to the user.
+     */
+    private void showReply(String reply) {
+        assert !reply.isEmpty() : "showReply called with no valid reply string.";
+        System.out.println(DIVIDER + reply + "\n" + DIVIDER);
+    }
+
+    /**
      * Says goodbye to the user before termination of the program.
      */
     public void showGoodbye() {
@@ -63,16 +74,6 @@ public class Ui {
      */
     public String readCommand() {
         return SCANNER.nextLine();
-    }
-
-    /**
-     * Shows the program's response to the user's input. The look of these replies are standardised by wrapping them in
-     * dividers.
-     *
-     * @param reply The text to present to the user.
-     */
-    public void showReply(String reply) {
-        System.out.println(DIVIDER + reply + "\n" + DIVIDER);
     }
 
     /**
