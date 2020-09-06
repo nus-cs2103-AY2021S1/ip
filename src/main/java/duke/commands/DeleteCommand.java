@@ -14,7 +14,7 @@ public class DeleteCommand {
      *
      * @param instruction the string of user input instruction.
      * @param tasks the tasklist that stores all the tasks.
-     * @return a task object representing the task to be done.
+     * @return a task object representing the task to be deleted.
      * @throws DukeException when the instruction format is incorrect.
      */
     public static Task executeCommand(String instruction, TaskList tasks) throws DukeException {

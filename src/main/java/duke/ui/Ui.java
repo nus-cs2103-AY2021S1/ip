@@ -14,6 +14,7 @@ public class Ui {
     private static String addTaskTailAlert = "Now you have %d tasks in the list.";
     private static String deleteTaskFrondAlert = "Noted. I've removed this task:";
     private static String findTaskFrontAlert = "Here are the matching tasks in your list:";
+    private static String updateTaskFrontAlert = "Noted. I have updated the task.";
 
     /**
      * Returns greetings at the beginning.
@@ -54,6 +55,18 @@ public class Ui {
      */
     public String deleteTaskAlert(Task tempDelete, TaskList result) {
         return printAnswer(deleteTaskFrondAlert, "   " + tempDelete.toString(),
+                String.format(addTaskTailAlert, result.getSize()));
+    }
+
+    /**
+     * Returns a reminder when a task has been udpated.
+     *
+     * @param tempUpdate the task object that has been deleted.
+     * @param result the TaskList of all the tasks.
+     * @return a string representing a reminder when a task has been deleted.
+     */
+    public String updateTaskAlert(Task tempUpdate, TaskList result) {
+        return printAnswer(updateTaskFrontAlert, "   " + tempUpdate.toString(),
                 String.format(addTaskTailAlert, result.getSize()));
     }
 

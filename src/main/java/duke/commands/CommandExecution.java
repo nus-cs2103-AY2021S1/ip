@@ -61,6 +61,10 @@ public class CommandExecution {
             TaskList matches = FindCommand.executeCommand(instruction, tasks);
             return ui.findTaskAlert(matches);
 
+        case UPDATE:
+            Task tempUpdate = UpdateCommand.executeCommand(instruction, tasks);
+            return ui.updateTaskAlert(tempUpdate, tasks);
+
         default:
             return "";
         }
