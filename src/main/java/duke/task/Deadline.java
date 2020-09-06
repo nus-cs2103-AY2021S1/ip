@@ -1,10 +1,6 @@
 package duke.task;
 
-import duke.exception.EmptyDateException;
-import duke.exception.EmptyDescriptionException;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -18,22 +14,12 @@ public class Deadline extends Task {
      * creates a new deadline task based on the given description
      * @param taskDescription the full description of the deadline task in the following format:
      *                        "deadline deadline_task_description /by due_date"
-     * @throws EmptyDescriptionException if the description given is empty
-     * @throws EmptyDateException if the date given is empty
      */
-    public Deadline(String taskDescription) throws EmptyDescriptionException, EmptyDateException {
-        if (taskDescription.length() <= 9) {
-            throw new EmptyDescriptionException("oops! the description of a deadline cannot be empty");
-        } else if (!taskDescription.contains("/")) {
-            throw new EmptyDateException("oops! the date for the deadline was not specified");
-        } else {
-            int space = taskDescription.indexOf(" ");
-            int slash = taskDescription.indexOf("/");
-
-            this.task = taskDescription.substring(space + 1, slash);
-            this.deadline = taskDescription.substring(slash + 4);
-            this.done = false;
-        }
+    public Deadline(String taskDescription) {
+        int slash = taskDescription.indexOf("/");
+        this.task = taskDescription.substring(0, slash);
+        this.deadline = taskDescription.substring(slash + 4);
+        this.done = false;
     }
 
     /**
@@ -73,13 +59,11 @@ public class Deadline extends Task {
      * decodes a given line of text and transforms it into a deadline task
      * @param string the line of text to decode
      * @return the deadline task that has been decoded from the given input
-     * @throws EmptyDescriptionException if the description given is empty
-     * @throws EmptyDateException if the date given is empty
      */
-    public static Deadline decode(String string) throws EmptyDescriptionException, EmptyDateException {
+    public static Deadline decode(String string) {
         String[] split = string.split(" \\| ");
 
-        String taskDescription = "deadline " + split[2] + " /by " + split[3];
+        String taskDescription = split[2] + " /by " + split[3];
 
         Deadline deadline = new Deadline(taskDescription);
 
