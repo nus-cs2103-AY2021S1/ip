@@ -19,14 +19,7 @@ public class Todo extends Task {
      */
     @Override
     public String convertToText() {
-        String str;
-        String link = " >> ";
-        if (!this.isDone()) {
-            str = "T" + link + "0" + link + this.getDescription();
-        } else {
-            str = "T" + link + "1" + link + this.getDescription();
-        }
-        return str;
+        return "T" + super.convertToText();
     }
 
     /**

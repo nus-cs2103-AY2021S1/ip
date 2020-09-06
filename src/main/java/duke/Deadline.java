@@ -47,16 +47,7 @@ public class Deadline extends Task {
      */
     @Override
     public String convertToText() {
-        String str;
-        String link = " >> ";
-        if (!this.isDone()) {
-            str = "D" + link + "0" + link + this.getDescription() + link
-                    + this.getDate().toString() + " " + this.getTime().toString();
-        } else {
-            str = "D" + link + "1" + link + this.getDescription() + link
-                    + this.getDate().toString() + " " + this.getTime().toString();
-        }
-        return str;
+        return "D" + super.convertToText() + " >> " + this.getDate().toString() + " " + this.getTime().toString();
     }
 
     /**

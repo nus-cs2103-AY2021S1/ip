@@ -34,16 +34,7 @@ public class Event extends Task {
      */
     @Override
     public String convertToText() {
-        String str;
-        String link = " >> ";
-        if (!this.isDone()) {
-            str = "E" + link + "0" + link + this.getDescription() + link
-                    + this.getAt().toString();
-        } else {
-            str = "E" + link + "1" + link + this.getDescription() + link
-                    + this.getAt().toString();
-        }
-        return str;
+        return "E" + super.convertToText() + " >> " + this.getAt().toString();
     }
 
     /**
