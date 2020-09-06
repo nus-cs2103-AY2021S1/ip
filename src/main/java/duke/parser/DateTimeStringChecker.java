@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import duke.DateTime;
 import duke.DukeException;
+import duke.task.TaskType;
 
 /**
  * Ensures that date and time input is in the correct format.
@@ -21,9 +22,9 @@ public class DateTimeStringChecker extends StringChecker {
         super(userInput);
     }
 
-    private void checkDelimiterPresent(String delimiter) throws DukeException {
-        if (Arrays.stream(getStringArray()).noneMatch(x -> x.equals(delimiter))) {
-            throw new DukeException("Input command must contain the delimiter " + delimiter
+    private void checkDelimiterPresent(TaskType taskType) throws DukeException {
+        if (Arrays.stream(getStringArray()).noneMatch(x -> x.equals(taskType.getDelimiter()))) {
+            throw new DukeException("Input command must contain the delimiter " + taskType.getDelimiter()
                     + " between task name and date!");
         }
     }
@@ -33,15 +34,15 @@ public class DateTimeStringChecker extends StringChecker {
      * Ensures date and times specified are in the future.
      * Also ensures the respective delimiter to separate task name and date is present in user input.
      *
-     * @param delimiter Delimiter that is used to separate the task name and date.
+     * @param taskType Type of the task to be checked.
      * @return DateTime object if inputs pass necessary date and time checks.
      * @throws DukeException If date is not present or formatting is incorrect.
      */
-    public DateTime checkDateTime(String delimiter) throws DukeException {
+    public DateTime checkDateTime(TaskType taskType) throws DukeException {
         //Makes sure the delimiter to separate name and date is present
-        checkDelimiterPresent(delimiter);
+        checkDelimiterPresent(taskType);
         //Extracts the date and time from the user input string array
-        String[] dateTime = extractDateTime(delimiter);
+        String[] dateTime = extractDateTime(taskType);
         //Check Date exists and is in the correct format
         LocalDate taskDate = checkDate(dateTime);
         //Verifies any existing time to be in the correct format
@@ -101,8 +102,8 @@ public class DateTimeStringChecker extends StringChecker {
         }
     }
 
-    private String[] extractDateTime(String delimiter) {
-        return Arrays.stream(getStringArray()).dropWhile(e -> !e.equals(delimiter))
+    private String[] extractDateTime(TaskType taskType) {
+        return Arrays.stream(getStringArray()).dropWhile(e -> !e.equals(taskType.getDelimiter()))
                 .skip(1).collect(Collectors.joining(" ")).split(" ");
     }
 }

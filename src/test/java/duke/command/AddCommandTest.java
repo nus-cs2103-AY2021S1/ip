@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import duke.task.TaskType;
 import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
@@ -38,7 +39,7 @@ class AddCommandTest {
     public void processTask_deadlineTask_success() {
         try {
             Task myReturnedTask = new AddCommand(new String[]{"deadline", "return", "book", "/by", "2022-08-26", "1800"
-            }).processTask("/by", "deadline");
+            }).processTask(TaskType.DEADLINE);
             assertNotNull(myReturnedTask); //check if the object is != null
             //check if the returned object is of class Task
             assertTrue(myReturnedTask instanceof Task);
@@ -52,7 +53,7 @@ class AddCommandTest {
     public void processTask_deadlineNoDate_exceptionThrown() {
         try {
             Task myReturnedTask = new AddCommand(new String[]{"deadline", "return", "book", "/by" })
-                    .processTask("/by", "deadline");
+                    .processTask(TaskType.DEADLINE);
             fail(); // the test should not reach this line
         } catch (DukeException e) {
             assertEquals("The task must come with a date in yyyy-mm-dd format!",

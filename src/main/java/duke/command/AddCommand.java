@@ -7,11 +7,7 @@ import duke.Storage;
 import duke.Ui;
 import duke.parser.DateTimeStringChecker;
 import duke.parser.TaskNameStringChecker;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
+import duke.task.*;
 
 
 /**
@@ -49,24 +45,21 @@ public class AddCommand extends Command {
      * This can be a todo task with the task name, a deadline task with a date and/or time,
      * or an event task with a date and/or time.
      *
-     * @param delimiter Represents the delimiter that is used to separate names and the date of the task.
      * @param taskType Represents the type of the task (todo, deadline, event).
      * @return The task to be added into the task list.
      * @throws DukeException If task string does not contain dates (for deadline and event tasks),
      * or has wrong date/time formatting.
      */
-    protected Task processTask(String delimiter, String taskType) throws DukeException {
-        String taskName = new TaskNameStringChecker(getArray()).checkTaskString(delimiter);
-        if (taskType.equals("todo")) {
+    protected Task processTask(TaskType taskType) throws DukeException {
+        String taskName = new TaskNameStringChecker(getArray()).checkTaskString(taskType);
+        if (taskType.equals(TaskType.TODO)) {
             return new Todo(taskName);
-        } else {
-            DateTime dateTime = new DateTimeStringChecker(getArray()).checkDateTime(delimiter);
-            return (taskType.equals("deadline")
-                    ? new Deadline(taskName, dateTime)
-                    : new Event(taskName, dateTime));
         }
+        DateTime dateTime = new DateTimeStringChecker(getArray()).checkDateTime(taskType);
+        return (taskType.equals(TaskType.DEADLINE)
+                ? new Deadline(taskName, dateTime)
+                : new Event(taskName, dateTime));
     }
-
 
     /**
      * Carries out the addition of a task to the task list specified.
@@ -76,23 +69,9 @@ public class AddCommand extends Command {
      * @throws DukeException If task string does not contain task name, is unrecognized.
      */
     protected Task addTask(TaskList tasks) throws DukeException {
-        switch (getArray()[0]) {
-        case ("todo"):
-            Task todo = processTask("", "todo");
-            tasks.addTask(todo);
-            return todo;
-        case ("deadline"):
-            Task deadline = processTask("/by", "deadline");
-            tasks.addTask(deadline);
-            return deadline;
-        case ("event"):
-            Task event = processTask("/at", "event");
-            tasks.addTask(event);
-            return event;
-        default:
-            throw new DukeException("I don't understand what task you want to be added! Only deadline/todo/event!");
-        }
-
+        Task task = processTask(Enum.valueOf(TaskType.class, getArray()[0]));
+        tasks.addTask(task);
+        return task;
     }
 
     /**
