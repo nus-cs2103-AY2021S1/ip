@@ -32,23 +32,42 @@ public class TaskList {
         this.lst = new ArrayList<>();
         if (inputLst.length >= 1) {
             for (String line : inputLst[0]) {
-                // splits each task string to get its task type, task description and task datetime (if applicable)
                 String[] splitInput = line.split(" \\| ");
                 TaskType taskType = TaskType.valueOf(splitInput[0]);
                 String taskDescription = splitInput[2];
                 String taskDate;
+                boolean hasTag;
+                Tag tag;
                 boolean isDone = splitInput[1].equals(done);
                 switch (taskType) {
                 case TODO:
-                    this.add(new ToDoTask(taskDescription, isDone));
+                    hasTag = splitInput.length == 4;
+                    if (hasTag) {
+                        tag = new Tag(splitInput[3]);
+                        this.add(new ToDoTask(taskDescription, isDone).setTag(tag));
+                    } else {
+                        this.add(new ToDoTask(taskDescription, isDone));
+                    }
                     break;
                 case DEADLINE:
+                    hasTag = splitInput.length == 5;
                     taskDate = splitInput[3];
-                    this.add(new DeadlineTask(taskDescription, isDone, taskDate));
+                    if (hasTag) {
+                        tag = new Tag(splitInput[4]);
+                        this.add(new DeadlineTask(taskDescription, isDone, taskDate).setTag(tag));
+                    } else {
+                        this.add(new DeadlineTask(taskDescription, isDone, taskDate));
+                    }
                     break;
                 case EVENT:
+                    hasTag = splitInput.length == 5;
                     taskDate = splitInput[3];
-                    this.add(new EventTask(taskDescription, isDone, taskDate));
+                    if (hasTag) {
+                        tag = new Tag(splitInput[4]);
+                        this.add(new EventTask(taskDescription, isDone, taskDate).setTag(tag));
+                    } else {
+                        this.add(new EventTask(taskDescription, isDone, taskDate));
+                    }
                     break;
                 default:
                     assert false : taskType;

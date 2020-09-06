@@ -28,8 +28,9 @@ public class Ui {
                 + "description and event time" + "\n"
                 + "6. done {task number} => marks the given task as done" + "\n"
                 + "7. delete {task number} => deletes the given task" + "\n"
-                + "8. find {query} => lists out tasks based on your query" + "\n"
-                + "9. bye => makes me go to sleep";
+                + "8. tag {task number} {tag name} => tag selected task with given tag name" + "\n"
+                + "9. find {query} => lists out tasks based on your query" + "\n"
+                + "10. bye => makes me go to sleep";
     }
 
     /**
@@ -96,6 +97,17 @@ public class Ui {
         } else {
             return "Here are your search results: \n";
         }
+    }
+
+    /**
+     * Returns the tag added to task acknowledgement string.
+     *
+     * @param task    Task to print
+     * @param taskNum Task number of task
+     * @return The task tag added to task acknowledgement string.
+     */
+    public String showTagAdded(Task task, int taskNum) {
+        return "The following task has been tagged: \n" + this.showTask(task, taskNum);
     }
 
     /**
