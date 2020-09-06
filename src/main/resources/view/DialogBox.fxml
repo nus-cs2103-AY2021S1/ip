@@ -22,9 +22,9 @@
                 <DropShadow blurType="GAUSSIAN" color="#9c9a9a" height="16.23" radius="9.9625" width="25.62"/>
             </effect>
             <children>
-                <Label fx:id="dialog" lineSpacing="5.0" text="Label" wrapText="true">
+                <Label fx:id="dialog" styleClass="chat-label" lineSpacing="5.0" text="Label" wrapText="true">
                     <font>
-                        <Font name="Lucida Console" size="12.0"/>
+                        <Font name="Lucida Console" size="12.0" />
                     </font>
                 </Label>
             </children>
