@@ -21,8 +21,8 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    //private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    //private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
 
     /**
@@ -53,7 +53,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.executeToString(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
@@ -71,7 +71,6 @@ public class Duke {
     public String getResponse(String input) {
         String response = "";
         try {
-
             Command c = Parser.parse(input);
             if (c instanceof ExitCommand) {
                 Platform.exit();

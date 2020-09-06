@@ -26,16 +26,68 @@ public class AddCommand extends Command {
         return false;
     }
 
-    /**
-     * Checks for the type of task added by the user based on the user input, and
-     * adds the appropriate type of task to the task list.
-     *
-     * @param tasks List of <code>Task</code> objects.
-     * @param ui Ui object created by Duke.
-     * @param storage Storage object created by Duke.
-     */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+//    /**
+//     * Checks for the type of task added by the user based on the user input, and
+//     * adds the appropriate type of task to the task list.
+//     *
+//     * @param tasks List of <code>Task</code> objects.
+//     * @param ui Ui object created by Duke.
+//     * @param storage Storage object created by Duke.
+//     */
+//    public void execute(TaskList tasks, Ui ui, Storage storage) {
+//        Task t = new Task(userInput);
+//        try {
+//            t.validate();
+//
+//            String fileString = tasks.listToString();
+//
+//            if (t.isTodo()) {
+//                // add to do to fileString
+//                ToDo todo = t.convertToTodo();
+//                tasks.add(todo);
+//                fileString += todo.taskToText() + "\n";
+//
+//                // saves fileString to txt file
+//                Storage.save(Duke.FILENAME, fileString);
+//
+//                // print template message
+//                System.out.println("    Got it. I've added this task:\n"
+//                        + "        " + todo + '\n'
+//                        + "    Now you have " + tasks.size() + " tasks in the list.");
+//
+//            } else if (t.isDeadline()) {
+//                Deadline d = t.convertToDeadline();
+//                tasks.add(d);
+//                fileString += d.taskToText() + "\n";
+//
+//                // saves fileString to txt file
+//                Storage.save(Duke.FILENAME, fileString);
+//
+//                System.out.println("    Got it. I've added this task:\n"
+//                        + "        " + d + '\n'
+//                        + "    Now you have " + tasks.size() + " tasks in the list.");
+//
+//            } else if (t.isEvent()) {
+//                Event e = t.convertToEvent();
+//                tasks.add(e);
+//                fileString += e.taskToText() + "\n";
+//
+//                // saves fileString to txt file
+//                Storage.save(Duke.FILENAME, fileString);
+//
+//                System.out.println("    Got it. I've added this task:\n"
+//                        + "        " + e + '\n'
+//                        + "    Now you have " + tasks.size() + " tasks in the list.");
+//            }
+//        } catch (DukeException e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//    }
+
+    public String executeToString(TaskList tasks, Ui ui, Storage storage) {
         Task t = new Task(userInput);
+        String result = "";
         try {
             t.validate();
 
@@ -51,58 +103,6 @@ public class AddCommand extends Command {
                 Storage.save(Duke.FILENAME, fileString);
 
                 // print template message
-                System.out.println("    Got it. I've added this task:\n"
-                        + "        " + todo + '\n'
-                        + "    Now you have " + tasks.size() + " tasks in the list.");
-
-            } else if (t.isDeadline()) {
-                Deadline d = t.convertToDeadline();
-                tasks.add(d);
-                fileString += d.taskToText() + "\n";
-
-                // saves fileString to txt file
-                Storage.save(Duke.FILENAME, fileString);
-
-                System.out.println("    Got it. I've added this task:\n"
-                        + "        " + d + '\n'
-                        + "    Now you have " + tasks.size() + " tasks in the list.");
-
-            } else if (t.isEvent()) {
-                Event e = t.convertToEvent();
-                tasks.add(e);
-                fileString += e.taskToText() + "\n";
-
-                // saves fileString to txt file
-                Storage.save(Duke.FILENAME, fileString);
-
-                System.out.println("    Got it. I've added this task:\n"
-                        + "        " + e + '\n'
-                        + "    Now you have " + tasks.size() + " tasks in the list.");
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
-
-    public String executeToString(TaskList tasks, Ui ui, Storage storage) {
-        Task t = new Task(userInput);
-        String result = "";
-        try {
-            t.validate();
-
-            String fileString = tasks.listToString();
-
-            if (t.isTodo()) {
-//                // add to do to fileString
-                ToDo todo = t.convertToTodo();
-                tasks.add(todo);
-                fileString += todo.taskToText() + "\n";
-
-                // saves fileString to txt file
-                Storage.save(Duke.FILENAME, fileString);
-
-                // print template message
                 return "    Got it. I've added this task:\n"
                         + "        " + todo + '\n'
                         + "    Now you have " + tasks.size() + " tasks in the list.";
@@ -129,6 +129,8 @@ public class AddCommand extends Command {
                 return "    Got it. I've added this task:\n"
                         + "        " + e + '\n'
                         + "    Now you have " + tasks.size() + " tasks in the list.";
+            } else {
+                assert false;
             }
         } catch (DukeException e) {
             result = e.getMessage();
