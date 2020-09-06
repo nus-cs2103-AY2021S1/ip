@@ -1,9 +1,10 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.util.Storage;
-import duke.ui.Ui;
 import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.util.Storage;
+
+
 
 /**
  * Class representing a find command.
@@ -15,12 +16,8 @@ public class FindCommand extends Command {
     /**
      * Creates a new {@code FindCommand}.
      * @param keyword Keyword for the search.
-     * @throws DukeException If no keyword is provided.
      */
-    public FindCommand(String keyword) throws DukeException {
-        if (keyword == null) {
-            throw new DukeException("You have to tell me what to search for!");
-        }
+    public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 

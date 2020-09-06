@@ -16,14 +16,9 @@ public class DoneCommand extends Command {
     /**
      * Creates a new {@code DoneCommand}.
      * @param taskIdx Index of the task to mark as done.
-     * @throws DukeException If no task index is provided, or if the format provided is invalid.
      */
-    public DoneCommand(String taskIdx) throws DukeException {
-        try {
-            this.taskIdx = Integer.parseInt(taskIdx);
-        } catch (NumberFormatException e) {
-            throw new DukeException("Invalid arguments provided!");
-        }
+    public DoneCommand(int taskIdx) {
+        this.taskIdx = taskIdx;
     }
 
     /**

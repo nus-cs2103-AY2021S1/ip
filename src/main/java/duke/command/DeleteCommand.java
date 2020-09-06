@@ -16,14 +16,9 @@ public class DeleteCommand extends Command {
     /**
      * Creates a new {@code DeleteCommand}.
      * @param taskIdx Index of the task to be deleted.
-     * @throws DukeException If no task index is provided, or if the format provided is invalid.
      */
-    public DeleteCommand(String taskIdx) throws DukeException {
-        try {
-            this.taskIdx = Integer.parseInt(taskIdx);
-        } catch (NumberFormatException e) {
-            throw new DukeException("Invalid arguments provided!");
-        }
+    public DeleteCommand(int taskIdx) {
+        this.taskIdx = taskIdx;
     }
 
     /**
