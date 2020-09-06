@@ -87,7 +87,7 @@ public class Duke {
      */
     public void saveData(TaskList taskList, DukeStorage storage) {
         try {
-            storage.saveStorage(taskList.getTasks());
+            storage.saveToStorage(taskList.getTasks());
         } catch (IOException ex) {
             System.out.println("Error in saving!");
             ex.printStackTrace();

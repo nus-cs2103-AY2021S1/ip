@@ -60,7 +60,7 @@ public class DukeStorage {
      * @param tasks tasklist to store tasks.
      * @throws IOException If an input/output operation fails.
      */
-    public void saveStorage(List<Task> tasks) throws IOException {
+    public void saveToStorage(List<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter(filePath);
         for (Task task : tasks) {
             writer.write(DukeInterpreter.encode(task) + "\n");
