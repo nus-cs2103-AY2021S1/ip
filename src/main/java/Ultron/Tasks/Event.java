@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,11 +40,7 @@ public final class Event extends Task {
      * @param at          Date of the event as a string.
      */
     public Event(final String description, final String at) {
-
-        //Call the superclass constructor
         super(description);
-
-        //Store the at variable
         this.at = at;
     }
 
@@ -53,13 +50,8 @@ public final class Event extends Task {
      * @param description Description of the Event.
      * @param at          Date of the event as a Date object.
      */
-    //Constructor for the event class
     public Event(final String description, final Date at) {
-
-        //Call the superclass constructor
         super(description);
-
-        //Store the at variable
         this.date = at;
     }
 
@@ -70,32 +62,16 @@ public final class Event extends Task {
      * @return Event with the arguments parsed.
      */
     public static Event parseCommand(final String args) {
-
-        //Create the matcher
         Matcher matcher = DATE_MATCH.matcher(args);
-
-        //Check for matches
-        matcher.find();
-
-        //Get the date and the name
+        boolean match = matcher.find();
         String name = matcher.group(NAME_INDEX);
         String date = matcher.group(DATE_INDEX);
-
-        //Extract the date
         try {
-
-            //Parse the date
             Date date1 = DATE_FORMAT.parse(date);
-
-            //Pass the date to the constructor
             return new Event(name, date1);
         } catch (ParseException e) {
-
-            //Pass the 2 arguments into the function
             return new Event(name, date);
         }
-
-
     }
 
     /**
@@ -104,12 +80,7 @@ public final class Event extends Task {
      * @return date Date of the event.
      */
     public String getDate() {
-        if (at != null) {
-            //Return the date
-            return at;
-        } else {
-            return new SimpleDateFormat("dd-MM-yyyy HHmm").format(date);
-        }
+        return Objects.requireNonNullElseGet(at, () -> new SimpleDateFormat("dd-MM-yyyy HHmm").format(date));
 
     }
 
