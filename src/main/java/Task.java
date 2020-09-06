@@ -2,10 +2,7 @@
 /**
  * Represents a task to do and creates a parent class with child classes Event, ToDo, Deadline
  */
-public abstract class Task implements Encodable<Task>{
-
-
-
+public abstract class Task implements Encodable<Task> {
 
 
     protected String description;
@@ -18,6 +15,7 @@ public abstract class Task implements Encodable<Task>{
 
     /**
      * obtains a tick or cross from a Task
+     *
      * @return String [✓] or [✗]
      */
     public String getStatusIcon() {
@@ -34,6 +32,7 @@ public abstract class Task implements Encodable<Task>{
 
     /**
      * overrides Task String output to be formatted
+     *
      * @return String of formatted Task
      */
     @Override

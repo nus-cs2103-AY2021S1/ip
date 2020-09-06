@@ -21,6 +21,7 @@ public enum Commands {
 
     /**
      * compares keyword with the enum commands
+     *
      * @param keyword
      * @return Commands that corresponds to the keyword
      * @throws DukeException if it is unable to match any of the enum commands
@@ -31,6 +32,6 @@ public enum Commands {
                 return c;
             }
         }
-        throw new DukeException("DukeException: ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new DukeException("DukeException: ಠ_ಠ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }

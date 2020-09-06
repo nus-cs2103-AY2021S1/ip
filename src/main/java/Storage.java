@@ -18,11 +18,13 @@ public class Storage {
 
     /**
      * saves the list of items in a hardcoded file called list.duke
-     * @param list TaskList object to be saved
+     *
+     * @param list     TaskList object to be saved
      * @param filePath path to save file at
      * @throws DukeException
      */
     public static void save(TaskList list, String filePath) throws DukeException {
+        assert filePath.length() > 0;
         String[] directories = filePath.split("/");
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, directories);
@@ -45,11 +47,13 @@ public class Storage {
 
     /**
      * loads from list.duke form specified filePath
+     *
      * @param filePath filePath to search
      * @return TaskList containing all saved additions to the list
      */
     public static TaskList load(String filePath) {
         try {
+            assert filePath.length() > 0;
             String[] directories = filePath.split("/");
             String home = System.getProperty("user.home");
             Path path = Paths.get(home, directories);

@@ -21,6 +21,7 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         try {
+            //assert text.length() > 0;
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
@@ -44,10 +45,12 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
+        //assert text.length() > 0;
         return new DialogBox(text, img);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
+        //assert text.length() > 0;
         var db = new DialogBox(text, img);
         db.flip();
         return db;
