@@ -1,17 +1,19 @@
-package duke;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.Task;
+import duke.ToDo;
+
 
 public class ToDoTest {
-    Task newToDoTask = new ToDo("read book");
-    
+    private Task newToDoTask = new ToDo("read book");
+
     @Test
-    void getTaskTypeTest(){
+    void getTaskTypeTest() {
         assertEquals("ToDo", newToDoTask.getTaskType());
     }
-    
+
     @Test
     public void toStringTest() {
         assertEquals("[T][✘] read book", newToDoTask.toString());

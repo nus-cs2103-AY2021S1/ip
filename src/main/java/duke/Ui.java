@@ -7,11 +7,11 @@ import java.util.Scanner;
  * Ui deals with interactions with users.
  */
 public class Ui {
-    private final String HORIZONTAL_LINE = "_______________________________________________________";
-    
-     /**
-     * Introduction of Mocha.
-     */
+    private static final String HORIZONTAL_LINE = "_______________________________________________________";
+
+    /**
+    * Introduction of Mocha.
+    */
     public void sayIntroduction() {
 
         String nameIntro = "Hello, I'm Mocha!";
@@ -27,7 +27,7 @@ public class Ui {
 
     /**
      * Creates a new Parser object.
-     * 
+     *
      * @return a Parser object.
      */
     public Parser createParser() {
@@ -36,7 +36,7 @@ public class Ui {
 
     /**
      * Creates a new Scanner object that uses the same list of Tasks as the existing file.
-     * 
+     *
      * @return s Scanner object.
      */
     public Scanner createUserInputScanner() {
@@ -45,13 +45,13 @@ public class Ui {
 
     /**
      * Displays the message when a task is added.
-     * 
+     *
      * @param task  Takes in a task object.
      * @param sizeOfTasks The size of the list of tasks.
-     */    
+     */
     public void addTask(Task task, int sizeOfTasks) {
         if (task.getTaskType() == "ToDo") {
-            
+
             System.out.println(HORIZONTAL_LINE
                     + "\r\n"
                     + "One new ToDo Task added: "
@@ -64,7 +64,7 @@ public class Ui {
                     + HORIZONTAL_LINE);
 
         } else if (task.getTaskType() == "Deadline") {
-            
+
             System.out.println(HORIZONTAL_LINE
                     + "\r\n"
                     + "One new Deadline added: "
@@ -75,9 +75,9 @@ public class Ui {
                     + sizeOfTasks
                     + "\r\n"
                     + HORIZONTAL_LINE);
-            
+
         } else if (task.getTaskType() == "Event") {
-            System.out.println(HORIZONTAL_LINE 
+            System.out.println(HORIZONTAL_LINE
                     + "\r\n"
                     + "One new Deadline Task added: "
                     + "\r\n"
@@ -88,15 +88,15 @@ public class Ui {
                     + "\r\n"
                     + HORIZONTAL_LINE);
         } else {
-            return;   
+            return;
         }
     }
 
     /**
      * Displays the message when a task is marked done.
-     * 
+     *
      * @param task Takes in a task object.
-     */    
+     */
     public void markTaskDone(Task task) {
         System.out.println(HORIZONTAL_LINE
                 + "\r\n"
@@ -108,7 +108,7 @@ public class Ui {
 
     /**
      * Displays all tasks.
-     * 
+     *
      * @param tasks Takes in a list of tasks.
      */
     public void listAllTasks(TaskList tasks) {
@@ -131,7 +131,7 @@ public class Ui {
 
     /**
      * Mocha's salutations.
-     */    
+     */
     public void sayGoodbye() {
         System.out.println(HORIZONTAL_LINE
                 + "\r\n"
@@ -142,7 +142,7 @@ public class Ui {
 
     /**
      * Displays the message when a task is deleted.
-     * 
+     *
      * @param task Takes in a task object.
      * @param sizeOfTasks Takes in the size of the list of tasks.
      */
@@ -158,45 +158,24 @@ public class Ui {
                 + "\r\n"
                 + HORIZONTAL_LINE);
     }
-    
-//    public void commandNotRecognisedExceptionMessage() {
-//        System.out.println(HORIZONTAL_LINE
-//                + "\r\n"
-//                + "Oops! I couldn't understand what you mean :("
-//                + "\r\n"
-//                + HORIZONTAL_LINE);
-//    }
-    
-//    public String commandNotRecognised() {
-<<<<<<< HEAD
-//        return HORIZONTAL_LINE
-//                + "\r\n"
-//                + "Oops! I couldn't understand what you mean :("
-//                + "\r\n"
-//                + HORIZONTAL_LINE;
-//    }
-=======
-//        return horizontalLine
-//                + "\r\n"
-//                + "Oops! I couldn't understand what you mean :("
-//                + "\r\n"
-//                + horizontalLine;
-//    }
-    
+
+    /**
+     * Displays all task that contains the word to find.
+     *
+     * @param matchingTasks A list of matching tasks.
+     */
     public void findTask(ArrayList<Task> matchingTasks) {
 
-        System.out.println(horizontalLine
+        System.out.println(HORIZONTAL_LINE
                 + "\r\n"
                 + "Here are the matching tasks in your list:"
                 + "\r\n");
 
         for (int i = 0; i < matchingTasks.size(); i++) {
-            System.out.println((i + 1) 
-                    + "." 
+            System.out.println((i + 1)
+                    + "."
                     + matchingTasks.get(i).toString());
         }
-        
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
     }
->>>>>>> branch-Level-9
 }

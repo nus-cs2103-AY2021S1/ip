@@ -10,7 +10,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor of Deadline object.
-     * 
+     *
      * @param description Takes in the description of the deadline task.
      * @param by Takes in the date in which the task needs to be completed by in YYYYY-MM-DD format..
      */
@@ -21,7 +21,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the task type of Deadline.
-     * 
+     *
      * @return the task type of Deadline.
      */
     @Override
@@ -31,7 +31,7 @@ public class Deadline extends Task {
 
     /**
      * Formats the string of a Deadline object.
-     * 
+     *
      * @return a formatted string for a Deadline object.
      */
     @Override
@@ -41,12 +41,11 @@ public class Deadline extends Task {
 
     /**
      * Formats the string of a Deadline object to be stored into hard drive.
-     * 
+     *
      * @return a formatted string suitable for storage in hard drive for a Deadline object.
      */
     @Override
     public String toStringInFile() {
         return "D" + super.toStringInFile() + " | " + this.by;
     }
-    
 }

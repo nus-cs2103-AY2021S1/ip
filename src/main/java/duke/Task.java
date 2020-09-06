@@ -9,7 +9,7 @@ public class Task {
 
     /**
      * Constructor of Task object.
-     * 
+     *
      * @param description Takes in the description of the task object.
      */
     public Task(String description) {
@@ -19,7 +19,7 @@ public class Task {
 
     /**
      * Returns the symbol to indicate if the task is done.
-     * 
+     *
      * @return a checkmark for a task that is done and a cross for a task that is not.
      */
     public String getStatusIcon() {
@@ -30,7 +30,7 @@ public class Task {
 
     /**
      * Gets the description of the task object.
-     * 
+     *
      * @return the description of the task.
      */
     public String getDescription() {
