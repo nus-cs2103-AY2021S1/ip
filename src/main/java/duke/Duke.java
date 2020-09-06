@@ -58,7 +58,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException | WrongFormatException e) {
-            ui.showError(e);
+            uiForGui.showError(e);
             tasks = new TaskList();
         }
     }
