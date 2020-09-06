@@ -1,6 +1,5 @@
 package duke.command;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -142,12 +141,12 @@ public class Parser {
             } else {
                 try {
                     String[] secondarr = stringarr[1].split("/by", 2);
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
                     LocalDateTime date = LocalDateTime.parse(secondarr[1].trim(), formatter);
                     Deadline deadline = Deadline.createDeadline(secondarr[0], date);
                     taskObj = deadline;
                 } catch (DateTimeParseException e) {
-                    String message = "That does not look like a proper Date. Please input YYYY-MM-DD";
+                    String message = "That does not look like a proper Date. Please input MMM d yyyy HH:mm";
                     throw new DukeException(message);
                 }
             }
@@ -156,11 +155,16 @@ public class Parser {
                 String message = "The description of an Event cannot be empty";
                 throw new DukeException(message);
             } else {
-                String[] secondarr = stringarr[1].split("/at", 2);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                LocalDateTime date = LocalDateTime.parse(secondarr[1].trim(), formatter);
-                Event event = Event.createEvent(secondarr[0], date);
-                taskObj = event;
+                try {
+                    String[] secondarr = stringarr[1].split("/at", 2);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+                    LocalDateTime date = LocalDateTime.parse(secondarr[1].trim(), formatter);
+                    Event event = Event.createEvent(secondarr[0], date);
+                    taskObj = event;
+                } catch (DateTimeParseException e) {
+                    String message = "That does not look like a proper Date. Please input MMM d yyyy HH:mm";
+                    throw new DukeException(message);
+                }
             }
         } else {
             String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
@@ -199,15 +203,14 @@ public class Parser {
             return "todo " + stringArr[1];
         case 'D':
             String[] secondArr = stringArr[1].split("by: ", 2);
-            DateTimeFormatter deadlineFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-            LocalDateTime deadlineDate = LocalDateTime.parse(secondArr[1], deadlineFormatter);
-            return "deadline " + secondArr[0] + "/by " + deadlineDate;
+            String storedDeadlineTask = secondArr[0];
+            String storedDeadlineDate = secondArr[1];
+            return "deadline " + storedDeadlineTask + "/by " + storedDeadlineDate;
         case 'E':
             String[] thirdArr = stringArr[1].split("at: ", 2);
-            System.out.println(thirdArr[1]);
-            DateTimeFormatter eventFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
-            LocalDateTime eventDate = LocalDateTime.parse(thirdArr[1].trim(), eventFormatter);
-            return "event " + thirdArr[0] + "/at " + eventDate;
+            String storedEventTask = thirdArr[0];
+            String storedEventDate = thirdArr[1];
+            return "event " + storedEventTask + "/at " + storedEventDate;
         default:
             String errorMessage = "Failed to process Stored Tasks";
             throw new DukeException(errorMessage);
