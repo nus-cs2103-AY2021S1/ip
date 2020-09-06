@@ -62,12 +62,14 @@ public class Command {
             assert order >= 1 : "order should be at least one";
             Task task = taskList.get(order - 1);
             task.markAsDone();
-            message = message + "  Nice! I've marked this task as done:" + "    [" + task.getStatusIcon() + "] "
+            message = message + "  Nice! I've marked this task as done:" + "    ["
+                    + task.getStatusIcon() + "] "
                     + task.getDescription();
         } else if (command.contains("delete")) {
             Task task = taskList.get(order - 1);
             taskList.remove(order - 1);
-            message = message + "Noted. I've removed this task:\n" + "  " + task.toString() + "\nNow you have "
+            message = message + "Noted. I've removed this task:\n" + "  "
+                    + task.toString() + "\nNow you have "
                     + taskList.size() + " tasks in the list.\n";
         } else if (command.equals("bye")) {
             isExit = true;
