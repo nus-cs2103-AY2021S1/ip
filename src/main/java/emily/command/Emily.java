@@ -11,13 +11,14 @@ import java.io.File;
  */
 public class Emily {
 
-    private static final String FILE_PATH = "data/emily.txt";
+    private static final String FILE_PATH = "data/emily.txt"; //store txt file under data folder
     private final Storage storage;
     private final Logic logic;
     private TaskList tasks;
 
     /**
      * Manages the app components
+     * Loads the tasklist with existing saved tasks from previous sessions
      */
     public Emily() {
         logic = new Logic();
@@ -33,6 +34,7 @@ public class Emily {
     /**
      * Reads the string of user command and return the corresponding output
      * by the program.
+     *
      * @param userInputText user will type into the box
      * @return a String response from Emily
      */
