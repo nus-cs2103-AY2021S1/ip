@@ -1,7 +1,6 @@
 package ultron.exceptions;
 
 public class UltronException extends Exception {
-
     /**
      * Ultron Exception for Ultron class.
      *
@@ -12,7 +11,6 @@ public class UltronException extends Exception {
                            final ExceptionType errorType) {
         super(errorType.getMessage(inputString));
     }
-
     /**
      * Ultron Exception for Ultron class.
      *
