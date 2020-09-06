@@ -51,8 +51,8 @@ public class Storage {
     public void saveTask(Task task) {
         File saveFile = new File(this.filepath);
         try {
-            saveFile.getParentFile().mkdirs(); //to create directory 'data'
-            saveFile.createNewFile(); //to create duke.txt file
+            saveFile.getParentFile().mkdir(); //to create data directory
+            saveFile.createNewFile(); //to create TaskList.txt file
             //Check to see whether duke.txt file exists
             if (saveFile.length() > 0) {
                 FileWriter toSave = new FileWriter(saveFile, true);
