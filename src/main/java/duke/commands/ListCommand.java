@@ -11,6 +11,7 @@ public class ListCommand extends Command {
     /**
      * Returns true since there is only one initial response which has been set in
      * the method call <code>init</code>.
+     * @param input the user input.
      * @return <code>true</code>
      */
     @Override
