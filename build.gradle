@@ -43,11 +43,11 @@ test {
 }
 
 application {
-    mainClassName = "bob.Bob"
+    mainClassName = "bob.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "bob"
+    archiveBaseName = "Bob"
     archiveClassifier = null
 }
 
