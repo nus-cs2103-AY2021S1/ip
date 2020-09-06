@@ -16,10 +16,11 @@ public class ListCommand extends Command {
      * @param tasks Task list representing current tasks.
      * @param ui User interface interacting with user.
      * @param storage Storage Storage in charge of saving file to hard disk.
+     * @return A string representing Duke's response after executing command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printMessage(tasks.listAllTasks());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.listAllTasks();
     }
 
 }

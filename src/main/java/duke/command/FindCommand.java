@@ -29,10 +29,11 @@ public class FindCommand extends Command {
      * @param tasks Task list representing current tasks.
      * @param ui User interface interacting with user.
      * @param storage Storage Storage in charge of saving file to hard disk.
+     * @return A string representing Duke's response after executing command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printMessage(String.format("%s\n%s", MESSAGE_ADD_ACKNOWLEDGEMENT,
-                tasks.findMatchingTasks(keyword)));
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return String.format("%s\n%s", MESSAGE_ADD_ACKNOWLEDGEMENT,
+                tasks.findMatchingTasks(keyword));
     }
 }
