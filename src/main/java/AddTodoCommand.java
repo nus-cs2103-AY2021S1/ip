@@ -29,9 +29,9 @@ public class AddTodoCommand extends Command {
         Todo todo = new Todo(input.substring(5));
         tasks.addTask(todo);
 
-        storage.writeNewDataToFile("T", "0", todo.getDescription(), "");
+        storage.updateFile(tasks);
 
-        System.out.println("    Got it. I've added this task:\n      " + todo + "\n    Now you have "
+        System.out.println("Got it. I've added this task:\n" + todo + "\nNow you have "
                 + tasks.getSize() + " tasks in the list.");
     }
 }

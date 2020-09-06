@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TaskList {
     protected ArrayList<Task> tasks;
@@ -43,7 +44,9 @@ public class TaskList {
      * @return true when Task is added.
      */
     public boolean addTask(Task task) {
-        return tasks.add(task);
+        tasks.add(task);
+        Collections.sort(tasks);
+        return true;
     }
 
     /**
@@ -54,6 +57,19 @@ public class TaskList {
      */
     public Task removeTask(int index) {
         return tasks.remove(index);
+    }
+
+    /**
+     * Marks the task at the given index as done.
+     *
+     * @param index Index of the Task.
+     * @return The Task that got updated as done.
+     */
+    public Task markTaskAsDone(int index) {
+        Task task = tasks.get(index);
+        task.markAsDone();
+        Collections.sort(tasks);
+        return task;
     }
 
     /**

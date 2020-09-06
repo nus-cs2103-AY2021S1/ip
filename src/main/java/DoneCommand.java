@@ -31,22 +31,9 @@ public class DoneCommand extends Command {
         assert splitStr.length == 2 : "Input for Done does not follow the correct format";
 
         int taskIndex = Integer.parseInt(splitStr[1]) - 1;
-        Task task = tasks.getTask(taskIndex);
-        task.markAsDone();
+        Task updatedTask = tasks.markTaskAsDone(taskIndex);
+        storage.updateFile(tasks);
 
-        if (task.getTaskType().equals("T")) {
-            storage.editCurrentDataInFile(taskIndex + 1, task.getTaskType(), "1",
-                    task.getDescription(), "", tasks.getSize());
-        } else if (task.getTaskType().equals("D")) {
-            Deadline deadline = (Deadline) task;
-            storage.editCurrentDataInFile(taskIndex + 1, task.getTaskType(), "1",
-                    task.getDescription(), deadline.getBy(), tasks.getSize());
-        } else {
-            Event event = (Event) task;
-            storage.editCurrentDataInFile(taskIndex + 1, task.getTaskType(), "1",
-                    task.getDescription(), event.getTime(), tasks.getSize());
-        }
-
-        System.out.println("    Nice! I've marked this task as done:\n      " + task);
+        System.out.println("Nice! I've marked this task as done:\n" + updatedTask);
     }
 }
