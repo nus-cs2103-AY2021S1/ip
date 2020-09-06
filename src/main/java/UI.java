@@ -76,4 +76,27 @@ public class UI {
         return message;
 
     }
+
+    public String printFoundTagsTasks(String substring, ArrayList<Task> tasks) {
+        String message = "Here are the matching tasks in your list with the tag:\n";
+        try {
+            ArrayList<Task> keywordTasks = new ArrayList<>();
+
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.get(i).getTagDisplay().contains(substring)) {
+                    keywordTasks.add(tasks.get(i));
+                }
+            }
+            if (keywordTasks.size() == 0) {
+                throw new DukeNoMatchesTagExcpetion("");
+            }
+            int sizeStore = keywordTasks.size();
+            for (int i = 1; i < sizeStore + 1; i++) {
+                message += String.valueOf(i) + "." + keywordTasks.get(i - 1).toString() + "\n";
+            }
+        } catch (DukeNoMatchesTagExcpetion e) {
+            message = e.getMessage();
+        }
+        return message;
+    }
 }

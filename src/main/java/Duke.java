@@ -63,6 +63,9 @@ public class Duke {
             } else if (Parser.isTag(input)) {
                 TagCommand tag = new TagCommand(input);
                 message = tag.execute(this.tasks, this.ui);
+            } else if (Parser.isFindTag(input)) {
+                FindTagCommand findTag = new FindTagCommand(input);
+                message = findTag.execute(this.tasks, this.ui);
             } else {
                 throw new DukeUnknownInputException(input);
             }
