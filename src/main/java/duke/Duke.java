@@ -5,14 +5,14 @@ import java.util.Scanner;
 import duke.parser.Parser;
 import duke.storage.TaskListStorage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.Cli;
 
 /**
  * This is the main class. Start Duke by running the main method.
  */
-public class Duke implements Bot {
+public class Duke implements Ui {
     private boolean isStopped;
-    private Ui ui;
+    private Cli cli;
     private StringBuilder message;
 
     /**
@@ -20,7 +20,7 @@ public class Duke implements Bot {
      */
     public Duke() {
         isStopped = false;
-        ui = new Ui();
+        cli = new Cli();
         message = new StringBuilder();
     }
 
@@ -38,10 +38,10 @@ public class Duke implements Bot {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-        sayLine(logo);
+        say(logo);
         Scanner sc = new Scanner(System.in);
         TaskList list = new TaskListStorage("data/tasks.txt").load(this);
-        sayLine("Hello, I'm Duke. What can I do for you?");
+        say("Hello, I'm Duke. What can I do for you?");
         flushMessage();
         while (!isStopped) {
             String input = sc.nextLine();
@@ -57,7 +57,7 @@ public class Duke implements Bot {
     }
 
     @Override
-    public void sayLine(String string) {
+    public void say(String string) {
         if (message.length() != 0) {
             message.append("\n");
         }
@@ -65,7 +65,7 @@ public class Duke implements Bot {
     }
 
     private void flushMessage() {
-        ui.say(message.toString());
+        cli.say(message.toString());
         message = new StringBuilder();
     }
 }

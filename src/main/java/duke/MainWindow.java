@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
-public class MainWindow extends AnchorPane implements Bot {
+public class MainWindow extends AnchorPane implements Ui {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -32,7 +32,6 @@ public class MainWindow extends AnchorPane implements Bot {
 
     // non-ui
     private boolean shouldStop;
-    private StringBuilder message;
     private TaskList taskList;
 
     /**
@@ -40,17 +39,6 @@ public class MainWindow extends AnchorPane implements Bot {
      */
     public MainWindow() {
         shouldStop = false;
-        message = new StringBuilder();
-        // TODO: currently broken due to non-monospace font
-        // String logo =
-        //     " ____        _        \n"
-        //         + "|  _ \\ _   _| | _____ \n"
-        //         + "| | | | | | | |/ / _ \\\n"
-        //         + "| |_| | |_| |   <  __/\n"
-        //         + "|____/ \\__,_|_|\\_\\___|\n";
-        // sayLine(logo);
-        sayLine("Hello, I'm Duke. What can I do for you?");
-        taskList = new TaskListStorage("data/tasks.txt").load(this);
     }
 
     /**
@@ -60,7 +48,16 @@ public class MainWindow extends AnchorPane implements Bot {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        flushMessage();
+        // TODO: currently broken due to non-monospace font
+        // String logo =
+        //     " ____        _        \n"
+        //         + "|  _ \\ _   _| | _____ \n"
+        //         + "| | | | | | | |/ / _ \\\n"
+        //         + "| |_| | |_| |   <  __/\n"
+        //         + "|____/ \\__,_|_|\\_\\___|\n";
+        // sayLine(logo);
+        say("Hello, I'm Duke. What can I do for you?");
+        taskList = new TaskListStorage("data/tasks.txt").load(this);
     }
 
     /**
@@ -73,7 +70,6 @@ public class MainWindow extends AnchorPane implements Bot {
         userInput.clear();
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage)); // show user input
         Parser.parse(input).execute(this, taskList);
-        flushMessage();
         if (shouldStop) {
             Platform.exit();
         }
@@ -85,15 +81,7 @@ public class MainWindow extends AnchorPane implements Bot {
     }
 
     @Override
-    public void sayLine(String string) {
-        if (message.length() != 0) {
-            message.append("\n");
-        }
-        message.append(string);
-    }
-
-    private void flushMessage() {
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(message.toString(), dukeImage));
-        message = new StringBuilder();
+    public void say(String string) {
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(string, dukeImage));
     }
 }

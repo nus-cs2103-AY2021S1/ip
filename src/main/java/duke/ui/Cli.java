@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * This class is responsible for displaying Duke's responses on the screen.
  */
-public class Ui {
+public class Cli {
 
     /**
      * Prints the given string to the console as a response from Duke, wrapping lines that exceed 68 characters in

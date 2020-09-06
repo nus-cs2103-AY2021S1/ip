@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Bot;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -20,10 +20,9 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public void execute(Bot bot, TaskList list) {
+    public void execute(Ui ui, TaskList list) {
         list.add(task);
-        bot.sayLine("Got it, I've added this task:");
-        bot.sayLine("  " + task.displayString());
-        bot.sayLine(Helper.getNumberOfTasksString(list));
+        ui.say(String.format("Got it, I've added this task:\n  %s\n%s", task.displayString(),
+                Helper.getNumberOfTasksString(list)));
     }
 }

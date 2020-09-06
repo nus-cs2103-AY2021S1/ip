@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Bot;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -20,20 +20,23 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void execute(Bot bot, TaskList list) {
+    public void execute(Ui ui, TaskList list) {
         try {
             Helper.validateTaskNumber(taskNumber, list);
         } catch (InvalidTaskNumberException e) {
-            bot.sayLine(e.getMessage());
+            ui.say(e.getMessage());
             return;
         }
+
+        StringBuilder sb = new StringBuilder();
         Task t = list.get(taskNumber - 1);
         if (t.isDone()) {
-            bot.sayLine("You've already completed this task:");
+            sb.append("You've already completed this task:\n");
         } else {
             list.markAsDone(taskNumber);
-            bot.sayLine("Nice! I've marked this task as done:");
+            sb.append("Nice! I've marked this task as done:\n");
         }
-        bot.sayLine("  " + t.displayString());
+        sb.append("  " + t.displayString());
+        ui.say(sb.toString());
     }
 }

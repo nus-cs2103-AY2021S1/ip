@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Bot;
+import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -11,8 +11,8 @@ public interface Command {
     /**
      * Executes this Command.
      *
-     * @param bot the bot which the Command can interact with.
+     * @param ui the ui which the Command can interact with.
      * @param list the TaskList which the Command can read and modify.
      */
-    public void execute(Bot bot, TaskList list);
+    public void execute(Ui ui, TaskList list);
 }

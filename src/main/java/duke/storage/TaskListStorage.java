@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import duke.Bot;
+import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -33,30 +33,30 @@ public class TaskListStorage {
      * existing file cannot be found or read, or if the file has an invalid format. The TaskList returned will attempt
      * to save to the file every time it is modified.
      *
-     * @param bot the Bot this TaskList can interact with to display error or other messages to the user.
+     * @param ui the Ui this TaskList can interact with to display error or other messages to the user.
      * @return an existing or new TaskList which saves to the file every time it is modified.
      */
-    public TaskList load(Bot bot) {
+    public TaskList load(Ui ui) {
         final String createNewListMessage = "I'll create a new list of tasks.";
         TaskList list;
         try {
             list = StorageHelper.open(this::deserializeTaskList, filepath);
-            bot.sayLine(String.format("Loaded tasks from %s.", filepath));
+            ui.say(String.format("Loaded tasks from %s.", filepath));
         } catch (FileMissingException e) {
-            bot.sayLine(String.format("Couldn't find the file %s. %s", filepath, createNewListMessage));
+            ui.say(String.format("Couldn't find the file %s. %s", filepath, createNewListMessage));
             list = new TaskList();
         } catch (FileReadingException e) {
-            bot.sayLine(String.format("Couldn't read the file %s. %s", filepath, createNewListMessage));
+            ui.say(String.format("Couldn't read the file %s. %s", filepath, createNewListMessage));
             list = new TaskList();
         } catch (DeserializingException e) {
-            bot.sayLine(String.format("I don't understand the data in %s. %s", filepath, createNewListMessage));
+            ui.say(String.format("I don't understand the data in %s. %s", filepath, createNewListMessage));
             list = new TaskList();
         }
         list.connectStorage((taskList) -> {
             try {
                 StorageHelper.save(() -> serializeTaskList(taskList), filepath);
             } catch (FileWritingException e) {
-                bot.sayLine(String.format("Couldn't save task list to %s!", filepath));
+                ui.say(String.format("Couldn't save task list to %s!", filepath));
             }
         });
         return list;

@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Bot;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -20,16 +20,15 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(Bot bot, TaskList list) {
+    public void execute(Ui ui, TaskList list) {
         try {
             Helper.validateTaskNumber(taskNumber, list);
         } catch (InvalidTaskNumberException e) {
-            bot.sayLine(e.getMessage());
+            ui.say(e.getMessage());
             return;
         }
         Task t = list.delete(taskNumber - 1);
-        bot.sayLine("Noted. I've removed this task:");
-        bot.sayLine("  " + t.displayString());
-        bot.sayLine(Helper.getNumberOfTasksString(list));
+        ui.say(String.format("Noted. I've removed this task:\n  %s\n%s", t.displayString(),
+                Helper.getNumberOfTasksString(list)));
     }
 }

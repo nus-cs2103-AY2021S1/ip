@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Bot;
+import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -19,7 +19,7 @@ public class ErrorCommand implements Command {
     }
 
     @Override
-    public void execute(Bot bot, TaskList list) {
-        bot.sayLine(message);
+    public void execute(Ui ui, TaskList list) {
+        ui.say(message);
     }
 }

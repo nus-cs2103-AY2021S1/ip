@@ -3,7 +3,7 @@ package duke;
 /**
  * This interface defines how other classes (eg. Commands, TaskListStorage) can control Duke.
  */
-public interface Bot {
+public interface Ui {
 
     /**
      * Tells Duke to exit after it finishes handling the current user input.
@@ -15,5 +15,5 @@ public interface Bot {
      *
      * @param string the String for Duke to say.
      */
-    public void sayLine(String string);
+    public void say(String string);
 }

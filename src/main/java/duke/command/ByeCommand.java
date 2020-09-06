@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Bot;
+import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -8,8 +8,8 @@ import duke.task.TaskList;
  */
 public class ByeCommand implements Command {
     @Override
-    public void execute(Bot bot, TaskList list) {
-        bot.sayLine("Bye! Hope to see you again soon!");
-        bot.stop();
+    public void execute(Ui ui, TaskList list) {
+        ui.say("Bye! Hope to see you again soon!");
+        ui.stop();
     }
 }

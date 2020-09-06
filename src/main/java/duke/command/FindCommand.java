@@ -3,7 +3,7 @@ package duke.command;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import duke.Bot;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -23,19 +23,20 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(Bot bot, TaskList list) {
+    public void execute(Ui ui, TaskList list) {
+        String message = "";
         if (list.size() == 0) {
-            bot.sayLine("There are no items in your list.");
+            message = "There are no items in your list.";
         } else {
             List<Task> matches =
                     list.toStream().filter(t -> t.getDescription().contains(query)).collect(Collectors.toList());
 
             if (matches.isEmpty()) {
-                bot.sayLine("No matching tasks found!");
+                message = "No matching tasks found!";
             } else {
-                bot.sayLine("Here are the matching tasks in your list:");
-                bot.sayLine(Helper.tasksToDisplayListString(matches));
+                message = "Here are the matching tasks in your list:\n" + Helper.tasksToDisplayListString(matches);
             }
         }
+        ui.say(message);
     }
 }

@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Bot;
+import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -8,12 +8,11 @@ import duke.task.TaskList;
  */
 public class ListCommand implements Command {
     @Override
-    public void execute(Bot bot, TaskList list) {
+    public void execute(Ui ui, TaskList list) {
         if (list.size() == 0) {
-            bot.sayLine("There are no items in your list.");
+            ui.say("There are no items in your list.");
         } else {
-            bot.sayLine("Here are the tasks in your list:");
-            bot.sayLine(Helper.tasksToDisplayListString(list));
+            ui.say("Here are the tasks in your list:\n" + Helper.tasksToDisplayListString(list));
         }
     }
 }
