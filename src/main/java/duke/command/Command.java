@@ -22,6 +22,10 @@ public class Command {
         return false;
     }
 
+    public boolean isStart() {
+        return false;
+    }
+
     /**
      * Executes the command.
      * @param tasks A list of tasks
@@ -30,6 +34,7 @@ public class Command {
      * @throws DukeException When facing errors parsing or running the program
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert ui != null : "ui object cannot be null";
         return ui.showUnrecognizedCommandMessage();
     }
 }
