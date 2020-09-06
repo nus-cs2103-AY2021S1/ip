@@ -19,17 +19,22 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
-    private void execute(Command command) {
+    private String printTasks(TaskList tasklist, boolean isFind) {
+        String output = String.format("Here are the %stasks in your list:", isFind ? "matching " : "");
+        for (int i = 0; i < tasklist.size(); i++) {
+            Task currentTask = tasklist.get(i);
+            String num = Integer.toString(i + 1);
+            output += "\n" + num + "." + currentTask;
+        }
+        return output;
+    }
+
+    public void execute(Command command) {
         String output = "";
         int commandType = command.getCommandType();
         boolean print = true;
         if (commandType == Command.LIST) {
-            output += "Here are the tasks in your list:";
-            for (int i = 0; i < taskList.size(); i++) {
-                Task currentTask = taskList.get(i);
-                String num = Integer.toString(i + 1);
-                output += "\n" + num + "." + currentTask;
-            }
+            output += printTasks(this.taskList, false);
         } else if (commandType == Command.DONE || commandType == Command.DELETE) {
             int taskIndex = command.getAdditionalInfo().getTaskIndex();
             Task selectedTask = taskList.get(taskIndex);
@@ -42,11 +47,23 @@ public class Duke {
             }
             output += "\nNow you have " + taskList.size() + " tasks in the list.";
         } else if (commandType == Command.EXIT) {
-            System.out.println("in exit case");
             storage.save(taskList);
             print = false;
         } else if (commandType == Command.INVALID) {
             print = false;
+        } else if (commandType == Command.FIND) {
+            String keyword = command.getAdditionalInfo().getDescription();
+            TaskList tempTaskList = new TaskList();
+            for (int i = 0; i < this.taskList.size(); i++) {
+                Task tempTask = taskList.get(i);
+                String taskDescription = tempTask.getDescription();
+                // contains will return true for "bookstore" when searching for "book"
+                // contains is case - sensitive "Book" and "book" is different
+                if (taskDescription.contains(keyword)) {
+                    tempTaskList.add(tempTask);
+                }
+            }
+            output += printTasks(tempTaskList, true);
         } else {
             Task newTask;
             AdditionalInfo info = command.getAdditionalInfo();

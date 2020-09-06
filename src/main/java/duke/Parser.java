@@ -12,6 +12,15 @@ public class Parser {
             command = new Command(Command.EXIT);
         } else if (input.equals("list")) {
             command = new Command(Command.LIST);
+        } else if (firstWord.equals("find")) {
+            String[] arr = input.split("find ");
+            if (arr.length == 1) {
+                throw new DukeException("What are you trying to find?");
+            } else {
+                String findKeyword = arr[1].trim();
+                info = new AdditionalInfo(findKeyword);
+                command = new Command(Command.FIND, info);
+            }
         } else if (firstWord.matches("done|delete")) {
             String[] splitted = input.split("\\s+");
             int taskIndex = Integer.parseInt(splitted[1]) - 1;
@@ -66,8 +75,9 @@ public class Parser {
     }
 
     public static Command parse(String input) {
+        String trimInput = input.trim();
         try {
-            return parsing(input);
+            return parsing(trimInput);
         } catch (DukeException e) {
             Ui.printException(e);
             return new Command(Command.INVALID);
