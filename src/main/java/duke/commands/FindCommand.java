@@ -23,9 +23,6 @@ public class FindCommand extends Command {
     }
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        assert tasks != null;
-        assert ui != null;
-        assert storage != null;
         return findTasks(tasks, inputArr[1], ui);
     }
 
@@ -37,7 +34,7 @@ public class FindCommand extends Command {
      * @return A String message stating all the tasks that contains the particular keyword that
      * the user has keyed in.
      */
-    public String findTasks(TaskList tasks, String keyword, Ui ui) {
+    private String findTasks(TaskList tasks, String keyword, Ui ui) {
         StringBuilder finalMessage = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
@@ -46,11 +43,11 @@ public class FindCommand extends Command {
                 finalMessage.append(task.toString()).append("\n");
             }
         }
-        // this means no available search
         if (finalMessage.toString().equals("")) {
             String noTask = String.format("No available task matches %s\n", keyword);
             return ui.messageFormatter(noTask);
         } else {
+            assert finalMessage.toString().length() > 0 : "Message is empty";
             return ui.messageFormatter(FIND_SUCCESS, finalMessage.toString());
         }
     }

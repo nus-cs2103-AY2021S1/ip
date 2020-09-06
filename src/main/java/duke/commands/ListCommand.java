@@ -27,9 +27,6 @@ public class ListCommand extends Command {
     }
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        assert tasks != null;
-        assert ui != null;
-        assert storage != null;
         return showListTasks(tasks, ui);
     }
 
@@ -44,6 +41,7 @@ public class ListCommand extends Command {
         if (tasks.size() == 0) {
             return ui.messageFormatter(EMPTY_MSG);
         } else {
+            assert tasks.size() > 0 : "Invalid task list, giving a negative size";
             StringBuffer finalMessage = new StringBuffer(SHOW_TASK).append("\n");
             IntStream.range(1, tasks.size() + 1).forEach(num -> finalMessage.append(num).append(". ")
                     .append(tasks.get(num - 1)).append("\n"));

@@ -29,7 +29,7 @@ public class ReminderCommand extends Command {
      * @param tasks Object contains the task list.
      * @return A string message confirm the task to be reminded
      */
-    public String setReminder(String command, TaskList tasks) {
+    private String setReminder(String command, TaskList tasks) {
         String[] result = command.split(" ");
         Task task = tasks.get(Integer.parseInt(result[0]) - 1);
         return task.setReminder(result[1].equals("y"));

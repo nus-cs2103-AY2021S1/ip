@@ -22,9 +22,6 @@ public class ByeCommand extends Command {
     }
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        assert tasks != null;
-        assert ui != null;
-        assert storage != null;
         return endProgram(tasks, ui, storage);
     }
 
@@ -36,7 +33,7 @@ public class ByeCommand extends Command {
      * @param storage Object that contains the saved list of tasks.
      * @return A String message that informs the user that the program will be ending.
      */
-    public String endProgram(TaskList tasks, Ui ui, Storage storage) {
+    private String endProgram(TaskList tasks, Ui ui, Storage storage) {
         String bye = ui.goodBye();
         storage.record(tasks);
         return bye;

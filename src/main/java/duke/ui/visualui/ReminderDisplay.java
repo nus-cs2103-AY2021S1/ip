@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
 import duke.parser.Parser;
+import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
@@ -72,9 +73,12 @@ public class ReminderDisplay extends VBox {
         } else if (task instanceof Event) {
             return new ReminderDisplay(description, isDone, "Event",
                     task.getDueDate().format(Format_Date_Time));
-        } else {
+        } else if (task instanceof Deadline) {
             return new ReminderDisplay(description, isDone, "Deadline",
                     task.getDueDate().format(Format_Date_Time));
+        } else {
+            assert false : "invalid task type";
+            return null;
         }
     }
 
@@ -123,7 +127,7 @@ public class ReminderDisplay extends VBox {
             bar.setStyle(DEADLINE_BACKGROUND);
             break;
         default:
-            return;
+            assert false : "Invalid task";
         }
     }
     /**

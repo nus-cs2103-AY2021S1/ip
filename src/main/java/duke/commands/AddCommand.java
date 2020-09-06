@@ -34,9 +34,6 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDeadlineException,
             InvalidFormatEventException, InvalidFormatDateException, UnknownCommandException, DuplicateException {
-        assert tasks != null;
-        assert ui != null;
-        assert storage != null;
         return addTask(inputArr[0], inputArr[1], ui, tasks);
     }
 
