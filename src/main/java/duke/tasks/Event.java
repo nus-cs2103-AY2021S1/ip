@@ -3,18 +3,19 @@ package duke.tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.ui.Ui;
 import duke.tool.Storage;
 import duke.tool.TaskList;
+import duke.ui.Ui;
 
 /**
- * Represent a event task.
+ * Represents a event task.
  */
 public class Event extends Task {
     protected LocalDateTime at;
 
     /**
      * Constructs a Event.
+     *
      * @param description
      * @param at
      * @param isDone
@@ -25,7 +26,8 @@ public class Event extends Task {
     }
 
     /**
-     * Mark the event as done.
+     * Marks the event as done.
+     *
      * @return
      */
     @Override
@@ -35,32 +37,35 @@ public class Event extends Task {
     }
 
     /**
-     * Add the task into the list and print the added message.
-     * Write the changes into the file.
-     * @param tasklist
+     * Adds the task into the list and print the added message.
+     * Writes the changes into the file.
+     *
+     * @param taskList
      * @param ui
      * @param storage
      * @return
      */
     @Override
-    public String execute(TaskList tasklist, Ui ui, Storage storage) {
-        tasklist.add(this);
-        storage.writeData(tasklist.getTaskList());
-        return ui.showAddedMessage(tasklist, tasklist.getNumOfTasks() - 1);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        taskList.add(this);
+        storage.writeData(taskList.getTaskList());
+        return ui.showAddedMessage(taskList, taskList.getNumOfTasks() - 1);
     }
 
     /**
-     * String representation of the deadline task.
+     * Shows the string representation of the deadline task.
+     *
      * @return
      */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"))  + ")";
+                + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 
     /**
-     * Formatted String representation of the task.
+     * Shows the formatted String representation of the task.
+     *
      * @return
      */
     @Override

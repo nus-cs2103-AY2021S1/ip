@@ -1,8 +1,8 @@
 package duke.tasks;
 
-import duke.ui.Ui;
 import duke.tool.Storage;
 import duke.tool.TaskList;
+import duke.ui.Ui;
 
 /**
  * The find command when user wants to find
@@ -13,6 +13,7 @@ public class Find extends Task {
 
     /**
      * Constructs a find task.
+     *
      * @param toFind
      */
     public Find(String toFind) {

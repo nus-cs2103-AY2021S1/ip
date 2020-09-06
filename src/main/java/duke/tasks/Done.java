@@ -1,18 +1,18 @@
 package duke.tasks;
 
-import duke.ui.Ui;
-
 import duke.tool.Storage;
 import duke.tool.TaskList;
+import duke.ui.Ui;
 
 /**
- * Represent a done task.
+ * Represents a done task.
  */
 public class Done extends Task {
     private int i;
 
     /**
      * Constructs a done task.
+     *
      * @param i ith item in the list.
      */
     public Done(int i) {
@@ -21,17 +21,18 @@ public class Done extends Task {
     }
 
     /**
-     * Mark the task in the list as done and print the done message.
-     * Write the changes into the file.
-     * @param tasklist
+     * Marks the task in the list as done and print the done message.
+     * Writes the changes into the file.
+     *
+     * @param taskList
      * @param ui
      * @param storage
      * @return
      */
     @Override
-    public String execute(TaskList tasklist, Ui ui, Storage storage) {
-        tasklist.markDone(this.i);
-        storage.writeData(tasklist.getTaskList());
-        return ui.showDoneMessage(tasklist, this.i);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        taskList.markDone(this.i);
+        storage.writeData(taskList.getTaskList());
+        return ui.showDoneMessage(taskList, this.i);
     }
 }

@@ -1,7 +1,6 @@
 package duke.ui;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.tasks.Task;
 import duke.tool.TaskList;
@@ -11,99 +10,65 @@ import duke.tool.TaskList;
  */
 public class Ui {
     /**
-     * The method to show the logo of Duke.
+     * Returns the formatted space.
+     *
+     * @return a whitespace.
      */
-    public void showLogo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-    }
-
-    /**
-     * Seperate line of the printed items
-     * @return
-     */
-    public String seperateLine() {
-        return "    _______________________________________";
-    }
-
-    /**
-     * The formatted space.
-     * @return
-     */
-    public String spaceBeforeOder() {
+    public String spaceBeforeOrder() {
         return "      ";
     }
 
-    /**
-     * Print the sentence in Duke's format.
-     * @param sentence
-     */
-    public void printFormmat(String sentence) {
-        System.out.println(seperateLine());
-        System.out.println(sentence);
-        System.out.println(seperateLine());
-    }
 
     /**
-     * Print the greeting message.
+     * Prints the greeting message.
      */
     public String showGreeting() {
-        return  "Hello! I'm Duke DuiDui\nWhat can I do for you?";
+        return "Hello! I'm Duke DuiDui\nWhat can I do for you?";
     }
 
     /**
-     * Print the loading error message.
+     * Prints the loading error message.
      */
     public void showLoadingError() {
         System.out.println("Loading error!");
     }
 
     /**
-     * Get the input from the user.
-     * @return
-     */
-    public String getOrder() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
-
-    /**
-     * Print the message showing the task is done.
-     * @param tasklist
+     * Prints the message showing the task is done.
+     *
+     * @param taskList
      * @param i ith task.
      * @return
      */
-    public String showDoneMessage(TaskList tasklist, int i) {
+    public String showDoneMessage(TaskList taskList, int i) {
         return "Nice! I've marked this task as done:\n"
-                + spaceBeforeOder() + tasklist.getTask(i) + "\n" + spaceBeforeOder() + "Now you have "
-                + tasklist.getNumOfTasks() + " tasks in the list.";
+                + spaceBeforeOrder() + taskList.getTask(i) + "\n" + spaceBeforeOrder() + "Now you have "
+                + taskList.getNumOfTasks() + " tasks in the list.";
     }
 
     /**
-     * Print the message showing the task is deleted.
-     * @param tasklist
+     * Prints the message showing the task is deleted.
+     *
+     * @param taskList
      * @param removed the removed task.
      * @return
      */
-    public String showDeleteMessage(TaskList tasklist, Task removed) {
+    public String showDeleteMessage(TaskList taskList, Task removed) {
         return "Noted. I've removed this task:\n"
-                + spaceBeforeOder() + removed + "\n" + spaceBeforeOder() + "Now you have "
-                + tasklist.getNumOfTasks() + " tasks in the list.";
+                + spaceBeforeOrder() + removed + "\n" + spaceBeforeOrder() + "Now you have "
+                + taskList.getNumOfTasks() + " tasks in the list.";
     }
 
     /**
-     * Print the message showing the task is added.
-     * @param tasklist
+     * Prints the message showing the task is added.
+     *
+     * @param taskList
      * @param num current number of tasks in the list.
      */
-    public String showAddedMessage(TaskList tasklist, int num) {
+    public String showAddedMessage(TaskList taskList, int num) {
         return "Got it. I've added this task:\n"
-                + spaceBeforeOder() + tasklist.getTask(num)
-                + "\n" + spaceBeforeOder() + "Now you have "
+                + spaceBeforeOrder() + taskList.getTask(num)
+                + "\n" + spaceBeforeOrder() + "Now you have "
                 + (num + 1) + " tasks in the list.";
     }
 
@@ -115,7 +80,7 @@ public class Ui {
      * @return the string representation of the task.
      */
     public String presentTask(Task task, TaskList taskList) {
-        return spaceBeforeOder() + (taskList.getTaskList().indexOf(task) + 1)
+        return spaceBeforeOrder() + (taskList.getTaskList().indexOf(task) + 1)
                 + ". " + task + "\n";
     }
 
@@ -135,7 +100,8 @@ public class Ui {
     }
 
     /**
-     * Print the tasks in the list.
+     * Prints the tasks in the list.
+     *
      * @param tasklist
      * @return
      */
@@ -145,22 +111,24 @@ public class Ui {
     }
 
     /**
-     * Print the tasks in the list which contain the certain string.
-     * @param tasklist
+     * Prints the tasks in the list which contain the certain string.
+     *
+     * @param taskList
      * @param toFind
      * @return
      */
-    public String listMatchedTasks(TaskList tasklist, String toFind) {
+    public String listMatchedTasks(TaskList taskList, String toFind) {
         String firstSentence = "Here are the matching tasks in your list:\n";
         TaskList listWithKeyword = new TaskList(new ArrayList<>());
-        tasklist.getTaskList().stream()
+        taskList.getTaskList().stream()
                 .filter(task -> task.getName().contains(toFind))
                 .forEach(task -> listWithKeyword.add(task));
         return UseStreamListTasks(firstSentence, listWithKeyword);
     }
 
     /**
-     * Print the goodbye message.
+     * Prints the goodbye message.
+     *
      * @return
      */
     public String showGoodbye() {
