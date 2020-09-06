@@ -31,6 +31,8 @@ public class Event extends Task {
      * {@inheritDoc}
      */
     public String getSaveToFileString() {
+        assert(!this.desc.isBlank() && this.taskDateTime != null);
+
         return "E" + TASK_DELIMITER + super.getSaveToFileString() + TASK_DELIMITER +
                 taskDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }

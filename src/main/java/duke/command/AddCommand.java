@@ -29,6 +29,8 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui) {
+        assert(this.task != null && tasks != null && ui != null);
+
         tasks.add(this.task);
         ui.showAddTask(this.task, tasks.size());
     }

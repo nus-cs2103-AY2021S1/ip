@@ -17,6 +17,8 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui) {
+        assert(tasks != null && ui != null);
+
         ui.printList(tasks);
     }
 }
