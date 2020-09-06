@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
      * @return UI message after executing delete command.
      */
     @Override
-    public String execute(Ui ui, Storage listStorage, TaskList taskList) {
+    public String execute(Ui ui, Storage listStorage, TaskList taskList) throws InvalidCommand {
         try {
             Task removedTask = taskList.removeTask(itemIndex - 1);
             listStorage.deleteTask(removedTask);

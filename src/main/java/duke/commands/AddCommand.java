@@ -3,6 +3,7 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.InvalidCommand;
 import duke.tasks.Task;
 
 /**
@@ -32,7 +33,7 @@ public class AddCommand extends Command {
      * @param taskList List of tasks added by users so far.
      * @return @return UI message after executing add command.
      */
-    public String execute (Ui ui, Storage listStorage, TaskList taskList) {
+    public String execute (Ui ui, Storage listStorage, TaskList taskList) throws InvalidCommand {
         taskList.add(this.newTask);
         listStorage.addTask(this.newTask);
         return ui.addTask(this.newTask, taskList);

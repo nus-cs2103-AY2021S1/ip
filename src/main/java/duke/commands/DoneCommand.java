@@ -33,7 +33,7 @@ public class DoneCommand extends Command {
      * @param taskList List of tasks added by users so far.
      * @return UI message after executing done command.
      */
-    public String execute(Ui ui, Storage listStorage, TaskList taskList) {
+    public String execute(Ui ui, Storage listStorage, TaskList taskList) throws InvalidCommand{
         try {
             Task editedTask = taskList.get(this.taskIndex);
             listStorage.editTask(editedTask, this.taskIndex, taskList);
