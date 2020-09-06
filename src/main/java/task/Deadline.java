@@ -44,7 +44,7 @@ public class Deadline extends Task {
      * @return Time of deadline.
      */
     public LocalTime getTime() {
-        return (time != null) ? time : LocalTime.MIDNIGHT;
+        return time;
     }
 
     /**
@@ -56,5 +56,21 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ((time != null) ? " " + time.format(DateTimeFormatter.ofPattern("HH:mm")) : "") + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj instanceof Deadline) {
+
+            Deadline deadline = (Deadline)obj;
+
+            return super.equals(obj)
+                    && this.date.equals(deadline.date)
+                    && ((this.time == null && deadline.time == null)
+                    || ((this.time != null && deadline.time != null)
+                    && this.time.equals(deadline.time)));
+        }
+        return false;
     }
 }

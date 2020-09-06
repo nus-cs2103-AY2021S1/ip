@@ -44,7 +44,7 @@ public class Event extends Task {
      * @return Time of event.
      */
     public LocalTime getTime() {
-        return (time != null) ? time : LocalTime.MIDNIGHT;
+        return time;
     }
 
     /**
@@ -56,5 +56,21 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ((time != null) ? " " + time.format(DateTimeFormatter.ofPattern("HH:mm")) : "") + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj instanceof Event) {
+
+            Event event = (Event)obj;
+
+            return super.equals(obj)
+                    && this.date.equals(event.date)
+                    && ((this.time == null && event.time == null)
+                    || ((this.time != null && event.time != null)
+                    && this.time.equals(event.time)));
+        }
+        return false;
     }
 }

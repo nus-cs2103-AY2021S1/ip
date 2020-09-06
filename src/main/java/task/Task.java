@@ -51,4 +51,14 @@ public abstract class Task {
     public String toString() {
         return "[" + (completed ? "\u2713" : "\u2717") + "] " + msg;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj instanceof Task) {
+            Task task = (Task)obj;
+            return this.msg.equals(task.msg);
+        }
+        return false;
+    }
 }

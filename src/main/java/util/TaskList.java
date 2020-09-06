@@ -93,10 +93,16 @@ public class TaskList {
      * Add task to the end of the list.
      *
      * @param task Task to be added.
+     * @return Index of duplicate task if any, else -1.
      */
-    public void addTask(Task task) {
+    public int addTask(Task task) {
         assert tasks != null;
-        tasks.add(task);
+
+        if (!tasks.contains(task)) {
+            tasks.add(task);
+            return -1;
+        }
+        return tasks.indexOf(task);
     }
 
     /**

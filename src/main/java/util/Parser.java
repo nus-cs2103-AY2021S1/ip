@@ -155,10 +155,16 @@ public class Parser {
         }
 
         if (task != null) {
-            taskList.addTask(task);
-            output += "Got it. I've added this task:\n";
-            output += task + "\n";
-            output += "Now you have " + taskList.getSize() + " tasks in the list.\n";
+            int index = taskList.addTask(task);
+
+            if (index == -1) {
+                output += "Got it. I've added this task:\n";
+                output += task + "\n";
+                output += "Now you have " + taskList.getSize() + " tasks in the list.\n";
+            } else {
+                output += "You already have the same task stored:\n";
+                output += taskList.printTask(index);
+            }
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
