@@ -91,7 +91,6 @@ public class Parser {
         }
     }
 
-
     private static Task parseEvent(String arguments) throws DukeException {
         String[] output = arguments.split(" /");
         if (output.length < 2) {
