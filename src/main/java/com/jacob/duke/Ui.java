@@ -9,8 +9,9 @@ import main.java.com.jacob.duke.task.Task;
 
 public class Ui {
     /**
-     * UI of the Done command
-     * @param taskDescription The currently operated task's status
+     * UI of the Done command.
+     *
+     * @param taskDescription The currently operated task's status.
      */
     public String showDone(String taskDescription) {
         assert (taskDescription != null);
@@ -18,9 +19,10 @@ public class Ui {
     }
 
     /**
-     * UI for the newly added tasks
-     * @param taskDescription The currently operated task's status
-     * @param taskList List representation of the current task list
+     * Show UI for the newly added tasks.
+     *
+     * @param taskDescription The currently operated task's status.
+     * @param taskList List representation of the current task list.
      */
     public String showNewTaskAdded(String taskDescription, List<Task> taskList) {
         assert (taskDescription != null && taskList != null);
@@ -30,9 +32,10 @@ public class Ui {
     }
 
     /**
-     * UI for the delete command
-     * @param taskDescription The currently operated task's status
-     * @param taskList List representation of the current task list
+     * Show UI for the delete command.
+     *
+     * @param taskDescription The currently operated task's status.
+     * @param taskList List representation of the current task list.
      */
     public String showTaskDeleted(String taskDescription, List<Task> taskList) {
         assert (taskDescription != null && taskList != null);
@@ -43,26 +46,28 @@ public class Ui {
     }
 
     /**
-     * UI of the print list command
-     * @param taskList List representation of the current task list
+     * Show UI of the print list command.
+     *
+     * @param taskList List representation of the current task list.
      */
     public String showFullList(List<Task> taskList) {
         assert (taskList != null);
         int count = 1;
-        StringBuffer stringList = new StringBuffer();
-        stringList.append(" Here are the tasks in your list:\n");
+        StringBuffer currentTaskList = new StringBuffer();
+        currentTaskList.append(" Here are the tasks in your list:\n");
         for (Task t: taskList) {
-            stringList.append("  " + count + ". " + t.getCurrentStatus() + "\n");
+            currentTaskList.append("  " + count + ". " + t.getCurrentStatus() + "\n");
             count++;
         }
-        return stringList.toString();
+        return currentTaskList.toString();
     }
 
     /**
-     * UI of the print filtered list command
-     * @param inputCommand Command includes the date time it is filtering for
-     * @param taskList List representation of the current task list
-     * @throws DukeException Duke Exception thrown if the command is incorrect
+     * Show UI of the print filtered list command.
+     *
+     * @param inputCommand Command includes the date time it is filtering for.
+     * @param taskList List representation of the current task list.
+     * @throws DukeException Duke Exception thrown if the command is incorrect.
      */
     @SuppressWarnings("checkstyle:JavadocMethod")
     public String showFilteredDateTimeList(String inputCommand, List<Task> taskList) throws DukeException {
@@ -73,56 +78,51 @@ public class Ui {
         //get the date time string from the initial string
         String dateTime = inputCommand.substring("list-due ".length());
 
-        //get the date time object for comparison
-        LocalDateTime filterDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+        LocalDateTime dateTimeFilter = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
 
-        //check that the date and time is the same before printing
-        Predicate<LocalDateTime> dateTimePredicate = x -> x.equals(filterDateTime);
+        Predicate<LocalDateTime> dateTimePredicate = x -> x.equals(dateTimeFilter);
 
-        //print out the filtered items
         int count = 1;
-        StringBuffer stringList = new StringBuffer();
-        stringList.append(" Here are the tasks in your filtered list:\n");
+        StringBuffer dueDateList = new StringBuffer();
+        dueDateList.append(" Here are the tasks in your filtered list:\n");
         for (Task t : taskList) {
             if (t.getDueDateTime() != null && dateTimePredicate.test(t.getDueDateTime())) {
-                stringList.append("  " + count + ". " + t.getCurrentStatus() + "\n");
+                dueDateList.append("  " + count + ". " + t.getCurrentStatus() + "\n");
                 count++;
             }
         }
-        return stringList.toString();
+        return dueDateList.toString();
     }
 
     /**
-     * Show List of tasks with keyword
-     * @param inputCommand Command includes keyword
-     * @param taskList List representation of the current task list
-     * @throws DukeException Throws Exception if the search string is empty
+     * Show List of tasks with keyword.
+     *
+     * @param inputCommand Command includes keyword.
+     * @param taskList List representation of the current task list.
+     * @throws DukeException Throws Exception if the search string is empty.
      */
     public String showKeywordList(String inputCommand, List<Task> taskList) throws DukeException {
         assert (inputCommand != null && taskList != null);
         if (inputCommand.length() <= "find ".length()) {
             throw new DukeException(" find command cannot be empty!!");
         }
-        //get the keyword string from the initial string
         String keyword = inputCommand.substring("find ".length());
 
         if (keyword.equals("")) {
             throw new DukeException(" Search String cannot be empty!");
         }
-        //check that the date and time is the same before printing
         Predicate<String> searchStringPredicate = x -> x.contains(keyword);
 
-        //print out the filtered items
         int count = 1;
-        StringBuffer stringList = new StringBuffer();
-        stringList.append(" Here are the tasks in your filtered list:\n");
+        StringBuffer keywordList = new StringBuffer();
+        keywordList.append(" Here are the tasks in your filtered list:\n");
         for (Task t : taskList) {
             if (t.getDescription() != null && searchStringPredicate.test(t.getDescription())) {
-                stringList.append("  " + count + ". " + t.getCurrentStatus() + "\n");
+                keywordList.append("  " + count + ". " + t.getCurrentStatus() + "\n");
                 count++;
             }
         }
-        return stringList.toString();
+        return keywordList.toString();
     }
 
     /**

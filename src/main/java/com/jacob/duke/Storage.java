@@ -17,10 +17,6 @@ import main.java.com.jacob.duke.task.Event;
 import main.java.com.jacob.duke.task.Task;
 import main.java.com.jacob.duke.task.Todo;
 
-
-
-
-
 public class Storage {
     private StringBuffer stringBufferOfData = new StringBuffer();
     private String filename;
@@ -45,7 +41,6 @@ public class Storage {
         String parent = fileParents[0];
         java.nio.file.Path directoryPath = java.nio.file.Paths.get(current, parent);
         boolean directoryExists = java.nio.file.Files.exists(directoryPath);
-
 
         java.nio.file.Path filePath = java.nio.file.Paths.get(current, filename);
         boolean fileExists = java.nio.file.Files.exists(filePath);
@@ -113,7 +108,6 @@ public class Storage {
             int count = 0;
             for (String line; (line = reader.readLine()) != null; ) {
                 //System.out.println(line);
-
                 //parse the line here and add to taskList
                 this.handleFileCommands(line, taskList, count++);
 
