@@ -63,7 +63,7 @@ public class Storage {
                 case EVENT:
                 case DEADLINE:
                     toSave += String.format("%s\t%d\t%s\t%s",
-                            type, isDone, description, task.getTime());
+                            type, isDone, description, task.getTimeString());
                     break;
                 default:
                 }

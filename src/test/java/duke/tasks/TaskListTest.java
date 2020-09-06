@@ -5,12 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-
 import duke.exceptions.DukeInvalidIndexException;
 import duke.exceptions.DukeInvalidKeywordException;
+import duke.exceptions.DukeInvalidScheduleInputException;
 import duke.exceptions.DukeInvalidTaskDescriptionException;
 import duke.exceptions.DukeInvalidTaskTimeException;
+import org.junit.jupiter.api.Test;
+
 import duke.messages.Message;
 
 public class TaskListTest {
@@ -21,11 +22,14 @@ public class TaskListTest {
     private Task event = new Event("test 2", "23-02-2020 23:00");
     private Task deadline = new Deadline("test 3", "01-01-2020 00:00");
 
+    private Task event2 = new Event("test 4", "23-02-2020 23:59");
+
     private TaskList createTaskList() {
         List<Task> sample = new ArrayList<>();
         sample.add(toDo);
         sample.add(event);
         sample.add(deadline);
+        sample.add(event2);
         return new TaskList(sample);
     }
 
@@ -132,6 +136,23 @@ public class TaskListTest {
                     createTaskList().findTasks("find").toString());
         } catch (DukeInvalidKeywordException e) {
             assertEquals(Message.ERROR_INVALID_KEYWORD, e.toString());
+        }
+    }
+
+    @Test
+    public void schedule_validInput_success() throws DukeInvalidScheduleInputException {
+        assertEquals(event2.toString(),
+                createTaskList().findScheduledTasks("schedule 23-02-2020").get(1).toString());
+    }
+
+    @Test
+    public void schedule_erroneousInput_exceptionThrown() {
+        try {
+            assertEquals(event2.toString(),
+                    createTaskList().findScheduledTasks("schedule hello").get(1).toString());
+        } catch (DukeInvalidScheduleInputException e) {
+            assertEquals(String.format("%s\n%s", Message.ERROR_SCHEDULE_INPUT, Message.ERROR_DATE_FORMATTING),
+                    e.toString());
         }
     }
 

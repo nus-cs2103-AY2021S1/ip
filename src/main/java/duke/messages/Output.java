@@ -126,6 +126,29 @@ public class Output {
     }
 
     /**
+     * Prints a chat window with a list of tasks scheduled on a particular date sorted chronologically.
+     *
+     * @param tasks The list of scheduled tasks on that dya.
+     * @return A string representing the list of scheduled tasks.
+     */
+    public String printScheduleChatWindow(List<Task> tasks) {
+        StringBuilder result = new StringBuilder();
+        result.append(printGeneralChatWindow(Message.MESSAGE_SCHEDULE_INTRO));
+
+        if (tasks.isEmpty()) {
+            result.append(Message.MESSAGE_NO_SCHEDULED_TASKS);
+        } else {
+            int index = 0;
+            for (Task task : tasks) {
+                result.append(printGeneralChatWindow(
+                        String.format("%d. %s", ++index, task)));
+            }
+        }
+
+        return result.toString();
+    }
+
+    /**
      * Prints a goodbye chat window.
      * @return A string representing the goodbye chat window.
      */
