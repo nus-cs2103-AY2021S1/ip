@@ -36,7 +36,7 @@ class Storage {
      *
      * @return List list of tasks in database.
      */
-    public List<Task> load() {
+    public List<Task> loadTasks() {
         List<Task> list = new ArrayList<>();
         while (inputSource.hasNextLine()) {
             String currentInput = inputSource.nextLine();

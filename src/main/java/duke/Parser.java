@@ -31,30 +31,30 @@ public class Parser {
     public static boolean execute(TaskList tasks, Ui ui, Storage storage, String userInput)
             throws FileNotFoundException {
         if (userInput.equals(Command.BYE.value)) {
-            ui.sayGoodbye();
+            System.out.println(ui.sayGoodbye());
             return true;
 
         } else if (userInput.equals(Command.LIST.value)) {
-            tasks.showTasks();
+            System.out.println(tasks.showTasksAsString());
 
         } else if (userInput.startsWith(Command.DONE.value)) {
             try {
                 int taskPosition = Integer.parseInt(userInput.substring(5));
-                tasks.setDone(taskPosition);
+                System.out.println(tasks.setDoneAsString(taskPosition));
 
             } catch (StringIndexOutOfBoundsException e) {
-                ui.showInvalidFormatCommandDescription();
+                System.out.println(ui.showInvalidFormatCommandDescription());
             } catch (NumberFormatException e) {
-                ui.showInvalidFormatCommandDescription();
+                System.out.println(ui.showInvalidFormatCommandDescription());
             }
 
         } else if (userInput.startsWith(Command.TODO.value)) {
             try {
                 String description = userInput.trim().substring(5);
-                tasks.addToDo(description);
+                System.out.println(tasks.addToDoAsString(description));
                 storage.saveTasks(tasks.getTasksList());
             } catch (StringIndexOutOfBoundsException e) {
-                ui.showInvalidFormatCommandDescription();
+                System.out.println(ui.showInvalidFormatCommandDescription());
             }
 
         } else if (userInput.startsWith(Command.DEADLINE.value)) {
@@ -63,10 +63,10 @@ public class Parser {
                 int keywordPosition = userInput.indexOf("/by");
                 String description = userInput.substring(spacePosition + 1, keywordPosition - 1);
                 String by = userInput.substring(keywordPosition + 4);
-                tasks.addDeadline(description, by);
+                System.out.println(tasks.addDeadlineAsString(description, by));
                 storage.saveTasks(tasks.getTasksList());
             } catch (StringIndexOutOfBoundsException e) {
-                ui.showInvalidFormatCommandDescription();
+                System.out.println(ui.showInvalidFormatCommandDescription());
             }
 
         } else if (userInput.startsWith(Command.EVENT.value)) {
@@ -75,36 +75,35 @@ public class Parser {
                 int keywordPosition = userInput.indexOf("/at");
                 String description = userInput.substring(spacePosition + 1, keywordPosition - 1);
                 String at = userInput.substring(keywordPosition + 4);
-                tasks.addEvent(description, at);
+                System.out.println(tasks.addEventAsString(description, at));
                 storage.saveTasks(tasks.getTasksList());
             } catch (StringIndexOutOfBoundsException e) {
-                ui.showInvalidFormatCommandDescription();
+                System.out.println(ui.showInvalidFormatCommandDescription());
             }
 
         } else if (userInput.startsWith(Command.DELETE.value)) {
             try {
                 int taskPosition = Integer.parseInt(userInput.substring(7));
-                tasks.deleteTask(taskPosition);
+                System.out.println(tasks.deleteTaskAsString(taskPosition));
                 storage.saveTasks(tasks.getTasksList());
 
             } catch (StringIndexOutOfBoundsException e) {
-                ui.showInvalidFormatCommandDescription();
+                System.out.println(ui.showInvalidFormatCommandDescription());
             }
 
         } else if (userInput.startsWith(Command.FILTER.value)) {
             String[] inputArray = userInput.split(" ");
-            tasks.filterTask(inputArray);
-
+            System.out.println(tasks.filterTask(inputArray));
         } else if (userInput.startsWith(Command.FIND.value)) {
             try {
                 String keyword = userInput.substring(6);
-                tasks.findTasks(keyword.trim());
+                System.out.println(tasks.findTasks(keyword.trim()));
 
             } catch (StringIndexOutOfBoundsException e) {
-                ui.showInvalidFormatCommandDescription();
+                System.out.println(ui.showInvalidFormatCommandDescription());
             }
         } else {
-            ui.showMeaninglessCommandDescription();
+            System.out.println(ui.showMeaninglessCommandDescription());
         }
         return false;
     }
@@ -122,27 +121,30 @@ public class Parser {
     public static String getUiReply(TaskList tasks, Ui ui, Storage storage, String userInput)
             throws FileNotFoundException {
         if (userInput.equals(Command.BYE.value)) {
-            return "Bye. Hope to see you again soon!";
+            return ui.sayGoodbye();
         } else if (userInput.equals(Command.LIST.value)) {
             return tasks.showTasksAsString();
         } else if (userInput.startsWith(Command.DONE.value)) {
             try {
                 int taskPosition = Integer.parseInt(userInput.substring(5));
-                return tasks.setDoneAsString(taskPosition);
+                String response = tasks.setDoneAsString(taskPosition);
+                assert response.length() > 0 : "Response should not be empty";
+                return response;
 
             } catch (StringIndexOutOfBoundsException e) {
-                return "☹ OOPS!!! The description of a done cannot be empty or in wrong format";
+                return ui.showInvalidFormatCommandDescription();
             } catch (NumberFormatException e) {
-                return "☹ OOPS!!! The description of a done cannot be empty or in wrong format";
+                return ui.showInvalidFormatCommandDescription();
             }
         } else if (userInput.startsWith(Command.TODO.value)) {
             try {
                 String description = userInput.trim().substring(5);
-                String result = tasks.addToDoAsString(description);
+                String response = tasks.addToDoAsString(description);
                 storage.saveTasks(tasks.getTasksList());
-                return result;
+                assert response.length() > 0 : "Response should not be empty";
+                return response;
             } catch (StringIndexOutOfBoundsException e) {
-                return "☹ OOPS!!! The description of a done cannot be empty or in wrong format";
+                return ui.showInvalidFormatCommandDescription();
             }
 
         } else if (userInput.startsWith(Command.DEADLINE.value)) {
@@ -151,11 +153,12 @@ public class Parser {
                 int keywordPosition = userInput.indexOf("/by");
                 String description = userInput.substring(spacePosition + 1, keywordPosition - 1);
                 String by = userInput.substring(keywordPosition + 4);
-                String result = tasks.addDeadlineAsString(description, by);
+                String response = tasks.addDeadlineAsString(description, by);
                 storage.saveTasks(tasks.getTasksList());
-                return result;
+                assert response.length() > 0 : "Response should not be empty";
+                return response;
             } catch (StringIndexOutOfBoundsException e) {
-                return "☹ OOPS!!! The description of a done cannot be empty or in wrong format";
+                return ui.showInvalidFormatCommandDescription();
             }
 
         } else if (userInput.startsWith(Command.EVENT.value)) {
@@ -164,24 +167,39 @@ public class Parser {
                 int keywordPosition = userInput.indexOf("/at");
                 String description = userInput.substring(spacePosition + 1, keywordPosition - 1);
                 String at = userInput.substring(keywordPosition + 4);
-                String result = tasks.addEventAsString(description, at);
+                String response = tasks.addEventAsString(description, at);
                 storage.saveTasks(tasks.getTasksList());
-                return result;
+                assert response.length() > 0 : "Response should not be empty";
+                return response;
 
             } catch (StringIndexOutOfBoundsException e) {
-                return "☹ OOPS!!! The description of a done cannot be empty or in wrong format";
+                return ui.showInvalidFormatCommandDescription();
             }
         } else if (userInput.startsWith(Command.DELETE.value)) {
             try {
                 int taskPosition = Integer.parseInt(userInput.substring(7));
-                String result = tasks.deleteTaskAsString(taskPosition);
+                String response = tasks.deleteTaskAsString(taskPosition);
                 storage.saveTasks(tasks.getTasksList());
-                return result;
+                assert response.length() > 0 : "Response should not be empty";
+                return response;
 
             } catch (StringIndexOutOfBoundsException e) {
-                return "☹ OOPS!!! The description of a done cannot be empty or in wrong format";
+                return ui.showInvalidFormatCommandDescription();
             }
+        } else if (userInput.startsWith(Command.FIND.value)) {
+            try {
+                String keyword = userInput.substring(6);
+                String response = tasks.findTasks(keyword.trim());
+                assert response.length() > 0 : "Response should not be empty";
+                return response;
+
+            } catch (StringIndexOutOfBoundsException e) {
+                return ui.showInvalidFormatCommandDescription();
+            }
+        } else if (userInput.startsWith(Command.FILTER.value)) {
+            String[] inputArray = userInput.split(" ");
+            return tasks.filterTask(inputArray);
         }
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return ui.showMeaninglessCommandDescription();
     }
 }
