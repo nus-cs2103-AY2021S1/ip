@@ -70,6 +70,8 @@ public class DeadlineCommand extends Command {
             throw new DukeIllegalArgumentException(
                     "The time of deadline cannot be empty!");
         }
+        assert description.length() > 0 : "Description is empty!";
+        assert time.length() > 0 : "Time is empty!";
         ITask task = Deadline.getDeadline(description, time);
         storeTask(task);
         String output = "Got it. I've added this task:\n\t" + task.toString()
@@ -85,6 +87,7 @@ public class DeadlineCommand extends Command {
      * @param task The tasks to be stored.
      */
     private void storeTask(ITask task) {
+        assert duke != null : Message.ERR_DUKE_NOT_INIT.toString();
         Storage storage = duke.getStorage();
         duke.storeTask(task);
         storage.save(duke.getTasks().getList());

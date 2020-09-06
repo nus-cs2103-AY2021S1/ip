@@ -57,6 +57,7 @@ public class ToDoCommand extends Command {
      * @throws DukeIllegalArgumentException If the description is incorrect.
      */
     private String handleToDo(String description) throws DukeIllegalArgumentException {
+        assert duke != null : Message.ERR_DUKE_NOT_INIT.toString();
         if (description.matches("\\s*")) {
             throw new DukeIllegalArgumentException(
                     "The description of todo cannot be empty!");
@@ -76,6 +77,7 @@ public class ToDoCommand extends Command {
      * @param task The tasks to be stored.
      */
     public void storeTask(ITask task) {
+        assert duke != null : Message.ERR_DUKE_NOT_INIT.toString();
         Storage storage = duke.getStorage();
         TaskList list = duke.getTasks();
         list.add(task);

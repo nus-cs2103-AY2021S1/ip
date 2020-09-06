@@ -56,6 +56,7 @@ public class FindCommand extends Command {
             throw new DukeIllegalArgumentException(
                     "The keyword of find cannot be empty!");
         }
+        assert duke != null : Message.ERR_DUKE_NOT_INIT.toString();
         TaskList list = duke.getTasks();
         int[] indexes = IntStream
                 .range(0, list.size())

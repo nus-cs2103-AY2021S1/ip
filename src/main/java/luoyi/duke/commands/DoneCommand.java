@@ -53,6 +53,7 @@ public class DoneCommand extends Command {
      * @throws DukeIllegalArgumentException If index is invalid.
      */
     private String handleDone(int index) throws DukeIllegalArgumentException {
+        assert duke != null : Message.ERR_DUKE_NOT_INIT.toString();
         if (index < 1 || index > duke.getNumTask()) {
             throw new DukeIllegalArgumentException("Task index out of bound!");
         }
@@ -69,6 +70,7 @@ public class DoneCommand extends Command {
      * @throws DukeIllegalArgumentException If index is invalid.
      */
     private void doneTask(int id) throws DukeIllegalArgumentException {
+        assert duke != null : Message.ERR_DUKE_NOT_INIT.toString();
         TaskList list = duke.getTasks();
         Storage storage = duke.getStorage();
         if (id - 1 > list.size() || id < 0) {
