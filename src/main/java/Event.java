@@ -35,7 +35,7 @@ public class Event extends Task {
      */
     @Override
     public String writeSaveFormat() {
-        return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, descriptionAfterAt);
+        return String.format("E | %d | %s | %s | %s", isDone ? 1 : 0, description, descriptionAfterAt, hasTag ? tagName: "");
     }
 
     /**

@@ -57,4 +57,23 @@ public class UI {
         }
         return message;
     }
+
+    public String printTag(String command, ArrayList<Task> tasks) {
+        String message = "Nice! I've tagged this task with: ";
+        try {
+            String[] commandSubstring = command.split(" ");
+            int index = Integer.parseInt(commandSubstring[1]);
+            if (index < 1 || index > tasks.size()) {
+                throw new DukeInvalidTagNumException(command);
+            } else {
+                tasks.get(index - 1).makeTag(commandSubstring[2]);
+                message += "#" + commandSubstring[2];
+            }
+            message += "\n" + tasks.get(index - 1).toString();
+        } catch (DukeInvalidTagNumException e) {
+            message = e.getMessage();
+        }
+        return message;
+
+    }
 }

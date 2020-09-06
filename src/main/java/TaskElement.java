@@ -6,6 +6,7 @@ public enum TaskElement {
     DEADLINE("deadline"),
     EVENT("event"),
     DELETE("delete"),
+    TAG("tag"),
     FIND("find");
 
     public final String label;

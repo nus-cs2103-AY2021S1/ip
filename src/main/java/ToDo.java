@@ -6,7 +6,7 @@ public class ToDo extends Task {
 
     @Override
     public String writeSaveFormat() {
-        return String.format("T | %d | %s", isDone ? 1 : 0, description);
+        return String.format("T | %d | %s | %s", isDone ? 1 : 0, description, hasTag ? tagName: "");
     }
 
     @Override

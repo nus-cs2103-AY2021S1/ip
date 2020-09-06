@@ -11,6 +11,10 @@ public class Task {
      */
     protected boolean isDone;
 
+    protected String tagName;
+
+    protected boolean hasTag;
+
     /**
      * Constructs a task object.
      *
@@ -19,6 +23,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.hasTag = false;
     }
 
     /**
@@ -42,6 +47,9 @@ public class Task {
             store += " 0 |";
         }
         store += " " + this.description;
+        if (hasTag) {
+            store += " | " + this.tagName;
+        }
         return store;
     }
 
@@ -49,13 +57,25 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public String getTagDisplay() {
+        String message = "";
+        if (hasTag) {
+            message += " #" +  this.tagName;
+        }
+        return message;
+    }
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "]" + " " + description;
+        return "[" + getStatusIcon() + "]" + " " + description + getTagDisplay();
     }
 
     public boolean containsKeyword(String substring) {
         return this.description.contains(substring);
+    }
+
+    public void makeTag(String tagName) {
+        this.tagName = tagName;
+        this.hasTag = true;
     }
 }
 

@@ -80,10 +80,19 @@ public class Storage {
                 Task currTask = null;
                 if (currLine[0].equals("T")) {
                     currTask = new ToDo(currLine[2]);
+                    if (currLine.length == 4) {
+                        currTask.makeTag(currLine[3]);
+                    }
                 } else if (currLine[0].equals("D")) {
                     currTask = new Deadline(currLine[2], currLine[3]);
+                    if (currLine.length == 5) {
+                        currTask.makeTag(currLine[4]);
+                    }
                 } else if (currLine[0].equals("E")) {
                     currTask = new Event(currLine[2], currLine[3]);
+                    if (currLine.length == 5) {
+                        currTask.makeTag(currLine[4]);
+                    }
                 }
                 if (currLine[1].equals("1")) {
                     currTask.markAsDone();

@@ -154,4 +154,8 @@ public class Parser {
     public static boolean isFind(String input) {
         return input.split(" ")[0].equals(TaskElement.FIND.label);
     }
+
+    public static boolean isTag(String input) {
+        return input.split(" ")[0].equals(TaskElement.TAG.label);
+    }
 }

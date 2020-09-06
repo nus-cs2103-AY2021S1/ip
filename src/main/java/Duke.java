@@ -53,13 +53,16 @@ public class Duke {
                 message = deadline.execute(this.tasks, this.ui);
             } else if (Parser.isEvent(input)) {
                 EventCommand event = new EventCommand(input);
-                message = event.execute(this.tasks, ui);
+                message = event.execute(this.tasks, this.ui);
             } else if (Parser.isDelete(input)) {
                 DeleteCommand delete = new DeleteCommand(input);
-                message = delete.execute(this.tasks, ui);
+                message = delete.execute(this.tasks, this.ui);
             } else if (Parser.isFind(input)) {
                 FindCommand find = new FindCommand(input);
                 message = find.execute(this.tasks, this.ui);
+            } else if (Parser.isTag(input)) {
+                TagCommand tag = new TagCommand(input);
+                message = tag.execute(this.tasks, this.ui);
             } else {
                 throw new DukeUnknownInputException(input);
             }

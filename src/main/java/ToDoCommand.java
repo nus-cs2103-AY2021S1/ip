@@ -17,7 +17,7 @@ public class ToDoCommand extends Command {
             tasklist.addTask(todoTask);
             message = ui.printTaskAdd(todoTask, tasklist.numOfTasks());
         } catch (DukeEmptyToDoException e) {
-            message = e.getMessage();
+            message =  e.getMessage();
         }
         return message;
     }

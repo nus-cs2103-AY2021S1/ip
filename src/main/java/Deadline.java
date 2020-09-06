@@ -29,7 +29,7 @@ public class Deadline extends Task {
      */
     @Override
     public String writeSaveFormat() {
-        return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, descriptionAfterBy);
+        return String.format("D | %d | %s | %s | %s", isDone ? 1 : 0, description, descriptionAfterBy, hasTag ? tagName: "");
     }
 
     /**

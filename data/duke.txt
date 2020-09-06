@@ -1,0 +1,5 @@
+T | 0 | read book | dd
+E | 0 | project meeting | 01-01-2020 12:30 | bru
+D | 0 | return book | 23-02-2020 00:00 | he
+T | 0 | sing song | sis
+T | 0 | run | lol
