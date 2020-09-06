@@ -33,9 +33,9 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        //Format for the date
+        //Format for the date in day, dd MMM yyyy, e.g. Sat, 25 Jan 2020
         DateTimeFormatter myDateFormat = DateTimeFormatter.ofPattern("E, d MMM yyyy");
-        //Format for the time
+        //Format for the time in XX:XX aa, e.g. 11:59 pm
         DateTimeFormatter myTimeFormat = DateTimeFormatter.ofPattern("h:mm a");
 
         String formattedDate = this.startDate.format(myDateFormat);

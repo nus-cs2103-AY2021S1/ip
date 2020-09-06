@@ -23,6 +23,7 @@ public class TaskList {
      */
     public void generateList(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(file);
+
         while (scanner.hasNext()) {
             String nextLine = scanner.nextLine();
             Task task = convertToTask(nextLine);
@@ -85,51 +86,66 @@ public class TaskList {
     //into Task objects in the task list.
     private static Task convertToTask(String line) {
         if (line.startsWith("[T]", 2)) {
-            //Is a todo task
+            //It is a todo task
             String[] parts = line.split(" ", 2);
+
             if (line.contains("[✘]")) {
                 return new Task(parts[1]);
             } else {
                 return new Task(parts[1]).markDone();
             }
         } else if (line.startsWith("[E]", 2)) {
+            //It is an event task
+
             DateTimeFormatter myDateFormat = DateTimeFormatter.ofPattern("d MMM yyyy");
             DateTimeFormatter myTimeFormat = DateTimeFormatter.ofPattern("h:mm a");
-            //Is a event task
+
             String[] parts = line.split(" ", 2);
             String[] split = parts[1].split("\\(at:");
+
             String desc = split[0];
             String timeInfo = split[1].split("\\)")[0];
 
             if (line.contains("[✘]")) {
                 String[] dateTime = timeInfo.trim().split(", ");
+
                 String date = dateTime[1];
                 String time = dateTime[2];
+
                 return new Event(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
             } else {
                 String[] dateTime = timeInfo.trim().split(", ");
+
                 String date = dateTime[1];
                 String time = dateTime[2];
+
                 return new Event(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat)).markDone();
             }
         } else {
+            //Is a deadline task
+
             DateTimeFormatter myDateFormat = DateTimeFormatter.ofPattern("d MMM yyyy");
             DateTimeFormatter myTimeFormat = DateTimeFormatter.ofPattern("h:mm a");
-            //Is a deadline task
+
             String[] parts = line.split(" ", 2);
             String[] split = parts[1].split("\\(by:");
+
             String desc = split[0];
             String timeInfo = split[1].split("\\)")[0];
 
             if (line.contains("[✘]")) {
                 String[] dateTime = timeInfo.trim().split(", ");
+
                 String date = dateTime[1];
                 String time = dateTime[2];
+
                 return new Deadline(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
             } else {
                 String[] dateTime = timeInfo.trim().split(", ");
+
                 String date = dateTime[1];
                 String time = dateTime[2];
+
                 return new Deadline(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat)).markDone();
             }
         }
