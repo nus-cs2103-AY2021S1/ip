@@ -1,8 +1,19 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:6.0.0"
+    }
+}
+
 plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id "com.github.johnrengelman.shadow" version "6.0.0"
 }
 
 repositories {
@@ -11,6 +22,13 @@ repositories {
 
 checkstyle {
     toolVersion = '8.36'
+}
+//--module-path /Users/amberhe/Desktop/CS2103T/IndividualProject/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml
+
+dependencies {
+
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
 
 dependencies {
@@ -29,8 +47,6 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
 
 test {
@@ -48,17 +64,25 @@ test {
 
 }
 
+//application {
+//    mainClassName = "seedu.duke.Duke"
+//}
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveClassifier = null
+    // archiveClassifier = null
+    archiveClassifier = 'v.0.1'
 }
 
 run{
     standardInput = System.in
 }
+
+
+
+apply plugin: "com.github.johnrengelman.shadow"
 
 
