@@ -13,4 +13,9 @@ public class ByeCommand extends Command {
     public void executeCommand (Ui ui, Storage storage, TaskList taskList) {
         ui.byeMessage();
     }
+    
+    @Override
+    public String toString() {
+        return "ByeCommand";
+    }
 }

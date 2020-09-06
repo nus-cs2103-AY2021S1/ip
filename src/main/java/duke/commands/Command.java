@@ -17,5 +17,10 @@ public class Command {
      * @param taskList taskList which stores information about tasks
      */
     public void executeCommand (Ui ui, Storage storage, TaskList taskList) {}
+    
+    @Override
+    public String toString() {
+        return "Command";
+    }
 
 }

@@ -21,12 +21,17 @@ public class RemoveTaskCommand extends Command {
         assert index >= 0;
         this.index = index;
     }
-    
+
     @Override
     public void executeCommand (Ui ui, Storage storage, TaskList taskList) {
         Task removedTask = taskList.getTask(index);         
         taskList.removeTask(index);
         ui.removeTaskMessage(removedTask, taskList.size());
         storage.writeDataToFile(taskList);
+    }
+    
+    @Override
+    public String toString() {
+        return "RemoveTaskCommand " + index;
     }
 }

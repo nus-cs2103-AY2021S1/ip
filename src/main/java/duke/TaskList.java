@@ -27,32 +27,36 @@ public class TaskList {
     }
 
     /**
-     * Adds the specified task to the list
+     * Adds the specified task to the end of the list
      * 
-     * @param t task to be added
+     * @param task task to be added
      */
-    public void addTask(Task t) {
-        taskList.add(t);
+    public void addTask(Task task) {
+        taskList.add(task);
     }
 
+    public void addTaskAtIndex (int index, Task task) {
+        taskList.add(index, task);
+    }
+    
     /**
      * Removes a task from the list
      * 
      * @param index position of task in the list to be removed
      */
-    public void removeTask (int index) {
+    public Task removeTask (int index) {
         assert index >= 0;
-        taskList.remove (taskList.get(index));
+        return taskList.remove (index);
     }
 
     /**
-     * Sets a task, specified by the index, as done
+     * Sets whether a task, specified by the index, has been done
      * 
-     * @param index position of task in the list to be marked done
+     * @param index position of task in the list 
      */
-    public void setDone (int index) {
+    public void setDone (int index, boolean isDone) {
         assert index >= 0;
-        taskList.get(index).markDone();
+        taskList.get(index).setDone(isDone);
     }
 
     /**

@@ -116,4 +116,14 @@ public class Ui {
     public void defaultMessage() {
         setOutputMessage("Sorry >_<!! I don't know what you mean...");
     }
+
+    /**
+     * Sets output message when the undo command is given
+     * @param message message depending on which command is reversed
+     */
+    public void undoMessage (String message) {
+        setOutputMessage("Your latest command");
+        appendMessage(message);
+        appendMessage("has been reversed");
+    }
 }
