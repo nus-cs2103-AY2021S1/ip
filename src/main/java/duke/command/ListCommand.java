@@ -6,7 +6,7 @@ import duke.io.TaskList;
 
 /**
  * List command type.
- * Print all the list in the task arraylist.
+ * Prints all the list in the task arraylist.
  *
  * @author Galvin Leow Wen Yuan
  * @author A0200204J
@@ -15,7 +15,7 @@ import duke.io.TaskList;
 public class ListCommand extends Command {
 
     /**
-     * Print all the task in the arraylist.
+     * Prints all the task in the arraylist.
      *
      * @param taskList arraylist of task.
      * @param ui       ui class for print.
@@ -33,7 +33,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Indicator for application to end.
+     * Returns indication for application to end.
      *
      * @return false.
      */

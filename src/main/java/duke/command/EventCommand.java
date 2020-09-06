@@ -12,7 +12,7 @@ import duke.task.Event;
 
 /**
  * Event command type.
- * Create event task and add into task arraylist.
+ * Creates event task and add into task arraylist.
  *
  * @author Galvin Leow Wen Yuan
  * @author A0200204J
@@ -24,7 +24,7 @@ public class EventCommand extends Command {
 
     /**
      * Class constructor.
-     * Extract task details from full command.
+     * Extracts task details from full command.
      *
      * @param fullCommand full command input by user.
      */
@@ -34,9 +34,9 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Create event task and add to task arraylist.
-     * Convert details like data time to dateTime format.
-     * Write to file.
+     * Creates event task and add to task arraylist.
+     * Converts details like data time to dateTime format.
+     * Writes to file.
      *
      * @param taskList arraylist of task.
      * @param ui       ui class for print.
@@ -58,16 +58,16 @@ public class EventCommand extends Command {
 
         String[] inputDateTime = at.split(" ");
         String[] date = inputDateTime[0].split("[/\\\\]|-");
-        LocalDate localDate = dateToLocalDate(date);
+        LocalDate localDate = convertDateToLocalDate(date);
 
         LocalTime startLocalTime = LocalTime.of(0, 0);
         LocalTime endLocalTime = LocalTime.of(23, 59);
         if (inputDateTime.length > 1) {
             String[] timeArr = inputDateTime[1].split("-");
             if (timeArr.length > 1) {
-                endLocalTime = timeToLocalTime(timeArr[1]);
+                endLocalTime = convertTimeToLocalTime(timeArr[1]);
             }
-            startLocalTime = timeToLocalTime(timeArr[0]);
+            startLocalTime = convertTimeToLocalTime(timeArr[0]);
         }
         LocalDateTime startLocalDateTime = LocalDateTime.of(localDate, startLocalTime);
         LocalDateTime endLocalDateTime = LocalDateTime.of(localDate, endLocalTime);
@@ -83,7 +83,7 @@ public class EventCommand extends Command {
         storage.write(taskList);
     }
 
-    private static LocalDate dateToLocalDate(String[] date) throws DukeException {
+    private static LocalDate convertDateToLocalDate(String[] date) throws DukeException {
         LocalDate localDate;
         if (date.length == 3) {
             int day = Integer.parseInt(date[0]);
@@ -96,7 +96,7 @@ public class EventCommand extends Command {
         return localDate;
     }
 
-    private static LocalTime timeToLocalTime(String time) throws DukeException {
+    private static LocalTime convertTimeToLocalTime(String time) throws DukeException {
         int timeLength = time.length();
         LocalTime localTime;
         if (timeLength == 4) {
@@ -114,7 +114,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Indicator for application to end.
+     * Returns indications for application to end.
      *
      * @return false.
      */

@@ -19,7 +19,7 @@ public class Event extends Task {
 
     /**
      * Class constructor.
-     * Initialise event class with description, isDone and time.
+     * Initialises event class with description, isDone and time.
      *
      * @param description description of the event.
      * @param at          date and start of the event.
@@ -32,7 +32,7 @@ public class Event extends Task {
     }
 
     /**
-     * The start date and time of the event object.
+     * Returns start date and time of the event object.
      *
      * @return localDateTime of start event.
      */
@@ -41,7 +41,7 @@ public class Event extends Task {
     }
 
     /**
-     * TThe end date and time of the event object.
+     * Returns end date and time of the event object.
      *
      * @return localDateTime of start event.
      */
@@ -50,7 +50,7 @@ public class Event extends Task {
     }
 
     /**
-     * Check if two object are equal.
+     * Checks if two object are equal.
      * If equal true, else false.
      *
      * @param o object to be compare.
@@ -72,7 +72,7 @@ public class Event extends Task {
     }
 
     /**
-     * Summary to the event object.
+     * Returns summary of the event object.
      *
      * @return string to the event object.
      */

@@ -9,7 +9,7 @@ package duke.common;
  */
 public class DukeException extends Exception {
     /**
-     * Exception for duke application.
+     * Throws exception for duke application.
      *
      * @param message String details of the error.
      */

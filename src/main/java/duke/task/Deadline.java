@@ -17,7 +17,7 @@ public class Deadline extends Task {
 
     /**
      * Class constructor.
-     * Initialise event class with description, isDone and time.
+     * Initialises event class with description, isDone and time.
      *
      * @param description description of the deadline task.
      * @param by          date and time of the task.
@@ -28,7 +28,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * The date and time of the deadline object.
+     * Returns date and time of the deadline object.
      *
      * @return LocalDateTime of the deadline object
      */
@@ -37,7 +37,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Check if two object are equal.
+     * Checks if two object are equal.
      * If equal true, else false.
      *
      * @param o object to be compare.
@@ -59,7 +59,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Summary to the deadline object.
+     * Returns summary to the deadline object.
      *
      * @return string to the deadline object.
      */

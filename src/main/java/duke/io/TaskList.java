@@ -16,7 +16,7 @@ public class TaskList {
 
     /**
      * Class constructor.
-     * Initialise taskArraylist will be empty.
+     * Initialises taskArraylist will be empty.
      */
     public TaskList() {
         this.taskArrayList = new ArrayList<>();
@@ -25,7 +25,7 @@ public class TaskList {
     /**
      * Overloaded method.
      * Class constructor.
-     * Initialise taskArrayList with data from filepath.
+     * Initialises taskArrayList with data from filepath.
      *
      * @param taskArrayList task array list from file.
      */
@@ -34,7 +34,7 @@ public class TaskList {
     }
 
     /**
-     * Arraylist that stores all the task.
+     * Returns Arraylist that stores all the task.
      *
      * @return arraylist of tasks.
      */
@@ -43,7 +43,7 @@ public class TaskList {
     }
 
     /**
-     * Add task into the taskArrayList.
+     * Adds task into the taskArrayList.
      *
      * @param task task to be added.
      */
@@ -52,7 +52,7 @@ public class TaskList {
     }
 
     /**
-     * Return number of task in list.
+     * Returns number of task in list.
      *
      * @return size of arraylist.
      */
@@ -61,7 +61,7 @@ public class TaskList {
     }
 
     /**
-     * Get task by index.
+     * Returns task by index.
      *
      * @param index int number to retrieve task.
      * @return task based on the index.
@@ -71,7 +71,7 @@ public class TaskList {
     }
 
     /**
-     * Delete task by index.
+     * Deletes task by index.
      *
      * @param index task index that is to be deleted.
      */
@@ -80,7 +80,7 @@ public class TaskList {
     }
 
     /**
-     * Search is input string is in task description.
+     * Searches input string if constains in task description.
      *
      * @param toFind search value.
      * @return arraylist of search result.

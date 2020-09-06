@@ -13,7 +13,7 @@ public class Task {
 
     /**
      * Class constructor.
-     * Initialise task class with description and isDone.
+     * Initialises task class with description and isDone.
      *
      * @param description description of task.
      */
@@ -23,7 +23,7 @@ public class Task {
     }
 
     /**
-     * Return a tick or cross.
+     * Returns a tick or cross.
      * If isDone is false return cross else tick.
      *
      * @return isDone status in a form of UTF-8 tick or cross.
@@ -33,14 +33,14 @@ public class Task {
     }
 
     /**
-     * Change task object isDone to true to indicate task done.
+     * Changes task object isDone to true to indicate task done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * The description for task object.
+     * Returns description for task object.
      *
      * @return string description of task object.
      */
@@ -49,7 +49,7 @@ public class Task {
     }
 
     /**
-     * The status of task object.
+     * Returns status of task object.
      *
      * @return true/false status of task object.
      */
@@ -58,7 +58,7 @@ public class Task {
     }
 
     /**
-     * Check if two object are equal.
+     * Checks if two object are equal.
      * If equal true, else false.
      *
      * @param o object to be compare.
@@ -77,7 +77,7 @@ public class Task {
     }
 
     /**
-     * Summary to the task object.
+     * Returns summary to the task object.
      *
      * @return string to the task object.
      */

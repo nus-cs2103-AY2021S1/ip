@@ -10,7 +10,7 @@ import duke.task.Task;
 
 /**
  * Find command type.
- * Take a string and find is there are task description that contains the string.
+ * Takes a string and find is there are task description that contains the string.
  *
  * @author Galvin Leow Wen Yuan
  * @author A0200204J
@@ -21,7 +21,7 @@ public class FindCommand extends Command {
 
     /**
      * Class constructor.
-     * Extract search value from full command.
+     * Extracts search value from full command.
      *
      * @param fullCommand full command input by user.
      */
@@ -30,9 +30,9 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Extract out search value.
-     * Search from the task arraylist.
-     * Print out search result.
+     * Extracts out search value.
+     * Searches from the task arraylist.
+     * Prints out search result.
      *
      * @param taskList arraylist of task.
      * @param ui       ui class for print.
@@ -60,7 +60,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Indicator for application to end.
+     * Returns indication for application to end.
      *
      * @return false.
      */

@@ -19,7 +19,7 @@ public class DoneCommand extends Command {
 
     /**
      * Class constructor.
-     * Extract task index details from full command.
+     * Extracts task index details from full command.
      *
      * @param fullCommand full command input by user.
      */
@@ -28,8 +28,8 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Retrieve task to be mark done and change isDone to true.
-     * Write to file.
+     * Retrieves task to be mark done and change isDone to true.
+     * Writes to file.
      *
      * @param taskList arraylist of task.
      * @param ui       ui class for print.
@@ -47,16 +47,14 @@ public class DoneCommand extends Command {
         } else {
             throw new DukeException("Cannot mark item done!");
         }
-        StringBuilder resultSb = new StringBuilder(
-                String.format("%s\n %s\n", ui.showLine(), "Nice! I've marked this task as done:"));
-        resultSb.append((String.format("%s\n %s", task, ui.showLine())));
-        Ui.printString(resultSb.toString());
+        Ui.printString(String.format("%s\n %s\n", ui.showLine(), "Nice! I've marked this task as done:")
+                + (String.format("%s\n %s", task, ui.showLine())));
 
         storage.write(taskList);
     }
 
     /**
-     * Indicator for application to end.
+     * Returns indication for application to end.
      *
      * @return false.
      */

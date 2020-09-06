@@ -14,8 +14,8 @@ import duke.io.TaskList;
  */
 public class ByeCommand extends Command {
     /**
-     * Execute bye command logic.
-     * Print end message.
+     * Executes bye command logic.
+     * Prints end message.
      *
      * @param task    not used in this command
      * @param ui      ui class for print.
@@ -29,7 +29,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Change isExit to true to indicate application to end.
+     * Changes isExit to true to indicate application to end.
      *
      * @return true.
      */

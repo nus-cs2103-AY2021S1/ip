@@ -31,7 +31,7 @@ public class Storage {
 
     /**
      * Class constructor.
-     * Initialise Storage class with filepath.
+     * Initialises Storage class with filepath.
      *
      * @param filePath use to create, read and write a file.
      */
@@ -40,7 +40,7 @@ public class Storage {
     }
 
     /**
-     * Read file and convert it into Arraylist<{Task}>.
+     * Reads file and converts it into Arraylist<{Task}>.
      *
      * @return Arraylist with tasks contains all the task from the file.
      * @throws DukeException exception for file cannot be found.
@@ -70,8 +70,8 @@ public class Storage {
                     taskArrayList.add(tempDeadline);
                     break;
                 case "duke.task.Event":
-                    Task tempEvent =
-                            new Event(tempArr[2], LocalDateTime.parse(tempArr[3]), LocalDateTime.parse(tempArr[4]));
+                    Task tempEvent = new Event(tempArr[2], LocalDateTime.parse(tempArr[3]),
+                            LocalDateTime.parse(tempArr[4]));
                     if (tempArr[1].equals("true")) {
                         tempEvent.markAsDone();
                     }
@@ -88,7 +88,7 @@ public class Storage {
     }
 
     /**
-     * Convert from Tasklist Arraylist<{Task}> and write into file.
+     * Converts from Tasklist Arraylist<{Task}> and write into file.
      *
      * @param taskList data to be written to file.
      */
@@ -104,9 +104,8 @@ public class Storage {
                     writer.append(String.format("%s,%s,%s,%s", taskType, task.isDone(), task.getDescription(), (
                             (Deadline) task).getBy()));
                 } else {
-                    writer.append(
-                            String.format("%s,%s,%s,%s,%s", taskType, task.isDone(), task.getDescription(), (
-                                    (Event) task).getAt(), ((Event) task).getEnd()));
+                    writer.append(String.format("%s,%s,%s,%s,%s", taskType, task.isDone(), task.getDescription(), (
+                            (Event) task).getAt(), ((Event) task).getEnd()));
                 }
                 writer.write("\n");
             }
@@ -117,7 +116,7 @@ public class Storage {
     }
 
     /**
-     * Check path exist.
+     * Checks path exist.
      * If exist do nothing, else create.
      */
     private void createFile() {

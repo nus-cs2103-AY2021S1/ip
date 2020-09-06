@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Class constructor.
-     * Extract task index details from full command.
+     * Extracts task index details from full command.
      *
      * @param fullCommand full command input by user.
      */
@@ -28,8 +28,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Remove task with index from task arraylist.
-     * Write to file.
+     * Removes task with index from task arraylist.
+     * Writes to file.
      *
      * @param taskList arraylist of task.
      * @param ui       ui class for print.
@@ -56,7 +56,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Indicator for application to end.
+     * Returns indication for application to end.
      *
      * @return false.
      */

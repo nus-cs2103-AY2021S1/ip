@@ -13,7 +13,7 @@ import duke.task.Todo;
  * @author A0200204J
  * @version v1.0
  */
-public class ToDoCommand extends Command {
+public class TodoCommand extends Command {
 
     private final String fullCommand;
 
@@ -23,7 +23,7 @@ public class ToDoCommand extends Command {
      *
      * @param fullCommand full command input by user.
      */
-    public ToDoCommand(String fullCommand) {
+    public TodoCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
 

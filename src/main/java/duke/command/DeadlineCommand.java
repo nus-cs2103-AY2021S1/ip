@@ -13,7 +13,7 @@ import duke.task.Deadline;
 
 /**
  * Deadline command type.
- * Create deadline task and add into task arraylist.
+ * Creates deadline task and add into task arraylist.
  *
  * @author Galvin Leow Wen Yuan
  * @author A0200204J
@@ -25,7 +25,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Class constructor.
-     * Extract task details from full command.
+     * Extracts task details from full command.
      *
      * @param fullCommand full command input by user.
      */
@@ -34,9 +34,9 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Create deadline task and add to task arraylist.
-     * Convert details like data time to dateTime format.
-     * Write to file.
+     * Creates deadline task and add to task arraylist.
+     * Converts details like data time to dateTime format.
+     * Writes to file.
      *
      * @param taskList arraylist of task.
      * @param ui       ui class for print.
@@ -58,7 +58,7 @@ public class DeadlineCommand extends Command {
 
         String[] inputDateTime = by.split(" ");
         String[] date = inputDateTime[0].split("[/\\\\]|-");
-        LocalDate localDate = dateToLocalDate(date);
+        LocalDate localDate = convertDateToLocalDate(date);
 
         LocalTime localTime = LocalTime.of(0, 0);
         if (inputDateTime.length > 1) {
@@ -89,7 +89,7 @@ public class DeadlineCommand extends Command {
         storage.write(taskList);
     }
 
-    private static LocalDate dateToLocalDate(String[] date) throws DukeException {
+    private static LocalDate convertDateToLocalDate(String[] date) throws DukeException {
         LocalDate localDate;
         if (date.length == 3) {
             int day = Integer.parseInt(date[0]);
@@ -103,7 +103,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Indicator for application to end.
+     * Returns indication for application to end.
      *
      * @return false.
      */

@@ -16,7 +16,7 @@ import duke.io.TaskList;
 public abstract class Command {
 
     /**
-     * Execute the logic define by the individual command type.
+     * Executes the logic define by the individual command type.
      *
      * @param taskList arraylist of task.
      * @param ui       ui class for print.
@@ -26,7 +26,7 @@ public abstract class Command {
     public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
-     * Indication to exit and end the application.
+     * Returns indication to exit and end the application.
      *
      * @return boolean true if application to end.
      */

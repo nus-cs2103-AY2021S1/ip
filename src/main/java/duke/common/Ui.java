@@ -12,7 +12,7 @@ import duke.Main;
 public class Ui {
 
     /**
-     * Return welcome message.
+     * Returns welcome message.
      *
      * @return string welcome message.
      */
@@ -24,7 +24,7 @@ public class Ui {
     }
 
     /**
-     * Return String that provide user with functionalities of the application.
+     * Returns String that provide user with functionalities of the application.
      *
      * @return String menu
      */
@@ -38,21 +38,21 @@ public class Ui {
     }
 
     /**
-     * Print loading error that will use when file fail to load.
+     * Prints loading error that will use when file fail to load.
      */
     public void showLoadingError() {
         showError("Error: Fail to load file!");
     }
 
     /**
-     * Use to divide the application to be more user friendly.
+     * Uses to divide the application to be more user friendly.
      */
     public String showLine() {
         return "____________________________________";
     }
 
     /**
-     * Print out an error message
+     * Prints out an error message.
      *
      * @param error error that occur.
      */
@@ -61,7 +61,7 @@ public class Ui {
     }
 
     /**
-     * Print out any string.
+     * Prints out any string.
      *
      * @param statement any string input
      */

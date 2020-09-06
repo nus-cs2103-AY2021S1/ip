@@ -11,7 +11,7 @@ public class Todo extends Task {
 
     /**
      * Class constructor.
-     * Initialise todo class with description and isDone.
+     * Initialises todo class with description and isDone.
      *
      * @param description description of task.
      */
@@ -20,7 +20,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Check if two object are equal.
+     * Checks if two object are equal.
      * If equal true, else false.
      *
      * @param o object to be compare.
@@ -32,7 +32,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Summary to the todo object.
+     * Returns summary of the todo object.
      *
      * @return string to the todo object.
      */

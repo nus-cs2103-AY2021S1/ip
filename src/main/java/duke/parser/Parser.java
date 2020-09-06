@@ -8,7 +8,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-import duke.command.ToDoCommand;
+import duke.command.TodoCommand;
 import duke.common.DukeException;
 
 /**
@@ -21,7 +21,7 @@ import duke.common.DukeException;
  */
 public class Parser {
     /**
-     * return command type that will be used.
+     * Returns command type that will be used.
      *
      * @param fullCommand full command that the user input.
      * @return command type.
@@ -35,7 +35,7 @@ public class Parser {
         case "done":
             return new DoneCommand(fullCommand);
         case "todo":
-            return new ToDoCommand(fullCommand);
+            return new TodoCommand(fullCommand);
         case "deadline":
             return new DeadlineCommand(fullCommand);
         case "event":
