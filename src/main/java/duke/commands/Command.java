@@ -32,6 +32,7 @@ public abstract class Command {
      * Executes the command.
      * Different child command classes will have different behaviours
      * when the method <code>execute</code> is called.
+     * @param input the user input.
      * @return a boolean value indicating whether or not the program should continue running.
      * @throws DukeException if an exception has occured while executing the command.
      */
