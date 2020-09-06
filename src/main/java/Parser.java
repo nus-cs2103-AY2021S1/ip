@@ -60,10 +60,13 @@ public class Parser {
             return handleDelete(remainderString);
         case FIND:
             return handleFind(remainderString);
+        case HELP:
+            return handleHelp();
         case INVALID:
             throw new DukeException("Unrecognized command!");
         default:
             assert true : "Fell through INVALID command switch case. Should not have reached here.";
+            return null;
         }
     }
 
@@ -221,6 +224,17 @@ public class Parser {
             sb.append((i + 1) + "." + matches.get(i) + "\n");
         }
         sb.setLength(sb.length() - 1);
+        return sb.toString();
+    }
+
+    /**
+     * Handles the "help" command.
+     */
+    private String handleHelp() {
+        StringBuilder sb = new StringBuilder();
+        for (Command command : Command.values()) {
+            sb.append(command + " - " + command.getDescription() + "\n");
+        }
         return sb.toString();
     }
 }
