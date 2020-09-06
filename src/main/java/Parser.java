@@ -1,6 +1,10 @@
 import java.io.IOException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Represents a parser to make sense of user input and saved data.
@@ -23,6 +27,7 @@ public class Parser {
      * @return Task object as described by the line.
      */
     protected Task parseFileData(String line) {
+        assert isValidFileLine(line) : "line is not valid input";
         char taskType = line.charAt(3);
         boolean isDone = line.charAt(6) == '\u2713';
         Task task = null;
@@ -43,6 +48,15 @@ public class Parser {
             task.markDone();
         }
         return task;
+    }
+
+    protected boolean isValidFileLine(String line) {
+        boolean isNotEmpty = !line.isEmpty();
+        ArrayList<Character> validTaskType = new ArrayList<>(Arrays.asList('T','E', 'D'));
+        boolean isValidTaskType = validTaskType.contains(line.charAt(3));
+        boolean isValidDoneType = line.charAt(6 ) == '\u2713'
+                || line.charAt(6 ) == '\u2717';
+        return isNotEmpty && isValidTaskType && isValidDoneType;
     }
 
     /**
