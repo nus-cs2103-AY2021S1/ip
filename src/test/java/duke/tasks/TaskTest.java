@@ -2,9 +2,9 @@ package duke.tasks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskTest {
 
@@ -35,7 +35,7 @@ public class TaskTest {
     }
 
     @Test
-    public void taskToString_DoneTask_tickPrinted() {
+    public void taskToString_doneTask_tickPrinted() {
         String boxWithTick = "[" + "\u2713" + "] ";
         Task testTask = new Task("test1");
         testTask.setDone();
@@ -50,7 +50,7 @@ public class TaskTest {
     }
 
     @Test
-    public void taskSaveFormat_DoneTask_onePrinted() {
+    public void taskSaveFormat_doneTask_onePrinted() {
         String expectedOutput = "1 | test1";
         Task testTask = new Task("test1");
         testTask.setDone();

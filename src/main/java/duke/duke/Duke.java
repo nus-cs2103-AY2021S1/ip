@@ -5,7 +5,6 @@ import java.io.File;
 import duke.commands.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.UI;
 import javafx.application.Application;

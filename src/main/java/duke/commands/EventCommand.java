@@ -16,7 +16,7 @@ public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
     private String eventDate;
     private LocalDate eventLocalDate;
-    private boolean hasLocalDate;
+    private boolean isLocalDateFormatted;
 
     /**
      * Creates a new instance of a Event Command with the appropriate
@@ -28,7 +28,7 @@ public class EventCommand extends Command {
     public EventCommand(String commandDescription, String eventDate) {
         super(commandDescription, false);
         this.eventDate = eventDate;
-        this.hasLocalDate = false;
+        this.isLocalDateFormatted = false;
     }
 
     /**
@@ -41,7 +41,7 @@ public class EventCommand extends Command {
     public EventCommand(String commandDescription, LocalDate eventLocalDate) {
         super(commandDescription, false);
         this.eventLocalDate = eventLocalDate;
-        this.hasLocalDate = true;
+        this.isLocalDateFormatted = true;
     }
 
     /**
@@ -59,7 +59,7 @@ public class EventCommand extends Command {
         assert storage != null;
         Event eventTask;
         try {
-            if (this.hasLocalDate) {
+            if (this.isLocalDateFormatted) {
                 eventTask = new Event(commandDescription, eventLocalDate);
             } else {
                 eventTask = new Event(commandDescription, eventDate);

@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.duke.Duke;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
 
@@ -16,6 +15,13 @@ import duke.parser.Parser;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
+
+    /**
+     * Creates an instance of a list of tasks.
+     */
+    public TaskList() {
+        tasks = new ArrayList<>();
+    }
 
     /**
      * Creates an instance of a list of tasks from
@@ -71,13 +77,6 @@ public class TaskList {
     }
 
     /**
-     * Creates an instance of a list of tasks.
-     */
-    public TaskList() {
-        tasks = new ArrayList<>();
-    }
-
-    /**
      * Adds a task to the list.
      *
      * @param task Task to be added.
@@ -94,7 +93,7 @@ public class TaskList {
      *
      * @param taskIndex Index of task to be removed.
      */
-    public void removeFromList(int taskIndex) throws IndexOutOfBoundsException{
+    public void removeFromList(int taskIndex) throws IndexOutOfBoundsException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
             throw new IndexOutOfBoundsException("Invalid Index!");
         }

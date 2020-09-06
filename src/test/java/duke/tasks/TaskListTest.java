@@ -2,8 +2,9 @@ package duke.tasks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.exceptions.DukeException;
 import org.junit.jupiter.api.Test;
+
+import duke.exceptions.DukeException;
 
 public class TaskListTest {
 
@@ -37,7 +38,7 @@ public class TaskListTest {
     public void removeTaskFromList_negativeNumber_throwException() {
         TaskList testTaskList = new TaskList();
         try {
-            testTaskList.removeFromList(- 1);
+            testTaskList.removeFromList(-1);
             assert false;
         } catch (IndexOutOfBoundsException e) {
             assert true;
@@ -70,7 +71,7 @@ public class TaskListTest {
     public void geTaskFromList_negativeNumber_throwException() {
         TaskList testTaskList = new TaskList();
         try {
-            testTaskList.getTaskAtIndex(- 1);
+            testTaskList.getTaskAtIndex(-1);
             assert false;
         } catch (IndexOutOfBoundsException e) {
             assert true;

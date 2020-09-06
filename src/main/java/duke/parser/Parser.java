@@ -62,24 +62,34 @@ public class Parser {
         switch (commandWord) {
         case TodoCommand.COMMAND_WORD:
             return prepareTodo(commandBody.strip());
+            //Fallthrough
         case DeadlineCommand.COMMAND_WORD:
             return prepareDeadline(commandBody.strip());
+            //Fallthrough
         case EventCommand.COMMAND_WORD:
             return prepareEvent(commandBody.strip());
+            //Fallthrough
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommand(commandBody.strip());
+            //Fallthrough
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+            //Fallthrough
         case DoneCommand.COMMAND_WORD:
             return new DoneCommand(commandBody.strip());
+            //Fallthrough
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+            //Fallthrough
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+            //Fallthrough
         case GetEventsCommand.COMMAND_WORD:
             return prepareGetEvents(commandBody.strip());
+            //Fallthrough
         case SearchCommand.COMMAND_WORD:
             return prepareSearch(commandBody.strip());
+            //Fallthrough
         default:
             return new InvalidCommand();
 

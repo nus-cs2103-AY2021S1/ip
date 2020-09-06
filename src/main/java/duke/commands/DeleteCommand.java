@@ -16,6 +16,7 @@ public class DeleteCommand extends Command {
     /**
      * Creates an instance of a DeleteCommand with the appropriate
      * task to be deleted as the command description.
+     *
      * @param commandDescription Task to be deleted.
      */
     public DeleteCommand(String commandDescription) {

@@ -4,10 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.format.DateTimeFormatter;
 
-import duke.commands.Command;
-import duke.storage.Storage;
-import duke.tasks.TaskList;
-import duke.ui.UI;
 import org.junit.jupiter.api.Test;
 
 public class ParserTest {

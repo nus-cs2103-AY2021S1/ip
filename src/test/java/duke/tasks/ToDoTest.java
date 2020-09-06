@@ -4,12 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-
 public class ToDoTest {
 
     @Test
-    public void taskToString_DoneTask_tickPrinted() {
+    public void taskToString_doneTask_tickPrinted() {
         String boxWithTick = "[T][" + "\u2713" + "] ";
         Task testTodo = new ToDo("test1");
         testTodo.setDone();
@@ -24,7 +22,7 @@ public class ToDoTest {
     }
 
     @Test
-    public void taskSaveFormat_DoneTask_onePrinted() {
+    public void taskSaveFormat_doneTask_onePrinted() {
         String expectedOutput = "T | 1 | test1";
         Task testTodo = new ToDo("test1");
         testTodo.setDone();
