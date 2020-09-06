@@ -24,10 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image USER_IMAGE = new Image(new FileInputStream(System.getProperty("user.dir")
-            + "\\data\\userChatBotIcon.png"));
-    private final Image DUKE_IMAGE = new Image(new FileInputStream(System.getProperty("user.dir")
-            + "\\data\\dukeChatBotIcon.png"));
+    private final Image IMAGE_USER = new Image(this.getClass().getResourceAsStream("/images/userChatBotIcon.png"));
+    private final Image IMAGE_DUKE = new Image(this.getClass().getResourceAsStream("/images/dukeChatBotIcon.png"));
 
     public MainWindow() { }
 
@@ -51,7 +49,7 @@ public class MainWindow extends AnchorPane {
                 + "list-due <YYYY-MM-DD HHMM>: gets list of tasks due on that date\n"
                 + "find: finds any task that has a description matching the given string\n";
 
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(startUpString, DUKE_IMAGE));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(startUpString, IMAGE_DUKE));
     }
 
     public void setDuke(Duke d) {
@@ -67,8 +65,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, USER_IMAGE),
-                DialogBox.getDukeDialog(response, DUKE_IMAGE)
+                DialogBox.getUserDialog(input, IMAGE_USER),
+                DialogBox.getDukeDialog(response, IMAGE_DUKE)
         );
         userInput.clear();
 
