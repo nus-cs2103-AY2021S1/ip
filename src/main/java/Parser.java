@@ -15,7 +15,7 @@ public class Parser {
             LocalDate ret = LocalDate.parse(input);
             return ret;
         } catch (DateTimeParseException ex1) {
-            throw new DukeException("Wrong formatting!");
+            throw new DukeException("Wrong formatting! Please provide in YYYY/MM/DD format.");
         }
     }
 
@@ -62,6 +62,7 @@ public class Parser {
      * @return Duke Command to indicate which switch to enter
      */
     public static Duke.Command parse(String input) {
+        assert !input.isEmpty();
         if (getFirstWord(input).equals("todo") || getFirstWord(input).equals("deadline") ||
                 getFirstWord(input).equals("event")) {
             return Duke.Command.ADD;

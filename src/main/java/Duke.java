@@ -28,7 +28,7 @@ public class Duke {
     }
 
     public String run(String input) {
-        // Introduction
+        assert !input.isEmpty();
 
         Command c = Parser.parse(input);
 
@@ -38,21 +38,21 @@ public class Duke {
                     Task curr = tasks.addItem(input);
                     return ui.addedItem(curr, tasks.getListSize());
                 } catch (DukeException ex1) {
-                    return ui.showError(ex1.getMessage());
+                    return ui.showError(ex1.description);
                 }
             case DONE:
                 try {
                     Task curr = tasks.doneItem(input);
                     return ui.doneItem(curr);
                 } catch (DukeException ex1) {
-                    return ui.showError(ex1.getMessage());
+                    return ui.showError(ex1.description);
                 }
             case DELETE:
                 try {
                     Task curr = tasks.deleteItem(input);
                     return ui.deleteItem(curr);
                 } catch (DukeException ex1) {
-                    return ui.showError(ex1.getMessage());
+                    return ui.showError(ex1.description);
                 }
             case LIST:
                 return ui.returnList(tasks.getList());
@@ -61,7 +61,7 @@ public class Duke {
                     storage.overwriteData(tasks.getList());
                     return ui.save();
                 } catch (IOException ex1) {
-                    return ui.showError(ex1.getMessage());
+                    return ui.showError(ex1.getLocalizedMessage());
                 }
             case FIND:
                 return ui.returnList(tasks.find(input));
@@ -75,7 +75,8 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        Duke d = new Duke("data/Duke.txt");
+        Duke d = new Duke("");
+//        "data/Duke.txt"
 
         System.out.println(ui.welcome());
 
