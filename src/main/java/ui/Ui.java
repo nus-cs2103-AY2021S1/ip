@@ -70,8 +70,8 @@ public class Ui {
      * @return String Formats strings with some indentation.
      */
     public String formatCommandList(String command, String format) {
-        String indentation = "%-20s%s%n";
-        return String.format(indentation, command, format);
+        String indentation = "  |   ";
+        return command + "  |   " + format + "\n";
     }
 
     /**
@@ -80,15 +80,15 @@ public class Ui {
      */
     public String getCommandList() {
         return formatCommandList("COMMAND", "FORMAT")
-                + formatCommandList("deadline", "deadline <DEADLINE_NAME> /by <yyyy-MM-dd> <HH:mm>")
-                + formatCommandList("delete", "delete <TASK_NUMBER>")
-                + formatCommandList("delete all", "delete all")
-                + formatCommandList("done", "done <TASK_NUMBER>")
-                + formatCommandList("done all", "done all")
-                + formatCommandList("event", "event <EVENT_NAME> /at <yyyy-MM-dd> <HH:mm>")
-                + formatCommandList("show after", "show after <yyyy-MM-dd>")
-                + formatCommandList("show before", "show before <yyyy-MM-dd>")
-                + formatCommandList("todo", "todo <TASK_NAME>");
+                + formatCommandList("- deadline", "deadline <DEADLINE_NAME> /by <yyyy-MM-dd> <HH:mm>")
+                + formatCommandList("- delete", "delete <TASK_NUMBER>")
+                + formatCommandList("- delete all", "delete all")
+                + formatCommandList("- done", "done <TASK_NUMBER>")
+                + formatCommandList("- done all", "done all")
+                + formatCommandList("- event", "event <EVENT_NAME> /at <yyyy-MM-dd> <HH:mm>")
+                + formatCommandList("- show after", "show after <yyyy-MM-dd>")
+                + formatCommandList("- show before", "show before <yyyy-MM-dd>")
+                + formatCommandList("- todo", "todo <TASK_NAME>");
     }
 
     /**
