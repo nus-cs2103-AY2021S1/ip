@@ -21,6 +21,7 @@ public class Parser {
      * @param ui Ui object that commands will use.
      */
     public Parser(TaskList taskList, Ui ui) {
+        assert taskList != null && ui != null : "taskList and ui should not be null";
         this.taskList = taskList;
         this.ui = ui;
     }
@@ -32,7 +33,6 @@ public class Parser {
      * @throws DukeException If there are any parse errors, or Command has any errors.
      */
     public void parseAndRun(String input) throws DukeException {
-        assert input != null : "input can not be null";
         for (Command command : Command.values()) {
             Optional<Matcher> maybeMatcher = command.matcher(input);
             if (maybeMatcher.isEmpty()) {
