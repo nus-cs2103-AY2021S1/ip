@@ -1,5 +1,8 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -56,7 +59,7 @@ public class Task {
     /**
      * Returns a fixed format in string to store the task to storage.
      *
-     * @return T | 0 | return book
+     * @return T | 0 | return book.
      */
     public String toCustomString() {
         return "T | " + (isDone ? 1 : 0) + " | " + description;
@@ -64,11 +67,35 @@ public class Task {
 
 
     /**
-     * Gets the content of the tasks
+     * Gets the content of the tasks.
      *
-     * @return String the content of the tasks
+     * @return String the content of the tasks.
      */
     public String getDescription() {
         return description;
     }
+
+
+    /**
+     * Returns the converted date in LocalDate format.
+     *
+     * @param toBeConverted the string to be converted.
+     * @return the date in LocalDate format.
+     */
+    protected LocalDate convertToLocalDate(String toBeConverted) {
+        return LocalDate.parse(toBeConverted.trim());
+    }
+
+
+    /**
+     * Converts the local date to string.
+     *
+     * @param date a LocalDate instance.
+     * @return the date in string.
+     */
+    protected String convertToString(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
+    }
+
+
 }

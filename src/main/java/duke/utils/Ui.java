@@ -46,6 +46,9 @@ public class Ui {
     }
 
 
+    /**
+     * Displays the welcome message when the user open the app.
+     */
     public void welcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

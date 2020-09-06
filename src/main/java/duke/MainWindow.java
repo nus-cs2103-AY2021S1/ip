@@ -24,8 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
     @FXML
     public void initialize() {
@@ -56,6 +56,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(s, dukeImage));
     }
 
+
+    /**
+     * Closes the window and exit the program.
+     */
     public void closeWindow() {
         Platform.exit();
     }
