@@ -1,4 +1,4 @@
-package dev.jingyen.duke;
+package dev.jingyen.duke.storage;
 
 import dev.jingyen.duke.model.Task;
 import dev.jingyen.duke.parser.TaskParser;

@@ -1,5 +1,7 @@
 package dev.jingyen.duke.model;
 
+import dev.jingyen.duke.storage.Storable;
+
 import java.util.Objects;
 
 /**

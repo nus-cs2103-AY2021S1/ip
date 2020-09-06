@@ -1,5 +1,7 @@
 package dev.jingyen.duke.model;
 
+import dev.jingyen.duke.storage.Storable;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
