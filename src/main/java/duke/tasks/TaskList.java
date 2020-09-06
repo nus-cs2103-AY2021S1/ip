@@ -51,11 +51,15 @@ public class TaskList {
      *
      * @param index The position index of the task in the list.
      */
-    public String deleteTask(int index) {
+    public String deleteTask(int index) throws Exception{
 
         Task toBeDeletedTask = listOfTasks.get(index-1);
 
+        int sizeOfList = listOfTasks.size();
+
         listOfTasks.remove(index-1);
+
+        assert listOfTasks.size() < sizeOfList : "OOPS! Deleting task failed.";
 
         int size = listOfTasks.size();
 
@@ -114,7 +118,11 @@ public class TaskList {
 
         listOfTasks.add(task);
 
+        int initialSize = listOfTasks.size();
+
         int taskSize = listOfTasks.size();
+
+        assert taskSize > initialSize: "OOPS! Adding task failed.";
 
         String result = "Got it. I've added this task:"+"\n"+task.toString()+"\n"
                 +"Now you have " + taskSize + " tasks in the list."+"\n";

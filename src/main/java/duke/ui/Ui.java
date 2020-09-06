@@ -68,7 +68,7 @@ public class Ui {
             try{
                 command = input.nextLine();
 
-                if(command.equals("bye")){
+                if(command.contains("bye")){
 
                     exit();
 

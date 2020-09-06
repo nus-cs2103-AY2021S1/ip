@@ -22,7 +22,7 @@ public class Duke {
 
         TaskList taskList = Storage.read();
         Parser.setTaskList(taskList);
-        System.out.println(Parser.taskList);
+//        System.out.println(Parser.taskList);
         Ui ui = new Ui();
         ui.run();
     }

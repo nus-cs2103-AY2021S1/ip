@@ -42,11 +42,11 @@ public class Parser {
 
             return taskList.printTaskList();
 
-        }else if(command.equals("hi")){
+        }else if(command.contains("hi")){
 
             return "Hi!";
 
-        }else if(command.equals("bye")){
+        }else if(command.contains("bye")){
 
             return "Bye!";
 
@@ -55,6 +55,8 @@ public class Parser {
             String[] words = command.split(" ");
 
             int numberOfWords = words.length;
+
+            assert numberOfWords >= 1 : "Command is incomplete!";
 
             if(numberOfWords == 0){
                 throw new InvalidRequestException("Command is empty. Please enter a valid command.");
@@ -160,9 +162,11 @@ public class Parser {
 
                     TimeConverter timeConverter = new TimeConverter();
 
-                    String formattedDueDate = timeConverter.convertTime(dueDate);
+//                    String formattedDueDate = timeConverter.convertTime(dueDate);
 
-                    newTask = new Deadline(name, formattedDueDate);
+//                    newTask = new Deadline(name, formattedDueDate);
+
+                    newTask = new Deadline(name, dueDate);
 
                 }else{
 

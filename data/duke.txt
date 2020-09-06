@@ -1,2 +1,4 @@
-T | 1 | 444
-T | 1 | 4
+E | 0 | meeting | tonight 8pm 
+D | 0 | quiz | wednesday 2359 
+T | 0 | hw
+D | 0 | assignment | saturday
