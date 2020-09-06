@@ -100,6 +100,7 @@ public class TaskList {
     /**
      * Overloaded store that reads from save file
      * NOT depreciated
+     *
      * @param wholeLine each line in the save file
      */
     public void addTask(String wholeLine) {
@@ -202,6 +203,24 @@ public class TaskList {
         response.append(currentTask).append("\n");
         storage.remove(taskNumber);
         response.append("There are now ").append(storage.size()).append(" task(s) remaining.");
+        return response.toString();
+    }
+
+
+    public String getUpdateString(int taskNumber, String changeField, String changeTo) {
+        StringBuilder response = new StringBuilder("Updated task:");
+        Task currentTask = storage.get(taskNumber);
+        switch (changeField) {
+        case "name":
+            currentTask.updateName(changeTo);
+            break;
+        case "date":
+            currentTask.updateDate(changeTo);
+            break;
+        default:
+            return "Invalid change field, task not updated";
+        }
+        response.append(currentTask).append("\n");
         return response.toString();
     }
 }

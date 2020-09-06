@@ -115,6 +115,14 @@ public class Task {
         return date != null;
     }
 
+    public void updateName(String changeTo) {
+        name = changeTo;
+    }
+
+    public void updateDate(String changeTo) {
+        date = LocalDate.parse(changeTo);
+    }
+
     @Override
     public String toString() {
         if (date != null) {
