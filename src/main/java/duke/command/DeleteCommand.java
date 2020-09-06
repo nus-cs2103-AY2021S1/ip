@@ -20,6 +20,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(int taskNumber) {
         super(false);
         this.taskNumber = taskNumber;
+        assert taskNumber >= 0 : "taskNumber should not be less than 0";
     }
 
     /**
@@ -38,6 +39,7 @@ public class DeleteCommand extends Command {
                 + getTaskDescription(noOfTask)
                 + " in the list.";
         boolean shouldExit = getIsExit();
+        assert !shouldExit : "shouldExit should be false";
         tasks.removeTask(taskNumber);
         storage.save(tasks);
         return new CommandResponse(responseMessage, shouldExit);

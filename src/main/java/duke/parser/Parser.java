@@ -85,6 +85,7 @@ public class Parser {
      * @throws DukeException If user input is not valid.
      */
     public static Command parseDone(String input, TaskList tasks) throws DukeException {
+        assert input.startsWith("done") : "input should start with done";
         String[] splitInput = input.split(" ");
         if (splitInput.length != 2 || !splitInput[1].matches("[0-9]+")) {
             throw new InvalidDoneException();
@@ -161,6 +162,7 @@ public class Parser {
      * @throws DukeException If user input is not valid.
      */
     public static Command parseDelete(String input, TaskList tasks) throws DukeException {
+        assert input.startsWith("delete") : "input should start with delete";
         String[] splitInput = input.split(" ");
         if (splitInput.length != 2 || !splitInput[1].matches("[0-9]+")) {
             throw new InvalidDeleteException();
@@ -182,6 +184,7 @@ public class Parser {
      * @throws DukeException If user input is not valid.
      */
     public static Command parseRetrieve(String input) throws DukeException {
+        assert input.startsWith("retrieve") : "input should start with retrieve";
         try {
             String[] splitInput = input.split(" ");
             if (splitInput.length == 1) {
@@ -203,6 +206,7 @@ public class Parser {
      * @throws DukeException If user input is not valid.
      */
     private static Command parseFind(String input, TaskList tasks) throws DukeException {
+        assert input.startsWith("find") : "input should start with find";
         String[] splitInput = input.split(" ", 2);
         if (splitInput.length != 2 || splitInput[1].trim().equals("")) {
             throw new NoFindContentException();

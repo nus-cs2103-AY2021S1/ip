@@ -73,6 +73,7 @@ public class RetrieveCommand extends Command {
                         date.format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
             }
             boolean shouldExit = getIsExit();
+            assert !shouldExit : "shouldExit should be false";
             return new CommandResponse(responseMessage, shouldExit);
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateException();
