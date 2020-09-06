@@ -8,19 +8,16 @@ public class Parser {
     /**
      * Duke components required when handling user commands.
      */
-    private UI ui;
     private TaskList taskList;
     private DukeSaver saver;
 
     /**
      * Constructor for parsing system.
      *
-     * @param ui Duke's UI.
      * @param taskList List of tasks.
      * @param saver Saving system.
      */
-    public Parser(UI ui, TaskList taskList, DukeSaver saver) {
-        this.ui = ui;
+    public Parser(TaskList taskList, DukeSaver saver) {
         this.taskList = taskList;
         this.saver = saver;
     }
@@ -30,8 +27,10 @@ public class Parser {
      *
      * @param response User's command.
      * @throws DukeException Thrown when invalid commands are invoked.
+     *
+     * @return A string response.
      */
-    public void handleResponse(String response) throws DukeException {
+    public String handleResponse(String response) throws DukeException {
         String[] parsedResponse = response.split(" ", 2);
         Command command;
         try {
@@ -43,29 +42,22 @@ public class Parser {
         switch (command) {
         case BYE:
             saver.saveData(taskList);
-            ui.exit();
-            break;
+            System.exit(0);
+            return null;
         case LIST:
-            handleList();
-            break;
+            return handleList();
         case DONE:
-            handleDone(rest);
-            break;
+            return handleDone(rest);
         case TODO:
-            handleTodo(rest);
-            break;
+            return handleTodo(rest);
         case DEADLINE:
-            handleDeadline(rest);
-            break;
+            return handleDeadline(rest);
         case EVENT:
-            handleEvent(rest);
-            break;
+            return handleEvent(rest);
         case DELETE:
-            handleDelete(rest);
-            break;
+            return handleDelete(rest);
         case FIND:
-            handleFind(rest);
-            break;
+            return handleFind(rest);
         case INVALID:
             throw new DukeException("Unrecognized command!");
         default:
@@ -78,10 +70,9 @@ public class Parser {
      * tasks in the list and building a string.
      * Prints the final string.
      */
-    private void handleList() {
+    private String handleList() {
         if (taskList.isEmpty()) {
-            ui.print("You have no tasks!");
-            return;
+            return "You have no tasks!";
         }
 
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
@@ -89,7 +80,7 @@ public class Parser {
             sb.append((i + 1) + ". " + taskList.get(i) + "\n");
         }
         sb.setLength(sb.length() - 1);
-        ui.print(sb.toString());
+        return sb.toString();
     }
 
     /**
@@ -99,7 +90,7 @@ public class Parser {
      * @param rest The remaining string after the key command "done".
      * @throws DukeException Thrown when invalid format used.
      */
-    private void handleDone(String rest) throws DukeException {
+    private String handleDone(String rest) throws DukeException {
         if (rest == null) {
             throw new DukeException("Specify a task!");
         }
@@ -113,7 +104,7 @@ public class Parser {
             throw new DukeException("No such task!");
         }
         taskList.markTaskDone(taskDone);
-        ui.print("Nice! I've marked this task as done:\n" + taskList.get(taskDone));
+        return "Nice! I've marked this task as done:\n" + taskList.get(taskDone);
     }
 
     /**
@@ -122,13 +113,13 @@ public class Parser {
      * @param rest The remaining string after the key command "todo".
      * @throws DukeException Thrown when invalid format used.
      */
-    private void handleTodo(String rest) throws DukeException {
+    private String handleTodo(String rest) throws DukeException {
         if (rest == null) {
             throw new DukeException("Description of a todo cannot be empty!");
         }
         Todo todo = new Todo(rest);
         taskList.addTask(todo);
-        ui.print("Got it. I've added this task:\n" + todo + "\n" + taskList.taskSizeString());
+        return "Got it. I've added this task:\n" + todo + "\n" + taskList.taskSizeString();
     }
 
     /**
@@ -137,7 +128,7 @@ public class Parser {
      * @param rest The remaining string after the key command "deadline".
      * @throws DukeException Thrown when invalid format used.
      */
-    private void handleDeadline(String rest) throws DukeException {
+    private String handleDeadline(String rest) throws DukeException {
         if (rest == null) {
             throw new DukeException("Description of a deadline cannot be empty!");
         }
@@ -153,7 +144,7 @@ public class Parser {
         String by = byParsed[1];
         Deadline deadline = new Deadline(deadlineName, by);
         taskList.addTask(deadline);
-        ui.print("Got it. I've added this task:\n" + deadline + "\n" + taskList.taskSizeString());
+        return "Got it. I've added this task:\n" + deadline + "\n" + taskList.taskSizeString();
     }
 
     /**
@@ -162,7 +153,7 @@ public class Parser {
      * @param rest The remaining string after the key command "event".
      * @throws DukeException Thrown when invalid format used.
      */
-    private void handleEvent(String rest) throws DukeException {
+    private String handleEvent(String rest) throws DukeException {
         if (rest == null) {
             throw new DukeException("Description of an event cannot be empty!");
         }
@@ -178,7 +169,7 @@ public class Parser {
         String at = atParsed[1];
         Event event = new Event(eventName, at);
         taskList.addTask(event);
-        ui.print("Got it. I've added this task:\n" + event + "\n" + taskList.taskSizeString());
+        return "Got it. I've added this task:\n" + event + "\n" + taskList.taskSizeString();
     }
 
     /**
@@ -187,7 +178,7 @@ public class Parser {
      * @param rest The remaining string after the key command "delete", which is index of task.
      * @throws DukeException Thrown when invalid format used.
      */
-    private void handleDelete(String rest) throws DukeException {
+    private String handleDelete(String rest) throws DukeException {
         if (rest == null) {
             throw new DukeException("Specify a task!");
         }
@@ -202,7 +193,7 @@ public class Parser {
         }
         Task taskToDelete = taskList.get(deleteIndex);
         taskList.deleteTask(deleteIndex);
-        ui.print("Noted. I've removed this task:\n" + taskToDelete + "\n" + taskList.taskSizeString());
+        return "Noted. I've removed this task:\n" + taskToDelete + "\n" + taskList.taskSizeString();
     }
 
     /**
@@ -211,7 +202,7 @@ public class Parser {
      * @param rest Remaining string after the "find" command, which is query term.
      * @throws DukeException Thrown when no search term is given.
      */
-    private void handleFind(String rest) throws DukeException {
+    private String handleFind(String rest) throws DukeException {
         if (rest == null) {
             throw new DukeException("Specify a search term!");
         }
@@ -219,8 +210,7 @@ public class Parser {
         List<Task> matches = taskList.search(rest);
 
         if (matches.isEmpty()) {
-            ui.print("No matching task.");
-            return;
+            return "No matching task.";
         }
 
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
@@ -229,6 +219,6 @@ public class Parser {
             sb.append((i + 1) + "." + matches.get(i) + "\n");
         }
         sb.setLength(sb.length() - 1);
-        ui.print(sb.toString());
+        return sb.toString();
     }
 }
