@@ -40,57 +40,65 @@ public class Parser {
      * @throws DukeException If the userInput is invalid or missing.
      */
     public Command parse(String userInput, ArrayList<Task> tasks) throws DukeException {
+        String[] inputCommandAndArgument = userInput.split(" ", 2);
+        String command = inputCommandAndArgument[0];
+        String argument = inputCommandAndArgument.length == 2 ? inputCommandAndArgument[1] : "";
         if (userInput.equals("bye")) {
             return new ByeCommand();
         } else if (userInput.equals("list")) {
             return new ListCommand();
-        } else if (userInput.startsWith("done")) {
-            if (userInput.substring(4).isEmpty()) {
-                throw new MissingTaskIndexException();
-            }
-            int num = Integer.parseInt(userInput.substring(5));
-            if (num <= 0 || num > tasks.size()) {
-                throw new InvalidTaskIndexException();
-            }
+        } else if (command.equals("done") || command.equals("delete")) {
+            return parseDoneDelete(command, argument, tasks.size());
+        } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+            return parseAdd(command, argument);
+        } else if (command.equals("date")) {
+            return new DateCommand(LocalDate.parse(argument, FORMATTER_INPUT));
+        } else if (command.equals("find")) {
+            return new FindCommand(argument);
+        } else {
+            throw new InvalidDukeCommandException();
+        }
+    }
+
+    private Command parseDoneDelete(String command, String argument, int size) {
+        if (argument.isEmpty()) {
+            throw new MissingTaskIndexException();
+        }
+        int num = Integer.parseInt(argument);
+        if (num <= 0 || num > size) {
+            throw new InvalidTaskIndexException();
+        }
+        if (command.equals("done")) {
             return new DoneCommand(num - 1);
-        } else if (userInput.startsWith("delete")) {
-            if (userInput.substring(6).isEmpty()) {
-                throw new MissingTaskIndexException();
-            }
-            int num = Integer.parseInt(userInput.substring(7));
-            if (num <= 0 || num > tasks.size()) {
-                throw new InvalidTaskIndexException();
-            }
+        } else if (command.equals("delete")) {
             return new DeleteCommand(num - 1);
-        } else if (userInput.startsWith("todo")) {
-            if (userInput.substring(4).isEmpty()) {
-                throw new MissingTaskDescriptionException();
-            }
-            return new AddCommand(new ToDo(userInput.substring(5)));
-        } else if (userInput.startsWith("deadline")) {
-            if (userInput.substring(8).isEmpty()) {
-                throw new MissingTaskDescriptionException();
-            }
-            if (!userInput.contains("/by")) {
+        } else {
+            throw new InvalidDukeCommandException();
+        }
+    }
+
+    private Command parseAdd(String command, String argument) {
+        if (argument.isEmpty()) {
+            throw new MissingTaskDescriptionException();
+        }
+        if (command.equals("todo")) {
+            return new AddCommand(new ToDo(argument));
+        } else if (command.equals("deadline")) {
+            if (!argument.contains(" /by ")) {
                 throw new MissingDateTimeException();
             }
-            int pos = userInput.indexOf("/by");
-            LocalDate date = LocalDate.parse(userInput.substring(pos + 4), FORMATTER_INPUT);
-            return new AddCommand(new Deadline(userInput.substring(9, pos - 1), date));
-        } else if (userInput.startsWith("event")) {
-            if (userInput.substring(5).isEmpty()) {
-                throw new MissingTaskDescriptionException();
-            }
-            if (!userInput.contains("/at")) {
+            String[] argumentDescriptionAndDate = argument.split(" /by ");
+            String description = argumentDescriptionAndDate[0];
+            String date = argumentDescriptionAndDate[1];
+            return new AddCommand(new Deadline(description, LocalDate.parse(date, FORMATTER_INPUT)));
+        } else if (command.equals("event")) {
+            if (!argument.contains(" /at ")) {
                 throw new MissingDateTimeException();
             }
-            int pos = userInput.indexOf("/at");
-            LocalDate date = LocalDate.parse(userInput.substring(pos + 4), FORMATTER_INPUT);
-            return new AddCommand(new Event(userInput.substring(6, pos - 1), date));
-        } else if (userInput.startsWith("date")) {
-            return new DateCommand(LocalDate.parse(userInput.substring(5), FORMATTER_INPUT));
-        } else if (userInput.startsWith("find")) {
-            return new FindCommand(userInput.substring(5));
+            String[] argumentDescriptionAndDate = argument.split(" /at ");
+            String description = argumentDescriptionAndDate[0];
+            String date = argumentDescriptionAndDate[1];
+            return new AddCommand(new Event(description, LocalDate.parse(date, FORMATTER_INPUT)));
         } else {
             throw new InvalidDukeCommandException();
         }
@@ -104,18 +112,22 @@ public class Parser {
     public ArrayList<Task> parseSavedTaskList(ArrayList<String> savedTaskList) {
         ArrayList<Task> tasks = new ArrayList<>();
         for (String task : savedTaskList) {
-            if (task.startsWith("[T]")) {
-                tasks.add(new ToDo(isDone(task.substring(4, 5)), task.substring(7)));
-            } else if (task.startsWith("[D]")) {
-                int pos = task.indexOf("(by: ");
-                tasks.add(new Deadline(isDone(task.substring(4, 5)),
-                        task.substring(7, pos - 1),
-                        LocalDate.parse(task.substring(pos + 5, task.length() - 1), FORMATTER_DISPLAY)));
-            } else if (task.startsWith("[E]")) {
-                int pos = task.indexOf("(at: ");
-                tasks.add(new Event(isDone(task.substring(4, 5)),
-                        task.substring(7, pos - 1),
-                        LocalDate.parse(task.substring(pos + 5, task.length() - 1), FORMATTER_DISPLAY)));
+            String[] taskParts = task.split(" ", 2);
+            String type = "" + taskParts[0].charAt(1);
+            String status = "" + taskParts[0].charAt(4);
+            String argument = taskParts[1];
+            if (type.equals("T")) {
+                tasks.add(new ToDo(isDone(status), argument));
+            } else if (type.equals("D")) {
+                String[] argumentDescriptionAndDate = argument.split(" \\(by: ");
+                String description = argumentDescriptionAndDate[0];
+                String date = argumentDescriptionAndDate[1];
+                tasks.add(new Deadline(isDone(status), description, LocalDate.parse(date, FORMATTER_DISPLAY)));
+            } else if (type.equals("E")) {
+                String[] argumentDescriptionAndDate = argument.split(" \\(at: ");
+                String description = argumentDescriptionAndDate[0];
+                String date = argumentDescriptionAndDate[1];
+                tasks.add(new Event(isDone(status), description, LocalDate.parse(date, FORMATTER_DISPLAY)));
             }
         }
         return tasks;
