@@ -8,6 +8,7 @@ public enum TaskElement {
     DELETE("delete"),
     TAG("tag"),
     FIND("find"),
+    HELP("help"),
     FINDTAG("findtag");
 
     public final String label;
