@@ -10,6 +10,9 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    public static final String TODO_SAVE_SYMBOL = "T";
+    public static final String DEADLINE_SAVE_SYMBOL = "D";
+    public static final String EVENT_SAVE_SYMBOL = "E";
     /**
      * Constructs a Task object.
      * @param description Description of the given Task.
@@ -56,10 +59,10 @@ public abstract class Task {
     }
 
     /**
-     * Method for returning the letter representation of a Task.
+     * Method for returning the symbol used in the save file for a Task.
      * 'E' for Event, 'D' for Deadline etc.
      */
-    public abstract String getStringType();
+    public abstract String getSaveSymbol();
 
     /**
      * Returns a stored date/time in the form of an Optional.
@@ -68,12 +71,16 @@ public abstract class Task {
      */
     public abstract Optional<String> getDate();
 
+    /**
+     * Returns true if description contains the given keywords.
+     * @param keyWords Keywords of user search.
+     */
+    public boolean contains(String keyWords) {
+        return description.contains(keyWords);
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.getDescription();
-    }
-
-    public boolean contains(String keyWords) {
-        return description.contains(keyWords);
     }
 }

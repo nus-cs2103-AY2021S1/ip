@@ -34,8 +34,8 @@ public class Deadline extends Task {
      * Returns the letter D for writing to hard disk file.
      */
     @Override
-    public String getStringType() {
-        return "D";
+    public String getSaveSymbol() {
+        return Task.DEADLINE_SAVE_SYMBOL;
     }
 
     /**
@@ -48,7 +48,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
+        return "[" + Task.DEADLINE_SAVE_SYMBOL + "]" + super.toString() + " (by: " +
                 byLocalDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

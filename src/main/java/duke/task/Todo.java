@@ -20,8 +20,8 @@ public class Todo extends Task {
      * Returns the letter T for writing to hard disk file.
      */
     @Override
-    public String getStringType() {
-        return "T";
+    public String getSaveSymbol() {
+        return Task.TODO_SAVE_SYMBOL;
     }
 
     /**
@@ -34,6 +34,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[" + Task.TODO_SAVE_SYMBOL + "]" + super.toString();
     }
 }
