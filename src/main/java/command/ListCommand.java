@@ -4,6 +4,8 @@ import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
+import java.util.stream.Stream;
+
 /**
  * ListCommand would execute the program when user specify
  * "list" as the command. This would show all the existing
@@ -30,7 +32,7 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder sb = new StringBuilder();
-
+        
         for (int i = 0; i < tasks.size(); i++) {
             boolean isLastTask = i != tasks.size() - 1;
             if (isLastTask) {
