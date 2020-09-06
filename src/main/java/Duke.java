@@ -6,18 +6,18 @@ import storage.Storage;
 import tasklist.TaskList;
 
 public class Duke {
-    private Storage stores;
-    private TaskList tasks;
+    private Storage dukeStores;
+    private TaskList dukeTasks;
 
     /**
      * default constructor for launcher
      */
     public Duke() {
-        this.stores = new Storage("./data/duke.txt");
+        this.dukeStores = new Storage("./data/duke.txt");
         try {
-            this.tasks = new TaskList(stores);
+            this.dukeTasks = new TaskList(dukeStores);
         } catch (Exception e) {
-            this.tasks = new TaskList();
+            this.dukeTasks = new TaskList();
         }
     }
 
@@ -26,14 +26,14 @@ public class Duke {
      * @param filePath save file path
      */
     public Duke(String filePath) {
-        this.stores = new Storage(filePath);
+        this.dukeStores = new Storage(filePath);
         try {
             echo("Loading started");
-            this.tasks = new TaskList(stores);
+            this.dukeTasks = new TaskList(dukeStores);
             echo("Loading ended");
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            this.tasks = new TaskList();
+            this.dukeTasks = new TaskList();
         }
     }
 
@@ -42,16 +42,16 @@ public class Duke {
      */
     public void run() {
         welcome();
-        Parser.accept(tasks, stores);
+        Parser.accept(dukeTasks, dukeStores);
     }
 
-    public Storage getStores() {
-        return stores;
+    public Storage getDukeStores() {
+        return dukeStores;
     }
 
     /**
-     * It's psvm, what do you want?
-     * @param args Please it's just psvm
+     * Launches duke and tells it where save file is located
+     * @param args possible full save file path
      */
     public static void main(String[] args) {
         if (args.length == 0) {
@@ -63,6 +63,6 @@ public class Duke {
     }
 
     String getResponse(String input) {
-        return Parser.response(tasks, stores, input);
+        return Parser.response(dukeTasks, dukeStores, input);
     }
 }

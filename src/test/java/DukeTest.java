@@ -13,6 +13,6 @@ public class DukeTest {
         // directory is in test now
         // go up test -> src -> iP -> data -> duke.txt
         Duke testDuke = new Duke("../../data/duke.txt");
-        assertEquals(testDuke.getStores(), new Storage("../../data/duke.txt"));
+        assertEquals(testDuke.getDukeStores(), new Storage("../../data/duke.txt"));
     }
 }

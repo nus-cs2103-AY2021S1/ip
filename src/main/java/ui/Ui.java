@@ -53,7 +53,7 @@ public class Ui {
      * @param storage where the tasks are stored
      * @return String of task added
      */
-    public static String stringTaskAdded(Task task, List<Task> storage) {
+    public static String getTaskAddedString(Task task, List<Task> storage) {
         return "Task added: \n"
                 + task + "\n"
                 + "You now have " + storage.size() + " task(s).";
@@ -80,7 +80,7 @@ public class Ui {
      * @param storage where tasks are stored
      * @return String of list of tasks
      */
-    public static String stringListOut(ArrayList<Task> storage) {
+    public static String getListOutString(ArrayList<Task> storage) {
         StringBuilder response = new StringBuilder("Here's your tasks \n");
         for (int i = 0; i < storage.size(); i++) {
             // list starts from 1
@@ -114,7 +114,7 @@ public class Ui {
      * @param storage where tasks are stored
      * @return
      */
-    public static String stringFilterList(String words, ArrayList<Task> storage) {
+    public static String getFilterListString(String words, ArrayList<Task> storage) {
         StringBuilder response = new StringBuilder("Here's your matching tasks \n");
         for (int i = 0; i < storage.size(); i++) {
             // list starts from 1

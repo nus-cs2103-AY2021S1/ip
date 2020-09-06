@@ -2,16 +2,20 @@ package parser;
 
 import static ui.Ui.echo;
 import static ui.Ui.filterList;
+import static ui.Ui.getListOutString;
 import static ui.Ui.line;
 import static ui.Ui.listOut;
-import static ui.Ui.stringFilterList;
-import static ui.Ui.stringListOut;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import data.task.Task;
+import parser.commands.DeleteParser;
+import parser.commands.DoneParser;
+import parser.commands.DueParser;
+import parser.commands.FindParser;
+import parser.commands.TaskParser;
 import storage.Storage;
 import tasklist.TaskList;
 import ui.Ui;
@@ -22,6 +26,7 @@ public class Parser {
     }
 
     /**
+     * depreciated method
      * accepts user inputs
      * @param tl list of current tasks
      * @param stores deals with location of storage file
@@ -122,7 +127,7 @@ public class Parser {
                         // whitespace in front of nextLine
                         if (multiWord.hasNextLine()) {
                             String remainingWords = multiWord.nextLine().trim();
-                            tl.store(firstWord, remainingWords);
+                            tl.addTask(firstWord, remainingWords);
                             // save to save file
                             stores.save(tl.getStorage());
                         } else {
@@ -158,98 +163,29 @@ public class Parser {
             if (output.equals("bye")) {
                 return "Ciao!";
             } else if (output.equals("list")) {
-                return stringListOut(tl.getStorage());
+                return getListOutString(tl.getStorage());
             } else {
                 Scanner multiWord = new Scanner(output);
                 // can't use enums here, firstWord can be literally anything
                 String firstWord = multiWord.next();
-                // wow intelliJ is a better programmer than i'll ever be
                 switch (firstWord) {
                 case "done": {
-                    String index;
-                    try {
-                        if (multiWord.hasNext()) {
-                            index = multiWord.next();
-                        } else {
-                            throw Ui.DukeException.empty("done");
-                        }
-                    } catch (Ui.DukeException e) {
-                        return e.getMessage();
-                    }
-                    int intIndex = Integer.parseInt(index);
-                    try {
-                        if (intIndex <= tl.getStorage().size() && intIndex > 0) {
-                            String returnString = tl.stringMarkComplete(intIndex - 1);
-                            // save to save file
-                            stores.save(tl.getStorage());
-                            return returnString;
-                        } else {
-                            throw Ui.DukeException.outOfBounds(intIndex);
-                        }
-                    } catch (Ui.DukeException e) {
-                        return e.getMessage();
-                    }
+                    return DoneParser.parse(multiWord, tl, stores);
                 }
                 case "delete": {
-                    String index = multiWord.next();
-                    int intIndex = Integer.parseInt(index);
-                    try {
-                        if (intIndex <= tl.getStorage().size() && intIndex > 0) {
-                            String returnString = tl.stringDelete(intIndex - 1);
-                            // save to save file
-                            stores.save(tl.getStorage());
-                            return returnString;
-                        } else {
-                            throw Ui.DukeException.outOfBounds(intIndex);
-                        }
-                    } catch (Ui.DukeException e) {
-                        return e.getMessage();
-                    }
+                    return DeleteParser.parse(multiWord, tl, stores);
                 }
                 case "find": {
-                    try {
-                        if (multiWord.hasNextLine()) {
-                            String remainingWords = multiWord.nextLine().trim();
-                            return stringFilterList(remainingWords, tl.getStorage());
-                        } else {
-                            throw Ui.DukeException.empty("find");
-                        }
-                    } catch (Ui.DukeException e) {
-                        return e.getMessage();
-                    }
+                    return FindParser.parse(multiWord, tl);
                 }
                 case "due": {
-                    try {
-                        LocalDate dueDate = LocalDate.parse(multiWord.nextLine().trim());
-                        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
-                        StringBuilder response = new StringBuilder("These tasks are due: \n");
-                        for (Task task: tl.getDateStorage().get(dueDate.format(dateFormat))) {
-                            response.append(task).append("\n");
-                        }
-                        return response.toString();
-                    } catch (Exception e) {
-                        // time can't be parsed
-                        return e.getMessage();
-                    }
+                    return DueParser.parse(multiWord, tl);
                 }
                 // it's a task
                 case "todo":
                 case "deadline":
                 case "event":
-                    try {
-                        // whitespace in front of nextLine
-                        if (multiWord.hasNextLine()) {
-                            String remainingWords = multiWord.nextLine().trim();
-                            String returnString = tl.stringStore(firstWord, remainingWords);
-                            // save to save file
-                            stores.save(tl.getStorage());
-                            return returnString;
-                        } else {
-                            throw Ui.DukeException.empty(firstWord);
-                        }
-                    } catch (Ui.DukeException e) {
-                        return e.getMessage();
-                    }
+                    return TaskParser.parse(firstWord, multiWord, tl, stores);
                 // invalid order
                 default:
                     // skip the try catch block

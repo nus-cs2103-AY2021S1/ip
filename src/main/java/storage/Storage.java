@@ -71,7 +71,7 @@ public class Storage {
             File data = new File(path);
             Scanner dataScan = new Scanner(data);
             while (dataScan.hasNextLine()) {
-                tl.store(dataScan.nextLine());
+                tl.addTask(dataScan.nextLine());
             }
         } catch (Exception e) {
             System.out.println("save file does not exist, nothing loaded");

@@ -1,9 +1,8 @@
 [T][?] dshaoudhuas
-[E][X] dhsoaudhuoa
 [D][X] dshaodhuas  @  Sep 09 1999
 [T][?] 123
 [T][X] 1234
-[T][X] 12345
+[T][?] 12345
 [T][X] 1234
-[T][X] 12345
 [D][X] abcde  @  Sep 08 1999
+[T][X] 987
