@@ -1,5 +1,6 @@
 package dev.jingyen.duke.parser;
 
+import dev.jingyen.duke.Command;
 import dev.jingyen.duke.model.Deadline;
 import dev.jingyen.duke.model.Event;
 import dev.jingyen.duke.model.Task;
@@ -94,16 +95,16 @@ public class TaskParser {
      * @throws InvalidTaskException if the input is malformed
      */
     // TODO: Consider some cleaner way of validating, perhaps a factory method for each dev.jingyen.duke.model.Task
-    public static Task parseInput(String command, String input) throws InvalidTaskException {
+    public static Task parseInput(Command command, String input) throws InvalidTaskException {
         switch (command) {
-        case "todo":
+        case TODO:
             String[] todoDetails = input.split("todo ");
             if (todoDetails.length < 2) {
                 throw new InvalidTaskException("😡 I have no idea what you want to do.");
             }
             String taskName = todoDetails[1];
             return new Todo(taskName);
-        case "deadline":
+        case DEADLINE:
             String[] deadlineDetails = input.split("deadline | /by ");
             if (deadlineDetails.length < 2) {
                 throw new InvalidTaskException("What is it you want to do?");
@@ -112,7 +113,7 @@ public class TaskParser {
                 throw new InvalidTaskException("What's your deadline? You have to tell me, you know.");
             }
             return TaskParser.parseDeadline(false, deadlineDetails[1], deadlineDetails[2]);
-        case "event":
+        case EVENT:
             String[] eventDetails = input.split("event | /at ");
             if (eventDetails.length < 2) {
                 throw new InvalidTaskException("What is it you want to do?");

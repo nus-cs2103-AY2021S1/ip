@@ -100,15 +100,15 @@ public class Duke {
     private String handleCommand(String input) {
         try {
             String[] tokens = input.split(" ");
-            String command = tokens[0].toLowerCase();
+            Command command = Command.valueOf(tokens[0].toUpperCase());
             switch (command) {
-            case "list": // show tasks available
+            case LIST: // show tasks available
                 return ui.displayTasks(tasks.getTasks());
-            case "find":
+            case FIND:
                 String term = input.substring("find".length()).strip();
                 List<Task> matchingTasks = tasks.searchTasks(term);
                 return ui.displayMatchingTasks(matchingTasks);
-            case "done": {
+            case DONE: {
                 if (tokens.length < 2) {
                     throw new InvalidInputException("Um, you need to tell me what it is you've done.");
                 }
@@ -119,7 +119,7 @@ public class Duke {
                         "Okay. So you've done:",
                         task.toString());
             }
-            case "delete":
+            case DELETE:
                 int index = Integer.parseInt(tokens[1]) - 1;
                 Task task = tasks.getTask(index);
                 tasks.deleteTask(index);
@@ -127,21 +127,27 @@ public class Duke {
                         "Right, you no longer want me to track:",
                         task.toString(),
                         ui.getTasksLeftMessage(tasks.tasksCount()));
-            case "todo":
-            case "deadline":
-            case "event": // it's a new task
+            case TODO:
+                // Fallthrough
+            case DEADLINE:
+                // Fallthrough
+            case EVENT: // it's a new task
                 return addTask(command, input);
-            case "bye":
+            case BYE: {
+                storage.saveTasks(tasks.getTasks());
                 return ui.displayGoodbye();
+            }
             default:
                 return ui.displayMessages("Um, I don't get what you're saying.");
             }
-        } catch (InvalidInputException e) {
+        } catch (IllegalArgumentException e) {
+            return ui.displayMessages("Um, I don't get what you're saying.");
+        } catch (InvalidInputException | IOException e) {
             return ui.displayMessages(e.getMessage());
         }
     }
 
-    private String addTask(String command, String input) throws InvalidTaskException {
+    private String addTask(Command command, String input) throws InvalidTaskException {
         Task task = TaskParser.parseInput(command, input);
         tasks.addTask(task);
         return ui.displayMessages(
