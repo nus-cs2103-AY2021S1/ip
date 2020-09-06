@@ -55,22 +55,23 @@ public class Parser {
         }
     }
 
-    private static AddCommand parseAddCommand(CommandType taskType, String commandArg) throws DukeException {
-        if (commandArg == null) {
+    private static AddCommand parseAddCommand(CommandType taskType, String taskDetail) throws DukeException {
+        if (taskDetail == null) {
             throw new DukeException("You have to tell me what's your task!");
         }
+
         switch(taskType) {
         case TODO:
-            String[] todoContents = {commandArg};
+            String[] todoContents = {taskDetail};
             return new AddCommand(taskType, todoContents);
         case DEADLINE:
-            String[] deadlineContents = commandArg.split(" /by ");
+            String[] deadlineContents = taskDetail.split(" /by ");
             if (deadlineContents.length < 2) {
                 throw new DukeException("You need to tell me when this task is due!");
             }
             return new AddCommand(taskType, deadlineContents);
         case EVENT:
-            String[] eventContents = commandArg.split( " /at ");
+            String[] eventContents = taskDetail.split( " /at ");
             if (eventContents.length < 2) {
                 throw new DukeException("You need to tell me when this event is happening!");
             }
