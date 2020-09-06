@@ -12,6 +12,7 @@ import duke.tasks.TaskManager;
 public class CompleteCommand extends Command {
     /**
      * Marks a task as complete.
+     * @param input the user input
      * @return <code>true</code>
      * @throws DukeException if an invalid task number was given by the user.
      */
