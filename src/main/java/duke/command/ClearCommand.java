@@ -25,9 +25,9 @@ public class ClearCommand extends Command {
      * @return message indicating that the task list was successfully cleared
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public CommandResult execute(TaskList tasks, Storage storage) {
         tasks.deleteAll();
-        storage.save(tasks);
-        return Output.clearedAllTasksMessage();
+        storage.save(tasks.getTasks());
+        return new CommandResult(Output.clearedAllTasksMessage());
     }
 }

@@ -29,10 +29,10 @@ public class DeleteCommand extends Command {
      * @throws InvalidIndexException if the given task number does not exist in the list
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) throws InvalidIndexException {
+    public CommandResult execute(TaskList tasks, Storage storage) throws InvalidIndexException {
         int taskNumber = Integer.parseInt(fullCommand.substring(7));
         Task task = tasks.delete(taskNumber);
-        storage.save(tasks);
-        return Output.deletedTaskMessage(task, tasks);
+        storage.save(tasks.getTasks());
+        return new CommandResult(Output.deletedTaskMessage(task, tasks));
     }
 }

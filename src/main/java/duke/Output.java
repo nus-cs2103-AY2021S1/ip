@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Output {
     public static String addedTaskMessage(Task task, TaskList tasks) {
         return "sure thing! i have added the following task to your list:\n    " +
-                task + "\n" + tasks.numberOfTasks();
+                task + "\n" + Output.numberOfTasksMessage(tasks.size());
     }
 
 
@@ -20,13 +20,13 @@ public class Output {
     public static String deletedTaskMessage(Task deletedTask, TaskList tasks) {
         return "of course! i have removed this task: \n    " +
                 deletedTask + "\n" +
-                tasks.numberOfTasks();
+                Output.numberOfTasksMessage(tasks.size());
     }
 
     public static String markedTaskAsDoneMessage(Task deletedTask, TaskList tasks) {
         return "yay! i have marked this task as done: \n    " +
                 deletedTask + "\n" +
-                tasks.numberOfTasks();
+                Output.numberOfTasksMessage(tasks.size());
     }
 
     public static String welcomeMessage() {
@@ -41,18 +41,14 @@ public class Output {
     }
 
     public static String matchingTasksMessage(ArrayList<Task> matchingTasks) {
-        StringBuilder sb = new StringBuilder();
-
+        String string;
         if (matchingTasks.size() == 0) {
-            sb.append("oh dear :-( there are no tasks matching the given search");
+            string = "oh dear :-( there are no tasks matching your search";
         } else {
-            sb.append("got it! here are the matching tasks in your list:\n");
-
-            for (int i = 0; i < matchingTasks.size(); i++) {
-                sb.append(i+1).append(". ").append(matchingTasks.get(i)).append("\n");
-            }
+            string = "got it! here are the tasks matching your search:\n" +
+                    Output.tasksAsStringMessage(matchingTasks);
         }
-        return sb.toString().trim();
+        return string;
     }
 
     public static String helpMessage() {
@@ -73,21 +69,34 @@ public class Output {
     }
 
     public static String listAllTasksMessage(ArrayList<Task> tasks) {
-        StringBuilder sb = new StringBuilder();
-
+        String string;
         if (tasks.size() == 0) {
-            sb.append("hurray! there are no tasks in your list");
+            string = "hurray! there are no tasks in your list";
         } else {
-            sb.append("okies! here are the tasks in your list:\n");
-
-            for (int i = 0; i < tasks.size(); i++) {
-                sb.append(i+1).append(". ").append(tasks.get(i)).append("\n");
-            }
+            string = "okies! here are the tasks in your list:\n" +
+                    Output.tasksAsStringMessage(tasks);
         }
-        return sb.toString().trim();
+        return string;
+    }
+
+    /**
+     * outputs a string representation of the number of tasks that the array list contains
+     * @return a string describing the number of tasks that the array list contains
+     */
+    public static String numberOfTasksMessage(int n) {
+        return "you have [" + n + "] task(s) in your list";
     }
 
     public static String loadingErrorMessage() {
-        return "There was an error loading the file";
+        return "there was an error loading the file";
+    }
+
+    public static String tasksAsStringMessage(ArrayList<Task> tasks) {
+        String tasksString = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            tasksString += String.format("%d", i+1) + ". " +
+                    tasks.get(i) + "\n";
+        }
+        return tasksString.trim();
     }
 }

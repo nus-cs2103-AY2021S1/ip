@@ -25,8 +25,8 @@ public class ExitCommand extends Command {
      * @return message indicating the application has been successfully shut down
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public CommandResult execute(TaskList tasks, Storage storage) {
         Platform.exit();
-        return Output.exitMessage();
+        return new CommandResult(Output.exitMessage(), true);
     }
 }

@@ -24,7 +24,7 @@ public class HelpCommand extends Command {
      * @return the list of commands available to the user
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
-        return Output.helpMessage();
+    public CommandResult execute(TaskList tasks, Storage storage) {
+        return new CommandResult(Output.helpMessage());
     }
 }

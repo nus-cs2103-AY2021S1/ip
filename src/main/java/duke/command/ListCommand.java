@@ -27,8 +27,8 @@ public class ListCommand extends Command {
      * @return a string representation of the full list of tasks
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
-        ArrayList<Task> taskList = tasks.getTaskList();
-        return Output.listAllTasksMessage(taskList);
+    public CommandResult execute(TaskList taskList, Storage storage) {
+        ArrayList<Task> tasks = taskList.getTasks();
+        return new CommandResult(Output.listAllTasksMessage(tasks));
     }
 }

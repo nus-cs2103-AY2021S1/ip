@@ -31,11 +31,11 @@ public class FindCommand extends Command {
      * @throws EmptyDescriptionException if the query string given by the user is empty
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) throws EmptyDescriptionException {
+    public CommandResult execute(TaskList tasks, Storage storage) throws EmptyDescriptionException {
         if (fullCommand.length() < 6) {
             throw new EmptyDescriptionException("oh dear :-( the description of 'find' cannot be empty");
         }
         ArrayList<Task> matchingTasks = tasks.getMatchingTasks(fullCommand.substring(5));
-        return Output.matchingTasksMessage(matchingTasks);
+        return new CommandResult(Output.matchingTasksMessage(matchingTasks));
     }
 }

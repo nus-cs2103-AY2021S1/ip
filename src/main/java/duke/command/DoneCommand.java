@@ -28,12 +28,10 @@ public class DoneCommand extends Command {
      * @return message indicating task was successfully marked as done
      * @throws InvalidIndexException if the given task number does not exist in the list
      */
-    public String execute(TaskList tasks, Storage storage) throws InvalidIndexException {
+    public CommandResult execute(TaskList tasks, Storage storage) throws InvalidIndexException {
         int taskNumber = Integer.parseInt(fullCommand.substring(5));
-
         Task task = tasks.done(taskNumber);
-
-        storage.save(tasks);
-        return Output.markedTaskAsDoneMessage(task, tasks);
+        storage.save(tasks.getTasks());
+        return new CommandResult(Output.markedTaskAsDoneMessage(task, tasks));
     }
 }

@@ -24,7 +24,7 @@ public class InvalidCommand extends Command {
      * @return message indicating that the given command cannot be understood
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
-        return Output.invalidCommandMessage();
+    public CommandResult execute(TaskList tasks, Storage storage) {
+        return new CommandResult(Output.invalidCommandMessage());
     }
 }
