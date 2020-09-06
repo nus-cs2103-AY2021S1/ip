@@ -13,7 +13,6 @@ import duke.tasks.Task;
 public class Command {
     private String task;
     private String action;
-    private boolean end;
 
     /**
      * Initializes a Command object
@@ -22,7 +21,6 @@ public class Command {
      * @param action The type of action take as given by the task.
      */
     public Command(String task, String action) {
-        this.end = false;
         this.task = task;
         this.action = action;
     }
@@ -37,7 +35,6 @@ public class Command {
         if (action.equals("invalid")) {
             return ui.showInvalidCommand();
         } else if (action.equals("bye")) {
-            this.end = true;
             return ui.showEnd();
         } else if (action.equals("list")) {
             return ui.showList(taskList.getList());
