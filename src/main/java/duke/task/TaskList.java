@@ -14,7 +14,7 @@ public class TaskList {
 
     private TaskList() {
         this.tasklist = new ArrayList<>();
-        this.taskPriority = new PriorityQueue<>();
+        this.taskPriority = new PriorityQueue<>(new TaskComparator());
     }
 
     /**

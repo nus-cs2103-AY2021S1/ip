@@ -8,7 +8,7 @@ public class TaskComparator implements Comparator<Task> {
     public int compare(Task task1, Task task2) {
         if (task1.isTaskImportant() && !task2.isTaskImportant()) {
             return -1;
-        } else if (!task1.isTaskImportant() && task2.isTaskImportant()){
+        } else if (!task1.isTaskImportant() && task2.isTaskImportant()) {
             return 1;
         } else if (task1.getDate().isBefore(task2.getDate())) {
             return -1;
