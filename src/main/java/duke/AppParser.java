@@ -39,6 +39,8 @@ public class AppParser extends Parser {
         while (command[ptr].equals("")) {
             ptr++;
         }
+      
+        assert !command[ptr].equals("") : "Pointer still points to empty string";
 
         switch (command[ptr]) {
             case "bye":

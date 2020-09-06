@@ -11,7 +11,7 @@ public class Storage {
     /**
      * Construct a Storage object
      * @param filePath the file path
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException fileNotFoundException
      */
     public Storage(String filePath) throws FileNotFoundException {
         this.filePath = filePath;
