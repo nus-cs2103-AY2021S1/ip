@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.util.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import duke.util.Storage;
 
 /**
  * Class representing an exit command.
@@ -10,9 +10,9 @@ import duke.ui.Ui;
 public class ExitCommand extends Command {
     /**
      * Initiates the termination of the bot.
-     * @param tasks List of tasks.
-     * @param ui Ui object.
-     * @param storage Storage object.
+     * @param tasks {@link TaskList} containing list of tasks.
+     * @param ui {@link Ui} object.
+     * @param storage {@link Storage} object.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

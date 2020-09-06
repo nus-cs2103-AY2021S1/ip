@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -18,42 +19,33 @@ import duke.task.ToDo;
  */
 public class Storage {
 
-    private File dataDirectory;
-    private String dataDirectoryPath;
-    private File dataFile;
-    private String dataFilePath;
+    private final File dataDirectory;
+    private final File dataFile;
+    private final String dataFilePath;
 
     /**
-     * Initialises a new Storage object.
+     * Initialises a new {@code Storage} object.
      */
     public Storage() {
-        dataDirectoryPath = Paths.get("data").toString();
+        String dataDirectoryPath = Paths.get("data").toString();
         dataDirectory = new File(dataDirectoryPath);
         dataFilePath = Paths.get("data", "duke.txt").toString();
         dataFile = new File(dataFilePath);
     }
 
-    private void alertDirectoryNotFound() {
-        System.out.println("Cannot access data directory.");
-    }
-
-    private void alertCorruptedData() {
-        System.out.println("Data file is corrupted.");
-    }
-
     /**
-     * Populates a TaskList with data saved in the hard disk. If the data directory or file does not exist,
+     * Populates a {@link TaskList} with data saved in the hard disk. If the data directory or file does not exist,
      * it will be created.
      * @param taskList List to be populated.
+     * @throws DukeException If the data fails to load.
      */
-    public void loadData(TaskList taskList) {
+    public void loadData(TaskList taskList) throws DukeException {
         dataDirectory.mkdirs();
         boolean toLoadFromDataFile;
 
         try {
             toLoadFromDataFile = !dataFile.createNewFile();
         } catch (IOException e) {
-            alertDirectoryNotFound();
             toLoadFromDataFile = false;
         }
 
@@ -64,117 +56,43 @@ public class Storage {
                 while ((line = br.readLine()) != null) {
 
                     String[] taskData = line.split("\\|");
-                    String taskType = taskData[1];
-                    Task task = null;
+                    String taskType = taskData[0];
+                    Task task;
 
                     switch (taskType) {
                     case "T":
-                        task = new ToDo(taskData[0], Boolean.parseBoolean(taskData[2]), taskData[3]);
+                        task = new ToDo(Boolean.parseBoolean(taskData[1]), taskData[2]);
                         break;
                     case "D":
-                        task = new Deadline(taskData[0], Boolean.parseBoolean(taskData[2]), taskData[3], taskData[4]);
+                        task = new Deadline(Boolean.parseBoolean(taskData[1]), taskData[2], taskData[3]);
                         break;
                     case "E":
-                        task = new Event(taskData[0], Boolean.parseBoolean(taskData[2]), taskData[3], taskData[4]);
+                        task = new Event(Boolean.parseBoolean(taskData[1]), taskData[2], taskData[3]);
                         break;
+                    default:
+                        throw new DukeException("Invalid argument detected in data file");
                     }
                     taskList.addTask(task);
                 }
             } catch (IOException | ArrayIndexOutOfBoundsException e) {
-                alertCorruptedData();
+                e.printStackTrace();
             }
         }
     }
 
-    private void appendData(String data) {
-        assert data != null;
-
-        try {
-            FileWriter writer = new FileWriter(dataFilePath, true);
-            writer.write(data);
-            writer.close();
-        } catch (IOException e) {
-            alertCorruptedData();
-        }
-    }
-
-    private void overwriteData(String data) {
-        assert data != null;
-
+    /**
+     * Saves the contents of a {@link TaskList} to the data saved in the hard disk.
+     * @param tasks List to be saved.
+     * @throws DukeException If the data fails to save.
+     */
+    public void saveData(TaskList tasks) throws DukeException {
         try {
             FileWriter writer = new FileWriter(dataFilePath);
-            writer.write(data);
+            System.out.println(tasks.serializeList());
+            writer.write(tasks.serializeList());
             writer.close();
         } catch (IOException e) {
-            alertCorruptedData();
-        }
-    }
-
-    public void saveTodo(ToDo task) {
-        assert task != null;
-
-        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.isDone() + "|"
-                + task.getDescription() + "\n";
-        appendData(line);
-    }
-
-    public void saveDeadline(Deadline task) {
-        assert task != null;
-
-        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.isDone() + "|"
-                + task.getDescription() + "|" + task.getTime() + "\n";
-        appendData(line);
-    }
-
-    public void saveEvent(Event task) {
-        assert task != null;
-
-        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.isDone() + "|"
-                + task.getDescription() + "|" + task.getTime() + "\n";
-        appendData(line);
-    }
-
-    public void doneTask(Task task) {
-        assert task != null;
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(dataFilePath));
-            StringBuilder newData = new StringBuilder();
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                if (line.contains(task.getUniqueId())) {
-                    line = line.replaceFirst("false", "true");
-                }
-                newData.append(line).append("\n");
-            }
-
-            br.close();
-            overwriteData(newData.toString());
-        } catch (Exception e) {
-            alertCorruptedData();
-        }
-
-    }
-
-    public void deleteTask(Task task) {
-        assert task != null;
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(dataFilePath));
-            StringBuilder newData = new StringBuilder();
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                if (!line.contains(task.getUniqueId())) {
-                    newData.append(line).append("\n");
-                }
-            }
-
-            br.close();
-            overwriteData(newData.toString());
-        } catch (Exception e) {
-            alertCorruptedData();
+            throw new DukeException("Failed to write to data file.");
         }
     }
 }

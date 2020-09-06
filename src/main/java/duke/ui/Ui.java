@@ -7,6 +7,7 @@ import duke.exception.DukeException;
  */
 public class Ui {
     private String nextMessage;
+  
     /**
      * Show a greeting message to the user.
      */
@@ -27,13 +28,13 @@ public class Ui {
     }
 
     /**
-     * Shows an error message from a DukeException to the user.
+     * Shows an error message from a {@link DukeException} to the user.
      * @param e Exception containing the error message.
      */
     public void showError(DukeException e) {
         botOutput(e.getMessage());
     }
-    
+
     public void botOutput(String message) {
         this.nextMessage = message;
     }
@@ -41,7 +42,7 @@ public class Ui {
     public void botOutput(StringBuilder message) {
         botOutput(message.toString());
     }
-    
+
     public String getNextMessage() {
         return this.nextMessage;
     }

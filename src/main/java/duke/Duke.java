@@ -8,22 +8,26 @@ import duke.util.Parser;
 import duke.util.Storage;
 
 /**
- * Main class of the Duke bot.
+ * Class representing the Duke chatbot.
  */
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Ui ui;
 
     /**
-     * Initialises a new Duke bot instance.
+     * Initialises a new {@code Duke} chatbot.
      */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
         this.tasks = new TaskList();
 
-        tasks.loadFromStorage(storage);
+        try {
+            tasks.loadFromStorage(storage);
+        } catch (DukeException e) {
+            ui.showError(e);
+        }
     }
 
     /**

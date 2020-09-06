@@ -1,9 +1,10 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.util.Storage;
-import duke.ui.Ui;
 import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.util.Storage;
+
+
 
 /**
  * Class representing a find command.
@@ -12,29 +13,23 @@ public class FindCommand extends Command {
 
     private String keyword;
 
-    /*
-     * Creates a new FindCommand.
+    /**
+     * Creates a new {@code FindCommand}.
      * @param keyword Keyword for the search.
-     * @throws DukeException If no keyword is provided.
      */
-    public FindCommand(String keyword) throws DukeException {
-        if (keyword == null) {
-            throw new DukeException("You have to tell me what to search for!");
-        }
+    public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
     /**
      * Searches and lists tasks with description containing the keyword.
-     * @param tasks List of tasks.
-     * @param ui Ui object.
-     * @param storage Storage object.
-     * @throws DukeException
+     * @param tasks {@link TaskList} containing list of tasks.
+     * @param ui {@link Ui} object.
+     * @param storage {@link Storage} object.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         assertArgumentsValid(tasks, ui, storage);
-
         ui.botOutput(tasks.listTasksWithKeyword(keyword));
     }
 }

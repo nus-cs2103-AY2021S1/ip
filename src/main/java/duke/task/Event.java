@@ -11,18 +11,17 @@ import java.time.format.FormatStyle;
  */
 public class Event extends Task {
 
-    private String at;
     private LocalDate taskDate;
     private LocalTime taskTime;
 
     /**
-     * Creates a brand new event.
+     * Creates a brand new {@code Event}.
      * @param description Description of the event.
      * @param at Time that the event is happening at.
      */
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.date = at;
         this.taskType = "E";
 
         String[] dateArguments = at.split(" ");
@@ -40,34 +39,19 @@ public class Event extends Task {
     }
 
     /**
-     * Create an Event from existing data.
-     * @param uniqueId Unique Id of the event.
+     * Create an {@code Event} from existing data.
      * @param isDone Event completion status.
      * @param description Description of the event.
      * @param at Time that the event is happening at.
      */
-    public Event(String uniqueId, boolean isDone, String description, String at) {
-        super (uniqueId, isDone, description);
-        this.at = at;
-        this.taskType = "E";
+    public Event(boolean isDone, String description, String at) {
+        this(description, at);
 
-        String[] dateArguments = at.split(" ");
-
-        try {
-            taskDate = LocalDate.parse(dateArguments[0]);
-
-            if (dateArguments.length == 2) {
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH[:]mm");
-                taskTime = LocalTime.parse(dateArguments[1], dtf);
-            }
-        } catch (DateTimeParseException e) {
-            System.out.println("Date and time format is invalid.");
+        if (isDone) {
+            this.markDone();
         }
     }
 
-    public String getTime() {
-        return at;
-    }
 
     private String formatTaskTime() {
         String output = taskDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
@@ -80,6 +64,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + formatTaskTime() + ")";
+        return String.format("[E]%s (at: %s)", super.toString(), formatTaskTime());
     }
 }

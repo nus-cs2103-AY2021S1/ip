@@ -11,18 +11,17 @@ import java.time.format.FormatStyle;
  */
 public class Deadline extends Task {
 
-    private String by;
     private LocalDate taskDate;
     private LocalTime taskTime;
 
     /**
-     * Creates a brand new deadline.
+     * Creates a brand new {@code Deadline}.
      * @param description Description of the deadline.
      * @param by Time that the deadline is due by.
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.date = by;
         this.taskType = "D";
 
         String[] dateArguments = by.split(" ");
@@ -40,33 +39,17 @@ public class Deadline extends Task {
     }
 
     /**
-     * Create a Deadline from existing data.
-     * @param uniqueId Unique Id of the deadline.
+     * Creates a {@code Deadline} from existing data.
      * @param isDone Deadline completion status.
      * @param description Description of the deadline.
      * @param by Time that the deadline is due by.
      */
-    public Deadline(String uniqueId, boolean isDone, String description, String by) {
-        super(uniqueId, isDone, description);
-        this.by = by;
-        this.taskType = "D";
+    public Deadline(boolean isDone, String description, String by) {
+        this(description, by);
 
-        String[] dateArguments = by.split(" ");
-
-        try {
-            taskDate = LocalDate.parse(dateArguments[0]);
-
-            if (dateArguments.length == 2) {
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH[:]mm");
-                taskTime = LocalTime.parse(dateArguments[1], dtf);
-            }
-        } catch (DateTimeParseException e) {
-            System.out.println("Date and time format is invalid.");
+        if (isDone) {
+            this.markDone();
         }
-    }
-
-    public String getTime() {
-        return by;
     }
 
     private String formatTaskTime() {
@@ -79,6 +62,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + formatTaskTime() + ")";
+        return String.format("[D]%s (at: %s)", super.toString(), formatTaskTime());
     }
 }

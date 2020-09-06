@@ -14,36 +14,31 @@ public class DoneCommand extends Command {
     private final int taskIdx;
 
     /**
-     * Creates a new DoneCommand.
+     * Creates a new {@code DoneCommand}.
      * @param taskIdx Index of the task to mark as done.
-     * @throws DukeException If no task index is provided, or if the format provided is invalid.
      */
-    public DoneCommand(String taskIdx) throws DukeException {
-        try {
-            this.taskIdx = Integer.parseInt(taskIdx);
-        } catch (NumberFormatException e) {
-            throw new DukeException("Invalid arguments provided!");
-        }
+    public DoneCommand(int taskIdx) {
+        this.taskIdx = taskIdx;
     }
 
     /**
      * Marks a task as done.
-     * @param tasks List of tasks.
-     * @param ui Ui object.
-     * @param storage Storage object.
+     * @param tasks {@link TaskList} containing list of tasks.
+     * @param ui {@link Ui} object.
+     * @param storage {@link Storage} object.
      * @throws DukeException If the provided index is not associated with a task.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         assertArgumentsValid(tasks, ui, storage);
-
-        if (taskIdx > tasks.size()) {
+      
+        if (taskIdx > tasks.size() || taskIdx <= 0) {
             throw new DukeException("No task with this ID!");
         }
 
         Task task = tasks.getTask(taskIdx);
         tasks.markAsDone(task);
-        storage.doneTask(tasks.getTask(taskIdx));
+        storage.saveData(tasks);
         ui.botOutput("Nice! I've marked this task as done:\n" + task);
     }
 }
