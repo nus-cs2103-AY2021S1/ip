@@ -17,6 +17,7 @@ public class Todo extends Task{
      * @return a string representation of the Todo object.
      */
     public String toString() {
+        assert super.description.length() > 0 : "Description is empty";
         return "[" + taskType + "]" + "[" + super.getStatusIcon()
                 + "] " + super.description;
     }

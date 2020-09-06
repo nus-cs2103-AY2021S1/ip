@@ -30,6 +30,7 @@ public class Event extends Task{
         // index 1 contains date
         // index 2 contains time
         String[] descSplitBySpace = byDateTime.split(" ", 3);
+        assert descSplitBySpace.length == 3 : "deadline is not in the format /by 2011-11-29 1830";
         localDate = LocalDate.parse(descSplitBySpace[1]);
         String timeString = descSplitBySpace[2];
         localTime = stringToLocalTime(timeString.substring(0, timeString.length() - 2),
@@ -44,6 +45,7 @@ public class Event extends Task{
     }
 
     public String formattedDescription() {
+        assert super.description.length() > 0 : "task description is empty";
         // an array where index 0 contains "deadline return book"
         // and index 1 contains "by 2019-10-15 1800"
         String[] descSplitBySlash = super.description.split("/", 2);
@@ -52,6 +54,7 @@ public class Event extends Task{
             return descSplitBySlash[0] + dateTimeWBrackets;
         } else {
             // description came from System file.
+            assert descSplitBySlash.length == 1 : "There is a '/' inside the description of this task.";
             return descSplitBySlash[0];
         }
 

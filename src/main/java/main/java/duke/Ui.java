@@ -20,7 +20,9 @@ public class Ui {
      */
     public Ui(TaskList taskList, Storage storage) {
         this.taskList = taskList;
+        assert this.taskList != null : "taskList is assigned to null";
         this.storage = storage;
+        assert this.storage != null : "storage is assigned to null";
     }
 
 

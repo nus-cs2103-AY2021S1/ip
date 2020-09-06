@@ -46,6 +46,7 @@ public class TaskList {
      * @return Returns the size of the task list
      */
     public int size() {
+        assert this.taskList != null : "taskList is null, unable to obtain its size.";
         return this.taskList.size();
     }
 

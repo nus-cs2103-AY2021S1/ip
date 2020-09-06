@@ -1,6 +1,7 @@
 package main.java.duke;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * The central class in handling the various objects in the Duke application.
@@ -28,7 +29,9 @@ public class Duke {
     public Duke(String filepath) {
         Storage storage = new Storage(filepath);
         // task
-        TaskList taskList = new TaskList(storage.getStartupTaskList());
+        ArrayList<Task> taskArrayList = storage.getStartupTaskList();
+        assert taskArrayList != null : "taskArrayList is null";
+        TaskList taskList = new TaskList(taskArrayList);
         ui = new Ui(taskList, storage);
     }
 
@@ -50,6 +53,7 @@ public class Duke {
 
     public static void main(String[] args) {
         String workingDir = System.getProperty("user.dir");
+        assert workingDir.length() > 0 : "working directory is empty";
         Duke application = new Duke(workingDir + File.separator
                 + "tasklist.txt");
         application.run();

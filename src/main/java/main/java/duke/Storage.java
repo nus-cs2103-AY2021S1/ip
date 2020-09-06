@@ -8,8 +8,10 @@ import java.util.Scanner;
 public class Storage {
 
     private File file;
+
     private FileWriter appendFileWriter;
     private BufferedWriter bufferedAppendWriter;
+
     private ArrayList<Task> startupTaskList = new ArrayList<>();
 
     /**
@@ -26,9 +28,12 @@ public class Storage {
             } else {
                 populateTaskList(file);
             }
+            fileReader = new FileReader(file);
+            bufferedReader = new BufferedReader(fileReader);
             // appendFileWriter appends new text whenever we write to the file
             // to maintain the previous entries.
             appendFileWriter = new FileWriter(file, true);
+            assert appendFileWriter != null : "appendFileWriter not initialized properly";
             bufferedAppendWriter = new BufferedWriter(appendFileWriter);
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -97,6 +102,7 @@ public class Storage {
             BufferedWriter bufferedOverrideWriter = new BufferedWriter(overrideFileWriter);;
             for (int i = 0; i < taskList.size(); i++) {
                 Task toWrite = taskList.getTask(i);
+                assert toWrite != null : "task to be written into .txt storage file is null";
                 bufferedOverrideWriter.write(toWrite.toString() + System.lineSeparator());
             }
             bufferedOverrideWriter.flush();
