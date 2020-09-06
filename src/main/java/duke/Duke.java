@@ -9,7 +9,6 @@ public class Duke {
 
     private static TaskList tasks;
     private final Storage storage;
-    private final Ui ui;
 
     /**
      * Constructor for creating Duke object
@@ -17,7 +16,7 @@ public class Duke {
      * @param filePath relative directory of the storage file
      */
     public Duke(String filePath) {
-        ui = new Ui();
+        Ui ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());

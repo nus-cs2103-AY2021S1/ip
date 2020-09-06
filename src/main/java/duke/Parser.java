@@ -17,6 +17,7 @@ public class Parser {
     private static boolean isExit = false;
     private static TaskList tasks;
     private static Storage storage;
+    private static Task currentTask;
 
     /**
      * Sets Parser's tasks to that of Duke's
@@ -47,7 +48,7 @@ public class Parser {
     private static String outputDeleteMessage(int taskToDelete) throws IOException {
         String output = "Alright! I've removed this task:\n";
         output += tasks.remove(taskToDelete) + "\n";
-        output += "Now you have " + tasks.size() + "tasks in your list.";
+        output += "Now you have " + tasks.size() + " tasks in your list.";
         storage.refresh(tasks);
         return output;
     }
@@ -57,8 +58,30 @@ public class Parser {
         tasks.add(currentTask);
         storage.append(currentTask);
         output += tasks.get(tasks.size() - 1) + "\n";
-        output += "Now you have " + tasks.size() + "tasks in your list.";
+        output += "Now you have " + tasks.size() + " tasks in your list.";
         return output;
+    }
+
+    private static String outputDuplicateMessage(Task task) {
+        String duplicateMessage = "The existing tasks have the same description:\n";
+        for (int i = 1; i < tasks.size() + 1; i++) {
+            Task currentTask = tasks.get(i - 1);
+            if (currentTask.getDescription().equals(task.getDescription())) {
+                duplicateMessage += i + ". " + currentTask + "\n";
+            }
+        }
+        duplicateMessage += "Enter \"yes\" if you wish to keep task or \"no\" otherwise.";
+        Parser.currentTask = task;
+        return duplicateMessage;
+    }
+
+    private static boolean hasDuplicates(String taskString) {
+        for (Task task : tasks.getListOfTasks()) {
+            if (task.getDescription().equals(taskString)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static String executeExit() {
@@ -119,7 +142,11 @@ public class Parser {
             return new DukeException("Hold up! The description of todo cannot be empty...").getMessage();
         }
 
-        ToDo currentTask = new ToDo(command.substring(5));
+        String taskString = command.substring(5);
+        ToDo currentTask = new ToDo(taskString);
+        if (hasDuplicates(taskString)) {
+            return outputDuplicateMessage(currentTask);
+        }
         return outputTaskMessage(currentTask);
     }
 
@@ -136,7 +163,11 @@ public class Parser {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         try {
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
-            Deadline currentTask = new Deadline(taskString, dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")));
+            Deadline currentTask = new Deadline(taskString,
+                    dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")));
+            if (hasDuplicates(taskString)) {
+                return outputDuplicateMessage(currentTask);
+            }
             return outputTaskMessage(currentTask);
         } catch (DateTimeException e) {
             return new DukeException("Please specify date & time in the form yyyy-MM-dd HHmm").getMessage();
@@ -154,6 +185,9 @@ public class Parser {
         String taskString = command.substring(6, endIndex);
         String atString = command.substring(endIndex + 5);
         Event currentTask = new Event(taskString, atString);
+        if (hasDuplicates(taskString)) {
+            return outputDuplicateMessage(currentTask);
+        }
         return outputTaskMessage(currentTask);
     }
 
@@ -167,6 +201,18 @@ public class Parser {
         } else {
             return new DukeException("Sorry, I'm not sure what you mean by that :(").getMessage();
         }
+    }
+
+    private static String executeDuplicateHandling(String command) throws IOException {
+        assert command.equals("yes") || command.equals("no");
+        String output = "";
+        if (Parser.currentTask == null) { // scenario where the user entered "yes" or "no" randomly
+            return "Invalid command";
+        } else if (command.equals("yes")) {
+            output += outputTaskMessage(Parser.currentTask);
+        }
+        Parser.currentTask = null; // clears Parser.currentTask each time duplicate handling is completed
+        return output.length() == 0 ? "Noted! The task will not be added." : output;
     }
 
     /**
@@ -189,6 +235,8 @@ public class Parser {
             return executeExit();
         } else if (command.equals("list")) {
             return executeList();
+        } else if (command.equals("yes") || command.equals("no")) {
+            return executeDuplicateHandling(command);
         } else if (command.startsWith("done")) {
             return executeDone(command);
         } else if (command.startsWith("delete")) {
