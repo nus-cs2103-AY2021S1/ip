@@ -53,6 +53,13 @@ public class HelpCommand extends Command {
         return commands.toString();
     }
 
+    /**
+     * @return The command string stored in this class.
+     */
+    public String getCommand() {
+        return command;
+    }
+
     @Override
     public String execute(TaskList taskList) throws TaskbotException {
         return CommandHelp.getCommandInstruction(command);
@@ -65,9 +72,12 @@ public class HelpCommand extends Command {
             return true;
         }
 
-        /* Check if obj is an instance of this class.
-           All HelpCommand instances are equal.
-         */
-        return obj instanceof HelpCommand;
+        // Check if obj is an instance of this class
+        if (!(obj instanceof HelpCommand)) {
+            return false;
+        }
+
+        // Compare tasks and return accordingly
+        return command.equals(((HelpCommand) obj).getCommand());
     }
 }
