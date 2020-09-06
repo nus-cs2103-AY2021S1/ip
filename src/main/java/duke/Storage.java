@@ -41,35 +41,31 @@ public class Storage {
      * @throws IOException When writing to file fails.
      */
     public void writeToFile(ArrayList<Task> tasks) throws IOException {
-        try {
-            FileWriter fileWriter = new FileWriter(path.toString());
-            for (Task task : tasks) {
-                String isDone = task.isDone ? "done" : "undone";
-                String description = task.getTask();
-                Type taskType = task.getType(); //null
-                String stringTaskType = taskType.toString();
-                switch (taskType) {
-                case TODO:
-                    String writeTodo = String.format("%s | %s | %s\n",
-                            stringTaskType, isDone, description);
-                    fileWriter.write(writeTodo);
-                    break;
-                case DEADLINE:
-                case EVENT:
-                    String dateAndTime = task.getTime();
-                    String write = String.format("%s | %s | %s | %s\n", stringTaskType, isDone,
-                            description, dateAndTime);
-                    fileWriter.write(write);
-                    break;
-                default:
-                    System.out.println("Write failed :(");
-                    break;
-                }
+        FileWriter fileWriter = new FileWriter(path.toString());
+        for (Task task : tasks) {
+            String isDone = task.isDone ? "done" : "undone";
+            String description = task.getTask();
+            Type taskType = task.getType(); //null
+            String stringTaskType = taskType.toString();
+            switch (taskType) {
+            case TODO:
+                String writeTodo = String.format("%s | %s | %s\n",
+                        stringTaskType, isDone, description);
+                fileWriter.write(writeTodo);
+                break;
+            case DEADLINE:
+            case EVENT:
+                String dateAndTime = task.getTime();
+                String write = String.format("%s | %s | %s | %s\n", stringTaskType, isDone,
+                        description, dateAndTime);
+                fileWriter.write(write);
+                break;
+            default:
+                System.out.println("Write failed :(");
+                break;
             }
-            fileWriter.close();
-        } catch (IOException ex) {
-            System.err.println(ex.getMessage());
         }
+        fileWriter.close();
     }
 
     /**
@@ -79,33 +75,29 @@ public class Storage {
      */
     public ArrayList<Task> readFromFile() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
-        try {
-            File file = path.toFile();
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNext()) {
-                String input = scanner.nextLine();
-                String[] splitString = input.split(" \\| ");
-                boolean isDone = splitString[1].equals("done");
-                switch (splitString[0]) {
-                case "ToDo":
-                    Task todo = new ToDo(splitString[2], isDone);
-                    tasks.add(todo);
-                    break;
-                case "Deadline":
-                    Task deadline = new Deadline(splitString[2], splitString[3], isDone);
-                    tasks.add(deadline);
-                    break;
-                case "Event":
-                    Task event = new Event(splitString[2], splitString[3], isDone);
-                    tasks.add(event);
-                    break;
-                default:
-                    System.out.println("Cannot read file! :(");
-                    break;
-                }
+        File file = path.toFile();
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            String input = scanner.nextLine();
+            String[] splitString = input.split(" \\| ");
+            boolean isDone = splitString[1].equals("done");
+            switch (splitString[0]) {
+            case "ToDo":
+                Task todo = new ToDo(splitString[2], isDone);
+                tasks.add(todo);
+                break;
+            case "Deadline":
+                Task deadline = new Deadline(splitString[2], splitString[3], isDone);
+                tasks.add(deadline);
+                break;
+            case "Event":
+                Task event = new Event(splitString[2], splitString[3], isDone);
+                tasks.add(event);
+                break;
+            default:
+                System.out.println("Cannot read file! :(");
+                break;
             }
-        } catch (FileNotFoundException ex) {
-            System.err.print(ex.getMessage());
         }
         return tasks;
     }
