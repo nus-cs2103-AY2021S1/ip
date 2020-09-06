@@ -72,6 +72,24 @@ public class Ui {
         printMessageWithBorders();
     }
 
+    public void printFind(ArrayList<Task> taskList, String keyword) {
+        if (taskList.size() < 1) {
+            message = "You currently have no tasks.\n";
+        } else {
+            int count = 1;
+            message = "Here are the matching tasks in your list:\n";
+            for (int i = 0; i < taskList.size(); i++) {
+                Task task = taskList.get(i);
+                if (task.contains(keyword)) {
+                    String taskString = count + "." + task.toString() + "\n";
+                    message += taskString;
+                    count++;
+                }
+            }
+        }
+        printMessageWithBorders();
+    }
+
     public void printGoodbye() {
         message = "Bye. Hope to see you again soon!\n";
         printMessageWithBorders();

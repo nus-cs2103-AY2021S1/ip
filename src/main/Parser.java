@@ -9,6 +9,14 @@ public class Parser {
                 case ("list"):
                     ui.printTasks(storage.loadExistingData());
                     break;
+                case ("find"):
+                    if (inputInfo.length < 2) {
+                        throw new DukeException("Error! To find a task, please enter 'find [keyword]'.\n");
+                    } else {
+                        String keyword = inputInfo[1];
+                        ui.printFind(storage.loadExistingData(), keyword);
+                    }
+                    break;
                 case ("bye"):
                     ui.printGoodbye();
                     System.exit(0);

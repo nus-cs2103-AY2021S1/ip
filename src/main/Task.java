@@ -19,6 +19,10 @@ public class Task {
         isDone = true;
     }
 
+    public boolean contains(String keyword) {
+        return description.contains(keyword);
+    }
+
     public String toData() {
         String done = isDone ? "1" : "0";
         return done + " | " + description;
