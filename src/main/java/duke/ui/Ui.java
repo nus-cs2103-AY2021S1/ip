@@ -43,7 +43,7 @@ public class Ui {
      */
     public void showLoadingError() {
         System.out.println(
-                "Error at load.");
+                "Error loading file.");
     }
 
     /**
@@ -69,9 +69,9 @@ public class Ui {
      */
     public void addTaskMessage(Task t, TaskList tasks) {
         String message =
-                "Got it. I've added this task:\n" +
-                "  " + t.toString() + "\n" +
-                "Now you have " + tasks.getNumOfTasks() + " tasks in the list.";
+                "Got it. I've added this task:\n"
+                        + "  " + t.toString() + "\n"
+                        + "Now you have " + tasks.getNumOfTasks() + " tasks in the list.";
         System.out.println(message);
     }
 
@@ -81,8 +81,8 @@ public class Ui {
      */
     public void doneTaskMessage(Task t) {
         String message =
-        "Nice! I've marked this task as done:\n" +
-        "  " + t.toString();
+        "Nice! I've marked this task as done:\n"
+                + "  " + t.toString();
         System.out.println(message);
     }
 
@@ -93,8 +93,8 @@ public class Ui {
      */
     public void deleteTaskMessage(Task t, TaskList tasks) {
         String message =
-                "Noted. I've removed this task:\n" +
-                        "  " + t.toString() + "\n" +
+                "Noted. I've removed this task:\n"
+                        + "  " + t.toString() + "\n" +
                         "Now you have " + tasks.getNumOfTasks() + " tasks in the list.";
         System.out.println(message);
     }

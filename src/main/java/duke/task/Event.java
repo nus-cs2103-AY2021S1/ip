@@ -33,8 +33,8 @@ public class Event extends Task {
      * Returns the letter E for writing to hard disk file.
      */
     @Override
-    public String getStringType() {
-        return "E";
+    public String getSaveSymbol() {
+        return Task.EVENT_SAVE_SYMBOL;
     }
 
     /**
@@ -47,7 +47,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: "
+        return "[" + Task.EVENT_SAVE_SYMBOL + "]" + super.toString() + " (at: "
                 + atLocalDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }
