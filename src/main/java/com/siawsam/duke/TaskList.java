@@ -39,10 +39,15 @@ public class TaskList implements Serializable {
     
     //--------start of item literal utilities---------//
     private String getItemType(String item) {
+        assert item.length() > 0 : "empty item literal";
+    
         return item.split(" ")[0].trim();
     }
     
     private String getItemDescription(String item, String itemType) {
+        assert item.length() > 0 : "empty item literal";
+        assert itemType.length() > 0 : "empty item type string";
+        
         // remove itemtype, which is the first word of the item literal
         return splitItemLiteral(item, itemType)[0]
                        .split(itemType)[1]
@@ -50,10 +55,16 @@ public class TaskList implements Serializable {
     }
     
     private String getItemParameter(String item, String itemType) {
+        assert item.length() > 0 : "empty item literal";
+        assert itemType.length() > 0 : "empty item type string";
+        
         return splitItemLiteral(item, itemType)[1].trim();
     }
     
     private String[] splitItemLiteral(String item, String itemType) {
+        assert item.length() > 0 : "empty item literal";
+        assert itemType.length() > 0 : "empty item type string";
+        
         String delimiter = itemType.equals("deadline") ? "/by" : "/at";
         return item.split(delimiter);
     }
@@ -61,6 +72,8 @@ public class TaskList implements Serializable {
     
     //--------start of item literal parsers---------//
     private Task parseTodo(String itemLiteral) throws DukeException {
+        assert itemLiteral.length() > 0 : "empty item literal";
+        
         if (itemLiteral.trim().equals("todo")) {
             throw new DukeException("Todos must have non-empty "
                                             + "descriptions!");
@@ -71,6 +84,8 @@ public class TaskList implements Serializable {
     }
     
     private Task parseDeadline(String itemLiteral) throws DukeException {
+        assert itemLiteral.length() > 0 : "empty item literal";
+        
         try {
             return new Deadline(
                     getItemDescription(itemLiteral, "deadline"),
@@ -82,6 +97,8 @@ public class TaskList implements Serializable {
     }
     
     private Task parseEvent(String itemLiteral) {
+        assert itemLiteral.length() > 0 : "empty item literal";
+        
         return new Event(
                 getItemDescription(itemLiteral, "event"),
                 getItemParameter(itemLiteral, "event")

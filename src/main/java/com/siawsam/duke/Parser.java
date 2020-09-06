@@ -64,6 +64,8 @@ public class Parser {
     }
     
     private Response parseParameterizedCommand(String command, String literal) {
+        assert command.length() > 0 : "empty command string";
+        
         switch (command) {
         case "done":
             return parseDoneCommand(literal);
@@ -72,11 +74,14 @@ public class Parser {
         case "find":
             return parseFindCommand(literal);
         default:
+            assert !COMMANDS.contains(command) : "invalid parameterized command";
             return Response.emptyResponse();
         }
     }
     
     private Response parseDoneCommand(String literal) {
+        assert literal.length() > 0 : "empty command literal";
+        
         try {
             return userTaskList.markAsDone(
                     Integer.parseInt(literal.split(" ")[1])
@@ -87,6 +92,8 @@ public class Parser {
     }
     
     private Response parseDeleteCommand(String literal) {
+        assert literal.length() > 0 : "empty command literal";
+        
         try {
             return userTaskList.removeItem(
                     Integer.parseInt(literal.split(" ")[1])
@@ -97,11 +104,15 @@ public class Parser {
     }
     
     private Response parseFindCommand(String literal) {
+        assert literal.length() > 0 : "empty command literal";
+        
         TaskSearcher searcher = new TaskSearcher(userTaskList);
         return searcher.searchAndDisplay(literal.split("find")[1].trim());
     }
     
     private Response parseAddCommand(String literal) {
+        assert literal.length() > 0 : "empty command literal";
+        
         try {
             Task addedTask = userTaskList.addItem(literal);
             return new Response(Ui.showSuccessfulAdd(addedTask));
