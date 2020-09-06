@@ -22,7 +22,9 @@ public class Parser {
      * @throws InvalidCommandException If command is of invalid format.
      */
     public int parse(String currInput, int sizeOfList) throws InvalidCommandException{
-        //Cuts white space before and after the input
+        assert(sizeOfList >= 0);
+      
+        //Cuts white space before and after the command
         String input = currInput.trim();
 
         if (isListCommand(input)) {
