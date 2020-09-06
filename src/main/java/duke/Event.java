@@ -10,7 +10,7 @@ public class Event extends Task {
 
     /**
      * Constructor of Event object.
-     * 
+     *
      * @param description Takes in the description of the Event object.
      * @param at Takes in the date in which the task is on in YYYYY-MM-DD format.
      */
@@ -21,7 +21,7 @@ public class Event extends Task {
 
     /**
      * Returns the task type of Event.
-     * 
+     *
      * @return the task type of Event.
      */
     @Override
@@ -48,5 +48,5 @@ public class Event extends Task {
     public String toStringInFile() {
         return "E" + super.toStringInFile() + " | " + this.at;
     }
-    
+
 }

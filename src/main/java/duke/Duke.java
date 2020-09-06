@@ -14,7 +14,7 @@ public class Duke {
 
     /**
      * Constructor for Duke Object.
-     * 
+     *
      * @param filePath a new file will be created in the stated filePath.
      */
     public Duke(String filePath) {
@@ -27,20 +27,19 @@ public class Duke {
      * Consists of the logic of the program.
      */
     public void run() {
-        
         ui.sayIntroduction();
         Parser parser = ui.createParser();
         Scanner userInput = ui.createUserInputScanner();
 
         while (userInput.hasNextLine()) {
-            try { 
+            try {
                 String nextLine = userInput.nextLine();
                 int commandNumber = parser.parseCommand(nextLine);
-                
+
                 if (commandNumber >= 1 && commandNumber <= 3) {
                     Task newTask = parser.createTask(commandNumber);
                     tasks.addTask(newTask);
-                    // TODO: write an exception for 
+                    // TODO: write an exception for
                     ui.addTask(newTask, tasks.getSize());
 
                 } else if (commandNumber == 4) {
@@ -65,18 +64,17 @@ public class Duke {
                     ui.deleteTask(deleteTask, tasks.getSize());
 
                 } else if (commandNumber == 8) {
-                    
                     ArrayList<Task> matchingTasks = parser.getMatchingTasks(tasks);
                     ui.findTask(matchingTasks);
-                    
+
                 } else {
-                    String HORIZONTAL_LINE = "_______________________________________________________";
-                    
-                    throw new CommandNotRecognisedException(HORIZONTAL_LINE
+                    final String horizontalLine = "_______________________________________________________";
+
+                    throw new CommandNotRecognizedException(horizontalLine
                             + "\r\n"
                             + "Oops! I couldn't understand what you mean :("
                             + "\r\n"
-                            + HORIZONTAL_LINE);
+                            + horizontalLine);
                 }
             } catch (MissingTaskDescriptionException e) {
                 System.out.println(e.getMessage());
@@ -84,16 +82,13 @@ public class Duke {
                 System.out.println(e.getMessage());
             } catch (CommandNotRecognizedException e) {
                 System.out.println(e.getMessage());
-//            } catch (TaskDoesNotExist e) {
-//                System.out.println(e.getMessage());
-//            }
             }
         }
     }
 
     /**
      * Driver of the program.
-     * 
+     *
      * @param args
      */
     public static void main(String[] args) {

@@ -8,15 +8,15 @@ import java.util.ArrayList;
  * Parser deals with making sense of the user command
  */
 public class Parser {
+    private static final String HORIZONTAL_LINE = "_______________________________________________________";
     private String command;
     private String[] commandParts;
-    private final String HORIZONTAL_LINE = "_______________________________________________________";
 
     /**
      * Returns the commandNumber.
-     * 
+     *
      * @param command The user's input.
-     * @return 
+     * @return commandNumber
      */
     public int parseCommand(String command) {
         this.command = command;
@@ -45,7 +45,7 @@ public class Parser {
 
     /**
      * Creates a new Task object.
-     * 
+     *
      * @param commandNumber Takes in the commandNumber that parseCommand returns.
      * @return a Task object
      * @throws MissingTaskDescriptionException Exception is thrown when task description is missing.
@@ -64,8 +64,7 @@ public class Parser {
 
     /**
      * Creates a new ToDo object.
-     * 
-     * @param command Takes in the command that user inputs.
+     *
      * @return a ToDo object.
      * @throws MissingTaskDescriptionException Exception is thrown when task description is missing.
      */
@@ -87,7 +86,6 @@ public class Parser {
     /**
      * Creates a new Deadline object.
      *
-     * @param command Takes in the command that user inputs.
      * @return a Deadline object.
      * @throws MissingTaskDescriptionException Exception is thrown when task description is missing.
      */
@@ -113,7 +111,6 @@ public class Parser {
     /**
      * Creates a new Event object.
      *
-     * @param command Takes in the command that user inputs.
      * @return a Event object.
      * @throws MissingTaskDescriptionException Exception is thrown when task description is missing.
      */
@@ -138,7 +135,7 @@ public class Parser {
 
     /**
      * Returns the task number of the task for its status to be updated.
-     * 
+     *
      * @return the task number of the task.
      * @throws MissingTaskNumberException  Exception is thrown when task number is missing.
      */
@@ -152,10 +149,9 @@ public class Parser {
     /**
      * Helper class for doneTask().
      *
-     * @param command Takes in the command that user inputs.
      * @return the task number of the task for status to be updated.
      * @throws MissingTaskNumberException Exception is thrown when task number is missing.
-     */ 
+     */
     public int markDoneTask() throws MissingTaskNumberException {
 
         try {
@@ -174,7 +170,7 @@ public class Parser {
 
     /**
      * Returns the task number of the task that is to be deleted.
-     * 
+     *
      * @return the task number of the task.
      */
     public int getDeleteTaskNumber() {
@@ -190,8 +186,7 @@ public class Parser {
 
     /**
      * Helper class for deleteTask().
-     * 
-     * @param command Takes in the command that user inputs.
+     *
      * @return the task number of the task that is to be deleted.
      * @throws MissingTaskNumberException Exception is thrown when task number is missing.
      */
@@ -214,15 +209,15 @@ public class Parser {
         try {
             ArrayList<Task> matchingTasks = new ArrayList<>();
             boolean doesTaskMatch = false;
-            
+
             String descriptionToFind = commandParts[1];;
-            
+
             for (int i = 0; i < tasks.getSize(); i++) {
                 ArrayList<Task> listOfTasks = tasks.getTaskList();
                 Task task = listOfTasks.get(i);
                 String descriptionOfTask = task.getDescription();
                 String[] taskDescriptionParts = descriptionOfTask.split("\\s");
-                
+
                 for (int j = 0; j < taskDescriptionParts.length; j++) {
                     if (!doesTaskMatch) {
                         if (taskDescriptionParts[j].contains(descriptionToFind)) {
@@ -231,22 +226,22 @@ public class Parser {
                         }
                     }
                 }
-                
+
                 if (doesTaskMatch) {
                     matchingTasks.add(task);
                 }
-                
+
                 doesTaskMatch = false;
             }
             return matchingTasks;
-            
+
         } catch (Exception e) {
 
-            throw new MissingTaskDescriptionException(horizontalLine
+            throw new MissingTaskDescriptionException(HORIZONTAL_LINE
                     + "\r\n"
                     + "Oops! The description cannot be empty :("
                     + "\r\n"
-                    + horizontalLine);
+                    + HORIZONTAL_LINE);
         }
     }
 }

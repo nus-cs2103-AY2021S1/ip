@@ -3,7 +3,7 @@ package duke;
 /**
  * MissingTaskNumberException is thrown when the task number is not inputted with the done or delete command.
  */
-public class MissingTaskNumberException extends Exception{
+public class MissingTaskNumberException extends Exception {
 
     /**
      * Formats the string of MissingTaskNumberException.

@@ -17,7 +17,7 @@ public class TaskList {
 
     /**
      * Constructor of an existing Tasklist.
-     * 
+     *
      * @param tasks Takes in an existing TaskList.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -26,7 +26,7 @@ public class TaskList {
 
     /**
      * Adds tasks in list of tasks.
-     * 
+     *
      * @param task Takes in a task object.
      */
     public void addTask(Task task) {
@@ -35,7 +35,7 @@ public class TaskList {
 
     /**
      * Gets the size of the list of tasks.
-     * 
+     *
      * @return the size of the list.
      */
     public int getSize() {
@@ -44,7 +44,7 @@ public class TaskList {
 
     /**
      * Gets the task object according to the taskNumber.
-     * 
+     *
      * @param taskNumber The task number is according to the user input.
      * @return a Task object.
      */
@@ -54,7 +54,7 @@ public class TaskList {
 
     /**
      * Returns the list of tasks.
-     * 
+     *
      * @return the list of tasks.
      */
     public ArrayList<Task> getTaskList() {
@@ -63,11 +63,11 @@ public class TaskList {
 
     /**
      * Deletes the task from the list of tasks.
-     * 
+     *
      * @param taskNumber The task number is according to the user input.
      */
     public void deleteTask(int taskNumber) {
         tasks.remove(taskNumber);
     }
-    
+
 }
