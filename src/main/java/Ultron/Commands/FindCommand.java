@@ -34,6 +34,7 @@ public class FindCommand extends Command {
         if (getArguments().length() == 0) {
             throw new UltronException("find", getArguments(), ExceptionType.NO_ARGUMENTS_SUPPLIED);
         }
+        assert getArguments().length() > 0;
         boolean printed = false;
         int count = 0;
         StringBuilder message = new StringBuilder();
