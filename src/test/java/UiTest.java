@@ -1,10 +1,10 @@
-import org.junit.Assert;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
 import java.util.ArrayList;
 
 public class UiTest {
@@ -21,7 +21,7 @@ public class UiTest {
         String expected = "Hi there. This is a custom message.";
         Ui ui = new Ui("Hi there. This is a custom message.");
         ui.printMessage();
-        Assert.assertEquals(expected, outputStreamCaptor.toString().trim());
+        assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class UiTest {
             Ui ui = new Ui();
             ui.printTasks(tasks);
 
-            Assert.assertEquals(expected, outputStreamCaptor.toString().trim());
+            assertEquals(expected, outputStreamCaptor.toString().trim());
         } catch (DukeException e) {
             System.out.println("Error occurred while testing");
         }

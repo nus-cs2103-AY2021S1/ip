@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,14 +19,16 @@ public class Duke {
 
         storage = new Storage(filePath);
         parser = new Parser();
-
         try {
             ArrayList<Task> existingTasks = storage.loadExistingData();
             tasks = new TaskList(existingTasks);
             ui.printWelcome(existingTasks);
-        } catch (Exception e) {
+        } catch (DukeException e) {
             ui.printLoadingError();
             tasks = new TaskList();
+        } catch (IOException e) {
+            new Ui("An error occurred while retrieving the data.").printMessage();
+
         }
     }
 
