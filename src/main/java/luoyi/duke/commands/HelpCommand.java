@@ -34,7 +34,7 @@ public class HelpCommand extends Command {
     @Override
     public String execute() {
         String helpMessage = Message.getHelpMessage(keyword);
-        TextFormatter.getFormattedText(helpMessage);
+        System.out.println(TextFormatter.getFormattedText(helpMessage));
         return helpMessage;
     }
 
