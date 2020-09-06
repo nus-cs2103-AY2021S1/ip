@@ -58,7 +58,7 @@ public class Parser {
                 try {
                     LocalDate date = LocalDate.parse(dateString);
 
-                    output += taskList.printList((task) -> {
+                    output += taskList.printList(task -> {
 
                         if (task instanceof Event && ((Event) task).getDate().equals(date)) {
                             return true;
@@ -79,7 +79,7 @@ public class Parser {
             } else if (input.length() > 5) {
 
                 String query = input.substring(5);
-                output += taskList.printList((task) -> task.contains(query));
+                output += taskList.printList(task -> task.contains(query));
 
             } else {
                 throw new DukeException("Enter a valid find command");
