@@ -34,7 +34,11 @@ public enum ExceptionType {
     /**
      * ExceptionType when Directory cannot be created.
      */
-    DIRECTORY_NOT_CREATED("I've accidentally destroyed the folder that was suppose to be made %s");
+    DIRECTORY_NOT_CREATED("I've accidentally destroyed the folder that was suppose to be made %s"),
+    /**
+     * ExceptionType already done.
+     */
+    ALREADY_DONE("%s is already completed.");
 
     /**
      * Stores the error message for the enum.
@@ -76,6 +80,13 @@ public enum ExceptionType {
 
         //Return the formatted error message
         return String.format(this.errorMessage, inputString);
+
+    }
+
+    public String getMessage() {
+
+        //Return the formatted error message
+        return String.format(this.errorMessage);
 
     }
 }
