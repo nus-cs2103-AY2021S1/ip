@@ -13,6 +13,7 @@ public class Ui {
      * @param taskDescription The currently operated task's status
      */
     public String showDone(String taskDescription) {
+        assert (taskDescription != null);
         return String.format(" Nice! I've marked this task as done: \n" + taskDescription);
     }
 
@@ -22,6 +23,7 @@ public class Ui {
      * @param taskList List representation of the current task list
      */
     public String showNewTaskAdded(String taskDescription, List<Task> taskList) {
+        assert (taskDescription != null && taskList != null);
         return String.format(
                 " Got it. I've added this task: \n   %s\n Now you have %d tasks in the list.\n",
                 taskDescription, taskList.size());
@@ -33,6 +35,7 @@ public class Ui {
      * @param taskList List representation of the current task list
      */
     public String showTaskDeleted(String taskDescription, List<Task> taskList) {
+        assert (taskDescription != null && taskList != null);
         return String.format(" Noted. I've removed this task:\n "
                 + "   %s\n"
                 + " Now you have %d tasks in the list.\n", taskDescription, taskList.size());
@@ -44,6 +47,7 @@ public class Ui {
      * @param taskList List representation of the current task list
      */
     public String showFullList(List<Task> taskList) {
+        assert (taskList != null);
         int count = 1;
         StringBuffer stringList = new StringBuffer();
         stringList.append(" Here are the tasks in your list:\n");
@@ -62,6 +66,7 @@ public class Ui {
      */
     @SuppressWarnings("checkstyle:JavadocMethod")
     public String showFilteredDateTimeList(String inputCommand, List<Task> taskList) throws DukeException {
+        assert (inputCommand != null && taskList != null);
         if (inputCommand.length() <= "list-due ".length()) {
             throw new DukeException(" list-due command cannot be empty!!");
         }
@@ -94,7 +99,7 @@ public class Ui {
      * @throws DukeException Throws Exception if the search string is empty
      */
     public String showKeywordList(String inputCommand, List<Task> taskList) throws DukeException {
-
+        assert (inputCommand != null && taskList != null);
         if (inputCommand.length() <= "find ".length()) {
             throw new DukeException(" find command cannot be empty!!");
         }
@@ -127,24 +132,3 @@ public class Ui {
         return " Bye. Hope to see you again soon!";
     }
 }
-    /*
-     * UI of the line printing
-    public return printLines() {
-        System.out.println(" -----------------");
-    }
-     * UI of the welcome message
-    public void showWelcomeMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Omo!! hello from\n" + logo);
-    }
-     * Handles console input
-     * @return console input as String to be operated on
-    public String getConsoleInput() {
-        //get console inputs
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }*/

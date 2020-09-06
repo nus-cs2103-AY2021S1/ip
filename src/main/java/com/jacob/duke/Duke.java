@@ -22,6 +22,7 @@ public class Duke {
             Command c = parser.parse(input);
             String response = c.execute(ui, tasks, storage);
             storage.writeToFile();
+            assert(response != null);
             return response;
         } catch (DukeException e) {
             return e.getMessage();

@@ -1,6 +1,4 @@
 package main.java.com.jacob.duke;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,13 +24,12 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(new FileInputStream(System.getProperty("user.dir")
-            + "\\data\\userChatBotIcon.png"));
-    private final Image dukeImage = new Image(new FileInputStream(System.getProperty("user.dir")
-            + "\\data\\dukeChatBotIcon.png"));
+    private final Image userImage = new Image(this.getClass()
+            .getResourceAsStream("/images/userChatBotIcon.png"));
+    private final Image dukeImage = new Image(this.getClass()
+            .getResourceAsStream("/images/dukeChatBotIcon.png"));
 
-    public MainWindow() throws FileNotFoundException {
-    }
+    public MainWindow() { }
 
     /**
      * Initializes the main window with a welcome message
@@ -74,5 +71,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        assert (userInput.getText().equals(""));
     }
 }

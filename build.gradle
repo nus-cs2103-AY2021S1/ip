@@ -52,4 +52,4 @@ dependencies {
 checkstyle {
     toolVersion = '8.23'
 }
-mainClassName = 'main.java.com.jacob.duke.Duke'
+mainClassName = 'main.java.com.jacob.duke.Launcher'
