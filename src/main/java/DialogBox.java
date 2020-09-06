@@ -31,7 +31,7 @@ public class DialogBox extends HBox {
             new Image(new File("src/main/resources/images/peanut.png").toURI().toString());
 
 
-    public DialogBox(String text, Image img, Color backgroundColor) {
+    protected DialogBox(String text, Image img, Color backgroundColor) {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -59,13 +59,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text) {
+    protected static DialogBox getUserDialog(String text) {
         DialogBox db = new DialogBox(text, USER_IMAGE, Color.NAVAJOWHITE);
         db.flip();
         return db;
     }
 
-    public static DialogBox getDukeDialog(String text) {
+    protected static DialogBox getDukeDialog(String text) {
         return new DialogBox(text, PEANUT_IMAGE, Color.DODGERBLUE);
     }
 }

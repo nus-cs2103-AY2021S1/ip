@@ -32,7 +32,6 @@ public class TaskList {
      */
     protected String addTask(Task task) throws IOException {
         list.add(task);
-        //System.out.println("Added: " + task + "\n");
         storage.saveTasks(toString());
         return "Added: " + task + "\n";
     }
@@ -43,12 +42,10 @@ public class TaskList {
      * @param listIndex Index of the task in the list to be marked as done.
      */
     protected String markTaskDone(int listIndex) throws IOException {
-            Task task = list.get(listIndex - 1);
-            task.markDone();
-            //System.out.printf("Hurray! %s is now done.\n", task.getTask());
-            //System.out.println(task + "\n");
-            storage.saveTasks(toString());
-            return String.format("Hurray! %s is now done.\n%s\n", task.getTask(), task);
+        Task task = list.get(listIndex - 1);
+        task.markDone();
+        storage.saveTasks(toString());
+        return String.format("Hurray! %s is now done.\n%s\n", task.getTask(), task);
     }
 
     /**
@@ -57,15 +54,12 @@ public class TaskList {
      * @param listIndex Index of the task in the list to be marked deleted.
      */
     protected String deleteTask(int listIndex) throws IOException {
-            Task task = list.get(listIndex - 1);
-            list.remove(listIndex - 1);
-            //System.out.printf("Okay %s has been deleted.\n", task.getTask());
-            //System.out.println(task);
-            //System.out.println("You now have " + list.size() + " tasks.\n");
-            storage.saveTasks(toString());
-            return String.format("Okay %s has been deleted.\n", task.getTask())
-                    + task + "\n"
-                    + "You now have " + list.size() + " tasks.\n";
+        Task task = list.get(listIndex - 1);
+        list.remove(listIndex - 1);
+        storage.saveTasks(toString());
+        return String.format("Okay %s has been deleted.\n", task.getTask())
+                + task + "\n"
+                + "You now have " + list.size() + " tasks.\n";
     }
 
     /**

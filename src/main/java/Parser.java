@@ -1,4 +1,5 @@
 import java.io.IOException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -9,7 +10,7 @@ public class Parser {
 
     private TaskList list;
 
-    protected Parser(){}
+    protected Parser() {}
 
     protected Parser(TaskList list) {
         this.list = list;
