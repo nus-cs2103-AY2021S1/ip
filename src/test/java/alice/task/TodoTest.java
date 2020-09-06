@@ -9,7 +9,7 @@ public class TodoTest {
     void testStringConversion() {
         Task task = new Todo("Test");
         // test toString
-        assertEquals(task.toString(), "[T][X] Test");
+        assertEquals(task.toString(), "[T][✘] Test");
 
         // test encode
         assertEquals(task.encode(), "T | 0 | Test");

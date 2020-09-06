@@ -42,7 +42,7 @@ public class FindCommand implements Command {
         if (output == null) {
             return new FindCommandResult("There are no tasks matching your search.", true);
         } else {
-            return new FindCommandResult("Here are the tasks that matches your search:\n" + output, true);
+            return new FindCommandResult("Here, I found some tasks matching your search:\n" + output, true);
         }
     }
 }

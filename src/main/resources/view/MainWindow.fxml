@@ -15,8 +15,8 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root iconified="true" minHeight="600.0" minWidth="500.0" title="Alice" type="Stage" xmlns="http://javafx.com/javafx"
-         xmlns:fx="http://javafx.com/fxml">
+<fx:root iconified="true" minHeight="600.0" minWidth="500.0" title="Alice" type="Stage"
+         xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <scene>
         <Scene>
             <root>
@@ -36,12 +36,12 @@
                                 <Insets left="10.0"/>
                             </padding>
                         </TextField>
-                        <Button fx:id="sendButton" layoutX="463.0" layoutY="563.0" minHeight="-Infinity"
+                        <Button fx:id="sendButton" layoutX="464.0" layoutY="566.0" minHeight="-Infinity"
                                 minWidth="-Infinity" mnemonicParsing="false" onAction="#handleUserInput"
-                                prefHeight="30.0" prefWidth="30.0"
+                                prefHeight="25.0" prefWidth="25.0"
                                 style="-fx-shape: &quot;M 700 350 L 200 175 L 200 325 L 550 350 L 200 375 L 200 525 Z&quot;; -fx-background-color: black;"
-                                textFill="#0b06a2" AnchorPane.bottomAnchor="6.600000000000023"
-                                AnchorPane.rightAnchor="6.600000000000023">
+                                textFill="#0b06a2" AnchorPane.bottomAnchor="8.399999999999977"
+                                AnchorPane.rightAnchor="10.399999999999977">
                             <font>
                                 <Font name="Lucida Fax Demibold" size="13.0"/>
                             </font>
