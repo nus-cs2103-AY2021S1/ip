@@ -3,6 +3,8 @@ package chatterbox;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,6 +19,7 @@ public class Storage {
 
     private static final String SAVE_FOLDER_PATH = "./data";
     private static final String SAVE_FILE_PATH = SAVE_FOLDER_PATH + "/chatterbox.txt";
+    private static final String ARCHIVE_FILE_PATH = SAVE_FOLDER_PATH + "/chatterbox_%d.bak";
     private final File saveFolder = new File(SAVE_FOLDER_PATH);
     private final File saveFile = new File(SAVE_FILE_PATH);
 
@@ -25,13 +28,28 @@ public class Storage {
      *
      * @throws IOException  If folder or file cannot be created.
      */
-    private void ensureExistence() throws IOException {
+    private void ensureSaveFileExistence() throws IOException {
         if (!saveFolder.exists()) {
             saveFolder.mkdir();
             saveFile.createNewFile();
         } else if (!saveFile.exists()) {
             saveFile.createNewFile();
         }
+    }
+
+    private File getUnusedArchiveFile() {
+        if (!saveFolder.exists()) {
+            saveFolder.mkdir();
+        }
+        for (int i = 0; i < 100; i++) {
+            String archiveFilename = String.format(ARCHIVE_FILE_PATH, i);
+            File archiveFile = new File(archiveFilename);
+            if (!archiveFile.exists()) {
+                return archiveFile;
+            }
+        }
+        // Returns the 0th file if all 0-99th archives are taken up
+        return new File(String.format(ARCHIVE_FILE_PATH, 0));
     }
 
     /**
@@ -42,7 +60,7 @@ public class Storage {
      */
     public List<Task> getItems() throws ChatterboxException, IOException {
         List<Task> items = new ArrayList<>();
-        ensureExistence();
+        ensureSaveFileExistence();
         Scanner scanner = new Scanner(saveFile);
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
@@ -60,6 +78,16 @@ public class Storage {
         return items;
     }
 
+    private String getSaveString(List<Task> items) {
+        StringBuilder saveText = new StringBuilder();
+        for (Task t : items) {
+            saveText.append(t.getDone() ? "true " : "false ");
+            saveText.append(t.getInputString());
+            saveText.append("\n");
+        }
+        return saveText.toString();
+    }
+
     /**
      * Saves the list of Task objects into the save file in text format.
      *
@@ -67,15 +95,22 @@ public class Storage {
      * @throws IOException  If the program is unable to write to the save file.
      */
     public void saveItems(List<Task> items) throws IOException {
-        StringBuilder saveText = new StringBuilder();
-        for (Task t : items) {
-            saveText.append(t.getDone() ? "true " : "false ");
-            saveText.append(t.getInputString());
-            saveText.append("\n");
-        }
-        ensureExistence();
+        ensureSaveFileExistence();
         FileWriter writer = new FileWriter(SAVE_FILE_PATH);
-        writer.write(saveText.toString());
+        String saveString = getSaveString(items);
+        writer.write(saveString);
         writer.close();
+    }
+
+    /**
+     * Archives the list of Task objects into an archive file in text format, and empties the current save file.
+     *
+     * @throws IOException If archiving fails.
+     */
+    public void archiveItems() throws IOException {
+        ensureSaveFileExistence();
+        File archiveFile = getUnusedArchiveFile();
+        Files.move(saveFile.toPath(), archiveFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        ensureSaveFileExistence(); // Create an empty save file again
     }
 }

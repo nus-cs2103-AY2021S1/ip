@@ -87,6 +87,8 @@ public class Chatterbox {
         } else if (command.equals("deadline") || command.equals("todo") || command.equals("event")) {
             Task t = Parser.parseTask(input);
             return tasks.addTask(t);
+        } else if (command.equals("archive")) {
+            return tasks.archive();
         } else {
             throw new ChatterboxException(ERROR_INVALID_COMMAND);
         }
