@@ -5,12 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
+
 import duke.exceptions.DukeInvalidIndexException;
 import duke.exceptions.DukeInvalidKeywordException;
 import duke.exceptions.DukeInvalidScheduleInputException;
 import duke.exceptions.DukeInvalidTaskDescriptionException;
 import duke.exceptions.DukeInvalidTaskTimeException;
-import org.junit.jupiter.api.Test;
 
 import duke.messages.Message;
 
