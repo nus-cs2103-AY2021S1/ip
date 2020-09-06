@@ -13,6 +13,7 @@ public class Duke {
         LIST,
         FIND,
         ERROR,
+        SORT,
         BYE
     }
 
@@ -71,6 +72,12 @@ public class Duke {
                 try {
                     return ui.returnList(tasks.find(input));
                 } catch (DukeException ex1) {
+                    return ui.showError(ex1.toString());
+                }
+            case SORT:
+                try {
+                    return ui.returnList(tasks.sort(input));
+                } catch (DukeException ex1){
                     return ui.showError(ex1.toString());
                 }
             case ERROR:

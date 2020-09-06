@@ -78,6 +78,8 @@ public class Parser {
             return Duke.Command.SAVE;
         } else if (getFirstWord(input).equals("find")) {
             return Duke.Command.FIND;
+        } else if (getFirstWord(input).equals("sort")) {
+            return Duke.Command.SORT;
         } else if (input.equals("bye")) {
             return Duke.Command.BYE;
         } else {

@@ -13,6 +13,8 @@ public class DukeException extends Exception {
                     "event [description] /at [time in YYYY/MM/DD HHMM] \n");
     public static final DukeException INVALID_INDEX_EXCEPTION = new DukeException("Excuse me... please check index... >:(");
     public static final DukeException INVALID_QUERY_EXCEPTION = new DukeException("Wat you looking for again?");
+    public static final DukeException INVALID_SORT_EXCEPTION = new DukeException("I dun gets... \n Accepted requests are: \n" +
+            "1. sort /type \n2. sort /date");
 
     public DukeException(String description) {
         this.description = description;

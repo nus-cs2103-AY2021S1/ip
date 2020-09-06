@@ -6,6 +6,8 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.time.LocalDate;
 
 /**
  * duke.TaskList Class stores the list of tasks and modifies the list according to commands.
@@ -58,8 +60,16 @@ public class TaskList {
                 throw DukeException.INVALID_TIME_EXCEPTION;
             } else {
                 String[] t = info[1].split(" ", 2);
-                curr = new Event(info[0], Parser.dateParser(t[0]), Parser.timeParser(t[1]));
-                list.add(curr);
+                try {
+                    LocalDate date = Parser.dateParser(t[0]);
+//                    String time = Parser.timeParser(t[1]);
+                    curr = new Event(info[0], date, t[1]);
+                    list.add(curr);
+                } catch (DukeException ex1) {
+                    throw DukeException.INVALID_TIME_EXCEPTION;
+                } catch (NumberFormatException ex1) {
+                    throw DukeException.INVALID_TIME_EXCEPTION;
+                }
             }
         }
         return curr;
@@ -117,6 +127,12 @@ public class TaskList {
         return toBeRet;
     }
 
+    /**
+     * Finds tasks that contains the string input as part of the task description
+     * @param input word to be found in task descriptions
+     * @return ArrayList of Tasks that contain the required word
+     * @throws DukeException Throws an exception if query is invalid due to missing or wrong information.
+     */
     public ArrayList<Task> find(String input) throws DukeException{
         assert input.length() >= 4;
         String[] info = input.split(" ", 2);
@@ -131,6 +147,42 @@ public class TaskList {
             }
             return ret;
         }
+    }
+
+    public ArrayList<Task> sort(String input) throws DukeException {
+        String[] filter = input.split("/", 2);
+        if (filter[1].equals("type")) {
+            return sortByType();
+        } else if (filter[1].equals("date")){
+            return sortByDate();
+        } else {
+            throw DukeException.INVALID_SORT_EXCEPTION;
+        }
+    }
+
+    public ArrayList<Task> sortByType() {
+        ArrayList<Task> todos = new ArrayList<>();
+        ArrayList<Task> deadlines = new ArrayList<>();
+        ArrayList<Task> events = new ArrayList<>();
+
+        for (Task k: list) {
+            if (k.getType().equals("Todo")) {
+                todos.add(k);
+            } else if (k.getType().equals("Event")) {
+                events.add(k);
+            } else if (k.getType().equals("Deadline")) {
+                deadlines.add(k);
+            }
+        }
+        todos.addAll(deadlines);
+        todos.addAll(events);
+        return todos;
+    }
+
+    public ArrayList<Task> sortByDate() {
+        ArrayList<Task> ret = new ArrayList<>(list);
+        Collections.sort(ret);
+        return ret;
     }
 
     /**

@@ -1,6 +1,8 @@
 package duke.task;
 
-public class Task {
+import java.time.LocalDate;
+
+public class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
@@ -34,8 +36,27 @@ public class Task {
 
     public String getDescription() { return this.description; }
 
+    public String getType() { return "Task"; }
+
+    public LocalDate getDate() { return LocalDate.MIN; }
+
     @Override
     public String toString() {
         return "["+getStatusIcon()+"] " + this.description;
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        if (this instanceof ToDo) {
+            return -1;
+        } else if (this instanceof Deadline || this instanceof Event) {
+            if(o instanceof ToDo) {
+                return 1;
+            } else {
+                return -(o.getDate().compareTo(this.getDate()));
+            }
+        } else {
+            return 0;
+        }
     }
 }
