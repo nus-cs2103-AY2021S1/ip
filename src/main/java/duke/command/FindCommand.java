@@ -13,6 +13,7 @@ public class FindCommand extends Command {
 
     @Override
     public String run(TaskList taskList) {
-        return Ui.find(taskList.findTasks(input.get(1)));
+        String query = input.get(1);
+        return Ui.answerFind(taskList.findTasks(query));
     }
 }

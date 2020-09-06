@@ -3,6 +3,7 @@ package duke.misc;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import duke.exception.InvalidArgumentException;
@@ -16,24 +17,28 @@ public class Parser {
      * @return the list of tokens
      */
     public static List<String> parseCommand(String command) {
-        String[] splitted = command.split(" /");
-        List<String> out = new ArrayList<>();
-        for (String token : splitted) {
-            String[] splitted2 = token.split(" ", 2);
-            for (String tokenn : splitted2) {
-                out.add(tokenn);
-            }
+        String[] splitBySlash = command.split(" /");
+        List<String> tokens = new ArrayList<>();
+        for (String token : splitBySlash) {
+            String[] splitByWhiteSpace = token.split(" ", 2);
+            Collections.addAll(tokens, splitByWhiteSpace);
         }
-        if (out.get(0).equals("todo") || out.get(0).equals("deadline") || out.get(0).equals("event")) {
-            if (out.size() >= 3) {
-                out.remove(2);
-            }
-            if (out.size() <= 2) {
-                out.add("null");
-            }
-            out.add("0");
+
+        if (!tokens.get(0).equals("todo")
+                && !tokens.get(0).equals("deadline")
+                && !tokens.get(0).equals("event")) { return tokens; }
+
+        if (tokens.size() >= 3) {
+            tokens.remove(2);
         }
-        return out;
+
+        if (tokens.size() <= 2) {
+            tokens.add(Const.NO_TIME);
+        }
+
+        tokens.add("0");
+
+        return tokens;
     }
 
     /**
@@ -44,7 +49,7 @@ public class Parser {
      * @throws InvalidArgumentException
      */
     public static LocalDateTime stringToTime(String datetimeString) throws InvalidArgumentException {
-        String[] timeTokens = datetimeString.split(" |/");
+        String[] timeTokens = datetimeString.split("[ /]");
         int time = timeTokens.length >= 4 ? Integer.parseInt(timeTokens[3]) : 0;
         try {
             return LocalDateTime.of(Integer.parseInt(timeTokens[2]),

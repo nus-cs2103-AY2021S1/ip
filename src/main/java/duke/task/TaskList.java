@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.exception.InvalidArgumentException;
+import duke.misc.Checker;
 import duke.misc.Parser;
 import duke.misc.Storage;
 
@@ -12,44 +13,51 @@ public class TaskList {
     private List<Task> database = new ArrayList<>();
 
     /**
-     * Create a new task corresponding to the tokens then add it into the list of task, or throw an exception
-     * if the input tokens is invalid.
+     * Initializes the list of task with the information from the disk.
      *
-     * @param tokens the description for the task (e.g. type, time)
-     * @return the task created
      * @throws InvalidArgumentException
      */
-    public Task addTask(List<String> tokens) throws InvalidArgumentException {
-        Task task;
-        String datetimeString = tokens.get(2).trim();
-        LocalDateTime datetime = (datetimeString.equals("null"))
-                ? LocalDateTime.MIN
-                : Parser.stringToTime(datetimeString);
+    public TaskList() throws InvalidArgumentException {
+        List<List<String>> data = Storage.readFile();
+        for (List<String> tokens : data) {
+            addTask(makeTask(tokens));
+        }
+    }
 
-        switch (tokens.get(0)) {
+    public Task makeTask(List<String> tokens) throws InvalidArgumentException {
+        LocalDateTime datetime;
+
+        String taskType = tokens.get(0);
+        String taskTitle = tokens.get(1).trim();
+        String datetimeString = tokens.get(2).trim();
+        String taskStatus = tokens.get(3);
+        boolean isDone = taskStatus.equals("1");
+
+
+        switch (taskType) {
         case "todo":
-            task = new Todo(tokens.get(1).trim());
-            break;
+            return new Todo(taskTitle, isDone);
         case "deadline":
-            if (datetimeString.equals("null")) {
-                throw new InvalidArgumentException("Deadline's time cannot be empty");
-            }
-            task = new Deadline(tokens.get(1).trim(), datetime);
-            break;
+            Checker.checkTime(datetimeString);
+            datetime = Parser.stringToTime(datetimeString);
+            return new Deadline(taskTitle, datetime, isDone);
         case "event":
-            if (datetimeString.equals("null")) {
-                throw new InvalidArgumentException("Event's time cannot be empty");
-            }
-            task = new Event(tokens.get(1).trim(), datetime);
-            break;
+            Checker.checkTime(datetimeString);
+            datetime = Parser.stringToTime(datetimeString);
+            return new Event(taskTitle, datetime, isDone);
         default:
             throw new Error("An unexpected error has occurred");
         }
-        if (tokens.get(3).equals("1")) {
-            task.markAsDone();
-        }
+    }
+
+    /**
+     * Create a new task corresponding to the tokens then add it into the list of task, or throw an exception
+     * if the input tokens is invalid.
+     *
+     * @param task the task to be added
+     */
+    public void addTask(Task task) {
         database.add(task);
-        return task;
     }
 
     /**
@@ -60,9 +68,7 @@ public class TaskList {
      * @throws InvalidArgumentException
      */
     public Task getTask(int index) throws InvalidArgumentException {
-        if (index <= 0 || index > database.size()) {
-            throw new InvalidArgumentException("Invalid argument for the LIST command.");
-        }
+        Checker.checkListIndex(index, database, "Out of range index for getting task.");
         return database.get(index - 1);
     }
 
@@ -73,9 +79,7 @@ public class TaskList {
      * @throws InvalidArgumentException
      */
     public void finishTask(int index) throws InvalidArgumentException {
-        if (index <= 0 || index > database.size()) {
-            throw new InvalidArgumentException("Out of range argument for DONE command.");
-        }
+        Checker.checkListIndex(index, database,"Out of range argument for DONE command.");
         database.get(index - 1).markAsDone();
     }
 
@@ -87,22 +91,8 @@ public class TaskList {
      * @throws InvalidArgumentException
      */
     public Task removeTask(int index) throws InvalidArgumentException {
-        if (index <= 0 || index > database.size()) {
-            throw new InvalidArgumentException("Out of range argument for DELETE command.");
-        }
+        Checker.checkListIndex(index, database,"Out of range argument for DELETE command.");
         return database.remove(index - 1);
-    }
-
-    /**
-     * Initializes the list of task with the information from the disk.
-     *
-     * @throws InvalidArgumentException
-     */
-    public void initialize() throws InvalidArgumentException {
-        List<List<String>> data = Storage.readFile();
-        for (List<String> tokens : data) {
-            addTask(tokens);
-        }
     }
 
     /**
@@ -145,9 +135,9 @@ public class TaskList {
         query = query.trim();
         List<String> output = new ArrayList<>();
         int count = 1;
-        for (int i = 0; i < database.size(); i++) {
-            if (database.get(i).getDescription().contains(query)) {
-                output.add(count + "." + database.get(i));
+        for (Task task : database) {
+            if (task.getDescription().contains(query)) {
+                output.add(count + "." + task);
                 count++;
             }
         }

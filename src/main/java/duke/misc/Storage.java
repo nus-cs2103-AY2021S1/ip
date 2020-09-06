@@ -27,7 +27,6 @@ public class Storage {
             while (s.hasNext()) {
                 String[] tokens = s.nextLine().split("%%%");
                 List<String> tokenss = new ArrayList<>(Arrays.asList(tokens));
-                //tokenss.add(2, "null");
                 out.add(tokenss);
             }
             return out;
@@ -45,13 +44,12 @@ public class Storage {
         File dir = new File("./tmp/data");
         try {
             FileWriter fw = new FileWriter(new File(dir, "storage.txt"));
-            for (int i = 0; i < database.size(); i++) {
-                Task task = database.get(i);
+            for (Task task : database) {
                 fw.write(task.serialize() + "\n");
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            throw new Error("Something went wrong: " + e.getMessage());
         }
     }
 }

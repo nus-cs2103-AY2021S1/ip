@@ -16,6 +16,6 @@ public class DoneCommand extends Command {
     public String run(TaskList taskList) throws InvalidArgumentException {
         int index = Integer.parseInt(input.get(1));
         taskList.finishTask(index);
-        return Ui.done(taskList.getTask(index).toString());
+        return Ui.answerDone(taskList.getTask(index).toString());
     }
 }

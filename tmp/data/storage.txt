@@ -1,4 +1,3 @@
-deadline%%%fly%%%16/2/2020 1159%%%1
-todo%%%read book%%%null%%%1
-deadline%%%return book%%%20/12/2020 1900%%%0
-todo%%%hihi%%%null%%%0
+todo%%%hihi%%%null%%%1
+todo%%%hoho%%%null%%%0
+event%%%haha%%%2/12/2020 0%%%1
