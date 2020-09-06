@@ -1,80 +1,38 @@
 package duke.misc;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class Ui {
-    private static Scanner sc;
-
-    private static String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
      * Wraps the message inside a box.
      *
-     * @param printMessage an action that print something to the user interface
+     * @param message the content of the message
      */
-    public static void wrap(Runnable printMessage) {
-        System.out.println();
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++");
-        printMessage.run();
-        System.out.println("------------------------------------------");
-        System.out.println();
+    public static String wrap(String message) {
+        return "\n++++++++++++++++++++++++++++++++++++++++++\n"
+                + message
+                + "\n------------------------------------------\n";
     }
-
 
     /**
      * Greet the user and create a Scanner object.
      */
-    public static void start() {
-        wrap(() -> System.out.println("Hello from\n" + logo));
-        sc = new Scanner(System.in);
+    public static String greet() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+
+        return ("Hello from\n" + logo);
     }
 
     /**
-     * Get the next line of user input.
-     *
-     * @return next line of user input
+     * Farewell the user.
      */
-    public static String feed() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Close the Scanner object and farewell the user.
-     */
-    public static String bye() {
+    public static String answerBye() {
         return ("See you again!\n");
-    }
-
-    public static void close() {
-        sc.close();
-    }
-
-    /**
-     * Prints the response of the LIST command
-     *
-     * @param tasks list of tasks to be printed
-     */
-    public static String list(List<String> tasks) {
-        String response = "Here are the tasks in your list: \n";
-        List<String> output = tasks;
-        for (String s : output) {
-            response += (s + "\n");
-        }
-        return response;
-    }
-
-    public static String find(List<String> tasks) {
-        String response = "Here are the matching tasks in your list: \n";
-        List<String> output = tasks;
-        for (String s : output) {
-            response += (s + "\n");
-        }
-        return response;
     }
 
     /**
@@ -82,9 +40,30 @@ public class Ui {
      *
      * @param task the task that is marked as finished
      */
-    public static String done(String task) {
+    public static String answerDone(String task) {
         return "Nice! I've marked this task as done:\n"
                 + "    " + task + "\n";
+    }
+
+    /**
+     * Prints the response of the LIST command
+     *
+     * @param tasks list of tasks to be printed
+     */
+    public static String answerList(List<String> tasks) {
+        StringBuilder response = new StringBuilder("Here are the tasks in your list: \n");
+        for (String s : tasks) {
+            response.append(s).append("\n");
+        }
+        return response.toString();
+    }
+
+    public static String answerFind(List<String> tasks) {
+        StringBuilder response = new StringBuilder("Here are the matching tasks in your list: \n");
+        for (String s : tasks) {
+            response.append(s).append("\n");
+        }
+        return response.toString();
     }
 
     /**
@@ -93,7 +72,7 @@ public class Ui {
      * @param task  the task deleted
      * @param count the number of tasks left in the list.
      */
-    public static String delete(String task, int count) {
+    public static String answerDelete(String task, int count) {
         return "Noted. I've removed this task: \n"
                 + "    " + task + "\n"
                 + "Now you have " + count + " tasks in the list. \n";
@@ -102,7 +81,7 @@ public class Ui {
     /**
      * Prints the response of the CLEAR command.
      */
-    public static String clear() {
+    public static String answerClear() {
         return "All tasks cleared!\n";
     }
 
@@ -112,9 +91,13 @@ public class Ui {
      * @param task  the task created
      * @param count the current number of tasks in the list
      */
-    public static String task(String task, int count) {
+    public static String answerTask(String task, int count) {
         return "Got it. I've added this task: \n"
                 + "    " + task + "\n"
                 + "Now you have " + count + " tasks in the list. \n";
+    }
+
+    public static String answerSave() {
+        return "All changes saved!\n";
     }
 }

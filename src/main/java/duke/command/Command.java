@@ -12,7 +12,7 @@ public abstract class Command {
     /**
      * Creates a new command with user's input.
      *
-     * @param input
+     * @param input user's input
      */
     public Command(List<String> input) {
         this.input = input;
