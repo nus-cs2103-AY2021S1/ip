@@ -76,8 +76,7 @@ public class Duke {
     }
 
     /**
-     * Main function of Duke
-     * Checks if the save folder for Duke exists before creating a new Duke Object.
+     * Main method of Duke.
      */
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();

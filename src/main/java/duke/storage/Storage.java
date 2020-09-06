@@ -64,7 +64,7 @@ public class Storage {
             File file = new File(filePath);
             if (!file.exists()) {
                 File dir = new File(".\\data");
-                System.out.println(dir.mkdir());
+                dir.mkdir();
                 boolean created = file.createNewFile();
                 assert created;
             }

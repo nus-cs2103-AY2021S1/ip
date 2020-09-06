@@ -38,6 +38,8 @@ public class TaskList {
      * @param i Task number provided.
      */
     public Task retrieve(int i) {
+        assert i > 0 && i <= tasks.size();
+
         return tasks.get(i - 1);
     }
 
@@ -54,6 +56,8 @@ public class TaskList {
      * @param i Task number provided.
      */
     public void remove(int i) {
+        assert i > 0 && i <= tasks.size();
+
         tasks.remove(i - 1);
     }
 }
