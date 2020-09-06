@@ -4,16 +4,13 @@ import duke.Ui;
 import duke.tasks.TaskManager;
 
 /**
- * <code>duke.commands.FindCommand</code> inherits from the base class <code>duke.commands.Command</code>.
- * It handles the execution of finding duke.tasks given a particular keyword.
+ * <code>FindCommand</code> inherits from the base class <code>Command</code>.
+ * It handles the execution of finding tasks given a particular keyword.
  */
 public class FindCommand extends Command {
 
     /**
-     * Asks for a keyword through the <code>duke.Ui</code> object and receives the user
-     * input through the <code>Scanner</code> object from the parent class.
-     * It then calls the method <code>findTask</code> with the <code>keyword</code>
-     * passed as an argument. It then prints out the result.
+     * Receives the keyword to search for and sets the response to be the result of the tasks found.
      * @return <code>true</code>
      */
     @Override
@@ -24,6 +21,12 @@ public class FindCommand extends Command {
         return true;
     }
 
+    /**
+     * Sets the inital response to ask for the keyword to search for.
+     * In addition, it sets the utility tools <code>tm</code> and <code>ui</code>.
+     * @param tm the task manager.
+     * @param ui the ui.
+     */
     @Override
     public void init(TaskManager tm, Ui ui) {
         setResponse(ui.askForKeyword());
