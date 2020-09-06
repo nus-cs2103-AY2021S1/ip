@@ -18,13 +18,17 @@ public class ClearCommand implements Command {
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "]";
 
     /**
-     * Checks if the command word triggers the <code>ClearCommand</code>.
+     * Checks if the command word triggers the {@code ClearCommand}.
      *
      * @param name the command word to check.
-     * @return true if the command word belongs to <code>ClearCommand</code>; false otherwise.
+     * @return true if the command word belongs to {@code ClearCommand}; false otherwise.
      */
     public static boolean hasCommandWord(String name) {
         return NAMES.contains(name);
+    }
+
+    public static ClearCommand createCommand() {
+        return new ClearCommand();
     }
 
     @Override

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class TaskTest {
     @Test
     void testStringConversion() {
-        Task task = new Task("TaskTest") {
+        Task task = new Task(false, "TaskTest") {
         };
         // test toString
         assertEquals(task.toString(), "[✘] TaskTest");
@@ -20,7 +20,7 @@ public class TaskTest {
 
     @Test
     void testMarkAsDone() {
-        Task task = new Task("TaskTest") {
+        Task task = new Task(false, "TaskTest") {
         };
         task.markAsDone();
         // test toString
@@ -32,7 +32,7 @@ public class TaskTest {
 
     @Test
     void testContainKeywords() {
-        Task task = new Task("Key1 Key2 Key3") {
+        Task task = new Task(false, "Key1 Key2 Key3") {
         };
         // Search 1 keyword
         assertTrue(task.containKeywords("Key1"));

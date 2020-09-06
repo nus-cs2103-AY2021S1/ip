@@ -16,13 +16,17 @@ public class HelpCommand implements Command {
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "]";
 
     /**
-     * Checks if the command word triggers the <code>HelpCommand</code>.
+     * Checks if the command word triggers the {@code HelpCommand}.
      *
      * @param name the command word to check.
-     * @return true if the command word belongs to <code>HelpCommand</code>; false otherwise.
+     * @return true if the command word belongs to {@code HelpCommand}; false otherwise.
      */
     public static boolean hasCommandWord(String name) {
         return NAMES.contains(name);
+    }
+
+    public static HelpCommand createCommand() {
+        return new HelpCommand();
     }
 
     @Override
