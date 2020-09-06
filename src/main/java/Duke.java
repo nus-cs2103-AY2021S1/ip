@@ -9,7 +9,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  * The Duke chat bot that can help you keep track of your upcoming schedules.

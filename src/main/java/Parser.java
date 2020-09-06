@@ -6,6 +6,14 @@ import java.time.format.DateTimeParseException;
  * Parses input by the user and identifies the commands.
  */
 public class Parser {
+
+    private static final int LIST_COMMAND = 1;
+    private static final int DONE_COMMAND = 2;
+    private static final int DELETE_COMMAND = 3;
+    private static final int FIND_COMMAND = 4;
+    private static final int TASK_COMMAND = 5;
+
+
     /**
      * Parses the input by the user in the user interface.
      * @param currInput the current input of the user.
@@ -18,19 +26,18 @@ public class Parser {
         String input = currInput.trim();
 
         if (isListCommand(input)) {
-            return 1;
+            return LIST_COMMAND;
         } else if (isDoneCommand(input)) {
             verifyDoneCommand(input, sizeOfList);
-            return 2;
+            return DONE_COMMAND;
         } else if (isDeleteCommand(input)) {
             verifyDeleteCommand(input, sizeOfList);
-            return 3;
+            return DELETE_COMMAND;
         } else if (isFindCommand(input)) {
             verifyFindCommand(input);
-            return 4;
+            return FIND_COMMAND;
         } else {
-            //Is a task command
-            return 5;
+            return TASK_COMMAND;
         }
     }
 
@@ -64,12 +71,15 @@ public class Parser {
         String[] parts = input.split(" ", 2);
 
         try {
+
             if (input.startsWith("todo")) {
                 //Verify the todo command
                 verifyTodo(input);
 
                 return new Task(parts[1]);
-            } else if (input.startsWith("deadline")) {
+            }
+
+            if (input.startsWith("deadline")) {
                 //Verify the deadline command has the format "deadline ___ /by ___
                 verifyDeadline(input);
 
@@ -81,7 +91,9 @@ public class Parser {
                 LocalTime time = getTime(split[1]);
 
                 return new Deadline(split[0], date, time);
-            } else if (input.startsWith("event")) {
+            }
+
+            if (input.startsWith("event")) {
                 //Verify the event command has the format "event ___ /at ___
                 verifyEvent(input);
 
@@ -111,62 +123,62 @@ public class Parser {
     }
 
     private static void verifyDeadline(String input) throws InvalidCommandException {
-        if (input.contains(" /by ")) {
-
-            //Checks if there is a spacing after the deadline word
-            if (input.charAt(8) == ' ') {
-                String[] parts = input.split(" ", 2);
-
-                //Parts 1 should include the description + " /by " + date and time info
-                if (parts[1].startsWith("/by")) {
-                    throw new InvalidCommandException("Sorry, missing deadline description :(");
-                } else {
-                    //Split into description and date, time info
-                    String[] split = parts[1].split("/by");
-
-                    if (split.length <= 1 || split[1].isBlank()) {
-                        throw new InvalidCommandException("Sorry, missing deadline time and date :(");
-                    } else if (split[0].isBlank()) {
-                        throw new InvalidCommandException("Sorry, missing deadline description :(");
-                    }
-                }
-            } else {
-                throw new InvalidCommandException("Sorry please leave a space after the deadline command!");
-            }
-        } else {
+        if (!input.contains(" /by ")) {
             throw new InvalidCommandException("Sorry, missing /by keyword, make sure to leave a space before " +
                     "and after the /by keyword!");
+        }
+
+        //Checks if there is a spacing after the deadline word
+        if (input.charAt(8) != ' ') {
+            throw new InvalidCommandException("Sorry please leave a space after the deadline command!");
+        }
+
+        String[] parts = input.split(" ", 2);
+
+        //Parts 1 should include the description + " /by " + date and time info
+        if (parts[1].startsWith("/by")) {
+            throw new InvalidCommandException("Sorry, missing deadline description :(");
+        }
+
+        //Split into description and date, time info
+        String[] split = parts[1].split("/by");
+
+        if (split.length <= 1 || split[1].isBlank()) {
+            throw new InvalidCommandException("Sorry, missing deadline time and date :(");
+        }
+
+        if (split[0].isBlank()) {
+            throw new InvalidCommandException("Sorry, missing deadline description :(");
         }
     }
 
     private static void verifyEvent(String input) throws InvalidCommandException {
-        if (input.contains(" /at ")) {
-
-            //Checks is there is a space after event keyword
-            if (input.charAt(5) == ' ') {
-
-                //Split into description + " /at " + date, time info
-                String[] parts = input.split(" ", 2);
-
-                if (parts[1].startsWith("/at")) {
-                    throw new InvalidCommandException("Sorry, missing event description :(");
-                } else {
-
-                    //Split into description and date, time info
-                    String[] split = parts[1].split("/at");
-
-                    if (split.length <= 1 || split[1].isBlank()) {
-                        throw new InvalidCommandException("Sorry, missing event date and time :(");
-                    } else if (split[0].isBlank()) {
-                        throw new InvalidCommandException("Sorry, missing event description :(");
-                    }
-                }
-            } else {
-                throw new InvalidCommandException("Sorry please leave a space after the event command!");
-            }
-        } else {
+        if (!input.contains(" /at ")) {
             throw new InvalidCommandException("Sorry, missing /at keyword, make sure to leave a space before " +
                     "and after the /at keyword!");
+        }
+
+        //Checks if there is a spacing after the deadline word
+        if (input.charAt(5) != ' ') {
+            throw new InvalidCommandException("Sorry please leave a space after the event command!");
+        }
+
+        String[] parts = input.split(" ", 2);
+
+        //Parts 1 should include the description + " /by " + date and time info
+        if (parts[1].startsWith("/at")) {
+            throw new InvalidCommandException("Sorry, missing event description :(");
+        }
+
+        //Split into description and date, time info
+        String[] split = parts[1].split("/at");
+
+        if (split.length <= 1 || split[1].isBlank()) {
+            throw new InvalidCommandException("Sorry, missing event time and date :(");
+        }
+
+        if (split[0].isBlank()) {
+            throw new InvalidCommandException("Sorry, missing event description :(");
         }
     }
 
@@ -210,7 +222,6 @@ public class Parser {
         }
     }
 
-    //Checks if
     private static boolean isFindCommand(String input) {
         return input.startsWith("find");
     }

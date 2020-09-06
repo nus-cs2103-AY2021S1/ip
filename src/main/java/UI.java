@@ -34,7 +34,7 @@ public class UI {
     /**
      * Reads the list of saved tasks in the storage.
      */
-    public String readSavedTasks() {
+    private String readSavedTasks() {
         int size = this.storage.getSizeofTasks();
 
         if (size == 0) {
@@ -42,11 +42,24 @@ public class UI {
         } else {
             String tasks = "Here are your current tasks:";
             for (int i = 0; i < size; i++) {
-                tasks += "\n" + "  " + this.storage.getListTask(i);
+                tasks += "\n" + "  " + this.storage.getTaskFromList(i);
             }
-
             return tasks;
         }
+    }
+
+    private String getListOfMatches(String keyword) {
+        int size = this.storage.getSizeofTasks();
+
+        int increment = 1;
+        String listOfMatches = " Here are the matching tasks in your list:";
+        for (int i = 0; i < size; i++) {
+            if (this.storage.getTaskFromList(i).toString().contains(keyword)) {
+                listOfMatches += "\n" + "  " + increment + ". " + this.storage.getTaskFromList(i).toString();
+                increment++;
+            }
+        }
+        return listOfMatches;
     }
 
     /**
@@ -56,150 +69,62 @@ public class UI {
         return exception.getMessage();
     }
 
-    /**
-     * Reads the user input and communicates with the storage and parser on what to do next.
-     * @throws IOException If the storage cannot find the file containing the saved tasks.
-     */
-    public void processInput() throws IOException {
-        if (this.storage.isInitialised()) {
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine();
-
-            while (!this.parser.isTerminateCommand(input)) {
-                try {
-                    //Get the result of the parse
-                    int parseResult = this.parser.parse(input, this.storage.getSizeofTasks());
-
-                    if (isListCommand(parseResult)) {
-                        //List Command
-                        this.readSavedTasks();
-
-                    } else if (isDoneCommand(parseResult)) {
-                        //Done command
-                        int index = this.parser.getIndex(input);
-
-                        this.storage.markDone(index);
-
-                        System.out.println("Nice! I've marked this task as done:" + "\n" + "  " + this.storage.getListTask(index).toString());
-                    } else if (isDeleteCommand(parseResult)) {
-                        //Delete command
-                        int index = this.parser.getIndex(input);
-
-                        System.out.println("Noted. I've removed this task:" + "\n" + "  " + this.storage.getListTask(index)
-                                + "\n" + "Now you have " + (this.storage.getSizeofTasks() - 1) + " tasks in the list.");
-
-                        this.storage.deleteTask(index);
-
-                    } else if (isFindCommand(parseResult)) {
-                        //Find command
-                        String keyword = this.parser.getKeyword(input);
-                        System.out.println(" Here are the matching tasks in your list:");
-
-                        int size = this.storage.getSizeofTasks();
-
-                        int increment = 1;
-                        for (int i = 0; i < size; i++) {
-                            if (this.storage.getListTask(i).toString().contains(keyword)) {
-                                System.out.println("  " + increment + ". " + this.storage.getListTask(i).toString());
-                                increment++;
-                            }
-                        }
-
-
-                    } else {
-                        //Is a task command
-                        Task newTask = this.parser.getTask(input);
-
-                        //Add newTask to the task list
-                        this.storage.addTask(newTask);
-
-                        System.out.println("Got it. I've added this task:" + "\n" + "  " +
-                                this.storage.getListTask(this.storage.getSizeofTasks() - 1) +
-                                "\n" + "Now you have " + this.storage.getSizeofTasks() + " tasks in the list.");
-                    }
-                    input = scanner.nextLine();
-                } catch (InvalidCommandException e) {
-                    System.out.println(e + "\n" + "Please enter a valid command");
-                    input = scanner.nextLine();
-                } catch (InvalidInputException e) {
-                    System.out.println(e + "\n" + "Please enter a valid input");
-                    input = scanner.nextLine();
-                }
-            }
-            System.out.println("Bye! See you again!");
-            this.storage.save();
-        } else {
-            System.out.println("Storage not initialised!");
-        }
-    }
 
     public String processInput(String input) throws IOException {
-        if (this.storage.isInitialised()) {
+        if (!this.storage.isInitialised()) {
+            return "Storage not initialised!";
+        }
 
-            try {
-                //Get the result of the parse
-                int parseResult = this.parser.parse(input, this.storage.getSizeofTasks());
 
-                if (isListCommand(parseResult)) {
-                    //List Command
-                    return this.readSavedTasks();
-                } else if (isDoneCommand(parseResult)) {
-                    //Done command
-                    int index = this.parser.getIndex(input);
+        try {
+            //Get the result of the parse
+            int parseResult = this.parser.parse(input, this.storage.getSizeofTasks());
 
-                    this.storage.markDone(index);
-
-                    return "Nice! I've marked this task as done:" + "\n" + "  " + this.storage.getListTask(index).toString();
-                } else if (isDeleteCommand(parseResult)) {
-                    //Delete command
-                    int index = this.parser.getIndex(input);
-                    Task toBeDeleted = this.storage.getListTask(index);
-                    this.storage.deleteTask(index);
-
-                    return "Noted. I've removed this task:" + "\n" + "  " + toBeDeleted
-                            + "\n" + "Now you have " + (this.storage.getSizeofTasks()) + " tasks in the list.";
-
-                } else if (isFindCommand(parseResult)) {
-                    //Find command
-                    String keyword = this.parser.getKeyword(input);
-
-                    int size = this.storage.getSizeofTasks();
-
-                    int increment = 1;
-                    String listOfMatches = " Here are the matching tasks in your list:";
-                    for (int i = 0; i < size; i++) {
-                        if (this.storage.getListTask(i).toString().contains(keyword)) {
-                            listOfMatches += "\n" + "  " + increment + ". " + this.storage.getListTask(i).toString();
-                            increment++;
-                        }
-                    }
-
-                    return listOfMatches;
-
-                } else if (parser.isTerminateCommand(input)) {
-                    this.storage.save();
-
-                    return "Bye see you again!";
-                } else {
-                    //Is a task command
-                    Task newTask = this.parser.getTask(input);
-
-                    //Add newTask to the task list
-                    this.storage.addTask(newTask);
-
-                    return "Got it. I've added this task:" + "\n" + "  " +
-                            this.storage.getListTask(this.storage.getSizeofTasks() - 1) +
-                            "\n" + "Now you have " + this.storage.getSizeofTasks() + " tasks in the list.";
-                }
-            } catch (InvalidCommandException e) {
-                return e + "\n" + "Please enter a valid command";
-            } catch (InvalidInputException e) {
-                return e + "\n" + "Please enter a valid input";
+            if (isListCommand(parseResult)) {
+                return this.readSavedTasks();
             }
 
-    } else {
-        return "Storage not initialised!";
-    }
+            if (isDoneCommand(parseResult)) {
+                int index = this.parser.getIndex(input);
+                this.storage.markDone(index);
+
+                return "Nice! I've marked this task as done:" + "\n" + "  " + this.storage.getTaskFromList(index).toString();
+            }
+
+            if (isDeleteCommand(parseResult)) {
+                int index = this.parser.getIndex(input);
+                Task toBeDeleted = this.storage.getTaskFromList(index);
+                this.storage.deleteTask(index);
+
+                return "Noted. I've removed this task:" + "\n" + "  " + toBeDeleted
+                        + "\n" + "Now you have " + (this.storage.getSizeofTasks()) + " tasks in the list.";
+
+            }
+
+            if (isFindCommand(parseResult)) {
+                String keyword = this.parser.getKeyword(input);
+
+                return getListOfMatches(keyword);
+            }
+
+            if (parser.isTerminateCommand(input)) {
+                this.storage.save();
+
+                return "Bye see you again!";
+            }
+
+            //Is a task command
+            Task newTask = this.parser.getTask(input);
+            this.storage.addTask(newTask);
+
+            return "Got it. I've added this task:" + "\n" + "  " +
+                    this.storage.getTaskFromList(this.storage.getSizeofTasks() - 1) +
+                    "\n" + "Now you have " + this.storage.getSizeofTasks() + " tasks in the list.";
+        } catch (InvalidCommandException e) {
+            return e + "\n" + "Please enter a valid command";
+        } catch (InvalidInputException e) {
+            return e + "\n" + "Please enter a valid input";
+        }
 }
 
     private boolean isListCommand(int num) {
