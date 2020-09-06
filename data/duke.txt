@@ -1,2 +1,3 @@
 D | 1 | return book | Dec 15 2020
 E | 0 | project meeting | Oct 15 2020
+T | 0 | borrow book
