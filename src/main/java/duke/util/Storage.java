@@ -33,16 +33,13 @@ public class Storage {
      * @throws DukeException if the creation of new file is not successful.
      */
     private void createFileIfNotExist() {
-        if (file.isDirectory()) {
-            file.mkdirs();
-        }
-        else {
-            file.getParentFile().mkdirs();
-            try {
-                file.createNewFile();
-            } catch (IOException io) {
-                throw new DukeException(io.getMessage());
-            }
+        assert(!this.file.isDirectory());
+
+        file.getParentFile().mkdirs();
+        try {
+            file.createNewFile();
+        } catch (IOException io) {
+            throw new DukeException(io.getMessage());
         }
     }
 
@@ -57,6 +54,8 @@ public class Storage {
     }
 
     private List<String> readAllLines() {
+        assert(this.file.canRead());
+
         List<String> content = new ArrayList<>();
 
         try {
@@ -80,6 +79,8 @@ public class Storage {
      */
     public boolean saveToFile(List<String> contents) {
         createFileIfNotExist();
+        assert(this.file.canWrite());
+
         try {
             FileWriter writer = new FileWriter(this.file);
             for (String s : contents) {

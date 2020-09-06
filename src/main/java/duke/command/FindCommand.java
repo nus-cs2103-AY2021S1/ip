@@ -31,6 +31,8 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui) {
+        assert(tasks != null && ui != null);
+
         List<Task> hits = new ArrayList<>();
         List<Integer> idxList = new ArrayList<>();
 
