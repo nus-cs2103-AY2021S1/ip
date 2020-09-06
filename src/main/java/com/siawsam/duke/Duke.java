@@ -22,7 +22,7 @@ public class Duke {
     public Response loadFromDisk() throws IOException, ClassNotFoundException {
         Storage storage = new Storage(FILE_PATH);
         
-        if (storage.doesExist()) {
+        if (storage.doesStorageFileExist()) {
             TaskList savedList = storage.load();
             parser = new Parser(storage, savedList);
             return new Response(Ui.showSuccessfulLoad());

@@ -24,10 +24,16 @@ public class Task implements Serializable {
      * @return A response indicating the task that is marked as "done".
      */
     Response markAsDone() {
-        this.isDone = true;
+        isDone = true;
         return new Response(Ui.showMarkedAsDone(this));
     }
     
+    /**
+     * Checks if the task description includes a search term.
+     *
+     * @param keyword The search string.
+     * @return True if the task description includes the keyword, false if otherwise.
+     */
     public boolean includesKeyword(String keyword) {
         return taskDescription.contains(keyword);
     }

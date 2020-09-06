@@ -31,8 +31,8 @@ public class LandingScene extends AnchorPane {
     private final Stage stage;
     private final Duke duke;
     
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    private final Image userImage = new Image(getClass().getResourceAsStream("/images/user.png"));
+    private final Image dukeImage = new Image(getClass().getResourceAsStream("/images/duke.png"));
     
     /**
      * Constructs a new scene that represents the main landing view of Duke.
