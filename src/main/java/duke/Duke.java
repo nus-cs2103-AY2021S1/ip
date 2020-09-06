@@ -1,57 +1,52 @@
 package duke;
 
-import java.util.Scanner;
-import java.io.File;
-
 public class Duke {
-    TaskList tasks;
-    
+    private TaskList tasks;
+
     public Duke() {
         this.tasks = new TaskList();
     }
 
-    public void op() {
-        boolean end = false;
-        Scanner sc = new Scanner(System.in);
-        
-        while (!end) {
-            String input = Ui.getInput(sc);
-            String output_msg = "";
-            if (Parser.isBye(input)) {
-                end = true;
-            } else if (Parser.isList(input)) {
-                output_msg = tasks.summarize();
-            } else if (Parser.isDone(input)) {
-                output_msg = tasks.markDone(Parser.getIndex(input)); 
-            } else if (Parser.isDelete(input)) {
-                output_msg = tasks.deleteTask(Parser.getIndex(input)); 
-            } else if (Parser.isFind(input)) {
-                output_msg = tasks.findTasksWith(Parser.getKeyword(input));
-            } else {
+    public TaskList getTasks() {
+        return tasks;
+    }
+
+    // start() method moved to class MainGUI
+    // And also handleUserInput()
+    // op() turned into this
+    public String getResponse(String input) {
+        String outputMsg;
+        if (Parser.isBye(input)) {
+            outputMsg = "Bye. Hope to see you again soon!\n";
+        } else if (Parser.isList(input)) {
+            outputMsg = getTasks().summarize();
+        } else if (Parser.isDone(input)) {
+            outputMsg = getTasks().markDone(Parser.getIndex(input));
+        } else if (Parser.isDelete(input)) {
+            outputMsg = getTasks().deleteTask(Parser.getIndex(input));
+        } else if (Parser.isFind(input)) {
+            outputMsg = getTasks().findTasksWith(Parser.getKeyword(input));
+        } else {
+            try {
                 Task taskInput;
-                try {
-                    taskInput = Parser.parseTask(input); // catch duke exception from getTask(input)
-                } catch (Exception e) {
-                    System.out.println(Formatter.formatResponse(e.getMessage()));
-                    continue;
-                }
-                output_msg = tasks.addTask(taskInput);
-            }
-            if (!end) {
-                FormatPrinter.print(output_msg);
+                taskInput = Parser.parseTask(input); // catch duke exception from getTask(input)
+                outputMsg = getTasks().addTask(taskInput);
+            } catch (Exception e) {
+                outputMsg = e.getMessage();
             }
         }
-        System.out.println(Formatter.formatResponse("Bye. Hope to see you again soon!\n"));
-        sc.close();
+        return outputMsg;
     }
-    
+
+    // Let's find some way to integrate this
+    /*
     public static void main(String[] args) {
         String logo =
-"   __ _____   __  ___  ___  ___  ___\n" +
-"  / // / _ | / / / _ \\/ _ \\/ _ \\/ _ \\\n" +
-" / _  / __ |/ /__\\_, / // / // / // /\n" +
-"/_//_/_/ |_/____/___/\\___/\\___/\\___/\n";
-                                     
+            "   __ _____   __  ___  ___  ___  ___\n"
+            + "  / // / _ | / / / _ \\/ _ \\/ _ \\/ _ \\\n"
+            + " / _  / __ |/ /__\\_, / // / // / // /\n"
+            + "/_//_/_/ |_/____/___/\\___/\\___/\\___/\n";
+
         // Intro message
         System.out.println(logo);
         FormatPrinter.print(
@@ -59,9 +54,10 @@ public class Duke {
         );
 
         Duke hal9000 = new Duke();
-        File prev_tasks = FileOpener.openFile("prev_tasks.txt");
-        TaskLoader.loadTasks(prev_tasks, hal9000.tasks);
+        File prevTasks = FileOpener.openFile("prevTasks.txt");
+        TaskLoader.loadTasks(prevTasks, hal9000.getTasks());
         hal9000.op();
-        TaskStorage.saveTask(prev_tasks, hal9000.tasks);
-    }
+        TaskStorage.saveTask(prevTasks, hal9000.getTasks());
+    } */
+
 }

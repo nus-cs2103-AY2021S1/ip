@@ -12,18 +12,18 @@ public class FileOpener {
      * @return File type object, which can be read and written into
      */
     public static File openFile(String path) {
-        File prev_tasks = new File(path);
+        File prevTasks = new File(path);
         try {
-            if (!prev_tasks.exists()) {
-                prev_tasks.createNewFile();
+            if (!prevTasks.exists()) {
+                prevTasks.createNewFile();
             }
-            prev_tasks.setReadable(true);
-            prev_tasks.setWritable(true);
-            
+            prevTasks.setReadable(true);
+            prevTasks.setWritable(true);
+
         } catch (IOException e) {
             System.out.println(e);
         }
-        
-        return prev_tasks;
+
+        return prevTasks;
     }
 }
