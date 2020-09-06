@@ -13,7 +13,7 @@ import java.io.ObjectOutputStream;
 public class SerializeUtil {
 
     /**
-     * Serialize an object in to byte array.
+     * Serialize an object in to byte array via streams.
      *
      * @param object Obect to be serialized
      * @return serialized object in the form of byte array
@@ -35,7 +35,7 @@ public class SerializeUtil {
     }
 
     /**
-     * Deserialize byte array into an object.
+     * Deserialize byte array into an object via streams.
      *
      * @param bytes An byte array to be deserialized
      * @return Object of deserialized byte array
