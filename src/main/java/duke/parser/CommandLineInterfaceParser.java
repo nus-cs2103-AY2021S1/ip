@@ -1,6 +1,18 @@
 package duke.parser;
 
-import duke.commands.*;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.CommandTypes;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.InvalidCommand;
+import duke.commands.ListAllCompletedTasksCommand;
+import duke.commands.ListAllUncompletedTasksCommand;
+import duke.commands.ListTasksCommand;
+import duke.commands.OverdueCommand;
+import duke.commands.TodayTasksCommand;
 
 import duke.exceptions.DukeException;
 
@@ -30,15 +42,13 @@ public class CommandLineInterfaceParser {
                 return newExitCommand();
             case TODO:
                 content = userInput.replaceFirst("^(?i)todo", "");
-                String trimmedContent = content.trim();
-                AddCommand addTask = new AddCommand(new Todo(trimmedContent));
-                return addTask;
+                return newAddTaskCommand(CommandTypes.TODO, content);
             case DEADLINE:
-                userInput = userInput.replaceFirst("^(?i)deadline", "");
-                return newAddTaskCommand(CommandTypes.DEADLINE, userInput);
+                content = userInput.replaceFirst("^(?i)deadline", "");
+                return newAddTaskCommand(CommandTypes.DEADLINE, content);
             case EVENT:
-                userInput = userInput.replaceFirst("^(?i)event", "");
-                return newAddTaskCommand(CommandTypes.EVENT, userInput);
+                content = userInput.replaceFirst("^(?i)event", "");
+                return newAddTaskCommand(CommandTypes.EVENT, content);
             case DONE:
                 int completedTaskIndex = Integer.parseInt(words[1]);
                 return newDoneCommand(completedTaskIndex);
@@ -51,17 +61,19 @@ public class CommandLineInterfaceParser {
             case TODAY:
                 return newTodayTasksCommand();
             case UNCOMPLETED:
-               return newListAllUncompletedTasksCommand();
+                return newListAllUncompletedTasksCommand();
             case COMPLETED:
                 return newListAllCompletedTasksCommand();
             case OVERDUE:
                 return newOverdueCommand();
             default:
-                throw new DukeException(Messages.INVALID_COMMAND_INPUT_MESSAGE);
+                assert false : Messages.INVALID_COMMAND_ASSERTIONS;
+                break;
             }
         } catch (IllegalArgumentException e) {
             throw new DukeException(Messages.INVALID_COMMAND_INPUT_MESSAGE);
         }
+        return newInvalidCommand(Messages.INVALID_COMMAND_INPUT_MESSAGE);
     }
 
     private static ListTasksCommand newListTasksCommand() {
@@ -91,6 +103,8 @@ public class CommandLineInterfaceParser {
     }
 
     private static AddCommand newAddTaskCommand(CommandTypes taskType, String userInputContent) throws DukeException {
+        assert taskType == CommandTypes.TODO || taskType == CommandTypes.EVENT || taskType == CommandTypes.DEADLINE
+                : "Command should either be a TODO, EVENT or DEADLINE command";
         switch (taskType) {
         case TODO:
             String trimmedContent = userInputContent.trim();
@@ -110,6 +124,7 @@ public class CommandLineInterfaceParser {
             AddCommand addDeadline = new AddCommand(new Deadline(content, deadlineDukeDateTime));
             return addDeadline;
         default:
+            assert false : Messages.INVALID_COMMAND_ASSERTIONS;
             throw new DukeException(Messages.INVALID_COMMAND_INPUT_MESSAGE);
         }
     }
@@ -134,5 +149,9 @@ public class CommandLineInterfaceParser {
 
     private static OverdueCommand newOverdueCommand() {
         return new OverdueCommand();
+    }
+
+    private static InvalidCommand newInvalidCommand(String errorMessage) {
+        return new InvalidCommand(errorMessage);
     }
 }
