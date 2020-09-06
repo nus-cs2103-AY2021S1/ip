@@ -6,10 +6,17 @@ public class ConcreteTaskStub extends Task {
         super(description);
     }
 
+    @Override
     public String encode() {
         return "";
     }
 
+    @Override
+    boolean similar(Object obj) {
+        return true;
+    }
+
+    @Override
     public boolean match(String test) {
         return true;
     }
