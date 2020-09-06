@@ -8,8 +8,8 @@ import java.io.IOException;
 public class Duke {
 
     private static TaskList tasks;
-    private Storage storage;
-    private Ui ui;
+    private final Storage storage;
+    private final Ui ui;
 
     /**
      * Constructor for creating Duke object
