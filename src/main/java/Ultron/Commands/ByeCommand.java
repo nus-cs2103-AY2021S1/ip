@@ -7,7 +7,7 @@ import ultron.exceptions.UltronException;
 import ultron.ui.UI;
 
 /**
- * Bye comamnd
+ * Bye command.
  */
 public final class ByeCommand extends Command {
     /**
@@ -35,8 +35,7 @@ public final class ByeCommand extends Command {
         if (this.getArguments().trim().length() > 0) {
             throw new UltronException("bye", ExceptionType.TOO_MUCH_ARGUMENTS);
         }
-
-        //Save the storage
+        assert this.getArguments().trim().length() == 0;
         storage.writeAll(taskList.getList());
     }
 }

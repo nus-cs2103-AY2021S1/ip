@@ -5,7 +5,6 @@ import ultron.Storage;
 import ultron.TaskList;
 import ultron.exceptions.ExceptionType;
 import ultron.exceptions.UltronException;
-import ultron.tasks.Task;
 import ultron.ui.UI;
 
 public final class DeleteCommand extends Command {
@@ -43,14 +42,6 @@ public final class DeleteCommand extends Command {
                 Integer.toString(index + 1),
                 ExceptionType.INVALID_ARGUMENT);
         }
-
-        //Get the task
-        Task tsk = taskList.get(index);
-
-        //Remove the task
-        taskList.remove(index);
-
-        //Print the delete message
         ui.setMessage(String.format("What are you doing removing this?!?!\n  "
                 + "%s\nNow you have %d burdens%n",
             taskList.get(index),
