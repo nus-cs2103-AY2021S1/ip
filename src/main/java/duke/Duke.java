@@ -179,7 +179,7 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-    private String getResponse(String userText) {
+    public String getResponse(String userText) {
         return "Haha " + userText + " makes Hal9000 go brrrrr";
     }
 
