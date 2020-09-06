@@ -23,13 +23,15 @@ public class EventCommand extends Command {
      */
     public EventCommand(String input) throws BobEmptyTaskException {
         //Removes all whitespaces and checks if input is empty
-        if (input.trim().length() == 0) {
+        boolean isEmptyInput = input.trim().length() == 0;
+        boolean isNotEmptyInput = !isEmptyInput;
+
+        if (isEmptyInput) {
             throw new BobEmptyTaskException();
         }
 
-        this.input = input.startsWith(" ")
-                    ? input.substring(1)
-                    : input;
+        assert isNotEmptyInput;
+        this.input = input.trim();
     }
 
     /**
@@ -41,10 +43,17 @@ public class EventCommand extends Command {
      */
     private String formatDate(String date) throws BobInvalidDateAndTimeException {
         String[] split = date.split("/");
-        // If length of date is not same as "YYYY/MM/DD" and components are not separated by "/"
-        if (date.length() != 10 || split.length != 3) {
+
+        boolean isNotCorrectLength = date.length() != 10;
+        boolean isNotValidFormat = split.length != 3;
+        boolean isNotValidDate = isNotCorrectLength || isNotValidFormat;
+        boolean isValidDate = !isNotValidDate;
+
+        if (isNotValidDate) {
             throw new BobInvalidDateAndTimeException();
         }
+
+        assert isValidDate;
         return split[0] + "-" + split[1] + "-" + split[2];
     }
 
@@ -56,10 +65,15 @@ public class EventCommand extends Command {
      * @throws BobInvalidDateAndTimeException If the inputted date and time has invalid format.
      */
     private String formatTime(String time) throws BobInvalidDateAndTimeException {
+        boolean isNotCorrectLength = time.length() != 4;
+        boolean isCorrectLength = !isNotCorrectLength;
+
         // If length of time is not same as "HHMM"
-        if (time.length() != 4) {
+        if (isNotCorrectLength) {
             throw new BobInvalidDateAndTimeException();
         }
+
+        assert isCorrectLength;
         return time.substring(0, 2) + ":" + time.substring(2);
     }
 
@@ -73,18 +87,19 @@ public class EventCommand extends Command {
      */
     private Event createEvent(String description, String dateAndTime)
             throws BobInvalidDateAndTimeException {
-
         // Checks if there is a space between "/by" and "date and time"
-        String temp = dateAndTime.startsWith(" ")
-                ? dateAndTime.substring(1)
-                : dateAndTime;
+        String temp = dateAndTime.trim();
         String[] dateAndTimeSplit = temp.split(" ");
 
+        boolean isNotCorrectFormat = dateAndTimeSplit.length != 2;
+        boolean isCorrectFormat = !isNotCorrectFormat;
+
         // If format of date and time is invalid (in this case, not separated by one space)
-        if (dateAndTimeSplit.length != 2) {
+        if (isNotCorrectFormat) {
             throw new BobInvalidDateAndTimeException();
         }
 
+        assert isCorrectFormat;
         String date = formatDate(dateAndTimeSplit[0]);
         String time = formatTime(dateAndTimeSplit[1]);
         return new Event(description, date, time);
@@ -107,9 +122,15 @@ public class EventCommand extends Command {
     @Override
     public String execute(Tasklist tasks, Storage storage) throws BobInvalidDateAndTimeException, IOException {
         String[] split = input.split("/at");
-        if (split.length == 1) {
+
+        boolean isNotValidFormat = split.length == 1;
+        boolean isValidFormat = !isNotValidFormat;
+
+        if (isNotValidFormat) {
             throw new BobInvalidDateAndTimeException();
         }
+
+        assert isValidFormat;
         String description = split[0];
         String dateAndTime = split[1];
         Event event = createEvent(description, dateAndTime);

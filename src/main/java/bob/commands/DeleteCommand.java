@@ -41,14 +41,17 @@ public class DeleteCommand extends Command {
             throws BobInvalidNumberException, BobListIndexOutOfBoundsException, IOException {
         try {
             int taskNum = Integer.parseInt(input.replaceAll("\\s+", ""));
+
             boolean isNegative = taskNum <= 0;
             boolean isOutOfBound = taskNum > tasks.getListSize();
             boolean isInvalidTaskNum = isNegative || isOutOfBound;
+            boolean isValidTaskNum = !isInvalidTaskNum;
 
             if (isInvalidTaskNum) {
                 throw new BobListIndexOutOfBoundsException(tasks.getListSize(), taskNum, "delete");
             }
 
+            assert isValidTaskNum;
             Task task = tasks.deleteTask(taskNum);
             tasks.updateData(storage);
             return MsgGenerator.generateDeleteMessage(task);
