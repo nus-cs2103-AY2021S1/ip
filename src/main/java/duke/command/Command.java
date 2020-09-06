@@ -20,8 +20,10 @@ public abstract class Command {
      * @param storage Storage associated with the operation.
      * @returns Response to user.
      * @throws DukeLoadingErrorException If I/O operation fails during Storage#save.
+     * @throws DukeInvalidUpdateException when attempting to update an invalid detail.
      */
-    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException, DukeInvalidUpdateException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage)
+            throws DukeLoadingErrorException, DukeInvalidUpdateException;
 
     /**
      * Indicates whether operation should continue running.
