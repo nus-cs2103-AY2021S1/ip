@@ -3,6 +3,7 @@ package duke.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: make this class implement Ui so that Duke can be launched in either GUI or CLI mode
 /**
  * This class is responsible for displaying Duke's responses on the screen.
  */

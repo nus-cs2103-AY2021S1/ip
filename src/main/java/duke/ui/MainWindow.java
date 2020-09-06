@@ -1,9 +1,8 @@
-package duke;
+package duke.ui;
 
-import duke.parser.Parser;
-import duke.storage.TaskListStorage;
-import duke.task.TaskList;
-import duke.ui.DialogBox;
+import java.util.function.Consumer;
+
+import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,8 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-// TODO: separate UI and processing logic. Ideally turn this into a Ui-like class that can be passed to Duke, so that
-// Duke can use either a CLI or GUI. May need to reconsider design of Ui and Duke.
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -32,13 +29,14 @@ public class MainWindow extends AnchorPane implements Ui {
 
     // non-ui
     private boolean shouldStop;
-    private TaskList taskList;
+    private Consumer<String> inputHandler;
 
     /**
      * Creates a new MainWindow.
      */
     public MainWindow() {
         shouldStop = false;
+        inputHandler = s -> {};
     }
 
     /**
@@ -48,16 +46,7 @@ public class MainWindow extends AnchorPane implements Ui {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        // TODO: currently broken due to non-monospace font
-        // String logo =
-        //     " ____        _        \n"
-        //         + "|  _ \\ _   _| | _____ \n"
-        //         + "| | | | | | | |/ / _ \\\n"
-        //         + "| |_| | |_| |   <  __/\n"
-        //         + "|____/ \\__,_|_|\\_\\___|\n";
-        // sayLine(logo);
-        say("Hello, I'm Duke. What can I do for you?");
-        taskList = new TaskListStorage("data/tasks.txt").load(this);
+        new Duke(this); // TODO: think of a nicer way to do this
     }
 
     /**
@@ -69,10 +58,15 @@ public class MainWindow extends AnchorPane implements Ui {
         String input = userInput.getText();
         userInput.clear();
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage)); // show user input
-        Parser.parse(input).execute(this, taskList);
+        inputHandler.accept(input);
         if (shouldStop) {
             Platform.exit();
         }
+    }
+
+    @Override
+    public void setInputHandler(Consumer<String> function) {
+        inputHandler = function;
     }
 
     @Override

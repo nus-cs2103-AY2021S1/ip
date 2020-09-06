@@ -3,9 +3,9 @@ package duke.command;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * This Command will cause Duke to find and display the Tasks whose description contains the specified String.

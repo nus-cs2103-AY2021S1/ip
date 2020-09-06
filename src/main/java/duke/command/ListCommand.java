@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.Ui;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * This Command will cause Duke to list all the Tasks inside the TaskList.

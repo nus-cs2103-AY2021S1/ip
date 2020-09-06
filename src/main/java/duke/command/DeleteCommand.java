@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * This Command will delete a Task from the TaskList.

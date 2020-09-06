@@ -1,71 +1,32 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.parser.Parser;
 import duke.storage.TaskListStorage;
 import duke.task.TaskList;
-import duke.ui.Cli;
+import duke.ui.Ui;
 
 /**
- * This is the main class. Start Duke by running the main method.
+ * Class that ties together commands and ui.
  */
-public class Duke implements Ui {
-    private boolean isStopped;
-    private Cli cli;
-    private StringBuilder message;
-
+public class Duke {
     /**
-     * Create a new instance of Duke.
+     * Creates a new instance of Duke.
+     *
+     * @param ui Ui for Duke to interact with.
      */
-    public Duke() {
-        isStopped = false;
-        cli = new Cli();
-        message = new StringBuilder();
-    }
-
-    /**
-     * Starts Duke.
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    private void run() {
-        String logo =
-            " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-        say(logo);
-        Scanner sc = new Scanner(System.in);
-        TaskList list = new TaskListStorage("data/tasks.txt").load(this);
-        say("Hello, I'm Duke. What can I do for you?");
-        flushMessage();
-        while (!isStopped) {
-            String input = sc.nextLine();
-            Parser.parse(input).execute(this, list);
-            flushMessage();
-        }
-        sc.close();
-    }
-
-    @Override
-    public void stop() {
-        isStopped = true;
-    }
-
-    @Override
-    public void say(String string) {
-        if (message.length() != 0) {
-            message.append("\n");
-        }
-        message.append(string);
-    }
-
-    private void flushMessage() {
-        cli.say(message.toString());
-        message = new StringBuilder();
+    public Duke(Ui ui) {
+        TaskList taskList = new TaskListStorage("data/tasks.txt").load(ui);
+        // TODO: currently broken due to non-monospace font
+        // String logo =
+        //     " ____        _        \n"
+        //         + "|  _ \\ _   _| | _____ \n"
+        //         + "| | | | | | | |/ / _ \\\n"
+        //         + "| |_| | |_| |   <  __/\n"
+        //         + "|____/ \\__,_|_|\\_\\___|\n";
+        // sayLine(logo);
+        ui.say("Hello, I'm Duke. What can I do for you?");
+        ui.setInputHandler((String input) -> {
+            Parser.parse(input).execute(ui, taskList);
+        });
     }
 }

@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.Ui;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * This interface represents an action which Duke can take in response to user input.

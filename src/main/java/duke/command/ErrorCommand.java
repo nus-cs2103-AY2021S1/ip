@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.Ui;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * This Command makes Duke report an error to the user. No special formatting is added.

@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * This class is responsible for loading a TaskList from an existing file and creating TaskLists which can be saved to a
