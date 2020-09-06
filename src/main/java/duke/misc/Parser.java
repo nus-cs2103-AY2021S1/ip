@@ -15,7 +15,7 @@ public class Parser {
     }
 
     private static String getTaskTitle(String command) {
-        return command.split(" ", 2)[0].split("/")[0];
+        return command.split(" ", 2)[1].split("/")[0];
     }
 
     private static String getTimeString(String command) {
@@ -52,12 +52,6 @@ public class Parser {
         String commandType = splitByFirstWhiteSpace[0];
 
         switch (commandType) {
-        case "bye":
-        case "clear":
-        case "list":
-        case "save":
-            tokens.add(commandType);
-            return tokens;
         case "delete":
         case "done":
         case "find":
@@ -73,7 +67,8 @@ public class Parser {
             tokens.add("0");
             return tokens;
         default:
-            throw new Error("An unexpected error occurred");
+            tokens.add(commandType);
+            return tokens;
         }
     }
 

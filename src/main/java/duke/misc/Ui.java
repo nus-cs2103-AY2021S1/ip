@@ -38,11 +38,14 @@ public class Ui {
     /**
      * Prints the response of the DONE command.
      *
-     * @param task the task that is marked as finished
+     * @param tasks the task that is marked as finished
      */
-    public static String answerDone(String task) {
-        return "Nice! I've marked this task as done:\n"
-                + "    " + task + "\n";
+    public static String answerDone(List<String> tasks) {
+        StringBuilder response = new StringBuilder("You have marked these task as finished: \n");
+        for (String s : tasks) {
+            response.append("    ").append(s).append("\n");
+        }
+        return response.toString();
     }
 
     /**
@@ -53,7 +56,7 @@ public class Ui {
     public static String answerList(List<String> tasks) {
         StringBuilder response = new StringBuilder("Here are the tasks in your list: \n");
         for (String s : tasks) {
-            response.append(s).append("\n");
+            response.append("    ").append(s).append("\n");
         }
         return response.toString();
     }
@@ -61,7 +64,7 @@ public class Ui {
     public static String answerFind(List<String> tasks) {
         StringBuilder response = new StringBuilder("Here are the matching tasks in your list: \n");
         for (String s : tasks) {
-            response.append(s).append("\n");
+            response.append("    ").append(s).append("\n");
         }
         return response.toString();
     }
@@ -69,13 +72,16 @@ public class Ui {
     /**
      * Prints the response of the DELETE command.
      *
-     * @param task  the task deleted
+     * @param tasks  the task deleted
      * @param count the number of tasks left in the list.
      */
-    public static String answerDelete(String task, int count) {
-        return "Noted. I've removed this task: \n"
-                + "    " + task + "\n"
-                + "Now you have " + count + " tasks in the list. \n";
+    public static String answerDelete(List<String> tasks, int count) {
+        StringBuilder response = new StringBuilder("Noted. I've removed these tasks: \n");
+        for (String s : tasks) {
+            response.append("    ").append(s).append("\n");
+        }
+        response.append("Now you have " + count + " tasks in the list.\n");
+        return response.toString();
     }
 
     /**

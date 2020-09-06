@@ -3,7 +3,7 @@ import duke.gui.Launcher;
 
 public class MainLauncher {
     public static void main(String[] args) {
-        boolean runningTerminal = false;
+        boolean runningTerminal = true;
         if (runningTerminal) {
             Duke.main(args);
         } else {

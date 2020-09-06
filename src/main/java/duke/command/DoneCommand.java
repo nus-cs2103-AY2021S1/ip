@@ -1,8 +1,10 @@
 package duke.command;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import duke.exception.InvalidArgumentException;
+import duke.misc.Checker;
 import duke.misc.Ui;
 import duke.task.TaskList;
 
@@ -14,9 +16,16 @@ public class DoneCommand extends Command {
 
     @Override
     public String run(TaskList taskList) throws InvalidArgumentException {
-        assert input.size() == 2: "DoneCommand.run(): input must have exactly 2 words";
-        int index = Integer.parseInt(input.get(1));
-        taskList.finishTask(index);
-        return Ui.answerDone(taskList.getTask(index).toString());
+        assert input.size() >= 2: "DoneCommand.run(): input must have at least 2 words";
+        for (int index = 1; index < input.size(); index++) {
+            if (index <= 0 || index > taskList.count()) throw new InvalidArgumentException("Out of range index(s)");
+        }
+        List<String> listOfTask= new ArrayList<>();
+        for (int index = 1; index < input.size(); index++) {
+            taskList.finishTask(index);
+            listOfTask.add(taskList.getTask(index).toString());
+        }
+
+        return Ui.answerDone(listOfTask);
     }
 }
