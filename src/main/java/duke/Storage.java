@@ -104,6 +104,7 @@ public class Storage {
                 String taskFromMemory = sc.nextLine();
                 // parse task string for its attributes
                 String[] taskAttributes = taskFromMemory.split(",");
+                assert taskAttributes.length >= 3 : "task retrieved must have type, status, description";
                 // Extract task attributes.
                 String taskType = taskAttributes[TASK_TYPE_INDEX];
                 boolean isDone = taskAttributes[TASK_COMPLETION_INDEX].equals("1") ? true : false;
