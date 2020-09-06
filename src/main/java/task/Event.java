@@ -63,7 +63,7 @@ public class Event extends Task {
 
         if (obj instanceof Event) {
 
-            Event event = (Event)obj;
+            Event event = (Event) obj;
 
             return super.equals(obj)
                     && this.date.equals(event.date)

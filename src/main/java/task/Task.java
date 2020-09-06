@@ -56,7 +56,7 @@ public abstract class Task {
     public boolean equals(Object obj) {
 
         if (obj instanceof Task) {
-            Task task = (Task)obj;
+            Task task = (Task) obj;
             return this.msg.equals(task.msg);
         }
         return false;

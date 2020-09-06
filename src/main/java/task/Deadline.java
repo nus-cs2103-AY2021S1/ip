@@ -63,7 +63,7 @@ public class Deadline extends Task {
 
         if (obj instanceof Deadline) {
 
-            Deadline deadline = (Deadline)obj;
+            Deadline deadline = (Deadline) obj;
 
             return super.equals(obj)
                     && this.date.equals(deadline.date)
