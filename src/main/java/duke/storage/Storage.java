@@ -134,22 +134,21 @@ public class Storage {
                 String task = matcher.group(3);
                 String date = matcher.group(4);
                 LocalDate localDate = null;
-                    if (date != null && !date.equals("null")) {
-                        localDate = LocalDate.parse(date);
-                    }
-                    switch (matcher.group(1)) {
-                    case ("T"):
-                        list.addItem(new Todo(task, done));
-                        break;
-                    case ("D"):
-                        list.addItem(new Deadline(task, done, localDate));
-                        break;
-                    case ("E"):
-                        list.addItem(new Event(task, done, localDate));
-                        break;
-                    default:
-                        System.out.println("Could not parse: " + matcher.group(0));
-                    }
+                if (date != null && !date.equals("null")) {
+                    localDate = LocalDate.parse(date);
+                }
+                switch (matcher.group(1)) {
+                case ("T"):
+                    list.addItem(new Todo(task, done));
+                    break;
+                case ("D"):
+                    list.addItem(new Deadline(task, done, localDate));
+                    break;
+                case ("E"):
+                    list.addItem(new Event(task, done, localDate));
+                    break;
+                default:
+                    System.out.println("Could not parse: " + matcher.group(0));
                 }
             }
             return list;
