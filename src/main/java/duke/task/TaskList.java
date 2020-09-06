@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.command.Parser;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -9,6 +11,20 @@ public class TaskList {
     private TaskList() {
         this.tasklist = new ArrayList<>();
     }
+
+//    /**
+//     *
+//     * @param taskHistory
+//     * @return
+//     */
+//    public String loadTasks(ArrayList<String> taskHistory) {
+//        for (int i = 0; i < taskHistory.size(); i++) {
+//
+//            Parser.process()
+//            tasklist.add(taskHistory.get(i));
+//        }
+//        return "Total number of Task loaded from previous file: " + taskHistory.size();
+//    }
 
     /**
      * Adds a task to the tasklist

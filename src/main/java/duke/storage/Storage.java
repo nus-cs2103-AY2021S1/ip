@@ -27,12 +27,11 @@ public class Storage {
 
     /**
      * Loads the saved tasks that have not been archived.
-     * @param file the TaskList saved text file
      * @return an ArrayList of the past Tasks
      * @throws IOException on input error.
      */
-    public ArrayList<String> loadFile(File file) throws IOException {
-        Scanner sc = new Scanner(file);
+    public ArrayList<String> loadFile() throws IOException {
+        Scanner sc = new Scanner(this.file);
         ArrayList<String> stringArr = new ArrayList<>();
         while (sc.hasNextLine()) {
             stringArr.add(sc.nextLine());

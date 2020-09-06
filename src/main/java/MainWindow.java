@@ -1,3 +1,5 @@
+import duke.storage.Storage;
+import duke.task.TaskList;
 import duke.ui.Ui;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -10,6 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -38,6 +43,15 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.welcomeMessage(), dukeImage)
         );
+        //Storage dukeStorage = duke.getDukeStorage();
+//        try {
+//            ArrayList<String> taskHistory = dukeStorage.loadFile();
+//            TaskList dukeTaskList = duke.getDukeTaskList();
+//        } catch (IOException e) {
+//            dialogContainer.getChildren().addAll(
+//                    DialogBox.getDukeDialog(Ui.showError(e.getMessage()), dukeImage)
+//            );
+//        }
     }
 
     public void setDuke(Duke d) {

@@ -66,6 +66,22 @@ public class Duke {
     }
 
     /**
+     * Gets the Storage object in Duke
+     * @return Storage Object
+     */
+    public Storage getDukeStorage() {
+        return this.storage;
+    }
+
+    /**
+     * Gets the TaskList object in Duke
+     * @return TaskList Object
+     */
+    public TaskList getDukeTaskList() {
+        return this.taskList;
+    }
+
+    /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
