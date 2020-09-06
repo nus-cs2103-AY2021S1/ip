@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 /**
  * Represents a list of tasks to keep track of.
@@ -30,7 +31,7 @@ public class TaskList {
      *
      * @param task Task to be added.
      */
-    protected String addTask(Task task) throws IOException{
+    protected String addTask(Task task) throws IOException {
         List<Task> duplicateTasks = findDuplicateTasks(task);
         String message = "Hurray! I have added: " + task + "\n";
         list.add(task);
@@ -52,14 +53,17 @@ public class TaskList {
     private List<Task> findDuplicateTasks(Task task) {
         List<Task> duplicateTasks = new ArrayList<>();
         String name = task.getTask();
-        for (Task t : list) {
-            if (t.getTask().equals(name)) {
-                duplicateTasks.add(t);
+        list.stream().forEach(new Consumer<Task>() {
+            @Override
+            public void accept(Task t) {
+                if (t.getTask().equals(name)) {
+                    duplicateTasks.add(t);
+                }
             }
-        }
+        });
+
         return duplicateTasks;
     }
-
 
     /**
      * Marks a task as done.
