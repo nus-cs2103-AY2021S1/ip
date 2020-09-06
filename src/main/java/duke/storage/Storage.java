@@ -36,6 +36,9 @@ public class Storage {
      * @return File that Duke will use to read/write data.
      */
     public File loadData(UI ui) {
+        assert ui != null;
+        assert directoryPath != null;
+        assert fileName != null;
         File directory = new File(directoryPath);
         if (!directory.exists()) {
             directory.mkdirs();
@@ -57,6 +60,10 @@ public class Storage {
      * @param ui UI object.
      */
     public String saveData(TaskList tasks, UI ui) {
+        assert ui != null;
+        assert tasks != null;
+        assert directoryPath != null;
+        assert fileName != null;
         File file = new File(directoryPath + "/" + fileName);
         try {
             resetFileContents(directoryPath + "/" + fileName);
@@ -66,6 +73,8 @@ public class Storage {
             }
         } catch (IOException e) {
             return ui.showError("Something went wrong while trying to save your data... :/");
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showError("There's no such element!");
         }
         return "";
     }
@@ -79,6 +88,7 @@ public class Storage {
 
     //Appends data to file.
     private void appendToFile(String filePath, String lineToAdd) throws IOException {
+        assert lineToAdd.length() > 0;
         FileWriter fileWriter = new FileWriter(filePath, true);
         fileWriter.write(lineToAdd);
         fileWriter.close();

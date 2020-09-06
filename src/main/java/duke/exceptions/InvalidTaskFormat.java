@@ -40,7 +40,7 @@ public class InvalidTaskFormat extends DukeException {
                     + "      deadline <description> /by <date>";
         //Fallthrough
         default:
-            return "What kind of task is that ?!?! :O";
+            return super.toString() + "Input doesn't match any accepted format. Enter --help for more information.";
         }
     }
 }

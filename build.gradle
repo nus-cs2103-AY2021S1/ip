@@ -56,14 +56,15 @@ checkstyle {
     toolVersion = '8.29'
 }
 
-run{
+run {
     standardInput = System.in
+    enableAssertions = true
 }
 
 jar {
     manifest {
         attributes(
-                'Main-Class': 'duke.duke.Duke'
+                'Main-Class': 'duke.duke.Launcher'
         )
     }
 }

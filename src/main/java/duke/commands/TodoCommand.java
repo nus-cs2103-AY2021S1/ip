@@ -33,6 +33,8 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
+        assert ui != null;
+        assert storage != null;
         Task task = new ToDo(commandDescription);
         taskList.addToList(task);
         storage.saveData(taskList, ui);
