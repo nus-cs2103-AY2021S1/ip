@@ -24,9 +24,9 @@ public class TodoCommand extends Command {
         if (newTodos == null) {
             return appUi.getDescriptionEmptyMsg();
         }
-        for(Todo newTodo : newTodos){
-            list.add(newTodo);
-        }
+
+        newTodos.stream().forEach(list::add);
+
         return appUi.getAfterAddMsgVarargs(TODO, list.getSize(), newTodos.toArray(new Task[newTodos.size()]));
     }
 }
