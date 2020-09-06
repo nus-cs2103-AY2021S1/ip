@@ -67,12 +67,15 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.setMinSize(DialogBox.USE_PREF_SIZE, DialogBox.USE_PREF_SIZE);
         return new DialogBox(text, img);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setMinSize(DialogBox.USE_PREF_SIZE, DialogBox.USE_PREF_SIZE);
         return db;
     }
 }
