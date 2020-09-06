@@ -30,7 +30,7 @@ public class TimeParser {
      */
     public static LocalDate parseDate(String string) {
         if (!isDate(string)) {
-            throw new RuntimeException(string +" does not have a date time!");
+            throw new RuntimeException(string + " does not have a date time!");
         }
 
         Pattern pattern = DATE_PATTERN_LIST
@@ -40,7 +40,7 @@ public class TimeParser {
                 .orElseThrow();
         Matcher matcher = pattern.matcher(string);
         if (!matcher.matches()) {
-            throw new RuntimeException(string +" failed to match regex!");
+            throw new RuntimeException(string + " failed to match regex!");
         }
         return LocalDate.of(Integer.parseInt(matcher.group("year")),
                 Integer.parseInt(matcher.group("month")),
@@ -55,7 +55,7 @@ public class TimeParser {
      */
     public static LocalDateTime parseDateTime(String string) {
         if (!isDateTime(string)) {
-            throw new RuntimeException(string +" does not have a date time!");
+            throw new RuntimeException(string + " does not have a date time!");
         }
 
         Pattern pattern = DATETIME_PATTERN_LIST
@@ -65,7 +65,7 @@ public class TimeParser {
                 .orElseThrow();
         Matcher matcher = pattern.matcher(string);
         if (!matcher.matches()) {
-            throw new RuntimeException(string +" failed to match regex!");
+            throw new RuntimeException(string + " failed to match regex!");
         }
         return LocalDateTime.of(Integer.parseInt(matcher.group("year")),
                 Integer.parseInt(matcher.group("month")),

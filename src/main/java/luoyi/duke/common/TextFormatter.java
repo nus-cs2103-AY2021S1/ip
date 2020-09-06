@@ -4,13 +4,12 @@ package luoyi.duke.common;
  * Handles text formatting
  */
 public class TextFormatter {
-    /** Horizontal lines used for formatting */
-    private static final String HORIZONTAL_LINE = "------------------------------------------------------------------";
-    private static final String HORIZONTAL_LINE_2 = "▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼△▼";
-
     /** Bot Logo */
     public static final String LOGO = "CAT BOT\n";
 
+    /** Horizontal lines used for formatting */
+    private static final String HORIZONTAL_LINE =
+            "------------------------------------------------------------------";
 
     /**
      * Returns text formatted with indentation and lines.

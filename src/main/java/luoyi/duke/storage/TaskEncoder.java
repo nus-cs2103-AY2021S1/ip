@@ -1,9 +1,9 @@
 package luoyi.duke.storage;
 
-import luoyi.duke.data.task.ITask;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import luoyi.duke.data.task.ITask;
 
 /**
  * Encodes the tasks in a Duke object to a string for storage.

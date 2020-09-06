@@ -3,7 +3,6 @@ package luoyi.duke.ui;
 import luoyi.duke.common.Message;
 import luoyi.duke.common.TextFormatter;
 import luoyi.duke.data.task.TaskList;
-import org.w3c.dom.Text;
 
 /**
  * Ui class to encapsulate output operations.

@@ -1,9 +1,9 @@
 package luoyi.duke.common;
 
-import luoyi.duke.parser.TimeParser;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import luoyi.duke.parser.TimeParser;
 
 /**
  * Time wrapper class to store a time that maybe contains explicit time representation.

@@ -1,19 +1,22 @@
-import luoyi.duke.data.task.Deadline;
-import luoyi.duke.data.task.Event;
-import luoyi.duke.data.task.TaskList;
-import luoyi.duke.data.task.ToDo;
-import luoyi.duke.ui.Ui;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
+import luoyi.duke.data.task.Deadline;
+import luoyi.duke.data.task.Event;
+import luoyi.duke.data.task.TaskList;
+import luoyi.duke.data.task.ToDo;
+import luoyi.duke.ui.Ui;
+
+/**
+ * Test Ui class.
+ */
 public class UiTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -48,7 +51,7 @@ public class UiTest {
     public void bye_stringPrinted() {
         Ui.bye();
         String expectedOutput = "------------------------------------------------------------------\n"
-                + "|\tBye! Hope to see you again!\n"
+                + "|\tBye! Hope to see you again! (App closing in 5s)\n"
                 + "------------------------------------------------------------------\n";
         assertEquals(expectedOutput, outContent.toString());
     }
@@ -83,8 +86,7 @@ public class UiTest {
     public void displayTasks_correctDate_matchingTaskPrinted() {
         TaskList list = setUpTestList();
         Ui.displayTasks(list, new int[]{2, 3});
-        String expectedOutput
-                = "------------------------------------------------------------------\n"
+        String expectedOutput = "------------------------------------------------------------------\n"
                 + "|\tHere are the task on you are looking for:\n"
                 + "|\t 3. [E][V] Tutorial (at: 2020-11-11T11:22)\n"
                 + "|\t 4. [E][V] Lecture (at: 2020-11-12T10:45)\n"
@@ -96,8 +98,7 @@ public class UiTest {
     public void displayTasks_noMatch_noMatchPromptPrinted() {
         TaskList list = setUpTestList();
         Ui.displayTasks(list, new int[]{});
-        String expectedOutput
-                = "------------------------------------------------------------------\n"
+        String expectedOutput = "------------------------------------------------------------------\n"
                 + "|\tOops! Looks like there's no matching task!\n"
                 + "------------------------------------------------------------------\n";
         assertEquals(expectedOutput, outContent.toString());

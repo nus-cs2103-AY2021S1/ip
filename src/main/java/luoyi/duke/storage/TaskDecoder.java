@@ -1,12 +1,12 @@
 package luoyi.duke.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import luoyi.duke.data.task.Deadline;
 import luoyi.duke.data.task.Event;
 import luoyi.duke.data.task.ITask;
 import luoyi.duke.data.task.ToDo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * TaskDecoder class to encapsulate Task decoding used for storage.

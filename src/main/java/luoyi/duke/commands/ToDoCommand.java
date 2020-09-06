@@ -2,7 +2,6 @@ package luoyi.duke.commands;
 
 import luoyi.duke.common.Message;
 import luoyi.duke.common.TextFormatter;
-import luoyi.duke.data.Duke;
 import luoyi.duke.data.IDuke;
 import luoyi.duke.data.exception.DukeIllegalArgumentException;
 import luoyi.duke.data.task.ITask;
@@ -65,8 +64,7 @@ public class ToDoCommand extends Command {
         ITask task = ToDo.getToDo(description);
         storeTask(task);
         String output = "Got it. I've added this task:\n\t" + task.toString()
-                + "\nNow you have "
-                +  duke.getNumTask() + " task(s) in the list.";
+                + "\nNow you have " + duke.getNumTask() + " task(s) in the list.";
         System.out.print(TextFormatter.getFormattedText(output));
         return output;
     }

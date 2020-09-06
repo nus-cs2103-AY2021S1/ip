@@ -2,12 +2,10 @@ package luoyi.duke.commands;
 
 import luoyi.duke.common.Message;
 import luoyi.duke.common.TextFormatter;
-import luoyi.duke.data.Duke;
 import luoyi.duke.data.IDuke;
 import luoyi.duke.data.exception.DukeIllegalArgumentException;
 import luoyi.duke.data.task.Deadline;
 import luoyi.duke.data.task.ITask;
-import luoyi.duke.data.task.TaskList;
 import luoyi.duke.storage.Storage;
 
 /**
@@ -75,8 +73,7 @@ public class DeadlineCommand extends Command {
         ITask task = Deadline.getDeadline(description, time);
         storeTask(task);
         String output = "Got it. I've added this task:\n\t" + task.toString()
-                + "\nNow you have " +  duke.getNumTask()
-                + " task(s) in the list.";
+                + "\nNow you have " + duke.getNumTask() + " task(s) in the list.";
         System.out.print(TextFormatter.getFormattedText(output));
         return output;
     }

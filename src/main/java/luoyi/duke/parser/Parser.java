@@ -1,6 +1,14 @@
 package luoyi.duke.parser;
 
-import luoyi.duke.commands.*;
+import luoyi.duke.commands.ByeCommand;
+import luoyi.duke.commands.Command;
+import luoyi.duke.commands.DeadlineCommand;
+import luoyi.duke.commands.DeleteCommand;
+import luoyi.duke.commands.DoneCommand;
+import luoyi.duke.commands.EventCommand;
+import luoyi.duke.commands.FindCommand;
+import luoyi.duke.commands.ListCommand;
+import luoyi.duke.commands.ToDoCommand;
 import luoyi.duke.common.Message;
 import luoyi.duke.data.exception.DukeIllegalArgumentException;
 import luoyi.duke.data.exception.DukeUnrecognizedArgumentException;
@@ -11,11 +19,11 @@ import luoyi.duke.data.exception.DukeUnrecognizedArgumentException;
 public class Parser {
     /**
      * Parse a command and returns the corresponding command object.
-     * @see Command For details of command objects.
      *
      * @param commandStr Command string.
      * @return Command object to execute.
      * @throws DukeIllegalArgumentException If the command string is invalid.
+     * @see Command For details of command objects.
      */
     public static Command parse(String commandStr) throws DukeIllegalArgumentException {
         if (commandStr.matches("^list.*")) {

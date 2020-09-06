@@ -1,12 +1,11 @@
 package luoyi.duke.commands;
 
+import java.util.stream.IntStream;
+
 import luoyi.duke.common.Message;
-import luoyi.duke.common.TextFormatter;
 import luoyi.duke.data.IDuke;
 import luoyi.duke.data.task.TaskList;
 import luoyi.duke.ui.Ui;
-
-import java.util.stream.IntStream;
 
 /**
  * ListCommand class to encapsulate a list command.

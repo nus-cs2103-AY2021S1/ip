@@ -1,7 +1,5 @@
 package luoyi.duke.storage;
 
-import luoyi.duke.data.task.ITask;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,6 +9,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import luoyi.duke.data.task.ITask;
 
 /**
  * Encapsulate operations related to storage of tasks.

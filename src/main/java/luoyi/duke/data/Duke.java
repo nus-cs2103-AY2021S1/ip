@@ -11,8 +11,6 @@ import luoyi.duke.parser.Parser;
 import luoyi.duke.storage.Storage;
 import luoyi.duke.ui.Ui;
 
-import java.util.Scanner;
-
 /**
  * Duke chatbot class to encapsulate the behavior of the chatbot.
  * Task id starts from 1.
