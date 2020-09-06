@@ -1,8 +1,11 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,6 +13,7 @@ import duke.exceptions.DukeInvalidDeadlineTimeException;
 import duke.exceptions.DukeInvalidEventTimeException;
 import duke.exceptions.DukeInvalidIndexException;
 import duke.exceptions.DukeInvalidKeywordException;
+import duke.exceptions.DukeInvalidScheduleInputException;
 import duke.exceptions.DukeInvalidTaskDescriptionException;
 import duke.exceptions.DukeInvalidTaskTimeException;
 
@@ -168,6 +172,30 @@ public class TaskList {
 
         return tasks.stream()
                 .filter(t -> t.getDescription().contains(keyword))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Finds all the tasks whose date matches the date in the user input.
+     *
+     * @param input A string representing the user input.
+     * @return The list of tasks whose date matches the date in the user input.
+     * @throws DukeInvalidScheduleInputException If the date input is invalid or empty.
+     */
+    public List<Task> findScheduledTasks(String input) throws DukeInvalidScheduleInputException {
+        String dateInput;
+        LocalDate date;
+
+        try {
+            dateInput = input.substring(9);
+            date = LocalDate.parse(dateInput, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
+            throw new DukeInvalidScheduleInputException();
+        }
+
+        return tasks.stream()
+                .filter(t -> t.getDate().equals(date))
+                .sorted(Comparator.comparing(Task::getTime))
                 .collect(Collectors.toList());
     }
 

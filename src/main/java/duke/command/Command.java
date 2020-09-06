@@ -1,11 +1,6 @@
 package duke.command;
 
-import duke.exceptions.DukeInvalidIndexException;
-import duke.exceptions.DukeInvalidKeywordException;
-import duke.exceptions.DukeInvalidTaskDescriptionException;
-import duke.exceptions.DukeInvalidTaskTimeException;
-import duke.exceptions.DukeLoadingErrorException;
-import duke.exceptions.DukeUnknownInputException;
+import duke.exceptions.*;
 import duke.messages.Output;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
@@ -51,10 +46,11 @@ public abstract class Command {
      * @throws DukeUnknownInputException           If the user input cannot be understood.
      * @throws DukeLoadingErrorException           If the file containing the save data cannot be loaded.
      * @throws DukeInvalidKeywordException         If the user input contains an invalid keyword.
+     * @throws DukeInvalidScheduleInputException   If the user input contains an invalid scheduled date.
      */
     public abstract CommandResult execute(TaskList tasks, Output output, Storage storage)
             throws DukeInvalidIndexException, DukeInvalidTaskTimeException,
             DukeInvalidTaskDescriptionException, DukeUnknownInputException,
-            DukeLoadingErrorException, DukeInvalidKeywordException;
+            DukeLoadingErrorException, DukeInvalidKeywordException, DukeInvalidScheduleInputException;
 
 }

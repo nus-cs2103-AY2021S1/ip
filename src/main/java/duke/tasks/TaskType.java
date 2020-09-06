@@ -15,6 +15,10 @@ public enum TaskType {
         }
     },
     /**
+     * Represents the type of a timed task.
+     */
+    TIMED,
+    /**
      * Represents the type of an event.
      */
     EVENT {

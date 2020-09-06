@@ -1,5 +1,8 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * Represents a task that is to be completed.
  */
@@ -84,7 +87,7 @@ public abstract class Task {
      *
      * @return A string representing the time in the specified format.
      */
-    public abstract String getTime();
+    public abstract String getTimeString();
 
     /**
      * Formats the time in the following format: <code>d MMM yyyy, hh:mm a</code>.
@@ -92,6 +95,20 @@ public abstract class Task {
      * @return A string representing the time in the specified format.
      */
     public abstract String printTime();
+
+    /**
+     * Obtains the date specified in the task (if applicable).
+     *
+     * @return The date specified in the task.
+     */
+    public abstract LocalDate getDate();
+
+    /**
+     * Obtains the time specified in the task (if applicable).
+     *
+     * @return The time specified in the task.
+     */
+    public abstract LocalTime getTime();
 
     /**
      * Standard <code>toString</code>.
