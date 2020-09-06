@@ -8,6 +8,10 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for Task.
+     * @param description Task description.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -21,8 +25,7 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public void setDone()
-    {
+    public void setDone() {
         isDone = true;
     }
 

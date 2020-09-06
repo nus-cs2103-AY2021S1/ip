@@ -1,14 +1,14 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
+import static duke.storage.Storage.DEFAULT_STORAGE_FILEPATH;
+import static duke.ui.Ui.GOODBYE;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static duke.storage.Storage.DEFAULT_STORAGE_FILEPATH;
-import static duke.ui.Ui.GOODBYE;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 public class DukeTest {
 

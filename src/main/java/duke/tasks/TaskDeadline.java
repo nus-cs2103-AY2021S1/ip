@@ -7,6 +7,11 @@ public class TaskDeadline extends Task {
 
     private LocalDateTime deadline;
 
+    /**
+     * Constructor for Deadline Task.
+     * @param description Description of deadline.
+     * @param deadline Date and time of deadline.
+     */
     public TaskDeadline(String description, LocalDateTime deadline) {
         super(description);
         this.deadline = deadline;
@@ -19,8 +24,7 @@ public class TaskDeadline extends Task {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return String.format("[D][%s] %s (by: %s)", getStatusIcon(),
                 description, deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy',' Hmm'hrs'")));
     }
