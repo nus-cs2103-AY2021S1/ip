@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
@@ -13,7 +14,6 @@ public class TaskList implements Iterable<Task> {
 
     public ArrayList<Task> ListOfKeyWordItems = new ArrayList<>();
 
-    public String line = "____________________________________________________________";
 
     TaskList() {
         this.listOfItems = new ArrayList<>();
@@ -21,6 +21,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * adds a task to the list of items
+     *
      * @param item task that is being added
      * @return String output stating its has been added
      */
@@ -34,55 +35,102 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * marks a task in the list with [✓] to state it is done
+     *
      * @param index position of the task to be marked in the list
      * @return String output stating that the task has been marked completed
      * @throws DukeException if the number given is not on the list
      */
     public String markCompleted(int index) throws DukeException {
         try {
+            //assert index > 0 && index < this.listOfItems.size();
             Task item = this.listOfItems.get(index);
             item.markAsDone();
 
             return String.format("\nNice! I've marked this task as done:\n  %s\n", item.toString());
 
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("List does not contain the number specified");
+            return (new DukeException("List does not contain the number specified")).toString();
         }
     }
 
     /**
      * removes a task form the list at the specified position
+     *
      * @param index
      * @return String output stating that the task has been removed
      * @throws DukeException if the number given is not on the list
      */
     public String deleteTask(int index) throws DukeException {
+
         try {
+
             Task item = this.listOfItems.remove(index);
 
             return String.format("\nNoted. I've removed this task:\n  %s\nNow you have %d tasks in your list.\n",
                     item.toString(),
                     this.listOfItems.size());
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("List does not contain the number specified");
+            return (new DukeException("List does not contain the number specified")).toString();
+        }
+    }
+
+    public String rescheduleTask(String details) {
+        if (details == null) {
+            throw new DukeException("I need something to work with.");
+        }
+        try {
+            String[] detailsArray = details.split("/to", 2);
+
+            String indexString = detailsArray[0].trim();
+            int index = Integer.parseInt(indexString) - 1;
+            Task temp = this.listOfItems.get(index);
+            String dateTimeString = detailsArray[1].trim();
+            LocalDateTime dateTime = DateConverter.parseString(dateTimeString);
+
+            if (temp instanceof Deadline) {
+                Task item = new Deadline(temp.description, dateTime);
+                if (temp.isDone) {
+                    item.markAsDone();
+                }
+
+                this.listOfItems.set(index, item);
+                return String.format("\nNoted. I have now rescheduled %s to :\n  %s\nYou still have %d tasks in your list.\n",
+                        temp.toString(), item.toString(),
+                        this.listOfItems.size());
+            } else if (temp instanceof Event) {
+                Task item = new Event(temp.description, dateTime);
+                if (temp.isDone) {
+                    item.markAsDone();
+                }
+                this.listOfItems.set(index, item);
+                return String.format("\nNoted. I have now rescheduled %s to :\n  %s\nYou still have %d tasks in your list.\n",
+                        temp.toString(), item.toString(),
+                        this.listOfItems.size());
+            } else {
+                return (new DukeException("Unable to detect class")).toString();
+            }
+        } catch (Exception e) {
+            return (new DukeException("Unable reschedule the specified Task")).toString();
         }
     }
 
 
     /**
      * prints out the entire list
+     *
      * @return String output of the entire list
      */
 
-    public void findTask(String Keyword){
-        ListOfKeyWordItems.clear();
-       for (Task item : listOfItems) {
-if (item.toString().indexOf(Keyword) != -1) {
-    ListOfKeyWordItems.add(item);
-} else {
 
-}
-       }
+    public void findTask(String Keyword){
+        assert Keyword.length() > 0;
+
+        ListOfKeyWordItems.clear();
+        for (Task item : listOfItems) {
+            if (item.toString().indexOf(Keyword) != -1) {
+                ListOfKeyWordItems.add(item);
+            }
+        }
 
     }
 
@@ -105,6 +153,7 @@ if (item.toString().indexOf(Keyword) != -1) {
 
     /**
      * iterates over the list of items
+     *
      * @return iterator with generic T as Task
      */
     @Override
