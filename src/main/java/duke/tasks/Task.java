@@ -1,7 +1,7 @@
 package duke.tasks;
 
 /**
- * <code>duke.tasks.Task</code> is the base class for all kinds of duke.tasks.
+ * <code>Task</code> is the base class for all kinds of duke.tasks.
  */
 public class Task {
     private boolean isCompleted;

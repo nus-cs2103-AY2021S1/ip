@@ -14,18 +14,18 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * <code>duke.Storage</code> handles all file read and writes.
+ * <code>Storage</code> handles all file read and writes.
  */
 public class Storage {
-    final static String TASKS_TEXT_FILE_PATH = "../../tasks.txt";
+    final static String TASKS_TEXT_FILE_PATH = "src/main/resources/tasks.txt";
 
     /**
      * Loads the information from the file "duke.tasks.txt" into a
      * <code>List</code>. Since each task from the file is
      * comma seperated, it splits each string into a string array using ","
      * as a delimiter. Then it creates objects of the child classes of
-     * <code>duke.tasks.Task</code> according to the information provided.
-     * @return a list of duke.tasks as a <code>List</code>
+     * <code>Task</code> according to the information provided.
+     * @return a list of tasks as a <code>List</code>
      * @throws DukeException if there is an IOexception while creating a new empty file
      */
     public List<Task> load() throws DukeException {
@@ -60,20 +60,20 @@ public class Storage {
             return tasks;
         } catch (FileNotFoundException e) {
             // TODO: Customise font
-            System.out.println("File \"tasks.txt\" does not exist. Attempting to create one for you.");
             try {
-                FileWriter fw = new FileWriter(TASKS_TEXT_FILE_PATH);
-                fw.close();
+                System.out.println("File \"tasks.txt\" does not exist. Attempting to create one for you.");
+                File file = new File(TASKS_TEXT_FILE_PATH);
+                file.createNewFile();
                 System.out.println("Successfully created file tasks.txt");
                 return tasks;
-            } catch (IOException ioException) {
-                throw new DukeException(ioException.getMessage());
+            } catch (IOException io) {
+                throw new DukeException(io.getMessage());
             }
         }
     }
 
     /**
-     * Writes the list of duke.tasks to the file "duke.tasks.txt".
+     * Writes the list of tasks to the file "tasks.txt".
      * @param fileContent the comma seperated string information to be written to the file
      */
     public static void writeTasksFile(String fileContent) {

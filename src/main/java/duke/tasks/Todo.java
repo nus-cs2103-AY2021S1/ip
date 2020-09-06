@@ -1,7 +1,7 @@
 package duke.tasks;
 
 /**
- * <code>duke.tasks.Todo</code> inherits from <code>duke.tasks.Task</code>
+ * <code>Todo</code> inherits from <code>Task</code>
  * and is used to represent a todo.
  */
 public class Todo extends Task {

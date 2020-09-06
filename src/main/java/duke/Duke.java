@@ -3,51 +3,49 @@ package duke;
 import duke.commands.Command;
 import duke.commands.CommandHandler;
 import duke.tasks.TaskManager;
-import java.util.Scanner;
 
 /**
  * Main class that will oversee the running of the program.
  */
 public class Duke {
-//    Ui ui;
-//    TaskManager taskManager;
-//    CommandHandler commandHandler;
-//
-//    Duke() {
-//        this.ui = new Ui();
-//        this.commandHandler = new CommandHandler();
-//        try {
-//            this.taskManager = new TaskManager(new Storage().load());
-//        } catch (DukeException e) {
-//            System.out.println(e);
-//        }
-//    }
+    private Ui ui;
+    private TaskManager taskManager;
+    private CommandHandler commandHandler;
+    private Command cmd;
 
-    public void start() {
-//        ui.showStartScreen();
-//        boolean running = true;
-//        Scanner sc = new Scanner(System.in);
-//        while (running) {
-//            ui.askForCommand();
-//            String s = sc.nextLine();
-//            Command cmd = CommandHandler.parseCommand(s);
-//            cmd.setUtility(taskManager, ui, sc);
-//            try {
-//                boolean result = cmd.execute();
-//                running = result;
-//            } catch (DukeException e) {
-//                System.out.println(e);
-//            }
-//        }
-//        ui.showExitScreen();
-//        sc.close();
+    Duke() {
+        this.ui = new Ui();
+        this.commandHandler = new CommandHandler();
+        try {
+            this.taskManager = new TaskManager(new Storage().load());
+        } catch (DukeException e) {
+            System.out.println("OOPS error loading storage: " + e.getMessage());
+        }
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a response depending on the user input.
+     * @param input user input.
+     * @return the response.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        // If a command has not been set yet or if the ongoing command has been completed
+        if (cmd == null || cmd.isDone()) {
+            Command cmd = commandHandler.parseCommand(input);
+            cmd.init(taskManager, ui);
+            setCommand(cmd);
+            return cmd.toString();
+        } else {
+            try {
+                cmd.execute(input);
+                return cmd.toString();
+            } catch (DukeException e) {
+                return "OOPS! Something went wrong while executing: " + e.toString();
+            }
+        }
+    }
+
+    private void setCommand(Command cmd) {
+        this.cmd = cmd;
     }
 }
