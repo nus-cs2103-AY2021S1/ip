@@ -40,7 +40,7 @@ public class Parser {
         } catch (IllegalArgumentException ex) {
             command = Command.INVALID;
         }
-        String rest = parsedResponse.length == 1 ? null : parsedResponse[1];
+        String remainderString = parsedResponse.length == 1 ? null : parsedResponse[1];
         switch (command) {
         case BYE:
             saver.saveData(taskList);
@@ -49,17 +49,17 @@ public class Parser {
         case LIST:
             return handleList();
         case DONE:
-            return handleDone(rest);
+            return handleDone(remainderString);
         case TODO:
-            return handleTodo(rest);
+            return handleTodo(remainderString);
         case DEADLINE:
-            return handleDeadline(rest);
+            return handleDeadline(remainderString);
         case EVENT:
-            return handleEvent(rest);
+            return handleEvent(remainderString);
         case DELETE:
-            return handleDelete(rest);
+            return handleDelete(remainderString);
         case FIND:
-            return handleFind(rest);
+            return handleFind(remainderString);
         case INVALID:
             throw new DukeException("Unrecognized command!");
         default:
@@ -89,16 +89,16 @@ public class Parser {
      * Handles the "done" command by looking for the task
      * at the index and marking it as done.
      *
-     * @param rest The remaining string after the key command "done".
+     * @param remainderString The remaining string after the key command "done".
      * @throws DukeException Thrown when invalid format used.
      */
-    private String handleDone(String rest) throws DukeException {
-        if (rest == null) {
+    private String handleDone(String remainderString) throws DukeException {
+        if (remainderString == null) {
             throw new DukeException("Specify a task!");
         }
         int taskDone;
         try {
-            taskDone = Integer.parseInt(rest) - 1;
+            taskDone = Integer.parseInt(remainderString) - 1;
         } catch (NumberFormatException ex) {
             throw new DukeException("Specify a valid task number!");
         }
@@ -112,14 +112,14 @@ public class Parser {
     /**
      * Handles the creation of a Todo task.
      *
-     * @param rest The remaining string after the key command "todo".
+     * @param remainderString The remaining string after the key command "todo".
      * @throws DukeException Thrown when invalid format used.
      */
-    private String handleTodo(String rest) throws DukeException {
-        if (rest == null) {
+    private String handleTodo(String remainderString) throws DukeException {
+        if (remainderString == null) {
             throw new DukeException("Description of a todo cannot be empty!");
         }
-        Todo todo = new Todo(rest);
+        Todo todo = new Todo(remainderString);
         taskList.addTask(todo);
         return "Got it. I've added this task:\n" + todo + "\n" + taskList.taskSizeString();
     }
@@ -127,14 +127,14 @@ public class Parser {
     /**
      * Handles the creation of a Deadline task.
      *
-     * @param rest The remaining string after the key command "deadline".
+     * @param remainderString The remaining string after the key command "deadline".
      * @throws DukeException Thrown when invalid format used.
      */
-    private String handleDeadline(String rest) throws DukeException {
-        if (rest == null) {
+    private String handleDeadline(String remainderString) throws DukeException {
+        if (remainderString == null) {
             throw new DukeException("Description of a deadline cannot be empty!");
         }
-        String[] deadlineParsed = rest.split("/");
+        String[] deadlineParsed = remainderString.split("/");
         if (deadlineParsed.length == 1) {
             throw new DukeException("Prefix the keyword 'by' with a forward slash!");
         }
@@ -152,14 +152,14 @@ public class Parser {
     /**
      * Handles the creation of an Event task.
      *
-     * @param rest The remaining string after the key command "event".
+     * @param remainderString The remaining string after the key command "event".
      * @throws DukeException Thrown when invalid format used.
      */
-    private String handleEvent(String rest) throws DukeException {
-        if (rest == null) {
+    private String handleEvent(String remainderString) throws DukeException {
+        if (remainderString == null) {
             throw new DukeException("Description of an event cannot be empty!");
         }
-        String[] eventParsed = rest.split("/");
+        String[] eventParsed = remainderString.split("/");
         if (eventParsed.length == 1) {
             throw new DukeException("Prefix the keyword 'at' with a forward slash!");
         }
@@ -177,16 +177,16 @@ public class Parser {
     /**
      * Handles the deletion of a task.
      *
-     * @param rest The remaining string after the key command "delete", which is index of task.
+     * @param remainderString The remaining string after the key command "delete", which is index of task.
      * @throws DukeException Thrown when invalid format used.
      */
-    private String handleDelete(String rest) throws DukeException {
-        if (rest == null) {
+    private String handleDelete(String remainderString) throws DukeException {
+        if (remainderString == null) {
             throw new DukeException("Specify a task!");
         }
         int deleteIndex;
         try {
-            deleteIndex = Integer.parseInt(rest) - 1;
+            deleteIndex = Integer.parseInt(remainderString) - 1;
         } catch (NumberFormatException ex) {
             throw new DukeException("Specify a valid task number!");
         }
@@ -201,15 +201,15 @@ public class Parser {
     /**
      * Handles the "find" command.
      *
-     * @param rest Remaining string after the "find" command, which is query term.
+     * @param remainderString Remaining string after the "find" command, which is query term.
      * @throws DukeException Thrown when no search term is given.
      */
-    private String handleFind(String rest) throws DukeException {
-        if (rest == null) {
+    private String handleFind(String remainderString) throws DukeException {
+        if (remainderString == null) {
             throw new DukeException("Specify a search term!");
         }
 
-        List<Task> matches = taskList.search(rest);
+        List<Task> matches = taskList.search(remainderString);
 
         if (matches.isEmpty()) {
             return "No matching task.";

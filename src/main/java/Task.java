@@ -16,14 +16,14 @@ public class Task {
      */
     public Task(String name) {
         this.name = name;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
      * Marks the task as completed.
      */
     public void markDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -32,7 +32,7 @@ public class Task {
      * @return Serialized string.
      */
     public String serialize() {
-        return (this.isDone ? "1" : "0") + "|" + this.name;
+        return (isDone ? "1" : "0") + "|" + name;
     }
 
     /**
@@ -73,6 +73,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + (this.isDone ? "O" : "X") + "] " + this.name;
+        return "[" + (isDone ? "O" : "X") + "] " + name;
     }
 }
