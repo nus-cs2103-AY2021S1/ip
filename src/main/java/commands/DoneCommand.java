@@ -31,6 +31,7 @@ public class DoneCommand extends Command {
         if (!super.isParse) {
             throw new Exception("Command has not been parsed");
         }
+        assert(position >= 0);
         return service.markAsDone(position);
     }
 

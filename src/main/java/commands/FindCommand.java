@@ -35,6 +35,7 @@ public class FindCommand extends Command {
         }
 
         String[] finalTokens = TokenUtils.dropFirst(tokens);
+        assert finalTokens.length >= 1;
         this.predicate = S -> TokenUtils.isSubsequence(TokenUtils.tokensToString(finalTokens), S.getDescription());
         super.isParse = true;
     }
