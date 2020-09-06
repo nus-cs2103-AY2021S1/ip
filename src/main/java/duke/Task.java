@@ -1,11 +1,13 @@
 package duke;
 
+import java.time.LocalDate;
+
 /**
  * <h1>duke.Task</h1>
  * General task for the multiple types of task.
  * To-do, duke.Deadline and duke.Event classes inherit from this class.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     private boolean isDone;
 
@@ -35,6 +37,10 @@ public class Task {
         return isDone;
     }
 
+    public boolean isNotDone() {
+        return !isDone;
+    }
+
     /**
      * Getter for description of task.
      * @return String This returns the name of the task.
@@ -49,6 +55,17 @@ public class Task {
     public void markAsDone() {
         isDone = true;
     }
+
+    /**
+     * Converts task to a string to be save in to-do.txt file
+     * @return String A string containing task-type, doneStatus, descriptions and details.
+     */
+    public String convertToText() {
+        String link = " >> ";
+        return link + (this.isDone() ? "1" : "0") + link + this.getDescription();
+    }
+
+    public abstract boolean checkTask(LocalDate date);
 
     /**
      * Overridden toString method to output name, type and status of task.

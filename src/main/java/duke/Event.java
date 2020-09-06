@@ -29,6 +29,20 @@ public class Event extends Task {
     }
 
     /**
+     * Converts event task to a string to be save in to-do.txt file
+     * @return String A string containing task-type, doneStatus, descriptions and details.
+     */
+    @Override
+    public String convertToText() {
+        return "E" + super.convertToText() + " >> " + this.getAt().toString();
+    }
+
+    @Override
+    public boolean checkTask(LocalDate date) {
+        return getAt().equals(date) && isNotDone();
+    }
+
+    /**
      * Overridden toString method to output name, type and status of task.
      * @return String This returns a string.
      */

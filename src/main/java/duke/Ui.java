@@ -208,20 +208,24 @@ public class Ui {
     public String outputCheckTask(TaskList ls, LocalDate date) {
         StringBuilder str = new StringBuilder();
         int counter = 0;
+        counter = getMatchedTask(ls, date, str, counter);
+        addCheckSummary(date, str, counter);
+
+        return str.toString();
+    }
+
+    private int getMatchedTask(TaskList ls, LocalDate date, StringBuilder str, int counter) {
         for (int i = 0; i < ls.size(); i++) {
             Task task = ls.get(i);
-            if (task instanceof Event) {
-                if (((Event) task).getAt().equals(date) && !task.isDone()) {
-                    counter += 1;
-                    str.append(counter).append(". ").append(task.toString()).append("\n");
-                }
-            } else if (task instanceof Deadline && !task.isDone()) {
-                if (((Deadline) task).getDate().equals(date)) {
-                    counter += 1;
-                    str.append(counter).append(". ").append(task.toString()).append("\n");
-                }
+            if (task.checkTask(date)) {
+                counter++;
+                str.append(counter).append(". ").append(task.toString()).append("\n");
             }
         }
+        return counter;
+    }
+
+    private void addCheckSummary(LocalDate date, StringBuilder str, int counter) {
         if (counter == 0) {
             str.append("You have currently no incomplete task on ")
                     .append(date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
@@ -232,8 +236,6 @@ public class Ui {
             str.append("You have a total of ").append(counter)
                     .append(" incomplete tasks on ").append(date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         }
-
-        return str.toString();
     }
 
     /**
@@ -254,6 +256,13 @@ public class Ui {
     public String outputFindTask(TaskList ls, String keyword) {
         StringBuilder str = new StringBuilder();
         int counter = 0;
+        counter = checkKeyword(ls, keyword, str, counter);
+        getFindSummary(keyword, str, counter);
+
+        return str.toString();
+    }
+
+    private int checkKeyword(TaskList ls, String keyword, StringBuilder str, int counter) {
         for (int i = 0; i < ls.size(); i++) {
             Task task = ls.get(i);
             if (task.getDescription().contains(keyword)) {
@@ -261,6 +270,10 @@ public class Ui {
                 str.append(counter).append(". ").append(task.toString()).append("\n");
             }
         }
+        return counter;
+    }
+
+    private void getFindSummary(String keyword, StringBuilder str, int counter) {
         if (counter == 0) {
             str.append("Looks like there is no task matching that keyword: ").append(keyword);
         } else if (counter == 1) {
@@ -270,8 +283,6 @@ public class Ui {
             str.append("^ The above are matching tasks with keyword: '").append(keyword)
                     .append("' from your list.");
         }
-
-        return str.toString();
     }
 
     /**
