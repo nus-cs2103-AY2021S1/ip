@@ -128,7 +128,7 @@ public class Ui {
     /**
      * Displays the welcome message of the Duke chat-bot.
      *
-     * @return String to be printed out.
+     * @return String to be printed out to welcome the user.
      */
     public String showWelcome() {
         String logo = " ____        _        \n"

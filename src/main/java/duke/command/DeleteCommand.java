@@ -33,10 +33,10 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-            int taskNumber = new TaskIndexStringChecker(getArray()).checkTask(tasks);
-            Task taskToDelete = tasks.getTask(taskNumber - 1);
-            tasks.deleteTask(taskNumber - 1);
-            storage.write(tasks);
-            return ui.showDelete(tasks, taskToDelete);
+        int taskNumber = new TaskIndexStringChecker(getArray()).checkTask(tasks);
+        Task taskToDelete = tasks.getTask(taskNumber - 1);
+        tasks.deleteTask(taskNumber - 1);
+        storage.write(tasks);
+        return ui.showDelete(tasks, taskToDelete);
     }
 }

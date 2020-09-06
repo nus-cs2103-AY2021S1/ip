@@ -1,8 +1,5 @@
 package duke.parser;
 
-import duke.DateTime;
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +8,13 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import duke.DateTime;
+import duke.DukeException;
+
+/**
+ * Ensures that date and time input is in the correct format.
+ * Also makes sure that dates are present in user-input.
+ */
 public class DateTimeStringChecker extends StringChecker {
 
     public DateTimeStringChecker(String[] userInput) {
@@ -18,12 +22,21 @@ public class DateTimeStringChecker extends StringChecker {
     }
 
     private void checkDelimiterPresent(String delimiter) throws DukeException {
-        if (Arrays.stream(getStringArray()).noneMatch( x -> x.equals(delimiter))) {
+        if (Arrays.stream(getStringArray()).noneMatch(x -> x.equals(delimiter))) {
             throw new DukeException("Input command must contain the delimiter " + delimiter
                     + " between task name and date!");
         }
     }
 
+    /**
+     * Checks user-specified date and time for format.
+     * Ensures date and times specified are in the future.
+     * Also ensures the respective delimiter to separate task name and date is present in user input.
+     *
+     * @param delimiter Delimiter that is used to separate the task name and date.
+     * @return DateTime object if inputs pass necessary date and time checks.
+     * @throws DukeException If date is not present or formatting is incorrect.
+     */
     public DateTime checkDateTime(String delimiter) throws DukeException {
         //Makes sure the delimiter to separate name and date is present
         checkDelimiterPresent(delimiter);
@@ -67,7 +80,7 @@ public class DateTimeStringChecker extends StringChecker {
         if (dateTime.length > 2) {
             throw new DukeException("Please make sure date is imputed in yyyy-mm-dd format. Any optional time"
                     + " parameter should be in HHmm format. Don't add any more characters after the date and time!");
-        } else if ( dateTime.length > 1  && !dateTime[1].equals("")) {
+        } else if (dateTime.length > 1 && !dateTime[1].equals("")) {
             return checkTimeFormat(taskDate, dateTime);
         } else {
             return null;
@@ -76,7 +89,7 @@ public class DateTimeStringChecker extends StringChecker {
 
     private LocalTime checkTimeFormat(LocalDate taskDate, String[] dateTime) throws DukeException {
         try {
-            LocalTime taskTime = LocalTime.parse(dateTime[1],DateTimeFormatter.ofPattern("HHmm"));
+            LocalTime taskTime = LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("HHmm"));
             //Make sure time has not passed
             if (taskDate.isEqual(LocalDate.now()) && taskTime.isBefore(LocalTime.now())) {
                 throw new DukeException("Check your time! The date and time combination you specified has already "
@@ -84,7 +97,7 @@ public class DateTimeStringChecker extends StringChecker {
             }
             return taskTime;
         } catch (DateTimeParseException e) {
-                throw new DukeException("Check your time! Any time specified must be in HHmm format (i.e. 1800)!");
+            throw new DukeException("Check your time! Any time specified must be in HHmm format (i.e. 1800)!");
         }
     }
 

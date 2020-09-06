@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.util.Arrays;
-
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
@@ -26,16 +24,6 @@ public abstract class Command {
     }
 
     /**
-     * Returns if the first index of the string array variable is empty.
-     *
-     * @return True if the first index of the string array variable is empty.
-     */
-    public boolean isFirstIndexEmpty() {
-        return userStrings.length < 2 || userStrings[1].equals("");
-    }
-
-
-    /**
      * Executes the command to add a task, mark a task as done, delete the task, list all tasks or exit.
      * Abstract method that should be implemented in all sub-types of the Command class.
      *
@@ -54,25 +42,6 @@ public abstract class Command {
     public boolean isExit() {
         return false;
     };
-
-    /**
-     * Checks if the input string is contained within the string array of the AddCommand object.
-     *
-     * @param delimiter Input string to be checked against the string array.
-     * @return True if the string is found inside of the string array.
-     */
-    public boolean containsString(String delimiter) {
-        return Arrays.stream(getArray()).anyMatch(delimiter::equals);
-    }
-
-    /**
-     * Returns the item contained in the first index of the string array.
-     *
-     * @return The the item contained in the first index of the string array.
-     */
-    public String getFirstIndex() {
-        return getArray()[1];
-    }
 
     /**
      * Returns the string array.

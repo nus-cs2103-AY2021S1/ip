@@ -1,6 +1,10 @@
 package duke.command;
 
-import duke.*;
+
+import duke.DateTime;
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
 import duke.parser.DateTimeStringChecker;
 import duke.parser.TaskNameStringChecker;
 import duke.task.Deadline;
@@ -9,8 +13,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * Represents an add command. An AddCommand object represents a command
@@ -71,8 +73,7 @@ public class AddCommand extends Command {
      *
      * @param tasks The task list to add the new task into.
      * @return The same task that is added to the task list.
-     * @throws DukeException If task string does not contain task name, is unrecognized,
-     * or the delimiter used to process deadline/event tasks.
+     * @throws DukeException If task string does not contain task name, is unrecognized.
      */
     private Task addTask(TaskList tasks) throws DukeException {
         switch (getArray()[0]) {

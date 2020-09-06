@@ -2,10 +2,6 @@ package duke.task;
 
 import duke.DateTime;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 /**
  * Represents an Event task that contains both task name and a date to serve as the event date.
  * Time can be added as an optional parameter.
@@ -19,7 +15,7 @@ public class Event extends Task {
      * Creates an Event task containing the description, date and time of the task.
      *
      * @param name Description of the event task.
-     * @param dateTime Date and any specified time of the event.
+     * @param dateTime Stores the date and any specified time of the task deadline.
      */
     public Event(String name, DateTime dateTime) {
         super(name);

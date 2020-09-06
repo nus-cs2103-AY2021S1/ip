@@ -2,6 +2,9 @@ package duke.parser;
 
 import duke.DukeException;
 
+/**
+ * Abstract class to represent utility checker classes that ensure string quality and correctness.
+ */
 public abstract class StringChecker {
 
     /** Input string array from the user. */
@@ -20,7 +23,7 @@ public abstract class StringChecker {
         //Makes sure string does not contain the illegal delimiter specified
         if (string.contains(delimiter)) {
             throw new DukeException("Sorry, task descriptions cannot contain '" + delimiter + " '");
-        };
+        }
     }
 
     public String[] getStringArray() {

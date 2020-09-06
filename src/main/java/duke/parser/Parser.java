@@ -93,7 +93,7 @@ public class Parser {
     /**
      * Gets the input string of the user.
      *
-     * @return The inputstring of the user.
+     * @return The input string of the user.
      */
     public String getString() {
         return inputString;

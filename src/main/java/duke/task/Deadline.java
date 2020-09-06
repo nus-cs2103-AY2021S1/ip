@@ -1,9 +1,5 @@
 package duke.task;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 import duke.DateTime;
 
 /**
@@ -19,7 +15,7 @@ public class Deadline extends Task {
      * Creates a Deadline task containing the description, date and time of the task.
      *
      * @param name Description of the deadline task.
-     * @param dateTime Date and any specified time of the task deadline.
+     * @param dateTime Stores the date and any specified time of the task deadline.
      */
     public Deadline(String name, DateTime dateTime) {
         super(name);

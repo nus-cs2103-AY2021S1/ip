@@ -60,10 +60,10 @@ public class Duke {
 
     /**
      * Takes in user input, parses the input and executes the correct command to process the tasks.
-     * Runs the program GUI.
+     * Used for running the program GUI.
      * Exits only when an ExitCommand is generated based on user input.
      *
-     * @param input The User input in the form of a string.
+     * @param input The user input in the form of a string.
      * @return The response to the user based on the user input.
      */
     public String run(String input) {
