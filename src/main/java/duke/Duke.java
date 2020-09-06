@@ -21,10 +21,9 @@ public class Duke {
 
     /**
      * Initializes Duke with the given file path
-     *
-     * @param filePath the file path used to initialize Duke
      */
-    public Duke(String filePath) {
+    public Duke() {
+        String filePath = "data/tasks.txt";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -39,15 +38,14 @@ public class Duke {
      * main method of Duke
      */
     public static void main(String[] args) {
-        String path = "data/tasks.txt";
-        new Duke(path).run();
+        new Duke().run();
     }
 
     /**
      * Runs the Duke
      */
     public void run() {
-        ui.greeting();
+        ui.welcome();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -58,6 +56,20 @@ public class Duke {
             } catch (DukeException e) {
                 ui.giveResponse(e.getMessage());
             }
+        }
+    }
+
+    /**
+     * Gives response to the given input.
+     * @param input the given input
+     * @return      corresponding repsonse
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            return ui.giveResponse(e.getMessage());
         }
     }
 }

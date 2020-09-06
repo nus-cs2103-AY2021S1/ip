@@ -42,7 +42,7 @@ public class DoneCommand implements Command {
      *                       or the task list cannot be saved to the storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (index < 0 || index >= taskList.size()) {
             throw new DukeException("The task index should be an index on the list!");
         }
@@ -50,6 +50,6 @@ public class DoneCommand implements Command {
         taskList.markAsDone(index);
         storage.saveList(taskList);
 
-        ui.giveResponse("Nice! I've marked this task as done:\n       " + task);
+        return ui.giveResponse("\tNice! I've marked this task as done:\n\t\t" + task);
     }
 }

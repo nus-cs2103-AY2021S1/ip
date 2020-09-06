@@ -37,7 +37,7 @@ public class FindCommand implements Command {
      * @param ui       the ui object that handles inputs and outputs
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         TaskList results = new TaskList();
         for (Task task : taskList.getList()) {
             if (task.getDescription().contains(keyword)) {
@@ -45,9 +45,9 @@ public class FindCommand implements Command {
             }
         }
         if (results.size() == 0) {
-            ui.giveResponse("I cannot find any task containing " + keyword + " !");
+            return ui.giveResponse("\tI cannot find any task containing " + keyword + " !");
         } else {
-            ui.displayList(results, "Here are the matching tasks in your list:");
+            return ui.displayList(results, "Here are the matching tasks in your list:");
         }
     }
 }
