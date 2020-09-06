@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 /**
  * Encapsulates storing logic
@@ -30,22 +31,22 @@ public class Storage {
         assert tasks != null : "tasks have not been initialised";
         FileWriter file = new FileWriter(filePath);
         StringBuilder s = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
+        IntStream.range(0, tasks.size()).forEach(i -> {
             if (tasks.get(i) instanceof Todo) {
                 s.append(String.format("T | %d | %s", tasks.get(i).getStatus() ? 1 : 0, tasks.get(i).getDescription()));
             } else if (tasks.get(i) instanceof Deadline) {
                 s.append(String.format("D | %d | %s | %s",
                         tasks.get(i).getStatus() ? 1 : 0,
                         tasks.get(i).getDescription(), (
-                        (Deadline) tasks.get(i)).getDate()));
+                                (Deadline) tasks.get(i)).getDate()));
             } else if (tasks.get(i) instanceof Event) {
                 s.append(String.format("E | %d | %s | %s",
                         tasks.get(i).getStatus() ? 1 : 0,
                         tasks.get(i).getDescription(), (
-                        (Event) tasks.get(i)).getDate()));
+                                (Event) tasks.get(i)).getDate()));
             }
             s.append("\n");
-        }
+        });
         file.write(s.toString());
         file.close();
     }
