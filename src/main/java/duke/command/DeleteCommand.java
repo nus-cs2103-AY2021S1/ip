@@ -28,6 +28,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null && storage != null;
         try {
             Task taskToDelete = taskList.getTask(indexOfTask);
             taskList.deleteTask(indexOfTask);

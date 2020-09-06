@@ -37,6 +37,7 @@ public class DateAndTimeListCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null && storage != null;
         int numberOfTasksFound = 0;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are the tasks with the date: "
@@ -60,6 +61,7 @@ public class DateAndTimeListCommand extends Command {
                 }
             }
         }
+
         if (numberOfTasksFound > 0) {
             return new CommandResult(stringBuilder.toString());
         } else {

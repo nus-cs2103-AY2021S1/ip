@@ -18,6 +18,7 @@ public class ListCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null && storage != null;
         if (taskList.numberOfTasks() > 0) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Here are the tasks in your list:\n");

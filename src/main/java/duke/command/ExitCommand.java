@@ -16,6 +16,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList taskList, Storage storage) {
+        assert taskList != null && storage != null;
         CommandResult commandResult = new CommandResult(EXIT_MESSAGE);
         commandResult.setIsExit();
         return commandResult;

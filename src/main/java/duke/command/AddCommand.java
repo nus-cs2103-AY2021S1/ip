@@ -19,7 +19,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds the taskToAdd to the TaskList, prints a message in the Ui and updates the Storage.
+     * Adds the taskToAdd to the TaskList and updates the Storage.
      *
      * @param tasks   The TaskList.
      * @param storage The Storage.
@@ -28,6 +28,7 @@ public class AddCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) throws DukeException {
+        assert tasks != null && storage != null;
         tasks.addTask(taskToAdd);
         storage.updateStorage(tasks);
         return new CommandResult("Got it. I've added this task:\n"

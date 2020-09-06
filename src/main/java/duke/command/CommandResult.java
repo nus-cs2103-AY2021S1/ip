@@ -17,6 +17,7 @@ public class CommandResult {
     }
 
     public String getFeedbackToUser() {
+        assert feedbackToUser != null;
         return feedbackToUser;
     }
 }
