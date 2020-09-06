@@ -7,10 +7,6 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final Scanner sc = new Scanner(System.in);
-//    private void delimiter() {
-//        System.out.println("__________________________________________________________________");
-//    }
-
     /**
      * Returns next line of user input
      *
@@ -63,7 +59,7 @@ public class Ui {
      */
     public String printTask(Task task, ActionType action) {
         String taskDescription;
-        switch(action){
+        switch(action) {
         case MARK_DONE:
             taskDescription = "Task marked complete: \n";
             break;
@@ -77,6 +73,13 @@ public class Ui {
         return taskDescription;
     }
 
+    /**
+     * Searches task with keywords and print them.
+     *
+     * @param tasks
+     * @param input
+     * @return tasks including keywords' description string.
+     */
     public String search(TaskList tasks, String input) {
         int count = 1;
         String result = "Matching tasks: \n";
