@@ -24,13 +24,4 @@ public abstract class Command {
      * @throws DukeException If there was a problem with executing the command.
      */
     public abstract CommandResponse execute(TaskList tasks, Storage storage) throws DukeException;
-
-    /**
-     * Indicates if this command is an exit command.
-     *
-     * @return False by default, unless this is an exit command.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

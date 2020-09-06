@@ -1,5 +1,9 @@
 package duke.task;
 
+import java.time.LocalDate;
+
+import duke.DukeException;
+
 /**
  * Represents tasks without any date attached to it.
  */
@@ -12,6 +16,26 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description, TaskType.TODO);
+    }
+
+    /**
+     * Returns false since todos do not have dates associated to them.
+     *
+     * @return False, since todos do not have dates associated to them.
+     */
+    @Override
+    public boolean hasDate() {
+        return false;
+    }
+
+    /**
+     * Throws an exception since todos do not have dates associated to them.
+     *
+     * @throws DukeException Since todos do not have dates associated to them.
+     */
+    @Override
+    public LocalDate getDate() throws DukeException {
+        throw new DukeException("Todo tasks do not have dates associated to them.");
     }
 
     /**

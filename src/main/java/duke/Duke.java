@@ -4,7 +4,7 @@ import duke.command.Command;
 import duke.command.CommandResponse;
 
 /**
- * Represents a Personal Assistant Chatbot that helps a person to keep track of various tasks.
+ * Represents a personal assistant chat bot that helps a person to keep track of various tasks.
  */
 public class Duke {
     /** The storage to handle saving and loading tasks. */
@@ -13,7 +13,7 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     * Creates a new Duke Chatbot that saves and loads tasks from the given filepath.
+     * Creates a new Duke chat bot that saves and loads tasks from the given filepath.
      *
      * @param filePath The file path to load tasks from and save tasks to.
      */
@@ -38,7 +38,7 @@ public class Duke {
             Command c = Parser.parse(input);
             return c.execute(tasks, storage);
         } catch (DukeException e) {
-            return new CommandResponse(Ui.respondError(e), false);
+            return new CommandResponse(Ui.respondError(e));
         }
     }
 }

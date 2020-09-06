@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,10 @@ import duke.task.Todo;
  */
 public class Storage {
     /** The file where tasks are loaded from and saved to. */
-    private File file;
+    private final File file;
 
     /**
-     * Creates a new Storage that loads tasks from and saves tasks to the given file.
+     * Creates a new storage that loads tasks from and saves tasks to the given file.
      *
      * @param filePath The file path of the file.
      */
@@ -50,32 +51,32 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String savedTask = sc.nextLine();
                 String[] splitTask = savedTask.split(" \\| ", 4);
-                switch (splitTask[0]) {
+                String taskShortForm = splitTask[0];
+                boolean isDone = splitTask[1].equals("1");
+                String fullDescription = splitTask[2];
+                Task task;
+                switch (taskShortForm) {
                 case "T":
-                    Todo todo = new Todo(splitTask[2]);
-                    if (splitTask[1].equals("1")) {
-                        todo.markAsDone();
-                    }
-                    tasks.add(todo);
+                    task = new Todo(fullDescription);
                     break;
                 case "D":
-                    Deadline deadline = new Deadline(splitTask[2], Parser.parseDate(splitTask[3]));
-                    if (splitTask[1].equals("1")) {
-                        deadline.markAsDone();
-                    }
-                    tasks.add(deadline);
+                    String deadlineDescription = splitTask[2];
+                    LocalDate deadlineDate = Parser.parseDate(splitTask[3]);
+                    task = new Deadline(deadlineDescription, deadlineDate);
                     break;
                 case "E":
-                    Event event = new Event(splitTask[2], Parser.parseDate(splitTask[3]));
-                    if (splitTask[1].equals("1")) {
-                        event.markAsDone();
-                    }
-                    tasks.add(event);
+                    String eventDescription = splitTask[2];
+                    LocalDate eventDate = Parser.parseDate(splitTask[3]);
+                    task = new Event(eventDescription, eventDate);
                     break;
                 default:
                     assert false : splitTask[0];
                     throw new IllegalArgumentException();
                 }
+                if (isDone) {
+                    task.markAsDone();
+                }
+                tasks.add(task);
             }
             return tasks;
         } catch (FileNotFoundException e) {
@@ -95,19 +96,18 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(file);
             for (Task task : tasks) {
-                int isDone = task.getIsDone() ? 1 : 0;
+                int isDone = task.isDone() ? 1 : 0;
                 switch (task.getShortForm()) {
                 case "T":
-                    writer.write(task.getShortForm() + " | " + isDone + " | "
-                            + task.getDescription() + "\n");
+                    writer.write(task.getShortForm()
+                            + " | " + isDone
+                            + " | " + task.getDescription() + "\n");
                     break;
-                case "D":
-                    writer.write(task.getShortForm() + " | " + isDone + " | "
-                            + task.getDescription() + " | " + ((Deadline) task).getBy() + "\n");
-                    break;
-                case "E":
-                    writer.write(task.getShortForm() + " | " + isDone + " | "
-                            + task.getDescription() + " | " + ((Event) task).getAt() + "\n");
+                case "D": case "E":
+                    writer.write(task.getShortForm()
+                            + " | " + isDone
+                            + " | " + task.getDescription()
+                            + " | " + task.getDate() + "\n");
                     break;
                 default:
                     assert false : task.getShortForm();
