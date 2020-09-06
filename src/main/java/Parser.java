@@ -15,8 +15,6 @@ public class Parser {
             myUi.horizontalRule();
             String[] fullArg = currInput.split("/");
             String[] args1 = fullArg[0].split(" ");
-
-
             if (currInput.equals("bye")) {
                 response += "Bye. Hope to see you again soon!\n";
                 myUi.horizontalRule();
@@ -78,7 +76,6 @@ public class Parser {
                 response+=myTasklist.numTaskUI();
 
             } else if (args1[0].equals("event")) {
-
                 String task = "";
                 for (int i = 1; i < args1.length; i++) {
                     task += args1[i] + " ";
@@ -92,7 +89,6 @@ public class Parser {
                     System.out.println("☹ OOPS!!! The description of a " + args1[0] + " cannot be empty.");
                 }
                 response+=myTasklist.numTaskUI();
-
             } else if (currInput.equals("list")) {
                 response+=myTasklist.listUI();
             } else if (args1[0].equals("done")) {
