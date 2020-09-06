@@ -1,5 +1,3 @@
-import duke.storage.Storage;
-import duke.task.TaskList;
 import duke.ui.Ui;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,8 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

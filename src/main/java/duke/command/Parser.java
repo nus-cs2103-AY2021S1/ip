@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -60,6 +61,12 @@ public class Parser {
         return finalString;
     }
 
+    /**
+     * Overloaded method that processes tasks that are formatted and saved in the textfile
+     * @param command command passed for processing
+     * @param taskList the tasklist that stores the tasks
+     * @throws DukeException for invalid commands
+     */
     public static void process(String command, TaskList taskList) throws DukeException {
         processorAdd(command, taskList);
     }
@@ -166,11 +173,13 @@ public class Parser {
         case 'T':
             return "todo " + stringArr[1];
         case 'D':
-            String[] secondArr = stringArr[1].split("/by", 2);
-            return "deadline /by " + secondArr[1].trim();
+            String[] secondArr = stringArr[1].split("by: ", 2);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+            LocalDate date = LocalDate.parse(secondArr[1], formatter);
+            return "deadline " + secondArr[0] + "/by " + date;
         case 'E':
-            String[] thirdArr = stringArr[1].split("/at", 2);
-            return "event /at " + thirdArr[1];
+            String[] thirdArr = stringArr[1].split("at: ", 2);
+            return "event " + thirdArr[0] + "/at " + thirdArr[1];
         default:
             String errorMessage = "Failed to process Stored Tasks";
             throw new DukeException(errorMessage);
