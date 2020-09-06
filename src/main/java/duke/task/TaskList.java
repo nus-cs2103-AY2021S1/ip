@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.Duke;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +17,7 @@ public class TaskList {
      * TaskList constructor called when first running Duke.
      */
     public TaskList() {
-         tasks = new ArrayList<>(100);
+         tasks = new ArrayList<>(Duke.MAX_NUM_OF_TASKS);
     }
 
     /**

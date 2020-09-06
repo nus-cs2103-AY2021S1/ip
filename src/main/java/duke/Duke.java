@@ -22,7 +22,9 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private static final String DEFAULT_SAVE_FILE = ".\\data\\duke.txt";
+
+    public static final String DEFAULT_SAVE_FILE = ".\\data\\duke.txt";
+    public static final int MAX_NUM_OF_TASKS = 100;
 
     /**
      * Constructs a Duke object and initialises Ui, Storage & TaskList classes.
@@ -79,14 +81,7 @@ public class Duke {
      * Main method of Duke.
      */
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
-    }
-
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
+        new Duke(DEFAULT_SAVE_FILE).run();
     }
 
     /**
@@ -94,12 +89,13 @@ public class Duke {
      * @param input String input from user.
      */
     public String getResponse(String input) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+
         try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            PrintStream ps = new PrintStream(baos);
-            PrintStream old = System.out;
-            System.setOut(ps);
             Command c = Parser.parse(input);
+            System.setOut(ps);
             c.execute(tasks, ui, storage);
             storage.store(tasks);
 
@@ -107,7 +103,7 @@ public class Duke {
             System.out.flush();
             System.setOut(old);
 
-            return c.isExit() ? "Close the window to stop me." : baos.toString();
+            return baos.toString();
         } catch (DukeException e) {
             return e.toString();
         }

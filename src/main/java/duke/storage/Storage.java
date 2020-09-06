@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.Duke;
 import duke.task.*;
 
 import duke.exception.DukeException;
@@ -18,6 +19,7 @@ import java.util.List;
  * Data is stored at the provided file path.
  */
 public class Storage {
+
     private final String filePath;
 
     /**
@@ -34,13 +36,13 @@ public class Storage {
      */
     public void store(TaskList tasks) {
         try {
-            FileWriter writer = new FileWriter(".\\data\\duke.txt");
+            FileWriter writer = new FileWriter(Duke.DEFAULT_SAVE_FILE);
             StringBuilder textToWrite = new StringBuilder();
 
             for (int i = 1; i <= tasks.getNumOfTasks(); i++) {
                 Task t = tasks.retrieve(i);
                 // Insert / separators.
-                String nextEntry = t.getStringType()
+                String nextEntry = t.getSaveSymbol()
                         + " / " + t.isDoneToString()
                         + " / " + t.getDescription()
                         + t.getDate()
@@ -70,11 +72,13 @@ public class Storage {
             }
 
             Scanner sc = new Scanner(file);
-            List<Task> tasks = new ArrayList<>(100);
+            List<Task> tasks = new ArrayList<>(Duke.MAX_NUM_OF_TASKS);
+            int lineNumber = 0;
 
             while (sc.hasNext()) {
                 // Get next line.
                 String nextEntryLine = sc.nextLine();
+                lineNumber++;
 
                 // Remove dividers and place into array.
                 String[] nextEntryArray = nextEntryLine.split(" / ", 4);
@@ -93,22 +97,29 @@ public class Storage {
 
                 // Create Task to add to TaskList.
                 Task t;
-                if (nextEntryTaskType.equals("T") && nextEntryLength == 3) { // Todo Task.
+                if (nextEntryTaskType.equals(Task.TODO_SAVE_SYMBOL)
+                        && nextEntryLength == 3) { // Todo Task.
                     t = new Todo(nextEntryDescription);
                     if (isDone) { t.markAsDone(); }
-                    tasks.add(t);
-                } else if (nextEntryTaskType.equals("D") && nextEntryLength == 4) { // Deadline Task.
+
+                } else if (nextEntryTaskType.equals(Task.DEADLINE_SAVE_SYMBOL)
+                        && nextEntryLength == 4) { // Deadline Task.
                     String by = nextEntryArray[3];
                     t = new Deadline(nextEntryDescription, by);
-                    tasks.add(t);
-                } else if (nextEntryTaskType.equals("E") && nextEntryLength == 4) { // Event Task.
+
+                } else if (nextEntryTaskType.equals(Task.EVENT_SAVE_SYMBOL)
+                        && nextEntryLength == 4) { // Event Task.
                     String at = nextEntryArray[3];
                     t = new Event(nextEntryDescription, at);
-                    tasks.add(t);
+
                 } else {
                     // Unknown Task type.
-                    throw new DukeException("Check duke.txt storage file integrity:");
+                    throw new DukeException("Check duke.txt storage file integrity: \n"
+                    + "Line No: "+ lineNumber + "\n"
+                    + "Content: " + nextEntryLine);
                 }
+                // Finally, add task if no exception thrown.
+                tasks.add(t);
             }
             // Return updated List of Tasks.
             return tasks;

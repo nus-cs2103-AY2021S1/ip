@@ -20,6 +20,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructor for DoneCommand.
+     *
      * @param taskNumber Task number of Task in the TaskList.
      */
     public DoneCommand(int taskNumber) {
@@ -33,18 +34,24 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        try {
-            Task t = tasks.retrieve(taskNumber);
+        boolean taskNumberGreaterThanZero = taskNumber <= 0;
+        boolean taskNumberMoreThanTaskListSize = taskNumber > tasks.getNumOfTasks();
+        boolean isNotValidTaskNumber = taskNumberGreaterThanZero
+                || taskNumberMoreThanTaskListSize;
 
-            if (t.isDone()) {
-                throw new DukeException("Task is already marked as done.");
-            }
-
-            t.markAsDone();
-            ui.doneTaskMessage(t);
-
-        } catch (Exception e) {
+        if (isNotValidTaskNumber) {
             throw new DukeException("Task does not exist/invalid task number.");
         }
+
+        Task t = tasks.retrieve(taskNumber);
+
+        if (t.isDone()) {
+            throw new DukeException("Task is already marked as done.");
+        }
+
+        t.markAsDone();
+        ui.doneTaskMessage(t);
+
+        assert t.isDone();
     }
 }
