@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -8,7 +10,7 @@ public class Task {
     }
 
     /**
-     * Returns a special character based on the state of the Task.
+     * Returns a special character based on the state of the duke.task.Task.
      * @return a Tick if the task is marked as done or a cross if not.
      */
     public String getStatusIcon() {
@@ -16,7 +18,7 @@ public class Task {
     }
 
     /**
-     * Marks the Task as done.
+     * Marks the duke.task.Task as done.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -29,6 +31,8 @@ public class Task {
     public String storageForm() {
         return "";
     }
+
+    public String getDescription() { return this.description; }
 
     @Override
     public String toString() {

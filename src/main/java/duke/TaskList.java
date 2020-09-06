@@ -1,7 +1,14 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.util.ArrayList;
 
 /**
- * TaskList Class stores the list of tasks and modifies the list according to commands.
+ * duke.TaskList Class stores the list of tasks and modifies the list according to commands.
  */
 public class TaskList {
 
@@ -23,9 +30,9 @@ public class TaskList {
     }
 
     /**
-     * Adds a new subclass of Task based on a String input.
+     * Adds a new subclass of duke.task.Task based on a String input.
      * @param input Command from user
-     * @return a Task that is either a ToDo, a Deadline or an Event.
+     * @return a duke.task.Task that is either a duke.task.ToDo, a duke.task.Deadline or an duke.task.Event.
      * @throws DukeException Throws exception if command is invalid due to missing information.
      */
     public Task addItem(String input) throws DukeException {
@@ -33,14 +40,14 @@ public class TaskList {
         String arr[] = input.split(" ", 2);
         Task curr = new Task("");
         if (arr.length == 1) {
-            throw new DukeException("The description of a " + arr[0] + " cannot be empty!");
+            throw DukeException.INVALID_TASK_EXCEPTION;
         } else if (arr[0].equals("todo")) {
             curr = new ToDo(arr[1]);
             list.add(curr);
         } else if (arr[0].equals("deadline")) {
             String info[] = arr[1].split("/by ", 2);
             if (info.length == 1) {
-                throw new DukeException("Deadline not provided!");
+                throw DukeException.INVALID_DEADLINE_EXCEPTION;
             } else {
                 curr = new Deadline(info[0], Parser.dateParser(info[1]));
                 list.add(curr);
@@ -48,7 +55,7 @@ public class TaskList {
         } else if (arr[0].equals("event")) {
             String info[] = arr[1].split("/at ", 2);
             if (info.length == 1) {
-                throw new DukeException("Time not provided!");
+                throw DukeException.INVALID_TIME_EXCEPTION;
             } else {
                 String[] t = info[1].split(" ", 2);
                 curr = new Event(info[0], Parser.dateParser(t[0]), Parser.timeParser(t[1]));
@@ -61,7 +68,7 @@ public class TaskList {
     /**
      * Deletes an item based on the number
      * @param input Command from user
-     * @return the Task that was deleted
+     * @return the duke.task.Task that was deleted
      * @throws DukeException Throws exception if command is invalid due to missing or wrong information.
      */
     public Task deleteItem(String input) throws DukeException{
@@ -69,19 +76,19 @@ public class TaskList {
         String info[] = input.split(" ", 2);
         Task toBeDeleted = new Task("");
         if (info.length == 1) {
-            throw new DukeException("Which item???");
+            throw DukeException.INVALID_INDEX_EXCEPTION;
         } else {
             try {
                 int index = Integer.parseInt(info[1]);
                 if (index > list.size() || index <= 0) {
-                    throw new DukeException("Excuse Moi???");
+                    throw DukeException.INVALID_INDEX_EXCEPTION;
                 } else {
                     toBeDeleted = list.get(index - 1);
                     list.remove(index - 1);
                     return toBeDeleted;
                 }
             } catch (NumberFormatException ex1){
-                throw new DukeException("Excuse Meee? number pls.");
+                throw DukeException.INVALID_INDEX_EXCEPTION;
             }
         }
     }
@@ -89,7 +96,7 @@ public class TaskList {
     /**
      * Marks an item as done based on the number
      * @param input Command from user
-     * @return the Task that was marked as done after it has been marked.
+     * @return the duke.task.Task that was marked as done after it has been marked.
      * @throws DukeException Throws exception if command is invalid due to missing or wrong information.
      */
     public Task doneItem(String input) throws DukeException {
@@ -97,11 +104,11 @@ public class TaskList {
         String info[] = input.split(" ", 2);
         Task toBeRet = new Task("");
         if (info.length == 1) {
-            throw new DukeException("Which item???");
+            throw DukeException.INVALID_INDEX_EXCEPTION;
         } else {
             int index = Integer.parseInt(info[1]);
             if (index > list.size() || index <= 0) {
-                throw new DukeException("Excuse Moi???");
+                throw DukeException.INVALID_INDEX_EXCEPTION;
             } else {
                 list.get(index-1).markAsDone();
                 toBeRet = list.get(index-1);
@@ -110,16 +117,20 @@ public class TaskList {
         return toBeRet;
     }
 
-    public ArrayList<Task> find(String input) {
+    public ArrayList<Task> find(String input) throws DukeException{
         assert input.length() >= 4;
         String[] info = input.split(" ", 2);
-        ArrayList<Task> ret = new ArrayList<>();
-        for (Task k: list) {
-            if (k.description.contains(info[1])) {
-                ret.add(k);
+        if (info.length == 1) {
+            throw DukeException.INVALID_QUERY_EXCEPTION;
+        } else {
+            ArrayList<Task> ret = new ArrayList<>();
+            for (Task k : list) {
+                if (k.getDescription().contains(info[1])) {
+                    ret.add(k);
+                }
             }
+            return ret;
         }
-        return ret;
     }
 
     /**

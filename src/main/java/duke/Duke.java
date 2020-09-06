@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.io.IOException;
 
 public class Duke {
@@ -38,14 +42,14 @@ public class Duke {
                     Task curr = tasks.addItem(input);
                     return ui.addedItem(curr, tasks.getListSize());
                 } catch (DukeException ex1) {
-                    return ui.showError(ex1.description);
+                    return ui.showError(ex1.toString());
                 }
             case DONE:
                 try {
                     Task curr = tasks.doneItem(input);
                     return ui.doneItem(curr);
                 } catch (DukeException ex1) {
-                    return ui.showError(ex1.description);
+                    return ui.showError(ex1.toString());
                 }
             case DELETE:
                 try {
@@ -53,6 +57,7 @@ public class Duke {
                     return ui.deleteItem(curr);
                 } catch (DukeException ex1) {
                     return ui.showError(ex1.description);
+                    return ui.showError(ex1.toString());
                 }
             case LIST:
                 return ui.returnList(tasks.getList());
@@ -64,7 +69,11 @@ public class Duke {
                     return ui.showError(ex1.getLocalizedMessage());
                 }
             case FIND:
-                return ui.returnList(tasks.find(input));
+                try {
+                    return ui.returnList(tasks.find(input));
+                } catch (DukeException ex1) {
+                    return ui.showError(ex1.toString());
+                }
             case ERROR:
                 return ui.defaultError();
             case BYE:
