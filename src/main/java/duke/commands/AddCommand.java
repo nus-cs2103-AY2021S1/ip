@@ -17,7 +17,8 @@ import duke.task.Todo;
  * Adds a task to the task list.
  */
 public class AddCommand extends Command {
-    private Type type;
+    private static final String DATE_TIME_FORMAT = "02-30-2020 23:59";
+    private Type taskType;
 
     public enum Type {
         TODO, DEADLINE, EVENT
@@ -26,31 +27,35 @@ public class AddCommand extends Command {
     /**
      * Creates AddCommand object that handles adding of todo, deadline and event.
      *
-     * @param type    differentiates between todo, deadline and event.
-     * @param command is the description entered by the user.
+     * @param taskType differentiates between todo, deadline and event.
+     * @param command  is the description entered by the user.
      */
-    public AddCommand(Type type, String command) {
+    public AddCommand(Type taskType, String command) {
         super(command);
-        this.type = type;
+        this.taskType = taskType;
     }
 
     @Override
-    public String execute(TaskList taskList, Storage storage) {
-        super.init(taskList, storage);
-        if (type == Type.TODO) {
-            return addTodo();
-        } else if (type == Type.DEADLINE) {
-            return addDeadline();
-        } else {
-            return addEvent();
+    public String execute(TaskList tasks, Storage storage) {
+        super.init(tasks, storage);
+        switch (taskType) {
+            case TODO:
+                return addTodo();
+            case EVENT:
+                return addEvent();
+            case DEADLINE:
+                return addDeadline();
+            default:
+                assert false : "Unknown type";
         }
+        return null;
     }
 
     private String addTodo() {
         Todo todo;
         try {
             todo = new Todo(super.command);
-            super.taskList.addTask(todo);
+            super.tasks.addTask(todo);
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -67,11 +72,11 @@ public class AddCommand extends Command {
             LocalDateTime dateTime = LocalDateTime.parse(timing, formatter);
 
             deadline = new Deadline(detail, dateTime);
-            super.taskList.addTask(deadline);
+            super.tasks.addTask(deadline);
         } catch (DukeException e) {
             return e.getMessage();
         } catch (DateTimeParseException e) {
-            return "Please enter timing in '/by 02-30-2020 23:59' format";
+            return "Please enter timing in '/by " + DATE_TIME_FORMAT + "' format";
         }
         return formatMessage(deadline);
     }
@@ -86,11 +91,11 @@ public class AddCommand extends Command {
             LocalDateTime dateTime = LocalDateTime.parse(timing, formatter);
 
             event = new Event(detail, dateTime);
-            super.taskList.addTask(event);
+            super.tasks.addTask(event);
         } catch (DukeException e) {
             return e.getMessage();
         } catch (DateTimeParseException e) {
-            return "Please enter timing in '/at 02-30-2020 23:59' format";
+            return "Please enter timing in '/at " + DATE_TIME_FORMAT + "' format";
         }
         return formatMessage(event);
     }
@@ -98,7 +103,7 @@ public class AddCommand extends Command {
     private String[] formatTimingInput(String format, String input) throws DukeException {
         if (!input.contains(format)) {
             String message = "Don't forget to add a timing in '"
-                    + format + " 12-12-2020 23:59' format";
+                    + format + " " + DATE_TIME_FORMAT + "' format";
             throw new DukeException(message);
         }
         return input.trim().split(format);
@@ -107,7 +112,7 @@ public class AddCommand extends Command {
     private String formatMessage(Task task) {
         return String.format("Got it I've added this task:\n%s"
                         + "\nNow you have %s tasks in the list.\n",
-                task.toString(), taskList.size());
+                task.toString(), tasks.size());
     }
 }
 

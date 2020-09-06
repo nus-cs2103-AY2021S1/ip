@@ -50,7 +50,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns a string that is formatted having the type, done status, description, and time
+     * Returns a string that is formatted having the taskType, done status, description, and time
      * of the task to be stored in the database.
      *
      * @return formatted string that is used for the creation of a task object.
