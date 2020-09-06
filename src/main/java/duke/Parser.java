@@ -34,10 +34,12 @@ public class Parser {
         Command command = null;
 
         try {
-            String className = "duke.command." + Character.toUpperCase(commandName.charAt(0)) + commandName.substring(1) + "Command";
+            String className = "duke.command." + Character.toUpperCase(commandName.charAt(0))
+                    + commandName.substring(1) + "Command";
             for (DukeCommand comm: DukeCommand.values()) {
                 if (commandName.equals(comm.getCommand())) {
-                    command = (Command) Class.forName(className).getConstructor(String.class).newInstance(inputCommand);
+                    command = (Command) Class.forName(className).getConstructor(String.class)
+                            .newInstance(inputCommand);
                     isCommand = true;
                     break;
                 }

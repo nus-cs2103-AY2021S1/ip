@@ -41,7 +41,8 @@ public abstract class Command {
      * @throws DukeCommandException  If the command received has incorrect format
      * @throws DukeStorageException  If fails to save changes made to the list of tasks
      */
-    public abstract void execute(TaskList list, Storage storage, Ui ui) throws DukeCommandException, DukeStorageException;
+    public abstract void execute(TaskList list, Storage storage, Ui ui) throws DukeCommandException,
+            DukeStorageException;
 
     /**
      * Return true if the current command is an exit command. i.e. 'bye'

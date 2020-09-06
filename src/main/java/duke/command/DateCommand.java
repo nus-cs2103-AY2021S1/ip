@@ -30,22 +30,22 @@ public class DateCommand extends Command {
             LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             ui.printMessage("Here are the tasks of date " + date + ":");
 
-            int ctr = 1;
+            int taskIndexCounter = 1;
             for (Task task: list.getList()) {
                 if (task instanceof Deadline) {
                     Deadline deadline = (Deadline) task;
                     LocalDateTime deadlineTime = deadline.getBy();
                     if (date.getYear() == deadlineTime.getYear() && date.getDayOfYear() == deadlineTime.getDayOfYear()) {
-                        ui.printMessage("" + ctr + "." + task);
-                        ctr++;
+                        ui.printMessage("" + taskIndexCounter + "." + task);
+                        taskIndexCounter++;
                     }
                 }
                 if (task instanceof Event) {
                     Event event = (Event) task;
                     LocalDateTime eventTime = event.getAt();
                     if (date.getYear() == eventTime.getYear() && date.getDayOfYear() == eventTime.getDayOfYear()) {
-                        ui.printMessage("" + ctr + "." + task);
-                        ctr++;
+                        ui.printMessage("" + taskIndexCounter + "." + task);
+                        taskIndexCounter++;
                     }
                 }
             }

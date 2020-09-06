@@ -52,10 +52,6 @@ public class Task implements Serializable {
         return isDone;
     }
 
-    public void setDone(boolean done) {
-        isDone = done;
-    }
-
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

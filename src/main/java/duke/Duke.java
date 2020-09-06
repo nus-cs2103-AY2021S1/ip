@@ -57,9 +57,9 @@ public class Duke {
     public ResultInfo getResponse(String input) {
         try {
             ui.setStringBuilder(new StringBuilder());
-            Command c = Parser.parse(input);
-            c.execute(tasks, storage, ui);
-            return new ResultInfo(true, c.isExit(), ui.getStringBuilder().toString());
+            Command command = Parser.parse(input);
+            command.execute(tasks, storage, ui);
+            return new ResultInfo(true, command.isExit(), ui.getStringBuilder().toString());
         } catch (DukeException e) {
             return new ResultInfo(false, false, e.getMessage());
         }

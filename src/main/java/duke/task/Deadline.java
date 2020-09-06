@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
+    /**A format date/time object to store the deadline of an event */
     protected LocalDateTime by;
 
     /**
@@ -33,6 +34,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma")) + ")";
     }
 }
