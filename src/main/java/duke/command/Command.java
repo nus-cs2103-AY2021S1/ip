@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.exception.DukeException;
 
 /**
@@ -31,10 +30,9 @@ public abstract class Command {
     /**
      * performs the appropriate command based on the type of command it is
      * @param tasks the list of tasks
-     * @param ui the user interface object responsible for system related commands
      * @param storage the storage system responsible for saving and loading data
-     * @return
+     * @return the response in terms of a string based on the type of command it is
      * @throws DukeException
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract CommandResult execute(TaskList tasks, Storage storage) throws DukeException;
 }
