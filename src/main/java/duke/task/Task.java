@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * represents a task
  */
@@ -43,4 +45,6 @@ public abstract class Task {
     public String toString() {
         return "[" + this.getStatus() + "] " + this.task;
     }
+
+    public abstract LocalDate getDate();
 }

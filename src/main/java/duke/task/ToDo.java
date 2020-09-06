@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * represents a to do task
  */
@@ -32,6 +34,11 @@ public class ToDo extends Task{
         return "T | " +
                 this.isDoneInt() + " | " +
                 this.task;
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return null;
     }
 
     /**

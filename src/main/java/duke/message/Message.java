@@ -51,6 +51,17 @@ public class Message {
         return string;
     }
 
+    public static String viewTasksOnDateMessage(ArrayList<Task> tasks) {
+        String string;
+        if (tasks.size() == 0) {
+            string = "yay! there are no tasks on the given date";
+        } else {
+            string = "okies! here are the tasks on the given date:\n" +
+                    Message.tasksAsStringMessage(tasks);
+        }
+        return string;
+    }
+
     public static String helpMessage() {
         return "available commands are: \n    " +
                 "1. todo <todo_desc>\n    " +

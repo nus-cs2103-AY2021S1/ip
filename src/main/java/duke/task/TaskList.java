@@ -4,6 +4,7 @@ import duke.exception.EmptyDateException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidIndexException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -96,13 +97,25 @@ public class TaskList {
      * @return an array list containing the tasks that match the query string
      */
     public ArrayList<Task> getMatchingTasks(String queryString) {
-        ArrayList<Task> matchingTasks = new ArrayList<Task>();
+        ArrayList<Task> matchingTasks = new ArrayList<>();
         tasks.forEach(task -> {
             if (task.toString().contains(queryString)) {
                 matchingTasks.add(task);
             }
         });
         return matchingTasks;
+    }
+
+    public ArrayList<Task> getTasksOnDate(LocalDate date) {
+        ArrayList<Task> tasksOnDate = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDate() != null) {
+                if (task.getDate().equals(date)) {
+                    tasksOnDate.add(task);
+                }
+            }
+        }
+        return tasksOnDate;
     }
 
     /**

@@ -44,6 +44,11 @@ public class Deadline extends Task {
                 this.date;
     }
 
+    @Override
+    public LocalDate getDate() {
+        return this.date;
+    }
+
     /**
      * decodes a given line of text and transforms it into a deadline task
      * @param string the line of text to decode

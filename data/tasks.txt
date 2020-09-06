@@ -1,1 +1,5 @@
 D | 0 | return book | 2020-09-07
+D | 0 | test1 | 2020-09-08
+D | 0 | test2 | 2020-09-08
+E | 0 | test3 | 2020-09-08
+T | 0 | read book

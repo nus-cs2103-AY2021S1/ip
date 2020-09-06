@@ -13,6 +13,7 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     /**
      * takes the user's full input and returns the appropriate command that should be run based on the given input
+     *
      * @param fullCommand the entire input given by the user
      * @return the appropriate command based on the input given by the user
      */
@@ -21,28 +22,30 @@ public class Parser {
         String firstWord = fullCommand.split(" ")[0];
 
         switch (firstWord) {
-            case "list":
-                return new ListCommand();
-            case "done":
-                return new DoneCommand(fullCommand);
-            case "delete":
-                return new DeleteCommand(fullCommand);
-            case "todo":
-                return new ToDoCommand(fullCommand);
-            case "deadline":
-                return new DeadlineCommand(fullCommand);
-            case "event":
-                return new EventCommand(fullCommand);
-            case "find":
-                return new FindCommand(fullCommand);
-            case "clear":
-                return new ClearCommand();
-            case "help":
-                return new HelpCommand();
-            case "bye":
-                return new ExitCommand();
-            default:
-                return new InvalidCommand();
+        case "list":
+            return new ListCommand();
+        case "done":
+            return new DoneCommand(fullCommand);
+        case "delete":
+            return new DeleteCommand(fullCommand);
+        case "todo":
+            return new ToDoCommand(fullCommand);
+        case "deadline":
+            return new DeadlineCommand(fullCommand);
+        case "event":
+            return new EventCommand(fullCommand);
+        case "find":
+            return new FindCommand(fullCommand);
+        case "clear":
+            return new ClearCommand();
+        case "help":
+            return new HelpCommand();
+        case "bye":
+            return new ExitCommand();
+        case "view":
+            return new ViewCommand(fullCommand);
+        default:
+            return new InvalidCommand();
         }
     }
 
@@ -53,7 +56,7 @@ public class Parser {
         } catch (DateTimeParseException e) {
             DayOfWeek currentDay = LocalDate.now().getDayOfWeek();
             DayOfWeek day;
-            switch(date) {
+            switch (date) {
             case "Mon":
                 day = DayOfWeek.MONDAY;
                 break;
