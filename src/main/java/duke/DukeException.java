@@ -9,9 +9,9 @@ import duke.task.Task;
 public class DukeException extends Exception {
 
     // message constants
-    private static final String EMPTY_DESCRIPTION = "☹ OOPS!!! The description of "
+    private static final String EMPTY_DESCRIPTION = "OOPS!!! The description of "
             + "a task cannot be empty";
-    private static final String EMPTY_TIME = "☹ OOPS!!! The description of "
+    private static final String EMPTY_TIME = "OOPS!!! The description of "
             + "a task with attached time cannot be empty";
 
     private static final String ALREADY_DONE_FRONT = "The task \'";
@@ -22,7 +22,7 @@ public class DukeException extends Exception {
     private static final String UNSPECIFIC_COMMAND = "This is a single word command. Please try again";
     private static final String MISSING_PARAMETERS = "This command requires more parameters. Please try again";
 
-    private static final String UNKNOWN_OPERATION = "☹ OOPS!!! I'm sorry, "
+    private static final String UNKNOWN_OPERATION = "OOPS!!! I'm sorry, "
             + "but I don't know what that means :-(";
 
     /**

@@ -69,9 +69,11 @@ public class Duke extends Application {
             output = ui.output(e.getMessage());
         }
 
-        // set labels and dialog container
+        // set labels and dialog container, wrap text
         Label userText = new Label(input);
+        userText.setWrapText(true);
         Label dukeText = new Label(output);
+        userText.setWrapText(true);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
