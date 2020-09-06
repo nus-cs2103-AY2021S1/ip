@@ -57,7 +57,7 @@ public class Parser {
             return createDoneCommand(commandArgs, isArgsEmpty);
         case "delete":
             return createDeleteCommand(commandArgs, isArgsEmpty);
-        case "bye":
+        case "exit":
             return createExitCommand();
         default:
             throw new InvalidCommandException("That was not a valid command.\nPlease try again.");
