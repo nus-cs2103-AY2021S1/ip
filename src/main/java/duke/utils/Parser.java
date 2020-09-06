@@ -25,6 +25,7 @@ public class Parser {
      * @throws DukeException if the command format is wrong.
      */
     public static Command parse(String input) throws DukeException {
+        // todo create test casee for parser, test for empty input
         switch (input.split(" ")[0].toLowerCase()) {
         case "":
             throw new DukeException("Please type a duke.command");

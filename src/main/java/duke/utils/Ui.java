@@ -35,6 +35,7 @@ public class Ui {
      * @param customTitle the custom string to display before showing the list.
      */
     public void displayList(List<Task> toDoList, String customTitle) {
+        assert toDoList.size() > 0;
         StringBuilder sBuilder = new StringBuilder(customTitle).append('\n');
 
         for (int i = 0; i < toDoList.size(); i++) {
@@ -69,6 +70,7 @@ public class Ui {
 
 
     private void displayString(String s) {
+        assert Main.getWindow() != null;
         Main.getWindow().showsToDialog(s);
     }
 

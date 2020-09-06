@@ -19,6 +19,7 @@ public class DukeFileHandler {
     private final String path;
 
     public DukeFileHandler(String path) {
+        assert !path.equals("");
         this.path = path;
     }
 
@@ -56,6 +57,7 @@ public class DukeFileHandler {
 
     // input is of format TaskType | isDone | Detail | Date (can be null)
     private Task createTask(String... inputArr) {
+        assert inputArr.length > 0;
         boolean isDone = inputArr[1].trim().equals("1");
 
         switch (inputArr[0].trim()) {
@@ -79,6 +81,7 @@ public class DukeFileHandler {
      * @throws IOException if the file could not be found
      */
     public void writeToFile(List<Task> list) throws IOException {
+        assert list.size() > 0;
 
         try {
             FileWriter fileWriter = new FileWriter(path);

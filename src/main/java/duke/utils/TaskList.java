@@ -69,6 +69,7 @@ public class TaskList {
      * @return the number of tasks in the list.
      */
     public int getSize() {
+        assert list.size() > 0;
         return list.size();
     }
 
@@ -89,6 +90,7 @@ public class TaskList {
      * @return the Lists which contains the tasks.
      */
     public List<Task> getList() {
+        assert list.size() > 0;
         return list;
     }
 
