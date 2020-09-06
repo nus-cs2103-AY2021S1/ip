@@ -4,10 +4,13 @@ package bob.common;
  * Contains messages used in Bob.
  */
 public class Messages {
-    public static final String INTRO = "Hi, my name is BOB.\n" + "What can I do for you boss?";
+    public static final String INTRO = "Welcome Boss, what can Bob do for you?";
     public static final String OUTRO = "Good bye boss, see you soon.";
     public static final String ADD_MSG = "Yes boss, I have added this task to your list:\n";
     public static final String DONE_MSG = "I have marked the task as done, good job boss.\n";
+    public static final String REMINDER_HEADER = "============= Reminders =============\n";
+    public static final String NO_UNFINISHED_TASKS_REMINDER = "You have no unfinished tasks.\n";
+    public static final String REMINDER_MSG = "You have these unfinished task / upcoming events & deadlines boss.\n";
     public static final String DELETE_MSG = "I have deleted the task.\n";
     public static final String INVALID_COMMAND =
             "Sorry boss, I am not smart enough to understand that. Please give me a valid instruction.\n";

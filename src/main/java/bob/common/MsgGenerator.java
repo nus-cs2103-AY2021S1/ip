@@ -6,9 +6,10 @@ import bob.exceptions.BobException;
 
 public class MsgGenerator {
     /**
-     * Shows message(s) to user.
+     * Generates response message to user.
      *
      * @param message Message to be shown.
+     * @return Response message.
      */
     private static String generateMsg(String ... message) {
         boolean isNotEmptyMessage = message.length > 0;
@@ -28,24 +29,22 @@ public class MsgGenerator {
         return "I can't find any task containing \"" + input + "\" in your list.\n";
     }
 
-
-
     /**
-     * Shows introduction message to user.
+     * Generates introduction message.
      */
     public static String generateIntroMessage() {
         return generateMsg(Messages.INTRO);
     }
 
     /**
-     * Shows exit message to user.
+     * Generates exit message.
      */
     public static String generateExitMessage() {
         return generateMsg(Messages.OUTRO);
     }
 
     /**
-     * Shows error message to user.
+     * Generates error message.
      *
      * @param e Exception caught.
      */
@@ -54,10 +53,11 @@ public class MsgGenerator {
     }
 
     /**
-     * Shows add message to user.
+     * Generates add message.
      *
      * @param task Task to include in the message.
      * @param tasks Tasklist of Bob.
+     * @return Add message.
      */
     public static String generateAddMessage(Task task, Tasklist tasks) {
         // Starting line
@@ -70,9 +70,10 @@ public class MsgGenerator {
     }
 
     /**
-     * Shows done message to user.
+     * Generates done message.
      *
      * @param task Task to include in the message.
+     * @return Done message.
      */
     public static String generateDoneMessage(Task task) {
         String taskMsg = task + "\n";
@@ -84,9 +85,10 @@ public class MsgGenerator {
     }
 
     /**
-     * Shows delete message to user.
+     * Generates delete message.
      *
-     * @param task
+     * @param task Deleted task to include in the message.
+     * @return Delete message.
      */
     public static String generateDeleteMessage(Task task) {
         String taskMsg = "Deleted: " + task + "\n";
@@ -94,14 +96,34 @@ public class MsgGenerator {
     }
 
     /**
-     * Shows loading error to user.
+     * Generates reminder message.
+     * @param tasklist Bob's Tasklist.
+     * @return Reminder message.
+     */
+    public static String generateReminderMessages(Tasklist tasklist) {
+        String header = Messages.REMINDER_HEADER;
+        String unfinishedTasks = tasklist.getUnfinishedTasks();
+        boolean noTasks = unfinishedTasks.length() == 0;
+        if (noTasks) {
+            return header + Messages.NO_UNFINISHED_TASKS_REMINDER;
+        } else {
+            return header + Messages.REMINDER_MSG + unfinishedTasks;
+        }
+    }
+
+    /**
+     * Generates loading error message.
+     *
+     * @return Loading error message.
      */
     public static String generateLoadingError() {
         return generateMsg(Messages.LOADING_ERROR);
     }
 
     /**
-     * Shows updating error to user.
+     * Generates updating error message.
+     *
+     * @return Updating error message.
      */
     public static String generateUpdatingError() {
         return generateMsg(Messages.UPDATE_ERROR);
@@ -121,7 +143,7 @@ public class MsgGenerator {
      * @param totalNoOfTasks Total number of tasks.
      * @param taskNo Task number.
      * @param action The command that was supposed to be executed.
-     * @return String message.
+     * @return List index out of bounds error message.
      */
     public static String generateListIndexOutOfBoundsMsg(int totalNoOfTasks, int taskNo, String action) {
         return "Erm, you are asking me to " + action + " task " + taskNo + " but there is/are only "

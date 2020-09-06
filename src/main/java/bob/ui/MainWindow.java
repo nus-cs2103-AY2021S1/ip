@@ -47,6 +47,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         scrollPane.setFitToHeight(false);
         dialogContainer.getChildren().addAll(
+                Gap.createGap(),
                 DialogBox.getBobDialog(MsgGenerator.generateIntroMessage(), bobImage)
         );
     }
@@ -57,10 +58,11 @@ public class MainWindow extends AnchorPane {
     public void initializeBob() {
         try {
             this.bob = new Bob();
-        } catch (BobException | IOException e) {
             dialogContainer.getChildren().addAll(
                     Gap.createGap(),
-                    Gap.createGap(),
+                    DialogBox.getBobDialog(bob.getReminders(), bobImage));
+        } catch (BobException | IOException e) {
+            dialogContainer.getChildren().addAll(
                     DialogBox.getBobDialog(MsgGenerator.generateLoadingError(), bobImage)
             );
         }
