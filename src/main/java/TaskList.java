@@ -40,6 +40,4 @@ public class TaskList {
     public Task getTask(int value) {
         return this.tasks.get(value);
     }
-
-
 }

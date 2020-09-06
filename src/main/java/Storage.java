@@ -97,7 +97,6 @@ public class Storage {
 
     }
 
-
     /**
      * Saves the list of strings into the folder
      *

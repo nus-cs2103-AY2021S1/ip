@@ -1,4 +1,3 @@
-
 /**
  * Thrown to indicate that the user has put in an empty ToDo reminder.
  */

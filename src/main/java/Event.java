@@ -9,24 +9,23 @@ public class Event extends Task {
     /**
      * The time/date of the event.
      */
-    protected String at;
+    protected String descriptionAfterAt;
     /**
      * The time/date of the event in terms of LocalDateTimeObject.
      */
     protected LocalDateTime localTime;
 
-
     /**
      * Constructs an Event object with the specified description and date and/or time.
      *
      * @param description The description of this event.
-     * @param at          The date/time of this event.
+     * @param descriptionAfterAt          The date/time of this event.
      * @throws DateTimeParseException Throws if there is a wrong format of date/time passed.
      */
-    public Event(String description, String at) throws DateTimeParseException {
+    public Event(String description, String descriptionAfterAt) throws DateTimeParseException {
         super(description);
-        this.at = at;
-        this.localTime = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        this.descriptionAfterAt = descriptionAfterAt;
+        this.localTime = LocalDateTime.parse(descriptionAfterAt, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     }
 
     /**
@@ -36,7 +35,7 @@ public class Event extends Task {
      */
     @Override
     public String writeSaveFormat() {
-        return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, at);
+        return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, descriptionAfterAt);
     }
 
     /**

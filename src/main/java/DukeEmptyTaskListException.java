@@ -1,4 +1,5 @@
 public class DukeEmptyTaskListException extends DukeException {
+
     /**
      * Constructs a DukeEmptyEventTimeException with a relevant detail message.
      *

@@ -3,7 +3,6 @@
  */
 public class Parser {
 
-
     /**
      * Parses the input to check for "bye".
      *
@@ -13,7 +12,6 @@ public class Parser {
     public static boolean isBye(String input) {
         return input.equals(TaskElement.BYE.label);
     }
-
 
     /**
      * Parses the input to check for "list".
@@ -156,6 +154,4 @@ public class Parser {
     public static boolean isFind(String input) {
         return input.split(" ")[0].equals(TaskElement.FIND.label);
     }
-
-
 }
