@@ -8,9 +8,9 @@ import java.util.List;
  */
 public class Parser {
     /**
-     * An array of valid Duke commands to edit tasks.
+     * An array of valid parameterized Duke commands.
      */
-    private static final List<String> COMMANDS = Arrays.asList("done", "delete", "find");
+    private static final List<String> PARAMETERIZED_COMMANDS = Arrays.asList("done", "delete", "find");
     private final TaskList userTaskList;
     private final Storage storage;
     
@@ -43,7 +43,7 @@ public class Parser {
      */
     public Response parseAndExecute(String literal) {
         String command = literal.split(" ")[0];
-        boolean isValidCommand = COMMANDS.contains(command);
+        boolean isValidCommand = PARAMETERIZED_COMMANDS.contains(command);
         boolean hasArgument = literal.split(" ").length > 1;
     
         if (isValidCommand && hasArgument) {

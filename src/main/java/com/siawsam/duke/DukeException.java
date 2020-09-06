@@ -17,9 +17,9 @@ public class DukeException extends Exception {
      * Constructs a DukeException from an existing throwable.
      *
      * @param message A string containing the exception message.
-     * @param err A throwable related to the exception being created.
+     * @param error A throwable related to the exception being created.
      */
-    DukeException(String message, Throwable err) {
-        super(message, err);
+    DukeException(String message, Throwable error) {
+        super(message, error);
     }
 }

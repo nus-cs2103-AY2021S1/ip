@@ -13,13 +13,15 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private final Duke duke = new Duke();
+    private static final String STAGE_TITLE = "Duke Chat Bot";
+    private static final String DEFAULT_SCENE = "/view/LandingScene.fxml";
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Duke Chat Bot");
+        primaryStage.setTitle(STAGE_TITLE);
         
         // load and set up scene
-        FXMLLoader loader = new FXMLLoader(Duke.class.getResource("/view/LandingScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(Duke.class.getResource(DEFAULT_SCENE));
         loader.setController(new LandingScene(duke, primaryStage));
         AnchorPane ap = loader.load();
         Scene scene = new Scene(ap);

@@ -44,7 +44,7 @@ public class Storage {
      *
      * @return True if file exists, False if otherwise.
      */
-    boolean doesExist() {
+    boolean doesStorageFileExist() {
         return Reader.doesFileExist(this.filePath);
     }
 
