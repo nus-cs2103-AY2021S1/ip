@@ -21,5 +21,4 @@ public class EmptyDeadLineException extends Exception {
     public String toString() {
         return errorMessage;
     }
-
 }

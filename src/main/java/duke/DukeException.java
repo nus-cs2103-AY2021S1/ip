@@ -9,7 +9,7 @@ public class DukeException extends Exception {
      *
      * @param s Exception error message
      */
-    public DukeException(String s){
+    public DukeException(String s) {
         super(s);
     }
 

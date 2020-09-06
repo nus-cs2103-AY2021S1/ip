@@ -13,6 +13,8 @@ public class Parser {
             return new ExitCommand();
         } else if (input.equalsIgnoreCase("list")) {
             return new ListCommand();
+        } else if (input.equalsIgnoreCase("help")) {
+            return new HelpCommand();
         } else if (input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("done")) {
             int taskIndex = Integer.parseInt(input.substring(5)) - 1;
             return new MarkDoneCommand(taskIndex);

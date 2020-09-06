@@ -29,6 +29,7 @@ public class Ui {
         System.out.println("type list to see the task list");
         System.out.println("type find to search by keywords for tasks");
         System.out.println("type bye to exit");
+        System.out.println("type help to get a tutorial");
     }
 
 

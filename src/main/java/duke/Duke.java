@@ -55,7 +55,7 @@ public class Duke {
      * @return a welcome message when people start the GUI
      */
     public String welcomeMessage() {
-        return  "Hello, I'm DukeQ:) \n" + "I am very happy to serve you! \n"
+        return "Hello, I'm DukeQ:) \n" + "I am very happy to serve you! \n"
                 + "The valid command formats are as follows and the case is sensitive. \n"
                 + "\n"
                 + "todo then your instructions e.g. todo read book\n"
@@ -66,7 +66,8 @@ public class Duke {
                 + "done followed by the task number to marked it as done \n"
                 + "type list to see the task lists\n"
                 + "type find followed by keywords to search for tasks \n"
-                + "type bye to exit DukeQ\n";
+                + "type help to get a tutorial \n"
+                + "type bye to exit DukeQ, hope you have a good day! \n";
     }
 
 }
