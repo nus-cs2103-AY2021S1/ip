@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
@@ -73,6 +74,46 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    public String rescheduleTask(String details) {
+        if (details == null) {
+            throw new DukeException("I need something to work with.");
+        }
+        try {
+            String[] detailsArray = details.split("/to", 2);
+
+            String indexString = detailsArray[0].trim();
+            int index = Integer.parseInt(indexString) - 1;
+            Task temp = this.listOfItems.get(index);
+            String dateTimeString = detailsArray[1].trim();
+            LocalDateTime dateTime = DateConverter.parseString(dateTimeString);
+
+            if (temp instanceof Deadline) {
+                Task item = new Deadline(temp.description, dateTime);
+                if (temp.isDone) {
+                    item.markAsDone();
+                }
+
+                this.listOfItems.set(index, item);
+                return String.format("\nNoted. I have now rescheduled %s to :\n  %s\nYou still have %d tasks in your list.\n",
+                        temp.toString(), item.toString(),
+                        this.listOfItems.size());
+            } else if (temp instanceof Event) {
+                Task item = new Event(temp.description, dateTime);
+                if (temp.isDone) {
+                    item.markAsDone();
+                }
+                this.listOfItems.set(index, item);
+                return String.format("\nNoted. I have now rescheduled %s to :\n  %s\nYou still have %d tasks in your list.\n",
+                        temp.toString(), item.toString(),
+                        this.listOfItems.size());
+            } else {
+                return (new DukeException("Unable to detect class")).toString();
+            }
+        } catch (Exception e) {
+            return (new DukeException("Unable reschedule the specified Task")).toString();
+        }
+    }
+
 
     /**
      * prints out the entire list
@@ -83,6 +124,7 @@ public class TaskList implements Iterable<Task> {
 
     public void findTask(String Keyword){
         assert Keyword.length() > 0;
+
         ListOfKeyWordItems.clear();
         for (Task item : listOfItems) {
             if (item.toString().indexOf(Keyword) != -1) {

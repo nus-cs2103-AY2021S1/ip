@@ -11,6 +11,7 @@ public class Parser {
      * @param ui       scanner that takes user inputs
      */
 
+
     public static String parseCode(TaskList taskList, UI ui, String userInput) {
 
         String echo = userInput;
@@ -77,6 +78,17 @@ public class Parser {
                     String findWord = arr[1];
                     taskList.findTask(findWord);
                     return ui.addLines(taskList.printOutKeyWordList());
+                
+                case RESCHEDULE:
+                    try {
+                      
+                        String taskToChange = arr[1];
+                        return ui.addLines(taskList.rescheduleTask(taskToChange));
+                      
+                    } catch (Exception e) {
+                        return (new DukeException("☹ OOPS!!! The description to reschedule a task cannot be empty", e)).toString();
+                    }
+
             }
 
 
