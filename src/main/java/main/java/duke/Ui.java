@@ -9,8 +9,8 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private TaskList taskList = null;
-    private Storage storage = null;
+    private TaskList taskList;
+    private Storage storage;
     private Parser parser = new Parser();
 
     /**
