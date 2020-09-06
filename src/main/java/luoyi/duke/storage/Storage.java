@@ -104,6 +104,8 @@ public class Storage {
             // If file not present, create file
             Files.createFile(filePath);
         }
+        assert Files.exists(filePath.getParent()) : "File path was not created!";
+        assert Files.exists(filePath) : "File was not created!";
     }
 
 }

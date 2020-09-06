@@ -61,6 +61,7 @@ public class EventCommand extends TaskCommand {
      */
     private String handleEvent(String description, String time)
             throws DukeIllegalArgumentException {
+        assert duke != null : Message.ERR_DUKE_NOT_INIT.toString();
         if (description.matches("\\s*")) {
             throw new DukeIllegalArgumentException(
                     "The description of event cannot be empty!");
@@ -77,6 +78,9 @@ public class EventCommand extends TaskCommand {
         return output;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Command setDuke(IDuke duke) {
         return new EventCommand(description, time, duke);

@@ -69,6 +69,8 @@ public class DeadlineCommand extends TaskCommand {
             throw new DukeIllegalArgumentException(
                     "The time of deadline cannot be empty!");
         }
+        assert description.length() > 0 : "Description is empty!";
+        assert time.length() > 0 : "Time is empty!";
         ITask task = Deadline.getDeadline(description, time);
         storeTask(task);
         String output = "Got it. I've added this task:\n\t" + task.toString()

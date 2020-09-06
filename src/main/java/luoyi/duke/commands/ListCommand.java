@@ -52,6 +52,7 @@ public class ListCommand extends Command {
     }
 
     private String handleDisplay() {
+        assert duke != null : Message.ERR_DUKE_NOT_INIT.toString();
         TaskList list = duke.getTasks();
         return Ui.displayTasks(list);
     }
@@ -62,6 +63,7 @@ public class ListCommand extends Command {
      * @param date Date by which the tasks are filtered by.
      */
     private String handleDisplay(String date) {
+        assert duke != null : Message.ERR_DUKE_NOT_INIT.toString();
         TaskList list = duke.getTasks();
         int[] indexes = IntStream
                 .range(0, list.size())

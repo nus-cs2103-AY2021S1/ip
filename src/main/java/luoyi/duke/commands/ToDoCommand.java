@@ -55,6 +55,7 @@ public class ToDoCommand extends TaskCommand {
      * @throws DukeIllegalArgumentException If the description is incorrect.
      */
     private String handleToDo(String description) throws DukeIllegalArgumentException {
+        assert duke != null : Message.ERR_DUKE_NOT_INIT.toString();
         if (description.matches("\\s*")) {
             throw new DukeIllegalArgumentException(
                     "The description of todo cannot be empty!");
@@ -66,8 +67,10 @@ public class ToDoCommand extends TaskCommand {
         System.out.print(TextFormatter.getFormattedText(output));
         return output;
     }
-
-
+  
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Command setDuke(IDuke duke) {
         return new ToDoCommand(description, duke);
