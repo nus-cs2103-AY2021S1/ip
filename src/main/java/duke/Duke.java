@@ -7,7 +7,6 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-
 /**
  * Represents Duke class, which is the control class of Duke and
  * includes the logic of Duke.
