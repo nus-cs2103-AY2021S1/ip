@@ -1,8 +1,8 @@
 package duke.tool;
 
-import duke.exceptions.NoSuchOrderException;
-
 import java.util.HashMap;
+
+import duke.exceptions.NoSuchOrderException;
 
 public enum ValidInput {
     DEADLINE("deadline", "Deadline", "ddl", "DDL"),
@@ -15,13 +15,12 @@ public enum ValidInput {
     TASK("task"),
     TODO("todo", "TODO");
 
+    private static HashMap<String, ValidInput> commandMap = new HashMap<>();
     private final String[] forms;
 
     ValidInput(String...strings) {
         this.forms = strings;
     }
-
-    private static HashMap<String, ValidInput> commandMap = new HashMap<>();
 
     static {
         for (ValidInput input : ValidInput.values()) {
@@ -34,7 +33,7 @@ public enum ValidInput {
     public static ValidInput getCmdType(String cmd) throws NoSuchOrderException {
         ValidInput command = commandMap.get(cmd);
 
-        if(command == null) {
+        if (command == null) {
             throw new NoSuchOrderException();
         }
 

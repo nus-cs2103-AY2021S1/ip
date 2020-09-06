@@ -1,11 +1,11 @@
 package duke.tasks;
 
-import duke.ui.Ui;
 import duke.tool.Storage;
 import duke.tool.TaskList;
+import duke.ui.Ui;
 
 /**
- * Represent a to do task.
+ * Represents a to do task.
  */
 public class Todo extends Task {
     public Todo(String description, boolean isDone) {
@@ -13,7 +13,8 @@ public class Todo extends Task {
     }
 
     /**
-     * mark the task as done.
+     * Marks the task as done.
+     *
      * @return
      */
     @Override
@@ -23,23 +24,25 @@ public class Todo extends Task {
     }
 
     /**
-     * Add the task into the list and print the added message.
-     * Write the changes into the file.
-     * @param tasklist
+     * Adds the task into the list and print the added message.
+     * Writes the changes into the file.
+     *
+     * @param taskList
      * @param ui
      * @param storage
      * @return
      */
     @Override
-    public String execute(TaskList tasklist, Ui ui, Storage storage) {
-        tasklist.add(this);
-        storage.writeData(tasklist.getTaskList());
-        return ui.showAddedMessage(tasklist, tasklist.getNumOfTasks() - 1);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        taskList.add(this);
+        storage.writeData(taskList.getTaskList());
+        return ui.showAddedMessage(taskList, taskList.getNumOfTasks() - 1);
 
     }
 
     /**
-     * String representation of the deadline task.
+     * Returns the string representation of the deadline task.
+     *
      * @return
      */
     @Override
@@ -48,7 +51,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Formatted String representation of the task.
+     * Returns the formatted String representation of the task.
+     *
      * @return
      */
     @Override

@@ -22,7 +22,7 @@ import duke.tasks.Todo;
  * The class deals with making sense of the user command.
  */
 public class Parser {
-    public static DateTimeFormatter VALID_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Check whether the characters in the string represents an integer.
@@ -52,52 +52,59 @@ public class Parser {
             int numOfOrders = tl.getNumOfTasks();
             if (order != null) {
                 String[] command = order.split(" ", 2);
-                if (ValidInput.getCmdType(command[0]).name().equals("EXIT")) {
-                    return new Exit();
-                } else if (ValidInput.getCmdType(command[0]).name().equals("LIST")) {
-                    return new List();
-                }else if (ValidInput.getCmdType(command[0]).name().equals("DONE")) {
-                    if (command.length == 1) {
-                        throw new NoTaskChosenException(command[0]);
-                    } else if (!isInteger(command[1])
-                            || Integer.parseInt(command[1]) > numOfOrders) {
-                        throw new NoThisNumOfTaskException();
-                    } else {
-                        return new Done(Integer.parseInt(command[1]) - 1);
-                    }
-                } else if (ValidInput.getCmdType(command[0]).name().equals("DELETE")) {
-                    if (command.length == 1) {
-                        throw new NoTaskChosenException(command[0]);
-                    } else if (!isInteger(command[1])
-                            || Integer.parseInt(command[1]) > numOfOrders) {
-                        throw new NoThisNumOfTaskException();
-                    } else {
-                        return new Delete((Integer.parseInt(command[1]) - 1));
-                    }
-                } else if (ValidInput.getCmdType(command[0]).name().equals("FIND")) {
-                    return new Find(command[1]);
-                } else {
-                    if (command.length == 1) {
-                        throw new NoDescriptionException(command[0]);
-                    } else if (ValidInput.getCmdType(command[0]).name().equals("DEADLINE")) {
+
+                switch (ValidInput.getCmdType(command[0]).name()) {
+                    case "EXIT":
+                        return new Exit();
+                    case "LIST":
+                        return new List();
+                    case "DONE":
+                        if (command.length == 1) {
+                            throw new NoTaskChosenException(command[0]);
+                        } else if (!isInteger(command[1])
+                                || Integer.parseInt(command[1]) > numOfOrders) {
+                            throw new NoThisNumOfTaskException();
+                        } else {
+                            return new Done(Integer.parseInt(command[1]) - 1);
+                        }
+                    case "DELETE":
+                        if (command.length == 1) {
+                            throw new NoTaskChosenException(command[0]);
+                        } else if (!isInteger(command[1])
+                                || Integer.parseInt(command[1]) > numOfOrders) {
+                            throw new NoThisNumOfTaskException();
+                        } else {
+                            return new Delete((Integer.parseInt(command[1]) - 1));
+                        }
+                    case "FIND":
+                        return new Find(command[1]);
+                    case "DEADLINE":
+                        if (command.length == 1) {
+                            throw new NoDescriptionException(command[0]);
+                        }
                         String[] splitAgain = command[1].split("/by ");
                         if (splitAgain.length == 1) {
                             throw new NoTimeException(command[0]);
                         }
                         return new Deadline(splitAgain[0],
-                                LocalDateTime.parse(splitAgain[1], VALID_FORMAT), false);
-                    } else if (ValidInput.getCmdType(command[0]).name().equals("EVENT")) {
-                        String[] splitAgain = command[1].split("/at ");
+                                LocalDateTime.parse(splitAgain[1], validFormat), false);
+                    case "EVENT":
+                        if (command.length == 1) {
+                            throw new NoDescriptionException(command[0]);
+                        }
+                        splitAgain = command[1].split("/at ");
                         if (splitAgain.length == 1) {
                             throw new NoTimeException(command[0]);
                         }
                         return new Event(splitAgain[0],
-                                LocalDateTime.parse(splitAgain[1], VALID_FORMAT), false);
-                    } else if (ValidInput.getCmdType(command[0]).name().equals("TODO")) {
+                                LocalDateTime.parse(splitAgain[1], validFormat), false);
+                    case "TODO":
+                        if (command.length == 1) {
+                            throw new NoDescriptionException(command[0]);
+                        }
                         return new Todo(command[1], false);
-                    } else {
+                    default:
                         throw new NoSuchOrderException();
-                    }
                 }
             }
         } catch (NoDescriptionException | NoTimeException | NoSuchOrderException

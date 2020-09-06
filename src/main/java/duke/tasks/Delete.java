@@ -1,17 +1,18 @@
 package duke.tasks;
 
-import duke.ui.Ui;
 import duke.tool.Storage;
 import duke.tool.TaskList;
+import duke.ui.Ui;
 
 /**
- * Represent a delete task.
+ * Represents a delete task.
  */
 public class Delete extends Task {
     private int i;
 
     /**
      * Constructs a Delete task.
+     *
      * @param i ith item in the list.
      */
     public Delete(int i) {
@@ -20,17 +21,18 @@ public class Delete extends Task {
     }
 
     /**
-     * Delete the certain task in the list and print the deleted message.
-     * Write the changes into the file.
-     * @param tasklist
+     * Deletes the certain task in the list and print the deleted message.
+     * Writes the changes into the file.
+     *
+     * @param taskList
      * @param ui
      * @param storage
      * @return
      */
     @Override
-    public String execute(TaskList tasklist, Ui ui, Storage storage) {
-        Task removed = tasklist.delete(i);
-        storage.writeData(tasklist.getTaskList());
-        return ui.showDeleteMessage(tasklist, removed);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        Task removed = taskList.delete(i);
+        storage.writeData(taskList.getTaskList());
+        return ui.showDeleteMessage(taskList, removed);
     }
 }

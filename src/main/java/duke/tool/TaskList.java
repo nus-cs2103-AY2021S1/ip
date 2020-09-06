@@ -16,7 +16,7 @@ public class TaskList {
     }
 
     /**
-     * Construct an empty task list.
+     * Constructs an empty task list.
      */
     public TaskList() {
         this.taskList = new ArrayList<Task>();
@@ -27,7 +27,8 @@ public class TaskList {
     }
 
     /**
-     * Add a task to the list.
+     * Adds a task to the list.
+     *
      * @param t task waiting to be added.
      */
     public void add(Task t) {
@@ -35,16 +36,18 @@ public class TaskList {
     }
 
     /**
-     * Delete a task in the list.
+     * Deletes a task in the list.
+     *
      * @param i position of the task.
-     * @return
+     * @return the task being deleted.
      */
     public Task delete(int i) {
         return taskList.remove(i);
     }
 
     /**
-     * Mark a task in the list as done.
+     * Marks a task in the list as done.
+     *
      * @param i position of the task.
      */
     public void markDone(int i) {
@@ -52,17 +55,19 @@ public class TaskList {
     }
 
     /**
-     * Get a task from the list.
+     * Gets a task from the list.
+     *
      * @param i position of the task.
-     * @return
+     * @return the ith task.
      */
     public Task getTask(int i) {
         return taskList.get(i);
     }
 
     /**
-     * Count the number of tasks in the list.
-     * @return
+     * Counts the number of tasks in the list.
+     *
+     * @return the number of tasks in the list.
      */
     public int getNumOfTasks() {
         return taskList.size();

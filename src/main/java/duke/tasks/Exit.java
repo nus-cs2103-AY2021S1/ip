@@ -14,18 +14,19 @@ public class Exit extends Task {
      */
     public Exit() {
         super("exit", true);
-        this.isExit = true;
+        this.setIsExit(true);
     }
 
     /**
-     * Excute the task.
-     * @param tasklist
+     * Executes the task.
+     *
+     * @param taskList
      * @param ui
      * @param storage
      * @return
      */
     @Override
-    public String execute(TaskList tasklist, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         return ui.showGoodbye();
     };
 

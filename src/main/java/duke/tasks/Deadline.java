@@ -3,9 +3,9 @@ package duke.tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.ui.Ui;
 import duke.tool.Storage;
 import duke.tool.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a deadline task.
@@ -15,6 +15,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline task.
+     *
      * @param description
      * @param by
      * @param isDone
@@ -25,7 +26,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Marks the deadline task as done,
+     * Marks the deadline task as done/
+     *
      * @return
      */
     @Override
@@ -37,6 +39,7 @@ public class Deadline extends Task {
     /**
      * Adds the task into the list and print the added message.
      * Writes the changes into the file.
+     *
      * @param tasklist
      * @param ui
      * @param storage
@@ -51,6 +54,7 @@ public class Deadline extends Task {
 
     /**
      * Shows string representation of the deadline task.
+     *
      * @return
      */
     @Override
@@ -61,6 +65,7 @@ public class Deadline extends Task {
 
     /**
      * Shows formatted String representation of the task.
+     *
      * @return
      */
     @Override

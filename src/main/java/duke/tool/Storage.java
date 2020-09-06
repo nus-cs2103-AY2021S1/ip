@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,9 +25,10 @@ public class Storage {
     }
 
     /**
-     * Load the data in the file to the task list.
-     * @return
-     * @throws IOException
+     * Loads data from the file to the task list.
+     *
+     * @return a list of tasks.
+     * @throws IOException cannot find existing file.
      */
     public ArrayList<Task> loadData() throws IOException {
         DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
@@ -42,14 +41,18 @@ public class Storage {
                 String curr = s.nextLine();
                 String[] currTask = curr.split(" \\| ");
                 Boolean isDone = currTask[1].equals("1");
-                if (currTask[0].equals("T")) {
-                    orderList.add(new Todo(currTask[2], isDone));
-                } else if (currTask[0].equals("D")) {
-                    orderList.add(new Deadline(currTask[2],
-                            LocalDateTime.parse(currTask[3], validFormat), isDone));
-                } else if (currTask[0].equals("E")) {
-                    orderList.add(new Event(currTask[2],
-                            LocalDateTime.parse(currTask[3], validFormat), isDone));
+                switch (currTask[0]) {
+                    case "T":
+                        orderList.add(new Todo(currTask[2], isDone));
+                        break;
+                    case "D":
+                        orderList.add(new Deadline(currTask[2],
+                                LocalDateTime.parse(currTask[3], validFormat), isDone));
+                        break;
+                    case "E":
+                        orderList.add(new Event(currTask[2],
+                                LocalDateTime.parse(currTask[3], validFormat), isDone));
+                        break;
                 }
             }
         } catch (FileNotFoundException e) {

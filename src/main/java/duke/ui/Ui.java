@@ -1,7 +1,5 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 import duke.tasks.Task;
 import duke.tool.TaskList;
 
@@ -10,48 +8,20 @@ import duke.tool.TaskList;
  */
 public class Ui {
     /**
-     * The method to show the logo of Duke.
-     */
-    public void showLogo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-    }
-
-    /**
-     * Seperate line of the printed items
-     * @return
-     */
-    public String seperateLine() {
-        return "    _______________________________________";
-    }
-
-    /**
      * The formatted space.
-     * @return
+     *
+     * @return a whitespace.
      */
-    public String spaceBeforeOder() {
+    public String spaceBeforeOrder() {
         return "      ";
     }
 
-    /**
-     * Print the sentence in Duke's format.
-     * @param sentence
-     */
-    public void printFormmat(String sentence) {
-        System.out.println(seperateLine());
-        System.out.println(sentence);
-        System.out.println(seperateLine());
-    }
 
     /**
      * Print the greeting message.
      */
     public String showGreeting() {
-        return  "Hello! I'm Duke DuiDui\nWhat can I do for you?";
+        return "Hello! I'm Duke DuiDui\nWhat can I do for you?";
     }
 
     /**
@@ -62,15 +32,6 @@ public class Ui {
     }
 
     /**
-     * Get the input from the user.
-     * @return
-     */
-    public String getOrder() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
-
-    /**
      * Print the message showing the task is done.
      * @param tasklist
      * @param i ith task.
@@ -78,7 +39,7 @@ public class Ui {
      */
     public String showDoneMessage(TaskList tasklist, int i) {
         return "Nice! I've marked this task as done:\n"
-                + spaceBeforeOder() + tasklist.getTask(i) + "\n" + spaceBeforeOder() + "Now you have "
+                + spaceBeforeOrder() + tasklist.getTask(i) + "\n" + spaceBeforeOrder() + "Now you have "
                 + tasklist.getNumOfTasks() + " tasks in the list.";
     }
 
@@ -90,7 +51,7 @@ public class Ui {
      */
     public String showDeleteMessage(TaskList tasklist, Task removed) {
         return "Noted. I've removed this task:\n"
-                + spaceBeforeOder() + removed + "\n" + spaceBeforeOder() + "Now you have "
+                + spaceBeforeOrder() + removed + "\n" + spaceBeforeOrder() + "Now you have "
                 + tasklist.getNumOfTasks() + " tasks in the list.";
     }
 
@@ -101,8 +62,8 @@ public class Ui {
      */
     public String showAddedMessage(TaskList tasklist, int num) {
         return "Got it. I've added this task:\n"
-                + spaceBeforeOder() + tasklist.getTask(num)
-                + "\n" + spaceBeforeOder() + "Now you have "
+                + spaceBeforeOrder() + tasklist.getTask(num)
+                + "\n" + spaceBeforeOrder() + "Now you have "
                 + (num + 1) + " tasks in the list.";
     }
 
@@ -115,7 +76,7 @@ public class Ui {
         String output;
         output = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasklist.getNumOfTasks(); i++) {
-            output += spaceBeforeOder() + (i + 1) + ". "
+            output += spaceBeforeOrder() + (i + 1) + ". "
                     + tasklist.getTask(i) + "\n";
         }
         return output;
@@ -133,7 +94,7 @@ public class Ui {
         int count = 1;
         for (int i = 0; i < tasklist.getNumOfTasks(); i++) {
             if (tasklist.getTask(i).getName().contains(toFind)) {
-                output += spaceBeforeOder() + count + ". "
+                output += spaceBeforeOrder() + count + ". "
                         + tasklist.getTask(i) + "\n";
                 count++;
             }
