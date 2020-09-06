@@ -57,14 +57,8 @@ public class Storage {
     public void saveTasks(List<? extends Storable> storables) throws IOException {
         File saveFile = new File(filePath);
         if (!saveFile.exists()) {
-            boolean directoryCreated = saveFile.getParentFile().mkdirs();
-            if (!directoryCreated) {
-                throw new IOException("Unable to create parent directories to save file");
-            }
-            boolean saveFileCreated = saveFile.createNewFile();
-            if (!saveFileCreated) {
-                throw new IOException("Unable to create save file");
-            }
+            saveFile.getParentFile().mkdirs();
+            saveFile.createNewFile();
         }
 
         // Use PrintWriter wrapping BufferedWriter in FileWriter
