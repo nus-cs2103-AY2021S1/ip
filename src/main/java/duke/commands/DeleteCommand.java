@@ -23,15 +23,15 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         Task selectedTask = null;
         try {
-            selectedTask = taskList.deleteTask(index);
+            selectedTask = tasks.deleteTask(index);
         } catch (DukeException e) {
             return e.getMessage();
         }
         return "Noted. I've removed this duke.task:\n " + selectedTask
-                + "\nNow you have " + taskList.size() + " in the list.";
+                + "\nNow you have " + tasks.size() + " in the list.";
     }
 
 }

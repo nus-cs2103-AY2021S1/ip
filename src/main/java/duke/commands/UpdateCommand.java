@@ -23,10 +23,10 @@ public class UpdateCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         String response = "Nice! I've marked this task as done:\n";
         try {
-            Task selectedTask = taskList.getTask(index);
+            Task selectedTask = tasks.getTask(index);
             selectedTask.setDone();
             response += selectedTask.toString();
         } catch (DukeException e) {

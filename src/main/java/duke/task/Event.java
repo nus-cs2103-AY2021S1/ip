@@ -9,18 +9,18 @@ import duke.exceptions.DukeException;
  * Represents an event object that has the event description and time of event.
  */
 public class Event extends Task {
-    private LocalDateTime timing;
+    private LocalDateTime eventTime;
 
     /**
      * Constructor to create an event object.
      *
      * @param detail is the description entered by the user.
-     * @param timing is the timing for the event entered by the user
+     * @param eventTime is the eventTime for the event entered by the user
      * @throws DukeException if the details entered by the user is invalid.
      */
-    public Event(String detail, LocalDateTime timing) throws DukeException {
+    public Event(String detail, LocalDateTime eventTime) throws DukeException {
         super(detail);
-        this.timing = timing;
+        this.eventTime = eventTime;
     }
 
     /**
@@ -28,24 +28,24 @@ public class Event extends Task {
      *
      * @param doneStatus the state of the task from the user's previous session
      * @param detail the description of the event
-     * @param timing the time of the event
+     * @param eventTime the time of the event
      */
-    public Event(int doneStatus, String detail, LocalDateTime timing) {
+    public Event(int doneStatus, String detail, LocalDateTime eventTime) {
         super(doneStatus, detail);
-        this.timing = timing;
+        this.eventTime = eventTime;
     }
 
     @Override
     public String formatTaskForDatabase() {
         int status = super.getDoneStatus() ? 1 : 0;
-        return "E|" + status + "|" + super.description + "|" + timing;
+        return "E|" + status + "|" + super.description + "|" + eventTime;
     }
 
 
     @Override
     public String toString() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        return "[E]" + super.toString() + " " + super.description + " (at:"
-                + timing.format(dateTimeFormatter) + ")";
+        return "[E]" + super.toString() + " " + super.description + " (At: "
+                + eventTime.format(dateTimeFormatter) + ")";
     }
 }

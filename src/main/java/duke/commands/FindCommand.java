@@ -13,14 +13,14 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         String response = "Here are the matching tasks in your list: \n";
 
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             try {
                 // Check if user input matches any task description in list
-                if (taskList.getTask(i + 1).getDescription().contains(super.command)) {
-                    String message = (i + 1) + "." + taskList.getTask(i + 1) + "\n";
+                if (tasks.getTask(i + 1).getDescription().contains(super.command)) {
+                    String message = (i + 1) + "." + tasks.getTask(i + 1) + "\n";
                     response += message;
                 }
             } catch (DukeException e) {
