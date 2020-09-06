@@ -9,6 +9,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ShowCommand;
+import duke.command.SortCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeException;
 import duke.exception.WrongInputException;
@@ -36,6 +37,9 @@ public class Parser {
 
                 } else if (firstWord.equals("bye")) {
                     return new ExitCommand();
+
+                } else if (firstWord.equals("sort")) {
+                    return new SortCommand();
 
                 } else {
                     throw new WrongInputException();
