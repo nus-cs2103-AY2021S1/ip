@@ -21,6 +21,13 @@ public class Duke {
         storage = new DukeStorage(filePath);
         ui = new Ui();
         taskList = new TaskList();
+        openDukeFile();
+    }
+
+    /**
+     * Helper method to check for and open Duke data.
+     */
+    public void openDukeFile() {
         // try to open the duke file
         try {
             storage.reloadStorage(taskList.getTasks());
