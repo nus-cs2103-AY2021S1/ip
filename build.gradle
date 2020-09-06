@@ -26,7 +26,6 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
 
-
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 
@@ -38,7 +37,6 @@ test {
 
     testLogging {
         events "passed", "skipped", "failed"
-
         showExceptions true
         exceptionFormat "full"
         showCauses true
@@ -48,7 +46,7 @@ test {
 }
 
 application {
-    mainClassName = "ultron.Ultron"
+    mainClassName = "ultron.Launcher"
 }
 
 shadowJar {
@@ -60,6 +58,7 @@ checkstyle {
     toolVersion = '8.29'
 }
 
-run{
+run {
     standardInput = System.in
+    enableAssertions = true
 }
