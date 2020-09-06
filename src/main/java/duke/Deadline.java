@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a task that has a deadline.
  */
-public class Deadline extends duke.Task {
+public class Deadline extends Task {
 
     private LocalDate date;
 

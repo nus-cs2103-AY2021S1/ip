@@ -39,6 +39,7 @@ public class Storage {
 
     public Storage(String filePath) throws IOException {
         assert filePath != null : "FilePath should not be null";
+
         try{
             setFilePath(filePath);
             setBr(new BufferedReader(new FileReader(filePath)));
@@ -64,55 +65,88 @@ public class Storage {
      *
      * @return List of tasks.
      * @throws IOException
-     * @throws duke.DukeException
+     * @throws DukeLoadTaskException
      */
-    public ArrayList<Task> loadTask() throws IOException, DukeException {
-        ArrayList<duke.Task> list = new ArrayList<>();
-        String line = getBr().readLine();
+    public ArrayList<Task> loadTask() throws IOException, DukeLoadTaskException {
+        ArrayList<Task> list = new ArrayList<>();
+        String lineOfText = getBr().readLine();
 
-        if (line == null) {
+        if (lineOfText == null) {
             return list;
         }
 
-        while (!line.isEmpty()) {
-            boolean isDone = String.valueOf(line.charAt(6)).equals("\u2713");
+        while (!lineOfText.isEmpty()) {
+            boolean isDone = String.valueOf(lineOfText.charAt(6)).equals("\u2713");
 
-            String icon = String.valueOf(line.charAt(3));
+            String icon = String.valueOf(lineOfText.charAt(3));
             switch (icon) {
                 case "T":
-                    Todo todo = new Todo(line.substring(9));
-                    if (isDone) {
-                        todo.setDone();
-                    }
-                    list.add(todo);
+                    loadTodo(lineOfText, isDone, list);
                     break;
                 case "D":
-                    int indexOfColon = line.indexOf(":");
-                    String name = line.substring(9, indexOfColon - 4);
-                    String date = line.substring(indexOfColon + 2, line.length() - 1);
-                    Deadline deadline = new Deadline(name, date);
-                    if (isDone) {
-                        deadline.setDone();
-                    }
-                    list.add(deadline);
+                    loadDeadline(lineOfText, isDone, list);
                     break;
                 case "E":
-                    indexOfColon = line.indexOf(":");
-                    name = line.substring(9, indexOfColon - 4);
-                    date = line.substring(indexOfColon + 2, line.length() - 1);
-                    Event event = new Event(name, date);
-                    if (isDone) {
-                        event.setDone();
-                    }
-                    list.add(event);
+                    loadEvent(lineOfText, isDone, list);
                     break;
                 default:
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that line means.");
+                    throw new DukeLoadTaskException();
             }
-            line = this.br.readLine();
+            lineOfText = this.br.readLine();
         }
         setList(list);
         return list;
+    }
+
+    /**
+     * Loads an Event into the storage.
+     *
+     * @param lineOfText A line of text in the text file.
+     * @param isDone Whether the event is done.
+     * @param list Task list.
+     */
+    private void loadEvent(String lineOfText, boolean isDone, ArrayList<Task> list) {
+        int indexOfColon = lineOfText.indexOf(":");
+        String name = lineOfText.substring(9, indexOfColon - 4);
+        String date = lineOfText.substring(indexOfColon + 2, lineOfText.length() - 1);
+        Event event = new Event(name, date);
+        if (isDone) {
+            event.setDone();
+        }
+        list.add(event);
+    }
+
+    /**
+     * Loads a Deadline into the storage.
+     *
+     * @param lineOfText A line of text in the text file.
+     * @param isDone Whether the deadline is done.
+     * @param list Task list.
+     */
+    private void loadDeadline(String lineOfText, boolean isDone, ArrayList<Task> list) {
+        int indexOfColon = lineOfText.indexOf(":");
+        String name = lineOfText.substring(9, indexOfColon - 4);
+        String date = lineOfText.substring(indexOfColon + 2, lineOfText.length() - 1);
+        Deadline deadline = new Deadline(name, date);
+        if (isDone) {
+            deadline.setDone();
+        }
+        list.add(deadline);
+    }
+
+    /**
+     * Loads a Todo into the storage.
+     *
+     * @param lineOfText A line of text in the txt file.
+     * @param isDone Whether the task is done.
+     * @param list Task list.
+     */
+    private void loadTodo(String lineOfText, boolean isDone, ArrayList<Task> list) {
+        Todo todo = new Todo(lineOfText.substring(9));
+        if (isDone) {
+            todo.setDone();
+        }
+        list.add(todo);
     }
 
     /**
@@ -127,7 +161,7 @@ public class Storage {
         StringBuilder listOutput = new StringBuilder();
         for (int j = 0; j < list.size(); j++) {
             int num = j + 1;
-            duke.Task task = list.get(j);
+            Task task = list.get(j);
             listOutput.append(num + "." + task.toString() + "\n");
         }
         String text = listOutput.toString();

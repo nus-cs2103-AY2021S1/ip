@@ -1,3 +1,4 @@
 1.[T][✘] read book
 2.[T][✘] study
+3.[T][✘] work
 

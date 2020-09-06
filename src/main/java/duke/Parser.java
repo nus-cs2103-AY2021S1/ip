@@ -55,19 +55,18 @@ public class Parser {
                     dealWithFind(input, i, list);
                     break;
                 default:
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task " +
-                        "with the starting keyword \"todo\" or \"deadline\" or \"event\".");
+                    throw new DukeUnknownCommandException();
             }
         } else {
-            if (input.equals("todo")) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            } else if (input.equals("deadline")) {
-                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-            } else if (input.equals("event")) {
-                throw new DukeException("OOPS!!! The description of an event cannot be empty.");
-            } else {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means. Please enter your task " +
-                        "with the starting keyword \"todo\" or \"deadline\" or \"event\".");
+            switch (input) {
+                case "todo":
+                    throw new DukeEmptyDescriptionException("todo");
+                case "deadline":
+                    throw new DukeEmptyDescriptionException("deadline");
+                case "event":
+                    throw new DukeEmptyDescriptionException("event");
+                default:
+                    throw new DukeUnknownCommandException();
             }
         }
     }
@@ -94,7 +93,7 @@ public class Parser {
 
         int num = Integer.parseInt(input.substring(indexOfSpace + 1));
         if (list.size() < num) {
-            throw new DukeException("List does not have that item.");
+            throw new DukeInvalidTaskException();
         } else {
             Task taskToSetToDone = list.get(num - 1);
             taskToSetToDone.setDone();
@@ -109,7 +108,7 @@ public class Parser {
 
         int num = Integer.parseInt(input.substring(indexOfSpace + 1));
         if (list.size() < num) {
-            throw new DukeException("List does not have that item.");
+            throw new DukeInvalidTaskException();
         } else {
             taskList.remove(num-1);
             storage.update(list);
