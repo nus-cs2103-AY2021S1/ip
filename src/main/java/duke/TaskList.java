@@ -22,16 +22,15 @@ public class TaskList {
      * @throws DukeException
      */
     public String listTasks() throws DukeException {
+        assert tasks.size() >= 0 : "Number of tasks cannot be negative";
         if (tasks.size() <= 0) {
             throw new DukeException("You don't have any tasks.");
         }
 
         String response = "Here are the tasks in your list:\n";
-//        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             int taskNo = i + 1;
             Task task = tasks.get(i);
-//            System.out.println(taskNo + "." + task);
             response = response + taskNo + "." + task + "\n";
         }
         return response;
@@ -43,6 +42,7 @@ public class TaskList {
      * @throws DukeException If there is no task on that day.
      */
     public String listTasksOn(LocalDate date) throws DukeException {
+        assert tasks.size() >= 0 : "Number of tasks cannot be negative";
         if (tasks.size() <= 0) {
             throw new DukeException("You don't have any tasks.");
         }
@@ -59,16 +59,13 @@ public class TaskList {
         String response;
         if (taskList.size() > 0) {
             response = "Here are the tasks happening on: " + date.format(formatter) + "\n";
-//            System.out.println("Here are the tasks happening on: " + date.format(formatter));
             for (int i = 0; i < taskList.size(); i++) {
                 int taskNo = i + 1;
                 Task task = taskList.get(i);
-//                System.out.println(taskNo + "." + task);
                 response = response + taskNo + "." + task + "\n";
             }
         } else {
             response = "You don't have anything on: " + date.format(formatter) + " :)))\n";
-//            System.out.println("You don't have anything on: " + date.format(formatter) + " :)))");
         }
         return response;
     }
@@ -78,12 +75,9 @@ public class TaskList {
      * @param taskNo The task number in the list.
      */
     public String doneTask(int taskNo) {
-//        System.out.println("Nice! I've marked this task as done:");
+        assert taskNo >= 0: "taskNo cannot be negative";
         Task completedTask = tasks.get(taskNo - 1);
         completedTask.markAsDone();
-//        System.out.println(" " + " "
-//                + "[" + completedTask.getStatusIcon() + "] "
-//                + completedTask.getDescription());
         String response = "Nice! I've marked this task as done:\n"
                 + " " + " "
                 + "[" + completedTask.getStatusIcon() + "] "
@@ -96,10 +90,8 @@ public class TaskList {
      * @param newTask The new task to add.
      */
     public String addTask(Task newTask) {
-//        System.out.println("Got it. I've added this task:");
+        assert newTask != null: "newTask cannot be null";
         tasks.add(newTask);
-//        System.out.println(newTask);
-//        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         String response = "Got it. I've added this task:\n"
                 + newTask + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.\n";
@@ -112,19 +104,15 @@ public class TaskList {
      * @throws DukeException If there is nothing to delete and the task number exceeds total number of tasks.
      */
     public String deleteTask(int taskNo) throws DukeException {
+        assert taskNo >= 0: "taskNo cannot be negative";
         if (tasks.size() <= 0) {
             throw new DukeException("Nothing to delete.");
         } else if (taskNo > tasks.size()) {
             throw new DukeException("Please provide a correct task number.");
         } else {
             String response;
-//            System.out.println("Noted. I've removed this task:");
             Task taskToBeDeleted = tasks.get(taskNo - 1);
             tasks.remove(taskNo - 1);
-//            System.out.println(" " + " "
-//                    + "[" + taskToBeDeleted.getStatusIcon() + "] "
-//                    + taskToBeDeleted.getDescription());
-//            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             response = "Noted. I've removed this task:\n"
                     + " " + " "
                     + "[" + taskToBeDeleted.getStatusIcon() + "] "
@@ -140,6 +128,7 @@ public class TaskList {
      * @throws DukeException
      */
     public String searchKeyword(String keyword) throws DukeException {
+        assert keyword != "": "keyword cannot be empty";
         if (tasks.size() <= 0) {
             throw new DukeException("You don't have any tasks.");
         }
@@ -154,16 +143,13 @@ public class TaskList {
         String response;
         if (taskList.size() > 0) {
             response = "Here are the matching tasks in your list:\n";
-//            System.out.println("Here are the matching tasks in your list:");
             for (int i = 0; i < taskList.size(); i++) {
                 int taskNo = i + 1;
                 Task task = taskList.get(i);
-//                System.out.println(taskNo + "." + task);
                 response = response + taskNo + "." + task + "\n";
             }
         } else {
             response = "You don't have anything related to " + "\"" + keyword + "\"" + "\n";
-//            System.out.println("You don't have anything related to " + "\"" + keyword + "\"");
         }
         return response;
     }
