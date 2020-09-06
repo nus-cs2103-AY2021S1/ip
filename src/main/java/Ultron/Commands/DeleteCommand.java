@@ -53,7 +53,8 @@ public final class DeleteCommand extends Command {
         //Print the delete message
         ui.setMessage(String.format("What are you doing removing this?!?!\n  "
                 + "%s\nNow you have %d burdens%n",
-            tsk,
-            taskList.size()));
+            taskList.get(index),
+            taskList.size() - 1));
+        taskList.remove(index);
     }
 }
