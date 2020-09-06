@@ -14,7 +14,15 @@ import java.util.List;
 
 import static duke.storage.Storage.DEFAULT_STORAGE_FILEPATH;
 
-
+/**
+ * Manages tasks and deadlines in a chat bot style.
+ * <p>
+ * Duke supports CRUD operations for 3 types of tasks:
+ * <li>Todo with description</li>
+ * <li>Events with duration</li>
+ * <li>Deadlines</li>
+ * </p>
+ */
 public class Duke {
 
     private Storage storage;
@@ -38,6 +46,14 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes Duke chat bot functionality.
+     * <p>
+     * Continues taking in commands until
+     * "bye" command is input by user.
+     * </p>
+     *
+     */
     public void run() {
         ui.showWelcomeMessage();
         String input = ui.getUserInput();

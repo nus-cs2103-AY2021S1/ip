@@ -3,6 +3,9 @@ package duke.ui;
 import java.io.InputStream;
 import java.util.Scanner;
 
+/**
+ * Handles input and output to the user.
+ */
 public class Ui {
 
     private static final String LOGO = "   ___      _      _ __   _              \n" +
@@ -36,7 +39,9 @@ public class Ui {
         outputBlockToUser(GOODBYE);
     }
 
-    /** Shows message to user */
+    /**
+     * Shows a message to user with indentation and divider blocks.
+     */
     public void outputBlockToUser(String... message) {
         System.out.print(LINE_PREFIX + DIVIDER.replace("\n", LINE_SEPARATOR));
         for (String m : message) {
