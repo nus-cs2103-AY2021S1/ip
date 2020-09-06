@@ -79,6 +79,7 @@ public class UI {
         try {
             //Get the result of the parse
             int parseResult = this.parser.parse(input, this.storage.getSizeofTasks());
+            assert(parseResult > 0 && parseResult < 6);
 
             if (isListCommand(parseResult)) {
                 return this.readSavedTasks();
