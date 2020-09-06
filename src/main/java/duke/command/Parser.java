@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -57,6 +58,10 @@ public class Parser {
             finalString = Ui.showResponse(response, command);
         }
         return finalString;
+    }
+
+    public static void process(String command, TaskList taskList) throws DukeException {
+        processorAdd(command, taskList);
     }
 
     private static String processorFind(String command, TaskList taskList) {
@@ -135,6 +140,40 @@ public class Parser {
         } else {
             String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw new DukeException(message);
+        }
+    }
+
+    /**
+     *
+     * @param taskHistory
+     * @return
+     */
+    public static String processOldTasks(ArrayList<String> taskHistory, TaskList taskList) {
+        for (String task : taskHistory) {
+            try {
+                String command = processStoredTask(task);
+                Parser.process(command, taskList);
+            } catch (DukeException e) {
+                return Ui.showError(e.getMessage());
+            }
+        }
+        return "Total number of Task loaded from previous file: " + taskHistory.size();
+    }
+
+    private static String processStoredTask(String task) throws DukeException {
+        String[] stringArr = task.split(" ", 2);
+        switch (task.charAt(1)) {
+        case 'T':
+            return "todo " + stringArr[1];
+        case 'D':
+            String[] secondArr = stringArr[1].split("/by", 2);
+            return "deadline /by " + secondArr[1].trim();
+        case 'E':
+            String[] thirdArr = stringArr[1].split("/at", 2);
+            return "event /at " + thirdArr[1];
+        default:
+            String errorMessage = "Failed to process Stored Tasks";
+            throw new DukeException(errorMessage);
         }
     }
 }

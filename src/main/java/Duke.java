@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 
 import duke.command.DukeException;
 import duke.command.Parser;
@@ -48,6 +49,12 @@ public class Duke {
     public Duke() {
         this.taskList = TaskList.createTaskList();
         this.storage = Storage.createDukeFile("Saved");
+        try {
+            ArrayList<String> taskHistory = this.storage.loadFile();
+            Parser.processOldTasks(taskHistory, this.taskList);
+        } catch (IOException e) {
+            System.out.println(Ui.showError(e.getMessage()));
+        }
     }
 
 
@@ -63,22 +70,6 @@ public class Duke {
         textToAdd.setWrapText(true);
 
         return textToAdd;
-    }
-
-    /**
-     * Gets the Storage object in Duke
-     * @return Storage Object
-     */
-    public Storage getDukeStorage() {
-        return this.storage;
-    }
-
-    /**
-     * Gets the TaskList object in Duke
-     * @return TaskList Object
-     */
-    public TaskList getDukeTaskList() {
-        return this.taskList;
     }
 
     /**

@@ -43,15 +43,6 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.welcomeMessage(), dukeImage)
         );
-        //Storage dukeStorage = duke.getDukeStorage();
-//        try {
-//            ArrayList<String> taskHistory = dukeStorage.loadFile();
-//            TaskList dukeTaskList = duke.getDukeTaskList();
-//        } catch (IOException e) {
-//            dialogContainer.getChildren().addAll(
-//                    DialogBox.getDukeDialog(Ui.showError(e.getMessage()), dukeImage)
-//            );
-//        }
     }
 
     public void setDuke(Duke d) {

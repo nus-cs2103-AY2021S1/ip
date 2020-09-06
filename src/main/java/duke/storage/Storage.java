@@ -31,12 +31,12 @@ public class Storage {
      * @throws IOException on input error.
      */
     public ArrayList<String> loadFile() throws IOException {
+        assert this.file != null : "file cannot be null";
         Scanner sc = new Scanner(this.file);
-        ArrayList<String> stringArr = new ArrayList<>();
         while (sc.hasNextLine()) {
-            stringArr.add(sc.nextLine());
+            this.recordArrayLst.add(sc.nextLine());
         }
-        return stringArr;
+        return recordArrayLst;
     };
 
     /**
