@@ -41,6 +41,7 @@ public enum Message {
             usages.put("delete", "Delete a task.\nUsage: delete [index]");
             usages.put("find", "Find a task with description.\nUsage: find [description]");
             usages.put("bye", "Quit application.\nUsage: bye");
+            usages.put("help", "Get help. Can specify command.\nUsage: help [keyword]");
         }
 
         private static String get(String key) {
