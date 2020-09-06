@@ -8,7 +8,7 @@ import duke.util.Parser;
 import duke.util.Storage;
 
 /**
- * Main class of the Duke bot.
+ * Class representing the Duke chatbot.
  */
 public class Duke {
     private final Storage storage;
@@ -16,7 +16,7 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Initialises a new {@code Duke} bot.
+     * Initialises a new {@code Duke} chatbot.
      */
     public Duke() {
         this.ui = new Ui();
