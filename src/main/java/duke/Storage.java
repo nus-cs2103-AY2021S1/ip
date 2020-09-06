@@ -34,16 +34,20 @@ public class Storage {
      */
     public static Task genTaskFromString(String string) {
         boolean status = (string.charAt(4) == '\u2713');
-        if (string.charAt(1) == 'T') {
+        char taskType = string.charAt(1);
+
+        if (taskType == 'T') {
             return new ToDo(string.substring(7), status);
-        } else if (string.charAt(1) == 'D') {
+        } else if (taskType == 'D') {
             int endIndex = string.indexOf("(by:") - 1;
-            return new Deadline(string.substring(7, endIndex),
-                    string.substring(endIndex + 6, string.length() - 1), status);
+            String taskString = string.substring(7, endIndex);
+            String dateTimeString = string.substring(endIndex + 6, string.length() - 1);
+            return new Deadline(taskString, dateTimeString, status);
         } else {
             int endIndex = string.indexOf("(at:") - 1;
-            return new Event(string.substring(7, endIndex),
-                    string.substring(endIndex + 6, string.length() - 1), status);
+            String taskString = string.substring(7, endIndex);
+            String atString = string.substring(endIndex + 6, string.length() - 1);
+            return new Event(taskString, atString, status);
         }
     }
 
