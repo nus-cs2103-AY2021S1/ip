@@ -1,6 +1,9 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 public enum Priority {
 
@@ -29,12 +32,17 @@ public enum Priority {
      *
      * @param priorityValue priority value in Integer.
      * @return priority type.
+     * @throws DukeException when invalid priority number is given (range allowed: 1-5)
      */
-    public static Priority getPriority(int priorityValue) {
-        return Arrays.stream(values())
-                .filter(x -> x.priorityValue == priorityValue)
-                .findFirst()
-                .get();
+    public static Priority getPriority(int priorityValue) throws DukeException {
+        try {
+            return Arrays.stream(values())
+                    .filter(x -> x.priorityValue == priorityValue)
+                    .findFirst()
+                    .get();
+        } catch (NoSuchElementException e) {
+            throw new DukeException("Invalid Priority Given...");
+        }
     }
 
     /**

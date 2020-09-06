@@ -8,7 +8,7 @@ public class ToDoTest {
     @Test
     public void todoCreation_normalInput_success() {
         ToDo todo = new ToDo("read book");
-        Assertions.assertEquals("[T][\u2718] read book", todo.toString());
+        Assertions.assertEquals("[T][\u2718][UNCLASSIFIED] read book", todo.toString());
     }
 
     @Test
@@ -25,13 +25,31 @@ public class ToDoTest {
     public void todoDone_setDone_success() {
         ToDo todo = new ToDo("read book");
         todo.setDone();
-        Assertions.assertEquals("[T][\u2713] read book", todo.toString());
+        Assertions.assertEquals("[T][\u2713][UNCLASSIFIED] read book", todo.toString());
     }
 
     @Test
     public void todoExport_noInput_success() {
         ToDo todo = new ToDo("wash clothes");
         todo.setDone();
-        Assertions.assertEquals("T`1`wash clothes", todo.getSaveToFileString());
+        Assertions.assertEquals("T`1`5`wash clothes", todo.getSaveToFileString());
+    }
+
+    @Test
+    public void todoPriority_changePriority_success() {
+        ToDo todo = new ToDo("sleep");
+        todo.setPriority(1);
+        Assertions.assertEquals(Priority.CRITICAL, todo.getPriority());
+    }
+
+    @Test
+    public void todoPriority_changePriority_invalidPriority() {
+        try {
+            ToDo todo = new ToDo("sleep");
+            todo.setPriority(-1);
+            Assertions.fail();
+        } catch (DukeException e) {
+            Assertions.assertEquals(new DukeException("Invalid Priority Given...").getMessage(), e.getMessage());
+        }
     }
 }
