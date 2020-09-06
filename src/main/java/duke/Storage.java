@@ -73,6 +73,7 @@ public class Storage {
                     tasks.add(event);
                     break;
                 default:
+                    assert false : splitTask[0];
                     throw new IllegalArgumentException();
                 }
             }
@@ -109,6 +110,7 @@ public class Storage {
                             + task.getDescription() + " | " + ((Event) task).getAt() + "\n");
                     break;
                 default:
+                    assert false : task.getShortForm();
                     throw new IllegalArgumentException();
                 }
             }
