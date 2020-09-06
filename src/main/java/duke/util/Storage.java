@@ -37,6 +37,7 @@ public class Storage {
      * Populates a {@link TaskList} with data saved in the hard disk. If the data directory or file does not exist,
      * it will be created.
      * @param taskList List to be populated.
+     * @throws DukeException If the data fails to load.
      */
     public void loadData(TaskList taskList) throws DukeException {
         dataDirectory.mkdirs();
@@ -55,18 +56,18 @@ public class Storage {
                 while ((line = br.readLine()) != null) {
 
                     String[] taskData = line.split("\\|");
-                    String taskType = taskData[1];
+                    String taskType = taskData[0];
                     Task task;
 
                     switch (taskType) {
                     case "T":
-                        task = new ToDo(taskData[0], Boolean.parseBoolean(taskData[2]), taskData[3]);
+                        task = new ToDo(Boolean.parseBoolean(taskData[1]), taskData[2]);
                         break;
                     case "D":
-                        task = new Deadline(taskData[0], Boolean.parseBoolean(taskData[2]), taskData[3], taskData[4]);
+                        task = new Deadline(Boolean.parseBoolean(taskData[1]), taskData[2], taskData[3]);
                         break;
                     case "E":
-                        task = new Event(taskData[0], Boolean.parseBoolean(taskData[2]), taskData[3], taskData[4]);
+                        task = new Event(Boolean.parseBoolean(taskData[1]), taskData[2], taskData[3]);
                         break;
                     default:
                         throw new DukeException("Invalid argument detected in data file");
@@ -79,79 +80,20 @@ public class Storage {
         }
     }
 
-    private void appendData(String data) throws DukeException {
+    /**
+     * Saves the contents of a {@link TaskList} to the data saved in the hard disk.
+     * @param tasks List to be saved.
+     * @throws DukeException If the data fails to save.
+     */
+    public void saveData(TaskList tasks) throws DukeException {
         try {
-            FileWriter writer = new FileWriter(dataFilePath, true);
-            writer.write(data);
+            FileWriter writer = new FileWriter(dataFilePath);
+            System.out.println(tasks.serializeList());
+            writer.write(tasks.serializeList());
             writer.close();
         } catch (IOException e) {
             throw new DukeException("Failed to write to data file.");
         }
-    }
 
-    private void overwriteData(String data) throws DukeException {
-        try {
-            FileWriter writer = new FileWriter(dataFilePath);
-            writer.write(data);
-            writer.close();
-        } catch (IOException e) {
-            throw new DukeException("Failed to write to data file");
-        }
-    }
-
-    public void saveTodo(ToDo task) throws DukeException {
-        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.isDone() + "|"
-                + task.getDescription() + "\n";
-        appendData(line);
-    }
-
-    public void saveDeadline(Deadline task) throws DukeException {
-        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.isDone() + "|"
-                + task.getDescription() + "|" + task.getTime() + "\n";
-        appendData(line);
-    }
-
-    public void saveEvent(Event task) throws DukeException {
-        String line = task.getUniqueId() + "|" + task.getTaskType() + "|" + task.isDone() + "|"
-                + task.getDescription() + "|" + task.getTime() + "\n";
-        appendData(line);
-    }
-
-    public void doneTask(Task task) throws DukeException {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(dataFilePath));
-            StringBuilder newData = new StringBuilder();
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                if (line.contains(task.getUniqueId())) {
-                    line = line.replaceFirst("false", "true");
-                }
-                newData.append(line).append("\n");
-            }
-            br.close();
-            overwriteData(newData.toString());
-        } catch (Exception e) {
-            throw new DukeException("Failed to update task in data.");
-        }
-
-    }
-
-    public void deleteTask(Task task) throws DukeException {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(dataFilePath));
-            StringBuilder newData = new StringBuilder();
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                if (!line.contains(task.getUniqueId())) {
-                    newData.append(line).append("\n");
-                }
-            }
-            br.close();
-            overwriteData(newData.toString());
-        } catch (Exception e) {
-            throw new DukeException("Failed to delete task in data.");
-        }
     }
 }

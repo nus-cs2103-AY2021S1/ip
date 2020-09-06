@@ -11,7 +11,6 @@ import java.time.format.FormatStyle;
  */
 public class Deadline extends Task {
 
-    private String by;
     private LocalDate taskDate;
     private LocalTime taskTime;
 
@@ -22,7 +21,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.date = by;
         this.taskType = "D";
 
         String[] dateArguments = by.split(" ");
@@ -41,32 +40,16 @@ public class Deadline extends Task {
 
     /**
      * Creates a {@code Deadline} from existing data.
-     * @param uniqueId Unique Id of the deadline.
      * @param isDone Deadline completion status.
      * @param description Description of the deadline.
      * @param by Time that the deadline is due by.
      */
-    public Deadline(String uniqueId, boolean isDone, String description, String by) {
-        super(uniqueId, isDone, description);
-        this.by = by;
-        this.taskType = "D";
+    public Deadline(boolean isDone, String description, String by) {
+        this(description, by);
 
-        String[] dateArguments = by.split(" ");
-
-        try {
-            taskDate = LocalDate.parse(dateArguments[0]);
-
-            if (dateArguments.length == 2) {
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH[:]mm");
-                taskTime = LocalTime.parse(dateArguments[1], dtf);
-            }
-        } catch (DateTimeParseException e) {
-            System.out.println("Date and time format is invalid.");
+        if (isDone) {
+            this.markDone();
         }
-    }
-
-    public String getTime() {
-        return by;
     }
 
     private String formatTaskTime() {

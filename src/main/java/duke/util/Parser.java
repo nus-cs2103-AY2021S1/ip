@@ -70,7 +70,7 @@ public class Parser {
             }
             return new AddCommand(taskType, deadlineContents);
         case EVENT:
-            String[] eventContents = commandArg.split( "/at" );
+            String[] eventContents = commandArg.split( " /at ");
             if (eventContents.length < 2) {
                 throw new DukeException("You need to tell me when this event is happening!");
             }

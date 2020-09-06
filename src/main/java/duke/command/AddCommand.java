@@ -39,32 +39,23 @@ public class AddCommand extends Command {
 
         switch (taskType) {
         case TODO: {
-            ToDo todo = new ToDo(taskContent[0]);
-            todo.generateUniqueId();
-            tasks.addTask(todo);
-            storage.saveTodo(todo);
-            task = todo;
+            task = new ToDo(taskContent[0]);
             break;
         }
         case DEADLINE: {
-            Deadline deadline = new Deadline(taskContent[0], taskContent[1]);
-            deadline.generateUniqueId();
-            tasks.addTask(deadline);
-            storage.saveDeadline(deadline);
-            task = deadline;
+            task = new Deadline(taskContent[0], taskContent[1]);
             break;
         }
         case EVENT: {
-            Event event = new Event(taskContent[0], taskContent[1]);
-            event.generateUniqueId();
-            tasks.addTask(event);
-            storage.saveEvent(event);
-            task = event;
+            task = new Event(taskContent[0], taskContent[1]);
             break;
         }
         default:
             throw new DukeException("Failed to create event.");
         }
+        tasks.addTask(task);
+        storage.saveData(tasks);
+
         StringBuilder message = new StringBuilder("Alright! I've added this task:\n");
         message.append(task);
         message.append("\nNow you have ").append(tasks.size()).append(" task(s) in your list.");

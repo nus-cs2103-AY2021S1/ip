@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
 
         Task task = tasks.getTask(taskIdx);
         tasks.deleteTask(task);
-        storage.deleteTask(task);
+        storage.saveData(tasks);
         ui.botOutput("Noted. I've removed this task:\n" + task);
     }
 }

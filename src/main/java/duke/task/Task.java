@@ -1,7 +1,5 @@
 package duke.task;
 
-import java.util.UUID;
-
 /**
  * Wrapper class for all types of tasks.
  */
@@ -10,7 +8,7 @@ public class Task {
     protected String taskType;
     protected String description;
     protected boolean isDone;
-    protected String uniqueId;
+    protected String date;
 
     /**
      * Creates a brand new {@code Task}.
@@ -21,17 +19,6 @@ public class Task {
         this.isDone = false;
     }
 
-    /**
-     * Creates a {@code Task} from existing data.
-     * @param uniqueId Unique Id of the task.
-     * @param isDone Task completion status.
-     * @param description Task description.
-     */
-    public Task(String uniqueId, boolean isDone, String description) {
-        this.uniqueId = uniqueId;
-        this.isDone = isDone;
-        this.description = description;
-    }
 
     public void markDone() {
         isDone = true;
@@ -53,19 +40,8 @@ public class Task {
         return taskType;
     }
 
-    /**
-     * Generates a unique id for the task.
-     */
-    public void generateUniqueId() {
-        this.uniqueId = UUID.randomUUID().toString();
-    }
-
-    public void setUniqueId(String uniqueId) {
-        this.uniqueId = uniqueId;
-    }
-
-    public String getUniqueId() {
-        return this.uniqueId;
+    public String getDate() {
+        return this.date;
     }
 
     @Override

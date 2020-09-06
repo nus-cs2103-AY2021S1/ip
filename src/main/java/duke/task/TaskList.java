@@ -22,6 +22,7 @@ public class TaskList {
     /**
      * Creates a {@code TaskList} from existing data.
      * @param storage {@link Storage} object that will load the data.
+     * @throws DukeException If the data fails to load.
      */
     public void loadFromStorage(Storage storage) throws DukeException {
         storage.loadData(this);
@@ -50,7 +51,7 @@ public class TaskList {
     /**
      * Finds and list tasks with description containing the keyword.
      * @param keyword Keyword for the search.
-     * @return
+     * @return Tasks containing the keyword.
      */
     public String listTasksWithKeyword(String keyword) {
         StringBuilder output = new StringBuilder();
@@ -65,6 +66,30 @@ public class TaskList {
 
         output.deleteCharAt(output.length() - 1);
         return output.toString();
+    }
+
+    /**
+     * Serializes the {@code TaskList} into a format that can be stored.
+     * @return Serialized data of the list.
+     */
+    public String serializeList() {
+        StringBuilder data = new StringBuilder();
+
+        for (Task task : tasks) {
+            String taskType = task.getTaskType();
+            String serializedTask;
+
+            if (taskType.equals("T")) {
+                serializedTask = String.format("%s|%s|%s\n", task.getTaskType(), task.isDone(), task.getDescription());
+            } else {
+                serializedTask = String.format("%s|%s|%s|%s\n", task.getTaskType(),
+                        task.isDone(), task.getDescription(), task.getDate());
+            }
+
+            data.append(serializedTask);
+        }
+
+        return data.toString();
     }
 
     @Override
