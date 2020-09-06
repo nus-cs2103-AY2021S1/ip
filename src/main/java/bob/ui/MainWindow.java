@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Initializes Bob.
+     * Initializes Bob and show reminders to user on MainWindow.
      */
     public void initializeBob() {
         try {
