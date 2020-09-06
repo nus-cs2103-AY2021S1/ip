@@ -12,6 +12,7 @@ import duke.ui.Ui;
 public class Duke {
     private final Parser parser;
     private final Ui ui;
+    private final Context context;
     private TaskList taskList;
     private Storage storage;
 
@@ -28,7 +29,8 @@ public class Duke {
             ui.systemMessage(e.getMessage());
             this.taskList = new TaskList();
         } finally {
-            this.parser = new Parser(this.taskList, this.ui);
+            this.context = new Context(this.taskList, this.ui);
+            this.parser = new Parser(this.context);
             ui.start();
         }
     }

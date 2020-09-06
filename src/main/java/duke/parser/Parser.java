@@ -11,30 +11,26 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import duke.Context;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.exception.DukeParseException;
-import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Class to parse raw input from user and run commands from the input.
  */
 public class Parser {
-    private final TaskList taskList;
-    private final Ui ui;
+    private final Context context;
     private final CommandLineParser parser;
     private final HelpFormatter formatter;
 
     /**
      * Constructor for Parser.
-     * @param taskList TaskList to pass to commands.
-     * @param ui Ui object that commands will use.
+     * @param context Context object.
      */
-    public Parser(TaskList taskList, Ui ui) {
-        assert taskList != null && ui != null : "taskList and ui should not be null";
-        this.taskList = taskList;
-        this.ui = ui;
+    public Parser(Context context) {
+        assert context != null : "context cannot be null";
+        this.context = context;
         this.parser = new DefaultParser();
         this.formatter = new HelpFormatter();
     }
@@ -73,7 +69,7 @@ public class Parser {
         Options options = command.getOptions();
         try {
             CommandLine cmd = this.parser.parse(options, args);
-            command.dispatch(this.taskList, this.ui, cmd);
+            command.dispatch(this.context, cmd);
         } catch (ParseException e) {
             DukeParseException toThrow = new DukeParseException(e.getMessage());
             toThrow.setExtraMessage(getHelp(commandName, options));

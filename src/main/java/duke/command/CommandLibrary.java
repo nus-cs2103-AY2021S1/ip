@@ -13,44 +13,47 @@ import duke.task.TaskList;
 import duke.task.Todo;
 
 class CommandLibrary {
-    static final CommandExecutable DEADLINE_COMMAND = (taskList, ui, args) -> {
+    static final CommandExecutable DEADLINE_COMMAND = (context, args) -> {
         String description = getUnusedArgs(args);
         String time = args.getOptionValue("by");
-        ui.systemMessage(taskList.add(new Deadline(description, time)));
+        String message = context.getTaskList().add(new Deadline(description, time));
+        context.getUi().systemMessage(message);
     };
-    static final CommandExecutable EVENT_COMMAND = (taskList, ui, args) -> {
+    static final CommandExecutable EVENT_COMMAND = (context, args) -> {
         String description = getUnusedArgs(args);
         String time = args.getOptionValue("at");
-        ui.systemMessage(taskList.add(new Event(description, time)));
+        String message = context.getTaskList().add(new Event(description, time));
+        context.getUi().systemMessage(message);
     };
-    static final CommandExecutable TODO_COMMAND = (taskList, ui, args) -> {
+    static final CommandExecutable TODO_COMMAND = (context, args) -> {
         String description = getUnusedArgs(args);
-        ui.systemMessage(taskList.add(new Todo(description)));
+        String message = context.getTaskList().add(new Todo(description));
+        context.getUi().systemMessage(message);
     };
-    static final CommandExecutable DELETE_COMMAND = (taskList, ui, args) -> {
+    static final CommandExecutable DELETE_COMMAND = (context, args) -> {
         int index = parseInt(getUnusedArgs(args));
-        if (index > taskList.size()) {
+        if (index > context.getTaskList().size()) {
             throw DukeException.Errors.DELETE_OUT_OF_RANGE.create();
         }
-        Task selected = taskList.deleteItem(index - 1);
-        ui.systemMessage("sir this task has been remove sir:\n  " + selected);
+        Task selected = context.getTaskList().deleteItem(index - 1);
+        context.getUi().systemMessage("sir this task has been remove sir:\n  " + selected);
     };
-    static final CommandExecutable DONE_COMMAND = (taskList, ui, args) -> {
+    static final CommandExecutable DONE_COMMAND = (context, args) -> {
         int index = parseInt(getUnusedArgs(args));
-        if (index > taskList.size()) {
+        if (index > context.getTaskList().size()) {
             throw DukeException.Errors.DONE_OUT_OF_RANGE.create();
         }
-        Task selected = taskList.markItem(index - 1);
-        ui.systemMessage("afternoon sir i have mark this task done sir:\n  " + selected);
+        Task selected = context.getTaskList().markItem(index - 1);
+        context.getUi().systemMessage("afternoon sir i have mark this task done sir:\n  " + selected);
     };
-    static final CommandExecutable LIST_COMMAND = (taskList, ui, args) ->
-        ui.systemMessage(taskList.toString());
-    static final CommandExecutable BYE_COMMAND = (taskList, ui, args) -> {
-        ui.close();
-        ui.systemMessage("bye sir thanks for using me sir hope to see you again sir");
+    static final CommandExecutable LIST_COMMAND = (context, args) ->
+        context.getUi().systemMessage(context.getTaskList().toString());
+    static final CommandExecutable BYE_COMMAND = (context, args) -> {
+        context.getUi().close();
+        context.getUi().systemMessage("bye sir thanks for using me sir hope to see you again sir");
     };
-    static final CommandExecutable FIND_COMMAND = (taskList, ui, args) -> {
-        List<Task> items = taskList.getItemsList();
+    static final CommandExecutable FIND_COMMAND = (context, args) -> {
+        List<Task> items = context.getTaskList().getItemsList();
         String keyword = getUnusedArgs(args);
         for (int i = 0; i < items.size(); i++) {
             // if description does not contain string
@@ -58,8 +61,8 @@ class CommandLibrary {
                 items.set(i, null);
             }
         }
-        ui.systemMessage("sir i found your items sir look:");
-        ui.systemMessage(TaskList.enumerateItems(items));
+        context.getUi().systemMessage("sir i found your items sir look:");
+        context.getUi().systemMessage(TaskList.enumerateItems(items));
     };
     private static String getUnusedArgs(CommandLine args) throws DukeParseException {
         List<String> unconsumedArgs = args.getArgList();

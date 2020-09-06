@@ -4,9 +4,8 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
+import duke.Context;
 import duke.exception.DukeException;
-import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Stores all the commands to be run.
@@ -49,8 +48,8 @@ public enum Command {
         }
     }
 
-    public void dispatch(TaskList taskList, Ui ui, CommandLine args) throws DukeException {
-        this.exec.run(taskList, ui, args);
+    public void dispatch(Context context, CommandLine args) throws DukeException {
+        this.exec.run(context, args);
     }
 
     public Options getOptions() {
