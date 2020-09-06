@@ -1,7 +1,6 @@
-package main.java.emily.command;
+package emily.storage;
 
-import main.java.emily.task.Task;
-
+import emily.task.Task;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> taskArrayList = new ArrayList<>();
 
-    TaskList(ArrayList<Task> taskArrayList) {
+    public TaskList(ArrayList<Task> taskArrayList) {
         this.taskArrayList = taskArrayList;
     }
 
@@ -29,6 +28,7 @@ public class TaskList {
      * @param index provided by the user
      */
     public void deleteTask(int index) {
+        assert index<=this.taskArrayList.size();
         taskArrayList.remove(index);
     }
 

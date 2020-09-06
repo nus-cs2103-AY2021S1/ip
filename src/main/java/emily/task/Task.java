@@ -1,4 +1,4 @@
-package main.java.emily.task;
+package emily.task;
 
 /**
  * Represents the basic structure of a sample task from the user input.
