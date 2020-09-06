@@ -8,7 +8,7 @@ import duke.TaskManager;
  */
 public class ExitCommand extends Command {
     /**
-     * Class constructor.
+     * Initializes an exit command.
      *
      * @param input User input.
      */

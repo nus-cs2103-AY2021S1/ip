@@ -7,7 +7,7 @@ import duke.TaskManager;
  */
 public class InvalidCommand extends Command {
     /**
-     * Class constructor.
+     * Initializes an invalid command.
      *
      * @param input User input.
      */

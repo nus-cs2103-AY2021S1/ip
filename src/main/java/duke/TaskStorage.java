@@ -89,10 +89,10 @@ public class TaskStorage {
         }
     }
 
-    private static boolean convertToBoolean(String value) {
+    private static boolean convertToBoolean(String isTrue) {
         boolean returnValue = false;
-        if ("1".equalsIgnoreCase(value) || "yes".equalsIgnoreCase(value)
-                || "true".equalsIgnoreCase(value) || "on".equalsIgnoreCase(value)) {
+        if ("1".equalsIgnoreCase(isTrue) || "yes".equalsIgnoreCase(isTrue)
+                || "true".equalsIgnoreCase(isTrue) || "on".equalsIgnoreCase(isTrue)) {
             returnValue = true;
         }
         return returnValue;

@@ -16,7 +16,7 @@ import duke.tasks.Deadline;
 public class AddDeadlineCommand extends Command {
 
     /**
-     * Class constructor.
+     * Initializes an add deadline command.
      *
      * @param input User input.
      */

@@ -13,7 +13,7 @@ public class Duke {
     private boolean isExit;
 
     /**
-     * Class constructor.
+     * Initializes the logic unit behind Duke.
      */
     public Duke() {
         try {

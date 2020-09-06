@@ -19,7 +19,7 @@ public class TaskManager {
     private final TaskStorage taskStorage;
 
     /**
-     * Constructor for TaskManager.
+     * Initializes a TaskManager.
      *
      * @throws IOException If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.

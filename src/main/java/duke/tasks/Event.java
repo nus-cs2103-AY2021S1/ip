@@ -14,7 +14,7 @@ public class Event extends Task {
     private final LocalDateTime datetime;
 
     /**
-     * Class constructor specifying whether the event is complete.
+     * Initializes an event specifying whether the event is complete.
      *
      * @param content Contents of the event.
      * @param datetimeString Datetime of the event.
@@ -34,7 +34,7 @@ public class Event extends Task {
     }
 
     /**
-     * Class constructor.
+     * Initializes an incomplete event.
      *
      * @param content Contents of the event.
      * @param datetimeString Datetime of the event.

@@ -15,7 +15,7 @@ import duke.tasks.Task;
 public class FindAllContainingCommand extends Command {
 
     /**
-     * Class constructor.
+     * Initializes a find all containing an input command.
      *
      * @param input User input.
      */

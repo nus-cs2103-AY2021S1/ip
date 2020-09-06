@@ -11,7 +11,7 @@ public class Task {
     protected boolean isComplete;
 
     /**
-     * Class constructor.
+     * Initializes an incomplete task.
      *
      * @param content Contents of the task.
      * @throws DukeException If an exception related to Duke occurred.
@@ -25,7 +25,7 @@ public class Task {
     }
 
     /**
-     * Class constructor specifying whether the task is complete.
+     * Initializes a task specifying whether the task is complete.
      *
      * @param content Contents of the task.
      * @throws DukeException If an exception related to Duke occurred.
