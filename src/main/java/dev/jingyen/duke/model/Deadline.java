@@ -11,6 +11,7 @@ import java.time.format.FormatStyle;
  */
 public class Deadline extends Task {
     private static final String SAVE_STRING = "DEADLINE|%s|%s|%s";
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
     private final LocalDate deadline;
 
     /**
@@ -41,19 +42,7 @@ public class Deadline extends Task {
         return String.format(
                 "[D]%s (by: %s)",
                 super.toString(),
-                this.deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
-    }
-
-    /**
-     * Serializes the dev.jingyen.duke.model.Deadline into a String that is easy to parse. The String takes the form:
-     * <code>DEADLINE|isDone|taskName|deadLine</code>.
-     * The deadLine is formatted into yyyy-mm-dd, where yyyy is the year, mm- is the month, and dd is the day.
-     *
-     * @return A formatted String ready for saving into a file
-     */
-    @Override
-    public String toSaveString() {
-        return String.format(SAVE_STRING, super.isDone, super.taskName, deadline);
+                deadline.format(DATE_FORMAT));
     }
 
     @Override
@@ -66,5 +55,10 @@ public class Deadline extends Task {
         }
         Deadline d = (Deadline) o;
         return super.equals(d) && deadline.equals(d.deadline);
+    }
+
+    @Override
+    public String toSaveString() {
+        return String.format(SAVE_STRING, super.isDone, super.taskName, deadline);
     }
 }

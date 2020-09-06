@@ -51,10 +51,10 @@ public class Storage {
     /**
      * Saves a list of tasks into a file.
      *
-     * @param tasks the list of tasks to serialize and save
+     * @param storables the list of tasks to serialize and save
      * @throws IOException if a problem was encountered while trying to access the file at <code>filePath</code>
      */
-    public void saveTasks(List<Task> tasks) throws IOException {
+    public void saveTasks(List<? extends Storable> storables) throws IOException {
         File saveFile = new File(filePath);
         if (!saveFile.exists()) {
             boolean directoryCreated = saveFile.getParentFile().mkdirs();
@@ -69,8 +69,8 @@ public class Storage {
 
         // Use PrintWriter wrapping BufferedWriter in FileWriter
         try (var out = new PrintWriter(new BufferedWriter(new FileWriter(filePath)))) {
-            for (Task task : tasks) {
-                out.println(task.toSaveString());
+            for (Storable storable : storables) {
+                out.println(storable.toSaveString());
             }
         }
     }

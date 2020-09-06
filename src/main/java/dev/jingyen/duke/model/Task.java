@@ -7,7 +7,7 @@ import java.util.Objects;
  *
  * @author jingyenloh
  */
-public abstract class Task {
+public abstract class Task implements Storable {
     protected boolean isDone;
     protected String taskName;
 
@@ -31,13 +31,6 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s] %s", isDone ? "✓" : "✘", taskName);
     }
-
-    /**
-     * Formats the task into a String that is easy to parse.
-     *
-     * @return a formatted String, ready for saving into a file.
-     */
-    public abstract String toSaveString();
 
     @Override
     public boolean equals(Object o) {
