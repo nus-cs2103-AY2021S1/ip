@@ -33,14 +33,15 @@ public class AddCommand extends Command {
      * @param tasks Task list representing current tasks.
      * @param ui User interface interacting with user.
      * @param storage Storage Storage in charge of saving file to hard disk.
+     * @return A string representing Duke's response after executing command.
      * @throws DukeException If unable to either add task or save task file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(task);
         storage.saveTaskList(task.saveToString());
-        ui.printMessage(String.format("%s\n%s\n%s%d!", MESSAGE_ADD_ACKNOWLEDGEMENT, task.toString(),
-                MESSAGE_ADD_UPDATE, tasks.getTaskCount()));
+        return String.format("%s\n%s\n%s%d!", MESSAGE_ADD_ACKNOWLEDGEMENT, task.toString(),
+                MESSAGE_ADD_UPDATE, tasks.getTaskCount());
     }
 
 

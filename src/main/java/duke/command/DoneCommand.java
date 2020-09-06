@@ -31,15 +31,17 @@ public class DoneCommand extends Command {
      * @param tasks Task list representing current tasks.
      * @param ui User interface interacting with user.
      * @param storage Storage Storage in charge of saving file to hard disk.
+     * @return A string representing Duke's response after executing command.
      * @throws DukeException If unable to edit task file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
         Task task = tasks.doneTask(taskNum);
         storage.editTaskList(task.saveToString(), taskNum, false);
-        ui.printMessage(String.format("%s\n%s\n%s", MESSAGE_DONE_ACKNOWLEDGEMENT,
-                task.toString(), MESSAGE_DONE_END));
+        return String.format("%s\n%s\n%s", MESSAGE_DONE_ACKNOWLEDGEMENT,
+                task.toString(), MESSAGE_DONE_END);
+
 
     }
 

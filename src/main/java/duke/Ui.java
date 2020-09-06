@@ -6,12 +6,34 @@ import java.util.Scanner;
  * Deals with interactions with the user by displaying messages to user.
  */
 public class Ui {
-    private static final String BORDER = "____________________________________________________________";
-    private final String LOGO = " ____        ____\n"
-            + "|  _ \\  ___ |  _ \\\n"
-            + "| | | |/ _ \\| | | |\n"
-            + "| |_| || __/| |_| |\n"
-            + "|____/ \\___||____/\n";
+    private static final String NAME = "CHUBS";
+    private static final String LOGO = "              ░                                             ░                                  ░░░  \n"
+            + "                                                         ████            ░                          \n"
+            + "                                                      █▓▒▒▒█                                      \n"
+            + "                                             ███████▒█                                    \n"
+            + "                                      ██░░░░░░░░██    ██                              \n"
+            + "                                  █░░░░░░░░░░░░░█▓▓█                            \n"
+            + "                              █░░░░░░░░░░░░░░░ ██▒█                            \n"
+            + "                              █░░░░░░░░░░░░░░░░░░█                              \n"
+            + "                          █░░░░░░░░░░░░░░░░░░░ █   █                          \n"
+            + "                          █░░░░░░░░░░░░░░░░░░░░█▓█                        \n"
+            + "                          █░░██░░░░░░░██░░░░░░░█▓█                        \n"
+            + "                          █▒▒██░░░░░░░██▒▒▒░░░░██                          \n"
+            + "                          █▒▒▒░░█░█░█░░░▒▒▒░░░░█                            \n"
+            + "                          █░░░░░░█░█░░░░░░░░░░█▒█                          \n"
+            + "                          █░░░░░░░░░░░░░░░░░░░█▓█                          \n"
+            + "                             █░░░░░░░░░░░░░░░░░█▓▓█                          \n"
+            + "                 ░             ██░░░░░░░░░░░░██    ██                            \n"
+            + "                                         ██████████                                      \n"
+            + "                                         █░░░░░░░░██                                    \n"
+            + "                                         █░░░░░░░░█░█                                  \n"
+            + "      ░.                            █░█░░░░░░█░█░█                                \n"
+            + "                                  █░░░█░░░░█░░░█░░█                              \n"
+            + "                                  █░░▓█░░░ █▓░░░███                                \n"
+            + "                                     ███   ███    ████                                      \n"
+            + "                                                                                        \n"
+            + "                                                                                        \n"
+            + "                                                                   ░                                  ";
     private Scanner sc;
 
     /**
@@ -24,9 +46,9 @@ public class Ui {
     /**
      * Displays welcome messages to user when Duke starts up.
      */
-    public void showWelcome() {
+    public String showWelcome() {
 
-        System.out.println("Hello I am\n" + LOGO + "\n" + "Feed me some stuff! :3\n");
+        return "Hello I am " + NAME + "\n" + LOGO + "\n" + "Feed me some stuff! :3";
     }
 
     /**
@@ -48,10 +70,6 @@ public class Ui {
      */
     public void showError(String message) {
         System.out.println(message);
-    }
-
-    public void showLine() {
-        System.out.println(BORDER);
     }
 
     /**

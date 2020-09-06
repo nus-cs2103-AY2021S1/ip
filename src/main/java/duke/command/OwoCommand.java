@@ -17,10 +17,11 @@ public class OwoCommand extends Command {
      * @param tasks Task list representing current tasks.
      * @param ui User interface interacting with user.
      * @param storage Storage Storage in charge of saving file to hard disk.
+     * @return A string representing Duke's response after executing command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printMessage(MESSAGE_OWO_ACKNOWLEDGEMENT);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return MESSAGE_OWO_ACKNOWLEDGEMENT;
     }
 
 }

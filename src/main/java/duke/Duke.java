@@ -10,7 +10,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public static Duke createDuke() {
+        return new Duke("data/tasks.txt");
+    }
+
+    private Duke(String filePath) {
         ui = new Ui();
         try {
             storage = new Storage(filePath);
@@ -21,31 +25,21 @@ public class Duke {
         }
     }
 
+    public String getWelcome() {
+        return ui.showWelcome();
+    }
+
     /**
-     * Starts Duke to take in user inputs.
+     * Generates Duke's response to user input.
+     * @param input A string representing the user input from text box.
+     * @return A string representing Duke's response to user input.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.toString());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.toString();
         }
     }
-
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
-
 }
