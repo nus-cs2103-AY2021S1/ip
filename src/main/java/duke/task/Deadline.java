@@ -55,8 +55,10 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String formattedEventTime = this.deadlineDate.format(DateTimeFormatter.ofPattern("EE, MMM dd yyyy"))
-                + ", " + this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
-        return "[D]" + super.toString() + " (by: " + formattedEventTime + ")";
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("EE, MMM dd yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+        String formattedDeadlineTime = this.deadlineDate.format(dateFormatter)
+                + ", " + this.deadlineTime.format(timeFormatter);
+        return "[D]" + super.toString() + " (by: " + formattedDeadlineTime + ")";
     }
 }

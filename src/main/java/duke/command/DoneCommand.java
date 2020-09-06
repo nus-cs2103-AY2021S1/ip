@@ -41,20 +41,19 @@ public class DoneCommand extends Command {
         try {
             int index = Integer.parseInt(this.parsedCommand[1]);
             if (index > tasks.getListSize() || index <= 0) {
-                String err = "Invalid Task! The task ID you provided is not valid. ";
-                throw new InvalidTaskException(err);
-            } else {
-                tasks.completeTask(index - 1);
-                storage.saveToFile(tasks);
-                return ui.showCompletedTask(tasks.getTask(index - 1));
+                String error = "Invalid Task! The task ID you provided is not valid. ";
+                throw new InvalidTaskException(error);
             }
+            tasks.completeTask(index - 1);
+            storage.saveToFile(tasks);
+            return ui.showCompletedTask(tasks.getTask(index - 1));
         } catch (ArrayIndexOutOfBoundsException ex) {
-            String err = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";
-            throw new InvalidFunctionException(err);
+            String error = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";
+            throw new InvalidFunctionException(error);
         } catch (NumberFormatException ex) {
-            String err = "Your input is not a recognised command. You have to provide the ID of "
+            String error = "Your input is not a recognised command. You have to provide the ID of "
                     + "the task you wish to mark as done. \n";
-            throw new InvalidFunctionException(err);
+            throw new InvalidFunctionException(error);
         }
     }
 

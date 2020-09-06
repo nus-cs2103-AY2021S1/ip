@@ -44,13 +44,13 @@ public class Parser {
         String message = userInput.trim();
         String[] parsedCommand = message.split(" ", 2);
         String function = parsedCommand[0];
-        if (message.equals(Parser.END_COMMAND)) {
-            return new ExitCommand();
-        } else if (message.equals(Parser.VIEW_FUNCTION_COMMAND)) {
-            return new FunctionsCommand();
-        } else if (message.isEmpty()) {
+        if (message.isEmpty()) {
             String err = "No input was entered! Please enter something!";
             throw new InvalidFunctionException(err);
+        } else if (message.equals(Parser.VIEW_FUNCTION_COMMAND)) {
+            return new FunctionsCommand();
+        } else if (message.equals(Parser.END_COMMAND)) {
+            return new ExitCommand();
         } else if (message.equals(Parser.LIST_COMMAND)) {
             return new ListCommand();
         } else if (function.equals(Parser.DONE_COMMAND)) {
