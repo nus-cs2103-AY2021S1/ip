@@ -18,7 +18,8 @@ public class Storage {
 
     /**
      * saves the list of items in a hardcoded file called list.duke
-     * @param list TaskList object to be saved
+     *
+     * @param list     TaskList object to be saved
      * @param filePath path to save file at
      * @throws DukeException
      */
@@ -45,6 +46,7 @@ public class Storage {
 
     /**
      * loads from list.duke form specified filePath
+     *
      * @param filePath filePath to search
      * @return TaskList containing all saved additions to the list
      */

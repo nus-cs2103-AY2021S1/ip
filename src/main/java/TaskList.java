@@ -13,7 +13,6 @@ public class TaskList implements Iterable<Task> {
 
     public ArrayList<Task> ListOfKeyWordItems = new ArrayList<>();
 
-    public String line = "____________________________________________________________";
 
     TaskList() {
         this.listOfItems = new ArrayList<>();
@@ -21,6 +20,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * adds a task to the list of items
+     *
      * @param item task that is being added
      * @return String output stating its has been added
      */
@@ -34,6 +34,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * marks a task in the list with [✓] to state it is done
+     *
      * @param index position of the task to be marked in the list
      * @return String output stating that the task has been marked completed
      * @throws DukeException if the number given is not on the list
@@ -46,12 +47,13 @@ public class TaskList implements Iterable<Task> {
             return String.format("\nNice! I've marked this task as done:\n  %s\n", item.toString());
 
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("List does not contain the number specified");
+            return (new DukeException("List does not contain the number specified")).toString();
         }
     }
 
     /**
      * removes a task form the list at the specified position
+     *
      * @param index
      * @return String output stating that the task has been removed
      * @throws DukeException if the number given is not on the list
@@ -64,25 +66,24 @@ public class TaskList implements Iterable<Task> {
                     item.toString(),
                     this.listOfItems.size());
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("List does not contain the number specified");
+            return (new DukeException("List does not contain the number specified")).toString();
         }
     }
 
 
     /**
      * prints out the entire list
+     *
      * @return String output of the entire list
      */
 
-    public void findTask(String Keyword){
+    public void findTask(String Keyword) {
         ListOfKeyWordItems.clear();
-       for (Task item : listOfItems) {
-if (item.toString().indexOf(Keyword) != -1) {
-    ListOfKeyWordItems.add(item);
-} else {
-
-}
-       }
+        for (Task item : listOfItems) {
+            if (item.toString().indexOf(Keyword) != -1) {
+                ListOfKeyWordItems.add(item);
+            }
+        }
 
     }
 
@@ -105,6 +106,7 @@ if (item.toString().indexOf(Keyword) != -1) {
 
     /**
      * iterates over the list of items
+     *
      * @return iterator with generic T as Task
      */
     @Override

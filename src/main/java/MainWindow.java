@@ -6,7 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 import java.util.concurrent.TimeUnit;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -48,10 +50,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws InterruptedException {
 
         String input = userInput.getText();
-        //String response = duke.getResponse(input);
-
-
-        String response = Parser.parseCode(tl, new UI(), false, input);
+        String response = Parser.parseCode(tl, new UI(), input);
         if (response.equals(UI.addLines("Bye. Hope to see you again soon!"))) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
@@ -68,7 +67,6 @@ public class MainWindow extends AnchorPane {
             userInput.clear();
 
         }
-
 
 
     }
