@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a task.
  */
@@ -7,12 +9,12 @@ public class Task {
     /**
      * The description of the task.
      */
-    private String description;
+    protected String description;
 
     /**
      * The completion status of the task.
      */
-    private boolean isDone;
+    protected boolean isDone;
 
     /**
      * Creates a new instance of a Task object with attributes defined
@@ -61,6 +63,14 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Updates a task's description.
+     * @param description New description of the event.
+     */
+    public void updateDesc(String description) {
+        this.description = description;
     }
 
     /**

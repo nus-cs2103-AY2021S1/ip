@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
@@ -9,6 +10,9 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UpdateCommand;
+import duke.command.UpdateDateCommand;
+import duke.command.UpdateDescCommand;
 
 import duke.exception.DukeEmptyInputException;
 import duke.exception.DukeInvalidCommandException;
@@ -44,6 +48,8 @@ public class Parser {
             return parseDone(Integer.parseInt(commands[1]));
         case "delete":
             return parseDelete(Integer.parseInt(commands[1]));
+        case "update":
+            return parseUpdate(commands[1]);
         case "find":
             if (commands.length < 2) {
                 throw new DukeInvalidKeywordException();
@@ -105,6 +111,37 @@ public class Parser {
      */
     static DeleteCommand parseDelete(int taskNo) {
         return new DeleteCommand(taskNo);
+    }
+
+    /**
+     * Parses a UpdateCommand.
+     *
+     * @param command Command given by user.
+     * @return Returns a UpdateCommand associated with the task to be updated.
+     */
+    static UpdateCommand parseUpdate(String command) throws DukeEmptyInputException, DukeInvalidDateTimeException {
+        String[] details;
+        try {
+            if (command.contains(" /date")) {
+                details = command.split(" /date ");
+                if (details.length < 2) {
+                    throw new DukeEmptyInputException("You have not entered a new date for your task!");
+                }
+                int taskNo = Integer.parseInt(details[0]);
+                return new UpdateDateCommand(taskNo, details[1]);
+            } else {
+                details = command.split(" /desc ");
+                System.out.println(Arrays.toString(details));
+                if (details.length < 2) {
+                    System.out.println("hello");
+                    throw new DukeEmptyInputException("You have not entered a new description for your task!");
+                }
+                int taskNo = Integer.parseInt(details[0]);
+                return new UpdateDescCommand(taskNo, details[1]);
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidDateTimeException("The new date for your task cannot be parsed.");
+        }
     }
 
     /**

@@ -3,6 +3,9 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.exception.DukeInvalidUpdateException;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 
 /**
@@ -93,6 +96,43 @@ public class TaskList {
         tasks.remove(task);
         return task;
     }
+
+    /**
+     * Edits a task's description in the task list.
+     *
+     * @param taskNo Index of the task to be edited.
+     * @param description New description of the task.
+     * @return Returns the edited task.
+     */
+    public Task updateTaskDesc(int taskNo, String description) {
+        Task task = tasks.get(taskNo - 1);
+        task.updateDesc(description);
+        return task;
+    }
+
+    /**
+     * Edits a task's date in the task list.
+     *
+     * @param taskNo Index of the task to be edited.
+     * @param date New date of the task.
+     * @return Returns the edited task.
+     * @throws DukeInvalidUpdateException when attempting to update an invalid detail.
+     */
+    public Task updateTaskDate(int taskNo, String date) throws DukeInvalidUpdateException {
+        Task task = tasks.get(taskNo - 1);
+        if (task instanceof Event) {
+            Event event = (Event) task;
+            event.updateDate(date);
+        } else if (task instanceof Deadline) {
+            Deadline deadline = (Deadline) task;
+            deadline.updateDate(date);
+        } else {
+            throw new DukeInvalidUpdateException();
+        }
+        return task;
+    }
+
+
 
     /**
      * Finds the tasks related to keyword.

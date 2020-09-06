@@ -49,6 +49,14 @@ public class Event extends Task {
     }
 
     /**
+     * Overloaded method, updates a event's date.
+     * @param date New date of the event.
+     */
+    public void updateDate(String date) {
+        this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+    }
+
+    /**
      * Overrides the default toString() method in the Task class.
      *
      * @return Returns a String describing the attributes of the event.

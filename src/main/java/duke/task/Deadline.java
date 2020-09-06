@@ -48,6 +48,14 @@ public class Deadline extends Task {
     }
 
     /**
+     * Overloaded method, updates a deadline's date.
+     * @param date New date of the deadline.
+     */
+    public void updateDate(String date) {
+        this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+    }
+
+    /**
      * Overrides the default toString() method in the Task class.
      *
      * @return Returns a String describing the attributes of the deadline task.

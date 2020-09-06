@@ -4,6 +4,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+import duke.exception.DukeInvalidUpdateException;
 import duke.exception.DukeLoadingErrorException;
 
 /**
@@ -20,7 +21,7 @@ public abstract class Command {
      * @returns Response to user.
      * @throws DukeLoadingErrorException If I/O operation fails during Storage#save.
      */
-    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException, DukeInvalidUpdateException;
 
     /**
      * Indicates whether operation should continue running.
