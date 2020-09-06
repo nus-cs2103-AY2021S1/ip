@@ -80,9 +80,12 @@ public class Parser {
         }
     }
 
-    private static int parseNumber(String input) throws DukeException {
+    private static int parseNumber(String detail) throws DukeException {
+        if (detail.trim().length() == 0) {
+            throw new MissingTaskIndexException();
+        }
         try {
-            return Integer.parseInt(input.trim());
+            return Integer.parseInt(detail.trim());
         } catch (NumberFormatException e) {
             throw new InvalidNumberInput();
         }

@@ -58,6 +58,7 @@ public class TaskSaveAndLoadManager {
         // loop through the loaded data strings, split each string by | and add to task list
         if (loadedData != null) {
             for (String loadedDatum : loadedData) {
+                assert (loadedDatum.contains(" %% ")) : "Each data object must have %% as separator";
                 String[] tempArr = loadedDatum.split(" %% ");
                 TaskData taskData;
                 // a todo item

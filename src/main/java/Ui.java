@@ -18,12 +18,12 @@ public class Ui {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private VBox dialogContainer;
 
-    /** Create and initiate an Ui object. */
+    /** Creates and initiate an Ui object. */
     public Ui(VBox dialogContainer) {
         this.dialogContainer = dialogContainer;
     }
 
-    /** Greet the user. */
+    /** Greets the user. */
     public void greet() {
         print(GREETING);
     }

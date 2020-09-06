@@ -33,6 +33,7 @@ public class Duke  {
     }
 
     public void greet() {
+        assert (ui != null) : "UI must be specified";
         ui.greet();
     }
 }
