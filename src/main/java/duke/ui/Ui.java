@@ -1,5 +1,6 @@
 package duke.ui;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.tasks.Task;
@@ -107,18 +108,40 @@ public class Ui {
     }
 
     /**
+     * Returns string representation of the tasks in the list.
+     *
+     * @param task
+     * @param taskList
+     * @return the string representation of the task.
+     */
+    public String presentTask(Task task, TaskList taskList) {
+        return spaceBeforeOder() + (taskList.getTaskList().indexOf(task) + 1)
+                + ". " + task + "\n";
+    }
+
+    /**
+     * Returns the string represents the whole task list
+     * starting with the first sentence.
+     *
+     * @param firstSentence
+     * @param taskList
+     * @return the string representation.
+     */
+    public String UseStreamListTasks(String firstSentence, TaskList taskList) {
+        return taskList.getTaskList().stream()
+                .reduce(firstSentence,
+                        (string, task) -> string + presentTask(task, taskList),
+                        (string1, string2) -> string1 + string2);
+    }
+
+    /**
      * Print the tasks in the list.
      * @param tasklist
      * @return
      */
     public String listTasks(TaskList tasklist) {
-        String output;
-        output = "Here are the tasks in your list:\n";
-        for (int i = 0; i < tasklist.getNumOfTasks(); i++) {
-            output += spaceBeforeOder() + (i + 1) + ". "
-                    + tasklist.getTask(i) + "\n";
-        }
-        return output;
+        String firstSentence = "Here are the tasks in your list:\n";
+        return UseStreamListTasks(firstSentence, tasklist);
     }
 
     /**
@@ -128,17 +151,12 @@ public class Ui {
      * @return
      */
     public String listMatchedTasks(TaskList tasklist, String toFind) {
-        String output;
-        output = "Here are the matching tasks in your list:\n";
-        int count = 1;
-        for (int i = 0; i < tasklist.getNumOfTasks(); i++) {
-            if (tasklist.getTask(i).getName().contains(toFind)) {
-                output += spaceBeforeOder() + count + ". "
-                        + tasklist.getTask(i) + "\n";
-                count++;
-            }
-        }
-        return output;
+        String firstSentence = "Here are the matching tasks in your list:\n";
+        TaskList listWithKeyword = new TaskList(new ArrayList<>());
+        tasklist.getTaskList().stream()
+                .filter(task -> task.getName().contains(toFind))
+                .forEach(task -> listWithKeyword.add(task));
+        return UseStreamListTasks(firstSentence, listWithKeyword);
     }
 
     /**
