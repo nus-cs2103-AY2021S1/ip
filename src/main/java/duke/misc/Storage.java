@@ -41,10 +41,12 @@ public class Storage {
      * @param database the current list of tasks
      */
     public static void writeFile(List<Task> database) {
+        assert database != null: "Storage.writeFile(): database cannot be null";
         File dir = new File("./tmp/data");
         try {
             FileWriter fw = new FileWriter(new File(dir, "storage.txt"));
             for (Task task : database) {
+                assert task != null: "Storage.writeFile(): task to be added cannot be null";
                 fw.write(task.serialize() + "\n");
             }
             fw.close();

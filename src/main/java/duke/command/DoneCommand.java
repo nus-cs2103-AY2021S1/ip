@@ -14,6 +14,7 @@ public class DoneCommand extends Command {
 
     @Override
     public String run(TaskList taskList) throws InvalidArgumentException {
+        assert input.size() == 2: "DoneCommand.run(): input must have exactly 2 words";
         int index = Integer.parseInt(input.get(1));
         taskList.finishTask(index);
         return Ui.answerDone(taskList.getTask(index).toString());
