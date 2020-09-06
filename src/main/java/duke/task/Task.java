@@ -2,7 +2,6 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import duke.command.Command;
 
 public abstract class Task implements Comparable<Task> {
     protected String description;
@@ -72,7 +71,7 @@ public abstract class Task implements Comparable<Task> {
     public abstract Task markAsDone();
 
     public LocalDate getTaskDate() {
-        if(this instanceof Todo) {
+        if (this instanceof Todo) {
             return LocalDate.MAX;
         } else if (this instanceof Event) {
             return ((Event) this).getEventDate();
@@ -104,7 +103,7 @@ public abstract class Task implements Comparable<Task> {
 
     @Override
     public int compareTo(Task other) {
-        if(this.getTaskDate().compareTo(other.getTaskDate()) > 0) {
+        if (this.getTaskDate().compareTo(other.getTaskDate()) > 0) {
             if (this.getTaskTime().compareTo(other.getTaskTime()) > 0) {
                 if (this.getDescription().compareTo(other.getDescription()) > 0) {
                     return 1;

@@ -46,7 +46,7 @@ public class Todo extends Task {
 
     @Override
     public boolean equals(Object other) {
-        if(this == other) {
+        if (this == other) {
             return true;
         } else if (other instanceof Todo) {
             Todo todo = (Todo) other;

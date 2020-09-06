@@ -189,7 +189,7 @@ public class Event extends Task {
 
     @Override
     public boolean equals(Object other) {
-        if(this == other) {
+        if (this == other) {
             return true;
         } else if (other instanceof Event) {
             Event event = (Event) other;
@@ -198,13 +198,13 @@ public class Event extends Task {
             boolean startTimeIsEqual = false;
             boolean endTimeIsEqual = false;
 
-            if(this.startTime != null && event.getStartTime() != null) {
+            if (this.startTime != null && event.getStartTime() != null) {
                 startTimeIsEqual = this.startTime.equals(event.getStartTime());
-            } else if (this.startTime == null && event.getStartTime() == null){
+            } else if (this.startTime == null && event.getStartTime() == null) {
                 startTimeIsEqual = true;
             }
 
-            if(this.endTime != null && event.getEndTime() != null) {
+            if (this.endTime != null && event.getEndTime() != null) {
                 endTimeIsEqual = this.endTime.equals(event.getEndTime());
             } else if (this.endTime == null && event.endTime == null) {
                 endTimeIsEqual = true;

@@ -1,13 +1,11 @@
 package duke;
 
-import javax.swing.plaf.synth.SynthToolTipUI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.PriorityQueue;
 
 import duke.exception.CalendarException;
 import duke.exception.DeleteException;
@@ -77,7 +75,7 @@ public class TaskList {
      * @return Save message.
      */
     public String saveToList(Task task) throws StorageException {
-        if(this.tasks.contains(task)) {
+        if (this.tasks.contains(task)) {
             throw new StorageException("This task already exist!");
         } else {
             this.tasks.add(task);
@@ -183,25 +181,14 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Sorts tasks in the list.
+     * @return Sorted list.
+     */
     public List<Task> sort() {
         Collections.sort(this.tasks, new TaskComparator());
         Storage.updateData(this.tasks);
         return this.tasks;
-    }
-
-    public List<Task> sortList() {
-        List<Task> tasks = new ArrayList<>(this.tasks);
-        for(int i = 0; i < tasks.size(); i++) {
-            for(int j = 0; j < tasks.size() - 1; j++) {
-                if (tasks.get(j).compareTo(tasks.get(j+1)) < 0) {
-                    Task temp = tasks.get(j+1);
-                    Task before = tasks.get(j);
-                    tasks.set(j+1, before);
-                    tasks.set(j, temp);
-                }
-            }
-        }
-        return tasks;
     }
 
 }
