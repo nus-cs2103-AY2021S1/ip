@@ -60,12 +60,7 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(this.filePath);
         if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            try {
-                file.createNewFile();
-            } catch (IOException ex) {
-                throw new DukeException("Failed to create file for storage.");
-            }
+            makeDirectory(file);
         }
         try {
             Scanner s = new Scanner(file);
@@ -90,5 +85,14 @@ public class Storage {
             throw new DukeException("Error reading file.");
         }
         return tasks;
+    }
+
+    private void makeDirectory(File file) throws DukeException {
+        file.getParentFile().mkdirs();
+        try {
+            file.createNewFile();
+        } catch (IOException ex) {
+            throw new DukeException("Failed to create file for storage.");
+        }
     }
 }
