@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Duke;
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -11,6 +11,9 @@ import duke.ui.Ui;
  */
 public class DoneCommand extends Command {
     private String userInput;
+
+    static final int INDEX_OF_TASK_NUMBER = 5;
+    static final String DONE_RESPONSE = "    Nice! I've marked this task as done:\n";
 
     public DoneCommand(String userInput) {
         this.userInput = userInput;
@@ -27,10 +30,11 @@ public class DoneCommand extends Command {
      * @param tasks List of <code>Task</code> objects.
      * @param ui Ui object created by Duke.
      * @param storage Storage object created by Duke.
+     * @return Resultant string where the check box for the specified task is ticked.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String executeToString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String fileString = tasks.listToString();
-        int taskNumber = Integer.parseInt(userInput.substring(5));
+        int taskNumber = Integer.parseInt(userInput.substring(INDEX_OF_TASK_NUMBER));
         Task curr = tasks.get(taskNumber - 1);
         String beforeDone = curr.taskToText();
 
@@ -41,29 +45,9 @@ public class DoneCommand extends Command {
         fileString = fileString.replace(beforeDone, afterDone);
 
         // saves fileString to txt file
-        Storage.save(Duke.FILENAME, fileString);
+        Storage.save(fileString);
 
-        System.out.println("    Nice! I've marked this task as done:\n"
-                + "        " + tasks.get(taskNumber - 1));
-    }
-
-    public String executeToString(TaskList tasks, Ui ui, Storage storage) {
-        String fileString = tasks.listToString();
-        int taskNumber = Integer.parseInt(userInput.substring(5));
-        Task curr = tasks.get(taskNumber - 1);
-        String beforeDone = curr.taskToText();
-
-        curr.markAsDone();
-        String afterDone = curr.taskToText();
-
-        // mark this task as done in fileString
-        fileString = fileString.replace(beforeDone, afterDone);
-
-        // saves fileString to txt file
-        Storage.save(Duke.FILENAME, fileString);
-
-        return "    Nice! I've marked this task as done:\n"
-                + "        " + tasks.get(taskNumber - 1);
+        return DONE_RESPONSE + "        " + tasks.get(taskNumber - 1);
     }
 }
 

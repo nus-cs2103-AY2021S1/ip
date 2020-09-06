@@ -25,20 +25,8 @@ public class FindCommand extends Command {
      * @param tasks List of <code>Task</code> objects.
      * @param ui Ui object created by Duke.
      * @param storage Storage object created by Duke.
+     * @return Resultant string with all the tasks that contain the word specified.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("    Here are the matching tasks in your list:");
-
-        String wordToFind = userInput.substring(5);
-
-        for (int i = 0; i < tasks.size(); i++) {
-            Task curr = tasks.get(i);
-            if (curr.getDescription().contains(wordToFind)) {
-                System.out.println("    " + (i + 1) + ". " + curr);
-            }
-        }
-    }
-
     public String executeToString(TaskList tasks, Ui ui, Storage storage) {
         String result = "    Here are the matching tasks in your list:";
 

@@ -1,14 +1,14 @@
 package duke.ui;
 
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.util.Scanner;
 
 /**
  * Represents a class that deals with interactions with the user
  */
 public class Ui {
-    public void showLoadingError() {
-        System.out.println("Something went wrong");
-    }
 
     /**
      * Prints the welcome message for the Duke application
@@ -43,5 +43,11 @@ public class Ui {
      */
     public void showError(String message) {
         System.out.println(message);
+    }
+
+    public String showAddTaskResponse(Task task, int sizeOfTaskList) {
+        return "    Got it. I've added this task:\n"
+                + "        " + task + '\n'
+                + "    Now you have " + sizeOfTaskList + " tasks in the list.";
     }
 }

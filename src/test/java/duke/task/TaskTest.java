@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TaskTest {
 
     @Test
-    public void taskToTextTest() {
+    public void taskToTextTest() throws DukeException {
 
         assertEquals("T | 0 | do something"
                 , new Task("todo do something").taskToText());

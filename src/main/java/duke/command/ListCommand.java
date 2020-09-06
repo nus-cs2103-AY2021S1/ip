@@ -24,14 +24,8 @@ public class ListCommand extends Command {
      * @param tasks List of <code>Task</code> objects.
      * @param ui Ui object created by Duke.
      * @param storage Storage object created by Duke.
+     * @return Resultant string with all the tasks in the list
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("    Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("    " + (i + 1) + ". " + tasks.get(i));
-        }
-    }
-
     public String executeToString(TaskList tasks, Ui ui, Storage storage) {
         String result = "    Here are the tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {

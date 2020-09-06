@@ -2,6 +2,7 @@ package duke.tasklist;
 
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 
 /**
@@ -41,7 +42,7 @@ public class TaskList {
      *
      * @return String where each line corresponds to a different task.
      */
-    public String listToString() {
+    public String listToString() throws DukeException {
         String str = "";
         for (int i = 0; i < tasks.size(); i++) {
             str += tasks.get(i).taskToText() + "\n";

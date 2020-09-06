@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.exception.DukeException;
 import duke.task.Task;
 
 /**
@@ -22,7 +23,7 @@ public class Parser {
      * @param userInput User input that is typed into the command line.
      * @return <code>Command</code> object based on user input.
      */
-    public static Command parse(String userInput) {
+    public static Command parse(String userInput) throws DukeException {
         Task t = new Task(userInput);
 
         if (userInput.equals("list")) {
@@ -35,8 +36,10 @@ public class Parser {
             return new ExitCommand(userInput);
         } else if (t.getFirstWord().equals("find")) {
             return new FindCommand(userInput);
-        } else {
+        } else if (t.isTodo() || t.isDeadline() || t.isEvent()) {
             return new AddCommand(userInput);
+        } else {
+            throw new DukeException("   ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

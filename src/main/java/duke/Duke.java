@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.ExitCommand;
 import javafx.application.Platform;
-import javafx.scene.image.Image;
 
 import duke.command.Command;
 import duke.exception.DukeException;
@@ -20,10 +19,6 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
 
     /**
      * Creates a new Duke object with the specified file path.
@@ -45,23 +40,21 @@ public class Duke {
     /**
      * Runs the duke application.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
+//    public void run() {
+//        //ui.showWelcome();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String fullCommand = ui.readCommand();
+//                //ui.showLine();
+//                Command c = Parser.parse(fullCommand);
+//                c.execute(tasks, ui, storage);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.showError(e.getMessage());
+//            }
+//        }
+//    }
 
 
     /**
@@ -71,7 +64,6 @@ public class Duke {
     public String getResponse(String input) {
         String response = "";
         try {
-
             Command c = Parser.parse(input);
             if (c instanceof ExitCommand) {
                 Platform.exit();
@@ -85,9 +77,9 @@ public class Duke {
         return response;
     }
 
-    public static void main(String[] args) {
-        new Duke(FILENAME).run();
-    }
+    //public static void main(String[] args) {
+    //    new Duke(FILENAME).run();
+    //}
 
 
 

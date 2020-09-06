@@ -18,6 +18,10 @@ import duke.task.Task;
 public class Storage {
     private String filePath;
 
+    static final int INDEX_OF_TASK_TYPE = 0;
+    static final int INDEX_OF_DONENESS = 4;
+    static final int INDEX_OF_TASK_DESCRIPTION = 8;
+
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -32,13 +36,13 @@ public class Storage {
      */
     public static Task textToTask(String input) {
         String des = "";
-        Character first = input.charAt(0);
-        Character num = input.charAt(4);
+        char first = input.charAt(INDEX_OF_TASK_TYPE);
+        char num = input.charAt(INDEX_OF_DONENESS);
         if (first == 'T') {
             des = "todo ";
-            des += input.substring(8);
+            des += input.substring(INDEX_OF_TASK_DESCRIPTION);
         } else {
-            String temp = input.substring(8);
+            String temp = input.substring(INDEX_OF_TASK_DESCRIPTION);
             String taskDescription = temp.substring(0, temp.indexOf(" |"));
             String date = temp.substring(temp.indexOf("|") + 2);
             if (first == 'D') {
@@ -49,12 +53,10 @@ public class Storage {
         }
 
         Task t = new Task(des);
-        if (num == '0') {
-            return t;
-        } else {
+        if (num != '0') {
             t.markAsDone();
-            return t;
         }
+        return t;
     }
 
     /**
@@ -82,7 +84,6 @@ public class Storage {
      * @throws DukeException If any of the <code>Task</code> objects is not valid.
      */
     public ArrayList<Task> load() throws DukeException {
-        // converts text to tasks, duke exception to check if is valid task
         ArrayList<Task> tasksArray = new ArrayList<>();
         ArrayList<String> tasksStrings = new ArrayList<>();
 
@@ -100,9 +101,10 @@ public class Storage {
                 tasksArray.add(t.convertToTodo());
             } else if (t.isDeadline()) {
                 tasksArray.add(t.convertToDeadline());
-            } else {
+            } else if (t.isEvent()){
                 tasksArray.add(t.convertToEvent());
             }
+            assert false;
         }
         return tasksArray;
     }
@@ -111,12 +113,11 @@ public class Storage {
      * Writes <code>String textToAdd</code> to the file specified in
      * <code>String filePath</code>.
      *
-     * @param filePath Path of the file to write to.
      * @param textToAdd Text to be written to the file specified in <code>filePath</code>.
      * @throws IOException
      */
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
+    private static void writeToFile(String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(Duke.FILENAME);
         fw.write(textToAdd);
         fw.close();
     }
@@ -125,13 +126,11 @@ public class Storage {
      * Saves the text from <code>String textToAdd</code> to the file specified
      * in <code>String filePath</code>.
      *
-     * @param filePath Path of the file to write to.
      * @param textToAdd Text to be written to the file specified in <code>filePath</code>.
      */
-    public static void save(String filePath, String textToAdd) {
-        // writes fileString to .txt file
+    public static void save(String textToAdd) {
         try {
-            writeToFile(Duke.FILENAME, textToAdd);
+            writeToFile(textToAdd);
         } catch (IOException e) {
             System.out.println("Oops, something went wrong: " + e.getMessage());
         }
