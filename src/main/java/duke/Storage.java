@@ -5,11 +5,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import duke.command.AddCommand;
+import duke.parser.FileStringChecker;
+import duke.parser.Parser;
 import duke.task.Task;
 import duke.task.TaskList;
 

@@ -1,5 +1,6 @@
-package duke;
+package duke.parser;
 
+import duke.DukeException;
 import duke.task.TaskList;
 
 public class TaskIndexStringChecker extends StringChecker {

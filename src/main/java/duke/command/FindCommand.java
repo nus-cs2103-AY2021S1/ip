@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import duke.DukeException;
-import duke.FindTaskStringChecker;
 import duke.Storage;
 import duke.Ui;
+import duke.parser.FindTaskStringChecker;
 import duke.task.TaskList;
 
 

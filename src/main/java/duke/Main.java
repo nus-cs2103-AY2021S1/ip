@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,7 +24,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<duke.MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
             ap.setPrefSize(400.0, 600.0);
         } catch (IOException e) {

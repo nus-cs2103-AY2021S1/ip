@@ -1,4 +1,6 @@
-package duke;
+package duke.parser;
+
+import duke.DukeException;
 
 public abstract class StringChecker {
 

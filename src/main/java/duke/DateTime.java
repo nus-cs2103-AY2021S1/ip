@@ -10,7 +10,7 @@ public class DateTime {
     private LocalDate date;
     private Optional<LocalTime> optionalTime;
 
-    DateTime(LocalDate date, Optional<LocalTime> optionalTime) {
+    public DateTime(LocalDate date, Optional<LocalTime> optionalTime) {
         this.date = date;
         this.optionalTime = optionalTime;
     }

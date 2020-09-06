@@ -1,6 +1,8 @@
 package duke.command;
 
 import duke.*;
+import duke.parser.DateTimeStringChecker;
+import duke.parser.TaskNameStringChecker;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;

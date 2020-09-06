@@ -1,7 +1,8 @@
-package duke;
+package duke.parser;
 
 import java.util.Arrays;
 
+import duke.DukeException;
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;

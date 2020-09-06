@@ -1,4 +1,6 @@
-package duke;
+package duke.parser;
+
+import duke.DukeException;
 
 public class FindTaskStringChecker extends StringChecker {
 

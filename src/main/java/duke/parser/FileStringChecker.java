@@ -1,11 +1,13 @@
-package duke;
+package duke.parser;
+
+import duke.DukeException;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class FileStringChecker extends StringChecker {
 
-    FileStringChecker(String[] userInput) {
+    public FileStringChecker(String[] userInput) {
         super(userInput);
     }
 

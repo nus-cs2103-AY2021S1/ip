@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.TaskIndexStringChecker;
 import duke.Ui;
+import duke.parser.TaskIndexStringChecker;
 import duke.task.Task;
 import duke.task.TaskList;
 
