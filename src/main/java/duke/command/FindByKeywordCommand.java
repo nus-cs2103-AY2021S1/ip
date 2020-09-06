@@ -11,6 +11,8 @@ import duke.task.TaskList;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Represents a command to search for tasks using a keyword.
@@ -43,13 +45,14 @@ public class FindByKeywordCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String keyword = this.parsedCommand[1].trim().toLowerCase();
+            Predicate<Task> searchKeywordFilter = task -> {
+                return task.getDescription().toLowerCase().contains(keyword);
+            };
+            List<Task> searchResults = new ArrayList<>(tasks.getTaskList())
+                    .stream()
+                    .filter(searchKeywordFilter)
+                    .collect(Collectors.toList());
             assert !keyword.isBlank();
-            List<Task> searchResults = new ArrayList<>();
-            for (Task task : tasks.getTaskList()) {
-                if (task.getDescription().toLowerCase().contains(keyword)) {
-                    searchResults.add(task);
-                }
-            }
             return ui.showTaskList(searchResults);
         } catch (ArrayIndexOutOfBoundsException ex) {
             String error = "No keyword for the search was entered. Please enter a keyword!";
