@@ -3,10 +3,14 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    
 }
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
 }
 
 dependencies {
@@ -44,7 +48,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
@@ -59,3 +63,4 @@ checkstyle {
 run{
     standardInput = System.in
 }
+//apply plugin: "com.github.johnrengelman.shadow"
