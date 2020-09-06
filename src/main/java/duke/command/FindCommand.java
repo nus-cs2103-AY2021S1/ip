@@ -5,6 +5,11 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
 public class FindCommand extends Command {
     private final String target;
 
@@ -14,24 +19,19 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
-        String out = "";
-        boolean hasFound = false;
-        int count = 1;
-        for (Task task : list.getList()) {
-            if (task.getName().contains(this.target)) {
-                if (!hasFound) {
-                    out = out + ui.showFind() + "\n";
-                    hasFound = true;
-                }
-                out = out + ui.showTask(count, task) + "\n";
-                count++;
-            }
-        }
+        AtomicInteger count = new AtomicInteger(1);
+        Predicate<Task> checkDate = x -> x.getName().contains(this.target);
+        Function<Task, String> taskString = x -> ui.showTask(count.getAndIncrement() ,x);
+        BinaryOperator<String> accumulator = (x, y) -> (x + "\n" + y);
 
-        if(!hasFound) {
-            out = ui.showNothingFound();
-        }
-        return out;
+        String output = list.getList().stream()
+                .filter(checkDate)
+                .map(taskString)
+                .reduce(accumulator)
+                .orElse("empty");
+
+        return output.equals("empty")? ui.showNothingFound() : ui.showFind() +
+                "\n" + output;
     }
 
     @Override

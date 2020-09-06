@@ -5,16 +5,21 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+
 public class ListCommand extends Command {
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
-        String out = ui.showList() + "\n";
-        int count = 1;
-        for (Task task : list.getList()) {
-            out = out + ui.showTask(count, task) + "\n";
-            count++;
-        }
-        return out;
+        String start = ui.showList() + "\n";
+        AtomicInteger count = new AtomicInteger(1);
+        Function<Task, String> taskString = x -> ui.showTask(count.getAndIncrement() ,x);
+        BinaryOperator<String> accumulator = (x,y) -> (x + "\n" + y);
+
+        return list.getList().stream()
+                             .map(taskString)
+                             .reduce(start, accumulator);
     }
 
     @Override
