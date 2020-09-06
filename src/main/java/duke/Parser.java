@@ -132,16 +132,25 @@ public class Parser {
         if (eventDetail.trim().equals("")) {
             throw new DukeException("Oops! Event cannot be empty");
         }
+
         String[] arr = eventDetail.split("/at");
         String detail = arr[0].trim();
         if (arr.length == 1 || detail.equals("")) {
             throw new DukeException("Oops! You need to include both detail and time.");
         }
-        LocalDateTime date = parseDate(arr[1].trim());
-        if (date == null) {
+
+        String startAndEndDates = arr[1].trim();
+        String[] dates = startAndEndDates.split("to");
+        if (dates.length == 1) {
+            throw new DukeException("Oops! You need to include both start and end dates.");
+        }
+
+        LocalDateTime startDate = parseDate(dates[0].trim());
+        LocalDateTime endDate = parseDate(dates[1].trim());
+        if (startDate == null || endDate == null) {
             throw new DukeException("Oops! Format of date and time might be wrong.");
         }
-        return new Event(detail, date);
+        return new Event(detail, startDate, endDate);
     }
 
     /**

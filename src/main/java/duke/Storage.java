@@ -147,12 +147,15 @@ public class Storage {
         String eventDetails = savedTask.substring(4);
         // Split the savedTask string into description and date in order to create a Deadline object.
         // eventArr[0] contains description of event
-        // eventArr[1] contains date of event
+        // eventArr[1] contains start and end dates of event
         String[] eventArr = eventDetails.split("/at");
+        String detail = eventArr[0].trim();
+        String[] dates = eventArr[1].trim().split("to");
         Event event = new Event(
-                eventArr[0].trim(),
+                detail,
                 isDone,
-                LocalDateTime.parse(eventArr[1].trim()));
+                LocalDateTime.parse(dates[0].trim()),
+                LocalDateTime.parse(dates[1].trim()));
         list.add(event);
     }
 }
