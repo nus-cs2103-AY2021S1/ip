@@ -116,6 +116,7 @@ public class Storage {
             newTask.markDone();
         }
 
+        assert newTask != null;
         return newTask;
     }
 
