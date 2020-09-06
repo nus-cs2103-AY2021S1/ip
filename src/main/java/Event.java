@@ -3,7 +3,7 @@ public class Event extends Task {
     protected String time;
 
     /**
-     * Creates a Event object that represents an event.
+     * Creates an Event object that represents an event.
      *
      * @param description Description of the event.
      * @param time The time of the event.
@@ -14,7 +14,7 @@ public class Event extends Task {
     }
 
     /**
-     * Return the Event time.
+     * Returns the Event time.
      *
      * @return The Event time.
      */

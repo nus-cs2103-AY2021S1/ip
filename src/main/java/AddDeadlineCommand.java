@@ -35,6 +35,7 @@ public class AddDeadlineCommand extends Command {
         tasks.addTask(deadline);
 
         storage.writeNewDataToFile("D", "0", deadline.getDescription(), deadline.getBy());
+
         System.out.println("    Got it. I've added this task:\n      " + deadline + "\n    Now you have "
                 + tasks.getSize() + " tasks in the list.");
     }

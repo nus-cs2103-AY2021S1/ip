@@ -81,7 +81,7 @@ public class Storage {
     }
 
     /**
-     * Adds a new Task to the file.
+     * Adds new Task to the file.
      *
      * @param taskType The type of the Task.
      * @param done Whether the task is completed.
@@ -93,6 +93,7 @@ public class Storage {
             throws DukeException {
         try {
             FileWriter myWriter = new FileWriter(filePath, true);
+
             switch (taskType) {
             case "T":
                 myWriter.write("\n" + taskType + " | " + done + " | " + description);
@@ -160,6 +161,7 @@ public class Storage {
             br.close();
 
             FileWriter fw = new FileWriter(new File(filePath));
+
             //Write entire string buffer into the file
             fw.write(sb.toString());
             fw.close();
