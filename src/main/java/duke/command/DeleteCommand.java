@@ -11,7 +11,7 @@ import duke.task.Task;
  */
 public class DeleteCommand extends Command {
     /** The number of the task to be deleted. */
-    private int taskNumber;
+    private final int taskNumber;
 
     /**
      * Creates a new delete command with the specified number of the task to be deleted.
@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
         try {
             Task removedTask = tasks.deleteTask(taskNumber);
             storage.save(tasks.getTasks());
-            return new CommandResponse(Ui.respondDeleteTask(removedTask, tasks), this.isExit());
+            return new CommandResponse(Ui.respondDeleteTask(removedTask, tasks));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The task number is not valid.");
         }

@@ -11,7 +11,7 @@ import duke.task.Task;
  */
 public class AddCommand extends Command {
     /** The task to be added. */
-    private Task task;
+    private final Task task;
 
     /**
      * Creates a new add command with the specified task to be added.
@@ -34,6 +34,6 @@ public class AddCommand extends Command {
     public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
         tasks.addTask(task);
         storage.save(tasks.getTasks());
-        return new CommandResponse(Ui.respondAddTask(task, tasks), this.isExit());
+        return new CommandResponse(Ui.respondAddTask(task, tasks));
     }
 }

@@ -27,7 +27,7 @@ public class Parser {
     private static final List<String> DATE_FORMATS = Arrays.asList("d/M/y", "y-M-d");
 
     /**
-     * Parses the input command from the user into a command that the Chatbot can understand.
+     * Parses the input command from the user into a command that the chat bot can understand.
      *
      * @param fullCommand The command from the user.
      * @return The command that can be interpreted from the user.
@@ -43,22 +43,29 @@ public class Parser {
             case BYE:
                 return new ExitCommand();
             case DONE:
-                return new DoneCommand(Integer.parseInt(splitCommand[1]));
+                int taskNumberDone = Integer.parseInt(splitCommand[1]);
+                return new DoneCommand(taskNumberDone);
             case DELETE:
-                return new DeleteCommand(Integer.parseInt(splitCommand[1]));
+                int taskNumberDelete = Integer.parseInt(splitCommand[1]);
+                return new DeleteCommand(taskNumberDelete);
             case TODO:
                 Todo todo = new Todo(splitCommand[1]);
                 return new AddCommand(todo);
             case DEADLINE:
                 String[] splitDeadline = splitCommand[1].split(" /by ", 2);
-                Deadline deadline = new Deadline(splitDeadline[0], parseDate(splitDeadline[1]));
+                String deadlineDescription = splitDeadline[0];
+                LocalDate deadlineDate = parseDate(splitDeadline[1]);
+                Deadline deadline = new Deadline(deadlineDescription, deadlineDate);
                 return new AddCommand(deadline);
             case EVENT:
                 String[] splitEvent = splitCommand[1].split(" /at ", 2);
-                Event event = new Event(splitEvent[0], parseDate(splitEvent[1]));
+                String eventDescription = splitEvent[0];
+                LocalDate eventDate = parseDate(splitEvent[1]);
+                Event event = new Event(eventDescription, eventDate);
                 return new AddCommand(event);
             case VIEW:
-                return new ViewCommand(splitCommand[1]);
+                LocalDate viewDate = parseDate(splitCommand[1]);
+                return new ViewCommand(viewDate);
             case FIND:
                 return new FindCommand(splitCommand[1]);
             default:
@@ -96,7 +103,13 @@ public class Parser {
         return null;
     }
 
-    private static CommandInstruction parseCommandInstruction(String stringCommand) {
-        return CommandInstruction.valueOf(stringCommand.toUpperCase());
+    /**
+     * Parses the input command instruction from the user to a command instruction this chat bot can understand.
+     *
+     * @param userInstruction The command instruction in string from the user.
+     * @return Command instruction this chat bot can understand.
+     */
+    private static CommandInstruction parseCommandInstruction(String userInstruction) {
+        return CommandInstruction.valueOf(userInstruction.toUpperCase());
     }
 }

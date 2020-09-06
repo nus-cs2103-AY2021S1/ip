@@ -8,7 +8,7 @@ import duke.task.Task;
  * Deals with coming up with responses to the user.
  */
 public class Ui {
-    /** Logo of the Chatbot. */
+    /** Logo of the chat bot. */
     private static final String LOGO = "    _  \\     \\     __ __|    _  \\     _ _|    ___|   |    /\n"
                     + "   |     |   _  \\       |      |     |      |     |        '   /\n"
                     + "  ___/    ___  \\     |     __ <       |     |        .   \\\n"
@@ -22,7 +22,8 @@ public class Ui {
     public static String greet() {
         return "Hello from\n"
                 + LOGO
-                + "Hello! This is Patrick\nWhat can I do for you?\n";
+                + "Hello! This is Patrick\n"
+                + "What can I do for you?\n";
     }
 
     /**
@@ -84,8 +85,9 @@ public class Ui {
      * @param taskList The task list to get the tasks from.
      * @param localDate The date that you want to get the tasks for.
      * @return The tasks that occur on the specified date, or none if there are no tasks on that date.
+     * @throws DukeException If there were some problems with getting the tasks on the date.
      */
-    public static String respondViewTasks(TaskList taskList, LocalDate localDate) {
+    public static String respondViewTasks(TaskList taskList, LocalDate localDate) throws DukeException {
         TaskList taskListOnDate = taskList.getTaskListOnDate(localDate);
         if (taskListOnDate.getNumberOfTasks() == 0) {
             return "You do not have any tasks on this date.";

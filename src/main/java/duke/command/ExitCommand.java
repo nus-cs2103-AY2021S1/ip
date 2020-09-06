@@ -6,7 +6,7 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Represents a command to exit the Chatbot.
+ * Represents a command to exit the chat bot.
  */
 public class ExitCommand extends Command {
 
@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Exits the Chatbot.
+     * Exits the chat bot.
      *
      * @param tasks The task list the command is executed with.
      * @param storage The storage the command is executed with.
@@ -27,16 +27,7 @@ public class ExitCommand extends Command {
     @Override
     public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
         storage.save(tasks.getTasks());
-        return new CommandResponse(Ui.respondExit(), this.isExit());
+        return new CommandResponse(Ui.respondExit(), true);
     }
 
-    /**
-     * Indicates that this command is an exit command.
-     *
-     * @return False.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }

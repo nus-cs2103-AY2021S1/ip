@@ -22,11 +22,22 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns true since deadlines have dates associated to them.
+     *
+     * @return True, since deadlines have dates associated to them.
+     */
+    @Override
+    public boolean hasDate() {
+        return true;
+    }
+
+    /**
      * Gets the date by which this task must be done.
      *
      * @return The date by which this task must be done.
      */
-    public LocalDate getBy() {
+    @Override
+    public LocalDate getDate() {
         return this.by;
     }
 
@@ -37,6 +48,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return String.format("%s (by: %s)",
+                super.toString(),
+                by.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

@@ -5,9 +5,9 @@ package duke.command;
  */
 public class CommandResponse {
     /** The response in string representation. */
-    private String response;
+    private final String response;
     /** Indicates if the command response is an exit response. */
-    private boolean isExit;
+    private final boolean isExit;
 
     /**
      * Creates a new command response with the specified string response and a boolean to indicate if the
@@ -19,6 +19,15 @@ public class CommandResponse {
     public CommandResponse(String response, boolean isExit) {
         this.response = response;
         this.isExit = isExit;
+    }
+
+    /**
+     * Creates a new non-exit command response with the specified string response.
+     *
+     * @param response The string response of this command response.
+     */
+    public CommandResponse(String response) {
+        this(response, false);
     }
 
     /**

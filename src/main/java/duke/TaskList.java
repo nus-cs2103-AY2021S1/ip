@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
 
 /**
@@ -13,7 +11,7 @@ import duke.task.Task;
  */
 public class TaskList {
     /** The tasks in this task list. */
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     /**
      * Creates an empty task list with no tasks.
@@ -64,13 +62,12 @@ public class TaskList {
      *
      * @param date The date of all the tasks to get.
      * @return The task list with all the tasks on the specified date.
+     * @throws DukeException If there were some problems with getting the tasks on the date.
      */
-    public TaskList getTaskListOnDate(LocalDate date) {
+    public TaskList getTaskListOnDate(LocalDate date) throws DukeException {
         TaskList result = new TaskList();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            if ((task instanceof Deadline && ((Deadline) task).getBy().equals(date))
-                    || task instanceof Event && ((Event) task).getAt().equals(date)) {
+        for (Task task : tasks) {
+            if (task.hasDate() && task.getDate().equals(date)) {
                 result.addTask(task);
             }
         }
@@ -85,8 +82,7 @@ public class TaskList {
      */
     public TaskList getTasksWithKeyword(String keyword) {
         TaskList result = new TaskList();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+        for (Task task : tasks) {
             if (task.toString().contains(keyword)) {
                 result.addTask(task);
             }
@@ -98,11 +94,9 @@ public class TaskList {
      * Adds a task to this task list.
      *
      * @param task The task to be added to this task list.
-     * @return The task that was added.
      */
-    public Task addTask(Task task) {
+    public void addTask(Task task) {
         this.tasks.add(task);
-        return this.tasks.get(tasks.size() - 1);
     }
 
     /**
@@ -133,10 +127,11 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        String numberedList = "";
+        StringBuilder numberedList = new StringBuilder();
         for (int i = 0; i < this.tasks.size(); i++) {
-            numberedList += "\t" + (i + 1) + "." + this.tasks.get(i) + "\n";
+            // e.g.     1.[D]✘ Finish project (by: Jan 23 2012)
+            numberedList.append(String.format("\t%d.%s\n", i + 1, this.tasks.get(i)));
         }
-        return numberedList;
+        return numberedList.toString();
     }
 }

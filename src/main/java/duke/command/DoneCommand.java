@@ -10,7 +10,7 @@ import duke.Ui;
  */
 public class DoneCommand extends Command {
     /** The number of the task to be marked as done. */
-    private int taskNumber;
+    private final int taskNumber;
 
     /**
      * Creates a new done command with the specified number of the task to mark as done.
@@ -34,7 +34,7 @@ public class DoneCommand extends Command {
         try {
             tasks.markTaskAsDone(taskNumber);
             storage.save(tasks.getTasks());
-            return new CommandResponse(Ui.respondDoneTask(tasks.getTask(taskNumber)), this.isExit());
+            return new CommandResponse(Ui.respondDoneTask(tasks.getTask(taskNumber)));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The task number is not valid.");
         }
