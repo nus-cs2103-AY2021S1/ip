@@ -62,6 +62,9 @@ public class MainWindow extends AnchorPane {
         } catch (DukeException e) {
             response = e.toString();
         }
+
+        assert response != null : "No response available!";
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

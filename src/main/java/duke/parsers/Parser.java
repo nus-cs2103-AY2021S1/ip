@@ -23,6 +23,8 @@ public class Parser {
      * @return A command to be executed.
      */
     public static Command parse(String input) {
+        assert input != null : "Input cannot be null!";
+
         // Tag refers to the command to perform
         String tag = input.split(" ")[0];
 
