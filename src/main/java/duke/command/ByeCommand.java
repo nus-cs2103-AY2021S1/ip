@@ -6,21 +6,21 @@ import duke.component.TaskList;
 import duke.component.Ui;
 
 /**
- * Command that closes Duke
+ * Command that closes Duke.
  */
 public class ByeCommand implements Command {
 
     /**
-     * Returns whether this is an exit command
+     * Returns whether this is an exit command.
      *
-     * @return true at all times
+     * @return true at all times.
      */
     public boolean isExit() {
         return true;
     }
 
     /**
-     * Says bye and closes Duke
+     * Says bye and closes Duke.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

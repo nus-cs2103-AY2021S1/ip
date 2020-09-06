@@ -8,8 +8,8 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Initializes a task using the given description
-     * @param description the description of the task
+     * Initializes a task using the given description.
+     * @param description the description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -17,16 +17,16 @@ public class Task {
     }
 
     /**
-     * Returns the symbol indicating whether the task has been completed
-     * @return check mark if the task has been completed, or a cross otherwise
+     * Returns the symbol indicating whether the task has been completed.
+     * @return check mark if the task has been completed, or a cross otherwise.
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     /**
-     * Returns the description of the task
-     * @return the description of the task
+     * Returns the description of the task.
+     * @return the description of the task.
      */
     public String getDescription() {
         return description;
@@ -39,16 +39,16 @@ public class Task {
     }
 
     /**
-     * Returns the String representation of the task
-     * @return the String representation of the task
+     * Returns the String representation of the task.
+     * @return the String representation of the task.
      */
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
     /**
-     * Returns the String representation of the task when it is stored in a data file
-     * @return the String representation of the task when it is stored in a data file
+     * Returns the String representation of the task when it is stored in a data file.
+     * @return the String representation of the task when it is stored in a data file.
      */
     public String toStorageString() {
         if (isDone) {

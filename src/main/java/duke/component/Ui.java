@@ -11,23 +11,23 @@ public class Ui {
     private Scanner sc;
 
     /**
-     * Initializes a Ui object with a new scanner
+     * Initializes a Ui object with a new scanner.
      */
     public Ui() {
         sc = new Scanner(System.in);
     }
 
     /**
-     * Displays loading error message on the screen
+     * Displays loading error message on the screen.
      *
-     * @param e the exception describing what errors occured
+     * @param e the exception describing what errors occurred.
      */
     public void showLoadingError(DukeException e) {
         giveResponse(e.getMessage());
     }
 
     /**
-     * Prints out the response on the screen
+     * Prints out the response on the screen.
      */
     public String giveResponse(String response) {
         String formattedResponse = DIVIDER + response + "\n" + DIVIDER;
@@ -36,9 +36,9 @@ public class Ui {
     }
 
     /**
-     * Displays the task list given
+     * Displays the task list given.
      *
-     * @param taskList the task list to be displayed
+     * @param taskList the task list to be displayed.
      */
     public String displayList(TaskList taskList, String description) {
 
@@ -59,7 +59,7 @@ public class Ui {
     /**
      * Gets the next input.
      *
-     * @return the next input in String format
+     * @return the next input in String format.
      */
     public String getInput() {
         return sc.nextLine();

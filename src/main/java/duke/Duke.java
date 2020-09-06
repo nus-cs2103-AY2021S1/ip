@@ -11,7 +11,7 @@ import duke.component.Ui;
  * Chat bot that can manage your tasks!
  *
  * @author Tian Fang
- * @version v0.1
+ * @version v0.2
  * @since 2020-08-18
  */
 public class Duke {
@@ -21,7 +21,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Initializes Duke with the given file path
+     * Initializes Duke with the given file path.
      */
     public Duke() {
         ui = new Ui();
@@ -35,14 +35,14 @@ public class Duke {
     }
 
     /**
-     * main method of Duke
+     * main method of Duke.
      */
     public static void main(String[] args) {
         new Duke().run();
     }
 
     /**
-     * Runs the Duke
+     * Runs the Duke.
      */
     public void run() {
         ui.welcome();
@@ -61,8 +61,8 @@ public class Duke {
 
     /**
      * Gives response to the given input.
-     * @param input the given input
-     * @return      corresponding repsonse
+     * @param input the given input.
+     * @return      corresponding response.
      */
     public String getResponse(String input) {
         try {

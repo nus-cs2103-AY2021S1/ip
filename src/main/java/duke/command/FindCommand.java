@@ -15,26 +15,26 @@ public class FindCommand implements Command {
     /**
      * Initializes a FindCommand with the given search keyword.
      *
-     * @param keyword the search keyword
+     * @param keyword the search keyword.
      */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
     /**
-     * Return whether this command is the exit command
+     * Return whether this command is the exit command.
      *
-     * @return false at all times
+     * @return false at all times.
      */
     public boolean isExit() {
         return false;
     }
 
     /**
-     * Executes the command to search tasks that contains the keyword
+     * Executes the command to search tasks that contains the keyword.
      *
-     * @param taskList the task list given
-     * @param ui       the ui object that handles inputs and outputs
+     * @param taskList the task list given.
+     * @param ui       the ui object that handles inputs and outputs.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

@@ -1,7 +1,7 @@
 package duke.component;
 
 /**
- * The exception to be thrown when Duke encounters a problem
+ * The exception to be thrown when Duke encounters a problem.
  */
 public class DukeException extends Exception {
     public DukeException() {

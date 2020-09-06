@@ -7,18 +7,18 @@ import java.time.format.DateTimeParseException;
 import duke.component.DukeException;
 
 /**
- * A type of task that has a deadline
+ * A type of task that has a deadline.
  */
 public class Deadline extends Task {
 
     protected LocalDate byDate;
 
     /**
-     * Initializes a Deadline using the given description and due date
+     * Initializes a Deadline using the given description and due date.
      *
-     * @param description the description of the deadline
-     * @param byDate      the due date of the deadline
-     * @throws DukeException if the input command is invalid
+     * @param description the description of the deadline.
+     * @param byDate      the due date of the deadline.
+     * @throws DukeException if the input command is invalid.
      */
     public Deadline(String description, String byDate) throws DukeException {
         super(description);
@@ -30,9 +30,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the String representation of the deadline
+     * Returns the String representation of the deadline.
      *
-     * @return the String representation of the deadline
+     * @return the String representation of the deadline.
      */
     @Override
     public String toString() {
@@ -41,9 +41,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the String representation of the deadline when it is stored in a data file
+     * Returns the String representation of the deadline when it is stored in a data file.
      *
-     * @return the String representation of the deadline when it is stored in a data file
+     * @return the String representation of the deadline when it is stored in a data file.
      */
     @Override
     public String toStorageString() {

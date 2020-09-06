@@ -13,7 +13,7 @@ public class DeadlineTest {
             Deadline d = new Deadline("UTC2107 Consultation", "2020/08/25");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! Invalid date detected! Please enter date as yyyy-mm-dd.", e.getMessage());
+            assertEquals("\t\u2639 OOPS!!! Invalid date detected! Please enter date as yyyy-mm-dd.", e.getMessage());
         }
     }
 

@@ -6,10 +6,10 @@ import duke.component.TaskList;
 import duke.component.Ui;
 
 /**
- * Interface for all command classes
+ * Interface for all command classes.
  */
 public interface Command {
     boolean isExit();
 
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 }

@@ -19,19 +19,19 @@ public class Storage {
     private final String path;
 
     /**
-     * Initializes a storage object using the given file path
+     * Initializes a storage object using the given file path.
      *
-     * @param path the given file path
+     * @param path the given file path.
      */
     public Storage(String path) {
         this.path = path;
     }
 
     /**
-     * Reads from the data file and returns the task list it stores
+     * Reads from the data file and returns the task list it stores.
      *
-     * @return the task list stored in the data file
-     * @throws DukeException if errors occur while trying to read the data file
+     * @return the task list stored in the data file.
+     * @throws DukeException if errors occur while trying to read the data file.
      */
     public LinkedList<Task> readList() throws DukeException {
         LinkedList<Task> taskList = new LinkedList<>();
@@ -88,10 +88,10 @@ public class Storage {
     }
 
     /**
-     * Saves the given task list to the data file
+     * Saves the given task list to the data file.
      *
-     * @param list the task list to be stored in the data file
-     * @throws DukeException if errors occur when trying to write task list to the data file
+     * @param list the task list to be stored in the data file.
+     * @throws DukeException if errors occur when trying to write task list to the data file.
      */
     public void saveList(TaskList list) throws DukeException {
         try {

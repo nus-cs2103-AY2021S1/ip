@@ -19,11 +19,11 @@ import duke.task.Todo;
 public class Parser {
 
     /**
-     * Parses an input string and gives the corresponding command
+     * Parses an input string and gives the corresponding command.
      *
-     * @param input the input typed in by the user
-     * @return the command that corresponds to the input
-     * @throws DukeException if the input is invalid or illegal
+     * @param input the input typed in by the user.
+     * @return the command that corresponds to the input.
+     * @throws DukeException if the input is invalid or illegal.
      */
     public static Command parse(String input) throws DukeException {
 
