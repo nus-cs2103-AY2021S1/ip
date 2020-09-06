@@ -16,7 +16,7 @@ public class Task {
     /**
      * To indicate that the task is completed (with a tick symbol).
      */
-    public void markAsCompleted() {
+    public void markTaskAsCompleted() {
         this.isCompleted = true;
     }
 

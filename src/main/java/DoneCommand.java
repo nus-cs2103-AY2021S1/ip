@@ -19,10 +19,10 @@ public class DoneCommand extends Command {
         int taskNo = Integer.parseInt(afterCommand) - 1;
         if (taskNo >= taskList.tasksSize() || taskNo < 0) {
             return ui.throwDukeException(new DukeException("Please enter a valid task no!"));
-        } else {
-            taskList.markTaskCompleted(taskNo);
-            return ui.displayCompletedTask(taskList.get(taskNo));
         }
+
+        taskList.markTaskCompleted(taskNo);
+        return ui.displayCompletedTask(taskList.get(taskNo));
     }
 
     @Override
