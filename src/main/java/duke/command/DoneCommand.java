@@ -10,15 +10,14 @@ import duke.task.Task;
  * Represents the done command when user wants to mark task as complete from task list.
  */
 public class DoneCommand extends Command {
-    private String args;
-
+    private int taskIndex;
 
     /**
      * Initializes the DoneCommand Object.
-     * @param args task to mark as complete.
+     * @param taskIndex task to mark as complete.
      */
-    public DoneCommand(String args) {
-        this.args = args;
+    public DoneCommand(int taskIndex) {
+        this.taskIndex = taskIndex;
     }
 
     /**
@@ -34,9 +33,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
         try {
-            // parse for argument - item number
-            int itemNumber = Integer.parseInt(args.split(" ")[1]) - 1;
-            Task task = taskItems.getTask(itemNumber);
+            Task task = taskItems.getTask(taskIndex);
             task.markDone();
             storage.saveTaskToMemory(taskItems.getAll());
             return ui.doneTaskReply(task);
