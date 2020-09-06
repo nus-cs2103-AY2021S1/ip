@@ -20,6 +20,7 @@ public class FindParser {
      * @return lists all found tasks
      */
     public static String parse(Scanner input, TaskList tl) {
+        assert input != null;
         try {
             if (input.hasNextLine()) {
                 String remainingWords = input.nextLine().trim();

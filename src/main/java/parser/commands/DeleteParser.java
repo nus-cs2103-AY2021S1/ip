@@ -20,10 +20,12 @@ public class DeleteParser {
      * @return confirmation message of marking task as deleted
      */
     public static String parse(Scanner input, TaskList tl, Storage stores) {
+        assert input != null;
         String index = input.next();
         int intIndex = Integer.parseInt(index);
         try {
-            if (intIndex <= tl.getStorage().size() && intIndex > 0) {
+            boolean isValidIndex = intIndex <= tl.getStorage().size() && intIndex > 0;
+            if (isValidIndex) {
                 String returnString = tl.getDeleteString(intIndex - 1);
                 // save to save file
                 stores.save(tl.getStorage());

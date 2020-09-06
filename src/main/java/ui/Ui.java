@@ -13,6 +13,7 @@ public class Ui {
 
     /**
      * Pads a given String with 2 lines, top and bottom
+     *
      * @param output the String to pad
      */
     public static void echo(String output) {
@@ -26,18 +27,37 @@ public class Ui {
      */
     public static void welcome() {
         String logo = " ____             _     \n"
-                        + "|  _ \\           | |    \n"
-                        + "| |_) |_ __ _   _| |__\n"
-                        + "|  _ <| '__| | | | '_ \\ \n"
-                        + "| |_) | |  | |_| | | | |\n"
-                        + "|____/|_|   \\__,_|_| |_|\n";
+                + "|  _ \\           | |    \n"
+                + "| |_) |_ __ _   _| |__\n"
+                + "|  _ <| '__| | | | '_ \\ \n"
+                + "| |_) | |  | |_| | | | |\n"
+                + "|____/|_|   \\__,_|_| |_|\n";
 
         echo(logo + "What's up?");
     }
 
+    /**
+     * String welcome message
+     *
+     * @return Bruh What's up?
+     */
+    public static String getWelcomeString() {
+        String logo = "888888b.                                        888      \n"
+                + "888  \"88b                                       888      \n"
+                + "888  .88P                                        888      \n"
+                + "8888888K.   888d888  888  888     88888b.  \n"
+                + "888  \"Y88b  888P\"      888   888     888 \"88b \n"
+                + "888    888    888          888   888    888  888 \n"
+                + "888   d88P   888         Y88b  888    888    888 \n"
+                + "8888888P\"   888         \"Y88888       888    888 \n"
+                + "                                     \n";
+
+        return logo + "What's up?";
+    }
 
     /**
      * Prints a message after adding a task
+     *
      * @param task the task added
      */
     public static void taskAdded(Task task, List<Task> storage) {
@@ -49,7 +69,8 @@ public class Ui {
 
     /**
      * String version of taskAdded
-     * @param task the task to be added
+     *
+     * @param task    the task to be added
      * @param storage where the tasks are stored
      * @return String of task added
      */
@@ -62,6 +83,7 @@ public class Ui {
 
     /**
      * lists out every task
+     *
      * @param storage where the tasks are stored
      */
     public static void listOut(ArrayList<Task> storage) {
@@ -77,6 +99,7 @@ public class Ui {
 
     /**
      * string version of listOut
+     *
      * @param storage where tasks are stored
      * @return String of list of tasks
      */
@@ -92,7 +115,8 @@ public class Ui {
 
     /**
      * only lists out tasks where it contains words
-     * @param words the words to be searched
+     *
+     * @param words   the words to be searched
      * @param storage where the tasks are stored
      */
     public static void filterList(String words, ArrayList<Task> storage) {
@@ -110,9 +134,10 @@ public class Ui {
 
     /**
      * String version of filterList
-     * @param words words to be searched
+     *
+     * @param words   words to be searched
      * @param storage where tasks are stored
-     * @return
+     * @return list of filtered tasks
      */
     public static String getFilterListString(String words, ArrayList<Task> storage) {
         StringBuilder response = new StringBuilder("Here's your matching tasks \n");
@@ -134,6 +159,7 @@ public class Ui {
 
         /**
          * error message for having a blank task name
+         *
          * @param type deadline, event, etc
          * @return error message
          */
@@ -144,6 +170,7 @@ public class Ui {
 
         /**
          * error message for unsupported user input
+         *
          * @param order user input
          * @return error message
          */
@@ -154,6 +181,7 @@ public class Ui {
 
         /**
          * error message for invalid task number
+         *
          * @param index task number
          * @return error message
          */
@@ -164,6 +192,7 @@ public class Ui {
 
         /**
          * exception for having invalid line format
+         *
          * @return file error message
          */
         public static DukeException fileError() {
