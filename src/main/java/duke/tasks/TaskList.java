@@ -4,6 +4,7 @@ import java.time.format.DateTimeParseException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.exceptions.DukeInvalidDeadlineTimeException;
 import duke.exceptions.DukeInvalidEventTimeException;
@@ -165,15 +166,9 @@ public class TaskList {
             throw new DukeInvalidKeywordException();
         }
 
-        List<Task> result = new ArrayList<>();
-
-        tasks.forEach(t -> {
-            if (t.getDescription().contains(keyword)) {
-                result.add(t);
-            }
-        });
-
-        return result;
+        return tasks.stream()
+                .filter(t -> t.getDescription().contains(keyword))
+                .collect(Collectors.toList());
     }
 
     /**
