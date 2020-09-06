@@ -136,6 +136,7 @@ public class Parser {
             } else {
                 try {
                     String[] secondarr = stringarr[1].split("/by", 2);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate date = LocalDate.parse(secondarr[1].trim());
                     Deadline deadline = Deadline.createDeadline(secondarr[0], date);
                     taskObj = deadline;
@@ -150,7 +151,7 @@ public class Parser {
                 throw new DukeException(message);
             } else {
                 String[] secondarr = stringarr[1].split("/at", 2);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                 LocalDateTime date = LocalDateTime.parse(secondarr[1].trim(), formatter);
                 Event event = Event.createEvent(secondarr[0], date);
                 taskObj = event;
@@ -192,12 +193,15 @@ public class Parser {
             return "todo " + stringArr[1];
         case 'D':
             String[] secondArr = stringArr[1].split("by: ", 2);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-            LocalDate date = LocalDate.parse(secondArr[1], formatter);
-            return "deadline " + secondArr[0] + "/by " + date;
+            DateTimeFormatter deadlineFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+            LocalDate deadlineDate = LocalDate.parse(secondArr[1], deadlineFormatter);
+            return "deadline " + secondArr[0] + "/by " + deadlineDate;
         case 'E':
             String[] thirdArr = stringArr[1].split("at: ", 2);
-            return "event " + thirdArr[0] + "/at " + thirdArr[1];
+            System.out.println(thirdArr[1]);
+            DateTimeFormatter eventFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+            LocalDateTime eventDate = LocalDateTime.parse(thirdArr[1].trim(), eventFormatter);
+            return "event " + thirdArr[0] + "/at " + eventDate;
         default:
             String errorMessage = "Failed to process Stored Tasks";
             throw new DukeException(errorMessage);
