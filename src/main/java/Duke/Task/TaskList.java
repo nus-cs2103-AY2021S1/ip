@@ -50,8 +50,7 @@ public class TaskList {
      * Shows the Task list.
      */
     public String showList(){
-        System.out.println("Here are the tasks in your list:");
-        String str = "";
+        String str = "Here are the tasks in your list:\n";
         for (int i = 0; i < list.size(); i++) {
             str += ((i+1)+"." + list.get(i).stringify() + "\n");
         }

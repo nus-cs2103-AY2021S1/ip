@@ -20,8 +20,8 @@ public class Ui {
     /**
      * Greets the user when the program is executed.
      */
-    public void greetingMessage() {
-        System.out.println("Hello! I'm Duke. What can I do for you?");
+    public String greetingMessage() {
+        return ("Hello! I'm Duke. What can I do for you?");
     }
 
     /**
