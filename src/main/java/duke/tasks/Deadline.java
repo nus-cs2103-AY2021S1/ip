@@ -41,6 +41,14 @@ public class Deadline extends Task {
         return by.toLocalDate();
     }
 
+    /**
+     * Sets the deadline date of the task.
+     *
+     * @param by the localDate object of the task deadline.
+     */
+    public void setBy(LocalDateTime by) {
+        this.by = by;
+    }
 
     /**
      * Returns the string representation of the deadline task.

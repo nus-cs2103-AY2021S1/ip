@@ -21,6 +21,14 @@ public class Event extends Task {
         this.startTime = startTime;
     }
 
+    /**
+     * Sets the start time of the event.
+     *
+     * @param startTime the LocalDateTime object that represents the events of the task.
+     */
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
 
     /**
      * Returns the start datetime of the task.
