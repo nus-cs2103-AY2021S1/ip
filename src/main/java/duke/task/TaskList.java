@@ -3,7 +3,7 @@ package duke.task;
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
-import duke.util.Storage;
+import duke.storage.Storage;
 
 /**
  * Class the holds the tasks provided by the user.

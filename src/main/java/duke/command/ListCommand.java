@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.util.Storage;
+import duke.storage.Storage;
 
 /**
  * Class representing a command to list out the current tasks.
@@ -17,7 +17,6 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         assertArgumentsValid(tasks, ui, storage);
-
         ui.botOutput(tasks.toString());
     }
 }

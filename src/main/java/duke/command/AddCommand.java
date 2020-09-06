@@ -7,7 +7,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
 import duke.ui.Ui;
-import duke.util.Storage;
+import duke.storage.Storage;
 
 /**
  * Class representing an add task command.
@@ -36,6 +36,7 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assertArgumentsValid(tasks, ui, storage);
         Task task;
 
         switch (taskType) {

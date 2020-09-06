@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.util.Storage;
+import duke.storage.Storage;
 
 
 
@@ -11,7 +11,7 @@ import duke.util.Storage;
  */
 public class FindCommand extends Command {
 
-    private String keyword;
+    private final String keyword;
 
     /**
      * Creates a new {@code FindCommand}.

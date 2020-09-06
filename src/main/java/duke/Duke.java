@@ -4,8 +4,8 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.util.Parser;
-import duke.util.Storage;
+import duke.parser.Parser;
+import duke.storage.Storage;
 
 /**
  * Class representing the Duke chatbot.

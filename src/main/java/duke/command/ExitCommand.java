@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.util.Storage;
+import duke.storage.Storage;
 
 /**
  * Class representing an exit command.

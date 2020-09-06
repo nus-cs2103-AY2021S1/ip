@@ -4,7 +4,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.util.Storage;
+import duke.storage.Storage;
 
 /**
  * Class representing a delete task command.
@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         assertArgumentsValid(tasks, ui, storage);
-      
+
         if (taskIdx > tasks.size() || taskIdx <= 0) {
             throw new DukeException("No task with this ID!");
         }
