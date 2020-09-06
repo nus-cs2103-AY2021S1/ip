@@ -69,7 +69,7 @@ public class TaskStorage {
 
     private static Task parseLine(String line) throws DukeException {
         String[] lineSplit = line.split("/");
-        assert lineSplit.length == 4 : "Invalid line format found in storage";
+        assert lineSplit.length == 5 : "Invalid line format found in storage";
         try {
             String taskType = lineSplit[0];
             String priority = lineSplit[1];
