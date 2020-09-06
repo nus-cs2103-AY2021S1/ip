@@ -21,6 +21,7 @@ public class Storage {
 
     /**
      * Load the tasks to the list of tasks.
+     *
      * @return The list of tasks
      * @throws DukeException if the file does not exist.
      */
@@ -44,7 +45,8 @@ public class Storage {
 
     /**
      * Read the tasks from the file.
-     * @param f The file that contains the list of tasks.
+     *
+     * @param f     The file that contains the list of tasks.
      * @param lists The list that the tasks are read into.
      */
     public static void readTask(File f, List<Task> lists) {
@@ -85,6 +87,7 @@ public class Storage {
 
     /**
      * Write teh tasks into the file.
+     *
      * @param lists The list of tasks.
      * @throws IOException If the file does not exist.
      */

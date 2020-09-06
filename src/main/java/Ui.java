@@ -32,6 +32,7 @@ public class Ui {
 
     /**
      * Read a command from the user.
+     *
      * @return The command string.
      */
     public String readCommand() {
@@ -50,6 +51,7 @@ public class Ui {
 
     /**
      * Show the error message.
+     *
      * @param message
      */
     public void showError(String message) {

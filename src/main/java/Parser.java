@@ -61,7 +61,7 @@ public class Parser {
                         s = s + '-';
                         s = s + by.substring(2, 4);
                         s = s + '-';
-                        s = s + '0' + by.substring(0,1);
+                        s = s + '0' + by.substring(0, 1);
                     } else {
                         s = s + by.substring(6, 10);
                         s = s + '-';
@@ -88,7 +88,7 @@ public class Parser {
                         s = s + '-';
                         s = s + time.substring(2, 4);
                         s = s + '-';
-                        s = s + '0' + time.substring(0,1);
+                        s = s + '0' + time.substring(0, 1);
                     } else {
                         s = s + time.substring(6, 10);
                         s = s + '-';
