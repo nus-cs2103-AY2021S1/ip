@@ -113,5 +113,13 @@ public class Storage {
     public ArrayList<String> getRecords() {
         return this.recordArrayLst;
     }
+
+    /**
+     * Returns an empty ArrayList to refresh the Records
+     * @return ArrayList
+     */
+    public ArrayList<String> refreshRecords() {
+        return this.recordArrayLst = new ArrayList<>();
+    }
 }
 

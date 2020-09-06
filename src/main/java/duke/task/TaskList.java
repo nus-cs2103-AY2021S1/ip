@@ -48,6 +48,10 @@ public class TaskList {
         return updatedTask.toString();
     }
 
+    public ArrayList<Task> refreshTasklist() {
+        return this.tasklist = new ArrayList<Task>();
+    }
+
     /**
      * Returns the current size of the task list
      * @return Integer value of the size of task list

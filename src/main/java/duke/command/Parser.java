@@ -53,6 +53,9 @@ public class Parser {
         } else if (stringarr[0].equals("find")) {
             String response = processorFind(command, taskList);
             finalString = Ui.showCommandMessage(response);
+        } else if (stringarr[0].equals("refresh")) {
+            String response = processorRefresh(taskList, storage);
+            finalString = Ui.showCommandMessage(response);
         } else {
             String response = processorAdd(command, taskList);
             storage.saveRecord(response);
@@ -69,6 +72,12 @@ public class Parser {
      */
     public static void process(String command, TaskList taskList) throws DukeException {
         processorAdd(command, taskList);
+    }
+
+    private static String processorRefresh(TaskList taskList, Storage storage) {
+        taskList.refreshTasklist();
+        storage.refreshRecords();
+        return "Records and Tasks refreshed.";
     }
 
     private static String processorFind(String command, TaskList taskList) {
