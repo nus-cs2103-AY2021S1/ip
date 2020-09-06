@@ -31,7 +31,7 @@ public class TaskSaveAndLoadManager {
                 taskData = new TaskData("todo", task.getTaskDescription(),
                         boolInt, "");
             } else if (task instanceof DeadlineTask) {
-                LocalDate date = ((DeadlineTask) task).getTimeToBeDoneBy().getDate();
+                LocalDate date = ((DeadlineTask) task).getDeadlineTime().getDate();
                 taskData = new TaskData("deadline", task.getTaskDescription(),
                         boolInt, date.toString(), "");
             } else if (task instanceof EventTask) {
@@ -92,5 +92,4 @@ public class TaskSaveAndLoadManager {
             return new EventTask(taskData.getTaskDescription(), isDone, dt);
         }
     }
-
 }

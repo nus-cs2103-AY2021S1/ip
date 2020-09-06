@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
-    private static final List<String> DATE_FORMATS = Arrays.asList("yyyy/MM/dd HHmm", "y/M/d HHmm", "y-M-d HHmm");
     public static Command parse(String userInput) throws DukeException {
         int i = userInput.trim().indexOf(' ');
         String command = userInput;
@@ -13,6 +12,9 @@ public class Parser {
         if (i > 0) {
             command = userInput.substring(0, i);
             detail = userInput.substring(i).trim();
+        }
+        if (command.trim().length() == 0) {
+            throw new EmptyTaskException();
         }
         switch (command) {
         case ("bye") :

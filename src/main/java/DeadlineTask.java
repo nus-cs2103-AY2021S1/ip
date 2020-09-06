@@ -3,7 +3,7 @@
  * specific date to be done by for the task.</p>
  */
 public class DeadlineTask extends Task {
-    private DateAndTime timeToBeDoneBy;
+    private DateAndTime deadlineTime;
 
     /**
      * Creates a Task object that has a description and status of whether the task is done.
@@ -14,15 +14,15 @@ public class DeadlineTask extends Task {
      */
     public DeadlineTask(String taskDescription, boolean isDone, DateAndTime timeToBeDoneBy) {
         super(taskDescription, isDone);
-        this.timeToBeDoneBy = timeToBeDoneBy;
+        this.deadlineTime = timeToBeDoneBy;
     }
 
-    public DateAndTime getTimeToBeDoneBy() {
-        return timeToBeDoneBy;
+    public DateAndTime getDeadlineTime() {
+        return deadlineTime;
     }
 
     @Override
     public String toString() {
-        return "[D] [" + getStatusIcon() + "] " + taskDescription + " (by: " + timeToBeDoneBy + ")";
+        return "[D] [" + getStatusIcon() + "] " + taskDescription + " (by: " + deadlineTime + ")";
     }
 }
