@@ -6,6 +6,11 @@ public class TaskToDo extends Task {
         super(description);
     }
 
+    /**
+     * Constructor for Todo Task.
+     * @param description
+     * @param done Whether task is completed.
+     */
     public TaskToDo(String description, boolean done) {
         super(description);
         isDone = done;
@@ -17,8 +22,7 @@ public class TaskToDo extends Task {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return String.format("[T][%s] %s", getStatusIcon(), description);
     }
 }

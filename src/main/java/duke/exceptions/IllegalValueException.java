@@ -7,8 +7,7 @@ import duke.storage.Storage.StorageOperationException;
  */
 public class IllegalValueException extends StorageOperationException {
 
-    public IllegalValueException(String message)
-    {
+    public IllegalValueException(String message) {
         super(message);
     }
 

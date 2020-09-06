@@ -10,6 +10,12 @@ public class CommandDone extends Command {
 
     private int doneIdx;
 
+    /**
+     * Constructor for CommandDone.
+     * @param taskList Task List.
+     * @param ui Ui.
+     * @param doneIdx Index of task to be set as done.
+     */
     public CommandDone(TaskList taskList, Ui ui, int doneIdx) {
         super(taskList, ui);
         this.doneIdx = doneIdx;

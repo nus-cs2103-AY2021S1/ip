@@ -10,6 +10,12 @@ public class CommandDelete extends Command {
 
     private int toDeleteIdx;
 
+    /**
+     * Constructor for CommandDelete.
+     * @param taskList task list.
+     * @param ui ui.
+     * @param toDeleteIdx index of task to delete.
+     */
     public CommandDelete(TaskList taskList, Ui ui, int toDeleteIdx) {
         super(taskList, ui);
         this.toDeleteIdx = toDeleteIdx;

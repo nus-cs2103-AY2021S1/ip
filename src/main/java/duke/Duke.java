@@ -1,16 +1,16 @@
 package duke;
 
+import static duke.storage.Storage.DEFAULT_STORAGE_FILEPATH;
+
+import java.io.InputStream;
+
+import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.storage.Storage.StorageOperationException;
 import duke.tasks.TaskList;
 import duke.ui.Parser;
 import duke.ui.Ui;
-import duke.commands.Command;
-
-import java.io.InputStream;
-
-import static duke.storage.Storage.DEFAULT_STORAGE_FILEPATH;
 
 /**
  * Manages tasks and deadlines in a chat bot style.
@@ -32,13 +32,18 @@ public class Duke {
         this(filePath, System.in);
     }
 
+    /**
+     * Constructor for Duke.
+     * @param filePath save file path.
+     * @param in inputStream.
+     */
     public Duke(String filePath, InputStream in) {
         try {
             storage = new Storage(filePath);
             taskList = storage.loadTasks();
             ui = new Ui(in);
             parser = new Parser(taskList, ui);
-        } catch (StorageOperationException e ) {
+        } catch (StorageOperationException e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
@@ -55,7 +60,7 @@ public class Duke {
     public void run() {
         ui.showWelcomeMessage();
         String input = ui.getUserInput();
-            while (!input.equals("bye")) {
+        while (!input.equals("bye")) {
             try {
                 Command command = parser.getCommandFromInput(input);
                 command.execute();
@@ -72,6 +77,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method for execution.
+     * @param args
+     */
     public static void main(String[] args) {
         Duke duke = new Duke(DEFAULT_STORAGE_FILEPATH);
         duke.run();

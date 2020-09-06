@@ -10,6 +10,13 @@ public class TaskEvent extends Task {
     private LocalTime startTime;
     private LocalTime endTime;
 
+    /**
+     * Constructor for Event Task.
+     * @param description
+     * @param eventDate
+     * @param startTime
+     * @param endTime
+     */
     public TaskEvent(String description, LocalDate eventDate, LocalTime startTime, LocalTime endTime) {
         super(description);
         this.eventDate = eventDate;
@@ -26,8 +33,7 @@ public class TaskEvent extends Task {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return String.format("[E][%s] %s (at: %s)", getStatusIcon(), description,
                 String.format(
                         eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))

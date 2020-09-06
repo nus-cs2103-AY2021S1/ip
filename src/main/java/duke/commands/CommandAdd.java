@@ -6,13 +6,19 @@ import duke.ui.Ui;
 
 public class CommandAdd extends Command {
 
-    private Task task;
-
     public static final String COMMAND_STRING = "add";
 
     private static final String ADD_TASK_CONFIRMATION = "Fine. I've added this task:\n" + "%s\n"
             + "Now you have a total of %d %s in your list.\n";
 
+    private Task task;
+
+    /**
+     * Constructor for CommandAdd
+     * @param taskList task list.
+     * @param ui ui.
+     * @param task task to be added.
+     */
     public CommandAdd(TaskList taskList, Ui ui, Task task) {
         super(taskList, ui);
         this.task = task;

@@ -1,26 +1,25 @@
 package duke.ui;
 
-import duke.exceptions.DukeException;
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-import duke.tasks.TaskToDo;
-import duke.tasks.TaskDeadline;
-import duke.tasks.TaskEvent;
-import duke.commands.Command;
-import duke.commands.CommandAddDeadline;
-import duke.commands.CommandAddEvent;
-import duke.commands.CommandAddToDo;
-import duke.commands.CommandDelete;
-import duke.commands.CommandDone;
-import duke.commands.CommandList;
-import duke.commands.CommandFind;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.commands.Command;
+import duke.commands.CommandAddDeadline;
+import duke.commands.CommandAddEvent;
+import duke.commands.CommandAddToDo;
+import duke.commands.CommandDelete;
+import duke.commands.CommandDone;
+import duke.commands.CommandFind;
+import duke.commands.CommandList;
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+import duke.tasks.TaskDeadline;
+import duke.tasks.TaskEvent;
+import duke.tasks.TaskList;
+import duke.tasks.TaskToDo;
 
 /**
  * Transforms user commands into {@code Command}.
@@ -33,6 +32,11 @@ public class Parser {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Constructor for Parser.
+     * @param taskList task list.
+     * @param ui ui.
+     */
     public Parser(TaskList taskList, Ui ui) {
         this.taskList = taskList;
         this.ui = ui;
@@ -85,7 +89,8 @@ public class Parser {
         if (matcher.matches()) {
             int index = Integer.parseInt(matcher.group("integer"));
             if (index < 0 || index > taskList.getSize() - 1) {
-                throw new DukeException(String.format("☹ BLEHHHHHH. Task no. %d does not exist. Please try again.", (index + 1)));
+                throw new DukeException(String.format("☹ BLEHHHHHH. Task no. %d does not exist. "
+                        + "Please try again.", (index + 1)));
             } else {
                 return index;
             }
@@ -104,10 +109,10 @@ public class Parser {
         LocalDate eventDate = LocalDate.parse(output[1].replaceAll(pattern, "$3"));
         String startTemp = output[1].replaceAll(pattern, "$5");
         String endTemp = output[1].replaceAll(pattern, "$7");
-        LocalTime startTime = LocalTime.parse(startTemp.substring(0,2) + ":"
-                + startTemp.substring(2,4));
-        LocalTime endTime = LocalTime.parse(endTemp.substring(0,2) + ":"
-                + endTemp.substring(2,4));
+        LocalTime startTime = LocalTime.parse(startTemp.substring(0, 2) + ":"
+                + startTemp.substring(2, 4));
+        LocalTime endTime = LocalTime.parse(endTemp.substring(0, 2) + ":"
+                + endTemp.substring(2, 4));
         return new TaskEvent(description, eventDate, startTime, endTime);
     }
 
@@ -120,8 +125,8 @@ public class Parser {
         String pattern = ("(by?)(\\s)([\\S]+)(\\s)([\\S]+)");
         LocalDate deadlineDate = LocalDate.parse(output[1].replaceAll(pattern, "$3"));
         String timeTemp = output[1].replaceAll(pattern, "$5");
-        LocalTime deadlineTime = LocalTime.parse(timeTemp.substring(0,2)
-                + ":" + timeTemp.substring(2,4));
+        LocalTime deadlineTime = LocalTime.parse(timeTemp.substring(0, 2)
+                + ":" + timeTemp.substring(2, 4));
         LocalDateTime deadline = deadlineDate.atTime(deadlineTime);
         return new TaskDeadline(description, deadline);
     }

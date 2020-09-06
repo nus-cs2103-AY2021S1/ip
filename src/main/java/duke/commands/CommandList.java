@@ -16,7 +16,7 @@ public class CommandList extends Command {
         String output = "";
         output += "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.getSize(); i++) {
-            output += String.format("%d. %s\n", i+1, taskList.get(i));
+            output += String.format("%d. %s\n", i + 1, taskList.get(i));
         }
         int remainingTasks = taskList.getRemainingTaskCount();
         output += String.format("You have %d undone tasks! %s\n",

@@ -1,10 +1,5 @@
 package duke.storage;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.IllegalValueException;
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +7,11 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.IllegalValueException;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 public class Storage {
 
@@ -41,6 +41,11 @@ public class Storage {
         this(DEFAULT_STORAGE_FILEPATH);
     }
 
+    /**
+     * Constructor for Storage.
+     * @param filePath Save file path.
+     * @throws InvalidStorageFilePathException If not valid path.
+     */
     public Storage(String filePath) throws InvalidStorageFilePathException {
         this.path = Path.of(filePath);
         if (!isValidPath(path)) {
@@ -64,7 +69,7 @@ public class Storage {
      */
     public void saveTasks(TaskList taskList) throws StorageOperationException {
         List<String> dataLines = new ArrayList<>();
-        for (int i = 0 ; i < taskList.getSize() ; i++) {
+        for (int i = 0; i < taskList.getSize(); i++) {
             Task task = taskList.get(i);
             String line = String.join(",", task.getSaveData());
             dataLines.add(line);
@@ -89,7 +94,7 @@ public class Storage {
         try {
             // read the file
             List<String> dataLines = Files.readAllLines(path);
-            return TaskDecoder.DecodeTasksFromSave(dataLines);
+            return TaskDecoder.decodeTasksFromSave(dataLines);
             // should be handled above so it's an assertion instead of an exception
         } catch (FileNotFoundException fnfe) {
             throw new AssertionError("A non-existent file scenario should already have been handled earlier.");
