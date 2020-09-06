@@ -62,7 +62,7 @@ public abstract class Task {
      */
     public String convertToText() {
         String link = " >> ";
-        return link + (this.isDone()? "1" : "0") + link + this.getDescription();
+        return link + (this.isDone() ? "1" : "0") + link + this.getDescription();
     }
 
     public abstract boolean checkTask(LocalDate date);
