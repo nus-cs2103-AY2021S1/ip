@@ -2,7 +2,6 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -200,16 +199,8 @@ public class DukeTest {
     @Test
     public void testRun() {
         duke = new Duke("./testTasks.txt");
-        String input = "bye";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        PrintStream ps = new PrintStream(out);
-        System.setOut(ps);
-        duke.run();
-        assertEquals(LOGO + SEPARATOR + WELCOME_MESSAGE
-                + SEPARATOR + DIVIDER + SEPARATOR + GOODBYE_MESSAGE
-                + SEPARATOR + DIVIDER + SEPARATOR, out.toString());
-        System.setOut(originalOut);
-        System.setIn(originalIn);
+        String response = duke.getResponse("bye");
+        assertEquals(DIVIDER + SEPARATOR + GOODBYE_MESSAGE
+                + SEPARATOR + DIVIDER + SEPARATOR, response);
     }
 }

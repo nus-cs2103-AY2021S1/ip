@@ -13,6 +13,7 @@ import duke.ui.Ui;
  * @author Audrey Felicio Anwar
  */
 public class Duke {
+    private static final String SEPARATOR = System.getProperty("line.separator");
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -49,13 +50,13 @@ public class Duke {
     public String getResponse(String input) {
         StringBuilder response = new StringBuilder();
         try {
-            response.append(ui.showLine() + "\n");
+            response.append(ui.showLine() + SEPARATOR);
             Command command = Parser.parse(input);
-            response.append(command.executeCommand(tasks, ui, storage) + "\n");
+            response.append(command.executeCommand(tasks, ui, storage) + SEPARATOR);
         } catch (DukeException error) {
-            response.append(error.getMessage() + "\n");
+            response.append(error.getMessage() + SEPARATOR);
         } finally {
-            response.append(ui.showLine() + "\n");
+            response.append(ui.showLine() + SEPARATOR);
         }
         return response.toString();
     }
