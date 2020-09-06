@@ -5,9 +5,7 @@ import luoyi.duke.common.TextFormatter;
 import luoyi.duke.data.IDuke;
 import luoyi.duke.data.exception.DukeIllegalArgumentException;
 import luoyi.duke.data.task.ITask;
-import luoyi.duke.data.task.TaskList;
 import luoyi.duke.data.task.ToDo;
-import luoyi.duke.storage.Storage;
 
 /**
  * ToDoCommand class to encapsulate a todo command.
@@ -17,7 +15,7 @@ import luoyi.duke.storage.Storage;
  * A command must be initiated with a Duke object before
  * it can execute.
  */
-public class ToDoCommand extends Command {
+public class ToDoCommand extends TaskCommand {
     private final String description;
     private ToDoCommand(String description, IDuke duke) {
         super(-1, duke);
@@ -69,18 +67,6 @@ public class ToDoCommand extends Command {
         return output;
     }
 
-    /**
-     * Adds task in Duke object.
-     * Also invokes storage class to store task list on disk.
-     *
-     * @param task The tasks to be stored.
-     */
-    public void storeTask(ITask task) {
-        Storage storage = duke.getStorage();
-        TaskList list = duke.getTasks();
-        list.add(task);
-        storage.save(list.getList());
-    }
 
     @Override
     public Command setDuke(IDuke duke) {

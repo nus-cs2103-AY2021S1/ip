@@ -6,8 +6,6 @@ import luoyi.duke.data.IDuke;
 import luoyi.duke.data.exception.DukeIllegalArgumentException;
 import luoyi.duke.data.task.Event;
 import luoyi.duke.data.task.ITask;
-import luoyi.duke.data.task.TaskList;
-import luoyi.duke.storage.Storage;
 
 /**
  * EventCommand class to encapsulate a event command.
@@ -17,7 +15,7 @@ import luoyi.duke.storage.Storage;
  * A command must be initiated with a Duke object before
  * it can execute.
  */
-public class EventCommand extends Command {
+public class EventCommand extends TaskCommand {
     private final String description;
     private final String time;
     private EventCommand(String description, String time, IDuke duke) {
@@ -77,19 +75,6 @@ public class EventCommand extends Command {
                 + "\nNow you have " + duke.getNumTask() + " task(s) in the list.";
         System.out.print(TextFormatter.getFormattedText(output));
         return output;
-    }
-
-    /**
-     * Adds task in Duke object.
-     * Also invokes storage class to store task list on disk.
-     *
-     * @param task The tasks to be stored.
-     */
-    public void storeTask(ITask task) {
-        Storage storage = duke.getStorage();
-        TaskList list = duke.getTasks();
-        list.add(task);
-        storage.save(list.getList());
     }
 
     @Override

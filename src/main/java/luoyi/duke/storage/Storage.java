@@ -37,6 +37,7 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Error creating file structure!");
         }
+        // If the file structure cannot be created, quit application.
         System.exit(-1);
         return null;
     }
@@ -72,7 +73,6 @@ public class Storage {
             System.out.println("Unable to save to disk!");
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -97,9 +97,11 @@ public class Storage {
      */
     private void preparePath() throws IOException {
         if (!Files.exists(filePath.getParent())) {
+            // If folder structure not present, create folder
             Files.createDirectory(filePath.getParent());
             Files.createFile(filePath);
         } else if (!Files.exists(filePath)) {
+            // If file not present, create file
             Files.createFile(filePath);
         }
     }

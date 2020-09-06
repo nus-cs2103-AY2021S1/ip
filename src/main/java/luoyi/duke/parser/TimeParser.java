@@ -33,11 +33,15 @@ public class TimeParser {
             throw new RuntimeException(string + " does not have a date time!");
         }
 
+        // Try to match string against any pattern in pattern list
         Pattern pattern = DATE_PATTERN_LIST
                 .stream()
                 .filter(x -> x.matcher(string).find())
                 .findFirst()
                 .orElseThrow();
+        assert pattern != null;
+
+        // Match and return string
         Matcher matcher = pattern.matcher(string);
         if (!matcher.matches()) {
             throw new RuntimeException(string + " failed to match regex!");
@@ -58,11 +62,15 @@ public class TimeParser {
             throw new RuntimeException(string + " does not have a date time!");
         }
 
+        // Try to match string against any pattern in pattern list
         Pattern pattern = DATETIME_PATTERN_LIST
                 .stream()
                 .filter(x -> x.matcher(string).find())
                 .findFirst()
                 .orElseThrow();
+        assert pattern != null;
+
+        // Match and return string
         Matcher matcher = pattern.matcher(string);
         if (!matcher.matches()) {
             throw new RuntimeException(string + " failed to match regex!");

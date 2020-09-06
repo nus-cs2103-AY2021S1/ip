@@ -6,7 +6,6 @@ import luoyi.duke.data.IDuke;
 import luoyi.duke.data.exception.DukeIllegalArgumentException;
 import luoyi.duke.data.task.Deadline;
 import luoyi.duke.data.task.ITask;
-import luoyi.duke.storage.Storage;
 
 /**
  * DeadlineCommand class to encapsulate a deadline command.
@@ -16,7 +15,7 @@ import luoyi.duke.storage.Storage;
  * A command must be initiated with a Duke object before
  * it can execute.
  */
-public class DeadlineCommand extends Command {
+public class DeadlineCommand extends TaskCommand {
     private final String description;
     private final String time;
 
@@ -76,18 +75,6 @@ public class DeadlineCommand extends Command {
                 + "\nNow you have " + duke.getNumTask() + " task(s) in the list.";
         System.out.print(TextFormatter.getFormattedText(output));
         return output;
-    }
-
-    /**
-     * Adds task in Duke object.
-     * Also invokes storage class to store task list on disk.
-     *
-     * @param task The tasks to be stored.
-     */
-    private void storeTask(ITask task) {
-        Storage storage = duke.getStorage();
-        duke.storeTask(task);
-        storage.save(duke.getTasks().getList());
     }
 
     /**
