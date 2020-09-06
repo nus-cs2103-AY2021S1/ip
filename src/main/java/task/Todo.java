@@ -9,6 +9,10 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
+    public Todo(String description, boolean isDone, String tag) {
+        super(description, isDone, tag);
+    }
+
     /**
      * Returns description of this task and its completion status.
      * @return String that describes task.

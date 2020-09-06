@@ -16,7 +16,8 @@ public class BadCommand extends Command {
             + "4. deadline - creates a deadline task\n"
             + "5. done - marks task as done\n"
             + "6. delete - deletes task from the list\n"
-            + "7. find - finds tasks containing keyword";
+            + "7. find - finds tasks containing keyword\n"
+            + "8. tag - tags tasks with given tag";
     }
 
 }

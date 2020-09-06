@@ -9,6 +9,7 @@ import command.DoneCommand;
 import command.EndCommand;
 import command.FindCommand;
 import command.ListCommand;
+import command.TagCommand;
 import exceptions.DukeException;
 import task.Deadline;
 import task.Event;
@@ -99,6 +100,16 @@ public class Parser {
         case "find":
             assert description != null : "Keyword for 'find' is empty.";
             return new FindCommand(tasks, description);
+        case "tag":
+            assert description != null : "Task number to tag cannot be empty.";
+            try {
+                int tagTaskNo = Integer.parseInt(description.substring(0, description.indexOf(" ")));
+                String tag = description.substring(description.indexOf(" ") + 1);
+                return new TagCommand(tasks, tagTaskNo, tag);
+            } catch (StringIndexOutOfBoundsException ex) {
+                throw new DukeException("Please indicate tag as: tag {taskNo} {tag}.");
+            }
+
 
         default:
             return new BadCommand();

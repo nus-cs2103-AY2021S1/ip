@@ -3,6 +3,8 @@ package task;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String tag;
+    protected boolean isTagged;
 
     /**
      * Creates Task object.
@@ -11,6 +13,8 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tag = null;
+        this.isTagged = false;
     }
 
     /**
@@ -21,6 +25,20 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+        this.isTagged = false;
+    }
+
+    /**
+     * Creates Task object using overloaded contructor to indicate whether Task is completed..
+     * @param description String description to describe Task.
+     * @param isDone Boolean to indicate completion status of Task.
+     * @param tag String tag to tag Task.
+     */
+    public Task(String description, boolean isDone, String tag) {
+        this.description = description;
+        this.isDone = isDone;
+        this.tag = tag;
+        this.isTagged = true;
     }
 
     /**
@@ -40,11 +58,23 @@ public class Task {
     }
 
     /**
+     * Sets given tag for this task.
+     */
+    public void setTag(String tag) {
+        this.tag = tag;
+        this.isTagged = true;
+    }
+
+    /**
      * Returns description of this task and its completion status.
      * @return String that describes task.
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        if (isTagged) {
+            return "[" + this.getStatusIcon() + "] " + "[" + this.tag + "] " + this.description;
+        } else {
+            return "[" + this.getStatusIcon() + "] " + this.description;
+        }
     }
 }

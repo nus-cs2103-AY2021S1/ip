@@ -28,6 +28,18 @@ public class Deadline extends Task {
     }
 
     /**
+     * Creates Event object.
+     * @param description String description to describe Deadline.
+     * @param by LocalDate to describe when Deadline occurs.
+     * @param isDone Boolean to indicate completion status of Deadline.
+     * @param tag String to tag Event.
+     */
+    public Deadline(String description, LocalDate by, boolean isDone, String tag) {
+        super(description, isDone, tag);
+        this.by = by;
+    }
+
+    /**
      * Returns description of this task and its completion status, with its deadline date.
      * @return String that describes task.
      */

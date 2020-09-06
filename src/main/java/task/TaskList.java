@@ -118,4 +118,25 @@ public class TaskList {
             return str;
         }
     }
+
+    /**
+     * Tags tasks with given tag.
+     *
+     * @param tag String that user wants to tag task with
+     * @param taskNo Task number to be tagged.
+     * @return str String to be returned.
+     * @throws DukeException if tag is empty, or task does not exists.
+     */
+    public String tagTask(String tag, int taskNo) throws DukeException {
+        assert tag != null : "Tag is empty.";
+        assert taskNo - 1 < tasks.size() : "Task number to tag does not exist.";
+        if (tag == null) {
+            throw new DukeException("Please indicate the tag you wish to use to tag tasks with.");
+        } else {
+            tasks.get(taskNo - 1).setTag(tag);
+            String str = "Got it, I've tagged this task for you:\n";
+            str += tasks.get(taskNo - 1).toString();
+            return str;
+        }
+    }
 }
