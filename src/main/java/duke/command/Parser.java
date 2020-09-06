@@ -51,31 +51,7 @@ public class Parser {
     public String processCommand(String command) throws DukeException {
         Pattern pattern = Pattern.compile("^(.*?)\\s(.*?)(?:\\s/..\\s?(.*))?$");
         Matcher matcher = pattern.matcher(command);
-        if (command.equals("")) {
-            return "Please provide an input!";
-        } else if (command.equals("list")) {
-            return this.list.toString();
-        } else if (command.equals("hello")) {
-            return "Hi! I'm Duke! Pleasure to meet you :)";
-        } else if (command.equals("bye")) {
-            this.isExit = true;
-            Storage storage = new Storage();
-            storage.updateFile(this.list);
-            return "Bye! Hope to see you again soon!";
-        } else if (command.equals("help")) {
-            return "Accepted commands:\n"
-                    + "hello - hello!\n"
-                    + "list - show current list\n"
-                    + "bye - saves the current list and exits the program\n"
-                    + "\n"
-                    + "todo <description> - create a todo Task\n"
-                    + "event <description> /at <dd/MM/yyyy> - create an event Task (date is optional)\n"
-                    + "deadline <description> /by <dd/MM/yyyy> - create a deadline Task (date is optional)\n"
-                    + "\n"
-                    + "done <index> - mark the specified task as done\n"
-                    + "undo <index> - mark the specified task as not done\n"
-                    + "delete <index> - deletes the specified task from the list";
-        } else if (matcher.find()) {
+        if (matcher.find()) {
             String com = matcher.group(1);
             String task = matcher.group(2);
             String date = matcher.group(3);
@@ -96,9 +72,36 @@ public class Parser {
                 throw new DukeException("Sorry, I did not understand: " + command
                         + "\nUse \"help\" to look at available commands.");
             }
+        } else {
+            switch (command) {
+            case (""):
+                return "Please provide an input!";
+            case ("list"):
+                return this.list.toString();
+            case ("hello"):
+                return "Hi! I'm Duke! Pleasure to meet you :)";
+            case ("bye"):
+                this.isExit = true;
+                Storage storage = new Storage();
+                return storage.updateFile(this.list) + "\nBye! Hope to see you again soon!";
+            case ("help"):
+                return "Accepted commands:\n"
+                        + "hello - hello!\n"
+                        + "list - show current list\n"
+                        + "bye - saves the current list and exits the program\n"
+                        + "\n"
+                        + "todo <description> - create a todo Task\n"
+                        + "event <description> /at <dd/MM/yyyy> - create an event Task (date is optional)\n"
+                        + "deadline <description> /by <dd/MM/yyyy> - create a deadline Task (date is optional)\n"
+                        + "\n"
+                        + "done <index> - mark the specified task as done\n"
+                        + "undo <index> - mark the specified task as not done\n"
+                        + "delete <index> - deletes the specified task from the list";
+            default:
+                throw new DukeException("Sorry, I did not understand: " + command
+                        + "\nUse \"help\" to look at available commands.");
+            }
         }
-        throw new DukeException("Sorry, I did not understand: " + command
-                + "\nUse \"help\" to look at available commands.");
     }
 
     /**
