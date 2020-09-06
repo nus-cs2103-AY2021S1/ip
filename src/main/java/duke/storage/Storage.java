@@ -51,22 +51,23 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String currentLine = scanner.nextLine();
                 String[] wordsParsed = currentLine.split(" | ");
-                String isTaskDone = wordsParsed[1].equals("\u2713")
+                String isTaskDone = wordsParsed[2].equals("1")
                         ? "true"
                         : "false";
+//                System.out.println(wordsParsed[4]);
                 switch (wordsParsed[0]) {
                     case "T":
-                        Task todo = new Todo(wordsParsed[2]);
+                        Task todo = new Todo(wordsParsed[4]);
                         todo.setStatus(isTaskDone);
                         listOfTasks.add(todo);
                         break;
                     case "D":
-                        Task deadline = new Deadline(wordsParsed[2], wordsParsed[3]);
+                        Task deadline = new Deadline(wordsParsed[4], wordsParsed[6]);
                         deadline.setStatus(isTaskDone);
                         listOfTasks.add(deadline);
                         break;
                     case "E":
-                        Task event = new Event(wordsParsed[2], wordsParsed[3]);
+                        Task event = new Event(wordsParsed[4], wordsParsed[6]);
                         event.setStatus(isTaskDone);
                         listOfTasks.add(event);
                         break;
