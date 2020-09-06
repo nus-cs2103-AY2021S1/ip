@@ -59,89 +59,121 @@ public class Duke {
             Storage.saveFile(this.storage.getFile(), ls);
             return ui.outputBye();
         case LIST:
-            if (ls.isEmpty()) {
-                return ui.outputListNoTask();
-            } else {
-                return ui.outputListTask(ls);
-            }
+            return cmdList();
         case DONE:
-            try {
-                int numToBeMarkedAsDone = Parser.parseInt(str);
-                Task tsk = ls.get(numToBeMarkedAsDone);
-                tsk.markAsDone();
-                ls.set(numToBeMarkedAsDone, tsk);
-                return ui.outputDoneMsg(tsk);
-            } catch (Exception ex) {
-                return ui.outputDoneError();
-            }
+            return cmdDone(str);
         case TODO:
-            try {
-                Task newTask = new Todo(arr[1]);
-                ls.add(newTask);
-                return ui.outputTodoMsg(ls, newTask);
-            } catch (Exception ex) {
-                return ui.outputTodoError();
-            }
+            return cmdTodo(arr[1]);
         case DEADLINE:
-            try {
-                String[] arrOfStr = Parser.parse(arr, 1);
-                try {
-                    Task newTask = new Deadline(arrOfStr[0], arrOfStr[1]);
-                    ls.add(newTask);
-                    return ui.outputDeadlineEventMsg(ls, newTask);
-                } catch (Exception ex) {
-                    return ui.outputDeadlineFormatError();
-                }
-            } catch (Exception ex) {
-                return ui.outputDeadlineError();
-            }
+            return cmdDeadline(arr);
         case EVENT:
-            try {
-                String[] arrOfStr = Parser.parse(arr, 2);
-                try {
-                    Task newTask = new Event(arrOfStr[0], arrOfStr[1]);
-                    ls.add(newTask);
-                    return ui.outputDeadlineEventMsg(ls, newTask);
-                } catch (Exception ex) {
-                    return ui.outputEventFormatError();
-                }
-            } catch (Exception ex) {
-                return ui.outputEventError();
-            }
+            return cmdEvent(arr);
         case DELETE:
-            try {
-                int numToBeDeleted = Parser.parseInt(str);
-                Task tsk = ls.get(numToBeDeleted);
-                ls.remove(numToBeDeleted);
-                return ui.outputDeleteMsg(ls, tsk);
-            } catch (Exception ex) {
-                return ui.outputDeleteError();
-            }
+            return cmdDelete(str);
         case CHECK:
-            try {
-                String checkDate = arr[1];
-                LocalDate date = LocalDate.parse(checkDate);
-                if (ls.isEmpty()) {
-                    return ui.outputCheckNoTask();
-                } else {
-                    return ui.outputCheckTask(ls, date);
-                }
-            } catch (Exception ex) {
-                return ui.outputCheckError();
-            }
+            return cmdCheck(arr[1]);
         case FIND:
-            try {
-                String keyword = arr[1];
-                if (ls.isEmpty()) {
-                    return ui.outputCheckNoTask();
-                } else {
-                    return ui.outputFindTask(ls, keyword);
-                }
-            } catch (Exception ex) {
-                return ui.outputFindError();
-            }
+            return cmdFind(arr[1]);
         default:
             return ui.outputInvalidInput();
+        }
+    }
+
+    private String cmdFind(String keyword) {
+        try {
+            if (ls.isEmpty()) {
+                return ui.outputCheckNoTask();
+            } else {
+                return ui.outputFindTask(ls, keyword);
+            }
+        } catch (Exception ex) {
+            return ui.outputFindError();
+        }
+    }
+
+    private String cmdCheck(String checkDate) {
+        try {
+            LocalDate date = LocalDate.parse(checkDate);
+            if (ls.isEmpty()) {
+                return ui.outputCheckNoTask();
+            } else {
+                return ui.outputCheckTask(ls, date);
+            }
+        } catch (Exception ex) {
+            return ui.outputCheckError();
+        }
+    }
+
+    private String cmdDelete(String str) {
+        try {
+            int numToBeDeleted = Parser.parseInt(str);
+            Task tsk = ls.get(numToBeDeleted);
+            ls.remove(numToBeDeleted);
+            return ui.outputDeleteMsg(ls, tsk);
+        } catch (Exception ex) {
+            return ui.outputDeleteError();
+        }
+    }
+
+    private String cmdEvent(String[] arr) {
+        String[] arrOfStr;
+        try {
+            arrOfStr = Parser.parse(arr, 2);
+        } catch (Exception ex) {
+            return ui.outputEventError();
+        }
+        try {
+            Task newTask = new Event(arrOfStr[0], arrOfStr[1]);
+            ls.add(newTask);
+            return ui.outputDeadlineEventMsg(ls, newTask);
+        } catch (Exception ex) {
+            return ui.outputEventFormatError();
+        }
+    }
+
+    private String cmdDeadline(String[] arr) {
+        String[] arrOfStr;
+        try {
+            arrOfStr = Parser.parse(arr, 1);
+        } catch (Exception ex) {
+            return ui.outputDeadlineError();
+        }
+        try {
+            Task newTask = new Deadline(arrOfStr[0], arrOfStr[1]);
+            ls.add(newTask);
+            return ui.outputDeadlineEventMsg(ls, newTask);
+        } catch (Exception ex) {
+            return ui.outputDeadlineFormatError();
+        }
+    }
+
+    private String cmdTodo(String description) {
+        try {
+            Task newTask = new Todo(description);
+            ls.add(newTask);
+            return ui.outputTodoMsg(ls, newTask);
+        } catch (Exception ex) {
+            return ui.outputTodoError();
+        }
+    }
+
+    private String cmdDone(String str) {
+        try {
+            int numToBeMarkedAsDone = Parser.parseInt(str);
+            Task tsk = ls.get(numToBeMarkedAsDone);
+            tsk.markAsDone();
+            ls.set(numToBeMarkedAsDone, tsk);
+            return ui.outputDoneMsg(tsk);
+        } catch (Exception ex) {
+            return ui.outputDoneError();
+        }
+    }
+
+    private String cmdList() {
+        if (ls.isEmpty()) {
+            return ui.outputListNoTask();
+        } else {
+            return ui.outputListTask(ls);
         }
     }
 }

@@ -49,81 +49,30 @@ public class Storage {
     /**
      * Loads the file from todolist.txt.
      * @return An arraylist of task that was stored.
-     * @throws FileNotFoundException When the file is not found.
      */
-    protected ArrayList<Task> loadFile() throws FileNotFoundException {
+    protected ArrayList<Task> loadFile() {
         ArrayList<String> result = new ArrayList<>();
         ArrayList<Task> taskList = new ArrayList<>();
 
-        try (Scanner s = new Scanner(new FileReader(getFile()))) {
-            while (s.hasNext()) {
-                result.add(s.nextLine());
-            }
-        }
+        scanFile(result);
+        loadToTaskList(result, taskList);
+        return taskList;
+    }
+
+    private void loadToTaskList(ArrayList<String> result, ArrayList<Task> taskList) {
         for (int i = 0; i < result.size(); i++) {
             String str = result.get(i);
             String[] arr = str.split(" >> ", -1);
 
             switch (arr[0]) {
             case "T":
-                // It is a to-do task
-                try {
-                    if (Integer.valueOf(arr[1]).equals(0)) {
-                        // Incomplete task
-                        Task task = new Todo(arr[2]);
-                        taskList.add(task);
-                    } else if (Integer.valueOf(arr[1]).equals(1)) {
-                        // Completed task
-                        Task task = new Todo(arr[2]);
-                        task.markAsDone();
-                        taskList.add(task);
-                    } else {
-                        // Not recognised format
-                        Ui.printFormatError(i);
-                    }
-                } catch (Exception ex) {
-                    Ui.printFormatError(i);
-                }
+                todoLoad(taskList, i, arr);
                 break;
             case "D":
-                // It is a deadline task
-                try {
-                    if (Integer.valueOf(arr[1]).equals(0)) {
-                        // Incomplete task
-                        Task task = new Deadline(arr[2], arr[3]);
-                        taskList.add(task);
-                    } else if (Integer.valueOf(arr[1]).equals(1)) {
-                        // Completed task
-                        Task task = new Deadline(arr[2], arr[3]);
-                        task.markAsDone();
-                        taskList.add(task);
-                    } else {
-                        // Not recognised format
-                        Ui.printFormatError(i);
-                    }
-                } catch (Exception ex) {
-                    Ui.printFormatError(i);
-                }
+                deadlineLoad(taskList, i, arr);
                 break;
             case "E":
-                // It is an duke.Event task
-                try {
-                    if (Integer.valueOf(arr[1]).equals(0)) {
-                        // Incomplete task
-                        Task task = new Event(arr[2], arr[3]);
-                        taskList.add(task);
-                    } else if (Integer.valueOf(arr[1]).equals(1)) {
-                        // Completed task
-                        Task task = new Event(arr[2], arr[3]);
-                        task.markAsDone();
-                        taskList.add(task);
-                    } else {
-                        // Not recognised format
-                        Ui.printFormatError(i);
-                    }
-                } catch (Exception ex) {
-                    Ui.printFormatError(i);
-                }
+                eventLoad(taskList, i, arr);
                 break;
             default:
                 // No such type
@@ -131,7 +80,76 @@ public class Storage {
                 break;
             }
         }
-        return taskList;
+    }
+
+    private void eventLoad(ArrayList<Task> taskList, int i, String[] arr) {
+        try {
+            if (Integer.valueOf(arr[1]).equals(0)) {
+                // Incomplete task
+                Task task = new Event(arr[2], arr[3]);
+                taskList.add(task);
+            } else if (Integer.valueOf(arr[1]).equals(1)) {
+                // Completed task
+                Task task = new Event(arr[2], arr[3]);
+                task.markAsDone();
+                taskList.add(task);
+            } else {
+                // Not recognised format
+                Ui.printFormatError(i);
+            }
+        } catch (Exception ex) {
+            Ui.printFormatError(i);
+        }
+    }
+
+    private void deadlineLoad(ArrayList<Task> taskList, int i, String[] arr) {
+        try {
+            if (Integer.valueOf(arr[1]).equals(0)) {
+                // Incomplete task
+                Task task = new Deadline(arr[2], arr[3]);
+                taskList.add(task);
+            } else if (Integer.valueOf(arr[1]).equals(1)) {
+                // Completed task
+                Task task = new Deadline(arr[2], arr[3]);
+                task.markAsDone();
+                taskList.add(task);
+            } else {
+                // Not recognised format
+                Ui.printFormatError(i);
+            }
+        } catch (Exception ex) {
+            Ui.printFormatError(i);
+        }
+    }
+
+    private void todoLoad(ArrayList<Task> taskList, int i, String[] arr) {
+        try {
+            if (Integer.valueOf(arr[1]).equals(0)) {
+                // Incomplete task
+                Task task = new Todo(arr[2]);
+                taskList.add(task);
+            } else if (Integer.valueOf(arr[1]).equals(1)) {
+                // Completed task
+                Task task = new Todo(arr[2]);
+                task.markAsDone();
+                taskList.add(task);
+            } else {
+                // Not recognised format
+                Ui.printFormatError(i);
+            }
+        } catch (NumberFormatException ex) {
+            Ui.printFormatError(i);
+        }
+    }
+
+    private void scanFile(ArrayList<String> result) {
+        try (Scanner s = new Scanner(new FileReader(getFile()))) {
+            while (s.hasNext()) {
+                result.add(s.nextLine());
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("File not found!");
+        }
     }
 
     /**
