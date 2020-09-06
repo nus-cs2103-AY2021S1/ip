@@ -12,9 +12,21 @@ import java.util.regex.Matcher;
 
 import static duke.storage.Storage.TASK_DATA_ARGS_FORMAT;
 
+/**
+ * Transforms String input from save file
+ * into {@code Tasks}.
+ * <p>
+ * Methods contained are static.
+ * </p>
+ */
 public class TaskDecoder {
 
-
+    /**
+     * Decodes a list of Strings into a {@code TaskList}.
+     * @param dataLines input from save file.
+     * @return TaskList object filled with decoded tasks.
+     * @throws IllegalValueException if input is not in the right format.
+     */
     public static TaskList DecodeTasksFromSave(List<String> dataLines) throws IllegalValueException {
         List<Task> output = new ArrayList<>();
         for (String line : dataLines) {
@@ -23,6 +35,12 @@ public class TaskDecoder {
         return new TaskList(output);
     }
 
+    /**
+     * Decodes a String into a {@code Task}.
+     * @param encodedTask task in String format.
+     * @return {@code Task} object.
+     * @throws IllegalValueException if input is not in the right format.
+     */
     private static Task decodeTaskFromString(String encodedTask)
             throws IllegalValueException {
         Matcher matcher = TASK_DATA_ARGS_FORMAT.matcher(encodedTask);

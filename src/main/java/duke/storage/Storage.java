@@ -20,6 +20,15 @@ public class Storage {
 
     public static final String SEPARATOR = ",";
 
+    /**
+     * Task data storage argument format.
+     * <p>
+     * <ol>T, D, E</ol>
+     * <ol>isDone (1 for done, 0 for not done)</ol>
+     * <ol>description</ol>
+     * <ol>date ("null" if not applicable)</ol>
+     * </p>
+     */
     public static final Pattern TASK_DATA_ARGS_FORMAT =
             Pattern.compile("(?<eventType>[TDE])" + SEPARATOR
                     + "(?<isDone>[01])" + SEPARATOR
@@ -39,10 +48,20 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks if save path is valid.
+     * @param path save path.
+     * @return true if path ends with .txt.
+     */
     private static boolean isValidPath(Path path) {
         return path.toString().endsWith(".txt");
     }
 
+    /**
+     * Saves tasks from a {@code TaskList} into a external file.
+     * @param taskList Task list.
+     * @throws StorageOperationException if IOException occurs.
+     */
     public void saveTasks(TaskList taskList) throws StorageOperationException {
         List<String> dataLines = new ArrayList<>();
         for (int i = 0 ; i < taskList.getSize() ; i++) {
@@ -57,8 +76,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from external file.
+     * @return {@code TaskList} containing list of tasks.
+     * @throws StorageOperationException if IOException or illegal save format is found.
+     */
     public TaskList loadTasks() throws StorageOperationException {
-
         if (!Files.exists(path) || !Files.isRegularFile(path)) {
             return new TaskList();
         }
@@ -79,8 +102,9 @@ public class Storage {
         }
     }
 
-
-
+    /**
+     * Signals that storage file path is invalid.
+     */
     public static class InvalidStorageFilePathException extends DukeException {
         public InvalidStorageFilePathException(String message) {
             super(message);
@@ -88,7 +112,8 @@ public class Storage {
     }
 
     /**
-     * Signals that some error has occured while trying to convert and read/write data between the application
+     * Signals that some error has occurred while trying to
+     * convert and read/write data between the application
      * and the duke.storage file.
      */
     public static class StorageOperationException extends DukeException {

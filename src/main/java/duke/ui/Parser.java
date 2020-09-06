@@ -20,6 +20,10 @@ import java.time.LocalTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+/**
+ * Transforms user commands into {@code Command}.
+ */
 public class Parser {
 
     private static final Pattern COMMAND_INPUT_FORMAT = Pattern.compile("(?<command>^[ltde]\\w+)" + "\\s?"
@@ -33,6 +37,20 @@ public class Parser {
         this.ui = ui;
     }
 
+    /**
+     * Gets {@code Command} from user String input.
+     * <p>
+     * Takes in input for the following commands:
+     * <li>List</li>
+     * <li>Done</li>
+     * <li>Delete</li>
+     * <li>Add - Event, To-do, Deadline</li>
+     * </p>
+     *
+     * @param input user command input in String
+     * @return Command to be executed
+     * @throws DukeException If input does not match the required format.
+     */
     public Command getCommandFromInput(String input) throws DukeException {
         Matcher matcher = COMMAND_INPUT_FORMAT.matcher(input);
         if (!matcher.matches()) {
