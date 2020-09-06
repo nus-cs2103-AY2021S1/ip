@@ -11,6 +11,7 @@ import taskbot.command.DoneCommand;
 import taskbot.command.EventCommand;
 import taskbot.command.ExitCommand;
 import taskbot.command.FindCommand;
+import taskbot.command.HelpCommand;
 import taskbot.command.ListCommand;
 import taskbot.command.TodoCommand;
 import taskbot.command.UpcomingCommand;
@@ -138,8 +139,42 @@ public class ParserTest {
     @Test
     public void testParseExit() {
         try {
-            testCommand = "bye";
+            testCommand = "exit";
             assertEquals(new ExitCommand(), Parser.parse(testCommand));
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    /**
+     * Tests if Parser returns a correct HelpCommand given no arguments.
+     */
+    @Test
+    public void testParseHelpNoArgs() {
+        try {
+            testCommand = "help ";
+            assertEquals(new HelpCommand("help"), Parser.parse(testCommand));
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    /**
+     * Tests if Parser returns a correct HelpCommand given
+     * the command argument.
+     */
+    @Test
+    public void testParseHelpArgs() {
+        try {
+            testCommand = "help ";
+            String[] testCommands = new String[]{
+                "deadline", "delete", "done", "event", "exit",
+                "find", "list", "todo", "upcoming"
+            };
+            for (String command : testCommands) {
+                assertEquals(new HelpCommand(command),
+                        Parser.parse(testCommand + command));
+            }
         } catch (Exception e) {
             fail();
         }

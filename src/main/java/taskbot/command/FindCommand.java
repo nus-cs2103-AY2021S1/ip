@@ -14,6 +14,7 @@ public class FindCommand extends Command {
 
     /**
      * Creates a FindCommand.
+     *
      * @param keywords The keywords used to find tasks.
      */
     public FindCommand(String ... keywords) {
@@ -22,6 +23,18 @@ public class FindCommand extends Command {
             keywords[i] = keywords[i].toLowerCase();
         }
         this.keywords = keywords;
+    }
+
+    /**
+     * Gives instructions on how to use the find command.
+     *
+     * @return A string of instructions to use the command.
+     */
+    public static String getInstruction() {
+        return "Finds tasks matching the given keywords.\n"
+                + "Format: find keywords[,...]\n"
+                + "keywords: the list of keywords, separated by whitespace\n"
+                + "Example: keyword key1 key2";
     }
 
     /**

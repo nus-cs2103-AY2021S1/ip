@@ -20,6 +20,19 @@ public class UpcomingCommand extends Command {
     }
 
     /**
+     * Gives instructions on how to use the upcoming command.
+     *
+     * @return A string of instructions to use the command.
+     */
+    public static String getInstruction() {
+        return "Gets upcoming tasks that occur within the given time frame.\n"
+                + "Time frame is given in days ahead."
+                + "Format: upcoming [days]\n"
+                + "days: The number of days ahead to search for a task, up to just before midnight.\n"
+                + "Example: upcoming 2 will search for tasks falling 2 days from now, up to 2359.";
+    }
+
+    /**
      * @return The days ahead to look.
      */
     public int getDays() {

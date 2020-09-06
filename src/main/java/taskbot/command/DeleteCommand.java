@@ -21,6 +21,17 @@ public class DeleteCommand extends Command {
     }
 
     /**
+     * Gives instructions on how to use the delete command.
+     *
+     * @return A string of instructions to use the command.
+     */
+    public static String getInstruction() {
+        return "Deletes the task at the given index.\n"
+                + "Format: delete [index]\n"
+                + "index: the index in which the task appears on the list.";
+    }
+
+    /**
      * @return The index of the list where the task is.
      */
     public int getTaskIndex() {

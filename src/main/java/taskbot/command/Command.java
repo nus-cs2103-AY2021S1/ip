@@ -24,7 +24,7 @@ public abstract class Command {
      * Performs the relevant operation tied to the Command type on the given task list.
      *
      * @param taskList The task list to be operated on.
-     * @return a String describing the outcome of the execution.
+     * @return A String describing the outcome of the execution.
      * @throws TaskbotException Any exception thrown by the Commands.
      */
     public abstract String execute(TaskList taskList) throws TaskbotException;

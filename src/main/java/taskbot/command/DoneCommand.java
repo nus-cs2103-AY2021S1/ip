@@ -21,6 +21,17 @@ public class DoneCommand extends Command {
     }
 
     /**
+     * Gives instructions on how to use the done command.
+     *
+     * @return A string of instructions to use the command.
+     */
+    public static String getInstruction() {
+        return "Completes the task at the given index.\n"
+                + "Format: done [index]\n"
+                + "index: the index in which the task appears on the list.";
+    }
+
+    /**
      * @return An int representing the index in the list
      * where the task is at.
      */

@@ -19,6 +19,17 @@ public class TodoCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Gives instructions on how to use the todo command.
+     *
+     * @return A string of instructions to use the command.
+     */
+    public static String getInstruction() {
+        return "Adds a todo task to the tasks list\n"
+                + "Format: todo [desc]\n"
+                + "desc: The description of the todo task\n";
+    }
+
     public String getTask() {
         return task;
     }

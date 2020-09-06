@@ -63,7 +63,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
 
         // Check if exit is called
-        if (input.equals("bye")) {
+        if (input.equals("exit")) {
             // Pauses for 1.5s for goodbye text to be read before exiting
             PauseTransition pause = new PauseTransition(Duration.seconds(1.5f));
             pause.setOnFinished(event -> {
