@@ -1,9 +1,10 @@
 package taskbot.command;
 
+import java.util.ArrayList;
+
 import taskbot.exceptions.TaskbotException;
 import taskbot.task.TaskList;
 
-import java.util.ArrayList;
 
 /**
  * Encapsulates a command to display help information.

@@ -167,9 +167,10 @@ public class ParserTest {
     public void testParseHelpArgs() {
         try {
             testCommand = "help ";
-            String[] testCommands = new String[]
-                    {"deadline", "delete", "done", "event", "exit",
-                            "find", "list", "todo", "upcoming"};
+            String[] testCommands = new String[]{
+                "deadline", "delete", "done", "event", "exit",
+                "find", "list", "todo", "upcoming"
+            };
             for (String command : testCommands) {
                 assertEquals(new HelpCommand(command),
                         Parser.parse(testCommand + command));
