@@ -55,7 +55,6 @@ public class DoneCommand extends Command {
                 builder.append(num + ". " + taskList.markTaskAsDone(taskNum) + "\n");
                 num++;
             }
-
             return builder.toString();
 
         } catch (DukeException d) {

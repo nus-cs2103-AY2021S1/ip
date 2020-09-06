@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.PriorityQueue;
+import java.util.stream.IntStream;
 
 import duke.exception.CalendarException;
 import duke.exception.DeleteException;
@@ -39,11 +39,9 @@ public class TaskList {
             return "You don't have any task in your list.";
         } else {
             StringBuilder todoList = new StringBuilder("Here are the task(s) in your list: \n");
-            int num = 1;
-            for (Task item : this.tasks) {
-                todoList.append(num + ". " + item.toString() + "\n");
-                num++;
-            }
+            IntStream.range(0, this.tasks.size())
+                .forEach(i -> todoList.append(String.format(
+                    "%d. %s\n", i+1, this.tasks.get(i))));
             return todoList.toString();
         }
     }
