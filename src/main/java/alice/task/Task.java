@@ -1,5 +1,8 @@
 package alice.task;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Represents a task in ALICE.
  */
@@ -44,15 +47,8 @@ public abstract class Task {
      * @return true if any keywords matches the task description; false otherwise.
      */
     public boolean containKeywords(String... keywords) {
-        String[] descriptionTokens = description.split(" ");
-        for (int i = 0; i < keywords.length; i++) {
-            for (int j = 0; j < descriptionTokens.length; j++) {
-                if (descriptionTokens[j].equals(keywords[i])) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        List<String> descriptionTokens = Arrays.asList(description.split(" "));
+        return Arrays.stream(keywords).anyMatch(descriptionTokens::contains);
     }
 
     /**
