@@ -14,7 +14,6 @@ import java.io.IOException;
  */
 public class Main extends Application {
     private Duke duke;
-
     @Override
     public void start(Stage stage) {
         try {
@@ -26,6 +25,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             scene.getStylesheets().add(this.getClass().getClassLoader().getResource("style/main_window.css").toExternalForm());
             stage.setScene(scene);
+
             this.duke = new Duke(stage);
             fxmlLoader.<MainWindow>getController().initialize(duke);
             stage.setTitle("Elon Musk");

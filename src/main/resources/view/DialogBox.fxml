@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <fx:root
         alignment="TOP_RIGHT"
         maxWidth="1.7976931348623157E308"
@@ -19,6 +20,7 @@
                 minHeight="-Infinity"
                 wrapText="true"
         />
+        <VBox fx:id="stat" minHeight="-Infinity"/>
         <ImageView
                 fx:id="displayPicture"
                 fitHeight="70.0"

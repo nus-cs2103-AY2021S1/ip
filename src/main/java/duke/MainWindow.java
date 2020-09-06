@@ -1,6 +1,7 @@
 package duke;
 
 import duke.dukehelper.uiparts.DialogBox;
+import duke.dukehelper.uiparts.Statistics;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -23,6 +24,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private VBox sideMenu;
 
     private Duke duke;
 
@@ -31,6 +34,8 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize(Duke duke) {
+        sideMenu.getStylesheets().add(this.getClass().getClassLoader().getResource("style/side_menu.css").toExternalForm());
+        //sideMenu.getChildren().add(new Statistics(new int[]{1,2,3}));
         this.duke = duke;
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(duke.init(),
                 dukeImage));
@@ -41,8 +46,19 @@ public class MainWindow extends AnchorPane {
     private void addDialog() {
         String userText = userInput.getText();
         String dukeText = duke.getResponse(userInput.getText());
-        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText,
-                userImage), DialogBox.getDukeDialog(dukeText, dukeImage));
+        if(dukeText.equals("GET_CHART")) {
+            //dialogContainer.getChildren().add();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText,userImage),
+                    DialogBox.getStatDialog(new Statistics(), dukeImage)
+            );
+        } else {
+            //System.out.println("HERE");
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText,userImage),
+                    DialogBox.getDukeDialog(dukeText, dukeImage)
+            );
+        }
         userInput.clear();
     }
 
@@ -69,10 +85,19 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input,userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        if(response == "GET_CHART") {
+            //dialogContainer.getChildren().add();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input,userImage),
+                    DialogBox.getStatDialog(new Statistics(), dukeImage)
+            );
+        } else {
+            //System.out.println("HERE");
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input,userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        }
         userInput.clear();
     }
 }

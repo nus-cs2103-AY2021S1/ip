@@ -5,6 +5,7 @@ import duke.dukehelper.Parser;
 import duke.dukehelper.Storage;
 import duke.dukehelper.TaskList;
 import duke.dukehelper.Ui;
+import duke.dukehelper.uiparts.Statistics;
 import duke.exception.DukeException;
 import duke.helper.DateTimeHelper;
 import duke.task.Task;
@@ -32,15 +33,19 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
     private Stage stage;
+    private int[] statData;
+    private Statistics statistics;
     /**
      * Constructor
      */
     public Duke(Stage stage) {
+        this.statistics = new Statistics();
         this.ui = new Ui();
         this.storage = new Storage("data/save_file.txt");
         this.tasks = new TaskList();
         this.parser = new Parser();
         this.stage = stage;
+        this.statData = new int[]{0,0,0};
     }
     private int getNumTasks() {
         return this.tasks.getTaskList().size();
@@ -83,6 +88,15 @@ public class Duke {
         };
 
         if (commandType == Commands.DEADLINE || commandType == Commands.EVENT || commandType == Commands.TODO) {
+            if(commandType == Commands.DEADLINE) {
+                statData[1]++;
+            } else if(commandType == Commands.EVENT) {
+                statData[2]++;
+            } else {
+                statData[0]++;
+            }
+            statistics.saveData(statData);
+
             parsedTask = parser.parseTaskCommand(commandType, tokens, isLoaded, getNumTasks());
         } else if (commandType == Commands.DELETE) {
 
@@ -168,6 +182,8 @@ public class Duke {
             return Ui.printDialog(res);
         } else if (content.equals(Commands.LIST.getAction())) {
             return Ui.printStoredTasks(this.tasks.getTaskList());
+        } else if (content.equals(Commands.STAT.getAction())) {
+            return "GET_CHART";
         } else {
             try {
                 String result = tokenizeCommand(content, false);

@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
@@ -26,27 +27,42 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private VBox stat;
 
-    private DialogBox(String text, Image img) {
-        assert (text != null && img != null) : "Input is null";
+    private void baseSetUp(Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
-            this.setSpacing(20);
+            this.setSpacing(10);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
         this.getStylesheets().add(this.getClass().getClassLoader().getResource("style/dialog.css").toString());
         this.getStyleClass().add("layout");
-        dialog.getStyleClass().add("message-right");
-        dialog.setText(text);
         Circle clip = new Circle(displayPicture.getX() + 35, displayPicture.getY() + 35, 35);
         displayPicture.setImage(img);
         displayPicture.setClip(clip);
     }
+
+    private DialogBox(String text, Image img) {
+        assert (text != null && img != null) : "Input is null";
+        baseSetUp(img);
+        dialog.getStyleClass().add("message-right");
+        dialog.setText(text);
+        stat.setVisible(false);
+    }
+    private DialogBox(String text, Image img, Statistics chart) {
+        assert (text != null && img != null) : "Input is null";
+        baseSetUp(img);
+        dialog.setVisible(false);
+        chart.getStyleClass().add("message-left");
+        stat.getChildren().add(chart);
+    }
+
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
@@ -62,6 +78,11 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
+    }
+    public static DialogBox getStatDialog(Statistics chart, Image img) {
+        DialogBox dialogBox = new DialogBox("", img, chart);
+        dialogBox.flip();
+        return dialogBox;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {

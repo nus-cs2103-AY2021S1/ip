@@ -2,15 +2,7 @@
     -fx-background-image: url("../images/background.jpg");
     -fx-background-position: center center;
 }
-#userInput {
-    -fx-background-color: #a9a9a9 , white , white;
-    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
-}
 
-#userInput:focused {
-    -fx-background-color: #a9a9a9 , white , white;
-    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
-}
 #sendButton {
     -fx-background-color:
             #090a0c,
@@ -39,4 +31,10 @@
 #sendButton:pressed {
     -fx-padding: 10 15 13 15;
     -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+#sideMenu {
+    -fx-background-image: url("../images/background.jpg");
+    -fx-background-position: center center;
+    -fx-padding: 10;
+    -fx-spacing: 10;
 }

@@ -209,7 +209,7 @@ public class Parser {
      * @throws DukeException
      * @throws DukeInvalidArgumentException
      */
-    public Task parseCommand(Commands commandType, String[] tokens, boolean isLoaded,
+    public Task parseTaskCommand(Commands commandType, String[] tokens, boolean isLoaded,
                              int numTasks) throws DukeException, DukeInvalidArgumentException {
         String[] extractedData = extractData(isLoaded, tokens);
         String content = extractedData[0];
