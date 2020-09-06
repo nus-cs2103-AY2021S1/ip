@@ -28,7 +28,7 @@ public class AddCommand extends Command {
      * Creates AddCommand object that handles adding of todo, deadline and event.
      *
      * @param taskType differentiates between todo, deadline and event.
-     * @param command  is the description entered by the user.
+     * @param command is the description entered by the user.
      */
     public AddCommand(Type taskType, String command) {
         super(command);
