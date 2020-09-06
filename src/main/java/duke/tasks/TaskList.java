@@ -167,11 +167,11 @@ public class TaskList {
 
         List<Task> result = new ArrayList<>();
 
-        for (Task task : tasks) {
-            if (task.getDescription().contains(keyword)) {
-                result.add(task);
+        tasks.forEach(t -> {
+            if (t.getDescription().contains(keyword)) {
+                result.add(t);
             }
-        }
+        });
 
         return result;
     }
