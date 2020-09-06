@@ -38,10 +38,16 @@ public class DoneCommand extends Command {
             throws BobInvalidNumberException, BobListIndexOutOfBoundsException, IOException {
         try {
             int taskNum = Integer.parseInt(input.replaceAll("\\s+", ""));
-            if (taskNum > tasks.getListSize() || taskNum <= 0) {
+
+            boolean isNegative = taskNum <= 0;
+            boolean isOutOfBound = taskNum > tasks.getListSize();
+            boolean isInvalidTaskNum = isNegative || isOutOfBound;
+            boolean isValidTaskNum = !isInvalidTaskNum;
+            if (isInvalidTaskNum) {
                 throw new BobListIndexOutOfBoundsException(tasks.getListSize(), taskNum, "mark");
             }
 
+            assert isValidTaskNum;
             Task task = tasks.markTaskDone(taskNum);
             tasks.updateData(storage);
             return MsgGenerator.generateDoneMessage(task);
