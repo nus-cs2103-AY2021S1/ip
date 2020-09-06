@@ -22,7 +22,7 @@ public class Parser {
      * @throws InvalidCommandException If command is of invalid format.
      */
     public int parse(String currInput, int sizeOfList) throws InvalidCommandException{
-        //Cuts white space before and after the command
+        //Cuts white space before and after the input
         String input = currInput.trim();
 
         if (isListCommand(input)) {
@@ -71,9 +71,8 @@ public class Parser {
         String[] parts = input.split(" ", 2);
 
         try {
-
             if (input.startsWith("todo")) {
-                //Verify the todo command
+                //Verify the todo command is of the correct format
                 verifyTodo(input);
 
                 return new Task(parts[1]);
@@ -100,6 +99,7 @@ public class Parser {
                 //Split into description and date, time info
                 String[] split = parts[1].split("/at");
 
+                //Should be of format yyyy-mm-dd x:x
                 LocalDate date = getDate(split[1]);
                 LocalTime time = getTime(split[1]);
 
@@ -191,6 +191,7 @@ public class Parser {
         try {
             String[] parts = input.split(" ");
             int index = Integer.parseInt(parts[1]) - 1;
+
             boolean numInRange = index > -1 && index < numOfTasks;
 
             if (!numInRange) {
@@ -212,6 +213,7 @@ public class Parser {
         try {
             String[] parts = input.split(" ");
             int index = Integer.parseInt(parts[1]) - 1;
+
             boolean numInRange = index > -1 && index < numOfTasks;
 
             if (!numInRange) {

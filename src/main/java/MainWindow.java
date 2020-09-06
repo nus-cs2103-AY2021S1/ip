@@ -30,6 +30,8 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         d.run();
+
+        //Runs the welcome message in the chat GUI with the saved tasks
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(d.startUpMessage(), dukeImage));
         duke = d;
     }
@@ -42,6 +44,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

@@ -41,6 +41,7 @@ public class UI {
             return "You currently have no tasks!";
         } else {
             String tasks = "Here are your current tasks:";
+
             for (int i = 0; i < size; i++) {
                 tasks += "\n" + "  " + this.storage.getTaskFromList(i);
             }
@@ -50,15 +51,22 @@ public class UI {
 
     private String getListOfMatches(String keyword) {
         int size = this.storage.getSizeofTasks();
-
         int increment = 1;
+
         String listOfMatches = " Here are the matching tasks in your list:";
+
         for (int i = 0; i < size; i++) {
             if (this.storage.getTaskFromList(i).toString().contains(keyword)) {
                 listOfMatches += "\n" + "  " + increment + ". " + this.storage.getTaskFromList(i).toString();
                 increment++;
             }
         }
+
+        //If increment is 1 means that there are no matching tasks
+        if (increment == 1) {
+            return "There seems to be no matches...";
+        }
+
         return listOfMatches;
     }
 
@@ -75,22 +83,18 @@ public class UI {
             return "Storage not initialised!";
         }
 
-
         try {
-            //Get the result of the parse
             int parseResult = this.parser.parse(input, this.storage.getSizeofTasks());
 
             if (isListCommand(parseResult)) {
                 return this.readSavedTasks();
             }
-
             if (isDoneCommand(parseResult)) {
                 int index = this.parser.getIndex(input);
                 this.storage.markDone(index);
 
                 return "Nice! I've marked this task as done:" + "\n" + "  " + this.storage.getTaskFromList(index).toString();
             }
-
             if (isDeleteCommand(parseResult)) {
                 int index = this.parser.getIndex(input);
                 Task toBeDeleted = this.storage.getTaskFromList(index);
@@ -98,22 +102,19 @@ public class UI {
 
                 return "Noted. I've removed this task:" + "\n" + "  " + toBeDeleted
                         + "\n" + "Now you have " + (this.storage.getSizeofTasks()) + " tasks in the list.";
-
             }
-
             if (isFindCommand(parseResult)) {
                 String keyword = this.parser.getKeyword(input);
 
                 return getListOfMatches(keyword);
             }
-
             if (parser.isTerminateCommand(input)) {
                 this.storage.save();
 
                 return "Bye see you again!";
             }
 
-            //Is a task command
+            //If reached here, means input must be a task command
             Task newTask = this.parser.getTask(input);
             this.storage.addTask(newTask);
 

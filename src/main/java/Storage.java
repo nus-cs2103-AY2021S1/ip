@@ -79,12 +79,12 @@ public class Storage {
      */
     public void initialise() throws FileNotFoundException, IOException{
         this.isInitialised = true;
+
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "ip", "src", "main", "java", "Data");
 
         boolean directoryExists = Files.exists(path);
 
-        //checks for the directory
         if (!directoryExists) {
             throw new FileNotFoundException();
         }
@@ -92,15 +92,16 @@ public class Storage {
         File file1 = new File(home + "/ip/src/main/java/Data/Duke.txt");
         File file2 = new File(home + "/ip/src/main/java/Data/Duke2.txt");
 
-        //Checks which file is to be read
+        //Checks which file is to be read and generated into the TaskList
         if (file1.exists()) {
             this.taskList.generateList(file1);
         } else if (file2.exists()) {
             this.taskList.generateList(file2);
         } else {
-            //if no file create a new empty file
+            //If no file creates a new empty file
             Path newPath = Files.createFile(Path.of(home + "/ip/src/main/java/Data/Duke.txt"));
             File newFile = new File(String.valueOf(newPath));
+
             this.taskList.generateList(newFile);
         }
     }
@@ -114,6 +115,7 @@ public class Storage {
 
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "ip", "src", "main", "java", "Data");
+
         boolean directoryExists = Files.exists(path);
 
         //Checks if directory is unchanged
@@ -123,32 +125,30 @@ public class Storage {
 
         File file1 = new File(home + "/ip/src/main/java/Data/Duke.txt");
         if (file1.exists()) {
-
-            //creates a new empty file
+            //Creates new file to store the new tasks
             Files.createFile(Path.of(home + "/ip/src/main/java/Data/Duke2.txt"));
             FileWriter fw = new FileWriter(home + "/ip/src/main/java/Data/Duke2.txt");
             BufferedWriter bw = new BufferedWriter(fw);
 
-            //deletes the old file
+            //Delete the old file1 so that it will not be read the next time Duke is activated
             Files.delete(Paths.get(home + "/ip/src/main/java/Data/Duke.txt"));
 
             for (int i = 0; i < this.taskList.size(); i++) {
                 Task task = this.taskList.getTask(i);
                 bw.write((i + 1) + "." + task.toString());
 
-                //Writes task on a new line
+                //Writes each task on a new line
                 bw.newLine();
             }
 
             bw.close();
         } else {
-
-            //creates a new empty file
+            //Creates new file to store the new tasks
             Files.createFile(Path.of(home + "/ip/src/main/java/Data/Duke.txt"));
             FileWriter fw = new FileWriter(home + "/ip/src/main/java/Data/Duke.txt");
             BufferedWriter bw = new BufferedWriter(fw);
 
-            //deletes the old file
+            //Delete the old file so that it will not be read the next time Duke is activated
             Files.delete(Paths.get(home + "/ip/src/main/java/Data/Duke2.txt"));
 
             for (int i = 0; i < this.taskList.size(); i++) {
