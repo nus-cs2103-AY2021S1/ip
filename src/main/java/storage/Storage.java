@@ -223,9 +223,9 @@ public class Storage {
     }
 
     /**
-     * Hello
-     * @param task hi
-     * @throws MugException hi
+     * Record the action.
+     * @param task command given to Mug.
+     * @throws MugException If fail to access undo.txt.
      */
     private void writeUndoRecord(String task, String info, int taskId) throws MugException {
         try {
@@ -240,7 +240,7 @@ public class Storage {
             pw.flush();
             pw.close();
         } catch (IOException ex) {
-            throw new MugException("Something went wrong. Mug fail to add the Tasks.Task :_:");
+            throw new MugException("Something went wrong. Mug fail to record task :_:");
         }
     }
 }
