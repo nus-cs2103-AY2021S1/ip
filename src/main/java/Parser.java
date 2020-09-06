@@ -63,7 +63,7 @@ public class Parser {
         case INVALID:
             throw new DukeException("Unrecognized command!");
         default:
-            throw new DukeException("Passed through invalid command switch case. Should not have happened.");
+            assert true : "Fell through INVALID command switch case. Should not have reached here.";
         }
     }
 

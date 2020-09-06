@@ -27,7 +27,7 @@ public class DukeSaver {
      * Initializes the directory and save file.
      * If already exists, does not do anything.
      */
-    public void initSaveDir() {
+    private void initSaveDir() {
         try {
             File saveFile = new File(this.savePath);
             saveFile.getParentFile().mkdirs();
