@@ -12,7 +12,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import util.DukeException;
 import util.Parser;
 import util.Storage;
