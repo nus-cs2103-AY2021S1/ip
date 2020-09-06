@@ -2,11 +2,11 @@ package duke;
 
 import duke.command.Command;
 import duke.command.CommandResult;
-import duke.command.InvalidCommand;
 import duke.exception.DukeException;
+import duke.message.Message;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.parsers.Parser;
+import duke.parser.Parser;
 
 /**
  * Duke is a personal chatbot cum task manager with the following functionalities:
@@ -34,7 +34,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            System.out.println(Output.loadingErrorMessage());
+            System.out.println(Message.loadingErrorMessage());
             tasks = new TaskList();
         }
     }

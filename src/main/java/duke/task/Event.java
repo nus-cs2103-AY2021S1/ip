@@ -1,14 +1,15 @@
 package duke.task;
 
+import duke.parser.Parser;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * represents an event task
  */
 public class Event extends Task {
-    protected String eventDate;
+    protected LocalDate date;
 
     /**
      * creates a new event task based on the given description
@@ -18,7 +19,7 @@ public class Event extends Task {
     public Event(String taskDescription) {
         int slash = taskDescription.indexOf("/");
         this.task = taskDescription.substring(0, slash);
-        this.eventDate = taskDescription.substring(slash + 4);
+        this.date = Parser.parseDate(taskDescription.substring(slash + 4));
         this.done = false;
     }
 
@@ -27,20 +28,8 @@ public class Event extends Task {
      * @return string representation of the event task
      */
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        String eventDate;
-        try {
-            LocalDate localDate = LocalDate.parse(this.eventDate);
-            eventDate = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        } catch (DateTimeParseException e) {
-            eventDate = this.eventDate;
-        }
-
-        sb.append("[E]")
-                .append(super.toString())
-                .append("(at: ").append(eventDate).append(")");
-        return sb.toString();
+        return "[E]" + super.toString() +
+                "(at: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
     /**
@@ -52,7 +41,7 @@ public class Event extends Task {
         return "E | " +
                 this.isDoneInt() + " | " +
                 this.task + "| " +
-                this.eventDate;
+                this.date;
     }
 
     /**

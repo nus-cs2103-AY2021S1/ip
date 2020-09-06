@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Output;
+import duke.message.Message;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.exception.EmptyDescriptionException;
@@ -36,6 +36,6 @@ public class FindCommand extends Command {
             throw new EmptyDescriptionException("oh dear :-( the description of 'find' cannot be empty");
         }
         ArrayList<Task> matchingTasks = tasks.getMatchingTasks(fullCommand.substring(5));
-        return new CommandResult(Output.matchingTasksMessage(matchingTasks));
+        return new CommandResult(Message.matchingTasksMessage(matchingTasks));
     }
 }

@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.Output;
 import duke.exception.DukeFileLoadingErrorException;
+import duke.message.Message;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.exception.InvalidIndexException;
@@ -34,6 +34,6 @@ public class DeleteCommand extends Command {
         int taskNumber = Integer.parseInt(fullCommand.substring(7));
         Task task = tasks.delete(taskNumber);
         storage.save(tasks.getTasks());
-        return new CommandResult(Output.deletedTaskMessage(task, tasks));
+        return new CommandResult(Message.deletedTaskMessage(task, tasks));
     }
 }

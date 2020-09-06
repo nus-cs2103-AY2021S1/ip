@@ -59,34 +59,13 @@ public class TaskList {
         return task;
     }
 
-    /**
-     * adds a task to the task list based on the input given by the user
-     * @param input the input given by the user
-     * @return the task that was added to the task list
-     */
-    public Task add(String input) throws EmptyDescriptionException, EmptyDateException {
-        String[] split = input.split(" ");
-        Task toAdd = null;
-        switch(split[0]) {
-        case "todo":
-            toAdd = addToDo(input);
-            break;
-        case "deadline":
-            toAdd = addDeadline(input);
-            break;
-        case "event":
-            toAdd = addEvent(input);
-            break;
-        }
-        tasks.add(toAdd);
-        return toAdd;
-    }
-
-    public Task addToDo(String input) throws EmptyDescriptionException {
+    public ToDo addToDo(String input) throws EmptyDescriptionException {
         if (input.length() <= 5) {
             throw new EmptyDescriptionException("oops! the description of a todo cannot be empty");
         }
-        return new ToDo(input.substring(5));
+        ToDo todo = new ToDo(input.substring(5));
+        tasks.add(todo);
+        return todo;
     }
 
     public Task addDeadline(String input) throws EmptyDescriptionException, EmptyDateException {
@@ -95,7 +74,9 @@ public class TaskList {
         } else if (!input.contains("/")) {
             throw new EmptyDateException("oops! the due date for the deadline was not specified");
         }
-        return new Deadline(input.substring(9));
+        Deadline deadline = new Deadline(input.substring(9));
+        tasks.add(deadline);
+        return deadline;
     }
 
     public Task addEvent(String input) throws EmptyDescriptionException, EmptyDateException {
@@ -104,7 +85,9 @@ public class TaskList {
         } else if (!input.contains("/")) {
             throw new EmptyDateException("oops! the event date for the event was not specified");
         }
-        return new Deadline(input.substring(6));
+        Event event = new Event(input.substring(6));
+        tasks.add(event);
+        return event;
     }
 
     /**

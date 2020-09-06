@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Output;
+import duke.message.Message;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import javafx.application.Platform;
@@ -27,6 +27,6 @@ public class ExitCommand extends Command {
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
         Platform.exit();
-        return new CommandResult(Output.exitMessage(), true);
+        return new CommandResult(Message.exitMessage(), true);
     }
 }

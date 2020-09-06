@@ -47,12 +47,9 @@ public class Storage {
     public void save(ArrayList<Task> tasks) throws DukeFileLoadingErrorException {
         try {
             FileWriter fw = new FileWriter(this.filePath);
-
             for (Task task : tasks) {
-                String encodedTask = task.encode();
-                fw.write(encodedTask + System.lineSeparator());
+                fw.write(task.encode() + System.lineSeparator());
             }
-
             fw.close();
         } catch (IOException e) {
             throw new DukeFileLoadingErrorException("there was an error loading the file");

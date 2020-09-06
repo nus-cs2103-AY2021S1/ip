@@ -1,14 +1,15 @@
 package duke.task;
 
+import duke.parser.Parser;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * represents a deadline task
  */
 public class Deadline extends Task {
-    protected String deadline;
+    protected LocalDate date;
 
     /**
      * creates a new deadline task based on the given description
@@ -18,7 +19,7 @@ public class Deadline extends Task {
     public Deadline(String taskDescription) {
         int slash = taskDescription.indexOf("/");
         this.task = taskDescription.substring(0, slash);
-        this.deadline = taskDescription.substring(slash + 4);
+        this.date = Parser.parseDate(taskDescription.substring(slash + 4));
         this.done = false;
     }
 
@@ -27,20 +28,8 @@ public class Deadline extends Task {
      * @return string representation of the deadline task
      */
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        String deadline;
-        try {
-            LocalDate localDate = LocalDate.parse(this.deadline);
-            deadline = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        } catch (DateTimeParseException e) {
-            deadline = this.deadline;
-        }
-
-        sb.append("[D]")
-                .append(super.toString())
-                .append("(by: ").append(deadline).append(")");
-        return sb.toString();
+        return "[D]" + super.toString() +
+                "(by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
     /**
@@ -52,7 +41,7 @@ public class Deadline extends Task {
         return "D | " +
                 this.isDoneInt() + " | " +
                 this.task + "| " +
-                this.deadline;
+                this.date;
     }
 
     /**

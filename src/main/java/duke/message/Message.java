@@ -1,14 +1,14 @@
-package duke;
+package duke.message;
 
 import duke.task.Task;
 import duke.task.TaskList;
 
 import java.util.ArrayList;
 
-public class Output {
+public class Message {
     public static String addedTaskMessage(Task task, TaskList tasks) {
         return "sure thing! i have added the following task to your list:\n    " +
-                task + "\n" + Output.numberOfTasksMessage(tasks.size());
+                task + "\n" + Message.numberOfTasksMessage(tasks.size());
     }
 
 
@@ -20,13 +20,13 @@ public class Output {
     public static String deletedTaskMessage(Task deletedTask, TaskList tasks) {
         return "of course! i have removed this task: \n    " +
                 deletedTask + "\n" +
-                Output.numberOfTasksMessage(tasks.size());
+                Message.numberOfTasksMessage(tasks.size());
     }
 
     public static String markedTaskAsDoneMessage(Task deletedTask, TaskList tasks) {
         return "yay! i have marked this task as done: \n    " +
                 deletedTask + "\n" +
-                Output.numberOfTasksMessage(tasks.size());
+                Message.numberOfTasksMessage(tasks.size());
     }
 
     public static String welcomeMessage() {
@@ -46,16 +46,16 @@ public class Output {
             string = "oh dear :-( there are no tasks matching your search";
         } else {
             string = "got it! here are the tasks matching your search:\n" +
-                    Output.tasksAsStringMessage(matchingTasks);
+                    Message.tasksAsStringMessage(matchingTasks);
         }
         return string;
     }
 
     public static String helpMessage() {
         return "available commands are: \n    " +
-                "1. todo <todo_description>\n    " +
-                "2. deadline <deadline_description> /by <date>\n    " +
-                "3. event <event_description> /at <date>\n    " +
+                "1. todo <todo_desc>\n    " +
+                "2. deadline <deadline_desc> /by <yyyy-mm-dd>\n    " +
+                "3. event <event_desc> /at <yyyy-mm-dd>\n    " +
                 "4. done <task_number>\n    " +
                 "5. delete <task number>\n    " +
                 "6. list\n    " +
@@ -74,7 +74,7 @@ public class Output {
             string = "hurray! there are no tasks in your list";
         } else {
             string = "okies! here are the tasks in your list:\n" +
-                    Output.tasksAsStringMessage(tasks);
+                    Message.tasksAsStringMessage(tasks);
         }
         return string;
     }

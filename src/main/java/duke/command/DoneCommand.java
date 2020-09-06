@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.Output;
 import duke.exception.DukeFileLoadingErrorException;
+import duke.message.Message;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.exception.InvalidIndexException;
@@ -33,6 +33,6 @@ public class DoneCommand extends Command {
         int taskNumber = Integer.parseInt(fullCommand.substring(5));
         Task task = tasks.done(taskNumber);
         storage.save(tasks.getTasks());
-        return new CommandResult(Output.markedTaskAsDoneMessage(task, tasks));
+        return new CommandResult(Message.markedTaskAsDoneMessage(task, tasks));
     }
 }

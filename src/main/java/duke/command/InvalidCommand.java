@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Output;
+import duke.message.Message;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -25,6 +25,6 @@ public class InvalidCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
-        return new CommandResult(Output.invalidCommandMessage());
+        return new CommandResult(Message.invalidCommandMessage());
     }
 }
