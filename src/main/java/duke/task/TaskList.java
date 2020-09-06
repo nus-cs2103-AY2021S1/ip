@@ -27,8 +27,9 @@ public class TaskList {
      * @param newTask The duke.task to be added.
      */
     public void addTask(Task newTask) {
-
+        int numberOfTasks = listOfTasks.size();
         listOfTasks.add(newTask);
+        assert listOfTasks.size() > numberOfTasks : "Addition failed";
     }
 
     /**
@@ -38,11 +39,13 @@ public class TaskList {
      * @throws InvalidRequestException If the command is invalid.
      */
     public void deleteTask(int index) throws InvalidRequestException {
+        int numberOfTasks = listOfTasks.size();
         if (listOfTasks.size() < index || index < 0) {
             throw new InvalidRequestException("You have entered an invalid duke.task "
                     + "number! Please try again.");
         }
         listOfTasks.remove(index - 1);
+        assert listOfTasks.size() < numberOfTasks : "Deletion failed";
     }
 
     /**
@@ -56,8 +59,9 @@ public class TaskList {
             throw new InvalidRequestException("You have entered an invalid duke.task "
                     + "number! Please try again.");
         }
-        this.listOfTasks.get(index - 1).setTaskToBeDone();
-
+        Task task = this.listOfTasks.get(index - 1);
+        task.setTaskToBeDone();
+        assert task.getStatusSymbol().equals("\u2713") : "Failed to mark task as done";
     }
 
     /**
