@@ -34,6 +34,7 @@ public class Event extends Task {
      * @return Date of event.
      */
     public LocalDate getDate() {
+        assert date != null;
         return date;
     }
 
@@ -43,7 +44,7 @@ public class Event extends Task {
      * @return Time of event.
      */
     public LocalTime getTime() {
-        return time;
+        return (time != null) ? time : LocalTime.MIDNIGHT;
     }
 
     /**
