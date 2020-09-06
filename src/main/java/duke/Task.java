@@ -5,7 +5,7 @@ package duke;
  * General task for the multiple types of task.
  * To-do, duke.Deadline and duke.Event classes inherit from this class.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     private boolean isDone;
 
@@ -49,6 +49,12 @@ public class Task {
     public void markAsDone() {
         isDone = true;
     }
+
+    /**
+     * Converts task to a string to be save in to-do.txt file
+     * @return String A string containing task-type, doneStatus, descriptions and details.
+     */
+    public abstract String convertToText();
 
     /**
      * Overridden toString method to output name, type and status of task.

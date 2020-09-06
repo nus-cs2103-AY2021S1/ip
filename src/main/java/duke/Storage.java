@@ -142,7 +142,6 @@ public class Storage {
      */
     protected static void saveFile(File f, TaskList ls) throws IOException {
         ArrayList<String> arrayList = new ArrayList<>();
-        String link = " >> ";
         FileWriter fw = new FileWriter(f.getAbsolutePath());
 
         if (ls.size() == 0) {
@@ -150,39 +149,8 @@ public class Storage {
         } else {
             for (int i = 0; i < ls.size(); i++) {
                 Task task = ls.get(i);
-                if (task instanceof Todo) {
-                    String str;
-                    if (!task.isDone()) {
-                        str = "T" + link + "0" + link + task.getDescription();
-                    } else {
-                        str = "T" + link + "1" + link + task.getDescription();
-                    }
-                    arrayList.add(str);
-
-                } else if (task instanceof Event) {
-                    String str;
-                    if (!task.isDone()) {
-                        str = "E" + link + "0" + link + task.getDescription() + link
-                                + ((Event) task).getAt().toString();
-                    } else {
-                        str = "E" + link + "1" + link + task.getDescription() + link
-                                + ((Event) task).getAt().toString();
-                    }
-                    arrayList.add(str);
-
-                } else if (task instanceof Deadline) {
-                    String str;
-                    if (!task.isDone()) {
-                        str = "D" + link + "0" + link + task.getDescription() + link
-                                + ((Deadline) task).getDate().toString() + " " + ((Deadline) task).getTime().toString();
-                    } else {
-                        str = "D" + link + "1" + link + task.getDescription() + link
-                                + ((Deadline) task).getDate().toString() + " " + ((Deadline) task).getTime().toString();
-                    }
-                    arrayList.add(str);
-                } else {
-                    System.out.println("One of your task is neither a Todo, Event or Deadline");
-                }
+                String str = task.convertToText();
+                arrayList.add(str);
             }
             for (String str : arrayList) {
                 fw.write(str + System.lineSeparator());
