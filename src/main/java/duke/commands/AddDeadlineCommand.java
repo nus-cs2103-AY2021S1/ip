@@ -39,8 +39,9 @@ public class AddDeadlineCommand extends Command {
         m.find();
         String content = m.group("content");
         String datetimeDue = m.group("datetimeDue");
+        String priority = m.group("priority");
         try {
-            Deadline deadline = taskManager.addDeadline(content, datetimeDue);
+            Deadline deadline = taskManager.addDeadline(content, datetimeDue, priority);
             return MessageManager.getAddSuccessMessage(deadline, taskManager);
         } catch (DukeException | IOException exception) {
             return exception.getMessage();

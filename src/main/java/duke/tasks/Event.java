@@ -19,10 +19,11 @@ public class Event extends Task {
      * @param content Contents of the event.
      * @param datetimeString Datetime of the event.
      * @param isComplete Completion status of the event.
+     * @param priority Priority of the event.
      * @throws DukeException If an exception related to Duke occurred.
      */
-    public Event(String content, String datetimeString, Boolean isComplete) throws DukeException {
-        super(content, isComplete);
+    public Event(String content, String datetimeString, Boolean isComplete, String priority) throws DukeException {
+        super(content, isComplete, priority);
         if (datetimeString.replace(" ", "").equals("")) {
             throw new DukeException("Event datetime cannot be empty.");
         }
@@ -38,10 +39,11 @@ public class Event extends Task {
      *
      * @param content Contents of the event.
      * @param datetimeString Datetime of the event.
+     * @param priority Priority of the event.
      * @throws DukeException If an exception related to Duke occurred.
      */
-    public Event(String content, String datetimeString) throws DukeException {
-        super(content);
+    public Event(String content, String datetimeString, String priority) throws DukeException {
+        super(content, priority);
         if (datetimeString.replace(" ", "").equals("")) {
             throw new DukeException("Event datetime cannot be empty.");
         }

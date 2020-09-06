@@ -10,40 +10,40 @@ class EventTest {
 
     @Test
     public void testCreateEvent() throws DukeException {
-        Event event = new Event("Test content", "1990-10-10 10:10");
+        Event event = new Event("Test content", "1990-10-10 10:10", "0");
     }
 
     @Test
     public void testEventSetComplete() throws DukeException {
-        Event event = new Event("Test content", "1990-10-10 10:10");
+        Event event = new Event("Test content", "1990-10-10 10:10", "0");
         event.setComplete(true);
         assertTrue(event.isComplete);
     }
 
     @Test
     public void testIncompleteEventToString() throws DukeException {
-        Event event = new Event("Test content", "1990-10-10 10:10");
-        assertEquals("[E][X] Test content (at: 1990-10-10 10:10)", event.toString());
+        Event event = new Event("Test content", "1990-10-10 10:10", "0");
+        assertEquals("[E][X](!) Test content (at: 1990-10-10 10:10)", event.toString());
     }
 
     @Test
     public void testCompleteEventToString() throws DukeException {
-        Event event = new Event("Test content", "1990-10-10 10:10");
+        Event event = new Event("Test content", "1990-10-10 10:10", "0");
         event.setComplete(true);
-        assertEquals("[E][Y] Test content (at: 1990-10-10 10:10)", event.toString());
+        assertEquals("[E][Y](!) Test content (at: 1990-10-10 10:10)", event.toString());
     }
 
     @Test
     public void testIncompleteEventToSaveString() throws DukeException {
-        Event event = new Event("Test content", "1990-10-10 10:10");
-        assertEquals("E/0/Test content/1990-10-10 10:10", event.toSaveString());
+        Event event = new Event("Test content", "1990-10-10 10:10", "0");
+        assertEquals("E/0/0/Test content/1990-10-10 10:10", event.toSaveString());
     }
 
     @Test
     public void testCompleteEventToSaveString() throws DukeException {
-        Event event = new Event("Test content", "1990-10-10 10:10");
+        Event event = new Event("Test content", "1990-10-10 10:10", "0");
         event.setComplete(true);
-        assertEquals("E/1/Test content/1990-10-10 10:10", event.toSaveString());
+        assertEquals("E/0/1/Test content/1990-10-10 10:10", event.toSaveString());
     }
 
 }

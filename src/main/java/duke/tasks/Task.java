@@ -9,16 +9,24 @@ public class Task {
 
     protected String content;
     protected boolean isComplete;
+    protected Priority priority;
 
     /**
      * Initializes an incomplete task.
      *
      * @param content Contents of the task.
+     * @param priority Priority of the task.
      * @throws DukeException If an exception related to Duke occurred.
      */
-    public Task(String content) throws DukeException {
+    public Task(String content, String priority) throws DukeException {
         if (content.replace(" ", "").equals("")) {
             throw new DukeException("Contents of a task cannot be empty.");
+        }
+        try {
+            int priorityValue = Integer.parseInt(priority);
+            this.priority = Priority.parseIntValue(priorityValue);
+        } catch (NumberFormatException exception) {
+            throw new DukeException("Priority specified is invalid, needs to be an integer.");
         }
         this.content = content;
         this.isComplete = false;
@@ -28,9 +36,12 @@ public class Task {
      * Initializes a task specifying whether the task is complete.
      *
      * @param content Contents of the task.
+     * @param priority Priority of the task.
      * @throws DukeException If an exception related to Duke occurred.
      */
-    public Task(String content, boolean isComplete) {
+    public Task(String content, boolean isComplete, String priority) throws DukeException {
+        int priorityValue = Integer.parseInt(priority);
+        this.priority = Priority.parseIntValue(priorityValue);
         this.content = content;
         this.isComplete = isComplete;
     }
@@ -56,9 +67,9 @@ public class Task {
     @Override
     public String toString() {
         if (isComplete) {
-            return String.format("[Y] %s", content);
+            return String.format("[Y](%s) %s", this.priority, content);
         } else {
-            return String.format("[X] %s", content);
+            return String.format("[X](%s) %s", this.priority, content);
         }
     }
 
@@ -68,7 +79,7 @@ public class Task {
      * @return Storage-safe task string.
      */
     public String toSaveString() {
-        return String.format("%s/%s", booleanToInt(isComplete), content);
+        return String.format("%s/%s/%s", this.priority.toSaveString(), booleanToInt(isComplete), content);
     }
 
     public String getContent() {
