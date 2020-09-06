@@ -1,17 +1,14 @@
 package duke.commands;
 
-import duke.Ui;
-import duke.tasks.TaskManager;
-
 /**
- * duke.commands.CommandHandler is the class that will handle all the duke.commands.
+ * Represents a command handler.
  */
 public class CommandHandler {
     /**
      * Parses the <code>cmd</code> and returns
-     * an appropriate <code>duke.commands.Command</code> object.
+     * an appropriate <code>Command</code> object.
      * @param cmd the string command to be parsed.
-     * @return a <code>duke.commands.Command</code>.
+     * @return a <code>Command</code>.
      */
     public Command parseCommand(String cmd) {
         switch (cmd) {
