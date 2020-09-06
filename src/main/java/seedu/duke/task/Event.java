@@ -71,4 +71,16 @@ public class Event extends Task {
     public boolean hasSameDate(LocalDate date) {
         return this.duration.equals(date);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof Event) {
+            Event otherTask = (Event) obj;
+            return super.equals(otherTask);
+        } else {
+            return false;
+        }
+    }
 }

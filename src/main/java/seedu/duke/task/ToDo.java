@@ -54,4 +54,16 @@ public class ToDo extends Task {
     public boolean hasSameDate(LocalDate date) {
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof ToDo) {
+            ToDo otherTask = (ToDo) obj;
+            return super.equals(otherTask);
+        } else {
+            return false;
+        }
+    }
 }

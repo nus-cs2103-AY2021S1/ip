@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import seedu.duke.exception.DuplicateTaskException;
 import seedu.duke.exception.InvalidTaskException;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
@@ -30,7 +31,12 @@ public class TaskList {
      *
      * @param task the task to be added
      */
-    public void add(Task task) {
+    public void add(Task task) throws DuplicateTaskException {
+        for (Task t : this.tasks) {
+            if (task.equals(t)) {
+                throw new DuplicateTaskException("Task not added because duplicate found: " + t);
+            }
+        }
         this.tasks.add(task);
     }
 

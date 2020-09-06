@@ -5,6 +5,7 @@ import java.io.IOException;
 import seedu.duke.Message;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
+import seedu.duke.exception.DuplicateTaskException;
 import seedu.duke.exception.InvalidCommandFormatException;
 import seedu.duke.task.ToDo;
 
@@ -19,10 +20,14 @@ public class ToDoCommand implements Command {
     }
 
     public Message execute(TaskList taskList, Storage storage) throws InvalidCommandFormatException, IOException {
-        ToDo toDo = ToDo.of(this.command);
-        taskList.add(toDo);
-        storage.appendToFile(toDo);
-        return Message.getTaskAdded(toDo);
+        try {
+            ToDo toDo = ToDo.of(this.command);
+            taskList.add(toDo);
+            storage.appendToFile(toDo);
+            return Message.getTaskAdded(toDo);
+        } catch (DuplicateTaskException e) {
+            return new Message(e.getMessage());
+        }
     }
 
     public boolean isDone() {

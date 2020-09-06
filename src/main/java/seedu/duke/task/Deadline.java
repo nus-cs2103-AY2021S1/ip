@@ -72,4 +72,16 @@ public class Deadline extends Task {
     public boolean hasSameDate(LocalDate date) {
         return this.deadline.equals(date);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else if (obj instanceof Deadline) {
+            Deadline otherTask = (Deadline) obj;
+            return super.equals(otherTask);
+        } else {
+            return false;
+        }
+    }
 }

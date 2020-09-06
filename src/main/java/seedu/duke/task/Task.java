@@ -66,4 +66,9 @@ public abstract class Task {
     public boolean containsKeyword(String keyword) {
         return this.title.contains(keyword);
     }
+
+    public boolean equals(Object obj) {
+        assert obj instanceof Task;
+        return this.title.equals(((Task) obj).title);
+    }
 }

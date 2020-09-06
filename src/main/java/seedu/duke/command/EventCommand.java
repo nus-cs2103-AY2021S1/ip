@@ -5,6 +5,7 @@ import java.io.IOException;
 import seedu.duke.Message;
 import seedu.duke.Storage;
 import seedu.duke.TaskList;
+import seedu.duke.exception.DuplicateTaskException;
 import seedu.duke.exception.InvalidCommandFormatException;
 import seedu.duke.task.Event;
 
@@ -19,10 +20,14 @@ public class EventCommand implements Command {
     }
 
     public Message execute(TaskList taskList, Storage storage) throws InvalidCommandFormatException, IOException {
-        Event event = Event.of(this.command);
-        taskList.add(event);
-        storage.appendToFile(event);
-        return Message.getTaskAdded(event);
+        try {
+            Event event = Event.of(this.command);
+            taskList.add(event);
+            storage.appendToFile(event);
+            return Message.getTaskAdded(event);
+        } catch (DuplicateTaskException e) {
+            return new Message(e.getMessage());
+        }
     }
 
     public boolean isDone() {
