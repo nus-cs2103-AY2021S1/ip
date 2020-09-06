@@ -32,6 +32,7 @@ abstract class TimeTask extends Task {
 
     @Override
     public String toString() {
+        assert this.getDateDescriptor() != null : "date descriptor needs to be defined properly";
         return super.toString()
             + " ("
             + this.getDateDescriptor()

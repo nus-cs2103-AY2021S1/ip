@@ -30,7 +30,7 @@ public class Cli implements Ui {
      */
     public Cli() {
         this.scanner = new Scanner(System.in);
-        this.isActive = true;
+        this.isActive = false;
     }
 
     @Override
@@ -47,12 +47,15 @@ public class Cli implements Ui {
      * Closes this Ui object, and sets isActive() to false.
      */
     public void close() {
+        assert this.isActive : "Cli instance should not be closed twice or closed before initialization.";
         this.scanner.close();
         this.isActive = false;
     }
 
     @Override
     public void start() {
+        assert !this.isActive : "Cli instance should not be initialized twice.";
+        this.isActive = true;
         this.systemMessage(LOGO);
     }
 

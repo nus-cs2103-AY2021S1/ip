@@ -3,6 +3,11 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'ru.vyarus.quality' version '4.3.0'
+}
+
+quality {
+    strict = false
 }
 
 repositories {
@@ -58,5 +63,6 @@ checkstyle {
 }
 
 run{
+    enableAssertions = true
     standardInput = System.in
 }

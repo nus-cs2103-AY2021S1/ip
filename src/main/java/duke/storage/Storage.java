@@ -86,6 +86,7 @@ public class Storage {
      * @param filePath Relative String filepath to the input json file.
      */
     public Storage(String filePath) {
+        assert filePath != null : "filePath cannot be null";
         this.filePath = filePath;
         this.gsonObject = GSON_BUILDER.create();
     }

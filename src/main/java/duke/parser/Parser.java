@@ -21,6 +21,7 @@ public class Parser {
      * @param ui Ui object that commands will use.
      */
     public Parser(TaskList taskList, Ui ui) {
+        assert taskList != null && ui != null : "taskList and ui should not be null";
         this.taskList = taskList;
         this.ui = ui;
     }
