@@ -7,8 +7,6 @@ import bob.exceptions.BobInvalidDateAndTimeException;
 import bob.exceptions.BobInvalidNumberException;
 import bob.exceptions.BobListIndexOutOfBoundsException;
 import bob.storage.Storage;
-//import bob.ui.Ui;
-
 
 /**
  * Represents command recognisable by Bob.

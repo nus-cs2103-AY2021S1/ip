@@ -120,7 +120,8 @@ public class Tasklist {
     public String findTasks(String input) {
         StringBuilder tasksFound = new StringBuilder();
         for (Task task: list) {
-            if (task.toString().contains(input)) {
+            boolean containsInput = task.toString().contains(input);
+            if (containsInput) {
                 tasksFound.append(task.toString()).append("\n");
             }
         }
