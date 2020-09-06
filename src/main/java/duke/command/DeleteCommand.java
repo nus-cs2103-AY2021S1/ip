@@ -33,8 +33,9 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
         try {
-            // parse for argument - item number
+            // Get index of task item from command argument
             int itemNumber = Integer.parseInt(args.split(" ")[1]);
+            assert itemNumber <= taskItems.getSize() : "Cannot remove from index larger than taskItems length";
             Task task = taskItems.removeTask(itemNumber);
             storage.saveTaskToMemory(taskItems.getAll());
             return ui.deleteTaskReply(task, taskItems);

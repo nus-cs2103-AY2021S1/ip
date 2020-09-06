@@ -100,6 +100,7 @@ public class Storage {
                 String savedTask = sc.nextLine();
                 // Array of task type, status, description and time
                 String[] parsedTasks = savedTask.split(",");
+                assert parsedTasks.length >= 3 : "task retrieved must have type, status, description";
                 String taskType = parsedTasks[0];
                 boolean isDone = parsedTasks[1].equals("1") ? true : false;
                 String description = parsedTasks[2];
