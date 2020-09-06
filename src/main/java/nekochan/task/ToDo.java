@@ -74,6 +74,40 @@ public class ToDo extends Task {
         return description.contains(searchParameter) || searchParameter.contains(description);
     }
 
+    /**
+     * Returns true if both {@code ToDo} are similar.
+     */
+    @Override
+    boolean similar(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof ToDo)) {
+            return false;
+        }
+
+        ToDo other = (ToDo) obj;
+        return other.description.toLowerCase().equals(description.toLowerCase());
+    }
+
+    /**
+     * Returns true if both {@code ToDo} have the same identity or data.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof ToDo)) {
+            return false;
+        }
+
+        ToDo other = (ToDo) obj;
+        return other.description.equals(description);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

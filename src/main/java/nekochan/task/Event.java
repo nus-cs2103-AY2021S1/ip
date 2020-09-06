@@ -161,6 +161,44 @@ public class Event extends Task {
     }
 
     /**
+     * Returns true if both {@code Event} have the same identity or data.
+     */
+    @Override
+    boolean similar(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Event)) {
+            return false;
+        }
+
+        Event other = (Event) obj;
+        return other.description.toLowerCase().equals(description.toLowerCase())
+                && other.startDateTime.equals(startDateTime)
+                && other.endDateTime.equals(endDateTime);
+    }
+
+    /**
+     * Returns true if both {@code Event} have the same identity or data.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Event)) {
+            return false;
+        }
+
+        Event other = (Event) obj;
+        return other.description.equals(description)
+                && other.startDateTime.equals(startDateTime)
+                && other.endDateTime.equals(endDateTime);
+    }
+
+    /**
      * Returns a string representation of this {@code Event} object.
      *
      * @return a string representation of this {@code Event} object.

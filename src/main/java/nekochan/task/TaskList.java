@@ -3,8 +3,11 @@ package nekochan.task;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import nekochan.exceptions.NekoDuplicateTaskException;
 import nekochan.exceptions.NekoException;
+import nekochan.exceptions.NekoSimilarTaskException;
 import nekochan.util.Messages;
 
 /**
@@ -36,12 +39,26 @@ public class TaskList implements Iterable<Task> {
     /**
      * Adds the specified {@code Task} to the end of this {@code TaskList}.
      *
-     * @param item the task to be inserted.
+     * @param task the task to be inserted.
      * @return the task that was inserted.
+     * @throws NekoDuplicateTaskException if a similar copy of {@code task} exists.
+     * @throws NekoDuplicateTaskException if a duplicate copy of {@code task} exists.
      */
-    public Task add(Task item) {
-        store.add(item);
-        return item;
+    public Task add(Task task) throws NekoSimilarTaskException, NekoDuplicateTaskException {
+        // Do not add task if there is an exact copy.
+        boolean hasDuplicate = store.stream().anyMatch((x) -> x.equals(task));
+        if (hasDuplicate) {
+            throw new NekoDuplicateTaskException(Messages.DUPLICATE_TASK_ERROR);
+        }
+
+        // Add task but show an error if there is a similar task.
+        List<Task> similars = store.stream().filter((x) -> x.similar(task)).collect(Collectors.toList());
+        boolean hasSimilars = similars.size() > 0;
+        store.add(task);
+        if (hasSimilars) {
+            throw new NekoSimilarTaskException(Messages.SIMILAR_TASK_ERROR, similars);
+        }
+        return task;
     }
 
     /**

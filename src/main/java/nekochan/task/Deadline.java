@@ -98,6 +98,42 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns true if both {@code Deadline} are similar.
+     */
+    @Override
+    boolean similar(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline other = (Deadline) obj;
+        return other.description.toLowerCase().equals(description.toLowerCase())
+                && other.dateTime.equals(dateTime);
+    }
+
+    /**
+     * Returns true if both {@code Deadline} have the same identity or data.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline other = (Deadline) obj;
+        return other.description.equals(description)
+                && other.dateTime.equals(dateTime);
+    }
+
+    /**
      * Returns a string representation of this {@code Deadline}.
      *
      * @return a string representation of this {@code Deadline}.
