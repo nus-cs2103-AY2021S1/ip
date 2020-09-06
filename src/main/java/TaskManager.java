@@ -30,8 +30,12 @@ public class TaskManager {
      *
      * @param taskIndex The int that represents index of the task in the list.
      */
-    public void removeTask(int taskIndex) {
-        taskList.remove(taskIndex);
+    public void removeTask(int taskIndex) throws DukeException {
+        try {
+            taskList.remove(taskIndex);
+        } catch (IndexOutOfBoundsException e) {
+            throw new OutOfBoundTaskException();
+        }
     }
 
     /**
@@ -39,8 +43,12 @@ public class TaskManager {
      *
      * @param index The int that represents index of the task in the list.
      */
-    public void markTaskAsDone(int index) {
-        taskList.get(index).setTaskAsDone();
+    public void markTaskAsDone(int index) throws DukeException {
+        try {
+            taskList.get(index).setTaskAsDone();
+        } catch (IndexOutOfBoundsException e) {
+            throw new OutOfBoundTaskException();
+        }
     }
 
     /**
@@ -49,8 +57,12 @@ public class TaskManager {
      * @param index The int that represents index of the task in the list.
      * @return The Task that has the specified index.
      */
-    public Task getTask(int index) {
-        return taskList.get(index);
+    public Task getTask(int index) throws DukeException {
+        try {
+            return taskList.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new OutOfBoundTaskException();
+        }
     }
 
     /**
