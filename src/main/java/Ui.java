@@ -7,11 +7,6 @@ public class Ui {
 
     protected static final String LINE = "______________________________________________________";
 
-    protected static final String GREETING = "____________________________________________________________\n"
-            + "Hello! I'm Duke\n"
-            + "What can I do for you?\n"
-            + "____________________________________________________________";
-
     /**
      * Returns the farewell message
      *
@@ -19,15 +14,6 @@ public class Ui {
      */
     protected String farewell() {
         return this.LINE + "\n" + "Bye. Hope to see you again soon!" + "\n" + this.LINE;
-    }
-
-    /**
-     * Returns the farewell message as a String
-     *
-     * @return String
-     */
-    protected String farewellMsg() {
-        return this.LINE + "Bye. Hope to see you again soon!" + this.LINE;
     }
 
     /**
