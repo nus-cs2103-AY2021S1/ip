@@ -40,8 +40,8 @@ public class AddCommand extends Command {
      * @param taskList Task list where tasks are stored.
      * @param ui Ui to display response.
      * @param storage Storage to save changes to disk.
-     * @throws ViscountSaveDataException If exception occurs with writing to disk.
      * @return The response from Viscount.
+     * @throws ViscountSaveDataException If exception occurs with writing to disk.
      */
     @Override
     public String executeAndGetResponse(TaskList taskList, Ui ui, Storage storage) throws ViscountSaveDataException {

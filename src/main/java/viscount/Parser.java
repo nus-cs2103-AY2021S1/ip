@@ -11,7 +11,10 @@ import java.util.List;
 
 import viscount.command.AddCommand;
 import viscount.command.Command;
+import viscount.command.DeleteAllCommand;
+import viscount.command.DeleteAllDoneCommand;
 import viscount.command.DeleteCommand;
+import viscount.command.DoneAllCommand;
 import viscount.command.DoneCommand;
 import viscount.command.ListCommand;
 import viscount.exception.ViscountDateTimeParseException;
@@ -299,6 +302,10 @@ public class Parser {
             throw new ViscountMissingArgumentException("task number");
         }
 
+        if (arguments.get(1).equals("all")) {
+            return new DoneAllCommand();
+        }
+
         try {
             int taskIndex = Integer.parseInt(arguments.get(1)) - 1;
             return new DoneCommand(taskIndex);
@@ -317,6 +324,14 @@ public class Parser {
     private static DeleteCommand parseDeleteCommand(List<String> arguments) throws ViscountException {
         if (arguments.size() < 2) {
             throw new ViscountMissingArgumentException("task number");
+        }
+
+        if (arguments.get(1).equals("all")) {
+            return new DeleteAllCommand();
+        }
+
+        if (arguments.get(1).equals("done")) {
+            return new DeleteAllDoneCommand();
         }
 
         try {

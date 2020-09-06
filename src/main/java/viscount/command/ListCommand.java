@@ -45,8 +45,8 @@ public class ListCommand extends Command {
      * @param taskList Task list where tasks are stored.
      * @param ui Ui to display response.
      * @param storage Storage to save changes to disk.
-     * @throws ViscountDateTimeParseException If exception occurs with parsing date string
      * @return The response from Viscount.
+     * @throws ViscountDateTimeParseException If exception occurs with parsing date string
      */
     @Override
     public String executeAndGetResponse(TaskList taskList, Ui ui, Storage storage) throws ViscountException {
@@ -59,6 +59,10 @@ public class ListCommand extends Command {
         Predicate<Task> filterByDescription = task -> task.getDescription().contains(findString);
 
         List<Task> tasks = taskList.getTasks();
+
+        if (tasks.isEmpty()) {
+            return ui.getEmptyListResponse();
+        }
 
         if (dateString.isEmpty()) {
             List<Task> filteredTasks = tasks

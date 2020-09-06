@@ -50,6 +50,10 @@ public class Ui {
                 convertTaskListToString(tasks));
     }
 
+    public String getEmptyListResponse() {
+        return "Your task list is empty! Add a new task to get started.";
+    }
+
     /**
      * Gets the add task response.
      *
@@ -79,6 +83,17 @@ public class Ui {
     }
 
     /**
+     * Gets the mark all task as done response.
+     *
+     * @param tasks Tasks marked as done.
+     * @return The appropriate mark all task as done response.
+     */
+    public String getDoneAllResponse(List<Task> tasks) {
+        return String.format("Very good! I have marked all these tasks as done:\n%s",
+                convertTaskListToString(tasks));
+    }
+
+    /**
      * Gets the delete task response.
      *
      * @param task Task deleted.
@@ -91,6 +106,30 @@ public class Ui {
         return String.format("Very well. I've removed this %s:\n%s\nNow you have %d tasks in the list.",
                 task.getTaskType().name().toLowerCase(),
                 task.toString(),
+                tasksSize);
+    }
+
+    /**
+     * Gets the delete all task response.
+     *
+     * @param tasks Tasks deleted.
+     * @return The appropriate delete all task response.
+     */
+    public String getDeleteAllResponse(List<Task> tasks) {
+        return String.format("Very well. I've removed all the tasks in the list:\n%s\nThe list is now empty.",
+                convertTaskListToString(tasks));
+    }
+
+    /**
+     * Gets the delete all done tasks response.
+     *
+     * @param tasks Tasks deleted.
+     * @return The appropriate delete all done tasks response.
+     */
+    public String getDeleteAllDoneResponse(List<Task> tasks, int tasksSize) {
+        return String.format(
+                "Very well. I've removed all the done tasks in the list:\n%s\nNow you have %d tasks in the list",
+                convertTaskListToString(tasks),
                 tasksSize);
     }
 

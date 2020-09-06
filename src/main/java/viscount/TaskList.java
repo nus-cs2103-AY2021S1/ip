@@ -1,6 +1,8 @@
 package viscount;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import viscount.exception.ViscountIndexOutOfBoundsException;
 import viscount.task.Task;
@@ -42,6 +44,24 @@ public class TaskList {
     }
 
     /**
+     * Marks all not done tasks as done and returns a list of these tasks.
+     *
+     * @return List of previously not done tasks.
+     */
+    public List<Task> markAndGetAllNotDoneTasks() {
+        List<Task> notDoneTasks = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (!task.getIsDone()) {
+                notDoneTasks.add(task);
+                task.setDone(true);
+            }
+        }
+
+        return notDoneTasks;
+    }
+
+    /**
      * Removes task from list by its index in the list.
      *
      * @param taskIndex Index of task removed.
@@ -54,6 +74,34 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new ViscountIndexOutOfBoundsException(taskIndex);
         }
+    }
+
+    /**
+     * Deletes all tasks and returns the task list before all tasks were deleted.
+     *
+     * @return Task list before all tasks were deleted.
+     */
+    public List<Task> deleteAndGetAllTasks() {
+        List<Task> copyOfTasks = new ArrayList<>(tasks);
+
+        tasks = new ArrayList<>();
+
+        return copyOfTasks;
+    }
+
+    /**
+     * Deletes all done tasks and returns a list of all the deleted tasks that were done.
+     *
+     * @return List of all the deleted tasks that were done.
+     */
+    public List<Task> deleteAndGetAllDoneTasks() {
+        List<Task> doneTasks = tasks.stream()
+                .filter(Task::getIsDone)
+                .collect(Collectors.toList());
+
+        tasks.removeAll(doneTasks);
+
+        return doneTasks;
     }
 
     /**

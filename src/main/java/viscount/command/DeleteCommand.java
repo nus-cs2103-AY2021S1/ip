@@ -11,9 +11,9 @@ import viscount.task.Task;
  * Represents a delete command.
  */
 public class DeleteCommand extends Command {
-    private int taskIndex;
+    private Integer taskIndex;
 
-    public DeleteCommand(int taskIndex) {
+    public DeleteCommand(Integer taskIndex) {
         this.taskIndex = taskIndex;
     }
 
@@ -23,9 +23,9 @@ public class DeleteCommand extends Command {
      * @param taskList Task list where tasks are stored.
      * @param ui Ui to display response.
      * @param storage Storage to save changes to disk.
+     * @return The response from Viscount.
      * @throws ViscountIndexOutOfBoundsException If taskIndex is < 0 or >= list size
      * @throws ViscountSaveDataException If exception occurs with writing to disk.
-     * @return The response from Viscount.
      */
     @Override
     public String executeAndGetResponse(TaskList taskList, Ui ui, Storage storage)
