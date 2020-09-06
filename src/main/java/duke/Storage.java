@@ -72,6 +72,7 @@ public class Storage {
      * @throws IOException The exception arises when there are issues reading from a file
      */
     public void populateToLstOfTask(List<Task> lstOfTask) throws IOException {
+
         createNewTextFileCalledTask();
         assert file != null;
 
