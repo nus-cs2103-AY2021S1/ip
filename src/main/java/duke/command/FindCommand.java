@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import duke.task.Task;
 import duke.task.TaskList;
@@ -23,13 +24,16 @@ public class FindCommand extends Command {
 
         ArrayList<String> msg = new ArrayList<>();
         int len = taskList.size();
-        for (int i = 1; i <= len; i++) {
-            Task task = taskList.get(i - 1);
-            if (task.containsKeyword(keyword)) {
-                String output = i + "." + task.toString();
-                msg.add(output);
-            }
-        }
+
+        Stream
+                .iterate(1 , i -> i <= len, i -> i + 1)
+                .forEach(i -> {
+                    Task task = taskList.get(i - 1);
+                    if (task.containsKeyword(keyword)) {
+                        String output = i + "." + task.toString();
+                        msg.add(output);
+                    }
+                });
 
         boolean hasMatches = msg.size() > 0;
         String firstLine = hasMatches
