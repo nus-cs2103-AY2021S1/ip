@@ -13,11 +13,19 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
-}
 
-javafx {
-    version = "14"
-    modules = [ 'javafx.controls', 'javafx.base', 'javafx.fxml', 'javafx.graphics' ]
+    implementation group: 'org.openjfx', name: 'javafx-base', version: 14, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: 14, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: 14, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: 14, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: 14, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: 14, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: 14, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: 14, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: 14, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: 14, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: 14, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: 14, classifier: 'linux'
 }
 
 test {
