@@ -19,8 +19,8 @@ public class Ui {
             + "done <task number> : marks the specified task as done\n"
             + "delete <task number> : deletes the specified task\n"
             + "todo <task name> : adds a ToDo task\n"
-            + "deadline <task name> /by YYYY-MM-DD : adds a Deadline task\n"
-            + "event <task name> /at YYYY-MM-DD TT:TT-TT:TT : adds an Event task\n"
+            + "deadline <task name> /by <YYYY-MM-DD> : adds a Deadline task\n"
+            + "event <task name> /at <YYYY-MM-DD> <TT:TT-TT:TT> : adds an Event task\n"
             + "Do note that Date and Time must have the specified format\n";
 
     private TaskList taskList;
