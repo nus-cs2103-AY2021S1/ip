@@ -21,6 +21,18 @@ public class EventCommand extends Command {
     }
 
     /**
+     * Gives instructions on how to use the event command.
+     * @return A string of instructions to use the command.
+     */
+    public static String getInstruction() {
+        return "Adds an event task to the tasks list\n"
+                + "Format: event [desc] /at [time]\n"
+                + "desc: The description of the event task\n"
+                + "time: the date and time in the following format: dd-MM-YYYY hhMM\n"
+                + "Example: 02-10-2020 1430 will represent 2 Oct 2020 2:30pm";
+    }
+
+    /**
      * @return The task description.
      */
     public String getTask() {

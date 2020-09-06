@@ -25,6 +25,17 @@ public class FindCommand extends Command {
     }
 
     /**
+     * Gives instructions on how to use the find command.
+     * @return A string of instructions to use the command.
+     */
+    public static String getInstruction() {
+        return "Finds tasks matching the given keywords.\n"
+                + "Format: find keywords[,...]\n"
+                + "keywords: the list of keywords, separated by whitespace\n"
+                + "Example: keyword key1 key2";
+    }
+
+    /**
      * @return The keywords stored within this command.
      */
     public String[] getKeywords() {

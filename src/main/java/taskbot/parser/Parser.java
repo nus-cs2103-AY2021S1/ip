@@ -7,6 +7,7 @@ import taskbot.command.DoneCommand;
 import taskbot.command.EventCommand;
 import taskbot.command.ExitCommand;
 import taskbot.command.FindCommand;
+import taskbot.command.HelpCommand;
 import taskbot.command.ListCommand;
 import taskbot.command.TodoCommand;
 import taskbot.command.UpcomingCommand;
@@ -38,6 +39,8 @@ public class Parser {
         }
 
         switch (commandArgs[0]) {
+        case "help":
+            return createHelpCommand(commandArgs, isArgsEmpty);
         case "todo":
             return createTodoCommand(commandArgs, isArgsEmpty);
         case "deadline":
@@ -59,6 +62,14 @@ public class Parser {
         default:
             throw new InvalidCommandException("That was not a valid command.\nPlease try again.");
         }
+    }
+
+    private static HelpCommand createHelpCommand(String[] commandArgs, boolean isArgsEmpty) {
+        if (isArgsEmpty) {
+            // No arguments supplied, so we instruct the user on how to use the help command.
+            return new HelpCommand("help");
+        }
+        return new HelpCommand(commandArgs[1]);
     }
 
     private static TodoCommand createTodoCommand(String[] commandArgs, boolean isArgsEmpty)

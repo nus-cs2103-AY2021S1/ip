@@ -13,6 +13,15 @@ public class ListCommand extends Command {
         super(false);
     }
 
+    /**
+     * Gives instructions on how to use the list command.
+     * @return A string of instructions to use the command.
+     */
+    public static String getInstruction() {
+        return "Lists the tasks in the order of when they were added.\n"
+                + "Format: list\n";
+    }
+
     @Override
     public String execute(TaskList taskList) {
         return taskList.listTasks();

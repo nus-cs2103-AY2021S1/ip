@@ -13,6 +13,15 @@ public class ExitCommand extends Command {
         super(true);
     }
 
+    /**
+     * Gives instructions on how to use the exit command.
+     * @return A string of instructions to use the command.
+     */
+    public static String getInstruction() {
+        return "Exits the program.\n"
+                + "Format: exit";
+    }
+
     @Override
     public String execute(TaskList taskList) {
         // Returns a farewell message
