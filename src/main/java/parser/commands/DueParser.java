@@ -19,6 +19,7 @@ public class DueParser {
      * @return lists all due tasks
      */
     public static String parse(Scanner input, TaskList tl) {
+        assert input != null;
         try {
             LocalDate dueDate = LocalDate.parse(input.nextLine().trim());
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");

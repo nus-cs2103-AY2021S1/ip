@@ -19,9 +19,10 @@ public class TaskParser {
      * @return confirmation message of adding task
      */
     public static String parse(String firstWord, Scanner input, TaskList tl, Storage stores) {
+        assert input != null;
         try {
-            // whitespace in front of nextLine
             if (input.hasNextLine()) {
+                // whitespace in front of nextLine
                 String remainingWords = input.nextLine().trim();
                 String returnString = tl.getAddTaskString(firstWord, remainingWords);
                 // save to save file

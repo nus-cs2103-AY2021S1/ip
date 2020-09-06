@@ -18,6 +18,7 @@ public class DoneParser {
      * @return confirmation message of marking task as done
      */
     public static String parse(Scanner input, TaskList tl, Storage stores) {
+        assert input != null;
         String index;
         try {
             if (input.hasNext()) {
@@ -30,7 +31,8 @@ public class DoneParser {
         }
         int intIndex = Integer.parseInt(index);
         try {
-            if (intIndex <= tl.getStorage().size() && intIndex > 0) {
+            boolean isValidIndex = intIndex <= tl.getStorage().size() && intIndex > 0;
+            if (isValidIndex) {
                 String returnString = tl.getMarkCompleteString(intIndex - 1);
                 // save to save file
                 stores.save(tl.getStorage());
