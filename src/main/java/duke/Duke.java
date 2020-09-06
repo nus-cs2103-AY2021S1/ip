@@ -13,6 +13,7 @@ public class Duke {
     private Ui ui = new Ui();
     private TaskList taskList;
     private Parser parser = new Parser();
+
     /**
      * Initializes a Duke object
      */
