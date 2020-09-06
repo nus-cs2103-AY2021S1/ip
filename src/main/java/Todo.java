@@ -5,8 +5,8 @@ import java.util.Optional;
  *  Represents a to-do task with only a description.
  */
 public class Todo extends Task {
-    public Todo(String description) {
-        super(description);
+    public Todo(String description, Optional<String> notes) {
+        super(description, notes.map(note -> "|Note: " + note));
     }
 
     /**
@@ -19,6 +19,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "T|" + super.toString();
+        return "T|" + super.toString() + notes.orElse("");
     }
 }

@@ -76,14 +76,21 @@ public class Parser {
      * Checks if the to-do command has a description and processes it.
      * @param command The original command from user.
      * @param cmd The command in array from user.
-     * @return A processed command in the format: [to-do, task description].
+     * @return A processed command in the format: [to-do, task description, notes(if present)].
      * @throws NoDescriptionException if no description was provided by user.
      */
     private String[] checkValidTodo(String command, String[] cmd) throws NoDescriptionException {
         if (cmd.length < 2) {
             throw new NoDescriptionException(cmd[0]);
         } else {
-            return new String[]{cmd[0], command.replaceFirst(cmd[0] + " ", "")};
+            String[] detectNotes = command.split("/");
+            boolean hasNotes = detectNotes.length > 1;
+            if (hasNotes) {
+                return new String[]{cmd[0], detectNotes[0].replaceFirst(cmd[0] + " ", "")
+                        , detectNotes[1]};
+            } else {
+                return new String[]{cmd[0], detectNotes[0].replaceFirst(cmd[0] + " ", "")};
+            }
         }
     }
 
@@ -91,7 +98,7 @@ public class Parser {
      * Checks if the deadline command has a description and valid date time and processes it.
      * @param command The original command from user.
      * @param cmd The command in array from user.
-     * @return A processed command in the format: [deadline, task description, date, time].
+     * @return A processed command in the format: [deadline, task description, date, time, notes (if present)].
      * @throws NoDescriptionException if no description was provided by user.
      * @throws InvalidDateAndTimeException if an invalid date is called.
      */
@@ -101,22 +108,45 @@ public class Parser {
             throw new NoDescriptionException(cmd[0]);
         } else {
             try {
-                LocalDate.parse(cmd[cmd.length - 2], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                LocalTime.parse(cmd[cmd.length - 1], DateTimeFormatter.ofPattern("HHmm"));
                 String[] splitBySlash = command.split("/");
-                return new String[]{cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
-                        cmd[cmd.length - 2], cmd[cmd.length - 1]};
-            } catch (DateTimeParseException e) {
+                String[] getDateAndTime = checkDeadlineInputDateTime(splitBySlash[1]);
+                String date = getDateAndTime[0];
+                String time = getDateAndTime[1];
+                LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));
+                boolean hasNotes = splitBySlash.length > 2;
+                if (hasNotes) {
+                    return new String[]{cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
+                            date, time, splitBySlash[2]};
+                } else {
+                    return new String[]{cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
+                            date, time};
+                }
+            } catch (DateTimeParseException | InvalidDateAndTimeException e) {
                 throw new InvalidDateAndTimeException();
             }
         }
     }
 
     /**
+     * Checks if the user has correctly input date and time for deadline.
+     * @param dateTimeInput the string to be parsed for date and time.
+     * @return an array {date, time}.
+     * @throws InvalidDateAndTimeException if date or time detected in the incorrect format.
+     */
+    private String[] checkDeadlineInputDateTime(String dateTimeInput) throws InvalidDateAndTimeException {
+        try {
+            return new String[]{dateTimeInput.split(" ")[0], dateTimeInput.split(" ")[1]};
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidDateAndTimeException();
+        }
+    }
+    /**
      * Checks if the event command has a description and valid date time and processes it.
      * @param command The original command from user.
      * @param cmd The command in array from user.
-     * @return A processed command in the format: [event, task description, date, start time, end time].
+     * @return A processed command in the format: [event, task description, date, start time,
+     * end time, notes (if present)].
      * @throws NoDescriptionException if no description was provided by user.
      * @throws InvalidDateAndTimeException if an invalid date time is called.
      */
@@ -126,16 +156,41 @@ public class Parser {
             throw new NoDescriptionException(cmd[0]);
         } else {
             try {
-                LocalDate.parse(cmd[cmd.length - 2], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                LocalTime.parse(cmd[cmd.length - 1].split("-")[0], DateTimeFormatter.ofPattern("HHmm"));
-                LocalTime.parse(cmd[cmd.length - 1].split("-")[1], DateTimeFormatter.ofPattern("HHmm"));
                 String[] splitBySlash = command.split("/");
-                return new String[]{cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
-                        cmd[cmd.length - 2], cmd[cmd.length - 1].split("-")[0],
-                        cmd[cmd.length - 1].split("-")[1]};
-            } catch (DateTimeParseException e) {
+                String[] getDateAndTime = checkEventInputDateTime(splitBySlash[1]);
+                String date = getDateAndTime[0];
+                String startTime = getDateAndTime[1];
+                String endTime = getDateAndTime[2];
+                LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalTime.parse(startTime, DateTimeFormatter.ofPattern("HHmm"));
+                LocalTime.parse(endTime, DateTimeFormatter.ofPattern("HHmm"));
+                boolean hasNotes = splitBySlash.length > 2;
+                if (hasNotes) {
+                    return new String[]{cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
+                            date, startTime, endTime, splitBySlash[2]};
+                } else {
+                    return new String[]{cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
+                            date, startTime, endTime};
+                }
+            } catch (DateTimeParseException | InvalidDateAndTimeException e) {
                 throw new InvalidDateAndTimeException();
             }
+        }
+    }
+
+    /**
+     * Checks if the user has correctly input date and time for event.
+     * @param dateTimeInput the string to be parsed for date and time.
+     * @return an array {date, startTime, endTime}.
+     * @throws InvalidDateAndTimeException if date or time detected in the incorrect format.
+     */
+    private String[] checkEventInputDateTime(String dateTimeInput) throws InvalidDateAndTimeException {
+        try {
+            return new String[]{dateTimeInput.split(" ")[0],
+                    dateTimeInput.split(" ")[1].split("-")[0],
+                    dateTimeInput.split(" ")[1].split("-")[1]};
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidDateAndTimeException();
         }
     }
 }

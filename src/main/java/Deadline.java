@@ -11,8 +11,9 @@ public class Deadline extends Task {
     private LocalDate deadlineDate;
     private LocalTime deadlineTime;
 
-    public Deadline(String description, LocalDate deadlineDate, LocalTime deadlineTime) {
-        super(description);
+    public Deadline(String description, LocalDate deadlineDate,
+                    LocalTime deadlineTime, Optional<String> notes) {
+        super(description, notes.map(note -> "|Note: " + note));
         this.deadlineDate = deadlineDate;
         this.deadlineTime = deadlineTime;
     }
@@ -29,6 +30,7 @@ public class Deadline extends Task {
     public String toString() {
         return "D|" + super.toString() + "|"
                 + deadlineDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + "|"
-                + deadlineTime.format(DateTimeFormatter.ofPattern("hh.mma"));
+                + deadlineTime.format(DateTimeFormatter.ofPattern("hh.mma"))
+                + notes.orElse("");
     }
 }

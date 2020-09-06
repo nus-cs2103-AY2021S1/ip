@@ -8,10 +8,12 @@ import java.util.Optional;
 abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected Optional<String> notes;
 
-    public Task(String description) {
+    public Task(String description, Optional<String> notes) {
         this.description = description;
         this.isDone = false;
+        this.notes = notes;
     }
 
     public abstract Optional<LocalDate> getDate();

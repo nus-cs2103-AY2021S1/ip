@@ -12,8 +12,9 @@ public class Event extends Task {
     private LocalTime startTime;
     private LocalTime endTime;
 
-    public Event(String description, LocalDate eventDate, LocalTime startTime, LocalTime endTime) {
-        super(description);
+    public Event(String description, LocalDate eventDate, LocalTime startTime,
+                 LocalTime endTime, Optional<String> notes) {
+        super(description, notes.map(note -> "|Note: " + note));
         this.eventDate = eventDate;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -32,7 +33,8 @@ public class Event extends Task {
         return "E|" + super.toString() + "|"
                 + eventDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + "|"
                 + startTime.format(DateTimeFormatter.ofPattern("hh.mma")) + " to "
-                + endTime.format(DateTimeFormatter.ofPattern("hh.mma"));
+                + endTime.format(DateTimeFormatter.ofPattern("hh.mma"))
+                + notes.orElse("");
     }
 }
 
