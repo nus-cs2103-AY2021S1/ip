@@ -5,7 +5,7 @@ package duke.exceptions;
  */
 public class InvalidTimeException extends Exception {
     /**
-     * Create a new InvalidTimeException.
+     * Creates a new InvalidTimeException.
      *
      * @param message The message of this exception
      */

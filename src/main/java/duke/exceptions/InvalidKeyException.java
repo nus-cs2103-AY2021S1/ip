@@ -5,7 +5,7 @@ package duke.exceptions;
  */
 public class InvalidKeyException extends Exception{
     /**
-     * Create a new InvalidKeyException.
+     * Creates a new InvalidKeyException.
      *
      * @param message The message of this exception
      */

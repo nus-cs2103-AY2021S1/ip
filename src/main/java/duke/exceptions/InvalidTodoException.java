@@ -5,7 +5,7 @@ package duke.exceptions;
  */
 public class InvalidTodoException extends Exception {
     /**
-     * Create a new InvalidTodoException.
+     * Creates a new InvalidTodoException.
      *
      * @param message The message of this exception
      */

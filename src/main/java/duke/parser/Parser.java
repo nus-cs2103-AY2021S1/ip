@@ -4,15 +4,7 @@ import duke.exceptions.InvalidDeadlineException;
 import duke.exceptions.InvalidEventException;
 import duke.exceptions.InvalidKeyException;
 import duke.exceptions.InvalidRequestException;
-import duke.tasks.Event;
-import duke.tasks.Deadline;
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-import duke.tasks.Todo;
-import duke.storage.Storage;
-
-import java.util.ArrayList;
-import java.util.Scanner;
+import duke.tasks.*;
 
 /**
  * Interpret the command and do the instruction.
@@ -24,6 +16,7 @@ public class Parser {
 
     /**
      * Sets taskList for Parser.
+     *
      * @param list TaskList that manages tasks.
      */
     public static void setTaskList(TaskList list) {
@@ -32,25 +25,26 @@ public class Parser {
 
 
     /**
-     * Process a command sentence.
+     * Processes a command sentence.
+     *
      * @param command Take in the command to be processed.
      * @throws Exception Throws an exception if the command can not be interpreted.
      */
     public static String processCommand(String command) throws Exception {
 
-        if(command.equals("list")){
+        if (command.equals("list")) {
 
             return taskList.printTaskList();
 
-        }else if(command.contains("hi")){
+        } else if (command.contains("hi")) {
 
             return "Hi!";
 
-        }else if(command.contains("bye")){
+        } else if (command.contains("bye")) {
 
             return "Bye!";
 
-        }else{
+        } else {
 
             String[] words = command.split(" ");
 
@@ -58,67 +52,67 @@ public class Parser {
 
             assert numberOfWords >= 1 : "Command is incomplete!";
 
-            if(numberOfWords == 0){
+            if (numberOfWords == 0) {
                 throw new InvalidRequestException("Command is empty. Please enter a valid command.");
             }
 
-            if(words[0].equals("done")){
+            if (words[0].equals("done")) {
 
-                if(numberOfWords == 1){
+                if (numberOfWords == 1) {
                     throw new InvalidRequestException("Which task would you like to mark as done?");
                 }
-                if(numberOfWords > 2){
+                if (numberOfWords > 2) {
                     throw new InvalidRequestException("Sorry. I can only handle one task at a time.");
                 }
 
                 Integer index = Integer.parseInt(words[1]);
 
-                if(taskList.findListSize() < index){
+                if (taskList.findListSize() < index) {
                     throw new InvalidRequestException("I could not find this task, please enter a valid task index.");
                 }
-                if(index < 0){
+                if (index < 0) {
                     throw new InvalidRequestException("Task index is invalid, please enter a valid one.");
                 }
 
                 return taskList.markAsDone(index);
 
-            }else if(words[0].equals("delete")){
+            } else if (words[0].equals("delete")) {
 
                 if (numberOfWords == 1) {
                     throw new InvalidRequestException("What task would you like to delete from the list?");
                 }
 
-                if(numberOfWords > 2){
+                if (numberOfWords > 2) {
                     throw new InvalidRequestException("Sorry, I can only handle one task at a time.");
                 }
 
                 Integer index = Integer.parseInt(words[1]);
 
-                if(taskList.findListSize() < index){
+                if (taskList.findListSize() < index) {
                     throw new InvalidRequestException("I could not find this task, please enter a valid task index.");
                 }
-                if(index < 0){
+                if (index < 0) {
                     throw new InvalidRequestException("Task index is invalid, please enter a valid one.");
                 }
 
                 return taskList.deleteTask(index);
 
 
-            }else if(words[0].equals("find")){
+            } else if (words[0].equals("find")) {
 
-                if(words.length>2){
+                if (words.length > 2) {
                     throw new InvalidKeyException("Sorry, I can only handle one keyword.");
                 }
 
                 return taskList.findTask(words[1]);
 
-            } else{
+            } else {
 
                 Task newTask;
 
-                if(words[0].equals("todo")){
+                if (words[0].equals("todo")) {
 
-                    if(numberOfWords == 1){
+                    if (numberOfWords == 1) {
                         throw new InvalidRequestException("What is the Todo that you would like to be added to list?");
                     }
 
@@ -126,15 +120,15 @@ public class Parser {
 
                     newTask = new Todo(name);
 
-                }else if(words[0].equals("event")){
+                } else if (words[0].equals("event")) {
 
-                    if(numberOfWords == 1){
+                    if (numberOfWords == 1) {
                         throw new InvalidEventException("What is the event that you would like to be added to list?");
                     }
 
                     String content = command.split(" ", 2)[1];
 
-                    if(content.split(" /at ").length < 2){
+                    if (content.split(" /at ").length < 2) {
                         throw new InvalidEventException("Please enter both the name as well as the period of time of the event!");
                     }
 
@@ -144,15 +138,15 @@ public class Parser {
 
                     newTask = new Event(name, timePeriod);
 
-                }else if(words[0].equals("deadline")){
+                } else if (words[0].equals("deadline")) {
 
-                    if(numberOfWords == 1){
+                    if (numberOfWords == 1) {
                         throw new InvalidDeadlineException("What is the Deadline that you would like to be added to list?");
                     }
 
                     String content = command.split(" ", 2)[1];
 
-                    if(content.split(" /by ").length < 2){
+                    if (content.split(" /by ").length < 2) {
                         throw new InvalidDeadlineException("Please enter both the name as well as the due date of the event!");
                     }
 
@@ -168,7 +162,7 @@ public class Parser {
 
                     newTask = new Deadline(name, dueDate);
 
-                }else{
+                } else {
 
                     throw new InvalidRequestException("Sorry, I could not understand what you said. Please say another one!");
 

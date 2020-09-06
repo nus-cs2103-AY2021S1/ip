@@ -4,7 +4,7 @@ package duke.exceptions;
  */
 public class InvalidRequestException extends Exception{
     /**
-     * Create a new InvalidRequestException.
+     * Creates a new InvalidRequestException.
      *
      * @param message The message of this exception
      */

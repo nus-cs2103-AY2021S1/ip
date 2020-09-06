@@ -2,7 +2,6 @@ package duke.ui;
 
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.tasks.TaskList;
 
 import java.util.Scanner;
 
@@ -16,19 +15,19 @@ public class Ui {
             + "     | |_| | |_| |   <  __/\n"
             + "     |____/ \\__,_|_|\\_\\___|\n";
 
-    private Scanner input;
+    private final Scanner input;
 
     /**
-     * Construct an User interface.
+     * Constructs an User interface.
      */
-    public Ui(){
+    public Ui() {
         input = new Scanner(System.in);
     }
 
     /**
-     * Print out the greetings.
+     * Prints out the greetings.
      */
-    public static void greet(){
+    public static void greet() {
 
         System.out.println("Hello from\n" + logo);
 
@@ -37,25 +36,26 @@ public class Ui {
     }
 
     /**
-     * Print out the goodbye words.
+     * Prints out the goodbye words.
      */
-    public static void exit(){
+    public static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Print out the command received.
+     * Prints out the command received.
+     *
      * @param command Take in a command.
      */
-    public static void echo(String command){
+    public static void echo(String command) {
         System.out.println(command);
     }
 
 
     /**
-     * Run the programme.
+     * Runs the programme.
      */
-    public void run(){
+    public void run() {
 
         greet();
 
@@ -63,12 +63,12 @@ public class Ui {
 
         String command;
 
-        while(input.hasNext()){
+        while (input.hasNext()) {
 
-            try{
+            try {
                 command = input.nextLine();
 
-                if(command.contains("bye")){
+                if (command.contains("bye")) {
 
                     exit();
 
@@ -76,7 +76,7 @@ public class Ui {
 
                     break;
 
-                }else{
+                } else {
 
                     System.out.println(Parser.processCommand(command));
 
@@ -85,7 +85,7 @@ public class Ui {
                     Storage.saveDataToFile(Parser.taskList);
 
                 }
-            } catch(Exception e){
+            } catch (Exception e) {
 
                 System.out.println(e.getMessage());
 

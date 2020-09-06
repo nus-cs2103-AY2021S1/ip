@@ -5,7 +5,7 @@ package duke.exceptions;
  */
 public class InvalidEventException extends Exception {
     /**
-     * Create a new InvalidEventException.
+     * Creates a new InvalidEventException.
      *
      * @param message The message of this exception
      */

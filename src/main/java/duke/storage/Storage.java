@@ -1,35 +1,31 @@
 package duke.storage;
 
+import duke.tasks.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import duke.tasks.Task;
-import duke.tasks.Todo;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.TaskList;
-
-import duke.tasks.TaskList;
-import duke.tasks.Task;
 
 
 public class Storage {
 
+    private static final String FILE_PATH = "data/duke.txt";
     private TaskList taskList;
 
-    public Storage(TaskList taskList){
+    /**
+     * Constructs a Storage object
+     * @param taskList The TaskList that is to be set as the taskList of this Storage object
+     */
+    public Storage(TaskList taskList) {
         taskList = taskList;
     }
 
-    private static final String FILE_PATH = "data/duke.txt";
-
+    /**
+     * Writes the list of tasks to duke.txt.
+     * @param taskList The list of tasks to be written in the file
+     */
     public static void saveDataToFile(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(FILE_PATH);
@@ -43,6 +39,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads data from the file.
+     * @return The list of tasks in the file
+     */
     public static TaskList read() {
         try {
             ArrayList<Task> listOfTasks = new ArrayList<>();
@@ -65,9 +65,9 @@ public class Storage {
                         listOfTasks.add(todo);
                         break;
                     case "D":
-                        String deadlineDate="";
-                        for(int i=6;i<wordsParsed.length;i++){
-                            deadlineDate=deadlineDate+wordsParsed[i]+" ";
+                        String deadlineDate = "";
+                        for (int i = 6; i < wordsParsed.length; i++) {
+                            deadlineDate = deadlineDate + wordsParsed[i] + " ";
                         }
 //                        deadlineDate = deadlineDate.substring(5);
                         Task deadline = new Deadline(wordsParsed[4], deadlineDate);
@@ -75,9 +75,9 @@ public class Storage {
                         listOfTasks.add(deadline);
                         break;
                     case "E":
-                        String eventDate="";
-                        for(int i=6;i<wordsParsed.length;i++){
-                            eventDate=eventDate+wordsParsed[i]+" ";
+                        String eventDate = "";
+                        for (int i = 6; i < wordsParsed.length; i++) {
+                            eventDate = eventDate + wordsParsed[i] + " ";
                         }
 //                        eventDate = eventDate.substring(3);
                         Task event = new Event(wordsParsed[4], eventDate);
