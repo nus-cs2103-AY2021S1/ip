@@ -1,20 +1,20 @@
 package command;
 
-import core.Storage;
-import core.TaskList;
-import exceptions.CommandException;
-import exceptions.IPException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import core.Storage;
+import core.TaskList;
+import exceptions.CommandException;
+import exceptions.IpException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 /**
  * A function that accepts and processes lines of user commands.
@@ -97,7 +97,7 @@ public class CommandHandler implements Consumer<String>, Function<String, String
             }
             Storage.save();
             return output;
-        } catch (IPException e) {
+        } catch (IpException e) {
             return e.toString();
         } catch (IOException e) {
             return e.getMessage();
@@ -124,7 +124,7 @@ public class CommandHandler implements Consumer<String>, Function<String, String
                 ? "No tasks added."
                 : TaskList.stream()
                     .map(new Function<Task, String>() {
-                        int id = 1;
+                        private int id = 1;
                         public String apply(Task t) {
                             return String.format("%d. %s", id++, t.toString());
                         }
@@ -173,7 +173,7 @@ public class CommandHandler implements Consumer<String>, Function<String, String
 
         return results.size() + " match(es) found.\n" + IntStream.rangeClosed(1, results.size())
                 .boxed()
-                .map(i -> String.format("%d. %s", i, results.get(i-1)))
+                .map(i -> String.format("%d. %s", i, results.get(i - 1)))
                 .collect(Collectors.joining("\n"));
     }
 

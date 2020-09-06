@@ -15,7 +15,7 @@ IF ERRORLEVEL 1 (
 REM no error here, errorlevel == 0
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ..\bin core.IPbot < input.txt > ACTUAL.TXT
+java -classpath ..\bin core.IpBot < input.txt > ACTUAL.TXT
 
 REM clean up stored data
 rmdir /Q /S data

@@ -3,9 +3,9 @@ package exceptions;
 /**
  * Exception representing an error in data validation.
  */
-public class DataException extends IPException {
+public class DataException extends IpException {
 
-    private final String command;
+    private final String field;
     private final String reason;
 
     /**
@@ -15,12 +15,12 @@ public class DataException extends IPException {
      */
     public DataException(String field, String reason) {
         super(reason);
-        this.command = field;
+        this.field = field;
         this.reason = reason;
     }
 
     @Override
     public String toString() {
-        return "Sorry, this field is invalid: " + command + "\nReason: " + reason;
+        return "Sorry, this field is invalid: " + field + "\nReason: " + reason;
     }
 }

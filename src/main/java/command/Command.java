@@ -4,21 +4,21 @@ package command;
  * Enumerates the types of possible commands.
  */
 public enum Command {
-    EXIT_CMD    ("bye", true),
-    LIST_CMD    ("list", true),
-    DONE_CMD    ("done", false),
-    TODO_CMD    ("todo", false),
-    EVENT_CMD   ("event", false),
+    EXIT_CMD("bye", true),
+    LIST_CMD("list", true),
+    DONE_CMD("done", false),
+    TODO_CMD("todo", false),
+    EVENT_CMD("event", false),
     DEADLINE_CMD("deadline", false),
-    DELETE_CMD  ("delete", false),
-    FIND_CMD    ("find", false);
+    DELETE_CMD("delete", false),
+    FIND_CMD("find", false);
 
     private final String cmdString;
-    private final boolean noArgs;
+    private final boolean hasNoArgs;
 
-    Command(String cmdString, boolean noArgs) {
+    Command(String cmdString, boolean hasNoArgs) {
         this.cmdString = cmdString;
-        this.noArgs = noArgs;
+        this.hasNoArgs = hasNoArgs;
     }
 
     /**
@@ -33,8 +33,8 @@ public enum Command {
      * Checks if the command is standalone and has no arguments.
      * @return {@code true} if the command has no arguments
      */
-    public boolean isNoArgs() {
-        return noArgs;
+    public boolean isHasNoArgs() {
+        return hasNoArgs;
     }
 
     @Override

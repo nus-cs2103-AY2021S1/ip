@@ -1,8 +1,8 @@
 package core;
 
-import javafx.application.Application;
-
 import java.io.IOException;
+
+import javafx.application.Application;
 
 /**
  * Main class containing the entry point of the program.
@@ -21,7 +21,7 @@ public class Launcher {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        Application.launch(IPbot.class, args);
+        Application.launch(IpBot.class, args);
     }
 
 }

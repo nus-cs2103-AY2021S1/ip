@@ -9,25 +9,30 @@ import exceptions.DataException;
 public abstract class Task {
 
     // task description
-    private final String desc;
+    private final String description;
 
     // indicates whether the task is done or not
-    private boolean done;
+    private boolean isDone;
 
-    public Task(String desc) throws DataException {
-        if (desc.isBlank()) {
+    /**
+     * Constructs a new Task.
+     * @param description the task description
+     * @throws DataException if the task description is blank
+     */
+    public Task(String description) throws DataException {
+        if (description.isBlank()) {
             throw new DataException("Task Description", "Cannot be blank");
         }
-        this.desc = desc;
-        this.done = false;
+        this.description = description;
+        this.isDone = false;
     }
 
     public String getDescription() {
-        return desc;
+        return description;
     }
 
     public boolean getDoneStatus() {
-        return done;
+        return isDone;
     }
 
     /**
@@ -37,12 +42,12 @@ public abstract class Task {
     protected abstract char getTaskType();
 
     public void markAsDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     private char getStatusIcon() {
         // returns tick or X symbols
-        return done ? '\u2713' : '\u2718';
+        return isDone ? '\u2713' : '\u2718';
     }
 
     public abstract String getParentCommand();
