@@ -11,6 +11,7 @@ import duke.command.FindByKeywordCommand;
 import duke.command.FunctionsCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
+import duke.command.TagCommand;
 import duke.command.ToDoCommand;
 
 import duke.exception.InvalidFunctionException;
@@ -31,6 +32,7 @@ public class Parser {
     private static final String FIND_BY_DATE_COMMAND = "find_by_date";
     private static final String FIND_BY_KEYWORD_COMMAND = "find";
     private static final String VIEW_FUNCTION_COMMAND = "commands";
+    private static final String TAG_COMMAND = "tag";
 
     /**
      * Parses the input entered by users and returns a Command object to be
@@ -70,6 +72,8 @@ public class Parser {
             return new FindByDateCommand(parsedCommand);
         } else if (function.equals(Parser.FIND_BY_KEYWORD_COMMAND)) {
             return new FindByKeywordCommand(parsedCommand);
+        } else if (function.equals(Parser.TAG_COMMAND)) {
+            return new TagCommand(parsedCommand);
         } else {
             return new InvalidCommand();
         }

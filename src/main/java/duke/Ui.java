@@ -120,6 +120,17 @@ public class Ui {
     }
 
     /**
+     * Prints a reply when the tag has been successfully attached to the desired task.
+     *
+     * @param task Task which the tag was attached to.
+     * @return String containing a reply for when the tag is added to the desired task.
+     */
+    public String showAddedTag(Task task) {
+        String message = "Nice! I've added the tag to your task:\n" + task.toString();
+        return message;
+    }
+
+    /**
      * Prints a reply containing a list of Duke's functions and their respective commands.
      *
      * @return String containing Duke functions and commands.
