@@ -24,6 +24,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         tasklist.add(task);
+        taskPriority.add(task);
         return task.toString();
     }
 
@@ -36,6 +37,7 @@ public class TaskList {
         int i = taskNumber - 1;
         Task removedTask = this.tasklist.get(i);
         this.tasklist.remove(i);
+        this.taskPriority.remove(removedTask);
         return removedTask.toString();
     }
 
@@ -47,7 +49,9 @@ public class TaskList {
     public String updateTask(int taskNumber) {
         int i = taskNumber - 1;
         Task updatedTask = this.tasklist.get(i);
+        this.taskPriority.remove(updatedTask);
         updatedTask.setDone();
+        this.taskPriority.add(updatedTask);
         return updatedTask.toString();
     }
 
@@ -74,6 +78,14 @@ public class TaskList {
      */
     public Task getTask(int index) {
         return this.tasklist.get(index);
+    }
+
+    public Task getTask() {
+        return this.taskPriority.poll();
+    }
+
+    public PriorityQueue<Task> getTaskPriorityQueue() {
+        return this.taskPriority;
     }
 
     /**

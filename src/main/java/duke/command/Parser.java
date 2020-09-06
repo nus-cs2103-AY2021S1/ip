@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -111,8 +112,13 @@ public class Parser {
         stringBuilder.append("Here are the tasks in your list: \n");
         for (int i = 0; i < taskList.getListSize(); i++) {
             int index = i + 1;
-            String listResponse = index + "." + taskList.getTask(i).toString() + "\n";
+            Task currentTask = taskList.getTask();
+            String listResponse = index + "." + currentTask.toString() + "\n";
             stringBuilder.append(listResponse);
+        }
+        for (int i = 0; i < taskList.getListSize(); i++) {
+            PriorityQueue<Task> taskPriorityQueue = taskList.getTaskPriorityQueue();
+            taskPriorityQueue.add(taskList.getTask(i));
         }
         stringBuilder.append(Ui.showLine());
         return stringBuilder.toString();
@@ -136,7 +142,7 @@ public class Parser {
             } else {
                 try {
                     String[] secondarr = stringarr[1].split("/by", 2);
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                     LocalDateTime date = LocalDateTime.parse(secondarr[1].trim(), formatter);
                     Deadline deadline = Deadline.createDeadline(secondarr[0], date);
                     taskObj = deadline;
@@ -151,7 +157,7 @@ public class Parser {
                 throw new DukeException(message);
             } else {
                 String[] secondarr = stringarr[1].split("/at", 2);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 LocalDateTime date = LocalDateTime.parse(secondarr[1].trim(), formatter);
                 Event event = Event.createEvent(secondarr[0], date);
                 taskObj = event;
@@ -160,10 +166,10 @@ public class Parser {
             String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw new DukeException(message);
         }
-        taskList.addTask(taskObj);
         if (isDone) {
             taskObj.setDone();
         }
+        taskList.addTask(taskObj);
         return taskObj.toString();
     }
 
