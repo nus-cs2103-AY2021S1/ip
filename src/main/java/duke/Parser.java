@@ -28,17 +28,19 @@ public class Parser {
      * @param taskLine  Single line of information of a Task object.
      * @returns  Specific information of a Task contained in an array of Strings.
      */
-    public String[] memoTaskParser(String taskLine) {
-        String[] tempType = taskLine.split(SpecialFormat.SPLIT_NOTN, 2);
-        String[] tempDetails;
+    public String[] localFileTaskParser(String taskLine) {
+        String[] taskTypeAndContent = taskLine.split(SpecialFormat.SPLIT_NOTN, 2);
+        String taskType = taskTypeAndContent[0];
+        String taskContent = taskTypeAndContent[1];
+        String[] taskDetails;
 
-        if (tempType[0].equals("T")) {
-            tempDetails = tempType[1].split(SpecialFormat.SPLIT_NOTN, 2);
-            return new String[] {tempType[0], tempDetails[0], tempDetails[1]};
-        } else {
-            tempDetails = tempType[1].split(SpecialFormat.SPLIT_NOTN, 3);
-            return new String[] {tempType[0], tempDetails[0], tempDetails[1], tempDetails[2]};
-
+        if (taskType.equals("T")) {
+            taskDetails = taskContent.split(SpecialFormat.SPLIT_NOTN, 2);
+            return new String[] {taskType, taskDetails[0], taskDetails[1]};
+        } else {  // if taskType has value of "E" or "D", representing Event or Deadline object
+            taskDetails = taskContent.split(SpecialFormat.SPLIT_NOTN, 3);
+            // taskDetails[0] isDone, taskDetails[1] taskAction, taskDetails[2] datetime
+            return new String[] {taskType, taskDetails[0], taskDetails[1], taskDetails[2]};
         }
     }
 
@@ -50,90 +52,92 @@ public class Parser {
      * @returns  Specific information of a Command in the form of String array.
      */
     public String[] commandParser(String input) {
-        String commandType;
-        String[] output = new String[] {};
 
-        if (input.equals("bye")) {
-            commandType = "bye";
-            output = new String[] {commandType};
-        } else if (input.equals("hello")) {
-            commandType = "hello";
-            output = new String[] {commandType};
-        } else if (input.equals("list")) {
-            commandType = "list";
-            output = new String[] {commandType};
-        } else {
-            String exceptionType;
-            String[] inputSplitArr;
-            inputSplitArr = input.split(" ", 2);
-            commandType = inputSplitArr[0];
-
-            if (commandType.equals("done") || commandType.equals("delete")) {
-                try {
-                    String actionNumber = inputSplitArr[1];
-                    output = new String[] {commandType, actionNumber};
-                } catch (Exception ex) {
-                    commandType = "exception";
-                    return new String[] {commandType, "empty_illegal"};
-                }
-            } else if (commandType.equals("find")) {
-                String keyword;
-                try {
-                    keyword = inputSplitArr[1];
-                } catch (Exception e) {
-                    return new String[] {"exception", "find"};
-                }
-                /*if (keyword.isBlank()) {
-                    return new String[] {"exception", "find"};
-                }*/
-                output = new String[] {commandType, keyword};
-            } else if (commandType.equals("deadline") || commandType.equals("event") ||
-                    commandType.equals("todo")) {
-                String taskContent;
-                String dateTime;
-
-                if (!commandType.equals("todo")) {
-                    try {
-                        inputSplitArr = inputSplitArr[1].split(
-                                commandType.equals("event") ? " /at " : " /by ", 2);
-                    } catch (Exception ex) {
-                        exceptionType = commandType.equals("deadline")
-                                ? "deadline"
-                                : "event";
-                        commandType = "exception";
-                        return new String[] {commandType, exceptionType};
-                    }
-                }
-
-                if (commandType.equals("todo")) {
-                    try {
-                        taskContent = inputSplitArr[1];
-                    } catch (Exception e) {
-                        return new String[] {"exception", "todo"};
-                    }
-                    output = new String[] {commandType, taskContent};
-                } else {
-                    try {
-                        taskContent = inputSplitArr[0];
-                        dateTime = inputSplitArr[1];
-                        dateTime = this.dateTimeParser(dateTime);
-                        output = new String[] {commandType, taskContent, dateTime};
-                    } catch (Exception ex) {
-                        exceptionType = commandType.equals("event")
-                                ? "event"
-                                : "deadline";
-                        commandType = "exception";
-                        return new String[] {commandType, exceptionType};
-                    }
-                }
-
-            } else {
-                exceptionType = "no_meaning";
-                commandType = "exception";
-                return new String[] {commandType, exceptionType};
-            }
+        if (input.equals("bye") || input.equals("hello") || input.equals("list")) {
+            return new String[]{input};
         }
+
+        String[] inputSplitArr = input.split(" ", 2);
+        String commandType = inputSplitArr[0];
+        String taskContent = inputSplitArr[1];
+
+        switch (commandType) {
+        case "find":
+            return parseFind(commandType, taskContent);
+
+        case "done":
+        case "delete":
+            return parseModifications(commandType, taskContent);
+
+        case "todo":
+        case "event":
+        case "deadline":
+            return parseNewEvent(commandType, taskContent);
+
+        default:
+            return new String[] {"exception", "no_meaning"};
+        }
+
+    }
+
+
+    public String[] parseFind(String commandType, String keyword) {
+        if (keyword.isBlank()) {
+            return new String[] {"exception", "find"};
+        }
+        return new String[] {commandType, keyword};
+    }
+
+
+    public String[] parseModifications(String commandType, String actionNumber) {
+        if (actionNumber.isBlank()) {
+            return new String[] {"exception", "empty_illegal"};
+        }
+        return new String[] {commandType, actionNumber};
+    }
+
+
+    public String[] parseNewEvent(String commandType, String taskContent) {
+
+        String[] output;
+
+        if (commandType.equals("todo")) {
+            output = parseTodo(commandType, taskContent);
+        } else {
+            output = parseEventAndDeadline(commandType, taskContent);
+        }
+
         return output;
+
+    }
+
+
+    public String[] parseTodo(String commandType, String taskContent) {
+        if (taskContent.isBlank()) {
+            return new String[] {"exception", "todo"};
+        }
+        return new String[] {commandType, taskContent};
+    }
+
+
+    public String[] parseEventAndDeadline(String commandType, String taskContent) {
+        try {
+            String[] taskDetails = taskContent.split(
+                    commandType.equals("event") ? " /at " : " /by ", 2);
+
+            String taskAction = taskDetails[0];
+            String dateTime = taskDetails[1];
+
+            dateTime = this.dateTimeParser(dateTime);
+
+            return new String[]{commandType, taskAction, dateTime};
+
+        } catch (Exception ex) {
+            String exceptionType = commandType.equals("event")
+                    ? "event"
+                    : "deadline";
+            return new String[]{"exception", exceptionType};
+        }
     }
 
 }

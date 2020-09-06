@@ -65,7 +65,6 @@ public class Storage {
      * @return List of Task objects each time the chatbot is run.
      */
     public List<Task> readMemoTasks() {
-
         reachFile();
 
         List<Task> taskCollections = new ArrayList<>();
@@ -79,29 +78,22 @@ public class Storage {
 
         while (sc.hasNextLine()) {
             String currTask = sc.nextLine();
-            if (currTask.equals("") || currTask.isBlank()) {
+            if (currTask.isBlank()) {
                 continue;
             }
+            String[] taskInfo = parser.localFileTaskParser(currTask);
+            String taskType = taskInfo[0];
+            boolean isDone = taskInfo[1].equals("0") ? false : true;
+            String taskAction = taskInfo[2];
 
-            String[] taskInfo = this.parser.memoTaskParser(currTask);
-            switch (taskInfo[0]) {
-            case "T":
-                taskCollections.add(
-                        new Todo(taskInfo[2], taskInfo[1].equals("0") ? false : true));
-                break;
-            case "E":
-                taskCollections.add(
-                        new Event(taskInfo[2], taskInfo[3],
-                                taskInfo[1].equals("0") ? false : true));
-                break;
-            case "D":
-                taskCollections.add(
-                        new Deadline(taskInfo[2], taskInfo[3],
-                                taskInfo[1].equals("0") ? false : true));
-                break;
-
-            }
+            Task t = taskType.equals("T")
+                    ? new Todo(taskAction, isDone)
+                    : taskType.equals("E")
+                        ? new Event(taskAction, taskInfo[3], isDone)
+                        : new Deadline(taskAction, taskInfo[3], isDone);
+            taskCollections.add(t);
         }
+
         return taskCollections;
     }
 

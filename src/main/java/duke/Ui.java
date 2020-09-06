@@ -53,124 +53,144 @@ public class Ui {
         String[] commandTask = parser.commandParser(input);
 
         if (commandTask.length == 1) {
-            switch(commandTask[0]){
-            case "hello":
-                if (sleepMode) {
-                    sleepMode = false;
-                    response.add("Hello! This is J.A.R.V.I.S.\nHow may I help you?");
-                } else {
-                    response.add("You have already started our dialog.\nPlease enter your command :)");
-                }
+            response = processSingleWordRequest(commandTask[0]);
+            return response.toArray(new String[response.size()]);
+        }
+
+        String commandType = commandTask[0];
+        switch (commandType) {
+            case "find":
+                response = processFindKeyword(commandTask[1]);
                 break;
-            case "bye":
-                response.add("Bye. Hope to see you again soon!");
-                sleepMode = true;
+            case "exception":
+                response = processException(commandTask[1]);
                 break;
-            case "list":
-                int temp = 1;
-                String output = "Here are the tasks in your list:\n";
-                Iterator task_iter;
-                task_iter = taskList.showList().iterator();
-                /*try {
-
-                } catch (Exception e) {
-                    taskList = new TaskList(new Storage(filePath, fileName).readMemoTasks(), filePath, fileName);
-                    response.addAll(HandleException.handleException(
-                            DukeException.ExceptionType.READ_FILE));
-                    return response.toArray(new String[response.size()]);
-                }*/
-
-
-                while (task_iter.hasNext()) {
-                    output += "\n" + temp + ". " + task_iter.next();
-                    temp++;
-                }
-                response.add(output);
+            case "done":
+            case "delete":
+                response.addAll(taskList.editTask(commandTask));
                 break;
             case "todo":
-                response.addAll(HandleException.handleException(
-                        DukeException.ExceptionType.TODO_INCOMPLETE));
-                break;
             case "event":
-                response.addAll(HandleException.handleException(
-                        DukeException.ExceptionType.EVENT_INCOMPLETE));
-                break;
             case "deadline":
-                response.addAll(HandleException.handleException(
-                        DukeException.ExceptionType.DEADLINE_INCOMPLETE));
+            default:
+                response.addAll(taskList.addTask(commandTask));
                 break;
-            }
-
-        } else if (commandTask.length == 2 && !commandTask[0].equals("todo")) {
-            if (commandTask[0].equals("exception")) {
-                switch (commandTask[1]) {
-                case "todo":
-                    response.addAll(HandleException.handleException(
-                            DukeException.ExceptionType.TODO_INCOMPLETE));
-                    break;
-                case "event":
-                    response.addAll(HandleException.handleException(
-                            DukeException.ExceptionType.EVENT_INCOMPLETE));
-                    break;
-                case "deadline":
-                    response.addAll(HandleException.handleException(
-                            DukeException.ExceptionType.DEADLINE_INCOMPLETE));
-                    break;
-                case "empty_illegal":
-                    response.addAll(HandleException.handleException(
-                            DukeException.ExceptionType.EMPTY_ILLEGAL));
-                    break;
-                case "no_meaning":
-                    response.addAll(HandleException.handleException(
-                            DukeException.ExceptionType.NO_MEANING));
-                    break;
-                }
-
-            } else if (commandTask[0].equals("find")) {
-                List<Task> matchList = taskList.searchTask(commandTask[1]);
-                if (matchList.size() == 0) {
-                    response.add("Sorry, there is no match for your keyword!");
-                } else {
-                    int temp = 1;
-                    String output = "Here are the tasks that match your keyword:\n";
-                    Iterator itr = matchList.iterator();
-                    while (itr.hasNext()) {
-                        output += "\n" + temp + "." + itr.next();
-                        temp++;
-                    }
-                    response.add(output);
-                }
-            } else {
-                response.addAll(taskList.editTask(commandTask));
-                /*try {
-
-                } catch (FileNotFoundException e) {
-                    Storage s = new Storage(filePath, fileName);
-                    s.reachFile();
-                    s.write_memory(taskList.showList());
-                    try {
-
-                    } catch (Exception ex) {
-                        response.addAll(HandleException.handleException(
-                                DukeException.ExceptionType.READ_FILE));
-                    }
-                }*/
-            }
-        } else {
-            response.addAll(taskList.addTask(commandTask));
-            /*try {
-                taskList = new TaskList(new Storage(filePath, fileName).readMemoTasks(), filePath, fileName);
-
-            } catch (Exception e) {
-                response.addAll(HandleException.handleException(
-                        DukeException.ExceptionType.READ_FILE));
-                return response.toArray(new String[response.size()]);
-            }*/
-
         }
 
         return response.toArray(new String[response.size()]);
+    }
+
+
+    public List<String> processSingleWordRequest(String command) {
+        List<String> response = new ArrayList<>();
+
+        switch(command){
+        case "hello":
+            response.add(processHelloCommand());
+            break;
+        case "bye":
+            sleepMode = true;
+            response.add("Bye. Hope to see you again soon!");
+            break;
+        case "list":
+        default:
+            response.add(processListCommand());
+            break;
+        }
+
+        return response;
+    }
+
+
+    public String processListCommand() {
+        int temp = 1;
+        String output = "Here are the tasks in your list:\n";
+        Iterator task_iter;
+        task_iter = taskList.showList().iterator();
+        while (task_iter.hasNext()) {
+            output += "\n" + temp + ". " + task_iter.next();
+            temp++;
+        }
+        return output;
+    }
+
+
+    public String processHelloCommand() {
+        if (sleepMode) {
+            sleepMode = false;
+            return "Hello! This is J.A.R.V.I.S.\nHow may I help you?";
+        }
+        return "You have already started our dialog.\nPlease enter your command :)";
+    }
+
+
+    public List<String> processFindKeyword(String keyword) {
+        List<String> response = new ArrayList<>();
+        List<Task> matchList = taskList.searchTask(keyword);
+
+        if (matchList.size() == 0) {
+            response.add("Sorry, there is no match for your keyword!");
+            return response;
+        }
+
+        String output = "Here are the tasks that match your keyword:\n";
+        Iterator itr = matchList.iterator();
+        int temp = 1;
+
+        while (itr.hasNext()) {
+            output += "\n" + temp + "." + itr.next();
+            temp++;
+        }
+        response.add(output);
+
+        return response;
+    }
+
+
+    public List<String> processException(String exceptionType) {
+        List<String> response = new ArrayList<>();
+        response.addAll(
+                HandleException.handleException(
+                        returnException(exceptionType)));
+        return response;
+    }
+
+
+    public DukeException.ExceptionType returnException(String exceptionType) {
+        switch (exceptionType) {
+        case "todo":
+            return DukeException.ExceptionType.TODO_INCOMPLETE;
+        case "event":
+            return DukeException.ExceptionType.EVENT_INCOMPLETE;
+        case "deadline":
+            return DukeException.ExceptionType.DEADLINE_INCOMPLETE;
+        case "empty_illegal":
+            return DukeException.ExceptionType.EMPTY_ILLEGAL;
+        case "no_meaning":
+        default:
+            return DukeException.ExceptionType.NO_MEANING;
+        }
 
     }
+
+
+
+    /*public List<String> processEmptyTask(List<String> response, String taskType) {
+        switch (taskType) {
+        case "todo":
+            response.addAll(HandleException.handleException(
+                    DukeException.ExceptionType.TODO_INCOMPLETE));
+            break;
+        case "event":
+            response.addAll(HandleException.handleException(
+                    DukeException.ExceptionType.EVENT_INCOMPLETE));
+            break;
+        case "deadline":
+            response.addAll(HandleException.handleException(
+                    DukeException.ExceptionType.DEADLINE_INCOMPLETE));
+            break;
+        }
+        return response;
+    }*/
 
 }

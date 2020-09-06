@@ -65,65 +65,48 @@ public class TaskList {
 
 
     /**
-     * Modify temporary tasklist and overwrite local memory.
+     * Return List of the Task objects matching the keyword.
+     *
+     * @param keyword  User input of keyword to look for.
+     * @return Matching Task objects.
      */
-    public List<String> editTask(String[] commandArr) {
-        String type = commandArr[0];
-        String taskNumber = commandArr[1];
-        boolean exceptionAbsent = true;
-        int actionNumber = -1;
-        String taskContent = "";
-        List<String> output = new ArrayList<>();
+    public List<Task> searchTask(String keyword) {
+        List<Task> searchResult = new ArrayList<>();
+        Iterator itr = taskCollections.iterator();
+        String keywordLowerCase = keyword.toLowerCase();
 
-        try {
-            actionNumber = Integer.parseInt(taskNumber);
-        } catch (Exception ex) {
-            exceptionAbsent = false;
-            output.addAll(HandleException.handleException(
-                    DukeException.ExceptionType.EMPTY_ILLEGAL));
-        }
-
-        if (exceptionAbsent) {
-            try {
-                if (type.equals("delete")) {
-                    taskContent = this.taskCollections.get(actionNumber - 1).toString();
-                    taskCollections.remove(actionNumber - 1);
-                } else {
-                    taskCollections.get(actionNumber - 1).markAsDone();
+        while (itr.hasNext()) {
+            Task currTask = (Task) itr.next();
+            if (currTask.getDescription().toLowerCase().contains(keywordLowerCase)) {
+                searchResult.add(currTask);
+                continue;
+            }
+            if (currTask.getType().equals("D") || currTask.getType().equals("E")) {
+                if (currTask.getInfo()[3].toLowerCase().contains(keywordLowerCase)) {
+                    searchResult.add(currTask);
                 }
-                new Storage(memoFileDir, memoFileName).write_memory(taskCollections);
-                if (type.equals("delete")) {
-                    output.add("Noted. I've removed this task:\n" + taskContent + "\n"
-                            + "Now you have " + this.taskCollections.size() + " tasks in the list.");
-                } else {
-                    output.add("Nice! I've marked this task as done:\n" + " [\u2713] "
-                            + taskCollections.get(actionNumber - 1).toString().split("] ", 2)[1]);                }
-            } catch (Exception ex) {
-                output.addAll(HandleException.handleException(
-                        DukeException.ExceptionType.EMPTY_ILLEGAL));
             }
         }
-        return output;
+
+        return searchResult;
     }
 
-
+    
     /**
      * Add new Task object to the temporary collection and local memory.
      */
     public List<String> addTask(String[] commandArr) {
         String type = commandArr[0];
         String taskContent = commandArr[1];
-        Task t;
         List<String> output = new ArrayList<>();
-        if (type.equals("todo")) {
-            t = new Todo(taskContent);
-        } else {
-            t = type.equals("event")
-                    ? new Event(taskContent, commandArr[2])
-                    : new Deadline(taskContent, commandArr[2]);
-        }
+
+        Task t = type.equals("todo")
+                ? new Todo(taskContent)
+                : type.equals("event")
+                ? new Event(taskContent, commandArr[2])
+                : new Deadline(taskContent, commandArr[2]);
         try {
-            this.taskCollections.add(t);
+            taskCollections.add(t);
             new Storage(memoFileDir, memoFileName).appendToFile(memoFileDir + memoFileName, t);
             output.add("Got it. I've added ths task:\n" + "  " + taskCollections.get(taskCollections.size() - 1)
                     + "\nNow you have " + taskCollections.size() + " tasks in the list.");
@@ -136,27 +119,51 @@ public class TaskList {
 
 
     /**
-     * Return List of the Task objects matching the keyword.
-     *
-     * @param keyword  User input of keyword to look for.
-     * @return Matching Task objects.
+     * Modify temporary tasklist and overwrite local memory.
      */
-    public List<Task> searchTask(String keyword) {
-        List<Task> searchResult = new ArrayList<>();
-        Iterator itr = taskCollections.iterator();
-        while (itr.hasNext()) {
-            Task currTask = (Task) itr.next();
-            if (currTask.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
-                searchResult.add(currTask);
-            } else {
-                if (currTask.getType().equals("D") || currTask.getType().equals("E")) {
-                    if (currTask.getInfo()[3].toLowerCase().contains(keyword.toLowerCase())) {
-                        searchResult.add(currTask);
-                    }
-                }
-            }
+    public List<String> editTask(String[] commandArr) {
+        List<String> output = new ArrayList<>();
+
+        try {
+            String type = commandArr[0];
+            int taskNumber = Integer.parseInt(commandArr[1]);
+            int actionNumber = taskNumber - 1;
+            String taskContent = taskCollections.get(actionNumber).toString();
+
+            editTaskCollections(type, actionNumber);
+            new Storage(memoFileDir, memoFileName).write_memory(taskCollections);
+            output.add(addSuccessMsg(type, taskContent));
+
+        } catch (Exception ex) {
+            output.addAll(HandleException.handleException(
+                    DukeException.ExceptionType.EMPTY_ILLEGAL));
         }
-        return searchResult;
+        return output;
+    }
+
+
+    public void editTaskCollections(String type, int actionNumber) {
+        switch (type) {
+        case "delete":
+            taskCollections.remove(actionNumber);
+            break;
+        case "done":
+        default:
+            taskCollections.get(actionNumber).markAsDone();
+            break;
+        }
+    }
+
+
+    public String addSuccessMsg(String type, String taskContent) {
+        if (type.equals("delete")) {
+            return "Noted. I've removed this task:\n" + taskContent + "\n"
+                    + "Now you have " + taskCollections.size() + " tasks in the list.";
+        }
+//        return "Nice! I've marked this task as done:\n" + " [\u2713] "
+//                + taskCollections.get(actionNumber).toString().split("] ", 2)[1];
+        return "Nice! I've marked this task as done:\n" + " [\u2713] "
+                + taskContent.split("] ", 2)[1];
     }
 
 }
