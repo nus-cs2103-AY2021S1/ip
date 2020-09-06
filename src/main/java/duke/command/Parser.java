@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -149,7 +150,9 @@ public class Parser {
                 throw new DukeException(message);
             } else {
                 String[] secondarr = stringarr[1].split("/at", 2);
-                Event event = Event.createEvent(secondarr[0], secondarr[1]);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                LocalDateTime date = LocalDateTime.parse(secondarr[1].trim(), formatter);
+                Event event = Event.createEvent(secondarr[0], date);
                 taskObj = event;
             }
         } else {

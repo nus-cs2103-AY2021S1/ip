@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * <h1> Event Task class </h1>
@@ -14,24 +16,25 @@ package duke.task;
  */
 public class Event extends Task {
 
-    protected String event;
+    protected LocalDateTime event;
 
-    protected Event(String task, String event) {
+    protected Event(String task, LocalDateTime event) {
         super(task);
         this.event = event;
     }
 
-    private String getEvent() {
+    private LocalDateTime getEvent() {
         return this.event;
     }
 
-    public static Event createEvent(String task, String event) {
+    public static Event createEvent(String task, LocalDateTime event) {
         return new Event(task, event);
     }
 
     @Override
     public String toString() {
         String done = this.done ? "O" : "X";
-        return "[E][" + done + "] " + this.task + "at:" + this.event;
+        String date = this.event.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
+        return "[E][" + done + "] " + this.task + "at: " + date;
     }
 }
