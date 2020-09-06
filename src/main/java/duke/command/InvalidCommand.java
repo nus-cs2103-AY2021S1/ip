@@ -19,7 +19,7 @@ public class InvalidCommand implements Command {
     }
 
     public InvalidCommand() {
-        toSend = "sorry I do not know what that means :(";
+        toSend = "Sorry I do not know what that means :(";
     }
 
     @Override
