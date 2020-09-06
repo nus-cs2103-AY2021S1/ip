@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Represents taskList containing tasks.
@@ -35,12 +36,9 @@ public class TaskList {
      */
     public ArrayList<Task> findTasks(String userInput) {
         String keyword = userInput.substring(5);
-        ArrayList<Task> findings = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.getTask().contains(keyword)) {
-                findings.add(task);
-            }
-        }
+        ArrayList<Task> findings;
+        findings = tasks.stream().filter(x -> x.description
+                .contains(keyword)).collect(Collectors.toCollection(ArrayList::new));
         return findings;
     }
 
