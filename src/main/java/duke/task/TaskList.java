@@ -22,9 +22,9 @@ public class TaskList {
     }
 
     /**
-     * Adds a duke.task to the list of tasks.
+     * Adds a task to the list of tasks.
      *
-     * @param newTask The duke.task to be added.
+     * @param newTask The task to be added.
      */
     public void addTask(Task newTask) {
         int numberOfTasks = listOfTasks.size();
@@ -33,9 +33,9 @@ public class TaskList {
     }
 
     /**
-     * Deletes a duke.task from the list of tasks.
+     * Deletes a task from the list of tasks.
      *
-     * @param index The index of the duke.task to be deleted.
+     * @param index The index of the task to be deleted.
      * @throws InvalidRequestException If the command is invalid.
      */
     public void deleteTask(int index) throws InvalidRequestException {
@@ -49,14 +49,14 @@ public class TaskList {
     }
 
     /**
-     * Sets the duke.task in the list to be done.
+     * Sets the task in the list to be done.
      *
-     * @param index The index of the duke.task to be set as done.
+     * @param index The index of the task to be set as done.
      * @throws InvalidRequestException If the command is invalid.
      */
     public void setAsDone(int index) throws InvalidRequestException {
         if (listOfTasks.size() < index || index < 0) {
-            throw new InvalidRequestException("You have entered an invalid duke.task "
+            throw new InvalidRequestException("You have entered an invalid task "
                     + "number! Please try again.");
         }
         Task task = this.listOfTasks.get(index - 1);
@@ -65,15 +65,15 @@ public class TaskList {
     }
 
     /**
-     * Return the particular duke.task from the list by its index.
+     * Return the particular task from the list by its index.
      *
-     * @param index The index of the duke.task.
-     * @return The duke.task with the index specified in the arraylist.
+     * @param index The index of the task.
+     * @return The task with the index specified in the arraylist.
      * @throws InvalidRequestException If the command is invalid.
      */
     public Task getTask(int index) throws InvalidRequestException {
         if (listOfTasks.size() < index || index < 0) {
-            throw new InvalidRequestException("You have entered an invalid duke.task "
+            throw new InvalidRequestException("You have entered an invalid task "
                     + "number! Please try again.");
         }
         return this.listOfTasks.get(index - 1);
