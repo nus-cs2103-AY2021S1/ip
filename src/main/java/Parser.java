@@ -33,6 +33,8 @@ public class Parser {
             return new DoneCommand(parseNumber(detail));
         case ("find") :
             return new FindCommand(detail);
+        case ("help") :
+            return new HelpCommand();
         default:
             throw new UnexpectedInputException();
         }
