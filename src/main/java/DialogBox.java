@@ -9,14 +9,16 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private ImageView displayPicture;
+    private Circle displayPicture;
 
     private DialogBox(String text, Image img) {
         try {
@@ -29,7 +31,12 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
+        dialog.setStyle("-fx-border-radius: 10 10 0 10;"
+                + "-fx-background-radius: 10 10 0 10;"
+                + "-fx-background-color: lightblue;"
+                + "-fx-padding:  5");
+        dialog.setFont(Font.font("Courier New"));
+        displayPicture.setFill(new ImagePattern(img));
     }
 
     /**
@@ -39,6 +46,10 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
+        getChildren().get(1).setStyle("-fx-border-radius: 10 10 10 0;"
+                + "-fx-background-radius: 10 10 10 0;"
+                + "-fx-background-color: lightblue;"
+                + "-fx-padding:  5");
         setAlignment(Pos.TOP_LEFT);
     }
 

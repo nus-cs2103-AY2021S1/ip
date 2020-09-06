@@ -110,7 +110,7 @@ public class TaskList {
             Ui.addMessage("You did not complete any task in the past 7 days.");
         } else {
             String taskWord = size <= 1 ? "task" : "tasks";
-            Ui.addMessage("You completed " + size + " " + taskWord + " in the past 7 days.");
+            Ui.addMessage("You completed " + size + " " + taskWord + " in the past 7 days:");
             for (int i = 0; i < size; i++) {
                 int taskNumber = i + 1;
                 String task = String.format("%d. %s", taskNumber, doneTasks.get(i));
