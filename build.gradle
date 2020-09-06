@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 repositories {
@@ -44,6 +45,11 @@ test {
 
 application {
     mainClassName = "chatterbox.Launcher"
+}
+
+shadowJar {
+    archiveBaseName = "chatterbox"
+    archiveClassifier = null
 }
 
 checkstyle {
