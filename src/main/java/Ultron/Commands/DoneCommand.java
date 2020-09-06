@@ -35,12 +35,10 @@ public final class DoneCommand extends Command {
         if (getArguments().trim().length() < 1) {
             throw new UltronException("done",
                 ExceptionType.NO_ARGUMENTS_SUPPLIED);
-        }
-        if (getArguments().trim().length() > 1) {
+        } else if (getArguments().trim().length() > 1) {
             throw new UltronException("done",
                 ExceptionType.TOO_MUCH_ARGUMENTS);
-        }
-        if (index >= taskList.size()) {
+        } else if (index >= taskList.size()) {
             throw new UltronException(Integer.toString(index + 1),
                 "done",
                 ExceptionType.INVALID_ARGUMENT);
