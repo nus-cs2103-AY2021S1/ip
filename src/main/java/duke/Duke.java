@@ -7,10 +7,7 @@ import javafx.scene.control.Label;
  */
 public class Duke {
     private static Label outputLabel;
-    private static final String FILE_PATH = (System.getProperty("user.dir").endsWith("text-ui-test")
-        ? System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length() - 13)
-            + "/data/duke.txt"
-        : System.getProperty("user.dir") + "/data/duke.txt");
+    private static final String FILE_PATH = getFilePath();
 
     private Storage storage;
     private TaskList tasks;
@@ -53,6 +50,15 @@ public class Duke {
             return c.execute(tasks, ui, storage);
         } catch (DukeException ex) {
             return ex.getMessage();
+        }
+    }
+
+    private static String getFilePath() {
+        if (System.getProperty("user.dir").endsWith("text-ui-test")) {
+            return System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length() - 13)
+                    + "/data/duke.txt";
+        } else {
+            return System.getProperty("user.dir") + "/data/duke.txt";
         }
     }
 }

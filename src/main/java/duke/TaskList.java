@@ -7,7 +7,7 @@ import java.util.stream.Stream;
  * Encapsulates a list of tasks.
  */
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructs an empty task list.
