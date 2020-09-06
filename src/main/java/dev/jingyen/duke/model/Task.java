@@ -1,5 +1,7 @@
 package dev.jingyen.duke.model;
 
+import dev.jingyen.duke.storage.Storable;
+
 import java.util.Objects;
 
 /**
@@ -7,7 +9,7 @@ import java.util.Objects;
  *
  * @author jingyenloh
  */
-public abstract class Task {
+public abstract class Task implements Storable {
     protected boolean isDone;
     protected String taskName;
 
@@ -24,20 +26,13 @@ public abstract class Task {
      * Marks a task as done.
      */
     public void markDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", isDone ? "✓" : "✘", this.taskName);
+        return String.format("[%s] %s", isDone ? "✓" : "✘", taskName);
     }
-
-    /**
-     * Formats the task into a String that is easy to parse.
-     *
-     * @return a formatted String, ready for saving into a file.
-     */
-    public abstract String toSaveString();
 
     @Override
     public boolean equals(Object o) {

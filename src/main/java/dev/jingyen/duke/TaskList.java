@@ -39,6 +39,7 @@ public class TaskList {
 
     /**
      * Searches the TaskList for tasks that match a search term
+     *
      * @param term the search term
      * @return a List of Tasks that match the search term
      */
