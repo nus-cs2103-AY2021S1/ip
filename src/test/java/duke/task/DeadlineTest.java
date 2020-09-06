@@ -15,23 +15,23 @@ public class DeadlineTest {
     }
 
     @Test
-    void testRejectsBadInputs() {
+    void testTimeWrongFormat_ThrowsException() {
         assertThrows(DukeException.class, () ->
             new Deadline("test", "bad input"));
     }
 
     @Test
-    void testCorrectIdentifier() {
+    void testIdentifier_CorrectOutput() {
         assertEquals("D", deadline.getTaskIdentifier());
     }
 
     @Test
-    void testToString() {
+    void testToString_CorrectOutput() {
         assertEquals("[D][ ] test (by: Aug 24 2020)", deadline.toString());
     }
 
     @Test
-    void testMarkAsDone() {
+    void testMarkAsDone_ChangesOutput() {
         deadline.markAsDone();
         assertEquals("[D][X] test (by: Aug 24 2020)", deadline.toString());
     }

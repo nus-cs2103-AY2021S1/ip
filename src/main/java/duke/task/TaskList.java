@@ -64,11 +64,11 @@ public class TaskList {
 
     /**
      * Calls the markAsDone method of the Task stored in this TaskList at index idx.
-     * @param idx Index of Task to markAsDone.
+     * @param index Index of Task to markAsDone.
      * @return Task of item that was just marked.
      */
-    public Task markItem(int idx) {
-        Task selected = this.items.get(idx);
+    public Task markItem(int index) {
+        Task selected = this.items.get(index);
         selected.markAsDone();
         return selected;
     }

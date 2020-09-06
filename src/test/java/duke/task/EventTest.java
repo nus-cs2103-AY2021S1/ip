@@ -15,23 +15,23 @@ public class EventTest {
     }
 
     @Test
-    void testRejectsBadInputs() {
+    void testTimeWrongFormat_ThrowsException() {
         assertThrows(DukeException.class, () ->
             new Event("test", "bad input"));
     }
 
     @Test
-    void testCorrectIdentifier() {
+    void testIdentifier_CorrectOutput() {
         assertEquals("E", event.getTaskIdentifier());
     }
 
     @Test
-    void testToString() {
+    void testToString_CorrectOutput() {
         assertEquals("[E][ ] test (at: Aug 24 2020)", event.toString());
     }
 
     @Test
-    void testMarkAsDone() {
+    void testMarkAsDone_ChangesOutput() {
         event.markAsDone();
         assertEquals("[E][X] test (at: Aug 24 2020)", event.toString());
     }

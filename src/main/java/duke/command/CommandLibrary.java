@@ -34,19 +34,19 @@ class CommandLibrary {
         ui.systemMessage(taskList.add(new Todo(description)));
     };
     static final CommandExecutable DELETE_COMMAND = (taskList, ui, args) -> {
-        int idx = Integer.parseInt(args[0]);
-        if (idx > taskList.size()) {
+        int index = Integer.parseInt(args[0]);
+        if (index > taskList.size()) {
             throw DukeException.Errors.DELETE_OUT_OF_RANGE.create();
         }
-        Task selected = taskList.deleteItem(idx - 1);
+        Task selected = taskList.deleteItem(index - 1);
         ui.systemMessage("sir this task has been remove sir:\n  " + selected);
     };
     static final CommandExecutable DONE_COMMAND = (taskList, ui, args) -> {
-        int idx = Integer.parseInt(args[0]);
-        if (idx > taskList.size()) {
+        int index = Integer.parseInt(args[0]);
+        if (index > taskList.size()) {
             throw DukeException.Errors.DONE_OUT_OF_RANGE.create();
         }
-        Task selected = taskList.markItem(idx - 1);
+        Task selected = taskList.markItem(index - 1);
         ui.systemMessage("afternoon sir i have mark this task done sir:\n  " + selected);
     };
     static final CommandExecutable LIST_COMMAND = (taskList, ui, args) ->
