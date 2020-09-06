@@ -20,9 +20,11 @@ public final class UI {
         setIntro();
     }
 
+    /**
+     * Returns the introduction string.
+     * @return String introduction.
+     */
     public static String getIntro() {
-
-        //Print the intro
         return "Hello lesser being, I am Ultron\n"
             + "What do you want?\n";
     }
@@ -30,14 +32,14 @@ public final class UI {
     /**
      * Prints a message.
      *
-     * @param argument message to be printed
+     * @param argument message to be printed.
      */
     public void print(final String argument) {
         System.out.println(argument);
     }
 
     /**
-     * Get the message that is currently stored
+     * Get the message that is currently stored.
      */
     public String getMessage() {
         return getLine() + string + getLine();
@@ -54,7 +56,6 @@ public final class UI {
      * Prints the end message to stdout.
      */
     public void printEnd() {
-        // Print the end message
         print(getEnd());
     }
 
@@ -65,6 +66,10 @@ public final class UI {
         setMessage(getIntro());
     }
 
+    /**
+     * Get the end message.
+     * @return String End message.
+     */
     private String getEnd() {
         return "Clearly you were not worth my time.\n";
     }
