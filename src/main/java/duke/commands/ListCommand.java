@@ -4,15 +4,13 @@ import duke.Ui;
 import duke.tasks.TaskManager;
 
 /**
- * <code>duke.commands.ListCommand</code> inherits from the base class <code>duke.commands.Command</code>
- * and will handle the job of listing duke.tasks.
+ * <code>ListCommand</code> inherits from the base class <code>Command</code>
+ * and will handle the job of listing tasks.
  */
 public class ListCommand extends Command {
     /**
-     * Calls the <code>listTasks</code> method of the <code>TaskManager</code>
-     * in the parent class. This returns a <code>String</code> which is then
-     * printed out using the <code>print</code> method of the <code>duke.Ui</code>
-     * object in the parent class.
+     * Returns true since there is only one initial response which has been set in
+     * the method call <code>init</code>.
      * @return <code>true</code>
      */
     @Override
@@ -20,6 +18,12 @@ public class ListCommand extends Command {
         return true;
     }
 
+    /**
+     * Sets the initial response to be the list of tasks.
+     * In addition, it Sets the utility tools <code>tm</code> and <code>ui</code>.
+     * @param tm the task manager.
+     * @param ui the ui.
+     */
     @Override
     public void init(TaskManager tm, Ui ui) {
         setUtility(tm, ui);
