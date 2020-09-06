@@ -53,12 +53,14 @@ public class Parser {
                     return new ToDoCommand(newTodo);
                 case "deadline":
                     String[] taskAndTimeByArray = reply.split(" /by ");
+                    assert taskAndTimeByArray.length == 2 : "Invalid command, there should only be one /by";
                     String deadlineDescription = taskAndTimeByArray[0].substring(9);
                     String by = taskAndTimeByArray[1];
                     Task newDeadline = new Deadline(deadlineDescription, LocalDate.parse(by));
                     return new DeadlineCommand(newDeadline);
                 case "event":
                     String[] taskAndTimeAtArray = reply.split(" /at ");
+                    assert taskAndTimeAtArray.length == 2 : "Invalid command, there should only be one /at";
                     String eventDescription = taskAndTimeAtArray[0].substring(6);
                     String at = taskAndTimeAtArray[1];
                     Task newEvent = new Event(eventDescription, LocalDate.parse(at));

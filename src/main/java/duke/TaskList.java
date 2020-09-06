@@ -37,7 +37,7 @@ public class TaskList {
     /**
      * Remove task from task list.
      *
-     * @param index index of task to be removed.
+     * @param index index of task to be removed offset by -1 due to 1 indexed based list.
      * @return Task object which is removed.
      */
     public Task removeTask(int index) {
