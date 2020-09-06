@@ -29,7 +29,7 @@ public class TaskList {
      * @throws DukeException Throws exception if command is invalid due to missing information.
      */
     public Task addItem(String input) throws DukeException {
-
+        assert input.length() >= 4;
         String arr[] = input.split(" ", 2);
         Task curr = new Task("");
         if (arr.length == 1) {
@@ -65,6 +65,7 @@ public class TaskList {
      * @throws DukeException Throws exception if command is invalid due to missing or wrong information.
      */
     public Task deleteItem(String input) throws DukeException{
+        assert input.length() >= 6;
         String info[] = input.split(" ", 2);
         Task toBeDeleted = new Task("");
         if (info.length == 1) {
@@ -92,6 +93,7 @@ public class TaskList {
      * @throws DukeException Throws exception if command is invalid due to missing or wrong information.
      */
     public Task doneItem(String input) throws DukeException {
+        assert input.length() >= 4;
         String info[] = input.split(" ", 2);
         Task toBeRet = new Task("");
         if (info.length == 1) {
@@ -109,6 +111,7 @@ public class TaskList {
     }
 
     public ArrayList<Task> find(String input) {
+        assert input.length() >= 4;
         String[] info = input.split(" ", 2);
         ArrayList<Task> ret = new ArrayList<>();
         for (Task k: list) {
