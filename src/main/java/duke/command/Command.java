@@ -22,6 +22,10 @@ public class Command {
         return false;
     }
 
+    public boolean isStart() {
+        return false;
+    }
+
     /**
      * Executes the command.
      * @param tasks A list of tasks

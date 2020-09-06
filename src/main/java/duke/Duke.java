@@ -33,25 +33,23 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generate the response for the GUI
+     * @param fullCommand The input command of the user
+     * @return A response of the program
      */
     public String getResponse(String fullCommand) {
-        String[] splittedInput = fullCommand.split("\\s+");
         String response;
-
-        if (splittedInput.length == 1 && splittedInput[0].equals("hello")) {
-            isRunning = true;
-            return ui.showWelcome();
-        }
-
-        if (!isRunning) {
-            return "I'm sleeping...zzz";
-        }
-
         try {
             Command command = Parser.parse(fullCommand);
-            isRunning = !command.isExit();
+            if (command.isStart()) {
+                isRunning = true;
+            }
+            if (!isRunning) {
+                return "I'm sleeping...zzz";
+            }
+            if (command.isExit()) {
+                isRunning = false;
+            }
             response = command.execute(tasks, ui, storage);
             storage.write(tasks);
         } catch (DukeException e) {

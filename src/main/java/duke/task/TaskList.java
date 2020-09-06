@@ -91,8 +91,7 @@ public class TaskList {
     public TaskList filter(Predicate<Task> predicate) {
         assert predicate != null : "predicate cannot be null";
         ArrayList<Task> filteredTasks = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+        for (Task task : tasks) {
             if (predicate.test(task)) {
                 filteredTasks.add(task);
             }
