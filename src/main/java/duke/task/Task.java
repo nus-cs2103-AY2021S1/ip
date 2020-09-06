@@ -4,6 +4,9 @@ import java.time.LocalDate;
 
 // Parent class for all types of tasks that can be created by the user.
 public abstract class Task {
+    private static final String SYMBOL_TICK = "\u2713";
+    private static final String SYMBOL_CROSS = "\u2718";
+
     protected String description;
     protected boolean isDone = false;
 
@@ -24,7 +27,7 @@ public abstract class Task {
      * @return String ✘ if not done and ✓ if done.
      */
     public String getStatusIcon() {
-        return isDone ? "\u2713" : "\u2718";
+        return isDone ? SYMBOL_TICK : SYMBOL_CROSS;
     }
 
     public boolean containsKeyword(String keyword) {

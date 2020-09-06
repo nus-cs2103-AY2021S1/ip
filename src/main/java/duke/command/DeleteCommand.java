@@ -19,9 +19,11 @@ public class DeleteCommand extends Command {
             int index = Integer.parseInt(in.replaceFirst("delete", "").trim());
             Task task = taskList.remove(index - 1);
             int len = taskList.size();
-            return "Noted. I've removed this task:\n"
+
+            String response = "Noted. I've removed this task:\n"
                     + "  " + task.toString() + "\n"
                     + "Now you have " + len + " task" + (len == 1 ? "" : "s") + " in the list.";
+            return response;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidCommandException("Please input a valid index.");
         }

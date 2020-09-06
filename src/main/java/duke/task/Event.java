@@ -7,6 +7,10 @@ import duke.exception.InvalidEventException;
 import duke.parser.DateTimeParsing;
 
 public class Event extends Task {
+    private static final String EVENT_SYMBOL = "[E]";
+    private static final String EVENT_NAME = "event ";
+    private static final String EVENT_AT = "/at ";
+
     private final String time12h;
     private final LocalDate date;
 
@@ -48,12 +52,12 @@ public class Event extends Task {
     public String toSaveString() {
         String date = DateTimeParsing.localDateToString(this.date);
         String time = DateTimeParsing.to24HTimeFormat(time12h);
-        return (isDone ? 1 : 0) + "event " + description + "/at " + date + " " + time;
+        return (isDone ? 1 : 0) + EVENT_NAME + description + EVENT_AT + date + " " + time;
     }
 
     @Override
     public String toString() {
         String formattedDate = DateTimeParsing.localDateToFormattedString(date);
-        return "[E]" + super.toString() + "(at: " + formattedDate + " " + time12h + ")";
+        return EVENT_SYMBOL + super.toString() + "(at: " + formattedDate + " " + time12h + ")";
     }
 }

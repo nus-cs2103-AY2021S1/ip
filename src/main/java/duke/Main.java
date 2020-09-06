@@ -14,6 +14,8 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
+    private static final String FXML_PATH = "/view/MainWindow.fxml";
+    private static final String ICON_PATH = "/images/Icon.png";
 
     private final Duke duke;
 
@@ -31,14 +33,14 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(FXML_PATH));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().setExitFunction(stage::close);
             stage.show();
-            stage.getIcons().add(new Image(getClass().getResource("/images/Icon.png").toString()));
+            stage.getIcons().add(new Image(getClass().getResource(ICON_PATH).toString()));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -11,6 +11,8 @@ import duke.task.TaskList;
 
 // Handles all the logic behind any "due" command from the user.
 public class DueCommand extends Command {
+    private static final String ERROR_INVALID_FORMAT = "Please key in a valid date format.\n" + "due *yyyy-mm-dd*";
+
     /**
      * Executes any "due" command issued by the user.
      * Returns the information of the tasks due on the date specified by the user.
@@ -36,15 +38,15 @@ public class DueCommand extends Command {
                 }
             }
 
-            if (filteredTasks.size() == 0) {
-                return "There are no tasks due on " + formattedDate + "!";
-            }
+            boolean hasTaskToShow = filteredTasks.size() > 0;
+            String firstLine = hasTaskToShow
+                    ? "These are the tasks due on " + formattedDate + ":\n"
+                    : "There are no tasks due on " + formattedDate + "!";
 
-            String firstLine = "These are the tasks due on " + formattedDate + ":";
-            return firstLine + "\n" + String.join("\n", filteredTasks);
+            String response = firstLine + String.join("\n", filteredTasks);
+            return response;
         } catch (DateTimeParseException | NumberFormatException e) {
-            String errMsg = "Please key in a valid date format.\n" + "due *yyyy-mm-dd*";
-            throw new InvalidCommandException(errMsg);
+            throw new InvalidCommandException(ERROR_INVALID_FORMAT);
         }
     }
 }

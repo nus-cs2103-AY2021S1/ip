@@ -6,6 +6,8 @@ import duke.exception.InvalidTaskException;
 
 // Deals with the creation of the different types of tasks.
 public class TaskFactory {
+    private static final String ERROR_INVALID_COMMAND = "Something went wrong during the creation of the task. :-(";
+
     /**
      * Calls the factory method of each type of tasks based on the task type specified.
      *
@@ -24,7 +26,7 @@ public class TaskFactory {
             return Event.createEvent(details);
         default:
             assert type.equals(TaskType.Invalid) : "TaskType should be Invalid";
-            throw new InvalidCommandException("Something went wrong during the creation of the task. :-(");
+            throw new InvalidCommandException(ERROR_INVALID_COMMAND);
         }
     }
 }

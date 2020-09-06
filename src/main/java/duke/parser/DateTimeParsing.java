@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 
 // Class that deals with any parsing or conversion of date and time.
 public class DateTimeParsing {
+    private static final String FORMAT_24H = "HH:mm";
+    private static final String FORMAT_12H = "hh:mm a";
+
     /**
      * Parses a formatted date string (YYYY-MM-DD) and returns the LocalDate equivalent of the date.
      *
@@ -51,8 +54,8 @@ public class DateTimeParsing {
      */
     public static String to12HTimeFormat(String time) {
         return LocalTime
-                .parse(time, DateTimeFormatter.ofPattern("HH:mm"))
-                .format(DateTimeFormatter.ofPattern("hh:mm a"));
+                .parse(time, DateTimeFormatter.ofPattern(FORMAT_24H))
+                .format(DateTimeFormatter.ofPattern(FORMAT_12H));
     }
 
     /**
@@ -63,7 +66,7 @@ public class DateTimeParsing {
      */
     public static String to24HTimeFormat(String time) {
         return LocalTime
-                .parse(time, DateTimeFormatter.ofPattern("hh:mm a"))
-                .format(DateTimeFormatter.ofPattern("HH:mm"));
+                .parse(time, DateTimeFormatter.ofPattern(FORMAT_12H))
+                .format(DateTimeFormatter.ofPattern(FORMAT_24H));
     }
 }

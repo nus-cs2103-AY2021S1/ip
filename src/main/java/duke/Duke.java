@@ -18,6 +18,9 @@ import duke.ui.Ui;
 // Main class that initializes the program.
 public class Duke {
     private static final String START_MSG = "Hello! I'm Duke.\nWhat can I do for you?";
+    private static final Path DEFAULT_SAVE_PATH = Paths.get("data", "duke.txt");
+    private static final String ERROR_LOAD_SAVE = "An error has occurred while loading the save file!";
+
     private final Scanner sc = new Scanner(System.in);
     private final CommandExecutor exe = new DukeCommandExecutor();
     private final Ui ui = new Ui();
@@ -31,7 +34,7 @@ public class Duke {
      * @throws IOException If an IO error occurs while loading the save file.
      */
     public Duke() throws IOException {
-        this.savePath = Paths.get("data", "duke.txt");
+        this.savePath = DEFAULT_SAVE_PATH;
         this.storage = new DukeStorage(savePath);
         this.taskList = new TaskArrayList(storage);
     }
@@ -54,8 +57,7 @@ public class Duke {
         try {
             loadSave();
         } catch (DukeException e) {
-            e.printStackTrace();
-            throw new InvalidSaveFileException("An error has occurred while loading the save file!");
+            throw new InvalidSaveFileException(ERROR_LOAD_SAVE);
         }
 
         ui.print(START_MSG);
@@ -96,6 +98,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException, InvalidSaveFileException {
-        new Duke(Paths.get("data", "duke.txt")).runCli();
+        new Duke(DEFAULT_SAVE_PATH).runCli();
     }
 }

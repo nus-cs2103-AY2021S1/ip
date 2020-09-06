@@ -10,6 +10,8 @@ import duke.task.TaskType;
 
 // Handles all the logic behind any "task" command from the user.
 public class TaskCommand {
+    private static final String INVALID_COMMAND_MSG = "Something went wrong during the execution of the command. :-(";
+
     /**
      * Executes any "task" command issued by the user.
      * Adds the task specified by the user to the taskList and updates save file after updating.
@@ -23,7 +25,7 @@ public class TaskCommand {
         TaskType taskType = CommandParser.parseTaskType(in);
         String taskDetails = in.replaceFirst(taskType.toString().toLowerCase(), "").trim();
         if (taskType == TaskType.Invalid) {
-            throw new InvalidCommandException("Something went wrong during the execution of the command. :-(");
+            throw new InvalidCommandException(INVALID_COMMAND_MSG);
         }
         return createTask(taskType, taskDetails, taskList, false, true);
     }
@@ -46,10 +48,14 @@ public class TaskCommand {
         if (isDone) {
             task.markAsDone();
         }
+
         int len = taskList.size();
-        return "Got it. I've added this task: \n"
+        boolean hasSingleTask = len == 1;
+
+        String response = "Got it. I've added this task: \n"
                 + "  " + task.toString() + "\n"
-                + "Now you have " + len + " task" + (len == 1 ? "" : "s") + " in the list.";
+                + "Now you have " + len + " task" + (hasSingleTask ? "" : "s") + " in the list.";
+        return response;
     }
 
     /**
@@ -63,10 +69,11 @@ public class TaskCommand {
         boolean isDone = in.charAt(0) == '1';
         String taskCommand = in.substring(1);
         TaskType taskType = CommandParser.parseTaskType(taskCommand);
-        String taskDetails = taskCommand.replaceFirst(taskType.toString().toLowerCase(), "").trim();
         if (taskType == TaskType.Invalid) {
-            throw new InvalidCommandException("Something went wrong during the execution of the command. :-(");
+            throw new InvalidCommandException(INVALID_COMMAND_MSG);
         }
+
+        String taskDetails = taskCommand.replaceFirst(taskType.toString().toLowerCase(), "").trim();
         createTask(taskType, taskDetails, taskList, isDone, false);
     }
 }
