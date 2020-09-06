@@ -29,8 +29,10 @@ public class DeadlineCommand extends Command {
             String[] parseArray = getInputCommand().substring(9).split(" /by ");
             Deadline deadline;
             try {
-                deadline = new Deadline(parseArray[0], LocalDateTime.parse(parseArray[1],
-                        DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
+                assert(LocalDateTime.parse(parseArray[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))
+                       .isAfter(LocalDateTime.now()));
+                deadline = new Deadline(parseArray[0], LocalDateTime.parse(
+                  parseArray[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
             } catch (DateTimeParseException e) {
                 throw new DukeCommandException("Invalid date!");
             }

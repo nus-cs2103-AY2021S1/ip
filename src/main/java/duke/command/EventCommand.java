@@ -30,8 +30,10 @@ public class EventCommand extends Command {
 
             Event event;
             try {
-                event = new Event(parseArray[0], LocalDateTime.parse(parseArray[1],
-                        DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
+                assert(LocalDateTime.parse(parseArray[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))
+                       .isAfter(LocalDateTime.now()));
+                event = new Event(parseArray[0], LocalDateTime.parse(
+                  parseArray[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
             } catch (DateTimeParseException e) {
                 throw new DukeCommandException("Invalid date!");
             }
