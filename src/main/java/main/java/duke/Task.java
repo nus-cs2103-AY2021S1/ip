@@ -1,6 +1,7 @@
 package main.java.duke;
 
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -14,7 +15,9 @@ public class Task {
     }
 
     /**
-     * Returns the symbol indicating if the task has been completed
+     * Returns the symbol indicating if the task has been completed.
+     * "\u2713" is unicode for the tick icon and
+     * "\u2718 is unicode for the cross icon.
      * @return
      */
     public String getStatusIcon() {

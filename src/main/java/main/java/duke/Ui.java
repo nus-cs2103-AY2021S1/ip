@@ -4,6 +4,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The class responsible for taking in user commands and displaying Duke's responses
+ */
 public class Ui {
 
     private TaskList taskList;
@@ -22,14 +25,6 @@ public class Ui {
         assert this.storage != null : "storage is assigned to null";
     }
 
-    /**
-     * Prints the DukeException error message.
-     * @param errMsg
-     */
-    public String invalidInput(String errMsg) {
-        DukeException exception = new DukeException(errMsg);
-        return exception.getMessage();
-    }
 
     /**
      * Prints a horizontal line of fixed length.
@@ -42,11 +37,89 @@ public class Ui {
     }
 
     /**
-     * Returns a string to be displayed as the response on CLI or GUI
-     * @param nextInput user input string
-     * @return a string to be displayed as the response on CLI or GUI
+     * Adds the passed task to the list of tasks and returns the response from Duke as a string
+     * @param toAdd The Task object to be added to the list of tasks
+     * @return The string response from duke for the input command.
+     */
+    public String handleAddTask(Task toAdd) throws ArrayIndexOutOfBoundsException {
+        storage.writeToFile(toAdd.toString());
+        taskList.addTask(toAdd);
+        return "  Got it. I've added this task:\n"
+                + "    " + toAdd.toString() + "\n"
+                + "  Now you have " + (taskList.size()+1) + " tasks in the list.";
+    }
+
+    /**
+     * Marks the task at index taskIndex of the task list as done, thereafter updates the contents
+     * of the local text file storage and returns the string response from Duke.
+     * @param taskIndex index of the task in the task list, 0-indexed
+     * @return the string response from Duke for the given 'done' command
+     * @throws IndexOutOfBoundsException
+     * @throws NumberFormatException
+     */
+    public String markTaskDone(int taskIndex) throws IndexOutOfBoundsException, NumberFormatException {
+        Task toMark = taskList.getTask(taskIndex);
+        toMark.markDone();
+        storage.changeFileContents(taskList);
+        return "  Nice! I've marked this task as done:\n"
+                + "    " + toMark.toString();
+    }
+
+    /**
+     * Deletes the task at index taskIndex of the task list, updates the contents
+     * of the local text file storage and returns the string response from Duke.
+     * @param taskIndex index of the task in the task list, 0-indexed
+     * @return the string response from Duke for the given 'delete' command
+     * @throws IndexOutOfBoundsException
+     * @throws NumberFormatException
+     */
+    public String deleteTask(int taskIndex) throws IndexOutOfBoundsException, NumberFormatException {
+        Task toDisplay = taskList.getTask(taskIndex);
+        taskList.removeTask(taskIndex);
+        storage.changeFileContents(taskList);
+        return "  Noted. I've removed this task:\n"
+                + "    " + toDisplay.toString() + "\n"
+                + "  Now you have " + taskList.size() + " tasks in the list.";
+    }
+
+    /**
+     * Takes in the user command and passes it to the parser object, to receive the correct Task
+     * to be handled appropriately. Thereafter Duke's response is returned.
+     * @param nextInput user input commands that involve the creation of task objects.
+     * @return the string to be displayed as the response on CLI or GUI
      */
     public String getResultFromParser(String nextInput) {
+        String toReturn;
+        // pass user input to parser
+        try {
+            Task toAdd = parser.handleInput(nextInput);
+            if (toAdd == null) {
+                DukeException invInputException = new DukeException();
+                toReturn = invInputException.getMessage();
+            } else {
+                toReturn = handleAddTask(toAdd);
+            }
+        } catch (EmptyDescriptionException ede) {
+            toReturn = ede.getMessage();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            DeadlineFormatException dFormatException = new DeadlineFormatException();
+            toReturn = dFormatException.getMessage();
+        } catch (DateTimeParseException dtpe) {
+            DeadlineFormatException dFormatException = new DeadlineFormatException("Sorry, please key in a " +
+                    "valid date and time " +
+                    "format");
+            toReturn = dFormatException.getMessage();
+        }
+        return toReturn;
+    }
+
+    /**
+     * Handles the user input command and returns the respective string responses to the given command. Commands that
+     * involves the creation of tasks will be passed to the getResultFromParser method.
+     * @param nextInput User input command
+     * @return the string to be displayed as the response on CLI or GUI
+     */
+    public String getDukeResponse(String nextInput) {
         String[] commandComponents = nextInput.split(" ", 2);
         String taskType = commandComponents[0];
         String toReturn;
@@ -59,57 +132,32 @@ public class Ui {
         } else if (commandComponents[0].equals("done")) {
             try {
                 int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
-                Task toMark = taskList.getTask(taskIndex);
-                toMark.markDone();
-                storage.changeFileContents(taskList);
-                toReturn = "  Nice! I've marked this task as done:\n"
-                        + "    " + toMark.toString();
+                toReturn = markTaskDone(taskIndex);
             } catch (IndexOutOfBoundsException e) {
-                toReturn = "The task number does not exist!";
+                DoneException doneException = new DoneException("The task number does not exist!");
+                toReturn = doneException.getMessage();
             } catch (NumberFormatException nfe) {
-                toReturn = "Please provide a task number to mark as done!";
+                DoneException doneException =
+                        new DoneException("Please provide a task number to mark as done!");
+                toReturn = doneException.getMessage();
             }
         } else if (commandComponents[0].equals("delete")) {
             try {
                 int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
-                Task toDisplay = taskList.getTask(taskIndex);
-                taskList.removeTask(taskIndex);
-                storage.changeFileContents(taskList);
-                toReturn = "  Noted. I've removed this task:\n"
-                        + "    " + toDisplay.toString() + "\n"
-                        + "  Now you have " + taskList.size() + " tasks in the list.";
+                toReturn = deleteTask(taskIndex);
             } catch (IndexOutOfBoundsException e) {
-                toReturn = "The task number does not exist!";
+                DeleteTaskException deleteException = new DeleteTaskException("The task number does not exist!");
+                toReturn = deleteException.getMessage();
             } catch (NumberFormatException nfe) {
-                toReturn = "Please provide a task number to delete!";
+                DeleteTaskException deleteException =
+                        new DeleteTaskException("Please provide a task number to delete!");
+                toReturn = deleteException.getMessage();
             }
         } else if (commandComponents[0].equals("find")) {
             String keyword = commandComponents[1];
             toReturn = taskList.searchWithKeyword(keyword);
         } else {
-            // pass user input to parser
-            if (commandComponents.length == 1) {
-                toReturn = invalidInput("  \u2639 OOPS!!! The description of a task cannot be empty.");
-            } else {
-                try {
-                    Task toAdd = parser.handleInput(nextInput);
-                    if (toAdd == null) {
-                        toReturn = invalidInput("  \u2639 OOPS!!! I'm sorry, but I don't know what " +
-                                "that means :-(");
-                    } else {
-                        storage.writeToFile(toAdd.toString());
-                        toReturn = "  Got it. I've added this task:\n"
-                                + "    " + toAdd.toString() + "\n"
-                                + "  Now you have " + (taskList.size()+1) + " tasks in the list.";
-                        taskList.addTask(toAdd);
-                    }
-                } catch(ArrayIndexOutOfBoundsException e) {
-                    toReturn = invalidInput("  \u2639 OOPS!!! A deadline/event task must be input with a " +
-                            "forward slash and the deadline");
-                } catch (DateTimeParseException dtpe) {
-                    toReturn = "Sorry, please key in a valid date and time format";
-                }
-            }
+            toReturn = getResultFromParser(nextInput);
         }
         return toReturn;
     }
@@ -127,7 +175,7 @@ public class Ui {
         while (sc.hasNextLine()) {
             String nextInput = sc.nextLine();
             horiLine(60);
-            System.out.println(getResultFromParser(nextInput));
+            System.out.println(getDukeResponse(nextInput));
             if (nextInput.equals("bye")) {
                 sc.close();
                 break;
