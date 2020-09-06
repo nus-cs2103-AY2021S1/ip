@@ -40,6 +40,19 @@ public class Deadline extends Task {
     }
 
     /**
+     * Initialises Deadlines using description, deadline and isDone.
+     * Used when knowledge about isDone is needed, eg. loading existing list from hard disk.
+     *
+     * @param description
+     * @param deadline
+     * @param isDone
+     */
+    public Deadline(String description, LocalDate deadline, boolean isDone) {
+        super(description, isDone);
+        this.deadline = deadline;
+    }
+
+    /**
      * Returns string format of deadline.
      *
      * @return String description of deadline

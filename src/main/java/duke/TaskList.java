@@ -1,5 +1,7 @@
 package duke;
 
+import static duke.DukeCommandType.UPDATE;
+
 import java.util.ArrayList;
 
 /**
@@ -42,7 +44,6 @@ public class TaskList {
 
     /**
      * Prints user's list of tasks.
-     *
      */
     public static String getListOfTasks() {
         String str = "";
@@ -115,6 +116,81 @@ public class TaskList {
             for (Task task : matchingTasks) {
                 str += "\n" + index + ". " + task;
                 index++;
+            }
+        }
+        return str;
+    }
+
+    /**
+     * Updates task's description or date
+     *
+     * @param index
+     * @param type
+     * @param edit
+     * @return String of updated task
+     */
+    public static String updateTask(Integer index, String type, String edit) {
+        String str = "";
+        if (index > tasks.size()) {
+            try {
+                throw new DukeException("", DukeExceptionType.INVALID_INDEX, UPDATE);
+            } catch (DukeException e) {
+                str += e;
+            }
+        } else {
+            Task currTask = tasks.get(index);
+            Task updatedTask = null;
+            if (currTask instanceof ToDo) {
+                if (type.equals("desc")) {
+                    updatedTask = new ToDo(edit, currTask.isDone);
+                    tasks.set(index, updatedTask);
+                    str += "Okay! I've updated this task to:\n"
+                            + tasks.get(index);
+                } else if (type.equals("date")) {
+                    str += "ToDo have no deadline.";
+                }
+            } else if (currTask instanceof Deadline) {
+                if (type.equals("desc")) {
+                    updatedTask = new Deadline(edit, ((Deadline) currTask).deadline, currTask.isDone);
+                    tasks.set(index, updatedTask);
+                    str += "Okay! I've updated this task to:\n"
+                            + tasks.get(index);
+                } else if (type.equals("date")) {
+                    try {
+                        updatedTask = new Deadline(currTask.description, edit, currTask.isDone);
+                        tasks.set(index, updatedTask);
+                        str += "Okay! I've updated this task to:\n"
+                                + tasks.get(index);
+                    } catch (RuntimeException exception) {
+                        try {
+                            throw new DukeException("", DukeExceptionType.WRONG_TIME_FORMAT, UPDATE);
+                        } catch (DukeException e) {
+                            System.err.println(e);
+                            str += e;
+                        }
+                    }
+                }
+            } else if (currTask instanceof Event) {
+                if (type.equals("desc")) {
+                    updatedTask = new Event(edit, ((Event) currTask).scheduled, currTask.isDone);
+                    tasks.set(index, updatedTask);
+                    str += "Okay! I've updated this task to:\n"
+                            + tasks.get(index);
+                } else if (type.equals("date")) {
+                    try {
+                        updatedTask = new Deadline(currTask.description, edit, currTask.isDone);
+                        tasks.set(index, updatedTask);
+                        str += "Okay! I've updated this task to:\n"
+                                + tasks.get(index);
+                    } catch (RuntimeException e) {
+                        try {
+                            throw new DukeException("", DukeExceptionType.WRONG_TIME_FORMAT, UPDATE);
+                        } catch (DukeException exception) {
+                            System.err.println(e);
+                            str += e;
+                        }
+                    }
+                }
             }
         }
         return str;

@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
      * @return greeting
      */
     public static String greeting() {
-        String greet = "Hello! I'm RJ"
+        String greet = "Hello! I'm RJ."
                 + "\nHow can I help you?";
         return greet;
     }

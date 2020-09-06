@@ -62,6 +62,28 @@ public class DukeException extends Exception {
                 error += "Error in adding event: Wrong format";
                 error += "\nFormat: event <description> /at <datetime>";
                 break;
+            case UPDATE:
+                error += "Error in updating task: Wrong format";
+                error += "\nFormat: update <index> <desc/date> <edited description/date>";
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + commandType);
+            }
+            break;
+        case WRONG_TIME_FORMAT:
+            switch (commandType) {
+            case DEADLINE:
+                error += "Error in adding deadline: Wrong time format";
+                error += "\nFormat: YYYY-MM-DD";
+                break;
+            case EVENT:
+                error += "Error in adding event: Wrong time format";
+                error += "\nFormat: YYYY-MM-DD";
+                break;
+            case UPDATE:
+                error += "Error in updating task: Wrong time format";
+                error += "\nFormat: YYYY-MM-DD";
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + commandType);
             }
@@ -101,6 +123,9 @@ public class DukeException extends Exception {
             case DELETE:
                 error += "Error in deleting task: Invalid index";
                 break;
+            case UPDATE:
+                error += "Error in updating task: Invalid index";
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + commandType);
             }
@@ -108,16 +133,6 @@ public class DukeException extends Exception {
         default:
             throw new IllegalStateException("Unexpected value: " + exceptionType);
         }
-        return error;
-    }
-
-    /**
-     * Returns error in user's input due to wrong time format.
-     */
-    public static String wrongTimeFormat() {
-        String error = "";
-        error += "Error in adding deadline: Wrong format";
-        error += "\nFormat: YYYY-MM-DD";
         return error;
     }
 }

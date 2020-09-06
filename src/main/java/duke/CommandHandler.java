@@ -5,6 +5,7 @@ import static duke.DukeCommandType.DELETE;
 import static duke.DukeCommandType.DONE;
 import static duke.DukeCommandType.EVENT;
 import static duke.DukeCommandType.TODO;
+import static duke.DukeCommandType.UPDATE;
 
 import java.time.format.DateTimeParseException;
 
@@ -85,7 +86,7 @@ public class CommandHandler {
                                 Task newTask = new Deadline(task, due);
                                 output += tasks.addTask(newTask);
                             } catch (DateTimeParseException e) {
-                                DukeException.wrongTimeFormat();
+                                throw new DukeException("", DukeExceptionType.WRONG_TIME_FORMAT, DEADLINE);
                             }
                         }
                     } catch (DukeException e) {
@@ -129,7 +130,7 @@ public class CommandHandler {
                     } catch (DukeException e) {
                         output += e;
                     } catch (DateTimeParseException e) {
-                        DukeException.wrongTimeFormat();
+                        throw new DukeException("", DukeExceptionType.WRONG_TIME_FORMAT, EVENT);
                     }
                 }
             } catch (DukeException e) {
@@ -168,6 +169,22 @@ public class CommandHandler {
             } catch (IndexOutOfBoundsException exception) {
                 try {
                     throw new DukeException("", DukeExceptionType.INVALID_INDEX, DELETE);
+                } catch (DukeException e) {
+                    output += e;
+                }
+            }
+            break;
+        case UPDATE:
+            try {
+                String indexString = input.split(" ")[1];
+                assert !indexString.isEmpty() : "Index shouldn't be empty!";
+                int index = Integer.parseInt(indexString);
+                String type = input.split(" ")[2];
+                String edit = input.split(" ")[3];
+                output += tasks.updateTask(index - 1, type, edit);
+            } catch (IndexOutOfBoundsException exception) {
+                try {
+                    throw new DukeException("", DukeExceptionType.INVALID_INDEX, UPDATE);
                 } catch (DukeException e) {
                     output += e;
                 }

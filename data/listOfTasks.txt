@@ -1,3 +1,5 @@
-T | 1 | CS2100 Lab 3
-T | 0 | CS2101 OP1 Script
-E | 0 | CS2101 OP1 Rehearsal  | 2020-09-07
+E | 0 | 7 | 2020-09-09
+T | 0 | hdhd
+T | 1 | yo
+T | 0 | hey hey
+D | 0 | yoyo  | 2020-09-09
