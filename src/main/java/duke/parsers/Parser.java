@@ -1,15 +1,6 @@
 package duke.parsers;
 
-import duke.command.AddTaskCommand;
-import duke.command.ByeCommand;
-import duke.command.ClearCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.HelpCommand;
-import duke.command.ListCommand;
-import duke.command.UnknownCommand;
+import duke.command.*;
 
 /**
  * Deals with making sense of the user command.
@@ -53,6 +44,9 @@ public class Parser {
 
         case "find":
             return new FindCommand(input);
+
+        case "schedule":
+            return new ScheduleCommand(input);
 
         case "bye":
             return new ByeCommand();

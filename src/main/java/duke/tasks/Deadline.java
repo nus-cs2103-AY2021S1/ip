@@ -1,14 +1,9 @@
 package duke.tasks;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 /**
  * Represents a task with a set deadline.
  */
-public class Deadline extends Task {
-
-    protected LocalDateTime by;
+public class Deadline extends TimedTask {
 
     /**
      * Class constructor.
@@ -17,8 +12,7 @@ public class Deadline extends Task {
      * @param by          A string representing the task deadline date/time.
      */
     public Deadline(String description, String by) {
-        super(description, TaskType.DEADLINE);
-        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        super(description, TaskType.DEADLINE, by);
     }
 
     /**
@@ -30,18 +24,7 @@ public class Deadline extends Task {
      * @param by          A string representing the task deadline date/time.
      */
     public Deadline(String description, boolean isDone, String by) {
-        super(description, isDone, TaskType.DEADLINE);
-        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
-    }
-
-    @Override
-    public String getTime() {
-        return by.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
-    }
-
-    @Override
-    public String printTime() {
-        return by.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a"));
+        super(description, isDone, TaskType.DEADLINE, by);
     }
 
     @Override

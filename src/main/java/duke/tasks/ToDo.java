@@ -1,5 +1,8 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * Represents a task with a simple description.
  */
@@ -26,13 +29,23 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String getTime() {
+    public String getTimeString() {
         throw new IllegalStateException("Impossible method call");
     }
 
     @Override
     public String printTime() {
         throw new IllegalStateException("Impossible method call");
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return LocalDate.EPOCH;
+    }
+
+    @Override
+    public LocalTime getTime() {
+        return LocalTime.MIN;
     }
 
 }

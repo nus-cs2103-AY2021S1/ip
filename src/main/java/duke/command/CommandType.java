@@ -97,6 +97,14 @@ public enum CommandType {
                     + "        \"find <keyword(s)>\"";
         }
     },
+    SCHEDULE {
+        @Override
+        public String toString() {
+            return "- Schedule: Shows the tasks due/at a specific date\n"
+                    + "        \"schedule <date>\"\n"
+                    + "        Date formatting: dd-MM-yyyy";
+        }
+    },
     /**
      * Represents a bye command.
      */
