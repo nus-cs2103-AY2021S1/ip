@@ -12,9 +12,9 @@ import javafx.stage.Stage;
  * Represents the entry point for the {@link Duke Duke} GUI application.
  */
 public class Main extends Application {
-    private final Duke duke = new Duke();
     private static final String STAGE_TITLE = "Duke Chat Bot";
     private static final String DEFAULT_SCENE = "/view/LandingScene.fxml";
+    private final Duke duke = new Duke();
     
     @Override
     public void start(Stage primaryStage) throws Exception {
