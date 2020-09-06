@@ -1,17 +1,17 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import duke.Storage;
-import duke.Task;
-import duke.TaskList;
-import duke.Ui;
-import duke.Command;
 import duke.AdditionalInfo;
-import duke.ToDo;
+import duke.Command;
 import duke.Deadline;
 import duke.Event;
 import duke.Parser;
+import duke.Storage;
+import duke.Task;
+import duke.TaskList;
+import duke.ToDo;
+import duke.Ui;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class Duke {
@@ -19,7 +19,7 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
-    public void execute(Command command) {
+    private void execute(Command command) {
         String output = "";
         int commandType = command.getCommandType();
         boolean print = true;
@@ -66,13 +66,13 @@ public class Duke {
         }
     }
 
-    public void run() {
+    private void run() {
         start();
         runLoopUntilExit();
         exit();
     }
 
-    public void runLoopUntilExit() {
+    private void runLoopUntilExit() {
         Command command;
         do {
             String input = ui.getUserInput();
@@ -91,7 +91,7 @@ public class Duke {
             File file = new File(filePath, fileName);
             if (dir.exists() && file.exists()) {
                 this.taskList = new TaskList(storage.load());
-            } else if (dir.exists()){
+            } else if (dir.exists()) {
                 // case where only folder exist
                 storage.createFile();
                 this.taskList = new TaskList();

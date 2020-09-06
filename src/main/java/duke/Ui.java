@@ -11,7 +11,7 @@ public class Ui {
 
     public static void printMessage(String s) {
         String output = String.format("____________________________________________________________\n%s\n"
-                + "____________________________________________________________\n",s);
+                + "____________________________________________________________\n", s);
         System.out.println(output);
     }
 
