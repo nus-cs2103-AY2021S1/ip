@@ -3,7 +3,9 @@ package duke;
 import java.io.File;
 import java.util.Scanner;
 
+import duke.controllers.DialogBox;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,9 +21,13 @@ import javafx.scene.image.ImageView;
 public class Duke extends Application {
     private TaskList tasks;
     // Variables for JavaFX
+    @FXML
     private ScrollPane scrollPane; // msg get too long
+    @FXML
     private VBox dialogContainer; // Lays out children in a vertical column
+    @FXML
     private TextField userInput; // Receive input
+    @FXML
     private Button sendButton; // the button that says Send for user
     private Scene scene; // The final scene that gets shown
     private Image userImg = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -162,6 +168,7 @@ public class Duke extends Application {
      * Do the same thing with Duke response (which is just echoing for now)
      * Finally, clear user text input node.
      */
+    @FXML
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText())); // impl getResponse
