@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * <h1> Storage Class (Saving Tasks)</h1>
@@ -23,6 +24,21 @@ public class Storage {
         this.file = new File(fileName);
         this.recordArrayLst = new ArrayList<>();
     }
+
+    /**
+     * Loads the saved tasks that have not been archived.
+     * @param file the TaskList saved text file
+     * @return an ArrayList of the past Tasks
+     * @throws IOException on input error.
+     */
+    public ArrayList<String> loadFile(File file) throws IOException {
+        Scanner sc = new Scanner(file);
+        ArrayList<String> stringArr = new ArrayList<>();
+        while (sc.hasNextLine()) {
+            stringArr.add(sc.nextLine());
+        }
+        return stringArr;
+    };
 
     /**
      * Saves the current list of task to a textfile.
