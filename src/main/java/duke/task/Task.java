@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.util.DateTime;
+
 /**
  * Wrapper class for all types of tasks.
  */
@@ -11,7 +13,7 @@ public class Task {
     protected String taskType;
     protected String description;
     protected boolean isDone;
-    protected String date;
+    protected DateTime dateTime;
 
     /**
      * Creates a brand new {@code Task}.
@@ -28,7 +30,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? TICK_SYMBOL : CROSS_SYMBOL); //return tick or cross symbols
+        return (isDone ? TICK_SYMBOL : CROSS_SYMBOL);
     }
 
     public String getDescription() {
@@ -43,8 +45,8 @@ public class Task {
         return taskType;
     }
 
-    public String getDate() {
-        return this.date;
+    public DateTime getDateTime() {
+        return this.dateTime;
     }
 
     @Override

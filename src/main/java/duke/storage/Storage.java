@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import duke.exception.DukeException;
+import duke.parser.DateTimeParser;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -64,10 +65,12 @@ public class Storage {
                         task = new ToDo(Boolean.parseBoolean(taskData[1]), taskData[2]);
                         break;
                     case "D":
-                        task = new Deadline(Boolean.parseBoolean(taskData[1]), taskData[2], taskData[3]);
+                        task = new Deadline(Boolean.parseBoolean(taskData[1]), taskData[2],
+                            DateTimeParser.parse(taskData[3]));
                         break;
                     case "E":
-                        task = new Event(Boolean.parseBoolean(taskData[1]), taskData[2], taskData[3]);
+                        task = new Event(Boolean.parseBoolean(taskData[1]), taskData[2],
+                            DateTimeParser.parse(taskData[3]));
                         break;
                     default:
                         throw new DukeException("Invalid argument detected in data file");

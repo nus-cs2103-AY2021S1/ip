@@ -12,7 +12,7 @@ import duke.command.ListCommand;
 import duke.exception.DukeException;
 
 /**
- * Utility class that parses user's input and checks for command correctness before
+ * Class that parses user's input and checks for argument correctness before
  * converting the input into executable commands.
  */
 public class Parser {

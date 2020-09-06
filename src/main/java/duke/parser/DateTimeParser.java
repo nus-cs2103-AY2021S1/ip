@@ -8,13 +8,22 @@ import java.time.format.DateTimeParseException;
 import duke.exception.DukeException;
 import duke.util.DateTime;
 
+/**
+ * Class that parses datetime input from the user and returns a {@link DateTime}.
+ */
 public class DateTimeParser {
 
     private static final String[] ACCEPTED_DATE_FORMATS = {"yyyy/M/d", "d/M/yyyy", "yyyy-M-d", "d-M-yyyy",
         "yyyy MMM d", "d MMM yyyy"};
     private static final String[] ACCEPTED_TIME_FORMATS = {"HH[:]mm", "h:mma", "h.mma"};
 
-    public static DateTime parseDateTime(String input) throws DukeException {
+    /**
+     * Parses datetime input from the user.
+     * @param input Datetime input from the user.
+     * @return Parsed {@link DateTime}.
+     * @throws DukeException If the input datetime is of an invalid format.
+     */
+    public static DateTime parse(String input) throws DukeException {
         String[] dateTimeArgs = input.split(" ", 2);
         assert dateTimeArgs.length > 0 : "Datetime input cannot be empty";
 

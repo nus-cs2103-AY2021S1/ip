@@ -85,7 +85,7 @@ public class TaskList {
                 serializedTask = String.format("%s|%s|%s\n", task.getTaskType(), task.isDone(), task.getDescription());
             } else {
                 serializedTask = String.format("%s|%s|%s|%s\n", task.getTaskType(),
-                        task.isDone(), task.getDescription(), task.getDate());
+                        task.isDone(), task.getDescription(), task.getDateTime().getOriginalInput());
             }
 
             data.append(serializedTask);

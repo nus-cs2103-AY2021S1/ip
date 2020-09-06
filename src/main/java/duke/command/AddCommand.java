@@ -1,13 +1,15 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.parser.DateTimeParser;
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
 import duke.ui.Ui;
-import duke.storage.Storage;
+import duke.util.DateTime;
 
 /**
  * Class representing an add task command.
@@ -45,11 +47,13 @@ public class AddCommand extends Command {
             break;
         }
         case DEADLINE: {
-            task = new Deadline(taskContent[0].trim(), taskContent[1].trim());
+            DateTime dateTime = DateTimeParser.parse(taskContent[1].trim());
+            task = new Deadline(taskContent[0].trim(), dateTime);
             break;
         }
         case EVENT: {
-            task = new Event(taskContent[0].trim(), taskContent[1].trim());
+            DateTime dateTime = DateTimeParser.parse(taskContent[1].trim());
+            task = new Event(taskContent[0].trim(), dateTime);
             break;
         }
         default:

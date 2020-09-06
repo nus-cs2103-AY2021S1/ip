@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
 
 /**
  * Class representing a command to list out the current tasks.
