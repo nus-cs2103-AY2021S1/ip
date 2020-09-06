@@ -4,7 +4,15 @@ import duke.exceptions.InvalidDeadlineException;
 import duke.exceptions.InvalidEventException;
 import duke.exceptions.InvalidKeyException;
 import duke.exceptions.InvalidRequestException;
-import duke.tasks.*;
+import duke.tasks.Event;
+import duke.tasks.Deadline;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
+import duke.storage.Storage;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Interpret the command and do the instruction.

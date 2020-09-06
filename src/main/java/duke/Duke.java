@@ -12,6 +12,7 @@ public class Duke {
     /**
      * The main method in Duke class.
      * Create an Ui object to print the lists of tasks.
+     * @param args Unused.
      *
      * @param args Unused.
      */
