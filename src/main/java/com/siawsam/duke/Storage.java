@@ -26,7 +26,7 @@ public class Storage {
      * @throws ClassNotFoundException if the file cannot be deserialized into a TaskList.
      */
     TaskList load() throws IOException, ClassNotFoundException {
-        return Reader.readListFromFile(this.filePath);
+        return Reader.readListFromFile(filePath);
     }
 
     /**
@@ -45,7 +45,7 @@ public class Storage {
      * @return True if file exists, False if otherwise.
      */
     boolean doesStorageFileExist() {
-        return Reader.doesFileExist(this.filePath);
+        return Reader.doesFileExist(filePath);
     }
 
 }

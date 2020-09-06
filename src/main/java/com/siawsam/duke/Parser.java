@@ -20,7 +20,7 @@ public class Parser {
      * @param storage A Storage instance to use when the parser needs to save to disk.
      */
     public Parser(Storage storage) {
-        this.userTaskList = new TaskList();
+        userTaskList = new TaskList();
         this.storage = storage;
     }
     

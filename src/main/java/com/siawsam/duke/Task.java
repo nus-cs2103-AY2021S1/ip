@@ -24,7 +24,7 @@ public class Task implements Serializable {
      * @return A response indicating the task that is marked as "done".
      */
     Response markAsDone() {
-        this.isDone = true;
+        isDone = true;
         return new Response(Ui.showMarkedAsDone(this));
     }
     
