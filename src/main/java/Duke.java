@@ -24,7 +24,9 @@ public class Duke {
     TaskList myTaskList = new TaskList();
 
     // Added 2 image items for use later in duke
+
     private Image user = new Image(this.getClass().getResourceAsStream("/images/SeanDuke.JPG"));
+
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/JARVIS.JPG"));
 
     public String getResponse(String input) {
