@@ -28,6 +28,7 @@ public class InvalidCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
+        assert ui != null;
         return ui.showError(message);
     }
 }

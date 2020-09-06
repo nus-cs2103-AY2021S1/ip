@@ -89,7 +89,10 @@ public class TaskList {
      *
      * @param taskIndex Index of task to be removed.
      */
-    public void removeFromList(int taskIndex) {
+    public void removeFromList(int taskIndex) throws IndexOutOfBoundsException{
+        if (taskIndex < 0 || taskIndex >= tasks.size()) {
+            throw new IndexOutOfBoundsException("Invalid Index!");
+        }
         tasks.remove(taskIndex);
     }
 
@@ -108,7 +111,10 @@ public class TaskList {
      * @param taskIndex Index of task to be retrieved.
      * @return Retrived task.
      */
-    public Task getTaskAtIndex(int taskIndex) {
+    public Task getTaskAtIndex(int taskIndex) throws IndexOutOfBoundsException {
+        if (taskIndex < 0 || taskIndex >= tasks.size()) {
+            throw new IndexOutOfBoundsException("Invalid Index!");
+        }
         return tasks.get(taskIndex);
     }
 }

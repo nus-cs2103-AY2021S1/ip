@@ -45,6 +45,7 @@ public class UI {
      * @return Error message as a String.
      */
     public String showLoadingError(String s) {
+        assert s.length() > 0;
         return "Looks like there was an error retrieving your data\n"
                        + s;
     }
@@ -55,6 +56,7 @@ public class UI {
      * @return Error message as a String.
      */
     public String showError(String s) {
+        assert s.length() > 0;
         return s;
     }
 
@@ -66,6 +68,8 @@ public class UI {
      * @return Task added message as a String.
      */
     public String displayAddedTask(Task task, int listSize) {
+        assert listSize > 0;
+        assert task != null;
         return "Got it. I've added this task:\n"
                        + task + "\n" + "Now you have \n"
                        + listSize + " tasks in the list.";
@@ -80,6 +84,8 @@ public class UI {
      * @return Task deleted message as a String.
      */
     public String displayDeletedTask(Task task, int listSize) {
+        assert listSize >= 0;
+        assert task != null;
         return "Noted. I've removed this task:\n" + task + "\n" + "Now you have " + listSize + " tasks in the list.";
     }
 
@@ -90,6 +96,7 @@ public class UI {
      * @return Task done message as a String.
      */
     public String displayDoneTask(Task task) {
+        assert task != null;
         return "Nice! I've marked this task as done:\n" + task;
     }
 
@@ -101,6 +108,11 @@ public class UI {
      * @return Tasks with corresponding due date as a String.
      */
     public String displayEventsOnDate(ArrayList<Task> tasks, LocalDate localDate) {
+        if (tasks.size() == 0) {
+            return "Whoops! Looks like there are no events on "
+                           + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        }
+        assert tasks.size() > 0;
         String answer = "Here are your events on "
                 + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ":\n";
         for (Task task : tasks) {
@@ -119,6 +131,7 @@ public class UI {
         if (tasks.size() == 0) {
             return "This is a very empty list... UwU";
         }
+        assert tasks.size() > 0;
         String result = "Here are the tasks in your list:\n";
         int taskCount = 1;
         for (Task task : tasks) {

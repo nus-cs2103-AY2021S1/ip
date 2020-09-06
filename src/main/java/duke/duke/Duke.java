@@ -50,13 +50,13 @@ public class Duke extends Application {
      */
     public Duke() {
         store = new Storage("./data", "duke.txt");
+        this.ui = new UI();
         File loadFile = store.loadData(ui);
         if (loadFile == null) {
             tasks = new TaskList();
         } else {
             tasks = new TaskList(loadFile);
         }
-        this.ui = new UI();
         userImage = new Image(
                 this.getClass().getResourceAsStream("/images/DaUser.png"));
         dukeImage = new Image(
