@@ -38,40 +38,32 @@ public class Duke {
      */
     public String run(String input) {
         String message = "";
+        Command currentCommand = null;
         try {
             if (Parser.isList(input)) {
-                ListCommand list = new ListCommand(input);
-                message = list.execute(this.tasks, this.ui);
+                currentCommand = new ListCommand(input);
             } else if (Parser.isDone(input)) {
-                DoneCommand done = new DoneCommand(input);
-                message = done.execute(this.tasks, this.ui);
+                currentCommand = new DoneCommand(input);
             } else if (Parser.isToDo(input)) {
-                ToDoCommand todo = new ToDoCommand(input);
-                message = todo.execute(this.tasks, this.ui);
+                currentCommand = new ToDoCommand(input);
             } else if (Parser.isDeadline(input)) {
-                DeadlineCommand deadline = new DeadlineCommand(input);
-                message = deadline.execute(this.tasks, this.ui);
+                currentCommand = new DeadlineCommand(input);
             } else if (Parser.isEvent(input)) {
-                EventCommand event = new EventCommand(input);
-                message = event.execute(this.tasks, this.ui);
+                currentCommand = new EventCommand(input);
             } else if (Parser.isDelete(input)) {
-                DeleteCommand delete = new DeleteCommand(input);
-                message = delete.execute(this.tasks, this.ui);
+                currentCommand = new DeleteCommand(input);
             } else if (Parser.isFind(input)) {
-                FindCommand find = new FindCommand(input);
-                message = find.execute(this.tasks, this.ui);
+                currentCommand = new FindCommand(input);
             } else if (Parser.isTag(input)) {
-                TagCommand tag = new TagCommand(input);
-                message = tag.execute(this.tasks, this.ui);
+                currentCommand = new TagCommand(input);
             } else if (Parser.isFindTag(input)) {
-                FindTagCommand findTag = new FindTagCommand(input);
-                message = findTag.execute(this.tasks, this.ui);
+                currentCommand = new FindTagCommand(input);
             } else if (Parser.isHelp(input)) {
-                HelpCommand help = new HelpCommand(input);
-                message = help.execute(this.tasks, this.ui);
+                currentCommand = new HelpCommand(input);
             } else {
                 throw new DukeUnknownInputException(input);
             }
+            message = currentCommand.execute(this.tasks, this.ui);
         } catch (DukeException e) {
             message = e.getMessage();
         }
