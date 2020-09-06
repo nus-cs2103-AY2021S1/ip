@@ -19,11 +19,11 @@ public class Ui {
         command = new String[2];
     }
 
-    public String showWelcome() {
+    public static String showWelcome() {
         return "Hello! I'm Duke\n" + "What can I do for you?";
     }
 
-    public String showEnd() {
+    public static String showEnd() {
         return "Bye. Hope to see you again soon!";
     }
 
