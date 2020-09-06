@@ -9,7 +9,7 @@ import duke.ui.Ui;
 /**
  * Handles 'done' command input by user.
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     /**
      * Constructor for DoneCommand class.

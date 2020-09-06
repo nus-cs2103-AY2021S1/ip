@@ -14,14 +14,14 @@ import duke.ui.Ui;
 /**
  * Handles 'deadline', 'event' and 'todo' command input by user.
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
     /**
      * Constructor for AddCommand class.
      *
      * @param command String input by user.
      */
-    public AddCommand(String command){
+    public AddCommand(String command) {
         super(command);
     }
 
