@@ -38,6 +38,7 @@ public class TaskList {
      * @return str String to be returned.
      */
     public String addTask(Task task) {
+        assert this.tasks != null : "TaskList has not been initiated properly with ArrayList<Tasks>.";
         this.tasks.add(task);
         // inform user item has been added
         String str = "Got it. I've added this task:\n"
@@ -54,6 +55,7 @@ public class TaskList {
      */
     public String deleteTask(int taskNo) throws DukeException {
         // verify task number exists, then delete
+        assert taskNo - 1 < tasks.size() : "Task number to delete does not exist.";
         if (taskNo - 1 < tasks.size()) {
             Task toDelete = tasks.get(taskNo - 1);
             tasks.remove(taskNo - 1);
@@ -75,6 +77,7 @@ public class TaskList {
      */
     public String markTaskDone(int taskNo) throws DukeException {
         // verify task number exists, then mark as done
+        assert taskNo - 1 < tasks.size() : "Task number to mark as done does not exist.";
         if (taskNo - 1 < tasks.size()) {
             if (tasks.get(taskNo - 1).isDone) {
                 // task marked as done already
@@ -99,6 +102,7 @@ public class TaskList {
      * @throws DukeException if keyword is empty.
      */
     public String findTask(String keyword) throws DukeException {
+        assert keyword != null : "Keyword is empty.";
         if (keyword == null) {
             throw new DukeException("Please indicate the keyword you wish to use to find tasks with.");
         } else {
