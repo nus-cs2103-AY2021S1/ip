@@ -55,10 +55,10 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response;
-        CommandResult result = null;
+        CommandResult commandResult = null;
         try {
-            result = duke.execute(userInput.getText());
-            response = result.getFeedback();
+            commandResult = duke.execute(userInput.getText());
+            response = commandResult.getFeedback();
         } catch (DukeException e) {
             response = e.toString();
         }
@@ -71,11 +71,10 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (result == null) {
+        if (commandResult == null) {
             return;
         }
-        if (result.isExit()) {
-            // TODO
+        if (commandResult.isExit()) {
             Platform.runLater(() -> {
                 try {
                     //Show the bye message for 1.5seconds before exit.
