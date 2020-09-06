@@ -27,6 +27,7 @@ public class FindCommand extends Command {
                 return e.getMessage();
             }
         }
+        assert response != "" : "Response is an empty string";
         return response;
     }
 }

@@ -15,7 +15,7 @@ public class UpdateCommand extends Command {
      * Creates an update command to mark the task at the specified index as done.
      *
      * @param command is the user input.
-     * @param index is the index of the task in the list to be updated.
+     * @param index   is the index of the task in the list to be updated.
      */
     public UpdateCommand(String command, String index) {
         super(command);
@@ -32,6 +32,7 @@ public class UpdateCommand extends Command {
         } catch (DukeException e) {
             return e.getMessage();
         }
+        assert response != "" : "Response is an empty string";
         return response;
     }
 

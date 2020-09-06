@@ -54,6 +54,7 @@ public class AddCommand extends Command {
         } catch (DukeException e) {
             return e.getMessage();
         }
+        assert todo != null : "todo is not properly created";
         return formatMessage(todo);
     }
 
@@ -73,6 +74,7 @@ public class AddCommand extends Command {
         } catch (DateTimeParseException e) {
             return "Please enter timing in '/by 02-30-2020 23:59' format";
         }
+        assert deadline != null : "Deadline is not properly created";
         return formatMessage(deadline);
     }
 
@@ -92,6 +94,7 @@ public class AddCommand extends Command {
         } catch (DateTimeParseException e) {
             return "Please enter timing in '/at 02-30-2020 23:59' format";
         }
+        assert event != null : "Event is not properly created";
         return formatMessage(event);
     }
 

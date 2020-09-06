@@ -37,11 +37,12 @@ public class TaskList {
      * @throws DukeException if the index specified by the user is invalid.
      */
     public Task deleteTask(int index) throws DukeException {
-        if (isIndexInRange(index)) {
-            return this.taskList.remove(index - 1);
+        if (!isIndexInRange(index)) {
+            throw new DukeException("Oh no! Task number does not exist in task list.");
         }
-
-        throw new DukeException("Oh no! Task number does not exist in task list.");
+        Task deletedTask = this.taskList.remove(index - 1);
+        assert deletedTask != null : "Task is null";
+        return deletedTask;
     }
 
     public int size() {
@@ -49,11 +50,12 @@ public class TaskList {
     }
 
     public Task getTask(int index) throws DukeException {
-        if (isIndexInRange(index)) {
-            return this.taskList.get(index - 1);
+        if (!isIndexInRange(index)) {
+            throw new DukeException("Oh no! Task number does not exist in task list.");
         }
-
-        throw new DukeException("Oh no! Task number does not exist in task list.");
+        Task task = this.taskList.get(index - 1);
+        assert task != null : "Task is null";
+        return task;
     }
 
     public void forEach(Consumer<Task> consumer) {
