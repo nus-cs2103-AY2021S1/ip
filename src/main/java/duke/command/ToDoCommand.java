@@ -41,6 +41,7 @@ public class ToDoCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
         String todoInfo = this.retrieveTodoInfo();
+        assert !todoInfo.isBlank();
         Task toAdd = new Todo(todoInfo.trim());
         tasks.addTask(toAdd);
         storage.saveToFile(tasks);
