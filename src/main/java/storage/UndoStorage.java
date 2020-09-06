@@ -160,6 +160,9 @@ public class UndoStorage {
                     mugPw.println(mugSc.next());
                 }
             }
+            // close scanner
+            undoSc.close();
+            mugSc.close();
             // close mug file
             mugPw.flush();
             mugPw.close();

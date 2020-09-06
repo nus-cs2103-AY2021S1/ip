@@ -1,14 +1,15 @@
 package storage;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import command.Command;
 import mugexception.MugException;
@@ -56,12 +57,12 @@ public class Storage {
     public ArrayList<Task> load() {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
-            Scanner sc = new Scanner(new File(this.filepath));
-            sc.useDelimiter("[\n]");
+            FileReader fr = new FileReader(this.filepath);
+            BufferedReader br = new BufferedReader(fr);
             String line;
 
-            while (sc.hasNext()) {
-                line = sc.next();
+            while (br.ready()) {
+                line = br.readLine();
                 String[] newLine = line.split("[|]");
                 Command command = Parser.command(newLine[0]);
                 boolean hasDone = Integer.parseInt(newLine[1]) == 1;
@@ -77,7 +78,7 @@ public class Storage {
                 }
             }
 
-        } catch (FileNotFoundException | MugException ex) {
+        } catch (IOException | MugException ex) {
             System.out.println("WARNING: " + ex.getMessage() + " :WARNING");
         } catch (ArrayIndexOutOfBoundsException ex) {
             System.out.println("WARNING: There is Something wrong with your Storage :WARNING");
@@ -122,11 +123,11 @@ public class Storage {
             }
             pw.flush();
             pw.close();
-            Scanner mugSc = new Scanner(new File(this.filepath));
-            mugSc.useDelimiter("[\n]");
+            FileReader fr = new FileReader(this.filepath);
+            BufferedReader br = new BufferedReader(fr);
             int lineNum = 0;
-            while (mugSc.hasNext()) {
-                mugSc.next();
+            while (br.ready()) {
+                br.readLine();
                 lineNum++;
             }
             writeUndoRecord("add", "", lineNum);
@@ -154,11 +155,11 @@ public class Storage {
             FileWriter fw = new FileWriter(tempFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            Scanner sc = new Scanner(new File(this.filepath));
-            sc.useDelimiter("[\n]");
+            FileReader fr = new FileReader(this.filepath);
+            BufferedReader br = new BufferedReader(fr);
 
-            while (sc.hasNext()) {
-                line = sc.next();
+            while (br.ready()) {
+                line = br.readLine();
                 taskTrack++;
                 if (taskTrack != taskId) {
                     pw.println(line);
@@ -167,7 +168,7 @@ public class Storage {
                 }
             }
 
-            sc.close();
+            br.close();
             pw.flush();
             pw.close();
             oldFile.delete();
@@ -195,11 +196,11 @@ public class Storage {
             FileWriter fw = new FileWriter(tempFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            Scanner sc = new Scanner(new File(this.filepath));
-            sc.useDelimiter("[\n]");
+            FileReader fr = new FileReader(this.filepath);
+            BufferedReader br = new BufferedReader(fr);
 
-            while (sc.hasNext()) {
-                line = sc.next();
+            while (br.ready()) {
+                line = br.readLine();
                 taskTrack++;
                 if (taskTrack != taskId) {
                     pw.println(line);
@@ -209,7 +210,8 @@ public class Storage {
                     pw.println(newLine[0] + "|" + 1 + "|" + newLine[2]);
                 }
             }
-            sc.close();
+
+            br.close();
             pw.flush();
             pw.close();
             oldFile.delete();
