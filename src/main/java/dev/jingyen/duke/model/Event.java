@@ -7,7 +7,7 @@ package dev.jingyen.duke.model;
  */
 public class Event extends Task {
     private static final String SAVE_STRING = "EVENT|%s|%s|%s";
-    private String timeRange;
+    private final String timeRange;
 
     public Event(String taskName, String timeRange) {
         super(taskName);
