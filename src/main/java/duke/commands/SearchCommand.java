@@ -44,18 +44,24 @@ public class SearchCommand extends Command {
         Set<Task> tasksFound = new HashSet<>();
         try {
             for (String keyword : commandKeywords) {
-                String keywordPattern = "(.*)" + keyword + "(.*)";
-                for (int i = 0; i < taskList.getListSize(); i++) {
-                    Task task = taskList.getTaskAtIndex(i);
-                    if (task.toString().matches(keywordPattern)) {
-                        tasksFound.add(task);
-                    }
-                }
+                findTasksWithKeyword(keyword, tasksFound, taskList);
             }
             ArrayList<Task> tasks = new ArrayList<>(tasksFound);
             return ui.displayAllItems(tasks);
         } catch (IndexOutOfBoundsException e) {
             return ui.showError("There's no such element!");
+        }
+    }
+
+
+    private void findTasksWithKeyword(String keyword, Set<Task> taskSet, TaskList taskList)
+            throws IndexOutOfBoundsException {
+        String keywordPattern = "(.*)" + keyword + "(.*)";
+        for (int i = 0; i < taskList.getListSize(); i++) {
+            Task task = taskList.getTaskAtIndex(i);
+            if (task.toString().matches(keywordPattern)) {
+                taskSet.add(task);
+            }
         }
     }
 }

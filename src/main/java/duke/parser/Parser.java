@@ -89,27 +89,27 @@ public class Parser {
     //Ensures todo command has the correct format and creates a TodoCommand object if it does.
     //Otherwise, returns an InvalidCommand object.
     private static Command prepareTodo(String commandBody) {
-        if (commandBody.length() > 0) {
-            return new TodoCommand(commandBody.strip());
-        } else {
+        if (commandBody.length() <= 0) {
             return new InvalidCommand();
         }
+        return new TodoCommand(commandBody.strip());
     }
 
     //Ensures deadline command has the correct format and creates a DeadlineCommand object if it does.
     //Otherwise, returns an InvalidCommand object.
     private static Command prepareDeadline(String commandBody) {
         String[] splitParts = commandBody.split((" /by "));
-        if (splitParts.length != 2 || splitParts[0].strip().length() == 0 || splitParts[1].strip().length() == 0) {
+        boolean insufficientArguments = splitParts.length != 2;
+        boolean argumentsEmpty = splitParts[0].strip().length() == 0 || splitParts[1].strip().length() == 0;
+        boolean isNotValid = insufficientArguments || argumentsEmpty;
+        if (isNotValid) {
             return new InvalidCommand();
+        }
+        LocalDate localDate = Parser.parseDate(splitParts[1].strip());
+        if (localDate != null) {
+            return new DeadlineCommand(splitParts[0].stripLeading(), localDate);
         } else {
-            LocalDate localDate = Parser.parseDate(splitParts[1].strip());
-            if (localDate != null) {
-                return new DeadlineCommand(splitParts[0].stripLeading(), localDate);
-            } else {
-                return new DeadlineCommand(splitParts[0].stripLeading(), splitParts[1].strip());
-            }
-
+            return new DeadlineCommand(splitParts[0].stripLeading(), splitParts[1].strip());
         }
     }
 
@@ -117,7 +117,10 @@ public class Parser {
     //Otherwise, returns an InvalidCommand object.
     private static Command prepareEvent(String commandBody) {
         String[] splitParts = commandBody.split((" /at "));
-        if (splitParts.length != 2 || splitParts[0].strip().length() == 0 || splitParts[1].strip().length() == 0) {
+        boolean insufficientArguments = splitParts.length != 2;
+        boolean argumentsEmpty = splitParts[0].strip().length() == 0 || splitParts[1].strip().length() == 0;
+        boolean isNotValid = insufficientArguments || argumentsEmpty;
+        if (isNotValid) {
             return new InvalidCommand();
         } else {
             LocalDate localDate = Parser.parseDate(splitParts[1].strip());

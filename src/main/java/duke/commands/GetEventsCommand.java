@@ -1,5 +1,6 @@
 package duke.commands;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -43,13 +44,7 @@ public class GetEventsCommand extends Command {
         assert ui != null;
         assert storage != null;
         try {
-            ArrayList<Task> listOfTasks = new ArrayList<>();
-            for (int i = 0; i < taskList.getListSize(); i++) {
-                Task task = taskList.getTaskAtIndex(i);
-                if (task.hasDate() && task.getDate().isEqual(localDate)) {
-                    listOfTasks.add(task);
-                }
-            }
+            ArrayList<Task> listOfTasks = getTasksMatchingDate(taskList, this.localDate);
             storage.saveData(taskList, ui);
             return ui.displayEventsOnDate(listOfTasks, localDate);
         } catch (DateTimeParseException e) {
@@ -57,5 +52,16 @@ public class GetEventsCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             return ui.showError("There's no such element!");
         }
+    }
+
+    private ArrayList<Task> getTasksMatchingDate(TaskList taskList, LocalDate localDate) {
+        ArrayList<Task> listOfTasks = new ArrayList<>();
+        for (int i = 0; i < taskList.getListSize(); i++) {
+            Task task = taskList.getTaskAtIndex(i);
+            if (task.hasDate() && task.getDate().isEqual(localDate)) {
+                listOfTasks.add(task);
+            }
+        }
+        return listOfTasks;
     }
 }

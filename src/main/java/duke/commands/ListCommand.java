@@ -35,13 +35,18 @@ public class ListCommand extends Command {
         assert ui != null;
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            for (int i = 0; i < taskList.getListSize(); i++) {
-                Task task = taskList.getTaskAtIndex(i);
-                tasks.add(task);
-            }
-            return ui.displayAllItems(tasks);
+            getAllTasks(tasks, taskList);
         } catch (IndexOutOfBoundsException e) {
             return ui.showError("There's no such element!");
         }
+        return ui.displayAllItems(tasks);
     }
+
+    private void getAllTasks(ArrayList<Task> tasks, TaskList taskList) throws IndexOutOfBoundsException {
+        for (int i = 0; i < taskList.getListSize(); i++) {
+            Task task = taskList.getTaskAtIndex(i);
+            tasks.add(task);
+        }
+    }
+
 }
