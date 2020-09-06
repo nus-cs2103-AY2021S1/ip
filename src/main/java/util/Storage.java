@@ -93,34 +93,40 @@ public class Storage {
             file.getParentFile().mkdirs();
             file.createNewFile();
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-
-            int completed;
             DateTimeFormatter format = DateTimeFormatter.ofPattern("YYYY-MM-dd");
 
-            for (Task task : tasks) {
-                completed = task.isCompleted() ? 1 : 0;
+            tasks.forEach(task -> {
+                int completed = task.isCompleted() ? 1 : 0;
+
+                String output = "";
 
                 if (task instanceof ToDo) {
 
-                    bw.write(String.format("T | %d | %s\n", completed, task.getMsg()));
+                    output = String.format("T | %d | %s\n", completed, task.getMsg());
 
                 } else if (task instanceof Deadline) {
 
                     String time = (((Deadline) task).getTime() != null)
                             ? ((Deadline) task).getTime().format(DateTimeFormatter.ofPattern("HH:mm")) : "NA";
-                    bw.write(String.format("D | %d | %s | %s | %s\n", completed,
+                    output = String.format("D | %d | %s | %s | %s\n", completed,
                             task.getMsg(), ((Deadline) task).getDate().format(format),
-                            time));
+                            time);
 
                 } else if (task instanceof Event) {
 
                     String time = (((Event) task).getTime() != null)
                             ? ((Event) task).getTime().format(DateTimeFormatter.ofPattern("HH:mm")) : "NA";
-                    bw.write(String.format("E | %d | %s | %s | %s\n", completed,
+                    output = String.format("E | %d | %s | %s | %s\n", completed,
                             task.getMsg(), ((Event) task).getDate().format(format),
-                            time));
+                            time);
                 }
-            }
+
+                try {
+                    bw.write(output);
+                } catch (IOException e) {
+                    System.out.println("Error occurred while saving data");
+                }
+            });
 
             bw.close();
 
