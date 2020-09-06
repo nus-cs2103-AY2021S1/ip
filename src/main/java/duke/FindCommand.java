@@ -28,6 +28,9 @@ public class FindCommand extends Command {
     public String execute(
             TaskList taskList, Storage storage,
             Ui ui) throws DukeException {
+        assert taskList != null : "Task list cannot be null";
+        assert storage != null : "Storage cannot be null";
+        assert ui != null : "Ui cannot be null";
         return ui.displayFindings(taskList.findTasks(userInput));
     }
 }
