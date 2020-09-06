@@ -32,7 +32,9 @@ public class Todo extends Task {
      */
     @Override
     public String execute(TaskList tasklist, Ui ui, Storage storage) {
+        int num = tasklist.getNumOfTasks();
         tasklist.add(this);
+        assert tasklist.getNumOfTasks() - num == 1 : "add not successful";
         storage.writeData(tasklist.getTaskList());
         return ui.showAddedMessage(tasklist, tasklist.getNumOfTasks() - 1);
 
