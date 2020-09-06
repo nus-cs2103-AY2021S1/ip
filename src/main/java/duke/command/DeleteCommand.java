@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Output;
+import duke.exception.DukeFileLoadingErrorException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.exception.InvalidIndexException;
@@ -29,7 +30,7 @@ public class DeleteCommand extends Command {
      * @throws InvalidIndexException if the given task number does not exist in the list
      */
     @Override
-    public CommandResult execute(TaskList tasks, Storage storage) throws InvalidIndexException {
+    public CommandResult execute(TaskList tasks, Storage storage) throws InvalidIndexException, DukeFileLoadingErrorException {
         int taskNumber = Integer.parseInt(fullCommand.substring(7));
         Task task = tasks.delete(taskNumber);
         storage.save(tasks.getTasks());

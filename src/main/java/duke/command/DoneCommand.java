@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Output;
+import duke.exception.DukeFileLoadingErrorException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.exception.InvalidIndexException;
@@ -28,7 +29,7 @@ public class DoneCommand extends Command {
      * @return message indicating task was successfully marked as done
      * @throws InvalidIndexException if the given task number does not exist in the list
      */
-    public CommandResult execute(TaskList tasks, Storage storage) throws InvalidIndexException {
+    public CommandResult execute(TaskList tasks, Storage storage) throws InvalidIndexException, DukeFileLoadingErrorException {
         int taskNumber = Integer.parseInt(fullCommand.substring(5));
         Task task = tasks.done(taskNumber);
         storage.save(tasks.getTasks());

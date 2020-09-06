@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Output;
+import duke.exception.DukeFileLoadingErrorException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -25,7 +26,7 @@ public class ClearCommand extends Command {
      * @return message indicating that the task list was successfully cleared
      */
     @Override
-    public CommandResult execute(TaskList tasks, Storage storage) {
+    public CommandResult execute(TaskList tasks, Storage storage) throws DukeFileLoadingErrorException {
         tasks.deleteAll();
         storage.save(tasks.getTasks());
         return new CommandResult(Output.clearedAllTasksMessage());

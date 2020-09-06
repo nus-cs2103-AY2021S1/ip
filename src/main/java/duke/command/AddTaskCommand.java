@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Output;
+import duke.exception.DukeFileLoadingErrorException;
 import duke.exception.EmptyDateException;
 import duke.exception.EmptyDescriptionException;
 import duke.storage.Storage;
@@ -31,7 +32,7 @@ public abstract class AddTaskCommand extends Command {
      * @throws EmptyDateException if the date for the deadline task is empty
      */
     @Override
-    public CommandResult execute(TaskList tasks, Storage storage) throws EmptyDescriptionException, EmptyDateException {
+    public CommandResult execute(TaskList tasks, Storage storage) throws EmptyDescriptionException, EmptyDateException, DukeFileLoadingErrorException {
         Task addedTask = tasks.add(fullCommand);
         storage.save(tasks.getTasks());
         return new CommandResult(Output.addedTaskMessage(addedTask, tasks));
