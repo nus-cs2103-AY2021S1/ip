@@ -45,6 +45,7 @@ public class Parser {
      * @throws KingException kingException is thrown when phrase is invalid.
      */
     public String parse(String phrase) throws KingException {
+        assert phrase != null : "command cannot be null!";
 
         String mainCommand = phrase.split(" ")[0].toLowerCase();
         String reply;
@@ -133,6 +134,8 @@ public class Parser {
 
     // takes a Date Time string and returns a LocalDateTime
     private LocalDateTime stringToLocalDateTime(String localDateTime) throws KingException {
+        assert localDateTime != null : "localDateTime cannot be null";
+
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             return LocalDateTime.parse(localDateTime, formatter);
