@@ -5,3 +5,4 @@
 5)delete
 6)done
 7)bye
+8)find
